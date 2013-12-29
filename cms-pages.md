@@ -1,4 +1,3 @@
-
 Page templates reside in the **/pages** directory of a theme. Page files should have the **htm** extension. All pages should have the configuration section and Twig section. 
 
 The following configuration parameters are supported for pages:
@@ -12,7 +11,7 @@ Simplest page example:
 ```php
 url = "/"
 ==
-<h1>Hello, world!</h3>
+<h1>Hello, world!</h1>
 ```
 
 #### URL syntax
