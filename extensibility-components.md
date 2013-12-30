@@ -75,7 +75,7 @@ public function defineProperties()
 }
 ```
 
-This defines what properties are accepted by this component.
+This defines the properties accepted by this component.
 
 #### Component events
 
@@ -125,11 +125,11 @@ This initializes the component with the settings that are defined in the compone
 {% endforeach %}
 ```
 
-> Note that  `{% demoTodo.items %}` resolves to the `items()` method in the class above. This means that you could fetch items from the database in order to populate the items property. It also means the item list is created on demand and if it is not requested on the page, nothing is fetched from the database.
+> Note that  `{% demoTodo.items %}` resolves to the `items()` method in the class above. This means that you could fetch items from the database in order to populate the items property. It also means the item list is created on demand and, if it's not requested on the page, nothing is fetched from the database.
 
 #### Component aliases
 
-If there are two plugins that register components with a same name, you can attach a component by using its fully qualified class name and assigning it an *alias*:
+If there are two plugins which register components with a same name, you can attach a component by using its fully qualified class name and assigning it an *alias*:
 
 ```
 [Plugins\October\Demo\Components\Todo demoTodoAlias]
@@ -195,7 +195,7 @@ If an identical component is called twice on the same page, an `id` property att
 {{__SELF__.id}}
 ```
 
-The ID is unique for each time the component is displayed.
+The ID is unique each time the component is displayed.
 
 ```
 <!-- ID: demoTodo527c532e9161b -->
