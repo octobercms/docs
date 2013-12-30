@@ -50,7 +50,7 @@ themes/
     ...
 ```
 
-To refer to a template from a subdirectory specify the subdirectory name before the template name.
+To refer to a template from a subdirectory, specify the subdirectory name before the template name.
 Example:
 
 ```php
@@ -59,7 +59,7 @@ Example:
 
 #### Template structure
 
-Template files (pages, partials and layouts) can include up to 3 sections: configuration, PHP code and Twig markup. 
+Template files (pages, partials and layouts) can include up to 3 sections: configuration, PHP code, and Twig markup. 
 Sections are separated with the `==` sequence.
 For example:
 
