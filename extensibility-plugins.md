@@ -2,10 +2,10 @@ Plugins are the foundation for adding new features to the CMS by extending it. S
 
 1. Define components
 2. Define user permissions
-3. Add back-end pages, menu items and forms
+3. Add back-end pages, menu items, and forms
 4. Create database table structures and seed data
 5. Alter functionality of the core or other plugins
-6. Provide classes, back-end controllers, views, assets and other files
+6. Provide classes, back-end controllers, views, assets, and other files
 
 Plugins reside in the **/plugins** directory. An example of a plugin directory structure:
 
@@ -24,9 +24,9 @@ plugins/
 
 #### Plugin information file
 
-The **Plugin.php** file, called the *Plugin information file*, is an initialization script that defines the plugin core functions and information. They can provide the following:
+The **Plugin.php** file, called the *Plugin information file*, is an initialization script that defines a plugin's core functions and information. They can provide the following:
 
-1. Information about the plugin, its name and author
+1. Information about the plugin, its name, and author
 2. Registration methods for extending the CMS
 
 An example Plugin information file:
