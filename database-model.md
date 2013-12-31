@@ -1,7 +1,5 @@
 October's database models are named Active Record which is based on the [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
 
-# @TODO
-
 #### Relations
 
 public $hasOne = [];
@@ -29,7 +27,7 @@ afterDelete
 ##### Flatten results as an array
 
 ```php
-Model::all->lists('name', 'id');
+Model::all()->lists('name', 'id');
 ```
 
 Returns an array where the key is the **id** and value is the **name**, eg: ```Array ( [1] => Name ) ```.
@@ -38,6 +36,7 @@ Returns an array where the key is the **id** and value is the **name**, eg: ```A
 ##### Further reading on Active Record (Eloquent)
 
 * [Eloquent ORM - Laravel documentation](http://laravel.com/docs/eloquent)
+* [Active record pattern - Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern)
 
 ---
 
