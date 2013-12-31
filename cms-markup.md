@@ -20,7 +20,7 @@ Assets resides in the **assets/** directory of a theme
 <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
 ```
 
-Assets of the same type can be combined on the fly by passing an array of files:
+Assets of the same type can be combined on the fly by passing an array of files
 
 ```html
 <link href="{{ ['assets/css/styles1.css', 'assets/css/styles2.css']|theme }}" rel="stylesheet">
@@ -32,7 +32,7 @@ Placeholders allow pages to inject content to the layout defined with the **plac
 
 For example, injecting content to the HEAD section.
 
-Layout:
+###### Layout
 
 ```html
 <head>
@@ -40,7 +40,7 @@ Layout:
 </head>
 ```
 
-Page:
+###### Page
 ```html
 url = "/my-page"
 --
@@ -51,7 +51,7 @@ url = "/my-page"
 <p>The page content goes here.</p>
 ```
 
-Layout:
+###### Layout
 
 ```html
 {% placeholder sidebar default %}
@@ -59,7 +59,7 @@ Layout:
 {% endplaceholder %}
 ```
 
-Page:
+###### Page
 
 ```html
 {% put sidebar %}
