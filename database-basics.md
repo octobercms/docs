@@ -38,8 +38,8 @@ Db::delete('delete from users');
 
 ##### Further reading on Direct SQL
 
-* [Database Basics - Laravel documentation](http://four.laravel.com/docs/database)
-* [Query builder - Laravel documentation](http://four.laravel.com/docs/queries)
+* [Database Basics - Laravel documentation](http://laravel.com/docs/database)
+* [Query builder - Laravel documentation](http://laravel.com/docs/queries)
 
 ---
 
@@ -87,6 +87,6 @@ $post->delete();
 
 ##### Further reading on Active Record
 
-* [Eloquent ORM - Laravel documentation](http://four.laravel.com/docs/eloquent)
+* [Eloquent ORM - Laravel documentation](http://laravel.com/docs/eloquent)
 * [Active record pattern - Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern)
 

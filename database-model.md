@@ -1,3 +1,4 @@
+October's database models are named Active Record which is based on the [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
 
 # @TODO
 
@@ -33,11 +34,16 @@ Model::all->lists('name', 'id');
 
 Returns an array where the key is the **id** and value is the **name**, eg: ```Array ( [1] => Name ) ```.
 
+
+##### Further reading on Active Record (Eloquent)
+
+* [Eloquent ORM - Laravel documentation](http://laravel.com/docs/eloquent)
+
 ---
 
 ## Model Validation
 
-October models use Laravel's built-in [Validator class](http://four.laravel.com/docs/validation). 
+October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation). 
 Defining validation rules are defined in the model class as a variable named `$rules`:
 
 ```php
@@ -52,7 +58,7 @@ class User extends \October\Rain\Database\Model
 }
 ```
 
-> **Note**: you're free to use the [array syntax](http://four.laravel.com/docs/validation#basic-usage) for validation rules as well.
+> **Note**: you're free to use the [array syntax](http://laravel.com/docs/validation#basic-usage) for validation rules as well.
 
 Models validate themselves automatically when the `save()` method is called.
 
@@ -75,7 +81,7 @@ Retrieve the validation errors message collection instance with `errors()` metho
 
 Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
-> **Note:** The Model leverages Laravel's MessagesBag object which has a [simple and elegant method](http://four.laravel.com/docs/validation#working-with-error-messages) of formatting errors.
+> **Note:** The Model leverages Laravel's MessagesBag object which has a [simple and elegant method](http://laravel.com/docs/validation#working-with-error-messages) of formatting errors.
 
 #### Overriding Validation
 
@@ -96,7 +102,7 @@ An array that is **not empty** will override the rules or custom error messages 
 
 #### Custom Error Messages
 
-Just like the Laravel Validator, Ardent lets you set custom error messages using the [same syntax](http://four.laravel.com/docs/validation#custom-error-messages).
+Just like the Laravel Validator, Ardent lets you set custom error messages using the [same syntax](http://laravel.com/docs/validation#custom-error-messages).
 
 ```php
 class User extends \October\Rain\Database\Model
@@ -110,4 +116,4 @@ class User extends \October\Rain\Database\Model
 
 #### Custom Validation Rules
 
-You can create custom validation rules the [same way](http://four.laravel.com/docs/validation#custom-validation-rules) you would for the Laravel Validator.
+You can create custom validation rules the [same way](http://laravel.com/docs/validation#custom-validation-rules) you would for the Laravel Validator.
