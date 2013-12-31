@@ -1,36 +1,36 @@
 Active Record models can support file attachments using a polymorphic relationship.
 
-### Model Definitions
+#### Model Definitions
 
-#### A single file attachment
+##### A single file attachment
 ```php
 public $morphOne = [
     'avatar' => ['Modules\System\Models\File', 'name' => 'attachment']
 ];
 ```
 
-#### Multiple file attachments
+##### Multiple file attachments
 ```php
 public $morphMany = [
     'photos' => ['Modules\System\Models\File', 'name' => 'attachment']
 ];
 ```
 
-### Creating new attachments
+#### Creating new attachments
 
-#### Add a file saved from postback
+##### Add a file saved from postback
 ```php
 $model->avatar()->create(['data' => Input::file('file_input')]);
 ```
 
-#### Add a protected a file
+##### Add a protected a file
 ```php
 $model->avatar()->create(['public' => false, 'data' => Input::file('file_input')]);
 ```
 
 *Note the public attribute must come before the data attribute*
 
-#### Add a prepared File object
+##### Add a prepared File object
 ```php
 $file = new Modules\System\Models\File;
 $file->data = Input::file('file_input');
@@ -39,22 +39,22 @@ $file->save();
 $model->avatar()->attach($file);
 ```
 
-### Viewing attachments
+#### Viewing attachments
 
-#### Returning the public file path
+##### Returning the public file path
 ```php
 // Returns http://mysite.com/uploads/public/path/to/avatar.jpg
 echo $model->avatar->getPath();
 ```
 
-#### Returning multiple attachment file paths
+##### Returning multiple attachment file paths
 ```php
 foreach ($model->photos as $photo) {
     echo $photo->getPath();
 }
 ```
 
-#### Resizing an image attachment
+##### Resizing an image attachment
 ```php
 //                   getThumb($width, $height, $options)
 echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
@@ -82,7 +82,7 @@ class Post extends Model
 }
 ```
 
-### Uploading a file
+#### Uploading a file
 
 A simple HTML form for uploading a file.
 
@@ -110,7 +110,7 @@ if ($fileFromPost)
     $post->featured_image()->create(['data' => $fileFromPost]);
 ```
 
-### Viewing the uploaded file
+#### Viewing the uploaded file
 
 Looking for the featured image
 

@@ -6,12 +6,12 @@ You can defer any number of **slave** models against a **master** model using a 
 When the master record is saved along with the session key, the relationships to slave records 
 are updated automatically for you.
 
-#### Generating a session key
+##### Generating a session key
 ```php
 $sessionKey = uniqid('session_key', true);
 ```
 
-#### Defer a relation binding
+##### Defer a relation binding
 ```php
 $comment = new Comment;
 $comment->content = "Hello world!";
@@ -22,7 +22,7 @@ $post->comments()->add($comment, $sessionKey);
 ```
 > **Note**: The ```$post``` object has not been saved but the relationship will be created if the saving happens.
 
-#### Defer a relation unbinding
+##### Defer a relation unbinding
 ```php
 $comment = Comment::find(1);
 $post = Post::find(1);
@@ -30,20 +30,20 @@ $post->comments()->delete($comment, $sessionKey);
 ```
 The comment will not be deleted unless the post is saved.
 
-#### List all bindings
+##### List all bindings
 ```php
 $post->comments()->withDeferred($sessionKey)->get();
 ```
 The results will include exisiting relations aswell.
 
-#### Cancel all bindings
+##### Cancel all bindings
 ```php
 $post->cancelDeferred($sessionKey);
 ```
 
 This will delete the slave objects rather than leaving them as orphans.
 
-#### Commit all bindings
+##### Commit all bindings
 ```php
 $post = new Post;
 $post->title = "First blog post";
@@ -55,7 +55,7 @@ Alternatively
 $post = Post::create(['title' => 'First blog post'], $sessionKey);
 ```
 
-#### Lazily commit bindings
+##### Lazily commit bindings
 
 If you are unable to supply the ```$sessionKey``` when saving, you can commit the bindings at any time using.
 
@@ -63,7 +63,7 @@ If you are unable to supply the ```$sessionKey``` when saving, you can commit th
 $post->commitDeferred($sessionKey);
 ```
 
-#### Clean up orphaned bindings
+##### Clean up orphaned bindings
 ```php
 DeferredBinding::cleanUp(5);
 ```
