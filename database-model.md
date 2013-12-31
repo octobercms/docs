@@ -2,27 +2,34 @@ October's database models are named Active Record which is based on the [Eloquen
 
 #### Relations
 
-public $hasOne = [];
-public $hasMany = [];
-public $belongsTo = [];
-public $belongsToMany = [];
-public $morphTo = [];
-public $morphOne = [];
-public $morphMany = [];
+The following relations are available:
+
+| Name           | Description                                                |
+|:-------------- |:-----------------------------------------------------------|
+| $hasOne        | Has a single related model that belongs to it              |
+| $hasMany       | Has many related models that belong to                     |
+| $belongsTo     | Owned by another related model (slave)                     |
+| $belongsToMany | Owned by multiple related models                           |
+| $morphTo       | Polymorphic version of belongs to                          |
+| $morphOne      | Polymorphic version of has one                             |
+| $morphMany     | Polymorphic version of has many                            |
 
 #### Events
 
-beforeCreate
-afterCreate
-beforeSave
-afterSave
-beforeValidate
-afterValidate
-beforeUpdate
-afterUpdate
-beforeDelete
-afterDelete
+The following events are available:
 
+| Name           | Description                                                |
+|:-------------- |:-----------------------------------------------------------|
+| beforeCreate   | Before the model is saved, when first created              |
+| afterCreate    | After the model is saved, when first created               |
+| beforeSave     | Before the model is saved, either created or updated       |
+| afterSave      | After the model is saved, either created or updated        |
+| beforeValidate | Before the supplied model data is validated                |
+| afterValidate  | After the supplied model data has been validated           |
+| beforeUpdate   | Before an exisiting model is saved                         |
+| afterUpdate    | After an exisiting model is saved                          |
+| beforeDelete   | Before an exisiting model is deleted                       |
+| afterDelete    | After an exisiting model is deleted                        |
 
 ##### Flatten results as an array
 
