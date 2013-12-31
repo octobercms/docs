@@ -1,18 +1,18 @@
 #### Creating Links
 
-###### Link to anything relative to the application
+##### Link to anything relative to the application
 
 ```html
 <a href="{{ '/about-us'|app }}">About Us</a>
 ```
 
-###### Link to a page file name with reverse routing
+##### Link to a page file name with reverse routing
 
 ```html
 <a href="{{ 'about'|page }}">About Us</a>
 ```
 
-###### Link to an asset file
+##### Link to an asset file
 
 Assets resides in the **assets/** directory of a theme
 
@@ -32,7 +32,7 @@ Placeholders allow pages to inject content to the layout defined with the **plac
 
 For example, injecting content to the HEAD section.
 
-###### Layout
+##### Layout
 
 ```html
 <head>
@@ -40,7 +40,7 @@ For example, injecting content to the HEAD section.
 </head>
 ```
 
-###### Page
+##### Page
 ```html
 url = "/my-page"
 --
@@ -53,7 +53,7 @@ url = "/my-page"
 
 Placeholders can have default content, that can be either replaced or complemented by a page. Example:
 
-###### Layout
+##### Layout
 
 ```html
 {% placeholder sidebar default %}
@@ -61,7 +61,7 @@ Placeholders can have default content, that can be either replaced or complement
 {% endplaceholder %}
 ```
 
-###### Page
+##### Page
 
 ```html
 {% put sidebar %}
