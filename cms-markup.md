@@ -51,6 +51,8 @@ url = "/my-page"
 <p>The page content goes here.</p>
 ```
 
+Placeholders can have default content, that can be either replaced or complemented by a page. Example:
+
 ###### Layout
 
 ```html
