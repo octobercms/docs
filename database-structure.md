@@ -71,10 +71,10 @@ An example of a seed file:
 ```php
 <?php namespace Plugins\October\Users\Updates;
 
+use Seeder;
 use Plugins\October\Users\Models\User;
-use October\Rain\Database\Updates\Seeder;
 
-class SeedUsersTable extends Seeder 
+class SeedUsersTable extends Seeder
 {
     public function run()
     {
