@@ -37,9 +37,10 @@ class Plugin extends Modules\System\Classes\PluginBase
     public function pluginDetails()
     {
         return [
-            'name' => 'October Demo Plugin',
-            'description' => 'Providers features used by the provided demonstration theme.',
-            'icon' => 'icon-check' // Icon name from FontAwesome icon set
+            'name' => 'October Demo',
+            'description' => 'Provides features used by the provided demonstration theme.',
+            'author' => 'Alexey Bobkov, Samuel Georges',
+            'icon' => 'icon-leaf'
         ];
     }
 
