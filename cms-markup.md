@@ -1,20 +1,20 @@
-#### Linking
+#### Creating Links
 
-When linking to other pages, you can use the **app** Twig filter to ensure your links always appear relative to the application.
-
-Create an application relative link using the **app* filter:
+###### Link to anything relative to the application
 
 ```html
 <a href="{{ '/about-us'|app }}">About Us</a>
 ```
 
-Link directly to a page file name using *reverse routing* with the **page** filter:
+###### Link to a page file name with reverse routing
 
 ```html
 <a href="{{ 'about'|page }}">About Us</a>
 ```
 
-Link to an asset file that resides in the **assets/** directory of a theme with the **theme** filter:
+###### Link to an asset file
+
+Assets resides in the **assets/** directory of a theme
 
 ```html
 <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
@@ -68,4 +68,4 @@ Page:
 {% endput %}
 ```
 
-The **default** tag specifies a place where the default placeholder content should be displayed. If this tag is omitted the default content will be ignored. Note that when a placeholder with default content is declared, the **default** word should be specified after the placeholder name. 
+The **default** tag specifies a place where the default placeholder content should be displayed.
