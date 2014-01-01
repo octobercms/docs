@@ -19,6 +19,12 @@ $results = Db::select('select * from users where id = ?', [1]);
 ```
 The select method will always return an array of results.
 
+##### Flatten results as an array
+```php
+Model::all()->lists('name', 'id');
+```
+Returns an array where the key is the **id** and value is the **name**, eg: ```Array ( [1] => Name ) ```.
+
 ##### Inserting data
 ```
 Db::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);

@@ -17,7 +17,7 @@ The following relations are available, along with their optional and required ar
 An example of defining a relationship:
 
 ```php
-class Order extends Model
+class BlogPost extends Model
 {
   public $belongsTo = [
     'user' => ['User', 'foreignKey' => 'user_id']
@@ -59,14 +59,6 @@ public function beforeCreate()
   $this->slug = slug($this->name);
 }
 ```
-
-##### Flatten results as an array
-
-```php
-Model::all()->lists('name', 'id');
-```
-
-Returns an array where the key is the **id** and value is the **name**, eg: ```Array ( [1] => Name ) ```.
 
 ##### Joined Eager Load
 
