@@ -4,15 +4,23 @@ October's database models are named Active Record which is based on the [Eloquen
 
 The following relations are available:
 
-| Name           | Description                                                |
-|:-------------- |:-----------------------------------------------------------|
-| $hasOne        | Has a single related model that belongs to it              |
-| $hasMany       | Has many related models that belong to                     |
-| $belongsTo     | Owned by another related model (slave)                     |
-| $belongsToMany | Owned by multiple related models                           |
-| $morphTo       | Polymorphic version of belongs to                          |
-| $morphOne      | Polymorphic version of has one                             |
-| $morphMany     | Polymorphic version of has many                            |
+| Name           | Description                                    | Optional Args                             | Required Args  |
+|:-------------- |:-----------------------------------------------|:----------------------------------------- |:-------------- |
+| $hasOne        | Has a single related model that belongs to it  | foreignKey                                |                |
+| $hasMany       | Has many related models that belong to         | foreignKey                                |                |
+| $belongsTo     | Owned by another related model (slave)         | foreignKey                                |                |
+| $belongsToMany | Owned by multiple related models               | table, foreignKey, primaryKey, pivotData  |                |
+| $morphTo       | Polymorphic version of belongs to              | name, type, id                            |                |
+| $morphOne      | Polymorphic version of has one                 | type, id                                  | name           |
+| $morphMany     | Polymorphic version of has many                | type, id                                  | name           |
+
+An example of defining a relationship:
+
+```php
+public $belongsToMany = [
+  'groups' => ['Group', 'table' => 'user_groups']
+];
+```
 
 #### Events
 
@@ -30,6 +38,16 @@ The following events are available:
 | afterUpdate    | After an exisiting model is saved                          |
 | beforeDelete   | Before an exisiting model is deleted                       |
 | afterDelete    | After an exisiting model is deleted                        |
+
+An example of using an event:
+
+```php
+public function beforeCreate()
+{
+  // Generate a URL slug for this model
+  $this->slug = slug($this->name);
+}
+```
 
 ##### Flatten results as an array
 
