@@ -31,13 +31,11 @@ Db::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
 ```
 
 ##### Updating data
-
 ```
 Db::update('update users set votes = 100 where name = ?', ['John']);
 ```
 
 ##### Removing data
-
 ```
 Db::delete('delete from users');
 ```
