@@ -57,6 +57,15 @@ Model::all()->lists('name', 'id');
 
 Returns an array where the key is the **id** and value is the **name**, eg: ```Array ( [1] => Name ) ```.
 
+##### Joined Eager Load
+
+Similar to the standard [Eager Loading](http://laravel.com/docs/eloquent#eager-loading), you eager load and join a relation to the main query.
+
+```php
+Post::joinWith('Category')->select("concat(posts.name, ' - ', category.name)")->get();
+```
+
+This will also eager load 
 
 ##### Further reading on Active Record (Eloquent)
 
