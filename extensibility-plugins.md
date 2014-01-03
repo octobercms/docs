@@ -53,6 +53,20 @@ class Plugin extends Modules\System\Classes\PluginBase
 }
 ```
 
+#### Supported methods
+
+The following registration methods are supported:
+
+| Method                | Purpose                                                         |
+|:--------------------- |:----------------------------------------------------------------|
+| register              | Register method, called when the plugin is first registered.    |
+| boot                  | Boot method, called right before the request route.             |
+| registerComponents    | Registers any front-end components used by this plugin.         |
+| registerWidgets       | Registers any back-end widgets used by this plugin.             |
+| registerNavigation    | Registers back-end navigation items for this plugin.            |
+| registerPermissions   | Registers any back-end permissions used by this plugin.         |
+| registerSettings      | Registers any back-end configuration links used by this plugin. |
+
 #### Version & Database history
 
 Plugins use a change log inside the **/updates** directory to maintain version information and database structure. An example of an updates directory structure:
