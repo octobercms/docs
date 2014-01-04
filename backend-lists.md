@@ -156,6 +156,16 @@ Displays the column value as time format `g:i A`
     type: time
 ```
 
+### Time elapsed
+
+Displays a human readable time difference from the value to the current time. Eg: *10 minutes ago*
+
+```
+  created_at:
+    label: Date
+    type: timesince
+```
+
 ## Custom Selects
 
 You can create a column using a custom select statement. Any valid SQL SELECT statement works here.
