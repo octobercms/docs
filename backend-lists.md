@@ -143,7 +143,7 @@ Displays the column value as date format `M j, Y`
 ```
   created_at:
     label: Date
-    type: time
+    type: date
 ```
 
 ### Time
