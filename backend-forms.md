@@ -30,7 +30,7 @@ preview:
 ### Required configuration
 
 * **name** - a name for the object being managed by this form.
-* **form** - a reference to list column definition file, see [form fields config](Form Fields Config).
+* **form** - a reference to list column definition file, see Model Configuration.
 * **model-class** - a Model class name to source and save the form data.
 
 ### Optional configuration

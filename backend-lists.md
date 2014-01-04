@@ -22,7 +22,7 @@ record-url: users/update/:id
 ### Required configuration
 
 * **title** - a title for this list.
-* **list** - a reference to list column definition file, see [list columns config](List Columns Config).
+* **list** - a reference to list column definition file, see Model Configuration.
 * **model-class** - a Model class name to source the list data.
 
 ### Optional configuration
