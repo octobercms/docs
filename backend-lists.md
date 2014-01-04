@@ -32,6 +32,7 @@ record-url: users/update/:id
 * **records-per-page** - how many records to display per page. Default: 20
 * **show-checkboxes** - displays checkboxes next to each record.
 * **toolbar** - reference to a Toolbar Widget configuration file, or an array with configuration (see below).
+* **default-sort** - sets a default sorting column and direction when user preference is not defined.
 
 ### Adding a toolbar
 
