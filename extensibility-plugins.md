@@ -19,7 +19,7 @@ plugins/
       models/
       updates/
       ...
-      Plugin.php       <=== Pluigin information file
+      Plugin.php       <=== Plugin information file
 ```
 
 #### Plugin information file

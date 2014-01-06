@@ -34,7 +34,7 @@ The comment will not be deleted unless the post is saved.
 ```php
 $post->comments()->withDeferred($sessionKey)->get();
 ```
-The results will include exisiting relations aswell.
+The results will include existing relations as well.
 
 ##### Cancel all bindings
 ```php
