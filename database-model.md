@@ -2,7 +2,7 @@ October's database models are named Active Record which is based on the [Eloquen
 
 #### Relations
 
-The following relations are available, along with their optional and required arguements:
+The following relations are available, along with their optional and required arguments:
 
 | Name           | Description                                    | Optional                                  | Required  |
 |:-------------- |:-----------------------------------------------|:----------------------------------------- |:--------- |
@@ -45,10 +45,10 @@ The following events are available:
 | afterSave      | After the model is saved, either created or updated        |
 | beforeValidate | Before the supplied model data is validated                |
 | afterValidate  | After the supplied model data has been validated           |
-| beforeUpdate   | Before an exisiting model is saved                         |
-| afterUpdate    | After an exisiting model is saved                          |
-| beforeDelete   | Before an exisiting model is deleted                       |
-| afterDelete    | After an exisiting model is deleted                        |
+| beforeUpdate   | Before an existing model is saved                          |
+| afterUpdate    | After an existing model is saved                           |
+| beforeDelete   | Before an existing model is deleted                        |
+| afterDelete    | After an existing model is deleted                         |
 
 An example of using an event:
 
@@ -134,7 +134,7 @@ The `validate($rules, $customMessages)` take two parameters:
 
 An array that is **not empty** will override the rules or custom error messages specified by the class for that instance of the method only.
 
-> **Note:** the default value for `$rules` and `$customMessages` is empty `array()`; thus, if you pass an `array()` nothing will be overriden.
+> **Note:** the default value for `$rules` and `$customMessages` is empty `array()`; thus, if you pass an `array()` nothing will be overridden.
 
 #### Custom Error Messages
 
