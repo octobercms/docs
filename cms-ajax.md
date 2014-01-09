@@ -26,7 +26,7 @@ The AJAX request workflow:
 
 Event handlers are functions that can be defined in the page or layout PHP code section. Handlers can also be defined inside [Components](../extensibility/components).
 
-Handler names should have the following pattern: `onName`. Handlers can inject variables to the Twig engine. Those variables then used during the partial rendering. Example:
+Handler names should have the following pattern: `onName`. Handlers can inject variables to the next page cycle, where they can be used during the partial rendering. Example:
 
 ```php
 url = "js"
@@ -126,7 +126,6 @@ $('form').request('onCalculate', {data: {value: 55})
 
 // Run onCalculate and before updating, run some custom code
 $('form').request('onCalculate', {beforeUpdate: function(){ /* do something */ }})
-
 
 // Run onCalculate and if successful, run some custom code and the default
 $('form').request('onCalculate', {success: function(data){ 

@@ -12,7 +12,7 @@ Components reside in the **/components** directory inside a Plugin. An example o
     /myplugin
       /components
         /componentname        <=== Component partials directory
-          default.htm         <=== Component default markup (Optional)
+          default.htm         <=== Component default markup (optional)
         ComponentName.php     <=== Component class file
       Plugin.php
 ```
@@ -125,7 +125,7 @@ This initializes the component with the settings that are defined in the compone
 {% endforeach %}
 ```
 
-> Note that  `{% demoTodo.items %}` resolves to the `items()` method in the class above. This means that you could fetch items from the database in order to populate the items property. It also means the item list is created on demand and, if it's not requested on the page, nothing is fetched from the database.
+> Note that  `{% demoTodo.items %}` resolves to the `items()` method in the class above. This means that you could fetch items from the database in order to populate the items property. It also means the item list is created on demand and if it's not requested on the page, nothing is fetched from the database.
 
 #### Component aliases
 
@@ -155,7 +155,7 @@ max-items = 20
 
 All components can come with default markup that is used when including it on a page, although this is optional. Default markup is kept inside the *Component partials directory*, which has the same name as the component class in lower case.
 
-The markup should be placed in a file named **default.htm**, so continuing from our previous example, the default markup for the *Todo* plugin would be located in the file **/plugins/october/demo/components/todo/default.htm**
+The default markup should be placed in a file named **default.htm**, so continuing from our previous example, the markup for the *Todo* plugin would be located in the file **/plugins/october/demo/components/todo/default.htm**
 
 It can then be inserted anywhere on the page by using the `{% component %}` tag:
 

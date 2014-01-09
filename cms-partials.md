@@ -30,7 +30,7 @@ You can pass parameters to partials by specifying them after the partial name in
 </div>
 ```
 
-Inside the partial, parameters can be accessed as any other Twig variable:
+Inside the partial, parameters can be accessed like any other Twig variable:
 
 ```php
 ...

@@ -2,8 +2,8 @@ Layout templates reside in the **/layouts** directory of a theme. Layout files s
 
 The following configuration parameters are supported:
 
-- *description* - the layout description, for the back-end UI (optional)
 - *name* - the layout name, for the back-end UI (optional)
+- *description* - the layout description, for the back-end UI (optional)
 
 Simplest layout example:
 
