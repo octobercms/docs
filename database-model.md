@@ -60,6 +60,26 @@ public function beforeCreate()
 }
 ```
 
+##### Attribute modifiers
+
+Specified attributes can be modified automatically when handling their values. For example:
+
+```php
+class User extends \October\Rain\Database\Model
+{
+    protected $hashable = ['password'];
+
+    protected $purgeable = ['password_confirmation'];
+
+    protected $jsonable = ['permissions'];
+}
+```
+
+* **$hashable** - values are hashed, they can be verified but cannot be reversed
+* **$purgeable** - attributes are removed before attempting to save to the database
+* **$jsonable** - values are encoded as JSON before saving and converted to arrays after fetching
+* **$encryptable** - values are encrypted and decrypted for storing sensitive data
+
 ##### Joined Eager Load
 
 Similar to the standard [Eager Loading](http://laravel.com/docs/eloquent#eager-loading), you eager load and join a relation to the main query.
@@ -100,11 +120,12 @@ Models validate themselves automatically when the `save()` method is called.
 
 ```php
 $user = new User;
-$user->name = 'John doe';
-$user->email = 'john@doe.com';
-$user->password = 'test';
+$user->name = 'Adam Person';
+$user->email = 'a.person@email.address.com';
+$user->password = 'passw0rd';
 
-$success = $user->save(); // Returns false if model is invalid
+// Returns false if model is invalid
+$success = $user->save();
 ```
 
 > **Note:** You can also validate a model at any time using the `validate()` method.
@@ -121,20 +142,14 @@ Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *sp
 
 #### Overriding Validation
 
-There are two ways to override Ardent's validation:
-
-##### 1. Forced Save
 `forceSave()` validates the model but saves regardless of whether or not there are validation errors.
 
-##### 2. Override Rules and Messages
-The `validate($rules, $customMessages)` take two parameters:
+```php
+$user = new User;
 
-- `$rules` is an array of Validator rules of the same form as `Model::$rules` property.
-- The same is true of the `$customMessages` parameter (same as `Model::$customMessages` property)
-
-An array that is **not empty** will override the rules or custom error messages specified by the class for that instance of the method only.
-
-> **Note:** the default value for `$rules` and `$customMessages` is empty `array()`; thus, if you pass an `array()` nothing will be overridden.
+// Creates a user without validation
+$user->forceSave();
+```
 
 #### Custom Error Messages
 
