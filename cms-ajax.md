@@ -1,4 +1,3 @@
-
 To use the AJAX framework it should be included by placing the `{% framework %}` tag anywhere inside the page or layout. 
 This adds a reference to to the October front-end JavaScript library. The library requires jQuery, so it should be loaded first, for example:
 
@@ -51,7 +50,7 @@ AJAX requests can be issued using HTML data attributes. Using the data attribute
 - *data-request* - specifies the AJAX handler name.
 - *data-request-confirm* - specifies a confirmation message. The confirmation is displayed before the request is sent. If the user clicks Cancel button the request isn't sent.
 - *data-request-redirect* - specifies a URL to redirect the browser after the successful AJAX request.
-- *data-request-update* - specifies a list of partials and page elements (CSS selectors) to update. The format is as follows: `partial: selector, partial: selector`. Usage of quotes is required in some cases, for example: `'my-partial': '#myelement'`.
+- *data-request-update* - specifies a list of partials and page elements (CSS selectors) to update. The format is as follows: `partial: selector, partial: selector`. Usage of quotes is required in some cases, for example: `'my-partial': '#myelement'`. If the selector string is prepended with the @ symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 - *data-request-data* - specifies additional POST parameters to be sent to the server. The format is following: `var: value, var: value`. Use ampersands if needed: `var: 'some string'`.
 - *data-request-success* - specifies JavaScript code to execute after the request is successfully completed.
 - *data-track-input* - can be applied to a text or password input field that also has the `data-request` attribute. When defined, the input field automatically sends an AJAX request when a user types something in the field. The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the requests.
@@ -98,7 +97,7 @@ The `request()` method has a single required parameter - the handler name. Examp
 
 The second attribute of the `request()` method is the options. You can use any options and methods compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
 
-- *update* - an object, specifies a list partials and page elements (as CSS selectors) to update: {'partial': '#select'}.
+- *update* - an object, specifies a list partials and page elements (as CSS selectors) to update: {'partial': '#select'}. If the selector string is prepended with the @ symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 - *confirm* - the confirmation string. If set, the confirmation is displayed before the request is sent. If the users clicks the Cancel button, the request cancels.
 - *data* - an optional object specifying data to be sent to the server along with the form data: {var: 'value'}.
 - *redirect* a string specifying an URL to redirect the browser to after the successful request.
