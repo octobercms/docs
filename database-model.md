@@ -95,7 +95,11 @@ This will also eager load
 * [Eloquent ORM - Laravel documentation](http://laravel.com/docs/eloquent)
 * [Active record pattern - Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern)
 
+
+
 ---
+
+
 
 ## Model Validation
 

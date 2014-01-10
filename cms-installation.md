@@ -24,19 +24,7 @@ As of PHP 5.5, some OS distributions may require you to manually install the PHP
 
 #### Command-line installation (Advanced)
 
-The command-line interface (CLI) method of installation requires [Composer](http://getcomposer.org/) to manage its dependencies.
-
-Download the application source code by using the `create-project` in your terminal:
-
-```
-composer create-project october/october --prefer-dist
-```
-
-Next, run the CLI installation wizard and follow the prompts:
-
-```
-php artisan october:install
-```
+You can also install October using the [command-line installation](advanced/console) process.
 
 #### Troubleshooting installation
 
