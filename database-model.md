@@ -72,6 +72,8 @@ class User extends \October\Rain\Database\Model
     protected $purgeable = ['password_confirmation'];
 
     protected $jsonable = ['permissions'];
+
+    protected $encryptable = ['api_key'];
 }
 ```
 

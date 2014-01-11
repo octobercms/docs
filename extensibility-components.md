@@ -77,6 +77,12 @@ public function defineProperties()
 
 This defines the properties accepted by this component.
 
+**Accessing a property**
+
+```php
+$this->property('max-items');
+```
+
 #### Component events
 
 Components can be involved in the Page execution cycle events by overriding the `onRun` method in the component class.
