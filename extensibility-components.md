@@ -77,10 +77,22 @@ public function defineProperties()
 
 This defines the properties accepted by this component.
 
-**Accessing a property**
+##### Retrieving a property value
 
 ```php
 $this->property('max-items');
+```
+
+##### Retrieving a property value if the value is absent
+
+```php
+$this->property('max-items', 6);
+```
+
+##### Getting all property values
+
+```php
+$this->allProperties();
 ```
 
 #### Component events
