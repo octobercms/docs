@@ -64,10 +64,18 @@ php artisan plugin:rebuild AuthorName.PluginName
 
 ##### Create a new plugin
 
-This will a plugin folder and basic files for a plugin named `Foo.Bar`
+This will generate a plugin folder and basic files for a plugin named `Foo.Bar`
 
 ```
 php artisan create:plugin Foo.Bar
+```
+
+##### Create a new component
+
+This will generate a component class and default view for a component named `Post`
+
+```
+php artisan create:component Foo.Bar Post
 ```
 
 ##### Create a new model
