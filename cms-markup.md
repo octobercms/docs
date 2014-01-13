@@ -71,3 +71,22 @@ Placeholders can have default content, that can be either replaced or complement
 ```
 
 The **default** tag specifies a place where the default placeholder content should be displayed.
+
+#### Checking a placeholder exists
+
+You can check if a placeholder content exists by using the `placeholder()` function. Example:
+
+```html
+{% if placeholder('sidemenu') %}
+    <div class="row">
+        <div class="col-md-3">
+            {% placeholder sidemenu %}
+        </div>
+        <div class="col-md-9">
+            {% page %}
+        </div>
+    </div>
+{% else %}
+    {% page %}
+{% endif %}
+```
