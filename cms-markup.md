@@ -26,6 +26,28 @@ Assets of the same type can be combined on the fly by passing an array of files
 <link href="{{ ['assets/css/styles1.css', 'assets/css/styles2.css']|theme }}" rel="stylesheet">
 ```
 
+#### Default variables
+
+The following default variables are available inside the `{{this}}` variable:
+
+* **this.page** - a reference to the current page object
+* **this.layout** - a reference to the layout used by the current page
+* **this.param** - a collection of the routing property values
+
+Example:
+
+```html
+<html>
+    <head>
+        <title>{{ this.page.name }}</title>
+        <meta name="description" content="{{ this.page.description }}">
+    </head>
+    <body class="page-{{ this.page.id }} layout-{{ this.layout.id }}">
+        ...
+    </body>
+</html>
+```
+
 #### Placeholders
 
 Placeholders allow pages to inject content to the layout defined with the **placeholder** tag. Content is then injected with the **put** tag.

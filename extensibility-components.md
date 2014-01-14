@@ -92,7 +92,7 @@ $this->property('max-items', 6);
 ##### Getting all property values
 
 ```php
-$this->allProperties();
+$this->getProperties();
 ```
 
 #### Component events
