@@ -32,7 +32,7 @@ The following default variables are available inside the `{{this}}` variable:
 
 * **this.page** - a reference to the current page object
 * **this.layout** - a reference to the layout used by the current page
-* **this.param** - a collection of the routing property values
+* **this.param** - a collection of the routing parameter values
 
 Example:
 

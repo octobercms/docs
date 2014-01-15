@@ -191,7 +191,15 @@ In addition to the default markup, components can also offer additional partials
 
 #### Referencing "self"
 
-Components can reference themselves inside their default markup or in any partials by using the Twig variable `__SELF__`. 
+Components can reference themselves inside their default markup or in any partials by using the `__SELF__` variable. By default it will return the component's alias.
+
+```
+<form data-request="{{__SELF__}}::onEventHandler">
+  [...]
+</form>
+```
+
+Components can also reference their own properties.
 
 ```
 {% foreach item in __SELF__.items() %}
@@ -199,15 +207,7 @@ Components can reference themselves inside their default markup or in any partia
 {% endforeach %}
 ```
 
-Components can also explicitly reference their alias by calling the `alias` property attached to the `__SELF__` variable.
-
-```
-{{__SELF__.alias}}
-```
-
-#### Unique identifier
-
-If an identical component is called twice on the same page, an `id` property attached to the  `__SELF__` variable can be used to reference each instance.
+If an identical component is called twice on the same page, an `id` property can be used to reference each instance.
 
 ```
 {{__SELF__.id}}
