@@ -57,7 +57,7 @@ the user comments.
 ##### Basic class structure
 
 ```php
-<?php namespace Plugins\Acme\Blog\Models;
+<?php namespace Acme\Blog\Models;
 
 class Post extends \October\Rain\Database\Model
 {
@@ -68,7 +68,7 @@ class Post extends \October\Rain\Database\Model
 ##### Creating a new record
 
 ```php
-$post = new Plugins\Acme\Blog\Models\Post;
+$post = new Acme\Blog\Models\Post;
 $post->title = 'Hello World!';
 $post->content = 'I am writing to you from my website...';
 $post->save();
@@ -77,7 +77,7 @@ $post->save();
 ##### Finding and updating a record
 
 ```php
-$post = Plugins\Acme\Blog\Models\Post::find(1);
+$post = Acme\Blog\Models\Post::find(1);
 $post->title = 'Hi there, World!';
 $post->save();
 ```
@@ -85,7 +85,7 @@ $post->save();
 ##### Deleting a record
 
 ```php
-$post = Plugins\Acme\Blog\Models\Post::find(1);
+$post = Acme\Blog\Models\Post::find(1);
 $post->delete();
 ```
 

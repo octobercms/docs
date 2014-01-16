@@ -48,7 +48,7 @@ Components must be registered in the [Plugin information file](plugins). This te
 public function registerComponents()
 {
     return [
-        'Plugins\October\Demo\Components\Todo' => 'demoTodo'
+        'October\Demo\Components\Todo' => 'demoTodo'
     ];
 }
 ```
@@ -150,7 +150,7 @@ This initializes the component with the settings that are defined in the compone
 If there are two plugins which register components with a same name, you can attach a component by using its fully qualified class name and assigning it an *alias*:
 
 ```
-[Plugins\October\Demo\Components\Todo demoTodoAlias]
+[October\Demo\Components\Todo demoTodoAlias]
 max-items = 20
 ```
 

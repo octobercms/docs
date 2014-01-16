@@ -37,7 +37,7 @@ An example version information file:
 An example of a structure file:
 
 ```php
-<?php namespace Plugins\October\Blog\Updates;
+<?php namespace October\Blog\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
@@ -69,10 +69,10 @@ class CreatePostsTable extends Migration
 
 An example of a seed file:
 ```php
-<?php namespace Plugins\October\Users\Updates;
+<?php namespace October\Users\Updates;
 
 use Seeder;
-use Plugins\October\Users\Models\User;
+use October\Users\Models\User;
 
 class SeedUsersTable extends Seeder
 {

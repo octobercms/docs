@@ -47,7 +47,7 @@ class Plugin extends System\Classes\PluginBase
     public function registerComponents()
     {
         return [
-            'Plugins\October\Demo\Components\Todo' => 'demoTodo'
+            'October\Demo\Components\Todo' => 'demoTodo'
         ];
     }
 }
@@ -111,7 +111,7 @@ Components are registered in the Plugin information file. An example of register
 public function registerComponents()
 {
     return [
-        'Plugins\October\Demo\Components\Todo' => 'demoTodo'
+        'October\Demo\Components\Todo' => 'demoTodo'
     ];
 }
 ```
