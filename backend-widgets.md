@@ -13,12 +13,12 @@ The widget class must contain a **render()** method for producing the widget mar
 
 ### Basic widgets
 
-A basic widget extends the **Modules\Backend\Classes\WidgetBase** class and can be used for any general purpose.
+A basic widget extends the **Backend\Classes\WidgetBase** class and can be used for any general purpose.
 
 ```php
-<?php namespace Modules\Backend\Widgets;
+<?php namespace Backend\Widgets;
 
-use Modules\Backend\Classes\WidgetBase;
+use Backend\Classes\WidgetBase;
 
 class Lists extends WidgetBase
 {
@@ -36,12 +36,12 @@ class Lists extends WidgetBase
 
 ### Form widgets
 
-Form widgets extend the **Modules\Backend\Classes\FormWidgetBase** class and are used specifically as Form fields. They provide features that are common to supplying data for models.
+Form widgets extend the **Backend\Classes\FormWidgetBase** class and are used specifically as Form fields. They provide features that are common to supplying data for models.
 
 ```php
-<?php namespace Modules\Backend\Widgets;
+<?php namespace Backend\Widgets;
 
-use Modules\Backend\Classes\FormWidgetBase;
+use Backend\Classes\FormWidgetBase;
 
 class CodeEditor extends FormWidgetBase
 {

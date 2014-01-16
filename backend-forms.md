@@ -15,7 +15,7 @@ The configuration is defined in YAML format, an example looks like this:
 
 name: Admin
 form: /Modules/Backend/Models/Admin/form-fields.yaml
-model-class: Modules\Backend\Models\Admin
+model-class: Backend\Models\Admin
 
 create:
     title: New Admin
@@ -248,7 +248,7 @@ You can also use a special field type called a *Form Widget*.
 
 ```
 blog_content:
-  type: Modules\Backend\Widgets\FormRichEditor
+  type: Backend\Widgets\FormRichEditor
   size: huge
   options: [...]
 ```

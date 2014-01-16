@@ -22,7 +22,7 @@ Components reside in the **/components** directory inside a Plugin. An example o
 The *Component class file* defines the functionality that is added to the page when it is attached and what properties can be used. In this example of a component class, the file would be named **Todo.php** and located in the **/plugins/october/demo/components** directory:
 
 ```php
-class Todo extends Modules\Cms\Classes\ComponentBase
+class Todo extends Cms\Classes\ComponentBase
 {
     public function componentDetails()
     {

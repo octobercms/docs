@@ -32,7 +32,7 @@ The **Plugin.php** file, called the *Plugin information file*, is an initializat
 An example Plugin information file:
 
 ```php
-class Plugin extends Modules\System\Classes\PluginBase
+class Plugin extends System\Classes\PluginBase
 {
     public function pluginDetails()
     {

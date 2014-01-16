@@ -5,14 +5,14 @@ Active Record models can support file attachments using a polymorphic relationsh
 ##### A single file attachment
 ```php
 public $morphOne = [
-    'avatar' => ['Modules\System\Models\File', 'name' => 'attachment']
+    'avatar' => ['System\Models\File', 'name' => 'attachment']
 ];
 ```
 
 ##### Multiple file attachments
 ```php
 public $morphMany = [
-    'photos' => ['Modules\System\Models\File', 'name' => 'attachment']
+    'photos' => ['System\Models\File', 'name' => 'attachment']
 ];
 ```
 
@@ -32,7 +32,7 @@ $model->avatar()->create(['public' => false, 'data' => Input::file('file_input')
 
 ##### Add a prepared File object
 ```php
-$file = new Modules\System\Models\File;
+$file = new System\Models\File;
 $file->data = Input::file('file_input');
 $file->save();
 
@@ -71,13 +71,13 @@ Supported options:
 
 ## Usage Example
 
-Inside your model define a relationship to the **Modules\System\Models\File** class, for example:
+Inside your model define a relationship to the **System\Models\File** class, for example:
 
 ```php
 class Post extends Model
 {
     public $morphOne = [
-        'featured_image' => ['Modules\System\Models\File', 'name' => 'attachment']
+        'featured_image' => ['System\Models\File', 'name' => 'attachment']
     ];
 }
 ```

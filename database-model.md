@@ -28,7 +28,7 @@ class BlogPost extends Model
   ];
 
   public $morphMany = [
-    'featured_images' => ['Modules\System\Models\File', 'name' => 'attachment']
+    'featured_images' => ['System\Models\File', 'name' => 'attachment']
   ];
 }
 ```
