@@ -49,6 +49,10 @@ The following events are available:
 | afterUpdate    | After an existing model is saved                           |
 | beforeDelete   | Before an existing model is deleted                        |
 | afterDelete    | After an existing model is deleted                         |
+| beforeRestore  | Before a soft-deleted model is restored                    |
+| afterRestore   | After a soft-deleted model has been restored               |
+| beforeFetch    | Before an exisiting model is populated                     |
+| afterFetch     | After an exisiting model has been populated                |
 
 An example of using an event:
 
