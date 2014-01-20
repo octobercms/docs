@@ -29,8 +29,13 @@ $settings->save();
 ```php
 // Outputs: ABCD
 echo Settings::instance()->api_key;
-```
 
+// Get a single value
+echo Settings::get('api_key');
+
+// Get a value and return a default value if it doesn't exist
+echo Settings::get('is_activated', true);
+```
 
 ### Settings page links
 
