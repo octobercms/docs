@@ -13,6 +13,8 @@ The following relations are available, along with their optional and required ar
 | $morphTo        | Polymorphic version of belongs to              | name, type, id                            |           |
 | $morphOne       | Polymorphic version of has one                 | type, id                                  | name      |
 | $morphMany      | Polymorphic version of has many                | type, id                                  | name      |
+| $attachOne      | Single file attachment                         | public                                    |           |
+| $attachMany     | Multiple file attachments                      | public                                    |           |
 | $hasManyThrough | Has many related models through another model  | firstKey, secondKey                       | through   |
 
 An example of defining a relationship:
