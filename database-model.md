@@ -4,15 +4,16 @@ October's database models are named Active Record which is based on the [Eloquen
 
 The following relations are available, along with their optional and required arguments:
 
-| Name           | Description                                    | Optional                                  | Required  |
-|:-------------- |:-----------------------------------------------|:----------------------------------------- |:--------- |
-| $hasOne        | Has a single related model that belongs to it  | foreignKey                                |           |
-| $hasMany       | Has many related models that belong to         | foreignKey                                |           |
-| $belongsTo     | Owned by another related model (slave)         | foreignKey                                |           |
-| $belongsToMany | Owned by multiple related models               | table, foreignKey, primaryKey, pivotData  |           |
-| $morphTo       | Polymorphic version of belongs to              | name, type, id                            |           |
-| $morphOne      | Polymorphic version of has one                 | type, id                                  | name      |
-| $morphMany     | Polymorphic version of has many                | type, id                                  | name      |
+| Name            | Description                                    | Optional                                  | Required  |
+|:--------------- |:-----------------------------------------------|:----------------------------------------- |:--------- |
+| $hasOne         | Has a single related model that belongs to it  | foreignKey                                |           |
+| $hasMany        | Has many related models that belong to         | foreignKey                                |           |
+| $belongsTo      | Owned by another related model (slave)         | foreignKey                                |           |
+| $belongsToMany  | Owned by multiple related models               | table, foreignKey, primaryKey, pivotData  |           |
+| $morphTo        | Polymorphic version of belongs to              | name, type, id                            |           |
+| $morphOne       | Polymorphic version of has one                 | type, id                                  | name      |
+| $morphMany      | Polymorphic version of has many                | type, id                                  | name      |
+| $hasManyThrough | Has many related models through another model  | firstKey, secondKey                       | through   |
 
 An example of defining a relationship:
 
