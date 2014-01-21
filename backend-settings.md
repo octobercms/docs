@@ -1,4 +1,3 @@
-
 ### Settings model
 
 You can create models used for storing settings easily by implementing the **SettingsModel** behavior. You do not need to create a database table or a controller.
@@ -53,7 +52,7 @@ public function registerSettings()
             'category' => 'Users',
             'icon' => 'icon-globe',
             'url' => Backend::url('october/user/locations'),
-            'sort' => 100
+            'order' => 100
         ]
     ];
 }
@@ -72,7 +71,7 @@ public function registerSettings()
             'category' => 'Users',
             'icon' => 'icon-cog',
             'class' => 'October\User\Models\Settings',
-            'sort' => 100
+            'order' => 100
         ]
     ];
 }
