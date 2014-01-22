@@ -1,3 +1,6 @@
+
+## Please note: October is still under development and cannot be installed just yet
+
 There are two ways you can install October, either using the Wizard or Command-line installation process. Before you proceed, you should check that your server meets the minimum system requirements.
 
 #### Minimum System Requirements
