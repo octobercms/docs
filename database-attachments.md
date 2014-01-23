@@ -80,8 +80,8 @@ Inside your model define a relationship to the **System\Models\File** class, for
 ```php
 class Post extends Model
 {
-    public $morphOne = [
-        'featured_image' => ['System\Models\File', 'name' => 'attachment']
+    public $attachOne = [
+        'featured_image' => ['System\Models\File']
     ];
 }
 ```
