@@ -71,7 +71,7 @@ The widget partial cound contain any HTML markup you want to display in the widg
 </div>
 ```
 
-![image](traffic-sources.png)
+![image](https://raw2.github.com/octobercms/docs/master/images/traffic-sources.png)
 
 Inside report widgets you can use any [charts or indicators](backend-charts-and-indicators.md), lists or any other markup you wish. Remember that the report widgets extend the [back-end widgets](backend-widgets.md) and you can use any widget functionality in your report widgets.
 
@@ -121,7 +121,7 @@ Inside report widgets you can use any [charts or indicators](backend-charts-and-
 
 Report widgets could have properties that users can manage with the Inspector:
 
-![image](report-widget-inspector.png)
+![image](https://github.com/octobercms/docs/blob/master/images/report-widget-inspector.png?raw=true)
 
 The properties should be defined in the **defineProperties()** method of the widget class. Note that the [components](extensibility-components.md) use the same way to define properties. Example:
 
