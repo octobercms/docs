@@ -30,6 +30,6 @@ The scoreboard control is usually displayed above back-end lists and displays so
 <?= $this->listRender() ?>
 ```
 
-![image](list-scoreboard.png)
+![image](https://github.com/octobercms/docs/blob/master/images/list-scoreboard.png?raw=true)
 
 Note that you should use the **scoreboard-item** class for your scoreboard elements.
