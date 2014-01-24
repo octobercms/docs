@@ -30,8 +30,8 @@ class BlogPost extends Model
     'categories' => ['Category', 'table' => 'october_blog_posts_categories']
   ];
 
-  public $morphMany = [
-    'featured_images' => ['System\Models\File', 'name' => 'attachment']
+  public $attachMany = [
+    'featured_images' => ['System\Models\File']
   ];
 }
 ```
@@ -88,6 +88,16 @@ class User extends \October\Rain\Database\Model
 * **$purgeable** - attributes are removed before attempting to save to the database
 * **$jsonable** - values are encoded as JSON before saving and converted to arrays after fetching
 * **$encryptable** - values are encrypted and decrypted for storing sensitive data
+
+##### Extending models
+
+Models can be extended by hooking in to the constructor. For example, to add another relation:
+
+```php
+User::extend(function($model) {
+    $model->hasOne['author'] = ['Author', 'foriegnKey' => 'user_id'];
+});
+```
 
 ##### Joined Eager Load
 
