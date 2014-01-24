@@ -19,7 +19,7 @@ The pie chart outputs information as a circle diagram, with optional label in th
 </div>
 ```
 
-![image](traffic-sources.png)
+![image](https://github.com/octobercms/docs/blob/master/images/traffic-sources.png?raw=true)
 
 The **centered** and **wrap-legend** classes are optional. They manage the chart and legend layout.
 
@@ -44,7 +44,7 @@ Example bar chart markup:
 
 The **wrap-legend** class is optional, it manages the legend layout. The **data-height** and **data-full-width** attributes are optional as well.
 
-![image](bar-chart.png)
+![image](https://github.com/octobercms/docs/blob/master/images/bar-chart.png?raw=true)
 
 #### Indicators with titles and values
 
@@ -82,7 +82,7 @@ Example title-value indicator markup:
 </div>
 ```
 
-![image](name-title-indicators.png)
+![image](https://github.com/octobercms/docs/blob/master/images/name-title-indicators.png?raw=true)
 
 Note that the example is given in the context of a scoreboard area. If you use the indicators in a [report widget](extensibility-dashboard-widgets.md) partial, the class **scoreboard-item** shouldn't be used.
 
