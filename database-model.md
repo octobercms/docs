@@ -6,16 +6,16 @@ The following relations are available, along with their optional and required ar
 
 | Name            | Description                                    | Optional                                  | Required  |
 |:--------------- |:-----------------------------------------------|:----------------------------------------- |:--------- |
-| $hasOne         | Has a single related model that belongs to it  | foreignKey                                |           |
-| $hasMany        | Has many related models that belong to         | foreignKey                                |           |
+| $hasOne         | Has a single related model that belongs to it  | foreignKey, localKey                      |           |
+| $hasMany        | Has many related models that belong to         | foreignKey, localKey                      |           |
 | $belongsTo      | Owned by another related model (slave)         | foreignKey                                |           |
 | $belongsToMany  | Owned by multiple related models               | table, foreignKey, primaryKey, pivotData  |           |
 | $morphTo        | Polymorphic version of belongs to              | name, type, id                            |           |
-| $morphOne       | Polymorphic version of has one                 | type, id                                  | name      |
-| $morphMany      | Polymorphic version of has many                | type, id                                  | name      |
+| $morphOne       | Polymorphic version of has one                 | type, id, localKey                        | name      |
+| $morphMany      | Polymorphic version of has many                | type, id, localKey                        | name      |
 | $attachOne      | Single file attachment                         | public                                    |           |
 | $attachMany     | Multiple file attachments                      | public                                    |           |
-| $hasManyThrough | Has many related models through another model  | firstKey, secondKey                       | through   |
+| $hasManyThrough | Has many related models through another model  | foreignKey, throughKey                    | through   |
 
 An example of defining a relationship:
 
@@ -95,7 +95,7 @@ Models can be extended by hooking in to the constructor. For example, to add ano
 
 ```php
 User::extend(function($model) {
-    $model->hasOne['author'] = ['Author', 'foriegnKey' => 'user_id'];
+    $model->hasOne['author'] = ['Author', 'foreignKey' => 'user_id'];
 });
 ```
 
