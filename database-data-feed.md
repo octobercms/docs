@@ -2,7 +2,7 @@ A data feed allows you to combine multiple model classes into a single Collectio
 
 It works by adding model objects in a prepared state, before the `get()` method is called, which are then combined to make a collection that behaves the same as a regular dataset.
 
-The `DataFeed` class mimics the `Model` class and supports `limit()` and `paginate()` methods.
+The `DataFeed` class mimics a regular Active Record model and supports `limit()` and `paginate()` methods.
 
 #### Usage instructions
 
@@ -24,7 +24,6 @@ This example will combine the User, Post and Comment models in to a single colle
 #### Processing results
 
 The `get()` method will return a `Collection` object that contains the results. Records can be differentiated by using the `tag_name` attribute which was set as the first parameter when the model was added.
-
 
 ```php
 foreach ($results as $result) {
