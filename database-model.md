@@ -6,16 +6,18 @@ The following relations are available, along with their optional and required ar
 
 | Name            | Description                                    | Optional                                  | Required  |
 |:--------------- |:-----------------------------------------------|:----------------------------------------- |:--------- |
-| $hasOne         | Has a single related model that belongs to it  | foreignKey, localKey                      |           |
-| $hasMany        | Has many related models that belong to         | foreignKey, localKey                      |           |
+| $hasOne         | Has a single related model that belongs to it  | primaryKey                                |           |
+| $hasMany        | Has many related models that belong to         | primaryKey                                |           |
 | $belongsTo      | Owned by another related model (slave)         | foreignKey                                |           |
-| $belongsToMany  | Owned by multiple related models               | table, foreignKey, primaryKey, pivotData  |           |
+| $belongsToMany  | Owned by multiple related models               | table, primaryKey, foreignKey, pivotData  |           |
 | $morphTo        | Polymorphic version of belongs to              | name, type, id                            |           |
-| $morphOne       | Polymorphic version of has one                 | type, id, localKey                        | name      |
-| $morphMany      | Polymorphic version of has many                | type, id, localKey                        | name      |
+| $morphOne       | Polymorphic version of has one                 | type, id                                  | name      |
+| $morphMany      | Polymorphic version of has many                | type, id                                  | name      |
 | $attachOne      | Single file attachment                         | public                                    |           |
 | $attachMany     | Multiple file attachments                      | public                                    |           |
-| $hasManyThrough | Has many related models through another model  | foreignKey, throughKey                    | through   |
+| $hasManyThrough | Has many related models through another model  | primaryKey, throughKey                    | through   |
+
+> **Note:**  The key arguments are in the context of the defining model. The defining [primary] model is identified by a `primaryKey` and the foreign model is identified by a `foreignKey`.
 
 An example of defining a relationship:
 
@@ -63,7 +65,7 @@ An example of using an event:
 public function beforeCreate()
 {
   // Generate a URL slug for this model
-  $this->slug = slug($this->name);
+  $this->slug = Str::slug($this->name);
 }
 ```
 

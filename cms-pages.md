@@ -52,7 +52,7 @@ You can also add regular expression validation to parameters. To add a validatio
 /blog/:post_name?|^[a-z0-9\-]+$ - this will match /blog/my-blog-post
 ```
 
-> **Note** Pages within subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
+> **Note:** Pages within subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
 
 #### 404 page
 
