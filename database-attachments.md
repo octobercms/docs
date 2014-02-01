@@ -106,13 +106,26 @@ Processing the file upload on the server
 // Find the Blog Post model
 $post = Post::find(1);
 
+// Save the featured image of the Blog Post model
+if (Input::hasFile('example_file'))
+    $post->featured_image = Input::file('example_file');
+```
+
+Alternatively, if you need to use deferred bindings
+
+```php
+// Find the Blog Post model
+$post = Post::find(1);
+
 // Look for the postback data 'example_file' in the HTML form above
 $fileFromPost = Input::file('example_file');
 
-// If it exists, save it as the featured image of the Blog Post model
+// If it exists, save it as the featured image with a deferred session key
 if ($fileFromPost)
-    $post->featured_image()->create(['data' => $fileFromPost]);
+    $post->featured_image()->create(['data' => $fileFromPost], $sessionKey);
 ```
+
+
 
 #### Viewing the uploaded file
 
