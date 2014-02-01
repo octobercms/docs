@@ -119,7 +119,7 @@ You can check if a placeholder content exists by using the `placeholder()` funct
 Additional markup tags can be registered in the CMS by plugins, contained in the Plugin Information File. An example of registering a custom markup tag:
 
 * A **filter** will manipulate a value with a specified function. Example: `{{ 'value'|uppercase }}`
-* A **function** can be used by itself and takes some parameters. Example: `{{ form_open('value') }}
+* A **function** can be used by itself and takes some parameters. Example: `{{ form_open('value') }}`
 
 ```php
 <?php namespace Plugins\October\Blog;
@@ -133,10 +133,18 @@ class Plugin extends System\Classes\PluginBase
     {
         return [
             'filters' => [
+                // A global function, i.e str_plural()
+                'plural' => 'str_plural',
+
+                // A local method, i.e $this->makeTextAllCaps()
                 'uppercase' => [$this, 'makeTextAllCaps']
             ],
             'functions' => [
-                'form_open' => ['October\Rain\Html\Form', 'open']
+                // A static method call, i.e Form::open()
+                'form_open' => ['October\Rain\Html\Form', 'open'],
+
+                // Using an inline closure
+                'helloWorld' => function() { return 'Hello World!'; }
             ]
         ];
     }
