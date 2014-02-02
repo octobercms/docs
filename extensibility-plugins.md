@@ -67,6 +67,7 @@ The following registration methods are supported:
 | registerPermissions   | Registers any back-end permissions used by this plugin.         |
 | registerSettings      | Registers any back-end configuration links used by this plugin. |
 | registerReportWidgets | Registers any report widgets, including the dashboard widgets.  |
+| registerMarkupTags    | Registers additional markup tags that can be used in the CMS.   |
 
 #### Version & Database history
 

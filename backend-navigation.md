@@ -2,7 +2,7 @@ This section shows you how to add menu items to the back-end navigation area.
 
 #### Adding back-end menu items
 
-Back-end navigation are registered in the system by plugins, contained in the Plugin Information File. An example of registering a navigation menu item:
+Back-end navigation items are registered in the system by plugins, contained in the Plugin Information File. An example of registering a navigation menu item:
 
 ```php
 <?php namespace Plugins\October\Blog;
