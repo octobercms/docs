@@ -48,6 +48,24 @@ Example:
 </html>
 ```
 
+#### Flash messages
+
+##### Display all flash messages
+
+``` html
+{% flash %}
+    <div class="alert alert-{{ type }}">{{ message }}</div>
+{% endflash %}
+```
+
+##### Display all messages of a given type
+
+``` html
+{% flash success %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endflash %}
+```
+
 #### Placeholders
 
 Placeholders allow pages to inject content to the layout defined with the **placeholder** tag. Content is then injected with the **put** tag.
@@ -94,7 +112,7 @@ Placeholders can have default content, that can be either replaced or complement
 
 The **default** tag specifies a place where the default placeholder content should be displayed.
 
-#### Checking a placeholder exists
+##### Checking a placeholder exists
 
 You can check if a placeholder content exists by using the `placeholder()` function. Example:
 
@@ -113,8 +131,54 @@ You can check if a placeholder content exists by using the `placeholder()` funct
 {% endif %}
 ```
 
+#### Forms
 
-### Adding custom markup tags
+Opening and closing forms.
+
+##### Open a form
+
+```html
+{{ form_open() }}
+
+{{ form_open({ class => 'form-horizontal' }) }}
+
+{{ form_open({ request: 'onUpdate' }) }}
+```
+
+* **method** - postback method. Eg:POST, GET, PUT, DELETE
+* **url** - specified URL to post to.
+* **route** - post to a route. eg: route.name
+* **action** - post to a controller action. eg: Controller@method
+* **files** - form will submit files. true|false
+* **request** - request handler to postback to. eg: onSave
+* **model** - form model binding
+
+##### Open an AJAX form
+
+```html
+{{ form_ajax('onUpdate') }}
+
+{{ form_ajax('onSave', { class => 'form-horizontal'}) }}
+
+{{ form_ajax('onDelete', { data: { id: 2 } }) }}
+
+{{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
+```
+
+* **success** - javascript to execute on successful result
+* **error** - javascript to execute on failed result
+* **confirm** - a message to display to confirm before sending
+* **redirect** - on successful result, redirect to a URL
+* **update** - array of partials to update. eg: { 'partial': '#element' }
+* **data** - extra data to include with the postback. eg: { isPostback: true }
+
+##### Close a form
+
+```html
+{{ form_close() }}
+```
+
+#### Adding custom markup tags
 
 Additional markup tags can be registered in the CMS by plugins, contained in the Plugin Information File. An example of registering a custom markup tag:
 
