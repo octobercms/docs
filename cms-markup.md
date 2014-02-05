@@ -145,7 +145,7 @@ Opening and closing forms.
 {{ form_open({ request: 'onUpdate' }) }}
 ```
 
-* **method** - postback method. Eg:POST, GET, PUT, DELETE
+* **method** - postback method. Eg: POST, GET, PUT, DELETE
 * **url** - specified URL to post to.
 * **route** - post to a route. eg: route.name
 * **action** - post to a controller action. eg: Controller@method
