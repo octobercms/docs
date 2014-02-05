@@ -1,4 +1,4 @@
-Charts and indicators are used in the back-end report widgets (including the [dashboard][extensibility-dashboard-widgets.md]) and scoreboard areas. 
+Charts and indicators are used in the back-end report widgets (including the [dashboard][extensibility-dashboard-widgets.md]) and scoreboard areas.
 
 #### Pie chart
 
@@ -6,8 +6,8 @@ The pie chart outputs information as a circle diagram, with optional label in th
 
 ```php
 <div 
-    class="control-chart centered wrap-legend" 
-    data-control="chart-pie" 
+    class="control-chart centered wrap-legend"
+    data-control="chart-pie"
     data-size="200"
     data-center-text="100"
 >
