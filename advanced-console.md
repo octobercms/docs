@@ -1,5 +1,7 @@
 ## Console Installation
 
+### Please note: October is still under development and cannot be installed just yet
+
 The command-line interface (CLI) method of installation requires [Composer](http://getcomposer.org/) to manage its dependencies.
 
 Download the application source code by using the `create-project` in your terminal:
