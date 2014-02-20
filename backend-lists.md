@@ -30,7 +30,9 @@ record-url: users/update/:id
 * **record-url** - link each list record to another page. Eg: **users/update:id**
 * **no-records-message** - a message to display when no records are found, can refer to a [localization string](Localization).
 * **records-per-page** - how many records to display per page. Default: 20
-* **show-checkboxes** - displays checkboxes next to each record.
+* **show-checkboxes** - displays checkboxes next to each record. Default: false
+* **show-setup** - displays the list column set up button. Default: true
+* **show-pagination** - displays page numbers for multiple records. Default: true
 * **toolbar** - reference to a Toolbar Widget configuration file, or an array with configuration (see below).
 * **default-sort** - sets a default sorting column and direction when user preference is not defined.
 
