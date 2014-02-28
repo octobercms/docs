@@ -128,13 +128,16 @@ $('form').request('onCalculate', {data: {value: 55})
 $('form').request('onCalculate', {beforeUpdate: function(){ /* do something */ }})
 
 // Run onCalculate and if successful, run some custom code and the default
-$('form').request('onCalculate', {success: function(data){ 
+$('form').request('onCalculate', {success: function(data){
     //... do something ...
     this.success(data);
 }})
 
+// Execute a request without an element
+$.request('onCalculate', {success: function(){ console.log('Finished!') }})
+
 // Run onCalculate and if successful, run some custom code after the default is done
-$('form').request('onCalculate', {success: function(data){ 
+$('form').request('onCalculate', {success: function(data){
     this.success(data).done(function() {
         //... do something after parent success() is finished ...
     });
