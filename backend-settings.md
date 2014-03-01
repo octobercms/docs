@@ -18,6 +18,10 @@ class Settings extends Model
 #### Writing to a settings model
 
 ```php
+Settings::set('api_key', 'ABCD');
+
+Settings::set(['api_key' => 'ABCD']);
+
 $settings = Settings::instance();
 $settings->api_key = 'ABCD';
 $settings->save();
