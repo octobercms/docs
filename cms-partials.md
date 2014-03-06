@@ -2,7 +2,7 @@ Partial templates reside in the **/partials** directory of a theme. Partial file
 
 The following configuration parameters are supported:
 
-- *description* - the partial description, for the back-end UI (optional)
+- **description** - the partial description, for the back-end UI (optional)
 
 Simplest partial example:
 

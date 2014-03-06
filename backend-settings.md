@@ -1,5 +1,3 @@
-### Settings model
-
 You can create models used for storing settings easily by implementing the **SettingsModel** behavior. You do not need to create a database table or a controller.
 
 ```php
@@ -15,7 +13,7 @@ class Settings extends Model
 }
 ```
 
-#### Writing to a settings model
+##### Writing to a settings model
 
 ```php
 Settings::set('api_key', 'ABCD');
@@ -27,7 +25,7 @@ $settings->api_key = 'ABCD';
 $settings->save();
 ```
 
-#### Reading from a settings model
+##### Reading from a settings model
 
 ```php
 // Outputs: ABCD
@@ -40,11 +38,11 @@ echo Settings::get('api_key');
 echo Settings::get('is_activated', true);
 ```
 
-### Settings page links
+#### Settings page links
 
 The section shows you how to add linkable items to the System Settings page.
 
-#### Link to a page URL
+##### Link to a page URL
 
 ```php
 public function registerSettings()
@@ -63,7 +61,7 @@ public function registerSettings()
 ```
 
 
-#### Link to a Settings model
+##### Link to a Settings model
 
 ```php
 public function registerSettings()

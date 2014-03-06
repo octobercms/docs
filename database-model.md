@@ -4,18 +4,16 @@ October's database models are named Active Record which is based on the [Eloquen
 
 The following relations are available, along with their optional and required arguments:
 
-| Name            | Description                                    | Optional                                  | Required  |
-|:--------------- |:-----------------------------------------------|:----------------------------------------- |:--------- |
-| $hasOne         | Has a single related model that belongs to it  | primaryKey                                |           |
-| $hasMany        | Has many related models that belong to         | primaryKey                                |           |
-| $belongsTo      | Owned by another related model (slave)         | foreignKey                                |           |
-| $belongsToMany  | Owned by multiple related models               | table, primaryKey, foreignKey, pivotData  |           |
-| $morphTo        | Polymorphic version of belongs to              | name, type, id                            |           |
-| $morphOne       | Polymorphic version of has one                 | type, id                                  | name      |
-| $morphMany      | Polymorphic version of has many                | type, id                                  | name      |
-| $attachOne      | Single file attachment                         | public                                    |           |
-| $attachMany     | Multiple file attachments                      | public                                    |           |
-| $hasManyThrough | Has many related models through another model  | primaryKey, throughKey                    | through   |
+- **$hasOne** - has a single related model that belongs to it. Optional: primaryKey.
+- **$hasMany** - has many related models that belong to. Optional: primaryKey.
+- **$belongsTo** - owned by another related model (slave). Optional: foreignKey.
+- **$belongsToMany** - owned by multiple related models. Optional: table, primaryKey, foreignKey, pivotData.
+- **$morphTo** - polymorphic version of belongs to. Optional: name, type, id.
+- **$morphOne** - polymorphic version of has one. Optional: type, id. Required: name.
+- **$morphMany** - polymorphic version of has many. Optional: type, id. Required: name.
+- **$attachOne** - single file attachment. Optional: public.
+- **$attachMany** - multiple file attachments. Optional: public.
+- **$hasManyThrough** - has many related models through another model. Optional: primaryKey, throughKey. Required: through.
 
 > **Note:**  The key arguments are in the context of the defining model. The defining [primary] model is identified by a `primaryKey` and the foreign model is identified by a `foreignKey`.
 
@@ -42,22 +40,20 @@ class BlogPost extends Model
 
 The following events are available:
 
-| Name           | Description                                                |
-|:-------------- |:-----------------------------------------------------------|
-| beforeCreate   | Before the model is saved, when first created              |
-| afterCreate    | After the model is saved, when first created               |
-| beforeSave     | Before the model is saved, either created or updated       |
-| afterSave      | After the model is saved, either created or updated        |
-| beforeValidate | Before the supplied model data is validated                |
-| afterValidate  | After the supplied model data has been validated           |
-| beforeUpdate   | Before an existing model is saved                          |
-| afterUpdate    | After an existing model is saved                           |
-| beforeDelete   | Before an existing model is deleted                        |
-| afterDelete    | After an existing model is deleted                         |
-| beforeRestore  | Before a soft-deleted model is restored                    |
-| afterRestore   | After a soft-deleted model has been restored               |
-| beforeFetch    | Before an exisiting model is populated                     |
-| afterFetch     | After an exisiting model has been populated                |
+- **beforeCreate** - before the model is saved, when first created.
+- **afterCreate** - after the model is saved, when first created.
+- **beforeSave** - before the model is saved, either created or updated.
+- **afterSave** - after the model is saved, either created or updated.
+- **beforeValidate** - before the supplied model data is validated.
+- **afterValidate** - after the supplied model data has been validated.
+- **beforeUpdate** - before an existing model is saved.
+- **afterUpdate** - after an existing model is saved.
+- **beforeDelete** - before an existing model is deleted.
+- **afterDelete** - after an existing model is deleted.
+- **beforeRestore** - before a soft-deleted model is restored.
+- **afterRestore** - after a soft-deleted model has been restored.
+- **beforeFetch** - before an exisiting model is populated.
+- **afterFetch** - after an exisiting model has been populated.
 
 An example of using an event:
 
@@ -117,12 +113,7 @@ This will also eager load
 * [Active record pattern - Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern)
 
 
-
----
-
-
-
-## Model Validation
+#### Model Validation
 
 October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation). 
 Defining validation rules are defined in the model class as a variable named `$rules`:
@@ -155,7 +146,7 @@ $success = $user->save();
 
 > **Note:** You can also validate a model at any time using the `validate()` method.
 
-#### Retrieving Validation Errors
+##### Retrieving Validation Errors
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the object which contains validation failure messages.
 
@@ -165,7 +156,7 @@ Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *sp
 
 > **Note:** The Model leverages Laravel's MessagesBag object which has a [simple and elegant method](http://laravel.com/docs/validation#working-with-error-messages) of formatting errors.
 
-#### Overriding Validation
+##### Overriding Validation
 
 `forceSave()` validates the model but saves regardless of whether or not there are validation errors.
 
@@ -176,7 +167,7 @@ $user = new User;
 $user->forceSave();
 ```
 
-#### Custom Error Messages
+##### Custom Error Messages
 
 Just like the Laravel Validator, Ardent lets you set custom error messages using the [same syntax](http://laravel.com/docs/validation#custom-error-messages).
 
@@ -190,6 +181,6 @@ class User extends \October\Rain\Database\Model
 }
 ```
 
-#### Custom Validation Rules
+##### Custom Validation Rules
 
 You can create custom validation rules the [same way](http://laravel.com/docs/validation#custom-validation-rules) you would for the Laravel Validator.

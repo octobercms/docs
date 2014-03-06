@@ -1,7 +1,5 @@
-Database tables and seed data is managed using a version information file **version.yaml** found 
-in the **updates** folder of a plugin.
-
-An example plugin updates folder:
+Database tables and seed data is managed using a version information file `version.yaml` found 
+in the `updates` folder of a plugin. An example plugin updates folder:
 
 ```
 /plugins
@@ -17,7 +15,7 @@ An example plugin updates folder:
 
 An example version information file:
 
-```yaml
+```
 1.0.1:
     - Added some upgrade file and some seeding
     - some_upgrade_file.php

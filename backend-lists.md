@@ -1,10 +1,6 @@
-## Controller Configuration
+`List behavior` is a controller modifier used for easily adding a List to a page. List behavior depends on column definitions and a model class.
 
-List behavior is a controller modifier used for easily adding a List to a page.
-
-List behavior depends on column definitions and a model class.
-
-### Basic structure
+#### Basic structure
 
 The configuration is defined in YAML format, an example looks like this:
 
@@ -19,13 +15,13 @@ model-class: Backend\Models\Admin
 record-url: users/update/:id
 ```
 
-### Required configuration
+##### Required configuration
 
 * **title** - a title for this list.
 * **list** - a reference to list column definition file, see Model Configuration.
 * **model-class** - a Model class name to source the list data.
 
-### Optional configuration
+##### Optional configuration
 
 * **record-url** - link each list record to another page. Eg: **users/update:id**
 * **no-records-message** - a message to display when no records are found, can refer to a [localization string](Localization).
@@ -36,7 +32,7 @@ record-url: users/update/:id
 * **toolbar** - reference to a Toolbar Widget configuration file, or an array with configuration (see below).
 * **default-sort** - sets a default sorting column and direction when user preference is not defined.
 
-### Adding a toolbar
+##### Adding a toolbar
 
 To include a toolbar with the list add the following configuration:
 
@@ -56,18 +52,11 @@ The search configuration allows:
 
 * **prompt** - A placeholder to display when there is no active search, can refer to a [localization string](Localization).
 
+#### Model Configuration
 
+List column definitions are used for creating a graphical user interface (GUI) representation of a collection of database Models. The GUI is displayed as a HTML table.
 
-
-
-
-## Model Configuration
-
-List column definitions are used for creating a graphical user interface (GUI) representation of a collection of database Models.
-
-The GUI is displayed as a HTML table.
-
-### Basic structure
+##### Basic structure
 
 ```
 # ===================================
@@ -79,7 +68,7 @@ columns:
     email: Email
 ```
 
-### Field options
+##### Field options
 
 Each field can specify these options (where applicable):
 
@@ -92,11 +81,11 @@ Each field can specify these options (where applicable):
 * **select** - defines a custom SQL select statement
 * **relation** - defines a relationship column
 
-## Column types
+#### Column types
 
 The following column types are available:
 
-### Text
+##### Text
 
 Displays a text column, aligned left
 
@@ -106,7 +95,7 @@ full_name:
     type: text
 ```
 
-### Number
+##### Number
 
 Displays a number column, aligned right
 
@@ -116,7 +105,7 @@ age:
     type: number
 ```
 
-### Date Time
+##### Date Time
 
 Displays the column value as a formatted date and time.
 
@@ -139,7 +128,7 @@ You can also specify a custom format:
 
 Displays as *Thursday 25th of December 1975 02:15:16 PM*
 
-### Date
+##### Date
 
 Displays the column value as date format `M j, Y`
 
@@ -149,7 +138,7 @@ Displays the column value as date format `M j, Y`
     type: date
 ```
 
-### Time
+##### Time
 
 Displays the column value as time format `g:i A`
 
@@ -159,7 +148,7 @@ Displays the column value as time format `g:i A`
     type: time
 ```
 
-### Time elapsed
+##### Time elapsed
 
 Displays a human readable time difference from the value to the current time. Eg: *10 minutes ago*
 
@@ -169,7 +158,7 @@ Displays a human readable time difference from the value to the current time. Eg
     type: timesince
 ```
 
-## Custom Selects
+##### Custom Selects
 
 You can create a column using a custom select statement. Any valid SQL SELECT statement works here.
 
@@ -179,7 +168,7 @@ full_name:
     select: concat(first_name, ' ', last_name)
 ```
 
-## Relationships
+##### Relationships
 
 If you want to display related columns, you can provide a relationship option.
 The value of this option has to be the name of the Active Record relationshp on your model.

@@ -2,9 +2,9 @@ Page templates reside in the **/pages** directory of a theme. Page files should 
 
 The following configuration parameters are supported for pages:
 
-- *url* - the page URL (required)
-- *layout* - the page layout, optional. If specified, should contain the name of the layout file, without extension. For example: "default".
-- *description* - the page description for the back-end interface (optional)
+- **url** - the page URL (required)
+- **layout** - the page layout, optional. If specified, should contain the name of the layout file, without extension. For example: "default".
+- **description** - the page description for the back-end interface (optional)
 
 Simplest page example:
 

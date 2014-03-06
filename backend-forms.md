@@ -1,10 +1,6 @@
-## Controller Configuration
+`Form behavior` is a controller modifier used for easily adding Form functionality to a page. Form behavior depends on field definitions and a model class.
 
-Form behavior is a controller modifier used for easily adding Form functionality to a page.
-
-Form behavior depends on field definitions and a model class.
-
-### Basic structure
+#### Basic structure
 
 The configuration is defined in YAML format, an example looks like this:
 
@@ -27,20 +23,20 @@ preview:
     title: View Admin
 ```
 
-### Required configuration
+##### Required configuration
 
 * **name** - a name for the object being managed by this form.
 * **form** - a reference to list column definition file, see Model Configuration.
 * **model-class** - a Model class name to source and save the form data.
 
-### Optional configuration
+##### Optional configuration
 
 * **default-redirect** - redirection page to use when none is defined.
 * **preview** - an array containing configuration for the preview page.
 * **create** - an array containing configuration for the create page.
 * **update** - an array containing configuration for the update page.
 
-### Create page
+##### Create page
 
 To include an create page add the following configuration:
 
@@ -59,7 +55,7 @@ The create page configuration allows:
 * **redirect-close** - redirection page when record is saved and **close** post variable is sent with the request.
 * **flash-save** - flash message to display when record is saved, can refer to a [localization string](Localization).
 
-### Update page
+##### Update page
 
 To include an update page add the following configuration:
 
@@ -79,7 +75,7 @@ The update page configuration allows:
 * **flash-save** - flash message to display when record is saved, can refer to a [localization string](Localization).
 * **flash-delete** - flash message to display when record is deleted, can refer to a [localization string](Localization).
 
-### Preview page
+##### Preview page
 
 To include an preview page add the following configuration:
 
@@ -92,18 +88,11 @@ The preview page configuration allows:
 
 * **title** - a page title, can refer to a [localization string](Localization).
 
+#### Model Configuration
 
+Form field definitions are a configuration file usually contained in a `form-fields.yaml` file stored in the **/models** directory of a plugin. They are used for creating a graphical user interface (GUI) representation of a database Model (or model-like class). The GUI is displayed as a HTML form. Fields can be placed in three areas, the *outside area*, *primary tabs* or *secondary tabs*.
 
-
-
-
-## Model Configuration
-
-Form field definitions are a configuration file usually contained in a ``form-fields.yaml`` file stored in the **/models** directory of a plugin.
-
-They are used for creating a graphical user interface (GUI) representation of a database Model (or model-like class). The GUI is displayed as a HTML form. Fields can be placed in three areas, the *outside area*, *primary tabs* or *secondary tabs*.
-
-### Basic structure
+##### Basic structure
 
 The configuration is defined in YAML format, an example looks like this:
 
@@ -133,7 +122,7 @@ secondary-tabs:
     [...]
 ```
 
-### Field options
+##### Field options
 
 Each field can specify these options (where applicable):
 
@@ -149,13 +138,11 @@ Each field can specify these options (where applicable):
 * **disabled** - grays out the field if set to true. Options: true, false.
 * **stretch** - specifies if this field stretch to fit the page height.
 
----
-
-## Field types
+#### Field types
 
 The following field types are available:
 
-### Text box
+##### Text box
 Renders a single line text box. This is the default type used if none is specified.
 ```
 blog_title:
@@ -163,7 +150,7 @@ blog_title:
   type: text
 ```
 
-### Password
+##### Password
 Renders a single line password field.
 ```
 user_password:
@@ -171,7 +158,7 @@ user_password:
   type: password
 ```
 
-### Text Area
+##### Text Area
 Renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
 
 ```
@@ -181,10 +168,10 @@ blog_contents:
   size: large
 ```
 
-### Dropdown
+##### Dropdown
 Renders a dropdown with specified options. There are 3 ways to provide options:
 
-*Method 1:* Define options directly in the YAML file
+**Method 1:** Define options directly in the YAML file
 ```
 status:
   label: Blog Post Status
@@ -195,18 +182,16 @@ status:
     archived: Archived
 ```
 
-*Method 2:* Define them with a method declared in the model's class
+**Method 2**: Define them with a method declared in the model's class
 ```
 status:
   label: Blog Post Status
   type: dropdown
 ```
 
-If the options element is omitted, the framework expects a method with the name **get*Field*Options()** to be defined in the model. 
+If the options element is omitted, the framework expects a method with the name **get*Field*Options()** to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method should return an array of options in the format *key => value*.
 
-Using the example above, the model should have the ``getStatusOptions()`` method. This method should return an array of options in the format *key => value*.
-
-*Method 3:* Use a specific method declared in the model's class:
+**Method 3:** Use a specific method declared in the model's class:
 
 ```
 status:
@@ -215,9 +200,9 @@ status:
   options: listStatuses
 ```
 
-In this example the ``listStatuses()`` method should be defined in the model class.
+In this example the `listStatuses()` method should be defined in the model class.
 
-### Radio List
+##### Radio List
 Renders a list of radio options, where only one item can be selected at a time.
 
 ```
@@ -242,7 +227,7 @@ security_level:
     guests: [Guests only, Only guest users will be able to access this page.]
 ```
 
-### Widget
+##### Widget
 
 You can also use a special field type called a *Form Widget*.
 
@@ -253,4 +238,4 @@ blog_content:
   options: [...]
 ```
 
-The *type* field can refer directly to the class name of the widget. You can read more on the [Form Widgets](Widgets) article.
+The `type` field can refer directly to the class name of the widget. You can read more on the [Form Widgets](Widgets) article.

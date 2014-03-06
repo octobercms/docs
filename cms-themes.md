@@ -1,11 +1,11 @@
 Themes are directories that reside in the **/themes** directory by default.
 Themes can contain the following CMS templates:
 
-- *Pages* - hold the content for each URL.
-- *Partials* - contain reusable chunks of HTML markup.
-- *Layouts* - define the page scaffold.
-- *Content files* - text or HTML blocks that can be edited separately from the page or layout.
-- *Asset files* - are resource files like images and stylesheets.
+- **Pages** - hold the content for each URL.
+- **Partials** - contain reusable chunks of HTML markup.
+- **Layouts** - define the page scaffold.
+- **Content files** - text or HTML blocks that can be edited separately from the page or layout.
+- **Asset files** - are resource files like images and stylesheets.
 
 Example theme directory structure:
 
