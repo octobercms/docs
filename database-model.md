@@ -99,10 +99,11 @@ User::extend(function($model) {
 
 ##### Joined Eager Load
 
-Similar to the standard [Eager Loading](http://laravel.com/docs/eloquent#eager-loading), you eager load and join a relation to the main query.
+Similar to the standard [Eager Loading](http://laravel.com/docs/eloquent#eager-loading), you eager load and join a relation to the main query. Mainly useful for `belongsToMany` relationships.
 
 ```php
-Post::joinWith('Category')->select("concat(posts.name, ' - ', category.name)")->get();
+Post::joinWith('category')->select("concat(posts.name, ' - ', category.name)")->get();
+Post::joinWith('comments')->where('comments.user_id', 6)->count();
 ```
 
 This will also eager load 
