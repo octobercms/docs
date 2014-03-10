@@ -36,6 +36,17 @@ class BlogPost extends Model
 }
 ```
 
+Default relationship filters can be used on all relations:
+
+- **order** - sorting order for multiple records.
+- **conditions** - applies a where statement. (TODO)
+
+```
+  public $belongsToMany = [
+    'categories' => ['Category', 'order' => 'name desc', 'conditions' => 'where active = 1']
+  ];
+```
+
 #### Events
 
 The following events are available:
