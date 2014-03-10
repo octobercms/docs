@@ -43,7 +43,7 @@ Default relationship filters can be used on all relations:
 
 ```
   public $belongsToMany = [
-    'categories' => ['Category', 'order' => 'name desc', 'conditions' => 'where active = 1']
+    'categories' => ['Category', 'order' => 'name desc', 'conditions' => 'active = 1']
   ];
 ```
 
