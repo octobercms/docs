@@ -186,7 +186,7 @@ Just like the Laravel Validator, Ardent lets you set custom error messages using
 ```php
 class User extends \October\Rain\Database\Model
 {
-  public static $customMessages = [
+  public $customMessages = [
     'required' => 'The :attribute field is required.',
     ...
   ];
