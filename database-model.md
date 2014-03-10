@@ -181,7 +181,7 @@ $user->forceSave();
 
 ##### Custom Error Messages
 
-Just like the Laravel Validator, Ardent lets you set custom error messages using the [same syntax](http://laravel.com/docs/validation#custom-error-messages).
+Just like the Laravel Validator, you can set custom error messages using the [same syntax](http://laravel.com/docs/validation#custom-error-messages).
 
 ```php
 class User extends \October\Rain\Database\Model
@@ -195,4 +195,4 @@ class User extends \October\Rain\Database\Model
 
 ##### Custom Validation Rules
 
-You can create custom validation rules the [same way](http://laravel.com/docs/validation#custom-validation-rules) you would for the Laravel Validator.
+You can also create custom validation rules the [same way](http://laravel.com/docs/validation#custom-validation-rules) you would for the Laravel Validator.
