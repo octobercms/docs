@@ -90,6 +90,8 @@ class User extends \October\Rain\Database\Model
     protected $jsonable = ['permissions'];
 
     protected $encryptable = ['api_key'];
+
+    protected $sluggable = ['slug' => 'name'];
 }
 ```
 
@@ -97,6 +99,7 @@ class User extends \October\Rain\Database\Model
 * **$purgeable** - attributes are removed before attempting to save to the database
 * **$jsonable** - values are encoded as JSON before saving and converted to arrays after fetching
 * **$encryptable** - values are encrypted and decrypted for storing sensitive data
+* **$sluggable** - key attributes are generated as unique url names (slugs) based on value attributes
 
 ##### Extending models
 
@@ -127,7 +130,7 @@ This will also eager load
 
 #### Model Validation
 
-October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation). 
+October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation).
 Defining validation rules are defined in the model class as a variable named `$rules`:
 
 ```php

@@ -57,15 +57,15 @@ class Plugin extends System\Classes\PluginBase
 
 The following registration methods are supported:
 
-- **register()** -Register method, called when the plugin is first registered.
-- **boot()** -Boot method, called right before the request route.
-- **registerComponents()** -Registers any front-end components used by this plugin.
-- **registerWidgets()** -Registers any back-end widgets used by this plugin.
-- **registerNavigation()** -Registers back-end navigation items for this plugin.
-- **registerPermissions()** -Registers any back-end permissions used by this plugin.
-- **registerSettings()** -Registers any back-end configuration links used by this plugin.
-- **registerReportWidgets()** -Registers any report widgets, including the dashboard widgets.
-- **registerMarkupTags()** -Registers additional markup tags that can be used in the CMS.
+- **register()** - Register method, called when the plugin is first registered.
+- **boot()** - Boot method, called right before the request route.
+- **registerComponents()** - Registers any front-end components used by this plugin.
+- **registerWidgets()** - Registers any back-end widgets used by this plugin.
+- **registerNavigation()** - Registers back-end navigation items for this plugin.
+- **registerPermissions()** - Registers any back-end permissions used by this plugin.
+- **registerSettings()** - Registers any back-end configuration links used by this plugin.
+- **registerReportWidgets()** - Registers any report widgets, including the dashboard widgets.
+- **registerMarkupTags()** - Registers additional markup tags that can be used in the CMS.
 
 #### Version & Database history
 

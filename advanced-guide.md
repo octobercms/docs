@@ -21,4 +21,5 @@ oc-happy-theme
 Use **camelCase** everywhere except for the following:
 
 * Database columns should use **snake_case**
+* Language keys should use **snake_case**
 
