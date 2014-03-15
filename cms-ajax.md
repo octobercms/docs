@@ -74,14 +74,35 @@ Confirm a record deletion.
 
 ```php
 <form ... >
-  ...
-	<button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
+    ...
+    <button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
 ```
 
 Redirect to another page after the successful request.
 
 ```php
 <form data-request="onLogin" data-request-redirect="/admin">
+```
+
+Show a popup window after the successful request.
+
+```php
+<form data-request="onLogin" data-request-success="alert('Yay!')">
+```
+
+Send a POST parameter of `mode` with a value `update`.
+
+```php
+<form data-request="onUpdate" data-request-data="mode: 'update'">
+```
+
+Send a POST parameter of `id` with value `7` across multiple elements.
+
+```php
+<div data-request-data="id: 7">
+    <button data-request="onDelete">Delete</button>
+    <button data-request="onSave">Update</button>
+</div>
 ```
 
 #### JavaScript API
@@ -92,7 +113,7 @@ The `request()` method has a single required parameter - the handler name. Examp
 
 ```php
 <form onsubmit="$(this).request('onProcess'); return false;">
-  ...
+    ...
 ```
 
 The second attribute of the `request()` method is the options. You can use any options and methods compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
