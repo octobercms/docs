@@ -105,6 +105,12 @@ Send a POST parameter of `id` with value `7` across multiple elements.
 </div>
 ```
 
+The priority of POST parameter values is:
+
+1. The triggering element `data-request-data`
+1. The closer parent elements `data-request-data`
+1. The form input data
+
 #### JavaScript API
 
 The JavaScript API is more powerful than using data attributes. The `request()` method can be used with any element that is inside a form, or on with a form element. When the method is used with an element inside a form, it is forwarded to the form. 
