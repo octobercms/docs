@@ -20,6 +20,7 @@ oc-happy-theme
 
 Use **camelCase** everywhere except for the following:
 
+* Postback parameters should use **snake_case**
 * Database columns should use **snake_case**
 * Language keys should use **snake_case**
 
