@@ -39,3 +39,21 @@ foreach ($results as $result) {
 
 }
 ```
+
+#### Ordering results
+
+Results can be ordered by a single database column, either shared default used by all datasets or individually specified with the `add()` method. The direction of results must also be shared.
+
+```php
+// Ordered by updated_at if it exists, otherwise created_at
+$feed->add('user', new User, 'ifnull(updated_at, created_at)');
+
+// Ordered by id
+$feed->add('comments', new Comment, 'id');
+
+// Ordered by name (specified default below)
+$feed->add('posts', new Post);
+
+// Specifies the default column and the direction
+$feed->orderBy('name', 'asc')->get();
+```
