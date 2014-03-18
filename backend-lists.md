@@ -10,7 +10,7 @@ The configuration is defined in YAML format, an example looks like this:
 # ===================================
 
 title: Admins
-list: /modules/backend/models/user/list-columns.yaml
+list: /modules/backend/models/user/columns.yaml
 model-class: Backend\Models\Admin
 record-url: users/update/:id
 ```
