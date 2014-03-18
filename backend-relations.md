@@ -1,4 +1,4 @@
-`Relation behavior` is a controller modifier used for easily managing complex Model relationships on a page. Not to be confused with List relation columns or Form relation fields which only provide simple management. Relation behavior depends on relation definitions.
+`Relation behavior` is a controller modifier used for easily managing complex Model relationships on a page. Not to be confused with List relation columns or Form relation fields that only provide simple management. Relation behavior depends on relation definitions.
 
 #### Basic structure
 
@@ -30,7 +30,7 @@ Relations can be managed on any page by first initializing the parent model.
 ```php
 $this->initRelation($model);
 ```
-> **Note:** The Form behavior will automatically initialize the model on it's create, update and preview actions.
+> **Note:** The Form behavior will automatically initialize the model on its create, update and preview actions.
 
 The relation manager can then be displayed for a specified relation definition.
 
