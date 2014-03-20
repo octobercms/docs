@@ -1,3 +1,4 @@
+
 Components are building blocks that can be attached to any page or layout. They extend the behavior of front-end pages by:
 
 - Injecting variables by participating in the page execution cycle

@@ -260,28 +260,24 @@ public $attachOne = [
 
 #### Creating new attachments
 
-Add a file saved from postback
+Attach a file from postback
 ```php
-$model->avatar()->create(['data' => Input::file('file_input')]);
+$model->avatar = Input::file('file_input');
 ```
 
-Add a protected a file
-```php
-$model->avatar()->create(['public' => false, 'data' => Input::file('file_input')]);
-```
-
-Add a prepared File object
+Attach a prepared File object
 ```php
 $file = new System\Models\File;
 $file->data = Input::file('file_input');
 $file->save();
 
-$model->avatar()->attach($file);
+$model->avatar()->add($file);
 ```
 
 #### Viewing attachments
 
 Returning the public file path
+
 ```php
 // Returns http://mysite.com/uploads/public/path/to/avatar.jpg
 echo $model->avatar->getPath();
@@ -300,7 +296,7 @@ Resizing an image attachment
 echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
 ```
 
-Supported options:
+Supported options
 
 * **mode** - auto, exact, portrait, landscape, crop (default: auto)
 * **quality** - 0-100 (default: 95)
@@ -333,7 +329,7 @@ A simple HTML form for uploading a file.
 <?= Form::close() ?>
 ```
 
-Processing the file upload on the server
+Processing the file upload
 
 ```php
 // Find the Blog Post model
@@ -344,7 +340,7 @@ if (Input::hasFile('example_file'))
     $post->featured_image = Input::file('example_file');
 ```
 
-Alternatively, if you need to use deferred bindings
+Or, to use deferred binding
 
 ```php
 // Find the Blog Post model
@@ -360,8 +356,6 @@ if ($fileFromPost)
 
 Viewing the uploaded file
 
-Looking for the featured image
-
 ```php
 // Find the Blog Post model again
 $post = Post::find(1);
@@ -376,7 +370,7 @@ else
 Displaying the results
 
 ```html
-<img src="<?= $featuredImage ?>" alt="Featured Image">
+<img src="<?= $featuredImage ?>" alt="Featured Image" />
 ```
 
 

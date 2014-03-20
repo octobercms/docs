@@ -1,3 +1,5 @@
+# Data Feed
+
 A data feed allows you to combine multiple model classes into a single Collection. This can be useful for creating feeds and streams of data while supporting the use of pagination.
 
 It works by adding model objects in a prepared state, before the `get()` method is called, which are then combined to make a collection that behaves the same as a regular dataset.

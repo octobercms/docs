@@ -1,5 +1,22 @@
 This section shows you how to add menu items to the back-end navigation area.
 
+#### Registering menu items
+
+Backend menu items are registered in the Plugin information file. An example of registering a menu item:
+
+```php
+public function registerNavigation()
+{
+    return [
+        'blog' => [
+            'label' => 'Blog',
+            'url' => Backend::url('october/blog/posts')
+        ]
+    ];
+}
+```
+You can learn more about registering backend menu items by reading the Backend navigation article (To do).
+
 #### Adding back-end menu items
 
 Back-end navigation items are registered in the system by plugins, contained in the Plugin Information File. An example of registering a navigation menu item:

@@ -1,3 +1,13 @@
+# Plugin Structure
+
+- [Introduction](#introduction)
+- [File Structure](#file-structure)
+- [Plugin Registration](#plugin-registration)
+- [Version History](#version-history)
+
+<a name="introduction"></a>
+## Introduction
+
 Plugins are the foundation for adding new features to the CMS by extending it. Some examples of what a plugin can do:
 
 1. Define components
@@ -6,6 +16,11 @@ Plugins are the foundation for adding new features to the CMS by extending it. S
 4. Create database table structures and seed data
 5. Alter functionality of the core or other plugins
 6. Provide classes, back-end controllers, views, assets, and other files
+
+
+
+<a name="file-structure"></a>
+## File Structure
 
 Plugins reside in the **/plugins** directory. An example of a plugin directory structure:
 
@@ -22,7 +37,10 @@ plugins/
       Plugin.php       <=== Plugin information file
 ```
 
-#### Plugin information file
+
+
+<a name="plugin-registration"></a>
+## Plugin Registration
 
 The **Plugin.php** file, called the *Plugin information file*, is an initialization script that defines a plugin's core functions and information. They can provide the following:
 
@@ -67,9 +85,18 @@ The following registration methods are supported:
 - **registerReportWidgets()** - Registers any report widgets, including the dashboard widgets.
 - **registerMarkupTags()** - Registers additional markup tags that can be used in the CMS.
 
-#### Version & Database history
+#### Initialization methods
 
-Plugins use a change log inside the **/updates** directory to maintain version information and database structure. An example of an updates directory structure:
+Plugin information files can contain two methods: `boot` and `register`. With these methods you can do anything you like, like register routes or attach to events.
+
+The `register` method is called immediately when the plugin is registered. The `boot` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method.
+
+
+
+<a name="version-history"></a>
+## Version History
+
+Plugins keep a change log inside the **/updates** directory to maintain version information and database structure. An example of an updates directory structure:
 
 ```
 plugins/
@@ -96,41 +123,3 @@ An example Plugin version file:
     - Creates another table for this new feature
     - create_another_table.php
 ```
-
-#### Initialization methods
-
-Plugin information files can contain two methods: `boot` and `register`. With these methods you can do anything you like, like register routes or attach to events.
-
-The `register` method is called immediately when the plugin is registered. The `boot` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method.
-
-#### Registering a component
-
-Components are registered in the Plugin information file. An example of registering a component:
-
-```php
-public function registerComponents()
-{
-    return [
-        'October\Demo\Components\Todo' => 'demoTodo'
-    ];
-}
-```
-You can learn more about what components do by reading the [Components article](components).
-
-#### Registering menu items
-
-Backend menu items are registered in the Plugin information file. An example of registering a menu item:
-
-```php
-public function registerNavigation()
-{
-    return [
-        'blog' => [
-            'label' => 'Blog',
-            'url' => Backend::url('october/blog/posts')
-        ]
-    ];
-}
-```
-You can learn more about registering backend menu items by reading the Backend navigation article (To do).
-
