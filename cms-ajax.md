@@ -53,8 +53,8 @@ AJAX requests can be issued using HTML data attributes. Using the data attribute
 - **data-request-update** - specifies a list of partials and page elements (CSS selectors) to update. The format is as follows: `partial: selector, partial: selector`. Usage of quotes is required in some cases, for example: `'my-partial': '#myelement'`. If the selector string is prepended with the @ symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 - **data-request-data** - specifies additional POST parameters to be sent to the server. The format is following: `var: value, var: value`. Use ampersands if needed: `var: 'some string'`.
 - **data-request-success** - specifies JavaScript code to execute after the request is successfully completed.
+- **data-request-loading** - will `show()` the specified element when loading and then `hide()` after the request is complete.
 - **data-track-input** - can be applied to a text or password input field that also has the `data-request` attribute. When defined, the input field automatically sends an AJAX request when a user types something in the field. The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the requests.
-- **data-load-indicator** - displays a load indicator with a supplied message, the element must be wrapped in a `<div class="loading-indicator-container"></div>` container.
 
 When the `data-request` attribute is specified for an element, the element triggers an AJAX request when a user interacts with it. Depending on the type of element, the request is triggered on the following events:
 
