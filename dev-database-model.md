@@ -1,6 +1,36 @@
-October's database models are named Active Record which is based on the [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
+# Active Record Model
 
-#### Relations
+- [Basic Usage](#basic-usage)
+- [Relationships](#relationships)
+- [Events](#events)
+- [Attribute Modifiers](#attribute-modifiers)
+- [Extending Models](#extending-models)
+- [Joined Eager Loading](#joined-eager-loading)
+- [Model Validation](#model-validation)
+- [Deferred Binding](#deferred-binding)
+- [Further Reading](#further-reading)
+
+
+
+<a name="basic-usage"></a>
+## Basic Usage
+
+October provides the option of using an Active Record pattern to access the database, through the use of a Model class. The class is based on the [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
+
+The most basic representation of a Model used inside a Plugin looks like this:
+
+```php
+namespace PluginAuthor\PluginName\Models;
+
+class User extends \Model {
+  protected $table = 'pluginauthor_pluginname_users';
+}
+```
+
+
+
+<a name="relationships"></a>
+## Relations
 
 The following relations are available, along with their optional and required arguments:
 
@@ -47,7 +77,10 @@ Default relationship filters can be used on all relations:
   ];
 ```
 
-#### Events
+
+
+<a name="events"></a>
+## Events
 
 The following events are available:
 
@@ -76,7 +109,10 @@ public function beforeCreate()
 }
 ```
 
-##### Attribute modifiers
+
+
+<a name="attribute-modifiers"></a>
+## Attribute modifiers
 
 Specified attributes can be modified automatically when handling their values. For example:
 
@@ -101,7 +137,10 @@ class User extends \October\Rain\Database\Model
 * **$encryptable** - values are encrypted and decrypted for storing sensitive data
 * **$sluggable** - key attributes are generated as unique url names (slugs) based on value attributes
 
-##### Extending models
+
+
+<a name="extending-models"></a>
+## Extending models
 
 Models can be extended by hooking in to the constructor. For example, to add another relation:
 
@@ -111,7 +150,10 @@ User::extend(function($model) {
 });
 ```
 
-##### Joined Eager Load
+
+
+<a name="joined-eager-loading"></a>
+## Joined Eager Loading
 
 Similar to the standard [Eager Loading](http://laravel.com/docs/eloquent#eager-loading), you eager load and join a relation to the main query. Mainly useful for `belongsToMany` relationships.
 
@@ -120,15 +162,12 @@ Post::joinWith('category')->select("concat(posts.name, ' - ', category.name)")->
 Post::joinWith('comments')->where('comments.user_id', 6)->count();
 ```
 
-This will also eager load 
-
-##### Further reading on Active Record (Eloquent)
-
-* [Eloquent ORM - Laravel documentation](http://laravel.com/docs/eloquent)
-* [Active record pattern - Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern)
+This will also eager load the relation.
 
 
-#### Model Validation
+
+<a name="model-validation"></a>
+## Model Validation
 
 October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation).
 Defining validation rules are defined in the model class as a variable named `$rules`:
@@ -161,7 +200,7 @@ $success = $user->save();
 
 > **Note:** You can also validate a model at any time using the `validate()` method.
 
-##### Retrieving Validation Errors
+#### Retrieving Validation Errors
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the object which contains validation failure messages.
 
@@ -171,7 +210,7 @@ Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *sp
 
 > **Note:** The Model leverages Laravel's MessagesBag object which has a [simple and elegant method](http://laravel.com/docs/validation#working-with-error-messages) of formatting errors.
 
-##### Overriding Validation
+#### Overriding Validation
 
 `forceSave()` validates the model but saves regardless of whether or not there are validation errors.
 
@@ -182,7 +221,7 @@ $user = new User;
 $user->forceSave();
 ```
 
-##### Custom Error Messages
+#### Custom Error Messages
 
 Just like the Laravel Validator, you can set custom error messages using the [same syntax](http://laravel.com/docs/validation#custom-error-messages).
 
@@ -196,6 +235,90 @@ class User extends \October\Rain\Database\Model
 }
 ```
 
-##### Custom Validation Rules
+#### Custom Validation Rules
 
 You can also create custom validation rules the [same way](http://laravel.com/docs/validation#custom-validation-rules) you would for the Laravel Validator.
+
+
+
+<a name="deferred-binding"></a>
+## Deferred Binding
+
+Deferred bindings allow you to postpone model relationships until the master record commits the changes.
+This is particularly useful if you need to prepare some models (such as file uploads) and associate
+them to another model that doesn't exist yet.
+
+You can defer any number of **slave** models against a **master** model using a **session key**. 
+When the master record is saved along with the session key, the relationships to slave records 
+are updated automatically for you.
+
+#### Generating a session key
+```php
+$sessionKey = uniqid('session_key', true);
+```
+
+#### Defer a relation binding
+```php
+$comment = new Comment;
+$comment->content = "Hello world!";
+$comment->save();
+
+$post = new Post;
+$post->comments()->add($comment, $sessionKey);
+```
+> **Note**: The ```$post``` object has not been saved but the relationship will be created if the saving happens.
+
+#### Defer a relation unbinding
+```php
+$comment = Comment::find(1);
+$post = Post::find(1);
+$post->comments()->delete($comment, $sessionKey);
+```
+The comment will not be deleted unless the post is saved.
+
+#### List all bindings
+```php
+$post->comments()->withDeferred($sessionKey)->get();
+```
+The results will include existing relations as well.
+
+#### Cancel all bindings
+```php
+$post->cancelDeferred($sessionKey);
+```
+
+This will delete the slave objects rather than leaving them as orphans.
+
+#### Commit all bindings
+```php
+$post = new Post;
+$post->title = "First blog post";
+$post->save(null, $sessionKey);
+```
+
+Alternatively
+```php
+$post = Post::create(['title' => 'First blog post'], $sessionKey);
+```
+
+#### Lazily commit bindings
+
+If you are unable to supply the ```$sessionKey``` when saving, you can commit the bindings at any time using.
+
+```php
+$post->commitDeferred($sessionKey);
+```
+
+#### Clean up orphaned bindings
+```php
+DeferredBinding::cleanUp(5);
+```
+Destroys all bindings that have not been committed and are older than 5 days.
+
+
+
+<a name="further-reading"></a>
+## Further Reading
+
+* [Eloquent ORM - Laravel documentation](http://laravel.com/docs/eloquent)
+* [Active record pattern - Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern)
