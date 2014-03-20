@@ -311,7 +311,7 @@ $post->commitDeferred($sessionKey);
 
 #### Clean up orphaned bindings
 ```php
-DeferredBinding::cleanUp(5);
+October\Rain\Database\DeferredBinding::cleanUp(5);
 ```
 Destroys all bindings that have not been committed and are older than 5 days.
 
