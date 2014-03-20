@@ -1,3 +1,13 @@
+# Table Structure
+
+- [Updates Files](#update-files)
+- [Migration](#migration)
+- [Seeding Data](#seeding-data)
+
+
+
+<a name="#update-files"></a>
+## Update files
 Database tables and seed data is managed using a version information file `version.yaml` found 
 in the `updates` folder of a plugin. An example plugin updates folder:
 
@@ -32,6 +42,11 @@ An example version information file:
 
 > **Note:** For updates with scripts, the first line is always the comment, then subsequent lines are script file names.
 
+
+
+<a name="migration"></a>
+## Migration
+
 An example of a structure file:
 
 ```php
@@ -65,7 +80,13 @@ class CreatePostsTable extends Migration
 }
 ```
 
+
+
+<a name="seed-data"></a>
+## Seed Data
+
 An example of a seed file:
+
 ```php
 <?php namespace October\Users\Updates;
 

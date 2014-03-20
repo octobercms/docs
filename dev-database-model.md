@@ -2,12 +2,13 @@
 
 - [Basic Usage](#basic-usage)
 - [Relationships](#relationships)
-- [Events](#events)
 - [Attribute Modifiers](#attribute-modifiers)
-- [Extending Models](#extending-models)
 - [Joined Eager Loading](#joined-eager-loading)
+- [Model Events](#model-events)
 - [Model Validation](#model-validation)
+- [File Attachments](#file-attachments)
 - [Deferred Binding](#deferred-binding)
+- [Extending Models](#extending-models)
 - [Further Reading](#further-reading)
 
 
@@ -79,38 +80,6 @@ Default relationship filters can be used on all relations:
 
 
 
-<a name="events"></a>
-## Events
-
-The following events are available:
-
-- **beforeCreate** - before the model is saved, when first created.
-- **afterCreate** - after the model is saved, when first created.
-- **beforeSave** - before the model is saved, either created or updated.
-- **afterSave** - after the model is saved, either created or updated.
-- **beforeValidate** - before the supplied model data is validated.
-- **afterValidate** - after the supplied model data has been validated.
-- **beforeUpdate** - before an existing model is saved.
-- **afterUpdate** - after an existing model is saved.
-- **beforeDelete** - before an existing model is deleted.
-- **afterDelete** - after an existing model is deleted.
-- **beforeRestore** - before a soft-deleted model is restored.
-- **afterRestore** - after a soft-deleted model has been restored.
-- **beforeFetch** - before an exisiting model is populated.
-- **afterFetch** - after an exisiting model has been populated.
-
-An example of using an event:
-
-```php
-public function beforeCreate()
-{
-  // Generate a URL slug for this model
-  $this->slug = Str::slug($this->name);
-}
-```
-
-
-
 <a name="attribute-modifiers"></a>
 ## Attribute modifiers
 
@@ -139,18 +108,6 @@ class User extends \October\Rain\Database\Model
 
 
 
-<a name="extending-models"></a>
-## Extending models
-
-Models can be extended by hooking in to the constructor. For example, to add another relation:
-
-```php
-User::extend(function($model) {
-    $model->hasOne['author'] = ['Author', 'foreignKey' => 'user_id'];
-});
-```
-
-
 
 <a name="joined-eager-loading"></a>
 ## Joined Eager Loading
@@ -163,6 +120,38 @@ Post::joinWith('comments')->where('comments.user_id', 6)->count();
 ```
 
 This will also eager load the relation.
+
+
+
+<a name="model-events"></a>
+## Model Events
+
+The following events are available:
+
+- **beforeCreate** - before the model is saved, when first created.
+- **afterCreate** - after the model is saved, when first created.
+- **beforeSave** - before the model is saved, either created or updated.
+- **afterSave** - after the model is saved, either created or updated.
+- **beforeValidate** - before the supplied model data is validated.
+- **afterValidate** - after the supplied model data has been validated.
+- **beforeUpdate** - before an existing model is saved.
+- **afterUpdate** - after an existing model is saved.
+- **beforeDelete** - before an existing model is deleted.
+- **afterDelete** - after an existing model is deleted.
+- **beforeRestore** - before a soft-deleted model is restored.
+- **afterRestore** - after a soft-deleted model has been restored.
+- **beforeFetch** - before an exisiting model is populated.
+- **afterFetch** - after an exisiting model has been populated.
+
+An example of using an event:
+
+```php
+public function beforeCreate()
+{
+  // Generate a URL slug for this model
+  $this->slug = Str::slug($this->name);
+}
+```
 
 
 
@@ -241,6 +230,157 @@ You can also create custom validation rules the [same way](http://laravel.com/do
 
 
 
+<a name="file-attachments"></a>
+## File Attachments
+
+Active Record models can support file attachments using a polymorphic relationship.
+
+#### Model Definitions
+
+A single file attachment
+```php
+public $attachOne = [
+    'avatar' => ['System\Models\File']
+];
+```
+
+Multiple file attachments
+```php
+public $attachMany = [
+    'photos' => ['System\Models\File']
+];
+```
+
+A protected file attachment
+```php
+public $attachOne = [
+    'avatar' => ['System\Models\File', 'public' => false]
+];
+```
+
+#### Creating new attachments
+
+Add a file saved from postback
+```php
+$model->avatar()->create(['data' => Input::file('file_input')]);
+```
+
+Add a protected a file
+```php
+$model->avatar()->create(['public' => false, 'data' => Input::file('file_input')]);
+```
+
+Add a prepared File object
+```php
+$file = new System\Models\File;
+$file->data = Input::file('file_input');
+$file->save();
+
+$model->avatar()->attach($file);
+```
+
+#### Viewing attachments
+
+Returning the public file path
+```php
+// Returns http://mysite.com/uploads/public/path/to/avatar.jpg
+echo $model->avatar->getPath();
+```
+
+Returning multiple attachment file paths
+```php
+foreach ($model->photos as $photo) {
+    echo $photo->getPath();
+}
+```
+
+Resizing an image attachment
+```php
+//                   getThumb($width, $height, $options)
+echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
+```
+
+Supported options:
+
+* **mode** - auto, exact, portrait, landscape, crop (default: auto)
+* **quality** - 0-100 (default: 95)
+* **extension** - jpg, png, gif (default: png)
+
+#### Usage Example
+
+Inside your model define a relationship to the **System\Models\File** class, for example:
+
+```php
+class Post extends Model
+{
+    public $attachOne = [
+        'featured_image' => ['System\Models\File']
+    ];
+}
+```
+
+Uploading a file
+
+A simple HTML form for uploading a file.
+
+```html
+<?= Form::open(['files' => true]) ?>
+
+    <input name="example_file" type="file">
+
+    <button type="submit">Upload File</button>
+
+<?= Form::close() ?>
+```
+
+Processing the file upload on the server
+
+```php
+// Find the Blog Post model
+$post = Post::find(1);
+
+// Save the featured image of the Blog Post model
+if (Input::hasFile('example_file'))
+    $post->featured_image = Input::file('example_file');
+```
+
+Alternatively, if you need to use deferred bindings
+
+```php
+// Find the Blog Post model
+$post = Post::find(1);
+
+// Look for the postback data 'example_file' in the HTML form above
+$fileFromPost = Input::file('example_file');
+
+// If it exists, save it as the featured image with a deferred session key
+if ($fileFromPost)
+    $post->featured_image()->create(['data' => $fileFromPost], $sessionKey);
+```
+
+Viewing the uploaded file
+
+Looking for the featured image
+
+```php
+// Find the Blog Post model again
+$post = Post::find(1);
+
+// Look for the featured image address, otherwise use a default one
+if ($post->featured_image)
+    $featuredImage = $post->featured_image->getPath();
+else
+    $featuredImage = 'http://placehold.it/220x300';
+```
+
+Displaying the results
+
+```html
+<img src="<?= $featuredImage ?>" alt="Featured Image">
+```
+
+
+
 <a name="deferred-binding"></a>
 ## Deferred Binding
 
@@ -314,6 +454,19 @@ $post->commitDeferred($sessionKey);
 October\Rain\Database\DeferredBinding::cleanUp(5);
 ```
 Destroys all bindings that have not been committed and are older than 5 days.
+
+
+
+<a name="extending-models"></a>
+## Extending models
+
+Models can be extended by hooking in to the constructor. For example, to add another relation:
+
+```php
+User::extend(function($model) {
+    $model->hasOne['author'] = ['Author', 'foreignKey' => 'user_id'];
+});
+```
 
 
 

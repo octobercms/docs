@@ -1,7 +1,13 @@
 # Database Basics
 
+- [Introduction](#introduction)
 - [Direct SQL](#direct-sql)
 - [Active Record](#active-record)
+
+
+
+<a name="introduction"></a>
+## Introduction
 
 In October you have two different approaches to working with databases:
 
