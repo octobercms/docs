@@ -1,4 +1,17 @@
-# Data Feed
+# Database Collection
+
+- [Introduction](#introduction)
+- [Data Feed](#data-feed)
+
+
+
+<a name="introduction"></a>
+## Introduction
+
+A Database Collection represents an array of results, typically of populated Models.
+
+<a name="data-feed"></a>
+## Data Feed
 
 A data feed allows you to combine multiple model classes into a single Collection. This can be useful for creating feeds and streams of data while supporting the use of pagination.
 

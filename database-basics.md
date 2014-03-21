@@ -1,4 +1,4 @@
-# Database Basics
+# Database Queries
 
 - [Introduction](#introduction)
 - [Direct SQL](#direct-sql)
@@ -12,7 +12,7 @@
 In October you have two different approaches to working with databases:
 
 * Using direct SQL queries using the **Db** class
-* Using Active Record by extending the **October\Rain\Database\Model** class
+* Using Active Record by extending the **Model** class
 
 Direct SQL will perform faster and should be used for simple tasks. Active Record is an approach 
 used by the popular framework, Ruby On Rails. It allows an easy interface for performing repetitive 
@@ -51,6 +51,11 @@ Db::update('update users set votes = 100 where name = ?', ['John']);
 Db::delete('delete from users');
 ```
 
+#### Raw query
+```
+Db::statement('drop table users');
+```
+
 #### Further reading on Direct SQL
 
 * [Database Basics - Laravel documentation](http://laravel.com/docs/database)
@@ -60,22 +65,6 @@ Db::delete('delete from users');
 
 <a name="active-record"></a>
 ## Active Record
-
-Model classes used for accessing the database should extend the **October\Rain\Database\Model** class, 
-this enables the usage of the active record pattern. You should create one model class for each database 
-table. For example if you were building a blog plugin, you might use models for the blog posts and 
-the user comments.
-
-#### Basic class structure
-
-```php
-<?php namespace Acme\Blog\Models;
-
-class Post extends \October\Rain\Database\Model
-{
-    public $table = 'acme_blog_posts';
-}
-```
 
 #### Creating a new record
 
@@ -103,6 +92,7 @@ $post->delete();
 
 #### Further reading on Active Record
 
+* [Models](http://octobercms.com/docs/database/models)
 * [Eloquent ORM - Laravel documentation](http://laravel.com/docs/eloquent)
 * [Active record pattern - Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern)
 

@@ -2,7 +2,7 @@ This section shows you how to add menu items to the back-end navigation area.
 
 #### Registering menu items
 
-Backend menu items are registered in the Plugin information file. An example of registering a menu item:
+Backend menu items are registered in the Plugin registration file. An example of registering a menu item:
 
 ```php
 public function registerNavigation()

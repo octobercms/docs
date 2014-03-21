@@ -16,17 +16,39 @@
 <a name="basic-usage"></a>
 ## Basic Usage
 
-October provides the option of using an Active Record pattern to access the database, through the use of a Model class. The class is based on the [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
+October provides the option of using an Active Record pattern to access the database, through the use of a Model class. The class extends and shares the features of [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
 
-The most basic representation of a Model used inside a Plugin looks like this:
+Models reside in the **/models** directory inside a Plugin. An example of a model directory structure:
+
+```
+plugins/
+  acme/
+    blog/
+      models/
+        user/               <=== Model config directory
+          columns.yaml      <=== Model config files
+          fields.yaml       <==^
+        User.php            <=== Model class
+      Plugin.php
+```
+
+The model config directory is a lower case name of the model class.
+
+#### Class definition
+
+You should create one model class for each database table. The most basic representation of a Model used inside a Plugin looks like this:
 
 ```php
-namespace PluginAuthor\PluginName\Models;
+namespace Acme\Blog\Models;
 
-class User extends \Model {
-  protected $table = 'pluginauthor_pluginname_users';
+class Post extends \Model {
+
+  protected $table = 'acme_blog_posts';
+
 }
 ```
+
+The table name is a snake case name of the author, plugin and pluralized model.
 
 
 
@@ -51,7 +73,7 @@ The following relations are available, along with their optional and required ar
 An example of defining a relationship:
 
 ```php
-class BlogPost extends Model
+class Post extends \Model
 {
   public $belongsTo = [
     'user' => ['User', 'foreignKey' => 'user_id']

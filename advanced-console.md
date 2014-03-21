@@ -103,7 +103,7 @@ php artisan create:controller RainLab.Blog Posts
 
 ## Console Development
 
-Plugins can register custom command-line interface (CLI) commands from the Plugin information file.
+Plugins can register custom command-line interface (CLI) commands from the Plugin registration file.
 
 It is best to place the console registration inside the **register()** method and to use the helper method **registerConsoleCommand**. For example:
 

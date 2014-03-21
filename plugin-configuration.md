@@ -1,3 +1,54 @@
+# Plugin Configuration
+
+- [File-based Configuration](#file-configuration)
+- [Database Settings](#database-settings)
+- [Back-end Settings Page](#settings-page)
+
+<a name="file-configuration"></a>
+## File-based Configuration
+
+Modules and plugins can have configuration files in the /config directory.
+
+#### Accessing configuration settings
+
+```
+// Get a localization string from the CMS module
+echo Config::get('cms::errors.page.not_found');
+
+// Get a localization string from the october/blog plugin.
+echo Config::get('october.blog::messages.post.added');
+```
+
+#### Overriding localization strings
+
+System users can override localization strings without altering the modules' and plugins' files. This is done by adding localization files to the app/lang directory. To override a plugin's localization:
+
+```
+app
+  lang
+    vendorname
+      pluginname
+        en
+          file.php
+```
+Example: app/lang/october/blog/en/errors.php
+
+To override a module's localization:
+
+```
+app
+  lang
+    modulename
+      en
+        file.php
+```
+Example: app/lang/cms/en/errors.php
+
+
+
+<a name="database-settings"></a>
+## Database Settings
+
 You can create models used for storing settings easily by implementing the **SettingsModel** behavior. You do not need to create a database table or a controller.
 
 ```php
@@ -13,7 +64,7 @@ class Settings extends Model
 }
 ```
 
-##### Writing to a settings model
+#### Writing to a settings model
 
 ```php
 Settings::set('api_key', 'ABCD');
@@ -25,7 +76,7 @@ $settings->api_key = 'ABCD';
 $settings->save();
 ```
 
-##### Reading from a settings model
+#### Reading from a settings model
 
 ```php
 // Outputs: ABCD
@@ -38,11 +89,14 @@ echo Settings::get('api_key');
 echo Settings::get('is_activated', true);
 ```
 
-#### Settings page links
+
+
+<a name="settings-page"></a>
+## Settings page links
 
 The section shows you how to add linkable items to the System Settings page.
 
-##### Link to a page URL
+#### Link to a page URL
 
 ```php
 public function registerSettings()
@@ -60,8 +114,7 @@ public function registerSettings()
 }
 ```
 
-
-##### Link to a Settings model
+#### Link to a Settings model
 
 ```php
 public function registerSettings()

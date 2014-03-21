@@ -1,8 +1,7 @@
-# Plugin Creation
+# Plugin Registration
 
 - [Introduction](#introduction)
-- [File Structure](#file-structure)
-- [Plugin Registration](#plugin-registration)
+- [Registration File](#registration-file)
 - [Version History](#version-history)
 
 <a name="introduction"></a>
@@ -10,17 +9,12 @@
 
 Plugins are the foundation for adding new features to the CMS by extending it. Some examples of what a plugin can do:
 
-1. Define components
-2. Define user permissions
-3. Add back-end pages, menu items, and forms
-4. Create database table structures and seed data
-5. Alter functionality of the core or other plugins
-6. Provide classes, back-end controllers, views, assets, and other files
-
-
-
-<a name="file-structure"></a>
-## File Structure
+1. Define components.
+2. Define user permissions.
+3. Add back-end pages, menu items, and forms.
+4. Create database table structures and seed data.
+5. Alter functionality of the core or other plugins.
+6. Provide classes, back-end controllers, views, assets, and other files.
 
 Plugins reside in the **/plugins** directory. An example of a plugin directory structure:
 
@@ -34,30 +28,32 @@ plugins/
       models/
       updates/
       ...
-      Plugin.php       <=== Plugin information file
+      Plugin.php       <=== Plugin registration file
 ```
 
 
 
-<a name="plugin-registration"></a>
-## Plugin Registration
+<a name="registration-file"></a>
+## Registration File
 
-The **Plugin.php** file, called the *Plugin information file*, is an initialization script that defines a plugin's core functions and information. They can provide the following:
+The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that defines a plugin's core functions and information. They can provide the following:
 
 1. Information about the plugin, its name, and author
 2. Registration methods for extending the CMS
 
-An example Plugin information file:
+An example Plugin registration file:
 
 ```php
-class Plugin extends System\Classes\PluginBase
+namespace Acme\Blog;
+
+class Plugin extends \System\Classes\PluginBase
 {
     public function pluginDetails()
     {
         return [
-            'name' => 'October Demo',
-            'description' => 'Provides features used by the provided demonstration theme.',
-            'author' => 'Alexey Bobkov, Samuel Georges',
+            'name' => 'Blog Plugin',
+            'description' => 'Provides some really cool blog features.',
+            'author' => 'ACME Corporation',
             'icon' => 'icon-leaf'
         ];
     }
@@ -65,7 +61,7 @@ class Plugin extends System\Classes\PluginBase
     public function registerComponents()
     {
         return [
-            'October\Demo\Components\Todo' => 'demoTodo'
+            'Acme\Blog\Components\Post' => 'blogPost'
         ];
     }
 }
@@ -87,7 +83,7 @@ The following registration methods are supported:
 
 #### Initialization methods
 
-Plugin information files can contain two methods: `boot` and `register`. With these methods you can do anything you like, like register routes or attach to events.
+Plugin registration files can contain two methods: `boot` and `register`. With these methods you can do anything you like, like register routes or attach to events.
 
 The `register` method is called immediately when the plugin is registered. The `boot` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method.
 
