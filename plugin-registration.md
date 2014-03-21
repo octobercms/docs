@@ -119,3 +119,103 @@ An example Plugin version file:
     - Creates another table for this new feature
     - create_another_table.php
 ```
+
+
+
+<a name="navigation"></a>
+## Registering menu items
+
+This section shows you how to add menu items to the back-end navigation area.
+
+Backend menu items are registered in the Plugin registration file. An example of registering a menu item:
+
+```php
+public function registerNavigation()
+{
+    return [
+        'blog' => [
+            'label' => 'Blog',
+            'url' => Backend::url('october/blog/posts')
+        ]
+    ];
+}
+```
+You can learn more about registering backend menu items by reading the Backend navigation article (To do).
+
+#### Adding back-end menu items
+
+Back-end navigation items are registered in the system by plugins, contained in the Plugin Information File. An example of registering a navigation menu item:
+
+```php
+<?php namespace Plugins\October\Blog;
+
+class Plugin extends System\Classes\PluginBase
+{
+
+    [...]
+
+    public function registerNavigation()
+    {
+        return [
+            'blog' => [
+                'label' => 'Blog',
+                'url' => Backend::url('october/blog/posts'),
+                'icon' => 'icon-pencil',
+                'permissions' => ['blog:*'],
+                'order' => 500,
+                'subMenu' => [
+                    'posts' => [
+                        'label' => 'Posts',
+                        'icon' => 'icon-copy',
+                        'url' => Backend::url('october/blog/posts'),
+                        'permissions' => ['blog:access_posts'],
+                    ],
+                    'categories' => [
+                        'label' => 'Categories',
+                        'icon' => 'icon-copy',
+                        'url' => Backend::url('october/blog/categories'),
+                        'permissions' => ['blog:access_categories'],
+                    ],
+                ]
+            ]
+        ];
+    }
+
+}
+```
+
+
+<a name="custom-markup-tags"></a>
+## Custom markup tags
+
+Additional markup tags can be registered in the CMS by plugins. An example of registering a custom markup tag:
+
+* A **filter** will manipulate a value with a specified function. Example: `{{ 'value'|uppercase }}`
+* A **function** can be used by itself and takes some parameters. Example: `{{ form_open('value') }}`
+
+```php
+public function registerMarkupTags()
+{
+    return [
+        'filters' => [
+            // A global function, i.e str_plural()
+            'plural' => 'str_plural',
+
+            // A local method, i.e $this->makeTextAllCaps()
+            'uppercase' => [$this, 'makeTextAllCaps']
+        ],
+        'functions' => [
+            // A static method call, i.e Form::open()
+            'form_open' => ['October\Rain\Html\Form', 'open'],
+
+            // Using an inline closure
+            'helloWorld' => function() { return 'Hello World!'; }
+        ]
+    ];
+}
+
+public function makeTextAllCaps($text)
+{
+    return strtoupper($text);
+}
+```

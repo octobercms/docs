@@ -16,3 +16,68 @@ Simplest layout example:
 ```
 
 The `{% page %}` tag outputs the page content.
+
+#### Placeholders
+
+Placeholders allow pages to inject content to the layout defined with the **placeholder** tag. Content is then injected with the **put** tag.
+
+For example, injecting content to the HEAD section.
+
+##### Layout
+
+```html
+<head>
+    {% placeholder head %}
+</head>
+```
+
+##### Page
+```html
+url = "/my-page"
+--
+{% put head %}
+    <link href="/themes/demo/assets/css/page.css" rel="stylesheet">
+{% endput %}
+
+<p>The page content goes here.</p>
+```
+
+Placeholders can have default content, that can be either replaced or complemented by a page. Example:
+
+##### Layout
+
+```html
+{% placeholder sidebar default %}
+    <p><a href="/contacts">Contact us</a></p>
+{% endplaceholder %}
+```
+
+##### Page
+
+```html
+{% put sidebar %}
+    <p><a href="/services">Services</a></p>
+    {% default %}
+{% endput %}
+```
+
+The **default** tag specifies a place where the default placeholder content should be displayed.
+
+##### Checking a placeholder exists
+
+You can check if a placeholder content exists by using the `placeholder()` function. Example:
+
+```html
+{% if placeholder('sidemenu') %}
+    <div class="row">
+        <div class="col-md-3">
+            {% placeholder sidemenu %}
+        </div>
+        <div class="col-md-9">
+            {% page %}
+        </div>
+    </div>
+{% else %}
+    {% page %}
+{% endif %}
+```
