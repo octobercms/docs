@@ -1,17 +1,22 @@
 # Component Development
 
+- [Introduction](#introduction)
+
+<a name="introduction"></a>
+## Introduction
+
 Components reside in the **/components** directory inside a Plugin. An example of a component directory structure:
 
-```
-/plugins
-  /author
-    /myplugin
-      /components
-        /componentname        <=== Component partials directory
-          default.htm         <=== Component default markup (optional)
-        ComponentName.php     <=== Component class file
-      Plugin.php
-```
+  /plugins
+    /author
+      /myplugin
+        /components
+          /componentname        <=== Component partials directory
+            default.htm         <=== Component default markup (optional)
+          ComponentName.php     <=== Component class file
+        Plugin.php
+
+Components must be registered in the [Plugin registration file](http://octobercms.com/docs/plugin/registration#component-registration).
 
 #### Creating a component
 
@@ -36,20 +41,6 @@ class Todo extends Cms\Classes\ComponentBase
 }
 ```
 
-#### Registering a component
-
-Components must be registered in the [Plugin registration file](plugins). This tells the CMS about the Component and provides a *short name* for using it. An example of registering a component:
-
-```php
-public function registerComponents()
-{
-    return [
-        'October\Demo\Components\Todo' => 'demoTodo'
-    ];
-}
-```
-
-This will register the Todo component class with the name *demoTodo*.
 
 #### Component properties
 

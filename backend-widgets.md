@@ -49,17 +49,7 @@ The widget class must contain a **render()** method for producing the widget mar
 <a name="form-widgets"></a>
 ## Form Widgets
 
-Plugins can register form widgets by overriding the **registerFormWidgets()** method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget name and context in the values. Example:
-
-```php
-public function registerFormWidgets()
-{
-    return [
-        ['Backend\FormWidgets\CodeEditor' => 'codeeditor']
-    ];
-}
-```
-
+Form Widgets must be registered in the [Plugin registration file](http://octobercms.com/docs/plugin/registration#widget-registration).
 
 #### Class definition
 
@@ -89,25 +79,7 @@ class CodeEditor extends FormWidgetBase
 <a name="report-widgets"></a>
 ## Report Widgets
 
-Plugins can register dashboard widgets by overriding the **registerReportWidgets()** method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget name and context in the values. Example:
-
-```php
-public function registerReportWidgets()
-{
-    return [
-        'RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview'=>[
-            'name'=>'Google Analytics traffic overview',
-            'context'=>'dashboard'
-        ],
-        'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources'=>[
-            'name'=>'Google Analytics traffic sources',
-            'context'=>'dashboard'
-        ]
-    ];
-}
-```
-
-The **name** element defines the widget name for the Add Widget popup window. The **context** element defines the context where the widget could be used. October's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the **dashboard** context.
+Report Widgets must be registered in the [Plugin registration file](http://octobercms.com/docs/plugin/registration#widget-registration).
 
 #### Report widget classes
 
