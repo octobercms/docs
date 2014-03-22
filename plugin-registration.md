@@ -174,7 +174,10 @@ Example:
     public function registerFormWidgets()
     {
         return [
-            ['Backend\FormWidgets\CodeEditor' => 'codeeditor']
+            'Backend\FormWidgets\CodeEditor' => [
+                'label' => 'Code editor',
+                'alias' => 'codeeditor'
+            ]
         ];
     }
 
@@ -186,12 +189,12 @@ Plugins can register dashboard widgets by overriding the **registerReportWidgets
     {
         return [
             'RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview'=>[
-                'name'=>'Google Analytics traffic overview',
-                'context'=>'dashboard'
+                'label'   => 'Google Analytics traffic overview',
+                'context' => 'dashboard'
             ],
             'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources'=>[
-                'name'=>'Google Analytics traffic sources',
-                'context'=>'dashboard'
+                'label'   => 'Google Analytics traffic sources',
+                'context' => 'dashboard'
             ]
         ];
     }
@@ -217,25 +220,27 @@ An example of registering a navigation menu item:
     {
         return [
             'blog' => [
-                'label' => 'Blog',
-                'url' => Backend::url('october/blog/posts'),
-                'icon' => 'icon-pencil',
+                'label'       => 'Blog',
+                'url'         => Backend::url('october/blog/posts'),
+                'icon'        => 'icon-pencil',
                 'permissions' => ['blog:*'],
-                'order' => 500,
+                'order'       => 500,
+
                 'subMenu' => [
                     'posts' => [
-                        'label' => 'Posts',
-                        'icon' => 'icon-copy',
-                        'url' => Backend::url('october/blog/posts'),
+                        'label'       => 'Posts',
+                        'icon'        => 'icon-copy',
+                        'url'         => Backend::url('october/blog/posts'),
                         'permissions' => ['blog:access_posts'],
                     ],
                     'categories' => [
-                        'label' => 'Categories',
-                        'icon' => 'icon-copy',
-                        'url' => Backend::url('october/blog/categories'),
+                        'label'       => 'Categories',
+                        'icon'        => 'icon-copy',
+                        'url'         => Backend::url('october/blog/categories'),
                         'permissions' => ['blog:access_categories'],
                     ],
                 ]
+
             ]
         ];
     }
@@ -248,7 +253,7 @@ An example of registering a backend permission item:
     {
         return [
             'backend.access_dashboard' => ['label' => 'View the dashboard'],
-            'backend.manage_users' => ['label' => 'Manage other administrators']
+            'backend.manage_users'     => ['label' => 'Manage other administrators']
         ];
     }
 
@@ -266,12 +271,12 @@ public function registerSettings()
 {
     return [
         'location' => [
-            'label' => 'Locations',
+            'label'       => 'Locations',
             'description' => 'Manage available user countries and states.',
-            'category' => 'Users',
-            'icon' => 'icon-globe',
-            'url' => Backend::url('october/user/locations'),
-            'order' => 100
+            'category'    => 'Users',
+            'icon'        => 'icon-globe',
+            'url'         => Backend::url('october/user/locations'),
+            'order'       => 100
         ]
     ];
 }
@@ -284,12 +289,12 @@ public function registerSettings()
 {
     return [
         'settings' => [
-            'label' => 'User Settings',
+            'label'       => 'User Settings',
             'description' => 'Manage user based settings.',
-            'category' => 'Users',
-            'icon' => 'icon-cog',
-            'class' => 'October\User\Models\Settings',
-            'order' => 100
+            'category'    => 'Users',
+            'icon'        => 'icon-cog',
+            'class'       => 'October\User\Models\Settings',
+            'order'       => 100
         ]
     ];
 }
