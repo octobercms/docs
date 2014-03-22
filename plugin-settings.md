@@ -1,48 +1,7 @@
-# Plugin Configuration
+# Plugin Settings & Configuration
 
-- [File-based Configuration](#file-configuration)
 - [Database Settings](#database-settings)
-- [Back-end Settings Page](#settings-page)
-
-<a name="file-configuration"></a>
-## File-based Configuration
-
-Modules and plugins can have configuration files in the /config directory.
-
-#### Accessing configuration settings
-
-```
-// Get a localization string from the CMS module
-echo Config::get('cms::errors.page.not_found');
-
-// Get a localization string from the october/blog plugin.
-echo Config::get('october.blog::messages.post.added');
-```
-
-#### Overriding localization strings
-
-System users can override localization strings without altering the modules' and plugins' files. This is done by adding localization files to the app/lang directory. To override a plugin's localization:
-
-```
-app
-  lang
-    vendorname
-      pluginname
-        en
-          file.php
-```
-Example: app/lang/october/blog/en/errors.php
-
-To override a module's localization:
-
-```
-app
-  lang
-    modulename
-      en
-        file.php
-```
-Example: app/lang/cms/en/errors.php
+- [File-based Configuration](#file-configuration)
 
 
 
@@ -50,6 +9,8 @@ Example: app/lang/cms/en/errors.php
 ## Database Settings
 
 You can create models used for storing settings easily by implementing the **SettingsModel** behavior. You do not need to create a database table or a controller.
+
+Settings models can be registered in the [Plugin registration file](http://octobercms.com/docs/plugin/registration#backend-settings) to appear on the Settings page.
 
 ```php
 class Settings extends Model
@@ -91,43 +52,42 @@ echo Settings::get('is_activated', true);
 
 
 
-<a name="settings-page"></a>
-## Settings page links
+<a name="file-configuration"></a>
+## File-based Configuration
 
-The section shows you how to add linkable items to the System Settings page.
+Modules and plugins can have configuration files in the /config directory.
 
-#### Link to a page URL
+#### Accessing configuration settings
 
-```php
-public function registerSettings()
-{
-    return [
-        'location' => [
-            'label' => 'Locations',
-            'description' => 'Manage available user countries and states.',
-            'category' => 'Users',
-            'icon' => 'icon-globe',
-            'url' => Backend::url('october/user/locations'),
-            'order' => 100
-        ]
-    ];
-}
+```
+// Get a localization string from the CMS module
+echo Config::get('cms::errors.page.not_found');
+
+// Get a localization string from the october/blog plugin.
+echo Config::get('october.blog::messages.post.added');
 ```
 
-#### Link to a Settings model
+#### Overriding localization strings
 
-```php
-public function registerSettings()
-{
-    return [
-        'settings' => [
-            'label' => 'User Settings',
-            'description' => 'Manage user based settings.',
-            'category' => 'Users',
-            'icon' => 'icon-cog',
-            'class' => 'October\User\Models\Settings',
-            'order' => 100
-        ]
-    ];
-}
+System users can override localization strings without altering the modules' and plugins' files. This is done by adding localization files to the app/lang directory. To override a plugin's localization:
+
 ```
+app
+  lang
+    vendorname
+      pluginname
+        en
+          file.php
+```
+Example: app/lang/october/blog/en/errors.php
+
+To override a module's localization:
+
+```
+app
+  lang
+    modulename
+      en
+        file.php
+```
+Example: app/lang/cms/en/errors.php

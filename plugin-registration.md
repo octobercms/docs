@@ -7,7 +7,7 @@
 - [Custom markup tags](#custom-markup-tags)
 - [Widget registration](#widget-registration)
 - [Navigation and permissions](#navigation-permissions)
-- [Settings page](#settings-page)
+- [Backend settings](#backend-settings)
 - [Version history](#version-history)
 
 <a name="introduction"></a>
@@ -254,8 +254,48 @@ An example of registering a backend permission item:
 
 
 
-<a name="settings-page"></a>
-## Settings page
+<a name="backend-settings"></a>
+## Backend settings
+
+The section shows you how to add linkable items to the System Settings page.
+
+#### Link to a page URL
+
+```php
+public function registerSettings()
+{
+    return [
+        'location' => [
+            'label' => 'Locations',
+            'description' => 'Manage available user countries and states.',
+            'category' => 'Users',
+            'icon' => 'icon-globe',
+            'url' => Backend::url('october/user/locations'),
+            'order' => 100
+        ]
+    ];
+}
+```
+
+#### Link to a Settings model
+
+```php
+public function registerSettings()
+{
+    return [
+        'settings' => [
+            'label' => 'User Settings',
+            'description' => 'Manage user based settings.',
+            'category' => 'Users',
+            'icon' => 'icon-cog',
+            'class' => 'October\User\Models\Settings',
+            'order' => 100
+        ]
+    ];
+}
+```
+
+More information on Settings models can be found at the [Plugin Settings & Configuration article](http://octobercms.com/docs/plugin/settings).
 
 
 
