@@ -25,36 +25,32 @@ tasks like creating, reading, updating and deleting database records. You can le
 ## Direct SQL
 
 #### Retrieving data
-```
-$results = Db::select('select * from users where id = ?', [1]);
-```
+
+    $results = Db::select('select * from users where id = ?', [1]);
+
 The select method will always return an array of results.
 
 #### Flatten results as an array
-```
-Db::select('select * from users')->lists('name', 'id');
-```
+
+    Db::select('select * from users')->lists('name', 'id');
+
 Returns an array where the key is the **id** and value is the **name**, eg: ```Array ( [1] => Name ) ```.
 
 #### Inserting data
-```
-Db::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
-```
+
+    Db::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
 
 #### Updating data
-```
-Db::update('update users set votes = 100 where name = ?', ['John']);
-```
+
+    Db::update('update users set votes = 100 where name = ?', ['John']);
 
 #### Removing data
-```
-Db::delete('delete from users');
-```
+
+    Db::delete('delete from users');
 
 #### Raw query
-```
-Db::statement('drop table users');
-```
+
+    Db::statement('drop table users');
 
 #### Further reading on Direct SQL
 
@@ -68,27 +64,21 @@ Db::statement('drop table users');
 
 #### Creating a new record
 
-```php
-$post = new Acme\Blog\Models\Post;
-$post->title = 'Hello World!';
-$post->content = 'I am writing to you from my website...';
-$post->save();
-```
+    $post = new Acme\Blog\Models\Post;
+    $post->title = 'Hello World!';
+    $post->content = 'I am writing to you from my website...';
+    $post->save();
 
 #### Finding and updating a record
 
-```php
-$post = Acme\Blog\Models\Post::find(1);
-$post->title = 'Hi there, World!';
-$post->save();
-```
+    $post = Acme\Blog\Models\Post::find(1);
+    $post->title = 'Hi there, World!';
+    $post->save();
 
 #### Deleting a record
 
-```php
-$post = Acme\Blog\Models\Post::find(1);
-$post->delete();
-```
+    $post = Acme\Blog\Models\Post::find(1);
+    $post->delete();
 
 #### Further reading on Active Record
 

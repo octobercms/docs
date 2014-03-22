@@ -12,13 +12,13 @@
 
 Components reside in the **/components** directory inside a Plugin. An example of a component directory structure:
 
-    /plugins
-      /author
-        /myplugin
-          /components
-            /componentname        <=== Component partials directory
-              default.htm         <=== Component default markup (optional)
-            ComponentName.php     <=== Component class file
+    plugins/
+      acme/
+        myplugin/
+          components/
+            componentname/      <=== Component partials directory
+              default.htm       <=== Component default markup (optional)
+            ComponentName.php   <=== Component class file
           Plugin.php
 
 Components must be registered in the [Plugin registration file](http://octobercms.com/docs/plugin/registration#component-registration).
@@ -66,41 +66,33 @@ More information on using components can be found at the [Using Components artic
 
 Components can be configured using properties which are set when attaching them to a page or layout. For example:
 
-```php
-public function defineProperties()
-{
-    return [
-        'maxItems' => [
-             'title' => 'Max items',
-             'description' => 'The most amount of todo items allowed',
-             'default' => 10,
-             'type' => 'string',
-             'validationPattern' => '^[a-zA-Z]*$', // Optional
-             'validationMessage' => 'The Max Items property can contain only Latin symbols'
-        ]
-    ];
-}
-```
+    public function defineProperties()
+    {
+        return [
+            'maxItems' => [
+                 'title'             => 'Max items',
+                 'description'       => 'The most amount of todo items allowed',
+                 'default'           => 10,
+                 'type'              => 'string',
+                 'validationPattern' => '^[a-zA-Z]*$', // Optional
+                 'validationMessage' => 'The Max Items property can contain only Latin symbols'
+            ]
+        ];
+    }
 
 This defines the properties accepted by this component.
 
 ##### Retrieving a property value
 
-```php
-$this->property('maxItems');
-```
+    $this->property('maxItems');
 
 ##### Retrieving a property value if the value is absent
 
-```php
-$this->property('maxItems', 6);
-```
+    $this->property('maxItems', 6);
 
 ##### Getting all property values
 
-```php
-$this->getProperties();
-```
+    $this->getProperties();
 
 
 <a name="page-events"></a>
@@ -108,15 +100,13 @@ $this->getProperties();
 
 Components can be involved in the Page execution cycle events by overriding the `onRun` method in the component class.
 
-```php
-public function onRun()
-{
-    // This code will be executed when the page or layout is
-    // loaded and the component is attached to it.
+    public function onRun()
+    {
+        // This code will be executed when the page or layout is
+        // loaded and the component is attached to it.
 
-    $this->page['var'] = 'value'; // Inject some variable to the page
-}
-```
+        $this->page['var'] = 'value'; // Inject some variable to the page
+    }
 
 
 
@@ -125,13 +115,11 @@ public function onRun()
 
 Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the page or layout code. An example AJAX handler:
 
-```php
-public function onAddItem()
-{
-    $value1 = post('value1');
-    $value2 = post('value2');
-    $this->page['result'] = $value1 + $value2;
-}
-```
+    public function onAddItem()
+    {
+        $value1 = post('value1');
+        $value2 = post('value2');
+        $this->page['result'] = $value1 + $value2;
+    }
 
 If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItems`.

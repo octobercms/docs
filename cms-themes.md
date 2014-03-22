@@ -22,20 +22,20 @@ Themes can contain the following CMS templates:
 Example theme directory structure:
 
     themes/
-        website/                <== Theme starts here
-            pages/              <== Pages directory
-                home.htm
-            layouts/            <== Layouts directory
-                default.htm
-            partials/           <== Partials directory
-                sidebar.htm
-            content/            <== Content directory
-                intro.htm
-            assets/             <== Assets directory
-                css/
-                    my-styles.css
-                js/
-                images/
+      website/              <== Theme starts here
+        pages/              <== Pages directory
+          home.htm
+        layouts/            <== Layouts directory
+          default.htm
+        partials/           <== Partials directory
+          sidebar.htm
+        content/            <== Content directory
+          intro.htm
+        assets/             <== Assets directory
+          css/
+            my-styles.css
+          js/
+          images/
 
 #### Subdirectories
 
@@ -43,21 +43,21 @@ All CMS templates can be grouped as a single level of subdirectories.
 This simplifies organizing large websites.
 
     themes/
-        website/
-            pages/
-                home.htm
-                blog/                   <== Subdirectory
-                    archive.htm
-                    category.htm
-            partials/
-                sidebar.htm
-                blog/                   <== Subdirectory
-                    category-list.htm
-            content/
-                footer-contacts.txt
-                home/                   <== Subdirectory
-                    intro.htm
-            ...
+      website/
+        pages/
+          home.htm
+          blog/                 <== Subdirectory
+            archive.htm
+            category.htm
+        partials/
+          sidebar.htm
+          blog/                 <== Subdirectory
+            category-list.htm
+        content/
+          footer-contacts.txt
+          home/                 <== Subdirectory
+            intro.htm
+        ...
 
 To refer to a template from a subdirectory, specify the subdirectory name before the template name.
 Example:
