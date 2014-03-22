@@ -1,6 +1,6 @@
 # Active Record Model
 
-- [Basic Usage](#basic-usage)
+- [Introduction](#introduction)
 - [Relationships](#relationships)
 - [Attribute Modifiers](#attribute-modifiers)
 - [Joined Eager Loading](#joined-eager-loading)
@@ -13,8 +13,8 @@
 
 
 
-<a name="basic-usage"></a>
-## Basic Usage
+<a name="introduction"></a>
+## Introduction
 
 October provides the option of using an Active Record pattern to access the database, through the use of a Model class. The class extends and shares the features of [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
 

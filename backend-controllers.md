@@ -1,14 +1,14 @@
 # Backend Controllers
 
-- [Basic Usage](#basic-usage)
+- [Introduction](#introduction)
 - [Routing](#routing)
 - [Forms](#forms)
 - [Lists](#lists)
 - [Relations](#relations)
 
 
-<a name="basic-usage"></a>
-## Basic Usage
+<a name="introduction"></a>
+## Introduction
 
 Controllers in October are primarily used for the back-end pages, since the CMS page template will act as the front-end controller.
 
