@@ -36,7 +36,7 @@ The most basic representation of a Controller used inside a Plugin looks like th
 ```php
 namespace Acme\Blog\Controllers;
 
-class Posts extends \Backend\Classes\BackendController {
+class Posts extends \Backend\Classes\Controller {
 
     public index() {}
 
@@ -197,7 +197,7 @@ tabs:
   fields:
     [...]
 
-secondary-tabs:
+secondaryTabs:
   fields:
     [...]
 ```
@@ -212,9 +212,9 @@ Each field can specify these options (where applicable):
 * **size** - specifies a field size for fields that use it. Options: tiny, small, large, huge, giant
 * **placeholder** - if the field supports a placeholder value
 * **comment** - places a descriptive comment below the field
-* **comment-above** - places a comment above the field
+* **commentAbove** - places a comment above the field
 * **tab** - assigns the field to a tab
-* **css-class** - assigns a CSS class to the field container
+* **cssClass** - assigns a CSS class to the field container
 * **disabled** - grays out the field if set to true. Options: true, false.
 * **stretch** - specifies if this field stretch to fit the page height.
 
