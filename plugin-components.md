@@ -5,6 +5,8 @@
 - [Page events](#page-events)
 - [AJAX events](#ajax-events)
 
+
+
 <a name="introduction"></a>
 ## Introduction
 

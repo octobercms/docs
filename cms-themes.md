@@ -1,3 +1,15 @@
+# CMS Themes
+
+- [Introduction](#introduction)
+- [Template structure](#template-structure)
+
+
+
+<a name="introduction"></a>
+## Introduction
+
+Themes represent the entire contents of a single website, including the template and asset files.
+
 Themes are directories that reside in the **/themes** directory by default.
 Themes can contain the following CMS templates:
 
@@ -9,75 +21,73 @@ Themes can contain the following CMS templates:
 
 Example theme directory structure:
 
-```
-themes/
-  website/ <== theme starts here
-    pages/
-      home.htm
-    layouts/
-      default.htm
-    partials/
-      sidebar.htm
-    content/
-      intro.htm
-    assets/
-      css/
-        my-styles.css
-      javascript
-      images
-```
+    themes/
+        website/                <== Theme starts here
+            pages/              <== Pages directory
+                home.htm
+            layouts/            <== Layouts directory
+                default.htm
+            partials/           <== Partials directory
+                sidebar.htm
+            content/            <== Content directory
+                intro.htm
+            assets/             <== Assets directory
+                css/
+                    my-styles.css
+                js/
+                images/
 
-##### Subdirectories
+#### Subdirectories
 
-All CMS templates can be grouped as a single level of subdirectories. This simplifies organizing large websites.
+All CMS templates can be grouped as a single level of subdirectories.
+This simplifies organizing large websites.
 
-```
-themes/
-  website/ <== theme starts here
-    pages/
-      home.htm
-      blog/
-        archive.htm
-        category.htm
-    partials/
-      sidebar.htm
-      blog/
-        category-list.htm
-    content/
-      footer-contacts.txt
-      home/
-        intro.htm
-    ...
-```
+    themes/
+        website/
+            pages/
+                home.htm
+                blog/                   <== Subdirectory
+                    archive.htm
+                    category.htm
+            partials/
+                sidebar.htm
+                blog/                   <== Subdirectory
+                    category-list.htm
+            content/
+                footer-contacts.txt
+                home/                   <== Subdirectory
+                    intro.htm
+            ...
 
 To refer to a template from a subdirectory, specify the subdirectory name before the template name.
 Example:
 
-```php
-{% partial "blog/category-list" %}
-```
+    {% partial "blog/category-list" %}
 
-#### Template structure
+> **Note**: To keep things simple, only one level of subdirectories is supported.
+
+
+
+<a name="template-structure"></a>
+## Template structure
 
 Template files (pages, partials and layouts) can include up to 3 sections: configuration, PHP code, and Twig markup. 
 Sections are separated with the `==` sequence.
 For example:
 
-```php
-url = "/blog"
-layout = "default"
-==
-function onStart()
-{
-  $this['posts'] = ...;
-}
-==
-<h3>Blog archive</h3>
-{% for post in posts %}
-  <h4>{{ post.title }}</h4>
-  {{ post.content }}
-{% endfor %}
-```
+    url = "/blog"
+    layout = "default"
+    ==
+    function onStart()
+    {
+        $this['posts'] = ...;
+    }
+    ==
+    <h3>Blog archive</h3>
+    {% for post in posts %}
+        <h4>{{ post.title }}</h4>
+        {{ post.content }}
+    {% endfor %}
 
 The **configuration section** uses INI format, where string parameter values are enclosed within quotes.
 Supported configuration parameters are specific for different CMS templates.
@@ -85,22 +95,20 @@ Supported configuration parameters are specific for different CMS templates.
 The **PHP code section** can contain optional open and close PHP tags to enable syntax highlighting in text editors.
 The open and close tags should always be specified on another line to the section separator (`==`):
 
-```php
-url = "/blog"
-layout = "default"
-==
-<?
-function onStart()
-{
-  $this['posts'] = ...;
-}
-?>
-==
-<h3>Blog archive</h3>
-{% for post in posts %}
-  <h4>{{ post.title }}</h4>
-  {{ post.content }}
-{% endfor %}
-```
+    url = "/blog"
+    layout = "default"
+    ==
+    <?
+    function onStart()
+    {
+        $this['posts'] = ...;
+    }
+    ?>
+    ==
+    <h3>Blog archive</h3>
+    {% for post in posts %}
+        <h4>{{ post.title }}</h4>
+        {{ post.content }}
+    {% endfor %}
 
 The PHP section is optional for all CMS templates.

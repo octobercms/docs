@@ -1,13 +1,23 @@
+# AJAX framework
+
+- [Introduction](#introduction)
+- [Event handlers](#event-handlers)
+- [Data attributes](#data-attributes)
+- [JavaScript API](#javascript-api)
+
+
+
+<a name="introduction"></a>
+## Introduction
+
 To use the AJAX framework it should be included by placing the `{% framework %}` tag anywhere inside the page or layout. 
 This adds a reference to to the October front-end JavaScript library. The library requires jQuery, so it should be loaded first, for example:
 
-```php
-<script src="{{ [
-    'assets/javascript/jquery.js',
-]|theme }}"></script> 
+    <script src="{{ [
+        'assets/javascript/jquery.js',
+    ]|theme }}"></script> 
 
-{% framework %}
-```
+    {% framework %}
 
 #### How AJAX requests work
 
@@ -22,28 +32,32 @@ The AJAX request workflow:
 5. The server sends the response, containing the rendered partials markup.
 6. The client-side framework updates page elements with the partials data received from the server.
 
-#### Event handlers
 
-Event handlers are functions that can be defined in the page or layout PHP code section. Handlers can also be defined inside [Components](../extensibility/components).
+
+<a name="event-handlers"></a>
+## Event handlers
+
+Event handlers are functions that can be defined in the page or layout PHP code section. Handlers can also be defined inside [Components](http://octobercms.com/cms/components).
 
 Handler names should have the following pattern: `onName`. Handlers can inject variables to the next page cycle, where they can be used during the partial rendering. Example:
 
-```php
-url = "js"
-layout = "default"
-==
-function onTest()
-{
-    $value1 = post('value1');
-    $value2 = post('value2');
-    $this['result'] = $value1 + $value2;
-}
-==
-```
+    url = "js"
+    layout = "default"
+    ==
+    function onTest()
+    {
+        $value1 = post('value1');
+        $value2 = post('value2');
+        $this['result'] = $value1 + $value2;
+    }
+    ==
 
 > If two handlers with a same name defined in a page and layout together, the page handler will be executed.
 
-#### Data attributes
+
+
+<a name="data-attributes"></a>
+## Data attributes
 
 AJAX requests can be issued using HTML data attributes. Using the data attributes doesn't require any JavaScript knowledge. The supported attributes are:
 
@@ -66,44 +80,32 @@ When the `data-request` attribute is specified for an element, the element trigg
 
 Trigger the `onCalculate` handler when the form is submitted. Update the element with `ID = "result"` with the **calcresult** partial.
 
-```php
-<form data-request="onCalculate" data-request-update="calcresult: '#result'">
-```
+    <form data-request="onCalculate" data-request-update="calcresult: '#result'">
 
 Confirm a record deletion.
 
-```php
-<form ... >
-    ...
-    <button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
-```
+    <form ... >
+        ...
+        <button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
 
 Redirect to another page after the successful request.
 
-```php
-<form data-request="onLogin" data-request-redirect="/admin">
-```
+    <form data-request="onLogin" data-request-redirect="/admin">
 
 Show a popup window after the successful request.
 
-```php
-<form data-request="onLogin" data-request-success="alert('Yay!')">
-```
+    <form data-request="onLogin" data-request-success="alert('Yay!')">
 
 Send a POST parameter of `mode` with a value `update`.
 
-```php
-<form data-request="onUpdate" data-request-data="mode: 'update'">
-```
+    <form data-request="onUpdate" data-request-data="mode: 'update'">
 
 Send a POST parameter of `id` with value `7` across multiple elements.
 
-```php
-<div data-request-data="id: 7">
-    <button data-request="onDelete">Delete</button>
-    <button data-request="onSave">Update</button>
-</div>
-```
+    <div data-request-data="id: 7">
+        <button data-request="onDelete">Delete</button>
+        <button data-request="onSave">Update</button>
+    </div>
 
 The priority of POST parameter values is:
 
@@ -111,16 +113,17 @@ The priority of POST parameter values is:
 1. The closer parent elements `data-request-data`
 1. The form input data
 
-#### JavaScript API
+
+
+<a name="javascript-api"></a>
+## JavaScript API
 
 The JavaScript API is more powerful than using data attributes. The `request()` method can be used with any element that is inside a form, or on with a form element. When the method is used with an element inside a form, it is forwarded to the form. 
 
 The `request()` method has a single required parameter - the handler name. Example:
 
-```php
-<form onsubmit="$(this).request('onProcess'); return false;">
-    ...
-```
+    <form onsubmit="$(this).request('onProcess'); return false;">
+        ...
 
 The second attribute of the `request()` method is the options. You can use any options and methods compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
 
@@ -141,35 +144,33 @@ The `request()` method triggers several events on the updated elements, form, an
 
 ##### Some JavaScript API examples
 
-```js
-// Confirm a record deletion
-$('form').request('onDelete', {confirm: 'Are you sure?', redirect: '/dashboard'})
+    // Confirm a record deletion
+    $('form').request('onDelete', {confirm: 'Are you sure?', redirect: '/dashboard'})
 
-// Run onCalculate handler and update with calcresult partial
-$('form').request('onCalculate', {update: {calcresult: '.calcresult'})
+    // Run onCalculate handler and update with calcresult partial
+    $('form').request('onCalculate', {update: {calcresult: '.calcresult'})
 
-// Run onCalculate handler with some extra data
-$('form').request('onCalculate', {data: {value: 55})
+    // Run onCalculate handler with some extra data
+    $('form').request('onCalculate', {data: {value: 55})
 
-// Run onCalculate and before updating, run some custom code
-$('form').request('onCalculate', {beforeUpdate: function(){ /* do something */ }})
+    // Run onCalculate and before updating, run some custom code
+    $('form').request('onCalculate', {beforeUpdate: function(){ /* do something */ }})
 
-// Run onCalculate and if successful, run some custom code and the default
-$('form').request('onCalculate', {success: function(data){
-    //... do something ...
-    this.success(data);
-}})
+    // Run onCalculate and if successful, run some custom code and the default
+    $('form').request('onCalculate', {success: function(data){
+        //... do something ...
+        this.success(data);
+    }})
 
-// Execute a request without an element
-$.request('onCalculate', {success: function(){ console.log('Finished!') }})
+    // Execute a request without an element
+    $.request('onCalculate', {success: function(){ console.log('Finished!') }})
 
-// Run onCalculate and if successful, run some custom code after the default is done
-$('form').request('onCalculate', {success: function(data){
-    this.success(data).done(function() {
-        //... do something after parent success() is finished ...
-    });
-}})
+    // Run onCalculate and if successful, run some custom code after the default is done
+    $('form').request('onCalculate', {success: function(data){
+        this.success(data).done(function() {
+            //... do something after parent success() is finished ...
+        });
+    }})
 
-// Assign the ajaxUpdate event handler to the .calcresult element
-$('.calcresult').on('ajaxUpdate', function(){ console.log('Updated!'); })
-```
+    // Assign the ajaxUpdate event handler to the .calcresult element
+    $('.calcresult').on('ajaxUpdate', function(){ console.log('Updated!'); })

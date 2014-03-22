@@ -1,7 +1,8 @@
 
 ## Please note: October is still under development and cannot be installed just yet
 
-There are two ways you can install October, either using the Wizard or Command-line installation process. Before you proceed, you should check that your server meets the minimum system requirements.
+There are two ways you can install October, either using the Wizard or Command-line installation process.
+Before you proceed, you should check that your server meets the minimum system requirements.
 
 #### Minimum System Requirements
 
@@ -13,7 +14,8 @@ October CMS has a few system requirements:
 * MCrypt PHP Extension
 * ZipArchive PHP Library
 
-As of PHP 5.5, some OS distributions may require you to manually install the PHP JSON extension. When using Ubuntu, this can be done via ``apt-get install php5-json``.
+As of PHP 5.5, some OS distributions may require you to manually install the PHP JSON extension.
+When using Ubuntu, this can be done via ``apt-get install php5-json``.
 
 #### Wizard installation (Recommended)
 
