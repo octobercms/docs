@@ -1,15 +1,23 @@
-Themes are directories that reside in the **/themes** directory by default.
-Themes can contain the following CMS templates:
+- [Introduction](#introduction)
+- [Subdirectories](#subdirectories)
+- [Template structure](#structure)
 
-- **Pages** - hold the content for each URL.
-- **Partials** - contain reusable chunks of HTML markup.
-- **Layouts** - define the page scaffold.
-- **Content files** - text or HTML blocks that can be edited separately from the page or layout.
-- **Asset files** - are resource files like images and stylesheets.
+Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the top-level description of October themes. You fill find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
-Example theme directory structure:
+<a name="introduction" class="anchor" href="#introduction"></a>
+## Introduction
 
-```
+Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects.
+
+- [Pages](pages) - represent the website pages.
+- [Partials](partials) - contain reusable chunks of HTML markup.
+- [Layouts](layouts) - define the page scaffold.
+- [Content files](content) - text, HTML or Markdown blocks that can be edited separately from the page or layout.
+- **Asset files** - are resource files like images, CSS and JavaScriptf files.
+
+Below you can see an example theme directory structure. Each October theme is represented with a separate directory. The example displays the "website" theme directory.
+
+```txt
 themes/
   website/ <== theme starts here
     pages/
@@ -27,13 +35,14 @@ themes/
       images
 ```
 
-##### Subdirectories
+<a name="subdirectories" class="anchor" href="#subdirectories"></a>
+## Subdirectories
 
-All CMS templates can be grouped as a single level of subdirectories. This simplifies organizing large websites.
+October supports a single level subdirectories for pages, partials, layouts and content files (the **assets** directory can have any structure). This simplifies organizing large websites. In the example directory structure below you can see that the pages and partials directories contain the **blog** subdirectory and the content directory contains the **home** subdirectory.
 
 ```
 themes/
-  website/ <== theme starts here
+  website/
     pages/
       home.htm
       blog/
@@ -50,16 +59,24 @@ themes/
     ...
 ```
 
-To refer to a template from a subdirectory, specify the subdirectory name before the template name.
-Example:
+To refer to a partial or a content file from a subdirectory, specify the subdirectory name before the template name. Example of rendering a partial from a subdirectory:
 
 ```php
 {% partial "blog/category-list" %}
 ```
 
-#### Template structure
+Referring a content file from a subdirectory:
 
-Template files (pages, partials and layouts) can include up to 3 sections: configuration, PHP code, and Twig markup. 
+```php
+{% content 'docs/themes.md' %}
+```
+
+Note that the partial and content paths are always absolute. If in a partial you render another partial from the same subdirectory you still need to specify the subdirectory name.
+
+<a name="structure" class="anchor" href="#structure"></a>
+## Template structure
+
+Pages, partials and layout templates can include up to 3 sections: **configuration**, **PHP code**, and **Twig markup**.
 Sections are separated with the `==` sequence.
 For example:
 
@@ -79,11 +96,23 @@ function onStart()
 {% endfor %}
 ```
 
-The **configuration section** uses INI format, where string parameter values are enclosed within quotes.
-Supported configuration parameters are specific for different CMS templates.
+<a name="configuration-section" class="anchor" href="#configuration-section"></a>
+### Configuration section
 
-The **PHP code section** can contain optional open and close PHP tags to enable syntax highlighting in text editors.
-The open and close tags should always be specified on another line to the section separator (`==`):
+The configuration section sets the template parameters. Supported configuration parameters are specific for different CMS templates and described in their corresponding documentation articles. The configuration section uses the simple INI format, where string parameter values are enclosed within quotes.  Example configuration section for a page template:
+
+```php
+url = "/blog"
+layout = "default"
+
+[component]
+parameter = "value"
+```
+
+<a name="php-section" class="anchor" href="#php-section"></a>
+### PHP code section
+
+The code in the PHP section executes every time before the template is rendered. The PHP section is optional for all CMS templates and its contents depends on the template type where it is defined. The PHP code section can contain optional open and close PHP tags to enable syntax highlighting in text editors. The open and close tags should always be specified on another line to the section separator `==`.
 
 ```php
 url = "/blog"
@@ -103,4 +132,26 @@ function onStart()
 {% endfor %}
 ```
 
-The PHP section is optional for all CMS templates.
+> **Note:** in the PHP section you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed.
+
+Example namespace reference:
+
+```php
+url = "/blog"
+layout = "default"
+==
+<?
+use JohnSmith\Blog\Classes\Post;
+
+function onStart()
+{
+  $this['posts'] = Post::get();
+}
+?>
+==
+```
+
+<a name="twig-section" class="anchor" href="#twig-section"></a>
+### Twig markup section
+
+The Twig section defines the markup to be rendered by the template. In the Twig section you can use [Twig functions, filters and tags provided by October](markup) and all the native [Twig](http://twig.sensiolabs.org/documentation) functions, tags and filters. The content of the Twig section depends on the template type (page, layout or partial). You will find more information about specific Twig objects in the documentation.
