@@ -1,9 +1,13 @@
 # CMS Partials
 
+- [Introduction](#introduction)
 - [Rendering partials](#rendering-partials)
 - [Passing variables to partials](#variables)
 
 Partials contain reusable chunks of Twig markup that can be used anywhere throughout the website. Partials are extremely useful for page elements that repeat on different pages or layouts. A good partial example is a page footer which is used in different page [layouts](layouts). Also, partials are required for updating the page content with [AJAX](ajax).
+
+<a name="introduction" class="anchor" href="#introduction"></a>
+## Introduction
 
 Partial templates files reside in the **/partials** subdirectory of a theme directory. Partial files should have the **htm** extension. Example of a simplest possible partial:
 
