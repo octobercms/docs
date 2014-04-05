@@ -102,10 +102,8 @@ The next example is more complicated. It shows how to load a blog post collectio
     <h2>Latest posts</h2>
     <ul>
         {% for post in posts %}
-            <li>
-                <h3>{{ post.title }}</h3>
-                <p>{{ post.description }}</p>
-            </li>
+            <h3>{{ post.title }}</h3>
+            {{ post.content }}
         {% endfor %}
     </ul>
 
@@ -123,6 +121,12 @@ The `this` variable is always presented in October Twig environment. This variab
 You can use the `this` variable to output the page title:
 
     <title>{{ this.page.title }}</title>
+
+Example of accessing an URL parameter:
+
+    {% if this.param['post_id'] == 1 %}
+        This is the first post in the blog!
+    {% endif %}
 
 <a name="404-page" class="anchor" href="#404-page"></a>
 ## 404 page
