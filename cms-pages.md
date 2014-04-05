@@ -17,6 +17,7 @@ All websites have pages. In October pages are represented with page templates. P
 Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and page [Components](components), which are explained in another article. The following configuration parameters are supported for pages:
 
 - **url** - the page URL, required. The URL syntax is described below.
+- **title** - the page title, required.
 - **layout** - the page [layout](layouts), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
 - **description** - the page description for the back-end interface, optional.
 
@@ -109,6 +110,19 @@ The next example is more complicated. It shows how to load a blog post collectio
     </ul>
 
 The PHP section can also define AJAX handlers which are described in the [AJAX Framework](ajax) article.
+
+<a name="this-variable" class="anchor" href="#this-variable"></a>
+### Accessing the page, layout and URL parameters in templates
+
+The `this` variable is always presented in October Twig environment. This variable contains an object with three fields: 
+
+- **page** - the current page object.
+- **layout** - the current layout object.
+- **param** - an array of URL parameters.
+
+You can use the `this` variable to output the page title:
+
+    <title>{{ this.page.title }}</title>
 
 <a name="404-page" class="anchor" href="#404-page"></a>
 ## 404 page
