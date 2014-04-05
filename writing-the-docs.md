@@ -5,7 +5,7 @@
 * Try to use only H2 and H3 headers.
 * Each H2 and H3 header should have a link defined as 
 ```
-    <a name="page-cycle-handlers" class="anchor" href="#page-cycle-handlers"></a>
+<a name="page-cycle-handlers" class="anchor" href="#page-cycle-handlers"></a>
 ```
 * Avoid short, 1 sentence, paragraphs. Merge short paragraphs and try to be a bit more verbose.
 * Avoid short hanging paragraphs below code sections. Merge such paragraphs with the text above the code blocks.
