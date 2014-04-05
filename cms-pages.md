@@ -86,12 +86,12 @@ There are two special functions that could be defined in the PHP section: `onSta
     <h3>{{ hello }}</h3>
 
 
-The next example is more complicated. It shows how to load a blog post collection from the database and display on the page (the JohnSmith\Blog plugin is imaginary).
+The next example is more complicated. It shows how to load a blog post collection from the database and display on the page (the Acme\Blog plugin is imaginary).
 
     url = "/blog"
     ==
     <?
-    use JohnSmith\Blog\Classes\Post;
+    use Acme\Blog\Classes\Post;
 
     function onStart()
     {

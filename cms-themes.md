@@ -125,7 +125,7 @@ Example namespace reference:
     layout = "default"
     ==
     <?
-    use JohnSmith\Blog\Classes\Post;
+    use Ame\Blog\Classes\Post;
 
     function onStart()
     {
