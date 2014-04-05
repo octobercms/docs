@@ -12,4 +12,4 @@
 * Use the inline `code` tags for everything related to code - variable names, function names, syntax examples, etc.
 * Use the **strong** tag for everything else.
 * Don't hesitate to make cross links to other documentation articles. Adding links to the same article in the same paragraph is not necessary.
-* See the cms-pages.md or cms-themes.md files for your reference.
+* See the [cms-pages.md](cms-pages.md) or [cms-themes.md](cms-themes.md) files for your reference.
