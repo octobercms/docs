@@ -15,7 +15,7 @@ Themes are directories that reside in the **/themes** directory by default. Them
 - [Pages](pages) - represent the website pages.
 - [Partials](partials) - contain reusable chunks of HTML markup.
 - [Layouts](layouts) - define the page scaffold.
-- [Content files](content) - text, HTML or Markdown blocks that can be edited separately from the page or layout.
+- [Content files](content) - text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
 - **Asset files** - are resource files like images, CSS and JavaScriptf files.
 
 Below you can see an example theme directory structure. Each October theme is represented with a separate directory. The example displays the "website" theme directory.
