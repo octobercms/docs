@@ -1,31 +1,29 @@
 # Backend Controllers
 
-- [Basic Usage](#basic-usage)
+- [Introduction](#introduction)
 - [Routing](#routing)
 - [Forms](#forms)
 - [Lists](#lists)
 - [Relations](#relations)
 
 
-<a name="basic-usage"></a>
-## Basic Usage
+<a name="introduction"></a>
+## Introduction
 
 Controllers in October are primarily used for the back-end pages, since the CMS page template will act as the front-end controller.
 
 Controllers reside in the **/controllers** directory inside a Plugin. An example of a controller directory structure:
 
-```
-plugins/
-  acme/
-    blog/
-      controllers/
-        users/               <=== Controller view directory
-          _partial.htm       <=== Controller partial file
-          config_form.yaml   <=== Controller config file
-          index.htm          <=== Controller view file
-        Users.php            <=== Controller class
-      Plugin.php
-```
+    plugins/
+      acme/
+        blog/
+          controllers/
+            users/               <=== Controller view directory
+              _partial.htm       <=== Controller partial file
+              config_form.yaml   <=== Controller config file
+              index.htm          <=== Controller view file
+            Users.php            <=== Controller class
+          Plugin.php
 
 The controller view directory is a lower case name of the controller class.
 
@@ -33,15 +31,13 @@ The controller view directory is a lower case name of the controller class.
 
 The most basic representation of a Controller used inside a Plugin looks like this:
 
-```php
-namespace Acme\Blog\Controllers;
+    namespace Acme\Blog\Controllers;
 
-class Posts extends \Backend\Classes\BackendController {
+    class Posts extends \Backend\Classes\Controller {
 
-    public index() {}
+        public index() {}
 
-}
-```
+    }
 
 
 
@@ -50,21 +46,15 @@ class Posts extends \Backend\Classes\BackendController {
 
 A controller is also coupled to a view file for its class method names, called *actions*, for example **index.htm** contents:
 
-```
-<h1>Hello World</h1>
-```
+    <h1>Hello World</h1>
 
 To access this page the URL is made up of the author name, plugin name, controller name, action name.
 
-```
-backend/[author name]/[plugin name]/[controller name]/[action name]
-```
+    backend/[author name]/[plugin name]/[controller name]/[action name]
 
 The above Controller results in the following:
 
-```
-http://yoursite.com/backend/acme/blog/users/index
-```
+    http://yoursite.com/backend/acme/blog/users/index
 
 
 
@@ -82,24 +72,22 @@ http://yoursite.com/backend/acme/blog/users/index
 
 The configuration is defined in YAML format, an example looks like this:
 
-```
-# ===================================
-#  Form Behavior Config
-# ===================================
+    # ===================================
+    #  Form Behavior Config
+    # ===================================
 
-name: Admin
-form: @/plugins/acme/blog/models/post/fields.yaml
-model-class: Acme\Blog\Post
+    name: Admin
+    form: @/plugins/acme/blog/models/post/fields.yaml
+    model-class: Acme\Blog\Post
 
-create:
-    title: New Blog Post
+    create:
+        title: New Blog Post
 
-update:
-    title: Edit Blog Post
+    update:
+        title: Edit Blog Post
 
-preview:
-    title: View Blog Post
-```
+    preview:
+        title: View Blog Post
 
 #### Required configuration
 
@@ -118,13 +106,11 @@ preview:
 
 To include an create page add the following configuration:
 
-```
-create:
-    title: New Blog Post
-    redirect: acme/blog/posts/update/:id
-    redirect-close: acme/blog/posts
-    flash-save: Post has been created!
-```
+    create:
+        title: New Blog Post
+        redirect: acme/blog/posts/update/:id
+        redirect-close: acme/blog/posts
+        flash-save: Post has been created!
 
 The create page configuration allows:
 
@@ -137,13 +123,11 @@ The create page configuration allows:
 
 To include an update page add the following configuration:
 
-```
-update:
-    title: Edit Blog Post
-    redirect: acme/blog/posts
-    flash-save: Post updated successfully!
-    flash-delete: Post has been deleted.
-```
+    update:
+        title: Edit Blog Post
+        redirect: acme/blog/posts
+        flash-save: Post updated successfully!
+        flash-delete: Post has been deleted.
 
 The update page configuration allows:
 
@@ -157,10 +141,8 @@ The update page configuration allows:
 
 To include an preview page add the following configuration:
 
-```
-preview:
-    title: View Blog Post
-```
+    preview:
+        title: View Blog Post
 
 The preview page configuration allows:
 
@@ -176,31 +158,29 @@ Fields can be placed in three areas, the *outside area*, *primary tabs* or *seco
 
 The configuration is defined in YAML format, an example looks like this:
 
-```
-# ===================================
-#  Form Field Definitions
-# ===================================
+    # ===================================
+    #  Form Field Definitions
+    # ===================================
 
-fields:
-  blog_title:
-    label: Blog Title
-    description: The title for this blog
+    fields:
+      blog_title:
+        label: Blog Title
+        description: The title for this blog
 
-  published_at:
-    label: Published date
-    description: When this blog post was published
-    type: datetime
+      published_at:
+        label: Published date
+        description: When this blog post was published
+        type: datetime
 
-  [...]
+      [...]
 
-tabs:
-  fields:
-    [...]
+    tabs:
+      fields:
+        [...]
 
-secondary-tabs:
-  fields:
-    [...]
-```
+    secondaryTabs:
+      fields:
+        [...]
 
 #### Field options
 
@@ -212,9 +192,9 @@ Each field can specify these options (where applicable):
 * **size** - specifies a field size for fields that use it. Options: tiny, small, large, huge, giant
 * **placeholder** - if the field supports a placeholder value
 * **comment** - places a descriptive comment below the field
-* **comment-above** - places a comment above the field
+* **commentAbove** - places a comment above the field
 * **tab** - assigns the field to a tab
-* **css-class** - assigns a CSS class to the field container
+* **cssClass** - assigns a CSS class to the field container
 * **disabled** - grays out the field if set to true. Options: true, false.
 * **stretch** - specifies if this field stretch to fit the page height.
 
@@ -225,99 +205,84 @@ The following field types are available:
 
 #### Text box
 Renders a single line text box. This is the default type used if none is specified.
-```
-blog_title:
-  label: Blog Title
-  type: text
-```
+    blog_title:
+      label: Blog Title
+      type: text
 
 #### Password
 Renders a single line password field.
-```
-user_password:
-  label: Password
-  type: password
-```
+
+    user_password:
+      label: Password
+      type: password
 
 #### Text Area
 Renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
 
-```
-blog_contents:
-  label: Contents
-  type: textarea
-  size: large
-```
+    blog_contents:
+      label: Contents
+      type: textarea
+      size: large
 
 #### Dropdown
 Renders a dropdown with specified options. There are 3 ways to provide options:
 
 **Method 1:** Define options directly in the YAML file
-```
-status:
-  label: Blog Post Status
-  type: dropdown
-  options:
-    draft: Draft
-    published: Published
-    archived: Archived
-```
+
+    status:
+      label: Blog Post Status
+      type: dropdown
+      options:
+        draft: Draft
+        published: Published
+        archived: Archived
 
 **Method 2**: Define them with a method declared in the model's class
-```
-status:
-  label: Blog Post Status
-  type: dropdown
-```
+
+    status:
+      label: Blog Post Status
+      type: dropdown
 
 If the options element is omitted, the framework expects a method with the name **get*Field*Options()** to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method should return an array of options in the format *key => value*.
 
 **Method 3:** Use a specific method declared in the model's class:
 
-```
-status:
-  label: Blog Post Status
-  type: dropdown
-  options: listStatuses
-```
+    status:
+      label: Blog Post Status
+      type: dropdown
+      options: listStatuses
 
 In this example the `listStatuses()` method should be defined in the model class.
 
 #### Radio List
 Renders a list of radio options, where only one item can be selected at a time.
 
-```
-security_level:
-  label: Access Level
-  type: radio
-  options:
-    all: All
-    registered: Registered only
-    guests: Guests only
-```
+    security_level:
+      label: Access Level
+      type: radio
+      options:
+        all: All
+        registered: Registered only
+        guests: Guests only
 
 Radio lists also support a secondary description.
 
-```
-security_level:
-  label: Access Level
-  type: radio
-  options:
-    all: [All, Guests and customers will be able to access this page.]
-    registered: [Registered only, Only logged in member will be able to access this page.]
-    guests: [Guests only, Only guest users will be able to access this page.]
-```
+    security_level:
+      label: Access Level
+      type: radio
+      options:
+        all: [All, Guests and customers will be able to access this page.]
+        registered: [Registered only, Only logged in member will be able to access this page.]
+        guests: [Guests only, Only guest users will be able to access this page.]
 
 #### Widget
 
 You can also use a special field type called a *Form Widget*.
 
-```
-blog_content:
-  type: Backend\FormWidgets\RichEditor
-  size: huge
-  options: [...]
-```
+    blog_content:
+      type: Backend\FormWidgets\RichEditor
+      size: huge
+      options: [...]
 
 The `type` field can refer directly to the class name of the widget. You can read more on the [Form Widgets](Widgets) article.
 
@@ -336,16 +301,14 @@ The `type` field can refer directly to the class name of the widget. You can rea
 
 The configuration is defined in YAML format, an example looks like this:
 
-```
-# ===================================
-#  List Behavior Config
-# ===================================
+    # ===================================
+    #  List Behavior Config
+    # ===================================
 
-title: Blog Posts
-list: @/plugins/acme/blog/models/post/columns.yaml
-model-class: Acme\Blog\Models\Post
-record-url: acme/blog/posts/update/:id
-```
+    title: Blog Posts
+    list: @/plugins/acme/blog/models/post/columns.yaml
+    model-class: Acme\Blog\Models\Post
+    record-url: acme/blog/posts/update/:id
 
 #### Required configuration
 
@@ -368,12 +331,10 @@ record-url: acme/blog/posts/update/:id
 
 To include a toolbar with the list add the following configuration:
 
-```
-toolbar:
-    buttons: list_toolbar
-    search:
-        prompt: No records found!
-```
+    toolbar:
+        buttons: list_toolbar
+        search:
+            prompt: No records found!
 
 The toolbar configuration allows:
 
@@ -389,15 +350,13 @@ The search configuration allows:
 
 List column definitions are used for creating a graphical user interface (GUI) representation of a collection of database Models. The GUI is displayed as a HTML table.
 
-```
-# ===================================
-#  List Column Definitions
-# ===================================
+    # ===================================
+    #  List Column Definitions
+    # ===================================
 
-columns:
-    name: Name
-    email: Email
-```
+    columns:
+        name: Name
+        email: Email
 
 #### Field options
 
@@ -421,42 +380,34 @@ The following column types are available:
 
 Displays a text column, aligned left
 
-```
-full_name:
-    label: Full Name
-    type: text
-```
+    full_name:
+        label: Full Name
+        type: text
 
 #### Number
 
 Displays a number column, aligned right
 
-```
-age:
-    label: Age
-    type: number
-```
+    age:
+        label: Age
+        type: number
 
 #### Date Time
 
 Displays the column value as a formatted date and time.
 
-```
-created_at:
-    label: Date
-    type: datetime
-```
+    created_at:
+        label: Date
+        type: datetime
 
 This displays as *Thu, Dec 25, 1975 2:15 PM*.
 
 You can also specify a custom format:
 
-```
-created_at:
-    label: Date
-    type: datetime
-    format: l jS \of F Y h:i:s A
-```
+    created_at:
+        label: Date
+        type: datetime
+        format: l jS \of F Y h:i:s A
 
 Displays as *Thursday 25th of December 1975 02:15:16 PM*
 
@@ -464,53 +415,43 @@ Displays as *Thursday 25th of December 1975 02:15:16 PM*
 
 Displays the column value as date format `M j, Y`
 
-```
-created_at:
-    label: Date
-    type: date
-```
+    created_at:
+        label: Date
+        type: date
 
 #### Time
 
 Displays the column value as time format `g:i A`
 
-```
-created_at:
-    label: Date
-    type: time
-```
+    created_at:
+        label: Date
+        type: time
 
 #### Time elapsed
 
 Displays a human readable time difference from the value to the current time. Eg: *10 minutes ago*
 
-```
-created_at:
-    label: Date
-    type: timesince
-```
+    created_at:
+        label: Date
+        type: timesince
 
 #### Custom Selects
 
 You can create a column using a custom select statement. Any valid SQL SELECT statement works here.
 
-```
-full_name:
-    label: Full Name
-    select: concat(first_name, ' ', last_name)
-```
+    full_name:
+        label: Full Name
+        select: concat(first_name, ' ', last_name)
 
 #### Relationships
 
 If you want to display related columns, you can provide a relationship option.
 The value of this option has to be the name of the Active Record relationshp on your model.
 
-```
-group:
-    label: Group
-    relation: groups
-    select: @name
-```
+    group:
+        label: Group
+        relation: groups
+        select: @name
 
 The **@name** value will be translated to a fully qualified reference (eg: table.name).
 
@@ -528,16 +469,14 @@ The **@name** value will be translated to a fully qualified reference (eg: table
 <a name="configuration"></a>
 ### Configuration
 
-```
-# ===================================
-#  Relation Behavior Config
-# ===================================
+    # ===================================
+    #  Relation Behavior Config
+    # ===================================
 
-comments:
-    label: Comment
-    list: @/plugins/acme/blog/models/comment/columns.yaml
-    form: @/plugins/acme/blog/models/comment/fields.yaml
-```
+    comments:
+        label: Comment
+        list: @/plugins/acme/blog/models/comment/columns.yaml
+        form: @/plugins/acme/blog/models/comment/fields.yaml
 
 #### Required configuration
 
@@ -554,16 +493,13 @@ comments:
 
 Relations can be managed on any page by first initializing the parent model.
 
-```php
-$this->initRelation($model);
-```
+    $this->initRelation($model);
+
 > **Note:** The Form behavior will automatically initialize the model on its create, update and preview actions.
 
 The relation manager can then be displayed for a specified relation definition.
 
-```php
-<?= $this->relationRender('comments') ?>
-```
+    <?= $this->relationRender('comments') ?>
 
 #### Relationship types
 
