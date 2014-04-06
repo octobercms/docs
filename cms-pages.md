@@ -107,26 +107,33 @@ The next example is more complicated. It shows how to load a blog post collectio
         {% endfor %}
     </ul>
 
-The PHP section can also define AJAX handlers which are described in the [AJAX Framework](ajax) article.
+The default variables and Twig extensions provided by October are described in the [Markup Guide](markup).
 
-<a name="this-variable" class="anchor" href="#this-variable"></a>
-### Accessing the page, layout and URL parameters in templates
+<a name="handling-forms" class="anchor" href="#handling-forms"></a>
+### Handling forms
 
-The `this` variable is always presented in October Twig environment. This variable contains an object with three fields: 
+You can handle standard forms with hander methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](ajax) article). Use the [form_open()](markup#standard-form) function to define a form that refers to an event handler. Example:
 
-- **page** - the current page object.
-- **layout** - the current layout object.
-- **param** - an array of URL parameters.
+    {{ form_open({ request: 'onHandleForm' }) }}
+        Please enter a string: <input type="text" name="value"/>
+        <input type="submit" value="Submit me!"/>
+    {{ form_close() }}
+    <p>Last submitted value: {{ lastValue }}</p>
 
-You can use the `this` variable to output the page title:
+The onHandleForm function can be defined in the page or layout [PHP section](themes#php-section) in the following way:
 
-    <title>{{ this.page.title }}</title>
+    function onHandleForm()
+    {
+        $this['lastValue'] = post('value');
+    }
 
-Example of accessing an URL parameter:
+The handler loads the value with the `post()` function and initializes the page `lastValue` attribute variable which is displayed below the form in the first example.
 
-    {% if this.param['post_id'] == 1 %}
-        This is the first post in the blog!
-    {% endif %}
+> **Note:** If a handler with a same name is defined in the page layout, page and a page [component](components) October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
+
+If you want to refer to a handler defined in a specific [component](components), use the component name or alias in the handler reference:
+
+    {{ form_open({ request: 'myComponent::onHandleForm' }) }}
 
 <a name="404-page" class="anchor" href="#404-page"></a>
 ## 404 page
