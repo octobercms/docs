@@ -4,25 +4,25 @@
 - [Registration file](#registration-file)
 - [Routing and initialization](#routing-initialization)
 - [Component registration](#component-registration)
-- [Custom markup tags](#custom-markup-tags)
+- [Extending Twig](#extending-twig)
 - [Widget registration](#widget-registration)
 - [Navigation and permissions](#navigation-permissions)
 - [Backend settings](#backend-settings)
-- [Version history](#version-history)
+- [Migrations and version history](#migrations-version-history)
 
-<a name="introduction"></a>
+Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
+
+- Define [components](components).
+- Define user permissions.
+- Add back-end pages, menu items, and forms.
+- Create database table structures and seed data.
+- Alter functionality of the core or other plugins.
+- Provide classes, back-end controllers, views, assets, and other files.
+
+<a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
 
-Plugins are the foundation for adding new features to the CMS by extending it. Some examples of what a plugin can do:
-
-1. Define components.
-2. Define user permissions.
-3. Add back-end pages, menu items, and forms.
-4. Create database table structures and seed data.
-5. Alter functionality of the core or other plugins.
-6. Provide classes, back-end controllers, views, assets, and other files.
-
-Plugins reside in the **/plugins** directory. An example of a plugin directory structure:
+Plugins reside in the **/plugins** subdirectory of the application directory. An example of a plugin directory structure:
 
     plugins/
       acme/              <=== Author name
@@ -33,20 +33,30 @@ Plugins reside in the **/plugins** directory. An example of a plugin directory s
           models/
           updates/
           ...
-          Plugin.php       <=== Plugin registration file
+          Plugin.php     <=== Plugin registration file
 
+Not all plugin directories are required. The only required file is the **Plugin.php** described below. If your plugin provides only a single [component](components), your plugin directory could be much simpler, like this:
 
+    plugins/
+      acme/              <=== Author name
+        blog/            <=== Plugin name
+          components/
+          Plugin.php     <=== Plugin registration file
 
+<a name="namespaces" class="anchor" href="#namespaces"></a>
+### Plugin namespaces
 
-<a name="registration-file"></a>
+Plugin namespaces are very important, especially if you are going to publish your plugins on the [October Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
+
+<a name="registration-file" class="anchor" href="#registration-file"></a>
 ## Registration file
 
-The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that defines a plugin's core functions and information. They can provide the following:
+The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
 
-1. Information about the plugin, its name, and author
-2. Registration methods for extending the CMS
+- Information about the plugin, its name, and author
+- Registration methods for extending the CMS
 
-An example Plugin registration file:
+Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is the `pluginDetails()`. An example Plugin registration file:
 
     namespace Acme\Blog;
 
@@ -70,31 +80,45 @@ An example Plugin registration file:
         }
     }
 
-#### Supported methods
+<a name="registration-methods" class="anchor" href="#registration-methods"></a>
+### Supported methods
 
-The following registration methods are supported:
+The following methods are supported in the plugin registration class:
 
-- **register()** - Register method, called when the plugin is first registered.
-- **boot()** - Boot method, called right before the request route.
-- **registerComponents()** - Registers any front-end components used by this plugin.
-- **registerMarkupTags()** - Registers additional markup tags that can be used in the CMS.
-- **registerNavigation()** - Registers back-end navigation items for this plugin.
-- **registerPermissions()** - Registers any back-end permissions used by this plugin.
-- **registerSettings()** - Registers any back-end configuration links used by this plugin.
-- **registerFormWidgets()** - Registers any back-end widgets used by this plugin.
-- **registerReportWidgets()** - Registers any report widgets, including the dashboard widgets.
+- **pluginDetails()** - returns the plugin information.
+- **register()** - register method, called when the plugin is first registered.
+- **boot()** - boot method, called right before the request route.
+- **registerComponents()** - registers any front-end components used by this plugin.
+- **registerMarkupTags()** - registers additional markup tags that can be used in the CMS.
+- **registerNavigation()** - registers back-end navigation items for this plugin.
+- **registerPermissions()** - registers any back-end permissions used by this plugin.
+- **registerSettings()** - registers any back-end configuration links used by this plugin.
+- **registerFormWidgets()** - registers any back-end widgets used by this plugin.
+- **registerReportWidgets()** - registers any report widgets, including the dashboard widgets.
 
+<a name="basic-plugin-information" class="anchor" href="#basic-plugin-information"></a>
+### Basic plugin information
 
+The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing 4 keys: 
 
-<a name="routing-initialization"></a>
+- **name** - the plugin name.
+- **description** - the plugin description.
+- **author** - the plugin author name.
+- **icon** - a name of the plugin icon. October uses [FontAwesome 3 icons](http://fortawesome.github.io/Font-Awesome/3.2.1/cheatsheet/). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+
+<a name="routing-initialization" class="anchor" href="#routing-initialization"></a>
 ## Routing and initialization
 
-Plugin registration files can contain two methods: `boot` and `register`.
-With these methods you can do anything you like, like register routes or attach to events.
+Plugin registration files can contain two methods `boot()` and `register()`. With these methods you can do anything you like, like register routes or attach handlers to events.
 
-The `register` method is called immediately when the plugin is registered.
-The `boot` method is called right before a request is routed.
-So if your actions rely on another plugin, you should use the boot method.
+The `register()` method is called immediately when the plugin is registered. The `boot()` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method. For example, inside the `boot()` method you can extend models:
+
+    public function boot()
+    {
+        User::extend(function($model) {
+            $model->hasOne['author'] = ['Acme\Blog\Models\Author'];
+        });
+    }
 
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [Laravel Routing documentation](http://laravel.com/docs/routing). For example:
 
@@ -104,15 +128,10 @@ Plugins can also supply a file named **routes.php** that contain custom routing 
 
     });
 
-
-
-
-<a name="component-registration"></a>
+<a name="component-registration" class="anchor" href="#component-registration"></a>
 ## Component registration
 
-Components must be registered in the [Plugin registration file](plugins).
-This tells the CMS about the Component and provides a *short name* for using it.
-An example of registering a component:
+[Components](components) must be registered in the [Plugin registration file](#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
 
     public function registerComponents()
     {
@@ -121,19 +140,12 @@ An example of registering a component:
         ];
     }
 
-This will register the Todo component class with the default alias name *demoTodo*.
+This will register the Todo component class with the default alias name **demoTodo**. More information on building components can be found at the [Building Components](components) article.
 
-More information on building components can be found at the [Component Development article](http://octobercms.com/docs/plugin/components).
+<a name="extending-twig" class="anchor" href="#extending-twig"></a>
+## Extending Twig
 
-
-
-<a name="custom-markup-tags"></a>
-## Custom markup tags
-
-Additional markup tags can be registered in the CMS by plugins. An example of registering a custom markup tag:
-
-* A **filter** will manipulate a value with a specified function. Example: `{{ 'value'|uppercase }}`
-* A **function** can be used by itself and takes some parameters. Example: `{{ form_open('value') }}`
+Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags()` method of the plugin registration class. The next example registers two Twig filters and two functions.
 
     public function registerMarkupTags()
     {
@@ -160,16 +172,10 @@ Additional markup tags can be registered in the CMS by plugins. An example of re
         return strtoupper($text);
     }
 
-
-
-<a name="widget-registration"></a>
+<a name="widget-registration" class="anchor" href="#widget-registration"></a>
 ## Widget registration
 
-#### Form Widgets
-
-Plugins can register form widgets by overriding the **registerFormWidgets()** method in the plugin registration class.
-The method should return an array containing the widget classes in the keys and widget name and context in the values.
-Example:
+Plugins can register [form widgets](../backend/widgets#form-widgets) by overriding the `registerFormWidgets()` method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget name and context in the values. Example:
 
     public function registerFormWidgets()
     {
@@ -181,9 +187,7 @@ Example:
         ];
     }
 
-#### Report Widgets
-
-Plugins can register dashboard widgets by overriding the **registerReportWidgets()** method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget name and context in the values. Example:
+Plugins can register [report widgets](../backend/widgets#report-widgets) by overriding the `registerReportWidgets()` method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget name and context in the values. Example:
 
     public function registerReportWidgets()
     {
@@ -199,22 +203,12 @@ Plugins can register dashboard widgets by overriding the **registerReportWidgets
         ];
     }
 
-The **name** element defines the widget name for the Add Widget popup window.
-The **context** element defines the context where the widget could be used.
-October's report widget system allows to host the report container on any page, and the container context name is unique.
-The widget container on the Dashboard page uses the **dashboard** context.
+The **name** element defines the widget name for the Add Widget popup window. The **context** element defines the context where the widget could be used. October's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the **dashboard** context.
 
-
-
-<a name="navigation-permissions"></a>
+<a name="navigation-permissions" class="anchor" href="#navigation-permissions"></a>
 ## Navigation and permissions
 
-Back-end navigation and permission items are registered in the system by plugins, contained in the Plugin Information File. 
-This section shows you how to add menu and permission items to the back-end navigation area.
-
-#### Adding to the backend menu
-
-An example of registering a navigation menu item:
+Plugins can extend the back-end navigation menus and permissions by overriding methods of the [Plugin registration class](#registration-file). This section shows you how to add menu items and permissions to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
     public function registerNavigation()
     {
@@ -245,68 +239,53 @@ An example of registering a navigation menu item:
         ];
     }
 
-#### Creating new permissions
-
-An example of registering a backend permission item:
+The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list.
 
     public function registerPermissions()
     {
         return [
-            'backend.access_dashboard' => ['label' => 'View the dashboard'],
-            'backend.manage_users'     => ['label' => 'Manage other administrators']
+            'blog.access_posts' => ['label' => 'Manage the blog posts'],
+            'blog.access_categories'     => ['label' => 'Manage the blog categories']
         ];
     }
 
-
-
-<a name="backend-settings"></a>
+<a name="backend-settings" class="anchor" href="#backend-settings"></a>
 ## Backend settings
 
-The section shows you how to add linkable items to the System Settings page.
+THe System / Settings page contains a list of links to the configuration pages. The list of links can be extended by plugins by overriding the `registerSettings()` method of the [Plugin registration class](#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
 
-#### Link to a page URL
+    public function registerSettings()
+    {
+        return [
+            'location' => [
+                'label'       => 'Locations',
+                'description' => 'Manage available user countries and states.',
+                'category'    => 'Users',
+                'icon'        => 'icon-globe',
+                'url'         => Backend::url('october/user/locations'),
+                'order'       => 100
+            ]
+        ];
+    }
 
-```php
-public function registerSettings()
-{
-    return [
-        'location' => [
-            'label'       => 'Locations',
-            'description' => 'Manage available user countries and states.',
-            'category'    => 'Users',
-            'icon'        => 'icon-globe',
-            'url'         => Backend::url('october/user/locations'),
-            'order'       => 100
-        ]
-    ];
-}
-```
+The following example creates a link to a settings model. Settings models is a part of the settings API which is described in the [Settings & Config](settings) article.
 
-#### Link to a Settings model
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label'       => 'User Settings',
+                'description' => 'Manage user based settings.',
+                'category'    => 'Users',
+                'icon'        => 'icon-cog',
+                'class'       => 'October\User\Models\Settings',
+                'order'       => 100
+            ]
+        ];
+    }
 
-```php
-public function registerSettings()
-{
-    return [
-        'settings' => [
-            'label'       => 'User Settings',
-            'description' => 'Manage user based settings.',
-            'category'    => 'Users',
-            'icon'        => 'icon-cog',
-            'class'       => 'October\User\Models\Settings',
-            'order'       => 100
-        ]
-    ];
-}
-```
-
-More information on Settings models can be found at the [Plugin Settings & Configuration article](http://octobercms.com/docs/plugin/settings).
-
-
-
-
-<a name="version-history"></a>
-## Version history
+<a name="migrations-version-history" class="anchor" href="#migrations-version-history"></a>
+## Migrations and version history
 
 Plugins keep a change log inside the **/updates** directory to maintain version information and database structure. An example of an updates directory structure:
 
@@ -316,11 +295,10 @@ Plugins keep a change log inside the **/updates** directory to maintain version 
           updates/                    <=== Updates directory
             version.yaml              <=== Plugin version file
             create_tables.php         <=== Database scripts
-            seed_the_database.php     <==^
-            create_another_table.php  <==^
+            seed_the_database.php     <=== Migration file
+            create_another_table.php  <=== Migration file
 
-The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order.
-An example Plugin version file:
+The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. An example Plugin version file:
 
     1.0.1:
         - First version
