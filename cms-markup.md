@@ -130,7 +130,7 @@ The first parameter of the `form_open()` function accepts the option object. The
 * **model** - a model object for the form model binding.
 
 <a name="ajax-form" class="anchor" href="#ajax-form"></a>
-### Opening an AJAX form
+### Opening the AJAX form
 
 The next example shows several examples of opening a AJAX form. The first parameter of the `form_ajax()` function is the AJAX handler name. The handler can be defined in the layout or page PHP [section](themes#php-section) or in a component. You may find more information about AJAX in the [AJAX Framework](ajax) article.
 
