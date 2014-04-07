@@ -52,9 +52,9 @@ When this [component is attached to a page or layout](../cms/components), the cl
     [blogPosts]
     ==
 
-you would be able to access its `posts()` method through the `blogPosts` variable. Note that Twig supports the property notation for methods, so that you don't need to use brackets.
+You would be able to access its `posts()` method through the `blogPosts` variable. Note that Twig supports the property notation for methods, so that you don't need to use brackets.
 
-    {% foreach post in blog.posts %}
+    {% foreach post in blogPosts.posts %}
         {{ post }}
     {% endforeach %}
 
