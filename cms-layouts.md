@@ -2,6 +2,7 @@
 
 - [Introduction](#introduction)
 - [Placeholders](#placeholders)
+- [Dynamic layouts](#dynamic-layouts)
 
 Layouts define the page scaffold, that is everything that repeats on a page, such as a header and footer. Layouts often contain the HTML tag as well as the HEAD, TITLE and BODY tags.
 
@@ -98,3 +99,17 @@ In a layout template you can check if a placeholder content exists by using the 
         <!-- Markup for a page without a sidebar -->
         {% page %}
     {% endif %}
+
+<a name="dynamic-layouts" class="anchor" href="#dynamic-layouts"></a>
+## Dynamic layouts
+
+Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details. Inside the layout's [PHP section](themes#php-section) you can define the following functions for handling the page execution life cycle: `onStart()`, `onBeforePageStart()` and `onEnd()`. The `onStart()` function is executed in the beginning of the page processing. The `onBeforePageStart()` function is executed after the layout [components](components) ran, but before the page's `onStart()` function is executed. The `onEnd()` function is executed after the page is rendered. The sequence the handlers are executed is following:
+
+* Layout `onStart()` function.
+* Layout components `onRun()` method.
+* Layout `onBeforePageStart()` function.
+* Page `onStart()` function.
+* Page components `onRun()` method.
+* Page `onEnd()` function.
+* Layout `onEnd()` function.
+

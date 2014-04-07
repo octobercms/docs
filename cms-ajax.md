@@ -4,6 +4,7 @@
 - [Ajax handlers](#ajax-handlers)
 - [Data attributes API](#data-attributes)
 - [JavaScript API](#javascript-api)
+- [Calling AJAX handlers defined in components](#components-ajax-handlers)
 - [Global AJAX events](#global-events)
 - [Returning data from AJAX handlers](#returning-data-from-handlers)
 - [Redirections in AJAX handlers](#redirections-in-handlers)
@@ -188,6 +189,13 @@ Run `onCalculate` handler and if successful, run some custom code after the defa
             //... do something after parent success() is finished ...
         });
     }})
+
+<a name="components-ajax-handlers" class="anchor" href="#components-ajax-handlers"></a>
+## Calling AJAX handlers defined in components
+
+If you need to issue a request to an AJAX handler defined in a [component](components) attached to a page or layout, you should prefix the handler name with the component short name or [alias](components#aliases). The next example demonstrates how to invoke the **onCalculate** AJAX handler defined in the imaginary **calculator** component:
+
+    <form data-request="calculator::onCalculate" data-request-update="calcresult: '#result'">
 
 <a name="global-events" class="anchor" href="#global-events"></a>
 ## Global AJAX events

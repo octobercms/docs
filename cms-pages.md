@@ -72,7 +72,7 @@ Inside the [Twig section](themes#twig-section) of a page template you can use an
 <a name="page-cycle-handlers" class="anchor" href="#page-cycle-handlers"></a>
 ### Page execution cycle handlers
 
-There are two special functions that could be defined in the PHP section: `onStart` and `onEnd`. The onStart function is executed in the beginning of the page execution. The onEnd function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
+There are two special functions that could be defined in the PHP section of pages and layouts: `onStart()` and `onEnd()`. The `onStart()` function is executed in the beginning of the page execution. The `onEnd()` function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
 
     url = "/"
     ==
@@ -84,7 +84,6 @@ There are two special functions that could be defined in the PHP section: `onSta
     ?>
     ==
     <h3>{{ hello }}</h3>
-
 
 The next example is more complicated. It shows how to load a blog post collection from the database and display on the page (the Acme\Blog plugin is imaginary).
 
