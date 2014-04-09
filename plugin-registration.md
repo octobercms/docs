@@ -215,23 +215,23 @@ Plugins can extend the back-end navigation menus and permissions by overriding m
         return [
             'blog' => [
                 'label'       => 'Blog',
-                'url'         => Backend::url('october/blog/posts'),
+                'url'         => Backend::url('acme/blog/posts'),
                 'icon'        => 'icon-pencil',
-                'permissions' => ['blog:*'],
+                'permissions' => ['acme.blog.*'],
                 'order'       => 500,
 
                 'subMenu' => [
                     'posts' => [
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
-                        'url'         => Backend::url('october/blog/posts'),
-                        'permissions' => ['blog:access_posts'],
+                        'url'         => Backend::url('acme/blog/posts'),
+                        'permissions' => ['acme.blog.access_posts'],
                     ],
                     'categories' => [
                         'label'       => 'Categories',
                         'icon'        => 'icon-copy',
-                        'url'         => Backend::url('october/blog/categories'),
-                        'permissions' => ['blog:access_categories'],
+                        'url'         => Backend::url('acme/blog/categories'),
+                        'permissions' => ['acme.blog.access_categories']
                     ],
                 ]
 
@@ -239,13 +239,15 @@ Plugins can extend the back-end navigation menus and permissions by overriding m
         ];
     }
 
-The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list.
+When you register the back-end navigation you can use localization strings for the `label` values. The localization is described in the [plugin localization](localization) article.
+
+The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the [user access](../backend/users) to pages or features.
 
     public function registerPermissions()
     {
         return [
-            'blog.access_posts' => ['label' => 'Manage the blog posts'],
-            'blog.access_categories'     => ['label' => 'Manage the blog categories']
+            'acme.blog.access_posts' => ['label' => 'Manage the blog posts'],
+            'acme.blog.access_categories'     => ['label' => 'Manage the blog categories']
         ];
     }
 

@@ -5,14 +5,12 @@
 - [Pie chart](#pie-chart)
 - [Bar chart](#bar-chart)
 
+The back-end user interface includes a number of HTML controls that you can use on your pages.
 
-
-<a name="scoreboards"></a>
+<a name="scoreboards" class="anchor" href="#scoreboards"></a>
 ## Scoreboards
 
-The scoreboard control is usually displayed above back-end lists and displays some summary or the most important data.
-The control could contain any [charts and indicators](backend-reports).
-Example of a scoreboard control markup displayed above a list widget:
+The scoreboard control is usually displayed above back-end lists and displays some summary or the most important data. The control could contain any charts and indicators (see below). Example of a scoreboard control markup displayed above a list widget:
 
     <div class="scoreboard">
         <div data-control="toolbar">
@@ -46,12 +44,10 @@ Example of a scoreboard control markup displayed above a list widget:
 
 Note that you should use the **scoreboard-item** class for your scoreboard elements.
 
-
-
-<a name="indicators"></a>
+<a name="indicators" class="anchor" href="#indicators"></a>
 ## Indicators
 
-Example of indicators with with titles and values:
+Indicators are simple reporting element that have a title, a value and a description. You can use the `positive` and `negative` classes on the value element. [Font Awesome](http://fortawesome.github.io/Font-Awesome/3.2.1/cheatsheet/) icon classes allow to add an icon before the value.
 
     <div class="scoreboard-item title-value">
         <h4>Weight</h4>
@@ -85,11 +81,9 @@ Example of indicators with with titles and values:
 
 ![image](https://github.com/octobercms/docs/blob/master/images/name-title-indicators.png?raw=true)
 
-Note that the example is given in the context of a scoreboard area. If you use the indicators in a [report widget](extensibility-dashboard-widgets.md) partial, the class **scoreboard-item** shouldn't be used.
+> **Note:** the example is given in the context of a scoreboard area. If you use the indicators in a [report widget](widgets#report-widgets) partial, the class **scoreboard-item** shouldn't be used.
 
-
-
-<a name="pie-chart"></a>
+<a name="pie-chart" class="anchor" href="#pie-chart"></a>
 ## Pie chart
 
 The pie chart outputs information as a circle diagram, with optional label in the center. Example markup:
@@ -108,14 +102,10 @@ The pie chart outputs information as a circle diagram, with optional label in th
 
 ![image](https://github.com/octobercms/docs/blob/master/images/traffic-sources.png?raw=true)
 
-The **centered** and **wrap-legend** classes are optional. They manage the chart and legend layout.
-
-
-
-<a name="bar-chart"></a>
+<a name="bar-chart" class="anchor" href="#bar-chart"></a>
 ## Bar chart
 
-Example bar chart markup:
+The next example shows a bar chart markup. The **wrap-legend** class is optional, it manages the legend layout. The **data-height** and **data-full-width** attributes are optional as well.
 
     <div 
         class="control-chart wrap-legend" 
@@ -128,7 +118,5 @@ Example bar chart markup:
             <li>Label 3 <span>100</span></li>
         </ul>
     </div>
-
-The **wrap-legend** class is optional, it manages the legend layout. The **data-height** and **data-full-width** attributes are optional as well.
 
 ![image](https://github.com/octobercms/docs/blob/master/images/bar-chart.png?raw=true)

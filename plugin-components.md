@@ -1,6 +1,7 @@
 # Component Development
 
-- [Component properties](#properties)
+- [Component class definition](#component-class-definition)
+- [Component properties](#component-properties)
 - [Handling the page execution cycle](#page-cycle)
 - [AJAX handlers](#ajax-handlers)
 - [Default markup](#default-markup)
