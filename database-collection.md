@@ -1,26 +1,20 @@
 # Database Collection
 
-- [Introduction](#introduction)
 - [Data feed](#data-feed)
 
+A Database Collection represents an array of results, typically of populated Models. October extends [Eloquent collections](http://laravel.com/docs/eloquent#collections) with new classes described in this article.
 
-
-<a name="introduction"></a>
-## Introduction
-
-A Database Collection represents an array of results, typically of populated Models.
-
-<a name="data-feed"></a>
+<a name="data-feed" class="anchor" href="#data-feed"></a>
 ## Data feed
 
-A data feed allows you to combine multiple model classes into a single Collection.
-This can be useful for creating feeds and streams of data while supporting the use of pagination.
-
-It works by adding model objects in a prepared state, before the `get()` method is called, which are then combined to make a collection that behaves the same as a regular dataset.
+A data feed allows you to combine multiple model classes into a single collection. This can be useful for creating feeds and streams of data while supporting the use of pagination. It works by adding model objects in a prepared state, before the `get()` method is called, which are then combined to make a collection that behaves the same as a regular dataset.
 
 The `DataFeed` class mimics a regular Active Record model and supports `limit()` and `paginate()` methods.
 
-#### Usage instructions
+<a name="data-feed-usage" class="anchor" href="#data-feed-usage"></a>
+### Usage
+
+The next example will combine the User, Post and Comment models in to a single collection and returns the first 10 records.
 
     $feed = new October\Rain\Database\DataFeed;
     $feed->add('user', new User);
@@ -33,12 +27,10 @@ The `DataFeed` class mimics a regular Active Record model and supports `limit()`
 
     $results = $feed->limit(10)->get();
 
-This example will combine the User, Post and Comment models in to a single collection and returns the first 10 records.
+<a name="data-feed-processing" class="anchor" href="#data-feed-processing"></a>
+### Processing results
 
-#### Processing results
-
-The `get()` method will return a `Collection` object that contains the results.
-Records can be differentiated by using the `tag_name` attribute which was set as the first parameter when the model was added.
+The `get()` method will return a `Collection` object that contains the results. Records can be differentiated by using the `tag_name` attribute which was set as the first parameter when the model was added.
 
     foreach ($results as $result) {
 
@@ -53,10 +45,10 @@ Records can be differentiated by using the `tag_name` attribute which was set as
 
     }
 
-#### Ordering results
+<a name="data-feed-ordering" class="anchor" href="#data-feed-ordering"></a>
+### Ordering results
 
-Results can be ordered by a single database column, either shared default used by all datasets or individually specified with the `add()` method.
-The direction of results must also be shared.
+Results can be ordered by a single database column, either shared default used by all datasets or individually specified with the `add()` method. The direction of results must also be shared.
 
     // Ordered by updated_at if it exists, otherwise created_at
     $feed->add('user', new User, 'ifnull(updated_at, created_at)');
@@ -69,4 +61,3 @@ The direction of results must also be shared.
 
     // Specifies the default column and the direction
     $feed->orderBy('name', 'asc')->get();
-
