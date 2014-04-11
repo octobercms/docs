@@ -5,7 +5,7 @@
 - [Template structure](#structure)
 
 
-Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the top-level description of October themes. You fill find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of October themes. You fill find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
@@ -16,7 +16,7 @@ Themes are directories that reside in the **/themes** directory by default. Them
 - [Partials](partials) - contain reusable chunks of HTML markup.
 - [Layouts](layouts) - define the page scaffold.
 - [Content files](content) - text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
-- **Asset files** - are resource files like images, CSS and JavaScriptf files.
+- **Asset files** - are resource files like images, CSS and JavaScript files.
 
 Below you can see an example theme directory structure. Each October theme is represented with a separate directory. The example displays the "website" theme directory.
 
@@ -125,7 +125,7 @@ Example namespace reference:
     layout = "default"
     ==
     <?
-    use Ame\Blog\Classes\Post;
+    use Acme\Blog\Classes\Post;
 
     function onStart()
     {

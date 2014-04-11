@@ -3,7 +3,7 @@
 - [Introduction](#introduction)
 - [Relationships](#relationships)
 - [Attribute modifiers](#attribute-modifiers)
-- [Joined eager Loading](#joined-eager-loading)
+- [Joined eager loading](#joined-eager-loading)
 - [Model events](#model-events)
 - [Model validation](#model-validation)
 - [File attachments](#file-attachments)

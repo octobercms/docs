@@ -6,7 +6,7 @@
 
 In October you have two different approaches to working with databases:
 
-* Using direct SQL queries using the `Db class
+* Using direct SQL queries using the `Db` class
 * Using Active Record by extending the `Model` class
 
 Direct SQL will perform faster and should be used for simple tasks. Active Record is an approach used by the popular framework, Ruby On Rails. It allows an easy interface for performing repetitive tasks like creating, reading, updating and deleting database records. You can learn more about the [Active record pattern on Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern).
