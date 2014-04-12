@@ -30,7 +30,7 @@ The configuration file referred in the `$formConfig` property is defined in YAML
 
     name: Blog Category
     form: @/plugins/acme/blog/models/post/fields.yaml
-    model-class: Acme\Blog\Post
+    modelClass: Acme\Blog\Post
 
     create:
         title: New Blog Post
@@ -45,11 +45,11 @@ The following fields are required in the form configuration file:
 
 * **name** - a name for the object being managed by this form.
 * **form** - a reference to form field definition file, see [form fields](#form-fields).
-* **model-class** - a model class name to load and save the form data.
+* **modelClass** - a model class name to load and save the form data.
 
 The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#form-create-page), [Update](#form-update-page) or [Preview](#form-preview-page) pages.
 
-* **default-redirect** - redirection page to use when none is defined.
+* **defaultRedirect** - redirection page to use when none is defined.
 * **create** - a configuration for the Create page.
 * **update** - a configuration for the Update page.
 * **preview** - a configuration for the Preview page.
@@ -62,14 +62,14 @@ To support the Create page add the following configuration to the YAML file:
     create:
         title: New Blog Post
         redirect: acme/blog/posts/update/:id
-        redirect-close: acme/blog/posts
+        redirectClose: acme/blog/posts
         flash-save: Post has been created!
 
 The following configuration options are supported for the Create page:
 
 * **title** - a page title, can refer to a [localization string](../plugin/localization).
 * **redirect** - redirection page when record is saved.
-* **redirect-close** - redirection page when record is saved and the **close** post variable is sent with the request.
+* **redirectClose** - redirection page when record is saved and the **close** post variable is sent with the request.
 * **flash-save** - flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
 
 <a name="form-update-page" class="anchor" href="#form-update-page"></a>
@@ -87,7 +87,7 @@ The following configuration options are supported for the Update page:
 
 * **title** - a page title, can refer to a [localization string](../plugin/localization).
 * **redirect** - redirection page when record is saved.
-* **redirect-close** - redirection page when record is saved and **close** post variable is sent with the request.
+* **redirectClose** - redirection page when record is saved and **close** post variable is sent with the request.
 * **flash-save** - flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
 * **flash-delete** - flash message to display when record is deleted, can refer to a [localization string](../plugin/localization).
 

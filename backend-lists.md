@@ -30,21 +30,21 @@ The configuration file referred in the `$listConfig` property is defined in YAML
 
     title: Blog Posts
     list: @/plugins/acme/blog/models/post/columns.yaml
-    model-class: Acme\Blog\Models\Post
-    record-url: acme/blog/posts/update/:id
+    modelClass: Acme\Blog\Models\Post
+    recordUrl: acme/blog/posts/update/:id
 
 The following fields are required in the list configuration file:
 
 * **title** - a title for this list.
 * **list** - a reference to list column definition file, see [list columns](#list-coliumns).
-* **model-class** - a model class name to load the list data.
+* **modelClass** - a model class name to load the list data.
 
 The configuration options listed below are optional. 
 
-* **record-url** - link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
-* **no-records-message** - a message to display when no records are found, can refer to a [localization string](../plugin/localization).
-* **records-per-page** - how many records to display per page. Default: 20.
-* **show-checkboxes** - displays checkboxes next to each record. Default: false.
+* **recordUrl** - link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
+* **noRecordsMessage** - a message to display when no records are found, can refer to a [localization string](../plugin/localization).
+* **recordsPerPage** - how many records to display per page. Default: 20.
+* **showCheckboxes** - displays checkboxes next to each record. Default: false.
 * **show-setup** - displays the list column set up button. Default: true.
 * **show-pagination** - displays page numbers for multiple records. Default: true.
 * **toolbar** - reference to a Toolbar Widget configuration file, or an array with configuration (see below).
