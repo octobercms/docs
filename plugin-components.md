@@ -6,6 +6,7 @@
 - [AJAX handlers](#ajax-handlers)
 - [Default markup](#default-markup)
 - [Component partials](#component-partials)
+- [Injecting page assets with components](#component-assets)
 
 Components files and directories reside in the **/components** subdirectory of a plugin directory. Each component has a PHP file defining the component class and an optional component partials directory. The component partials directory name matches the component class name written in lowercase. An example of a component directory structure:
 
@@ -192,3 +193,13 @@ The ID is unique each time the component is displayed.
 
     <!-- ID: demoTodo527c532ec4c33 -->
     {% component 'demoTodo' %}
+
+<a name="component-assets" class="anchor" href="#component-assets"></a>
+## Injecting page assets with components
+
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss()` and `addJs()` methods to add assets to the CMS controllers. It could be done in the component's `onRun()` method. Please read more details about [injecting assets in the Pages article](../cms/page#injecting-assets). Example:
+
+    public function onRun()
+    {
+        $this->controller->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
+    }

@@ -4,6 +4,7 @@
 - [Dynamic pages](#dynamic-pages)
 - [404 page](#404-page)
 - [Error page](#error-page)
+- [Injecting page assets programmatically](#injecting-assets)
 
 All websites have pages. In October pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages accordingly to the page function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages but the [PHP section](themes#php-section) is optional. Below you can see the simplest home page example.
 
@@ -143,3 +144,27 @@ If the theme contains a page with the URL `/404` it is displayed when the system
 ## Error page
 
 By default any errors will be shown with a detailed error page containing the file contents, line number and stack trace where the error occurred. You can display a friendly error page by setting the configuration value `customErrorPage` to **true** in the `app/config/cms.php` script and creating a page with the URL `/error`.
+
+<a name="injecting-assets" class="anchor" href="#injecting-assets"></a>
+## Injecting page assets programmatically
+
+If needed, you can inject assets (CSS and JavaScript files) to pages with the controller's `addCss()` and `addJs()` methods. It could be done in the `onStart()` function defined in the [PHP section](themes#php-section) of a page or [layout](layout) template. Example:
+
+    function onStart()
+    {
+        $this->controller->addCss('assets/css/hello.css');
+        $this->controller->addJs('assets/js/app.js');
+    }
+
+If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme. 
+
+In order to output the injected assets on pages or [layouts](layout) use the `{% styles %}` and ` {% scripts %}` tags. Example:
+
+    <head>
+        ...
+        {% styles %}
+    </head>
+    <body>
+        ...
+        {% scripts %}
+    </body>
