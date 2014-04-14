@@ -311,3 +311,5 @@ The **version.yaml** file, called the *Plugin version file*, contains the versio
     1.0.4:
         - Creates another table for this new feature
         - create_another_table.php
+
+> **Note:** To apply updates, log out of the back-end and sign in again. The plugin version history is applied when an administrator signs in to the back-end.
