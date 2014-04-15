@@ -1,7 +1,7 @@
 # Command Line Interface
 
 - [Console installation](#console-install)
-- [Utility commands](#utility)
+- [Plugin development](#utility)
 - [Scaffolding](#scaffolding)
 - [Console development](#development)
 - [Further reading](#further-reading)
@@ -18,40 +18,70 @@ Download the application source code by using the `create-project` in your termi
 
     composer create-project october/october --prefer-dist
 
-Next, run the CLI installation wizard and follow the prompts:
+Open the file **app/config/app.php** and set the following array values:
 
-    php artisan october:install
+    'url' => 'http://yourwebsite.com', // Your website address
 
+    'key' => 'UNIQUE_ENCRYPTION_KEY',  // Pick a unique encryption key
+
+Open the file **app/config/cms.php** and set the following array values:
+
+    'activeTheme' => 'demo',           // Enter the active theme to use
+
+    'backendUri' => '/backend',        // Optional, customise your backend URL
+
+Open the file **app/config/database.php** and set the database configuration values.
+
+Next, run the CLI update process, this will build the database tables:
+
+    php artisan october:up
+
+
+
+<a name="console-install"></a>
+## Console updating
+
+#### Updating October via Composer
+
+This will connect to the repository and pull updates for the core and any other composer installed packages.
+
+    composer update
+
+#### Updating October via the Update Gateway
+
+
+This will connect to the October gateway and update the core and all installed plugins.
+
+    php artisan october:update
 
 
 
 <a name="utility"></a>
-## Utility commands
+## Plugin development
 
-#### Updating October
+#### Updating all plugins
 
-This will update October's core and any installed plugins.
+This will update all installed plugins.
 
-    php artisan october:update
+    php artisan october:up
 
 #### Installing a plugin
 
-This will download and install the plugin called `AuthorName.PluginName`
+This will download and install the plugin called `AuthorName.PluginName`.
 
-    php artisan plugin:add AuthorName.PluginName
+    php artisan plugin:install AuthorName.PluginName
 
 #### Removing a plugin
 
 This will destroy the plugin's database entries and delete the plugin files from the filesystem.
 
-    php artisan plugin:remove AuthorName.PluginName
+    php artisan plugin:uninstall AuthorName.PluginName
 
+#### Update a single plugin
 
-#### Recreating a plugin
+Useful for development, this will update a single plugin.
 
-Useful for development, this will pack down the Plugin database and rebuild it
-
-    php artisan plugin:rebuild AuthorName.PluginName
+    php artisan plugin:update AuthorName.PluginName
 
 
 

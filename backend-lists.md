@@ -44,11 +44,14 @@ The configuration options listed below are optional.
 * **recordUrl** - link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
 * **noRecordsMessage** - a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 * **recordsPerPage** - how many records to display per page. Default: 20.
-* **showCheckboxes** - displays checkboxes next to each record. Default: false.
-* **show-setup** - displays the list column set up button. Default: true.
-* **show-pagination** - displays page numbers for multiple records. Default: true.
 * **toolbar** - reference to a Toolbar Widget configuration file, or an array with configuration (see below).
-* **default-sort** - sets a default sorting column and direction when user preference is not defined.
+* **showSorting** - displays the sorting link on each column. Default: true
+* **defaultSort** - sets a default sorting column and direction when user preference is not defined.
+* **showCheckboxes** - displays checkboxes next to each record. Default: false.
+* **showSetup** - displays the list column set up button. Default: true.
+* **showPagination** - displays page numbers for multiple records. Default: true.
+* **showTree** - displays a tree hierarchy for parent/child records. Default: false.
+* **treeExpanded** - if tree nodes should be expanded by default. Default: true.
 
 <a name="adding-toolbar" class="anchor" href="#adding-toolbar"></a>
 ### Adding a toolbar
