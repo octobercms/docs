@@ -64,7 +64,7 @@ AJAX handlers are PHP functions that can be defined in the page or layout [PHP s
     }
     ==
 
-> **Note:** if two handlers with a same name defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
+> **Note:** If two handlers with a same name defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
 
 <a name="data-attributes" class="anchor" href="#data-attributes"></a>
 ## Data attributes API

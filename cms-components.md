@@ -26,7 +26,7 @@ When you refer a component, it automatically creates a page variable that matche
 
     {% component 'demoTodo' %}
 
-> **Note:** if two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
+> **Note:** If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
 
 <a name="aliases" class="anchor" href="#aliases"></a>
 ## Components aliases

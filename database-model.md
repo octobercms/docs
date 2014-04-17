@@ -63,7 +63,7 @@ October models allow to define [relationships](http://laravel.com/docs/eloquent#
 - **$attachMany** - multiple file attachments. Optional: public.
 - **$hasManyThrough** - has many related models through another model. Optional: primaryKey, throughKey. Required: through.
 
-> **Note:** the key arguments are in the context of the defining model. The defining [primary] model is identified by a `primaryKey` and the foreign model is identified by a `foreignKey`.
+> **Note:** The key arguments are in the context of the defining model. The defining [primary] model is identified by a `primaryKey` and the foreign model is identified by a `foreignKey`.
 
 An example of defining a relationship:
 
@@ -170,7 +170,7 @@ October models use Laravel's built-in [Validator class](http://laravel.com/docs/
         ];
     }
 
-> **Note**: you're free to use the [array syntax](http://laravel.com/docs/validation#basic-usage) for validation rules as well.
+> **Note**: You're free to use the [array syntax](http://laravel.com/docs/validation#basic-usage) for validation rules as well.
 
 Models validate themselves automatically when the `save()` method is called.
 
@@ -189,7 +189,7 @@ Models validate themselves automatically when the `save()` method is called.
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors()` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
-> **Note:** the Model leverages Laravel's MessagesBag object which has a [simple and elegant method](http://laravel.com/docs/validation#working-with-error-messages) of formatting errors.
+> **Note:** The Model leverages Laravel's MessagesBag object which has a [simple and elegant method](http://laravel.com/docs/validation#working-with-error-messages) of formatting errors.
 
 <a name="overriding-validation" class="anchor" href="#overriding-validation"></a>
 ### Overriding validation

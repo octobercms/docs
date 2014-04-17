@@ -14,15 +14,13 @@ Relation behavior depends on [relation definitions](#relation-definitions). In o
     {
         public $implement = [
             'Backend.Behaviors.FormController',
-            'Backend.Behaviors.ListController',
             'Backend.Behaviors.RelationController',
         ];
 
         public $formConfig = 'config_form.yaml';
-        public $listConfig = 'config_list.yaml';
         public $relationConfig = 'config_relation.yaml';
 
-> **Note:** very often the relation behavior is used together with the [form behavior](form) and [list behavior](list).
+> **Note:** Very often the relation behavior is used together with the [form behavior](form).
 
 <a name="configuring-relation" class="anchor" href="#configuring-relation"></a>
 ## Configuring the relation behavior
@@ -57,9 +55,9 @@ Relations can be managed on any page by first initializing the parent model. Not
 
 The relation manager can then be displayed for a specified relation definition. For example, if you want to display the relation manager on the [Preview](forms#form-preview-view) page, the **preview.htm** view contents could look like this:
 
-        <?= $this->formRenderPreview() ?>
+    <?= $this->formRenderPreview() ?>
 
-        <?= $this->relationRender('packages') ?>
+    <?= $this->relationRender('packages') ?>
 
 <a name="relationship-types" class="anchor" href="#relationship-types"></a>
 ## Relationship types

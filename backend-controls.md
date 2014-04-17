@@ -81,7 +81,7 @@ Indicators are simple reporting element that have a title, a value and a descrip
 
 ![image](https://github.com/octobercms/docs/blob/master/images/name-title-indicators.png?raw=true)
 
-> **Note:** the example is given in the context of a scoreboard area. If you use the indicators in a [report widget](widgets#report-widgets) partial, the class **scoreboard-item** shouldn't be used.
+> **Note:** The example is given in the context of a scoreboard area. If you use the indicators in a [report widget](widgets#report-widgets) partial, the class **scoreboard-item** shouldn't be used.
 
 <a name="pie-chart" class="anchor" href="#pie-chart"></a>
 ## Pie chart

@@ -17,7 +17,7 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
 
         public $formConfig = 'form_config.yaml';
 
-> **Note:** very often the form and [list behavior](lists) are used together in a same controller.
+> **Note:** Very often the form and [list behavior](lists) are used together in a same controller.
 
 <a name="configuring-form" class="anchor" href="#configuring-form"></a>
 ## Configuring the form behavior

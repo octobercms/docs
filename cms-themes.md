@@ -62,7 +62,7 @@ To refer to a partial or a content file from a subdirectory, specify the subdire
 
     {% partial "blog/category-list" %}
 
-> **Note:** the template paths are always absolute. If in a partial you render another partial from the same subdirectory you still need to specify the subdirectory name.
+> **Note:** The template paths are always absolute. If in a partial you render another partial from the same subdirectory you still need to specify the subdirectory name.
 
 <a name="structure" class="anchor" href="#structure"></a>
 ## Template structure
@@ -117,7 +117,7 @@ The code in the PHP section executes every time before the template is rendered.
         {{ post.content }}
     {% endfor %}
 
-> **Note:** in the PHP section you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed.
+> **Note:** In the PHP section you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed.
 
 Example namespace reference:
 
