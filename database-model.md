@@ -108,7 +108,7 @@ October models can apply modifiers to the attribute values when the model is loa
 
         protected $encryptable = ['api_key'];
 
-        protected $sluggable = ['slug' => 'name'];
+        protected $slugs = ['slug' => 'name'];
     }
 
 The following attribute modifiers are supported:
@@ -116,8 +116,9 @@ The following attribute modifiers are supported:
 * **$hashable** - values are hashed, they can be verified but cannot be reversed.
 * **$purgeable** - attributes are removed before attempting to save to the database.
 * **$jsonable** - values are encoded as JSON before saving and converted to arrays after fetching.
-* **$encryptable** - values are encrypted and decrypted for storing sensitive data.
-* **$sluggable** - key attributes are generated as unique url names (slugs) based on value attributes.
+* **$encrypted** - values are encrypted and decrypted for storing sensitive data.
+* **$slugs** - key attributes are generated as unique url names (slugs) based on value attributes.
+* **$dates** - values are converted to an instance of Carbon/DateTime objects after fetching.
 
 <a name="joined-eager-loading" class="anchor" href="#joined-eager-loading"></a>
 ## Joined eager loading
