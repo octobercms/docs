@@ -1,7 +1,7 @@
 # Command Line Interface
 
 - [Console installation](#console-install)
-- [Plugin development](#utility)
+- [Utility commands](#utility)
 - [Scaffolding](#scaffolding)
 - [Console development](#development)
 - [Further reading](#further-reading)
@@ -57,7 +57,13 @@ This will connect to the October gateway and update the core and all installed p
 
 
 <a name="utility"></a>
-## Plugin development
+## Utility commands
+
+#### Clear cache folders
+
+This will clear the application, twig and combiner cache directories.
+
+    php artisan cache:clear
 
 #### Updating all plugins
 

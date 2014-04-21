@@ -42,7 +42,7 @@ You can also use the methods in the back-end views for hiding user interface ele
     <?php if ($this->user->hasAccess('acme.blog.delete_categories')): ?>
         <button 
             type="button" 
-            class="oc-icon-trash btn-icon danger pull-right" 
+            class="oc-icon-trash-o btn-icon danger pull-right" 
             data-request="onDelete" 
             data-load-indicator="Deleting Category..." 
             data-request-confirm="Do you really want to delete this category?">
