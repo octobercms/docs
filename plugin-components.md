@@ -104,23 +104,21 @@ You can also load all the properties as array:
 
 In some cases a property may act as a hard coded reference or obtain the value from the routing parameter.
 
-In this hard coded example, the blog post with an identifier `2` will be shown:
+In this hard coded example, the blog post with an identifier `2` will be used:
 
     url = "/blog/hard-coded-page"
 
     [blogPost]
     id = "2"
 
-Alternatively the value can be taken from the page URL, :This next example shows how a routing parameter can be used instead:
+Alternatively the value can be taken from the page URL:
 
     url = "/blog/:my_custom_parameter"
 
     [blogPost]
     id = ":my_custom_parameter"
 
-
-
-For a property value to reference a routing parameter, it can start with a colon character `:` otherwise a hard coded value can be used.
+In both cases the value can be retrieved by using the `propertyOrParam()` method:
 
     $this->propertyOrParam('id');
 
