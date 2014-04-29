@@ -104,7 +104,7 @@ You can also load all the properties as array:
 <a name="routing-parameters" class="anchor" href="#routing-parameters"></a>
 ## Routing parameters
 
-Components can access routing parameter values defined the [URL defined in the page](../cms/pages#url-syntax).
+Components can access routing parameter values defined the [URL of the page](../cms/pages#url-syntax).
 
     $post_id = $this->param('post_id');
 
