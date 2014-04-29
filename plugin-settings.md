@@ -38,7 +38,7 @@ The `$settingsFields` property is required if are going to build a back-end sett
               fields.yaml      <=== Model form fields
             Settings.php       <=== Model script
 
-Settings models can be registered in the [Plugin registration file](http://octobercms.com/docs/plugin/registration#backend-settings) to appear on the **back-end Settings page**, but it is not necessary - you can set and read settings values with the API.
+Settings models can be registered in the [Plugin registration file](http://octobercms.com/docs/plugin/registration#backend-settings) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
 <a name="writing-settings" class="anchor" href="#writing-settings"></a>
 ### Writing to a settings model

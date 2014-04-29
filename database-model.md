@@ -119,6 +119,7 @@ The following attribute modifiers are supported:
 * **$encrypted** - values are encrypted and decrypted for storing sensitive data.
 * **$slugs** - key attributes are generated as unique url names (slugs) based on value attributes.
 * **$dates** - values are converted to an instance of Carbon/DateTime objects after fetching.
+* **$timestamps** - boolean that if true will automatically set created_at and updated_at fields.
 
 <a name="joined-eager-loading" class="anchor" href="#joined-eager-loading"></a>
 ## Joined eager loading

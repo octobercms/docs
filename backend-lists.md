@@ -133,6 +133,12 @@ For each column can specify these options (where applicable):
         label: Age
         type: number
 
+`switch` - displays a on or off state for boolean fields.
+
+    enabled:
+        label: Enabled
+        type: switch
+
 `datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
 
     created_at:

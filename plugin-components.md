@@ -100,6 +100,30 @@ You can also load all the properties as array:
 
     $properties = $this->getProperties();
 
+### Referencing routing parameters
+
+In some cases a property may act as a hard coded reference or obtain the value from the routing parameter.
+
+In this hard coded example, the blog post with an identifier `2` will be shown:
+
+    url = "/blog/hard-coded-page"
+
+    [blogPost]
+    id = "2"
+
+Alternatively the value can be taken from the page URL, :This next example shows how a routing parameter can be used instead:
+
+    url = "/blog/:my_custom_parameter"
+
+    [blogPost]
+    id = ":my_custom_parameter"
+
+
+
+For a property value to reference a routing parameter, it can start with a colon character `:` otherwise a hard coded value can be used.
+
+    $this->propertyOrParam('id');
+
 <a name="page-cycle" class="anchor" href="#page-cycle"></a>
 ## Handling the page execution cycle
 
