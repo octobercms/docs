@@ -104,20 +104,20 @@ You can also load all the properties as array:
 <a name="routing-parameters" class="anchor" href="#routing-parameters"></a>
 ## Routing parameters
 
-Components can access routing parameters from the [URL defined in the page](../cms/pages#url-syntax).
+Components can access routing parameter values defined the [URL defined in the page](../cms/pages#url-syntax).
 
     $post_id = $this->param('post_id');
 
-In some cases a property may act as a hard coded reference or obtain the value from the routing parameter.
+In some cases a [component property](#component-properties) may act as a hard coded value or reference the value from the URL.
 
-For this hard coded example, the blog post with an identifier `2` will be used:
+This hard coded example shows the blog post with an identifier `2` being used:
 
     url = "/blog/hard-coded-page"
 
     [blogPost]
     id = "2"
 
-Alternatively the value can be taken dynamically from the page URL:
+Alternatively the value can be referenced dynamically from the page URL:
 
     url = "/blog/:my_custom_parameter"
 
