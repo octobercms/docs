@@ -121,6 +121,13 @@ The following attribute modifiers are supported:
 * **$dates** - values are converted to an instance of Carbon/DateTime objects after fetching.
 * **$timestamps** - boolean that if true will automatically set created_at and updated_at fields.
 
+The following attribute declarations are supported:
+
+* **$fillable** - values are fields accessible to mass assignment.
+* **$guarded** - values are fields guarded from mass assignment.
+* **$visible** - values are fields made visible when converting the model to JSON or an array.
+* **$hidden** - values are fields made hidden when converting the model to JSON or an array.
+
 <a name="joined-eager-loading" class="anchor" href="#joined-eager-loading"></a>
 ## Joined eager loading
 
