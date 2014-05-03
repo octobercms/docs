@@ -1,3 +1,4 @@
+# Installation
 
 ## Please note: October is still under development and cannot be installed just yet
 
