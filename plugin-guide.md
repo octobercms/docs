@@ -20,3 +20,23 @@ Use **camelCase** everywhere except for the following:
 * Database columns should use **snake_case**
 * Language keys should use **snake_case**
 
+## Class naming
+
+Recommended class suffixes and prefixes:
+
+* Manager
+* Builder
+* Writer
+* Reader
+* Handler
+* Container
+* Protocol
+* Target
+* Converter
+* Controller
+* View
+* Factory
+* Entity
+* Bag
+
+NB: Don't get naming paralysis. Yes, names are very important but they're not important enough to waste huge amounts of time on. If you can't think up a good name in 10 minutes, move on.
