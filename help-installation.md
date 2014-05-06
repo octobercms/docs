@@ -9,7 +9,7 @@ Before you proceed, you should check that your server meets the minimum system r
 
 October CMS has a few system requirements:
 
-* PHP 5.4 or higher with **safe_mode** and **open_basedir** restrictions disabled
+* PHP 5.4 or higher with **safe_mode** restrictions disabled
 * PDO PHP Extension
 * cURL PHP Extension
 * MCrypt PHP Extension
