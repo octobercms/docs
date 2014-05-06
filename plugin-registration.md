@@ -246,8 +246,8 @@ The next example shows how to register back-end permission items. Permissions ar
     public function registerPermissions()
     {
         return [
-            'acme.blog.access_posts' => ['label' => 'Manage the blog posts'],
-            'acme.blog.access_categories'     => ['label' => 'Manage the blog categories']
+            'acme.blog.access_posts'       => ['label' => 'Manage the blog posts'],
+            'acme.blog.access_categories'  => ['label' => 'Manage the blog categories']
         ];
     }
 
