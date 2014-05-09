@@ -85,9 +85,12 @@ The method should return an array with the property keys as indexes and property
 * **title** - required, the property title, it is used by the component Inspector in the CMS back-end.
 * **description** - required, the property description, it is used by the component Inspector in the CMS back-end.
 * **default** - optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
-* **type** - optional, the default value is **string**. Specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string** and **checkbox**.
+* **type** - optional, the default value is **string**. Specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox** and **dropdown**.
 * **validationPattern** - optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
 * **validationMessage** - optional error message to display if the validation fails.
+* **placeholder** - optional placeholder for string and dropdown properties.
+* **options** - optional array of options for dropdown properties.
+* **depends** - an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
 
 Inside the component you can read the property value with the `property()` method:
 
@@ -100,6 +103,95 @@ If the property value is not defined, you can supply the default value as a seco
 You can also load all the properties as array:
 
     $properties = $this->getProperties();
+
+<a name="dropdown-properties" class="anchor" href="#dropdown-properties"></a>
+### Dropdown properties
+
+The option list for dropdown properties can be static or dynamic. Static options are defined with the `options` element of the property definition.Example: 
+
+    public function defineProperties()
+    {
+        return [
+            'units' => [
+                'title'             => 'Units',
+                'type'              => 'dropdown',
+                'default'           => 'imperial',
+                'placeholder'       => 'Select units',
+                'options'           => ['metric'=>'Metric', 'imperial'=>'Imperial']
+            ]
+        ];
+    }
+
+The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options()`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
+
+    public function defineProperties()
+    {
+        return [
+            'country' => [
+                'title'             => 'Country',
+                'type'              => 'dropdown',
+                'default'           => 'us'
+            ]
+        ];
+    }
+
+    public function getCountryOptions()
+    {
+        return ['us'=>'United states', 'ca'=>'Canada'];
+    }
+
+Dynamic drop-down lists can depend on other properties. For example, the state list could depend on the selected country. The dependences are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
+
+    public function defineProperties()
+    {
+        return [
+            'country' => [
+                'title'             => 'Country',
+                'type'              => 'dropdown',
+                'default'           => 'us'
+            ],
+            'state' => [
+                'title'             => 'State',
+                'type'              => 'dropdown',
+                'default'           => 'dc',
+                'depends'           => ['country'],
+                'placeholder'       => 'Select a state'
+            ]
+        ];
+    }
+
+In order to load the state list you should know what country is currently selected in the Inspector. The Inspector POSTs all property values to the `getPropertyOptions()` handler, so you can do the following:
+
+    public function getStateOptions()
+    {
+        $countryCode = Request::input('country'); // Load the country property value from POST
+
+        $states = [
+            'ca' => ['ab'=>'Alberta', 'bc'=>'British columbia'],
+            'us' => ['al'=>'Alabama', 'ak'=>'Alaska']
+        ];
+
+        return $states[$countryCode];
+    }
+
+<a name="page-list-properties" class="anchor" href="#page-list-properties"></a>
+### Page list properties
+
+Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup#page-filter)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
+
+    public function defineProperties()
+    {
+            'postPage' => [
+                'title' => 'Post page',
+                'type'=>'dropdown',
+                'default' => 'blog/post'
+            ]
+    }
+
+    public function getPostPageOptions()
+    {
+        return CmsPropertyHelper::listPages();
+    }
 
 <a name="routing-parameters" class="anchor" href="#routing-parameters"></a>
 ## Routing parameters
