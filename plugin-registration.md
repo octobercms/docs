@@ -122,7 +122,7 @@ The `register()` method is called immediately when the plugin is registered. The
 
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [Laravel Routing documentation](http://laravel.com/docs/routing). For example:
 
-    Route::group(['prefix' => 'acme/blog'], function() {
+    Route::group(['prefix' => 'api_acme_blog'], function() {
 
         Route::get('cleanup_posts', function(){ return Posts::cleanUp(); });
 
