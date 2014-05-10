@@ -2,8 +2,11 @@
 
 - [Default variables](#default-variables)
 - [Page links](#page-links)
+- [Links to asset files](#theme-filter)
 - [Flash messages](#flash-messages)
 - [Forms](#forms)
+- [Injecting CSS links](#styles-tag)
+- [Injecting JavaScript scripts](#scripts-tag)
 
 October extends [Twig](http://twig.sensiolabs.org/documentation) engine with a number of functions, tags, filters and variables. Those extensions allow you to use the CMS features and access the page environment information inside your templates.
 
@@ -71,7 +74,7 @@ Another great feature of the reverse routing is the route parameter persisting. 
 As you can see we don't need to specify the **post_id** parameter, because it is already known on the Preview page - it was loaded from the Preview Post page URL.
 
 <a name="theme-filter" class="anchor" href="#theme-filter"></a>
-### Link to an asset file
+## Links to asset files
 
 Assets files reside in the **assets** subdirectory of a theme directory. October provides the `|theme` filter for creating links to assets files. The next example shows how to refer to a JavaScript file from the theme assets directory:
 
@@ -103,7 +106,6 @@ The `{% flash %}` tag has an optional parameter that allows to filter flash mess
     {% flash success %}
         <div class="alert alert-success">{{ message }}</div>
     {% endflash %}
-
 
 <a name="forms" class="anchor" href="#forms"></a>
 ## Forms
@@ -150,3 +152,35 @@ The second parameter accepts the option object. The function supports the follow
 * **redirect** - on successful result, redirect to a URL.
 * **update** - an array of partials to update on success in the following format: { 'partial': '#element' }.
 * **data** - extra data to include with the request in the following format: { 'myvar': 'myvalue' }
+
+<a name="styles-tag" class="anchor" href="#styles-tag"></a>
+## Injecting CSS links
+
+The `{% styles %}` tag inserts CSS links to files added by [components](../plugin/components#component-assets), or [pages](../cms/pages#injecting-assets). The tag is commonly defined in the HEAD section of a page or layout:
+
+    <head>
+        ...
+        {% styles %}
+    </head>
+
+Another way to add styles to the `{% styles %}` tag is using the **styles**  anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+
+    {% put styles %}
+        <link href="/themes/demo/assets/css/page.css" rel="stylesheet">
+    {% endput %}
+
+<a name="scripts-tag" class="anchor" href="#scripts-tag"></a>
+## Injecting JavaScript scripts
+
+The `{% scripts %}` tag inserts JavaScript file references to scripts added by [components](../plugin/components#component-assets), or [pages](../cms/pages#injecting-assets). The tag is commonly defined before the closing BODY tag:
+
+    <body>
+        ...
+        {% scripts %}
+    </body>
+
+Another way to add scripts to the `{% scripts %}` tag is using the **scripts**  anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+
+    {% put scripts %}
+        <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
+    {% endput %}

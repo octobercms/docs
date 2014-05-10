@@ -23,6 +23,10 @@ This adds a reference to to the October front-end JavaScript library. The librar
 
     {% framework %}
 
+The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds a CSS and JavaScript files that contain the loading indicator plugin and CSS classes for styling the loading indicator. The indicator is displayed on the top of the page when an AJAX request runs.
+
+    {% framework extras %}
+
 <a name="how-ajax-works" class="anchor" href="#how-ajax-works"></a>
 ### How AJAX requests work
 
