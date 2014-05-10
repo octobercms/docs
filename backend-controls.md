@@ -47,7 +47,7 @@ Note that you should use the **scoreboard-item** class for your scoreboard eleme
 <a name="indicators" class="anchor" href="#indicators"></a>
 ## Indicators
 
-Indicators are simple reporting element that have a title, a value and a description. You can use the `positive` and `negative` classes on the value element. [Font Awesome](http://fortawesome.github.io/Font-Awesome/3.2.1/cheatsheet/) icon classes allow to add an icon before the value.
+Indicators are simple reporting element that have a title, a value and a description. You can use the `positive` and `negative` classes on the value element. [Font Autumn](http://daftspunk.github.io/Font-Autumn/) icon classes allow to add an icon before the value.
 
     <div class="scoreboard-item title-value">
         <h4>Weight</h4>

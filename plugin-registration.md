@@ -104,7 +104,7 @@ The `pluginDetails()` is a required method of the plugin registration class. It 
 - **name** - the plugin name.
 - **description** - the plugin description.
 - **author** - the plugin author name.
-- **icon** - a name of the plugin icon. October uses [FontAwesome 3 icons](http://fortawesome.github.io/Font-Awesome/3.2.1/cheatsheet/). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+- **icon** - a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
 
 <a name="routing-initialization" class="anchor" href="#routing-initialization"></a>
 ## Routing and initialization
