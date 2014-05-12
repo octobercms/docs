@@ -55,7 +55,7 @@ October models allow to define [relationships](http://laravel.com/docs/eloquent#
 - **$hasOne** - has a single related model that belongs to it. Optional: primaryKey.
 - **$hasMany** - has many related models that belong to. Optional: primaryKey.
 - **$belongsTo** - owned by another related model (slave). Optional: foreignKey.
-- **$belongsToMany** - owned by multiple related models. Optional: table, primaryKey, foreignKey, pivotData.
+- **$belongsToMany** - owned by multiple related models. Optional: table, primaryKey, foreignKey, pivot, timestamps.
 - **$morphTo** - polymorphic version of belongs to. Optional: name, type, id.
 - **$morphOne** - polymorphic version of has one. Optional: type, id. Required: name.
 - **$morphMany** - polymorphic version of has many. Optional: type, id. Required: name.
