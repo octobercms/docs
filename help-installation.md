@@ -1,11 +1,16 @@
 # Installation
 
-## Please note: October is still under development and cannot be installed just yet
+- [Minimum System Requirements](#system-requirements)
+- [Wizard installation](#wizard-installation)
+- [Command-line installation](#commaind-line-installation)
+
+> **Please note:** October is still under development and cannot be installed just yet.
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
 
-#### Minimum System Requirements
+<a name="system-requirements" class="anchor" href="#system-requirements"></a>
+## Minimum System Requirements
 
 October CMS has a few system requirements:
 
@@ -19,9 +24,10 @@ October CMS has a few system requirements:
 As of PHP 5.5, some OS distributions may require you to manually install the PHP JSON extension.
 When using Ubuntu, this can be done via ``apt-get install php5-json``.
 
-#### Wizard installation (Recommended)
+<a name="wizard-installation" class="anchor" href="#wizard-installation"></a>
+## Wizard installation
 
-##### Installation steps
+The wizard installation is a recommended way to install October. It is simpler than the command-line installation and doesn't require any special skills.
 
 1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
 2. Unpack the installer archive to the prepared sub-directory, domain root or a sub-domain.
@@ -29,10 +35,7 @@ When using Ubuntu, this can be done via ``apt-get install php5-json``.
 4. Navigate to the install.php script in your web browser.
 5. Follow the installation instructions.
 
-#### Command-line installation (Advanced)
+<a name="commaind-line-installation" class="anchor" href="#commaind-line-installation"></a>
+## Command-line installation
 
-You can also install October using the [command-line installation](advanced/console) process.
-
-#### Troubleshooting installation
-
-Reserved for common problems faced during installation.
+If you feel more comfortable with a command-line, there is a CLI install process on the [Console interface page](console).

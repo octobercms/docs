@@ -1,16 +1,20 @@
 # Command Line Interface
 
 - [Console installation](#console-install)
-- [Utility commands](#utility)
-- [Scaffolding](#scaffolding)
-- [Console development](#development)
-- [Further reading](#further-reading)
+- [Console updating](#console-updating)
+- [Utility commands](#utility-commands)
+- [Scaffolding commands](#scaffolding-commands)
+- [Console development](#console-development)
 
+October includes several CLI commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Artisan. Please see Laravel documentation for more details.
 
-<a name="console-install"></a>
+* [Artisan Overview](http://laravel.com/docs/artisan)
+* [Artisan Development](http://laravel.com/docs/commands)
+
+<a name="console-install" class="anchor" href="#console-install"></a>
 ## Console installation
 
-### Please note: October is still under development and cannot be installed just yet
+> **Please note:** October is still under development and cannot be installed just yet.
 
 The command-line interface (CLI) method of installation requires [Composer](http://getcomposer.org/) to manage its dependencies.
 
@@ -28,7 +32,7 @@ Open the file **app/config/cms.php** and set the following array values:
 
     'activeTheme' => 'demo',           // Enter the active theme to use
 
-    'backendUri' => '/backend',        // Optional, customise your backend URL
+    'backendUri' => '/backend',        // Optional, customize your backend URL
 
 Open the file **app/config/database.php** and set the database configuration values.
 
@@ -37,97 +41,67 @@ Next, run the CLI update process, this will build the database tables:
     php artisan october:up
 
 
-
-<a name="console-install"></a>
+<a name="console-updating" class="anchor" href="#console-updating"></a>
 ## Console updating
 
-#### Updating October via Composer
-
-This will connect to the repository and pull updates for the core and any other composer installed packages.
+There are two ways to update October - via Composer and via the Update Gateway. Updating October via Composer will connect to the repository and pull updates for the core and any other composer installed packages.
 
     composer update
 
-#### Updating October via the Update Gateway
-
-
-This will connect to the October gateway and update the core and all installed plugins.
+Updating October via the Update Gateway will connect to the October gateway and update the core and all installed plugins.
 
     php artisan october:update
 
-
-
-<a name="utility"></a>
+<a name="utility-commands" class="anchor" href="#utility-commands"></a>
 ## Utility commands
 
-#### Clear cache folders
+October includes a number of Artisan utility commands.
 
-This will clear the application, twig and combiner cache directories.
+`cache:clear` - clears the application, twig and combiner cache directories. Example:
 
     php artisan cache:clear
 
-#### Updating all plugins
-
-This will update all installed plugins.
+`october:up` - updates all installed plugins.
 
     php artisan october:up
 
-#### Installing a plugin
-
-This will download and install the plugin called `AuthorName.PluginName`.
+`plugin:install` - downloads and installs the plugin by its name. The next example will install a plugin called **AuthorName.PluginName**. Note that your installation should be bound to a project in order to use this command. You can create projects on October website, in the [Account / Projects](https://octobercms.com/account/projects) section.
 
     php artisan plugin:install AuthorName.PluginName
 
-#### Removing a plugin
-
-This will destroy the plugin's database entries and delete the plugin files from the filesystem.
+`plugin:uninstall` - destroys the plugin's database entries and deletes the plugin files from the filesystem.
 
     php artisan plugin:uninstall AuthorName.PluginName
 
-#### Update a single plugin
-
-Useful for development, this will update a single plugin.
+`plugin:update` - updates a single plugin. This command is useful for development.
 
     php artisan plugin:update AuthorName.PluginName
 
-
-
-<a name="scaffolding"></a>
+<a name="scaffolding-commands" class="anchor" href="#scaffolding-commands"></a>
 ## Scaffolding commands
 
-#### Create a new plugin
+Use the scaffolding commands to speed up the development process.
 
-This will generate a plugin folder and basic files for a plugin named `Foo.Bar`
+`create:plugin` - generates a plugin folder and basic files for the plugin. The parameter specifies the author and plugin name.
 
     php artisan create:plugin Foo.Bar
 
-#### Create a new component
-
-This will generate a component class and default view for a component named `Post`
+`create:component` - creates a new component class and the default component view. The first parameter specifies the author and plugin name. The second parameter specifies the component class name.
 
     php artisan create:component Foo.Bar Post
 
-#### Create a new model
-
-This will generate the files needed for a new model named `Post` in the plugin `RainLab.Blog`
+`create:model` - generates files needed for a new model. The first parameter specifies the author and plugin name. The second parameter specifies the model class name.
 
     php artisan create:model RainLab.Blog Post
 
-#### Create a new back-end controller
-
-This will generate the controller, configuration and view files for `Posts` in the plugin `RainLab.Blog`
+`create:controller` - generates a controller, configuration and view files. The first parameter specifies the author and plugin name. The second parameter specifies the controller class name.
 
     php artisan create:controller RainLab.Blog Posts
 
-
-
-
-<a name="development"></a> 
+<a name="console-development" class="anchor" href="#console-development"></a>
 ## Console development
 
-Plugins can register custom command-line interface (CLI) commands from the Plugin registration file.
-
-It is best to place the console registration inside the **register()** method and to use the helper method **registerConsoleCommand**.
-For example:
+Plugins can register custom command-line interface (CLI) commands from the Plugin registration file. It is best to place the console registration inside the `register()` method and to use the helper method `registerConsoleCommand()`. Example:
 
     class MyPlugin extends PluginBase
     {
@@ -142,9 +116,7 @@ For example:
         }
     }
 
-The first parameter is the command name, the second parameter is the console class name.
-
-You can then define the console class:
+The first parameter is the command name, the second parameter is the console class name. You can then define the console class:
 
     namespace Acme\MyPlugin\Console;
 
@@ -205,11 +177,3 @@ You can then define the console class:
         }
 
     }
-
-
-
-<a name="further-reading"></a>
-#### Further reading on Console Commands
-
-* [Artisan Overview - Laravel documentation](http://laravel.com/docs/artisan)
-* [Artisan Development - Laravel documentation](http://laravel.com/docs/commands)
