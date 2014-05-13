@@ -20,7 +20,7 @@ The command-line interface (CLI) method of installation requires [Composer](http
 
 Download the application source code by using the `create-project` in your terminal:
 
-    composer create-project october/october --prefer-dist
+    composer create-project october/october
 
 Open the file **app/config/app.php** and set the following array values:
 
@@ -69,13 +69,13 @@ October includes a number of Artisan utility commands.
 
     php artisan plugin:install AuthorName.PluginName
 
-`plugin:uninstall` - destroys the plugin's database entries and deletes the plugin files from the filesystem.
+`plugin:uninstall` - destroys the plugin's database tables and deletes the plugin files from the filesystem.
 
     php artisan plugin:uninstall AuthorName.PluginName
 
-`plugin:update` - updates a single plugin. This command is useful for development.
+`plugin:refresh` - destroys the plugin's database tables and reinstalls them. This command is useful for development.
 
-    php artisan plugin:update AuthorName.PluginName
+    php artisan plugin:refresh AuthorName.PluginName
 
 <a name="scaffolding-commands" class="anchor" href="#scaffolding-commands"></a>
 ## Scaffolding commands
