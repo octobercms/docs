@@ -43,6 +43,8 @@ Not all plugin directories are required. The only required file is the **Plugin.
           components/
           Plugin.php     <=== Plugin registration file
 
+> **Note**: if you are developing a plugin for the [Marketplace](../help/marketplace), the [updates/version.yaml](#migrations-version-history) file is required.
+
 <a name="namespaces" class="anchor" href="#namespaces"></a>
 ### Plugin namespaces
 
@@ -300,7 +302,7 @@ Plugins keep a change log inside the **/updates** directory to maintain version 
             seed_the_database.php     <=== Migration file
             create_another_table.php  <=== Migration file
 
-The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. An example Plugin version file:
+The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](../help/marketplace). An example Plugin version file:
 
     1.0.1:
         - First version
@@ -312,4 +314,4 @@ The **version.yaml** file, called the *Plugin version file*, contains the versio
         - Creates another table for this new feature
         - create_another_table.php
 
-> **Note:** To apply plugin updates, log out of the back-end and sign in again. The plugin version history is applied when an administrator signs in to the back-end.
+> **Note:** During the development, to apply plugin updates, log out of the back-end and sign in again. The plugin version history is applied when an administrator signs in to the back-end. Plugin updates are applied automatically for plugins installed from the Marketplace when you update the system.
