@@ -14,8 +14,6 @@ October includes several CLI commands and utilities that allow to install Octobe
 <a name="console-install" class="anchor" href="#console-install"></a>
 ## Console installation
 
-> **Please note:** October is still under development and cannot be installed just yet.
-
 The command-line interface (CLI) method of installation requires [Composer](http://getcomposer.org/) to manage its dependencies.
 
 Download the application source code by using the `create-project` in your terminal:
