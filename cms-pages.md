@@ -9,7 +9,7 @@
 All websites have pages. In October pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages accordingly to the page function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages but the [PHP section](themes#php-section) is optional. Below you can see the simplest home page example.
 
     url = "/"
-    ==t
+    ==
     <h1>Hello, world!</h1>
 
 <a name="configuration" class="anchor" href="#configuration"></a>
@@ -51,11 +51,11 @@ Parameters in the middle of the URL cannot be optional. In the next example the 
 
     url = "/blog/:post_id?/comments"
 
-Optional parameters can have default values which are used as fallback values in case the real parameter value is not presented in the URL. Default values cannot contain the pipe symbols and question marks. The default value is specified after the **question mark**. In the next example the `category_id` parameter would be `10` for this URL: /blog/category
+Optional parameters can have default values which are used as fallback values in case the real parameter value is not presented in the URL. Default values cannot contain any pipe symbols or question marks. The default value is specified after the **question mark**. In the next example the `category_id` parameter would be `10` for the URL `/blog/category`.
 
     url = "/blog/category/:category_id?10"
 
-You can also add regular expression validation to parameters. To add a validation expression, add the pipe symbol after the parameter name (or the question mark) and specify the expression. The forward slash symbol is not allowed in the expressions. Examples:
+You can also use regular expressions to validate parameters. To add a validation expression, add the pipe symbol after the parameter name (or the question mark) and specify the expression. The forward slash symbol is not allowed in the expressions. Examples:
 
     url = "/blog/:post_id|^[0-9]+$/comments" - this will match /blog/post/10/comments
     ...

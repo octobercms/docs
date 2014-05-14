@@ -4,10 +4,9 @@
 - [Subdirectories](#subdirectories)
 - [Template structure](#structure)
 
-
 Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of October themes. You fill find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
-> The active CMS theme is set with the `activeTheme` parameter in the `app/config/cms.php` script. 
+> The active CMS theme is set with the `activeTheme` parameter in the `app/config/cms.php` file.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
@@ -139,4 +138,4 @@ Example namespace reference:
 <a name="twig-section" class="anchor" href="#twig-section"></a>
 ### Twig markup section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section you can use [Twig functions, filters and tags provided by October](markup) and all the native [Twig](http://twig.sensiolabs.org/documentation) functions, tags and filters. The content of the Twig section depends on the template type (page, layout or partial). You will find more information about specific Twig objects in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section you can use [Twig functions, filters and tags provided by October](markup) and all the native [Twig](http://twig.sensiolabs.org/documentation) functions, tags and filters. The content of the Twig section depends on the template type (page, layout or partial). You will find more information about specific Twig objects further in the documentation.
