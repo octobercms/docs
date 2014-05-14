@@ -44,7 +44,7 @@ Below is a simple example of using the data attributes API for an AJAX calculato
     <form data-request="onTest" data-request-update="calcresult: '#result'">
         <input type="text" name="value1"/>
         <input type="text" name="value2"/>
-        <input type="submit" vlaue="Calculate">
+        <input type="submit" value="Calculate">
     </form>
     <div id="#result"></div>
 
