@@ -222,7 +222,7 @@ Plugins can extend the back-end navigation menus and permissions by overriding m
                 'permissions' => ['acme.blog.*'],
                 'order'       => 500,
 
-                'subMenu' => [
+                'sideMenu' => [
                     'posts' => [
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
