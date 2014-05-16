@@ -2,7 +2,7 @@
 
 - [Updates files](#update-files)
 - [Migration files](#migration-files)
-- [Data deeding files ](#data-seeding-files)
+- [Data seeding files](#data-seeding-files)
 
 October provides a simple way of managing the database structure and contents with the database scripts (migrations and seed files). The database scripts can be provided by plugins.
 
