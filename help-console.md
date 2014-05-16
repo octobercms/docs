@@ -19,6 +19,11 @@ The command-line interface (CLI) method of installation requires [Composer](http
 Download the application source code by using the `create-project` in your terminal:
 
     composer create-project october/october
+    
+> Currently October is only available in stability 'alpha'. You can specify the stability level using the -s|--stability="..." option. 
+
+    composer create-project -s alpha october/october
+
 
 Open the file **app/config/app.php** and set the following array values:
 
