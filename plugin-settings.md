@@ -15,6 +15,8 @@ The settings model classes should extend the Model class and implement the `Syst
 
     <?php namespace Acme\Demo\Models;
 
+    use Model;
+
     class Settings extends Model
     {
         public $implement = ['System.Behaviors.SettingsModel'];
