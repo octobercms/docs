@@ -13,7 +13,7 @@ You can create models for storing settings in the database by implementing the `
 
 The settings model classes should extend the Model class and implement the `System.Behaviors.SettingsModel` behavior. The settings models, like any other models, should be defined in the **models** subdirectory of the plugin directory. The model from the next example should be defined in the `plugins/acme/demo/models/Settings.php` script. 
 
-    <?php namespace Acme\Demo;
+    <?php namespace Acme\Demo\Models;
 
     class Settings extends Model
     {
@@ -45,7 +45,7 @@ Settings models can be registered in the [Plugin registration file](http://octob
 
 The settings model has the static `set()` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
 
-    use Acme\Demo\Settings;
+    use Acme\Demo\Models\Settings;
 
     ...
 
