@@ -38,6 +38,8 @@ Next, run the CLI update process, this will build the database tables:
 
     php artisan october:up
 
+You can sign in to the back-end area using the default username **admin** and password **admin**.
+
 
 <a name="console-updating" class="anchor" href="#console-updating"></a>
 ## Console updating
