@@ -36,7 +36,7 @@ The configuration file referred in the `$listConfig` property is defined in YAML
 The following fields are required in the list configuration file:
 
 * **title** - a title for this list.
-* **list** - a reference to list column definition file, see [list columns](#list-coliumns).
+* **list** - a reference to list column definition file, see [list columns](#list-columns).
 * **modelClass** - a model class name to load the list data.
 
 The configuration options listed below are optional. 
@@ -89,7 +89,7 @@ List columns are defined with the YAML file. The column configuration is used by
         blog/
           models/                <=== Plugin models directory
             post/                <=== Model configuration directory
-              list_climns.yaml   <=== Model list columns config file
+              list_columns.yaml  <=== Model list columns config file
             Post.php             <=== model class
 
 
