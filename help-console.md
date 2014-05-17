@@ -16,14 +16,9 @@ October includes several CLI commands and utilities that allow to install Octobe
 
 The command-line interface (CLI) method of installation requires [Composer](http://getcomposer.org/) to manage its dependencies.
 
-Download the application source code by using the `create-project` in your terminal:
+Download the application source code by using the `create-project` in your terminal. This will install to a directory named **/october**:
 
-    composer create-project october/october
-    
-> Currently October is only available in stability 'alpha'. You can specify the stability level using the -s|--stability="..." option. 
-
-    composer create-project -s alpha october/october
-
+    composer create-project october/october october dev-master
 
 Open the file **app/config/app.php** and set the following array values:
 
