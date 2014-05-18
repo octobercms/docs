@@ -38,7 +38,7 @@ The Marketplace grows quickly and you want your plugins to be noticeable and peo
 <a name="plugin-icons" class="anchor" href="#plugin-icons"></a>
 ### Use quality icons
 
-Good plugins require good icons. The plugin icon is the first thing the Marketplace users notice when they browse the plugin list. Quality, bright and recognizable icons draw attention. If you develop an plugin that integrates a known service, like Twitter, FaceBook, LinkedIn, don't hesitate to use the brand icons. For non-integration plugins find free buy a quality icon that expresses the plugin purpose. There are many service where you can buy nice icons, for example the [Noun Project](http://thenounproject.com/). 
+Good plugins require good icons. The plugin icon is the first thing the Marketplace users notice when they browse the plugin list. Quality, bright and recognizable icons draw attention. If you develop an plugin that integrates a known service, like Twitter, FaceBook, LinkedIn, don't hesitate to use the brand icons. For non-integration plugins find free or buy a quality icon that expresses the plugin purpose. There are many service where you can buy nice icons, for example the [Noun Project](http://thenounproject.com/). 
 
 <a name="plugin-descriptions" class="anchor" href="#plugin-descriptions"></a>
 ### Write good descriptions 
