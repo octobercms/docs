@@ -69,9 +69,9 @@ October includes a number of Artisan utility commands.
 
     php artisan plugin:install AuthorName.PluginName
 
-`plugin:uninstall` - destroys the plugin's database tables and deletes the plugin files from the filesystem.
+`plugin:remove` - destroys the plugin's database tables and deletes the plugin files from the filesystem.
 
-    php artisan plugin:uninstall AuthorName.PluginName
+    php artisan plugin:remove AuthorName.PluginName
 
 `plugin:refresh` - destroys the plugin's database tables and reinstalls them. This command is useful for development.
 
