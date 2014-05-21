@@ -140,7 +140,7 @@ The list of options could be fetched dynamically from the server when the Inspec
         return ['us'=>'United states', 'ca'=>'Canada'];
     }
 
-Dynamic drop-down lists can depend on other properties. For example, the state list could depend on the selected country. The dependences are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
+Dynamic drop-down lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
 
     public function defineProperties()
     {

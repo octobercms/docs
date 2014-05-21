@@ -38,7 +38,7 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 * **The page appears empty when opening the installer**: This might be caused by using older versions of PHP, check that you are running PHP version 5.4 or higher.
 
-<a name="commaind-line-installation" class="anchor" href="#commaind-line-installation"></a>
+<a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
 ## Command-line installation
 
 If you feel more comfortable with a command-line, there is a CLI install process on the [Console interface page](console#console-install).

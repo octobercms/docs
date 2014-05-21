@@ -140,7 +140,7 @@ The report widget classes should extend the `Backend\Classes\ReportWidgetBase` c
     plugins/
       rainlab/                  <=== Author name
         googleanalytics/        <=== Plugin name
-          reportwidgets/        <=== Report widgets directoru
+          reportwidgets/        <=== Report widgets directory
             trafficsources      <=== Widget files directory
               partials
                 _widget.htm
