@@ -152,8 +152,8 @@ If needed, you can inject assets (CSS and JavaScript files) to pages with the co
 
     function onStart()
     {
-        $this->controller->addCss('assets/css/hello.css');
-        $this->controller->addJs('assets/js/app.js');
+        $this->addCss('assets/css/hello.css');
+        $this->addJs('assets/js/app.js');
     }
 
 If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme. 

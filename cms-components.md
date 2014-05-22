@@ -2,6 +2,7 @@
 
 - [Introduction](#introduction)
 - [Component aliases](#aliases)
+- [Passing variables to components](#variables)
 
 Components are configurable building elements that can be attached to any page or layout. Components is a key feature of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](ajax), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
@@ -46,3 +47,12 @@ The aliases also allow you to define multiple components of the same class on a 
     maxItems = 10
     [demoTodo todoB]
     maxItems = 20
+
+<a name="variables" class="anchor" href="#variables"></a>
+## Passing variables to components
+
+Components can sometimes use variables at the time they are rendered, similar to [Partials](partials), they can be specified after the component name in the `{% component %}` tag:
+
+    {% component 'demoTodoAlias' maxItems="7" %}
+
+> **Note**: Not all components support passing variables when rendering.

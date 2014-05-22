@@ -273,6 +273,20 @@ The default component markup should be placed in a file named **default.htm**. F
     ==
     {% component 'demoTodo' %}
 
+The default markup can also take parameters that override the [component properties](#component-properties) at the time they are rendered.
+
+    {% component 'demoTodo' maxItems="7" %}
+
+These properties will not be available in the `onRun()` method since they are established after the page cycle has completed. Instead they can be processed by overriding the `onRender()` method in the component class. The CMS controller executes this method before the default markup is rendered.
+
+    public function onRender()
+    {
+        // This code will be executed before the default component
+        // markup is rendered on the page or layout.
+
+        $this->page['var'] = 'Maximum items allowed: ' . $this->property('maxItems');
+    }
+
 <a name="component-partials" class="anchor" href="#component-partials"></a>
 ## Component partials
 
@@ -321,5 +335,7 @@ Components can inject assets (CSS and JavaScript files) to pages or layouts they
 
     public function onRun()
     {
-        $this->controller->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
+        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
     }
+
+If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
