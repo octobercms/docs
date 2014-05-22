@@ -2,8 +2,10 @@
 
 - [Minimum System Requirements](#system-requirements)
 - [Wizard installation](#wizard-installation)
+- [Apache configuration](#apache-configuration)
+- [Nginx configuration](#nginx-configuration)
+- [Lighttpd configuration](#lighttd-configuration)
 - [Command-line installation](#commaind-line-installation)
-- [Webserver configuration](#webserver-configuration)
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
@@ -19,7 +21,6 @@ October CMS has a few system requirements:
 * MCrypt PHP Extension
 * ZipArchive PHP Library
 * GD PHP Library
-* mod_rewrite installed and AllowOverride turned on (or your server's equivalent)
 
 As of PHP 5.5, some OS distributions may require you to manually install the PHP JSON extension.
 When using Ubuntu, this can be done via ``apt-get install php5-json``.
@@ -40,16 +41,22 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 * **The page appears empty when opening the installer**: This might be caused by using older versions of PHP, check that you are running PHP version 5.4 or higher.
 
-<a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
-## Command-line installation
+<a name="apache-configuration" class="anchor" href="#apache-configuration"></a>
+## Apache configuration
 
-If you feel more comfortable with a command-line, there is a CLI install process on the [Console interface page](console#console-install).
+If your webserver is running Apache there are some extra system requirements:
 
-<a name="wizard-installation" class="anchor" href="#webserver-configuration"></a>
-## Webserver configuration
+* mod_rewrite installed and AllowOverride turned on
 
-### Lighttpd configuration
-If you your webserver is running Lighttpd you can use the following configuratiob to run OctoberCMS.
+<a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
+## Nginx configuration
+
+TBA (**Awaiting someone to contribute Nginx configuration**)
+
+<a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
+## Lighttpd configuration
+
+If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS.
 
 Open your site configuration file with your favorite editor.
 
@@ -59,13 +66,18 @@ Paste the following code in the editor and change the **host address** and  **se
 
 ```lua
 $HTTP["host"] =~ "example.domain.com" {
-        server.document-root = "/var/www/example/"
+    server.document-root = "/var/www/example/"
 
-        url.rewrite-once = (
-                "^/modules/(system|backend|cms)/([a-zA-Z0-9]+/[a-zA-Z0-9]+/|/|)assets/(vendor/.*|css|js|javascript|less|images|font(s|)).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff.*|ttf)$" => "$0",
-                "^/(system|themes/[a-zA-Z0-9]+)/assets/(vendor/.*|css|js|javascript|less|images|fonts).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)$" => "$0",
-                "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
-                "^/[^\?]*(\?.*)?$" => "index.php/$1",
-        )
+    url.rewrite-once = (
+        "^/modules/(system|backend|cms)/([a-zA-Z0-9]+/[a-zA-Z0-9]+/|/|)assets/(vendor/.*|css|js|javascript|less|images|font(s|)).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff.*|ttf)$" => "$0",
+        "^/(system|themes/[a-zA-Z0-9]+)/assets/(vendor/.*|css|js|javascript|less|images|fonts).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)$" => "$0",
+        "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
+        "^/[^\?]*(\?.*)?$" => "index.php/$1",
+    )
 }
 ```
+
+<a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
+## Command-line installation
+
+If you feel more comfortable with a command-line, there is a CLI install process on the [Console interface page](console#console-install).
