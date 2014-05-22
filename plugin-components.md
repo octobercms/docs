@@ -57,9 +57,9 @@ When this [component is attached to a page or layout](../cms/components), the cl
 
 You would be able to access its `posts()` method through the `blogPosts` variable. Note that Twig supports the property notation for methods, so that you don't need to use brackets.
 
-    {% foreach post in blogPosts.posts %}
+    {% for post in blogPosts.posts %}
         {{ post }}
-    {% endforeach %}
+    {% endfor %}
 
 <a name="component-properties" class="anchor" href="#component-properties"></a>
 ## Component properties
@@ -305,9 +305,9 @@ Components can reference themselves inside their partials by using the `__SELF__
 
 Components can also reference their own properties.
 
-    {% foreach item in __SELF__.items() %}
+    {% for item in __SELF__.items() %}
         {{ item }}
-    {% endforeach %}
+    {% endfor %}
 
 If inside a component partial you need to render another component partial concatenate the `__SELF__` variable with the partial name:
 
