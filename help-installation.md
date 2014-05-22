@@ -18,6 +18,7 @@ October CMS has a few system requirements:
 * MCrypt PHP Extension
 * ZipArchive PHP Library
 * GD PHP Library
+* mod_rewrite installed and AllowOverride turned on (or your server's equivalent)
 
 As of PHP 5.5, some OS distributions may require you to manually install the PHP JSON extension.
 When using Ubuntu, this can be done via ``apt-get install php5-json``.
