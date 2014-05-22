@@ -3,6 +3,7 @@
 - [Minimum System Requirements](#system-requirements)
 - [Wizard installation](#wizard-installation)
 - [Command-line installation](#commaind-line-installation)
+- [Webserver configuration](#webserver-configuration)
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
@@ -42,3 +43,28 @@ The wizard installation is a recommended way to install October. It is simpler t
 ## Command-line installation
 
 If you feel more comfortable with a command-line, there is a CLI install process on the [Console interface page](console#console-install).
+
+<a name="wizard-installation" class="anchor" href="#webserver-configuration"></a>
+## Webserver configuration
+
+### Lighttpd configuration
+If you your webserver is running Lighttpd you can use the following configuratiob to run OctoberCMS.
+
+Open your site configuration file with your favorite editor.
+
+``nano /etc/lighttpd/conf-enabled/sites.conf``
+
+Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
+
+```lua
+$HTTP["host"] =~ "example.domain.com" {
+        server.document-root = "/var/www/example/"
+
+        url.rewrite-once = (
+                "^/modules/(system|backend|cms)/([a-zA-Z0-9]+/[a-zA-Z0-9]+/|/|)assets/(vendor/.*|css|js|javascript|less|images|font(s|)).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff.*|ttf)$" => "$0",
+                "^/(system|themes/[a-zA-Z0-9]+)/assets/(vendor/.*|css|js|javascript|less|images|fonts).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)$" => "$0",
+                "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
+                "^/[^\?]*(\?.*)?$" => "index.php/$1",
+        )
+}
+```
