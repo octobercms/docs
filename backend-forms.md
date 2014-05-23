@@ -332,3 +332,18 @@ The **preview.htm** view represents the Preview page that allows users to previe
     </div>
 
     <?= $this->formRenderPreview() ?>
+
+
+### Overriding the default form behavior
+
+Sometimes you may wish to use your own logic along with the form. You can use your own `create()`, `update()` or `preview()` action method in the controller, then call the Form behavior method.
+
+    public function update($recordId, $context = null)
+    {
+        //
+        // Do any custom code here
+        //
+
+        // Call the FormController behavior update() method
+        return $this->getClassExtension('Backend.Behaviors.FormController')->update($recordId, $context);
+    }

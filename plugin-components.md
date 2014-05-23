@@ -190,7 +190,7 @@ Sometimes components need to create links to the website pages. For example, the
 
     public function getPostPageOptions()
     {
-        return CmsPropertyHelper::listPages();
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
 <a name="routing-parameters" class="anchor" href="#routing-parameters"></a>
