@@ -51,7 +51,21 @@ If your webserver is running Apache there are some extra system requirements:
 <a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
 ## Nginx configuration
 
-TBA (**Awaiting someone to contribute Nginx configuration**)
+There are small changes required to configure your site in Nginx. 
+
+``nano /etc/nginx/sites-available/default``
+
+Use the following code in **server** section.
+
+```lua
+if (!-e $request_filename)
+{
+    rewrite ^/(.*)$ /index.php?/$1 break;
+    break;
+}
+rewrite themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
+rewrite uploads/protected/.* /index.php break;
+```
 
 <a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
 ## Lighttpd configuration
