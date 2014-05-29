@@ -41,6 +41,8 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 * **The page appears empty when opening the installer**: This might be caused by using older versions of PHP, check that you are running PHP version 5.4 or higher.
 
+* **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
+
 <a name="apache-configuration" class="anchor" href="#apache-configuration"></a>
 ## Apache configuration
 
