@@ -29,9 +29,18 @@ It is possible to hide published plugins. Click the **Hide** menu item on the si
 
 The **Manage updates** menu item allows to update a plugin on the Marketplace. Note that if you're updating a plugin you should increase its version number in the [Plugin version file](/docs/plugin/registration#migrations-version-history), otherwise existing plugin installations won't know that it was updated.
 
+### Updating plugins automatically
+
+Plugins can be updated automatically by using a hook update URL. To find this navigate to the Manage Updates screen of the plugin, there will be an Update URL displayed. Keep this URL secret as once opened it will trigger a new build for the plugin. You can trigger this URL automatically every time you push changes. Some examples are below:
+
+For Github, navigate to the Settings page of your Git repository and click on **Webhooks & Services**. Click the **Add webhook** button and in the **Payload URL** field enter the Update URL from the plugin updates page. Click **Add webhook** to complete.
+
+For Bitbucket, navigate to the Settings page of the Git repository and click on **Hooks**. In the drop-down menu, select **POST** and click **Add hook**. In the URL field, enter the Update URL from the plugin updates page. Click **Save** to complete.
+
+For protected plugins, you can give OctoberCMS rights to view the repo by adding the user **octoberapp** on Github and Bitbucket.
 
 <a name="for-plugin-authors" class="anchor" href="#for-plugin-authors"></a>
-##Suggestions for Marketplace plugin authors
+## Suggestions for Marketplace plugin authors
 
 The Marketplace grows quickly and you want your plugins to be noticeable and people to use them. There are a few simple ways that could help you to achieve this goal.
 
