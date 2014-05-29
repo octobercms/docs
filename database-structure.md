@@ -36,9 +36,9 @@ The version information file defines the plugin version and refers to the migrat
         - Create blog settings table
         - create_blog_settings_table.php
 
-> **Note:** For updates that refer migration or seeding files, the first line is always the comment, then subsequent lines are script file names.
+> **Note:** For updates that refer to migration or seeding files, the first line is always the comment, then subsequent lines are script file names.
 
-October executes updates when you run the `php artisan october:update --env=dev` command in the command line in the application directory. When October is updated with the built-in Update feature in the back-end the updates are executed automatically.
+October executes updates when you run the `php artisan october:up` command in the command line in the application directory. When October is updated with the built-in Update feature in the back-end the updates are executed automatically.
 
 <a name="migration-files" class="anchor" href="#migration-files"></a>
 ## Migration files
