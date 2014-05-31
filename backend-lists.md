@@ -193,7 +193,7 @@ Usually lists are displayed in the index [view](controllers-views-ajax/#introduc
 
 Sometimes you may wish to use your own logic along with the list. You can use your own `index()` action method in the controller, then call the List behavior `index()` method.
 
-    public function index($userId = null)
+    public function index()
     {
         //
         // Do any custom code here
