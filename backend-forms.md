@@ -183,7 +183,7 @@ For each field you can specify these options (where applicable):
       type: textarea
       size: large
 
-`dropdown` - renders a dropdown with specified options. There are 3 ways to provide the drop-down options. The first method defines options directly in the YAML file:
+`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines options directly in the YAML file:
 
     status:
       label: Blog Post Status
@@ -193,19 +193,42 @@ For each field you can specify these options (where applicable):
         published: Published
         archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method should return an array of options in the format **key => label**.
+The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method takes a single parameter, the current key value, and should return an array of options in the format **key => label**. 
 
     status:
       label: Blog Post Status
       type: dropdown
 
+Supplying the dropdown options tn the model class:
 
-The third method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class.
+    public function getStatusOptions($keyValue = null)
+    {
+        return ['all' => 'All', ...];
+    }
+
+The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. This method takes two parameters, the field name and current key value, and should return an array of options in the format **key => label**.
+
+    public function getDropdownOptions($fieldName = null, $keyValue = null)
+    {
+        if ($fieldName == 'status')
+            return ['all' => 'All', ...];
+        else
+            return ['' => '-- none --'];
+    }
+
+The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method takes two parameters, the current key value and field name, and should return an array of options in the format **key => label**.
 
     status:
       label: Blog Post Status
       type: dropdown
       options: listStatuses
+
+Supplying the dropdown options tn the model class:
+
+    public function listStatuses($keyValue = null, $fieldName = null)
+    {
+        return ['published' => 'Published', ...];
+    }
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
 
