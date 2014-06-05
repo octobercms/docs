@@ -5,7 +5,7 @@
 - [Apache configuration](#apache-configuration)
 - [Nginx configuration](#nginx-configuration)
 - [Lighttpd configuration](#lighttd-configuration)
-- [Command-line installation](#commaind-line-installation)
+- [Command-line installation](#command-line-installation)
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
