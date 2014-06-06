@@ -63,7 +63,7 @@ October migrations use the Laravel's [Schema Builder](http://laravel.com/docs/sc
                 $table->text('excerpt')->nullable();
                 $table->text('content');
                 $table->timestamp('published_at')->nullable();
-                $table->boolean('published')->default(false);
+                $table->boolean('is_published')->default(false);
                 $table->timestamps();
             });
         }
@@ -95,7 +95,7 @@ Use the the data seeding files to add, update or remove records in the database 
                 'password_confirmation' => 'user',
                 'first_name'            => 'Adam',
                 'last_name'             => 'Person',
-                'activated'             => 1
+                'is_activated'          => true
             ]);
         }
     }

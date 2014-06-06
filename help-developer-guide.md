@@ -93,6 +93,38 @@ There is a number of class suffixes and prefixes that we recommend to use.
 * Entity
 * Bag
 
+<a name="event-naming" class="anchor" href="#event-naming"></a>
+### Event naming
+
+The term *after* is not used in Events, only the term *before* is used. For example:
+
+* **beforeSetAttribute** - this event comes *before* any default logic.
+* **setAttribute** - this event comes *after* any default logic.
+
+Where possible events should cover global and local versions. Global events should be prefixed with the module or plugin name. For example:
+
+    // For global events, it is prefixed with the module or plugin code
+    Event::fire('cms.page.end')
+
+    // For local events, the prefix is not required
+    $this->fireEvent('page.end')
+
+Avoid using terms such as *onSomething* in event names since the word *bind*/*fire* represent this action word.
+
+<a name="db-table-naming" class="anchor" href="#db-table-naming"></a>
+### Database table naming
+
+Tables names should be prefixed with the author and plugin name.
+
+    acme_blog_xxx
+
+Boolean column names should be prefixed with `is_`
+
+    is_activated
+    is_visible
+
+This is because the model attributes can conflict, for example, `public $visible;` in the Model class conflicts with a database column with the same name.
+
 <a name="strict-trans-tables" class="anchor" href="#strict-trans-tables"></a>
 ### Use the STRICT_TRANS_TABLES mode with MySQL
 
