@@ -48,7 +48,20 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 If your webserver is running Apache there are some extra system requirements:
 
-* mod_rewrite installed and AllowOverride turned on
+* mod_rewrite should be installed
+* AllowOverride option should be switched on
+
+In some cases you may need to uncomment this line in the `.htaccess` file:
+
+    ##
+    ## You may need to uncomment the following line for some hosting environments,
+    ## if you have installed to a subdirectory, enter the name here also.
+    ##
+    # RewriteBase /
+
+If you have installed to a subdirectory, you should add the name of the subdirectory also:
+
+    RewriteBase /mysubdirectory/
 
 <a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
 ## Nginx configuration
