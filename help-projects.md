@@ -12,7 +12,7 @@ October projects allow you to group plugins and themes and simplify the developm
 
 Projects are required if you want to use any [Marketplace plugins](/plugins). You can create a project on the [Projects page](/account/projects) in the Account area or from the **Add to Project** popup window on a Marketplace plugin page. When you have a project you can add plugins to it. The plugins you add to your projects are installed automatically when you update your October installation.
 
-Projects are very useful if you have multiple copies of a same website, for example - several development installation, a staging copy and the production copy. All these installation can be bound to a same project. When you add a plugin to a project on the [October website](/) all your installations will download the plugin as soon as you update them. This reduces the maintenance overhead.
+Projects are very useful if you have multiple copies of a same website, for example - several development installation, a staging copy and the production copy. All these installations can be bound to a same project. When you add a plugin to a project on the [October website](/) all your installations will download the plugin as soon as you update them. This reduces the maintenance overhead.
 
 <a name="project-id" class="anchor" href="#project-id"></a>
 ## How to find the project ID
