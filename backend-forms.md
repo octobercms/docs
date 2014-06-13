@@ -160,6 +160,7 @@ For each field you can specify these options (where applicable):
 * **cssClass** - assigns a CSS class to the field container.
 * **disabled** - grays out the field if set to true. Options: true, false.
 * **stretch** - specifies if this field stretch to fit the parent height.
+* **context** - specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 
 <a name="form-field-types" class="anchor" href="#form-field-types"></a>
 ### Field Types
