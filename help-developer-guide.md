@@ -123,7 +123,7 @@ Boolean column names should be prefixed with `is_`
     is_activated
     is_visible
 
-This is because the model attributes can conflict, for example, `public $visible;` in the Model class conflicts with a database column with the same name.
+This is because the model attributes can conflict, for example, `public $visible;` in the Model class conflicts with a database column with the same name. Some column names are exceptions, for example `notify_user`.
 
 <a name="strict-trans-tables" class="anchor" href="#strict-trans-tables"></a>
 ### Use the STRICT_TRANS_TABLES mode with MySQL
