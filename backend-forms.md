@@ -171,6 +171,12 @@ For each field you can specify these options (where applicable):
       label: Blog Title
       type: text
 
+`number` - renders a single line text box that takes numbers only.
+
+    your_age:
+      label: Your Age
+      type: number
+
 `password ` - renders a single line password field.
 
     user_password:

@@ -109,7 +109,6 @@ With form widgets you can add new control types to the back-end [forms](forms). 
 
 The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). A registered widget can be used in the back-end [form field definition](forms#form-fields) file. Example form widget class definition:
 
-
     namespace Backend\Widgets;
 
     use Backend\Classes\FormWidgetBase;
