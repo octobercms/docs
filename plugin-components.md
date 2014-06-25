@@ -294,6 +294,10 @@ In addition to the default markup, components can also offer additional partials
 
     {% partial 'demoTodo::pagination' %}
 
+A relaxed method is also available that is contextual. If called inside a component partial, it will directly refer to itself. If called inside a theme partial, it will scan all components used on the page/layout for a matching partial name and use that.
+
+    {% partial '@pagination' %}
+
 <a name="referencing-self" class="anchor" href="#referencing-self"></a>
 ### Referencing "self"
 
