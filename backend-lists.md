@@ -36,7 +36,7 @@ The configuration file referred in the `$listConfig` property is defined in YAML
 The following fields are required in the list configuration file:
 
 * **title** - a title for this list.
-* **list** - a reference to list column definition file, see [list columns](#list-coliumns).
+* **list** - a reference to list column definition file, see [list columns](#list-columns).
 * **modelClass** - a model class name to load the list data.
 
 The configuration options listed below are optional. 
@@ -89,7 +89,7 @@ List columns are defined with the YAML file. The column configuration is used by
         blog/
           models/                <=== Plugin models directory
             post/                <=== Model configuration directory
-              list_climns.yaml   <=== Model list columns config file
+              list_columns.yaml  <=== Model list columns config file
             Post.php             <=== model class
 
 
@@ -188,3 +188,17 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
 Usually lists are displayed in the index [view](controllers-views-ajax/#introduction). As lists include the toolbar, a view can consist from the single `listRender()` method call:
 
     <?= $this->listRender() ?>
+
+### Overriding the default list behavior
+
+Sometimes you may wish to use your own logic along with the list. You can use your own `index()` action method in the controller, then call the List behavior `index()` method.
+
+    public function index()
+    {
+        //
+        // Do any custom code here
+        //
+
+        // Call the ListController behavior index() method
+        $this->getClassExtension('Backend.Behaviors.ListController')->index();
+    }

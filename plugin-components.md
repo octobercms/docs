@@ -57,9 +57,9 @@ When this [component is attached to a page or layout](../cms/components), the cl
 
 You would be able to access its `posts()` method through the `blogPosts` variable. Note that Twig supports the property notation for methods, so that you don't need to use brackets.
 
-    {% foreach post in blogPosts.posts %}
+    {% for post in blogPosts.posts %}
         {{ post }}
-    {% endforeach %}
+    {% endfor %}
 
 <a name="component-properties" class="anchor" href="#component-properties"></a>
 ## Component properties
@@ -140,7 +140,7 @@ The list of options could be fetched dynamically from the server when the Inspec
         return ['us'=>'United states', 'ca'=>'Canada'];
     }
 
-Dynamic drop-down lists can depend on other properties. For example, the state list could depend on the selected country. The dependences are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
+Dynamic drop-down lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
 
     public function defineProperties()
     {
@@ -190,7 +190,7 @@ Sometimes components need to create links to the website pages. For example, the
 
     public function getPostPageOptions()
     {
-        return CmsPropertyHelper::listPages();
+        return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
 <a name="routing-parameters" class="anchor" href="#routing-parameters"></a>
@@ -273,6 +273,20 @@ The default component markup should be placed in a file named **default.htm**. F
     ==
     {% component 'demoTodo' %}
 
+The default markup can also take parameters that override the [component properties](#component-properties) at the time they are rendered.
+
+    {% component 'demoTodo' maxItems="7" %}
+
+These properties will not be available in the `onRun()` method since they are established after the page cycle has completed. Instead they can be processed by overriding the `onRender()` method in the component class. The CMS controller executes this method before the default markup is rendered.
+
+    public function onRender()
+    {
+        // This code will be executed before the default component
+        // markup is rendered on the page or layout.
+
+        $this->page['var'] = 'Maximum items allowed: ' . $this->property('maxItems');
+    }
+
 <a name="component-partials" class="anchor" href="#component-partials"></a>
 ## Component partials
 
@@ -291,9 +305,9 @@ Components can reference themselves inside their partials by using the `__SELF__
 
 Components can also reference their own properties.
 
-    {% foreach item in __SELF__.items() %}
+    {% for item in __SELF__.items() %}
         {{ item }}
-    {% endforeach %}
+    {% endfor %}
 
 If inside a component partial you need to render another component partial concatenate the `__SELF__` variable with the partial name:
 
@@ -321,5 +335,7 @@ Components can inject assets (CSS and JavaScript files) to pages or layouts they
 
     public function onRun()
     {
-        $this->controller->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
+        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
     }
+
+If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.

@@ -28,3 +28,37 @@ When you are ready to publish a plugin, click the **Submit for approval** menu i
 It is possible to hide published plugins. Click the **Hide** menu item on the sidebar of the Plugin Details page to hide a published plugin. This item is available only for published plugins. To show the plugin again click the **Unhide** menu item. Unhiding a plugin doesn't require the approval.
 
 The **Manage updates** menu item allows to update a plugin on the Marketplace. Note that if you're updating a plugin you should increase its version number in the [Plugin version file](/docs/plugin/registration#migrations-version-history), otherwise existing plugin installations won't know that it was updated.
+
+### Updating plugins automatically
+
+Plugins can be updated automatically by using a hook update URL. To find this navigate to the Manage Updates screen of the plugin, there will be an Update URL displayed. Keep this URL secret as once opened it will trigger a new build for the plugin. You can trigger this URL automatically every time you push changes. Some examples are below:
+
+For Github, navigate to the Settings page of your Git repository and click on **Webhooks & Services**. Click the **Add webhook** button and in the **Payload URL** field enter the Update URL from the plugin updates page. Click **Add webhook** to complete.
+
+For Bitbucket, navigate to the Settings page of the Git repository and click on **Hooks**. In the drop-down menu, select **POST** and click **Add hook**. In the URL field, enter the Update URL from the plugin updates page. Click **Save** to complete.
+
+For protected plugins, you can give OctoberCMS rights to view the repo by adding the user **octoberapp** on Github and Bitbucket.
+
+<a name="for-plugin-authors" class="anchor" href="#for-plugin-authors"></a>
+## Suggestions for Marketplace plugin authors
+
+The Marketplace grows quickly and you want your plugins to be noticeable and people to use them. There are a few simple ways that could help you to achieve this goal.
+
+<a name="plugin-icons" class="anchor" href="#plugin-icons"></a>
+### Use quality icons
+
+Good plugins require good icons. The plugin icon is the first thing the Marketplace users notice when they browse the plugin list. Quality, bright and recognizable icons draw attention. If you develop an plugin that integrates a known service, like Twitter, FaceBook, LinkedIn, don't hesitate to use the brand icons. For non-integration plugins find free or buy a quality icon that expresses the plugin purpose. There are many service where you can buy nice icons, for example the [Noun Project](http://thenounproject.com/). 
+
+<a name="plugin-descriptions" class="anchor" href="#plugin-descriptions"></a>
+### Write good descriptions 
+
+The Create/Edit Plugin form has three text fields: Description, Content and Documentation. The Description text is displayed in the plugin list and it is very important. The description should briefly but precisely express the plugin functionality. 
+
+The Content field is displayed on the Plugin Details page. Users make the decision to use a plugin after reading the Content. The contents of this field should tell the users what exactly the plugin does, what functions it includes, how to use it for end users and how to configure the plugin. The Content shouldn't describe much about the programming part of the plugin. It's a rule of thumb: the Content field is for end users, the Documentation is for developers.
+
+In the Documentation field describe as much as you can about using the plugin as a developer. Explain what components the plugin includes, which properties the components have, what variables plugins inject to pages and so on. Remember - the more details you provide in the Documentation, the fewer questions will have you users. Also, quality documentation is always a sign of a good product!
+
+<a name="plugin-screenshots" class="anchor" href="#plugin-screenshots"></a>
+### Provide quality screenshots
+
+Screenshots are very important. Sometimes a single glance is enough to understand what a software product does and what the final result looks like. Take screenshots of your plugins and their components in the back-end user interface. Style front-end pages before taking screenshots. Use known CSS frameworks for the demo front-end pages - they are recognizable and this could save you time.

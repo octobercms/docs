@@ -16,7 +16,7 @@ Below is an example of the of the plugin's lang directory:
         acme
           todo              <==== Plugin directory
             lang            <==== Localization directory
-              en            <==== Langauage directory
+              en            <==== Language directory
                 lang.php    <==== Localization file
               fr
                 lang.php

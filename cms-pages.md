@@ -112,7 +112,7 @@ The default variables and Twig extensions provided by October are described in t
 <a name="handling-forms" class="anchor" href="#handling-forms"></a>
 ### Handling forms
 
-You can handle standard forms with hander methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](ajax) article). Use the [form_open()](markup#standard-form) function to define a form that refers to an event handler. Example:
+You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](ajax) article). Use the [form_open()](markup#standard-form) function to define a form that refers to an event handler. Example:
 
     {{ form_open({ request: 'onHandleForm' }) }}
         Please enter a string: <input type="text" name="value"/>
@@ -152,8 +152,8 @@ If needed, you can inject assets (CSS and JavaScript files) to pages with the co
 
     function onStart()
     {
-        $this->controller->addCss('assets/css/hello.css');
-        $this->controller->addJs('assets/js/app.js');
+        $this->addCss('assets/css/hello.css');
+        $this->addJs('assets/js/app.js');
     }
 
 If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme. 

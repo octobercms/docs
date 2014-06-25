@@ -155,10 +155,12 @@ For each field you can specify these options (where applicable):
 * **placeholder** - if the field supports a placeholder value.
 * **comment** - places a descriptive comment below the field.
 * **commentAbove** - places a comment above the field.
+* **default** - specifies the default value for the field.
 * **tab** - assigns the field to a tab.
 * **cssClass** - assigns a CSS class to the field container.
 * **disabled** - grays out the field if set to true. Options: true, false.
 * **stretch** - specifies if this field stretch to fit the parent height.
+* **context** - specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 
 <a name="form-field-types" class="anchor" href="#form-field-types"></a>
 ### Field Types
@@ -168,6 +170,12 @@ For each field you can specify these options (where applicable):
     blog_title:
       label: Blog Title
       type: text
+
+`number` - renders a single line text box that takes numbers only.
+
+    your_age:
+      label: Your Age
+      type: number
 
 `password ` - renders a single line password field.
 
@@ -182,7 +190,7 @@ For each field you can specify these options (where applicable):
       type: textarea
       size: large
 
-`dropdown` - renders a dropdown with specified options. There are 3 ways to provide the drop-down options. The first method defines options directly in the YAML file:
+`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines options directly in the YAML file:
 
     status:
       label: Blog Post Status
@@ -192,19 +200,42 @@ For each field you can specify these options (where applicable):
         published: Published
         archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method should return an array of options in the format **key => label**.
+The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method takes a single parameter, the current key value, and should return an array of options in the format **key => label**. 
 
     status:
       label: Blog Post Status
       type: dropdown
 
+Supplying the dropdown options tn the model class:
 
-The third method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class.
+    public function getStatusOptions($keyValue = null)
+    {
+        return ['all' => 'All', ...];
+    }
+
+The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. This method takes two parameters, the field name and current key value, and should return an array of options in the format **key => label**.
+
+    public function getDropdownOptions($fieldName = null, $keyValue = null)
+    {
+        if ($fieldName == 'status')
+            return ['all' => 'All', ...];
+        else
+            return ['' => '-- none --'];
+    }
+
+The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method takes two parameters, the current key value and field name, and should return an array of options in the format **key => label**.
 
     status:
       label: Blog Post Status
       type: dropdown
       options: listStatuses
+
+Supplying the dropdown options tn the model class:
+
+    public function listStatuses($keyValue = null, $fieldName = null)
+    {
+        return ['published' => 'Published', ...];
+    }
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
 
@@ -332,3 +363,18 @@ The **preview.htm** view represents the Preview page that allows users to previe
     </div>
 
     <?= $this->formRenderPreview() ?>
+
+
+### Overriding the default form behavior
+
+Sometimes you may wish to use your own logic along with the form. You can use your own `create()`, `update()` or `preview()` action method in the controller, then call the Form behavior method.
+
+    public function update($recordId, $context = null)
+    {
+        //
+        // Do any custom code here
+        //
+
+        // Call the FormController behavior update() method
+        return $this->getClassExtension('Backend.Behaviors.FormController')->update($recordId, $context);
+    }

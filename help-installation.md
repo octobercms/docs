@@ -2,7 +2,10 @@
 
 - [Minimum System Requirements](#system-requirements)
 - [Wizard installation](#wizard-installation)
-- [Command-line installation](#commaind-line-installation)
+- [Apache configuration](#apache-configuration)
+- [Nginx configuration](#nginx-configuration)
+- [Lighttpd configuration](#lighttd-configuration)
+- [Command-line installation](#command-line-installation)
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
@@ -38,7 +41,72 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 * **The page appears empty when opening the installer**: This might be caused by using older versions of PHP, check that you are running PHP version 5.4 or higher.
 
-<a name="commaind-line-installation" class="anchor" href="#commaind-line-installation"></a>
+* **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
+
+<a name="apache-configuration" class="anchor" href="#apache-configuration"></a>
+## Apache configuration
+
+If your webserver is running Apache there are some extra system requirements:
+
+* mod_rewrite should be installed
+* AllowOverride option should be switched on
+
+In some cases you may need to uncomment this line in the `.htaccess` file:
+
+    ##
+    ## You may need to uncomment the following line for some hosting environments,
+    ## if you have installed to a subdirectory, enter the name here also.
+    ##
+    # RewriteBase /
+
+If you have installed to a subdirectory, you should add the name of the subdirectory also:
+
+    RewriteBase /mysubdirectory/
+
+<a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
+## Nginx configuration
+
+There are small changes required to configure your site in Nginx. 
+
+``nano /etc/nginx/sites-available/default``
+
+Use the following code in **server** section.
+
+```lua
+if (!-e $request_filename)
+{
+    rewrite ^/(.*)$ /index.php?/$1 break;
+    break;
+}
+rewrite themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
+rewrite uploads/protected/.* /index.php break;
+```
+
+<a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
+## Lighttpd configuration
+
+If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS.
+
+Open your site configuration file with your favorite editor.
+
+``nano /etc/lighttpd/conf-enabled/sites.conf``
+
+Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
+
+```lua
+$HTTP["host"] =~ "example.domain.com" {
+    server.document-root = "/var/www/example/"
+
+    url.rewrite-once = (
+        "^/modules/(system|backend|cms)/([a-zA-Z0-9]+/[a-zA-Z0-9]+/|/|)assets/(vendor/.*|css|js|javascript|less|images|font(s|)).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff.*|ttf)$" => "$0",
+        "^/(system|themes/[a-zA-Z0-9]+)/assets/(vendor/.*|css|js|javascript|less|images|fonts).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)$" => "$0",
+        "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
+        "^/[^\?]*(\?.*)?$" => "index.php/$1",
+    )
+}
+```
+
+<a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
 ## Command-line installation
 
 If you feel more comfortable with a command-line, there is a CLI install process on the [Console interface page](console#console-install).

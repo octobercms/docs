@@ -59,6 +59,8 @@ October models allow to define [relationships](http://laravel.com/docs/eloquent#
 - **$morphTo** - polymorphic version of belongs to. Optional: name, type, id.
 - **$morphOne** - polymorphic version of has one. Optional: type, id. Required: name.
 - **$morphMany** - polymorphic version of has many. Optional: type, id. Required: name.
+- **$morphToMany** - polymorphic version of belongs to many. Optional: table, primaryKey, foreignKey, pivot, timestamps. Required: name.
+- **$morphedByMany** - polymorphic version of belongs to many, inversed. Optional: table, primaryKey, foreignKey, pivot, timestamps. Required: name.
 - **$attachOne** - single file attachment. Optional: public.
 - **$attachMany** - multiple file attachments. Optional: public.
 - **$hasManyThrough** - has many related models through another model. Optional: primaryKey, throughKey. Required: through.

@@ -36,9 +36,9 @@ The version information file defines the plugin version and refers to the migrat
         - Create blog settings table
         - create_blog_settings_table.php
 
-> **Note:** For updates that refer migration or seeding files, the first line is always the comment, then subsequent lines are script file names.
+> **Note:** For updates that refer to migration or seeding files, the first line is always the comment, then subsequent lines are script file names.
 
-October executes updates when you run the `php artisan october:update --env=dev` command in the command line in the application directory. When October is updated with the built-in Update feature in the back-end the updates are executed automatically.
+October executes updates when you run the `php artisan october:up` command in the command line in the application directory. When October is updated with the built-in Update feature in the back-end the updates are executed automatically.
 
 <a name="migration-files" class="anchor" href="#migration-files"></a>
 ## Migration files
@@ -63,7 +63,7 @@ October migrations use the Laravel's [Schema Builder](http://laravel.com/docs/sc
                 $table->text('excerpt')->nullable();
                 $table->text('content');
                 $table->timestamp('published_at')->nullable();
-                $table->boolean('published')->default(false);
+                $table->boolean('is_published')->default(false);
                 $table->timestamps();
             });
         }
@@ -95,7 +95,7 @@ Use the the data seeding files to add, update or remove records in the database 
                 'password_confirmation' => 'user',
                 'first_name'            => 'Adam',
                 'last_name'             => 'Person',
-                'activated'             => 1
+                'is_activated'          => true
             ]);
         }
     }

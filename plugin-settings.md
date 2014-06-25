@@ -79,7 +79,7 @@ The settings model has the static `get()` method that lets you to load individua
 <a name="file-configuration" class="anchor" href="#file-configuration"></a>
 ## File-based configuration
 
-Plugins can have a configuration file `config.php` in the `config` subdirectory of the plugin directory. The configuration files are PHP scriptsthat define and return an **array**. Example configuration file `plugins/acme/demo/config/config.php`:
+Plugins can have a configuration file `config.php` in the `config` subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file `plugins/acme/demo/config/config.php`:
 
     <?php
 
