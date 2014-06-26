@@ -20,6 +20,8 @@ The `this` variable is always presented in October Twig environment. This variab
 - **page** - the current page object.
 - **layout** - the current layout object.
 - **param** - an array of URL parameters.
+- **controller** - the CMS controller.
+- **environment** - the application environment.
 
 You can use the `this` variable to output the page title or description:
 

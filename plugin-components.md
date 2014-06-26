@@ -290,13 +290,17 @@ These properties will not be available in the `onRun()` method since they are es
 <a name="component-partials" class="anchor" href="#component-partials"></a>
 ## Component partials
 
-In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it Would be located in **/plugins/october/demo/components/todo/pagination.htm** and displayed on the page using:
+In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/october/demo/components/todo/pagination.htm** and displayed on the page using:
 
     {% partial 'demoTodo::pagination' %}
 
-A relaxed method is also available that is contextual. If called inside a component partial, it will directly refer to itself. If called inside a theme partial, it will scan all components used on the page/layout for a matching partial name and use that.
+A relaxed method can be used that is contextual. If called inside a component partial, it will directly refer to itself. If called inside a theme partial, it will scan all components used on the page/layout for a matching partial name and use that.
 
     {% partial '@pagination' %}
+
+Multiple components can share partials by placing the partial file in a directory called **components/partials**. The partials found in this directory are used as a fallback when the usual component partial cannot be found. For example, a shared partial located in **/plugins/acme/blog/components/partials/shared.htm** can be displayed on the page by any component using:
+
+    {% partial '@shared' %}
 
 <a name="referencing-self" class="anchor" href="#referencing-self"></a>
 ### Referencing "self"
