@@ -8,6 +8,7 @@
 - [Widget registration](#widget-registration)
 - [Navigation and permissions](#navigation-permissions)
 - [Backend settings](#backend-settings)
+- [Email templates](#email-templates)
 - [Migrations and version history](#migrations-version-history)
 
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
@@ -285,6 +286,19 @@ The following example creates a link to a settings model. Settings models is a p
                 'class'       => 'October\User\Models\Settings',
                 'order'       => 100
             ]
+        ];
+    }
+
+<a name="email-templates" class="anchor" href="#email-templates"></a>
+## Email templates
+
+Email views can be registered as templates that are automatically generated in the back-end for customization. Email templates can be customized via the *Settings > Email templates* menu. The templates can be registered by overriding the `registerEmailTemplates()` method of the [Plugin registration class](#registration-file). The method should return an array where the key is the email view name as described in the [sending email messages](email) article, and the value gives a brief description about what the email template is used for.
+
+    public function registerEmailTemplates()
+    {
+        return [
+            'rainlab.user::emails.activate' => 'Activation email sent to new users.',
+            'rainlab.user::emails.restore'  => 'Password reset instructions for front-end users.',
         ];
     }
 
