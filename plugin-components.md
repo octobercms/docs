@@ -91,6 +91,7 @@ The method should return an array with the property keys as indexes and property
 * **placeholder** - optional placeholder for string and dropdown properties.
 * **options** - optional array of options for dropdown properties.
 * **depends** - an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
+* **group** - an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 
 Inside the component you can read the property value with the `property()` method:
 
