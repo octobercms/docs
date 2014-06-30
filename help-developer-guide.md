@@ -63,13 +63,53 @@ Themes to be named with the `-theme` suffix and optional `oc-` prefix.
     oc-happy-theme
 
 <a name="variable-naming" class="anchor" href="#variable-naming"></a>
-### Variable naming
+### PHP Variable naming
 
 Use **camelCase** everywhere except for the following:
 
 * Postback parameters should use **snake_case**
 * Database columns should use **snake_case**
 * Language keys should use **snake_case**
+
+<a name="element-naming" class="anchor" href="#element-naming"></a>
+### HTML element naming
+
+[Form] Element names should use snake_case (underscores)
+
+    <input name="first_name" />
+
+Where the name is an array, the array keys can be either StudlyCase or snake_case.
+
+    <input name="ForumMember[first_name]" />
+    <input name="forum_member[first_name]" />
+
+Element IDs should be camel case or hyphen-case (dashes)
+
+    <div id="firstNameGroup">
+        <input id="firstName" />
+    </div>
+
+    <div id="first-name-group">
+        <input id="first-name" />
+    </div>
+
+Element classes names should use hyphen-case (dashes)
+
+    <div class="form-group">
+        <input class="form-control" />
+    </div>
+
+<a name="view-naming" class="anchor" href="#view-naming"></a>
+### View file naming
+
+Partial views should begin with an underscore character. Whereas Controller and Layout views do not begin with an underscore character. Since views are often found in a single folder, the underscore (_) and dash (-) characters can be used to organise the files. A dash is used as a substitute for a space character. An underscore is used as a substitute for a slash character (folder or namespace).
+
+    index_fancy-layout.htm       <== Index\Fancy layout
+    form-with-sidebar.htm        <== Form with sidebar
+    _field-container.htm         <== Field container (partial)
+    _field_baloon-selector.htm   <== Field\Baloon Selector (partial)
+
+View files must end with the `.htm` file extension but `.html` is also accepted (todo).
 
 <a name="class-naming" class="anchor" href="#class-naming"></a>
 ### Class naming

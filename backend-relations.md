@@ -50,6 +50,7 @@ The following fields are then used for each relationship name definition:
 
 * **label** - a label for the relation, in the singular tense, required.
 * **emptyMessage** - a message to display when the relationship is empty, optional.
+* **readOnly** - disables the ability to add, update, delete or create relations. default: false
 
 The configuration options listed below are optional.
 
