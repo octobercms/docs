@@ -165,6 +165,19 @@ Boolean column names should be prefixed with `is_`
 
 This is because the model attributes can conflict, for example, `public $visible;` in the Model class conflicts with a database column with the same name. Some column names are exceptions, for example `notify_user`.
 
+<a name="model-naming" class="anchor" href="#model-naming"></a>
+### Model naming
+
+When extending other models, you should prefix the field with at least the plugin name.
+
+    User::extend(function($model) {
+        $model->hasOne['forum_member'] = ['RainLab\Forum\Models\Member'];
+    });
+
+The fully qualified plugin name is also acceptable, for example:
+
+    $user->rainlab_forum_member
+
 <a name="strict-trans-tables" class="anchor" href="#strict-trans-tables"></a>
 ### Use the STRICT_TRANS_TABLES mode with MySQL
 
