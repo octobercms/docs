@@ -260,12 +260,17 @@ Radio lists can also support a secondary description.
 
 Radio lists support three ways of defining the options, exactly like the drop-down lists. For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
 
-`widget` - the `type` field can refer directly to the class name of the widget. You can read more on the [Form Widgets](widgets) article.
+`partial` - renders a partial, the `path` field can refer to a partial view file otherwise the field name is used as the partial name.
+
+    comments_content:
+        type: partial
+        path: @/plugins/acme/blog/models/comments/_content.htm
+
+`widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name. You can read more on the [Form Widgets](widgets) article.
 
     blog_content:
       type: Backend\FormWidgets\RichEditor
       size: huge
-      options: [...]
 
 <a name="form-views" class="anchor" href="#form-views"></a>
 ## Form views
