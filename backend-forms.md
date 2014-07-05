@@ -2,6 +2,7 @@
 
 - [Configuring the form behavior](#configuring-form)
 - [Form fields](#form-fields)
+- [Form widgets](#form-widgets)
 - [Form views](#form-views)
 
 **Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages Create, Update and Preview. The preview page is a read-only version of the update page. When you use the form behavior you don't need to define the `create()`, `update()` and `preview()` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
@@ -266,16 +267,70 @@ Radio lists support three ways of defining the options, exactly like the drop-do
         type: partial
         path: @/plugins/acme/blog/models/comments/_content.htm
 
-`widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name. You can read more on the [Form Widgets](widgets) article.
+`widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
 
     blog_content:
       type: Backend\FormWidgets\RichEditor
       size: huge
 
+<a name="form-widgets" class="anchor" href="#form-widgets"></a>
+## Form widgets
+
+There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets) article.
+
+`richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
+
+    html_content:
+      type: richeditor
+      size: huge
+
+`codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
+
+    css_content:
+      type: codeeditor
+      size: huge
+      language: html
+
+* **language** - code language, for example, php, css, js, html. Default: php.
+* **showGutter** - shows a gutter with line numbers. Default: true.
+* **wrapWords** - breaks long lines on to a new line. Default true.
+* **fontSize** - the text font size. Default: 12.
+
+`fileupload` - renders a file uploader for images or regular files. The field name must use an attachOne or attachMany relation.
+
+    avatar:
+      label: Avatar
+      type: fileupload
+      mode: image
+      imageHeight: 260
+      imageWidth: 260
+
+* **mode** - the expected file type, either file or image. Default: file.
+* **imageWidth** - if using image type, the image will be resized to this width.
+* **imageWidth** - if using image type, the image will be resized to this height.
+
+`datepicker` - renders a text field used for selecting date and times.
+
+    published_at:
+        label: Published
+        type: datepicker
+        mode: date
+
+* **mode** - the expected result, either date, datetime or time. Default: datetime.
+
+`relation` - renders either a dropdown or checkbox list according to the field relation type.
+
+    categories:
+        label: Categories
+        type: relation
+
+* **nameColumn** - the column name to use in the relation used for displaying the name.
+* **emptyOption** - text to display when there is no available selections.
+
 <a name="form-views" class="anchor" href="#form-views"></a>
 ## Form views
 
-For each page your form supports -[Create](#form-create-page), [Update](#form-update-page) and [Preview](#form-preview-page) you should provide a [view file](#introduction) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
+For each page your form supports [Create](#form-create-page), [Update](#form-update-page) and [Preview](#form-preview-page) you should provide a [view file](#introduction) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
 
 The form behavior adds two methods to the controller class: `formRender()` and `formRenderPreview()`. These methods render the form controls configured with the YAML file described above.
 
