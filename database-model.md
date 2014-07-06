@@ -82,6 +82,10 @@ An example of defining a relationship:
         public $attachMany = [
             'featured_images' => ['System\Models\File']
         ];
+
+        public $hasManyThrough = [
+            'followers' => ['RainLab\Forum\Models\Member', 'through' => 'RainLab\Forum\Models\TopicFollower'],
+        ];
     }
 
 Default relationship filters can be used on all relations:
