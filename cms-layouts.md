@@ -103,8 +103,10 @@ In a layout template you can check if a placeholder content exists by using the 
 <a name="dynamic-layouts" class="anchor" href="#dynamic-layouts"></a>
 ## Dynamic layouts
 
-Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details. Inside the layout's [PHP section](themes#php-section) you can define the following functions for handling the page execution life cycle: `onStart()`, `onBeforePageStart()` and `onEnd()`. The `onStart()` function is executed in the beginning of the page processing. The `onBeforePageStart()` function is executed after the layout [components](components) ran, but before the page's `onStart()` function is executed. The `onEnd()` function is executed after the page is rendered. The sequence the handlers are executed is following:
+Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details. Inside the layout's [PHP section](themes#php-section) you can define the following functions for handling the page execution life cycle: `onInit()`, `onStart()`, `onBeforePageStart()` and `onEnd()`. The `onInit()` function is executed when all components are initialized and before AJAX requests are handled. The `onStart()` function is executed in the beginning of the page processing. The `onBeforePageStart()` function is executed after the layout [components](components) ran, but before the page's `onStart()` function is executed. The `onEnd()` function is executed after the page is rendered. The sequence the handlers are executed is following:
 
+* Layout `onInit()` function.
+* Page `onInit()` function.
 * Layout `onStart()` function.
 * Layout components `onRun()` method.
 * Layout `onBeforePageStart()` function.
@@ -112,4 +114,3 @@ Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pag
 * Page components `onRun()` method.
 * Page `onEnd()` function.
 * Layout `onEnd()` function.
-

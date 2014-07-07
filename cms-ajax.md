@@ -70,6 +70,14 @@ AJAX handlers are PHP functions that can be defined in the page or layout [PHP s
 
 > **Note:** If two handlers with a same name defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
 
+The `onInit()` methods found in the [page execution life cycle](layouts#dynamic-pages) can be used for defining code that always executes before an AJAX event is handled.
+
+    function onInit()
+    {
+        // This code will be executed before
+        // an AJAX request is handled.
+    }
+
 <a name="data-attributes" class="anchor" href="#data-attributes"></a>
 ## Data attributes API
 

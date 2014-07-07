@@ -1,18 +1,18 @@
 # Plugin Events and Usage
 
-- [Subscribing to Events](#subscribing-to-events)
-- [Declaring Events](#declaring-events)
-- [Local and global](#local-global)
-- [Event Listing](#event-listing)
+- [Subscribing to events](#subscribing-to-events)
+- [Declaring events](#declaring-events)
+- [Usage examples](#usage-examples)
+- [Available events](#available-events)
 
-Events are an easy way to extend the functionality of core classes and other plugins, this methodology can sometimes be referred to ask *hooks and triggers*. Events in October can be either local using the `fireEvent()` method or global using the `Event::fire()` static method.
+Events are an easy way to extend the functionality of core classes and other plugins, this methodology can sometimes be referred to as *hooks and triggers*. Events in October can be either local to the class using the `fireEvent()` method, or global to the application using the `Event::fire()` static method. Global events usage is taken directly from [Laravel events](http://laravel.com/docs/events). In order to use Local events the class should use the `October\Rain\Support\Traits\Emitter` trait.
 
 <a name="subscribing-to-events" class="anchor" href="#subscribing-to-events"></a>
-## Subscribing to Events
+## Subscribing to events
 
 Subscribing to an event, also known as *hooking on to an event*, can be done from from anywhere, although the most common place is the `boot()` method of a [Plugin registration file](registration#mail-templates).
 
-For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** event.
+For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
 
     public function boot()
     {
@@ -23,85 +23,146 @@ For example, when a user is first registered you might want to add them to a thi
         });
     }
 
-<a name="declaring-events" class="anchor" href="#declaring-events"></a>
-## Declaring Events
+The same can be achieved by extending the model's constructor and using a local event.
 
-You can declare events, also known as *triggering an event*, anywhere in your code. Below is an example:
+    User::extend(function($model){
+        $model->bindEvent('user.register', function() use ($model) {
+            // Code to register $model->email to mailing list
+        });
+    });
+
+<a name="declaring-events" class="anchor" href="#declaring-events"></a>
+## Declaring events
+
+You can declare events, also known as *triggering an event*, anywhere in your code. Below is an example of declaring a global event:
 
     Event::fire('acme.blog.beforePost', ['first parameter', 'second parameter']);
 
+The local equivalent requires the code be in context of the calling object.
+
+    $this->fireEvent('blog.beforePost', ['first parameter', 'second parameter']);
+
 Once this event has been subscribed to, the parameters are available in the handler method. For example:
 
+    // Global
     Event::listen('acme.blog.beforePost', function($param1, $param2){
         echo 'Parameters: ' . $param1 . ' ' . $param2;
     });
 
-<a name="local-global" class="anchor" href="#local-global"></a>
-## Local and global
-There are two types of events - local and global and their usage slightly differ. 
+    // Local
+    $this->bindEvent('blog.beforePost', function($param1, $param2) {
+        echo 'Parameters: ' . $param1 . ' ' . $param2;
+    });
 
-### Local events
-Local events are created using `Class::extend()` or `$instance->extend()` and passing a closure.
+<a name="usage-examples" class="anchor" href="#usage-examples"></a>
+## Usage examples
 
-    <?php namespace Acme\Blog;
+These are some practical examples of how events can be used.
 
-    use System\Classes\PluginBase;
-    use RainLab\User\Models\User;
+### Extending a User model
+
+This example will modify the `model.getAttribute` event of the `User` model by binding to its local event. This is carried out inside the `boot()` method of the [Plugin registration file](registration#routing-initialization). In both cases when the `$model->foo` attribute is accessed, it will return the value *bar*.
 
     class Plugin extends PluginBase
     {
-        ...
+        [...]
 
         public function boot()
         {
-            // Local Event hook that affects all users
+
+            // Local event hook that affects all users
             User::extend(function($model) {
                 $model->bindEvent('model.getAttribute', function($attribute, $value) use ($model) {
-                    if ( $attribute == 'foo' )
+                    if ($attribute == 'foo')
                         return 'bar';
                 });
             });
 
-            // Local Event hook that affects only a single user
-            $user = User::first();
-            $user->extend(function($model) {
-                $model->bindEvent('model.getAttribute', function($attribute, $value) use ($model) {
-                    if ( $attribute == 'foo' )
-                        return 'bar';
+            // Double event hook that affects user #2 only
+            User::extend(function($model) {
+                $model->bindEvent('model.afterFetch', function() use ($model) {
+                    if ($model->id != 2)
+                        return;
+
+                    $model->bindEvent('model.getAttribute', function($attribute, $value) use ($model) {
+                        if ($attribute == 'foo')
+                            return 'bar';
+                    });
                 });
             });
+
         }
     }
 
-### Global events
-Global event hooks work the same way they do in [stock Laravel](http://laravel.com/docs/events) - with `Event::listen()`.
+### Extending a backend form
 
-    <?php namespace Your\Plugin;
-
-    use Event;
-    use System\Classes\PluginBase;
+This example will modify the `backend.form.extendFields` global event of the `Backend\Widget\Form` class and inject some extra fields values under the conditions that the form is being used to modify a user. This event is also subscribed inside the `boot()` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
-        ...
+        [...]
 
         public function boot()
         {
+            // Extend all backend form usage
             Event::listen('backend.form.extendFields', function($widget) {
-                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) return;
-                if (!$widget->model instanceof \RainLab\User\Models\User) return;
 
-                $widget->addFields(...);
+                // Only for the Users controller
+                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users)
+                    return;
+
+                // Only for the User model
+                if (!$widget->model instanceof \RainLab\User\Models\User)
+                    return;
+
+                // Add an extra birthday field
+                $widget->addFields([
+                    'birthday' => [
+                        'label' => 'Birthday',
+                        'comment' => 'Select the users birthday',
+                        'type' => 'datepicker'
+                    ]
+                ]);
             }
         }
     }
 
-Remember to add `use Event;` to the top of your file to use Global Event hooks.
+> Remember to add `use Event` to the top of your class file to use global events.
 
-<a name="event-listing" class="anchor" href="#event-listing"></a>
-## Event Listeing
+### Extending a component
 
-October CMS comes with a large number of event listeners baked in. Some work with both local event and hooks, some only the former. All event listeners are listed below along with any relevant information about their usage.
+This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components#component-class-definition).
+
+    class Topic extends ComponentBase
+    {
+        public function onPost()
+        {
+            [...]
+
+            /*
+             * Extensbility
+             */
+            Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
+            $this->fireEvent('topic.post', [$post, $postUrl]);
+        }
+    }
+
+Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts#dynamic-pages). This will write to the trace log when the `onPost()` event handler is called inside the `Topic` component (above).
+
+    [topic]
+    idParam = ":slug"
+    ==
+    function onInit()
+    {
+        $this['topic']->bindEvent('topic.post', function($post, $postUrl){
+            traceLog('A post has been submitted at '.$postUrl);
+        });
+    }
+
+<a name="available-events" class="anchor" href="#available-events"></a>
+## Available events
+
+October comes with a large number of event listeners baked in. Some work with both local event and hooks, some only the former. All event listeners are listed below along with any relevant information about their usage.
 
 ### Global Events
 

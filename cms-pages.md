@@ -73,7 +73,7 @@ Inside the [Twig section](themes#twig-section) of a page template you can use an
 <a name="page-cycle-handlers" class="anchor" href="#page-cycle-handlers"></a>
 ### Page execution cycle handlers
 
-There are two special functions that could be defined in the PHP section of pages and layouts: `onStart()` and `onEnd()`. The `onStart()` function is executed in the beginning of the page execution. The `onEnd()` function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
+There are special functions that can be defined in the PHP section of pages and layouts: `onInit()`, `onStart()` and `onEnd()`. The `onInit()` function is executed when all components are initialized and before AJAX requests are handled. The `onStart()` function is executed in the beginning of the page execution. The `onEnd()` function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
 
     url = "/"
     ==
