@@ -261,6 +261,13 @@ Radio lists can also support a secondary description.
 
 Radio lists support three ways of defining the options, exactly like the drop-down lists. For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
 
+`checkbox` - renders a single checkbox.
+
+    showFullContent:
+      label: Show full content?
+      type: checkbox
+      default: true
+
 `partial` - renders a partial, the `path` field can refer to a partial view file otherwise the field name is used as the partial name.
 
     comments_content:
