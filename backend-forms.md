@@ -132,7 +132,7 @@ Fields can be placed in three areas, the **outside area**, **primary tabs** or *
       published_at:
         label: Published date
         description: When this blog post was published
-        type: datetime
+        type: datepicker
 
       [...]
 

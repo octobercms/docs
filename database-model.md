@@ -119,11 +119,11 @@ October models can apply modifiers to the attribute values when the model is loa
 
 The following attribute modifiers are supported:
 
-* **$hashable** - values are hashed, they can be verified but cannot be reversed.
-* **$purgeable** - attributes are removed before attempting to save to the database.
+* **$hashable** - values are hashed, they can be verified but cannot be reversed. Requires trait: `October\Rain\Database\Traits\Hashable`.
+* **$purgeable** - attributes are removed before attempting to save to the database. Requires trait: `October\Rain\Database\Traits\Purgeable`.
 * **$jsonable** - values are encoded as JSON before saving and converted to arrays after fetching.
 * **$encrypted** - values are encrypted and decrypted for storing sensitive data.
-* **$slugs** - key attributes are generated as unique url names (slugs) based on value attributes.
+* **$slugs** - key attributes are generated as unique url names (slugs) based on value attributes. Requires trait: `October\Rain\Database\Traits\Sluggable`.
 * **$dates** - values are converted to an instance of Carbon/DateTime objects after fetching.
 * **$timestamps** - boolean that if true will automatically set created_at and updated_at fields.
 
@@ -173,10 +173,12 @@ An example of using an event:
 <a name="model-validation" class="anchor" href="#model-validation"></a>
 ## Model validation
 
-October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation). The validation rules are defined in the model class as a property named `$rules`:
+October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
 
     class User extends \October\Rain\Database\Model
     {
+        use \October\Rain\Database\Traits\Validation;
+
         public $rules = [
             'name'                  => 'required|between:4,16',
             'email'                 => 'required|email',

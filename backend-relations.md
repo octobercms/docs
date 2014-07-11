@@ -52,6 +52,11 @@ The following fields are then used for each relationship name definition:
 * **emptyMessage** - a message to display when the relationship is empty, optional.
 * **readOnly** - disables the ability to add, update, delete or create relations. default: false
 
+The following fields can be used for *many* relations:
+
+* **showSorting** - displays the sorting link on each column. Default: true
+* **defaultSort** - sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
+
 The configuration options listed below are optional.
 
 * **list** - a reference to list column definition file, see [backend list columns](lists#list-columns).

@@ -46,7 +46,7 @@ The configuration options listed below are optional.
 * **recordsPerPage** - records to display per page, use 0 for no pages. Default: 0
 * **toolbar** - reference to a Toolbar Widget configuration file, or an array with configuration (see below).
 * **showSorting** - displays the sorting link on each column. Default: true
-* **defaultSort** - sets a default sorting column and direction when user preference is not defined.
+* **defaultSort** - sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 * **showCheckboxes** - displays checkboxes next to each record. Default: false.
 * **showSetup** - displays the list column set up button. Default: false.
 * **showTree** - displays a tree hierarchy for parent/child records. Default: false.
