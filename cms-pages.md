@@ -1,6 +1,7 @@
 # CMS Pages
 
 - [Page configuration](#configuration)
+- [Page variables](#page-variables)
 - [Dynamic pages](#dynamic-pages)
 - [404 page](#404-page)
 - [Error page](#error-page)
@@ -64,6 +65,26 @@ You can also use regular expressions to validate parameters. To add a validation
     url = "/blog/:post_name?|^[a-z0-9\-]+$" - this will match /blog/my-blog-post
 
 > **Note:** Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
+
+<a name="page-variables" class="anchor" href="#page-variables"></a>
+## Page variables
+
+The properties of a page can be accessed in the markup using the variables found in the `this.page` object. For example, to return the title of a page:
+
+    <p>The title of this page is: {{ this.page.title }}</p>
+
+The following variables are available:
+
+* **this.page.id** - Unique code
+* **this.page.url** - URL
+* **this.page.title** - Title
+* **this.page.description** - Description
+* **this.page.meta_title** - Meta title
+* **this.page.meta_description** - Meta description
+* **this.page.fileName** - File name with extension
+* **this.page.baseFileName** - File name without extension
+
+More information can be found on [default variables in the Markup guide](markup#default-variables).
 
 <a name="dynamic-pages" class="anchor" href="#dynamic-pages"></a>
 ## Dynamic pages
