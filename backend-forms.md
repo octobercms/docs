@@ -163,6 +163,7 @@ For each field you can specify these options (where applicable):
 * **stretch** - specifies if this field stretch to fit the parent height.
 * **context** - specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 * **depends** - an array of other field names this field depends on, when the other fields are modified, this field will update.
+* **required** - places a red asterisk next to the field label to indicate it is required.
 
 <a name="form-field-types" class="anchor" href="#form-field-types"></a>
 ### Field Types
