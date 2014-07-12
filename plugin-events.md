@@ -159,6 +159,34 @@ Next this will demonstrate how to hook to this new event from inside the [page e
         });
     }
 
+### Extending the backend menu
+
+This example will replace the label for CMS and Pages in the backend with *...*.
+
+    class Plugin extends PluginBase
+    {
+        [...]
+
+        public function boot()
+        {
+            Event::listen('backend.menu.extendItems', function($manager){
+
+                $manager->addMainMenuItems('October.Cms', [
+                    'cms' => [
+                        'label' => '...'
+                    ]
+                ]);
+
+                $manager->addSideMenuItems('October.Cms', 'cms', [
+                    'pages' => [
+                        'label' => '...'
+                    ]
+                ]);
+
+            });
+        }
+    }
+
 <a name="available-events" class="anchor" href="#available-events"></a>
 ## Available events
 
