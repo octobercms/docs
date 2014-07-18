@@ -286,6 +286,10 @@ Returning multiple attachment file paths:
     foreach ($model->photos as $photo)
         echo $photo->getPath();
 
+To output the file contents directly, use the `output()` method, this will include the necessary headers for downloading the file:
+
+    echo $model->avatar->output();
+
 You can resize an image with the `getThumb()` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
 
 - **mode** - auto, exact, portrait, landscape, crop (default: auto).
