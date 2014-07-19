@@ -268,7 +268,7 @@ The System / Settings page contains a list of links to the configuration pages. 
                 'category'    => 'Users',
                 'icon'        => 'icon-globe',
                 'url'         => Backend::url('october/user/locations'),
-                'order'       => 100
+                'order'       => 500
             ]
         ];
     }
@@ -284,7 +284,7 @@ The following example creates a link to a settings model. Settings models is a p
                 'category'    => 'Users',
                 'icon'        => 'icon-cog',
                 'class'       => 'October\User\Models\Settings',
-                'order'       => 100
+                'order'       => 500
             ]
         ];
     }
