@@ -123,6 +123,10 @@ Back-end settings pages should set the settings context. It's required in order 
 
     public function __construct()
     {
+        parent::__construct();
+        
+        ...
+
         SettingsManager::setContext('October.Backend', 'editor');
     }
 
