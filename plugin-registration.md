@@ -273,6 +273,8 @@ The System / Settings page contains a list of links to the configuration pages. 
         ];
     }
 
+> **Note:** that back-end settings pages should [set the settings context](../backend/controllers-views-ajax#settings-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described in the [Settings & Config](settings) article.
 
     public function registerSettings()
