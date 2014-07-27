@@ -131,7 +131,7 @@ Where possible events should cover global and local versions. Global events shou
 
 Avoid using terms such as *onSomething* in event names since the word *bind*/*fire* represent this action word.
 
-It is good practise to always pass the calling object as the first parameter to the global event. The local event should not need this.
+It is good practise to always pass the calling object as the first parameter to the global event, the local event should not need this. Local events take priority over global events.
 
     // Local event
     if ($this->fireEvent('beforeAddContent', [$message, $view], true) === false)
