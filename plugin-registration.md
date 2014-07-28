@@ -268,7 +268,8 @@ The System / Settings page contains a list of links to the configuration pages. 
                 'category'    => 'Users',
                 'icon'        => 'icon-globe',
                 'url'         => Backend::url('october/user/locations'),
-                'order'       => 500
+                'order'       => 500,
+                'keywords'    => 'geography place placement'
             ]
         ];
     }
@@ -286,10 +287,13 @@ The following example creates a link to a settings model. Settings models is a p
                 'category'    => 'Users',
                 'icon'        => 'icon-cog',
                 'class'       => 'October\User\Models\Settings',
-                'order'       => 500
+                'order'       => 500,
+                'keywords'    => 'security location'
             ]
         ];
     }
+
+The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 
 <a name="mail-templates" class="anchor" href="#mail-templates"></a>
 ## Mail templates
