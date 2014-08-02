@@ -182,6 +182,13 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         relation: groups
         select: @name
 
+`partial` - allows to display a given partial. The partial will be given `$value` and `$column` values with the former being the row's column value and the latter being an instance of `Backend\Classes\ListColumn`.
+
+    age:
+        label: Age
+        type: partial
+        path: @/plugins/acme/blog/partials/_age.htm
+
 <a name="displaying-list" class="anchor" href="#displaying-list"></a>
 ## Displaying the list
 
