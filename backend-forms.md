@@ -269,11 +269,11 @@ Radio lists support three ways of defining the options, exactly like the drop-do
       type: checkbox
       default: true
 
-`partial` - renders a partial, the `path` field can refer to a partial view file otherwise the field name is used as the partial name.
+`partial` - renders a partial, the `path` field can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial the variable `$formModel` is available as the class object `Backend\Classes\FormField`.
 
-    comments_content:
+    content:
         type: partial
-        path: @/plugins/acme/blog/models/comments/_content.htm
+        path: @/plugins/acme/blog/models/comments/_content_field.htm
 
 `widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
 

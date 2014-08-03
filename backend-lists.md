@@ -116,6 +116,7 @@ For each column can specify these options (where applicable):
 * **sortable** - specifies if this column can be sorted. Default: yes.
 * **select** - defines a custom SQL select statement.
 * **relation** - defines a relationship column.
+* **cssClass** - assigns a CSS class to the column container.
 
 <a name="column-types" class="anchor" href="#column-types"></a>
 ### Column Types
@@ -181,6 +182,12 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Group
         relation: groups
         select: @name
+
+`partial` - renders a partial, the `path` field can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial the variable `$value` is available as the cell value and `$listColumn` as the class object `Backend\Classes\ListColumn`.
+
+    content:
+        type: partial
+        path: @/plugins/acme/blog/models/comments/_content_column.htm
 
 <a name="displaying-list" class="anchor" href="#displaying-list"></a>
 ## Displaying the list

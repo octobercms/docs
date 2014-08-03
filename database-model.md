@@ -69,7 +69,7 @@ October models allow to define [relationships](http://laravel.com/docs/eloquent#
 
 An example of defining a relationship:
 
-    class Post extends \Model
+    class Post extends Model
     {
         public $belongsTo = [
             'user' => ['User', 'foreignKey' => 'user_id']
@@ -91,13 +91,32 @@ An example of defining a relationship:
 Default relationship filters can be used on all relations:
 
 - **order** - sorting order for multiple records.
-- **conditions** - applies a where statement (TODO).
+- **conditions** - filters the relation using a raw where statement.
+- **scope** - filters the relation using a supplied scope method.
+- **push** - if set to false, this relation will not be saved via `push()` (defaults true).
 
-````
-public $belongsToMany = [
-    'categories' => ['Category', 'order' => 'name desc', 'conditions' => 'active = 1']
-];
-````
+Example filter using **order** and **conditions**:
+
+    public $belongsToMany = [
+        'categories' => ['Category', 'order' => 'name desc', 'conditions' => 'is_active = 1']
+    ];
+
+Example filter using **scope**:
+
+    class Post extends Model
+    {
+        public $belongsToMany = [
+            'categories' => ['Category', 'scope' => 'isActive']
+        ];
+    }
+
+    class Category extends Model
+    {
+        public function scopeIsActive($query)
+        {
+            return $query->where('is_active', 1)->orderBy('name', 'desc');
+        }
+    }
 
 <a name="attribute-modifiers" class="anchor" href="#attribute-modifiers"></a>
 ## Attribute modifiers
