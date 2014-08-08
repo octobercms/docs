@@ -179,7 +179,6 @@ The fully qualified plugin name is also acceptable, for example:
 These points are to be considered in a relaxed fashion:
 
 * In classes, properties and methods should be declared as `protected` in favor of `private`. So all classes can be used as base classes.
-* In traits, properties should be declared as `private` in favor of `protected`. So traits can be used in base classes.
 * If a property contains a single value (not an array), make the property `public` instead of a get/set approach.
 * If a property contains a collection (is an array), make the property `protected` with get `getProperties`, `getProperty` and `setProperty`.
 

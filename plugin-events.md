@@ -3,7 +3,6 @@
 - [Subscribing to events](#subscribing-to-events)
 - [Declaring events](#declaring-events)
 - [Usage examples](#usage-examples)
-- [Available events](#available-events)
 
 Events are an easy way to extend the functionality of core classes and other plugins, this methodology can sometimes be referred to as *hooks and triggers*. Events in October can be either local to the class using the `fireEvent()` method, or global to the application using the `Event::fire()` static method. Global events usage is taken directly from [Laravel events](http://laravel.com/docs/events). In order to use Local events the class should use the `October\Rain\Support\Traits\Emitter` trait.
 
@@ -72,7 +71,7 @@ This example will modify the `model.getAttribute` event of the `User` model by b
 
             // Local event hook that affects all users
             User::extend(function($model) {
-                $model->bindEvent('model.getAttribute', function($attribute, $value) use ($model) {
+                $model->bindEvent('model.getAttribute', function($attribute, $value) {
                     if ($attribute == 'foo')
                         return 'bar';
                 });
@@ -84,7 +83,7 @@ This example will modify the `model.getAttribute` event of the `User` model by b
                     if ($model->id != 2)
                         return;
 
-                    $model->bindEvent('model.getAttribute', function($attribute, $value) use ($model) {
+                    $model->bindEvent('model.getAttribute', function($attribute, $value) {
                         if ($attribute == 'foo')
                             return 'bar';
                     });
@@ -186,16 +185,3 @@ This example will replace the label for CMS and Pages in the backend with *...*.
             });
         }
     }
-
-<a name="available-events" class="anchor" href="#available-events"></a>
-## Available events
-
-October comes with a large number of event listeners baked in. Some work with both local event and hooks, some only the former. All event listeners are listed below along with any relevant information about their usage.
-
-### Global Events
-
-Event                                       | Accepts                  | Description                                       | Usage Hints
---------------------------------------------|--------------------------|---------------------------------------------------|--------
-backend.form.extendFields                   | $form                    | Modify a form before render                       | This will trigger for all forms. Restrict to just the form you want to modify using `if (!$widget->getController() instanceof \Author\Plugin\Controllers\ControllerName) return;`
-cms.page.beforeDisplay                      | $controller, $url, $page | Modify a page or redirect away before it's loaded | 
-cms.activeTheme                             |                          | Change the active theme before page load          | return a theme name
