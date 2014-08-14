@@ -21,10 +21,12 @@ You can also disable the ability to hide a hint by setting the key value to a nu
 
 The following properties are available:
 
-* **type** - Sets the color of the hint, supported types: danger, info, success, warning. Default: info.
-* **title** - Adds a title section to the hint.
-* **subtitle** - In addition to the title, adds a second line to the title secion.
-* **icon** - In addition to the title, adds an icon to the title section.
+Property  | Description
+------------- | -------------
+**type** | Sets the color of the hint, supported types: danger, info, success, warning. Default: info.
+**title** | Adds a title section to the hint.
+**subtitle** | In addition to the title, adds a second line to the title secion.
+**icon** | In addition to the title, adds an icon to the title section.
 
 <a name="scoreboards" class="anchor" href="#scoreboards"></a>
 ## Scoreboards

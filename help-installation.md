@@ -15,12 +15,12 @@ Before you proceed, you should check that your server meets the minimum system r
 
 October CMS has a few system requirements:
 
-* PHP 5.4 or higher with **safe_mode** restrictions disabled
-* PDO PHP Extension
-* cURL PHP Extension
-* MCrypt PHP Extension
-* ZipArchive PHP Library
-* GD PHP Library
+1. PHP 5.4 or higher with **safe_mode** restrictions disabled
+1. PDO PHP Extension
+1. cURL PHP Extension
+1. MCrypt PHP Extension
+1. ZipArchive PHP Library
+1. GD PHP Library
 
 As of PHP 5.5, some OS distributions may require you to manually install the PHP JSON extension.
 When using Ubuntu, this can be done via ``apt-get install php5-json``.
@@ -39,17 +39,17 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 ### Troubleshooting installation
 
-* **The page appears empty when opening the installer**: This might be caused by using older versions of PHP, check that you are running PHP version 5.4 or higher.
+1. **The page appears empty when opening the installer**: This might be caused by using older versions of PHP, check that you are running PHP version 5.4 or higher.
 
-* **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
+1. **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 
 <a name="apache-configuration" class="anchor" href="#apache-configuration"></a>
 ## Apache configuration
 
 If your webserver is running Apache there are some extra system requirements:
 
-* mod_rewrite should be installed
-* AllowOverride option should be switched on
+1. mod_rewrite should be installed
+1. AllowOverride option should be switched on
 
 In some cases you may need to uncomment this line in the `.htaccess` file:
 
@@ -68,7 +68,7 @@ If you have installed to a subdirectory, you should add the name of the subdirec
 
 There are small changes required to configure your site in Nginx. 
 
-``nano /etc/nginx/sites-available/default``
+`nano /etc/nginx/sites-available/default`
 
 Use the following code in **server** section.
 
@@ -89,7 +89,7 @@ If your webserver is running Lighttpd you can use the following configuration to
 
 Open your site configuration file with your favorite editor.
 
-``nano /etc/lighttpd/conf-enabled/sites.conf``
+`nano /etc/lighttpd/conf-enabled/sites.conf`
 
 Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
 

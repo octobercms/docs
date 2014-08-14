@@ -8,8 +8,8 @@
 
 October includes several CLI commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Artisan. Please see Laravel documentation for more details.
 
-* [Artisan Overview](http://laravel.com/docs/artisan)
-* [Artisan Development](http://laravel.com/docs/commands)
+1. [Artisan Overview](http://laravel.com/docs/artisan)
+1. [Artisan Development](http://laravel.com/docs/commands)
 
 <a name="console-install" class="anchor" href="#console-install"></a>
 ## Console installation

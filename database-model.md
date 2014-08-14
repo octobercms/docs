@@ -9,7 +9,6 @@
 - [File attachments](#file-attachments)
 - [Deferred binding](#deferred-binding)
 - [Extending models](#extending-models)
-- [Further reading](#further-reading)
 
 October provides the option of using an Active Record pattern to access the database, through the use of the `Model` class. The class extends and shares the features of [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
 
@@ -52,18 +51,20 @@ The `$table` protected field specifies the database table corresponding the mode
 
 October models allow to define [relationships](http://laravel.com/docs/eloquent#relationships) with the model class fields. The following relations are available, along with their optional and required arguments:
 
-- **$hasOne** - has a single related model that belongs to it. Optional: primaryKey.
-- **$hasMany** - has many related models that belong to. Optional: primaryKey.
-- **$belongsTo** - owned by another related model (slave). Optional: foreignKey.
-- **$belongsToMany** - owned by multiple related models. Optional: table, primaryKey, foreignKey, pivot, timestamps.
-- **$morphTo** - polymorphic version of belongs to. Optional: name, type, id.
-- **$morphOne** - polymorphic version of has one. Optional: type, id. Required: name.
-- **$morphMany** - polymorphic version of has many. Optional: type, id. Required: name.
-- **$morphToMany** - polymorphic version of belongs to many. Optional: table, primaryKey, foreignKey, pivot, timestamps. Required: name.
-- **$morphedByMany** - polymorphic version of belongs to many, inversed. Optional: table, primaryKey, foreignKey, pivot, timestamps. Required: name.
-- **$attachOne** - single file attachment. Optional: public.
-- **$attachMany** - multiple file attachments. Optional: public.
-- **$hasManyThrough** - has many related models through another model. Optional: primaryKey, throughKey. Required: through.
+Relation  | Description
+------------- | -------------
+**$hasOne** | has a single related model that belongs to it. Optional: `primaryKey`.
+**$hasMany** | has many related models that belong to. Optional: `primaryKey`.
+**$belongsTo** | owned by another related model (slave). Optional: `foreignKey`.
+**$belongsToMany** | owned by multiple related models. Optional: `table`, `primaryKey`, `foreignKey`, `pivot`, `timestamps`.
+**$morphTo** | polymorphic version of belongs to. Optional: `name`, `type`, `id`.
+**$morphOne** | polymorphic version of has one. Optional: `type`, `id`. Required: `name`.
+**$morphMany** | polymorphic version of has many. Optional: `type`, `id`. Required: `name`.
+**$morphToMany** | polymorphic version of belongs to many. Optional: `table`, `primaryKey`, `foreignKey`, `pivot`, `timestamps`. Required: `name`.
+**$morphedByMany** | polymorphic version of belongs to many, inversed. Optional: `table`, `primaryKey`, `foreignKey`, `pivot`, `timestamps`. Required: `name`.
+**$attachOne** | single file attachment., see [file attachments](#file-attachments) Optional: `public`.
+**$attachMany** | multiple file attachments, see [file attachments](#file-attachments). Optional: `public`.
+**$hasManyThrough** | has many related models through another model. Optional: `primaryKey`, `throughKey`. Required: `through`.
 
 > **Note:** The key arguments are in the context of the defining model. The defining [primary] model is identified by a `primaryKey` and the foreign model is identified by a `foreignKey`.
 
@@ -90,10 +91,12 @@ An example of defining a relationship:
 
 Default relationship filters can be used on all relations:
 
-- **order** - sorting order for multiple records.
-- **conditions** - filters the relation using a raw where statement.
-- **scope** - filters the relation using a supplied scope method.
-- **push** - if set to false, this relation will not be saved via `push()` (defaults true).
+Filter  | Description
+------------- | -------------
+**order** | sorting order for multiple records.
+**conditions** | filters the relation using a raw where query statement.
+**scope** | filters the relation using a supplied scope method.
+**push** | if set to false, this relation will not be saved via `push()`, default: true.
 
 Example filter using **order** and **conditions**:
 
@@ -121,7 +124,7 @@ Example filter using **scope**:
 <a name="attribute-modifiers" class="anchor" href="#attribute-modifiers"></a>
 ## Attribute modifiers
 
-October models can apply modifiers to the attribute values when the model is loaded or saved to the database. The modifiers are defined with the model class properties as arrays.For example:
+October models can apply modifiers to the attribute values when the model is loaded or saved to the database. The modifiers are defined with the model class properties as arrays. For example:
 
     class User extends \October\Rain\Database\Model
     {
@@ -138,20 +141,24 @@ October models can apply modifiers to the attribute values when the model is loa
 
 The following attribute modifiers are supported:
 
-* **$hashable** - values are hashed, they can be verified but cannot be reversed. Requires trait: `October\Rain\Database\Traits\Hashable`.
-* **$purgeable** - attributes are removed before attempting to save to the database. Requires trait: `October\Rain\Database\Traits\Purgeable`.
-* **$jsonable** - values are encoded as JSON before saving and converted to arrays after fetching.
-* **$encrypted** - values are encrypted and decrypted for storing sensitive data.
-* **$slugs** - key attributes are generated as unique url names (slugs) based on value attributes. Requires trait: `October\Rain\Database\Traits\Sluggable`.
-* **$dates** - values are converted to an instance of Carbon/DateTime objects after fetching.
-* **$timestamps** - boolean that if true will automatically set created_at and updated_at fields.
+Property  | Description
+------------- | -------------
+**$hashable** | values are hashed, they can be verified but cannot be reversed. Requires trait: `October\Rain\Database\Traits\Hashable`.
+**$purgeable** | attributes are removed before attempting to save to the database. Requires trait: `October\Rain\Database\Traits\Purgeable`.
+**$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
+**$encrypted** | values are encrypted and decrypted for storing sensitive data.
+**$slugs** | key attributes are generated as unique url names (slugs) based on value attributes. Requires trait: `October\Rain\Database\Traits\Sluggable`.
+**$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
+**$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
 
 The following attribute declarations are supported:
 
-* **$fillable** - values are fields accessible to mass assignment.
-* **$guarded** - values are fields guarded from mass assignment.
-* **$visible** - values are fields made visible when converting the model to JSON or an array.
-* **$hidden** - values are fields made hidden when converting the model to JSON or an array.
+Property  | Description
+------------- | -------------
+**$fillable** | values are fields accessible to mass assignment.
+**$guarded** | values are fields guarded from mass assignment.
+**$visible** | values are fields made visible when converting the model to JSON or an array.
+**$hidden** | values are fields made hidden when converting the model to JSON or an array.
 
 <a name="joined-eager-loading" class="anchor" href="#joined-eager-loading"></a>
 ## Joined eager loading
@@ -166,20 +173,22 @@ Similar to the standard [Eager Loading](http://laravel.com/docs/eloquent#eager-l
 
 You can handle different model life cycle events by defining special methods in the model class. The following events are available:
 
-- **beforeCreate** - before the model is saved, when first created.
-- **afterCreate** - after the model is saved, when first created.
-- **beforeSave** - before the model is saved, either created or updated.
-- **afterSave** - after the model is saved, either created or updated.
-- **beforeValidate** - before the supplied model data is validated.
-- **afterValidate** - after the supplied model data has been validated.
-- **beforeUpdate** - before an existing model is saved.
-- **afterUpdate** - after an existing model is saved.
-- **beforeDelete** - before an existing model is deleted.
-- **afterDelete** - after an existing model is deleted.
-- **beforeRestore** - before a soft-deleted model is restored.
-- **afterRestore** - after a soft-deleted model has been restored.
-- **beforeFetch** - before an existing model is populated.
-- **afterFetch** - after an existing model has been populated.
+Event  | Description
+------------- | -------------
+**beforeCreate** | before the model is saved, when first created.
+**afterCreate** | after the model is saved, when first created.
+**beforeSave** | before the model is saved, either created or updated.
+**afterSave** | after the model is saved, either created or updated.
+**beforeValidate** | before the supplied model data is validated.
+**afterValidate** | after the supplied model data has been validated.
+**beforeUpdate** | before an existing model is saved.
+**afterUpdate** | after an existing model is saved.
+**beforeDelete** | before an existing model is deleted.
+**afterDelete** | after an existing model is deleted.
+**beforeRestore** | before a soft-deleted model is restored.
+**afterRestore** | after a soft-deleted model has been restored.
+**beforeFetch** | before an existing model is populated.
+**afterFetch** | after an existing model has been populated.
 
 An example of using an event:
 
@@ -258,7 +267,7 @@ You can also create custom validation rules the [same way](http://laravel.com/do
 <a name="file-attachments" class="anchor" href="#file-attachments"></a>
 ## File attachments
 
-Models can support file attachments using a polymorphic relationship. 
+Models can support file attachments using a polymorphic relationship.
 
 A single file attachment:
 
@@ -311,9 +320,11 @@ To output the file contents directly, use the `output()` method, this will inclu
 
 You can resize an image with the `getThumb()` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
 
-- **mode** - auto, exact, portrait, landscape, crop (default: auto).
-- **quality** - 0-100 (default: 95).
-- **extension** - jpg, png, gif (default: png).
+Option  | Description
+------------- | -------------
+**mode** | auto, exact, portrait, landscape, crop. Default: auto
+**quality** | 0 - 100. Default: 95
+**extension** | jpg, png, gif. Default: png
 
 The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
 

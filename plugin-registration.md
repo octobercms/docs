@@ -13,12 +13,12 @@
 
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
 
-- Define [components](components).
-- Define user permissions.
-- Add back-end pages, menu items, and forms.
-- Create database table structures and seed data.
-- Alter functionality of the core or other plugins.
-- Provide classes, back-end controllers, views, assets, and other files.
+1. Define [components](components).
+1. Define user permissions.
+1. Add back-end pages, menu items, and forms.
+1. Create database table structures and seed data.
+1. Alter functionality of the core or other plugins.
+1. Provide classes, back-end controllers, views, assets, and other files.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
@@ -56,8 +56,8 @@ Plugin namespaces are very important, especially if you are going to publish you
 
 The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
 
-- Information about the plugin, its name, and author
-- Registration methods for extending the CMS
+1. Information about the plugin, its name, and author.
+1. Registration methods for extending the CMS.
 
 Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is the `pluginDetails()`. An example Plugin registration file:
 
@@ -88,26 +88,30 @@ Registration scripts should use the plugin namespace. The registration script sh
 
 The following methods are supported in the plugin registration class:
 
-- **pluginDetails()** - returns the plugin information.
-- **register()** - register method, called when the plugin is first registered.
-- **boot()** - boot method, called right before the request route.
-- **registerComponents()** - registers any front-end components used by this plugin.
-- **registerMarkupTags()** - registers additional markup tags that can be used in the CMS.
-- **registerNavigation()** - registers back-end navigation items for this plugin.
-- **registerPermissions()** - registers any back-end permissions used by this plugin.
-- **registerSettings()** - registers any back-end configuration links used by this plugin.
-- **registerFormWidgets()** - registers any back-end widgets used by this plugin.
-- **registerReportWidgets()** - registers any report widgets, including the dashboard widgets.
+Method  | Description
+------------- | -------------
+**pluginDetails()** | returns the plugin information.
+**register()** | register method, called when the plugin is first registered.
+**boot()** | boot method, called right before the request route.
+**registerComponents()** | registers any front-end components used by this plugin.
+**registerMarkupTags()** | registers additional markup tags that can be used in the CMS.
+**registerNavigation()** | registers back-end navigation items for this plugin.
+**registerPermissions()** | registers any back-end permissions used by this plugin.
+**registerSettings()** | registers any back-end configuration links used by this plugin.
+**registerFormWidgets()** | registers any back-end widgets used by this plugin.
+**registerReportWidgets()** | registers any report widgets, including the dashboard widgets.
 
 <a name="basic-plugin-information" class="anchor" href="#basic-plugin-information"></a>
 ### Basic plugin information
 
-The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing 4 keys: 
+The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing four keys:
 
-- **name** - the plugin name.
-- **description** - the plugin description.
-- **author** - the plugin author name.
-- **icon** - a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+Key  | Description
+------------- | -------------
+**name** | the plugin name.
+**description** | the plugin description.
+**author** | the plugin author name.
+**icon** | a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/), any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
 
 <a name="routing-initialization" class="anchor" href="#routing-initialization"></a>
 ## Routing and initialization
@@ -274,7 +278,7 @@ The System / Settings page contains a list of links to the configuration pages. 
         ];
     }
 
-> **Note:** that back-end settings pages should [set the settings context](../backend/controllers-views-ajax#settings-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+> **Note:** Back-end settings pages should [set the settings context](../backend/controllers-views-ajax#settings-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
 
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described in the [Settings & Config](settings) article.
 
@@ -334,4 +338,4 @@ The **version.yaml** file, called the *Plugin version file*, contains the versio
         - Creates another table for this new feature
         - create_another_table.php
 
-> **Note:** During the development, to apply plugin updates, log out of the back-end and sign in again. The plugin version history is applied when an administrator signs in to the back-end. Plugin updates are applied automatically for plugins installed from the Marketplace when you update the system.
+> **Note:** To apply plugin updates during development, log out of the back-end and sign in again. The plugin version history is applied when an administrator signs in to the back-end. Plugin updates are applied automatically for plugins installed from the Marketplace when you update the system.

@@ -17,11 +17,13 @@ The theme information file **theme.yaml** contains the theme description, the au
 
 The following fields are supported in the **theme.yaml** file:
 
-* **name** - specifies the theme name, required.
-* **author** - specifies the author name, required.
-* **author-url** - specifies the author website URL, required.
-* **description** - the theme description, required.
-* **code** - the theme code, optional. The value is used on the OctoberCMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
+Field  | Description
+------------- | -------------
+**name** | specifies the theme name, required.
+**author** | specifies the author name, required.
+**authorUrl** | specifies the author website URL, required.
+**description** | the theme description, required.
+**code** | the theme code, optional. The value is used on the OctoberCMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
 
 Example of the theme information file:
 

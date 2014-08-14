@@ -82,16 +82,18 @@ When you add a component to a page or layout you can configure it using using pr
 
 The method should return an array with the property keys as indexes and property parameters as values. The property keys are used for accessing the component property values inside the component class. The property parameters are defined with an array with the following keys:
 
-* **title** - required, the property title, it is used by the component Inspector in the CMS back-end.
-* **description** - required, the property description, it is used by the component Inspector in the CMS back-end.
-* **default** - optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
-* **type** - optional, the default value is **string**. Specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox** and **dropdown**.
-* **validationPattern** - optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
-* **validationMessage** - optional error message to display if the validation fails.
-* **placeholder** - optional placeholder for string and dropdown properties.
-* **options** - optional array of options for dropdown properties.
-* **depends** - an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
-* **group** - an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
+Key  | Description
+------------- | -------------
+**title** | required, the property title, it is used by the component Inspector in the CMS back-end.
+**description** | required, the property description, it is used by the component Inspector in the CMS back-end.
+**default** | optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
+**type** | optional, the default value is **string**. Specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox** and **dropdown**.
+**validationPattern** | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
+**validationMessage** | optional error message to display if the validation fails.
+**placeholder** | optional placeholder for string and dropdown properties.
+**options** | optional array of options for dropdown properties.
+**depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
+**group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 
 Inside the component you can read the property value with the `property()` method:
 
@@ -239,13 +241,13 @@ Components can be involved in the Page execution cycle events by overriding the 
 
 When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-section) and component classes. The sequence the handlers are executed is following:
 
-* Layout `onStart()` function.
-* Layout components `onRun()` method.
-* Layout `onBeforePageStart()` function.
-* Page `onStart()` function.
-* Page components `onRun()` method.
-* Page `onEnd()` function.
-* Layout `onEnd()` function.
+1. Layout `onStart()` function.
+1. Layout components `onRun()` method.
+1. Layout `onBeforePageStart()` function.
+1. Page `onStart()` function.
+1. Page components `onRun()` method.
+1. Page `onEnd()` function.
+1. Layout `onEnd()` function.
 
 <a name="ajax-handlers" class="anchor" href="#ajax-handlers"></a>
 ## AJAX handlers

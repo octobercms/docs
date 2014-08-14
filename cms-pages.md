@@ -18,10 +18,12 @@ All websites have pages. In October pages are represented with page templates. P
 
 Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and page [Components](components), which are explained in another article. The following configuration parameters are supported for pages:
 
-- **url** - the page URL, required. The URL syntax is described below.
-- **title** - the page title, required.
-- **layout** - the page [layout](layouts), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
-- **description** - the page description for the back-end interface, optional.
+Parameter  | Description
+------------- | -------------
+**url** | the page URL, required. The URL syntax is described below.
+**title** | the page title, required.
+**layout** | the page [layout](layouts), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
+**description** | the page description for the back-end interface, optional.
 
 <a name="url-syntax" class="anchor" href="#url-syntax"></a>
 ### URL syntax
@@ -75,14 +77,16 @@ The properties of a page can be accessed in the markup using the variables found
 
 The following variables are available:
 
-* **this.page.id** - Unique code
-* **this.page.url** - URL
-* **this.page.title** - Title
-* **this.page.description** - Description
-* **this.page.meta_title** - Meta title
-* **this.page.meta_description** - Meta description
-* **this.page.fileName** - File name with extension
-* **this.page.baseFileName** - File name without extension
+Variable  | Description
+------------- | -------------
+**this.page.id** | A unique code for the active page.
+**this.page.url** | URL for the active page.
+**this.page.title** | Title for the active page.
+**this.page.description** | Description wording for the page.
+**this.page.meta_title** | Meta title for the page.
+**this.page.meta_description** | Meta description for the page.
+**this.page.fileName** | Page file name in the theme with extension.
+**this.page.baseFileName** | Page file name in the theme without the extension.
 
 More information can be found on [default variables in the Markup guide](markup#default-variables).
 

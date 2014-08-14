@@ -17,11 +17,13 @@ Please refer to the [Twig documentation](http://twig.sensiolabs.org/doc/template
 
 The `this` variable is always presented in October Twig environment. This variable contains an object with three fields: 
 
-- **page** - the current page object.
-- **layout** - the current layout object.
-- **param** - an array of URL parameters.
-- **controller** - the CMS controller.
-- **environment** - the application environment.
+Variable  | Description
+------------- | -------------
+**page** | the current page object.
+**layout** | the current layout object.
+**param** | an array of URL parameters.
+**controller** | the CMS controller.
+**environment** | the application environment.
 
 You can use the `this` variable to output the page title or description:
 
@@ -127,11 +129,13 @@ The next example shows several examples of opening a standard (non AJAX) form wi
 
 The first parameter of the `form_open()` function accepts the option object. The function support the following options:
 
-* **method** - request method. Eg: POST, GET, PUT, DELETE. Corresponds the **method** FORM tag attribute.
-* **request** - a handler name to execute on the server when the form is posted. See the [Handling Forms](pages#handling-forms) article for details about the event handlers.
-* **url** - specifies URL to post the form to - corresponds the **action** FORM tag attribute.
-* **files** - determines whether the form will submit files. Accepted values: **true** and **false**.
-* **model** - a model object for the form model binding.
+Option  | Description
+------------- | -------------
+**method** | request method, corresponds the **method** FORM tag attribute. Eg: POST, GET, PUT, DELETE
+**request** | a handler name to execute on the server when the form is posted, see the [Handling forms](pages#handling-forms) article for details about the event handlers.
+**url** | specifies URL to post the form to, corresponds the **action** FORM tag attribute.
+**files** | determines whether the form will submit files, accepted values: **true** and **false**.
+**model** | a model object for the form model binding.
 
 <a name="ajax-form" class="anchor" href="#ajax-form"></a>
 ### Opening the AJAX form
@@ -148,12 +152,14 @@ The next example shows several examples of opening a AJAX form. The first parame
 
 The second parameter accepts the option object. The function supports the following options:
 
-* **success** - JavaScript string to execute on successful result.
-* **error** - JavaScript string to execute on failed result.
-* **confirm** - a message to display to confirm before sending the request.
-* **redirect** - on successful result, redirect to a URL.
-* **update** - an array of partials to update on success in the following format: { 'partial': '#element' }.
-* **data** - extra data to include with the request in the following format: { 'myvar': 'myvalue' }
+Option  | Description
+------------- | -------------
+**success** | JavaScript string to execute on successful result.
+**error** | JavaScript string to execute on failed result.
+**confirm** | a message to display to confirm before sending the request.
+**redirect** | on successful result, redirect to a URL.
+**update** | an array of partials to update on success in the following format: { 'partial': '#element' }.
+**data** | extra data to include with the request in the following format: { 'myvar': 'myvalue' }.
 
 <a name="styles-tag" class="anchor" href="#styles-tag"></a>
 ## Injecting CSS links

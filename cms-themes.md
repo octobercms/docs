@@ -6,20 +6,20 @@
 
 Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of October themes. You fill find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
-> The active CMS theme is set with the `activeTheme` parameter in the `app/config/cms.php` file or with the Theme Selector on the System / CMS / Front-end Theme page. The active theme set wit the Theme Selector overrides the value in the `app/config/cms.php` file.
-
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
 
 Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects.
 
-- [Pages](pages) - represent the website pages.
-- [Partials](partials) - contain reusable chunks of HTML markup.
-- [Layouts](layouts) - define the page scaffold.
-- [Content files](content) - text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
-- **Asset files** - are resource files like images, CSS and JavaScript files.
+Object  | Description
+------------- | -------------
+[Pages](pages) | represent the website pages.
+[Partials](partials) | contain reusable chunks of HTML markup.
+[Layouts](layouts) | define the page scaffold.
+[Content files](content) | text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
+**Asset files** | are resource files like images, CSS and JavaScript files.
 
-Below you can see an example theme directory structure. Each October theme is represented with a separate directory. The example displays the "website" theme directory.
+Below you can see an example theme directory structure. Each October theme is represented with a separate directory and generally one active theme is used for displaying the website. This example displays the "website" theme directory.
 
     themes/
       website/              <== Theme starts here
@@ -36,6 +36,8 @@ Below you can see an example theme directory structure. Each October theme is re
             my-styles.css
           js/
           images/
+
+> The active theme is set with the `activeTheme` parameter in the `app/config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme back-end page. The theme set with the Theme Selector overrides the value in the `app/config/cms.php` file.
 
 <a name="subdirectories" class="anchor" href="#subdirectories"></a>
 ## Subdirectories
@@ -120,7 +122,7 @@ The code in the PHP section executes every time before the template is rendered.
 
 > **Note:** In the PHP section you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed.
 
-Example namespace reference:
+Example of using a namespace reference:
 
     url = "/blog"
     layout = "default"

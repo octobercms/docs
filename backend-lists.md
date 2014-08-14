@@ -1,8 +1,11 @@
 # Backend lists
 
 - [Configuring the list behavior](#configuring-list)
-- [List columns](#list-columns)
+- [Defining list columns](#list-columns)
+- [Available column types](#column-types)
 - [Displaying the list](#displaying-list)
+- [Applying list filters](#list-filters)
+- [Overriding default behavior](#overriding-behavior)
 
 `List behavior` is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. 
 
@@ -35,27 +38,31 @@ The configuration file referred in the `$listConfig` property is defined in YAML
 
 The following fields are required in the list configuration file:
 
-* **title** - a title for this list.
-* **list** - a reference to list column definition file, see [list columns](#list-columns).
-* **modelClass** - a model class name to load the list data.
+Field  | Description
+------------- | -------------
+**title** | a title for this list.
+**list** | a configuration array or reference to a list column definition file, see [list columns](#list-columns).
+**modelClass** | a model class name, the list data is loaded from this model.
 
-The configuration options listed below are optional. 
+The configuration options listed below are optional.
 
-* **recordUrl** - link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
-* **noRecordsMessage** - a message to display when no records are found, can refer to a [localization string](../plugin/localization).
-* **recordsPerPage** - records to display per page, use 0 for no pages. Default: 0
-* **toolbar** - reference to a Toolbar Widget configuration file, or an array with configuration (see below).
-* **showSorting** - displays the sorting link on each column. Default: true
-* **defaultSort** - sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
-* **showCheckboxes** - displays checkboxes next to each record. Default: false.
-* **showSetup** - displays the list column set up button. Default: false.
-* **showTree** - displays a tree hierarchy for parent/child records. Default: false.
-* **treeExpanded** - if tree nodes should be expanded by default. Default: true.
+Option  | Description
+------------- | -------------
+**recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
+**noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
+**recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
+**toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
+**showSorting** | displays the sorting link on each column. Default: true
+**defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
+**showCheckboxes** | displays checkboxes next to each record. Default: false.
+**showSetup** | displays the list column set up button. Default: false.
+**showTree** | displays a tree hierarchy for parent/child records. Default: false.
+**treeExpanded** | if tree nodes should be expanded by default. Default: true.
 
 <a name="adding-toolbar" class="anchor" href="#adding-toolbar"></a>
 ### Adding a toolbar
 
-To include a toolbar with the list add the following configuration to the list configuration YAML file:
+To include a toolbar with the list, add the following configuration to the list configuration YAML file:
 
     toolbar:
         buttons: list_toolbar
@@ -64,12 +71,16 @@ To include a toolbar with the list add the following configuration to the list c
 
 The toolbar configuration allows:
 
-* **buttons** - a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.htm**
-* **search** - reference to a Search Widget configuration file, or an array with configuration.
+Option  | Description
+------------- | -------------
+**buttons** | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.htm**
+**search** | reference to a Search Widget configuration file, or an array with configuration.
 
-The search configuration supports the following fields:
+The search configuration supports the following options:
 
-* **prompt** - A placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
+Option  | Description
+------------- | -------------
+**prompt** | A placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
 
 The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
 
@@ -79,8 +90,17 @@ The toolbar buttons partial referred above should contain the toolbar control de
             class="btn btn-primary oc-icon-plus">New Post</a>
     </div>
 
+<a name="adding-filters" class="anchor" href="#adding-filters"></a>
+### Filtering the list
+
+To filter a list by user defined input, add the following list configuration to the YAML file:
+
+    filter: config_filter.yaml
+
+The **filter** option should make reference to a [filter configuration file](#list-filters) path or supply an array with the configuration.
+
 <a name="list-columns" class="anchor" href="#list-columns"></a>
-## List columns
+## Defining list columns
 
 List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location: 
 
@@ -93,7 +113,7 @@ List columns are defined with the YAML file. The column configuration is used by
             Post.php             <=== model class
 
 
-The next example shows a typical contents of the list column definitions file.
+The next example shows the typical contents of a list column definitions file.
 
     # ===================================
     #  List Column Definitions
@@ -108,18 +128,37 @@ The next example shows a typical contents of the list column definitions file.
 
 For each column can specify these options (where applicable):
 
-* **label** - a name when displaying the list column to the user.
-* **type** - defines how this column should be rendered (see [Column types](column-types) below).
-* **options** - options used by a render type used (optional).
-* **searchable** - include this field in the list search results. Default: no.
-* **invisible** - specifies if this column is hidden by default. Default: no.
-* **sortable** - specifies if this column can be sorted. Default: yes.
-* **select** - defines a custom SQL select statement.
-* **relation** - defines a relationship column.
-* **cssClass** - assigns a CSS class to the column container.
+Option  | Description
+------------- | -------------
+**label** | a name when displaying the list column to the user.
+**type** | defines how this column should be rendered (see [Column types](column-types) below).
+**options** | options used by a render type used (optional).
+**searchable** | include this field in the list search results. Default: no.
+**invisible** | specifies if this column is hidden by default. Default: no.
+**sortable** | specifies if this column can be sorted. Default: yes.
+**select** | defines a custom SQL select statement.
+**relation** | defines a relationship column.
+**cssClass** | assigns a CSS class to the column container.
+
 
 <a name="column-types" class="anchor" href="#column-types"></a>
-### Column Types
+## Available column types
+
+There are various column types that can be used for the **type** setting, these control how the list column is displayed.
+
+- [Text](#column-text)
+- [Number](#column-number)
+- [Switch](#column-switch)
+- [Date & Time](#column-datetime)
+- [Date](#column-date)
+- [Time](#column-time)
+- [Time since](#column-timesince)
+- [Select](#column-select)
+- [Relation](#column-relation)
+- [Partial](#column-partial)
+
+<a name="column-text" class="anchor" href="#column-text"></a>
+### Text
 
 `text` - displays a text column, aligned left
 
@@ -127,17 +166,26 @@ For each column can specify these options (where applicable):
         label: Full Name
         type: text
 
+<a name="column-number" class="anchor" href="#column-number"></a>
+### Number
+
 `number` - displays a number column, aligned right
 
     age:
         label: Age
         type: number
 
+<a name="column-switch" class="anchor" href="#column-switch"></a>
+### Switch
+
 `switch` - displays a on or off state for boolean fields.
 
     enabled:
         label: Enabled
         type: switch
+
+<a name="column-datetime" class="anchor" href="#column-datetime"></a>
+### Date & Time
 
 `datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
 
@@ -152,11 +200,17 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         type: datetime
         format: l jS \of F Y h:i:s A
 
+<a name="column-date" class="anchor" href="#column-date"></a>
+### Date
+
 `date` - displays the column value as date format **M j, Y**
 
     created_at:
         label: Date
         type: date
+
+<a name="column-time" class="anchor" href="#column-time"></a>
+### Time
 
 `time` - displays the column value as time format **g:i A**
 
@@ -164,11 +218,17 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Date
         type: time
 
+<a name="column-timesince" class="anchor" href="#column-timesince"></a>
+### Time since
+
 `timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
 
     created_at:
         label: Date
         type: timesince
+
+<a name="column-select" class="anchor" href="#column-select"></a>
+### Select
 
 `select` - allows to create a column using a custom select statement. Any valid SQL SELECT statement works here.
 
@@ -176,12 +236,18 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Full Name
         select: concat(first_name, ' ', last_name)
 
+<a name="column-relation" class="anchor" href="#column-relation"></a>
+### Relation
+
 `relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/model#relationships) on your model. In the next example the **@name** value will be translated to a fully qualified reference (eg: table.name).
 
     group:
         label: Group
         relation: groups
         select: @name
+
+<a name="column-partial" class="anchor" href="#column-partial"></a>
+### Partial
 
 `partial` - renders a partial, the `path` field can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial the variable `$value` is available as the cell value and `$listColumn` as the class object `Backend\Classes\ListColumn`.
 
@@ -196,9 +262,54 @@ Usually lists are displayed in the index [view](controllers-views-ajax/#introduc
 
     <?= $this->listRender() ?>
 
-### Overriding the default list behavior
+<a name="list-filters" class="anchor" href="#list-filters"></a>
+## Applying list filters
 
-Sometimes you may wish to use your own logic along with the list. You can use your own `index()` action method in the controller, then call the List behavior `index()` method.
+Lists can be filtered by [adding a filter definition](#adding-filters) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+
+    # ===================================
+    # Filter Scope Definitions
+    # ===================================
+    scopes:
+
+        category:
+            label: Category
+            modelClass: Acme\Blog\Models\Category
+            nameColumn: name
+            conditions: category_id in (:filtered)
+
+        published:
+            label: Hide published
+            type: checkbox
+            conditions: published <> 1
+
+<a name="filter-scope-options" class="anchor" href="#filter-scope-options"></a>
+### Scope options
+
+For each scope you can specify these options (where applicable):
+
+Option  | Description
+------------- | -------------
+**label** | a name when displaying the filter scope to the user.
+**type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
+**conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
+**scope** | specifies a [query scope method](http://laravel.com/docs/eloquent#query-scopes) defined in the **list model** to apply to the list query, the first parameter will contain the filtered value(s).
+**nameColumn** | if filtering by multiple items, a column name to display, taken from the `modelClass` model.
+
+<a name="scope-types" class="anchor" href="#scope-types"></a>
+### Available scope types
+
+These types can be used to determine how the filter scope should be displayed.
+
+Type  | Description
+------------- | -------------
+**group** | filters the list by a group of items, usually by a related model and require a `nameColumn` definition. Eg: Status name as open, closed, etc.
+**checkbox** | used as a switch to apply a predefined condition or query to the list.
+
+<a name="overriding-behavior" class="anchor" href="#overriding-behavior"></a>
+## Overriding default behavior
+
+Sometimes you may wish to use your own logic along with the default list behavior. You can use your own `index()` action method in the controller, then call the List behavior `index()` method.
 
     public function index()
     {
@@ -207,5 +318,5 @@ Sometimes you may wish to use your own logic along with the list. You can use yo
         //
 
         // Call the ListController behavior index() method
-        $this->getClassExtension('Backend.Behaviors.ListController')->index();
+        $this->asExtension('ListController')->index();
     }

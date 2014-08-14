@@ -4,7 +4,7 @@
 - [Back-end settings forms](#backend-forms)
 - [File-based configuration](#file-configuration)
 
-There are two ways to configure plugins - with the back-end settings forms and with the configuration files. The back-end settings forms provide the better user experience, but they are more complicated for the development.
+There are two ways to configure plugins - with the back-end settings forms and with the configuration files. The back-end settings forms provide a better user experience, but they carry more overhead for the initial development.
 
 <a name="database-settings" class="anchor" href="#database-settings"></a>
 ## Database settings

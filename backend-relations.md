@@ -46,22 +46,28 @@ An *Invoice* model with a relationship called `items` should define the first le
         list: @/plugins/acme/pay/models/invoiceitem/columns.yaml
         form: @/plugins/acme/pay/models/invoiceitem/fields.yaml
 
-The following fields are then used for each relationship name definition:
+The following options are then used for each relationship name definition:
 
-* **label** - a label for the relation, in the singular tense, required.
-* **emptyMessage** - a message to display when the relationship is empty, optional.
-* **readOnly** - disables the ability to add, update, delete or create relations. default: false
+Option  | Description
+------------- | -------------
+**label** | a label for the relation, in the singular tense, required.
+**emptyMessage** | a message to display when the relationship is empty, optional.
+**readOnly** | disables the ability to add, update, delete or create relations. default: false
 
-The following fields can be used for *many* relations:
+The following options can be used for *many* relations:
 
-* **showSorting** - displays the sorting link on each column. Default: true
-* **defaultSort** - sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
+Option  | Description
+------------- | -------------
+**showSorting** | displays the sorting link on each column. Default: true
+**defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 
 The configuration options listed below are optional.
 
-* **list** - a reference to list column definition file, see [backend list columns](lists#list-columns).
-* **form** - a reference to form field definition file, see [backend form fields](forms#form-fields).
-* **pivot** - a reference to form field definition file, used for relations with pivot table data.
+Option  | Description
+------------- | -------------
+**list** | a reference to list column definition file, see [backend list columns](lists#list-columns).
+**form** | a reference to form field definition file, see [backend form fields](forms#form-fields).
+**pivot** | a reference to form field definition file, used for relations with pivot table data.
 
 <a name="relationship-types" class="anchor" href="#relationship-types"></a>
 ## Relationship types
@@ -71,10 +77,10 @@ How the relation manager is displayed depends on the relationship definition in 
 <a name="has-many" class="anchor" href="#has-many"></a>
 ### Has Many relation
 
-* Related records are displayed as a **list**.
-* Clicking a record will display an update **form**.
-* Clicking toolbar Create button will display a create **form**.
-* Clicking toolbar Delete button will destroy the record(s).
+1. Related records are displayed as a **list**.
+1. Clicking a record will display an update **form**.
+1. Clicking toolbar Create button will display a create **form**.
+1. Clicking toolbar Delete button will destroy the record(s).
 
 For example, if a *Blog Post* has many *Comments*, the target model is set as the blog post and a list of comments is displayed, using columns from the **list** definition. Clicking on a comment opens a popup form with the fields defined in **form** to update the comment. Comments can be created in the same way. Below is an example of the relation behavior configuration file:
 
@@ -90,9 +96,9 @@ For example, if a *Blog Post* has many *Comments*, the target model is set as th
 <a name="belongs-to-many" class="anchor" href="#belongs-to-many"></a>
 ### Belongs to Many relation
 
-* Related records are displayed as a **list**.
-* Clicking toolbar Add button will display a selection **list**.
-* Clicking toolbar Delete button will destroy the pivot table record(s).
+1. Related records are displayed as a **list**.
+1. Clicking toolbar Add button will display a selection **list**.
+1. Clicking toolbar Delete button will destroy the pivot table record(s).
 
 For example, if a *User* belongs to many *Roles*, the target model is set as the user and a list of roles is displayed, using columns from the **list** definition. Existing roles can be added and removed from the user. Below is an example of the relation behavior configuration file:
 
@@ -107,10 +113,10 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
 <a name="belongs-to-many-pivot" class="anchor" href="#belongs-to-many-pivot"></a>
 ### Belongs to Many (with Pivot Data) relation
 
-* Related records are displayed as a **list**.
-* Clicking a record will display a **pivot** data update form.
-* Clicking toolbar Add button will display a selection **list**, then a **pivot** data entry form.
-* Clicking toolbar Delete button will destroy the pivot table record(s).
+1. Related records are displayed as a **list**.
+1. Clicking a record will display a **pivot** data update form.
+1. Clicking toolbar Add button will display a selection **list**, then a **pivot** data entry form.
+1. Clicking toolbar Delete button will destroy the pivot table record(s).
 
 Continuing the example in *Belongs To Many* relations, if a role also carried an expiry date, clicking on a role will open a popup form with the fields defined in **pivot** to update the expiry date. Below is an example of the relation behavior configuration file:
 
@@ -128,19 +134,19 @@ Continuing the example in *Belongs To Many* relations, if a role also carried an
                     type: datepicker
 
 <a name="belongs-to" class="anchor" href="#belongs-to"></a>
-### Belongs to relation (TODO)
+### Belongs to relation (*Not yet implemented*)
 
-* Related record is displayed as a **form** preview.
-* Clicking toolbar Link to button will display a selection **list**.
-* Clicking toolbar Unlink button will orphan the relationship.
+1. Related record is displayed as a **form** preview.
+1. Clicking toolbar Link to button will display a selection **list**.
+1. Clicking toolbar Unlink button will orphan the relationship.
 
 <a name="has-one" class="anchor" href="#has-one"></a>
-### Has one relation (TODO)
+### Has one relation (*Not yet implemented*)
 
-* Related record is displayed as a **form** preview.
-* Clicking toolbar Create button will display a create **form**.
-* Clicking toolbar Update button will display an update **form**.
-* Clicking toolbar Delete button will destroy the record.
+1. Related record is displayed as a **form** preview.
+1. Clicking toolbar Create button will display a create **form**.
+1. Clicking toolbar Update button will display an update **form**.
+1. Clicking toolbar Delete button will destroy the record.
 
 <a name="relation-display" class="anchor" href="#relation-display"></a>
 ## Displaying a relation manager

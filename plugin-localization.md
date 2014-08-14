@@ -6,6 +6,8 @@
 
 Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugins' localization files are registered automatically. The localization strings are supported automatically in the back-end user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#accessing-strings). 
 
+> **Note**: For translating front-end content, [there are plugins that can be used](http://octobercms.com/plugin/rainlab-translate) for this purpose.
+
 <a name="file-structure" class="anchor" href="#file-structure"></a>
 ## Localization directory and file structure
 
@@ -22,7 +24,7 @@ Below is an example of the of the plugin's lang directory:
                 lang.php
 
 
-The **lang.php** file should define and return an array of any deepness, for example:
+The **lang.php** file should define and return an array of any depth, for example:
 
     <?php
 

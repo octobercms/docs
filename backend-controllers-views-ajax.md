@@ -48,16 +48,18 @@ Usually each controller implements functionality for working with a single type 
 
 The back-end controller base class defines a number of properties that allow to configure the page appearance and manage the page security:
 
-- **$fatalError** - allows to store a fatal exception generated in an action method in order to display it in the view.
-- **$user** - contains a reference to the the back-end user object.
-- **$suppressView** - allows to prevent the view display. Can be updated in the action method or in the controller constructor.
-- **$params** - an array of the routed parameters.
-- **$action** - a name of the action method being executed in the current request.
-- **$publicActions** - defines an array of actions available without the back-end user authentication. Can be overridden in the class definition.
-- **$requiredPermissions** - permissions required to view this page. Can be set in the class definition or in the controller constructor. See [users & permissions](users) for details.
-- **$pageTitle** - sets the page title. Can be set in the action method.
-- **$bodyClass** - body class property used for customizing the layout. Can be set in the controller constructor or action method.
-- **$guarded** - controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
+Property  | Description
+------------- | -------------
+**$fatalError** | allows to store a fatal exception generated in an action method in order to display it in the view.
+**$user** | contains a reference to the the back-end user object.
+**$suppressView** | allows to prevent the view display. Can be updated in the action method or in the controller constructor.
+**$params** | an array of the routed parameters.
+**$action** | a name of the action method being executed in the current request.
+**$publicActions** | defines an array of actions available without the back-end user authentication. Can be overridden in the class definition.
+**$requiredPermissions** | permissions required to view this page. Can be set in the class definition or in the controller constructor. See [users & permissions](users) for details.
+**$pageTitle** | sets the page title. Can be set in the action method.
+**$bodyClass** | body class property used for customizing the layout. Can be set in the controller constructor or action method.
+**$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
 
 <a name="actions-views-routing" class="anchor" href="#actions-views-routing"></a>
 ## Actions, views and routing

@@ -64,11 +64,13 @@ url = "mypage"
 
 We can override the partial by creating a file in our theme called **partials/channel/title.htm**.
 
-The file path is broken down like this:
+The file path segments are broken down like this:
 
-* **partials** - the theme partials directory
-* **channel** - the component alias (a partial subdirectory)
-* **title.htm** - the component partial to override
+Segment  | Description
+------------- | -------------
+**partials** | the theme partials directory
+**channel** | the component alias (a partial subdirectory)
+**title.htm** | the component partial to override
 
 The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed:
 
