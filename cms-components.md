@@ -95,7 +95,7 @@ Components can sometimes use variables at the time they are rendered, similar to
 <a name="viewbag-component" class="anchor" href="#viewbag-component"></a>
 ## The "View Bag" component
 
-There is a special component included in October called `viewBag` that can be used on any page or layout. It allows ad hoc variables to be defined on the fly and accessed inside the markup area easily. A good usage example is defining an active menu item inside a page:
+There is a special component included in October called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page:
 
 
     title = "About"
@@ -103,12 +103,12 @@ There is a special component included in October called `viewBag` that can be us
     layout = "default"
 
     [viewBag]
-    activePage = "about"
+    activeMenu = "about"
     ==
 
     <p>Page content...</p>
 
-Any properties defined for the component are then made available to the layout, or even inside partials using the `viewBag` variable. For example, in this layout the **active** class is added to the list item if the `viewBag.activePage` value is set to **about**:
+Any property defined for the component is then made available inside the page, layout, or partial markup using the `viewBag` variable. For example, in this layout the **active** class is added to the list item if the `viewBag.activeMenu` value is set to **about**:
 
     description = "Default layout"
     ==
@@ -116,6 +116,6 @@ Any properties defined for the component are then made available to the layout, 
 
     <!-- Main navigation -->
     <ul>
-        <li class="{{ viewBag.activePage == 'about' ? 'active' }}">About</li>
+        <li class="{{ viewBag.activeMenu == 'about' ? 'active' }}">About</li>
         [...]
     </ul>
