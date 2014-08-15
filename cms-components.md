@@ -4,6 +4,7 @@
 - [Component aliases](#aliases)
 - [Overriding component partials](#overriding-partials)
 - [Passing variables to components](#variables)
+- [The "View Bag" component](#viewbag-component)
 
 Components are configurable building elements that can be attached to any page or layout. Components is a key feature of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](ajax), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
@@ -90,3 +91,31 @@ Components can sometimes use variables at the time they are rendered, similar to
     {% component 'demoTodoAlias' maxItems="7" %}
 
 > **Note**: Not all components support passing variables when rendering.
+
+<a name="viewbag-component" class="anchor" href="#viewbag-component"></a>
+## The "View Bag" component
+
+There is a special component included in October called `viewBag` that can be used on any page or layout. It allows ad hoc variables to be defined on the fly and accessed inside the markup area easily. A good usage example is defining an active menu item inside a page:
+
+
+    title = "About"
+    url = "/about.html"
+    layout = "default"
+
+    [viewBag]
+    activePage = "about"
+    ==
+
+    <p>Page content...</p>
+
+The variable can then be accessed by the layout, or even inside partials using `viewBag.activePage` variable. For example, this will add the **active** class to the list item if the value is set to **about**:
+
+    description = "Default layout"
+    ==
+    [...]
+
+    <!-- Main navigation -->
+    <ul>
+        <li class="{{ viewBag.activePage == 'about' ? 'active' }}">About</li>
+        [...]
+    </ul>
