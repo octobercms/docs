@@ -119,3 +119,5 @@ Any property defined for the component is then made available inside the page, l
         <li class="{{ viewBag.activeMenu == 'about' ? 'active' }}">About</li>
         [...]
     </ul>
+
+> **Note**: The viewBag component is hidden on the back-end and can only be used for file-based editing at this stage.
