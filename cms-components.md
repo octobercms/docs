@@ -108,7 +108,7 @@ There is a special component included in October called `viewBag` that can be us
 
     <p>Page content...</p>
 
-The variable can then be accessed by the layout, or even inside partials using `viewBag.activePage` variable. For example, this will add the **active** class to the list item if the value is set to **about**:
+The variable can then be accessed by the layout, or even inside partials using `viewBag.activePage` variable. For example, in this layout the **active** class is added to the list item if the **activePage** value is set to **about**:
 
     description = "Default layout"
     ==
