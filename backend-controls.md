@@ -13,7 +13,7 @@ The back-end user interface includes a number of HTML controls that you can use 
 
 You can render informative panels in the backend, called hints, that the user can hide. The first parameter should be a unique key for the purposes of remembering if the hint has been hidden or not. The second parameter is a reference to a partial view. The third parameter can be some extra view variables to pass to the partial, in addition to some hint properties.
 
-    <?= $this->makeHintPartial('my_hint_key, 'my_hint_partial', ['foo' => 'bar']) ?>
+    <?= $this->makeHintPartial('my_hint_key', 'my_hint_partial', ['foo' => 'bar']) ?>
 
 You can also disable the ability to hide a hint by setting the key value to a null value. This hint will always be displayed:
 
