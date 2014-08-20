@@ -66,7 +66,7 @@ If you have installed to a subdirectory, you should add the name of the subdirec
 <a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
 ## Nginx configuration
 
-There are small changes required to configure your site in Nginx. 
+There are small changes required to configure your site in Nginx.
 
 `nano /etc/nginx/sites-available/default`
 
@@ -98,10 +98,11 @@ $HTTP["host"] =~ "example.domain.com" {
     server.document-root = "/var/www/example/"
 
     url.rewrite-once = (
-        "^/modules/(system|backend|cms)/([a-zA-Z0-9]+/[a-zA-Z0-9]+/|/|)assets/(vendor/.*|css|js|javascript|less|images|font(s|)).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff.*|ttf)$" => "$0",
-        "^/(system|themes/[a-zA-Z0-9]+)/assets/(vendor/.*|css|js|javascript|less|images|fonts).*\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)$" => "$0",
+        "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+        "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+        "^/uploads/public/[\w-]+/.*$" => "$0",
         "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
-        "^/[^\?]*(\?.*)?$" => "index.php/$1",
+        "(.*)" => "/index.php$1"
     )
 }
 ```
