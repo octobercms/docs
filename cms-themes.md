@@ -120,9 +120,7 @@ The code in the PHP section executes every time before the template is rendered.
         {{ post.content }}
     {% endfor %}
 
-> **Note:** In the PHP section you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed.
-
-Example of using a namespace reference:
+In the PHP section you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed. Example of using a namespace reference:
 
     url = "/blog"
     layout = "default"
@@ -132,10 +130,21 @@ Example of using a namespace reference:
 
     function onStart()
     {
-      $this['posts'] = Post::get();
+        $this['posts'] = Post::get();
     }
     ?>
     ==
+
+As a general way of setting variables you should use the array access method on `$this`, although for simplicity you can use **object access as read-only**, for example:
+
+    // Write via array
+    $this['foo'] = 'bar';
+
+    // Read via array
+    echo $this['foo'];
+
+    // Read-only via object
+    echo $this->foo;
 
 <a name="twig-section" class="anchor" href="#twig-section"></a>
 ### Twig markup section
