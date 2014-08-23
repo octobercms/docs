@@ -3,7 +3,6 @@
 - [Introduction](#introduction)
 - [Relationships](#relationships)
 - [Attribute modifiers](#attribute-modifiers)
-- [Joined eager loading](#joined-eager-loading)
 - [Model events](#model-events)
 - [Model validation](#model-validation)
 - [File attachments](#file-attachments)
@@ -159,14 +158,6 @@ Property  | Description
 **$guarded** | values are fields guarded from mass assignment.
 **$visible** | values are fields made visible when converting the model to JSON or an array.
 **$hidden** | values are fields made hidden when converting the model to JSON or an array.
-
-<a name="joined-eager-loading" class="anchor" href="#joined-eager-loading"></a>
-## Joined eager loading
-
-Similar to the standard [Eager Loading](http://laravel.com/docs/eloquent#eager-loading), you you can eager load and join a relation to the main query. This feature is mainly useful for `belongsToMany` relationships. The next example will also eager load the relation.
-
-    Post::joinWith('category')->select("concat(posts.name, ' - ', category.name)")->get();
-    Post::joinWith('comments')->where('comments.user_id', 6)->count();
 
 <a name="model-events" class="anchor" href="#model-events"></a>
 ## Model events
