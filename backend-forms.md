@@ -189,8 +189,9 @@ There are various native field types that can be used for the **type** setting. 
 - [Password](#field-password)
 - [Textarea](#field-textarea)
 - [Dropdown](#field-dropdown)
-- [Radio](#field-radio)
+- [Radio List](#field-radio)
 - [Checkbox](#field-checkbox)
+- [Checkbox List](#field-checkboxlist)
 - [Partial](#field-partial)
 - [Widget](#field-widget)
 
@@ -282,7 +283,7 @@ Supplying the dropdown options tn the model class:
     }
 
 <a name="field-radio" class="anchor" href="#field-radio"></a>
-### Radio
+### Radio List
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
 
@@ -304,17 +305,33 @@ Radio lists can also support a secondary description.
         registered: [Registered only, Only logged in member will be able to access this page.]
         guests: [Guests only, Only guest users will be able to access this page.]
 
-Radio lists support three ways of defining the options, exactly like the drop-down lists. For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
+Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
 
 <a name="field-checkbox" class="anchor" href="#field-checkbox"></a>
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
 
-    showFullContent:
-      label: Show full content?
+    show_content:
+      label: Display content
       type: checkbox
       default: true
+
+<a name="field-checkboxlist" class="anchor" href="#field-checkboxlist"></a>
+### Checkbox List
+
+`checkboxlist` - renders a list of checkboxes.
+
+    permissions:
+      label: Permissions
+      type: checkboxlist
+      options:
+        open_account: Open account
+        close_account: Close account
+        modify_account: Modify account
+
+
+Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
 
 <a name="field-partial" class="anchor" href="#field-partial"></a>
 ### Partial
