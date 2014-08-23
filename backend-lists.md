@@ -131,7 +131,7 @@ For each column can specify these options (where applicable):
 Option  | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
-**type** | defines how this column should be rendered (see [Column types](column-types) below).
+**type** | defines how this column should be rendered (see [Column types](#column-types) below).
 **options** | options used by a render type used (optional).
 **searchable** | include this field in the list search results. Default: no.
 **invisible** | specifies if this column is hidden by default. Default: no.
