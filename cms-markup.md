@@ -1,8 +1,8 @@
 # Markup Guide
 
 - [Default variables](#default-variables)
-- [Page links](#page-links)
-- [Links to asset files](#theme-filter)
+- [Linking to pages and assets](#linking-to-pages-assets)
+- [Combining CSS and JavaScript](#combine-css-javascript)
 - [Flash messages](#flash-messages)
 - [Forms](#forms)
 - [Injecting CSS links](#styles-tag)
@@ -44,10 +44,10 @@ The next example demonstrates how to access an URL parameter in a page:
         <p>This is the first post in the blog!</p>
     {% endif %}
 
-<a name="page-links" class="anchor" href="#page-links"></a>
-## Page links
+<a name="linking-to-pages-assets" class="anchor" href="#linking-to-pages-assets"></a>
+## Linking to pages and assets
 
-October provides several Twig filters that help to generate links to pages and asset files. 
+October provides several Twig filters that help to generate links to pages and asset files.
 
 <a name="app-filter" class="anchor" href="#app-filter"></a>
 ### Link to a page relative to the application
@@ -55,6 +55,15 @@ October provides several Twig filters that help to generate links to pages and a
 The `|app` filter returns an absolute URL, including the domain name and protocol, to a page specified in the parameter. The next example would return a string like **http://example.com/about-us**:
 
     <a href="{{ '/about-us'|app }}">About Us</a>
+
+<a name="theme-filter" class="anchor" href="#theme-filter"></a>
+### Link to an asset relative to the theme
+
+The `|theme` filter returns a URL like the [app filter](#app-filter) to an asset specified in the parameter. The next example shows how to refer to a JavaScript file from the theme assets directory:
+
+    <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
+
+Asset files of the same type can also be [combined and minified](#combine-css-javascript) using this filter.
 
 <a name="page-filter" class="anchor" href="#page-filter"></a>
 ### Link to a page file name with reverse routing
@@ -77,18 +86,49 @@ Another great feature of the reverse routing is the route parameter persisting. 
 
 As you can see we don't need to specify the **post_id** parameter, because it is already known on the Preview page - it was loaded from the Preview Post page URL.
 
-<a name="theme-filter" class="anchor" href="#theme-filter"></a>
-## Links to asset files
+<a name="combine-css-javascript" class="anchor" href="#combine-css-javascript"></a>
+## Combining CSS and JavaScript
 
-Assets files reside in the **assets** subdirectory of a theme directory. October provides the `|theme` filter for creating links to assets files. The next example shows how to refer to a JavaScript file from the theme assets directory:
-
-    <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
-
-The `|theme` filter allows to combine assets of the same type on the fly by passing an array of files: 
+Theme assets usually reside in the **assets** subdirectory of a theme directory. October provides the `|theme` filter for [creating links to assets files](#theme-filter), it can also combine assets of the same type by passing an array of files:
 
     <link href="{{ ['assets/css/styles1.css', 'assets/css/styles2.css']|theme }}" rel="stylesheet">
 
 You can enable the assets minification with the `enableAssetMinify` parameter in the `app/config/cms.php` script. By default the minification is disabled.
+
+<a name="combiner-aliases" class="anchor" href="#combiner-aliases"></a>
+### Combiner aliases
+
+The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](ajax#introduction) can be included in the combiner:
+
+    <script src="{{ [
+        '@jquery'
+        '@framework',
+        '@framework.extras',
+        'assets/javascript/app.js']|theme }}"></script>
+
+The following aliases are supported:
+
+Alias  | Description
+------------- | -------------
+jquery | Reference to the jQuery library used in the back-end. (JavaScript)
+framework | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
+framework.extras | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
+
+> **Note:** The same alias can be used for JavaScript or CSS, at least one explicit reference with a file extension is needed in the array to determine which to use.
+
+<a name="external-combiner-paths" class="anchor" href="#external-combiner-paths"></a>
+### External combiner paths
+
+In some cases you may wish to combine a file outside the theme, this is achieved by prefixing the path with a symbol to create a dynamic path. For example, a path beginning with `~/` will create a path relative to the application:
+
+    <script src="{{ ['~/modules/system/assets/js/framework.js']|theme }}"></script>
+
+These symbols are supported for creating dynamic paths:
+
+Symbol  | Description
+------------- | -------------
+`$` | Relative to the plugins directory
+`~` | Relative to the application directory
 
 <a name="flash-messages" class="anchor" href="#flash-messages"></a>
 ## Flash messages
