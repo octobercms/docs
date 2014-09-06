@@ -67,6 +67,8 @@ Relation  | Description
 
 > **Note:** The key arguments are in the context of the defining model. The defining [primary] model is identified by a `primaryKey` and the foreign model is identified by a `foreignKey`.
 
+> **Note:** Maybe it should be noted there that you could have to reference the namespace of your model, for example: \Acme\Plugin\Models\Category or the class of the model will not be found.
+
 An example of defining a relationship:
 
     class Post extends Model
