@@ -57,7 +57,7 @@ Option  | Description
 **showCheckboxes** | displays checkboxes next to each record. Default: false.
 **showSetup** | displays the list column set up button. Default: false.
 **showTree** | displays a tree hierarchy for parent/child records. Default: false.
-**treeExpanded** | if tree nodes should be expanded by default. Default: true.
+**treeExpanded** | if tree nodes should be expanded by default. Default: false.
 
 <a name="adding-toolbar" class="anchor" href="#adding-toolbar"></a>
 ### Adding a toolbar
