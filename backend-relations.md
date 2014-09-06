@@ -45,6 +45,8 @@ An *Invoice* model with a relationship called `items` should define the first le
         label: Invoice Line Item
         list: @/plugins/acme/pay/models/invoiceitem/columns.yaml
         form: @/plugins/acme/pay/models/invoiceitem/fields.yaml
+        manage:
+            recordsPerPage: 10
 
 The following options are then used for each relationship name definition:
 
@@ -54,13 +56,6 @@ Option  | Description
 **emptyMessage** | a message to display when the relationship is empty, optional.
 **readOnly** | disables the ability to add, update, delete or create relations. default: false
 
-The following options can be used for *many* relations:
-
-Option  | Description
-------------- | -------------
-**showSorting** | displays the sorting link on each column. Default: true
-**defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
-
 The configuration options listed below are optional.
 
 Option  | Description
@@ -68,6 +63,17 @@ Option  | Description
 **list** | a reference to list column definition file, see [backend list columns](lists#list-columns).
 **form** | a reference to form field definition file, see [backend form fields](forms#form-fields).
 **pivot** | a reference to form field definition file, used for relations with pivot table data.
+**view** | configuration specific to the view container, see below.
+**manage** | configuration specific to the management popup, see below.
+
+These configuration values can be specified for the **view** or **manage** options.
+
+Option  | Type | Description
+------------- | -------------
+**showSearch** | List | display an input for searching the records. Default: false
+**showSorting** | List | displays the sorting link on each column. Default: true
+**defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
+**recordsPerPage** | List | maximum rows to display for each page.
 
 <a name="relationship-types" class="anchor" href="#relationship-types"></a>
 ## Relationship types
