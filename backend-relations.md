@@ -69,7 +69,7 @@ Option  | Description
 These configuration values can be specified for the **view** or **manage** options.
 
 Option  | Type | Description
-------------- | -------------
+------------- | ------------- | -------------
 **showSearch** | List | display an input for searching the records. Default: false
 **showSorting** | List | displays the sorting link on each column. Default: true
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
