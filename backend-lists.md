@@ -275,7 +275,7 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
         category:
             label: Category
             modelClass: Acme\Blog\Models\Category
-            nameColumn: name
+            nameFrom: name
             conditions: category_id in (:filtered)
 
         published:
@@ -294,7 +294,7 @@ Option  | Description
 **type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
 **scope** | specifies a [query scope method](http://laravel.com/docs/eloquent#query-scopes) defined in the **list model** to apply to the list query, the first parameter will contain the filtered value(s).
-**nameColumn** | if filtering by multiple items, a column name to display, taken from the `modelClass` model.
+**nameFrom** | if filtering by multiple items, a column to display for the name, taken from the `modelClass` model.
 
 <a name="scope-types" class="anchor" href="#scope-types"></a>
 ### Available scope types
@@ -303,7 +303,7 @@ These types can be used to determine how the filter scope should be displayed.
 
 Type  | Description
 ------------- | -------------
-**group** | filters the list by a group of items, usually by a related model and require a `nameColumn` definition. Eg: Status name as open, closed, etc.
+**group** | filters the list by a group of items, usually by a related model and require a `nameFrom` definition. Eg: Status name as open, closed, etc.
 **checkbox** | used as a switch to apply a predefined condition or query to the list.
 
 <a name="overriding-behavior" class="anchor" href="#overriding-behavior"></a>

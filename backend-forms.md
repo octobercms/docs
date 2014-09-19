@@ -193,6 +193,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Checkbox](#field-checkbox)
 - [Checkbox List](#field-checkboxlist)
 - [Partial](#field-partial)
+- [Hint](#field-hint)
 - [Widget](#field-widget)
 
 <a name="field-text" class="anchor" href="#field-text"></a>
@@ -342,6 +343,15 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         type: partial
         path: @/plugins/acme/blog/models/comments/_content_field.htm
 
+<a name="field-partial" class="anchor" href="#field-partial"></a>
+### Hint
+
+`hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
+
+    content:
+        type: hint
+        path: @/plugins/acme/blog/models/comments/_content_field.htm
+
 <a name="field-widget" class="anchor" href="#field-widget"></a>
 ### Widget
 
@@ -423,15 +433,17 @@ Option  | Description
 <a name="widget-relation" class="anchor" href="#widget-relation"></a>
 ### Relation
 
-`relation` - renders either a dropdown or checkbox list according to the field relation type.
+`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list.
 
     categories:
         label: Categories
         type: relation
+        nameFrom: title
 
 Option  | Description
 ------------- | -------------
-**nameColumn** | the column name to use in the relation used for displaying the name.
+**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
+**descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
 **emptyOption** | text to display when there is no available selections.
 
 <a name="form-views" class="anchor" href="#form-views"></a>
@@ -459,18 +471,18 @@ The **create.htm** view represents the Create page that allows users to create n
 
         <div class="form-buttons layout-item fix">
             <div class="loading-indicator-container">
-                <button 
-                    type="button" 
-                    data-request="onSave" 
-                    data-request-data="close:true" 
-                    data-hotkey="ctrl+enter"
-                    data-hotkey-mac="cmd+enter"
-                    data-load-indicator="Creating Category..." 
+                <button
+                    type="button"
+                    data-request="onSave"
+                    data-request-data="close:true"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="Creating Category..."
                     class="btn btn-default">
                     Create and Close
                 </button>
-                <span class="btn-text"> or 
-                <a href="<?= Backend::url('acme/blog/categories') ?>">Cancel</a></span>
+                <span class="btn-text">
+                    or <a href="<?= Backend::url('acme/blog/categories') ?>">Cancel</a>
+                </span>
             </div>
         </div>
 
@@ -494,26 +506,25 @@ The **update.htm** view represents the Update page that allows users to update o
 
         <div class="form-buttons layout-item fix">
             <div class="loading-indicator-container">
-                <button 
-                    type="button" 
-                    data-request="onSave" 
-                    data-request-data="close:true" 
-                    data-hotkey="ctrl+enter"
-                    data-hotkey-mac="cmd+enter"
-                    data-load-indicator="Saving Category..." 
+                <button
+                    type="button"
+                    data-request="onSave"
+                    data-request-data="close:true"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="Saving Category..."
                     class="btn btn-default">
                     Save and Close
                 </button>
                 <button 
-                    type="button" 
+                    type="button"
                     class="oc-icon-trash-o btn-icon danger pull-right"
-                    data-request="onDelete" 
+                    data-request="onDelete"
                     data-load-indicator="Deleting Category..."
                     data-request-confirm="Do you really want to delete this category?">
                 </button>
-
-                <span class="btn-text"> or 
-                <a href="<?= Backend::url('acme/blog/categories') ?>">Cancel</a></span>
+                <span class="btn-text">
+                    or <a href="<?= Backend::url('acme/blog/categories') ?>">Cancel</a>
+                </span>
             </div>
         </div>
     <?= Form::close() ?>
@@ -531,7 +542,6 @@ The **preview.htm** view represents the Preview page that allows users to previe
     </div>
 
     <?= $this->formRenderPreview() ?>
-
 
 <a name="overriding-behavior" class="anchor" href="#overriding-behavior"></a>
 ## Overriding default behavior
