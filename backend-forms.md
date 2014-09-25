@@ -178,6 +178,8 @@ Option  | Description
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **depends** | an array of other field names this field depends on, when the other fields are modified, this field will update.
 **required** | places a red asterisk next to the field label to indicate it is required.
+**attributes** | specify custom HTML attributes to add to the form field element.
+**containerAttributes** | specify custom HTML attributes to add to the form field container.
 
 <a name="field-types" class="anchor" href="#field-types"></a>
 ## Available field types
