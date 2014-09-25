@@ -114,7 +114,7 @@ The following configuration options are supported for the Preview page:
 
 Option  | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](Localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization).
 
 <a name="form-fields" class="anchor" href="#form-fields"></a>
 ## Defining form fields
