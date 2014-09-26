@@ -5,9 +5,10 @@
 - [Inspecting markup variables](#inspecting-markup-variables)
 - [Error page](#error-page)
 
-By default debug mode in October is turned *off*, this means detailed error information is not displayed and this can be useful for debugging and troubleshooting issues.
 
-To switch on debug mode, open the configuration file `config/app.php` and change the `debug` value to **true**.
+By default detailed error reporting is turned *on* so it is helpful to see detailed error information which can be useful for debugging and troubleshooting issues. When this feature is turned off, when there is a problem in a page, a friendly error message will be displayed.
+
+When development has ended, it is advised that you switch off debug mode, open the configuration file `config/app.php` and change the `debug` value to **false**.
 
     /*
     |--------------------------------------------------------------------------
@@ -20,9 +21,7 @@ To switch on debug mode, open the configuration file `config/app.php` and change
     |
     */
 
-    'debug' => true,
-
-When development has ended, it is advised that you revert this configuration value back to **false**.
+    'debug' => false,
 
 <a name="event-log" class="anchor" href="#event-log"></a>
 ## Event log
