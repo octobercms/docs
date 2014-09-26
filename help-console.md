@@ -188,6 +188,7 @@ October comes bundled with the [Dispatcher package](https://github.com/indatus/d
 
     use Symfony\Component\Console\Input\InputOption;
     use Symfony\Component\Console\Input\InputArgument;
+    use Indatus\Dispatcher\Scheduling\Schedulable;
     use Indatus\Dispatcher\Scheduling\ScheduledCommand;
 
     class MyConsoleCommand extends ScheduledCommand
@@ -204,7 +205,7 @@ October comes bundled with the [Dispatcher package](https://github.com/indatus/d
          * @param Scheduler $scheduler
          * @return \Indatus\Dispatcher\Scheduling\Schedulable
          */
-        public function schedule($scheduler)
+        public function schedule(Schedulable $scheduler)
         {
             // Run every 5 minutes
             return $scheduler->everyMinutes(5);
