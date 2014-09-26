@@ -5,6 +5,7 @@
 - [Apache configuration](#apache-configuration)
 - [Nginx configuration](#nginx-configuration)
 - [Lighttpd configuration](#lighttd-configuration)
+- [Setting up the crontab](#crontab-setup)
 - [Command-line installation](#command-line-installation)
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
@@ -106,6 +107,20 @@ $HTTP["host"] =~ "example.domain.com" {
     )
 }
 ```
+
+<a name="crontab-setup" class="anchor" href="#crontab-setup"></a>
+## Setting up the crontab
+
+By default *queued jobs* are executed using a simple database driven [Queue driver for Laravel](http://laravel.com/docs/queues) and repeating *scheduled tasks* are managed by [Dispatcher](https://github.com/indatus/dispatcher).
+
+For these automated tasks to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October:
+
+```php
+* * * * * php /path/to/artisan queue:cron 1>> /dev/null 2>&1
+* * * * * php /path/to/artisan scheduled:run 1>> /dev/null 2>&1
+```
+
+> **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 
 <a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
 ## Command-line installation

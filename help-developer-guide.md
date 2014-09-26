@@ -90,14 +90,12 @@ Partial views should begin with an underscore character. Whereas Controller and 
     _field-container.htm         <== Field container (partial)
     _field_baloon-selector.htm   <== Field\Baloon Selector (partial)
 
-View files must end with the `.htm` file extension but `.html` is also accepted (todo).
+View files must end with the `.htm` file extension.
 
 <a name="class-naming" class="anchor" href="#class-naming"></a>
 ### Class naming
 
-There is a number of class suffixes and prefixes that we recommend to use. 
-
-> Don't get naming paralysis. Yes, names are very important but they're not important enough to waste huge amounts of time on. If you can't think up a good name in five minutes, move on.
+There is a number of class suffixes and prefixes that we recommend to use.
 
 1. Manager
 1. Builder
@@ -113,6 +111,8 @@ There is a number of class suffixes and prefixes that we recommend to use.
 1. Factory
 1. Entity
 1. Bag
+
+> Don't get naming paralysis. Yes, names are very important but they're not important enough to waste huge amounts of time on. If you can't think up a good name in five minutes, move on.
 
 <a name="event-naming" class="anchor" href="#event-naming"></a>
 ### Event naming
