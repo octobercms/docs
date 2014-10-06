@@ -4,7 +4,7 @@
 - [Subdirectories](#subdirectories)
 - [Template structure](#structure)
 
-Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of October themes. You fill find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
