@@ -6,6 +6,7 @@
 - [Form widgets](#form-widgets)
 - [Form views](#form-views)
 - [Overriding default behavior](#overriding-behavior)
+- [Extending form fields](#extending-form-fields)
 
 **Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages Create, Update and Preview. The preview page is a read-only version of the update page. When you use the form behavior you don't need to define the `create()`, `update()` and `preview()` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
@@ -559,3 +560,41 @@ Sometimes you may wish to use your own logic along with the default form behavio
         // Call the FormController behavior update() method
         return $this->asExtension('FormController')->update($recordId, $context);
     }
+
+<a name="extending-form-fields" class="anchor" href="#extending-form-fields"></a>
+## Extending form fields
+
+You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
+
+    class Categories extends \Backend\Classes\Controller
+    {
+        public $implement = ['Backend.Behaviors.FormController'];
+
+        public $formConfig = 'form_config.yaml';
+    }
+
+Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
+
+        Categories::extendFormFields(function($form, $model, $context){
+
+            if (!$model instanceof MyModel)
+                return;
+
+            $form->addFields([
+                'my_field' => [
+                    'label'   => 'My Field',
+                    'comment' => 'This is a custom field I have added.',
+                ],
+            ]);
+
+        });
+
+The following methods are available on the $form object.
+
+Method  | Description
+------------- | -------------
+**addFields** | adds new fields to the outside area
+**addTabFields** | adds new fields to the tabbed area
+**addSecondaryTabFields** | adds new fields to the secondary tabbed area
+
+Each method takes an array of fields similar to the [form field configuration](#form-fields).

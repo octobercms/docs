@@ -6,19 +6,20 @@
 - [Displaying the list](#displaying-list)
 - [Applying list filters](#list-filters)
 - [Overriding default behavior](#overriding-behavior)
+- [Extending list columns](#extending-list-columns)
 
 `List behavior` is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. 
 
-List behavior depends on form [column definitions](#form-fields) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on form [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 
-    class Categories extends \Backend\Classes\Controller {
-        public $implement = [
-            'Backend.Behaviors.ListController'
-        ];
+    class Categories extends \Backend\Classes\Controller
+    {
+        public $implement = ['Backend.Behaviors.ListController'];
 
         public $listConfig = 'list_config.yaml';
+    }
 
 > **Note:** Very often the list and [form behavior](form) are used together in a same controller.
 
@@ -133,7 +134,7 @@ Option  | Description
 **label** | a name when displaying the list column to the user.
 **type** | defines how this column should be rendered (see [Column types](#column-types) below).
 **options** | options used by a render type used (optional).
-**searchable** | include this field in the list search results. Default: no.
+**searchable** | include this column in the list search results. Default: no.
 **invisible** | specifies if this column is hidden by default. Default: no.
 **sortable** | specifies if this column can be sorted. Default: yes.
 **select** | defines a custom SQL select statement.
@@ -178,7 +179,7 @@ There are various column types that can be used for the **type** setting, these 
 <a name="column-switch" class="anchor" href="#column-switch"></a>
 ### Switch
 
-`switch` - displays a on or off state for boolean fields.
+`switch` - displays a on or off state for boolean columns.
 
     enabled:
         label: Enabled
@@ -320,3 +321,39 @@ Sometimes you may wish to use your own logic along with the default list behavio
         // Call the ListController behavior index() method
         $this->asExtension('ListController')->index();
     }
+
+
+<a name="extending-list-columns" class="anchor" href="#extending-list-columns"></a>
+## Extending list columns
+
+You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
+
+    class Categories extends \Backend\Classes\Controller
+    {
+        public $implement = ['Backend.Behaviors.ListController'];
+
+        public $listConfig = 'list_config.yaml';
+    }
+
+Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
+
+        Categories::extendListColumns(function($list, $model, $context){
+
+            if (!$model instanceof MyModel)
+                return;
+
+            $list->addColumns([
+                'my_column' => [
+                    'label'   => 'My Column',
+                ],
+            ]);
+
+        });
+
+The following methods are available on the $list object.
+
+Method  | Description
+------------- | -------------
+**addColumns** | adds new columns to the list
+
+Each method takes an array of columns similar to the [list column configuration](#list-columns).
