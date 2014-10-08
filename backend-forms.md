@@ -175,6 +175,7 @@ Option  | Description
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
 **disabled** | grays out the field if set to true. Options: true, false.
+**hidden** | hides the field from the view. Options: true, false.
 **stretch** | specifies if this field stretch to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **depends** | an array of other field names this field depends on, when the other fields are modified, this field will update.
