@@ -3,6 +3,7 @@
 - [Introduction](#introduction)
 - [Registration file](#registration-file)
 - [Routing and initialization](#routing-initialization)
+- [Dependency definitions](#dependency-definitions)
 - [Component registration](#component-registration)
 - [Extending Twig](#extending-twig)
 - [Widget registration](#widget-registration)
@@ -44,7 +45,7 @@ Not all plugin directories are required. The only required file is the **Plugin.
           components/
           Plugin.php     <=== Plugin registration file
 
-> **Note**: if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](#migrations-version-history) file is required.
+> **Note:** if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](#migrations-version-history) file is required.
 
 <a name="namespaces" class="anchor" href="#namespaces"></a>
 ### Plugin namespaces
@@ -127,6 +128,8 @@ The `register()` method is called immediately when the plugin is registered. The
         });
     }
 
+> **Note:** The `boot()` and `register()` methods are not called during the update process to protect the system from critical errors.
+
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [Laravel Routing documentation](http://laravel.com/docs/routing). For example:
 
     Route::group(['prefix' => 'api_acme_blog'], function() {
@@ -134,6 +137,27 @@ Plugins can also supply a file named **routes.php** that contain custom routing 
         Route::get('cleanup_posts', function(){ return Posts::cleanUp(); });
 
     });
+
+<a name="dependency-definitions" class="anchor" href="#dependency-definitions"></a>
+## Dependency definitions
+
+A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
+
+    namespace Acme\Blog;
+
+    class Plugin extends \System\Classes\PluginBase
+    {
+        /**
+         * @var array Plugin dependencies
+         */
+        public $require = ['Acme.User'];
+
+        [...]
+    }
+
+Dependency definitions will affect how the plugin operates and [how the update process applies updates](../database/structure#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
+
+Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 
 <a name="component-registration" class="anchor" href="#component-registration"></a>
 ## Component registration

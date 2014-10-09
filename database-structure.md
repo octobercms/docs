@@ -1,6 +1,7 @@
 # Table Structure
 
 - [Updates files](#update-files)
+- [Update process](#update-process)
 - [Migration files](#migration-files)
 - [Data seeding files](#data-seeding-files)
 
@@ -36,9 +37,22 @@ The version information file defines the plugin version and refers to the migrat
         - Create blog settings table
         - create_blog_settings_table.php
 
-> **Note:** For updates that refer to migration or seeding files, the first line is always the comment, then subsequent lines are script file names.
+For updates that refer to migration or seeding files, the first line is always the comment, then subsequent lines are script file names.
 
-October executes updates when you run the `php artisan october:up` command in the command line in the application directory. When October is updated with the built-in Update feature in the back-end the updates are executed automatically.
+> **Note:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
+
+<a name="update-process" class="anchor" href="#update-process"></a>
+## Update process
+
+Any given [update file](#update-files) will only be applied once after a successful execution. October executes the update process automatically when any of the following occurs:
+
+1. When an administrator signs in to the back-end.
+
+2. When the system is updated with the built-in Update feature in the back-end.
+
+3. When the console command `php artisan october:up` is called in the command line from the application directory.
+
+Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
 
 <a name="migration-files" class="anchor" href="#migration-files"></a>
 ## Migration files
