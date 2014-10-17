@@ -80,6 +80,8 @@ The page can inject more content to the placeholder. The `{% default %}` tag spe
         {% default %}
     {% endput %}
 
+If the `{% put %}` tag for a placeholder with default content is not present, the default placeholder content is displayed.
+
 <a name="checking-placeholder-exits" class="anchor" href="#checking-placeholder-exits"></a>
 ### Checking a placeholder exists
 
