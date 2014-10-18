@@ -206,35 +206,41 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
 <a name="widget-registration" class="anchor" href="#widget-registration"></a>
 ## Widget registration
 
-Plugins can register [form widgets](../backend/widgets#form-widgets) by overriding the `registerFormWidgets()` method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget name and context in the values. Example:
+### Form widget registration
+
+Plugins can register [form widgets](../backend/widgets#form-widgets) by overriding the `registerFormWidgets()` method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget label and code in the values. Example:
 
     public function registerFormWidgets()
     {
         return [
             'Backend\FormWidgets\CodeEditor' => [
                 'label' => 'Code editor',
-                'alias' => 'codeeditor'
+                'code'  => 'codeeditor'
             ]
         ];
     }
 
-Plugins can register [report widgets](../backend/widgets#report-widgets) by overriding the `registerReportWidgets()` method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget name and context in the values. Example:
+The **label** element defines a general name for the form field. The **code** element defines a short code that can be used when referencing the widget in the [Form field definitions](../backend/forms#field-widget), it should be a unique value to avoid conflicts with other form fields.
+
+### Report widget registration
+
+Plugins can register [report widgets](../backend/widgets#report-widgets) by overriding the `registerReportWidgets()` method in the plugin registration class. The method should return an array containing the widget classes in the keys and widget label and context in the values. Example:
 
     public function registerReportWidgets()
     {
         return [
-            'RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview'=>[
+            'RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
                 'label'   => 'Google Analytics traffic overview',
                 'context' => 'dashboard'
             ],
-            'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources'=>[
+            'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources' => [
                 'label'   => 'Google Analytics traffic sources',
                 'context' => 'dashboard'
             ]
         ];
     }
 
-The **name** element defines the widget name for the Add Widget popup window. The **context** element defines the context where the widget could be used. October's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the **dashboard** context.
+The **label** element defines the widget name for the Add Widget popup window. The **context** element defines the context where the widget could be used. October's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the **dashboard** context.
 
 <a name="navigation-permissions" class="anchor" href="#navigation-permissions"></a>
 ## Navigation and permissions

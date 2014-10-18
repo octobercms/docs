@@ -33,7 +33,7 @@ The configuration file referred in the `$listConfig` property is defined in YAML
     # ===================================
 
     title: Blog Posts
-    list: @/plugins/acme/blog/models/post/columns.yaml
+    list: ~/plugins/acme/blog/models/post/columns.yaml
     modelClass: Acme\Blog\Models\Post
     recordUrl: acme/blog/posts/update/:id
 
@@ -240,12 +240,12 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
 <a name="column-relation" class="anchor" href="#column-relation"></a>
 ### Relation
 
-`relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/model#relationships) on your model. In the next example the **@name** value will be translated to a fully qualified reference (eg: table.name).
+`relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/model#relationships) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
 
     group:
         label: Group
         relation: groups
-        select: @name
+        select: name
 
 <a name="column-partial" class="anchor" href="#column-partial"></a>
 ### Partial
@@ -254,7 +254,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
 
     content:
         type: partial
-        path: @/plugins/acme/blog/models/comments/_content_column.htm
+        path: ~/plugins/acme/blog/models/comments/_content_column.htm
 
 <a name="displaying-list" class="anchor" href="#displaying-list"></a>
 ## Displaying the list

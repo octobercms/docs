@@ -465,7 +465,7 @@ The **create.htm** view represents the Create page that allows users to create n
     <div class="control-breadcrumb">
         <ul>
             <li><a href="<?= Backend::url('acme/blog/categories') ?>">Blog Categories</a></li>
-            <li><?= e($this->pageTitle) ?></li>
+            <li><?= $this->pageTitle ?></li>
         </ul>
     </div>
 
@@ -500,7 +500,7 @@ The **update.htm** view represents the Update page that allows users to update o
     <div class="control-breadcrumb">
         <ul>
             <li><a href="<?= Backend::url('acme/blog/posts') ?>">Blog Categories</a></li>
-            <li><?= e($this->pageTitle) ?></li>
+            <li><?= $this->pageTitle ?></li>
         </ul>
     </div>
 
@@ -541,7 +541,7 @@ The **preview.htm** view represents the Preview page that allows users to previe
     <div class="control-breadcrumb">
         <ul>
             <li><a href="<?= Backend::url('rainlab/blog/categories') ?>">Blog Categories</a></li>
-            <li><?= e($this->pageTitle) ?></li>
+            <li><?= $this->pageTitle ?></li>
         </ul>
     </div>
 
