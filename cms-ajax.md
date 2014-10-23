@@ -8,6 +8,7 @@
 - [Global AJAX events](#global-events)
 - [Returning data from AJAX handlers](#returning-data-from-handlers)
 - [Redirections in AJAX handlers](#redirections-in-handlers)
+- [Pushing content updates](#pushing-content-updates)
 
 October includes the AJAX framework that lets you to execute AJAX handlers defined in your [pages](pages), [layouts](layouts) or [components](components) and update page blocks with [partials](partials). The AJAX framework comes in two flavors - as JavaScript API and data attributes API. The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
 
@@ -275,3 +276,18 @@ If you need to redirect the browser to another location, return the `Redirect` o
     {
         return Redirect::to('http://google.com');
     }
+
+
+<a name="pushing-content-updates" class="anchor" href="#pushing-content-updates"></a>
+## Pushing content updates
+
+AJAX handlers can push content updates to the client-side browser from the server-side. Comparatively, using **data-request-update** attribute in [data attributes](#data-attributes) or the **update** property in the [javascript-api](#javascript-api) is considered *pulling a content update*.
+
+To push an update the handler can return an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update. The following example will update an element on the page with the id **flashMessages** using the contents found inside the partial **flash-messages** containing [markup to display flash messages](markup#flash-messages).
+
+    function onFlash()
+    {
+        return ['#flashMessages' => $this->renderPartial('flash-messages')];
+    }
+
+> **Note:** The key name must start with an identifier `#` or class `.` character to trigger a content update.
