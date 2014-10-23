@@ -81,6 +81,7 @@ if (!-e $request_filename)
 }
 rewrite themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
 rewrite uploads/protected/.* /index.php break;
+rewrite app/.* /index.php break;
 ```
 
 <a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
