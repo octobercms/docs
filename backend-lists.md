@@ -316,7 +316,7 @@ Sometimes you may wish to modify the default list behavior and there are several
 - [Extending list model query](#extend-model-query)
 
 <a name="overriding-action" class="anchor" href="#overriding-action"></a>
-### Overriding default behavior
+### Overriding controller action
 
 You can use your own logic for the `index()` action method in the controller, then optionally call the List behavior `index()` parent method.
 
