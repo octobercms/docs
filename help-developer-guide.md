@@ -6,7 +6,7 @@
 <a name="writing-docs" class="anchor" href="#writing-docs"></a>
 ## Writing documentation
 
-You contributions to the October documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect October documentation pages:
+Your contributions to the October documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect October documentation pages:
 
 1. Each page that has at least one H2 header should have a TOC list. The TOC list should be the first element after the H1 header. The TOC should have links to all H2 headers on the page.
 1. There should be an introductory text below the TOC, even if there is the Introduction section. You may want to get rid of the Introduction section if it's not really needed. Don't leave the TOC alone.
