@@ -4,13 +4,12 @@
 - [Defining list columns](#list-columns)
 - [Available column types](#column-types)
 - [Displaying the list](#displaying-list)
-- [Applying list filters](#list-filters)
-- [Overriding default behavior](#overriding-behavior)
-- [Extending list columns](#extending-list-columns)
+- [Using list filters](#list-filters)
+- [Extending list behavior](#extend-list-behavior)
 
 `List behavior` is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. 
 
-List behavior depends on form [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 
@@ -264,7 +263,7 @@ Usually lists are displayed in the index [view](controllers-views-ajax/#introduc
     <?= $this->listRender() ?>
 
 <a name="list-filters" class="anchor" href="#list-filters"></a>
-## Applying list filters
+## Using list filters
 
 Lists can be filtered by [adding a filter definition](#adding-filters) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
@@ -307,10 +306,19 @@ Type  | Description
 **group** | filters the list by a group of items, usually by a related model and require a `nameFrom` definition. Eg: Status name as open, closed, etc.
 **checkbox** | used as a switch to apply a predefined condition or query to the list.
 
-<a name="overriding-behavior" class="anchor" href="#overriding-behavior"></a>
-## Overriding default behavior
+<a name="extend-list-behavior" class="anchor" href="#extend-list-behavior"></a>
+## Extending list behavior
 
-Sometimes you may wish to use your own logic along with the default list behavior. You can use your own `index()` action method in the controller, then call the List behavior `index()` method.
+Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
+
+- [Overriding controller action](#overriding-action)
+- [Extending list columns](#extend-list-columns)
+- [Extending list model query](#extend-model-query)
+
+<a name="overriding-action" class="anchor" href="#overriding-action"></a>
+### Overriding default behavior
+
+You can use your own logic for the `index()` action method in the controller, then optionally call the List behavior `index()` parent method.
 
     public function index()
     {
@@ -322,11 +330,10 @@ Sometimes you may wish to use your own logic along with the default list behavio
         $this->asExtension('ListController')->index();
     }
 
+<a name="extend-list-columns" class="anchor" href="#extend-list-columns"></a>
+### Extending list columns
 
-<a name="extending-list-columns" class="anchor" href="#extending-list-columns"></a>
-## Extending list columns
-
-You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
+You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
 
     class Categories extends \Backend\Classes\Controller
     {
@@ -350,6 +357,18 @@ Using the `extendListColumns` method you can add extra columns to any list rende
 
         });
 
+You can also extend the list columns internally by overriding the `listExtendColumns` method inside the controller class.
+
+    class Categories extends \Backend\Classes\Controller
+    {
+        [...]
+
+        public function listExtendColumns($list)
+        {
+            $list->addColumns([...]);
+        }
+    }
+
 The following methods are available on the $list object.
 
 Method  | Description
@@ -357,3 +376,13 @@ Method  | Description
 **addColumns** | adds new columns to the list
 
 Each method takes an array of columns similar to the [list column configuration](#list-columns).
+
+<a name="extend-model-query" class="anchor" href="#extend-model-query"></a>
+### Extending model query
+
+The lookup query for the list [database model](../database/model) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
+
+    public function listExtendQuery($query)
+    {
+        $query->withTrashed();
+    }

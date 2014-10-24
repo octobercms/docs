@@ -5,8 +5,7 @@
 - [Available field types](#field-types)
 - [Form widgets](#form-widgets)
 - [Form views](#form-views)
-- [Overriding default behavior](#overriding-behavior)
-- [Extending form fields](#extending-form-fields)
+- [Extending form behavior](#extend-form-behavior)
 
 **Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages Create, Update and Preview. The preview page is a read-only version of the update page. When you use the form behavior you don't need to define the `create()`, `update()` and `preview()` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
@@ -547,10 +546,19 @@ The **preview.htm** view represents the Preview page that allows users to previe
 
     <?= $this->formRenderPreview() ?>
 
-<a name="overriding-behavior" class="anchor" href="#overriding-behavior"></a>
-## Overriding default behavior
+<a name="extend-form-behavior" class="anchor" href="#extend-form-behavior"></a>
+## Extending form behavior
 
-Sometimes you may wish to use your own logic along with the default form behavior. You can use your own `create()`, `update()` or `preview()` action method in the controller, then call the Form behavior method.
+Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
+
+- [Overriding controller action](#overriding-action)
+- [Extending form fields](#extend-form-fields)
+- [Extending form model query](#extend-model-query)
+
+<a name="overriding-action" class="anchor" href="#overriding-action"></a>
+### Overriding controller action
+
+You can use your own logic for the `create()`, `update()` or `preview()` action method in the controller, then optionally call the Form behavior parent method.
 
     public function update($recordId, $context = null)
     {
@@ -562,10 +570,10 @@ Sometimes you may wish to use your own logic along with the default form behavio
         return $this->asExtension('FormController')->update($recordId, $context);
     }
 
-<a name="extending-form-fields" class="anchor" href="#extending-form-fields"></a>
-## Extending form fields
+<a name="extend-form-fields" class="anchor" href="#extend-form-fields"></a>
+### Extending form fields
 
-You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
+You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller class. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
 
     class Categories extends \Backend\Classes\Controller
     {
@@ -590,6 +598,18 @@ Using the `extendFormFields` method you can add extra fields to any form rendere
 
         });
 
+You can also extend the form fields internally by overriding the `formExtendFields` method inside the controller class.
+
+    class Categories extends \Backend\Classes\Controller
+    {
+        [...]
+
+        public function formExtendFields($form)
+        {
+            $form->addFields([...]);
+        }
+    }
+
 The following methods are available on the $form object.
 
 Method  | Description
@@ -599,3 +619,13 @@ Method  | Description
 **addSecondaryTabFields** | adds new fields to the secondary tabbed area
 
 Each method takes an array of fields similar to the [form field configuration](#form-fields).
+
+<a name="extend-model-query" class="anchor" href="#extend-model-query"></a>
+### Extending model query
+
+The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
+
+    public function formExtendQuery($query)
+    {
+        $query->withTrashed();
+    }
