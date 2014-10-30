@@ -22,8 +22,6 @@ The [Configuration](themes#configuration-section) section is optional for partia
 
 The partial configuration section can also contain component definitions. [Components](components) are explained in another article.
 
-> **Note:** The component support in partials has limitations. Please read about them in the [Components](components#limitations) article.
-
 <a name="rendering-partials" class="anchor" href="#rendering-partials"></a>
 ## Rendering partials
 
@@ -46,8 +44,14 @@ Inside the partial, parameters can be accessed like any other markup variable:
 
     <p>Country: {{ country }}, city: {{ city }}.</p>
 
-<a name="life-cycle" class="anchor" href="#life-cycle"></a>
-## Partial execution life cycle
+
+<a name="dynamic-layouts" class="anchor" href="#dynamic-layouts"></a>
+## Dynamic layouts
+
+Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
+
+<a name="partial-life-cycle" class="anchor" href="#partial-life-cycle"></a>
+### Partial execution life cycle
 
 There are special functions that can be defined in the PHP section of partials: `onStart()` and `onEnd()`. The `onStart()` function is executed before the partial is rendered and before the partial [components](components) are executed. The `onEnd()` function is executed before the partial is rendered and after the partial [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
 
@@ -60,4 +64,15 @@ There are special functions that can be defined in the PHP section of partials: 
     ==
     <h3>{{ hello }}</h3>
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](markup).
+The default variables and Twig extensions provided by October are described in the [Markup Guide](markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
+
+<a name="life-cycle-limitations" class="anchor" href="#life-cycle-limitations"></a>
+### Life cycle limitations
+
+Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. They do not follow the standard execution process, as described in the [layout execution life cycle](layouts#dynamic-layouts). The following limitations should be noted:
+
+1. AJAX events are not registered and won't function as normal.
+1. The life cycle functions cannot return any values.
+1. Regular POST form handling will occur at the time the partial is rendered.
+
+In general, component usage in partials is designed for basic components that render simple markup without much processing, such as a *Like* or *Tweet* button.

@@ -94,7 +94,7 @@ Key  | Description
 **options** | optional array of options for dropdown properties.
 **depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
-**noExternalParameter** | Allows to disable the External Parameter editor for the property in the Inspector.
+**noExternalParameter** | disables the External Parameter editor for the property in the Inspector.
 
 Inside the component you can read the property value with the `property()` method:
 
@@ -242,6 +242,8 @@ Components can be involved in the Page execution cycle events by overriding the 
 
 When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-section) and component classes. The sequence the handlers are executed is following:
 
+1. Layout `onInit()` function.
+1. Page `onInit()` function.
 1. Layout `onStart()` function.
 1. Layout components `onRun()` method.
 1. Layout `onBeforePageStart()` function.

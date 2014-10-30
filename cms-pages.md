@@ -95,8 +95,9 @@ More information can be found on [default variables in the Markup guide](markup#
 
 Inside the [Twig section](themes#twig-section) of a page template you can use any native [Twig](http://twig.sensiolabs.org/documentation) functions, filters and tags as well as the [Twig extensions provided by October](markup). Any dynamic page requires **variables**. In October page variables can be prepared by the page or layout [PHP section](themes#php-section) or by [Components](components). In this article we describe how to prepare variables in the PHP section.
 
-<a name="page-cycle-handlers" class="anchor" href="#page-cycle-handlers"></a>
-### Page execution cycle handlers
+
+<a name="page-life-cycle" class="anchor" href="#page-life-cycle"></a>
+### Page execution life cycle
 
 There are special functions that can be defined in the PHP section of pages and layouts: `onInit()`, `onStart()` and `onEnd()`. The `onInit()` function is executed when all components are initialized and before AJAX requests are handled. The `onStart()` function is executed in the beginning of the page execution. The `onEnd()` function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
 
@@ -132,7 +133,7 @@ The next example is more complicated. It shows how to load a blog post collectio
         {% endfor %}
     </ul>
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](markup).
+The default variables and Twig extensions provided by October are described in the [Markup Guide](markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 <a name="handling-forms" class="anchor" href="#handling-forms"></a>
 ### Handling forms
