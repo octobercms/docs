@@ -13,7 +13,7 @@ Components are configurable building elements that can be attached to any page, 
 
 This article describes the components basics and doesn't explain how to use components with AJAX. This topic is described in the [AJAX](ajax) article.
 
-> **Note:** Using components inside partials has limited functionality, this is described in more detailed in the [dynamic partials](partials#dynamic-partials) article.
+> **Note:** Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials#dynamic-partials) article.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
@@ -98,14 +98,14 @@ By default property values are initialized in the Configuration section where th
     ==
     ...
 
-However there is a way to initialize properties with values loaded from external parameters - URL parameters or [partial](partials) parameters (for components defined in partials). Use the `{{ paramName }}` syntax for values that should be loaded from partial parameters:
+However there is a way to initialize properties with values loaded from external parameters - URL parameters or [partial](partials) parameters (for components defined in partials). Use the `{{ paramName }}` syntax for values that should be loaded from partial variables:
 
     [demoTodo]
     maxItems = {{ maxItems }}
     ==
     ...
 
-Assuming that in the example above the component **demoTodo** is defined in a partial, it will be initialized with a value loaded from the **maxItems** partial parameter:
+Assuming that in the example above the component **demoTodo** is defined in a partial, it will be initialized with a value loaded from the **maxItems** partial variable:
 
     {% partial 'my-todo-partial' maxItems='10' %}
 
@@ -120,7 +120,7 @@ The page, the component belongs to, should have a corresponding [URL parameter](
 
     url = "/todo/:maxItems"
 
-In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial parameters or `:paramName` for URL parameters.
+In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
 <a name="variables" class="anchor" href="#variables"></a>
 ## Passing variables to components

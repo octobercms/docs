@@ -34,13 +34,13 @@ The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a sin
 <a name="variables" class="anchor" href="#variables"></a>
 ## Passing variables to partials
 
-You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog post. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass parameters to partials by specifying them after the partial name in the `{% partial %}` tag:
+You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog post. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
 
     <div class="sidebar">
         {% partial "sidebar-contacts" city="Vancouver" country="Canada" %}
     </div>
 
-Inside the partial, parameters can be accessed like any other markup variable:
+Inside the partial, variables can be accessed like any other markup variable:
 
     <p>Country: {{ country }}, city: {{ city }}.</p>
 
