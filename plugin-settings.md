@@ -95,7 +95,7 @@ Use the `Config` class for accessing the configuration values defined in the con
 
     ...
 
-    $maxItems = Config::get('Acme.Demo::maxItems', 50);
+    $maxItems = Config::get('acme.demo::maxItems', 50);
 
 A plugin configuration can be overridden by creating the configuration file `/app/config/author/plugin/config.php`, for example `/app/config/acme/todo/config.php`. Inside the overridden configuration file you can return only values you want to override:
 
