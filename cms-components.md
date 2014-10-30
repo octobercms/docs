@@ -3,19 +3,21 @@
 # Using Components
 
 - [Introduction](#introduction)
+- [External property values](#external-property-values)
+- [Limitations](#limitations)
 - [Component aliases](#aliases)
 - [Overriding component partials](#overriding-partials)
 - [Passing variables to components](#variables)
 - [The "View Bag" component](#viewbag-component)
 
-Components are configurable building elements that can be attached to any page or layout. Components is a key feature of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](ajax), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+Components are configurable building elements that can be attached to any page, partial or layout. Components is a key feature of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](ajax), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
 This article describes the components basics and doesn't explain how to use components with AJAX. This topic is described in the [AJAX](ajax) article.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
 
-If you use the back-end user interface you can add components to your pages and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
+If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
 
     title = "Components demonstration"
     url = "/components"
@@ -32,6 +34,45 @@ When you refer a component, it automatically creates a page variable that matche
     {% component 'demoTodo' %}
 
 > **Note:** If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
+
+<a name="external-property-values" class="anchor" href="#external-property-values"></a>
+## External property values
+
+By default property values are initialized in the Configuration section where the component is defined, and the property values are static, like this:
+
+    [demoTodo]
+    maxItems = 20
+    ==
+    ...
+
+However there's a way to initialize properties with values loaded from external parameters - URL parameters or [partial](partials) parameters (for components defined in partials). Use the `{{ paramName }}` syntax for values that should be loaded from partial parameters:
+
+    [demoTodo]
+    maxItems = {{ maxItems }}
+    ==
+    ...
+
+Assuming that in the example above the component **demoTodo** is defined in a partial, it will be initialized with a value loaded from the **maxItems** partial parameter:
+
+    {% partial "my-todo-partial" maxItems="10" %}
+
+To load a property value from the URL parameter, use the `{{ :paramName }}` syntax, for example:
+
+    [demoTodo]
+    maxItems = {{ :maxItems }}
+    ==
+    ...
+
+The page, the component belongs to, should have a corresponding [URL parameter](pages#url-syntax) defined:
+
+    url = "/todo/:maxItems"
+
+In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial parameters or `:paramName` for URL parameters.
+
+<a name="limitations" class="anchor" href="#limitations"></a>
+## Limitations
+
+Some limitations apply to components defined in [partials](partials). As partials are instantiated late, during the render-time, components defined in partials can't handle AJAX events. The regular POST form handling is limited as well. If a component defined in a partial triggers a redirect in the POST form handling code, the results could be unexpected.
 
 <a name="aliases" class="anchor" href="#aliases"></a>
 ## Components aliases
