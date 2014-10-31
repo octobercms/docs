@@ -200,6 +200,8 @@ Sometimes components need to create links to the website pages. For example, the
 <a name="routing-parameters" class="anchor" href="#routing-parameters"></a>
 ## Routing parameters
 
+> **Note:** the CMS core now allows to bind component properties directly to URL and partial parameters. The approach described in this section is deprecated, although it's still supported. We encourage you to use the new approach. Please read the [blog post](http://octobercms.com/blog/post/updates-core-components-features) that describes it.
+
 Components can access routing parameter values defined the [URL of the page](../cms/pages#url-syntax).
 
     $post_id = $this->param('post_id');
