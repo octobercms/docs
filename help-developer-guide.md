@@ -25,6 +25,57 @@ Your contributions to the October documentation are very welcome. Please follow 
 1. Don't hesitate to make cross links to other documentation articles. Adding links to the same article in the same paragraph is not necessary.
 1. See the [cms-pages.md](cms-pages.md) or [cms-themes.md](cms-themes.md) files for your reference.
 
+<a name="psr-exceptions" class="anchor" href="#psr-exceptions"></a>
+## Exceptions to PSR standards
+
+There are some exceptions to the PSR standard used by October.
+
+<a name="psr-exception-methods" class="anchor" href="#psr-exception-methods"></a>
+### Controller methods can have a single underscore
+
+PSR-2 states that methods must be in **camelCase**. However, in Backend controllers October will prefix AJAX handlers with the action name to define a controlled context. For example:
+
+    public function index_onDoSomething()
+    {
+        // Only works on the index page
+    }
+
+    public function onDoSomethingElse()
+    {
+        // Works globally for all pages
+    }
+
+An exception must be granted for these scenarios.
+
+<a name="psr-exception-newline-expressions" class="anchor" href="#psr-exception-newline-expressions"></a>
+### Subsequent expressions are on a new line
+
+PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing parenthesis.
+
+The following code is considered valid and is recommended for better spacing between logic:
+
+    if ($expr1) {
+        // if body
+    }
+    elseif ($expr2) {
+        // elseif body
+    }
+    else {
+        // else body;
+    }
+
+    try {
+        // try body
+    }
+    catch (FirstExceptionType $e) {
+        // catch body
+    }
+    catch (OtherExceptionType $e) {
+        // catch body
+    }
+
+This is an acceptable preference based on a technicality, PSR-1 and PSR-2 are not explicit when using SHOULD, MUST, etc. in this case. However, at the time of writing, the PSR-2 codesniffer rules say it's not valid, so an exception may be required.
+
 <a name="developer-standards" class="anchor" href="#developer-standards"></a>
 ## Developer standards and patterns
 
