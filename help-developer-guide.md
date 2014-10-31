@@ -35,14 +35,19 @@ There are some exceptions to the PSR standard used by October.
 
 PSR-2 states that methods must be in **camelCase**. However, in Backend controllers October will prefix AJAX handlers with the action name to define a controlled context. For example:
 
+    public function index()
+    {
+        // This is the index page (index action)
+    }
+
     public function index_onDoSomething()
     {
-        // Only works on the index page
+        // AJAX handler only works on the index action
     }
 
     public function onDoSomethingElse()
     {
-        // Works globally for all pages
+        // AJAX handler works globally for all actions
     }
 
 An exception must be granted for these scenarios.
