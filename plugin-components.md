@@ -87,14 +87,14 @@ Key  | Description
 **title** | required, the property title, it is used by the component Inspector in the CMS back-end.
 **description** | required, the property description, it is used by the component Inspector in the CMS back-end.
 **default** | optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
-**type** | optional, the default value is **string**. Specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox** and **dropdown**.
+**type** | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox** and **dropdown**. Default value: **string**.
 **validationPattern** | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
 **validationMessage** | optional error message to display if the validation fails.
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
 **depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
-**noExternalParameter** | disables the External Parameter editor for the property in the Inspector.
+**showExternalParameter** | specifies visiblity of the External Parameter editor for the property in the Inspector. Default value: **true**.
 
 Inside the component you can read the property value with the `property()` method:
 
@@ -200,11 +200,10 @@ Sometimes components need to create links to the website pages. For example, the
 <a name="routing-parameters" class="anchor" href="#routing-parameters"></a>
 ## Routing parameters
 
-> **Note:** the CMS core now allows to bind component properties directly to URL and partial parameters. The approach described in this section is deprecated, although it's still supported. We encourage you to use the new approach. Please read the [blog post](http://octobercms.com/blog/post/updates-core-components-features) that describes it.
+Components can directly access routing parameter values defined the [URL of the page](../cms/pages#url-syntax).
 
-Components can access routing parameter values defined the [URL of the page](../cms/pages#url-syntax).
-
-    $post_id = $this->param('post_id');
+    // Returns he URL segment value, eg: /page/:post_id
+    $postId = $this->param('post_id');
 
 In some cases a [component property](#component-properties) may act as a hard coded value or reference the value from the URL.
 
@@ -215,16 +214,16 @@ This hard coded example shows the blog post with an identifier `2` being used:
     [blogPost]
     id = "2"
 
-Alternatively the value can be referenced dynamically from the page URL:
+Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components#external-property-values):
 
     url = "/blog/:my_custom_parameter"
 
     [blogPost]
-    id = ":my_custom_parameter"
+    id = "{{ :my_custom_parameter }}"
 
-In both cases the value can be retrieved by using the `propertyOrParam()` method:
+In both cases the value can be retrieved by using the `property()` method:
 
-    $this->propertyOrParam('id');
+    $this->property('id');
 
 <a name="page-cycle" class="anchor" href="#page-cycle"></a>
 ## Handling the page execution cycle
