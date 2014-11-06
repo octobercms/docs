@@ -6,7 +6,7 @@ Extension  | Description
 **txt** | Used for plain text.
 **md** | Used for Markdown syntax.
 
-The extension affects the way how content blocks are displayed in the back-end user interface (with a WYSIWYG editor or with a plain text editor) and how the blocks are rendered on the website. Markdown blocks are converted to HTML before they are displayed.
+The extension affects the way content blocks are displayed in the back-end user interface (with a WYSIWYG editor or with a plain text editor) and how the blocks are rendered on the website. Markdown blocks are converted to HTML before they are displayed.
 
 Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pages), [partial](partials) or [layout](layouts). Example of a page rendering a content block:
 

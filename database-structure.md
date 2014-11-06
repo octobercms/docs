@@ -33,7 +33,7 @@ The version information file defines the plugin version and refers to the migrat
         - create_comments_table.php
     1.0.3: Bug fix update that uses no scripts
     1.0.4: Another fix
-    1.0.5: 
+    1.0.5:
         - Create blog settings table
         - create_blog_settings_table.php
 
