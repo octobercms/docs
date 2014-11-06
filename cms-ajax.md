@@ -47,7 +47,7 @@ Below is a simple example of using the data attributes API for an AJAX calculato
         <input type="text" name="value2"/>
         <input type="submit" value="Calculate">
     </form>
-    <div id="#result"></div>
+    <div id="result"></div>
 
 The form configuration from the previous example could be read like this: "When the form is submitted, issue an AJAX request to the **onTest** AJAX handler. When the handler finishes, render the **calcresult** partial and inject its contents to the **#result** element.". Below is an example of the **calcresult** partial. It basically outputs the `result` variable prepared by the AJAX handler.
 
