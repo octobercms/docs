@@ -3,7 +3,7 @@
 - [Introduction](#introduction)
 - [Rendering partials](#rendering-partials)
 - [Passing variables to partials](#variables)
-- [Partial execution life cycle](#life-cycle)
+- [Dynamic partials](#dynamic-partials)
 
 Partials contain reusable chunks of Twig markup that can be used anywhere throughout the website. Partials are extremely useful for page elements that repeat on different pages or layouts. A good partial example is a page footer which is used in different page [layouts](layouts). Also, partials are required for updating the page content with [AJAX](ajax).
 
@@ -45,8 +45,8 @@ Inside the partial, variables can be accessed like any other markup variable:
     <p>Country: {{ country }}, city: {{ city }}.</p>
 
 
-<a name="dynamic-layouts" class="anchor" href="#dynamic-layouts"></a>
-## Dynamic layouts
+<a name="dynamic-partials" class="anchor" href="#dynamic-partials"></a>
+## Dynamic partials
 
 Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
 
