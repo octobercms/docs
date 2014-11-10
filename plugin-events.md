@@ -9,7 +9,7 @@ Events are an easy way to extend the functionality of core classes and other plu
 <a name="subscribing-to-events" class="anchor" href="#subscribing-to-events"></a>
 ## Subscribing to events
 
-Subscribing to an event, also known as *hooking on to an event*, can be done from from anywhere, although the most common place is the `boot()` method of a [Plugin registration file](registration#mail-templates).
+Subscribing to an event, also known as *hooking on to an event*, can be done from anywhere, although the most common place is the `boot()` method of a [Plugin registration file](registration#mail-templates).
 
 For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
 
@@ -122,7 +122,7 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
                         'type' => 'datepicker'
                     ]
                 ]);
-            }
+            });
         }
     }
 
