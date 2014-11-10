@@ -10,17 +10,17 @@
 - [Redirections in AJAX handlers](#redirections-in-handlers)
 - [Pushing content updates](#pushing-content-updates)
 
-October includes the AJAX framework that lets you to execute AJAX handlers defined in your [pages](pages), [layouts](layouts) or [components](components) and update page blocks with [partials](partials). The AJAX framework comes in two flavors - as JavaScript API and data attributes API. The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
+October includes the AJAX framework that lets you execute AJAX handlers defined in your [pages](pages), [layouts](layouts) or [components](components) and update page blocks with [partials](partials). The AJAX framework comes in two flavors - as JavaScript API and data attributes API. The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
 
-To use the AJAX framework it should be included by placing the `{% framework %}` tag anywhere inside the page or layout. 
+To use the AJAX framework it should be included by placing the `{% framework %}` tag anywhere inside the page or layout.
 This adds a reference to to the October front-end JavaScript library. The library requires jQuery, so it should be loaded first, for example:
 
     <script src="{{ [
         'assets/javascript/jquery.js',
-    ]|theme }}"></script> 
+    ]|theme }}"></script>
 
     {% framework %}
 
@@ -33,7 +33,7 @@ The `{% framework %}` tag supports the optional **extras** parameter. If this pa
 
 A page can issue an AJAX request with the data attributes or with JavaScript. Each request invokes an **event handler** on the server and can update page elements using [partials](partials). AJAX requests work best with forms, since the form data is automatically sent to the server. The AJAX request flow:
 
-1. Client issues an AJAX request by providing the AJAX handler name, and optionally other parameters. 
+1. Client issues an AJAX request by providing the AJAX handler name, and optionally other parameters.
 2. The server finds the AJAX handler and executes it.
 3. The handler executes the required business logic and updates the Twig environment by injecting page variables.
 4. The server renders partials requested by the client with the `update` option.
@@ -69,7 +69,7 @@ AJAX handlers are PHP functions that can be defined in the page or layout [PHP s
     }
     ==
 
-> **Note:** If two handlers with a same name defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
+> **Note:** If two handlers with a same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
 
 The `onInit()` methods found in the [page execution life cycle](layouts#dynamic-pages) can be used for defining code that always executes before an AJAX event is handled.
 
@@ -82,7 +82,7 @@ The `onInit()` methods found in the [page execution life cycle](layouts#dynamic-
 <a name="data-attributes" class="anchor" href="#data-attributes"></a>
 ## Data attributes API
 
-The data attributes API lets you to issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
+The data attributes API lets you issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
 
 Attribute  | Description
 ------------- | -------------
@@ -141,19 +141,19 @@ Send a POST parameter `id` with value `7` across multiple elements:
 <a name="javascript-api" class="anchor" href="#javascript-api"></a>
 ## JavaScript API
 
-The JavaScript API is more powerful than the data attributes API. The `request()` method can be used with any element that is inside a form, or on with a form element. When the method is used with an element inside a form, it is forwarded to the form. 
+The JavaScript API is more powerful than the data attributes API. The `request()` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
 
 The `request()` method has a single required parameter - the AJAX handler name. Example:
 
     <form onsubmit="$(this).request('onProcess'); return false;">
         ...
 
-The second attribute of the `request()` method is the options object. You can use any options and methods compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
+The second attribute of the `request()` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
 
 Option  | Description
 ------------- | -------------
 **update** | an object, specifies a list partials and page elements (as CSS selectors) to update: {'partial': '#select'}. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
-**confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the users clicks the Cancel button, the request cancels.
+**confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
 **data** | an optional object specifying data to be sent to the server along with the form data: {var: 'value'}.
 **redirect** | string specifying an URL to redirect the browser to after the successful request.
 **beforeUpdate** | a callback function to execute before page elements are updated. The function gets 3 parameters: the data object received from the server, text status string, and the jqXHR object. The `this` variable inside the function resolves to the request content - an object containing 2 properties: `handler` and `options` representing the original request() parameters.
@@ -167,7 +167,7 @@ Option  | Description
 Request a confirmation before the onDelete request is sent:
 
     $('form').request('onDelete', {
-        confirm: 'Are you sure?', 
+        confirm: 'Are you sure?',
         redirect: '/dashboard'
     })
 
@@ -184,7 +184,7 @@ Run `onCalculate` handler with some extra data:
 Run `onCalculate` handler and run some custom code before the page elements update:
 
     $('form').request('onCalculate', {
-        update: {calcresult: '.result'}, 
+        update: {calcresult: '.result'},
         beforeUpdate: function(){ /* do something */ }
     })
 
@@ -233,7 +233,7 @@ Event  | Description
 **ajaxError** | triggered on the form object if the request encounters an error. The handler gets 5 parameters: the event object, the context object, the status text string, and the jqXHR object.
 
 
-The next example execute JavaScript code when the `ajaxUpdate` event is triggered on an element. 
+The next example execute JavaScript code when the `ajaxUpdate` event is triggered on an element.
 
     $('.calcresult').on('ajaxUpdate', function(){
         console.log('Updated!');

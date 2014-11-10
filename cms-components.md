@@ -9,7 +9,7 @@
 - [Passing variables to components](#variables)
 - [The "View Bag" component](#viewbag-component)
 
-Components are configurable building elements that can be attached to any page, partial or layout. Components is a key feature of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](ajax), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](ajax), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
 This article describes the components basics and doesn't explain how to use components with AJAX. This topic is described in the [AJAX](ajax) article.
 
