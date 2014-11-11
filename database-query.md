@@ -4,7 +4,7 @@
 - [Active Record](#active-record)
 
 
-In October you have two different approaches to working with databases:
+In October you have two different approaches working with databases:
 
 * Using direct SQL queries using the `Db` class
 * Using Active Record by extending the `Model` class
