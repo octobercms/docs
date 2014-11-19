@@ -145,7 +145,7 @@ Property  | Description
 **$hashable** | values are hashed, they can be verified but cannot be reversed. Requires trait: `October\Rain\Database\Traits\Hashable`.
 **$purgeable** | attributes are removed before attempting to save to the database. Requires trait: `October\Rain\Database\Traits\Purgeable`.
 **$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
-**$encrypted** | values are encrypted and decrypted for storing sensitive data.
+**$encryptable** | values are encrypted and decrypted for storing sensitive data. Requires trait: `October\Rain\Database\Traits\Encryptable`.
 **$slugs** | key attributes are generated as unique url names (slugs) based on value attributes. Requires trait: `October\Rain\Database\Traits\Sluggable`.
 **$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
 **$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
