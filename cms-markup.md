@@ -163,7 +163,7 @@ The next example shows several examples of opening a standard (non AJAX) form wi
 
     {{ form_open() }}
 
-    {{ form_open({ class => 'form-horizontal' }) }}
+    {{ form_open({ class: 'form-horizontal' }) }}
 
     {{ form_open({ request: 'onUpdate' }) }}
 
