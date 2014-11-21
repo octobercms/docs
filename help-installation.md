@@ -16,7 +16,7 @@ Before you proceed, you should check that your server meets the minimum system r
 
 October CMS has a few system requirements:
 
-1. PHP 5.4 or higher with **safe_mode** restrictions disabled
+1. PHP 5.4 or higher
 1. PDO PHP Extension
 1. cURL PHP Extension
 1. MCrypt PHP Extension
