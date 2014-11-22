@@ -60,13 +60,11 @@ The aliases also allow you to define multiple components of the same class on a 
 
 All component partials can be overridden using the theme partials. If a component called **channel** uses the **title.htm** partial.
 
-```
-url = "mypage"
+    url = "mypage"
 
-[channel]
-==
-{% component "channel" %}
-```
+    [channel]
+    ==
+    {% component "channel" %}
 
 We can override the partial by creating a file in our theme called **partials/channel/title.htm**.
 
@@ -80,11 +78,9 @@ Segment  | Description
 
 The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed:
 
-```
-[channel foobar]
-==
-{% component "foobar" %}
-```
+    [channel foobar]
+    ==
+    {% component "foobar" %}
 
 Now we can override the **title.htm** partial by creating a file in our theme called **partials/foobar/title.htm**.
 

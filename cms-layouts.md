@@ -82,17 +82,13 @@ The page can inject more content to the placeholder. The `{% default %}` tag spe
 
 The `placeholder` tag accepts two optional attributes - `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment - **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
 
-```
-{% placeholder ordering title="Ordering information" type="text" %}
-```
+    {% placeholder ordering title="Ordering information" type="text" %}
 
 Example of a placeholder with a default content, title and type attributes.
 
-```
-{% placeholder ordering default title="Ordering information" type="text" %}
-    There is no ordering information for this product.
-{% endplaceholder %}
-```
+    {% placeholder ordering default title="Ordering information" type="text" %}
+        There is no ordering information for this product.
+    {% endplaceholder %}
 
 <a name="checking-placeholder-exits" class="anchor" href="#checking-placeholder-exits"></a>
 ### Checking a placeholder exists

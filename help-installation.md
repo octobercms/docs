@@ -73,16 +73,14 @@ There are small changes required to configure your site in Nginx.
 
 Use the following code in **server** section.
 
-```lua
-if (!-e $request_filename)
-{
-    rewrite ^/(.*)$ /index.php?/$1 break;
-    break;
-}
-rewrite themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
-rewrite uploads/protected/.* /index.php break;
-rewrite app/.* /index.php break;
-```
+    if (!-e $request_filename)
+    {
+        rewrite ^/(.*)$ /index.php?/$1 break;
+        break;
+    }
+    rewrite themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
+    rewrite uploads/protected/.* /index.php break;
+    rewrite app/.* /index.php break;
 
 <a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
 ## Lighttpd configuration
@@ -95,19 +93,17 @@ Open your site configuration file with your favorite editor.
 
 Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
 
-```lua
-$HTTP["host"] =~ "example.domain.com" {
-    server.document-root = "/var/www/example/"
+    $HTTP["host"] =~ "example.domain.com" {
+        server.document-root = "/var/www/example/"
 
-    url.rewrite-once = (
-        "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
-        "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
-        "^/uploads/public/[\w-]+/.*$" => "$0",
-        "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
-        "(.*)" => "/index.php$1"
-    )
-}
-```
+        url.rewrite-once = (
+            "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+            "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+            "^/uploads/public/[\w-]+/.*$" => "$0",
+            "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
+            "(.*)" => "/index.php$1"
+        )
+    }
 
 <a name="crontab-setup" class="anchor" href="#crontab-setup"></a>
 ## Setting up the crontab
@@ -116,10 +112,8 @@ By default *queued jobs* are executed using a simple database driven [Queue driv
 
 For these automated tasks to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October:
 
-```php
-* * * * * php /path/to/artisan queue:cron 1>> /dev/null 2>&1
-* * * * * php /path/to/artisan scheduled:run 1>> /dev/null 2>&1
-```
+    * * * * * php /path/to/artisan queue:cron 1>> /dev/null 2>&1
+    * * * * * php /path/to/artisan scheduled:run 1>> /dev/null 2>&1
 
 > **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 

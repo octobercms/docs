@@ -446,7 +446,7 @@ The same approach works with the model's `create()` method:
 <a name="lazily-commit-bindings" class="anchor" href="#lazily-commit-bindings"></a>
 ### Lazily commit bindings
 
-If you are unable to supply the ```$sessionKey``` when saving, you can commit the bindings at any time using the the next code:
+If you are unable to supply the `$sessionKey` when saving, you can commit the bindings at any time using the the next code:
 
     $post->commitDeferred($sessionKey);
 

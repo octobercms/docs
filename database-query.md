@@ -23,7 +23,7 @@ The `select()` method returns an array of records.
 
     $results = Db::select('select * from users where id = ?', [1]);
 
-You can use the `select()` method together with the `lists() method in order to flatten the result. In the next example the lists() method returns an array where the key is the **id** and value is the **name**, eg: ```Array ( [1] => Name ) ```.
+You can use the `select()` method together with the `lists() method in order to flatten the result. In the next example the lists() method returns an array where the key is the **id** and value is the **name**, eg: `Array ( [1] => Name ) `.
 
     Db::select('select * from users')->lists('name', 'id');
 

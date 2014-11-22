@@ -13,9 +13,7 @@ Your contributions to the October documentation are very welcome. Please follow 
 1. Try to use only H2 and H3 headers.
 1. Each H2 and H3 header should have a link defined as.
 
-    ```
     <a name="page-cycle-handlers" class="anchor" href="#page-cycle-handlers"></a>
-    ```
 
 1. Only use UL tags for TOC lists.
 1. Avoid short, 1 sentence, paragraphs. Merge short paragraphs and try to be a bit more verbose.
