@@ -105,14 +105,15 @@ Method  | Description
 <a name="basic-plugin-information" class="anchor" href="#basic-plugin-information"></a>
 ### Basic plugin information
 
-The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing four keys:
+The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing the following keys:
 
 Key  | Description
 ------------- | -------------
-**name** | the plugin name.
-**description** | the plugin description.
-**author** | the plugin author name.
+**name** | the plugin name, required.
+**description** | the plugin description, required.
+**author** | the plugin author name, required.
 **icon** | a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/), any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+**homepage** | A link to the author's website address, optional.
 
 <a name="routing-initialization" class="anchor" href="#routing-initialization"></a>
 ## Routing and initialization
