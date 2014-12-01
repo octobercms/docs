@@ -35,7 +35,7 @@ Controller classes must extend the `\Backend\Classes\Controller` class. As any o
 
     class Posts extends \Backend\Classes\Controller {
 
-        public index()    // <=== Action method
+        public function index()    // <=== Action method
         {
 
         }
