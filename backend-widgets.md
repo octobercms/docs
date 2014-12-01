@@ -176,7 +176,7 @@ The widget partial could contain any HTML markup you want to display in the widg
         </div>
     </div>
 
-![image](https://raw2.github.com/octobercms/docs/master/images/traffic-sources.png)
+![image](https://raw.githubusercontent.com/octobercms/docs/master/images/traffic-sources.png)
 
 Inside report widgets you can use any [charts or indicators](controls), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
