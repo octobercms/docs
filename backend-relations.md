@@ -75,6 +75,12 @@ Option  | Type | Description
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **recordsPerPage** | List | maximum rows to display for each page.
 
+These configuration values can be specified only for the **view** options.
+
+Option  | Type | Description
+------------- | ------------- | -------------
+**showCheckboxes** | List | displays checkboxes next to each record. Default: false.
+
 <a name="relationship-types" class="anchor" href="#relationship-types"></a>
 ## Relationship types
 
