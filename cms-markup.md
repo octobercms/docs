@@ -21,6 +21,7 @@ Variable  | Description
 ------------- | -------------
 **page** | the current page object.
 **layout** | the current layout object.
+**theme** | a reference to the [theme customization object](../themes/development#customization).
 **param** | an array of URL parameters.
 **controller** | the CMS controller.
 **environment** | the application environment.

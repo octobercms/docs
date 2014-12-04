@@ -3,6 +3,7 @@
 - [Theme information file](#theme-information)
 - [Version file](#version-file)
 - [Theme preview image](#preview-image)
+- [Theme customization](#customization)
 
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the OctoberCMS Marketplace. 
 
@@ -21,16 +22,17 @@ Field  | Description
 ------------- | -------------
 **name** | specifies the theme name, required.
 **author** | specifies the author name, required.
-**authorUrl** | specifies the author website URL, required.
+**homepage** | specifies the author website URL, required.
 **description** | the theme description, required.
 **code** | the theme code, optional. The value is used on the OctoberCMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
+**form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization).
 
 Example of the theme information file:
 
-    name: "Demo"
-    description: "Demo OctoberCMS theme. Demonstrates the basic concepts of the front-end theming: layouts, pages, partials, components, content blocks, AJAX framework."
+    name: "OctoberCMS Demo"
+    description: "Demonstrates the basic concepts of the front-end theming."
     author: "OctoberCMS"
-    author-url: "http://octobercms.com"
+    homepage: "http://octobercms.com"
     code: "demo"
 
 <a name="version-file" class="anchor" href="#version-file"></a>
@@ -40,7 +42,7 @@ The theme version file **version.yaml** defines the current theme version and th
 
     themes/
       demo/
-        ... 
+        ...
         version.yaml       <=== Theme version file
 
 The file format is following:
@@ -61,3 +63,24 @@ The theme preview image is used in the back-end theme selector. The image file *
             theme-preview.png <=== Theme preview image
 
 The image width should be at least 600 px. The ideal aspect ratio is 1.5, for example 600x400px.
+
+<a name="customization" class="anchor" href="#customization"></a>
+## Theme customization
+
+Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms#form-fields) for more information.
+
+The following is an example of how to define a website name configuration field called **site_name**:
+
+    name: My Theme
+    # [...]
+
+    form:
+        fields:
+            site_name:
+                label: Site name
+                comment: The website name as it should appear on the front-end
+                default: My Amazing Site!
+
+The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup#default-variables) called `this.theme`.
+
+    <h1>Welcome to {{ this.theme.site_name }}!</h1>
