@@ -374,6 +374,7 @@ There are various form widgets included as standard, although it is common for p
 - [File upload](#widget-fileupload)
 - [Date picker](#widget-datepicker)
 - [Relation](#widget-relation)
+- [Record finder](#widget-recordfinder)
 
 <a name="widget-richeditor" class="anchor" href="#widget-richeditor"></a>
 ### Rich editor / WYSIWYG
@@ -448,6 +449,26 @@ Option  | Description
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
 **emptyOption** | text to display when there is no available selections.
+
+<a name="widget-recordfinder" class="anchor" href="#widget-recordfinder"></a>
+### Record finder
+
+`recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationaships only.
+
+    user:
+        label: User
+        type: recordfinder
+        list: @/plugins/rainlab/user/models/user/columns.yaml
+        prompt: Click the %s button to find a user
+        nameFrom: name
+        descriptionFrom: email
+
+Option  | Description
+------------- | -------------
+**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
+**descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
+**prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
+**list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
 
 <a name="form-views" class="anchor" href="#form-views"></a>
 ## Form views
