@@ -73,14 +73,13 @@ There are small changes required to configure your site in Nginx.
 
 Use the following code in **server** section.
 
-    if (!-e $request_filename)
-    {
-        rewrite ^/(.*)$ /index.php?/$1 break;
-        break;
+    try_files $uri $uri/ /index.php$is_args$args;
+
+If you have installed October into a subdirectory, you should use this code instead, replacing `/october` with the subdirectory October is installed under:
+
+    location /october {
+        try_files $uri $uri/ /index.php$is_args$args;
     }
-    rewrite themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
-    rewrite uploads/protected/.* /index.php break;
-    rewrite app/.* /index.php break;
 
 <a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
 ## Lighttpd configuration
