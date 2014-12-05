@@ -78,7 +78,7 @@ Use the following code in **server** section.
 If you have installed October into a subdirectory, you should use this code instead, replacing `/october` with the subdirectory October is installed under:
 
     location /october {
-        try_files $uri $uri/ /index.php$is_args$args;
+        try_files $uri $uri/ /october/index.php$is_args$args;
     }
 
 <a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
