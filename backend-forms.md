@@ -126,7 +126,7 @@ Form fields are defined with the YAML file. The form fields configuration is use
         blog/
           models/                <=== Plugin models directory
             post/                <=== Model configuration directory
-              form_fields.yaml   <=== Model form fields config file
+              fields.yaml        <=== Model form fields config file
             Post.php             <=== model class
 
 
