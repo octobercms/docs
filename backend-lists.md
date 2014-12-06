@@ -49,6 +49,7 @@ The configuration options listed below are optional.
 Option  | Description
 ------------- | -------------
 **recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
+**recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
