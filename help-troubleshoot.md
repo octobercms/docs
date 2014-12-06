@@ -81,4 +81,4 @@ If you want to explore the variables available on a page, or inspect the content
 <a name="error-page" class="anchor" href="#error-page"></a>
 ## Error page
 
-By default any errors will be shown with a detailed error page containing the file contents, line number and stack trace where the error occurred. You can display a error page by setting the configuration value `customErrorPage` to **true** in the `app/config/cms.php` script and creating a page with the URL `/error`.
+By default any errors will be shown with a detailed error page containing the file contents, line number and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `app/config/app.php` script and creating a page with the URL `/error`.
