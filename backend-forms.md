@@ -80,6 +80,7 @@ Option  | Description
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
 **flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
+**form** | overrides the default form fields definitions for the create page only.
 
 <a name="form-update-page" class="anchor" href="#form-update-page"></a>
 ### Update page
@@ -101,6 +102,7 @@ Option  | Description
 **redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
 **flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
 **flashDelete** | flash message to display when record is deleted, can refer to a [localization string](../plugin/localization).
+**form** | overrides the default form fields definitions for the update page only.
 
 <a name="form-preview-page" class="anchor" href="#form-preview-page"></a>
 ### Preview page
@@ -115,6 +117,7 @@ The following configuration options are supported for the Preview page:
 Option  | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization).
+**form** | overrides the default form fields definitions for the preview page only.
 
 <a name="form-fields" class="anchor" href="#form-fields"></a>
 ## Defining form fields
