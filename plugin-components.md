@@ -94,7 +94,7 @@ Key  | Description
 **options** | optional array of options for dropdown properties.
 **depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
-**showExternalParameter** | specifies visiblity of the External Parameter editor for the property in the Inspector. Default value: **true**.
+**showExternalParam** | specifies visiblity of the External Parameter editor for the property in the Inspector. Default value: **true**.
 
 Inside the component you can read the property value with the `property()` method:
 
@@ -224,6 +224,10 @@ Alternatively the value can be referenced dynamically from the page URL using an
 In both cases the value can be retrieved by using the `property()` method:
 
     $this->property('id');
+
+If you need to access the routing parameter name:
+
+    $this->paramName('id'); // Returns "my_custom_parameter"
 
 <a name="page-cycle" class="anchor" href="#page-cycle"></a>
 ## Handling the page execution cycle
