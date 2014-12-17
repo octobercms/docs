@@ -91,3 +91,10 @@ When a generated template is saved for the first time, the customized content wi
 ## Using mail layouts
 
 Mail layouts can be created by selecting *Settings > Mail > Mail templates* and clicking the *Layouts* tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
+
+By default, October comes with two primary mail layouts:
+
+Layout  | Code | Description
+------------- | ------------- | -------------
+Default | default | Used for public facing, front-end mail
+System | system | Used for internal, back-end mail
