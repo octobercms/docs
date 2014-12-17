@@ -250,7 +250,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
 <a name="column-partial" class="anchor" href="#column-partial"></a>
 ### Partial
 
-`partial` - renders a partial, the `path` field can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`.
+`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name. Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`.
 
     content:
         type: partial

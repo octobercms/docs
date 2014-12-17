@@ -343,7 +343,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 <a name="field-partial" class="anchor" href="#field-partial"></a>
 ### Partial
 
-`partial` - renders a partial, the `path` field can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
+`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
 
     content:
         type: partial
