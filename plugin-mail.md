@@ -17,7 +17,7 @@ October extends the [Laravel's Mail system](http://laravel.com/docs/mail) with T
         $message->to($user->email, $user->full_name);
     });
 
-The first argument in the `send()` method is a path to the mail view in the following format: **author.plugin:mail.message**. It corresponds to the following file:
+The first argument in the `send()` method is a path to the mail view in the following format: **author.plugin:mail.message**. Which in this case corresponds to the following file:
 
     plugins/
       author/
@@ -26,7 +26,7 @@ The first argument in the `send()` method is a path to the mail view in the foll
             mail/
               message.htm
 
-Mail views can contain up to 3 sections separated with the `==` sequence. The first, configuration section defines the view subject. The second section defines the message content in text format. The third section defines the message content in HTML format. Note that the text section is optional and a view can contain only the settings and HTML sections. The standard Twig tags are supported in mail views. An example view file:
+Mail views can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==`` sequence. For example:
 
     subject = "You product has been added to OctoberCMS project"
     ==
@@ -35,25 +35,58 @@ Mail views can contain up to 3 sections separated with the `==` sequence. The fi
 
     Good news! User {{ user }} just added your product "{{ product }}" to a project.
 
-    Thanks for using October CMS!
+    This message was sent using no formatting (plain text)
     ==
 
     <p>Hi {{ name }},</p>
 
-    <p>Good news! User {{ user }} just added your product "{{ product }}" to a project.</p>
+    <p>Good news! User {{ user }} just added your product <strong>{{ product }}</strong> to a project.</p>
 
-    <p>Thanks for using October CMS!</p>
+    <p>This email was sent using formatting (HTML)</p>
+
+> **Note:** Basic Twig tags and expressions are supported in mail views.
+
+The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
+
+    subject = "You product has been added to OctoberCMS project"
+    ==
+
+    <p>Hi {{ name }},</p>
+
+    <p>This email does not support plain text.</p>
+
+    <p>Sorry about that!</p>
+
+### Configuration section
+
+The configuration section sets the mail view parameters. The following configuration parameters are supported:
+
+Parameter  | Description
+------------- | -------------
+**subject** | the mail message subject, required.
+**layout** | the [mail layout](#mail-layouts) code, optional. Default value is `default`.
 
 <a name="mail-templates" class="anchor" href="#mail-templates"></a>
 ## Using mail templates
 
-Mail templates can be created in the back-end area or generated automatically by registered mail views. The **code** specified in the template is a unique identifier and the process for sending these emails is the same.
+Mail templates can be created in the back-end area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
 
-For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
+The process for sending these emails is the same. For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
 
     Mail::send('this.is.my.email', $data, function($message) use ($user)
     {
         [...]
     });
 
-> **Note:** If the mail template does not exist in the system, this code will attempt to find the mail view instead.
+> **Note:** If the mail template does not exist in the system, this code will attempt to find a mail view with the same code.
+
+### Automatically generated templates
+
+Mail templates can also be generated automatically by [mail views that have been registered](registration#mail-templates). The **code** value will be the same as the mail view path (eg: author.plugin:mail.message). If the mail view has a **layout** parameter defined, this will be used to give the template a layout.
+
+When a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the mail view can be considered a *default view*.
+
+<a name="mail-layouts" class="anchor" href="#mail-layouts"></a>
+## Using mail layouts
+
+Mail layouts can be created by selecting *Settings > Mail > Mail templates* and clicking the *Layouts* tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
