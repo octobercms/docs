@@ -2,6 +2,7 @@
 
 - [Mail views](#mail-views)
 - [Mail templates](#mail-templates)
+- [Mail layouts](#mail-layouts)
 
 Mails can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*.
 
