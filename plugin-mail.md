@@ -5,7 +5,7 @@
 - [Mail templates](#mail-templates)
 - [Mail layouts](#mail-layouts)
 
-Mails can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*.
+Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*.
 
 Optionally, mail views can be registered in the [Plugin registration file](registration#mail-templates) with the `registerMailTemplates()` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
@@ -35,7 +35,7 @@ October also includes an alternative method called `sendTo()` that can simplify 
     // Send to multiple addresses
     Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
 
-The first argument is used for the recipients can take different value types:
+The first argument in `sendTo()` is used for the recipients can take different value types:
 
 Type  | Description
 ------------- | -------------
