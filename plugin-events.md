@@ -41,6 +41,8 @@ The local equivalent requires the code be in context of the calling object.
 
     $this->fireEvent('blog.beforePost', ['first parameter', 'second parameter']);
 
+> **Note:** It is good practice to put the local event before the global event, so local events take priority.
+
 Once this event has been subscribed to, the parameters are available in the handler method. For example:
 
     // Global

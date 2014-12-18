@@ -179,10 +179,10 @@ The term *after* is not used in Events, only the term *before* is used. For exam
 Where possible events should cover global and local versions. Global events should be prefixed with the module or plugin name. For example:
 
     // For global events, it is prefixed with the module or plugin code
-    Event::fire('cms.page.end')
+    Event::fire('cms.page.end');
 
     // For local events, the prefix is not required
-    $this->fireEvent('page.end')
+    $this->fireEvent('page.end');
 
 Avoid using terms such as *onSomething* in event names since the word *bind*/*fire* represent this action word.
 

@@ -1,5 +1,6 @@
 # Sending mail messages
 
+- [Sending mail](#sending-mail)
 - [Mail views](#mail-views)
 - [Mail templates](#mail-templates)
 - [Mail layouts](#mail-layouts)
@@ -8,26 +9,54 @@ Mails can be sent in October using either mail views or mail templates. A mail v
 
 Optionally, mail views can be registered in the [Plugin registration file](registration#mail-templates) with the `registerMailTemplates()` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
+<a name="sending-mail" class="anchor" href="#sending-mail"></a>
+## Sending mail
+
+October extends the [Laravel's Mail system](http://laravel.com/docs/mail) with added Twig support. The programming interface is indentical, the first argument in the `send()` method is a unique *mail code* used to locate either the [mail view](#mail-views) or [mail template](#mail-templates).
+
+    // These variables are available inside the message as Twig
+    $params = ['name' => 'Joe', 'user' => 'Mary'];
+
+    Mail::send('acme.blog::mail.message', $params, function($message) {
+
+        // Message recipient
+        $message->to('admin@domain.tld', 'Admin Person');
+
+    });
+
+October also includes an alternative method called `sendTo()` that can simplify sending mail:
+
+    // Send to address using no name
+    Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params);
+
+    // Send using an object's properties
+    Mail::sendTo($user, 'acme.blog::mail.message', $params);
+
+    // Send to multiple addresses
+    Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
+
+The first argument is used for the recipients can take different value types:
+
+Type  | Description
+------------- | -------------
+String | a single recipient address, with no name defined.
+Object | a single recipient object, where the *email* property is used for the address and the *name* is optionally used for the name.
+Array | multiple recipients where the array key is the address and the value is the name.
+Collection | a collection of recipient objects, as above.
+
 <a name="mail-views" class="anchor" href="#mail-views"></a>
 ## Mail views
 
-October extends the [Laravel's Mail system](http://laravel.com/docs/mail) with Twig support. The programming interface is the same:
+Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin:mail.message** would use the content in following file:
 
-    Mail::send('acme.blog::mail.message', $data, function($message) use ($user)
-    {
-        $message->to($user->email, $user->full_name);
-    });
+    plugins/                <== Plugins directory
+      author/               <=== "author" segment
+        plugin/             <=== "plugin" segment
+          views/            <== View directory
+            mail/           <== "mail" segment
+              message.htm   <== "message" segment
 
-The first argument in the `send()` method is a path to the mail view in the following format: **author.plugin:mail.message**. Which in this case corresponds to the following file:
-
-    plugins/
-      author/
-        plugin/
-          views/
-            mail/
-              message.htm
-
-Mail views can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==`` sequence. For example:
+The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==`` sequence. For example:
 
     subject = "You product has been added to OctoberCMS project"
     ==
@@ -70,7 +99,7 @@ Parameter  | Description
 <a name="mail-templates" class="anchor" href="#mail-templates"></a>
 ## Using mail templates
 
-Mail templates can be created in the back-end area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
+Mail templates reside in the database and can be created in the back-end area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
 
 The process for sending these emails is the same. For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
 
