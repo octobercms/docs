@@ -198,6 +198,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Radio List](#field-radio)
 - [Checkbox](#field-checkbox)
 - [Checkbox List](#field-checkboxlist)
+- [Switch](#field-switch)
 - [Partial](#field-partial)
 - [Hint](#field-hint)
 - [Widget](#field-widget)
@@ -339,6 +340,17 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
 
 
 Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
+
+<a name="field-switch" class="anchor" href="#field-switch"></a>
+### Switch
+
+`switch` - renders a switchbox.
+
+    show_content:
+      label: Display content
+      type: switch
+      default: true
+      comment: Short text
 
 <a name="field-partial" class="anchor" href="#field-partial"></a>
 ### Partial
