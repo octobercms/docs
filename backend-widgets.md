@@ -16,7 +16,7 @@ Widget classes reside inside the **widgets** directory of the plugin directory. 
     widgets/
       /form
         /partials
-          _form.htm     <== Widget view file
+          _form.htm     <== Widget partial file
         /assets
           /js
             form.js    <== Widget JavaScript file
