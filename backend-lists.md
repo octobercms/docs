@@ -314,7 +314,7 @@ Sometimes you may wish to modify the default list behavior and there are several
 
 - [Overriding controller action](#overriding-action)
 - [Extending list columns](#extend-list-columns)
-- [Extending list model query](#extend-model-query)
+- [Extending the model query](#extend-model-query)
 
 <a name="overriding-action" class="anchor" href="#overriding-action"></a>
 ### Overriding controller action
@@ -379,11 +379,20 @@ Method  | Description
 Each method takes an array of columns similar to the [list column configuration](#list-columns).
 
 <a name="extend-model-query" class="anchor" href="#extend-model-query"></a>
-### Extending model query
+### Extending the model query
 
 The lookup query for the list [database model](../database/model) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
 
     public function listExtendQuery($query)
     {
         $query->withTrashed();
+    }
+
+The [list filter](#list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
+
+    public function listFilterExtendQuery($query, $scope)
+    {
+        if ($scope->scopeName == 'status') {
+            $query->where('status', '<>', 'all');
+        }
     }
