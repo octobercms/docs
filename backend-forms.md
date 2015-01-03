@@ -209,8 +209,8 @@ There are various native field types that can be used for the **type** setting. 
 `text` - renders a single line text box. This is the default type used if none is specified.
 
     blog_title:
-      label: Blog Title
-      type: text
+        label: Blog Title
+        type: text
 
 <a name="field-number" class="anchor" href="#field-number"></a>
 ### Number
@@ -218,8 +218,8 @@ There are various native field types that can be used for the **type** setting. 
 `number` - renders a single line text box that takes numbers only.
 
     your_age:
-      label: Your Age
-      type: number
+        label: Your Age
+        type: number
 
 <a name="field-password" class="anchor" href="#field-password"></a>
 ### Password
@@ -227,8 +227,8 @@ There are various native field types that can be used for the **type** setting. 
 `password ` - renders a single line password field.
 
     user_password:
-      label: Password
-      type: password
+        label: Password
+        type: password
 
 <a name="field-password" class="anchor" href="#field-textarea"></a>
 ### Textarea
@@ -236,9 +236,9 @@ There are various native field types that can be used for the **type** setting. 
 `textarea` - renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
 
     blog_contents:
-      label: Contents
-      type: textarea
-      size: large
+        label: Contents
+        type: textarea
+        size: large
 
 <a name="field-dropdown" class="anchor" href="#field-dropdown"></a>
 ### Dropdown
@@ -246,18 +246,18 @@ There are various native field types that can be used for the **type** setting. 
 `dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines options directly in the YAML file:
 
     status:
-      label: Blog Post Status
-      type: dropdown
-      options:
-        draft: Draft
-        published: Published
-        archived: Archived
+        label: Blog Post Status
+        type: dropdown
+        options:
+            draft: Draft
+            published: Published
+            archived: Archived
 
 The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method takes a single parameter, the current key value, and should return an array of options in the format **key => label**. 
 
     status:
-      label: Blog Post Status
-      type: dropdown
+        label: Blog Post Status
+        type: dropdown
 
 Supplying the dropdown options tn the model class:
 
@@ -279,9 +279,9 @@ The third global method `getDropdownOptions()` can also be defined in the model,
 The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method takes two parameters, the current key value and field name, and should return an array of options in the format **key => label**.
 
     status:
-      label: Blog Post Status
-      type: dropdown
-      options: listStatuses
+        label: Blog Post Status
+        type: dropdown
+        options: listStatuses
 
 Supplying the dropdown options tn the model class:
 
@@ -296,22 +296,22 @@ Supplying the dropdown options tn the model class:
 `radio` - renders a list of radio options, where only one item can be selected at a time.
 
     security_level:
-      label: Access Level
-      type: radio
-      options:
-        all: All
-        registered: Registered only
-        guests: Guests only
+        label: Access Level
+        type: radio
+        options:
+            all: All
+            registered: Registered only
+            guests: Guests only
 
 Radio lists can also support a secondary description.
 
     security_level:
-      label: Access Level
-      type: radio
-      options:
-        all: [All, Guests and customers will be able to access this page.]
-        registered: [Registered only, Only logged in member will be able to access this page.]
-        guests: [Guests only, Only guest users will be able to access this page.]
+        label: Access Level
+        type: radio
+        options:
+            all: [All, Guests and customers will be able to access this page.]
+            registered: [Registered only, Only logged in member will be able to access this page.]
+            guests: [Guests only, Only guest users will be able to access this page.]
 
 Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
 
@@ -321,9 +321,9 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
 `checkbox` - renders a single checkbox.
 
     show_content:
-      label: Display content
-      type: checkbox
-      default: true
+        label: Display content
+        type: checkbox
+        default: true
 
 <a name="field-checkboxlist" class="anchor" href="#field-checkboxlist"></a>
 ### Checkbox List
@@ -331,12 +331,12 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
 `checkboxlist` - renders a list of checkboxes.
 
     permissions:
-      label: Permissions
-      type: checkboxlist
-      options:
-        open_account: Open account
-        close_account: Close account
-        modify_account: Modify account
+        label: Permissions
+        type: checkboxlist
+        options:
+            open_account: Open account
+            close_account: Close account
+            modify_account: Modify account
 
 
 Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
@@ -347,10 +347,9 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 `switch` - renders a switchbox.
 
     show_content:
-      label: Display content
-      type: switch
-      default: true
-      comment: Short text
+        label: Display content
+        type: switch
+        comment: Flick this switch to display content
 
 <a name="field-partial" class="anchor" href="#field-partial"></a>
 ### Partial
@@ -376,8 +375,8 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 `widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
 
     blog_content:
-      type: Backend\FormWidgets\RichEditor
-      size: huge
+        type: Backend\FormWidgets\RichEditor
+        size: huge
 
 <a name="form-widgets" class="anchor" href="#form-widgets"></a>
 ## Form widgets
