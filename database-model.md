@@ -48,16 +48,7 @@ The `$table` protected field specifies the database table corresponding the mode
 <a name="relationships" class="anchor" href="#relationships"></a>
 ## Relationships
 
-October models allow you to define [relationships](http://laravel.com/docs/eloquent#relationships) with the model class properties. An example of defining a relationship:
-
-    class Post extends Model
-    {
-        public $belongsTo = [
-            'user' => ['Acme\Blog\Models\User']
-        ];
-    }
-
-Each relationship definition is an array, where the first value is always the related model and all other values are relation arguments based on their key name. The following relations are available:
+October models allow you to define [relationships](http://laravel.com/docs/eloquent#relationships) with the model class properties. The following relations types are available:
 
 - [Belongs to](#relation-belongsto)
 - [Belongs to many](#relation-belongstomany)
@@ -66,7 +57,23 @@ Each relationship definition is an array, where the first value is always the re
 - [Polymorphic relations](#relation-polymorph)
 - [File attachments](#file-attachments)
 
-All relations can use the following arguments to filter the results:
+An example of defining relationships:
+
+    class Post extends Model
+    {
+        public $belongsTo = [
+            'user' => ['Acme\Blog\Models\User'],
+            'category' => [...]
+        ];
+
+        public $hasMany = [
+            'comments' => ['Acme\Blog\Models\Comment', 'order' => 'created_at']
+        ]
+    }
+
+Each definition is an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are arguments that must have a key name.
+
+The following are global arguments that can be used with all relations:
 
 Argument  | Description
 ------------- | -------------
@@ -117,7 +124,7 @@ The `$belongsTo` relation sets up a one-to-one connection with another model, wh
         ];
     }
 
-In this example the Post model belongs to the User model, defined by the Post table having a *key* column of `user_id` . The key column name generated automatically. However, it can be defined explicitly too:
+In this example the Post model belongs to the User model, defined by the Post database table having a *key* column of `user_id` . The key column name generated automatically. However, it can be defined explicitly too:
 
     public $belongsTo = [
         'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id']
@@ -166,7 +173,7 @@ This above code shows the table schema used to create the join *table*. The two 
         ]
     ];
 
-Thee following arguments are supported:
+Thee following arguments are supported for belongs to many relations:
 
 Argument  | Description
 ------------- | -------------
@@ -179,7 +186,7 @@ Argument  | Description
 <a name="relation-hasone-hasmany" class="anchor" href="#relation-hasone-hasmany"></a>
 ### Has one / Has many
 
-The `$hasOne` relation indicates a one-to-one and the  `$hasMany` indicates a one-to-many connection with another model. This relationship can be considered the 'other side' of the [Belongs to](#relation-belongsto) relationship.
+The `$hasOne` relation indicates a one-to-one and the  `$hasMany` indicates a one-to-many connection with another model. This relationship can be considered the "other side" of the [Belongs to](#relation-belongsto) relationship.
 
     class User extends Model
     {
@@ -200,9 +207,11 @@ The above example shows that this User "has one" Profile model only, but "has ma
 
 The one-to-one relationship will always return a single model, whereas the one-to-many relationship will always return a collection of models.
 
+    // Has one:
     // Returns a single Profile model
     $user->profile;
 
+    // Has many:
     // Returns an array of Post models
     $user->posts;
 
@@ -270,7 +279,7 @@ For example, you might have a Event Log model that carries generic information a
 
 In the above example the User and Location models both use the Event Log model for recording events under the shared *type* of `event_owner`. The inverse occurs via the Event Log which can access the owner of the event (User or Location) via the relationship of the type name.
 
-The database structure for this polymorphic relation should represent the following:
+The database structure for this polymorphic relation is represented as the following:
 
     acme_blog_users
         id - integer
