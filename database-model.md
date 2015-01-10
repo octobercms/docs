@@ -48,49 +48,27 @@ The `$table` protected field specifies the database table corresponding the mode
 <a name="relationships" class="anchor" href="#relationships"></a>
 ## Relationships
 
-October models allow to define [relationships](http://laravel.com/docs/eloquent#relationships) with the model class fields. The following relations are available, along with their optional and required arguments:
-
-Relation  | Description
-------------- | -------------
-**$hasOne** | has a single related model that belongs to it. Optional: `primaryKey`.
-**$hasMany** | has many related models that belong to. Optional: `primaryKey`.
-**$belongsTo** | owned by another related model (slave). Optional: `foreignKey`.
-**$belongsToMany** | owned by multiple related models. Optional: `table`, `primaryKey`, `foreignKey`, `pivot`, `timestamps`.
-**$morphTo** | polymorphic version of belongs to. Optional: `name`, `type`, `id`.
-**$morphOne** | polymorphic version of has one. Optional: `type`, `id`. Required: `name`.
-**$morphMany** | polymorphic version of has many. Optional: `type`, `id`. Required: `name`.
-**$morphToMany** | polymorphic version of belongs to many. Optional: `table`, `primaryKey`, `foreignKey`, `pivot`, `timestamps`. Required: `name`.
-**$morphedByMany** | polymorphic version of belongs to many, inversed. Optional: `table`, `primaryKey`, `foreignKey`, `pivot`, `timestamps`. Required: `name`.
-**$attachOne** | single file attachment., see [file attachments](#file-attachments) Optional: `public`.
-**$attachMany** | multiple file attachments, see [file attachments](#file-attachments). Optional: `public`.
-**$hasManyThrough** | has many related models through another model. Optional: `primaryKey`, `throughKey`. Required: `through`.
-
-> **Note:** The key arguments are in the context of the defining model. The defining [primary] model is identified by a `primaryKey` and the foreign model is identified by a `foreignKey`.
-
-An example of defining a relationship:
+October models allow you to define [relationships](http://laravel.com/docs/eloquent#relationships) with the model class properties. An example of defining a relationship:
 
     class Post extends Model
     {
         public $belongsTo = [
-            'user' => ['User', 'foreignKey' => 'user_id']
-        ];
-
-        public $belongsToMany = [
-            'categories' => ['Category', 'table' => 'october_blog_posts_categories']
-        ];
-
-        public $attachMany = [
-            'featured_images' => ['System\Models\File']
-        ];
-
-        public $hasManyThrough = [
-            'followers' => ['RainLab\Forum\Models\Member', 'through' => 'RainLab\Forum\Models\TopicFollower'],
+            'user' => ['Acme\Blog\Models\User']
         ];
     }
 
-Default relationship filters can be used on all relations:
+Each relationship definition is an array, where the first value is always the related model and all other values are relation arguments based on their key name. The following relations are available:
 
-Filter  | Description
+- [Belongs to](#relation-belongsto)
+- [Belongs to many](#relation-belongstomany)
+- [Has one / Has many](#relation-hasone-hasmany)
+- [Has many through](#relation-hasmanythrough)
+- [Polymorphic relations](#relation-polymorph)
+- [File attachments](#file-attachments)
+
+All relations can use the following arguments to filter the results:
+
+Argument  | Description
 ------------- | -------------
 **order** | sorting order for multiple records.
 **conditions** | filters the relation using a raw where query statement.
@@ -100,7 +78,11 @@ Filter  | Description
 Example filter using **order** and **conditions**:
 
     public $belongsToMany = [
-        'categories' => ['Category', 'order' => 'name desc', 'conditions' => 'is_active = 1']
+        'categories' => [
+            'Acme\Blog\Models\Category',
+            'order'      => 'name desc',
+            'conditions' => 'is_active = 1'
+        ]
     ];
 
 Example filter using **scope**:
@@ -108,7 +90,10 @@ Example filter using **scope**:
     class Post extends Model
     {
         public $belongsToMany = [
-            'categories' => ['Category', 'scope' => 'isActive']
+            'categories' => [
+                'Acme\Blog\Models\Category',
+                'scope' => 'isActive'
+            ]
         ];
     }
 
@@ -119,6 +104,189 @@ Example filter using **scope**:
             return $query->where('is_active', 1)->orderBy('name', 'desc');
         }
     }
+
+<a name="relation-belongsto" class="anchor" href="#relation-belongsto"></a>
+### Belongs to
+
+The `$belongsTo` relation sets up a one-to-one connection with another model, where the declaring model "belongs to" the other model.
+
+    class Post extends Model
+    {
+        public $belongsTo = [
+            'user' => ['Acme\Blog\Models\User']
+        ];
+    }
+
+In this example the Post model belongs to the User model, defined by the Post table having a *key* column of `user_id` . The key column name generated automatically. However, it can be defined explicitly too:
+
+    public $belongsTo = [
+        'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id']
+    ];
+
+The inverse relationship can also be defined where the [User has one / has many Posts](#relation-hasone-hasmany).
+
+<a name="relation-belongstomany" class="anchor" href="#relation-belongstomany"></a>
+### Belongs to many
+
+The `$belongsToMany` relation creates a many-to-many connection with another model, using a joining database table.
+
+    class Post extends Model
+    {
+        public $belongsToMany = [
+            'categories' => ['Acme\Blog\Models\Category', 'table' => 'acme_blog_posts_categories']
+        ];
+    }
+
+In the above example a Post model "belongs to many" Category models, which inversely can have many Posts too.
+
+    class Category extends Model
+    {
+        public $belongsToMany = [
+            'posts' => ['Acme\Blog\Models\Post', 'table' => 'acme_blog_posts_categories']
+        ];
+    }
+
+The above example shows the inverse relationship where the Category model also belongs to many Post models. Both relationships are stored in a shared join *table* defined here explicitly as `acme_blog_posts_categories`.
+
+    Schema::create('acme_blog_posts_categories', function($table)
+    {
+        $table->integer('post_id')->unsigned();
+        $table->integer('category_id')->unsigned();
+        $table->primary(['post_id', 'category_id']);
+    });
+
+This above code shows the table schema used to create the join *table*. The two key names are generated automatically from the context of the defining model. In context of the Post model, the *key* column is generated as `post_id` and the *otherKey* column is `category_id`. However, these can be defined explicitly too:
+
+    public $belongsToMany = [
+        'categories' => [
+            'Acme\Blog\Models\Category',
+            'table'    => 'acme_blog_posts_categories',
+            'key'      => 'my_post_id',
+            'otherKey' => 'my_category_id'
+        ]
+    ];
+
+Thee following arguments are supported:
+
+Argument  | Description
+------------- | -------------
+**table** | the name of the join table.
+**key** | the key column name of the defining model.
+**otherKey** | the key column name of the related model.
+**pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
+**timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
+
+<a name="relation-hasone-hasmany" class="anchor" href="#relation-hasone-hasmany"></a>
+### Has one / Has many
+
+The `$hasOne` relation indicates a one-to-one and the  `$hasMany` indicates a one-to-many connection with another model. This relationship can be considered the 'other side' of the [Belongs to](#relation-belongsto) relationship.
+
+    class User extends Model
+    {
+        public $hasOne = [
+            'profile' => ['Acme\Blog\Models\Profile']
+        ];
+
+        public $hasMany = [
+            'posts' => ['Acme\Blog\Models\Post']
+        ];
+    }
+
+The above example shows that this User "has one" Profile model only, but "has many" Post models that belong to her. This is defined by the Profile/Post table having a *key* column of `user_id` , however it can be defined explicitly too:
+
+    public $hasMany = [
+        'posts' => ['Acme\Blog\Models\Post', 'key' => 'my_user_id']
+    ];
+
+The one-to-one relationship will always return a single model, whereas the one-to-many relationship will always return a collection of models.
+
+    // Returns a single Profile model
+    $user->profile;
+
+    // Returns an array of Post models
+    $user->posts;
+
+<a name="relation-hasmanythrough" class="anchor" href="#relation-hasmanythrough"></a>
+### Has many through
+
+The `$hasManyThrough` relation sets up a many-to-many connection with another model, it does so by proceeding "through" a third model.
+
+    class Country extends Model
+    {
+        public $hasManyThrough = [
+            'comments' => [
+                'Acme\Blog\Models\Comment',
+                'through' => 'Acme\Blog\Models\User'
+            ],
+        ];
+    }
+
+The above example shows that a Country model may 'have many' Comment models, based on the User model belonging to that Country. It will assume the *key* column of the User model is `country_id` and the *throughKey* of the Comment model is `user_id`. These can be defined explicitly:
+
+    public $hasManyThrough = [
+        'comments' => [
+            'Acme\Blog\Models\Comment',
+            'key'        => 'my_country_id',
+            'through'    => 'Acme\Blog\Models\User',
+            'throughKey' => 'my_user_id'
+        ],
+    ];
+
+<a name="relation-polymorph" class="anchor" href="#relation-polymorph"></a>
+### Polymorphic relations
+
+A slightly more advanced twist on relations is the "polymorphic relation", where a model can belong to more than one other model. The following polymorphic relationship types are available, shown with their optional or required arguments:
+
+Relation  | Description
+------------- | -------------
+**$morphTo** | polymorphic version of belongs to. Optional: `name`, `type`, `id`.
+**$morphOne** | polymorphic version of has one. Optional: `type`, `id`. Required: `name`.
+**$morphMany** | polymorphic version of has many. Optional: `type`, `id`. Required: `name`.
+**$morphToMany** | polymorphic version of belongs to many. Optional: `table`, `key`, `otherKey`, `pivot`, `timestamps`. Required: `name`.
+**$morphedByMany** | polymorphic version of belongs to many, inversed. Optional: `table`, `key`, `otherKey`, `pivot`, `timestamps`. Required: `name`.
+
+For example, you might have a Event Log model that carries generic information about an incident, it can then belong to either a User model or a Location model.
+
+    class EventLog extends Model
+    {
+        public $morphTo = [
+            'event_owner' => []
+        ];
+    }
+
+    class User extends Model
+    {
+        public $morphMany = [
+            'event_log' => ['Acme\Blog\Models\EventLog', 'type' => 'event_owner']
+        ];
+    }
+
+    class Location extends Model
+    {
+        public $morphMany = [
+            'event_log' => ['Acme\Blog\Models\EventLog', 'type' => 'event_owner']
+        ];
+    }
+
+In the above example the User and Location models both use the Event Log model for recording events under the shared *type* of `event_owner`. The inverse occurs via the Event Log which can access the owner of the event (User or Location) via the relationship of the type name.
+
+The database structure for this polymorphic relation should represent the following:
+
+    acme_blog_users
+        id - integer
+        name - string
+
+    acme_blog_locations
+        id - integer
+        address -string
+
+    acme_blog_event_logs
+        id - integer
+        details - string
+        event_owner_id - integer
+        event_owner_type - string
+
+It is important to note the columns `event_owner_id` and `event_owner_type` in the Event Log table. These are used to "morph" the relationship depending on who owns the event.
 
 <a name="attribute-modifiers" class="anchor" href="#attribute-modifiers"></a>
 ## Attribute modifiers
@@ -258,7 +426,9 @@ You can also create custom validation rules the [same way](http://laravel.com/do
 <a name="file-attachments" class="anchor" href="#file-attachments"></a>
 ## File attachments
 
-Models can support file attachments using a polymorphic relationship.
+Models can support file attachments using a subset of the [polymorphic relationship](#relation-polymorph). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship.
+
+In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 
 A single file attachment:
 
@@ -272,7 +442,7 @@ Multiple file attachments:
         'photos' => ['System\Models\File']
     ];
 
-Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined like this:
+Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`:
 
     public $attachOne = [
         'avatar' => ['System\Models\File', 'public' => false]
@@ -465,5 +635,5 @@ Destroys all bindings that have not been committed and are older than 1 day:
 Models can be extended with the static `extend()` method. The method takes a closure and passes the model object into it. Inside the closure you can add relations to the model::
 
     User::extend(function($model) {
-        $model->hasOne['author'] = ['Author', 'foreignKey' => 'user_id'];
+        $model->hasOne['author'] = ['Author', 'key' => 'user_id'];
     });
