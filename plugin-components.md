@@ -90,6 +90,7 @@ Key  | Description
 **type** | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox** and **dropdown**. Default value: **string**.
 **validationPattern** | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
 **validationMessage** | optional error message to display if the validation fails.
+**required** | optional, forces field to be filled. Uses validationMessage when left empty.
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
 **depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
