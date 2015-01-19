@@ -345,7 +345,7 @@ You can extend the columns of another controller from outside by calling the `ex
 
 Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
-        Categories::extendListColumns(function($list, $model, $context){
+        Categories::extendListColumns(function($list, $model){
 
             if (!$model instanceof MyModel)
                 return;
