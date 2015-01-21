@@ -4,7 +4,7 @@
 - [Relationship types](#relationship-types)
 - [Displaying a relation manager](#relation-display)
 
-`Relation behavior` is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List](lists#column-types) relation columns or Form relation fields that only provide simple management.
+`Relation behavior` is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
 
 Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `Backend.Behaviors.RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-relation).
 
