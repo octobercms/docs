@@ -43,8 +43,8 @@ An *Invoice* model with a relationship called `items` should define the first le
 
     items:
         label: Invoice Line Item
-        list: @/plugins/acme/pay/models/invoiceitem/columns.yaml
-        form: @/plugins/acme/pay/models/invoiceitem/fields.yaml
+        list: ~/plugins/acme/pay/models/invoiceitem/columns.yaml
+        form: ~/plugins/acme/pay/models/invoiceitem/fields.yaml
         manage:
             recordsPerPage: 10
 
@@ -87,10 +87,16 @@ Option  | Type | Description
 <a name="relationship-types" class="anchor" href="#relationship-types"></a>
 ## Relationship types
 
-How the relation manager is displayed depends on the relationship definition in the target model. The relationship type will also determine the configuration requirements, these are shown in **bold**.
+How the relation manager is displayed depends on the relationship definition in the target model. The relationship type will also determine the configuration requirements, these are shown in **bold**. The following relationship types are available:
+
+- [Has many](#has-many)
+- [Belongs to many](#belongs-to-many)
+- [Belongs to Many (with Pivot Data)](#belongs-to-many-pivot)
+- [Belongs to](#belongs-to)
+- [Has one](#has-one)
 
 <a name="has-many" class="anchor" href="#has-many"></a>
-### Has Many relation
+### Has many
 
 1. Related records are displayed as a **list**.
 1. Clicking a record will display an update **form**.
@@ -105,11 +111,11 @@ For example, if a *Blog Post* has many *Comments*, the target model is set as th
 
     comments:
         label: Comment
-        list: @/plugins/acme/blog/models/comment/columns.yaml
-        form: @/plugins/acme/blog/models/comment/fields.yaml
+        list: ~/plugins/acme/blog/models/comment/columns.yaml
+        form: ~/plugins/acme/blog/models/comment/fields.yaml
 
 <a name="belongs-to-many" class="anchor" href="#belongs-to-many"></a>
-### Belongs to Many relation
+### Belongs to many
 
 1. Related records are displayed as a **list**.
 1. Clicking toolbar Add button will display a selection **list**.
@@ -123,10 +129,10 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
 
     roles:
         label: Role
-        list: @/plugins/acme/user/models/role/columns.yaml
+        list: ~/plugins/acme/user/models/role/columns.yaml
 
 <a name="belongs-to-many-pivot" class="anchor" href="#belongs-to-many-pivot"></a>
-### Belongs to Many (with Pivot Data) relation
+### Belongs to many (with Pivot Data)
 
 1. Related records are displayed as a **list**.
 1. Clicking a record will display a **pivot** data update form.
@@ -141,7 +147,7 @@ Continuing the example in *Belongs To Many* relations, if a role also carried an
 
     roles:
         label: Role
-        list: @/plugins/acme/user/models/role/columns.yaml
+        list: ~/plugins/acme/user/models/role/columns.yaml
         pivot:
             fields:
                 expiry_date:
@@ -149,19 +155,40 @@ Continuing the example in *Belongs To Many* relations, if a role also carried an
                     type: datepicker
 
 <a name="belongs-to" class="anchor" href="#belongs-to"></a>
-### Belongs to relation (*Not yet implemented*)
+### Belongs to
 
 1. Related record is displayed as a **form** preview.
 1. Clicking toolbar Link to button will display a selection **list**.
 1. Clicking toolbar Unlink button will orphan the relationship.
 
+For example, if a *Phone* belongs to a *Person* the relation manager will display a form with the fields defined in **form**. Clicking the Link button will display a list of People to associate with the Phone. Clicking the Unlink button will dissociate the Phone with the Person.
+
+    # ===================================
+    #  Relation Behavior Config
+    # ===================================
+
+    person:
+        label: Person
+        list: @/plugins/october/test/models/person/columns.yaml
+        form: @/plugins/october/test/models/person/fields.yaml
+
 <a name="has-one" class="anchor" href="#has-one"></a>
-### Has one relation (*Not yet implemented*)
+### Has one
 
 1. Related record is displayed as a **form** preview.
 1. Clicking toolbar Create button will display a create **form**.
 1. Clicking toolbar Update button will display an update **form**.
 1. Clicking toolbar Delete button will destroy the record.
+
+For example, if a *Person* has one *Phone* the relation manager will display form with the fields defined in **form** for the Phone. When clicking the Create button, a popup is displayed with the fields now editable. If the Person already has a Phone only the Update and Delete buttons are shown.
+
+    # ===================================
+    #  Relation Behavior Config
+    # ===================================
+
+    phone:
+        label: Phone
+        form: ~/plugins/october/test/models/phone/fields.yaml
 
 <a name="relation-display" class="anchor" href="#relation-display"></a>
 ## Displaying a relation manager
