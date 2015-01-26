@@ -230,7 +230,7 @@ There are various native field types that can be used for the **type** setting. 
         label: Password
         type: password
 
-<a name="field-password" class="anchor" href="#field-textarea"></a>
+<a name="field-textarea" class="anchor" href="#field-textarea"></a>
 ### Textarea
 
 `textarea` - renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
