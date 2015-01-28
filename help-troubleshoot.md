@@ -30,9 +30,9 @@ When any exception is thrown, such as a `SystemException` it will be recorded in
 
     <?php
 
-        throw new SystemException('I will be logged in the event log');
+        throw new SystemException("I will be logged in the event log");
 
-        throw new ApplicationException('I will cause an error but won't be logged anywhere');
+        throw new ApplicationException("I will cause an error but won't be logged anywhere");
 
 
 There are two ways the event log can be accessed:

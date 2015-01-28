@@ -43,6 +43,7 @@ Field  | Description
 **title** | a title for this list.
 **list** | a configuration array or reference to a list column definition file, see [list columns](#list-columns).
 **modelClass** | a model class name, the list data is loaded from this model.
+**filter** | optional filter configuration, see [filtering the list](#adding-filters).
 
 The configuration options listed below are optional.
 
