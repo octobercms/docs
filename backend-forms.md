@@ -433,6 +433,7 @@ Option  | Description
 **mode** | the expected file type, either file or image. Default: file.
 **imageWidth** | if using image type, the image will be resized to this width.
 **imageWidth** | if using image type, the image will be resized to this height.
+**fileTypes** | file extensions that are accepted by the uploader, optional. Eg: zip,txt
 
 <a name="widget-datepicker" class="anchor" href="#widget-datepicker"></a>
 ### Date picker

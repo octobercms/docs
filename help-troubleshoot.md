@@ -4,7 +4,7 @@
 - [Writing to the log](#write-log)
 - [Inspecting markup variables](#inspecting-markup-variables)
 - [Error page](#error-page)
-
+- [Bleeding edge updates](#edge-updates)
 
 By default detailed error reporting is turned *on* so it is helpful to see detailed error information which can be useful for debugging and troubleshooting issues. When this feature is turned off, when there is a problem in a page, a friendly error message will be displayed.
 
@@ -82,3 +82,25 @@ If you want to explore the variables available on a page, or inspect the content
 ## Error page
 
 By default any errors will be shown with a detailed error page containing the file contents, line number and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `app/config/app.php` script and creating a page with the URL `/error`.
+
+<a name="edge-updates" class="anchor" href="#edge-updates"></a>
+## Bleeding edge updates
+
+The October platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
+
+You can instruct the platform to prefer test builds by changing the `edgeUpdates` parameter in the `app/config/cms.php` configuration file.
+
+    /*
+    |--------------------------------------------------------------------------
+    | Bleeding edge updates
+    |--------------------------------------------------------------------------
+    |
+    | If you are developing with October, it is important to have the latest
+    | code base, set this value to 'true' to tell the platform to download
+    | and use the development copies of core files and plugins.
+    |
+    */
+
+    'edgeUpdates' => false,
+
+> **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
