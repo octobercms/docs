@@ -426,6 +426,19 @@ Just like the Laravel Validator, you can set custom error messages using the [sa
             ...
         ];
     }
+    
+<a name="custom-attribute-names" class="anchor" href="#custom-attribute-names"></a>
+### Custom attribute names
+
+You may also set custom attribute names with the `$attributeNames` array.
+
+    class User extends \October\Rain\Database\Model
+    {
+        public $attributeNames = [
+           'email' => 'Email Address',
+            ...
+        ];
+    }
 
 <a name="custom-validation-rules" class="anchor" href="#custom-validation-rules"></a>
 ### Custom validation rules
