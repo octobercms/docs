@@ -106,12 +106,9 @@ Paste the following code in the editor and change the **host address** and  **se
 <a name="crontab-setup" class="anchor" href="#crontab-setup"></a>
 ## Setting up the crontab
 
-By default *queued jobs* are executed using a simple database driven [Queue driver for Laravel](http://laravel.com/docs/queues) and repeating *scheduled tasks* are managed by [Dispatcher](https://github.com/indatus/dispatcher).
+For automated activities, such as *queued jobs* and *scheduled tasks*, to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October:
 
-For these automated tasks to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October:
-
-    * * * * * php /path/to/artisan queue:cron 1>> /dev/null 2>&1
-    * * * * * php /path/to/artisan scheduled:run 1>> /dev/null 2>&1
+    * * * * * php /path/to/artisan schedule:run 1>> /dev/null 2>&1
 
 > **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 

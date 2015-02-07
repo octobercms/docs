@@ -10,6 +10,7 @@
 - [Navigation and permissions](#navigation-permissions)
 - [Backend settings](#backend-settings)
 - [Mail templates](#mail-templates)
+- [Scheduled tasks](#scheduled-tasks)
 - [Migrations and version history](#migrations-version-history)
 
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
@@ -101,7 +102,7 @@ Method  | Description
 **registerSettings()** | registers any back-end configuration links used by this plugin.
 **registerFormWidgets()** | registers any back-end widgets used by this plugin.
 **registerReportWidgets()** | registers any report widgets, including the dashboard widgets.
-
+**registerSchedule()** | registers scheduled commands that are executed on a regular basis.
 <a name="basic-plugin-information" class="anchor" href="#basic-plugin-information"></a>
 ### Basic plugin information
 
@@ -342,6 +343,35 @@ Mail views can be registered as templates that are automatically generated in th
             'rainlab.user::mail.restore'  => 'Password reset instructions for front-end users.',
         ];
     }
+
+<a name="scheduled-tasks" class="anchor" href="#scheduled-tasks"></a>
+## Scheduled tasks
+
+October has the ability to [run automated tasks on a regular basis](http://laravel.com/docs/5.0/artisan#scheduling-artisan-commands). A plugin can register to this service by overriding the `registerSchedule` method. The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
+
+    public function registerSchedule($schedule)
+    {
+        // Clear the cache every 10 minutes
+        $schedule->command('cache:clear')->everyFiveMinutes();
+
+        // Perform a task every hour
+        $schedule->call(function(){
+            //...
+        })->hourly();
+    }
+
+The time methods supported by `$schedule` are:
+
+Method  | Description
+------------- | -------------
+**everyFiveMinutes()** | Run a command every `5` minutes
+**everyTenMinutes()** | Run a command every `10` minutes
+**everyThirtyMinutes()** | Run a command every `30` minutes
+**hourly()** | Run once an hour at the beginning of the hour
+**daily()** | Run once a day at midnight
+**weekly()** | Run once a week at midnight on Sunday morning
+**monthly()** | Run once a month at midnight in the morning of the first day of the month
+**yearly()** | Run once a year at midnight in the morning of January 1
 
 <a name="migrations-version-history" class="anchor" href="#migrations-version-history"></a>
 ## Migrations and version history

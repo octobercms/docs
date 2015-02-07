@@ -5,7 +5,6 @@
 - [Utility commands](#utility-commands)
 - [Scaffolding commands](#scaffolding-commands)
 - [Console development](#console-development)
-- [Scheduling console commands](#scheduling-console-commands)
 
 October includes several CLI commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Artisan. Please see Laravel documentation for more details.
 
@@ -178,48 +177,3 @@ The first parameter is the command name, the second parameter is the console cla
         }
 
     }
-
-<a name="scheduling-console-commands" class="anchor" href="#scheduling-console-commands"></a>
-## Scheduling console commands
-
-October comes bundled with the [Dispatcher package](https://github.com/indatus/dispatcher) that allows [console commands](#console-development) to be executed on a regular basis. To enable this functionality the class should extend the `Indatus\Dispatcher\Scheduling\ScheduledCommand` base class and must define a `schedule()` method, for example:
-
-    namespace Acme\MyPlugin\Console;
-
-    use Symfony\Component\Console\Input\InputOption;
-    use Symfony\Component\Console\Input\InputArgument;
-    use Indatus\Dispatcher\Scheduling\Schedulable;
-    use Indatus\Dispatcher\Scheduling\ScheduledCommand;
-
-    class MyConsoleCommand extends ScheduledCommand
-    {
-        /**
-         * @var string The console command name.
-         */
-        protected $name = 'myplugin:mycommand';
-
-        [...]
-
-        /**
-         * When a command should run
-         * @param Scheduler $scheduler
-         * @return \Indatus\Dispatcher\Scheduling\Schedulable
-         */
-        public function schedule(Schedulable $scheduler)
-        {
-            // Run every 5 minutes
-            return $scheduler->everyMinutes(5);
-        }
-    }
-
-As above the command **myplugin:mycommand** would be called every 5 minutes by the scheduler. The methods supported by `$scheduler` are:
-
-Method  | Description
-------------- | -------------
-**everyMinutes(x)** | Run a command every `x` minutes
-**hourly()** | Run once an hour at the beginning of the hour
-**daily()** | Run once a day at midnight
-**weekly()** | Run once a week at midnight on Sunday morning
-**monthly()** | Run once a month at midnight in the morning of the first day of the month
-**yearly()** | Run once a year at midnight in the morning of January 1
-**everyOtherWeek()** | Run once every other week at midnight on Sunday morning
