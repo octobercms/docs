@@ -85,6 +85,11 @@ Option  | Type | Description
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
 **toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add|remove**
 
+These configuration values can be specified only for the **manage** options.
+Option  | Type | Description
+------------- | ------------- | -------------
+**context** | Form | context of the form being displayed. Can be a string or create/update set. Default: relation.
+
 
 <a name="relationship-types" class="anchor" href="#relationship-types"></a>
 ## Relationship types
