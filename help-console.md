@@ -98,6 +98,10 @@ Use the scaffolding commands to speed up the development process.
 
     php artisan create:controller RainLab.Blog Posts
 
+`create:formwidget` - generates a back-end form widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the form widget class name.
+
+    php artisan create:formwidget RainLab.Blog CategorySelector
+
 <a name="console-development" class="anchor" href="#console-development"></a>
 ## Console development
 

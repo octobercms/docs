@@ -12,11 +12,11 @@
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
 
 1. Define [components](components).
-1. Define user permissions.
-1. Add back-end pages, menu items, and forms.
-1. Create database table structures and seed data.
-1. Alter functionality of the core or other plugins.
-1. Provide classes, back-end controllers, views, assets, and other files.
+1. Define [user permissions](../backend/users).
+1. Add [settings pages](settings#backend-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
+1. Create [database table structures and seed data](#migrations-version-history).
+1. Alter [functionality of the core or other plugins](events).
+1. Provide classes, [back-end controllers](../backend/controllers-views-ajax), views, assets, and other files.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
