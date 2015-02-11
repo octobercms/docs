@@ -6,7 +6,6 @@
 - [Dependency definitions](#dependency-definitions)
 - [Extending Twig](#extending-twig)
 - [Navigation menus](#navigation-menus)
-- [Mail templates](#mail-templates)
 - [Scheduled tasks](#scheduled-tasks)
 - [Migrations and version history](#migrations-version-history)
 
@@ -89,7 +88,7 @@ The following methods are supported in the plugin registration class:
 
 Method  | Description
 ------------- | -------------
-**pluginDetails()** | returns the plugin information.
+**pluginDetails()** | returns information about the plugin.
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
 **registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
@@ -99,6 +98,7 @@ Method  | Description
 **registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) used by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
+**registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](#scheduled-tasks) that are executed on a regular basis.
 
 <a name="basic-plugin-information" class="anchor" href="#basic-plugin-information"></a>
@@ -224,19 +224,6 @@ Plugins can extend the back-end navigation menus by overriding methods of the [P
     }
 
 When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users).
-
-<a name="mail-templates" class="anchor" href="#mail-templates"></a>
-## Mail templates
-
-Mail views can be registered as templates that are automatically generated in the back-end for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates()` method of the [Plugin registration class](#registration-file). The method should return an array where the key is the mail view name as described in the [sending mail messages](mail) article, and the value gives a brief description about what the mail template is used for.
-
-    public function registerMailTemplates()
-    {
-        return [
-            'rainlab.user::mail.activate' => 'Activation mail sent to new users.',
-            'rainlab.user::mail.restore'  => 'Password reset instructions for front-end users.',
-        ];
-    }
 
 <a name="scheduled-tasks" class="anchor" href="#scheduled-tasks"></a>
 ## Scheduled tasks

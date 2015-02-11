@@ -4,10 +4,11 @@
 - [Mail views](#mail-views)
 - [Mail templates](#mail-templates)
 - [Mail layouts](#mail-layouts)
+- [Registering mail templates](#mail-template-registration)
 
 Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*.
 
-Optionally, mail views can be registered in the [Plugin registration file](registration#mail-templates) with the `registerMailTemplates()` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
+Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates()` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
 <a name="sending-mail" class="anchor" href="#sending-mail"></a>
 ## Sending mail
@@ -112,7 +113,7 @@ The process for sending these emails is the same. For example, if you create a t
 
 ### Automatically generated templates
 
-Mail templates can also be generated automatically by [mail views that have been registered](registration#mail-templates). The **code** value will be the same as the mail view path (eg: author.plugin:mail.message). If the mail view has a **layout** parameter defined, this will be used to give the template a layout.
+Mail templates can also be generated automatically by [mail views that have been registered](#mail-template-registration). The **code** value will be the same as the mail view path (eg: author.plugin:mail.message). If the mail view has a **layout** parameter defined, this will be used to give the template a layout.
 
 When a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the mail view can be considered a *default view*.
 
@@ -127,3 +128,18 @@ Layout  | Code | Description
 ------------- | ------------- | -------------
 Default | default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
+
+<a name="mail-template-registration" class="anchor" href="#mail-template-registration"></a>
+## Registering mail templates
+
+Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates()` method of the [Plugin registration class](registration#registration-file).
+
+    public function registerMailTemplates()
+    {
+        return [
+            'rainlab.user::mail.activate' => 'Activation mail sent to new users.',
+            'rainlab.user::mail.restore'  => 'Password reset instructions for front-end users.',
+        ];
+    }
+
+The method should return an array where the key is the [mail view name](#mail-views) and the value gives a brief description about what the mail template is used for.
