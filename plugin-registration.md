@@ -4,7 +4,6 @@
 - [Registration file](#registration-file)
 - [Routing and initialization](#routing-initialization)
 - [Dependency definitions](#dependency-definitions)
-- [Component registration](#component-registration)
 - [Extending Twig](#extending-twig)
 - [Navigation menus](#navigation-menus)
 - [Mail templates](#mail-templates)
@@ -93,8 +92,8 @@ Method  | Description
 **pluginDetails()** | returns the plugin information.
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
-**registerComponents()** | registers any front-end components used by this plugin.
-**registerMarkupTags()** | registers additional markup tags that can be used in the CMS.
+**registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
+**registerComponents()** | registers any [front-end components](components#component-registration) used by this plugin.
 **registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
 **registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.
 **registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
@@ -159,20 +158,6 @@ A plugin can depend upon other plugins by defining a `$require` property in the 
 Dependency definitions will affect how the plugin operates and [how the update process applies updates](../database/structure#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
-
-<a name="component-registration" class="anchor" href="#component-registration"></a>
-## Component registration
-
-[Components](components) must be registered in the [Plugin registration file](#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
-
-    public function registerComponents()
-    {
-        return [
-            'October\Demo\Components\Todo' => 'demoTodo'
-        ];
-    }
-
-This will register the Todo component class with the default alias name **demoTodo**. More information on building components can be found at the [Building Components](components) article.
 
 <a name="extending-twig" class="anchor" href="#extending-twig"></a>
 ## Extending Twig

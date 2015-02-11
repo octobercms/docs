@@ -5,10 +5,9 @@
 - [Restricting access to features](#features)
 
 <a name="permission-registration" class="anchor" href="#permission-registration"></a>
-### Registering permissions
+## Registering permissions
 
-Plugins can register back-end user permissions by overriding the `registerPermissions()` method inside the [Plugin registration class](registration#registration-file). 
-The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Example:
+Plugins can register back-end user permissions by overriding the `registerPermissions()` method inside the [Plugin registration class](../plugin/registration#registration-file).  The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
 
     acme.blog.access_categories
 

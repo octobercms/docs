@@ -129,7 +129,7 @@ The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. 
 <a name="form-widget-registration" class="anchor" href="#form-widget-registration"></a>
 ### Form widget registration
 
-Plugins can register form widgets by overriding the `registerFormWidgets()` method inside the [Plugin registration class](registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and code in the values. Example:
+Plugins can register form widgets by overriding the `registerFormWidgets()` method inside the [Plugin registration class](../plugin/registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and code in the values. Example:
 
     public function registerFormWidgets()
     {
@@ -266,7 +266,7 @@ The properties should be defined in the `defineProperties()` method of the widge
 <a name="report-widget-registration" class="anchor" href="#report-widget-registration"></a>
 ### Report widget registration
 
-Plugins can register report widgets by overriding the `registerReportWidgets()` method inside the [Plugin registration class](registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and context in the values. Example:
+Plugins can register report widgets by overriding the `registerReportWidgets()` method inside the [Plugin registration class](../plugin/registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and context in the values. Example:
 
     public function registerReportWidgets()
     {

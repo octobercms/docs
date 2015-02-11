@@ -20,7 +20,7 @@ Components files and directories reside in the **/components** subdirectory of a
             ComponentName.php   <=== Component class file
           Plugin.php
 
-Components must be registered in the [Plugin registration file](registration#component-registration) with the `registerComponents()` method.
+Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents()` method.
 
 <a name="component-class-definition" class="anchor" href="#component-class-definition"></a>
 ## Component class definition
@@ -60,6 +60,20 @@ You would be able to access its `posts()` method through the `blogPosts` variabl
     {% for post in blogPosts.posts %}
         {{ post }}
     {% endfor %}
+
+<a name="component-registration" class="anchor" href="#component-registration"></a>
+### Component registration
+
+Components must be registered by overriding the `registerComponents()` method inside the [Plugin registration class](registration#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
+
+    public function registerComponents()
+    {
+        return [
+            'October\Demo\Components\Todo' => 'demoTodo'
+        ];
+    }
+
+This will register the Todo component class with the default alias name **demoTodo**. More information on using components can be found at the [CMS components article](../cms/components).
 
 <a name="component-properties" class="anchor" href="#component-properties"></a>
 ## Component properties
