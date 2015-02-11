@@ -1,11 +1,26 @@
 # Backend Users & Permissions
 
+- [Registering permissions](#registering permissions)
 - [Restricting access to back-end pages](#page-access)
 - [Restricting access to features](#features)
 
-Plugins can register permissions in the [registration class](../plugin/registration#navigation-permissions) inside the `registerPermissions()` method. Plugin permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Example:
+<a name="permission-registration" class="anchor" href="#permission-registration"></a>
+### Registering permissions
+
+Plugins can register back-end user permissions by overriding the `registerPermissions()` method inside the [Plugin registration class](registration#registration-file). 
+The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Example:
 
     acme.blog.access_categories
+
+The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the user access to [pages](#page-access) or [features](#features).
+
+    public function registerPermissions()
+    {
+        return [
+            'acme.blog.access_posts'       => ['label' => 'Manage the blog posts'],
+            'acme.blog.access_categories'  => ['label' => 'Manage the blog categories']
+        ];
+    }
 
 <a name="page-access" class="anchor" href="#page-access"></a>
 ## Restricting access to back-end pages

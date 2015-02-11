@@ -6,7 +6,7 @@
 - [Dependency definitions](#dependency-definitions)
 - [Component registration](#component-registration)
 - [Extending Twig](#extending-twig)
-- [Navigation and permissions](#navigation-permissions)
+- [Navigation menus](#navigation-menus)
 - [Mail templates](#mail-templates)
 - [Scheduled tasks](#scheduled-tasks)
 - [Migrations and version history](#migrations-version-history)
@@ -95,8 +95,8 @@ Method  | Description
 **boot()** | boot method, called right before the request route.
 **registerComponents()** | registers any front-end components used by this plugin.
 **registerMarkupTags()** | registers additional markup tags that can be used in the CMS.
-**registerNavigation()** | registers back-end navigation items for this plugin.
-**registerPermissions()** | registers any back-end permissions used by this plugin.
+**registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
+**registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.
 **registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) used by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
@@ -204,10 +204,10 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
         return strtoupper($text);
     }
 
-<a name="navigation-permissions" class="anchor" href="#navigation-permissions"></a>
-## Navigation and permissions
+<a name="navigation-menus" class="anchor" href="#navigation-menus"></a>
+## Navigation menus
 
-Plugins can extend the back-end navigation menus and permissions by overriding methods of the [Plugin registration class](#registration-file). This section shows you how to add menu items and permissions to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
+Plugins can extend the back-end navigation menus by overriding methods of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
     public function registerNavigation()
     {
@@ -238,17 +238,7 @@ Plugins can extend the back-end navigation menus and permissions by overriding m
         ];
     }
 
-When you register the back-end navigation you can use localization strings for the `label` values. The localization is described in the [plugin localization](localization) article.
-
-The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the [user access](../backend/users) to pages or features.
-
-    public function registerPermissions()
-    {
-        return [
-            'acme.blog.access_posts'       => ['label' => 'Manage the blog posts'],
-            'acme.blog.access_categories'  => ['label' => 'Manage the blog categories']
-        ];
-    }
+When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users).
 
 <a name="mail-templates" class="anchor" href="#mail-templates"></a>
 ## Mail templates

@@ -96,7 +96,7 @@ Back-end partials are files with the extension **htm** that reside in the [contr
 <a name="navigation-context" class="anchor" href="#navigation-context"></a>
 ## Setting the navigation context
 
-Plugins can register the back-end navigation menus and submenus in the [plugin registration file](../plugin/registration#navigation-permissions). The navigation context determines what back-end menu and submenu are active for the current back-end page. You can set the navigation context with the `BackendMenu` class:
+Plugins can register the back-end navigation menus and submenus in the [plugin registration file](../plugin/registration#navigation-menus). The navigation context determines what back-end menu and submenu are active for the current back-end page. You can set the navigation context with the `BackendMenu` class:
 
     BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
 
