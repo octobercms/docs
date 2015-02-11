@@ -126,6 +126,23 @@ The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. 
         public function render() {}
     }
 
+<a name="form-widget-registration" class="anchor" href="#form-widget-registration"></a>
+### Form widget registration
+
+Plugins can register form widgets by overriding the `registerFormWidgets()` method inside the [Plugin registration class](registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and code in the values. Example:
+
+    public function registerFormWidgets()
+    {
+        return [
+            'Backend\FormWidgets\CodeEditor' => [
+                'label' => 'Code editor',
+                'code'  => 'codeeditor'
+            ]
+        ];
+    }
+
+The **label** element defines a general name for the form field. The **code** element defines a short code that can be used when referencing the widget in the [Form field definitions](forms#field-widget), it should be a unique value to avoid conflicts with other form fields.
+
 <a name="report-widgets" class="anchor" href="#report-widgets"></a>
 ## Report Widgets
 
@@ -245,3 +262,24 @@ The properties should be defined in the `defineProperties()` method of the widge
             ]
         ];
     }
+
+<a name="report-widget-registration" class="anchor" href="#report-widget-registration"></a>
+### Report widget registration
+
+Plugins can register report widgets by overriding the `registerReportWidgets()` method inside the [Plugin registration class](registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and context in the values. Example:
+
+    public function registerReportWidgets()
+    {
+        return [
+            'RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
+                'label'   => 'Google Analytics traffic overview',
+                'context' => 'dashboard'
+            ],
+            'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources' => [
+                'label'   => 'Google Analytics traffic sources',
+                'context' => 'dashboard'
+            ]
+        ];
+    }
+
+The **label** element defines the widget name for the Add Widget popup window. The **context** element defines the context where the widget could be used. October's report widget system allows to host the report container on any page, and the container context name is unique. The widget container on the Dashboard page uses the **dashboard** context.

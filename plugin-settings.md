@@ -82,10 +82,10 @@ The settings model has the static `get()` method that lets you to load individua
 
 The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
-<a name="backend-page-registration" class="anchor" href="#backend-page-registration"></a>
-### Settings page registration
+<a name="link-registration" class="anchor" href="#link-registration"></a>
+### Settings link registration
 
-The back-end settings navigation links can be extended by overriding the `registerSettings()` method of the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+The back-end settings navigation links can be extended by overriding the `registerSettings()` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
 
     public function registerSettings()
     {
@@ -137,7 +137,7 @@ Just like [setting navigation context in the controller](../backend/controllers-
         SettingsManager::setContext('October.Backend', 'editor');
     }
 
-The first argument of the `setContext()` method is the settings item owner in the following format: **author:plugin**. The second argument is the setting name, the same as you provided in the [when registering the back-end settings page](#backend-page-registration).
+The first argument of the `setContext()` method is the settings item owner in the following format: **author:plugin**. The second argument is the setting name, the same as you provided in the [when registering the back-end settings page](#link-registration).
 
 <a name="file-configuration" class="anchor" href="#file-configuration"></a>
 ## File-based configuration
