@@ -1,7 +1,7 @@
 # Plugin Settings & Configuration
 
 - [Database settings](#database-settings)
-- [Back-end settings forms](#backend-forms)
+- [Back-end settings pages](#backend-pages)
 - [File-based configuration](#file-configuration)
 
 There are two ways to configure plugins - with the back-end settings forms and with the configuration files. The back-end settings forms provide a better user experience, but they carry more overhead for the initial development.
@@ -40,7 +40,7 @@ The `$settingsFields` property is required if are going to build a back-end sett
               fields.yaml      <=== Model form fields
             Settings.php       <=== Model script
 
-Settings models can be registered in the [Plugin registration file](http://octobercms.com/docs/plugin/registration#backend-settings) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
+Settings models [can be registered](#backend-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
 <a name="writing-settings" class="anchor" href="#writing-settings"></a>
 ### Writing to a settings model
@@ -75,6 +75,69 @@ The settings model has the static `get()` method that lets you to load individua
 
     // Get a value and return a default value if it doesn't exist
     echo Settings::get('is_activated', true);
+
+
+<a name="backend-pages" class="anchor" href="#backend-pages"></a>
+## Back-end settings pages
+
+The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
+
+<a name="backend-page-registration" class="anchor" href="#backend-page-registration"></a>
+### Settings page registration
+
+The back-end settings navigation links can be extended by overriding the `registerSettings()` method of the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+
+    public function registerSettings()
+    {
+        return [
+            'location' => [
+                'label'       => 'Locations',
+                'description' => 'Manage available user countries and states.',
+                'category'    => 'Users',
+                'icon'        => 'icon-globe',
+                'url'         => Backend::url('october/user/locations'),
+                'order'       => 500,
+                'keywords'    => 'geography place placement'
+            ]
+        ];
+    }
+
+> **Note:** Back-end settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+
+The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
+
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label'       => 'User Settings',
+                'description' => 'Manage user based settings.',
+                'category'    => 'Users',
+                'icon'        => 'icon-cog',
+                'class'       => 'October\User\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'security location'
+            ]
+        ];
+    }
+
+The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
+
+<a name="settings-page-context" class="anchor" href="#settings-page-context"></a>
+### Setting the page navigation context
+
+Just like [setting navigation context in the controller](../backend/controllers-views-ajax#navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        [...]
+
+        SettingsManager::setContext('October.Backend', 'editor');
+    }
+
+The first argument of the `setContext()` method is the settings item owner in the following format: **author:plugin**. The second argument is the setting name, the same as you provided in the [when registering the back-end settings page](#backend-page-registration).
 
 <a name="file-configuration" class="anchor" href="#file-configuration"></a>
 ## File-based configuration

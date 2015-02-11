@@ -8,7 +8,6 @@
 - [Extending Twig](#extending-twig)
 - [Widget registration](#widget-registration)
 - [Navigation and permissions](#navigation-permissions)
-- [Backend settings](#backend-settings)
 - [Mail templates](#mail-templates)
 - [Scheduled tasks](#scheduled-tasks)
 - [Migrations and version history](#migrations-version-history)
@@ -99,10 +98,11 @@ Method  | Description
 **registerMarkupTags()** | registers additional markup tags that can be used in the CMS.
 **registerNavigation()** | registers back-end navigation items for this plugin.
 **registerPermissions()** | registers any back-end permissions used by this plugin.
-**registerSettings()** | registers any back-end configuration links used by this plugin.
+**registerSettings()** | registers any back-end configuration links used by this plugin. See [Settings & Config](settings#backend-pages) for more details.
 **registerFormWidgets()** | registers any back-end widgets used by this plugin.
 **registerReportWidgets()** | registers any report widgets, including the dashboard widgets.
 **registerSchedule()** | registers scheduled commands that are executed on a regular basis.
+
 <a name="basic-plugin-information" class="anchor" href="#basic-plugin-information"></a>
 ### Basic plugin information
 
@@ -289,47 +289,6 @@ The next example shows how to register back-end permission items. Permissions ar
             'acme.blog.access_categories'  => ['label' => 'Manage the blog categories']
         ];
     }
-
-<a name="backend-settings" class="anchor" href="#backend-settings"></a>
-## Backend settings
-
-The System / Settings page contains a list of links to the configuration pages. The list of links can be extended by plugins by overriding the `registerSettings()` method of the [Plugin registration class](#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
-
-    public function registerSettings()
-    {
-        return [
-            'location' => [
-                'label'       => 'Locations',
-                'description' => 'Manage available user countries and states.',
-                'category'    => 'Users',
-                'icon'        => 'icon-globe',
-                'url'         => Backend::url('october/user/locations'),
-                'order'       => 500,
-                'keywords'    => 'geography place placement'
-            ]
-        ];
-    }
-
-> **Note:** Back-end settings pages should [set the settings context](../backend/controllers-views-ajax#settings-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
-
-The following example creates a link to a settings model. Settings models is a part of the settings API which is described in the [Settings & Config](settings) article.
-
-    public function registerSettings()
-    {
-        return [
-            'settings' => [
-                'label'       => 'User Settings',
-                'description' => 'Manage user based settings.',
-                'category'    => 'Users',
-                'icon'        => 'icon-cog',
-                'class'       => 'October\User\Models\Settings',
-                'order'       => 500,
-                'keywords'    => 'security location'
-            ]
-        ];
-    }
-
-The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 
 <a name="mail-templates" class="anchor" href="#mail-templates"></a>
 ## Mail templates

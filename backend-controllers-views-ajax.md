@@ -5,7 +5,6 @@
 - [Passing data to views](#passing-data-to-views)
 - [Partials](#partials)
 - [Setting the navigation context](#navigation-context)
-- [Setting the settings context](#settings-context)
 - [AJAX](#ajax)
 
 October back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors. 
@@ -117,22 +116,6 @@ The first parameter specifies the author and plugin names. The second parameter 
 You can set the title of the back-end page with the `$pageTitle` property of the controller class (note that the form and list behaviors can do it for you):
 
     $this->pageTitle = 'Blog categories';
-
-<a name="settings-context" class="anchor" href="#settings-context"></a>
-## Setting the settings context
-
-Back-end settings pages should set the settings context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
-
-    public function __construct()
-    {
-        parent::__construct();
-        
-        ...
-
-        SettingsManager::setContext('October.Backend', 'editor');
-    }
-
-The first argument of the `setContext()` method is the settings item owner in the following format: **author:plugin**. The second argument is the setting name, the same as you provided in the [back-end settings registration code](../plugin/registration#backend-settings).
 
 <a name="ajax" class="anchor" href="#ajax"></a>
 ## Back-end AJAX framework
