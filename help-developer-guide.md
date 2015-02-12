@@ -215,6 +215,14 @@ Boolean column names should be prefixed with `is_`
 
 This is because the model attributes can conflict, for example, `public $visible;` in the Model class conflicts with a database column with the same name. Some column names are exceptions, for example `notify_user`.
 
+If your plugin extends tables belonging to other plugins, the added column names should be prefixed with the author and plugin name:
+
+    acme_blog_category_id
+
+The author and plugin name acronym is acceptable too:
+
+    ab_category_id
+
 <a name="model-naming" class="anchor" href="#model-naming"></a>
 ### Model naming
 
