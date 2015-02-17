@@ -1,6 +1,6 @@
 # Backend Users & Permissions
 
-- [Registering permissions](#registering permissions)
+- [Registering permissions](#permission-registration)
 - [Restricting access to back-end pages](#page-access)
 - [Restricting access to features](#features)
 

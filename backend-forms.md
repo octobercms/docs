@@ -5,6 +5,7 @@
 - [Available field types](#field-types)
 - [Form widgets](#form-widgets)
 - [Form views](#form-views)
+- [Applying conditions to fields](#field-conditions)
 - [Extending form behavior](#extend-form-behavior)
 
 **Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages Create, Update and Preview. The preview page is a read-only version of the update page. When you use the form behavior you don't need to define the `create()`, `update()` and `preview()` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
@@ -167,7 +168,7 @@ For each field you can specify these options (where applicable):
 Option  | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
-**type** | defines how this field should be rendered (see [Fields types](#field-types) below). Default: text.
+**type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
 **span** | aligns the form field to one side. Options: auto, left, right, full. Default: auto.
 **size** | specifies a field size for fields that use it (for example the text area). Options: tiny, small, large, huge, giant.
 **placeholder** | if the field supports a placeholder value.
@@ -180,7 +181,8 @@ Option  | Description
 **hidden** | hides the field from the view. Options: true, false.
 **stretch** | specifies if this field stretch to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
-**depends** | an array of other field names this field depends on, when the other fields are modified, this field will update.
+**dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
+**trigger** | specify conditions for this field using the [trigger interface](#field-trigger-api).
 **required** | places a red asterisk next to the field label to indicate it is required.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
@@ -568,14 +570,80 @@ The **preview.htm** view represents the Preview page that allows users to previe
         <?= $this->formRenderPreview() ?>
     </div>
 
+<a name="field-conditions" class="anchor" href="#field-conditions"></a>
+## Applying conditions to fields
+
+Sometimes you may want a field only to appear under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are two ways you can do this, either by using the trigger API or field dependencies. These two options are described in more detail below.
+
+<a name="field-trigger-api" class="anchor" href="#field-trigger-api"></a>
+### Trigger API
+
+The trigger API is defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is an sample definition:
+
+    is_delayed:
+        label: Send later
+        comment: Place a tick in this box if you want to send this message at a later time.
+        type: checkbox
+
+    send_at:
+        label: Send date
+        type: datepicker
+        cssClass: field-indent
+        trigger:
+            action: show
+            field: is_delayed
+            condition: checked
+
+In the above example the `send_at` form field will only be shown if the `is_delayed` field is checked. In other words, the field will show (action) if the other form input (field) is checked (condition). The `trigger` definition specifies these options:
+
+Option  | Description
+------------- | -------------
+**action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
+**field** | defines the other field name that will trigger the action.
+**condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, value[somevalue].
+
+<a name="field-dependencies" class="anchor" href="#field-dependencies"></a>
+### Field dependencies
+
+Form fields can depend on others when defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution. When the defined other fields change, the defining field will update using the AJAX framework. Here is a sample definition:
+
+        country:
+            label: Country
+            type: dropdown
+
+        state:
+            label: State
+            type: dropdown
+            dependsOn: country
+
+In the above example the `state` form field will refresh when the `country` field has a changed value. When this occurs, the current form data will be filled in the model so the dropdown options can use it.
+
+    public function getCountryOptions()
+    {
+        return ['au' => 'Australia', 'ca' => 'Canada'];
+    }
+
+    public function getStateOptions()
+    {
+        if ($this->country == 'au') {
+            return ['act' => 'Capital Territory', 'qld' => 'Queensland', ...];
+        }
+        elseif ($this->country == 'ca') {
+            return ['bc' => 'British Columbia', 'on' => 'Ontario', ...];
+        }
+    }
+
+This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields()` method inside the model, described in the [Filtering form fields](#filter-form-fields) section.
+
 <a name="extend-form-behavior" class="anchor" href="#extend-form-behavior"></a>
 ## Extending form behavior
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
 
 - [Overriding controller action](#overriding-action)
-- [Extending form fields](#extend-form-fields)
 - [Extending form model query](#extend-model-query)
+- [Extending form fields](#extend-form-fields)
+- [Filtering form fields](#filter-form-fields)
 
 <a name="overriding-action" class="anchor" href="#overriding-action"></a>
 ### Overriding controller action
@@ -590,6 +658,16 @@ You can use your own logic for the `create()`, `update()` or `preview()` action 
 
         // Call the FormController behavior update() method
         return $this->asExtension('FormController')->update($recordId, $context);
+    }
+
+<a name="extend-model-query" class="anchor" href="#extend-model-query"></a>
+### Extending model query
+
+The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
+
+    public function formExtendQuery($query)
+    {
+        $query->withTrashed();
     }
 
 <a name="extend-form-fields" class="anchor" href="#extend-form-fields"></a>
@@ -642,12 +720,25 @@ Method  | Description
 
 Each method takes an array of fields similar to the [form field configuration](#form-fields).
 
-<a name="extend-model-query" class="anchor" href="#extend-model-query"></a>
-### Extending model query
+<a name="filter-form-fields" class="anchor" href="#filter-form-fields"></a>
+### Filtering form fields
 
-The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
+You can filter the form field definitions by overriding the `filterFields()` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes a single argument **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields).
 
-    public function formExtendQuery($query)
+    public function filterFields($fields)
     {
-        $query->withTrashed();
+        if ($this->source_type == 'http') {
+            $fields->source_url->hidden = false;
+            $fields->git_branch->hidden = true;
+        }
+        elseif ($this->source_type == 'git') {
+            $fields->source_url->hidden = false;
+            $fields->git_branch->hidden = false;
+        }
+        else {
+            $fields->source_url->hidden = true;
+            $fields->git_branch->hidden = true;
+        }
     }
+
+The above example will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies).
