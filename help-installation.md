@@ -69,13 +69,12 @@ There are small changes required to configure your site in Nginx.
 
 `nano /etc/nginx/sites-available/default`
 
-Use the following code in **server** section.
+Use the following code in **server** section. If you have installed October into a subdirectory, replace `/` with the directory October was installed under:
 
-    if (!-e $request_filename)
-    {
-        rewrite ^/(.*)$ /index.php?/$1 break;
-        break;
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
     }
+    
     rewrite themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
     rewrite uploads/protected/.* /index.php break;
     rewrite app/.* /index.php break;
