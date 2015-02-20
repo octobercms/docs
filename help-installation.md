@@ -2,11 +2,9 @@
 
 - [Minimum System Requirements](#system-requirements)
 - [Wizard installation](#wizard-installation)
-- [Apache configuration](#apache-configuration)
-- [Nginx configuration](#nginx-configuration)
-- [Lighttpd configuration](#lighttd-configuration)
-- [Setting up the crontab](#crontab-setup)
 - [Command-line installation](#command-line-installation)
+- [Webserver configuration](#webserver-configuration)
+- [Post-install configuration](#post-install-config)
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
@@ -14,12 +12,14 @@ Before you proceed, you should check that your server meets the minimum system r
 <a name="system-requirements" class="anchor" href="#system-requirements"></a>
 ## Minimum System Requirements
 
-October CMS has a few system requirements:
+October CMS has some server requirements for web hosting:
 
-1. PHP 5.4 or higher
+1. PHP version 5.4 or higher
 1. PDO PHP Extension
 1. cURL PHP Extension
+1. OpenSSL PHP Extension
 1. MCrypt PHP Extension
+1. Mbstring PHP Library
 1. ZipArchive PHP Library
 1. GD PHP Library
 
@@ -38,12 +38,31 @@ The wizard installation is a recommended way to install October. It is simpler t
 1. Navigate to the install.php script in your web browser.
 1. Follow the installation instructions.
 
+![image](https://github.com/octobercms/docs/blob/master/images/wizard-installer.png?raw=true)
+
+<a name="troubleshoot-installation" class="anchor" href="#troubleshoot-installation"></a>
 ### Troubleshooting installation
 
 1. **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 
+> **Note:** A detailed installation log can be found in the `install_files/install.log` file.
+
+<a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
+## Command-line installation
+
+If you feel more comfortable with a command-line and want to use composer, there is a CLI install process on the [Console interface page](console#console-install).
+
+<a name="webserver-configuration" class="anchor" href="#webserver-configuration"></a>
+## Web server configuration
+
+October has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
+
+- [Apache configuration](#apache-configuration)
+- [Nginx configuration](#nginx-configuration)
+- [Lighttpd configuration](#lighttd-configuration)
+
 <a name="apache-configuration" class="anchor" href="#apache-configuration"></a>
-## Apache configuration
+### Apache configuration
 
 If your webserver is running Apache there are some extra system requirements:
 
@@ -63,7 +82,7 @@ If you have installed to a subdirectory, you should add the name of the subdirec
     RewriteBase /mysubdirectory/
 
 <a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
-## Nginx configuration
+### Nginx configuration
 
 There are small changes required to configure your site in Nginx.
 
@@ -74,13 +93,19 @@ Use the following code in **server** section. If you have installed October into
     location / {
         try_files $uri $uri/ /index.php$is_args$args;
     }
-    
-    rewrite themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
-    rewrite uploads/protected/.* /index.php break;
-    rewrite app/.* /index.php break;
+
+    rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
+    rewrite ^uploads/protected/.* /index.php break;
+    rewrite ^bootstrap/.* /index.php break;
+    rewrite ^config/.* /index.php break;
+    rewrite ^vendor/.* /index.php break;
+    rewrite ^storage/cms/.* /index.php break;
+    rewrite ^storage/logs/.* /index.php break;
+    rewrite ^storage/temp/.* /index.php break;
+    rewrite ^storage/framework/.* /index.php break;
 
 <a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
-## Lighttpd configuration
+### Lighttpd configuration
 
 If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS.
 
@@ -102,16 +127,35 @@ Paste the following code in the editor and change the **host address** and  **se
         )
     }
 
-<a name="crontab-setup" class="anchor" href="#crontab-setup"></a>
-## Setting up the crontab
+<a name="post-install-config" class="anchor" href="#post-install-config"></a>
+## Post-install configuration
 
-For automated activities, such as *queued jobs* and *scheduled tasks*, to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October:
+There are some things you may need to set up after the installation is complete.
+
+- [Delete installation files](#delete-install-files)
+- [Setting up the crontab](#crontab-setup)
+- [Setting up queue workers](#queue-setup)
+
+<a name="delete-install-files" class="anchor" href="#delete-install-files"></a>
+### Delete installation files
+
+If you have used the [Wizard installation](#wizard-installation) you should delete the installation files for security reasons. October will never delete files from your system automatically, so you should delete these files and directories manually:
+
+    install_files/      <== Installation directory
+    install.php         <== Installation script
+
+<a name="crontab-setup" class="anchor" href="#crontab-setup"></a>
+### Setting up the crontab
+
+For *scheduled tasks* to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October:
 
     * * * * * php /path/to/artisan schedule:run 1>> /dev/null 2>&1
 
 > **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 
-<a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
-## Command-line installation
+<a name="queue-setup" class="anchor" href="#queue-setup"></a>
+### Setting up queue workers
 
-If you feel more comfortable with a command-line, there is a CLI install process on the [Console interface page](console#console-install).
+You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
+
+If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work` to process the first available job in the queue.

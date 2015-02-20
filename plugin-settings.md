@@ -11,7 +11,7 @@ There are two ways to configure plugins - with the back-end settings forms and w
 
 You can create models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the back-end settings form. You don't need to create a database table and a controller for creating the back-end settings forms based on the settings model.
 
-The settings model classes should extend the Model class and implement the `System.Behaviors.SettingsModel` behavior. The settings models, like any other models, should be defined in the **models** subdirectory of the plugin directory. The model from the next example should be defined in the `plugins/acme/demo/models/Settings.php` script. 
+The settings model classes should extend the Model class and implement the `System.Behaviors.SettingsModel` behavior. The settings models, like any other models, should be defined in the **models** subdirectory of the plugin directory. The model from the next example should be defined in the `plugins/acme/demo/models/Settings.php` script.
 
     <?php namespace Acme\Demo\Models;
 
@@ -152,7 +152,7 @@ Plugins can have a configuration file `config.php` in the `config` subdirectory 
     );
 
 
-Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default=null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist. Example:
+Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist. Example:
 
     use Config;
 
@@ -160,7 +160,7 @@ Use the `Config` class for accessing the configuration values defined in the con
 
     $maxItems = Config::get('acme.demo::maxItems', 50);
 
-A plugin configuration can be overridden by creating the configuration file `/app/config/author/plugin/config.php`, for example `/app/config/acme/todo/config.php`. Inside the overridden configuration file you can return only values you want to override:
+A plugin configuration can be overridden by creating the configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`. Inside the overridden configuration file you can return only values you want to override:
 
     <?php
 

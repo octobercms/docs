@@ -94,7 +94,7 @@ Theme assets usually reside in the **assets** subdirectory of a theme directory.
 
     <link href="{{ ['assets/css/styles1.css', 'assets/css/styles2.css']|theme }}" rel="stylesheet">
 
-You can enable the assets minification with the `enableAssetMinify` parameter in the `app/config/cms.php` script. By default the minification is disabled.
+You can enable the assets minification with the `enableAssetMinify` parameter in the `config/cms.php` script. By default the minification is disabled.
 
 <a name="combiner-aliases" class="anchor" href="#combiner-aliases"></a>
 ### Combiner aliases

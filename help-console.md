@@ -20,19 +20,19 @@ Download the application source code by using the `create-project` in your termi
 
     composer create-project october/october october dev-master
 
-Open the file **app/config/app.php** and set the following array values:
+Open the file **config/app.php** and set the following array values:
 
     'url' => 'http://yourwebsite.com', // Your website address
 
     'key' => 'UNIQUE_ENCRYPTION_KEY',  // Pick a unique encryption key
 
-Open the file **app/config/cms.php** and set the following array values:
+Open the file **config/cms.php** and set the following array values:
 
     'activeTheme' => 'demo',           // Enter the active theme to use
 
     'backendUri' => '/backend',        // Optional, customize your backend URL
 
-Open the file **app/config/database.php** and set the database configuration values.
+Open the file **config/database.php** and set the database configuration values.
 
 Next, run the CLI update process, this will build the database tables:
 
