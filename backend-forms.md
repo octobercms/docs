@@ -201,6 +201,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Checkbox](#field-checkbox)
 - [Checkbox List](#field-checkboxlist)
 - [Switch](#field-switch)
+- [Section](#field-section)
 - [Partial](#field-partial)
 - [Hint](#field-hint)
 - [Widget](#field-widget)
@@ -352,6 +353,16 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         label: Display content
         type: switch
         comment: Flick this switch to display content
+
+<a name="field-section" class="anchor" href="#field-section"></a>
+### Section
+
+`section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
+
+    user_details_section:
+        label: User details
+        type: section
+        comment: This section contains details about the user.
 
 <a name="field-partial" class="anchor" href="#field-partial"></a>
 ### Partial
