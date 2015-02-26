@@ -734,9 +734,9 @@ Each method takes an array of fields similar to the [form field configuration](#
 <a name="filter-form-fields" class="anchor" href="#filter-form-fields"></a>
 ### Filtering form fields
 
-You can filter the form field definitions by overriding the `filterFields()` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes a single argument **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields).
+You can filter the form field definitions by overriding the `filterFields()` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
 
-    public function filterFields($fields)
+    public function filterFields($fields, $context = null)
     {
         if ($this->source_type == 'http') {
             $fields->source_url->hidden = false;
