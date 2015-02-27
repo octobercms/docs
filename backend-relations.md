@@ -53,18 +53,14 @@ The following options are then used for each relationship name definition:
 Option  | Description
 ------------- | -------------
 **label** | a label for the relation, in the singular tense, required.
-**emptyMessage** | a message to display when the relationship is empty, optional.
-**readOnly** | disables the ability to add, update, delete or create relations. default: false
-
-The configuration options listed below are optional.
-
-Option  | Description
-------------- | -------------
 **list** | a reference to list column definition file, see [backend list columns](lists#list-columns).
 **form** | a reference to form field definition file, see [backend form fields](forms#form-fields).
 **pivot** | a reference to form field definition file, used for relations with pivot table data.
 **view** | configuration specific to the view container, see below.
 **manage** | configuration specific to the management popup, see below.
+**emptyMessage** | a message to display when the relationship is empty, optional.
+**readOnly** | disables the ability to add, update, delete or create relations. default: false
+**deferredBinding** | [defers all binding actions using a session key](../database/model#deferred-binding) when it is available. default: false
 
 These configuration values can be specified for the **view** or **manage** options.
 
