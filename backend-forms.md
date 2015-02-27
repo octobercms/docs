@@ -481,7 +481,7 @@ Option  | Description
 <a name="widget-recordfinder" class="anchor" href="#widget-recordfinder"></a>
 ### Record finder
 
-`recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationaships only.
+`recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.
 
     user:
         label: User
