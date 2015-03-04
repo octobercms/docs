@@ -7,9 +7,9 @@
 - [Using list filters](#list-filters)
 - [Extending list behavior](#extend-list-behavior)
 
-`List behavior` is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. 
+`List behavior` is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records.
 
-List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` field of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 
@@ -50,7 +50,7 @@ The configuration options listed below are optional.
 Option  | Description
 ------------- | -------------
 **recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
-**recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
+**recordOnClick** | custom JavaScript code to execute when clicking on a record.
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
@@ -87,8 +87,8 @@ Option  | Description
 The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
 
     <div data-control="toolbar">
-        <a 
-            href="<?= Backend::url('acme/blog/posts/create') ?>" 
+        <a
+            href="<?= Backend::url('acme/blog/posts/create') ?>"
             class="btn btn-primary oc-icon-plus">New Post</a>
     </div>
 
@@ -104,7 +104,7 @@ The **filter** option should make reference to a [filter configuration file](#li
 <a name="list-columns" class="anchor" href="#list-columns"></a>
 ## Defining list columns
 
-List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location: 
+List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
 
     plugins/
       acme/
