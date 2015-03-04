@@ -402,6 +402,7 @@ There are various form widgets included as standard, although it is common for p
 - [Date picker](#widget-datepicker)
 - [Relation](#widget-relation)
 - [Record finder](#widget-recordfinder)
+- [Repeater](#widget-repeater)
 
 <a name="widget-richeditor" class="anchor" href="#widget-richeditor"></a>
 ### Rich editor / WYSIWYG
@@ -497,6 +498,27 @@ Option  | Description
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
 **list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
+
+<a name="widget-repeater" class="anchor" href="#widget-repeater"></a>
+### Repeater
+
+`repeater` - renders a repeating set of form fields defined within.
+
+    extra_information:
+        type: repeater
+        form:
+            fields:
+                added_at:
+                    label: Date added
+                    type: datepicker
+                details:
+                    label: Details
+                    type: textarea
+
+Option  | Description
+------------- | -------------
+**form** | a reference to form field definition file, see [backend form fields](forms#form-fields). Inline fields can also be used.
+**prompt** | text to display for the create button. Default: Add new item.
 
 <a name="form-views" class="anchor" href="#form-views"></a>
 ## Form views
