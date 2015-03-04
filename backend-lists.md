@@ -43,12 +43,12 @@ Field  | Description
 **title** | a title for this list.
 **list** | a configuration array or reference to a list column definition file, see [list columns](#list-columns).
 **modelClass** | a model class name, the list data is loaded from this model.
-**filter** | optional filter configuration, see [filtering the list](#adding-filters).
 
 The configuration options listed below are optional.
 
 Option  | Description
 ------------- | -------------
+**filter** | filter configuration, see [filtering the list](#adding-filters).
 **recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
 **recordOnClick** | custom JavaScript code to execute when clicking on a record.
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization).

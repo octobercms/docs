@@ -85,7 +85,7 @@ These configuration values can be specified only for the **manage** options.
 
 Option  | Type | Description
 ------------- | ------------- | -------------
-**context** | Form | context of the form being displayed. Can be a string or create/update set. Default: relation.
+**context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update. Default: relation.
 
 
 <a name="relationship-types" class="anchor" href="#relationship-types"></a>

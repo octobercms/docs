@@ -35,7 +35,7 @@ The generic widget classes must extend the `Backend\Classes\WidgetBase` class. A
 
     class Lists extends WidgetBase
     {
-        public $defaultAlias = 'list';
+        protected $defaultAlias = 'list';
 
         public function widgetDetails()
         {
