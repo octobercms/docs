@@ -623,7 +623,7 @@ The input preset converter is defined with the `preset` [form field option](#for
             field: title
             type: url
 
-The above example will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) value has no prior value.
+The above example will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
 
 Option  | Description
 ------------- | -------------
