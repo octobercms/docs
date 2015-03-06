@@ -46,7 +46,7 @@ A loading indicator can have text by adding a `<div>` element inside.
 
 A loading indicator can have a size by adding `size-X` to the container. These sizes are available: **size-small**.
 
-<div class="ui-example ui-example-dark">
+<div class="ui-example">
     <div class="loading-indicator-container">
         <div class="loading-indicator size-small">
             <span></span>
@@ -66,7 +66,7 @@ A loading indicator can have a size by adding `size-X` to the container. These s
 
 A loading indicator can be aligned to the center by adding `indicator-center` to the container and/or indicator.
 
-<div class="ui-example ui-example-dark">
+<div class="ui-example">
     <div class="loading-indicator-container">
         <div class="loading-indicator indicator-center">
             <span></span>

@@ -183,6 +183,7 @@ Option  | Description
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using the [trigger interface](#field-trigger-api).
+**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#field-input-preset).
 **required** | places a red asterisk next to the field label to indicate it is required.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
@@ -606,7 +607,28 @@ The **preview.htm** view represents the Preview page that allows users to previe
 <a name="field-conditions" class="anchor" href="#field-conditions"></a>
 ## Applying conditions to fields
 
-Sometimes you may want a field only to appear under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are two ways you can do this, either by using the trigger API or field dependencies. These two options are described in more detail below.
+Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are a few ways you can do this, either by using the trigger API or field dependencies. The input preset converter is primarily used to converting field values. These options are described in more detail below.
+
+<a name="field-input-preset" class="anchor" href="#field-input-preset"></a>
+### Input preset converter
+
+The input preset converter is defined with the `preset` [form field option](#form-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element. Here is a sample definition:
+
+    title:
+        label: Title
+
+    url:
+        label: URL
+        preset:
+            field: title
+            type: url
+
+The above example will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) value has no prior value.
+
+Option  | Description
+------------- | -------------
+**field** | defines the other field name to source the value from.
+**type** | specifies the conversion type. Supported values are: url, file, slug, camel.
 
 <a name="field-trigger-api" class="anchor" href="#field-trigger-api"></a>
 ### Trigger API
