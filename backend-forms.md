@@ -630,6 +630,8 @@ Option  | Description
 **field** | defines the other field name to source the value from.
 **type** | specifies the conversion type. Supported values are: url, file, slug, camel.
 
+The `preset` value can also be a string that refers to the **field** only, the `type` option will then default to **slug**.
+
 <a name="field-trigger-api" class="anchor" href="#field-trigger-api"></a>
 ### Trigger API
 
