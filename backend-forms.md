@@ -629,6 +629,7 @@ Option  | Description
 ------------- | -------------
 **field** | defines the other field name to source the value from.
 **type** | specifies the conversion type. Supported values are: url, file, slug, camel.
+**prefixInput** | optional, prefixes the converted value with the value found in the supplied input element using a CSS selector.
 
 The `preset` value can also be a string that refers to the **field** only, the `type` option will then default to **slug**.
 
