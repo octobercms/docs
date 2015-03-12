@@ -16,30 +16,23 @@ October includes several CLI commands and utilities that allow to install Octobe
 
 The command-line interface (CLI) method of installation requires [Composer](http://getcomposer.org/) to manage its dependencies.
 
-Download the application source code by using the `create-project` in your terminal. This will install to a directory named **/october**:
+Download the application source code by using `create-project` in your terminal. This will install to a directory called **/myoctober**:
 
-    composer create-project october/october october dev-master
+    composer create-project october/october myoctober dev-master
 
-Open the file **config/app.php** and set the following array values:
+Once this task has finished, open the file **config/database.php** and set your database connection:
 
-    'url' => 'http://yourwebsite.com', // Your website address
+    'default' => 'mysql', // Default database connection
 
-    'key' => 'UNIQUE_ENCRYPTION_KEY',  // Pick a unique encryption key
+Configure the `connections` section below it with the database credentials.
 
-Open the file **config/cms.php** and set the following array values:
-
-    'activeTheme' => 'demo',           // Enter the active theme to use
-
-    'backendUri' => '/backend',        // Optional, customize your backend URL
-
-Open the file **config/database.php** and set the database configuration values.
-
-Next, run the CLI update process, this will build the database tables:
+Next, run the CLI migration process, this will build the database tables:
 
     php artisan october:up
 
-You can sign in to the back-end area using the default username **admin** and password **admin**.
+You can sign in to the back-end area via `/backend` and using the default username **admin** and password **admin**.
 
+You also may wish to inspect **config/app.php** and **config/cms.php** to change any optional configuration.
 
 <a name="console-updating" class="anchor" href="#console-updating"></a>
 ## Console updating
