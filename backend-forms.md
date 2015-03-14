@@ -160,6 +160,17 @@ Fields can be placed in three areas, the **outside area**, **primary tabs** or *
         fields:
             [...]
 
+<a name="form-tab-options" class="anchor" href="#form-tab-options"></a>
+### Tab options
+
+For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
+
+Option  | Description
+------------- | -------------
+**stretch** | specifies if this tab stretches to fit the parent height.
+**defaultTab** | the default tab to assign fields to. Default: Misc.
+**cssClass** | assigns a CSS class to the tab container.
+
 <a name="form-field-options" class="anchor" href="#form-field-options"></a>
 ### Field options
 
@@ -179,7 +190,7 @@ Option  | Description
 **cssClass** | assigns a CSS class to the field container.
 **disabled** | grays out the field if set to true. Options: true, false.
 **hidden** | hides the field from the view. Options: true, false.
-**stretch** | specifies if this field stretch to fit the parent height.
+**stretch** | specifies if this field stretches to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using the [trigger interface](#field-trigger-api).
