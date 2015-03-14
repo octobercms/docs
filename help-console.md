@@ -30,7 +30,7 @@ Next, run the CLI migration process, this will build the database tables:
 
     php artisan october:up
 
-You can sign in to the back-end area via `/backend` and using the default username **admin** and password **admin**.
+You can sign in to the back-end area via the `/backend` route and using the default username **admin** and password **admin**.
 
 You also may wish to inspect **config/app.php** and **config/cms.php** to change any optional configuration.
 
