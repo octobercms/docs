@@ -181,6 +181,7 @@ Argument  | Description
 **key** | the key column name of the defining model.
 **otherKey** | the key column name of the related model.
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
+**pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot`.
 **timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
 
 <a name="relation-hasone-hasmany" class="anchor" href="#relation-hasone-hasmany"></a>

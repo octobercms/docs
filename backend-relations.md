@@ -43,9 +43,11 @@ An *Invoice* model with a relationship called `items` should define the first le
 
     items:
         label: Invoice Line Item
-        list: ~/plugins/acme/pay/models/invoiceitem/columns.yaml
-        form: ~/plugins/acme/pay/models/invoiceitem/fields.yaml
+        view:
+            list: $/acme/pay/models/invoiceitem/columns.yaml
+            toolbarButtons: create|delete
         manage:
+            form: $/acme/pay/models/invoiceitem/fields.yaml
             recordsPerPage: 10
 
 The following options are then used for each relationship name definition:
@@ -53,11 +55,9 @@ The following options are then used for each relationship name definition:
 Option  | Description
 ------------- | -------------
 **label** | a label for the relation, in the singular tense, required.
-**list** | a reference to list column definition file, see [backend list columns](lists#list-columns).
-**form** | a reference to form field definition file, see [backend form fields](forms#form-fields).
-**pivot** | a reference to form field definition file, used for relations with pivot table data.
 **view** | configuration specific to the view container, see below.
 **manage** | configuration specific to the management popup, see below.
+**pivot** | a reference to form field definition file, used for [relations with pivot table data](#belongs-to-many-pivot).
 **emptyMessage** | a message to display when the relationship is empty, optional.
 **readOnly** | disables the ability to add, update, delete or create relations. default: false
 **deferredBinding** | [defers all binding actions using a session key](../database/model#deferred-binding) when it is available. default: false
@@ -66,6 +66,8 @@ These configuration values can be specified for the **view** or **manage** optio
 
 Option  | Type | Description
 ------------- | ------------- | -------------
+**form** | Form | a reference to form field definition file, see [backend form fields](forms#form-fields).
+**list** | List | a reference to list column definition file, see [backend list columns](lists#list-columns).
 **showSearch** | List | display an input for searching the records. Default: false
 **showSorting** | List | displays the sorting link on each column. Default: true
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
@@ -102,12 +104,12 @@ How the relation manager is displayed depends on the relationship definition in 
 <a name="has-many" class="anchor" href="#has-many"></a>
 ### Has many
 
-1. Related records are displayed as a **list**.
-1. Clicking a record will display an update **form**.
-1. Clicking toolbar Add button will display a selection **list**.
-1. Clicking toolbar Create button will display a create **form**.
-1. Clicking toolbar Delete button will destroy the record(s).
-1. Clicking toolbar Remove button will orphan the relationship.
+1. Related records are displayed as a list (**view.list**).
+1. Clicking a record will display an update form (**manage.form**).
+1. Clicking *Add* will display a selection list (**manage.list**).
+1. Clicking *Create* will display a create form (**manage.form**).
+1. Clicking *Delete* will destroy the record(s).
+1. Clicking *Remove* will orphan the relationship.
 
 For example, if a *Blog Post* has many *Comments*, the target model is set as the blog post and a list of comments is displayed, using columns from the **list** definition. Clicking on a comment opens a popup form with the fields defined in **form** to update the comment. Comments can be created in the same way. Below is an example of the relation behavior configuration file:
 
@@ -117,19 +119,21 @@ For example, if a *Blog Post* has many *Comments*, the target model is set as th
 
     comments:
         label: Comment
-        list: ~/plugins/acme/blog/models/comment/columns.yaml
-        form: ~/plugins/acme/blog/models/comment/fields.yaml
+        manage:
+            form: $/acme/blog/models/comment/fields.yaml
+            list: $/acme/blog/models/comment/columns.yaml
         view:
+            list: $/acme/blog/models/comment/columns.yaml
             toolbarButtons: create|delete
 
 <a name="belongs-to-many" class="anchor" href="#belongs-to-many"></a>
 ### Belongs to many
 
-1. Related records are displayed as a **list**.
-1. Clicking toolbar Add button will display a selection **list**.
-1. Clicking toolbar Create button will display a create **form**.
-1. Clicking toolbar Delete button will destroy the pivot table record(s).
-1. Clicking toolbar Remove button will orphan the relationship.
+1. Related records are displayed as a list (**view.list**).
+1. Clicking *Add* will display a selection list (**manage.list**).
+1. Clicking *Create* will display a create form (**manage.form**).
+1. Clicking *Delete* will destroy the pivot table record(s).
+1. Clicking *Remove* will orphan the relationship.
 
 For example, if a *User* belongs to many *Roles*, the target model is set as the user and a list of roles is displayed, using columns from the **list** definition. Existing roles can be added and removed from the user. Below is an example of the relation behavior configuration file:
 
@@ -139,18 +143,20 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
 
     roles:
         label: Role
-        list: ~/plugins/acme/user/models/role/columns.yaml
-        form: ~/plugins/acme/user/models/role/fields.yaml
         view:
+            list: $/acme/user/models/role/columns.yaml
             toolbarButtons: add|remove
+        manage:
+            list: $/acme/user/models/role/columns.yaml
+            form: $/acme/user/models/role/fields.yaml
 
 <a name="belongs-to-many-pivot" class="anchor" href="#belongs-to-many-pivot"></a>
 ### Belongs to many (with Pivot Data)
 
-1. Related records are displayed as a **list**.
-1. Clicking a record will display a **pivot** data update form.
-1. Clicking toolbar Add button will display a selection **list**, then a **pivot** data entry form.
-1. Clicking toolbar Delete button will destroy the pivot table record(s).
+1. Related records are displayed as a list (**view.list**).
+1. Clicking a record will display an update form (**pivot.form**).
+1. Clicking *Add* will display a selection list (**manage.list**), then a data entry form (**pivot.form**).
+1. Clicking *Remove* will destroy the pivot table record(s).
 
 Continuing the example in *Belongs To Many* relations, if a role also carried an expiry date, clicking on a role will open a popup form with the fields defined in **pivot** to update the expiry date. Below is an example of the relation behavior configuration file:
 
@@ -160,22 +166,48 @@ Continuing the example in *Belongs To Many* relations, if a role also carried an
 
     roles:
         label: Role
-        list: ~/plugins/acme/user/models/role/columns.yaml
+        view:
+            list: $/acme/user/models/role/columns.yaml
+        manage:
+            list: $/acme/user/models/role/columns.yaml
         pivot:
-            fields:
-                expiry_date:
-                    label: Expires
-                    type: datepicker
+            form: $/acme/user/models/role/fields.yaml
+
+Pivot data is available when defining form fields and list columns via the `pivot` relation, see the example below:
+
+    # ===================================
+    #  Relation Behavior Config
+    # ===================================
+
+    teams:
+        label: Team
+        view:
+            list:
+                columns:
+                    name:
+                        label: Name
+                    pivot[team_color]:
+                        label: Team color
+        manage:
+            list:
+                columns:
+                    name:
+                        label: Name
+        pivot:
+            form:
+                fields:
+                    pivot[team_color]:
+                        label: Team color
 
 <a name="belongs-to" class="anchor" href="#belongs-to"></a>
 ### Belongs to
 
-1. Related record is displayed as a **form** preview.
-1. Clicking toolbar Create button will display a create **form**.
-1. Clicking toolbar Update button will display an update **form**.
-1. Clicking toolbar Link to button will display a selection **list**.
-1. Clicking toolbar Unlink button will orphan the relationship.
-1. Clicking toolbar Delete button will destroy the record.
+1. Related record is displayed as a preview form (**view.form**).
+1. Clicking *Create* will display a create form (**manage.form**).
+1. Clicking *Update* will display an update form (**manage.form**).
+1. Clicking *Link* will display a selection list (**manage.list**).
+1. Clicking *Unlink* will orphan the relationship.
+1. Clicking *Delete* will destroy the record.
 
 For example, if a *Phone* belongs to a *Person* the relation manager will display a form with the fields defined in **form**. Clicking the Link button will display a list of People to associate with the Phone. Clicking the Unlink button will dissociate the Phone with the Person.
 
@@ -185,20 +217,22 @@ For example, if a *Phone* belongs to a *Person* the relation manager will displa
 
     person:
         label: Person
-        list: ~/plugins/october/test/models/person/columns.yaml
-        form: ~/plugins/october/test/models/person/fields.yaml
         view:
+            form: $/acme/user/models/person/fields.yaml
             toolbarButtons: link|unlink
+        manage:
+            form: $/acme/user/models/person/fields.yaml
+            list: $/acme/user/models/person/columns.yaml
 
 <a name="has-one" class="anchor" href="#has-one"></a>
 ### Has one
 
-1. Related record is displayed as a **form** preview.
-1. Clicking toolbar Create button will display a create **form**.
-1. Clicking toolbar Update button will display an update **form**.
-1. Clicking toolbar Link to button will display a selection **list**.
-1. Clicking toolbar Unlink button will orphan the relationship.
-1. Clicking toolbar Delete button will destroy the record.
+1. Related record is displayed as a preview form (**view.form**).
+1. Clicking *Create* will display a create form (**manage.form**).
+1. Clicking *Update* will display an update form (**manage.form**).
+1. Clicking *Link* will display a selection list (**manage.list**).
+1. Clicking *Unlink* will orphan the relationship.
+1. Clicking *Delete* will destroy the record.
 
 For example, if a *Person* has one *Phone* the relation manager will display form with the fields defined in **form** for the Phone. When clicking the Update button, a popup is displayed with the fields now editable. If the Person already has a Phone the fields are update, otherwise a new Phone is created for them.
 
@@ -208,10 +242,12 @@ For example, if a *Person* has one *Phone* the relation manager will display for
 
     phone:
         label: Phone
-        list: ~/plugins/october/test/models/phone/columns.yaml
-        form: ~/plugins/october/test/models/phone/fields.yaml
         view:
+            form: $/acme/user/models/phone/fields.yaml
             toolbarButtons: update|delete
+        manage:
+            form: $/acme/user/models/phone/fields.yaml
+            list: $/acme/user/models/phone/columns.yaml
 
 <a name="relation-display" class="anchor" href="#relation-display"></a>
 ## Displaying a relation manager
