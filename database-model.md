@@ -81,6 +81,7 @@ Argument  | Description
 **conditions** | filters the relation using a raw where query statement.
 **scope** | filters the relation using a supplied scope method.
 **push** | if set to false, this relation will not be saved via `push()`, default: true.
+**delete** | if set to true, the related model will be deleted if the relationship is destroyed, default: false.
 
 Example filter using **order** and **conditions**:
 
