@@ -78,7 +78,7 @@ This will register the Todo component class with the default alias name **demoTo
 <a name="component-properties" class="anchor" href="#component-properties"></a>
 ## Component properties
 
-When you add a component to a page or layout you can configure it using using properties. The properties are defined with the `defineProperties()` method of the component class. The next example shows how to define a component property:
+When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties()` method of the component class. The next example shows how to define a component property:
 
     public function defineProperties()
     {
