@@ -23,10 +23,6 @@ The `select()` method returns an array of records.
 
     $results = Db::select('select * from users where id = ?', [1]);
 
-You can use the `select()` method together with the `lists() method in order to flatten the result. In the next example the lists() method returns an array where the key is the **id** and value is the **name**, eg: `Array ( [1] => Name ) `.
-
-    Db::select('select * from users')->lists('name', 'id');
-
 Use the `insert()` method to insert a record to a database table:
 
     Db::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
@@ -35,7 +31,7 @@ The `update()` method allows to update a database record:
 
     Db::update('update users set votes = 100 where name = ?', ['John']);
 
-Use the `delete` method to delete database records:
+Use the `delete()` method to delete database records:
 
     Db::delete('delete from users');
 
@@ -65,3 +61,15 @@ The `delete()` method deletes a record from the database.
 
     $post = Acme\Blog\Models\Post::find(1);
     $post->delete();
+
+Use `where()` methods for applying constraints to the query.
+
+    $post = Acme\Blog\Models\Post::where('is_published', '=', 1)->get();
+
+The `all()` method returns all records from the database.
+
+    $posts = Acme\Blog\Models\Post::all();
+
+The `lists()` method will flatten the result as an array.  In the next example the lists() method returns an array where the key is the **id** and value is the **name**, eg: `Array ( [1] => Name ) `.
+
+    $posts = Acme\Blog\Models\Post::lists('name', 'id');
