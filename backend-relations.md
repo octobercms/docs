@@ -77,7 +77,7 @@ These configuration values can be specified only for the **view** options.
 
 Option  | Type | Description
 ------------- | ------------- | -------------
-**showCheckboxes** | List | displays checkboxes next to each record. Default: false.
+**showCheckboxes** | List | displays checkboxes next to each record.
 **recordUrl** | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
