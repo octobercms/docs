@@ -87,7 +87,7 @@ These configuration values can be specified only for the **manage** options.
 
 Option  | Type | Description
 ------------- | ------------- | -------------
-**context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update. Default: relation.
+**context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 
 <a name="relationship-types" class="anchor" href="#relationship-types"></a>
@@ -198,6 +198,8 @@ Pivot data is available when defining form fields and list columns via the `pivo
                 fields:
                     pivot[team_color]:
                         label: Team color
+
+> **Note:** Pivot data is not supported by [deferred bindings](../database/model#deferred-binding) at this time, so the parent model should exist.
 
 <a name="belongs-to" class="anchor" href="#belongs-to"></a>
 ### Belongs to

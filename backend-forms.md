@@ -33,7 +33,7 @@ The configuration file referred in the `$formConfig` property is defined in YAML
     # ===================================
 
     name: Blog Category
-    form: ~/plugins/acme/blog/models/post/fields.yaml
+    form: $/acme/blog/models/post/fields.yaml
     modelClass: Acme\Blog\Post
 
     create:
@@ -186,6 +186,7 @@ Option  | Description
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
 **default** | specifies the default value for the field.
+**defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
 **disabled** | grays out the field if set to true. Options: true, false.
@@ -383,7 +384,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 
     content:
         type: partial
-        path: ~/plugins/acme/blog/models/comments/_content_field.htm
+        path: $/acme/blog/models/comments/_content_field.htm
 
 <a name="field-hint" class="anchor" href="#field-hint"></a>
 ### Hint
@@ -392,7 +393,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 
     content:
         type: hint
-        path: ~/plugins/acme/blog/models/comments/_content_field.htm
+        path: $/acme/blog/models/comments/_content_field.htm
 
 <a name="field-widget" class="anchor" href="#field-widget"></a>
 ### Widget
@@ -499,7 +500,7 @@ Option  | Description
     user:
         label: User
         type: recordfinder
-        list: ~/plugins/rainlab/user/models/user/columns.yaml
+        list: $/rainlab/user/models/user/columns.yaml
         prompt: Click the %s button to find a user
         nameFrom: name
         descriptionFrom: email
