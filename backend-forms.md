@@ -385,7 +385,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         type: partial
         path: ~/plugins/acme/blog/models/comments/_content_field.htm
 
-<a name="field-partial" class="anchor" href="#field-partial"></a>
+<a name="field-hint" class="anchor" href="#field-hint"></a>
 ### Hint
 
 `hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
