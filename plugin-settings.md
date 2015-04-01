@@ -28,7 +28,7 @@ The settings model classes should extend the Model class and implement the `Syst
         public $settingsFields = 'fields.yaml';
     }
 
-The `$settingsCode` property is required for settings models. It defines the the unique settings key which is used for saving the settings to the database. 
+The `$settingsCode` property is required for settings models. It defines the unique settings key which is used for saving the settings to the database. 
 
 The `$settingsFields` property is required if are going to build a back-end settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [Backend forms](../backend/forms) article. The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
 
