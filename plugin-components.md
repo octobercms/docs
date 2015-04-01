@@ -29,7 +29,7 @@ The **component class file** defines the component functionality and [component 
 
     namespace Acme\Blog\Components;
 
-    class BlogPosts extends Cms\Classes\ComponentBase
+    class BlogPosts extends \Cms\Classes\ComponentBase
     {
         public function componentDetails()
         {
@@ -88,8 +88,8 @@ When you add a component to a page or layout you can configure it using properti
                  'description'       => 'The most amount of todo items allowed',
                  'default'           => 10,
                  'type'              => 'string',
-                 'validationPattern' => '^[a-zA-Z]*$',
-                 'validationMessage' => 'The Max Items property can contain only Latin symbols'
+                 'validationPattern' => '^[0-9]+$',
+                 'validationMessage' => 'The Max Items property can contain only numeric symbols'
             ]
         ];
     }
