@@ -6,6 +6,7 @@ These body classes are available:
 
 - **compact-container** - uses no padding on all sides.
 - **slim-container** - uses no padding left and right.
+- **breadcrumb-flush** - the page breadcrumb should sit flush to the element below.
 
 ## Form with sidebar
 
