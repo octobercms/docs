@@ -4,8 +4,9 @@
 - [Version file](#version-file)
 - [Theme preview image](#preview-image)
 - [Theme customization](#customization)
+- [Theme dependencies](#dependencies)
 
-The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the OctoberCMS Marketplace. 
+The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the OctoberCMS Marketplace.
 
 <a name="theme-information" class="anchor" href="#theme-information"></a>
 ## Theme information file
@@ -25,7 +26,8 @@ Field  | Description
 **homepage** | specifies the author website URL, required.
 **description** | the theme description, required.
 **code** | the theme code, optional. The value is used on the OctoberCMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
-**form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization).
+**form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
+**require** | an array of plugin codes, used for [theme dependencies](#dependencies), optional.
 
 Example of the theme information file:
 
@@ -84,3 +86,17 @@ The following is an example of how to define a website name configuration field 
 The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup#default-variables) called `this.theme`.
 
     <h1>Welcome to {{ this.theme.site_name }}!</h1>
+
+<a name="dependencies" class="anchor" href="#dependencies"></a>
+## Theme dependencies
+
+A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
+
+    name: "OctoberCMS Demo"
+    # [...]
+
+    require:
+        - Acme.User
+        - Acme.Blog
+
+When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
