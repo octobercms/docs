@@ -475,6 +475,8 @@ Option  | Description
 Option  | Description
 ------------- | -------------
 **mode** | the expected result, either date, datetime or time. Default: datetime.
+**minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
+**maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 
 <a name="widget-relation" class="anchor" href="#widget-relation"></a>
 ### Relation
