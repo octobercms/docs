@@ -32,7 +32,7 @@ The **lang.php** file should define and return an array of any depth, for exampl
             'name' => 'October CMS',
             'tagline' => 'Getting back to basics',
         ]
-    }
+    ];
 
 <a name="accessing-strings" class="anchor" href="#accessing-strings"></a>
 ## Accessing localization strings
@@ -60,4 +60,4 @@ The file could contain only strings you want to override, there is no need to re
         'app' => [
             'name' => 'October CMS!'
         ]
-    }
+    ];
