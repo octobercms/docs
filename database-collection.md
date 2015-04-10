@@ -44,9 +44,9 @@ The `each()` method lets you easily cycle through every object inside.
 
 The `contains()` method will return true if the collection has a model inside with the primary key value specified.
 
-if ($collection->contains(3)) {
-    // Collection has a Model with ID of 3
-}
+    if ($collection->contains(3)) {
+        // Collection has a Model with ID of 3
+    }
 
 <a name="data-feed" class="anchor" href="#data-feed"></a>
 ## Data feed (Experimental)
