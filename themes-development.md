@@ -27,7 +27,7 @@ Field  | Description
 **description** | the theme description, required.
 **code** | the theme code, optional. The value is used on the OctoberCMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
 **form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
-**require** | an array of plugin codes, used for [theme dependencies](#dependencies), optional.
+**require** | an array of plugin names used for [theme dependencies](#dependencies), optional.
 
 Example of the theme information file:
 
