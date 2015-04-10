@@ -96,7 +96,7 @@ Attribute  | Description
 **data-request-error** | specifies JavaScript code to execute if the request encounters an error. Inside the JavaScript code you can access the following variables: `$el` (the page element triggered the request), the `context` object, the `textStatus` text string, and the `jqXHR` object.
 **data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error. Inside the JavaScript code you can access the following variables: `$el` (the page element triggered the request), the `context` object, the `textStatus` text string, and the `jqXHR` object.
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show the AJAX loading indicator. The feature uses jQuery's `show()` and `hide()` functions to manage the element visibility.
-**data-track-input** | can be applied to a text or password input field that also has the `data-request` attribute. When defined, the input field automatically sends an AJAX request when a user types something in the field. The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the requests.
+**data-track-input** | can be applied to a text, number, or password input field that also has the `data-request` attribute. When defined, the input field automatically sends an AJAX request when a user types something in the field. The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the requests.
 
 When the `data-request` attribute is specified for an element, the element triggers an AJAX request when a user interacts with it. Depending on the type of element, the request is triggered on the following events:
 
@@ -104,7 +104,7 @@ Element  | Event
 ------------- | -------------
 **Forms** | when the form is submitted.
 **Links, buttons** | when the element is clicked.
-**Text and password fields** | when the text is changed and only if the `data-track-input` attribute is presented.
+**Text, number, and password fields** | when the text is changed and only if the `data-track-input` attribute is presented.
 **Dropdowns, checkboxes, radios** | when the element is selected.
 
 <a name="data-attribute-examples" class="anchor" href="#data-attribute-examples"></a>
