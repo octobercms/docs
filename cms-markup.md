@@ -15,7 +15,7 @@ Please refer to the [Twig documentation](http://twig.sensiolabs.org/doc/template
 <a name="default-variables" class="anchor" href="#default-variables"></a>
 ## Default variables
 
-The `this` variable is always presented in October Twig environment. This variable contains an object with three fields: 
+The `this` variable is always presented in October Twig environment. This variable contains an object with three fields:
 
 Variable  | Description
 ------------- | -------------
@@ -102,7 +102,7 @@ You can enable the assets minification with the `enableAssetMinify` parameter in
 The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](ajax#introduction) can be included in the combiner:
 
     <script src="{{ [
-        '@jquery'
+        '@jquery',
         '@framework',
         '@framework.extras',
         'assets/javascript/app.js']|theme }}"></script>
@@ -155,7 +155,7 @@ The `{% flash %}` tag has an optional parameter that allows to filter flash mess
 <a name="forms" class="anchor" href="#forms"></a>
 ## Forms
 
-October provides the `form_open()`, `form_ajax()` and `form_close()` functions that simplify creating the FORM tags. Using the functions is not necessary, but you may find that in many cases using the functions is simpler than listing all required attributes in the standard FORM tag. 
+October provides the `form_open()`, `form_ajax()` and `form_close()` functions that simplify creating the FORM tags. Using the functions is not necessary, but you may find that in many cases using the functions is simpler than listing all required attributes in the standard FORM tag.
 
 <a name="standard-form" class="anchor" href="#standard-form"></a>
 ### Opening the standard form
