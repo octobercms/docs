@@ -185,7 +185,7 @@ The next example shows several examples of opening a AJAX form. The first parame
 
     {{ form_ajax('onUpdate') }}
 
-    {{ form_ajax('onSave', { class => 'form-horizontal'}) }}
+    {{ form_ajax('onSave', { class: 'form-horizontal'}) }}
 
     {{ form_ajax('onDelete', { data: { id: 2 }, confirm: 'Really delete this record?' }) }}
 
