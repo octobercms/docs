@@ -28,9 +28,9 @@ Collections may also be converted to a PHP array or JSON:
 
 The `first()` method will return the first object that matches the condition.
 
-$found = $collection->first(function($model) {
-    return $model->color == 'red';
-});
+    $found = $collection->first(function($model) {
+        return $model->color == 'red';
+    });
 
 #### Iterating the collection
 
