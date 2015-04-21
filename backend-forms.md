@@ -269,7 +269,7 @@ There are various native field types that can be used for the **type** setting. 
             published: Published
             archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method takes a single parameter, the current key value, and should return an array of options in the format **key => label**. 
+The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method takes a single parameter, the current key value, and should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
@@ -409,22 +409,14 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets) article.
 
-- [Rich editor / WYSIWYG](#widget-richeditor)
 - [Code editor](#widget-codeeditor)
-- [File upload](#widget-fileupload)
+- [Color picker](#color-picker)
 - [Date picker](#widget-datepicker)
-- [Relation](#widget-relation)
+- [File upload](#widget-fileupload)
 - [Record finder](#widget-recordfinder)
+- [Relation](#widget-relation)
 - [Repeater](#widget-repeater)
-
-<a name="widget-richeditor" class="anchor" href="#widget-richeditor"></a>
-### Rich editor / WYSIWYG
-
-`richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
-
-    html_content:
-      type: richeditor
-      size: huge
+- [Rich editor / WYSIWYG](#widget-richeditor)
 
 <a name="widget-codeeditor" class="anchor" href="#widget-codeeditor"></a>
 ### Code editor
@@ -432,9 +424,9 @@ There are various form widgets included as standard, although it is common for p
 `codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
 
     css_content:
-      type: codeeditor
-      size: huge
-      language: html
+        type: codeeditor
+        size: huge
+        language: html
 
 Option  | Description
 ------------- | -------------
@@ -443,24 +435,12 @@ Option  | Description
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
 
-<a name="widget-fileupload" class="anchor" href="#widget-fileupload"></a>
-### File upload
+<a name="color-picker" class="anchor" href="#color-picker"></a>
+### Color picker
+`colorpicker` - renders controls to select a hexadecimal color value.
 
-`fileupload` - renders a file uploader for images or regular files. The field name must use an attachOne or attachMany relation.
-
-    avatar:
-      label: Avatar
-      type: fileupload
-      mode: image
-      imageHeight: 260
-      imageWidth: 260
-
-Option  | Description
-------------- | -------------
-**mode** | the expected file type, either file or image. Default: file.
-**imageWidth** | if using image type, the image will be resized to this width.
-**imageWidth** | if using image type, the image will be resized to this height.
-**fileTypes** | file extensions that are accepted by the uploader, optional. Eg: zip,txt
+    color:
+        type: colorpicker
 
 <a name="widget-datepicker" class="anchor" href="#widget-datepicker"></a>
 ### Date picker
@@ -478,21 +458,24 @@ Option  | Description
 **minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 
-<a name="widget-relation" class="anchor" href="#widget-relation"></a>
-### Relation
+<a name="widget-fileupload" class="anchor" href="#widget-fileupload"></a>
+### File upload
 
-`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list.
+`fileupload` - renders a file uploader for images or regular files. The field name must use an attachOne or attachMany relation.
 
-    categories:
-        label: Categories
-        type: relation
-        nameFrom: title
+    avatar:
+        label: Avatar
+        type: fileupload
+        mode: image
+        imageHeight: 260
+        imageWidth: 260
 
 Option  | Description
 ------------- | -------------
-**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
-**descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
-**emptyOption** | text to display when there is no available selections.
+**mode** | the expected file type, either file or image. Default: file.
+**imageWidth** | if using image type, the image will be resized to this width.
+**imageWidth** | if using image type, the image will be resized to this height.
+**fileTypes** | file extensions that are accepted by the uploader, optional. Eg: zip,txt
 
 <a name="widget-recordfinder" class="anchor" href="#widget-recordfinder"></a>
 ### Record finder
@@ -514,6 +497,22 @@ Option  | Description
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
 **list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
 
+<a name="widget-relation" class="anchor" href="#widget-relation"></a>
+### Relation
+
+`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list.
+
+    categories:
+        label: Categories
+        type: relation
+        nameFrom: title
+
+Option  | Description
+------------- | -------------
+**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
+**descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
+**emptyOption** | text to display when there is no available selections.
+
 <a name="widget-repeater" class="anchor" href="#widget-repeater"></a>
 ### Repeater
 
@@ -534,6 +533,15 @@ Option  | Description
 ------------- | -------------
 **form** | a reference to form field definition file, see [backend form fields](forms#form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
+
+<a name="widget-richeditor" class="anchor" href="#widget-richeditor"></a>
+### Rich editor / WYSIWYG
+
+`richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
+
+    html_content:
+        type: richeditor
+        size: huge
 
 <a name="form-views" class="anchor" href="#form-views"></a>
 ## Form views
@@ -594,7 +602,7 @@ The **update.htm** view represents the Update page that allows users to update o
                     class="btn btn-default">
                     Save and Close
                 </button>
-                <button 
+                <button
                     type="button"
                     class="oc-icon-trash-o btn-icon danger pull-right"
                     data-request="onDelete"
