@@ -29,7 +29,7 @@ The **lang.php** file should define and return an array of any depth, for exampl
 
     return [
         'app' => [
-            'name' => 'October CMS',
+            'name' => 'OctoberCMS',
             'tagline' => 'Getting back to basics',
         ]
     ];
@@ -58,6 +58,6 @@ The file could contain only strings you want to override, there is no need to re
 
     return [
         'app' => [
-            'name' => 'October CMS!'
+            'name' => 'OctoberCMS!'
         ]
     ];
