@@ -3,11 +3,12 @@
 - [Amazon S3](#amazon-s3)
 - [Rackspace CDN](#rackspace-cdn)
 - [Audio and video players](#audio-and-video-players)
+- [Other configuration options](#configuration-options)
 - [Troubleshooting](#troubleshooting)
 
 By default Media Manager works with the storage/app/media subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration.
 
-> You need to install [Drivers plugin](http://octobercms.com/plugin/rainlab-drivers) before you can use Amazon S3 or Rackspace CDN features.
+> You need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers) before you can use Amazon S3 or Rackspace CDN features.
 
 Please note that after you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
@@ -193,6 +194,29 @@ As the partials are written with Twig, you can automate adding alternative video
             src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}" 
             media="only screen and (max-device-width: 568px)"></source>
     </video>
+
+<a name="configuration-options" class="anchor" href="#configuration-options"></a>
+## Other configuration options
+
+There are several options that allow you to fine-tune the Media Manager. All of them could be defined in **config/cms.php** script, in the **storage/media** section, for example:
+
+    'storage' => [
+        ...
+
+        'media' => [
+            ...
+            'ignore' => ['.svn', '.git', '.DS_Store']
+        ]
+    ],
+
+
+Parameter | Value
+------------- | -------------
+**ignore** | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
+**ttl** | specifies the cache time-to-live, in minutes. The default value is 10. The cache invalidates automatically when Library items are added, updated or deleted. 
+**image_extensions** | file extensions corresponding to the Image document type. The default value is **['gif', 'png', 'jpg', 'jpeg', 'bmp']**.
+**video_extensions** | file extensions corresponding to the Video document type. The default value is **['mp4', 'avi', 'mov', 'mpg']**.
+**audio_extensions** | file extensions corresponding to the Audio document type. The default value is **['mp3', 'wav', 'wma', 'm4a']**.
 
 <a name="troubleshooting" class="anchor" href="#troubleshooting"></a>
 ## Troubleshooting 
