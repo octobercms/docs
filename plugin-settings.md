@@ -102,6 +102,22 @@ The back-end settings navigation links can be extended by overriding the `regist
         ];
     }
 
+### Predefined System Allocated Category Types
+Category  | registerSettings Category String
+------------- | -------------
+CMS | system::lang.system.categories.cms
+MISC | system::lang.system.categories.misc
+MAIL | system::lang.system.categories.mail
+LOGS | system::lang.system.categories.logs
+SHOP | system::lang.system.categories.shop
+TEAM | system::lang.system.categories.team
+USERS | system::lang.system.categories.users
+SOCIAL | system::lang.system.categories.social
+SYSTEM | system::lang.system.categories.system
+EVENTS | system::lang.system.categories.events
+CUSTOMERS | system::lang.system.categories.customers
+MY SETTINGS | system::lang.system.categories.my_settings
+
 > **Note:** Back-end settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
 
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
