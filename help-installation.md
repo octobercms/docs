@@ -96,14 +96,14 @@ Use the following code in **server** section. If you have installed October into
     }
 
     rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
-    rewrite ^uploads/protected/.* /index.php break;
     rewrite ^bootstrap/.* /index.php break;
     rewrite ^config/.* /index.php break;
     rewrite ^vendor/.* /index.php break;
     rewrite ^storage/cms/.* /index.php break;
     rewrite ^storage/logs/.* /index.php break;
-    rewrite ^storage/temp/.* /index.php break;
     rewrite ^storage/framework/.* /index.php break;
+    rewrite ^storage/temp/protected/.* /index.php break;
+    rewrite ^storage/app/uploads/protected/.* /index.php break;
 
 <a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
 ### Lighttpd configuration
@@ -122,7 +122,8 @@ Paste the following code in the editor and change the **host address** and  **se
         url.rewrite-once = (
             "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
             "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
-            "^/uploads/public/[\w-]+/.*$" => "$0",
+            "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
+            "^/storage/temp/public/[\w-]+/.*$" => "$0",
             "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
             "(.*)" => "/index.php$1"
         )
