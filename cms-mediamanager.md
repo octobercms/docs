@@ -138,7 +138,7 @@ Example configuration after update:
             'username'  => 'october.api.cdn',
             'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
             'container' => 'my-bucket',
-            'endpoint'  => https://identity.api.rackspacecloud.com/v2.0/',
+            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
             'region'    => 'ORD'
         ],
         ...

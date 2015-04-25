@@ -4,7 +4,7 @@
 - [Back-end settings pages](#backend-pages)
 - [File-based configuration](#file-configuration)
 
-There are two ways to configure plugins - with the back-end settings forms and with the configuration files. The back-end settings forms provide a better user experience, but they carry more overhead for the initial development.
+There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 
 <a name="database-settings" class="anchor" href="#database-settings"></a>
 ## Database settings
@@ -146,11 +146,10 @@ Plugins can have a configuration file `config.php` in the `config` subdirectory 
 
     <?php
 
-    return array(
+    return [
         'maxItems' => 10,
         'display' => 5
-    );
-
+    ];
 
 Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist. Example:
 
@@ -160,10 +159,10 @@ Use the `Config` class for accessing the configuration values defined in the con
 
     $maxItems = Config::get('acme.demo::maxItems', 50);
 
-A plugin configuration can be overridden by creating the configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`. Inside the overridden configuration file you can return only values you want to override:
+A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`. Inside the overridden configuration file you can return only values you want to override:
 
     <?php
 
-    return array(
+    return [
         'maxItems' => 20
-    );
+    ];
