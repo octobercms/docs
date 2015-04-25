@@ -30,7 +30,7 @@ Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pag
         {% content 'contacts.htm' %}
     </div>
 
-Content blocks can be used in combination with [layout placeholders](layouts#placeholders):
+Content blocks can also be used in combination with [layout placeholders](layouts#placeholders):
 
     {% put sidebar %}
         {% content 'sidebar-content.htm' %}
@@ -55,7 +55,7 @@ You can also pass a collection of variables as a simple array:
         {name:'Golf'}
     ] %}
 
-The collection of variables **likes** is accessed by using an opening and closing set of brackets:
+The collection of variables is accessed by using an opening and closing set of brackets:
 
     <ul>
         {likes}
