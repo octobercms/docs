@@ -70,10 +70,34 @@ October includes a number of Artisan utility commands.
 
     php artisan plugin:refresh AuthorName.PluginName
 
+`theme:use` - switch the active theme. The following example will switch to the theme in `/themes/rainlab-vanilla`
+
+    php artisan theme:use rainlab-vanilla
+
+`theme:list` - list installed themes. Use the **-m** option to include popular themes in the Marketplace.
+
+    php artisan theme:list
+
+`theme:install` - download and install a theme from the [Marketplace](https://octobercms.com/themes/). The following example will install the theme in `/themes/authorname-themename`
+
+    php artisan theme:install AuthorName.ThemeName
+
+If you wish to install the theme in a custom directory, simply provide the second argument. The following example will download `AuthorName.ThemeName` and install it in `/themes/my-theme`
+
+    php artisan theme:install AuthorName.ThemeName my-theme
+
+`theme:delete` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
+
+    php artisan theme:delete rainlab-vanilla
+
 <a name="scaffolding-commands" class="anchor" href="#scaffolding-commands"></a>
 ## Scaffolding commands
 
 Use the scaffolding commands to speed up the development process.
+
+`october:fresh` - removes the demo theme and plugin that ships with October.
+
+    php artisan october:fresh
 
 `create:plugin` - generates a plugin folder and basic files for the plugin. The parameter specifies the author and plugin name.
 
