@@ -86,9 +86,9 @@ If you wish to install the theme in a custom directory, simply provide the secon
 
     php artisan theme:install AuthorName.ThemeName my-theme
 
-`theme:delete` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
+`theme:remove` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
 
-    php artisan theme:delete rainlab-vanilla
+    php artisan theme:remove rainlab-vanilla
 
 <a name="scaffolding-commands" class="anchor" href="#scaffolding-commands"></a>
 ## Scaffolding commands
