@@ -9,7 +9,20 @@ Themes define the appearance of your website or web application built with Octob
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
 
-Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects.
+Themes are directories that reside in the **/themes** directory by default.
+
+**To install a theme**, simply download its contents into the **/themes** directory and activate it from the admin area.
+You can do this by either downloading and unzipping the .zip file or from the command line:
+
+    # From within your project root, cd into your /themes directory
+    cd themes
+    # Assuming that {theme-name} will be "agency"
+    # Download the theme contents into /themes/{theme-name}
+    git clone git@github.com:jacoweb/AgencyTheme.git {theme-name}
+    # Optionally checkout a branch to separate your customizations/changes to the theme
+    cd {theme-name} && git checkout -b my_changes
+
+Themes can contain the following objects.
 
 Object  | Description
 ------------- | -------------
