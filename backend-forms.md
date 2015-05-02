@@ -792,11 +792,12 @@ You can also extend the form fields internally by overriding the `formExtendFiel
 
 The following methods are available on the $form object.
 
-Method  | Description
+Method | Description
 ------------- | -------------
 **addFields** | adds new fields to the outside area
 **addTabFields** | adds new fields to the tabbed area
 **addSecondaryTabFields** | adds new fields to the secondary tabbed area
+**removeField** | remove a field from the tabbed area
 
 Each method takes an array of fields similar to the [form field configuration](#form-fields).
 

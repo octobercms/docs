@@ -5,6 +5,7 @@
 - [Command-line installation](#command-line-installation)
 - [Webserver configuration](#webserver-configuration)
 - [Post-install configuration](#post-install-config)
+- [Environment configuration](#environment-config)
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
@@ -95,14 +96,14 @@ Use the following code in **server** section. If you have installed October into
     }
 
     rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
-    rewrite ^uploads/protected/.* /index.php break;
     rewrite ^bootstrap/.* /index.php break;
     rewrite ^config/.* /index.php break;
     rewrite ^vendor/.* /index.php break;
     rewrite ^storage/cms/.* /index.php break;
     rewrite ^storage/logs/.* /index.php break;
-    rewrite ^storage/temp/.* /index.php break;
     rewrite ^storage/framework/.* /index.php break;
+    rewrite ^storage/temp/protected/.* /index.php break;
+    rewrite ^storage/app/uploads/protected/.* /index.php break;
 
 <a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
 ### Lighttpd configuration
@@ -121,7 +122,8 @@ Paste the following code in the editor and change the **host address** and  **se
         url.rewrite-once = (
             "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
             "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
-            "^/uploads/public/[\w-]+/.*$" => "$0",
+            "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
+            "^/storage/temp/public/[\w-]+/.*$" => "$0",
             "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
             "(.*)" => "/index.php$1"
         )
@@ -159,3 +161,36 @@ For *scheduled tasks* to operate correctly, you should add the following to your
 You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
 
 If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work` to process the first available job in the queue.
+
+<a name="environment-config" class="anchor" href="#environment-config"></a>
+## Environment configuration
+
+It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to **production**. There are two common ways to change this value:
+
+1. Set `APP_ENV` value directly with your webserver.
+
+    For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
+
+        SetEnv APP_ENV "dev"
+
+2. Create a **.env** file in the root directory with the following content:
+
+        APP_ENV=dev
+
+In both of the above examples, the environment is set to the new value `dev`. Configuration files can now be created in the path **config/dev** and will override the application's base configuration.
+
+For example, to use a different MySQL database for the `dev` environment only, create a file called **config/dev/database.php** using this content:
+
+    <?php
+
+    return [
+        'connections' => [
+            'mysql' => [
+                'host'      => 'localhost',
+                'port'      => '',
+                'database'  => 'database',
+                'username'  => 'root',
+                'password'  => '',
+            ]
+        ]
+    ];
