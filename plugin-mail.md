@@ -59,7 +59,7 @@ Mail views reside in the file system and the code used represents the path to th
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==`` sequence. For example:
 
-    subject = "You product has been added to OctoberCMS project"
+    subject = "Your product has been added to OctoberCMS project"
     ==
 
     Hi {{ name }},
@@ -79,7 +79,7 @@ The content inside a mail view file can include up to 3 sections: **configuratio
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
-    subject = "You product has been added to OctoberCMS project"
+    subject = "Your product has been added to OctoberCMS project"
     ==
 
     <p>Hi {{ name }},</p>

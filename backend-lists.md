@@ -376,6 +376,7 @@ The following methods are available on the $list object.
 Method  | Description
 ------------- | -------------
 **addColumns** | adds new columns to the list
+**removeColumn** | removes a column from the list
 
 Each method takes an array of columns similar to the [list column configuration](#list-columns).
 

@@ -28,9 +28,9 @@ Collections may also be converted to a PHP array or JSON:
 
 The `first()` method will return the first object that matches the condition.
 
-$found = $collection->first(function($model) {
-    return $model->color == 'red';
-});
+    $found = $collection->first(function($model) {
+        return $model->color == 'red';
+    });
 
 #### Iterating the collection
 
@@ -44,9 +44,9 @@ The `each()` method lets you easily cycle through every object inside.
 
 The `contains()` method will return true if the collection has a model inside with the primary key value specified.
 
-if ($collection->contains(3)) {
-    // Collection has a Model with ID of 3
-}
+    if ($collection->contains(3)) {
+        // Collection has a Model with ID of 3
+    }
 
 <a name="data-feed" class="anchor" href="#data-feed"></a>
 ## Data feed (Experimental)
