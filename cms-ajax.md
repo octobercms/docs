@@ -43,8 +43,8 @@ A page can issue an AJAX request with the data attributes or with JavaScript. Ea
 Below is a simple example of using the data attributes API for an AJAX calculator form. The form refers to the **onTest** handler example demonstrated in the [Ajax Handlers](#ajax-handlers) section below. The example can easily be converted to use the [JavaScript API](#javascript-api).
 
     <form data-request="onTest" data-request-update="calcresult: '#result'">
-        <input type="text" name="value1"/>
-        <input type="text" name="value2"/>
+        <input type="text" name="value1">
+        <input type="text" name="value2">
         <input type="submit" value="Calculate">
     </form>
     <div id="result"></div>
@@ -84,7 +84,7 @@ The `onInit()` methods found in the [page execution life cycle](layouts#dynamic-
 
 The data attributes API lets you issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
 
-Attribute  | Description
+Attribute | Description
 ------------- | -------------
 **data-request** | specifies the AJAX handler name.
 **data-request-confirm** | specifies a confirmation message. The confirmation is displayed before the request is sent. If the user clicks the Cancel button the request isn't sent.
@@ -100,7 +100,7 @@ Attribute  | Description
 
 When the `data-request` attribute is specified for an element, the element triggers an AJAX request when a user interacts with it. Depending on the type of element, the request is triggered on the following events:
 
-Element  | Event
+Element | Event
 ------------- | -------------
 **Forms** | when the form is submitted.
 **Links, buttons** | when the element is clicked.
@@ -151,7 +151,7 @@ The `request()` method has a single required parameter - the AJAX handler name. 
 
 The second attribute of the `request()` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **update** | an object, specifies a list partials and page elements (as CSS selectors) to update: {'partial': '#select'}. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 **confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
@@ -186,12 +186,12 @@ Run `onCalculate` handler and run some custom code before the page elements upda
 
     $('form').request('onCalculate', {
         update: {calcresult: '.result'},
-        beforeUpdate: function(){ /* do something */ }
+        beforeUpdate: function() { /* do something */ }
     })
 
 Run `onCalculate` handler and if successful, run some custom code and the default `success` function:
 
-    $('form').request('onCalculate', {success: function(data){
+    $('form').request('onCalculate', {success: function(data) {
         //... do something ...
         this.success(data);
     }})
@@ -199,14 +199,14 @@ Run `onCalculate` handler and if successful, run some custom code and the defaul
 Execute a request without a FORM element:
 
     $.request('onCalculate', {
-        success: function(){
-            console.log('Finished!')
+        success: function() {
+            console.log('Finished!');
         }
     })
 
 Run `onCalculate` handler and if successful, run some custom code after the default `success` function is done:
 
-    $('form').request('onCalculate', {success: function(data){
+    $('form').request('onCalculate', {success: function(data) {
         this.success(data).done(function() {
             //... do something after parent success() is finished ...
         });
@@ -224,7 +224,7 @@ If you need to issue a request to an AJAX handler defined in a [component](compo
 
 The AJAX framework triggers several events on the updated elements, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
 
-Event  | Description
+Event | Description
 ------------- | -------------
 **ajaxBeforeSend** | triggered on the window object before sending the request.
 **ajaxUpdate** | triggered on a page element after it has been updated with the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
@@ -236,7 +236,7 @@ Event  | Description
 
 The next example execute JavaScript code when the `ajaxUpdate` event is triggered on an element.
 
-    $('.calcresult').on('ajaxUpdate', function(){
+    $('.calcresult').on('ajaxUpdate', function() {
         console.log('Updated!');
     })
 
@@ -250,8 +250,8 @@ In advanced cases you may want to return structured data from your AJAX handlers
         /* Something server-side code */
 
         return [
-            'totalUsers'=>1000,
-            'totalProjects'=>937
+            'totalUsers' => 1000,
+            'totalProjects' => 937
         ];
     }
 
@@ -263,8 +263,8 @@ The same with the JavaScript API:
 
     <form
         onsubmit="$(this).request('onHandleForm', {
-            success: function(data){
-                console.log(data)
+            success: function(data) {
+                console.log(data);
             }
         }); return false;">
 
