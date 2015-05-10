@@ -268,14 +268,14 @@ For example, you might have a Event Log model that carries generic information a
     class User extends Model
     {
         public $morphMany = [
-            'event_log' => ['Acme\Blog\Models\EventLog', 'type' => 'event_owner']
+            'event_log' => ['Acme\Blog\Models\EventLog', 'name' => 'event_owner']
         ];
     }
 
     class Location extends Model
     {
         public $morphMany = [
-            'event_log' => ['Acme\Blog\Models\EventLog', 'type' => 'event_owner']
+            'event_log' => ['Acme\Blog\Models\EventLog', 'name' => 'event_owner']
         ];
     }
 
@@ -428,7 +428,7 @@ Just like the Laravel Validator, you can set custom error messages using the [sa
             ...
         ];
     }
-    
+
 <a name="custom-attribute-names" class="anchor" href="#custom-attribute-names"></a>
 ### Custom attribute names
 
@@ -576,7 +576,7 @@ Display the uploaded file on a page:
 <a name="deferred-binding" class="anchor" href="#deferred-binding"></a>
 ## Deferred binding
 
-Deferred bindings allow you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet. 
+Deferred bindings allow you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
 
 You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/form) automatically, but you may want to use this feature in other places.
 
@@ -620,7 +620,7 @@ Use the `withDeferred()` method of a relation to load all records, including def
 <a name="cancel-all-bindings" class="anchor" href="#cancel-all-bindings"></a>
 ### Cancel all bindings
 
-It's a good idea to cancel deferred binding and delete the slave objects rather than leaving them as orphans. 
+It's a good idea to cancel deferred binding and delete the slave objects rather than leaving them as orphans.
 
     $post->cancelDeferred($sessionKey);
 
