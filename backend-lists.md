@@ -38,7 +38,7 @@ The configuration file referred in the `$listConfig` property is defined in YAML
 
 The following fields are required in the list configuration file:
 
-Field  | Description
+Field | Description
 ------------- | -------------
 **title** | a title for this list.
 **list** | a configuration array or reference to a list column definition file, see [list columns](#list-columns).
@@ -46,7 +46,7 @@ Field  | Description
 
 The configuration options listed below are optional.
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **filter** | filter configuration, see [filtering the list](#adding-filters).
 **recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
@@ -73,14 +73,14 @@ To include a toolbar with the list, add the following configuration to the list 
 
 The toolbar configuration allows:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **buttons** | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.htm**
 **search** | reference to a Search Widget configuration file, or an array with configuration.
 
 The search configuration supports the following options:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **prompt** | A placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
 
@@ -130,7 +130,7 @@ The next example shows the typical contents of a list column definitions file.
 
 For each column can specify these options (where applicable):
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
 **type** | defines how this column should be rendered (see [Column types](#column-types) below).
@@ -290,7 +290,7 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
 
 For each scope you can specify these options (where applicable):
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
@@ -303,7 +303,7 @@ Option  | Description
 
 These types can be used to determine how the filter scope should be displayed.
 
-Type  | Description
+Type | Description
 ------------- | -------------
 **group** | filters the list by a group of items, usually by a related model and require a `nameFrom` definition. Eg: Status name as open, closed, etc.
 **checkbox** | used as a switch to apply a predefined condition or query to the list.
@@ -346,7 +346,7 @@ You can extend the columns of another controller from outside by calling the `ex
 
 Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
-        Categories::extendListColumns(function($list, $model){
+        Categories::extendListColumns(function($list, $model) {
 
             if (!$model instanceof MyModel)
                 return;
@@ -373,7 +373,7 @@ You can also extend the list columns internally by overriding the `listExtendCol
 
 The following methods are available on the $list object.
 
-Method  | Description
+Method | Description
 ------------- | -------------
 **addColumns** | adds new columns to the list
 **removeColumn** | removes a column from the list

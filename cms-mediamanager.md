@@ -17,7 +17,7 @@ Please note that after you change Media Manager configuration, you should reset 
 
 To use Amazon S3 with OctoberCMS, you should create S3 bucket, folder in the bucket and API user.
 
-Sign up for Amazon AWS account or sign in with your existing account to AWS Console. Open S3 management panel. Create a new bucket and assign it any name (the name of the bucket will be a part of your public file URLs). 
+Sign up for Amazon AWS account or sign in with your existing account to AWS Console. Open S3 management panel. Create a new bucket and assign it any name (the name of the bucket will be a part of your public file URLs).
 
 Create **media** folder in the bucket. The folder name doesn't matter. This folder will be a root of your Media Library.
 
@@ -39,7 +39,7 @@ By default files in S3 buckets cannot be accessed directly. To make the bucket p
         ]
     }
 
-Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value: 
+Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value:
 
     "arn:aws:s3:::BUCKETNAME/media/*"
 
@@ -84,7 +84,7 @@ Example configuration after update:
         ...
     ]
 
-Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters: 
+Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
 Parameter | Value
 ------------- | -------------
@@ -127,7 +127,7 @@ Parameter | Value
 **container** | the container name.
 **region** | the bucket region code, see below.
 **endpoint** | leave the value as is.
-**region** | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago. 
+**region** | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago.
 
 Example configuration after update:
 
@@ -144,7 +144,7 @@ Example configuration after update:
         ...
     ]
 
-Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters: 
+Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
 Parameter | Value
 ------------- | -------------
@@ -152,7 +152,7 @@ Parameter | Value
 **folder** | the name of the folder you created in CDN container.
 **path** | the public path of the folder in the container, see below.
 
-To obtain the path of the folder, go to the CDN container list in Rackspace console. Click the container and open the media folder. Upload any file. After the file is uploaded, click it. The file will open in a new browser tab. Copy the file URL and remove the file name and trailing slash from it. 
+To obtain the path of the folder, go to the CDN container list in Rackspace console. Click the container and open the media folder. Upload any file. After the file is uploaded, click it. The file will open in a new browser tab. Copy the file URL and remove the file name and trailing slash from it.
 
 Example storage configuration:
 

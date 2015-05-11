@@ -47,7 +47,7 @@ The generic widget classes must extend the `Backend\Classes\WidgetBase` class. A
     
         ...
 
-The widget class must contain a **render()** method for producing the widget markup by rendering a widget partial. Example: 
+The widget class must contain a **render()** method for producing the widget markup by rendering a widget partial. Example:
 
     public function render()
     {

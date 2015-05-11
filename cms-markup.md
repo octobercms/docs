@@ -8,16 +8,16 @@
 - [Injecting CSS links](#styles-tag)
 - [Injecting JavaScript scripts](#scripts-tag)
 
-October extends [Twig](http://twig.sensiolabs.org/documentation) engine with a number of functions, tags, filters and variables. Those extensions allow you to use the CMS features and access the page environment information inside your templates.
+OctoberCMS extends [Twig](http://twig.sensiolabs.org/documentation) engine with a number of functions, tags, filters and variables. Those extensions allow you to use the CMS features and access the page environment information inside your templates.
 
 Please refer to the [Twig documentation](http://twig.sensiolabs.org/doc/templates.html) for the full information about the native Twig language syntax and elements.
 
 <a name="default-variables" class="anchor" href="#default-variables"></a>
 ## Default variables
 
-The `this` variable is always presented in October Twig environment. This variable contains an object with three fields:
+The `this` variable is always presented in OctoberCMS Twig environment. This variable contains an object with three fields:
 
-Variable  | Description
+Variable | Description
 ------------- | -------------
 **page** | the current page object.
 **layout** | the current layout object.
@@ -48,7 +48,7 @@ The next example demonstrates how to access an URL parameter in a page:
 <a name="linking-to-pages-assets" class="anchor" href="#linking-to-pages-assets"></a>
 ## Linking to pages and assets
 
-October provides several Twig filters that help to generate links to pages and asset files.
+OctoberCMS provides several Twig filters that help to generate links to pages and asset files.
 
 <a name="app-filter" class="anchor" href="#app-filter"></a>
 ### Link to a page relative to the application
@@ -90,7 +90,7 @@ As you can see we don't need to specify the **post_id** parameter, because it is
 <a name="combine-css-javascript" class="anchor" href="#combine-css-javascript"></a>
 ## Combining CSS and JavaScript
 
-Theme assets usually reside in the **assets** subdirectory of a theme directory. October provides the `|theme` filter for [creating links to assets files](#theme-filter), it can also combine assets of the same type by passing an array of files:
+Theme assets usually reside in the **assets** subdirectory of a theme directory. OctoberCMS provides the `|theme` filter for [creating links to assets files](#theme-filter), it can also combine assets of the same type by passing an array of files:
 
     <link href="{{ ['assets/css/styles1.css', 'assets/css/styles2.css']|theme }}" rel="stylesheet">
 
@@ -109,7 +109,7 @@ The asset combiner supports common aliases that substitute file paths, these wil
 
 The following aliases are supported:
 
-Alias  | Description
+Alias | Description
 ------------- | -------------
 jquery | Reference to the jQuery library used in the back-end. (JavaScript)
 framework | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
@@ -126,7 +126,7 @@ In some cases you may wish to combine a file outside the theme, this is achieved
 
 These symbols are supported for creating dynamic paths:
 
-Symbol  | Description
+Symbol | Description
 ------------- | -------------
 `$` | Relative to the plugins directory
 `~` | Relative to the application directory
@@ -140,7 +140,7 @@ Flash messages can be set by [Components](components) or inside the page or layo
     ...
     Flash::error('Error saving settings');
 
-October provides the `{% flash %}` tag for displaying Flash messages on the website pages. The tag has a closing tag - `{% endflash %}`. Everything between the opening and closing tags is displayed if the flash message is set. When the flash message is displayed it deletes from the session. Inside the `{% flash %}` you can use the `type` variable that represents the flash message type - **success**, **error**, **info** or **warning**. The `message` variable represents the flash message text.
+OctoberCMS provides the `{% flash %}` tag for displaying Flash messages on the website pages. The tag has a closing tag - `{% endflash %}`. Everything between the opening and closing tags is displayed if the flash message is set. When the flash message is displayed it deletes from the session. Inside the `{% flash %}` you can use the `type` variable that represents the flash message type - **success**, **error**, **info** or **warning**. The `message` variable represents the flash message text.
 
     {% flash %}
         <div class="alert alert-{{ type }}">{{ message }}</div>
@@ -155,7 +155,7 @@ The `{% flash %}` tag has an optional parameter that allows to filter flash mess
 <a name="forms" class="anchor" href="#forms"></a>
 ## Forms
 
-October provides the `form_open()`, `form_ajax()` and `form_close()` functions that simplify creating the FORM tags. Using the functions is not necessary, but you may find that in many cases using the functions is simpler than listing all required attributes in the standard FORM tag.
+OctoberCMS provides the `form_open()`, `form_ajax()` and `form_close()` functions that simplify creating the FORM tags. Using the functions is not necessary, but you may find that in many cases using the functions is simpler than listing all required attributes in the standard FORM tag.
 
 <a name="standard-form" class="anchor" href="#standard-form"></a>
 ### Opening the standard form
@@ -170,7 +170,7 @@ The next example shows several examples of opening a standard (non AJAX) form wi
 
 The first parameter of the `form_open()` function accepts the option object. The function support the following options:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **method** | request method, corresponds the **method** FORM tag attribute. Eg: POST, GET, PUT, DELETE
 **request** | a handler name to execute on the server when the form is posted, see the [Handling forms](pages#handling-forms) article for details about the event handlers.
@@ -193,7 +193,7 @@ The next example shows several examples of opening a AJAX form. The first parame
 
 The second parameter accepts the option object. The function supports the following options:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **success** | JavaScript string to execute on successful result.
 **error** | JavaScript string to execute on failed result.

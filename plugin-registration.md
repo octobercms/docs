@@ -47,7 +47,7 @@ Not all plugin directories are required. The only required file is the **Plugin.
 <a name="namespaces" class="anchor" href="#namespaces"></a>
 ### Plugin namespaces
 
-Plugin namespaces are very important, especially if you are going to publish your plugins on the [October Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
+Plugin namespaces are very important, especially if you are going to publish your plugins on the [OctoberCMS Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
 <a name="registration-file" class="anchor" href="#registration-file"></a>
 ## Registration file
@@ -86,7 +86,7 @@ Registration scripts should use the plugin namespace. The registration script sh
 
 The following methods are supported in the plugin registration class:
 
-Method  | Description
+Method | Description
 ------------- | -------------
 **pluginDetails()** | returns information about the plugin.
 **register()** | register method, called when the plugin is first registered.
@@ -106,12 +106,12 @@ Method  | Description
 
 The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing the following keys:
 
-Key  | Description
+Key | Description
 ------------- | -------------
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/), any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+**icon** | a name of the plugin icon. OctoberCMS uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/), any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
 **homepage** | A link to the author's website address, optional.
 
 <a name="routing-initialization" class="anchor" href="#routing-initialization"></a>
@@ -209,16 +209,15 @@ Plugins can extend the back-end navigation menus by overriding methods of the [P
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/posts'),
-                        'permissions' => ['acme.blog.access_posts'],
+                        'permissions' => ['acme.blog.access_posts']
                     ],
                     'categories' => [
                         'label'       => 'Categories',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/categories'),
                         'permissions' => ['acme.blog.access_categories']
-                    ],
+                    ]
                 ]
-
             ]
         ];
     }
@@ -228,7 +227,7 @@ When you register the back-end navigation you can use [localization strings](loc
 <a name="scheduled-tasks" class="anchor" href="#scheduled-tasks"></a>
 ## Scheduled tasks
 
-October has the ability to [run automated tasks on a regular basis](http://laravel.com/docs/5.0/artisan#scheduling-artisan-commands). A plugin can register to this service by overriding the `registerSchedule` method. The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
+OctoberCMS has the ability to [run automated tasks on a regular basis](http://laravel.com/docs/5.0/artisan#scheduling-artisan-commands). A plugin can register to this service by overriding the `registerSchedule` method. The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
 
     public function registerSchedule($schedule)
     {
@@ -243,7 +242,7 @@ October has the ability to [run automated tasks on a regular basis](http://larav
 
 The time methods supported by `$schedule` are:
 
-Method  | Description
+Method | Description
 ------------- | -------------
 **everyFiveMinutes()** | Run a command every `5` minutes
 **everyTenMinutes()** | Run a command every `10` minutes

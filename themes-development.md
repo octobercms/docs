@@ -19,7 +19,7 @@ The theme information file **theme.yaml** contains the theme description, the au
 
 The following fields are supported in the **theme.yaml** file:
 
-Field  | Description
+Field | Description
 ------------- | -------------
 **name** | specifies the theme name, required.
 **author** | specifies the author name, required.

@@ -6,7 +6,7 @@
 <a name="writing-docs" class="anchor" href="#writing-docs"></a>
 ## Writing documentation
 
-Your contributions to the October documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect October documentation pages:
+Your contributions to the OctoberCMS documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect OctoberCMS documentation pages:
 
 1. Each page that has at least one H2 header should have a TOC list. The TOC list should be the first element after the H1 header. The TOC should have links to all H2 headers on the page.
 1. There should be an introductory text below the TOC, even if there is the Introduction section. You may want to get rid of the Introduction section if it's not really needed. Don't leave the TOC alone.
@@ -26,12 +26,12 @@ Your contributions to the October documentation are very welcome. Please follow 
 <a name="psr-exceptions" class="anchor" href="#psr-exceptions"></a>
 ## Exceptions to PSR standards
 
-There are some exceptions to the PSR standard used by October.
+There are some exceptions to the PSR standard used by OctoberCMS.
 
 <a name="psr-exception-methods" class="anchor" href="#psr-exception-methods"></a>
 ### Controller methods can have a single underscore
 
-PSR-2 states that methods must be in **camelCase**. However, in Backend controllers October will prefix AJAX handlers with the action name to define a controlled context. For example:
+PSR-2 states that methods must be in **camelCase**. However, in Backend controllers OctoberCMS will prefix AJAX handlers with the action name to define a controlled context. For example:
 
     public function index()
     {

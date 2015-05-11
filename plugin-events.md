@@ -4,7 +4,7 @@
 - [Declaring events](#declaring-events)
 - [Usage examples](#usage-examples)
 
-Events are an easy way to extend the functionality of core classes and other plugins, this methodology can sometimes be referred to as *hooks and triggers*. Events in October can be either local to the class using the `fireEvent()` method, or global to the application using the `Event::fire()` static method. Global events usage is taken directly from [Laravel events](http://laravel.com/docs/events). In order to use Local events the class should use the `October\Rain\Support\Traits\Emitter` trait.
+Events are an easy way to extend the functionality of core classes and other plugins, this methodology can sometimes be referred to as *hooks and triggers*. Events in OctoberCMS can be either local to the class using the `fireEvent()` method, or global to the application using the `Event::fire()` static method. Global events usage is taken directly from [Laravel events](http://laravel.com/docs/events). In order to use Local events the class should use the `October\Rain\Support\Traits\Emitter` trait.
 
 <a name="subscribing-to-events" class="anchor" href="#subscribing-to-events"></a>
 ## Subscribing to events
@@ -15,7 +15,7 @@ For example, when a user is first registered you might want to add them to a thi
 
     public function boot()
     {
-        Event::listen('rainlab.user.register', function($user){
+        Event::listen('rainlab.user.register', function($user) {
 
             // Code to register $user->email to mailing list
 
@@ -46,7 +46,7 @@ The local equivalent requires the code be in context of the calling object.
 Once this event has been subscribed to, the parameters are available in the handler method. For example:
 
     // Global
-    Event::listen('acme.blog.beforePost', function($param1, $param2){
+    Event::listen('acme.blog.beforePost', function($param1, $param2) {
         echo 'Parameters: ' . $param1 . ' ' . $param2;
     });
 
@@ -155,7 +155,7 @@ Next this will demonstrate how to hook to this new event from inside the [page e
     ==
     function onInit()
     {
-        $this['topic']->bindEvent('topic.post', function($post, $postUrl){
+        $this['topic']->bindEvent('topic.post', function($post, $postUrl) {
             traceLog('A post has been submitted at '.$postUrl);
         });
     }
@@ -170,7 +170,7 @@ This example will replace the label for CMS and Pages in the backend with *...*.
 
         public function boot()
         {
-            Event::listen('backend.menu.extendItems', function($manager){
+            Event::listen('backend.menu.extendItems', function($manager) {
 
                 $manager->addMainMenuItems('October.Cms', [
                     'cms' => [

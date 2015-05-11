@@ -30,7 +30,7 @@ The **lang.php** file should define and return an array of any depth, for exampl
     return [
         'app' => [
             'name' => 'OctoberCMS',
-            'tagline' => 'Getting back to basics',
+            'tagline' => 'Getting back to basics'
         ]
     ];
 

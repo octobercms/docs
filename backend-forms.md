@@ -47,7 +47,7 @@ The configuration file referred in the `$formConfig` property is defined in YAML
 
 The following fields are required in the form configuration file:
 
-Field  | Description
+Field | Description
 ------------- | -------------
 **name** | the name of the object being managed by this form.
 **form** | a configuration array or reference to a form field definition file, see [form fields](#form-fields).
@@ -55,7 +55,7 @@ Field  | Description
 
 The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#form-create-page), [Update](#form-update-page) or [Preview](#form-preview-page) pages.
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
 **create** | a configuration array or reference to a config file for the Create page.
@@ -75,7 +75,7 @@ To support the Create page add the following configuration to the YAML file:
 
 The following configuration options are supported for the Create page:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization).
 **redirect** | redirection page when record is saved.
@@ -96,7 +96,7 @@ To support the Update page add the following configuration to the YAML file:
 
 The following configuration options are supported for the Update page:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization).
 **redirect** | redirection page when record is saved.
@@ -115,7 +115,7 @@ To support the Preview page add the following configuration to the YAML file:
 
 The following configuration options are supported for the Preview page:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the preview page only.
@@ -165,7 +165,7 @@ Fields can be placed in three areas, the **outside area**, **primary tabs** or *
 
 For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
@@ -176,7 +176,7 @@ Option  | Description
 
 For each field you can specify these options (where applicable):
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
@@ -428,7 +428,7 @@ There are various form widgets included as standard, although it is common for p
         size: huge
         language: html
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **language** | code language, for example, php, css, js, html. Default: php.
 **showGutter** | shows a gutter with line numbers. Default: true.
@@ -452,7 +452,7 @@ Option  | Description
         type: datepicker
         mode: date
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **mode** | the expected result, either date, datetime or time. Default: datetime.
 **minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
@@ -470,7 +470,7 @@ Option  | Description
         imageHeight: 260
         imageWidth: 260
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **mode** | the expected file type, either file or image. Default: file.
 **imageWidth** | if using image type, the image will be resized to this width.
@@ -490,7 +490,7 @@ Option  | Description
         nameFrom: name
         descriptionFrom: email
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
@@ -507,7 +507,7 @@ Option  | Description
         type: relation
         nameFrom: title
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
@@ -529,7 +529,7 @@ Option  | Description
                     label: Details
                     type: textarea
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **form** | a reference to form field definition file, see [backend form fields](forms#form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
@@ -647,7 +647,7 @@ The input preset converter is defined with the `preset` [form field option](#for
 
 The above example will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **field** | defines the other field name to source the value from.
 **type** | specifies the conversion type. Supported values are: url, file, slug, camel.
@@ -676,7 +676,7 @@ The trigger API is defined with the `trigger` [form field option](#form-field-op
 
 In the above example the `send_at` form field will only be shown if the `is_delayed` field is checked. In other words, the field will show (action) if the other form input (field) is checked (condition). The `trigger` definition specifies these options:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
 **field** | defines the other field name that will trigger the action.

@@ -7,13 +7,13 @@
 - [Post-install configuration](#post-install-config)
 - [Environment configuration](#environment-config)
 
-There are two ways you can install October, either using the Wizard or Command-line installation process.
+There are two ways you can install OctoberCMS, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
 
 <a name="system-requirements" class="anchor" href="#system-requirements"></a>
 ## Minimum System Requirements
 
-October CMS has some server requirements for web hosting:
+OctoberCMS has some server requirements for web hosting:
 
 1. PHP version 5.4 or higher
 1. PDO PHP Extension
@@ -30,7 +30,7 @@ When using Ubuntu, this can be done via ``apt-get install php5-json``.
 <a name="wizard-installation" class="anchor" href="#wizard-installation"></a>
 ## Wizard installation
 
-The wizard installation is a recommended way to install October. It is simpler than the command-line installation and doesn't require any special skills.
+The wizard installation is a recommended way to install OctoberCMS. It is simpler than the command-line installation and doesn't require any special skills.
 
 1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
 1. [Download the installer archive file](http://octobercms.com/download).
@@ -56,7 +56,7 @@ If you feel more comfortable with a command-line and want to use composer, there
 <a name="webserver-configuration" class="anchor" href="#webserver-configuration"></a>
 ## Web server configuration
 
-October has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
+OctoberCMS has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
 
 - [Apache configuration](#apache-configuration)
 - [Nginx configuration](#nginx-configuration)
@@ -89,7 +89,7 @@ There are small changes required to configure your site in Nginx.
 
 `nano /etc/nginx/sites-available/default`
 
-Use the following code in **server** section. If you have installed October into a subdirectory, replace `/` with the directory October was installed under:
+Use the following code in **server** section. If you have installed OctoberCMS into a subdirectory, replace `/` with the directory OctoberCMS was installed under:
 
     location / {
         try_files $uri $uri/ /index.php$is_args$args;
@@ -141,7 +141,7 @@ There are some things you may need to set up after the installation is complete.
 <a name="delete-install-files" class="anchor" href="#delete-install-files"></a>
 ### Delete installation files
 
-If you have used the [Wizard installation](#wizard-installation) you should delete the installation files for security reasons. October will never delete files from your system automatically, so you should delete these files and directories manually:
+If you have used the [Wizard installation](#wizard-installation) you should delete the installation files for security reasons. OctoberCMS will never delete files from your system automatically, so you should delete these files and directories manually:
 
     install_files/      <== Installation directory
     install.php         <== Installation script
@@ -149,7 +149,7 @@ If you have used the [Wizard installation](#wizard-installation) you should dele
 <a name="crontab-setup" class="anchor" href="#crontab-setup"></a>
 ### Setting up the crontab
 
-For *scheduled tasks* to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October:
+For *scheduled tasks* to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of OctoberCMS:
 
     * * * * * php /path/to/artisan schedule:run 1>> /dev/null 2>&1
 
@@ -190,7 +190,7 @@ For example, to use a different MySQL database for the `dev` environment only, c
                 'port'      => '',
                 'database'  => 'database',
                 'username'  => 'root',
-                'password'  => '',
+                'password'  => ''
             ]
         ]
     ];

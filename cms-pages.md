@@ -7,7 +7,7 @@
 - [Error page](#error-page)
 - [Injecting page assets programmatically](#injecting-assets)
 
-All websites have pages. In October pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages accordingly to the page function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages but the [PHP section](themes#php-section) is optional. Below you can see the simplest home page example.
+All websites have pages. In OctoberCMS pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages accordingly to the page function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages but the [PHP section](themes#php-section) is optional. Below you can see the simplest home page example.
 
     url = "/"
     ==
@@ -18,7 +18,7 @@ All websites have pages. In October pages are represented with page templates. P
 
 Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and page [Components](components), which are explained in another article. The following configuration parameters are supported for pages:
 
-Parameter  | Description
+Parameter | Description
 ------------- | -------------
 **url** | the page URL, required. The URL syntax is described below.
 **title** | the page title, required.
@@ -32,7 +32,7 @@ The page URL is defined with the **url** configuration parameter. URLs should st
 
     url = "/blog"
 
-URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by October components or from the page [PHP code](themes#php-section) section.
+URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by OctoberCMS components or from the page [PHP code](themes#php-section) section.
 
     url = "/blog/post/:post_id"
 
@@ -40,10 +40,12 @@ This is how you can access the URL parameter from the page PHP section (see the 
 
     url = "/blog/post/:post_id"
     ==
+    <?php
     function onStart()
     {
         $post_id = $this->param('post_id');
     }
+    ?>
     ==
 
 Parameter names should be compatible with PHP variable names. To make a parameter optional add the question mark after its name:
@@ -77,7 +79,7 @@ The properties of a page can be accessed in the markup using the variables found
 
 The following variables are available:
 
-Variable  | Description
+Variable | Description
 ------------- | -------------
 **this.page.id** | A unique code for the active page.
 **this.page.url** | URL for the active page.
@@ -93,7 +95,7 @@ More information can be found on [default variables in the Markup guide](markup#
 <a name="dynamic-pages" class="anchor" href="#dynamic-pages"></a>
 ## Dynamic pages
 
-Inside the [Twig section](themes#twig-section) of a page template you can use any native [Twig](http://twig.sensiolabs.org/documentation) functions, filters and tags as well as the [Twig extensions provided by October](markup). Any dynamic page requires **variables**. In October page variables can be prepared by the page or layout [PHP section](themes#php-section) or by [Components](components). In this article we describe how to prepare variables in the PHP section.
+Inside the [Twig section](themes#twig-section) of a page template you can use any native [Twig](http://twig.sensiolabs.org/documentation) functions, filters and tags as well as the [Twig extensions provided by OctoberCMS](markup). Any dynamic page requires **variables**. In OctoberCMS page variables can be prepared by the page or layout [PHP section](themes#php-section) or by [Components](components). In this article we describe how to prepare variables in the PHP section.
 
 
 <a name="page-life-cycle" class="anchor" href="#page-life-cycle"></a>
@@ -103,10 +105,10 @@ There are special functions that can be defined in the PHP section of pages and 
 
     url = "/"
     ==
-    <?
+    <?php
     function onStart()
     {
-        $this['hello'] = "Hello world!";
+        $this['hello'] = 'Hello world!';
     }
     ?>
     ==
@@ -116,7 +118,7 @@ The next example is more complicated. It shows how to load a blog post collectio
 
     url = "/blog"
     ==
-    <?
+    <?php
     use Acme\Blog\Classes\Post;
 
     function onStart()
@@ -133,7 +135,7 @@ The next example is more complicated. It shows how to load a blog post collectio
         {% endfor %}
     </ul>
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
+The default variables and Twig extensions provided by OctoberCMS are described in the [Markup Guide](markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 <a name="handling-forms" class="anchor" href="#handling-forms"></a>
 ### Handling forms
@@ -141,8 +143,8 @@ The default variables and Twig extensions provided by October are described in t
 You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](ajax) article). Use the [form_open()](markup#standard-form) function to define a form that refers to an event handler. Example:
 
     {{ form_open({ request: 'onHandleForm' }) }}
-        Please enter a string: <input type="text" name="value"/>
-        <input type="submit" value="Submit me!"/>
+        Please enter a string: <input type="text" name="value">
+        <input type="submit" value="Submit me!">
     {{ form_close() }}
     <p>Last submitted value: {{ lastValue }}</p>
 
@@ -155,7 +157,7 @@ The onHandleForm function can be defined in the page or layout [PHP section](the
 
 The handler loads the value with the `post()` function and initializes the page `lastValue` attribute variable which is displayed below the form in the first example.
 
-> **Note:** If a handler with a same name is defined in the page layout, page and a page [component](components) October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
+> **Note:** If a handler with a same name is defined in the page layout, page and a page [component](components) OctoberCMS will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
 
 If you want to refer to a handler defined in a specific [component](components), use the component name or alias in the handler reference:
 
