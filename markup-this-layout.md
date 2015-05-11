@@ -2,9 +2,9 @@
 
 You can access the current layout object via `this.layout` and it returns the object `Cms\Classes\Layout`.
 
-## Parameters
+## Properties
 
-`this.layout` supports the following parameters.
+`this.layout` has the following properties.
 
 ### id
 

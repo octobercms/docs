@@ -2,9 +2,9 @@
 
 You can access the current page object via `this.page` and it returns the object `Cms\Classes\Page`.
 
-## Parameters
+## Properties
 
-`this.page` supports the following parameters.
+`this.page` has the following properties.
 
 ### id
 
