@@ -28,7 +28,7 @@ If you use the back-end user interface you can add components to your pages, par
     ==
     ...
 
-This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the October back-end. The Inspector opens when you click a component in the page or layout component panel.
+This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the OctoberCMS back-end. The Inspector opens when you click a component in the page or layout component panel.
 
 When you refer a component, it automatically creates a page variable that matches the component name (`demoTodo` in the previous example). Components that provide HTML markup can be rendered on a page with the `{% component %}` tag, like this:
 
@@ -116,7 +116,7 @@ The page, the component belongs to, should have a corresponding [URL parameter](
 
     url = "/todo/:maxItems"
 
-In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
+In the OctoberCMS back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
 <a name="variables" class="anchor" href="#variables"></a>
 ## Passing variables to components
@@ -132,7 +132,7 @@ In this example, the **maxItems** property of the component will be set to *7* a
 <a name="viewbag-component" class="anchor" href="#viewbag-component"></a>
 ## The "View Bag" component
 
-There is a special component included in October called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page:
+There is a special component included in OctoberCMS called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page:
 
 
     title = "About"

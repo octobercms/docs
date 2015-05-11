@@ -6,7 +6,7 @@
 - [Scaffolding commands](#scaffolding-commands)
 - [Console development](#console-development)
 
-October includes several CLI commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Artisan. Please see Laravel documentation for more details.
+OctoberCMS includes several CLI commands and utilities that allow to install OctoberCMS, update it, as well as speed up the development process. The console commands are based on Artisan. Please see Laravel documentation for more details.
 
 1. [Artisan Overview](http://laravel.com/docs/artisan)
 1. [Artisan Development](http://laravel.com/docs/commands)
@@ -37,18 +37,18 @@ You also may wish to inspect **config/app.php** and **config/cms.php** to change
 <a name="console-updating" class="anchor" href="#console-updating"></a>
 ## Console updating
 
-There are two ways to update October - via Composer and via the Update Gateway. Updating October via Composer will connect to the repository and pull updates for the core and any other composer installed packages.
+There are two ways to update OctoberCMS - via Composer and via the Update Gateway. Updating OctoberCMS via Composer will connect to the repository and pull updates for the core and any other composer installed packages.
 
     composer update
 
-Updating October via the Update Gateway will connect to the October gateway and update the core and all installed plugins.
+Updating OctoberCMS via the Update Gateway will connect to the OctoberCMS gateway and update the core and all installed plugins.
 
     php artisan october:update
 
 <a name="utility-commands" class="anchor" href="#utility-commands"></a>
 ## Utility commands
 
-October includes a number of Artisan utility commands.
+OctoberCMS includes a number of Artisan utility commands.
 
 `cache:clear` - clears the application, twig and combiner cache directories. Example:
 
@@ -58,7 +58,7 @@ October includes a number of Artisan utility commands.
 
     php artisan october:up
 
-`plugin:install` - downloads and installs the plugin by its name. The next example will install a plugin called **AuthorName.PluginName**. Note that your installation should be bound to a project in order to use this command. You can create projects on October website, in the [Account / Projects](https://octobercms.com/account/project/dashboard) section.
+`plugin:install` - downloads and installs the plugin by its name. The next example will install a plugin called **AuthorName.PluginName**. Note that your installation should be bound to a project in order to use this command. You can create projects on OctoberCMS website, in the [Account / Projects](https://octobercms.com/account/project/dashboard) section.
 
     php artisan plugin:install AuthorName.PluginName
 
@@ -95,7 +95,7 @@ If you wish to install the theme in a custom directory, simply provide the secon
 
 Use the scaffolding commands to speed up the development process.
 
-`october:fresh` - removes the demo theme and plugin that ships with October.
+`october:fresh` - removes the demo theme and plugin that ships with OctoberCMS.
 
     php artisan october:fresh
 

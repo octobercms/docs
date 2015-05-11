@@ -86,7 +86,7 @@ By default any errors will be shown with a detailed error page containing the fi
 <a name="edge-updates" class="anchor" href="#edge-updates"></a>
 ## Bleeding edge updates
 
-The October platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
+The OctoberCMS platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
 
 You can instruct the platform to prefer test builds by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
 
@@ -95,7 +95,7 @@ You can instruct the platform to prefer test builds by changing the `edgeUpdates
     | Bleeding edge updates
     |--------------------------------------------------------------------------
     |
-    | If you are developing with October, it is important to have the latest
+    | If you are developing with OctoberCMS, it is important to have the latest
     | code base, set this value to 'true' to tell the platform to download
     | and use the development copies of core files and plugins.
     |

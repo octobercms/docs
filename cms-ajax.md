@@ -10,13 +10,13 @@
 - [Redirections in AJAX handlers](#redirections-in-handlers)
 - [Pushing content updates](#pushing-content-updates)
 
-October includes the AJAX framework that lets you execute AJAX handlers defined in your [pages](pages), [layouts](layouts) or [components](components) and update page blocks with [partials](partials). The AJAX framework comes in two flavors - as JavaScript API and data attributes API. The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
+OctoberCMS includes the AJAX framework that lets you execute AJAX handlers defined in your [pages](pages), [layouts](layouts) or [components](components) and update page blocks with [partials](partials). The AJAX framework comes in two flavors - as JavaScript API and data attributes API. The data attributes API doesn't require any JavaScript knowledge to use AJAX with OctoberCMS.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
 
 To use the AJAX framework it should be included by placing the `{% framework %}` tag anywhere inside the page or layout.
-This adds a reference to to the October front-end JavaScript library. The library requires jQuery, so it should be loaded first, for example:
+This adds a reference to to the OctoberCMS front-end JavaScript library. The library requires jQuery, so it should be loaded first, for example:
 
     <script src="{{ [
         'assets/javascript/jquery.js',
@@ -61,13 +61,16 @@ AJAX handlers are PHP functions that can be defined in the page or layout [PHP s
     url = "js"
     layout = "default"
     ==
+    <?php
     function onTest()
     {
         $value1 = post('value1');
         $value2 = post('value2');
         $this['result'] = $value1 + $value2;
     }
+    ?>
     ==
+    ...
 
 > **Note:** If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
 
@@ -149,7 +152,7 @@ The `request()` method has a single required parameter - the AJAX handler name. 
     <form onsubmit="$(this).request('onProcess'); return false;">
         ...
 
-The second attribute of the `request()` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
+The second attribute of the `request()` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the OctoberCMS framework:
 
 Option | Description
 ------------- | -------------

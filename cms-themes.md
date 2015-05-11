@@ -4,14 +4,14 @@
 - [Subdirectories](#subdirectories)
 - [Template structure](#structure)
 
-Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+Themes define the appearance of your website or web application built with OctoberCMS. OctoberCMS themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of OctoberCMS themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
 
 Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects.
 
-Object  | Description
+Object | Description
 ------------- | -------------
 [Pages](pages) | represent the website pages.
 [Partials](partials) | contain reusable chunks of HTML markup.
@@ -19,7 +19,7 @@ Object  | Description
 [Content files](content) | text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
 **Asset files** | are resource files like images, CSS and JavaScript files.
 
-Below you can see an example theme directory structure. Each October theme is represented with a separate directory and generally one active theme is used for displaying the website. This example displays the "website" theme directory.
+Below you can see an example theme directory structure. Each OctoberCMS theme is represented with a separate directory and generally one active theme is used for displaying the website. This example displays the "website" theme directory.
 
     themes/
       website/              <== Theme starts here
@@ -42,7 +42,7 @@ Below you can see an example theme directory structure. Each October theme is re
 <a name="subdirectories" class="anchor" href="#subdirectories"></a>
 ## Subdirectories
 
-October supports a single level subdirectories for pages, partials, layouts and content files (the **assets** directory can have any structure). This simplifies organizing large websites. In the example directory structure below you can see that the pages and partials directories contain the **blog** subdirectory and the content directory contains the **home** subdirectory.
+OctoberCMS supports a single level subdirectories for pages, partials, layouts and content files (the **assets** directory can have any structure). This simplifies organizing large websites. In the example directory structure below you can see that the pages and partials directories contain the **blog** subdirectory and the content directory contains the **home** subdirectory.
 
     themes/
       website/
@@ -77,10 +77,12 @@ For example:
     url = "/blog"
     layout = "default"
     ==
+    <?php
     function onStart()
     {
         $this['posts'] = ...;
     }
+    ?>
     ==
     <h3>Blog archive</h3>
     {% for post in posts %}
@@ -107,7 +109,7 @@ The code in the PHP section executes every time before the template is rendered.
     url = "/blog"
     layout = "default"
     ==
-    <?
+    <?php
     function onStart()
     {
         $this['posts'] = ...;
@@ -125,7 +127,7 @@ In the PHP section you can only define functions and refer to namespaces with th
     url = "/blog"
     layout = "default"
     ==
-    <?
+    <?php
     use Acme\Blog\Classes\Post;
 
     function onStart()
@@ -149,4 +151,4 @@ As a general way of setting variables you should use the array access method on 
 <a name="twig-section" class="anchor" href="#twig-section"></a>
 ### Twig markup section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section you can use functions, tags and filters [provided by October](markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout or partial). You will find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section you can use functions, tags and filters [provided by OctoberCMS](markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout or partial). You will find more information about specific Twig objects further in the documentation.

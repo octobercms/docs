@@ -21,7 +21,7 @@ You can also disable the ability to hide a hint by setting the key value to a nu
 
 The following properties are available:
 
-Property  | Description
+Property | Description
 ------------- | -------------
 **type** | Sets the color of the hint, supported types: danger, info, success, warning. Default: info.
 **title** | Adds a title section to the hint.

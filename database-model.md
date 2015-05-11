@@ -75,7 +75,7 @@ Each definition is an array where the key is the relation name and the value is 
 
 The following are global arguments that can be used with all relations:
 
-Argument  | Description
+Argument | Description
 ------------- | -------------
 **order** | sorting order for multiple records.
 **conditions** | filters the relation using a raw where query statement.
@@ -176,7 +176,7 @@ This above code shows the [database table structure](../database/structure#migra
 
 Thee following arguments are supported for belongs to many relations:
 
-Argument  | Description
+Argument | Description
 ------------- | -------------
 **table** | the name of the join table.
 **key** | the key column name of the defining model.
@@ -248,7 +248,7 @@ The above example shows that a Country model may 'have many' Comment models, bas
 
 A slightly more advanced twist on relations is the "polymorphic relation", where a model can belong to more than one other model. The following polymorphic relationship types are available, shown with their optional or required arguments:
 
-Relation  | Description
+Relation | Description
 ------------- | -------------
 **$morphTo** | polymorphic version of belongs to. Optional: `name`, `type`, `id`.
 **$morphOne** | polymorphic version of has one. Optional: `type`, `id`. Required: `name`.
@@ -319,7 +319,7 @@ October models can apply modifiers to the attribute values when the model is loa
 
 The following attribute modifiers are supported:
 
-Property  | Description
+Property | Description
 ------------- | -------------
 **$hashable** | values are hashed, they can be verified but cannot be reversed. Requires trait: `October\Rain\Database\Traits\Hashable`.
 **$purgeable** | attributes are removed before attempting to save to the database. Requires trait: `October\Rain\Database\Traits\Purgeable`.
@@ -331,7 +331,7 @@ Property  | Description
 
 The following attribute declarations are supported:
 
-Property  | Description
+Property | Description
 ------------- | -------------
 **$fillable** | values are fields accessible to mass assignment.
 **$guarded** | values are fields guarded from mass assignment.
@@ -343,7 +343,7 @@ Property  | Description
 
 You can handle different model life cycle events by defining special methods in the model class. The following events are available:
 
-Event  | Description
+Event | Description
 ------------- | -------------
 **beforeCreate** | before the model is saved, when first created.
 **afterCreate** | after the model is saved, when first created.
@@ -505,7 +505,7 @@ To output the file contents directly, use the `output()` method, this will inclu
 
 You can resize an image with the `getThumb()` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **mode** | auto, exact, portrait, landscape, crop. Default: auto
 **quality** | 0 - 100. Default: 95
