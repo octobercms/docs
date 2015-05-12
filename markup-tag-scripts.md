@@ -1,14 +1,18 @@
 # {% scripts %}
 
-The `{% scripts %}` tag inserts JavaScript file references to scripts added by [components](../plugin/components#component-assets), or [pages](../cms/pages#injecting-assets). The tag is commonly defined before the closing BODY tag:
+The `{% scripts %}` tag inserts JavaScript file references to scripts injected by the application. The tag is commonly defined before the closing BODY tag:
 
     <body>
         ...
         {% scripts %}
     </body>
 
-Another way to add scripts to the `{% scripts %}` tag is using the **scripts**  anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+> **Note**: This tag should appear once only in a given page cycle to prevent duplicated references.
+
+## Injecting scripts
+
+Links to JavaScript files can be injected either by [components](../plugin/components#component-assets) or [pages programatically](../cms/pages#injecting-assets). You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
 
     {% put scripts %}
-        <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
+        <script type="text/javascript" src="/themes/demo/assets/js/menu.js"></script>
     {% endput %}

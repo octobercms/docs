@@ -2,6 +2,8 @@
 
 You can access the current theme object via `this.theme` and it returns the object `Cms\Classes\Theme`.
 
+a reference to the [theme customization object](../themes/development#customization).
+
 ## Properties
 
 `this.theme` has the following properties.

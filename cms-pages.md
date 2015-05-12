@@ -1,10 +1,10 @@
 # CMS Pages
 
 - [Page configuration](#configuration)
-- [Page variables](#page-variables)
 - [Dynamic pages](#dynamic-pages)
 - [404 page](#404-page)
 - [Error page](#error-page)
+- [Page variables](#page-variables)
 - [Injecting page assets programmatically](#injecting-assets)
 
 All websites have pages. In October pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages accordingly to the page function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages but the [PHP section](themes#php-section) is optional. Below you can see the simplest home page example.
@@ -68,33 +68,10 @@ You can also use regular expressions to validate parameters. To add a validation
 
 > **Note:** Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
 
-<a name="page-variables" class="anchor" href="#page-variables"></a>
-## Page variables
-
-The properties of a page can be accessed in the markup using the variables found in the `this.page` object. For example, to return the title of a page:
-
-    <p>The title of this page is: {{ this.page.title }}</p>
-
-The following variables are available:
-
-Variable  | Description
-------------- | -------------
-**this.page.id** | A unique code for the active page.
-**this.page.url** | URL for the active page.
-**this.page.title** | Title for the active page.
-**this.page.description** | Description wording for the page.
-**this.page.meta_title** | Meta title for the page.
-**this.page.meta_description** | Meta description for the page.
-**this.page.fileName** | Page file name in the theme with extension.
-**this.page.baseFileName** | Page file name in the theme without the extension.
-
-More information can be found on [default variables in the Markup guide](markup#default-variables).
-
 <a name="dynamic-pages" class="anchor" href="#dynamic-pages"></a>
 ## Dynamic pages
 
-Inside the [Twig section](themes#twig-section) of a page template you can use any native [Twig](http://twig.sensiolabs.org/documentation) functions, filters and tags as well as the [Twig extensions provided by October](markup). Any dynamic page requires **variables**. In October page variables can be prepared by the page or layout [PHP section](themes#php-section) or by [Components](components). In this article we describe how to prepare variables in the PHP section.
-
+Inside the [Twig section](themes#twig-section) of a page template you can use any [functions, filters and tags provided by October](../markup). Any dynamic page requires **variables**. In October page variables can be prepared by the page or layout [PHP section](themes#php-section) or by [Components](components). In this article we describe how to prepare variables in the PHP section.
 
 <a name="page-life-cycle" class="anchor" href="#page-life-cycle"></a>
 ### Page execution life cycle
@@ -133,7 +110,7 @@ The next example is more complicated. It shows how to load a blog post collectio
         {% endfor %}
     </ul>
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
+The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 <a name="handling-forms" class="anchor" href="#handling-forms"></a>
 ### Handling forms
@@ -171,6 +148,22 @@ If the theme contains a page with the URL `/404` it is displayed when the system
 
 By default any errors will be shown with a detailed error page containing the file contents, line number and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script and creating a page with the URL `/error`.
 
+<a name="page-variables" class="anchor" href="#page-variables"></a>
+## Page variables
+
+The properties of a page can be accessed in the [PHP code section](../cms/themes#php-section) or [Components](../cms/components) by referencing `$this->page`.
+
+    function onEnd()
+    {
+        $this->page->title = 'A different page title';
+    }
+
+They can also be accessed in the markup using the [`this.page` variable](../markup/this-page). For example, to return the title of a page:
+
+    <p>The title of this page is: {{ this.page.title }}</p>
+
+More information can be found on [`this.page` in the Markup guide](../markup/this-page).
+
 <a name="injecting-assets" class="anchor" href="#injecting-assets"></a>
 ## Injecting page assets programmatically
 
@@ -184,7 +177,7 @@ If needed, you can inject assets (CSS and JavaScript files) to pages with the co
 
 If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme. 
 
-In order to output the injected assets on pages or [layouts](layout) use the [{% styles %}](..//cms/markup#styles-tag) and [{% scripts %}](../cms/markup#scripts-tag) tags. Example:
+In order to output the injected assets on pages or [layouts](layout) use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
 
     <head>
         ...

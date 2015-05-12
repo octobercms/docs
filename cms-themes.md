@@ -149,4 +149,6 @@ As a general way of setting variables you should use the array access method on 
 <a name="twig-section" class="anchor" href="#twig-section"></a>
 ### Twig markup section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section you can use functions, tags and filters [provided by October](markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout or partial). You will find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section you can use functions, tags and filters [provided by October](../markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout or partial). You will find more information about specific Twig objects further in the documentation.
+
+More information can be found [in the Markup guide](../markup).

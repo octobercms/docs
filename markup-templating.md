@@ -80,3 +80,12 @@ The most important thing to learn about Twig is how it accesses the PHP layer. F
 1. If not, and if `foo` is an object, check that `getBar` is a valid method
 1. If not, and if `foo` is an object, check that `isBar` is a valid method
 1. If not, return a `null` value.
+
+## Unsupported features
+
+There are some features offered by Twig that are not supported by October. They are listed below.
+
+Tag  | Equivalent
+------------- | -------------
+`{% extend %}` | Supplemented by Layouts or `{% placeholder %}`
+`{% include %}` | Supplemented by `{% partial %}` or `{% content %}`

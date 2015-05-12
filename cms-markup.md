@@ -12,17 +12,6 @@
 <a name="default-variables" class="anchor" href="#default-variables"></a>
 ## Default variables
 
-The `this` variable is always presented in October Twig environment. This variable contains an object with three fields:
-
-Variable  | Description
-------------- | -------------
-**page** | the current page object.
-**layout** | the current layout object.
-**theme** | a reference to the [theme customization object](../themes/development#customization).
-**param** | an array of URL parameters.
-**controller** | the CMS controller.
-**environment** | the application environment.
-
 
 
 <a name="flash-messages" class="anchor" href="#flash-messages"></a>
@@ -33,7 +22,7 @@ Variable  | Description
 <a name="forms" class="anchor" href="#forms"></a>
 ## Forms
 
-October provides the `form_open()`, `form_ajax()` and `form_close()` functions that simplify creating the FORM tags. Using the functions is not necessary, but you may find that in many cases using the functions is simpler than listing all required attributes in the standard FORM tag.
+
 
 <a name="standard-form" class="anchor" href="#standard-form"></a>
 ### Opening the standard form
