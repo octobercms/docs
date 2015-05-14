@@ -11,7 +11,14 @@ The `{% scripts %}` tag inserts JavaScript file references to scripts injected b
 
 ## Injecting scripts
 
-Links to JavaScript files can be injected either by [components](../plugin/components#component-assets) or [pages programatically](../cms/pages#injecting-assets). You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+Links to JavaScript files can be injected in PHP either by [components](../plugin/components#component-assets) or [pages programatically](../cms/pages#injecting-assets).
+
+    function onStart()
+    {
+        $this->addJs('assets/js/app.js');
+    }
+
+You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
 
     {% put scripts %}
         <script type="text/javascript" src="/themes/demo/assets/js/menu.js"></script>

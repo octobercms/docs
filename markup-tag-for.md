@@ -1,6 +1,6 @@
 # {% for %}
 
-This tag will loop over each item in a collection (array). A collection can be either an array or an object implementing the `Traversable` interface.
+The `{% for %}` and `{% endfor %}` tags will loop over each value in a collection. A collection can be either an array or an object implementing the `Traversable` interface.
 
     <ul>
         {% for user in users %}

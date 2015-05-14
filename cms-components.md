@@ -4,9 +4,9 @@
 
 - [Introduction](#introduction)
 - [Component aliases](#aliases)
-- [Overriding component partials](#overriding-partials)
 - [Using external property values](#external-property-values)
 - [Passing variables to components](#variables)
+- [Customizing default markup](#customizing-default-markup)
 - [The "View Bag" component](#viewbag-component)
 
 Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](ajax), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
@@ -55,35 +55,6 @@ The aliases also allow you to define multiple components of the same class on a 
     [demoTodo todoB]
     maxItems = 20
 
-<a name="overriding-partials" class="anchor" href="#overriding-partials"></a>
-## Overriding component partials
-
-All component partials can be overridden using the theme partials. If a component called **channel** uses the **title.htm** partial.
-
-    url = "mypage"
-
-    [channel]
-    ==
-    {% component "channel" %}
-
-We can override the partial by creating a file in our theme called **partials/channel/title.htm**.
-
-The file path segments are broken down like this:
-
-Segment  | Description
-------------- | -------------
-**partials** | the theme partials directory
-**channel** | the component alias (a partial subdirectory)
-**title.htm** | the component partial to override
-
-The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed:
-
-    [channel foobar]
-    ==
-    {% component "foobar" %}
-
-Now we can override the **title.htm** partial by creating a file in our theme called **partials/foobar/title.htm**.
-
 <a name="external-property-values" class="anchor" href="#external-property-values"></a>
 ## Using external property values
 
@@ -129,11 +100,71 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
 > **Note**: Not all components support passing variables when rendering.
 
+<a name="customizing-default-markup" class="anchor" href="#customizing-default-markup"></a>
+## Customizing default markup
+
+The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. [Moving the default markup to a theme partial](#moving-default-markup) is suitable to completely overhaul a component. [Overriding the component partials](#overriding-partials) is useful for cherry picking areas to customize.
+
+<a name="moving-default-markup" class="anchor" href="#moving-default-markup"></a>
+### Moving default markup to a partial
+
+Each component can have an entry point partial called **default.htm** that is rendered when the `{% component %}` tag is called, in the following example we will assume the component is called **blogPost**.
+
+    url = "blog/post"
+
+    [blogPost]
+    ==
+    {% component "blogPost" %}
+
+The output will be rendered from the plugin directory **components/blogpost/default.htm**. You can copy all the markup from this file and paste it directly in the page or to a new partial, called **blog-post.htm** for example.
+
+    <h1>{{ __SELF__.post.title }}</h1>
+    <p>{{ __SELF__.post.description }}</p>
+
+Inside the markup you may notice references to a variable called `__SELF__`, this refers to the component object and should be replaced with the component alias used on the page, in this example it is `blogPost`.
+
+    <h1>{{ blogPost.post.title }}</h1>
+    <p>{{ blogPost.post.description }}</p>
+
+This is the only change needed to allow the default component markup to work anywhere inside the theme. Now the component markup can be customized and rendered using the theme partial.
+
+    {% partial 'blog-post.htm' %}
+
+This process can be repeated for all other partials found in the component partial directory.
+
+<a name="overriding-partials" class="anchor" href="#overriding-partials"></a>
+### Overriding component partials
+
+All component partials can be overridden using the theme partials. If a component called **channel** uses the **title.htm** partial.
+
+    url = "mypage"
+
+    [channel]
+    ==
+    {% component "channel" %}
+
+We can override the partial by creating a file in our theme called **partials/channel/title.htm**.
+
+The file path segments are broken down like this:
+
+Segment  | Description
+------------- | -------------
+**partials** | the theme partials directory
+**channel** | the component alias (a partial subdirectory)
+**title.htm** | the component partial to override
+
+The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed:
+
+    [channel foobar]
+    ==
+    {% component "foobar" %}
+
+Now we can override the **title.htm** partial by creating a file in our theme called **partials/foobar/title.htm**.
+
 <a name="viewbag-component" class="anchor" href="#viewbag-component"></a>
 ## The "View Bag" component
 
 There is a special component included in October called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page:
-
 
     title = "About"
     url = "/about.html"
@@ -157,4 +188,4 @@ Any property defined for the component is then made available inside the page, l
         [...]
     </ul>
 
-> **Note**: The viewBag component is hidden on the back-end and can only be used for file-based editing at this stage.
+> **Note**: The viewBag component is hidden on the back-end and is only available for file-based editing. It can also be used by other plugins to store data.

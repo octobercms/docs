@@ -1,6 +1,6 @@
 # {% placeholder %}
 
-This tag will render a placeholder section which is generally [used inside Layouts](../cms/layouts#placeholders). The `{% placeholder %}` tag will return any placeholder contents that have been added using the `{% put %}` tag or any default content that is defined (optional).
+The `{% placeholder %}` tag will render a placeholder section which is generally [used inside Layouts](../cms/layouts#placeholders). This tag will return any placeholder contents that have been added using the `{% put %}` tag, or any default content that is defined (optional).
 
     {% placeholder name %}
 

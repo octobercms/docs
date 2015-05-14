@@ -30,12 +30,6 @@ Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pag
         {% content 'contacts.htm' %}
     </div>
 
-Content blocks can also be used in combination with [layout placeholders](layouts#placeholders):
-
-    {% put sidebar %}
-        {% content 'sidebar-content.htm' %}
-    {% endput %}
-
 <a name="variables" class="anchor" href="#variables"></a>
 ## Passing variables to content blocks
 
@@ -47,18 +41,4 @@ Inside the content block, variables can be accessed using singular *curly bracke
 
     <h1>This is a demo for {name}</h1>
 
-You can also pass a collection of variables as a simple array:
-
-    {% content "welcome.htm" likes=[
-        {name:'Dogs'},
-        {name:'Fishing'},
-        {name:'Golf'}
-    ] %}
-
-The collection of variables is accessed by using an opening and closing set of brackets:
-
-    <ul>
-        {likes}
-            <li>{name}</li>
-        {/likes}
-    </ul>
+More information can be found [in the Markup guide](../markup/tag-content).
