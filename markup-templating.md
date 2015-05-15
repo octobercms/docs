@@ -1,6 +1,6 @@
 # Templating
 
-October extends [Twig](http://twig.sensiolabs.org/documentation) engine with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
+October extends the [Twig template language](http://twig.sensiolabs.org/documentation) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
 
 ## Variables
 
@@ -70,18 +70,18 @@ Functions are listed under the **Functions** section.
 
 The most important thing to learn about Twig is how it accesses the PHP layer. For convenience sake `{{ foo.bar }}` does the following checks on a PHP object:
 
-1. Check if `foo` is an array and `bar` a valid element
-1. If not, and if `foo` is an object, check that `bar` is a valid property
-1. If not, and if `foo` is an object, check that `bar` is a valid method (even if bar is the constructor - use __construct() instead)
-1. If not, and if `foo` is an object, check that `getBar` is a valid method
-1. If not, and if `foo` is an object, check that `isBar` is a valid method
+1. Check if `foo` is an array and `bar` a valid element.
+1. If not, and if `foo` is an object, check that `bar` is a valid property.
+1. If not, and if `foo` is an object, check that `bar` is a valid method (even if bar is the constructor - use `__construct()` instead).
+1. If not, and if `foo` is an object, check that `getBar` is a valid method.
+1. If not, and if `foo` is an object, check that `isBar` is a valid method.
 1. If not, return a `null` value.
 
 ## Unsupported features
 
-There are some features offered by Twig that are not supported by October. They are listed below.
+There are some features offered by Twig that are not supported by October. They are listed below next to the equivalent feature.
 
 Tag  | Equivalent
 ------------- | -------------
-`{% extend %}` | Supplemented by Layouts or `{% placeholder %}`
-`{% include %}` | Supplemented by `{% partial %}` or `{% content %}`
+`{% extend %}` | Use Layouts or `{% placeholder %}`
+`{% include %}` | Use `{% partial %}` or `{% content %}`
