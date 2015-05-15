@@ -71,7 +71,7 @@ There are special functions that can be defined in the PHP section of partials: 
     ==
     <h3>{{ hello }}</h3>
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
+The templating language provided by October is described in the [Markup Guide](../markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 <a name="life-cycle-limitations" class="anchor" href="#life-cycle-limitations"></a>
 ### Life cycle limitations

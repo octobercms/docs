@@ -47,7 +47,7 @@ The [Configuration](themes#configuration-section) section is optional for layout
 <a name="placeholders" class="anchor" href="#placeholders"></a>
 ## Placeholders
 
-Placeholders allow pages to inject content to the layout. Placeholders are defined in the layout templates with the `{% placeholder name %}` tag. The next example shows a layout template with a placeholder **head** defined in the HTML HEAD section.
+Placeholders allow pages to inject content to the layout. Placeholders are defined in the layout templates with the `{% placeholder %}` tag. The next example shows a layout template with a placeholder **head** defined in the HTML HEAD section.
 
     <html>
         <head>
@@ -55,8 +55,7 @@ Placeholders allow pages to inject content to the layout. Placeholders are defin
         </head>
         ...
 
-Pages can inject content to placeholders with the `{% put %}` and `{% endput %}` tags. The following example demonstrates a simple page template which injects a CSS link to the placeholder **head** defined in the previous example
-
+Pages can inject content to placeholders with the `{% put %}` and `{% endput %}` tags. The following example demonstrates a simple page template which injects a CSS link to the placeholder **head** defined in the previous example.
 
     url = "/my-page"
     layout = "default"
@@ -67,48 +66,7 @@ Pages can inject content to placeholders with the `{% put %}` and `{% endput %}`
 
     <p>The page content goes here.</p>
 
-Placeholders can have default content, that can be either replaced or complemented by a page. If the `{% put %}` tag for a placeholder with default content is not defined on a page, the default placeholder content is displayed. Example placeholder definition in the layout template:
-
-    {% placeholder sidebar default %}
-        <p><a href="/contacts">Contact us</a></p>
-    {% endplaceholder %}
-
-The page can inject more content to the placeholder. The `{% default %}` tag specifies a place where the default placeholder content should be displayed. If the tag is not used the placeholder content is completely replaced.
-
-    {% put sidebar %}
-        <p><a href="/services">Services</a></p>
-        {% default %}
-    {% endput %}
-
-The `placeholder` tag accepts two optional attributes - `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment - **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
-
-    {% placeholder ordering title="Ordering information" type="text" %}
-
-Example of a placeholder with a default content, title and type attributes.
-
-    {% placeholder ordering default title="Ordering information" type="text" %}
-        There is no ordering information for this product.
-    {% endplaceholder %}
-
-<a name="checking-placeholder-exits" class="anchor" href="#checking-placeholder-exits"></a>
-### Checking a placeholder exists
-
-In a layout template you can check if a placeholder content exists by using the `placeholder()` function. This lets you to generate different markup depending on whether the page provides a placeholder content. Example:
-
-    {% if placeholder('sidemenu') %}
-        <!-- Markup for a page with a sidebar -->
-        <div class="row">
-            <div class="col-md-3">
-                {% placeholder sidemenu %}
-            </div>
-            <div class="col-md-9">
-                {% page %}
-            </div>
-        </div>
-    {% else %}
-        <!-- Markup for a page without a sidebar -->
-        {% page %}
-    {% endif %}
+More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder).
 
 <a name="dynamic-layouts" class="anchor" href="#dynamic-layouts"></a>
 ## Dynamic layouts

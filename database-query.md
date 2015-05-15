@@ -6,8 +6,8 @@
 
 In October you have two different approaches working with databases:
 
-* Using direct SQL queries using the `Db` class
-* Using Active Record by extending the `Model` class
+1. Using direct SQL queries using the `Db` class
+1. Using Active Record by extending the `Model` class
 
 Direct SQL will perform faster and should be used for simple tasks. Active Record is an approach used by the popular framework, Ruby On Rails. It allows an easy interface for performing repetitive tasks like creating, reading, updating and deleting database records. You can learn more about the [Active record pattern on Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern).
 
@@ -16,8 +16,8 @@ Direct SQL will perform faster and should be used for simple tasks. Active Recor
 
 The `Db` class has several methods for loading, inserting, updating and deleting data. You can find more information about the DB class here:
 
-* [Database Basics - Laravel documentation](http://laravel.com/docs/database)
-* [Query builder - Laravel documentation](http://laravel.com/docs/queries)
+1. [Database Basics - Laravel documentation](http://laravel.com/docs/database)
+1. [Query builder - Laravel documentation](http://laravel.com/docs/queries)
 
 The `select()` method returns an array of records.
 
