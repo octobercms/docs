@@ -186,11 +186,11 @@ For example, to use a different MySQL database for the `dev` environment only, c
     return [
         'connections' => [
             'mysql' => [
-                'host'      => 'localhost',
-                'port'      => '',
-                'database'  => 'database',
-                'username'  => 'root',
-                'password'  => '',
+                'host'     => 'localhost',
+                'port'     => '',
+                'database' => 'database',
+                'username' => 'root',
+                'password' => ''
             ]
         ]
     ];

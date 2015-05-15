@@ -1,5 +1,3 @@
-==
-==
 # Using Components
 
 - [Introduction](#introduction)
@@ -147,7 +145,7 @@ We can override the partial by creating a file in our theme called **partials/ch
 
 The file path segments are broken down like this:
 
-Segment  | Description
+Segment | Description
 ------------- | -------------
 **partials** | the theme partials directory
 **channel** | the component alias (a partial subdirectory)

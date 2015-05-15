@@ -36,9 +36,9 @@ The `$settingsFields` property is required if are going to build a back-end sett
       acme/
         demo/
           models/
-            settings/          <=== Model files directory
-              fields.yaml      <=== Model form fields
-            Settings.php       <=== Model script
+            settings/        <=== Model files directory
+              fields.yaml    <=== Model form fields
+            Settings.php     <=== Model script
 
 Settings models [can be registered](#backend-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 

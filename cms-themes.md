@@ -11,7 +11,7 @@ Themes define the appearance of your website or web application built with Octob
 
 Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects.
 
-Object  | Description
+Object | Description
 ------------- | -------------
 [Pages](pages) | represent the website pages.
 [Partials](partials) | contain reusable chunks of HTML markup.
@@ -22,16 +22,16 @@ Object  | Description
 Below you can see an example theme directory structure. Each October theme is represented with a separate directory and generally one active theme is used for displaying the website. This example displays the "website" theme directory.
 
     themes/
-      website/              <== Theme starts here
-        pages/              <== Pages directory
+      website/           <=== Theme starts here
+        pages/           <=== Pages directory
           home.htm
-        layouts/            <== Layouts directory
+        layouts/         <=== Layouts directory
           default.htm
-        partials/           <== Partials directory
+        partials/        <=== Partials directory
           sidebar.htm
-        content/            <== Content directory
+        content/         <=== Content directory
           intro.htm
-        assets/             <== Assets directory
+        assets/          <=== Assets directory
           css/
             my-styles.css
           js/
@@ -48,16 +48,16 @@ October supports a single level subdirectories for pages, partials, layouts and 
       website/
         pages/
           home.htm
-          blog/                 <== Subdirectory
+          blog/                  <=== Subdirectory
             archive.htm
             category.htm
         partials/
           sidebar.htm
-          blog/                 <== Subdirectory
+          blog/                  <=== Subdirectory
             category-list.htm
         content/
           footer-contacts.txt
-          home/                 <== Subdirectory
+          home/                  <=== Subdirectory
             intro.htm
         ...
 
@@ -77,10 +77,12 @@ For example:
     url = "/blog"
     layout = "default"
     ==
+   <?php
     function onStart()
     {
         $this['posts'] = ...;
     }
+    ?>
     ==
     <h3>Blog archive</h3>
     {% for post in posts %}
@@ -91,7 +93,7 @@ For example:
 <a name="configuration-section" class="anchor" href="#configuration-section"></a>
 ### Configuration section
 
-The configuration section sets the template parameters. Supported configuration parameters are specific for different CMS templates and described in their corresponding documentation articles. The configuration section uses the simple [INI format](http://en.wikipedia.org/wiki/INI_file), where string parameter values are enclosed within quotes.  Example configuration section for a page template:
+The configuration section sets the template parameters. Supported configuration parameters are specific for different CMS templates and described in their corresponding documentation articles. The configuration section uses the simple [INI format](http://en.wikipedia.org/wiki/INI_file), where string parameter values are enclosed within quotes. Example configuration section for a page template:
 
     url = "/blog"
     layout = "default"
@@ -107,7 +109,7 @@ The code in the PHP section executes every time before the template is rendered.
     url = "/blog"
     layout = "default"
     ==
-    <?
+    <?php
     function onStart()
     {
         $this['posts'] = ...;
@@ -125,7 +127,7 @@ In the PHP section you can only define functions and refer to namespaces with th
     url = "/blog"
     layout = "default"
     ==
-    <?
+    <?php
     use Acme\Blog\Classes\Post;
 
     function onStart()

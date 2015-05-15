@@ -18,7 +18,7 @@ All websites have pages. In October pages are represented with page templates. P
 
 Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and page [Components](components), which are explained in another article. The following configuration parameters are supported for pages:
 
-Parameter  | Description
+Parameter | Description
 ------------- | -------------
 **url** | the page URL, required. The URL syntax is described below.
 **title** | the page title, required.
@@ -40,10 +40,12 @@ This is how you can access the URL parameter from the page PHP section (see the 
 
     url = "/blog/post/:post_id"
     ==
+    <?php
     function onStart()
     {
         $post_id = $this->param('post_id');
     }
+    ?>
     ==
 
 Parameter names should be compatible with PHP variable names. To make a parameter optional add the question mark after its name:
@@ -80,7 +82,7 @@ There are special functions that can be defined in the PHP section of pages and 
 
     url = "/"
     ==
-    <?
+    <?php
     function onStart()
     {
         $this['hello'] = "Hello world!";
@@ -93,7 +95,7 @@ The next example is more complicated. It shows how to load a blog post collectio
 
     url = "/blog"
     ==
-    <?
+    <?php
     use Acme\Blog\Classes\Post;
 
     function onStart()
@@ -175,7 +177,7 @@ If needed, you can inject assets (CSS and JavaScript files) to pages with the co
         $this->addJs('assets/js/app.js');
     }
 
-If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme. 
+If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme.
 
 In order to output the injected assets on pages or [layouts](layout) use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
 

@@ -7,7 +7,7 @@
 - [Setting the navigation context](#navigation-context)
 - [AJAX](#ajax)
 
-October back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors. 
+October back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors.
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
@@ -18,11 +18,11 @@ Each controller is represented with a PHP script which resides in the the **/con
       acme/
         blog/
           controllers/
-            users/               <=== Controller view directory
-              _partial.htm       <=== Controller partial file
-              config_form.yaml   <=== Controller config file
-              index.htm          <=== Controller view file
-            Users.php            <=== Controller class
+            users/                <=== Controller view directory
+              _partial.htm        <=== Controller partial file
+              config_form.yaml    <=== Controller config file
+              index.htm           <=== Controller view file
+            Users.php             <=== Controller class
           Plugin.php
 
 <a name="class-definition" class="anchor" href="#class-definition"></a>
@@ -47,7 +47,7 @@ Usually each controller implements functionality for working with a single type 
 
 The back-end controller base class defines a number of properties that allow to configure the page appearance and manage the page security:
 
-Property  | Description
+Property | Description
 ------------- | -------------
 **$fatalError** | allows to store a fatal exception generated in an action method in order to display it in the view.
 **$user** | contains a reference to the the back-end user object.
@@ -125,9 +125,9 @@ The back-end AJAX framework uses the same [AJAX library](../cms/ajax) as the fro
 <a name="ajax-handlers" class="anchor" href="#ajax-handlers"></a>
 ### Back-end AJAX handlers
 
-The back-end AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc. 
+The back-end AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
 
-Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see the [front-end AJAX library](../cms/ajax)). You can use the controller's `makePartial()` method to render a partial and return its contents as a part of the response data. 
+Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see the [front-end AJAX library](../cms/ajax)). You can use the controller's `makePartial()` method to render a partial and return its contents as a part of the response data.
 
     public function onOpenTemplate()
     {
@@ -146,9 +146,9 @@ Back-end AJAX handlers can return an array of data, throw an exception or redir
 
 The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [front-end AJAX library](../cms/ajax) for details. The following example shows how to trigger a request with a back-end button.
 
-    <button 
-        type="button" 
-        data-request="onDoSomething" 
+    <button
+        type="button"
+        data-request="onDoSomething"
         class="btn btn-default">
         Do something
     </button>

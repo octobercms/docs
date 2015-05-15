@@ -15,7 +15,7 @@ For example, when a user is first registered you might want to add them to a thi
 
     public function boot()
     {
-        Event::listen('rainlab.user.register', function($user){
+        Event::listen('rainlab.user.register', function($user) {
 
             // Code to register $user->email to mailing list
 
@@ -46,7 +46,7 @@ The local equivalent requires the code be in context of the calling object.
 Once this event has been subscribed to, the parameters are available in the handler method. For example:
 
     // Global
-    Event::listen('acme.blog.beforePost', function($param1, $param2){
+    Event::listen('acme.blog.beforePost', function($param1, $param2) {
         echo 'Parameters: ' . $param1 . ' ' . $param2;
     });
 
@@ -153,9 +153,10 @@ Next this will demonstrate how to hook to this new event from inside the [page e
     [topic]
     slug = "{{ :slug }}"
     ==
+    <?php
     function onInit()
     {
-        $this['topic']->bindEvent('topic.post', function($post, $postUrl){
+        $this['topic']->bindEvent('topic.post', function($post, $postUrl) {
             traceLog('A post has been submitted at '.$postUrl);
         });
     }

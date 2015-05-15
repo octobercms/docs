@@ -20,7 +20,6 @@ A standard tooltip
 ## Spawning tooltips
 Tooltips can be automatically created when the mouse enters an element using the `data-toggle="tooltip"` tag.
 
-
     <a
         href="javascript:;"
         data-toggle="tooltip"

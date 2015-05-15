@@ -86,7 +86,7 @@ Registration scripts should use the plugin namespace. The registration script sh
 
 The following methods are supported in the plugin registration class:
 
-Method  | Description
+Method | Description
 ------------- | -------------
 **pluginDetails()** | returns information about the plugin.
 **register()** | register method, called when the plugin is first registered.
@@ -106,7 +106,7 @@ Method  | Description
 
 The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing the following keys:
 
-Key  | Description
+Key | Description
 ------------- | -------------
 **name** | the plugin name, required.
 **description** | the plugin description, required.
@@ -209,16 +209,15 @@ Plugins can extend the back-end navigation menus by overriding methods of the [P
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/posts'),
-                        'permissions' => ['acme.blog.access_posts'],
+                        'permissions' => ['acme.blog.access_posts']
                     ],
                     'categories' => [
                         'label'       => 'Categories',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/categories'),
                         'permissions' => ['acme.blog.access_categories']
-                    ],
+                    ]
                 ]
-
             ]
         ];
     }
@@ -236,14 +235,14 @@ October has the ability to [run automated tasks on a regular basis](http://larav
         $schedule->command('cache:clear')->everyFiveMinutes();
 
         // Perform a task every hour
-        $schedule->call(function(){
+        $schedule->call(function() {
             //...
         })->hourly();
     }
 
 The time methods supported by `$schedule` are:
 
-Method  | Description
+Method | Description
 ------------- | -------------
 **everyFiveMinutes()** | Run a command every `5` minutes
 **everyTenMinutes()** | Run a command every `10` minutes
@@ -262,11 +261,11 @@ Plugins keep a change log inside the **/updates** directory to maintain version 
     plugins/
       author/
         myplugin/
-          updates/                    <=== Updates directory
-            version.yaml              <=== Plugin version file
-            create_tables.php         <=== Database scripts
-            seed_the_database.php     <=== Migration file
-            create_another_table.php  <=== Migration file
+          updates/                      <=== Updates directory
+            version.yaml                <=== Plugin version file
+            create_tables.php           <=== Database scripts
+            seed_the_database.php       <=== Migration file
+            create_another_table.php    <=== Migration file
 
 The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). An example Plugin version file:
 

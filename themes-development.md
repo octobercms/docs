@@ -15,11 +15,11 @@ The theme information file **theme.yaml** contains the theme description, the au
 
     themes/
       demo/
-        theme.yaml       <=== Theme information file
+        theme.yaml    <=== Theme information file
 
 The following fields are supported in the **theme.yaml** file:
 
-Field  | Description
+Field | Description
 ------------- | -------------
 **name** | specifies the theme name, required.
 **author** | specifies the author name, required.
@@ -45,7 +45,7 @@ The theme version file **version.yaml** defines the current theme version and th
     themes/
       demo/
         ...
-        version.yaml       <=== Theme version file
+        version.yaml    <=== Theme version file
 
 The file format is following:
 
@@ -62,7 +62,7 @@ The theme preview image is used in the back-end theme selector. The image file *
       demo/
         assets/
           images/
-            theme-preview.png <=== Theme preview image
+            theme-preview.png    <=== Theme preview image
 
 The image width should be at least 600 px. The ideal aspect ratio is 1.5, for example 600x400px.
 

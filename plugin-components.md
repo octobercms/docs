@@ -15,9 +15,9 @@ Components files and directories reside in the **/components** subdirectory of a
       acme/
         myplugin/
           components/
-            componentname/      <=== Component partials directory
-              default.htm       <=== Component default markup (optional)
-            ComponentName.php   <=== Component class file
+            componentname/       <=== Component partials directory
+              default.htm        <=== Component default markup (optional)
+            ComponentName.php    <=== Component class file
           Plugin.php
 
 Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents()` method.
@@ -96,7 +96,7 @@ When you add a component to a page or layout you can configure it using properti
 
 The method should return an array with the property keys as indexes and property parameters as values. The property keys are used for accessing the component property values inside the component class. The property parameters are defined with an array with the following keys:
 
-Key  | Description
+Key | Description
 ------------- | -------------
 **title** | required, the property title, it is used by the component Inspector in the CMS back-end.
 **description** | required, the property description, it is used by the component Inspector in the CMS back-end.
@@ -132,11 +132,11 @@ The option list for dropdown properties can be static or dynamic. Static options
     {
         return [
             'units' => [
-                'title'             => 'Units',
-                'type'              => 'dropdown',
-                'default'           => 'imperial',
-                'placeholder'       => 'Select units',
-                'options'           => ['metric'=>'Metric', 'imperial'=>'Imperial']
+                'title'       => 'Units',
+                'type'        => 'dropdown',
+                'default'     => 'imperial',
+                'placeholder' => 'Select units',
+                'options'     => ['metric'=>'Metric', 'imperial'=>'Imperial']
             ]
         ];
     }
@@ -147,9 +147,9 @@ The list of options could be fetched dynamically from the server when the Inspec
     {
         return [
             'country' => [
-                'title'             => 'Country',
-                'type'              => 'dropdown',
-                'default'           => 'us'
+                'title'   => 'Country',
+                'type'    => 'dropdown',
+                'default' => 'us'
             ]
         ];
     }
@@ -165,16 +165,16 @@ Dynamic drop-down lists can depend on other properties. For example, the state l
     {
         return [
             'country' => [
-                'title'             => 'Country',
-                'type'              => 'dropdown',
-                'default'           => 'us'
+                'title'       => 'Country',
+                'type'        => 'dropdown',
+                'default'     => 'us'
             ],
             'state' => [
-                'title'             => 'State',
-                'type'              => 'dropdown',
-                'default'           => 'dc',
-                'depends'           => ['country'],
-                'placeholder'       => 'Select a state'
+                'title'       => 'State',
+                'type'        => 'dropdown',
+                'default'     => 'dc',
+                'depends'     => ['country'],
+                'placeholder' => 'Select a state'
             ]
         ];
     }

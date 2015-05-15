@@ -19,4 +19,3 @@ If the layout file was **default.htm** this would generate a class name of `layo
 The layout description as defined by the configuration.
 
     <meta name="description" content="{{ this.layout.description }}">
-

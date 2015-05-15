@@ -38,7 +38,7 @@ October also includes an alternative method called `sendTo()` that can simplify 
 
 The first argument in `sendTo()` is used for the recipients can take different value types:
 
-Type  | Description
+Type | Description
 ------------- | -------------
 String | a single recipient address, with no name defined.
 Object | a single recipient object, where the *email* property is used for the address and the *name* is optionally used for the name.
@@ -50,12 +50,12 @@ Collection | a collection of recipient objects, as above.
 
 Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin:mail.message** would use the content in following file:
 
-    plugins/                <== Plugins directory
-      author/               <=== "author" segment
-        plugin/             <=== "plugin" segment
-          views/            <== View directory
-            mail/           <== "mail" segment
-              message.htm   <== "message" segment
+    plugins/                 <=== Plugins directory
+      author/                <=== "author" segment
+        plugin/              <=== "plugin" segment
+          views/             <=== View directory
+            mail/            <=== "mail" segment
+              message.htm    <=== "message" segment
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==`` sequence. For example:
 
@@ -92,7 +92,7 @@ The **plain text** section is optional and a view can contain only the configura
 
 The configuration section sets the mail view parameters. The following configuration parameters are supported:
 
-Parameter  | Description
+Parameter | Description
 ------------- | -------------
 **subject** | the mail message subject, required.
 **layout** | the [mail layout](#mail-layouts) code, optional. Default value is `default`.
@@ -124,7 +124,7 @@ Mail layouts can be created by selecting *Settings > Mail > Mail templates* and 
 
 By default, October comes with two primary mail layouts:
 
-Layout  | Code | Description
+Layout | Code | Description
 ------------- | ------------- | -------------
 Default | default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
@@ -138,7 +138,7 @@ Mail views can be registered as templates that are automatically generated in th
     {
         return [
             'rainlab.user::mail.activate' => 'Activation mail sent to new users.',
-            'rainlab.user::mail.restore'  => 'Password reset instructions for front-end users.',
+            'rainlab.user::mail.restore'  => 'Password reset instructions for front-end users.'
         ];
     }
 

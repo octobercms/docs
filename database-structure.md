@@ -15,12 +15,12 @@ Database tables and seed data is managed using a version information file `versi
     plugins/
       acme/
         blog/
-          updates/                    <=== Updates folder
-            version.yaml              <=== Version Information File
-            create_posts_table.php    <=== Database scripts
-            create_comments_table.php <=== Migration script
-            some_seeding_file.php     <=== Seeding script
-            some_upgrade_file.php     <=== Seeding script
+          updates/                       <=== Updates folder
+            version.yaml                 <=== Version Information File
+            create_posts_table.php       <=== Database scripts
+            create_comments_table.php    <=== Migration script
+            some_seeding_file.php        <=== Seeding script
+            some_upgrade_file.php        <=== Seeding script
 
 The version information file defines the plugin version and refers to the migration and seeding files. All migration and seeding files should be associated with a plugin version. Example of the version.yaml file:
 

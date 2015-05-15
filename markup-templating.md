@@ -81,7 +81,7 @@ The most important thing to learn about Twig is how it accesses the PHP layer. F
 
 There are some features offered by Twig that are not supported by October. They are listed below next to the equivalent feature.
 
-Tag  | Equivalent
+Tag | Equivalent
 ------------- | -------------
 `{% extend %}` | Use Layouts or `{% placeholder %}`
 `{% include %}` | Use `{% partial %}` or `{% content %}`

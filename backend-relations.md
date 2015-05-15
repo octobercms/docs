@@ -52,7 +52,7 @@ An *Invoice* model with a relationship called `items` should define the first le
 
 The following options are then used for each relationship name definition:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **label** | a label for the relation, in the singular tense, required.
 **view** | configuration specific to the view container, see below.
@@ -64,7 +64,7 @@ Option  | Description
 
 These configuration values can be specified for the **view** or **manage** options.
 
-Option  | Type | Description
+Option | Type | Description
 ------------- | ------------- | -------------
 **form** | Form | a reference to form field definition file, see [backend form fields](forms#form-fields).
 **list** | List | a reference to list column definition file, see [backend list columns](lists#list-columns).
@@ -75,7 +75,7 @@ Option  | Type | Description
 
 These configuration values can be specified only for the **view** options.
 
-Option  | Type | Description
+Option | Type | Description
 ------------- | ------------- | -------------
 **showCheckboxes** | List | displays checkboxes next to each record.
 **recordUrl** | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
@@ -85,7 +85,7 @@ Option  | Type | Description
 
 These configuration values can be specified only for the **manage** options.
 
-Option  | Type | Description
+Option | Type | Description
 ------------- | ------------- | -------------
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
@@ -266,4 +266,3 @@ The relation manager can then be displayed for a specified relation definition b
     <?= $this->formRenderPreview() ?>
 
     <?= $this->relationRender('comments') ?>
-

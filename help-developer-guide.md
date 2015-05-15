@@ -111,27 +111,27 @@ Use **camelCase** everywhere except for the following:
 
 [Form] Element names should use snake_case (underscores)
 
-    <input name="first_name" />
+    <input name="first_name">
 
 Where the name is an array, the array keys can be either StudlyCase or snake_case.
 
-    <input name="ForumMember[first_name]" />
-    <input name="forum_member[first_name]" />
+    <input name="ForumMember[first_name]">
+    <input name="forum_member[first_name]">
 
 Element IDs should be camel case or hyphen-case (dashes)
 
     <div id="firstNameGroup">
-        <input id="firstName" />
+        <input id="firstName">
     </div>
 
     <div id="first-name-group">
-        <input id="first-name" />
+        <input id="first-name">
     </div>
 
 Element classes names should use hyphen-case (dashes)
 
     <div class="form-group">
-        <input class="form-control" />
+        <input class="form-control">
     </div>
 
 <a name="view-naming" class="anchor" href="#view-naming"></a>

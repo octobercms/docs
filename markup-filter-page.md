@@ -67,4 +67,3 @@ Or by defining a different value:
     <a href="{{ 'post'|page({ post_id: 6 }) }}">
         Blog post #6
     </a>
-
