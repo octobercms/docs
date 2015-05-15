@@ -1,10 +1,6 @@
-# Introduction to Twig
+# Templating
 
-October extends [Twig](http://twig.sensiolabs.org/documentation) engine with a number of functions, tags, filters and variables. Those extensions allow you to use the CMS features and access the page environment information inside your templates.
-
-Please refer to the [Twig documentation](http://twig.sensiolabs.org/doc/templates.html) for the full information about the native Twig language syntax and elements.
-
-October leverages Twig for the front-end templating language. Twig is a robust and mature library that shares syntax with other systems such as AngularJS and Jinja. More can be discovered by reading the [Twig documentation](http://twig.sensiolabs.org/documentation).
+October extends [Twig](http://twig.sensiolabs.org/documentation) engine with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
 
 ## Variables
 

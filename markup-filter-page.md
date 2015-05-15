@@ -10,6 +10,10 @@ Remember that if you refer a page from a subdirectory you should specify the sub
 
 > **Note**: The [Themes documentation](../cms/themes#subdirectories) has more details on subdirectory usage.
 
+You can create a link to the current page by filtering an empty string:
+
+    <a href="{{ ''|page }}">Refresh page</a>
+
 <a name="reverse-routing" class="anchor" href="#reverse-routing"></a>
 ## Reverse routing
 

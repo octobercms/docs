@@ -4,14 +4,18 @@ You can access the current URL parameters via `this.param` and it returns a PHP 
 
 ## Accessing page parameters
 
-This example demonstrates how to access an URL parameter in a page.
+This example demonstrates how to access the `tab` URL parameter in a page.
 
     url = "/account/:tab"
     ==
     {% if this.param.tab == 'details' %}
-        <p>You are on the account details tab</p>
+
+        <p>Here are all your details</p>
+
     {% elseif this.param.tab == 'history' %}
-        <p>You are on the history tab</p>
+
+        <p>You are viewing a blast from the past</p>
+
     {% endif %}
 
 If the parameter name is also a variable, then array syntax can be used.
@@ -19,4 +23,5 @@ If the parameter name is also a variable, then array syntax can be used.
     url = "/account/:post_id"
     ==
     {% set name = 'post_id' %}
+
     <p>The post ID is: {{ this.param[name] }}</p>
