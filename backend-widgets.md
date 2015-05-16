@@ -16,13 +16,13 @@ Widget classes reside inside the **widgets** directory of the plugin directory. 
     widgets/
       /form
         /partials
-          _form.htm     <== Widget partial file
+          _form.htm     <=== Widget partial file
         /assets
           /js
-            form.js    <== Widget JavaScript file
+            form.js     <=== Widget JavaScript file
           /css
-            form.css   <== Widget StyleSheet file
-      Form.php         <== Widget class
+            form.css    <=== Widget StyleSheet file
+      Form.php          <=== Widget class
 
 <a name="generic-class-definition" class="anchor" href="#generic-class-definition"></a>
 ### Class definition
@@ -154,13 +154,13 @@ Report widgets can be used on the back-end dashboard and in other back-end repor
 The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The class should override the `render()` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
     plugins/
-      rainlab/                  <=== Author name
-        googleanalytics/        <=== Plugin name
-          reportwidgets/        <=== Report widgets directory
-            trafficsources      <=== Widget files directory
+      rainlab/                    <=== Author name
+        googleanalytics/          <=== Plugin name
+          reportwidgets/          <=== Report widgets directory
+            trafficsources        <=== Widget files directory
               partials
                 _widget.htm
-            TrafficSources.php  <=== Widget class file
+            TrafficSources.php    <=== Widget class file
 
 Example report widget class definition:
 
@@ -181,9 +181,9 @@ The widget partial could contain any HTML markup you want to display in the widg
     <div class="report-widget">
         <h3>Traffic sources</h3>
 
-        <div 
+        <div
             class="control-chart"
-            data-control="chart-pie" 
+            data-control="chart-pie"
             data-size="200"
             data-center-text="180">
             <ul>

@@ -54,11 +54,11 @@ The `hasAccess()` method returns **true** for any permission if the user is an a
 You can also use the methods in the back-end views for hiding user interface elements. The next examples demonstrates how you can hide a button on the Edit Category [back-end form](forms):
 
     <?php if ($this->user->hasAccess('acme.blog.delete_categories')): ?>
-        <button 
-            type="button" 
-            class="oc-icon-trash-o btn-icon danger pull-right" 
-            data-request="onDelete" 
-            data-load-indicator="Deleting Category..." 
+        <button
+            type="button"
+            class="oc-icon-trash-o btn-icon danger pull-right"
+            data-request="onDelete"
+            data-load-indicator="Deleting Category..."
             data-request-confirm="Do you really want to delete this category?">
         </button>
     <?php endif ?>

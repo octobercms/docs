@@ -15,10 +15,10 @@ Below is an example of the of the plugin's lang directory:
 
     plugins/
       acme/
-        todo/              <==== Plugin directory
-          lang/            <==== Localization directory
-            en/            <==== Language directory
-              lang.php     <==== Localization file
+        todo/             <=== Plugin directory
+          lang/           <=== Localization directory
+            en/           <=== Language directory
+              lang.php    <=== Localization file
             fr/
               lang.php
 
@@ -30,7 +30,7 @@ The **lang.php** file should define and return an array of any depth, for exampl
     return [
         'app' => [
             'name' => 'OctoberCMS',
-            'tagline' => 'Getting back to basics',
+            'tagline' => 'Getting back to basics'
         ]
     ];
 
@@ -46,11 +46,11 @@ The localization strings can be loaded with the `Lang` class. The parameter it a
 
 System users can override plugin localization strings without altering the plugins' files. This is done by adding localization files to the **lang** directory. For example, to override the lang.php file of the **acme/blog** plugin you should create the file in the following location:
 
-    lang/                 <==== App localization directory
-      en/                 <==== Language directory
-        acme/             <==== Plugin / Module directory
-          blog/           <===^
-            lang.php      <==== Localization override file
+    lang/               <=== App localization directory
+      en/               <=== Language directory
+        acme/           <=== Plugin / Module directory
+          blog/         <===^
+            lang.php    <=== Localization override file
 
 The file could contain only strings you want to override, there is no need to replace the entire file. Example:
 

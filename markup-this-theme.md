@@ -21,4 +21,3 @@ If the theme directory was **website** this would generate a class name of `them
 The theme description as defined by the configuration.
 
     <meta name="description" content="{{ this.theme.description }}">
-

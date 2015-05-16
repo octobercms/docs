@@ -61,12 +61,14 @@ AJAX handlers are PHP functions that can be defined in the page or layout [PHP s
     url = "js"
     layout = "default"
     ==
+    <?php
     function onTest()
     {
         $value1 = post('value1');
         $value2 = post('value2');
         $this['result'] = $value1 + $value2;
     }
+    ?>
     ==
 
 > **Note:** If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
@@ -262,7 +264,7 @@ The data can be fetched with the data attributes API:
 The same with the JavaScript API:
 
     <form
-        onsubmit="$(this).request('onHandleForm', {
+        onsubmit = "$(this).request('onHandleForm', {
             success: function(data) {
                 console.log(data);
             }

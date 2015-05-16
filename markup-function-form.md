@@ -30,7 +30,7 @@ There are some special options that can also be used alongside the attributes.
 
 The function support the following options:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **method** | request method, corresponds the **method** FORM tag attribute. Eg: POST, GET, PUT, DELETE
 **request** | a handler name to execute on the server when the form is posted, see the [Handling forms](../cms/pages#handling-forms) article for details about the event handlers.
@@ -60,7 +60,7 @@ There are some special options that can also be used alongside the attributes.
 
 The function support the following options:
 
-Option  | Description
+Option | Description
 ------------- | -------------
 **success** | JavaScript string to execute on successful result.
 **error** | JavaScript string to execute on failed result.

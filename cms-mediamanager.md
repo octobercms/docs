@@ -17,7 +17,7 @@ Please note that after you change Media Manager configuration, you should reset 
 
 To use Amazon S3 with OctoberCMS, you should create S3 bucket, folder in the bucket and API user.
 
-Sign up for Amazon AWS account or sign in with your existing account to AWS Console. Open S3 management panel. Create a new bucket and assign it any name (the name of the bucket will be a part of your public file URLs). 
+Sign up for Amazon AWS account or sign in with your existing account to AWS Console. Open S3 management panel. Create a new bucket and assign it any name (the name of the bucket will be a part of your public file URLs).
 
 Create **media** folder in the bucket. The folder name doesn't matter. This folder will be a root of your Media Library.
 
@@ -186,11 +186,11 @@ If you don't want to use HTML5 player you can provide any other markup in the pa
 
 As the partials are written with Twig, you can automate adding alternative video sources based on a naming convention. For example, if there's a convention that there's always a smaller resolution video for each full resolution video, and the smaller resolution file has extension "iphone.mp4", the generated markup could look like this:
 
-    <video controls> 
-        <source 
-            src="{{ src }}" 
+    <video controls>
+        <source
+            src="{{ src }}"
             media="only screen and (min-device-width: 568px)"></source>
-        <source 
+        <source
             src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}" 
             media="only screen and (max-device-width: 568px)"></source>
     </video>
@@ -213,12 +213,12 @@ There are several options that allow you to fine-tune the Media Manager. All of 
 Parameter | Value
 ------------- | -------------
 **ignore** | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
-**ttl** | specifies the cache time-to-live, in minutes. The default value is 10. The cache invalidates automatically when Library items are added, updated or deleted. 
+**ttl** | specifies the cache time-to-live, in minutes. The default value is 10. The cache invalidates automatically when Library items are added, updated or deleted.
 **image_extensions** | file extensions corresponding to the Image document type. The default value is **['gif', 'png', 'jpg', 'jpeg', 'bmp']**.
 **video_extensions** | file extensions corresponding to the Video document type. The default value is **['mp4', 'avi', 'mov', 'mpg']**.
 **audio_extensions** | file extensions corresponding to the Audio document type. The default value is **['mp3', 'wav', 'wma', 'm4a']**.
 
 <a name="troubleshooting" class="anchor" href="#troubleshooting"></a>
-## Troubleshooting 
+## Troubleshooting
 
 The most common issue with using remote services is the SSL connection problem. If you get SSL errors, make sure that your server has fresh SSL certificates of public Certificate Authorities (CA).

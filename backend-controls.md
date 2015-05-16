@@ -21,7 +21,7 @@ You can also disable the ability to hide a hint by setting the key value to a nu
 
 The following properties are available:
 
-Property  | Description
+Property | Description
 ------------- | -------------
 **type** | Sets the color of the hint, supported types: danger, info, success, warning. Default: info.
 **title** | Adds a title section to the hint.
@@ -117,7 +117,7 @@ Indicators are simple reporting element that have a title, a value and a descrip
 
 The pie chart outputs information as a circle diagram, with optional label in the center. Example markup:
 
-    <div 
+    <div
         class="control-chart centered wrap-legend"
         data-control="chart-pie"
         data-size="200"
@@ -136,7 +136,7 @@ The pie chart outputs information as a circle diagram, with optional label in th
 
 The next example shows a bar chart markup. The **wrap-legend** class is optional, it manages the legend layout. The **data-height** and **data-full-width** attributes are optional as well.
 
-    <div 
+    <div
         class="control-chart wrap-legend"
         data-control="chart-bar"
         data-height="100"

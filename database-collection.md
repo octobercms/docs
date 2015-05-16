@@ -64,7 +64,7 @@ The next example will combine the User, Post and Comment models in to a single c
     $feed->add('user', new User);
     $feed->add('post', Post::where('category_id', 7));
 
-    $feed->add('comment', function(){
+    $feed->add('comment', function() {
         $comment = new Comment;
         return $comment->where('approved', true);
     });

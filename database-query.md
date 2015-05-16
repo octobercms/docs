@@ -70,6 +70,6 @@ The `all()` method returns all records from the database.
 
     $posts = Acme\Blog\Models\Post::all();
 
-The `lists()` method will flatten the result as an array.  In the next example the lists() method returns an array where the key is the **id** and value is the **name**, eg: `Array ( [1] => Name ) `.
+The `lists()` method will flatten the result as an array. In the next example the lists() method returns an array where the key is the **id** and value is the **name**, eg: `Array ( [1] => Name ) `.
 
     $posts = Acme\Blog\Models\Post::lists('name', 'id');

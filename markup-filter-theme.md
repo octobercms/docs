@@ -34,7 +34,7 @@ The asset combiner supports common aliases that substitute file paths, these wil
 
 The following aliases are supported:
 
-Alias  | Description
+Alias | Description
 ------------- | -------------
 `@jquery` | Reference to the jQuery library used in the back-end. (JavaScript)
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
@@ -51,7 +51,7 @@ In some cases you may wish to combine a file outside the theme, this is achieved
 
 These symbols are supported for creating dynamic paths:
 
-Symbol  | Description
+Symbol | Description
 ------------- | -------------
 `$` | Relative to the plugins directory
 `~` | Relative to the application directory
