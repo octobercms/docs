@@ -153,7 +153,6 @@ Next this will demonstrate how to hook to this new event from inside the [page e
     [topic]
     slug = "{{ :slug }}"
     ==
-    <?php
     function onInit()
     {
         $this['topic']->bindEvent('topic.post', function($post, $postUrl) {

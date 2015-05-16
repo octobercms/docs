@@ -77,12 +77,10 @@ For example:
     url = "/blog"
     layout = "default"
     ==
-   <?php
     function onStart()
     {
         $this['posts'] = ...;
     }
-    ?>
     ==
     <h3>Blog archive</h3>
     {% for post in posts %}
@@ -109,7 +107,7 @@ The code in the PHP section executes every time before the template is rendered.
     url = "/blog"
     layout = "default"
     ==
-    <?php
+    <?
     function onStart()
     {
         $this['posts'] = ...;
@@ -127,7 +125,7 @@ In the PHP section you can only define functions and refer to namespaces with th
     url = "/blog"
     layout = "default"
     ==
-    <?php
+    <?
     use Acme\Blog\Classes\Post;
 
     function onStart()

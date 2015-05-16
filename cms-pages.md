@@ -40,12 +40,10 @@ This is how you can access the URL parameter from the page PHP section (see the 
 
     url = "/blog/post/:post_id"
     ==
-    <?php
     function onStart()
     {
         $post_id = $this->param('post_id');
     }
-    ?>
     ==
 
 Parameter names should be compatible with PHP variable names. To make a parameter optional add the question mark after its name:
@@ -82,12 +80,10 @@ There are special functions that can be defined in the PHP section of pages and 
 
     url = "/"
     ==
-    <?php
     function onStart()
     {
         $this['hello'] = "Hello world!";
     }
-    ?>
     ==
     <h3>{{ hello }}</h3>
 
@@ -95,14 +91,12 @@ The next example is more complicated. It shows how to load a blog post collectio
 
     url = "/blog"
     ==
-    <?php
     use Acme\Blog\Classes\Post;
 
     function onStart()
     {
       $this['posts'] = Post::orderBy('created_at', 'desc')->get();
     }
-    ?>
     ==
     <h2>Latest posts</h2>
     <ul>
