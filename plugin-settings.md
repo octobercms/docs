@@ -166,3 +166,17 @@ A plugin configuration can be overridden by the application by creating a config
     return [
         'maxItems' => 20
     ];
+
+If you want to use seperate configurations across different environments (eg: **dev**, **production**), simply create another file in `config/author/plugin/environment/config.php`. Replace **environment** with the environment name. This will be merged with `config/author/plugin/config.php`.
+
+Example:
+
+**config/author/plugin/production/config.php:**
+
+    <?php
+
+    return [
+        'maxItems' => 25
+    ];
+
+This will set `maxItems` to 25 when `APP_ENV` is set to **production**.
