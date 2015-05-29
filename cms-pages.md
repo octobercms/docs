@@ -114,8 +114,8 @@ The default variables and Twig extensions provided by October are described in t
 You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](ajax) article). Use the [form_open()](markup#standard-form) function to define a form that refers to an event handler. Example:
 
     {{ form_open({ request: 'onHandleForm' }) }}
-        Please enter a string: <input type="text" name="value"/>
-        <input type="submit" value="Submit me!"/>
+        Please enter a string: <input type="text" name="value">
+        <input type="submit" value="Submit me!">
     {{ form_close() }}
     <p>Last submitted value: {{ lastValue }}</p>
 
