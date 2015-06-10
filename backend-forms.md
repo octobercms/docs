@@ -473,9 +473,10 @@ Option | Description
 Option | Description
 ------------- | -------------
 **mode** | the expected file type, either file or image. Default: file.
-**imageWidth** | if using image type, the image will be resized to this width.
-**imageWidth** | if using image type, the image will be resized to this height.
+**imageWidth** | if using image type, the image will be resized to this width, optional.
+**imageWidth** | if using image type, the image will be resized to this height, optional.
 **fileTypes** | file extensions that are accepted by the uploader, optional. Eg: zip,txt
+**useCaption** | allows a title and description to be set for the file. Default: true
 
 <a name="widget-recordfinder" class="anchor" href="#widget-recordfinder"></a>
 ### Record finder
