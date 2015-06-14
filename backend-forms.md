@@ -414,6 +414,7 @@ There are various form widgets included as standard, although it is common for p
 - [Date picker](#widget-datepicker)
 - [File upload](#widget-fileupload)
 - [Record finder](#widget-recordfinder)
+- [Media finder](#widget-mediafinder)
 - [Relation](#widget-relation)
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
@@ -497,6 +498,21 @@ Option | Description
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
 **list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
+
+<a name="widget-mediafinder" class="anchor" href="#widget-mediafinder"></a>
+### Media finder
+
+`mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
+
+    background_image:
+        label: Background image
+        type: mediafinder
+        mode: image
+
+Option | Description
+------------- | -------------
+**mode** | the expected file type, either file or image. Default: file.
+**prompt** | text to display when there is no item selected. The `%s` character represents the media manager icon.
 
 <a name="widget-relation" class="anchor" href="#widget-relation"></a>
 ### Relation
