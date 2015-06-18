@@ -48,7 +48,7 @@ The `$table` protected field specifies the database table corresponding the mode
 <a name="relationships" class="anchor" href="#relationships"></a>
 ## Relationships
 
-October models allow you to define [relationships](http://laravel.com/docs/eloquent#relationships) with the model class properties. The following relations types are available:
+October models allow you to define [relationships](http://laravel.com/docs/eloquent-relationships) with the model class properties. The following relations types are available:
 
 - [Belongs to](#relation-belongsto)
 - [Belongs to many](#relation-belongstomany)
