@@ -181,12 +181,13 @@ Option | Description
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
 **span** | aligns the form field to one side. Options: auto, left, right, full. Default: auto.
-**size** | specifies a field size for fields that use it (for example the text area). Options: tiny, small, large, huge, giant.
+**size** | specifies a field size for fields that use it (for example the textarea). Options: tiny, small, large, huge, giant.
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
 **default** | specifies the default value for the field.
 **defaultFrom** | takes the default value from the value of another field.
+**maxlength** | number of characters. It works only the text, number and password fields. Default: 255.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
 **disabled** | grays out the field if set to true. Options: true, false.
