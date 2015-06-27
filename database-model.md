@@ -82,6 +82,7 @@ Argument | Description
 **scope** | filters the relation using a supplied scope method.
 **push** | if set to false, this relation will not be saved via `push()`, default: true.
 **delete** | if set to true, the related model will be deleted if the relationship is destroyed, default: false.
+**count** | if set to true, the result contains a `count` column only, used for counting relations, default false.
 
 Example filter using **order** and **conditions**:
 
@@ -112,6 +113,13 @@ Example filter using **scope**:
             return $query->where('is_active', 1)->orderBy('name', 'desc');
         }
     }
+
+Example filter using **count**:
+
+    public $belongsToMany = [
+        'users' => ['Backend\Models\User'],
+        'users_count' => ['Backend\Models\User', 'count' => true]
+    ];
 
 <a name="relation-belongsto" class="anchor" href="#relation-belongsto"></a>
 ### Belongs to

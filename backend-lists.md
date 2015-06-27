@@ -134,7 +134,7 @@ Option | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
 **type** | defines how this column should be rendered (see [Column types](#column-types) below).
-**options** | options used by a render type used (optional).
+**default** | specifies the default value for the column if value is empty.
 **searchable** | include this column in the list search results. Default: no.
 **invisible** | specifies if this column is hidden by default. Default: no.
 **sortable** | specifies if this column can be sorted. Default: yes.
@@ -247,6 +247,14 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Group
         relation: groups
         select: name
+
+If the [relationship definition](../database/model#relationships) uses the **count** argument, you can display the number of related records using the `nameFrom` and `default` options.
+
+    users_count:
+        label: Users
+        relation: users_count
+        valueFrom: count
+        default: 0
 
 <a name="column-partial" class="anchor" href="#column-partial"></a>
 ### Partial
