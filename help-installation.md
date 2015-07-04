@@ -46,6 +46,10 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 1. **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 
+1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the files and folders. For example, running the command `chmod -R 777 *` can fix it.
+
+1. **MySQL shows an error "Syntax error or access violation: 1067 Invalid default value for ..."**: Check your MySQL settings file to make sure the `NO_ZERO_DATE` setting is disabled.
+
 > **Note:** A detailed installation log can be found in the `install_files/install.log` file.
 
 <a name="command-line-installation" class="anchor" href="#command-line-installation"></a>

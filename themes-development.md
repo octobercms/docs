@@ -64,7 +64,7 @@ The theme preview image is used in the back-end theme selector. The image file *
           images/
             theme-preview.png    <=== Theme preview image
 
-The image width should be at least 600 px. The ideal aspect ratio is 1.5, for example 600x400px.
+The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
 
 <a name="customization" class="anchor" href="#customization"></a>
 ## Theme customization

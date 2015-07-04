@@ -393,7 +393,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 
     content:
         type: hint
-        path: $/acme/blog/models/comments/_content_field.htm
+        path: content_field
 
 <a name="field-widget" class="anchor" href="#field-widget"></a>
 ### Widget
