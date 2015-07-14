@@ -1,4 +1,4 @@
-# Databause structure and updates
+# Database structure and updates
 
 - [Updates files](#update-files)
 - [Update process](#update-process)
