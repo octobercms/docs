@@ -698,7 +698,7 @@ Option | Description
 ------------- | -------------
 **action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
 **field** | defines the other field name that will trigger the action.
-**condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, value[somevalue].
+**condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
 
 <a name="field-dependencies" class="anchor" href="#field-dependencies"></a>
 ### Field dependencies

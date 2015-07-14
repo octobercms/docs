@@ -270,13 +270,15 @@ Plugins keep a change log inside the **/updates** directory to maintain version 
 The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). An example Plugin version file:
 
     1.0.1:
-        - First version
+        - First version.
         - create_tables.php
         - seed_the_database.php
-    1.0.2: Small fix that uses no scripts
-    1.0.3: Another minor fix
+    1.0.2: Small fix that uses no scripts.
+    1.0.3: Another minor fix.
     1.0.4:
-        - Creates another table for this new feature
+        - Creates another table for this new feature.
         - create_another_table.php
 
 > **Note:** To apply plugin updates during development, log out of the back-end and sign in again. The plugin version history is applied when an administrator signs in to the back-end. Plugin updates are applied automatically for plugins installed from the Marketplace when you update the system.
+
+More information on the plugin version file can be found in the [database structure article](../database/structure#update-files).

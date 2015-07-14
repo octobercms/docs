@@ -1,4 +1,4 @@
-# Table Structure
+# Databause structure and updates
 
 - [Updates files](#update-files)
 - [Update process](#update-process)
@@ -22,24 +22,50 @@ Database tables and seed data is managed using a version information file `versi
             some_seeding_file.php        <=== Seeding script
             some_upgrade_file.php        <=== Seeding script
 
-The version information file defines the plugin version and refers to the migration and seeding files. All migration and seeding files should be associated with a plugin version. Example of the version.yaml file:
+The version information file defines the plugin version and refers to the migration and seeding files. All migration and seeding files should be associated with a plugin version. Example of the **version.yaml** file:
 
     1.0.1:
-        - Added some upgrade file and some seeding
+        - Added some upgrade file and some seeding.
         - some_upgrade_file.php
         - some_seeding_file.php
     1.0.2:
-        - Create blog post comments table
+        - Create blog post comments table.
         - create_comments_table.php
-    1.0.3: Bug fix update that uses no scripts
-    1.0.4: Another fix
+    1.0.3: Bug fix update that uses no scripts.
+    1.0.4: Another fix.
     1.0.5:
-        - Create blog settings table
+        - Create blog settings table.
         - create_blog_settings_table.php
 
 For updates that refer to migration or seeding files, the first line is always the comment, then subsequent lines are script file names.
 
-> **Note:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
+An example of a comment with no associated update files:
+
+    1.0.1: A single comment that uses no update scripts.
+    1.0.2:
+        - Alternative comment with no update files.
+
+An update line with a comment and update scripts:
+
+    1.0.3:
+        - This update will execute the two scripts below.
+        - some_upgrade_file.php
+        - some_seeding_file.php
+
+<a name="important-updates" class="anchor" href="#important-updates"></a>
+### Important updates
+
+Sometimes a plugin needs to introduce features that will break websites already using the plugin. If an update comment in the **version.yaml** file begins with three exclamation marks (`!!!`) then it will be considered *Important* and will require the user to confirm before updating. An example of an important update comment:
+
+    1.1.0: !!! This is an important update that contains breaking changes.
+
+When the system detects an important update it will provide three options to proceed:
+
+1. Confirm update
+1. Skip this plugin (once only)
+1. Skip this plugin (always)
+
+Confirming the comment will update the plugin as usual, or if the comment is skipped it will not be updated.
 
 <a name="update-process" class="anchor" href="#update-process"></a>
 ## Update process
@@ -53,6 +79,8 @@ Any given [update file](#update-files) will only be applied once after a success
 3. When the console command `php artisan october:up` is called in the command line from the application directory.
 
 Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
+
+> **Note:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 
 <a name="migration-files" class="anchor" href="#migration-files"></a>
 ## Migration files
