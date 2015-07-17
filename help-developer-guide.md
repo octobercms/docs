@@ -186,7 +186,7 @@ Where possible events should cover global and local versions. Global events shou
 
 Avoid using terms such as *onSomething* in event names since the word *bind*/*fire* represent this action word.
 
-It is good practise to always pass the calling object as the first parameter to the global event, the local event should not need this. Local events take priority over global events.
+It is good practise to always pass the calling object as the first parameter to the global event, the local event should not need this. Local events take priority over global events when halting, or come first when processing.
 
     // Local event
     if ($this->fireEvent('beforeAddContent', [$message, $view], true) === false)
@@ -196,10 +196,22 @@ It is good practise to always pass the calling object as the first parameter to 
     if (Event::fire('mailer.beforeAddContent', [$this, $message, $view], true) === false)
         return;
 
-When expecting results, it is easy to combine the arrays like so:
+When expecting multiple results, it is easy to combine the arrays like so:
 
     // Combine local and global event results
-    $eventResults = $this->fireEvent('form.beforeRefresh', [$saveData]) + Event::fire('backend.form.beforeRefresh', [$this, $saveData]);
+    $eventResults = array_merge(
+        $this->fireEvent('form.beforeRefresh', [$saveData]),
+        Event::fire('backend.form.beforeRefresh', [$this, $saveData])
+    );
+
+When processing or filtering over a value, use the data holder pattern:
+
+    $dataHolder = (object) ['content' => $content];
+
+    $this->fireEvent('cms.processContent', [$dataHolder]);
+    Event::fire('cms.processContent', [$this, $dataHolder]);
+
+    return $dataHolder->content;
 
 <a name="db-table-naming" class="anchor" href="#db-table-naming"></a>
 ### Database table naming
