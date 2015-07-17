@@ -204,14 +204,14 @@ When expecting multiple results, it is easy to combine the arrays like so:
         Event::fire('backend.form.beforeRefresh', [$this, $saveData])
     );
 
-When processing or filtering over a value, use the data holder pattern:
+When processing or filtering over a value, use the data holder pattern to pass the value by reference:
 
     $dataHolder = (object) ['content' => $content];
 
     $this->fireEvent('cms.processContent', [$dataHolder]);
     Event::fire('cms.processContent', [$this, $dataHolder]);
 
-    return $dataHolder->content;
+    $content = $dataHolder->content;
 
 <a name="db-table-naming" class="anchor" href="#db-table-naming"></a>
 ### Database table naming
