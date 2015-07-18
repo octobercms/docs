@@ -498,14 +498,19 @@ Attach a prepared File object:
 <a name="viewing-attachments" class="anchor" href="#viewing-attachments"></a>
 ### Viewing attachments
 
-The `getPath()` method returns the full URL of an uploaded public file. The following code would print something like **http://mysite.com/uploads/public/path/to/avatar.jpg**
+The `getPath()` method returns the full URL of an uploaded public file. The following code would print something like **...mysite.com/uploads/public/path/to/avatar.jpg**
 
     echo $model->avatar->getPath();
 
 Returning multiple attachment file paths:
 
-    foreach ($model->photos as $photo)
+    foreach ($model->photos as $photo) {
         echo $photo->getPath();
+    }
+
+The `getLocalPath()` method will return an absolute path of an uploaded file in the local filesystem.
+
+    echo $model->avatar->getLocalPath();
 
 To output the file contents directly, use the `output()` method, this will include the necessary headers for downloading the file:
 
@@ -553,8 +558,9 @@ Process the uploaded file on the server and attach it to a model:
     $post = Post::find(1);
 
     // Save the featured image of the Blog Post model
-    if (Input::hasFile('example_file'))
+    if (Input::hasFile('example_file')) {
         $post->featured_image = Input::file('example_file');
+    }
 
 Alternatively you use the [deferred binding](#deferred-binding):
 
@@ -565,8 +571,9 @@ Alternatively you use the [deferred binding](#deferred-binding):
     $fileFromPost = Input::file('example_file');
 
     // If it exists, save it as the featured image with a deferred session key
-    if ($fileFromPost)
+    if ($fileFromPost) {
         $post->featured_image()->create(['data' => $fileFromPost], $sessionKey);
+    }
 
 Display the uploaded file on a page:
 
@@ -574,10 +581,12 @@ Display the uploaded file on a page:
     $post = Post::find(1);
 
     // Look for the featured image address, otherwise use a default one
-    if ($post->featured_image)
+    if ($post->featured_image) {
         $featuredImage = $post->featured_image->getPath();
-    else
+    }
+    else {
         $featuredImage = 'http://placehold.it/220x300';
+    }
 
     <img src="<?= $featuredImage ?>" alt="Featured Image">
 

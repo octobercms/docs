@@ -206,11 +206,10 @@ When expecting multiple results, it is easy to combine the arrays like so:
 
 When processing or filtering over a value, use the data holder pattern to pass the value by reference:
 
+    // Pass content to events by reference
     $dataHolder = (object) ['content' => $content];
-
     $this->fireEvent('cms.processContent', [$dataHolder]);
     Event::fire('cms.processContent', [$this, $dataHolder]);
-
     $content = $dataHolder->content;
 
 <a name="db-table-naming" class="anchor" href="#db-table-naming"></a>
