@@ -4,12 +4,13 @@
 - [Defining list columns](#list-columns)
 - [Available column types](#column-types)
 - [Displaying the list](#displaying-list)
+- [Multiple list definitions](#multiple-list-definitions)
 - [Using list filters](#list-filters)
 - [Extending list behavior](#extend-list-behavior)
 
-`List behavior` is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records.
+**List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index()` however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` field of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 
@@ -268,9 +269,23 @@ If the [relationship definition](../database/model#relationships) uses the **cou
 <a name="displaying-list" class="anchor" href="#displaying-list"></a>
 ## Displaying the list
 
-Usually lists are displayed in the index [view](controllers-views-ajax/#introduction). As lists include the toolbar, a view can consist from the single `listRender()` method call:
+Usually lists are displayed in the index [view](controllers-views-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender()` method call.
 
     <?= $this->listRender() ?>
+
+<a name="multiple-list-definitions" class="anchor" href="#multiple-list-definitions"></a>
+## Multiple list definitions
+
+The list behavior can support mulitple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
+
+    public $listConfig = [
+        'templates' => 'config_templates_list.yaml',
+        'layouts' => 'config_layouts_list.yaml'
+    ];
+
+Each definition can then be displayed by passing the definition name as the first argument when calling the `listRender()` method:
+
+    <?= $this->listRender('templates') ?>
 
 <a name="list-filters" class="anchor" href="#list-filters"></a>
 ## Using list filters
