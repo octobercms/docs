@@ -2,6 +2,8 @@
 
 - [Configuring the behavior](#configuring-import-export)
 - [Import and export views](#import-export-views)
+- [Import model](#import-model)
+- [Export model](#export-model)
 
 **Import Export behavior** is a controller modifier that provides features for importing and exporting data. The behavior provies two pages called Import and Export. The Import page allows a user to upload a CSV file and match the columns to the database. The Export page is the opposite and allows a user to download columns from the database as a CSV file. The behavior provides the controller actions `import()` and `export()`.
 
@@ -144,3 +146,39 @@ The **export.htm** view represents the Export page that allows users to export a
         </div>
 
     <?= Form::close() ?>
+
+<a name="import-model" class="anchor" href="#import-model"></a>
+## Import model
+
+For importing data you should create a dedicated model for this process which extends the `Backend\Models\ImportModel` class. Here is an example class definition:
+
+    class SubscriberImport extends \Backend\Models\ImportModel
+    {
+        public $table = 'acme_campaign_subscribers';
+
+        public function importData($results, $sessionKey = null)
+        {
+            foreach ($results as $row => $data) {
+                $subscriber = new self;
+                $subscriber->fill($data);
+                $subscriber->save();
+
+                $this->logCreated();
+            }
+        }
+    }
+
+The class must define a method called `importData()` used for processing the imported data. The first parameter `$results` will contain an array containing the data to import. The second parameter `$sessionKey` will contain the session key used for the request.
+
+Method | Description
+------------- | -------------
+`logUpdated` | Called when a record is updated.
+`logCreated` | Called when a record is created.
+`logError(rowIndex, message)` | Called when there is a problem with importing the record.
+`logWarning(rowIndex, message)` | Used to provide a soft warning, like modifying a value.
+`logSkipped(rowIndex, message)` | Used when the entire row of data was not imported (skipped).
+
+<a name="export-model" class="anchor" href="#export-model"></a>
+## Export model
+
+TBA

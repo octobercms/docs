@@ -247,6 +247,35 @@ The fully qualified plugin name is also acceptable, for example:
 
     $user->rainlab_forum_member
 
+<a name="model-scopes" class="anchor" href="#model-scopes"></a>
+### Model scopes
+
+If a model scope returns a query object, used for chaining, they should generally be prefix with `apply` to indicate they are being applied to the query. Defined as:
+
+    public function scopeApplyUser($query, $user)
+    {
+        return $query->where('user_id', $user->id);
+    }
+
+Then applied to the model as:
+
+    $model->applyUser($user);
+
+Whilst `apply` is the ideal prefix name, here are some other prefixes we recommended for chained scopes:
+
+    - is
+    - for
+    - with
+    - without
+    - filter
+
+If a scope returns anything other than a query then any name can be used. Some acceptable names for non-chained scopes:
+
+    - find
+    - get
+    - list
+    - lists
+
 <a name="class-guide" class="anchor" href="#class-guide"></a>
 ### Class guidance
 
