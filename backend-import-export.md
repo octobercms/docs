@@ -2,8 +2,8 @@
 
 - [Configuring the behavior](#configuring-import-export)
 - [Import and export views](#import-export-views)
-- [Import model](#import-model)
-- [Export model](#export-model)
+- [Defining an import model](#import-model)
+- [Defining an export model](#export-model)
 
 **Import Export behavior** is a controller modifier that provides features for importing and exporting data. The behavior provies two pages called Import and Export. The Import page allows a user to upload a CSV file and match the columns to the database. The Export page is the opposite and allows a user to download columns from the database as a CSV file. The behavior provides the controller actions `import()` and `export()`.
 
@@ -109,15 +109,14 @@ The **import.htm** view represents the Import page that allows users to import d
         </div>
 
         <div class="form-buttons">
-            <div class="loading-indicator-container">
-                <button
-                    type="submit"
-                    data-request="onImport"
-                    data-load-indicator="Importing..."
-                    class="btn btn-primary">
-                    Import records
-                </button>
-            </div>
+            <button
+                type="submit"
+                data-control="popup"
+                data-handler="onImportLoadForm"
+                data-keyboard="false"
+                class="btn btn-primary">
+                Import records
+            </button>
         </div>
 
     <?= Form::close() ?>
@@ -148,22 +147,27 @@ The **export.htm** view represents the Export page that allows users to export a
     <?= Form::close() ?>
 
 <a name="import-model" class="anchor" href="#import-model"></a>
-## Import model
+## Defining an import model
 
 For importing data you should create a dedicated model for this process which extends the `Backend\Models\ImportModel` class. Here is an example class definition:
 
     class SubscriberImport extends \Backend\Models\ImportModel
     {
-        public $table = 'acme_campaign_subscribers';
-
         public function importData($results, $sessionKey = null)
         {
             foreach ($results as $row => $data) {
-                $subscriber = new self;
-                $subscriber->fill($data);
-                $subscriber->save();
 
-                $this->logCreated();
+                try {
+                    $subscriber = new Subscriber;
+                    $subscriber->fill($data);
+                    $subscriber->save();
+
+                    $this->logCreated();
+                }
+                catch (\Exception) {
+                    $this->logError($row, $ex->getMessage());
+                }
+
             }
         }
     }
@@ -172,13 +176,49 @@ The class must define a method called `importData()` used for processing the imp
 
 Method | Description
 ------------- | -------------
-`logUpdated` | Called when a record is updated.
-`logCreated` | Called when a record is created.
+`logUpdated()` | Called when a record is updated.
+`logCreated()` | Called when a record is created.
 `logError(rowIndex, message)` | Called when there is a problem with importing the record.
 `logWarning(rowIndex, message)` | Used to provide a soft warning, like modifying a value.
 `logSkipped(rowIndex, message)` | Used when the entire row of data was not imported (skipped).
 
+<a name="import-custom-options" class="anchor" href="#import-custom-options"></a>
+### Custom import options
+
+You can pass custom values to the import model by specifying form fields in the **form** option in the export configuration.
+
+    export:
+        [...]
+        form: $/acme/campaign/models/subscriberexport/fields.yaml
+
+The form fields defined in this file will appear in Step 3 of the import process called *Import Options*. The field values are then available to the Import model during the import process, here is an example `fields.yaml` file contents:
+
+    # ===================================
+    #  Form Field Definitions
+    # ===================================
+
+    fields:
+
+        auto_create_lists:
+            label: Automatically create lists
+            type: checkbox
+            default: true
+
+The value of the **auto_create_lists** field is available as `$this->auto_create_lists` inside the `importData()` method:
+
+    class SubscriberImport extends \Backend\Models\ImportModel
+    {
+        public function importData($results, $sessionKey = null)
+        {
+            if ($this->auto_create_lists) {
+                // Do something
+            }
+
+            [...]
+        }
+    }
+
 <a name="export-model" class="anchor" href="#export-model"></a>
-## Export model
+## Defining an export model
 
 TBA
