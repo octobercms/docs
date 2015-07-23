@@ -4,6 +4,7 @@
 - [Import and export views](#import-export-views)
 - [Defining an import model](#import-model)
 - [Defining an export model](#export-model)
+- [Custom options](#custom-options)
 
 **Import Export behavior** is a controller modifier that provides features for importing and exporting data. The behavior provides two pages called Import and Export. The Import page allows a user to upload a CSV file and match the columns to the database. The Export page is the opposite and allows a user to download columns from the database as a CSV file. The behavior provides the controller actions `import()` and `export()`.
 
@@ -183,42 +184,6 @@ Method | Description
 `logWarning(rowIndex, message)` | Used to provide a soft warning, like modifying a value.
 `logSkipped(rowIndex, message)` | Used when the entire row of data was not imported (skipped).
 
-<a name="import-custom-options" class="anchor" href="#import-custom-options"></a>
-### Custom import options
-
-You can pass custom values to the import model by specifying form fields in the **form** option in the export configuration.
-
-    export:
-        [...]
-        form: $/acme/campaign/models/subscriberexport/fields.yaml
-
-The form fields defined in this file will appear in Step 3 of the import process called *Import Options*. The field values are then available to the Import model during the import process, here is an example `fields.yaml` file contents:
-
-    # ===================================
-    #  Form Field Definitions
-    # ===================================
-
-    fields:
-
-        auto_create_lists:
-            label: Automatically create lists
-            type: checkbox
-            default: true
-
-The value of the **auto_create_lists** field is available as `$this->auto_create_lists` inside the `importData()` method:
-
-    class SubscriberImport extends \Backend\Models\ImportModel
-    {
-        public function importData($results, $sessionKey = null)
-        {
-            if ($this->auto_create_lists) {
-                // Do something
-            }
-
-            [...]
-        }
-    }
-
 <a name="export-model" class="anchor" href="#export-model"></a>
 ## Defining an export model
 
@@ -233,3 +198,43 @@ For exporting data you should create a dedicated model which extends the `Backen
     }
 
 The class must define a method called `exportData()` used for returning the export data. The first parameter `$columns` is an of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
+
+<a name="custom-options" class="anchor" href="#custom-options"></a>
+### Custom options
+
+Both import and export forms support custom options that can be introduced using form fields, defined in the **form** option in the import or export configuration respectively. These values are then passed to the Import / Export model and are available during processing.
+
+    import:
+        [...]
+        form: $/acme/campaign/models/subscriberimport/fields.yaml
+
+    export:
+        [...]
+        form: $/acme/campaign/models/subscriberexport/fields.yaml
+
+The form fields specified will appear on the import/export page. Here is an example `fields.yaml` file contents:
+
+    # ===================================
+    #  Form Field Definitions
+    # ===================================
+
+    fields:
+
+        auto_create_lists:
+            label: Automatically create lists
+            type: checkbox
+            default: true
+
+The value of the form field above called **auto_create_lists** can be accessed using `$this->auto_create_lists` inside the `importData()` method of the import model. If this were the export model, the value would be available inside the `exportData()` method instead.
+
+    class SubscriberImport extends \Backend\Models\ImportModel
+    {
+        public function importData($results, $sessionKey = null)
+        {
+            if ($this->auto_create_lists) {
+                // Do something
+            }
+
+            [...]
+        }
+    }
