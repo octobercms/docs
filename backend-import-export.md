@@ -81,11 +81,12 @@ To support the Export page add the following configuration to the YAML file:
         list: $/acme/campaign/models/subscriberexport/columns.yaml
         redirect: acme/campaign/subscribers
 
-The following configuration options are supported for the Update page:
+The following configuration options are supported for the Export page:
 
 Option | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization).
+**fileName** | the file name to use for the exported file, default **export.csv**.
 **list** | defines the list columns available for exporting.
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the export is complete, optional.
@@ -221,4 +222,14 @@ The value of the **auto_create_lists** field is available as `$this->auto_create
 <a name="export-model" class="anchor" href="#export-model"></a>
 ## Defining an export model
 
-TBA
+For exporting data you should create a dedicated model which extends the `Backend\Models\ExportModel` class. Here is an example:
+
+    class SubscriberExport extends \Backend\Models\ExportModel
+    {
+        public function exportData($columns, $sessionKey = null)
+        {
+            return Subscriber::get($columns);
+        }
+    }
+
+The class must define a method called `exportData()` used for returning the export data. The first parameter `$columns` is an of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
