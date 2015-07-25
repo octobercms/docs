@@ -135,15 +135,14 @@ The **export.htm** view represents the Export page that allows users to export a
         </div>
 
         <div class="form-buttons">
-            <div class="loading-indicator-container">
-                <button
-                    type="submit"
-                    data-request="onExport"
-                    data-load-indicator="Exporting..."
-                    class="btn btn-primary">
-                    Export records
-                </button>
-            </div>
+            <button
+                type="submit"
+                data-control="popup"
+                data-handler="onExportLoadForm"
+                data-keyboard="false"
+                class="btn btn-primary">
+                Export records
+            </button>
         </div>
 
     <?= Form::close() ?>
