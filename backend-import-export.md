@@ -200,7 +200,9 @@ For exporting data you should create a dedicated model which extends the `Backen
         public function exportData($columns, $sessionKey = null)
         {
             $subscribers = Subscriber::all();
-            $subscribers->addVisible($columns);
+            $subscribers->each(function($subscriber) use ($columns) {
+                $subscriber->addVisible($columns);
+            });
             return $subscribers->toArray();
         }
     }
