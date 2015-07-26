@@ -154,6 +154,11 @@ For importing data you should create a dedicated model for this process which ex
 
     class SubscriberImport extends \Backend\Models\ImportModel
     {
+        /**
+         * @var array The rules to be applied to the data.
+         */
+        public $rules = [];
+
         public function importData($results, $sessionKey = null)
         {
             foreach ($results as $row => $data) {
