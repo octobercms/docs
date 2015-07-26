@@ -165,7 +165,7 @@ For importing data you should create a dedicated model for this process which ex
 
                     $this->logCreated();
                 }
-                catch (\Exception) {
+                catch (\Exception $ex) {
                     $this->logError($row, $ex->getMessage());
                 }
 
