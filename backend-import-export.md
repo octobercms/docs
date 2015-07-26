@@ -5,6 +5,7 @@
 - [Defining an import model](#import-model)
 - [Defining an export model](#export-model)
 - [Custom options](#custom-options)
+- [Integration with list behavior](#list-behavior-integration)
 
 **Import Export behavior** is a controller modifier that provides features for importing and exporting data. The behavior provides two pages called Import and Export. The Import page allows a user to upload a CSV file and match the columns to the database. The Export page is the opposite and allows a user to download columns from the database as a CSV file. The behavior provides the controller actions `import()` and `export()`.
 
@@ -91,6 +92,7 @@ Option | Description
 **list** | defines the list columns available for exporting.
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the export is complete, optional.
+**useList** | set to true or the value of a list definition to enable [integration with Lists](#lists-integration), default: false.
 
 <a name="import-export-views" class="anchor" href="#import-export-views"></a>
 ## Import and export views
@@ -197,14 +199,16 @@ For exporting data you should create a dedicated model which extends the `Backen
     {
         public function exportData($columns, $sessionKey = null)
         {
-            return Subscriber::get($columns);
+            $subscribers = Subscriber::all();
+            $subscribers->addVisible($columns);
+            return $subscribers->toArray();
         }
     }
 
 The class must define a method called `exportData()` used for returning the export data. The first parameter `$columns` is an of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
 
 <a name="custom-options" class="anchor" href="#custom-options"></a>
-### Custom options
+## Custom options
 
 Both import and export forms support custom options that can be introduced using form fields, defined in the **form** option in the import or export configuration respectively. These values are then passed to the Import / Export model and are available during processing.
 
@@ -242,3 +246,17 @@ The value of the form field above called **auto_create_lists** can be accessed u
             [...]
         }
     }
+
+<a name="list-behavior-integration" class="anchor" href="#list-behavior-integration"></a>
+## Integration with list behavior
+
+There is an alternative approach to exporting data that uses the [list behavior](lists) to provide the export data. In order to use this feature you should have the `Backend.Behaviors.ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
+
+    export:
+        useList: true
+
+If you are using [multiple list definitions](lists#multiple-list-definitions), then you can supply the list definition:
+
+    export:
+        useList: orders
+        fileName: orders.csv
