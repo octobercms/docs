@@ -418,6 +418,7 @@ There are various form widgets included as standard, although it is common for p
 - [Relation](#widget-relation)
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
+- [Markdown editor](#widget-markdowneditor)
 
 <a name="widget-codeeditor" class="anchor" href="#widget-codeeditor"></a>
 ### Code editor
@@ -560,6 +561,20 @@ Option | Description
     html_content:
         type: richeditor
         size: huge
+
+<a name="widget-markdowneditor" class="anchor" href="#widget-markdowneditor"></a>
+### Markdown editor
+
+`markdown` - renders a basic editor for markdown formatted text.
+
+    md_content:
+        type: markdown
+        size: huge
+        mode: split
+
+Option | Description
+------------- | -------------
+**mode** | the expected view mode, either tab or split. Default: tab.
 
 <a name="form-views" class="anchor" href="#form-views"></a>
 ## Form views
