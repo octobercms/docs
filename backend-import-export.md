@@ -71,6 +71,7 @@ Option | Description
 **list** | defines the list columns available for importing.
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the import is complete, optional
+**permissions** | user permissions needed to perform the operation, optional
 
 <a name="export-page" class="anchor" href="#export-page"></a>
 ### Export page
