@@ -95,7 +95,7 @@ The back-end settings navigation links can be extended by overriding the `regist
                 'description' => 'Manage available user countries and states.',
                 'category'    => 'Users',
                 'icon'        => 'icon-globe',
-                'url'         => Backend::url('october/user/locations'),
+                'url'         => Backend::url('acme/user/locations'),
                 'order'       => 500,
                 'keywords'    => 'geography place placement'
             ]
@@ -114,7 +114,7 @@ The following example creates a link to a settings model. Settings models is a p
                 'description' => 'Manage user based settings.',
                 'category'    => 'Users',
                 'icon'        => 'icon-cog',
-                'class'       => 'October\User\Models\Settings',
+                'class'       => 'Acme\User\Models\Settings',
                 'order'       => 500,
                 'keywords'    => 'security location',
                 'permissions' => ['acme.users.access_settings']
