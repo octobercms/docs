@@ -17,7 +17,7 @@ Layout templates reside in the **/layouts** subdirectory of a theme directory. L
         </body>
     </html>
 
-To use a layout for a [page](pages) the page should refer the layout file name (without extension) in the [Configuration](themes#configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes#subdirectories) you should specify the subdirectory name. Example page template using the default.md layout:
+To use a layout for a [page](pages) the page should refer the layout file name (without extension) in the [Configuration](themes#configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes#subdirectories) you should specify the subdirectory name. Example page template using the default.htm layout:
 
     url = "/"
     layout = "default"
