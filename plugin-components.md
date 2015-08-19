@@ -7,7 +7,7 @@
 - [AJAX handlers](#ajax-handlers)
 - [Default markup](#default-markup)
 - [Component partials](#component-partials)
-- [Injecting page assets with components](#component-assets)
+- [Injecting page assets with components](#component-assets)th
 
 Components files and directories reside in the **/components** subdirectory of a plugin directory. Each component has a PHP file defining the component class and an optional component partials directory. The component partials directory name matches the component class name written in lowercase. An example of a component directory structure:
 
@@ -42,7 +42,7 @@ The **component class file** defines the component functionality and [component 
         // This array becomes available on the page as {{ component.posts }}
         public function posts()
         {
-            return ['First Post', 'Second Post', 'Third Third'];
+            return ['First Post', 'Second Post', 'Third Post'];
         }
     }
 
@@ -202,7 +202,7 @@ Sometimes components need to create links to the website pages. For example, the
     {
             'postPage' => [
                 'title' => 'Post page',
-                'type'=>'dropdown',
+                'type' => 'dropdown',
                 'default' => 'blog/post'
             ]
     }
