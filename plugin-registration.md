@@ -231,7 +231,7 @@ October has the ability to [run automated tasks on a regular basis](http://larav
 
     public function registerSchedule($schedule)
     {
-        // Clear the cache every 10 minutes
+        // Clear the cache every 5 minutes
         $schedule->command('cache:clear')->everyFiveMinutes();
 
         // Perform a task every hour
