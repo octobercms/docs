@@ -42,7 +42,7 @@ The **component class file** defines the component functionality and [component 
         // This array becomes available on the page as {{ component.posts }}
         public function posts()
         {
-            return ['First Post', 'Second Post', 'Third Third'];
+            return ['First Post', 'Second Post', 'Third Post'];
         }
     }
 
@@ -126,7 +126,7 @@ You can also load all the properties as array:
 <a name="dropdown-properties" class="anchor" href="#dropdown-properties"></a>
 ### Dropdown properties
 
-The option list for dropdown properties can be static or dynamic. Static options are defined with the `options` element of the property definition.Example: 
+The option list for dropdown properties can be static or dynamic. Static options are defined with the `options` element of the property definition.Example:
 
     public function defineProperties()
     {
@@ -202,7 +202,7 @@ Sometimes components need to create links to the website pages. For example, the
     {
             'postPage' => [
                 'title' => 'Post page',
-                'type'=>'dropdown',
+                'type' => 'dropdown',
                 'default' => 'blog/post'
             ]
     }
