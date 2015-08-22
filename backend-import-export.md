@@ -98,7 +98,7 @@ Option | Description
 <a name="import-export-views" class="anchor" href="#import-export-views"></a>
 ## Import and export views
 
-For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](#introduction) with the corresponding name - **import.htm** and **export.htm**.
+For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-views-ajax/#introduction) with the corresponding name - **import.htm** and **export.htm**.
 
 The import/export behavior adds two methods to the controller class: `importRender()` and `exportRender()`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 
