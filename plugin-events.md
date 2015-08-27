@@ -2,6 +2,7 @@
 
 - [Subscribing to events](#subscribing-to-events)
 - [Declaring events](#declaring-events)
+- [Extending back-end views](#backend-view-events)
 - [Usage examples](#usage-examples)
 
 Events are an easy way to extend the functionality of core classes and other plugins, this methodology can sometimes be referred to as *hooks and triggers*. Events in October can be either local to the class using the `fireEvent()` method, or global to the application using the `Event::fire()` static method. Global events usage is taken directly from [Laravel events](http://laravel.com/docs/events). In order to use Local events the class should use the `October\Rain\Support\Traits\Emitter` trait.
@@ -54,6 +55,23 @@ Once this event has been subscribed to, the parameters are available in the hand
     $this->bindEvent('blog.beforePost', function($param1, $param2) {
         echo 'Parameters: ' . $param1 . ' ' . $param2;
     });
+
+<a name="backend-view-events" class="anchor" href="#backend-view-events"></a>
+## Extending back-end views
+
+Sometimes you may wish to allow a back-end view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent()` method found in all back-end controllers.
+
+Place this code in your view file:
+
+    <?= $this->fireViewEvent('backend.auth.extendSigninView') ?>
+
+This will allow other plugins to inject HTML to this area by hooking the event and returning the desired markup.
+
+    Event::listen('backend.auth.extendSigninView', function($controller) {
+        return '<a href="#">Sign in with Google!</a>';
+    });
+
+> **Note**: The first parameter in the event handler will always be the calling object (the controller).
 
 <a name="usage-examples" class="anchor" href="#usage-examples"></a>
 ## Usage examples
