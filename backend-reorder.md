@@ -1,6 +1,7 @@
 # Backend sorting and reordering
 
 - [Configuring the reorder behavior](#configuring-reorder)
+- [Configuring DataBase](#configuring-database)
 - [Displaying the reorder page](#reorder-display)
 
 **Reorder behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder()`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
@@ -9,6 +10,19 @@ The behavior depends on a [model class](../database/model) which must implement 
 
 1. `October\Rain\Database\Traits\Sortable`
 1. `October\Rain\Database\Traits\NestedTree`
+
+Model Example :
+    
+    namespace Acme\Shop\Models;
+    
+    use Model;
+    
+    class Category extends Model
+    {
+    	use \October\Rain\Database\Traits\Sortable;
+    
+        // [...]
+    }
 
 In order to use the reorder behavior you should add it to the `$implement` property of the controller class. Also, the `$reorderConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
@@ -24,6 +38,23 @@ In order to use the reorder behavior you should add it to the `$implement` prope
 
         // [...]
     }
+
+<a name="configuring-database" class="anchor" href="#configuring-reorder"></a>
+## Configuring DataBase
+
+In your sortable database table you need to add this **integer** field 
+
+-  `sort_order`
+
+> **Note:** If table has records, add sort order manually.
+
+In your nested tree database table you need to add these **integer** fields 
+
+- `parent_id`
+- `nest_left`
+- `nest_right`
+
+> **Note:** To work correctly add fields on empty table.
 
 <a name="configuring-reorder" class="anchor" href="#configuring-reorder"></a>
 ## Configuring the behavior
