@@ -666,7 +666,7 @@ If you are unable to supply the `$sessionKey` when saving, you can commit the bi
 
 Destroys all bindings that have not been committed and are older than 1 day:
 
-    October\Rain\Database\DeferredBinding::cleanUp(1);
+    October\Rain\Database\Models\DeferredBinding::cleanUp(1);
 
 > **Note:** October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
 
