@@ -460,6 +460,12 @@ Option | Description
 **minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 
+You need to add the attribute modifier to the model:
+
+    protected $dates = ['published_at'];
+
+More information on using attribute modifiers can be found at the [Database models article](../database/model#attribute-modifiers).
+
 <a name="widget-fileupload" class="anchor" href="#widget-fileupload"></a>
 ### File upload
 
@@ -553,6 +559,12 @@ Option | Description
 ------------- | -------------
 **form** | a reference to form field definition file, see [backend form fields](forms#form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
+
+You need to add the attribute modifier to the model:
+
+    protected $jsonable = ['extra_information'];
+
+More information on using attribute modifiers can be found at the [Database models article](../database/model#attribute-modifiers).
 
 <a name="widget-richeditor" class="anchor" href="#widget-richeditor"></a>
 ### Rich editor / WYSIWYG
