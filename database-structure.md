@@ -85,7 +85,7 @@ Updates are applied in a specific order, based on the [defined dependencies in t
 <a name="migration-files" class="anchor" href="#migration-files"></a>
 ## Migration files
 
-October migrations use the Laravel's [Schema Builder](http://laravel.com/docs/schema). The migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class. The class should define two public methods - `up()` and `down()`.  The class name should match the script file name written in CamelCase. Inside the migration files the `Author\Plugin\Updates` [namespace](../plugin/registration#namespaces) should be used. An example of a structure file:
+October migrations use the Laravel's [Schema Builder](http://laravel.com/docs/5.0/schema). The migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class. The class should define two public methods - `up()` and `down()`.  The class name should match the script file name written in CamelCase. Inside the migration files the `Author\Plugin\Updates` [namespace](../plugin/registration#namespaces) should be used. An example of a structure file:
 
     namespace Acme\Blog\Updates;
 
