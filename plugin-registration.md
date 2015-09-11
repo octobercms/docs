@@ -7,14 +7,13 @@
 - [Extending Twig](#extending-twig)
 - [Navigation menus](#navigation-menus)
 - [Scheduled tasks](#scheduled-tasks)
-- [Migrations and version history](#migrations-version-history)
 
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
 
 1. Define [components](components).
 1. Define [user permissions](../backend/users).
 1. Add [settings pages](settings#backend-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
-1. Create [database table structures and seed data](#migrations-version-history).
+1. Create [database table structures and seed data](updates).
 1. Alter [functionality of the core or other plugins](events).
 1. Provide classes, [back-end controllers](../backend/controllers-views-ajax), views, assets, and other files.
 
@@ -42,7 +41,7 @@ Not all plugin directories are required. The only required file is the **Plugin.
           components/
           Plugin.php     <=== Plugin registration file
 
-> **Note:** if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](#migrations-version-history) file is required.
+> **Note:** if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
 
 <a name="namespaces" class="anchor" href="#namespaces"></a>
 ### Plugin namespaces
@@ -155,7 +154,7 @@ A plugin can depend upon other plugins by defining a `$require` property in the 
         [...]
     }
 
-Dependency definitions will affect how the plugin operates and [how the update process applies updates](../database/structure#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
+Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 
@@ -253,32 +252,3 @@ Method | Description
 **monthly()** | Run once a month at midnight in the morning of the first day of the month
 **yearly()** | Run once a year at midnight in the morning of January 1
 
-<a name="migrations-version-history" class="anchor" href="#migrations-version-history"></a>
-## Migrations and version history
-
-Plugins keep a change log inside the **/updates** directory to maintain version information and database structure. An example of an updates directory structure:
-
-    plugins/
-      author/
-        myplugin/
-          updates/                      <=== Updates directory
-            version.yaml                <=== Plugin version file
-            create_tables.php           <=== Database scripts
-            seed_the_database.php       <=== Migration file
-            create_another_table.php    <=== Migration file
-
-The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). An example Plugin version file:
-
-    1.0.1:
-        - First version.
-        - create_tables.php
-        - seed_the_database.php
-    1.0.2: Small fix that uses no scripts.
-    1.0.3: Another minor fix.
-    1.0.4:
-        - Creates another table for this new feature.
-        - create_another_table.php
-
-> **Note:** To apply plugin updates during development, log out of the back-end and sign in again. The plugin version history is applied when an administrator signs in to the back-end. Plugin updates are applied automatically for plugins installed from the Marketplace when you update the system.
-
-More information on the plugin version file can be found in the [database structure article](../database/structure#update-files).

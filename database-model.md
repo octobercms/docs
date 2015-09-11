@@ -171,7 +171,7 @@ The above example shows the inverse relationship where the Category model also b
         $table->primary(['post_id', 'category_id']);
     });
 
-This above code shows the [database table structure](../database/structure#migration-files) used to create the join *table*. The two key names are generated automatically from the context of the defining model. In context of the Post model, the *key* column is generated as `post_id` and the *otherKey* column is `category_id`. However, these can be defined explicitly too:
+This above code shows the [database table structure](../plugin/updates#migration-files) used to create the join *table*. The two key names are generated automatically from the context of the defining model. In context of the Post model, the *key* column is generated as `post_id` and the *otherKey* column is `category_id`. However, these can be defined explicitly too:
 
     public $belongsToMany = [
         'categories' => [
