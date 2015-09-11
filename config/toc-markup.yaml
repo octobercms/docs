@@ -1,0 +1,50 @@
+Markup:
+  icon: "icon-code"
+  pages:
+    markup/templating: "Templating"
+
+Variables:
+  icon: "icon-subscript"
+  itemClass: "code-item"
+  pages:
+    markup/this-page: "this.page"
+    markup/this-layout: "this.layout"
+    markup/this-theme: "this.theme"
+    markup/this-param: "this.param"
+    markup/this-environment: "this.environment"
+
+Tags:
+  icon: "icon-tags"
+  itemClass: "code-item"
+  pages:
+    markup/tag-partial: "{% partial %}"
+    markup/tag-content: "{% content %}"
+    markup/tag-component: "{% component %}"
+    markup/tag-placeholder: "{% placeholder %}"
+    markup/tag-scripts: "{% scripts %}"
+    markup/tag-styles: "{% styles %}"
+    markup/tag-flash: "{% flash %}"
+    markup/tag-verbatim: "{% verbatim %}"
+    markup/tag-for: "{% for %}"
+    markup/tag-if: "{% if %}"
+
+Filters:
+  icon: "icon-quote-right"
+  itemClass: "code-item"
+  pages:
+    markup/filter-app: "|app"
+    markup/filter-page: "|page"
+    markup/filter-theme: "|theme"
+    markup/filter-media: "|media"
+    markup/filter-md: "|md"
+    markup/filter-raw: "|raw"
+    markup/filter-default: "|default"
+
+Functions:
+  icon: "icon-eraser"
+  itemClass: "code-item"
+  pages:
+    markup/function-str: "str()"
+    markup/function-form: "form()"
+    markup/function-html: "html()"
+    markup/function-dump: "dump()"
