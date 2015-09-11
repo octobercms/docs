@@ -49,9 +49,9 @@ Backend:
 Database:
   icon: "icon-hdd"
   pages:
+    database/structure: "Structure"
     database/query: "Queries"
     database/model: "Models"
-    database/structure: "Structure"
     database/relations: "Relationships"
     database/collection: "Collections"
     database/mutators: "Mutators"

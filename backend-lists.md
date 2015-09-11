@@ -242,14 +242,14 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
 <a name="column-relation" class="anchor" href="#column-relation"></a>
 ### Relation
 
-`relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/model#relationships) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
+`relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
 
     group:
         label: Group
         relation: groups
         select: name
 
-If the [relationship definition](../database/model#relationships) uses the **count** argument, you can display the number of related records using the `nameFrom` and `default` options.
+If the [relationship definition](../database/relations) uses the **count** argument, you can display the number of related records using the `nameFrom` and `default` options.
 
     users_count:
         label: Users
