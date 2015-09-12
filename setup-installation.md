@@ -139,7 +139,7 @@ Paste the following code in the editor and change the **host address** and  **se
 There are some things you may need to set up after the installation is complete.
 
 - [Delete installation files](#delete-install-files)
-- [Setting up the crontab](#crontab-setup)
+- [Setting up the scheduler](#crontab-setup)
 - [Setting up queue workers](#queue-setup)
 
 <a name="delete-install-files" class="anchor" href="#delete-install-files"></a>
@@ -151,11 +151,13 @@ If you have used the [Wizard installation](#wizard-installation) you should dele
     install.php         <== Installation script
 
 <a name="crontab-setup" class="anchor" href="#crontab-setup"></a>
-### Setting up the crontab
+### Setting up the scheduler
 
-For *scheduled tasks* to operate correctly, you should add the following to your Crontab using `crontab -e` and replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October:
+For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
 
-    * * * * * php /path/to/artisan schedule:run 1>> /dev/null 2>&1
+    * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+
+Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October. This Cron will call the command scheduler every minute. Then October evaluates any scheduled tasks and runs the tasks that are due.
 
 > **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 

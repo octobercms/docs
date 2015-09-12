@@ -6,7 +6,6 @@
 - [Dependency definitions](#dependency-definitions)
 - [Extending Twig](#extending-twig)
 - [Navigation menus](#navigation-menus)
-- [Scheduled tasks](#scheduled-tasks)
 
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
 
@@ -98,7 +97,7 @@ Method | Description
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) used by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
-**registerSchedule()** | registers [scheduled tasks](#scheduled-tasks) that are executed on a regular basis.
+**registerSchedule()** | registers [scheduled tasks](#scheduling) that are executed on a regular basis.
 
 <a name="basic-plugin-information" class="anchor" href="#basic-plugin-information"></a>
 ### Basic plugin information
@@ -222,33 +221,3 @@ Plugins can extend the back-end navigation menus by overriding methods of the [P
     }
 
 When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users).
-
-<a name="scheduled-tasks" class="anchor" href="#scheduled-tasks"></a>
-## Scheduled tasks
-
-October has the ability to [run automated tasks on a regular basis](http://laravel.com/docs/5.0/artisan#scheduling-artisan-commands). A plugin can register to this service by overriding the `registerSchedule` method. The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
-
-    public function registerSchedule($schedule)
-    {
-        // Clear the cache every 5 minutes
-        $schedule->command('cache:clear')->everyFiveMinutes();
-
-        // Perform a task every hour
-        $schedule->call(function() {
-            //...
-        })->hourly();
-    }
-
-The time methods supported by `$schedule` are:
-
-Method | Description
-------------- | -------------
-**everyFiveMinutes()** | Run a command every `5` minutes
-**everyTenMinutes()** | Run a command every `10` minutes
-**everyThirtyMinutes()** | Run a command every `30` minutes
-**hourly()** | Run once an hour at the beginning of the hour
-**daily()** | Run once a day at midnight
-**weekly()** | Run once a week at midnight on Sunday morning
-**monthly()** | Run once a month at midnight in the morning of the first day of the month
-**yearly()** | Run once a year at midnight in the morning of January 1
-
