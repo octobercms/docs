@@ -1,21 +1,21 @@
 # Database Relationships
 
 - [Introduction](#introduction)
-- [Defining Relationships](#defining-relationships)
-- [Relationship Types](#relationship-types)
+- [Defining relationships](#defining-relationships)
+- [Relationship types](#relationship-types)
     - [One To One](#one-to-one)
     - [One To Many](#one-to-many)
     - [Many To Many](#many-to-many)
     - [Has Many Through](#has-many-through)
-    - [Polymorphic Relations](#polymorphic-relations)
-    - [Many To Many Polymorphic Relations](#many-to-many-polymorphic-relations)
-- [Querying Relations](#querying-relations)
-    - [Eager Loading](#eager-loading)
-    - [Constraining Eager Loads](#constraining-eager-loads)
-    - [Lazy Eager Loading](#lazy-eager-loading)
-- [Inserting Related Models](#inserting-related-models)
-    - [Many To Many Relationships](#inserting-many-to-many-relationships)
-    - [Touching Parent Timestamps](#touching-parent-timestamps)
+    - [Polymorphic relations](#polymorphic-relations)
+    - [Many To Many Polymorphic relations](#many-to-many-polymorphic-relations)
+- [Querying relations](#querying-relations)
+    - [Eager loading](#eager-loading)
+    - [Constraining eager loads](#constraining-eager-loads)
+    - [Lazy eager loading](#lazy-eager-loading)
+- [Inserting related models](#inserting-related-models)
+    - [Many To Many relations](#inserting-many-to-many-relations)
+    - [Touching parent timestamps](#touching-parent-timestamps)
 
 <a name="introduction"></a>
 ## Introduction
@@ -23,7 +23,7 @@
 Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. October makes managing and working with these relationships easy and supports several different types of relationships.
 
 <a name="defining-relationships"></a>
-## Defining Relationships
+## Defining relationships
 
 Model relationships are defined as properties on your model classes. An example of defining relationships:
 
@@ -100,7 +100,7 @@ Example filter using **count**:
     ];
 
 <a name="relationship-types"></a>
-## Relationship Types
+## Relationship types
 
 The following relations types are available:
 
@@ -108,8 +108,8 @@ The following relations types are available:
 - [One To Many](#one-to-many)
 - [Many To Many](#many-to-many)
 - [Has Many Through](#has-many-through)
-- [Polymorphic Relations](#polymorphic-relations)
-- [Many To Many Polymorphic Relations](#many-to-many-polymorphic-relations)
+- [Polymorphic relations](#polymorphic-relations)
+- [Many To Many Polymorphic relations](#many-to-many-polymorphic-relations)
 
 <a name="one-to-one"></a>
 ### One To One
@@ -143,7 +143,7 @@ Additionally, the model assumes that the foreign key should have a value matchin
         'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id', 'otherKey' => 'my_id']
     ];
 
-#### Defining The Inverse Of The Relation
+#### Defining the inverse of the relation
 
 Now that we can access the `Phone` model from our `User`. Let's do the opposite and define a relationship on the `Phone` model that will let us access the `User` that owns the phone. We can define the inverse of a `hasOne` relationship using the `$belongsTo` property:
 
@@ -198,7 +198,7 @@ Like the `hasOne` relation, you may also override the foreign and local keys by 
         'comments' => ['Acme\Blog\Models\Comment', 'key' => 'my_post_id', 'otherKey' => 'my_id']
     ];
 
-#### Defining The Inverse Of The Relation
+#### Defining the inverse of the relation
 
 Now that we can access all of a post's comments, let's define a relationship to allow a comment to access its parent post. To define the inverse of a `hasMany` relationship, define the `$belongsTo` property on the child model:
 
@@ -279,7 +279,7 @@ In addition to customizing the name of the joining table, you may also customize
         ]
     ];
 
-#### Defining The Inverse Of The Relationship
+#### Defining the inverse of the relationship
 
 To define the inverse of a many-to-many relationship, you simply place another `$belongsToMany` property on your related model. To continue our user roles example, let's define the `users` relationship on the `Role` model:
 
@@ -292,7 +292,7 @@ To define the inverse of a many-to-many relationship, you simply place another `
 
 As you can see, the relationship is defined exactly the same as its `User` counterpart, with the exception of simply referencing the `Acme\Blog\Models\User` model. Since we're reusing the `$belongsToMany` property, all of the usual table and key customization options are available when defining the inverse of many-to-many relationships.
 
-#### Retrieving Intermediate Table Columns
+#### Retrieving intermediate table columns
 
 As you have already learned, working with many-to-many relations requires the presence of an intermediate join table. Models provide some very helpful ways of interacting with this table. For example, let's assume our `User` object has many `Role` objects that it is related to. After accessing this relationship, we may access the intermediate table using the `pivot` attribute on the models:
 
@@ -377,9 +377,9 @@ Typical foreign key conventions will be used when performing the relationship's 
     ];
 
 <a name="polymorphic-relations"></a>
-### Polymorphic Relations
+### Polymorphic relations
 
-#### Table Structure
+#### Table structure
 
 Polymorphic relations allow a model to belong to more than one other model on a single association. For example, imagine you want to store photos for your staff members and for your products. Using polymorphic relationships, you can use a single `photos` table for both of these scenarios. First, let's examine the table structure required to build this relationship:
 
@@ -399,7 +399,7 @@ Polymorphic relations allow a model to belong to more than one other model on a 
 
 Two important columns to note are the `imageable_id` and `imageable_type` columns on the `photos` table. The `imageable_id` column will contain the ID value of the owning staff or product, while the `imageable_type` column will contain the class name of the owning model. The `imageable_type` column is how the ORM determines which "type" of owning model to return when accessing the `imageable` relation.
 
-#### Model Structure
+#### Model structure
 
 Next, let's examine the model definitions needed to build this relationship:
 
@@ -424,7 +424,7 @@ Next, let's examine the model definitions needed to build this relationship:
         ];
     }
 
-#### Retrieving Polymorphic Relations
+#### Retrieving Polymorphic relations
 
 Once your database table and models are defined, you may access the relationships via your models. For example, to access all of the photos for a staff member, we can simply use the `photos` dynamic property:
 
@@ -443,9 +443,9 @@ You may also retrieve the owner of a polymorphic relation from the polymorphic m
 The `imageable` relation on the `Photo` model will return either a `Staff` or `Product` instance, depending on which type of model owns the photo.
 
 <a name="many-to-many-polymorphic-relations"></a>
-### Many To Many Polymorphic Relations
+### Many To Many Polymorphic relations
 
-#### Table Structure
+#### Table structure
 
 In addition to traditional polymorphic relations, you may also define "many-to-many" polymorphic relations. For example, a blog `Post` and `Video` model could share a polymorphic relation to a `Tag` model. Using a many-to-many polymorphic relation allows you to have a single list of unique tags that are shared across blog posts and videos. First, let's examine the table structure:
 
@@ -466,7 +466,7 @@ In addition to traditional polymorphic relations, you may also define "many-to-m
         taggable_id - integer
         taggable_type - string
 
-#### Model Structure
+#### Model structure
 
 Next, we're ready to define the relationships on the model. The `Post` and `Video` models will both have a `tags` relation defined in the `$morphToMany` property on the base model class:
 
@@ -477,7 +477,7 @@ Next, we're ready to define the relationships on the model. The `Post` and `Vide
         ];
     }
 
-#### Defining The Inverse Of The Relationship
+#### Defining the inverse of the relationship
 
 Next, on the `Tag` model, you should define a relation for each of its related models. So, for this example, we will define a `posts` relation and a `videos` relation:
 
@@ -489,7 +489,7 @@ Next, on the `Tag` model, you should define a relation for each of its related m
         ];
     }
 
-#### Retrieving The Relationship
+#### Retrieving The relationship
 
 Once your database table and models are defined, you may access the relationships via your models. For example, to access all of the tags for a post, you can simply use the `tags` dynamic property:
 
@@ -508,7 +508,7 @@ You may also retrieve the owner of a polymorphic relation from the polymorphic m
     }
 
 <a name="querying-relations"></a>
-## Querying Relations
+## Querying relations
 
 Since all types of Model relationships can be called via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of relationships also serve as [query builders](query), allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.
 
@@ -529,7 +529,7 @@ You may query the `posts` relationship and add additional constraints to the rel
 
 Note that you are able to use any of the [query builder](query) methods on the relationship!
 
-#### Relationship Methods Vs. Dynamic Properties
+#### Relationship methods Vs. Dynamic properties
 
 If you do not need to add additional constraints to a relationship query, you may simply access the relationship as if it were a property. For example, continuing to use our `User` and `Post` example models, we may access all of a user's posts like so:
 
@@ -541,7 +541,7 @@ If you do not need to add additional constraints to a relationship query, you ma
 
 Dynamic properties are "lazy loading", meaning they will only load their relationship data when you actually access them. Because of this, developers often use [eager loading](#eager-loading) to pre-load relationships they know will be accessed after loading the model. Eager loading provides a significant reduction in SQL queries that must be executed to load a model's relations.
 
-#### Querying Relationship Existence
+#### Querying relationship existence
 
 When accessing the records for a model, you may wish to limit your results based on the existence of a relationship. For example, imagine you want to retrieve all blog posts that have at least one comment. To do so, you may pass the name of the relationship to the `has` method:
 
@@ -566,7 +566,7 @@ If you need even more power, you may use the `whereHas` and `orWhereHas` methods
     })->get();
 
 <a name="eager-loading"></a>
-### Eager Loading
+### Eager loading
 
 When accessing relationships as properties, the relationship data is "lazy loaded". This means the relationship data is not actually loaded until you first access the property. However, models can "eager load" relationships at the time you query the parent model. Eager loading alleviates the N + 1 query problem. To illustrate the N + 1 query problem, consider a `Book` model that is related to `Author`:
 
@@ -601,20 +601,20 @@ For this operation only two queries will be executed:
 
     select * from authors where id in (1, 2, 3, 4, 5, ...)
 
-#### Eager Loading Multiple Relationships
+#### Eager loading multiple relationships
 
 Sometimes you may need to eager load several different relationships in a single operation. To do so, just pass additional arguments to the `with` method:
 
     $books = Book::with('author', 'publisher')->get();
 
-#### Nested Eager Loading
+#### Nested eager loading
 
 To eager load nested relationships, you may use "dot" syntax. For example, let's eager load all of the book's authors and all of the author's personal contacts in one statement:
 
     $books = Book::with('author.contacts')->get();
 
 <a name="constraining-eager-loads"></a>
-### Constraining Eager Loads
+### Constraining eager loads
 
 Sometimes you may wish to eager load a relationship, but also specify additional query constraints for the eager loading query. Here's an example:
 
@@ -633,7 +633,7 @@ In this example, the model will only eager load posts if the post's `title` colu
     ])->get();
 
 <a name="lazy-eager-loading"></a>
-### Lazy Eager Loading
+### Lazy eager loading
 
 Sometimes you may need to eager load a relationship after the parent model has already been retrieved. For example, this may be useful if you need to dynamically decide whether to load related models:
 
@@ -652,9 +652,9 @@ If you need to set additional query constraints on the eager loading query, you 
     ]);
 
 <a name="inserting-related-models"></a>
-## Inserting Related Models
+## Inserting related models
 
-#### The Save Method
+#### The Save method
 
 October provides convenient methods for adding new models to relationships. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship's `save` method:
 
@@ -675,13 +675,13 @@ If you need to save multiple related models, you may use the `saveMany` method:
         new Comment(['message' => 'Another comment.']),
     ]);
 
-#### Save & Many To Many Relationships
+#### Save & Many To Many relations
 
 When working with a many-to-many relationship, the `save` method accepts an array of additional intermediate table attributes as its second argument:
 
     User::find(1)->roles()->save($role, ['expires' => $expires]);
 
-#### The Create Method
+#### The Create method
 
 In addition to the `save` and `saveMany` methods, you may also use the `create` method, which accepts an array of attributes, creates a model, and inserts it into the database. Again, the difference between `save` and `create` is that `save` accepts a full model instance while `create` accepts a plain PHP `array`:
 
@@ -694,7 +694,7 @@ In addition to the `save` and `saveMany` methods, you may also use the `create` 
 Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model#mass-assignment).
 
 <a name="updating-belongs-to-relationships"></a>
-#### Updating "Belongs To" Relationships
+#### Updating "Belongs To" relationships
 
 When updating a `belongsTo` relationship, you may use the `associate` method. This method will set the foreign key on the child model:
 
@@ -710,8 +710,8 @@ When removing a `belongsTo` relationship, you may use the `dissociate` method. T
 
     $user->save();
 
-<a name="inserting-many-to-many-relationships"></a>
-### Many To Many Relationships
+<a name="inserting-many-to-many-relations"></a>
+### Many To Many relations
 
 #### Attaching / Detaching
 
@@ -741,7 +741,7 @@ For convenience, `attach` and `detach` also accept arrays of IDs as input:
 
     $user->roles()->attach([1 => ['expires' => $expires], 2, 3]);
 
-#### Syncing For Convenience
+#### Syncing For convenience
 
 You may also use the `sync` method to construct many-to-many associations. The `sync` method accepts an array of IDs to place on the intermediate table. Any IDs that are not in the given array will be removed from the intermediate table. So, after this operation is complete, only the IDs in the array will exist in the intermediate table:
 
@@ -752,7 +752,7 @@ You may also pass additional intermediate table values with the IDs:
     $user->roles()->sync([1 => ['expires' => true], 2, 3]);
 
 <a name="touching-parent-timestamps"></a>
-### Touching Parent Timestamps
+### Touching parent timestamps
 
 When a model `belongsTo` or `belongsToMany` another model, such as a `Comment` which belongs to a `Post`, it is sometimes helpful to update the parent's timestamp when the child model is updated. For example, when a `Comment` model is updated, you may want to automatically "touch" the `updated_at` timestamp of the owning `Post`. Just add a `touches` property containing the names of the relationships to the child model:
 
