@@ -1,18 +1,21 @@
-# Plugin Events and Usage
+# Extending plugins
 
-- [Subscribing to events](#subscribing-to-events)
-- [Declaring events](#declaring-events)
+- [Extending with events](#extending-with-events)
 - [Extending back-end views](#backend-view-events)
 - [Usage examples](#usage-examples)
 
-Events are an easy way to extend the functionality of core classes and other plugins, this methodology can sometimes be referred to as *hooks and triggers*. Events in October can be either local to the class using the `fireEvent()` method, or global to the application using the `Event::fire()` static method. Global events usage is taken directly from [Laravel events](http://laravel.com/docs/events). In order to use Local events the class should use the `October\Rain\Support\Traits\Emitter` trait.
+<!-- Behaviors: Mixin concept, dynamic implement, extend constructor -->
+<!-- IoC/Facades: Replacing objects -->
+
+<a name="extending-with-events" class="anchor" href="#extending-with-events"></a>
+## Extending with events
+
+Plugins are primarily extended using the [Event service](../services/events) to inject or modify the functionality of core classes and other plugins.
 
 <a name="subscribing-to-events" class="anchor" href="#subscribing-to-events"></a>
-## Subscribing to events
+### Subscribing to events
 
-Subscribing to an event, also known as *hooking on to an event*, can be done from anywhere, although the most common place is the `boot()` method of a [Plugin registration file](registration#registration-methods).
-
-For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
+The most common place to subscribe to an event is the `boot()` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
 
     public function boot()
     {
@@ -32,9 +35,9 @@ The same can be achieved by extending the model's constructor and using a local 
     });
 
 <a name="declaring-events" class="anchor" href="#declaring-events"></a>
-## Declaring events
+### Declaring events
 
-You can declare events, also known as *triggering an event*, anywhere in your code. Below is an example of declaring a global event:
+You can declare events globally or locally, below is an example of declaring a global event:
 
     Event::fire('acme.blog.beforePost', ['first parameter', 'second parameter']);
 
@@ -63,7 +66,9 @@ Sometimes you may wish to allow a back-end view file or partial to be extended, 
 
 Place this code in your view file:
 
-    <?= $this->fireViewEvent('backend.auth.extendSigninView') ?>
+    <div class="footer-area-extension">
+        <?= $this->fireViewEvent('backend.auth.extendSigninView') ?>
+    </div>
 
 This will allow other plugins to inject HTML to this area by hooking the event and returning the desired markup.
 
@@ -72,6 +77,12 @@ This will allow other plugins to inject HTML to this area by hooking the event a
     });
 
 > **Note**: The first parameter in the event handler will always be the calling object (the controller).
+
+The above example would output the following markup:
+
+    <div class="footer-area-extension">
+        <a href="#">Sign in with Google!</a>
+    </div>
 
 <a name="usage-examples" class="anchor" href="#usage-examples"></a>
 ## Usage examples
