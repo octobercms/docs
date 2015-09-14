@@ -46,7 +46,7 @@ Sometimes you may wish to stop the propagation of an event to other listeners. Y
 
 ### Where to register events
 
-So, you know how to register events, but you may be wondering _where_ to register them. Subscribing to an event can be done from anywhere, although the most common place is the `boot()` method of a [Plugin registration file](registration#registration-methods).
+So, you know how to register events, but you may be wondering _where_ to register them. Subscribing to an event can be done from anywhere, although the most common place is the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods).
 
     class Plugin extends PluginBase
     {
@@ -58,7 +58,7 @@ So, you know how to register events, but you may be wondering _where_ to registe
         }
     }
 
-Alternatively, plugins can supply a file named **init.php** that you can use to place event registration logic. For example:
+Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place event registration logic. For example:
 
     <?php
 
