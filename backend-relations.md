@@ -199,7 +199,7 @@ Pivot data is available when defining form fields and list columns via the `pivo
                     pivot[team_color]:
                         label: Team color
 
-> **Note:** Pivot data is not supported by [deferred bindings](../database/model#deferred-binding) at this time, so the parent model should exist.
+> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist.
 
 <a name="belongs-to" class="anchor" href="#belongs-to"></a>
 ### Belongs to

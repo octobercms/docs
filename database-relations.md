@@ -16,6 +16,7 @@
 - [Inserting related models](#inserting-related-models)
     - [Many To Many relations](#inserting-many-to-many-relations)
     - [Touching parent timestamps](#touching-parent-timestamps)
+- [Deferred binding](#deferred-binding)
 
 <a name="introduction"></a>
 ## Introduction
@@ -778,3 +779,83 @@ Now, when you update a `Comment`, the owning `Post` will have its `updated_at` c
     $comment->text = 'Edit to this comment!';
 
     $comment->save();
+
+<a name="deferred-binding" class="anchor" href="#deferred-binding"></a>
+## Deferred binding
+
+Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
+
+You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/form) automatically, but you may want to use this feature in other places.
+
+<a name="deferred-session-key" class="anchor" href="#deferred-session-key"></a>
+### Generating a session key
+
+The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../cms/markup#forms) generates a hidden field containing the session key automatically.
+
+    $sessionKey = uniqid('session_key', true);
+
+<a name="defer-binding" class="anchor" href="#deferr-binding"></a>
+### Defer a relation binding
+
+The comment in the next example will not be added to the post unless the post is saved.
+
+    $comment = new Comment;
+    $comment->content = "Hello world!";
+    $comment->save();
+
+    $post = new Post;
+    $post->comments()->add($comment, $sessionKey);
+
+> **Note**: the `$post` object has not been saved but the relationship will be created if the saving happens.
+
+<a name="defer-unbinding" class="anchor" href="#defer-unbinding"></a>
+### Defer a relation unbinding
+
+The comment in the next example will not be deleted unless the post is saved.
+
+    $comment = Comment::find(1);
+    $post = Post::find(1);
+    $post->comments()->delete($comment, $sessionKey);
+
+<a name="list-all-bindings" class="anchor" href="#list-all-bindings"></a>
+### List all bindings
+
+Use the `withDeferred()` method of a relation to load all records, including deferred. The results will include existing relations as well.
+
+    $post->comments()->withDeferred($sessionKey)->get();
+
+<a name="cancel-all-bindings" class="anchor" href="#cancel-all-bindings"></a>
+### Cancel all bindings
+
+It's a good idea to cancel deferred binding and delete the slave objects rather than leaving them as orphans.
+
+    $post->cancelDeferred($sessionKey);
+
+<a name="commit-all-bindings" class="anchor" href="#commit-all-bindings"></a>
+### Commit all bindings
+
+You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save()` method.
+
+    $post = new Post;
+    $post->title = "First blog post";
+    $post->save(null, $sessionKey);
+
+The same approach works with the model's `create()` method:
+
+    $post = Post::create(['title' => 'First blog post'], $sessionKey);
+
+<a name="lazily-commit-bindings" class="anchor" href="#lazily-commit-bindings"></a>
+### Lazily commit bindings
+
+If you are unable to supply the `$sessionKey` when saving, you can commit the bindings at any time using the the next code:
+
+    $post->commitDeferred($sessionKey);
+
+<a name="cleanup-bindings" class="anchor" href="#cleanup-bindings"></a>
+### Clean up orphaned bindings
+
+Destroys all bindings that have not been committed and are older than 1 day:
+
+    October\Rain\Database\Models\DeferredBinding::cleanUp(1);
+
+> **Note:** October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.

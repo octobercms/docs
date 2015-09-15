@@ -1,11 +1,9 @@
 # Active Record Model
 
 - [Introduction](#introduction)
-- [Attribute modifiers](#attribute-modifiers)
+- [Standard attributes](#standard-attributes)
 - [Model events](#model-events)
-- [Model validation](#model-validation)
 - [File attachments](#file-attachments)
-- [Deferred binding](#deferred-binding)
 - [Extending models](#extending-models)
 
 October provides the option of using an Active Record pattern to access the database, through the use of the `Model` class. The class extends and shares the features of [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
@@ -44,40 +42,30 @@ You should create one model class for each database table. All model classes mus
 
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
-<a name="attribute-modifiers" class="anchor" href="#attribute-modifiers"></a>
-## Attribute modifiers
+<a name="standard-attributes" class="anchor" href="#standard-attributes"></a>
+## Standard attributes
+
+There are some standard attributes that can be found on models, in addition to those provided by [model traits](traits).
 
 October models can apply modifiers to the attribute values when the model is loaded or saved to the database. The modifiers are defined with the model class properties as arrays. For example:
 
-    class User extends \October\Rain\Database\Model
+    class User extends Model
     {
-        protected $hashable = ['password'];
+        protected $exists = false;
 
-        protected $purgeable = ['password_confirmation'];
+        protected $dates = ['last_seen_at'];
+
+        protected $timestamps = true;
 
         protected $jsonable = ['permissions'];
-
-        protected $encryptable = ['api_key'];
-
-        protected $slugs = ['slug' => 'name'];
     }
 
-The following attribute modifiers are supported:
-
 Property | Description
 ------------- | -------------
-**$hashable** | values are hashed, they can be verified but cannot be reversed. Requires trait: `October\Rain\Database\Traits\Hashable`.
-**$purgeable** | attributes are removed before attempting to save to the database. Requires trait: `October\Rain\Database\Traits\Purgeable`.
-**$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
-**$encryptable** | values are encrypted and decrypted for storing sensitive data. Requires trait: `October\Rain\Database\Traits\Encryptable`.
-**$slugs** | key attributes are generated as unique url names (slugs) based on value attributes. Requires trait: `October\Rain\Database\Traits\Sluggable`.
+**$exists** | boolean that if true indicates that the model exists.
 **$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
 **$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
-
-The following attribute declarations are supported:
-
-Property | Description
-------------- | -------------
+**$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
 **$fillable** | values are fields accessible to mass assignment.
 **$guarded** | values are fields guarded from mass assignment.
 **$visible** | values are fields made visible when converting the model to JSON or an array.
@@ -112,85 +100,6 @@ An example of using an event:
         // Generate a URL slug for this model
         $this->slug = Str::slug($this->name);
     }
-
-<a name="model-validation" class="anchor" href="#model-validation"></a>
-## Model validation
-
-October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
-
-    class User extends \October\Rain\Database\Model
-    {
-        use \October\Rain\Database\Traits\Validation;
-
-        public $rules = [
-            'name'                  => 'required|between:4,16',
-            'email'                 => 'required|email',
-            'password'              => 'required|alpha_num|between:4,8|confirmed',
-            'password_confirmation' => 'required|alpha_num|between:4,8'
-        ];
-    }
-
-> **Note**: You're free to use the [array syntax](http://laravel.com/docs/validation#basic-usage) for validation rules as well.
-
-Models validate themselves automatically when the `save()` method is called.
-
-    $user = new User;
-    $user->name = 'Adam Person';
-    $user->email = 'a.person@email.address.com';
-    $user->password = 'passw0rd';
-
-    // Returns false if model is invalid
-    $success = $user->save();
-
-> **Note:** You can also validate a model at any time using the `validate()` method.
-
-<a name="retrieving-validation-errors" class="anchor" href="#retrieving-validation-errors"></a>
-### Retrieving validation errors
-
-When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors()` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
-
-> **Note:** The Model leverages Laravel's MessagesBag object which has a [simple and elegant method](http://laravel.com/docs/validation#working-with-error-messages) of formatting errors.
-
-<a name="overriding-validation" class="anchor" href="#overriding-validation"></a>
-### Overriding validation
-
-The `forceSave()` method validates the model and saves regardless of whether or not there are validation errors.
-
-    $user = new User;
-
-    // Creates a user without validation
-    $user->forceSave();
-
-<a name="custom-error-messages" class="anchor" href="#custom-error-messages"></a>
-### Custom error messages
-
-Just like the Laravel Validator, you can set custom error messages using the [same syntax](http://laravel.com/docs/validation#custom-error-messages).
-
-    class User extends \October\Rain\Database\Model
-    {
-        public $customMessages = [
-           'required' => 'The :attribute field is required.',
-            ...
-        ];
-    }
-
-<a name="custom-attribute-names" class="anchor" href="#custom-attribute-names"></a>
-### Custom attribute names
-
-You may also set custom attribute names with the `$attributeNames` array.
-
-    class User extends \October\Rain\Database\Model
-    {
-        public $attributeNames = [
-           'email' => 'Email Address',
-            ...
-        ];
-    }
-
-<a name="custom-validation-rules" class="anchor" href="#custom-validation-rules"></a>
-### Custom validation rules
-
-You can also create custom validation rules the [same way](http://laravel.com/docs/validation#custom-validation-rules) you would for the Laravel Validator.
 
 <a name="file-attachments" class="anchor" href="#file-attachments"></a>
 ## File attachments
@@ -299,7 +208,7 @@ Process the uploaded file on the server and attach it to a model:
         $post->featured_image = Input::file('example_file');
     }
 
-Alternatively you use the [deferred binding](#deferred-binding):
+Alternatively you use the [deferred binding](../database/relations#deferred-binding):
 
     // Find the Blog Post model
     $post = Post::find(1);
@@ -326,86 +235,6 @@ Display the uploaded file on a page:
     }
 
     <img src="<?= $featuredImage ?>" alt="Featured Image">
-
-<a name="deferred-binding" class="anchor" href="#deferred-binding"></a>
-## Deferred binding
-
-Deferred bindings allow you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
-
-You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/form) automatically, but you may want to use this feature in other places.
-
-<a name="deferred-session-key" class="anchor" href="#deferred-session-key"></a>
-### Generating a session key
-
-The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../cms/markup#forms) generates a hidden field containing the session key automatically.
-
-    $sessionKey = uniqid('session_key', true);
-
-<a name="defer-binding" class="anchor" href="#deferr-binding"></a>
-### Defer a relation binding
-
-The comment in the next example will not be added to the post unless the post is saved.
-
-    $comment = new Comment;
-    $comment->content = "Hello world!";
-    $comment->save();
-
-    $post = new Post;
-    $post->comments()->add($comment, $sessionKey);
-
-> **Note**: the `$post` object has not been saved but the relationship will be created if the saving happens.
-
-<a name="defer-unbinding" class="anchor" href="#defer-unbinding"></a>
-### Defer a relation unbinding
-
-The comment in the next example will not be deleted unless the post is saved.
-
-    $comment = Comment::find(1);
-    $post = Post::find(1);
-    $post->comments()->delete($comment, $sessionKey);
-
-<a name="list-all-bindings" class="anchor" href="#list-all-bindings"></a>
-### List all bindings
-
-Use the `withDeferred()` method of a relation to load all records, including deferred. The results will include existing relations as well.
-
-    $post->comments()->withDeferred($sessionKey)->get();
-
-<a name="cancel-all-bindings" class="anchor" href="#cancel-all-bindings"></a>
-### Cancel all bindings
-
-It's a good idea to cancel deferred binding and delete the slave objects rather than leaving them as orphans.
-
-    $post->cancelDeferred($sessionKey);
-
-<a name="commit-all-bindings" class="anchor" href="#commit-all-bindings"></a>
-### Commit all bindings
-
-You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save()` method.
-
-    $post = new Post;
-    $post->title = "First blog post";
-    $post->save(null, $sessionKey);
-
-The same approach works with the model's `create()` method:
-
-    $post = Post::create(['title' => 'First blog post'], $sessionKey);
-
-<a name="lazily-commit-bindings" class="anchor" href="#lazily-commit-bindings"></a>
-### Lazily commit bindings
-
-If you are unable to supply the `$sessionKey` when saving, you can commit the bindings at any time using the the next code:
-
-    $post->commitDeferred($sessionKey);
-
-<a name="cleanup-bindings" class="anchor" href="#cleanup-bindings"></a>
-### Clean up orphaned bindings
-
-Destroys all bindings that have not been committed and are older than 1 day:
-
-    October\Rain\Database\Models\DeferredBinding::cleanUp(1);
-
-> **Note:** October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
 
 <a name="extending-models" class="anchor" href="#extending-models"></a>
 ## Extending models
