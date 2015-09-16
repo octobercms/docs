@@ -4,8 +4,8 @@
 - [Wizard installation](#wizard-installation)
 - [Command-line installation](#command-line-installation)
 - [Webserver configuration](#webserver-configuration)
-- [Post-install configuration](#post-install-config)
-- [Environment configuration](#environment-config)
+- [Post-installation setup](#post-install-setup)
+- [Using a public folder (advanced)](#public-folder)
 
 There are two ways you can install October, either using the Wizard or Command-line installation process.
 Before you proceed, you should check that your server meets the minimum system requirements.
@@ -133,8 +133,8 @@ Paste the following code in the editor and change the **host address** and  **se
         )
     }
 
-<a name="post-install-config" class="anchor" href="#post-install-config"></a>
-## Post-install configuration
+<a name="post-install-setup" class="anchor" href="#post-install-setup"></a>
+## Post-installation setup
 
 There are some things you may need to set up after the installation is complete.
 
@@ -168,35 +168,13 @@ You may optionally set up an external queue for processing *queued jobs*, by def
 
 If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work` to process the first available job in the queue.
 
-<a name="environment-config" class="anchor" href="#environment-config"></a>
-## Environment configuration
+<a name="public-folder"></a>
+## Using a public folder (advanced)
 
-It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to **production**. There are two common ways to change this value:
+While this step is optional, for ultimate security in production environments it is recommended that you configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
 
-1. Set `APP_ENV` value directly with your webserver.
+    php artisan october:mirror public/
 
-    For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
+This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
 
-        SetEnv APP_ENV "dev"
-
-2. Create a **.env** file in the root directory with the following content:
-
-        APP_ENV=dev
-
-In both of the above examples, the environment is set to the new value `dev`. Configuration files can now be created in the path **config/dev** and will override the application's base configuration.
-
-For example, to use a different MySQL database for the `dev` environment only, create a file called **config/dev/database.php** using this content:
-
-    <?php
-
-    return [
-        'connections' => [
-            'mysql' => [
-                'host'     => 'localhost',
-                'port'     => '',
-                'database' => 'database',
-                'username' => 'root',
-                'password' => ''
-            ]
-        ]
-    ];
+> **Note**: The above command needs to be performed with System Administrator or *sudo* privileges in most cases. It should also be performed after each system update or when a new plugin is installed.
