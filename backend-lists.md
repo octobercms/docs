@@ -156,6 +156,7 @@ There are various column types that can be used for the **type** setting, these 
 - [Date](#column-date)
 - [Time](#column-time)
 - [Time since](#column-timesince)
+- [Time tense](#column-timetense)
 - [Select](#column-select)
 - [Relation](#column-relation)
 - [Partial](#column-partial)
@@ -229,6 +230,15 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: timesince
+
+<a name="column-timetense" class="anchor" href="#column-timetense"></a>
+### Time tense
+
+`timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
+
+    created_at:
+        label: Date
+        type: timetense
 
 <a name="column-select" class="anchor" href="#column-select"></a>
 ### Select
