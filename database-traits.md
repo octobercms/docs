@@ -4,6 +4,7 @@
 - [Purgeable](#purgeable)
 - [Encryptable](#encryptable)
 - [Sluggable](#sluggable)
+- [Revisionable](#revisionable)
 - [Sortable](#sortable)
 - [Simple Tree](#simple-tree)
 - [Nested Tree](#nested-tree)
@@ -98,6 +99,45 @@ Use the `slugAttributes` method to regenerate slugs when updating a model:
     $user->slugAttributes();
     $user->save();
 
+<a name="revisionable" class="anchor" href="#revisionable"></a>
+## Revisionable
+
+October models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
+
+    class User extends Model
+    {
+        use \October\Rain\Database\Traits\Revisionable;
+
+        /**
+         * @var array Monitor these attributes for changes.
+         */
+        protected $revisionable = ['name', 'email'];
+
+        /**
+         * @var array Relations
+         */
+        public $morphMany = [
+            'revision_history' => ['System\Models\Revision', 'name' => 'revisionable']
+        ];
+    }
+
+By default 500 records will be kept, however this can be modified by declaring a `$revisionableLimit` property on the model with a new limit value.
+
+    /**
+     * @var int Maximum number of revision records to keep.
+     */
+    public $revisionableLimit = 8;
+
+The revision history can be accessed like any other relation:
+
+    $history = User::find(1)->revision_history;
+
+    foreach ($history as $record) {
+        echo $record->field . ' updated ';
+        echo 'from ' . $record->old_value;
+        echo 'to ' . $record->new_value;
+    }
+
 <a name="sortable" class="anchor" href="#sortable"></a>
 ## Sortable
 
@@ -121,10 +161,88 @@ Use the `setSortableOrder` method to set the orders on a single record or multip
 
 A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To use the simple tree, apply the `October\Rain\Database\Traits\SimpleTree` trait.
 
+    class Category extends Model
+    {
+        use \October\Rain\Database\Traits\SimpleTree;
+    }
+
+This trait will automatically inject two [model relations](../database/relations) called `parent` and `children`, it is the equivalent of the following definitions:
+
+    public $belongsTo = [
+        'parent'    => ['User', 'key' => 'parent_id'],
+    ];
+
+    public $hasMany = [
+        'children'    => ['User', 'key' => 'parent_id'],
+    ];
+
+You may modify the key name used to identify the parent by defining the `PARENT_ID` constant:
+
+    const PARENT_ID = 'my_parent_column';
+
+Collections of models that use this trait will return the type of `October\Rain\Database\TreeCollection` which adds the `toNested` method. To build an eager loaded tree structure, return the records with the relations eager loaded.
+
+    Category::all()->toNested();
+
 <a name="nested-tree" class="anchor" href="#nested-tree"></a>
 ## Nested Tree
 
-The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait.
+The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
+
+    class Category extends Model
+    {
+        use \October\Rain\Database\Traits\NestedTree;
+    }
+
+### Creating a root node
+
+By default, all nodes are created as roots:
+
+    $root = Category::create(['name' => 'Root category']);
+
+Alternatively, you may find yourself in the need of converting an existing node into a root node:
+
+    $node->makeRoot();
+
+You may also nullify it's `parent_id` column which works the same as `makeRoot'.
+
+    $node->parent_id = null;
+    $node->save();
+
+### Inserting nodes
+
+You can insert new nodes directly by the relation:
+
+    $child1 = $root->children()->create(['name' => 'Child 1']);
+
+Or use the `makeChildOf` method for existing nodes:
+
+    $child2 = Category::create(['name' => 'Child 2']);
+    $child2->makeChildOf($root);
+
+### Deleting nodes
+
+When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](../database/model#model-events) will not be fired for the child models.
+
+    $child1->delete();
+
+### Getting the nesting level of a node
+
+The `getLevel` method will return current nesting level, or depth, of a node.
+
+    // 0 when root
+    $node->getLevel()
+
+### Moving nodes around
+
+There are several methods for moving nodes around:
+
+`moveLeft()`: Find the left sibling and move to the left of it.
+`moveRight()`: Find the right sibling and move to the right of it.
+`moveBefore($otherNode)`: Move to the node to the left of ...
+`moveAfter($otherNode)`: Move to the node to the right of ...
+`makeChildOf($otherNode)`: Make the node a child of ...
+`makeRoot()`: Make current node a root node.
 
 <a name="validation" class="anchor" href="#validation"></a>
 ## Validation
