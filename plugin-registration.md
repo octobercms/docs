@@ -128,7 +128,7 @@ The `register()` method is called immediately when the plugin is registered. The
 
 > **Note:** The `boot()` and `register()` methods are not called during the update process to protect the system from critical errors.
 
-Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [Laravel Routing documentation](http://laravel.com/docs/routing). For example:
+Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
 
     Route::group(['prefix' => 'api_acme_blog'], function() {
 
