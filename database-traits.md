@@ -295,7 +295,7 @@ The `forceSave()` method validates the model and saves regardless of whether or 
 <a name="custom-error-messages" class="anchor" href="#custom-error-messages"></a>
 ### Custom error messages
 
-Just like the Laravel Validator, you can set custom error messages using the [same syntax](../services/validation#custom-error-messages).
+Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation#custom-error-messages).
 
     class User extends Model
     {

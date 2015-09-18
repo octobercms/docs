@@ -1,11 +1,18 @@
 # Version history
 
-- [Updates files](#update-files)
+- [Introduction](#introduction)
 - [Update process](#update-process)
-- [Migration files](#migration-files)
-- [Data seeding files](#data-seeding-files)
+    - [Plugin depedencies](#plugin-depedencies)
+- [Plugin version file](#version-file)
+    - [Important updates](#important-updates)
+    - [Migration and seed files](#migration-seed-files)
 
-Plugins keep a change log inside the **/updates** directory to maintain version information and database structure. An example of an updates directory structure:
+<a name="introduction"></a>
+## Introduction
+
+It is good practice for plugins to maintain a change log that documents any changes or improvements in the code. In addition to writing notes about changes, this process has the useful ability to execute [migration and seed files](../database/structure) in their correct order.
+
+The change log is stored in a YAML file called `version.yaml` inside the **/updates** directory of a plugin, which co-exists with migration and seed files. This example displays a typical plugin updates directory structure:
 
     plugins/
       author/
@@ -16,74 +23,48 @@ Plugins keep a change log inside the **/updates** directory to maintain version 
             seed_the_database.php       <=== Migration file
             create_another_table.php    <=== Migration file
 
-The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). An example Plugin version file:
+<a name="update-process" class="anchor" href="#update-process"></a>
+## Update process
 
-    1.0.1:
-        - First version.
+During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#important-updates). Any given migration or seed file will only be excuted once after a successful update. October executes the update process automatically when any of the following occurs:
+
+1. When an administrator signs in to the back-end.
+1. When the system is updated using the update feature in the back-end area.
+1. When the [console command](../console/commands) `php artisan october:up` is called in the command line from the application directory.
+
+> **Note:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
+
+<a name="plugin-depedencies"></a>
+### Plugin depedencies
+
+Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
+
+    <?php namespace Acme\Blog;
+
+    class Plugin extends \System\Classes\PluginBase
+    {
+        public $require = ['Acme.User'];
+    }
+
+In the example above the **Acme.Blog** plugin will not be updated until the **Acme.User** plugin has been fully updated.
+
+<a name="version-file"></a>
+## Plugin version file
+
+The **version.yaml** file, called the *Plugin version file*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). Here is an example of a plugin version file:
+
+    1.0.1: First version
+    1.0.2: Second version
+    1.0.3: Third version
+    1.1.0: !!! Important update
+    1.1.1:
+        - Update with a migration and seed
         - create_tables.php
         - seed_the_database.php
-    1.0.2: Small fix that uses no scripts.
-    1.0.3: Another minor fix.
-    1.0.4:
-        - Creates another table for this new feature.
-        - create_another_table.php
 
-> **Note:** To apply plugin updates during development, log out of the back-end and sign in again. The plugin version history is applied when an administrator signs in to the back-end. Plugin updates are applied automatically for plugins installed from the Marketplace when you update the system.
-
-More information on database schema and seeding can be found in the [database structure article](../database/structure).
-
-
-
-
-
-
-
-October provides a simple way of managing the database structure and contents with the database scripts (migrations and seed files). The database scripts can be provided by plugins.
-
-<a name="update-files" class="anchor" href="#update-files"></a>
-## Update files
-
-Database tables and seed data is managed using a version information file `version.yaml` found in the **updates** subdirectory of a plugin directory. An example plugin updates folder:
-
-    plugins/
-      acme/
-        blog/
-          updates/                       <=== Updates folder
-            version.yaml                 <=== Version Information File
-            create_posts_table.php       <=== Database scripts
-            create_comments_table.php    <=== Migration script
-            some_seeding_file.php        <=== Seeding script
-            some_upgrade_file.php        <=== Seeding script
-
-The version information file defines the plugin version and refers to the migration and seeding files. All migration and seeding files should be associated with a plugin version. Example of the **version.yaml** file:
-
-    1.0.1:
-        - Added some upgrade file and some seeding.
-        - some_upgrade_file.php
-        - some_seeding_file.php
-    1.0.2:
-        - Create blog post comments table.
-        - create_comments_table.php
-    1.0.3: Bug fix update that uses no scripts.
-    1.0.4: Another fix.
-    1.0.5:
-        - Create blog settings table.
-        - create_blog_settings_table.php
-
-For updates that refer to migration or seeding files, the first line is always the comment, then subsequent lines are script file names.
-
-An example of a comment with no associated update files:
+As you can see above, there should be a key that represents the version number followed by the update message, which is either a string or an array containing the update message. For updates that refer to migration or seeding files, the first line is always the comment, then subsequent lines are script file names. An example of a comment with no associated update files:
 
     1.0.1: A single comment that uses no update scripts.
-    1.0.2:
-        - Alternative comment with no update files.
-
-An update line with a comment and update scripts:
-
-    1.0.3:
-        - This update will execute the two scripts below.
-        - some_upgrade_file.php
-        - some_seeding_file.php
 
 <a name="important-updates" class="anchor" href="#important-updates"></a>
 ### Important updates
@@ -100,77 +81,27 @@ When the system detects an important update it will provide three options to pro
 
 Confirming the comment will update the plugin as usual, or if the comment is skipped it will not be updated.
 
-<a name="update-process" class="anchor" href="#update-process"></a>
-## Update process
+<a name="migration-seed-files" class="anchor" href="#migration-seed-files"></a>
+### Migration and seed files
 
-Any given [update file](#update-files) will only be applied once after a successful execution. October executes the update process automatically when any of the following occurs:
+As previously decribed, updates also define when [migration and seed files](../database/structure) should be applied. An update line with a comment and updates:
 
-1. When an administrator signs in to the back-end.
+    1.1.1:
+        - This update will execute the two scripts below.
+        - some_upgrade_file.php
+        - some_seeding_file.php
 
-2. When the system is updated with the built-in Update feature in the back-end.
+The update file name should use *snake_case* while the containing PHP class should use *CamelCase*. For a file named **some_upgrade_file.php** the corresponding class would be `SomeUpgradeFile`.
 
-3. When the console command `php artisan october:up` is called in the command line from the application directory.
-
-Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
-
-> **Note:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
-
-<a name="migration-files" class="anchor" href="#migration-files"></a>
-## Migration files
-
-October migrations use the Laravel's [Schema Builder](http://laravel.com/docs/schema). The migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class. The class should define two public methods - `up()` and `down()`.  The class name should match the script file name written in CamelCase. Inside the migration files the `Author\Plugin\Updates` [namespace](../plugin/registration#namespaces) should be used. An example of a structure file:
-
-    namespace Acme\Blog\Updates;
+    <?php namespace Acme\Blog\Updates;
 
     use Schema;
     use October\Rain\Database\Updates\Migration;
 
-    class CreatePostsTable extends Migration
+    /**
+     * some_upgrade_file.php
+     */
+    class SomeUpgradeFile extends Migration
     {
-        public function up()
-        {
-            Schema::create('october_blog_posts', function($table)
-            {
-                $table->engine = 'InnoDB';
-                $table->increments('id');
-                $table->string('title');
-                $table->string('slug')->index();
-                $table->text('excerpt')->nullable();
-                $table->text('content');
-                $table->timestamp('published_at')->nullable();
-                $table->boolean('is_published')->default(false);
-                $table->timestamps();
-            });
-        }
-
-        public function down()
-        {
-            Schema::drop('october_blog_posts');
-        }
-    }
-
-<a name="data-seeding-files" class="anchor" href="#data-seeding-files"></a>
-## Data seeding files
-
-Use the the data seeding files to add, update or remove records in the database when a plugin changes its version. The file should define a class that extends the `Seeder` class. The class should define the public method `run()`. The class name should match the script file name written in CamelCase. Inside the seeding files the `Author\Plugin\Updates` [namespace](../plugin/registration#namespaces) should be used. An example of a seeding file:
-
-    namespace Acme\Users\Updates;
-
-    use Seeder;
-    use Acme\Users\Models\User;
-
-    class SeedUsersTable extends Seeder
-    {
-        public function run()
-        {
-            $user = User::create([
-                'email'                 => 'user@user.com',
-                'login'                 => 'user',
-                'password'              => 'user',
-                'password_confirmation' => 'user',
-                'first_name'            => 'Adam',
-                'last_name'             => 'Person',
-                'is_activated'          => true
-            ]);
-        }
+        ///
     }
