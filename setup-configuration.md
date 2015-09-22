@@ -1,8 +1,99 @@
 # App configuration
 
+- [Webserver configuration](#webserver-configuration)
+    - [Apache configuration](#apache-configuration)
+    - [Nginx configuration](#nginx-configuration)
+    - [Lighttpd configuration](#lighttd-configuration)
+    - [Using a public folder (advanced)](#public-folder)
 - [Environment configuration](#environment-config)
 - [Bleeding edge updates](#edge-updates)
 - [CSRF protection](#csrf-protection)
+
+All of the configuration files for October are stored in the **config/** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
+
+
+<a name="webserver-configuration" class="anchor" href="#webserver-configuration"></a>
+## Web server configuration
+
+October has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
+
+<a name="apache-configuration" class="anchor" href="#apache-configuration"></a>
+### Apache configuration
+
+If your webserver is running Apache there are some extra system requirements:
+
+1. mod_rewrite should be installed
+1. AllowOverride option should be switched on
+
+In some cases you may need to uncomment this line in the `.htaccess` file:
+
+    ##
+    ## You may need to uncomment the following line for some hosting environments,
+    ## if you have installed to a subdirectory, enter the name here also.
+    ##
+    # RewriteBase /
+
+If you have installed to a subdirectory, you should add the name of the subdirectory also:
+
+    RewriteBase /mysubdirectory/
+
+<a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
+### Nginx configuration
+
+There are small changes required to configure your site in Nginx.
+
+`nano /etc/nginx/sites-available/default`
+
+Use the following code in **server** section. If you have installed October into a subdirectory, replace `/` with the directory October was installed under:
+
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
+    rewrite ^bootstrap/.* /index.php break;
+    rewrite ^config/.* /index.php break;
+    rewrite ^vendor/.* /index.php break;
+    rewrite ^storage/cms/.* /index.php break;
+    rewrite ^storage/logs/.* /index.php break;
+    rewrite ^storage/framework/.* /index.php break;
+    rewrite ^storage/temp/protected/.* /index.php break;
+    rewrite ^storage/app/uploads/protected/.* /index.php break;
+
+<a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
+### Lighttpd configuration
+
+If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS.
+
+Open your site configuration file with your favorite editor.
+
+`nano /etc/lighttpd/conf-enabled/sites.conf`
+
+Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
+
+    $HTTP["host"] =~ "example.domain.com" {
+        server.document-root = "/var/www/example/"
+
+        url.rewrite-once = (
+            "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+            "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+            "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
+            "^/storage/temp/public/[\w-]+/.*$" => "$0",
+            "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
+            "(.*)" => "/index.php$1"
+        )
+    }
+
+<a name="public-folder"></a>
+### Using a public folder (advanced)
+
+While this step is optional, for ultimate security in production environments it is recommended that you configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
+
+    php artisan october:mirror public/
+
+This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
+
+> **Note**: The above command needs to be performed with System Administrator or *sudo* privileges in most cases. It should also be performed after each system update or when a new plugin is installed.
 
 <a name="environment-config" class="anchor" href="#environment-config"></a>
 ## Environment configuration

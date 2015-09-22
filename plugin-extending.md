@@ -185,7 +185,7 @@ Next this will demonstrate how to hook to this new event from inside the [page e
     function onInit()
     {
         $this['topic']->bindEvent('topic.post', function($post, $postUrl) {
-            traceLog('A post has been submitted at '.$postUrl);
+            trace_log('A post has been submitted at '.$postUrl);
         });
     }
 

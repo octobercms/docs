@@ -74,12 +74,11 @@ Services:
     services/mail: "Mail"
     services/pagination: "Pagination"
     services/queues: "Queues"
-    services/request: "Request"
-    services/response: "Response"
+    services/request-input: "Request & Input"
+    services/response-view: "Response & View"
     services/router: "Router"
     services/session: "Session"
     services/validation: "Validation"
-    services/view: "View"
 
 Console:
   icon: "icon-terminal"
@@ -87,7 +86,6 @@ Console:
     console/commands: "Command list"
     console/scaffolding: "Scaffolding"
     console/development: "Development"
-    console/composer: "Composer"
 
 Extras:
   icon: "icon-question-sign"

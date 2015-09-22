@@ -174,27 +174,27 @@ An array of contextual data may also be passed to the log methods. This contextu
 <a name="helpers" class="anchor" href="#helpers"></a>
 ### Helper functions
 
-There are some global helper methods available to make logging easier. The `traceLog()` function is an alias for `Log::info` with support for using arrays and exceptions as the message.
+There are some global helper methods available to make logging easier. The `trace_log()` function is an alias for `Log::info` with support for using arrays and exceptions as the message.
 
     // Write a string value
     $val = 'Hello world';
-    traceLog('The value is '.$val);
+    trace_log('The value is '.$val);
 
     // Dump an array value
     $val = ['Some', 'array', 'data'];
-    traceLog($val);
+    trace_log($val);
 
     // Trace an exception
     try {
         //
     }
     catch (Exception $ex) {
-        traceLog($ex);
+        trace_log($ex);
     }
 
-The `traceSql()` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the admininstration area log as this is stored in the database and would result in a feedback loop.
+The `trace_sql()` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the admininstration area log as this is stored in the database and would result in a feedback loop.
 
-    traceSql();
+    trace_sql();
 
     Db::table('users')->count();
 

@@ -1,17 +1,17 @@
 # Installation
 
-- [Minimum System Requirements](#system-requirements)
+- [Minimum system requirements](#system-requirements)
 - [Wizard installation](#wizard-installation)
 - [Command-line installation](#command-line-installation)
-- [Webserver configuration](#webserver-configuration)
-- [Post-installation setup](#post-install-setup)
-- [Using a public folder (advanced)](#public-folder)
+- [Post-installation steps](#post-install-steps)
+    - [Delete installation files](#delete-install-files)
+    - [Setting up the scheduler](#crontab-setup)
+    - [Setting up queue workers](#queue-setup)
 
-There are two ways you can install October, either using the Wizard or Command-line installation process.
-Before you proceed, you should check that your server meets the minimum system requirements.
+There are two ways you can install October, either using the Wizard or Command-line installation process. Before you proceed, you should check that your server meets the minimum system requirements.
 
 <a name="system-requirements" class="anchor" href="#system-requirements"></a>
-## Minimum System Requirements
+## Minimum system requirements
 
 October CMS has some server requirements for web hosting:
 
@@ -57,90 +57,10 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 If you feel more comfortable with a command-line and want to use composer, there is a CLI install process on the [Console interface page](console#console-install).
 
-<a name="webserver-configuration" class="anchor" href="#webserver-configuration"></a>
-## Web server configuration
-
-October has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
-
-- [Apache configuration](#apache-configuration)
-- [Nginx configuration](#nginx-configuration)
-- [Lighttpd configuration](#lighttd-configuration)
-
-<a name="apache-configuration" class="anchor" href="#apache-configuration"></a>
-### Apache configuration
-
-If your webserver is running Apache there are some extra system requirements:
-
-1. mod_rewrite should be installed
-1. AllowOverride option should be switched on
-
-In some cases you may need to uncomment this line in the `.htaccess` file:
-
-    ##
-    ## You may need to uncomment the following line for some hosting environments,
-    ## if you have installed to a subdirectory, enter the name here also.
-    ##
-    # RewriteBase /
-
-If you have installed to a subdirectory, you should add the name of the subdirectory also:
-
-    RewriteBase /mysubdirectory/
-
-<a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
-### Nginx configuration
-
-There are small changes required to configure your site in Nginx.
-
-`nano /etc/nginx/sites-available/default`
-
-Use the following code in **server** section. If you have installed October into a subdirectory, replace `/` with the directory October was installed under:
-
-    location / {
-        try_files $uri $uri/ /index.php$is_args$args;
-    }
-
-    rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
-    rewrite ^bootstrap/.* /index.php break;
-    rewrite ^config/.* /index.php break;
-    rewrite ^vendor/.* /index.php break;
-    rewrite ^storage/cms/.* /index.php break;
-    rewrite ^storage/logs/.* /index.php break;
-    rewrite ^storage/framework/.* /index.php break;
-    rewrite ^storage/temp/protected/.* /index.php break;
-    rewrite ^storage/app/uploads/protected/.* /index.php break;
-
-<a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
-### Lighttpd configuration
-
-If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS.
-
-Open your site configuration file with your favorite editor.
-
-`nano /etc/lighttpd/conf-enabled/sites.conf`
-
-Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
-
-    $HTTP["host"] =~ "example.domain.com" {
-        server.document-root = "/var/www/example/"
-
-        url.rewrite-once = (
-            "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
-            "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
-            "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
-            "^/storage/temp/public/[\w-]+/.*$" => "$0",
-            "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
-            "(.*)" => "/index.php$1"
-        )
-    }
-
-<a name="post-install-setup" class="anchor" href="#post-install-setup"></a>
-## Post-installation setup
+<a name="post-install-steps" class="anchor" href="#post-install-steps"></a>
+## Post-installation steps
 
 There are some things you may need to set up after the installation is complete.
-
-- [Delete installation files](#delete-install-files)
-- [Setting up the scheduler](#crontab-setup)
-- [Setting up queue workers](#queue-setup)
 
 <a name="delete-install-files" class="anchor" href="#delete-install-files"></a>
 ### Delete installation files
@@ -167,14 +87,3 @@ Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* 
 You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
 
 If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work` to process the first available job in the queue.
-
-<a name="public-folder"></a>
-## Using a public folder (advanced)
-
-While this step is optional, for ultimate security in production environments it is recommended that you configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
-
-    php artisan october:mirror public/
-
-This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
-
-> **Note**: The above command needs to be performed with System Administrator or *sudo* privileges in most cases. It should also be performed after each system update or when a new plugin is installed.
