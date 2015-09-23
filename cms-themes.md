@@ -1,15 +1,19 @@
 # CMS Themes
 
 - [Introduction](#introduction)
-- [Subdirectories](#subdirectories)
-- [Template structure](#structure)
-
-Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+- [Directory structure](#directory-structure)
+    - [Subdirectories](#subdirectories)
+- [Template structure](#template-structure)
+    - [Configuration section](#configuration-section)
+    - [PHP code section](#php-section)
+    - [Twig markup section](#twig-section)
 
 <a name="introduction" class="anchor" href="#introduction"></a>
 ## Introduction
 
-Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects.
+Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example Git. This page gives you the high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+
+Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects:
 
 Object | Description
 ------------- | -------------
@@ -18,6 +22,9 @@ Object | Description
 [Layouts](layouts) | define the page scaffold.
 [Content files](content) | text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
 **Asset files** | are resource files like images, CSS and JavaScript files.
+
+<a name="directory-structure" class="anchor" href="#directory-structure"></a>
+## Directory structure
 
 Below you can see an example theme directory structure. Each October theme is represented with a separate directory and generally one active theme is used for displaying the website. This example displays the "website" theme directory.
 
@@ -40,7 +47,7 @@ Below you can see an example theme directory structure. Each October theme is re
 > The active theme is set with the `activeTheme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme back-end page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 
 <a name="subdirectories" class="anchor" href="#subdirectories"></a>
-## Subdirectories
+### Subdirectories
 
 October supports a single level subdirectories for pages, partials, layouts and content files (the **assets** directory can have any structure). This simplifies organizing large websites. In the example directory structure below you can see that the pages and partials directories contain the **blog** subdirectory and the content directory contains the **home** subdirectory.
 
@@ -67,7 +74,7 @@ To refer to a partial or a content file from a subdirectory, specify the subdire
 
 > **Note:** The template paths are always absolute. If in a partial you render another partial from the same subdirectory you still need to specify the subdirectory name.
 
-<a name="structure" class="anchor" href="#structure"></a>
+<a name="template-structure" class="anchor" href="#template-structure"></a>
 ## Template structure
 
 Pages, partials and layout templates can include up to 3 sections: **configuration**, **PHP code**, and **Twig markup**.

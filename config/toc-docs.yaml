@@ -36,8 +36,8 @@ Plugins:
 Backend:
   icon: "icon-desktop"
   pages:
-    backend/controllers-views-ajax: "Controllers & AJAX"
-    backend/views-patials: "Views & Partials"
+    backend/controllers-ajax: "Controllers & AJAX"
+    backend/views-partials: "Views & Partials"
     backend/widgets: "Widgets"
     backend/forms: "Forms"
     backend/lists: "Lists"

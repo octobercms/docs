@@ -1,11 +1,22 @@
 # Behaviors
 
-Adds the ability for classes to have *private traits*, also known as Behaviors. These are similar to native PHP Traits except they have some distinct benefits:
+- [Introduction](#introduction)
+- [Comparison to traits](#compare-traits)
+- [Extending constructors](#constructor-extension)
+- [Usage example](#usage-example)
+
+<a name="introduction" class="anchor" href="#introduction"></a>
+## Introduction
+
+Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to native PHP Traits except they have some distinct benefits:
 
 1. Behaviors have their own contructor.
 1. Behaviors can have private or protected methods.
 1. Methods and property names can conflict safely.
 1. Class can be extended with behaviors dynamically.
+
+<a name="compare-traits" class="anchor" href="#compare-traits"></a>
+## Comparison to traits
 
 Where you might use a trait like this:
 
@@ -54,7 +65,41 @@ A behavior is defined like this:
 
 The extended object is always passed as the first parameter to the Behavior's constructor.
 
-### Usage example
+<a name="constructor-extension" class="anchor" href="#constructor-extension"></a>
+## Extending constructors
+
+Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend()` method. The argument should pass a closure that will be called as part of the class constructor.
+
+    MyNamespace\Controller::extend(function($controller) {
+        //
+    });
+
+#### Dynamically implementing a behavior
+
+This unique ability to extend constructors allows behaviors to be implemented dynamically, for example:
+
+    /**
+     * Extend the Pizza Shop to include the Master Splinter behavior too
+     */
+    MyNamespace\Controller::extend(function($controller) {
+
+        // Implement the list controller behavior dynamically
+        $controller->implement[] = 'MyNamespace.Behaviors.ListController';
+    });
+
+#### Dynamically creating methods
+
+Methods can be aded to a `Model` through the use of `addDynamicMethod`.
+
+    Post::extend(function($model) {
+        $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
+            return $model->tags()->lists('name');
+        });
+    });
+
+
+<a name="usage-example" class="anchor" href="#usage-example"></a>
+## Usage example
 
 #### Behavior / Extension class
 
@@ -120,28 +165,6 @@ This `Controller` class will implement the `FormController` behavior and then th
 
     // Prints: You might not see me...
     echo $controller->asExtension('FormController')->otherMethod();
-
-### Dynamically using a behavior / Constructor extension
-
-Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend()` method. The argument should pass a closure that will be called as part of the class constructor. For example:
-
-    /**
-     * Extend the Pizza Shop to include the Master Splinter behavior too
-     */
-    MyNamespace\Controller::extend(function($controller){
-
-        // Implement the list controller behavior dynamically
-        $controller->implement[] = 'MyNamespace.Behaviors.ListController';
-    });
-
-### Dynamically creating methods
-Methods can be aded to a `Model` through the use of `addDynamicMethod`.
-
-    Post::extend(function($model) {
-        $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
-            return $model->tags()->lists('name');
-        });
-    });
 
 ### Soft definition
 

@@ -1,11 +1,16 @@
 # CMS Pages
 
+- [Introduction](#introduction)
 - [Page configuration](#configuration)
+    - [URL syntax](#url-syntax)
 - [Dynamic pages](#dynamic-pages)
 - [404 page](#404-page)
 - [Error page](#error-page)
 - [Page variables](#page-variables)
 - [Injecting page assets programmatically](#injecting-assets)
+
+<a name="introduction" class="anchor" href="#introduction"></a>
+## Introduction
 
 All websites have pages. In October pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages accordingly to the page function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages but the [PHP section](themes#php-section) is optional. Below you can see the simplest home page example.
 
