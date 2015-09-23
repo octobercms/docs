@@ -54,7 +54,7 @@ Parameters in the middle of the URL cannot be optional. In the next example the 
 
     url = "/blog/:post_id?/comments"
 
-Optional parameters can have default values which are used as fallback values in case the real parameter value is not presented in the URL. Default values cannot contain any pipe symbols or question marks. The default value is specified after the **question mark**. In the next example the `category_id` parameter would be `10` for the URL `/blog/category`.
+Optional parameters can have default values which are used as fallback values in case the real parameter value is not presented in the URL. Default values cannot contain any asterisks, pipe symbols or question marks. The default value is specified after the **question mark**. In the next example the `category_id` parameter would be `10` for the URL `/blog/category`.
 
     url = "/blog/category/:category_id?10"
 
@@ -65,6 +65,17 @@ You can also use regular expressions to validate parameters. To add a validation
     url = "/blog/:post_id|^[0-9]+$" - this will match /blog/post/3
     ...
     url = "/blog/:post_name?|^[a-z0-9\-]+$" - this will match /blog/my-blog-post
+
+It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match zero or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
+
+    url = "/blog/:category*/:slug"
+
+For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brown/make/volkswagen/beetle/retro/edit` and extract the following parameter values:
+
+<div class="content-list" markdown="1">
+- color: `brown`
+- make: `volkswagen/beetle/retro`
+</div>
 
 > **Note:** Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
 
