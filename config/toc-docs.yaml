@@ -36,14 +36,15 @@ Plugins:
 Backend:
   icon: "icon-desktop"
   pages:
-    backend/controllers-views-ajax: "Controllers, Views & AJAX"
+    backend/controllers-views-ajax: "Controllers & AJAX"
+    backend/views-patials: "Views & Partials"
+    backend/widgets: "Widgets"
     backend/forms: "Forms"
     backend/lists: "Lists"
     backend/relations: "Relations"
     backend/reorder: "Sorting records"
     backend/import-export: "Importing & Exporting"
     backend/users: "Users & Permissions"
-    backend/widgets: "Widgets"
     ui: "User interface guide@"
 
 Database:
