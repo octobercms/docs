@@ -1,9 +1,9 @@
 # Model Mutators
 
 - [Introduction](#introduction)
-- [Accessors & Mutators](#accessors-and-mutators)
-- [Date Mutators](#date-mutators)
-- [Attribute Casting](#attribute-casting)
+- [Accessors & mutators](#accessors-and-mutators)
+- [Date mutators](#date-mutators)
+- [Attribute casting](#attribute-casting)
 
 <a name="introduction"></a>
 ## Introduction
@@ -13,9 +13,9 @@ Accessors and mutators allow you to format attributes when retrieving them from 
 In addition to custom accessors and mutators, you can also automatically cast date fields to [Carbon](https://github.com/briannesbitt/Carbon) instances or even [cast text values to JSON](#attribute-casting).
 
 <a name="accessors-and-mutators"></a>
-## Accessors & Mutators
+## Accessors & mutators
 
-#### Defining An Accessor
+#### Defining an accessor
 
 To define an accessor, create a `getFooAttribute` method on your model where `Foo` is the "camel" cased name of the column you wish to access. In this example, we'll define an accessor for the `first_name` attribute. The accessor will automatically be called when attempting to retrieve the value of `first_name`:
 
@@ -43,7 +43,7 @@ As you can see, the original value of the column is passed to the accessor, allo
 
     $firstName = $user->first_name;
 
-#### Defining A Mutator
+#### Defining a mutator
 
 To define a mutator, define a `setFooAttribute` method on your model where `Foo` is the "camel" cased name of the column you wish to access. In this example, let's define a mutator for the `first_name` attribute. This mutator will be automatically called when we attempt to set the value of the `first_name` attribute on the model:
 
@@ -74,7 +74,7 @@ The mutator will receive the value that is being set on the attribute, allowing 
 Here the `setFirstNameAttribute` function will be called with the value `Sally`. The mutator will then apply the `strtolower` function to the name and set its value in the internal `$attributes` array.
 
 <a name="date-mutators"></a>
-## Date Mutators
+## Date mutators
 
 By default, Models in October will convert the `created_at` and `updated_at` columns to instances of a [Carbon](https://github.com/briannesbitt/Carbon) object, which provides an assortment of helpful methods and extends the native PHP `DateTime` class.
 
@@ -117,7 +117,7 @@ By default, timestamps are formatted as `'Y-m-d H:i:s'`. If you need to customiz
     }
 
 <a name="attribute-casting"></a>
-## Attribute Casting
+## Attribute casting
 
 The `$casts` property on your model provides a convenient method of converting attributes to common data types. The `$casts` property should be an array where the key is the name of the attribute being cast, while the value is the type you wish to cast to the column to. The supported cast types are: `integer`, `real`, `float`, `double`, `string`, `boolean`, `object` and `array`.
 
@@ -143,7 +143,7 @@ Now the `is_admin` attribute will always be cast to a boolean when you access it
         //
     }
 
-#### Array Casting
+#### Array casting
 
 The `array` cast type is particularly useful when working with columns that are stored as serialized JSON. For example, if your database has a `TEXT` field type that contains serialized JSON, adding the `array` cast to that attribute will automatically deserialize the attribute to a PHP array when you access it on your Eloquent model:
 
