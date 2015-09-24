@@ -45,7 +45,7 @@ Backend:
     backend/reorder: "Sorting records"
     backend/import-export: "Importing & Exporting"
     backend/users: "Users & Permissions"
-    # ui: "User interface guide@"
+    ui: "User interface guide@"
 
 Database:
   icon: "icon-hdd"
