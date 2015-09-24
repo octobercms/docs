@@ -1,11 +1,19 @@
 # Backend importing and exporting
 
+- [Introduction](#introduction)
 - [Configuring the behavior](#configuring-import-export)
+    - [Import page](#import-page)
+    - [Export page](#export-page)
 - [Import and export views](#import-export-views)
+    - [Import view](#import-view)
+    - [Export view](#export-view)
 - [Defining an import model](#import-model)
 - [Defining an export model](#export-model)
 - [Custom options](#custom-options)
 - [Integration with list behavior](#list-behavior-integration)
+
+<a name="introduction"></a>
+## Introduction
 
 **Import Export behavior** is a controller modifier that provides features for importing and exporting data. The behavior provides two pages called Import and Export. The Import page allows a user to upload a CSV file and match the columns to the database. The Export page is the opposite and allows a user to download columns from the database as a CSV file. The behavior provides the controller actions `import()` and `export()`.
 

@@ -1,8 +1,17 @@
 # Relations
 
+- [Introduction](#introduction)
 - [Configuring the relation behavior](#configuring-relation)
 - [Relationship types](#relationship-types)
+    - [Has many](#has-many)
+    - [Belongs to many](#belongs-to-many)
+    - [Belongs to many (with Pivot Data)](#belongs-to-many-pivot)
+    - [Belongs to](#belongs-to)
+    - [Has one](#has-one)
 - [Displaying a relation manager](#relation-display)
+
+<a name="introduction"></a>
+## Introduction
 
 `Relation behavior` is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
 
@@ -89,7 +98,6 @@ These configuration values can be specified only for the **manage** options.
 Option | Type | Description
 ------------- | ------------- | -------------
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
-
 
 <a name="relationship-types"></a>
 ## Relationship types

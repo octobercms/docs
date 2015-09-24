@@ -1,12 +1,31 @@
 # Backend forms
 
+- [Introduction](#introduction)
 - [Configuring the form behavior](#configuring-form)
+    - [Create page](#form-create-page)
+    - [Update page](#form-update-page)
+    - [Preview page](#form-preview-page)
 - [Defining form fields](#form-fields)
+    - [Tab options](#form-tab-options)
+    - [Field options](#form-field-options)
 - [Available field types](#field-types)
 - [Form widgets](#form-widgets)
 - [Form views](#form-views)
+    - [Create view](#form-create-view)
+    - [Update view](#form-update-view)
+    - [Preview view](#form-preview-view)
 - [Applying conditions to fields](#field-conditions)
+    - [Input preset converter](#field-input-preset)
+    - [Trigger API](#field-trigger-api)
+    - [Field dependencies](#field-dependencies)
 - [Extending form behavior](#extend-form-behavior)
+    - [Overriding controller action](#overriding-action)
+    - [Extending form model query](#extend-model-query)
+    - [Extending form fields](#extend-form-fields)
+    - [Filtering form fields](#filter-form-fields)
+
+<a name="introduction"></a>
+## Introduction
 
 **Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create()`, `update()` and `preview()` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
@@ -205,6 +224,18 @@ Option | Description
 
 There are various native field types that can be used for the **type** setting. For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
+<style>
+    .collection-method-list {
+        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
+        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
+    }
+
+    .collection-method-list a {
+        display: block;
+    }
+</style>
+
+<div class="content-list collection-method-list" markdown="1">
 - [Text](#field-text)
 - [Number](#field-number)
 - [Password](#field-password)
@@ -218,6 +249,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Partial](#field-partial)
 - [Hint](#field-hint)
 - [Widget](#field-widget)
+</div>
 
 <a name="field-text"></a>
 ### Text
@@ -409,6 +441,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets) article.
 
+<div class="content-list collection-method-list" markdown="1">
 - [Code editor](#widget-codeeditor)
 - [Color picker](#color-picker)
 - [Date picker](#widget-datepicker)
@@ -419,6 +452,7 @@ There are various form widgets included as standard, although it is common for p
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Markdown editor](#widget-markdowneditor)
+</div>
 
 <a name="widget-codeeditor"></a>
 ### Code editor
@@ -753,11 +787,6 @@ This example is useful for manipulating the model values, but it does not have a
 ## Extending form behavior
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
-
-- [Overriding controller action](#overriding-action)
-- [Extending form model query](#extend-model-query)
-- [Extending form fields](#extend-form-fields)
-- [Filtering form fields](#filter-form-fields)
 
 <a name="overriding-action"></a>
 ### Overriding controller action

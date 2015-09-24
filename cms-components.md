@@ -5,6 +5,8 @@
 - [Using external property values](#external-property-values)
 - [Passing variables to components](#variables)
 - [Customizing default markup](#customizing-default-markup)
+    - [Moving default markup to a partial](#moving-default-markup)
+    - [Overriding component partials](#overriding-partials)
 - [The "View Bag" component](#viewbag-component)
 
 Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](ajax), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.

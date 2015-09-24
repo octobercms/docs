@@ -1,15 +1,19 @@
 # Backend Controllers & AJAX
 
 - [Introduction](#introduction)
+    - [Class definition](#class-definition)
+    - [Controller properties](#controller-properties)
 - [Actions, views and routing](#actions-views-routing)
 - [Passing data to views](#passing-data-to-views)
 - [Setting the navigation context](#navigation-context)
 - [Using AJAX handlers](#ajax)
-
-October back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors.
+    - [Back-end AJAX handlers](#ajax-handlers)
+    - [Triggering AJAX requests](#triggering-ajax-requests)
 
 <a name="introduction"></a>
 ## Introduction
+
+October back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors.
 
 Each controller is represented with a PHP script which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are htm files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
 

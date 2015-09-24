@@ -1,7 +1,10 @@
 # Backend Views & Partials
 
 - [Partials and hints](#partials)
+    - [Hint partials](#hints)
+    - [Checking if hints are hidden](#checking-hints)
 - [Layouts and child layouts](#layouts)
+    - [Form with sidebar](#layout-form-with-sidebar)
 
 <a name="partials"></a>
 ## Partials
@@ -30,7 +33,8 @@ Property | Description
 **subtitle** | In addition to the title, adds a second line to the title secion.
 **icon** | In addition to the title, adds an icon to the title section.
 
-### Checking if Hints are Hidden
+<a name="checking-hints"></a>
+### Checking if hints are hidden
 
 If you're using hints, you may find it useful to check if the user has hidden them. This is easily done using the `isBackendHintHidden` method. It takes a single parameter, and that's the unique key you specified in the original call to `makeHintPartial`. The method will return true if the hint was hidden, false otherwise:
 

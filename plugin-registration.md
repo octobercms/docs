@@ -1,11 +1,18 @@
 # Plugin Registration
 
 - [Introduction](#introduction)
+    - [Directory structure](#directory-structure)
+    - [Plugin namespaces](#namespaces)
 - [Registration file](#registration-file)
+    - [Supported methods](#registration-methods)
+    - [Basic plugin information](#basic-plugin-information)
 - [Routing and initialization](#routing-initialization)
 - [Dependency definitions](#dependency-definitions)
 - [Extending Twig](#extending-twig)
 - [Navigation menus](#navigation-menus)
+
+<a name="introduction"></a>
+## Introduction
 
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
 
@@ -16,8 +23,8 @@ Plugins are the foundation for adding new features to the CMS by extending it. T
 1. Alter [functionality of the core or other plugins](events).
 1. Provide classes, [back-end controllers](../backend/controllers-views-ajax), views, assets, and other files.
 
-<a name="introduction"></a>
-## Introduction
+<a name="directory-structure"></a>
+### Directory structure
 
 Plugins reside in the **/plugins** subdirectory of the application directory. An example of a plugin directory structure:
 

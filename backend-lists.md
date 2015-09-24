@@ -1,12 +1,24 @@
 # Backend lists
 
+- [Introduction](#introduction)
 - [Configuring the list behavior](#configuring-list)
+    - [Adding a toolbar](#adding-toolbar)
+    - [Filtering the list](#adding-filters)
 - [Defining list columns](#list-columns)
+    - [Column options](#column-options)
 - [Available column types](#column-types)
 - [Displaying the list](#displaying-list)
 - [Multiple list definitions](#multiple-list-definitions)
 - [Using list filters](#list-filters)
+    - [Scope options](#filter-scope-options)
+    - [Available scope types](#scope-types)
 - [Extending list behavior](#extend-list-behavior)
+    - [Overriding controller action](#overriding-action)
+    - [Extending list columns](#extend-list-columns)
+    - [Extending the model query](#extend-model-query)
+
+<a name="introduction"></a>
+## Introduction
 
 **List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index()` however the list can be rendered anywhere and multiple list definitions can be used.
 
@@ -149,6 +161,18 @@ Option | Description
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed.
 
+<style>
+    .collection-method-list {
+        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
+        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
+    }
+
+    .collection-method-list a {
+        display: block;
+    }
+</style>
+
+<div class="content-list collection-method-list" markdown="1">
 - [Text](#column-text)
 - [Number](#column-number)
 - [Switch](#column-switch)
@@ -160,6 +184,7 @@ There are various column types that can be used for the **type** setting, these 
 - [Select](#column-select)
 - [Relation](#column-relation)
 - [Partial](#column-partial)
+</div>
 
 <a name="column-text"></a>
 ### Text

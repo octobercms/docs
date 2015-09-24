@@ -1,8 +1,16 @@
 # Plugin Settings & Configuration
 
+- [Introduction](#introduction)
 - [Database settings](#database-settings)
+    - [Writing to a settings model](#writing-settings)
+    - [Reading from a settings model](#reading-settings)
 - [Back-end settings pages](#backend-pages)
+    - [Settings link registration](#link-registration)
+    - [Setting the page navigation context](#settings-page-context)
 - [File-based configuration](#file-configuration)
+
+<a name="introduction"></a>
+## Introduction
 
 There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 

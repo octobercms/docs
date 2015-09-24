@@ -1,8 +1,15 @@
 # Extending plugins
 
 - [Extending with events](#extending-with-events)
+    - [Subscribing to events](#subscribing-to-events)
+    - [Declaring events](#declaring-events)
 - [Extending back-end views](#backend-view-events)
 - [Usage examples](#usage-examples)
+    - [Extending a User model](#extending-user-model)
+    - [Extending a backend form](#extending-backend-form)
+    - [Extending a component](#extending-component)
+    - [Extending the backend menu](#extending-backend-menu)
+
 
 <!-- Behaviors: Mixin concept, dynamic implement, extend constructor -->
 <!-- IoC/Facades: Replacing objects -->
@@ -89,6 +96,7 @@ The above example would output the following markup:
 
 These are some practical examples of how events can be used.
 
+<a name="extending-user-model"></a>
 ### Extending a User model
 
 This example will modify the `model.getAttribute` event of the `User` model by binding to its local event. This is carried out inside the `boot()` method of the [Plugin registration file](registration#routing-initialization). In both cases when the `$model->foo` attribute is accessed, it will return the value *bar*.
@@ -124,6 +132,7 @@ This example will modify the `model.getAttribute` event of the `User` model by b
         }
     }
 
+<a name="extending-backend-form"></a>
 ### Extending a backend form
 
 This example will modify the `backend.form.extendFields` global event of the `Backend\Widget\Form` class and inject some extra fields values under the conditions that the form is being used to modify a user. This event is also subscribed inside the `boot()` method of the [Plugin registration file](registration#routing-initialization).
@@ -159,6 +168,7 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
 
 > Remember to add `use Event` to the top of your class file to use global events.
 
+<a name="extending-component"></a>
 ### Extending a component
 
 This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components#component-class-definition).
@@ -189,6 +199,7 @@ Next this will demonstrate how to hook to this new event from inside the [page e
         });
     }
 
+<a name="extending-backend-menu"></a>
 ### Extending the backend menu
 
 This example will replace the label for CMS and Pages in the backend with *...*.

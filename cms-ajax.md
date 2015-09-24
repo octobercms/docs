@@ -1,14 +1,19 @@
 # AJAX framework
 
 - [Introduction](#introduction)
-- [Ajax handlers](#ajax-handlers)
+    - [How AJAX requests work](#how-ajax-works)
+- [AJAX handlers](#ajax-handlers)
 - [Data attributes API](#data-attributes)
+    - [Data attributes API examples](#data-attribute-examples)
 - [JavaScript API](#javascript-api)
+    - [JavaScript API examples](#javascript-examples)
 - [Calling AJAX handlers defined in components](#components-ajax-handlers)
 - [Global AJAX events](#global-events)
 - [Returning data from AJAX handlers](#returning-data-from-handlers)
 - [Redirections in AJAX handlers](#redirections-in-handlers)
 - [Pushing content updates](#pushing-content-updates)
+
+
 
 October includes the AJAX framework that lets you execute AJAX handlers defined in your [pages](pages), [layouts](layouts) or [components](components) and update page blocks with [partials](partials). The AJAX framework comes in two flavors - as JavaScript API and data attributes API. The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
 
@@ -54,7 +59,7 @@ The form configuration from the previous example could be read like this: "When 
     The result is {{ result }}
 
 <a name="ajax-handlers"></a>
-## Ajax handlers
+## AJAX handlers
 
 AJAX handlers are PHP functions that can be defined in the page or layout [PHP section](themes#php-section) or inside [components](components). Handler names should have the following pattern: `onName`. Handlers can inject variables the Twig environment, where they can be used during the partial rendering. The next example shows an Ajax handler defined in the page PHP section. The handler loads two POST values and injects the **result** page variable.
 

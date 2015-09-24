@@ -1,7 +1,11 @@
 # Backend sorting and reordering
 
+- [Introduction](#introduction)
 - [Configuring the reorder behavior](#configuring-reorder)
 - [Displaying the reorder page](#reorder-display)
+
+<a name="introduction"></a>
+## Introduction
 
 **Reorder behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder()`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
 
