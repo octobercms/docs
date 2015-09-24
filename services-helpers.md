@@ -87,8 +87,8 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [response](#method-response)
 [route](#method-route)
 [secure_asset](#method-secure-asset)
-[trace_log](#method-trace-log)
-[trace_sql](#method-trace-sql)
+[traceLog](#method-trace-log)
+[traceSql](#method-trace-sql)
 [url](#method-url)
 </div>
 
@@ -678,18 +678,18 @@ Generate a URL for an asset using HTTPS:
     echo secure_asset('foo/bar.zip', $title, $attributes = []);
 
 <a name="method-trace-log"></a>
-#### `trace_log()` {#collection-method}
+#### `traceLog()` {#collection-method}
 
-The `trace_log` function writes a trace message to the log file.
+The `traceLog` function writes a trace message to the log file.
 
-    trace_log('This code has passed...');
+    traceLog('This code has passed...');
 
 <a name="method-trace-log"></a>
-#### `trace_sql()` {#collection-method}
+#### `traceSql()` {#collection-method}
 
-The `trace_log` function function enables database logging and begins to monitor all SQL output.
+The `traceSql` function function enables database logging and begins to monitor all SQL output.
 
-    trace_sql();
+    traceSql();
 
     Db::table('users')->count();
 
