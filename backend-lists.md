@@ -23,7 +23,7 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
 
 > **Note:** Very often the list and [form behavior](form) are used together in a same controller.
 
-<a name="configuring-list" class="anchor" href="#configuring-list"></a>
+<a name="configuring-list"></a>
 ## Configuring the list behavior
 
 The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a typical list behavior configuration file:
@@ -62,7 +62,7 @@ Option | Description
 **showTree** | displays a tree hierarchy for parent/child records. Default: false.
 **treeExpanded** | if tree nodes should be expanded by default. Default: false.
 
-<a name="adding-toolbar" class="anchor" href="#adding-toolbar"></a>
+<a name="adding-toolbar"></a>
 ### Adding a toolbar
 
 To include a toolbar with the list, add the following configuration to the list configuration YAML file:
@@ -93,7 +93,7 @@ The toolbar buttons partial referred above should contain the toolbar control de
             class="btn btn-primary oc-icon-plus">New Post</a>
     </div>
 
-<a name="adding-filters" class="anchor" href="#adding-filters"></a>
+<a name="adding-filters"></a>
 ### Filtering the list
 
 To filter a list by user defined input, add the following list configuration to the YAML file:
@@ -102,7 +102,7 @@ To filter a list by user defined input, add the following list configuration to 
 
 The **filter** option should make reference to a [filter configuration file](#list-filters) path or supply an array with the configuration.
 
-<a name="list-columns" class="anchor" href="#list-columns"></a>
+<a name="list-columns"></a>
 ## Defining list columns
 
 List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
@@ -126,7 +126,7 @@ The next example shows the typical contents of a list column definitions file.
         name: Name
         email: Email
 
-<a name="column-options" class="anchor" href="#column-options"></a>
+<a name="column-options"></a>
 ### Column options
 
 For each column can specify these options (where applicable):
@@ -144,7 +144,7 @@ Option | Description
 **cssClass** | assigns a CSS class to the column container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 
-<a name="column-types" class="anchor" href="#column-types"></a>
+<a name="column-types"></a>
 ## Available column types
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed.
@@ -161,7 +161,7 @@ There are various column types that can be used for the **type** setting, these 
 - [Relation](#column-relation)
 - [Partial](#column-partial)
 
-<a name="column-text" class="anchor" href="#column-text"></a>
+<a name="column-text"></a>
 ### Text
 
 `text` - displays a text column, aligned left
@@ -170,7 +170,7 @@ There are various column types that can be used for the **type** setting, these 
         label: Full Name
         type: text
 
-<a name="column-number" class="anchor" href="#column-number"></a>
+<a name="column-number"></a>
 ### Number
 
 `number` - displays a number column, aligned right
@@ -179,7 +179,7 @@ There are various column types that can be used for the **type** setting, these 
         label: Age
         type: number
 
-<a name="column-switch" class="anchor" href="#column-switch"></a>
+<a name="column-switch"></a>
 ### Switch
 
 `switch` - displays a on or off state for boolean columns.
@@ -188,7 +188,7 @@ There are various column types that can be used for the **type** setting, these 
         label: Enabled
         type: switch
 
-<a name="column-datetime" class="anchor" href="#column-datetime"></a>
+<a name="column-datetime"></a>
 ### Date & Time
 
 `datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
@@ -204,7 +204,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         type: datetime
         format: l jS \of F Y h:i:s A
 
-<a name="column-date" class="anchor" href="#column-date"></a>
+<a name="column-date"></a>
 ### Date
 
 `date` - displays the column value as date format **M j, Y**
@@ -213,7 +213,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Date
         type: date
 
-<a name="column-time" class="anchor" href="#column-time"></a>
+<a name="column-time"></a>
 ### Time
 
 `time` - displays the column value as time format **g:i A**
@@ -222,7 +222,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Date
         type: time
 
-<a name="column-timesince" class="anchor" href="#column-timesince"></a>
+<a name="column-timesince"></a>
 ### Time since
 
 `timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
@@ -231,7 +231,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Date
         type: timesince
 
-<a name="column-timetense" class="anchor" href="#column-timetense"></a>
+<a name="column-timetense"></a>
 ### Time tense
 
 `timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
@@ -240,7 +240,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Date
         type: timetense
 
-<a name="column-select" class="anchor" href="#column-select"></a>
+<a name="column-select"></a>
 ### Select
 
 `select` - allows to create a column using a custom select statement. Any valid SQL SELECT statement works here.
@@ -249,7 +249,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Full Name
         select: concat(first_name, ' ', last_name)
 
-<a name="column-relation" class="anchor" href="#column-relation"></a>
+<a name="column-relation"></a>
 ### Relation
 
 `relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
@@ -267,7 +267,7 @@ If the [relationship definition](../database/relations) uses the **count** argum
         valueFrom: count
         default: 0
 
-<a name="column-partial" class="anchor" href="#column-partial"></a>
+<a name="column-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name. Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`.
@@ -276,14 +276,14 @@ If the [relationship definition](../database/relations) uses the **count** argum
         type: partial
         path: ~/plugins/acme/blog/models/comments/_content_column.htm
 
-<a name="displaying-list" class="anchor" href="#displaying-list"></a>
+<a name="displaying-list"></a>
 ## Displaying the list
 
 Usually lists are displayed in the index [view](controllers-views-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender()` method call.
 
     <?= $this->listRender() ?>
 
-<a name="multiple-list-definitions" class="anchor" href="#multiple-list-definitions"></a>
+<a name="multiple-list-definitions"></a>
 ## Multiple list definitions
 
 The list behavior can support mulitple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
@@ -297,7 +297,7 @@ Each definition can then be displayed by passing the definition name as the firs
 
     <?= $this->listRender('templates') ?>
 
-<a name="list-filters" class="anchor" href="#list-filters"></a>
+<a name="list-filters"></a>
 ## Using list filters
 
 Lists can be filtered by [adding a filter definition](#adding-filters) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
@@ -319,7 +319,7 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
             type: checkbox
             conditions: published <> 1
 
-<a name="filter-scope-options" class="anchor" href="#filter-scope-options"></a>
+<a name="filter-scope-options"></a>
 ### Scope options
 
 For each scope you can specify these options (where applicable):
@@ -332,7 +332,7 @@ Option | Description
 **scope** | specifies a [query scope method](http://laravel.com/docs/eloquent#query-scopes) defined in the **list model** to apply to the list query, the first parameter will contain the filtered value(s).
 **nameFrom** | if filtering by multiple items, a column to display for the name, taken from the `modelClass` model.
 
-<a name="scope-types" class="anchor" href="#scope-types"></a>
+<a name="scope-types"></a>
 ### Available scope types
 
 These types can be used to determine how the filter scope should be displayed.
@@ -342,7 +342,7 @@ Type | Description
 **group** | filters the list by a group of items, usually by a related model and require a `nameFrom` definition. Eg: Status name as open, closed, etc.
 **checkbox** | used as a switch to apply a predefined condition or query to the list.
 
-<a name="extend-list-behavior" class="anchor" href="#extend-list-behavior"></a>
+<a name="extend-list-behavior"></a>
 ## Extending list behavior
 
 Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
@@ -351,7 +351,7 @@ Sometimes you may wish to modify the default list behavior and there are several
 - [Extending list columns](#extend-list-columns)
 - [Extending the model query](#extend-model-query)
 
-<a name="overriding-action" class="anchor" href="#overriding-action"></a>
+<a name="overriding-action"></a>
 ### Overriding controller action
 
 You can use your own logic for the `index()` action method in the controller, then optionally call the List behavior `index()` parent method.
@@ -366,7 +366,7 @@ You can use your own logic for the `index()` action method in the controller, th
         $this->asExtension('ListController')->index();
     }
 
-<a name="extend-list-columns" class="anchor" href="#extend-list-columns"></a>
+<a name="extend-list-columns"></a>
 ### Extending list columns
 
 You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
@@ -414,7 +414,7 @@ Method | Description
 
 Each method takes an array of columns similar to the [list column configuration](#list-columns).
 
-<a name="extend-model-query" class="anchor" href="#extend-model-query"></a>
+<a name="extend-model-query"></a>
 ### Extending the model query
 
 The lookup query for the list [database model](../database/model) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:

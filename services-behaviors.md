@@ -5,7 +5,7 @@
 - [Extending constructors](#constructor-extension)
 - [Usage example](#usage-example)
 
-<a name="introduction" class="anchor" href="#introduction"></a>
+<a name="introduction"></a>
 ## Introduction
 
 Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to native PHP Traits except they have some distinct benefits:
@@ -15,7 +15,7 @@ Behaviors add the ability for classes to have *private traits*, also known as Be
 1. Methods and property names can conflict safely.
 1. Classes can be extended with behaviors dynamically.
 
-<a name="compare-traits" class="anchor" href="#compare-traits"></a>
+<a name="compare-traits"></a>
 ## Comparison to traits
 
 Where you might use a trait like this:
@@ -65,7 +65,7 @@ A behavior is defined like this:
 
 The extended object is always passed as the first parameter to the Behavior's constructor.
 
-<a name="constructor-extension" class="anchor" href="#constructor-extension"></a>
+<a name="constructor-extension"></a>
 ## Extending constructors
 
 Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend()` method. The argument should pass a closure that will be called as part of the class constructor.
@@ -98,7 +98,7 @@ Methods can be aded to a `Model` through the use of `addDynamicMethod`.
     });
 
 
-<a name="usage-example" class="anchor" href="#usage-example"></a>
+<a name="usage-example"></a>
 ## Usage example
 
 #### Behavior / Extension class

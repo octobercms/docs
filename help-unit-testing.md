@@ -3,7 +3,7 @@
 - [Testing plugins](#testing-plugins)
 - [System testing](#testing-system)
 
-<a name="testing-plugins" class="anchor" href="#testing-plugins"></a>
+<a name="testing-plugins"></a>
 ## Testing plugins
 
 Plugin unit tests can be performed by running `phpunit` in the base plugin directory.
@@ -58,7 +58,7 @@ The test class should extend the base class `PluginTestCase` and this is a speci
     php artisan plugin:refresh Acme.Blog
     [php artisan plugin:refresh <dependency>, ...]
 
-<a name="testing-system" class="anchor" href="#testing-system"></a>
+<a name="testing-system"></a>
 ## System testing
 
 To perform unit testing on the core October files, you should download a development copy using composer or cloning the git repo. This will ensure you have the `tests/` directory.

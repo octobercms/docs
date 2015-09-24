@@ -8,7 +8,7 @@
 
 October provides the option of using an Active Record pattern to access the database, through the use of the `Model` class. The class extends and shares the features of [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
 
-<a name="introduction" class="anchor" href="#introduction"></a>
+<a name="introduction"></a>
 ## Introduction
 
 Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
@@ -25,7 +25,7 @@ Model classes reside in the **models** subdirectory of a plugin directory. An ex
 
 The model configuration directory could contain the model's [list column](../backend/lists#list-columns) and [form field](../backend/forms#form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
-<a name="class-definition" class="anchor" href="#class-definition"></a>
+<a name="class-definition"></a>
 ### Class definition
 
 You should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this:
@@ -42,7 +42,7 @@ You should create one model class for each database table. All model classes mus
 
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
-<a name="standard-attributes" class="anchor" href="#standard-attributes"></a>
+<a name="standard-attributes"></a>
 ## Standard attributes
 
 There are some standard attributes that can be found on models, in addition to those provided by [model traits](traits).
@@ -71,7 +71,7 @@ Property | Description
 **$visible** | values are fields made visible when converting the model to JSON or an array.
 **$hidden** | values are fields made hidden when converting the model to JSON or an array.
 
-<a name="model-events" class="anchor" href="#model-events"></a>
+<a name="model-events"></a>
 ## Model events
 
 You can handle different model life cycle events by defining special methods in the model class. The following events are available:
@@ -101,7 +101,7 @@ An example of using an event:
         $this->slug = Str::slug($this->name);
     }
 
-<a name="file-attachments" class="anchor" href="#file-attachments"></a>
+<a name="file-attachments"></a>
 ## File attachments
 
 Models can support file attachments using a subset of the [polymorphic relationship](#relation-polymorph). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship.
@@ -126,7 +126,7 @@ Protected attachments are uploaded to the application's **uploads/protected** di
         'avatar' => ['System\Models\File', 'public' => false]
     ];
 
-<a name="creating-attachments" class="anchor" href="#creating-attachments"></a>
+<a name="creating-attachments"></a>
 ### Creating new attachments
 
 Attach a file uploaded with a form:
@@ -141,7 +141,7 @@ Attach a prepared File object:
 
     $model->avatar()->add($file);
 
-<a name="viewing-attachments" class="anchor" href="#viewing-attachments"></a>
+<a name="viewing-attachments"></a>
 ### Viewing attachments
 
 The `getPath()` method returns the full URL of an uploaded public file. The following code would print something like **...mysite.com/uploads/public/path/to/avatar.jpg**
@@ -174,7 +174,7 @@ The **width** and **height** parameters should be specified as a number or as th
 
     echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
 
-<a name="attachments-usage-example" class="anchor" href="#attachments-usage-example"></a>
+<a name="attachments-usage-example"></a>
 ### Usage example
 
 This section shows a full usage example of the model attachments feature - from defining the relation in a model to displaying the uploaded image on a page.
@@ -236,7 +236,7 @@ Display the uploaded file on a page:
 
     <img src="<?= $featuredImage ?>" alt="Featured Image">
 
-<a name="extending-models" class="anchor" href="#extending-models"></a>
+<a name="extending-models"></a>
 ## Extending models
 
 Models can be extended with the static `extend()` method. The method takes a closure and passes the model object into it. Inside the closure you can add relations to the model::

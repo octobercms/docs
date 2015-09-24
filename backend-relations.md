@@ -23,7 +23,7 @@ Relation behavior depends on [relation definitions](#relation-definitions). In o
 
 > **Note:** Very often the relation behavior is used together with the [form behavior](form).
 
-<a name="configuring-relation" class="anchor" href="#configuring-relation"></a>
+<a name="configuring-relation"></a>
 ## Configuring the relation behavior
 
 The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
@@ -91,7 +91,7 @@ Option | Type | Description
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 
-<a name="relationship-types" class="anchor" href="#relationship-types"></a>
+<a name="relationship-types"></a>
 ## Relationship types
 
 How the relation manager is displayed depends on the relationship definition in the target model. The relationship type will also determine the configuration requirements, these are shown in **bold**. The following relationship types are available:
@@ -102,7 +102,7 @@ How the relation manager is displayed depends on the relationship definition in 
 - [Belongs to](#belongs-to)
 - [Has one](#has-one)
 
-<a name="has-many" class="anchor" href="#has-many"></a>
+<a name="has-many"></a>
 ### Has many
 
 1. Related records are displayed as a list (**view.list**).
@@ -127,7 +127,7 @@ For example, if a *Blog Post* has many *Comments*, the target model is set as th
             list: $/acme/blog/models/comment/columns.yaml
             toolbarButtons: create|delete
 
-<a name="belongs-to-many" class="anchor" href="#belongs-to-many"></a>
+<a name="belongs-to-many"></a>
 ### Belongs to many
 
 1. Related records are displayed as a list (**view.list**).
@@ -151,7 +151,7 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
             list: $/acme/user/models/role/columns.yaml
             form: $/acme/user/models/role/fields.yaml
 
-<a name="belongs-to-many-pivot" class="anchor" href="#belongs-to-many-pivot"></a>
+<a name="belongs-to-many-pivot"></a>
 ### Belongs to many (with Pivot Data)
 
 1. Related records are displayed as a list (**view.list**).
@@ -202,7 +202,7 @@ Pivot data is available when defining form fields and list columns via the `pivo
 
 > **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist.
 
-<a name="belongs-to" class="anchor" href="#belongs-to"></a>
+<a name="belongs-to"></a>
 ### Belongs to
 
 1. Related record is displayed as a preview form (**view.form**).
@@ -227,7 +227,7 @@ For example, if a *Phone* belongs to a *Person* the relation manager will displa
             form: $/acme/user/models/person/fields.yaml
             list: $/acme/user/models/person/columns.yaml
 
-<a name="has-one" class="anchor" href="#has-one"></a>
+<a name="has-one"></a>
 ### Has one
 
 1. Related record is displayed as a preview form (**view.form**).
@@ -252,7 +252,7 @@ For example, if a *Person* has one *Phone* the relation manager will display for
             form: $/acme/user/models/phone/fields.yaml
             list: $/acme/user/models/phone/columns.yaml
 
-<a name="relation-display" class="anchor" href="#relation-display"></a>
+<a name="relation-display"></a>
 ## Displaying a relation manager
 
 Before relations can be managed on any page, the target model must first be initialized in the controller by calling the `initRelation()` method.

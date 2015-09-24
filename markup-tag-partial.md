@@ -15,7 +15,7 @@ The partial name can also be a variable:
     {% set tabName = "profile" %}
     {% partial tabName %}
 
-<a name="variables" class="anchor" href="#variables"></a>
+<a name="variables"></a>
 ## Variables
 
 You can pass variables to partials by specifying them after the partial name:

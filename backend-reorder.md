@@ -25,7 +25,7 @@ In order to use the reorder behavior you should add it to the `$implement` prope
         // [...]
     }
 
-<a name="configuring-reorder" class="anchor" href="#configuring-reorder"></a>
+<a name="configuring-reorder"></a>
 ## Configuring the behavior
 
 The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a configuration file:
@@ -58,7 +58,7 @@ Option | Description
 **modelClass** | a model class name, the record data is loaded from this model.
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration.
 
-<a name="reorder-display" class="anchor" href="#reorder-display"></a>
+<a name="reorder-display"></a>
 ## Displaying the reorder page
 
 You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reodering includes the toolbar, the view file will consist solely of the single `reorderRender()` method call.

@@ -8,7 +8,7 @@
 
 October back-end implements the MVC pattern. Controllers manage back-end pages and implement various features like forms and lists. This article describes how to develop back-end controllers and how to configure controller behaviors.
 
-<a name="introduction" class="anchor" href="#introduction"></a>
+<a name="introduction"></a>
 ## Introduction
 
 Each controller is represented with a PHP script which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are htm files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
@@ -24,7 +24,7 @@ Each controller is represented with a PHP script which resides in the the **/con
             Users.php             <=== Controller class
           Plugin.php
 
-<a name="class-definition" class="anchor" href="#class-definition"></a>
+<a name="class-definition"></a>
 ### Class definition
 
 Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The most basic representation of a Controller used inside a Plugin looks like this:
@@ -41,7 +41,7 @@ Controller classes must extend the `\Backend\Classes\Controller` class. As any o
 
 Usually each controller implements functionality for working with a single type of data - like blog posts or categories. All back-end behaviors described below assume this convention.
 
-<a name="controller-properties" class="anchor" href="#controller-properties"></a>
+<a name="controller-properties"></a>
 ### Controller properties
 
 The back-end controller base class defines a number of properties that allow to configure the page appearance and manage the page security:
@@ -60,7 +60,7 @@ Property | Description
 **$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
 **$layout** | specify a custom layout for the controller views (see [layouts](#layouts) below).
 
-<a name="actions-views-routing" class="anchor" href="#actions-views-routing"></a>
+<a name="actions-views-routing"></a>
 ## Actions, views and routing
 
 Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Back-end view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
@@ -75,7 +75,7 @@ The above Controller results in the following:
 
     http://yoursite.com/backend/acme/blog/users/index
 
-<a name="passing-data-to-views" class="anchor" href="#passing-data-to-views"></a>
+<a name="passing-data-to-views"></a>
 ## Passing data to views
 
 Usually when you build the back-end user interface you can use the **controller behaviors**, described below, and don't need to pass any variables directly to your views. However you can do it with the controller's `$vars` property:
@@ -86,7 +86,7 @@ The variables passed with the `$vars` property can be accessed in the view code 
 
     <p>The variable value is <?= $var ?></p>
 
-<a name="navigation-context" class="anchor" href="#navigation-context"></a>
+<a name="navigation-context"></a>
 ## Setting the navigation context
 
 Plugins can register the back-end navigation menus and submenus in the [plugin registration file](../plugin/registration#navigation-menus). The navigation context determines what back-end menu and submenu are active for the current back-end page. You can set the navigation context with the `BackendMenu` class:
@@ -110,12 +110,12 @@ You can set the title of the back-end page with the `$pageTitle` property of the
 
     $this->pageTitle = 'Blog categories';
 
-<a name="ajax" class="anchor" href="#ajax"></a>
+<a name="ajax"></a>
 ## Using AJAX handlers
 
 The back-end AJAX framework uses the same [AJAX library](../cms/ajax) as the front-end pages. The library is loaded automatically on the back-end pages.
 
-<a name="ajax-handlers" class="anchor" href="#ajax-handlers"></a>
+<a name="ajax-handlers"></a>
 ### Back-end AJAX handlers
 
 The back-end AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
@@ -134,7 +134,7 @@ Back-end AJAX handlers can return an array of data, throw an exception or redir
         ];
     }
 
-<a name="triggering-ajax-requests" class="anchor" href="#triggering-ajax-requests"></a>
+<a name="triggering-ajax-requests"></a>
 ### Triggering AJAX requests
 
 The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [front-end AJAX library](../cms/ajax) for details. The following example shows how to trigger a request with a back-end button.

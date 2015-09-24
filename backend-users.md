@@ -4,7 +4,7 @@
 - [Restricting access to back-end pages](#page-access)
 - [Restricting access to features](#features)
 
-<a name="permission-registration" class="anchor" href="#permission-registration"></a>
+<a name="permission-registration"></a>
 ## Registering permissions
 
 Plugins can register back-end user permissions by overriding the `registerPermissions()` method inside the [Plugin registration class](../plugin/registration#registration-file).  The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
@@ -27,7 +27,7 @@ The next example shows how to register back-end permission items. Permissions ar
         ];
     }
 
-<a name="page-access" class="anchor" href="#page-access"></a>
+<a name="page-access"></a>
 ## Restricting access to back-end pages
 
 In a back-end controller class you can specify which permissions are required for access the pages provided by the controller. It's done with the `$requiredPermissions` controller's property. This property should contain an array of permission keys. If the user permissions match any permission from the list, the framework will let the user to see the controller pages.
@@ -44,7 +44,7 @@ You can also use the **asterisk** symbol to indicate the "all permissions" condi
 
     public $requiredPermissions = ['acme.blog.*'];
 
-<a name="features" class="anchor" href="#features"></a>
+<a name="features"></a>
 ## Restricting access to features
 
 The back-end user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the back-end user interface. The permission methods supported by the back-end user are `hasPermission()` and `hasAccess()`. The both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.

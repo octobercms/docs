@@ -226,7 +226,7 @@ Mail messages can be sent in October using either mail views or mail templates. 
 
 Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates()` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
-<a name="mail-views" class="anchor" href="#mail-views"></a>
+<a name="mail-views"></a>
 ### Mail views
 
 Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin:mail.message** would use the content in following file:
@@ -278,7 +278,7 @@ Parameter | Description
 **subject** | the mail message subject, required.
 **layout** | the [mail layout](#mail-layouts) code, optional. Default value is `default`.
 
-<a name="mail-templates" class="anchor" href="#mail-templates"></a>
+<a name="mail-templates"></a>
 ### Using mail templates
 
 Mail templates reside in the database and can be created in the back-end area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
@@ -298,7 +298,7 @@ Mail templates can also be generated automatically by [mail views that have been
 
 When a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the mail view can be considered a *default view*.
 
-<a name="mail-layouts" class="anchor" href="#mail-layouts"></a>
+<a name="mail-layouts"></a>
 ### Using mail layouts
 
 Mail layouts can be created by selecting *Settings > Mail > Mail templates* and clicking the *Layouts* tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
@@ -310,7 +310,7 @@ Layout | Code | Description
 Default | default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
 
-<a name="mail-template-registration" class="anchor" href="#mail-template-registration"></a>
+<a name="mail-template-registration"></a>
 ### Registering mail templates
 
 Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates()` method of the [Plugin registration class](../plugin/registration#registration-file).

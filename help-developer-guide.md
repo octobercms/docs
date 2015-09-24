@@ -3,7 +3,7 @@
 - [Writing documentation](#writing-docs)
 - [Developer standards and patterns](#developer-standards)
 
-<a name="writing-docs" class="anchor" href="#writing-docs"></a>
+<a name="writing-docs"></a>
 ## Writing documentation
 
 Your contributions to the October documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect October documentation pages:
@@ -13,7 +13,7 @@ Your contributions to the October documentation are very welcome. Please follow 
 1. Try to use only H2 and H3 headers.
 1. Each H2 and H3 header should have a link defined as.
 
-    <a name="page-cycle-handlers" class="anchor" href="#page-cycle-handlers"></a>
+    <a name="page-cycle-handlers"></a>
 
 1. Only use UL tags for TOC lists.
 1. Avoid short, 1 sentence, paragraphs. Merge short paragraphs and try to be a bit more verbose.
@@ -23,12 +23,12 @@ Your contributions to the October documentation are very welcome. Please follow 
 1. Don't hesitate to make cross links to other documentation articles. Adding links to the same article in the same paragraph is not necessary.
 1. See the [cms-pages.md](https://github.com/octobercms/docs/blob/master/cms-pages.md) or [cms-themes.md](https://github.com/octobercms/docs/blob/master/cms-themes.md) files for your reference.
 
-<a name="psr-exceptions" class="anchor" href="#psr-exceptions"></a>
+<a name="psr-exceptions"></a>
 ## Exceptions to PSR standards
 
 There are some exceptions to the PSR standard used by October.
 
-<a name="psr-exception-methods" class="anchor" href="#psr-exception-methods"></a>
+<a name="psr-exception-methods"></a>
 ### Controller methods can have a single underscore
 
 PSR-2 states that methods must be in **camelCase**. However, in Backend controllers October will prefix AJAX handlers with the action name to define a controlled context. For example:
@@ -50,7 +50,7 @@ PSR-2 states that methods must be in **camelCase**. However, in Backend controll
 
 An exception must be granted for these scenarios.
 
-<a name="psr-exception-newline-expressions" class="anchor" href="#psr-exception-newline-expressions"></a>
+<a name="psr-exception-newline-expressions"></a>
 ### Subsequent expressions are on a new line
 
 PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing parenthesis.
@@ -79,12 +79,12 @@ The following code is considered valid and is recommended for better spacing bet
 
 This is an acceptable preference based on a technicality, PSR-1 and PSR-2 are not explicit when using SHOULD, MUST, etc. in this case. However, at the time of writing, the PSR-2 codesniffer rules say it's not valid, so an exception may be required.
 
-<a name="developer-standards" class="anchor" href="#developer-standards"></a>
+<a name="developer-standards"></a>
 ## Developer standards and patterns
 
 This section describes some standards that we highly recommend to follow for everybody, especially if you are going to publish your products on the Marketplace.
 
-<a name="repository-naming" class="anchor" href="#repository-naming"></a>
+<a name="repository-naming"></a>
 ### Repository naming
 
 Plugins to be named with the `-plugin` suffix and optional `oc-` prefix.
@@ -97,7 +97,7 @@ Themes to be named with the `-theme` suffix and optional `oc-` prefix.
     happy-theme
     oc-happy-theme
 
-<a name="variable-naming" class="anchor" href="#variable-naming"></a>
+<a name="variable-naming"></a>
 ### PHP Variable naming
 
 Use **camelCase** everywhere except for the following:
@@ -106,7 +106,7 @@ Use **camelCase** everywhere except for the following:
 1. Database columns should use **snake_case**
 1. Language keys should use **snake_case**
 
-<a name="element-naming" class="anchor" href="#element-naming"></a>
+<a name="element-naming"></a>
 ### HTML element naming
 
 [Form] Element names should use snake_case (underscores)
@@ -134,7 +134,7 @@ Element classes names should use hyphen-case (dashes)
         <input class="form-control">
     </div>
 
-<a name="view-naming" class="anchor" href="#view-naming"></a>
+<a name="view-naming"></a>
 ### View file naming
 
 Partial views should begin with an underscore character. Whereas Controller and Layout views do not begin with an underscore character. Since views are often found in a single folder, the underscore (_) and dash (-) characters can be used to organise the files. A dash is used as a substitute for a space character. An underscore is used as a substitute for a slash character (folder or namespace).
@@ -146,7 +146,7 @@ Partial views should begin with an underscore character. Whereas Controller and 
 
 View files must end with the `.htm` file extension.
 
-<a name="class-naming" class="anchor" href="#class-naming"></a>
+<a name="class-naming"></a>
 ### Class naming
 
 There is a number of class suffixes and prefixes that we recommend to use.
@@ -168,7 +168,7 @@ There is a number of class suffixes and prefixes that we recommend to use.
 
 > Don't get naming paralysis. Yes, names are very important but they're not important enough to waste huge amounts of time on. If you can't think up a good name in five minutes, move on.
 
-<a name="event-naming" class="anchor" href="#event-naming"></a>
+<a name="event-naming"></a>
 ### Event naming
 
 The term *after* is not used in Events, only the term *before* is used. For example:
@@ -212,7 +212,7 @@ When processing or filtering over a value, use the data holder pattern to pass t
     Event::fire('cms.processContent', [$this, $dataHolder]);
     $content = $dataHolder->content;
 
-<a name="db-table-naming" class="anchor" href="#db-table-naming"></a>
+<a name="db-table-naming"></a>
 ### Database table naming
 
 Tables names should be prefixed with the author and plugin name.
@@ -234,7 +234,7 @@ The author and plugin name acronym is acceptable too:
 
     ab_category_id
 
-<a name="model-naming" class="anchor" href="#model-naming"></a>
+<a name="model-naming"></a>
 ### Model naming
 
 When extending other models, you should prefix the field with at least the plugin name.
@@ -247,7 +247,7 @@ The fully qualified plugin name is also acceptable, for example:
 
     $user->rainlab_forum_member
 
-<a name="model-scopes" class="anchor" href="#model-scopes"></a>
+<a name="model-scopes"></a>
 ### Model scopes
 
 If a model scope returns a query object, used for chaining, they should generally be prefix with `apply` to indicate they are being applied to the query. Defined as:
@@ -276,7 +276,7 @@ If a scope returns anything other than a query then any name can be used. Some a
     - list
     - lists
 
-<a name="class-guide" class="anchor" href="#class-guide"></a>
+<a name="class-guide"></a>
 ### Class guidance
 
 These points are to be considered in a relaxed fashion:
@@ -285,7 +285,7 @@ These points are to be considered in a relaxed fashion:
 1. If a property contains a single value (not an array), make the property `public` instead of a get/set approach.
 1. If a property contains a collection (is an array), make the property `protected` with get `getProperties`, `getProperty` and `setProperty`.
 
-<a name="strict-trans-tables" class="anchor" href="#strict-trans-tables"></a>
+<a name="strict-trans-tables"></a>
 ### Use the STRICT_TRANS_TABLES mode with MySQL
 
 When MySQL [STRICT_TRANS_TABLES mode](http://dev.mysql.com/doc/refman/5.0/en/sql-mode.html) is enabled the server performs strict data type validation. It is highly recommended to keep this mode enabled in MySQL during the development. This allows to find errors before your code gets to a client's server with the enabled strict mode. The mode can be enabled in my.cnf (Unix) or my.ini (Windows) file:

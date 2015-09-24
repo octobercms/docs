@@ -12,12 +12,12 @@
 All of the configuration files for October are stored in the **config/** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
 
 
-<a name="webserver-configuration" class="anchor" href="#webserver-configuration"></a>
+<a name="webserver-configuration"></a>
 ## Web server configuration
 
 October has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
 
-<a name="apache-configuration" class="anchor" href="#apache-configuration"></a>
+<a name="apache-configuration"></a>
 ### Apache configuration
 
 If your webserver is running Apache there are some extra system requirements:
@@ -37,7 +37,7 @@ If you have installed to a subdirectory, you should add the name of the subdirec
 
     RewriteBase /mysubdirectory/
 
-<a name="nginx-configuration" class="anchor" href="#nginx-configuration"></a>
+<a name="nginx-configuration"></a>
 ### Nginx configuration
 
 There are small changes required to configure your site in Nginx.
@@ -60,7 +60,7 @@ Use the following code in **server** section. If you have installed October into
     rewrite ^storage/temp/protected/.* /index.php break;
     rewrite ^storage/app/uploads/protected/.* /index.php break;
 
-<a name="lighttd-configuration" class="anchor" href="#lighttd-configuration"></a>
+<a name="lighttd-configuration"></a>
 ### Lighttpd configuration
 
 If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS.
@@ -95,7 +95,7 @@ This will create a new directory called **public/** in the project's base direct
 
 > **Note**: The above command needs to be performed with System Administrator or *sudo* privileges in most cases. It should also be performed after each system update or when a new plugin is installed.
 
-<a name="environment-config" class="anchor" href="#environment-config"></a>
+<a name="environment-config"></a>
 ## Environment configuration
 
 It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to **production**. There are two common ways to change this value:
@@ -128,7 +128,7 @@ For example, to use a different MySQL database for the `dev` environment only, c
         ]
     ];
 
-<a name="edge-updates" class="anchor" href="#edge-updates"></a>
+<a name="edge-updates"></a>
 ## Bleeding edge updates
 
 The October platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
@@ -150,7 +150,7 @@ You can instruct the platform to prefer test builds by changing the `edgeUpdates
 
 > **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
 
-<a name="csrf-protection" class="anchor" href="#csrf-protection"></a>
+<a name="csrf-protection"></a>
 ## CSRF protection
 
 October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.

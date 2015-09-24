@@ -11,7 +11,7 @@ In October you have two different approaches working with databases:
 
 Direct SQL will perform faster and should be used for simple tasks. Active Record is an approach used by the popular framework, Ruby On Rails. It allows an easy interface for performing repetitive tasks like creating, reading, updating and deleting database records. You can learn more about the [Active record pattern on Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern).
 
-<a name="direct-sql" class="anchor" href="#direct-sql"></a>
+<a name="direct-sql"></a>
 ## Direct SQL
 
 The `Db` class has several methods for loading, inserting, updating and deleting data. You can find more information about the DB class here:
@@ -39,7 +39,7 @@ The `statement()` method allows to execute other types of SQL queries, for examp
 
     Db::statement('drop table users');
 
-<a name="active-record" class="anchor" href="#active-record"></a>
+<a name="active-record"></a>
 ## Active Record
 
 The Active Record pattern is implemented in the `Model` class in October. See the [Models](model) article for details. Below are some basic examples of using Active Record.

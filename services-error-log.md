@@ -141,7 +141,7 @@ The `abort` method will immediately raise an exception which will be rendered by
 
 This method may be used at any time during the request's lifecycle.
 
-<a name="custom-error-page" class="anchor" href="#custom-error-page"></a>
+<a name="custom-error-page"></a>
 ### Custom error page
 
 By default any errors will be shown with a detailed error page containing the file contents, line number and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script and creating a page with the URL `/error`.
@@ -171,7 +171,7 @@ An array of contextual data may also be passed to the log methods. This contextu
 
     Log::info('User failed to login.', ['id' => $user->id]);
 
-<a name="helpers" class="anchor" href="#helpers"></a>
+<a name="helpers"></a>
 ### Helper functions
 
 There are some global helper methods available to make logging easier. The `trace_log()` function is an alias for `Log::info` with support for using arrays and exceptions as the message.

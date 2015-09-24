@@ -14,7 +14,7 @@ You can create a link to the current page by filtering an empty string:
 
     <a href="{{ ''|page }}">Refresh page</a>
 
-<a name="reverse-routing" class="anchor" href="#reverse-routing"></a>
+<a name="reverse-routing"></a>
 ## Reverse routing
 
 When linking to a page that has URL parameters defined, the `|page` filter supports reverse routing by passing an array as the first argument.
@@ -35,7 +35,7 @@ If the website address is __http://octobercms.com__ the above example would outp
         Blog post #10
     </a>
 
-<a name="persistent-parameters" class="anchor" href="#persistent-parameters"></a>
+<a name="persistent-parameters"></a>
 ## Persistent URL parameters
 
 If a URL parameter is already presented in the environment, the `|page` filter will use it automatically.

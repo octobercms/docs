@@ -6,7 +6,7 @@
 
 October includes several CLI commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan). Please see Laravel documentation for more details.
 
-<a name="console-install" class="anchor" href="#console-install"></a>
+<a name="console-install"></a>
 ## Console installation
 
 The command-line interface (CLI) method of installation requires [Composer](http://getcomposer.org/) to manage its dependencies.
@@ -29,7 +29,7 @@ You can sign in to the back-end area via the `/backend` route and using the defa
 
 You also may wish to inspect **config/app.php** and **config/cms.php** to change any optional configuration.
 
-<a name="console-updating" class="anchor" href="#console-updating"></a>
+<a name="console-updating"></a>
 ## Console updating
 
 There are two ways to update October - via Composer and via the Update Gateway. Updating October via Composer will connect to the repository and pull updates for the core and any other composer installed packages.
@@ -40,7 +40,7 @@ Updating October via the Update Gateway will connect to the October gateway and 
 
     php artisan october:update
 
-<a name="utility-commands" class="anchor" href="#utility-commands"></a>
+<a name="utility-commands"></a>
 ## Utility commands
 
 October includes a number of Artisan utility commands.

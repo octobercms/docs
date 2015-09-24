@@ -7,12 +7,12 @@
 <!-- Behaviors: Mixin concept, dynamic implement, extend constructor -->
 <!-- IoC/Facades: Replacing objects -->
 
-<a name="extending-with-events" class="anchor" href="#extending-with-events"></a>
+<a name="extending-with-events"></a>
 ## Extending with events
 
 Plugins are primarily extended using the [Event service](../services/events) to inject or modify the functionality of core classes and other plugins.
 
-<a name="subscribing-to-events" class="anchor" href="#subscribing-to-events"></a>
+<a name="subscribing-to-events"></a>
 ### Subscribing to events
 
 The most common place to subscribe to an event is the `boot()` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
@@ -34,7 +34,7 @@ The same can be achieved by extending the model's constructor and using a local 
         });
     });
 
-<a name="declaring-events" class="anchor" href="#declaring-events"></a>
+<a name="declaring-events"></a>
 ### Declaring events
 
 You can declare events globally or locally, below is an example of declaring a global event:
@@ -59,7 +59,7 @@ Once this event has been subscribed to, the parameters are available in the hand
         echo 'Parameters: ' . $param1 . ' ' . $param2;
     });
 
-<a name="backend-view-events" class="anchor" href="#backend-view-events"></a>
+<a name="backend-view-events"></a>
 ## Extending back-end views
 
 Sometimes you may wish to allow a back-end view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent()` method found in all back-end controllers.
@@ -84,7 +84,7 @@ The above example would output the following markup:
         <a href="#">Sign in with Google!</a>
     </div>
 
-<a name="usage-examples" class="anchor" href="#usage-examples"></a>
+<a name="usage-examples"></a>
 ## Usage examples
 
 These are some practical examples of how events can be used.

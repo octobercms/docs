@@ -16,7 +16,7 @@ Plugins are the foundation for adding new features to the CMS by extending it. T
 1. Alter [functionality of the core or other plugins](events).
 1. Provide classes, [back-end controllers](../backend/controllers-views-ajax), views, assets, and other files.
 
-<a name="introduction" class="anchor" href="#introduction"></a>
+<a name="introduction"></a>
 ## Introduction
 
 Plugins reside in the **/plugins** subdirectory of the application directory. An example of a plugin directory structure:
@@ -42,12 +42,12 @@ Not all plugin directories are required. The only required file is the **Plugin.
 
 > **Note:** if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
 
-<a name="namespaces" class="anchor" href="#namespaces"></a>
+<a name="namespaces"></a>
 ### Plugin namespaces
 
 Plugin namespaces are very important, especially if you are going to publish your plugins on the [October Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
-<a name="registration-file" class="anchor" href="#registration-file"></a>
+<a name="registration-file"></a>
 ## Registration file
 
 The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
@@ -79,7 +79,7 @@ Registration scripts should use the plugin namespace. The registration script sh
         }
     }
 
-<a name="registration-methods" class="anchor" href="#registration-methods"></a>
+<a name="registration-methods"></a>
 ### Supported methods
 
 The following methods are supported in the plugin registration class:
@@ -99,7 +99,7 @@ Method | Description
 **registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](#scheduling) that are executed on a regular basis.
 
-<a name="basic-plugin-information" class="anchor" href="#basic-plugin-information"></a>
+<a name="basic-plugin-information"></a>
 ### Basic plugin information
 
 The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing the following keys:
@@ -112,7 +112,7 @@ Key | Description
 **icon** | a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/), any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
 **homepage** | A link to the author's website address, optional.
 
-<a name="routing-initialization" class="anchor" href="#routing-initialization"></a>
+<a name="routing-initialization"></a>
 ## Routing and initialization
 
 Plugin registration files can contain two methods `boot()` and `register()`. With these methods you can do anything you like, like register routes or attach handlers to events.
@@ -136,7 +136,7 @@ Plugins can also supply a file named **routes.php** that contain custom routing 
 
     });
 
-<a name="dependency-definitions" class="anchor" href="#dependency-definitions"></a>
+<a name="dependency-definitions"></a>
 ## Dependency definitions
 
 A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
@@ -157,7 +157,7 @@ Dependency definitions will affect how the plugin operates and [how the update p
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 
-<a name="extending-twig" class="anchor" href="#extending-twig"></a>
+<a name="extending-twig"></a>
 ## Extending Twig
 
 Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags()` method of the plugin registration class. The next example registers two Twig filters and two functions.
@@ -187,7 +187,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
         return strtoupper($text);
     }
 
-<a name="navigation-menus" class="anchor" href="#navigation-menus"></a>
+<a name="navigation-menus"></a>
 ## Navigation menus
 
 Plugins can extend the back-end navigation menus by overriding methods of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:

@@ -5,7 +5,7 @@
 
 A Database Collection represents an array of results, typically of populated Models. October extends [Eloquent collections](http://laravel.com/docs/eloquent#collections) with new classes described in this article.
 
-<a name="access-methods" class="anchor" href="#access-methods"></a>
+<a name="access-methods"></a>
 ## Access methods
 
 A collection is returned any time there are multiple records from a model query, either via the get method or a relationship. This collection object can be iterated over like an array, it also has a variety of other helpful methods described below.
@@ -48,14 +48,14 @@ The `contains()` method will return true if the collection has a model inside wi
         // Collection has a Model with ID of 3
     }
 
-<a name="data-feed" class="anchor" href="#data-feed"></a>
+<a name="data-feed"></a>
 ## Data feed (Experimental)
 
 A data feed allows you to combine multiple model classes into a single collection. This can be useful for creating feeds and streams of data while supporting the use of pagination. It works by adding model objects in a prepared state, before the `get()` method is called, which are then combined to make a collection that behaves the same as a regular dataset.
 
 The `DataFeed` class mimics a regular Active Record model and supports `limit()` and `paginate()` methods.
 
-<a name="data-feed-usage" class="anchor" href="#data-feed-usage"></a>
+<a name="data-feed-usage"></a>
 ### Usage
 
 The next example will combine the User, Post and Comment models in to a single collection and returns the first 10 records.
@@ -71,7 +71,7 @@ The next example will combine the User, Post and Comment models in to a single c
 
     $results = $feed->limit(10)->get();
 
-<a name="data-feed-processing" class="anchor" href="#data-feed-processing"></a>
+<a name="data-feed-processing"></a>
 ### Processing results
 
 The `get()` method will return a `Collection` object that contains the results. Records can be differentiated by using the `tag_name` attribute which was set as the first parameter when the model was added.
@@ -89,7 +89,7 @@ The `get()` method will return a `Collection` object that contains the results. 
 
     }
 
-<a name="data-feed-ordering" class="anchor" href="#data-feed-ordering"></a>
+<a name="data-feed-ordering"></a>
 ### Ordering results
 
 Results can be ordered by a single database column, either shared default used by all datasets or individually specified with the `add()` method. The direction of results must also be shared.

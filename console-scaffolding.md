@@ -2,7 +2,7 @@
 
 - [Scaffolding commands](#scaffolding-commands)
 
-<a name="scaffolding-commands" class="anchor" href="#scaffolding-commands"></a>
+<a name="scaffolding-commands"></a>
 ## Scaffolding commands
 
 Use the scaffolding commands to speed up the development process.

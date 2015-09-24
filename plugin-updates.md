@@ -23,7 +23,7 @@ The change log is stored in a YAML file called `version.yaml` inside the **/upda
             seed_the_database.php       <=== Migration file
             create_another_table.php    <=== Migration file
 
-<a name="update-process" class="anchor" href="#update-process"></a>
+<a name="update-process"></a>
 ## Update process
 
 During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#important-updates). Any given migration or seed file will only be excuted once after a successful update. October executes the update process automatically when any of the following occurs:
@@ -66,7 +66,7 @@ As you can see above, there should be a key that represents the version number f
 
     1.0.1: A single comment that uses no update scripts.
 
-<a name="important-updates" class="anchor" href="#important-updates"></a>
+<a name="important-updates"></a>
 ### Important updates
 
 Sometimes a plugin needs to introduce features that will break websites already using the plugin. If an update comment in the **version.yaml** file begins with three exclamation marks (`!!!`) then it will be considered *Important* and will require the user to confirm before updating. An example of an important update comment:
@@ -81,7 +81,7 @@ When the system detects an important update it will provide three options to pro
 
 Confirming the comment will update the plugin as usual, or if the comment is skipped it will not be updated.
 
-<a name="migration-seed-files" class="anchor" href="#migration-seed-files"></a>
+<a name="migration-seed-files"></a>
 ### Migration and seed files
 
 As previously decribed, updates also define when [migration and seed files](../database/structure) should be applied. An update line with a comment and updates:

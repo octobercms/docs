@@ -24,7 +24,7 @@ Content blocks can also be used in combination with [layout placeholders](../cms
         {% content 'sidebar-content.htm' %}
     {% endput %}
 
-<a name="variables" class="anchor" href="#variables"></a>
+<a name="variables"></a>
 ## Variables
 
 You can pass variables to content blocks by specifying them after the file name:

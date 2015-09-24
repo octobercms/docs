@@ -12,7 +12,7 @@ By default Media Manager works with the storage/app/media subdirectory of the in
 
 Please note that after you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
-<a name="amazon-s3" class="anchor" href="#amazon-s3"></a>
+<a name="amazon-s3"></a>
 ## Configuring Amazon S3 access
 
 To use Amazon S3 with OctoberCMS, you should create S3 bucket, folder in the bucket and API user.
@@ -107,7 +107,7 @@ Example storage configuration:
 
 Congratulations! Now you're ready to use Amazon S3 with OctoberCMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
 
-<a name="rackspace-cdn" class="anchor" href="#rackspace-cdn"></a>
+<a name="rackspace-cdn"></a>
 ## Configuring Rackspace CDN access
 
 To use Rackspace CDN with OctoberCMS, you should create Rackspace CDN container, folder in the container and API user.
@@ -167,7 +167,7 @@ Example storage configuration:
 
 Congratulations! Now you're ready to use Rackspace CDN with OctoberCMS.
 
-<a name="audio-and-video-players" class="anchor" href="#audio-and-video-players"></a>
+<a name="audio-and-video-players"></a>
 ## Audio and video players
 
 By default the system uses HTML5 audio and video tags to render audio and video files:
@@ -195,7 +195,7 @@ As the partials are written with Twig, you can automate adding alternative video
             media="only screen and (max-device-width: 568px)"></source>
     </video>
 
-<a name="configuration-options" class="anchor" href="#configuration-options"></a>
+<a name="configuration-options"></a>
 ## Other configuration options
 
 There are several options that allow you to fine-tune the Media Manager. All of them could be defined in **config/cms.php** script, in the **storage/media** section, for example:
@@ -218,7 +218,7 @@ Parameter | Value
 **video_extensions** | file extensions corresponding to the Video document type. The default value is **['mp4', 'avi', 'mov', 'mpg']**.
 **audio_extensions** | file extensions corresponding to the Audio document type. The default value is **['mp3', 'wav', 'wma', 'm4a']**.
 
-<a name="troubleshooting" class="anchor" href="#troubleshooting"></a>
+<a name="troubleshooting"></a>
 ## Troubleshooting
 
 The most common issue with using remote services is the SSL connection problem. If you get SSL errors, make sure that your server has fresh SSL certificates of public Certificate Authorities (CA).

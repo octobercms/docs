@@ -8,7 +8,7 @@ If the website address is __http://octobercms.com__ and the active theme is call
 
     <script type="text/javascript" src="http://october.com/themes/website/assets/js/menu.js"></script>
 
-<a name="combine-css-javascript" class="anchor" href="#combine-css-javascript"></a>
+<a name="combine-css-javascript"></a>
 ## Combining CSS and JavaScript
 
 The filter can also be used to combine assets of the same type by passing an array of files.
@@ -20,7 +20,7 @@ The filter can also be used to combine assets of the same type by passing an arr
 
 > **Note**: You can enable the assets minification with the `enableAssetMinify` parameter in the `config/cms.php` script. By default the minification is disabled.
 
-<a name="combiner-aliases" class="anchor" href="#combiner-aliases"></a>
+<a name="combiner-aliases"></a>
 ### Combiner aliases
 
 The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../cms/ajax#introduction) can be included in the combiner:
@@ -42,7 +42,7 @@ Alias | Description
 
 The same alias can be used for JavaScript or CSS, for example `@framework.extras`, at least one explicit reference with a file extension is needed in the array to determine which is used.
 
-<a name="external-combiner-paths" class="anchor" href="#external-combiner-paths"></a>
+<a name="external-combiner-paths"></a>
 ### External combiner paths
 
 In some cases you may wish to combine a file outside the theme, this is achieved by prefixing the path with a symbol to create a dynamic path. For example, a path beginning with `~/` will create a path relative to the application:

@@ -10,7 +10,7 @@
 
 There are two ways you can install October, either using the Wizard or Command-line installation process. Before you proceed, you should check that your server meets the minimum system requirements.
 
-<a name="system-requirements" class="anchor" href="#system-requirements"></a>
+<a name="system-requirements"></a>
 ## Minimum system requirements
 
 October CMS has some server requirements for web hosting:
@@ -27,7 +27,7 @@ October CMS has some server requirements for web hosting:
 As of PHP 5.5, some OS distributions may require you to manually install the PHP JSON extension.
 When using Ubuntu, this can be done via ``apt-get install php5-json``.
 
-<a name="wizard-installation" class="anchor" href="#wizard-installation"></a>
+<a name="wizard-installation"></a>
 ## Wizard installation
 
 The wizard installation is a recommended way to install October. It is simpler than the command-line installation and doesn't require any special skills.
@@ -41,7 +41,7 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 ![image](https://github.com/octobercms/docs/blob/master/images/wizard-installer.png?raw=true) {.img-responsive .frame}
 
-<a name="troubleshoot-installation" class="anchor" href="#troubleshoot-installation"></a>
+<a name="troubleshoot-installation"></a>
 ### Troubleshooting installation
 
 1. **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
@@ -52,17 +52,17 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 > **Note:** A detailed installation log can be found in the `install_files/install.log` file.
 
-<a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
+<a name="command-line-installation"></a>
 ## Command-line installation
 
 If you feel more comfortable with a command-line and want to use composer, there is a CLI install process on the [Console interface page](../console/commands#console-install).
 
-<a name="post-install-steps" class="anchor" href="#post-install-steps"></a>
+<a name="post-install-steps"></a>
 ## Post-installation steps
 
 There are some things you may need to set up after the installation is complete.
 
-<a name="delete-install-files" class="anchor" href="#delete-install-files"></a>
+<a name="delete-install-files"></a>
 ### Delete installation files
 
 If you have used the [Wizard installation](#wizard-installation) you should delete the installation files for security reasons. October will never delete files from your system automatically, so you should delete these files and directories manually:
@@ -70,7 +70,7 @@ If you have used the [Wizard installation](#wizard-installation) you should dele
     install_files/      <== Installation directory
     install.php         <== Installation script
 
-<a name="crontab-setup" class="anchor" href="#crontab-setup"></a>
+<a name="crontab-setup"></a>
 ### Setting up the scheduler
 
 For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
@@ -81,7 +81,7 @@ Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* 
 
 > **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 
-<a name="queue-setup" class="anchor" href="#queue-setup"></a>
+<a name="queue-setup"></a>
 ### Setting up queue workers
 
 You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.

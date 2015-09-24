@@ -23,7 +23,7 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
 
 > **Note:** Very often the form and [list behavior](lists) are used together in a same controller.
 
-<a name="configuring-form" class="anchor" href="#configuring-form"></a>
+<a name="configuring-form"></a>
 ## Configuring the form behavior
 
 The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a typical form behavior configuration file:
@@ -62,7 +62,7 @@ Option | Description
 **update** | a configuration array or reference to a config file for the Update page.
 **preview** | a configuration array or reference to a config file for the Preview page.
 
-<a name="form-create-page" class="anchor" href="#form-create-page"></a>
+<a name="form-create-page"></a>
 ### Create page
 
 To support the Create page add the following configuration to the YAML file:
@@ -83,7 +83,7 @@ Option | Description
 **flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the create page only.
 
-<a name="form-update-page" class="anchor" href="#form-update-page"></a>
+<a name="form-update-page"></a>
 ### Update page
 
 To support the Update page add the following configuration to the YAML file:
@@ -105,7 +105,7 @@ Option | Description
 **flashDelete** | flash message to display when record is deleted, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the update page only.
 
-<a name="form-preview-page" class="anchor" href="#form-preview-page"></a>
+<a name="form-preview-page"></a>
 ### Preview page
 
 To support the Preview page add the following configuration to the YAML file:
@@ -120,7 +120,7 @@ Option  | Description
 **title** | a page title, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the preview page only.
 
-<a name="form-fields" class="anchor" href="#form-fields"></a>
+<a name="form-fields"></a>
 ## Defining form fields
 
 Form fields are defined with the YAML file. The form fields configuration is used by the form behavior for creating the form controls and binding them to the model fields. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but **fields.yaml** and **form_fields.yaml** are common names. Example form fields file location:
@@ -160,7 +160,7 @@ Fields can be placed in three areas, the **outside area**, **primary tabs** or *
         fields:
             [...]
 
-<a name="form-tab-options" class="anchor" href="#form-tab-options"></a>
+<a name="form-tab-options"></a>
 ### Tab options
 
 For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
@@ -171,7 +171,7 @@ Option | Description
 **defaultTab** | the default tab to assign fields to. Default: Misc.
 **cssClass** | assigns a CSS class to the tab container.
 
-<a name="form-field-options" class="anchor" href="#form-field-options"></a>
+<a name="form-field-options"></a>
 ### Field options
 
 For each field you can specify these options (where applicable):
@@ -200,7 +200,7 @@ Option | Description
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 
-<a name="field-types" class="anchor" href="#field-types"></a>
+<a name="field-types"></a>
 ## Available field types
 
 There are various native field types that can be used for the **type** setting. For more advanced form fields, a [form widget](#form-widgets) can be used instead.
@@ -219,7 +219,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Hint](#field-hint)
 - [Widget](#field-widget)
 
-<a name="field-text" class="anchor" href="#field-text"></a>
+<a name="field-text"></a>
 ### Text
 
 `text` - renders a single line text box. This is the default type used if none is specified.
@@ -228,7 +228,7 @@ There are various native field types that can be used for the **type** setting. 
         label: Blog Title
         type: text
 
-<a name="field-number" class="anchor" href="#field-number"></a>
+<a name="field-number"></a>
 ### Number
 
 `number` - renders a single line text box that takes numbers only.
@@ -237,7 +237,7 @@ There are various native field types that can be used for the **type** setting. 
         label: Your Age
         type: number
 
-<a name="field-password" class="anchor" href="#field-password"></a>
+<a name="field-password"></a>
 ### Password
 
 `password ` - renders a single line password field.
@@ -246,7 +246,7 @@ There are various native field types that can be used for the **type** setting. 
         label: Password
         type: password
 
-<a name="field-textarea" class="anchor" href="#field-textarea"></a>
+<a name="field-textarea"></a>
 ### Textarea
 
 `textarea` - renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
@@ -256,7 +256,7 @@ There are various native field types that can be used for the **type** setting. 
         type: textarea
         size: large
 
-<a name="field-dropdown" class="anchor" href="#field-dropdown"></a>
+<a name="field-dropdown"></a>
 ### Dropdown
 
 `dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines options directly in the YAML file:
@@ -306,7 +306,7 @@ Supplying the dropdown options tn the model class:
         return ['published' => 'Published', ...];
     }
 
-<a name="field-radio" class="anchor" href="#field-radio"></a>
+<a name="field-radio"></a>
 ### Radio List
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
@@ -331,7 +331,7 @@ Radio lists can also support a secondary description.
 
 Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
 
-<a name="field-checkbox" class="anchor" href="#field-checkbox"></a>
+<a name="field-checkbox"></a>
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
@@ -341,7 +341,7 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
         type: checkbox
         default: true
 
-<a name="field-checkboxlist" class="anchor" href="#field-checkboxlist"></a>
+<a name="field-checkboxlist"></a>
 ### Checkbox List
 
 `checkboxlist` - renders a list of checkboxes.
@@ -357,7 +357,7 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
 
 Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
 
-<a name="field-switch" class="anchor" href="#field-switch"></a>
+<a name="field-switch"></a>
 ### Switch
 
 `switch` - renders a switchbox.
@@ -367,7 +367,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         type: switch
         comment: Flick this switch to display content
 
-<a name="field-section" class="anchor" href="#field-section"></a>
+<a name="field-section"></a>
 ### Section
 
 `section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
@@ -377,7 +377,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         type: section
         comment: This section contains details about the user.
 
-<a name="field-partial" class="anchor" href="#field-partial"></a>
+<a name="field-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
@@ -386,7 +386,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         type: partial
         path: $/acme/blog/models/comments/_content_field.htm
 
-<a name="field-hint" class="anchor" href="#field-hint"></a>
+<a name="field-hint"></a>
 ### Hint
 
 `hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
@@ -395,7 +395,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         type: hint
         path: content_field
 
-<a name="field-widget" class="anchor" href="#field-widget"></a>
+<a name="field-widget"></a>
 ### Widget
 
 `widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
@@ -404,7 +404,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         type: Backend\FormWidgets\RichEditor
         size: huge
 
-<a name="form-widgets" class="anchor" href="#form-widgets"></a>
+<a name="form-widgets"></a>
 ## Form widgets
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets) article.
@@ -420,7 +420,7 @@ There are various form widgets included as standard, although it is common for p
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Markdown editor](#widget-markdowneditor)
 
-<a name="widget-codeeditor" class="anchor" href="#widget-codeeditor"></a>
+<a name="widget-codeeditor"></a>
 ### Code editor
 
 `codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
@@ -437,14 +437,14 @@ Option | Description
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
 
-<a name="color-picker" class="anchor" href="#color-picker"></a>
+<a name="color-picker"></a>
 ### Color picker
 `colorpicker` - renders controls to select a hexadecimal color value.
 
     color:
         type: colorpicker
 
-<a name="widget-datepicker" class="anchor" href="#widget-datepicker"></a>
+<a name="widget-datepicker"></a>
 ### Date picker
 
 `datepicker` - renders a text field used for selecting date and times.
@@ -460,7 +460,7 @@ Option | Description
 **minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 
-<a name="widget-fileupload" class="anchor" href="#widget-fileupload"></a>
+<a name="widget-fileupload"></a>
 ### File upload
 
 `fileupload` - renders a file uploader for images or regular files. The field name must use an attachOne or attachMany relation.
@@ -482,7 +482,7 @@ Option | Description
 **useCaption** | allows a title and description to be set for the file. Default: true
 **prompt** | text to display for the upload button, applies to files only, optional.
 
-<a name="widget-recordfinder" class="anchor" href="#widget-recordfinder"></a>
+<a name="widget-recordfinder"></a>
 ### Record finder
 
 `recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.
@@ -502,7 +502,7 @@ Option | Description
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
 **list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
 
-<a name="widget-mediafinder" class="anchor" href="#widget-mediafinder"></a>
+<a name="widget-mediafinder"></a>
 ### Media finder
 
 `mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
@@ -517,7 +517,7 @@ Option | Description
 **mode** | the expected file type, either file or image. Default: file.
 **prompt** | text to display when there is no item selected. The `%s` character represents the media manager icon.
 
-<a name="widget-relation" class="anchor" href="#widget-relation"></a>
+<a name="widget-relation"></a>
 ### Relation
 
 `relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list.
@@ -533,7 +533,7 @@ Option | Description
 **descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
 **emptyOption** | text to display when there is no available selections.
 
-<a name="widget-repeater" class="anchor" href="#widget-repeater"></a>
+<a name="widget-repeater"></a>
 ### Repeater
 
 `repeater` - renders a repeating set of form fields defined within.
@@ -554,7 +554,7 @@ Option | Description
 **form** | a reference to form field definition file, see [backend form fields](forms#form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
 
-<a name="widget-richeditor" class="anchor" href="#widget-richeditor"></a>
+<a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
 
 `richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
@@ -563,7 +563,7 @@ Option | Description
         type: richeditor
         size: huge
 
-<a name="widget-markdowneditor" class="anchor" href="#widget-markdowneditor"></a>
+<a name="widget-markdowneditor"></a>
 ### Markdown editor
 
 `markdown` - renders a basic editor for markdown formatted text.
@@ -577,14 +577,14 @@ Option | Description
 ------------- | -------------
 **mode** | the expected view mode, either tab or split. Default: tab.
 
-<a name="form-views" class="anchor" href="#form-views"></a>
+<a name="form-views"></a>
 ## Form views
 
 For each page your form supports [Create](#form-create-page), [Update](#form-update-page) and [Preview](#form-preview-page) you should provide a [view file](#introduction) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
 
 The form behavior adds two methods to the controller class: `formRender()` and `formRenderPreview()`. These methods render the form controls configured with the YAML file described above.
 
-<a name="form-create-view" class="anchor" href="#form-create-view"></a>
+<a name="form-create-view"></a>
 ### Create view
 
 The **create.htm** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create.htm form.
@@ -614,7 +614,7 @@ The **create.htm** view represents the Create page that allows users to create n
 
     <?= Form::close() ?>
 
-<a name="form-update-view" class="anchor" href="#form-update-view"></a>
+<a name="form-update-view"></a>
 ### Update view
 
 The **update.htm** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.htm form.
@@ -651,7 +651,7 @@ The **update.htm** view represents the Update page that allows users to update o
 
     <?= Form::close() ?>
 
-<a name="form-preview-view" class="anchor" href="#form-preview-view"></a>
+<a name="form-preview-view"></a>
 ### Preview view
 
 The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.
@@ -660,12 +660,12 @@ The **preview.htm** view represents the Preview page that allows users to previe
         <?= $this->formRenderPreview() ?>
     </div>
 
-<a name="field-conditions" class="anchor" href="#field-conditions"></a>
+<a name="field-conditions"></a>
 ## Applying conditions to fields
 
 Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are a few ways you can do this, either by using the trigger API or field dependencies. The input preset converter is primarily used to converting field values. These options are described in more detail below.
 
-<a name="field-input-preset" class="anchor" href="#field-input-preset"></a>
+<a name="field-input-preset"></a>
 ### Input preset converter
 
 The input preset converter is defined with the `preset` [form field option](#form-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element. Here is a sample definition:
@@ -689,7 +689,7 @@ Option | Description
 
 The `preset` value can also be a string that refers to the **field** only, the `type` option will then default to **slug**.
 
-<a name="field-trigger-api" class="anchor" href="#field-trigger-api"></a>
+<a name="field-trigger-api"></a>
 ### Trigger API
 
 The trigger API is defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is an sample definition:
@@ -716,7 +716,7 @@ Option | Description
 **field** | defines the other field name that will trigger the action.
 **condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
 
-<a name="field-dependencies" class="anchor" href="#field-dependencies"></a>
+<a name="field-dependencies"></a>
 ### Field dependencies
 
 Form fields can depend on others when defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution. When the defined other fields change, the defining field will update using the AJAX framework. Here is a sample definition:
@@ -749,7 +749,7 @@ In the above example the `state` form field will refresh when the `country` fiel
 
 This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields()` method inside the model, described in the [Filtering form fields](#filter-form-fields) section.
 
-<a name="extend-form-behavior" class="anchor" href="#extend-form-behavior"></a>
+<a name="extend-form-behavior"></a>
 ## Extending form behavior
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
@@ -759,7 +759,7 @@ Sometimes you may wish to modify the default form behavior and there are several
 - [Extending form fields](#extend-form-fields)
 - [Filtering form fields](#filter-form-fields)
 
-<a name="overriding-action" class="anchor" href="#overriding-action"></a>
+<a name="overriding-action"></a>
 ### Overriding controller action
 
 You can use your own logic for the `create()`, `update()` or `preview()` action method in the controller, then optionally call the Form behavior parent method.
@@ -774,7 +774,7 @@ You can use your own logic for the `create()`, `update()` or `preview()` action 
         return $this->asExtension('FormController')->update($recordId, $context);
     }
 
-<a name="extend-model-query" class="anchor" href="#extend-model-query"></a>
+<a name="extend-model-query"></a>
 ### Extending model query
 
 The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
@@ -784,7 +784,7 @@ The lookup query for the form [database model](../database/model) can be extende
         $query->withTrashed();
     }
 
-<a name="extend-form-fields" class="anchor" href="#extend-form-fields"></a>
+<a name="extend-form-fields"></a>
 ### Extending form fields
 
 You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller class. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
@@ -835,7 +835,7 @@ Method | Description
 
 Each method takes an array of fields similar to the [form field configuration](#form-fields).
 
-<a name="filter-form-fields" class="anchor" href="#filter-form-fields"></a>
+<a name="filter-form-fields"></a>
 ### Filtering form fields
 
 You can filter the form field definitions by overriding the `filterFields()` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.

@@ -6,7 +6,7 @@
 
 There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 
-<a name="database-settings" class="anchor" href="#database-settings"></a>
+<a name="database-settings"></a>
 ## Database settings
 
 You can create models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the back-end settings form. You don't need to create a database table and a controller for creating the back-end settings forms based on the settings model.
@@ -42,7 +42,7 @@ The `$settingsFields` property is required if are going to build a back-end sett
 
 Settings models [can be registered](#backend-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
-<a name="writing-settings" class="anchor" href="#writing-settings"></a>
+<a name="writing-settings"></a>
 ### Writing to a settings model
 
 The settings model has the static `set()` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
@@ -62,7 +62,7 @@ The settings model has the static `set()` method that allows to save individual 
     $settings->api_key = 'ABCD';
     $settings->save();
 
-<a name="reading-settings" class="anchor" href="#reading-settings"></a>
+<a name="reading-settings"></a>
 ### Reading from a settings model
 
 The settings model has the static `get()` method that lets you to load individual properties. Also, when you instantiate a model with the `instance()` method it loads the properties from the database and you can access them directly.
@@ -77,12 +77,12 @@ The settings model has the static `get()` method that lets you to load individua
     echo Settings::get('is_activated', true);
 
 
-<a name="backend-pages" class="anchor" href="#backend-pages"></a>
+<a name="backend-pages"></a>
 ## Back-end settings pages
 
 The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
-<a name="link-registration" class="anchor" href="#link-registration"></a>
+<a name="link-registration"></a>
 ### Settings link registration
 
 The back-end settings navigation links can be extended by overriding the `registerSettings()` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
@@ -124,7 +124,7 @@ The following example creates a link to a settings model. Settings models is a p
 
 The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 
-<a name="settings-page-context" class="anchor" href="#settings-page-context"></a>
+<a name="settings-page-context"></a>
 ### Setting the page navigation context
 
 Just like [setting navigation context in the controller](../backend/controllers-views-ajax#navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
@@ -140,7 +140,7 @@ Just like [setting navigation context in the controller](../backend/controllers-
 
 The first argument of the `setContext()` method is the settings item owner in the following format: **author:plugin**. The second argument is the setting name, the same as you provided in the [when registering the back-end settings page](#link-registration).
 
-<a name="file-configuration" class="anchor" href="#file-configuration"></a>
+<a name="file-configuration"></a>
 ## File-based configuration
 
 Plugins can have a configuration file `config.php` in the `config` subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file `plugins/acme/demo/config/config.php`:

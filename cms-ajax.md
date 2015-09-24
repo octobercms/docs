@@ -12,7 +12,7 @@
 
 October includes the AJAX framework that lets you execute AJAX handlers defined in your [pages](pages), [layouts](layouts) or [components](components) and update page blocks with [partials](partials). The AJAX framework comes in two flavors - as JavaScript API and data attributes API. The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
 
-<a name="introduction" class="anchor" href="#introduction"></a>
+<a name="introduction"></a>
 ## Introduction
 
 To use the AJAX framework it should be included by placing the `{% framework %}` tag anywhere inside the page or layout.
@@ -28,7 +28,7 @@ The `{% framework %}` tag supports the optional **extras** parameter. If this pa
 
     {% framework extras %}
 
-<a name="how-ajax-works" class="anchor" href="#how-ajax-works"></a>
+<a name="how-ajax-works"></a>
 ### How AJAX requests work
 
 A page can issue an AJAX request with the data attributes or with JavaScript. Each request invokes an **event handler** on the server and can update page elements using [partials](partials). AJAX requests work best with forms, since the form data is automatically sent to the server. The AJAX request flow:
@@ -53,7 +53,7 @@ The form configuration from the previous example could be read like this: "When 
 
     The result is {{ result }}
 
-<a name="ajax-handlers" class="anchor" href="#ajax-handlers"></a>
+<a name="ajax-handlers"></a>
 ## Ajax handlers
 
 AJAX handlers are PHP functions that can be defined in the page or layout [PHP section](themes#php-section) or inside [components](components). Handler names should have the following pattern: `onName`. Handlers can inject variables the Twig environment, where they can be used during the partial rendering. The next example shows an Ajax handler defined in the page PHP section. The handler loads two POST values and injects the **result** page variable.
@@ -79,7 +79,7 @@ The `onInit()` methods found in the [page execution life cycle](layouts#dynamic-
         // an AJAX request is handled.
     }
 
-<a name="data-attributes" class="anchor" href="#data-attributes"></a>
+<a name="data-attributes"></a>
 ## Data attributes API
 
 The data attributes API lets you issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
@@ -107,7 +107,7 @@ Element | Event
 **Text, number, and password fields** | when the text is changed and only if the `data-track-input` attribute is presented.
 **Dropdowns, checkboxes, radios** | when the element is selected.
 
-<a name="data-attribute-examples" class="anchor" href="#data-attribute-examples"></a>
+<a name="data-attribute-examples"></a>
 ### Data attributes API examples
 
 Trigger the `onCalculate` handler when the form is submitted. Update the element with the identifier "result"` with the **calcresult** partial:
@@ -139,7 +139,7 @@ Send a POST parameter `id` with value `7` across multiple elements:
         <button data-request="onSave">Update</button>
     </div>
 
-<a name="javascript-api" class="anchor" href="#javascript-api"></a>
+<a name="javascript-api"></a>
 ## JavaScript API
 
 The JavaScript API is more powerful than the data attributes API. The `request()` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
@@ -162,7 +162,7 @@ Option | Description
 **error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed. The handler gets 3 parameters: the jqXHR object, the text status string and the error object - see [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/).
 **complete** | a callback function execute in case of a success or an error.
 
-<a name="javascript-examples" class="anchor" href="#javascript-examples"></a>
+<a name="javascript-examples"></a>
 ### JavaScript API examples
 
 Request a confirmation before the onDelete request is sent:
@@ -212,14 +212,14 @@ Run `onCalculate` handler and if successful, run some custom code after the defa
         });
     }})
 
-<a name="components-ajax-handlers" class="anchor" href="#components-ajax-handlers"></a>
+<a name="components-ajax-handlers"></a>
 ## Calling AJAX handlers defined in components
 
 If you need to issue a request to an AJAX handler defined in a [component](components) attached to a page or layout, you should prefix the handler name with the component short name or [alias](components#aliases). The next example demonstrates how to invoke the **onCalculate** AJAX handler defined in the imaginary **calculator** component:
 
     <form data-request="calculator::onCalculate" data-request-update="calcresult: '#result'">
 
-<a name="global-events" class="anchor" href="#global-events"></a>
+<a name="global-events"></a>
 ## Global AJAX events
 
 The AJAX framework triggers several events on the updated elements, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
@@ -240,7 +240,7 @@ The next example execute JavaScript code when the `ajaxUpdate` event is triggere
         console.log('Updated!');
     })
 
-<a name="returning-data-from-handlers" class="anchor" href="#returning-data-from-handlers"></a>
+<a name="returning-data-from-handlers"></a>
 ## Returning data from AJAX handlers
 
 In advanced cases you may want to return structured data from your AJAX handlers. If an AJAX handler returns an array, you can access its elements in the `success` event handler. Example AJAX handler:
@@ -268,7 +268,7 @@ The same with the JavaScript API:
             }
         }); return false;">
 
-<a name="redirections-in-handlers" class="anchor" href="#redirections-in-handlers"></a>
+<a name="redirections-in-handlers"></a>
 ## Redirections in AJAX handlers
 
 If you need to redirect the browser to another location, return the `Redirect` object from the AJAX handler. The framework will redirect the browser as soon as the response is returned from the server. Example AJAX handler:
@@ -279,7 +279,7 @@ If you need to redirect the browser to another location, return the `Redirect` o
     }
 
 
-<a name="pushing-content-updates" class="anchor" href="#pushing-content-updates"></a>
+<a name="pushing-content-updates"></a>
 ## Pushing content updates
 
 AJAX handlers can push content updates to the client-side browser from the server-side. Comparatively, using the **data-request-update** attribute in [data attributes](#data-attributes) or the **update** property in the [JavaScript API](#javascript-api) is considered *pulling a content update*.
