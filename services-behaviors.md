@@ -13,7 +13,7 @@ Behaviors add the ability for classes to have *private traits*, also known as Be
 1. Behaviors have their own contructor.
 1. Behaviors can have private or protected methods.
 1. Methods and property names can conflict safely.
-1. Class can be extended with behaviors dynamically.
+1. Classes can be extended with behaviors dynamically.
 
 <a name="compare-traits" class="anchor" href="#compare-traits"></a>
 ## Comparison to traits

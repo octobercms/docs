@@ -55,7 +55,7 @@ The wizard installation is a recommended way to install October. It is simpler t
 <a name="command-line-installation" class="anchor" href="#command-line-installation"></a>
 ## Command-line installation
 
-If you feel more comfortable with a command-line and want to use composer, there is a CLI install process on the [Console interface page](console#console-install).
+If you feel more comfortable with a command-line and want to use composer, there is a CLI install process on the [Console interface page](../console/commands#console-install).
 
 <a name="post-install-steps" class="anchor" href="#post-install-steps"></a>
 ## Post-installation steps

@@ -184,11 +184,13 @@ Views can also be parsed using PHP templating by using the `.php` extension:
         </body>
     </html>
 
-This view may be returned to the browser like so:
+This view may be returned to the browser using the `View::make` method:
 
     return View::make('acme.blog::greeting', ['name' => 'Charlie']);
 
-The second argument passed to `View::make` is an array of data that should be made available to the view.
+The first argument is a "path hint" that contains the plugin name, separated by two colons `::`, followed by the view file name. The second argument passed to `View::make` is an array of data that should be made available to the view.
+
+> **Note**: The path hint is case sensitive and the plugin name should always be in lowercase.
 
 #### Passing data to views
 
@@ -208,11 +210,11 @@ It is also possible to share a piece of data across all views:
 
 #### Passing a sub-view to a view
 
-Sometimes you may wish to pass a view into another view. For example, given a sub-view stored at `app/views/child/view.php`, we could pass it to another view like so:
+Sometimes you may wish to pass a view into another view. For example, given a sub-view stored at `plugins/acme/blog/views/child/view.php`, we could pass it to another view like so:
 
-    $view = View::make('acme.blog::greeting')->nest('child', 'acme.blog::child');
+    $view = View::make('acme.blog::greeting')->nest('child', 'acme.blog::child.view');
 
-    $view = View::make('acme.blog::greeting')->nest('child', 'child', $data);
+    $view = View::make('acme.blog::greeting')->nest('child', 'acme.blog::child.view', $data);
 
 The sub-view can then be rendered from the parent view:
 
