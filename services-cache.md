@@ -68,6 +68,8 @@ If your Redis server requires authentication, you may supply a password by addin
 <a name="cache-usage"></a>
 ## Cache usage
 
+While most caching is handled internally by October, the `Cache` facade provides some simple methods for caching your own data.
+
 <a name="retrieving-items-from-the-cache"></a>
 ### Retrieving items from the cache
 
