@@ -93,7 +93,7 @@ The `has` method may be used to determine if an item exists in the cache:
         //
     }
 
-#### Incrementing / Decrementing values
+#### Incrementing / decrementing values
 
 The `increment` and `decrement` methods may be used to adjust the value of integer items in the cache. Both of these methods optionally accept a second argument indicating the amount by which to increment or decrement the item's value:
 

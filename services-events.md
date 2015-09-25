@@ -1,6 +1,7 @@
 # Events
 
 - [Basic usage](#basic-usage)
+    - [Where to register events](#event-registration)
 - [Wildcard listeners](#wildcard-listeners)
 - [Using classes as listeners](#using-classes-as-listeners)
 - [Queued events](#queued-events)
@@ -44,6 +45,7 @@ Sometimes you may wish to stop the propagation of an event to other listeners. Y
         return false;
     });
 
+<a name="event-registration"></a>
 ### Where to register events
 
 So, you know how to register events, but you may be wondering _where_ to register them. Subscribing to an event can be done from anywhere, although the most common place is the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods).

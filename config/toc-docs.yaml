@@ -50,6 +50,7 @@ Backend:
 Database:
   icon: "icon-hdd"
   pages:
+    database/basics: "Basic usage"
     database/structure: "Structure"
     database/query: "Queries"
     database/model: "Models"
