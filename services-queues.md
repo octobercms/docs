@@ -113,7 +113,7 @@ You may also access the job identifier:
 
 You may also push a Closure onto the queue. This is very convenient for quick, simple tasks that need to be queued:
 
-#### Pushing A Closure Onto The Queue
+#### Pushing a closure onto the queue
 
     Queue::push(function($job) use ($id) {
         Account::delete($id);

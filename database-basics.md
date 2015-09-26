@@ -13,7 +13,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-Connecting to databases and running queries is simple process, supported by using either raw SQL, the [query builder](../database/query) or [active record models](../database/model). Managing database tables and populating seed data is handled by the [migration and seeder process](../database/structure).
+Connecting to databases and running queries is a simple process, supported by using either raw SQL, the [query builder](../database/query) or [active record models](../database/model). Managing database tables and populating seed data is handled by the [migration and seeder process](../database/structure).
 
 Raw SQL and using the query builder will perform faster and should be used for simple tasks. Active Record is an approach used by the popular framework, Ruby On Rails. It allows an easy interface for performing repetitive tasks like creating, reading, updating and deleting database records. You can learn more about the [active record pattern on Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern).
 
