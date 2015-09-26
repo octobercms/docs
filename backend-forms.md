@@ -16,7 +16,7 @@
     - [Preview view](#form-preview-view)
 - [Applying conditions to fields](#field-conditions)
     - [Input preset converter](#field-input-preset)
-    - [Trigger API](#field-trigger-api)
+    - [Trigger events](#field-trigger-events)
     - [Field dependencies](#field-dependencies)
 - [Extending form behavior](#extend-form-behavior)
     - [Overriding controller action](#overriding-action)
@@ -213,7 +213,7 @@ Option | Description
 **stretch** | specifies if this field stretches to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
-**trigger** | specify conditions for this field using the [trigger interface](#field-trigger-api).
+**trigger** | specify conditions for this field using [trigger events](#field-trigger-events).
 **preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#field-input-preset).
 **required** | places a red asterisk next to the field label to indicate it is required.
 **attributes** | specify custom HTML attributes to add to the form field element.
@@ -702,7 +702,9 @@ Sometimes you may want to manipulate the value or appearance of a form field und
 <a name="field-input-preset"></a>
 ### Input preset converter
 
-The input preset converter is defined with the `preset` [form field option](#form-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element. Here is a sample definition:
+The input preset converter is defined with the `preset` [form field option](#form-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
+
+In this example we will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
 
     title:
         label: Title
@@ -713,7 +715,13 @@ The input preset converter is defined with the `preset` [form field option](#for
             field: title
             type: url
 
-The above example will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
+Alternatively, the `preset` value can also be a string that refers to the **field** only, the `type` option will then default to **slug**.
+
+    slug:
+        label: Slug
+        preset: title
+
+The following options are available for the `preset` option:
 
 Option | Description
 ------------- | -------------
@@ -721,12 +729,10 @@ Option | Description
 **type** | specifies the conversion type. Supported values are: url, file, slug, camel.
 **prefixInput** | optional, prefixes the converted value with the value found in the supplied input element using a CSS selector.
 
-The `preset` value can also be a string that refers to the **field** only, the `type` option will then default to **slug**.
+<a name="field-trigger-events"></a>
+### Trigger events
 
-<a name="field-trigger-api"></a>
-### Trigger API
-
-The trigger API is defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is an sample definition:
+Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is an sample definition:
 
     is_delayed:
         label: Send later
