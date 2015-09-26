@@ -2,7 +2,6 @@
 
 - [Introduction](#introduction)
 - [Building a command](#building-a-command)
-    - [Defining the class](#defining-class)
     - [Defining arguments](#defining-arguments)
     - [Defining options](#defining-options)
     - [Writing output](#writing-output)
@@ -17,9 +16,6 @@ In addition to the provided console commands, you may also build your own custom
 
 <a name="building-a-command"></a>
 ## Building a command
-
-<a name="defining-class"></a>
-### Defining the class
 
 If you wanted to create a console command called `acme:mycommand`, you might create the associated class for that command in a file called **plugins/acme/blog/console/MyCommand.php** and paste the following contents to get started:
 

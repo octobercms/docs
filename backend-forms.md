@@ -761,14 +761,14 @@ Option | Description
 
 Form fields can depend on others when defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution. When the defined other fields change, the defining field will update using the AJAX framework. Here is a sample definition:
 
-        country:
-            label: Country
-            type: dropdown
+    country:
+        label: Country
+        type: dropdown
 
-        state:
-            label: State
-            type: dropdown
-            dependsOn: country
+    state:
+        label: State
+        type: dropdown
+        dependsOn: country
 
 In the above example the `state` form field will refresh when the `country` field has a changed value. When this occurs, the current form data will be filled in the model so the dropdown options can use it.
 
@@ -833,19 +833,19 @@ You can extend the fields of another controller from outside by calling the `ext
 
 Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
-        Categories::extendFormFields(function($form, $model, $context){
+    Categories::extendFormFields(function($form, $model, $context){
 
-            if (!$model instanceof MyModel)
-                return;
+        if (!$model instanceof MyModel)
+            return;
 
-            $form->addFields([
-                'my_field' => [
-                    'label'   => 'My Field',
-                    'comment' => 'This is a custom field I have added.',
-                ],
-            ]);
+        $form->addFields([
+            'my_field' => [
+                'label'   => 'My Field',
+                'comment' => 'This is a custom field I have added.',
+            ],
+        ]);
 
-        });
+    });
 
 You can also extend the form fields internally by overriding the `formExtendFields` method inside the controller class.
 
