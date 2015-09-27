@@ -653,7 +653,7 @@ The `request` function returns the current [request instance](../services/reques
 <a name="method-response"></a>
 #### `response()` {#collection-method}
 
-The `response` function creates a [response](/docs/{{version}}/responses) instance or obtains an instance of the response factory:
+The `response` function creates a [response](../services/response-view) instance or obtains an instance of the response factory:
 
     return response('Hello World', 200, $headers);
 

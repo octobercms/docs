@@ -2,6 +2,7 @@
 
 - [Introduction](#introduction)
 - [Defining models](#defining-models)
+    - [Standard properties](#standard-properties)
 - [Retrieving multiple models](#retrieving-multiple-models)
 - [Retrieving single models / aggregates](#retrieving-single-models)
     - [Retrieving aggregates](#retrieving-aggregates)
@@ -54,6 +55,38 @@ In most cases, you should create one model class for each database table. All mo
 
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
+<a name="standard-properties"></a>
+### Standard properties
+
+There are some standard properties that can be found on models, in addition to those provided by [model traits](traits). For example:
+
+    class User extends Model
+    {
+        protected $primaryKey = 'id';
+
+        protected $exists = false;
+
+        protected $dates = ['last_seen_at'];
+
+        protected $timestamps = true;
+
+        protected $jsonable = ['permissions'];
+
+        protected $guarded = ['*'];
+    }
+
+Property | Description
+------------- | -------------
+**$primaryKey** | primary key name used to identify the model.
+**$exists** | boolean that if true indicates that the model exists.
+**$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
+**$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
+**$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
+**$fillable** | values are fields accessible to [mass assignment](#mass-assignment).
+**$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
+**$visible** | values are fields made visible when [serializing the model data](../database/serialization).
+**$hidden** | values are fields made hidden when [serializing the model data](../database/serialization).
+
 #### Primary keys
 
 Models will assume that each table has a primary key column named `id`. You may define a `$primaryKey` property to override this convention.
@@ -92,6 +125,18 @@ If you need to customize the format of your timestamps, set the `$dateFormat` pr
          * @var string
          */
         protected $dateFormat = 'U';
+    }
+
+#### Values stored as JSON
+
+When attributes names are passed to the `$jsonable` property, the values will be serialized and deserialized from the database as JSON:
+
+    class Post extends Model
+    {
+        /**
+         * @var array Attribute names to encode and decode using JSON.
+         */
+        protected $jsonable = ['data'];
     }
 
 <a name="retrieving-multiple-models"></a>

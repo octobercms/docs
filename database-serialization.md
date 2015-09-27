@@ -1,9 +1,9 @@
 # Model Serialization
 
 - [Introduction](#introduction)
-- [Basic Usage](#basic-usage)
-- [Hiding Attributes From JSON](#hiding-attributes-from-json)
-- [Appending Values To JSON](#appending-values-to-json)
+- [Basic usage](#basic-usage)
+- [Hiding attributes from JSON](#hiding-attributes-from-json)
+- [Appending values to JSON](#appending-values-to-json)
 
 <a name="introduction"></a>
 ## Introduction
@@ -11,9 +11,9 @@
 When building JSON APIs, you will often need to convert your models and relationships to arrays or JSON. Models includes convenient methods for making these conversions, as well as controlling which attributes are included in your serializations.
 
 <a name="basic-usage"></a>
-## Basic Usage
+## Basic usage
 
-#### Converting A Model To An Array
+#### Converting a model to an array
 
 To convert a model and its loaded [relationships](relations) to an array, you may use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
 
@@ -27,7 +27,7 @@ You may also convert [collections](collections) to arrays:
 
     return $users->toArray();
 
-#### Converting A Model To JSON
+#### Converting a model to JSON
 
 To convert a model to JSON, you may use the `toJson` method. Like `toArray`, the `toJson` method is recursive, so all attributes and relations will be converted to JSON:
 
@@ -48,7 +48,7 @@ Since models and collections are converted to JSON when cast to a string, you ca
     });
 
 <a name="hiding-attributes-from-json"></a>
-## Hiding Attributes From JSON
+## Hiding attributes from JSON
 
 Sometimes you may wish to limit the attributes, such as passwords, that are included in your model's array or JSON representation. To do so, add a `$hidden` property definition to your model:
 
@@ -79,9 +79,9 @@ Alternatively, you may use the `$visible` property to define a white-list of att
     }
 
 <a name="appending-values-to-json"></a>
-## Appending Values To JSON
+## Appending values to JSON
 
-Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, first define an [accessor](/docs/{{version}}/eloquent-mutators) for the value:
+Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, first define an [accessor](../database/mutators) for the value:
 
     <?php
 
