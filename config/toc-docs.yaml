@@ -55,6 +55,7 @@ Database:
     database/query: "Queries"
     database/model: "Models"
     database/relations: "Relationships"
+    database/attachments: "File attachments"
     database/collection: "Collections"
     database/mutators: "Mutators"
     database/serialization: "Serialization"

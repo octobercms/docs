@@ -23,7 +23,7 @@ To convert a model and its loaded [relationships](relations) to an array, you ma
 
 You may also convert [collections](collections) to arrays:
 
-    $users = App\User::all();
+    $users = User::all();
 
     return $users->toArray();
 
