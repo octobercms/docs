@@ -9,7 +9,7 @@
 <a name="file-attachments"></a>
 ## File attachments
 
-Models can support file attachments using a subset of the [polymorphic relationship](#relation-polymorph). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship.
+Models can support file attachments using a subset of the [polymorphic relationship](../database/relations#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship.
 
 In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 
