@@ -111,8 +111,9 @@ This example will modify the `model.getAttribute` event of the `User` model by b
             // Local event hook that affects all users
             User::extend(function($model) {
                 $model->bindEvent('model.getAttribute', function($attribute, $value) {
-                    if ($attribute == 'foo')
+                    if ($attribute == 'foo') {
                         return 'bar';
+                    }
                 });
             });
 
@@ -123,8 +124,9 @@ This example will modify the `model.getAttribute` event of the `User` model by b
                         return;
 
                     $model->bindEvent('model.getAttribute', function($attribute, $value) {
-                        if ($attribute == 'foo')
+                        if ($attribute == 'foo') {
                             return 'bar';
+                        }
                     });
                 });
             });
@@ -147,12 +149,14 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
             Event::listen('backend.form.extendFields', function($widget) {
 
                 // Only for the Users controller
-                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users)
+                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
                     return;
+                }
 
                 // Only for the User model
-                if (!$widget->model instanceof \RainLab\User\Models\User)
+                if (!$widget->model instanceof \RainLab\User\Models\User) {
                     return;
+                }
 
                 // Add an extra birthday field
                 $widget->addFields([
