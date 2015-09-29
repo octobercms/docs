@@ -112,6 +112,10 @@ The service container fires an event each time it resolves an object. You may li
         // Called when container resolves object of any type...
     });
 
+    App::resolving('foo', function ($fooBar, $app) {
+        // Called when container resolves objects using hint "foo"...
+    });
+
     App::resolving('Acme\Blog\Classes\FooBar', function ($fooBar, $app) {
         // Called when container resolves objects of type "FooBar"...
     });
