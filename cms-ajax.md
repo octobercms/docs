@@ -235,9 +235,10 @@ Event | Description
 **ajaxUpdate** | triggered on a page element after it has been updated with the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
 **ajaxUpdateComplete** | triggered on the window object after all elements are updated by the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
 **ajaxBeforeUpdate** | triggered on the form object directly after the request is complete, but before the page is updated. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxSuccess** | triggered on the form object after after the request is successfully completed. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxError** | triggered on the form object if the request encounters an error. The handler gets 5 parameters: the event object, the context object, the status text string, and the jqXHR object.
-
+**ajaxSuccess** | triggered on the form object after the request is successfully completed. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
+**ajaxError** | triggered on the form object if the request encounters an error. The handler gets 4 parameters: the event object, the context object, the status text string, and the jqXHR object.
+**ajaxErrorMessage** | triggered on the window object if the request encounters an error. The handler gets 2 parameters: the event object and error message returned from the server.
+**ajaxConfirmMessage** | triggered on the window object when `confirm` option is given. The handler gets 2 parameters: the event object and text message assigned to the handler as part of `confirm` option. This is useful for implementing custom confirm logic/interface instead of native javascript confirm box.
 
 The next example execute JavaScript code when the `ajaxUpdate` event is triggered on an element.
 
