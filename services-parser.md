@@ -224,7 +224,7 @@ Multiple line input for larger blocks of text.
 
 #### Variable
 
-Renders are whatever is defined in the `type` attribute. This tag will simply set a variable and renders in view mode as an empty string.
+Renders the form field type exactly as defined in the `type` attribute. This tag will simply set a variable and will render in view mode as an empty string.
 
     {variable type="text" name="name" label="Name"}John{/variable}
 
