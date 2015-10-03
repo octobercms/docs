@@ -125,7 +125,7 @@ October will always check for errors in the session data, and automatically bind
 
 So, after redirection, you may utilize the automatically bound `errors` variable in your view:
 
-    {{ errors.first('email' ) }}
+    {{ errors.first('email') }}
 
 ### Named error bags
 

@@ -89,7 +89,7 @@ This unique ability to extend constructors allows behaviors to be implemented dy
 
 #### Dynamically creating methods
 
-Methods can be aded to a `Model` through the use of `addDynamicMethod`.
+Methods can be created to a extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
 
     Post::extend(function($model) {
         $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
@@ -184,7 +184,7 @@ If the class name `RainLab\Translate\Behaviors\TranslatableModel` does not exist
         public function __construct()
         {
             if (class_exists('RainLab\Translate\Behaviors\TranslatableModel')) {
-                $controller->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
+                $this->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
             }
 
             parent::__construct();

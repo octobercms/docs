@@ -83,12 +83,6 @@ Alternatively, you may use the `$visible` property to define a white-list of att
 
 Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, first define an [accessor](../database/mutators) for the value:
 
-    <?php
-
-    namespace App;
-
-    use Illuminate\Database\Eloquent\Model;
-
     class User extends Model
     {
         /**
@@ -103,12 +97,6 @@ Occasionally, you may need to add array attributes that do not have a correspond
     }
 
 Once you have created the accessor, add the attribute name to the `appends` property on the model:
-
-    <?php
-
-    namespace App;
-
-    use Illuminate\Database\Eloquent\Model;
 
     class User extends Model
     {

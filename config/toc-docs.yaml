@@ -76,6 +76,7 @@ Services:
     services/helpers: "Helpers"
     services/mail: "Mail"
     services/pagination: "Pagination"
+    services/parser: "Parser"
     services/queues: "Queues"
     services/request-input: "Request & Input"
     services/response-view: "Response & View"

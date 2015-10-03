@@ -16,13 +16,13 @@ In the examples below the model has a single Avatar attachment model and many Ph
 A single file attachment:
 
     public $attachOne = [
-        'avatar' => ['System\Models\File']
+        'avatar' => 'System\Models\File'
     ];
 
 Multiple file attachments:
 
     public $attachMany = [
-        'photos' => ['System\Models\File']
+        'photos' => 'System\Models\File'
     ];
 
 Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`:
@@ -89,7 +89,7 @@ Inside your model define a relationship to the `System\Models\File` class, for e
     class Post extends Model
     {
         public $attachOne = [
-            'featured_image' => ['System\Models\File']
+            'featured_image' => 'System\Models\File'
         ];
     }
 
@@ -113,7 +113,7 @@ Process the uploaded file on the server and attach it to a model:
         $post->featured_image = Input::file('example_file');
     }
 
-Alternatively you use the [deferred binding](../database/relations#deferred-binding):
+Alternatively, you can use [deferred binding](../database/relations#deferred-binding) to defer the relationship:
 
     // Find the Blog Post model
     $post = Post::find(1);
