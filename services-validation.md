@@ -556,8 +556,8 @@ Instead of using Closure callbacks to extend the Validator, you may also extend 
 
 Next, you need to register your custom Validator extension:
 
-    Validator::resolver(function($translator, $data, $rules, $messages) {
-        return new CustomValidator($translator, $data, $rules, $messages);
+    Validator::resolver(function($translator, $data, $rules, $messages, $customAttributes) {
+        return new CustomValidator($translator, $data, $rules, $messages, $customAttributes);
     });
 
 When creating a custom validation rule, you may sometimes need to define custom placeholder replacements for error messages. You may do so by creating a custom Validator as described above, and adding a `replaceXXX` function to the validator.
