@@ -184,7 +184,7 @@ This example will modify the `backend.list.extendColumns` global event of the `B
 
         public function boot()
         {
-            // Extend all backend form usage
+            // Extend all backend list usage
             Event::listen('backend.list.extendColumns', function($widget) {
 
                 // Only for the User controller
