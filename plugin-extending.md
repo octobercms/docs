@@ -7,6 +7,7 @@
 - [Usage examples](#usage-examples)
     - [Extending a User model](#extending-user-model)
     - [Extending a backend form](#extending-backend-form)
+    - [Extending a backend list](#extending-backend-list)
     - [Extending a component](#extending-component)
     - [Extending the backend menu](#extending-backend-menu)
 
@@ -27,15 +28,13 @@ The most common place to subscribe to an event is the `boot()` method of a [Plug
     public function boot()
     {
         Event::listen('rainlab.user.register', function($user) {
-
             // Code to register $user->email to mailing list
-
         });
     }
 
 The same can be achieved by extending the model's constructor and using a local event.
 
-    User::extend(function($model){
+    User::extend(function($model) {
         $model->bindEvent('user.register', function() use ($model) {
             // Code to register $model->email to mailing list
         });
@@ -107,7 +106,6 @@ This example will modify the `model.getAttribute` event of the `User` model by b
 
         public function boot()
         {
-
             // Local event hook that affects all users
             User::extend(function($model) {
                 $model->bindEvent('model.getAttribute', function($attribute, $value) {
@@ -120,8 +118,9 @@ This example will modify the `model.getAttribute` event of the `User` model by b
             // Double event hook that affects user #2 only
             User::extend(function($model) {
                 $model->bindEvent('model.afterFetch', function() use ($model) {
-                    if ($model->id != 2)
+                    if ($model->id != 2) {
                         return;
+                    }
 
                     $model->bindEvent('model.getAttribute', function($attribute, $value) {
                         if ($attribute == 'foo') {
@@ -130,7 +129,6 @@ This example will modify the `model.getAttribute` event of the `User` model by b
                     });
                 });
             });
-
         }
     }
 
@@ -148,7 +146,7 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
             // Extend all backend form usage
             Event::listen('backend.form.extendFields', function($widget) {
 
-                // Only for the Users controller
+                // Only for the User controller
                 if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
                     return;
                 }
@@ -161,11 +159,53 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
                 // Add an extra birthday field
                 $widget->addFields([
                     'birthday' => [
-                        'label' => 'Birthday',
+                        'label'   => 'Birthday',
                         'comment' => 'Select the users birthday',
-                        'type' => 'datepicker'
+                        'type'    => 'datepicker'
                     ]
                 ]);
+
+                // Remove a Surname field
+                $widget->removeField('surname');
+            });
+        }
+    }
+
+> Remember to add `use Event` to the top of your class file to use global events.
+
+<a name="extending-backend-list"></a>
+### Extending a backend list
+
+This example will modify the `backend.list.extendColumns` global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot()` method of the [Plugin registration file](registration#routing-initialization).
+
+    class Plugin extends PluginBase
+    {
+        [...]
+
+        public function boot()
+        {
+            // Extend all backend form usage
+            Event::listen('backend.list.extendColumns', function($widget) {
+
+                // Only for the User controller
+                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
+                    return;
+                }
+
+                // Only for the User model
+                if (!$widget->model instanceof \RainLab\User\Models\User) {
+                    return;
+                }
+
+                // Add an extra birthday column
+                $widget->addColumns([
+                    'birthday' => [
+                        'label' => 'Birthday'
+                    ]
+                ]);
+
+                // Remove a Surname column
+                $widget->removeColumn('surname');
             });
         }
     }
