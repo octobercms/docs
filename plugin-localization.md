@@ -11,7 +11,7 @@ Plugins can have localization files in the **lang** subdirectory of the plugin d
 <a name="file-structure"></a>
 ## Localization directory and file structure
 
-Below is an example of the of the plugin's lang directory:
+Below is an example of the plugin's lang directory:
 
     plugins/
       acme/
