@@ -148,9 +148,9 @@ Option | Description
 **label** | a name when displaying the list column to the user.
 **type** | defines how this column should be rendered (see [Column types](#column-types) below).
 **default** | specifies the default value for the column if value is empty.
-**searchable** | include this column in the list search results. Default: no.
-**invisible** | specifies if this column is hidden by default. Default: no.
-**sortable** | specifies if this column can be sorted. Default: yes.
+**searchable** | include this column in the list search results. Default: false.
+**invisible** | specifies if this column is hidden by default. Default: false.
+**sortable** | specifies if this column can be sorted. Default: true.
 **select** | defines a custom SQL select statement.
 **relation** | defines a relationship column.
 **cssClass** | assigns a CSS class to the column container.
