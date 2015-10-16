@@ -3,7 +3,8 @@
 - [Webserver configuration](#webserver-configuration)
     - [Apache configuration](#apache-configuration)
     - [Nginx configuration](#nginx-configuration)
-    - [Lighttpd configuration](#lighttd-configuration)
+    - [Lighttpd configuration](#lighttpd-configuration)
+    - [IIS configuration](#iis-configuration)
     - [Using a public folder (advanced)](#public-folder)
 - [Environment configuration](#environment-config)
 - [Bleeding edge updates](#edge-updates)
@@ -60,12 +61,10 @@ Use the following code in **server** section. If you have installed October into
     rewrite ^storage/temp/protected/.* /index.php break;
     rewrite ^storage/app/uploads/protected/.* /index.php break;
 
-<a name="lighttd-configuration"></a>
+<a name="lighttpd-configuration"></a>
 ### Lighttpd configuration
 
-If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS.
-
-Open your site configuration file with your favorite editor.
+If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS. Open your site configuration file with your favorite editor.
 
 `nano /etc/lighttpd/conf-enabled/sites.conf`
 
@@ -83,6 +82,28 @@ Paste the following code in the editor and change the **host address** and  **se
             "(.*)" => "/index.php$1"
         )
     }
+
+<a name="iis-configuration"></a>
+### IIS configuration
+
+If your webserver is running Internet Information Services (IIS) you can use the following in your **web.config** configuration file to run OctoberCMS.
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+        <system.webServer>
+            <rewrite>
+                <rules>
+                    <rule name="redirect all requests" stopProcessing="true">
+                        <match url="^(.*)$" ignoreCase="false" />
+                        <conditions logicalGrouping="MatchAll">
+                            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" pattern="" ignoreCase="false" />
+                        </conditions>
+                        <action type="Rewrite" url="index.php" appendQueryString="true" />
+                    </rule>
+                </rules>
+            </rewrite>
+        </system.webServer>
+    </configuration>
 
 <a name="public-folder"></a>
 ### Using a public folder (advanced)
