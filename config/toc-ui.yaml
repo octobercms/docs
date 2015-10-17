@@ -40,4 +40,5 @@ Script:
     ui/input-hotkey: "Input.Hotkey"
     ui/input-preset: "Input.Preset"
     ui/input-trigger: "Input.Trigger"
+    ui/inspector: "Inspector"
     # ui/input-monitor: "Input.Monitor"
