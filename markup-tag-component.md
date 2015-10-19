@@ -11,7 +11,7 @@ This will render the component partial with a fixed name of **default.htm** and 
 <a name="variables"></a>
 ## Variables
 
-Some components support [passing variables](../cms/components#variables) at the render time:
+Some components support [passing variables](../cms/components#variables) at render time:
 
     {% component "blogPosts" postsPerPage="5" %}
 
