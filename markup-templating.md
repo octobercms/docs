@@ -83,5 +83,5 @@ There are some features offered by Twig that are not supported by October. They 
 
 Tag | Equivalent
 ------------- | -------------
-`{% extend %}` | Use Layouts or `{% placeholder %}`
+`{% extend %}` | Use [Layouts](http://octobercms.com/docs/cms/layouts) or `{% placeholder %}`
 `{% include %}` | Use `{% partial %}` or `{% content %}`
