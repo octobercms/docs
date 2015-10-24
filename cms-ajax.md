@@ -290,7 +290,7 @@ If you need to redirect the browser to another location, return the `Redirect` o
 
 AJAX handlers can push content updates to the client-side browser from the server-side. Comparatively, using the **data-request-update** attribute in [data attributes](#data-attributes) or the **update** property in the [JavaScript API](#javascript-api) is considered *pulling a content update*.
 
-To push an update the AJAX handler returns an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update. The following example will update an element on the page with the id **flashMessages** using the contents found inside the partial **flash-messages** containing [markup to display flash messages](markup/tag-flash).
+To push an update the AJAX handler returns an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update. The following example will update an element on the page with the id **flashMessages** using the contents found inside the partial **flash-messages** containing [markup to display flash messages](../markup/tag-flash).
 
     function onFlash()
     {
