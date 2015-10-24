@@ -40,7 +40,7 @@ Alias | Description
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
 
-The same alias can be used for JavaScript or CSS, for example `@framework.extras`, at least one explicit reference with a file extension is needed in the array to determine which is used.
+The same alias can be used for JavaScript or CSS, for example `@framework.extras`. At least one explicit reference with a file extension is needed in the array to determine which is used.
 
 <a name="external-combiner-paths"></a>
 ### External combiner paths

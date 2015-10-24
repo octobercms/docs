@@ -8,7 +8,7 @@ The `{% flash %}` and `{% endflash %}` tags will render any flash messages store
         {% endflash %}
     </ul>
 
-You can use the `type` variable that represents the flash message type - **success**, **error**, **info** or **warning**.
+You can use the `type` variable that represents the flash message type &mdash; **success**, **error**, **info** or **warning**.
 
     {% flash %}
         <div class="alert alert-{{ type }}">

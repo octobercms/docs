@@ -23,7 +23,7 @@ When linking to a page that has URL parameters defined, the `|page` filter suppo
     ==
     [...]
 
-Given the above contents is found in a CMS page file **post.htm** you can link to this page using:
+Given the above content is found in a CMS page file **post.htm** you can link to this page using:
 
     <a href="{{ 'post'|page({ post_id: 10 }) }}">
         Blog post #10
