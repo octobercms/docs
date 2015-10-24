@@ -91,6 +91,12 @@ If you need to use a custom `Collection` object with your own extension methods,
 
 Once you have defined a `newCollection` method, you will receive an instance of your custom collection anytime the model returns a `Collection` instance. If you would like to use a custom collection for every model in your plugin or application, you should override the `newCollection` method on a model base class that is extended by all of your models.
 
+    use October\Rain\Database\Collection as CollectionBase;
+
+    class CustomCollection extends CollectionBase
+    {
+    }
+
 <a name="data-feed"></a>
 ## Data feed
 
