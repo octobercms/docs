@@ -48,6 +48,8 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the files and folders. For example, running the command `chmod -R 777 *` can fix it.
 
+1. **An error code "liveConnection" is displayed**: The installer will test a connection to the installation server using port 80. Check that your webserver can create outgoing connections on port 80 via PHP. Contact your hosting provider or this is often found in the server firewall settings.
+
 1. **MySQL shows an error "Syntax error or access violation: 1067 Invalid default value for ..."**: Check your MySQL settings file to make sure the `NO_ZERO_DATE` setting is disabled.
 
 > **Note:** A detailed installation log can be found in the `install_files/install.log` file.
