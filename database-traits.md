@@ -318,6 +318,19 @@ You may also set custom attribute names with the `$attributeNames` array.
         ];
     }
 
+<a name="dynamic-validation-rules"></a>
+### Dynamic validation rules
+
+You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model#events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
+
+    public function beforeValidate()
+    {
+        if (!$this->is_remote) {
+            $this->rules['latitude'] = 'required';
+            $this->rules['longitude'] = 'required';
+        }
+    }
+
 <a name="custom-validation-rules"></a>
 ### Custom validation rules
 
