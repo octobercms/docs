@@ -9,6 +9,7 @@
 - [Routing parameters](#routing-parameters)
 - [Handling the page execution cycle](#page-cycle)
     - [Page execution life cycle handlers](#page-cycle-handlers)
+    - [Component initialization](#page-cycle-init)
 - [AJAX handlers](#ajax-handlers)
 - [Default markup](#default-markup)
 - [Component partials](#component-partials)
@@ -281,6 +282,16 @@ When a page loads, October executes handler functions that could be defined in t
 1. Page components `onRun()` method.
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
+
+<a name="page-cycle-init"></a>
+### Component initialization
+
+Sometimes you may wish to execute code at the time the component class is first instantiated. You may override the `init` method in the component class to handle any initialization logic, this will execute before AJAX handlers and before the page execution life cycle. For example, this method can be used for attaching another component to the page dynamically.
+
+    public function init()
+    {
+        $this->addComponent('Acme\Blog\Components\BlogPosts', 'blogPosts');
+    }
 
 <a name="ajax-handlers"></a>
 ## AJAX handlers
