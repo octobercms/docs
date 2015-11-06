@@ -374,6 +374,7 @@ There are various form widgets included as standard, although it is common for p
 - [File upload](#widget-fileupload)
 - [Date picker](#widget-datepicker)
 - [Relation](#widget-relation)
+- [Balloon Selector](#widget-balloon-selector)
 
 <a name="widget-richeditor" class="anchor" href="#widget-richeditor"></a>
 ### Rich editor / WYSIWYG
@@ -448,6 +449,20 @@ Option  | Description
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
 **emptyOption** | text to display when there is no available selections.
+
+<a name="widget-balloon-selector" class="anchor" href="#widget-balloon-selector"></a>
+### Balloon Selector
+
+`balloon-selector` - renders a list of button options, where only one item can be selected at a time.
+
+    permission:
+        label: Manage the blog posts
+        type: balloon-selector
+        options:
+            allow: ALLOW
+            inherit: INHERIT
+            deny: DENY
+        default: inherit
 
 <a name="form-views" class="anchor" href="#form-views"></a>
 ## Form views
