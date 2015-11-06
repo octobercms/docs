@@ -13,8 +13,6 @@
 - [Redirections in AJAX handlers](#redirections-in-handlers)
 - [Pushing content updates](#pushing-content-updates)
 
-
-
 October includes the AJAX framework that lets you execute AJAX handlers defined in your [pages](pages), [layouts](layouts) or [components](components) and update page blocks with [partials](partials). The AJAX framework comes in two flavors - as JavaScript API and data attributes API. The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
 
 <a name="introduction"></a>
