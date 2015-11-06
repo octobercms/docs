@@ -228,7 +228,7 @@ Sometimes components need to create links to the website pages. For example, the
 
 Components can directly access routing parameter values defined the [URL of the page](../cms/pages#url-syntax).
 
-    // Returns he URL segment value, eg: /page/:post_id
+    // Returns the URL segment value, eg: /page/:post_id
     $postId = $this->param('post_id');
 
 In some cases a [component property](#component-properties) may act as a hard coded value or reference the value from the URL.
