@@ -10,11 +10,13 @@
 - [Handling the page execution cycle](#page-cycle)
     - [Page execution life cycle handlers](#page-cycle-handlers)
     - [Component initialization](#page-cycle-init)
+    - [Halting with a response](#page-cycle-response)
 - [AJAX handlers](#ajax-handlers)
 - [Default markup](#default-markup)
 - [Component partials](#component-partials)
     - [Referencing "self"](#referencing-self)
     - [Unique identifier](#unique-identifier)
+- [Rendering partials from code](#render-partial-method)
 - [Injecting page assets with components](#component-assets)
 
 <a name="introduction"></a>
@@ -293,6 +295,18 @@ Sometimes you may wish to execute code at the time the component class is first 
         $this->addComponent('Acme\Blog\Components\BlogPosts', 'blogPosts');
     }
 
+<a name="page-cycle-response"></a>
+### Halting with a response
+
+Like all methods in the [page execution life cycle](../cms/layouts#layout-life-cycle), if the `onRun()` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
+
+    public function onRun()
+    {
+        if (true) {
+            return Response::make('Access denied!', 403);
+        }
+    }
+
 <a name="ajax-handlers"></a>
 ## AJAX handlers
 
@@ -382,6 +396,32 @@ The ID is unique each time the component is displayed.
 
     <!-- ID: demoTodo527c532ec4c33 -->
     {% component 'demoTodo' %}
+
+<a name="render-partial-method"></a>
+## Rendering partials from code
+
+You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables.
+
+    $content = $this->renderPartial('component-partial.htm');
+
+    $content = $this->renderPartial('component-partial.htm', [
+        'name' => 'John Smith'
+    ]);
+
+For example, to render a partial as a response to an [AJAX handler](../cms/ajax#ajax-handlers):
+
+    function onGetTemplate()
+    {
+        return ['#someDiv' => $this->renderPartial('component-partial.htm')];
+    }
+
+Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#page-cycle). This code will specifically return an XML response using the `Response` facade:
+
+    public function onRun()
+    {
+        $content = $this->renderPartial('default.htm');
+        return Response::make($content)->header('Content-Type', 'text/xml');
+    }
 
 <a name="component-assets"></a>
 ## Injecting page assets with components
