@@ -197,7 +197,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
 <a name="navigation-menus"></a>
 ## Navigation menus
 
-Plugins can extend the back-end navigation menus by overriding methods of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
+Plugins can extend the back-end navigation menus by overriding the `registerNavigation()` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
     public function registerNavigation()
     {
