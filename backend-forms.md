@@ -555,16 +555,24 @@ Option | Description
 <a name="widget-relation"></a>
 ### Relation
 
-`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list.
+`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
 
     categories:
         label: Categories
         type: relation
         nameFrom: title
 
+Alternatively, you may populate the label using a custom `select` statement. Any valid SQL statement works here.
+
+    user:
+        label: User
+        type: relation
+        select: concat(first_name, ' ', last_name)
+
 Option | Description
 ------------- | -------------
-**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
+**nameFrom** | a model attribute name used for displaying the relation label. Default: name.
+**select** | a custom SQL select statement to use for the name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
 **emptyOption** | text to display when there is no available selections.
 
