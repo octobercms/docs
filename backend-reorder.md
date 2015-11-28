@@ -9,7 +9,7 @@
 
 **Reorder behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder()`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
 
-The behavior depends on a [model class](../database/model) which must implement one of the following traits:
+The behavior depends on a [model class](../database/model) which must implement one of the following [model traits](../database/traits):
 
 1. `October\Rain\Database\Traits\Sortable`
 1. `October\Rain\Database\Traits\NestedTree`

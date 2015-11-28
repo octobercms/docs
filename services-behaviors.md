@@ -8,7 +8,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to native PHP Traits except they have some distinct benefits:
+Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to [native PHP Traits](http://php.net/manual/en/language.oop5.traits.php) except they have some distinct benefits:
 
 1. Behaviors have their own contructor.
 1. Behaviors can have private or protected methods.
@@ -18,7 +18,7 @@ Behaviors add the ability for classes to have *private traits*, also known as Be
 <a name="compare-traits"></a>
 ## Comparison to traits
 
-Where you might use a trait like this:
+Where you might use a PHP trait like this:
 
     class MyClass
     {
