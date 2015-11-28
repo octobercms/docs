@@ -151,7 +151,8 @@ Option | Description
 **searchable** | include this column in the list search results. Default: false.
 **invisible** | specifies if this column is hidden by default. Default: false.
 **sortable** | specifies if this column can be sorted. Default: true.
-**select** | defines a custom SQL select statement.
+**select** | defines a custom SQL select statement to use for the value.
+**valueFrom** | defines a model attribute to use for the value.
 **relation** | defines a relationship column.
 **cssClass** | assigns a CSS class to the column container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
@@ -284,7 +285,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         relation: groups
         select: name
 
-If the [relationship definition](../database/relations) uses the **count** argument, you can display the number of related records using the `nameFrom` and `default` options.
+If the [relationship definition](../database/relations) uses the **count** argument, you can display the number of related records using the `valueFrom` and `default` options.
 
     users_count:
         label: Users
