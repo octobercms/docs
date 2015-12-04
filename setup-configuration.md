@@ -108,7 +108,7 @@ If your webserver is running Internet Information Services (IIS) you can use the
 <a name="public-folder"></a>
 ### Using a public folder (advanced)
 
-While this step is optional, for ultimate security in production environments it is recommended that you configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
+While this step is optional, for ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
 
     php artisan october:mirror public/
 
