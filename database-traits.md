@@ -339,11 +339,11 @@ You can also create custom validation rules the [same way](../services/validatio
 <a name="soft-deleting"></a>
 ## Soft deleting
 
-When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDeleting` trait to the model and add the deleted_at column to your `$dates` property:
+When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\SoftDeleting;
+        use \October\Rain\Database\Traits\SoftDelete;
 
         protected $dates = ['deleted_at'];
     }
@@ -404,3 +404,19 @@ Sometimes you may need to truly remove a model from your database. To permanentl
 
     // Force deleting all related models...
     $user->posts()->forceDelete();
+
+<a name="soft-deleting-relations"></a>
+### Soft deleting relations
+
+When a two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+
+    class User extends Model
+    {
+        use \October\Rain\Database\Traits\SoftDelete;
+
+        public $hasMany = [
+            'comments' => ['Acme\Blog\Models\Comment', 'softDelete' => true]
+        ];
+    }
+
+> **Note:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
