@@ -408,7 +408,7 @@ Sometimes you may need to truly remove a model from your database. To permanentl
 <a name="soft-deleting-relations"></a>
 ### Soft deleting relations
 
-When a two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
 
     class User extends Model
     {
@@ -420,3 +420,8 @@ When a two related models have soft deletes enabled, you can cascade the delete 
     }
 
 > **Note:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+
+Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
+
+    // Restore the user and comments
+    $user->restore();
