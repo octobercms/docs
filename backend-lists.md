@@ -344,7 +344,7 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
         published:
             label: Hide published
             type: checkbox
-            conditions: published <> 1
+            conditions: published <> true
 
 <a name="filter-scope-options"></a>
 ### Scope options
