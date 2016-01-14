@@ -3,6 +3,7 @@
 - [Application container](#app-container)
 - [Service providers](#service-providers)
 - [Application events](#application-events)
+- [Application helpers](#application-helpers)
 
 <a name="app-container"></a>
 ## Application container
@@ -121,3 +122,23 @@ The service container fires an event each time it resolves an object. You may li
     });
 
 As you can see, the object being resolved will be passed to the callback, allowing you to set any additional properties on the object before it is given to its consumer.
+
+<a name="application-helpers"></a>
+## Application helpers
+
+#### Finding the application environment
+
+You may use the `environment` method to discover the application environment as determined by the [environment configuration](../setup/configuration#environment-config).
+
+    // production
+    App::environment();
+
+#### Determine the execution context
+
+It is possible to know if the current request is being performed in the administrative back-end area using the `runningInBackend` method.
+
+    App::runningInBackend();
+
+You may also use the `runningInConsole` method to check if the executing code is taking place inside the [command line interface](../console/commands):
+
+    App::runningInConsole();
