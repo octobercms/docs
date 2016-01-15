@@ -10,6 +10,7 @@
 - [Nested Tree](#nested-tree)
 - [Validation](#validation)
 - [Soft deleting](#soft-deleting)
+- [Nullable](#nullable)
 
 Model traits are used to implement common functionality.
 
@@ -404,3 +405,18 @@ Sometimes you may need to truly remove a model from your database. To permanentl
 
     // Force deleting all related models...
     $user->posts()->forceDelete();
+
+<a name="nullable"></a>
+## Nullable
+
+Nullable attributes are set to `NULL` when left empty. To nullify attributes in your model, apply the `October\Rain\Database\Traits\Nullable` trait and declare a `$nullable` property with an array containing the attributes to nullify.
+
+    class Product extends Model
+    {
+        use \October\Rain\Database\Traits\Nullable;
+
+        /**
+         * @var array Nullable attributes.
+         */
+        protected $nullable = ['sku'];
+    }
