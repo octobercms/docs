@@ -358,6 +358,7 @@ Option | Description
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
 **scope** | specifies a [query scope method](http://laravel.com/docs/eloquent#query-scopes) defined in the **list model** to apply to the list query, the first parameter will contain the filtered value(s).
 **nameFrom** | if filtering by multiple items, a column to display for the name, taken from the `modelClass` model.
+**options** | If the `type` is set as group, then an array of options can be used instead of a dynamic model class.
 
 <a name="scope-types"></a>
 ### Available scope types
