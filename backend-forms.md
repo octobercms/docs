@@ -215,7 +215,7 @@ Option | Description
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using [trigger events](#field-trigger-events).
 **preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#field-input-preset).
-**required** | places a red asterisk next to the field label to indicate it is required.
+**required** | places a red asterisk next to the field label to indicate it is required (make sure to setup validation on the model as this is not enforced by the form controller).
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 
