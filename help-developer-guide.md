@@ -84,6 +84,21 @@ This is an acceptable preference based on a technicality, PSR-1 and PSR-2 are no
 
 This section describes some standards that we highly recommend to follow for everybody, especially if you are going to publish your products on the Marketplace.
 
+<a name="vendor-naming"></a>
+### Vendor naming
+
+The vendor or author code in a namespace must begin with an uppercase character and should not contain underscores or dashes. These are examples of valid names:
+
+    Acme.Blog
+    RainLab.User
+    Happygilmore.Golf
+
+These are examples of names that are **not** valid:
+
+    acme.blog
+    rainLab.user
+    Happy_gilmore.Golf
+
 <a name="repository-naming"></a>
 ### Repository naming
 
