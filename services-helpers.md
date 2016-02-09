@@ -44,9 +44,9 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [database_path](#method-database-path)
 [plugins_path](#method-plugins-path)
 [public_path](#method-public-path)
+[storage_path](#method-storage-path)
 [temp_path](#method-temp-path)
 [themes_path](#method-themes-path)
-[storage_path](#method-storage-path)
 [uploads_path](#method-uploads-path)
 </div>
 
@@ -392,13 +392,6 @@ The `public_path` function returns the fully qualified path to the `public` dire
 
     $path = public_path();
 
-<a name="method-temp-path"></a>
-#### `temp_path()` {#collection-method}
-
-The `temp_path` function returns the fully qualified path to a writable directory for temporary files:
-
-    $path = temp_path();
-
 <a name="method-storage-path"></a>
 #### `storage_path()` {#collection-method}
 
@@ -409,6 +402,20 @@ The `storage_path` function returns the fully qualified path to the `storage` di
 You may also use the `storage_path` function to generate a fully qualified path to a given file relative to the storage directory:
 
     $path = storage_path('app/file.txt');
+
+<a name="method-temp-path"></a>
+#### `temp_path()` {#collection-method}
+
+The `temp_path` function returns the fully qualified path to a writable directory for temporary files:
+
+    $path = temp_path();
+
+<a name="method-themes-path"></a>
+#### `themes_path()` {#collection-method}
+
+The `themes_path` function returns the fully qualified path to the `themes` directory:
+
+    $path = themes_path();
 
 <a name="method-uploads-path"></a>
 #### `uploads_path()` {#collection-method}
