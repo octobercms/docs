@@ -29,7 +29,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [array_pull](#method-array-pull)
 [array_set](#method-array-set)
 [array_sort](#method-array-sort)
-[array_sort_recursive](#method-array-recursive)
+[array_sort_recursive](#method-array-sort-recursive)
 [array_where](#method-array-where)
 [head](#method-head)
 [last](#method-last)
@@ -684,10 +684,10 @@ The `trace_log` function writes a trace message to the log file.
 
     trace_log('This code has passed...');
 
-<a name="method-trace-log"></a>
+<a name="method-trace-sql"></a>
 #### `trace_sql()` {#collection-method}
 
-The `trace_log` function function enables database logging and begins to monitor all SQL output.
+The `trace_sql` function enables database logging and begins to monitor all SQL output.
 
     trace_sql();
 

@@ -106,7 +106,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 <a name="error-messages-and-views"></a>
 ## Error messages & views
 
-Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by Ocotber. Consider the following routes as an example:
+Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October. Consider the following routes as an example:
 
     public function onRegister()
     {
