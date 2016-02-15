@@ -91,7 +91,7 @@ Option | Type | Description
 **recordUrl** | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
-**toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add\|remove**
+**toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Set to `false` to show no buttons. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add\|remove**
 
 These configuration values can be specified only for the **manage** options.
 
