@@ -164,7 +164,7 @@ View files must end with the `.htm` file extension.
 <a name="class-naming"></a>
 ### Class naming
 
-There is a number of class suffixes and prefixes that we recommend to use.
+Classes commonly are placed in the `classes` directory. There is a number of class suffixes and prefixes that we recommend to use.
 
 1. Manager
 1. Builder
@@ -249,8 +249,48 @@ The author and plugin name acronym is acceptable too:
 
     ab_category_id
 
+<a name="component-naming"></a>
+### Component naming
+
+Component classes are commonly place in the `components` directory. The name of a component should represent its primary function.
+
+To display a list of records, use the `List` suffix, eg:
+
+    ProductList
+    ProductReviewList
+    CategoryList
+
+To display a single record, use the `Details` suffix, eg:
+
+    ProductDetails
+    CategoryDetails
+
+Using the suffix helps avoid conflicts with controller and model names. Alternatively you can name components without the suffix, for cases when the name is descriptive and does not conflict:
+
+    ProductReviews
+    CustomerCheckout
+    SeoDirectory
+    UserProfile
+
+<a name="controller-naming"></a>
+### Controller naming
+
+Controllers are commonly are placed in `controllers` directory, for back-end controllers. The name of a controller should be a plural, for example:
+
+    People
+    Products
+    Categories
+    ProductCategories
+
 <a name="model-naming"></a>
 ### Model naming
+
+Models are commonly are placed in `models` directory. The name of a model should be a singular, for example:
+
+    Person
+    Product
+    Category
+    ProductCategory
 
 When extending other models, you should prefix the field with at least the plugin name.
 
