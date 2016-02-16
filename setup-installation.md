@@ -15,11 +15,10 @@ There are two ways you can install October, either using the Wizard or Command-l
 
 October CMS has some server requirements for web hosting:
 
-1. PHP version 5.4 or higher
+1. PHP version 5.5.9 or higher
 1. PDO PHP Extension
 1. cURL PHP Extension
 1. OpenSSL PHP Extension
-1. MCrypt PHP Extension
 1. Mbstring PHP Library
 1. ZipArchive PHP Library
 1. GD PHP Library
