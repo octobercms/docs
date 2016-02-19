@@ -104,7 +104,7 @@ Method | Description
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) used by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
-**registerSchedule()** | registers [scheduled tasks](#scheduling) that are executed on a regular basis.
+**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
 
 <a name="basic-plugin-information"></a>
 ### Basic plugin information
