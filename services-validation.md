@@ -391,7 +391,7 @@ The field under validation must be present _only when_ the all of the other spec
 <a name="rule-same"></a>
 #### same:_field_
 
-The given _field_ must match the field under validation.
+The specified _field_ value must match the field's value under validation.
 
 <a name="rule-size"></a>
 #### size:_value_
