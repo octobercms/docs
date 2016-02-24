@@ -5,6 +5,7 @@
 - [Command-line installation](#command-line-installation)
 - [Post-installation steps](#post-install-steps)
     - [Delete installation files](#delete-install-files)
+    - [Review configuration](#config-review)
     - [Setting up the scheduler](#crontab-setup)
     - [Setting up queue workers](#queue-setup)
 
@@ -70,6 +71,15 @@ If you have used the [Wizard installation](#wizard-installation) you should dele
 
     install_files/      <== Installation directory
     install.php         <== Installation script
+
+<a name="config-review"></a>
+### Review configuration
+
+Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
+
+For example, in production environments you may want to enable [CSRF protection](../setup/configuration#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
+
+While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments.
 
 <a name="crontab-setup"></a>
 ### Setting up the scheduler

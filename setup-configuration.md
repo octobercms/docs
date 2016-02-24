@@ -6,12 +6,12 @@
     - [Lighttpd configuration](#lighttpd-configuration)
     - [IIS configuration](#iis-configuration)
     - [Using a public folder (advanced)](#public-folder)
-- [Environment configuration](#environment-config)
-- [Bleeding edge updates](#edge-updates)
+- [Debug mode](#debug-mode)
 - [CSRF protection](#csrf-protection)
+- [Bleeding edge updates](#edge-updates)
+- [Environment configuration](#environment-config)
 
 All of the configuration files for October are stored in the **config/** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
-
 
 <a name="webserver-configuration"></a>
 ## Web server configuration
@@ -116,6 +116,50 @@ This will create a new directory called **public/** in the project's base direct
 
 > **Note**: The above command needs to be performed with System Administrator or *sudo* privileges in most cases. It should also be performed after each system update or when a new plugin is installed.
 
+<a name="debug-mode"></a>
+## Debug mode
+
+The debug setting is found in the `config/app.php` configuration file with the `debug` parameter and is enabled by default.
+
+When enabled, this setting will show detailed error messages when they occur along with other debugging features. While useful during development, debug mode should always be disabled when used in a live production site. This prevents potentially sensitive information from being displayed to the end-user.
+
+The debug mode uses the following features when enabled:
+
+1. [Detailed error pages are displayed](../cms/pages#error-page).
+1. Failed user authentication provides a specific reason.
+1. [Combined assets are not minified by default](../markup/filter-theme).
+
+> **Important**: Always set the `app.debug` setting to `false` for production environments.
+
+<a name="csrf-protection"></a>
+## CSRF protection
+
+October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
+
+While CSRF protection is disabled by default, you can enable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
+
+<a name="edge-updates"></a>
+## Bleeding edge updates
+
+The October platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
+
+You can instruct the platform to prefer test builds by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
+
+    /*
+    |--------------------------------------------------------------------------
+    | Bleeding edge updates
+    |--------------------------------------------------------------------------
+    |
+    | If you are developing with October, it is important to have the latest
+    | code base, set this value to 'true' to tell the platform to download
+    | and use the development copies of core files and plugins.
+    |
+    */
+
+    'edgeUpdates' => false,
+
+> **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
+
 <a name="environment-config"></a>
 ## Environment configuration
 
@@ -148,32 +192,3 @@ For example, to use a different MySQL database for the `dev` environment only, c
             ]
         ]
     ];
-
-<a name="edge-updates"></a>
-## Bleeding edge updates
-
-The October platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
-
-You can instruct the platform to prefer test builds by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
-
-    /*
-    |--------------------------------------------------------------------------
-    | Bleeding edge updates
-    |--------------------------------------------------------------------------
-    |
-    | If you are developing with October, it is important to have the latest
-    | code base, set this value to 'true' to tell the platform to download
-    | and use the development copies of core files and plugins.
-    |
-    */
-
-    'edgeUpdates' => false,
-
-> **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
-
-<a name="csrf-protection"></a>
-## CSRF protection
-
-October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
-
-While CSRF protection is disabled by default, you can enable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
