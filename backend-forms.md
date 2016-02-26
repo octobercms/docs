@@ -204,6 +204,7 @@ Option | Description
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
+**commentHtml** | allow HTML markup inside the comment. Options: true, false.
 **default** | specifies the default value for the field.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
