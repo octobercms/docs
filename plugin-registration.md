@@ -116,7 +116,8 @@ Key | Description
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/), any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+**iconSvg** | an SVG icon to be used in place of the standard icon, optional. The SVG icon should be a rectangle and can support colors.
 **homepage** | A link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
