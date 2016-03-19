@@ -19,8 +19,10 @@ Below is an example of the plugin's lang directory:
           lang/           <=== Localization directory
             en/           <=== Language directory
               lang.php    <=== Localization file
+              validation.php <=== Custom validation messages
             fr/
               lang.php
+              validation.php
 
 
 The **lang.php** file should define and return an array of any depth, for example:
