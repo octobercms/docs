@@ -3,7 +3,7 @@
 - [Introduction](#introduction)
 - [Markdown parser](#markdown-parser)
 - [Twig template parser](#twig-parser)
-- [Simple template parser](#template-parser)
+- [Bracket parser](#bracket-parser)
 - [YAML configuration parser](#yaml-parser)
 - [Initialization (INI) configuration parser](#ini-parser)
     - [October flavored INI](#october-ini)
@@ -52,14 +52,14 @@ The second argument can be used for passing variables to the Twig markup.
 
 The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration#extending-twig).
 
-<a name="template-parser"></a>
-## Simple template parser
+<a name="bracket-parser"></a>
+## Bracket parser
 
-October also ships with a simple template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Template` class should be used with the `parse` method.
+October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
 
-    use October\Rain\Parse\Template;
+    use October\Rain\Parse\Bracket;
 
-    $html = Template::parse($content, ['foo' => 'bar']);
+    $html = Bracket::parse($content, ['foo' => 'bar']);
 
 The syntax uses singular *curly brackets* for rendering variables:
 
