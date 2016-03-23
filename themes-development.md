@@ -87,6 +87,13 @@ The value can then be accessed inside any of the Theme templates using the [defa
 
     <h1>Welcome to {{ this.theme.site_name }}!</h1>
 
+You may also define the configuration in a separate file, where the path is relative to the theme. The following definition will source the form fields from the file **config/fields.yaml** inside the theme.
+
+    name: My Theme
+    # [...]
+
+    form: config/fields.yaml
+
 <a name="dependencies"></a>
 ## Theme dependencies
 
