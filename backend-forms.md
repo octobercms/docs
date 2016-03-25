@@ -292,7 +292,7 @@ There are various native field types that can be used for the **type** setting. 
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines options directly in the YAML file:
+`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines `options` directly in the YAML file:
 
     status:
         label: Blog Post Status
@@ -332,12 +332,19 @@ The fourth method uses a specific method declared in the model's class. In the n
         type: dropdown
         options: listStatuses
 
-Supplying the dropdown options tn the model class:
+Supplying the dropdown options to the model class:
 
     public function listStatuses($keyValue = null, $fieldName = null)
     {
         return ['published' => 'Published', ...];
     }
+
+By default the dropdown has a searching feature, allowing quick selection of a value. This can be disabled by setting the `showSearch` option to `false`.
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        showSearch: false
 
 <a name="field-radio"></a>
 ### Radio List
