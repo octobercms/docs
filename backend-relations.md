@@ -97,6 +97,7 @@ These configuration values can be specified only for the **manage** options.
 
 Option | Type | Description
 ------------- | ------------- | -------------
+**title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 <a name="relationship-types"></a>
