@@ -34,18 +34,19 @@ Protected attachments are uploaded to the application's **uploads/protected** di
 <a name="creating-attachments"></a>
 ### Creating new attachments
 
-To attach a file uploaded with a form, you may create the attachment directly via the model relationship, using the `Input::file` method set against the `data` attribute.
+You may create an attachment directly via the model relationship, by setting its value using the `Input::file` method, which reads the file data from an input upload.
 
     $model->avatar = Input::file('file_input');
 
-    // The above is the same as...
-    $model->avatar()->create(['data' => Input::file('file_input'));
-
-You may also pass a string to the `data` attribute.
+You may also pass a string to the `data` attribute that contains an absolute path to a local file.
 
     $model->avatar = '/path/to/somefile.jpg';
 
-Alternatively, you can prepare a File object before hand, then manually associate the file model.
+An indentical way to write this code is to use the `create()` method on the relationship instead, notice the file object is assocated to the `data` attribute.
+
+    $model->avatar()->create(['data' => '/path/to/somefile.jpg']);
+
+Alternatively, you can prepare a File model before hand, then manually associate the relationship later.
 
     $file = new System\Models\File;
     $file->data = Input::file('file_input');
