@@ -34,7 +34,7 @@ Protected attachments are uploaded to the application's **uploads/protected** di
 <a name="creating-attachments"></a>
 ### Creating new attachments
 
-You may create an attachment directly via the model relationship, by setting its value using the `Input::file` method, which reads the file data from an input upload.
+For singular attach relations (`$attachOne`), you may create an attachment directly via the model relationship, by setting its value using the `Input::file` method, which reads the file data from an input upload.
 
     $model->avatar = Input::file('file_input');
 
@@ -42,11 +42,11 @@ You may also pass a string to the `data` attribute that contains an absolute pat
 
     $model->avatar = '/path/to/somefile.jpg';
 
-An indentical way to write this code is to use the `create()` method on the relationship instead, notice the file object is assocated to the `data` attribute.
+For multiple attach relations (`$attachMany`), you may use the `create()` method on the relationship instead, notice the file object is assocated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
 
-    $model->avatar()->create(['data' => '/path/to/somefile.jpg']);
+    $model->avatar()->create(['data' => Input::file('file_input')]);
 
-Alternatively, you can prepare a File model before hand, then manually associate the relationship later.
+Alternatively, you can prepare a File model before hand, then manually associate the relationship later. Notice the `is_public` attribute must be set explicitly using this approach.
 
     $file = new System\Models\File;
     $file->data = Input::file('file_input');
