@@ -87,6 +87,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [response](#method-response)
 [route](#method-route)
 [secure_asset](#method-secure-asset)
+[flash](#method-flash)
 [trace_log](#method-trace-log)
 [trace_sql](#method-trace-sql)
 [url](#method-url)
@@ -676,6 +677,17 @@ If the route accepts parameters, you may pass them as the second argument to the
 Generate a URL for an asset using HTTPS:
 
     echo secure_asset('foo/bar.zip', $title, $attributes = []);
+
+<a name="method-flash"></a>
+### `flash()` {#collection-method}
+
+The `flash` function displays a floating flash message on a screen.
+ 
+    flash('This is a success message.');
+    
+    flash()->success('This is a success message.');
+    
+    flash()->error('This is an error message.');
 
 <a name="method-trace-log"></a>
 #### `trace_log()` {#collection-method}
