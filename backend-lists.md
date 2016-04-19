@@ -95,9 +95,9 @@ The search configuration supports the following options:
 
 Option | Description
 ------------- | -------------
-**prompt** | A placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
-**mode** | Defines the search policy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**scope** | Specifies a [query scope method](http://laravel.com/docs/eloquent#query-scopes) defined in the **list model** to apply to the search query, the first argument will contain the search term.
+**prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
+**mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the search query, the first argument will contain the search term.
 
 The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
 
@@ -358,7 +358,7 @@ Option | Description
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](http://laravel.com/docs/eloquent#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
 **nameFrom** | if filtering by multiple items, a column to display for the name, taken from the `modelClass` model.
 
 <a name="scope-types"></a>
