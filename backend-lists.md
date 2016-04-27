@@ -340,13 +340,31 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
         category:
             label: Category
             modelClass: Acme\Blog\Models\Category
-            nameFrom: name
             conditions: category_id in (:filtered)
+            nameFrom: name
+
+        status:
+            label: Status
+            type: group
+            conditions: status in (:filtered)
+            options:
+                pending: Pending
+                active: Active
+                closed: Closed
 
         published:
             label: Hide published
             type: checkbox
-            conditions: published <> true
+            conditions: is_published <> true
+
+        approved:
+            label: Approved
+            type: switch
+            conditions:
+                - is_approved <> true
+                - is_approved = true
+
+
 
 <a name="filter-scope-options"></a>
 ### Scope options
@@ -359,7 +377,8 @@ Option | Description
 **type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
-**nameFrom** | if filtering by multiple items, a column to display for the name, taken from the `modelClass` model.
+**options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
+**nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -368,8 +387,9 @@ These types can be used to determine how the filter scope should be displayed.
 
 Type | Description
 ------------- | -------------
-**group** | filters the list by a group of items, usually by a related model and require a `nameFrom` definition. Eg: Status name as open, closed, etc.
-**checkbox** | used as a switch to apply a predefined condition or query to the list.
+**group** | filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+**checkbox** | used as a binary checkbox to apply a predefined condition or query to the list, either on or off.
+**switch** | used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off.
 
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
