@@ -460,6 +460,7 @@ There are various form widgets included as standard, although it is common for p
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Markdown editor](#widget-markdowneditor)
+- [Tag list](#widget-taglist)
 </div>
 
 <a name="widget-codeeditor"></a>
@@ -631,6 +632,31 @@ Option | Description
 Option | Description
 ------------- | -------------
 **mode** | the expected view mode, either tab or split. Default: tab.
+
+<a name="widget-taglist"></a>
+### Tag list
+
+`taglist` - renders a field for inputting a list of tags.
+
+    tags:
+        type: taglist
+        separator: comma
+
+A tag list can support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown).
+
+    tags:
+        type: taglist
+        separator: comma
+        options:
+            - Red
+            - Blue
+            - Orange
+
+Option | Description
+------------- | -------------
+**separator** | separate tags with the specified character, either command or space. Default: space.
+**useCustom** | allows custom tags to be entered manually by the user. Default: true
+**options** | specifies a method or array for predefined options. Optional.
 
 <a name="form-views"></a>
 ## Form views
