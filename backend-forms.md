@@ -646,17 +646,24 @@ A tag list can support three ways of defining the options, exactly like the [dro
 
     tags:
         type: taglist
-        separator: comma
         options:
             - Red
             - Blue
             - Orange
 
+You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+
+    tags:
+        type: taglist
+        mode: relation
+
 Option | Description
 ------------- | -------------
+**mode** | controls how the value is returned, either string, array or relation. Default: string.
 **separator** | separate tags with the specified character, either command or space. Default: space.
-**useCustom** | allows custom tags to be entered manually by the user. Default: true
-**options** | specifies a method or array for predefined options. Optional.
+**customTags** | allows custom tags to be entered manually by the user. Default: true
+**options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options()` method. Optional.
+**nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name.
 
 <a name="form-views"></a>
 ## Form views
