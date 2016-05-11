@@ -364,6 +364,10 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
                 - is_approved <> true
                 - is_approved = true
 
+        date:
+            label: Date
+            type: date
+            conditions: created_at >= ':filtered 00:00:00' AND created_at <= ':filtered 23:59:59'
 
 
 <a name="filter-scope-options"></a>
@@ -390,6 +394,8 @@ Type | Description
 **group** | filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
 **checkbox** | used as a binary checkbox to apply a predefined condition or query to the list, either on or off.
 **switch** | used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off.
+**date** | displays a date picker for a single date to be selected.
+**daterange** | displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:before` and `:after`.
 
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
