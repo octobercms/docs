@@ -232,7 +232,7 @@ Renders the form field type exactly as defined in the `type` attribute. This tag
 
 Text input for rich content (WYSIWYG).
 
-    {richeditor name="content" label="Main content"}Default text{/checkbox}
+    {richeditor name="content" label="Main content"}Default text{/richeditor}
 
 Renders in Twig as
 
