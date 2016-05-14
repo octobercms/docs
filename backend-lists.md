@@ -364,10 +364,16 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
                 - is_approved <> true
                 - is_approved = true
 
-        date:
+        created_at:
             label: Date
             type: date
-            conditions: created_at >= ':filtered 00:00:00' AND created_at <= ':filtered 23:59:59'
+            conditions: created_at >= ':filtered'
+
+
+        published_at:
+            label: Date
+            type: daterange
+            conditions: created_at >= ':before' AND created_at <= ':after'
 
 
 <a name="filter-scope-options"></a>
