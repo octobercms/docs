@@ -342,6 +342,21 @@ The `last` function returns the last element in the given array:
 <a name="paths"></a>
 ## Paths
 
+<a name="path-symbols"></a>
+#### `$` {#collection-method}
+
+The `$` symbol sets the start of path to the `plugins` directory:
+
+    list: $/acme/pay/models/invoiceitem/columns.yaml
+    
+#### `~` {#collection-method}
+
+The `~` symbol sets the start of path to the project root directory:
+
+    list: ~/plugins/acme/pay/models/invoiceitem/columns.yaml
+
+
+    
 <a name="method-app-path"></a>
 #### `app_path()` {#collection-method}
 
