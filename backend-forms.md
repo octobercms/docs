@@ -617,7 +617,18 @@ Option | Description
 
     html_content:
         type: richeditor
+        toolbarButtons: bold|italic
         size: huge
+
+Option | Description
+------------- | -------------
+**toolbarButtons** | which buttons to show on the editor toolbar. Default: `paragraphFormat|paragraphStyle|quote|bold|italic|align|formatOL|formatUL|insertTable|insertLink|insertImage|insertVideo|insertAudio|insertFile|insertHR|fullscreen|html`
+
+The available toolbar buttons are:
+
+    fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html
+
+> **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown editor
