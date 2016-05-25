@@ -30,4 +30,8 @@ Use the scaffolding commands to speed up the development process.
 `create:formwidget` - generates a back-end form widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the form widget class name.
 
     php artisan create:formwidget RainLab.Blog CategorySelector
+    
+`create:command` - generates a new console command. The first parameter specifies the author and plugin name. The second parameter specifies the command name.
+
+    php artisan create:command RainLab.Blog MyCommand
 
