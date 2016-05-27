@@ -134,13 +134,13 @@ Once the relationship is defined, we may retrieve the related record using the m
 
 The model assumes the foreign key of the relationship based on the model name. In this case, the `Phone` model is automatically assumed to have a `user_id` foreign key. If you wish to override this convention, you may pass the `key` parameter to the definition:
 
-    public $hasMany = [
+    public $hasOne = [
         'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id']
     ];
 
 Additionally, the model assumes that the foreign key should have a value matching the `id` column of the parent. In other words, it will look for the value of the user's `id` column in the `user_id` column of the `Phone` record. If you would like the relationship to use a value other than `id`, you may pass the `otherKey` parameter to the definition:
 
-    public $hasMany = [
+    public $hasOne = [
         'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id', 'otherKey' => 'my_id']
     ];
 
