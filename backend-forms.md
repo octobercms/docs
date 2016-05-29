@@ -451,7 +451,7 @@ There are various form widgets included as standard, although it is common for p
 
 <div class="content-list collection-method-list" markdown="1">
 - [Code editor](#widget-codeeditor)
-- [Color picker](#color-picker)
+- [Color picker](#widget-colorpicker)
 - [Date picker](#widget-datepicker)
 - [File upload](#widget-fileupload)
 - [Record finder](#widget-recordfinder)
@@ -480,7 +480,7 @@ Option | Description
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
 
-<a name="color-picker"></a>
+<a name="widget-colorpicker"></a>
 ### Color picker
 `colorpicker` - renders controls to select a hexadecimal color value.
 
