@@ -97,7 +97,7 @@ You may also define the configuration in a separate file, where the path is rela
 <a name="combiner-vars"></a>
 ### Combiner variables
 
-Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simple define the `assetVar` option when defining the form field, the value should contain the desired variable name.
+Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
     form:
         fields:
