@@ -741,7 +741,7 @@ Option | Description
 <a name="field-trigger-events"></a>
 ### Trigger events
 
-Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is an sample definition:
+Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
     is_delayed:
         label: Send later
