@@ -300,7 +300,7 @@ Calling `$syntax->toEditor()` will return a different array for a repeater field
 
     'repeater' => [
         'label' => 'Website name',
-        'type' => 'repeater'
+        'type' => 'repeater',
         'fields' => [
 
             'title' => [
