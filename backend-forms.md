@@ -318,10 +318,12 @@ The third global method `getDropdownOptions()` can also be defined in the model,
 
     public function getDropdownOptions($fieldName = null, $keyValue = null)
     {
-        if ($fieldName == 'status')
+        if ($fieldName == 'status') {
             return ['all' => 'All', ...];
-        else
+        }
+        else {
             return ['' => '-- none --'];
+        }
     }
 
 The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method takes two parameters, the current key value and field name, and should return an array of options in the format **key => label**.
@@ -842,10 +844,11 @@ You can extend the fields of another controller from outside by calling the `ext
 
 Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
-    Categories::extendFormFields(function($form, $model, $context){
-
-        if (!$model instanceof MyModel)
+    Categories::extendFormFields(function($form, $model, $context)
+    {
+        if (!$model instanceof MyModel) {
             return;
+        }
 
         $form->addFields([
             'my_field' => [
