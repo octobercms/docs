@@ -2,6 +2,7 @@
 
 - [Minimum system requirements](#system-requirements)
 - [Wizard installation](#wizard-installation)
+    - [Troubleshooting installation](#troubleshoot-installation)
 - [Command-line installation](#command-line-installation)
 - [Post-installation steps](#post-install-steps)
     - [Delete installation files](#delete-install-files)
@@ -9,7 +10,7 @@
     - [Setting up the scheduler](#crontab-setup)
     - [Setting up queue workers](#queue-setup)
 
-There are two ways you can install October, either using the Wizard or Command-line installation process. Before you proceed, you should check that your server meets the minimum system requirements.
+There are two ways you can install October, either using the [Wizard installer](#wizard-installation) or [Command-line installation](../console/commands#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
 
 <a name="system-requirements"></a>
 ## Minimum system requirements
@@ -57,7 +58,7 @@ The wizard installation is a recommended way to install October. It is simpler t
 <a name="command-line-installation"></a>
 ## Command-line installation
 
-If you feel more comfortable with a command-line and want to use composer, there is a CLI install process on the [Console interface page](../console/commands#console-install).
+If you feel more comfortable with a command-line or want to use composer, there is a CLI install process on the [Console interface page](../console/commands#console-install).
 
 <a name="post-install-steps"></a>
 ## Post-installation steps
@@ -67,7 +68,7 @@ There are some things you may need to set up after the installation is complete.
 <a name="delete-install-files"></a>
 ### Delete installation files
 
-If you have used the [Wizard installation](#wizard-installation) you should delete the installation files for security reasons. October will never delete files from your system automatically, so you should delete these files and directories manually:
+If you have used the [Wizard installer](#wizard-installation) you should delete the installation files for security reasons. October will never delete files from your system automatically, so you should delete these files and directories manually:
 
     install_files/      <== Installation directory
     install.php         <== Installation script
