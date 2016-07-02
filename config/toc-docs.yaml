@@ -94,6 +94,6 @@ Console:
 Extras:
   icon: "icon-question-sign"
   pages:
-    help/developer-guide: "Developer guide"
     help/unit-testing: "Unit testing"
-    ../resources: "Resources@"
+    ../help/guidelines/quality: "Quality guidelines@"
+    ../help/guidelines/developer: "Developer guide@"
