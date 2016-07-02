@@ -95,7 +95,9 @@ The search configuration supports the following options:
 
 Option | Description
 ------------- | -------------
-**prompt** | A placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
+**prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
+**mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the search query, the first argument will contain the search term.
 
 The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
 
@@ -151,8 +153,10 @@ Option | Description
 **searchable** | include this column in the list search results. Default: false.
 **invisible** | specifies if this column is hidden by default. Default: false.
 **sortable** | specifies if this column can be sorted. Default: true.
-**select** | defines a custom SQL select statement.
-**relation** | defines a relationship column.
+**clickable** | if set to false, disables the default click behavior when the column is clicked. Default: true.
+**select** | defines a custom SQL select statement to use for the value.
+**valueFrom** | defines a model attribute to use for the value.
+**relation** | defines a model relationship column.
 **cssClass** | assigns a CSS class to the column container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 
@@ -284,7 +288,7 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         relation: groups
         select: name
 
-If the [relationship definition](../database/relations) uses the **count** argument, you can display the number of related records using the `nameFrom` and `default` options.
+If the [relationship definition](../database/relations) uses the **count** argument, you can display the number of related records using the `valueFrom` and `default` options.
 
     users_count:
         label: Users
@@ -336,13 +340,41 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
         category:
             label: Category
             modelClass: Acme\Blog\Models\Category
-            nameFrom: name
             conditions: category_id in (:filtered)
+            nameFrom: name
+
+        status:
+            label: Status
+            type: group
+            conditions: status in (:filtered)
+            options:
+                pending: Pending
+                active: Active
+                closed: Closed
 
         published:
             label: Hide published
             type: checkbox
-            conditions: published <> 1
+            conditions: is_published <> true
+
+        approved:
+            label: Approved
+            type: switch
+            conditions:
+                - is_approved <> true
+                - is_approved = true
+
+        created_at:
+            label: Date
+            type: date
+            conditions: created_at >= ':filtered'
+
+
+        published_at:
+            label: Date
+            type: daterange
+            conditions: created_at >= ':before' AND created_at <= ':after'
+
 
 <a name="filter-scope-options"></a>
 ### Scope options
@@ -354,8 +386,10 @@ Option | Description
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](http://laravel.com/docs/eloquent#query-scopes) defined in the **list model** to apply to the list query, the first parameter will contain the filtered value(s).
-**nameFrom** | if filtering by multiple items, a column to display for the name, taken from the `modelClass` model.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
+**options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
+**nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
+**options** | If the `type` is set as group, then an array of options can be used instead of a dynamic model class.
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -364,8 +398,11 @@ These types can be used to determine how the filter scope should be displayed.
 
 Type | Description
 ------------- | -------------
-**group** | filters the list by a group of items, usually by a related model and require a `nameFrom` definition. Eg: Status name as open, closed, etc.
-**checkbox** | used as a switch to apply a predefined condition or query to the list.
+**group** | filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+**checkbox** | used as a binary checkbox to apply a predefined condition or query to the list, either on or off.
+**switch** | used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off.
+**date** | displays a date picker for a single date to be selected.
+**daterange** | displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:before` and `:after`.
 
 <a name="extend-list-behavior"></a>
 ## Extending list behavior

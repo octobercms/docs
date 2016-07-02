@@ -10,6 +10,7 @@
 - [Nested Tree](#nested-tree)
 - [Validation](#validation)
 - [Soft deleting](#soft-deleting)
+- [Nullable](#nullable)
 
 Model traits are used to implement common functionality.
 
@@ -318,6 +319,19 @@ You may also set custom attribute names with the `$attributeNames` array.
         ];
     }
 
+<a name="dynamic-validation-rules"></a>
+### Dynamic validation rules
+
+You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model#events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
+
+    public function beforeValidate()
+    {
+        if (!$this->is_remote) {
+            $this->rules['latitude'] = 'required';
+            $this->rules['longitude'] = 'required';
+        }
+    }
+
 <a name="custom-validation-rules"></a>
 ### Custom validation rules
 
@@ -326,11 +340,11 @@ You can also create custom validation rules the [same way](../services/validatio
 <a name="soft-deleting"></a>
 ## Soft deleting
 
-When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDeleting` trait to the model and add the deleted_at column to your `$dates` property:
+When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\SoftDeleting;
+        use \October\Rain\Database\Traits\SoftDelete;
 
         protected $dates = ['deleted_at'];
     }
@@ -391,3 +405,39 @@ Sometimes you may need to truly remove a model from your database. To permanentl
 
     // Force deleting all related models...
     $user->posts()->forceDelete();
+
+<a name="soft-deleting-relations"></a>
+### Soft deleting relations
+
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+
+    class User extends Model
+    {
+        use \October\Rain\Database\Traits\SoftDelete;
+
+        public $hasMany = [
+            'comments' => ['Acme\Blog\Models\Comment', 'softDelete' => true]
+        ];
+    }
+
+> **Note:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+
+Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
+
+    // Restore the user and comments
+    $user->restore();
+
+<a name="nullable"></a>
+## Nullable
+
+Nullable attributes are set to `NULL` when left empty. To nullify attributes in your model, apply the `October\Rain\Database\Traits\Nullable` trait and declare a `$nullable` property with an array containing the attributes to nullify.
+
+    class Product extends Model
+    {
+        use \October\Rain\Database\Traits\Nullable;
+
+        /**
+         * @var array Nullable attributes.
+         */
+        protected $nullable = ['sku'];
+    }

@@ -4,7 +4,7 @@ The `{% placeholder %}` tag will render a placeholder section which is generally
 
     {% placeholder name %}
 
-Content can then be injected in to the placeholder in any subsequent page or partial.
+Content can then be injected into the placeholder in any subsequent page or partial.
 
     {% put name %}
         <p>Place this text in the name placeholder</p>
@@ -13,7 +13,7 @@ Content can then be injected in to the placeholder in any subsequent page or par
 <a name="default-placeholder-content"></a>
 ## Default placeholder content
 
-Placeholders can have default content, that can be either replaced or complemented by a page. If the `{% put %}` tag for a placeholder with default content is not defined on a page, the default placeholder content is displayed. Example placeholder definition in the layout template:
+Placeholders can have default content that can be either replaced or complemented by a page. If the `{% put %}` tag for a placeholder with default content is not defined on a page, the default placeholder content is displayed. Example placeholder definition in the layout template:
 
     {% placeholder sidebar default %}
         <p><a href="/contacts">Contact us</a></p>
@@ -49,7 +49,7 @@ In a layout template you can check if a placeholder content exists by using the 
 <a name="custom-placeholder-attributes"></a>
 ## Custom attributes
 
-The `placeholder` tag accepts two optional attributes - `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment - **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
+The `placeholder` tag accepts two optional attributes &mdash; `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment &mdash; **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
 
     {% placeholder ordering title="Ordering information" type="text" %}
 

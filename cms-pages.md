@@ -4,8 +4,9 @@
 - [Page configuration](#configuration)
     - [URL syntax](#url-syntax)
 - [Dynamic pages](#dynamic-pages)
-    - [Handling forms](#handling-forms)
     - [Page execution life cycle](#page-life-cycle)
+    - [Sending a custom response](#life-cycle-response)
+    - [Handling forms](#handling-forms)
 - [404 page](#404-page)
 - [Error page](#error-page)
 - [Page variables](#page-variables)
@@ -73,7 +74,7 @@ You can also use regular expressions to validate parameters. To add a validation
     ...
     url = "/blog/:post_name?|^[a-z0-9\-]+$" - this will match /blog/my-blog-post
 
-It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match zero or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
+It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
 
     url = "/blog/:category*/:slug"
 
@@ -125,6 +126,23 @@ The next example is more complicated. It shows how to load a blog post collectio
     </ul>
 
 The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
+
+<a name="life-cycle-response"></a>
+### Sending a custom response
+
+All methods defined in the execution life cycle have the ability to halt the process and return a response. Simply return a response from the life cycle function. The example below will not load any page contents and return the string *Hello world!* to the browser:
+
+    function onStart()
+    {
+        return 'Hello world!';
+    }
+
+A more useful example might be triggering a redirect using the `Redirect` facade:
+
+    public function onStart()
+    {
+        return Redirect:to('http://google.com');
+    }
 
 <a name="handling-forms"></a>
 ### Handling forms

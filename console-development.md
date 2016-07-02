@@ -12,7 +12,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory.
+In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding#scaffold-create-command).
 
 <a name="building-a-command"></a>
 ## Building a command

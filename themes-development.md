@@ -87,6 +87,35 @@ The value can then be accessed inside any of the Theme templates using the [defa
 
     <h1>Welcome to {{ this.theme.site_name }}!</h1>
 
+You may also define the configuration in a separate file, where the path is relative to the theme. The following definition will source the form fields from the file **config/fields.yaml** inside the theme.
+
+    name: My Theme
+    # [...]
+
+    form: config/fields.yaml
+
+<a name="combiner-vars"></a>
+### Combiner variables
+
+Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+
+    form:
+        fields:
+            # [...]
+
+            link_color:
+                label: Link color
+                type: colorpicker
+                assetVar: 'link-color'
+
+In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
+
+    <link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet">
+
+Using some example content inside **themes/yourtheme/assets/less/theme.less**:
+
+    a { color: @link-color }
+
 <a name="dependencies"></a>
 ## Theme dependencies
 

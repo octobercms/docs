@@ -64,6 +64,10 @@ Keep in mind that most response methods are chainable, allowing for the fluent b
                 ->header('X-Header-One', 'Header Value')
                 ->header('X-Header-Two', 'Header Value');
 
+A practical example of this could be returning an XML response:
+
+    return Response::make($xmlString)->header('Content-Type', 'text/xml');
+
 <a name="attaching-cookies-to-responses"></a>
 ### Attaching cookies to responses
 

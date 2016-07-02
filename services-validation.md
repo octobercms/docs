@@ -106,7 +106,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 <a name="error-messages-and-views"></a>
 ## Error messages & views
 
-Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by Ocotber. Consider the following routes as an example:
+Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October. Consider the following routes as an example:
 
     public function onRegister()
     {
@@ -391,7 +391,7 @@ The field under validation must be present _only when_ the all of the other spec
 <a name="rule-same"></a>
 #### same:_field_
 
-The given _field_ must match the field under validation.
+The specified _field_ value must match the field's value under validation.
 
 <a name="rule-size"></a>
 #### size:_value_

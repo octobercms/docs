@@ -224,7 +224,7 @@ This example will declare a new global event `rainlab.forum.topic.post` and loca
             [...]
 
             /*
-             * Extensbility
+             * Extensibility
              */
             Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
             $this->fireEvent('topic.post', [$post, $postUrl]);

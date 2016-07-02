@@ -73,7 +73,7 @@ The settings model has the static `set()` method that allows to save individual 
 <a name="reading-settings"></a>
 ### Reading from a settings model
 
-The settings model has the static `get()` method that lets you to load individual properties. Also, when you instantiate a model with the `instance()` method it loads the properties from the database and you can access them directly.
+The settings model has the static `get()` method that enables you to load individual properties. Also, when you instantiate a model with the `instance()` method, it loads the properties from the database and you can access them directly.
 
     // Outputs: ABCD
     echo Settings::instance()->api_key;
@@ -146,7 +146,7 @@ Just like [setting navigation context in the controller](../backend/controllers-
         SettingsManager::setContext('October.Backend', 'editor');
     }
 
-The first argument of the `setContext()` method is the settings item owner in the following format: **author:plugin**. The second argument is the setting name, the same as you provided in the [when registering the back-end settings page](#link-registration).
+The first argument of the `setContext()` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#link-registration).
 
 <a name="file-configuration"></a>
 ## File-based configuration

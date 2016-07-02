@@ -1,10 +1,10 @@
 # str()
 
-Functions prefixed with `str_` perform tasks that are useful when dealing with strs. The helper maps directly to the `Str` PHP class and its methods.
+Functions prefixed with `str_` perform tasks that are useful when dealing with strings. The helper maps directly to the `Str` PHP class and its methods. For example:
 
     {{ str_camel() }}
 
-Is the PHP equivalent of the following:
+is the PHP equivalent of the following:
 
     <?= Str::camel() ?>
 

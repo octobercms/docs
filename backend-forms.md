@@ -204,6 +204,7 @@ Option | Description
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
+**commentHtml** | allow HTML markup inside the comment. Options: true, false.
 **default** | specifies the default value for the field.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
@@ -291,7 +292,7 @@ There are various native field types that can be used for the **type** setting. 
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines options directly in the YAML file:
+`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines `options` directly in the YAML file:
 
     status:
         label: Blog Post Status
@@ -331,12 +332,19 @@ The fourth method uses a specific method declared in the model's class. In the n
         type: dropdown
         options: listStatuses
 
-Supplying the dropdown options tn the model class:
+Supplying the dropdown options to the model class:
 
     public function listStatuses($keyValue = null, $fieldName = null)
     {
         return ['published' => 'Published', ...];
     }
+
+By default the dropdown has a searching feature, allowing quick selection of a value. This can be disabled by setting the `showSearch` option to `false`.
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        showSearch: false
 
 <a name="field-radio"></a>
 ### Radio List
@@ -443,7 +451,7 @@ There are various form widgets included as standard, although it is common for p
 
 <div class="content-list collection-method-list" markdown="1">
 - [Code editor](#widget-codeeditor)
-- [Color picker](#color-picker)
+- [Color picker](#widget-colorpicker)
 - [Date picker](#widget-datepicker)
 - [File upload](#widget-fileupload)
 - [Record finder](#widget-recordfinder)
@@ -452,6 +460,7 @@ There are various form widgets included as standard, although it is common for p
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Markdown editor](#widget-markdowneditor)
+- [Tag list](#widget-taglist)
 </div>
 
 <a name="widget-codeeditor"></a>
@@ -471,7 +480,7 @@ Option | Description
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
 
-<a name="color-picker"></a>
+<a name="widget-colorpicker"></a>
 ### Color picker
 `colorpicker` - renders controls to select a hexadecimal color value.
 
@@ -533,8 +542,14 @@ Option | Description
 ------------- | -------------
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
+**title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
 **list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
+**recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
+**conditions** | specifies a raw where query statement to apply to the list model query.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
+**searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
+**searchScope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 
 <a name="widget-mediafinder"></a>
 ### Media finder
@@ -554,16 +569,24 @@ Option | Description
 <a name="widget-relation"></a>
 ### Relation
 
-`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list.
+`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
 
     categories:
         label: Categories
         type: relation
         nameFrom: title
 
+Alternatively, you may populate the label using a custom `select` statement. Any valid SQL statement works here.
+
+    user:
+        label: User
+        type: relation
+        select: concat(first_name, ' ', last_name)
+
 Option | Description
 ------------- | -------------
-**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
+**nameFrom** | a model attribute name used for displaying the relation label. Default: name.
+**select** | a custom SQL select statement to use for the name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description (optional). Default: description.
 **emptyOption** | text to display when there is no available selections.
 
@@ -595,7 +618,18 @@ Option | Description
 
     html_content:
         type: richeditor
+        toolbarButtons: bold|italic
         size: huge
+
+Option | Description
+------------- | -------------
+**toolbarButtons** | which buttons to show on the editor toolbar. Default: `paragraphFormat|paragraphStyle|quote|bold|italic|align|formatOL|formatUL|insertTable|insertLink|insertImage|insertVideo|insertAudio|insertFile|insertHR|fullscreen|html`
+
+The available toolbar buttons are:
+
+    fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html
+
+> **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown editor
@@ -610,6 +644,38 @@ Option | Description
 Option | Description
 ------------- | -------------
 **mode** | the expected view mode, either tab or split. Default: tab.
+
+<a name="widget-taglist"></a>
+### Tag list
+
+`taglist` - renders a field for inputting a list of tags.
+
+    tags:
+        type: taglist
+        separator: space
+
+A tag list can support three ways of defining the `options`, exactly like the [dropdown field type](#field-dropdown).
+
+    tags:
+        type: taglist
+        options:
+            - Red
+            - Blue
+            - Orange
+
+You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+
+    tags:
+        type: taglist
+        mode: relation
+
+Option | Description
+------------- | -------------
+**mode** | controls how the value is returned, either string, array or relation. Default: string.
+**separator** | separate tags with the specified character, either comma or space. Default: comma.
+**customTags** | allows custom tags to be entered manually by the user. Default: true
+**options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options()` method. Optional.
+**nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name.
 
 <a name="form-views"></a>
 ## Form views
@@ -732,7 +798,7 @@ Option | Description
 <a name="field-trigger-events"></a>
 ### Trigger events
 
-Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is an sample definition:
+Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
     is_delayed:
         label: Send later
