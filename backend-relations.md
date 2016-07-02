@@ -72,7 +72,7 @@ Option | Description
 **readOnly** | disables the ability to add, update, delete or create relations. default: false
 **deferredBinding** | [defers all binding actions using a session key](../database/model#deferred-binding) when it is available. default: false
 
-These configuration values can be specified for the **view** or **manage** options.
+These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
 
 Option | Type | Description
 ------------- | ------------- | -------------
@@ -91,13 +91,16 @@ Option | Type | Description
 **recordUrl** | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
-**toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add\|remove**
+**toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Set to `false` to show no buttons. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add\|remove**
 
 These configuration values can be specified only for the **manage** options.
 
 Option | Type | Description
 ------------- | ------------- | -------------
+**title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
+**conditions** | List | specifies a raw where query statement to apply to the list model query.
+**scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
 <a name="relationship-types"></a>
 ## Relationship types

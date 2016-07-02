@@ -116,7 +116,8 @@ Key | Description
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/), any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+**iconSvg** | an SVG icon to be used in place of the standard icon, optional. The SVG icon should be a rectangle and can support colors.
 **homepage** | A link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
@@ -228,3 +229,5 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
     }
 
 When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users).
+
+To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.

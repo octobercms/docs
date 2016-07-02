@@ -3,7 +3,7 @@
 - [Introduction](#introduction)
 - [Component aliases](#aliases)
 - [Using external property values](#external-property-values)
-- [Passing variables to components](#variables)
+- [Passing variables to components](#component-variables)
 - [Customizing default markup](#customizing-default-markup)
     - [Moving default markup to a partial](#moving-default-markup)
     - [Overriding component partials](#overriding-partials)
@@ -89,10 +89,10 @@ The page, the component belongs to, should have a corresponding [URL parameter](
 
 In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
-<a name="variables"></a>
+<a name="component-variables"></a>
 ## Passing variables to components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials#variables), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components#component-properties), including [external property values](#external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials#partial-variables), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components#component-properties), including [external property values](#external-property-values).
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 

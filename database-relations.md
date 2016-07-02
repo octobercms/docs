@@ -60,7 +60,7 @@ Argument | Description
 **conditions** | filters the relation using a raw where query statement.
 **scope** | filters the relation using a supplied scope method.
 **push** | if set to false, this relation will not be saved via `push()`, default: true.
-**delete** | if set to true, the related model will be deleted if the relationship is destroyed, default: false.
+**delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
 **count** | if set to true, the result contains a `count` column only, used for counting relations, default: false.
 
 Example filter using **order** and **conditions**:
