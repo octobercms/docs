@@ -485,7 +485,12 @@ Option | Description
 `colorpicker` - renders controls to select a hexadecimal color value.
 
     color:
+        label: Background
         type: colorpicker
+
+Option | Description
+------------- | -------------
+**availableColors** |  list of available colors.
 
 <a name="widget-datepicker"></a>
 ### Date picker
