@@ -7,6 +7,7 @@
     - [IIS configuration](#iis-configuration)
     - [Using a public folder (advanced)](#public-folder)
 - [Debug mode](#debug-mode)
+- [Safe mode](#safe-mode)
 - [CSRF protection](#csrf-protection)
 - [Bleeding edge updates](#edge-updates)
 - [Environment configuration](#environment-config)
@@ -130,6 +131,13 @@ The debug mode uses the following features when enabled:
 1. [Combined assets are not minified by default](../markup/filter-theme).
 
 > **Important**: Always set the `app.debug` setting to `false` for production environments.
+
+<a name="safe-mode"></a>
+## Safe mode
+
+The safe mode setting is found in the `config/cms.php` configuration file with the `enableSafeMode` parameter. The default value is `null`.
+
+If safe mode is enabled, the PHP code section is disabled in CMS templates for security reasons. If set to `null`, safe mode is on when [debug mode](#debug-mode) is disabled.
 
 <a name="csrf-protection"></a>
 ## CSRF protection
