@@ -20,6 +20,7 @@
     - [Clear application cache](#cache-clear-command)
     - [Remove demo data](#october-fresh-command)
     - [Mirror public directory](#cache-clear-command)
+    - [Enable DotEnv configuration](#october-env-command)
     - [Miscellaneous commands](#october-util-command)
 
 October includes several command-line interface (CLI) commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development) or speed up development with the provided [scaffolding commands](../console/scaffolding).
@@ -177,6 +178,13 @@ October includes a number of utility commands.
 `october:mirror` - creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration#public-folder).
 
     php artisan october:mirror public/
+
+<a name="october-env-command"></a>
+### Enable DotEnv configuration
+
+`october:env` - changes common configuration values to [DotEnv syntax](../setup/configuration#environment-config-extended).
+
+    php artisan october:env
 
 <a name="october-util-command"></a>
 ### Miscellaneous commands
