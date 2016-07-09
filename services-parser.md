@@ -222,6 +222,18 @@ Multiple line input for larger blocks of text.
         This is our vision for things to come
     {/textarea}
 
+### Dropdown
+
+Renders a dropdown form field.
+
+    {dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
+
+### Radio
+
+Renders a radio form field.
+
+    {radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
+
 #### Variable
 
 Renders the form field type exactly as defined in the `type` attribute. This tag will simply set a variable and will render in view mode as an empty string.
