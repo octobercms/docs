@@ -613,7 +613,7 @@ Option | Description
 
 Option | Description
 ------------- | -------------
-**form** | a reference to form field definition file, see [backend form fields](forms#form-fields). Inline fields can also be used.
+**form** | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
 
 <a name="widget-richeditor"></a>
