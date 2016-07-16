@@ -32,7 +32,7 @@ Hashed attributes are hashed immediately when the attribute is first set on the 
 <a name="purgeable"></a>
 ## Purgeable
 
-Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to hash.
+Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to purge.
 
     class User extends Model
     {
