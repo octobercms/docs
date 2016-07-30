@@ -25,7 +25,7 @@ Style:
   icon: "icon-magic"
   pages:
     # ui/site: "Site"
-    # ui/utilities: "Utilities"
+    ui/utilities: "Utilities"
     ui/flag: "Flag"
     ui/icon: "Icon"
     ui/breadcrumb: "Breadcrumb"
