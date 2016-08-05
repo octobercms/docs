@@ -797,8 +797,18 @@ The following options are available for the `preset` option:
 Option | Description
 ------------- | -------------
 **field** | defines the other field name to source the value from.
-**type** | specifies the conversion type. Supported values are: url, file, slug, camel.
+**type** | specifies the conversion type. See below for supported values.
 **prefixInput** | optional, prefixes the converted value with the value found in the supplied input element using a CSS selector.
+
+Following are the supported types:
+
+Type | Description
+------------- | -------------
+**exact** | copies the exact value
+**slug** | formats the copied value as a slug
+**url** | same as slug but prefixed with a /
+**camel** | formats the copied value with camelCase
+**file** | formats the copied value as a file name with whitespace replaced with dashes
 
 <a name="field-trigger-events"></a>
 ### Trigger events
