@@ -797,7 +797,7 @@ The following options are available for the `preset` option:
 Option | Description
 ------------- | -------------
 **field** | defines the other field name to source the value from.
-**type** | specifies the conversion type. Supported values are: exact, slug, url, camel, file. See below.
+**type** | specifies the conversion type. See below for supported values.
 **prefixInput** | optional, prefixes the converted value with the value found in the supplied input element using a CSS selector.
 
 Following are the supported types:
