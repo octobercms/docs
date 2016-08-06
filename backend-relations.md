@@ -278,3 +278,7 @@ The relation manager can then be displayed for a specified relation definition b
     <?= $this->formRenderPreview() ?>
 
     <?= $this->relationRender('comments') ?>
+
+You may instruct the relation manager to render in read only mode by passing the option as the second argument:
+
+    <?= $this->relationRender('comments', ['readOnly' => true]) ?>
