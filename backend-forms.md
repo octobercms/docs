@@ -23,6 +23,7 @@
     - [Extending form model query](#extend-model-query)
     - [Extending form fields](#extend-form-fields)
     - [Filtering form fields](#filter-form-fields)
+- [Validating form fields](#validate-form-fields)
 
 <a name="introduction"></a>
 ## Introduction
@@ -973,3 +974,9 @@ You can filter the form field definitions by overriding the `filterFields()` met
     }
 
 The above example will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies).
+
+
+<a name="validate-form-fields"></a>
+## Validating form fields
+
+To validate the fields of your form you can make use of the [Validation](database/traits#validation) trait in your model. 
