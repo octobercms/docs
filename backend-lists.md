@@ -373,7 +373,7 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
         published_at:
             label: Date
             type: daterange
-            conditions: created_at >= ':before' AND created_at <= ':after'
+            conditions: created_at >= ':after' AND created_at <= ':before'
 
 
 <a name="filter-scope-options"></a>
