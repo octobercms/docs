@@ -71,7 +71,7 @@ A practical example of this could be returning an XML response:
 <a name="attaching-cookies-to-responses"></a>
 ### Attaching cookies to responses
 
-he `withCookie` method  allows you to easily attach cookies to the response. For example, you may use the withCookie method to generate a cookie and attach it to the response instance:
+The `withCookie` method  allows you to easily attach cookies to the response. For example, you may use the withCookie method to generate a cookie and attach it to the response instance:
 
     return Response::make($content)->withCookie('name', 'value');
 
