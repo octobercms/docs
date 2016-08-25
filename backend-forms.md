@@ -523,7 +523,7 @@ Option | Description
 
 Option | Description
 ------------- | -------------
-**mode** | the expected file type, either file or image. Default: file.
+**mode** | the expected file type, either file or image. Default: image.
 **imageWidth** | if using image type, the image will be resized to this width, optional.
 **imageHeight** | if using image type, the image will be resized to this height, optional.
 **fileTypes** | file extensions that are accepted by the uploader, optional. Eg: `zip,txt`
