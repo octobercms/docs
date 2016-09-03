@@ -979,4 +979,4 @@ The above example will set the `hidden` flag on certain fields by checking the v
 <a name="validate-form-fields"></a>
 ## Validating form fields
 
-To validate the fields of your form you can make use of the [Validation](../database/traits#validation) trait in your model. 
+To validate the fields of your form you can make use of the [Validation](../../database/traits#validation) trait in your model. 
