@@ -73,6 +73,8 @@ Option | Description
 **showSetup** | displays the list column set up button. Default: false.
 **showTree** | displays a tree hierarchy for parent/child records. Default: false.
 **treeExpanded** | if tree nodes should be expanded by default. Default: false.
+**topPartial** | partial name or path to render above the list contents.
+**sidePartial** | partial name or path to render to the side of the list (experimental).
 
 <a name="adding-toolbar"></a>
 ### Adding a toolbar
