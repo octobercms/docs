@@ -3,6 +3,7 @@
 - [Introduction](#introduction)
 - [Configuring the reorder behavior](#configuring-reorder)
 - [Displaying the reorder page](#reorder-display)
+- [Extending the model query](#extend-model-query)
 
 <a name="introduction"></a>
 ## Introduction
@@ -68,3 +69,13 @@ Option | Description
 You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reodering includes the toolbar, the view file will consist solely of the single `reorderRender()` method call.
 
     <?= $this->reorderRender() ?>
+
+<a name="extend-model-query"></a>
+## Extending the model query
+
+The lookup query for the list [database model](../database/model) can be extended by overriding the `reorderExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
+
+	public function reorderExtendQuery($query)
+	{
+	    $query->withTrashed();
+	}
