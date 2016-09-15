@@ -142,7 +142,7 @@ The revision history can be accessed like any other relation:
 <a name="sortable"></a>
 ## Sortable
 
-Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: ``$table->integer('sort_order')->default(0);``).
+Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
 
     class User extends Model
     {
