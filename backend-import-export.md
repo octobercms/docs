@@ -271,3 +271,18 @@ If you are using [multiple list definitions](lists#multiple-list-definitions), t
     export:
         useList: orders
         fileName: orders.csv
+
+The `useList` option also supports extended configuration options.
+
+
+    export:
+        useList:
+            definition: orders
+            raw: true
+
+The following configuration options are supported:
+
+Option | Description
+------------- | -------------
+**definition** | the list definition to source records from, optional.
+**raw** | output the raw attribute values from the record, default: false.
