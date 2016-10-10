@@ -630,7 +630,7 @@ Option | Description
 
 Option | Description
 ------------- | -------------
-**toolbarButtons** | which buttons to show on the editor toolbar. Default: `paragraphFormat|paragraphStyle|quote|bold|italic|align|formatOL|formatUL|insertTable|insertLink|insertImage|insertVideo|insertAudio|insertFile|insertHR|fullscreen|html`
+**toolbarButtons** | which buttons to show on the editor toolbar.
 
 The available toolbar buttons are:
 
