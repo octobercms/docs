@@ -203,7 +203,7 @@ Alternatively, plugins can supply a file named **init.php** in the plugin direct
 
 #### Registering a command in the application container
 
-If your command is registered in the [application container](application#app-container), you may use the `Artisan::resolve` method to make it available to Artisan:
+If your command is registered in the [application container](../services/application#app-container), you may use the `Artisan::resolve` method to make it available to Artisan:
 
     Artisan::resolve('binding.name');
 
