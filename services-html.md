@@ -203,10 +203,18 @@ You may pass a default value as the second argument:
 
     <?= Form::selectRange('number', 10, 20) ?>
 
+#### Generating a drop-down list with a range, selected value and blank option
+
+    <?= Form::selectRange('number', 10, 20, 2, ['emptyOption' => 'Choose...']) ?>
+    
 #### Generating a list with month names
 
     <?= Form::selectMonth('month') ?>
 
+#### Generating a list with month names, selected value and blank option
+
+    <?= Form::selectMonth('month', 2, ['emptyOption' => 'Choose month...']) ?>
+    
 <a name="buttons"></a>
 ## Buttons
 
