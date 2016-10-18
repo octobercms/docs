@@ -391,7 +391,6 @@ Option | Description
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
-**options** | If the `type` is set as group, then an array of options can be used instead of a dynamic model class.
 
 <a name="scope-types"></a>
 ### Available scope types
