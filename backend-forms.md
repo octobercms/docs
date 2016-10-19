@@ -507,6 +507,7 @@ Option | Description
 Option | Description
 ------------- | -------------
 **mode** | the expected result, either date, datetime or time. Default: datetime.
+**format** | provide an explicit date display format. Eg: Y-m-d
 **minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 
