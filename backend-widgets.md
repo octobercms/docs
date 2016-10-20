@@ -111,7 +111,7 @@ After binding the widget you can access it in the controller's view or partial b
 <a name="form-widgets"></a>
 ## Form Widgets
 
-With form widgets you can add new control types to the back-end [forms](forms). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration#widget-registration).
+With form widgets you can add new control types to the back-end [forms](forms). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration#registration-methods).
 
 <a name="form-class-definition"></a>
 ### Class definition

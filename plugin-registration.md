@@ -101,8 +101,9 @@ Method | Description
 **registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
 **registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.
 **registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
-**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) used by this plugin.
+**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
+**registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
 

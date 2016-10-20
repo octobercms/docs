@@ -16,6 +16,7 @@
     - [Overriding controller action](#overriding-action)
     - [Extending list columns](#extend-list-columns)
     - [Extending the model query](#extend-model-query)
+    - [Custom column types](#custom-column-types)
 
 <a name="introduction"></a>
 ## Introduction
@@ -165,7 +166,7 @@ Option | Description
 <a name="column-types"></a>
 ## Available column types
 
-There are various column types that can be used for the **type** setting, these control how the list column is displayed.
+There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
 
 <style>
     .collection-method-list {
@@ -495,3 +496,35 @@ The [list filter](#list-filters) model query can also be extended by overriding 
             $query->where('status', '<>', 'all');
         }
     }
+
+<a name="custom-column-types"></a>
+### Custom column types
+
+Custom list column types can be registered in the back-end with the `registerListColumnTypes()` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+
+    public function registerListColumnTypes()
+    {
+        return [
+            // A local method, i.e $this->evalUppercaseListColumn()
+            'uppercase' => [$this, 'evalUppercaseListColumn'],
+
+            // Using an inline closure
+            'loveit' => function($value) { return 'I love '. $value; }
+        ];
+    }
+
+    public function evalUppercaseListColumn($value, $column, $record)
+    {
+        return strtoupper($value);
+    }
+
+Using the custom list column type is as simple as calling it by name using the `type` option.
+
+    # ===================================
+    #  List Column Definitions
+    # ===================================
+
+    columns:
+        secret_code:
+            label: Secret code
+            type: uppercase
