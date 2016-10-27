@@ -220,7 +220,7 @@ Run `onCalculate` handler and if successful, run some custom code after the defa
 
 If you need to issue a request to an AJAX handler defined in a [component](components) attached to a page or layout, you should prefix the handler name with the component short name or [alias](components#aliases). The next example demonstrates how to invoke the **onCalculate** AJAX handler defined in the imaginary **calculator** component:
 
-    <form data-request="calculator::onCalculate" data-request-update="calcresult: '#result'">
+    <form data-request="{{ __SELF__ }}::onCalculate" data-request-update="'{{ __SELF__ }}::calcresult': '#result'">
 
 <a name="global-events"></a>
 ## Global AJAX events
