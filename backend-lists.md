@@ -14,7 +14,8 @@
     - [Available scope types](#scope-types)
 - [Extending list behavior](#extend-list-behavior)
     - [Overriding controller action](#overriding-action)
-    - [Extending list columns](#extend-list-columns)
+    - [Overriding views](#overriding-views)
+    - [Extending column definitions](#extend-list-columns)
     - [Extending the model query](#extend-model-query)
     - [Custom column types](#custom-column-types)
 
