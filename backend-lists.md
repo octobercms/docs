@@ -74,8 +74,7 @@ Option | Description
 **showSetup** | displays the list column set up button. Default: false.
 **showTree** | displays a tree hierarchy for parent/child records. Default: false.
 **treeExpanded** | if tree nodes should be expanded by default. Default: false.
-**topPartial** | partial name or path to render above the list contents.
-**sidePartial** | partial name or path to render to the side of the list (experimental).
+**customViewPath** | specify a custom view path to override partials used by the list, optional.
 
 <a name="adding-toolbar"></a>
 ### Adding a toolbar
@@ -412,8 +411,10 @@ Type | Description
 Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
 
 - [Overriding controller action](#overriding-action)
-- [Extending list columns](#extend-list-columns)
+- [Overriding views](#overriding-views)
+- [Extending column definitions](#extend-list-columns)
 - [Extending the model query](#extend-model-query)
+- [Custom column types](#custom-column-types)
 
 <a name="overriding-action"></a>
 ### Overriding controller action
@@ -430,8 +431,37 @@ You can use your own logic for the `index()` action method in the controller, th
         $this->asExtension('ListController')->index();
     }
 
+<a name="overriding-views"></a>
+### Overriding views
+
+The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
+
+    <?php if ($toolbar): ?>
+        <?= $toolbar->render() ?>
+    <?php endif ?>
+
+    <?php if ($filter): ?>
+        <?= $filter->render() ?>
+    <?php endif ?>
+
+    <div class="row row-flush">
+        <div class="col-sm-3">
+            [Insert sidebar here]
+        </div>
+        <div class="col-sm-9 list-with-sidebar">
+            <?= $list->render() ?>
+        </div>
+    </div>
+
+The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-list). The widget will look in this path for a view first, then fall back to the default location.
+
+    # Custom view path
+    customViewPath: $/acme/blog/controllers/reviews/list
+
+> **Note**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
+
 <a name="extend-list-columns"></a>
-### Extending list columns
+### Extending column definitions
 
 You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
 
