@@ -304,7 +304,7 @@ There are various native field types that can be used for the **type** setting. 
             published: Published
             archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method takes a single parameter, the current key value, and should return an array of options in the format **key => label**.
+The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
@@ -312,22 +312,24 @@ The second method defines options with a method declared in the model's class. I
 
 Supplying the dropdown options tn the model class:
 
-    public function getStatusOptions($keyValue = null)
+    public function getStatusOptions()
     {
         return ['all' => 'All', ...];
     }
 
-The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. This method takes two parameters, the field name and current key value, and should return an array of options in the format **key => label**.
+The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, and should return an array of options in the format **key => label**.
 
-    public function getDropdownOptions($fieldName = null, $keyValue = null)
+    public function getDropdownOptions($fieldName = null)
     {
-        if ($fieldName == 'status')
+        if ($fieldName == 'status') {
             return ['all' => 'All', ...];
-        else
+        }
+        else {
             return ['' => '-- none --'];
+        }
     }
 
-The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method takes two parameters, the current key value and field name, and should return an array of options in the format **key => label**.
+The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
@@ -336,7 +338,7 @@ The fourth method uses a specific method declared in the model's class. In the n
 
 Supplying the dropdown options to the model class:
 
-    public function listStatuses($keyValue = null, $fieldName = null)
+    public function listStatuses()
     {
         return ['published' => 'Published', ...];
     }
@@ -976,7 +978,6 @@ You can filter the form field definitions by overriding the `filterFields()` met
     }
 
 The above example will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies).
-
 
 <a name="validate-form-fields"></a>
 ## Validating form fields
