@@ -1,0 +1,141 @@
+# Task Scheduling
+
+- [Introduction](#introduction)
+- [Defining schedules](#defining-schedules)
+    - [Schedule frequency options](#schedule-frequency-options)
+    - [Preventing task overlaps](#preventing-task-overlaps)
+- [Task output](#task-output)
+- [Task hooks](#task-hooks)
+
+<a name="introduction"></a>
+## Introduction
+
+In the past, developers have generated a Cron entry for each task they need to schedule. However, this can sometimes be a headache. Your task schedule is no longer in source control, and you must SSH into your server to add the Cron entries. The command scheduler allows you to fluently and expressively define your command schedule within the application itself, and only a single Cron entry is needed on your server.
+
+> **Note**: See the [installation guide](../setup/installation#crontab-setup) for instructions on how to set up the scheduler task.
+
+<a name="defining-schedules"></a>
+## Defining schedules
+
+You may define all of your scheduled tasks by overriding the `registerSchedule()` method inside the [Plugin registration class](registration#registration-file). The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
+
+To get started, let's look at an example of scheduling a task. In this example, we will schedule a `Closure` to be called every day at midnight. Within the `Closure` we will execute a database query to clear a table:
+
+    class Plugin extends PluginBase
+    {
+        [...]
+
+        public function registerSchedule($schedule)
+        {
+            $schedule->call(function () {
+                \Db::table('recent_users')->delete();
+            })->daily();
+        }
+    }
+
+In addition to scheduling `Closure` calls, you may also schedule [console commands](../console/commands) and operating system commands. For example, you may use the `command` method to schedule a console command:
+
+    $schedule->command('cache:clear')->daily();
+
+The `exec` command may be used to issue a command to the operating system:
+
+    $schedule->exec('node /home/acme/script.js')->daily();
+
+<a name="schedule-frequency-options"></a>
+### Schedule frequency options
+
+Of course, there are a variety of schedules you may assign to your task:
+
+Method  | Description
+------------- | -------------
+`->cron('* * * * *');`  |  Run the task on a custom Cron schedule
+`->everyMinute();`  |  Run the task every minute
+`->everyFiveMinutes();`  |  Run the task every five minutes
+`->everyTenMinutes();`  |  Run the task every ten minutes
+`->everyThirtyMinutes();`  |  Run the task every thirty minutes
+`->hourly();`  |  Run the task every hour
+`->daily();`  |  Run the task every day at midnight
+`->dailyAt('13:00');`  |  Run the task every day at 13:00
+`->twiceDaily(1, 13);`  |  Run the task daily at 1:00 & 13:00
+`->weekly();`  |  Run the task every week
+`->monthly();`  |  Run the task every month
+
+These methods may be combined with additional constraints to create even more finely tuned schedules that only run on certain days of the week. For example, to schedule a command to run weekly on Monday:
+
+    $schedule->call(function () {
+        // Runs once a week on Monday at 13:00...
+    })->weekly()->mondays()->at('13:00');
+
+Below is a list of the additional schedule constraints:
+
+Method  | Description
+------------- | -------------
+`->weekdays();`  |  Limit the task to weekdays
+`->sundays();`  |  Limit the task to Sunday
+`->mondays();`  |  Limit the task to Monday
+`->tuesdays();`  |  Limit the task to Tuesday
+`->wednesdays();`  |  Limit the task to Wednesday
+`->thursdays();`  |  Limit the task to Thursday
+`->fridays();`  |  Limit the task to Friday
+`->saturdays();`  |  Limit the task to Saturday
+`->when(Closure);`  |  Limit the task based on a truth test
+
+#### Truth test constraints
+
+The `when` method may be used to limit the execution of a task based on the result of a given truth test. In other words, if the given `Closure` return `true`, the task will execute as long as no other constraining conditions prevent the task from running:
+
+    $schedule->command('emails:send')->daily()->when(function () {
+        return true;
+    });
+
+<a name="preventing-task-overlaps"></a>
+### Preventing task overlaps
+
+By default, scheduled tasks will be run even if the previous instance of the task is still running. To prevent this, you may use the `withoutOverlapping` method:
+
+    $schedule->command('emails:send')->withoutOverlapping();
+
+In this example, the `emails:send` [console command](../console/commands) will be run every minute if it is not already running. The `withoutOverlapping` method is especially useful if you have tasks that vary drastically in their execution time, preventing you from needing to predict exactly how long a given task will take.
+
+<a name="task-output"></a>
+## Task output
+
+The scheduler provides several convenient methods for working with the output generated by scheduled tasks. First, using the `sendOutputTo` method, you may send the output to a file for later inspection:
+
+    $schedule->command('emails:send')
+             ->daily()
+             ->sendOutputTo($filePath);
+
+Using the `emailOutputTo` method, you may e-mail the output to an e-mail address of your choice. Note that the output must first be sent to a file using the `sendOutputTo` method. Also before e-mailing the output of a task, you should configure [mail services](../services/mail):
+
+    $schedule->command('foo')
+             ->daily()
+             ->sendOutputTo($filePath)
+             ->emailOutputTo('foo@example.com');
+
+> **Note:** The `emailOutputTo` and `sendOutputTo` methods are exclusive to the `command` method and are not supported for `call`.
+
+<a name="task-hooks"></a>
+## Task hooks
+
+Using the `before` and `after` methods, you may specify code to be executed before and after the scheduled task is complete:
+
+    $schedule->command('emails:send')
+             ->daily()
+             ->before(function () {
+                 // Task is about to start...
+             })
+             ->after(function () {
+                 // Task is complete...
+             });
+
+#### Pinging URLs
+
+Using the `pingBefore` and `thenPing` methods, the scheduler can automatically ping a given URL before or after a task is complete. This method is useful for notifying an external service that your scheduled task is commencing or complete:
+
+    $schedule->command('emails:send')
+             ->daily()
+             ->pingBefore($url)
+             ->thenPing($url);
+
+> You need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers) before you can use either the `pingBefore($url)` or `thenPing($url)` features.

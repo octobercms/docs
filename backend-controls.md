@@ -1,6 +1,5 @@
 # Backend Controls
 
-- [Hints](#hints)
 - [Scoreboards](#scoreboards)
 - [Indicators](#indicators)
 - [Pie chart](#pie-chart)
@@ -8,35 +7,7 @@
 
 The back-end user interface includes a number of HTML controls that you can use on your pages.
 
-<a name="hints" class="anchor" href="#hints"></a>
-## Hints
-
-You can render informative panels in the backend, called hints, that the user can hide. The first parameter should be a unique key for the purposes of remembering if the hint has been hidden or not. The second parameter is a reference to a partial view. The third parameter can be some extra view variables to pass to the partial, in addition to some hint properties.
-
-    <?= $this->makeHintPartial('my_hint_key', 'my_hint_partial', ['foo' => 'bar']) ?>
-
-You can also disable the ability to hide a hint by setting the key value to a null value. This hint will always be displayed:
-
-    <?= $this->makeHintPartial(null, 'my_hint_partial') ?>
-
-The following properties are available:
-
-Property | Description
-------------- | -------------
-**type** | Sets the color of the hint, supported types: danger, info, success, warning. Default: info.
-**title** | Adds a title section to the hint.
-**subtitle** | In addition to the title, adds a second line to the title secion.
-**icon** | In addition to the title, adds an icon to the title section.
-
-### Checking if Hints are Hidden
-
-If you're using hints, you may find it useful to check if the user has hidden them. This is easily done using the `isBackendHintHidden` method. It takes a single parameter, and that's the unique key you specified in the original call to `makeHintPartial`. The method will return true if the hint was hidden, false otherwise:
-
-    <?php if ($this->isBackendHintHidden('my_hint_key')): ?>
-    <!-- Do something when the hint is hidden -->
-    <?php endif ?>
-
-<a name="scoreboards" class="anchor" href="#scoreboards"></a>
+<a name="scoreboards"></a>
 ## Scoreboards
 
 The scoreboard control is usually displayed above back-end lists and displays some summary or the most important data. The control could contain any charts and indicators (see below). Example of a scoreboard control markup displayed above a list widget:
@@ -73,7 +44,7 @@ The scoreboard control is usually displayed above back-end lists and displays so
 
 Note that you should use the **scoreboard-item** class for your scoreboard elements.
 
-<a name="indicators" class="anchor" href="#indicators"></a>
+<a name="indicators"></a>
 ## Indicators
 
 Indicators are simple reporting element that have a title, a value and a description. You can use the `positive` and `negative` classes on the value element. [Font Autumn](http://daftspunk.github.io/Font-Autumn/) icon classes allow to add an icon before the value.
@@ -112,7 +83,7 @@ Indicators are simple reporting element that have a title, a value and a descrip
 
 > **Note:** The example is given in the context of a scoreboard area. If you use the indicators in a [report widget](widgets#report-widgets) partial, the class **scoreboard-item** shouldn't be used.
 
-<a name="pie-chart" class="anchor" href="#pie-chart"></a>
+<a name="pie-chart"></a>
 ## Pie chart
 
 The pie chart outputs information as a circle diagram, with optional label in the center. Example markup:
@@ -131,7 +102,7 @@ The pie chart outputs information as a circle diagram, with optional label in th
 
 ![image](https://github.com/octobercms/docs/blob/master/images/traffic-sources.png?raw=true) {.img-responsive .frame}
 
-<a name="bar-chart" class="anchor" href="#bar-chart"></a>
+<a name="bar-chart"></a>
 ## Bar chart
 
 The next example shows a bar chart markup. The **wrap-legend** class is optional, it manages the legend layout. The **data-height** and **data-full-width** attributes are optional as well.

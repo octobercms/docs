@@ -1,0 +1,45 @@
+Controls:
+  icon: "icon-magic"
+  pages:
+    ui/form: "Form"
+    ui/list: "List"
+    ui/button: "Button"
+    ui/checkbox: "Checkbox"
+    # ui/datepicker: "Date Picker"
+    ui/select: "Select"
+    ui/callout: "Callout"
+    ui/chart: "Chart"
+    ui/scoreboard: "Scoreboard"
+    ui/dropdown: "Dropdown"
+    ui/inspector: "Inspector"
+    ui/flashmessage: "Flash Message"
+    ui/filter: "Filter"
+    ui/loader: "Loader"
+    ui/tooltip: "Tooltip"
+    ui/toolbar: "Toolbar"
+    # ui/popover: "Popover"
+    ui/popup: "Popup"
+    ui/tab: "Tab"
+
+Style:
+  icon: "icon-magic"
+  pages:
+    # ui/site: "Site"
+    ui/utilities: "Utilities"
+    ui/flag: "Flag"
+    ui/icon: "Icon"
+    ui/breadcrumb: "Breadcrumb"
+    ui/pagination: "Pagination"
+    ui/progressbar: "Progress Bar"
+
+Script:
+  icon: "icon-magic"
+  pages:
+    ui/foundation: "Foundation"
+    ui/drag-value: "Drag.Value"
+    ui/drag-scroll: "Drag.Scroll"
+    ui/drag-sort: "Drag.Sort"
+    ui/input-hotkey: "Input.Hotkey"
+    ui/input-preset: "Input.Preset"
+    ui/input-trigger: "Input.Trigger"
+    ui/input-monitor: "Input.Monitor"

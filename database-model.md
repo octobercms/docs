@@ -1,18 +1,24 @@
 # Active Record Model
 
 - [Introduction](#introduction)
-- [Relationships](#relationships)
-- [Attribute modifiers](#attribute-modifiers)
-- [Model events](#model-events)
-- [Model validation](#model-validation)
-- [File attachments](#file-attachments)
-- [Deferred binding](#deferred-binding)
+- [Defining models](#defining-models)
+    - [Standard properties](#standard-properties)
+- [Retrieving multiple models](#retrieving-multiple-models)
+- [Retrieving single models / aggregates](#retrieving-single-models)
+    - [Retrieving aggregates](#retrieving-aggregates)
+- [Inserting & updating models](#inserting-and-updating-models)
+    - [Basic inserts](#basic-inserts)
+    - [Basic updates](#basic-updates)
+    - [Mass assignment](#mass-assignment)
+- [Deleting models](#deleting-models)
+- [Query scopes](#query-scopes)
+- [Events](#events)
 - [Extending models](#extending-models)
 
-October provides the option of using an Active Record pattern to access the database, through the use of the `Model` class. The class extends and shares the features of [Eloquent ORM provided by Laravel](http://laravel.com/docs/eloquent).
-
-<a name="introduction" class="anchor" href="#introduction"></a>
+<a name="introduction"></a>
 ## Introduction
+
+October provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
 
 Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
 
@@ -28,320 +34,361 @@ Model classes reside in the **models** subdirectory of a plugin directory. An ex
 
 The model configuration directory could contain the model's [list column](../backend/lists#list-columns) and [form field](../backend/forms#form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
-<a name="class-definition" class="anchor" href="#class-definition"></a>
-### Class definition
+<a name="defining-models"></a>
+## Defining models
 
-You should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this:
+In most cases, you should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this:
 
     namespace Acme\Blog\Models;
 
     use Model;
 
-    class Post extends Model {
-
+    class Post extends Model
+    {
+        /**
+         * The table associated with the model.
+         *
+         * @var string
+         */
         protected $table = 'acme_blog_posts';
-
     }
 
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
-<a name="relationships" class="anchor" href="#relationships"></a>
-## Relationships
+<a name="standard-properties"></a>
+### Standard properties
 
-October models allow you to define [relationships](http://laravel.com/docs/eloquent#relationships) with the model class properties. The following relations types are available:
-
-- [Belongs to](#relation-belongsto)
-- [Belongs to many](#relation-belongstomany)
-- [Has one / Has many](#relation-hasone-hasmany)
-- [Has many through](#relation-hasmanythrough)
-- [Polymorphic relations](#relation-polymorph)
-- [File attachments](#file-attachments)
-
-An example of defining relationships:
-
-    class Post extends Model
-    {
-        public $belongsTo = [
-            'user' => ['Acme\Blog\Models\User'],
-            'category' => [...]
-        ];
-
-        public $hasMany = [
-            'comments' => ['Acme\Blog\Models\Comment', 'order' => 'created_at']
-        ]
-    }
-
-Each definition is an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are arguments that must have a key name.
-
-The following are global arguments that can be used with all relations:
-
-Argument | Description
-------------- | -------------
-**order** | sorting order for multiple records.
-**conditions** | filters the relation using a raw where query statement.
-**scope** | filters the relation using a supplied scope method.
-**push** | if set to false, this relation will not be saved via `push()`, default: true.
-**delete** | if set to true, the related model will be deleted if the relationship is destroyed, default: false.
-
-Example filter using **order** and **conditions**:
-
-    public $belongsToMany = [
-        'categories' => [
-            'Acme\Blog\Models\Category',
-            'order'      => 'name desc',
-            'conditions' => 'is_active = 1'
-        ]
-    ];
-
-Example filter using **scope**:
-
-    class Post extends Model
-    {
-        public $belongsToMany = [
-            'categories' => [
-                'Acme\Blog\Models\Category',
-                'scope' => 'isActive'
-            ]
-        ];
-    }
-
-    class Category extends Model
-    {
-        public function scopeIsActive($query)
-        {
-            return $query->where('is_active', 1)->orderBy('name', 'desc');
-        }
-    }
-
-<a name="relation-belongsto" class="anchor" href="#relation-belongsto"></a>
-### Belongs to
-
-The `$belongsTo` relation sets up a one-to-one connection with another model, where the declaring model "belongs to" the other model.
-
-    class Post extends Model
-    {
-        public $belongsTo = [
-            'user' => ['Acme\Blog\Models\User']
-        ];
-    }
-
-In this example the Post model belongs to the User model, defined by the Post database table having a *key* column of `user_id` . The key column name generated automatically. However, it can be defined explicitly too:
-
-    public $belongsTo = [
-        'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id']
-    ];
-
-The inverse relationship can also be defined where the [User has one / has many Posts](#relation-hasone-hasmany).
-
-<a name="relation-belongstomany" class="anchor" href="#relation-belongstomany"></a>
-### Belongs to many
-
-The `$belongsToMany` relation creates a many-to-many connection with another model, using a joining database table.
-
-    class Post extends Model
-    {
-        public $belongsToMany = [
-            'categories' => ['Acme\Blog\Models\Category', 'table' => 'acme_blog_posts_categories']
-        ];
-    }
-
-In the above example a Post model "belongs to many" Category models, which inversely can have many Posts too.
-
-    class Category extends Model
-    {
-        public $belongsToMany = [
-            'posts' => ['Acme\Blog\Models\Post', 'table' => 'acme_blog_posts_categories']
-        ];
-    }
-
-The above example shows the inverse relationship where the Category model also belongs to many Post models. Both relationships are stored in a shared join *table* defined here explicitly as `acme_blog_posts_categories`.
-
-    Schema::create('acme_blog_posts_categories', function($table)
-    {
-        $table->integer('post_id')->unsigned();
-        $table->integer('category_id')->unsigned();
-        $table->primary(['post_id', 'category_id']);
-    });
-
-This above code shows the [database table structure](../database/structure#migration-files) used to create the join *table*. The two key names are generated automatically from the context of the defining model. In context of the Post model, the *key* column is generated as `post_id` and the *otherKey* column is `category_id`. However, these can be defined explicitly too:
-
-    public $belongsToMany = [
-        'categories' => [
-            'Acme\Blog\Models\Category',
-            'table'    => 'acme_blog_posts_categories',
-            'key'      => 'my_post_id',
-            'otherKey' => 'my_category_id'
-        ]
-    ];
-
-Thee following arguments are supported for belongs to many relations:
-
-Argument | Description
-------------- | -------------
-**table** | the name of the join table.
-**key** | the key column name of the defining model.
-**otherKey** | the key column name of the related model.
-**pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
-**pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot`.
-**timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
-
-<a name="relation-hasone-hasmany" class="anchor" href="#relation-hasone-hasmany"></a>
-### Has one / Has many
-
-The `$hasOne` relation indicates a one-to-one and the  `$hasMany` indicates a one-to-many connection with another model. This relationship can be considered the "other side" of the [Belongs to](#relation-belongsto) relationship.
+There are some standard properties that can be found on models, in addition to those provided by [model traits](traits). For example:
 
     class User extends Model
     {
-        public $hasOne = [
-            'profile' => ['Acme\Blog\Models\Profile']
-        ];
+        protected $primaryKey = 'id';
 
-        public $hasMany = [
-            'posts' => ['Acme\Blog\Models\Post']
-        ];
-    }
+        public $exists = false;
 
-The above example shows that this User "has one" Profile model only, but "has many" Post models that belong to her. This is defined by the Profile/Post table having a *key* column of `user_id` , however it can be defined explicitly too:
+        protected $dates = ['last_seen_at'];
 
-    public $hasMany = [
-        'posts' => ['Acme\Blog\Models\Post', 'key' => 'my_user_id']
-    ];
-
-The one-to-one relationship will always return a single model, whereas the one-to-many relationship will always return a collection of models.
-
-    // Has one:
-    // Returns a single Profile model
-    $user->profile;
-
-    // Has many:
-    // Returns an array of Post models
-    $user->posts;
-
-<a name="relation-hasmanythrough" class="anchor" href="#relation-hasmanythrough"></a>
-### Has many through
-
-The `$hasManyThrough` relation sets up a many-to-many connection with another model, it does so by proceeding "through" a third model.
-
-    class Country extends Model
-    {
-        public $hasManyThrough = [
-            'comments' => [
-                'Acme\Blog\Models\Comment',
-                'through' => 'Acme\Blog\Models\User'
-            ],
-        ];
-    }
-
-The above example shows that a Country model may 'have many' Comment models, based on the User model belonging to that Country. It will assume the *key* column of the User model is `country_id` and the *throughKey* of the Comment model is `user_id`. These can be defined explicitly:
-
-    public $hasManyThrough = [
-        'comments' => [
-            'Acme\Blog\Models\Comment',
-            'key'        => 'my_country_id',
-            'through'    => 'Acme\Blog\Models\User',
-            'throughKey' => 'my_user_id'
-        ],
-    ];
-
-<a name="relation-polymorph" class="anchor" href="#relation-polymorph"></a>
-### Polymorphic relations
-
-A slightly more advanced twist on relations is the "polymorphic relation", where a model can belong to more than one other model. The following polymorphic relationship types are available, shown with their optional or required arguments:
-
-Relation | Description
-------------- | -------------
-**$morphTo** | polymorphic version of belongs to. Optional: `name`, `type`, `id`.
-**$morphOne** | polymorphic version of has one. Optional: `type`, `id`. Required: `name`.
-**$morphMany** | polymorphic version of has many. Optional: `type`, `id`. Required: `name`.
-**$morphToMany** | polymorphic version of belongs to many. Optional: `table`, `key`, `otherKey`, `pivot`, `timestamps`. Required: `name`.
-**$morphedByMany** | polymorphic version of belongs to many, inversed. Optional: `table`, `key`, `otherKey`, `pivot`, `timestamps`. Required: `name`.
-
-For example, you might have a Event Log model that carries generic information about an incident, it can then belong to either a User model or a Location model.
-
-    class EventLog extends Model
-    {
-        public $morphTo = [
-            'event_owner' => []
-        ];
-    }
-
-    class User extends Model
-    {
-        public $morphMany = [
-            'event_log' => ['Acme\Blog\Models\EventLog', 'name' => 'event_owner']
-        ];
-    }
-
-    class Location extends Model
-    {
-        public $morphMany = [
-            'event_log' => ['Acme\Blog\Models\EventLog', 'name' => 'event_owner']
-        ];
-    }
-
-In the above example the User and Location models both use the Event Log model for recording events under the shared *type* of `event_owner`. The inverse occurs via the Event Log which can access the owner of the event (User or Location) via the relationship of the type name.
-
-The database structure for this polymorphic relation is represented as the following:
-
-    acme_blog_users
-        id - integer
-        name - string
-
-    acme_blog_locations
-        id - integer
-        address -string
-
-    acme_blog_event_logs
-        id - integer
-        details - string
-        event_owner_id - integer
-        event_owner_type - string
-
-It is important to note the columns `event_owner_id` and `event_owner_type` in the Event Log table. These are used to "morph" the relationship depending on who owns the event.
-
-<a name="attribute-modifiers" class="anchor" href="#attribute-modifiers"></a>
-## Attribute modifiers
-
-October models can apply modifiers to the attribute values when the model is loaded or saved to the database. The modifiers are defined with the model class properties as arrays. For example:
-
-    class User extends \October\Rain\Database\Model
-    {
-        protected $hashable = ['password'];
-
-        protected $purgeable = ['password_confirmation'];
+        public $timestamps = true;
 
         protected $jsonable = ['permissions'];
 
-        protected $encryptable = ['api_key'];
-
-        protected $slugs = ['slug' => 'name'];
+        protected $guarded = ['*'];
     }
 
-The following attribute modifiers are supported:
-
 Property | Description
 ------------- | -------------
-**$hashable** | values are hashed, they can be verified but cannot be reversed. Requires trait: `October\Rain\Database\Traits\Hashable`.
-**$purgeable** | attributes are removed before attempting to save to the database. Requires trait: `October\Rain\Database\Traits\Purgeable`.
-**$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
-**$encryptable** | values are encrypted and decrypted for storing sensitive data. Requires trait: `October\Rain\Database\Traits\Encryptable`.
-**$slugs** | key attributes are generated as unique url names (slugs) based on value attributes. Requires trait: `October\Rain\Database\Traits\Sluggable`.
+**$primaryKey** | primary key name used to identify the model.
+**$exists** | boolean that if true indicates that the model exists.
 **$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
 **$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
+**$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
+**$fillable** | values are fields accessible to [mass assignment](#mass-assignment).
+**$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
+**$visible** | values are fields made visible when [serializing the model data](../database/serialization).
+**$hidden** | values are fields made hidden when [serializing the model data](../database/serialization).
 
-The following attribute declarations are supported:
+#### Primary keys
 
-Property | Description
-------------- | -------------
-**$fillable** | values are fields accessible to mass assignment.
-**$guarded** | values are fields guarded from mass assignment.
-**$visible** | values are fields made visible when converting the model to JSON or an array.
-**$hidden** | values are fields made hidden when converting the model to JSON or an array.
+Models will assume that each table has a primary key column named `id`. You may define a `$primaryKey` property to override this convention.
 
-<a name="model-events" class="anchor" href="#model-events"></a>
-## Model events
+    class Post extends Model
+    {
+        /**
+         * The primary key for the model.
+         *
+         * @var string
+         */
+        protected $primaryKey = 'id';
+    }
 
-You can handle different model life cycle events by defining special methods in the model class. The following events are available:
+#### Timestamps
+
+By default, a model will expect `created_at` and `updated_at` columns to exist on your tables. If you do not wish to have these columns managed automatically, set the `$timestamps` property on your model to `false`:
+
+    class Post extends Model
+    {
+        /**
+         * Indicates if the model should be timestamped.
+         *
+         * @var bool
+         */
+        public $timestamps = false;
+    }
+
+If you need to customize the format of your timestamps, set the `$dateFormat` property on your model. This property determines how date attributes are stored in the database, as well as their format when the model is serialized to an array or JSON:
+
+    class Post extends Model
+    {
+        /**
+         * The storage format of the model's date columns.
+         *
+         * @var string
+         */
+        protected $dateFormat = 'U';
+    }
+
+#### Values stored as JSON
+
+When attributes names are passed to the `$jsonable` property, the values will be serialized and deserialized from the database as JSON:
+
+    class Post extends Model
+    {
+        /**
+         * @var array Attribute names to encode and decode using JSON.
+         */
+        protected $jsonable = ['data'];
+    }
+
+<a name="retrieving-multiple-models"></a>
+## Retrieving multiple models
+
+Once you have created a model and [its associated database table](../database/structure#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query) allowing you to query the database table associated with the model. For example:
+
+    $flights = Flight::all();
+
+#### Accessing column values
+
+If you have a model instance, you may access the column values of the model by accessing the corresponding property. For example, let's loop through each `Flight` instance returned by our query and echo the value of the `name` column:
+
+    foreach ($flights as $flight) {
+        echo $flight->name;
+    }
+
+#### Adding additional constraints
+
+The `all` method will return all of the results in the model's table. Since each model serves as a [query builder](../database/query), you may also add constraints to queries, and then use the `get` method to retrieve the results:
+
+    $flights = Flight::where('active', 1)
+        ->orderBy('name', 'desc')
+        ->take(10)
+        ->get();
+
+> **Note:** Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query). You may use any of these methods in your model queries.
+
+#### Collections
+
+For methods like `all` and `get` which retrieve multiple results, an instance of a `Collection` will be returned. This class provides [a variety of helpful methods](../database/collection) for working with your results. Of course, you can simply loop over this collection like an array:
+
+    foreach ($flights as $flight) {
+        echo $flight->name;
+    }
+
+#### Chunking results
+
+If you need to process thousands of records, use the `chunk` command. The `chunk` method will retrieve a "chunk" of models, feeding them to a given `Closure` for processing. Using the `chunk` method will conserve memory when working with large result sets:
+
+    Flight::chunk(200, function ($flights) {
+        foreach ($flights as $flight) {
+            //
+        }
+    });
+
+The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is retrieved from the database.
+
+<a name="retrieving-single-models"></a>
+## Retrieving single models / aggregates
+
+In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance:
+
+    // Retrieve a model by its primary key
+    $flight = Flight::find(1);
+
+    // Retrieve the first model matching the query constraints
+    $flight = Flight::where('active', 1)->first();
+
+#### Not found exceptions
+
+Sometimes you may wish to throw an exception if a model is not found. This is particularly useful in routes or controllers. The `findOrFail` and `firstOrFail` methods will retrieve the first result of the query. However, if no result is found, a `Illuminate\Database\Eloquent\ModelNotFoundException` will be thrown:
+
+    $model = Flight::findOrFail(1);
+
+    $model = Flight::where('legs', '>', 100)->firstOrFail();
+
+When [developing an API](../services/router), if the exception is not caught, a `404` HTTP response is automatically sent back to the user, so it is not necessary to write explicit checks to return `404` responses when using these methods:
+
+    Route::get('/api/flights/{id}', function ($id) {
+        return Flight::findOrFail($id);
+    });
+
+<a name="retrieving-aggregates"></a>
+### Retrieving aggregates
+
+You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query#aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
+
+    $count = Flight::where('active', 1)->count();
+
+    $max = Flight::where('active', 1)->max('price');
+
+<a name="inserting-and-updating-models"></a>
+## Inserting & updating models
+
+Inserting and updating data are the cornerstone feature of models, it makes the process effortless when compared to traditional SQL statements.
+
+<a name="basic-inserts"></a>
+### Basic inserts
+
+To create a new record in the database, simply create a new model instance, set attributes on the model, then call the `save` method:
+
+    $flight = new Flight;
+    $flight->name = 'Sydney to Canberra';
+    $flight->save();
+
+In this example, we simply create a new instance of the `Flight` model and assign the `name` attribute. When we call the `save` method, a record will be inserted into the database. The `created_at` and `updated_at` timestamps will automatically be set too, so there is no need to set them manually.
+
+<a name="basic-updates"></a>
+### Basic updates
+
+The `save` method may also be used to update models that already exist in the database. To update a model, you should retrieve it, set any attributes you wish to update, and then call the `save` method. Again, the `updated_at` timestamp will automatically be updated, so there is no need to manually set its value:
+
+    $flight = Flight::find(1);
+    $flight->name = 'Darwin to Adelaide';
+    $flight->save();
+
+Updates can also be performed against any number of models that match a given query. In this example, all flights that are `active` and have a `destination` of `San Diego` will be marked as delayed:
+
+    Flight::where('is_active', true)
+        ->where('destination', 'Perth')
+        ->update(['delayed' => true]);
+
+The `update` method expects an array of column and value pairs representing the columns that should be updated.
+
+<a name="mass-assignment"></a>
+### Mass assignment
+
+You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment.
+
+A mass-assignment vulnerability occurs when a user passes an unexpected HTTP parameter through a request, and that parameter changes a column in your database you did not expect. For example, a malicious user might send an `is_admin` parameter through an HTTP request, which is then mapped onto your model's `create` method, allowing the user to escalate themselves to an administrator.
+
+To get started, you should define which model attributes you want to make mass assignable. You may do this using the `$fillable` property on the model. For example, let's make the `name` attribute of our `Flight` model mass assignable:
+
+    class Flight extends Model
+    {
+        /**
+         * The attributes that are mass assignable.
+         *
+         * @var array
+         */
+        protected $fillable = ['name'];
+    }
+
+Once we have made the attributes mass assignable, we can use the `create` method to insert a new record in the database. The `create` method returns the saved model instance:
+
+    $flight = Flight::create(['name' => 'Flight 10']);
+
+While `$fillable` serves as a "white list" of attributes that should be mass assignable, you may also choose to use `$guarded`. The `$guarded` property should contain an array of attributes that you do not want to be mass assignable. All other attributes not in the array will be mass assignable. So, `$guarded` functions like a "black list". Of course, you should use either `$fillable` or `$guarded` - not both:
+
+    class Flight extends Model
+    {
+        /**
+         * The attributes that aren't mass assignable.
+         *
+         * @var array
+         */
+        protected $guarded = ['price'];
+    }
+
+In the example above, all attributes **except for `price`** will be mass assignable.
+
+#### Other creation methods
+
+Sometimes you may wish to only instantiate a new instance of a model. You can do this using the `make` method. The `make` method will simply return a new instance without saving or creating anything.
+
+    $flight = Flight::make(['name' => 'Flight 10']);
+
+    // Functionally the same as...
+    $flight = new Flight;
+    $flight->fill(['name' => 'Flight 10']);
+
+There are two other methods you may use to create models by mass assigning attributes: `firstOrCreate` and `firstOrNew`. The `firstOrCreate` method will attempt to locate a database record using the given column / value pairs. If the model can not be found in the database, a record will be inserted with the given attributes.
+
+The `firstOrNew` method, like `firstOrCreate` will attempt to locate a record in the database matching the given attributes. However, if a model is not found, a new model instance will be returned. Note that the model returned by `firstOrNew` has not yet been persisted to the database. You will need to call `save` manually to persist it:
+
+    // Retrieve the flight by the attributes, otherwise create it
+    $flight = Flight::firstOrCreate(['name' => 'Flight 10']);
+
+    // Retrieve the flight by the attributes, or instantiate a new instance
+    $flight = Flight::firstOrNew(['name' => 'Flight 10']);
+
+<a name="deleting-models"></a>
+## Deleting models
+
+To delete a model, call the `delete` method on a model instance:
+
+    $flight = Flight::find(1);
+
+    $flight->delete();
+
+#### Deleting an existing model by key
+
+In the example above, we are retrieving the model from the database before calling the `delete` method. However, if you know the primary key of the model, you may delete the model without retrieving it. To do so, call the `destroy` method:
+
+    Flight::destroy(1);
+
+    Flight::destroy([1, 2, 3]);
+
+    Flight::destroy(1, 2, 3);
+
+#### Deleting models by query
+
+You may also run a delete query on a set of models. In this example, we will delete all flights that are marked as inactive:
+
+    $deletedRows = Flight::where('active', 0)->delete();
+
+> **Note**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
+
+<a name="query-scopes"></a>
+## Query scopes
+
+Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
+
+    class User extends Model
+    {
+        /**
+         * Scope a query to only include popular users.
+         */
+        public function scopePopular($query)
+        {
+            return $query->where('votes', '>', 100);
+        }
+
+        /**
+         * Scope a query to only include active users.
+         */
+        public function scopeActive($query)
+        {
+            return $query->where('is_active', 1);
+        }
+    }
+
+#### Utilizing a query scope
+
+Once the scope has been defined, you may call the scope methods when querying the model. However, you do not need to include the `scope` prefix when calling the method. You can even chain calls to various scopes, for example:
+
+    $users = User::popular()->active()->orderBy('created_at')->get();
+
+#### Dynamic scopes
+
+Sometimes you may wish to define a scope that accepts parameters. To get started, just add your additional parameters to your scope. Scope parameters should be defined after the `$query` argument:
+
+    class User extends Model
+    {
+        /**
+         * Scope a query to only include users of a given type.
+         */
+        public function scopeApplyType($query, $type)
+        {
+            return $query->where('type', $type);
+        }
+    }
+
+Now you may pass the parameters when calling the scope:
+
+    $users = User::applyType('admin')->get();
+
+<a name="events"></a>
+## Events
+
+Models fire several events, allowing you to hook into various points in the model's lifecycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
 
 Event | Description
 ------------- | -------------
@@ -362,302 +409,58 @@ Event | Description
 
 An example of using an event:
 
+    /**
+     * Generate a URL slug for this model
+     */
     public function beforeCreate()
     {
-        // Generate a URL slug for this model
         $this->slug = Str::slug($this->name);
     }
 
-<a name="model-validation" class="anchor" href="#model-validation"></a>
-## Model validation
+<a name="basic-usage"></a>
+### Basic usage
 
-October models use Laravel's built-in [Validator class](http://laravel.com/docs/validation). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
+Whenever a new model is saved for the first time, the `beforeCreate` and `afterCreate` events will fire. If a model already existed in the database and the `save` method is called, the `beforeUpdate` / `afterUpdate` events will fire. However, in both cases, the `beforeSave` / `afterSave` events will fire.
 
-    class User extends \October\Rain\Database\Model
+For example, let's define an event listener that populates the slug attribute when a model is first created:
+
+    /**
+     * Generate a URL slug for this model
+     */
+    public function beforeCreate()
     {
-        use \October\Rain\Database\Traits\Validation;
-
-        public $rules = [
-            'name'                  => 'required|between:4,16',
-            'email'                 => 'required|email',
-            'password'              => 'required|alpha_num|between:4,8|confirmed',
-            'password_confirmation' => 'required|alpha_num|between:4,8'
-        ];
+        $this->slug = Str::slug($this->name);
     }
 
-> **Note**: You're free to use the [array syntax](http://laravel.com/docs/validation#basic-usage) for validation rules as well.
+Returning `false` from an event will cancel the `save` / `update` operation:
 
-Models validate themselves automatically when the `save()` method is called.
-
-    $user = new User;
-    $user->name = 'Adam Person';
-    $user->email = 'a.person@email.address.com';
-    $user->password = 'passw0rd';
-
-    // Returns false if model is invalid
-    $success = $user->save();
-
-> **Note:** You can also validate a model at any time using the `validate()` method.
-
-<a name="retrieving-validation-errors" class="anchor" href="#retrieving-validation-errors"></a>
-### Retrieving validation errors
-
-When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors()` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
-
-> **Note:** The Model leverages Laravel's MessagesBag object which has a [simple and elegant method](http://laravel.com/docs/validation#working-with-error-messages) of formatting errors.
-
-<a name="overriding-validation" class="anchor" href="#overriding-validation"></a>
-### Overriding validation
-
-The `forceSave()` method validates the model and saves regardless of whether or not there are validation errors.
-
-    $user = new User;
-
-    // Creates a user without validation
-    $user->forceSave();
-
-<a name="custom-error-messages" class="anchor" href="#custom-error-messages"></a>
-### Custom error messages
-
-Just like the Laravel Validator, you can set custom error messages using the [same syntax](http://laravel.com/docs/validation#custom-error-messages).
-
-    class User extends \October\Rain\Database\Model
+    public function beforeCreate()
     {
-        public $customMessages = [
-           'required' => 'The :attribute field is required.',
-            ...
-        ];
+        if (!$user->isValid()) {
+            return false;
+        }
     }
 
-<a name="custom-attribute-names" class="anchor" href="#custom-attribute-names"></a>
-### Custom attribute names
+You can externally bind to [local events](../services/events) for a single instance of a model using the `bindEvent` method. The event name should be the same as the method override name, prefixed with `model.`.
 
-You may also set custom attribute names with the `$attributeNames` array.
+    $flight = new Flight;
+    $flight->bindEvent('model.beforeCreate', function() use ($model) {
+        $model->slug = Str::slug($model->name);
+    })
 
-    class User extends \October\Rain\Database\Model
-    {
-        public $attributeNames = [
-           'email' => 'Email Address',
-            ...
-        ];
-    }
-
-<a name="custom-validation-rules" class="anchor" href="#custom-validation-rules"></a>
-### Custom validation rules
-
-You can also create custom validation rules the [same way](http://laravel.com/docs/validation#custom-validation-rules) you would for the Laravel Validator.
-
-<a name="file-attachments" class="anchor" href="#file-attachments"></a>
-## File attachments
-
-Models can support file attachments using a subset of the [polymorphic relationship](#relation-polymorph). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship.
-
-In the examples below the model has a single Avatar attachment model and many Photo attachment models.
-
-A single file attachment:
-
-    public $attachOne = [
-        'avatar' => ['System\Models\File']
-    ];
-
-Multiple file attachments:
-
-    public $attachMany = [
-        'photos' => ['System\Models\File']
-    ];
-
-Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`:
-
-    public $attachOne = [
-        'avatar' => ['System\Models\File', 'public' => false]
-    ];
-
-<a name="creating-attachments" class="anchor" href="#creating-attachments"></a>
-### Creating new attachments
-
-Attach a file uploaded with a form:
-
-    $model->avatar = Input::file('file_input');
-
-Attach a prepared File object:
-
-    $file = new System\Models\File;
-    $file->data = Input::file('file_input');
-    $file->save();
-
-    $model->avatar()->add($file);
-
-<a name="viewing-attachments" class="anchor" href="#viewing-attachments"></a>
-### Viewing attachments
-
-The `getPath()` method returns the full URL of an uploaded public file. The following code would print something like **http://mysite.com/uploads/public/path/to/avatar.jpg**
-
-    echo $model->avatar->getPath();
-
-Returning multiple attachment file paths:
-
-    foreach ($model->photos as $photo)
-        echo $photo->getPath();
-
-To output the file contents directly, use the `output()` method, this will include the necessary headers for downloading the file:
-
-    echo $model->avatar->output();
-
-You can resize an image with the `getThumb()` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
-
-Option | Description
-------------- | -------------
-**mode** | auto, exact, portrait, landscape, crop. Default: auto
-**quality** | 0 - 100. Default: 95
-**extension** | auto, jpg, png, gif. Default: jpg
-
-The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
-
-    echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
-
-<a name="attachments-usage-example" class="anchor" href="#attachments-usage-example"></a>
-### Usage example
-
-This section shows a full usage example of the model attachments feature - from defining the relation in a model to displaying the uploaded image on a page.
-
-Inside your model define a relationship to the `System\Models\File` class, for example:
-
-    class Post extends Model
-    {
-        public $attachOne = [
-            'featured_image' => ['System\Models\File']
-        ];
-    }
-
-Build a form for uploading a file:
-
-    <?= Form::open(['files' => true]) ?>
-
-        <input name="example_file" type="file">
-
-        <button type="submit">Upload File</button>
-
-    <?= Form::close() ?>
-
-Process the uploaded file on the server and attach it to a model:
-
-    // Find the Blog Post model
-    $post = Post::find(1);
-
-    // Save the featured image of the Blog Post model
-    if (Input::hasFile('example_file'))
-        $post->featured_image = Input::file('example_file');
-
-Alternatively you use the [deferred binding](#deferred-binding):
-
-    // Find the Blog Post model
-    $post = Post::find(1);
-
-    // Look for the postback data 'example_file' in the HTML form above
-    $fileFromPost = Input::file('example_file');
-
-    // If it exists, save it as the featured image with a deferred session key
-    if ($fileFromPost)
-        $post->featured_image()->create(['data' => $fileFromPost], $sessionKey);
-
-Display the uploaded file on a page:
-
-    // Find the Blog Post model again
-    $post = Post::find(1);
-
-    // Look for the featured image address, otherwise use a default one
-    if ($post->featured_image)
-        $featuredImage = $post->featured_image->getPath();
-    else
-        $featuredImage = 'http://placehold.it/220x300';
-
-    <img src="<?= $featuredImage ?>" alt="Featured Image">
-
-<a name="deferred-binding" class="anchor" href="#deferred-binding"></a>
-## Deferred binding
-
-Deferred bindings allow you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
-
-You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/form) automatically, but you may want to use this feature in other places.
-
-<a name="deferred-session-key" class="anchor" href="#deferred-session-key"></a>
-### Generating a session key
-
-The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../cms/markup#forms) generates a hidden field containing the session key automatically.
-
-    $sessionKey = uniqid('session_key', true);
-
-<a name="defer-binding" class="anchor" href="#deferr-binding"></a>
-### Defer a relation binding
-
-The comment in the next example will not be added to the post unless the post is saved.
-
-    $comment = new Comment;
-    $comment->content = "Hello world!";
-    $comment->save();
-
-    $post = new Post;
-    $post->comments()->add($comment, $sessionKey);
-
-> **Note**: the `$post` object has not been saved but the relationship will be created if the saving happens.
-
-<a name="defer-unbinding" class="anchor" href="#defer-unbinding"></a>
-### Defer a relation unbinding
-
-The comment in the next example will not be deleted unless the post is saved.
-
-    $comment = Comment::find(1);
-    $post = Post::find(1);
-    $post->comments()->delete($comment, $sessionKey);
-
-<a name="list-all-bindings" class="anchor" href="#list-all-bindings"></a>
-### List all bindings
-
-Use the `withDeferred()` method of a relation to load all records, including deferred. The results will include existing relations as well.
-
-    $post->comments()->withDeferred($sessionKey)->get();
-
-<a name="cancel-all-bindings" class="anchor" href="#cancel-all-bindings"></a>
-### Cancel all bindings
-
-It's a good idea to cancel deferred binding and delete the slave objects rather than leaving them as orphans.
-
-    $post->cancelDeferred($sessionKey);
-
-<a name="commit-all-bindings" class="anchor" href="#commit-all-bindings"></a>
-### Commit all bindings
-
-You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save()` method.
-
-    $post = new Post;
-    $post->title = "First blog post";
-    $post->save(null, $sessionKey);
-
-The same approach works with the model's `create()` method:
-
-    $post = Post::create(['title' => 'First blog post'], $sessionKey);
-
-<a name="lazily-commit-bindings" class="anchor" href="#lazily-commit-bindings"></a>
-### Lazily commit bindings
-
-If you are unable to supply the `$sessionKey` when saving, you can commit the bindings at any time using the the next code:
-
-    $post->commitDeferred($sessionKey);
-
-<a name="cleanup-bindings" class="anchor" href="#cleanup-bindings"></a>
-### Clean up orphaned bindings
-
-Destroys all bindings that have not been committed and are older than 1 day:
-
-    October\Rain\Database\DeferredBinding::cleanUp(1);
-
-> **Note:** October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
-
-<a name="extending-models" class="anchor" href="#extending-models"></a>
+<a name="extending-models"></a>
 ## Extending models
 
-Models can be extended with the static `extend()` method. The method takes a closure and passes the model object into it. Inside the closure you can add relations to the model::
+Since models are [equipped to use behaviors](../services/behaviors), they can be extended with the static `extend()` method. The method takes a closure and passes the model object into it. Inside the closure you can add relations to the model:
 
     User::extend(function($model) {
         $model->hasOne['author'] = ['Author', 'key' => 'user_id'];
+    });
+
+Or even bind to local events:
+
+    User::extend(function($model) {
+        $model->bindEvent('model.beforeSave', function() use ($model) {
+            // ...
+        });
     });

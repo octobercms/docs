@@ -1,0 +1,99 @@
+Setup:
+  icon: "icon-wrench"
+  pages:
+    setup/installation: "Installation"
+    setup/configuration: "Configuration"
+
+CMS:
+  icon: "icon-magic"
+  pages:
+    cms/themes: "Themes"
+    cms/pages: "Pages"
+    cms/partials: "Partials"
+    cms/layouts: "Layouts"
+    cms/content: "Content blocks"
+    cms/components: "Components"
+    cms/ajax: "AJAX framework"
+    cms/mediamanager: "Media manager"
+    markup: "Markup guide@"
+
+Themes:
+  icon: "icon-picture"
+  pages:
+    themes/development: "Developing themes"
+
+Plugins:
+  icon: "icon-puzzle-piece"
+  pages:
+    plugin/registration: "Registration"
+    plugin/updates: "Version history"
+    plugin/components: "Building components"
+    plugin/settings: "Settings & Config"
+    plugin/localization: "Localization"
+    plugin/scheduling: "Task scheduling"
+    plugin/extending: "Extending plugins"
+
+Backend:
+  icon: "icon-desktop"
+  pages:
+    backend/controllers-ajax: "Controllers & AJAX"
+    backend/views-partials: "Views & Partials"
+    backend/widgets: "Widgets"
+    backend/forms: "Forms"
+    backend/lists: "Lists"
+    backend/relations: "Relations"
+    backend/reorder: "Sorting records"
+    backend/import-export: "Importing & Exporting"
+    backend/users: "Users & Permissions"
+    ui: "User interface guide@"
+
+Database:
+  icon: "icon-hdd"
+  pages:
+    database/basics: "Basic usage"
+    database/structure: "Structure"
+    database/query: "Queries"
+    database/model: "Models"
+    database/relations: "Relationships"
+    database/attachments: "File attachments"
+    database/collection: "Collections"
+    database/mutators: "Mutators"
+    database/serialization: "Serialization"
+    database/traits: "Traits"
+
+Services:
+  icon: "icon-gears"
+  pages:
+    services/application: "Application"
+    services/behaviors: "Behaviors"
+    services/cache: "Cache"
+    services/collections: "Collections"
+    services/error-log: "Errors & Logging"
+    services/events: "Events"
+    services/html: "Forms & Html"
+    services/filesystem-cdn: "Filesystem / CDN"
+    services/hashing-encryption: "Hashing & Encryption"
+    services/helpers: "Helpers"
+    services/mail: "Mail"
+    services/pagination: "Pagination"
+    services/parser: "Parser"
+    services/queues: "Queues"
+    services/request-input: "Request & Input"
+    services/response-view: "Response & View"
+    services/router: "Router"
+    services/session: "Session"
+    services/validation: "Validation"
+
+Console:
+  icon: "icon-terminal"
+  pages:
+    console/commands: "Command list"
+    console/scaffolding: "Scaffolding"
+    console/development: "Development"
+
+Extras:
+  icon: "icon-question-sign"
+  pages:
+    help/unit-testing: "Unit testing"
+    ../help/guidelines/quality: "Quality guidelines@"
+    ../help/guidelines/developer: "Developer guide@"

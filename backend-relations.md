@@ -1,8 +1,17 @@
 # Relations
 
+- [Introduction](#introduction)
 - [Configuring the relation behavior](#configuring-relation)
 - [Relationship types](#relationship-types)
+    - [Has many](#has-many)
+    - [Belongs to many](#belongs-to-many)
+    - [Belongs to many (with Pivot Data)](#belongs-to-many-pivot)
+    - [Belongs to](#belongs-to)
+    - [Has one](#has-one)
 - [Displaying a relation manager](#relation-display)
+
+<a name="introduction"></a>
+## Introduction
 
 `Relation behavior` is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
 
@@ -19,10 +28,11 @@ Relation behavior depends on [relation definitions](#relation-definitions). In o
 
         public $formConfig = 'config_form.yaml';
         public $relationConfig = 'config_relation.yaml';
+    }
 
 > **Note:** Very often the relation behavior is used together with the [form behavior](form).
 
-<a name="configuring-relation" class="anchor" href="#configuring-relation"></a>
+<a name="configuring-relation"></a>
 ## Configuring the relation behavior
 
 The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
@@ -62,7 +72,7 @@ Option | Description
 **readOnly** | disables the ability to add, update, delete or create relations. default: false
 **deferredBinding** | [defers all binding actions using a session key](../database/model#deferred-binding) when it is available. default: false
 
-These configuration values can be specified for the **view** or **manage** options.
+These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
 
 Option | Type | Description
 ------------- | ------------- | -------------
@@ -72,6 +82,8 @@ Option | Type | Description
 **showSorting** | List | displays the sorting link on each column. Default: true
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **recordsPerPage** | List | maximum rows to display for each page.
+**conditions** | List | specifies a raw where query statement to apply to the list model query.
+**scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
 These configuration values can be specified only for the **view** options.
 
@@ -81,16 +93,16 @@ Option | Type | Description
 **recordUrl** | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
-**toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add\|remove**
+**toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Set to `false` to show no buttons. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add\|remove**
 
 These configuration values can be specified only for the **manage** options.
 
 Option | Type | Description
 ------------- | ------------- | -------------
+**title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
-
-<a name="relationship-types" class="anchor" href="#relationship-types"></a>
+<a name="relationship-types"></a>
 ## Relationship types
 
 How the relation manager is displayed depends on the relationship definition in the target model. The relationship type will also determine the configuration requirements, these are shown in **bold**. The following relationship types are available:
@@ -101,7 +113,7 @@ How the relation manager is displayed depends on the relationship definition in 
 - [Belongs to](#belongs-to)
 - [Has one](#has-one)
 
-<a name="has-many" class="anchor" href="#has-many"></a>
+<a name="has-many"></a>
 ### Has many
 
 1. Related records are displayed as a list (**view.list**).
@@ -126,7 +138,7 @@ For example, if a *Blog Post* has many *Comments*, the target model is set as th
             list: $/acme/blog/models/comment/columns.yaml
             toolbarButtons: create|delete
 
-<a name="belongs-to-many" class="anchor" href="#belongs-to-many"></a>
+<a name="belongs-to-many"></a>
 ### Belongs to many
 
 1. Related records are displayed as a list (**view.list**).
@@ -150,7 +162,7 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
             list: $/acme/user/models/role/columns.yaml
             form: $/acme/user/models/role/fields.yaml
 
-<a name="belongs-to-many-pivot" class="anchor" href="#belongs-to-many-pivot"></a>
+<a name="belongs-to-many-pivot"></a>
 ### Belongs to many (with Pivot Data)
 
 1. Related records are displayed as a list (**view.list**).
@@ -199,9 +211,9 @@ Pivot data is available when defining form fields and list columns via the `pivo
                     pivot[team_color]:
                         label: Team color
 
-> **Note:** Pivot data is not supported by [deferred bindings](../database/model#deferred-binding) at this time, so the parent model should exist.
+> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist.
 
-<a name="belongs-to" class="anchor" href="#belongs-to"></a>
+<a name="belongs-to"></a>
 ### Belongs to
 
 1. Related record is displayed as a preview form (**view.form**).
@@ -226,7 +238,7 @@ For example, if a *Phone* belongs to a *Person* the relation manager will displa
             form: $/acme/user/models/person/fields.yaml
             list: $/acme/user/models/person/columns.yaml
 
-<a name="has-one" class="anchor" href="#has-one"></a>
+<a name="has-one"></a>
 ### Has one
 
 1. Related record is displayed as a preview form (**view.form**).
@@ -251,7 +263,7 @@ For example, if a *Person* has one *Phone* the relation manager will display for
             form: $/acme/user/models/phone/fields.yaml
             list: $/acme/user/models/phone/columns.yaml
 
-<a name="relation-display" class="anchor" href="#relation-display"></a>
+<a name="relation-display"></a>
 ## Displaying a relation manager
 
 Before relations can be managed on any page, the target model must first be initialized in the controller by calling the `initRelation()` method.
@@ -266,3 +278,7 @@ The relation manager can then be displayed for a specified relation definition b
     <?= $this->formRenderPreview() ?>
 
     <?= $this->relationRender('comments') ?>
+
+You may instruct the relation manager to render in read only mode by passing the option as the second argument:
+
+    <?= $this->relationRender('comments', ['readOnly' => true]) ?>

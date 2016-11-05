@@ -8,10 +8,10 @@ Plugins can have localization files in the **lang** subdirectory of the plugin d
 
 > **Note**: For translating front-end content, [there are plugins that can be used](http://octobercms.com/plugin/rainlab-translate) for this purpose.
 
-<a name="file-structure" class="anchor" href="#file-structure"></a>
+<a name="file-structure"></a>
 ## Localization directory and file structure
 
-Below is an example of the of the plugin's lang directory:
+Below is an example of the plugin's lang directory:
 
     plugins/
       acme/
@@ -34,14 +34,14 @@ The **lang.php** file should define and return an array of any depth, for exampl
         ]
     ];
 
-<a name="accessing-strings" class="anchor" href="#accessing-strings"></a>
+<a name="accessing-strings"></a>
 ## Accessing localization strings
 
 The localization strings can be loaded with the `Lang` class. The parameter it accepts is the localization key string that consists of the plugin name, the localization file name and the path to the localization string inside the array returned from the file. The next example loads the **app.name** string from the plugins/acme/blog/lang/en/lang.php file (the language is set with the `locale` parameter in the `config/app.php` configuration file):
 
     echo Lang::get('acme.blog::lang.app.name');
 
-<a name="overriding" class="anchor" href="#overriding"></a>
+<a name="overriding"></a>
 ## Overriding localization strings
 
 System users can override plugin localization strings without altering the plugins' files. This is done by adding localization files to the **lang** directory. For example, to override the lang.php file of the **acme/blog** plugin you should create the file in the following location:

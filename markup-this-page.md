@@ -6,6 +6,12 @@ You can access the current page object via `this.page` and it returns the object
 
 `this.page` has the following properties.
 
+### layout
+
+Reference to the layout name used by this page, if defined. Not to be confused with `this.layout`.
+
+    {{ this.page.layout }}
+
 ### id
 
 Converts the page file name and folder name to a CSS friendly identifier.

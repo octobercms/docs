@@ -3,11 +3,12 @@
 - [Introduction](#introduction)
 - [Placeholders](#placeholders)
 - [Dynamic layouts](#dynamic-layouts)
+    - [Layout execution life cycle](#layout-life-cycle)
+
+<a name="introduction"></a>
+## Introduction
 
 Layouts define the page scaffold, that is everything that repeats on a page, such as a header and footer. Layouts often contain the HTML tag as well as the HEAD, TITLE and BODY tags.
-
-<a name="introduction" class="anchor" href="#introduction"></a>
-## Introduction
 
 Layout templates reside in the **/layouts** subdirectory of a theme directory. Layout template files should have the **htm** extension. Inside the layout file you should use the `{% page %}` tag to output the page content. Simplest layout example:
 
@@ -17,7 +18,7 @@ Layout templates reside in the **/layouts** subdirectory of a theme directory. L
         </body>
     </html>
 
-To use a layout for a [page](pages) the page should refer the layout file name (without extension) in the [Configuration](themes#configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes#subdirectories) you should specify the subdirectory name. Example page template using the default.md layout:
+To use a layout for a [page](pages) the page should refer the layout file name (without extension) in the [Configuration](themes#configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes#subdirectories) you should specify the subdirectory name. Example page template using the default.htm layout:
 
     url = "/"
     layout = "default"
@@ -44,7 +45,7 @@ The [Configuration](themes#configuration-section) section is optional for layout
         </body>
     </html>
 
-<a name="placeholders" class="anchor" href="#placeholders"></a>
+<a name="placeholders"></a>
 ## Placeholders
 
 Placeholders allow pages to inject content to the layout. Placeholders are defined in the layout templates with the `{% placeholder %}` tag. The next example shows a layout template with a placeholder **head** defined in the HTML HEAD section.
@@ -68,12 +69,12 @@ Pages can inject content to placeholders with the `{% put %}` and `{% endput %}`
 
 More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder).
 
-<a name="dynamic-layouts" class="anchor" href="#dynamic-layouts"></a>
+<a name="dynamic-layouts"></a>
 ## Dynamic layouts
 
 Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
 
-<a name="layout-life-cycle" class="anchor" href="#layout-life-cycle"></a>
+<a name="layout-life-cycle"></a>
 ### Layout execution life cycle
 
 Inside the layout's [PHP section](themes#php-section) you can define the following functions for handling the page execution life cycle: `onInit()`, `onStart()`, `onBeforePageStart()` and `onEnd()`.
