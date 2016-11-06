@@ -343,6 +343,20 @@ Supplying the dropdown options to the model class:
         return ['published' => 'Published', ...];
     }
 
+To specify the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        emptyOption: -- no status --
+
+Alternatively you may use the `placeholder` option to use a "one-way" empty option that cannot be reselected.
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        placeholder: -- select a status --
+
 By default the dropdown has a searching feature, allowing quick selection of a value. This can be disabled by setting the `showSearch` option to `false`.
 
     status:
