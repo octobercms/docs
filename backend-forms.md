@@ -343,7 +343,7 @@ Supplying the dropdown options to the model class:
         return ['published' => 'Published', ...];
     }
 
-To specify the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
+To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
     status:
         label: Blog Post Status

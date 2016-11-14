@@ -461,6 +461,14 @@ The behavior will invoke a `Lists` widget that also contains numerous views that
 
 > **Note**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
 
+For example, to modify the list body row markup, create a file called `list/_list_body_row.htm` in your controller directory.
+
+    <tr>
+        <?php foreach ($columns as $key => $column): ?>
+            <td><?= $this->getColumnValue($record, $column) ?></td>
+        <?php endforeach ?>
+    </tr>
+
 <a name="extend-list-columns"></a>
 ### Extending column definitions
 
