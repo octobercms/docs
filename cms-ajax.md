@@ -59,7 +59,7 @@ The form configuration from the previous example could be read like this: "When 
 <a name="ajax-handlers"></a>
 ## AJAX handlers
 
-AJAX handlers are PHP functions that can be defined in the page or layout [PHP section](themes#php-section) or inside [components](components). Handler names should have the following pattern: `onName`. Handlers can inject variables the Twig environment, where they can be used during the partial rendering. The next example shows an Ajax handler defined in the page PHP section. The handler loads two POST values and injects the **result** page variable.
+AJAX handlers are PHP functions that can be defined in the page or layout [PHP section](themes#php-section) or inside [components](components). Handler names should have the following pattern: `onName`. Handlers can inject variables the Twig environment, where they can be used during the partial rendering. The next example shows an AJAX handler defined in the page PHP section. The handler loads two POST values and injects the **result** page variable.
 
     url = "js"
     layout = "default"
@@ -72,9 +72,11 @@ AJAX handlers are PHP functions that can be defined in the page or layout [PHP s
     }
     ==
 
-> **Note:** If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
+> **Note:** The variable `$this[]` is used to pass values to the page, when using [AJAX handlers in components](../plugin/components#ajax-handlers) the property `$this->page[]` should be used instead.
 
-The `onInit()` methods found in the [page execution life cycle](layouts#dynamic-pages) can be used for defining code that always executes before an AJAX event is handled.
+If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](components) have the lowest priority.
+
+The `onInit()` method found in the [page execution life cycle](layouts#dynamic-pages) can be used for defining code that always executes before an AJAX event is handled.
 
     function onInit()
     {
