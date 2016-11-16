@@ -2,7 +2,7 @@
 
 - [Form validation](#ajax-validation)
     - [Throwing a validation error](#throw-validation-exception)
-    - [Displaying the first error](#error-message)
+    - [Displaying error messages](#error-messages)
     - [Displaying errors with fields](#field-errors)
 - [Loading button](#loader-button)
 - [Flash messages](#ajax-flash)
@@ -42,14 +42,14 @@ You may also pass an instance of the [Validation service](../services/validation
         }
     }
 
-<a name="error-message"></a>
-### Displaying the first error
+<a name="error-messages"></a>
+### Displaying error messages
 
-Inside the form, you may display the first error message by using the `data-validate-error` attribute on a container element.
+Inside the form, you may display the first error message by using the `data-validate-error` attribute on a container element. The content inside the container will be set to the error message and the element will be made visible.
 
     <div class="alert alert-danger" data-validate-error></div>
 
-To use a wrapper element include an element with the `data-message` attribute. In this example the message will be appended to the paragraph and the parent container will only show with an error.
+To display multiple error messages, include an element with the `data-message` attribute. In this example the paragraph tag will be duplicated and set with content for each message that exists.
 
     <div class="alert alert-danger" data-validate-error>
         <p data-message></p>
