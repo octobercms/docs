@@ -16,7 +16,7 @@ Validating forms and other features are available via the data attributes API, w
 You may specify the `data-request-validate` attribute on a form to enable validation features.
 
     <form
-        data-request="onSuccess"
+        data-request="onSubmit"
         data-request-validate>
         <!-- ... -->
     </form>
@@ -26,27 +26,30 @@ You may specify the `data-request-validate` attribute on a form to enable valida
 
 You may throw an exception using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error message for the values.
 
-    function onSuccess()
+    function onSubmit()
     {
         throw new ValidationException(['name' => 'You must give a name!']);
     }
 
 You may also pass an instance of the [Validation service](../services/validation) to the exception.
 
-    $validator = Validator::make(...);
+    function onSubmit()
+    {
+        $validator = Validator::make(...);
 
-    if ($validator->fails()) {
-        throw new ValidationException($validator);
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
     }
 
 <a name="error-message"></a>
 ### Displaying the first error
 
-Alternatively, you may display the first error message by using the `data-validate-error` attribute on a container element.
+Inside the form, you may display the first error message by using the `data-validate-error` attribute on a container element.
 
     <div class="alert alert-danger" data-validate-error></div>
 
-To use a wrapper element use an element with the `data-message` attribute. In this example the message will be appended to the paragraph and the parent container will only show with an error.
+To use a wrapper element include an element with the `data-message` attribute. In this example the message will be appended to the paragraph and the parent container will only show with an error.
 
     <div class="alert alert-danger" data-validate-error>
         <p data-message></p>
@@ -55,7 +58,7 @@ To use a wrapper element use an element with the `data-message` attribute. In th
 <a name="field-errors"></a>
 ### Displaying errors with fields
 
-You can show validation messages for individual fields by defining an element that uses the `data-validate-for` attribute, passing the field name as the value.
+Alternatively, you can show validation messages for individual fields by defining an element that uses the `data-validate-for` attribute, passing the field name as the value.
 
     <!-- Input field -->
     <input name="phone" />
@@ -65,12 +68,14 @@ You can show validation messages for individual fields by defining an element th
 
 If the element is left empty, it will be populated with the validation text from the server. Otherwise you can specify any text you like and it will be displayed instead.
 
-    <div data-validate-for="phone">Oops.. phone number is invalid!</div>
+    <div data-validate-for="phone">
+        Oops.. phone number is invalid!
+    </div>
 
 <a name="loader-button"></a>
 ## Loading button
 
-When any element contains the `data-attach-loading` attribute, the CSS class `oc-loader` will be added to during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
+When any element contains the `data-attach-loading` attribute, the CSS class `oc-loader` will be added to it during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
 
     <form data-request="onSubmit">
         <button data-attach-loading>
@@ -84,7 +89,6 @@ When any element contains the `data-attach-loading` attribute, the CSS class `oc
         data-attach-loading>
         Do something
     </a>
-
 
 <a name="ajax-flash"></a>
 ## Flash messages
