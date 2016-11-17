@@ -72,7 +72,7 @@ You can also pass partials to update as another array:
         ]
     ])
 
-> Most [data attributes from the AJAX framework](../cms/ajax#data-attributes) are available here by dropping the `data-request-` prefix.
+> **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api) are available here by dropping the `data-request-` prefix.
 
 <a name="form-tokens"></a>
 ## Form tokens

@@ -13,9 +13,18 @@ CMS:
     cms/layouts: "Layouts"
     cms/content: "Content blocks"
     cms/components: "Components"
-    cms/ajax: "AJAX framework"
     cms/mediamanager: "Media manager"
     markup: "Markup guide@"
+
+AJAX:
+  icon: "icon-bolt"
+  pages:
+    ajax/introduction: "Introduction"
+    ajax/handlers: "Event handlers"
+    ajax/update-partials: "Updating partials"
+    ajax/attributes-api: "Data attributes API"
+    ajax/javascript-api: "JavaScript API"
+    ajax/extras: "Extra features"
 
 Themes:
   icon: "icon-picture"

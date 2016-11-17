@@ -117,31 +117,32 @@ You can set the title of the back-end page with the `$pageTitle` property of the
 <a name="ajax"></a>
 ## Using AJAX handlers
 
-The back-end AJAX framework uses the same [AJAX library](../cms/ajax) as the front-end pages. The library is loaded automatically on the back-end pages.
+The back-end AJAX framework uses the same [AJAX library](../ajax/introduction) as the front-end pages. The library is loaded automatically on the back-end pages.
 
 <a name="ajax-handlers"></a>
 ### Back-end AJAX handlers
 
 The back-end AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
 
-Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see the [front-end AJAX library](../cms/ajax)). You can use the controller's `makePartial()` method to render a partial and return its contents as a part of the response data.
+Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers)). You can use `$this->vars` to set variables and the controller's `makePartial()` method to render a partial and return its contents as a part of the response data.
 
     public function onOpenTemplate()
     {
-        if (Request::input('someVar') != 'someValue')
+        if (Request::input('someVar') != 'someValue') {
             throw new ApplicationException('Invalid value');
+        }
+
+        $this->vars['foo'] = 'bar';
 
         return [
-            'partialContents' => $this->makePartial('some_partial', [
-                'var' => 'value'
-            ])
+            'partialContents' => $this->makePartial('some-partial')
         ];
     }
 
 <a name="triggering-ajax-requests"></a>
 ### Triggering AJAX requests
 
-The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [front-end AJAX library](../cms/ajax) for details. The following example shows how to trigger a request with a back-end button.
+The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [front-end AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a back-end button.
 
     <button
         type="button"
@@ -149,3 +150,5 @@ The AJAX request can be triggered with the data attributes API or the JavaScript
         class="btn btn-default">
         Do something
     </button>
+
+> **Note**: You can specifically target the AJAX handler of a widget using a preix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#generic-ajax-handlers) for more details.

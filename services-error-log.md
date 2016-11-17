@@ -84,11 +84,12 @@ The `October\Rain\Exception\ValidationException` class, aliased as `ValidationEx
 You can also pass an instance of the [validation service](validation).
 
     $validation = Validator::make(...);
+
     if ($validation->fails()) {
         throw new ValidationException($validation);
     }
 
-When this exception is thrown the [AJAX framework](../cms/ajax) will provide this information in a usable format and focus the first invalid field.
+When this exception is thrown the [AJAX framework](../ajax/introduction) will provide this information in a usable format and focus the first invalid field.
 
 <a name="ajax-exception"></a>
 ### AJAX exception
@@ -97,7 +98,7 @@ The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is
 
     throw new AjaxException(['#flashMessages' => $this->renderPartial(...)]);
 
-When this exception is thrown the [AJAX framework](../cms/ajax) will follow the standard error workflow but will also refresh specified partials.
+When this exception is thrown the [AJAX framework](../ajax/introduction) will follow the standard error workflow but will also refresh specified partials.
 
 <a name="exception-handling"></a>
 ## Exception handling

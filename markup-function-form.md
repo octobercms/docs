@@ -40,7 +40,7 @@ Option | Description
 
 ## form_ajax()
 
-Outputs an AJAX enabled FORM opening tag. The first parameter of the `form_ajax()` function is the AJAX handler name. The handler can be defined in the layout or page [PHP section](../cms/themes#php-section) code, it can also be defined in a component. You may find more information about AJAX in the [AJAX Framework](../cms/ajax) article.
+Outputs an AJAX enabled FORM opening tag. The first parameter of the `form_ajax()` function is the AJAX handler name. The handler can be defined in the layout or page [PHP section](../cms/themes#php-section) code, it can also be defined in a component. You may find more information about AJAX in the [AJAX Framework](../ajax/introduction) article.
 
     {{ form_ajax('onUpdate') }}
 

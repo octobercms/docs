@@ -1,4 +1,4 @@
- # Developer Guide
+# Developer Guide
 
 - [Writing documentation](#writing-docs)
 - [Developer standards and patterns](#developer-standards)

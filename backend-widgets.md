@@ -78,12 +78,16 @@ Alternatively you may pass the variables to the second parameter of the makePart
 <a name="generic-ajax-handlers"></a>
 ### AJAX handlers
 
-Widgets implement the same AJAX approach as the [back-end controllers](controllers-views-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler()` in order to get the widget's handler name when you refer to it in the widget partials. Example:
+Widgets implement the same AJAX approach as the [back-end controllers](controllers-views-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler()` to return the widget's handler name when you refer to it in the widget partials.
 
     <a
         href="javascript:;"
         data-request="<?= $this->getEventHandler('onPaginate') ?>"
         title="Next page">Next</a>
+
+When called from a widget class or partial the AJAX handler will target itself. For example, if the widget uses the alias of **mywidget** the handler will be targeted with `mywidget::onName`. The above would output the following attribute value:
+
+    data-request="mywidget::onPaginate"
 
 <a name="generic-binding"></a>
 ### Binding widgets to controllers
