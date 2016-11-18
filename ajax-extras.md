@@ -9,10 +9,7 @@
 - [Flash messages](#ajax-flash)
 - [Usage example](#usage-example)
 
-
-<!-- Extra AJAX features are available via the data attributes API, when using the `{% framework extras %}` tag in your page or layout.  -->
-
-When including the AJAX framework, you have the option to specify an **extras** option that will includes additional StyleSheet and JavaScript files that are useful when working with AJAX requests. These features only apply to front-end pages and are described in more detail below.
+When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in front-end CMS pages.
 
     {% framework extras %}
 
