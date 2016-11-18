@@ -52,7 +52,7 @@ There are small changes required to configure your site in Nginx.
 Use the following code in **server** section. If you have installed October into a subdirectory, replace `/` with the directory October was installed under:
 
     location / {
-        try_files $uri $uri/ /index.php$is_args$args;
+        try_files $uri /index.php$is_args$args;
     }
 
     rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
