@@ -31,15 +31,10 @@ The `{% framework %}` tag supports the optional **extras** parameter. If this pa
 A page can issue an AJAX request either prompted by data attributes or by using JavaScript. Each request invokes an **event handler** -- also called an [AJAX handler](../ajax/handlers) -- on the server and can update page elements using partials. AJAX requests work best with forms, since the form data is automatically sent to the server. Here is request workflow:
 
 1. The client browser issues an AJAX request by providing the handler name, and optionally other parameters.
-
 2. The server finds the [AJAX handler](../ajax/handlers) and executes it.
-
 3. The handler executes the required business logic and updates the environment by injecting page variables.
-
 4. The server [renders partials requested](../ajax/update-partials) by the client with the `update` option.
-
 5. The server sends the response, containing the rendered partials markup.
-
 6. The client-side framework updates page elements with the partials data received from the server.
 
 > **Note**: Depending on the page context a [CMS partial](../cms/partials) or [backend partial](../backend/views-partials) view will be rendered.
