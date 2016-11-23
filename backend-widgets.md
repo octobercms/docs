@@ -225,14 +225,14 @@ The main purpose of the form widget is to interact with your model, which means 
         return $this->makePartial('myformwidget');
     }
 
-At a basic level the form widget can send its value back when saving data using an input element. From the above example, inside the **myformwidget** partial the element can be rendered using the prepared variables.
+At a basic level the form widget can send the user input value back using an input element. From the above example, inside the **myformwidget** partial the element can be rendered using the prepared variables.
 
     <input id="<?= $id ?>" name="<?= $name ?>" value="<?= e($value) ?>" />
 
 <a name="form-widget-save-data"></a>
 ### Saving form data
 
-When the time comes to take the user input and store it in the database, the form widget will call the `getSaveValue` internally to request the value. You may modify this behavior simply override the method in your form widget class.
+When the time comes to take the user input and store it in the database, the form widget will call the `getSaveValue` internally to request the value. To modify this behavior simply override the method in your form widget class.
 
     public function getSaveValue($value)
     {

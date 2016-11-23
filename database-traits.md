@@ -138,18 +138,13 @@ The revision history can be accessed like any other relation:
         echo 'from ' . $record->old_value;
         echo 'to ' . $record->new_value;
     }
-    
-You may want to keep track of the user that did the modification. To do so add a `getRevisionableUser` function to your model.
 
-```
-    /**
-     * The user who made the revision.
-     */
+The revision record optionally supports a user relationship using the `user_id` attribute. You may include a `getRevisionableUser` method in your model to keep track of the user that made the modification.
+
     public function getRevisionableUser()
     {
         return BackendAuth::getUser()->id;
     }
-```
 
 <a name="sortable"></a>
 ## Sortable
