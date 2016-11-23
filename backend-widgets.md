@@ -8,6 +8,7 @@
     - [Class definition](#form-class-definition)
     - [Form widget properties](#form-widget-properties)
     - [Form widget registration](#form-widget-registration)
+    - [Form widget saving data](#form-widget-saving-data)
 - [Report Widgets](#report-widgets)
     - [Report widget classes](#report-class-definition)
     - [Report widget properties](#report-properties)
@@ -206,6 +207,31 @@ Plugins should register form widgets by overriding the `registerFormWidgets()` m
     }
 
 The short code is optional and can be used when referencing the widget in the [Form field definitions](forms#field-widget), it should be a unique value to avoid conflicts with other form fields.
+
+<a name="form-widget-saving-data"></a>
+### Form widget saving data
+The main purpose of the form widget is to interact with your model, which means in most of the case saving the value you get into the database. Simply define the `getSaveValue` function that take the user input and return the value to store in the database.
+
+```
+/**
+ * {@inheritDoc}
+ */
+ public function getSaveValue($value)
+ {
+     return $value;
+ }
+```
+However, sometimes your want to create a __Display only form widget__. To do so, you must return the constant `FormField::NO_SAVE_DATA` instead.
+
+```
+/**
+ * {@inheritDoc}
+ */
+ public function getSaveValue($value)
+ {
+     return FormField::NO_SAVE_DATA;
+ }
+```
 
 <a name="report-widgets"></a>
 ## Report Widgets
