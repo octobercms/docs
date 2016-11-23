@@ -8,7 +8,8 @@
     - [Class definition](#form-class-definition)
     - [Form widget properties](#form-widget-properties)
     - [Form widget registration](#form-widget-registration)
-    - [Form widget saving data](#form-widget-saving-data)
+    - [Loading form data](#form-widget-load-data)
+    - [Saving form data](#form-widget-save-data)
 - [Report Widgets](#report-widgets)
     - [Report widget classes](#report-class-definition)
     - [Report widget properties](#report-properties)
@@ -65,6 +66,7 @@ To pass variables to partials you can either add them to the `$vars` property.
     public function render()
     {
         $this->vars['var'] = 'value';
+
         return $this->makePartial('list');
     }
 
@@ -73,6 +75,7 @@ Alternatively you may pass the variables to the second parameter of the makePart
     public function render()
     {
         $this->vars['var'] = $value;
+
         return $this->makePartial('list', ['var' => 'value']);
     }
 
@@ -208,30 +211,40 @@ Plugins should register form widgets by overriding the `registerFormWidgets()` m
 
 The short code is optional and can be used when referencing the widget in the [Form field definitions](forms#field-widget), it should be a unique value to avoid conflicts with other form fields.
 
-<a name="form-widget-saving-data"></a>
-### Form widget saving data
-The main purpose of the form widget is to interact with your model, which means in most of the case saving the value you get into the database. Simply define the `getSaveValue` function that take the user input and return the value to store in the database.
+<a name="form-widget-load-data"></a>
+### Loading form data
 
-```
-/**
- * {@inheritDoc}
- */
- public function getSaveValue($value)
- {
-     return $value;
- }
-```
-However, sometimes your want to create a __Display only form widget__. To do so, you must return the constant `FormField::NO_SAVE_DATA` instead.
+The main purpose of the form widget is to interact with your model, which means in most cases loading and saving the value via the database. When a form widget renders, it will request its stored value using the `getLoadValue` method. The `getId` and `getFieldName` methods will return a unique identifier and name for a HTML element used in the form. These values are often passed to the widget partial at render time.
 
-```
-/**
- * {@inheritDoc}
- */
- public function getSaveValue($value)
- {
-     return FormField::NO_SAVE_DATA;
- }
-```
+    public function render()
+    {
+        $this->vars['id'] = $this->getId();
+        $this->vars['name'] = $this->getFieldName();
+        $this->vars['value'] = $this->getLoadValue();
+
+        return $this->makePartial('myformwidget');
+    }
+
+At a basic level the form widget can send its value back when saving data using an input element. From the above example, inside the **myformwidget** partial the element can be rendered using the prepared variables.
+
+    <input id="<?= $id ?>" name="<?= $name ?>" value="<?= e($value) ?>" />
+
+<a name="form-widget-save-data"></a>
+### Saving form data
+
+When the time comes to take the user input and store it in the database, the form widget will call the `getSaveValue` internally to request the value. You may modify this behavior simply override the method in your form widget class.
+
+    public function getSaveValue($value)
+    {
+         return $value;
+    }
+
+In some cases you intentionally don't want any value to be given, for example, a form widget that displays information without saving anything. Return the special constant called `FormField::NO_SAVE_DATA` derived from the `Backend\Classes\FormField` class to have the value ignored.
+
+    public function getSaveValue($value)
+    {
+         return \Backend\Classes\FormField::NO_SAVE_DATA;
+    }
 
 <a name="report-widgets"></a>
 ## Report Widgets
