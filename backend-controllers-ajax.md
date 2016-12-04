@@ -151,4 +151,4 @@ The AJAX request can be triggered with the data attributes API or the JavaScript
         Do something
     </button>
 
-> **Note**: You can specifically target the AJAX handler of a widget using a preix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#generic-ajax-handlers) for more details.
+> **Note**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#generic-ajax-handlers) for more details.
