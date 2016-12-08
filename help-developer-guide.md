@@ -223,7 +223,7 @@ When processing or filtering over a value, use the data holder pattern to pass t
 
     // Pass content to events by reference
     $dataHolder = (object) ['content' => $content];
-    $this->fireEvent('cms.processContent', [$dataHolder]);
+    $this->fireEvent('processContent', [$dataHolder]);
     Event::fire('cms.processContent', [$this, $dataHolder]);
     $content = $dataHolder->content;
 
