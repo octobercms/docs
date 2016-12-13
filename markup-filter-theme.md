@@ -29,8 +29,8 @@ The asset combiner supports common aliases that substitute file paths, these wil
         '@jquery',
         '@framework',
         '@framework.extras',
-        'assets/javascript/app.js
-    ']|theme }}"></script>
+        'assets/javascript/app.js'
+    ]|theme }}"></script>
 
 The following aliases are supported:
 
