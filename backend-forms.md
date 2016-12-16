@@ -891,7 +891,7 @@ This example is useful for manipulating the model values, but it does not have a
 
 ### Preventing a field from being submitted
 
-Sometimes you may need to prevent a field from being submitted. In order to do that, just ad an underscore before the name of the filed in the form configuration file:
+Sometimes you may need to prevent a field from being submitted. In order to do that, just ad an underscore (\_) before the name of the filed in the form configuration file. Form fields beginning with an underscore are purged automatically and no longer saved to the model.
 
     address:
         label: Title
