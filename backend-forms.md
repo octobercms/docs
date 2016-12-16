@@ -889,6 +889,18 @@ In the above example the `state` form field will refresh when the `country` fiel
 
 This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields()` method inside the model, described in the [Filtering form fields](#filter-form-fields) section.
 
+### Preventing a field from being submitted
+
+Sometimes you may need to prevent a field from being submitted. In order to do that, just ad an underscore before the name of the filed in the form configuration file:
+
+    address:
+        label: Title
+        type: text
+
+    _map:
+        label: Point your address on the map
+        type: mapviewer
+
 <a name="extend-form-behavior"></a>
 ## Extending form behavior
 
