@@ -143,7 +143,8 @@ Just like [setting navigation context in the controller](../backend/controllers-
 
         [...]
 
-        SettingsManager::setContext('October.Backend', 'editor');
+        BackendMenu::setContext('October.System', 'system', 'settings');
+        SettingsManager::setContext('You.Plugin', 'settings');
     }
 
 The first argument of the `setContext()` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#link-registration).
