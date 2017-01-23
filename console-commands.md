@@ -46,7 +46,7 @@ Or if you don't have curl:
 
 Download the application source code by using `create-project` in your terminal. The following command will install to a directory called **/myoctober**.
 
-    composer create-project october/october myoctober dev-master
+    composer create-project october/october myoctober
 
 Once this task has finished, open the file **config/cms.php** and enable the `disableCoreUpdates` setting. This will disable core updates from being delivered by the October gateway.
 
