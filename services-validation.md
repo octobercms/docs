@@ -11,7 +11,7 @@
 <a name="basic-usage"></a>
 ## Basic usage
 
-The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validation` class.
+The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class.
 
 #### Basic Validation Example
 
