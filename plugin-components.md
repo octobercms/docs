@@ -213,11 +213,13 @@ Sometimes components need to create links to the website pages. For example, the
 
     public function defineProperties()
     {
-            'postPage' => [
-                'title' => 'Post page',
-                'type' => 'dropdown',
-                'default' => 'blog/post'
-            ]
+            return [
+                'postPage' => [
+                    'title' => 'Post page',
+                    'type' => 'dropdown',
+                    'default' => 'blog/post'
+                ]
+            ];
     }
 
     public function getPostPageOptions()
@@ -228,7 +230,7 @@ Sometimes components need to create links to the website pages. For example, the
 <a name="routing-parameters"></a>
 ## Routing parameters
 
-Components can directly access routing parameter values defined the [URL of the page](../cms/pages#url-syntax).
+Components can directly access routing parameter values defined in the [URL of the page](../cms/pages#url-syntax).
 
     // Returns the URL segment value, eg: /page/:post_id
     $postId = $this->param('post_id');
@@ -310,7 +312,7 @@ Like all methods in the [page execution life cycle](../cms/layouts#layout-life-c
 <a name="ajax-handlers"></a>
 ## AJAX handlers
 
-Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../cms/ajax#ajax-handlers). An example AJAX handler method defined in a component class:
+Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../ajax/handlers). An example AJAX handler method defined in a component class:
 
     public function onAddItem()
     {
@@ -319,7 +321,7 @@ Components can host AJAX event handlers. They are defined in the component class
         $this->page['result'] = $value1 + $value2;
     }
 
-If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItems`. Please see the [Calling AJAX handlers defined in components](../cms/ajax#components-ajax-handlers) article for details about using AJAX with components.
+If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItems`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers#calling-handlers) article for details about using AJAX with components.
 
 <a name="default-markup"></a>
 ## Default markup
@@ -408,7 +410,7 @@ You may programmatically render component partials inside the PHP code using the
         'name' => 'John Smith'
     ]);
 
-For example, to render a partial as a response to an [AJAX handler](../cms/ajax#ajax-handlers):
+For example, to render a partial as a response to an [AJAX handler](../ajax/handlers):
 
     function onGetTemplate()
     {

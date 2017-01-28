@@ -691,7 +691,19 @@ The `trace_log` function writes a trace message to the log file.
 
     trace_log('This code has passed...');
 
-<a name="method-trace-sql"></a>
+The function supports passing exceptions, arrays and objects:
+
+    trace_log($exception);
+
+    trace_log($array);
+
+    trace_log($object);
+
+You may also pass multiple arguments to trace multiple messages:
+
+    trace_log($value1, $value2, $exception, '...');
+
+<a name="method-trace-log"></a>
 #### `trace_sql()` {#collection-method}
 
 The `trace_sql` function enables database logging and begins to monitor all SQL output.

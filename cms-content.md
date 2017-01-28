@@ -2,7 +2,8 @@
 
 - [Introduction](#introduction)
 - [Rendering content blocks](#rendering-content-blocks)
-- [Passing variables to content blocks](#variables)
+- [Passing variables to content blocks](#content-variables)
+    - [Global variables](#content-global-variables)
 
 Content blocks are text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout. They are designed to hold static content only and support basic templating variables. [Partials](partials) are more flexible and should be used for generating dynamic content.
 
@@ -30,7 +31,7 @@ Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pag
         {% content 'contacts.htm' %}
     </div>
 
-<a name="variables"></a>
+<a name="content-variables"></a>
 ## Passing variables to content blocks
 
 Sometimes you may need to pass variables to a content block from the external code. While content blocks do not support the use of Twig markup, they do support using variables with a basic syntax. You can pass variables to content blocks by specifying them after the content block name in the `{% content %}` tag:
@@ -42,3 +43,12 @@ Inside the content block, variables can be accessed using singular *curly bracke
     <h1>This is a demo for {name}</h1>
 
 More information can be found [in the Markup guide](../markup/tag-content).
+
+<a name="content-global-variables"></a>
+### Global variables
+
+You may register variables that are globally available to all content blocks with the `View::share` method.
+
+    View::share('site_name', 'OctoberCMS');
+
+This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{site_name}` will be available inside all content blocks.

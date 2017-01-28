@@ -23,20 +23,20 @@ The filter can also be used to combine assets of the same type by passing an arr
 <a name="combiner-aliases"></a>
 ### Combiner aliases
 
-The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../cms/ajax#introduction) can be included in the combiner:
+The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../ajax/introduction#framework-script) can be included in the combiner:
 
     <script src="{{ [
         '@jquery',
         '@framework',
         '@framework.extras',
-        'assets/javascript/app.js
-    ']|theme }}"></script>
+        'assets/javascript/app.js'
+    ]|theme }}"></script>
 
 The following aliases are supported:
 
 Alias | Description
 ------------- | -------------
-`@jquery` | Reference to the jQuery library used in the back-end. (JavaScript)
+`@jquery` | Reference to the jQuery library (v2.1.3) used in the back-end. (JavaScript)
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
 

@@ -32,7 +32,7 @@ Hashed attributes are hashed immediately when the attribute is first set on the 
 <a name="purgeable"></a>
 ## Purgeable
 
-Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to hash.
+Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to purge.
 
     class User extends Model
     {
@@ -139,15 +139,27 @@ The revision history can be accessed like any other relation:
         echo 'to ' . $record->new_value;
     }
 
+The revision record optionally supports a user relationship using the `user_id` attribute. You may include a `getRevisionableUser` method in your model to keep track of the user that made the modification.
+
+    public function getRevisionableUser()
+    {
+        return BackendAuth::getUser()->id;
+    }
+
 <a name="sortable"></a>
 ## Sortable
 
-Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. The store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait.
+Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
 
     class User extends Model
     {
         use \October\Rain\Database\Traits\Sortable;
     }
+    
+
+You may modify the key name used to identify the sort order by defining the `SORT_ORDER` constant:
+
+    const SORT_ORDER = 'my_sort_order_column';
 
 Use the `setSortableOrder` method to set the orders on a single record or multiple records.
 
@@ -340,11 +352,11 @@ You can also create custom validation rules the [same way](../services/validatio
 <a name="soft-deleting"></a>
 ## Soft deleting
 
-When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDeleting` trait to the model and add the deleted_at column to your `$dates` property:
+When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\SoftDeleting;
+        use \October\Rain\Database\Traits\SoftDelete;
 
         protected $dates = ['deleted_at'];
     }
@@ -405,6 +417,27 @@ Sometimes you may need to truly remove a model from your database. To permanentl
 
     // Force deleting all related models...
     $user->posts()->forceDelete();
+
+<a name="soft-deleting-relations"></a>
+### Soft deleting relations
+
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+
+    class User extends Model
+    {
+        use \October\Rain\Database\Traits\SoftDelete;
+
+        public $hasMany = [
+            'comments' => ['Acme\Blog\Models\Comment', 'softDelete' => true]
+        ];
+    }
+
+> **Note:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+
+Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
+
+    // Restore the user and comments
+    $user->restore();
 
 <a name="nullable"></a>
 ## Nullable

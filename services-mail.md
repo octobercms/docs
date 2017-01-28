@@ -10,6 +10,7 @@
     - [Mail templates](#mail-templates)
     - [Mail layouts](#mail-layouts)
     - [Registering mail templates](#mail-template-registration)
+    - [Global variables](#mail-global-variables)
 - [Mail & local development](#mail-and-local-development)
 
 <a name="introduction"></a>
@@ -324,6 +325,15 @@ Mail views can be registered as templates that are automatically generated in th
     }
 
 The method should return an array where the key is the [mail view name](#mail-views) and the value gives a brief description about what the mail template is used for.
+
+<a name="mail-global-variables"></a>
+### Global variables
+
+You may register variables that are globally available to all mail templates with the `View::share` method.
+
+    View::share('site_name', 'OctoberCMS');
+
+This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 
 <a name="mail-and-local-development"></a>
 ## Mail & local development

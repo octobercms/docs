@@ -101,7 +101,7 @@ Option | Description
 **list** | defines the list columns available for exporting.
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the export is complete, optional.
-**useList** | set to true or the value of a list definition to enable [integration with Lists](#lists-integration), default: false.
+**useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
 
 <a name="import-export-views"></a>
 ## Import and export views
@@ -216,7 +216,7 @@ For exporting data you should create a dedicated model which extends the `Backen
         }
     }
 
-The class must define a method called `exportData()` used for returning the export data. The first parameter `$columns` is an of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
+The class must define a method called `exportData()` used for returning the export data. The first parameter `$columns` is an array of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
 
 <a name="custom-options"></a>
 ## Custom options
@@ -271,3 +271,18 @@ If you are using [multiple list definitions](lists#multiple-list-definitions), t
     export:
         useList: orders
         fileName: orders.csv
+
+The `useList` option also supports extended configuration options.
+
+
+    export:
+        useList:
+            definition: orders
+            raw: true
+
+The following configuration options are supported:
+
+Option | Description
+------------- | -------------
+**definition** | the list definition to source records from, optional.
+**raw** | output the raw attribute values from the record, default: false.

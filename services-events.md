@@ -1,54 +1,56 @@
 # Events
 
 - [Basic usage](#basic-usage)
-    - [Where to register events](#event-registration)
-- [Wildcard listeners](#wildcard-listeners)
+- [Subscribing to events](#events-subscribing)
+    - [Where to register listeners](#event-registration)
+    - [Subscribe using priority](#subscribing-priority)
+    - [Halting events](#subscribing-halting)
+    - [Wildcard listeners](#wildcard-listeners)
+- [Firing events](#events-firing)
+    - [Passing arguments by reference](#event-pass-by-reference)
+    - [Queued events](#queued-events)
 - [Using classes as listeners](#using-classes-as-listeners)
-- [Queued events](#queued-events)
-- [Event subscribers](#event-subscribers)
+    - [Subscribe to individual methods](#event-class-method)
+    - [Subscribe to entire class](#event-class-subscribe)
 - [Event emitter trait](#event-emitter-trait)
 
 <a name="basic-usage"></a>
 ## Basic usage
 
-The `Event` class provides a simple observer implementation, allowing you to subscribe and listen for events in your application.
-
-#### Subscribing to an event
+The `Event` class provides a simple observer implementation, allowing you to subscribe and listen for events in your application. For example, you may listen for when a user signs in and update their last login date.
 
     Event::listen('auth.login', function($user) {
         $user->last_login = new DateTime;
-
         $user->save();
     });
 
-#### Firing an event
+This is event made available with the `Event::fire` method which is called as part of the user sign in logic, thereby making the logic extensible.
 
-    $response = Event::fire('auth.login', [$user]);
+    Event::fire('auth.login', [$user]);
 
-The `fire` method returns an array of responses that you can use to control what happens next in your application.
+<a name="events-subscribing"></a>
+## Subscribing to events
 
-#### Subscribing to events with priority
+The `Event::listen` method is primarily used to subscribe to events and can be can be done from anywhere within your application code. The first argument is the event name.
 
-You may also specify a priority when subscribing to events. Listeners with higher priority will be run first, while listeners that have the same priority will be run in order of subscription.
+    Event::listen('acme.blog.myevent', ...);
 
-    Event::listen('auth.login', 'LoginHandler', 10);
+The second argument can be a closure that specifies what should happen when the event is fired. The closure can accept optional some arguments, provided by [the firing event](#events-firing).
 
-    Event::listen('auth.login', 'OtherHandler', 5);
-
-#### Stopping the propagation of an event
-
-Sometimes you may wish to stop the propagation of an event to other listeners. You may do so using by returning `false` from your listener:
-
-    Event::listen('auth.login', function($event) {
-        // Handle the event...
-
-        return false;
+    Event::listen('acme.blog.myevent', function($arg1, $arg2) {
+        // Do something
     });
 
-<a name="event-registration"></a>
-### Where to register events
+You may also pass a reference to any callable object or a [dedicated event class](#using-classes-as-listeners) and this will be used instead.
 
-So, you know how to register events, but you may be wondering _where_ to register them. Subscribing to an event can be done from anywhere, although the most common place is the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods).
+    Event::listen('auth.login', [$this, 'LoginHandler']);
+
+> **Note**: The callable method can choose to specify all, some or none of the arguments. Either way the event will not throw any errors unless it specifies too many.
+
+<a name="event-registration"></a>
+### Where to register listeners
+
+The most common place is the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods).
 
     class Plugin extends PluginBase
     {
@@ -68,37 +70,113 @@ Alternatively, plugins can supply a file named **init.php** in the plugin direct
 
 Since none of these approaches is inherently "correct", choose an approach you feel comfortable with based on the size of your application.
 
+<a name="subscribing-priority"></a>
+### Subscribe using priority
+
+You may also specify a priority as the third argument when subscribing to events. Listeners with higher priority will be run first, while listeners that have the same priority will be run in order of subscription.
+
+    // Run first
+    Event::listen('auth.login', function() { ... }, 10);
+
+    // Run second
+    Event::listen('auth.login', function() { ... }, 5);
+
+<a name="subscribing-halting"></a>
+### Halting events
+
+Sometimes you may wish to stop the propagation of an event to other listeners. You may do so using by returning `false` from your listener:
+
+    Event::listen('auth.login', function($event) {
+        // Handle the event
+
+        return false;
+    });
+
 <a name="wildcard-listeners"></a>
-## Wildcard listeners
+### Wildcard listeners
 
-#### Registering wildcard event listeners
-
-When registering an event listener, you may use asterisks to specify wildcard listeners:
+When registering an event listener, you may use asterisks to specify wildcard listeners. The following listener will handle all events that begin with `foo.`.
 
     Event::listen('foo.*', function($param) {
         // Handle the event...
     });
 
-This listener will handle all events that begin with `foo.`.
-
 You may use the `Event::firing` method to determine exactly which event was fired:
 
     Event::listen('foo.*', function($param) {
         if (Event::firing() == 'foo.bar') {
-            //
+            // ...
         }
     });
+
+<a name="events-firing"></a>
+## Firing events
+
+You may use the `Event::fire` method anywhere in your code to make the logic extensible. This means other developers, or even your own internal code, can "hook" to this point of code and inject specific logic. The first argument of should be the event name.
+
+    Event::fire('myevent')
+
+It is always a good idea to prefix event names with your plugin namespace code, this will prevent collisions with other plugins.
+
+    Event::fire('acme.blog.myevent');
+
+The second argument is an array of values that will be passed as arguments to [the event listener](#events-subscribing) subscribing to it.
+
+    Event::fire('acme.blog.myevent', [$arg1, $arg2]);
+
+The third argument specifies whether the event should be a [halting event](#subscribing-halting), meaning it should halt if a "non null" value is returned. This argument is set to false by default.
+
+    Event::fire('acme.blog.myevent', [...], true);
+
+If the event is halting, the first value returned with be captured.
+
+    // Single result, event halted
+    $result = Event::fire('acme.blog.myevent', [...], true);
+
+Otherwise it returns a collection of all the responses from all the events in the form of an array.
+
+    // Multiple results, all events fired
+    $results = Event::fire('acme.blog.myevent', [...]);
+
+<a name="event-pass-by-reference"></a>
+## Passing arguments by reference
+
+When processing or filtering over a value passed to an event, you may prefix the variable with `&` to pass it by reference. This allows multiple listeners to manipulate the result and pass it to the next one.
+
+    Event::fire('cms.processContent', [&$content]);
+
+When listening for the event, the argument also needs to be declared with the `&` symbol in the closure definition. In the example below, the `$content` variable will have "AB" appended to the result.
+
+    Event::listen('cms.processContent', function (&$content) {
+        $content = $content . 'A';
+    });
+
+    Event::listen('cms.processContent', function (&$content) {
+        $content = $content . 'B';
+    });
+
+<a name="queued-events"></a>
+### Queued events
+
+Firing events can be deferred in [conjunction with queues](../services/queues). Use the `Event::queue` method to "queue" the event for firing but not fire it immediately.
+
+    Event::queue('foo', [$user]);
+
+You may use the `Event::flush` method to flush all queued events.
+
+    Event::flush('foo');
 
 <a name="using-classes-as-listeners"></a>
 ## Using classes as listeners
 
 In some cases, you may wish to use a class to handle an event rather than a Closure. Class event listeners will be resolved out of the [Application IoC container](application), providing you with the full power of dependency injection on your listeners.
 
-#### Registering a class listener
+<a name="event-class-method"></a>
+### Subscribe to individual methods
+
+The event class can be registered with the `Event::listen` method like any other, passing the class name as a string.
 
     Event::listen('auth.login', 'LoginHandler');
-
-#### Defining an Event listener class
 
 By default, the `handle()` method on the `LoginHandler` class will be called:
 
@@ -106,52 +184,35 @@ By default, the `handle()` method on the `LoginHandler` class will be called:
     {
         public function handle($data)
         {
-            //
+            // ...
         }
     }
 
-#### Specifying which method to subscribe
-
-If you do not wish to use the default `handle` method, you may specify the method that should be subscribed:
+If you do not wish to use the default `handle` method, you may specify the method name that should be subscribed.
 
     Event::listen('auth.login', 'LoginHandler@onLogin');
 
-<a name="queued-events"></a>
-## Queued events
+<a name="event-class-subscribe"></a>
+### Subscribe to entire class
 
-#### Registering a queued event
-
-Using the `queue` and `flush` methods, you may "queue" an event for firing, but not fire it immediately:
-
-    Event::queue('foo', [$user]);
-
-You may run the "flusher" and flush all queued events using the `flush` method:
-
-    Event::flush('foo');
-
-<a name="event-subscribers"></a>
-## Event subscribers
-
-#### Defining an event subscriber
-
-Event subscribers are classes that may subscribe to multiple events from within the class itself. Subscribers should define a `subscribe` method, which will be passed an event dispatcher instance:
+Event subscribers are classes that may subscribe to multiple events from within the class itself. Subscribers should define a `subscribe` method, which will be passed an event dispatcher instance.
 
     class UserEventHandler
     {
         /**
          * Handle user login events.
          */
-        public function onUserLogin($event)
+        public function userLogin($event)
         {
-            //
+            // ...
         }
 
         /**
          * Handle user logout events.
          */
-        public function onUserLogout($event)
+        public function userLogout($event)
         {
-            //
+            // ...
         }
 
         /**
@@ -162,21 +223,17 @@ Event subscribers are classes that may subscribe to multiple events from within 
          */
         public function subscribe($events)
         {
-            $events->listen('auth.login', 'UserEventHandler@onUserLogin');
+            $events->listen('auth.login', 'UserEventHandler@userLogin');
 
-            $events->listen('auth.logout', 'UserEventHandler@onUserLogout');
+            $events->listen('auth.logout', 'UserEventHandler@userLogout');
         }
     }
 
-#### Registering an event subscriber
+Once the subscriber has been defined, it may be registered with the `Event::subscribe` method.
 
-Once the subscriber has been defined, it may be registered with the `Event` class.
+    Event::subscribe(new UserEventHandler);
 
-    $subscriber = new UserEventHandler;
-
-    Event::subscribe($subscriber);
-
-You may also use the [Application IoC container](application) to resolve your subscriber. To do so, simply pass the name of your subscriber to the `subscribe` method:
+You may also use the [Application IoC container](application) to resolve your subscriber. To do so, simply pass the name of your subscriber to the `subscribe` method.
 
     Event::subscribe('UserEventHandler');
 
@@ -190,7 +247,7 @@ Sometimes you want to bind events to a single instance of an object. You may use
         use \October\Rain\Support\Traits\Emitter;
     }
 
-This trait provides a method to listen for events with `bindEvent()`
+This trait provides a method to listen for events with `bindEvent()`.
 
     $manager = new UserManager;
     $manager->bindEvent('user.beforeRegister', function($user) {

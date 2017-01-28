@@ -12,7 +12,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory.
+In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding#scaffold-create-command).
 
 <a name="building-a-command"></a>
 ## Building a command
@@ -203,7 +203,7 @@ Alternatively, plugins can supply a file named **init.php** in the plugin direct
 
 #### Registering a command in the application container
 
-If your command is registered in the [application container](application#app-container), you may use the `Artisan::resolve` method to make it available to Artisan:
+If your command is registered in the [application container](../services/application#app-container), you may use the `Artisan::resolve` method to make it available to Artisan:
 
     Artisan::resolve('binding.name');
 

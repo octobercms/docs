@@ -10,7 +10,7 @@
 - [Dependency definitions](#dependency-definitions)
 - [Extending Twig](#extending-twig)
 - [Navigation menus](#navigation-menus)
-- [Registring middleware](#registring-middleware)
+- [Registering middleware](#registering-middleware)
 
 <a name="introduction"></a>
 ## Introduction
@@ -102,8 +102,9 @@ Method | Description
 **registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
 **registerPermissions()** | registers any [back-end permissions](../backend/users#permission-registration) used by this plugin.
 **registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
-**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) used by this plugin.
+**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
+**registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
 
@@ -117,7 +118,8 @@ Key | Description
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. October uses [Font Autumn icons](http://daftspunk.github.io/Font-Autumn/), any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**.
+**iconSvg** | an SVG icon to be used in place of the standard icon, optional. The SVG icon should be a rectangle and can support colors.
 **homepage** | A link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
@@ -230,10 +232,21 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
 
 When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users).
 
-<a name="registring-middleware"></a>
-## Registring middleware
+To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
-To register a custom middleware you can use the following call inside your boot method to push it into the Kernel.
+<a name="registering-middleware"></a>
+## Registering middleware
+
+To register a custom middleware you can use the following call inside your boot method to extend a Controller class that you wish to add the middleware to.
+
+    public function boot()
+    {
+        Cms\Classes\CmsController::extend(function($controller) {
+            $controller->middleware('Path\To\Custom\Middleware');
+        });
+    }
+
+Alternatively, you can push it directly into the Kernel via the following.
 
     public function boot()
     {
@@ -245,3 +258,4 @@ To register a custom middleware you can use the following call inside your boot 
         $this->app['Illuminate\Contracts\Http\Kernel']
              ->pushMiddleware('Path\To\Custom\Middleware');
     }
+

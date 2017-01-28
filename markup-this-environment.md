@@ -1,6 +1,6 @@
 # this.environment
 
-You can access the current environment object via `this.environment` and it returns a string that references the [current environment configuration](../help/installation#environment-config).
+You can access the current environment object via `this.environment` and it returns a string that references the [current environment configuration](../setup/configuration#environment-config).
 
 ## Example
 

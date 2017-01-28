@@ -23,6 +23,7 @@
     - [Extending form model query](#extend-model-query)
     - [Extending form fields](#extend-form-fields)
     - [Filtering form fields](#filter-form-fields)
+- [Validating form fields](#validate-form-fields)
 
 <a name="introduction"></a>
 ## Introduction
@@ -204,12 +205,14 @@ Option | Description
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
+**commentHtml** | allow HTML markup inside the comment. Options: true, false.
 **default** | specifies the default value for the field.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
-**disabled** | grays out the field if set to true. Options: true, false.
-**hidden** | hides the field from the view. Options: true, false.
+**readOnly** | prevents the field from being modified. Options: true, false.
+**disabled** | prevents the field from being modified and excludes it from the saved data. Options: true, false.
+**hidden** | hides the field from the view and excludes it from the saved data. Options: true, false.
 **stretch** | specifies if this field stretches to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
@@ -291,7 +294,7 @@ There are various native field types that can be used for the **type** setting. 
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines options directly in the YAML file:
+`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines `options` directly in the YAML file:
 
     status:
         label: Blog Post Status
@@ -301,7 +304,7 @@ There are various native field types that can be used for the **type** setting. 
             published: Published
             archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method takes a single parameter, the current key value, and should return an array of options in the format **key => label**.
+The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
@@ -309,34 +312,57 @@ The second method defines options with a method declared in the model's class. I
 
 Supplying the dropdown options tn the model class:
 
-    public function getStatusOptions($keyValue = null)
+    public function getStatusOptions()
     {
         return ['all' => 'All', ...];
     }
 
-The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. This method takes two parameters, the field name and current key value, and should return an array of options in the format **key => label**.
+The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, and should return an array of options in the format **key => label**.
 
-    public function getDropdownOptions($fieldName = null, $keyValue = null)
+    public function getDropdownOptions($fieldName = null)
     {
-        if ($fieldName == 'status')
+        if ($fieldName == 'status') {
             return ['all' => 'All', ...];
-        else
+        }
+        else {
             return ['' => '-- none --'];
+        }
     }
 
-The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method takes two parameters, the current key value and field name, and should return an array of options in the format **key => label**.
+The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
         type: dropdown
         options: listStatuses
 
-Supplying the dropdown options tn the model class:
+Supplying the dropdown options to the model class:
 
-    public function listStatuses($keyValue = null, $fieldName = null)
+    public function listStatuses()
     {
         return ['published' => 'Published', ...];
     }
+
+To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        emptyOption: -- no status --
+
+Alternatively you may use the `placeholder` option to use a "one-way" empty option that cannot be reselected.
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        placeholder: -- select a status --
+
+By default the dropdown has a searching feature, allowing quick selection of a value. This can be disabled by setting the `showSearch` option to `false`.
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        showSearch: false
 
 <a name="field-radio"></a>
 ### Radio List
@@ -443,7 +469,7 @@ There are various form widgets included as standard, although it is common for p
 
 <div class="content-list collection-method-list" markdown="1">
 - [Code editor](#widget-codeeditor)
-- [Color picker](#color-picker)
+- [Color picker](#widget-colorpicker)
 - [Date picker](#widget-datepicker)
 - [File upload](#widget-fileupload)
 - [Record finder](#widget-recordfinder)
@@ -452,6 +478,7 @@ There are various form widgets included as standard, although it is common for p
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Markdown editor](#widget-markdowneditor)
+- [Tag list](#widget-taglist)
 </div>
 
 <a name="widget-codeeditor"></a>
@@ -471,12 +498,17 @@ Option | Description
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
 
-<a name="color-picker"></a>
+<a name="widget-colorpicker"></a>
 ### Color picker
 `colorpicker` - renders controls to select a hexadecimal color value.
 
     color:
+        label: Background
         type: colorpicker
+
+Option | Description
+------------- | -------------
+**availableColors** |  list of available colors.
 
 <a name="widget-datepicker"></a>
 ### Date picker
@@ -491,6 +523,7 @@ Option | Description
 Option | Description
 ------------- | -------------
 **mode** | the expected result, either date, datetime or time. Default: datetime.
+**format** | provide an explicit date display format. Eg: Y-m-d
 **minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 
@@ -508,7 +541,7 @@ Option | Description
 
 Option | Description
 ------------- | -------------
-**mode** | the expected file type, either file or image. Default: file.
+**mode** | the expected file type, either file or image. Default: image.
 **imageWidth** | if using image type, the image will be resized to this width, optional.
 **imageHeight** | if using image type, the image will be resized to this height, optional.
 **fileTypes** | file extensions that are accepted by the uploader, optional. Eg: `zip,txt`
@@ -536,6 +569,11 @@ Option | Description
 **title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
 **list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
+**recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
+**conditions** | specifies a raw where query statement to apply to the list model query.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
+**searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
+**searchScope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 
 <a name="widget-mediafinder"></a>
 ### Media finder
@@ -594,7 +632,7 @@ Option | Description
 
 Option | Description
 ------------- | -------------
-**form** | a reference to form field definition file, see [backend form fields](forms#form-fields). Inline fields can also be used.
+**form** | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
 
 <a name="widget-richeditor"></a>
@@ -604,7 +642,18 @@ Option | Description
 
     html_content:
         type: richeditor
+        toolbarButtons: bold|italic
         size: huge
+
+Option | Description
+------------- | -------------
+**toolbarButtons** | which buttons to show on the editor toolbar.
+
+The available toolbar buttons are:
+
+    fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html
+
+> **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown editor
@@ -619,6 +668,38 @@ Option | Description
 Option | Description
 ------------- | -------------
 **mode** | the expected view mode, either tab or split. Default: tab.
+
+<a name="widget-taglist"></a>
+### Tag list
+
+`taglist` - renders a field for inputting a list of tags.
+
+    tags:
+        type: taglist
+        separator: space
+
+A tag list can support three ways of defining the `options`, exactly like the [dropdown field type](#field-dropdown).
+
+    tags:
+        type: taglist
+        options:
+            - Red
+            - Blue
+            - Orange
+
+You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+
+    tags:
+        type: taglist
+        mode: relation
+
+Option | Description
+------------- | -------------
+**mode** | controls how the value is returned, either string, array or relation. Default: string.
+**separator** | separate tags with the specified character, either comma or space. Default: comma.
+**customTags** | allows custom tags to be entered manually by the user. Default: true
+**options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options()` method. Optional.
+**nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name.
 
 <a name="form-views"></a>
 ## Form views
@@ -735,13 +816,23 @@ The following options are available for the `preset` option:
 Option | Description
 ------------- | -------------
 **field** | defines the other field name to source the value from.
-**type** | specifies the conversion type. Supported values are: url, file, slug, camel.
+**type** | specifies the conversion type. See below for supported values.
 **prefixInput** | optional, prefixes the converted value with the value found in the supplied input element using a CSS selector.
+
+Following are the supported types:
+
+Type | Description
+------------- | -------------
+**exact** | copies the exact value
+**slug** | formats the copied value as a slug
+**url** | same as slug but prefixed with a /
+**camel** | formats the copied value with camelCase
+**file** | formats the copied value as a file name with whitespace replaced with dashes
 
 <a name="field-trigger-events"></a>
 ### Trigger events
 
-Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is an sample definition:
+Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
     is_delayed:
         label: Send later
@@ -798,6 +889,18 @@ In the above example the `state` form field will refresh when the `country` fiel
 
 This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields()` method inside the model, described in the [Filtering form fields](#filter-form-fields) section.
 
+### Preventing a field from being submitted
+
+Sometimes you may need to prevent a field from being submitted. In order to do that, just add an underscore (\_) before the name of the field in the form configuration file. Form fields beginning with an underscore are purged automatically and no longer saved to the model.
+
+    address:
+        label: Title
+        type: text
+
+    _map:
+        label: Point your address on the map
+        type: mapviewer
+
 <a name="extend-form-behavior"></a>
 ## Extending form behavior
 
@@ -842,10 +945,11 @@ You can extend the fields of another controller from outside by calling the `ext
 
 Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
-    Categories::extendFormFields(function($form, $model, $context){
-
-        if (!$model instanceof MyModel)
+    Categories::extendFormFields(function($form, $model, $context)
+    {
+        if (!$model instanceof MyModel) {
             return;
+        }
 
         $form->addFields([
             'my_field' => [
@@ -901,3 +1005,8 @@ You can filter the form field definitions by overriding the `filterFields()` met
     }
 
 The above example will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies).
+
+<a name="validate-form-fields"></a>
+## Validating form fields
+
+To validate the fields of your form you can make use of the [Validation](../../database/traits#validation) trait in your model. 

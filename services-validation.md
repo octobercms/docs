@@ -11,7 +11,7 @@
 <a name="basic-usage"></a>
 ## Basic usage
 
-The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validation` class.
+The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class.
 
 #### Basic Validation Example
 
@@ -391,7 +391,7 @@ The field under validation must be present _only when_ the all of the other spec
 <a name="rule-same"></a>
 #### same:_field_
 
-The given _field_ must match the field under validation.
+The specified _field_ value must match the field's value under validation.
 
 <a name="rule-size"></a>
 #### size:_value_

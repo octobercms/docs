@@ -64,11 +64,11 @@ There are some standard properties that can be found on models, in addition to t
     {
         protected $primaryKey = 'id';
 
-        protected $exists = false;
+        public $exists = false;
 
         protected $dates = ['last_seen_at'];
 
-        protected $timestamps = true;
+        public $timestamps = true;
 
         protected $jsonable = ['permissions'];
 

@@ -25,6 +25,7 @@ Tags:
     markup/tag-styles: "{% styles %}"
     markup/tag-flash: "{% flash %}"
     markup/tag-verbatim: "{% verbatim %}"
+    markup/tag-macro: "{% macro %}"
     markup/tag-for: "{% for %}"
     markup/tag-if: "{% if %}"
 

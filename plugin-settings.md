@@ -143,7 +143,8 @@ Just like [setting navigation context in the controller](../backend/controllers-
 
         [...]
 
-        SettingsManager::setContext('October.Backend', 'editor');
+        BackendMenu::setContext('October.System', 'system', 'settings');
+        SettingsManager::setContext('You.Plugin', 'settings');
     }
 
 The first argument of the `setContext()` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#link-registration).
@@ -168,7 +169,7 @@ Use the `Config` class for accessing the configuration values defined in the con
 
     $maxItems = Config::get('acme.demo::maxItems', 50);
 
-A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`. Inside the overridden configuration file you can return only values you want to override:
+A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for different environment. Inside the overridden configuration file you can return only values you want to override:
 
     <?php
 

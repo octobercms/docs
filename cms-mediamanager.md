@@ -191,7 +191,7 @@ As the partials are written with Twig, you can automate adding alternative video
             src="{{ src }}"
             media="only screen and (min-device-width: 568px)"></source>
         <source
-            src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}" 
+            src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
             media="only screen and (max-device-width: 568px)"></source>
     </video>
 
@@ -214,9 +214,9 @@ Parameter | Value
 ------------- | -------------
 **ignore** | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
 **ttl** | specifies the cache time-to-live, in minutes. The default value is 10. The cache invalidates automatically when Library items are added, updated or deleted.
-**image_extensions** | file extensions corresponding to the Image document type. The default value is **['gif', 'png', 'jpg', 'jpeg', 'bmp']**.
-**video_extensions** | file extensions corresponding to the Video document type. The default value is **['mp4', 'avi', 'mov', 'mpg']**.
-**audio_extensions** | file extensions corresponding to the Audio document type. The default value is **['mp3', 'wav', 'wma', 'm4a']**.
+**imageExtensions** | file extensions corresponding to the Image document type. The default value is **['gif', 'png', 'jpg', 'jpeg', 'bmp']**.
+**videoExtensions** | file extensions corresponding to the Video document type. The default value is **['mp4', 'avi', 'mov', 'mpg']**.
+**audioExtensions** | file extensions corresponding to the Audio document type. The default value is **['mp3', 'wav', 'wma', 'm4a']**.
 
 <a name="troubleshooting"></a>
 ## Troubleshooting

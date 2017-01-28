@@ -10,7 +10,7 @@ Plugin unit tests can be performed by running `phpunit` in the base plugin direc
 
 ### Creating plugin tests
 
-Plugins can be tested by creating a creating a file called `phpunit.xml` in the base directory with the following content, for example, in a file **/plugins/acme/blog/phpunit.xml**:
+Plugins can be tested by creating a file called `phpunit.xml` in the base directory with the following content, for example, in a file **/plugins/acme/blog/phpunit.xml**:
 
     <?xml version="1.0" encoding="UTF-8"?>
     <phpunit backupGlobals="false"
