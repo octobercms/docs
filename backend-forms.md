@@ -945,10 +945,11 @@ You can extend the fields of another controller from outside by calling the `ext
 
 Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
-    Categories::extendFormFields(function($form, $model, $context){
-
-        if (!$model instanceof MyModel)
+    Categories::extendFormFields(function($form, $model, $context)
+    {
+        if (!$model instanceof MyModel) {
             return;
+        }
 
         $form->addFields([
             'my_field' => [
