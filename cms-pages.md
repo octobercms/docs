@@ -141,7 +141,7 @@ A more useful example might be triggering a redirect using the `Redirect` facade
 
     public function onStart()
     {
-        return Redirect:to('http://google.com');
+        return Redirect::to('http://google.com');
     }
 
 <a name="handling-forms"></a>
