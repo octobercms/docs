@@ -376,6 +376,8 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
             female: Female
             male: Male
 
+Balloon selectors support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown).
+
 <a name="field-checkbox"></a>
 ### Checkbox
 
@@ -398,7 +400,6 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
             open_account: Open account
             close_account: Close account
             modify_account: Modify account
-
 
 Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
 
