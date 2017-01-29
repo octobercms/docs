@@ -509,13 +509,17 @@ Sometimes you may wish to specify a custom error messages only for a specific fi
 <a name="localization"></a>
 #### Specifying custom messages in language files
 
-In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to `custom` array in the `lang/xx/validation.php` language file.
+In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
 
-    'custom' => [
-        'email' => [
+    return  [
             'required' => 'We need to know your e-mail address!',
+            'email.required' => 'We need to know your e-mail address!',
         ],
     ],
+
+Then in your call to `Validator::make()` use the `Lang:get()` to use your custom files.
+
+    Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 
 <a name="custom-validation-rules"></a>
 ## Custom validation rules
