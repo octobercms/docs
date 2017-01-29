@@ -218,6 +218,36 @@ Parameter | Value
 **videoExtensions** | file extensions corresponding to the Video document type. The default value is **['mp4', 'avi', 'mov', 'mpg']**.
 **audioExtensions** | file extensions corresponding to the Audio document type. The default value is **['mp3', 'wav', 'wma', 'm4a']**.
 
+<a name="events"></a>
+## Events
+
+The Media Manager provides a few [events](../services/events) that you can listen for in order to improve extensibility.
+
+Event | Description | Parameters
+------------- | ------------- | -------------
+**folder.delete** | Called when a folder is deleted | `(string) $path`
+**file.delete** | Called when a file is deleted | `(string) $path`
+**folder.rename** | Called when a folder is renamed | `(string) $originalPath`, `(string) $newPath`
+**file.rename** | Called when a file is renamed | `(string) $originalPath`, `(string) $newPath`
+**folder.create** | Called when a folder is created | `(string) $newFolderPath`
+**folder.move** | Called when a folder is moved | `(string) $path`, `(string) $dest`
+**file.move** | Called when a file is moved | `(string) $path`, `(string) $dest`
+**file.upload** | Called when a file is uploaded | `(string) $filePath`, `(\Symfony\Component\HttpFoundation\File\UploadedFile) $uploadedFile`
+
+**To hook into these events, either extend the `Cms\Widgets\MediaManager` class directly:**
+
+    Cms\Widgets\MediaManager::extend(function($widget) {
+        $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
+            // Update custom references to path here
+        });
+    });
+    
+**Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Cms\Widgets\MediaManager` object as the first parameter):**
+
+    Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
+        // Update custom references to path here
+    });
+
 <a name="troubleshooting"></a>
 ## Troubleshooting
 
