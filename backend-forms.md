@@ -245,6 +245,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Textarea](#field-textarea)
 - [Dropdown](#field-dropdown)
 - [Radio List](#field-radio)
+- [Balloon Selector](#field-balloon)
 - [Checkbox](#field-checkbox)
 - [Checkbox List](#field-checkboxlist)
 - [Switch](#field-switch)
@@ -389,6 +390,20 @@ Radio lists can also support a secondary description.
 
 Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
 
+<a name="field-balloon"></a>
+### Balloon Selector
+
+`balloon-selector` - renders a list, where only one item can be selected at a time.
+
+    gender:
+        label: Gender
+        type: balloon-selector
+        options:
+            female: Female
+            male: Male
+
+Balloon selectors support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown).
+
 <a name="field-checkbox"></a>
 ### Checkbox
 
@@ -411,7 +426,6 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
             open_account: Open account
             close_account: Close account
             modify_account: Modify account
-
 
 Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
 
