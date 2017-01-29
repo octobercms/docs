@@ -514,7 +514,7 @@ In some cases, you may wish to specify your custom messages in a language file i
     return  [
         'required' => 'We need to know your e-mail address!',
         'email.required' => 'We need to know your e-mail address!',
-    ],
+    ];
 
 Then in your call to `Validator::make()` use the `Lang:get()` to use your custom files.
 
