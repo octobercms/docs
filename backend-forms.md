@@ -311,7 +311,7 @@ The second method defines options with a method declared in the model's class. I
         label: Blog Post Status
         type: dropdown
 
-Supplying the dropdown options tn the model class:
+Supplying the dropdown options in the model class:
 
     public function getStatusOptions()
     {
