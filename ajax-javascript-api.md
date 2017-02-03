@@ -27,6 +27,7 @@ Option | Description
 **error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed. The handler gets 3 parameters: the jqXHR object, the text status string and the error object - see [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/).
 **complete** | a callback function execute in case of a success or an error.
 **flash** | when specified this option instructs the server to clear and send any flash messages with the response.
+**loading** | an object to use as the loading indicator for the request. Supports variables of type `string` (will be used as a jQuery selector to find the element to call `.show()` and `.hide()` on) and `object` (will be used unmodified, allowing the use of `$.oc.stripeLoadIndicator` if `framework.extras.js` is also included.
 
 <a name="javascript-examples"></a>
 ## Usage examples
