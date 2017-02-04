@@ -33,8 +33,9 @@ You may also overide some of the request logic by passing new functions as optio
 
 Handler | Description
 ------------- | -------------
-**handleErrorMessage(message)** | called when an error message should be displayed.
 **handleConfirmMessage(message)** | called when requesting confirmation from the user.
+**handleErrorMessage(message)** | called when an error message should be displayed.
+**handleValidationMessage(message, fields)** | focuses the first invalid field when validation is used.
 **handleFlashMessage(message, type)** | called when a flash message is provided using the **flash** option (see above).
 **handleRedirectResponse(url)** | called when the browser should redirect to another location.
 
