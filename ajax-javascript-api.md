@@ -92,7 +92,7 @@ Run `onCalculate` handler and if successful, run some custom code after the defa
 <a name="global-events"></a>
 ## Global AJAX events
 
-The AJAX framework triggers several events on the updated elements, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
+The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
 
 Event | Description
 ------------- | -------------
@@ -104,6 +104,16 @@ Event | Description
 **ajaxError** | triggered on the form object if the request encounters an error. The handler gets 5 parameters: the event object, the context object, the error message, the status text string, and the jqXHR object.
 **ajaxErrorMessage** | triggered on the window object if the request encounters an error. The handler gets 2 parameters: the event object and error message returned from the server.
 **ajaxConfirmMessage** | triggered on the window object when `confirm` option is given. The handler gets 2 parameters: the event object and text message assigned to the handler as part of `confirm` option. This is useful for implementing custom confirm logic/interface instead of native javascript confirm box.
+
+These events are fired on the triggering element:
+
+Event | Description
+------------- | -------------
+**ajaxSetup** | triggered before the request is formed, allowing options to be modified via the `context.options` object.
+**ajaxPromise** | triggered directly before the AJAX request is sent.
+**ajaxFail** | triggered finally if the AJAX request fails.
+**ajaxDone** | triggered finally if the AJAX request was successful.
+**ajaxAlways** | triggered regardless if the AJAX request fails or was successful.
 
 The next example execute JavaScript code when the `ajaxUpdate` event is triggered on an element.
 
