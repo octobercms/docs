@@ -29,6 +29,14 @@ Option | Description
 **flash** | when specified this option instructs the server to clear and send any flash messages with the response.
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element, the object should support the `show()` and `hide()` functions to manage the visibility. You may pass the global object `$.oc.stripeLoadIndicator` when using the [framework extras](../ajax/extras).
 
+You may also overide some of the request logic by passing new functions as options. These logic handlers are available.
+
+Handler | Description
+------------- | -------------
+**handleErrorMessage(message)** | called when an error message should be displayed.
+**handleFlashMessage(message, type)** | called when a flash message is provided using the **flash** option (see above).
+**handleRedirectResponse(url)** | called when the browser should redirect to another location.
+
 <a name="javascript-examples"></a>
 ## Usage examples
 
