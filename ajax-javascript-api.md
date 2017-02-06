@@ -3,6 +3,7 @@
 - [JavaScript API](#javascript-api)
 - [Usage examples](#javascript-examples)
 - [Global AJAX events](#global-events)
+- [Usage examples](#global-events-examples)
 
 <a name="javascript-api"></a>
 ## JavaScript API
@@ -97,9 +98,9 @@ The AJAX framework triggers several events on the updated elements, triggering e
 Event | Description
 ------------- | -------------
 **ajaxBeforeSend** | triggered on the window object before sending the request.
+**ajaxBeforeUpdate** | triggered on the form object directly after the request is complete, but before the page is updated. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
 **ajaxUpdate** | triggered on a page element after it has been updated with the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
 **ajaxUpdateComplete** | triggered on the window object after all elements are updated by the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxBeforeUpdate** | triggered on the form object directly after the request is complete, but before the page is updated. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
 **ajaxSuccess** | triggered on the form object after the request is successfully completed. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
 **ajaxError** | triggered on the form object if the request encounters an error. The handler gets 5 parameters: the event object, the context object, the error message, the status text string, and the jqXHR object.
 **ajaxErrorMessage** | triggered on the window object if the request encounters an error. The handler gets 2 parameters: the event object and error message returned from the server.
@@ -115,8 +116,33 @@ Event | Description
 **ajaxDone** | triggered finally if the AJAX request was successful.
 **ajaxAlways** | triggered regardless if the AJAX request fails or was successful.
 
-The next example execute JavaScript code when the `ajaxUpdate` event is triggered on an element.
+<a name="global-events-examples"></a>
+## Usage examples
+
+Applies configurations to all AJAX requests
+
+    $(document).on('ajaxSetup', function(event, context) {
+        // Enable AJAX handling of Flash messages on all AJAX requests
+        context.options.flash = true
+        
+        // Enable the StripeLoadIndicator on all AJAX requests
+        context.options.loading = $.oc.stripeLoadIndicator
+      
+        // Handle Error Messages by triggering a flashMsg of type error
+        context.options.handleErrorMessage = function(message) {
+            $.oc.flashMsg({ text: message, class: 'error' })
+        }
+        
+        // Handle Flash Messages by triggering a flashMsg of the message type
+        context.options.handleFlashMessage = function(message, type) {
+            $.oc.flashMsg({ text: message, class: type })
+        }
+    })
+
+Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.
 
     $('.calcresult').on('ajaxUpdate', function() {
         console.log('Updated!');
     })
+
+
