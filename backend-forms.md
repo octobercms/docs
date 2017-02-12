@@ -552,6 +552,14 @@ Option | Description
         mode: image
         imageHeight: 260
         imageWidth: 260
+        thumbOptions:
+            mode: crop
+            offset:
+                - 0
+                - 0
+            quality: 90
+            sharpen: 0
+            extension: auto
 
 Option | Description
 ------------- | -------------
@@ -562,6 +570,7 @@ Option | Description
 **mimeTypes** | MIME types that are accepted by the uploader, either as file extension or fully qualified name, optional. Eg: `bin,txt`
 **useCaption** | allows a title and description to be set for the file. Default: true
 **prompt** | text to display for the upload button, applies to files only, optional.
+**thumbOptions** | options to pass to the thumbnail generating method for the file
 
 <a name="widget-recordfinder"></a>
 ### Record finder
