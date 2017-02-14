@@ -540,9 +540,9 @@ The [list filter](#list-filters) model query can also be extended by overriding 
 <a name="extend-records-collection"></a>
 ### Extending the records collection
 
-The collection of records to be used can be extended by overriding the `listExtendRecords` method inside the controller class. This example will sort the records collection without the use of a query based `ORDERBY` and allowing for complex ordering of computed values  as well as any other Eloquent Collection methods.
+The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort()` method on the [record collection](../database/collection) to change the sort order of the records.
 
-    public function listExtendRecords($records, $definition)
+    public function listExtendRecords($records)
     {
         return $records->sort(function ($a, $b) {
             return $a->computedVal() > $b->computedVal();
