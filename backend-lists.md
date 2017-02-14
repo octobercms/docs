@@ -17,6 +17,7 @@
     - [Overriding views](#overriding-views)
     - [Extending column definitions](#extend-list-columns)
     - [Extending the model query](#extend-model-query)
+    - [Extending the records collection](#extend-records-collection)
     - [Custom column types](#custom-column-types)
 
 <a name="introduction"></a>
@@ -534,6 +535,18 @@ The [list filter](#list-filters) model query can also be extended by overriding 
         if ($scope->scopeName == 'status') {
             $query->where('status', '<>', 'all');
         }
+    }
+    
+<a name="extend-records-collection"></a>
+### Extending the records collection
+
+The collection of records to be used can be extended by overriding the `listExtendRecords` method inside the controller class. This example will sort the records collection without the use of a query based `ORDERBY` and allowing for complex ordering of computed values  as well as any other Eloquent Collection methods.
+
+    public function listExtendRecords($records, $definition)
+    {
+        return $records->sort(function ($a, $b) {
+            return $a->computedVal() > $b->computedVal();
+        });
     }
 
 <a name="custom-column-types"></a>
