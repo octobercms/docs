@@ -67,6 +67,13 @@ Alternatively, plugins can supply a file named **init.php** in the plugin direct
     <?php
 
     Event::listen(...);
+    
+Side note: if you want to listen backend events maybe you should to set the `$elevated` property in your plugin definition.
+
+    class Plugin extends PluginBase
+    {
+        $elevated = true;
+    }
 
 Since none of these approaches is inherently "correct", choose an approach you feel comfortable with based on the size of your application.
 
