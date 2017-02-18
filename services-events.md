@@ -70,14 +70,29 @@ Alternatively, plugins can supply a file named **init.php** in the plugin direct
     
 Since none of these approaches is inherently "correct", choose an approach you feel comfortable with based on the size of your application.
 
-Side note: if you want to listen events that run on the */backend/**  path or run on the october's cli commands you should to set the `$elevated` property in your plugin definition.
+Side note: if you want to listen events that are fired on the path */backend/backend/**  path or run on the october's cli commands you should to set the `$elevated` property in your plugin definition.
 
     class Plugin extends PluginBase
     {
         $elevated = true;
     }
     
-By default plugin boot methods are disabled in the */backend* path and the october's cli commands.
+By default plugin boot methods are disabled in the */backend/backend/** path for instance (/backend/backend/auth) and the october's cli commands.
+
+Example: Listen when a backend user is logged in.
+
+    class Plugin extends PluginBase
+    {
+        $elevated = true; //this enable your plugin boot method on the /backend/backend path
+        public function boot()
+        {
+            Event::listen('backend.user.login', function ($user) {
+                //Do anything when user is logged
+            });
+            }
+        }
+    }
+    
 
 <a name="subscribing-priority"></a>
 ### Subscribe using priority
