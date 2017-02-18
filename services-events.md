@@ -68,14 +68,16 @@ Alternatively, plugins can supply a file named **init.php** in the plugin direct
 
     Event::listen(...);
     
-Side note: if you want to listen backend events maybe you should to set the `$elevated` property in your plugin definition.
+Since none of these approaches is inherently "correct", choose an approach you feel comfortable with based on the size of your application.
+
+Side note: if you want to listen events that run on the */backend/**  path or run on the october's cli commands you should to set the `$elevated` property in your plugin definition.
 
     class Plugin extends PluginBase
     {
         $elevated = true;
     }
-
-Since none of these approaches is inherently "correct", choose an approach you feel comfortable with based on the size of your application.
+    
+By default plugin boot methods are disabled in the */backend* path and the october's cli commands.
 
 <a name="subscribing-priority"></a>
 ### Subscribe using priority
