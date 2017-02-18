@@ -34,7 +34,7 @@ Protected attachments are uploaded to the application's **uploads/protected** di
 <a name="inverse-of-relation"></a>
 ### The inverse of the relation
 
-If you need to access the owner of the attachment, you can use the `attachment` property of the `File` model:
+If you need to access the owner of the file, you can use the `attachment` property of the `File` model:
 
     public $morphTo = [
         'attachment' => []
