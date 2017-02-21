@@ -31,21 +31,6 @@ Protected attachments are uploaded to the application's **uploads/protected** di
         'avatar' => ['System\Models\File', 'public' => false]
     ];
 
-<a name="inverse-of-relation"></a>
-### The inverse of the relation
-
-If you need to access the owner of the file, you can use the `attachment` property of the `File` model:
-
-    public $morphTo = [
-        'attachment' => []
-    ];
-    
-Example:  
-
-    $user = $file->attachment;
-    
-For more information read the [polymorphic relationships](https://octobercms.com/docs/database/relations#polymorphic-relations)
-
 <a name="creating-attachments"></a>
 ### Creating new attachments
 
@@ -164,3 +149,18 @@ Display the uploaded file on a page:
     }
 
     <img src="<?= $featuredImage ?>" alt="Featured Image">
+
+<a name="inverse-of-relation"></a>
+#### The inverse of the relation
+
+If you need to access the owner of a file, you can use the `attachment` property of the `File` model:
+
+    public $morphTo = [
+        'attachment' => []
+    ];
+    
+Example:  
+
+    $user = $file->attachment;
+    
+For more information read the [polymorphic relationships](https://octobercms.com/docs/database/relations#polymorphic-relations)
