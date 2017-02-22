@@ -11,6 +11,7 @@
 - [Extending Twig](#extending-twig)
 - [Navigation menus](#navigation-menus)
 - [Registering middleware](#registering-middleware)
+- [Elevated permissions](#elevated-plugin)
 
 <a name="introduction"></a>
 ## Introduction
@@ -136,25 +137,7 @@ The `register()` method is called immediately when the plugin is registered. The
         });
     }
 
-> **Note:** The `boot()` and `register()` methods are not called during the update process to protect the system from critical errors.
-
-Neither method will be triggered on certain protected requests unless the `$elevated` property for your plugin is set to true.
-
-    /**
-     * @var bool Prevents plugin initialization from being run on certain requests
-     */
-    public $elevated = true;
-    
-These protected requests include the following:
-
-Request | Description
-------------- | -------------
-**/combine** | the asset combiner generator URL
-**@/system/updates** | the site updates context
-**@/system/install** | the installer path
-**@/backend/auth** | the backend authentication path (login, logout)
-**october:up** | the CLI command that runs all pending migrations
-**october:update** | the CLI command that triggers the update process
+> **Note:** The `boot()` and `register()` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
 
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
 
@@ -271,9 +254,29 @@ Alternatively, you can push it directly into the Kernel via the following.
         // Add a new middleware to beginning of the stack.
         $this->app['Illuminate\Contracts\Http\Kernel']
              ->prependMiddleware('Path\To\Custom\Middleware');
-             
+
         // Add a new middleware to end of the stack.
         $this->app['Illuminate\Contracts\Http\Kernel']
              ->pushMiddleware('Path\To\Custom\Middleware');
     }
 
+<a name="elevated-plugin"></a>
+## Elevated permissions
+
+By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the back-end. When these areas are accessed without elevated permissions, the `boot()` and `register()` [initialization methods](#routing-initialization) for the plugin will not fire.
+
+Request | Description
+------------- | -------------
+**/combine** | the asset combiner generator URL
+**/backend/system/updates** | the site updates context
+**/backend/system/install** | the installer path
+**/backend/backend/auth** | the backend authentication path (login, logout)
+**october:up** | the CLI command that runs all pending migrations
+**october:update** | the CLI command that triggers the update process
+
+Define the `$elevated` property to grant elevated permissions for your plugin.
+
+    /**
+     * @var bool Plugin requires elevated permissions.
+     */
+    public $elevated = true;
