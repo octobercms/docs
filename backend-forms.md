@@ -1006,6 +1006,8 @@ Method | Description
 
 Each method takes an array of fields similar to the [form field configuration](#form-fields).
 
+Note that the `formExtendFields` interacts with the `FormController` behavior, which targets the primary form (usually fired once). The `extendFormFields` interacts with the `Form` widget, which targets any and all forms (can fire many times).
+
 <a name="filter-form-fields"></a>
 ### Filtering form fields
 
