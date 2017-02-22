@@ -137,7 +137,7 @@ You may pass a default value as the second argument:
 
 #### Specifying a default value
 
-    <?= Form::text('email', 'example@gmail.com') ?>
+    <?= Form::text('email', 'emailaddress@example.com') ?>
 
 > **Note:** The *hidden* and *textarea* methods have the same signature as the *text* method.
 
