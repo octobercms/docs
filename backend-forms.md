@@ -966,7 +966,7 @@ You can extend the fields of another controller from outside by calling the `ext
         public $formConfig = 'form_config.yaml';
     }
 
-Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
+Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. Since this has the potential to affect all forms used by this controller, it is a good idea to check the **$model** is of the correct type. Here is an example:
 
     Categories::extendFormFields(function($form, $model, $context)
     {
@@ -983,7 +983,7 @@ Using the `extendFormFields` method you can add extra fields to any form rendere
 
     });
 
-You can also extend the form fields internally by overriding the `formExtendFields` method inside the controller class.
+You can also extend the form fields internally by overriding the `formExtendFields` method inside the controller class. This will only affect the form used by the `FormController` behavior.
 
     class Categories extends \Backend\Classes\Controller
     {
