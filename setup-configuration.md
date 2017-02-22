@@ -74,7 +74,7 @@ If your webserver is running Lighttpd you can use the following configuration to
 
 Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
 
-    $HTTP["host"] =~ "example.domain.com" {
+    $HTTP["host"] =~ "domain.example.com" {
         server.document-root = "/var/www/example/"
 
         url.rewrite-once = (

@@ -77,7 +77,7 @@ URL of this page is made up of the author name, plugin name, controller name and
 
 The above Controller results in the following:
 
-    http://yoursite.com/backend/acme/blog/users/index
+    http://example.com/backend/acme/blog/users/index
 
 <a name="passing-data-to-views"></a>
 ## Passing data to views

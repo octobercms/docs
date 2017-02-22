@@ -151,7 +151,7 @@ Route groups allow you to share route attributes across a large number of routes
 
 Route groups may also be used to route wildcard sub-domains. Sub-domains may be assigned route parameters just like route URIs, allowing you to capture a portion of the sub-domain for usage in your route or controller. The sub-domain may be specified using the `domain` key on the group attribute array:
 
-    Route::group(['domain' => '{account}.myapp.com'], function () {
+    Route::group(['domain' => '{account}.example.com'], function () {
         Route::get('user/{id}', function ($account, $id) {
             //
         });

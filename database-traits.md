@@ -279,8 +279,8 @@ October models uses the built-in [Validator class](../services/validation). The 
 Models validate themselves automatically when the `save()` method is called.
 
     $user = new User;
-    $user->name = 'Adam Person';
-    $user->email = 'a.person@email.address.com';
+    $user->name = 'Actual Person';
+    $user->email = 'a.person@example.com';
     $user->password = 'passw0rd';
 
     // Returns false if model is invalid

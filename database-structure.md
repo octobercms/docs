@@ -291,11 +291,11 @@ Like migration files, a seeder class only contains one method by default: `run`a
         public function run()
         {
             $user = User::create([
-                'email'                 => 'user@user.com',
+                'email'                 => 'user@example.com',
                 'login'                 => 'user',
-                'password'              => 'user',
-                'password_confirmation' => 'user',
-                'first_name'            => 'Adam',
+                'password'              => 'password123',
+                'password_confirmation' => 'password123',
+                'first_name'            => 'Actual',
                 'last_name'             => 'Person',
                 'is_activated'          => true
             ]);
@@ -307,7 +307,7 @@ Alternatively, the same can be achieved using the `Db::table` [query builder](..
     public function run()
     {
         $user = Db::table('users')->create([
-            'email'                 => 'user@user.com',
+            'email'                 => 'user@example.com',
             'login'                 => 'user',
             [...]
         ]);

@@ -58,7 +58,7 @@ Alternatively, you can prepare a File model before hand, then manually associate
 <a name="viewing-attachments"></a>
 ### Viewing attachments
 
-The `getPath()` method returns the full URL of an uploaded public file. The following code would print something like **...mysite.com/uploads/public/path/to/avatar.jpg**
+The `getPath()` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**
 
     echo $model->avatar->getPath();
 
