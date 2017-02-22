@@ -138,6 +138,24 @@ The `register()` method is called immediately when the plugin is registered. The
 
 > **Note:** The `boot()` and `register()` methods are not called during the update process to protect the system from critical errors.
 
+Neither method will be triggered on certain protected requests unless the `$elevated` property for your plugin is set to true.
+
+    /**
+     * @var bool Prevents plugin initialization from being run on certain requests
+     */
+    public $elevated = true;
+    
+These protected requests include the following:
+
+Request | Description
+------------- | -------------
+**/combine** | the asset combiner generator URL
+**@/system/updates** | the site updates context
+**@/system/install** | the installer path
+**@/backend/auth** | the backend authentication path (login, logout)
+**october:up** | the CLI command that runs all pending migrations
+**october:update** | the CLI command that triggers the update process
+
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
 
     Route::group(['prefix' => 'api_acme_blog'], function() {
