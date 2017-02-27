@@ -119,30 +119,37 @@ Event | Description
 <a name="global-events-examples"></a>
 ## Usage examples
 
-Applies configurations to all AJAX requests
-
-    $(document).on('ajaxSetup', function(event, context) {
-        // Enable AJAX handling of Flash messages on all AJAX requests
-        context.options.flash = true
-        
-        // Enable the StripeLoadIndicator on all AJAX requests
-        context.options.loading = $.oc.stripeLoadIndicator
-      
-        // Handle Error Messages by triggering a flashMsg of type error
-        context.options.handleErrorMessage = function(message) {
-            $.oc.flashMsg({ text: message, class: 'error' })
-        }
-        
-        // Handle Flash Messages by triggering a flashMsg of the message type
-        context.options.handleFlashMessage = function(message, type) {
-            $.oc.flashMsg({ text: message, class: type })
-        }
-    })
-
 Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.
 
     $('.calcresult').on('ajaxUpdate', function() {
         console.log('Updated!');
     })
 
+Execute a single request that shows a Flash Message using logic handler.
 
+    $.request('onDoSomething', {
+        flash: 1,
+        handleFlashMessage: function(message, type) {
+            $.oc.flashMsg({ text: message, class: type })
+        }
+    })
+
+Applies configurations to all AJAX requests globally.
+
+    $(document).on('ajaxSetup', function(event, context) {
+        // Enable AJAX handling of Flash messages on all AJAX requests
+        context.options.flash = true
+
+        // Enable the StripeLoadIndicator on all AJAX requests
+        context.options.loading = $.oc.stripeLoadIndicator
+
+        // Handle Error Messages by triggering a flashMsg of type error
+        context.options.handleErrorMessage = function(message) {
+            $.oc.flashMsg({ text: message, class: 'error' })
+        }
+
+        // Handle Flash Messages by triggering a flashMsg of the message type
+        context.options.handleFlashMessage = function(message, type) {
+            $.oc.flashMsg({ text: message, class: type })
+        }
+    })
