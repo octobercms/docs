@@ -40,7 +40,7 @@ For singular attach relations (`$attachOne`), you may create an attachment direc
 
 You may also pass a string to the `data` attribute that contains an absolute path to a local file.
 
-    $model->avatar = '/path/to/somefile.jpg';
+    $model->avatar->data = '/path/to/somefile.jpg';
 
 For multiple attach relations (`$attachMany`), you may use the `create()` method on the relationship instead, notice the file object is assocated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
 
