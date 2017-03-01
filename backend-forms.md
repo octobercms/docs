@@ -657,6 +657,7 @@ Option | Description
 ------------- | -------------
 **form** | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
+**maxItems** | maximum number of items to allow within the repeater.
 
 <a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
