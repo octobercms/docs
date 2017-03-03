@@ -16,6 +16,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 ### Arrays
 
 <div class="collection-method-list" markdown="1">
+[Path Symbols](#path-symbols)
 [array_add](#method-array-add)
 [array_divide](#method-array-divide)
 [array_dot](#method-array-dot)
@@ -342,6 +343,21 @@ The `last` function returns the last element in the given array:
 <a name="paths"></a>
 ## Paths
 
+<a name="path-symbols"></a>
+#### Path Symbols
+
+Path prefix symbols can be used to create a dynamic path. For example, a path beginning with `~/` will create a path relative to the application:
+
+    list: ~/plugins/acme/pay/models/invoiceitem/columns.yaml
+
+These symbols are supported for creating dynamic paths:
+
+Symbol | Description
+------------- | -------------
+`$` | Relative to the plugins directory
+`~` | Relative to the application directory
+
+    
 <a name="method-app-path"></a>
 #### `app_path()` {#collection-method}
 
