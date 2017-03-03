@@ -180,6 +180,23 @@ Fields can be placed in three areas, the **outside area**, **primary tabs** or *
         fields:
             [...]
 
+Fields from related models can be rendered with the [Relation Widget](#widget-relation) or the [Relation Manager](relations#relationship-types). The exception is a OneToOne or morphOne related field, which must be defined as **relation[field]** and then can be specified as any other field of the model:
+
+        user_name:
+            label: User Name
+            description: The name of the user
+        avatar[name]:
+            label: Avatar
+            description: will be saved in the Avatar table
+        published_at:
+            label: Published date
+            description: When this blog post was published
+            type: datepicker
+
+        [...]
+
+
+
 <a name="form-tab-options"></a>
 ### Tab options
 
