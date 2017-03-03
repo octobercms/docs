@@ -58,6 +58,7 @@ The wizard installation is a recommended way to install October. It is simpler t
 ## Command-line installation
 
 If you feel more comfortable with a command-line or want to use composer, there is a CLI install process on the [Console interface page](../console/commands#console-install).
+There's an unofficial tutorial on how to install October CMS on CentOS via the command line [here](https://www.rosehosting.com/blog/how-to-install-october-cms-on-a-centos-7-vps/)
 
 <a name="post-install-steps"></a>
 ## Post-installation steps
