@@ -135,6 +135,10 @@ If the property value is not defined, you can supply the default value as a seco
 You can also load all the properties as array:
 
     $properties = $this->getProperties();
+    
+To access the property from the Twig partials for the component, utilize the `__SELF__` variable which refers to the Component object:
+
+   `{{ __SELF__.property('maxItems') }}`
 
 <a name="dropdown-properties"></a>
 ### Dropdown properties
