@@ -150,9 +150,6 @@ Display the uploaded file on a page:
 
     <img src="<?= $featuredImage ?>" alt="Featured Image">
 
-<a name="inverse-of-relation"></a>
-#### The inverse of the relation
-
 If you need to access the owner of a file, you can use the `attachment` property of the `File` model:
 
     public $morphTo = [
@@ -163,4 +160,4 @@ Example:
 
     $user = $file->attachment;
     
-For more information read the [polymorphic relationships](https://octobercms.com/docs/database/relations#polymorphic-relations)
+For more information read the [polymorphic relationships](../database/relations#polymorphic-relations)
