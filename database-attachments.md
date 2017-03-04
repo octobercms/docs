@@ -149,3 +149,15 @@ Display the uploaded file on a page:
     }
 
     <img src="<?= $featuredImage ?>" alt="Featured Image">
+
+If you need to access the owner of a file, you can use the `attachment` property of the `File` model:
+
+    public $morphTo = [
+        'attachment' => []
+    ];
+    
+Example:  
+
+    $user = $file->attachment;
+    
+For more information read the [polymorphic relationships](../database/relations#polymorphic-relations)
