@@ -18,6 +18,7 @@
     - [Input preset converter](#field-input-preset)
     - [Trigger events](#field-trigger-events)
     - [Field dependencies](#field-dependencies)
+    - [Preventing a field from being submitted](#prevent-field-submission)
 - [Extending form behavior](#extend-form-behavior)
     - [Overriding controller action](#overriding-action)
     - [Extending form model query](#extend-model-query)
@@ -930,6 +931,7 @@ In the above example the `state` form field will refresh when the `country` fiel
 
 This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields()` method inside the model, described in the [Filtering form fields](#filter-form-fields) section.
 
+<a name="prevent-field-submission"></a>
 ### Preventing a field from being submitted
 
 Sometimes you may need to prevent a field from being submitted. In order to do that, just add an underscore (\_) before the name of the field in the form configuration file. Form fields beginning with an underscore are purged automatically and no longer saved to the model.
