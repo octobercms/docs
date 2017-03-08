@@ -83,7 +83,7 @@ Option | Type | Description
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **recordsPerPage** | List | maximum rows to display for each page.
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
-**scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
+**scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the first parameter.
 
 These configuration values can be specified only for the **view** options.
 
