@@ -10,12 +10,12 @@
 
 The JavaScript API is more powerful than the data attributes API. The `request()` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
 
-The `request()` method has a single required parameter - the AJAX handler name. Example:
+The `request()` method has a single required argument - the AJAX handler name. Example:
 
     <form onsubmit="$(this).request('onProcess'); return false;">
         ...
 
-The second attribute of the `request()` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
+The second argument of the `request()` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
 
 Option | Description
 ------------- | -------------
