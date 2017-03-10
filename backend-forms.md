@@ -315,7 +315,7 @@ There are various native field types that can be used for the **type** setting. 
 
 `dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines `options` directly in the YAML file:
 
-    status:
+    status_type:
         label: Blog Post Status
         type: dropdown
         options:
@@ -323,22 +323,22 @@ There are various native field types that can be used for the **type** setting. 
             published: Published
             archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*Field*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusOptions()`` method. This method should return an array of options in the format **key => label**.
+The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusTypeOptions()`` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
 
-    status:
+    status_type:
         label: Blog Post Status
         type: dropdown
 
 Supplying the dropdown options in the model class:
 
-    public function getStatusOptions()
+    public function getStatusTypeOptions($value, $formData)
     {
         return ['all' => 'All', ...];
     }
 
-The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, and should return an array of options in the format **key => label**.
+The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
 
-    public function getDropdownOptions($fieldName = null)
+    public function getDropdownOptions($fieldName, $value, $formData)
     {
         if ($fieldName == 'status') {
             return ['all' => 'All', ...];
@@ -348,7 +348,7 @@ The third global method `getDropdownOptions()` can also be defined in the model,
         }
     }
 
-The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method should return an array of options in the format **key => label**.
+The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions()` method, and should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
@@ -357,7 +357,7 @@ The fourth method uses a specific method declared in the model's class. In the n
 
 Supplying the dropdown options to the model class:
 
-    public function listStatuses()
+    public function listStatuses($fieldName, $value, $formData)
     {
         return ['published' => 'Published', ...];
     }
