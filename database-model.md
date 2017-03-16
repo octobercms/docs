@@ -2,9 +2,10 @@
 
 - [Introduction](#introduction)
 - [Defining models](#defining-models)
-    - [Standard properties](#standard-properties)
-- [Retrieving multiple models](#retrieving-multiple-models)
-- [Retrieving single models / aggregates](#retrieving-single-models)
+    - [Supported properties](#standard-properties)
+- [Retrieving models](#retrieving-models)
+    - [Retrieving multiple models](#retrieving-multiple-models)
+    - [Retrieving a single model](#retrieving-single-models)
     - [Retrieving aggregates](#retrieving-aggregates)
 - [Inserting & updating models](#inserting-and-updating-models)
     - [Basic inserts](#basic-inserts)
@@ -56,7 +57,7 @@ In most cases, you should create one model class for each database table. All mo
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
 <a name="standard-properties"></a>
-### Standard properties
+### Supported properties
 
 There are some standard properties that can be found on models, in addition to those provided by [model traits](traits). For example:
 
@@ -87,7 +88,8 @@ Property | Description
 **$visible** | values are fields made visible when [serializing the model data](../database/serialization).
 **$hidden** | values are fields made hidden when [serializing the model data](../database/serialization).
 
-#### Primary keys
+<a name="property-primary-key"></a>
+#### Primary key
 
 Models will assume that each table has a primary key column named `id`. You may define a `$primaryKey` property to override this convention.
 
@@ -101,6 +103,7 @@ Models will assume that each table has a primary key column named `id`. You may 
         protected $primaryKey = 'id';
     }
 
+<a name="property-timestamps"></a>
 #### Timestamps
 
 By default, a model will expect `created_at` and `updated_at` columns to exist on your tables. If you do not wish to have these columns managed automatically, set the `$timestamps` property on your model to `false`:
@@ -127,6 +130,7 @@ If you need to customize the format of your timestamps, set the `$dateFormat` pr
         protected $dateFormat = 'U';
     }
 
+<a name="property-jsonable"></a>
 #### Values stored as JSON
 
 When attributes names are passed to the `$jsonable` property, the values will be serialized and deserialized from the database as JSON:
@@ -139,13 +143,21 @@ When attributes names are passed to the `$jsonable` property, the values will be
         protected $jsonable = ['data'];
     }
 
+<a name="retrieving-models"></a>
+## Retrieving models
+
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
+
+> **Note**: All model queries have [in-memory caching enabled](../database/query#caching-queries) by default.
+
 <a name="retrieving-multiple-models"></a>
-## Retrieving multiple models
+### Retrieving multiple models
 
 Once you have created a model and [its associated database table](../database/structure#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query) allowing you to query the database table associated with the model. For example:
 
     $flights = Flight::all();
 
+<a name="accessing-column-values"></a>
 #### Accessing column values
 
 If you have a model instance, you may access the column values of the model by accessing the corresponding property. For example, let's loop through each `Flight` instance returned by our query and echo the value of the `name` column:
@@ -154,6 +166,7 @@ If you have a model instance, you may access the column values of the model by a
         echo $flight->name;
     }
 
+<a name="adding-constraints"></a>
 #### Adding additional constraints
 
 The `all` method will return all of the results in the model's table. Since each model serves as a [query builder](../database/query), you may also add constraints to queries, and then use the `get` method to retrieve the results:
@@ -165,6 +178,7 @@ The `all` method will return all of the results in the model's table. Since each
 
 > **Note:** Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query). You may use any of these methods in your model queries.
 
+<a name="returning-collections"></a>
 #### Collections
 
 For methods like `all` and `get` which retrieve multiple results, an instance of a `Collection` will be returned. This class provides [a variety of helpful methods](../database/collection) for working with your results. Of course, you can simply loop over this collection like an array:
@@ -173,6 +187,7 @@ For methods like `all` and `get` which retrieve multiple results, an instance of
         echo $flight->name;
     }
 
+<a name="chunking-results"></a>
 #### Chunking results
 
 If you need to process thousands of records, use the `chunk` command. The `chunk` method will retrieve a "chunk" of models, feeding them to a given `Closure` for processing. Using the `chunk` method will conserve memory when working with large result sets:
@@ -186,7 +201,7 @@ If you need to process thousands of records, use the `chunk` command. The `chunk
 The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is retrieved from the database.
 
 <a name="retrieving-single-models"></a>
-## Retrieving single models / aggregates
+### Retrieving a single model
 
 In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance:
 
@@ -196,6 +211,7 @@ In addition to retrieving all of the records for a given table, you may also ret
     // Retrieve the first model matching the query constraints
     $flight = Flight::where('active', 1)->first();
 
+<a name="model-not-found-exception"></a>
 #### Not found exceptions
 
 Sometimes you may wish to throw an exception if a model is not found. This is particularly useful in routes or controllers. The `findOrFail` and `firstOrFail` methods will retrieve the first result of the query. However, if no result is found, a `Illuminate\Database\Eloquent\ModelNotFoundException` will be thrown:
@@ -255,7 +271,7 @@ The `update` method expects an array of column and value pairs representing the 
 <a name="mass-assignment"></a>
 ### Mass assignment
 
-You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create()` or `fill()` method.
+You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create` or `fill` method.
 
 A mass-assignment vulnerability occurs when a user passes an unexpected HTTP parameter through a request, and that parameter changes a column in your database you did not expect. For example, a malicious user might send an `is_admin` parameter through an HTTP request, which is then mapped onto your model's `create` method, allowing the user to escalate themselves to an administrator.
 
@@ -451,7 +467,7 @@ You can externally bind to [local events](../services/events) for a single insta
 <a name="extending-models"></a>
 ## Extending models
 
-Since models are [equipped to use behaviors](../services/behaviors), they can be extended with the static `extend()` method. The method takes a closure and passes the model object into it. Inside the closure you can add relations to the model:
+Since models are [equipped to use behaviors](../services/behaviors), they can be extended with the static `extend` method. The method takes a closure and passes the model object into it. Inside the closure you can add relations to the model:
 
     User::extend(function($model) {
         $model->hasOne['author'] = ['Author', 'key' => 'user_id'];
