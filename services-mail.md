@@ -83,7 +83,7 @@ October also includes an alternative method called `sendTo` that can simplify se
     // Send to multiple addresses
     Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
 
-The first argument in `sendTo()` is used for the recipients can take different value types:
+The first argument in `sendTo` is used for the recipients can take different value types:
 
 Type | Description
 ------------- | -------------
@@ -225,7 +225,7 @@ If you wish to specify a specific queue on which to push the message, you may do
 
 Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
-Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates()` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
+Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
 <a name="mail-views"></a>
 ### Mail views
@@ -314,7 +314,7 @@ System | system | Used for internal, back-end mail
 <a name="mail-template-registration"></a>
 ### Registering mail templates
 
-Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates()` method of the [Plugin registration class](../plugin/registration#registration-file).
+Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
 
     public function registerMailTemplates()
     {

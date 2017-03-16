@@ -97,7 +97,7 @@ Plugins can register the back-end navigation menus and submenus in the [plugin r
 
     BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
 
-The first parameter specifies the author and plugin names. The second parameter sets the menu code. The optional third parameter specifies the submenu code. Usually you call the `BackendMenu::setContext()` in the controller constructor.
+The first parameter specifies the author and plugin names. The second parameter sets the menu code. The optional third parameter specifies the submenu code. Usually you call the `BackendMenu::setContext` in the controller constructor.
 
     namespace Acme\Blog\Controllers;
 
@@ -124,7 +124,7 @@ The back-end AJAX framework uses the same [AJAX library](../ajax/introduction) a
 
 The back-end AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
 
-Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers)). You can use `$this->vars` to set variables and the controller's `makePartial()` method to render a partial and return its contents as a part of the response data.
+Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers)). You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
 
     public function onOpenTemplate()
     {

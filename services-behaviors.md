@@ -68,7 +68,7 @@ The extended object is always passed as the first parameter to the Behavior's co
 <a name="constructor-extension"></a>
 ## Extending constructors
 
-Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend()` method. The argument should pass a closure that will be called as part of the class constructor.
+Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend` method. The argument should pass a closure that will be called as part of the class constructor.
 
     MyNamespace\Controller::extend(function($controller) {
         //

@@ -23,7 +23,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-**List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index()` however the list can be rendered anywhere and multiple list definitions can be used.
+**List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
 List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
@@ -312,7 +312,7 @@ If the [relationship definition](../database/relations) uses the **count** argum
 <a name="displaying-list"></a>
 ## Displaying the list
 
-Usually lists are displayed in the index [view](controllers-views-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender()` method call.
+Usually lists are displayed in the index [view](controllers-views-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
 
     <?= $this->listRender() ?>
 
@@ -326,7 +326,7 @@ The list behavior can support mulitple lists in the same controller using named 
         'layouts' => 'config_layouts_list.yaml'
     ];
 
-Each definition can then be displayed by passing the definition name as the first argument when calling the `listRender()` method:
+Each definition can then be displayed by passing the definition name as the first argument when calling the `listRender` method:
 
     <?= $this->listRender('templates') ?>
 
@@ -421,7 +421,7 @@ Sometimes you may wish to modify the default list behavior and there are several
 <a name="overriding-action"></a>
 ### Overriding controller action
 
-You can use your own logic for the `index()` action method in the controller, then optionally call the List behavior `index()` parent method.
+You can use your own logic for the `index` action method in the controller, then optionally call the List behavior `index` parent method.
 
     public function index()
     {
@@ -540,7 +540,7 @@ The [list filter](#list-filters) model query can also be extended by overriding 
 <a name="extend-records-collection"></a>
 ### Extending the records collection
 
-The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort()` method on the [record collection](../database/collection) to change the sort order of the records.
+The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort` method on the [record collection](../database/collection) to change the sort order of the records.
 
     public function listExtendRecords($records)
     {
@@ -552,7 +552,7 @@ The collection of records used by the list can be extended by overriding the `li
 <a name="custom-column-types"></a>
 ### Custom column types
 
-Custom list column types can be registered in the back-end with the `registerListColumnTypes()` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
 
     public function registerListColumnTypes()
     {

@@ -82,7 +82,7 @@ Alternatively you may pass the variables to the second parameter of the makePart
 <a name="generic-ajax-handlers"></a>
 ### AJAX handlers
 
-Widgets implement the same AJAX approach as the [back-end controllers](controllers-views-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler()` to return the widget's handler name when you refer to it in the widget partials.
+Widgets implement the same AJAX approach as the [back-end controllers](controllers-views-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
 
     <a
         href="javascript:;"
@@ -96,7 +96,7 @@ When called from a widget class or partial the AJAX handler will target itself. 
 <a name="generic-binding"></a>
 ### Binding widgets to controllers
 
-A widget should be bound to a [back-end controller](controllers-views-ajax) before you can start using it in a back-end page or partial. Use the widget's `bindToController()` method for binding it to a controller. The best place to initialize a widget is the controller's constructor. Example:
+A widget should be bound to a [back-end controller](controllers-views-ajax) before you can start using it in a back-end page or partial. Use the widget's `bindToController` method for binding it to a controller. The best place to initialize a widget is the controller's constructor. Example:
 
     public function __construct()
     {
@@ -199,7 +199,7 @@ The property values then become available to set from the [form field definition
 <a name="form-widget-registration"></a>
 ### Form widget registration
 
-Plugins should register form widgets by overriding the `registerFormWidgets()` method inside the [Plugin registration class](../plugin/registration#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
+Plugins should register form widgets by overriding the `registerFormWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
 
     public function registerFormWidgets()
     {
@@ -254,7 +254,7 @@ Report widgets can be used on the back-end dashboard and in other back-end repor
 <a name="report-class-definition"></a>
 ### Report widget classes
 
-The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The class should override the `render()` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
+The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
     plugins/
       rainlab/                    <=== Author name
@@ -345,7 +345,7 @@ Report widgets may have properties that users can manage with the Inspector:
 
 ![image](https://github.com/octobercms/docs/blob/master/images/report-widget-inspector.png?raw=true)
 
-The properties should be defined in the `defineProperties()` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
+The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
 
     public function defineProperties()
     {
@@ -369,7 +369,7 @@ The properties should be defined in the `defineProperties()` method of the widge
 <a name="report-widget-registration"></a>
 ### Report widget registration
 
-Plugins can register report widgets by overriding the `registerReportWidgets()` method inside the [Plugin registration class](../plugin/registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and context in the values. Example:
+Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and context in the values. Example:
 
     public function registerReportWidgets()
     {

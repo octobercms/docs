@@ -516,7 +516,7 @@ In some cases, you may wish to specify your custom messages in a language file i
         'email.required' => 'We need to know your e-mail address!',
     ];
 
-Then in your call to `Validator::make()` use the `Lang:get()` to use your custom files.
+Then in your call to `Validator::make` use the `Lang:get` to use your custom files.
 
     Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 

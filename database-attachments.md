@@ -42,7 +42,7 @@ You may also pass a string to the `data` attribute that contains an absolute pat
 
     $model->avatar = '/path/to/somefile.jpg';
 
-For multiple attach relations (`$attachMany`), you may use the `create()` method on the relationship instead, notice the file object is assocated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
+For multiple attach relations (`$attachMany`), you may use the `create` method on the relationship instead, notice the file object is assocated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
 
     $model->avatar()->create(['data' => Input::file('file_input')]);
 
@@ -58,7 +58,7 @@ Alternatively, you can prepare a File model before hand, then manually associate
 <a name="viewing-attachments"></a>
 ### Viewing attachments
 
-The `getPath()` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**
+The `getPath` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**
 
     echo $model->avatar->getPath();
 
@@ -68,15 +68,15 @@ Returning multiple attachment file paths:
         echo $photo->getPath();
     }
 
-The `getLocalPath()` method will return an absolute path of an uploaded file in the local filesystem.
+The `getLocalPath` method will return an absolute path of an uploaded file in the local filesystem.
 
     echo $model->avatar->getLocalPath();
 
-To output the file contents directly, use the `output()` method, this will include the necessary headers for downloading the file:
+To output the file contents directly, use the `output` method, this will include the necessary headers for downloading the file:
 
     echo $model->avatar->output();
 
-You can resize an image with the `getThumb()` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
+You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
 
 Option | Description
 ------------- | -------------

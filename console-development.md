@@ -68,12 +68,12 @@ If you wanted to create a console command called `acme:mycommand`, you might cre
 
 Once your class is created you should fill out the `name` and `description` properties of the class, which will be used when displaying your command on the command `list` screen.
 
-The `fire()` method will be called when your command is executed. You may place any command logic in this method.
+The `fire` method will be called when your command is executed. You may place any command logic in this method.
 
 <a name="defining-arguments"></a>
 ### Defining arguments
 
-Arguments are defined by returning an array value from the `getArguments()` method are where you may define any arguments your command receives. For example:
+Arguments are defined by returning an array value from the `getArguments` method are where you may define any arguments your command receives. For example:
 
         /**
          * Get the console command arguments.
@@ -95,7 +95,7 @@ The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `I
 <a name="defining-options"></a>
 ### Defining options
 
-Options are defined by returning an array value from the `getOptions()` method. Like arguments this method should return an array of commands, which are described by a list of array options. For example:
+Options are defined by returning an array value from the `getOptions` method. Like arguments this method should return an array of commands, which are described by a list of array options. For example:
 
         /**
          * Get the console command options.
@@ -182,7 +182,7 @@ You may also specify a default value to the `confirm` method, which should be `t
 
 #### Registering a console command
 
-Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register()` method of a [Plugin registration file](../plugin/registration#registration-methods) using  the `registerConsoleCommand()` helper method.
+Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration#registration-methods) using  the `registerConsoleCommand` helper method.
 
     class Blog extends PluginBase
     {

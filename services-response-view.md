@@ -161,7 +161,7 @@ The `macro` function accepts a name as its first argument, and a Closure as its 
 
     return Response::caps('foo');
 
-You may define your macros in the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
+You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
 
 <a name="views"></a>
 ## Views

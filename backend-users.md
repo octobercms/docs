@@ -49,7 +49,7 @@ You may authenticate a user by providing their login and password with `BackendA
 <a name="permission-registration"></a>
 ## Registering permissions
 
-Plugins can register back-end user permissions by overriding the `registerPermissions()` method inside the [Plugin registration class](../plugin/registration#registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
+Plugins can register back-end user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration#registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
 
     acme.blog.access_categories
 
@@ -90,9 +90,9 @@ You can also use the **asterisk** symbol to indicate the "all permissions" condi
 <a name="features"></a>
 ## Restricting access to features
 
-The back-end user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the back-end user interface. The permission methods supported by the back-end user are `hasPermission()` and `hasAccess()`. The both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.
+The back-end user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the back-end user interface. The permission methods supported by the back-end user are `hasPermission` and `hasAccess`. The both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.
 
-The `hasAccess()` method returns **true** for any permission if the user is an administrator. The `hasPermission()` method is more strict. The following example shows how to use the methods in the controller code:
+The `hasAccess` method returns **true** for any permission if the user is an administrator. The `hasPermission` method is more strict. The following example shows how to use the methods in the controller code:
 
     if ($this->user->hasAccess('acme.blog.*')) {
         // ...

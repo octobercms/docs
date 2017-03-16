@@ -29,7 +29,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-**Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create()`, `update()` and `preview()` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
+**Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
 Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
@@ -323,7 +323,7 @@ There are various native field types that can be used for the **type** setting. 
             published: Published
             archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options()` to be defined in the model. Using the example above, the model should have the ``getStatusTypeOptions()`` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
+The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
 
     status_type:
         label: Blog Post Status
@@ -336,7 +336,7 @@ Supplying the dropdown options in the model class:
         return ['all' => 'All', ...];
     }
 
-The third global method `getDropdownOptions()` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
+The third global method `getDropdownOptions` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
 
     public function getDropdownOptions($fieldName, $value, $formData)
     {
@@ -348,7 +348,7 @@ The third global method `getDropdownOptions()` can also be defined in the model,
         }
     }
 
-The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses()` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions()` method, and should return an array of options in the format **key => label**.
+The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
@@ -740,7 +740,7 @@ Option | Description
 **mode** | controls how the value is returned, either string, array or relation. Default: string.
 **separator** | separate tags with the specified character, either comma or space. Default: comma.
 **customTags** | allows custom tags to be entered manually by the user. Default: true
-**options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options()` method. Optional.
+**options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options` method. Optional.
 **nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name.
 
 <a name="form-views"></a>
@@ -748,7 +748,7 @@ Option | Description
 
 For each page your form supports [Create](#form-create-page), [Update](#form-update-page) and [Preview](#form-preview-page) you should provide a [view file](#introduction) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
 
-The form behavior adds two methods to the controller class: `formRender()` and `formRenderPreview()`. These methods render the form controls configured with the YAML file described above.
+The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 
 <a name="form-create-view"></a>
 ### Create view
@@ -929,7 +929,7 @@ In the above example the `state` form field will refresh when the `country` fiel
         }
     }
 
-This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields()` method inside the model, described in the [Filtering form fields](#filter-form-fields) section.
+This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering form fields](#filter-form-fields) section.
 
 <a name="prevent-field-submission"></a>
 ### Preventing a field from being submitted
@@ -952,7 +952,7 @@ Sometimes you may wish to modify the default form behavior and there are several
 <a name="overriding-action"></a>
 ### Overriding controller action
 
-You can use your own logic for the `create()`, `update()` or `preview()` action method in the controller, then optionally call the Form behavior parent method.
+You can use your own logic for the `create`, `update` or `preview` action method in the controller, then optionally call the Form behavior parent method.
 
     public function update($recordId, $context = null)
     {
@@ -1029,7 +1029,7 @@ Each method takes an array of fields similar to the [form field configuration](#
 <a name="filter-form-fields"></a>
 ### Filtering form fields
 
-You can filter the form field definitions by overriding the `filterFields()` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
+You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
 
     public function filterFields($fields, $context = null)
     {

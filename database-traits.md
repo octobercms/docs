@@ -276,7 +276,7 @@ October models uses the built-in [Validator class](../services/validation). The 
 
 > **Note**: You're free to use the [array syntax](../services/validation#basic-usage) for validation rules as well.
 
-Models validate themselves automatically when the `save()` method is called.
+Models validate themselves automatically when the `save` method is called.
 
     $user = new User;
     $user->name = 'Actual Person';
@@ -286,19 +286,19 @@ Models validate themselves automatically when the `save()` method is called.
     // Returns false if model is invalid
     $success = $user->save();
 
-> **Note:** You can also validate a model at any time using the `validate()` method.
+> **Note:** You can also validate a model at any time using the `validate` method.
 
 <a name="retrieving-validation-errors"></a>
 ### Retrieving validation errors
 
-When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors()` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
+When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
 > **Note:** The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation#working-with-error-messages) of formatting errors.
 
 <a name="overriding-validation"></a>
 ### Overriding validation
 
-The `forceSave()` method validates the model and saves regardless of whether or not there are validation errors.
+The `forceSave` method validates the model and saves regardless of whether or not there are validation errors.
 
     $user = new User;
 

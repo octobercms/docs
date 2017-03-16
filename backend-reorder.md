@@ -8,7 +8,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-**Reorder behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder()`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
+**Reorder behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
 
 The behavior depends on a [model class](../database/model) which must implement one of the following [model traits](../database/traits):
 
@@ -66,7 +66,7 @@ Option | Description
 <a name="reorder-display"></a>
 ## Displaying the reorder page
 
-You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reodering includes the toolbar, the view file will consist solely of the single `reorderRender()` method call.
+You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reodering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
     <?= $this->reorderRender() ?>
 

@@ -65,7 +65,7 @@ Argument | Description
 **order** | sorting order for multiple records.
 **conditions** | filters the relation using a raw where query statement.
 **scope** | filters the relation using a supplied scope method.
-**push** | if set to false, this relation will not be saved via `push()`, default: true.
+**push** | if set to false, this relation will not be saved via `push`, default: true.
 **delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
 **count** | if set to true, the result contains a `count` column only, used for counting relations, default: false.
 
@@ -531,7 +531,7 @@ For example, imagine a blog system in which a `User` model has many associated `
 <a name="querying-method"></a>
 ### Access via relationship method
 
-You may query the **posts** relationship and add additional constraints to the relationship using the `posts()` method. This gives you the ability to chain any of the [query builder](query) methods on the relationship.
+You may query the **posts** relationship and add additional constraints to the relationship using the `posts` method. This gives you the ability to chain any of the [query builder](query) methods on the relationship.
 
     $user = User::find(1);
 
@@ -675,7 +675,7 @@ October provides convenient methods for adding new models to relationships. Prim
 
 #### Add method
 
-Use the `add()` method to associate a new relationship.
+Use the `add` method to associate a new relationship.
 
     $comment = new Comment(['message' => 'A new comment.']);
 
@@ -683,9 +683,9 @@ Use the `add()` method to associate a new relationship.
 
     $comment = $post->comments()->add($comment);
 
-Notice that we did not access the `comments` relationship as a dynamic property. Instead, we called the `comments` method to obtain an instance of the relationship. The `add()` method will automatically add the appropriate `post_id` value to the new `Comment` model.
+Notice that we did not access the `comments` relationship as a dynamic property. Instead, we called the `comments` method to obtain an instance of the relationship. The `add` method will automatically add the appropriate `post_id` value to the new `Comment` model.
 
-If you need to save multiple related models, you may use the `addMany()` method:
+If you need to save multiple related models, you may use the `addMany` method:
 
     $post = Post::find(1);
 
@@ -696,7 +696,7 @@ If you need to save multiple related models, you may use the `addMany()` method:
 
 #### Remove method
 
-Comparatively, the `remove()` method can be used to disassociate a relationship, making it an orphaned record.
+Comparatively, the `remove` method can be used to disassociate a relationship, making it an orphaned record.
 
     $post->comments()->remove($comment);
 
@@ -704,13 +704,13 @@ In the case of many-to-many relations, the record is removed from the relationsh
 
     $post->categories()->remove($category);
 
-In the case of a "belongs to" relationship, you may use the `dissociate()` method, which doesn't require the related model passed to it.
+In the case of a "belongs to" relationship, you may use the `dissociate` method, which doesn't require the related model passed to it.
 
     $post->author()->dissociate();
 
 #### Adding with pivot data
 
-When working with a many-to-many relationship, the `add()` method accepts an array of additional intermediate "pivot" table attributes as its second argument as an array.
+When working with a many-to-many relationship, the `add` method accepts an array of additional intermediate "pivot" table attributes as its second argument as an array.
 
     $user = User::find(1);
 
@@ -718,13 +718,13 @@ When working with a many-to-many relationship, the `add()` method accepts an arr
 
     $user->roles()->add($role, $pivotData);
 
-The second argument of the `add()` method can also specify the session key used by [deferred binding](#deferred-binding) when passed as a string. In these cases the pivot data can be provided as the third argument instead.
+The second argument of the `add` method can also specify the session key used by [deferred binding](#deferred-binding) when passed as a string. In these cases the pivot data can be provided as the third argument instead.
 
     $user->roles()->add($role, $sessionKey, $pivotData);
 
 #### Create method
 
-While `add()` and `addMany()` accepts a full model instance, you may also use the `create()` method, that accepts a PHP array of attributes, creates a model, and inserts it into the database.
+While `add` and `addMany` accept a full model instance, you may also use the `create` method, that accepts a PHP array of attributes, creates a model, and inserts it into the database.
 
     $post = Post::find(1);
 
@@ -732,7 +732,7 @@ While `add()` and `addMany()` accepts a full model instance, you may also use th
         'message' => 'A new comment.',
     ]);
 
-Before using the `create()` method, be sure to review the documentation on attribute [mass assignment](model#mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
+Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model#mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
 
 <a name="inserting-dynamic-property"></a>
 ### Insert via dynamic property
@@ -763,7 +763,7 @@ Relationships can be disassociated by assigning the NULL value to the property.
 
     $post->save();
 
-Similar to [deferred binding](#deferred-binding), relationships defined on non-existent models are deferred in memory until they are saved. In this example the post does not exist yet, so the `post_id` attribute cannot be set on the comment via `$post->comments`. Therefore the association is deferred until the post is created by calling the `save()` method.
+Similar to [deferred binding](#deferred-binding), relationships defined on non-existent models are deferred in memory until they are saved. In this example the post does not exist yet, so the `post_id` attribute cannot be set on the comment via `$post->comments`. Therefore the association is deferred until the post is created by calling the `save` method.
 
     $comment = Comment::find(1);
 
@@ -882,7 +882,7 @@ The comment in the next example will not be deleted unless the post is saved.
 <a name="list-all-bindings"></a>
 ### List all bindings
 
-Use the `withDeferred()` method of a relation to load all records, including deferred. The results will include existing relations as well.
+Use the `withDeferred` method of a relation to load all records, including deferred. The results will include existing relations as well.
 
     $post->comments()->withDeferred($sessionKey)->get();
 
@@ -896,13 +896,13 @@ It's a good idea to cancel deferred binding and delete the slave objects rather 
 <a name="commit-all-bindings"></a>
 ### Commit all bindings
 
-You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save()` method.
+You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save` method.
 
     $post = new Post;
     $post->title = "First blog post";
     $post->save(null, $sessionKey);
 
-The same approach works with the model's `create()` method:
+The same approach works with the model's `create` method:
 
     $post = Post::create(['title' => 'First blog post'], $sessionKey);
 

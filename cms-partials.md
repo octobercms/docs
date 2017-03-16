@@ -61,7 +61,7 @@ Partials, like pages, can use any Twig features. Please refer to the [Dynamic pa
 <a name="partial-life-cycle"></a>
 ### Partial execution life cycle
 
-There are special functions that can be defined in the PHP section of partials: `onStart()` and `onEnd()`. The `onStart()` function is executed before the partial is rendered and before the partial [components](components) are executed. The `onEnd()` function is executed before the partial is rendered and after the partial [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
+There are special functions that can be defined in the PHP section of partials: `onStart` and `onEnd`. The `onStart` function is executed before the partial is rendered and before the partial [components](components) are executed. The `onEnd` function is executed before the partial is rendered and after the partial [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
 
     ==
     function onStart()

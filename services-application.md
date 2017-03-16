@@ -55,7 +55,7 @@ Since we have bound the `UserRepositoryInterface` to a concrete type, the `DbUse
 <a name="where-to-register"></a>
 ### Where to register bindings
 
-IoC bindings, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place IoC registration logic.
+IoC bindings, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place IoC registration logic.
 
 <a name="service-providers"></a>
 ## Service providers

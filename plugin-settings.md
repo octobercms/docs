@@ -53,7 +53,7 @@ Settings models [can be registered](#backend-pages) to appear on the **back-end 
 <a name="writing-settings"></a>
 ### Writing to a settings model
 
-The settings model has the static `set()` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
+The settings model has the static `set` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
 
     use Acme\Demo\Models\Settings;
 
@@ -73,7 +73,7 @@ The settings model has the static `set()` method that allows to save individual 
 <a name="reading-settings"></a>
 ### Reading from a settings model
 
-The settings model has the static `get()` method that enables you to load individual properties. Also, when you instantiate a model with the `instance()` method, it loads the properties from the database and you can access them directly.
+The settings model has the static `get` method that enables you to load individual properties. Also, when you instantiate a model with the `instance` method, it loads the properties from the database and you can access them directly.
 
     // Outputs: ABCD
     echo Settings::instance()->api_key;
@@ -93,7 +93,7 @@ The back-end contains a dedicated area for housing settings and configuration, i
 <a name="link-registration"></a>
 ### Settings link registration
 
-The back-end settings navigation links can be extended by overriding the `registerSettings()` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
 
     public function registerSettings()
     {
@@ -147,7 +147,7 @@ Just like [setting navigation context in the controller](../backend/controllers-
         SettingsManager::setContext('You.Plugin', 'settings');
     }
 
-The first argument of the `setContext()` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#link-registration).
+The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#link-registration).
 
 <a name="file-configuration"></a>
 ## File-based configuration

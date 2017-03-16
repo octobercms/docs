@@ -91,14 +91,14 @@ You may throw an [AJAX exception](../services/error-log#ajax-exception) using th
 <a name="before-handler"></a>
 ## Running code before handlers
 
-Sometimes you may want code to execute before a handler executes. Defining an `onInit()` function as part of the [page execution life cycle](../cms/layouts#dynamic-pages) allows code to run before every AJAX handler.
+Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts#dynamic-pages) allows code to run before every AJAX handler.
 
     function onInit()
     {
         // From a page or layout PHP code section
     }
 
-You may define an `init()` method inside a [component class](../plugin/components#page-cycle-init) or [backend widget class](../backend/widgets).
+You may define an `init` method inside a [component class](../plugin/components#page-cycle-init) or [backend widget class](../backend/widgets).
 
     function init()
     {

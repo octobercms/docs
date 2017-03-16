@@ -308,7 +308,7 @@ Renders in Twig as
         <p>{{ fields.content|raw }}</p>
     {% endfor %}
 
-Calling `$syntax->toEditor()` will return a different array for a repeater field:
+Calling `$syntax->toEditor` will return a different array for a repeater field:
 
     'repeater' => [
         'label' => 'Website name',

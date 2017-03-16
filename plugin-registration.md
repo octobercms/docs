@@ -64,7 +64,7 @@ The **Plugin.php** file, called the *Plugin registration file*, is an initializa
 1. Information about the plugin, its name, and author.
 1. Registration methods for extending the CMS.
 
-Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is the `pluginDetails()`. An example Plugin registration file:
+Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is `pluginDetails`. An example Plugin registration file:
 
     namespace Acme\Blog;
 
@@ -112,7 +112,7 @@ Method | Description
 <a name="basic-plugin-information"></a>
 ### Basic plugin information
 
-The `pluginDetails()` is a required method of the plugin registration class. It should return an array containing the following keys:
+The `pluginDetails` is a required method of the plugin registration class. It should return an array containing the following keys:
 
 Key | Description
 ------------- | -------------
@@ -126,9 +126,9 @@ Key | Description
 <a name="routing-initialization"></a>
 ## Routing and initialization
 
-Plugin registration files can contain two methods `boot()` and `register()`. With these methods you can do anything you like, like register routes or attach handlers to events.
+Plugin registration files can contain two methods `boot` and `register`. With these methods you can do anything you like, like register routes or attach handlers to events.
 
-The `register()` method is called immediately when the plugin is registered. The `boot()` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method. For example, inside the `boot()` method you can extend models:
+The `register` method is called immediately when the plugin is registered. The `boot` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method. For example, inside the `boot` method you can extend models:
 
     public function boot()
     {
@@ -137,7 +137,7 @@ The `register()` method is called immediately when the plugin is registered. The
         });
     }
 
-> **Note:** The `boot()` and `register()` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
+> **Note:** The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
 
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
 
@@ -171,7 +171,7 @@ Dependency definitions can be complex but care should be taken to prevent circul
 <a name="extending-twig"></a>
 ## Extending Twig
 
-Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags()` method of the plugin registration class. The next example registers two Twig filters and two functions.
+Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags` method of the plugin registration class. The next example registers two Twig filters and two functions.
 
     public function registerMarkupTags()
     {
@@ -201,7 +201,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
 <a name="navigation-menus"></a>
 ## Navigation menus
 
-Plugins can extend the back-end navigation menus by overriding the `registerNavigation()` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
+Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
     public function registerNavigation()
     {
@@ -263,7 +263,7 @@ Alternatively, you can push it directly into the Kernel via the following.
 <a name="elevated-plugin"></a>
 ## Elevated permissions
 
-By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the back-end. When these areas are accessed without elevated permissions, the `boot()` and `register()` [initialization methods](#routing-initialization) for the plugin will not fire.
+By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the back-end. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
 
 Request | Description
 ------------- | -------------

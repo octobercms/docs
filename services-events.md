@@ -50,7 +50,7 @@ You may also pass a reference to any callable object or a [dedicated event class
 <a name="event-registration"></a>
 ### Where to register listeners
 
-The most common place is the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods).
+The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
 
     class Plugin extends PluginBase
     {
@@ -178,7 +178,7 @@ The event class can be registered with the `Event::listen` method like any other
 
     Event::listen('auth.login', 'LoginHandler');
 
-By default, the `handle()` method on the `LoginHandler` class will be called:
+By default, the `handle` method on the `LoginHandler` class will be called:
 
     class LoginHandler
     {
@@ -247,14 +247,14 @@ Sometimes you want to bind events to a single instance of an object. You may use
         use \October\Rain\Support\Traits\Emitter;
     }
 
-This trait provides a method to listen for events with `bindEvent()`.
+This trait provides a method to listen for events with `bindEvent`.
 
     $manager = new UserManager;
     $manager->bindEvent('user.beforeRegister', function($user) {
         // Check if the $user is a spammer
     });
 
-The `fireEvent()` method is used to fire events.
+The `fireEvent` method is used to fire events.
 
     $manager = new UserManager;
     $manager->fireEvent('user.beforeRegister', [$user]);

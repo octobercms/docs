@@ -95,7 +95,7 @@ Inside the [Twig section](themes#twig-section) of a page template you can use an
 <a name="page-life-cycle"></a>
 ### Page execution life cycle
 
-There are special functions that can be defined in the PHP section of pages and layouts: `onInit()`, `onStart()` and `onEnd()`. The `onInit()` function is executed when all components are initialized and before AJAX requests are handled. The `onStart()` function is executed in the beginning of the page execution. The `onEnd()` function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
+There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart` and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
 
     url = "/"
     ==
@@ -162,7 +162,7 @@ The onHandleForm function can be defined in the page or layout [PHP section](the
         $this['lastValue'] = post('value');
     }
 
-The handler loads the value with the `post()` function and initializes the page `lastValue` attribute variable which is displayed below the form in the first example.
+The handler loads the value with the `post` function and initializes the page `lastValue` attribute variable which is displayed below the form in the first example.
 
 > **Note:** If a handler with a same name is defined in the page layout, page and a page [component](components) October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
 
@@ -199,7 +199,7 @@ More information can be found on [`this.page` in the Markup guide](../markup/thi
 <a name="injecting-assets"></a>
 ## Injecting page assets programmatically
 
-If needed, you can inject assets (CSS and JavaScript files) to pages with the controller's `addCss()` and `addJs()` methods. It could be done in the `onStart()` function defined in the [PHP section](themes#php-section) of a page or [layout](layout) template. Example:
+If needed, you can inject assets (CSS and JavaScript files) to pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layout) template. Example:
 
     function onStart()
     {
@@ -207,7 +207,7 @@ If needed, you can inject assets (CSS and JavaScript files) to pages with the co
         $this->addJs('assets/js/app.js');
     }
 
-If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme.
+If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme.
 
 In order to output the injected assets on pages or [layouts](layout) use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
 

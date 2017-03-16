@@ -266,14 +266,14 @@ For example, if a *Person* has one *Phone* the relation manager will display for
 <a name="relation-display"></a>
 ## Displaying a relation manager
 
-Before relations can be managed on any page, the target model must first be initialized in the controller by calling the `initRelation()` method.
+Before relations can be managed on any page, the target model must first be initialized in the controller by calling the `initRelation` method.
 
     $post = Post::where('id', 7)->first();
     $this->initRelation($post);
 
 > **Note:** The [form behavior](forms) will automatically initialize the model on its create, update and preview actions.
 
-The relation manager can then be displayed for a specified relation definition by calling the `relationRender()` method. For example, if you want to display the relation manager on the [Preview](forms#form-preview-view) page, the **preview.htm** view contents could look like this:
+The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms#form-preview-view) page, the **preview.htm** view contents could look like this:
 
     <?= $this->formRenderPreview() ?>
 
