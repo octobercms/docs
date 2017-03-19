@@ -27,6 +27,7 @@ Option | Description
 **success** | a callback function to execute in case of a successful request. If this option is supplied it overrides the default framework's functionality: the elements are not updated, the `beforeUpdate` event is not triggered, the `ajaxUpdate` and `ajaxUpdateComplete` events are not triggered. The event handler gets 3 arguments: the data object received from the server, the text status string and the jqXHR object. However, you can still call the default framework functionality calling `this.success(...)` inside your function.
 **error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed. The handler gets 3 parameters: the jqXHR object, the text status string and the error object - see [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/).
 **complete** | a callback function execute in case of a success or an error.
+**form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
 **flash** | when specified this option instructs the server to clear and send any flash messages with the response.
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element, the object should support the `show()` and `hide()` functions to manage the visibility. You may pass the global object `$.oc.stripeLoadIndicator` when using the [framework extras](../ajax/extras).
 
