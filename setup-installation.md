@@ -52,7 +52,7 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 1. **An error code "liveConnection" is displayed**: The installer will test a connection to the installation server using port 80. Check that your webserver can create outgoing connections on port 80 via PHP. Contact your hosting provider or this is often found in the server firewall settings.
 
-1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try disabling [debug mode](../setup/configuration#debug-mode) to see the underlying error message.
+1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration#debug-mode) to see the underlying error message.
 
 > **Note:** A detailed installation log can be found in the `install_files/install.log` file.
 
