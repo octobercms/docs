@@ -56,6 +56,8 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 > **Note:** A detailed installation log can be found in the `install_files/install.log` file.
 
+> **Note:** To use composer with an October instance that has been installed using the above method, you must first copy the `tests/` directory, `composer.json` file, and `server.php` file from [GitHub](https://github.com/octobercms/october) into the October instance and then run `composer install`.
+
 <a name="command-line-installation"></a>
 ## Command-line installation
 
