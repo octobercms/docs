@@ -313,7 +313,7 @@ The fully qualified plugin name is also acceptable, for example:
 <a name="model-scopes"></a>
 ### Model scopes
 
-If a model scope returns a query object, used for chaining, they should generally be prefix with `apply` to indicate they are being applied to the query. Defined as:
+If a model scope returns a query object, used for chaining, they should be prefixed with `apply` to indicate they are being applied to the query. Defined as:
 
     public function scopeApplyUser($query, $user)
     {
