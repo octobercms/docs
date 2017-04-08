@@ -73,30 +73,48 @@ Any class that uses the `Extendable` or `ExtendableTrait` can have its construct
     MyNamespace\Controller::extend(function($controller) {
         //
     });
+    
+#### Dynamically declaring properties
 
+Properties can be declared on an extendable object by calling `addDynamicProperty` and passing a property name and value.
+
+    Post::extend(function($model) {
+        $model->addDynamicProperty('tagsCache', null);
+    });
+    
+> **Note**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **October\Rain\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
+
+#### Dynamically creating methods
+
+Methods can be created to an extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
+
+    Post::extend(function($model) {
+        $model->addDynamicProperty('tagsCache', null);
+    
+        $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
+            if ($this->tagsCache) {
+                return $this->tagsCache;
+            } else {
+                return $this->tagsCache = $model->tags()->lists('name');
+            }
+        });
+    });
+    
 #### Dynamically implementing a behavior
 
 This unique ability to extend constructors allows behaviors to be implemented dynamically, for example:
 
     /**
-     * Extend the Pizza Shop to include the Master Splinter behavior too
+     * Extend the RainLab.Users controller to include the RelationController behavior too
      */
-    MyNamespace\Controller::extend(function($controller) {
+    RainLab\Users\Controllers\Users::extend(function($controller) {
 
         // Implement the list controller behavior dynamically
-        $controller->implement[] = 'MyNamespace.Behaviors.ListController';
+        $controller->implement[] = 'Backend.Behaviors.RelationController';
+        
+        // Declare the relationConfig property dynamically for the RelationController behavior to use
+        $controller->addDynamicProperty('relationConfig', '$/myvendor/myplugin/controllers/users/config_relation.yaml');
     });
-
-#### Dynamically creating methods
-
-Methods can be created to a extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
-
-    Post::extend(function($model) {
-        $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
-            return $model->tags()->lists('name');
-        });
-    });
-
 
 <a name="usage-example"></a>
 ## Usage example
