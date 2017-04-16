@@ -183,31 +183,35 @@ This `Controller` class will implement the `FormController` behavior and then th
 
     // Prints: You might not see me...
     echo $controller->asExtension('FormController')->otherMethod();
-    
+
 #### Detecting utilized extensions
 
-In order to check if a particular object has been extended with a particular behavior, use the `isClassExtendedWith` method on the object. Below is an example of dynamically extending a `UsersController` of a third-party plugin utilizing this method in order to avoid preventing other plugins from also extending the afore-mentioned third-party plugin.
+To check if an object has been extended with a behavior, you may use the `isClassExtendedWith` method on the object.
+
+    $controller->isClassExtendedWith('Backend.Behaviors.RelationController');
+
+Below is an example of dynamically extending a `UsersController` of a third-party plugin utilizing this method to avoid preventing other plugins from also extending the afore-mentioned third-party plugin.
 
     UsersController::extend(function($controller) {
-        // Implement the relation controller if it doesn't exist already
+
+        // Implement behavior if not already implemented
         if (!$controller->isClassExtendedWith('Backend.Behaviors.RelationController')) {
             $controller->implement[] = 'Backend.Behaviors.RelationController';
         }
-        
-        // Implement the relationConfig property with our custom config if it doesn't exist already
-        $myConfigPath = '$/myvendor/myplugin/controllers/users/config_relation.yaml';
+
+        // Define property if not already defined
         if (!isset($controller->relationConfig)) {
-            $controller->addDynamicProperty('relationConfig', $myConfigPath);
-        } else {
-            // Ensure that we have an instantiated config object to work with
-            $config = $controller->makeConfig($controller->relationConfig);
-            
-            // Instantiate our custom config object to work with
-            $myConfig = $controller->makeConfig($myConfigPath);
-            
-            // Merge the above two
-            $controller->relationConfig = (object) array_merge((array) $config, (array) $myConfig);
+            $controller->addDynamicProperty('relationConfig');
         }
+
+        // Splice in configuration safely
+        $myConfigPath = '$/myvendor/myplugin/controllers/users/config_relation.yaml';
+
+        $controller->relationConfig = $this->mergeConfig(
+            $controller->relationConfig,
+            $myConfigPath
+        );
+
     }
 
 ### Soft definition
