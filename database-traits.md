@@ -62,6 +62,8 @@ Similar to the [hashable trait](#hashable), encrypted attributes are encrypted w
          */
         protected $encryptable = ['api_key', 'api_secret'];
     }
+    
+> **Note:** Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#standard-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
 
 <a name="sluggable"></a>
 ## Sluggable
