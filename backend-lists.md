@@ -299,6 +299,23 @@ If the [relationship definition](../database/relations) uses the **count** argum
         relation: users_count
         valueFrom: count
         default: 0
+        
+> **Note:** Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
+
+**Best Practice:**
+
+     group_name:
+         label: Group
+         relation: group
+         select: name
+
+**Poor Practice:**
+
+    # This will overwrite the value of $record->group_id which will break accessing relations from the list view
+    group_id:
+        label: Group
+        relation: group
+        select: name
 
 <a name="column-partial"></a>
 ### Partial
