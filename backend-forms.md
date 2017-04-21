@@ -497,7 +497,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 <a name="form-widgets"></a>
 ## Form widgets
 
-There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets) article.
+There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
 
 <div class="content-list collection-method-list" markdown="1">
 - [Code editor](#widget-codeeditor)
