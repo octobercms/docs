@@ -469,14 +469,16 @@ You can externally bind to [local events](../services/events) for a single insta
 
 Since models are [equipped to use behaviors](../services/behaviors), they can be extended with the static `extend` method. The method takes a closure and passes the model object into it. Inside the closure you can add relations to the model:
 
-    User::extend(function($model) {
-        $model->hasOne['author'] = ['Author', 'key' => 'user_id'];
+    \Backend\Models\User::extend(function($model) {
+        $model->hasOne['profile'] = ['MyVendor\MyPlugin\Models\Profile', 'key' => 'user_id'];
     });
 
 Or even bind to local events:
 
-    User::extend(function($model) {
+    \Backend\Models\User::extend(function($model) {
         $model->bindEvent('model.beforeSave', function() use ($model) {
             // ...
         });
     });
+    
+> **Note:** Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
