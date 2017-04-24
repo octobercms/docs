@@ -676,6 +676,55 @@ Option | Description
 **form** | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
 **maxItems** | maximum number of items to allow within the repeater.
+**groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
+
+The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
+
+    content:
+        type: repeater
+        prompt: Add content block
+        groups: $/acme/blog/config/repeater_fields.yaml
+
+This is an example of a group configuration file, which would be located in **/plugins/acme/blog/config/repeater_fields.yaml**. Alternatively these definitions could be specified inline with the repeater.
+
+    textarea:
+        name: Textarea
+        description: Basic text field
+        icon: icon-file-text-o
+        fields:
+            text_area:
+                label: Text Content
+                type: textarea
+                size: large
+
+    quote:
+        name: Quote
+        description: Quote item
+        icon: icon-quote-right
+        fields:
+            quote_position:
+                span: auto
+                label: Quote Position
+                type: radio
+                options:
+                    left: Left
+                    center: Center
+                    right: Right
+            quote_content:
+                span: auto
+                label: Details
+                type: textarea
+
+Each group must specify a unique key and the definition supports the following options.
+
+Option | Description
+------------- | -------------
+**name** | The name of the group.
+**description** | A breif description of the group.
+**icon** | Defines an icon for the group, optional.
+**fields** | form fields belonging to the group, see [backend form fields](#form-fields).
+
+> **Note**: The group key is stored along with the saved data as the `_group` attribute.
 
 <a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
@@ -1052,4 +1101,4 @@ The above example will set the `hidden` flag on certain fields by checking the v
 <a name="validate-form-fields"></a>
 ## Validating form fields
 
-To validate the fields of your form you can make use of the [Validation](../database/traits#validation) trait in your model. 
+To validate the fields of your form you can make use of the [Validation](../database/traits#validation) trait in your model.
