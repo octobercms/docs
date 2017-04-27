@@ -209,6 +209,21 @@ If needed, you can inject assets (CSS and JavaScript files) to pages with the co
 
 If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme.
 
+Injected assets can be combined by passing them in as an array:
+
+    function onStart()
+    {
+        $this->addCss(['assets/css/hello.css', 'assets/css/goodbye.css']);
+        $this->addJs(['assets/js/app.js', 'assets/js/nav.js']);
+    }
+
+LESS and SCSS assets can be injected and compiled using the combiner:
+
+    function onStart()
+    {
+        $this->addCss(['assets/less/base.less]');
+    }
+
 In order to output the injected assets on pages or [layouts](layout) use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
 
     <head>
