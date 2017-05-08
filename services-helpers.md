@@ -718,7 +718,7 @@ You may also pass multiple arguments to trace multiple messages:
 
     trace_log($value1, $value2, $exception, '...');
 
-<a name="method-trace-log"></a>
+<a name="method-trace-sql"></a>
 #### `trace_sql()` {#collection-method}
 
 The `trace_sql` function enables database logging and begins to monitor all SQL output.
