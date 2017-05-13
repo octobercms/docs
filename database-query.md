@@ -45,9 +45,9 @@ If you just need to retrieve a single row from the database table, you may use t
 
     echo $user->name;
 
-If you don't even need an entire row, you may extract a single value from a record using the `pluck` method. This method will return the value of the column directly:
+If you don't even need an entire row, you may extract a single value from a record using the `value` method. This method will return the value of the column directly:
 
-    $email = Db::table('users')->where('name', 'John')->pluck('email');
+    $email = Db::table('users')->where('name', 'John')->value('email');
 
 #### Chunking results from a table
 
