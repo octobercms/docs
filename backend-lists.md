@@ -553,7 +553,7 @@ Using the `extendfilterScopes` method you can add and remove filter scopes to an
 
         Categories::extendListColumns(function($filter) {
             $filter->addScopes([
-                'my_filter_scope' => [
+                'my_scope' => [
                     'label' => 'My Filter Scope'
                 ]
             ]);
@@ -578,7 +578,7 @@ Method | Description
 ------------- | -------------
 **addScopes** | adds new scopes to filter widget
 
-Each method takes an array of columns similar to the [list filters configuration](#list-filters).
+Each method takes an array of scopes similar to the [list filters configuration](#list-filters).
 
 
 <a name="extend-model-query"></a>
