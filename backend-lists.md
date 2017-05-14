@@ -16,6 +16,7 @@
     - [Overriding controller action](#overriding-action)
     - [Overriding views](#overriding-views)
     - [Extending column definitions](#extend-list-columns)
+    - [Extending filter scopes](#extend-filter-scopes)
     - [Extending the model query](#extend-model-query)
     - [Extending the records collection](#extend-records-collection)
     - [Custom column types](#custom-column-types)
@@ -432,6 +433,7 @@ Sometimes you may wish to modify the default list behavior and there are several
 - [Overriding controller action](#overriding-action)
 - [Overriding views](#overriding-views)
 - [Extending column definitions](#extend-list-columns)
+- [Extending filter scopes](#extend-filter-scopes)
 - [Extending the model query](#extend-model-query)
 - [Custom column types](#custom-column-types)
 
@@ -534,6 +536,39 @@ Method | Description
 **removeColumn** | removes a column from the list
 
 Each method takes an array of columns similar to the [list column configuration](#list-columns).
+
+<a name="extend-filter-scopes"></a>
+### Extending filter scopes
+
+You can extend the filter scopes of another controller from outside by calling the `extendFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
+
+        Categories::extendFilterScopes(function($filter) {
+            $filter->addScopes([
+                'my_scope' => [
+                    'label' => 'My Filter Scope'
+                ]
+            ]);
+        });
+
+> The array of scopes provided is similar to the [list filters configuration](#list-filters).
+
+You can also extend the filter scopes internally to the controller class, simply override the `filterExtendScopes` method.
+
+    class Categories extends \Backend\Classes\Controller
+    {
+        [...]
+
+        public function filterExtendScopes($filter)
+        {
+            $filter->addScopes([...]);
+        }
+    }
+
+The following methods are available on the $filter object.
+
+Method | Description
+------------- | -------------
+**addScopes** | adds new scopes to filter widget
 
 <a name="extend-model-query"></a>
 ### Extending the model query
