@@ -540,9 +540,9 @@ Each method takes an array of columns similar to the [list column configuration]
 <a name="extend-filter-scopes"></a>
 ### Extending filter scopes
 
-You can extend the filter scopes of another controller from outside by calling the `extendFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
+You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
 
-        Categories::extendFilterScopes(function($filter) {
+        Categories::extendListFilterScopes(function($filter) {
             $filter->addScopes([
                 'my_scope' => [
                     'label' => 'My Filter Scope'
@@ -552,13 +552,13 @@ You can extend the filter scopes of another controller from outside by calling t
 
 > The array of scopes provided is similar to the [list filters configuration](#list-filters).
 
-You can also extend the filter scopes internally to the controller class, simply override the `filterExtendScopes` method.
+You can also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
     class Categories extends \Backend\Classes\Controller
     {
         [...]
 
-        public function filterExtendScopes($filter)
+        public function listFilterExtendScopes($filter)
         {
             $filter->addScopes([...]);
         }
