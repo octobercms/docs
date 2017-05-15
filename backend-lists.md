@@ -398,6 +398,12 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
             conditions: created_at >= ':after' AND created_at <= ':before'
 
 
+        visitors:
+            label: Visitor Count
+            type: numberrange
+            conditions: vistors >= ':min' and visitors <= ':max'
+
+
 <a name="filter-scope-options"></a>
 ### Scope options
 
@@ -424,6 +430,7 @@ Type | Description
 **switch** | used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off.
 **date** | displays a date picker for a single date to be selected.
 **daterange** | displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:before` and `:after`.
+**numberrange** | displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`.
 
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
