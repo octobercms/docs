@@ -104,7 +104,7 @@ Option | Description
 **mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the search query, the first argument will contain the search term.
 
-The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
+The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](backend-controls.md#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
 
     <div data-control="toolbar">
         <a
