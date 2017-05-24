@@ -66,7 +66,7 @@ Option | Description
 <a name="reorder-display"></a>
 ## Displaying the reorder page
 
-You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reodering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
+You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
     <?= $this->reorderRender() ?>
 
