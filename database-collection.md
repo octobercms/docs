@@ -53,7 +53,7 @@ Collections may also be converted to a PHP array or JSON:
 
 The `first` method will return the first object that matches the condition.
 
-    $found = $collection->first(function($model) {
+    $found = $collection->first(function($key, $model) {
         return $model->color == 'red';
     });
 
