@@ -208,6 +208,7 @@ Option | Description
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
 **cssClass** | assigns a CSS class to the tab container.
+**paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class.
 
 <a name="form-field-options"></a>
 ### Field options
