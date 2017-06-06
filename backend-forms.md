@@ -154,7 +154,6 @@ Form fields are defined with the YAML file. The form fields configuration is use
               fields.yaml    <=== Model form fields config file
             Post.php         <=== model class
 
-
 Fields can be placed in three areas, the **outside area**, **primary tabs** or **secondary tabs**. The next example shows the typical contents of a form fields definition file.
 
     # ===================================
@@ -195,8 +194,6 @@ Fields from related models can be rendered with the [Relation Widget](#widget-re
             type: datepicker
 
         [...]
-
-
 
 <a name="form-tab-options"></a>
 ### Tab options
@@ -631,6 +628,8 @@ Option | Description
 ------------- | -------------
 **mode** | the expected file type, either file or image. Default: file.
 **prompt** | text to display when there is no item selected. The `%s` character represents the media manager icon.
+**imageWidth** | if using image type, the preview image will be displayed to this width, optional.
+**imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 
 <a name="widget-relation"></a>
 ### Relation
@@ -720,9 +719,9 @@ Each group must specify a unique key and the definition supports the following o
 
 Option | Description
 ------------- | -------------
-**name** | The name of the group.
-**description** | A breif description of the group.
-**icon** | Defines an icon for the group, optional.
+**name** | the name of the group.
+**description** | a breif description of the group.
+**icon** | defines an icon for the group, optional.
 **fields** | form fields belonging to the group, see [backend form fields](#form-fields).
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute.
