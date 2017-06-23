@@ -84,11 +84,12 @@ The `October\Rain\Exception\ValidationException` class, aliased as `ValidationEx
 You can also pass an instance of the [validation service](validation).
 
     $validation = Validator::make(...);
+
     if ($validation->fails()) {
         throw new ValidationException($validation);
     }
 
-When this exception is thrown the [AJAX framework](../cms/ajax) will provide this information in a usable format and focus the first invalid field.
+When this exception is thrown the [AJAX framework](../ajax/introduction) will provide this information in a usable format and focus the first invalid field.
 
 <a name="ajax-exception"></a>
 ### AJAX exception
@@ -97,7 +98,7 @@ The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is
 
     throw new AjaxException(['#flashMessages' => $this->renderPartial(...)]);
 
-When this exception is thrown the [AJAX framework](../cms/ajax) will follow the standard error workflow but will also refresh specified partials.
+When this exception is thrown the [AJAX framework](../ajax/introduction) will follow the standard error workflow but will also refresh specified partials.
 
 <a name="exception-handling"></a>
 ## Exception handling
@@ -126,7 +127,7 @@ If you have several exception handlers, they should be defined from most generic
 
 ### Where to place error handlers
 
-Error handler registrations, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
+Error handler registrations, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
 
 <a name="http-exceptions"></a>
 ## HTTP exceptions
@@ -174,7 +175,7 @@ An array of contextual data may also be passed to the log methods. This contextu
 <a name="helpers"></a>
 ### Helper functions
 
-There are some global helper methods available to make logging easier. The `trace_log()` function is an alias for `Log::info` with support for using arrays and exceptions as the message.
+There are some global helper methods available to make logging easier. The `trace_log` function is an alias for `Log::info` with support for using arrays and exceptions as the message.
 
     // Write a string value
     $val = 'Hello world';
@@ -192,7 +193,7 @@ There are some global helper methods available to make logging easier. The `trac
         trace_log($ex);
     }
 
-The `trace_sql()` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the admininstration area log as this is stored in the database and would result in a feedback loop.
+The `trace_sql` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the admininstration area log as this is stored in the database and would result in a feedback loop.
 
     trace_sql();
 

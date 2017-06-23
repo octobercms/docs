@@ -1,6 +1,6 @@
 # {% partial %}
 
-The `{% partial %}` tag will parse a [CMS partial](../cms/partials) and render the partial contents on the page. To display a partial called **footer.htm** you pass the name after the `partial` tag quoted as a string.
+The `{% partial %}` tag will parse a [CMS partial](../cms/partials) and render the partial contents on the page. To display a partial called **footer.htm**, simply pass the name after the `partial` tag quoted as a string.
 
     {% partial "footer" %}
 

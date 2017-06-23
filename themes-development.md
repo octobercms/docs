@@ -25,6 +25,7 @@ Field | Description
 **author** | specifies the author name, required.
 **homepage** | specifies the author website URL, required.
 **description** | the theme description, required.
+**previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
 **code** | the theme code, optional. The value is used on the OctoberCMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
 **form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
 **require** | an array of plugin names used for [theme dependencies](#dependencies), optional.
@@ -86,6 +87,35 @@ The following is an example of how to define a website name configuration field 
 The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup#default-variables) called `this.theme`.
 
     <h1>Welcome to {{ this.theme.site_name }}!</h1>
+
+You may also define the configuration in a separate file, where the path is relative to the theme. The following definition will source the form fields from the file **config/fields.yaml** inside the theme.
+
+    name: My Theme
+    # [...]
+
+    form: config/fields.yaml
+
+<a name="combiner-vars"></a>
+### Combiner variables
+
+Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+
+    form:
+        fields:
+            # [...]
+
+            link_color:
+                label: Link color
+                type: colorpicker
+                assetVar: 'link-color'
+
+In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
+
+    <link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet">
+
+Using some example content inside **themes/yourtheme/assets/less/theme.less**:
+
+    a { color: @link-color }
 
 <a name="dependencies"></a>
 ## Theme dependencies

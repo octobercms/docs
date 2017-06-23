@@ -9,7 +9,7 @@
 <a name="basic-input"></a>
 ## Basic input
 
-You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input()` [helper function](../services/helpers) is an alias for `Input::get`.
+You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input` [helper function](../services/helpers) is an alias for `Input::get`.
 
 #### Retrieving an input value
 
@@ -58,7 +58,7 @@ All cookies created by the October are encrypted and signed with an authenticati
 
 #### Queueing a cookie for the next response
 
-If you would like to set a cookie before a response has been created, use the `Cookie::queue()` method. The cookie will automatically be attached to the final response from your application.
+If you would like to set a cookie before a response has been created, use the `Cookie::queue` method. The cookie will automatically be attached to the final response from your application.
 
     Cookie::queue($name, $value, $minutes);
 

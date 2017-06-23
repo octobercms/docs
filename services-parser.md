@@ -3,7 +3,7 @@
 - [Introduction](#introduction)
 - [Markdown parser](#markdown-parser)
 - [Twig template parser](#twig-parser)
-- [Simple template parser](#template-parser)
+- [Bracket parser](#bracket-parser)
 - [YAML configuration parser](#yaml-parser)
 - [Initialization (INI) configuration parser](#ini-parser)
     - [October flavored INI](#october-ini)
@@ -52,14 +52,14 @@ The second argument can be used for passing variables to the Twig markup.
 
 The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration#extending-twig).
 
-<a name="template-parser"></a>
-## Simple template parser
+<a name="bracket-parser"></a>
+## Bracket parser
 
-October also ships with a simple template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Template` class should be used with the `parse` method.
+October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#content-variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
 
-    use October\Rain\Parse\Template;
+    use October\Rain\Parse\Bracket;
 
-    $html = Template::parse($content, ['foo' => 'bar']);
+    $html = Bracket::parse($content, ['foo' => 'bar']);
 
 The syntax uses singular *curly brackets* for rendering variables:
 
@@ -222,6 +222,18 @@ Multiple line input for larger blocks of text.
         This is our vision for things to come
     {/textarea}
 
+### Dropdown
+
+Renders a dropdown form field.
+
+    {dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
+
+### Radio
+
+Renders a radio form field.
+
+    {radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
+
 #### Variable
 
 Renders the form field type exactly as defined in the `type` attribute. This tag will simply set a variable and will render in view mode as an empty string.
@@ -232,7 +244,7 @@ Renders the form field type exactly as defined in the `type` attribute. This tag
 
 Text input for rich content (WYSIWYG).
 
-    {richeditor name="content" label="Main content"}Default text{/checkbox}
+    {richeditor name="content" label="Main content"}Default text{/richeditor}
 
 Renders in Twig as
 
@@ -296,11 +308,11 @@ Renders in Twig as
         <p>{{ fields.content|raw }}</p>
     {% endfor %}
 
-Calling `$syntax->toEditor()` will return a different array for a repeater field:
+Calling `$syntax->toEditor` will return a different array for a repeater field:
 
     'repeater' => [
         'label' => 'Website name',
-        'type' => 'repeater'
+        'type' => 'repeater',
         'fields' => [
 
             'title' => [

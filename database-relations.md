@@ -2,6 +2,7 @@
 
 - [Introduction](#introduction)
 - [Defining relationships](#defining-relationships)
+    - [Detailed definitions](#detailed-relationships)
 - [Relationship types](#relationship-types)
     - [One To One](#one-to-one)
     - [One To Many](#one-to-many)
@@ -10,10 +11,15 @@
     - [Polymorphic relations](#polymorphic-relations)
     - [Many To Many Polymorphic relations](#many-to-many-polymorphic-relations)
 - [Querying relations](#querying-relations)
-    - [Eager loading](#eager-loading)
+    - [Access via relationship method](#querying-method)
+    - [Access via dynamic property](#querying-dynamic-property)
+    - [Querying relationship existence](#querying-existence)
+- [Eager loading](#eager-loading)
     - [Constraining eager loads](#constraining-eager-loads)
     - [Lazy eager loading](#lazy-eager-loading)
 - [Inserting related models](#inserting-related-models)
+    - [Insert via relationship method](#inserting-method)
+    - [Insert via dynamic property](#inserting-dynamic-property)
     - [Many To Many relations](#inserting-many-to-many-relations)
     - [Touching parent timestamps](#touching-parent-timestamps)
 - [Deferred binding](#deferred-binding)
@@ -59,8 +65,8 @@ Argument | Description
 **order** | sorting order for multiple records.
 **conditions** | filters the relation using a raw where query statement.
 **scope** | filters the relation using a supplied scope method.
-**push** | if set to false, this relation will not be saved via `push()`, default: true.
-**delete** | if set to true, the related model will be deleted if the relationship is destroyed, default: false.
+**push** | if set to false, this relation will not be saved via `push`, default: true.
+**delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
 **count** | if set to true, the result contains a `count` column only, used for counting relations, default: false.
 
 Example filter using **order** and **conditions**:
@@ -134,13 +140,13 @@ Once the relationship is defined, we may retrieve the related record using the m
 
 The model assumes the foreign key of the relationship based on the model name. In this case, the `Phone` model is automatically assumed to have a `user_id` foreign key. If you wish to override this convention, you may pass the `key` parameter to the definition:
 
-    public $hasMany = [
+    public $hasOne = [
         'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id']
     ];
 
 Additionally, the model assumes that the foreign key should have a value matching the `id` column of the parent. In other words, it will look for the value of the user's `id` column in the `user_id` column of the `Phone` record. If you would like the relationship to use a value other than `id`, you may pass the `otherKey` parameter to the definition:
 
-    public $hasMany = [
+    public $hasOne = [
         'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id', 'otherKey' => 'my_id']
     ];
 
@@ -490,7 +496,7 @@ Next, on the `Tag` model, you should define a relation for each of its related m
         ];
     }
 
-#### Retrieving The relationship
+#### Retrieving the relationship
 
 Once your database table and models are defined, you may access the relationships via your models. For example, to access all of the tags for a post, you can simply use the `tags` dynamic property:
 
@@ -522,27 +528,32 @@ For example, imagine a blog system in which a `User` model has many associated `
         ];
     }
 
-You may query the `posts` relationship and add additional constraints to the relationship like so:
+<a name="querying-method"></a>
+### Access via relationship method
+
+You may query the **posts** relationship and add additional constraints to the relationship using the `posts` method. This gives you the ability to chain any of the [query builder](query) methods on the relationship.
 
     $user = User::find(1);
 
-    $user->posts()->where('active', 1)->get();
+    $posts = $user->posts()->where('is_active', 1)->get();
 
-Note that you are able to use any of the [query builder](query) methods on the relationship!
+    $post = $user->posts()->first();
 
-#### Relationship methods Vs. Dynamic properties
+<a name="querying-dynamic-property"></a>
+### Access via dynamic property
 
-If you do not need to add additional constraints to a relationship query, you may simply access the relationship as if it were a property. For example, continuing to use our `User` and `Post` example models, we may access all of a user's posts like so:
+If you do not need to add additional constraints to a relationship query, you may simply access the relationship as if it were a property. For example, continuing to use our `User` and `Post` example models, we may access all of a user's posts using the `$user->posts` property instead.
 
     $user = User::find(1);
 
     foreach ($user->posts as $post) {
-        //
+        // ...
     }
 
 Dynamic properties are "lazy loading", meaning they will only load their relationship data when you actually access them. Because of this, developers often use [eager loading](#eager-loading) to pre-load relationships they know will be accessed after loading the model. Eager loading provides a significant reduction in SQL queries that must be executed to load a model's relations.
 
-#### Querying relationship existence
+<a name="querying-existence"></a>
+### Querying relationship existence
 
 When accessing the records for a model, you may wish to limit your results based on the existence of a relationship. For example, imagine you want to retrieve all blog posts that have at least one comment. To do so, you may pass the name of the relationship to the `has` method:
 
@@ -567,7 +578,7 @@ If you need even more power, you may use the `whereHas` and `orWhereHas` methods
     })->get();
 
 <a name="eager-loading"></a>
-### Eager loading
+## Eager loading
 
 When accessing relationships as properties, the relationship data is "lazy loaded". This means the relationship data is not actually loaded until you first access the property. However, models can "eager load" relationships at the time you query the parent model. Eager loading alleviates the N + 1 query problem. To illustrate the N + 1 query problem, consider a `Book` model that is related to `Author`:
 
@@ -655,36 +666,65 @@ If you need to set additional query constraints on the eager loading query, you 
 <a name="inserting-related-models"></a>
 ## Inserting related models
 
-#### The Save method
+Just like you would [query a relationship](#querying-relations), October supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
 
-October provides convenient methods for adding new models to relationships. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship's `save` method:
+<a name="inserting-method"></a>
+### Insert via relationship method
+
+October provides convenient methods for adding new models to relationships. Primarily models can be added to a relationship or removed from a relationship. In each case the relationship is associated or disassociated respectively.
+
+#### Add method
+
+Use the `add` method to associate a new relationship.
 
     $comment = new Comment(['message' => 'A new comment.']);
 
     $post = Post::find(1);
 
-    $comment = $post->comments()->save($comment);
+    $comment = $post->comments()->add($comment);
 
-Notice that we did not access the `comments` relationship as a dynamic property. Instead, we called the `comments` method to obtain an instance of the relationship. The `save` method will automatically add the appropriate `post_id` value to the new `Comment` model.
+Notice that we did not access the `comments` relationship as a dynamic property. Instead, we called the `comments` method to obtain an instance of the relationship. The `add` method will automatically add the appropriate `post_id` value to the new `Comment` model.
 
-If you need to save multiple related models, you may use the `saveMany` method:
+If you need to save multiple related models, you may use the `addMany` method:
 
     $post = Post::find(1);
 
-    $post->comments()->saveMany([
+    $post->comments()->addMany([
         new Comment(['message' => 'A new comment.']),
         new Comment(['message' => 'Another comment.']),
     ]);
 
-#### Save & Many To Many relations
+#### Remove method
 
-When working with a many-to-many relationship, the `save` method accepts an array of additional intermediate table attributes as its second argument:
+Comparatively, the `remove` method can be used to disassociate a relationship, making it an orphaned record.
 
-    User::find(1)->roles()->save($role, ['expires' => $expires]);
+    $post->comments()->remove($comment);
 
-#### The Create method
+In the case of many-to-many relations, the record is removed from the relationship's collection instead.
 
-In addition to the `save` and `saveMany` methods, you may also use the `create` method, which accepts an array of attributes, creates a model, and inserts it into the database. Again, the difference between `save` and `create` is that `save` accepts a full model instance while `create` accepts a plain PHP `array`:
+    $post->categories()->remove($category);
+
+In the case of a "belongs to" relationship, you may use the `dissociate` method, which doesn't require the related model passed to it.
+
+    $post->author()->dissociate();
+
+#### Adding with pivot data
+
+When working with a many-to-many relationship, the `add` method accepts an array of additional intermediate "pivot" table attributes as its second argument as an array.
+
+    $user = User::find(1);
+
+    $pivotData = ['expires' => $expires];
+
+    $user->roles()->add($role, $pivotData);
+
+The second argument of the `add` method can also specify the session key used by [deferred binding](#deferred-binding) when passed as a string. In these cases the pivot data can be provided as the third argument instead.
+
+    $user->roles()->add($role, $sessionKey, $pivotData);
+
+#### Create method
+
+While `add` and `addMany` accept a full model instance, you may also use the `create` method, that accepts a PHP array of attributes, creates a model, and inserts it into the database.
 
     $post = Post::find(1);
 
@@ -692,24 +732,46 @@ In addition to the `save` and `saveMany` methods, you may also use the `create` 
         'message' => 'A new comment.',
     ]);
 
-Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model#mass-assignment).
+Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model#mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
 
-<a name="updating-belongs-to-relationships"></a>
-#### Updating "Belongs To" relationships
+<a name="inserting-dynamic-property"></a>
+### Insert via dynamic property
 
-When updating a `belongsTo` relationship, you may use the `associate` method. This method will set the foreign key on the child model:
+Relationships can be set directly via their properties in the same way you would access them. Setting a relationship using this approach will overwrite any relationship that existed previously. The model should be saved afterwards like you would with any attribute.
 
-    $account = Account::find(10);
+    $post->author = $author;
 
-    $user->account()->associate($account);
+    $post->comments = [$comment1, $comment2];
 
-    $user->save();
+    $post->save();
 
-When removing a `belongsTo` relationship, you may use the `dissociate` method. This method will reset the foreign key as well as the relation on the child model:
+Alternatively you may set the relationship using the primary key, this is useful when working with HTML forms.
 
-    $user->account()->dissociate();
+    // Assign to author with ID of 3
+    $post->author = 3;
 
-    $user->save();
+    // Assign comments with IDs of 1, 2 and 3
+    $post->comments = [1, 2, 3];
+
+    $post->save();
+
+Relationships can be disassociated by assigning the NULL value to the property.
+
+    $post->author = null;
+
+    $post->comments = null;
+
+    $post->save();
+
+Similar to [deferred binding](#deferred-binding), relationships defined on non-existent models are deferred in memory until they are saved. In this example the post does not exist yet, so the `post_id` attribute cannot be set on the comment via `$post->comments`. Therefore the association is deferred until the post is created by calling the `save` method.
+
+    $comment = Comment::find(1);
+
+    $post = new Post;
+
+    $post->comments = [$comment];
+
+    $post->save();
 
 <a name="inserting-many-to-many-relations"></a>
 ### Many To Many relations
@@ -820,7 +882,7 @@ The comment in the next example will not be deleted unless the post is saved.
 <a name="list-all-bindings"></a>
 ### List all bindings
 
-Use the `withDeferred()` method of a relation to load all records, including deferred. The results will include existing relations as well.
+Use the `withDeferred` method of a relation to load all records, including deferred. The results will include existing relations as well.
 
     $post->comments()->withDeferred($sessionKey)->get();
 
@@ -834,13 +896,13 @@ It's a good idea to cancel deferred binding and delete the slave objects rather 
 <a name="commit-all-bindings"></a>
 ### Commit all bindings
 
-You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save()` method.
+You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save` method.
 
     $post = new Post;
     $post->title = "First blog post";
     $post->save(null, $sessionKey);
 
-The same approach works with the model's `create()` method:
+The same approach works with the model's `create` method:
 
     $post = Post::create(['title' => 'First blog post'], $sessionKey);
 

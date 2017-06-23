@@ -17,7 +17,7 @@
 <a name="basic-responses"></a>
 ## Basic responses
 
-A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts#layout-life-cycle) and [AJAX handler definitions](../cms/ajax#ajax-handlers).
+A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts#layout-life-cycle) and [AJAX handler definitions](../ajax/handlers).
 
 #### Returning strings from a CMS method
 
@@ -71,7 +71,7 @@ A practical example of this could be returning an XML response:
 <a name="attaching-cookies-to-responses"></a>
 ### Attaching cookies to responses
 
-he `withCookie` method  allows you to easily attach cookies to the response. For example, you may use the withCookie method to generate a cookie and attach it to the response instance:
+The `withCookie` method  allows you to easily attach cookies to the response. For example, you may use the withCookie method to generate a cookie and attach it to the response instance:
 
     return Response::make($content)->withCookie('name', 'value');
 
@@ -161,7 +161,7 @@ The `macro` function accepts a name as its first argument, and a Closure as its 
 
     return Response::caps('foo');
 
-You may define your macros in the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
+You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
 
 <a name="views"></a>
 ## Views

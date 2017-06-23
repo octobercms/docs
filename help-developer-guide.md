@@ -1,7 +1,25 @@
 # Developer Guide
 
 - [Writing documentation](#writing-docs)
+- [Exceptions to PSR standards](#psr-exceptions)
+    - [Controller methods can have a single underscore](#psr-exception-methods)
+    - [Subsequent expressions are on a new line](#psr-exception-newline-expressions)
 - [Developer standards and patterns](#developer-standards)
+    - [Vendor naming](#vendor-naming)
+    - [Repository naming](#repository-naming)
+    - [PHP Variable naming](#variable-naming)
+    - [HTML element naming](#element-naming)
+    - [View file naming](#view-naming)
+    - [Class naming](#class-naming)
+    - [Event naming](#event-naming)
+    - [Database table naming](#db-table-naming)
+    - [Component naming](#component-naming)
+    - [Controller naming](#controller-naming)
+    - [Model naming](#model-naming)
+    - [Model scopes](#model-scopes)
+    - [Class guidance](#class-guide)
+- [Environment configuration](#environment-config)
+    - [Use strict mode with MySQL](#strict-trans-tables)
 
 <a name="writing-docs"></a>
 ## Writing documentation
@@ -11,10 +29,7 @@ Your contributions to the October documentation are very welcome. Please follow 
 1. Each page that has at least one H2 header should have a TOC list. The TOC list should be the first element after the H1 header. The TOC should have links to all H2 headers on the page.
 1. There should be an introductory text below the TOC, even if there is the Introduction section. You may want to get rid of the Introduction section if it's not really needed. Don't leave the TOC alone.
 1. Try to use only H2 and H3 headers.
-1. Each H2 and H3 header should have a link defined as.
-
-    <a name="page-cycle-handlers"></a>
-
+1. Each H2 and H3 header should have a link defined as `<a name="page-cycle-handlers"></a>`
 1. Only use UL tags for TOC lists.
 1. Avoid short, 1 sentence, paragraphs. Merge short paragraphs and try to be a bit more verbose.
 1. Avoid short hanging paragraphs below code sections. Merge such paragraphs with the text above the code blocks.
@@ -84,15 +99,30 @@ This is an acceptable preference based on a technicality, PSR-1 and PSR-2 are no
 
 This section describes some standards that we highly recommend to follow for everybody, especially if you are going to publish your products on the Marketplace.
 
+<a name="vendor-naming"></a>
+### Vendor naming
+
+The vendor or author code in a namespace must begin with an uppercase character and should not contain underscores or dashes. These are examples of valid names:
+
+    Acme.Blog
+    RainLab.User
+    Happygilmore.Golf
+
+These are examples of names that are **not** valid:
+
+    acme.blog
+    rainLab.user
+    Happy_gilmore.Golf
+
 <a name="repository-naming"></a>
 ### Repository naming
 
-Plugins to be named with the `-plugin` suffix and optional `oc-` prefix.
+When publishing work to a repository, such as Git, use the following naming as a convention. Plugins should be named with a `-plugin` suffix and optional `oc-` prefix.
 
     blog-plugin
     oc-blog-plugin
 
-Themes to be named with the `-theme` suffix and optional `oc-` prefix.
+Themes should be named with the `-theme` suffix and optional `oc-` prefix.
 
     happy-theme
     oc-happy-theme
@@ -102,14 +132,14 @@ Themes to be named with the `-theme` suffix and optional `oc-` prefix.
 
 Use **camelCase** everywhere except for the following:
 
-1. Postback parameters should use **snake_case**
-1. Database columns should use **snake_case**
+1. Database attributes and relationships should use **snake_case**
+1. Postback parameters and HTML elements should use **snake_case**
 1. Language keys should use **snake_case**
 
 <a name="element-naming"></a>
 ### HTML element naming
 
-[Form] Element names should use snake_case (underscores)
+Form element names should use snake_case (underscores)
 
     <input name="first_name">
 
@@ -149,7 +179,7 @@ View files must end with the `.htm` file extension.
 <a name="class-naming"></a>
 ### Class naming
 
-There is a number of class suffixes and prefixes that we recommend to use.
+Classes commonly are placed in the `classes` directory. There is a number of class suffixes and prefixes that we recommend to use.
 
 1. Manager
 1. Builder
@@ -164,6 +194,7 @@ There is a number of class suffixes and prefixes that we recommend to use.
 1. View
 1. Factory
 1. Entity
+1. Engine
 1. Bag
 
 > Don't get naming paralysis. Yes, names are very important but they're not important enough to waste huge amounts of time on. If you can't think up a good name in five minutes, move on.
@@ -171,7 +202,7 @@ There is a number of class suffixes and prefixes that we recommend to use.
 <a name="event-naming"></a>
 ### Event naming
 
-The term *after* is not used in Events, only the term *before* is used. For example:
+When specifying [event names](../../docs/services/events). The term *after* is not used in Events, only the term *before* is used. For example:
 
 1. **beforeSetAttribute** - this event comes *before* any default logic.
 1. **setAttribute** - this event comes *after* any default logic.
@@ -204,14 +235,6 @@ When expecting multiple results, it is easy to combine the arrays like so:
         Event::fire('backend.form.beforeRefresh', [$this, $saveData])
     );
 
-When processing or filtering over a value, use the data holder pattern to pass the value by reference:
-
-    // Pass content to events by reference
-    $dataHolder = (object) ['content' => $content];
-    $this->fireEvent('cms.processContent', [$dataHolder]);
-    Event::fire('cms.processContent', [$this, $dataHolder]);
-    $content = $dataHolder->content;
-
 <a name="db-table-naming"></a>
 ### Database table naming
 
@@ -234,8 +257,48 @@ The author and plugin name acronym is acceptable too:
 
     ab_category_id
 
+<a name="component-naming"></a>
+### Component naming
+
+Component classes are commonly place in the `components` directory. The name of a component should represent its primary function.
+
+To display a list of records, use the `List` suffix, eg:
+
+    ProductList
+    ProductReviewList
+    CategoryList
+
+To display a single record, use the `Details` suffix, eg:
+
+    ProductDetails
+    CategoryDetails
+
+Using the suffix helps avoid conflicts with controller and model names. Alternatively you can name components without the suffix, for cases when the name is descriptive and does not conflict:
+
+    ProductReviews
+    CustomerCheckout
+    SeoDirectory
+    UserProfile
+
+<a name="controller-naming"></a>
+### Controller naming
+
+Controllers are commonly are placed in `controllers` directory, for back-end controllers. The name of a controller should be a plural, for example:
+
+    People
+    Products
+    Categories
+    ProductCategories
+
 <a name="model-naming"></a>
 ### Model naming
+
+Models are commonly are placed in `models` directory. The name of a model should be a singular, for example:
+
+    Person
+    Product
+    Category
+    ProductCategory
 
 When extending other models, you should prefix the field with at least the plugin name.
 
@@ -250,7 +313,7 @@ The fully qualified plugin name is also acceptable, for example:
 <a name="model-scopes"></a>
 ### Model scopes
 
-If a model scope returns a query object, used for chaining, they should generally be prefix with `apply` to indicate they are being applied to the query. Defined as:
+If a model scope returns a query object, used for chaining, they should be prefixed with `apply` to indicate they are being applied to the query. Defined as:
 
     public function scopeApplyUser($query, $user)
     {
@@ -285,9 +348,12 @@ These points are to be considered in a relaxed fashion:
 1. If a property contains a single value (not an array), make the property `public` instead of a get/set approach.
 1. If a property contains a collection (is an array), make the property `protected` with get `getProperties`, `getProperty` and `setProperty`.
 
-<a name="strict-trans-tables"></a>
-### Use the STRICT_TRANS_TABLES mode with MySQL
+<a name="environment-config"></a>
+## Environment configuration
 
-When MySQL [STRICT_TRANS_TABLES mode](http://dev.mysql.com/doc/refman/5.0/en/sql-mode.html) is enabled the server performs strict data type validation. It is highly recommended to keep this mode enabled in MySQL during the development. This allows to find errors before your code gets to a client's server with the enabled strict mode. The mode can be enabled in my.cnf (Unix) or my.ini (Windows) file:
+<a name="strict-trans-tables"></a>
+### Use strict mode with MySQL
+
+When MySQL [STRICT_TRANS_TABLES mode](http://dev.mysql.com/doc/refman/5.0/en/sql-mode.html) is enabled the server performs strict data type validation. It is highly recommended to keep this mode enabled in MySQL during the development. This allows you to find errors before your code gets to a client's server with the enabled strict mode. The mode can be enabled in my.cnf (Unix) or my.ini (Windows) file:
 
     sql_mode=STRICT_TRANS_TABLES

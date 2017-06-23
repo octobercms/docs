@@ -23,7 +23,7 @@ Plugins are primarily extended using the [Event service](../services/events) to 
 <a name="subscribing-to-events"></a>
 ### Subscribing to events
 
-The most common place to subscribe to an event is the `boot()` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
+The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
 
     public function boot()
     {
@@ -68,7 +68,7 @@ Once this event has been subscribed to, the parameters are available in the hand
 <a name="backend-view-events"></a>
 ## Extending back-end views
 
-Sometimes you may wish to allow a back-end view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent()` method found in all back-end controllers.
+Sometimes you may wish to allow a back-end view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent` method found in all back-end controllers.
 
 Place this code in your view file:
 
@@ -98,7 +98,7 @@ These are some practical examples of how events can be used.
 <a name="extending-user-model"></a>
 ### Extending a User model
 
-This example will modify the `model.getAttribute` event of the `User` model by binding to its local event. This is carried out inside the `boot()` method of the [Plugin registration file](registration#routing-initialization). In both cases when the `$model->foo` attribute is accessed, it will return the value *bar*.
+This example will modify the `model.getAttribute` event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases when the `$model->foo` attribute is accessed, it will return the value *bar*.
 
     class Plugin extends PluginBase
     {
@@ -135,7 +135,7 @@ This example will modify the `model.getAttribute` event of the `User` model by b
 <a name="extending-backend-form"></a>
 ### Extending a backend form
 
-This example will modify the `backend.form.extendFields` global event of the `Backend\Widget\Form` class and inject some extra fields values under the conditions that the form is being used to modify a user. This event is also subscribed inside the `boot()` method of the [Plugin registration file](registration#routing-initialization).
+This example will modify the `backend.form.extendFields` global event of the `Backend\Widget\Form` class and inject some extra fields values under the conditions that the form is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
@@ -176,7 +176,7 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
 <a name="extending-backend-list"></a>
 ### Extending a backend list
 
-This example will modify the `backend.list.extendColumns` global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot()` method of the [Plugin registration file](registration#routing-initialization).
+This example will modify the `backend.list.extendColumns` global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
@@ -231,7 +231,7 @@ This example will declare a new global event `rainlab.forum.topic.post` and loca
         }
     }
 
-Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts#dynamic-pages). This will write to the trace log when the `onPost()` event handler is called inside the `Topic` component (above).
+Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts#dynamic-pages). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
     [topic]
     slug = "{{ :slug }}"

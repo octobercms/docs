@@ -72,7 +72,7 @@ You can also pass partials to update as another array:
         ]
     ])
 
-> Most [data attributes from the AJAX framework](../cms/ajax#data-attributes) are available here by dropping the `data-request-` prefix.
+> **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api) are available here by dropping the `data-request-` prefix.
 
 <a name="form-tokens"></a>
 ## Form tokens
@@ -137,7 +137,7 @@ You may pass a default value as the second argument:
 
 #### Specifying a default value
 
-    <?= Form::text('email', 'example@gmail.com') ?>
+    <?= Form::text('email', 'emailaddress@example.com') ?>
 
 > **Note:** The *hidden* and *textarea* methods have the same signature as the *text* method.
 
@@ -203,10 +203,18 @@ You may pass a default value as the second argument:
 
     <?= Form::selectRange('number', 10, 20) ?>
 
+#### Generating a drop-down list with a range, selected value and blank option
+
+    <?= Form::selectRange('number', 10, 20, 2, ['emptyOption' => 'Choose...']) ?>
+    
 #### Generating a list with month names
 
     <?= Form::selectMonth('month') ?>
 
+#### Generating a list with month names, selected value and blank option
+
+    <?= Form::selectMonth('month', 2, ['emptyOption' => 'Choose month...']) ?>
+    
 <a name="buttons"></a>
 ## Buttons
 

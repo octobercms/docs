@@ -38,6 +38,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 ### Paths
 
 <div class="collection-method-list" markdown="1">
+[Path Symbols](#path-symbols)
 [app_path](#method-app-path)
 [base_path](#method-base-path)
 [config_path](#method-config-path)
@@ -341,6 +342,20 @@ The `last` function returns the last element in the given array:
 
 <a name="paths"></a>
 ## Paths
+
+<a name="path-symbols"></a>
+#### Path Symbols
+
+Path prefix symbols can be used to create a dynamic path. For example, a path beginning with `~/` will create a path relative to the application:
+
+    list: ~/plugins/acme/pay/models/invoiceitem/columns.yaml
+
+These symbols are supported for creating dynamic paths:
+
+Symbol | Description
+------------- | -------------
+`$` | Relative to the plugins directory
+`~` | Relative to the application directory
 
 <a name="method-app-path"></a>
 #### `app_path()` {#collection-method}
@@ -690,6 +705,18 @@ Generate a URL for an asset using HTTPS:
 The `trace_log` function writes a trace message to the log file.
 
     trace_log('This code has passed...');
+
+The function supports passing exceptions, arrays and objects:
+
+    trace_log($exception);
+
+    trace_log($array);
+
+    trace_log($object);
+
+You may also pass multiple arguments to trace multiple messages:
+
+    trace_log($value1, $value2, $exception, '...');
 
 <a name="method-trace-sql"></a>
 #### `trace_sql()` {#collection-method}

@@ -101,14 +101,14 @@ Option | Description
 **list** | defines the list columns available for exporting.
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the export is complete, optional.
-**useList** | set to true or the value of a list definition to enable [integration with Lists](#lists-integration), default: false.
+**useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
 
 <a name="import-export-views"></a>
 ## Import and export views
 
 For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-views-ajax/#introduction) with the corresponding name - **import.htm** and **export.htm**.
 
-The import/export behavior adds two methods to the controller class: `importRender()` and `exportRender()`. These methods render the importing and exporting sections as per the YAML configuration file described above.
+The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 
 <a name="import-view"></a>
 ### Import view
@@ -189,7 +189,7 @@ For importing data you should create a dedicated model for this process which ex
         }
     }
 
-The class must define a method called `importData()` used for processing the imported data. The first parameter `$results` will contain an array containing the data to import. The second parameter `$sessionKey` will contain the session key used for the request.
+The class must define a method called `importData` used for processing the imported data. The first parameter `$results` will contain an array containing the data to import. The second parameter `$sessionKey` will contain the session key used for the request.
 
 Method | Description
 ------------- | -------------
@@ -216,7 +216,7 @@ For exporting data you should create a dedicated model which extends the `Backen
         }
     }
 
-The class must define a method called `exportData()` used for returning the export data. The first parameter `$columns` is an of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
+The class must define a method called `exportData` used for returning the export data. The first parameter `$columns` is an array of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
 
 <a name="custom-options"></a>
 ## Custom options
@@ -244,7 +244,7 @@ The form fields specified will appear on the import/export page. Here is an exam
             type: checkbox
             default: true
 
-The value of the form field above called **auto_create_lists** can be accessed using `$this->auto_create_lists` inside the `importData()` method of the import model. If this were the export model, the value would be available inside the `exportData()` method instead.
+The value of the form field above called **auto_create_lists** can be accessed using `$this->auto_create_lists` inside the `importData` method of the import model. If this were the export model, the value would be available inside the `exportData` method instead.
 
     class SubscriberImport extends \Backend\Models\ImportModel
     {
@@ -271,3 +271,18 @@ If you are using [multiple list definitions](lists#multiple-list-definitions), t
     export:
         useList: orders
         fileName: orders.csv
+
+The `useList` option also supports extended configuration options.
+
+
+    export:
+        useList:
+            definition: orders
+            raw: true
+
+The following configuration options are supported:
+
+Option | Description
+------------- | -------------
+**definition** | the list definition to source records from, optional.
+**raw** | output the raw attribute values from the record, default: false.

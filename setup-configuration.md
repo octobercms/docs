@@ -5,13 +5,17 @@
     - [Nginx configuration](#nginx-configuration)
     - [Lighttpd configuration](#lighttpd-configuration)
     - [IIS configuration](#iis-configuration)
-    - [Using a public folder (advanced)](#public-folder)
-- [Environment configuration](#environment-config)
-- [Bleeding edge updates](#edge-updates)
-- [CSRF protection](#csrf-protection)
+- [Application configuration](#app-configuration)
+    - [Debug mode](#debug-mode)
+    - [Safe mode](#safe-mode)
+    - [CSRF protection](#csrf-protection)
+    - [Bleeding edge updates](#edge-updates)
+    - [Environment configuration](#environment-config)
+- [Advanced configuration](#advanced-configuration)
+    - [Using a public folder](#public-folder)
+    - [Extended environment configuration](#environment-config-extended)
 
 All of the configuration files for October are stored in the **config/** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
-
 
 <a name="webserver-configuration"></a>
 ## Web server configuration
@@ -48,7 +52,7 @@ There are small changes required to configure your site in Nginx.
 Use the following code in **server** section. If you have installed October into a subdirectory, replace `/` with the directory October was installed under:
 
     location / {
-        try_files $uri $uri/ /index.php$is_args$args;
+        try_files $uri /index.php$is_args$args;
     }
 
     rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
@@ -70,7 +74,7 @@ If your webserver is running Lighttpd you can use the following configuration to
 
 Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
 
-    $HTTP["host"] =~ "example.domain.com" {
+    $HTTP["host"] =~ "domain.example.com" {
         server.document-root = "/var/www/example/"
 
         url.rewrite-once = (
@@ -105,19 +109,63 @@ If your webserver is running Internet Information Services (IIS) you can use the
         </system.webServer>
     </configuration>
 
-<a name="public-folder"></a>
-### Using a public folder (advanced)
+<a name="app-configuration"></a>
+## Application configuration
 
-While this step is optional, for ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
+<a name="debug-mode"></a>
+### Debug mode
 
-    php artisan october:mirror public/
+The debug setting is found in the `config/app.php` configuration file with the `debug` parameter and is enabled by default.
 
-This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
+When enabled, this setting will show detailed error messages when they occur along with other debugging features. While useful during development, debug mode should always be disabled when used in a live production site. This prevents potentially sensitive information from being displayed to the end-user.
 
-> **Note**: The above command needs to be performed with System Administrator or *sudo* privileges in most cases. It should also be performed after each system update or when a new plugin is installed.
+The debug mode uses the following features when enabled:
+
+1. [Detailed error pages](../cms/pages#error-page) are displayed.
+1. Failed user authentication provides a specific reason.
+1. [Combined assets](../markup/filter-theme) are not minified by default.
+1. [Safe mode](#safe-mode) is disabled by default.
+
+> **Important**: Always set the `app.debug` setting to `false` for production environments.
+
+<a name="safe-mode"></a>
+### Safe mode
+
+The safe mode setting is found in the `config/cms.php` configuration file with the `enableSafeMode` parameter. The default value is `null`.
+
+If safe mode is enabled, the PHP code section is disabled in CMS templates for security reasons. If set to `null`, safe mode is on when [debug mode](#debug-mode) is disabled.
+
+<a name="csrf-protection"></a>
+### CSRF protection
+
+October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
+
+While CSRF protection is disabled by default, you can enable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
+
+<a name="edge-updates"></a>
+### Bleeding edge updates
+
+The October platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
+
+You can instruct the platform to prefer test builds by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
+
+    /*
+    |--------------------------------------------------------------------------
+    | Bleeding edge updates
+    |--------------------------------------------------------------------------
+    |
+    | If you are developing with October, it is important to have the latest
+    | code base, set this value to 'true' to tell the platform to download
+    | and use the development copies of core files and plugins.
+    |
+    */
+
+    'edgeUpdates' => false,
+
+> **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
 
 <a name="environment-config"></a>
-## Environment configuration
+### Environment configuration
 
 It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to **production**. There are two common ways to change this value:
 
@@ -149,31 +197,29 @@ For example, to use a different MySQL database for the `dev` environment only, c
         ]
     ];
 
-<a name="edge-updates"></a>
-## Bleeding edge updates
+<a name="advanced-configuration"></a>
+## Advanced configuration
 
-The October platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
+<a name="public-folder"></a>
+### Using a public folder
 
-You can instruct the platform to prefer test builds by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
+For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
 
-    /*
-    |--------------------------------------------------------------------------
-    | Bleeding edge updates
-    |--------------------------------------------------------------------------
-    |
-    | If you are developing with October, it is important to have the latest
-    | code base, set this value to 'true' to tell the platform to download
-    | and use the development copies of core files and plugins.
-    |
-    */
+    php artisan october:mirror public/
 
-    'edgeUpdates' => false,
+This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
 
-> **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
+> **Note**: The above command may need to be performed with System Administrator or *sudo* privileges. It should also be performed after each system update or when a new plugin is installed.
 
-<a name="csrf-protection"></a>
-## CSRF protection
+<a name="environment-config-extended"></a>
+### Extended environment configuration
 
-October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
+As an alternative to the standard [environment configuration](#environment-config) you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `october:env` command to move common config values to the environment:
 
-While CSRF protection is disabled by default, you can enable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
+    php artisan october:env
+
+This will create an **.env** file in project root directory and modify configuration files to use `env` helper function. The first argument contains the key name found in the environment, the second argument contains an optional default value.
+
+    'debug' => env('APP_DEBUG', true),
+
+Your `.env` file should not be committed to your application's source control, since each developer or server using your application could require a different environment configuration.

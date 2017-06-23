@@ -11,7 +11,7 @@
 <a name="basic-usage"></a>
 ## Basic usage
 
-The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validation` class.
+The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class.
 
 #### Basic Validation Example
 
@@ -391,7 +391,7 @@ The field under validation must be present _only when_ the all of the other spec
 <a name="rule-same"></a>
 #### same:_field_
 
-The given _field_ must match the field under validation.
+The specified _field_ value must match the field's value under validation.
 
 <a name="rule-size"></a>
 #### size:_value_
@@ -509,13 +509,16 @@ Sometimes you may wish to specify a custom error messages only for a specific fi
 <a name="localization"></a>
 #### Specifying custom messages in language files
 
-In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to `custom` array in the `lang/xx/validation.php` language file.
+In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
 
-    'custom' => [
-        'email' => [
-            'required' => 'We need to know your e-mail address!',
-        ],
-    ],
+    return  [
+        'required' => 'We need to know your e-mail address!',
+        'email.required' => 'We need to know your e-mail address!',
+    ];
+
+Then in your call to `Validator::make` use the `Lang:get` to use your custom files.
+
+    Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 
 <a name="custom-validation-rules"></a>
 ## Custom validation rules
