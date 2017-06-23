@@ -575,6 +575,7 @@ Option | Description
                 - 0
             quality: 90
             sharpen: 0
+            interlace: 0
             extension: auto
 
 Option | Description
