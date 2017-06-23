@@ -86,6 +86,7 @@ Option | Description
 ------------- | -------------
 **mode** | auto, exact, portrait, landscape, crop. Default: auto
 **quality** | 0 - 100. Default: 95
+**interlace** | 0 (false: default), 1 (true) - Supported ext: jpg, gif, png
 **extension** | auto, jpg, png, gif. Default: jpg
 
 The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
