@@ -556,6 +556,7 @@ Option | Description
 **format** | provide an explicit date display format. Eg: Y-m-d
 **minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
+**firstDay** | the first day of the week. Default: 0 (Sunday).
 
 <a name="widget-fileupload"></a>
 ### File upload
