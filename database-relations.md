@@ -173,6 +173,23 @@ If your parent model does not use `id` as its primary key, or you wish to join t
         'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id', 'otherKey' => 'my_id']
     ];
 
+#### Default models
+
+The `belongsTo` relationship lets you define a default model that will be returned if the given relationship is `null`. This pattern is often referred to as the [Null Object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) and can help remove conditional checks in your code. In the following example, the `user` relation will return an empty `Acme\Blog\Models\User` model if no `user` is attached to the post:
+
+    public $belongsTo = [
+        'user' => ['Acme\Blog\Models\User', 'default' => true]
+    ];
+
+To populate the default model with attributes, you may pass an array to the `default` parameter:
+
+    public $belongsTo = [
+        'user' => [
+            'Acme\Blog\Models\User',
+            'default' => ['name' => 'Guest']
+        ]
+    ];
+
 <a name="one-to-many"></a>
 ### One To Many
 
