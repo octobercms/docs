@@ -72,6 +72,8 @@ The `october:install` command will guide you through the process of setting up O
 
 You also may wish to inspect **config/app.php** and **config/cms.php** to change any additional configuration.
 
+> **Note:** You cannot run `october:install` after running `october:env`. `october:env` takes the existing configuration values and puts them in the `.env` file while replacing the original values with calls to `env()` within the configuration files. `october:install` cannot now replace those calls to `env()` within the configuration files as that would be overly complex to manage.
+
 <a name="console-update-command"></a>
 ### System update
 
