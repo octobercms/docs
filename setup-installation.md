@@ -48,7 +48,7 @@ The wizard installation is a recommended way to install October. It is simpler t
 
 1. **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 
-1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the installer files and folders, they should be writable for the web server.
+1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
 
 1. **An error code "liveConnection" is displayed**: The installer will test a connection to the installation server using port 80. Check that your webserver can create outgoing connections on port 80 via PHP. Contact your hosting provider or this is often found in the server firewall settings.
 
