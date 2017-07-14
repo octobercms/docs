@@ -41,7 +41,7 @@ If you wanted to create a console command called `acme:mycommand`, you might cre
          * Execute the console command.
          * @return void
          */
-        public function fire()
+        public function handle()
         {
             $this->output->writeln('Hello world!');
         }
@@ -68,7 +68,7 @@ If you wanted to create a console command called `acme:mycommand`, you might cre
 
 Once your class is created you should fill out the `name` and `description` properties of the class, which will be used when displaying your command on the command `list` screen.
 
-The `fire` method will be called when your command is executed. You may place any command logic in this method.
+The `handle` method will be called when your command is executed. You may place any command logic in this method.
 
 <a name="defining-arguments"></a>
 ### Defining arguments
