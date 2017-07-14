@@ -242,7 +242,7 @@ To register a custom middleware you can use the following call inside your boot 
 
     public function boot()
     {
-        Cms\Classes\CmsController::extend(function($controller) {
+        \Cms\Classes\CmsController::extend(function($controller) {
             $controller->middleware('Path\To\Custom\Middleware');
         });
     }

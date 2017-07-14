@@ -5,7 +5,7 @@
 - [Restricting access to back-end pages](#page-access)
 - [Restricting access to features](#features)
 
-The user management for the back-end includes features like groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the back-end.
+The user management for the back-end includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the back-end.
 
 <a name="backend-auth-facade"></a>
 ## Backend user helper
@@ -60,12 +60,25 @@ The next example shows how to register back-end permission items. Permissions ar
         return [
             'acme.blog.access_posts' => [
                 'label' => 'Manage the blog posts',
-                'tab' => 'Blog'
+                'tab' => 'Blog',
+                'order' => 200,
             ],
+            // ...
+        ];
+    }
+
+You may also specify a `roles` option as an array with each value as a role API code. When a role is created with this code, it becomes a system role that always grants this permission to users with that role. October ships with two system roles, using the codes: `publisher` and `developer`.
+
+    public function registerPermissions()
+    {
+        return [
             'acme.blog.access_categories' => [
                 'label' => 'Manage the blog categories',
-                'tab' => 'Blog'
+                'tab' => 'Blog',
+                'order' => 200,
+                'roles' => ['developer']
             ]
+            // ...
         ];
     }
 
