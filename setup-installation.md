@@ -17,7 +17,7 @@ There are two ways you can install October, either using the [Wizard installer](
 
 October CMS has some server requirements for web hosting:
 
-1. PHP version 5.5.9 or higher
+1. PHP version 7.0 or higher
 1. PDO PHP Extension
 1. cURL PHP Extension
 1. OpenSSL PHP Extension
@@ -99,4 +99,4 @@ Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* 
 
 You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
 
-If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work` to process the first available job in the queue.
+If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
