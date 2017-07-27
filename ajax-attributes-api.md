@@ -22,6 +22,7 @@ Attribute | Description
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show the AJAX loading indicator. The feature uses jQuery's `show()` and `hide()` functions to manage the element visibility.
 **data-request-form** | explicitly specify a form element to use for sourcing the form data. If this is unspecified, the closest form to the triggering element is used, including if the element itself is a form.
 **data-request-flash** | when specified this option instructs the server to clear and send any flash messages with the response. This option is also used by the [extra features](../ajax/extras#ajax-flash).
+**data-request-files** | when specified the request will accept file uploads, this requires `FormData` interface support by the browser.
 **data-track-input** | can be applied to a text, number, or password input field that also has the `data-request` attribute. When defined, the input field automatically sends an AJAX request when a user types something in the field. The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the requests.
 
 When the `data-request` attribute is specified for an element, the element triggers an AJAX request when a user interacts with it. Depending on the type of element, the request is triggered on the following events:
@@ -64,3 +65,10 @@ Send a POST parameter `id` with value `7` across multiple elements:
         <button data-request="onDelete">Delete</button>
         <button data-request="onSave">Update</button>
     </div>
+
+Including [file uploads](../services/request-input#files) with a request:
+
+    <form data-request="onSubmit" data-request-files>
+        <input type="file" name="photo" accept="image/*" />
+        <button type="submit">Submit</button>
+    </form>
