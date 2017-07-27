@@ -466,6 +466,21 @@ You may also retrieve the owner of a polymorphic relation from the polymorphic m
 
 The `imageable` relation on the `Photo` model will return either a `Staff` or `Product` instance, depending on which type of model owns the photo.
 
+#### Custom Polymorphic types
+
+By default, the fully qualified class name is used to store the related model type. For instance, given the example above where a `Photo` may belong to `Staff` or a `Product`, the default `imageable_type` value is either `Acme\Blog\Models\Staff` or `Acme\Blog\Models\Product` respectively.
+
+Using a custom polymorphic type lets you decouple your database from your application's internal structure. You may define a relationship "morph map" to provide a custom name for each model instead of the class name:
+
+    use October\Rain\Database\Relations\Relation;
+
+    Relation::morphMap([
+        'staff' => 'Acme\Blog\Models\Staff',
+        'product' => 'Acme\Blog\Models\Product',
+    ]);
+
+The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
+
 <a name="many-to-many-polymorphic-relations"></a>
 ### Many To Many Polymorphic relations
 
