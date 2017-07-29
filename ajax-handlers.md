@@ -38,6 +38,12 @@ You may want to use the [`__SELF__`](https://octobercms.com/docs/plugin/componen
 
     <form data-request="{{ __SELF__ }}::onCalculate" data-request-update="'{{ __SELF__ }}::calcresult': '#result'">
 
+#### Generic handler
+
+Sometimes you may need to make an AJAX request for the sole purpose of updating page contents, not needing to execute any code. You may use the `onAjax` handler for this purpose. This handler is available everywhere without needing to write any code.
+
+    <button data-request="onAjax">Do nothing</button>
+
 <a name="redirections-in-handlers"></a>
 ## Redirections in AJAX handlers
 
