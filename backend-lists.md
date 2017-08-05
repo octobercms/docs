@@ -434,6 +434,8 @@ These types can be used to determine how the filter scope should be displayed.
 - [Switch](#filter-switch)
 - [Date](#filter-date)
 - [Date range](#filter-daterange)
+- [Number](#filter-number)
+- [Number range](#filter-numberrange)
 </div>
 
 <a name="filter-group"></a>
@@ -497,6 +499,26 @@ These types can be used to determine how the filter scope should be displayed.
         maxDate: '2030-10-13'
         yearRange: 10
         conditions: created_at >= ':after' AND created_at <= ':before'
+        
+<a name="filter-number"></a>
+### Number
+
+`number` - displays input for a single number to be entered.
+
+    age:
+        label: Age
+        type: number
+        conditions: age >= ':filtered'
+        
+<a name="filter-numberrange"></a>
+### Number Range
+
+`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`.
+
+    visitors:
+        label: Visitor Count
+        type: numberrange
+        conditions: vistors >= ':min' and visitors <= ':max'
 
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
