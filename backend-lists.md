@@ -417,13 +417,86 @@ Option | Description
 
 These types can be used to determine how the filter scope should be displayed.
 
-Type | Description
-------------- | -------------
-**group** | filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
-**checkbox** | used as a binary checkbox to apply a predefined condition or query to the list, either on or off.
-**switch** | used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off.
-**date** | displays a date picker for a single date to be selected.
-**daterange** | displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:before` and `:after`.
+<style>
+    .collection-method-list {
+        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
+        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
+    }
+
+    .collection-method-list a {
+        display: block;
+    }
+</style>
+
+<div class="content-list collection-method-list" markdown="1">
+- [Group](#filter-group)
+- [Checkbox](#filter-checkbox)
+- [Switch](#filter-switch)
+- [Date](#filter-date)
+- [Date range](#filter-daterange)
+</div>
+
+<a name="filter-group"></a>
+### Group
+
+`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+
+    status:
+        label: Status
+        type: group
+        conditions: status in (:filtered)
+        options:
+            pending: Pending
+            active: Active
+            closed: Closed
+            
+<a name="filter-checkbox"></a>
+### Checkbox
+
+`checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off.
+
+    published:
+        label: Hide published
+        type: checkbox
+        conditions: is_published <> true
+        
+<a name="filter-switch"></a>
+### Switch
+
+`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off.
+
+    approved:
+        label: Approved
+        type: switch
+        conditions:
+            - is_approved <> true
+            - is_approved = true
+            
+<a name="filter-date"></a>
+### Date
+
+`date` - displays a date picker for a single date to be selected.
+
+    created_at:
+        label: Date
+        type: date
+        minDate: '2001-01-23'
+        maxDate: '2030-10-13'
+        yearRange: 10
+        conditions: created_at >= ':filtered'
+        
+<a name="filter-daterange"></a>
+### Date Range
+
+`daterange` - displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:before` and `:after`.
+
+    published_at:
+        label: Date
+        type: daterange
+        minDate: '2001-01-23'
+        maxDate: '2030-10-13'
+        yearRange: 10
+        conditions: created_at >= ':after' AND created_at <= ':before'
 
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
