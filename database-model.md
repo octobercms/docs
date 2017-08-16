@@ -79,6 +79,7 @@ There are some standard properties that can be found on models, in addition to t
 Property | Description
 ------------- | -------------
 **$primaryKey** | primary key name used to identify the model.
+**$incrementing** | boolean that if false indicates that the primary key is not an incrementing integer value.
 **$exists** | boolean that if true indicates that the model exists.
 **$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
 **$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
@@ -101,6 +102,21 @@ Models will assume that each table has a primary key column named `id`. You may 
          * @var string
          */
         protected $primaryKey = 'id';
+    }
+
+<a name="property-incrementing"></a>
+#### Incrementing
+
+Models will assume that the primary key is an incrementing integer value, which means that by default the primary key will be cast to an integer automatically. If you wish to use a non-incrementing or a non-numeric primary key you must set the public `$incrementing` property to false.
+
+    class Message extends Model
+    {
+        /**
+         * The primary key for the model in not an integer.
+         *
+         * @var bool
+         */
+        public $incrementing = false;
     }
 
 <a name="property-timestamps"></a>
