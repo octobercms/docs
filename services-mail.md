@@ -16,11 +16,11 @@
 <a name="introduction"></a>
 ## Introduction
 
-October provides drivers for SMTP, Mailgun, Mandrill, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
+October provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
 
 ### Driver prerequisites
 
-Before using the Mailgun, Mandrill or SES drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
 
 #### Mailgun driver
 
@@ -31,12 +31,12 @@ To use the Mailgun driver, set the `driver` option in your `config/mail.php` con
         'secret' => 'your-mailgun-key',
     ],
 
-#### Mandrill driver
+#### SparkPost driver
 
-To use the Mandrill driver set the `driver` option in your `config/mail.php` configuration file to `mandrill`. Next, verify that your `config/services.php` configuration file contains the following options:
+To use the SparkPost driver set the `driver` option in your `config/mail.php` configuration file to `sparkpost`. Next, verify that your `config/services.php` configuration file contains the following options:
 
-    'mandrill' => [
-        'secret' => 'your-mandrill-key',
+    'sparkpost' => [
+        'secret' => 'your-sparkpost-key',
     ],
 
 #### SES driver
@@ -82,6 +82,9 @@ October also includes an alternative method called `sendTo` that can simplify se
 
     // Send to multiple addresses
     Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
+
+    // Alternatively send a raw message without parameters
+    Mail::rawTo('admin@domain.tld', 'Hello friend');
 
 The first argument in `sendTo` is used for the recipients can take different value types:
 
@@ -133,21 +136,30 @@ Or, if you only need to send a plain text e-mail, you may specify this using the
 
     Mail::send(['text' => 'acme.blog::mail.text'], $data, $callback);
 
-#### Mailing raw strings
+#### Mailing parsed raw strings
 
-You may use the `raw` method if you wish to e-mail a raw string directly:
+You may use the `raw` method if you wish to e-mail a raw string directly. This content will be parsed by Markdown.
 
     Mail::raw('Text to e-mail', function ($message) {
         //
     });
 
-To pass raw HTML and text, set the `raw` array value to `true`:
+Additionally this string will be parsed by Twig, if you wish to pass variables to this environment, use the `send` method instead, passing the content as the `raw` key.
 
-    Mail::send([
+    Mail::send(['raw' => 'Text to email'], $vars, function ($message) {
+        //
+    });
+
+#### Mailing raw strings
+
+If you pass an array containing either `text` or `html` keys, this will be an explicit request to send mail. No layout or markdown parsing is used.
+
+    Mail::raw([
         'text' => 'This is plain text',
-        'html' => '<strong>This is HTML</strong>',
-        'raw' => true
-    ], $data, $callback);
+        'html' => '<strong>This is HTML</strong>'
+    ], function ($message) {
+        //
+    });
 
 <a name="attachments"></a>
 ### Attachments
