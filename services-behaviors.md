@@ -8,7 +8,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to native PHP Traits except they have some distinct benefits:
+Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to [native PHP Traits](http://php.net/manual/en/language.oop5.traits.php) except they have some distinct benefits:
 
 1. Behaviors have their own contructor.
 1. Behaviors can have private or protected methods.
@@ -18,7 +18,7 @@ Behaviors add the ability for classes to have *private traits*, also known as Be
 <a name="compare-traits"></a>
 ## Comparison to traits
 
-Where you might use a trait like this:
+Where you might use a PHP trait like this:
 
     class MyClass
     {
@@ -68,35 +68,53 @@ The extended object is always passed as the first parameter to the Behavior's co
 <a name="constructor-extension"></a>
 ## Extending constructors
 
-Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend()` method. The argument should pass a closure that will be called as part of the class constructor.
+Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend` method. The argument should pass a closure that will be called as part of the class constructor.
 
     MyNamespace\Controller::extend(function($controller) {
         //
     });
+    
+#### Dynamically declaring properties
 
+Properties can be declared on an extendable object by calling `addDynamicProperty` and passing a property name and value.
+
+    Post::extend(function($model) {
+        $model->addDynamicProperty('tagsCache', null);
+    });
+    
+> **Note**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **October\Rain\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
+
+#### Dynamically creating methods
+
+Methods can be created to an extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
+
+    Post::extend(function($model) {
+        $model->addDynamicProperty('tagsCache', null);
+    
+        $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
+            if ($this->tagsCache) {
+                return $this->tagsCache;
+            } else {
+                return $this->tagsCache = $model->tags()->lists('name');
+            }
+        });
+    });
+    
 #### Dynamically implementing a behavior
 
 This unique ability to extend constructors allows behaviors to be implemented dynamically, for example:
 
     /**
-     * Extend the Pizza Shop to include the Master Splinter behavior too
+     * Extend the RainLab.Users controller to include the RelationController behavior too
      */
-    MyNamespace\Controller::extend(function($controller) {
+    RainLab\Users\Controllers\Users::extend(function($controller) {
 
         // Implement the list controller behavior dynamically
-        $controller->implement[] = 'MyNamespace.Behaviors.ListController';
+        $controller->implement[] = 'Backend.Behaviors.RelationController';
+        
+        // Declare the relationConfig property dynamically for the RelationController behavior to use
+        $controller->addDynamicProperty('relationConfig', '$/myvendor/myplugin/controllers/users/config_relation.yaml');
     });
-
-#### Dynamically creating methods
-
-Methods can be created to a extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
-
-    Post::extend(function($model) {
-        $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
-            return $model->tags()->lists('name');
-        });
-    });
-
 
 <a name="usage-example"></a>
 ## Usage example
@@ -166,9 +184,39 @@ This `Controller` class will implement the `FormController` behavior and then th
     // Prints: You might not see me...
     echo $controller->asExtension('FormController')->otherMethod();
 
+#### Detecting utilized extensions
+
+To check if an object has been extended with a behavior, you may use the `isClassExtendedWith` method on the object.
+
+    $controller->isClassExtendedWith('Backend.Behaviors.RelationController');
+
+Below is an example of dynamically extending a `UsersController` of a third-party plugin utilizing this method to avoid preventing other plugins from also extending the afore-mentioned third-party plugin.
+
+    UsersController::extend(function($controller) {
+
+        // Implement behavior if not already implemented
+        if (!$controller->isClassExtendedWith('Backend.Behaviors.RelationController')) {
+            $controller->implement[] = 'Backend.Behaviors.RelationController';
+        }
+
+        // Define property if not already defined
+        if (!isset($controller->relationConfig)) {
+            $controller->addDynamicProperty('relationConfig');
+        }
+
+        // Splice in configuration safely
+        $myConfigPath = '$/myvendor/myplugin/controllers/users/config_relation.yaml';
+
+        $controller->relationConfig = $this->mergeConfig(
+            $controller->relationConfig,
+            $myConfigPath
+        );
+
+    }
+
 ### Soft definition
 
-If a behavior class does not exist, like a trait, an *Class not found* error will be thrown. In some cases you may wish to suppress this error, for conditional implementation if a module is present in the system. You can do this by placing an `@` symbol at the beginning of the class name.
+If a behavior class does not exist, like a trait, a *Class not found* error will be thrown. In some cases you may wish to suppress this error, for conditional implementation if a behavior is present in the system. You can do this by placing an `@` symbol at the beginning of the class name.
 
     class User extends \October\Rain\Extension\Extendable
     {

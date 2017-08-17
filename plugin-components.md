@@ -9,11 +9,14 @@
 - [Routing parameters](#routing-parameters)
 - [Handling the page execution cycle](#page-cycle)
     - [Page execution life cycle handlers](#page-cycle-handlers)
+    - [Component initialization](#page-cycle-init)
+    - [Halting with a response](#page-cycle-response)
 - [AJAX handlers](#ajax-handlers)
 - [Default markup](#default-markup)
 - [Component partials](#component-partials)
     - [Referencing "self"](#referencing-self)
     - [Unique identifier](#unique-identifier)
+- [Rendering partials from code](#render-partial-method)
 - [Injecting page assets with components](#component-assets)
 
 <a name="introduction"></a>
@@ -30,7 +33,7 @@ Components files and directories reside in the **/components** subdirectory of a
             ComponentName.php    <=== Component class file
           Plugin.php
 
-Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents()` method.
+Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents` method.
 
 <a name="component-class-definition"></a>
 ## Component class definition
@@ -56,7 +59,7 @@ The **component class file** defines the component functionality and [component 
         }
     }
 
-The `componentDetails()` method is required. The method should return an array with two keys: `name` and `description`. The name and description are display in the CMS back-end user interface.
+The `componentDetails` method is required. The method should return an array with two keys: `name` and `description`. The name and description are display in the CMS back-end user interface.
 
 When this [component is attached to a page or layout](../cms/components), the class properties and methods become available on the page through the component variable, which name matches the component short name or the alias. For example, if the BlogPost component from the previous example was defined on a page with its short name:
 
@@ -65,7 +68,7 @@ When this [component is attached to a page or layout](../cms/components), the cl
     [blogPosts]
     ==
 
-You would be able to access its `posts()` method through the `blogPosts` variable. Note that Twig supports the property notation for methods, so that you don't need to use brackets.
+You would be able to access its `posts` method through the `blogPosts` variable. Note that Twig supports the property notation for methods, so that you don't need to use brackets.
 
     {% for post in blogPosts.posts %}
         {{ post }}
@@ -74,7 +77,7 @@ You would be able to access its `posts()` method through the `blogPosts` variabl
 <a name="component-registration"></a>
 ### Component registration
 
-Components must be registered by overriding the `registerComponents()` method inside the [Plugin registration class](registration#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
+Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
 
     public function registerComponents()
     {
@@ -88,7 +91,7 @@ This will register the Todo component class with the default alias name **demoTo
 <a name="component-properties"></a>
 ## Component properties
 
-When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties()` method of the component class. The next example shows how to define a component property:
+When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties` method of the component class. The next example shows how to define a component property:
 
     public function defineProperties()
     {
@@ -121,17 +124,21 @@ Key | Description
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 **showExternalParam** | specifies visiblity of the External Parameter editor for the property in the Inspector. Default value: **true**.
 
-Inside the component you can read the property value with the `property()` method:
+Inside the component you can read the property value with the `property` method:
 
     $this->property('maxItems');
 
-If the property value is not defined, you can supply the default value as a second parameter of the `property()` method:
+If the property value is not defined, you can supply the default value as a second parameter of the `property` method:
 
     $this->property('maxItems', 6);
 
 You can also load all the properties as array:
 
     $properties = $this->getProperties();
+    
+To access the property from the Twig partials for the component, utilize the `__SELF__` variable which refers to the Component object:
+
+   `{{ __SELF__.property('maxItems') }}`
 
 <a name="dropdown-properties"></a>
 ### Dropdown properties
@@ -151,7 +158,7 @@ The option list for dropdown properties can be static or dynamic. Static options
         ];
     }
 
-The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options()`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
+The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
 
     public function defineProperties()
     {
@@ -189,7 +196,7 @@ Dynamic drop-down lists can depend on other properties. For example, the state l
         ];
     }
 
-In order to load the state list you should know what country is currently selected in the Inspector. The Inspector POSTs all property values to the `getPropertyOptions()` handler, so you can do the following:
+In order to load the state list you should know what country is currently selected in the Inspector. The Inspector POSTs all property values to the `getPropertyOptions` handler, so you can do the following:
 
     public function getStateOptions()
     {
@@ -210,11 +217,13 @@ Sometimes components need to create links to the website pages. For example, the
 
     public function defineProperties()
     {
-            'postPage' => [
-                'title' => 'Post page',
-                'type' => 'dropdown',
-                'default' => 'blog/post'
-            ]
+            return [
+                'postPage' => [
+                    'title' => 'Post page',
+                    'type' => 'dropdown',
+                    'default' => 'blog/post'
+                ]
+            ];
     }
 
     public function getPostPageOptions()
@@ -225,9 +234,9 @@ Sometimes components need to create links to the website pages. For example, the
 <a name="routing-parameters"></a>
 ## Routing parameters
 
-Components can directly access routing parameter values defined the [URL of the page](../cms/pages#url-syntax).
+Components can directly access routing parameter values defined in the [URL of the page](../cms/pages#url-syntax).
 
-    // Returns he URL segment value, eg: /page/:post_id
+    // Returns the URL segment value, eg: /page/:post_id
     $postId = $this->param('post_id');
 
 In some cases a [component property](#component-properties) may act as a hard coded value or reference the value from the URL.
@@ -246,7 +255,7 @@ Alternatively the value can be referenced dynamically from the page URL using an
     [blogPost]
     id = "{{ :my_custom_parameter }}"
 
-In both cases the value can be retrieved by using the `property()` method:
+In both cases the value can be retrieved by using the `property` method:
 
     $this->property('id');
 
@@ -257,7 +266,7 @@ If you need to access the routing parameter name:
 <a name="page-cycle"></a>
 ## Handling the page execution cycle
 
-Components can be involved in the Page execution cycle events by overriding the `onRun()` method in the component class. The CMS controller executes this method every time when the page or layout loads. Inside the method you can inject variables to the Twig environment through the `page` property:
+Components can be involved in the Page execution cycle events by overriding the `onRun` method in the component class. The CMS controller executes this method every time when the page or layout loads. Inside the method you can inject variables to the Twig environment through the `page` property:
 
     public function onRun()
     {
@@ -282,10 +291,32 @@ When a page loads, October executes handler functions that could be defined in t
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
 
+<a name="page-cycle-init"></a>
+### Component initialization
+
+Sometimes you may wish to execute code at the time the component class is first instantiated. You may override the `init` method in the component class to handle any initialization logic, this will execute before AJAX handlers and before the page execution life cycle. For example, this method can be used for attaching another component to the page dynamically.
+
+    public function init()
+    {
+        $this->addComponent('Acme\Blog\Components\BlogPosts', 'blogPosts');
+    }
+
+<a name="page-cycle-response"></a>
+### Halting with a response
+
+Like all methods in the [page execution life cycle](../cms/layouts#layout-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
+
+    public function onRun()
+    {
+        if (true) {
+            return Response::make('Access denied!', 403);
+        }
+    }
+
 <a name="ajax-handlers"></a>
 ## AJAX handlers
 
-Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../cms/ajax#ajax-handlers). An example AJAX handler method defined in a component class:
+Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../ajax/handlers). An example AJAX handler method defined in a component class:
 
     public function onAddItem()
     {
@@ -294,7 +325,7 @@ Components can host AJAX event handlers. They are defined in the component class
         $this->page['result'] = $value1 + $value2;
     }
 
-If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItems`. Please see the [Calling AJAX handlers defined in components](../cms/ajax#components-ajax-handlers) article for details about using AJAX with components.
+If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItems`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers#calling-handlers) article for details about using AJAX with components.
 
 <a name="default-markup"></a>
 ## Default markup
@@ -313,7 +344,7 @@ The default markup can also take parameters that override the [component propert
 
     {% component 'demoTodo' maxItems="7" %}
 
-These properties will not be available in the `onRun()` method since they are established after the page cycle has completed. Instead they can be processed by overriding the `onRender()` method in the component class. The CMS controller executes this method before the default markup is rendered.
+These properties will not be available in the `onRun` method since they are established after the page cycle has completed. Instead they can be processed by overriding the `onRender` method in the component class. The CMS controller executes this method before the default markup is rendered.
 
     public function onRender()
     {
@@ -372,14 +403,40 @@ The ID is unique each time the component is displayed.
     <!-- ID: demoTodo527c532ec4c33 -->
     {% component 'demoTodo' %}
 
+<a name="render-partial-method"></a>
+## Rendering partials from code
+
+You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables.
+
+    $content = $this->renderPartial('component-partial.htm');
+
+    $content = $this->renderPartial('component-partial.htm', [
+        'name' => 'John Smith'
+    ]);
+
+For example, to render a partial as a response to an [AJAX handler](../ajax/handlers):
+
+    function onGetTemplate()
+    {
+        return ['#someDiv' => $this->renderPartial('component-partial.htm')];
+    }
+
+Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#page-cycle). This code will specifically return an XML response using the `Response` facade:
+
+    public function onRun()
+    {
+        $content = $this->renderPartial('default.htm');
+        return Response::make($content)->header('Content-Type', 'text/xml');
+    }
+
 <a name="component-assets"></a>
 ## Injecting page assets with components
 
-Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss()` and `addJs()` methods to add assets to the CMS controllers. It could be done in the component's `onRun()` method. Please read more details about [injecting assets in the Pages article](../cms/page#injecting-assets). Example:
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page#injecting-assets). Example:
 
     public function onRun()
     {
         $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
     }
 
-If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
+If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.

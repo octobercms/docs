@@ -1,10 +1,10 @@
 # html()
 
-Functions prefixed with `html_` perform tasks that are useful when dealing with htmls. The helper maps directly to the `Html` PHP class and its methods.
+Functions prefixed with `html_` perform tasks that are useful when dealing with html markup. The helper maps directly to the `Html` PHP class and its methods. For example:
 
     {{ html_strip() }}
 
-Is the PHP equivalent of the following:
+is the PHP equivalent of the following:
 
     <?= Html::strip() ?>
 

@@ -1,6 +1,6 @@
 # |raw
 
-Output variables in October are automatically escape, the `|raw` filter marks the value as being "safe" and will not be escaped if raw is the last filter applied.
+Output variables in October are automatically escaped, the `|raw` filter marks the value as being "safe" and will not be escaped if `raw` is the last filter applied.
 
     {# This variable won't be escaped #}
     {{ variable|raw }}

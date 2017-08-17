@@ -53,7 +53,7 @@ Settings models [can be registered](#backend-pages) to appear on the **back-end 
 <a name="writing-settings"></a>
 ### Writing to a settings model
 
-The settings model has the static `set()` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
+The settings model has the static `set` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
 
     use Acme\Demo\Models\Settings;
 
@@ -73,7 +73,7 @@ The settings model has the static `set()` method that allows to save individual 
 <a name="reading-settings"></a>
 ### Reading from a settings model
 
-The settings model has the static `get()` method that lets you to load individual properties. Also, when you instantiate a model with the `instance()` method it loads the properties from the database and you can access them directly.
+The settings model has the static `get` method that enables you to load individual properties. Also, when you instantiate a model with the `instance` method, it loads the properties from the database and you can access them directly.
 
     // Outputs: ABCD
     echo Settings::instance()->api_key;
@@ -93,7 +93,7 @@ The back-end contains a dedicated area for housing settings and configuration, i
 <a name="link-registration"></a>
 ### Settings link registration
 
-The back-end settings navigation links can be extended by overriding the `registerSettings()` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
 
     public function registerSettings()
     {
@@ -143,10 +143,11 @@ Just like [setting navigation context in the controller](../backend/controllers-
 
         [...]
 
-        SettingsManager::setContext('October.Backend', 'editor');
+        BackendMenu::setContext('October.System', 'system', 'settings');
+        SettingsManager::setContext('You.Plugin', 'settings');
     }
 
-The first argument of the `setContext()` method is the settings item owner in the following format: **author:plugin**. The second argument is the setting name, the same as you provided in the [when registering the back-end settings page](#link-registration).
+The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#link-registration).
 
 <a name="file-configuration"></a>
 ## File-based configuration
@@ -168,10 +169,24 @@ Use the `Config` class for accessing the configuration values defined in the con
 
     $maxItems = Config::get('acme.demo::maxItems', 50);
 
-A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`. Inside the overridden configuration file you can return only values you want to override:
+A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for different environment. Inside the overridden configuration file you can return only values you want to override:
 
     <?php
 
     return [
         'maxItems' => 20
     ];
+
+If you want to use seperate configurations across different environments (eg: **dev**, **production**), simply create another file in `config/author/plugin/environment/config.php`. Replace **environment** with the environment name. This will be merged with `config/author/plugin/config.php`.
+
+Example:
+
+**config/author/plugin/production/config.php:**
+
+    <?php
+
+    return [
+        'maxItems' => 25
+    ];
+
+This will set `maxItems` to 25 when `APP_ENV` is set to **production**.

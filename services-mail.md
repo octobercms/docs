@@ -10,16 +10,17 @@
     - [Mail templates](#mail-templates)
     - [Mail layouts](#mail-layouts)
     - [Registering mail templates](#mail-template-registration)
+    - [Global variables](#mail-global-variables)
 - [Mail & local development](#mail-and-local-development)
 
 <a name="introduction"></a>
 ## Introduction
 
-October provides drivers for SMTP, Mailgun, Mandrill, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
+October provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
 
 ### Driver prerequisites
 
-Before using the Mailgun, Mandrill or SES drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
 
 #### Mailgun driver
 
@@ -30,12 +31,12 @@ To use the Mailgun driver, set the `driver` option in your `config/mail.php` con
         'secret' => 'your-mailgun-key',
     ],
 
-#### Mandrill driver
+#### SparkPost driver
 
-To use the Mandrill driver set the `driver` option in your `config/mail.php` configuration file to `mandrill`. Next, verify that your `config/services.php` configuration file contains the following options:
+To use the SparkPost driver set the `driver` option in your `config/mail.php` configuration file to `sparkpost`. Next, verify that your `config/services.php` configuration file contains the following options:
 
-    'mandrill' => [
-        'secret' => 'your-mandrill-key',
+    'sparkpost' => [
+        'secret' => 'your-sparkpost-key',
     ],
 
 #### SES driver
@@ -82,7 +83,10 @@ October also includes an alternative method called `sendTo` that can simplify se
     // Send to multiple addresses
     Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
 
-The first argument in `sendTo()` is used for the recipients can take different value types:
+    // Alternatively send a raw message without parameters
+    Mail::rawTo('admin@domain.tld', 'Hello friend');
+
+The first argument in `sendTo` is used for the recipients can take different value types:
 
 Type | Description
 ------------- | -------------
@@ -132,21 +136,30 @@ Or, if you only need to send a plain text e-mail, you may specify this using the
 
     Mail::send(['text' => 'acme.blog::mail.text'], $data, $callback);
 
-#### Mailing raw strings
+#### Mailing parsed raw strings
 
-You may use the `raw` method if you wish to e-mail a raw string directly:
+You may use the `raw` method if you wish to e-mail a raw string directly. This content will be parsed by Markdown.
 
     Mail::raw('Text to e-mail', function ($message) {
         //
     });
 
-To pass raw HTML and text, set the `raw` array value to `true`:
+Additionally this string will be parsed by Twig, if you wish to pass variables to this environment, use the `send` method instead, passing the content as the `raw` key.
 
-    Mail::send([
+    Mail::send(['raw' => 'Text to email'], $vars, function ($message) {
+        //
+    });
+
+#### Mailing raw strings
+
+If you pass an array containing either `text` or `html` keys, this will be an explicit request to send mail. No layout or markdown parsing is used.
+
+    Mail::raw([
         'text' => 'This is plain text',
-        'html' => '<strong>This is HTML</strong>',
-        'raw' => true
-    ], $data, $callback);
+        'html' => '<strong>This is HTML</strong>'
+    ], function ($message) {
+        //
+    });
 
 <a name="attachments"></a>
 ### Attachments
@@ -224,7 +237,7 @@ If you wish to specify a specific queue on which to push the message, you may do
 
 Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
-Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates()` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
+Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
 <a name="mail-views"></a>
 ### Mail views
@@ -313,7 +326,7 @@ System | system | Used for internal, back-end mail
 <a name="mail-template-registration"></a>
 ### Registering mail templates
 
-Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates()` method of the [Plugin registration class](../plugin/registration#registration-file).
+Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
 
     public function registerMailTemplates()
     {
@@ -324,6 +337,15 @@ Mail views can be registered as templates that are automatically generated in th
     }
 
 The method should return an array where the key is the [mail view name](#mail-views) and the value gives a brief description about what the mail template is used for.
+
+<a name="mail-global-variables"></a>
+### Global variables
+
+You may register variables that are globally available to all mail templates with the `View::share` method.
+
+    View::share('site_name', 'OctoberCMS');
+
+This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 
 <a name="mail-and-local-development"></a>
 ## Mail & local development
@@ -339,7 +361,7 @@ One solution is to use the `log` mail driver during local development. This driv
 Another solution is to set a universal recipient of all e-mails sent by the framework. This way, all the emails generated by your application will be sent to a specific address, instead of the address actually specified when sending the message. This can be done via the `to` option in your `config/mail.php` configuration file:
 
     'to' => [
-        'address' => 'dev@domain.com',
+        'address' => 'dev@example.com',
         'name' => 'Dev Example'
     ],
 

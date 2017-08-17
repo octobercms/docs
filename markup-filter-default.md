@@ -10,6 +10,6 @@ The `|default` filter returns the value passed as the first argument if the filt
 
     {{ ''|default('The variable is empty')  }}
 
-When using the default filter on an expression that uses variables in some method calls, be sure to use the default filter whenever a variable can be undefined:
+When using the `default` filter on an expression that uses variables in some method calls, be sure to use the `default` filter whenever a variable can be undefined:
 
     {{ variable.method(foo|default('bar'))|default('bar') }}

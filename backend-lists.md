@@ -14,13 +14,17 @@
     - [Available scope types](#scope-types)
 - [Extending list behavior](#extend-list-behavior)
     - [Overriding controller action](#overriding-action)
-    - [Extending list columns](#extend-list-columns)
+    - [Overriding views](#overriding-views)
+    - [Extending column definitions](#extend-list-columns)
+    - [Extending filter scopes](#extend-filter-scopes)
     - [Extending the model query](#extend-model-query)
+    - [Extending the records collection](#extend-records-collection)
+    - [Custom column types](#custom-column-types)
 
 <a name="introduction"></a>
 ## Introduction
 
-**List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index()` however the list can be rendered anywhere and multiple list definitions can be used.
+**List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
 List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
@@ -73,6 +77,7 @@ Option | Description
 **showSetup** | displays the list column set up button. Default: false.
 **showTree** | displays a tree hierarchy for parent/child records. Default: false.
 **treeExpanded** | if tree nodes should be expanded by default. Default: false.
+**customViewPath** | specify a custom view path to override partials used by the list, optional.
 
 <a name="adding-toolbar"></a>
 ### Adding a toolbar
@@ -95,7 +100,9 @@ The search configuration supports the following options:
 
 Option | Description
 ------------- | -------------
-**prompt** | A placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
+**prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
+**mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the search query, the first argument will contain the search term.
 
 The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
 
@@ -148,18 +155,20 @@ Option | Description
 **label** | a name when displaying the list column to the user.
 **type** | defines how this column should be rendered (see [Column types](#column-types) below).
 **default** | specifies the default value for the column if value is empty.
-**searchable** | include this column in the list search results. Default: no.
-**invisible** | specifies if this column is hidden by default. Default: no.
-**sortable** | specifies if this column can be sorted. Default: yes.
-**select** | defines a custom SQL select statement.
-**relation** | defines a relationship column.
+**searchable** | include this column in the list search results. Default: false.
+**invisible** | specifies if this column is hidden by default. Default: false.
+**sortable** | specifies if this column can be sorted. Default: true.
+**clickable** | if set to false, disables the default click behavior when the column is clicked. Default: true.
+**select** | defines a custom SQL select statement to use for the value.
+**valueFrom** | defines a model attribute to use for the value.
+**relation** | defines a model relationship column.
 **cssClass** | assigns a CSS class to the column container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 
 <a name="column-types"></a>
 ## Available column types
 
-There are various column types that can be used for the **type** setting, these control how the list column is displayed.
+There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
 
 <style>
     .collection-method-list {
@@ -284,13 +293,30 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         relation: groups
         select: name
 
-If the [relationship definition](../database/relations) uses the **count** argument, you can display the number of related records using the `nameFrom` and `default` options.
+If the [relationship definition](../database/relations) uses the **count** argument, you can display the number of related records using the `valueFrom` and `default` options.
 
     users_count:
         label: Users
         relation: users_count
         valueFrom: count
         default: 0
+        
+> **Note:** Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
+
+**Best Practice:**
+
+     group_name:
+         label: Group
+         relation: group
+         select: name
+
+**Poor Practice:**
+
+    # This will overwrite the value of $record->group_id which will break accessing relations from the list view
+    group_id:
+        label: Group
+        relation: group
+        select: name
 
 <a name="column-partial"></a>
 ### Partial
@@ -304,7 +330,7 @@ If the [relationship definition](../database/relations) uses the **count** argum
 <a name="displaying-list"></a>
 ## Displaying the list
 
-Usually lists are displayed in the index [view](controllers-views-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender()` method call.
+Usually lists are displayed in the index [view](controllers-views-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
 
     <?= $this->listRender() ?>
 
@@ -318,7 +344,7 @@ The list behavior can support mulitple lists in the same controller using named 
         'layouts' => 'config_layouts_list.yaml'
     ];
 
-Each definition can then be displayed by passing the definition name as the first argument when calling the `listRender()` method:
+Each definition can then be displayed by passing the definition name as the first argument when calling the `listRender` method:
 
     <?= $this->listRender('templates') ?>
 
@@ -336,13 +362,41 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
         category:
             label: Category
             modelClass: Acme\Blog\Models\Category
-            nameFrom: name
             conditions: category_id in (:filtered)
+            nameFrom: name
+
+        status:
+            label: Status
+            type: group
+            conditions: status in (:filtered)
+            options:
+                pending: Pending
+                active: Active
+                closed: Closed
 
         published:
             label: Hide published
             type: checkbox
-            conditions: published <> 1
+            conditions: is_published <> true
+
+        approved:
+            label: Approved
+            type: switch
+            conditions:
+                - is_approved <> true
+                - is_approved = true
+
+        created_at:
+            label: Date
+            type: date
+            conditions: created_at >= ':filtered'
+
+
+        published_at:
+            label: Date
+            type: daterange
+            conditions: created_at >= ':after' AND created_at <= ':before'
+
 
 <a name="filter-scope-options"></a>
 ### Scope options
@@ -354,18 +408,117 @@ Option | Description
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](http://laravel.com/docs/eloquent#query-scopes) defined in the **list model** to apply to the list query, the first parameter will contain the filtered value(s).
-**nameFrom** | if filtering by multiple items, a column to display for the name, taken from the `modelClass` model.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
+**options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
+**nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 
 <a name="scope-types"></a>
 ### Available scope types
 
 These types can be used to determine how the filter scope should be displayed.
 
-Type | Description
-------------- | -------------
-**group** | filters the list by a group of items, usually by a related model and require a `nameFrom` definition. Eg: Status name as open, closed, etc.
-**checkbox** | used as a switch to apply a predefined condition or query to the list.
+<style>
+    .collection-method-list {
+        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
+        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
+    }
+
+    .collection-method-list a {
+        display: block;
+    }
+</style>
+
+<div class="content-list collection-method-list" markdown="1">
+- [Group](#filter-group)
+- [Checkbox](#filter-checkbox)
+- [Switch](#filter-switch)
+- [Date](#filter-date)
+- [Date range](#filter-daterange)
+- [Number](#filter-number)
+- [Number range](#filter-numberrange)
+</div>
+
+<a name="filter-group"></a>
+### Group
+
+`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+
+    status:
+        label: Status
+        type: group
+        conditions: status in (:filtered)
+        options:
+            pending: Pending
+            active: Active
+            closed: Closed
+            
+<a name="filter-checkbox"></a>
+### Checkbox
+
+`checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off.
+
+    published:
+        label: Hide published
+        type: checkbox
+        conditions: is_published <> true
+        
+<a name="filter-switch"></a>
+### Switch
+
+`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off.
+
+    approved:
+        label: Approved
+        type: switch
+        conditions:
+            - is_approved <> true
+            - is_approved = true
+            
+<a name="filter-date"></a>
+### Date
+
+`date` - displays a date picker for a single date to be selected.
+
+    created_at:
+        label: Date
+        type: date
+        minDate: '2001-01-23'
+        maxDate: '2030-10-13'
+        yearRange: 10
+        conditions: created_at >= ':filtered'
+        
+<a name="filter-daterange"></a>
+### Date Range
+
+`daterange` - displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:before` and `:after`.
+
+    published_at:
+        label: Date
+        type: daterange
+        minDate: '2001-01-23'
+        maxDate: '2030-10-13'
+        yearRange: 10
+        conditions: created_at >= ':after' AND created_at <= ':before'
+        
+<a name="filter-number"></a>
+### Number
+
+`number` - displays input for a single number to be entered.
+
+    age:
+        label: Age
+        type: number
+        conditions: age >= ':filtered'
+        
+<a name="filter-numberrange"></a>
+### Number Range
+
+`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`.
+
+    visitors:
+        label: Visitor Count
+        type: numberrange
+        conditions: vistors >= ':min' and visitors <= ':max'
 
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
@@ -373,13 +526,16 @@ Type | Description
 Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
 
 - [Overriding controller action](#overriding-action)
-- [Extending list columns](#extend-list-columns)
+- [Overriding views](#overriding-views)
+- [Extending column definitions](#extend-list-columns)
+- [Extending filter scopes](#extend-filter-scopes)
 - [Extending the model query](#extend-model-query)
+- [Custom column types](#custom-column-types)
 
 <a name="overriding-action"></a>
 ### Overriding controller action
 
-You can use your own logic for the `index()` action method in the controller, then optionally call the List behavior `index()` parent method.
+You can use your own logic for the `index` action method in the controller, then optionally call the List behavior `index` parent method.
 
     public function index()
     {
@@ -391,8 +547,45 @@ You can use your own logic for the `index()` action method in the controller, th
         $this->asExtension('ListController')->index();
     }
 
+<a name="overriding-views"></a>
+### Overriding views
+
+The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
+
+    <?php if ($toolbar): ?>
+        <?= $toolbar->render() ?>
+    <?php endif ?>
+
+    <?php if ($filter): ?>
+        <?= $filter->render() ?>
+    <?php endif ?>
+
+    <div class="row row-flush">
+        <div class="col-sm-3">
+            [Insert sidebar here]
+        </div>
+        <div class="col-sm-9 list-with-sidebar">
+            <?= $list->render() ?>
+        </div>
+    </div>
+
+The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-list). The widget will look in this path for a view first, then fall back to the default location.
+
+    # Custom view path
+    customViewPath: $/acme/blog/controllers/reviews/list
+
+> **Note**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
+
+For example, to modify the list body row markup, create a file called `list/_list_body_row.htm` in your controller directory.
+
+    <tr>
+        <?php foreach ($columns as $key => $column): ?>
+            <td><?= $this->getColumnValue($record, $column) ?></td>
+        <?php endforeach ?>
+    </tr>
+
 <a name="extend-list-columns"></a>
-### Extending list columns
+### Extending column definitions
 
 You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
 
@@ -439,6 +632,39 @@ Method | Description
 
 Each method takes an array of columns similar to the [list column configuration](#list-columns).
 
+<a name="extend-filter-scopes"></a>
+### Extending filter scopes
+
+You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
+
+        Categories::extendListFilterScopes(function($filter) {
+            $filter->addScopes([
+                'my_scope' => [
+                    'label' => 'My Filter Scope'
+                ]
+            ]);
+        });
+
+> The array of scopes provided is similar to the [list filters configuration](#list-filters).
+
+You can also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
+
+    class Categories extends \Backend\Classes\Controller
+    {
+        [...]
+
+        public function listFilterExtendScopes($filter)
+        {
+            $filter->addScopes([...]);
+        }
+    }
+
+The following methods are available on the $filter object.
+
+Method | Description
+------------- | -------------
+**addScopes** | adds new scopes to filter widget
+
 <a name="extend-model-query"></a>
 ### Extending the model query
 
@@ -457,3 +683,47 @@ The [list filter](#list-filters) model query can also be extended by overriding 
             $query->where('status', '<>', 'all');
         }
     }
+    
+<a name="extend-records-collection"></a>
+### Extending the records collection
+
+The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort` method on the [record collection](../database/collection) to change the sort order of the records.
+
+    public function listExtendRecords($records)
+    {
+        return $records->sort(function ($a, $b) {
+            return $a->computedVal() > $b->computedVal();
+        });
+    }
+
+<a name="custom-column-types"></a>
+### Custom column types
+
+Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+
+    public function registerListColumnTypes()
+    {
+        return [
+            // A local method, i.e $this->evalUppercaseListColumn()
+            'uppercase' => [$this, 'evalUppercaseListColumn'],
+
+            // Using an inline closure
+            'loveit' => function($value) { return 'I love '. $value; }
+        ];
+    }
+
+    public function evalUppercaseListColumn($value, $column, $record)
+    {
+        return strtoupper($value);
+    }
+
+Using the custom list column type is as simple as calling it by name using the `type` option.
+
+    # ===================================
+    #  List Column Definitions
+    # ===================================
+
+    columns:
+        secret_code:
+            label: Secret code
+            type: uppercase

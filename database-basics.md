@@ -145,7 +145,7 @@ If you would like to receive each SQL query executed by your application, you ma
         //
     });
 
-Just like [event registration](../services/events#event-registration), you may register your query listener in the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
+Just like [event registration](../services/events#event-registration), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
 
 <a name="query-logging"></a>
 ### Query logging
@@ -162,4 +162,4 @@ However, in some cases, such as when inserting a large number of rows, this can 
 
     Db::connection()->disableQueryLog();
 
-> **Note**: For quicker debugging it may be more useful to call the `trace_sql()` [helper function](../services/error-log#helpers) instead.
+> **Note**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log#helpers) instead.

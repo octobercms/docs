@@ -36,7 +36,7 @@ If you do need to iterate over a collection of numbers, you can use the `..` ope
 
 The above snippet of code would print all numbers from 0 to 10.
 
-It can be also useful with letters:
+It can also be useful with letters:
 
     {% for letter in 'a'..'z' %}
         - {{ letter }}
@@ -65,13 +65,13 @@ Inside of a `for` loop block you can access some special variables:
 Variable | Description
 ------------- | -------------
 `loop.index` | The current iteration of the loop. (1 indexed)
-`loop.index0` | he current iteration of the loop. (0 indexed)
+`loop.index0` | The current iteration of the loop. (0 indexed)
 `loop.revindex` |  The number of iterations from the end of the loop (1 indexed)
 `loop.revindex0` | The number of iterations from the end of the loop (0 indexed)
 `loop.first` | True if first iteration
 `loop.last` |  True if last iteration
-`loop.length` | he number of items in the collection
-`loop.parent` | he parent context
+`loop.length` | The number of items in the collection
+`loop.parent` | The parent context
 
     {% for user in users %}
         {{ loop.index }} - {{ user.username }}

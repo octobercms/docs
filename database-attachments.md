@@ -9,7 +9,7 @@
 <a name="file-attachments"></a>
 ## File attachments
 
-Models can support file attachments using a subset of the [polymorphic relationship](../database/relations#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship.
+Models can support file attachments using a subset of the [polymorphic relationship](../database/relations#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
 
 In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 
@@ -34,14 +34,27 @@ Protected attachments are uploaded to the application's **uploads/protected** di
 <a name="creating-attachments"></a>
 ### Creating new attachments
 
-Attach a file uploaded with a form:
+For singular attach relations (`$attachOne`), you may create an attachment directly via the model relationship, by setting its value using the `Input::file` method, which reads the file data from an input upload.
 
     $model->avatar = Input::file('file_input');
 
-Attach a prepared File object:
+You may also pass a string to the `data` attribute that contains an absolute path to a local file.
+
+    $model->avatar = '/path/to/somefile.jpg';
+    
+Sometimes it may also be useful to create a `File` instance directly from (raw) data:
+
+    $file = (new System\Models\File)->fromData('Some content', 'sometext.txt');
+
+For multiple attach relations (`$attachMany`), you may use the `create` method on the relationship instead, notice the file object is assocated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
+
+    $model->avatar()->create(['data' => Input::file('file_input')]);
+
+Alternatively, you can prepare a File model before hand, then manually associate the relationship later. Notice the `is_public` attribute must be set explicitly using this approach.
 
     $file = new System\Models\File;
     $file->data = Input::file('file_input');
+    $file->is_public = true;
     $file->save();
 
     $model->avatar()->add($file);
@@ -49,7 +62,7 @@ Attach a prepared File object:
 <a name="viewing-attachments"></a>
 ### Viewing attachments
 
-The `getPath()` method returns the full URL of an uploaded public file. The following code would print something like **...mysite.com/uploads/public/path/to/avatar.jpg**
+The `getPath` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**
 
     echo $model->avatar->getPath();
 
@@ -59,20 +72,21 @@ Returning multiple attachment file paths:
         echo $photo->getPath();
     }
 
-The `getLocalPath()` method will return an absolute path of an uploaded file in the local filesystem.
+The `getLocalPath` method will return an absolute path of an uploaded file in the local filesystem.
 
     echo $model->avatar->getLocalPath();
 
-To output the file contents directly, use the `output()` method, this will include the necessary headers for downloading the file:
+To output the file contents directly, use the `output` method, this will include the necessary headers for downloading the file:
 
     echo $model->avatar->output();
 
-You can resize an image with the `getThumb()` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
+You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
 
 Option | Description
 ------------- | -------------
 **mode** | auto, exact, portrait, landscape, crop. Default: auto
 **quality** | 0 - 100. Default: 95
+**interlace** | boolean: false (default), true
 **extension** | auto, jpg, png, gif. Default: jpg
 
 The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
@@ -140,3 +154,15 @@ Display the uploaded file on a page:
     }
 
     <img src="<?= $featuredImage ?>" alt="Featured Image">
+
+If you need to access the owner of a file, you can use the `attachment` property of the `File` model:
+
+    public $morphTo = [
+        'attachment' => []
+    ];
+    
+Example:  
+
+    $user = $file->attachment;
+    
+For more information read the [polymorphic relationships](../database/relations#polymorphic-relations)

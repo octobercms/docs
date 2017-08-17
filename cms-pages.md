@@ -4,8 +4,9 @@
 - [Page configuration](#configuration)
     - [URL syntax](#url-syntax)
 - [Dynamic pages](#dynamic-pages)
-    - [Handling forms](#handling-forms)
     - [Page execution life cycle](#page-life-cycle)
+    - [Sending a custom response](#life-cycle-response)
+    - [Handling forms](#handling-forms)
 - [404 page](#404-page)
 - [Error page](#error-page)
 - [Page variables](#page-variables)
@@ -73,7 +74,7 @@ You can also use regular expressions to validate parameters. To add a validation
     ...
     url = "/blog/:post_name?|^[a-z0-9\-]+$" - this will match /blog/my-blog-post
 
-It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match zero or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
+It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
 
     url = "/blog/:category*/:slug"
 
@@ -94,7 +95,7 @@ Inside the [Twig section](themes#twig-section) of a page template you can use an
 <a name="page-life-cycle"></a>
 ### Page execution life cycle
 
-There are special functions that can be defined in the PHP section of pages and layouts: `onInit()`, `onStart()` and `onEnd()`. The `onInit()` function is executed when all components are initialized and before AJAX requests are handled. The `onStart()` function is executed in the beginning of the page execution. The `onEnd()` function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
+There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart` and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
 
     url = "/"
     ==
@@ -126,10 +127,27 @@ The next example is more complicated. It shows how to load a blog post collectio
 
 The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
 
+<a name="life-cycle-response"></a>
+### Sending a custom response
+
+All methods defined in the execution life cycle have the ability to halt the process and return a response. Simply return a response from the life cycle function. The example below will not load any page contents and return the string *Hello world!* to the browser:
+
+    function onStart()
+    {
+        return 'Hello world!';
+    }
+
+A more useful example might be triggering a redirect using the `Redirect` facade:
+
+    public function onStart()
+    {
+        return Redirect::to('http://google.com');
+    }
+
 <a name="handling-forms"></a>
 ### Handling forms
 
-You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](ajax) article). Use the [form_open()](markup#standard-form) function to define a form that refers to an event handler. Example:
+You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [form_open()](markup#standard-form) function to define a form that refers to an event handler. Example:
 
     {{ form_open({ request: 'onHandleForm' }) }}
         Please enter a string: <input type="text" name="value"/>
@@ -144,7 +162,7 @@ The onHandleForm function can be defined in the page or layout [PHP section](the
         $this['lastValue'] = post('value');
     }
 
-The handler loads the value with the `post()` function and initializes the page `lastValue` attribute variable which is displayed below the form in the first example.
+The handler loads the value with the `post` function and initializes the page `lastValue` attribute variable which is displayed below the form in the first example.
 
 > **Note:** If a handler with a same name is defined in the page layout, page and a page [component](components) October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
 
@@ -181,7 +199,7 @@ More information can be found on [`this.page` in the Markup guide](../markup/thi
 <a name="injecting-assets"></a>
 ## Injecting page assets programmatically
 
-If needed, you can inject assets (CSS and JavaScript files) to pages with the controller's `addCss()` and `addJs()` methods. It could be done in the `onStart()` function defined in the [PHP section](themes#php-section) of a page or [layout](layout) template. Example:
+If needed, you can inject assets (CSS and JavaScript files) to pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layout) template. Example:
 
     function onStart()
     {
@@ -189,7 +207,22 @@ If needed, you can inject assets (CSS and JavaScript files) to pages with the co
         $this->addJs('assets/js/app.js');
     }
 
-If the path specified in the `addCss()` and `addJs()` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme.
+If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the theme.
+
+Injected assets can be combined by passing them in as an array:
+
+    function onStart()
+    {
+        $this->addCss(['assets/css/hello.css', 'assets/css/goodbye.css']);
+        $this->addJs(['assets/js/app.js', 'assets/js/nav.js']);
+    }
+
+LESS and SCSS assets can be injected and compiled using the combiner:
+
+    function onStart()
+    {
+        $this->addCss(['assets/less/base.less']);
+    }
 
 In order to output the injected assets on pages or [layouts](layout) use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
 

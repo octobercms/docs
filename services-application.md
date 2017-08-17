@@ -3,6 +3,7 @@
 - [Application container](#app-container)
 - [Service providers](#service-providers)
 - [Application events](#application-events)
+- [Application helpers](#application-helpers)
 
 <a name="app-container"></a>
 ## Application container
@@ -54,7 +55,7 @@ Since we have bound the `UserRepositoryInterface` to a concrete type, the `DbUse
 <a name="where-to-register"></a>
 ### Where to register bindings
 
-IoC bindings, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place IoC registration logic.
+IoC bindings, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place IoC registration logic.
 
 <a name="service-providers"></a>
 ## Service providers
@@ -121,3 +122,23 @@ The service container fires an event each time it resolves an object. You may li
     });
 
 As you can see, the object being resolved will be passed to the callback, allowing you to set any additional properties on the object before it is given to its consumer.
+
+<a name="application-helpers"></a>
+## Application helpers
+
+#### Finding the application environment
+
+You may use the `environment` method to discover the application environment as determined by the [environment configuration](../setup/configuration#environment-config).
+
+    // production
+    App::environment();
+
+#### Determine the execution context
+
+It is possible to know if the current request is being performed in the administrative back-end area using the `runningInBackend` method.
+
+    App::runningInBackend();
+
+You may also use the `runningInConsole` method to check if the executing code is taking place inside the [command line interface](../console/commands):
+
+    App::runningInConsole();

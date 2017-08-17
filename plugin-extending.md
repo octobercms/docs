@@ -7,6 +7,7 @@
 - [Usage examples](#usage-examples)
     - [Extending a User model](#extending-user-model)
     - [Extending a backend form](#extending-backend-form)
+    - [Extending a backend list](#extending-backend-list)
     - [Extending a component](#extending-component)
     - [Extending the backend menu](#extending-backend-menu)
 
@@ -22,20 +23,18 @@ Plugins are primarily extended using the [Event service](../services/events) to 
 <a name="subscribing-to-events"></a>
 ### Subscribing to events
 
-The most common place to subscribe to an event is the `boot()` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
+The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
 
     public function boot()
     {
         Event::listen('rainlab.user.register', function($user) {
-
             // Code to register $user->email to mailing list
-
         });
     }
 
 The same can be achieved by extending the model's constructor and using a local event.
 
-    User::extend(function($model){
+    User::extend(function($model) {
         $model->bindEvent('user.register', function() use ($model) {
             // Code to register $model->email to mailing list
         });
@@ -69,7 +68,7 @@ Once this event has been subscribed to, the parameters are available in the hand
 <a name="backend-view-events"></a>
 ## Extending back-end views
 
-Sometimes you may wish to allow a back-end view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent()` method found in all back-end controllers.
+Sometimes you may wish to allow a back-end view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent` method found in all back-end controllers.
 
 Place this code in your view file:
 
@@ -99,7 +98,7 @@ These are some practical examples of how events can be used.
 <a name="extending-user-model"></a>
 ### Extending a User model
 
-This example will modify the `model.getAttribute` event of the `User` model by binding to its local event. This is carried out inside the `boot()` method of the [Plugin registration file](registration#routing-initialization). In both cases when the `$model->foo` attribute is accessed, it will return the value *bar*.
+This example will modify the `model.getAttribute` event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases when the `$model->foo` attribute is accessed, it will return the value *bar*.
 
     class Plugin extends PluginBase
     {
@@ -107,7 +106,6 @@ This example will modify the `model.getAttribute` event of the `User` model by b
 
         public function boot()
         {
-
             // Local event hook that affects all users
             User::extend(function($model) {
                 $model->bindEvent('model.getAttribute', function($attribute, $value) {
@@ -120,8 +118,9 @@ This example will modify the `model.getAttribute` event of the `User` model by b
             // Double event hook that affects user #2 only
             User::extend(function($model) {
                 $model->bindEvent('model.afterFetch', function() use ($model) {
-                    if ($model->id != 2)
+                    if ($model->id != 2) {
                         return;
+                    }
 
                     $model->bindEvent('model.getAttribute', function($attribute, $value) {
                         if ($attribute == 'foo') {
@@ -130,14 +129,13 @@ This example will modify the `model.getAttribute` event of the `User` model by b
                     });
                 });
             });
-
         }
     }
 
 <a name="extending-backend-form"></a>
 ### Extending a backend form
 
-This example will modify the `backend.form.extendFields` global event of the `Backend\Widget\Form` class and inject some extra fields values under the conditions that the form is being used to modify a user. This event is also subscribed inside the `boot()` method of the [Plugin registration file](registration#routing-initialization).
+This example will modify the `backend.form.extendFields` global event of the `Backend\Widget\Form` class and inject some extra fields values under the conditions that the form is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
@@ -148,7 +146,7 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
             // Extend all backend form usage
             Event::listen('backend.form.extendFields', function($widget) {
 
-                // Only for the Users controller
+                // Only for the User controller
                 if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
                     return;
                 }
@@ -161,11 +159,53 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
                 // Add an extra birthday field
                 $widget->addFields([
                     'birthday' => [
-                        'label' => 'Birthday',
+                        'label'   => 'Birthday',
                         'comment' => 'Select the users birthday',
-                        'type' => 'datepicker'
+                        'type'    => 'datepicker'
                     ]
                 ]);
+
+                // Remove a Surname field
+                $widget->removeField('surname');
+            });
+        }
+    }
+
+> Remember to add `use Event` to the top of your class file to use global events.
+
+<a name="extending-backend-list"></a>
+### Extending a backend list
+
+This example will modify the `backend.list.extendColumns` global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+
+    class Plugin extends PluginBase
+    {
+        [...]
+
+        public function boot()
+        {
+            // Extend all backend list usage
+            Event::listen('backend.list.extendColumns', function($widget) {
+
+                // Only for the User controller
+                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
+                    return;
+                }
+
+                // Only for the User model
+                if (!$widget->model instanceof \RainLab\User\Models\User) {
+                    return;
+                }
+
+                // Add an extra birthday column
+                $widget->addColumns([
+                    'birthday' => [
+                        'label' => 'Birthday'
+                    ]
+                ]);
+
+                // Remove a Surname column
+                $widget->removeColumn('surname');
             });
         }
     }
@@ -184,14 +224,14 @@ This example will declare a new global event `rainlab.forum.topic.post` and loca
             [...]
 
             /*
-             * Extensbility
+             * Extensibility
              */
             Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
             $this->fireEvent('topic.post', [$post, $postUrl]);
         }
     }
 
-Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts#dynamic-pages). This will write to the trace log when the `onPost()` event handler is called inside the `Topic` component (above).
+Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts#dynamic-pages). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
     [topic]
     slug = "{{ :slug }}"

@@ -3,13 +3,14 @@
 - [Introduction](#introduction)
 - [Configuring the reorder behavior](#configuring-reorder)
 - [Displaying the reorder page](#reorder-display)
+- [Extending the model query](#extend-model-query)
 
 <a name="introduction"></a>
 ## Introduction
 
-**Reorder behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder()`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
+**Reorder behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
 
-The behavior depends on a [model class](../database/model) which must implement one of the following traits:
+The behavior depends on a [model class](../database/model) which must implement one of the following [model traits](../database/traits):
 
 1. `October\Rain\Database\Traits\Sortable`
 1. `October\Rain\Database\Traits\NestedTree`
@@ -65,6 +66,16 @@ Option | Description
 <a name="reorder-display"></a>
 ## Displaying the reorder page
 
-You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reodering includes the toolbar, the view file will consist solely of the single `reorderRender()` method call.
+You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
     <?= $this->reorderRender() ?>
+
+<a name="extend-model-query"></a>
+## Extending the model query
+
+The lookup query for the list [database model](../database/model) can be extended by overriding the `reorderExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
+
+	public function reorderExtendQuery($query)
+	{
+	    $query->withTrashed();
+	}

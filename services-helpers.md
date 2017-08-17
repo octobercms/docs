@@ -29,7 +29,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [array_pull](#method-array-pull)
 [array_set](#method-array-set)
 [array_sort](#method-array-sort)
-[array_sort_recursive](#method-array-recursive)
+[array_sort_recursive](#method-array-sort-recursive)
 [array_where](#method-array-where)
 [head](#method-head)
 [last](#method-last)
@@ -38,15 +38,16 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 ### Paths
 
 <div class="collection-method-list" markdown="1">
+[Path Symbols](#path-symbols)
 [app_path](#method-app-path)
 [base_path](#method-base-path)
 [config_path](#method-config-path)
 [database_path](#method-database-path)
 [plugins_path](#method-plugins-path)
 [public_path](#method-public-path)
+[storage_path](#method-storage-path)
 [temp_path](#method-temp-path)
 [themes_path](#method-themes-path)
-[storage_path](#method-storage-path)
 [uploads_path](#method-uploads-path)
 </div>
 
@@ -342,6 +343,20 @@ The `last` function returns the last element in the given array:
 <a name="paths"></a>
 ## Paths
 
+<a name="path-symbols"></a>
+#### Path Symbols
+
+Path prefix symbols can be used to create a dynamic path. For example, a path beginning with `~/` will create a path relative to the application:
+
+    list: ~/plugins/acme/pay/models/invoiceitem/columns.yaml
+
+These symbols are supported for creating dynamic paths:
+
+Symbol | Description
+------------- | -------------
+`$` | Relative to the plugins directory
+`~` | Relative to the application directory
+
 <a name="method-app-path"></a>
 #### `app_path()` {#collection-method}
 
@@ -392,13 +407,6 @@ The `public_path` function returns the fully qualified path to the `public` dire
 
     $path = public_path();
 
-<a name="method-temp-path"></a>
-#### `temp_path()` {#collection-method}
-
-The `temp_path` function returns the fully qualified path to a writable directory for temporary files:
-
-    $path = temp_path();
-
 <a name="method-storage-path"></a>
 #### `storage_path()` {#collection-method}
 
@@ -409,6 +417,20 @@ The `storage_path` function returns the fully qualified path to the `storage` di
 You may also use the `storage_path` function to generate a fully qualified path to a given file relative to the storage directory:
 
     $path = storage_path('app/file.txt');
+
+<a name="method-temp-path"></a>
+#### `temp_path()` {#collection-method}
+
+The `temp_path` function returns the fully qualified path to a writable directory for temporary files:
+
+    $path = temp_path();
+
+<a name="method-themes-path"></a>
+#### `themes_path()` {#collection-method}
+
+The `themes_path` function returns the fully qualified path to the `themes` directory:
+
+    $path = themes_path();
 
 <a name="method-uploads-path"></a>
 #### `uploads_path()` {#collection-method}
@@ -684,10 +706,22 @@ The `trace_log` function writes a trace message to the log file.
 
     trace_log('This code has passed...');
 
-<a name="method-trace-log"></a>
+The function supports passing exceptions, arrays and objects:
+
+    trace_log($exception);
+
+    trace_log($array);
+
+    trace_log($object);
+
+You may also pass multiple arguments to trace multiple messages:
+
+    trace_log($value1, $value2, $exception, '...');
+
+<a name="method-trace-sql"></a>
 #### `trace_sql()` {#collection-method}
 
-The `trace_log` function function enables database logging and begins to monitor all SQL output.
+The `trace_sql` function enables database logging and begins to monitor all SQL output.
 
     trace_sql();
 

@@ -10,6 +10,7 @@
 - [Nested Tree](#nested-tree)
 - [Validation](#validation)
 - [Soft deleting](#soft-deleting)
+- [Nullable](#nullable)
 
 Model traits are used to implement common functionality.
 
@@ -31,7 +32,7 @@ Hashed attributes are hashed immediately when the attribute is first set on the 
 <a name="purgeable"></a>
 ## Purgeable
 
-Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to hash.
+Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to purge.
 
     class User extends Model
     {
@@ -61,6 +62,8 @@ Similar to the [hashable trait](#hashable), encrypted attributes are encrypted w
          */
         protected $encryptable = ['api_key', 'api_secret'];
     }
+    
+> **Note:** Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#standard-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
 
 <a name="sluggable"></a>
 ## Sluggable
@@ -138,15 +141,27 @@ The revision history can be accessed like any other relation:
         echo 'to ' . $record->new_value;
     }
 
+The revision record optionally supports a user relationship using the `user_id` attribute. You may include a `getRevisionableUser` method in your model to keep track of the user that made the modification.
+
+    public function getRevisionableUser()
+    {
+        return BackendAuth::getUser()->id;
+    }
+
 <a name="sortable"></a>
 ## Sortable
 
-Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. The store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait.
+Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
 
     class User extends Model
     {
         use \October\Rain\Database\Traits\Sortable;
     }
+    
+
+You may modify the key name used to identify the sort order by defining the `SORT_ORDER` constant:
+
+    const SORT_ORDER = 'my_sort_order_column';
 
 Use the `setSortableOrder` method to set the orders on a single record or multiple records.
 
@@ -155,6 +170,8 @@ Use the `setSortableOrder` method to set the orders on a single record or multip
 
     // Sets the order of records 1, 2, 3 to 3, 2, 1 respectively...
     $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
+    
+> **Note:** If adding this trait to a model where data (rows) already existed previously, the data set may need to be initialized before this trait will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).
 
 <a name="simple-tree"></a>
 ## Simple Tree
@@ -263,29 +280,29 @@ October models uses the built-in [Validator class](../services/validation). The 
 
 > **Note**: You're free to use the [array syntax](../services/validation#basic-usage) for validation rules as well.
 
-Models validate themselves automatically when the `save()` method is called.
+Models validate themselves automatically when the `save` method is called.
 
     $user = new User;
-    $user->name = 'Adam Person';
-    $user->email = 'a.person@email.address.com';
+    $user->name = 'Actual Person';
+    $user->email = 'a.person@example.com';
     $user->password = 'passw0rd';
 
     // Returns false if model is invalid
     $success = $user->save();
 
-> **Note:** You can also validate a model at any time using the `validate()` method.
+> **Note:** You can also validate a model at any time using the `validate` method.
 
 <a name="retrieving-validation-errors"></a>
 ### Retrieving validation errors
 
-When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors()` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
+When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
 > **Note:** The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation#working-with-error-messages) of formatting errors.
 
 <a name="overriding-validation"></a>
 ### Overriding validation
 
-The `forceSave()` method validates the model and saves regardless of whether or not there are validation errors.
+The `forceSave` method validates the model and saves regardless of whether or not there are validation errors.
 
     $user = new User;
 
@@ -318,6 +335,19 @@ You may also set custom attribute names with the `$attributeNames` array.
         ];
     }
 
+<a name="dynamic-validation-rules"></a>
+### Dynamic validation rules
+
+You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model#events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
+
+    public function beforeValidate()
+    {
+        if (!$this->is_remote) {
+            $this->rules['latitude'] = 'required';
+            $this->rules['longitude'] = 'required';
+        }
+    }
+
 <a name="custom-validation-rules"></a>
 ### Custom validation rules
 
@@ -326,11 +356,11 @@ You can also create custom validation rules the [same way](../services/validatio
 <a name="soft-deleting"></a>
 ## Soft deleting
 
-When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDeleting` trait to the model and add the deleted_at column to your `$dates` property:
+When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
 
     class User extends Model
     {
-        use \October\Rain\Database\Traits\SoftDeleting;
+        use \October\Rain\Database\Traits\SoftDelete;
 
         protected $dates = ['deleted_at'];
     }
@@ -391,3 +421,39 @@ Sometimes you may need to truly remove a model from your database. To permanentl
 
     // Force deleting all related models...
     $user->posts()->forceDelete();
+
+<a name="soft-deleting-relations"></a>
+### Soft deleting relations
+
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+
+    class User extends Model
+    {
+        use \October\Rain\Database\Traits\SoftDelete;
+
+        public $hasMany = [
+            'comments' => ['Acme\Blog\Models\Comment', 'softDelete' => true]
+        ];
+    }
+
+> **Note:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+
+Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
+
+    // Restore the user and comments
+    $user->restore();
+
+<a name="nullable"></a>
+## Nullable
+
+Nullable attributes are set to `NULL` when left empty. To nullify attributes in your model, apply the `October\Rain\Database\Traits\Nullable` trait and declare a `$nullable` property with an array containing the attributes to nullify.
+
+    class Product extends Model
+    {
+        use \October\Rain\Database\Traits\Nullable;
+
+        /**
+         * @var array Nullable attributes.
+         */
+        protected $nullable = ['sku'];
+    }
