@@ -68,9 +68,9 @@ Optional parameters can have default values which are used as fallback values in
 
 You can also use regular expressions to validate parameters. To add a validation expression, add the pipe symbol after the parameter name (or the question mark) and specify the expression. The forward slash symbol is not allowed in the expressions. Examples:
 
-    url = "/blog/:post_id|^[0-9]+$/comments" - this will match /blog/post/10/comments
+    url = "/blog/:post_id|^[0-9]+$/comments" - this will match /blog/10/comments
     ...
-    url = "/blog/:post_id|^[0-9]+$" - this will match /blog/post/3
+    url = "/blog/:post_id|^[0-9]+$" - this will match /blog/3
     ...
     url = "/blog/:post_name?|^[a-z0-9\-]+$" - this will match /blog/my-blog-post
 
