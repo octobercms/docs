@@ -186,7 +186,7 @@ October includes a number of utility commands.
 <a name="october-env-command"></a>
 ### Enable DotEnv configuration
 
-`october:env` - changes common configuration values to [DotEnv syntax](../setup/configuration#environment-config-extended).
+`october:env` - changes common configuration values to [DotEnv syntax](../setup/configuration#dotenv-configuration).
 
     php artisan october:env
 

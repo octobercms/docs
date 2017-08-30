@@ -10,10 +10,10 @@
     - [Safe mode](#safe-mode)
     - [CSRF protection](#csrf-protection)
     - [Bleeding edge updates](#edge-updates)
-    - [Environment configuration](#environment-config)
-- [Advanced configuration](#advanced-configuration)
     - [Using a public folder](#public-folder)
-    - [Extended environment configuration](#environment-config-extended)
+- [Environment configuration](#environment-config)
+    - [Defining a base environment](#base-environment)
+    - [Converting to DotEnv configuration](#dotenv-configuration)
 
 All of the configuration files for October are stored in the **config/** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
 
@@ -164,8 +164,22 @@ You can instruct the platform to prefer test builds by changing the `edgeUpdates
 
 > **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
 
+<a name="public-folder"></a>
+### Using a public folder
+
+For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
+
+    php artisan october:mirror public/
+
+This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
+
+> **Note**: The above command may need to be performed with System Administrator or *sudo* privileges. It should also be performed after each system update or when a new plugin is installed.
+
 <a name="environment-config"></a>
-### Environment configuration
+## Environment configuration
+
+<a name="base-environment"></a>
+### Defining a base environment
 
 It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to **production**. There are two common ways to change this value:
 
@@ -197,24 +211,10 @@ For example, to use a different MySQL database for the `dev` environment only, c
         ]
     ];
 
-<a name="advanced-configuration"></a>
-## Advanced configuration
+<a name="dotenv-configuration"></a>
+### Converting to DotEnv configuration
 
-<a name="public-folder"></a>
-### Using a public folder
-
-For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
-
-    php artisan october:mirror public/
-
-This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
-
-> **Note**: The above command may need to be performed with System Administrator or *sudo* privileges. It should also be performed after each system update or when a new plugin is installed.
-
-<a name="environment-config-extended"></a>
-### Extended environment configuration
-
-As an alternative to the standard [environment configuration](#environment-config) you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `october:env` command to move common config values to the environment:
+As an alternative to the [base environment configuration](#base-environment) you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `october:env` command to move common config values to the environment:
 
     php artisan october:env
 
