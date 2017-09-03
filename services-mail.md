@@ -75,16 +75,16 @@ Since we are passing an array containing the `name` key in the example above, we
 October also includes an alternative method called `sendTo` that can simplify sending mail:
 
     // Send to address using no name
-    Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params);
+    Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params, $callback, $queue, $bcc);
 
     // Send using an object's properties
-    Mail::sendTo($user, 'acme.blog::mail.message', $params);
+    Mail::sendTo($user, 'acme.blog::mail.message', $params, $callback, $queue, $bcc);
 
     // Send to multiple addresses
-    Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
+    Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params, $callback, $queue, $bcc);
 
     // Alternatively send a raw message without parameters
-    Mail::rawTo('admin@domain.tld', 'Hello friend');
+    Mail::rawTo('admin@domain.tld', 'Hello friend', $callback, $queue, $bcc);
 
 The first argument in `sendTo` is used for the recipients can take different value types:
 
@@ -94,6 +94,12 @@ String | a single recipient address, with no name defined.
 Array | multiple recipients where the array key is the address and the value is the name.
 Object | a single recipient object, where the *email* property is used for the address and the *name* is optionally used for the name.
 Collection | a collection of recipient objects, as above.
+
+`$callback` gets called with one parameter, the message builder as described for the `send` method (defaults to null).
+
+`$queue` specifies whether to queue the message or send it directly (defaults to false).
+
+`$bcc` specifies wheter to add recipients as Bcc or regular To addresses (defaults to false).
 
 #### Building the message
 
