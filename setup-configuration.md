@@ -13,6 +13,7 @@
     - [Using a public folder](#public-folder)
 - [Environment configuration](#environment-config)
     - [Defining a base environment](#base-environment)
+    - [Domain driven environment](#domain-environment)
     - [Converting to DotEnv configuration](#dotenv-configuration)
 
 All of the configuration files for October are stored in the **config/** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
@@ -208,6 +209,22 @@ For example, to use a different MySQL database for the `dev` environment only, c
                 'username' => 'root',
                 'password' => ''
             ]
+        ]
+    ];
+
+<a name="domain-environment"></a>
+### Domain driven environment
+
+October supports using an environment detected by a specific hostname. You may place these hostnames in an environment configuration file, for example, **config/environment.php**.
+
+Using this file contents below, when the application is acccessed via **global.website.tld** the environment will be set to `global` and likewise for the others.
+
+    <?php
+
+    return [
+        'hosts' => [
+            'global.website.tld' => 'global',
+            'local.website.tld' => 'local',
         ]
     ];
 
