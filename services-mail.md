@@ -75,16 +75,16 @@ Since we are passing an array containing the `name` key in the example above, we
 October also includes an alternative method called `sendTo` that can simplify sending mail:
 
     // Send to address using no name
-    Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params, $callback, $queue, $bcc);
+    Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params);
 
     // Send using an object's properties
-    Mail::sendTo($user, 'acme.blog::mail.message', $params, $callback, $queue, $bcc);
+    Mail::sendTo($user, 'acme.blog::mail.message', $params);
 
     // Send to multiple addresses
-    Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params, $callback, $queue, $bcc);
+    Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
 
     // Alternatively send a raw message without parameters
-    Mail::rawTo('admin@domain.tld', 'Hello friend', $callback, $queue, $bcc);
+    Mail::rawTo('admin@domain.tld', 'Hello friend');
 
 The first argument in `sendTo` is used for the recipients can take different value types:
 
@@ -95,11 +95,20 @@ Array | multiple recipients where the array key is the address and the value is 
 Object | a single recipient object, where the *email* property is used for the address and the *name* is optionally used for the name.
 Collection | a collection of recipient objects, as above.
 
-`$callback` gets called with one parameter, the message builder as described for the `send` method (defaults to null).
+The complete signature of `sendTo` is as follows:
 
-`$queue` specifies whether to queue the message or send it directly (defaults to false).
+    Mail::sendTo($recipient, $message, $params, $callback, $options);
 
-`$bcc` specifies wheter to add recipients as Bcc or regular To addresses (defaults to false).
+- `$recipient` is defined as above.
+- `$message` is the template name or message contents for raw sending.
+- `$params` array of variables made available inside the template.
+- `$callback` gets called with one parameter, the message builder as described for the `send` method (optional, defaults to null). If not a callable value, works as a substitute for the next options argument.
+- `$options` custom sending options passed as an array (optional)
+
+The following custom sending `$options` are supported
+
+- **queue** specifies whether to queue the message or send it directly (optional, defaults to false).
+- **bcc** specifies wheter to add recipients as Bcc or regular To addresses (defaults to false).
 
 #### Building the message
 
