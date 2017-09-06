@@ -257,7 +257,7 @@ Optionally, mail views can be [registered in the Plugin registration file](#mail
 <a name="mail-views"></a>
 ### Mail views
 
-Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin:mail.message** would use the content in following file:
+Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file:
 
     plugins/                 <=== Plugins directory
       author/                <=== "author" segment
