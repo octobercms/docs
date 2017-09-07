@@ -177,27 +177,27 @@ You may also use the `prefix` parameter to specify common parameters for your gr
         });
     });
 
-<a name="route-middlewares"></a>
-### Route Middlewares
+<a name="route-middleware"></a>
+### Route Middleware
 
-Registering middleware inside your plugin's `boot()` method will register it globaly, for each request.
-If you want to register middleware to only some of your routes you should do it like this
-```
-Route::get('info', 'Acme\News@info')->middleware('Path\To\Your\Middleware');
-```
-For route groups it could be done like this
-```
-Route::group(['middleware' => 'Path\To\Your\Middleware'], function() {
-    Route::get('info', 'Acme\News@info');
-});
-```
-And finally, if you want to assign group of middlewares to just one route you can it like this
-```
-Route::middleware(['Path\To\Your\Middleware'])->group(function() {
-    Route::get('info', 'Acme\News@info');
-});
-```
-You can of course add more than one middlewares in groups, in those examples we used just one for convenience.
+Registering middleware inside your plugin's `boot()` method will register it globally for each request.
+If you want to register middleware to one route at a time you should do it like this:
+
+    Route::get('info', 'Acme\News@info')->middleware('Path\To\Your\Middleware');
+
+For route groups it could be done like this:
+
+    Route::group(['middleware' => 'Path\To\Your\Middleware'], function() {
+        Route::get('info', 'Acme\News@info');
+    });
+
+And finally, if you want to assign a group of middleware to just one route you can it like this
+
+    Route::middleware(['Path\To\Your\Middleware'])->group(function() {
+        Route::get('info', 'Acme\News@info');
+    });
+
+You can of course add more than one middleware in a group, just one is used in the above examples for conveniance.
 
 <a name="throwing-404-errors"></a>
 ## Throwing 404 errors
