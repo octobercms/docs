@@ -9,6 +9,7 @@
 - [Route groups](#route-groups)
     - [Sub-domain routing](#route-group-sub-domain-routing)
     - [Route prefixes](#route-group-prefixes)
+    - [Route middlewares](#route-middlewares)
 - [Throwing 404 errors](#throwing-404-errors)
 
 <a name="basic-routing"></a>
@@ -175,6 +176,28 @@ You may also use the `prefix` parameter to specify common parameters for your gr
             // Matches The accounts/{account_id}/detail URL
         });
     });
+
+<a name="route-middlewares"></a>
+### Route Middlewares
+
+Registering middleware inside your plugin's `boot()` method will register it globaly, for each request.
+If you want to register middleware to only some of your routes you should do it like this
+```
+Route::get('info', 'Acme\News@info')->middleware('Path\To\Your\Middleware');
+```
+For route groups it could be done like this
+```
+Route::group(['middleware' => 'Path\To\Your\Middleware'], function() {
+    Route::get('info', 'Acme\News@info');
+});
+```
+And finally, if you want to assign group of middlewares to just one route you can it like this
+```
+Route::middleware(['Path\To\Your\Middleware'])->group(function() {
+    Route::get('info', 'Acme\News@info');
+});
+```
+You can of course add more than one middlewares in groups, in those examples we used just one for convenience.
 
 <a name="throwing-404-errors"></a>
 ## Throwing 404 errors
