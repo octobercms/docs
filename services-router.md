@@ -9,7 +9,7 @@
 - [Route groups](#route-groups)
     - [Sub-domain routing](#route-group-sub-domain-routing)
     - [Route prefixes](#route-group-prefixes)
-    - [Route middlewares](#route-middlewares)
+    - [Route middleware](#route-middleware)
 - [Throwing 404 errors](#throwing-404-errors)
 
 <a name="basic-routing"></a>
