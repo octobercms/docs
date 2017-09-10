@@ -306,7 +306,7 @@ Alternatively, the same can be achieved using the `Db::table` [query builder](..
 
     public function run()
     {
-        $user = Db::table('users')->create([
+        $user = Db::table('users')->insert([
             'email'                 => 'user@example.com',
             'login'                 => 'user',
             [...]
