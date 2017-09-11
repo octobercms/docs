@@ -231,6 +231,8 @@ There are various column types that can be used for the **type** setting, these 
     created_at:
         label: Date
         type: datetime
+        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
+        ignoreTimezone: true
 
 You can also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**:
 
@@ -247,6 +249,8 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: date
+        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
+        ignoreTimezone: true
 
 <a name="column-time"></a>
 ### Time
@@ -256,6 +260,8 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: time
+        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
+        ignoreTimezone: true
 
 <a name="column-timesince"></a>
 ### Time since
@@ -265,6 +271,8 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: timesince
+        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
+        ignoreTimezone: true
 
 <a name="column-timetense"></a>
 ### Time tense
@@ -274,6 +282,8 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: timetense
+        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
+        ignoreTimezone: true
 
 <a name="column-select"></a>
 ### Select
