@@ -216,7 +216,7 @@ Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
-**span** | aligns the form field to one side. Options: auto, left, right, full. Default: auto.
+**span** | aligns the form field to one side. Options: auto, left, right, full. Default: full.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
