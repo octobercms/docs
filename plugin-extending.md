@@ -171,6 +171,36 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
         }
     }
 
+If you need to extend backend form and in same time add support for translating those new fields you have to add fields before actual form is rendered. This can be done with `backend.form.extendFieldsBefore` event.
+```
+    public function boot()
+    {
+        Event::extend('backend.form.extendFieldsBefore', function($widget) {
+            
+            // You should always check to see if you're extending correct model/controller
+            if(!$widget->model instanceof \Foo\Example\Models\Bar) {
+                return;
+            }
+            
+            // Here you can't use addFields() because it will throw you an exception because form is not yet created 
+            // and it does not have tabs and fields
+            // For this example we will pretend that we want to add a new field named example_field
+            $widget->fields['example_field'] = [
+                'label' => 'Example field',
+                'comment' => 'Your example field',
+                'type' => 'text',
+            ];
+            
+            // Ok that's it about adding field inside form, now we need to tell our model that this field is translatable
+        });
+        
+        // We will pretend that our model already implements RainLab Translatable behavior and $translatable property, 
+        // if it does not you'll have to add it with addDynamicProperty()
+        \Foo\Example\Models\Bar::extend(function($model) {
+            $model->translatable[] = 'example_field';
+        });
+    }
+```
 > Remember to add `use Event` to the top of your class file to use global events.
 
 <a name="extending-backend-list"></a>
