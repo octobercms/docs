@@ -675,6 +675,7 @@ The following methods are available on the $filter object.
 Method | Description
 ------------- | -------------
 **addScopes** | adds new scopes to filter widget
+**removeScope** | remove scope from filter widget
 
 <a name="extend-model-query"></a>
 ### Extending the model query
