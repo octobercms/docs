@@ -325,7 +325,7 @@ Components can host AJAX event handlers. They are defined in the component class
         $this->page['result'] = $value1 + $value2;
     }
 
-If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItems`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers#calling-handlers) article for details about using AJAX with components.
+If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers#calling-handlers) article for details about using AJAX with components.
 
 <a name="default-markup"></a>
 ## Default markup
