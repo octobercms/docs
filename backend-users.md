@@ -1,11 +1,22 @@
 # Backend Users & Permissions
 
+- [Users and Permissions](#users-and-permissions)
 - [Backend user helper](#backend-auth-facade)
 - [Registering permissions](#permission-registration)
 - [Restricting access to back-end pages](#page-access)
 - [Restricting access to features](#features)
 
 The user management for the back-end includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the back-end.
+
+<a name="users-and-permissions"></a>
+## Users and Permissions
+
+Access to all parts of an OctoberCMS instance is controlled by the Permissions system. At the lowest level, there are Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user. Permissions are string keys in the form of `vendor.plugin.permission_name` that are granted to users by either direct assignment on their Edit Administrator page or by inheritance through the user's Role.
+
+Roles (`\Backend\Models\UserRole`) are groupings of permissions with a name and description used to identify the role. An Administrator can only have one role assigned to them at once. A Role could be assigned to multiple administrators. October ships with two system roles by default, `developer` and `publisher`. 
+
+> **Note:** System roles (`developer`, `publisher`, any role with `is_system` = `true`) cannot have their permissions changed through the Backend, they are defined in code and any permissions attached to them are attached directly in code as well. 
+
 
 <a name="backend-auth-facade"></a>
 ## Backend user helper
