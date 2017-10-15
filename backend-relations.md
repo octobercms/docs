@@ -357,6 +357,10 @@ Provides an opportunity to manipulate the manage widget of your relation.
 
     public function relationExtendManageWidget($widget, $field, $model)
     {
+        // Make sure the field is the expected one
+        if ($field != 'myField')
+            return; 
+            
         // manipulate widget as needed
     }
 
