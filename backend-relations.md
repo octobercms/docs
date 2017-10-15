@@ -9,6 +9,7 @@
     - [Belongs to](#belongs-to)
     - [Has one](#has-one)
 - [Displaying a relation manager](#relation-display)
+- [Extending relation behavior](#extend-relation-behavior)
 
 <a name="introduction"></a>
 ## Introduction
@@ -282,3 +283,35 @@ The relation manager can then be displayed for a specified relation definition b
 You may instruct the relation manager to render in read only mode by passing the option as the second argument:
 
     <?= $this->relationRender('comments', ['readOnly' => true]) ?>
+    
+<a name="extend-relation-behavior"></a>
+## Extending relation behavior    
+
+Sometimes you may wish to modify the default relation behavior and there are several ways you can do this.
+
+- [Extending relation configuration](#extend-relation-config)
+- [Extending the view widget](#extend-view-widget)
+- [Extending the manage widget](#extend-manage-widget)
+- [Extending the pivot widget](#extend-pivot-widget)
+- [Extending refresh results](#extend-refresh-results)
+
+<a name="extend-relation-config"></a>
+### Extending relation configuration
+
+Provides an opportunity to manipulate the relation configuration. The following example can be used to inject a different columns.yaml file based on a property of your model. 
+
+    public function relationExtendConfig($config, $field, $model)
+    {
+        // Make sure the model and field matches those you want to manipulate
+        if (!$model instanceof MyModel || $field == 'myField')
+            return;
+
+        // Show a different list for business customers
+        if ($model->mode == 'b2b') {  
+            $config->view['list'] = '$/jurgenhauser/slider/models/slide/b2b_columns.yaml';
+        }
+    }
+    
+<a name="extend-view-widget"></a>
+### Extending the view widget
+    
