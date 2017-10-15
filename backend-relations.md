@@ -303,7 +303,7 @@ Provides an opportunity to manipulate the relation configuration. The following 
     public function relationExtendConfig($config, $field, $model)
     {
         // Make sure the model and field matches those you want to manipulate
-        if (!$model instanceof MyModel || $field == 'myField')
+        if (!$model instanceof MyModel || $field != 'myField')
             return;
 
         // Show a different list for business customers
@@ -323,7 +323,7 @@ For example you might want to toggle showCheckboxes based on a property of your 
     public function relationExtendViewWidget($widget, $field, $model)
     {
         // Make sure the model and field matches those you want to manipulate
-        if (!$model instanceof MyModel || $field == 'myField')
+        if (!$model instanceof MyModel || $field != 'myField')
             return;
             
         if ($model->constant) {
@@ -337,6 +337,10 @@ Since the widget has not completed initializing at this point of the runtime cyc
 
     public function relationExtendViewWidget($widget, $field, $model)
     {               
+        // Make sure the model and field matches those you want to manipulate
+        if (!$model instanceof MyModel || $field != 'myField')
+            return;
+            
         // Will not work!
         $widget->removeColumn('my_column');
         
@@ -346,3 +350,40 @@ Since the widget has not completed initializing at this point of the runtime cyc
         });
     }
     
+<a name="extend-manage-widget"></a>
+### Extending the manage widget
+
+Provides an opportunity to manipulate the manage widget of your relation. 
+
+    public function relationExtendManageWidget($widget, $field, $model)
+    {
+        // manipulate widget as needed
+    }
+
+<a name="extend-pivot-widget"></a>
+### Extending the pivot widget
+
+Provides an opportunity to manipulate the pivot widget of your relation. 
+
+    public function relationExtendPivotWidget($widget, $field, $model)
+    {
+        // Make sure the field is the expected one
+        if ($field != 'myField')
+            return; 
+            
+        // manipulate widget as needed
+    }
+    
+<a name="extend-refresh-results"></a>
+### Extending the refresh results
+
+The view widget is often refreshed when the manage widget makes a change, you can use this method to inject additional containers when this process occurs. Return an array with the extra values to send to the browser, eg: 
+
+    public function relationExtendRefreshResults($field)
+    {
+        // Make sure the field is the expected one
+        if ($field != 'myField')
+            return;
+            
+        return ['#myCounter' => 'Total records: 6'];
+    }    
