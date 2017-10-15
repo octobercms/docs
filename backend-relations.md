@@ -314,4 +314,35 @@ Provides an opportunity to manipulate the relation configuration. The following 
     
 <a name="extend-view-widget"></a>
 ### Extending the view widget
+
+Provides an opportunity to manipulate the view widget.
+> **Note**: The view widget has not yet fully initialized, so not all public methods will work as expected! For more information read [How to remove a column](#remove-column).
+
+For example you might want to toggle showCheckboxes based on a property of your model.
+
+    public function relationExtendViewWidget($widget, $field, $model)
+    {
+        // Make sure the model and field matches those you want to manipulate
+        if (!$model instanceof MyModel || $field == 'myField')
+            return;
+            
+        if ($model->constant) {
+            $widget->showCheckboxes = false;
+        }
+    }
+
+<a name="remove-column"></a>
+#### How to remove a column 
+Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](/docs/backend/lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
+
+    public function relationExtendViewWidget($widget, $field, $model)
+    {               
+        // Will not work!
+        $widget->removeColumn('my_column');
+        
+        // This will work
+        $widget->bindEvent('list.extendColumns', function () use($widget) {
+            $widget->removeColumn('my_column');
+        });
+    }
     
