@@ -308,7 +308,7 @@ Provides an opportunity to manipulate the relation configuration. The following 
 
         // Show a different list for business customers
         if ($model->mode == 'b2b') {  
-            $config->view['list'] = '$/jurgenhauser/slider/models/slide/b2b_columns.yaml';
+            $config->view['list'] = '$/author/plugin_name/models/mymodel/b2b_columns.yaml';
         }
     }
     
