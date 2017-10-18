@@ -63,7 +63,13 @@ A behavior is defined like this:
         }
     }
 
-The extended object is always passed as the first parameter to the Behavior's constructor.
+The extended object is always passed as the first parameter to the Behavior's constructor. 
+
+To summarize:
+- Extend \October\Rain\Extension\ExtensionBase to declare your class as a Behaviour
+- The class wanting to -implement- the Behaviour needs to extend \October\Rain\Extension\Extendable
+
+> **Note**: See [Using traits instead of base classes](#usage-example) 
 
 <a name="constructor-extension"></a>
 ## Extending constructors
@@ -239,10 +245,108 @@ If the class name `RainLab\Translate\Behaviors\TranslatableModel` does not exist
         }
     }
 
+<a name="using-traits"></a>
 ### Using Traits instead of base classes
 
-In some cases you may not wish to extend the `ExtensionBase` or `Extendable` classes, due to other needs. So you can use the traits instead, although obviously the behavior methods will not be available to the parent class.
+For those cases where you may not wish to extend the `ExtensionBase` or `Extendable` classes, you can use the traits instead. Your classes will have to be implemented as follows:
 
+First let's create the class that will act as a Behaviour, ie. can be -implemented- by other classes.
+
+    <?php namespace MyNamespace\Behaviours;
+
+    class WaveBehaviour
+    {
+        use \October\Rain\Extension\ExtensionTrait;
+
+        /**
+         * When using the Extensiontrait, your behaviour also has to implement this method
+         * @see \October\Rain\Extension\ExtensionBase
+         */
+        public static function extend(callable $callback)
+        {
+            self::extensionExtendCallback($callback);
+        }
+
+        public function wave()
+        {
+            echo "*waves*<br>";
+        }
+    }
+
+Now let's create the class that is able to -implement- behaviours using the ExtendableTrait.
+
+    class AI
+    {
+        use \October\Rain\Extension\ExtendableTrait;
+
+        /**
+         * @var array Extensions implemented by this class.
+         */
+        public $implement;
+        /**
+         * Constructor
+         */
+        public function __construct()
+        {
+            $this->extendableConstruct();
+        }
+        public function __get($name)
+        {
+            return $this->extendableGet($name);
+        }
+        public function __set($name, $value)
+        {
+            $this->extendableSet($name, $value);
+        }
+        public function __call($name, $params)
+        {
+            return $this->extendableCall($name, $params);
+        }
+        public static function __callStatic($name, $params)
+        {
+            return self::extendableCallStatic($name, $params);
+        }
+        public static function extend(callable $callback)
+        {
+            self::extendableExtendCallback($callback);
+        }
+
+        public function youGotBrains()
+        {
+            echo "I've got an AI!<br>";
+        }
+    }
+
+The AI class is now able to use behaviours. Let's extend it and have this class implement the WaveBehaviour.
+
+    <?php namespace MyNamespace\Classes;
+
+    class Robot extends AI
+    {
+        public $implement = [
+            'MyNamespace.Behaviours.WaveBehaviour'
+        ];
+
+        public function identify()
+        {
+            echo "I'm a Robot<br>";
+            echo $this->youGotBrains();
+            echo $this->wave();
+        }
+    }
+
+You can now utilize the Robot as follows:
+
+        $robot = new Robot();
+        $robot->identify();
+
+Which will output:
+
+    I'm a Robot
+    I've got an AI!
+    *waves*
+
+Remember:
 - When using the `ExtensionTrait` the methods from `ExtensionBase` should be applied to the class.
 
 - When using the `ExtendableTrait` the methods from `Extendable` should be applied to the class.
