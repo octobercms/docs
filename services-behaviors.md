@@ -69,7 +69,7 @@ To summarize:
 - Extend \October\Rain\Extension\ExtensionBase to declare your class as a Behaviour
 - The class wanting to -implement- the Behaviour needs to extend \October\Rain\Extension\Extendable
 
-> **Note**: See [Using traits instead of base classes](#usage-example) 
+> **Note**: See [Using traits instead of base classes](#using-traits) 
 
 <a name="constructor-extension"></a>
 ## Extending constructors
