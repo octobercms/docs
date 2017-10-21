@@ -82,13 +82,13 @@ The above Controller results in the following:
 <a name="passing-data-to-views"></a>
 ## Passing data to views
 
-Usually when you build the back-end user interface you can use the **controller behaviors**, described below, and don't need to pass any variables directly to your views. However you can do it with the controller's `$vars` property:
+Use the controller's `$vars` property to pass any data directly to your view:
 
-    $this->vars['var'] = 'value';
+    $this->vars['myVariable'] = 'value';
 
-The variables passed with the `$vars` property can be accessed in the view code directly:
+The variables passed with the `$vars` property can now be accessed directly in your view:
 
-    <p>The variable value is <?= $var ?></p>
+    <p>The variable value is <?= $myVariable ?></p>
 
 <a name="navigation-context"></a>
 ## Setting the navigation context
