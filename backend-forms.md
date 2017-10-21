@@ -454,6 +454,8 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
         label: Display content
         type: switch
         comment: Flick this switch to display content
+        on: myauthor.myplugin::lang.models.mymodel.show_content.on
+        off: myauthor.myplugin::lang.models.mymodel.show_content.off
 
 <a name="field-section"></a>
 ### Section

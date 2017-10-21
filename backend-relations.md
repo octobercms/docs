@@ -9,6 +9,7 @@
     - [Belongs to](#belongs-to)
     - [Has one](#has-one)
 - [Displaying a relation manager](#relation-display)
+- [Extending relation behavior](#extend-relation-behavior)
 
 <a name="introduction"></a>
 ## Introduction
@@ -282,3 +283,111 @@ The relation manager can then be displayed for a specified relation definition b
 You may instruct the relation manager to render in read only mode by passing the option as the second argument:
 
     <?= $this->relationRender('comments', ['readOnly' => true]) ?>
+    
+<a name="extend-relation-behavior"></a>
+## Extending relation behavior    
+
+Sometimes you may wish to modify the default relation behavior and there are several ways you can do this.
+
+- [Extending relation configuration](#extend-relation-config)
+- [Extending the view widget](#extend-view-widget)
+- [Extending the manage widget](#extend-manage-widget)
+- [Extending the pivot widget](#extend-pivot-widget)
+- [Extending refresh results](#extend-refresh-results)
+
+<a name="extend-relation-config"></a>
+### Extending relation configuration
+
+Provides an opportunity to manipulate the relation configuration. The following example can be used to inject a different columns.yaml file based on a property of your model. 
+
+    public function relationExtendConfig($config, $field, $model)
+    {
+        // Make sure the model and field matches those you want to manipulate
+        if (!$model instanceof MyModel || $field != 'myField')
+            return;
+
+        // Show a different list for business customers
+        if ($model->mode == 'b2b') {  
+            $config->view['list'] = '$/author/plugin_name/models/mymodel/b2b_columns.yaml';
+        }
+    }
+    
+<a name="extend-view-widget"></a>
+### Extending the view widget
+
+Provides an opportunity to manipulate the view widget.
+> **Note**: The view widget has not yet fully initialized, so not all public methods will work as expected! For more information read [How to remove a column](#remove-column).
+
+For example you might want to toggle showCheckboxes based on a property of your model.
+
+    public function relationExtendViewWidget($widget, $field, $model)
+    {
+        // Make sure the model and field matches those you want to manipulate
+        if (!$model instanceof MyModel || $field != 'myField')
+            return;
+            
+        if ($model->constant) {
+            $widget->showCheckboxes = false;
+        }
+    }
+
+<a name="remove-column"></a>
+#### How to remove a column 
+Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](/docs/backend/lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
+
+    public function relationExtendViewWidget($widget, $field, $model)
+    {               
+        // Make sure the model and field matches those you want to manipulate
+        if (!$model instanceof MyModel || $field != 'myField')
+            return;
+            
+        // Will not work!
+        $widget->removeColumn('my_column');
+        
+        // This will work
+        $widget->bindEvent('list.extendColumns', function () use($widget) {
+            $widget->removeColumn('my_column');
+        });
+    }
+    
+<a name="extend-manage-widget"></a>
+### Extending the manage widget
+
+Provides an opportunity to manipulate the manage widget of your relation. 
+
+    public function relationExtendManageWidget($widget, $field, $model)
+    {
+        // Make sure the field is the expected one
+        if ($field != 'myField')
+            return; 
+            
+        // manipulate widget as needed
+    }
+
+<a name="extend-pivot-widget"></a>
+### Extending the pivot widget
+
+Provides an opportunity to manipulate the pivot widget of your relation. 
+
+    public function relationExtendPivotWidget($widget, $field, $model)
+    {
+        // Make sure the field is the expected one
+        if ($field != 'myField')
+            return; 
+            
+        // manipulate widget as needed
+    }
+    
+<a name="extend-refresh-results"></a>
+### Extending the refresh results
+
+The view widget is often refreshed when the manage widget makes a change, you can use this method to inject additional containers when this process occurs. Return an array with the extra values to send to the browser, eg: 
+
+    public function relationExtendRefreshResults($field)
+    {
+        // Make sure the field is the expected one
+        if ($field != 'myField')
+            return;
+            
+        return ['#myCounter' => 'Total records: 6'];
+    }    
