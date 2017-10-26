@@ -200,6 +200,24 @@ You may modify the key name used to identify the parent by defining the `PARENT_
 Collections of models that use this trait will return the type of `October\Rain\Database\TreeCollection` which adds the `toNested` method. To build an eager loaded tree structure, return the records with the relations eager loaded.
 
     Category::all()->toNested();
+    
+### Rendering
+
+In order to render all levels of items and their children, you can use recursive processing
+
+    {% macro renderChildren(item) %}
+        {% import _self as SELF %}
+        {% if item.children is not empty %}
+            <ul>
+                {% for child in item.children %}
+                    <li>{{ child.name }}{{ SELF.renderChildren(child) | raw }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endmacro %}
+
+    {% import _self as SELF %}
+    {{ SELF.renderChildren(category) | raw }}
 
 <a name="nested-tree"></a>
 ## Nested Tree
