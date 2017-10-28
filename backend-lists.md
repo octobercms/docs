@@ -504,7 +504,6 @@ These types can be used to determine how the filter scope should be displayed.
         type: date
         minDate: '2001-01-23'
         maxDate: '2030-10-13'
-        default: '2002-02-20'
         yearRange: 10
         conditions: created_at >= ':filtered'
         
