@@ -519,10 +519,30 @@ These types can be used to determine how the filter scope should be displayed.
         minDate: '2001-01-23'
         maxDate: '2030-10-13'
         yearRange: 10
-        default: 
-            '2002-02-20':'2002-02-20'
-            '2002-08-20':'2002-08-20'
         conditions: created_at >= ':after' AND created_at <= ':before'
+        
+ 
+ To use default value for Date and Date Range
+ 
+ ```php
+ myController::extendListFilterScopes(function($filter) {
+                'Date Test' => [
+                    'label' => 'Date Test',
+                    'type' => 'daterange',
+                    'default' => $this->myDefaultTime(),
+                    'conditions' => "created_at >= ':after' AND created_at <= ':before'"
+                ],
+            ]);
+        });
+  
+  // return value must be instance of carbon
+  public function myDefaultTime() {
+        return [
+            0 => Carbon::parse('2012-02-02'),
+            1 => Carbon::parse('2012-04-02'),
+        ];
+    }
+ ```
         
 <a name="filter-number"></a>
 ### Number
@@ -544,8 +564,8 @@ These types can be used to determine how the filter scope should be displayed.
         label: Visitor Count
         type: numberrange
         default: 
-            10:10
-            20:20
+            0:10
+            1:20
         conditions: vistors >= ':min' and visitors <= ':max'
 
 <a name="extend-list-behavior"></a>
