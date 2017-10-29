@@ -388,11 +388,13 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
         published:
             label: Hide published
             type: checkbox
+            default: 1
             conditions: is_published <> true
 
         approved:
             label: Approved
             type: switch
+            default: 2
             conditions:
                 - is_approved <> true
                 - is_approved = true
@@ -422,6 +424,7 @@ Option | Description
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
+**default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -458,6 +461,9 @@ These types can be used to determine how the filter scope should be displayed.
         label: Status
         type: group
         conditions: status in (:filtered)
+        default: 
+            pending: Pending
+            active: Active
         options:
             pending: Pending
             active: Active
@@ -466,21 +472,24 @@ These types can be used to determine how the filter scope should be displayed.
 <a name="filter-checkbox"></a>
 ### Checkbox
 
-`checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off.
+`checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
 
     published:
         label: Hide published
         type: checkbox
+        default: 1
         conditions: is_published <> true
         
 <a name="filter-switch"></a>
 ### Switch
 
-`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off.
+`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
+
 
     approved:
         label: Approved
         type: switch
+        default: 1
         conditions:
             - is_approved <> true
             - is_approved = true
@@ -511,6 +520,29 @@ These types can be used to determine how the filter scope should be displayed.
         yearRange: 10
         conditions: created_at >= ':after' AND created_at <= ':before'
         
+ 
+ To use default value for Date and Date Range
+ 
+ ```php
+ myController::extendListFilterScopes(function($filter) {
+                'Date Test' => [
+                    'label' => 'Date Test',
+                    'type' => 'daterange',
+                    'default' => $this->myDefaultTime(),
+                    'conditions' => "created_at >= ':after' AND created_at <= ':before'"
+                ],
+            ]);
+        });
+  
+  // return value must be instance of carbon
+  public function myDefaultTime() {
+        return [
+            0 => Carbon::parse('2012-02-02'),
+            1 => Carbon::parse('2012-04-02'),
+        ];
+    }
+ ```
+        
 <a name="filter-number"></a>
 ### Number
 
@@ -519,6 +551,7 @@ These types can be used to determine how the filter scope should be displayed.
     age:
         label: Age
         type: number
+        default: 14
         conditions: age >= ':filtered'
         
 <a name="filter-numberrange"></a>
@@ -529,6 +562,9 @@ These types can be used to determine how the filter scope should be displayed.
     visitors:
         label: Visitor Count
         type: numberrange
+        default: 
+            0:10
+            1:20
         conditions: vistors >= ':min' and visitors <= ':max'
 
 <a name="extend-list-behavior"></a>
