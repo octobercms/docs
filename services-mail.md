@@ -204,6 +204,14 @@ Embedding inline images into your e-mails is typically cumbersome; however, ther
         <img src="{{ message.embed(pathToFile) }}">
     </body>
 
+If you are planning to use queued emails make sure that the path of the file is absolute. To achive that you can simply use the `app` [markup](https://octobercms.com/docs/markup/filter-app):
+
+    <body>
+        Here is an image:
+        {% set pathToFile = 'storage/app/media/path/to/file.jpg' | app %}
+        <img src="{{ message.embed(pathToFile) }}">
+    </body>   
+    
 #### Embedding raw data in mail content
 
 If you already have a raw data string you wish to embed into an e-mail message, you may use the `embedData` method on the `message` variable:
