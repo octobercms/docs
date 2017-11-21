@@ -175,7 +175,7 @@ If you need to extend backend form and in same time add support for translating 
 ```
     public function boot()
     {
-        Event::extend('backend.form.extendFieldsBefore', function($widget) {
+        Event::listen('backend.form.extendFieldsBefore', function($widget) {
             
             // You should always check to see if you're extending correct model/controller
             if(!$widget->model instanceof \Foo\Example\Models\Bar) {
