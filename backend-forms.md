@@ -610,6 +610,7 @@ Option | Description
 ------------- | -------------
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
+**keyFrom** | the column of the related record, stored in the foreign key. Default: id.
 **title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
 **list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
