@@ -450,6 +450,7 @@ These types can be used to determine how the filter scope should be displayed.
 - [Date range](#filter-daterange)
 - [Number](#filter-number)
 - [Number range](#filter-numberrange)
+- [Text](#filter-text)
 </div>
 
 <a name="filter-group"></a>
@@ -567,6 +568,17 @@ These types can be used to determine how the filter scope should be displayed.
             1:20
         conditions: vistors >= ':min' and visitors <= ':max'
 
+<a name="filter-text"></a>
+### Text
+
+`text` - display text input for a string to be entered. You can specify a `size` attribute that will be injected in the input size attribute (default: 10).
+
+    username:
+        label: Username
+        type: text
+        conditions: username = :value
+        size: 2
+            
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
 
