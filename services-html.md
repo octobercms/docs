@@ -67,8 +67,8 @@ The second argument of `Form::ajax` should contain the attributes:
 You can also pass partials to update as another array:
 
     Form::ajax('onSave', ['update' => [
-            'control-panel': '#controlPanel',
-            'layout/sidebar': '#layoutSidebar'
+            'control-panel' => '#controlPanel',
+            'layout/sidebar' => '#layoutSidebar'
         ]
     ])
 
