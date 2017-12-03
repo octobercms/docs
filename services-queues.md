@@ -3,7 +3,7 @@
 - [Configuration](#configuration)
 - [Basic usage](#basic-usage)
 - [Queueing closures](#queueing-closures)
-- [Running the queue listener](#running-the-queue-listener)
+- [Running the queue worker](#running-the-queue-worker)
 - [Daemon queue worker](#daemon-queue-worker)
 - [Push queues](#push-queues)
 - [Failed jobs](#failed-jobs)
@@ -125,53 +125,56 @@ You may also push a Closure onto the queue. This is very convenient for quick, s
 
 When using Iron.io [push queues](#push-queues), you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
 
-<a name="running-the-queue-listener"></a>
-## Running the queue listener
+<a name="running-the-queue-worker"></a>
+## Running the queue worker
 
 October includes some [console commands](../console/commands) that will process jobs in the queue.
 
-#### Processing the first job on the queue
-
-To process only the first job on the queue, you may use the `queue:work` command:
+To process new jobs as they are pushed onto the queue, run the `queue:work` command:
 
     php artisan queue:work
 
-#### Starting the queue listener
+Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](http://supervisord.org/) to ensure that the queue worker does not stop running.
 
-To listen for new jobs as they are pushed onto the queue. You may run this task using the `queue:listen` command:
+Queue worker processes store the booted application state in memory. They will not recognize changes in your code after they have been started. When deploying changes, restart queue workers.
 
-    php artisan queue:listen
+#### Processing a single job
 
-You may also specify which queue connection the listener should utilize:
+To process only the first job on the queue, use the `--once` option:
 
-    php artisan queue:listen connection
+    php artisan queue:work --once
 
-Note that once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](http://supervisord.org/) to ensure that the queue listener does not stop running.
+#### Specifying the connection & Queue
 
-You may pass a comma-delimited list of queue connections to the `listen` command to set queue priorities:
+You may also specify which queue connection the worker should utilize:
 
-    php artisan queue:listen --queue=high,low
+    php artisan queue:work connection
 
-In this example, jobs on the `high-connection` will always be processed before moving onto jobs from the `low-connection`.
+
+You may pass a comma-delimited list of queue connections to the `work` command to set queue priorities:
+
+    php artisan queue:work --queue=high,low
+
+In this example, jobs on the `high` queue will always be processed before moving onto jobs from the `low` queue.
 
 #### Specifying the job timeout parameter
 
 You may also set the length of time (in seconds) each job should be allowed to run:
 
-    php artisan queue:listen --timeout=60
+    php artisan queue:work --timeout=60
 
 #### Specifying queue sleep duration
 
 In addition, you may specify the number of seconds to wait before polling for new jobs:
 
-    php artisan queue:listen --sleep=5
+    php artisan queue:work --sleep=5
 
 Note that the queue only "sleeps" if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.
 
 <a name="daemon-queue-worker"></a>
 ## Daemon queue worker
 
-The `queue:work` also includes a `--daemon` option for forcing the queue worker to continue processing jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the `queue:listen` command, but at the added complexity of needing to drain the queues of currently executing jobs during your deployments.
+The `queue:work` also includes a `--daemon` option for forcing the queue worker to continue processing jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the `queue:work` command, but at the added complexity of needing to drain the queues of currently executing jobs during your deployments.
 
 To start a queue worker in daemon mode, use the `--daemon` flag:
 
@@ -181,7 +184,7 @@ To start a queue worker in daemon mode, use the `--daemon` flag:
 
     php artisan queue:work connection --daemon --sleep=3 --tries=3
 
-As you can see, the `queue:work` command supports most of the same options available to `queue:listen`. You may use the `php artisan help queue:work` command to view all of the available options.
+You may use the `php artisan help queue:work` command to view all of the available options.
 
 ### Deploying with daemon queue workers
 
@@ -201,35 +204,14 @@ Daemon queue workers do not restart the platform before processing each job. The
 
 Similarly, your database connection may disconnect when being used by long-running daemon. You may use the `Db::reconnect` method to ensure you have a fresh connection.
 
-<a name="push-queues"></a>
-## Push queues
-
-Push queues allow you to utilize the powerful queue facilities without running any daemons or background listeners. Currently, push queues are only supported by the [Iron.io](http://iron.io) driver. Before getting started, create an Iron.io account, and add your Iron credentials to the `config/queue.php` configuration file.
-
-#### Registering a push queue subscriber
-
-Next, you may use the `queue:subscribe` Artisan command to register a URL end-point that will receive newly pushed queue jobs:
-
-    php artisan queue:subscribe queue_name queue/receive
-
-    php artisan queue:subscribe queue_name http://example.com/queue/receive
-
-Now, when you login to your Iron dashboard, you will see your new push queue, as well as the subscribed URL. You may subscribe as many URLs as you wish to a given queue. Next, create a route for your `queue/receive` end-point and return the response from the `Queue::marshal` method:
-
-    Route::post('queue/receive', function() {
-        return Queue::marshal();
-    });
-
-The `marshal` method will take care of firing the correct job handler class. To fire jobs onto the push queue, just use the same `Queue::push` method used for conventional queues.
-
 <a name="failed-jobs"></a>
 ## Failed jobs
 
 Since things don't always go as planned, sometimes your queued jobs will fail. Don't worry, it happens to the best of us! There is a convenient way to specify the maximum number of times a job should be attempted. After a job has exceeded this amount of attempts, it will be inserted into a `failed_jobs` table. The failed jobs table name can be configured via the `config/queue.php` configuration file.
 
-You can specify the maximum number of times a job should be attempted using the `--tries` switch on the `queue:listen` command:
+You can specify the maximum number of times a job should be attempted using the `--tries` switch on the `queue:work` command:
 
-    php artisan queue:listen connection-name --tries=3
+    php artisan queue:work connection-name --tries=3
 
 If you would like to register an event that will be called when a queue job fails, you may use the `Queue::failing` method. This event is a great opportunity to notify your team via e-mail or another third party service.
 
