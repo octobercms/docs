@@ -170,13 +170,11 @@ Option | Description
 ## Available column types
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
-
 <style>
     .collection-method-list {
         column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
         column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
     }
-
     .collection-method-list a {
         display: block;
     }
@@ -194,6 +192,7 @@ There are various column types that can be used for the **type** setting, these 
 - [Select](#column-select)
 - [Relation](#column-relation)
 - [Partial](#column-partial)
+- [Colorpicker](#column-colorpicker)
 </div>
 
 <a name="column-text"></a>
@@ -337,6 +336,14 @@ If the [relationship definition](../database/relations) uses the **count** argum
     content:
         type: partial
         path: ~/plugins/acme/blog/models/comments/_content_column.htm
+<a name="column-colorpicker"></a>
+### Color Picker
+
+`colorpicker` - displays a color from colorpicker column
+
+    color:
+        label: Background
+        type: colorpicker
 
 <a name="displaying-list"></a>
 ## Displaying the list
