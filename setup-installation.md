@@ -25,7 +25,7 @@ October CMS has some server requirements for web hosting:
 1. ZipArchive PHP Library
 1. GD PHP Library
 
-As of PHP 5.5, some OS distributions may require you to manually install the PHP JSON extension. When using Ubuntu, this can be done via `apt-get install php5-json`.
+Some OS distributions may require you to manually install the PHP JSON and XML extensions. For example, when using Ubuntu this can be done via `apt-get install php7.0-json` and `apt-get install php7.0-xml` respectively.
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
