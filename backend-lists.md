@@ -163,6 +163,7 @@ Option | Description
 **select** | defines a custom SQL select statement to use for the value.
 **valueFrom** | defines a model attribute to use for the value.
 **relation** | defines a model relationship column.
+**useRelationCount** | use the count of the defined `relation` as the value for this column. Default: false
 **cssClass** | assigns a CSS class to the column container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 
@@ -303,13 +304,12 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         relation: groups
         select: name
 
-If the [relationship definition](../database/relations) uses the **count** argument, you can display the number of related records using the `valueFrom` and `default` options.
+To display a column that shows the number of related records, use the `useRelationCount` option.
 
     users_count:
         label: Users
-        relation: users_count
-        valueFrom: count
-        default: 0
+        relation: users
+        useRelationCount: true
         
 > **Note:** Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
 
