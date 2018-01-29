@@ -56,15 +56,18 @@ Use the following code in **server** section. If you have installed October into
         try_files $uri /index.php$is_args$args;
     }
 
-    rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
-    rewrite ^bootstrap/.* /index.php break;
-    rewrite ^config/.* /index.php break;
-    rewrite ^vendor/.* /index.php break;
-    rewrite ^storage/cms/.* /index.php break;
-    rewrite ^storage/logs/.* /index.php break;
-    rewrite ^storage/framework/.* /index.php break;
-    rewrite ^storage/temp/protected/.* /index.php break;
-    rewrite ^storage/app/uploads/protected/.* /index.php break;
+    rewrite ^/themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
+    rewrite ^/bootstrap/.* /index.php break;
+    rewrite ^/config/.* /index.php break;
+    rewrite ^/modules/.* /index.php break;
+    rewrite ^/plugins/.* /index.php break;
+    rewrite ^/vendor/.* /index.php break;
+    rewrite ^/storage/cms/.* /index.php break;
+    rewrite ^/storage/logs/.* /index.php break;
+    rewrite ^/storage/framework/.* /index.php break;
+    rewrite ^/storage/temp/protected/.* /index.php break;
+    rewrite ^/storage/app/uploads/protected/.* /index.php break;
+    rewrite ^/tests/.* /index.php break;
 
 <a name="lighttpd-configuration"></a>
 ### Lighttpd configuration
