@@ -53,18 +53,51 @@ There are small changes required to configure your site in Nginx.
 Use the following code in **server** section. If you have installed October into a subdirectory, replace `/` with the directory October was installed under:
 
     location / {
-        try_files $uri /index.php$is_args$args;
+        # Let OctoberCMS handle everything by default.
+        # The pash not resolved by OctoberCMS router will return OctoberCMS's 404 page.
+        # Everything that does not match with the whitelist below will fall into this.
+        rewrite ^/.*$ /index.php last;
     }
 
-    rewrite ^themes/.*/(layouts|pages|partials)/.*.htm /index.php break;
-    rewrite ^bootstrap/.* /index.php break;
-    rewrite ^config/.* /index.php break;
-    rewrite ^vendor/.* /index.php break;
-    rewrite ^storage/cms/.* /index.php break;
-    rewrite ^storage/logs/.* /index.php break;
-    rewrite ^storage/framework/.* /index.php break;
-    rewrite ^storage/temp/protected/.* /index.php break;
-    rewrite ^storage/app/uploads/protected/.* /index.php break;
+    # Pass the PHP scripts to FastCGI server
+    location ~ ^/index.php {
+        # Write your FPM configuration here
+
+    }
+
+    # Whitelist
+    location ~ ^/favicon.ico { try_files $uri 404; }
+    location ~ ^/robots.txt { try_files $uri 404; }
+    location ~ ^/sitemap.xml { try_files $uri 404; }
+
+    location ~ ^/storage/app/uploads/public { try_files $uri 404; }
+    location ~ ^/storage/app/media { try_files $uri 404; }
+    location ~ ^/storage/temp/public { try_files $uri 404; }
+
+    location ~ ^/modules/.*/assets { try_files $uri 404; }
+    location ~ ^/modules/.*/resources { try_files $uri 404; }
+    location ~ ^/modules/.*/behaviors/.*/assets { try_files $uri 404; }
+    location ~ ^/modules/.*/behaviors/.*/resources { try_files $uri 404; }
+    location ~ ^/modules/.*/widgets/.*/assets { try_files $uri 404; }
+    location ~ ^/modules/.*/widgets/.*/resources { try_files $uri 404; }
+    location ~ ^/modules/.*/formwidgets/.*/assets { try_files $uri 404; }
+    location ~ ^/modules/.*/formwidgets/.*/resources { try_files $uri 404; }
+    location ~ ^/modules/.*/reportwidgets/.*/assets { try_files $uri 404; }
+    location ~ ^/modules/.*/reportwidgets/.*/resources { try_files $uri 404; }
+
+    location ~ ^/plugins/.*/.*/assets { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/resources { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/behaviors/.*/assets { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/behaviors/.*/resources { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/reportwidgets/.*/assets { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/reportwidgets/.*/resources { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/formwidgets/.*/assets { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/formwidgets/.*/resources { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/widgets/.*/assets { try_files $uri 404; }
+    location ~ ^/plugins/.*/.*/widgets/.*/resources { try_files $uri 404; }
+
+    location ~ ^/themes/.*/assets { try_files $uri 404; }
+    location ~ ^/themes/.*/resources { try_files $uri 404; }
 
 <a name="lighttpd-configuration"></a>
 ### Lighttpd configuration
