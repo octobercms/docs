@@ -50,11 +50,11 @@ There are small changes required to configure your site in Nginx.
 
 `nano /etc/nginx/sites-available/default`
 
-Use the following code in **server** section. If you have installed October into a subdirectory, replace `/` with the directory October was installed under:
+Use the following code in **server** section. If you have installed October into a subdirectory, replace the first `/` in location directives with the directory October was installed under:
 
     location / {
         # Let OctoberCMS handle everything by default.
-        # The pash not resolved by OctoberCMS router will return OctoberCMS's 404 page.
+        # The path not resolved by OctoberCMS router will return OctoberCMS's 404 page.
         # Everything that does not match with the whitelist below will fall into this.
         rewrite ^/.*$ /index.php last;
     }
