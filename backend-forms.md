@@ -734,9 +734,7 @@ Option | Description
 > **Note**: The group key is stored along with the saved data as the `_group` attribute.
 
 <a name="widget-repeater-jsonable"></a>
-> **Note**: The exception `Unexpected type of array, should attribute "x" be jsonable?` is thrown when `$jsonable` is not defined in the model file. If attrtibute "x" caused the exception, you would use...
-> `public $jsonable = ['x'];`
-> in your model file to work fix it.
+> **Note**: The exception `Unexpected type of array, should attribute "x" be jsonable?` is thrown when `$jsonable` is not defined in the model file. If attrtibute `x` caused the exception, you would add `public $jsonable = ['x'];` to your model file to fix it.
 
 <a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
