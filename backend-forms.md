@@ -652,12 +652,15 @@ Alternatively, you may populate the label using a custom `select` statement. Any
         label: User
         type: relation
         select: concat(first_name, ' ', last_name)
+        
+You can also provide a model scope to use to filter the results with the `scope` property.
 
 Option | Description
 ------------- | -------------
 **nameFrom** | a model attribute name used for displaying the relation label. Default: name.
 **select** | a custom SQL select statement to use for the name.
 **emptyOption** | text to display when there is no available selections.
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
 <a name="widget-repeater"></a>
 ### Repeater
