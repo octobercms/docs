@@ -503,12 +503,20 @@ This approach can also be used to bind to [local events](#events), the following
 
 > **Note:** Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
 
-Additionally, helpers exist to extend protected model properties. Here we'll demonstrate casting extended model properties.
+Additionally, a few methods exist to extend protected model properties.
 
     \Backend\Models\User::extend(function($model) {
+        // add cast attributes
         $model->addCasts([
             'some_extended_field' => 'int',
         ]);
+        
+        // add a date attribute
+        $model->addDateAttribute('updated_at');
+        
+        // add fillable or jsonable fields
+        // these methods accept one or more strings, or an array of strings
+        $model->addFillable('first_name');
+        $model->addJsonable('some_data');
     });
     
-Similar to `addCasts`, the methods `addDateAttribute`, `addFillable`, and `addJsonable` are also available.
