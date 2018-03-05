@@ -31,7 +31,7 @@ This is event made available with the `Event::fire` method which is called as pa
 <a name="events-subscribing"></a>
 ## Subscribing to events
 
-The `Event::listen` method is primarily used to subscribe to events and can be can be done from anywhere within your application code. The first argument is the event name.
+The `Event::listen` method is primarily used to subscribe to events and can be done from anywhere within your application code. The first argument is the event name.
 
     Event::listen('acme.blog.myevent', ...);
 
