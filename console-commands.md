@@ -51,6 +51,14 @@ Download the application source code by using `create-project` in your terminal.
 Once this task has finished, open the file **config/cms.php** and enable the `disableCoreUpdates` setting. This will disable core updates from being delivered by the October gateway.
 
     'disableCoreUpdates' => true,
+    
+If you are actively developing a site and would like to get the latest and greatest changes for October when updating, then update the `composer.json` file to use the following; which enables you to test the latest improvements on the develop branch.
+
+    "october/rain": "dev-develop as 1.0",
+    "october/system": "dev-develop",
+    "october/backend": "dev-develop",
+    "october/cms": "dev-develop",
+    "laravel/framework": "5.5.*@dev",
 
 When updating October, use the composer update command as normal before performing a [database migration](#console-up-command).
 
