@@ -86,7 +86,7 @@ If the element is left empty, it will be populated with the validation text from
 <a name="loader-button"></a>
 ## Loading button
 
-When any element contains the `data-attach-loading` attribute, the CSS class `oc-loader` will be added to it during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
+When any element contains the `data-attach-loading` attribute, the CSS class `oc-loading` will be added to it during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
 
     <form data-request="onSubmit">
         <button data-attach-loading>
