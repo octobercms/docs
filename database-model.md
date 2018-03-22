@@ -474,6 +474,15 @@ Returning `false` from an event will cancel the `save` / `update` operation:
             return false;
         }
     }
+    
+It's possible to access old values using the `original` attribute. For example:
+
+    public function afterUpdate()
+    {
+        if ($this->title != $this->original['title']) {
+            // title changed
+        }
+    }
 
 You can externally bind to [local events](../services/events) for a single instance of a model using the `bindEvent` method. The event name should be the same as the method override name, prefixed with `model.`.
 
