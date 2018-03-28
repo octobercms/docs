@@ -4,6 +4,7 @@
     - [Creating new attachments](#creating-attachments)
     - [Viewing attachments](#viewing-attachments)
     - [Usage example](#attachments-usage-example)
+    - [Validation example](#attachments-validation-example)
 
 
 <a name="file-attachments"></a>
@@ -166,3 +167,32 @@ Example:
     $user = $file->attachment;
     
 For more information read the [polymorphic relationships](../database/relations#polymorphic-relations)
+
+<a name="attachments-validation-example"></a>
+### Validation example
+
+This section shows how you can validate `attachMany` attachments.
+
+~~~php
+use October\Rain\Database\Traits\Validation;
+use System\Models\File;
+use Model;
+
+class Gallery extends Model
+{
+    use Validation;
+
+    public $attachMany = [
+        'photos' => File::class
+    ];
+
+    public $rules = [
+        'photos'   => 'required',
+        'photos.*' => 'image|max:1000|dimensions:min_width=100,min_height=100'
+    ];
+
+    /* some other code */
+}
+~~~
+
+For more information read the [validating arrays](../services/validation#validating-arrays)
