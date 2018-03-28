@@ -5,6 +5,7 @@
 - [Error messages & views](#error-messages-and-views)
 - [Available validation rules](#available-validation-rules)
 - [Conditionally adding rules](#conditionally-adding-rules)
+- [Validating Arrays](#validating-arrays)
 - [Custom error messages](#custom-error-messages)
 - [Custom validation rules](#custom-validation-rules)
 
@@ -473,6 +474,31 @@ The first argument passed to the `sometimes` method is the name of the field we 
     });
 
 > **Note:** The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
+
+<a name="validating-arrays"></a>
+## Validating Arrays
+
+Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
+
+    $validator = Validator::make(Input::all(), [
+        'photos.profile' => 'required|image',
+    ]);
+
+You may also validate each element of an array. For example, to validate that each e-mail in a given array input field is unique, you may do the following:
+
+    $validator = Validator::make(Input::all(), [
+        'person.*.email' => 'email|unique:users',
+        'person.*.first_name' => 'required_with:person.*.last_name',
+    ]);
+
+Likewise, you may use the `*` character when specifying your validation messages in your language files, making it a breeze to use a single validation message for array based fields:
+
+    'custom' => [
+        'person.*.email' => [
+            'unique' => 'Each person must have a unique e-mail address',
+        ]
+    ],
+
 
 <a name="custom-error-messages"></a>
 ## Custom error messages
