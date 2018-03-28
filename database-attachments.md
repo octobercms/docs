@@ -171,28 +171,26 @@ For more information read the [polymorphic relationships](../database/relations#
 <a name="attachments-validation-example"></a>
 ### Validation example
 
-This section shows how you can validate `attachMany` attachments.
+The example below uses [array validation](../services/validation#validating-arrays) to validate `$attachMany` relationships.
 
-~~~php
-use October\Rain\Database\Traits\Validation;
-use System\Models\File;
-use Model;
+    use October\Rain\Database\Traits\Validation;
+    use System\Models\File;
+    use Model;
+    
+    class Gallery extends Model
+    {
+        use Validation;
 
-class Gallery extends Model
-{
-    use Validation;
+        public $attachMany = [
+            'photos' => File::class
+        ];
+    
+        public $rules = [
+            'photos'   => 'required',
+            'photos.*' => 'image|max:1000|dimensions:min_width=100,min_height=100'
+        ];
+    
+        /* some other code */
+    }
 
-    public $attachMany = [
-        'photos' => File::class
-    ];
-
-    public $rules = [
-        'photos'   => 'required',
-        'photos.*' => 'image|max:1000|dimensions:min_width=100,min_height=100'
-    ];
-
-    /* some other code */
-}
-~~~
-
-For more information read the [validating arrays](../services/validation#validating-arrays)
+For more information on the `attribute.*` syntax used above, see [validating arrays](../services/validation#validating-arrays).
