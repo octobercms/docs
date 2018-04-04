@@ -328,3 +328,30 @@ Calling `$syntax->toEditor` will return a different array for a repeater field:
 
         ]
     ]
+    
+The repeater field also supports group mode, to be used with the dynamic syntax parser as follows:
+
+    {variable name="sections" type="repeater" prompt="Add another section" tab="Sections" 
+        groups="$/author/plugin/repeater_fields.yaml"}{/variable}
+
+This is an example of the repeater_fields.yaml group configuration file:
+
+    quote:
+        name: Quote
+        description: Quote item
+        icon: icon-quote-right
+        fields:
+            quote_position:
+                span: auto
+                label: Quote Position
+                type: radio
+                options:
+                    left: Left
+                    center: Center
+                    right: Right
+            quote_content:
+                span: auto
+                label: Details
+                type: textarea
+                
+For more information about the repeater group mode see [Repeater Widget](../backend/forms#widget-repeater).                
