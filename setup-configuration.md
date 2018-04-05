@@ -182,9 +182,9 @@ While CSRF protection is disabled by default, you can enable it with the `enable
 <a name="edge-updates"></a>
 ### Bleeding edge updates
 
-The October platform and some plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
+The October platform and some marketplace plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
 
-You can instruct the platform to prefer test builds by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
+You can instruct the platform to prefer test builds from the marketplace by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
 
     /*
     |--------------------------------------------------------------------------
@@ -200,6 +200,14 @@ You can instruct the platform to prefer test builds by changing the `edgeUpdates
     'edgeUpdates' => false,
 
 > **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
+
+> **Note:** If using [Composer](../console/commands#console-install-composer) to manage updates, then replace the default OctoberCMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch.
+
+    "october/rain": "dev-develop as 1.0",
+    "october/system": "dev-develop",
+    "october/backend": "dev-develop",
+    "october/cms": "dev-develop",
+    "laravel/framework": "5.5.*@dev",
 
 <a name="public-folder"></a>
 ### Using a public folder
