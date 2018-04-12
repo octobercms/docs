@@ -4,6 +4,7 @@
 - [Basic usage](#basic-usage)
 - [Queueing closures](#queueing-closures)
 - [Running the queue worker](#running-the-queue-worker)
+- [Supervisor configuration](#supervisor-configuration)
 - [Daemon queue worker](#daemon-queue-worker)
 - [Push queues](#push-queues)
 - [Failed jobs](#failed-jobs)
@@ -134,7 +135,7 @@ To process new jobs as they are pushed onto the queue, run the `queue:work` comm
 
     php artisan queue:work
 
-Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](http://supervisord.org/) to ensure that the queue worker does not stop running.
+Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](#supervisor-configuration) to ensure that the queue worker does not stop running.
 
 Queue worker processes store the booted application state in memory. They will not recognize changes in your code after they have been started. When deploying changes, restart queue workers.
 
@@ -170,6 +171,43 @@ In addition, you may specify the number of seconds to wait before polling for ne
     php artisan queue:work --sleep=5
 
 Note that the queue only "sleeps" if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.
+
+<a name="supervisor-configuration"></a>
+## Supervisor configuration
+
+### Installing Supervisor
+
+Supervisor is a process monitor for the Linux operating system, and will automatically restart your `queue:work` process if it fails. To install Supervisor on Ubuntu, you may use the following command:
+
+    sudo apt-get install supervisor
+
+### Configuring Supervisor
+
+Supervisor configuration files are typically stored in the `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `october-worker.conf` file that starts and monitors a `queue:work` process:
+
+    [program:october-worker]
+    process_name=%(program_name)s_%(process_num)02d
+    command=php /path/to/october/artisan queue:work --sleep=3 --tries=3
+    autostart=true
+    autorestart=true
+    user=october
+    numprocs=8
+    redirect_stderr=true
+    stdout_logfile=/path/to/october/worker.log
+    
+In this example, the `numprocs` directive will instruct Supervisor to run 8 `queue:work` processes and monitor all of them, automatically restarting them if they fail. Of course, you should change the `queue:work` portion of the command directive to reflect your desired queue connection. The `user` directive should be changed to the name of a user that has permission to run the command.
+
+### Starting Supervisor
+
+Once the configuration file has been created, you may update the Supervisor configuration and start the processes using the following commands:
+
+    sudo supervisorctl reread
+
+    sudo supervisorctl update
+
+    sudo supervisorctl start october-worker:*
+    
+For more information on Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
 
 <a name="daemon-queue-worker"></a>
 ## Daemon queue worker
