@@ -172,13 +172,6 @@ In addition, you may specify the number of seconds to wait before polling for ne
 
 Note that the queue only "sleeps" if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.
 
-<a name="daemon-queue-worker"></a>
-## Daemon queue worker
-
-The `queue:work` also includes a `--daemon` option for forcing the queue worker to continue processing jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the `queue:work` command, but at the added complexity of needing to drain the queues of currently executing jobs during your deployments.
-
-To start a queue worker in daemon mode, use the `--daemon` flag:
-
 <a name="supervisor-configuration"></a>
 ## Supervisor configuration
 
