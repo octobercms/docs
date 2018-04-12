@@ -179,32 +179,6 @@ The `queue:work` also includes a `--daemon` option for forcing the queue worker 
 
 To start a queue worker in daemon mode, use the `--daemon` flag:
 
-    php artisan queue:work connection --daemon
-
-    php artisan queue:work connection --daemon --sleep=3
-
-    php artisan queue:work connection --daemon --sleep=3 --tries=3
-
-You may use the `php artisan help queue:work` command to view all of the available options.
-
-### Deploying with daemon queue workers
-
-The simplest way to deploy an application using daemon queue workers is to put the application in maintenance mode at the beginning of your deployment. This can be done using the back-end settings area. Once the application is in maintenance mode, October will not accept any new jobs off of the queue, but will continue to process existing jobs.
-
-The easiest way to restart your workers is to include the following command in your deployment script:
-
-    php artisan queue:restart
-
-This command will instruct all queue workers to restart after they finish processing their current job.
-
-> **Note:** This command relies on the cache system to schedule the restart. By default, APCu does not work for CLI commands. If you are using APCu, add `apc.enable_cli=1` to your APCu configuration.
-
-### Coding for daemon queue workers
-
-Daemon queue workers do not restart the platform before processing each job. Therefore, you should be careful to free any heavy resources before your job finishes. For example, if you are doing image manipulation with the GD library, you should free the memory with `imagedestroy` when you are done.
-
-Similarly, your database connection may disconnect when being used by long-running daemon. You may use the `Db::reconnect` method to ensure you have a fresh connection.
-
 <a name="supervisor-configuration"></a>
 ## Supervisor configuration
 
