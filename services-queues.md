@@ -4,6 +4,7 @@
 - [Basic usage](#basic-usage)
 - [Queueing closures](#queueing-closures)
 - [Running the queue worker](#running-the-queue-worker)
+- [Supervisor configuration](#supervisor-configuration)
 - [Daemon queue worker](#daemon-queue-worker)
 - [Push queues](#push-queues)
 - [Failed jobs](#failed-jobs)
@@ -134,7 +135,7 @@ To process new jobs as they are pushed onto the queue, run the `queue:work` comm
 
     php artisan queue:work
 
-Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](http://supervisord.org/) to ensure that the queue worker does not stop running.
+Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](#supervisor-configuration) to ensure that the queue worker does not stop running.
 
 Queue worker processes store the booted application state in memory. They will not recognize changes in your code after they have been started. When deploying changes, restart queue workers.
 
@@ -170,6 +171,76 @@ In addition, you may specify the number of seconds to wait before polling for ne
     php artisan queue:work --sleep=5
 
 Note that the queue only "sleeps" if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.
+
+<a name="daemon-queue-worker"></a>
+## Daemon queue worker
+
+The `queue:work` also includes a `--daemon` option for forcing the queue worker to continue processing jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the `queue:work` command, but at the added complexity of needing to drain the queues of currently executing jobs during your deployments.
+
+To start a queue worker in daemon mode, use the `--daemon` flag:
+
+    php artisan queue:work connection --daemon
+
+    php artisan queue:work connection --daemon --sleep=3
+
+    php artisan queue:work connection --daemon --sleep=3 --tries=3
+
+You may use the `php artisan help queue:work` command to view all of the available options.
+
+### Deploying with daemon queue workers
+
+The simplest way to deploy an application using daemon queue workers is to put the application in maintenance mode at the beginning of your deployment. This can be done using the back-end settings area. Once the application is in maintenance mode, October will not accept any new jobs off of the queue, but will continue to process existing jobs.
+
+The easiest way to restart your workers is to include the following command in your deployment script:
+
+    php artisan queue:restart
+
+This command will instruct all queue workers to restart after they finish processing their current job.
+
+> **Note:** This command relies on the cache system to schedule the restart. By default, APCu does not work for CLI commands. If you are using APCu, add `apc.enable_cli=1` to your APCu configuration.
+
+### Coding for daemon queue workers
+
+Daemon queue workers do not restart the platform before processing each job. Therefore, you should be careful to free any heavy resources before your job finishes. For example, if you are doing image manipulation with the GD library, you should free the memory with `imagedestroy` when you are done.
+
+Similarly, your database connection may disconnect when being used by long-running daemon. You may use the `Db::reconnect` method to ensure you have a fresh connection.
+
+<a name="supervisor-configuration"></a>
+## Supervisor configuration
+
+### Installing Supervisor
+
+Supervisor is a process monitor for the Linux operating system, and will automatically restart your `queue:work` process if it fails. To install Supervisor on Ubuntu, you may use the following command:
+
+    sudo apt-get install supervisor
+
+### Configuring Supervisor
+
+Supervisor configuration files are typically stored in the `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `october-worker.conf` file that starts and monitors a `queue:work` process:
+
+    [program:october-worker]
+    process_name=%(program_name)s_%(process_num)02d
+    command=php /path/to/october/artisan queue:work --sleep=3 --tries=3
+    autostart=true
+    autorestart=true
+    user=october
+    numprocs=8
+    redirect_stderr=true
+    stdout_logfile=/path/to/october/worker.log
+    
+In this example, the `numprocs` directive will instruct Supervisor to run 8 `queue:work` processes and monitor all of them, automatically restarting them if they fail. Of course, you should change the `queue:work` portion of the command directive to reflect your desired queue connection.
+
+### Starting Supervisor
+
+Once the configuration file has been created, you may update the Supervisor configuration and start the processes using the following commands:
+
+    sudo supervisorctl reread
+
+    sudo supervisorctl update
+
+    sudo supervisorctl start october-worker:*
+    
+For more information on Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
 
 <a name="daemon-queue-worker"></a>
 ## Daemon queue worker
