@@ -16,6 +16,7 @@
     - [Overriding controller action](#overriding-action)
     - [Overriding views](#overriding-views)
     - [Extending column definitions](#extend-list-columns)
+    - [Inject CSS row class](#inject-row-class)
     - [Extending filter scopes](#extend-filter-scopes)
     - [Extending the model query](#extend-model-query)
     - [Extending the records collection](#extend-records-collection)
@@ -596,6 +597,7 @@ Sometimes you may wish to modify the default list behavior and there are several
 - [Overriding controller action](#overriding-action)
 - [Overriding views](#overriding-views)
 - [Extending column definitions](#extend-list-columns)
+- [Inject CSS row class](#inject-row-class)
 - [Extending filter scopes](#extend-filter-scopes)
 - [Extending the model query](#extend-model-query)
 - [Custom column types](#custom-column-types)
@@ -699,6 +701,24 @@ Method | Description
 **removeColumn** | removes a column from the list
 
 Each method takes an array of columns similar to the [list column configuration](#list-columns).
+
+<a name="inject-row-class"></a>
+### Inject CSS row class
+
+You can inject a custom css row class by adding a `listInjectRowClass` method on the controller class. This method can take two arguments, **$record** will represent a single model record and **$definition** contains the name of the List widget definition. You can return any string value containing your row classes. These classes will be added to the row's HTML markup.
+
+    class Lessons extends \Backend\Classes\Controller
+    {
+        [...]
+
+        public function listInjectRowClass($lesson, $definition)
+        {
+            // Strike through past lessons
+            if ($lesson->lesson_date->lt(Carbon::today())) {
+                return 'strike';
+            }
+        }
+    }
 
 <a name="extend-filter-scopes"></a>
 ### Extending filter scopes
