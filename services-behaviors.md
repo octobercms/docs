@@ -213,7 +213,7 @@ Below is an example of dynamically extending a `UsersController` of a third-part
         // Splice in configuration safely
         $myConfigPath = '$/myvendor/myplugin/controllers/users/config_relation.yaml';
 
-        $controller->relationConfig = $this->mergeConfig(
+        $controller->relationConfig = $controller->mergeConfig(
             $controller->relationConfig,
             $myConfigPath
         );
