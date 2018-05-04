@@ -112,7 +112,7 @@ Models will assume that the primary key is an incrementing integer value, which 
     class Message extends Model
     {
         /**
-         * The primary key for the model in not an integer.
+         * The primary key for the model is not an integer.
          *
          * @var bool
          */
