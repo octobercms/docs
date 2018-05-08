@@ -7,7 +7,7 @@
     - [Configuration section](#configuration-section)
     - [PHP code section](#php-section)
     - [Twig markup section](#twig-section)
-- [Theme loggin](#theme-logging)
+- [Theme logging](#theme-logging)
 
 <a name="introduction"></a>
 ## Introduction
