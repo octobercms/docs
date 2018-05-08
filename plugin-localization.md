@@ -33,6 +33,15 @@ The **lang.php** file should define and return an array of any depth, for exampl
             'tagline' => 'Getting back to basics'
         ]
     ];
+    
+The **validation.php** file has a similar structure to the **lang.php** and is used to specify your [custom validation](https://octobercms.com/docs/services/validation#localization) messages in a language file, for example:
+
+    <?php
+
+    return [
+        'required' => 'We need to know your xxx!',
+        'email.required' => 'We need to know your e-mail address!',
+    ];  
 
 <a name="accessing-strings"></a>
 ## Accessing localization strings
