@@ -7,6 +7,7 @@
     - [Configuration section](#configuration-section)
     - [PHP code section](#php-section)
     - [Twig markup section](#twig-section)
+- [Theme logging](#theme-logging)
 
 <a name="introduction"></a>
 ## Introduction
@@ -159,3 +160,14 @@ As a general way of setting variables you should use the array access method on 
 The Twig section defines the markup to be rendered by the template. In the Twig section you can use functions, tags and filters [provided by October](../markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout or partial). You will find more information about specific Twig objects further in the documentation.
 
 More information can be found [in the Markup guide](../markup).
+
+<a name="theme-logging"></a>
+## Theme Logging
+
+OctoberCMS comes with a very useful feature, disabled by default, called Theme Logging. 
+
+Since layouts and pages store most of the data in flat files, it's possible for you or your clients to accidently lose content. For example, switching the layout of a page will modify the scaffold of the page, and as such, result in data loss. 
+
+To enable Theme Logging, simply go to **Settings -> Log settings** and enable **Log theme changes**. All changes are now logged.
+
+The theme change log can be viewed at **Settings -> Theme log**. Each change has an overview of what has been added / removed, along with a copy of the changed file before and after. You can use this information to decide the approprate action to revert the changes, if necessary.
