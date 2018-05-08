@@ -19,8 +19,10 @@ Below is an example of the plugin's lang directory:
           lang/           <=== Localization directory
             en/           <=== Language directory
               lang.php    <=== Localization file
+              validation.php <=== Custom validation messages
             fr/
               lang.php
+              validation.php
 
 
 The **lang.php** file should define and return an array of any depth, for example:
@@ -33,6 +35,19 @@ The **lang.php** file should define and return an array of any depth, for exampl
             'tagline' => 'Getting back to basics'
         ]
     ];
+    
+The **validation.php** file has a similar structure to the **lang.php**  and is used to specify your [custom validation](https://octobercms.com/docs/services/validation#localization) messages in a language file, for example:
+
+    <?php
+
+    return [
+    'custom' => [
+        'email' => [
+            'required' => 'We need to know your e-mail address!',
+        ],
+    ]
+    ];  
+
 
 <a name="accessing-strings"></a>
 ## Accessing localization strings
