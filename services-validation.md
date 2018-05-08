@@ -181,6 +181,7 @@ Below is a list of all available validation rules and their function:
 - [MIME Types](#rule-mimes)
 - [Min](#rule-min)
 - [Not In](#rule-not-in)
+- [Nullable](#rule-nullable)
 - [Numeric](#rule-numeric)
 - [Regular Expression](#rule-regex)
 - [Required](#rule-required)
@@ -346,6 +347,11 @@ The field under validation must have a minimum _value_. Strings, numerics, and f
 #### not_in:_foo_,_bar_,...
 
 The field under validation must not be included in the given list of values.
+
+<a name="rule-nullable"></a>
+#### nullable
+
+The field under validation may be `null`. This is particularly useful when validating primitive such as strings and integers that can contain `null` values.
 
 <a name="rule-numeric"></a>
 #### numeric
