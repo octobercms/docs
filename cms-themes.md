@@ -170,4 +170,4 @@ Since layouts and pages store most of the data in flat files, it's possible for 
 
 To enable Theme Logging, simply go to **Settings -> Log settings** and enable **Log theme changes**. All changes are now logged.
 
-The theme change log can be viewed at **Settings -> Theme log**. Each change has an overview of what has been added / removed, along with a copy of the changed file before and after. You can use this information to decide approprate action on reventing the changes, if needed.
+The theme change log can be viewed at **Settings -> Theme log**. Each change has an overview of what has been added / removed, along with a copy of the changed file before and after. You can use this information to decide the approprate action to revert the changes, if necessary.
