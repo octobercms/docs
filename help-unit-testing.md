@@ -57,6 +57,38 @@ The test class should extend the base class `PluginTestCase` and this is a speci
     php artisan october:up
     php artisan plugin:refresh Acme.Blog
     [php artisan plugin:refresh <dependency>, ...]
+    
+> **Note:** If your plugin uses [configuration files](../plugin/settings#file-configuration), then you will need to run `System\Classes\PluginManager::instance()->registerAll(true);` in the `setUp` method of your tests. Below is an example of a base test case class that should be used if you need to test your plugin working with other plugins instead of in isolation.
+
+    use System\Classes\PluginManager;
+        
+    class BaseTestCase extends PluginTestCase
+    {
+        public function setUp()
+        {
+            parent::setUp();
+
+            // Get the plugin manager
+            $pluginManager = PluginManager::instance();
+            
+            // Register the plugins to make features like file configuration available
+            $pluginManager->registerAll(true);
+
+            // Boot all the plugins to test with dependencies of this plugin
+            $pluginManager->bootAll(true);
+        }
+
+        public function tearDown()
+        {
+            parent::tearDown();
+
+            // Get the plugin manager
+            $pluginManager = PluginManager::instance();
+            
+            // Ensure that plugins are registered again for the next test
+            $pluginManager->unregisterAll();
+        }
+    }
 
 <a name="testing-system"></a>
 ## System testing
