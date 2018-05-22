@@ -68,7 +68,7 @@ The **onTest** handler method accessed the form data using the `input` [helper m
 
     function onTest()
     {
-        $this['result'] = input('value1') + input('value2');
+        $this->page['result'] = input('value1') + input('value2');
     }
 
 The example could be read like this: "When the form is submitted, issue an AJAX request to the **onTest** handler. When the handler finishes, render the **mypartial** partial and inject its contents to the **#myDiv** element."
