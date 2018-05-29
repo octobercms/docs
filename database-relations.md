@@ -670,7 +670,7 @@ Sometimes you may wish to eager load a relationship, but also specify additional
         }
     ])->get();
 
-In this example, the model will only eager load posts if the post's `title` column contains the word `first`. Of course, you may call other [query builder](query) to further customize the eager loading operation:
+In this example, the model will only eager load posts if the post's `title` column contains the word `first`. Of course, you may call other [query builder](query) methods to further customize the eager loading operation:
 
     $users = User::with([
         'posts' => function ($query) {
