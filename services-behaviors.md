@@ -4,6 +4,7 @@
 - [Comparison to traits](#compare-traits)
 - [Extending constructors](#constructor-extension)
 - [Usage example](#usage-example)
+- [Pre-defined Behaviors](#pre-defined-behaviors)
 
 <a name="introduction"></a>
 ## Introduction
@@ -350,3 +351,47 @@ Remember:
 - When using the `ExtensionTrait` the methods from `ExtensionBase` should be applied to the class.
 
 - When using the `ExtendableTrait` the methods from `Extendable` should be applied to the class.
+
+<a name="pre-defined-behaviors"></a>
+## Pre-defined Behaviors
+
+October comes with some pre-defined behaviors.
+
+### Behaviors from Traits
+
+These behaviors originate from the default [Traits](https://octobercms.com/docs/database/traits)
+available in October.
+
+#### Purgeable
+
+Purged attributes will not be saved to the database when a model is created or updated.  
+To extend a model with this behavior simply add it to the $implement array and declare a $purgeable
+property with an array containing the attributes to purge.
+
+> **Note**: Due to how models are processed the purgeable behavior needs to include a reference to
+itself in the $purgeable property.
+
+This behavior can be implemented directly in a class.
+
+    class MyClass extends \October\Rain\Extension\Extendable
+    {
+        public $implement = [
+            'October.Rain.UtilityFunctions',
+        ];
+
+        $purgeable = ['purgeable'];
+    }
+
+It can also be dynamically implemented.
+
+    /**
+     * Extend the RainLab.User user model to include the purgeable behavior
+     */
+    RainLab\User\Models\User::extend(function($model) {
+
+        // Implement the purgeable behavior
+        $model->implement[] = 'October.Rain.Database.Behaviors.Purgeable';
+
+        // Declare the purgeable property dynamically for the behavior behavior to use
+        $model->addDynamicProperty('purgeable', ['purgeable']);
+    });
