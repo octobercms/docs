@@ -592,6 +592,7 @@ Option | Description
 **useCaption** | allows a title and description to be set for the file. Default: true
 **prompt** | text to display for the upload button, applies to files only, optional.
 **thumbOptions** | options to pass to the thumbnail generating method for the file
+**attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
 <a name="widget-recordfinder"></a>
 ### Record finder
@@ -652,7 +653,7 @@ Alternatively, you may populate the label using a custom `select` statement. Any
         label: User
         type: relation
         select: concat(first_name, ' ', last_name)
-        
+
 You can also provide a model scope to use to filter the results with the `scope` property.
 
 Option | Description
