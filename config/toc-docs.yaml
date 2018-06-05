@@ -69,6 +69,7 @@ Database:
     database/mutators: "Mutators"
     database/serialization: "Serialization"
     database/traits: "Traits"
+    database/behaviors: "Behaviors"
 
 Services:
   icon: "icon-gears"

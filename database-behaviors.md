@@ -3,8 +3,8 @@
 - [Purgeable](#purgeable)
 
 Model behaviors are used to implement common functionality.  
-Unlike [Traits](https://octobercms.com/docs/database/traits) these can be implemented either directly
-in a class or by extending the class. You can read more about behaviors [here](https://octobercms.com/docs/services/behaviors).
+Unlike [Traits](traits) these can be implemented either directly
+in a class or by extending the class. You can read more about behaviors [here](../services/behaviors).
 
 <a name="purgeable"></a>
 ## Purgeable

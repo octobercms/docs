@@ -95,14 +95,14 @@ Properties can be declared on an extendable object by calling `addDynamicPropert
 Properties created dynamically can be retrieved with the getDynamicProperties function inherited from
 the ExtendableTrait.  
 
-So retrieving all dynamic property would look like this.
+So retrieving all dynamic properties would look like this:
 
     $model->getDynamicProperties();
 
 This will return an associative array [key => value], with the key being the dynamic property name
 and the value being the property value.
 
-If we know what property we want we can simply append the key (property name) to the function.
+If we know what property we want we can simply append the key (property name) to the function:
 
     $model->getDynamicProperties()[$key];
 
