@@ -22,7 +22,7 @@ a `$purgeable` property with an array containing the attributes to purge.
         /**
          * @var array List of attributes to purge.
          */
-        protected $purgeable = ['purgeable'];
+        public $purgeable = ['purgeable'];
     }
     
 You can also dynamically implement this behavior in a class.
