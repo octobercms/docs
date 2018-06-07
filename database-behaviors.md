@@ -22,7 +22,7 @@ a `$purgeable` property with an array containing the attributes to purge.
         /**
          * @var array List of attributes to purge.
          */
-        public $purgeable = ['purgeable'];
+        public $purgeable = [];
     }
     
 You can also dynamically implement this behavior in a class.
@@ -36,11 +36,8 @@ You can also dynamically implement this behavior in a class.
         $model->implement[] = 'October.Rain.Database.Behaviors.Purgeable';
         
         // Declare the purgeable property dynamically for the purgeable behavior to use
-        $model->addDynamicProperty('purgeable', ['purgeable']]);
+        $model->addDynamicProperty('purgeable', []);
     });
-
-> **Note**: Implementing this behavior will require the $purgeable property to have a reference to
-itself so that the model won't try and save the $purgeable property to the database.
 
 The defined attributes will be purged when the model is saved, before the [model events](#model-events)
 are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
