@@ -90,6 +90,22 @@ Properties can be declared on an extendable object by calling `addDynamicPropert
     
 > **Note**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **October\Rain\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
 
+#### Retrieving dynamic properties
+
+Properties created dynamically can be retrieved with the getDynamicProperties function inherited from
+the ExtendableTrait.  
+
+So retrieving all dynamic properties would look like this:
+
+    $model->getDynamicProperties();
+
+This will return an associative array [key => value], with the key being the dynamic property name
+and the value being the property value.
+
+If we know what property we want we can simply append the key (property name) to the function:
+
+    $model->getDynamicProperties()[$key];
+
 #### Dynamically creating methods
 
 Methods can be created to an extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
