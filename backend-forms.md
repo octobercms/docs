@@ -559,6 +559,7 @@ Option | Description
 **minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 **firstDay** | the first day of the week. Default: 0 (Sunday).
+**showWeekNumber** | show week numbers at head of row. Default: false
 **ignoreTimezone** | display datetime exactly as it is stored, ignoring October's and the backend user's specified timezones
 
 <a name="widget-fileupload"></a>
