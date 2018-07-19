@@ -71,7 +71,7 @@ If you would like to set a cookie before a response has been created, use the `C
 If you don't want some cookies to be encrypted or decrypted, you can specify them in configuration.
 This is useful, for example, when you want to pass data from frontend to server side backend via cookies, and vice versa.
 
-Add names of the cookies that should not be encrypted or decrypted to `unecryptedCookies` parameter in the `config/cookie.php` configuration file.
+Add names of the cookies that should not be encrypted or decrypted to `unencryptedCookies` parameter in the `config/cookie.php` configuration file.
 
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ Add names of the cookies that should not be encrypted or decrypted to `unecrypte
     |
     */
 
-    'unecryptedCookies' => [
+    'unencryptedCookies' => [
         'my_cookie',
     ],
 
@@ -91,7 +91,7 @@ Alternatively for plugins, you can also add these dynamically from `Plugin.php` 
 
     public function boot()
     {
-        Config::push('cookie.unecryptedCookies', "my_cookie");
+        Config::push('cookie.unencryptedCookies', "my_cookie");
     }
 
 <a name="old-input"></a>
