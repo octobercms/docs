@@ -44,7 +44,7 @@ When working on forms with "array" inputs, you may use dot notation to access th
 <a name="cookies"></a>
 ## Cookies
 
-All cookies created by the October are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client.
+By default, all cookies created by the October are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client.
 
 #### Retrieving a cookie value
 
@@ -65,6 +65,36 @@ If you would like to set a cookie before a response has been created, use the `C
 #### Creating a cookie that lasts forever
 
     $cookie = Cookie::forever('name', 'value');
+
+#### Handling cookies without encryption
+
+If you don't want some cookies to be encrypted or decrypted, you can specify them in configuration.
+This is useful, for example, when you want to pass data from frontend to server side backend via cookies, and vice versa.
+
+Add names of the cookies that should not be encrypted or decrypted to `unencryptedCookies` parameter in the `config/cookie.php` configuration file.
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cookies without encryption
+    |--------------------------------------------------------------------------
+    |
+    | OctoberCMS encrypts/decrypts cookies by default. You can specify cookies
+    | that should not be encrypted or decrypted here. This is useful, for
+    | example, when you want to pass data from frontend to server side backend
+    | via cookies, and vice versa.
+    |
+    */
+
+    'unencryptedCookies' => [
+        'my_cookie',
+    ],
+
+Alternatively for plugins, you can also add these dynamically from `Plugin.php` of your plugin.
+
+    public function boot()
+    {
+        Config::push('cookie.unencryptedCookies', "my_cookie");
+    }
 
 <a name="old-input"></a>
 ## Old input
