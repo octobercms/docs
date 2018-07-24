@@ -134,13 +134,20 @@ If your webserver is running Internet Information Services (IIS) you can use the
         <system.webServer>
             <rewrite>
                 <rules>
-                    <rule name="redirect all requests" stopProcessing="true">
-                        <match url="^(.*)$" ignoreCase="false" />
-                        <conditions logicalGrouping="MatchAll">
-                            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" pattern="" ignoreCase="false" />
-                        </conditions>
-                        <action type="Rewrite" url="index.php" appendQueryString="true" />
-                    </rule>
+                    <clear />
+                    <rule name="OctoberCMS to handle all non-whitelisted URLs" stopProcessing="true">
+                       <match url="^(.*)$" ignoreCase="false" />
+                       <conditions logicalGrouping="MatchAll">
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/.well-known/*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/uploads/.*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/media/.*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/temp/public/.*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/themes/.*/(assets|resources)/.*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/plugins/.*/(assets|resources)/.*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/modules/.*/(assets|resources)/.*" negate="true" />
+                       </conditions>
+                       <action type="Rewrite" url="index.php" appendQueryString="true" />
+                   </rule>
                 </rules>
             </rewrite>
         </system.webServer>
