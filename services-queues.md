@@ -259,10 +259,12 @@ If you would like to register an event that will be called when a queue job fail
 
 You may also define a `failed` method directly on a queue job class, allowing you to perform job specific actions when a failure occurs:
 
-    public function failed()
+    public function failed($data)
     {
         // Called when the job is failing...
     }
+    
+The original array of `data` will also be automatically passed onto the failed method.    
 
 ### Retrying failed jobs
 
