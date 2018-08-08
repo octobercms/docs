@@ -176,6 +176,24 @@ You may also use the `ask` and `confirm` methods to prompt the user for input:
 You may also specify a default value to the `confirm` method, which should be `true` or `false`:
 
     $this->confirm($question, true);
+    
+#### Progress Bars
+
+For long running tasks, it could be helpful to show a progress indicator. Using the output object, we can start, advance and stop the Progress Bar. First, define the total number of steps the process will iterate through. Then, advance the Progress Bar after processing each item:
+
+    $users = App\User::all();
+
+    $bar = $this->output->createProgressBar(count($users));
+
+    foreach ($users as $user) {
+        $this->performTask($user);
+
+        $bar->advance();
+    }
+
+    $bar->finish();
+
+For more advanced options, check out the [Symfony Progress Bar component documentation](https://symfony.com/doc/2.7/components/console/helpers/progressbar.html).
 
 <a name="registering-commands"></a>
 ## Registering commands
