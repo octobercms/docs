@@ -18,6 +18,7 @@
     - [Unique identifier](#unique-identifier)
 - [Rendering partials from code](#render-partial-method)
 - [Injecting page assets with components](#component-assets)
+    - Javascript Modules MJS and Atom Feeds
 
 <a name="introduction"></a>
 ## Introduction
@@ -440,3 +441,23 @@ Components can inject assets (CSS and JavaScript files) to pages or layouts they
     }
 
 If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
+
+### Javascript Modules MJS and Atom Feeds
+
+You can also inject other file types, such as JS modules (also known as 'ES modules' or 'ECMAScript modules') these are a major new feature, or rather a collection of new features. An Atom feed is a data file, it describes a list of content in a structured way. Below shows how to add these file types in October:
+
+    // Include MJS file
+    $this->addJs('/path/to/mjs/file.mjs', ['type' => 'module']);
+
+    // Include Atom file
+    $this->addRss('/path/to/atom/file.xml', ['title' => 'Atom', 'type' => 'application/atom+xml']);
+
+Please be aware that Javascript and Javascript Modules use different Mime-Types:
+
+JavaScript ([IANA Specification](https://www.iana.org/assignments/media-types/application/javascript)) ([RFC 4329 Section 8.2](https://tools.ietf.org/html/rfc4329#section-8.2))
+`.js`
+**_application/javascript_**
+
+Javascript Modules ([Issue per Spec](https://github.com/whatwg/html/issues/558))
+`.mjs`
+**_text/javascript_**
