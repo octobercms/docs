@@ -461,3 +461,5 @@ JavaScript ([IANA Specification](https://www.iana.org/assignments/media-types/ap
 Javascript Modules ([Issue per Spec](https://github.com/whatwg/html/issues/558))
 `.mjs`
 **_text/javascript_**
+
+> OctoberCMS is currently set to **_text/javascript_** for all types of Javascript files meaning you would not need to change the mime-type for Javascript Modules `.mjs` files.
