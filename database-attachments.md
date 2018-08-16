@@ -50,7 +50,7 @@ Sometimes it may also be useful to create a `File` instance directly from (raw) 
 
     $file = (new System\Models\File)->fromData('Some content', 'sometext.txt');
 
-For multiple attach relations (`$attachMany`), you may use the `create` method on the relationship instead, notice the file object is assocated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
+For multiple attach relations (`$attachMany`), you may use the `create` method on the relationship instead, notice the file object is associated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
 
     $model->avatar()->create(['data' => Input::file('file_input')]);
 

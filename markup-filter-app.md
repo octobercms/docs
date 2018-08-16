@@ -20,4 +20,4 @@ The above would output:
         About us
     </a>
 
-> **Note**: The `|page` filter is reccommended for linking to other pages.
+> **Note**: The `|page` filter is recommended for linking to other pages.

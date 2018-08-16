@@ -2,7 +2,7 @@
 
 - [Introduction](#introduction)
 - [Update process](#update-process)
-    - [Plugin depedencies](#plugin-depedencies)
+    - [Plugin dependencies](#plugin-dependencies)
 - [Plugin version file](#version-file)
     - [Important updates](#important-updates)
     - [Migration and seed files](#migration-seed-files)
@@ -34,8 +34,8 @@ During an update the system will notify the user about recent changes to plugins
 
 > **Note:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 
-<a name="plugin-depedencies"></a>
-### Plugin depedencies
+<a name="plugin-dependencies"></a>
+### Plugin dependencies
 
 Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
 
@@ -84,7 +84,7 @@ Confirming the comment will update the plugin as usual, or if the comment is ski
 <a name="migration-seed-files"></a>
 ### Migration and seed files
 
-As previously decribed, updates also define when [migration and seed files](../database/structure) should be applied. An update line with a comment and updates:
+As previously described, updates also define when [migration and seed files](../database/structure) should be applied. An update line with a comment and updates:
 
     1.1.1:
         - This update will execute the two scripts below.

@@ -268,7 +268,7 @@ For example, to use a different MySQL database for the `dev` environment only, c
 
 October supports using an environment detected by a specific hostname. You may place these hostnames in an environment configuration file, for example, **config/environment.php**.
 
-Using this file contents below, when the application is acccessed via **global.website.tld** the environment will be set to `global` and likewise for the others.
+Using this file contents below, when the application is accessed via **global.website.tld** the environment will be set to `global` and likewise for the others.
 
     <?php
 

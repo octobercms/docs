@@ -30,7 +30,7 @@ Property | Description
 ------------- | -------------
 **type** | Sets the color of the hint, supported types: danger, info, success, warning. Default: info.
 **title** | Adds a title section to the hint.
-**subtitle** | In addition to the title, adds a second line to the title secion.
+**subtitle** | In addition to the title, adds a second line to the title section.
 **icon** | In addition to the title, adds an icon to the title section.
 
 <a name="checking-hints"></a>

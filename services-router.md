@@ -197,7 +197,7 @@ And finally, if you want to assign a group of middleware to just one route you c
         Route::get('info', 'Acme\News@info');
     });
 
-You can of course add more than one middleware in a group, just one is used in the above examples for conveniance.
+You can of course add more than one middleware in a group, just one is used in the above examples for convenience.
 
 <a name="throwing-404-errors"></a>
 ## Throwing 404 errors
