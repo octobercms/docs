@@ -32,7 +32,7 @@ Option | Description
 **files** | when true, the request will accept file uploads, this requires `FormData` interface support by the browser. default: false
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element, the object should support the `show()` and `hide()` functions to manage the visibility. You may pass the global object `$.oc.stripeLoadIndicator` when using the [framework extras](../ajax/extras).
 
-You may also overide some of the request logic by passing new functions as options. These logic handlers are available.
+You may also override some of the request logic by passing new functions as options. These logic handlers are available.
 
 Handler | Description
 ------------- | -------------

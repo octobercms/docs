@@ -2,7 +2,7 @@
 
 - [AJAX handlers](#ajax-handlers)
     - [Calling a handler](#calling-handlers)
-- [Redirections in AJAX handlers](#redirections-in-handlers)
+- [Redirects in AJAX handlers](#redirects-in-handlers)
 - [Returning data from AJAX handlers](#returning-data-from-handlers)
 - [Throwing an AJAX exception](#throw-ajax-exception)
 - [Running code before handlers](#before-handler)
@@ -44,8 +44,8 @@ Sometimes you may need to make an AJAX request for the sole purpose of updating 
 
     <button data-request="onAjax">Do nothing</button>
 
-<a name="redirections-in-handlers"></a>
-## Redirections in AJAX handlers
+<a name="redirects-in-handlers"></a>
+## Redirects in AJAX handlers
 
 If you need to redirect the browser to another location, return the `Redirect` object from the AJAX handler. The framework will redirect the browser as soon as the response is returned from the server. Example AJAX handler:
 

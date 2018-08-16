@@ -72,7 +72,7 @@ The `October\Rain\Exception\SystemException` class, aliased as `SystemException`
 
     throw new SystemException('Unable to contact the mail server API');
 
-When this exception is thrown a detailed error message is shown with the file and line number where it occured.
+When this exception is thrown a detailed error message is shown with the file and line number where it occurred.
 
 <a name="validation-exception"></a>
 ### Validation exception
@@ -193,7 +193,7 @@ There are some global helper methods available to make logging easier. The `trac
         trace_log($ex);
     }
 
-The `trace_sql` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the admininstration area log as this is stored in the database and would result in a feedback loop.
+The `trace_sql` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the administration area log as this is stored in the database and would result in a feedback loop.
 
     trace_sql();
 

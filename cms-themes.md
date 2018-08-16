@@ -166,8 +166,8 @@ More information can be found [in the Markup guide](../markup).
 
 OctoberCMS comes with a very useful feature, disabled by default, called Theme Logging. 
 
-Since layouts and pages store most of the data in flat files, it's possible for you or your clients to accidently lose content. For example, switching the layout of a page will modify the scaffold of the page, and as such, result in data loss. 
+Since layouts and pages store most of the data in flat files, it's possible for you or your clients to accidentally lose content. For example, switching the layout of a page will modify the scaffold of the page, and as such, result in data loss. 
 
 To enable Theme Logging, simply go to **Settings -> Log settings** and enable **Log theme changes**. All changes are now logged.
 
-The theme change log can be viewed at **Settings -> Theme log**. Each change has an overview of what has been added / removed, along with a copy of the changed file before and after. You can use this information to decide the approprate action to revert the changes, if necessary.
+The theme change log can be viewed at **Settings -> Theme log**. Each change has an overview of what has been added / removed, along with a copy of the changed file before and after. You can use this information to decide the appropriate action to revert the changes, if necessary.

@@ -108,7 +108,7 @@ The complete signature of `sendTo` is as follows:
 The following custom sending `$options` are supported
 
 - **queue** specifies whether to queue the message or send it directly (optional, defaults to false).
-- **bcc** specifies wheter to add recipients as Bcc or regular To addresses (defaults to false).
+- **bcc** specifies whether to add recipients as Bcc or regular To addresses (defaults to false).
 
 #### Building the message
 

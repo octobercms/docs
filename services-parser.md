@@ -195,7 +195,7 @@ To continue with the examples above, calling the `toEditor` method on the `Parse
     //     'type' => 'text'
     // ]
 
-You may notice the properties closely resemble the options found in [form field definintions](../backend/forms#form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
+You may notice the properties closely resemble the options found in [form field definitions](../backend/forms#form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
 
     $form = [
         'fields' => $syntax->toEditor()
