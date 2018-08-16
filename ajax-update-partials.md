@@ -2,6 +2,7 @@
 
 - [Pulling partial updates](#pulling-updates)
     - [Update definition](#update-definition)
+    - [Appending and prepending content](#appending-prepending)
 - [Pushing partial updates](#pushing-updates)
 - [Passing variables to partials](#passing-variables)
 
@@ -53,6 +54,22 @@ If the partial name contains a slash or a dash, it is important to 'quote' the l
 The target element will always be on the right side since it can also be a HTML element in JavaScript.
 
     mypartial: document.getElementById('myDiv')
+
+
+<a name="appending-prepending"></a>
+### Appending and prepending content
+
+If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
+
+
+    'folder/append': '@#myDiv'
+
+
+If the selector string is prepended with the `^` symbol, the content will be prepended instead.
+
+
+    'folder/append': '^#myDiv'
+
 
 <a name="pushing-updates"></a>
 ## Pushing partial updates
