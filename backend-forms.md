@@ -542,6 +542,29 @@ Option | Description
 ------------- | -------------
 **availableColors** |  list of available colors.
 
+There are two ways to privde the available colors for the colorpicker. The first method defines the `availableColors` directly as a list of hex color codes in the YAML file:
+
+    color:
+        label: Background
+        type: colorpicker
+        availableColors: ['#000000', '#111111', '#222222']
+
+The second method uses a specific method declared in the model's class.  This method should return an array of hex colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
+
+    color:
+        label: Background
+        type: colorpicker
+        availableColors: myColorList
+
+Supplying the available colors in the model class:
+
+    public function myColorList($fieldName, $value, $formData)
+    {
+        return ['#000000', '#111111', '#222222']
+    }
+
+If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors.
+
 <a name="widget-datepicker"></a>
 ### Date picker
 
