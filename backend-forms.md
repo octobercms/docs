@@ -443,7 +443,7 @@ Balloon selectors support three ways of defining the options, exactly like the [
             close_account: Close account
             modify_account: Modify account
 
-Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
+Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
 <a name="field-switch"></a>
 ### Switch
