@@ -62,6 +62,14 @@ Alternatively, you can prepare a File model before hand, then manually associate
     $file->save();
 
     $model->avatar()->add($file);
+    
+Also you can attach the file to model by URL.
+
+    $file = new System\Models\File;
+    $file->fromLink('https://example.com/uploads/public/path/to/avatar.jpg');
+
+    $user->avatar()->add($file);
+    
 
 <a name="viewing-attachments"></a>
 ### Viewing attachments
