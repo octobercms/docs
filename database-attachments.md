@@ -63,10 +63,10 @@ Alternatively, you can prepare a File model before hand, then manually associate
 
     $model->avatar()->add($file);
     
-Also you can attach the file to model by URL.
+You can also add a file from a URL. To work this method, you need install cURL PHP Extension.
 
     $file = new System\Models\File;
-    $file->fromLink('https://example.com/uploads/public/path/to/avatar.jpg');
+    $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg');
 
     $user->avatar()->add($file);
     
