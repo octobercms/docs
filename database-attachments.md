@@ -70,6 +70,10 @@ You can also add a file from a URL. To work this method, you need install cURL P
 
     $user->avatar()->add($file);
     
+Occasionally you may need to change a file name. You may do so by using second method parameter.
+
+    $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefilename');
+    
 
 <a name="viewing-attachments"></a>
 ### Viewing attachments
