@@ -72,7 +72,7 @@ You can also add a file from a URL. To work this method, you need install cURL P
     
 Occasionally you may need to change a file name. You may do so by using second method parameter.
 
-    $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefilename');
+    $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefilename.jpg');
     
 
 <a name="viewing-attachments"></a>
