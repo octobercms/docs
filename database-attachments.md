@@ -100,14 +100,25 @@ You can resize an image with the `getThumb` method. The method takes 3 parameter
 
 Option | Description
 ------------- | -------------
-**mode** | auto, exact, portrait, landscape, crop. Default: auto
-**quality** | 0 - 100. Default: 95
+**mode** | auto, exact, portrait, landscape, crop, fit. Default: auto
+**quality** | 0 - 100. Default: 90
 **interlace** | boolean: false (default), true
 **extension** | auto, jpg, png, gif. Default: jpg
 
 The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
 
     echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
+
+#### Viewing Modes
+
+The `mode` option allows you to specify how the image should be resized. Here are the available modes:
+
+* `auto` will automatically choose between `portrait` and `landscape` based on the image's orientation
+* `exact` will resize to the exact dimensions given, without preserving aspect ratio
+* `portrait` will resize to the given height and adapt the width to preserve aspect ratio
+* `landscape` will resize to the given width and adapt the height to preserve aspect ratio
+* `crop` will crop to the given dimensions after fitting as much of the image as possible inside those
+* `fit` will fit the image inside the given maximal dimensions, keeping the aspect ratio
 
 <a name="attachments-usage-example"></a>
 ### Usage example
