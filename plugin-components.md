@@ -38,7 +38,7 @@ Components must be [registered in the Plugin registration class](#component-regi
 <a name="component-class-definition"></a>
 ## Component class definition
 
-The **component class file** defines the component functionality and [component properties](#component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component form the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
+The **component class file** defines the component functionality and [component properties](#component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
 
     namespace Acme\Blog\Components;
 
