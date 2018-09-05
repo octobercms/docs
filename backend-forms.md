@@ -280,6 +280,13 @@ There are various native field types that can be used for the **type** setting. 
         label: Blog Title
         type: text
 
+There is available a special option: **mask**. This specifies a pattern. You can use it for mobile number, credit card, etc. [See documentation and examples](http://igorescobar.github.io/jQuery-Mask-Plugin/docs.html)
+
+    phone:
+        label: Phone number
+        type: text
+        mask: 00 0000-0000
+
 <a name="field-number"></a>
 ### Number
 
