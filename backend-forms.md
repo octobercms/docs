@@ -205,7 +205,7 @@ Option | Description
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
 **cssClass** | assigns a CSS class to the tab container.
-**paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class.
+**paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
 <a name="form-field-options"></a>
 ### Field options
@@ -216,7 +216,7 @@ Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
-**span** | aligns the form field to one side. Options: auto, left, right, full. Default: full.
+**span** | aligns the form field to one side. Options: auto, left, right, storm, full. Default: full. The parameter `storm` allows to form the form in the form of a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
