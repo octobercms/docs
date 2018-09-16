@@ -171,6 +171,8 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
         }
     }
 
+> **Note:** When extending the form, you should check to see if `$formWidget->isNested === false` as the Repeater FormWidget includes nested Form widgets which can cause your changes to be made in unexpected places.
+
 If you need to extend backend form and in same time add support for translating those new fields you have to add fields before actual form is rendered. This can be done with `backend.form.extendFieldsBefore` event.
 ```
     public function boot()
