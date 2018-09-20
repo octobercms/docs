@@ -286,6 +286,9 @@ There is available a special option: **mask**. This specifies a pattern. You can
         label: Phone number
         type: text
         mask: 00 0000-0000
+        maskOptions: [reverse, selectOnFocus]
+
+The **maskOptions** parameter is optional. It is an array what can contain the following values: **reverse**, **clearIfNotMatch** and **selectOnFocus**.
 
 <a name="field-number"></a>
 ### Number
