@@ -435,6 +435,7 @@ Option | Description
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
+**session** | default: true. Set to false to disable the filter choice from being saved to the session.
 
 <a name="scope-types"></a>
 ### Available scope types
