@@ -83,6 +83,12 @@ The following is an example of how to define a website name configuration field 
                 label: Site name
                 comment: The website name as it should appear on the front-end
                 default: My Amazing Site!
+                
+> **Note:** If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
+
+    \Cms\Models\ThemeData::extend(function ($model) { 
+        $model->addJsonable('contact');
+    });
 
 The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup#default-variables) called `this.theme`.
 
