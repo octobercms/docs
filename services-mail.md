@@ -354,12 +354,12 @@ Mail views can be registered as templates that are automatically generated in th
     public function registerMailTemplates()
     {
         return [
-            'rainlab.user::mail.activate' => 'Activation mail sent to new users.',
-            'rainlab.user::mail.restore'  => 'Password reset instructions for front-end users.'
+            'rainlab.user::mail.activate',
+            'rainlab.user::mail.restore'
         ];
     }
 
-The method should return an array where the key is the [mail view name](#mail-views) and the value gives a brief description about what the mail template is used for.
+The method should return an array of [mail view names](#mail-views).
 
 <a name="mail-global-variables"></a>
 ### Global variables
