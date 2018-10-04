@@ -334,7 +334,7 @@ Supplying the dropdown options in the model class:
         return ['all' => 'All', ...];
     }
 
-The third global method `getDropdownOptions` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
+The third global method `getDropdownOptions` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the current value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
 
     public function getDropdownOptions($fieldName, $value, $formData)
     {
