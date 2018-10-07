@@ -9,7 +9,7 @@
     - [Mail views](#mail-views)
     - [Mail templates](#mail-templates)
     - [Mail layouts](#mail-layouts)
-    - [Registering mail templates & partials](#mail-template-registration)
+    - [Registering mail layouts, templates & partials](#mail-template-registration)
     - [Global variables](#mail-global-variables)
 - [Mail & local development](#mail-and-local-development)
 
@@ -347,7 +347,7 @@ Default | default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
 
 <a name="mail-template-registration"></a>
-### Registering mail templates & partials
+### Registering mail layouts, templates & partials
 
 Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
 
@@ -361,7 +361,7 @@ Mail views can be registered as templates that are automatically generated in th
 
 The method should return an array of [mail view names](#mail-views).
 
-Like templates, mail partials can be registered by overriding the `registerMailPartials` method of the [Plugin registration class](../plugin/registration#registration-file). Mail partials can be customized via the *Settings > Mail partials* menu.
+Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [Plugin registration class](../plugin/registration#registration-file).
 
 
     public function registerMailPartials()
@@ -372,8 +372,16 @@ Like templates, mail partials can be registered by overriding the `registerMailP
         ];
     }
 
+    public function registerMailLayouts()
+    {
+        return [
+            'marketing'    => 'acme.blog::layouts.marketing',
+            'notification' => 'acme.blog::layouts.notification',
+        ];
+    }
 
-The method should return an array of [mail view names](#mail-views). The array key will be used as `code` property for the partial.
+
+The methods should return an array of [mail view names](#mail-views). The array key will be used as `code` property for the partial or layout.
 
 <a name="mail-global-variables"></a>
 ### Global variables
