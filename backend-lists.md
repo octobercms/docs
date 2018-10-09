@@ -574,8 +574,8 @@ These types can be used to determine how the filter scope should be displayed.
         label: Visitor Count
         type: numberrange
         default: 
-            0:10
-            1:20
+            0: 10
+            1: 20
         conditions: vistors >= ':min' and visitors <= ':max'
 
 <a name="filter-text"></a>
