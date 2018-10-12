@@ -36,6 +36,7 @@ Plugins:
   pages:
     plugin/registration: "Registration"
     plugin/updates: "Version history"
+    plugin/composer: "Using Composer"
     plugin/components: "Building components"
     plugin/settings: "Settings & Config"
     plugin/localization: "Localization"
