@@ -21,34 +21,34 @@ OctoberCMS uses [Composer](https://getcomposer.org/) as the package manager of c
 An example `composer.json` file for a plugin is included below:
 
 ```json
-    {
-        "name": "october/oc-demo-plugin",
-        "type": "october-plugin",
-        "description": "Demo OctoberCMS plugin",
-        "keywords": ["october", "cms", "demo", "plugin"],
-        "license": "MIT",
-        "authors": [
-            {
-                "name": "Alexey Bobkov",
-                "email": "hello@octobercms.com",
-                "role": "Co-founder"
-            },
-            {
-                "name": "Samuel Georges",
-                "email": "hello@octobercms.com",
-                "role": "Co-founder"
-            },
-            {
-                "name": "Luke Towers",
-                "email": "octobercms@luketowers.ca",
-                "role": "Core maintainer"
-            }
-        ],
-        "require": {
-            "php": ">=7.0",
-            "composer/installers": "~1.0"
+{
+    "name": "october/oc-demo-plugin",
+    "type": "october-plugin",
+    "description": "Demo OctoberCMS plugin",
+    "keywords": ["october", "cms", "demo", "plugin"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexey Bobkov",
+            "email": "hello@octobercms.com",
+            "role": "Co-founder"
+        },
+        {
+            "name": "Samuel Georges",
+            "email": "hello@octobercms.com",
+            "role": "Co-founder"
+        },
+        {
+            "name": "Luke Towers",
+            "email": "octobercms@luketowers.ca",
+            "role": "Core maintainer"
         }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "composer/installers": "~1.0"
     }
+}
 ```
 
 Two important properties to note are the `name` (the package name should be prefixed with `oc-` & suffixed with `-plugin`, in accordance with the [quality guidelines](http://octobercms.com/help/guidelines/developer#repository-naming)); and the `type` (the type `october-plugin` is used to indicate to the `composer/installers` package how to actually install the dependency).
@@ -99,53 +99,53 @@ Laravel packages will often provide configuration files, and they will usually c
 
 **Code to put in the `boot()` method of your Plugin registration file**
 ```php
-    use Config;
+use Config;
 
-    /**
-     * Boots (configures and registers) any packages found within this plugin's packages.load configuration value
-     *
-     * @see https://luketowers.ca/blog/how-to-use-laravel-packages-in-october-plugins
-     * @author Luke Towers <octobercms@luketowers.ca>
-     */
-    public function bootPackages()
-    {
-        // Get the namespace of the current plugin to use in accessing the Config of the plugin
-        $pluginNamespace = str_replace('\\', '.', strtolower(__NAMESPACE__));
+/**
+ * Boots (configures and registers) any packages found within this plugin's packages.load configuration value
+ *
+ * @see https://luketowers.ca/blog/how-to-use-laravel-packages-in-october-plugins
+ * @author Luke Towers <octobercms@luketowers.ca>
+ */
+public function bootPackages()
+{
+    // Get the namespace of the current plugin to use in accessing the Config of the plugin
+    $pluginNamespace = str_replace('\\', '.', strtolower(__NAMESPACE__));
 
-        // Get the packages to boot
-        $packages = Config::get($pluginNamespace . '::packages');
+    // Get the packages to boot
+    $packages = Config::get($pluginNamespace . '::packages');
 
-        // Boot each package
-        foreach ($packages as $name => $options) {
-            // Setup the configuration for the package, pulling from this plugin's config
-            if (!empty($options['config']) && !empty($options['config_namespace'])) {
-                Config::set($options['config_namespace'], $options['config']);
-            }
+    // Boot each package
+    foreach ($packages as $name => $options) {
+        // Setup the configuration for the package, pulling from this plugin's config
+        if (!empty($options['config']) && !empty($options['config_namespace'])) {
+            Config::set($options['config_namespace'], $options['config']);
         }
     }
+}
 ```
 
 **How to structure your plugin's config file (/plugin/config/config.php):**
 ```php
-    return [
-        // This contains the Laravel Packages that you want this plugin to utilize listed under their package identifiers
-        'packages' => [
-            'packagevendor/packagename' => [
-                // The namespace to set the configuration under. For this example, this package accesses
-                // it's config via config('purifier.' . $key), so the namespace 'purifier' is what we put here
-                'config_namespace' => 'purifier',
+return [
+    // This contains the Laravel Packages that you want this plugin to utilize listed under their package identifiers
+    'packages' => [
+        'packagevendor/packagename' => [
+            // The namespace to set the configuration under. For this example, this package accesses
+            // it's config via config('purifier.' . $key), so the namespace 'purifier' is what we put here
+            'config_namespace' => 'purifier',
 
-                // The configuration file for the package itself. Start this out by copying the default
-                // one that comes with the package and then modifying what you need.
-                'config' => [
-                    'encoding'      => 'UTF-8',
-                    'finalize'      => true,
-                    'cachePath'     => storage_path('app/purifier'),
-                    'cacheFileMode' => 0755,
-                ],
+            // The configuration file for the package itself. Start this out by copying the default
+            // one that comes with the package and then modifying what you need.
+            'config' => [
+                'encoding'      => 'UTF-8',
+                'finalize'      => true,
+                'cachePath'     => storage_path('app/purifier'),
+                'cacheFileMode' => 0755,
             ],
         ],
-    ];
+    ],
+];
 ```
 
 Now the configuration for the packages introduced by your plugin lives within your plugin and can be [overridden](settings#file-configuration) at the project level in the normal, OctoberCMS way.
