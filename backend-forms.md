@@ -588,7 +588,7 @@ Option | Description
 <a name="widget-fileupload"></a>
 ### File upload
 
-`fileupload` - renders a file uploader for images or regular files. The field name must use an attachOne or attachMany relation.
+`fileupload` - renders a file uploader for images or regular files. **The field name must use an attachOne or attachMany relation.**
 
     avatar:
         label: Avatar
@@ -660,6 +660,8 @@ Option | Description
 **prompt** | text to display when there is no item selected. The `%s` character represents the media manager icon.
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
+
+> **Note:** Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library.
 
 <a name="widget-relation"></a>
 ### Relation
