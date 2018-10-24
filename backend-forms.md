@@ -225,6 +225,7 @@ Option | Description
 **default** | specifies the default value for the field.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
+**tabIcon** | assigns an icon to the Tab.
 **cssClass** | assigns a CSS class to the field container.
 **readOnly** | prevents the field from being modified. Options: true, false.
 **disabled** | prevents the field from being modified and excludes it from the saved data. Options: true, false.
