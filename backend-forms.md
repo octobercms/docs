@@ -208,6 +208,28 @@ Option | Description
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
+    tabs:
+        stretch: true
+        defaultTab: backend::lang.account.default_tab
+        cssClass: text-blue
+        paneCssClass:
+            0: first-tab
+            1: second-tab
+        icons:
+            backend::lang.account.user: icon-user
+            backend::lang.account.groups: icon-group
+            
+        fields:
+            username:
+                type: text
+                label: Username
+                tab: backend::lang.account.user
+                
+            groups:
+                type: relation
+                label: Groups
+                tab: backend::lang.account.groups
+
 <a name="form-field-options"></a>
 ### Field options
 
