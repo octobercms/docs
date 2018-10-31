@@ -204,6 +204,7 @@ Option | Description
 ------------- | -------------
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
+**icons** | assign icons to tabs using tab names as the key.
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
