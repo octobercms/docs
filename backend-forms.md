@@ -204,8 +204,31 @@ Option | Description
 ------------- | -------------
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
+**icons** | assign icons to tabs using tab names as the key.
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
+
+    tabs:
+        stretch: true
+        defaultTab: backend::lang.account.default_tab
+        cssClass: text-blue
+        paneCssClass:
+            0: first-tab
+            1: second-tab
+        icons:
+            backend::lang.account.user: icon-user
+            backend::lang.account.groups: icon-group
+            
+        fields:
+            username:
+                type: text
+                label: Username
+                tab: backend::lang.account.user
+                
+            groups:
+                type: relation
+                label: Groups
+                tab: backend::lang.account.groups
 
 <a name="form-field-options"></a>
 ### Field options
@@ -588,7 +611,7 @@ Option | Description
 <a name="widget-fileupload"></a>
 ### File upload
 
-`fileupload` - renders a file uploader for images or regular files. The field name must use an attachOne or attachMany relation.
+`fileupload` - renders a file uploader for images or regular files. **The field name must use an attachOne or attachMany relation.**
 
     avatar:
         label: Avatar
@@ -660,6 +683,8 @@ Option | Description
 **prompt** | text to display when there is no item selected. The `%s` character represents the media manager icon.
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
+
+> **Note:** Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library.
 
 <a name="widget-relation"></a>
 ### Relation

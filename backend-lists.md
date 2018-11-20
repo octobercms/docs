@@ -137,7 +137,6 @@ List columns are defined with the YAML file. The column configuration is used by
               list_columns.yaml    <=== Model list columns config file
             Post.php               <=== model class
 
-
 The next example shows the typical contents of a list column definitions file.
 
     # ===================================
@@ -339,6 +338,7 @@ To display a column that shows the number of related records, use the `useRelati
     content:
         type: partial
         path: ~/plugins/acme/blog/models/comments/_content_column.htm
+
 <a name="column-colorpicker"></a>
 ### Color Picker
 
@@ -414,12 +414,10 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
             type: date
             conditions: created_at >= ':filtered'
 
-
         published_at:
             label: Date
             type: daterange
             conditions: created_at >= ':after' AND created_at <= ':before'
-
 
 <a name="filter-scope-options"></a>
 ### Scope options
@@ -496,7 +494,6 @@ These types can be used to determine how the filter scope should be displayed.
 
 `switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
 
-
     approved:
         label: Approved
         type: switch
@@ -530,30 +527,31 @@ These types can be used to determine how the filter scope should be displayed.
         maxDate: '2030-10-13'
         yearRange: 10
         conditions: created_at >= ':after' AND created_at <= ':before'
-        
- 
- To use default value for Date and Date Range
- 
- ```php
- myController::extendListFilterScopes(function($filter) {
-                'Date Test' => [
-                    'label' => 'Date Test',
-                    'type' => 'daterange',
-                    'default' => $this->myDefaultTime(),
-                    'conditions' => "created_at >= ':after' AND created_at <= ':before'"
-                ],
-            ]);
-        });
+
+To use default value for Date and Date Range
+
+```php
+    myController::extendListFilterScopes(function($filter)
+    {
+            'Date Test' => [
+                'label' => 'Date Test',
+                'type' => 'daterange',
+                'default' => $this->myDefaultTime(),
+                'conditions' => "created_at >= ':after' AND created_at <= ':before'"
+            ],
+        ]);
+    });
   
-  // return value must be instance of carbon
-  public function myDefaultTime() {
+    // return value must be instance of carbon
+    public function myDefaultTime()
+    {
         return [
             0 => Carbon::parse('2012-02-02'),
             1 => Carbon::parse('2012-04-02'),
         ];
     }
- ```
-        
+```
+
 <a name="filter-number"></a>
 ### Number
 
@@ -668,10 +666,11 @@ You can extend the columns of another controller from outside by calling the `ex
 
 Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
 
-        Categories::extendListColumns(function($list, $model) {
-
-            if (!$model instanceof MyModel)
+        Categories::extendListColumns(function($list, $model)
+        {
+            if (!$model instanceof MyModel) {
                 return;
+            }
 
             $list->addColumns([
                 'my_column' => [

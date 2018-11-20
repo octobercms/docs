@@ -312,6 +312,16 @@ Like all methods in the [page execution life cycle](../cms/layouts#layout-life-c
             return Response::make('Access denied!', 403);
         }
     }
+    
+You can also return a 404 response from the `onRun` method:
+
+    public function onRun()
+    {
+        if (true) {
+            $this->setStatusCode(404);
+            return $this->controller->run('404');
+        }
+    }
 
 <a name="ajax-handlers"></a>
 ## AJAX handlers
