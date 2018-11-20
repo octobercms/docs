@@ -989,7 +989,7 @@ Option | Description
 <a name="field-dependencies"></a>
 ### Field dependencies
 
-Form fields can depend on others when defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution. When the defined other fields change, the defining field will update using the AJAX framework. Here is a sample definition:
+Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field. Examples below:
 
     country:
         label: Country
@@ -1017,7 +1017,46 @@ In the above example the `state` form field will refresh when the `country` fiel
         }
     }
 
-This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering form fields](#filter-form-fields) section.
+This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering form fields](#filter-form-fields) section. An example is provided below:
+
+    dnsprovider:
+        label: DNS Provider
+        type: dropdown
+
+    registrar:
+        label: Registrar
+        type: dropdown
+
+    specificfields[for][provider1]:
+        label: Provider 1 ID
+        type: text
+        hidden: true
+        dependsOn:
+            - dnsprovider
+            - registrar
+
+    specificfields[for][provider2]:
+        label: Provider 2 ID
+        type: text
+        hidden: true
+        dependsOn:
+            - dnsprovider
+            - registrar
+
+And the logic for the filterFields method would be as follows:
+
+    public function filterFields($fields, $context = null)
+    {
+        $displayedVendors = strtolower($this->dnsprovider->name . $this->registrar->name);
+        if (str_contains($displayedVendors, 'provider1')) {
+            $fields->{'specificfields[for][provider1]'}->hidden = false;
+        }
+        if (str_contains($displayedVendors, 'provider2')) {
+            $fields->{'specificfields[for][provider2]'}->hidden = false;
+        }
+    }
+
+In the above example, both the `provider1` and `provider2` fields will automatically refresh whenever either the `dnsprovider` or `registrar` fields are modified. When this occurs, the full form cycle will be processed, which means that any logic defined in `filterFields` methods would be run again, allowing you to filter which fields get displayed dynamically.
 
 <a name="prevent-field-submission"></a>
 ### Preventing a field from being submitted
