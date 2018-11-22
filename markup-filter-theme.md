@@ -39,6 +39,8 @@ Alias | Description
 `@jquery` | Reference to the jQuery library (v3.3.1) used in the back-end. (JavaScript)
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
+`@framework.extras.js` | AJAX framework extras, (JavaScript)
+`@framework.extras.css` | AJAX framework extras, (CSS)
 
 The same alias can be used for JavaScript or CSS, for example `@framework.extras`. At least one explicit reference with a file extension is needed in the array to determine which is used.
 
