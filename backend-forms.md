@@ -656,6 +656,7 @@ Option | Description
 
 Option | Description
 ------------- | -------------
+**keyFrom** | the name of column to use in the relation used for key. Default: id.
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **title** | text to display in the title section of the popup.
