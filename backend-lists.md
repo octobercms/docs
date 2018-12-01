@@ -574,7 +574,7 @@ To use default value for Date and Date Range
         default: 
             0: 10
             1: 20
-        conditions: vistors >= ':min' and visitors <= ':max'
+        conditions: visitors >= ':min' and visitors <= ':max'
 
 <a name="filter-text"></a>
 ### Text
