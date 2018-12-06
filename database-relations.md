@@ -8,8 +8,11 @@
     - [One To Many](#one-to-many)
     - [Many To Many](#many-to-many)
     - [Has Many Through](#has-many-through)
-    - [Polymorphic relations](#polymorphic-relations)
-    - [Many To Many Polymorphic relations](#many-to-many-polymorphic-relations)
+- [Polymorphic relations](#polymorphic-relations)
+    - [One To One](#one-to-one-polymorphic-relations)
+    - [One To Many](#one-to-many-polymorphic-relations)
+    - [Many To Many](#many-to-many-polymorphic-relations)
+    - [Custom Polymorphic Types](#custom-polymorphic-types)
 - [Querying relations](#querying-relations)
     - [Access via relationship method](#querying-method)
     - [Access via dynamic property](#querying-dynamic-property)
@@ -405,9 +408,14 @@ Typical foreign key conventions will be used when performing the relationship's 
 <a name="polymorphic-relations"></a>
 ### Polymorphic relations
 
+Polymorphic relations allow a model to belong to more than one other model on a single association.
+
+<a name="one-to-one-polymorphic-relations"></a>
+### One To One
+
 #### Table structure
 
-Polymorphic relations allow a model to belong to more than one other model on a single association. For example, imagine you want to store photos for your staff members and for your products. Using polymorphic relationships, you can use a single `photos` table for both of these scenarios. First, let's examine the table structure required to build this relationship:
+A one-to-one polymorphic relation is similar to a simple one-to-one relation; however, the target model can belong to more than one type of model on a single association. For example, imagine you want to store photos for your staff members and for your products. Using polymorphic relationships, you can use a single `photos` table for both of these scenarios. First, let's examine the table structure required to build this relationship:
 
     staff
         id - integer
@@ -438,27 +446,25 @@ Next, let's examine the model definitions needed to build this relationship:
 
     class Staff extends Model
     {
-        public $morphMany = [
-            'photos' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
+        public $morphOne = [
+            'photo' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
         ];
     }
 
     class Product extends Model
     {
-        public $morphMany = [
-            'photos' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
+        public $morphOne = [
+            'photo' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
         ];
     }
 
 #### Retrieving Polymorphic relations
 
-Once your database table and models are defined, you may access the relationships via your models. For example, to access all of the photos for a staff member, we can simply use the `photos` dynamic property:
+Once your database table and models are defined, you may access the relationships via your models. For example, to access the photo for a staff member, we can simply use the `photo` dynamic property:
 
     $staff = Staff::find(1);
 
-    foreach ($staff->photos as $photo) {
-        //
-    }
+    $photo = $staff->photo
 
 You may also retrieve the owner of a polymorphic relation from the polymorphic model by accessing the name of the `morphTo` relationship. In our case, that is the `imageable` definition on the `Photo` model. So, we will access it as a dynamic property:
 
@@ -468,27 +474,78 @@ You may also retrieve the owner of a polymorphic relation from the polymorphic m
 
 The `imageable` relation on the `Photo` model will return either a `Staff` or `Product` instance, depending on which type of model owns the photo.
 
-#### Custom Polymorphic types
+<a name="one-to-many-polymorphic-relations"></a>
+### One To Many
 
-By default, the fully qualified class name is used to store the related model type. For instance, given the example above where a `Photo` may belong to `Staff` or a `Product`, the default `imageable_type` value is either `Acme\Blog\Models\Staff` or `Acme\Blog\Models\Product` respectively.
+#### Table Structure
 
-Using a custom polymorphic type lets you decouple your database from your application's internal structure. You may define a relationship "morph map" to provide a custom name for each model instead of the class name:
+A one-to-many polymorphic relation is similar to a simple one-to-many relation; however, the target model can belong to more than one type of model on a single association. For example, imagine users of your application can "comment" on both posts and videos. Using polymorphic relationships, you may use a single `comments` table for both of these scenarios. First, let's examine the table structure required to build this relationship:
 
-    use October\Rain\Database\Relations\Relation;
+    posts
+        id - integer
+        title - string
+        body - text
 
-    Relation::morphMap([
-        'staff' => 'Acme\Blog\Models\Staff',
-        'product' => 'Acme\Blog\Models\Product',
-    ]);
+    videos
+        id - integer
+        title - string
+        url - string
 
-The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
+    comments
+        id - integer
+        body - text
+        commentable_id - integer
+        commentable_type - string
+
+#### Model Structure
+
+Next, let's examine the model definitions needed to build this relationship:
+
+    class Comment extends Model
+    {
+        public $morphTo = [
+            'commentable' => []
+        ];
+    }
+
+    class Post extends Model
+    {
+        public $morphMany = [
+            'comments' => ['Acme\Blog\Models\Comment', 'name' => 'commentable']
+        ];
+    }
+
+    class Product extends Model
+    {
+        public $morphMany = [
+            'comments' => ['Acme\Blog\Models\Comment', 'name' => 'commentable']
+        ];
+    }
+
+#### Retrieving The Relationship
+
+Once your database table and models are defined, you may access the relationships via your models. For example, to access all of the comments for a post, we can use the `comments` dynamic property:
+
+    $post = App\Post::find(1);
+
+    foreach ($post->comments as $comment) {
+        //
+    }
+
+You may also retrieve the owner of a polymorphic relation from the polymorphic model by accessing the name of the `morphTo` relationship. In our case, that is the `commentable` definition on the `Comment` model. So, we will access it as a dynamic property:
+
+    $comment = App\Comment::find(1);
+
+    $commentable = $comment->commentable;
+
+The `commentable` relation on the `Comment` model will return either a `Post` or `Video` instance, depending on which type of model owns the comment.
 
 <a name="many-to-many-polymorphic-relations"></a>
-### Many To Many Polymorphic relations
+### Many To Many
 
 #### Table structure
 
-In addition to traditional polymorphic relations, you may also define "many-to-many" polymorphic relations. For example, a blog `Post` and `Video` model could share a polymorphic relation to a `Tag` model. Using a many-to-many polymorphic relation allows you to have a single list of unique tags that are shared across blog posts and videos. First, let's examine the table structure:
+In addition to "one-to-one" and "one-to-many" relations, you may also define "many-to-many" polymorphic relations. For example, a blog `Post` and `Video` model could share a polymorphic relation to a `Tag` model. Using a many-to-many polymorphic relation allows you to have a single list of unique tags that are shared across blog posts and videos. First, let's examine the table structure:
 
     posts
         id - integer
@@ -547,6 +604,22 @@ You may also retrieve the owner of a polymorphic relation from the polymorphic m
     foreach ($tag->videos as $video) {
         //
     }
+
+<a name="custom-polymorphic-types"></a>
+#### Custom Polymorphic types
+
+By default, the fully qualified class name is used to store the related model type. For instance, given the example above where a `Photo` may belong to `Staff` or a `Product`, the default `imageable_type` value is either `Acme\Blog\Models\Staff` or `Acme\Blog\Models\Product` respectively.
+
+Using a custom polymorphic type lets you decouple your database from your application's internal structure. You may define a relationship "morph map" to provide a custom name for each model instead of the class name:
+
+    use October\Rain\Database\Relations\Relation;
+
+    Relation::morphMap([
+        'staff' => 'Acme\Blog\Models\Staff',
+        'product' => 'Acme\Blog\Models\Product',
+    ]);
+
+The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
 
 <a name="querying-relations"></a>
 ## Querying relations
