@@ -353,8 +353,10 @@ These are the parameters supported for `belongsToMany` relations:
 Argument | Description
 ------------- | -------------
 **table** | the name of the join table.
-**key** | the key column name of the defining model.
-**otherKey** | the key column name of the related model.
+**key** | the key column name of the defining model (inside pivot table). Default value is combined from model name and `_id` suffix, i.e. `user_id`
+**parentKey** | the key column name of the defining model (inside defining model table). Default: id
+**otherKey** | the key column name of the related model (inside pivot table). Default value is combined from model name and `_id` suffix, i.e. `role_id`
+**relatedKey** | the key column name of the related model (inside related model table). Default: id
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot`.
 **timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
