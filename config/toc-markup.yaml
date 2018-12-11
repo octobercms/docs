@@ -17,6 +17,7 @@ Tags:
   icon: "icon-tags"
   itemClass: "code-item"
   pages:
+    markup/tag-page: "{% page %}"
     markup/tag-partial: "{% partial %}"
     markup/tag-content: "{% content %}"
     markup/tag-component: "{% component %}"
