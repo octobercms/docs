@@ -534,6 +534,7 @@ There are various form widgets included as standard, although it is common for p
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Markdown editor](#widget-markdowneditor)
 - [Tag list](#widget-taglist)
+- [Nested Form](#widget-nestedform)
 </div>
 
 <a name="widget-codeeditor"></a>
@@ -856,6 +857,47 @@ Option | Description
 **options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options` method. Optional.
 **nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name
 **useKey** | use the key instead of value for saving and reading data. Default: false
+
+<a name="widget-nestedform"></a>
+### Nested form
+`nestedform` - renders a form inside a form bound to a jsonable model attribute.
+
+    content:
+        type: nestedform
+        form:
+            fields:
+                added_at:
+                    label: Date added
+                    type: datepicker
+                details:
+                    label: Details
+                    type: textarea
+                title_when_collapsed:
+                    label: This field is the title when collapsed
+                    type: text                
+            tabs:
+                meta_title:
+                    lable: Meta Title
+                    tab: SEO
+                color:
+                    label: Color
+                    type: colorpicker
+                    tab: Design
+            secondaryTabs:
+                is_active:
+                    label: Active
+                    type: checkbox
+                logo:
+                    label: Logo
+                    type: mediafinder
+                    mode: image
+                                                                      
+A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has 
+the structure of your form definition. It's even possible to use nested forms inside a nested form.   
+
+Option | Description
+------------- | -------------
+**form**  | same as in [form definition](#form-fields) 
 
 <a name="form-views"></a>
 ## Form views
