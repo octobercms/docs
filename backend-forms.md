@@ -864,6 +864,7 @@ Option | Description
 
     content:
         type: nestedform
+        isStyled: false
         form:
             fields:
                 added_at:
@@ -872,8 +873,8 @@ Option | Description
                 details:
                     label: Details
                     type: textarea
-                title_when_collapsed:
-                    label: This field is the title when collapsed
+                title:
+                    label: This the title
                     type: text                
             tabs:
                 meta_title:
@@ -898,6 +899,7 @@ the structure of your form definition. It's even possible to use nested forms in
 Option | Description
 ------------- | -------------
 **form**  | same as in [form definition](#form-fields) 
+**isStyled** | defines if a panel like look is applied or not (defaults true)
 
 <a name="form-views"></a>
 ## Form views
