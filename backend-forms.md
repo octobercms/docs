@@ -859,8 +859,10 @@ Option | Description
 **useKey** | use the key instead of value for saving and reading data. Default: false
 
 <a name="widget-nestedform"></a>
-### Nested form
-`nestedform` - renders a form inside a form bound to a jsonable model attribute.
+### Nested Form
+`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained. 
+
+> **NOTE:** In order to use this with a model it should be attached to a `jsonable` or other attribute that can handle storing array data
 
     content:
         type: nestedform
@@ -893,13 +895,12 @@ Option | Description
                     type: mediafinder
                     mode: image
                                                                       
-A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has 
-the structure of your form definition. It's even possible to use nested forms inside a nested form.   
+A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has the structure of your form definition. It's even possible to use nested forms inside a nested form.   
 
 Option | Description
 ------------- | -------------
 **form**  | same as in [form definition](#form-fields) 
-**isStyled** | defines if a panel like look is applied or not (defaults true)
+**usePanelStyles** | defines if a panel like look is applied or not (defaults true)
 
 <a name="form-views"></a>
 ## Form views
