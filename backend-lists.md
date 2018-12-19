@@ -230,7 +230,8 @@ You can also specify a custom number format, for example currency **$ 99.00**
         type: number
         format: $ %.2f
 
-> **Note:** `Text`  and `Number` Both support formatting rules of PHP sprintf() function. format value must be a string.
+> **Note:** Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
+
 <a name="column-switch"></a>
 ### Switch
 
