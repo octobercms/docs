@@ -1030,3 +1030,19 @@ Destroys all bindings that have not been committed and are older than 1 day:
     October\Rain\Database\Models\DeferredBinding::cleanUp(1);
 
 > **Note:** October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
+
+<a name="disable-deferred-binding"></a>
+### Disable Deferred Binding
+
+Sometimes you might need to disable deferred binding entirely for a given model, for instance if you are loading it from a separate database connection. In order to do that, you need to make sure that the model's `sessionKey` property is `null` before the pre and post deferred binding hooks in the internal save method are run. To do that, you can bind to the model's `model.saveInternal` event:
+
+    public function __construct()
+    {
+        $result = parent::__construct(...func_get_args());
+        $this->bindEvent('model.saveInternal', function () {
+            $this->sessionKey = null;
+        });
+        return $result;
+    }
+
+> **Note:** This will disable deferred binding entirely for any model's you apply this override to.
