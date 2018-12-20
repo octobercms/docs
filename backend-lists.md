@@ -206,6 +206,13 @@ There are various column types that can be used for the **type** setting, these 
     full_name:
         label: Full Name
         type: text
+        
+You can also specify a custom text format, for example **Admin:Full Name (active)**
+
+    full_name:
+        label: Full Name
+        type: text
+        format: Admin:%s (active)
 
 <a name="column-number"></a>
 ### Number
@@ -215,6 +222,15 @@ There are various column types that can be used for the **type** setting, these 
     age:
         label: Age
         type: number
+
+You can also specify a custom number format, for example currency **$ 99.00**
+
+    price:
+        label: Price
+        type: number
+        format: $ %.2f
+
+> **Note:** Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
 
 <a name="column-switch"></a>
 ### Switch
