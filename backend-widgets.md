@@ -74,8 +74,6 @@ Alternatively you may pass the variables to the second parameter of the makePart
 
     public function render()
     {
-        $this->vars['var'] = $value;
-
         return $this->makePartial('list', ['var' => 'value']);
     }
 
