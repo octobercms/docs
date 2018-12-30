@@ -654,7 +654,16 @@ When creating a custom validation rule, you may sometimes need to define custom 
     public function boot()
     {
         Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
-            return str_replace(...);
+            // return a message as a string
+        });
+    }
+
+The callback receives 4 arguments: `$message` being the message returned by the validator, `$attribute` being the attribute which failed validation, `$rule` being the rule object and `$parameters` being the parameters defined with the validation rule. You may, for example, inject a column name into the message that was defined in the parameters:
+
+    public function boot()
+    {
+        Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':column', $parameters[0], $message);
         });
     }
 
@@ -662,7 +671,6 @@ If you wish to support multiple languages with your error messages, you will nee
 
     public function boot()
     {
-        //
         Event::listen('translator.beforeResolve', function ($key, $replaces, $locale) {
             if ($key === 'validation.uppercase') {
                 return Lang::get('plugin.name::lang.validation.uppercase');
