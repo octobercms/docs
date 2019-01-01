@@ -2,6 +2,7 @@
 
 - [Introduction](#introduction)
 - [Including the framework](#framework-script)
+- [Making October CMS Load Faster when using AJAX](#preload-ajax)
 - [How AJAX requests work](#how-ajax-works)
 - [Usage example](#usage-example)
 
@@ -24,6 +25,18 @@ The AJAX framework is optional in your [CMS theme](../cms/themes), to use the li
 The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators.
 
     {% framework extras %}
+	
+<a name="preload-ajax"></a>
+## Making October CMS Load Faster when using AJAX
+
+You can make October CMS load faster for all the web pages that you have added the AJAX framework attributes to.
+
+To do this you can preload these files to speed up the loading of October CMS by adding the following two lines of code in to your `<head>` section, e.g.
+
+    <link rel="preload" href="https://example.com/modules/system/assets/css/framework.extras-min.css" as="style">
+    <link rel="preload" href="https://example.com/modules/system/assets/js/framework.combined-min.js" as="script">
+
+> **Note**: You will need to change the **https://example.com** into your website domain to make the two above lines of code work.
 
 <a name="how-ajax-works"></a>
 ## How AJAX requests work
