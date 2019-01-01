@@ -62,6 +62,8 @@ The **version.yaml** file, called the *Plugin version file*, contains the versio
         - create_tables.php
         - seed_the_database.php
 
+> **Note:** `version.yaml` files do **not** support having multiple text entries per version as the change log description. Each version should only have one string changelog entry.
+
 As you can see above, there should be a key that represents the version number followed by the update message, which is either a string or an array containing the update message. For updates that refer to migration or seeding files, the first line is always the comment, then subsequent lines are script file names. An example of a comment with no associated update files:
 
     1.0.1: A single comment that uses no update scripts.
