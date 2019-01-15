@@ -116,7 +116,7 @@ Combined with use of the `Flash` facade in the event handler, a flash message wi
 
     function onSuccess()
     {
-        Flash::success('You did it!')
+        Flash::success('You did it!');
     }
 
 To remain consistent with AJAX based flash messages, you can render a [standard flash message](../markup/tag-flash) when the page loads by placing this code in your page or layout.
