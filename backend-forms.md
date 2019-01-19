@@ -218,13 +218,13 @@ Option | Description
         icons:
             backend::lang.account.user: icon-user
             backend::lang.account.groups: icon-group
-            
+
         fields:
             username:
                 type: text
                 label: Username
                 tab: backend::lang.account.user
-                
+
             groups:
                 type: relation
                 label: Groups
@@ -311,6 +311,9 @@ There are various native field types that can be used for the **type** setting. 
     your_age:
         label: Your Age
         type: number
+        step: 1  # defaults to 'any'
+        min: 1   # defaults to not present
+        max: 100 # defaults to not present
 
 <a name="field-password"></a>
 ### Password
@@ -650,10 +653,19 @@ Option | Description
     user:
         label: User
         type: recordfinder
-        list: $/rainlab/user/models/user/columns.yaml
-        prompt: Click the %s button to find a user
+        list: ~/plugins/rainlab/user/models/user/columns.yaml
+        recordsPerPage: 10
+        title: Find Record
+        prompt: Click the Find button to find a user
+        keyFrom: id
         nameFrom: name
         descriptionFrom: email
+        conditions: email = "bob@example.com"
+        scope: whereActive
+        searchMode: all
+        searchScope: searchUsers
+        useRelation: false
+        modelClass: RainLab\User\Models\User
 
 Option | Description
 ------------- | -------------
@@ -668,6 +680,8 @@ Option | Description
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 **searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
 **searchScope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
+**useRelation** | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
+**modelClass** | Class of the model to use for listing records when useRelation = false
 
 <a name="widget-mediafinder"></a>
 ### Media finder
@@ -860,7 +874,7 @@ Option | Description
 
 <a name="widget-nestedform"></a>
 ### Nested Form
-`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained. 
+`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
 
 > **NOTE:** In order to use this with a model it should be attached to a `jsonable` or other attribute that can handle storing array data
 
@@ -877,7 +891,7 @@ Option | Description
                     type: textarea
                 title:
                     label: This the title
-                    type: text                
+                    type: text
             tabs:
                 meta_title:
                     lable: Meta Title
@@ -894,12 +908,12 @@ Option | Description
                     label: Logo
                     type: mediafinder
                     mode: image
-                                                                      
-A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has the structure of your form definition. It's even possible to use nested forms inside a nested form.   
+
+A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has the structure of your form definition. It's even possible to use nested forms inside a nested form.
 
 Option | Description
 ------------- | -------------
-**form**  | same as in [form definition](#form-fields) 
+**form**  | same as in [form definition](#form-fields)
 **usePanelStyles** | defines if a panel like look is applied or not (defaults true)
 
 <a name="form-views"></a>
