@@ -121,6 +121,44 @@ Methods can be created to an extendable object by calling `addDynamicMethod` and
             }
         });
     });
+
+#### Checking the existence of a method
+
+You can check for the existence of a method in an `Extendable` class by using the `methodExists` method - similar to the PHP `method_exists()` function. This will detect both standard methods and dynamic methods that have been added through a `addDynamicMethod` call. `methodExists` accepts one parameter: a string of the method name to check the existence of.
+
+    Post::extend(function($model) {
+        $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
+            return $this->tagsCache;
+        });
+    });
+
+    $post = new Post;
+
+    $post->methodExists('getTagsAttribute'); // true
+    $post->methodExists('missingMethod'); // false
+
+#### List all available methods
+
+To retrieve a list of all available methods in an `Extendable` class, you can use the `getClassMethods` method. This method operates similar to the PHP `get_class_methods()` function in that it returns an array of available methods in a class, but in addition to defined methods in the class, it will also list any methods provided by an extension or through an `addDynamicMethod` call.
+
+    Post::extend(function($model) {
+        $model->addDynamicMethod('getTagsAttribute', function () use ($model) {
+            return $this->tagsCache;
+        });
+    });
+
+    $post = new Post;
+
+    $methods = $post->getClassMethods();
+
+    /**
+     * $methods = [
+     *   0 => '__construct',
+     *   1 => 'extend',
+     *   2 => 'getTagsAttribute',
+     *   ...
+     * ];
+     */
     
 #### Dynamically implementing a behavior
 
