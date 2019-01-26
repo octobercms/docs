@@ -640,7 +640,7 @@ Option | Description
 **imageHeight** | if using image type, the image will be resized to this height, optional.
 **fileTypes** | file extensions that are accepted by the uploader, optional. Eg: `zip,txt`
 **mimeTypes** | MIME types that are accepted by the uploader, either as file extension or fully qualified name, optional. Eg: `bin,txt`
-**maxFilesize** | file size in Mb that are accepted by the uploader, optional. Default: 256
+**maxFilesize** | file size in Mb that are accepted by the uploader, optional. Default: from "upload_max_filesize" param value
 **useCaption** | allows a title and description to be set for the file. Default: true
 **prompt** | text to display for the upload button, applies to files only, optional.
 **thumbOptions** | options to pass to the thumbnail generating method for the file
