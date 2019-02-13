@@ -214,6 +214,8 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                 'icon'        => 'icon-pencil',
                 'permissions' => ['acme.blog.*'],
                 'order'       => 500,
+                'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
+                'counterLabel'=> 'Label describing a dynamic menu counter'
 
                 'sideMenu' => [
                     'posts' => [
@@ -221,6 +223,8 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/posts'),
                         'permissions' => ['acme.blog.access_posts']
+                        'counter'     => 2,
+                        'counterLabel'=> 'Label describing a static menu counter',
                     ],
                     'categories' => [
                         'label'       => 'Categories',
