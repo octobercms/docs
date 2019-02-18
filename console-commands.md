@@ -141,7 +141,7 @@ October includes a number of commands for managing plugins.
 <a name="plugin-enable-command"></a>
 ### Enable Plugin
 
-`plugin:enable` - Enable an disabled plugin.
+`plugin:enable` - Enable a disabled plugin.
 
     php artisan plugin:enable AuthorName.PluginName
 
