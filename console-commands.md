@@ -10,6 +10,9 @@
 - [Plugin management](#plugin-commands)
     - [Install plugin](#plugin-install-command)
     - [Refresh plugin](#plugin-refresh-command)
+    - [List plugin](#plugin-list-command)
+    - [Disable plugin](#plugin-disable-command)
+    - [Enable plugin](#plugin-enable-command)
     - [Remove plugin](#plugin-remove-command)
 - [Theme management](#theme-commands)
     - [Install theme](#theme-install-command)
@@ -120,6 +123,27 @@ October includes a number of commands for managing plugins.
 `plugin:refresh` - destroys the plugin's database tables and recreates them. This command is useful for development.
 
     php artisan plugin:refresh AuthorName.PluginName
+
+<a name="plugin-list-command"></a>
+### List Plugins
+
+`plugin:list` - Displays a list of installed plugins.
+
+    php artisan plugin:list
+
+<a name="plugin-disable-command"></a>
+### Disable Plugin
+
+`plugin:disable` - Disable an existing plugin.
+
+    php artisan plugin:disable AuthorName.PluginName
+
+<a name="plugin-enable-command"></a>
+### Enable Plugin
+
+`plugin:enable` - Enable an disabled plugin.
+
+    php artisan plugin:enable AuthorName.PluginName
 
 <a name="plugin-remove-command"></a>
 ### Remove plugin
