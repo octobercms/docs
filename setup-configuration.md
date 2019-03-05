@@ -184,7 +184,7 @@ If safe mode is enabled, the PHP code section is disabled in CMS templates for s
 
 October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
 
-While CSRF protection is disabled by default, you can enable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
+While CSRF protection is enabled by default, you can disable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
 
 <a name="edge-updates"></a>
 ### Bleeding edge updates

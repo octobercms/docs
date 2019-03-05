@@ -36,7 +36,7 @@ The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a sin
 <a name="partial-variables"></a>
 ## Passing variables to partials
 
-You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog post. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
+You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
 
     <div class="sidebar">
         {% partial "blog-posts" posts=posts %}

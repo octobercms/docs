@@ -367,18 +367,24 @@ The properties should be defined in the `defineProperties` method of the widget 
 <a name="report-widget-registration"></a>
 ### Report widget registration
 
-Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method should return an array containing the widget classes in the keys and widget label and context in the values. Example:
+Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
 
     public function registerReportWidgets()
     {
         return [
             'RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview' => [
                 'label'   => 'Google Analytics traffic overview',
-                'context' => 'dashboard'
+                'context' => 'dashboard',
+                'permissions' => [
+                    'rainlab.googleanalytics.widgets.traffic_overview',
+                ],
             ],
             'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources' => [
                 'label'   => 'Google Analytics traffic sources',
                 'context' => 'dashboard'
+                'permissions' => [
+                    'rainlab.googleanaltyics.widgets.traffic_sources',
+                ],
             ]
         ];
     }
