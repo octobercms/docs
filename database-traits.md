@@ -80,7 +80,7 @@ Slugs are meaningful codes that are commonly used in page URLs. To automatically
         protected $slugs = ['slug' => 'name'];
     }
 
-The `$slugs` property should be an array where the key is the destination column for the slug and the value is the source string used to generate the slug. In the above example, if the `name` column was set to **Cheyenne**, as a result the `slug` column would be set to **cheyenne**, **cheyenne-1**, or **cheyenne-2**, etc before the model is created.
+The `$slugs` property should be an array where the key is the destination column for the slug and the value is the source string used to generate the slug. In the above example, if the `name` column was set to **Cheyenne**, as a result the `slug` column would be set to **cheyenne**, **cheyenne-2**, or **cheyenne-3**, etc before the model is created.
 
 To generate a slug from multiple sources, pass another array as the source value:
 
