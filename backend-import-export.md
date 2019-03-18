@@ -4,6 +4,7 @@
 - [Configuring the behavior](#configuring-import-export)
     - [Import page](#import-page)
     - [Export page](#export-page)
+    - [Format options](#format-options)
 - [Import and export views](#import-export-views)
     - [Import view](#import-view)
     - [Export view](#export-view)
@@ -59,6 +60,7 @@ Option | Description
 **defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
 **import** | a configuration array or reference to a config file for the Import page.
 **export** | a configuration array or reference to a config file for the Export page.
+**formatOptions** | a configuration array or reference to a config file for the default CSV format options.
 
 <a name="import-page"></a>
 ### Import page
@@ -102,6 +104,26 @@ Option | Description
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the export is complete, optional.
 **useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
+
+<a name="format-options"></a>
+### Format options
+
+To override the default CSV format options add the following configuration to the YAML file:
+
+    formatOptions:
+        delimiter: ';'
+        enclosure: '"'
+        escape: '\'
+        encoding: 'UTF-8'
+
+The following configuration options (all optional) are supported for the format options:
+
+Option | Description
+------------- | -------------
+**delimiter** | Delimiter character.
+**enclosure** | Enclosure character.
+**escape** | Escape character.
+**encoding** | File encoding (only used for the import).
 
 <a name="import-export-views"></a>
 ## Import and export views
