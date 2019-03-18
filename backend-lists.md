@@ -374,7 +374,7 @@ Usually lists are displayed in the index [view](controllers-views-ajax/#introduc
 <a name="multiple-list-definitions"></a>
 ## Multiple list definitions
 
-The list behavior can support mulitple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
+The list behavior can support multiple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
 
     public $listConfig = [
         'templates' => 'config_templates_list.yaml',
