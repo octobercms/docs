@@ -60,7 +60,7 @@ Option | Description
 **defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
 **import** | a configuration array or reference to a config file for the Import page.
 **export** | a configuration array or reference to a config file for the Export page.
-**formatOptions** | a configuration array or reference to a config file for the default CSV format options.
+**defaultFormatOptions** | a configuration array or reference to a config file for the default CSV format options.
 
 <a name="import-page"></a>
 ### Import page
@@ -110,11 +110,11 @@ Option | Description
 
 To override the default CSV format options add the following configuration to the YAML file:
 
-    formatOptions:
+    defaultFormatOptions:
         delimiter: ';'
         enclosure: '"'
         escape: '\'
-        encoding: 'UTF-8'
+        encoding: 'utf-8'
 
 The following configuration options (all optional) are supported for the format options:
 
