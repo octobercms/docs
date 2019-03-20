@@ -174,7 +174,7 @@ public function __construct()
 }
 ```
 
-The `middleware()` method requires a callback with two arguments, `$request` providing the [request information](https://octobercms.com/docs/services/request-input#request-information) and `$response` providing the [response object](https://octobercms.com/docs/services/response-view#basic-responses). The callback should return the `$response` object with your modifications.
+The `middleware()` method requires a callback with two arguments, `$request` providing the [request information](../services/request-input#request-information) and `$response` providing the [response object](../services/response-view#basic-responses). The callback should return the `$response` object with your modifications.
 
 As an example, to add a `Test-Header` header to your response, you could do the following:
 
