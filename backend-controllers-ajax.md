@@ -9,6 +9,7 @@
 - [Using AJAX handlers](#ajax)
     - [Back-end AJAX handlers](#ajax-handlers)
     - [Triggering AJAX requests](#triggering-ajax-requests)
+- [Controller middleware](#controller-middleware)
 
 <a name="introduction"></a>
 ## Introduction
@@ -152,3 +153,65 @@ The AJAX request can be triggered with the data attributes API or the JavaScript
     </button>
 
 > **Note**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#generic-ajax-handlers) for more details.
+
+<a name="controller-middleware"></a>
+## Controller middleware
+
+You can define middleware in your Backend controllers, providing you with a convenient mechanism for making changes to the response of a HTTP request. For example, you may wish to specify a HTTP header for certain actions in your controller, or redirect users if they don't meet certain criteria.
+
+Controller middleware is executed after the request is processed by October CMS, but before the response is sent to the browser.
+
+To define middleware for your controller, you may specify it in the `__construct()` method of your Backend controller by calling the `middleware()` method.
+
+```php
+public function __construct()
+{
+    parent::__construct();
+
+    $this->middleware(function ($request, $response) {
+        // Middleware functionality
+    });
+}
+```
+
+The `middleware()` method requires a callback with two arguments, `$request` providing the [request information](../services/request-input#request-information) and `$response` providing the [response object](../services/response-view#basic-responses). The callback should return the `$response` object with your modifications.
+
+As an example, to add a `Test-Header` header to your response, you could do the following:
+
+```php
+public function __construct()
+{
+    parent::__construct();
+
+    $this->middleware(function ($request, $response) {
+        $response->headers->set('Test-Header', 'Test');
+        return $response;
+    });
+}
+```
+
+You can also control which actions will use your middleware by using the `only()` and `except()` modifiers. For example, to restrict the middleware to only run on the `index` action, you could do the following:
+
+```php
+public function __construct()
+{
+    parent::__construct();
+
+    $this->middleware(function ($request, $response) {
+        // Middleware functionality
+    })->only('index');
+}
+```
+
+Alternatively, to run the middleware on every action except the `index` action:
+
+```php
+public function __construct()
+{
+    parent::__construct();
+
+    $this->middleware(function ($request, $response) {
+        // Middleware functionality
+    })->except('index');
+}
+```

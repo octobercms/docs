@@ -246,7 +246,7 @@ To make the sub-menu items visible, you may [set the navigation context](../back
 <a name="registering-middleware"></a>
 ## Registering middleware
 
-To register a custom middleware you can use the following call inside your boot method to extend a Controller class that you wish to add the middleware to.
+To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
 
     public function boot()
     {
