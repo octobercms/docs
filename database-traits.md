@@ -105,7 +105,7 @@ Use the `slugAttributes` method to regenerate slugs when updating a model:
 <a name="sluggable-with-softdelete-trait"></a>
 ### Sluggable with SoftDelete trait
 
-By default soft deleted models are ignored when the slug is generated.
+By default, soft deleted models are ignored when the slug is generated.
 You might want to prevent slug duplication when recovering soft deleted models.
 
 Set the `$allowTrashedSlugs` attribute to `true` will prevent slug generation from ignoring soft deleted models.
@@ -474,8 +474,8 @@ Under these same conditions, when the primary model is restored, all the related
 <a name="soft-delete-with-sluggable-trait"></a>
 ### Soft Delete with Sluggable trait
 
-By default Sluggable trait will ignore soft deleted models when the slug is generated.
-In order to make the model restoration much painless [checkout the Sluggable section](#sluggable-with-softdelete-trait).
+By default, Sluggable trait will ignore soft deleted models when the slug is generated.
+In order to make the model restoration less painful [checkout the Sluggable section](#sluggable-with-softdelete-trait).
 
 <a name="nullable"></a>
 ## Nullable
