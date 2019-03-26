@@ -108,7 +108,7 @@ Use the `slugAttributes` method to regenerate slugs when updating a model:
 By default, soft deleted models are ignored when the slug is generated.
 You might want to prevent slug duplication when recovering soft deleted models.
 
-Set the `$allowTrashedSlugs` attribute to `true` will prevent slug generation from ignoring soft deleted models.
+Set the `$allowTrashedSlugs` attribute to `true` in order to take into account soft deleted records when generating new slugs.
 
     protected $allowTrashedSlugs = true;
 
