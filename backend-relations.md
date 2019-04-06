@@ -102,6 +102,7 @@ Option | Type | Description
 ------------- | ------------- | -------------
 **title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
+**filter** | List | a reference to filter scopes definition file, see [backend list filters](lists#list-filters).
 
 <a name="relationship-types"></a>
 ## Relationship types
