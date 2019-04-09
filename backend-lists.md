@@ -166,6 +166,7 @@ Option | Description
 **relation** | defines a model relationship column.
 **useRelationCount** | use the count of the defined `relation` as the value for this column. Default: false
 **cssClass** | assigns a CSS class to the column container.
+**headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
 
@@ -374,7 +375,7 @@ Usually lists are displayed in the index [view](controllers-views-ajax/#introduc
 <a name="multiple-list-definitions"></a>
 ## Multiple list definitions
 
-The list behavior can support mulitple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
+The list behavior can support multiple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
 
     public $listConfig = [
         'templates' => 'config_templates_list.yaml',
