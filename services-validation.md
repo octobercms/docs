@@ -505,6 +505,12 @@ Likewise, you may use the `*` character when specifying your validation messages
         ]
     ],
 
+You may also use "array notation" in your validation rules if you wish. These rules will be converted to "dot notation" automatically on validation.
+
+    $validator = Validator::make(Input::all(), [
+        'photos[profile]' => 'required|image',
+        'person[][email]' => 'email|unique:users',
+    ]);
 
 <a name="custom-error-messages"></a>
 ## Custom error messages
