@@ -464,6 +464,9 @@ Balloon selectors support three ways of defining the options, exactly like the [
     permissions:
         label: Permissions
         type: checkboxlist
+        # set to true to explicitly enable the "Select All", "Select None" options
+        # on lists that have <=10 items (>10 automatically enables it)
+        quickselect: true 
         options:
             open_account: Open account
             close_account: Close account
