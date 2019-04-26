@@ -466,7 +466,7 @@ Balloon selectors support three ways of defining the options, exactly like the [
         type: checkboxlist
         # set to true to explicitly enable the "Select All", "Select None" options
         # on lists that have <=10 items (>10 automatically enables it)
-        quickselect: true 
+        quickselect: true
         options:
             open_account: Open account
             close_account: Close account
@@ -673,7 +673,7 @@ Option | Description
 Option | Description
 ------------- | -------------
 **keyFrom** | the name of column to use in the relation used for key. Default: id.
-**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
+**nameFrom** | the column name to use in the relation used for displaying the name. Can use the dot notation to query a related model (e.g. use name from student model: student.name). It can use unlimited nesting such as relation.subrelation.subsubrelation.propertythatreturnsanobject.name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
