@@ -74,9 +74,13 @@ You can also use regular expressions to validate parameters. To add a validation
     ...
     url = "/blog/:post_name?|^[a-z0-9\-]+$" - this will match /blog/my-blog-post
 
-It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
+It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter. 
 
     url = "/blog/:category*/:slug"
+
+Wildcard parameters themselves can be made optional by preceding the asterisk with the `?` character however.
+
+    url = "/blog/:slug?*"
 
 For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brown/make/volkswagen/beetle/retro/edit` and extract the following parameter values:
 
