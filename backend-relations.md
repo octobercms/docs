@@ -85,6 +85,7 @@ Option | Type | Description
 **recordsPerPage** | List | maximum rows to display for each page.
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
 **scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the second parameter (`$query` is the first).
+**filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#list-filters).
 
 These configuration values can be specified only for the **view** options.
 
@@ -102,7 +103,6 @@ Option | Type | Description
 ------------- | ------------- | -------------
 **title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
-**filter** | List | a reference to filter scopes definition file, see [backend list filters](lists#list-filters).
 
 <a name="relationship-types"></a>
 ## Relationship types
@@ -294,6 +294,7 @@ Sometimes you may wish to modify the default relation behavior and there are sev
 - [Extending the view widget](#extend-view-widget)
 - [Extending the manage widget](#extend-manage-widget)
 - [Extending the pivot widget](#extend-pivot-widget)
+- [Extending the filter widgets](#extend-filter-widgets)
 - [Extending refresh results](#extend-refresh-results)
 
 <a name="extend-relation-config"></a>
@@ -378,6 +379,23 @@ Provides an opportunity to manipulate the pivot widget of your relation.
             
         // manipulate widget as needed
     }
+
+<a name="extend-filter-widgets"></a>
+### Extending the filter widget
+
+There are two filter widgets that may be extended using the following methods, one for the view mode and one for the manage mode of the `RelationController`.
+
+    public function relationExtendViewFilterWidget($widget, $field, $model)
+    {
+        // Extends the view filter widget
+    }
+    
+    public function relationExtendManageFilterWidget($widget, $field, $model)
+    {
+        // Extends the manage filter widget
+    }
+    
+Examples on how to add scopes programmatically to the widgets can be found in the [ListController documentation](/docs/backend/lists#extend-filter-scopes).
     
 <a name="extend-refresh-results"></a>
 ### Extending the refresh results
