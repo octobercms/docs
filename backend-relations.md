@@ -381,7 +381,7 @@ Provides an opportunity to manipulate the pivot widget of your relation.
     }
 
 <a name="extend-filter-widgets"></a>
-### Extending the filter widget
+### Extending the filter widgets
 
 There are two filter widgets that may be extended using the following methods, one for the view mode and one for the manage mode of the `RelationController`.
 
@@ -395,7 +395,7 @@ There are two filter widgets that may be extended using the following methods, o
         // Extends the manage filter widget
     }
     
-Examples on how to add scopes programmatically to the widgets can be found in the [ListController documentation](/docs/backend/lists#extend-filter-scopes).
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](/docs/backend/lists#extend-filter-scopes).
     
 <a name="extend-refresh-results"></a>
 ### Extending the refresh results
