@@ -337,7 +337,7 @@ There are various native field types that can be used for the **type** setting. 
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines `options` directly in the YAML file:
+`dropdown` - renders a dropdown with specified options. There are 5 ways to provide the drop-down options. The first method defines `options` directly in the YAML file:
 
     status_type:
         label: Blog Post Status
@@ -384,6 +384,22 @@ Supplying the dropdown options to the model class:
     public function listStatuses($fieldName, $value, $formData)
     {
         return ['published' => 'Published', ...];
+    }
+
+The fifth method is particularly useful when you want to define the dropdown options in a class different to the model class associated with the form or as a static method within the form's model class itself. You can use this method by specifiying the class name with the namespace followed by the method name which should be defined as a public, static method in either a model class or in a custom class and it should return an array of options in the format **key => label**.
+
+    colors:
+        label: Colors
+        type: dropdown
+        options:
+          - Acme\Demo\Classes\ColorManager
+          - getAvailableColors
+
+Supplying the dropdown options as a static method:
+
+    public static function getAvailableColors()
+    {
+        return ['red' => 'Red', 'blue' => 'Blue' ...];
     }
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
@@ -466,7 +482,7 @@ Balloon selectors support three ways of defining the options, exactly like the [
         type: checkboxlist
         # set to true to explicitly enable the "Select All", "Select None" options
         # on lists that have <=10 items (>10 automatically enables it)
-        quickselect: true 
+        quickselect: true
         options:
             open_account: Open account
             close_account: Close account
