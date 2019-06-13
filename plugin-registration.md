@@ -224,7 +224,7 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/posts'),
-                        'permissions' => ['acme.blog.access_posts']
+                        'permissions' => ['acme.blog.access_posts'],
                         'counter'     => 2,
                         'counterLabel'=> 'Label describing a static menu counter',
                     ],
