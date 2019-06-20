@@ -381,7 +381,7 @@ Plugins can register report widgets by overriding the `registerReportWidgets` me
             ],
             'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources' => [
                 'label'   => 'Google Analytics traffic sources',
-                'context' => 'dashboard'
+                'context' => 'dashboard',
                 'permissions' => [
                     'rainlab.googleanaltyics.widgets.traffic_sources',
                 ],
