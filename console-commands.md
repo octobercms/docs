@@ -10,6 +10,7 @@
 - [Plugin management](#plugin-commands)
     - [Install plugin](#plugin-install-command)
     - [Refresh plugin](#plugin-refresh-command)
+    - [Rollback plugin](#plugin-rollback-command)
     - [List plugin](#plugin-list-command)
     - [Disable plugin](#plugin-disable-command)
     - [Enable plugin](#plugin-enable-command)
@@ -123,6 +124,14 @@ October includes a number of commands for managing plugins.
 `plugin:refresh` - destroys the plugin's database tables and recreates them. This command is useful for development.
 
     php artisan plugin:refresh AuthorName.PluginName
+
+
+<a name="plugin-rollback-command"></a>
+### Rollback plugin
+
+`plugin:rollback` - Restore a plugin version to a previously defined state. The second parameter version is optional, if in the past, it returns to a version after the informed, if not passed, back to the initial version of the plugin.
+
+    php artisan plugin:rollback AuthorName.PluginName 1.2.3
 
 <a name="plugin-list-command"></a>
 ### List Plugins
