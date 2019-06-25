@@ -4,6 +4,7 @@
 - [Comparison to traits](#compare-traits)
 - [Extending constructors](#constructor-extension)
 - [Usage example](#usage-example)
+- [Summary](#summary)
 
 <a name="introduction"></a>
 ## Introduction
@@ -404,3 +405,50 @@ Remember:
 - When using the `ExtensionTrait` the methods from `ExtensionBase` should be applied to the class.
 
 - When using the `ExtendableTrait` the methods from `Extendable` should be applied to the class.
+
+<a name="summary"></a>
+## Summary
+
+- Added by OctoberCMS
+- Used to add new functionality to a class.
+- Behavior is like an `extension` that can be added to an exisiting `extendable` class to extend it.
+- They are like PHP traits, but are better.
+- Extend `\October\Rain\Extension\ExtensionBase` to declare your class as a `Behavior`.
+- Implementing behavior means adding the functionality of that behavior to the class.
+- The class wanting to -implement- a `Behavior` needs to 
+    - Extend the `\October\Rain\Extension\Extendable` class
+    - Add the `$implement` property
+- `$implement` is an array of behaviors.
+- It's possible to dynamically extend the constructor of an existing `Extendable` class.
+- It's possible to add methods and properties to `Extendable` classes using:
+  	- `addDynamicProperty`
+  	- `addDynamicMethod`
+- By implementing a behavior, we add lots of methods and properties to the class at once.
+- By calling `addDynamicProperty` or `addDynamicMethod` we only add one at a time.
+	- Interestingly, it's possible to add multiple methods and properties at once using `addDynamicProperty`. How? 
+		- By adding the `$implement` property to a class
+		- Or if the class already has a `$implement` property, by adding a new behavior to that array
+
+The following code checks if the `UserController` class has the `$implement` property and if not adds it, then adds a new behavior to that array. The merge is used because there might be already other behaviors added to the class. 
+```php
+UsersController::extend(function($controller) {
+
+    // Implement behavior if not already implemented
+    if (!$controller->isClassExtendedWith('Backend.Behaviors.RelationController')) {
+        $controller->implement[] = 'Backend.Behaviors.RelationController';
+    }
+
+    // Define property if not already defined
+    if (!isset($controller->relationConfig)) {
+        $controller->addDynamicProperty('relationConfig');
+    }
+
+    // Splice in configuration safely
+    $myConfigPath = '$/myvendor/myplugin/controllers/users/config_relation.yaml';
+
+    $controller->relationConfig = $controller->mergeConfig(
+        $controller->relationConfig,
+        $myConfigPath
+    );
+}
+```
