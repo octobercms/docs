@@ -217,7 +217,7 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                 // Set counter to false to prevent the default behaviour of the main menu counter being a sum of
                 // its side menu counters
                 'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
-                'counterLabel'=> 'Label describing a dynamic menu counter'
+                'counterLabel'=> 'Label describing a dynamic menu counter',
 
                 'sideMenu' => [
                     'posts' => [
