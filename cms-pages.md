@@ -129,7 +129,7 @@ The next example is more complicated. It shows how to load a blog post collectio
         {% endfor %}
     </ul>
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup). During the overall sequence, the handlers are executed as described in the [Dynamic layouts](layouts#dynamic-layouts) article.
+The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 <a name="life-cycle-response"></a>
 ### Sending a custom response
