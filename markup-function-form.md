@@ -58,6 +58,11 @@ There are some special options that can also be used alongside the attributes.
 
     {{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
 
+To update component partials a variable must first be set like so:
+
+    {% set updateAttrib = "'" ~ __SELF__ ~ "::statistics': '#statsPanel'" %}
+    {{ form_ajax('onUpdate', { update: updateAttrib }) }}
+
 The function support the following options:
 
 Option | Description
