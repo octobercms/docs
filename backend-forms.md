@@ -613,7 +613,9 @@ Option | Description
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 **firstDay** | the first day of the week. Default: 0 (Sunday).
 **showWeekNumber** | show week numbers at head of row. Default: false
-**ignoreTimezone** | display datetime exactly as it is stored, ignoring October's and the backend user's specified timezones. If you use `mode: date`, you would probably need to set this to `true` to avoid the value of date being saved into database incorrectly.
+**ignoreTimezone** | display datetime exactly as it is stored, ignoring October's and the backend user's specified timezones.
+
+> **Note:** If you are using `mode: date`, you may also want to set `ignoreTimezone: true` as the differences in timezones can cause dates stored in the database to become off by one day on either end depending on the difference between the app timezone and the backend timezone of the user at the time of entry.
 
 <a name="widget-fileupload"></a>
 ### File upload
