@@ -10,6 +10,7 @@
     - [Field options](#form-field-options)
 - [Available field types](#field-types)
 - [Form widgets](#form-widgets)
+- [Available span types](#span-types)
 - [Form views](#form-views)
     - [Create view](#form-create-view)
     - [Update view](#form-update-view)
@@ -239,7 +240,7 @@ Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
-**span** | aligns the form field to one side. Options: auto, left, right, storm, full. Default: full. The parameter `storm` allows you to display the form as a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
+**span** | aligns the form field to one side. Options: auto, left, right, storm, full, third, quarter and three-quarters. Default: full. The parameter `storm` allows you to display the form as a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
@@ -260,6 +261,26 @@ Option | Description
 **required** | places a red asterisk next to the field label to indicate it is required (make sure to setup validation on the model as this is not enforced by the form controller).
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
+
+<a name="span-types"></a>
+## Available span types
+
+### One column layout (100%)
+`span: full`
+
+### Normal two column layout (50%)
+`span: left`
+`span: right`
+`span: auto`
+
+### Three column layout (33%)
+`span: third`
+
+### Four column layout (25%)
+`span: quarter`
+
+### Three-fourths column layout (75%)
+`span: three-quarters`
 
 <a name="field-types"></a>
 ## Available field types
