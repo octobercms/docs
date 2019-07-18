@@ -1142,12 +1142,12 @@ The `where` method filters the collection by a given key / value pair:
     ]
     */
 
-The `where` method uses strict comparisons when checking item values. Use the [`whereLoose`](#where-loose) method to filter using "loose" comparisons.
+The `where` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereStrict`](#method-wherestrict) method to filter using "strict" comparisons.
 
-<a name="method-whereloose"></a>
-#### `whereLoose()` {.collection-method}
+<a name="method-wherestrict"></a>
+#### `whereStrict()` {.collection-method}
 
-This method has the same signature as the [`where`](#method-where) method; however, all values are compared using "loose" comparisons.
+This method has the same signature as the [`where`](#method-where) method; however, all values are compared using "strict" comparisons.
 
 <a name="method-zip"></a>
 #### `zip()` {.collection-method}
