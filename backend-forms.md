@@ -9,6 +9,7 @@
     - [Tab options](#form-tab-options)
     - [Field options](#form-field-options)
 - [Available field types](#field-types)
+    - [Downscaling rules for span types](#span-types-downscaling)
 - [Form widgets](#form-widgets)
 - [Available span types](#span-types)
 - [Form views](#form-views)
@@ -203,7 +204,8 @@ For each tab definition, namely `tabs` and `secondaryTabs`, you can specify thes
 
 Option | Description
 ------------- | -------------
-**stretch** | specifies if this tab stretches to fit the parent height.
+**stretch** | this will stretch the form field box to cover the height of the rest of the form field area, **make sure there are no other form fields below it as it needs to be the last form field**, otherwise you will see overflow errors.
+**grow** | this will make the form field have dynamic height and grow when more content is added, it can be useful for certain fields like the `textarea` and `rich editor`.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
 **icons** | assign icons to tabs using tab names as the key.
 **cssClass** | assigns a CSS class to the tab container.
@@ -265,22 +267,68 @@ Option | Description
 <a name="span-types"></a>
 ## Available span types
 
-### One column layout (100%)
-`span: full`
+![image](https://github.com/octobercms/docs/blob/master/images/span-types.png?raw=true) {.img-responsive .frame}
 
-### Normal two column layout (50%)
-`span: left`
-`span: right`
-`span: auto`
+API field position name | Percentage | Position
+--- | --- | ---
+full | 100% | whole width of conatiner
+left | 50% | left
+right | 50% | right
+auto | 50% | various
+3-1 | 33% | left
+3-2 | 33% | middle
+3-3 | 33% | right
+4-1 | 25% | left
+4-2 | 25% | middle left
+4-3 | 25% | middle right
+4-4 | 25% | right
+75-left | 75% | left
+25-right | 25% | right
+75-right | 75% | right
+25-left | 25% | left
 
-### Three column layout (33%)
-`span: third`
+<a name="span-types-downscaling"></a>
+### Downscaling rules for span types
 
-### Four column layout (25%)
-`span: quarter`
+October CMS takes care of everything when it comes to downscaling smaller screen sizes. The following media query rules are used:
 
-### Three-fourths column layout (75%)
-`span: three-quarters`
+API field position name | Media Query | Number of Fields and width values
+--- | --- | ---
+full | any size | 1 field (100% width)
+left | above 769px |  2 fields (50% width)
+left | below 769px | 1 field (100% width)
+right | above 769px |  2 fields (50% width)
+right | below 769px | 1 field (100% width)
+auto | above 769px |  2 fields (50% width)
+auto | below 769px | 1 field (100% width)
+4-1 | above 1200px | 4 fields (25% width)
+4-2 | above 1200px | 4 fields (25% width)
+4-3 | above 1200px | 4 fields (25% width)
+4-4 | above 1200px | 4 fields (25% width)
+4-1 | 769px - 1200px | 2 fields (50% width)
+4-2 | 769px - 1200px | 2 fields (50% width)
+4-3 | 769px - 1200px | 2 fields (50% width)
+4-4 | 769px - 1200px | 2 fields (50% width)
+4-1 | below 769px | 1 field (100% width)
+4-2 | below 769px | 1 field (100% width)
+4-3 | below 769px | 1 field (100% width)
+4-4 | below 769px | 1 field (100% width)
+3-1 | above 769px | 3 fields (33% width)
+3-2 | above 769px | 3 fields (33% width)
+3-3 | above 769px | 3 fields (33% width)
+3-1 | below 769px | 1 field (100% width)
+3-2 | below 769px | 1 field (100% width)
+3-3 | below 769px | 1 field (100% width)
+75-left | above 769px | Allows 2 fields (75% and 25% widths)
+25-right | above 769px | Allows 2 fields (75% and 25% widths)
+75-right | above 769px | Allows 2 fields (25% and 25% widths)
+25-left | above 769px | Allows 2 fields (25% and 75% widths)
+75-left | below 769px | 1 field (100% width)
+25-right | below 769px | 1 field (100% width)
+75-right | below 769px | 1 field (100% width)
+25-left | below 769px | 1 field (100% width)
+
+Note: The quarter fields do not ajust into `33%` because the output would be all over the place and so is resized down to `50%` and `100%`, to fill the whole width of the container in each row in the form area. Likewise, the third fields do not adjust down to `50%`, instead they down size from `33%` into `100%`,  to fill the whole width of the container in each row in the form area.
 
 <a name="field-types"></a>
 ## Available field types
