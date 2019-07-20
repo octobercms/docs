@@ -8,6 +8,7 @@
 - [Defining form fields](#form-fields)
     - [Tab options](#form-tab-options)
     - [Field options](#form-field-options)
+    - [Dynamic heights](#dynamic-heights)
     - [Available span types](#span-types)
     - [Downscaling rules for span types](#span-types-downscaling)	
 - [Available field types](#field-types)
@@ -254,8 +255,7 @@ Option | Description
 **readOnly** | prevents the field from being modified. Options: true, false.
 **disabled** | prevents the field from being modified and excludes it from the saved data. Options: true, false.
 **hidden** | hides the field from the view and excludes it from the saved data. Options: true, false.
-**stretch** | this will stretch the form field box to cover the height of the rest of the form field area, **make sure there are no other form fields below it as it needs to be the last form field**, otherwise you will see overflow errors. We recommend you using this feature on multiline inputs like `richeditor`, `markdown`, `textarea`, `partial` or `hint`.
-**grow** | this will make the form field have dynamic height and grow when more content is added. We recommend you using this feature on multiline inputs like `richeditor`, `markdown` or `textarea`.
+**dynamic** | allows you to make multiline form fields have dynamic heights, the two options are `stretch` and `grow`, for more information go to the [dynamic heights](#dynamic-heights).
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using [trigger events](#field-trigger-events).
@@ -263,6 +263,25 @@ Option | Description
 **required** | places a red asterisk next to the field label to indicate it is required (make sure to setup validation on the model as this is not enforced by the form controller).
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
+
+<a name="dynamic-heights"></a>
+### Dynamic heights
+
+![image](https://github.com/octobercms/docs/blob/master/images/dynamic-heights.gif?raw=true) {.img-responsive .frame}
+
+The above animated image shows the different dynamic height for the feature `stretch` and `grow`.
+
+    # ===================================
+    #  Dynamic height Config
+    # ===================================
+
+    dynamic: grow
+    dynmic: stretch
+
+Option | Description
+------------- | -------------
+**stretch** | this will stretch the form field box to cover the height of the rest of the form field area, **make sure there are no other form fields below it as it needs to be the last form field**, otherwise you will see overflow errors. We recommend you using this feature on multiline inputs like `richeditor`, `markdown`, `textarea`, `partial` or `hint`.
+**grow** | this will make the form field have dynamic height and grow when more content is added. We recommend you using this feature on multiline inputs like `richeditor`, `markdown` or `textarea`.
 
 <a name="span-types"></a>
 ### Available span types
