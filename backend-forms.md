@@ -276,7 +276,7 @@ The above animated image shows the different dynamic height for the feature `str
     # ===================================
 
     dynamic: grow
-    dynmic: stretch
+    dynamic: stretch
 
 Option | Description
 ------------- | -------------
