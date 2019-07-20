@@ -254,8 +254,8 @@ Option | Description
 **readOnly** | prevents the field from being modified. Options: true, false.
 **disabled** | prevents the field from being modified and excludes it from the saved data. Options: true, false.
 **hidden** | hides the field from the view and excludes it from the saved data. Options: true, false.
-**stretch** | this will stretch the form field box to cover the height of the rest of the form field area, **make sure there are no other form fields below it as it needs to be the last form field**, otherwise you will see overflow errors.
-**grow** | this will make the form field have dynamic height and grow when more content is added, it can be useful for certain fields like the `textarea` and `rich editor`.
+**stretch** | this will stretch the form field box to cover the height of the rest of the form field area, **make sure there are no other form fields below it as it needs to be the last form field**, otherwise you will see overflow errors. We recommend you using this feature on multiline inputs like `richeditor`, `markdown`, `textarea`, `partial` or `hint`.
+**grow** | this will make the form field have dynamic height and grow when more content is added. We recommend you using this feature on multiline inputs like `richeditor`, `markdown` or `textarea`.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using [trigger events](#field-trigger-events).
