@@ -242,7 +242,7 @@ Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
-**span** | aligns the form field to one side. Options: auto, left, right, storm, full, 3-1, 3-2, 3-3, 4-1, 4-2, 4-3, 4-4, 75-left, 75-right, 25-left and 25-right. Default: full. The parameter `storm` allows you to display the form as a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
+**span** | aligns the form field to one side. Options: auto, left, right, storm, full, third, quarter and three-quarters. Default: full. The parameter `storm` allows you to display the form as a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
