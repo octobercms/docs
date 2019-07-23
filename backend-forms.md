@@ -291,8 +291,6 @@ Right now it's not possible to add `stretch` to YAML for `partial` and `hint` fi
 
 Add `stretch` to your class attribute for the container in your hint or partial file and October will do all the rest for you.
 
-I will add a note of this in the doc's.
-
 <a name="span-types"></a>
 ### Available span types
 
