@@ -283,6 +283,16 @@ Option | Description
 **stretch** | this will stretch the form field box to cover the height of the rest of the form field area, **make sure there are no other form fields below it as it needs to be the last form field**, otherwise you will see overflow errors. We recommend you using this feature on multiline inputs like `richeditor`, `markdown`, `textarea`, `partial` or `hint`.
 **grow** | this will make the form field have dynamic height and grow when more content is added. We recommend you using this feature on multiline inputs like `richeditor`, `markdown` or `textarea`.
 
+Right now it's not possible to add `Stretch` to YAML for `partial` and `hint` fields, due to the code setup. Instead all you need to do is the following:
+
+    <div class="stretch">
+        ..
+    </div>
+
+Add `stretch` to your class attribute for the container in your hint or partial file and October will do all the rest for you.
+
+I will add a note of this in the doc's.
+
 <a name="span-types"></a>
 ### Available span types
 
@@ -294,17 +304,9 @@ full | 100% | whole width of conatiner
 left | 50% | left
 right | 50% | right
 auto | 50% | various
-3-1 | 33% | left
-3-2 | 33% | middle
-3-3 | 33% | right
-4-1 | 25% | left
-4-2 | 25% | middle left
-4-3 | 25% | middle right
-4-4 | 25% | right
-75-left | 75% | left
-25-right | 25% | right
-75-right | 75% | right
-25-left | 25% | left
+third | 33% | various
+quarter | 25% | various
+three-quarters | 75% | various
 
 <a name="span-types-downscaling"></a>
 ### Downscaling rules for span types
@@ -320,34 +322,12 @@ right | above 769px |  2 fields (50% width)
 right | below 769px | 1 field (100% width)
 auto | above 769px |  2 fields (50% width)
 auto | below 769px | 1 field (100% width)
-4-1 | above 1200px | 4 fields (25% width)
-4-2 | above 1200px | 4 fields (25% width)
-4-3 | above 1200px | 4 fields (25% width)
-4-4 | above 1200px | 4 fields (25% width)
-4-1 | 769px - 1200px | 2 fields (50% width)
-4-2 | 769px - 1200px | 2 fields (50% width)
-4-3 | 769px - 1200px | 2 fields (50% width)
-4-4 | 769px - 1200px | 2 fields (50% width)
-4-1 | below 769px | 1 field (100% width)
-4-2 | below 769px | 1 field (100% width)
-4-3 | below 769px | 1 field (100% width)
-4-4 | below 769px | 1 field (100% width)
-3-1 | above 769px | 3 fields (33% width)
-3-2 | above 769px | 3 fields (33% width)
-3-3 | above 769px | 3 fields (33% width)
-3-1 | below 769px | 1 field (100% width)
-3-2 | below 769px | 1 field (100% width)
-3-3 | below 769px | 1 field (100% width)
-75-left | above 769px | Allows 2 fields (75% and 25% widths)
-25-right | above 769px | Allows 2 fields (75% and 25% widths)
-75-right | above 769px | Allows 2 fields (25% and 25% widths)
-25-left | above 769px | Allows 2 fields (25% and 75% widths)
-75-left | below 769px | 1 field (100% width)
-25-right | below 769px | 1 field (100% width)
-75-right | below 769px | 1 field (100% width)
-25-left | below 769px | 1 field (100% width)
-
-Note: The quarter fields do not ajust into `33%` because the output would be all over the place and so is resized down to `50%` and `100%`, to fill the whole width of the container in each row in the form area. Likewise, the third fields do not adjust down to `50%`, instead they down size from `33%` into `100%`,  to fill the whole width of the container in each row in the form area.
+quarter | above 769px | 4 fields (25% width)
+quarter | below 769px | 1 field (100% width)
+third | above 769px | 3 fields (33% width)
+third | below 769px | 1 field (100% width)
+three-quarters | above 769px | Allows 2 different sized fields (75% width and a space for a quarter size)
+three-quarters | below 769px | 1 field (100% width)
 
 <a name="field-types"></a>
 ## Available field types
