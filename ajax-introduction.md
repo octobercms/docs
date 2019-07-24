@@ -30,14 +30,27 @@ The AJAX framework is optional in your [CMS theme](../cms/themes), to use the li
     # ===================================
 
     {% framework %}
+    {% framework optimized %}
     {% framework extras %}
+    {% framework extras_optimized %}
     {% framework jquery %}
+    {% framework jquery_optimized %}
 
 Field | Description
 ------------- | -------------
-**framework** | loads the file `framework.js`.
-**framework extras** | the `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators. It will load the following asset files: `framework.js`, `framework.extras.js` and `framework.extras.css`.
-**framework jquery** | this will load the latest version of jQuery and jQuery Migrate (adding backwards compatibility). It also includes a `Subresource Integrity (SRI)` attribute, this is a security feature that allows your browser to distinguish if the files being retrieved have been maliciously altered.
+**framework** | loads the `framework.js` using the `sync` method.
+**framework optimized** | loads the `framework.js` using a `preload`, `async` and priority low with the new `importance="low"` attribute.
+**framework extras** | the `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators. It will load the following asset files: `framework.js`, `framework.extras.js` and `framework.extras.css` using a `sync` method.
+**framework extras_optimized** | loads the same files as **framework extras**, but using a `preload`, `async` and priority low with the new `importance="low"` attribute.
+**framework jquery** | this will load the latest version of jQuery and jQuery Migrate (adding backwards compatibility) using the `sync` method. It also includes a `Subresource Integrity (SRI)` attribute, this is a security feature that allows your browser to distinguish if the files being retrieved have been maliciously altered.
+**framework jquery_optimized** | loads the same files as **framework jquery**, but using a `preload`, `sync` and priority high with the new `importance="high"` attribute.
+
+The most common method setup is adding the following to the bottom of the web page:
+
+    {% framework extras_optimized %}
+    {% scripts %}
+
+You can inject assets on pages or [layouts](layout), using the [{% styles %}](../markup/tag-styles) and/or [{% scripts %}](../markup/tag-scripts) tags.
 
 <a name="how-ajax-works"></a>
 ## How AJAX requests work
