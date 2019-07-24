@@ -31,13 +31,11 @@ The AJAX framework is optional in your [CMS theme](../cms/themes), to use the li
 
     {% framework %}
     {% framework extras %}
-    {% framework jquery %}
 
 Field | Description
 ------------- | -------------
 **framework** | loads the file `framework.js`.
 **framework extras** | the `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators. It will load the following asset files: `framework.js`, `framework.extras.js` and `framework.extras.css`.
-**framework jquery** | this will load the latest version of jQuery and jQuery Migrate (adding backwards compatibility). It also includes a `Subresource Integrity (SRI)` attribute, this is a security feature that allows your browser to distinguish if the files being retrieved have been maliciously altered.
 
 <a name="how-ajax-works"></a>
 ## How AJAX requests work

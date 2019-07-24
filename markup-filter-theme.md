@@ -36,7 +36,7 @@ The following aliases are supported:
 
 Alias | Description
 ------------- | -------------
-`@jquery` | Reference to the jQuery library (latest available version) used in the back-end. (JavaScript)
+`@jquery` | Reference to the jQuery library (v3.4.0) used in the back-end. (JavaScript)
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
 `@framework.extras.js` | AJAX framework extras, (JavaScript)
