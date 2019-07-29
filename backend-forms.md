@@ -528,16 +528,17 @@ There are various form widgets included as standard, although it is common for p
 <div class="content-list collection-method-list" markdown="1">
 - [Code editor](#widget-codeeditor)
 - [Color picker](#widget-colorpicker)
+- [Data table](#widget-datatable)
 - [Date picker](#widget-datepicker)
 - [File upload](#widget-fileupload)
-- [Record finder](#widget-recordfinder)
+- [Markdown editor](#widget-markdowneditor)
 - [Media finder](#widget-mediafinder)
+- [Nested Form](#widget-nestedform)
+- [Record finder](#widget-recordfinder)
 - [Relation](#widget-relation)
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
-- [Markdown editor](#widget-markdowneditor)
 - [Tag list](#widget-taglist)
-- [Nested Form](#widget-nestedform)
 </div>
 
 <a name="widget-codeeditor"></a>
@@ -592,6 +593,89 @@ Supplying the available colors in the model class:
 
 If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors.
 
+<a name="widget-datatable"></a>
+### Data table
+
+`datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.
+
+> **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
+
+    datatable:
+        adding: true
+        btnAddRowLabel: Add Row Above
+        btnAddRowBelowLabel: Add Row Below
+        btnDeleteRowLabel: Delete Row
+        columns: []
+        deleting: true
+        dynamicHeight: true
+        fieldName: null
+        height: false
+        keyFrom: id
+        postbackHandlerName: null
+        recordsPerPage: false
+        searching: false
+        toolbar: []
+
+#### Table configuration
+
+The following lists the configuration values of the data table widget itself.
+
+Option | Description
+------ | -----------
+**adding** | allow records to be added to the data table. Default: `true`.
+**btnAddRowLabel** | defines a custom label for the "Add Row Above" button.
+**btnAddRowBelowLabel** | defines a custom label for the "Add Row Below" button.
+**btnDeleteRowLabel** | defines a custom label for the "Delete Row" button.
+**columns** | an array representing the column configuration of the data table. See the *Column configuration* section below.
+**deleting** | allow records to be deleted from the data table. Default: `false`.
+**dynamicHeight** | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
+**fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
+**height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
+**keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`.
+**postbackHandlerName** | defines a custom post-back handler to use when saving the data from the data table.
+**recordsPerPage** | the number of records to show per page. If set to `false`, the pagination will be disabled.
+**searching** | allow records to be searched via a search box. Default: `false`.
+**toolbar** | an array representing the toolbar configuration of the data table.
+
+#### Column configuration
+
+The data table widget allows for the specification of columns as an array via the `columns` configuration variable. Each column should use the field name as a key, and the following configuration variables to set up the field.
+
+Example:
+
+    columns:
+        id:
+            type: string
+            title: ID
+            validation:
+                integer:
+                    message: Please enter a number
+        name:
+            type: string
+            title: Name
+
+
+Option | Description
+------ | -----------
+**type** | the input type for this column's cells. Must be one of the following: `string`, `checkbox`, `dropdown` or `autocomplete`.
+**options** | for `dropdown` and `autocomplete` columns only - this specifies the AJAX handler that will return the available options, as an array. The array key is used as the value of the option, and the array value is used as the option label.
+**readOnly** | whether this column is read-only. Default: `false`.
+**title** | defines the column's title.
+**validation** | an array specifying the validation for the content of the column's cells. See the *Column validation* section below.
+**width** | defines the width of the column, in pixels.
+
+#### Column validation
+
+Column cells can be validated against the below types of validation. Validation should be specified as an array, with the type of validation used as a key, and an optional message specified as the `message` attrbute for that validation.
+
+Validation | Description
+---------- | -----------
+**float** | Validates the data as a float. An optional boolean `allowNegative` attribute can be provided, allowing for negative float numbers.
+**integer** | Validates the data as an integer. An optional boolean `allowNegative` attribute can be provided, allowing for negative integers.
+**length** | Validates the data to be of a certain length. An integer `min` and `max` attribute must be provided, representing the minimum and maximum number of characters that must be entered.
+**regex** | Validates the data against a regular expression. A string `pattern` attribute must be provided, defining the regular expression to test the data against.
+**required** | Validates that the data must be entered before saving.
+
 <a name="widget-datepicker"></a>
 ### Date picker
 
@@ -645,6 +729,83 @@ Option | Description
 **thumbOptions** | options to pass to the thumbnail generating method for the file
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
+<a name="widget-markdowneditor"></a>
+### Markdown editor
+
+`markdown` - renders a basic editor for markdown formatted text.
+
+    md_content:
+        type: markdown
+        size: huge
+        mode: split
+
+Option | Description
+------------- | -------------
+**mode** | the expected view mode, either tab or split. Default: tab.
+
+<a name="widget-mediafinder"></a>
+### Media finder
+
+`mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
+
+    background_image:
+        label: Background image
+        type: mediafinder
+        mode: image
+
+Option | Description
+------------- | -------------
+**mode** | the expected file type, either file or image. Default: file.
+**prompt** | text to display when there is no item selected. The `%s` character represents the media manager icon.
+**imageWidth** | if using image type, the preview image will be displayed to this width, optional.
+**imageHeight** | if using image type, the preview image will be displayed to this height, optional.
+
+> **Note:** Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library.
+
+<a name="widget-nestedform"></a>
+### Nested Form
+`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
+
+> **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
+
+    content:
+        type: nestedform
+        usePanelStyles: false
+        form:
+            fields:
+                added_at:
+                    label: Date added
+                    type: datepicker
+                details:
+                    label: Details
+                    type: textarea
+                title:
+                    label: This the title
+                    type: text
+            tabs:
+                meta_title:
+                    lable: Meta Title
+                    tab: SEO
+                color:
+                    label: Color
+                    type: colorpicker
+                    tab: Design
+            secondaryTabs:
+                is_active:
+                    label: Active
+                    type: checkbox
+                logo:
+                    label: Logo
+                    type: mediafinder
+                    mode: image
+
+A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has the structure of your form definition. It's even possible to use nested forms inside a nested form.
+
+Option | Description
+------------- | -------------
+**form**  | same as in [form definition](#form-fields)
+**usePanelStyles** | defines if a panel like look is applied or not (defaults true)
+
 <a name="widget-recordfinder"></a>
 ### Record finder
 
@@ -682,25 +843,6 @@ Option | Description
 **searchScope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 **useRelation** | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
 **modelClass** | Class of the model to use for listing records when useRelation = false
-
-<a name="widget-mediafinder"></a>
-### Media finder
-
-`mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
-
-    background_image:
-        label: Background image
-        type: mediafinder
-        mode: image
-
-Option | Description
-------------- | -------------
-**mode** | the expected file type, either file or image. Default: file.
-**prompt** | text to display when there is no item selected. The `%s` character represents the media manager icon.
-**imageWidth** | if using image type, the preview image will be displayed to this width, optional.
-**imageHeight** | if using image type, the preview image will be displayed to this height, optional.
-
-> **Note:** Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library.
 
 <a name="widget-relation"></a>
 ### Relation
@@ -825,20 +967,6 @@ The available toolbar buttons are:
 
 > **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
 
-<a name="widget-markdowneditor"></a>
-### Markdown editor
-
-`markdown` - renders a basic editor for markdown formatted text.
-
-    md_content:
-        type: markdown
-        size: huge
-        mode: split
-
-Option | Description
-------------- | -------------
-**mode** | the expected view mode, either tab or split. Default: tab.
-
 <a name="widget-taglist"></a>
 ### Tag list
 
@@ -871,50 +999,6 @@ Option | Description
 **options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options` method. Optional.
 **nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name
 **useKey** | use the key instead of value for saving and reading data. Default: false
-
-<a name="widget-nestedform"></a>
-### Nested Form
-`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
-
-> **NOTE:** In order to use this with a model it should be attached to a `jsonable` or other attribute that can handle storing array data
-
-    content:
-        type: nestedform
-        usePanelStyles: false
-        form:
-            fields:
-                added_at:
-                    label: Date added
-                    type: datepicker
-                details:
-                    label: Details
-                    type: textarea
-                title:
-                    label: This the title
-                    type: text
-            tabs:
-                meta_title:
-                    lable: Meta Title
-                    tab: SEO
-                color:
-                    label: Color
-                    type: colorpicker
-                    tab: Design
-            secondaryTabs:
-                is_active:
-                    label: Active
-                    type: checkbox
-                logo:
-                    label: Logo
-                    type: mediafinder
-                    mode: image
-
-A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has the structure of your form definition. It's even possible to use nested forms inside a nested form.
-
-Option | Description
-------------- | -------------
-**form**  | same as in [form definition](#form-fields)
-**usePanelStyles** | defines if a panel like look is applied or not (defaults true)
 
 <a name="form-views"></a>
 ## Form views
