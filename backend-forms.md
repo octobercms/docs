@@ -600,7 +600,8 @@ If the `availableColors` field in not defined in the YAML file, the colorpicker 
 
 > **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
 
-    datatable:
+    data:
+        type: datatable
         adding: true
         btnAddRowLabel: Add Row Above
         btnAddRowBelowLabel: Add Row Below
