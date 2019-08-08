@@ -194,11 +194,11 @@ The properties of a page can be accessed in the [PHP code section](../cms/themes
         $this->page->title = 'A different page title';
     }
 
-They can also be accessed in the markup using the [`this.page` variable](../markup/this-page). For example, to return the title of a page:
+They can also be accessed in the markup using the [`this.page` variable](../../markup/this-page). For example, to return the title of a page:
 
     <p>The title of this page is: {{ this.page.title }}</p>
 
-More information can be found at [`this.page` in the Markup guide](../markup/this-page).
+More information can be found at [`this.page` in the Markup guide](../../markup/this-page).
 
 <a name="injecting-assets"></a>
 ## Injecting page assets programmatically
