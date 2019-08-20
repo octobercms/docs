@@ -291,3 +291,5 @@ This will create an **.env** file in project root directory and modify configura
     'debug' => env('APP_DEBUG', true),
 
 Your `.env` file should not be committed to your application's source control, since each developer or server using your application could require a different environment configuration.
+
+It is also important that your `.env` file is not accessible to the public in production. To accomplish this, you should consider using a [public folder](#public-folder).
