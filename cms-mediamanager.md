@@ -179,7 +179,7 @@ or
 
     <audio src="audio.mp3" controls></audio>
 
-This behavior can be overridden. If there are **oc-audio-player.html** and **oc-video-player.html** CMS partials they will be used for displaying audio and video contents. Inside the partials use the variable **src** to output a link to the source file. Example:
+This behavior can be overridden. If there are **oc-audio-player.html** and **oc-video-player.html** CMS partials, they will be used for displaying audio and video contents. Inside the partials use the variable **src** to output a link to the source file. Example:
 
     <video src="{{ src }}" width="320" height="200" controls preload></video>
 
