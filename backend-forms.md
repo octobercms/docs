@@ -242,7 +242,7 @@ Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
-**span** | aligns the form field to one side. Options: auto, left, right, storm, full, third, quarter and three-quarters. Default: full. The parameter `storm` allows you to display the form as a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
+**span** | aligns the form field to one side. Options: auto, left, right, storm, full, third, quarter, two-thirds and three-quarters. Default: full. The parameter `storm` allows you to display the form as a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
@@ -304,6 +304,7 @@ right | 50% | right
 auto | 50% | various
 third | 33% | various
 quarter | 25% | various
+two-thirds | 66% | various
 three-quarters | 75% | various
 
 <a name="span-types-downscaling"></a>
@@ -324,6 +325,8 @@ quarter | above 769px | 4 fields (25% width)
 quarter | below 769px | 1 field (100% width)
 third | above 769px | 3 fields (33% width)
 third | below 769px | 1 field (100% width)
+two-thirds | above 769px | Allows 2 different sized fields (66% width and a space for a third size)
+two-thirds | below 769px | 1 field (100% width)
 three-quarters | above 769px | Allows 2 different sized fields (75% width and a space for a quarter size)
 three-quarters | below 769px | 1 field (100% width)
 
