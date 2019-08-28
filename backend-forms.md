@@ -11,7 +11,7 @@
     - [Dynamic heights](#dynamic-heights)
     - [Available span types](#span-types)
     - [Downscaling rules for span types](#span-types-downscaling)
-    - [Line breaks for fields](line-breaks)
+    - [Line breaks for fields](#line-breaks)
 - [Available field types](#field-types)
 - [Form widgets](#form-widgets)
 - [Form views](#form-views)
