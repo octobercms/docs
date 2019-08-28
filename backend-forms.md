@@ -451,6 +451,14 @@ Balloon selectors support three ways of defining the options, exactly like the [
 
 `checkbox` - renders a single checkbox.
 
+Default | Result
+------------- | -------------
+**true** | checked
+**false** | unchecked
+**0** | unchecked
+**1** | checked
+**null** | unchecked
+
     show_content:
         label: Display content
         type: checkbox
