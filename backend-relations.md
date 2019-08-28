@@ -167,6 +167,8 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
 <a name="belongs-to-many-pivot"></a>
 ### Belongs to many (with Pivot Data)
 
+> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).
+
 1. Related records are displayed as a list (**view.list**).
 1. Clicking a record will display an update form (**pivot.form**).
 1. Clicking *Add* will display a selection list (**manage.list**), then a data entry form (**pivot.form**).
@@ -212,8 +214,6 @@ Pivot data is available when defining form fields and list columns via the `pivo
                 fields:
                     pivot[team_color]:
                         label: Team color
-
-> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist.
 
 <a name="belongs-to"></a>
 ### Belongs to
