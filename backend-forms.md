@@ -10,7 +10,8 @@
     - [Field options](#form-field-options)
     - [Dynamic heights](#dynamic-heights)
     - [Available span types](#span-types)
-    - [Downscaling rules for span types](#span-types-downscaling)	
+    - [Downscaling rules for span types](#span-types-downscaling)
+    - [Line breaks for fields](line-breaks)
 - [Available field types](#field-types)
 - [Form widgets](#form-widgets)
 - [Form views](#form-views)
@@ -302,8 +303,8 @@ full | 100% | whole width of conatiner
 left | 50% | left
 right | 50% | right
 auto | 50% | various
-third | 33% | various
 quarter | 25% | various
+third | 33% | various
 two-thirds | 66% | various
 three-quarters | 75% | various
 
@@ -329,6 +330,27 @@ two-thirds | above 769px | Allows 2 different sized fields (66% width and a spac
 two-thirds | below 769px | 1 field (100% width)
 three-quarters | above 769px | Allows 2 different sized fields (75% width and a space for a quarter size)
 three-quarters | below 769px | 1 field (100% width)
+
+<a name="line-breaks"></a>
+### Line breaks for fields
+
+You can set line breaks on the following fields accept line breaks: `quarter`, `third`, `two-thirds` and `three-quarters`.
+
+    # ===================================
+    #  Line break fields
+    # ===================================
+
+    lineBreak: left | right
+
+#### Line-break (left)
+
+![image](https://github.com/octobercms/docs/blob/master/images/line-break-left.png?raw=true) {.img-responsive .frame}
+
+#### Line-break (right)
+
+![image](https://github.com/octobercms/docs/blob/master/images/line-break-right.png?raw=true) {.img-responsive .frame}
+
+Note: `Full`, `auto`, `left` and `right` - do not accept line breaks.
 
 <a name="field-types"></a>
 ## Available field types
