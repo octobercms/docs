@@ -282,7 +282,7 @@ The above animated image shows the different dynamic height for the feature `str
 Option | Description
 ------------- | -------------
 **stretch** | this will stretch the form field box to cover the height of the rest of the form field area, **make sure there are no other form fields below it as it needs to be the last form field**, otherwise you will see overflow errors. We recommend you using this feature on multiline inputs like `richeditor`, `markdown`, `textarea`, `partial` or `hint`. A value of `1` will turn on the feature and a value of `0` will turn it off.
-**grow** | this will make the form field have dynamic height and grow when more content is added. We recommend you using this feature on multiline inputs like `richeditor`, `markdown` or `textarea`. A value of `1` will turn on the feature and a value of `0` will turn it off.
+**grow** | this will make the form field have dynamic height and grow when more content is added. We recommend you using this feature on multiline inputs like `richeditor`, `codeeditor`, `markdown` or `textarea`. A value of `1` will turn on the feature and a value of `0` will turn it off.
 
 Right now it's not possible to add `stretch` to YAML for `partial` and `hint` fields, due to the code setup. Instead all you need to do is the following:
 
