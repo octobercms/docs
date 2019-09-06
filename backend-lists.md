@@ -446,7 +446,7 @@ Option | Description
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query. The first value will contain the query and the second argument will contain the filtered value(s).
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
