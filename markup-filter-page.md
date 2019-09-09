@@ -10,9 +10,31 @@ Remember that if you refer a page from a subdirectory you should specify the sub
 
 > **Note**: The [Themes documentation](../cms/themes#subdirectories) has more details on subdirectory usage.
 
+To access the link to a certain page from the PHP section, you can use `$this->pageUrl('page-name-without-extension')`:
+    
+    ==
+    <?php
+    function onStart() {
+        $this['newsPage'] = $this->pageUrl('blog/overview');
+    }
+    ?>
+    ==
+    {{ newsPage }}
+
 You can create a link to the current page by filtering an empty string:
 
     <a href="{{ ''|page }}">Refresh page</a>
+    
+To get the link to the current page in PHP, you can use `$this->pageUrl('')` with an empty string.
+
+    ==
+    <?php
+    function onStart() {
+        $this['currentUrl'] = $this->pageUrl('');
+    }
+    ?>
+    ==
+    {{ currentUrl }}
 
 <a name="reverse-routing"></a>
 ## Reverse routing
