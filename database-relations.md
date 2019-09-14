@@ -541,7 +541,15 @@ You may also retrieve the owner of a polymorphic relation from the polymorphic m
     $commentable = $comment->commentable;
 
 The `commentable` relation on the `Comment` model will return either a `Post` or `Video` instance, depending on which type of model owns the comment.
-
+#### Updating The Relationship Owner
+Suppose there is a need to update the owner of a polymorhic relation . For example , we want to update the ownership of a comment from a post to a video . We can easily do this by directly assigning the attribute of the model to the owner model.
+```php
+    $video = App\Video::find(1);
+    
+    $comment = App\Comment::find(1);
+    $comment->commentable=$video;
+    $comment->save();
+```
 <a name="many-to-many-polymorphic-relations"></a>
 ### Many To Many
 
