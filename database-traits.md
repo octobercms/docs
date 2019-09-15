@@ -80,7 +80,7 @@ Slugs are meaningful codes that are commonly used in page URLs. To automatically
         protected $slugs = ['slug' => 'name'];
     }
 
-The `$slugs` property should be an array where the key is the destination column for the slug and the value is the source string used to generate the slug. In the above example, if the `name` column was set to **Cheyenne**, as a result the `slug` column would be set to **cheyenne**, **cheyenne-1**, or **cheyenne-2**, etc before the model is created.
+The `$slugs` property should be an array where the key is the destination column for the slug and the value is the source string used to generate the slug. In the above example, if the `name` column was set to **Cheyenne**, as a result the `slug` column would be set to **cheyenne**, **cheyenne-2**, or **cheyenne-3**, etc before the model is created.
 
 To generate a slug from multiple sources, pass another array as the source value:
 
@@ -101,6 +101,16 @@ Use the `slugAttributes` method to regenerate slugs when updating a model:
     $user->slug = null;
     $user->slugAttributes();
     $user->save();
+
+<a name="sluggable-with-softdelete-trait"></a>
+### Sluggable with SoftDelete trait
+
+By default, soft deleted models are ignored when the slug is generated.
+You might want to prevent slug duplication when recovering soft deleted models.
+
+Set the `$allowTrashedSlugs` attribute to `true` in order to take into account soft deleted records when generating new slugs.
+
+    protected $allowTrashedSlugs = true;
 
 <a name="revisionable"></a>
 ## Revisionable
@@ -460,6 +470,12 @@ Under these same conditions, when the primary model is restored, all the related
 
     // Restore the user and comments
     $user->restore();
+
+<a name="soft-delete-with-sluggable-trait"></a>
+### Soft Delete with Sluggable trait
+
+By default, Sluggable trait will ignore soft deleted models when the slug is generated.
+In order to make the model restoration less painful [checkout the Sluggable section](#sluggable-with-softdelete-trait).
 
 <a name="nullable"></a>
 ## Nullable

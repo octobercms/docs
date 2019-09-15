@@ -528,7 +528,7 @@ Next, let's examine the model definitions needed to build this relationship:
 
 Once your database table and models are defined, you may access the relationships via your models. For example, to access all of the comments for a post, we can use the `comments` dynamic property:
 
-    $post = App\Post::find(1);
+    $post = Author\Plugin\Models\Post::find(1);
 
     foreach ($post->comments as $comment) {
         //
@@ -536,11 +536,19 @@ Once your database table and models are defined, you may access the relationship
 
 You may also retrieve the owner of a polymorphic relation from the polymorphic model by accessing the name of the `morphTo` relationship. In our case, that is the `commentable` definition on the `Comment` model. So, we will access it as a dynamic property:
 
-    $comment = App\Comment::find(1);
+    $comment = Author\Plugin\Models\Comment::find(1);
 
     $commentable = $comment->commentable;
 
 The `commentable` relation on the `Comment` model will return either a `Post` or `Video` instance, depending on which type of model owns the comment.
+
+You are also able to update the owner of the related model by setting the attribute with the name of the `morphTo` relationship, in this case `commentable`. 
+
+    $comment = Author\Plugin\Models\Comment::find(1);
+    $video = Author\Plugin\Models\Video::find(1);
+
+    $comment->commentable = $video;
+    $comment->save()
 
 <a name="many-to-many-polymorphic-relations"></a>
 ### Many To Many

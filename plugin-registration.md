@@ -217,14 +217,14 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                 // Set counter to false to prevent the default behaviour of the main menu counter being a sum of
                 // its side menu counters
                 'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
-                'counterLabel'=> 'Label describing a dynamic menu counter'
+                'counterLabel'=> 'Label describing a dynamic menu counter',
 
                 'sideMenu' => [
                     'posts' => [
                         'label'       => 'Posts',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/posts'),
-                        'permissions' => ['acme.blog.access_posts']
+                        'permissions' => ['acme.blog.access_posts'],
                         'counter'     => 2,
                         'counterLabel'=> 'Label describing a static menu counter',
                     ],
@@ -232,7 +232,7 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                         'label'       => 'Categories',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/categories'),
-                        'permissions' => ['acme.blog.access_categories']
+                        'permissions' => ['acme.blog.access_categories'],
                     ]
                 ]
             ]
@@ -246,7 +246,7 @@ To make the sub-menu items visible, you may [set the navigation context](../back
 <a name="registering-middleware"></a>
 ## Registering middleware
 
-To register a custom middleware you can use the following call inside your boot method to extend a Controller class that you wish to add the middleware to.
+To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
 
     public function boot()
     {

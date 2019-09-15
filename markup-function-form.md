@@ -58,6 +58,11 @@ There are some special options that can also be used alongside the attributes.
 
     {{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
 
+>**Note:** When attempting to reference a component's alias with `__SELF__` as an argument to `form_ajax()` you must first build the string you wish to use outside of the call itself. Example:
+
+    {% set targetPartial = "'" ~ __SELF__ ~ "::statistics': '#statsPanel'" %}
+    {{ form_ajax('onUpdate', { update: targetPartial }) }}
+
 The function support the following options:
 
 Option | Description

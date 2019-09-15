@@ -85,6 +85,7 @@ Option | Type | Description
 **recordsPerPage** | List | maximum rows to display for each page.
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
 **scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the second parameter (`$query` is the first).
+**filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#list-filters).
 
 These configuration values can be specified only for the **view** options.
 
@@ -166,6 +167,8 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
 <a name="belongs-to-many-pivot"></a>
 ### Belongs to many (with Pivot Data)
 
+> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).
+
 1. Related records are displayed as a list (**view.list**).
 1. Clicking a record will display an update form (**pivot.form**).
 1. Clicking *Add* will display a selection list (**manage.list**), then a data entry form (**pivot.form**).
@@ -211,8 +214,6 @@ Pivot data is available when defining form fields and list columns via the `pivo
                 fields:
                     pivot[team_color]:
                         label: Team color
-
-> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist.
 
 <a name="belongs-to"></a>
 ### Belongs to
@@ -293,6 +294,7 @@ Sometimes you may wish to modify the default relation behavior and there are sev
 - [Extending the view widget](#extend-view-widget)
 - [Extending the manage widget](#extend-manage-widget)
 - [Extending the pivot widget](#extend-pivot-widget)
+- [Extending the filter widgets](#extend-filter-widgets)
 - [Extending refresh results](#extend-refresh-results)
 
 <a name="extend-relation-config"></a>
@@ -377,6 +379,23 @@ Provides an opportunity to manipulate the pivot widget of your relation.
             
         // manipulate widget as needed
     }
+
+<a name="extend-filter-widgets"></a>
+### Extending the filter widgets
+
+There are two filter widgets that may be extended using the following methods, one for the view mode and one for the manage mode of the `RelationController`.
+
+    public function relationExtendViewFilterWidget($widget, $field, $model)
+    {
+        // Extends the view filter widget
+    }
+    
+    public function relationExtendManageFilterWidget($widget, $field, $model)
+    {
+        // Extends the manage filter widget
+    }
+    
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](/docs/backend/lists#extend-filter-scopes).
     
 <a name="extend-refresh-results"></a>
 ### Extending the refresh results
