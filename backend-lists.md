@@ -169,6 +169,7 @@ Option | Description
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
+**permissions** | specify administrator permissions to show column. (Allows to use array of multiple permissions)
 
 <a name="column-types"></a>
 ## Available column types
@@ -450,6 +451,7 @@ Option | Description
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
+**permissions** | specify administrator permissions to show scope. (Allows to use array of multiple permissions)
 
 <a name="scope-types"></a>
 ### Available scope types

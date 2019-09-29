@@ -260,6 +260,7 @@ Option | Description
 **required** | places a red asterisk next to the field label to indicate it is required (make sure to setup validation on the model as this is not enforced by the form controller).
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
+**permissions** | specify administrator permissions to show field. (Allows to use array of multiple permissions)
 
 <a name="field-types"></a>
 ## Available field types
