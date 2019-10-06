@@ -875,6 +875,7 @@ Option | Description
 ------------- | -------------
 **nameFrom** | a model attribute name used for displaying the relation label. Default: name.
 **select** | a custom SQL select statement to use for the name.
+**order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
