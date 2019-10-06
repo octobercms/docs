@@ -281,6 +281,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Text](#field-text)
 - [Number](#field-number)
 - [Password](#field-password)
+- [Email](#field-email)
 - [Textarea](#field-textarea)
 - [Dropdown](#field-dropdown)
 - [Radio List](#field-radio)
@@ -323,6 +324,15 @@ There are various native field types that can be used for the **type** setting. 
     user_password:
         label: Password
         type: password
+
+<a name="field-email"></a>
+### Email
+
+`email` - renders a single line text box with the type of `email` for browser based verification that the provided input matches a properly formated email address.
+
+    user_email:
+        label: Email Address
+        type: email
 
 <a name="field-textarea"></a>
 ### Textarea
