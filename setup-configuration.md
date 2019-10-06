@@ -73,6 +73,7 @@ Use the following code in **server** section. If you have installed October into
     location ~ ^/humans\.txt { try_files $uri /index.php; }
 
     ## Let nginx return 404 if static file not exists
+    location ~ ^/.well-known { try_files $uri 404; }
     location ~ ^/storage/app/uploads/public { try_files $uri 404; }
     location ~ ^/storage/app/media { try_files $uri 404; }
     location ~ ^/storage/temp/public { try_files $uri 404; }
