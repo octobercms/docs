@@ -430,7 +430,7 @@ Radio lists can also support a secondary description.
             registered: [Registered only, Only logged in member will be able to access this page.]
             guests: [Guests only, Only guest users will be able to access this page.]
 
-Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
+Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
 <a name="field-balloon"></a>
 ### Balloon Selector
