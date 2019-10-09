@@ -451,7 +451,7 @@ Option | Description
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
-**permissions** | specify administrator permissions to show scope. (Allows to use array of multiple permissions)
+**permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 <a name="scope-types"></a>
 ### Available scope types
