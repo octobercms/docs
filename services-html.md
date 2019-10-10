@@ -2,7 +2,7 @@
 
 - [Introduction](#introduction)
 - [Opening a form](#opening-a-form)
-- [Form tokens](#form-tokens)
+- [Form tokens & CSRF protection](#form-tokens)
 - [Form model binding](#form-model-binding)
 - [Labels](#labels)
 - [Text fields](#text)
