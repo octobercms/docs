@@ -3,7 +3,6 @@
 - [Introduction](#introduction)
 - [Opening a form](#opening-a-form)
 - [Form tokens](#form-tokens)
-- [CSRF protection](#csrf-protection)
 - [Form model binding](#form-model-binding)
 - [Labels](#labels)
 - [Text fields](#text)
