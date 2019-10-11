@@ -84,9 +84,9 @@ The above example would output as the following:
 
     </form>
 
-## Passing parameters through the form tag
+## Passing attributes to the generated element
 
-You can pass through custom parameters, below shows an example:
+You can pass additional attributes to the `Form::open()` method by passing an array of attribute names and values to be rendered on the final generated `<form>` element.
 
     <?= Form::open(array('id' => 'example', 'class' => 'something')) ?>
         // ..
