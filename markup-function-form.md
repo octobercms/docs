@@ -83,3 +83,17 @@ Outputs a standard FORM closing tag. This tag is generally available to provide 
 The above example would output as the following:
 
     </form>
+
+## Passing parameters through the form tag
+
+You can pass through custom parameters, below shows an example:
+
+    <?= Form::open(array('id' => 'example', 'class' => 'something')) ?>
+        // ..
+    <?= Form::close() ?>
+
+The above example would output the following:
+
+    <form method="POST" action="" accept-charset="UTF-8" id="example" class="something">
+
+    </form>
