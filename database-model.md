@@ -164,7 +164,7 @@ When attributes names are passed to the `$jsonable` property, the values will be
 
 When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
 
-> **Note**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. Use `reload` method to flush this cache.
+> **Note**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. Use `reload` method to flush in-memory cache.
 
 <a name="retrieving-multiple-models"></a>
 ### Retrieving multiple models
