@@ -54,7 +54,7 @@ Accessing a relationship as a property is also possible:
 
     $user->posts;
 
-> **Note**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. `load` method won't force cache flushing. For reloading relationship cache use `reloadRelations` method or `reload` whole model.
+> **Note**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. `load` method won't force cache to flush. To reload the relations cache use `reloadRelations` method or `reload` the whole model.
 
 <a name="detailed-relationships"></a>
 ### Detailed definitions
