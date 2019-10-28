@@ -228,6 +228,14 @@ Renders a dropdown form field.
 
     {dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
 
+Renders a dropdown form field with independent values and labels.
+
+    {dropdown name="dropdown" label="Pick one" options="one:One|two:Two"}{/dropdown}
+
+Renders a dropdown form field with an array returned by a static class method (the class must be full namespaced class).
+
+    {dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
+
 ### Radio
 
 Renders a radio form field.
