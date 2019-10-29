@@ -54,6 +54,8 @@ Accessing a relationship as a property is also possible:
 
     $user->posts;
 
+> **Note**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
+
 <a name="detailed-relationships"></a>
 ### Detailed definitions
 
@@ -542,7 +544,7 @@ You may also retrieve the owner of a polymorphic relation from the polymorphic m
 
 The `commentable` relation on the `Comment` model will return either a `Post` or `Video` instance, depending on which type of model owns the comment.
 
-You are also able to update the owner of the related model by setting the attribute with the name of the `morphTo` relationship, in this case `commentable`. 
+You are also able to update the owner of the related model by setting the attribute with the name of the `morphTo` relationship, in this case `commentable`.
 
     $comment = Author\Plugin\Models\Comment::find(1);
     $video = Author\Plugin\Models\Video::find(1);
