@@ -76,15 +76,13 @@ You should provide a [view file](controllers-views-ajax/#introduction) with the 
 
 If you need to override default view of your reorder page, you have to copy
 
-modules/backend/behaviors/reordercontroller/partials/_container.htm
-and
-modules/backend/behaviors/reordercontroller/partials/_records.htm
+1. `modules/backend/behaviors/reordercontroller/partials/_container.htm`
+2. `modules/backend/behaviors/reordercontroller/partials/_records.htm`
 
 in
 
-plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_container.htm
-and
-plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_records.htm
+1. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_container.htm`
+2. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_records.htm`
 
 
 <a name="extend-model-query"></a>
