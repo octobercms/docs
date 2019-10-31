@@ -3,6 +3,7 @@
 - [Introduction](#introduction)
 - [Configuring the reorder behavior](#configuring-reorder)
 - [Displaying the reorder page](#reorder-display)
+- [Override Sortable Partials](#override-sortable-partials)
 - [Extending the model query](#extend-model-query)
 
 <a name="introduction"></a>
@@ -69,6 +70,20 @@ Option | Description
 You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
     <?= $this->reorderRender() ?>
+    
+<a name="override-sortable-partials"></a>
+## Override Sortable Partials
+
+If you need to override default view of your reorder page, you have to copy
+
+1. `modules/backend/behaviors/reordercontroller/partials/_container.htm`
+2. `modules/backend/behaviors/reordercontroller/partials/_records.htm`
+
+in
+
+1. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_container.htm`
+2. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_records.htm`
+
 
 <a name="extend-model-query"></a>
 ## Extending the model query
