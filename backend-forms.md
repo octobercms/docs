@@ -329,11 +329,22 @@ There are various native field types that can be used for the **type** setting. 
 <a name="field-email"></a>
 ### Email
 
-`email` - renders a single line text box with the type of `email` for browser based verification that the provided input matches a properly formated email address.
+`email` - renders a single line text box with the type of `email`, triggering a specialised "email" keyboard in mobile browsers.
 
     user_email:
         label: Email Address
         type: email
+        
+If you would like to validate this field on save to ensure that it matches a properly-validated email address, please use the `$rules` property on your model, like so:
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'email' => 'email',
+    ];
+    
+For more information on model validation, please visit [the documentation page for it](https://octobercms.com/docs/services/validation#rule-email).
 
 <a name="field-textarea"></a>
 ### Textarea
