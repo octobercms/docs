@@ -352,7 +352,7 @@ If you would like to validate this field on save to ensure that it is a properly
      * @var array Validation rules
      */
     public $rules = [
-        'email' => 'email',
+        'user_email' => 'email',
     ];
     
 For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
