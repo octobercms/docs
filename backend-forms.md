@@ -329,7 +329,7 @@ There are various native field types that can be used for the **type** setting. 
 <a name="field-email"></a>
 ### Email
 
-`email` - renders a single line text box with the type of `email`, triggering a specialised "email" keyboard in mobile browsers.
+`email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
 
     user_email:
         label: Email Address
@@ -344,7 +344,7 @@ If you would like to validate this field on save to ensure that it matches a pro
         'email' => 'email',
     ];
     
-For more information on model validation, please visit [the documentation page for it](https://octobercms.com/docs/services/validation#rule-email).
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
 
 <a name="field-textarea"></a>
 ### Textarea
