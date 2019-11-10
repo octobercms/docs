@@ -316,6 +316,17 @@ There are various native field types that can be used for the **type** setting. 
         step: 1  # defaults to 'any'
         min: 1   # defaults to not present
         max: 100 # defaults to not present
+        
+If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'your_age' => 'numeric',
+    ];
+    
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
 
 <a name="field-password"></a>
 ### Password
@@ -329,11 +340,22 @@ There are various native field types that can be used for the **type** setting. 
 <a name="field-email"></a>
 ### Email
 
-`email` - renders a single line text box with the type of `email` for browser based verification that the provided input matches a properly formated email address.
+`email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
 
     user_email:
         label: Email Address
         type: email
+        
+If you would like to validate this field on save to ensure that it is a properly-formatted email address, please use the `$rules` property on your model, like so:
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'user_email' => 'email',
+    ];
+    
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
 
 <a name="field-textarea"></a>
 ### Textarea
