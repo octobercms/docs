@@ -452,7 +452,7 @@ Option | Description
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
-**dependsOn** | a string or an array of other scope names this scope [depends on](#filter-scope-dependencies), when the other scopes are modified, this scope will update.
+**dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
 
 <a name="filter-scope-dependencies">
 ### Filter Dependencies
