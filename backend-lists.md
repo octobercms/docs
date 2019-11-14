@@ -457,7 +457,7 @@ Option | Description
 <a name="filter-scope-dependencies">
 ### Filter Dependencies
 
-Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#filter-scope-options) which provides a more robust server side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update using the AJAX framework. This provides an opportunity to  change the available options to be provided to the scope. Examples below:
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#filter-scope-options), which provides a more robust server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update using the AJAX framework. This provides an opportunity to change the available options to be provided to the scope. Examples below:
 
     country:
         label: Country
