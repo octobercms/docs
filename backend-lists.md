@@ -474,7 +474,7 @@ Filter scopes can declare dependencies on other scopes by defining the `dependsO
         options: getCityOptions
         dependsOn: country
 
-In the above example the `city` scope will refresh when the `country` scope has changed. Any scope that defines the `dependsOn` property will be passed all current scope objects for the Filter widget (which includes their current values) as an array keyed by the scope names:
+In the above example, the `city` scope will refresh when the `country` scope has changed. Any scope that defines the `dependsOn` property will be passed all current scope objects for the Filter widget (which includes their current values) as an array that is keyed by the scope names:
 
     public function getCountryOptions()
     {
