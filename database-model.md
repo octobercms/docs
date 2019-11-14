@@ -88,6 +88,7 @@ Property | Description
 **$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
 **$visible** | values are fields made visible when [serializing the model data](../database/serialization).
 **$hidden** | values are fields made hidden when [serializing the model data](../database/serialization).
+**$connection** | string that contains the [connection name](../database/basics#accessing-connections) that's utilised by the model by default.
 
 <a name="property-primary-key"></a>
 #### Primary key
