@@ -452,6 +452,45 @@ Option | Description
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
+
+<a name="filter-scope-dependencies">
+### Filter Dependencies
+
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#filter-scope-options), which provides a more robust server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update using the AJAX framework. This provides an opportunity to change the available options to be provided to the scope. Examples below:
+
+    country:
+        label: Country
+        type: group
+        conditions: country_id in (:filtered)
+        modelClass: October\Test\Models\Location
+        options: getCountryOptions
+        
+    city:
+        label: City
+        type: group
+        conditions: city_id in (:filtered)
+        modelClass: October\Test\Models\Location
+        options: getCityOptions
+        dependsOn: country
+
+In the above example, the `city` scope will refresh when the `country` scope has changed. Any scope that defines the `dependsOn` property will be passed all current scope objects for the Filter widget (which includes their current values) as an array that is keyed by the scope names:
+
+    public function getCountryOptions()
+    {
+        return Country::lists('name', 'id');
+    }
+
+    public function getCityOptions($scopes = null)
+    {
+        if (!empty($scopes['country']->value)) {
+            return City::whereIn('country_id', array_keys($scopes['country']->value))->lists('name', 'id');
+        } else {
+            return City::lists('name', 'id');
+        }
+    }
+
+>**NOTE:** Scope dependencies are currently only intended to be used on `type: group` scopes. Pull requests to add support for other scope types will be reviewed & most likely accepted however.
 
 <a name="scope-types"></a>
 ### Available scope types
