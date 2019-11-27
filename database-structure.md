@@ -167,6 +167,7 @@ Modifier  | Description
 `->unsigned()`  |  Set `integer` columns to `UNSIGNED`
 `->first()`  |  Place the column "first" in the table (MySQL Only)
 `->after('column')`  |  Place the column "after" another column (MySQL Only)
+`->comment('my comment')`  |  Add a comment to a column (MySQL Only)
 
 <a name="modifying-columns"></a>
 ### Modifying columns
