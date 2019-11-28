@@ -624,7 +624,7 @@ To use default value for Date and Date Range
 <a name="filter-numberrange"></a>
 ### Number Range
 
-`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`.
+`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`. You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
 
     visitors:
         label: Visitor Count
