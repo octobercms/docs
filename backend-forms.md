@@ -1036,7 +1036,7 @@ You may use the `mode` called **relation** where the field name is a [many-to-ma
 Option | Description
 ------------- | -------------
 **mode** | controls how the value is returned, either string, array or relation. Default: string
-**separator** | separate tags with the specified character, either comma or space. Default: comma
+**separator** | separate tags with the specified character, either comma or space or spacedcomma. Default: comma
 **customTags** | allows custom tags to be entered manually by the user. Default: true
 **options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options` method. Optional.
 **nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name
