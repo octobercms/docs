@@ -205,30 +205,33 @@ Option | Description
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
 **icons** | assign icons to tabs using tab names as the key.
+**lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
     tabs:
         stretch: true
-        defaultTab: backend::lang.account.default_tab
+        defaultTab: User
         cssClass: text-blue
+        lazy:
+            - Groups
         paneCssClass:
             0: first-tab
             1: second-tab
         icons:
-            backend::lang.account.user: icon-user
-            backend::lang.account.groups: icon-group
+            User: icon-user
+            Groups: icon-group
 
         fields:
             username:
                 type: text
                 label: Username
-                tab: backend::lang.account.user
+                tab: User
 
             groups:
                 type: relation
                 label: Groups
-                tab: backend::lang.account.groups
+                tab: Groups
 
 <a name="form-field-options"></a>
 ### Field options
