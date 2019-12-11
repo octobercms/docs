@@ -55,21 +55,13 @@ Once this task has finished, open the file **config/cms.php** and enable the `di
 
     'disableCoreUpdates' => true,
 
-If you are actively developing a site and would like to get the latest and greatest changes for October when updating, then update the `composer.json` file to use the following; which enables you to test the latest improvements on the develop branch.
-
-    "october/rain": "dev-develop as 1.0",
-    "october/system": "dev-develop",
-    "october/backend": "dev-develop",
-    "october/cms": "dev-develop",
-    "laravel/framework": "5.5.*@dev",
-
 When updating October, use the composer update command as normal before performing a [database migration](#console-up-command).
 
     composer update
 
 Composer is configured to look inside plugin directories for composer dependencies and these will be included in updates.
 
-> **Note:** To use composer with an October instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory, `composer.json` file and `server.php` file from [GitHub](https://github.com/octobercms/october) into your October instance and then run `composer install`.
+> **Note:** To use composer with an October instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/octobercms/october) into your October instance and then run `composer install`.
 
 <a name="maintenance-commands"></a>
 ## Setup & Maintenance

@@ -208,7 +208,7 @@ There are various column types that can be used for the **type** setting, these 
     full_name:
         label: Full Name
         type: text
-        
+
 You can also specify a custom text format, for example **Admin:Full Name (active)**
 
     full_name:
@@ -330,7 +330,7 @@ To display a column that shows the number of related records, use the `useRelati
         label: Users
         relation: users
         useRelationCount: true
-        
+
 > **Note:** Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
 
 **Best Practice:**
@@ -457,7 +457,7 @@ Option | Description
 <a name="filter-scope-dependencies">
 ### Filter Dependencies
 
-Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#filter-scope-options), which provides a more robust server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update using the AJAX framework. This provides an opportunity to change the available options to be provided to the scope. Examples below:
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#filter-scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
 
     country:
         label: Country
@@ -465,7 +465,7 @@ Filter scopes can declare dependencies on other scopes by defining the `dependsO
         conditions: country_id in (:filtered)
         modelClass: October\Test\Models\Location
         options: getCountryOptions
-        
+
     city:
         label: City
         type: group
@@ -474,7 +474,7 @@ Filter scopes can declare dependencies on other scopes by defining the `dependsO
         options: getCityOptions
         dependsOn: country
 
-In the above example, the `city` scope will refresh when the `country` scope has changed. Any scope that defines the `dependsOn` property will be passed all current scope objects for the Filter widget (which includes their current values) as an array that is keyed by the scope names:
+In the above example, the `city` scope will refresh when the `country` scope has changed. Any scope that defines the `dependsOn` property will be passed all current scope objects for the Filter widget, including their current values, as an array that is keyed by the scope names.
 
     public function getCountryOptions()
     {
@@ -490,7 +490,7 @@ In the above example, the `city` scope will refresh when the `country` scope has
         }
     }
 
->**NOTE:** Scope dependencies are currently only intended to be used on `type: group` scopes. Pull requests to add support for other scope types will be reviewed & most likely accepted however.
+> **Note:** Scope dependencies with `type: group` are only supported at this stage.
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -528,14 +528,14 @@ These types can be used to determine how the filter scope should be displayed.
         label: Status
         type: group
         conditions: status in (:filtered)
-        default: 
+        default:
             pending: Pending
             active: Active
         options:
             pending: Pending
             active: Active
             closed: Closed
-            
+
 <a name="filter-checkbox"></a>
 ### Checkbox
 
@@ -546,7 +546,7 @@ These types can be used to determine how the filter scope should be displayed.
         type: checkbox
         default: 1
         conditions: is_published <> true
-        
+
 <a name="filter-switch"></a>
 ### Switch
 
@@ -559,7 +559,7 @@ These types can be used to determine how the filter scope should be displayed.
         conditions:
             - is_approved <> true
             - is_approved = true
-            
+
 <a name="filter-date"></a>
 ### Date
 
@@ -572,7 +572,7 @@ These types can be used to determine how the filter scope should be displayed.
         maxDate: '2030-10-13'
         yearRange: 10
         conditions: created_at >= ':filtered'
-        
+
 <a name="filter-daterange"></a>
 ### Date Range
 
@@ -599,7 +599,7 @@ To use default value for Date and Date Range
             ],
         ]);
     });
-  
+
     // return value must be instance of carbon
     public function myDefaultTime()
     {
@@ -620,7 +620,7 @@ To use default value for Date and Date Range
         type: number
         default: 14
         conditions: age >= ':filtered'
-        
+
 <a name="filter-numberrange"></a>
 ### Number Range
 
@@ -629,7 +629,7 @@ To use default value for Date and Date Range
     visitors:
         label: Visitor Count
         type: numberrange
-        default: 
+        default:
             0: 10
             1: 20
         conditions: visitors >= ':min' and visitors <= ':max'
@@ -644,7 +644,7 @@ To use default value for Date and Date Range
         type: text
         conditions: username = :value
         size: 2
-            
+
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
 
@@ -829,7 +829,7 @@ The [list filter](#list-filters) model query can also be extended by overriding 
             $query->where('status', '<>', 'all');
         }
     }
-    
+
 <a name="extend-records-collection"></a>
 ### Extending the records collection
 
