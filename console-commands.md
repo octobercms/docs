@@ -7,6 +7,7 @@
     - [Install command](#console-install-command)
     - [System update](#console-update-command)
     - [Database migration](#console-up-command)
+    - [Change Backend user password](#change-backend-user-password-command)
 - [Plugin management](#plugin-commands)
     - [Install plugin](#plugin-install-command)
     - [Refresh plugin](#plugin-refresh-command)
@@ -96,6 +97,15 @@ The `october:up` command will perform a database migration, creating database ta
 The inverse command `october:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#plugin-refresh-command) is a useful alternative for debugging a single plugin.
 
     php artisan october:down
+    
+<a name="change-backend-user-password-command"></a>
+### Change Backend user password
+
+The `october:passwd` command will allow the password of a Backend user or administrator to be changed via the command-line. This is useful if someone gets locked out of their October CMS install, or for changing the password for the default administrator account.
+
+    php artisan october:passwd username password
+    
+You may provide the username/email and password as both the first and second argument, or you may leave the arguments blank, in which case the command will be run interactively.
 
 <a name="plugin-commands"></a>
 ## Plugin management
