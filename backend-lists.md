@@ -776,6 +776,15 @@ You can inject a custom css row class by adding a `listInjectRowClass` method on
             }
         }
     }
+    
+A special CSS class `nolink` is available to force a row to be unclickable, even if the `recordUrl` or `recordOnClick` options are defined for the List widget. Returning this class in an event will allow you to make records unclickable - for example, for soft-deleted rows or for informational rows:
+
+        public function listInjectRowClass($record, $value)
+        {
+            if ($record->trashed()) {
+                return 'nolink';
+            }
+        }
 
 <a name="extend-filter-scopes"></a>
 ### Extending filter scopes
