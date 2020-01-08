@@ -517,7 +517,7 @@ Greater than | >
 Greater than or equal | >=
 Less than | < 
 Less than or equal | <=
-??? | <>
+Not equal to | <>
 
 <a name="custom-variables"></a>
 ### Available custom variables for filters
