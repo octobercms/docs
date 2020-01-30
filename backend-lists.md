@@ -251,8 +251,6 @@ You can also specify a custom number format, for example currency **$ 99.00**
     created_at:
         label: Date
         type: datetime
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 You can also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**:
 
@@ -260,6 +258,15 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Date
         type: datetime
         format: l jS \of F Y h:i:s A
+
+You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
+
+    created_at:
+        label: Date
+        type: datetime
+        ignoreTimezone: true
+
+> **Note:** the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
 <a name="column-date"></a>
 ### Date
@@ -269,8 +276,6 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: date
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 <a name="column-time"></a>
 ### Time
@@ -280,8 +285,6 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: time
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 <a name="column-timesince"></a>
 ### Time since
@@ -291,8 +294,6 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: timesince
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 <a name="column-timetense"></a>
 ### Time tense
@@ -302,8 +303,6 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: timetense
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 <a name="column-select"></a>
 ### Select
@@ -776,7 +775,7 @@ You can inject a custom css row class by adding a `listInjectRowClass` method on
             }
         }
     }
-    
+
 A special CSS class `nolink` is available to force a row to be unclickable, even if the `recordUrl` or `recordOnClick` options are defined for the List widget. Returning this class in an event will allow you to make records unclickable - for example, for soft-deleted rows or for informational rows:
 
         public function listInjectRowClass($record, $value)
