@@ -209,6 +209,8 @@ Option | Description
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
+> **Note:** It is not recommended to use lazy loading on tabs with fields that are affected by triggers.
+
     tabs:
         stretch: true
         defaultTab: User
