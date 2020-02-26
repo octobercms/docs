@@ -248,7 +248,7 @@ Option | Description
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
 **commentHtml** | allow HTML markup inside the comment. Options: true, false.
-**default** | specifies the default value for the field.
+**default** | specify the 'value' field in the options list you want to make **selected** or **checked** on page load.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
@@ -378,10 +378,13 @@ For more information on model validation, please visit [the documentation page](
     status_type:
         label: Blog Post Status
         type: dropdown
+        default: published
         options:
             draft: Draft
             published: Published
             archived: Archived
+
+In the above example, the option `published` will be **selected** using the `default` method.
 
 The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
 
@@ -451,10 +454,13 @@ By default the dropdown has a searching feature, allowing quick selection of a v
     security_level:
         label: Access Level
         type: radio
+        default: guests
         options:
             all: All
             registered: Registered only
             guests: Guests only
+
+In the above example, the option `guests` will be **checked** using the `default` method.
 
 Radio lists can also support a secondary description.
 
@@ -502,11 +508,14 @@ Balloon selectors support three ways of defining the options, exactly like the [
         type: checkboxlist
         # set to true to explicitly enable the "Select All", "Select None" options
         # on lists that have <=10 items (>10 automatically enables it)
-        quickselect: true 
+        quickselect: true
+        default: open_account
         options:
             open_account: Open account
             close_account: Close account
             modify_account: Modify account
+
+In the above example, the option `open_account` will be **checked** using the `default` method.
 
 Checkbox lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
