@@ -590,6 +590,7 @@ There are various form widgets included as standard, although it is common for p
 </div>
 
 <a name="widget-codeeditor"></a>
+
 ### Code editor
 
 `codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
