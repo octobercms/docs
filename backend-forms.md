@@ -987,7 +987,7 @@ Each group must specify a unique key and the definition supports the following o
 Option | Description
 ------------- | -------------
 **name** | the name of the group.
-**description** | a breif description of the group.
+**description** | a brief description of the group.
 **icon** | defines an icon for the group, optional.
 **fields** | form fields belonging to the group, see [backend form fields](#form-fields).
 
