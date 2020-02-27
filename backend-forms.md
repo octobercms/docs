@@ -250,7 +250,7 @@ Option | Description
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
 **commentHtml** | allow HTML markup inside the comment. Options: true, false.
-**default** | specify the `value` field in the options list you want to make selected or checked on page load, compatible with `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets.
+**default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
