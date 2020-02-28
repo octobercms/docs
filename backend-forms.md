@@ -250,7 +250,7 @@ Option | Description
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
 **commentHtml** | allow HTML markup inside the comment. Options: true, false.
-**default** | specifies the default value for the field.
+**default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
@@ -380,6 +380,7 @@ For more information on model validation, please visit [the documentation page](
     status_type:
         label: Blog Post Status
         type: dropdown
+        default: published
         options:
             draft: Draft
             published: Published
@@ -453,6 +454,7 @@ By default the dropdown has a searching feature, allowing quick selection of a v
     security_level:
         label: Access Level
         type: radio
+        default: guests
         options:
             all: All
             registered: Registered only
@@ -478,6 +480,7 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
     gender:
         label: Gender
         type: balloon-selector
+        default: female
         options:
             female: Female
             male: Male
@@ -505,6 +508,7 @@ Balloon selectors support three ways of defining the options, exactly like the [
         # set to true to explicitly enable the "Select All", "Select None" options
         # on lists that have <=10 items (>10 automatically enables it)
         quickselect: true
+        default: open_account
         options:
             open_account: Open account
             close_account: Close account
