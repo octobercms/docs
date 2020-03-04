@@ -103,11 +103,15 @@ Option | Description
 **mode** | auto, exact, portrait, landscape, crop, fit. Default: auto
 **quality** | 0 - 100. Default: 90
 **interlace** | boolean: false (default), true
-**extension** | auto, jpg, png, gif. Default: jpg
+**extension** | auto, jpg, png, webp, gif. Default: jpg
 
 The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
 
     echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
+
+Display image on a page:
+
+    <img src="{{ model.avatar.getThumb(100, 100, {'mode':'exact', 'quality': 80, 'extension': 'webp'}) }}" alt="Description Image" />
 
 #### Viewing Modes
 
