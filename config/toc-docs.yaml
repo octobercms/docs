@@ -30,6 +30,7 @@ Themes:
   icon: "icon-picture"
   pages:
     themes/development: "Developing themes"
+    themes/localization: "Localization"
 
 Plugins:
   icon: "icon-puzzle-piece"
