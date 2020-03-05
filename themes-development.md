@@ -5,6 +5,7 @@
 - [Theme preview image](#preview-image)
 - [Theme customization](#customization)
 - [Theme dependencies](#dependencies)
+- [Localization](#localization)
 
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the OctoberCMS Marketplace.
 
@@ -136,3 +137,40 @@ A theme can depend on plugins by defining a **require** option in the [Theme inf
         - Acme.Blog
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
+
+<a name="localization"></a>
+## Localization
+
+Themes can have localization files in the **lang** subdirectory of the theme directory. Theme's localization files
+ are registered automatically when the theme is being edited in the backend. The localization strings are supported
+  automatically in the back-end customization form labels - if you provide the localization key instead of a real
+   string, the system will try to load it from the localization file.
+   
+> **Note**: For translating front-end content, [there are plugins that can be used](http://octobercms.com/plugin/rainlab-translate) for this purpose.
+
+<a name="file-structure"></a>
+### Localization directory and file structure
+
+Below is an example of the theme's lang directory:
+
+    themes/
+      acme/               <=== Theme directory
+        lang/             <=== Localization directory
+          en/             <=== Language directory
+            lang.php      <=== Localization file
+          fr/
+            lang.php
+
+
+The **lang.php** file should define and return an array of any depth, for example:
+
+    <?php
+
+    return [
+        'options' => [
+            'website_name' => 'OctoberCMS'
+        ]
+    ];
+
+> **Note**: the full localization key format is the following: theme.theme-code::lang.key. So for example above it
+> would be `theme.theme-code::lang.options.website_name`
