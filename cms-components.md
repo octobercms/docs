@@ -75,6 +75,13 @@ However there is a way to initialize properties with values loaded from external
 Assuming that in the example above the component **demoTodo** is defined in a partial, it will be initialized with a value loaded from the **maxItems** partial variable:
 
     {% partial 'my-todo-partial' maxItems='10' %}
+    
+You may use dot notation to retrieve a deeply nested value from an external parameter:
+
+    [demoTodo]
+    maxItems = {{ data.maxItems }}
+    ==
+    ...
 
 To load a property value from the URL parameter, use the `{{ :paramName }}` syntax, where the name starts with a colon (`:`), for example:
 
