@@ -1013,6 +1013,7 @@ The `styles` attribute of the repeater widget controls the behaviour of repeater
         type: richeditor
         toolbarButtons: bold|italic
         size: huge
+        allowImagePaste: Flag to allow image pasting into the editor. Default: true.
 
 Option | Description
 ------------- | -------------
