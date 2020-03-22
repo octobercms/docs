@@ -21,6 +21,7 @@
     - [Preventing a field from being submitted](#prevent-field-submission)
 - [Extending form behavior](#extend-form-behavior)
     - [Overriding controller action](#overriding-action)
+    - [Overriding controller redirect](#overriding-redirect)
     - [Extending form model query](#extend-model-query)
     - [Extending form fields](#extend-form-fields)
     - [Filtering form fields](#filter-form-fields)
@@ -1315,6 +1316,16 @@ You can use your own logic for the `create`, `update` or `preview` action method
 
         // Call the FormController behavior update() method
         return $this->asExtension('FormController')->update($recordId, $context);
+    }
+
+<a name="overriding-redirect"></a>
+### Overriding controller redirect
+
+You can specify the URL to redirect to after the model is saved by overriding the `formGetRedirectUrl` method. This method returns the location to redirect to with relative URLs being treated as backend URLs.
+
+    public function formGetRedirectUrl($context = null, $model = null)
+    {
+        return 'https://octobercms.com';
     }
 
 <a name="extend-model-query"></a>
