@@ -997,7 +997,7 @@ The comment in the next example will not be deleted unless the post is saved.
 
     $comment = Comment::find(1);
     $post = Post::find(1);
-    $post->comments()->delete($comment, $sessionKey);
+    $post->comments()->remove($comment, $sessionKey);
 
 <a name="list-all-bindings"></a>
 ### List all bindings
