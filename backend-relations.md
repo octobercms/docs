@@ -96,13 +96,13 @@ Option | Type | Description
 **customViewPath** | List | specify a custom view path to override partials used by the list.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
-**toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Set to `false` to show no buttons. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add\|remove**
+**toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add\|remove`. <br/> Additionally, you can customize the text inside these buttons by setting this property to an associative array, with the key being the button type and the value being the text for that button. Example: `create: 'Assign User'`. The value also supports translation.
 
 These configuration values can be specified only for the **manage** options.
 
 Option | Type | Description
 ------------- | ------------- | -------------
-**title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
+**title** | Both | a popup title, can refer to a [localization string](../plugin/localization). <br/> Additionally, you can customize the title for each mode individually by setting this to an associative array, with the key being the mode and the value being the title used when displaying that mode. Eg: `form: acme.blog::lang.subcategory.FormTitle`.
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 <a name="relationship-types"></a>
