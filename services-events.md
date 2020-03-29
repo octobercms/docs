@@ -97,16 +97,19 @@ Sometimes you may wish to stop the propagation of an event to other listeners. Y
 <a name="wildcard-listeners"></a>
 ### Wildcard listeners
 
-When registering an event listener, you may use asterisks to specify wildcard listeners. The following listener will handle all events that begin with `foo.`.
+When registering an event listener, you may use asterisks to specify wildcard listeners. Wildcard listeners will receive the 
+event name fired first, followed by the parameters passed through to the event as an array.
 
-    Event::listen('foo.*', function($param) {
+The following listener will handle all events that begin with `foo.`.
+
+    Event::listen('foo.*', function($event, $params) {
         // Handle the event...
     });
 
 You may use the `Event::firing` method to determine exactly which event was fired:
 
-    Event::listen('foo.*', function($param) {
-        if (Event::firing() == 'foo.bar') {
+    Event::listen('foo.*', function($event, $params) {
+        if (Event::firing() === 'foo.bar') {
             // ...
         }
     });
