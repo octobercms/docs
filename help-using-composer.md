@@ -24,7 +24,7 @@ If you plan on submitting pull requests to the October CMS project via GitHub, o
     "october/system": "dev-develop",
     "october/backend": "dev-develop",
     "october/cms": "dev-develop",
-    "laravel/framework": "5.5.*@dev",
+    "laravel/framework": "~6.0",
 
 > **Note**: This is considered a bleeding edge copy of October and is only for the brave!
 
@@ -47,7 +47,7 @@ When publishing your plugins or themes to the marketplace, you may wish to also 
             }
         ],
         "require": {
-            "php": ">=7.0.8",
+            "php": ">=7.2",
             "composer/installers": "~1.0"
         }
     }

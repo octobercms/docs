@@ -215,7 +215,7 @@ You can instruct the platform to prefer test builds from the marketplace by chan
     "october/system": "dev-develop",
     "october/backend": "dev-develop",
     "october/cms": "dev-develop",
-    "laravel/framework": "5.5.*@dev",
+    "laravel/framework": "~6.0",
 
 <a name="public-folder"></a>
 ### Using a public folder
