@@ -109,7 +109,7 @@ The `increment` and `decrement` methods may be used to adjust the value of integ
 
 Sometimes you may wish to retrieve an item from the cache, but also store a default value if the requested item doesn't exist. For example, you may wish to retrieve all users from the cache or, if they don't exist, retrieve them from the database and add them to the cache. You may do this using the `Cache::remember` method:
 
-    $value = Cache::remember('users', $minutes, function() {
+    $value = Cache::remember('users', $seconds, function() {
         return Db::table('users')->get();
     });
 
@@ -130,19 +130,21 @@ If you need to retrieve an item from the cache and then delete it, you may use t
 <a name="storing-items-in-the-cache"></a>
 ### Storing items in the cache
 
-You may use the `put` method on the `Cache` facade to store items in the cache. When you place an item in the cache, you will need to specify the number of minutes for which the value should be cached:
+You may use the `put` method on the `Cache` facade to store items in the cache. When you place an item in the cache, you will need to specify the number of seconds for which the value should be cached:
 
-    Cache::put('key', 'value', $minutes);
+    Cache::put('key', 'value', $seconds);
 
-Instead of passing the number of minutes until the item expires, you may also pass a PHP `DateTime` instance representing the expiration time of the cached item:
+Instead of passing the number of seconds until the item expires, you may also pass a PHP `DateTime` instance representing the expiration time of the cached item:
 
     $expiresAt = Carbon::now()->addMinutes(10);
 
     Cache::put('key', 'value', $expiresAt);
 
+> **Note:** We recommend using `DateTime` instances for defining all expiry lengths, in order to ensure compatibility with future versions of October CMS.
+
 The `add` method will only add the item to the cache if it does not already exist in the cache store. The method will return `true` if the item is actually added to the cache. Otherwise, the method will return `false`:
 
-    Cache::add('key', 'value', $minutes);
+    Cache::add('key', 'value', $seconds);
 
 The `forever` method may be used to store an item in the cache permanently. These values must be manually removed from the cache using the `forget` method:
 
