@@ -8,6 +8,7 @@
     - [One To Many](#one-to-many)
     - [Many To Many](#many-to-many)
     - [Has Many Through](#has-many-through)
+    - [Has One Through](#has-one-through)
 - [Polymorphic relations](#polymorphic-relations)
     - [One To One](#one-to-one-polymorphic-relations)
     - [One To Many](#one-to-many-polymorphic-relations)
@@ -409,6 +410,49 @@ Typical foreign key conventions will be used when performing the relationship's 
             'otherKey'   => 'my_id'
         ],
     ];
+
+<a name="has-one-through"></a>
+### Has One Through
+
+The has-one-through relationship links models through a single intermediate relation. For example, if each supplier has one user, and each user is associated with one user history record, then the supplier model may access the user's history through the user. Let's look at the database tables necessary to define this relationship:
+
+    users
+        id - integer
+        supplier_id - integer
+
+    suppliers
+        id - integer
+
+    history
+        id - integer
+        user_id - integer
+
+Though the `history` table does not contain a `supplier_id` column, the `hasOneThrough` relation can provide access to the user's history to the supplier model. Now that we have examined the table structure for the relationship, let's define it on the `Supplier` model:
+
+    class Supplier extends Model
+    {
+        public $hasOneThrough = [
+            'userHistory' => [
+                'Acme\Supplies\Model\History',
+                'through' => 'Acme\Supplies\Model\User'
+            ],
+        ];
+    }
+
+The first array parameter passed to the `$hasOneThrough` property is the name of the final model we wish to access, while the `through` key is the name of the intermediate model.
+
+Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
+
+    public $hasOneThrough = [
+        'userHistory' => [
+            'Acme\Supplies\Model\History',
+            'key'        => 'supplier_id',
+            'through' => 'Acme\Supplies\Model\User'
+            'throughKey' => 'user_id',
+            'otherKey'   => 'id'
+        ],
+    ];
+
 
 <a name="polymorphic-relations"></a>
 ### Polymorphic relations
