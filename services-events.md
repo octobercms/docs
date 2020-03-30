@@ -97,8 +97,7 @@ Sometimes you may wish to stop the propagation of an event to other listeners. Y
 <a name="wildcard-listeners"></a>
 ### Wildcard listeners
 
-When registering an event listener, you may use asterisks to specify wildcard listeners. Wildcard listeners will receive the 
-event name fired first, followed by the parameters passed through to the event as an array.
+When registering an event listener, you may use asterisks to specify wildcard listeners. Wildcard listeners will receive the event name fired first, followed by the parameters passed through to the event as an array.
 
 The following listener will handle all events that begin with `foo.`.
 
