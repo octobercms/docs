@@ -218,7 +218,7 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                 // its side menu counters
                 'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
                 'counterLabel'=> 'Label describing a dynamic menu counter',
-                // Set badge to a non-numeric value to override the counter value. Can be set on side menu items as well.
+                // Optionally you can set a badge value instead of a counter to display a string instead of a numerical counter
                 'badge'       => 'New'
 
                 'sideMenu' => [
