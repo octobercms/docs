@@ -34,6 +34,7 @@ However, collections are much more powerful than arrays and expose a variety of 
 
 > **Note:** While most model collection methods return a new instance of an `Eloquent` collection, the `pluck`, `keys`, `zip`, `collapse`, `flatten` and `flip` methods return a base collection instance. Likewise, if a `map` operation returns a collection that does not contain any models, it will be automatically cast to a base collection.
 
+<a name="usage-examples"></a>
 <a name="available-methods"></a>
 ## Available methods
 
