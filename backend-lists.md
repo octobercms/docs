@@ -609,6 +609,19 @@ To use default value for Date and Date Range
     }
 ```
 
+You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
+
+    published_at:
+        label: Date
+        type: daterange
+        minDate: '2001-01-23'
+        maxDate: '2030-10-13'
+        yearRange: 10
+        conditions: created_at >= ':after' AND created_at <= ':before'
+        ignoreTimezone: true
+
+> **Note:** the `ignoreTimezone` option also applies to the `date` filter type as well.
+
 <a name="filter-number"></a>
 ### Number
 
