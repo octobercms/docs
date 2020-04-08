@@ -61,6 +61,7 @@ You may select any method from this table to see an example of its usage:
 [each](#method-each)
 [filter](#method-filter)
 [first](#method-first)
+[flatMap](#method-flatmap)
 [flatten](#method-flatten)
 [flip](#method-flip)
 [forget](#method-forget)
@@ -311,6 +312,25 @@ You may also call the `first` method with no arguments to get the first element 
     new Collection([1, 2, 3, 4])->first();
 
     // 1
+    
+<a name="method-flatmap"></a>
+#### `flatMap()` {#collection-method}
+
+The `flatMap` method iterates through the collection and passes each value to the given callback. The callback is free to modify the item and return it, thus forming a new collection of modified items. Then, the array is flattened by a level:
+
+    $collection = collect([
+        ['name' => 'Sally'],
+        ['school' => 'Arkansas'],
+        ['age' => 28]
+    ]);
+
+    $flattened = $collection->flatMap(function ($values) {
+        return array_map('strtoupper', $values);
+    });
+
+    $flattened->all();
+
+    // ['name' => 'SALLY', 'school' => 'ARKANSAS', 'age' => '28'];    
 
 <a name="method-flatten"></a>
 #### `flatten()` {.collection-method}
