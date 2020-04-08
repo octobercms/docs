@@ -52,6 +52,7 @@ You may select any method from this table to see an example of its usage:
 
 <div class="collection-method-list" markdown="1">
 [all](#method-all)
+[average](#method-average)
 [chunk](#method-chunk)
 [collapse](#method-collapse)
 [contains](#method-contains)
@@ -128,6 +129,24 @@ The `all` method simply returns the underlying array represented by the collecti
     $collection->all();
 
     // [1, 2, 3]
+
+<a name="method-average"></a>
+#### `average()` {#collection-method}
+
+Alias for the [`avg`](#method-avg) method.
+
+<a name="method-avg"></a>
+#### `avg()` {#collection-method}
+
+The `avg` method returns the [average value](https://en.wikipedia.org/wiki/Average) of a given key:
+
+    $average = collect([['foo' => 10], ['foo' => 10], ['foo' => 20], ['foo' => 40]])->avg('foo');
+
+    // 20
+
+    $average = collect([1, 1, 2, 4])->avg();
+
+    // 2
 
 <a name="method-chunk"></a>
 #### `chunk()` {.collection-method}
