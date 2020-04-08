@@ -63,6 +63,9 @@ You may select any method from this table to see an example of its usage:
 [contains](#method-contains)
 [containsStrict](#method-containsstrict)
 [count](#method-count)
+[countBy](#method-countBy)
+[crossJoin](#method-crossjoin)
+[dd](#method-dd)
 [diff](#method-diff)
 [each](#method-each)
 [filter](#method-filter)
@@ -319,6 +322,90 @@ The `count` method returns the total number of items in the collection:
     $collection->count();
 
     // 4
+
+<a name="method-countBy"></a>
+#### `countBy()` {#collection-method}
+
+The `countBy` method counts the occurrences of values in the collection. By default, the method counts the occurrences of every element:
+
+    $collection = collect([1, 2, 2, 2, 3]);
+
+    $counted = $collection->countBy();
+
+    $counted->all();
+
+    // [1 => 1, 2 => 3, 3 => 1]
+
+However, you pass a callback to the `countBy` method to count all items by a custom value:
+
+    $collection = collect(['alice@gmail.com', 'bob@yahoo.com', 'carlos@gmail.com']);
+
+    $counted = $collection->countBy(function ($email) {
+        return substr(strrchr($email, "@"), 1);
+    });
+
+    $counted->all();
+
+    // ['gmail.com' => 2, 'yahoo.com' => 1]
+
+<a name="method-crossjoin"></a>
+#### `crossJoin()` {#collection-method}
+
+The `crossJoin` method cross joins the collection's values among the given arrays or collections, returning a Cartesian product with all possible permutations:
+
+    $collection = collect([1, 2]);
+
+    $matrix = $collection->crossJoin(['a', 'b']);
+
+    $matrix->all();
+
+    /*
+        [
+            [1, 'a'],
+            [1, 'b'],
+            [2, 'a'],
+            [2, 'b'],
+        ]
+    */
+
+    $collection = collect([1, 2]);
+
+    $matrix = $collection->crossJoin(['a', 'b'], ['I', 'II']);
+
+    $matrix->all();
+
+    /*
+        [
+            [1, 'a', 'I'],
+            [1, 'a', 'II'],
+            [1, 'b', 'I'],
+            [1, 'b', 'II'],
+            [2, 'a', 'I'],
+            [2, 'a', 'II'],
+            [2, 'b', 'I'],
+            [2, 'b', 'II'],
+        ]
+    */
+
+<a name="method-dd"></a>
+#### `dd()` {#collection-method}
+
+The `dd` method dumps the collection's items and ends execution of the script:
+
+    $collection = collect(['John Doe', 'Jane Doe']);
+
+    $collection->dd();
+
+    /*
+        Collection {
+            #items: array:2 [
+                0 => "John Doe"
+                1 => "Jane Doe"
+            ]
+        }
+    */
+
+If you do not want to stop executing the script, use the [`dump`](#method-dump) method instead.
 
 <a name="method-diff"></a>
 #### `diff()` {.collection-method}
