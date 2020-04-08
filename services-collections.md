@@ -54,9 +54,14 @@ You may select any method from this table to see an example of its usage:
 
 [all](#method-all)
 [average](#method-average)
+[avg](#method-avg)
 [chunk](#method-chunk)
 [collapse](#method-collapse)
+[collect](#method-collect)
+[combine](#method-combine)
+[concat](#method-concat)
 [contains](#method-contains)
+[containsStrict](#method-containsstrict)
 [count](#method-count)
 [diff](#method-diff)
 [each](#method-each)
@@ -200,13 +205,71 @@ The `collapse` method collapses a collection of arrays into a flat collection:
     $collapsed->all();
 
     // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+<a name="method-combine"></a>
+#### `combine()` {#collection-method}
+
+The `combine` method combines the values of the collection, as keys, with the values of another array or collection:
+
+    $collection = collect(['name', 'age']);
+
+    $combined = $collection->combine(['George', 29]);
+
+    $combined->all();
+
+    // ['name' => 'George', 'age' => 29]
+
+<a name="method-collect"></a>
+#### `collect()` {#collection-method}
+
+The `collect` method returns a new `Collection` instance with the items currently in the collection:
+
+    $collectionA = collect([1, 2, 3]);
+
+    $collectionB = $collectionA->collect();
+
+    $collectionB->all();
+
+    // [1, 2, 3]
+
+The `collect` method is primarily useful for converting [lazy collections](#lazy-collections) into standard `Collection` instances:
+
+    $lazyCollection = LazyCollection::make(function () {
+        yield 1;
+        yield 2;
+        yield 3;
+    });
+
+    $collection = $lazyCollection->collect();
+
+    get_class($collection);
+
+    // 'Illuminate\Support\Collection'
+
+    $collection->all();
+
+    // [1, 2, 3]
+
+> {tip} The `collect` method is especially useful when you have an instance of `Enumerable` and need a non-lazy collection instance. Since `collect()` is part of the `Enumerable` contract, you can safely use it to get a `Collection` instance.
+
+<a name="method-concat"></a>
+#### `concat()` {#collection-method}
+
+The `concat` method appends the given `array` or collection values onto the end of the collection:
+
+    $collection = collect(['John Doe']);
+
+    $concatenated = $collection->concat(['Jane Doe'])->concat(['name' => 'Johnny Doe']);
+
+    $concatenated->all();
+
+    // ['John Doe', 'Jane Doe', 'Johnny Doe']
 
 <a name="method-contains"></a>
-#### `contains()` {.collection-method}
+#### `contains()` {#collection-method}
 
 The `contains` method determines whether the collection contains a given item:
 
-    $collection = new Collection(['name' => 'Desk', 'price' => 100]);
+    $collection = collect(['name' => 'Desk', 'price' => 100]);
 
     $collection->contains('Desk');
 
@@ -218,7 +281,7 @@ The `contains` method determines whether the collection contains a given item:
 
 You may also pass a key / value pair to the `contains` method, which will determine if the given pair exists in the collection:
 
-    $collection = new Collection([
+    $collection = collect([
         ['product' => 'Desk', 'price' => 200],
         ['product' => 'Chair', 'price' => 100],
     ]);
@@ -229,13 +292,22 @@ You may also pass a key / value pair to the `contains` method, which will determ
 
 Finally, you may also pass a callback to the `contains` method to perform your own truth test:
 
-    $collection = new Collection([1, 2, 3, 4, 5]);
+    $collection = collect([1, 2, 3, 4, 5]);
 
-    $collection->contains(function ($key, $value) {
+    $collection->contains(function ($value, $key) {
         return $value > 5;
     });
 
     // false
+
+The `contains` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`containsStrict`](#method-containsstrict) method to filter using "strict" comparisons.
+
+<a name="method-containsstrict"></a>
+#### `containsStrict()` {#collection-method}
+
+This method has the same signature as the [`contains`](#method-contains) method; however, all values are compared using "strict" comparisons.
+
+> {tip} This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-contains).
 
 <a name="method-count"></a>
 #### `count()` {.collection-method}
