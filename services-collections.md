@@ -88,6 +88,8 @@ You may select any method from this table to see an example of its usage:
 [intersect](#method-intersect)
 [intersectByKeys](#method-intersectbykeys)
 [isEmpty](#method-isempty)
+[isNotEmpty](#method-isnotempty)
+[join](#method-join)
 [keyBy](#method-keyby)
 [keys](#method-keys)
 [last](#method-last)
@@ -838,6 +840,26 @@ The `isEmpty` method returns `true` if the collection is empty; otherwise `false
     new Collection([])->isEmpty();
 
     // true
+
+<a name="method-isnotempty"></a>
+#### `isNotEmpty()` {#collection-method}
+
+The `isNotEmpty` method returns `true` if the collection is not empty; otherwise, `false` is returned:
+
+    collect([])->isNotEmpty();
+
+    // false
+
+<a name="method-join"></a>
+#### `join()` {#collection-method}
+
+The `join` method joins the collection's values with a string:
+
+    collect(['a', 'b', 'c'])->join(', '); // 'a, b, c'
+    collect(['a', 'b', 'c'])->join(', ', ', and '); // 'a, b, and c'
+    collect(['a', 'b'])->join(', ', ' and '); // 'a and b'
+    collect(['a'])->join(', ', ' and '); // 'a'
+    collect([])->join(', ', ' and '); // ''
 
 <a name="method-keyby"></a>
 #### `keyBy()` {.collection-method}
