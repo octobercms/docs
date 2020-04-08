@@ -67,6 +67,11 @@ You may select any method from this table to see an example of its usage:
 [crossJoin](#method-crossjoin)
 [dd](#method-dd)
 [diff](#method-diff)
+[diffAssoc](#method-diffassoc)
+[diffKeys](#method-diffkeys)
+[dump](#method-dump)
+[duplicates](#method-duplicates)
+[duplicatesStrict](#method-duplicatesstrict)
 [each](#method-each)
 [filter](#method-filter)
 [first](#method-first)
@@ -420,22 +425,117 @@ The `diff` method compares the collection against another collection or a plain 
 
     // [1, 3, 5]
 
+<a name="method-diffassoc"></a>
+#### `diffAssoc()` {#collection-method}
+
+The `diffAssoc` method compares the collection against another collection or a plain PHP `array` based on its keys and values. This method will return the key / value pairs in the original collection that are not present in the given collection:
+
+    $collection = collect([
+        'color' => 'orange',
+        'type' => 'fruit',
+        'remain' => 6
+    ]);
+
+    $diff = $collection->diffAssoc([
+        'color' => 'yellow',
+        'type' => 'fruit',
+        'remain' => 3,
+        'used' => 6,
+    ]);
+
+    $diff->all();
+
+    // ['color' => 'orange', 'remain' => 6]
+
+<a name="method-diffkeys"></a>
+#### `diffKeys()` {#collection-method}
+
+The `diffKeys` method compares the collection against another collection or a plain PHP `array` based on its keys. This method will return the key / value pairs in the original collection that are not present in the given collection:
+
+    $collection = collect([
+        'one' => 10,
+        'two' => 20,
+        'three' => 30,
+        'four' => 40,
+        'five' => 50,
+    ]);
+
+    $diff = $collection->diffKeys([
+        'two' => 2,
+        'four' => 4,
+        'six' => 6,
+        'eight' => 8,
+    ]);
+
+    $diff->all();
+
+    // ['one' => 10, 'three' => 30, 'five' => 50]
+
+<a name="method-dump"></a>
+#### `dump()` {#collection-method}
+
+The `dump` method dumps the collection's items:
+
+    $collection = collect(['John Doe', 'Jane Doe']);
+
+    $collection->dump();
+
+    /*
+        Collection {
+            #items: array:2 [
+                0 => "John Doe"
+                1 => "Jane Doe"
+            ]
+        }
+    */
+
+If you want to stop executing the script after dumping the collection, use the [`dd`](#method-dd) method instead.
+
+<a name="method-duplicates"></a>
+#### `duplicates()` {#collection-method}
+
+The `duplicates` method retrieves and returns duplicate values from the collection:
+
+    $collection = collect(['a', 'b', 'a', 'c', 'b']);
+
+    $collection->duplicates();
+
+    // [2 => 'a', 4 => 'b']
+
+If the collection contains arrays or objects, you can pass the key of the attributes that you wish to check for duplicate values:
+
+    $employees = collect([
+        ['email' => 'abigail@example.com', 'position' => 'Developer'],
+        ['email' => 'james@example.com', 'position' => 'Designer'],
+        ['email' => 'victoria@example.com', 'position' => 'Developer'],
+    ])
+
+    $employees->duplicates('position');
+
+    // [2 => 'Developer']
+
+<a name="method-duplicatesstrict"></a>
+#### `duplicatesStrict()` {#collection-method}
+
+This method has the same signature as the [`duplicates`](#method-duplicates) method; however, all values are compared using "strict" comparisons.
+
 <a name="method-each"></a>
-#### `each()` {.collection-method}
+#### `each()` {#collection-method}
 
-The `each` method iterates over the items in the collection and passes each item to a given callback:
+The `each` method iterates over the items in the collection and passes each item to a callback:
 
-    $collection = $collection->each(function ($item, $key) {
+    $collection->each(function ($item, $key) {
         //
     });
 
-Return `false` from your callback to break out of the loop:
+If you would like to stop iterating through the items, you may return `false` from your callback:
 
-    $collection = $collection->each(function ($item, $key) {
+    $collection->each(function ($item, $key) {
         if (/* some condition */) {
             return false;
         }
     });
+
 
 <a name="method-every"></a>
 #### `every()` {.collection-method}
