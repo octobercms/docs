@@ -76,7 +76,21 @@ You may select any method from this table to see an example of its usage:
 [keys](#method-keys)
 [last](#method-last)
 [map](#method-map)
+[mapInto](#method-mapinto)
+[mapSpread](#method-mapspread)
+[mapToGroups](#method-maptogroups)
+[mapWithKeys](#method-mapwithkeys)
+[max](#method-max)
+[median](#method-median)
 [merge](#method-merge)
+[mergeRecursive](#method-mergerecursive)
+[min](#method-min)
+[mode](#method-mode)
+[nth](#method-nth)
+[only](#method-only)
+[pad](#method-pad)
+[partition](#method-partition)
+[pipe](#method-pipe)
 [pluck](#method-pluck)
 [pop](#method-pop)
 [prepend](#method-prepend)
@@ -606,28 +620,292 @@ The `map` method iterates through the collection and passes each value to the gi
 
 > **Note:** Like most other collection methods, `map` returns a new collection instance; it does not modify the collection it is called on. If you want to transform the original collection, use the [`transform`](#method-transform) method.
 
+<a name="method-mapinto"></a>
+#### `mapInto()` {#collection-method}
+
+The `mapInto()` method iterates over the collection, creating a new instance of the given class by passing the value into the constructor:
+
+    class Currency
+    {
+        /**
+         * Create a new currency instance.
+         *
+         * @param  string  $code
+         * @return void
+         */
+        function __construct(string $code)
+        {
+            $this->code = $code;
+        }
+    }
+
+    $collection = collect(['USD', 'EUR', 'GBP']);
+
+    $currencies = $collection->mapInto(Currency::class);
+
+    $currencies->all();
+
+    // [Currency('USD'), Currency('EUR'), Currency('GBP')]
+
+<a name="method-mapspread"></a>
+#### `mapSpread()` {#collection-method}
+
+The `mapSpread` method iterates over the collection's items, passing each nested item value into the given callback. The callback is free to modify the item and return it, thus forming a new collection of modified items:
+
+    $collection = collect([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+    $chunks = $collection->chunk(2);
+
+    $sequence = $chunks->mapSpread(function ($even, $odd) {
+        return $even + $odd;
+    });
+
+    $sequence->all();
+
+    // [1, 5, 9, 13, 17]
+
+<a name="method-maptogroups"></a>
+#### `mapToGroups()` {#collection-method}
+
+The `mapToGroups` method groups the collection's items by the given callback. The callback should return an associative array containing a single key / value pair, thus forming a new collection of grouped values:
+
+    $collection = collect([
+        [
+            'name' => 'John Doe',
+            'department' => 'Sales',
+        ],
+        [
+            'name' => 'Jane Doe',
+            'department' => 'Sales',
+        ],
+        [
+            'name' => 'Johnny Doe',
+            'department' => 'Marketing',
+        ]
+    ]);
+
+    $grouped = $collection->mapToGroups(function ($item, $key) {
+        return [$item['department'] => $item['name']];
+    });
+
+    $grouped->toArray();
+
+    /*
+        [
+            'Sales' => ['John Doe', 'Jane Doe'],
+            'Marketing' => ['Johnny Doe'],
+        ]
+    */
+
+    $grouped->get('Sales')->all();
+
+    // ['John Doe', 'Jane Doe']
+
+<a name="method-mapwithkeys"></a>
+#### `mapWithKeys()` {#collection-method}
+
+The `mapWithKeys` method iterates through the collection and passes each value to the given callback. The callback should return an associative array containing a single key / value pair:
+
+    $collection = collect([
+        [
+            'name' => 'John',
+            'department' => 'Sales',
+            'email' => 'john@example.com'
+        ],
+        [
+            'name' => 'Jane',
+            'department' => 'Marketing',
+            'email' => 'jane@example.com'
+        ]
+    ]);
+
+    $keyed = $collection->mapWithKeys(function ($item) {
+        return [$item['email'] => $item['name']];
+    });
+
+    $keyed->all();
+
+    /*
+        [
+            'john@example.com' => 'John',
+            'jane@example.com' => 'Jane',
+        ]
+    */
+
+<a name="method-max"></a>
+#### `max()` {#collection-method}
+
+The `max` method returns the maximum value of a given key:
+
+    $max = collect([['foo' => 10], ['foo' => 20]])->max('foo');
+
+    // 20
+
+    $max = collect([1, 2, 3, 4, 5])->max();
+
+    // 5
+
+<a name="method-median"></a>
+#### `median()` {#collection-method}
+
+The `median` method returns the [median value](https://en.wikipedia.org/wiki/Median) of a given key:
+
+    $median = collect([['foo' => 10], ['foo' => 10], ['foo' => 20], ['foo' => 40]])->median('foo');
+
+    // 15
+
+    $median = collect([1, 1, 2, 4])->median();
+
+    // 1.5
+
 <a name="method-merge"></a>
-#### `merge()` {.collection-method}
+#### `merge()` {#collection-method}
 
-The `merge` method merges the given array into the collection. Any string key in the array matching a string key in the collection will overwrite the value in the collection:
+The `merge` method merges the given array or collection with the original collection. If a string key in the given items matches a string key in the original collection, the given items's value will overwrite the value in the original collection:
 
-    $collection = new Collection(['product_id' => 1, 'name' => 'Desk']);
+    $collection = collect(['product_id' => 1, 'price' => 100]);
 
-    $merged = $collection->merge(['price' => 100, 'discount' => false]);
-
-    $merged->all();
-
-    // ['product_id' => 1, 'name' => 'Desk', 'price' => 100, 'discount' => false]
-
-If the given array's keys are numeric, the values will be appended to the end of the collection:
-
-    $collection = new Collection(['Bookcase', 'Chair']);
-
-    $merged = $collection->merge(['Desk', 'Door']);
+    $merged = $collection->merge(['price' => 200, 'discount' => false]);
 
     $merged->all();
 
-    // ['Bookcase', 'Chair', 'Desk', 'Door']
+    // ['product_id' => 1, 'price' => 200, 'discount' => false]
+
+If the given items's keys are numeric, the values will be appended to the end of the collection:
+
+    $collection = collect(['Desk', 'Chair']);
+
+    $merged = $collection->merge(['Bookcase', 'Door']);
+
+    $merged->all();
+
+    // ['Desk', 'Chair', 'Bookcase', 'Door']
+
+<a name="method-mergerecursive"></a>
+#### `mergeRecursive()` {#collection-method}
+
+The `mergeRecursive` method merges the given array or collection recursively with the original collection. If a string key in the given items matches a string key in the original collection, then the values for these keys are merged together into an array, and this is done recursively:
+
+    $collection = collect(['product_id' => 1, 'price' => 100]);
+
+    $merged = $collection->mergeRecursive(['product_id' => 2, 'price' => 200, 'discount' => false]);
+
+    $merged->all();
+
+    // ['product_id' => [1, 2], 'price' => [100, 200], 'discount' => false]
+
+<a name="method-min"></a>
+#### `min()` {#collection-method}
+
+The `min` method returns the minimum value of a given key:
+
+    $min = collect([['foo' => 10], ['foo' => 20]])->min('foo');
+
+    // 10
+
+    $min = collect([1, 2, 3, 4, 5])->min();
+
+    // 1
+
+<a name="method-mode"></a>
+#### `mode()` {#collection-method}
+
+The `mode` method returns the [mode value](https://en.wikipedia.org/wiki/Mode_(statistics)) of a given key:
+
+    $mode = collect([['foo' => 10], ['foo' => 10], ['foo' => 20], ['foo' => 40]])->mode('foo');
+
+    // [10]
+
+    $mode = collect([1, 1, 2, 4])->mode();
+
+    // [1]
+
+<a name="method-nth"></a>
+#### `nth()` {#collection-method}
+
+The `nth` method creates a new collection consisting of every n-th element:
+
+    $collection = collect(['a', 'b', 'c', 'd', 'e', 'f']);
+
+    $collection->nth(4);
+
+    // ['a', 'e']
+
+You may optionally pass an offset as the second argument:
+
+    $collection->nth(4, 1);
+
+    // ['b', 'f']
+
+<a name="method-only"></a>
+#### `only()` {#collection-method}
+
+The `only` method returns the items in the collection with the specified keys:
+
+    $collection = collect(['product_id' => 1, 'name' => 'Desk', 'price' => 100, 'discount' => false]);
+
+    $filtered = $collection->only(['product_id', 'name']);
+
+    $filtered->all();
+
+    // ['product_id' => 1, 'name' => 'Desk']
+
+For the inverse of `only`, see the [except](#method-except) method.
+
+> {tip} This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-only).
+
+<a name="method-pad"></a>
+#### `pad()` {#collection-method}
+
+The `pad` method will fill the array with the given value until the array reaches the specified size. This method behaves like the [array_pad](https://secure.php.net/manual/en/function.array-pad.php) PHP function.
+
+To pad to the left, you should specify a negative size. No padding will take place if the absolute value of the given size is less than or equal to the length of the array:
+
+    $collection = collect(['A', 'B', 'C']);
+
+    $filtered = $collection->pad(5, 0);
+
+    $filtered->all();
+
+    // ['A', 'B', 'C', 0, 0]
+
+    $filtered = $collection->pad(-5, 0);
+
+    $filtered->all();
+
+    // [0, 0, 'A', 'B', 'C']
+
+<a name="method-partition"></a>
+#### `partition()` {#collection-method}
+
+The `partition` method may be combined with the `list` PHP function to separate elements that pass a given truth test from those that do not:
+
+    $collection = collect([1, 2, 3, 4, 5, 6]);
+
+    list($underThree, $equalOrAboveThree) = $collection->partition(function ($i) {
+        return $i < 3;
+    });
+
+    $underThree->all();
+
+    // [1, 2]
+
+    $equalOrAboveThree->all();
+
+    // [3, 4, 5, 6]
+
+<a name="method-pipe"></a>
+#### `pipe()` {#collection-method}
+
+The `pipe` method passes the collection to the given callback and returns the result:
+
+    $collection = collect([1, 2, 3]);
+
+    $piped = $collection->pipe(function ($collection) {
+        return $collection->sum();
+    });
+
+    // 6
 
 <a name="method-pluck"></a>
 #### `pluck()` {.collection-method}
