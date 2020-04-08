@@ -51,6 +51,7 @@ You may select any method from this table to see an example of its usage:
 </style>
 
 <div class="collection-method-list" markdown="1">
+
 [all](#method-all)
 [average](#method-average)
 [chunk](#method-chunk)
@@ -119,6 +120,7 @@ You may select any method from this table to see an example of its usage:
 [where](#method-where)
 [whereLoose](#method-whereloose)
 [zip](#method-zip)
+
 </div>
 
 <a name="method-listing"></a>
