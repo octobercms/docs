@@ -61,15 +61,27 @@ You can find the bucket region in S3 management console, in the bucket propertie
 
 Region | Code
 ------------- | -------------
-<span class="nowrap">**US Standard**</span> | us-east-1
-<span class="nowrap">**US West (Oregon)**</span> | us-west-2
+<span class="nowrap">**US East (Ohio)**</span> | us-east-2
+<span class="nowrap">**US East (N. Virginia)**</span> | us-east-1
 <span class="nowrap">**US West (N. California)**</span> | us-west-1
-<span class="nowrap">**EU (Ireland)**</span> | eu-west-1
-<span class="nowrap">**EU (Frankfurt)**</span> | eu-central-1
+<span class="nowrap">**US West (Oregon)**</span> | us-west-2
+<span class="nowrap">**Asia Pacific (Hong Kong)**</span> | ap-east-1
+<span class="nowrap">**Asia Pacific (Mumbai)**</span> | ap-south-1
+<span class="nowrap">**Asia Pacific (Osaka-Local)**</span> | ap-northeast-3
+<span class="nowrap">**Asia Pacific (Seoul)**</span> | ap-northeast-2
 <span class="nowrap">**Asia Pacific (Singapore)**</span> | ap-southeast-1
 <span class="nowrap">**Asia Pacific (Sydney)**</span> | ap-southeast-2
 <span class="nowrap">**Asia Pacific (Tokyo)**</span> | ap-northeast-1
-<span class="nowrap">**South America (Sao Paulo)**</span> | sa-east-1
+<span class="nowrap">**Canada (Central)**</span> | ca-central-1
+<span class="nowrap">**China (Beijing)**</span> | cn-north-1
+<span class="nowrap">**China (Ningxia)**</span> | cn-northwest-1
+<span class="nowrap">**EU (Frankfurt)**</span> | eu-central-1
+<span class="nowrap">**EU (Ireland)**</span> | eu-west-1
+<span class="nowrap">**EU (London)**</span> | eu-west-2
+<span class="nowrap">**EU (Paris)**</span> | eu-west-3
+<span class="nowrap">**EU (Stockholm)**</span> | eu-north-1
+<span class="nowrap">**South America (São Paulo)**</span> | sa-east-1
+<span class="nowrap">**Middle East (Bahrain)**</span> | me-south-1
 
 Example configuration after update:
 
@@ -179,7 +191,7 @@ or
 
     <audio src="audio.mp3" controls></audio>
 
-This behavior can be overridden. If there are **oc-audio-player.html** and **oc-video-player.html** CMS partials they will be used for displaying audio and video contents. Inside the partials use the variable **src** to output a link to the source file. Example:
+This behavior can be overridden. If there are **oc-audio-player.html** and **oc-video-player.html** CMS partials, they will be used for displaying audio and video contents. Inside the partials use the variable **src** to output a link to the source file. Example:
 
     <video src="{{ src }}" width="320" height="200" controls preload></video>
 

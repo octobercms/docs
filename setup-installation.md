@@ -17,7 +17,7 @@ There are two ways you can install October, either using the [Wizard installer](
 
 October CMS has some server requirements for web hosting:
 
-1. PHP version 7.0 or higher
+1. PHP version 7.0.8 or higher
 1. PDO PHP Extension
 1. cURL PHP Extension
 1. OpenSSL PHP Extension
@@ -81,7 +81,7 @@ Configuration files are stored in the **config** directory of the application. W
 
 For example, in production environments you may want to enable [CSRF protection](../setup/configuration#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
 
-While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments.
+While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#public-folder) for additional security.
 
 <a name="crontab-setup"></a>
 ### Setting up the scheduler

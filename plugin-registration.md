@@ -217,7 +217,9 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                 // Set counter to false to prevent the default behaviour of the main menu counter being a sum of
                 // its side menu counters
                 'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
-                'counterLabel'=> 'Label describing a dynamic menu counter'
+                'counterLabel'=> 'Label describing a dynamic menu counter',
+                // Optionally you can set a badge value instead of a counter to display a string instead of a numerical counter
+                'badge'       => 'New'
 
                 'sideMenu' => [
                     'posts' => [
@@ -232,7 +234,7 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
                         'label'       => 'Categories',
                         'icon'        => 'icon-copy',
                         'url'         => Backend::url('acme/blog/categories'),
-                        'permissions' => ['acme.blog.access_categories']
+                        'permissions' => ['acme.blog.access_categories'],
                     ]
                 ]
             ]

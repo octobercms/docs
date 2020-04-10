@@ -57,11 +57,11 @@ The test class should extend the base class `PluginTestCase` and this is a speci
     php artisan october:up
     php artisan plugin:refresh Acme.Blog
     [php artisan plugin:refresh <dependency>, ...]
-    
+
 > **Note:** If your plugin uses [configuration files](../plugin/settings#file-configuration), then you will need to run `System\Classes\PluginManager::instance()->registerAll(true);` in the `setUp` method of your tests. Below is an example of a base test case class that should be used if you need to test your plugin working with other plugins instead of in isolation.
 
     use System\Classes\PluginManager;
-        
+
     class BaseTestCase extends PluginTestCase
     {
         public function setUp()
@@ -70,7 +70,7 @@ The test class should extend the base class `PluginTestCase` and this is a speci
 
             // Get the plugin manager
             $pluginManager = PluginManager::instance();
-            
+
             // Register the plugins to make features like file configuration available
             $pluginManager->registerAll(true);
 
@@ -84,13 +84,18 @@ The test class should extend the base class `PluginTestCase` and this is a speci
 
             // Get the plugin manager
             $pluginManager = PluginManager::instance();
-            
+
             // Ensure that plugins are registered again for the next test
             $pluginManager->unregisterAll();
         }
     }
 
-<a name="testing-system"></a>
+#### Changing database engine for plugins tests
+
+By default OctoberCMS uses SQLite stored in memory for the plugin testing environment. If you want to override the default behavior set the `useConfigForTesting` config to `true` in your `/config/database.php` file. When the `APP_ENV` is `testing` and the `useConfigForTesting` is `true` database parameters will be taken from `/config/database.php`.
+
+You can override the `/config/database.php` file by creating `/config/testing/database.php`. In this case variables from the latter file will be taken.
+
 ## System testing
 
 To perform unit testing on the core October files, you should download a development copy using composer or cloning the git repo. This will ensure you have the `tests/` directory.

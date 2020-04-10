@@ -169,6 +169,7 @@ Option | Description
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
+**permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 <a name="column-types"></a>
 ## Available column types
@@ -207,7 +208,7 @@ There are various column types that can be used for the **type** setting, these 
     full_name:
         label: Full Name
         type: text
-        
+
 You can also specify a custom text format, for example **Admin:Full Name (active)**
 
     full_name:
@@ -250,8 +251,6 @@ You can also specify a custom number format, for example currency **$ 99.00**
     created_at:
         label: Date
         type: datetime
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 You can also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**:
 
@@ -259,6 +258,15 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
         label: Date
         type: datetime
         format: l jS \of F Y h:i:s A
+
+You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
+
+    created_at:
+        label: Date
+        type: datetime
+        ignoreTimezone: true
+
+> **Note:** the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
 <a name="column-date"></a>
 ### Date
@@ -268,8 +276,6 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: date
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 <a name="column-time"></a>
 ### Time
@@ -279,8 +285,6 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: time
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 <a name="column-timesince"></a>
 ### Time since
@@ -290,8 +294,6 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: timesince
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 <a name="column-timetense"></a>
 ### Time tense
@@ -301,8 +303,6 @@ You can also specify a custom date format, for example **Thursday 25th of Decemb
     created_at:
         label: Date
         type: timetense
-        # Display datetime exactly as it is stored, ignores October's and the backend user's specified timezones.
-        ignoreTimezone: true
 
 <a name="column-select"></a>
 ### Select
@@ -329,7 +329,7 @@ To display a column that shows the number of related records, use the `useRelati
         label: Users
         relation: users
         useRelationCount: true
-        
+
 > **Note:** Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
 
 **Best Practice:**
@@ -446,10 +446,50 @@ Option | Description
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query, the first argument will contain the filtered value(s).
+**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
+**permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
+
+<a name="filter-scope-dependencies"></a>
+### Filter Dependencies
+
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#filter-scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
+
+    country:
+        label: Country
+        type: group
+        conditions: country_id in (:filtered)
+        modelClass: October\Test\Models\Location
+        options: getCountryOptions
+
+    city:
+        label: City
+        type: group
+        conditions: city_id in (:filtered)
+        modelClass: October\Test\Models\Location
+        options: getCityOptions
+        dependsOn: country
+
+In the above example, the `city` scope will refresh when the `country` scope has changed. Any scope that defines the `dependsOn` property will be passed all current scope objects for the Filter widget, including their current values, as an array that is keyed by the scope names.
+
+    public function getCountryOptions()
+    {
+        return Country::lists('name', 'id');
+    }
+
+    public function getCityOptions($scopes = null)
+    {
+        if (!empty($scopes['country']->value)) {
+            return City::whereIn('country_id', array_keys($scopes['country']->value))->lists('name', 'id');
+        } else {
+            return City::lists('name', 'id');
+        }
+    }
+
+> **Note:** Scope dependencies with `type: group` are only supported at this stage.
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -487,14 +527,14 @@ These types can be used to determine how the filter scope should be displayed.
         label: Status
         type: group
         conditions: status in (:filtered)
-        default: 
+        default:
             pending: Pending
             active: Active
         options:
             pending: Pending
             active: Active
             closed: Closed
-            
+
 <a name="filter-checkbox"></a>
 ### Checkbox
 
@@ -505,7 +545,7 @@ These types can be used to determine how the filter scope should be displayed.
         type: checkbox
         default: 1
         conditions: is_published <> true
-        
+
 <a name="filter-switch"></a>
 ### Switch
 
@@ -518,7 +558,7 @@ These types can be used to determine how the filter scope should be displayed.
         conditions:
             - is_approved <> true
             - is_approved = true
-            
+
 <a name="filter-date"></a>
 ### Date
 
@@ -531,7 +571,7 @@ These types can be used to determine how the filter scope should be displayed.
         maxDate: '2030-10-13'
         yearRange: 10
         conditions: created_at >= ':filtered'
-        
+
 <a name="filter-daterange"></a>
 ### Date Range
 
@@ -558,7 +598,7 @@ To use default value for Date and Date Range
             ],
         ]);
     });
-  
+
     // return value must be instance of carbon
     public function myDefaultTime()
     {
@@ -568,6 +608,19 @@ To use default value for Date and Date Range
         ];
     }
 ```
+
+You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
+
+    published_at:
+        label: Date
+        type: daterange
+        minDate: '2001-01-23'
+        maxDate: '2030-10-13'
+        yearRange: 10
+        conditions: created_at >= ':after' AND created_at <= ':before'
+        ignoreTimezone: true
+
+> **Note:** the `ignoreTimezone` option also applies to the `date` filter type as well.
 
 <a name="filter-number"></a>
 ### Number
@@ -579,16 +632,16 @@ To use default value for Date and Date Range
         type: number
         default: 14
         conditions: age >= ':filtered'
-        
+
 <a name="filter-numberrange"></a>
 ### Number Range
 
-`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`.
+`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`. You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
 
     visitors:
         label: Visitor Count
         type: numberrange
-        default: 
+        default:
             0: 10
             1: 20
         conditions: visitors >= ':min' and visitors <= ':max'
@@ -603,7 +656,7 @@ To use default value for Date and Date Range
         type: text
         conditions: username = :value
         size: 2
-            
+
 <a name="extend-list-behavior"></a>
 ## Extending list behavior
 
@@ -736,6 +789,15 @@ You can inject a custom css row class by adding a `listInjectRowClass` method on
         }
     }
 
+A special CSS class `nolink` is available to force a row to be unclickable, even if the `recordUrl` or `recordOnClick` options are defined for the List widget. Returning this class in an event will allow you to make records unclickable - for example, for soft-deleted rows or for informational rows:
+
+        public function listInjectRowClass($record, $value)
+        {
+            if ($record->trashed()) {
+                return 'nolink';
+            }
+        }
+
 <a name="extend-filter-scopes"></a>
 ### Extending filter scopes
 
@@ -788,7 +850,7 @@ The [list filter](#list-filters) model query can also be extended by overriding 
             $query->where('status', '<>', 'all');
         }
     }
-    
+
 <a name="extend-records-collection"></a>
 ### Extending the records collection
 

@@ -416,7 +416,7 @@ Alternatively, you may use the `lockForUpdate` method. A "for update" lock preve
 <a name="caching-queries"></a>
 ## Caching queries
 
-<a name="adding-constraints"></a>
+<a name="persistent-caching"></a>
 ### Persistent caching
 
 You may easily cache the results of a query using the [Cache service](../services/cache). Simply chain the `remember` or `rememberForever` method when preparing the query.
@@ -425,7 +425,7 @@ You may easily cache the results of a query using the [Cache service](../service
 
 In this example, the results of the query will be cached for ten minutes. While the results are cached, the query will not be run against the database, and the results will be loaded from the default cache driver specified for your application.
 
-<a name="adding-constraints"></a>
+<a name="in-memory-caching"></a>
 ### In-memory caching
 
 Duplicate queries across the same request can be prevented by using in-memory caching. This feature is enabled by default for [queries prepared by a model](../database/model#retrieving-models) but not those generated directly using the `Db` facade.

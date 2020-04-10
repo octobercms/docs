@@ -1,6 +1,6 @@
 # {% component %}
 
-The `{% component %}` tag will parse the default markup content for a [CMS component](../cms/partials) and display it on the page. Not all components provide default markup, the documentation for the plugin will guide in the correct usage.
+The `{% component %}` tag will parse the default markup content for a [CMS component](../cms/components) and display it on the page. Not all components provide default markup, the documentation for the plugin will guide in the correct usage.
 
     {% component "blogPosts" %}
 
