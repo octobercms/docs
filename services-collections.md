@@ -133,8 +133,11 @@ You may select any method from this table to see an example of its usage:
 [sortKeys](#method-sortkeys)
 [sortKeysDesc](#method-sortkeysdesc)
 [splice](#method-splice)
+[split](#method-split)
 [sum](#method-sum)
 [take](#method-take)
+[tap](#method-tap)
+[times](#method-times)
 [toArray](#method-toarray)
 [toJson](#method-tojson)
 [transform](#method-transform)
@@ -1715,7 +1718,20 @@ In addition, you can pass a third argument containing the new items to replace t
     $collection->all();
 
     // [1, 2, 10, 11, 4, 5]
+    
+<a name="method-split"></a>
+#### `split()` {#collection-method}
 
+The `split` method breaks a collection into the given number of groups:
+
+    $collection = collect([1, 2, 3, 4, 5]);
+
+    $groups = $collection->split(3);
+
+    $groups->toArray();
+
+    // [[1, 2], [3, 4], [5]]    
+    
 <a name="method-sum"></a>
 #### `sum()` {.collection-method}
 
@@ -1772,6 +1788,49 @@ You may also pass a negative integer to take the specified amount of items from 
     $chunk->all();
 
     // [4, 5]
+
+<a name="method-tap"></a>
+#### `tap()` {#collection-method}
+
+The `tap` method passes the collection to the given callback, allowing you to "tap" into the collection at a specific point and do something with the items while not affecting the collection itself:
+
+    collect([2, 4, 3, 1, 5])
+        ->sort()
+        ->tap(function ($collection) {
+            Log::debug('Values after sorting', $collection->values()->toArray());
+        })
+        ->shift();
+
+    // 1
+
+<a name="method-times"></a>
+#### `times()` {#collection-method}
+
+The static `times` method creates a new collection by invoking the callback a given amount of times:
+
+    $collection = Collection::times(10, function ($number) {
+        return $number * 9;
+    });
+
+    $collection->all();
+
+    // [9, 18, 27, 36, 45, 54, 63, 72, 81, 90]
+
+This method can be useful when combined with factories to create [Eloquent](/docs/{{version}}/eloquent) models:
+
+    $categories = Collection::times(3, function ($number) {
+        return factory(Category::class)->create(['name' => "Category No. $number"]);
+    });
+
+    $categories->all();
+
+    /*
+        [
+            ['id' => 1, 'name' => 'Category No. 1'],
+            ['id' => 2, 'name' => 'Category No. 2'],
+            ['id' => 3, 'name' => 'Category No. 3'],
+        ]
+    */
 
 <a name="method-toarray"></a>
 #### `toArray()` {.collection-method}
