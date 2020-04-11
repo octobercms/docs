@@ -149,8 +149,21 @@ You may select any method from this table to see an example of its usage:
 [unlessNotEmpty](#method-unlessnotempty)
 [unwrap](#method-unwrap)
 [values](#method-values)
+[when](#method-when)
+[whenEmpty](#method-whenempty)
+[whenNotEmpty](#method-whennotempty)
 [where](#method-where)
-[whereLoose](#method-whereloose)
+[whereStrict](#method-wherestrict)
+[whereBetween](#method-wherebetween)
+[whereIn](#method-wherein)
+[whereInStrict](#method-whereinstrict)
+[whereInstanceOf](#method-whereinstanceof)
+[whereNotBetween](#method-wherenotbetween)
+[whereNotIn](#method-wherenotin)
+[whereNotInStrict](#method-wherenotinstrict)
+[whereNotNull](#method-wherenotnull)
+[whereNull](#method-wherenull)
+[wrap](#method-wrap)
 [zip](#method-zip)
 
 </div>
@@ -2023,12 +2036,116 @@ The `values` method returns a new collection with the keys reset to consecutive 
             1 => ['product' => 'Desk', 'price' => 200],
         ]
     */
+
+<a name="method-when"></a>
+#### `when()` {#collection-method}
+
+The `when` method will execute the given callback when the first argument given to the method evaluates to `true`:
+
+    $collection = collect([1, 2, 3]);
+
+    $collection->when(true, function ($collection) {
+        return $collection->push(4);
+    });
+
+    $collection->when(false, function ($collection) {
+        return $collection->push(5);
+    });
+
+    $collection->all();
+
+    // [1, 2, 3, 4]
+
+For the inverse of `when`, see the [`unless`](#method-unless) method.
+
+<a name="method-whenempty"></a>
+#### `whenEmpty()` {#collection-method}
+
+The `whenEmpty` method will execute the given callback when the collection is empty:
+
+    $collection = collect(['michael', 'tom']);
+
+    $collection->whenEmpty(function ($collection) {
+        return $collection->push('adam');
+    });
+
+    $collection->all();
+
+    // ['michael', 'tom']
+
+
+    $collection = collect();
+
+    $collection->whenEmpty(function ($collection) {
+        return $collection->push('adam');
+    });
+
+    $collection->all();
+
+    // ['adam']
+
+
+    $collection = collect(['michael', 'tom']);
+
+    $collection->whenEmpty(function ($collection) {
+        return $collection->push('adam');
+    }, function ($collection) {
+        return $collection->push('taylor');
+    });
+
+    $collection->all();
+
+    // ['michael', 'tom', 'taylor']
+
+For the inverse of `whenEmpty`, see the [`whenNotEmpty`](#method-whennotempty) method.
+
+<a name="method-whennotempty"></a>
+#### `whenNotEmpty()` {#collection-method}
+
+The `whenNotEmpty` method will execute the given callback when the collection is not empty:
+
+    $collection = collect(['michael', 'tom']);
+
+    $collection->whenNotEmpty(function ($collection) {
+        return $collection->push('adam');
+    });
+
+    $collection->all();
+
+    // ['michael', 'tom', 'adam']
+
+
+    $collection = collect();
+
+    $collection->whenNotEmpty(function ($collection) {
+        return $collection->push('adam');
+    });
+
+    $collection->all();
+
+    // []
+
+
+    $collection = collect();
+
+    $collection->whenNotEmpty(function ($collection) {
+        return $collection->push('adam');
+    }, function ($collection) {
+        return $collection->push('taylor');
+    });
+
+    $collection->all();
+
+    // ['taylor']
+
+For the inverse of `whenNotEmpty`, see the [`whenEmpty`](#method-whenempty) method.
+
 <a name="method-where"></a>
-#### `where()` {.collection-method}
+#### `where()` {#collection-method}
 
 The `where` method filters the collection by a given key / value pair:
 
-    $collection = new Collection([
+    $collection = collect([
         ['product' => 'Desk', 'price' => 200],
         ['product' => 'Chair', 'price' => 100],
         ['product' => 'Bookcase', 'price' => 150],
@@ -2040,25 +2157,240 @@ The `where` method filters the collection by a given key / value pair:
     $filtered->all();
 
     /*
-    [
-        ['product' => 'Chair', 'price' => 100],
-        ['product' => 'Door', 'price' => 100],
-    ]
+        [
+            ['product' => 'Chair', 'price' => 100],
+            ['product' => 'Door', 'price' => 100],
+        ]
     */
 
 The `where` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereStrict`](#method-wherestrict) method to filter using "strict" comparisons.
 
+Optionally, you may pass a comparison operator as the second parameter.
+
+    $collection = collect([
+        ['name' => 'Jim', 'deleted_at' => '2019-01-01 00:00:00'],
+        ['name' => 'Sally', 'deleted_at' => '2019-01-02 00:00:00'],
+        ['name' => 'Sue', 'deleted_at' => null],
+    ]);
+
+    $filtered = $collection->where('deleted_at', '!=', null);
+
+    $filtered->all();
+
+    /*
+        [
+            ['name' => 'Jim', 'deleted_at' => '2019-01-01 00:00:00'],
+            ['name' => 'Sally', 'deleted_at' => '2019-01-02 00:00:00'],
+        ]
+    */
+
 <a name="method-wherestrict"></a>
-#### `whereStrict()` {.collection-method}
+#### `whereStrict()` {#collection-method}
 
 This method has the same signature as the [`where`](#method-where) method; however, all values are compared using "strict" comparisons.
 
+<a name="method-wherebetween"></a>
+#### `whereBetween()` {#collection-method}
+
+The `whereBetween` method filters the collection within a given range:
+
+    $collection = collect([
+        ['product' => 'Desk', 'price' => 200],
+        ['product' => 'Chair', 'price' => 80],
+        ['product' => 'Bookcase', 'price' => 150],
+        ['product' => 'Pencil', 'price' => 30],
+        ['product' => 'Door', 'price' => 100],
+    ]);
+
+    $filtered = $collection->whereBetween('price', [100, 200]);
+
+    $filtered->all();
+
+    /*
+        [
+            ['product' => 'Desk', 'price' => 200],
+            ['product' => 'Bookcase', 'price' => 150],
+            ['product' => 'Door', 'price' => 100],
+        ]
+    */
+
+<a name="method-wherein"></a>
+#### `whereIn()` {#collection-method}
+
+The `whereIn` method filters the collection by a given key / value contained within the given array:
+
+    $collection = collect([
+        ['product' => 'Desk', 'price' => 200],
+        ['product' => 'Chair', 'price' => 100],
+        ['product' => 'Bookcase', 'price' => 150],
+        ['product' => 'Door', 'price' => 100],
+    ]);
+
+    $filtered = $collection->whereIn('price', [150, 200]);
+
+    $filtered->all();
+
+    /*
+        [
+            ['product' => 'Desk', 'price' => 200],
+            ['product' => 'Bookcase', 'price' => 150],
+        ]
+    */
+
+The `whereIn` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereInStrict`](#method-whereinstrict) method to filter using "strict" comparisons.
+
+<a name="method-whereinstrict"></a>
+#### `whereInStrict()` {#collection-method}
+
+This method has the same signature as the [`whereIn`](#method-wherein) method; however, all values are compared using "strict" comparisons.
+
+<a name="method-whereinstanceof"></a>
+#### `whereInstanceOf()` {#collection-method}
+
+The `whereInstanceOf` method filters the collection by a given class type:
+
+    use App\User;
+    use App\Post;
+
+    $collection = collect([
+        new User,
+        new User,
+        new Post,
+    ]);
+
+    $filtered = $collection->whereInstanceOf(User::class);
+
+    $filtered->all();
+
+    // [App\User, App\User]
+
+<a name="method-wherenotbetween"></a>
+#### `whereNotBetween()` {#collection-method}
+
+The `whereNotBetween` method filters the collection within a given range:
+
+    $collection = collect([
+        ['product' => 'Desk', 'price' => 200],
+        ['product' => 'Chair', 'price' => 80],
+        ['product' => 'Bookcase', 'price' => 150],
+        ['product' => 'Pencil', 'price' => 30],
+        ['product' => 'Door', 'price' => 100],
+    ]);
+
+    $filtered = $collection->whereNotBetween('price', [100, 200]);
+
+    $filtered->all();
+
+    /*
+        [
+            ['product' => 'Chair', 'price' => 80],
+            ['product' => 'Pencil', 'price' => 30],
+        ]
+    */
+
+<a name="method-wherenotin"></a>
+#### `whereNotIn()` {#collection-method}
+
+The `whereNotIn` method filters the collection by a given key / value not contained within the given array:
+
+    $collection = collect([
+        ['product' => 'Desk', 'price' => 200],
+        ['product' => 'Chair', 'price' => 100],
+        ['product' => 'Bookcase', 'price' => 150],
+        ['product' => 'Door', 'price' => 100],
+    ]);
+
+    $filtered = $collection->whereNotIn('price', [150, 200]);
+
+    $filtered->all();
+
+    /*
+        [
+            ['product' => 'Chair', 'price' => 100],
+            ['product' => 'Door', 'price' => 100],
+        ]
+    */
+
+The `whereNotIn` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`whereNotInStrict`](#method-wherenotinstrict) method to filter using "strict" comparisons.
+
+<a name="method-wherenotinstrict"></a>
+#### `whereNotInStrict()` {#collection-method}
+
+This method has the same signature as the [`whereNotIn`](#method-wherenotin) method; however, all values are compared using "strict" comparisons.
+
+<a name="method-wherenotnull"></a>
+#### `whereNotNull()` {#collection-method}
+
+The `whereNotNull` method filters items where the given key is not null:
+
+    $collection = collect([
+        ['name' => 'Desk'],
+        ['name' => null],
+        ['name' => 'Bookcase'],
+    ]);
+    
+    $filtered = $collection->whereNotNull('name');
+
+    $filtered->all();
+    
+    /*
+        [
+            ['name' => 'Desk'],
+            ['name' => 'Bookcase'],
+        ]
+    */
+
+<a name="method-wherenull"></a>
+#### `whereNull()` {#collection-method}
+
+The `whereNull` method filters items where the given key is null:
+
+    $collection = collect([
+        ['name' => 'Desk'],
+        ['name' => null],
+        ['name' => 'Bookcase'],
+    ]);
+    
+    $filtered = $collection->whereNull('name');
+
+    $filtered->all();
+    
+    /*
+        [
+            ['name' => null],
+        ]
+    */
+
+
+<a name="method-wrap"></a>
+#### `wrap()` {#collection-method}
+
+The static `wrap` method wraps the given value in a collection when applicable:
+
+    $collection = Collection::wrap('John Doe');
+
+    $collection->all();
+
+    // ['John Doe']
+
+    $collection = Collection::wrap(['John Doe']);
+
+    $collection->all();
+
+    // ['John Doe']
+
+    $collection = Collection::wrap(collect('John Doe'));
+
+    $collection->all();
+
+    // ['John Doe']
+
 <a name="method-zip"></a>
-#### `zip()` {.collection-method}
+#### `zip()` {#collection-method}
 
-The `zip` method merges together the values of the given array with the values of the collection at the corresponding index:
+The `zip` method merges together the values of the given array with the values of the original collection at the corresponding index:
 
-    $collection = new Collection(['Chair', 'Desk']);
+    $collection = collect(['Chair', 'Desk']);
 
     $zipped = $collection->zip([100, 200]);
 
