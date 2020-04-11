@@ -124,7 +124,9 @@ You may select any method from this table to see an example of its usage:
 [search](#method-search)
 [shift](#method-shift)
 [shuffle](#method-shuffle)
+[skip](#method-skip)
 [slice](#method-slice)
+[some](#method-some)
 [sort](#method-sort)
 [sortBy](#method-sortby)
 [sortByDesc](#method-sortbydesc)
@@ -1481,12 +1483,26 @@ The `shuffle` method randomly shuffles the items in the collection:
 
     // [3, 2, 5, 1, 4] (generated randomly)
 
+
+<a name="method-skip"></a>
+#### `skip()` {#collection-method}
+
+The `skip` method returns a new collection, without the first given amount of items:
+
+    $collection = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+    $collection = $collection->skip(4);
+
+    $collection->all();
+
+    // [5, 6, 7, 8, 9, 10]
+
 <a name="method-slice"></a>
-#### `slice()` {.collection-method}
+#### `slice()` {#collection-method}
 
 The `slice` method returns a slice of the collection starting at the given index:
 
-    $collection = new Collection([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    $collection = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
     $slice = $collection->slice(4);
 
@@ -1502,7 +1518,12 @@ If you would like to limit the size of the returned slice, pass the desired size
 
     // [5, 6]
 
-The returned slice will have new, numerically indexed keys. If you wish to preserve the original keys, pass `true` as the third argument to the method.
+The returned slice will preserve keys by default. If you do not wish to preserve the original keys, you can use the [`values`](#method-values) method to reindex them.
+
+<a name="method-some"></a>
+#### `some()` {#collection-method}
+
+Alias for the [`contains`](#method-contains) method.
 
 <a name="method-sort"></a>
 #### `sort()` {.collection-method}
