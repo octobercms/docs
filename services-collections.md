@@ -4,6 +4,11 @@
 - [Creating collections](#creating-collections)
 - [Available methods](#available-methods)
 - [Higher Order Messages](#higher-order-messages)
+- [Lazy Collections](#lazy-collections)
+    - [Introduction](#lazy-collection-introduction)
+    - [Creating Lazy Collections](#creating-lazy-collections)
+    - [The Enumerable Contract](#the-enumerable-contract)
+    - [Lazy Collection Methods](#lazy-collection-methods)
 
 <a name="introduction"></a>
 ## Introduction
@@ -2414,3 +2419,221 @@ Likewise, we can use the `sum` higher order message to gather the total number o
     $users = User::where('group', 'Development')->get();
 
     return $users->sum->votes;
+    
+<a name="lazy-collections"></a>
+## Lazy Collections
+
+<a name="lazy-collection-introduction"></a>
+### Introduction
+
+> {note} Before learning more about Laravel's lazy collections, take some time to familiarize yourself with [PHP generators](https://www.php.net/manual/en/language.generators.overview.php).
+
+To supplement the already powerful `Collection` class, the `LazyCollection` class leverages PHP's [generators](https://www.php.net/manual/en/language.generators.overview.php) to allow you to work with very large datasets while keeping memory usage low.
+
+For example, imagine your application needs to process a multi-gigabyte log file while taking advantage of Laravel's collection methods to parse the logs. Instead of reading the entire file into memory at once, lazy collections may be used to keep only a small part of the file in memory at a given time:
+
+    use App\LogEntry;
+    use Illuminate\Support\LazyCollection;
+
+    LazyCollection::make(function () {
+        $handle = fopen('log.txt', 'r');
+
+        while (($line = fgets($handle)) !== false) {
+            yield $line;
+        }
+    })->chunk(4)->map(function ($lines) {
+        return LogEntry::fromLines($lines);
+    })->each(function (LogEntry $logEntry) {
+        // Process the log entry...
+    });
+
+Or, imagine you need to iterate through 10,000 Eloquent models. When using traditional Laravel collections, all 10,000 Eloquent models must be loaded into memory at the same time:
+
+    $users = App\User::all()->filter(function ($user) {
+        return $user->id > 500;
+    });
+
+However, the query builder's `cursor` method returns a `LazyCollection` instance. This allows you to still only run a single query against the database but also only keep one Eloquent model loaded in memory at a time. In this example, the `filter` callback is not executed until we actually iterate over each user individually, allowing for a drastic reduction in memory usage:
+
+    $users = App\User::cursor()->filter(function ($user) {
+        return $user->id > 500;
+    });
+
+    foreach ($users as $user) {
+        echo $user->id;
+    }
+
+<a name="creating-lazy-collections"></a>
+### Creating Lazy Collections
+
+To create a lazy collection instance, you should pass a PHP generator function to the collection's `make` method:
+
+    use Illuminate\Support\LazyCollection;
+
+    LazyCollection::make(function () {
+        $handle = fopen('log.txt', 'r');
+
+        while (($line = fgets($handle)) !== false) {
+            yield $line;
+        }
+    });
+
+<a name="the-enumerable-contract"></a>
+### The Enumerable Contract
+
+Almost all methods available on the `Collection` class are also available on the `LazyCollection` class. Both of these classes implement the `Illuminate\Support\Enumerable` contract, which defines the following methods:
+
+<div id="collection-method-list" markdown="1">
+
+[all](#method-all)
+[average](#method-average)
+[avg](#method-avg)
+[chunk](#method-chunk)
+[collapse](#method-collapse)
+[collect](#method-collect)
+[combine](#method-combine)
+[concat](#method-concat)
+[contains](#method-contains)
+[containsStrict](#method-containsstrict)
+[count](#method-count)
+[countBy](#method-countBy)
+[crossJoin](#method-crossjoin)
+[dd](#method-dd)
+[diff](#method-diff)
+[diffAssoc](#method-diffassoc)
+[diffKeys](#method-diffkeys)
+[dump](#method-dump)
+[duplicates](#method-duplicates)
+[duplicatesStrict](#method-duplicatesstrict)
+[each](#method-each)
+[eachSpread](#method-eachspread)
+[every](#method-every)
+[except](#method-except)
+[filter](#method-filter)
+[first](#method-first)
+[firstWhere](#method-first-where)
+[flatMap](#method-flatmap)
+[flatten](#method-flatten)
+[flip](#method-flip)
+[forPage](#method-forpage)
+[get](#method-get)
+[groupBy](#method-groupby)
+[has](#method-has)
+[implode](#method-implode)
+[intersect](#method-intersect)
+[intersectByKeys](#method-intersectbykeys)
+[isEmpty](#method-isempty)
+[isNotEmpty](#method-isnotempty)
+[join](#method-join)
+[keyBy](#method-keyby)
+[keys](#method-keys)
+[last](#method-last)
+[macro](#method-macro)
+[make](#method-make)
+[map](#method-map)
+[mapInto](#method-mapinto)
+[mapSpread](#method-mapspread)
+[mapToGroups](#method-maptogroups)
+[mapWithKeys](#method-mapwithkeys)
+[max](#method-max)
+[median](#method-median)
+[merge](#method-merge)
+[mergeRecursive](#method-mergerecursive)
+[min](#method-min)
+[mode](#method-mode)
+[nth](#method-nth)
+[only](#method-only)
+[pad](#method-pad)
+[partition](#method-partition)
+[pipe](#method-pipe)
+[pluck](#method-pluck)
+[random](#method-random)
+[reduce](#method-reduce)
+[reject](#method-reject)
+[replace](#method-replace)
+[replaceRecursive](#method-replacerecursive)
+[reverse](#method-reverse)
+[search](#method-search)
+[shuffle](#method-shuffle)
+[skip](#method-skip)
+[slice](#method-slice)
+[some](#method-some)
+[sort](#method-sort)
+[sortBy](#method-sortby)
+[sortByDesc](#method-sortbydesc)
+[sortKeys](#method-sortkeys)
+[sortKeysDesc](#method-sortkeysdesc)
+[split](#method-split)
+[sum](#method-sum)
+[take](#method-take)
+[tap](#method-tap)
+[times](#method-times)
+[toArray](#method-toarray)
+[toJson](#method-tojson)
+[union](#method-union)
+[unique](#method-unique)
+[uniqueStrict](#method-uniquestrict)
+[unless](#method-unless)
+[unlessEmpty](#method-unlessempty)
+[unlessNotEmpty](#method-unlessnotempty)
+[unwrap](#method-unwrap)
+[values](#method-values)
+[when](#method-when)
+[whenEmpty](#method-whenempty)
+[whenNotEmpty](#method-whennotempty)
+[where](#method-where)
+[whereStrict](#method-wherestrict)
+[whereBetween](#method-wherebetween)
+[whereIn](#method-wherein)
+[whereInStrict](#method-whereinstrict)
+[whereInstanceOf](#method-whereinstanceof)
+[whereNotBetween](#method-wherenotbetween)
+[whereNotIn](#method-wherenotin)
+[whereNotInStrict](#method-wherenotinstrict)
+[wrap](#method-wrap)
+[zip](#method-zip)
+
+</div>
+
+> {note} Methods that mutate the collection (such as `shift`, `pop`, `prepend` etc.) are _not_ available on the `LazyCollection` class.
+
+<a name="lazy-collection-methods"></a>
+### Lazy Collection Methods
+
+In addition to the methods defined in the `Enumerable` contract, the `LazyCollection` class contains the following methods:
+
+<a name="method-tapEach"></a>
+#### `tapEach()` {#collection-method}
+
+While the `each` method calls the given callback for each item in the collection right away, the `tapEach` method only calls the given callback as the items are being pulled out of the list one by one:
+
+    $lazyCollection = LazyCollection::times(INF)->tapEach(function ($value) {
+        dump($value);
+    });
+
+    // Nothing has been dumped so far...
+
+    $array = $lazyCollection->take(3)->all();
+
+    // 1
+    // 2
+    // 3
+
+<a name="method-remember"></a>
+#### `remember()` {#collection-method}
+
+The `remember` method returns a new lazy collection that will remember any values that have already been enumerated and will not retrieve them again when the collection is enumerated again:
+
+    $users = User::cursor()->remember();
+
+    // No query has been executed yet...
+
+    $users->take(5)->all();
+
+    // The query has been executed and the first 5 users have been hydrated from the database...
+
+    $users->take(20)->all();
+
+    // First 5 users come from the collection's cache... The rest are hydrated from the database...    
+    
+    
