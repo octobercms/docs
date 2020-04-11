@@ -141,7 +141,13 @@ You may select any method from this table to see an example of its usage:
 [toArray](#method-toarray)
 [toJson](#method-tojson)
 [transform](#method-transform)
+[union](#method-union)
 [unique](#method-unique)
+[uniqueStrict](#method-uniquestrict)
+[unless](#method-unless)
+[unlessEmpty](#method-unlessempty)
+[unlessNotEmpty](#method-unlessnotempty)
+[unwrap](#method-unwrap)
 [values](#method-values)
 [where](#method-where)
 [whereLoose](#method-whereloose)
@@ -1877,12 +1883,25 @@ The `transform` method iterates over the collection and calls the given callback
 
 > **Note:** Unlike most other collection methods, `transform` modifies the collection itself. If you wish to create a new collection instead, use the [`map`](#method-map) method.
 
+<a name="method-union"></a>
+#### `union()` {#collection-method}
+
+The `union` method adds the given array to the collection. If the given array contains keys that are already in the original collection, the original collection's values will be preferred:
+
+    $collection = collect([1 => ['a'], 2 => ['b']]);
+
+    $union = $collection->union([3 => ['c'], 1 => ['b']]);
+
+    $union->all();
+
+    // [1 => ['a'], 2 => ['b'], 3 => ['c']]
+
 <a name="method-unique"></a>
-#### `unique()` {.collection-method}
+#### `unique()` {#collection-method}
 
-The `unique` method returns all of the unique items in the collection:
+The `unique` method returns all of the unique items in the collection. The returned collection keeps the original array keys, so in this example we'll use the [`values`](#method-values) method to reset the keys to consecutively numbered indexes:
 
-    $collection = new Collection([1, 1, 2, 2, 3, 4, 2]);
+    $collection = collect([1, 1, 2, 2, 3, 4, 2]);
 
     $unique = $collection->unique();
 
@@ -1890,11 +1909,9 @@ The `unique` method returns all of the unique items in the collection:
 
     // [1, 2, 3, 4]
 
-The returned collection keeps the original array keys. In this example we used the [`values`](#method-values) method to reset the keys to consecutively numbered indexes.
-
 When dealing with nested arrays or objects, you may specify the key used to determine uniqueness:
 
-    $collection = new Collection([
+    $collection = collect([
         ['name' => 'iPhone 6', 'brand' => 'Apple', 'type' => 'phone'],
         ['name' => 'iPhone 5', 'brand' => 'Apple', 'type' => 'phone'],
         ['name' => 'Apple Watch', 'brand' => 'Apple', 'type' => 'watch'],
@@ -1929,6 +1946,62 @@ You may also pass your own callback to determine item uniqueness:
             ['name' => 'Galaxy Gear', 'brand' => 'Samsung', 'type' => 'watch'],
         ]
     */
+
+The `unique` method uses "loose" comparisons when checking item values, meaning a string with an integer value will be considered equal to an integer of the same value. Use the [`uniqueStrict`](#method-uniquestrict) method to filter using "strict" comparisons.
+
+<a name="method-uniquestrict"></a>
+#### `uniqueStrict()` {#collection-method}
+
+This method has the same signature as the [`unique`](#method-unique) method; however, all values are compared using "strict" comparisons.
+
+<a name="method-unless"></a>
+#### `unless()` {#collection-method}
+
+The `unless` method will execute the given callback unless the first argument given to the method evaluates to `true`:
+
+    $collection = collect([1, 2, 3]);
+
+    $collection->unless(true, function ($collection) {
+        return $collection->push(4);
+    });
+
+    $collection->unless(false, function ($collection) {
+        return $collection->push(5);
+    });
+
+    $collection->all();
+
+    // [1, 2, 3, 5]
+
+For the inverse of `unless`, see the [`when`](#method-when) method.
+
+<a name="method-unlessempty"></a>
+#### `unlessEmpty()` {#collection-method}
+
+Alias for the [`whenNotEmpty`](#method-whennotempty) method.
+
+<a name="method-unlessnotempty"></a>
+#### `unlessNotEmpty()` {#collection-method}
+
+Alias for the [`whenEmpty`](#method-whenempty) method.
+
+<a name="method-unwrap"></a>
+#### `unwrap()` {#collection-method}
+
+The static `unwrap` method returns the collection's underlying items from the given value when applicable:
+
+    Collection::unwrap(collect('John Doe'));
+
+    // ['John Doe']
+
+    Collection::unwrap(['John Doe']);
+
+    // ['John Doe']
+
+    Collection::unwrap('John Doe');
+
+    // 'John Doe'
+
 
 <a name="method-values"></a>
 #### `values()` {.collection-method}
