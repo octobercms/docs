@@ -130,6 +130,8 @@ You may select any method from this table to see an example of its usage:
 [sort](#method-sort)
 [sortBy](#method-sortby)
 [sortByDesc](#method-sortbydesc)
+[sortKeys](#method-sortkeys)
+[sortKeysDesc](#method-sortkeysdesc)
 [splice](#method-splice)
 [sum](#method-sum)
 [take](#method-take)
@@ -1595,6 +1597,56 @@ You can also pass your own callback to determine how to sort the collection valu
 #### `sortByDesc()` {.collection-method}
 
 This method has the same signature as the [`sortBy`](#method-sortby) method, but will sort the collection in the opposite order.
+
+<a name="method-sortkeysdesc"></a>
+#### `sortKeysDesc()` {#collection-method}
+
+This method has the same signature as the [`sortKeys`](#method-sortkeys) method, but will sort the collection in the opposite order.
+
+<a name="method-splice"></a>
+#### `splice()` {#collection-method}
+
+The `splice` method removes and returns a slice of items starting at the specified index:
+
+    $collection = collect([1, 2, 3, 4, 5]);
+
+    $chunk = $collection->splice(2);
+
+    $chunk->all();
+
+    // [3, 4, 5]
+
+    $collection->all();
+
+    // [1, 2]
+
+You may pass a second argument to limit the size of the resulting chunk:
+
+    $collection = collect([1, 2, 3, 4, 5]);
+
+    $chunk = $collection->splice(2, 1);
+
+    $chunk->all();
+
+    // [3]
+
+    $collection->all();
+
+    // [1, 2, 4, 5]
+
+In addition, you can pass a third argument containing the new items to replace the items removed from the collection:
+
+    $collection = collect([1, 2, 3, 4, 5]);
+
+    $chunk = $collection->splice(2, 1, [10, 11]);
+
+    $chunk->all();
+
+    // [3]
+
+    $collection->all();
+
+    // [1, 2, 10, 11, 4, 5]
 
 <a name="method-splice"></a>
 #### `splice()` {.collection-method}
