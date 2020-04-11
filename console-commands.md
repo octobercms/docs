@@ -131,7 +131,7 @@ October includes a number of commands for managing plugins.
 <a name="plugin-rollback-command"></a>
 ### Rollback plugin
 
-`plugin:rollback` - Restore a plugin version to a previously defined state. The second parameter version is optional, if in the past, it returns to a version informed, if not passed, back to the initial version of the plugin.
+`plugin:rollback` - Rollback the specified plugin's migrations. The second parameter is optional, if specified the rollback process will stop at the specified version.
 
     php artisan plugin:rollback AuthorName.PluginName 1.2.3
 
