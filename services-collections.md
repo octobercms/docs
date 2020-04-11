@@ -1598,6 +1598,29 @@ You can also pass your own callback to determine how to sort the collection valu
 
 This method has the same signature as the [`sortBy`](#method-sortby) method, but will sort the collection in the opposite order.
 
+<a name="method-sortkeys"></a>
+#### `sortKeys()` {#collection-method}
+
+The `sortKeys` method sorts the collection by the keys of the underlying associative array:
+
+    $collection = collect([
+        'id' => 22345,
+        'first' => 'John',
+        'last' => 'Doe',
+    ]);
+
+    $sorted = $collection->sortKeys();
+
+    $sorted->all();
+
+    /*
+        [
+            'first' => 'John',
+            'id' => 22345,
+            'last' => 'Doe',
+        ]
+    */
+
 <a name="method-sortkeysdesc"></a>
 #### `sortKeysDesc()` {#collection-method}
 
