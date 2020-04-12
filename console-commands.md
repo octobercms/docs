@@ -21,6 +21,7 @@
     - [List themes](#theme-list-command)
     - [Enable theme](#theme-use-command)
     - [Remove theme](#theme-remove-command)
+    - [Sync theme](#theme-sync-command)
 - [Utilities](#utility-commands)
     - [Clear application cache](#cache-clear-command)
     - [Remove demo data](#october-fresh-command)
