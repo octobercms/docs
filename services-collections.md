@@ -352,8 +352,6 @@ The `contains` method uses "loose" comparisons when checking item values, meanin
 
 This method has the same signature as the [`contains`](#method-contains) method; however, all values are compared using "strict" comparisons.
 
-> **Tip:** This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/database-collection#method-contains).
-
 <a name="method-count"></a>
 #### `count()` {.collection-method}
 
@@ -1214,8 +1212,6 @@ The `only` method returns the items in the collection with the specified keys:
     // ['product_id' => 1, 'name' => 'Desk']
 
 For the inverse of `only`, see the [except](#method-except) method.
-
-> **Tip:** This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/database-collection#method-only).
 
 <a name="method-pad"></a>
 #### `pad()` {#collection-method}
