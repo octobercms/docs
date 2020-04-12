@@ -294,7 +294,7 @@ The `collect` method is primarily useful for converting [lazy collections](#lazy
 
     // [1, 2, 3]
 
-> {tip} The `collect` method is especially useful when you have an instance of `Enumerable` and need a non-lazy collection instance. Since `collect()` is part of the `Enumerable` contract, you can safely use it to get a `Collection` instance.
+> **Tip:** The `collect` method is especially useful when you have an instance of `Enumerable` and need a non-lazy collection instance. Since `collect()` is part of the `Enumerable` contract, you can safely use it to get a `Collection` instance.
 
 <a name="method-concat"></a>
 #### `concat()` {#collection-method}
@@ -352,7 +352,7 @@ The `contains` method uses "loose" comparisons when checking item values, meanin
 
 This method has the same signature as the [`contains`](#method-contains) method; however, all values are compared using "strict" comparisons.
 
-> {tip} This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-contains).
+> **Tip:** This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-contains).
 
 <a name="method-count"></a>
 #### `count()` {.collection-method}
@@ -670,7 +670,7 @@ The `flatMap` method iterates through the collection and passes each value to th
 
     $flattened->all();
 
-    // ['name' => 'SALLY', 'school' => 'ARKANSAS', 'age' => '28'];    
+    // ['name' => 'SALLY', 'school' => 'ARKANSAS', 'age' => '28'];
 
 <a name="method-flatten"></a>
 #### `flatten()` {.collection-method}
@@ -1215,7 +1215,7 @@ The `only` method returns the items in the collection with the specified keys:
 
 For the inverse of `only`, see the [except](#method-except) method.
 
-> {tip} This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-only).
+> **Tip:** This method's behavior is modified when using [Eloquent Collections](/docs/{{version}}/eloquent-collections#method-only).
 
 <a name="method-pad"></a>
 #### `pad()` {#collection-method}
@@ -1742,7 +1742,7 @@ In addition, you can pass a third argument containing the new items to replace t
     $collection->all();
 
     // [1, 2, 10, 11, 4, 5]
-    
+
 <a name="method-split"></a>
 #### `split()` {#collection-method}
 
@@ -1754,8 +1754,8 @@ The `split` method breaks a collection into the given number of groups:
 
     $groups->toArray();
 
-    // [[1, 2], [3, 4], [5]]    
-    
+    // [[1, 2], [3, 4], [5]]
+
 <a name="method-sum"></a>
 #### `sum()` {.collection-method}
 
@@ -2333,11 +2333,11 @@ The `whereNotNull` method filters items where the given key is not null:
         ['name' => null],
         ['name' => 'Bookcase'],
     ]);
-    
+
     $filtered = $collection->whereNotNull('name');
 
     $filtered->all();
-    
+
     /*
         [
             ['name' => 'Desk'],
@@ -2355,11 +2355,11 @@ The `whereNull` method filters items where the given key is null:
         ['name' => null],
         ['name' => 'Bookcase'],
     ]);
-    
+
     $filtered = $collection->whereNull('name');
 
     $filtered->all();
-    
+
     /*
         [
             ['name' => null],
@@ -2402,7 +2402,7 @@ The `zip` method merges together the values of the given array with the values o
     $zipped->all();
 
     // [['Chair', 100], ['Desk', 200]]
-    
+
 <a name="higher-order-messages"></a>
 ## Higher Order Messages
 
@@ -2419,14 +2419,14 @@ Likewise, we can use the `sum` higher order message to gather the total number o
     $users = User::where('group', 'Development')->get();
 
     return $users->sum->votes;
-    
+
 <a name="lazy-collections"></a>
 ## Lazy Collections
 
 <a name="lazy-collection-introduction"></a>
 ### Introduction
 
-> {note} Before learning more about Laravel's lazy collections, take some time to familiarize yourself with [PHP generators](https://www.php.net/manual/en/language.generators.overview.php).
+> **Note:** Before learning more about Laravel's lazy collections, take some time to familiarize yourself with [PHP generators](https://www.php.net/manual/en/language.generators.overview.php).
 
 To supplement the already powerful `Collection` class, the `LazyCollection` class leverages PHP's [generators](https://www.php.net/manual/en/language.generators.overview.php) to allow you to work with very large datasets while keeping memory usage low.
 
@@ -2595,7 +2595,7 @@ Almost all methods available on the `Collection` class are also available on the
 
 </div>
 
-> {note} Methods that mutate the collection (such as `shift`, `pop`, `prepend` etc.) are _not_ available on the `LazyCollection` class.
+> **Note:** Methods that mutate the collection (such as `shift`, `pop`, `prepend` etc.) are _not_ available on the `LazyCollection` class.
 
 <a name="lazy-collection-methods"></a>
 ### Lazy Collection Methods
@@ -2634,6 +2634,6 @@ The `remember` method returns a new lazy collection that will remember any value
 
     $users->take(20)->all();
 
-    // First 5 users come from the collection's cache... The rest are hydrated from the database...    
-    
-    
+    // First 5 users come from the collection's cache... The rest are hydrated from the database...
+
+
