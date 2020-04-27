@@ -26,7 +26,14 @@ October CMS has some server requirements for web hosting:
 1. GD PHP Extension
 1. SimpleXML PHP Extension
 
-Some OS distributions may require you to manually install the PHP JSON and XML extensions. For example, when using Ubuntu this can be done via `apt-get install php-json` and `apt-get install php-xml` respectively.
+Some OS distributions may require you to manually install some of the required PHP extensions.
+
+When using Ubuntu, the following command can be run to install all required extensions:
+
+```bash
+sudo apt-get update &&
+sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
+```
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
