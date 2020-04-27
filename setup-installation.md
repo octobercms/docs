@@ -17,15 +17,16 @@ There are two ways you can install October, either using the [Wizard installer](
 
 October CMS has some server requirements for web hosting:
 
-1. PHP version 7.0.8 or higher
-1. PDO PHP Extension
+1. PHP version 7.2 or higher
+1. PDO PHP Extension (and relevant driver for the database you want to connect to)
 1. cURL PHP Extension
 1. OpenSSL PHP Extension
-1. Mbstring PHP Library
-1. ZipArchive PHP Library
-1. GD PHP Library
+1. Mbstring PHP Extension
+1. ZipArchive PHP Extension
+1. GD PHP Extension
+1. SimpleXML PHP Extension
 
-Some OS distributions may require you to manually install the PHP JSON and XML extensions. For example, when using Ubuntu this can be done via `apt-get install php7.0-json` and `apt-get install php7.0-xml` respectively.
+Some OS distributions may require you to manually install the PHP JSON and XML extensions. For example, when using Ubuntu this can be done via `apt-get install php-json` and `apt-get install php-xml` respectively.
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
