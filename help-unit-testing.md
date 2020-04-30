@@ -22,7 +22,6 @@ Plugins can be tested by creating a file called `phpunit.xml` in the base direct
              convertWarningsToExceptions="true"
              processIsolation="false"
              stopOnFailure="false"
-             syntaxCheck="false"
     >
         <testsuites>
             <testsuite name="Plugin Unit Test Suite">
