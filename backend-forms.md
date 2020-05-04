@@ -585,6 +585,7 @@ There are various form widgets included as standard, although it is common for p
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Tag list](#widget-taglist)
+- [Sensitive](#widget-sensitive)
 </div>
 
 <a name="widget-codeeditor"></a>
@@ -1057,6 +1058,15 @@ Option | Description
 **options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options` method. Optional.
 **nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name
 **useKey** | use the key instead of value for saving and reading data. Default: false
+
+<a name="widget-sensitive"></a>
+### Sensitive
+
+`sensitive` - renders a `password` input with a small button to the right that toggles input type with `text` when clicked.
+
+    secret:
+        label: Some hidden value
+        type: sensitive
 
 <a name="form-views"></a>
 ## Form views
