@@ -11,6 +11,7 @@
     - [CSRF protection](#csrf-protection)
     - [Bleeding edge updates](#edge-updates)
     - [Using a public folder](#public-folder)
+    - [Using a shared hosting](#shared-hosting)
 - [Environment configuration](#environment-config)
     - [Defining a base environment](#base-environment)
     - [Domain driven environment](#domain-environment)
@@ -226,6 +227,26 @@ For ultimate security in production environments you may configure your web serv
 This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
 
 > **Note**: The above command may need to be performed with System Administrator or *sudo* privileges. It should also be performed after each system update or when a new plugin is installed.
+
+<a name="shared-hosting"></a>
+### Using a shared hosting
+
+If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
+
+You can setup this protection in the file location `config/cms.php` in the section titled **Default permission mask**.
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default permission mask
+    |--------------------------------------------------------------------------
+    |
+    | Specifies a default file and folder permission for newly created objects.
+    |
+    */
+
+    'defaultMask' => ['file' => '644', 'folder' => '755'],
+
+> **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.
 
 <a name="environment-config"></a>
 ## Environment configuration

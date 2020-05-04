@@ -17,15 +17,24 @@ There are two ways you can install October, either using the [Wizard installer](
 
 October CMS has some server requirements for web hosting:
 
-1. PHP version 7.0 or higher
-1. PDO PHP Extension
+1. PHP version 7.2 or higher
+1. PDO PHP Extension (and relevant driver for the database you want to connect to)
 1. cURL PHP Extension
 1. OpenSSL PHP Extension
-1. Mbstring PHP Library
-1. ZipArchive PHP Library
-1. GD PHP Library
+1. Mbstring PHP Extension
+1. ZipArchive PHP Extension
+1. GD PHP Extension
+1. SimpleXML PHP Extension
 
-Some OS distributions may require you to manually install the PHP JSON and XML extensions. For example, when using Ubuntu this can be done via `apt-get install php7.0-json` and `apt-get install php7.0-xml` respectively.
+Some OS distributions may require you to manually install some of the required PHP extensions.
+
+When using Ubuntu, the following command can be run to install all required extensions:
+
+```bash
+sudo apt-get update &&
+sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
+```
+
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
 
@@ -69,7 +78,7 @@ There are some things you may need to set up after the installation is complete.
 <a name="delete-install-files"></a>
 ### Delete installation files
 
-If you have used the [Wizard installer](#wizard-installation) you should delete the installation files for security reasons. October will never delete files from your system automatically, so you should delete these files and directories manually:
+If you have used the [Wizard installer](#wizard-installation), for security reasons you should verify the installation files have been deleted. The October installer attempts to cleanup after itself, but you should always verify that they have been successfullly removed:
 
     install_files/      <== Installation directory
     install.php         <== Installation script

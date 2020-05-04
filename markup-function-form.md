@@ -83,3 +83,17 @@ Outputs a standard FORM closing tag. This tag is generally available to provide 
 The above example would output as the following:
 
     </form>
+
+## Passing attributes to the generated element
+
+You can pass additional attributes to the `Form::open()` method by passing an array of attribute names and values to be rendered on the final generated `<form>` element.
+
+    <?= Form::open(array('id' => 'example', 'class' => 'something')) ?>
+        // ..
+    <?= Form::close() ?>
+
+The above example would output the following:
+
+    <form method="POST" action="" accept-charset="UTF-8" id="example" class="something">
+
+    </form>

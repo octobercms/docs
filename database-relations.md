@@ -54,6 +54,8 @@ Accessing a relationship as a property is also possible:
 
     $user->posts;
 
+> **Note**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
+
 <a name="detailed-relationships"></a>
 ### Detailed definitions
 
@@ -396,14 +398,15 @@ Now that we have examined the table structure for the relationship, let's define
 
 The first argument passed to the `$hasManyThrough` relation is the name of the final model we wish to access, while the `through` parameter is the name of the intermediate model.
 
-Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, while the `throughKey` parameter is the name of the foreign key on the final model.
+Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
 
     public $hasManyThrough = [
         'posts' => [
             'Acme\Blog\Models\Post',
             'key'        => 'my_country_id',
             'through'    => 'Acme\Blog\Models\User',
-            'throughKey' => 'my_user_id'
+            'throughKey' => 'my_user_id',
+            'otherKey'   => 'my_id'
         ],
     ];
 
@@ -542,7 +545,7 @@ You may also retrieve the owner of a polymorphic relation from the polymorphic m
 
 The `commentable` relation on the `Comment` model will return either a `Post` or `Video` instance, depending on which type of model owns the comment.
 
-You are also able to update the owner of the related model by setting the attribute with the name of the `morphTo` relationship, in this case `commentable`. 
+You are also able to update the owner of the related model by setting the attribute with the name of the `morphTo` relationship, in this case `commentable`.
 
     $comment = Author\Plugin\Models\Comment::find(1);
     $video = Author\Plugin\Models\Video::find(1);
@@ -994,7 +997,7 @@ The comment in the next example will not be deleted unless the post is saved.
 
     $comment = Comment::find(1);
     $post = Post::find(1);
-    $post->comments()->delete($comment, $sessionKey);
+    $post->comments()->remove($comment, $sessionKey);
 
 <a name="list-all-bindings"></a>
 ### List all bindings

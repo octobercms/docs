@@ -8,11 +8,14 @@
     - [PHP code section](#php-section)
     - [Twig markup section](#twig-section)
 - [Theme logging](#theme-logging)
+- [Database driven themes](#database-driven-themes)
 
 <a name="introduction"></a>
 ## Introduction
 
-Themes define the appearance of your website or web application built with October. October themes are completely file-based and can be managed with any version control system, for example, Git. This page gives you the high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+Themes define the appearance of your website or web application built with October. October themes are completely file-backed and can be managed with any version control system, for example, Git. This page gives you the high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+
+>**NOTE:** Themes can store templates in the database if `cms.databaseTemplates` is enabled, see the [database driven themes](#database-driven-themes) section for more information.
 
 Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects:
 
@@ -164,10 +167,19 @@ More information can be found [in the Markup guide](../markup).
 <a name="theme-logging"></a>
 ## Theme Logging
 
-OctoberCMS comes with a very useful feature, disabled by default, called Theme Logging. 
+October CMS comes with a very useful feature, disabled by default, called Theme Logging. 
 
 Since layouts and pages store most of the data in flat files, it's possible for you or your clients to accidentally lose content. For example, switching the layout of a page will modify the scaffold of the page, and, as such, will result in data loss. 
 
 To enable Theme Logging, simply go to **Settings -> Log settings** and enable **Log theme changes**. All changes are now logged.
 
 The theme changelog can be viewed at **Settings -> Theme log**. Each change has an overview of what has been added/removed, along with a copy of the changed file before and after. You can use this information to decide the appropriate action, to aid the reversion of these changes, if necessary.
+
+<a name="database-driven-themes"></a>
+## Database Driven Themes
+    
+October CMS comes with another very useful feature, disabled by default, called Database Driven Themes. When this feature is enabled (by setting `cms.databaseTemplates` to `true`, or `null` when `app.debug` is `false`); the database layer stores all modified CMS files in the database. Files that are not modified continue to be loaded from the filesystem. There is a [`theme:sync $themeDir`](../console/commands#theme-sync-command) console command that can be used to sync changes between the filesystem and database.
+
+Files modified in the database are cached to indicate that they should be loaded from the database.
+
+>**NOTE:** All CMS template objects (ex. `Layout`, `Page`, `Content`, `Partial`, `Meta`, etc) are stored in the database when this feature is enabled and a change is made to the template in question; however theme asset files will **not** be.

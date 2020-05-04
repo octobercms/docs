@@ -21,6 +21,7 @@
     - [Preventing a field from being submitted](#prevent-field-submission)
 - [Extending form behavior](#extend-form-behavior)
     - [Overriding controller action](#overriding-action)
+    - [Overriding controller redirect](#overriding-redirect)
     - [Extending form model query](#extend-model-query)
     - [Extending form fields](#extend-form-fields)
     - [Filtering form fields](#filter-form-fields)
@@ -205,30 +206,35 @@ Option | Description
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
 **icons** | assign icons to tabs using tab names as the key.
+**lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
+> **Note:** It is not recommended to use lazy loading on tabs with fields that are affected by triggers.
+
     tabs:
         stretch: true
-        defaultTab: backend::lang.account.default_tab
+        defaultTab: User
         cssClass: text-blue
+        lazy:
+            - Groups
         paneCssClass:
             0: first-tab
             1: second-tab
         icons:
-            backend::lang.account.user: icon-user
-            backend::lang.account.groups: icon-group
+            User: icon-user
+            Groups: icon-group
 
         fields:
             username:
                 type: text
                 label: Username
-                tab: backend::lang.account.user
+                tab: User
 
             groups:
                 type: relation
                 label: Groups
-                tab: backend::lang.account.groups
+                tab: Groups
 
 <a name="form-field-options"></a>
 ### Field options
@@ -245,7 +251,7 @@ Option | Description
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
 **commentHtml** | allow HTML markup inside the comment. Options: true, false.
-**default** | specifies the default value for the field.
+**default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
 **defaultFrom** | takes the default value from the value of another field.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
@@ -260,6 +266,7 @@ Option | Description
 **required** | places a red asterisk next to the field label to indicate it is required (make sure to setup validation on the model as this is not enforced by the form controller).
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
+**permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 <a name="field-types"></a>
 ## Available field types
@@ -281,6 +288,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Text](#field-text)
 - [Number](#field-number)
 - [Password](#field-password)
+- [Email](#field-email)
 - [Textarea](#field-textarea)
 - [Dropdown](#field-dropdown)
 - [Radio List](#field-radio)
@@ -315,6 +323,17 @@ There are various native field types that can be used for the **type** setting. 
         min: 1   # defaults to not present
         max: 100 # defaults to not present
 
+If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'your_age' => 'numeric',
+    ];
+
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
+
 <a name="field-password"></a>
 ### Password
 
@@ -323,6 +342,26 @@ There are various native field types that can be used for the **type** setting. 
     user_password:
         label: Password
         type: password
+
+<a name="field-email"></a>
+### Email
+
+`email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
+
+    user_email:
+        label: Email Address
+        type: email
+
+If you would like to validate this field on save to ensure that it is a properly-formatted email address, please use the `$rules` property on your model, like so:
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'user_email' => 'email',
+    ];
+
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
 
 <a name="field-textarea"></a>
 ### Textarea
@@ -342,6 +381,7 @@ There are various native field types that can be used for the **type** setting. 
     status_type:
         label: Blog Post Status
         type: dropdown
+        default: published
         options:
             draft: Draft
             published: Published
@@ -415,6 +455,7 @@ By default the dropdown has a searching feature, allowing quick selection of a v
     security_level:
         label: Access Level
         type: radio
+        default: guests
         options:
             all: All
             registered: Registered only
@@ -430,7 +471,7 @@ Radio lists can also support a secondary description.
             registered: [Registered only, Only logged in member will be able to access this page.]
             guests: [Guests only, Only guest users will be able to access this page.]
 
-Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**
+Radio lists support three ways of defining the options, exactly like the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
 <a name="field-balloon"></a>
 ### Balloon Selector
@@ -440,6 +481,7 @@ Radio lists support three ways of defining the options, exactly like the [dropdo
     gender:
         label: Gender
         type: balloon-selector
+        default: female
         options:
             female: Female
             male: Male
@@ -466,7 +508,8 @@ Balloon selectors support three ways of defining the options, exactly like the [
         type: checkboxlist
         # set to true to explicitly enable the "Select All", "Select None" options
         # on lists that have <=10 items (>10 automatically enables it)
-        quickselect: true 
+        quickselect: true
+        default: open_account
         options:
             open_account: Open account
             close_account: Close account
@@ -616,7 +659,6 @@ If the `availableColors` field in not defined in the YAML file, the colorpicker 
         fieldName: null
         height: false
         keyFrom: id
-        postbackHandlerName: null
         recordsPerPage: false
         searching: false
         toolbar: []
@@ -637,7 +679,7 @@ Option | Description
 **fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
 **height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
 **keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`.
-**postbackHandlerName** | defines a custom post-back handler to use when saving the data from the data table.
+**postbackHandlerName** | specifies the AJAX handler name in which the data table content will be sent with. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
 **recordsPerPage** | the number of records to show per page. If set to `false`, the pagination will be disabled.
 **searching** | allow records to be searched via a search box. Default: `false`.
 **toolbar** | an array representing the toolbar configuration of the data table.
@@ -699,9 +741,7 @@ Option | Description
 **maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
 **firstDay** | the first day of the week. Default: 0 (Sunday).
 **showWeekNumber** | show week numbers at head of row. Default: false
-**ignoreTimezone** | display datetime exactly as it is stored, ignoring October's and the backend user's specified timezones.
-
-> **Note:** If you are using `mode: date`, you may also want to set `ignoreTimezone: true` as the differences in timezones can cause dates stored in the database to become off by one day on either end depending on the difference between the app timezone and the backend timezone of the user at the time of entry.
+**ignoreTimezone** | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
 
 <a name="widget-fileupload"></a>
 ### File upload
@@ -875,6 +915,7 @@ Option | Description
 ------------- | -------------
 **nameFrom** | a model attribute name used for displaying the relation label. Default: name.
 **select** | a custom SQL select statement to use for the name.
+**order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
@@ -906,6 +947,7 @@ Option | Description
 **minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
 **maxItems** | maximum number of items to allow within the repeater.
 **groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
+**style** | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
 
 The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
 
@@ -949,11 +991,19 @@ Each group must specify a unique key and the definition supports the following o
 Option | Description
 ------------- | -------------
 **name** | the name of the group.
-**description** | a breif description of the group.
+**description** | a brief description of the group.
 **icon** | defines an icon for the group, optional.
 **fields** | form fields belonging to the group, see [backend form fields](#form-fields).
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute.
+
+#### Repeater styles
+
+The `styles` attribute of the repeater widget controls the behaviour of repeater items. There are three different types of styles available for developers:
+
+- **default:** Shows all the repeater items as expanded on page load. This is the default current behavior, and will be used if style is not defined in the repeater widget's configuration.
+- **collapsed:** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
+- **accordion:** Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
 
 <a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
@@ -1266,6 +1316,16 @@ You can use your own logic for the `create`, `update` or `preview` action method
 
         // Call the FormController behavior update() method
         return $this->asExtension('FormController')->update($recordId, $context);
+    }
+
+<a name="overriding-redirect"></a>
+### Overriding controller redirect
+
+You can specify the URL to redirect to after the model is saved by overriding the `formGetRedirectUrl` method. This method returns the location to redirect to with relative URLs being treated as backend URLs.
+
+    public function formGetRedirectUrl($context = null, $model = null)
+    {
+        return 'https://octobercms.com';
     }
 
 <a name="extend-model-query"></a>
