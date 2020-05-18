@@ -49,6 +49,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [temp_path](#method-temp-path)
 [themes_path](#method-themes-path)
 [uploads_path](#method-uploads-path)
+[media_path](#method-media-path)
 </div>
 
 ### Strings
@@ -438,6 +439,13 @@ The `themes_path` function returns the fully qualified path to the `themes` dire
 The `uploads_path` function returns the fully qualified path to the application uploads directory:
 
     $path = uploads_path();
+
+<a name="method-media-path"></a>
+#### `media_path()` {#collection-method}
+
+The `media_path` function returns the fully qualified path to the application media directory:
+
+    $path = media_path();
 
 <a name="strings"></a>
 ## Strings
