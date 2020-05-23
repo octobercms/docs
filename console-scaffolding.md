@@ -6,6 +6,7 @@
     - [Create a model](#scaffold-create-model)
     - [Create a back-end controller](#scaffold-create-controller)
     - [Create a form widget](#scaffold-create-formwidget)
+    - [Create a report widget](#scaffold-create-reportwidget)
     - [Create a console command](#scaffold-create-command)
 
 <a name="scaffolding-commands"></a>
@@ -47,6 +48,13 @@ The `create:controller` command generates a controller, configuration and view f
 The `create:formwidget` command generates a back-end form widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the form widget class name.
 
     php artisan create:formwidget Acme.Blog CategorySelector
+    
+<a name="scaffold-create-reportwidget"></a>
+### Create a report widget
+
+The `create:reportwidget` command generates a back-end report widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the report widget class name.
+
+    php artisan create:reportwidget Acme.Blog TopPosts
 
 <a name="scaffold-create-command"></a>
 ### Create a console command
