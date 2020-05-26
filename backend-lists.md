@@ -804,6 +804,9 @@ A special CSS class `nolink` is available to force a row to be unclickable, even
 You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
 
         Categories::extendListFilterScopes(function($filter) {
+            // Add custom CSS classes to the Filter widget itself
+            $filter->cssClasses = array_merge($filter->cssClasses, ['my', 'array', 'of', 'classes']);
+            
             $filter->addScopes([
                 'my_scope' => [
                     'label' => 'My Filter Scope'
