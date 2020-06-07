@@ -40,7 +40,7 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
     {
         public $implement = ['Backend.Behaviors.FormController'];
 
-        public $formConfig = 'form_config.yaml';
+        public $formConfig = 'config_form.yaml';
     }
 
 > **Note:** Very often the form and [list behavior](lists) are used together in a same controller.
@@ -1347,7 +1347,7 @@ You can extend the fields of another controller from outside by calling the `ext
     {
         public $implement = ['Backend.Behaviors.FormController'];
 
-        public $formConfig = 'form_config.yaml';
+        public $formConfig = 'config_form.yaml';
     }
 
 Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. Since this has the potential to affect all forms used by this controller, it is a good idea to check the **$model** is of the correct type. Here is an example:
