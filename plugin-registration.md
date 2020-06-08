@@ -23,7 +23,7 @@ Plugins are the foundation for adding new features to the CMS by extending it. T
 1. Add [settings pages](settings#backend-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
 1. Create [database table structures and seed data](updates).
 1. Alter [functionality of the core or other plugins](events).
-1. Provide classes, [back-end controllers](../backend/controllers-views-ajax), views, assets, and other files.
+1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
 
 <a name="directory-structure"></a>
 ### Directory structure

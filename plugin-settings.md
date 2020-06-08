@@ -135,7 +135,7 @@ The optional `keywords` parameter is used by the settings search feature. If key
 <a name="settings-page-context"></a>
 ### Setting the page navigation context
 
-Just like [setting navigation context in the controller](../backend/controllers-views-ajax#navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+Just like [setting navigation context in the controller](../backend/controllers-ajax#navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
 
     public function __construct()
     {
