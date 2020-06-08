@@ -48,7 +48,7 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
 <a name="configuring-form"></a>
 ## Configuring the form behavior
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a typical form behavior configuration file:
+The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical form behavior configuration file:
 
     # ===================================
     #  Form Behavior Config

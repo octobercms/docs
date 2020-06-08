@@ -80,7 +80,7 @@ Alternatively you may pass the variables to the second parameter of the makePart
 <a name="generic-ajax-handlers"></a>
 ### AJAX handlers
 
-Widgets implement the same AJAX approach as the [back-end controllers](controllers-views-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
+Widgets implement the same AJAX approach as the [back-end controllers](controllers-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
 
     <a
         href="javascript:;"
@@ -94,7 +94,7 @@ When called from a widget class or partial the AJAX handler will target itself. 
 <a name="generic-binding"></a>
 ### Binding widgets to controllers
 
-A widget should be bound to a [back-end controller](controllers-views-ajax) before you can start using it in a back-end page or partial. Use the widget's `bindToController` method for binding it to a controller. The best place to initialize a widget is the controller's constructor. Example:
+A widget should be bound to a [back-end controller](controllers-ajax) before you can start using it in a back-end page or partial. Use the widget's `bindToController` method for binding it to a controller. The best place to initialize a widget is the controller's constructor. Example:
 
     public function __construct()
     {

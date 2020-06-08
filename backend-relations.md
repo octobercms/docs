@@ -36,7 +36,7 @@ Relation behavior depends on [relation definitions](#relation-definitions). In o
 <a name="configuring-relation"></a>
 ## Configuring the relation behavior
 
-The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
+The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
 
 The first level field in the relation configuration file defines the relationship name in the target model. For example:
 

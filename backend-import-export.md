@@ -37,7 +37,7 @@ The behavior configuration is defined in two parts, each part depends on a speci
 <a name="configuring-import-export"></a>
 ## Configuring the behavior
 
-The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a configuration file:
+The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
 
     # ===================================
     #  Import/Export Behavior Config
@@ -128,7 +128,7 @@ Option | Description
 <a name="import-export-views"></a>
 ## Import and export views
 
-For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-views-ajax/#introduction) with the corresponding name - **import.htm** and **export.htm**.
+For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax/#introduction) with the corresponding name - **import.htm** and **export.htm**.
 
 The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 
