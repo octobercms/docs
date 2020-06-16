@@ -18,6 +18,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 <div class="collection-method-list" markdown="1">
 [array_add](#method-array-add)
 [array_divide](#method-array-divide)
+[array_undot](#method-array-undot)
 [array_dot](#method-array-dot)
 [array_except](#method-array-except)
 [array_first](#method-array-first)
@@ -134,6 +135,23 @@ The `array_dot` function flattens a multi-dimensional array into a single level 
     $array = array_dot(['foo' => ['bar' => 'baz']]);
 
     // ['foo.bar' => 'baz'];
+
+<a name="method-array-undot"></a>
+#### `array_undot()` {#collection-method}
+
+The `array_undot` function is the counter-part to the `array_dot` method. It will convert a dot-notated array into a standard
+associative array:
+
+    $array = array_undot([
+        'foo.bar' => 'baz'
+    ]);
+
+    // [
+    //    'foo' => [
+    //        'bar' => 'baz'
+    //    ]
+    // ]
+
 
 <a name="method-array-except"></a>
 #### `array_except()` {#collection-method}
