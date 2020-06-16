@@ -18,8 +18,8 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 <div class="collection-method-list" markdown="1">
 [array_add](#method-array-add)
 [array_divide](#method-array-divide)
-[array_undot](#method-array-undot)
 [array_dot](#method-array-dot)
+[array_undot](#method-array-undot)
 [array_except](#method-array-except)
 [array_first](#method-array-first)
 [array_flatten](#method-array-flatten)
