@@ -100,6 +100,14 @@ You may also define the configuration in a separate file, where the path is rela
     # [...]
 
     form: config/fields.yaml
+    
+**config/fields.yaml**:
+
+    fields:
+        site_name:
+            label: Site name
+            comment: The website name as it should appear on the front-end
+            default: My Amazing Site!
 
 <a name="combiner-vars"></a>
 ### Combiner variables

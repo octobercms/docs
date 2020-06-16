@@ -43,7 +43,7 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
 <a name="configuring-list"></a>
 ## Configuring the list behavior
 
-The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a typical list behavior configuration file:
+The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical list behavior configuration file:
 
     # ===================================
     #  List Behavior Config
@@ -368,7 +368,7 @@ To display a column that shows the number of related records, use the `useRelati
 <a name="displaying-list"></a>
 ## Displaying the list
 
-Usually lists are displayed in the index [view](controllers-views-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
+Usually lists are displayed in the index [view](controllers-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
 
     <?= $this->listRender() ?>
 
@@ -609,6 +609,19 @@ To use default value for Date and Date Range
     }
 ```
 
+You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
+
+    published_at:
+        label: Date
+        type: daterange
+        minDate: '2001-01-23'
+        maxDate: '2030-10-13'
+        yearRange: 10
+        conditions: created_at >= ':after' AND created_at <= ':before'
+        ignoreTimezone: true
+
+> **Note:** the `ignoreTimezone` option also applies to the `date` filter type as well.
+
 <a name="filter-number"></a>
 ### Number
 
@@ -791,6 +804,9 @@ A special CSS class `nolink` is available to force a row to be unclickable, even
 You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
 
         Categories::extendListFilterScopes(function($filter) {
+            // Add custom CSS classes to the Filter widget itself
+            $filter->cssClasses = array_merge($filter->cssClasses, ['my', 'array', 'of', 'classes']);
+            
             $filter->addScopes([
                 'my_scope' => [
                     'label' => 'My Filter Scope'

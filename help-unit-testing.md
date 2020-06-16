@@ -1,7 +1,7 @@
 # Unit testing
 
 - [Testing plugins](#testing-plugins)
-- [System testing](#testing-system)
+- [System testing](#system-testing)
 
 <a name="testing-plugins"></a>
 ## Testing plugins
@@ -95,6 +95,7 @@ By default OctoberCMS uses SQLite stored in memory for the plugin testing enviro
 
 You can override the `/config/database.php` file by creating `/config/testing/database.php`. In this case variables from the latter file will be taken.
 
+<a name="system-testing"></a>
 ## System testing
 
 To perform unit testing on the core October files, you should download a development copy using Composer or cloning the Git repository. This will ensure you have the `tests/` directory necessary to run unit tests.
