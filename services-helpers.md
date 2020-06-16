@@ -139,8 +139,7 @@ The `array_dot` function flattens a multi-dimensional array into a single level 
 <a name="method-array-undot"></a>
 #### `array_undot()` {#collection-method}
 
-The `array_undot` function is the counter-part to the `array_dot` method. It will convert a dot-notated array into a standard
-associative array:
+The `array_undot` function is the counter-part to the `array_dot` method. It will convert a dot-notated array into a standard associative array:
 
     $array = array_undot([
         'foo.bar' => 'baz'
