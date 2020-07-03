@@ -53,13 +53,6 @@ There are small changes required to configure your site in Nginx.
 
 Use the following code in **server** section. If you have installed October into a subdirectory, replace the first `/` in location directives with the directory October was installed under:
 
-    # Basic CSP Configurations
-    add_header X-Content-Type-Options nosniff;
-    add_header X-XSS-Protection "1; mode=block";
-
-    # activate this rule if you want to enable HSTS
-    # add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-
     location / {
         # Let OctoberCMS handle everything by default.
         # The path not resolved by OctoberCMS router will return OctoberCMS's 404 page.
