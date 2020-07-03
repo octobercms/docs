@@ -447,6 +447,17 @@ By default the dropdown has a searching feature, allowing quick selection of a v
         type: dropdown
         showSearch: false
 
+You have the possibility to add an icon or an image for every option which will be rendered in the dropdown field. In this case you have to specify the options as a multidimensional array with the following format **key => [label-text, label-icon]**.
+
+    public function listStatuses($fieldName, $value, $formData)
+    {
+        return [
+            'published' => ['Published', 'icon-check-circle'],
+            'unpublished' => ['Unpublished', 'icon-minus-circle'],
+            'draft' => ['Draft', 'icon-clock-o']
+        ];
+    }
+
 <a name="field-radio"></a>
 ### Radio List
 
