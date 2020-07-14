@@ -65,6 +65,8 @@ You may define an `options` array value in your Redis connection definition, all
 
 If your Redis server requires authentication, you may supply a password by adding a `password` configuration item to your Redis server configuration array.
 
+The `php artisan october:up` command will run `FLUSHDB` to delete all the keys. So, please set a specific database for that.
+
 <a name="cache-usage"></a>
 ## Cache usage
 
