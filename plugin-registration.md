@@ -122,7 +122,7 @@ Key | Description
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
 **icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, required.
-**iconSvg** | a SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
+**iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
