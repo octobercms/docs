@@ -253,7 +253,7 @@ Key | Description
 **url** | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 **counterLabel** | a string value to describe the numeric reference in counter, optional.
-**badge** | a string value to output near the menu icon, the value should be a string, this value will override the counter if set, optional.
+**badge** | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
 **attributes** | an array of attributes and values to apply to the menu item, optional.
 **permissions** | an array of permissions the back-end user should have, optional.
 
