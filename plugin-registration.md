@@ -250,7 +250,7 @@ Key | Description
 **label** | specifies the menu label localization string key, required.
 **icon** | an icon name from the [October CMS icon collection](../ui/icon), required.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
-**url** | the back-end relative URL the menu item should point to, required.
+**url** | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 **counterLabel** | a string value to describe the numeric reference in counter, optional.
 **badge** | a string value to output near the menu icon, the value should be a string, this value will override the counter if set, optional.
