@@ -116,14 +116,14 @@ Method | Description
 
 The `pluginDetails` is a required method of the plugin registration class. It should return an array containing the following keys:
 
-Key | Description | Required field
-------------- | ------------- | -------------
-**name** | the plugin name. | **required**
-**description** | the plugin description. | **required**
-**author** | the plugin author name. | **required**
-**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**. | **required**
-**iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors. | optional
-**homepage** | A link to the author's website address. | optional
+Key | Description
+------------- | -------------
+**name** | the plugin name, required.
+**description** | the plugin description, required.
+**author** | the plugin author name, required.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, required.
+**iconSvg** | a SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
+**homepage** | a link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
 ## Routing and initialization
@@ -243,20 +243,19 @@ When you register the back-end navigation you can use [localization strings](loc
 
 To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
-Key | Description | Required field
-------------- | ------------- | -------------
-**code** | a string value that acts as an unique identifier for that menu option. | **required**
-**owner** | a string value that specifies the menu items owner plugin or module in the format Author. | optional
-**label** | specifies the menu label localization string key. | **required**
-**icon** | an icon name from the Font Awesome icon collection. | **required**
-**iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors. | optional
-**url** | the back-end relative URL the menu item should point to. | **required**
-**counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number. | optional
-**counterLabel** | a string value to describe the numeric reference in counter. | optional
-**badge** | a string value to output near the menu icon, the value should be a string, this value will override the counter if set. | optional
-**attributes** | an array of attributes and values to apply to the menu item. | optional
-**group** | a string value that defines a sub-header to a group of menu fields. | optional
-**permissions** | an array of permissions the back-end user should have. | optional
+Key | Description
+------------- | -------------
+**code** | a string value that acts as an unique identifier for that menu option, required.
+**owner** | a string value that specifies the menu items owner plugin or module in the format Author, optional.
+**label** | specifies the menu label localization string key, required.
+**icon** | an icon name from the Font Awesome icon collection, required.
+**iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
+**url** | the back-end relative URL the menu item should point to, required.
+**counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
+**counterLabel** | a string value to describe the numeric reference in counter, optional.
+**badge** | a string value to output near the menu icon, the value should be a string, this value will override the counter if set, optional.
+**attributes** | an array of attributes and values to apply to the menu item, optional.
+**permissions** | an array of permissions the back-end user should have, optional.
 
 <a name="registering-middleware"></a>
 ## Registering middleware
