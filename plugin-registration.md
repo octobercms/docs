@@ -121,7 +121,7 @@ Key | Description
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, required.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
 **iconSvg** | a SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 
@@ -248,7 +248,7 @@ Key | Description
 **code** | a string value that acts as an unique identifier for that menu option, required.
 **owner** | a string value that specifies the menu items owner plugin or module in the format Author, optional.
 **label** | specifies the menu label localization string key, required.
-**icon** | an icon name from the Font Awesome icon collection, required.
+**icon** | an icon name from the Font Awesome icon collection, optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
 **url** | the back-end relative URL the menu item should point to, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
