@@ -122,7 +122,7 @@ Key | Description
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
 **icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
-**iconSvg** | a SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
+**iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
@@ -246,16 +246,16 @@ To make the sub-menu items visible, you may [set the navigation context](../back
 Key | Description
 ------------- | -------------
 **code** | a string value that acts as an unique identifier for that menu option, required.
-**owner** | a string value that specifies the menu items owner plugin or module in the format Author, optional.
+**owner** | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin", optional.
 **label** | specifies the menu label localization string key, required.
-**icon** | an icon name from the Font Awesome icon collection, optional.
+**icon** | an icon name from the [October CMS icon collection](../ui/icon), optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
-**url** | the back-end relative URL the menu item should point to, required.
+**url** | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 **counterLabel** | a string value to describe the numeric reference in counter, optional.
-**badge** | a string value to output near the menu icon, the value should be a string, this value will override the counter if set, optional.
-**attributes** | an array of attributes and values to apply to the menu item, optional.
-**permissions** | an array of permissions the back-end user should have, optional.
+**badge** | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
+**attributes** | an associative array of attributes and values to apply to the menu item, optional.
+**permissions** | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
 
 <a name="registering-middleware"></a>
 ## Registering middleware
