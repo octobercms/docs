@@ -245,8 +245,6 @@ To make the sub-menu items visible, you may [set the navigation context](../back
 
 Key | Description
 ------------- | -------------
-**code** | a string value that acts as an unique identifier for that menu option, required.
-**owner** | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin", optional.
 **label** | specifies the menu label localization string key, required.
 **icon** | an icon name from the [October CMS icon collection](../ui/icon), optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
