@@ -45,7 +45,7 @@ For singular attach relations (`$attachOne`), you may create an attachment direc
 You may also pass a string to the `data` attribute that contains an absolute path to a local file.
 
     $model->avatar = '/path/to/somefile.jpg';
-    
+
 Sometimes it may also be useful to create a `File` instance directly from (raw) data:
 
     $file = (new System\Models\File)->fromData('Some content', 'sometext.txt');
@@ -62,18 +62,18 @@ Alternatively, you can prepare a File model before hand, then manually associate
     $file->save();
 
     $model->avatar()->add($file);
-    
+
 You can also add a file from a URL. To work this method, you need install cURL PHP Extension.
 
     $file = new System\Models\File;
     $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg');
 
     $user->avatar()->add($file);
-    
+
 Occasionally you may need to change a file name. You may do so by using second method parameter.
 
     $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefilename.jpg');
-    
+
 
 <a name="viewing-attachments"></a>
 ### Viewing attachments
@@ -96,33 +96,7 @@ To output the file contents directly, use the `output` method, this will include
 
     echo $model->avatar->output();
 
-You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. The following options are supported:
-
-Option | Description
-------------- | -------------
-**mode** | auto, exact, portrait, landscape, crop, fit. Default: auto
-**quality** | 0 - 100. Default: 90
-**interlace** | boolean: false (default), true
-**extension** | auto, jpg, png, webp, gif. Default: jpg
-
-The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
-
-    echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
-
-Display image on a page:
-
-    <img src="{{ model.avatar.getThumb(100, 100, {'mode':'exact', 'quality': 80, 'extension': 'webp'}) }}" alt="Description Image" />
-
-#### Viewing Modes
-
-The `mode` option allows you to specify how the image should be resized. Here are the available modes:
-
-* `auto` will automatically choose between `portrait` and `landscape` based on the image's orientation
-* `exact` will resize to the exact dimensions given, without preserving aspect ratio
-* `portrait` will resize to the given height and adapt the width to preserve aspect ratio
-* `landscape` will resize to the given width and adapt the height to preserve aspect ratio
-* `crop` will crop to the given dimensions after fitting as much of the image as possible inside those
-* `fit` will fit the image inside the given maximal dimensions, keeping the aspect ratio
+You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. Read more about these parameters on the [Image Resizing](../services/image-resizing#resize-parameters) page.
 
 <a name="attachments-usage-example"></a>
 ### Usage example
@@ -191,11 +165,11 @@ If you need to access the owner of a file, you can use the `attachment` property
     public $morphTo = [
         'attachment' => []
     ];
-    
-Example:  
+
+Example:
 
     $user = $file->attachment;
-    
+
 For more information read the [polymorphic relationships](../database/relations#polymorphic-relations)
 
 <a name="attachments-validation-example"></a>
@@ -206,7 +180,7 @@ The example below uses [array validation](../services/validation#validating-arra
     use October\Rain\Database\Traits\Validation;
     use System\Models\File;
     use Model;
-    
+
     class Gallery extends Model
     {
         use Validation;
@@ -214,12 +188,12 @@ The example below uses [array validation](../services/validation#validating-arra
         public $attachMany = [
             'photos' => File::class
         ];
-    
+
         public $rules = [
             'photos'   => 'required',
             'photos.*' => 'image|max:1000|dimensions:min_width=100,min_height=100'
         ];
-    
+
         /* some other code */
     }
 
