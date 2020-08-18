@@ -450,3 +450,20 @@ Components can inject assets (CSS and JavaScript files) to pages or layouts they
     }
 
 If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
+
+The `addCss` and `addJs` methods provide a second argument that defines the attributes of your injected asset as an array. A special attribute - `build` - is available, that will suffix your injected assets with the current version of the plugin specified. This can be used to refresh cached assets when a plugin is upgraded.
+
+    public function onRun()
+    {
+        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', [
+            'build' => 'Acme.Test',
+            'defer' => true
+        ]);
+    }
+    
+You may also use a string as the second argument, which then defaults to using the string value as the `build`:
+
+    public function onRun()
+    {
+        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', 'Acme.Test');
+    }

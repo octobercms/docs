@@ -227,6 +227,13 @@ LESS and SCSS assets can be injected and compiled using the combiner:
     {
         $this->addCss(['assets/less/base.less']);
     }
+    
+The second argument of `addCss` and `addJs` allows you to provide additional attributes to your injected assets:
+
+    function onStart()
+    {
+        $this->addJs(['assets/js/app.js', 'assets/js/nav.js'], ['defer' => true]);
+    }
 
 In order to output the injected assets on pages or [layouts](layout), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
 

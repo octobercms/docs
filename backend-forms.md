@@ -48,7 +48,7 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
 <a name="configuring-form"></a>
 ## Configuring the form behavior
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a typical form behavior configuration file:
+The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical form behavior configuration file:
 
     # ===================================
     #  Form Behavior Config
@@ -584,6 +584,7 @@ There are various form widgets included as standard, although it is common for p
 - [Relation](#widget-relation)
 - [Repeater](#widget-repeater)
 - [Rich editor / WYSIWYG](#widget-richeditor)
+- [Sensitive](#widget-sensitive)
 - [Tag list](#widget-taglist)
 </div>
 
@@ -1024,6 +1025,24 @@ The available toolbar buttons are:
     fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html
 
 > **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
+
+<a name="widget-sensitive"></a>
+### Sensitive
+
+`sensitive` - renders a revealable password field that can be used for sensitive information such as API keys or secrets, configuration values, etc. A sensitive field can be toggled visible and hidden at the user's request.
+
+A sensitive field that contains a previously entered value will have the value replaced with a placeholder value on load, preventing the value from being guessed by length or copied. Upon revealing the value, the original value is retrieved by AJAX and populated into the field.
+
+    api_secret:
+        type: sensitive
+        allowCopy: false
+        hideOnTabChange: true
+
+Option | Description
+------------- | -------------
+**allowCopy** | adds a "copy" action to the sensitive field, allowing the user to copy the password without revealing it. Default: false
+**hiddenPlaceholder** | sets the placeholder text that is used to simulate a hidden, unrevealed value. You can change this to a long or short string to emulate different length values. Default: `__hidden__`
+**hideOnTabChange** | if true, the sensitive field will automatically be hidden if the user navigates to a different tab, or minimizes their browser. Default: true
 
 <a name="widget-taglist"></a>
 ### Tag list
