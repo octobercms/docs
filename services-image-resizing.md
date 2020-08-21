@@ -6,9 +6,11 @@
 <a name="resize-parameters">
 ## Resize Parameters
 
+The basic parameters provided to the ImageResizer are `(int) $width`, `(int) $height`, and `(array) $options`.
+
 If `$width` or `$height` is falsey or `'auto'`, that value is calculated using original image ratio (automatic proportional scaling).
 
-The following options are supported:
+The following elements are supported in the options array are supported:
 
 Key | Description | Default | Options
 --- | --- | --- | ---
