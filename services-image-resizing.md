@@ -1,6 +1,7 @@
 # Image Resizing
 
 - [Resize parameters](#resize-parameters)
+- [Available modes](#available-modes)
 - [Resize sources](#resize-sources)
 
 <a name="resize-parameters">
