@@ -187,6 +187,7 @@ There are various column types that can be used for the **type** setting, these 
 
 <div class="content-list collection-method-list" markdown="1">
 - [Text](#column-text)
+- [Image](#column-image)
 - [Number](#column-number)
 - [Switch](#column-switch)
 - [Date & Time](#column-datetime)
@@ -215,6 +216,22 @@ You can also specify a custom text format, for example **Admin:Full Name (active
         label: Full Name
         type: text
         format: Admin:%s (active)
+
+<a name="column-image"></a>
+### Image
+
+`image` - displays an image using the built in [image resizing functionality](../services/image-resizing#resize-sources).
+
+    avatar:
+        label: Avatar
+        type: image
+        sortable: false
+        width: 150
+        height: 150
+        options:
+            quality: 80
+
+See the [image resizing docs](../services/image-resizing#resize-sources) for more information on what image sources are supported and what [options](../services/image-resizing#resize-parameters) are supported
 
 <a name="column-number"></a>
 ### Number
@@ -806,7 +823,7 @@ You can extend the filter scopes of another controller from outside by calling t
         Categories::extendListFilterScopes(function($filter) {
             // Add custom CSS classes to the Filter widget itself
             $filter->cssClasses = array_merge($filter->cssClasses, ['my', 'array', 'of', 'classes']);
-            
+
             $filter->addScopes([
                 'my_scope' => [
                     'label' => 'My Filter Scope'

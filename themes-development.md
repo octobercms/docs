@@ -83,10 +83,10 @@ The following is an example of how to define a website name configuration field 
                 label: Site name
                 comment: The website name as it should appear on the front-end
                 default: My Amazing Site!
-                
-> **Note:** If using nested fields with array syntax (`contact[name]`, `contact[email]` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
 
-    \Cms\Models\ThemeData::extend(function ($model) { 
+> **Note:** If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
+
+    \Cms\Models\ThemeData::extend(function ($model) {
         $model->addJsonable('contact');
     });
 
@@ -100,7 +100,7 @@ You may also define the configuration in a separate file, where the path is rela
     # [...]
 
     form: config/fields.yaml
-    
+
 **config/fields.yaml**:
 
     fields:
@@ -112,7 +112,7 @@ You may also define the configuration in a separate file, where the path is rela
 <a name="combiner-vars"></a>
 ### Combiner variables
 
-Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+Assets combined using the `| theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
     form:
         fields:
@@ -125,7 +125,7 @@ Assets combined using the `|theme` [filter and combiner](../markup/filter-theme)
 
 In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
 
-    <link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet">
+    <link href="{{ ['assets/less/theme.less'] | theme }}" rel="stylesheet">
 
 Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 

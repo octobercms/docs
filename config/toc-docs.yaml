@@ -81,6 +81,7 @@ Services:
     services/error-log: "Errors & Logging"
     services/events: "Events"
     services/html: "Forms & Html"
+    services/image-resizing: "Image Resizing"
     services/filesystem-cdn: "Filesystem / CDN"
     services/hashing-encryption: "Hashing & Encryption"
     services/helpers: "Helpers"

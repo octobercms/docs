@@ -17,7 +17,7 @@ The AJAX framework comes in two flavors, you may either use [the JavaScript API]
 
 The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% framework %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the October front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
 
-    <script src="{{ 'assets/javascript/jquery.js'|theme }}"></script>
+    <script src="{{ 'assets/javascript/jquery.js' | theme }}"></script>
 
     {% framework %}
 
