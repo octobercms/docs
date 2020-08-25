@@ -598,10 +598,10 @@ Once the Validator has been extended with your custom rule, you will need to add
 
 #### Using Rule objects
 
-A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation, a `validate` method which is called on validation and a `message` method which defines the default fallback error message.
+A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation and a `message` method which defines the default fallback error message. `Rule` objects should extend the `October\Rain\Validation\Rule` abstract.
 
     <?php
-    use Illuminate\Contracts\Validation\Rule;
+    use October\Rain\Validation\Rule;
 
     class Uppercase implements Rule
     {
@@ -615,19 +615,6 @@ A `Rule` object represents a single reusable validation rule for your models tha
         public function passes($attribute, $value)
         {
             return strtoupper($value) === $value;
-        }
-
-        /**
-         * Validation callback method.
-         *
-         * @param  string  $attribute
-         * @param  mixed  $value
-         * @param  array  $params
-         * @return bool
-         */
-        public function validate($attribute, $value, $params)
-        {
-            return $this->passes($attribute, $value);
         }
 
         /**
@@ -655,7 +642,7 @@ You will also need to define an error message for your custom rule. You can do s
 
     "accepted" => "The :attribute must be accepted.",
 
-With `Rule` objects, you can set a fallback error message by providing a `message` method that returns a string.
+With `Rule` objects, you can set a fallback error message by providing a `message` method that returns a string. This string can be a language string, which will allow the message to be translated as required.
 
 When creating a custom validation rule, you may sometimes need to define custom placeholder replacements for error messages. You may do so by making a call to the `replacer` method on the Validator facade. You may also do this within the `boot` method of your plugin.
 
@@ -672,17 +659,6 @@ The callback receives 4 arguments: `$message` being the message returned by the 
     {
         Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':column', $parameters[0], $message);
-        });
-    }
-
-If you wish to support multiple languages with your error messages, you will need to listen for the `translator.beforeResolve` event in your plugin, as your plugin's `boot` method may be run before translation support is fully enabled.
-
-    public function boot()
-    {
-        Event::listen('translator.beforeResolve', function ($key, $replaces, $locale) {
-            if ($key === 'validation.uppercase') {
-                return Lang::get('plugin.name::lang.validation.uppercase');
-            }
         });
     }
 
