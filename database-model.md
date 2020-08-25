@@ -450,7 +450,7 @@ An example of using an event:
         $this->slug = Str::slug($this->name);
     }
 
-> **Note:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images->withDeferred(post('_session_key'))->get();`
+> **Note:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
 
 <a name="basic-usage"></a>
 ### Basic usage
