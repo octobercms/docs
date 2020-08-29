@@ -38,7 +38,7 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
 
     class Categories extends \Backend\Classes\Controller
     {
-        public $implement = ['Backend.Behaviors.FormController'];
+        public $implement = [\Backend\Behaviors\FormController::class];
 
         public $formConfig = 'config_form.yaml';
     }
@@ -55,7 +55,7 @@ The configuration file referred in the `$formConfig` property is defined in YAML
     # ===================================
 
     name: Blog Category
-    form: $/acme/blog/models/post/fields.yaml
+    form: ~/acme/blog/models/post/fields.yaml
     modelClass: Acme\Blog\Post
 
     create:
@@ -546,7 +546,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 
     content:
         type: partial
-        path: $/acme/blog/models/comments/_content_field.htm
+        path: ~/acme/blog/models/comments/_content_field.htm
 
 <a name="field-hint"></a>
 ### Hint
@@ -955,7 +955,7 @@ The repeater field supports a group mode which allows a custom set of fields to 
     content:
         type: repeater
         prompt: Add content block
-        groups: $/acme/blog/config/repeater_fields.yaml
+        groups: ~/acme/blog/config/repeater_fields.yaml
 
 This is an example of a group configuration file, which would be located in **/plugins/acme/blog/config/repeater_fields.yaml**. Alternatively these definitions could be specified inline with the repeater.
 
@@ -1364,7 +1364,7 @@ You can extend the fields of another controller from outside by calling the `ext
 
     class Categories extends \Backend\Classes\Controller
     {
-        public $implement = ['Backend.Behaviors.FormController'];
+        public $implement = [\Backend\Behaviors\FormController::class];
 
         public $formConfig = 'config_form.yaml';
     }

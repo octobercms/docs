@@ -33,9 +33,9 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
 
     class Categories extends \Backend\Classes\Controller
     {
-        public $implement = ['Backend.Behaviors.ListController'];
+        public $implement = [\Backend\Behaviors\ListController::class];
 
-        public $listConfig = 'list_config.yaml';
+        public $listConfig = 'config_list.yaml';
     }
 
 > **Note:** Very often the list and [form behavior](form) are used together in a same controller.
@@ -727,7 +727,7 @@ The `ListController` behavior has a main container view that you may override by
 The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-list). The widget will look in this path for a view first, then fall back to the default location.
 
     # Custom view path
-    customViewPath: $/acme/blog/controllers/reviews/list
+    customViewPath: ~/acme/blog/controllers/reviews/list
 
 > **Note**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
 
@@ -746,9 +746,9 @@ You can extend the columns of another controller from outside by calling the `ex
 
     class Categories extends \Backend\Classes\Controller
     {
-        public $implement = ['Backend.Behaviors.ListController'];
+        public $implement = [\Backend\Behaviors\ListController::class];
 
-        public $listConfig = 'list_config.yaml';
+        public $listConfig = 'config_list.yaml';
     }
 
 Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
