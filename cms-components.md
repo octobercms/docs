@@ -8,6 +8,7 @@
     - [Moving default markup to a partial](#moving-default-markup)
     - [Overriding component partials](#overriding-partials)
 - [The "View Bag" component](#viewbag-component)
+- [Soft components](#soft-components)
 
 Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
@@ -75,6 +76,13 @@ However there is a way to initialize properties with values loaded from external
 Assuming that in the example above the component **demoTodo** is defined in a partial, it will be initialized with a value loaded from the **maxItems** partial variable:
 
     {% partial 'my-todo-partial' maxItems='10' %}
+    
+You may use dot notation to retrieve a deeply nested value from an external parameter:
+
+    [demoTodo]
+    maxItems = {{ data.maxItems }}
+    ==
+    ...
 
 To load a property value from the URL parameter, use the `{{ :paramName }}` syntax, where the name starts with a colon (`:`), for example:
 
@@ -189,3 +197,40 @@ Any property defined for the component is then made available inside the page, l
     </ul>
 
 > **Note**: The viewBag component is hidden on the back-end and is only available for file-based editing. It can also be used by other plugins to store data.
+
+<a name="soft-components"></a>
+## Soft components
+
+Soft components are components in a theme that will continue to operate even if the linked component is no longer available. This allows theme and site developers to specify optional plugin components in their themes that will provide specific functionality if the plugin and/or component is present, while allowing the site to continue to function should the component no longer exist.
+
+When soft components are present on a page and the component is unavailable, no output is generated for the component.
+
+You can define soft components by prefixing the component name with an `@` symbol.
+
+    url = "mypage"
+
+    [@channel]
+    ==
+    {% component "channel" %}
+
+In this example, should the `channel` component not be available, the `{% component "channel" %}` tag will be ignored when the page is rendered.
+
+Soft components also work with aliases as well:
+
+    url = "mypage"
+
+    [@channel channelSection]
+    ==
+    {% component "channelSection" %}
+
+As soft components do not contain any of the data that the component may provide normally if the component is not available, you must take care to ensure that any custom markup will gracefully handle any missing component information. For example:
+
+    url = "mypage"
+
+    [@channel]
+    ==
+    {% if channel.name %}
+        <div class="channel">
+            {% channel.name %}
+        </div>
+    {% endif %}

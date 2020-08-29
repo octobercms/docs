@@ -58,6 +58,11 @@ There are some special options that can also be used alongside the attributes.
 
     {{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
 
+>**Note:** When attempting to reference a component's alias with `__SELF__` as an argument to `form_ajax()` you must first build the string you wish to use outside of the call itself. Example:
+
+    {% set targetPartial = "'" ~ __SELF__ ~ "::statistics': '#statsPanel'" %}
+    {{ form_ajax('onUpdate', { update: targetPartial }) }}
+
 The function support the following options:
 
 Option | Description
@@ -76,5 +81,19 @@ Outputs a standard FORM closing tag. This tag is generally available to provide 
     {{ form_close() }}
 
 The above example would output as the following:
+
+    </form>
+
+## Passing attributes to the generated element
+
+You can pass additional attributes to the `Form::open()` method by passing an array of attribute names and values to be rendered on the final generated `<form>` element.
+
+    <?= Form::open(array('id' => 'example', 'class' => 'something')) ?>
+        // ..
+    <?= Form::close() ?>
+
+The above example would output the following:
+
+    <form method="POST" action="" accept-charset="UTF-8" id="example" class="something">
 
     </form>

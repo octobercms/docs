@@ -8,6 +8,7 @@
     - [One To Many](#one-to-many)
     - [Many To Many](#many-to-many)
     - [Has Many Through](#has-many-through)
+    - [Has One Through](#has-one-through)
 - [Polymorphic relations](#polymorphic-relations)
     - [One To One](#one-to-one-polymorphic-relations)
     - [One To Many](#one-to-many-polymorphic-relations)
@@ -53,6 +54,8 @@ Relationships like models themselves, also serve as powerful [query builders](qu
 Accessing a relationship as a property is also possible:
 
     $user->posts;
+
+> **Note**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
 
 <a name="detailed-relationships"></a>
 ### Detailed definitions
@@ -396,16 +399,60 @@ Now that we have examined the table structure for the relationship, let's define
 
 The first argument passed to the `$hasManyThrough` relation is the name of the final model we wish to access, while the `through` parameter is the name of the intermediate model.
 
-Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, while the `throughKey` parameter is the name of the foreign key on the final model.
+Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
 
     public $hasManyThrough = [
         'posts' => [
             'Acme\Blog\Models\Post',
             'key'        => 'my_country_id',
             'through'    => 'Acme\Blog\Models\User',
-            'throughKey' => 'my_user_id'
+            'throughKey' => 'my_user_id',
+            'otherKey'   => 'my_id'
         ],
     ];
+
+<a name="has-one-through"></a>
+### Has One Through
+
+The has-one-through relationship links models through a single intermediate relation. For example, if each supplier has one user, and each user is associated with one user history record, then the supplier model may access the user's history through the user. Let's look at the database tables necessary to define this relationship:
+
+    users
+        id - integer
+        supplier_id - integer
+
+    suppliers
+        id - integer
+
+    history
+        id - integer
+        user_id - integer
+
+Though the `history` table does not contain a `supplier_id` column, the `hasOneThrough` relation can provide access to the user's history to the supplier model. Now that we have examined the table structure for the relationship, let's define it on the `Supplier` model:
+
+    class Supplier extends Model
+    {
+        public $hasOneThrough = [
+            'userHistory' => [
+                'Acme\Supplies\Model\History',
+                'through' => 'Acme\Supplies\Model\User'
+            ],
+        ];
+    }
+
+The first array parameter passed to the `$hasOneThrough` property is the name of the final model we wish to access, while the `through` key is the name of the intermediate model.
+
+Typical foreign key conventions will be used when performing the relationship's queries. If you would like to customize the keys of the relationship, you may pass them as the `key`, `otherKey` and `throughKey` parameters to the `$hasManyThrough` definition. The `key` parameter is the name of the foreign key on the intermediate model, the `throughKey` parameter is the name of the foreign key on the final model, while the `otherKey` is the local key.
+
+    public $hasOneThrough = [
+        'userHistory' => [
+            'Acme\Supplies\Model\History',
+            'key'        => 'supplier_id',
+            'through' => 'Acme\Supplies\Model\User'
+            'throughKey' => 'user_id',
+            'otherKey'   => 'id'
+        ],
+    ];
+
 
 <a name="polymorphic-relations"></a>
 ### Polymorphic relations
@@ -528,7 +575,7 @@ Next, let's examine the model definitions needed to build this relationship:
 
 Once your database table and models are defined, you may access the relationships via your models. For example, to access all of the comments for a post, we can use the `comments` dynamic property:
 
-    $post = App\Post::find(1);
+    $post = Author\Plugin\Models\Post::find(1);
 
     foreach ($post->comments as $comment) {
         //
@@ -536,11 +583,19 @@ Once your database table and models are defined, you may access the relationship
 
 You may also retrieve the owner of a polymorphic relation from the polymorphic model by accessing the name of the `morphTo` relationship. In our case, that is the `commentable` definition on the `Comment` model. So, we will access it as a dynamic property:
 
-    $comment = App\Comment::find(1);
+    $comment = Author\Plugin\Models\Comment::find(1);
 
     $commentable = $comment->commentable;
 
 The `commentable` relation on the `Comment` model will return either a `Post` or `Video` instance, depending on which type of model owns the comment.
+
+You are also able to update the owner of the related model by setting the attribute with the name of the `morphTo` relationship, in this case `commentable`.
+
+    $comment = Author\Plugin\Models\Comment::find(1);
+    $video = Author\Plugin\Models\Video::find(1);
+
+    $comment->commentable = $video;
+    $comment->save()
 
 <a name="many-to-many-polymorphic-relations"></a>
 ### Many To Many
@@ -986,7 +1041,7 @@ The comment in the next example will not be deleted unless the post is saved.
 
     $comment = Comment::find(1);
     $post = Post::find(1);
-    $post->comments()->delete($comment, $sessionKey);
+    $post->comments()->remove($comment, $sessionKey);
 
 <a name="list-all-bindings"></a>
 ### List all bindings

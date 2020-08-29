@@ -29,6 +29,7 @@ To use the Mailgun driver, set the `driver` option in your `config/mail.php` con
     'mailgun' => [
         'domain' => 'your-mailgun-domain',
         'secret' => 'your-mailgun-key',
+        'endpoint' => 'api.mailgun.net', // api.eu.mailgun.net for EU
     ],
 
 #### SparkPost driver
