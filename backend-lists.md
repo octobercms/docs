@@ -50,7 +50,7 @@ The configuration file referred in the `$listConfig` property is defined in YAML
     # ===================================
 
     title: Blog Posts
-    list: ~/plugins/acme/blog/models/post/columns.yaml
+    list: $/plugins/acme/blog/models/post/columns.yaml
     modelClass: Acme\Blog\Models\Post
     recordUrl: acme/blog/posts/update/:id
 
@@ -371,7 +371,7 @@ To display a column that shows the number of related records, use the `useRelati
 
     content:
         type: partial
-        path: ~/plugins/acme/blog/models/comments/_content_column.htm
+        path: $/plugins/acme/blog/models/comments/_content_column.htm
 
 <a name="column-colorpicker"></a>
 ### Color Picker

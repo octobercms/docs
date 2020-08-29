@@ -863,7 +863,7 @@ Option | Description
     user:
         label: User
         type: recordfinder
-        list: ~/plugins/rainlab/user/models/user/columns.yaml
+        list: $/plugins/rainlab/user/models/user/columns.yaml
         recordsPerPage: 10
         title: Find Record
         prompt: Click the Find button to find a user
