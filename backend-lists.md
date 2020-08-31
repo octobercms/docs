@@ -727,7 +727,7 @@ The `ListController` behavior has a main container view that you may override by
 The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-list). The widget will look in this path for a view first, then fall back to the default location.
 
     # Custom view path
-    customViewPath: ~/acme/blog/controllers/reviews/list
+    customViewPath: $/acme/blog/controllers/reviews/list
 
 > **Note**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
 
