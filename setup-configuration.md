@@ -76,6 +76,7 @@ Use the following code in **server** section. If you have installed October into
     ## Let nginx return 404 if static file not exists
     location ~ ^/storage/app/uploads/public { try_files $uri 404; }
     location ~ ^/storage/app/media { try_files $uri 404; }
+    location ~ ^/storage/app/resized { try_files $uri 404; }
     location ~ ^/storage/temp/public { try_files $uri 404; }
 
     location ~ ^/modules/.*/assets { try_files $uri 404; }
@@ -119,8 +120,10 @@ Paste the following code in the editor and change the **host address** and  **se
             "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
             "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
             "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
+            "^/storage/app/media/.*$" => "$0",
+            "^/storage/app/resized/.*$" => "$0",
             "^/storage/temp/public/[\w-]+/.*$" => "$0",
-            "^/(favicon\.ico|robots\.txt|sitemap\.xml)$" => "$0",
+            "^/(favicon\.ico)$" => "$0",
             "(.*)" => "/index.php$1"
         )
     }
@@ -140,8 +143,9 @@ If your webserver is running Internet Information Services (IIS) you can use the
                        <match url="^(.*)$" ignoreCase="false" />
                        <conditions logicalGrouping="MatchAll">
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/.well-known/*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/uploads/.*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/uploads/public/.*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/media/.*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/resized/.*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/temp/public/.*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/themes/.*/(assets|resources)/.*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/plugins/.*/(assets|resources)/.*" negate="true" />
