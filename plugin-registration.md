@@ -297,6 +297,8 @@ Request | Description
 **/backend/backend/auth** | the backend authentication path (login, logout)
 **october:up** | the CLI command that runs all pending migrations
 **october:update** | the CLI command that triggers the update process
+**october:env** | the CLI command that converts configuration files to environment variables in a `.env` file
+**october:version** | the CLI command that detects the version of October CMS that is installed
 
 Define the `$elevated` property to grant elevated permissions for your plugin.
 
