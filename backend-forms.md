@@ -375,7 +375,22 @@ For more information on model validation, please visit [the documentation page](
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 4 ways to provide the drop-down options. The first method defines `options` directly in the YAML file:
+`dropdown` - renders a dropdown with specified options. There are 6 ways to provide the drop-down options.
+
+The first method defines `options` directly in the YAML file(two variants):
+
+(value only):
+
+    status_type:
+        label: Blog Post Status
+        type: dropdown
+        default: published
+        options:
+            draft
+            published
+            archived
+
+(key / value):
 
     status_type:
         label: Blog Post Status
@@ -386,7 +401,7 @@ For more information on model validation, please visit [the documentation page](
             published: Published
             archived: Archived
 
-The second method defines options with a method declared in the model's class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
+The second method defines options with a method declared in the model class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
 
     status_type:
         label: Blog Post Status
@@ -411,7 +426,7 @@ The third global method `getDropdownOptions` can also be defined in the model, t
         }
     }
 
-The fourth method uses a specific method declared in the model's class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
+The fourth method uses a specific method declared in the model class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
@@ -424,6 +439,36 @@ Supplying the dropdown options to the model class:
     {
         return ['published' => 'Published', ...];
     }
+
+The fifth method uses a static method declared in the model class:
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        options: FormHelper::staticMethodOptions
+
+Supplying the dropdown options to the model class:
+
+    public static function staticMethodOptions($fieldName, $value, $formData)
+    {
+        return ['published' => 'Published', ...];
+    }
+
+The sixth method uses an array that contains the class as the first argument and the method as the second argument; a static method must be defined in the model class:
+
+    status:
+        label: Blog Post Status
+        type: dropdown
+        options: [FormHelper, staticMethodOptions]
+
+Supplying the dropdown options to the model class:
+
+    public static function staticMethodOptions($fieldName, $value, $formData)
+    {
+        return ['published' => 'Published', ...];
+    }
+
+
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
@@ -623,7 +668,7 @@ There are two ways to provide the available colors for the colorpicker. The firs
         type: colorpicker
         availableColors: ['#000000', '#111111', '#222222']
 
-The second method uses a specific method declared in the model's class.  This method should return an array of hex colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
+The second method uses a specific method declared in the model class.  This method should return an array of hex colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
 
     color:
         label: Background
