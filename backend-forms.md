@@ -445,7 +445,7 @@ The fifth method allows you to specify a static method on a class to return the 
     status:
         label: Blog Post Status
         type: dropdown
-        options: FormHelper::staticMethodOptions
+        options: \MyAuthor\MyPlugin\Classes\FormHelper::staticMethodOptions
 
 Supplying the dropdown options to the model class:
 
