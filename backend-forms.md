@@ -440,7 +440,7 @@ Supplying the dropdown options to the model class:
         return ['published' => 'Published', ...];
     }
 
-The fifth method uses a static method declared in the model class:
+The fifth method allows you to specify a static method on a class to return the options:
 
     status:
         label: Blog Post Status
