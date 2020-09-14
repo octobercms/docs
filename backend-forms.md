@@ -454,7 +454,7 @@ Supplying the dropdown options to the model class:
         return ['published' => 'Published', ...];
     }
 
-The sixth method uses an array that contains the class as the first argument and the method as the second argument; a static method must be defined in the model class:
+The sixth method allows you to specify a callable object via an array definition. If using PHP, you're able to provide an array with the first element being the object and the second element being the method you want to call on that object. If you're using YAML, you're limited to a static method defined as the second element and the namespaced reference to a class as the first element:
 
     status:
         label: Blog Post Status
