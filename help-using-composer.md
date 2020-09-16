@@ -20,7 +20,7 @@ Using [Composer](https://getcomposer.org/) as an alternative package manager to 
 
 If you plan on submitting pull requests to the October CMS project via GitHub, or just want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place.
 
-    "october/rain": "dev-develop as 1.0",
+    "october/rain": "dev-develop as 1.1",
     "october/system": "dev-develop",
     "october/backend": "dev-develop",
     "october/cms": "dev-develop",
