@@ -310,5 +310,10 @@ Similarly we can remove the menu items with the same event:
 
         $manager->removeMainMenuItem('October.Cms', 'cms');
         $manager->removeSideMenuItem('October.Cms', 'cms', 'pages');
+    });
 
+Or, we can remove multiple side menu items at a time:
+
+    Event::listen('backend.menu.extendItems', function($manager) {
+        $manager->removeSideMenuItems('October.Cms','cms',['pages','cms']);
     });
