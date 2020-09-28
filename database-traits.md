@@ -364,6 +364,8 @@ You can also add custom error messages to the array syntax for validation rules 
 
     class User extends Model
     {
+        use \October\Rain\Database\Traits\Validation;
+
         public $rules = [
             'links.*.url'    => 'required|url',
             'links.*.anchor' => 'required'
