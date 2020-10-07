@@ -33,7 +33,8 @@ Groups (`\Backend\Models\UserGroup`) are an organizational tool for grouping adm
 The global `BackendAuth` facade can be used for managing administrative users, which primarily inherits the `October\Rain\Auth\Manager` class. To register a new administrator user account, use the `BackendAuth::register` method.
 
     $user = BackendAuth::register([
-        'name' => 'Some User',
+        'first_name' => 'Some',
+        'last_name' => 'User',
         'login' => 'someuser',
         'email' => 'some@website.tld',
         'password' => 'changeme',
