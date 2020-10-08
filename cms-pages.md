@@ -40,6 +40,8 @@ The page URL is defined with the **url** configuration parameter. URLs should st
 
     url = "/blog"
 
+> **Note:** The page URL is case-insensitive by default.
+
 URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by October components or from the page [PHP code](themes#php-section) section.
 
     url = "/blog/post/:post_id"
