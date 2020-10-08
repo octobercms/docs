@@ -86,8 +86,8 @@ You also may wish to inspect **config/app.php** and **config/cms.php** to change
 The `october:update` command will request updates from the October gateway. It will update the core application and plugin files, then perform a database migration.
 
     php artisan october:update
-
-> **Note**: If you are [using composer](#console-install-composer), the core application files will not be downloaded and `composer update` should be called before running this command. **Additionally**: If you are using composer to manage all of your dependencies (as opposed to the marketplace) then use `october:up` to run the pending migrations instead of `october:update`.
+    
+> **IMPORTANT**: If you are using [using composer](#console-install-composer) do **NOT** run this command without first making sure that `cms.disableCoreUpdates` is set to true. Doing so will cause conflicts between the marketplace version of October and the version available through composer. In order to update the core October installation when using composer run `composer update` instead.
 
 <a name="console-up-command"></a>
 ### Database migration
