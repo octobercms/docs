@@ -313,6 +313,6 @@ Similarly we can remove the menu items with the same event:
 
         $manager->removeSideMenuItems('October.Cms', 'cms', [
             'pages',
-            'cms'
+            'partials'
         ]);
     });
