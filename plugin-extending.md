@@ -311,4 +311,8 @@ Similarly we can remove the menu items with the same event:
         $manager->removeMainMenuItem('October.Cms', 'cms');
         $manager->removeSideMenuItem('October.Cms', 'cms', 'pages');
 
+        $manager->removeSideMenuItems('October.Cms', 'cms', [
+            'pages',
+            'partials'
+        ]);
     });
