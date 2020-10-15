@@ -15,3 +15,5 @@ The filter accepts three parameters: `| resize(int $width [, int $height , array
 See the [image resizing docs](../services/image-resizing#resize-parameters) for more information on the parameters.
 
 - [List of locations images can be resized from](../services/image-resizing#resize-sources)
+
+>**Note:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
