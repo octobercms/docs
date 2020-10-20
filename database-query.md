@@ -146,6 +146,12 @@ If you already have a query builder instance and you wish to add a column to its
     $query = Db::table('users')->select('name');
 
     $users = $query->addSelect('age')->get();
+    
+If you wish to concatenate columns and/or strings together, you may use the `selectConcat` method to specify a list of concatenated values and the resulting alias. If you wish to use strings in the concatenation, you must provide a quoted string:
+
+    $query = Db::table('users')->selectConcat(['"Name: "', 'first_name', 'last_name'], 'name_string');
+    
+    $nameString = $query->first()->name_string;   // Name: John Smith
 
 #### Raw expressions
 
