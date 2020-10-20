@@ -146,11 +146,11 @@ If you already have a query builder instance and you wish to add a column to its
     $query = Db::table('users')->select('name');
 
     $users = $query->addSelect('age')->get();
-    
+
 If you wish to concatenate columns and/or strings together, you may use the `selectConcat` method to specify a list of concatenated values and the resulting alias. If you wish to use strings in the concatenation, you must provide a quoted string:
 
     $query = Db::table('users')->selectConcat(['"Name: "', 'first_name', 'last_name'], 'name_string');
-    
+
     $nameString = $query->first()->name_string;   // Name: John Smith
 
 #### Raw expressions
@@ -558,7 +558,7 @@ In addition to inserting records into the database, the query builder can also u
         ->where('id', 1)
         ->update(['votes' => 1]);
 
-#### Update or Insert
+#### Update or Insert (One query per row)
 
 Sometimes you may want to update an existing record in the database or create it if no matching record exists. In this scenario, the `updateOrInsert` method may be used. The `updateOrInsert` method accepts two arguments: an array of conditions by which to find the record, and an array of column and value pairs containing the columns to be updated.
 
@@ -569,6 +569,17 @@ The `updateOrInsert` method will first attempt to locate a matching database rec
             ['email' => 'john@example.com', 'name' => 'John'],
             ['votes' => '2']
         );
+
+#### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
+
+The `upsert` method will insert rows that do not exist and update the rows that already exist with the new values. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of columns that should be updated if a matching record already exists in the database:
+
+    DB::table('flights')->upsert([
+        ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
+        ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
+    ], ['departure', 'destination'], ['price']);
+
+> **Note:** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
 
 #### Updating JSON columns
 
