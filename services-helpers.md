@@ -381,11 +381,15 @@ You may also use the `base_path` function to generate a fully qualified path to 
     $path = base_path('vendor/bin');
 
 <a name="method-config-path"></a>
-#### `config_path()` {#collection-method}
+#### `config_path($path = '')` {#collection-method}
 
 The `config_path` function returns the fully qualified path to the application configuration directory:
 
     $path = config_path();
+
+You may also use the `config_path` function to generate a fully qualified path to a given file relative to the config directory:
+
+    $path = config_path('dev/cms.php');
 
 <a name="method-database-path"></a>
 #### `database_path()` {#collection-method}
@@ -395,18 +399,26 @@ The `database_path` function returns the fully qualified path to the application
     $path = database_path();
 
 <a name="method-media-path"></a>
-#### `media_path()` {#collection-method}
+#### `media_path($path = '')` {#collection-method}
 
 The `media_path` function returns the fully qualified path to the application media directory:
 
     $path = media_path();
 
+You may also use the `media_path` function to generate a fully qualified path to a given file relative to the media directory:
+
+    $path = media_path('images/myimage.png');
+
 <a name="method-plugins-path"></a>
-#### `plugins_path()` {#collection-method}
+#### `plugins_path($path = '')` {#collection-method}
 
 The `plugins_path` function returns the fully qualified path to the application plugin directory:
 
     $path = plugins_path();
+
+You may also use the `plugins_path` function to generate a fully qualified path to a given file relative to the plugins directory:
+
+    $path = plugins_path('author/plugin/routes.php');
 
 <a name="method-public-path"></a>
 #### `public_path()` {#collection-method}
@@ -416,7 +428,7 @@ The `public_path` function returns the fully qualified path to the `public` dire
     $path = public_path();
 
 <a name="method-storage-path"></a>
-#### `storage_path()` {#collection-method}
+#### `storage_path($path = '')` {#collection-method}
 
 The `storage_path` function returns the fully qualified path to the `storage` directory:
 
@@ -427,25 +439,37 @@ You may also use the `storage_path` function to generate a fully qualified path 
     $path = storage_path('app/file.txt');
 
 <a name="method-temp-path"></a>
-#### `temp_path()` {#collection-method}
+#### `temp_path($path = '')` {#collection-method}
 
 The `temp_path` function returns the fully qualified path to a writable directory for temporary files:
 
     $path = temp_path();
 
+You may also use the `temp_path` function to generate a fully qualified path to a given file relative to the temp directory:
+
+    $path = temp_path('app/file.txt');
+
 <a name="method-themes-path"></a>
-#### `themes_path()` {#collection-method}
+#### `themes_path($path = '')` {#collection-method}
 
 The `themes_path` function returns the fully qualified path to the `themes` directory:
 
     $path = themes_path();
 
+You may also use the `themes_path` function to generate a fully qualified path to a given file relative to the themes directory:
+
+    $path = themes_path('mytheme/file.txt');
+
 <a name="method-uploads-path"></a>
-#### `uploads_path()` {#collection-method}
+#### `uploads_path($path = '')` {#collection-method}
 
 The `uploads_path` function returns the fully qualified path to the application uploads directory:
 
     $path = uploads_path();
+
+You may also use the `uploads_path` function to generate a fully qualified path to a given file relative to the uploads directory:
+
+    $path = uploads_path('public/file.txt');
 
 <a name="strings"></a>
 ## Strings
