@@ -43,6 +43,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [base_path](#method-base-path)
 [config_path](#method-config-path)
 [database_path](#method-database-path)
+[media_path](#method-media-path)
 [plugins_path](#method-plugins-path)
 [public_path](#method-public-path)
 [storage_path](#method-storage-path)
@@ -392,6 +393,13 @@ The `config_path` function returns the fully qualified path to the application c
 The `database_path` function returns the fully qualified path to the application's database directory:
 
     $path = database_path();
+
+<a name="method-media-path"></a>
+#### `media_path()` {#collection-method}
+
+The `media_path` function returns the fully qualified path to the application media directory:
+
+    $path = media_path();
 
 <a name="method-plugins-path"></a>
 #### `plugins_path()` {#collection-method}
