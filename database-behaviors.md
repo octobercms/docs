@@ -55,11 +55,6 @@ Sorted models will store a number value in `sort_order` which maintains the sort
         public $implement = [
             'October.Rain.Database.Behaviors.Sortable'
         ];
-
-        /**
-         * @var array List of attributes to purge.
-         */
-        public $purgeable = [];
     }
 
 You can also dynamically implement this behavior in a class.
@@ -71,9 +66,6 @@ You can also dynamically implement this behavior in a class.
 
         // Implement the sortable behavior dynamically
         $model->implement[] = 'October.Rain.Database.Behaviors.Sortable';
-
-        // Declare the purgeable property dynamically for the purgeable behavior to use
-        $model->addDynamicProperty('sort_order', []);
     });
 
 You may modify the key name used to identify the sort order by defining the `SORT_ORDER` constant:
