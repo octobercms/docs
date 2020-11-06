@@ -724,7 +724,7 @@ Option | Description
 **dynamicHeight** | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
 **fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
 **height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
-**keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`.
+**keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`. Only supports integer values.
 **postbackHandlerName** | specifies the AJAX handler name in which the data table content will be sent with. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
 **recordsPerPage** | the number of records to show per page. If set to `false`, the pagination will be disabled.
 **searching** | allow records to be searched via a search box. Default: `false`.
