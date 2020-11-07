@@ -145,7 +145,7 @@ Themes can provide backend localization keys through files placed in the **lang*
    
 > **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) plugin.
 
-<a name="file-structure"></a>
+<a name="localization-file-structure"></a>
 ### Localization directory and file structure
 
 Below is an example of the theme's lang directory:
