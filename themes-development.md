@@ -141,10 +141,7 @@ When the theme is installed for the first time, the system will attempt to insta
 <a name="localization"></a>
 ## Localization
 
-Themes can have localization files in the **lang** subdirectory of the theme directory. Theme's localization files
- are registered automatically when the theme is being edited in the backend. The localization strings are supported
-  automatically in the back-end customization form labels - if you provide the localization key instead of a real
-   string, the system will try to load it from the localization file.
+Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October backend and can be used for form labels just like [plugin localization](../plugin/localization)
    
 > **Note**: For translating front-end content, [there are plugins that can be used](http://octobercms.com/plugin/rainlab-translate) for this purpose.
 
