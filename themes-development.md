@@ -164,9 +164,7 @@ Below is an example of the theme's lang directory:
 
 The **lang.php** file should define and return an array of any depth, for example:
 
-    <?php
-
-    return [
+    <?php return [
         'options' => [
             'website_name' => 'OctoberCMS'
         ]
