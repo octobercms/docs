@@ -306,6 +306,8 @@ October models uses the built-in [Validator class](../services/validation). The 
         ];
     }
 
+> **Note**: You're free to use the [array syntax](../services/validation#basic-usage) for validation rules as well.
+
 Models validate themselves automatically when the `save` method is called.
 
     $user = new User;
