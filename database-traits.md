@@ -306,18 +306,6 @@ October models uses the built-in [Validator class](../services/validation). The 
         ];
     }
 
-> **Note**: You're free to use the [array syntax](../services/validation#validating-arrays) for validation rules as well.
-
-    class User extends Model
-    {
-        use \October\Rain\Database\Traits\Validation;
-
-        public $rules = [
-            'links.*.url'    => 'required|url',
-            'links.*.anchor' => 'required'
-        ];
-    }
-
 Models validate themselves automatically when the `save` method is called.
 
     $user = new User;
@@ -359,27 +347,6 @@ Just like the Validator class, you can set custom error messages using the [same
             ...
         ];
     }
-
-You can also add custom error messages to the array syntax for validation rules as well.
-
-    class User extends Model
-    {
-        use \October\Rain\Database\Traits\Validation;
-
-        public $rules = [
-            'links.*.url'    => 'required|url',
-            'links.*.anchor' => 'required'
-        ];
-
-        public $customMessages = [
-            'links.*.url.required'    => 'The url is required',
-            'links.*.url.*'           => 'The url needs to be a valid url'
-            
-            'links.*.anchor.required' => 'The anchor text is required',
-        ];
-    }
-
-In the above example you can write custom error messages to specific validation rules (here we used: `required`). Or you can use a `*` to select everything else (here we added a custom message to the `url` validation rule using the `*`).
 
 <a name="custom-attribute-names"></a>
 ### Custom attribute names
