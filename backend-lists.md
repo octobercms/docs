@@ -11,6 +11,8 @@
 - [Multiple list definitions](#multiple-list-definitions)
 - [Using list filters](#list-filters)
     - [Scope options](#filter-scope-options)
+    - [Filter Dependencies](#filter-scope-options)
+    - [Available custom variables for filters](#custom-variables)
     - [Available scope types](#scope-types)
 - [Extending list behavior](#extend-list-behavior)
     - [Overriding controller action](#overriding-action)
@@ -490,6 +492,50 @@ In the above example, the `city` scope will refresh when the `country` scope has
     }
 
 > **Note:** Scope dependencies with `type: group` are only supported at this stage.
+
+<a name="custom-variables"></a>
+### Available custom variables for filters
+
+October CMS comes with some built in custom variables with each scope type.
+
+<div class="content-list collection-method-list" markdown="1">
+- [Date](#custom-variables-date)
+- [Date range](#custom-variables-daterange)
+- [Number](#custom-variables-number)
+- [Number range](#custom-variables-numberrange)
+- [Text](#fcustom-variables-text)
+</div>
+
+<a name="custom-variables-date"></a>
+### date
+
+- `:filtered`
+- `:after`
+- `:before`
+
+<a name="custom-variables-daterange"></a>
+### daterange
+
+- `:afterDate`
+- `:after`
+- `:beforeDate`
+- `:before`
+
+<a name="custom-variables-number"></a>
+### number
+
+- `:filtered`
+
+<a name="custom-variables-numberrange"></a>
+### numberrange
+
+- `:min`
+- `:max`
+
+<a name="custom-variables-text"></a>
+### text
+
+- `:value`
 
 <a name="scope-types"></a>
 ### Available scope types
