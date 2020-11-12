@@ -503,7 +503,7 @@ October CMS comes with some built in custom variables with each scope type.
 - [Date range](#custom-variables-daterange)
 - [Number](#custom-variables-number)
 - [Number range](#custom-variables-numberrange)
-- [Text](#fcustom-variables-text)
+- [Text](#custom-variables-text)
 </div>
 
 <a name="custom-variables-date"></a>
