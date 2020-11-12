@@ -562,7 +562,7 @@ These types can be used to determine how the filter scope should be displayed.
 <a name="filter-date"></a>
 ### Date
 
-`date` - displays a date picker for a single date to be selected. The conditions parameters are passed as `:after`, `:before` or `:filtered`.
+`date` - displays a date picker for a single date to be selected.
 
     created_at:
         label: Date
@@ -575,7 +575,7 @@ These types can be used to determine how the filter scope should be displayed.
 <a name="filter-daterange"></a>
 ### Date Range
 
-`daterange` - displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:afterDate`, `:after`, `:beforeDate` or `:before`.
+`daterange` - displays a date picker for two dates to be selected as a date range. The conditions parameters are passed as `:before` and `:after`.
 
     published_at:
         label: Date
@@ -612,7 +612,7 @@ To use default value for Date and Date Range
 <a name="filter-number"></a>
 ### Number
 
-`number` - displays input for a single number to be entered. The conditions parameters are passed as `:filtered`.
+`number` - displays input for a single number to be entered.
 
     age:
         label: Age
@@ -623,9 +623,7 @@ To use default value for Date and Date Range
 <a name="filter-numberrange"></a>
 ### Number Range
 
-`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`.
-
-You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
+`numberrange` - displays inputs for two numbers to be entered as a number range. The conditions parameters are passed as `:min` and `:max`. You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
 
     visitors:
         label: Visitor Count
