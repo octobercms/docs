@@ -11,7 +11,9 @@ Variables:
     markup/this-layout: "this.layout"
     markup/this-theme: "this.theme"
     markup/this-param: "this.param"
+    markup/this-controller: "this.controller"
     markup/this-environment: "this.environment"
+    markup/this-session: "this.session"
 
 Tags:
   icon: "icon-tags"
