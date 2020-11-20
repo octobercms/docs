@@ -4,7 +4,7 @@
 - [Component class definition](#component-class-definition)
     - [Component registration](#component-registration)
 - [Component properties](#component-properties)
-    - [Dropdown properties](#dropdown-properties)
+    - [Dropdown and Set properties](#dropdown-properties)
     - [Page list properties](#page-list-properties)
 - [Routing parameters](#routing-parameters)
 - [Handling the page execution cycle](#page-cycle)
@@ -114,7 +114,7 @@ Key | Description
 **title** | required, the property title, it is used by the component Inspector in the CMS back-end.
 **description** | required, the property description, it is used by the component Inspector in the CMS back-end.
 **default** | optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
-**type** | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox** and **dropdown**. Default value: **string**.
+**type** | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox**, **dropdown** and **set**. Default value: **string**.
 **validationPattern** | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
 **validationMessage** | optional error message to display if the validation fails.
 **required** | optional, forces field to be filled. Uses validationMessage when left empty.
@@ -141,9 +141,9 @@ To access the property from the Twig partials for the component, utilize the `__
    `{{ __SELF__.property('maxItems') }}`
 
 <a name="dropdown-properties"></a>
-### Dropdown properties
+### Dropdown and Set properties
 
-The option list for dropdown properties can be static or dynamic. Static options are defined with the `options` element of the property definition.Example:
+The option list for dropdown and set properties can be static or dynamic. Static options are defined with the `options` element of the property definition. Example:
 
     public function defineProperties()
     {
@@ -158,7 +158,7 @@ The option list for dropdown properties can be static or dynamic. Static options
         ];
     }
 
-The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
+The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown or set property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
 
     public function defineProperties()
     {
@@ -176,7 +176,7 @@ The list of options could be fetched dynamically from the server when the Inspec
         return ['us'=>'United states', 'ca'=>'Canada'];
     }
 
-Dynamic drop-down lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
+Dynamic dropdown and set lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
 
     public function defineProperties()
     {
@@ -450,3 +450,20 @@ Components can inject assets (CSS and JavaScript files) to pages or layouts they
     }
 
 If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
+
+The `addCss` and `addJs` methods provide a second argument that defines the attributes of your injected asset as an array. A special attribute - `build` - is available, that will suffix your injected assets with the current version of the plugin specified. This can be used to refresh cached assets when a plugin is upgraded.
+
+    public function onRun()
+    {
+        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', [
+            'build' => 'Acme.Test',
+            'defer' => true
+        ]);
+    }
+    
+You may also use a string as the second argument, which then defaults to using the string value as the `build`:
+
+    public function onRun()
+    {
+        $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', 'Acme.Test');
+    }

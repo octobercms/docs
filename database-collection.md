@@ -1,7 +1,7 @@
 # Database Collection
 
 - [Introduction](#introduction)
-- [Usage examples](#usage-examples)
+- [Available methods](#available-methods)
 - [Custom collections](#custom-collections)
 - [Data feed](#data-feed)
     - [Creating a new feed](#creating-feed)
@@ -13,7 +13,7 @@
 
 All multi-result sets returned by a model are an instance of the `Illuminate\Database\Eloquent\Collection` object, including results retrieved via the `get` method or accessed via a relationship. The `Collection` object extends the [base collection](../services/collections), so it naturally inherits dozens of methods used to fluently work with the underlying array of models.
 
-Of course, all collections also serve as iterators, allowing you to loop over them as if they were simple PHP arrays:
+All collections also serve as iterators, allowing you to loop over them as if they were simple PHP arrays:
 
     $users = User::where('is_active', true)->get();
 
@@ -32,46 +32,109 @@ However, collections are much more powerful than arrays and expose a variety of 
             return $user->name;
         });
 
+> **Note:** While most model collection methods return a new instance of an `Eloquent` collection, the `pluck`, `keys`, `zip`, `collapse`, `flatten` and `flip` methods return a base collection instance. Likewise, if a `map` operation returns a collection that does not contain any models, it will be automatically cast to a base collection.
+
 <a name="usage-examples"></a>
-## Usage examples
+<a name="available-methods"></a>
+## Available methods
 
-Here are some examples of methods that will return a `Collection` object:
+All model collections extend the base collection object; therefore, they inherit all of the powerful methods provided by the base collection class.
 
-    $collection = User::all();
-    $collection = User::where('name', 'Joe')->get();
-    $collection = User::find(3)->groups;
+In addition, the `Illuminate\Database\Eloquent\Collection` class provides a superset of methods to aid with managing your model collections. Most methods return `Illuminate\Database\Eloquent\Collection` instances; however, some methods return a base `Illuminate\Support\Collection` instance.
 
-#### Converting to JSON or array
+**contains($key, $operator = null, $value = null)**
 
-Collections may also be converted to a PHP array or JSON:
+The `contains` method may be used to determine if a given model instance is contained by the collection. This method accepts a primary key or a model instance:
 
-    $phpArray = $collection->toArray();
+    $users->contains(1);
 
-    $jsonString = $collection->toJson();
+    $users->contains(User::find(1));
 
-#### Finding the first match
+**diff($items)**
 
-The `first` method will return the first object that matches the condition.
+The `diff` method returns all of the models that are not present in the given collection:
 
-    $found = $collection->first(function($model) {
-        return $model->color == 'red';
-    });
+    use App\User;
 
-#### Iterating the collection
+    $users = $users->diff(User::whereIn('id', [1, 2, 3])->get());
 
-The `each` method lets you easily cycle through every object inside.
+**except($keys)**
 
-    $collection->each(function($model) {
-        $model->is_cool = true;
-    });
+The `except` method returns all of the models that do not have the given primary keys:
 
-#### Checking for a key
+    $users = $users->except([1, 2, 3]);
 
-The `contains` method will return true if the collection has a model inside with the primary key value specified.
+**find($key)**
 
-    if ($collection->contains(3)) {
-        // Collection has a Model with ID of 3
-    }
+The `find` method finds a model that has a given primary key. If `$key` is a model instance, `find` will attempt to return a model matching the primary key. If `$key` is an array of keys, find will return all models which match the `$keys` using `whereIn()`:
+
+    $users = User::all();
+
+    $user = $users->find(1);
+
+**fresh($with = [])**
+
+The `fresh` method retrieves a fresh instance of each model in the collection from the database. In addition, any specified relationships will be eager loaded:
+
+    $users = $users->fresh();
+
+    $users = $users->fresh('comments');
+
+**intersect($items)**
+
+The `intersect` method returns all of the models that are also present in the given collection:
+
+    use App\User;
+
+    $users = $users->intersect(User::whereIn('id', [1, 2, 3])->get());
+
+**load($relations)**
+
+The `load` method eager loads the given relationships for all models in the collection:
+
+    $users->load('comments', 'posts');
+
+    $users->load('comments.author');
+
+**loadMissing($relations)**
+
+The `loadMissing` method eager loads the given relationships for all models in the collection if the relationships are not already loaded:
+
+    $users->loadMissing('comments', 'posts');
+
+    $users->loadMissing('comments.author');
+
+**modelKeys()**
+
+The `modelKeys` method returns the primary keys for all models in the collection:
+
+    $users->modelKeys();
+
+    // [1, 2, 3, 4, 5]
+
+**makeVisible($attributes)**
+
+The `makeVisible` method makes attributes visible that are typically "hidden" on each model in the collection:
+
+    $users = $users->makeVisible(['address', 'phone_number']);
+
+**makeHidden($attributes)**
+
+The `makeHidden` method hides attributes that are typically "visible" on each model in the collection:
+
+    $users = $users->makeHidden(['address', 'phone_number']);
+
+**only($keys)**
+
+The `only` method returns all of the models that have the given primary keys:
+
+    $users = $users->only([1, 2, 3]);
+
+**unique($key = null, $strict = false)**
+
+The `unique` method returns all of the unique models in the collection. Any models of the same type with the same primary key as another model in the collection are removed.
+
+    $users = $users->unique();
 
 <a name="custom-collections"></a>
 ## Custom collections

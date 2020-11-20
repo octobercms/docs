@@ -2,18 +2,23 @@
 
 - [Introduction](#introduction)
 - [Retrieving results](#retrieving-results)
+    - [Chunking results](#chunking-results)
     - [Aggregates](#aggregates)
 - [Selects](#selects)
 - [Joins](#joins)
 - [Unions](#unions)
 - [Where clauses](#where-clauses)
     - [Advanced where clauses](#advanced-where-clauses)
+    - [Conditional clauses](#conditional-clauses)
 - [Ordering, grouping, limit, & offset](#ordering-grouping-limit-and-offset)
 - [Inserts](#inserts)
 - [Updates](#updates)
 - [Deletes](#deletes)
 - [Pessimistic locking](#pessimistic-locking)
 - [Caching queries](#caching-queries)
+    - [Persistent Caching](#persistent-caching)
+    - [In-Memory Caching](#in-memory-caching)
+- [Debugging](#debugging)
 
 <a name="introduction"></a>
 ## Introduction
@@ -49,23 +54,6 @@ If you don't even need an entire row, you may extract a single value from a reco
 
     $email = Db::table('users')->where('name', 'John')->value('email');
 
-#### Chunking results from a table
-
-If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small "chunk" of the results at a time, and feeds each chunk into a `Closure` for processing. This method is very useful for writing [console commands](../console/development) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
-
-    Db::table('users')->chunk(100, function($users) {
-        foreach ($users as $user) {
-            //
-        }
-    });
-
-You may stop further chunks from being processed by returning `false` from the `Closure`:
-
-    Db::table('users')->chunk(100, function($users) {
-        // Process the records...
-
-        return false;
-    });
 
 #### Retrieving a list of column values
 
@@ -85,6 +73,38 @@ If you would like to retrieve an array containing the values of a single column,
         echo $title;
     }
 
+<a name="chunking-results"></a>
+### Chunking results
+
+If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small "chunk" of the results at a time, and feeds each chunk into a `Closure` for processing. This method is very useful for writing [console commands](../console/development) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
+
+    Db::table('users')->chunk(100, function($users) {
+        foreach ($users as $user) {
+            //
+        }
+    });
+
+You may stop further chunks from being processed by returning `false` from the `Closure`:
+
+    Db::table('users')->chunk(100, function($users) {
+        // Process the records...
+
+        return false;
+    });
+
+If you are updating database records while chunking results, your chunk results could change in unexpected ways. So, when updating records while chunking, it is always best to use the `chunkById` method instead. This method will automatically paginate the results based on the record's primary key:
+
+    Db::table('users')->where('active', false)
+        ->chunkById(100, function ($users) {
+            foreach ($users as $user) {
+                Db::table('users')
+                    ->where('id', $user->id)
+                    ->update(['active' => true]);
+            }
+        });
+
+> **Note:** When updating or deleting records inside the chunk callback, any changes to the primary key or foreign keys could affect the chunk query. This could potentially result in records not being included in the chunked results.
+
 <a name="aggregates"></a>
 ### Aggregates
 
@@ -99,6 +119,14 @@ Of course, you may combine these methods with other clauses to build your query:
     $price = Db::table('orders')
         ->where('is_finalized', 1)
         ->avg('price');
+
+#### Determining if records exist
+
+Instead of using the `count` method to determine if any records exist that match your query's constraints, you may use the `exists` and `doesntExist` methods:
+
+    return Db::table('orders')->where('finalized', 1)->exists();
+
+    return Db::table('orders')->where('finalized', 1)->doesntExist();
 
 <a name="selects"></a>
 ## Selects
@@ -119,15 +147,70 @@ If you already have a query builder instance and you wish to add a column to its
 
     $users = $query->addSelect('age')->get();
 
+If you wish to concatenate columns and/or strings together, you may use the `selectConcat` method to specify a list of concatenated values and the resulting alias. If you wish to use strings in the concatenation, you must provide a quoted string:
+
+    $query = Db::table('users')->selectConcat(['"Name: "', 'first_name', 'last_name'], 'name_string');
+
+    $nameString = $query->first()->name_string;   // Name: John Smith
+
 #### Raw expressions
 
-Sometimes you may need to use a raw expression in a query. These expressions will be injected into the query as strings, so be careful not to create any SQL injection points! To create a raw expression, you may use the `Db::raw` method:
+Sometimes you may need to use a raw expression in a query. To create a raw expression, you may use the `Db::raw` method:
 
     $users = Db::table('users')
         ->select(Db::raw('count(*) as user_count, status'))
         ->where('status', '<>', 1)
         ->groupBy('status')
         ->get();
+
+> **Note:** Raw statements will be injected into the query as strings, so you should be extremely careful to not create SQL injection vulnerabilities.
+
+#### Raw methods
+
+Instead of using `Db::raw`, you may also use the following methods to insert a raw expression into various parts of your query.
+
+**selectRaw**
+
+The `selectRaw` method can be used in place of `addSelect(Db::raw(...)).` This method accepts an optional array of bindings as its second argument:
+
+    $orders = Db::table('orders')
+                    ->selectRaw('price * ? as price_with_tax', [1.0825])
+                    ->get();
+
+**whereRaw / orWhereRaw**
+
+The `whereRaw` and `orWhereRaw` methods can be used to inject a raw `where` clause into your query. These methods accept an optional array of bindings as their second argument:
+
+    $orders = Db::table('orders')
+                    ->whereRaw('price > IF(state = "TX", ?, 100)', [200])
+                    ->get();
+
+**havingRaw / orHavingRaw**
+
+The `havingRaw` and `orHavingRaw` methods may be used to set a raw string as the value of the `having` clause. These methods accept an optional array of bindings as their second argument:
+
+    $orders = Db::table('orders')
+                    ->select('department', Db::raw('SUM(price) as total_sales'))
+                    ->groupBy('department')
+                    ->havingRaw('SUM(price) > ?', [2500])
+                    ->get();
+
+**orderByRaw**
+
+The `orderByRaw` method may be used to set a raw string as the value of the order by clause:
+
+    $orders = Db::table('orders')
+                    ->orderByRaw('updated_at - created_at DESC')
+                    ->get();
+
+**groupByRaw**
+
+The `groupByRaw` method may be used to set a raw string as the value of the group by clause:
+
+    $orders = Db::table('orders')
+                    ->select('city', 'state')
+                    ->groupByRaw('city, state')
+                    ->get();
 
 <a name="joins"></a>
 ## Joins
@@ -142,13 +225,25 @@ The query builder may also be used to write join statements. To perform a basic 
         ->select('users.*', 'contacts.phone', 'orders.price')
         ->get();
 
-#### Left join statement
+#### Left join / right join statement
 
-If you would like to perform a "left join" instead of an "inner join", use the `leftJoin` method. The `leftJoin` method has the same signature as the `join` method:
+If you would like to perform a "left join" or "right join" instead of an "inner join", use the `leftJoin` or `rightJoin` method. The `leftJoin` and `rightJoin` methods have the same signature as the `join` method:
 
     $users = Db::table('users')
         ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
         ->get();
+
+    $users = Db::table('users')
+        ->rightJoin('posts', 'users.id', '=', 'posts.user_id')
+        ->get();
+
+#### Cross join statement
+
+To perform a "cross join" use the `crossJoin` method with the name of the table you wish to cross join to. Cross joins generate a cartesian product between the first table and the joined table:
+
+    $users = Db::table('sizes')
+                ->crossJoin('colors')
+                ->get();
 
 #### Advanced join statements
 
@@ -168,6 +263,20 @@ If you would like to use a "where" style clause on your joins, you may use the `
                 ->where('contacts.user_id', '>', 5);
         })
         ->get();
+
+#### Subquery joins
+
+You may use the `joinSub`, `leftJoinSub`, and `rightJoinSub` methods to join a query to a subquery. Each of these methods receive three arguments: the subquery, its table alias, and a Closure that defines the related columns:
+
+    $latestPosts = Db::table('posts')
+                       ->select('user_id', Db::raw('MAX(created_at) as last_post_created_at'))
+                       ->where('is_published', true)
+                       ->groupBy('user_id');
+
+    $users = Db::table('users')
+                ->joinSub($latestPosts, 'latest_posts', function ($join) {
+                    $join->on('users.id', '=', 'latest_posts.user_id');
+                })->get();
 
 <a name="unions"></a>
 ## Unions
@@ -222,6 +331,8 @@ You may chain where constraints together, as well as add `or` clauses to the que
         ->orWhere('name', 'John')
         ->get();
 
+> **Tip:** You can also prefix `or` to any of the where statements methods below, to make the condition an "OR" condition - for example, `orWhereBetween`, `orWhereIn`, etc.
+
 #### "Where between" statements
 
 The `whereBetween` method verifies that a column's value is between two values:
@@ -264,7 +375,7 @@ The `whereNotNull` method verifies that the column's value is **not** `NULL`:
         ->get();
 
 <a name="advanced-where-clauses"></a>
-## Advanced where clauses
+### Advanced where clauses
 
 #### Parameter grouping
 
@@ -300,6 +411,67 @@ The query above will produce the following SQL:
         select 1 from orders where orders.user_id = users.id
     )
 
+#### JSON "where" statements
+
+October CMS also supports querying JSON column types on databases that provide support for JSON column types. To query a JSON column, use the `->` operator:
+
+    $users = Db::table('users')
+                    ->where('options->language', 'en')
+                    ->get();
+
+    $users = Db::table('users')
+                    ->where('preferences->dining->meal', 'salad')
+                    ->get();
+
+You may use `whereJsonContains` to query JSON arrays (not supported on SQLite):
+
+    $users = Db::table('users')
+                    ->whereJsonContains('options->languages', 'en')
+                    ->get();
+
+MySQL and PostgreSQL support `whereJsonContains` with multiple values:
+
+    $users = Db::table('users')
+                    ->whereJsonContains('options->languages', ['en', 'de'])
+                    ->get();
+
+You may use `whereJsonLength` to query JSON arrays by their length:
+
+    $users = Db::table('users')
+                    ->whereJsonLength('options->languages', 0)
+                    ->get();
+
+    $users = Db::table('users')
+                    ->whereJsonLength('options->languages', '>', 1)
+                    ->get();
+
+<a name="conditional-clauses"></a>
+### Conditional clauses
+
+Sometimes you may want clauses to apply to a query only when something else is true. For instance you may only want to apply a `where` statement if a given input value is present on the incoming request. You may accomplish this using the `when` method:
+
+    $role = $request->input('role');
+
+    $users = Db::table('users')
+                    ->when($role, function ($query, $role) {
+                        return $query->where('role_id', $role);
+                    })
+                    ->get();
+
+The `when` method only executes the given Closure when the first parameter is `true`. If the first parameter is `false`, the Closure will not be executed.
+
+You may pass another Closure as the third parameter to the `when` method. This Closure will execute if the first parameter evaluates as false. To illustrate how this feature may be used, we will use it to configure the default sorting of a query:
+
+    $sortBy = null;
+
+    $users = Db::table('users')
+                    ->when($sortBy, function ($query, $sortBy) {
+                        return $query->orderBy($sortBy);
+                    }, function ($query) {
+                        return $query->orderBy('name');
+                    })
+                    ->get();
+
 <a name="ordering-grouping-limit-and-offset"></a>
 ## Ordering, grouping, limit, & offset
 
@@ -311,6 +483,22 @@ The `orderBy` method allows you to sort the result of the query by a given colum
         ->orderBy('name', 'desc')
         ->get();
 
+#### Latest / oldest
+
+The `latest` and `oldest` methods allow you to easily order results by date. By default, result will be ordered by the `created_at` column. Or, you may pass the column name that you wish to sort by:
+
+    $user = Db::table('users')
+        ->latest()
+        ->first();
+
+#### Random order
+
+The `inRandomOrder` method may be used to sort the query results randomly. For example, you may use this method to fetch a random user:
+
+    $randomUser = Db::table('users')
+        ->inRandomOrder()
+        ->first();
+
 #### Grouping
 
 The `groupBy` and `having` methods may be used to group the query results. The `having` method's signature is similar to that of the `where` method:
@@ -320,13 +508,14 @@ The `groupBy` and `having` methods may be used to group the query results. The `
         ->having('account_id', '>', 100)
         ->get();
 
-The `havingRaw` method may be used to set a raw string as the value of the `having` clause. For example, we can find all of the departments with sales greater than $2,500:
+You may pass multiple arguments to the `groupBy` method to group by multiple columns:
 
-    $users = Db::table('orders')
-        ->select('department', Db::raw('SUM(price) as total_sales'))
-        ->groupBy('department')
-        ->havingRaw('SUM(price) > 2500')
+    $users = Db::table('users')
+        ->groupBy('first_name', 'status')
+        ->having('account_id', '>', 100)
         ->get();
+
+For more advanced `having` statements, you may wish to use the [`havingRaw`](#aggregates) method.
 
 #### Limit and offset
 
@@ -368,6 +557,37 @@ In addition to inserting records into the database, the query builder can also u
     Db::table('users')
         ->where('id', 1)
         ->update(['votes' => 1]);
+
+#### Update or Insert (One query per row)
+
+Sometimes you may want to update an existing record in the database or create it if no matching record exists. In this scenario, the `updateOrInsert` method may be used. The `updateOrInsert` method accepts two arguments: an array of conditions by which to find the record, and an array of column and value pairs containing the columns to be updated.
+
+The `updateOrInsert` method will first attempt to locate a matching database record using the first argument's column and value pairs. If the record exists, it will be updated with the values in the second argument. If the record can not be found, a new record will be inserted with the merged attributes of both arguments:
+
+    Db::table('users')
+        ->updateOrInsert(
+            ['email' => 'john@example.com', 'name' => 'John'],
+            ['votes' => '2']
+        );
+
+#### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
+
+The `upsert` method will insert rows that do not exist and update the rows that already exist with the new values. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of columns that should be updated if a matching record already exists in the database:
+
+    DB::table('flights')->upsert([
+        ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
+        ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
+    ], ['departure', 'destination'], ['price']);
+
+> **Note:** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
+
+#### Updating JSON columns
+
+When updating a JSON column, you should use `->` syntax to access the appropriate key in the JSON object. This operation is supported on MySQL 5.7+ and PostgreSQL 9.5+:
+
+    $affected = Db::table('users')
+        ->where('id', 1)
+        ->update(['options->enabled' => true]);
 
 #### Increment / decrement
 
@@ -416,7 +636,7 @@ Alternatively, you may use the `lockForUpdate` method. A "for update" lock preve
 <a name="caching-queries"></a>
 ## Caching queries
 
-<a name="adding-constraints"></a>
+<a name="persistent-caching"></a>
 ### Persistent caching
 
 You may easily cache the results of a query using the [Cache service](../services/cache). Simply chain the `remember` or `rememberForever` method when preparing the query.
@@ -425,7 +645,7 @@ You may easily cache the results of a query using the [Cache service](../service
 
 In this example, the results of the query will be cached for ten minutes. While the results are cached, the query will not be run against the database, and the results will be loaded from the default cache driver specified for your application.
 
-<a name="adding-constraints"></a>
+<a name="in-memory-caching"></a>
 ### In-memory caching
 
 Duplicate queries across the same request can be prevented by using in-memory caching. This feature is enabled by default for [queries prepared by a model](../database/model#retrieving-models) but not those generated directly using the `Db` facade.
@@ -445,3 +665,12 @@ If a query is stored in the cache, it will automatically be cleared when an inse
     Db::flushDuplicateCache();
 
 > **Note**: In-memory caching is disabled entirely when running via the command-line interface (CLI).
+
+<a name="debugging"></a>
+## Debugging
+
+You may use the `dd` or `dump` methods while building a query to dump the query bindings and SQL. The `dd` method will display the debug information and then stop executing the request. The `dump` method will display the debug information but allow the request to keep executing:
+
+    Db::table('users')->where('votes', '>', 100)->dd();
+
+    Db::table('users')->where('votes', '>', 100)->dump();

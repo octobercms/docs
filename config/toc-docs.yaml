@@ -36,7 +36,6 @@ Plugins:
   pages:
     plugin/registration: "Registration"
     plugin/updates: "Version history"
-    plugin/composer: "Using Composer"
     plugin/components: "Building components"
     plugin/settings: "Settings & Config"
     plugin/localization: "Localization"
@@ -82,6 +81,7 @@ Services:
     services/error-log: "Errors & Logging"
     services/events: "Events"
     services/html: "Forms & Html"
+    services/image-resizing: "Image Resizing"
     services/filesystem-cdn: "Filesystem / CDN"
     services/hashing-encryption: "Hashing & Encryption"
     services/helpers: "Helpers"
@@ -108,6 +108,7 @@ Console:
 Extras:
   icon: "icon-question-sign"
   pages:
-    help/unit-testing: "Unit testing"
+    help/unit-testing: "Unit Testing"
+    help/using-composer: "Using Composer"
     ../help/guidelines/quality: "Quality guidelines@"
     ../help/guidelines/developer: "Developer guide@"

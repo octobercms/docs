@@ -5,6 +5,7 @@
 - [Theme preview image](#preview-image)
 - [Theme customization](#customization)
 - [Theme dependencies](#dependencies)
+- [Localization](#localization)
 
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the OctoberCMS Marketplace.
 
@@ -83,10 +84,10 @@ The following is an example of how to define a website name configuration field 
                 label: Site name
                 comment: The website name as it should appear on the front-end
                 default: My Amazing Site!
-                
+
 > **Note:** If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
 
-    \Cms\Models\ThemeData::extend(function ($model) { 
+    \Cms\Models\ThemeData::extend(function ($model) {
         $model->addJsonable('contact');
     });
 
@@ -101,10 +102,18 @@ You may also define the configuration in a separate file, where the path is rela
 
     form: config/fields.yaml
 
+**config/fields.yaml**:
+
+    fields:
+        site_name:
+            label: Site name
+            comment: The website name as it should appear on the front-end
+            default: My Amazing Site!
+
 <a name="combiner-vars"></a>
 ### Combiner variables
 
-Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+Assets combined using the `| theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
     form:
         fields:
@@ -117,7 +126,7 @@ Assets combined using the `|theme` [filter and combiner](../markup/filter-theme)
 
 In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
 
-    <link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet">
+    <link href="{{ ['assets/less/theme.less'] | theme }}" rel="stylesheet">
 
 Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 
@@ -136,3 +145,34 @@ A theme can depend on plugins by defining a **require** option in the [Theme inf
         - Acme.Blog
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
+
+<a name="localization"></a>
+## Localization
+
+Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October backend and can be used for form labels just like [plugin localization](../plugin/localization)
+   
+> **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) plugin.
+
+<a name="localization-file-structure"></a>
+### Localization directory and file structure
+
+Below is an example of the theme's lang directory:
+
+    themes/
+      acme/               <=== Theme directory
+        lang/             <=== Localization directory
+          en/             <=== Language directory
+            lang.php      <=== Localization file
+          fr/
+            lang.php
+
+
+The **lang.php** file should define and return an array of any depth, for example:
+
+    <?php return [
+        'options' => [
+            'website_name' => 'OctoberCMS'
+        ]
+    ];
+
+You are then able to reference the keys using `themes.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `themes.acme::lang.options.website_name`

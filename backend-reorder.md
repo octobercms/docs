@@ -3,6 +3,7 @@
 - [Introduction](#introduction)
 - [Configuring the reorder behavior](#configuring-reorder)
 - [Displaying the reorder page](#reorder-display)
+- [Override Sortable Partials](#override-sortable-partials)
 - [Extending the model query](#extend-model-query)
 
 <a name="introduction"></a>
@@ -33,7 +34,7 @@ In order to use the reorder behavior you should add it to the `$implement` prope
 <a name="configuring-reorder"></a>
 ## Configuring the behavior
 
-The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a configuration file:
+The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
 
 	# ===================================
 	#  Reorder Behavior Config
@@ -66,9 +67,23 @@ Option | Description
 <a name="reorder-display"></a>
 ## Displaying the reorder page
 
-You should provide a [view file](controllers-views-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
+You should provide a [view file](controllers-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
     <?= $this->reorderRender() ?>
+    
+<a name="override-sortable-partials"></a>
+## Override Sortable Partials
+
+If you need to override default view of your reorder page, you have to copy
+
+1. `modules/backend/behaviors/reordercontroller/partials/_container.htm`
+2. `modules/backend/behaviors/reordercontroller/partials/_records.htm`
+
+in
+
+1. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_container.htm`
+2. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_records.htm`
+
 
 <a name="extend-model-query"></a>
 ## Extending the model query

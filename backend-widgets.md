@@ -80,7 +80,7 @@ Alternatively you may pass the variables to the second parameter of the makePart
 <a name="generic-ajax-handlers"></a>
 ### AJAX handlers
 
-Widgets implement the same AJAX approach as the [back-end controllers](controllers-views-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
+Widgets implement the same AJAX approach as the [back-end controllers](controllers-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
 
     <a
         href="javascript:;"
@@ -94,7 +94,7 @@ When called from a widget class or partial the AJAX handler will target itself. 
 <a name="generic-binding"></a>
 ### Binding widgets to controllers
 
-A widget should be bound to a [back-end controller](controllers-views-ajax) before you can start using it in a back-end page or partial. Use the widget's `bindToController` method for binding it to a controller. The best place to initialize a widget is the controller's constructor. Example:
+A widget should be bound to a [back-end controller](controllers-ajax) before you can start using it in a back-end page or partial. Use the widget's `bindToController` method for binding it to a controller. The best place to initialize a widget is the controller's constructor. Example:
 
     public function __construct()
     {
@@ -113,6 +113,19 @@ After binding the widget you can access it in the controller's view or partial b
 ## Form Widgets
 
 With form widgets you can add new control types to the back-end [forms](../backend/forms). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration#registration-methods).
+
+Form Widget classes reside inside the **formwidgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
+
+    formwidgets/
+      /form
+        /partials
+          _form.htm     <=== Widget partial file
+        /assets
+          /js
+            form.js     <=== Widget JavaScript file
+          /css
+            form.css    <=== Widget StyleSheet file
+      Form.php          <=== Widget class
 
 <a name="form-class-definition"></a>
 ### Class definition
@@ -249,6 +262,8 @@ In some cases you intentionally don't want any value to be given, for example, a
 
 Report widgets can be used on the back-end dashboard and in other back-end report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration#widget-registration).
 
+> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding#scaffold-create-reportwidget) for more information.
+
 <a name="report-class-definition"></a>
 ### Report widget classes
 
@@ -381,7 +396,7 @@ Plugins can register report widgets by overriding the `registerReportWidgets` me
             ],
             'RainLab\GoogleAnalytics\ReportWidgets\TrafficSources' => [
                 'label'   => 'Google Analytics traffic sources',
-                'context' => 'dashboard'
+                'context' => 'dashboard',
                 'permissions' => [
                     'rainlab.googleanaltyics.widgets.traffic_sources',
                 ],

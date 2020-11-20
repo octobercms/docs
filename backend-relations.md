@@ -14,7 +14,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-`Relation behavior` is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
+**Relation behavior** is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
 
 Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `Backend.Behaviors.RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-relation).
 
@@ -36,7 +36,7 @@ Relation behavior depends on [relation definitions](#relation-definitions). In o
 <a name="configuring-relation"></a>
 ## Configuring the relation behavior
 
-The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
+The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
 
 The first level field in the relation configuration file defines the relationship name in the target model. For example:
 
@@ -83,8 +83,10 @@ Option | Type | Description
 **showSorting** | List | displays the sorting link on each column. Default: true
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **recordsPerPage** | List | maximum rows to display for each page.
+**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
 **scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the second parameter (`$query` is the first).
+**filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#list-filters).
 
 These configuration values can be specified only for the **view** options.
 
@@ -92,15 +94,16 @@ Option | Type | Description
 ------------- | ------------- | -------------
 **showCheckboxes** | List | displays checkboxes next to each record.
 **recordUrl** | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
+**customViewPath** | List | specify a custom view path to override partials used by the list.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
-**toolbarButtons** | Both | the set of buttons to display, can be an array or a pipe separated string. Set to `false` to show no buttons. Available options are: add, create, update, delete, remove, link, unlink. Eg: **add\|remove**
+**toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add\|remove`. <br/> Additionally, you can customize the text inside these buttons by setting this property to an associative array, with the key being the button type and the value being the text for that button. Example: `create: 'Assign User'`. The value also supports translation.
 
 These configuration values can be specified only for the **manage** options.
 
 Option | Type | Description
 ------------- | ------------- | -------------
-**title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
+**title** | Both | a popup title, can refer to a [localization string](../plugin/localization). <br/> Additionally, you can customize the title for each mode individually by setting this to an associative array, with the key being the mode and the value being the title used when displaying that mode. Eg: `form: acme.blog::lang.subcategory.FormTitle`.
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 <a name="relationship-types"></a>
@@ -166,6 +169,8 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
 <a name="belongs-to-many-pivot"></a>
 ### Belongs to many (with Pivot Data)
 
+> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).
+
 1. Related records are displayed as a list (**view.list**).
 1. Clicking a record will display an update form (**pivot.form**).
 1. Clicking *Add* will display a selection list (**manage.list**), then a data entry form (**pivot.form**).
@@ -211,8 +216,6 @@ Pivot data is available when defining form fields and list columns via the `pivo
                 fields:
                     pivot[team_color]:
                         label: Team color
-
-> **Note:** Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist.
 
 <a name="belongs-to"></a>
 ### Belongs to
@@ -293,6 +296,7 @@ Sometimes you may wish to modify the default relation behavior and there are sev
 - [Extending the view widget](#extend-view-widget)
 - [Extending the manage widget](#extend-manage-widget)
 - [Extending the pivot widget](#extend-pivot-widget)
+- [Extending the filter widgets](#extend-filter-widgets)
 - [Extending refresh results](#extend-refresh-results)
 
 <a name="extend-relation-config"></a>
@@ -377,6 +381,23 @@ Provides an opportunity to manipulate the pivot widget of your relation.
             
         // manipulate widget as needed
     }
+
+<a name="extend-filter-widgets"></a>
+### Extending the filter widgets
+
+There are two filter widgets that may be extended using the following methods, one for the view mode and one for the manage mode of the `RelationController`.
+
+    public function relationExtendViewFilterWidget($widget, $field, $model)
+    {
+        // Extends the view filter widget
+    }
+    
+    public function relationExtendManageFilterWidget($widget, $field, $model)
+    {
+        // Extends the manage filter widget
+    }
+    
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](/docs/backend/lists#extend-filter-scopes).
     
 <a name="extend-refresh-results"></a>
 ### Extending the refresh results

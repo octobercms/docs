@@ -88,6 +88,7 @@ Property | Description
 **$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
 **$visible** | values are fields made visible when [serializing the model data](../database/serialization).
 **$hidden** | values are fields made hidden when [serializing the model data](../database/serialization).
+**$connection** | string that contains the [connection name](../database/basics#accessing-connections) that's utilised by the model by default.
 
 <a name="property-primary-key"></a>
 #### Primary key
@@ -164,7 +165,7 @@ When attributes names are passed to the `$jsonable` property, the values will be
 
 When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
 
-> **Note**: All model queries have [in-memory caching enabled](../database/query#caching-queries) by default.
+> **Note**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
 
 <a name="retrieving-multiple-models"></a>
 ### Retrieving multiple models
@@ -283,6 +284,17 @@ Updates can also be performed against any number of models that match a given qu
         ->update(['delayed' => true]);
 
 The `update` method expects an array of column and value pairs representing the columns that should be updated.
+
+#### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
+
+If you would like to perform multiple "upserts" in a single query, then you should use the `upsert` method instead. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of the columns that should be updated if a matching record already exists in the database. The `upsert` method will automatically set the `created_at` and `updated_at` timestamps if timestamps are enabled on the model:
+
+    MyVendor\MyPlugin\Models\Flight::upsert([
+        ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
+        ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
+    ], ['departure', 'destination'], ['price']);
+
+> **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
 
 <a name="mass-assignment"></a>
 ### Mass assignment
@@ -448,8 +460,8 @@ An example of using an event:
     {
         $this->slug = Str::slug($this->name);
     }
-    
-> **Note:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images->withDeferred(post('_session_key'))->get();` 
+
+> **Note:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
 
 <a name="basic-usage"></a>
 ### Basic usage
@@ -474,7 +486,7 @@ Returning `false` from an event will cancel the `save` / `update` operation:
             return false;
         }
     }
-    
+
 It's possible to access old values using the `original` attribute. For example:
 
     public function afterUpdate()
@@ -519,13 +531,12 @@ Additionally, a few methods exist to extend protected model properties.
         $model->addCasts([
             'some_extended_field' => 'int',
         ]);
-        
+
         // add a date attribute
         $model->addDateAttribute('updated_at');
-        
+
         // add fillable or jsonable fields
         // these methods accept one or more strings, or an array of strings
         $model->addFillable('first_name');
         $model->addJsonable('some_data');
     });
-    
