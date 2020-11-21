@@ -103,7 +103,8 @@ These configuration values can be specified only for the **manage** options.
 
 Option | Type | Description
 ------------- | ------------- | -------------
-**title** | Both | a popup title, can refer to a [localization string](../plugin/localization). <br/> Additionally, you can customize the title for each mode individually by setting this to an associative array, with the key being the mode and the value being the title used when displaying that mode. Eg: `form: acme.blog::lang.subcategory.FormTitle`.
+**title** | Both | a popup title, can refer to a [localization string](../plugin/localization). <br/> Additionally, you can customize the title for each mode individually by setting this to an associative array, with the key being the mode (form, list) and the value being the title used when displaying that mode. Eg: `form: acme.blog::lang.subcategory.form.title`. Alternatively you can use another nested associative array for each mode with keys for each action and text or localization string as value. For *form* mode are possible keys: `create`, `update`, `preview`, for *list* mode: `add`, `link`.
+**flash** | Both | optional flash messages. Can be an array with keys: `create`, `update`, `delete`, `add`, `remove`, `link`, `unlink` and text or localization string as value. Eg: `add: acme.blog::lang.subcategory.flash.added`.
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 <a name="relationship-types"></a>
@@ -190,6 +191,12 @@ Continuing the example in *Belongs To Many* relations, if a role also carried an
             list: $/acme/user/models/role/columns.yaml
         pivot:
             form: $/acme/user/models/role/fields.yaml
+
+These configuration values can be specified only for the **pivot** options.
+
+Option | Description
+------------- | -------------
+**title** | a popup title, can refer to a [localization string](../plugin/localization). <br/> Alternatively you can use associative array with keys for each action and text or localization string as value. Possible keys: `create`, `update`, `preview`.
 
 Pivot data is available when defining form fields and list columns via the `pivot` relation, see the example below:
 
