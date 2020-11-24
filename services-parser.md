@@ -299,6 +299,12 @@ Renders in Twig as
 File uploader input for files. This tag value will contain the full path to the file.
 
     {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
+    
+#### Color picker
+
+Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
+
+    {colorpicker name="bg_color" label="Background colour" allowEmpty="true" availableColors="#ffffff|#000000"}{/colorpicker}
 
 #### Repeater
 
