@@ -40,7 +40,7 @@ Filters:
     markup/filter-page: "| page"
     markup/filter-theme: "| theme"
     markup/filter-media: "| media"
-    markup/filter-reszize: "| resize"
+    markup/filter-resize: "| resize"
     markup/filter-image-width: "| imageWidth"
     markup/filter-image-height: "| imageHeight"
     markup/filter-md: "| md"
