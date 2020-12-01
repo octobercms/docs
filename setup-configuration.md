@@ -13,7 +13,6 @@
     - [Using a public folder](#public-folder)
     - [Using a shared hosting](#shared-hosting)
     - [Enable text compression](#text-compression)
-        - [Enable text compression](#text-compression)
         - [Apache GZip example](#apache-gzip)
         - [Apache Brotli example](#apache-brotli)
         - [Nginx GZip example](#nginx-gzip)
