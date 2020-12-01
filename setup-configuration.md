@@ -12,6 +12,13 @@
     - [Bleeding edge updates](#edge-updates)
     - [Using a public folder](#public-folder)
     - [Using a shared hosting](#shared-hosting)
+    - [Enable text compression](#text-compression)
+        - [Enable text compression](#text-compression)
+        - [Apache GZip example](#apache-gzip)
+        - [Apache Brotli example](#apache-brotli)
+        - [Nginx GZip example](#nginx-gzip)
+        - [Nginx Brotli example](#nginx-brotli)
+        - [IIS GZip example](#iis-gzip)
 - [Environment configuration](#environment-config)
     - [Defining a base environment](#base-environment)
     - [Domain driven environment](#domain-environment)
@@ -251,6 +258,131 @@ You can setup this protection in the file location `config/cms.php` in the secti
     'defaultMask' => ['file' => '644', 'folder' => '755'],
 
 > **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.
+
+<a name="text-compression"></a>
+### Enable text compression
+
+Reduce the size of files sent from your server to increase the speed to which they are transferred to the browser. Gzip/Brotli compresses your web pages and style sheets before sending them over to the browser. This drastically reduces transfer time since the files are much smaller.
+
+<a name="apache-gzip"></a>
+#### Apache GZip example
+
+    <IfModule mod_headers.c>
+    
+        RewriteCond %{HTTP:Accept-Encoding} gzip
+        RewriteCond %{REQUEST_FILENAME}\.gz -f
+        RewriteRule \.(css|ics|js|json|html|svg)$ %{REQUEST_URI}.gz [L]
+    
+        # Prevent mod_deflate double gzip
+        RewriteRule \.gz$ - [E=no-gzip:1]
+    
+        <FilesMatch "\.gz$">
+    
+            # Serve correct content types
+            <IfModule mod_mime.c>
+                # (1)
+                RemoveType gz
+    
+                # Serve correct content types
+                AddType text/css              css.gz
+                AddType text/calendar         ics.gz
+                AddType text/javascript       js.gz
+                AddType application/json      json.gz
+                AddType text/html             html.gz
+                AddType image/svg+xml         svg.gz
+    
+                # Serve correct content charset
+                AddCharset utf-8 .css.gz \
+                                 .ics.gz \
+                                 .js.gz \
+                                 .json.gz
+            </IfModule>
+    
+            # Force proxies to cache gzipped and non-gzipped files separately
+            Header append Vary Accept-Encoding
+    
+        </FilesMatch>
+    
+        # Serve correct encoding type
+        AddEncoding gzip .gz
+    
+    </IfModule>
+
+<a name="apache-brotli"></a>
+#### Apache Brotli example
+
+    <IfModule mod_headers.c>
+    
+        RewriteCond %{HTTP:Accept-Encoding} br
+        RewriteCond %{REQUEST_FILENAME}\.br -f
+        RewriteRule \.(css|ics|js|json|html|svg)$ %{REQUEST_URI}.br [L]
+    
+        # Prevent mod_deflate double gzip
+        RewriteRule \.br$ - [E=no-gzip:1]
+    
+        <FilesMatch "\.br$">
+    
+            <IfModule mod_mime.c>
+                # (1)
+                RemoveLanguage .br
+            
+                # Serve correct content types
+                AddType text/css              css.br
+                AddType text/calendar         ics.br
+                AddType text/javascript       js.br
+                AddType application/json      json.br
+                AddType text/html             html.br
+                AddType image/svg+xml         svg.br
+    
+                # Serve correct content charset
+                AddCharset utf-8 .css.br \
+                                 .ics.br \
+                                 .js.br \
+                                 .json.br
+            </IfModule>
+    
+            # Force proxies to cache brotlied and non-brotlied files separately
+            Header append Vary Accept-Encoding
+    
+        </FilesMatch>
+    
+        # Serve correct encoding type
+        AddEncoding br .br
+    
+    </IfModule>
+
+<a name="nginx-gzip"></a>
+#### Nginx GZip example
+
+    gzip_static on;
+
+<a name="nginx-brotli"></a>
+#### Nginx Brotli example
+
+    brotli_static on;
+
+<a name="iis-gzip"></a>
+#### IIS GZip example
+
+        <httpCompression directory="%SystemDrive%\websites\_compressed" minFileSizeForComp="1024">
+            <scheme dll="%Windir%\system32\inetsrv\gzip.dll" name="gzip"/>
+			<dynamicTypes>
+				<add enabled="true" mimeType="text/*" />
+				<add enabled="true" mimeType="message/*" />
+				<add enabled="true" mimeType="application/javascript" />
+				<add enabled="true" mimeType="application/json" />
+				<add enabled="true" mimeType="application/json; charset=utf-8" />
+				<add enabled="false" mimeType="*/*" />
+			</dynamicTypes>
+            <staticTypes>
+                <add enabled="true" mimeType="text/*"/>
+                <add enabled="true" mimeType="message/*"/>
+                <add enabled="true" mimeType="application/javascript"/>
+                <add enabled="true" mimeType="application/json"/>
+                <add enabled="true" mimeType="application/json; charset=utf-8" />
+                <add enabled="false" mimeType="*/*"/>
+            </staticTypes>
+        </httpCompression>
 
 <a name="environment-config"></a>
 ## Environment configuration
