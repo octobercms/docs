@@ -47,4 +47,4 @@ The available sources that images can be resized from are as follows:
 - Uploads Directory
 - Models that extend the `\October\Rain\Database\Attach\File` model
 
-Available sources can be extend by listening to the [`system.resizer.getAvailableSources` event](../api/system/resizer/getavailablesources)
+Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](../api/system/resizer/getavailablesources)
