@@ -645,7 +645,7 @@ There are various form widgets included as standard, although it is common for p
 
 Option | Description
 ------------- | -------------
-**language** | code language, for example, php, css, js, html. Default: php.
+**language** | code language, for example, php, css, javascript, html. Default: php.
 **showGutter** | shows a gutter with line numbers. Default: true.
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
