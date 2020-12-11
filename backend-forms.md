@@ -450,7 +450,7 @@ The fifth method allows you to specify a static method on a class to return the 
 
 Supplying the dropdown options to the model class:
 
-    public static function staticMethodOptions($fieldName, $value, $formData)
+    public static function staticMethodOptions($formWidget, $formField)
     {
         return ['published' => 'Published', ...];
     }
@@ -464,7 +464,7 @@ The sixth method allows you to specify a callable object via an array definition
 
 Supplying the dropdown options to the model class:
 
-    public static function staticMethodOptions($fieldName, $value, $formData)
+    public static function staticMethodOptions($formWidget, $formField)
     {
         return ['published' => 'Published', ...];
     }
