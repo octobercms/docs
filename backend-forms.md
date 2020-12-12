@@ -460,7 +460,7 @@ The sixth method allows you to specify a callable object via an array definition
     status:
         label: Blog Post Status
         type: dropdown
-        options: [\MyAuthor\MyPlugin\ClassesFormHelper, staticMethodOptions]
+        options: [\MyAuthor\MyPlugin\Classes\FormHelper, staticMethodOptions]
 
 Supplying the dropdown options to the model class:
 
