@@ -35,6 +35,8 @@ A behavior is used in a similar fashion:
             'October.Rain.DeferredBinding',
         ];
     }
+    
+> **Note**: Implementing behaviors is case sensitive, so `RainLab.Translate.Behaviors.TranslatableModel` will work but `Rainlab.Translate.Behaviors.TranslatableModel` will not.
 
 Where you might define a trait like this:
 
