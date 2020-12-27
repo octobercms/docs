@@ -792,7 +792,7 @@ Option | Description
 <a name="widget-fileupload"></a>
 ### File upload
 
-`fileupload` - renders a file uploader for images or regular files. **The field name must use an attachOne or attachMany relation.**
+`fileupload` - renders a file uploader for images or regular files.
 
     avatar:
         label: Avatar
@@ -822,6 +822,8 @@ Option | Description
 **prompt** | text to display for the upload button, applies to files only, optional.
 **thumbOptions** | options to pass to the thumbnail generating method for the file
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
+
+> **Note:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown editor
@@ -854,7 +856,7 @@ Option | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 
-> **Note:** Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library.
+> **Note:** Unlike the [File Upload FormWidget](#widget-fileupload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
 
 <a name="widget-nestedform"></a>
 ### Nested Form
