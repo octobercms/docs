@@ -18,67 +18,72 @@
 <a name="extending-with-events"></a>
 ## Extending with events
 
-Plugins are primarily extended using the [Event service](../services/events) to inject or modify the functionality of core classes and other plugins.
+The [Event service](../services/events) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
 
 <a name="subscribing-to-events"></a>
 ### Subscribing to events
 
-The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a **rainlab.user.register** global event.
+The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
 
     public function boot()
     {
-        Event::listen('rainlab.user.register', function($user) {
+        Event::listen('rainlab.user.register', function ($user) {
             // Code to register $user->email to mailing list
         });
     }
 
 The same can be achieved by extending the model's constructor and using a local event.
 
-    User::extend(function($model) {
-        $model->bindEvent('user.register', function() use ($model) {
+    User::extend(function ($model) {
+        $model->bindEvent('user.register', function () use ($model) {
             // Code to register $model->email to mailing list
         });
     });
 
 <a name="declaring-events"></a>
-### Declaring events
+### Declaring / Firing  events
 
-You can declare events globally or locally, below is an example of declaring a global event:
+You can fire events globally (through the Event service) or locally.
 
-    Event::fire('acme.blog.beforePost', ['first parameter', 'second parameter']);
+Local events are fired by calling `fireEvent()` on an instance of an object that implements `October\Rain\Support\Traits\Emitter`. Since local events are only fired on a specific object instance, it is not required to namespace them as it is less likely that a given project would have multiple events with the same name being fired on the same objects within a local context.
 
-The local equivalent requires the code be in context of the calling object.
+    $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
 
-    $this->fireEvent('blog.beforePost', ['first parameter', 'second parameter']);
+Global events are fired by calling `Event::fire()`. As these events are global across the entire application, it is best practice to namespace them by including the vendor information in the name of the event. If your plugin Author is ACME and the plugin name is Blog, then any global events provided by the ACME.Blog plugin should be prefixed with `acme.blog`. 
 
-> **Note:** It is good practice to put the local event before the global event, so local events take priority.
+    Event::fire('acme.blog.post.beforePost', [$firstParam, $secondParam]);
+    
+If both global & local events are provided at the same place it's best practice to fire the local event before the global event so that the local event takes priority. Additionally, the global event should provide the object instance that the local event was fired on as the first parameter.
+
+    $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
+    Event::fire('rainlab.blog.beforePost', [$this, $firstParam, $secondParam]);
 
 Once this event has been subscribed to, the parameters are available in the handler method. For example:
 
     // Global
-    Event::listen('acme.blog.beforePost', function($param1, $param2) {
-        echo 'Parameters: ' . $param1 . ' ' . $param2;
+    Event::listen('acme.blog.post.beforePost', function ($post, $param1, $param2) {
+        Log::info($post->name . 'posted. Parameters: ' . $param1 . ' ' . $param2);
     });
 
     // Local
-    $this->bindEvent('blog.beforePost', function($param1, $param2) {
-        echo 'Parameters: ' . $param1 . ' ' . $param2;
+    $post->bindEvent('post.beforePost', function ($param1, $param2) use ($post) {
+        Log::info($post->name . 'posted. Parameters: ' . $param1 . ' ' . $param2);
     });
 
 <a name="backend-view-events"></a>
-## Extending back-end views
+## Extending backend views
 
-Sometimes you may wish to allow a back-end view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent` method found in all back-end controllers.
+Sometimes you may wish to allow a backend view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent` method found in all backend controllers.
 
 Place this code in your view file:
 
     <div class="footer-area-extension">
-        <?= $this->fireViewEvent('backend.auth.extendSigninView') ?>
+        <?= $this->fireViewEvent('backend.auth.extendSigninView', [$firstParam]) ?>
     </div>
 
 This will allow other plugins to inject HTML to this area by hooking the event and returning the desired markup.
 
-    Event::listen('backend.auth.extendSigninView', function($controller) {
+    Event::listen('backend.auth.extendSigninView', function ($controller, $firstParam) {
         return '<a href="#">Sign in with Google!</a>';
     });
 
@@ -98,7 +103,7 @@ These are some practical examples of how events can be used.
 <a name="extending-user-model"></a>
 ### Extending a User model
 
-This example will modify the `model.getAttribute` event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases when the `$model->foo` attribute is accessed, it will return the value *bar*.
+This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
 
     class Plugin extends PluginBase
     {
@@ -107,23 +112,23 @@ This example will modify the `model.getAttribute` event of the `User` model by b
         public function boot()
         {
             // Local event hook that affects all users
-            User::extend(function($model) {
-                $model->bindEvent('model.getAttribute', function($attribute, $value) {
-                    if ($attribute == 'foo') {
+            User::extend(function ($model) {
+                $model->bindEvent('model.getAttribute', function ($attribute, $value) {
+                    if ($attribute === 'foo') {
                         return 'bar';
                     }
                 });
             });
 
             // Double event hook that affects user #2 only
-            User::extend(function($model) {
-                $model->bindEvent('model.afterFetch', function() use ($model) {
-                    if ($model->id != 2) {
+            User::extend(function ($model) {
+                $model->bindEvent('model.afterFetch', function () use ($model) {
+                    if ($model->id !== 2) {
                         return;
                     }
 
-                    $model->bindEvent('model.getAttribute', function($attribute, $value) {
-                        if ($attribute == 'foo') {
+                    $model->bindEvent('model.getAttribute', function ($attribute, $value) {
+                        if ($attribute === 'foo') {
                             return 'bar';
                         }
                     });
@@ -133,9 +138,11 @@ This example will modify the `model.getAttribute` event of the `User` model by b
     }
 
 <a name="extending-backend-form"></a>
-### Extending a backend form
+### Extending backend forms
 
-This example will modify the `backend.form.extendFields` global event of the `Backend\Widget\Form` class and inject some extra fields values under the conditions that the form is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms#extend-form-behavior).
+
+This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
@@ -145,14 +152,19 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
         {
             // Extend all backend form usage
             Event::listen('backend.form.extendFields', function($widget) {
-
-                // Only for the User controller
+                // Only apply this listener when the Users controller is being used
                 if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
                     return;
                 }
 
-                // Only for the User model
+                // Only apply this listener when the User model is being modified
                 if (!$widget->model instanceof \RainLab\User\Models\User) {
+                    return;
+                }
+                
+                // Only apply this listener when the Form widget in question is a root-level
+                // Form widget (not a repeater, nestedform, etc)
+                if ($widget->isNested) {
                     return;
                 }
 
@@ -171,44 +183,12 @@ This example will modify the `backend.form.extendFields` global event of the `Ba
         }
     }
 
-> **Note:** When extending the form, you should check to see if `$formWidget->isNested === false` as the Repeater FormWidget includes nested Form widgets which can cause your changes to be made in unexpected places.
-
-If you need to extend backend form and in same time add support for translating those new fields you have to add fields before actual form is rendered. This can be done with `backend.form.extendFieldsBefore` event.
-```
-    public function boot()
-    {
-        Event::listen('backend.form.extendFieldsBefore', function($widget) {
-            
-            // You should always check to see if you're extending correct model/controller
-            if(!$widget->model instanceof \Foo\Example\Models\Bar) {
-                return;
-            }
-            
-            // Here you can't use addFields() because it will throw you an exception because form is not yet created 
-            // and it does not have tabs and fields
-            // For this example we will pretend that we want to add a new field named example_field
-            $widget->fields['example_field'] = [
-                'label' => 'Example field',
-                'comment' => 'Your example field',
-                'type' => 'text',
-            ];
-            
-            // Ok that's it about adding field inside form, now we need to tell our model that this field is translatable
-        });
-        
-        // We will pretend that our model already implements RainLab Translatable behavior and $translatable property, 
-        // if it does not you'll have to add it with addDynamicProperty()
-        \Foo\Example\Models\Bar::extend(function($model) {
-            $model->translatable[] = 'example_field';
-        });
-    }
-```
-> Remember to add `use Event` to the top of your class file to use global events.
+> **Note:** In some cases (adding fields that should be made translatable by [RainLab.Translate](https://github.com/rainlab/translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://octobercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
 
 <a name="extending-backend-list"></a>
 ### Extending a backend list
 
-This example will modify the `backend.list.extendColumns` global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
     class Plugin extends PluginBase
     {
@@ -217,8 +197,7 @@ This example will modify the `backend.list.extendColumns` global event of the `B
         public function boot()
         {
             // Extend all backend list usage
-            Event::listen('backend.list.extendColumns', function($widget) {
-
+            Event::listen('backend.list.extendColumns', function ($widget) {
                 // Only for the User controller
                 if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
                     return;
@@ -233,7 +212,7 @@ This example will modify the `backend.list.extendColumns` global event of the `B
                 $widget->addColumns([
                     'birthday' => [
                         'label' => 'Birthday'
-                    ]
+                    ],
                 ]);
 
                 // Remove a Surname column
@@ -241,8 +220,6 @@ This example will modify the `backend.list.extendColumns` global event of the `B
             });
         }
     }
-
-> Remember to add `use Event` to the top of your class file to use global events.
 
 <a name="extending-component"></a>
 ### Extending a component
@@ -258,8 +235,8 @@ This example will declare a new global event `rainlab.forum.topic.post` and loca
             /*
              * Extensibility
              */
-            Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
             $this->fireEvent('topic.post', [$post, $postUrl]);
+            Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
         }
     }
 
