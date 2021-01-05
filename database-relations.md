@@ -363,6 +363,7 @@ Argument | Description
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot`.
 **timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
+**detach** | if set to true, the related model will be detached if the primary model is deleted or relationship is destroyed, default: true.
 
 <a name="has-many-through"></a>
 ### Has Many Through
