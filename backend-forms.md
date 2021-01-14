@@ -783,8 +783,8 @@ Option | Description
 ------------- | -------------
 **mode** | the expected result, either date, datetime or time. Default: datetime.
 **format** | provide an explicit date display format. Eg: Y-m-d
-**minDate** | the minimum/earliest date that can be selected. Default: 2000-01-01.
-**maxDate** | the maximum/latest date that can be selected. Default: 2020-12-31.
+**minDate** | the minimum/earliest date that can be selected.
+**maxDate** | the maximum/latest date that can be selected.
 **firstDay** | the first day of the week. Default: 0 (Sunday).
 **showWeekNumber** | show week numbers at head of row. Default: false
 **ignoreTimezone** | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
