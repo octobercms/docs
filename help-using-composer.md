@@ -1,8 +1,9 @@
 # Composer
 
 - [Introduction](#introduction)
+    - [Converting from Basic Install](#converting-from-basic-install)
     - [Development Branch](#development-branch)
-- [Publishing Plugins or Themes](#product-composer-file)
+- [Publishing Plugins or Themes](#publishing-products)
 - [Package Descriptions](#package-descriptions)
 - [Marketplace Builds](#marketplace-builds)
 - [Using Laravel Packages](#laravel-packages)
@@ -13,20 +14,23 @@
 <a name="introduction"></a>
 ## Introduction
 
-Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is possible, however, there are some trade-offs to this approach and should only be considered by more advanced users and developers. See the console command on how to [first install October using composer](../console/commands#console-install-composer).
+Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is recommended for more advanced users and developers. See the console command on how to [first install October using composer](../console/commands#console-install-composer).
+
+<a name="converting-from-basic-install"></a>
+### Converting from Basic Install
+
+In order to use Composer with an October instance that has been installed using the Wizard or simple CLI installation process, simply copy the latest [`tests/` directory](https://github.com/octobercms/october/tree/develop/tests) and [`composer.json`](https://github.com/octobercms/october/tree/develop/composer.json) file from [GitHub](https://github.com/octobercms/october/tree/develop) into your October instance and then run `composer install`.
 
 <a name="development-branch"></a>
 ### Development Branch
 
-If you plan on submitting pull requests to the October CMS project via GitHub, or just want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place.
+If you plan on submitting pull requests to the October CMS project via GitHub, or are actively developing a project based on October CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
 
     "october/rain": "dev-develop as 1.1",
     "october/system": "dev-develop",
     "october/backend": "dev-develop",
     "october/cms": "dev-develop",
     "laravel/framework": "~6.0",
-
-> **Note**: This is considered a bleeding edge copy of October and is only for the brave!
 
 <a name="publishing-products"></a>
 ## Publishing Plugins or Themes
@@ -157,13 +161,36 @@ Now the package configuration has been included natively in October CMS and the 
 <a name="laravel-aliases-service-providers"></a>
 ### Aliases & Service Providers
 
-Laravel packages will often use [Package Discovery](https://laravel.com/docs/5.5/packages#package-discovery) to register their Aliases and Service Providers through Composer automatically, but in case they don't you are able to provide that information in your plugin's `composer.json` file yourself and it will work.
+By default, October CMS disables the loading of discovered packages through [Laravel's package discovery service](https://laravel.com/docs/6.x/packages#package-discovery), in order to allow packages used by plugins to be disabled if the plugin itself is disabled. Please note that packages defined in `app.providers` will still be loaded even if discovery is disabled.
 
-If you want to prevent automatic package discovery for packages included by your plugin, this can be done by using the `extra.laravel.dont-discover` Composer file property, as specified by the Laravel documentation.
+> **NOTE:** It is possible to set `app.loadDiscoveredPackages` to `true` in the project configuration to enable automatic loading of these packages. This will result in packages being loaded, even if the plugin using them is disabled. This is **NOT RECOMMENDED.**
+
+In order to manually register ServiceProviders and Aliases provided by external Laravel packages that are used by your plugins you should use the `App` facade and `AliasLoader` instance respectively:
+
+```php
+use App;
+use Illuminate\Foundation\AliasLoader;
+use System\Classes\Plugin as PluginBase;
+
+class Plugin extends PluginBase
+{
+    public function register()
+    {
+        // Instantiate the AliasLoader
+        $aliasLoader = AliasLoader::getInstance();
+        
+        // Register the aliases provided by the packages used by your plugin
+        $aliasLoader->alias('Purifier', \Mews\Purifier\Facades\Purifier::class);
+    
+        // Register the service providers provided by the packages used by your plugin
+        App::register(\Mews\Purifier\PurifierServiceProvider::class);
+    }
+}
+```       
 
 <a name="laravel-migrations-models"></a>
 ### Migrations & Models
 
-Laravel packages that interact with the database will often include their own database migrations and Eloquent models. Ideally you should duplicate these migrations and models in to your plugin's directory to take advantage of the extended technology features found in October.
+Laravel packages that interact with the database will often include their own database migrations and Eloquent models. Ideally you should duplicate these migrations and models to your plugin's directory and then rebase the provided Model classes to extend the base `\October\Rain\Database\Model` class instead of the base Laravel Eloquent model class to take advantage of the extended technology features found in October.
 
 You should also make an effort to rename the tables to prefix them with your plugin's author code and name. For example, a table with the name `posts` should be renamed to `rainlab_blog_posts`.
