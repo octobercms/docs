@@ -304,3 +304,20 @@ This will execute the command `git pull` on all theme and plugin directories.
 Deletes all generated thumbnails in the uploads directory.
 
     php artisan october:util purge thumbs
+
+#### Purge uploads
+
+Deletes files in the uploads directory that do not exist in the "system_files" table.
+
+    php artisan october:util purge uploads
+
+#### Purge orphans
+
+Deletes records in "system_files" table that do not belong to any other model.
+
+    php artisan october:util purge orphans
+
+To also delete records that have no associated file in the local storage, pass the `--missing-files` option.
+
+    php artisan october:util purge orphans --missing-files
+
