@@ -878,6 +878,20 @@ The lookup query for the list [database model](../database/model) can be extende
     {
         $query->withTrashed();
     }
+    
+When dealing with multiple lists definitions in a same controller, you can use the second parameter of `listExtendQuery` which contains the name of the definition :
+
+    public $listConfig = [
+        'inbox' => 'config_inbox_list.yaml',
+        'trashed' => 'config_trashed_list.yaml'
+    ];
+    
+    public function listExtendQuery($query, $definition)
+    {
+        if ($definition === 'trashed') {
+            $query->onlyTrashed();
+        }
+    }
 
 The [list filter](#list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
 
