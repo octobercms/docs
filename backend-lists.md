@@ -656,18 +656,18 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
 
 `number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
 
-The `minInput` and `maxInput` options specify the minimum and maximum values that can be entered by the user. The `step` option specifies the stepping interval to use when adjusting the value with the up and down arrows.
+The `min` and `max` options specify the minimum and maximum values that can be entered by the user. The `step` option specifies the stepping interval to use when adjusting the value with the up and down arrows.
 
     age:
         label: Age
         type: number
         default: 14
         step: 1
-        minInput: 0
-        maxInput: 1000
+        min: 0
+        max: 1000
         conditions: age >= ':filtered'
 
-> **Note:** the `step`, `minInput`, and `maxInput` options also apply to the `numberrange` filter type as well.
+> **Note:** the `step`, `min`, and `max` options also apply to the `numberrange` filter type as well.
 
 <a name="filter-numberrange"></a>
 ### Number Range
