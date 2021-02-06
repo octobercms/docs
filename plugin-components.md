@@ -416,11 +416,11 @@ The ID is unique each time the component is displayed.
 <a name="render-partial-method"></a>
 ## Rendering partials from code
 
-You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables.
+You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [frontend syntax rules](#component-partials) operates when you render a component partial from the backend, use the `@` prefix to refer the partial path from the component itself.
 
-    $content = $this->renderPartial('component-partial.htm');
+    $content = $this->renderPartial('@component-partial.htm');
 
-    $content = $this->renderPartial('component-partial.htm', [
+    $content = $this->renderPartial('@component-partial.htm', [
         'name' => 'John Smith'
     ]);
 
@@ -428,14 +428,14 @@ For example, to render a partial as a response to an [AJAX handler](../ajax/hand
 
     function onGetTemplate()
     {
-        return ['#someDiv' => $this->renderPartial('component-partial.htm')];
+        return ['#someDiv' => $this->renderPartial('@component-partial.htm')];
     }
 
 Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#page-cycle). This code will specifically return an XML response using the `Response` facade:
 
     public function onRun()
     {
-        $content = $this->renderPartial('default.htm');
+        $content = $this->renderPartial('@default.htm');
         return Response::make($content)->header('Content-Type', 'text/xml');
     }
 
