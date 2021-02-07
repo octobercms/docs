@@ -416,7 +416,7 @@ The ID is unique each time the component is displayed.
 <a name="render-partial-method"></a>
 ## Rendering partials from code
 
-You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [frontend syntax rules](#component-partials) operates when you render a component partial from the backend, use the `@` prefix to refer the partial path from the component itself.
+You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [path resolution logic](#component-partials) operates when you render a component partial from the backend, use the `@` prefix to refer to partials within the component itself.
 
     $content = $this->renderPartial('@component-partial.htm');
 
