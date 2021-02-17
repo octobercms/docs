@@ -567,7 +567,7 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
 
 There are a variety of helpful validation rules; however, you may wish to specify some of your own.
 
-The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
+The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an October CMS plugin, this can be registered either in the `boot()` callback method inside your `Plugin.php` registration file or with the `registerValidators` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the validator rule name and the value is a callable function. The callable function receives four arguments, the name of the `$attribute` being validated, the `$value` of the attribute and an array of `$parameters` passed to the rule, and the `$validator` instance.
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
 

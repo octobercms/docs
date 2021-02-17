@@ -106,6 +106,7 @@ Method | Description
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
+**registerValidators()** | registers any [custom validators](../services/validation#custom-validation-rules) supplied by this plugin.
 **registerMailLayouts()** | registers any [mail view layouts](mail#mail-template-registration) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
 **registerMailPartials()** | registers any [mail view partials](mail#mail-template-registration) supplied by this plugin.
