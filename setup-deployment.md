@@ -11,7 +11,7 @@
 <a name="webserver-configuration"></a>
 ## Web Server Configuration
 
-October has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
+October CMS has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
 
 <a name="apache-configuration"></a>
 ### Apache Configuration
@@ -43,8 +43,8 @@ There are small changes required to configure your site in Nginx.
 Use the following code in **server** section. If you have installed October into a subdirectory, replace the first `/` in location directives with the directory October was installed under:
 
     location / {
-        # Let OctoberCMS handle everything by default.
-        # The path not resolved by OctoberCMS router will return OctoberCMS's 404 page.
+        # Let October CMS handle everything by default.
+        # The path not resolved by October CMS router will return October CMS's 404 page.
         # Everything that does not match with the whitelist below will fall into this.
         rewrite ^/.*$ /index.php last;
     }
@@ -96,7 +96,7 @@ Use the following code in **server** section. If you have installed October into
 <a name="lighttpd-configuration"></a>
 ### Lighttpd Configuration
 
-If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS. Open your site configuration file with your favorite editor.
+If your webserver is running Lighttpd you can use the following configuration to run October CMS. Open your site configuration file with your favorite editor.
 
 `nano /etc/lighttpd/conf-enabled/sites.conf`
 
@@ -120,7 +120,7 @@ Paste the following code in the editor and change the **host address** and  **se
 <a name="iis-configuration"></a>
 ### IIS Configuration
 
-If your webserver is running Internet Information Services (IIS) you can use the following in your **web.config** configuration file to run OctoberCMS.
+If your webserver is running Internet Information Services (IIS) you can use the following in your **web.config** configuration file to run October CMS.
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
@@ -128,7 +128,7 @@ If your webserver is running Internet Information Services (IIS) you can use the
             <rewrite>
                 <rules>
                     <clear />
-                    <rule name="OctoberCMS to handle all non-whitelisted URLs" stopProcessing="true">
+                    <rule name="October CMS to handle all non-whitelisted URLs" stopProcessing="true">
                        <match url="^(.*)$" ignoreCase="false" />
                        <conditions logicalGrouping="MatchAll">
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/.well-known/*" negate="true" />
@@ -147,7 +147,6 @@ If your webserver is running Internet Information Services (IIS) you can use the
         </system.webServer>
     </configuration>
 
-
 <a name="public-folder"></a>
 ## Public Folder
 
@@ -164,17 +163,18 @@ This will create a new directory called **public/** in the project's base direct
 
 If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
 
-You can setup this protection in the file location `config/cms.php` in the section titled **Default permission mask**.
+You can setup this protection in the file location `config/system.php` in the section titled **Default Permission Mask**.
 
     /*
     |--------------------------------------------------------------------------
-    | Default permission mask
+    | Default Permission Mask
     |--------------------------------------------------------------------------
     |
-    | Specifies a default file and folder permission for newly created objects.
+    | Specifies a default file and folder permission for newly created files
+    | and directories in the system paths.
     |
     */
 
-    'defaultMask' => ['file' => '644', 'folder' => '755'],
+    'default_mask' => ['file' => '644', 'folder' => '755'],
 
 > **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.

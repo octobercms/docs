@@ -1,23 +1,54 @@
 # App configuration
 
-- [Application configuration](#app-configuration)
-    - [Debug mode](#debug-mode)
-    - [Safe mode](#safe-mode)
+- [Environment Configuration](#environment-config)
+    - [Environment File Security](#environment-file-security)
+- [Application Configuration](#app-configuration)
+    - [Debug Mode](#debug-mode)
+    - [Safe Mode](#safe-mode)
     - [CSRF protection](#csrf-protection)
-    - [Bleeding edge updates](#edge-updates)
-- [Environment configuration](#environment-config)
-    - [Defining a base environment](#base-environment)
-    - [Domain driven environment](#domain-environment)
+    - [Bleeding Edge Updates](#edge-updates)
 
-All of the configuration files for October are stored in the **config/** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
+All of the configuration files for October CMS are stored in the **config** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
+
+<a name="environment-config"></a>
+## Environment Configuration
+
+It is often helpful to have different configuration values based on the environment the application is running in. To control confguration in different environments, October CMS uses a [DotEnv library](https://github.com/vlucas/phpdotenv) to make it easy to manage environment variables. These variables can override any values specified in the **config** directory.
+
+In a fresh installation of October CMS, the base directory will contain a `.env.example` file that provides typical values for a local environment. During the installation process, this file will be copied to `.env` where you can make any changes.
+
+For example, the database connection can be specified with these variables.
+
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=database
+    DB_USERNAME=root
+    DB_PASSWORD=
+
+Any variable in your `.env` file can be overridden by external environment variables such as server-level or system-level environment variables. For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
+
+    SetEnv DB_CONNECTION "mysql"
+
+To recap, configuration values are loaded in this order.
+
+1. System environment variables
+1. Variables in the `.env` file
+1. Values in the **config** PHP files
+
+> **Important**: Never commit your `.env` file to source control because this would be a security risk in the event an intruder gains access to your source control repository, since any sensitive credentials would get exposed.
 
 <a name="app-configuration"></a>
-## Application configuration
+## Application Configuration
+
+Here we will cover some common configuration items and their purpose.
 
 <a name="debug-mode"></a>
-### Debug mode
+### Debug Mode
 
-The debug setting is found in the `config/app.php` configuration file with the `debug` parameter and is enabled by default.
+The debug setting is found in the `config/app.php` configuration file with the `debug` parameter. By default, this option looks at the value of the `APP_DEBUG` environment variable, which is stored in your `.env` file.
+
+    APP_DEBUG=true
 
 When enabled, this setting will show detailed error messages when they occur along with other debugging features. While useful during development, debug mode should always be disabled when used in a live production site. This prevents potentially sensitive information from being displayed to the end-user.
 
@@ -28,100 +59,37 @@ The debug mode uses the following features when enabled:
 1. [Combined assets](../markup/filter-theme) are not minified by default.
 1. [Safe mode](#safe-mode) is disabled by default.
 
-> **Important**: Always set the `app.debug` setting to `false` for production environments.
+> **Important**: Always set the `APP_DEBUG` setting to `false` in production environments.
 
 <a name="safe-mode"></a>
-### Safe mode
+### Safe Mode
 
-The safe mode setting is found in the `config/cms.php` configuration file with the `enableSafeMode` parameter. The default value is `null`.
+The safe mode setting is found in the `config/cms.php` configuration file with the `enable_safe_mode` parameter. By default, the option sources its value from `CMS_SAFE_MODE` which can be added to your `.env` file.
 
-If safe mode is enabled, the PHP code section is disabled in CMS templates for security reasons. If set to `null`, safe mode is on when [debug mode](#debug-mode) is disabled.
+    CMS_SAFE_MODE=null
+
+When safe mode is enabled, the PHP code section is disabled in CMS templates to prevent a user from potentially executing malicious code.
+
+This variable can be set to `true` or `false`. If set to `null`, safe mode will activate when [debug mode](#debug-mode) is disabled.
 
 <a name="csrf-protection"></a>
 ### CSRF protection
 
-October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
+October CMS provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
 
-While CSRF protection is enabled by default, you can disable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
+    ENABLE_CSRF=true
+
+While CSRF protection is enabled by default, you can disable it with the `enable_csrf_protection` parameter in the `config/system.php` configuration file, or the sourced value from `ENABLE_CSRF` environment variable.
 
 <a name="edge-updates"></a>
-### Bleeding edge updates
+### Bleeding Edge Updates
 
-The October platform and some marketplace plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
+The October CMS platform is updated all the time and may contain a recent bug fix that won't be available until a new version is created. If you'd like to use the bleeding edge version of October CMS, simply target the `develop` branch in your composer file.
 
-You can instruct the platform to prefer test builds from the marketplace by changing the `edgeUpdates` parameter in the `config/cms.php` configuration file.
-
-    /*
-    |--------------------------------------------------------------------------
-    | Bleeding edge updates
-    |--------------------------------------------------------------------------
-    |
-    | If you are developing with October, it is important to have the latest
-    | code base, set this value to 'true' to tell the platform to download
-    | and use the development copies of core files and plugins.
-    |
-    */
-
-    'edgeUpdates' => false,
-
-> **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
-
-> **Note:** If using [Composer](../console/commands#console-install-composer) to manage updates, then replace the default OctoberCMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch.
-
-    "october/rain": "dev-develop as 1.0",
+    "october/rain": "dev-develop",
     "october/system": "dev-develop",
     "october/backend": "dev-develop",
     "october/cms": "dev-develop",
-    "laravel/framework": "~6.0",
+    "october/media": "dev-develop",
 
-<a name="environment-config"></a>
-## Environment configuration
-
-<a name="base-environment"></a>
-### Defining a base environment
-
-It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to **production**. There are two common ways to change this value:
-
-1. Set `APP_ENV` value directly with your webserver.
-
-    For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
-
-        SetEnv APP_ENV "dev"
-
-2. Create a **.env** file in the root directory with the following content:
-
-        APP_ENV=dev
-
-In both of the above examples, the environment is set to the new value `dev`. Configuration files can now be created in the path **config/dev** and will override the application's base configuration.
-
-For example, to use a different MySQL database for the `dev` environment only, create a file called **config/dev/database.php** using this content:
-
-    <?php
-
-    return [
-        'connections' => [
-            'mysql' => [
-                'host'     => 'localhost',
-                'port'     => '',
-                'database' => 'database',
-                'username' => 'root',
-                'password' => ''
-            ]
-        ]
-    ];
-
-<a name="domain-environment"></a>
-### Domain driven environment
-
-October supports using an environment detected by a specific hostname. You may place these hostnames in an environment configuration file, for example, **config/environment.php**.
-
-Using this file contents below, when the application is accessed via **global.website.tld** the environment will be set to `global` and likewise for the others.
-
-    <?php
-
-    return [
-        'hosts' => [
-            'global.website.tld' => 'global',
-            'local.website.tld' => 'local',
-        ]
-    ];
+> **Note**: This naming convention may also apply to some plugins and themes.
