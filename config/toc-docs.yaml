@@ -3,6 +3,7 @@ Getting Started:
   pages:
     setup/installation: "Installation"
     setup/configuration: "Configuration"
+    setup/deployment: "Deployment"
 
 Concepts:
   icon: "icon-magic"
