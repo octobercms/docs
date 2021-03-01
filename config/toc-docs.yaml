@@ -1,46 +1,46 @@
-Setup:
+Getting Started:
   icon: "icon-wrench"
   pages:
     setup/installation: "Installation"
     setup/configuration: "Configuration"
 
-CMS:
+Concepts:
   icon: "icon-magic"
   pages:
     cms/themes: "Themes"
     cms/pages: "Pages"
     cms/partials: "Partials"
     cms/layouts: "Layouts"
-    cms/content: "Content blocks"
+    cms/content: "Content Blocks"
     cms/components: "Components"
-    cms/mediamanager: "Media manager"
-    markup: "Markup guide@"
+    cms/mediamanager: "Media Manager"
+    markup: "Markup Guide@"
 
 AJAX:
   icon: "icon-bolt"
   pages:
     ajax/introduction: "Introduction"
-    ajax/handlers: "Event handlers"
-    ajax/update-partials: "Updating partials"
-    ajax/attributes-api: "Data attributes API"
+    ajax/handlers: "Event Handlers"
+    ajax/update-partials: "Updating Partials"
+    ajax/attributes-api: "Data Attributes API"
     ajax/javascript-api: "JavaScript API"
-    ajax/extras: "Extra features"
+    ajax/extras: "Extra Features"
 
 Themes:
   icon: "icon-picture"
   pages:
-    themes/development: "Developing themes"
+    themes/development: "Developing Themes"
 
 Plugins:
   icon: "icon-puzzle-piece"
   pages:
     plugin/registration: "Registration"
-    plugin/updates: "Version history"
-    plugin/components: "Building components"
+    plugin/updates: "Version History"
+    plugin/components: "Building Components"
     plugin/settings: "Settings & Config"
     plugin/localization: "Localization"
-    plugin/scheduling: "Task scheduling"
-    plugin/extending: "Extending plugins"
+    plugin/scheduling: "Task Scheduling"
+    plugin/extending: "Extending Plugins"
 
 Backend:
   icon: "icon-desktop"
@@ -51,20 +51,20 @@ Backend:
     backend/forms: "Forms"
     backend/lists: "Lists"
     backend/relations: "Relations"
-    backend/reorder: "Sorting records"
+    backend/reorder: "Sorting Records"
     backend/import-export: "Importing & Exporting"
     backend/users: "Users & Permissions"
-    ui: "User interface guide@"
+    ui: "User Interface Guide@"
 
 Database:
   icon: "icon-hdd"
   pages:
-    database/basics: "Basic usage"
+    database/basics: "Basic Usage"
     database/structure: "Structure"
     database/query: "Queries"
     database/model: "Models"
     database/relations: "Relationships"
-    database/attachments: "File attachments"
+    database/attachments: "File Attachments"
     database/collection: "Collections"
     database/mutators: "Mutators"
     database/serialization: "Serialization"
@@ -98,7 +98,7 @@ Services:
 Console:
   icon: "icon-terminal"
   pages:
-    console/commands: "Command list"
+    console/commands: "Command List"
     console/scaffolding: "Scaffolding"
     console/development: "Development"
 
@@ -110,5 +110,5 @@ Extras:
   pages:
     help/unit-testing: "Unit Testing"
     help/using-composer: "Using Composer"
-    ../help/guidelines/quality: "Quality guidelines@"
-    ../help/guidelines/developer: "Developer guide@"
+    ../help/guidelines/quality: "Quality Guidelines@"
+    ../help/guidelines/developer: "Developer Guide@"

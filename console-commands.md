@@ -1,8 +1,5 @@
 # Command Line Interface
 
-- [Console installation](#console-install)
-    - [Quick start install](#console-install-quick)
-    - [Composer install](#console-install-composer)
 - [Setup & Maintenance](#maintenance-commands)
     - [Install command](#console-install-command)
     - [System update](#console-update-command)
@@ -29,42 +26,7 @@
     - [Enable DotEnv configuration](#october-env-command)
     - [Miscellaneous commands](#october-util-command)
 
-October includes several command-line interface (CLI) commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development) or speed up development with the provided [scaffolding commands](../console/scaffolding).
-
-<a name="console-install"></a>
-## Console installation
-
-Console installation can be performed using the native system or with [Composer](http://getcomposer.org/) to manage dependencies. Either approach will download the October application files and can be used right away. If you plan on using a database, be sure to run the [install command](#console-install-command) after installation.
-
-<a name="console-install-quick"></a>
-### Quick start install
-
-Run this in your terminal to get the latest copy of October:
-
-    curl -s https://octobercms.com/api/installer | php
-
-Or if you don't have curl:
-
-    php -r "eval('?>'.file_get_contents('https://octobercms.com/api/installer'));"
-
-<a name="console-install-composer"></a>
-### Composer install
-
-Download the application source code by using `create-project` in your terminal. The following command will install to a directory called **/myoctober**.
-
-    composer create-project october/october myoctober
-
-Once this task has finished, open the file **config/cms.php** and enable the `disableCoreUpdates` setting. This will disable core updates from being delivered by the October gateway.
-
-    'disableCoreUpdates' => true,
-
-When updating October, use the composer update command as normal before performing a [database migration](#console-up-command).
-
-    composer update
-
-Composer is configured to look inside plugin directories for composer dependencies and these will be included in updates.
-
-> **Note:** To use composer with an October instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/octobercms/october) into your October instance and then run `composer install`.
+October CMS includes several command-line interface (CLI) commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development) or speed up development with the provided [scaffolding commands](../console/scaffolding).
 
 <a name="maintenance-commands"></a>
 ## Setup & Maintenance
@@ -86,7 +48,7 @@ You also may wish to inspect **config/app.php** and **config/cms.php** to change
 The `october:update` command will request updates from the October gateway. It will update the core application and plugin files, then perform a database migration.
 
     php artisan october:update
-    
+
 > **IMPORTANT**: If you are using [using composer](#console-install-composer) do **NOT** run this command without first making sure that `cms.disableCoreUpdates` is set to true. Doing so will cause conflicts between the marketplace version of October and the version available through composer. In order to update the core October installation when using composer run `composer update` instead.
 
 <a name="console-up-command"></a>
@@ -99,14 +61,14 @@ The `october:up` command will perform a database migration, creating database ta
 The inverse command `october:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#plugin-refresh-command) is a useful alternative for debugging a single plugin.
 
     php artisan october:down
-    
+
 <a name="change-backend-user-password-command"></a>
 ### Change Backend user password
 
 The `october:passwd` command will allow the password of a Backend user or administrator to be changed via the command-line. This is useful if someone gets locked out of their October CMS install, or for changing the password for the default administrator account.
 
     php artisan october:passwd username password
-    
+
 You may provide the username/email and password as both the first and second argument, or you may leave the arguments blank, in which case the command will be run interactively.
 
 <a name="plugin-commands"></a>

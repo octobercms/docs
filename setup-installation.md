@@ -1,19 +1,78 @@
 # Installation
 
-- [Minimum system requirements](#system-requirements)
-- [Wizard installation](#wizard-installation)
-    - [Troubleshooting installation](#troubleshoot-installation)
-- [Command-line installation](#command-line-installation)
-- [Post-installation steps](#post-install-steps)
-    - [Delete installation files](#delete-install-files)
-    - [Review configuration](#config-review)
-    - [Setting up the scheduler](#crontab-setup)
-    - [Setting up queue workers](#queue-setup)
+- [Command-Line Installation](#command-line-installation)
+- [Post-Installation Steps](#post-install-steps)
+    - [Review Configuration](#config-review)
+    - [Setting Up The Scheduler](#crontab-setup)
+    - [Setting Up Queue Workers](#queue-setup)
+- [Minimum System Requirements](#system-requirements)
+- [Troubleshooting Installation](#troubleshoot-installation)
 
-There are two ways you can install October, either using the [Wizard installer](#wizard-installation) or [Command-line installation](../console/commands#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
+October CMS is a web application platform with a simple and intuitive interface. A web platform provides a consistent structure with an emphasis on reusability so you can focus on building something unique while we handle the boring bits.
+
+October CMS makes one bold but obvious assumption: clients don't build websites; developers do. When platforms have a client-centric development process, it only results in one thing: an unhappy developer.
+
+Whether you're new to web development or have years of experience, October CMS is a platform that makes it easy to create bespoke experiences for you and your clients. We hope you enjoy your journey with us and discover happiness in simplicity.
+
+<a name="command-line-installation"></a>
+## Installing October CMS
+
+Before you proceed, you should check that your computer or server meets the [minimum system requirements](#system-requirements), including having PHP and [Composer](http://getcomposer.org/) installed.
+
+You can then create a new October CMS project by using `create-project` command in your terminal. The following creates a new project in a directory called **myoctober**.
+
+    composer create-project october/october myoctober
+
+When the task finishes, run the installation command to guide you through the next steps.
+
+    php artisan october:install
+
+Next, migrate the database with the following command.
+
+    php artisan october:migrate
+
+You can then serve the application and open it in your browser.
+
+    php artisan serve
+
+<a name="post-install-steps"></a>
+## Post-Installation Steps
+
+There are some things you may need to set up after the installation is complete.
+
+<a name="config-review"></a>
+### Review Configuration
+
+Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
+
+For example, in production environments you may want to enable [CSRF protection](../setup/configuration#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
+
+While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#public-folder) for additional security.
+
+<a name="crontab-setup"></a>
+### Setting Up The Scheduler
+
+For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
+
+    * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+
+Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October CMS. This Cron will call the command scheduler every minute. Then October CMS evaluates any scheduled tasks and runs the tasks that are due.
+
+> **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
+
+<a name="queue-setup"></a>
+### Setting Up Queue Workers
+
+You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
+
+If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
+
+You can also run the queue as a daemon process with
+
+    php artisan queue:work
 
 <a name="system-requirements"></a>
-## Minimum system requirements
+## Minimum System Requirements
 
 October CMS has some server requirements for web hosting:
 
@@ -26,7 +85,7 @@ October CMS has some server requirements for web hosting:
 1. GD PHP Extension
 1. SimpleXML PHP Extension
 
-Some OS distributions may require you to manually install some of the required PHP extensions.
+Some OS distributions may require you manually install some of the necessary PHP extensions.
 
 When using Ubuntu, the following command can be run to install all required extensions:
 
@@ -35,78 +94,15 @@ sudo apt-get update &&
 sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
 ```
 
-When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
-
-<a name="wizard-installation"></a>
-## Wizard installation
-
-The wizard installation is the recommended way to install October for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
-
-> **Note:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
-
-1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
-1. [Download the installer archive file](http://octobercms.com/download).
-1. Unpack the installer archive to the prepared directory.
-1. Grant writing permissions on the installation directory and all its subdirectories and files.
-1. Navigate to the install.php script in your web browser.
-1. Follow the installation instructions.
-
-![image](https://github.com/octobercms/docs/blob/master/images/wizard-installer.png?raw=true) {.img-responsive .frame}
+When using the SQL Server database engine, you will need to install the [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) user-defined aggregate.
 
 <a name="troubleshoot-installation"></a>
-### Troubleshooting installation
-
-1. **An error 500 is displayed when downloading the application files**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
+## Troubleshooting Installation
 
 1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
 
-1. **An error code "liveConnection" is displayed**: The installer will test a connection to the installation server using port 80. Check that your webserver can create outgoing connections on port 80 via PHP. Contact your hosting provider or this is often found in the server firewall settings.
-
 1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration#debug-mode) to see the underlying error message.
 
-> **Note:** A detailed installation log can be found in the `install_files/install.log` file.
+1. **An error 500 is displayed when updating the application**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 
-<a name="command-line-installation"></a>
-## Command-line installation
-
-If you feel more comfortable with a command-line or want to use composer, there is a CLI install process on the [Console interface page](../console/commands#console-install).
-
-<a name="post-install-steps"></a>
-## Post-installation steps
-
-There are some things you may need to set up after the installation is complete.
-
-<a name="delete-install-files"></a>
-### Delete installation files
-
-If you have used the [Wizard installer](#wizard-installation), for security reasons you should verify the installation files have been deleted. The October installer attempts to cleanup after itself, but you should always verify that they have been successfullly removed:
-
-    install_files/      <== Installation directory
-    install.php         <== Installation script
-
-<a name="config-review"></a>
-### Review configuration
-
-Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
-
-For example, in production environments you may want to enable [CSRF protection](../setup/configuration#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
-
-While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#public-folder) for additional security.
-
-<a name="crontab-setup"></a>
-### Setting up the scheduler
-
-For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
-
-    * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
-
-Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October. This Cron will call the command scheduler every minute. Then October evaluates any scheduled tasks and runs the tasks that are due.
-
-> **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
-
-<a name="queue-setup"></a>
-### Setting up queue workers
-
-You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
-
-If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
+> **Note:** A detailed system log can be found in the `storage/logs` directory.
