@@ -103,4 +103,4 @@ When using the SQL Server database engine, you will need to install the [group c
 
 1. **An error 500 is displayed when updating the application**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 
-> **Note:** A detailed system log can be found in the `storage/logs` directory.
+> **Note**: A detailed system log can be found in the `storage/logs` directory.

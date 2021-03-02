@@ -49,7 +49,7 @@ Not all plugin directories are required. The only required file is the **Plugin.
           components/
           Plugin.php     <=== Plugin registration file
 
-> **Note:** if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
+> **Note**: if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
 
 <a name="namespaces"></a>
 ### Plugin namespaces
@@ -139,7 +139,7 @@ The `register` method is called immediately when the plugin is registered. The `
         });
     }
 
-> **Note:** The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
+> **Note**: The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
 
 Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
 

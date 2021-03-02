@@ -25,7 +25,7 @@
 
 The database query builder provides a convenient, fluent interface to creating and running database queries. It can be used to perform most database operations in your application, and works on all supported database systems.
 
-> **Note:** The query builder uses PDO parameter binding to protect your application against SQL injection attacks. There is no need to clean strings being passed as bindings.
+> **Note**: The query builder uses PDO parameter binding to protect your application against SQL injection attacks. There is no need to clean strings being passed as bindings.
 
 <a name="retrieving-results"></a>
 ## Retrieving results
@@ -103,7 +103,7 @@ If you are updating database records while chunking results, your chunk results 
             }
         });
 
-> **Note:** When updating or deleting records inside the chunk callback, any changes to the primary key or foreign keys could affect the chunk query. This could potentially result in records not being included in the chunked results.
+> **Note**: When updating or deleting records inside the chunk callback, any changes to the primary key or foreign keys could affect the chunk query. This could potentially result in records not being included in the chunked results.
 
 <a name="aggregates"></a>
 ### Aggregates
@@ -163,7 +163,7 @@ Sometimes you may need to use a raw expression in a query. To create a raw expre
         ->groupBy('status')
         ->get();
 
-> **Note:** Raw statements will be injected into the query as strings, so you should be extremely careful to not create SQL injection vulnerabilities.
+> **Note**: Raw statements will be injected into the query as strings, so you should be extremely careful to not create SQL injection vulnerabilities.
 
 #### Raw methods
 
@@ -547,7 +547,7 @@ If the table has an auto-incrementing id, use the `insertGetId` method to insert
         ['email' => 'john@example.com', 'votes' => 0]
     );
 
-> **Note:** When using the PostgreSQL database driver, the insertGetId method expects the auto-incrementing column to be named `id`. If you would like to retrieve the ID from a different "sequence", you may pass the sequence name as the second parameter to the `insertGetId` method.
+> **Note**: When using the PostgreSQL database driver, the insertGetId method expects the auto-incrementing column to be named `id`. If you would like to retrieve the ID from a different "sequence", you may pass the sequence name as the second parameter to the `insertGetId` method.
 
 <a name="updates"></a>
 ## Updates
@@ -579,7 +579,7 @@ The `upsert` method will insert rows that do not exist and update the rows that 
         ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
     ], ['departure', 'destination'], ['price']);
 
-> **Note:** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
+> **Note**: All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
 
 #### Updating JSON columns
 

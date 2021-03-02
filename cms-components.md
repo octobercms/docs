@@ -14,7 +14,7 @@ Components are configurable building elements that can be attached to any page, 
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers) or [developing components](../plugin/components) as part of plugins.
 
-> **Note:** Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials#dynamic-partials) article.
+> **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials#dynamic-partials) article.
 
 <a name="introduction"></a>
 ## Introduction
@@ -35,7 +35,7 @@ When you refer a component, it automatically creates a page variable that matche
 
     {% component 'demoTodo' %}
 
-> **Note:** If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
+> **Note**: If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
 
 <a name="aliases"></a>
 ## Components Aliases

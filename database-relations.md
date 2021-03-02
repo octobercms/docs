@@ -33,7 +33,7 @@
 
 Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. October makes managing and working with these relationships easy and supports several different types of relationships.
 
-> **Note:** If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, October cannot connect the relations.
+> **Note**: If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, October cannot connect the relations.
 
 <a name="defining-relationships"></a>
 ## Defining relationships
@@ -1084,7 +1084,7 @@ Destroys all bindings that have not been committed and are older than 1 day:
 
     October\Rain\Database\Models\DeferredBinding::cleanUp(1);
 
-> **Note:** October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
+> **Note**: October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
 
 <a name="disable-deferred-binding"></a>
 ### Disable Deferred Binding
@@ -1100,4 +1100,4 @@ Sometimes you might need to disable deferred binding entirely for a given model,
         return $result;
     }
 
-> **Note:** This will disable deferred binding entirely for any model's you apply this override to.
+> **Note**: This will disable deferred binding entirely for any model's you apply this override to.

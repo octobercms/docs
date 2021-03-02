@@ -85,7 +85,7 @@ The following is an example of how to define a website name configuration field 
                 comment: The website name as it should appear on the front-end
                 default: My Amazing Site!
 
-> **Note:** If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
+> **Note**: If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
 
     \Cms\Models\ThemeData::extend(function ($model) {
         $model->addJsonable('contact');
@@ -150,7 +150,7 @@ When the theme is installed for the first time, the system will attempt to insta
 ## Localization
 
 Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October backend and can be used for form labels just like [plugin localization](../plugin/localization)
-   
+
 > **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) plugin.
 
 <a name="localization-file-structure"></a>

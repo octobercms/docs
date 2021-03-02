@@ -2,15 +2,15 @@
 
 - [Introduction](#introduction)
 - [Placeholders](#placeholders)
-- [Dynamic layouts](#dynamic-layouts)
-    - [Layout execution life cycle](#layout-life-cycle)
+- [Dynamic Layouts](#dynamic-layouts)
+    - [Layout Execution Life Cycle](#layout-life-cycle)
 
 <a name="introduction"></a>
 ## Introduction
 
-Layouts define the page scaffold, that is everything that repeats on a page, such as a header and footer. Layouts often contain the HTML tag as well as the HEAD, TITLE and BODY tags.
+Layouts define a common scaffold for your pages, which usually means everything that repeats on every page, such as a header and a footer. They will almost always contain HTML code such as HEAD, TITLE and BODY tags.
 
-Layout templates reside in the **/layouts** subdirectory of a theme directory. Layout template files should have the **htm** extension. Inside the layout file you should use the `{% page %}` tag to output the page content. Simplest layout example:
+Layout template files reside in the **layouts** directory in your theme. Layout template files should have the **htm** extension. Inside the layout file you should use the `{% page %}` tag to output the page content. Next is an example of the simplest possible layout.
 
     <html>
         <body>
@@ -70,12 +70,12 @@ Pages can inject content to placeholders with the `{% put %}` and `{% endput %}`
 More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder).
 
 <a name="dynamic-layouts"></a>
-## Dynamic layouts
+## Dynamic Layouts
 
 Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
 
 <a name="layout-life-cycle"></a>
-### Layout execution life cycle
+### Layout Execution Life Cycle
 
 Inside the layout's [PHP section](themes#php-section) you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
 

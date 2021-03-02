@@ -39,7 +39,7 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
         public $listConfig = 'list_config.yaml';
     }
 
-> **Note:** Very often the list and [form behavior](form) are used together in a same controller.
+> **Note**: Very often the list and [form behavior](form) are used together in a same controller.
 
 <a name="configuring-list"></a>
 ## Configuring the list behavior
@@ -252,7 +252,7 @@ You can also specify a custom number format, for example currency **$ 99.00**
         type: number
         format: $ %.2f
 
-> **Note:** Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
+> **Note**: Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
 
 <a name="column-switch"></a>
 ### Switch
@@ -286,7 +286,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         type: datetime
         ignoreTimezone: true
 
-> **Note:** the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
+> **Note**: the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
 <a name="column-date"></a>
 ### Date
@@ -350,7 +350,7 @@ To display a column that shows the number of related records, use the `useRelati
         relation: users
         useRelationCount: true
 
-> **Note:** Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
+> **Note**: Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
 
 **Best Practice:**
 
@@ -510,7 +510,7 @@ In the above example, the `city` scope will refresh when the `country` scope has
         }
     }
 
-> **Note:** Scope dependencies with `type: group` are only supported at this stage.
+> **Note**: Scope dependencies with `type: group` are only supported at this stage.
 
 <a name="scope-types"></a>
 ### Available scope types
@@ -650,7 +650,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         conditions: created_at >= ':after' AND created_at <= ':before'
         ignoreTimezone: true
 
-> **Note:** the `ignoreTimezone` option also applies to the `date` filter type as well.
+> **Note**: the `ignoreTimezone` option also applies to the `date` filter type as well.
 
 <a name="filter-number"></a>
 ### Number
@@ -879,14 +879,14 @@ The lookup query for the list [database model](../database/model) can be extende
     {
         $query->withTrashed();
     }
-    
+
 When dealing with multiple lists definitions in a same controller, you can use the second parameter of `listExtendQuery` which contains the name of the definition :
 
     public $listConfig = [
         'inbox' => 'config_inbox_list.yaml',
         'trashed' => 'config_trashed_list.yaml'
     ];
-    
+
     public function listExtendQuery($query, $definition)
     {
         if ($definition === 'trashed') {

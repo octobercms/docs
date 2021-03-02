@@ -85,7 +85,7 @@ The following example will update an element on the page with the id **myDiv** u
         ];
     }
 
-> **Note:** The key name must start with an identifier `#` or class `.` character to trigger a content update.
+> **Note**: The key name must start with an identifier `#` or class `.` character to trigger a content update.
 
 <a name="passing-variables"></a>
 ## Passing variables to partials

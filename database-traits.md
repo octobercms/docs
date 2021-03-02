@@ -62,8 +62,8 @@ Similar to the [hashable trait](#hashable), encrypted attributes are encrypted w
          */
         protected $encryptable = ['api_key', 'api_secret'];
     }
-    
-> **Note:** Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#standard-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
+
+> **Note**: Encrypted attributes will be serialized and unserialized as a part of the encryption / decryption process. Do not make an attribute that is `encryptable` also [`jsonable`](model#standard-properties) at the same time as the `jsonable` process will attempt to decode a value that has already been unserialized by the encryptor.
 
 <a name="sluggable"></a>
 ## Sluggable
@@ -167,7 +167,7 @@ Sorted models will store a number value in `sort_order` which maintains the sort
     {
         use \October\Rain\Database\Traits\Sortable;
     }
-    
+
 
 You may modify the key name used to identify the sort order by defining the `SORT_ORDER` constant:
 
@@ -180,8 +180,8 @@ Use the `setSortableOrder` method to set the orders on a single record or multip
 
     // Sets the order of records 1, 2, 3 to 3, 2, 1 respectively...
     $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
-    
-> **Note:** If adding this trait to a model where data (rows) already existed previously, the data set may need to be initialized before this trait will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).
+
+> **Note**: If adding this trait to a model where data (rows) already existed previously, the data set may need to be initialized before this trait will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).
 
 <a name="simple-tree"></a>
 ## Simple Tree
@@ -210,7 +210,7 @@ You may modify the key name used to identify the parent by defining the `PARENT_
 Collections of models that use this trait will return the type of `October\Rain\Database\TreeCollection` which adds the `toNested` method. To build an eager loaded tree structure, return the records with the relations eager loaded.
 
     Category::all()->toNested();
-    
+
 ### Rendering
 
 In order to render all levels of items and their children, you can use recursive processing
@@ -328,14 +328,14 @@ Models validate themselves automatically when the `save` method is called.
     // Returns false if model is invalid
     $success = $user->save();
 
-> **Note:** You can also validate a model at any time using the `validate` method.
+> **Note**: You can also validate a model at any time using the `validate` method.
 
 <a name="retrieving-validation-errors"></a>
 ### Retrieving validation errors
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
-> **Note:** The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation#working-with-error-messages) of formatting errors.
+> **Note**: The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation#working-with-error-messages) of formatting errors.
 
 <a name="overriding-validation"></a>
 ### Overriding validation
@@ -494,7 +494,7 @@ When two related models have soft deletes enabled, you can cascade the delete ev
         ];
     }
 
-> **Note:** If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+> **Note**: If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
 
 Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
 

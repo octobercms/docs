@@ -49,10 +49,10 @@ Local events are fired by calling `fireEvent()` on an instance of an object that
 
     $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
 
-Global events are fired by calling `Event::fire()`. As these events are global across the entire application, it is best practice to namespace them by including the vendor information in the name of the event. If your plugin Author is ACME and the plugin name is Blog, then any global events provided by the ACME.Blog plugin should be prefixed with `acme.blog`. 
+Global events are fired by calling `Event::fire()`. As these events are global across the entire application, it is best practice to namespace them by including the vendor information in the name of the event. If your plugin Author is ACME and the plugin name is Blog, then any global events provided by the ACME.Blog plugin should be prefixed with `acme.blog`.
 
     Event::fire('acme.blog.post.beforePost', [$firstParam, $secondParam]);
-    
+
 If both global & local events are provided at the same place it's best practice to fire the local event before the global event so that the local event takes priority. Additionally, the global event should provide the object instance that the local event was fired on as the first parameter.
 
     $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
@@ -161,7 +161,7 @@ This example will listen to the [`backend.form.extendFields`](https://octobercms
                 if (!$widget->model instanceof \RainLab\User\Models\User) {
                     return;
                 }
-                
+
                 // Only apply this listener when the Form widget in question is a root-level
                 // Form widget (not a repeater, nestedform, etc)
                 if ($widget->isNested) {
@@ -183,7 +183,7 @@ This example will listen to the [`backend.form.extendFields`](https://octobercms
         }
     }
 
-> **Note:** In some cases (adding fields that should be made translatable by [RainLab.Translate](https://github.com/rainlab/translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://octobercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
+> **Note**: In some cases (adding fields that should be made translatable by [RainLab.Translate](https://github.com/rainlab/translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://octobercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
 
 <a name="extending-backend-list"></a>
 ### Extending a backend list

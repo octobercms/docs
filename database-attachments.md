@@ -26,7 +26,7 @@ Multiple file attachments:
         'photos' => 'System\Models\File'
     ];
 
-> **NOTE:** If you have a column in your model's table with the same name as the attachment relationship it will not work. Attachments and the FileUpload FormWidget work using relationships, so if there is a column with the same name present in the table itself it will cause issues. 
+> **Note**: Make sure that your model's database table does not already have an attribute that uses the same name as your attachment relationship. If it does, it will cause a naming conflict and create problems.
 
 Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`:
 

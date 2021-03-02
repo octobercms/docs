@@ -110,7 +110,7 @@ The back-end settings navigation links can be extended by overriding the `regist
         ];
     }
 
-> **Note:** Back-end settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+> **Note**: Back-end settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
 
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
 

@@ -29,19 +29,19 @@ Object | Description
 <a name="directory-structure"></a>
 ## Directory Structure
 
-Below, you can see an example theme directory structure. Each October theme is represented with a separate directory and generally, one active theme is used for displaying the website. This example displays the "website" theme directory.
+Below, you can see an example theme directory structure. Each theme represents a separate directory, and generally, one theme is active to display the website. This example demonstrates the **website** theme directory.
 
     themes/
       website/           <=== Theme starts here
-        pages/           <=== Pages directory
+        pages/           <=== Page files
           home.htm
-        layouts/         <=== Layouts directory
+        layouts/         <=== Layout files
           default.htm
-        partials/        <=== Partials directory
+        partials/        <=== Partial files
           sidebar.htm
-        content/         <=== Content directory
+        content/         <=== Content files
           intro.htm
-        assets/          <=== Assets directory
+        assets/          <=== Asset files
           css/
             my-styles.css
           js/
@@ -52,30 +52,30 @@ Below, you can see an example theme directory structure. Each October theme is r
 <a name="subdirectories"></a>
 ### Subdirectories
 
-October CMS supports single level subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have any structure. This simplifies the organization of large websites. In the example directory structure below, you can see that the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
+October CMS supports a single level of subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
     themes/
       website/
         pages/
           home.htm
-          blog/                  <=== Subdirectory
+          blog/                  <=== Page subdirectory
             archive.htm
             category.htm
         partials/
           sidebar.htm
-          blog/                  <=== Subdirectory
+          blog/                  <=== Partial subdirectory
             category-list.htm
         content/
           footer-contacts.txt
-          home/                  <=== Subdirectory
+          home/                  <=== Content subdirectory
             intro.htm
         ...
 
-To refer to a partial or a content file from a subdirectory, specify the subdirectory's name before the template's name. Example of rendering a partial from a subdirectory:
+To refer to a template in a subdirectory, specify the subdirectory's name before the template's name. For example, rendering the **category-list** partial from a **blog** subdirectory.
 
     {% partial "blog/category-list" %}
 
-> **Note:** The template paths are always absolute. If, in a partial, you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
+> **Note**: The template paths are always absolute. If, in a partial, you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
 
 <a name="template-structure"></a>
 ## Template Structure

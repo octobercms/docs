@@ -134,7 +134,7 @@ Lastly, you can commit a transaction via the `commit` method:
 
     Db::commit();
 
-> **Note:** Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query) and [model queries](../database/model).
+> **Note**: Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query) and [model queries](../database/model).
 
 <a name="database-events"></a>
 ## Database events

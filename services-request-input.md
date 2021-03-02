@@ -39,14 +39,14 @@ When working on forms with "array" inputs, you may use dot notation to access th
 
     $input = Input::get('products.0.name');
 
-> **Note:** Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via `Input::get` like normal.
+> **Note**: Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via `Input::get` like normal.
 
 <a name="cookies"></a>
 ## Cookies
 
 By default, all cookies created by the October are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client. Cookies named in the `cookie.unencryptedCookies` config key will not be encrypted.
 
-> **Note:** Cookies are encrypted with the APP_KEY, so there is the potential for cookies to be crafted by the client if they know the APP_KEY. If your application's encryption key is in the hands of a malicious party, that party could craft cookie values using the encryption key and exploit vulnerabilities inherit to PHP object serialization / unserialization, such as calling arbitrary class methods within your application. To mitigate that, always rotate your APP_KEY if you suspect it has been compromised and ensure you always verify that the data you received from a cookie is what you expect it to be before using it.
+> **Note**: Cookies are encrypted with the APP_KEY, so there is the potential for cookies to be crafted by the client if they know the APP_KEY. If your application's encryption key is in the hands of a malicious party, that party could craft cookie values using the encryption key and exploit vulnerabilities inherit to PHP object serialization / unserialization, such as calling arbitrary class methods within your application. To mitigate that, always rotate your APP_KEY if you suspect it has been compromised and ensure you always verify that the data you received from a cookie is what you expect it to be before using it.
 
 #### Retrieving a cookie value
 
@@ -119,7 +119,7 @@ Since you often will want to flash input in association with a redirect to the p
 
     return Redirect::to('form')->withInput(Input::except('password'));
 
-> **Note:** You may flash other data across requests using the [Session](../services/session) class.
+> **Note**: You may flash other data across requests using the [Session](../services/session) class.
 
 #### Retrieving old data
 

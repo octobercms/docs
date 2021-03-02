@@ -140,7 +140,7 @@ Instead of passing the number of seconds until the item expires, you may also pa
 
     Cache::put('key', 'value', $expiresAt);
 
-> **Note:** We recommend using `DateTime` instances for defining all expiry lengths, in order to ensure compatibility with future versions of October CMS.
+> **Note**: We recommend using `DateTime` instances for defining all expiry lengths, in order to ensure compatibility with future versions of October CMS.
 
 The `add` method will only add the item to the cache if it does not already exist in the cache store. The method will return `true` if the item is actually added to the cache. Otherwise, the method will return `false`:
 

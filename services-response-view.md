@@ -114,7 +114,7 @@ The `download` method may be used to generate a response that forces the user's 
 
     return Response::download($pathToFile)->deleteFileAfterSend(true);
 
-> **Note:** Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
+> **Note**: Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
 
 <a name="redirects"></a>
 ## Redirects
@@ -130,7 +130,7 @@ Redirecting to a new URL and [flashing data to the session](../services/session)
 
     return Redirect::to('user/login')->with('message', 'Login Failed');
 
-> **Note:** Since the `with` method flashes data to the session, you may retrieve the data using the typical `Session::get` method.
+> **Note**: Since the `with` method flashes data to the session, you may retrieve the data using the typical `Session::get` method.
 
 <a name="redirecting-previous-url"></a>
 #### Redirecting to the previous URL

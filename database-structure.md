@@ -193,7 +193,7 @@ To rename a column, you may use the `renameColumn` method on the Schema builder:
         $table->renameColumn('from', 'to');
     });
 
-> **Note:** Renaming columns in a table with a `enum` column is not currently supported.
+> **Note**: Renaming columns in a table with a `enum` column is not currently supported.
 
 <a name="dropping-columns"></a>
 ### Dropping columns

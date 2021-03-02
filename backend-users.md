@@ -21,9 +21,9 @@ When checking if a user has a specific permission, the permission settings for t
 
 Roles (`\Backend\Models\UserRole`) are groupings of permissions with a name and description used to identify the role. An Administrator can only have one role assigned to them at once. A Role could be assigned to multiple administrators. October ships with two system roles by default, `developer` and `publisher`. Any number of custom roles with their own combinations of permissions can be created and applied to users.
 
-> **Note:** Any user with the `manage_users` permissions can manage the assignment of roles, but only to other users (not to themselves), and roles can only be created or modified by a superuser.
+> **Note**: Any user with the `manage_users` permissions can manage the assignment of roles, but only to other users (not to themselves), and roles can only be created or modified by a superuser.
 
-> **Note:** System roles (`developer`, `publisher`, and any role with `is_system` set to `true`) cannot have their permissions changed through the Backend. They are assumed to have access to all permissions, unless a given permission specifies a specific role or roles that it applies to using the `roles` array key in the definition of the permission (in which case only that specified system role has access to it).
+> **Note**: System roles (`developer`, `publisher`, and any role with `is_system` set to `true`) cannot have their permissions changed through the Backend. They are assumed to have access to all permissions, unless a given permission specifies a specific role or roles that it applies to using the `roles` array key in the definition of the permission (in which case only that specified system role has access to it).
 
 Groups (`\Backend\Models\UserGroup`) are an organizational tool for grouping administrators, they can be thought of as "user categories". They have nothing to do with permissions and are strictly for organizational purposes. For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you would simply do `Mail::sendTo(UserGroup::where('code', 'head-office-staff')->get()->users, 'author.plugin::mail.important_notification', $data);`
 

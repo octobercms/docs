@@ -32,7 +32,7 @@ During an update the system will notify the user about recent changes to plugins
 1. When the system is updated using the update feature in the back-end area.
 1. When the [console command](../console/commands#console-up-command) `php artisan october:up` is called in the command line from the application directory.
 
-> **Note:** The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
+> **Note**: The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 
 <a name="plugin-dependencies"></a>
 ### Plugin dependencies
@@ -67,7 +67,7 @@ The **version.yaml** file, called the *Plugin version file*, contains the versio
         - "and here's the seed"
         - seed_the_database.php
 
-> **Note:** `version.yaml` files support having multiple text entries per version as the change log description. You can have as many update messages as you want, migration files can be listed in any position too.
+> **Note**: `version.yaml` files support having multiple text entries per version as the change log description. You can have as many update messages as you want, migration files can be listed in any position too.
 
 As you can see above, there should be a key that represents the version number followed by the update message, which is either a string or an array containing update messages. For updates that refer to migration or seeding files, lines that are script file names can be placed in any position. An example of a comment with no associated update files:
 

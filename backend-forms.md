@@ -1,10 +1,10 @@
 # Backend forms
 
 - [Introduction](#introduction)
-- [Configuring the form behavior](#configuring-form)
-    - [Create page](#form-create-page)
-    - [Update page](#form-update-page)
-    - [Preview page](#form-preview-page)
+- [Configuring the Form Behavior](#configuring-form)
+    - [Create Page](#form-create-page)
+    - [Update Page](#form-update-page)
+    - [Preview Page](#form-preview-page)
 - [Defining form fields](#form-fields)
     - [Tab options](#form-tab-options)
     - [Field options](#form-field-options)
@@ -43,10 +43,10 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
         public $formConfig = 'config_form.yaml';
     }
 
-> **Note:** Very often the form and [list behavior](lists) are used together in a same controller.
+> **Note**: Very often the form and [list behavior](lists) are used together in a same controller.
 
 <a name="configuring-form"></a>
-## Configuring the form behavior
+## Configuring the Form Behavior
 
 The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical form behavior configuration file:
 
@@ -85,7 +85,7 @@ Option | Description
 **preview** | a configuration array or reference to a config file for the Preview page.
 
 <a name="form-create-page"></a>
-### Create page
+### Create Page
 
 To support the Create page add the following configuration to the YAML file:
 
@@ -106,7 +106,7 @@ Option | Description
 **form** | overrides the default form fields definitions for the create page only.
 
 <a name="form-update-page"></a>
-### Update page
+### Update Page
 
 To support the Update page add the following configuration to the YAML file:
 
@@ -128,7 +128,7 @@ Option | Description
 **form** | overrides the default form fields definitions for the update page only.
 
 <a name="form-preview-page"></a>
-### Preview page
+### Preview Page
 
 To support the Preview page add the following configuration to the YAML file:
 
@@ -210,7 +210,7 @@ Option | Description
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
-> **Note:** It is not recommended to use lazy loading on tabs with fields that are affected by triggers.
+> **Note**: It is not recommended to use lazy loading on tabs with fields that are affected by triggers.
 
     tabs:
         stretch: true
@@ -691,8 +691,6 @@ If the `availableColors` field in not defined in the YAML file, the colorpicker 
 
 `datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.
 
-> **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
-
     data:
         type: datatable
         adding: true
@@ -708,6 +706,8 @@ If the `availableColors` field in not defined in the YAML file, the colorpicker 
         recordsPerPage: false
         searching: false
         toolbar: []
+
+> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model#standard-properties) or anything that can handle storing as an array.
 
 #### Table configuration
 
@@ -823,7 +823,7 @@ Option | Description
 **thumbOptions** | options to pass to the thumbnail generating method for the file
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
-> **Note:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
+> **Note**: Unlike the [Media Finder form widget](#widget-mediafinder), the File Upload form widget uses [database file attachments](../database/attachments) so the field name be that of an `attachOne` or `attachMany` relationship attrbiute on your associated model.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown editor
@@ -856,13 +856,11 @@ Option | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 
-> **Note:** Unlike the [File Upload FormWidget](#widget-fileupload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
+> **Note**: Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library. It should associate to a normal attribute on your model.
 
 <a name="widget-nestedform"></a>
 ### Nested Form
 `nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
-
-> **NOTE:** In order to use this with a model, the field should be defined as a `jsonable` attribute, or as another attribute that can handle storing arrayed data.
 
     content:
         type: nestedform
@@ -896,6 +894,8 @@ Option | Description
                     mode: image
 
 A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has the structure of your form definition. It's even possible to use nested forms inside a nested form.
+
+> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model#standard-properties) or anything that can handle storing as an array.
 
 Option | Description
 ------------- | -------------

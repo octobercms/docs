@@ -3,7 +3,7 @@
 - [Purgeable](#purgeable)
 - [Sortable](#sortable)
 
-Model behaviors are used to implement common functionality.  
+Model behaviors are used to implement common functionality.
 Unlike [Traits](traits) these can be implemented either directly
 in a class or by extending the class. You can read more about behaviors [here](../services/behaviors).
 
@@ -25,7 +25,7 @@ a `$purgeable` property with an array containing the attributes to purge.
          */
         public $purgeable = [];
     }
-    
+
 You can also dynamically implement this behavior in a class.
 
     /**
@@ -80,4 +80,4 @@ Use the `setSortableOrder` method to set the orders on a single record or multip
     // Sets the order of records 1, 2, 3 to 3, 2, 1 respectively...
     $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 
-> **Note:** If implementing this behavior in a model where data (rows) already existed previously, the data set may need to be initialized before this behavior will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).
+> **Note**: If implementing this behavior in a model where data (rows) already existed previously, the data set may need to be initialized before this behavior will work correctly. To do so, either manually update each row's `sort_order` column or run a query against the data to copy the record's `id` column to the `sort_order` column (ex. `UPDATE myvendor_myplugin_mymodelrecords SET sort_order = id`).

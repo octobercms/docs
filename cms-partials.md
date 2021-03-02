@@ -1,31 +1,31 @@
 # CMS Partials
 
 - [Introduction](#introduction)
-- [Rendering partials](#rendering-partials)
-- [Passing variables to partials](#partial-variables)
-- [Dynamic partials](#dynamic-partials)
-    - [Partial execution life cycle](#partial-life-cycle)
-    - [Life cycle limitations](#life-cycle-limitations)
+- [Rendering Partials](#rendering-partials)
+- [Passing Variables to Partials](#partial-variables)
+- [Dynamic Partials](#dynamic-partials)
+    - [Partial Execution Life Cycle](#partial-life-cycle)
+    - [Life Cycle Limitations](#life-cycle-limitations)
 
 <a name="introduction"></a>
 ## Introduction
 
-Partials contain reusable chunks of Twig markup that can be used anywhere throughout the website. Partials are extremely useful for page elements that repeat on different pages or layouts. A good partial example is a page footer which is used in different [page layouts](layouts). Also, partials are required for [updating the page content with AJAX](../ajax/update-partials).
+Partials contain reusable chunks of code that are used anywhere throughout your website. They are useful for elements that repeat on different pages or layouts. One such example is a page footer used across different [page layouts](layouts). Partials are also a key ingredient when [updating the page content with AJAX](../ajax/update-partials).
 
-Partial templates files reside in the **/partials** subdirectory of a theme directory. Partial files should have the **htm** extension. Example of a simplest possible partial:
+Partial templates files reside in the **partials** directory in your theme. Partial files should have the **htm** extension. Next is an example of the simplest possible partial.
 
     <p>This is a partial</p>
 
-The [Configuration](themes#configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the back-end user interface. The next example shows a partial with description:
+A [Configuration](themes#configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the backend user interface. This example shows a partial with a description defined.
 
     description = "Demo partial"
     ==
     <p>This is a partial</p>
 
-The partial configuration section can also contain component definitions. [Components](components) are explained in another article.
+The partial configuration section can also contain component definitions. The [Components article](components) explains components in more detail.
 
 <a name="rendering-partials"></a>
-## Rendering partials
+## Rendering Partials
 
 The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. Remember that if you refer a partial from a [subdirectory](themes#subdirectories) you should specify the subdirectory name. The `{% partial %}` tag can be used inside a page, layout or another partial. Example of a page referring to a partial:
 
@@ -34,7 +34,7 @@ The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a sin
     </div>
 
 <a name="partial-variables"></a>
-## Passing variables to partials
+## Passing Variables to Partials
 
 You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
 
@@ -54,12 +54,12 @@ Inside the partial, variables can be accessed like any other markup variable:
 
 
 <a name="dynamic-partials"></a>
-## Dynamic partials
+## Dynamic Partials
 
 Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
 
 <a name="partial-life-cycle"></a>
-### Partial execution life cycle
+### Partial Execution Life Cycle
 
 There are special functions that can be defined in the PHP section of partials: `onStart` and `onEnd`. The `onStart` function is executed before the partial is rendered and before the partial [components](components) are executed. The `onEnd` function is executed before the partial is rendered and after the partial [components](components) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
 
@@ -74,7 +74,7 @@ There are special functions that can be defined in the PHP section of partials: 
 The templating language provided by October is described in the [Markup Guide](../markup). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts#dynamic-layouts) article.
 
 <a name="life-cycle-limitations"></a>
-### Life cycle limitations
+### Life Cycle Limitations
 
 Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. They do not follow the standard execution process, as described in the [layout execution life cycle](layouts#dynamic-layouts). The following limitations should be noted:
 
