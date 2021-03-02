@@ -5,7 +5,7 @@ Getting Started:
     setup/configuration: "Configuration"
     setup/deployment: "Deployment"
 
-Themes:
+CMS:
   icon: "icon-magic"
   pages:
     cms/themes: "Themes"
@@ -30,6 +30,7 @@ Media Manager:
   icon: "icon-picture"
   pages:
     media/introduction: "Introduction"
+    media/providers: "Providers"
 
 Themes:
   icon: "icon-picture"
@@ -108,7 +109,7 @@ Console:
     console/development: "Development"
 
 "API Docs@":
-    page: api
+  page: api
 
 Extras:
   icon: "icon-question-sign"

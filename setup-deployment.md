@@ -177,4 +177,4 @@ You can setup this protection in the file location `config/system.php` in the se
 
     'default_mask' => ['file' => '644', 'folder' => '755'],
 
-> **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.
+> **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your control panel and set them.
