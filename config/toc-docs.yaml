@@ -5,7 +5,7 @@ Getting Started:
     setup/configuration: "Configuration"
     setup/deployment: "Deployment"
 
-Concepts:
+Themes:
   icon: "icon-magic"
   pages:
     cms/themes: "Themes"
@@ -14,7 +14,6 @@ Concepts:
     cms/layouts: "Layouts"
     cms/content: "Content Blocks"
     cms/components: "Components"
-    cms/mediamanager: "Media Manager"
     markup: "Markup Guide@"
 
 AJAX:
@@ -26,6 +25,11 @@ AJAX:
     ajax/attributes-api: "Data Attributes API"
     ajax/javascript-api: "JavaScript API"
     ajax/extras: "Extra Features"
+
+Media Manager:
+  icon: "icon-picture"
+  pages:
+    media/introduction: "Introduction"
 
 Themes:
   icon: "icon-picture"

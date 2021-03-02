@@ -89,6 +89,7 @@ The October CMS platform is updated all the time and may contain a recent bug fi
     "october/rain": "dev-develop",
     "october/system": "dev-develop",
     "october/backend": "dev-develop",
+    "october/editor": "dev-develop",
     "october/cms": "dev-develop",
     "october/media": "dev-develop",
 
