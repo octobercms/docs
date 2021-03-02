@@ -7,13 +7,14 @@
     - [Configuration Section](#configuration-section)
     - [PHP Code Section](#php-section)
     - [Twig Markup Section](#twig-section)
-- [Theme Logging](#theme-logging)
 - [Database Driven Themes](#database-driven-themes)
+- [Child Themes](#child-themes)
+- [Theme Logging](#theme-logging)
 
 <a name="introduction"></a>
 ## Introduction
 
-Themes define the appearance of your website or web application built with October CMS. October themes are completely file-backed and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+Themes define the appearance of your website or web application built with October CMS. They are completely file-backed and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
 Themes are directories that reside in the **themes** directory by default. Themes can contain the following objects:
 
@@ -51,7 +52,7 @@ Below, you can see an example theme directory structure. Each October theme is r
 <a name="subdirectories"></a>
 ### Subdirectories
 
-October supports single level subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have any structure. This simplifies the organization of large websites. In the example directory structure below, you can see that the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
+October CMS supports single level subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have any structure. This simplifies the organization of large websites. In the example directory structure below, you can see that the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
     themes/
       website/
@@ -158,28 +159,37 @@ As a general way of setting variables, you should use the array access method on
 <a name="twig-section"></a>
 ### Twig Markup Section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October](../markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
 
 More information can be found [in the Markup guide](../markup).
-
-<a name="theme-logging"></a>
-## Theme Logging
-
-October CMS has the ability to record every change made to a theme, called ThemeL Logging and is disabled by default.
-
-Since layouts and pages store most of the data in flat files, it's possible for you or your clients to accidentally lose content. For example, switching the layout of a page will modify the scaffold of the page, and, as such, will result in data loss.
-
-To enable Theme Logging, simply go to **Settings > Log Settings** and enable **Log Theme Changes**. All changes are now logged.
-
-The theme change log can be viewed at **Settings > Theme log**. Each change has an overview of what has been added/removed, along with a copy of the changed file before and after. You can use this information to decide the appropriate action, to aid the reversion of these changes, if necessary.
 
 <a name="database-driven-themes"></a>
 ## Database Driven Themes
 
-October CMS comes with another very useful feature, disabled by default, called Database Driven Themes. When this feature is enabled (by setting `cms.databaseTemplates` to `true`, or `null` when `app.debug` is `false`); the database layer stores all modified CMS files in the database. Files that are not modified continue to be loaded from the filesystem. There is a [`theme:sync $themeDir`](../console/commands#theme-sync-command) console command that can be used to sync changes between the filesystem and database.
+In some cases you may not have access to write to the filesystem to make changes to the theme. Database driven themes allows you to store all changes to CMS templates in the database.
 
-Files modified in the database are cached to indicate that they should be loaded from the database.
+To enable this feature for a single theme, navigate to **Settings > Frontend Theme**, select **Edit Properties** and check the checkbox called **Save Changes in Database**.
 
->**NOTE:** Themes can store templates in the database if `cms.databaseTemplates` is enabled, see the [database driven themes](#database-driven-themes) section for more information.
+Alternatively you can enable this feature globally for all themes with the config item `cms.database_templates` or using the environment variable.
 
->**NOTE:** All CMS template objects (ex. `Layout`, `Page`, `Content`, `Partial`, `Meta`, etc) are stored in the database when this feature is enabled and a change is made to the template in question; however theme asset files will **not** be.
+    CMS_DB_TEMPLATES=true
+
+> **Note**: Assets files like images and stylesheets do not save in the database and cannot be modified without access to the filesystem.
+
+<a name="child-themes"></a>
+## Child Themes
+
+Child themes allow for the possibility of theme inheritence. A good use of this is when you have a third party theme or a theme that is in read-only mode. A child theme will reference a parent and use it as a fallback source.
+
+If a page named `home.htm` exists in the parent theme but not the child, it treats it the same as if it did; the URL is active, and you can open the page like normal. When saving the page in the backend area, a new file is created in the child theme to override the contents.
+
+To enable this feature for a theme, navigate to **Settings > Frontend Theme**, select **Edit Properties** and select a parent from the **Parent Theme** dropdown list.
+
+<a name="theme-logging"></a>
+## Theme Logging
+
+Since layouts and pages store most of the data in flat files, you or your clients can lose content accidentally. For example, switching the layout of a page will modify the scaffold of the page and, as such, will result in data loss.
+
+October CMS can record every change made to a theme called Theme Logging, and this feature is disabled by default. To enable Theme Logging, go to **Settings > Log Settings** and enable **Log Theme Changes**.
+
+You may now view the theme changelog via **Settings > Theme Log** where you can observe an overview of each change. You can use this information to decide the appropriate action to aid the regression of these changes, if necessary.
