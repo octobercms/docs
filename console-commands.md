@@ -34,7 +34,7 @@ October CMS includes several command-line interface (CLI) commands and utilities
 <a name="console-install-command"></a>
 ### Install command
 
-The `october:install` command will guide you through the process of setting up OctoberCMS for the first time. It will ask for the database configuration, application URL, encryption key and administrator details.
+The `october:install` command will guide you through the process of setting up October CMS for the first time. It will ask for the database configuration, application URL, encryption key and administrator details.
 
     php artisan october:install
 

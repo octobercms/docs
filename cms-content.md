@@ -49,6 +49,6 @@ More information can be found [in the Markup guide](../markup/tag-content).
 
 You may register variables that are globally available to all content blocks with the `View::share` method.
 
-    View::share('site_name', 'OctoberCMS');
+    View::share('site_name', 'October CMS');
 
 This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{site_name}` will be available inside all content blocks.

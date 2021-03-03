@@ -7,7 +7,7 @@
 - [Theme dependencies](#dependencies)
 - [Localization](#localization)
 
-The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the OctoberCMS Marketplace.
+The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the October CMS Marketplace.
 
 <a name="theme-information"></a>
 ## Theme information file
@@ -27,15 +27,15 @@ Field | Description
 **homepage** | specifies the author website URL, required.
 **description** | the theme description, required.
 **previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
-**code** | the theme code, optional. The value is used on the OctoberCMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
+**code** | the theme code, optional. The value is used on the October CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
 **form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
 **require** | an array of plugin names used for [theme dependencies](#dependencies), optional.
 
 Example of the theme information file:
 
-    name: "OctoberCMS Demo"
+    name: "October CMS Demo"
     description: "Demonstrates the basic concepts of the front-end theming."
-    author: "OctoberCMS"
+    author: "October CMS"
     homepage: "http://octobercms.com"
     code: "demo"
 
@@ -113,7 +113,7 @@ You may also define the configuration in a separate file, where the path is rela
 <a name="combiner-vars"></a>
 ### Combiner variables
 
-Assets combined using the `| theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
     form:
         fields:
@@ -126,7 +126,7 @@ Assets combined using the `| theme` [filter and combiner](../markup/filter-theme
 
 In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
 
-    <link href="{{ ['assets/less/theme.less'] | theme }}" rel="stylesheet">
+    <link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet" />
 
 Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 
@@ -137,7 +137,7 @@ Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 
 A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
 
-    name: "OctoberCMS Demo"
+    name: "October CMS Demo"
     # [...]
 
     require:
@@ -171,7 +171,7 @@ The **lang.php** file should define and return an array of any depth, for exampl
 
     <?php return [
         'options' => [
-            'website_name' => 'OctoberCMS'
+            'website_name' => 'October CMS'
         ]
     ];
 

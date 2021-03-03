@@ -2,7 +2,7 @@
 
 - [Resize parameters](#resize-parameters)
 - [Available modes](#available-modes)
-- [Resize sources](#resize-sources)
+<!-- - [Resize sources](#resize-sources) -->
 
 >**Note:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
 
@@ -36,6 +36,7 @@ Mode | Description
 `crop` | Crop to the given dimensions after fitting as much of the image as possible inside those
 `fit` | Fit the image inside the given maximal dimensions, keeping the aspect ratio
 
+<!--
 <a name="resize-sources"></a>
 ## Resize sources
 
@@ -48,3 +49,4 @@ The available sources that images can be resized from are as follows:
 - Models that extend the `\October\Rain\Database\Attach\File` model
 
 Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](../api/system/resizer/getavailablesources)
+-->

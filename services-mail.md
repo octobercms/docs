@@ -209,7 +209,7 @@ If you are planning to use queued emails make sure that the path of the file is 
 
     <body>
         Here is an image:
-        {% set pathToFile = 'storage/app/media/path/to/file.jpg' | app %}
+        {% set pathToFile = 'storage/app/media/path/to/file.jpg'|app %}
         <img src="{{ message.embed(pathToFile) }}">
     </body>
 
@@ -277,7 +277,7 @@ Mail views reside in the file system and the code used represents the path to th
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
 
-    subject = "Your product has been added to OctoberCMS project"
+    subject = "Your product has been added to October CMS project"
     ==
 
     Hi {{ name }},
@@ -297,7 +297,7 @@ The content inside a mail view file can include up to 3 sections: **configuratio
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
-    subject = "Your product has been added to OctoberCMS project"
+    subject = "Your product has been added to October CMS project"
     ==
 
     <p>Hi {{ name }},</p>
@@ -389,7 +389,7 @@ The methods should return an array of [mail view names](#mail-views). The array 
 
 You may register variables that are globally available to all mail templates with the `View::share` method.
 
-    View::share('site_name', 'OctoberCMS');
+    View::share('site_name', 'October CMS');
 
 This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 

@@ -11,7 +11,7 @@ The user management for the back-end includes features like roles, groups, permi
 <a name="users-and-permissions"></a>
 ## Users and Permissions
 
-Access to all parts of an OctoberCMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user.
+Access to all parts of an October CMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user.
 
 Superusers have access to everything in the system and are only manageable by themselves or other superusers; they are not visible to nor editable by regular administrators, not even if an administrator has the `backend.manage_users` permission.
 

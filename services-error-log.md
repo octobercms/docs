@@ -16,7 +16,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-When you first start using OctoberCMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
+When you first start using October CMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
 
 1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
 1. Alternatively it can be viewed via the Administration area by navigating to *System > Logs > Event Log*.

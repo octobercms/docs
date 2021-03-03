@@ -40,7 +40,7 @@ When publishing your plugins or themes to the marketplace, you may wish to also 
     {
         "name": "october/oc-demo-plugin",
         "type": "october-plugin",
-        "description": "Demo OctoberCMS plugin",
+        "description": "Demo October CMS plugin",
         "keywords": ["october", "cms", "demo", "plugin"],
         "license": "MIT",
         "authors": [
@@ -103,7 +103,7 @@ If you are developing with your plugin, you can run `composer update` from the r
 <a name="laravel-packages"></a>
 ## Using Laravel Packages
 
-When including Laravel packages in OctoberCMS plugins there are a few things to take note of.
+When including Laravel packages in October CMS plugins there are a few things to take note of.
 
 <a name="laravel-config-files"></a>
 ### Configuration Files
@@ -178,15 +178,15 @@ class Plugin extends PluginBase
     {
         // Instantiate the AliasLoader
         $aliasLoader = AliasLoader::getInstance();
-        
+
         // Register the aliases provided by the packages used by your plugin
         $aliasLoader->alias('Purifier', \Mews\Purifier\Facades\Purifier::class);
-    
+
         // Register the service providers provided by the packages used by your plugin
         App::register(\Mews\Purifier\PurifierServiceProvider::class);
     }
 }
-```       
+```
 
 <a name="laravel-migrations-models"></a>
 ### Migrations & Models

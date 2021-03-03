@@ -173,8 +173,8 @@ Let's say we used the first example above as the template content, calling the `
 
 Just like any templating engine, passing an array of variables to the first argument of `render` will replace the variables inside the template. Here the default value of `websiteName` is replaced with our new value:
 
-    echo $syntax->render(['websiteName' => 'OctoberCMS']);
-    // <h1>OctoberCMS</h1>
+    echo $syntax->render(['websiteName' => 'October CMS']);
+    // <h1>October CMS</h1>
 
 As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-parser).
 
@@ -299,7 +299,7 @@ Renders in Twig as
 File uploader input for files. This tag value will contain the full path to the file.
 
     {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
-    
+
 #### Color picker
 
 Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
@@ -342,10 +342,10 @@ Calling `$syntax->toEditor` will return a different array for a repeater field:
 
         ]
     ]
-    
+
 The repeater field also supports group mode, to be used with the dynamic syntax parser as follows:
 
-    {variable name="sections" type="repeater" prompt="Add another section" tab="Sections" 
+    {variable name="sections" type="repeater" prompt="Add another section" tab="Sections"
         groups="$/author/plugin/repeater_fields.yaml"}{/variable}
 
 This is an example of the repeater_fields.yaml group configuration file:
@@ -367,5 +367,5 @@ This is an example of the repeater_fields.yaml group configuration file:
                 span: auto
                 label: Details
                 type: textarea
-                
-For more information about the repeater group mode see [Repeater Widget](../backend/forms#widget-repeater).                
+
+For more information about the repeater group mode see [Repeater Widget](../backend/forms#widget-repeater).

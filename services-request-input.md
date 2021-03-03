@@ -80,7 +80,7 @@ Add names of the cookies that should not be encrypted or decrypted to `unencrypt
     | Cookies without encryption
     |--------------------------------------------------------------------------
     |
-    | OctoberCMS encrypts/decrypts cookies by default. You can specify cookies
+    | October CMS encrypts/decrypts cookies by default. You can specify cookies
     | that should not be encrypted or decrypted here. This is useful, for
     | example, when you want to pass data from frontend to server side backend
     | via cookies, and vice versa.
