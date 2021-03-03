@@ -115,6 +115,6 @@ Extras:
   icon: "icon-question-sign"
   pages:
     help/unit-testing: "Unit Testing"
-    help/using-composer: "Using Composer"
+    help/publishing-packages: "Publishing Packages"
     ../help/guidelines/quality: "Quality Guidelines@"
     ../help/guidelines/developer: "Developer Guide@"

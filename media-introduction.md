@@ -83,7 +83,7 @@ Event | Description | Parameters
 
 To hook into these events, either extend the `Media\Widgets\MediaManager` class directly
 
-    Media\Widgets\MediaManager::extend(function($widget) {
+    \Media\Widgets\MediaManager::extend(function($widget) {
         $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
             // Update custom references to path here
         });
@@ -91,6 +91,6 @@ To hook into these events, either extend the `Media\Widgets\MediaManager` class 
 
 Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Media\Widgets\MediaManager` object as the first parameter)
 
-    Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
+    \Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
         // Update custom references to path here
     });

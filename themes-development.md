@@ -1,16 +1,16 @@
 # Developing themes
 
-- [Theme information file](#theme-information)
-- [Version file](#version-file)
-- [Theme preview image](#preview-image)
-- [Theme customization](#customization)
-- [Theme dependencies](#dependencies)
-- [Localization](#localization)
+- [Theme Information File](#theme-information)
+- [Version File](#version-file)
+- [Theme Preview Image](#preview-image)
+- [Theme Customization](#customization)
+- [Theme Dependencies](#dependencies)
+<!-- - [Localization](#localization) -->
 
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the October CMS Marketplace.
 
 <a name="theme-information"></a>
-## Theme information file
+## Theme Information File
 
 The theme information file **theme.yaml** contains the theme description, the author name, URL of the author's website and some other information. The file should be placed to the theme root directory:
 
@@ -40,7 +40,7 @@ Example of the theme information file:
     code: "demo"
 
 <a name="version-file"></a>
-## Version file
+## Version File
 
 The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory:
 
@@ -56,7 +56,7 @@ The file format is following:
     1.0.3: Some features are removed
 
 <a name="preview-image"></a>
-## Theme preview image
+## Theme Preview Image
 
 The theme preview image is used in the back-end theme selector. The image file **theme-preview.png** should be placed to the theme's **assets/images** directory:
 
@@ -69,7 +69,7 @@ The theme preview image is used in the back-end theme selector. The image file *
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
 
 <a name="customization"></a>
-## Theme customization
+## Theme Customization
 
 Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms#form-fields) for more information.
 
@@ -111,7 +111,7 @@ You may also define the configuration in a separate file, where the path is rela
             default: My Amazing Site!
 
 <a name="combiner-vars"></a>
-### Combiner variables
+### Combiner Variables
 
 Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
@@ -133,7 +133,7 @@ Using some example content inside **themes/yourtheme/assets/less/theme.less**:
     a { color: @link-color }
 
 <a name="dependencies"></a>
-## Theme dependencies
+## Theme Dependencies
 
 A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
 
@@ -146,6 +146,7 @@ A theme can depend on plugins by defining a **require** option in the [Theme inf
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
 
+<!--
 <a name="localization"></a>
 ## Localization
 
@@ -176,3 +177,4 @@ The **lang.php** file should define and return an array of any depth, for exampl
     ];
 
 You are then able to reference the keys using `themes.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `themes.acme::lang.options.website_name`
+-->

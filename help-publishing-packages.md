@@ -1,11 +1,10 @@
-# Composer
+# Publishing Packages
 
 - [Introduction](#introduction)
-    - [Converting from Basic Install](#converting-from-basic-install)
-    - [Development Branch](#development-branch)
-- [Publishing Plugins or Themes](#publishing-products)
-- [Package Descriptions](#package-descriptions)
 - [Marketplace Builds](#marketplace-builds)
+- [Publishing Plugins](#publishing-plugins)
+- [Publishing Themes](#publishing-themes)
+- [Package Descriptions](#package-descriptions)
 - [Using Laravel Packages](#laravel-packages)
     - [Configuration Files](#laravel-config-files)
     - [Aliases & Service Providers](#laravel-aliases-service-providers)
@@ -16,24 +15,30 @@
 
 Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is recommended for more advanced users and developers. See the console command on how to [first install October using composer](../console/commands#console-install-composer).
 
-<a name="converting-from-basic-install"></a>
-### Converting from Basic Install
+<a name="marketplace-builds"></a>
+## Marketplace Builds
 
-In order to use Composer with an October instance that has been installed using the Wizard or simple CLI installation process, simply copy the latest [`tests/` directory](https://github.com/octobercms/october/tree/develop/tests) and [`composer.json`](https://github.com/octobercms/october/tree/develop/composer.json) file from [GitHub](https://github.com/octobercms/october/tree/develop) into your October instance and then run `composer install`.
+When you publish your plugin or theme to the marketplace, the server will conveniently pull in all the packages defined in your composer file. This makes the product ready for others to use, even if they don't use composer. Here's how it works:
 
-<a name="development-branch"></a>
-### Development Branch
+1. As a plugin or theme developer, you can define your external dependencies and packages in `composer.json`, including other plugins or themes.
 
-If you plan on submitting pull requests to the October CMS project via GitHub, or are actively developing a project based on October CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
+2. The server will attempt to remove any core dependencies that are inherently available in the core, including Laravel, October and its related packages.
 
-    "october/rain": "dev-develop as 1.1",
-    "october/system": "dev-develop",
-    "october/backend": "dev-develop",
-    "october/cms": "dev-develop",
-    "laravel/framework": "~6.0",
+3. The server will run  `composer install` in your plugin or themes directory, pulling dependencies into the `vendor` directory, local to that package.
 
-<a name="publishing-products"></a>
-## Publishing Plugins or Themes
+4. The files `composer.json` and `composer.lock` are then removed to prevent the package files from becoming duplicated and a potential double up of dependencies.
+
+5. The final result is packaged up and ready for consumption by October CMS platforms using one-click updates.
+
+It is a good idea not to include the `vendor` directory when publishing your plugin or theme to the marketplace, the server will handle this for you.
+
+If you are developing with your plugin, you can run `composer update` from the root directory. A special package called `wikimedia/composer-merge-plugin` will scan the plugins directory and merge the dependencies in to the main composer file.
+
+<a name="publishing-plugins"></a>
+## Publishing Plugins
+
+<a name="publishing-themes"></a>
+## Publishing Themes
 
 When publishing your plugins or themes to the marketplace, you may wish to also make them available via composer. An example `composer.json` file for a plugin is included below:
 
@@ -80,25 +85,6 @@ There are many different moving parts that come together to make the October CMS
 - **Themes** contain static file content that is used to manage the front end structure of your website and use the package type `october-theme`. They are located within the `/themes` directory. The `Cms` module is responsible for managing themes and determining what theme is currently active.
 
 - **Vendor** packages are included via Composer in either the project's `/vendor` directory or can sometimes be found in plugin-specific `/vendor` directories. The project vendor directory takes priority over and plugin vendor directories that appear in the system.
-
-<a name="marketplace-builds"></a>
-## Marketplace Builds
-
-When you publish your plugin or theme to the marketplace, the server will conveniently pull in all the packages defined in your composer file. This makes the product ready for others to use, even if they don't use composer. Here's how it works:
-
-1. As a plugin or theme developer, you can define your external dependencies and packages in `composer.json`, including other plugins or themes.
-
-2. The server will attempt to remove any core dependencies that are inherently available in the core, including Laravel, October and its related packages.
-
-3. The server will run  `composer install` in your plugin or themes directory, pulling dependencies into the `vendor` directory, local to that package.
-
-4. The files `composer.json` and `composer.lock` are then removed to prevent the package files from becoming duplicated and a potential double up of dependencies.
-
-5. The final result is packaged up and ready for consumption by October CMS platforms using one-click updates.
-
-It is a good idea not to include the `vendor` directory when publishing your plugin or theme to the marketplace, the server will handle this for you.
-
-If you are developing with your plugin, you can run `composer update` from the root directory. A special package called `wikimedia/composer-merge-plugin` will scan the plugins directory and merge the dependencies in to the main composer file.
 
 <a name="laravel-packages"></a>
 ## Using Laravel Packages
