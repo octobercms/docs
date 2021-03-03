@@ -2,7 +2,7 @@
 
 The `|theme` filter returns an address relative to the active theme path of the website. The result is an absolute URL, including domain and protocol, to the asset specified in the filter parameter. Theme assets usually reside in the **assets** subdirectory of a theme directory.
 
-    <script type="text/javascript" src="{{ 'assets/js/menu.js' |theme }}"></script>
+    <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
 
 If the website address is __https://octobercms.com__ and the active theme is called `website` the above example would output the following:
 

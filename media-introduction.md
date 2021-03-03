@@ -4,6 +4,17 @@
 - [Audio and Video Players](#audio-and-video-players)
 - [Events](#events)
 
+October CMS ships with a media manager built in, making it easy to publish larger assets such as video and photos. These assets can then be inserted to your pages and content files via the user interface.
+
+![image](https://github.com/octobercms/docs/blob/master/images/media-manager.png?raw=true) {.img-responsive .frame}
+
+<a name="media-links"></a>
+## Linking to Media
+
+In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [filter](../markup/filter-media).
+
+    {{ 'relative/path/to/asset.jpg'|media }}
+
 <a name="configuration-options"></a>
 ## Configuration Options
 
@@ -14,10 +25,9 @@ There are several options that allow you to fine-tune the Media Manager. All of 
         'media' => [
             ...
             'ignore' => ['.svn', '.git', '.DS_Store'],
-            'image_extensions => ['png', 'jpg'],
+            'image_extensions' => ['png', 'jpg'],
         ]
     ],
-
 
 Parameter | Value
 ------------- | -------------
