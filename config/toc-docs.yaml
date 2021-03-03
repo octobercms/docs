@@ -3,7 +3,9 @@ Getting Started:
   pages:
     setup/installation: "Installation"
     setup/configuration: "Configuration"
+    setup/structure: "Directory Structure"
     setup/deployment: "Deployment"
+    setup/updating: "Upgrade Guide"
 
 CMS:
   icon: "icon-magic"
@@ -114,7 +116,7 @@ Console:
 Extras:
   icon: "icon-question-sign"
   pages:
-    help/unit-testing: "Unit Testing"
     help/publishing-packages: "Publishing Packages"
     ../help/guidelines/quality: "Quality Guidelines@"
     ../help/guidelines/developer: "Developer Guide@"
+    help/unit-testing: "Unit Testing"

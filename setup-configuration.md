@@ -6,7 +6,6 @@
     - [Debug Mode](#debug-mode)
     - [Safe Mode](#safe-mode)
     - [CSRF protection](#csrf-protection)
-    - [Bleeding Edge Updates](#edge-updates)
 
 All of the configuration files for October CMS are stored in the **config** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
 
@@ -80,17 +79,3 @@ October CMS provides an easy method of protecting your application from cross-si
     ENABLE_CSRF=true
 
 While CSRF protection is enabled by default, you can disable it with the `enable_csrf_protection` parameter in the `config/system.php` configuration file, or the sourced value from `ENABLE_CSRF` environment variable.
-
-<a name="edge-updates"></a>
-### Bleeding Edge Updates
-
-The October CMS platform is updated all the time and may contain a recent bug fix that won't be available until a new version is created. If you'd like to use the bleeding edge version of October CMS, simply target the `develop` branch in your composer file.
-
-    "october/rain": "dev-develop",
-    "october/system": "dev-develop",
-    "october/backend": "dev-develop",
-    "october/editor": "dev-develop",
-    "october/cms": "dev-develop",
-    "october/media": "dev-develop",
-
-> **Note**: This naming convention may also apply to some plugins and themes.

@@ -1,6 +1,7 @@
 # Installation
 
-- [Command-Line Installation](#command-line-installation)
+- [Installing Composer](#install-composer)
+- [Installing October CMS](#install-october)
 - [Post-Installation Steps](#post-install-steps)
     - [Review Configuration](#config-review)
     - [Setting Up The Scheduler](#crontab-setup)
@@ -15,9 +16,14 @@ October CMS makes one bold but obvious assumption: clients don't build websites;
 Whether you're new to web development or have years of experience, October CMS is a platform that makes it easy to create bespoke experiences for you and your clients. We hope you enjoy your journey with us and discover happiness in simplicity.
 
 <a name="command-line-installation"></a>
-## Installing October CMS
+## Installing Composer
 
-Before you proceed, you should check that your computer or server meets the [minimum system requirements](#system-requirements), including having PHP and [Composer](http://getcomposer.org/) installed.
+October CMS uses [Composer](http://getcomposer.org/) to manage its dependencies. So before getting started, you will need to make sure you have Composer installed.
+
+You should also check that your computer or server meets the [minimum system requirements](#system-requirements) for running the PHP application.
+
+<a name="install-october"></a>
+## Installing October CMS
 
 You can then create a new October CMS project by using `create-project` command in your terminal. The following creates a new project in a directory called **myoctober**.
 

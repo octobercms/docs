@@ -1,10 +1,12 @@
 # Publishing Packages
 
 - [Introduction](#introduction)
-- [Marketplace Builds](#marketplace-builds)
 - [Publishing Plugins](#publishing-plugins)
 - [Publishing Themes](#publishing-themes)
-- [Package Descriptions](#package-descriptions)
+
+- [Declaring Dependencies](#dependencies)
+- [Tagging a Release](#tagging-release)
+
 - [Using Laravel Packages](#laravel-packages)
     - [Configuration Files](#laravel-config-files)
     - [Aliases & Service Providers](#laravel-aliases-service-providers)
@@ -13,78 +15,63 @@
 <a name="introduction"></a>
 ## Introduction
 
-Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is recommended for more advanced users and developers. See the console command on how to [first install October using composer](../console/commands#console-install-composer).
+October CMS uses [Composer](https://getcomposer.org/) to publish packages and is fully compatible, so their documentation applies as an extension of this article. However, a composer version is not the same as an October CMS version and these need to be managed separately.
 
-<a name="marketplace-builds"></a>
-## Marketplace Builds
+To publish your plugin or theme on the October CMS marketplace, you will need to first become an author and choose an author code. This code will determine the name of your packages and cannot be changed later.
 
-When you publish your plugin or theme to the marketplace, the server will conveniently pull in all the packages defined in your composer file. This makes the product ready for others to use, even if they don't use composer. Here's how it works:
+Your package also must reside in a source control repository that can be accessed by the October CMS gateway, such as [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/). For private packages, the server can access them using the credentials you provide during the publishing process.
 
-1. As a plugin or theme developer, you can define your external dependencies and packages in `composer.json`, including other plugins or themes.
-
-2. The server will attempt to remove any core dependencies that are inherently available in the core, including Laravel, October and its related packages.
-
-3. The server will run  `composer install` in your plugin or themes directory, pulling dependencies into the `vendor` directory, local to that package.
-
-4. The files `composer.json` and `composer.lock` are then removed to prevent the package files from becoming duplicated and a potential double up of dependencies.
-
-5. The final result is packaged up and ready for consumption by October CMS platforms using one-click updates.
-
-It is a good idea not to include the `vendor` directory when publishing your plugin or theme to the marketplace, the server will handle this for you.
-
-If you are developing with your plugin, you can run `composer update` from the root directory. A special package called `wikimedia/composer-merge-plugin` will scan the plugins directory and merge the dependencies in to the main composer file.
+Be sure to start your package `name` with **oc-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer#repository-naming).
 
 <a name="publishing-plugins"></a>
 ## Publishing Plugins
 
-<a name="publishing-themes"></a>
-## Publishing Themes
-
-When publishing your plugins or themes to the marketplace, you may wish to also make them available via composer. An example `composer.json` file for a plugin is included below:
+When publishing your plugin the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-plugin** and include the `composer/installers` package as a dependency.
 
     {
-        "name": "october/oc-demo-plugin",
+        "name": "acme/blog-plugin",
         "type": "october-plugin",
-        "description": "Demo October CMS plugin",
-        "keywords": ["october", "cms", "demo", "plugin"],
-        "license": "MIT",
-        "authors": [
-            {
-                "name": "Alexey Bobkov",
-                "email": "hello@octobercms.com",
-                "role": "Co-founder"
-            }
-        ],
+        "description": "Enter a meaningful description here",
         "require": {
-            "php": ">=7.2",
             "composer/installers": "~1.0"
         }
     }
 
-Be sure to start your package `name` with **oc-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer#repository-naming).
+<a name="publishing-themes"></a>
+## Publishing Themes
 
-The `type` field is a key definition for ensuring that your plugin or theme arrives at the correct location upon installation. Use the following types:
+When publishing your theme the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-theme** and include the `composer/installers` package as a dependency.
 
-Product | Type
-------- | -------------
-Plugin  | `october-plugin`
-Theme   | `october-theme`
-Module  | `october-module`
+    {
+        "name": "acme/boilerplate-theme",
+        "type": "october-theme",
+        "description": "Enter a meaningful description here",
+        "require": {
+            "composer/installers": "~1.0"
+        }
+    }
 
 > **Reminder**: Be sure to specify any dependencies in your composer file as you would using the  `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions)
 
-<a name="package-descriptions"></a>
-## Package Descriptions
+<a name="dependencies"></a>
+## Declaring Dependencies
 
-There are many different moving parts that come together to make the October CMS platform work. Here we will describe the various packages you will likely encounter:
+Plugins and themes alike can depend on other packages.
 
-- **Modules** are the core packages that are included with October, you can think of them as "internal plugins" that provide core functionality. Modules use the package type `october-module` and are located within the `/modules` directory. They are loaded manually via configuration and at least one module must be present in the `cms.loadModules` configuration item for the system to operate.
+<a name="tagging-release"></a>
+## Tagging a Release
 
-- **Plugins** extend the core functionality of October and are packages of type `october-plugin`. They are located within the `/plugins` directory. The `System` module is responsible for the loading of plugins which happens automatically when found in the file system, unless they are explicitly disabled.
+Packages in October CMS follow semantic versioning and Composer uses git to determine the stability and impact of a given release.
 
-- **Themes** contain static file content that is used to manage the front end structure of your website and use the package type `october-theme`. They are located within the `/themes` directory. The `Cms` module is responsible for managing themes and determining what theme is currently active.
+Listing your tags
 
-- **Vendor** packages are included via Composer in either the project's `/vendor` directory or can sometimes be found in plugin-specific `/vendor` directories. The project vendor directory takes priority over and plugin vendor directories that appear in the system.
+    $ git tag
+    v1.0
+    v2.0
+
+Creating a tag
+
+    git tag -a v2.0.1 -m "Version 2 is here!"
 
 <a name="laravel-packages"></a>
 ## Using Laravel Packages

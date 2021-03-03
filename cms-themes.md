@@ -24,7 +24,7 @@ Object | Description
 [Partials](partials) | contain reusable chunks of HTML markup.
 [Layouts](layouts) | define the page scaffold.
 [Content files](content) | text, HTML, or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
-**Asset files** | are resource files like images, CSS and JavaScript files.
+**Asset files** | are resource files like images, CSS, and JavaScript files.
 
 <a name="directory-structure"></a>
 ## Directory Structure
