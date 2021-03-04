@@ -441,6 +441,7 @@ Supplying the dropdown options to the model class:
         return ['published' => 'Published', ...];
     }
 
+<!--
 The fifth method allows you to specify a static method on a class to return the options:
 
     status:
@@ -468,8 +469,7 @@ Supplying the dropdown options to the model class:
     {
         return ['published' => 'Published', ...];
     }
-
-
+-->
 
 To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
