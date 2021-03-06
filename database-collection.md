@@ -1,12 +1,8 @@
 # Database Collection
 
 - [Introduction](#introduction)
-- [Available methods](#available-methods)
-- [Custom collections](#custom-collections)
-- [Data feed](#data-feed)
-    - [Creating a new feed](#creating-feed)
-    - [Processing results](#data-feed-processing)
-    - [Ordering results](#data-feed-ordering)
+- [Available Methods](#available-methods)
+- [Custom Collections](#custom-collections)
 
 <a name="introduction"></a>
 ## Introduction
@@ -36,7 +32,7 @@ However, collections are much more powerful than arrays and expose a variety of 
 
 <a name="usage-examples"></a>
 <a name="available-methods"></a>
-## Available methods
+## Available Methods
 
 All model collections extend the base collection object; therefore, they inherit all of the powerful methods provided by the base collection class.
 
@@ -137,7 +133,7 @@ The `unique` method returns all of the unique models in the collection. Any mode
     $users = $users->unique();
 
 <a name="custom-collections"></a>
-## Custom collections
+## Custom Collections
 
 If you need to use a custom `Collection` object with your own extension methods, you may override the `newCollection` method on your model:
 
@@ -159,61 +155,3 @@ Once you have defined a `newCollection` method, you will receive an instance of 
     class CustomCollection extends CollectionBase
     {
     }
-
-<a name="data-feed"></a>
-## Data feed
-
-A data feed allows you to combine multiple model classes into a single collection. This can be useful for creating feeds and streams of data while supporting the use of pagination. It works by adding model objects in a prepared state, before the `get` method is called, which are then combined to make a collection that behaves the same as a regular dataset.
-
-The `DataFeed` class mimics a regular model and supports `limit` and `paginate` methods.
-
-<a name="creating-feed"></a>
-### Creating a new feed
-
-The next example will combine the User, Post and Comment models in to a single collection and returns the first 10 records.
-
-    $feed = new October\Rain\Database\DataFeed;
-    $feed->add('user', new User);
-    $feed->add('post', Post::where('category_id', 7));
-
-    $feed->add('comment', function() {
-        $comment = new Comment;
-        return $comment->where('approved', true);
-    });
-
-    $results = $feed->limit(10)->get();
-
-<a name="data-feed-processing"></a>
-### Processing results
-
-The `get` method will return a `Collection` object that contains the results. Records can be differentiated by using the `tag_name` attribute which was set as the first parameter when the model was added.
-
-    foreach ($results as $result) {
-
-        if ($result->tag_name == 'post')
-            echo "New Blog Post: " . $record->title;
-
-        elseif ($result->tag_name == 'comment')
-            echo "New Comment: " . $record->content;
-
-        elseif ($result->tag_name == 'user')
-            echo "New User: " . $record->name;
-
-    }
-
-<a name="data-feed-ordering"></a>
-### Ordering results
-
-Results can be ordered by a single database column, either shared default used by all datasets or individually specified with the `add` method. The direction of results must also be shared.
-
-    // Ordered by updated_at if it exists, otherwise created_at
-    $feed->add('user', new User, 'ifnull(updated_at, created_at)');
-
-    // Ordered by id
-    $feed->add('comments', new Comment, 'id');
-
-    // Ordered by name (specified default below)
-    $feed->add('posts', new Post);
-
-    // Specifies the default column and the direction
-    $feed->orderBy('name', 'asc')->get();
