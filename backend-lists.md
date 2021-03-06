@@ -1,27 +1,27 @@
 # Backend lists
 
 - [Introduction](#introduction)
-- [Configuring the list behavior](#configuring-list)
-    - [Adding a toolbar](#adding-toolbar)
-    - [Filtering the list](#adding-filters)
-- [Defining list columns](#list-columns)
-    - [Column options](#column-options)
-- [Available column types](#column-types)
-- [Displaying the list](#displaying-list)
-- [Multiple list definitions](#multiple-list-definitions)
-- [Using list filters](#list-filters)
-    - [Scope options](#filter-scope-options)
+- [Configuring the List Behavior](#configuring-list)
+    - [Adding a Toolbar](#adding-toolbar)
+    - [Filtering the List](#adding-filters)
+- [Defining List Columns](#list-columns)
+    - [Column Options](#column-options)
+- [Available Column Types](#column-types)
+- [Displaying the List](#displaying-list)
+- [Multiple List Definitions](#multiple-list-definitions)
+- [Using List Filters](#list-filters)
+    - [Scope Options](#filter-scope-options)
     - [Filter Dependencies](#filter-scope-options)
-    - [Available scope types](#scope-types)
-- [Extending list behavior](#extend-list-behavior)
-    - [Overriding controller action](#overriding-action)
-    - [Overriding views](#overriding-views)
-    - [Extending column definitions](#extend-list-columns)
-    - [Inject CSS row class](#inject-row-class)
-    - [Extending filter scopes](#extend-filter-scopes)
-    - [Extending the model query](#extend-model-query)
-    - [Extending the records collection](#extend-records-collection)
-    - [Custom column types](#custom-column-types)
+    - [Available Scope Types](#scope-types)
+- [Extending List Behavior](#extend-list-behavior)
+    - [Overriding Controller Action](#overriding-action)
+    - [Overriding Ciews](#overriding-views)
+    - [Extending Column Definitions](#extend-list-columns)
+    - [Inject CSS Row Class](#inject-row-class)
+    - [Extending Filter Scopes](#extend-filter-scopes)
+    - [Extending the Model Query](#extend-model-query)
+    - [Extending the Records Collection](#extend-records-collection)
+    - [Custom Column Types](#custom-column-types)
 
 <a name="introduction"></a>
 ## Introduction
@@ -42,7 +42,7 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
 > **Note**: Very often the list and [form behavior](form) are used together in a same controller.
 
 <a name="configuring-list"></a>
-## Configuring the list behavior
+## Configuring the List Behavior
 
 The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical list behavior configuration file:
 
@@ -86,7 +86,7 @@ Option | Description
 **customViewPath** | specify a custom view path to override partials used by the list, optional.
 
 <a name="adding-toolbar"></a>
-### Adding a toolbar
+### Adding a Toolbar
 
 To include a toolbar with the list, add the following configuration to the list configuration YAML file:
 
@@ -120,7 +120,7 @@ The toolbar buttons partial referred above should contain the toolbar control de
     </div>
 
 <a name="adding-filters"></a>
-### Filtering the list
+### Filtering the List
 
 To filter a list by user defined input, add the following list configuration to the YAML file:
 
@@ -129,7 +129,7 @@ To filter a list by user defined input, add the following list configuration to 
 The **filter** option should make reference to a [filter configuration file](#list-filters) path or supply an array with the configuration.
 
 <a name="list-columns"></a>
-## Defining list columns
+## Defining List Columns
 
 List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
 
@@ -152,7 +152,7 @@ The next example shows the typical contents of a list column definitions file.
         email: Email
 
 <a name="column-options"></a>
-### Column options
+### Column Options
 
 For each column can specify these options (where applicable):
 
@@ -176,7 +176,7 @@ Option | Description
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 <a name="column-types"></a>
-## Available column types
+## Available Column Types
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
 <style>
@@ -200,6 +200,7 @@ There are various column types that can be used for the **type** setting, these 
 - [Time since](#column-timesince)
 - [Time tense](#column-timetense)
 - [Select](#column-select)
+- [Selectable](#column-selectable)
 - [Relation](#column-relation)
 - [Partial](#column-partial)
 - [Colorpicker](#column-colorpicker)
@@ -308,7 +309,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         type: time
 
 <a name="column-timesince"></a>
-### Time since
+### Time Since
 
 `timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
 
@@ -317,7 +318,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         type: timesince
 
 <a name="column-timetense"></a>
-### Time tense
+### Time Tense
 
 `timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
 
@@ -333,6 +334,28 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
     full_name:
         label: Full Name
         select: concat(first_name, ' ', last_name)
+
+<a name="column-selectable"></a>
+### Selectable
+
+`selectable` - takes the column value and matches it to the value in the records available options. Take the following array as an example. If the record value is set to `open` then the **Open** value is displayed in the column.
+
+    ['open' => 'Open', 'closed' => 'Closed']
+
+The available options are defined on the model as [dropdown options](forms#field-dropdown).
+
+    status:
+        label: Status
+        type: selectable
+
+They can also be specified explicitly in the `options` value.
+
+    status:
+        label: Status
+        type: selectable
+        options:
+            pending: Pending
+            active: Active
 
 <a name="column-relation"></a>
 ### Relation
@@ -388,14 +411,14 @@ To display a column that shows the number of related records, use the `useRelati
         type: colorpicker
 
 <a name="displaying-list"></a>
-## Displaying the list
+## Displaying the List
 
 Usually lists are displayed in the index [view](controllers-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
 
     <?= $this->listRender() ?>
 
 <a name="multiple-list-definitions"></a>
-## Multiple list definitions
+## Multiple List Definitions
 
 The list behavior can support multiple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
 
@@ -409,7 +432,7 @@ Each definition can then be displayed by passing the definition name as the firs
     <?= $this->listRender('templates') ?>
 
 <a name="list-filters"></a>
-## Using list filters
+## Using List Filters
 
 Lists can be filtered by [adding a filter definition](#adding-filters) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
@@ -459,7 +482,7 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
             conditions: created_at >= ':after' AND created_at <= ':before'
 
 <a name="filter-scope-options"></a>
-### Scope options
+### Scope Options
 
 For each scope you can specify these options (where applicable):
 
@@ -514,7 +537,7 @@ In the above example, the `city` scope will refresh when the `country` scope has
 > **Note**: Scope dependencies with `type: group` are only supported at this stage.
 
 <a name="scope-types"></a>
-### Available scope types
+### Available Scope Types
 
 These types can be used to determine how the filter scope should be displayed.
 
@@ -694,20 +717,20 @@ You may leave either the minimum value blank to search everything up to the maxi
         size: 2
 
 <a name="extend-list-behavior"></a>
-## Extending list behavior
+## Extending List Behavior
 
 Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
 
-- [Overriding controller action](#overriding-action)
-- [Overriding views](#overriding-views)
-- [Extending column definitions](#extend-list-columns)
-- [Inject CSS row class](#inject-row-class)
-- [Extending filter scopes](#extend-filter-scopes)
-- [Extending the model query](#extend-model-query)
-- [Custom column types](#custom-column-types)
+- [Overriding Controller Action](#overriding-action)
+- [Overriding Ciews](#overriding-views)
+- [Extending Column Definitions](#extend-list-columns)
+- [Inject CSS Row Class](#inject-row-class)
+- [Extending Filter Scopes](#extend-filter-scopes)
+- [Extending the Model Query](#extend-model-query)
+- [Custom Column Types](#custom-column-types)
 
 <a name="overriding-action"></a>
-### Overriding controller action
+### Overriding Controller Action
 
 You can use your own logic for the `index` action method in the controller, then optionally call the List behavior `index` parent method.
 
@@ -722,7 +745,7 @@ You can use your own logic for the `index` action method in the controller, then
     }
 
 <a name="overriding-views"></a>
-### Overriding views
+### Overriding Ciews
 
 The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
 
@@ -759,7 +782,7 @@ For example, to modify the list body row markup, create a file called `list/_lis
     </tr>
 
 <a name="extend-list-columns"></a>
-### Extending column definitions
+### Extending Column Definitions
 
 You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
 
@@ -808,7 +831,7 @@ Method | Description
 Each method takes an array of columns similar to the [list column configuration](#list-columns).
 
 <a name="inject-row-class"></a>
-### Inject CSS row class
+### Inject CSS Row Class
 
 You can inject a custom css row class by adding a `listInjectRowClass` method on the controller class. This method can take two arguments, **$record** will represent a single model record and **$definition** contains the name of the List widget definition. You can return any string value containing your row classes. These classes will be added to the row's HTML markup.
 
@@ -835,7 +858,7 @@ A special CSS class `nolink` is available to force a row to be unclickable, even
         }
 
 <a name="extend-filter-scopes"></a>
-### Extending filter scopes
+### Extending Filter Scopes
 
 You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
 
@@ -872,7 +895,7 @@ Method | Description
 **removeScope** | remove scope from filter widget
 
 <a name="extend-model-query"></a>
-### Extending the model query
+### Extending the Model Query
 
 The lookup query for the list [database model](../database/model) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
 
@@ -905,7 +928,7 @@ The [list filter](#list-filters) model query can also be extended by overriding 
     }
 
 <a name="extend-records-collection"></a>
-### Extending the records collection
+### Extending the Records Collection
 
 The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort` method on the [record collection](../database/collection) to change the sort order of the records.
 
@@ -917,7 +940,7 @@ The collection of records used by the list can be extended by overriding the `li
     }
 
 <a name="custom-column-types"></a>
-### Custom column types
+### Custom Column Types
 
 Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
 

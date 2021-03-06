@@ -5,27 +5,27 @@
     - [Create Page](#form-create-page)
     - [Update Page](#form-update-page)
     - [Preview Page](#form-preview-page)
-- [Defining form fields](#form-fields)
-    - [Tab options](#form-tab-options)
-    - [Field options](#form-field-options)
-- [Available field types](#field-types)
-- [Form widgets](#form-widgets)
-- [Form views](#form-views)
-    - [Create view](#form-create-view)
-    - [Update view](#form-update-view)
-    - [Preview view](#form-preview-view)
-- [Applying conditions to fields](#field-conditions)
-    - [Input preset converter](#field-input-preset)
-    - [Trigger events](#field-trigger-events)
-    - [Field dependencies](#field-dependencies)
-    - [Preventing a field from being submitted](#prevent-field-submission)
-- [Extending form behavior](#extend-form-behavior)
-    - [Overriding controller action](#overriding-action)
-    - [Overriding controller redirect](#overriding-redirect)
-    - [Extending form model query](#extend-model-query)
-    - [Extending form fields](#extend-form-fields)
-    - [Filtering form fields](#filter-form-fields)
-- [Validating form fields](#validate-form-fields)
+- [Defining Form Fields](#form-fields)
+    - [Tab Options](#form-tab-options)
+    - [Field Options](#form-field-options)
+- [Available Field Types](#field-types)
+- [Form Widgets](#form-widgets)
+- [Form Views](#form-views)
+    - [Create View](#form-create-view)
+    - [Update View](#form-update-view)
+    - [Preview View](#form-preview-view)
+- [Applying Conditions to Fields](#field-conditions)
+    - [Input Preset Converter](#field-input-preset)
+    - [Trigger Events](#field-trigger-events)
+    - [Field Dependencies](#field-dependencies)
+    - [Preventing a Field From Being Submitted](#prevent-field-submission)
+- [Extending Form Behavior](#extend-form-behavior)
+    - [Overriding Controller Action](#overriding-action)
+    - [Overriding Controller Redirect](#overriding-redirect)
+    - [Extending Form Model Query](#extend-model-query)
+    - [Extending Form Fields](#extend-form-fields)
+    - [Filtering Form Fields](#filter-form-fields)
+- [Validating Form Fields](#validate-form-fields)
 
 <a name="introduction"></a>
 ## Introduction
@@ -143,7 +143,7 @@ Option  | Description
 **form** | overrides the default form fields definitions for the preview page only.
 
 <a name="form-fields"></a>
-## Defining form fields
+## Defining Form Fields
 
 Form fields are defined with the YAML file. The form fields configuration is used by the form behavior for creating the form controls and binding them to the model fields. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but **fields.yaml** and **form_fields.yaml** are common names. Example form fields file location:
 
@@ -197,7 +197,7 @@ Fields from related models can be rendered with the [Relation Widget](#widget-re
         [...]
 
 <a name="form-tab-options"></a>
-### Tab options
+### Tab Options
 
 For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
 
@@ -237,7 +237,7 @@ Option | Description
                 tab: Groups
 
 <a name="form-field-options"></a>
-### Field options
+### Field Options
 
 For each field you can specify these options (where applicable):
 
@@ -269,7 +269,7 @@ Option | Description
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 <a name="field-types"></a>
-## Available field types
+## Available Field Types
 
 There are various native field types that can be used for the **type** setting. For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
@@ -376,11 +376,9 @@ For more information on model validation, please visit [the documentation page](
 <a name="field-dropdown"></a>
 ### Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are 6 ways to provide the drop-down options.
+`dropdown` - renders a dropdown with specified options. There are a number of ways to provide the dropdown options, most of them involve specify the `options` value.
 
-The first method defines `options` directly in the YAML file(two variants):
-
-(value only):
+Option values only, where the values and labels are the same.
 
     status_type:
         label: Blog Post Status
@@ -391,7 +389,7 @@ The first method defines `options` directly in the YAML file(two variants):
             published
             archived
 
-(key / value):
+Options with key-value pair, where the value and label are independently specified.
 
     status_type:
         label: Blog Post Status
@@ -402,20 +400,24 @@ The first method defines `options` directly in the YAML file(two variants):
             published: Published
             archived: Archived
 
-The second method defines options with a method declared in the model class. If the options element is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model. Using the example above, the model should have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
+The next approaches involve using the model class in your plugin or application codebase. If the `options` value is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model.
+
+Using the example below, the model class is expected to have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
 
     status_type:
         label: Blog Post Status
         type: dropdown
 
-Supplying the dropdown options in the model class:
+This is an example of the model class method that supplies the dropdown options. Notice that the method name matches the column name in _TitleCase_ format.
 
     public function getStatusTypeOptions($value, $formData)
     {
         return ['all' => 'All', ...];
     }
 
-The third global method `getDropdownOptions` can also be defined in the model, this will be used for all dropdown field types for the model. The first argument of this method is the field name, the second is the current value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
+You may also define a catch-all method that works as a fallback in cases where the dedicated method name is not defined, which will be used for all dropdown field types for the model.
+
+The first argument of this method is the field name, the second is the current value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
 
     public function getDropdownOptions($fieldName, $value, $formData)
     {
@@ -427,51 +429,37 @@ The third global method `getDropdownOptions` can also be defined in the model, t
         }
     }
 
-The fourth method uses a specific method declared in the model class. In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
+To use a custom method name, specify it explicitly in the `options` parameter and this will match exactly to the method name defined in the model.
+
+In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
 
     status:
         label: Blog Post Status
         type: dropdown
         options: listStatuses
 
-Supplying the dropdown options to the model class:
+This is an example of the model class custom method that supplies the dropdown options.
 
     public function listStatuses($fieldName, $value, $formData)
     {
         return ['published' => 'Published', ...];
     }
 
-<!--
-The fifth method allows you to specify a static method on a class to return the options:
+If you want to call a method on an external class, you may do it by calling a static method on any fully qualified object. Simply specify the `ClassName::method` syntax as a string in the `options` parameter.
 
     status:
         label: Blog Post Status
         type: dropdown
-        options: \MyAuthor\MyPlugin\Classes\FormHelper::staticMethodOptions
+        options: \MyAuthor\MyPlugin\Helpers\FormHelper::staticMethodOptions
 
-Supplying the dropdown options to the model class:
+This examples shows the static method defined on any helper class. The first argument is the Model object and the second argument is the form field definition.
 
-    public static function staticMethodOptions($formWidget, $formField)
+    public static function staticMethodOptions($model, $formField)
     {
         return ['published' => 'Published', ...];
     }
 
-The sixth method allows you to specify a callable object via an array definition. If using PHP, you're able to provide an array with the first element being the object and the second element being the method you want to call on that object. If you're using YAML, you're limited to a static method defined as the second element and the namespaced reference to a class as the first element:
-
-    status:
-        label: Blog Post Status
-        type: dropdown
-        options: [\MyAuthor\MyPlugin\Classes\FormHelper, staticMethodOptions]
-
-Supplying the dropdown options to the model class:
-
-    public static function staticMethodOptions($formWidget, $formField)
-    {
-        return ['published' => 'Published', ...];
-    }
--->
-
-To define the behavior when there is no selection, you may specify an `emptyOption` value to include an empty option that can be reselected.
+To handle cases when there is no value set on the model, you may specify an `emptyOption` value to include an empty option that can be reselected.
 
     status:
         label: Blog Post Status
@@ -612,7 +600,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         size: huge
 
 <a name="form-widgets"></a>
-## Form widgets
+## Form Widgets
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
 
@@ -1125,14 +1113,14 @@ Option | Description
 **useKey** | use the key instead of value for saving and reading data. Default: false
 
 <a name="form-views"></a>
-## Form views
+## Form Views
 
 For each page your form supports [Create](#form-create-page), [Update](#form-update-page) and [Preview](#form-preview-page) you should provide a [view file](#introduction) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
 
 The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 
 <a name="form-create-view"></a>
-### Create view
+### Create View
 
 The **create.htm** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create.htm form.
 
@@ -1162,7 +1150,7 @@ The **create.htm** view represents the Create page that allows users to create n
     <?= Form::close() ?>
 
 <a name="form-update-view"></a>
-### Update view
+### Update View
 
 The **update.htm** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.htm form.
 
@@ -1199,7 +1187,7 @@ The **update.htm** view represents the Update page that allows users to update o
     <?= Form::close() ?>
 
 <a name="form-preview-view"></a>
-### Preview view
+### Preview View
 
 The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.
 
@@ -1208,12 +1196,12 @@ The **preview.htm** view represents the Preview page that allows users to previe
     </div>
 
 <a name="field-conditions"></a>
-## Applying conditions to fields
+## Applying Conditions to Fields
 
 Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are a few ways you can do this, either by using the trigger API or field dependencies. The input preset converter is primarily used to converting field values. These options are described in more detail below.
 
 <a name="field-input-preset"></a>
-### Input preset converter
+### Input Preset Converter
 
 The input preset converter is defined with the `preset` [form field option](#form-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
 
@@ -1253,9 +1241,9 @@ Type | Description
 **file** | formats the copied value as a file name with whitespace replaced with dashes
 
 <a name="field-trigger-events"></a>
-### Trigger events
+### Trigger Events
 
-Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
+Trigger Events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
     is_delayed:
         label: Send later
@@ -1280,7 +1268,7 @@ Option | Description
 **condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
 
 <a name="field-dependencies"></a>
-### Field dependencies
+### Field Dependencies
 
 Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field. Examples below:
 
@@ -1310,7 +1298,7 @@ In the above example the `state` form field will refresh when the `country` fiel
         }
     }
 
-This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering form fields](#filter-form-fields) section. An example is provided below:
+This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering Form Fields](#filter-form-fields) section. An example is provided below:
 
     dnsprovider:
         label: DNS Provider
@@ -1352,7 +1340,7 @@ And the logic for the filterFields method would be as follows:
 In the above example, both the `provider1` and `provider2` fields will automatically refresh whenever either the `dnsprovider` or `registrar` fields are modified. When this occurs, the full form cycle will be processed, which means that any logic defined in `filterFields` methods would be run again, allowing you to filter which fields get displayed dynamically.
 
 <a name="prevent-field-submission"></a>
-### Preventing a field from being submitted
+### Preventing a Field From Being Submitted
 
 Sometimes you may need to prevent a field from being submitted. In order to do that, just add an underscore (\_) before the name of the field in the form configuration file. Form fields beginning with an underscore are purged automatically and no longer saved to the model.
 
@@ -1365,12 +1353,12 @@ Sometimes you may need to prevent a field from being submitted. In order to do t
         type: mapviewer
 
 <a name="extend-form-behavior"></a>
-## Extending form behavior
+## Extending Form Behavior
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
 
 <a name="overriding-action"></a>
-### Overriding controller action
+### Overriding Controller Action
 
 You can use your own logic for the `create`, `update` or `preview` action method in the controller, then optionally call the Form behavior parent method.
 
@@ -1385,7 +1373,7 @@ You can use your own logic for the `create`, `update` or `preview` action method
     }
 
 <a name="overriding-redirect"></a>
-### Overriding controller redirect
+### Overriding Controller Redirect
 
 You can specify the URL to redirect to after the model is saved by overriding the `formGetRedirectUrl` method. This method returns the location to redirect to with relative URLs being treated as backend URLs.
 
@@ -1395,7 +1383,7 @@ You can specify the URL to redirect to after the model is saved by overriding th
     }
 
 <a name="extend-model-query"></a>
-### Extending model query
+### Extending Form Model Query
 
 The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
 
@@ -1405,7 +1393,7 @@ The lookup query for the form [database model](../database/model) can be extende
     }
 
 <a name="extend-form-fields"></a>
-### Extending form fields
+### Extending Form Fields
 
 You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller class. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
 
@@ -1457,7 +1445,7 @@ Method | Description
 Each method takes an array of fields similar to the [form field configuration](#form-fields).
 
 <a name="filter-form-fields"></a>
-### Filtering form fields
+### Filtering Form Fields
 
 You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
 
@@ -1480,6 +1468,6 @@ You can filter the form field definitions by overriding the `filterFields` metho
 The above example will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies).
 
 <a name="validate-form-fields"></a>
-## Validating form fields
+## Validating Form Fields
 
 To validate the fields of your form you can make use of the [Validation](../database/traits#validation) trait in your model.
