@@ -338,7 +338,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
 <a name="column-selectable"></a>
 ### Selectable
 
-`selectable` - takes the column value and matches it to the value in the records available options. Take the following array as an example. If the record value is set to `open` then the **Open** value is displayed in the column.
+`selectable` - takes the column value and matches it to the value in the record's available options. Take the following array as an example, if the record value is set to `open` then the **Open** value is displayed in the column.
 
     ['open' => 'Open', 'closed' => 'Closed']
 
@@ -493,8 +493,9 @@ Option | Description
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
+**emptyOption** | an optional label for an intentional empty selection.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
-**default** | can either be integer(switch,checkbox,number) or array(group,date range,number range) or string(date).
+**default** | can either be integer (switch, checkbox, number) or array (group, date range, number range) or string (date).
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 **dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
 
