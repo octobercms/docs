@@ -1,21 +1,21 @@
 # Views & Responses
 
-- [Basic responses](#basic-responses)
-    - [Attaching headers to responses](#attaching-headers-to-responses)
-    - [Attaching cookies to responses](#attaching-cookies-to-responses)
-- [Other response types](#other-response-types)
-    - [View responses](#view-responses)
-    - [JSON responses](#json-responses)
-    - [File downloads](#file-downloads)
+- [Basic Responses](#basic-responses)
+    - [Attaching Headers to Responses](#attaching-headers-to-responses)
+    - [Attaching Cookies to Responses](#attaching-cookies-to-responses)
+- [Other Response Types](#other-response-types)
+    - [View Responses](#view-responses)
+    - [JSON Responses](#json-responses)
+    - [File Downloads](#file-downloads)
 - [Redirects](#redirects)
-    - [Returning a redirect with flash data](#redirect-flash-data)
-    - [Redirecting to the previous URL](#redirecting-previous-url)
-    - [Redirecting to the current page](#redirecting-current-page)
-- [Response macros](#response-macros)
+    - [Returning a Redirect with Flash Data](#redirect-flash-data)
+    - [Redirecting to the Previous URL](#redirecting-previous-url)
+    - [Redirecting to the Current Page](#redirecting-current-page)
+- [Response Macros](#response-macros)
 - [Views](#views)
 
 <a name="basic-responses"></a>
-## Basic responses
+## Basic Responses
 
 A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts#layout-life-cycle) and [AJAX handler definitions](../ajax/handlers).
 
@@ -55,7 +55,7 @@ For a more robust solution, returning a `Response` object providing a variety of
     return Response::make($contents, $statusCode);
 
 <a name="attaching-headers-to-responses"></a>
-### Attaching headers to responses
+### Attaching Headers to Responses
 
 Keep in mind that most response methods are chainable, allowing for the fluent building of responses. For example, you may use the `header` method to add a series of headers to the response before sending it back to the user:
 
@@ -69,7 +69,7 @@ A practical example of this could be returning an XML response:
     return Response::make($xmlString)->header('Content-Type', 'text/xml');
 
 <a name="attaching-cookies-to-responses"></a>
-### Attaching cookies to responses
+### Attaching Cookies to Responses
 
 The `withCookie` method  allows you to easily attach cookies to the response. For example, you may use the withCookie method to generate a cookie and attach it to the response instance:
 
@@ -80,19 +80,19 @@ The `withCookie` method accepts additional optional arguments which allow you to
     ->withCookie($name, $value, $minutes, $path, $domain, $secure, $httpOnly)
 
 <a name="other-response-types"></a>
-## Other response types
+## Other Response Types
 
 The `Response` facade may be used to conveniently generate other types of response instances.
 
 <a name="view-responses"></a>
-### View responses
+### View Responses
 
 If you need access to the `Response` class methods, but want to return a [view](#views) as the response content, you may use the `Response::view` method for convenience:
 
     return Response::view('acme.blog::hello')->header('Content-Type', $type);
 
 <a name="json-responses"></a>
-### JSON responses
+### JSON Responses
 
 The `json` method will automatically set the `Content-Type` header to application/json, as well as convert the given array into JSON using the `json_encode` PHP function:
 
@@ -104,7 +104,7 @@ If you would like to create a JSONP response, you may use the `json` method in a
         ->setCallback(Input::get('callback'));
 
 <a name="file-downloads"></a>
-### File downloads
+### File Downloads
 
 The `download` method may be used to generate a response that forces the user's browser to download the file at the given path. The `download` method accepts a file name as the second argument to the method, which will determine the file name that is seen by the user downloading the file. Finally, you may pass an array of HTTP headers as the third argument to the method:
 
@@ -124,7 +124,7 @@ Redirect responses are typically instances of the `Illuminate\Http\RedirectRespo
     return Redirect::to('user/login');
 
 <a name="redirect-flash-data"></a>
-### Returning a redirect with flash data
+### Returning a Redirect with Flash Data
 
 Redirecting to a new URL and [flashing data to the session](../services/session) are typically done at the same time. So, for convenience, you may create a `RedirectResponse` instance and flash data to the session in a single method chain:
 
@@ -133,7 +133,7 @@ Redirecting to a new URL and [flashing data to the session](../services/session)
 > **Note**: Since the `with` method flashes data to the session, you may retrieve the data using the typical `Session::get` method.
 
 <a name="redirecting-previous-url"></a>
-#### Redirecting to the previous URL
+#### Redirecting to the Previous URL
 
 You may wish to redirect the user to their previous location, for example, after a form submission. You can do so by using the `back` method:
 
@@ -142,14 +142,14 @@ You may wish to redirect the user to their previous location, for example, after
     return Redirect::back()->withInput();
 
 <a name="redirecting-current-page"></a>
-#### Redirecting to the current page
+#### Redirecting to the Current Page
 
 Sometimes you want to simply refresh the current page, you can do this using the `refresh` method:
 
     return Redirect::refresh();
 
 <a name="response-macros"></a>
-## Response macros
+## Response Macros
 
 If you would like to define a custom response that you can re-use in a variety of your routes and controllers, you may use the `Response::macro` method:
 

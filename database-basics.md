@@ -2,13 +2,12 @@
 
 - [Introduction](#introduction)
 - [Configuration](#configuration)
-    - [Read / write connections](#read-write-connections)
-- [Running raw SQL queries](#running-queries)
-- [Multiple database connections](#accessing-connections)
-- [Database transactions](#database-transactions)
-- [Database events](#database-events)
-    - [Query logging](#query-logging)
-
+    - [Read / Write Connections](#read-write-connections)
+- [Running Raw SQL Queries](#running-queries)
+- [Multiple Database Connections](#accessing-connections)
+- [Database Transactions](#database-transactions)
+- [Database Events](#database-events)
+    - [Query Logging](#query-logging)
 
 <a name="introduction"></a>
 ## Introduction
@@ -23,7 +22,7 @@ Raw SQL and using the query builder will perform faster and should be used for s
 The database configuration for your application is located in the `config/database.php` file. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for all of the supported database systems are provided in this file.
 
 <a name="read-write-connections"></a>
-### Read / write connections
+### Read / Write Connections
 
 Sometimes you may wish to use one database connection for SELECT statements, and another for INSERT, UPDATE, and DELETE statements. It is easy to specify which connection is used whether you are using raw queries, the query builder or a model.
 
@@ -50,7 +49,7 @@ Note that two keys have been added to the configuration array: `read` and `write
 We only need to place items in the `read` and `write` arrays if we wish to override the values in the main array. So, in this case, `192.168.1.1` will be used as the "read" connection, while `192.168.1.2` will be used as the "write" connection. The database credentials, prefix, character set, and all other options in the main `mysql` array will be shared across both connections.
 
 <a name="running-queries"></a>
-## Running raw SQL queries
+## Running Raw SQL Queries
 
 Once you have configured your database connection, you may run queries using the `Db` facade. The `Db` facade provides methods for each type of query: `select`, `update`, `insert`, `delete`, and `statement`.
 
@@ -99,7 +98,7 @@ Some database statements should not return any value. For these types of operati
     Db::statement('drop table users');
 
 <a name="accessing-connections"></a>
-## Multiple database connections
+## Multiple Database Connections
 
 When using multiple connections, you may access each connection via the `connection` method on the `Db` facade. The `name` passed to the `connection` method should correspond to one of the connections listed in your `config/database.php` configuration file:
 
@@ -110,7 +109,7 @@ You may also access the raw, underlying PDO instance using the `getPdo` method o
     $pdo = Db::connection()->getPdo();
 
 <a name="database-transactions"></a>
-## Database transactions
+## Database Transactions
 
 To run a set of operations within a database transaction, you may use the `transaction` method on the `Db` facade. If an exception is thrown within the transaction `Closure`, the transaction will automatically be rolled back. If the `Closure` executes successfully, the transaction will automatically be committed. You don't need to worry about manually rolling back or committing while using the `transaction` method:
 
@@ -137,7 +136,7 @@ Lastly, you can commit a transaction via the `commit` method:
 > **Note**: Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query) and [model queries](../database/model).
 
 <a name="database-events"></a>
-## Database events
+## Database Events
 
 If you would like to receive each SQL query executed by your application, you may use the `listen` method. This method is useful for logging queries or debugging.
 
@@ -148,7 +147,7 @@ If you would like to receive each SQL query executed by your application, you ma
 Just like [event registration](../services/events#event-registration), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
 
 <a name="query-logging"></a>
-### Query logging
+### Query Logging
 
 When query logging is enabled, a log is kept in memory of all queries that have been run for the current request. Call the `enableQueryLog` method to enable this feature.
 

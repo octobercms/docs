@@ -1,21 +1,22 @@
 # Database Queries
 
 - [Introduction](#introduction)
-- [Retrieving results](#retrieving-results)
-    - [Chunking results](#chunking-results)
+- [Retrieving Results](#retrieving-results)
+    - [Raw SQL Example](#raw-sql-query)
+    - [Chunking Results](#chunking-results)
     - [Aggregates](#aggregates)
 - [Selects](#selects)
 - [Joins](#joins)
 - [Unions](#unions)
-- [Where clauses](#where-clauses)
-    - [Advanced where clauses](#advanced-where-clauses)
-    - [Conditional clauses](#conditional-clauses)
-- [Ordering, grouping, limit, & offset](#ordering-grouping-limit-and-offset)
+- [Where Clauses](#where-clauses)
+    - [Advanced Where Clauses](#advanced-where-clauses)
+    - [Conditional Clauses](#conditional-clauses)
+- [Ordering, Grouping, Limit, & Offset](#ordering-grouping-limit-and-offset)
 - [Inserts](#inserts)
 - [Updates](#updates)
 - [Deletes](#deletes)
-- [Pessimistic locking](#pessimistic-locking)
-- [Caching queries](#caching-queries)
+- [Pessimistic Locking](#pessimistic-locking)
+- [Caching Queries](#caching-queries)
     - [Persistent Caching](#persistent-caching)
     - [In-Memory Caching](#in-memory-caching)
 - [Debugging](#debugging)
@@ -28,7 +29,7 @@ The database query builder provides a convenient, fluent interface to creating a
 > **Note**: The query builder uses PDO parameter binding to protect your application against SQL injection attacks. There is no need to clean strings being passed as bindings.
 
 <a name="retrieving-results"></a>
-## Retrieving results
+## Retrieving Results
 
 #### Retrieving all rows from a table
 
@@ -54,7 +55,6 @@ If you don't even need an entire row, you may extract a single value from a reco
 
     $email = Db::table('users')->where('name', 'John')->value('email');
 
-
 #### Retrieving a list of column values
 
 If you would like to retrieve an array containing the values of a single column, you may use the `lists` method. In this example, we'll retrieve an array of role titles:
@@ -73,8 +73,17 @@ If you would like to retrieve an array containing the values of a single column,
         echo $title;
     }
 
+<a name="raw-sql-query"></a>
+### Raw SQL Example
+
+Sometimes it makes sense to perform a query using plain SQL, you can do this with the `Db::select` method.
+
+    Db::select('select * from sometable where name = :name', ['name' => 'Charles']);
+
+See the article on [Running Raw SQL Queries](../database/basics#running-queries) for more information.
+
 <a name="chunking-results"></a>
-### Chunking results
+### Chunking Results
 
 If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small "chunk" of the results at a time, and feeds each chunk into a `Closure` for processing. This method is very useful for writing [console commands](../console/development) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
 
@@ -294,7 +303,7 @@ The query builder also provides a quick way to "union" two queries together. For
 The `unionAll` method is also available and has the same method signature as `union`.
 
 <a name="where-clauses"></a>
-## Where clauses
+## Where Clauses
 
 #### Simple where clauses
 
@@ -375,7 +384,7 @@ The `whereNotNull` method verifies that the column's value is **not** `NULL`:
         ->get();
 
 <a name="advanced-where-clauses"></a>
-### Advanced where clauses
+### Advanced Where Clauses
 
 #### Parameter grouping
 
@@ -446,7 +455,7 @@ You may use `whereJsonLength` to query JSON arrays by their length:
                     ->get();
 
 <a name="conditional-clauses"></a>
-### Conditional clauses
+### Conditional Clauses
 
 Sometimes you may want clauses to apply to a query only when something else is true. For instance you may only want to apply a `where` statement if a given input value is present on the incoming request. You may accomplish this using the `when` method:
 
@@ -473,7 +482,7 @@ You may pass another Closure as the third parameter to the `when` method. This C
                     ->get();
 
 <a name="ordering-grouping-limit-and-offset"></a>
-## Ordering, grouping, limit, & offset
+## Ordering, Grouping, Limit, & Offset
 
 #### Sort order
 
@@ -623,7 +632,7 @@ If you wish to truncate the entire table, which will remove all rows and reset t
     Db::table('users')->truncate();
 
 <a name="pessimistic-locking"></a>
-## Pessimistic locking
+## Pessimistic Locking
 
 The query builder also includes a few functions to help you do "pessimistic locking" on your `select` statements. To run the statement with a "shared lock", you may use the `sharedLock` method on a query. A shared lock prevents the selected rows from being modified until your transaction commits:
 
@@ -634,10 +643,10 @@ Alternatively, you may use the `lockForUpdate` method. A "for update" lock preve
     Db::table('users')->where('votes', '>', 100)->lockForUpdate()->get();
 
 <a name="caching-queries"></a>
-## Caching queries
+## Caching Queries
 
 <a name="persistent-caching"></a>
-### Persistent caching
+### Persistent Caching
 
 You may easily cache the results of a query using the [Cache service](../services/cache). Simply chain the `remember` or `rememberForever` method when preparing the query.
 
@@ -646,7 +655,7 @@ You may easily cache the results of a query using the [Cache service](../service
 In this example, the results of the query will be cached for ten minutes. While the results are cached, the query will not be run against the database, and the results will be loaded from the default cache driver specified for your application.
 
 <a name="in-memory-caching"></a>
-### In-memory caching
+### In-Memory Caching
 
 Duplicate queries across the same request can be prevented by using in-memory caching. This feature is enabled by default for [queries prepared by a model](../database/model#retrieving-models) but not those generated directly using the `Db` facade.
 
