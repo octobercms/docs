@@ -2,11 +2,11 @@
 
 - [Introduction](#introduction)
 - [Configuration](#configuration)
-- [Basic usage](#basic-usage)
-    - [Obtaining disk instances](#obtaining-disk-instances)
-    - [Retrieving files](#retrieving-files)
-    - [Storing files](#storing-files)
-    - [Deleting files](#deleting-files)
+- [Basic Usage](#basic-usage)
+    - [Obtaining Disk Instances](#obtaining-disk-instances)
+    - [Retrieving Files](#retrieving-files)
+    - [Storing Files](#storing-files)
+    - [Deleting Files](#deleting-files)
     - [Directories](#directories)
 
 <a name="introduction"></a>
@@ -32,10 +32,10 @@ When using the `local` driver, note that all file operations are relative to the
 Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
 
 <a name="basic-usage"></a>
-## Basic usage
+## Basic Usage
 
 <a name="obtaining-disk-instances"></a>
-### Obtaining disk instances
+### Obtaining Disk Instances
 
 The `Storage` facade may be used to interact with any of your configured disks. For example, you may use the `put` method on the facade to store an avatar on the default disk. If you call methods on the `Storage` facade without first calling the `disk` method, the method call will automatically be passed to the default disk:
 
@@ -53,7 +53,7 @@ When using multiple disks, you may access a particular disk using the `disk` met
     $contents = Storage::disk('local')->get('file.jpg')
 
 <a name="retrieving-files"></a>
-### Retrieving files
+### Retrieving Files
 
 The `get` method may be used to retrieve the contents of a given file. The raw string contents of the file will be returned by the method:
 
@@ -74,7 +74,7 @@ The `lastModified` method returns the UNIX timestamp of the last time the file w
     $time = Storage::lastModified('file1.jpg');
 
 <a name="storing-files"></a>
-### Storing files
+### Storing Files
 
 The `put` method may be used to store a file on disk. You may also pass a PHP `resource` to the `put` method, which will use Flysystem's underlying stream support. Using streams is greatly recommended when dealing with large files:
 
@@ -99,7 +99,7 @@ The `prepend` and `append` methods allow you to easily insert content at the beg
     Storage::append('file.log', 'Appended Text');
 
 <a name="deleting-files"></a>
-### Deleting files
+### Deleting Files
 
 The `delete` method accepts a single filename or an array of files to remove from the disk:
 

@@ -18,24 +18,30 @@ In most cases the complete URL will be used when inserting media assets in to yo
 <a name="configuration-options"></a>
 ## Configuration Options
 
-There are several options that allow you to fine-tune the Media Manager. All of them could be defined in **config/system.php** file, in the **storage.media** section, for example:
+There are several options that allow you to fine-tune the Media Manager, which are defined in **config/media.php** file.
 
-    'storage' => [
-        ...
-        'media' => [
-            ...
-            'ignore' => ['.svn', '.git', '.DS_Store'],
-            'image_extensions' => ['png', 'jpg'],
-        ]
-    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Ignored Files and Patterns
+    |--------------------------------------------------------------------------
+    |
+    | The media manager wil ignore file names and patterns specified here
+    |
+    */
 
-Parameter | Value
-------------- | -------------
-**ignore** | a list of file and directory names to ignore. Defaults to ['.svn', '.git', '.DS_Store'].
-**ttl** | specifies the cache time-to-live, in minutes. The default value is 10. The cache invalidates automatically when Library items are added, updated or deleted.
-**image_extensions** | file extensions corresponding to the Image document type. The default value is **['gif', 'png', 'jpg', 'jpeg', 'bmp']**.
-**video_extensions** | file extensions corresponding to the Video document type. The default value is **['mp4', 'avi', 'mov', 'mpg']**.
-**audio_extensions** | file extensions corresponding to the Audio document type. The default value is **['mp3', 'wav', 'wma', 'm4a']**.
+    'ignore_files' => ['.svn', '.git', '.DS_Store', '.AppleDouble'],
+
+    'ignore_patterns' => ['^\..*'],
+
+The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](../media/providers) on using third party providers such as Amazon S3.
+
+#### SVG uploads are disabled by default
+
+For security reasons, uploading SVG graphic files is disabled in October CMS by default. This is because there is potential for malicious code to be executed when the SVG file renders on the page. If your website is open to the public, we recommend leaving this setting as normal.
+
+To allow the use of SVG files in the backend, simply add it to the list of image extensions.
+
+    'image_extensions' => [..., 'svg'],
 
 <a name="audio-and-video-players"></a>
 ## Audio and Video Players

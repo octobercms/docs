@@ -9,12 +9,20 @@
 
 Media Manager uses the Local Disk provider by default. You need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers) before you can use Amazon S3 or Rackspace CDN features.
 
-> **Note**: after you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
+> **Note**: After you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
 <a name="local-disk"></a>
 ## Local Disk
 
-By default Media Manager works with the storage/app/media subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration.
+By default Media Manager works with the **storage/app/media** subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration found in the **config/system.php** config file and follow the instructions found in this article.
+
+    'storage' => [
+        'media' => [
+            'disk'   => 'local',
+            'folder' => 'media',
+            'path'   => '/storage/app/media',
+        ],
+    ],
 
 <a name="amazon-s3"></a>
 ## Configuring Amazon S3 access
@@ -100,7 +108,7 @@ Example configuration after update:
         ...
     ]
 
-Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
+Save **config/filesystem.php** script and open **config/system.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
 Parameter | Value
 ------------- | -------------
@@ -160,7 +168,7 @@ Example configuration after update:
         ...
     ]
 
-Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
+Save **config/filesystem.php** script and open **config/system.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
 Parameter | Value
 ------------- | -------------

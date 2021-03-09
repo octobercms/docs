@@ -156,21 +156,19 @@ If you already have a query builder instance and you wish to add a column to its
 
     $users = $query->addSelect('age')->get();
 
-If you wish to concatenate columns and/or strings together, you may use the `selectConcat` method to specify a list of concatenated values and the resulting alias. If you wish to use strings in the concatenation, you must provide a quoted string:
-
-    $query = Db::table('users')->selectConcat(['"Name: "', 'first_name', 'last_name'], 'name_string');
-
-    $nameString = $query->first()->name_string;   // Name: John Smith
-
 #### Raw expressions
 
-Sometimes you may need to use a raw expression in a query. To create a raw expression, you may use the `Db::raw` method:
+Sometimes you may need to use a raw expression in a query. To create a raw expression, you may use the `Db::raw` method.
 
     $users = Db::table('users')
         ->select(Db::raw('count(*) as user_count, status'))
         ->where('status', '<>', 1)
         ->groupBy('status')
         ->get();
+
+Another use might be to concatenate columns and/or strings together.
+
+    Db::raw("(first_name, ' ', last_name) as full_name");
 
 > **Note**: Raw statements will be injected into the query as strings, so you should be extremely careful to not create SQL injection vulnerabilities.
 
