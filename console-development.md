@@ -90,7 +90,7 @@ When defining `arguments`, the array definition values represent the following:
 
     array($name, $mode, $description, $defaultValue)
 
-The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`. 
+The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`.
 
 <a name="defining-options"></a>
 ### Defining options
@@ -176,7 +176,7 @@ You may also use the `ask` and `confirm` methods to prompt the user for input:
 You may also specify a default value to the `confirm` method, which should be `true` or `false`:
 
     $this->confirm($question, true);
-    
+
 #### Progress Bars
 
 For long running tasks, it could be helpful to show a progress indicator. Using the output object, we can start, advance and stop the Progress Bar. First, define the total number of steps the process will iterate through. Then, advance the Progress Bar after processing each item:
@@ -243,7 +243,7 @@ If you need to register commands from within a [service provider](application#se
 
 Sometimes you may wish to call other commands from your command. You may do so using the `call` method:
 
-    $this->call('october:up');
+    $this->call('october:migrate');
 
 You can also pass arguments as an array:
 

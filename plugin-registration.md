@@ -1,17 +1,16 @@
 # Plugin Registration
 
 - [Introduction](#introduction)
-    - [Directory structure](#directory-structure)
-    - [Plugin namespaces](#namespaces)
-- [Registration file](#registration-file)
-    - [Supported methods](#registration-methods)
-    - [Basic plugin information](#basic-plugin-information)
-- [Routing and initialization](#routing-initialization)
-- [Dependency definitions](#dependency-definitions)
+    - [Directory Structure](#directory-structure)
+    - [Plugin Namespaces](#namespaces)
+- [Registration File](#registration-file)
+    - [Supported Methods](#registration-methods)
+    - [Basic Plugin Information](#basic-plugin-information)
+- [Routing and Initialization](#routing-initialization)
+- [Dependency Definitions](#dependency-definitions)
 - [Extending Twig](#extending-twig)
-- [Navigation menus](#navigation-menus)
-- [Registering middleware](#registering-middleware)
-- [Elevated permissions](#elevated-plugin)
+- [Navigation Menus](#navigation-menus)
+- [Registering Middleware](#registering-middleware)
 
 <a name="introduction"></a>
 ## Introduction
@@ -26,7 +25,7 @@ Plugins are the foundation for adding new features to the CMS by extending it. T
 1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
 
 <a name="directory-structure"></a>
-### Directory structure
+### Directory Structure
 
 Plugins reside in the **/plugins** subdirectory of the application directory. An example of a plugin directory structure:
 
@@ -52,12 +51,12 @@ Not all plugin directories are required. The only required file is the **Plugin.
 > **Note**: if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
 
 <a name="namespaces"></a>
-### Plugin namespaces
+### Plugin Namespaces
 
-Plugin namespaces are very important, especially if you are going to publish your plugins on the [October Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
+Plugin namespaces are essential, especially if you are going to publish your plugins on the [October Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
 <a name="registration-file"></a>
-## Registration file
+## Registration File
 
 The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
 
@@ -89,7 +88,7 @@ Registration scripts should use the plugin namespace. The registration script sh
     }
 
 <a name="registration-methods"></a>
-### Supported methods
+### Supported Methods
 
 The following methods are supported in the plugin registration class:
 
@@ -112,7 +111,7 @@ Method | Description
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
 
 <a name="basic-plugin-information"></a>
-### Basic plugin information
+### Basic Plugin Information
 
 The `pluginDetails` is a required method of the plugin registration class. It should return an array containing the following keys:
 
@@ -126,7 +125,7 @@ Key | Description
 **homepage** | a link to the author's website address, optional.
 
 <a name="routing-initialization"></a>
-## Routing and initialization
+## Routing and Initialization
 
 Plugin registration files can contain two methods `boot` and `register`. With these methods you can do anything you like, like register routes or attach handlers to events.
 
@@ -150,7 +149,7 @@ Plugins can also supply a file named **routes.php** that contain custom routing 
     });
 
 <a name="dependency-definitions"></a>
-## Dependency definitions
+## Dependency Definitions
 
 A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
 
@@ -201,7 +200,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
     }
 
 <a name="navigation-menus"></a>
-## Navigation menus
+## Navigation Menus
 
 Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
@@ -260,7 +259,7 @@ Key | Description
 **owner** | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
 
 <a name="registering-middleware"></a>
-## Registering middleware
+## Registering Middleware
 
 To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
 
@@ -283,26 +282,3 @@ Alternatively, you can push it directly into the Kernel via the following.
         $this->app['Illuminate\Contracts\Http\Kernel']
              ->pushMiddleware('Path\To\Custom\Middleware');
     }
-
-<a name="elevated-plugin"></a>
-## Elevated permissions
-
-By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the back-end. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
-
-Request | Description
-------------- | -------------
-**/combine** | the asset combiner generator URL
-**/backend/system/updates** | the site updates context
-**/backend/system/install** | the installer path
-**/backend/backend/auth** | the backend authentication path (login, logout)
-**october:up** | the CLI command that runs all pending migrations
-**october:update** | the CLI command that triggers the update process
-**october:env** | the CLI command that converts configuration files to environment variables in a `.env` file
-**october:version** | the CLI command that detects the version of October CMS that is installed
-
-Define the `$elevated` property to grant elevated permissions for your plugin.
-
-    /**
-     * @var bool Plugin requires elevated permissions.
-     */
-    public $elevated = true;

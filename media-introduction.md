@@ -37,7 +37,7 @@ The configuration that specifies where media files are kept is in the system con
 
 #### SVG uploads are disabled by default
 
-For security reasons, uploading SVG graphic files is disabled in October CMS by default. This is because there is potential for malicious code to be executed when the SVG file renders on the page. If your website is open to the public, we recommend leaving this setting as normal.
+For security reasons, uploading SVG graphic files is disabled in October CMS by default. This is because there is potential for malicious code to be executed when the SVG file renders on the page. If your administration area is open to the public, we recommend leaving this setting as normal.
 
 To allow the use of SVG files in the backend, simply add it to the list of image extensions.
 

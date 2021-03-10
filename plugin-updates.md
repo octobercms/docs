@@ -30,7 +30,7 @@ During an update the system will notify the user about recent changes to plugins
 
 1. When an administrator signs in to the back-end.
 1. When the system is updated using the update feature in the back-end area.
-1. When the [console command](../console/commands#console-up-command) `php artisan october:up` is called in the command line from the application directory.
+1. When the [console command](../console/commands#console-up-command) `php artisan october:migrate` is called in the command line from the application directory.
 
 > **Note**: The plugin [initialization process](../plugin/registration#routing-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 

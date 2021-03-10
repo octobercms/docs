@@ -49,14 +49,12 @@ The `october:update` command will request updates from the October gateway. It w
 
     php artisan october:update
 
-> **IMPORTANT**: If you are using [using composer](#console-install-composer) do **NOT** run this command without first making sure that `cms.disableCoreUpdates` is set to true. Doing so will cause conflicts between the marketplace version of October and the version available through composer. In order to update the core October installation when using composer run `composer update` instead.
-
 <a name="console-up-command"></a>
 ### Database migration
 
-The `october:up` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
+The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
 
-    php artisan october:up
+    php artisan october:migrate
 
 The inverse command `october:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#plugin-refresh-command) is a useful alternative for debugging a single plugin.
 
