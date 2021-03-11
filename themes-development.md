@@ -51,9 +51,9 @@ The theme version file **version.yaml** defines the current theme version and th
 
 The file format is following:
 
-    1.0.1: Theme initialization
-    1.0.2: Added more features
-    1.0.3: Some features are removed
+    "1.0.1": "Theme initialization"
+    "1.0.2": "Added more features"
+    "1.0.3": "Some features are removed"
 
 <a name="preview-image"></a>
 ## Theme Preview Image
@@ -141,8 +141,8 @@ A theme can depend on plugins by defining a **require** option in the [Theme inf
     # [...]
 
     require:
-        - Acme.User
-        - Acme.Blog
+        - "Acme.User"
+        - "Acme.Blog"
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
 
