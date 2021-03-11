@@ -51,9 +51,9 @@ The theme version file **version.yaml** defines the current theme version and th
 
 The file format is following:
 
-    "1.0.1": "Theme initialization"
-    "1.0.2": "Added more features"
-    "1.0.3": "Some features are removed"
+    1.0.1: Theme initialization
+    1.0.2: Added more features
+    1.0.3: Some features are removed
 
 <a name="preview-image"></a>
 ## Theme Preview Image
