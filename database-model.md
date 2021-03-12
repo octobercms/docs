@@ -1,20 +1,20 @@
 # Active Record Model
 
 - [Introduction](#introduction)
-- [Defining models](#defining-models)
-    - [Supported properties](#standard-properties)
-- [Retrieving models](#retrieving-models)
-    - [Retrieving multiple models](#retrieving-multiple-models)
-    - [Retrieving a single model](#retrieving-single-models)
-    - [Retrieving aggregates](#retrieving-aggregates)
-- [Inserting & updating models](#inserting-and-updating-models)
-    - [Basic inserts](#basic-inserts)
-    - [Basic updates](#basic-updates)
-    - [Mass assignment](#mass-assignment)
-- [Deleting models](#deleting-models)
-- [Query scopes](#query-scopes)
+- [Defining Models](#defining-models)
+    - [Supported Properties](#standard-properties)
+- [Retrieving Models](#retrieving-models)
+    - [Retrieving Multiple Models](#retrieving-multiple-models)
+    - [Retrieving a Single Model](#retrieving-single-models)
+    - [Retrieving Aggregates](#retrieving-aggregates)
+- [Inserting & Updating Models](#inserting-and-updating-models)
+    - [Basic Inserts](#basic-inserts)
+    - [Basic Updates](#basic-updates)
+    - [Mass Assignment](#mass-assignment)
+- [Deleting Models](#deleting-models)
+- [Query Scopes](#query-scopes)
 - [Events](#events)
-- [Extending models](#extending-models)
+- [Extending Models](#extending-models)
 
 <a name="introduction"></a>
 ## Introduction
@@ -36,7 +36,7 @@ Model classes reside in the **models** subdirectory of a plugin directory. An ex
 The model configuration directory could contain the model's [list column](../backend/lists#list-columns) and [form field](../backend/forms#form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
 <a name="defining-models"></a>
-## Defining models
+## Defining Models
 
 In most cases, you should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this:
 
@@ -57,7 +57,7 @@ In most cases, you should create one model class for each database table. All mo
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
 <a name="standard-properties"></a>
-### Supported properties
+### Supported Properties
 
 There are some standard properties that can be found on models, in addition to those provided by [model traits](traits). For example:
 
@@ -161,14 +161,14 @@ When attributes names are passed to the `$jsonable` property, the values will be
     }
 
 <a name="retrieving-models"></a>
-## Retrieving models
+## Retrieving Models
 
 When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
 
 > **Note**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
 
 <a name="retrieving-multiple-models"></a>
-### Retrieving multiple models
+### Retrieving Multiple Models
 
 Once you have created a model and [its associated database table](../database/structure#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query) allowing you to query the database table associated with the model. For example:
 
@@ -218,7 +218,7 @@ If you need to process thousands of records, use the `chunk` command. The `chunk
 The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is retrieved from the database.
 
 <a name="retrieving-single-models"></a>
-### Retrieving a single model
+### Retrieving a Single Model
 
 In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance:
 
@@ -244,7 +244,7 @@ When [developing an API](../services/router), if the exception is not caught, a 
     });
 
 <a name="retrieving-aggregates"></a>
-### Retrieving aggregates
+### Retrieving Aggregates
 
 You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query#aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
 
@@ -253,12 +253,12 @@ You may also use `count`, `sum`, `max`, and other [aggregate functions](../datab
     $max = Flight::where('active', 1)->max('price');
 
 <a name="inserting-and-updating-models"></a>
-## Inserting & updating models
+## Inserting & Updating Models
 
 Inserting and updating data are the cornerstone feature of models, it makes the process effortless when compared to traditional SQL statements.
 
 <a name="basic-inserts"></a>
-### Basic inserts
+### Basic Inserts
 
 To create a new record in the database, simply create a new model instance, set attributes on the model, then call the `save` method:
 
@@ -269,7 +269,7 @@ To create a new record in the database, simply create a new model instance, set 
 In this example, we simply create a new instance of the `Flight` model and assign the `name` attribute. When we call the `save` method, a record will be inserted into the database. The `created_at` and `updated_at` timestamps will automatically be set too, so there is no need to set them manually.
 
 <a name="basic-updates"></a>
-### Basic updates
+### Basic Updates
 
 The `save` method may also be used to update models that already exist in the database. To update a model, you should retrieve it, set any attributes you wish to update, and then call the `save` method. Again, the `updated_at` timestamp will automatically be updated, so there is no need to manually set its value:
 
@@ -297,7 +297,7 @@ If you would like to perform multiple "upserts" in a single query, then you shou
 > **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
 
 <a name="mass-assignment"></a>
-### Mass assignment
+### Mass Assignment
 
 You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create` or `fill` method.
 
@@ -354,7 +354,7 @@ The `firstOrNew` method, like `firstOrCreate` will attempt to locate a record in
     $flight = Flight::firstOrNew(['name' => 'Flight 10']);
 
 <a name="deleting-models"></a>
-## Deleting models
+## Deleting Models
 
 To delete a model, call the `delete` method on a model instance:
 
@@ -372,7 +372,7 @@ In the example above, we are retrieving the model from the database before calli
 
     Flight::destroy(1, 2, 3);
 
-#### Deleting models by query
+#### Deleting Models by query
 
 You may also run a delete query on a set of models. In this example, we will delete all flights that are marked as inactive:
 
@@ -381,7 +381,7 @@ You may also run a delete query on a set of models. In this example, we will del
 > **Note**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
 
 <a name="query-scopes"></a>
-## Query scopes
+## Query Scopes
 
 Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
 
@@ -504,7 +504,7 @@ You can externally bind to [local events](../services/events) for a single insta
     })
 
 <a name="extending-models"></a>
-## Extending models
+## Extending Models
 
 Since models are [equipped to use behaviors](../services/behaviors), they can be extended with the static `extend` method. The method takes a closure and passes the model object into it.
 
@@ -522,21 +522,20 @@ This approach can also be used to bind to [local events](#events), the following
         });
     });
 
-> **Note**: Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
-
 Additionally, a few methods exist to extend protected model properties.
 
     \Backend\Models\User::extend(function($model) {
-        // add cast attributes
+        // Add cast attributes
         $model->addCasts([
             'some_extended_field' => 'int',
         ]);
 
-        // add a date attribute
+        // Add a date attribute
         $model->addDateAttribute('updated_at');
 
-        // add fillable or jsonable fields
-        // these methods accept one or more strings, or an array of strings
+        // Adds fillable or jsonable fields
         $model->addFillable('first_name');
         $model->addJsonable('some_data');
     });
+
+> **Note**: Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.

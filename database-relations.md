@@ -1,32 +1,32 @@
 # Database Relationships
 
 - [Introduction](#introduction)
-- [Defining relationships](#defining-relationships)
-    - [Detailed definitions](#detailed-relationships)
-- [Relationship types](#relationship-types)
+- [Defining Relationships](#defining-relationships)
+    - [Detailed Definitions](#detailed-relationships)
+- [Relationship Types](#relationship-types)
     - [One To One](#one-to-one)
     - [One To Many](#one-to-many)
     - [Many To Many](#many-to-many)
     - [Has Many Through](#has-many-through)
     - [Has One Through](#has-one-through)
-- [Polymorphic relations](#polymorphic-relations)
+- [Polymorphic Relations](#polymorphic-relations)
     - [One To One](#one-to-one-polymorphic-relations)
     - [One To Many](#one-to-many-polymorphic-relations)
     - [Many To Many](#many-to-many-polymorphic-relations)
     - [Custom Polymorphic Types](#custom-polymorphic-types)
-- [Querying relations](#querying-relations)
-    - [Access via relationship method](#querying-method)
-    - [Access via dynamic property](#querying-dynamic-property)
-    - [Querying relationship existence](#querying-existence)
-- [Eager loading](#eager-loading)
-    - [Constraining eager loads](#constraining-eager-loads)
-    - [Lazy eager loading](#lazy-eager-loading)
-- [Inserting related models](#inserting-related-models)
-    - [Insert via relationship method](#inserting-method)
-    - [Insert via dynamic property](#inserting-dynamic-property)
-    - [Many To Many relations](#inserting-many-to-many-relations)
-    - [Touching parent timestamps](#touching-parent-timestamps)
-- [Deferred binding](#deferred-binding)
+- [Querying Relations](#querying-relations)
+    - [Access via Relationship Method](#querying-method)
+    - [Access via Dynamic Property](#querying-dynamic-property)
+    - [Querying Relationship Existence](#querying-existence)
+- [Eager Loading](#eager-loading)
+    - [Constraining Eager Loads](#constraining-eager-loads)
+    - [Lazy Eager Loading](#lazy-eager-loading)
+- [Inserting Related Models](#inserting-related-models)
+    - [Insert via Relationship Method](#inserting-method)
+    - [Insert via Dynamic Property](#inserting-dynamic-property)
+    - [Many To Many Relations](#inserting-many-to-many-relations)
+    - [Touching Parent Timestamps](#touching-parent-timestamps)
+- [Deferred Binding](#deferred-binding)
 
 <a name="introduction"></a>
 ## Introduction
@@ -36,7 +36,7 @@ Database tables are often related to one another. For example, a blog post may h
 > **Note**: If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, October cannot connect the relations.
 
 <a name="defining-relationships"></a>
-## Defining relationships
+## Defining Relationships
 
 Model relationships are defined as properties on your model classes. An example of defining relationships:
 
@@ -58,7 +58,7 @@ Accessing a relationship as a property is also possible:
 > **Note**: All relationship queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. The `load($relation)` method won't force cache to flush. To reload the memory cache use the `reloadRelations()` or the `reload()` methods on the model object.
 
 <a name="detailed-relationships"></a>
-### Detailed definitions
+### Detailed Definitions
 
 Each definition can be an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are parameters that must have a key name.
 
@@ -116,7 +116,7 @@ Example filter using **count**:
     ];
 
 <a name="relationship-types"></a>
-## Relationship types
+## Relationship Types
 
 The following relations types are available:
 
@@ -124,8 +124,8 @@ The following relations types are available:
 - [One To Many](#one-to-many)
 - [Many To Many](#many-to-many)
 - [Has Many Through](#has-many-through)
-- [Polymorphic relations](#polymorphic-relations)
-- [Many To Many Polymorphic relations](#many-to-many-polymorphic-relations)
+- [Polymorphic Relations](#polymorphic-relations)
+- [Many To Many Polymorphic Relations](#many-to-many-polymorphic-relations)
 
 <a name="one-to-one"></a>
 ### One To One
@@ -696,7 +696,7 @@ For example, imagine a blog system in which a `User` model has many associated `
     }
 
 <a name="querying-method"></a>
-### Access via relationship method
+### Access via Relationship Method
 
 You may query the **posts** relationship and add additional constraints to the relationship using the `posts` method. This gives you the ability to chain any of the [query builder](query) methods on the relationship.
 
@@ -707,7 +707,7 @@ You may query the **posts** relationship and add additional constraints to the r
     $post = $user->posts()->first();
 
 <a name="querying-dynamic-property"></a>
-### Access via dynamic property
+### Access via Dynamic Property
 
 If you do not need to add additional constraints to a relationship query, you may simply access the relationship as if it were a property. For example, continuing to use our `User` and `Post` example models, we may access all of a user's posts using the `$user->posts` property instead.
 
@@ -720,7 +720,7 @@ If you do not need to add additional constraints to a relationship query, you ma
 Dynamic properties are "lazy loading", meaning they will only load their relationship data when you actually access them. Because of this, developers often use [eager loading](#eager-loading) to pre-load relationships they know will be accessed after loading the model. Eager loading provides a significant reduction in SQL queries that must be executed to load a model's relations.
 
 <a name="querying-existence"></a>
-### Querying relationship existence
+### Querying Relationship Existence
 
 When accessing the records for a model, you may wish to limit your results based on the existence of a relationship. For example, imagine you want to retrieve all blog posts that have at least one comment. To do so, you may pass the name of the relationship to the `has` method:
 
@@ -745,7 +745,7 @@ If you need even more power, you may use the `whereHas` and `orWhereHas` methods
     })->get();
 
 <a name="eager-loading"></a>
-## Eager loading
+## Eager Loading
 
 When accessing relationships as properties, the relationship data is "lazy loaded". This means the relationship data is not actually loaded until you first access the property. However, models can "eager load" relationships at the time you query the parent model. Eager loading alleviates the N + 1 query problem. To illustrate the N + 1 query problem, consider a `Book` model that is related to `Author`:
 
@@ -793,7 +793,7 @@ To eager load nested relationships, you may use "dot" syntax. For example, let's
     $books = Book::with('author.contacts')->get();
 
 <a name="constraining-eager-loads"></a>
-### Constraining eager loads
+### Constraining Eager Loads
 
 Sometimes you may wish to eager load a relationship, but also specify additional query constraints for the eager loading query. Here's an example:
 
@@ -812,7 +812,7 @@ In this example, the model will only eager load posts if the post's `title` colu
     ])->get();
 
 <a name="lazy-eager-loading"></a>
-### Lazy eager loading
+### Lazy Eager Loading
 
 Sometimes you may need to eager load a relationship after the parent model has already been retrieved. For example, this may be useful if you need to dynamically decide whether to load related models:
 
@@ -831,12 +831,12 @@ If you need to set additional query constraints on the eager loading query, you 
     ]);
 
 <a name="inserting-related-models"></a>
-## Inserting related models
+## Inserting Related Models
 
 Just like you would [query a relationship](#querying-relations), October supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
 
 <a name="inserting-method"></a>
-### Insert via relationship method
+### Insert via Relationship Method
 
 October provides convenient methods for adding new models to relationships. Primarily models can be added to a relationship or removed from a relationship. In each case the relationship is associated or disassociated respectively.
 
@@ -902,7 +902,7 @@ While `add` and `addMany` accept a full model instance, you may also use the `cr
 Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model#mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
 
 <a name="inserting-dynamic-property"></a>
-### Insert via dynamic property
+### Insert via Dynamic Property
 
 Relationships can be set directly via their properties in the same way you would access them. Setting a relationship using this approach will overwrite any relationship that existed previously. The model should be saved afterwards like you would with any attribute.
 
@@ -941,7 +941,7 @@ Similar to [deferred binding](#deferred-binding), relationships defined on non-e
     $post->save();
 
 <a name="inserting-many-to-many-relations"></a>
-### Many To Many relations
+### Many To Many Relations
 
 #### Attaching / Detaching
 
@@ -982,7 +982,7 @@ You may also pass additional intermediate table values with the IDs:
     $user->roles()->sync([1 => ['expires' => true], 2, 3]);
 
 <a name="touching-parent-timestamps"></a>
-### Touching parent timestamps
+### Touching Parent Timestamps
 
 When a model `belongsTo` or `belongsToMany` another model, such as a `Comment` which belongs to a `Post`, it is sometimes helpful to update the parent's timestamp when the child model is updated. For example, when a `Comment` model is updated, you may want to automatically "touch" the `updated_at` timestamp of the owning `Post`. Just add a `touches` property containing the names of the relationships to the child model:
 
@@ -1010,7 +1010,7 @@ Now, when you update a `Comment`, the owning `Post` will have its `updated_at` c
     $comment->save();
 
 <a name="deferred-binding"></a>
-## Deferred binding
+## Deferred Binding
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
 

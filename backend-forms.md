@@ -30,7 +30,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-**Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
+**Form Behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
 Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
@@ -43,7 +43,7 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
         public $formConfig = 'config_form.yaml';
     }
 
-> **Note**: Very often the form and [list behavior](lists) are used together in a same controller.
+> **Note**: Very often the form and [list behavior](../backend/lists) are used together in a same controller.
 
 <a name="configuring-form"></a>
 ## Configuring the Form Behavior

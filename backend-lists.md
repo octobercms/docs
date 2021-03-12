@@ -6,6 +6,7 @@
     - [Filtering the List](#adding-filters)
 - [Defining List Columns](#list-columns)
     - [Column Options](#column-options)
+    - [Nested Column Selection](#nested-column-select)
 - [Available Column Types](#column-types)
 - [Displaying the List](#displaying-list)
 - [Multiple List Definitions](#multiple-list-definitions)
@@ -26,7 +27,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-**List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
+**List Behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
 List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
@@ -39,7 +40,7 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
         public $listConfig = 'list_config.yaml';
     }
 
-> **Note**: Very often the list and [form behavior](form) are used together in a same controller.
+> **Note**: Very often the list and [form behavior](../backend/forms) are used together in a same controller.
 
 <a name="configuring-list"></a>
 ## Configuring the List Behavior
@@ -175,6 +176,17 @@ Option | Description
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
+<a name="nested-column-select"></a>
+## Nested Column Selection
+
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations) column or a [jsonable array](../database/model#property-jsonable). The only drawback of doing this is the column cannot use searchable or sortable options.
+
+    content[title]:
+        name: Title
+        sortable: false
+
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model#events).
+
 <a name="column-types"></a>
 ## Available Column Types
 
@@ -215,12 +227,12 @@ There are various column types that can be used for the **type** setting, these 
         label: Full Name
         type: text
 
-You can also specify a custom text format, for example **Admin:Full Name (active)**
+You can also specify a custom text format, for example **Admin: Full Name (active)**
 
     full_name:
         label: Full Name
         type: text
-        format: Admin:%s (active)
+        format: "Admin: %s (active)"
 
 <a name="column-image"></a>
 ### Image
@@ -252,9 +264,9 @@ You can also specify a custom number format, for example currency **$ 99.00**
     price:
         label: Price
         type: number
-        format: $ %.2f
+        format: "$ %.2f"
 
-> **Note**: Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
+> **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
 
 <a name="column-switch"></a>
 ### Switch
@@ -529,8 +541,11 @@ In the above example, the `city` scope will refresh when the `country` scope has
     public function getCityOptions($scopes = null)
     {
         if (!empty($scopes['country']->value)) {
-            return City::whereIn('country_id', array_keys($scopes['country']->value))->lists('name', 'id');
-        } else {
+            return City::whereIn('country_id', array_keys($scopes['country']->value))
+                ->lists('name', 'id')
+            ;
+        }
+        else {
             return City::lists('name', 'id');
         }
     }
@@ -642,9 +657,8 @@ These types can be used to determine how the filter scope should be displayed.
 
 To use default value for Date and Date Range
 
-```php
-    myController::extendListFilterScopes(function($filter)
-    {
+    \MyController::extendListFilterScopes(function($filter) {
+        $widget->addScopes([
             'Date Test' => [
                 'label' => 'Date Test',
                 'type' => 'daterange',
@@ -654,7 +668,7 @@ To use default value for Date and Date Range
         ]);
     });
 
-    // return value must be instance of carbon
+    // Return value must be instance of carbon
     public function myDefaultTime()
     {
         return [
@@ -662,7 +676,7 @@ To use default value for Date and Date Range
             1 => Carbon::parse('2012-04-02'),
         ];
     }
-```
+
 
 You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
 
