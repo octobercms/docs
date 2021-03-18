@@ -263,7 +263,7 @@ Option | Description
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using [trigger events](#field-trigger-events).
 **preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#field-input-preset).
-**required** | places a red asterisk next to the field label to indicate it is required (make sure to setup validation on the model as this is not enforced by the form controller).
+**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits#validation) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
