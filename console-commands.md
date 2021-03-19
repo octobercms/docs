@@ -1,7 +1,6 @@
 # Command Line Interface
 
 - [Setup & Maintenance](#maintenance-commands)
-    - [Install Command](#console-install-command)
     - [System Update](#console-update-command)
     - [Database Migration](#console-up-command)
     - [Change Backend User Password](#change-backend-user-password-command)
@@ -28,21 +27,10 @@
     - [Mirror Public Directory](#cache-clear-command)
     - [Miscellaneous Commands](#october-util-command)
 
-October CMS includes several command-line interface (CLI) commands and utilities that allow to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development) or speed up development with the provided [scaffolding commands](../console/scaffolding).
+October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development) or speed up development with the provided [scaffolding commands](../console/scaffolding).
 
 <a name="maintenance-commands"></a>
 ## Setup & Maintenance
-
-<a name="console-install-command"></a>
-### Install Command
-
-The `october:install` command will guide you through the process of setting up October CMS for the first time. It will ask for the database configuration, application URL, encryption key and administrator details.
-
-    php artisan october:install
-
-You also may wish to inspect **config/app.php** and **config/cms.php** to change any additional configuration.
-
-> **Note**: You cannot run `october:install` after running `october:env`. `october:env` takes the existing configuration values and puts them in the `.env` file while replacing the original values with calls to `env()` within the configuration files. `october:install` cannot now replace those calls to `env()` within the configuration files as that would be overly complex to manage.
 
 <a name="console-update-command"></a>
 ### System Update
@@ -58,9 +46,9 @@ The `october:migrate` command will perform a database migration, creating databa
 
     php artisan october:migrate
 
-The inverse command `october:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#plugin-refresh-command) is a useful alternative for debugging a single plugin.
+The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#plugin-refresh-command) is a useful alternative for debugging a single plugin.
 
-    php artisan october:down
+    php artisan october:migrate --rollback
 
 <a name="change-backend-user-password-command"></a>
 ### Change Backend User Password
