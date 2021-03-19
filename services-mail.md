@@ -1,17 +1,17 @@
 # Mail
 
 - [Introduction](#introduction)
-- [Sending mail](#sending-mail)
+- [Sending Mail](#sending-mail)
     - [Attachments](#attachments)
-    - [Inline attachments](#inline-attachments)
-    - [Queueing mail](#queueing-mail)
-- [Message content](#message-content)
-    - [Mail views](#mail-views)
-    - [Mail templates](#mail-templates)
-    - [Mail layouts](#mail-layouts)
-    - [Registering mail layouts, templates & partials](#mail-template-registration)
-    - [Global variables](#mail-global-variables)
-- [Mail & local development](#mail-and-local-development)
+    - [Inline Attachments](#inline-attachments)
+    - [Queueing Mail](#queueing-mail)
+- [Message Content](#message-content)
+    - [Mail Views](#mail-views)
+    - [Mail Templates](#mail-templates)
+    - [Mail Layouts](#mail-layouts)
+    - [Registering Mail Layouts, Templates & Partials](#mail-template-registration)
+    - [Global Variables](#mail-global-variables)
+- [Mail & Local Development](#mail-and-local-development)
 
 <a name="introduction"></a>
 ## Introduction
@@ -51,7 +51,7 @@ To use the Amazon SES driver set the `driver` option in your `config/mail.php` c
     ],
 
 <a name="sending-mail"></a>
-## Sending mail
+## Sending Mail
 
 To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#mail-views) or [mail template](#mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
 
@@ -144,9 +144,9 @@ Here is a list of the available methods on the `$message` message builder instan
 
 #### Mailing plain text
 
-By default, the view given to the `send` method is assumed to contain HTML. However, by passing an array as the first argument to the `send` method, you may specify a plain text view to send in addition to the HTML view:
+By default, the view given to the `send` method is assumed to contain a [mail view](#mail-views), where you may specify a plain text view to send in addition to the HTML view.
 
-    Mail::send(['acme.blog::mail.html', 'acme.blog::mail.text'], $data, $callback);
+    Mail::send('acme.blog::mail.message', $data, $callback);
 
 Or, if you only need to send a plain text e-mail, you may specify this using the `text` key in the array:
 
@@ -193,7 +193,7 @@ When attaching files to a message, you may also specify the display name and / o
     $message->attach($pathToFile, ['as' => $display, 'mime' => $mime]);
 
 <a name="inline-attachments"></a>
-### Inline attachments
+### Inline Attachments
 
 #### Embedding an image in mail content
 
@@ -224,7 +224,7 @@ If you already have a raw data string you wish to embed into an e-mail message, 
     </body>
 
 <a name="queueing-mail"></a>
-### Queueing mail
+### Queueing Mail
 
 #### Queueing a mail message
 
@@ -257,14 +257,14 @@ If you wish to specify a specific queue on which to push the message, you may do
     });
 
 <a name="message-content"></a>
-## Message content
+## Message Content
 
 Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
 Optionally, mail views can be [registered in the Plugin registration file](#mail-template-registration) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
 <a name="mail-views"></a>
-### Mail views
+### Mail Views
 
 Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file:
 
@@ -316,7 +316,7 @@ Parameter | Description
 **layout** | the [mail layout](#mail-layouts) code, optional. Default value is `default`.
 
 <a name="mail-templates"></a>
-### Using mail templates
+### Using Mail Templates
 
 Mail templates reside in the database and can be created in the back-end area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
 
@@ -336,7 +336,7 @@ Mail templates can also be generated automatically by [mail views that have been
 When a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the mail view can be considered a *default view*.
 
 <a name="mail-layouts"></a>
-### Using mail layouts
+### Using Mail Layouts
 
 Mail layouts can be created by selecting *Settings > Mail > Mail templates* and clicking the *Layouts* tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
 
@@ -385,7 +385,7 @@ Like templates, mail partials and layouts can be registered by overriding the `r
 The methods should return an array of [mail view names](#mail-views). The array key will be used as `code` property for the partial or layout.
 
 <a name="mail-global-variables"></a>
-### Global variables
+### Global Variables
 
 You may register variables that are globally available to all mail templates with the `View::share` method.
 
