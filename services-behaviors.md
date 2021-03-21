@@ -309,7 +309,7 @@ Sometimes your class may already extend a parent class outside of your source co
 
 First let's create the class that will act as a Behaviour, ie. can be implemented by other classes.
 
-    <?php namespace MyNamespace\Behaviours;
+    <?php namespace MyNamespace\Behaviors;
 
     class WaveBehaviour
     {
@@ -387,7 +387,7 @@ The AI class is now able to use behaviours. Let's extend it and have this class 
     class Robot extends AI
     {
         public $implement = [
-            \MyNamespace\Behaviours\WaveBehaviour::class
+            \MyNamespace\Behaviors\WaveBehaviour::class
         ];
 
         public function identify()
