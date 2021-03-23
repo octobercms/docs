@@ -1,10 +1,10 @@
 # AJAX Data Attributes API
 
-- [Data attributes API](#data-attributes)
-- [Usage examples](#data-attribute-examples)
+- [Data Attributes API](#data-attributes)
+- [Usage Examples](#data-attribute-examples)
 
 <a name="data-attributes"></a>
-## Data attributes API
+## Data Attributes API
 
 The data attributes API lets you issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
 
@@ -38,7 +38,7 @@ Element | Event
 **Dropdowns, checkboxes, radios** | when the element is selected.
 
 <a name="data-attribute-examples"></a>
-## Usage examples
+## Usage Examples
 
 Trigger the `onCalculate` handler when the form is submitted. Update the element with the identifier "result"` with the **calcresult** partial:
 

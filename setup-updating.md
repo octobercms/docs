@@ -1,6 +1,15 @@
 # Updating
 
+- [Updating to v1.2](#upgrade-v1-2)
 - [Bleeding Edge Updates](#edge-updates)
+
+<a name="upgrade-v1-2"></a>
+### Updating to v1.2
+
+Please observe the following guides when performing the upgrade.
+
+- [Platform Upgrade Guide](https://octobercms.com/support/article/rn-13)
+- [Laravel 6 LTS Upgrade Guide](https://octobercms.com/support/article/rn-11)
 
 <a name="edge-updates"></a>
 ### Bleeding Edge Updates

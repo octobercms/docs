@@ -1,9 +1,9 @@
 # AJAX Getting Started
 
 - [Introduction](#introduction)
-- [Including the framework](#framework-script)
-- [How AJAX requests work](#how-ajax-works)
-- [Usage example](#usage-example)
+- [Including the Framework](#framework-script)
+- [How AJAX Requests Work](#how-ajax-works)
+- [Usage Example](#usage-example)
 
 <a name="introduction"></a>
 ## Introduction
@@ -13,7 +13,7 @@ October includes a framework that brings a full suite of AJAX capabilities which
 The AJAX framework comes in two flavors, you may either use [the JavaScript API](../ajax/javascript-api) or [the data attributes API](../ajax/attributes-api). The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
 
 <a name="framework-script"></a>
-## Including the framework
+## Including the Framework
 
 The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% framework %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the October front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
 
@@ -26,7 +26,7 @@ The `{% framework %}` tag supports the optional **extras** parameter. If this pa
     {% framework extras %}
 
 <a name="how-ajax-works"></a>
-## How AJAX requests work
+## How AJAX Requests Work
 
 A page can issue an AJAX request either prompted by data attributes or by using JavaScript. Each request invokes an **event handler** -- also called an [AJAX handler](../ajax/handlers) -- on the server and can update page elements using partials. AJAX requests work best with forms, since the form data is automatically sent to the server. Here is request workflow:
 
@@ -40,7 +40,7 @@ A page can issue an AJAX request either prompted by data attributes or by using 
 > **Note**: Depending on the page context a [CMS partial](../cms/partials) or [backend partial](../backend/views-partials) view will be rendered.
 
 <a name="usage-example"></a>
-## Usage example
+## Usage Example
 
 Below is a simple example that uses the data attributes API to define an AJAX enabled form. The form will issue an AJAX request to the **onTest** handler and requests that the result container be updated with the **mypartial** partial markup.
 

@@ -2,8 +2,8 @@
 
 - [Scoreboards](#scoreboards)
 - [Indicators](#indicators)
-- [Pie chart](#pie-chart)
-- [Bar chart](#bar-chart)
+- [Pie Chart](#pie-chart)
+- [Bar Chart](#bar-chart)
 
 The back-end user interface includes a number of HTML controls that you can use on your pages.
 
@@ -84,7 +84,7 @@ Indicators are simple reporting element that have a title, a value and a descrip
 > **Note**: The example is given in the context of a scoreboard area. If you use the indicators in a [report widget](widgets#report-widgets) partial, the class **scoreboard-item** shouldn't be used.
 
 <a name="pie-chart"></a>
-## Pie chart
+## Pie Chart
 
 The pie chart outputs information as a circle diagram, with optional label in the center. Example markup:
 
@@ -103,7 +103,7 @@ The pie chart outputs information as a circle diagram, with optional label in th
 ![image](https://github.com/octobercms/docs/blob/master/images/traffic-sources.png?raw=true) {.img-responsive .frame}
 
 <a name="bar-chart"></a>
-## Bar chart
+## Bar Chart
 
 The next example shows a bar chart markup. The **wrap-legend** class is optional, it manages the legend layout. The **data-height** and **data-full-width** attributes are optional as well.
 

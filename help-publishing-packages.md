@@ -1,10 +1,11 @@
 # Publishing Packages
 
 - [Introduction](#introduction)
-- [Publishing Plugins](#publishing-plugins)
-- [Publishing Themes](#publishing-themes)
-- [Declaring Dependencies](#dependencies)
-- [Tagging a Release](#tagging-release)
+    - [Publishing Plugins](#publishing-plugins)
+    - [Publishing Themes](#publishing-themes)
+    - [Declaring Dependencies](#dependencies)
+    - [Tagging a Release](#tagging-release)
+- [Private Plugins and Themes](#private-plugins-themes)
 - [Using Laravel Packages](#laravel-packages)
     - [Configuration Files](#laravel-config-files)
     - [Aliases & Service Providers](#laravel-aliases-service-providers)
@@ -22,7 +23,7 @@ Your package also must reside in a source control repository that can be accesse
 Be sure to start your package `name` with **oc-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer#repository-naming).
 
 <a name="publishing-plugins"></a>
-## Publishing Plugins
+### Publishing Plugins
 
 When publishing your plugin the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-plugin** and include the `composer/installers` package as a dependency.
 
@@ -35,8 +36,10 @@ When publishing your plugin the `composer.json` file should have this JSON conte
         }
     }
 
+A plugin with the code **Acme.Blog** will have a composer package name of `acme/blog-plugin` and will be installed in the **plugins/acme/blog** directory.
+
 <a name="publishing-themes"></a>
-## Publishing Themes
+### Publishing Themes
 
 When publishing your theme the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-theme** and include the `composer/installers` package as a dependency.
 
@@ -49,27 +52,68 @@ When publishing your theme the `composer.json` file should have this JSON conten
         }
     }
 
-> **Reminder**: Be sure to specify any dependencies in your composer file as you would using the  `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions)
+A plugin with the code **Acme.Boilerplate** will have a composer package name of `acme/boilerplate-theme` and be installed in the **themes/boilerplate** directory.
 
 <a name="dependencies"></a>
-## Declaring Dependencies
+### Declaring Dependencies
 
 Plugins and themes alike can depend on other packages.
 
+#### Requiring another plugin
+
+Navigate to your theme or plugin directory and use `composer require` to include it as a dependency.
+
+    composer require acme/blog-plugin
+
+You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions).
+
+#### Requiring another theme
+
+Navigate to your theme or plugin directory and use `composer require` to include it as a dependency.
+
+    composer require acme/vanilla-theme
+
+Make sure that this package is included in the `require` property found in the [theme information file](../themes/development#dependencies).
+
 <a name="tagging-release"></a>
-## Tagging a Release
+### Tagging a Release
 
 Packages in October CMS follow semantic versioning and Composer uses git to determine the stability and impact of a given release.
 
-Listing your tags
+#### Listing your tags
+
+Use the `git tag` command to list the existing tags for your package.
 
     $ git tag
     v1.0
     v2.0
 
-Creating a tag
+#### Creating a new tag
+
+To create a new tag add (`-a`) the version with an optional (`-m`) message.
 
     git tag -a v2.0.1 -m "Version 2 is here!"
+
+In addition to tagging, you should also increment the version file found in your [plugin](../plugin/updates) or [theme](../themes/development#version-file).
+
+<a name="private-plugins-themes"></a>
+## Private Plugins and Themes
+
+Composer allows you to add private repositories from GitHub and other providers to your October CMS projects. Make sure you have followed the same instructions for [publishing plugins](#publishing-plugins) and [themes](#publishing-themes) respectively.
+
+In all cases, you should have a copy of your private plugin or theme stored somewhere outside of the main project. The `plugin:install` and `theme:install` commands can be used to install private plugins from either a remote or local source. This will add the location to your composer file and install it like any other package.
+
+#### Install from a remote source
+
+Use the `--source` option to specify the location to your remote source when installing.
+
+    php artisan plugin:install Acme.Blog --source=git@github.com:acme/blog-plugin.git
+
+#### Install from a local source
+
+You may also use a source found on a local or network drive.
+
+    php artisan plugin:install Acme.Blog --source=../private-plugins/acme-blog
 
 <a name="laravel-packages"></a>
 ## Using Laravel Packages
@@ -132,9 +176,7 @@ Now the package configuration has been included natively in October CMS and the 
 <a name="laravel-aliases-service-providers"></a>
 ### Aliases & Service Providers
 
-By default, October CMS disables the loading of discovered packages through [Laravel's package discovery service](https://laravel.com/docs/6.x/packages#package-discovery), in order to allow packages used by plugins to be disabled if the plugin itself is disabled. Please note that packages defined in `app.providers` will still be loaded even if discovery is disabled.
-
-> **NOTE:** It is possible to set `app.loadDiscoveredPackages` to `true` in the project configuration to enable automatic loading of these packages. This will result in packages being loaded, even if the plugin using them is disabled. This is **NOT RECOMMENDED.**
+By default, October CMS will load discovered packages through [Laravel's package discovery service](https://laravel.com/docs/6.x/packages#package-discovery), in order to allow packages used by plugins to be disabled if the plugin itself is disabled. Please note that packages defined in `app.providers` will still be loaded even if discovery is disabled.
 
 In order to manually register ServiceProviders and Aliases provided by external Laravel packages that are used by your plugins you should use the `App` facade and `AliasLoader` instance respectively:
 

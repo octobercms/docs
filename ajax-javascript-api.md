@@ -1,9 +1,9 @@
 # AJAX JavaScript API
 
 - [JavaScript API](#javascript-api)
-- [Usage examples](#javascript-examples)
-- [Global AJAX events](#global-events)
-- [Usage examples](#global-events-examples)
+- [Usage Examples](#javascript-examples)
+- [Global AJAX Events](#global-events)
+- [Usage Examples](#global-events-examples)
 
 <a name="javascript-api"></a>
 ## JavaScript API
@@ -44,7 +44,7 @@ Handler | Description
 **handleRedirectResponse(url)** | called when the browser should redirect to another location.
 
 <a name="javascript-examples"></a>
-## Usage examples
+## Usage Examples
 
 Request a confirmation before the onDelete request is sent:
 
@@ -94,7 +94,7 @@ Run `onCalculate` handler and if successful, run some custom code after the defa
     }})
 
 <a name="global-events"></a>
-## Global AJAX events
+## Global AJAX Events
 
 The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
 
@@ -120,7 +120,7 @@ Event | Description
 **ajaxAlways** | triggered regardless if the AJAX request fails or was successful.
 
 <a name="global-events-examples"></a>
-## Usage examples
+## Usage Examples
 
 Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.
 

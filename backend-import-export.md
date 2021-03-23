@@ -1,17 +1,17 @@
 # Backend importing and exporting
 
 - [Introduction](#introduction)
-- [Configuring the behavior](#configuring-import-export)
-    - [Import page](#import-page)
-    - [Export page](#export-page)
-    - [Format options](#format-options)
-- [Import and export views](#import-export-views)
-    - [Import view](#import-view)
-    - [Export view](#export-view)
-- [Defining an import model](#import-model)
-- [Defining an export model](#export-model)
-- [Custom options](#custom-options)
-- [Integration with list behavior](#list-behavior-integration)
+- [Configuring the Behavior](#configuring-import-export)
+    - [Import Page](#import-page)
+    - [Export Page](#export-page)
+    - [Format Options](#format-options)
+- [Import and Export Views](#import-export-views)
+    - [Import View](#import-view)
+    - [Export View](#export-view)
+- [Defining an Import Model](#import-model)
+- [Defining an Export Model](#export-model)
+- [Custom Options](#custom-options)
+- [Integration with List Behavior](#list-behavior-integration)
 
 <a name="introduction"></a>
 ## Introduction
@@ -35,7 +35,7 @@ The behavior configuration is defined in two parts, each part depends on a speci
     }
 
 <a name="configuring-import-export"></a>
-## Configuring the behavior
+## Configuring the Behavior
 
 The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
 
@@ -63,7 +63,7 @@ Option | Description
 **defaultFormatOptions** | a configuration array or reference to a config file for the default CSV format options.
 
 <a name="import-page"></a>
-### Import page
+### Import Page
 
 To support the Import page add the following configuration to the YAML file:
 
@@ -84,7 +84,7 @@ Option | Description
 **permissions** | user permissions needed to perform the operation, optional
 
 <a name="export-page"></a>
-### Export page
+### Export Page
 
 To support the Export page add the following configuration to the YAML file:
 
@@ -106,7 +106,7 @@ Option | Description
 **useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
 
 <a name="format-options"></a>
-### Format options
+### Format Options
 
 To override the default CSV format options add the following configuration to the YAML file:
 
@@ -126,14 +126,14 @@ Option | Description
 **encoding** | File encoding (only used for the import).
 
 <a name="import-export-views"></a>
-## Import and export views
+## Import and Export Views
 
 For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax/#introduction) with the corresponding name - **import.htm** and **export.htm**.
 
 The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 
 <a name="import-view"></a>
-### Import view
+### Import View
 
 The **import.htm** view represents the Import page that allows users to import data. A typical Import page contains breadcrumbs, the import section itself, and the submission buttons. The **data-request** attribute should refer to the `onImport` AJAX handler provided by the behavior. Below is a contents of the typical import.htm view file.
 
@@ -157,7 +157,7 @@ The **import.htm** view represents the Import page that allows users to import d
     <?= Form::close() ?>
 
 <a name="export-view"></a>
-### Export view
+### Export View
 
 The **export.htm** view represents the Export page that allows users to export a file from the database. A typical Export page contains breadcrumbs, the export section itself, and the submission buttons. The **data-request** attribute should refer to the `onExport` AJAX handler provided by the behavior. Below is a contents of the typical export.htm form.
 
@@ -181,7 +181,7 @@ The **export.htm** view represents the Export page that allows users to export a
     <?= Form::close() ?>
 
 <a name="import-model"></a>
-## Defining an import model
+## Defining an Import Model
 
 For importing data you should create a dedicated model for this process which extends the `Backend\Models\ImportModel` class. Here is an example class definition:
 
@@ -222,7 +222,7 @@ Method | Description
 `logSkipped(rowIndex, message)` | Used when the entire row of data was not imported (skipped).
 
 <a name="export-model"></a>
-## Defining an export model
+## Defining an Export Model
 
 For exporting data you should create a dedicated model which extends the `Backend\Models\ExportModel` class. Here is an example:
 
@@ -241,7 +241,7 @@ For exporting data you should create a dedicated model which extends the `Backen
 The class must define a method called `exportData` used for returning the export data. The first parameter `$columns` is an array of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
 
 <a name="custom-options"></a>
-## Custom options
+## Custom Options
 
 Both import and export forms support custom options that can be introduced using form fields, defined in the **form** option in the import or export configuration respectively. These values are then passed to the Import / Export model and are available during processing.
 
@@ -281,7 +281,7 @@ The value of the form field above called **auto_create_lists** can be accessed u
     }
 
 <a name="list-behavior-integration"></a>
-## Integration with list behavior
+## Integration with List Behavior
 
 There is an alternative approach to exporting data that uses the [list behavior](lists) to provide the export data. In order to use this feature you should have the `Backend.Behaviors.ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
 
