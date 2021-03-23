@@ -5,7 +5,7 @@
 - [Theme Preview Image](#preview-image)
 - [Theme Customization](#customization)
 - [Theme Dependencies](#dependencies)
-<!-- - [Localization](#localization) -->
+- [Localization](#localization)
 
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the October CMS Marketplace.
 
@@ -146,7 +146,6 @@ A theme can depend on plugins by defining a **require** option in the [Theme inf
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
 
-<!--
 <a name="localization"></a>
 ## Localization
 
@@ -176,5 +175,4 @@ The **lang.php** file should define and return an array of any depth, for exampl
         ]
     ];
 
-You are then able to reference the keys using `themes.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `themes.acme::lang.options.website_name`
--->
+You are then able to reference the keys using `themes.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `themes.acme::lang.options.website_name`.

@@ -57,13 +57,15 @@ A plugin with the code **Acme.Boilerplate** will have a composer package name of
 <a name="dependencies"></a>
 ### Declaring Dependencies
 
-Plugins and themes alike can depend on other packages.
+Plugins and themes alike can depend on other packages. Use the `composer require` command to include them in your composer.json file.
+
+> **Note**: The `--no-update` switch should be used to instruct composer to only include a reference to the dependency. Otherwise, the files will be installed and included in your package source.
 
 #### Requiring another plugin
 
 Navigate to your theme or plugin directory and use `composer require` to include it as a dependency.
 
-    composer require acme/blog-plugin
+    composer require --no-update acme/blog-plugin
 
 You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions).
 
@@ -71,7 +73,7 @@ You should also make sure that this package is included in the `$require` proper
 
 Navigate to your theme or plugin directory and use `composer require` to include it as a dependency.
 
-    composer require acme/vanilla-theme
+    composer require --no-update acme/vanilla-theme
 
 Make sure that this package is included in the `require` property found in the [theme information file](../themes/development#dependencies).
 
