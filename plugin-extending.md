@@ -1,35 +1,37 @@
-# Extending plugins
+# Extending Plugins
 
-- [Extending with events](#extending-with-events)
-    - [Subscribing to events](#subscribing-to-events)
-    - [Declaring events](#declaring-events)
-- [Extending back-end views](#backend-view-events)
-- [Usage examples](#usage-examples)
-    - [Extending a User model](#extending-user-model)
-    - [Extending a backend form](#extending-backend-form)
-    - [Extending a backend list](#extending-backend-list)
-    - [Extending a component](#extending-component)
-    - [Extending the backend menu](#extending-backend-menu)
+- [Extending with Events](#extending-with-events)
+    - [Subscribing to Events](#subscribing-to-events)
+    - [Declaring Events](#declaring-events)
+- [Extending Backend Views](#backend-view-events)
+- [Usage Examples](#usage-examples)
+    - [Extending a User Model](#extending-user-model)
+    - [Extending a Backend Form](#extending-backend-form)
+    - [Extending a Backend List](#extending-backend-list)
+    - [Extending a Component](#extending-component)
+    - [Extending the Backend Menu](#extending-backend-menu)
 
-
-<!-- Behaviors: Mixin concept, dynamic implement, extend constructor -->
-<!-- IoC/Facades: Replacing objects -->
 
 <a name="extending-with-events"></a>
-## Extending with events
+## Extending with Events
 
 The [Event service](../services/events) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
 
 <a name="subscribing-to-events"></a>
-### Subscribing to events
+### Subscribing to Events
 
 The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
 
-    public function boot()
+    class Plugin extends PluginBase
     {
-        Event::listen('rainlab.user.register', function ($user) {
-            // Code to register $user->email to mailing list
-        });
+        // [...]
+
+        public function boot()
+        {
+            Event::listen('rainlab.user.register', function ($user) {
+                // Code to register $user->email to mailing list
+            });
+        }
     }
 
 The same can be achieved by extending the model's constructor and using a local event.
@@ -41,7 +43,7 @@ The same can be achieved by extending the model's constructor and using a local 
     });
 
 <a name="declaring-events"></a>
-### Declaring / Firing  events
+### Declaring / Firing Events
 
 You can fire events globally (through the Event service) or locally.
 
@@ -71,7 +73,7 @@ Once this event has been subscribed to, the parameters are available in the hand
     });
 
 <a name="backend-view-events"></a>
-## Extending backend views
+## Extending Backend Views
 
 Sometimes you may wish to allow a backend view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent` method found in all backend controllers.
 
@@ -96,133 +98,119 @@ The above example would output the following markup:
     </div>
 
 <a name="usage-examples"></a>
-## Usage examples
+## Usage Examples
 
 These are some practical examples of how events can be used.
 
 <a name="extending-user-model"></a>
-### Extending a User model
+### Extending a User Model
 
 This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
 
-    class Plugin extends PluginBase
-    {
-        [...]
+    // Local event hook that affects all users
+    User::extend(function ($model) {
+        $model->bindEvent('model.getAttribute', function ($attribute, $value) {
+            if ($attribute === 'foo') {
+                return 'bar';
+            }
+        });
+    });
 
-        public function boot()
-        {
-            // Local event hook that affects all users
-            User::extend(function ($model) {
-                $model->bindEvent('model.getAttribute', function ($attribute, $value) {
-                    if ($attribute === 'foo') {
-                        return 'bar';
-                    }
-                });
+    // Double event hook that affects user #2 only
+    User::extend(function ($model) {
+        $model->bindEvent('model.afterFetch', function () use ($model) {
+            if ($model->id !== 2) {
+                return;
+            }
+
+            $model->bindEvent('model.getAttribute', function ($attribute, $value) {
+                if ($attribute === 'foo') {
+                    return 'bar';
+                }
             });
+        });
+    });
 
-            // Double event hook that affects user #2 only
-            User::extend(function ($model) {
-                $model->bindEvent('model.afterFetch', function () use ($model) {
-                    if ($model->id !== 2) {
-                        return;
-                    }
+To add model validation for introduced fields, hook into the `beforeValidate` event and throw a `ValidationException` exception.
 
-                    $model->bindEvent('model.getAttribute', function ($attribute, $value) {
-                        if ($attribute === 'foo') {
-                            return 'bar';
-                        }
-                    });
-                });
-            });
-        }
-    }
+    User::extend(function ($model) {
+        $model->bindEvent('model.beforeValidate', function () use ($model) {
+            if (!$model->billing_first_name) {
+                throw new \ValidationException(['billing_first_name' => 'First name is required']);
+            }
+        });
+    });
 
 <a name="extending-backend-form"></a>
-### Extending backend forms
+### Extending Backend Forms
 
 There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms#extend-form-behavior).
 
 This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
-    class Plugin extends PluginBase
-    {
-        [...]
-
-        public function boot()
-        {
-            // Extend all backend form usage
-            Event::listen('backend.form.extendFields', function($widget) {
-                // Only apply this listener when the Users controller is being used
-                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
-                    return;
-                }
-
-                // Only apply this listener when the User model is being modified
-                if (!$widget->model instanceof \RainLab\User\Models\User) {
-                    return;
-                }
-
-                // Only apply this listener when the Form widget in question is a root-level
-                // Form widget (not a repeater, nestedform, etc)
-                if ($widget->isNested) {
-                    return;
-                }
-
-                // Add an extra birthday field
-                $widget->addFields([
-                    'birthday' => [
-                        'label'   => 'Birthday',
-                        'comment' => 'Select the users birthday',
-                        'type'    => 'datepicker'
-                    ]
-                ]);
-
-                // Remove a Surname field
-                $widget->removeField('surname');
-            });
+    // Extend all backend form usage
+    Event::listen('backend.form.extendFields', function($widget) {
+        // Only apply this listener when the Users controller is being used
+        if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
+            return;
         }
-    }
 
-> **Note**: In some cases (adding fields that should be made translatable by [RainLab.Translate](https://github.com/rainlab/translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://octobercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
+        // Only apply this listener when the User model is being modified
+        if (!$widget->model instanceof \RainLab\User\Models\User) {
+            return;
+        }
+
+        // Only apply this listener when the Form widget in question is a root-level
+        // Form widget (not a repeater, nestedform, etc)
+        if ($widget->isNested) {
+            return;
+        }
+
+        // Add an extra birthday field
+        $widget->addFields([
+            'birthday' => [
+                'label'   => 'Birthday',
+                'comment' => 'Select the users birthday',
+                'type'    => 'datepicker'
+            ]
+        ]);
+
+        // Remove a Surname field
+        $widget->removeField('surname');
+    });
+
+> **Note**: You may also use the `backend.form.extendFieldsBefore` event to add fields.
 
 <a name="extending-backend-list"></a>
-### Extending a backend list
+### Extending a Backend List
 
 This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 
-    class Plugin extends PluginBase
-    {
-        [...]
-
-        public function boot()
-        {
-            // Extend all backend list usage
-            Event::listen('backend.list.extendColumns', function ($widget) {
-                // Only for the User controller
-                if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
-                    return;
-                }
-
-                // Only for the User model
-                if (!$widget->model instanceof \RainLab\User\Models\User) {
-                    return;
-                }
-
-                // Add an extra birthday column
-                $widget->addColumns([
-                    'birthday' => [
-                        'label' => 'Birthday'
-                    ],
-                ]);
-
-                // Remove a Surname column
-                $widget->removeColumn('surname');
-            });
+    // Extend all backend list usage
+    Event::listen('backend.list.extendColumns', function ($widget) {
+        // Only for the User controller
+        if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
+            return;
         }
-    }
+
+        // Only for the User model
+        if (!$widget->model instanceof \RainLab\User\Models\User) {
+            return;
+        }
+
+        // Add an extra birthday column
+        $widget->addColumns([
+            'birthday' => [
+                'label' => 'Birthday'
+            ],
+        ]);
+
+        // Remove a Surname column
+        $widget->removeColumn('surname');
+    });
 
 <a name="extending-component"></a>
-### Extending a component
+### Extending a Component
 
 This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components#component-class-definition).
 
@@ -230,7 +218,7 @@ This example will declare a new global event `rainlab.forum.topic.post` and loca
     {
         public function onPost()
         {
-            [...]
+            // [...]
 
             /*
              * Extensibility
@@ -247,47 +235,45 @@ Next this will demonstrate how to hook to this new event from inside the [page e
     ==
     function onInit()
     {
-        $this['topic']->bindEvent('topic.post', function($post, $postUrl) {
+        $this->topic->bindEvent('topic.post', function($post, $postUrl) {
             trace_log('A post has been submitted at '.$postUrl);
         });
     }
 
 <a name="extending-backend-menu"></a>
-### Extending the backend menu
+### Extending the Backend Menu
 
 This example will replace the label for CMS and Pages in the backend with *...*.
 
-    class Plugin extends PluginBase
-    {
-        [...]
+    Event::listen('backend.menu.extendItems', function($manager) {
 
-        public function boot()
-        {
-            Event::listen('backend.menu.extendItems', function($manager) {
+        // Add main menu item
+        $manager->addMainMenuItems('October.Cms', [
+            'cms' => [
+                'label' => '...'
+            ]
+        ]);
 
-                $manager->addMainMenuItems('October.Cms', [
-                    'cms' => [
-                        'label' => '...'
-                    ]
-                ]);
+        // Add side menu item
+        $manager->addSideMenuItems('October.Cms', 'cms', [
+            'pages' => [
+                'label' => '...'
+            ]
+        ]);
 
-                $manager->addSideMenuItems('October.Cms', 'cms', [
-                    'pages' => [
-                        'label' => '...'
-                    ]
-                ]);
+    });
 
-            });
-        }
-    }
-
-Similarly we can remove the menu items with the same event:
+Similarly, we can remove the menu items using the same event.
 
     Event::listen('backend.menu.extendItems', function($manager) {
 
+        // Remove all items
         $manager->removeMainMenuItem('October.Cms', 'cms');
+
+        // Remove single item
         $manager->removeSideMenuItem('October.Cms', 'cms', 'pages');
 
+        // Remove two items
         $manager->removeSideMenuItems('October.Cms', 'cms', [
             'pages',
             'partials'
