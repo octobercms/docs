@@ -445,6 +445,17 @@ This is an example of the model class custom method that supplies the dropdown o
     {
         return ['published' => 'Published', ...];
     }
+    
+You have the possibility to add an icon or an image for every option which will be rendered in the dropdown field. In this case you have to specify the options as a multidimensional array with the following format **key => [label-text, label-icon]**.
+
+    public function listStatuses($fieldName, $value, $formData)
+    {
+        return [
+            'published' => ['Published', 'icon-check-circle'],
+            'unpublished' => ['Unpublished', 'icon-minus-circle'],
+            'draft' => ['Draft', 'icon-clock-o']
+        ];
+    }
 
 If you want to call a method on an external class, you may do it by calling a static method on any fully qualified object. Simply specify the `ClassName::method` syntax as a string in the `options` parameter.
 
