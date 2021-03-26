@@ -1,20 +1,20 @@
 # Validation
 
-- [Basic usage](#basic-usage)
-- [Working with error messages](#working-with-error-messages)
-- [Error messages & views](#error-messages-and-views)
-- [Available validation rules](#available-validation-rules)
-- [Conditionally adding rules](#conditionally-adding-rules)
+- [Basic Usage](#basic-usage)
+- [Working with Error Messages](#working-with-error-messages)
+- [Error Messages & Views](#error-messages-and-views)
+- [Available Validation Rules](#available-validation-rules)
+- [Conditionally Adding Rules](#conditionally-adding-rules)
 - [Validating Arrays](#validating-arrays)
-- [Custom error messages](#custom-error-messages)
-- [Custom validation rules](#custom-validation-rules)
-
-> This section is for detailing validation with the `Validator` class. Validating a model is handled slightly differently via a trait. Please see the [Validation Trait](../database/traits#validation) section for more information on validating models.
+- [Custom Error Messages](#custom-error-messages)
+- [Custom Validation Rules](#custom-validation-rules)
 
 <a name="basic-usage"></a>
 ## Basic usage
 
-The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class.
+The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class. It is useful when processing form data submitted by the end user.
+
+> **Note**: When working with models, October CMS ships with a useful [Validation Trait](../database/traits#validation) that implements the `Validator` class and supports the same rule definitions.
 
 #### Basic Validation Example
 
@@ -68,7 +68,7 @@ You may also access an array of the failed validation rules, without messages. T
 The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
 
 <a name="working-with-error-messages"></a>
-## Working with error messages
+## Working with Error Messages
 
 After calling the `messages` method on a `Validator` instance, you will receive a `Illuminate\Support\MessageBag` instance, which has a variety of convenient methods for working with error messages.
 
@@ -107,7 +107,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
     }
 
 <a name="error-messages-and-views"></a>
-## Error messages & views
+## Error Messages & Views
 
 Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October. Consider the following routes as an example:
 
@@ -141,7 +141,7 @@ You may then access the named `MessageBag` instance from the `$errors` variable:
     {{ errors.login.first('email') }}
 
 <a name="available-validation-rules"></a>
-## Available validation rules
+## Available Validation Rules
 
 Below is a list of all available validation rules and their function:
 
@@ -450,7 +450,7 @@ The field under validation must be formatted as an URL.
 > **Note**: This function uses PHP's `filter_var` method.
 
 <a name="conditionally-adding-rules"></a>
-## Conditionally adding rules
+## Conditionally Adding Rules
 
 In some situations, you may wish to run validation checks against a field **only** if that field is present in the input array. To quickly accomplish this, add the `sometimes` rule to your rule list:
 
@@ -515,7 +515,7 @@ You may also use "array notation" in your validation rules if you wish. These ru
     ]);
 
 <a name="custom-error-messages"></a>
-## Custom error messages
+## Custom Error Messages
 
 If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
 
@@ -547,7 +547,7 @@ Sometimes you may wish to specify a custom error messages only for a specific fi
     ];
 
 <a name="localization"></a>
-#### Specifying custom messages in language files
+#### Specifying Custom Messages in Language Files
 
 In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
 
@@ -561,7 +561,7 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
     Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 
 <a name="custom-validation-rules"></a>
-## Custom validation rules
+## Custom Validation Rules
 
 #### Registering a custom validation rule
 
