@@ -56,11 +56,13 @@ Use the following code in **server** section. If you have installed October into
     }
 
     # Whitelist
-    ## Let October handle if static file not exists
     location ~ ^/favicon\.ico { try_files $uri /index.php; }
     location ~ ^/sitemap\.xml { try_files $uri /index.php; }
     location ~ ^/robots\.txt { try_files $uri /index.php; }
     location ~ ^/humans\.txt { try_files $uri /index.php; }
+
+    # Block all .dotfiles except well-known
+    location ~ /\.(?!well-known).* { deny all; }
 
     ## Let nginx return 404 if static file not exists
     location ~ ^/storage/app/uploads/public { try_files $uri 404; }
