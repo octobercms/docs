@@ -67,7 +67,7 @@ Use the following code in **server** section. If you have installed October into
     ## Let nginx return 404 if static file not exists
     location ~ ^/storage/app/uploads/public { try_files $uri 404; }
     location ~ ^/storage/app/media { try_files $uri 404; }
-    location ~ ^/storage/app/resized { try_files $uri 404; }
+    location ~ ^/storage/app/resources { try_files $uri 404; }
     location ~ ^/storage/temp/public { try_files $uri 404; }
 
     location ~ ^/modules/.*/assets { try_files $uri 404; }
@@ -112,7 +112,7 @@ Paste the following code in the editor and change the **host address** and  **se
             "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
             "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
             "^/storage/app/media/.*$" => "$0",
-            "^/storage/app/resized/.*$" => "$0",
+            "^/storage/app/resources/.*$" => "$0",
             "^/storage/temp/public/[\w-]+/.*$" => "$0",
             "^/(favicon\.ico)$" => "$0",
             "(.*)" => "/index.php$1"
@@ -136,7 +136,7 @@ If your webserver is running Internet Information Services (IIS) you can use the
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/.well-known/*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/uploads/public/.*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/media/.*" negate="true" />
-                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/resized/.*" negate="true" />
+                           <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/app/resources/.*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/storage/temp/public/.*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/themes/.*/(assets|resources)/.*" negate="true" />
                            <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/plugins/.*/(assets|resources)/.*" negate="true" />
@@ -154,11 +154,15 @@ If your webserver is running Internet Information Services (IIS) you can use the
 
 For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
 
-    php artisan october:mirror public/
+    php artisan october:mirror
 
 This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
 
-> **Note**: The above command may need to be performed with System Administrator or *sudo* privileges. It should also be performed after each system update or when a new plugin is installed.
+The command should be performed after each system update or when a new plugin is installed. You may instruct October CMS to automatically do this using the `system.auto_mirror_public` configuration item.
+
+    AUTO_MIRROR_PUBLIC=true
+
+> **Note**: For Windows operating systems, the `october:mirror` command must be performed in a console running as administrator. Therefore it is more suitable to run as part of a deployment process.
 
 <a name="shared-hosting"></a>
 ## Shared Hosting

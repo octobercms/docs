@@ -153,7 +153,7 @@ If you wish to install the theme in a custom directory, simply provide the secon
 <a name="theme-list-command"></a>
 ### List Themes
 
-`theme:list` - list installed themes. Use the **-m** option to include popular themes in the Marketplace.
+`theme:list` - list installed themes.
 
     php artisan theme:list
 
@@ -162,14 +162,14 @@ If you wish to install the theme in a custom directory, simply provide the secon
 
 `theme:use` - switch the active theme. The following example will switch to the theme in `/themes/rainlab-vanilla`
 
-    php artisan theme:use rainlab-vanilla
+    php artisan theme:use vanilla
 
 <a name="theme-remove-command"></a>
 ### Remove Theme
 
 `theme:remove` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
 
-    php artisan theme:remove rainlab-vanilla
+    php artisan theme:remove vanilla
 
 <!--
 <a name="theme-sync-command"></a>
@@ -219,13 +219,13 @@ October CMS includes a number of utility commands.
 <a name="cache-clear-command"></a>
 ### Mirror Public Directory
 
-`october:mirror` - creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration#public-folder).
+`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/configuration#public-folder) using symbolic linking.
 
-    php artisan october:mirror public
+    php artisan october:mirror
 
-By default the symlinks created will be absolute symlinks, to create them as relative symlinks instead include the `--relative` option.
+If you want to specify a custom folder, you can pass it as the second argument, which is relative to the base directory.
 
-    php artisan october:mirror public --relative
+    php artisan october:mirror mypublicfolder
 
 <a name="october-util-command"></a>
 ### Miscellaneous Commands

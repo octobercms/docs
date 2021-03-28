@@ -111,6 +111,10 @@ Use the `--source` option to specify the location to your remote source when ins
 
     php artisan plugin:install Acme.Blog --source=git@github.com:acme/blog-plugin.git
 
+To use a specific version or branch, use the `--want` option, for example to request the **develop** branch version.
+
+    php artisan plugin:install Acme.Blog --source=git@github.com:acme/blog-plugin.git --want=dev-develop
+
 #### Install from a local source
 
 You may also use a source found on a local or network drive.
