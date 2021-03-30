@@ -1,17 +1,35 @@
 # Image Resizing
 
-- [Resize parameters](#resize-parameters)
-- [Available modes](#available-modes)
+- [Introduction](#introduction)
+    - [Resize Parameters](#resize-parameters)
+    - [Available Modes](#available-modes)
 <!-- - [Resize sources](#resize-sources) -->
 
->**Note:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
+<a name="introduction"></a>
+## Introduction
+
+October CMS ships with an image resizer that lets you change the shape and size of supported images. To resize an image, use the `open` method on the `Resizer` facade to target a file path.
+
+    $image = Resizer::open('path/to/image.jpg');
+
+You may also pass an uploaded file from the [page request input](../services/request-input).
+
+    $image = Resizer::open(Input::file('field_name'));
+
+To resize the image, call the `resize` method on the object to perform the resize. The first argument is the image width, the second argument is the image height and the third argument is an array of [resize parameters](#resize-parameters) options.
+
+    $image->resize(800, 600, ['mode' => 'crop']);
+
+The width and height arguments are also optional, for example, to use the existing width and only adjust the height, pass the second argument as `null`. This value is then calculated using original image ratio (automatic proportional scaling) based on the `mode` option.
+
+    $image->resize(800, null, [...]);
+
+Finally, use the `save` method to save the resized image to a new location.
+
+    $image->save('path/to/new/file.jpg');
 
 <a name="resize-parameters"></a>
 ## Resize Parameters
-
-The basic parameters provided to the ImageResizer are `(int) $width`, `(int) $height`, and `(array) $options`.
-
-If `$width` or `$height` is falsey or `'auto'`, that value is calculated using original image ratio (automatic proportional scaling).
 
 The following elements are supported in the options array are supported:
 

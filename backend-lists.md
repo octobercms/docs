@@ -237,7 +237,7 @@ You can also specify a custom text format, for example **Admin: Full Name (activ
 <a name="column-image"></a>
 ### Image
 
-`image` - displays an image using the built in [image resizing functionality](../services/image-resizing#resize-sources).
+`image` - displays an image column with the option to resize the output.
 
     avatar:
         label: Avatar
@@ -248,7 +248,7 @@ You can also specify a custom text format, for example **Admin: Full Name (activ
         options:
             quality: 80
 
-See the [image resizing docs](../services/image-resizing#resize-sources) for more information on what image sources are supported and what [options](../services/image-resizing#resize-parameters) are supported
+See the [image resizing article](../services/resizer#resize-parameters) for more information on what options are supported.
 
 <a name="column-number"></a>
 ### Number

@@ -95,7 +95,17 @@ To output the file contents directly, use the `output` method, this will include
 
     echo $model->avatar->output();
 
-You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. Read more about these parameters on the [Image Resizing](../services/image-resizing#resize-parameters) page.
+You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter.
+
+The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
+
+    echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
+
+Displaying an image on the page.
+
+    <img src="{{ model.avatar.getThumb(100, 100, {'mode':'exact', 'quality': 80, 'extension': 'webp'}) }}" alt="Description Image" />
+
+Read more about the available options for `getThumb` on the [image resizer article](../services/resizer#resize-parameters).
 
 <a name="attachments-usage-example"></a>
 ### Usage example

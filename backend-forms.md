@@ -445,7 +445,7 @@ This is an example of the model class custom method that supplies the dropdown o
     {
         return ['published' => 'Published', ...];
     }
-    
+
 You have the possibility to add an icon or an image for every option which will be rendered in the dropdown field. In this case you have to specify the options as a multidimensional array with the following format **key => [label-text, label-icon]**.
 
     public function listStatuses($fieldName, $value, $formData)
@@ -617,24 +617,24 @@ Checkbox lists support the same methods for defining the options as the [dropdow
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
 
 <div class="content-list collection-method-list" markdown="1">
-- [Code editor](#widget-codeeditor)
-- [Color picker](#widget-colorpicker)
-- [Data table](#widget-datatable)
-- [Date picker](#widget-datepicker)
-- [File upload](#widget-fileupload)
-- [Markdown editor](#widget-markdowneditor)
-- [Media finder](#widget-mediafinder)
+- [Code Editor](#widget-codeeditor)
+- [Color Picker](#widget-colorpicker)
+- [Data Table](#widget-datatable)
+- [Date Picker](#widget-datepicker)
+- [File Upload](#widget-fileupload)
+- [Markdown Editor](#widget-markdowneditor)
+- [Media Finder](#widget-mediafinder)
 - [Nested Form](#widget-nestedform)
-- [Record finder](#widget-recordfinder)
+- [Record Finder](#widget-recordfinder)
 - [Relation](#widget-relation)
 - [Repeater](#widget-repeater)
-- [Rich editor / WYSIWYG](#widget-richeditor)
+- [Rich Editor / WYSIWYG](#widget-richeditor)
 - [Sensitive](#widget-sensitive)
-- [Tag list](#widget-taglist)
+- [Tag List](#widget-taglist)
 </div>
 
 <a name="widget-codeeditor"></a>
-### Code editor
+### Code Editor
 
 `codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
 
@@ -651,7 +651,7 @@ Option | Description
 **fontSize** | the text font size. Default: 12.
 
 <a name="widget-colorpicker"></a>
-### Color picker
+### Color Picker
 `colorpicker` - renders controls to select a hexadecimal color value.
 
     color:
@@ -687,22 +687,15 @@ Supplying the available colors in the model class:
 If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors.
 
 <a name="widget-datatable"></a>
-### Data table
+### Data Table
 
 `datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.
 
     data:
         type: datatable
         adding: true
-        btnAddRowLabel: Add Row Above
-        btnAddRowBelowLabel: Add Row Below
-        btnDeleteRowLabel: Delete Row
-        columns: []
         deleting: true
-        dynamicHeight: true
-        fieldName: null
-        height: false
-        keyFrom: id
+        columns: []
         recordsPerPage: false
         searching: false
         toolbar: []
@@ -770,7 +763,7 @@ Validation | Description
 **required** | Validates that the data must be entered before saving.
 
 <a name="widget-datepicker"></a>
-### Date picker
+### Date Picker
 
 `datepicker` - renders a text field used for selecting date and times.
 
@@ -790,7 +783,7 @@ Option | Description
 **ignoreTimezone** | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
 
 <a name="widget-fileupload"></a>
-### File upload
+### File Upload
 
 `fileupload` - renders a file uploader for images or regular files.
 
@@ -826,7 +819,7 @@ Option | Description
 > **Note**: Unlike the [Media Finder form widget](#widget-mediafinder), the File Upload form widget uses [database file attachments](../database/attachments) so the field name be that of an `attachOne` or `attachMany` relationship attrbiute on your associated model.
 
 <a name="widget-markdowneditor"></a>
-### Markdown editor
+### Markdown Editor
 
 `markdown` - renders a basic editor for markdown formatted text.
 
@@ -840,7 +833,7 @@ Option | Description
 **mode** | the expected view mode, either tab or split. Default: tab.
 
 <a name="widget-mediafinder"></a>
-### Media finder
+### Media Finder
 
 `mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
 
@@ -860,7 +853,7 @@ Option | Description
 
 <a name="widget-nestedform"></a>
 ### Nested Form
-`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
+`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained. Fields can be defined inline.
 
     content:
         type: nestedform
@@ -876,31 +869,21 @@ Option | Description
                 title:
                     label: This the title
                     type: text
-            tabs:
-                meta_title:
-                    lable: Meta Title
-                    tab: SEO
-                color:
-                    label: Color
-                    type: colorpicker
-                    tab: Design
-            secondaryTabs:
-                is_active:
-                    label: Active
-                    type: checkbox
-                logo:
-                    label: Logo
-                    type: mediafinder
-                    mode: image
 
-A nested form supports the same syntax as a form itself, including tabs and secondaryTabs. The jsonsable attribute, has the structure of your form definition. It's even possible to use nested forms inside a nested form.
+Fields can also make reference to a `fields.yaml` file.
 
-> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model#standard-properties) or anything that can handle storing as an array.
+    profile:
+        label: Profile
+        type: nestedform
+        form: $/october/demo/models/profile/fields.yaml
+
+A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model#standard-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
 
 Option | Description
 ------------- | -------------
 **form**  | same as in [form definition](#form-fields)
-**usePanelStyles** | defines if a panel like look is applied or not (defaults true)
+**showPanel** | places the form inside a panel container. Default: true
+**useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: false
 
 <a name="widget-recordfinder"></a>
 ### Record finder
@@ -917,12 +900,6 @@ Option | Description
         keyFrom: id
         nameFrom: name
         descriptionFrom: email
-        conditions: email = "bob@example.com"
-        scope: whereActive
-        searchMode: all
-        searchScope: searchUsers
-        useRelation: false
-        modelClass: RainLab\User\Models\User
 
 Option | Description
 ------------- | -------------
@@ -938,8 +915,8 @@ Option | Description
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 **searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
 **searchScope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
-**useRelation** | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
-**modelClass** | Class of the model to use for listing records when useRelation = false
+**useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
+**modelClass** | class of the model to use for listing records when useRelation = false
 
 <a name="widget-relation"></a>
 ### Relation
