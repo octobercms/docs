@@ -28,8 +28,10 @@ Finally, use the `save` method to save the resized image to a new location.
 
     $image->save('path/to/new/file.jpg');
 
+> **Note**: There is also a `|resize` [markup filter](../markup/filter-resize) that can be used for resizing images in your themes.
+
 <a name="resize-parameters"></a>
-## Resize Parameters
+### Resize Parameters
 
 The following elements are supported in the options array are supported:
 
@@ -53,18 +55,3 @@ Mode | Description
 `landscape` | Resize to the given width and adapt the height to preserve aspect ratio
 `crop` | Crop to the given dimensions after fitting as much of the image as possible inside those
 `fit` | Fit the image inside the given maximal dimensions, keeping the aspect ratio
-
-<!--
-<a name="resize-sources"></a>
-## Resize sources
-
-The available sources that images can be resized from are as follows:
-
-- Plugins
-- Themes
-- Media Library
-- Uploads Directory
-- Models that extend the `\October\Rain\Database\Attach\File` model
-
-Available sources can be extended by listening to the [`system.resizer.getAvailableSources` event](../api/system/resizer/getavailablesources)
--->

@@ -14,13 +14,13 @@
 <a name="introduction"></a>
 ## Introduction
 
-October CMS uses [Composer](https://getcomposer.org/) to publish packages and is fully compatible, so their documentation applies as an extension of this article. However, a composer version is not the same as an October CMS version and these need to be managed separately.
+October CMS uses [Composer](https://getcomposer.org/) to publish packages and is fully compatible, so their documentation applies as an extension of this article.
 
 To publish your plugin or theme on the October CMS marketplace, you will need to first become an author and choose an author code. This code will determine the name of your packages and cannot be changed later.
 
-Your package also must reside in a source control repository that can be accessed by the October CMS gateway, such as [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/). For private packages, the server can access them using the credentials you provide during the publishing process.
+Your package should reside in a source control repository that can be accessed by the October CMS gateway, such as [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/). For private packages, the server can access them using the credentials you provide during the publishing process.
 
-Be sure to start your package `name` with **oc-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer#repository-naming).
+Be sure to start your package `name` ends with **-plugin** or **-theme** respectively, this will help others find your package and is in accordance with the [quality guidelines](../help/guidelines/developer#repository-naming). You may also include a prefix of **oc-** to indicate it is an October CMS package.
 
 <a name="publishing-plugins"></a>
 ### Publishing Plugins
@@ -107,19 +107,19 @@ In all cases, you should have a copy of your private plugin or theme stored some
 
 #### Install from a remote source
 
-Use the `--source` option to specify the location to your remote source when installing.
+Use the `--from` option to specify the location to your remote source when installing.
 
-    php artisan plugin:install Acme.Blog --source=git@github.com:acme/blog-plugin.git
+    php artisan plugin:install Acme.Blog --from=git@github.com:acme/blog-plugin.git
 
 To use a specific version or branch, use the `--want` option, for example to request the **develop** branch version.
 
-    php artisan plugin:install Acme.Blog --source=git@github.com:acme/blog-plugin.git --want=dev-develop
+    php artisan plugin:install Acme.Blog --from=git@github.com:acme/blog-plugin.git --want=dev-develop
 
 #### Install from a local source
 
 You may also use a source found on a local or network drive.
 
-    php artisan plugin:install Acme.Blog --source=../private-plugins/acme-blog
+    php artisan plugin:install Acme.Blog --from=../private-plugins/acme-blog
 
 <a name="laravel-packages"></a>
 ## Using Laravel Packages
