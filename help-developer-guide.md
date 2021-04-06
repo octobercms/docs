@@ -1,28 +1,29 @@
 # Developer Guide
 
-- [Writing documentation](#writing-docs)
-- [Exceptions to PSR standards](#psr-exceptions)
-    - [Controller methods can have a single underscore](#psr-exception-methods)
-    - [Subsequent expressions are on a new line](#psr-exception-newline-expressions)
-- [Developer standards and patterns](#developer-standards)
-    - [Vendor naming](#vendor-naming)
-    - [Repository naming](#repository-naming)
-    - [PHP Variable naming](#variable-naming)
-    - [HTML element naming](#element-naming)
-    - [View file naming](#view-naming)
-    - [Class naming](#class-naming)
-    - [Event naming](#event-naming)
-    - [Database table naming](#db-table-naming)
-    - [Component naming](#component-naming)
-    - [Controller naming](#controller-naming)
-    - [Model naming](#model-naming)
-    - [Model scopes](#model-scopes)
-    - [Class guidance](#class-guide)
-- [Environment configuration](#environment-config)
-    - [Use strict mode with MySQL](#strict-trans-tables)
+- [Writing Documentation](#writing-docs)
+- [Exceptions to PSR Standards](#psr-exceptions)
+    - [Controller Methods](#psr-exception-methods)
+    - [Expressions on New Line](#psr-exception-newline-expressions)
+- [Developer Standards and Patterns](#developer-standards)
+    - [Vendor Naming](#vendor-naming)
+    - [Repository Naming](#repository-naming)
+    - [Package Naming](#package-naming)
+    - [PHP Variable Naming](#variable-naming)
+    - [HTML Element Naming](#element-naming)
+    - [View File Naming](#view-naming)
+    - [Class Naming](#class-naming)
+    - [Event Naming](#event-naming)
+    - [Database Table Naming](#db-table-naming)
+    - [Component Naming](#component-naming)
+    - [Controller Naming](#controller-naming)
+    - [Model Naming](#model-naming)
+    - [Model Scopes](#model-scopes)
+    - [Class Guidance](#class-guide)
+- [Environment Configuration](#environment-config)
+    - [Use Strict Mode with MySQL](#strict-trans-tables)
 
 <a name="writing-docs"></a>
-## Writing documentation
+## Writing Documentation
 
 Your contributions to the October documentation are very welcome. Please follow the next rules if you want to contribute. How to style perfect October documentation pages:
 
@@ -44,9 +45,9 @@ Your contributions to the October documentation are very welcome. Please follow 
 There are some exceptions to the PSR standard used by October.
 
 <a name="psr-exception-methods"></a>
-### Controller methods can have a single underscore
+### Controller Methods
 
-PSR-2 states that methods must be in **camelCase**. However, in Backend controllers October will prefix AJAX handlers with the action name to define a controlled context. For example:
+Controller methods can have a single underscore. PSR-2 states that methods must be in **camelCase**. However, in Backend controllers October will prefix AJAX handlers with the action name to define a controlled context. For example:
 
     public function index()
     {
@@ -66,9 +67,9 @@ PSR-2 states that methods must be in **camelCase**. However, in Backend controll
 An exception must be granted for these scenarios.
 
 <a name="psr-exception-newline-expressions"></a>
-### Subsequent expressions are on a new line
+### Expressions on New Line
 
-PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing parenthesis.
+Subsequent expressions are on a new line. PSR-2 does not explicitly state that subsequent expressions should be on the same line as the closing parenthesis.
 
 The following code is considered valid and is recommended for better spacing between logic:
 
@@ -95,12 +96,12 @@ The following code is considered valid and is recommended for better spacing bet
 This is an acceptable preference based on a technicality, PSR-1 and PSR-2 are not explicit when using SHOULD, MUST, etc. in this case. However, at the time of writing, the PSR-2 codesniffer rules say it's not valid, so an exception may be required.
 
 <a name="developer-standards"></a>
-## Developer standards and patterns
+## Developer Standards and Patterns
 
 This section describes some standards that we highly recommend to follow for everybody, especially if you are going to publish your products on the Marketplace.
 
 <a name="vendor-naming"></a>
-### Vendor naming
+### Vendor Naming
 
 The vendor or author code in a namespace must begin with an uppercase character and should not contain underscores or dashes. These are examples of valid names:
 
@@ -115,7 +116,7 @@ These are examples of names that are **not** valid:
     Happy_gilmore.Golf
 
 <a name="repository-naming"></a>
-### Repository naming
+### Repository Naming
 
 When publishing work to a repository, such as Git, use the following naming as a convention. Plugins should be named with a `-plugin` suffix and optional `oc-` prefix.
 
@@ -127,8 +128,18 @@ Themes should be named with the `-theme` suffix and optional `oc-` prefix.
     happy-theme
     oc-happy-theme
 
+<a name="package-naming"></a>
+### Package Naming
+
+When publishing work to the marketplace, the composer package name should use either the `-plugin` suffix or `-theme` suffix based on the package type.
+
+    blog-plugin
+    happy-theme
+
+See the [publishing packages article](/docs/help/publishing-packages) for more details on additional requirements.
+
 <a name="variable-naming"></a>
-### PHP Variable naming
+### PHP Variable Naming
 
 Use **camelCase** everywhere except for the following:
 
@@ -137,7 +148,7 @@ Use **camelCase** everywhere except for the following:
 1. Language keys should use **snake_case**
 
 <a name="element-naming"></a>
-### HTML element naming
+### HTML Element Naming
 
 Form element names should use snake_case (underscores)
 
@@ -165,7 +176,7 @@ Element classes names should use hyphen-case (dashes)
     </div>
 
 <a name="view-naming"></a>
-### View file naming
+### View File Naming
 
 Partial views should begin with an underscore character. Whereas Controller and Layout views do not begin with an underscore character. Since views are often found in a single folder, the underscore (_) and dash (-) characters can be used to organise the files. A dash is used as a substitute for a space character. An underscore is used as a substitute for a slash character (folder or namespace).
 
@@ -177,7 +188,7 @@ Partial views should begin with an underscore character. Whereas Controller and 
 View files must end with the `.htm` file extension.
 
 <a name="class-naming"></a>
-### Class naming
+### Class Naming
 
 Classes commonly are placed in the `classes` directory. There is a number of class suffixes and prefixes that we recommend to use.
 
@@ -200,7 +211,7 @@ Classes commonly are placed in the `classes` directory. There is a number of cla
 > Don't get naming paralysis. Yes, names are very important but they're not important enough to waste huge amounts of time on. If you can't think up a good name in five minutes, move on.
 
 <a name="event-naming"></a>
-### Event naming
+### Event Naming
 
 When specifying [event names](../../docs/services/events). The term *after* is not used in Events, only the term *before* is used. For example:
 
@@ -236,7 +247,7 @@ When expecting multiple results, it is easy to combine the arrays like so:
     );
 
 <a name="db-table-naming"></a>
-### Database table naming
+### Database Table Naming
 
 Tables names should be prefixed with the author and plugin name.
 
@@ -258,7 +269,7 @@ The author and plugin name acronym is acceptable too:
     ab_category_id
 
 <a name="component-naming"></a>
-### Component naming
+### Component Naming
 
 Component classes are commonly place in the `components` directory. The name of a component should represent its primary function.
 
@@ -281,7 +292,7 @@ Using the suffix helps avoid conflicts with controller and model names. Alternat
     UserProfile
 
 <a name="controller-naming"></a>
-### Controller naming
+### Controller Naming
 
 Controllers are commonly are placed in `controllers` directory, for back-end controllers. The name of a controller should be a plural, for example:
 
@@ -291,7 +302,7 @@ Controllers are commonly are placed in `controllers` directory, for back-end con
     ProductCategories
 
 <a name="model-naming"></a>
-### Model naming
+### Model Naming
 
 Models are commonly are placed in `models` directory. The name of a model should be a singular, for example:
 
@@ -311,7 +322,7 @@ The fully qualified plugin name is also acceptable, for example:
     $user->rainlab_forum_member
 
 <a name="model-scopes"></a>
-### Model scopes
+### Model Scopes
 
 If a model scope returns a query object, used for chaining, they should be prefixed with `apply` to indicate they are being applied to the query. Defined as:
 
@@ -340,7 +351,7 @@ If a scope returns anything other than a query then any name can be used. Some a
     - lists
 
 <a name="class-guide"></a>
-### Class guidance
+### Class Guidance
 
 These points are to be considered in a relaxed fashion:
 
@@ -349,11 +360,20 @@ These points are to be considered in a relaxed fashion:
 1. If a property contains a collection (is an array), make the property `protected` with get `getProperties`, `getProperty` and `setProperty`.
 
 <a name="environment-config"></a>
-## Environment configuration
+## Environment Configuration
 
 <a name="strict-trans-tables"></a>
-### Use strict mode with MySQL
+### Use Strict Mode with MySQL
 
-When MySQL [STRICT_TRANS_TABLES mode](http://dev.mysql.com/doc/refman/5.0/en/sql-mode.html) is enabled the server performs strict data type validation. It is highly recommended to keep this mode enabled in MySQL during the development. This allows you to find errors before your code gets to a client's server with the enabled strict mode. The mode can be enabled in my.cnf (Unix) or my.ini (Windows) file:
+When MySQL [STRICT_TRANS_TABLES mode](http://dev.mysql.com/doc/refman/5.0/en/sql-mode.html) is enabled the server performs strict data type validation. It is highly recommended to keep this mode enabled in MySQL during the development. This allows you to find errors before your code gets to a client's server with the enabled strict mode. The mode can be enabled in `my.cnf` (Unix) or `my.ini` (Windows) file.
 
     sql_mode=STRICT_TRANS_TABLES
+
+You may also specify this in your `database.php` configuration file.
+
+    'connections' => [
+        'mysql' => [
+            // ...
+            'strict' => true,
+        ],
+    ],
