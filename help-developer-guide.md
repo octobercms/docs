@@ -42,7 +42,7 @@ Your contributions to the October documentation are very welcome. Please follow 
 <a name="psr-exceptions"></a>
 ## Exceptions to PSR standards
 
-There are some exceptions to the PSR standard used by October.
+There are some exceptions to the PSR standard used by October CMS.
 
 <a name="psr-exception-methods"></a>
 ### Controller Methods
