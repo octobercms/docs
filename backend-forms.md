@@ -38,7 +38,9 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
 
     class Categories extends \Backend\Classes\Controller
     {
-        public $implement = ['Backend.Behaviors.FormController'];
+        public $implement = [
+            \Backend\Behaviors\FormController::class
+        ];
 
         public $formConfig = 'config_form.yaml';
     }

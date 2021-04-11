@@ -20,13 +20,12 @@
 
 The behavior configuration is defined in two parts, each part depends on a special model class along with a list and form field definition file. To use the importing and exporting behavior you should add it to the `$implement` property of the controller class. Also, the `$importExportConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
-
     namespace Acme\Shop\Controllers;
 
     class Products extends Controller
     {
         public $implement = [
-            'Backend.Behaviors.ImportExportController',
+            \Backend\Behaviors\ImportExportController::class
         ];
 
         public $importExportConfig = 'config_import_export.yaml';

@@ -25,7 +25,7 @@ In order to use the reorder behavior you should add it to the `$implement` prope
     class Categories extends Controller
     {
         public $implement = [
-            'Backend.Behaviors.ReorderController',
+            \Backend\Behaviors\ReorderController::class
         ];
 
         public $reorderConfig = 'config_reorder.yaml';

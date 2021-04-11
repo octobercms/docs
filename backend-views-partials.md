@@ -1,10 +1,10 @@
 # Backend Views & Partials
 
-- [Partials and hints](#partials)
-    - [Hint partials](#hints)
-    - [Checking if hints are hidden](#checking-hints)
-- [Layouts and child layouts](#layouts)
-    - [Form with sidebar](#layout-form-with-sidebar)
+- [Partials and Hints](#partials)
+    - [Hint Partials](#hints)
+    - [Checking if Hints are Hidden](#checking-hints)
+- [Layouts and Child Layouts](#layouts)
+    - [Form with Sidebar](#layout-form-with-sidebar)
 
 <a name="partials"></a>
 ## Partials
@@ -14,7 +14,7 @@ Back-end partials are files with the extension **htm** that reside in the [contr
     <?= $this->makePartial('sidebar', ['showHeader' => true]) ?>
 
 <a name="hints"></a>
-### Hint partials
+### Hint Partials
 
 You can render informative panels in the backend, called hints, that the user can hide. The first parameter should be a unique key for the purposes of remembering if the hint has been hidden or not. The second parameter is a reference to a partial view. The third parameter can be some extra view variables to pass to the partial, in addition to some hint properties.
 
@@ -34,7 +34,7 @@ Property | Description
 **icon** | In addition to the title, adds an icon to the title section.
 
 <a name="checking-hints"></a>
-### Checking if hints are hidden
+### Checking if Hints are Hidden
 
 If you're using hints, you may find it useful to check if the user has hidden them. This is easily done using the `isBackendHintHidden` method. It takes a single parameter, and that's the unique key you specified in the original call to `makeHintPartial`. The method will return true if the hint was hidden, false otherwise:
 
@@ -43,7 +43,7 @@ If you're using hints, you may find it useful to check if the user has hidden th
     <?php endif ?>
 
 <a name="layouts"></a>
-## Layouts and child layouts
+## Layouts and Child Layouts
 
 Back-end layouts reside in an optional **layouts/** directory of a plugin. A custom layout is set with the `$layout` property of the controller object. It defaults to the system layout called  `default`.
 
@@ -66,7 +66,7 @@ These body classes are available for the default layout:
 - **breadcrumb-flush** - tells the page breadcrumb to sit flush against the element below.
 
 <a name="layout-form-with-sidebar"></a>
-### Form with sidebar
+### Form with Sidebar
 
 Layouts can also be used in the same way as partials, acting more like a global partial. The system provides an example of this called `form-with-sidebar` and demonstrates a novel way to implement a child layout structure.
 

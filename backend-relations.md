@@ -1,30 +1,30 @@
 # Relations
 
 - [Introduction](#introduction)
-- [Configuring the relation behavior](#configuring-relation)
-- [Relationship types](#relationship-types)
-    - [Has many](#has-many)
-    - [Belongs to many](#belongs-to-many)
-    - [Belongs to many (with Pivot Data)](#belongs-to-many-pivot)
-    - [Belongs to](#belongs-to)
-    - [Has one](#has-one)
-- [Displaying a relation manager](#relation-display)
-- [Extending relation behavior](#extend-relation-behavior)
+- [Configuring the Relation Behavior](#configuring-relation)
+- [Relationship Types](#relationship-types)
+    - [Has Many](#has-many)
+    - [Belongs To Many](#belongs-to-many)
+    - [Belongs To Many (with Pivot Data)](#belongs-to-many-pivot)
+    - [Belongs To](#belongs-to)
+    - [Has One](#has-one)
+- [Displaying a Relation Manager](#relation-display)
+- [Extending Relation Behavior](#extend-relation-behavior)
 
 <a name="introduction"></a>
 ## Introduction
 
 **Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List relation columns](lists#column-types) or [Form relation fields](forms#widget-relation) that only provide simple management.
 
-Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `Backend.Behaviors.RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-relation).
+Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-relation).
 
     namespace Acme\Projects\Controllers;
 
     class Projects extends Controller
     {
         public $implement = [
-            'Backend.Behaviors.FormController',
-            'Backend.Behaviors.RelationController',
+            \Backend\Behaviors\FormController::class,
+            \Backend\Behaviors\RelationController::class
         ];
 
         public $formConfig = 'config_form.yaml';
@@ -34,7 +34,7 @@ Relation behavior depends on [relation definitions](#relation-definitions). In o
 > **Note**: Very often the relation behavior is used together with the [form behavior](form).
 
 <a name="configuring-relation"></a>
-## Configuring the relation behavior
+## Configuring the Relation Behavior
 
 The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
 
@@ -42,7 +42,7 @@ The first level field in the relation configuration file defines the relationshi
 
     class Invoice {
         public $hasMany = [
-            'items' => ['Acme\Pay\Models\InvoiceItem'],
+            'items' => \Acme\Pay\Models\InvoiceItem::class,
         ];
     }
 
@@ -107,7 +107,7 @@ Option | Type | Description
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 <a name="relationship-types"></a>
-## Relationship types
+## Relationship Types
 
 How the relation manager is displayed depends on the relationship definition in the target model. The relationship type will also determine the configuration requirements, these are shown in **bold**. The following relationship types are available:
 
@@ -118,7 +118,7 @@ How the relation manager is displayed depends on the relationship definition in 
 - [Has one](#has-one)
 
 <a name="has-many"></a>
-### Has many
+### Has Hany
 
 1. Related records are displayed as a list (**view.list**).
 1. Clicking a record will display an update form (**manage.form**).
@@ -143,7 +143,7 @@ For example, if a *Blog Post* has many *Comments*, the target model is set as th
             toolbarButtons: create|delete
 
 <a name="belongs-to-many"></a>
-### Belongs to many
+### Belongs to Many
 
 1. Related records are displayed as a list (**view.list**).
 1. Clicking *Add* will display a selection list (**manage.list**).
@@ -167,7 +167,7 @@ For example, if a *User* belongs to many *Roles*, the target model is set as the
             form: $/acme/user/models/role/fields.yaml
 
 <a name="belongs-to-many-pivot"></a>
-### Belongs to many (with Pivot Data)
+### Belongs to Many (with Pivot Data)
 
 > **Note**: Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).
 
@@ -218,7 +218,7 @@ Pivot data is available when defining form fields and list columns via the `pivo
                         label: Team color
 
 <a name="belongs-to"></a>
-### Belongs to
+### Belongs To
 
 1. Related record is displayed as a preview form (**view.form**).
 1. Clicking *Create* will display a create form (**manage.form**).
@@ -243,7 +243,7 @@ For example, if a *Phone* belongs to a *Person* the relation manager will displa
             list: $/acme/user/models/person/columns.yaml
 
 <a name="has-one"></a>
-### Has one
+### Has One
 
 1. Related record is displayed as a preview form (**view.form**).
 1. Clicking *Create* will display a create form (**manage.form**).
@@ -268,7 +268,7 @@ For example, if a *Person* has one *Phone* the relation manager will display for
             list: $/acme/user/models/phone/columns.yaml
 
 <a name="relation-display"></a>
-## Displaying a relation manager
+## Displaying a Relation Manager
 
 Before relations can be managed on any page, the target model must first be initialized in the controller by calling the `initRelation` method.
 
@@ -288,27 +288,28 @@ You may instruct the relation manager to render in read only mode by passing the
     <?= $this->relationRender('comments', ['readOnly' => true]) ?>
 
 <a name="extend-relation-behavior"></a>
-## Extending relation behavior
+## Extending Relation Behavior
 
 Sometimes you may wish to modify the default relation behavior and there are several ways you can do this.
 
-- [Extending relation configuration](#extend-relation-config)
-- [Extending the view widget](#extend-view-widget)
-- [Extending the manage widget](#extend-manage-widget)
-- [Extending the pivot widget](#extend-pivot-widget)
-- [Extending the filter widgets](#extend-filter-widgets)
-- [Extending refresh results](#extend-refresh-results)
+- [Extending Relation Configuration](#extend-relation-config)
+- [Extending the View Widget](#extend-view-widget)
+- [Extending the Manage Widget](#extend-manage-widget)
+- [Extending the Pivot Widget](#extend-pivot-widget)
+- [Extending the Filter Widgets](#extend-filter-widgets)
+- [Extending Refresh Results](#extend-refresh-results)
 
 <a name="extend-relation-config"></a>
-### Extending relation configuration
+### Extending Relation Configuration
 
 Provides an opportunity to manipulate the relation configuration. The following example can be used to inject a different columns.yaml file based on a property of your model.
 
     public function relationExtendConfig($config, $field, $model)
     {
         // Make sure the model and field matches those you want to manipulate
-        if (!$model instanceof MyModel || $field != 'myField')
+        if (!$model instanceof MyModel || $field != 'myField') {
             return;
+        }
 
         // Show a different list for business customers
         if ($model->mode == 'b2b') {
@@ -317,7 +318,7 @@ Provides an opportunity to manipulate the relation configuration. The following 
     }
 
 <a name="extend-view-widget"></a>
-### Extending the view widget
+### Extending the View Widget
 
 Provides an opportunity to manipulate the view widget.
 > **Note**: The view widget has not yet fully initialized, so not all public methods will work as expected! For more information read [How to remove a column](#remove-column).
@@ -327,8 +328,9 @@ For example you might want to toggle showCheckboxes based on a property of your 
     public function relationExtendViewWidget($widget, $field, $model)
     {
         // Make sure the model and field matches those you want to manipulate
-        if (!$model instanceof MyModel || $field != 'myField')
+        if (!$model instanceof MyModel || $field != 'myField') {
             return;
+        }
 
         if ($model->constant) {
             $widget->showCheckboxes = false;
@@ -336,17 +338,16 @@ For example you might want to toggle showCheckboxes based on a property of your 
     }
 
 <a name="remove-column"></a>
-#### How to remove a column
-Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The addColumns() method as described in the [ListController documentation](/docs/backend/lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the relationExtendViewWidget() method. The following example shows how to remove a column:
+#### How to Remove a Column
+
+Since the widget has not completed initializing at this point of the runtime cycle you can't call $widget->removeColumn(). The `addColumns()` method as described in the [ListController documentation](../backend/lists#extend-list-columns) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the `relationExtendViewWidget()` method. The following example shows how to remove a column.
 
     public function relationExtendViewWidget($widget, $field, $model)
     {
         // Make sure the model and field matches those you want to manipulate
-        if (!$model instanceof MyModel || $field != 'myField')
+        if (!$model instanceof MyModel || $field != 'myField') {
             return;
-
-        // Will not work!
-        $widget->removeColumn('my_column');
+        }
 
         // This will work
         $widget->bindEvent('list.extendColumns', function () use($widget) {
@@ -355,35 +356,37 @@ Since the widget has not completed initializing at this point of the runtime cyc
     }
 
 <a name="extend-manage-widget"></a>
-### Extending the manage widget
+### Extending the Manage Widget
 
 Provides an opportunity to manipulate the manage widget of your relation.
 
     public function relationExtendManageWidget($widget, $field, $model)
     {
         // Make sure the field is the expected one
-        if ($field != 'myField')
+        if ($field != 'myField') {
             return;
+        }
 
-        // manipulate widget as needed
+        // Manipulate widget as needed
     }
 
 <a name="extend-pivot-widget"></a>
-### Extending the pivot widget
+### Extending the Pivot Widget
 
 Provides an opportunity to manipulate the pivot widget of your relation.
 
     public function relationExtendPivotWidget($widget, $field, $model)
     {
         // Make sure the field is the expected one
-        if ($field != 'myField')
+        if ($field != 'myField') {
             return;
+        }
 
-        // manipulate widget as needed
+        // Manipulate widget as needed
     }
 
 <a name="extend-filter-widgets"></a>
-### Extending the filter widgets
+### Extending the Filter Widgets
 
 There are two filter widgets that may be extended using the following methods, one for the view mode and one for the manage mode of the `RelationController`.
 
@@ -397,10 +400,10 @@ There are two filter widgets that may be extended using the following methods, o
         // Extends the manage filter widget
     }
 
-Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](/docs/backend/lists#extend-filter-scopes).
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](../backend/lists#extend-filter-scopes).
 
 <a name="extend-refresh-results"></a>
-### Extending the refresh results
+### Extending the Refresh Results
 
 The view widget is often refreshed when the manage widget makes a change, you can use this method to inject additional containers when this process occurs. Return an array with the extra values to send to the browser, eg:
 

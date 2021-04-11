@@ -35,7 +35,9 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
 
     class Categories extends \Backend\Classes\Controller
     {
-        public $implement = ['Backend.Behaviors.ListController'];
+        public $implement = [
+            \Backend\Behaviors\ListController::class
+        ];
 
         public $listConfig = 'list_config.yaml';
     }
