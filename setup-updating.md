@@ -1,10 +1,10 @@
 # Updating
 
-- [Updating to v1.2](#upgrade-v1-2)
+- [Updating to v2.0](#upgrade-v2-0)
 - [Bleeding Edge Updates](#edge-updates)
 
-<a name="upgrade-v1-2"></a>
-### Updating to v1.2
+<a name="upgrade-v2-0"></a>
+### Updating to v2.0
 
 Please observe the following guides when performing the upgrade.
 
