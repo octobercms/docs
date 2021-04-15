@@ -16,9 +16,10 @@
     - [Available Scope Types](#scope-types)
 - [Extending List Behavior](#extend-list-behavior)
     - [Overriding Controller Action](#overriding-action)
-    - [Overriding Ciews](#overriding-views)
+    - [Overriding Views](#overriding-views)
     - [Extending Column Definitions](#extend-list-columns)
     - [Inject CSS Row Class](#inject-row-class)
+    - [Overriding Column URL](#overriding-url)
     - [Extending Filter Scopes](#extend-filter-scopes)
     - [Extending the Model Query](#extend-model-query)
     - [Extending the Records Collection](#extend-records-collection)
@@ -229,7 +230,7 @@ There are various column types that can be used for the **type** setting, these 
         label: Full Name
         type: text
 
-You can also specify a custom text format, for example **Admin: Full Name (active)**
+You may also specify a custom text format, for example **Admin: Full Name (active)**
 
     full_name:
         label: Full Name
@@ -261,7 +262,7 @@ See the [image resizing article](../services/resizer#resize-parameters) for more
         label: Age
         type: number
 
-You can also specify a custom number format, for example currency **$ 99.00**
+You may also specify a custom number format, for example currency **$ 99.00**
 
     price:
         label: Price
@@ -288,7 +289,7 @@ You can also specify a custom number format, for example currency **$ 99.00**
         label: Date
         type: datetime
 
-You can also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**:
+You may also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**:
 
     created_at:
         label: Date
@@ -731,7 +732,7 @@ You may leave either the minimum value blank to search everything up to the maxi
 <a name="filter-text"></a>
 ### Text
 
-`text` - display text input for a string to be entered. You can specify a `size` attribute that will be injected in the input size attribute (default: 10).
+`text` - display text input for a string to be entered. You may specify a `size` attribute that will be injected in the input size attribute (default: 10).
 
     username:
         label: Username
@@ -745,9 +746,10 @@ You may leave either the minimum value blank to search everything up to the maxi
 Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
 
 - [Overriding Controller Action](#overriding-action)
-- [Overriding Ciews](#overriding-views)
+- [Overriding Views](#overriding-views)
 - [Extending Column Definitions](#extend-list-columns)
 - [Inject CSS Row Class](#inject-row-class)
+- [Overriding Column URL](#overriding-url)
 - [Extending Filter Scopes](#extend-filter-scopes)
 - [Extending the Model Query](#extend-model-query)
 - [Custom Column Types](#custom-column-types)
@@ -755,7 +757,7 @@ Sometimes you may wish to modify the default list behavior and there are several
 <a name="overriding-action"></a>
 ### Overriding Controller Action
 
-You can use your own logic for the `index` action method in the controller, then optionally call the List behavior `index` parent method.
+You may use your own logic for the `index` action method in the controller, then optionally call the List behavior `index` parent method.
 
     public function index()
     {
@@ -807,7 +809,7 @@ For example, to modify the list body row markup, create a file called `list/_lis
 <a name="extend-list-columns"></a>
 ### Extending Column Definitions
 
-You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
+You may extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
 
     class Categories extends \Backend\Classes\Controller
     {
@@ -832,7 +834,7 @@ Using the `extendListColumns` method you can add extra columns to any list rende
 
         });
 
-You can also extend the list columns internally by overriding the `listExtendColumns` method inside the controller class.
+You may also extend the list columns internally by overriding the `listExtendColumns` method inside the controller class.
 
     class Categories extends \Backend\Classes\Controller
     {
@@ -856,13 +858,13 @@ Each method takes an array of columns similar to the [list column configuration]
 <a name="inject-row-class"></a>
 ### Inject CSS Row Class
 
-You can inject a custom css row class by adding a `listInjectRowClass` method on the controller class. This method can take two arguments, **$record** will represent a single model record and **$definition** contains the name of the List widget definition. You can return any string value containing your row classes. These classes will be added to the row's HTML markup.
+You may inject a custom css row class by adding a `listInjectRowClass` method on the controller class. This method can take two arguments, **$record** will represent a single model record and **$definition** contains the name of the List widget definition. You may return any string value containing your row classes. These classes will be added to the row's HTML markup.
 
     class Lessons extends \Backend\Classes\Controller
     {
         [...]
 
-        public function listInjectRowClass($lesson, $definition)
+        public function listInjectRowClass($lesson, $definition = null)
         {
             // Strike through past lessons
             if ($lesson->lesson_date->lt(Carbon::today())) {
@@ -880,10 +882,40 @@ A special CSS class `nolink` is available to force a row to be unclickable, even
             }
         }
 
+<a name="overriding-url"></a>
+### Overriding Column URL
+
+You may specify the click action for a column record by overriding the `listOverrideRecordUrl` method. This method can return a string for a new URL or an array with a complex definition.
+
+    public function listOverrideRecordUrl($record, $definition = null)
+    {
+        if ($record->is_active) {
+            return 'acme/test/services/preview/' . $record->id;
+        }
+    }
+
+To override the onclick behavior by returning an array with the `onclick` key and change the `url` to null.
+
+    public function listOverrideRecordUrl($record, $definition = null)
+    {
+        if ($record->is_banned) {
+            return ['onclick' => "alert('Unable to click')", 'url' => null];
+        }
+    }
+
+To make a column unclickable entirely by returning an array with the `clickable` key set to false.
+
+    public function listOverrideRecordUrl($record, $definition = null)
+    {
+        if ($record->is_disabled) {
+            return ['clickable' => false];
+        }
+    }
+
 <a name="extend-filter-scopes"></a>
 ### Extending Filter Scopes
 
-You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
+You may extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
 
         Categories::extendListFilterScopes(function($filter) {
             // Add custom CSS classes to the Filter widget itself
@@ -898,7 +930,7 @@ You can extend the filter scopes of another controller from outside by calling t
 
 > The array of scopes provided is similar to the [list filters configuration](#list-filters).
 
-You can also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
+You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
     class Categories extends \Backend\Classes\Controller
     {
