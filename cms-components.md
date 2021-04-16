@@ -8,6 +8,7 @@
     - [Moving Default Markup to a Partial](#moving-default-markup)
     - [Overriding Component Partials](#overriding-partials)
 - [The "View Bag" Component](#viewbag-component)
+- [AJAX Handlers and Partials](#ajax-handlers-partials)
 <!-- - [Soft Components](#soft-components) -->
 
 Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
@@ -197,6 +198,23 @@ Any property defined for the component is then made available inside the page, l
     </ul>
 
 > **Note**: The viewBag component is hidden on the back-end and is only available for file-based editing. It can also be used by other plugins to store data.
+
+<a name="ajax-handlers-partials"></a>
+### AJAX Handlers and Partials
+
+Components may introduce [AJAX handlers](../ajax/introduction) and [partials](../cms/partials) to the a theme's lifecycle, using a prefix of the component name and two `::` symbols. For example, all the AJAX handlers defined by components are available globally.
+
+    data-request="onMyComponentHandler"
+
+However, if there is a conflict in naming, the fully qualified name can be used.
+
+    data-request="componentName::onMyComponentHandler"
+
+Partials rendered from outside the component must use their fully qualified name.
+
+    {% partial 'componentName::component-partial' %}
+
+Read more on [component development](../plugin/components#component-partials) to learn about component partials.
 
 <!--
 <a name="soft-components"></a>

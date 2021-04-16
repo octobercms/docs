@@ -875,17 +875,17 @@ You may inject a custom css row class by adding a `listInjectRowClass` method on
 
 A special CSS class `nolink` is available to force a row to be unclickable, even if the `recordUrl` or `recordOnClick` options are defined for the List widget. Returning this class in an event will allow you to make records unclickable - for example, for soft-deleted rows or for informational rows:
 
-        public function listInjectRowClass($record, $value)
-        {
-            if ($record->trashed()) {
-                return 'nolink';
-            }
+    public function listInjectRowClass($record, $value)
+    {
+        if ($record->trashed()) {
+            return 'nolink';
         }
+    }
 
 <a name="overriding-url"></a>
 ### Overriding Column URL
 
-You may specify the click action for a column record by overriding the `listOverrideRecordUrl` method. This method can return a string for a new URL or an array with a complex definition.
+You may specify the click action for a column record by overriding the `listOverrideRecordUrl` method. This method can return a string for a new backend URL or an array with a complex definition.
 
     public function listOverrideRecordUrl($record, $definition = null)
     {
@@ -894,7 +894,7 @@ You may specify the click action for a column record by overriding the `listOver
         }
     }
 
-To override the onclick behavior by returning an array with the `onclick` key and change the `url` to null.
+To override the onclick behavior return an array with the `onclick` key and change the `url` to null.
 
     public function listOverrideRecordUrl($record, $definition = null)
     {
@@ -903,7 +903,7 @@ To override the onclick behavior by returning an array with the `onclick` key an
         }
     }
 
-To make a column unclickable entirely by returning an array with the `clickable` key set to false.
+To make a column unclickable entirely return an array with the `clickable` key set to false.
 
     public function listOverrideRecordUrl($record, $definition = null)
     {
