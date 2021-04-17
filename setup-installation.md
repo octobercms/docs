@@ -51,9 +51,11 @@ There are some things you may need to set up after the installation is complete.
 
 Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
 
-For example, in production environments you may want to enable [CSRF protection](../setup/configuration#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration#edge-updates).
+For example, in production environments you may want to do the following:
 
-While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#public-folder) for additional security.
+- Enable [CSRF protection](../setup/configuration#csrf-protection)
+- Disable [debug mode](../setup/configuration#debug-mode)
+- Use a [public folder](../setup/configuration#public-folder) for additional security
 
 <a name="crontab-setup"></a>
 ### Setting Up The Scheduler
