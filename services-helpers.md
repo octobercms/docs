@@ -44,13 +44,12 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [base_path](#method-base-path)
 [config_path](#method-config-path)
 [database_path](#method-database-path)
-[media_path](#method-media-path)
 [plugins_path](#method-plugins-path)
 [public_path](#method-public-path)
 [storage_path](#method-storage-path)
 [temp_path](#method-temp-path)
 [themes_path](#method-themes-path)
-[uploads_path](#method-uploads-path)
+[cache_path](#method-cache-path)
 </div>
 
 ### Strings
@@ -415,17 +414,6 @@ The `database_path` function returns the fully qualified path to the application
 
     $path = database_path();
 
-<a name="method-media-path"></a>
-#### `media_path($path = '')` {#collection-method}
-
-The `media_path` function returns the fully qualified path to the application media directory:
-
-    $path = media_path();
-
-You may also use the `media_path` function to generate a fully qualified path to a given file relative to the media directory:
-
-    $path = media_path('images/myimage.png');
-
 <a name="method-plugins-path"></a>
 #### `plugins_path($path = '')` {#collection-method}
 
@@ -477,16 +465,16 @@ You may also use the `themes_path` function to generate a fully qualified path t
 
     $path = themes_path('mytheme/file.txt');
 
-<a name="method-uploads-path"></a>
-#### `uploads_path($path = '')` {#collection-method}
+<a name="method-cache-path"></a>
+#### `cache_path($path = '')` {#collection-method}
 
-The `uploads_path` function returns the fully qualified path to the application uploads directory:
+The `cache_path` function returns the fully qualified path to the application cache directory:
 
-    $path = uploads_path();
+    $path = cache_path();
 
-You may also use the `uploads_path` function to generate a fully qualified path to a given file relative to the uploads directory:
+You may also use the `cache_path` function to generate a fully qualified path to a given file relative to the cache directory:
 
-    $path = uploads_path('public/file.txt');
+    $path = cache_path('cms/cachefile.json');
 
 <a name="strings"></a>
 ## Strings
