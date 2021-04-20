@@ -577,6 +577,7 @@ The `updateOrInsert` method will first attempt to locate a matching database rec
             ['votes' => '2']
         );
 
+<!--
 #### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
 
 The `upsert` method will insert rows that do not exist and update the rows that already exist with the new values. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of columns that should be updated if a matching record already exists in the database:
@@ -587,6 +588,7 @@ The `upsert` method will insert rows that do not exist and update the rows that 
     ], ['departure', 'destination'], ['price']);
 
 > **Note**: All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
+-->
 
 #### Updating JSON columns
 
