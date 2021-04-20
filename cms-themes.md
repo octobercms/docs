@@ -185,6 +185,17 @@ If a page named `home.htm` exists in the parent theme but not the child, it trea
 
 To enable this feature for a theme, navigate to **Settings > Frontend Theme**, select **Edit Properties** and select a parent from the **Parent Theme** dropdown list.
 
+<a name="child-themes-lock"></a>
+### Theme Lock File
+
+When installing a theme from a third party, it is important to note that when the theme is updated, all the files can be overwritten. This could result in any customizations made to the theme being lost. As a safety mechanism, a file called `.themelock` is included to protect a theme from any changes that may be lost during a system update.
+
+When the file `.themelock` is present in the theme directory:
+
+- The theme can only be selected as a parent theme
+- The theme does not appear in the backend UI
+- The theme cannot be selected as active
+
 <a name="theme-logging"></a>
 ## Theme Logging
 
