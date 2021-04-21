@@ -9,6 +9,7 @@
     - [Set Project](#project-set-command)
 - [Plugin Management](#plugin-commands)
     - [Install Plugin](#plugin-install-command)
+    - [Check Dependencies](#plugin-check-command)
     - [Refresh Plugin](#plugin-refresh-command)
     - [Rollback Plugin](#plugin-rollback-command)
     - [List Plugin](#plugin-list-command)
@@ -91,6 +92,13 @@ October CMS includes a number of commands for managing plugins.
     php artisan plugin:install AuthorName.PluginName
 
 Note that your installation should be bound to a project in order to use this command. You can create projects on October CMS website, in the [Account / Projects](https://octobercms.com/account/project/dashboard) section.
+
+<a name="plugin-check-command"></a>
+### Check Dependencies
+
+`plugin:check` - performs a system wide check of installed plugin dependencies. This command will spin over every theme and plugin that is currently installed and check to see if its dependencies are also installed. If it finds any missing requirements, it will attempt to install them.
+
+    php artisan plugin:check
 
 <a name="plugin-refresh-command"></a>
 ### Refresh Plugin
