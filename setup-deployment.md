@@ -1,12 +1,61 @@
 # Deployment
 
+- [Auth File](#auth-file)
+- [Public Folder](#public-folder)
+- [Shared Hosting](#shared-hosting)
 - [Web Server Configuration](#webserver-configuration)
     - [Apache Configuration](#apache-configuration)
     - [Nginx Configuration](#nginx-configuration)
     - [Lighttpd Configuration](#lighttpd-configuration)
     - [IIS Configuration](#iis-configuration)
-- [Public Folder](#public-folder)
-- [Shared Hosting](#shared-hosting)
+
+<a name="auth-file"></a>
+## Auth File
+
+When deploying your application to a remote server, you may be prompted to provide your login credentials for the October CMS website. These credentials will authenticate your Composer session as having permission to download the October CMS source code.
+
+To avoid manually typing in these credentials, you should make sure that the [Composer auth.json file](https://getcomposer.org/doc/articles/http-basic-authentication.md) is deployed with your application. The `auth.json` file is ignored in the `.gitignore` file by default.
+
+Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands#project-set-command).
+
+    php artisan project:set <license key>
+
+<a name="public-folder"></a>
+## Public Folder
+
+For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
+
+    php artisan october:mirror
+
+This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
+
+The command should be performed after each system update or when a new plugin is installed. You may instruct October CMS to automatically do this using the `system.auto_mirror_public` configuration item.
+
+    AUTO_MIRROR_PUBLIC=true
+
+> **Note**: For Windows operating systems, the `october:mirror` command must be performed in a console running as administrator. Therefore it is more suitable to run as part of a deployment process.
+
+<a name="shared-hosting"></a>
+## Shared Hosting
+
+If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
+
+You can setup this protection in the file location `config/system.php` in the section titled **Default Permission Mask**.
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Permission Mask
+    |--------------------------------------------------------------------------
+    |
+    | Specifies a default file and folder permission for newly created files
+    | and directories in the system paths.
+    |
+    */
+
+    'default_mask' => ['file' => '644', 'folder' => '755'],
+
+> **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your control panel and set them.
+
 
 <a name="webserver-configuration"></a>
 ## Web Server Configuration
@@ -148,39 +197,3 @@ If your webserver is running Internet Information Services (IIS) you can use the
             </rewrite>
         </system.webServer>
     </configuration>
-
-<a name="public-folder"></a>
-## Public Folder
-
-For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
-
-    php artisan october:mirror
-
-This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
-
-The command should be performed after each system update or when a new plugin is installed. You may instruct October CMS to automatically do this using the `system.auto_mirror_public` configuration item.
-
-    AUTO_MIRROR_PUBLIC=true
-
-> **Note**: For Windows operating systems, the `october:mirror` command must be performed in a console running as administrator. Therefore it is more suitable to run as part of a deployment process.
-
-<a name="shared-hosting"></a>
-## Shared Hosting
-
-If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
-
-You can setup this protection in the file location `config/system.php` in the section titled **Default Permission Mask**.
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default Permission Mask
-    |--------------------------------------------------------------------------
-    |
-    | Specifies a default file and folder permission for newly created files
-    | and directories in the system paths.
-    |
-    */
-
-    'default_mask' => ['file' => '644', 'folder' => '755'],
-
-> **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your control panel and set them.

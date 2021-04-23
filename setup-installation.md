@@ -84,7 +84,8 @@ You can also run the queue as a daemon process with
 
 October CMS has some server requirements for web hosting:
 
-1. PHP version 7.2 or higher
+1. PHP version 7.2.9 or higher
+1. Composer 2.0 or higher
 1. PDO PHP Extension (and relevant driver for the database you want to connect to)
 1. cURL PHP Extension
 1. OpenSSL PHP Extension

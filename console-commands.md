@@ -75,9 +75,9 @@ October CMS includes these commands for managing your project.
 <a name="project-set-command"></a>
 ### Set Project
 
-`project:set` sets the project ID on the current installation.
+`project:set` sets the license key for the current installation.
 
-    php artisan project:set <project identifier>
+    php artisan project:set <license key>
 
 <a name="plugin-commands"></a>
 ## Plugin Management
