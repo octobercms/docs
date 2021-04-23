@@ -770,7 +770,7 @@ You may use your own logic for the `index` action method in the controller, then
     }
 
 <a name="overriding-views"></a>
-### Overriding Ciews
+### Overriding Views
 
 The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
 
