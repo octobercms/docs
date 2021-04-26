@@ -94,6 +94,12 @@ October CMS has some server requirements for web hosting:
 1. GD PHP Extension
 1. SimpleXML PHP Extension
 
+Support is provided for these databases with minimum requirements:
+
+1. MySQL 5.7 or MariaDB 10.2
+1. PostgreSQL 9.6
+1. SQLite 3.8.8
+
 Some OS distributions may require you manually install some of the necessary PHP extensions.
 
 When using Ubuntu, the following command can be run to install all required extensions:
