@@ -18,6 +18,7 @@
     - [Remove Plugin](#plugin-remove-command)
 - [Theme Management](#theme-commands)
     - [Install Theme](#theme-install-command)
+    - [Check Protected](#theme-check-command)
     - [List Themes](#theme-list-command)
     - [Enable Theme](#theme-use-command)
     - [Remove Theme](#theme-remove-command)
@@ -157,6 +158,13 @@ October includes a number of commands for managing themes.
 If you wish to install the theme in a custom directory, simply provide the second argument. The following example will download `AuthorName.ThemeName` and install it in `/themes/my-theme`
 
     php artisan theme:install AuthorName.ThemeName my-theme
+
+<a name="theme-check-command"></a>
+### Check Protected
+
+`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes#child-themes-lock) is added and a child theme is created.
+
+    php artisan theme:check
 
 <a name="theme-list-command"></a>
 ### List Themes
