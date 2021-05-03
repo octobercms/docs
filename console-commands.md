@@ -92,7 +92,17 @@ October CMS includes a number of commands for managing plugins.
 
     php artisan plugin:install AuthorName.PluginName
 
-Note that your installation should be bound to a project in order to use this command. You can create projects on October CMS website, in the [Account / Projects](https://octobercms.com/account/project/dashboard) section.
+You may install a plugin from a remote source using the `--from` option.
+
+    php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git
+
+Use the `--want` option to specify a target branch or version.
+
+    php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git --want=dev-develop
+
+Use the `--oc` option if your package name has the `oc` prefix.
+
+    php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git --oc
 
 <a name="plugin-check-command"></a>
 ### Check Dependencies
@@ -155,9 +165,17 @@ October includes a number of commands for managing themes.
 
     php artisan theme:install AuthorName.ThemeName
 
-If you wish to install the theme in a custom directory, simply provide the second argument. The following example will download `AuthorName.ThemeName` and install it in `/themes/my-theme`
+You may install a theme from a remote source using the `--from` option.
 
-    php artisan theme:install AuthorName.ThemeName my-theme
+    php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/themename-theme.git
+
+Use the `--want` option to specify a target branch or version.
+
+    php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/themename-theme.git --want=dev-develop
+
+Use the `--oc` option if your package name has the `oc` prefix.
+
+    php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/oc-themename-theme.git --oc
 
 <a name="theme-check-command"></a>
 ### Check Protected
