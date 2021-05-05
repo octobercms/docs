@@ -8,7 +8,7 @@
 
 Please observe the following guides when performing the upgrade.
 
-- [Platform Upgrade Guide](https://octobercms.com/support/article/rn-13)
+- [October CMS v2.0 Upgrade Guide](https://octobercms.com/support/article/rn-13)
 - [Laravel 6 LTS Upgrade Guide](https://octobercms.com/support/article/rn-11)
 
 <a name="edge-updates"></a>

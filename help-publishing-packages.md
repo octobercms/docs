@@ -63,17 +63,21 @@ Plugins and themes alike can depend on other packages. Use the `composer require
 
 #### Requiring another plugin
 
-Navigate to your theme or plugin directory and use `composer require` to include it as a dependency.
+Navigate to your theme or plugin directory and open the composer.json file to include a dependency and its target version. The following will include the Acme.Blog plugin with a [version range of 1.2](https://getcomposer.org/doc/articles/versions.md).
 
-    composer require --no-update acme/blog-plugin
+    "require": {
+        "acme/blog-plugin": "^1.2"
+    },
 
 You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions).
 
 #### Requiring another theme
 
-Navigate to your theme or plugin directory and use `composer require` to include it as a dependency.
+Navigate to your theme or plugin directory and open the composer.json file to include a dependency and its target version. The following will include the Acme.Vanilla theme with a [version range of 1.2](https://getcomposer.org/doc/articles/versions.md).
 
-    composer require --no-update acme/vanilla-theme
+    "require": {
+        "acme/vanilla-theme": "^1.2"
+    },
 
 Make sure that this package is included in the `require` property found in the [theme information file](../themes/development#dependencies).
 
