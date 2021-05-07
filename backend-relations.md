@@ -118,7 +118,7 @@ How the relation manager is displayed depends on the relationship definition in 
 - [Has one](#has-one)
 
 <a name="has-many"></a>
-### Has Hany
+### Has Many
 
 1. Related records are displayed as a list (**view.list**).
 1. Clicking a record will display an update form (**manage.form**).
