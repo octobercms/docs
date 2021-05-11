@@ -860,7 +860,7 @@ Option | Description
 
     content:
         type: nestedform
-        usePanelStyles: false
+        showPanel: false
         form:
             fields:
                 added_at:
