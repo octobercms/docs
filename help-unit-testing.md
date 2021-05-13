@@ -15,7 +15,7 @@ Plugins can be tested by creating a file called `phpunit.xml` in the base direct
     <?xml version="1.0" encoding="UTF-8"?>
     <phpunit backupGlobals="false"
              backupStaticAttributes="false"
-             bootstrap="../../../tests/bootstrap.php"
+             bootstrap="../../../modules/system/tests/bootstrap.php"
              colors="true"
              convertErrorsToExceptions="true"
              convertNoticesToExceptions="true"
@@ -29,9 +29,16 @@ Plugins can be tested by creating a file called `phpunit.xml` in the base direct
             </testsuite>
         </testsuites>
         <php>
-            <env name="APP_ENV" value="testing"/>
-            <env name="CACHE_DRIVER" value="array"/>
-            <env name="SESSION_DRIVER" value="array"/>
+            <env name="APP_ENV" value="testing" />
+            <env name="CACHE_DRIVER" value="array" />
+            <env name="SESSION_DRIVER" value="array" />
+            <env name="ACTIVE_THEME" value="test" />
+            <env name="CONVERT_LINE_ENDINGS" value="true" />
+            <env name="CMS_ROUTE_CACHE" value="true" />
+            <env name="CMS_TWIG_CACHE" value="false" />
+            <env name="ENABLE_CSRF" value="false" />
+            <env name="DB_CONNECTION" value="sqlite" />
+            <env name="DB_DATABASE" value=":memory:" />
         </php>
     </phpunit>
 
