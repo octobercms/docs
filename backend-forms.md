@@ -573,8 +573,8 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         label: Display content
         type: switch
         comment: Flick this switch to display content
-        on: myauthor.myplugin::lang.models.mymodel.show_content.on
-        off: myauthor.myplugin::lang.models.mymodel.show_content.off
+            on: On
+            off: Off
 
 <a name="field-section"></a>
 ### Section
@@ -700,7 +700,6 @@ If the `availableColors` field in not defined in the YAML file, the colorpicker 
         columns: []
         recordsPerPage: false
         searching: false
-        toolbar: []
 
 > **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model#standard-properties) or anything that can handle storing as an array.
 
@@ -795,15 +794,6 @@ Option | Description
         mode: image
         imageHeight: 260
         imageWidth: 260
-        thumbOptions:
-            mode: crop
-            offset:
-                - 0
-                - 0
-            quality: 90
-            sharpen: 0
-            interlace: false
-            extension: auto
 
 Option | Description
 ------------- | -------------
@@ -816,7 +806,7 @@ Option | Description
 **maxFiles** | maximum number of files allowed to be uploaded
 **useCaption** | allows a title and description to be set for the file. Default: true
 **prompt** | text to display for the upload button, applies to files only, optional
-**thumbOptions** | options to pass to the thumbnail generating method for the file
+**thumbOptions** | additional [resize options](../services/resizer#resize-parameters) for generating the thumbnail
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
 
 > **Note**: Unlike the [Media Finder form widget](#widget-mediafinder), the File Upload form widget uses [database file attachments](../database/attachments) so the field name be that of an `attachOne` or `attachMany` relationship attrbiute on your associated model.
@@ -1291,7 +1281,7 @@ In the above example the `state` form field will refresh when the `country` fiel
         }
     }
 
-This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering Form Fields](#filter-form-fields) section. An example is provided below:
+This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering Form Fields](#filter-form-fields) section. An example is provided below.
 
     dnsprovider:
         label: DNS Provider
@@ -1301,7 +1291,7 @@ This example is useful for manipulating the model values, but it does not have a
         label: Registrar
         type: dropdown
 
-    specificfields[for][provider1]:
+    show_for_provider1:
         label: Provider 1 ID
         type: text
         hidden: true
@@ -1309,7 +1299,7 @@ This example is useful for manipulating the model values, but it does not have a
             - dnsprovider
             - registrar
 
-    specificfields[for][provider2]:
+    show_for_provider2:
         label: Provider 2 ID
         type: text
         hidden: true
@@ -1317,16 +1307,17 @@ This example is useful for manipulating the model values, but it does not have a
             - dnsprovider
             - registrar
 
-And the logic for the filterFields method would be as follows:
+And the logic for the `filterFields` method would be as follows.
 
     public function filterFields($fields, $context = null)
     {
-        $displayedVendors = strtolower($this->dnsprovider->name . $this->registrar->name);
-        if (str_contains($displayedVendors, 'provider1')) {
-            $fields->{'specificfields[for][provider1]'}->hidden = false;
+        if ($this->dnsprovider->name == 'provider1') {
+            $fields->show_for_provider1->hidden = false;
         }
-        if (str_contains($displayedVendors, 'provider2')) {
-            $fields->{'specificfields[for][provider2]'}->hidden = false;
+
+        if ($this->registrar->name == 'godaddy') {
+            $fields->show_for_provider1->hidden = false;
+            $fields->show_for_provider2->hidden = false;
         }
     }
 

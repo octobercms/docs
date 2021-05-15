@@ -3,7 +3,6 @@
 - [Introduction](#introduction)
     - [Resize Parameters](#resize-parameters)
     - [Available Modes](#available-modes)
-<!-- - [Resize sources](#resize-sources) -->
 
 <a name="introduction"></a>
 ## Introduction
