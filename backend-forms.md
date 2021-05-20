@@ -9,6 +9,7 @@
     - [Tab Options](#form-tab-options)
     - [Field Options](#form-field-options)
 - [Available Field Types](#field-types)
+- [UI Elements](#form-ui-elements)
 - [Form Widgets](#form-widgets)
 - [Form Views](#form-views)
     - [Create View](#form-create-view)
@@ -274,7 +275,7 @@ Option | Description
 <a name="field-types"></a>
 ## Available Field Types
 
-There are various native field types that can be used for the **type** setting. For more advanced form fields, a [form widget](#form-widgets) can be used instead.
+There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#field-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
 <style>
     .collection-method-list {
@@ -299,9 +300,6 @@ There are various native field types that can be used for the **type** setting. 
 - [Checkbox](#field-checkbox)
 - [Checkbox List](#field-checkboxlist)
 - [Switch](#field-switch)
-- [Section](#field-section)
-- [Partial](#field-partial)
-- [Hint](#field-hint)
 - [Widget](#field-widget)
 </div>
 
@@ -576,24 +574,36 @@ Checkbox lists support the same methods for defining the options as the [dropdow
             on: On
             off: Off
 
+<a name="field-widget"></a>
+### Widget
+
+`widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
+
+    blog_content:
+        type: Backend\FormWidgets\RichEditor
+        size: huge
+
+<a name="field-ui-elements"></a>
+## Available UI Elements
+
+There are non function UI elements that can be included in forms to help with the layout design.
+
+<div class="content-list collection-method-list" markdown="1">
+- [Section](#field-section)
+- [Hint](#field-hint)
+- [Horizontal Rule](#field-ruler)
+- [Partial](#field-partial)
+</div>
+
 <a name="field-section"></a>
 ### Section
 
 `section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
 
-    user_details_section:
+    _section1:
         label: User details
         type: section
         comment: This section contains details about the user.
-
-<a name="field-partial"></a>
-### Partial
-
-`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
-
-    content:
-        type: partial
-        path: $/acme/blog/models/comments/_content_field.htm
 
 <a name="field-hint"></a>
 ### Hint
@@ -604,14 +614,38 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: hint
         path: content_field
 
-<a name="field-widget"></a>
-### Widget
+A hint supports content inline to the field. The `label` and `comment` values are optional and contain the content for the heading and subheading. You may also use Markdown syntax for the values.
 
-`widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
+    tip1:
+        type: hint
+        mode: tip
+        label: Pro Tip
+        comment: Always check to make sure this field is populated.
 
-    blog_content:
-        type: Backend\FormWidgets\RichEditor
-        size: huge
+The `mode` option supports the values: tip, info, warning, danger, success
+
+    warning1:
+        type: hint
+        mode: warning
+        label: Always wash your hands
+        comment: This is good for stopping the spread of germs.
+
+<a name="field-ruler"></a>
+### Horizontal Rule
+
+`ruler` - renders a horizontal rule to break up the form contents
+
+    _ruler1:
+        type: ruler
+
+<a name="field-partial"></a>
+### Partial
+
+`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
+
+    content:
+        type: partial
+        path: $/acme/blog/models/comments/_content_field.htm
 
 <a name="form-widgets"></a>
 ## Form Widgets
@@ -1058,7 +1092,8 @@ A sensitive field that contains a previously entered value will have the value r
 
 Option | Description
 ------------- | -------------
-**allowCopy** | adds a "copy" action to the sensitive field, allowing the user to copy the password without revealing it. Default: false
+**mode** | display mode for the widget, either textarea or text. Default: text
+**allowCopy** | adds a "copy" action to the sensitive field, allowing the user to copy the password without revealing it. Default: true
 **hiddenPlaceholder** | sets the placeholder text that is used to simulate a hidden, unrevealed value. You can change this to a long or short string to emulate different length values. Default: `__hidden__`
 **hideOnTabChange** | if true, the sensitive field will automatically be hidden if the user navigates to a different tab, or minimizes their browser. Default: true
 
@@ -1253,7 +1288,7 @@ Option | Description
 <a name="field-dependencies"></a>
 ### Field Dependencies
 
-Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field. Examples below:
+Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field.
 
     country:
         label: Country
@@ -1281,47 +1316,45 @@ In the above example the `state` form field will refresh when the `country` fiel
         }
     }
 
-This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering Form Fields](#filter-form-fields) section. An example is provided below.
-
-    dnsprovider:
-        label: DNS Provider
-        type: dropdown
-
-    registrar:
-        label: Registrar
-        type: dropdown
-
-    show_for_provider1:
-        label: Provider 1 ID
-        type: text
-        hidden: true
-        dependsOn:
-            - dnsprovider
-            - registrar
-
-    show_for_provider2:
-        label: Provider 2 ID
-        type: text
-        hidden: true
-        dependsOn:
-            - dnsprovider
-            - registrar
-
-And the logic for the `filterFields` method would be as follows.
+You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
 
     public function filterFields($fields, $context = null)
     {
-        if ($this->dnsprovider->name == 'provider1') {
-            $fields->show_for_provider1->hidden = false;
+        if ($this->source_type == 'http') {
+            $fields->source_url->hidden = false;
+            $fields->git_branch->hidden = true;
         }
-
-        if ($this->registrar->name == 'godaddy') {
-            $fields->show_for_provider1->hidden = false;
-            $fields->show_for_provider2->hidden = false;
+        elseif ($this->source_type == 'git') {
+            $fields->source_url->hidden = false;
+            $fields->git_branch->hidden = false;
+        }
+        else {
+            $fields->source_url->hidden = true;
+            $fields->git_branch->hidden = true;
         }
     }
 
-In the above example, both the `provider1` and `provider2` fields will automatically refresh whenever either the `dnsprovider` or `registrar` fields are modified. When this occurs, the full form cycle will be processed, which means that any logic defined in `filterFields` methods would be run again, allowing you to filter which fields get displayed dynamically.
+The above logic will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies). For example, here is the associated form field definitions.
+
+    source_type:
+        label: Source Type
+        type: dropdown
+        options:
+            git: Git
+            http: Http
+            upload: Upload
+
+    source_url:
+        label: Source URL
+        type: text
+        dependsOn: source_type
+
+    git_branch:
+        label: Git Branch
+        type: text
+        dependsOn: source_type
+
+You may also extend other models to apply the `filterFields` logic, see the [Filtering Form Fields](#filter-form-fields) section for more details.
 
 <a name="prevent-field-submission"></a>
 ### Preventing a Field From Being Submitted
@@ -1431,25 +1464,24 @@ Each method takes an array of fields similar to the [form field configuration](#
 <a name="filter-form-fields"></a>
 ### Filtering Form Fields
 
-You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
+As described in the [field dependencies section](#field-dependencies), you may also implement form field filtering by extension by hooking in to the `form.filterFields` event.
 
-    public function filterFields($fields, $context = null)
-    {
-        if ($this->source_type == 'http') {
-            $fields->source_url->hidden = false;
-            $fields->git_branch->hidden = true;
-        }
-        elseif ($this->source_type == 'git') {
-            $fields->source_url->hidden = false;
-            $fields->git_branch->hidden = false;
-        }
-        else {
-            $fields->source_url->hidden = true;
-            $fields->git_branch->hidden = true;
-        }
-    }
-
-The above example will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies).
+    User::extend(function ($model) {
+        $model->bindEvent('model.form.filterFields', function ($formWidget, $fields, $context) use ($model) {
+            if ($model->source_type == 'http') {
+                $fields->source_url->hidden = false;
+                $fields->git_branch->hidden = true;
+            }
+            elseif ($model->source_type == 'git') {
+                $fields->source_url->hidden = false;
+                $fields->git_branch->hidden = false;
+            }
+            else {
+                $fields->source_url->hidden = true;
+                $fields->git_branch->hidden = true;
+            }
+        });
+    });
 
 <a name="validate-form-fields"></a>
 ## Validating Form Fields
