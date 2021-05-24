@@ -19,7 +19,7 @@
     - [Input Preset Converter](#field-input-preset)
     - [Trigger Events](#field-trigger-events)
     - [Field Dependencies](#field-dependencies)
-    - [Preventing a Field From Being Submitted](#prevent-field-submission)
+    - [Field Facades](#field-facades)
 - [Extending Form Behavior](#extend-form-behavior)
     - [Overriding Controller Action](#overriding-action)
     - [Overriding Controller Redirect](#overriding-redirect)
@@ -1356,10 +1356,10 @@ The above logic will set the `hidden` flag on certain fields by checking the val
 
 You may also extend other models to apply the `filterFields` logic, see the [Filtering Form Fields](#filter-form-fields) section for more details.
 
-<a name="prevent-field-submission"></a>
-### Preventing a Field From Being Submitted
+<a name="field-facades"></a>
+### Field Facades
 
-Sometimes you may need to prevent a field from being submitted. In order to do that, just add an underscore (\_) before the name of the field in the form configuration file. Form fields beginning with an underscore are purged automatically and no longer saved to the model.
+Sometimes you may need to display a field while preventing it from being submitted. A field can be defined as a facade by adding an underscore (\_) before the name of the field. These fields are purged automatically and no longer saved to the model, such as with the following `_map` field.
 
     address:
         label: Title

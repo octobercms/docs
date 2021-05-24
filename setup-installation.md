@@ -15,6 +15,8 @@ October CMS makes one bold but obvious assumption: clients don't build websites;
 
 Whether you're new to web development or have years of experience, October CMS is a platform that makes it easy to create bespoke experiences for you and your clients. We hope you enjoy your journey with us and discover happiness in simplicity.
 
+To run October CMS locally, we recommend using [Laravel Valet for macOS](https://laravel.com/docs/valet) and [Laragon for Windows 10](https://laragon.org/).
+
 <a name="command-line-installation"></a>
 ## Installing Composer
 
