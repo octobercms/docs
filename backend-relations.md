@@ -320,10 +320,7 @@ Provides an opportunity to manipulate the relation configuration. The following 
 <a name="extend-view-widget"></a>
 ### Extending the View Widget
 
-Provides an opportunity to manipulate the view widget.
-> **Note**: The view widget has not yet fully initialized, so not all public methods will work as expected! For more information read [How to remove a column](#remove-column).
-
-For example you might want to toggle showCheckboxes based on a property of your model.
+Provides an opportunity to manipulate the view widget. For example you might want to toggle showCheckboxes based on a property of your model.
 
     public function relationExtendViewWidget($widget, $field, $model)
     {
@@ -350,7 +347,7 @@ Since the widget has not completed initializing at this point of the runtime cyc
         }
 
         // This will work
-        $widget->bindEvent('list.extendColumns', function () use($widget) {
+        $widget->bindEvent('list.extendColumns', function () use ($widget) {
             $widget->removeColumn('my_column');
         });
     }

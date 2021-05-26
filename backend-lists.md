@@ -6,6 +6,7 @@
     - [Filtering the List](#adding-filters)
 - [Defining List Columns](#list-columns)
     - [Column Options](#column-options)
+    - [Custom Value Selection](#custom-value-select)
     - [Nested Column Selection](#nested-column-select)
 - [Available Column Types](#column-types)
 - [Displaying the List](#displaying-list)
@@ -170,7 +171,8 @@ Option | Description
 **sortable** | specifies if this column can be sorted. Default: true.
 **clickable** | if set to false, disables the default click behavior when the column is clicked. Default: true.
 **select** | defines a custom SQL select statement to use for the value.
-**valueFrom** | defines a model attribute to use for the value.
+**valueFrom** | defines a model attribute to use for the source value.
+**displayFrom** | defines a model attribute to use for the display value.
 **relation** | defines a model relationship column.
 **useRelationCount** | use the count of the defined `relation` as the value for this column. Default: false
 **cssClass** | assigns a CSS class to the column container.
@@ -179,8 +181,30 @@ Option | Description
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
+<a name="custom-value-select"></a>
+### Custom Value Selection
+
+It is possible to change the source and display values for each column. If you want to source the column value from another column, do so with the `valueFrom` option.
+
+    other_name:
+        label: Something Great
+        valueFrom: name
+
+If you want to keep the source column value but display a different value from the model attribute, use the `displayFrom` option.
+
+    status_code:
+        label: Status
+        displayFrom: status_label
+
+This is mostly applicable when a [model accessor](../database/mutators#accessors-and-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
+
+    public function getStatusLabelAttribute()
+    {
+        return title_case($this->status_code);
+    }
+
 <a name="nested-column-select"></a>
-## Nested Column Selection
+### Nested Column Selection
 
 In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations) column or a [jsonable array](../database/model#property-jsonable). The only drawback of doing this is the column cannot use searchable or sortable options.
 
@@ -230,13 +254,6 @@ There are various column types that can be used for the **type** setting, these 
         label: Full Name
         type: text
 
-You may also specify a custom text format, for example **Admin: Full Name (active)**
-
-    full_name:
-        label: Full Name
-        type: text
-        format: "Admin: %s (active)"
-
 <a name="column-image"></a>
 ### Image
 
@@ -262,12 +279,12 @@ See the [image resizing article](../services/resizer#resize-parameters) for more
         label: Age
         type: number
 
-You may also specify a custom number format, for example currency **$ 99.00**
+You may also specify a custom number format, for example currency **$99.00**.
 
     price:
         label: Price
         type: number
-        format: "$ %.2f"
+        format: "$%.2f"
 
 > **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
 
@@ -971,6 +988,19 @@ When dealing with multiple lists definitions in a same controller, you can use t
         if ($definition === 'trashed') {
             $query->onlyTrashed();
         }
+    }
+
+You may also join other tables to aid with searching and sorting. The following will join the `post_statuses` table and introduce the `status_sort_order` and `status_name` columns to the query.
+
+    public function listExtendQuery($query, $definition = null)
+    {
+        $query->leftJoin('post_statuses', 'posts.status_id', 'post_statuses.id');
+
+        $query->select(
+            'posts.*',
+            'post_statuses.sort_order as status_sort_order',
+            'post_statuses.name as status_name'
+        );
     }
 
 The [list filter](#list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
