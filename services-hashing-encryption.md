@@ -61,3 +61,5 @@ Of course, you may decrypt values using the `decrypt` method on the `Crypt` faca
     catch (DecryptException $ex) {
         //
     }
+
+Alternatively, models can implement the [Encryptable trait](../database/traits#encryptable) to automatically encrypt and decrypt attributes.

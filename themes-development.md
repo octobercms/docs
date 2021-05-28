@@ -27,7 +27,8 @@ Field | Description
 **homepage** | specifies the author website URL, required.
 **description** | the theme description, required.
 **previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
-**code** | the theme code, optional. The value is used on the October CMS marketplace for initializing the theme code value. If the theme code is not provided, the theme directory name will be used as a code. When a theme is installed from the Marketplace, the code is used as the new theme directory name.
+**code** | the theme code, optional. The value is used on the October CMS marketplace for initializing the theme code value.
+**authorCode** | the theme author code, optional. The value is used on the October CMS marketplace for defining the theme owner.
 **form** | a configuration array or reference to a form field definition file, used for [theme customization](#customization), optional.
 **require** | an array of plugin names used for [theme dependencies](#dependencies), optional.
 
@@ -37,7 +38,8 @@ Example of the theme information file:
     description: "Demonstrates the basic concepts of the front-end theming."
     author: "October CMS"
     homepage: "http://octobercms.com"
-    code: "demo"
+    code: "Demo"
+    authorCode: "Acme"
 
 <a name="version-file"></a>
 ## Version File
