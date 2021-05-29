@@ -275,7 +275,7 @@ Option | Description
 <a name="field-types"></a>
 ## Available Field Types
 
-There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#field-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
+There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#form-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
 <style>
     .collection-method-list {
@@ -583,7 +583,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: Backend\FormWidgets\RichEditor
         size: huge
 
-<a name="field-ui-elements"></a>
+<a name="form-ui-elements"></a>
 ## Available UI Elements
 
 There are non function UI elements that can be included in forms to help with the layout design.
