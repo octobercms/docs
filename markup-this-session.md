@@ -2,10 +2,6 @@
 
 You can access the current session manager via `this.session` and it returns the object `Illuminate\Session\SessionManager` [current session configuration](../services/session#configuration).
 
-## Storing data in the session
-
-    {{ this.session.put('key', 'value') }}
-
 ## Retrieving data from the session
 
     {{ this.session.get('key') }}
