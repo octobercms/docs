@@ -57,9 +57,7 @@ A plugin with the code **Acme.Boilerplate** will have a composer package name of
 <a name="dependencies"></a>
 ### Declaring Dependencies
 
-Plugins and themes alike can depend on other packages. Use the `composer require` command to include them in your composer.json file.
-
-> **Note**: The `--no-update` switch should be used to instruct composer to only include a reference to the dependency. Otherwise, the files will be installed and included in your package source.
+Plugins and themes alike can depend on other packages, simple include them in your composer.json file.
 
 #### Requiring another plugin
 
@@ -107,7 +105,7 @@ In addition to tagging, you should also increment the version file found in your
 
 Composer allows you to add private repositories from GitHub and other providers to your October CMS projects. Make sure you have followed the same instructions for [publishing plugins](#publishing-plugins) and [themes](#publishing-themes) respectively.
 
-In all cases, you should have a copy of your private plugin or theme stored somewhere outside of the main project. The `plugin:install` and `theme:install` commands can be used to install private plugins from either a remote or local source. This will add the location to your composer file and install it like any other package.
+In all cases, you should have a copy of your private plugin or theme stored somewhere available to the main project. The `plugin:install` and `theme:install` commands can be used to install private plugins from either a remote or local source. This will add the location to your composer file and install it like any other package.
 
 #### Install from a remote source
 
@@ -119,11 +117,17 @@ To use a specific version or branch, use the `--want` option, for example to req
 
     php artisan plugin:install Acme.Blog --from=git@github.com:acme/blog-plugin.git --want=dev-develop
 
+> **Note**: If you use the `git@` address of a repository, composer will prefer the source version and clone the repository so you can continue to push updates normally.
+
 #### Install from a local source
+
+To install a plugin using composer from the same project source.
+
+    php artisan plugin:install Acme.Blog --from=./plugins/acme/blog
 
 You may also use a source found on a local or network drive.
 
-    php artisan plugin:install Acme.Blog --from=../private-plugins/acme-blog
+    php artisan plugin:install Acme.Blog --from=/home/sam/private-plugins/acme-blog
 
 <a name="laravel-packages"></a>
 ## Using Laravel Packages
