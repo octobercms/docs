@@ -89,7 +89,6 @@ Services:
     services/events: "Events"
     services/html: "Forms & Html"
     services/resizer: "Image Resizer"
-    services/filesystem-cdn: "Filesystem / CDN"
     services/hashing-encryption: "Hashing & Encryption"
     services/helpers: "Helpers"
     services/mail: "Mail"
@@ -100,6 +99,7 @@ Services:
     services/response-view: "Response & View"
     services/router: "Router"
     services/session: "Session"
+    services/storage: "Storage"
     services/validation: "Validation"
 
 Console:

@@ -1,35 +1,35 @@
 # Requests & Input
 
-- [Basic input](#basic-input)
+- [Basic Input](#basic-input)
 - [Cookies](#cookies)
-- [Old input](#old-input)
+- [Old Input](#old-input)
 - [Files](#files)
-- [Request information](#request-information)
+- [Request Information](#request-information)
 
 <a name="basic-input"></a>
-## Basic input
+## Basic Input
 
 You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input` [helper function](../services/helpers) is an alias for `Input::get`.
 
-#### Retrieving an input value
+#### Retrieving an Input Value
 
     $name = Input::get('name');
 
-#### Retrieving a default value if the input value is absent
+#### Retrieving a Default Value if the Input Value is Absent
 
     $name = Input::get('name', 'Sally');
 
-#### Determining if an input value is present
+#### Determining if an Input Value is Present
 
     if (Input::has('name')) {
         //
     }
 
-#### Getting all input for the request
+#### Getting All Input for the Request
 
     $input = Input::all();
 
-#### Getting only some of the request input
+#### Getting Only Some of the Request Input
 
     $input = Input::only('username', 'password');
 
@@ -44,50 +44,35 @@ When working on forms with "array" inputs, you may use dot notation to access th
 <a name="cookies"></a>
 ## Cookies
 
-By default, all cookies created by the October are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client. Cookies named in the `cookie.unencryptedCookies` config key will not be encrypted.
+By default, all cookies created by the October CMS are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client. Cookies named in the `system.unencrypt_cookies` config key will not be encrypted.
 
-> **Note**: Cookies are encrypted with the APP_KEY, so there is the potential for cookies to be crafted by the client if they know the APP_KEY. If your application's encryption key is in the hands of a malicious party, that party could craft cookie values using the encryption key and exploit vulnerabilities inherit to PHP object serialization / unserialization, such as calling arbitrary class methods within your application. To mitigate that, always rotate your APP_KEY if you suspect it has been compromised and ensure you always verify that the data you received from a cookie is what you expect it to be before using it.
-
-#### Retrieving a cookie value
+#### Retrieving a Cookie Value
 
     $value = Cookie::get('name');
 
-#### Attaching a new cookie to a response
+#### Attaching a New Cookie to a Response
 
     $response = Response::make('Hello World');
 
     $response->withCookie(Cookie::make('name', 'value', $minutes));
 
-#### Queueing a cookie for the next response
+#### Queueing a Cookie for the Next Response
 
 If you would like to set a cookie before a response has been created, use the `Cookie::queue` method. The cookie will automatically be attached to the final response from your application.
 
     Cookie::queue($name, $value, $minutes);
 
-#### Creating a cookie that lasts forever
+#### Creating a Cookie That Lasts Forever
 
     $cookie = Cookie::forever('name', 'value');
 
-#### Handling cookies without encryption
+#### Handling Cookies Without Encryption
 
-If you don't want some cookies to be encrypted or decrypted, you can specify them in configuration.
-This is useful, for example, when you want to pass data from frontend to server side backend via cookies, and vice versa.
+If you don't want some cookies to be encrypted or decrypted, you can specify them in configuration. This is useful, for example, when you want to pass data from frontend to server side backend via cookies, and vice versa.
 
-Add names of the cookies that should not be encrypted or decrypted to `unencryptedCookies` parameter in the `config/cookie.php` configuration file.
+Add names of the cookies that should not be encrypted or decrypted to `unencrypt_cookies` parameter in the `config/system.php` configuration file.
 
-    /*
-    |--------------------------------------------------------------------------
-    | Cookies without encryption
-    |--------------------------------------------------------------------------
-    |
-    | October CMS encrypts/decrypts cookies by default. You can specify cookies
-    | that should not be encrypted or decrypted here. This is useful, for
-    | example, when you want to pass data from frontend to server side backend
-    | via cookies, and vice versa.
-    |
-    */
-
-    'unencryptedCookies' => [
+    'unencrypt_cookies' => [
         'my_cookie',
     ],
 
@@ -95,19 +80,19 @@ Alternatively for plugins, you can also add these dynamically from `Plugin.php` 
 
     public function boot()
     {
-        Config::push('cookie.unencryptedCookies', "my_cookie");
+        Config::push('system.unencrypt_cookies', "my_cookie");
     }
 
 <a name="old-input"></a>
-## Old input
+## Old Input
 
 You may need to keep input from one request until the next request. For example, you may need to re-populate a form after checking it for validation errors.
 
-#### Flashing input to the session
+#### Flashing Input to the Session
 
     Input::flash();
 
-#### Flashing only some input to the session
+#### Flashing Only Some Input to the Session
 
     Input::flashOnly('username', 'email');
 
@@ -121,18 +106,18 @@ Since you often will want to flash input in association with a redirect to the p
 
 > **Note**: You may flash other data across requests using the [Session](../services/session) class.
 
-#### Retrieving old data
+#### Retrieving Old Data
 
     Input::old('username');
 
 <a name="files"></a>
 ## Files
 
-#### Retrieving an uploaded file
+#### Retrieving an Uploaded File
 
     $file = Input::file('photo');
 
-#### Determining if a file was uploaded
+#### Determining if a File was Uploaded
 
     if (Input::hasFile('photo')) {
         //
@@ -140,48 +125,48 @@ Since you often will want to flash input in association with a redirect to the p
 
 The object returned by the `file` method is an instance of the `Symfony\Component\HttpFoundation\File\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file.
 
-#### Determining if an uploaded file is valid
+#### Determining if an Uploaded File is Valid
 
     if (Input::file('photo')->isValid()) {
         //
     }
 
-#### Moving an uploaded file
+#### Moving an Uploaded File
 
     Input::file('photo')->move($destinationPath);
 
     Input::file('photo')->move($destinationPath, $fileName);
 
-#### Retrieving the path to an uploaded file
+#### Retrieving the Path to an Uploaded File
 
     $path = Input::file('photo')->getRealPath();
 
-#### Retrieving the original name of an uploaded file
+#### Retrieving the Original Name of an Uploaded File
 
     $name = Input::file('photo')->getClientOriginalName();
 
-#### Retrieving the extension of an uploaded file
+#### Retrieving the Extension of an Uploaded File
 
     $extension = Input::file('photo')->getClientOriginalExtension();
 
-#### Retrieving the size of an uploaded file
+#### Retrieving the Size of an Uploaded file
 
     $size = Input::file('photo')->getSize();
 
-#### Retrieving the MIME type of an uploaded file
+#### Retrieving the MIME Type of an Uploaded File
 
     $mime = Input::file('photo')->getMimeType();
 
 <a name="request-information"></a>
-## Request information
+## Request Information
 
 The `Request` class provides many methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class. Here are some of the highlights.
 
-#### Retrieving the request URI
+#### Retrieving the Request URI
 
     $uri = Request::path();
 
-#### Retrieving the request method
+#### Retrieving the Request Method
 
     $method = Request::method();
 
@@ -189,53 +174,53 @@ The `Request` class provides many methods for examining the HTTP request for you
         //
     }
 
-#### Determining if the request path matches a pattern
+#### Determining if the Request Path Matches a Pattern
 
     if (Request::is('admin/*')) {
         //
     }
 
-#### Get the request URL
+#### Get the Request URL
 
     $url = Request::url();
 
-#### Retrieve a request URI segment
+#### Retrieve a Request URI Segment
 
     $segment = Request::segment(1);
 
-#### Retrieving a request header
+#### Retrieving a Request Header
 
     $value = Request::header('Content-Type');
 
-#### Retrieving values from $_SERVER
+#### Retrieving Values from $_SERVER
 
     $value = Request::server('PATH_INFO');
 
-#### Determining if the request is over HTTPS
+#### Determining if the Request is Over HTTPS
 
     if (Request::secure()) {
         //
     }
 
-#### Determine if the request is using AJAX
+#### Determine if the Request is Using AJAX
 
     if (Request::ajax()) {
         //
     }
 
-#### Determine if the request has JSON content type
+#### Determine if the Request has JSON Content Type
 
     if (Request::isJson()) {
         //
     }
 
-#### Determine if the request is asking for JSON
+#### Determine if the Request is Asking for JSON
 
     if (Request::wantsJson()) {
         //
     }
 
-#### Checking the requested response format
+#### Checking the Requested Response Format
 
 The `Request::format` method will return the requested response format based on the HTTP Accept header:
 

@@ -57,7 +57,7 @@ A plugin with the code **Acme.Boilerplate** will have a composer package name of
 <a name="dependencies"></a>
 ### Declaring Dependencies
 
-Plugins and themes alike can depend on other packages, simple include them in your composer.json file.
+Plugins and themes alike can depend on other packages, simply include them in your composer.json file.
 
 #### Requiring another plugin
 
