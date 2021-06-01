@@ -80,7 +80,7 @@ Alternatively for plugins, you can also add these dynamically from `Plugin.php` 
 
     public function boot()
     {
-        Config::push('system.unencrypt_cookies', "my_cookie");
+        Config::push('system.unencrypt_cookies', 'my_cookie');
     }
 
 <a name="old-input"></a>
