@@ -3,11 +3,21 @@
 - [Auth File](#auth-file)
 - [Public Folder](#public-folder)
 - [Shared Hosting](#shared-hosting)
+- [Deployment without Composer](#deploy-plugin)
 - [Web Server Configuration](#webserver-configuration)
     - [Apache Configuration](#apache-configuration)
     - [Nginx Configuration](#nginx-configuration)
     - [Lighttpd Configuration](#lighttpd-configuration)
     - [IIS Configuration](#iis-configuration)
+
+<a name="deploy-plugin"></a>
+## Deployment without Composer
+
+![image](https://github.com/octobercms/docs/blob/develop/images/deploy-plugin.png?raw=true){.pull-right .m-l-lg .w-100}
+
+If your server does not have the ability to run Composer or command line tools, such as micro instances and shared environments, you may use the [official deployment plugin](https://octobercms.com/plugin/rainlab-deploy) as a solution to deploying your website.
+
+<div class="clearfix"></div>
 
 <a name="auth-file"></a>
 ## Auth File
@@ -42,20 +52,9 @@ If you share a server with other users, you should act as if your neighbor's sit
 
 You can setup this protection in the file location `config/system.php` in the section titled **Default Permission Mask**.
 
-    /*
-    |--------------------------------------------------------------------------
-    | Default Permission Mask
-    |--------------------------------------------------------------------------
-    |
-    | Specifies a default file and folder permission for newly created files
-    | and directories in the system paths.
-    |
-    */
-
     'default_mask' => ['file' => '644', 'folder' => '755'],
 
 > **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your control panel and set them.
-
 
 <a name="webserver-configuration"></a>
 ## Web Server Configuration

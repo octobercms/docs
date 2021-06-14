@@ -40,7 +40,7 @@ The scoreboard control is usually displayed above back-end lists and displays so
 
     <?= $this->listRender() ?>
 
-![image](https://github.com/octobercms/docs/blob/master/images/list-scoreboard.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/list-scoreboard.png?raw=true) {.img-responsive .frame}
 
 Note that you should use the **scoreboard-item** class for your scoreboard elements.
 
@@ -79,7 +79,7 @@ Indicators are simple reporting element that have a title, a value and a descrip
         <p class="description">37 posts remain</p>
     </div>
 
-![image](https://github.com/octobercms/docs/blob/master/images/name-title-indicators.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/name-title-indicators.png?raw=true) {.img-responsive .frame}
 
 > **Note**: The example is given in the context of a scoreboard area. If you use the indicators in a [report widget](widgets#report-widgets) partial, the class **scoreboard-item** shouldn't be used.
 
@@ -100,7 +100,7 @@ The pie chart outputs information as a circle diagram, with optional label in th
         </ul>
     </div>
 
-![image](https://github.com/octobercms/docs/blob/master/images/traffic-sources.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/traffic-sources.png?raw=true) {.img-responsive .frame}
 
 <a name="bar-chart"></a>
 ## Bar Chart
@@ -119,4 +119,4 @@ The next example shows a bar chart markup. The **wrap-legend** class is optional
         </ul>
     </div>
 
-![image](https://github.com/octobercms/docs/blob/master/images/bar-chart.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/bar-chart.png?raw=true) {.img-responsive .frame}

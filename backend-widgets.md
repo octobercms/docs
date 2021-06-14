@@ -356,7 +356,7 @@ Inside report widgets you can use any [charts or indicators](controls), lists or
 
 Report widgets may have properties that users can manage with the Inspector:
 
-![image](https://github.com/octobercms/docs/blob/master/images/report-widget-inspector.png?raw=true)
+![image](https://github.com/octobercms/docs/blob/develop/images/report-widget-inspector.png?raw=true)
 
 The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
 

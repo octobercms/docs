@@ -6,7 +6,7 @@
 
 October CMS ships with a media manager built in, making it easy to publish larger assets such as video and photos. These assets can then be inserted to your pages and content files via the user interface.
 
-![image](https://github.com/octobercms/docs/blob/master/images/media-manager.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/media-manager.png?raw=true) {.img-responsive .frame}
 
 <a name="media-links"></a>
 ## Linking to Media

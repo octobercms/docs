@@ -1,7 +1,7 @@
 # App configuration
 
 - [Environment Configuration](#environment-config)
-    - [Environment File Security](#environment-file-security)
+    - [Specific Environment Files](#specific-environment-files)
 - [Application Configuration](#app-configuration)
     - [Debug Mode](#debug-mode)
     - [Safe Mode](#safe-mode)
@@ -36,6 +36,15 @@ To recap, configuration values are loaded in this order.
 1. Values in the **config** PHP files
 
 > **Important**: Never commit your `.env` file to source control because this would be a security risk in the event an intruder gains access to your source control repository, since any sensitive credentials would get exposed.
+
+<a name="specific-environment-files"></a>
+## Specific Environment Files
+
+In rare cases you may need to load different `.env` files for the same codebase, such as local, staging and production. The current application environment detection can be overridden by a server-level `APP_ENV` environment variable.
+
+    SetEnv APP_ENV "staging"
+
+The above example sets the `APP_ENV` value to **staging** will therefore attempt to load values from the `.env.staging` file instead.
 
 <a name="app-configuration"></a>
 ## Application Configuration
