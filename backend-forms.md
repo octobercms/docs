@@ -5,6 +5,7 @@
     - [Create Page](#form-create-page)
     - [Update Page](#form-update-page)
     - [Preview Page](#form-preview-page)
+    - [Custom Messages](#form-custom-messages)
 - [Defining Form Fields](#form-fields)
     - [Field Options](#form-field-options)
     - [Nested Field Selection](#nested-field-select)
@@ -52,7 +53,7 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
 <a name="configuring-form"></a>
 ## Configuring the Form Behavior
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical form behavior configuration file:
+The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical form behavior configuration file.
 
     # ===================================
     #  Form Behavior Config
@@ -71,7 +72,7 @@ The configuration file referred in the `$formConfig` property is defined in YAML
     preview:
         title: View Blog Post
 
-The following fields are required in the form configuration file:
+The following fields are required in the form configuration file.
 
 Field | Description
 ------------- | -------------
@@ -91,44 +92,38 @@ Option | Description
 <a name="form-create-page"></a>
 ### Create Page
 
-To support the Create page add the following configuration to the YAML file:
+To support the Create page add the following configuration to the YAML file.
 
     create:
         title: New Blog Post
         redirect: acme/blog/posts/update/:id
         redirectClose: acme/blog/posts
-        flashSave: Post has been created!
 
-The following configuration options are supported for the Create page:
+The following configuration options are supported for the Create page.
 
 Option | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
-**flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the create page only.
 
 <a name="form-update-page"></a>
 ### Update Page
 
-To support the Update page add the following configuration to the YAML file:
+To support the Update page add the following configuration to the YAML file.
 
     update:
         title: Edit Blog Post
         redirect: acme/blog/posts
-        flashSave: Post updated successfully!
-        flashDelete: Post has been deleted.
 
-The following configuration options are supported for the Update page:
+The following configuration options are supported for the Update page.
 
 Option | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
-**flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
-**flashDelete** | flash message to display when record is deleted, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the update page only.
 
 <a name="form-preview-page"></a>
@@ -139,12 +134,38 @@ To support the Preview page add the following configuration to the YAML file:
     preview:
         title: View Blog Post
 
-The following configuration options are supported for the Preview page:
+The following configuration options are supported for the Preview page.
 
 Option  | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the preview page only.
+
+<a name="form-custom-messages"></a>
+### Custom Messages
+
+Specify a `customMessages` option to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
+
+    customMessages:
+        notFound: Did not find the thing
+        flashCreate: New thing created
+        flashUpdate: Updated that thing
+        flashDelete: Thing is gone
+
+You may also modify messages in the context of the form being displayed. The following will override the `notFound` message for the `update` context only.
+
+    update:
+        customMessages:
+            notFound: Nothing found when updating
+
+The following messages are available to override as custom messages.
+
+Message | Default
+------------- | -------------
+notFound | Form record with an ID of :id could not be found.
+flashCreate | :name Created
+flashUpdate | :name Updated
+flashDelete | :name Deleted
 
 <a name="form-fields"></a>
 ## Defining Form Fields
@@ -154,10 +175,10 @@ Form fields are defined with the YAML file. The form fields configuration is use
     plugins/
       acme/
         blog/
-          models/            <=== Plugin models directory
-            post/            <=== Model configuration directory
-              fields.yaml    <=== Model form fields config file
-            Post.php         <=== model class
+          models/            <=== Plugin Models Directory
+            post/            <=== Model Configuration Directory
+              fields.yaml    <=== Model Form Fields Config File
+            Post.php         <=== model Class
 
 Fields can be placed in three areas, the **outside area**, **primary tabs** or **secondary tabs**. The next example shows the typical contents of a form fields definition file.
 

@@ -2,6 +2,7 @@
 
 - [Introduction](#introduction)
 - [Configuring the Relation Behavior](#configuring-relation)
+    - [Custom Messages](#relation-custom-messages)
 - [Relationship Types](#relationship-types)
     - [Has Many](#has-many)
     - [Belongs To Many](#belongs-to-many)
@@ -85,7 +86,7 @@ Option | Type | Description
 **recordsPerPage** | List | maximum rows to display for each page.
 **noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
-**scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The model that this relationship will be attached to (i.e. the **parent model**) is passed to this scope method as the second parameter (`$query` is the first).
+**scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the _related form model_ to apply to the list query always. The model that this relationship will be attached to (i.e. the parent model) is passed to this scope method as the second parameter (`$query` is the first).
 **filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#list-filters).
 
 These configuration values can be specified only for the **view** options.
@@ -105,6 +106,35 @@ Option | Type | Description
 ------------- | ------------- | -------------
 **title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
+
+<a name="relation-custom-messages"></a>
+### Custom Messages
+
+Specify a `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
+
+    customMessages:
+        createButton: Make Thing
+        deleteButton: Destroy Thing
+
+You may also modify messages in the context of the related field being displayed. The following will override the `createButton` message for the `items` relation only.
+
+    items:
+        customMessages:
+            createButton: New Item!
+
+The following messages are available to override as custom messages.
+
+Message | Default
+------------- | -------------
+buttonCreate | Create :name
+buttonUpdate | Update :name
+buttonAdd | Add :name
+buttonLink | Link :name
+buttonDelete | Delete
+buttonRemove | Remove
+buttonUnlink | Unlink
+deleteConfirm | Are you sure?
+unlinkConfirm | Are you sure?
 
 <a name="relationship-types"></a>
 ## Relationship Types
