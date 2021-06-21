@@ -144,7 +144,7 @@ Option  | Description
 <a name="form-custom-messages"></a>
 ### Custom Messages
 
-Specify a `customMessages` option to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
+Specify the `customMessages` option to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
 
     customMessages:
         notFound: Did not find the thing
@@ -160,7 +160,7 @@ You may also modify messages in the context of the form being displayed. The fol
 
 The following messages are available to override as custom messages.
 
-Message | Default
+Message | Default Message
 ------------- | -------------
 notFound | Form record with an ID of :id could not be found.
 flashCreate | :name Created

@@ -110,7 +110,7 @@ Option | Type | Description
 <a name="relation-custom-messages"></a>
 ### Custom Messages
 
-Specify a `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
+Specify the `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
 
     customMessages:
         createButton: Make Thing
@@ -133,8 +133,8 @@ buttonLink | Link :name
 buttonDelete | Delete
 buttonRemove | Remove
 buttonUnlink | Unlink
-deleteConfirm | Are you sure?
-unlinkConfirm | Are you sure?
+confirmDelete | Are you sure?
+confirmUnlink | Are you sure?
 
 <a name="relationship-types"></a>
 ## Relationship Types
