@@ -6,8 +6,9 @@
     - [Update Page](#form-update-page)
     - [Preview Page](#form-preview-page)
 - [Defining Form Fields](#form-fields)
-    - [Tab Options](#form-tab-options)
     - [Field Options](#form-field-options)
+    - [Nested Field Selection](#nested-field-select)
+    - [Tab Options](#form-tab-options)
 - [Available Field Types](#field-types)
 - [UI Elements](#form-ui-elements)
 - [Form Widgets](#form-widgets)
@@ -184,61 +185,6 @@ Fields can be placed in three areas, the **outside area**, **primary tabs** or *
         fields:
             [...]
 
-Fields from related models can be rendered with the [Relation Widget](#widget-relation) or the [Relation Manager](relations#relationship-types). The exception is a OneToOne or morphOne related field, which must be defined as **relation[field]** and then can be specified as any other field of the model:
-
-        user_name:
-            label: User Name
-            description: The name of the user
-        avatar[name]:
-            label: Avatar
-            description: will be saved in the Avatar table
-        published_at:
-            label: Published date
-            description: When this blog post was published
-            type: datepicker
-
-        [...]
-
-<a name="form-tab-options"></a>
-### Tab Options
-
-For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
-
-Option | Description
-------------- | -------------
-**stretch** | specifies if this tab stretches to fit the parent height.
-**defaultTab** | the default tab to assign fields to. Default: Misc.
-**icons** | assign icons to tabs using tab names as the key.
-**lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
-**cssClass** | assigns a CSS class to the tab container.
-**paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
-
-> **Note**: It is not recommended to use lazy loading on tabs with fields that are affected by triggers.
-
-    tabs:
-        stretch: true
-        defaultTab: User
-        cssClass: text-blue
-        lazy:
-            - Groups
-        paneCssClass:
-            0: first-tab
-            1: second-tab
-        icons:
-            User: icon-user
-            Groups: icon-group
-
-        fields:
-            username:
-                type: text
-                label: Username
-                tab: User
-
-            groups:
-                type: relation
-                label: Groups
-                tab: Groups
-
 <a name="form-field-options"></a>
 ### Field Options
 
@@ -271,6 +217,55 @@ Option | Description
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+
+<a name="nested-field-select"></a>
+### Nested Field Selection
+
+Fields from related models can be rendered with the [Relation Widget](#widget-relation) or the [Relation Manager](relations#relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model#property-jsonable), you may use a nested field type using the **relation[field]** definition.
+
+    avatar[name]:
+        label: Avatar
+        comment: will be saved in the Avatar table
+
+The above example would fetch and save the value in PHP equivalent of `$record->avatar->name` or `$record->avatar['name']` respectively.
+
+<a name="form-tab-options"></a>
+### Tab Options
+
+For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
+
+Option | Description
+------------- | -------------
+**stretch** | specifies if this tab stretches to fit the parent height.
+**defaultTab** | the default tab to assign fields to. Default: Misc.
+**icons** | assign icons to tabs using tab names as the key.
+**lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
+**cssClass** | assigns a CSS class to the tab container.
+**paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
+
+    tabs:
+        stretch: true
+        defaultTab: User
+        cssClass: text-blue
+        lazy:
+            - Groups
+        paneCssClass:
+            0: first-tab
+            1: second-tab
+        icons:
+            User: icon-user
+            Groups: icon-group
+
+        fields:
+            username:
+                type: text
+                label: Username
+                tab: User
+
+            groups:
+                type: relation
+                label: Groups
+                tab: Groups
 
 <a name="field-types"></a>
 ## Available Field Types

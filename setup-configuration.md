@@ -38,7 +38,7 @@ To recap, configuration values are loaded in this order.
 > **Important**: Never commit your `.env` file to source control because this would be a security risk in the event an intruder gains access to your source control repository, since any sensitive credentials would get exposed.
 
 <a name="specific-environment-files"></a>
-## Specific Environment Files
+### Specific Environment Files
 
 In rare cases you may need to load different `.env` files for the same codebase, such as local, staging and production. The current application environment detection can be overridden by a server-level `APP_ENV` environment variable.
 
