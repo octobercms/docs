@@ -80,6 +80,7 @@ Option | Type | Description
 ------------- | ------------- | -------------
 **form** | Form | a reference to form field definition file, see [backend form fields](forms#form-fields).
 **list** | List | a reference to list column definition file, see [backend list columns](lists#list-columns).
+**showFlash** | Both | enables the display of flash messages after a successful action. Default: true
 **showSearch** | List | display an input for searching the records. Default: false
 **showSorting** | List | displays the sorting link on each column. Default: true
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
@@ -124,7 +125,7 @@ You may also modify messages in the context of the related field being displayed
 
 The following messages are available to override as custom messages.
 
-Message | Default
+Message | Default Message
 ------------- | -------------
 buttonCreate | Create :name
 buttonUpdate | Update :name
@@ -135,6 +136,19 @@ buttonRemove | Remove
 buttonUnlink | Unlink
 confirmDelete | Are you sure?
 confirmUnlink | Are you sure?
+titlePreviewForm | Preview :name
+titleCreateForm | Create :name
+titleUpdateForm | Update :name
+titleLinkForm | Link a New :name
+titleAddForm | Add a New :name
+titlePivotForm | Related :name Data
+flashCreate | :name Created
+flashUpdate | :name Updated
+flashDelete | :name Deleted
+flashAdd | :name(s) Added
+flashLink | :name(s) Linked
+flashRemove | :name(s) Removed
+flashUnlink | :name(s) Unlinked
 
 <a name="relationship-types"></a>
 ## Relationship Types
