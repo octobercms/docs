@@ -114,14 +114,14 @@ Option | Type | Description
 Specify the `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
 
     customMessages:
-        createButton: Make Thing
-        deleteButton: Destroy Thing
+        buttonCreate: Make Thing
+        buttonDelete: Destroy Thing
 
 You may also modify messages in the context of the related field being displayed. The following will override the `createButton` message for the `items` relation only.
 
     items:
         customMessages:
-            createButton: New Item!
+            buttonCreate: New Item!
 
 The following messages are available to override as custom messages.
 
@@ -145,10 +145,10 @@ titlePivotForm | Related :name Data
 flashCreate | :name Created
 flashUpdate | :name Updated
 flashDelete | :name Deleted
-flashAdd | :name(s) Added
-flashLink | :name(s) Linked
-flashRemove | :name(s) Removed
-flashUnlink | :name(s) Unlinked
+flashAdd | :name Added
+flashLink | :name Linked
+flashRemove | :name Removed
+flashUnlink | :name Unlinked
 
 <a name="relationship-types"></a>
 ## Relationship Types
