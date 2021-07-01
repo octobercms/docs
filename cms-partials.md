@@ -3,6 +3,7 @@
 - [Introduction](#introduction)
 - [Rendering Partials](#rendering-partials)
 - [Passing Variables to Partials](#partial-variables)
+    - [Passing Markup as a Variable](#partial-markup-variable)
 - [Dynamic Partials](#dynamic-partials)
     - [Partial Execution Life Cycle](#partial-life-cycle)
     - [Life Cycle Limitations](#life-cycle-limitations)
@@ -52,6 +53,39 @@ Inside the partial, variables can be accessed like any other markup variable:
 
     <p>Country: {{ country }}, city: {{ city }}.</p>
 
+<a name="partial-markup-variable"></a>
+### Passing Markup as a Variable
+
+It is possible to pass markup to a partial by adding the `body` attribute to the partial tag.
+
+    {% partial "card" body %}
+        This is the card contents
+    {% endpartial %}
+
+The contents are then available inside the partial as the `body` variable.
+
+    {{ body|raw }}
+
+Combined with the [placeholder markup tag](../markup/tag-placeholder), this lets you build composable partials.
+
+    {% partial "card" image="img.jpg" body %}
+        {% put header %}
+            <h2>This is the card header</h2>
+        {% endput %}
+        This is the card contents
+    {% endpartial %}
+
+The **card** partial is then composed of two content areas and an image variable.
+
+    <div class="header">
+        <div class="image">
+            <img src="{{ image }}" />
+        </div>
+        {% placeholder header %}
+    </div>
+    <div class="body">
+        {{ body|raw }}
+    </div>
 
 <a name="dynamic-partials"></a>
 ## Dynamic Partials
