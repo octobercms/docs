@@ -587,6 +587,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         label: Display content
         type: switch
         comment: Flick this switch to display content
+        options:
             on: On
             off: Off
 
