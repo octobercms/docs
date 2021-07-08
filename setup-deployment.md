@@ -1,9 +1,9 @@
 # Deployment
 
-- [Auth File](#auth-file)
-- [Public Folder](#public-folder)
-- [Shared Hosting](#shared-hosting)
 - [Deployment without Composer](#deploy-plugin)
+- [Public Folder](#public-folder)
+- [Auth File](#auth-file)
+- [Shared Hosting](#shared-hosting)
 - [Web Server Configuration](#webserver-configuration)
     - [Apache Configuration](#apache-configuration)
     - [Nginx Configuration](#nginx-configuration)
@@ -19,17 +19,6 @@ If your server does not have the ability to run Composer or command line tools, 
 
 <div class="clearfix"></div>
 
-<a name="auth-file"></a>
-## Auth File
-
-When deploying your application to a remote server, you may be prompted to provide your login credentials for the October CMS website. These credentials will authenticate your Composer session as having permission to download the October CMS source code.
-
-To avoid manually typing in these credentials, you should make sure that the [Composer auth.json file](https://getcomposer.org/doc/articles/http-basic-authentication.md) is deployed with your application. The `auth.json` file is ignored in the `.gitignore` file by default.
-
-Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands#project-set-command).
-
-    php artisan project:set <license key>
-
 <a name="public-folder"></a>
 ## Public Folder
 
@@ -44,6 +33,17 @@ The command should be performed after each system update or when a new plugin is
     AUTO_MIRROR_PUBLIC=true
 
 > **Note**: For Windows operating systems, the `october:mirror` command must be performed in a console running as administrator. Therefore it is more suitable to run as part of a deployment process.
+
+<a name="auth-file"></a>
+## Auth File
+
+When deploying your application to a remote server, you may be prompted to provide your login credentials for the October CMS website. These credentials will authenticate your Composer session as having permission to download the October CMS source code.
+
+To avoid manually typing in these credentials, you should make sure that the [Composer auth.json file](https://getcomposer.org/doc/articles/http-basic-authentication.md) is deployed with your application.
+
+Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands#project-set-command).
+
+    php artisan project:set <license key>
 
 <a name="shared-hosting"></a>
 ## Shared Hosting

@@ -62,7 +62,7 @@ It is possible to pass markup to a partial by adding the `body` attribute to the
         This is the card contents
     {% endpartial %}
 
-The contents are then available inside the partial as the `body` variable.
+The contents are available inside the partial as the `body` variable.
 
     {{ body|raw }}
 
@@ -75,7 +75,7 @@ Combined with the [placeholder markup tag](../markup/tag-placeholder), this lets
         This is the card contents
     {% endpartial %}
 
-The **card** partial is then composed of two content areas and an image variable.
+The **card** partial is composed of two content areas and an image variable.
 
     <div class="header">
         <div class="image">
