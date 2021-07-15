@@ -43,7 +43,7 @@ Model relationships are defined as properties on your model classes. An example 
     class User extends Model
     {
         public $hasMany = [
-            'posts' => 'Acme\Blog\Models\Post'
+            'posts' => \Acme\Blog\Models\Post::class
         ]
     }
 
@@ -61,7 +61,7 @@ Accessing a relationship as a property is also possible:
 Each definition can be an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are parameters that must have a key name.
 
     public $hasMany = [
-        'posts' => ['Acme\Blog\Models\Post', 'delete' => true]
+        'posts' => [\Acme\Blog\Models\Post::class, 'delete' => true]
     ];
 
 The following are parameters that can be used with all relations:
@@ -137,7 +137,7 @@ A one-to-one relationship is a very basic relation. For example, a `User` model 
     class User extends Model
     {
         public $hasOne = [
-            'phone' => 'Acme\Blog\Models\Phone'
+            'phone' => \Acme\Blog\Models\Phone::class
         ];
     }
 
@@ -148,13 +148,13 @@ Once the relationship is defined, we may retrieve the related record using the m
 The model assumes the foreign key of the relationship based on the model name. In this case, the `Phone` model is automatically assumed to have a `user_id` foreign key. If you wish to override this convention, you may pass the `key` parameter to the definition:
 
     public $hasOne = [
-        'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id']
+        'phone' => [\Acme\Blog\Models\Phone::class, 'key' => 'my_user_id']
     ];
 
 Additionally, the model assumes that the foreign key should have a value matching the `id` column of the parent. In other words, it will look for the value of the user's `id` column in the `user_id` column of the `Phone` record. If you would like the relationship to use a value other than `id`, you may pass the `otherKey` parameter to the definition:
 
     public $hasOne = [
-        'phone' => ['Acme\Blog\Models\Phone', 'key' => 'my_user_id', 'otherKey' => 'my_id']
+        'phone' => [\Acme\Blog\Models\Phone::class, 'key' => 'my_user_id', 'otherKey' => 'my_id']
     ];
 
 #### Defining the inverse of the relation
@@ -164,20 +164,20 @@ Now that we can access the `Phone` model from our `User`. Let's do the opposite 
     class Phone extends Model
     {
         public $belongsTo = [
-            'user' => 'Acme\Blog\Models\User'
+            'user' => \Acme\Blog\Models\User::class
         ];
     }
 
 In the example above, the model will try to match the `user_id` from the `Phone` model to an `id` on the `User` model. It determines the default foreign key name by examining the name of the relationship definition and suffixing the name with `_id`. However, if the foreign key on the `Phone` model is not `user_id`, you may pass a custom key name using the `key` parameter on the definition:
 
     public $belongsTo = [
-        'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id']
+        'user' => [Acme\Blog\Models\User::class, 'key' => 'my_user_id']
     ];
 
 If your parent model does not use `id` as its primary key, or you wish to join the child model to a different column, you may pass the `otherKey` parameter to the definition specifying your parent table's custom key:
 
     public $belongsTo = [
-        'user' => ['Acme\Blog\Models\User', 'key' => 'my_user_id', 'otherKey' => 'my_id']
+        'user' => [\Acme\Blog\Models\User::class, 'key' => 'my_user_id', 'otherKey' => 'my_id']
     ];
 
 #### Default models
@@ -185,14 +185,14 @@ If your parent model does not use `id` as its primary key, or you wish to join t
 The `belongsTo` relationship lets you define a default model that will be returned if the given relationship is `null`. This pattern is often referred to as the [Null Object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) and can help remove conditional checks in your code. In the following example, the `user` relation will return an empty `Acme\Blog\Models\User` model if no `user` is attached to the post:
 
     public $belongsTo = [
-        'user' => ['Acme\Blog\Models\User', 'default' => true]
+        'user' => [\Acme\Blog\Models\User::class, 'default' => true]
     ];
 
 To populate the default model with attributes, you may pass an array to the `default` parameter:
 
     public $belongsTo = [
         'user' => [
-            'Acme\Blog\Models\User',
+            \Acme\Blog\Models\User::class,
             'default' => ['name' => 'Guest']
         ]
     ];
@@ -205,7 +205,7 @@ A one-to-many relationship is used to define relationships where a single model 
     class Post extends Model
     {
         public $hasMany = [
-            'comments' => 'Acme\Blog\Models\Comment'
+            'comments' => \Acme\Blog\Models\Comment::class
         ];
     }
 
@@ -226,7 +226,7 @@ Of course, since all relationships also serve as query builders, you can add fur
 Like the `hasOne` relation, you may also override the foreign and local keys by passing the `key` and `otherKey` parameters on the definition respectively:
 
     public $hasMany = [
-        'comments' => ['Acme\Blog\Models\Comment', 'key' => 'my_post_id', 'otherKey' => 'my_id']
+        'comments' => [\Acme\Blog\Models\Comment::class, 'key' => 'my_post_id', 'otherKey' => 'my_id']
     ];
 
 #### Defining the inverse of the relation
@@ -236,7 +236,7 @@ Now that we can access all of a post's comments, let's define a relationship to 
     class Comment extends Model
     {
         public $belongsTo = [
-            'post' => 'Acme\Blog\Models\Post'
+            'post' => \Acme\Blog\Models\Post::class
         ];
     }
 
@@ -249,13 +249,13 @@ Once the relationship has been defined, we can retrieve the `Post` model for a `
 In the example above, the model will try to match the `post_id` from the `Comment` model to an `id` on the `Post` model. It determines the default foreign key name by examining the name of the relationship  and suffixing it with `_id`. However, if the foreign key on the `Comment` model is not `post_id`, you may pass a custom key name using the `key` parameter:
 
     public $belongsTo = [
-        'post' => ['Acme\Blog\Models\Post', 'key' => 'my_post_id']
+        'post' => [\Acme\Blog\Models\Post::class, 'key' => 'my_post_id']
     ];
 
 If your parent model does not use `id` as its primary key, or you wish to join the child model to a different column, you may pass the `otherKey` parameter to the definition specifying your parent table's custom key:
 
     public $belongsTo = [
-        'post' => ['Acme\Blog\Models\Post', 'key' => 'my_post_id', 'otherKey' => 'my_id']
+        'post' => [Acme\Blog\Models\Post::class, 'key' => 'my_post_id', 'otherKey' => 'my_id']
     ];
 
 <a name="many-to-many"></a>
@@ -277,7 +277,7 @@ Many-to-many relationships are defined adding an entry to the `$belongsToMany` p
     class User extends Model
     {
         public $belongsToMany = [
-            'roles' => 'Acme\Blog\Models\Role'
+            'roles' => \Acme\Blog\Models\Role::class
         ];
     }
 
@@ -296,14 +296,14 @@ Of course, like all other relationship types, you may call the `roles` method to
 As mentioned previously, to determine the table name of the relationship's joining table, the model will join the two related model names in alphabetical order. However, you are free to override this convention. You may do so by passing the `table` parameter to the `belongsToMany` definition:
 
     public $belongsToMany = [
-        'roles' => ['Acme\Blog\Models\Role', 'table' => 'acme_blog_role_user']
+        'roles' => [\Acme\Blog\Models\Role::class, 'table' => 'acme_blog_role_user']
     ];
 
 In addition to customizing the name of the joining table, you may also customize the column names of the keys on the table by passing additional parameters to the `belongsToMany` definition. The `key` parameter is the foreign key name of the model on which you are defining the relationship, while the `otherKey` parameter is the foreign key name of the model that you are joining to:
 
     public $belongsToMany = [
         'roles' => [
-            'Acme\Blog\Models\Role',
+            \Acme\Blog\Models\Role::class,
             'table'    => 'acme_blog_role_user',
             'key'      => 'my_user_id',
             'otherKey' => 'my_role_id'
@@ -317,7 +317,7 @@ To define the inverse of a many-to-many relationship, you simply place another `
     class Role extends Model
     {
         public $belongsToMany = [
-            'users' => 'Acme\Blog\Models\User'
+            'users' => \Acme\Blog\Models\User::class
         ];
     }
 
@@ -339,7 +339,7 @@ By default, only the model keys will be present on the `pivot` object. If your p
 
     public $belongsToMany = [
         'roles' => [
-            'Acme\Blog\Models\Role',
+            \Acme\Blog\Models\Role::class,
             'pivot' => ['column1', 'column2']
         ]
     ];
@@ -347,7 +347,7 @@ By default, only the model keys will be present on the `pivot` object. If your p
 If you want your pivot table to have automatically maintained `created_at` and `updated_at` timestamps, use the `timestamps` parameter on the relationship definition:
 
     public $belongsToMany = [
-        'roles' => ['Acme\Blog\Models\Role', 'timestamps' => true]
+        'roles' => [\Acme\Blog\Models\Role::class, 'timestamps' => true]
     ];
 
 If you would like to define a custom model to represent the intermediate table of your relationship, you may use `pivotModel` attribute when defining the relationship. Custom many-to-many pivot models should extend the `October\Rain\Database\Pivot` class while custom polymorphic many-to-many pivot models should extend the `October\Rain\Database\MorphPivot` class.
@@ -392,8 +392,8 @@ Now that we have examined the table structure for the relationship, let's define
     {
         public $hasManyThrough = [
             'posts' => [
-                'Acme\Blog\Models\Post',
-                'through' => 'Acme\Blog\Models\User'
+                \Acme\Blog\Models\Post::class,
+                'through' => \Acme\Blog\Models\User::class
             ],
         ];
     }
@@ -404,11 +404,11 @@ Typical foreign key conventions will be used when performing the relationship's 
 
     public $hasManyThrough = [
         'posts' => [
-            'Acme\Blog\Models\Post',
-            'key'        => 'my_country_id',
-            'through'    => 'Acme\Blog\Models\User',
+            \Acme\Blog\Models\Post::class,
+            'key' => 'my_country_id',
+            'through' => \Acme\Blog\Models\User::class,
             'throughKey' => 'my_user_id',
-            'otherKey'   => 'my_id'
+            'otherKey' => 'my_id'
         ],
     ];
 
@@ -434,8 +434,8 @@ Though the `history` table does not contain a `supplier_id` column, the `hasOneT
     {
         public $hasOneThrough = [
             'userHistory' => [
-                'Acme\Supplies\Model\History',
-                'through' => 'Acme\Supplies\Model\User'
+                \Acme\Supplies\Model\History::class,
+                'through' => \Acme\Supplies\Model\User::class
             ],
         ];
     }
@@ -446,11 +446,11 @@ Typical foreign key conventions will be used when performing the relationship's 
 
     public $hasOneThrough = [
         'userHistory' => [
-            'Acme\Supplies\Model\History',
-            'key'        => 'supplier_id',
-            'through' => 'Acme\Supplies\Model\User'
+            \Acme\Supplies\Model\History::class,
+            'key' => 'supplier_id',
+            'through' => \Acme\Supplies\Model\User::class,
             'throughKey' => 'user_id',
-            'otherKey'   => 'id'
+            'otherKey' => 'id'
         ],
     ];
 
@@ -497,14 +497,14 @@ Next, let's examine the model definitions needed to build this relationship:
     class Staff extends Model
     {
         public $morphOne = [
-            'photo' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
+            'photo' => [\Acme\Blog\Models\Photo::class, 'name' => 'imageable']
         ];
     }
 
     class Product extends Model
     {
         public $morphOne = [
-            'photo' => ['Acme\Blog\Models\Photo', 'name' => 'imageable']
+            'photo' => [\Acme\Blog\Models\Photo::class, 'name' => 'imageable']
         ];
     }
 
@@ -561,14 +561,14 @@ Next, let's examine the model definitions needed to build this relationship:
     class Post extends Model
     {
         public $morphMany = [
-            'comments' => ['Acme\Blog\Models\Comment', 'name' => 'commentable']
+            'comments' => [\Acme\Blog\Models\Comment::class, 'name' => 'commentable']
         ];
     }
 
     class Product extends Model
     {
         public $morphMany = [
-            'comments' => ['Acme\Blog\Models\Comment', 'name' => 'commentable']
+            'comments' => [\Acme\Blog\Models\Comment::class, 'name' => 'commentable']
         ];
     }
 
@@ -629,7 +629,7 @@ Next, we're ready to define the relationships on the model. The `Post` and `Vide
     class Post extends Model
     {
         public $morphToMany = [
-            'tags' => ['Acme\Blog\Models\Tag', 'name' => 'taggable']
+            'tags' => [\Acme\Blog\Models\Tag::class, 'name' => 'taggable']
         ];
     }
 
@@ -640,8 +640,8 @@ Next, on the `Tag` model, you should define a relation for each of its related m
     class Tag extends Model
     {
         public $morphedByMany = [
-            'posts'  => ['Acme\Blog\Models\Post', 'name' => 'taggable'],
-            'videos' => ['Acme\Blog\Models\Video', 'name' => 'taggable']
+            'posts'  => [\Acme\Blog\Models\Post::class, 'name' => 'taggable'],
+            'videos' => [\Acme\Blog\Models\Video::class, 'name' => 'taggable']
         ];
     }
 
@@ -673,8 +673,8 @@ Using a custom polymorphic type lets you decouple your database from your applic
     use October\Rain\Database\Relations\Relation;
 
     Relation::morphMap([
-        'staff' => 'Acme\Blog\Models\Staff',
-        'product' => 'Acme\Blog\Models\Product',
+        'staff' => \Acme\Blog\Models\Staff::class,
+        'product' => \Acme\Blog\Models\Product::class,
     ]);
 
 The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
@@ -689,7 +689,7 @@ For example, imagine a blog system in which a `User` model has many associated `
     class User extends Model
     {
         public $hasMany = [
-            'posts' => ['Acme\Blog\Models\Post']
+            'posts' => \Acme\Blog\Models\Post::class
         ];
     }
 
@@ -750,7 +750,7 @@ When accessing relationships as properties, the relationship data is "lazy loade
     class Book extends Model
     {
         public $belongsTo = [
-            'author' => ['Acme\Blog\Models\Author']
+            'author' => \Acme\Blog\Models\Author::class
         ];
     }
 
@@ -995,7 +995,7 @@ When a model `belongsTo` or `belongsToMany` another model, such as a `Comment` w
          * Relations
          */
         public $belongsTo = [
-            'post' => ['Acme\Blog\Models\Post']
+            'post' => \Acme\Blog\Models\Post::class
         ];
     }
 
@@ -1085,19 +1085,21 @@ Destroys all bindings that have not been committed and are older than 1 day:
 
     October\Rain\Database\Models\DeferredBinding::cleanUp(1);
 
-> **Note**: October automatically destroys deferred bindings that are older than 5 days. It happens when a back-end user logs into the system.
+> **Note**: October CMS automatically destroys deferred bindings that are older than 5 days. It happens when a backend user logs into the system.
 
 <a name="disable-deferred-binding"></a>
 ### Disable Deferred Binding
 
-Sometimes you might need to disable deferred binding entirely for a given model, for instance if you are loading it from a separate database connection. In order to do that, you need to make sure that the model's `sessionKey` property is `null` before the pre and post deferred binding hooks in the internal save method are run. To do that, you can bind to the model's `model.saveInternal` event:
+Sometimes you might need to disable deferred binding entirely for a given model, for instance if you are loading it from a separate database connection. In order to do that, you need to make sure that the model's `sessionKey` property is `null` before the pre and post deferred binding hooks in the internal save method are run. To do that, you can bind to the model's `model.saveInternal` event.
 
     public function __construct()
     {
         $result = parent::__construct(...func_get_args());
+
         $this->bindEvent('model.saveInternal', function () {
             $this->sessionKey = null;
         });
+
         return $result;
     }
 
