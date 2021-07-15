@@ -17,8 +17,6 @@
 - [Deletes](#deletes)
 - [Pessimistic Locking](#pessimistic-locking)
 - [Caching Queries](#caching-queries)
-    - [Persistent Caching](#persistent-caching)
-    - [In-Memory Caching](#in-memory-caching)
 - [Debugging](#debugging)
 
 <a name="introduction"></a>
@@ -645,35 +643,11 @@ Alternatively, you may use the `lockForUpdate` method. A "for update" lock preve
 <a name="caching-queries"></a>
 ## Caching Queries
 
-<a name="persistent-caching"></a>
-### Persistent Caching
-
 You may easily cache the results of a query using the [Cache service](../services/cache). Simply chain the `remember` or `rememberForever` method when preparing the query.
 
     $users = Db::table('users')->remember(10)->get();
 
 In this example, the results of the query will be cached for ten minutes. While the results are cached, the query will not be run against the database, and the results will be loaded from the default cache driver specified for your application.
-
-<a name="in-memory-caching"></a>
-### In-Memory Caching
-
-Duplicate queries across the same request can be prevented by using in-memory caching. This feature is enabled by default for [queries prepared by a model](../database/model#retrieving-models) but not those generated directly using the `Db` facade.
-
-    Db::table('users')->get(); // Result from database
-    Db::table('users')->get(); // Result from database
-
-    Model::all(); // Result from database
-    Model::all(); // Result from in-memory cache
-
-You may enable or disable the duplicate cache with either the `enableDuplicateCache` or `disableDuplicateCache` method.
-
-    Db::table('users')->enableDuplicateCache()->get();
-
-If a query is stored in the cache, it will automatically be cleared when an insert, update, delete, or truncate statement is used. However you may clear the cache manually using the `flushDuplicateCache` method.
-
-    Db::flushDuplicateCache();
-
-> **Note**: In-memory caching is disabled entirely when running via the command-line interface (CLI).
 
 <a name="debugging"></a>
 ## Debugging
