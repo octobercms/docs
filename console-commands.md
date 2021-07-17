@@ -11,7 +11,6 @@
     - [Install Plugin](#plugin-install-command)
     - [Check Dependencies](#plugin-check-command)
     - [Refresh Plugin](#plugin-refresh-command)
-    - [Rollback Plugin](#plugin-rollback-command)
     - [List Plugin](#plugin-list-command)
     - [Disable Plugin](#plugin-disable-command)
     - [Enable Plugin](#plugin-enable-command)
@@ -118,12 +117,13 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
     php artisan plugin:refresh AuthorName.PluginName
 
-<a name="plugin-rollback-command"></a>
-### Rollback Plugin
+Use the `--rollback` option to only destroy the database tables without recreating them.
 
-`plugin:rollback` - Rollback the specified plugin's migrations. The second parameter is optional, if specified the rollback process will stop at the specified version.
+    php artisan plugin:refresh AuthorName.PluginName --rollback
 
-    php artisan plugin:rollback AuthorName.PluginName 1.2.3
+You may also specify a version number with the `--rollback` option to stop at a specified version.
+
+    php artisan plugin:refresh AuthorName.PluginName --rollback=1.0.3
 
 <a name="plugin-list-command"></a>
 ### List Plugins
