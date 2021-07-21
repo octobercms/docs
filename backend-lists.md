@@ -306,35 +306,44 @@ You may also specify a custom number format, for example currency **$99.00**.
         label: Date
         type: datetime
 
-You may also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**:
+You may also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**.
 
     created_at:
         label: Date
         type: datetime
         format: l jS \of F Y h:i:s A
 
-You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
+The display value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
 
     created_at:
         label: Date
         type: datetime
-        ignoreTimezone: true
+        useTimezone: false
 
-> **Note**: the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
+> **Note**: the `useTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
 <a name="column-date"></a>
 ### Date
 
-`date` - displays the column value as date format **M j, Y**
+`date` - displays the column value as date format **M j, Y**.
 
     created_at:
         label: Date
         type: date
 
+The backend timezone preference is not applied to this value by default. If the date includes a time, you may convert the timezone with the `useTimezone` option.
+
+    created_at:
+        label: Date
+        type: date
+        useTimezone: true
+
+> **Note**: the `date` and `time` columns do not apply backend timezone conversions by default since a date and time are both required for the conversion.
+
 <a name="column-time"></a>
 ### Time
 
-`time` - displays the column value as time format **g:i A**
+`time` - displays the column value as time format **g:i A**.
 
     created_at:
         label: Date
@@ -703,8 +712,8 @@ To use default value for Date and Date Range
         ];
     }
 
-
-You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
+<!--
+You may also wish to set `useTimezone: false` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
 
     published_at:
         label: Date
@@ -713,9 +722,10 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         maxDate: '2030-10-13'
         yearRange: 10
         conditions: created_at >= ':after' AND created_at <= ':before'
-        ignoreTimezone: true
+        useTimezone: false
 
-> **Note**: the `ignoreTimezone` option also applies to the `date` filter type as well.
+> **Note**: the `useTimezone` option also applies to the `date` filter type as well.
+-->
 
 <a name="filter-number"></a>
 ### Number

@@ -831,7 +831,7 @@ Option | Description
 **maxDate** | the maximum/latest date that can be selected.
 **firstDay** | the first day of the week. Default: 0 (Sunday).
 **showWeekNumber** | show week numbers at head of row. Default: false
-**ignoreTimezone** | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
+**useTimezone** | convert the date and time to the backend specified timezone preference. Default: true
 
 <a name="widget-fileupload"></a>
 ### File Upload
