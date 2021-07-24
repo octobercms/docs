@@ -18,6 +18,7 @@
     - [Access via Relationship Method](#querying-method)
     - [Access via Dynamic Property](#querying-dynamic-property)
     - [Querying Relationship Existence](#querying-existence)
+    - [Counting Related Records](#counting-records)
 - [Eager Loading](#eager-loading)
     - [Constraining Eager Loads](#constraining-eager-loads)
     - [Lazy Eager Loading](#lazy-eager-loading)
@@ -32,8 +33,6 @@
 ## Introduction
 
 Database tables are often related to one another. For example, a blog post may have many comments, or an order could be related to the user who placed it. October makes managing and working with these relationships easy and supports several different types of relationships.
-
-> **Note**: If you are selecting specific columns in your query and want to load relationships as well, you need to make sure that the columns that contain the keying data (i.e. `id`, `foreign_key`, etc) are included in your select statement. Otherwise, October cannot connect the relations.
 
 <a name="defining-relationships"></a>
 ## Defining Relationships
@@ -74,7 +73,6 @@ Argument | Description
 **push** | if set to false, this relation will not be saved via `push`, default: true.
 **delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
 **detach** | used by the `belongsToMany` relationships only, if set to false, the related model will be not be detached if the primary model is deleted or relationship is destroyed, default: true.
-**count** | if set to true, the result contains a `count` column only, used for counting relations, default: false.
 
 Example filter using **order** and **conditions**:
 
@@ -105,13 +103,6 @@ Example filter using **scope**:
             return $query->where('is_active', true)->orderBy('name', 'desc');
         }
     }
-
-Example filter using **count**:
-
-    public $belongsToMany = [
-        'users' => ['Backend\Models\User'],
-        'users_count' => ['Backend\Models\User', 'count' => true]
-    ];
 
 <a name="relationship-types"></a>
 ## Relationship Types
@@ -741,6 +732,37 @@ If you need even more power, you may use the `whereHas` and `orWhereHas` methods
     $posts = Post::whereHas('comments', function ($query) {
         $query->where('content', 'like', 'foo%');
     })->get();
+
+<a name="counting-records"></a>
+### Counting Related Records
+
+In some scenarios you may want to count the number of related records found in a given relationship definition. The `withCount` method can be used to include a `{relation}_count` column with the selected models.
+
+    $users = User::withCount('roles')->get();
+
+    foreach ($users as $user) {
+        echo $user->roles_count;
+    }
+
+The `withCount` method supports multiple relations along with additional query constraints.
+
+    $posts = Post::withCount(['votes', 'comments' => function ($query) {
+        $query->where('content', 'like', 'foo%');
+    }])->get();
+
+    echo $posts[0]->votes_count;
+    echo $posts[0]->comments_count;
+
+You may lazy load the count column with the `loadCount` method.
+
+    $user = User::first();
+    $user->loadCount('roles');
+
+Additional query constraints are also supported.
+
+    $user->loadCount(['roles' => function ($query) {
+        $query->where('clearance', '>', 5);
+    }])
 
 <a name="eager-loading"></a>
 ## Eager Loading

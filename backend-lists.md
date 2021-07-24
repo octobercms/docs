@@ -174,7 +174,7 @@ Option | Description
 **valueFrom** | defines a model attribute to use for the source value.
 **displayFrom** | defines a model attribute to use for the display value.
 **relation** | defines a model relationship column.
-**useRelationCount** | use the count of the defined `relation` as the value for this column. Default: false
+**relationCount** | use the count of the defined `relation` as the value for this column. Default: false
 **cssClass** | assigns a CSS class to the column container.
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
@@ -403,34 +403,20 @@ They can also be specified explicitly in the `options` value.
 
 `relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
 
-    group:
+    group_name:
         label: Group
         relation: groups
         select: name
 
-To display a column that shows the number of related records, use the `useRelationCount` option.
+To display a column that shows the number of related records, use the `relationCount` option.
 
     users_count:
         label: Users
         relation: users
-        useRelationCount: true
+        relationCount: true
+        type: number
 
-> **Note**: Using the `relation` option on a column will load the value from the `select`ed column into the attribute specified by this column. It is recommended that you name the column displaying the relation data without conflicting with existing model attributes as demonstrated in the examples below:
-
-**Best Practice:**
-
-     group_name:
-         label: Group
-         relation: group
-         select: name
-
-**Poor Practice:**
-
-    # This will overwrite the value of $record->group_id which will break accessing relations from the list view
-    group_id:
-        label: Group
-        relation: group
-        select: name
+> **Note**: Be careful not to name relations the same as existing database columns. For example, using a name `group_id` could break the group relation due to a naming conflict.
 
 <a name="column-partial"></a>
 ### Partial
