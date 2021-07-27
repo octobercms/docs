@@ -177,4 +177,4 @@ The **lang.php** file should define and return an array of any depth, for exampl
         ]
     ];
 
-You are then able to reference the keys using `themes.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `themes.acme::lang.options.website_name`.
+You are then able to reference the keys using `theme.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `theme.acme::lang.options.website_name`.
