@@ -1,98 +1,79 @@
-# Backend sorting and reordering
+# Backend Sorting and Reordering
 
 - [Introduction](#introduction)
-- [Configuring the reorder behavior](#configuring-reorder)
-- [Displaying the reorder page](#reorder-display)
-- [Override Sortable Partials](#override-sortable-partials)
-- [Extending the model query](#extend-model-query)
+- [Configuring a Behavior](#configuring-reorder)
+- [Supported Model Types](#supported-models)
+    - [Nested Set](#model-nested-set)
+    - [Simple Tree](#model-simple-tree)
+    - [Sortable Model](#model-sortable)
 
 <a name="introduction"></a>
 ## Introduction
 
-**Reorder Behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
-
-The behavior depends on a [model class](../database/model) which must implement one of the following [model traits](../database/traits):
-
-1. [`October\Rain\Database\Traits\Sortable`](../database/traits#sortable)
-1. [`October\Rain\Database\Traits\NestedTree`](../database/traits#nestedtree)
-
->**NOTE**: If adding sorting to a previously unsorted model under the control of a third party is desired, you can use the [`October\Rain\Database\Behaviors\Sortable`](../database/behaviors#sortable) behavior, which can be dynamically implemented. However, you will need to ensure that the model table has a `sort_order` column present on it.
-
-In order to use the reorder behavior you should add it to the `$implement` property of the controller class. Also, the `$reorderConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
-
-    namespace Acme\Shop\Controllers;
-
-    class Categories extends Controller
-    {
-        public $implement = [
-            \Backend\Behaviors\ReorderController::class
-        ];
-
-        public $reorderConfig = 'config_reorder.yaml';
-
-        // [...]
-    }
+October CMS provides features for sorting and reordering database records. For behaviors that support structured lists, you can define a **structure** option to enable the feature. Various [model traits](../database/traits) are used to support reordering including nested sets, simple trees and sortable models.
 
 <a name="configuring-reorder"></a>
-## Configuring the behavior
+## Configuring a Behavior
 
-The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
+The [List Behavior](../backend/lists) backend behavior currently support the option to reorder records using the **structure** option in the relevant definition. When defined, the page displays a list of records with a drag handle allowing them to be sorted and restructured.
 
-	# ===================================
-	#  Reorder Behavior Config
-	# ===================================
+    # ===================================
+    #  List Behavior Config
+    # ===================================
 
-	# Reorder Title
-	title: Reorder Categories
+    # ...
 
-	# Attribute name
-	nameFrom: title
-
-	# Model Class name
-	modelClass: Acme\Shop\Models\Category
-
-	# Toolbar widget configuration
-	toolbar:
-	    # Partial for toolbar buttons
-	    buttons: reorder_toolbar
-
+    structure:
+        showTree: true
+        showReorder: true
+        maxDepth: 2
 
 The configuration options listed below can be used.
 
 Option | Description
 ------------- | -------------
-**title** | used for the page title.
-**nameFrom** | specifies which attribute should be used as a label for each record.
-**modelClass** | a model class name, the record data is loaded from this model.
-**toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration.
+**showTree** | displays a tree hierarchy for parent/child records. Default: true.
+**treeExpanded** | if tree nodes should be expanded by default. Default: true.
+**showReorder** | displays an interface for reordering records. Default: true
+**maxDepth** | defines the maximum levels allowed for reordering. Default: null
 
-<a name="reorder-display"></a>
-## Displaying the reorder page
+<a name="supported-models"></a>
+## Supported Model Types
 
-You should provide a [view file](controllers-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
+Depending on the requirements, a different model interface can be used for managing nested and sorted records. The behavior will adapt depending on which trait is implemented.
 
-    <?= $this->reorderRender() ?>
+<a name="model-nested-set"></a>
+### Nested Set
 
-<a name="override-sortable-partials"></a>
-## Override Sortable Partials
+Use the `NestedTree` trait when a fixed structure is needed. This includes parent-child relationships and when records need to be displayed in a specific order.
 
-If you need to override default view of your reorder page, you have to copy
+    class Category extends Model
+    {
+        use \October\Rain\Database\Traits\NestedTree;
+    }
 
-1. `modules/backend/behaviors/reordercontroller/partials/_container.htm`
-2. `modules/backend/behaviors/reordercontroller/partials/_records.htm`
+Read more about the [NestedTree trait in the database documentation](../database/traits#nested-tree).
 
-in
+<a name="model-simple-tree"></a>
+### Simple Tree
 
-1. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_container.htm`
-2. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_records.htm`
+Use the `SimpleTree` trait when a basic parent-child relationship is needed.
 
+    class Category extends Model
+    {
+        use \October\Rain\Database\Traits\SimpleTree;
+    }
 
-<a name="extend-model-query"></a>
-## Extending the model query
+Read more about the [SimpleTree trait in the database documentation](../database/traits#simple-tree).
 
-The lookup query for the list [database model](../database/model) can be extended by overriding the `reorderExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
+<a name="model-sortable"></a>
+### Sortable Model
 
-	public function reorderExtendQuery($query)
-	{
-	    $query->withTrashed();
-	}
+Use the `Sortable` trait when records need to be displayed in a specific order.
+
+    class User extends Model
+    {
+        use \October\Rain\Database\Traits\Sortable;
+    }
+
+Read more about the [Sortable trait in the database documentation](../database/traits#sortable).

@@ -86,8 +86,7 @@ Option | Description
 **defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **showCheckboxes** | displays checkboxes next to each record. Default: false.
 **showSetup** | displays the list column set up button. Default: false.
-**showTree** | displays a tree hierarchy for parent/child records. Default: false.
-**treeExpanded** | if tree nodes should be expanded by default. Default: false.
+**structure** | enables a structured list, see the [sorting and reordering article](../backend/reorder) for more details.
 **customViewPath** | specify a custom view path to override partials used by the list, optional.
 
 <a name="adding-toolbar"></a>
@@ -174,7 +173,7 @@ Option | Description
 **valueFrom** | defines a model attribute to use for the source value.
 **displayFrom** | defines a model attribute to use for the display value.
 **relation** | defines a model relationship column.
-**relationCount** | use the count of the defined `relation` as the value for this column. Default: false
+**relationCount** | display the number of related records as the column value. Must be used with the `relation` option. Default: false
 **cssClass** | assigns a CSS class to the column container.
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
@@ -992,8 +991,7 @@ You may also join other tables to aid with searching and sorting. The following 
     {
         $query->leftJoin('post_statuses', 'posts.status_id', 'post_statuses.id');
 
-        $query->select(
-            'posts.*',
+        $query->addSelect(
             'post_statuses.sort_order as status_sort_order',
             'post_statuses.name as status_name'
         );
