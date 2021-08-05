@@ -21,7 +21,7 @@
     - [List Themes](#theme-list-command)
     - [Enable Theme](#theme-use-command)
     - [Remove Theme](#theme-remove-command)
-    <!-- - [Sync Theme](#theme-sync-command) -->
+    - [Duplicate Theme](#theme-duplicate-command)
 - [Utilities](#utility-commands)
     - [Clear Application Cache](#cache-clear-command)
     - [Remove Demo Data](#october-fresh-command)
@@ -205,31 +205,22 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
     php artisan theme:remove vanilla
 
-<!--
-<a name="theme-sync-command"></a>
-### Sync Theme
+<a name="theme-duplicate-command"></a>
+### Duplicate Theme
 
-`theme:sync` - Sync a theme's content between the filesystem and database when `cms.databaseTemplates` is enabled.
+`theme:duplicate` - duplicates an existing theme to create a new one, including the creation of child themes.
 
-    php artisan theme:sync
+    php artisan theme:duplicate demo
 
-By default the theme that will be synced is the currently active one. You can specify any theme to sync by passing the desired theme's code:
+The above command will create a new theme called `demo-copy` by copying the directory and its contents. The `.themelock` file will be removed during this process.
 
-    php artisan theme:sync my-custom-theme
+To specify the new directory name, such as `mydemo`, you may supply this a second argument.
 
-By default the sync direction will be from the database to the filesytem (i.e. you're syncing changes on a remote host to the filesystem for tracking in a version control system). However, you can change the direction of the sync by specifying `--target=database`. This is useful if you have changed the underlying files that make up the theme and you want to force the site to pick up your changes even if they have made changes of their own that are stored in the database.
+    php artisan theme:duplicate demo mydemo
 
-    php artisan theme:sync --target=database
+To create a child theme that inherits the parent theme, specify the `--child` option.
 
-By default the command requires user interaction to confirm that they want to complete the sync (including information about the amount of paths affected, the theme targeted, and the target & source of the sync). To override the need for user interaction (i.e. if running this command in a deploy / build script of some sort) just pass the `--force` option:
-
-    php artisan theme:sync --force
-
-Unless otherwise specified, the command will sync all the valid paths (determined by the Halcyon model instances returned to the `system.console.theme.sync.getAvailableModelClasses` event) available in the theme. To manually specify specific paths to be synced pass a comma separated list of paths to the `--paths` option:
-
-php artisan theme:sync --paths=partials/header.htm,content/contact.md
-
--->
+    php artisan theme:duplicate demo mychild --child
 
 <a name="utility-commands"></a>
 ## Utilities
