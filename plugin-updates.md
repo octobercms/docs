@@ -53,39 +53,36 @@ In the example above the **Acme.Blog** plugin will not be updated until the **Ac
 
 The **version.yaml** file, called the *Plugin Version File*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). Here is an example of a plugin version file:
 
-    1.0.1: First version
-    1.0.2: Second version
-    1.0.3:
-        - Third version
-    1.1.0: "!!! Important update"
-    1.1.1:
+    v1.0.1: First version
+    v1.0.2: Second version
+    v1.0.3:
         - Update with a migration and seed
         - create_tables.php
         - seed_the_database.php
+    v2.0.0: Important update
+    v2.0.1: Latest version
 
 > **Note**: The `version.yaml` file should always use the first line for a text update that describes the changes and the remaining lines for update scripts. For more verbose updates, consider using a dedicated changelog file.
 
-As you can see above, there should be a key that represents the version number followed by the update message, which is either a string or an array containing update messages. For updates that refer to migration or seeding files, lines that are script file names can be placed in any position. An example of a comment with no associated update files:
+As you can see above, there should be a key that represents the version number followed by the update message, which is either a string or an array containing update messages. For updates that refer to migration or seeding files, lines that are script file names can be placed in any position. An example of a comment with no associated update files.
 
-    1.0.1: A single comment that uses no update scripts.
+    v1.0.1: A single comment that uses no update scripts.
 
 <a name="important-updates"></a>
 ### Important Updates
 
-Sometimes a plugin needs to introduce features that will break websites already using the plugin. If an update comment in the **version.yaml** file begins with three exclamation marks (`!!!`) then it will be considered *Important* and will require the user to confirm before updating. An example of an important update comment is below.
+Sometimes a plugin needs to introduce features that will break websites already using the plugin. To prevent the changes from being deployed automatically, you should increase the **major** segment of the version string (`major.minor.patch`). An example of an important update comment is below.
 
-    1.1.0: "!!! This is an important update that contains breaking changes."
+    v2.1.0: This is an important update from v1 that contains breaking changes.
 
-When the system detects an important update it will require confirmation to proceed.
-
-> **Important**: For important updates, the update message must be wrapped in quotes.
+When tagging the new version `v2` from a version `v1` then the changes are not deployed as part of a regular update. The user must install the plugin again to receive the latest version via Composer.
 
 <a name="migration-seed-files"></a>
 ### Migration and Seed Files
 
 As previously described, updates also define when [migration and seed files](../database/structure) should be applied. An update line with a comment and updates:
 
-    1.1.1:
+    v1.1.1:
         - This update will execute the two scripts below.
         - some_upgrade_file.php
         - some_seeding_file.php
