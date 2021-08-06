@@ -21,7 +21,7 @@
     - [List Themes](#theme-list-command)
     - [Enable Theme](#theme-use-command)
     - [Remove Theme](#theme-remove-command)
-    - [Duplicate Theme](#theme-duplicate-command)
+    - [Copy Theme](#theme-copy-command)
 - [Utilities](#utility-commands)
     - [Clear Application Cache](#cache-clear-command)
     - [Remove Demo Data](#october-fresh-command)
@@ -205,22 +205,22 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
     php artisan theme:remove vanilla
 
-<a name="theme-duplicate-command"></a>
-### Duplicate Theme
+<a name="theme-copy-command"></a>
+### Copy Theme
 
-`theme:duplicate` - duplicates an existing theme to create a new one, including the creation of child themes.
+`theme:copy` - duplicates an existing theme to create a new one, including the creation of child themes.
 
-    php artisan theme:duplicate demo
+    php artisan theme:copy demo
 
 The above command will create a new theme called `demo-copy` by copying the directory and its contents. The `.themelock` file will be removed during this process.
 
 To specify the new directory name, such as `mydemo`, you may supply this a second argument.
 
-    php artisan theme:duplicate demo mydemo
+    php artisan theme:copy demo mydemo
 
 To create a child theme that inherits the parent theme, specify the `--child` option.
 
-    php artisan theme:duplicate demo mychild --child
+    php artisan theme:copy demo mychild --child
 
 <a name="utility-commands"></a>
 ## Utilities
