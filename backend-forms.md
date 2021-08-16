@@ -259,6 +259,7 @@ Option | Description
 ------------- | -------------
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
+**activeTab** | selected tab when the form first loads, name or index. Default: 1
 **icons** | assign icons to tabs using tab names as the key.
 **lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
 **cssClass** | assigns a CSS class to the tab container.
@@ -271,8 +272,8 @@ Option | Description
         lazy:
             - Groups
         paneCssClass:
-            0: first-tab
-            1: second-tab
+            1: first-tab
+            2: second-tab
         icons:
             User: icon-user
             Groups: icon-group
