@@ -20,7 +20,7 @@ To run October CMS locally, we recommend the following software:
 - [Laravel Valet for macOS](https://laravel.com/docs/valet)
 - [Laragon for Windows 10](https://laragon.org/)
 
-<a name="command-line-installation"></a>
+<a name="install-composer"></a>
 ## Installing Composer
 
 October CMS uses [Composer](http://getcomposer.org/) to manage its dependencies. So before getting started, you will need to make sure you have Composer installed.
