@@ -99,7 +99,7 @@ Option | Type | Description
 **customViewPath** | List | specify a custom view path to override partials used by the list.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
-**toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add\|remove`.
+**toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add|remove`.
 
 These configuration values can be specified only for the **manage** options.
 
