@@ -588,8 +588,14 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         label: Display content
         type: switch
         comment: Flick this switch to display content
-            on: On
-            off: Off
+
+Customize the switch text using the `on` and `off` options.
+
+    show_content:
+        label: Display content
+        type: switch
+        on: Yes
+        off: No
 
 <a name="field-widget"></a>
 ### Widget
