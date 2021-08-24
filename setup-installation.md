@@ -46,6 +46,8 @@ You can then serve the application and open it in your browser.
 
     php artisan serve
 
+> **Note**: If you are using a project, continue reading the [Projects article](https://octobercms.com/help/site/projects) for information on how to set up your project.
+
 <a name="post-install-steps"></a>
 ## Post-Installation Steps
 
