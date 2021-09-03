@@ -57,9 +57,17 @@ A plugin with the code **Acme.Boilerplate** will have a composer package name of
 <a name="dependencies"></a>
 ### Declaring Dependencies
 
-Plugins and themes alike can depend on other packages, simply include them in your composer.json file.
+Plugins and themes alike can require a specific version of October CMS and also depend on other packages, simply include them in your composer.json file.
 
-#### Requiring another plugin
+#### Requiring a Version of October CMS
+
+Simply require the `october/system` package to the desired [target version pattern](https://getcomposer.org/doc/articles/versions.md). The following will require that the platform installation uses version 2.1 of October CMS.
+
+    "require": {
+        "october/system": "^2.1"
+    },
+
+#### Requiring Another Plugin
 
 Navigate to your theme or plugin directory and open the composer.json file to include a dependency and its target version. The following will include the Acme.Blog plugin with a [version range of 1.2](https://getcomposer.org/doc/articles/versions.md).
 
@@ -69,7 +77,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 
 You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions).
 
-#### Requiring another theme
+#### Requiring Another Theme
 
 Navigate to your theme or plugin directory and open the composer.json file to include a dependency and its target version. The following will include the Acme.Vanilla theme with a [version range of 1.2](https://getcomposer.org/doc/articles/versions.md).
 
