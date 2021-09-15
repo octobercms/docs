@@ -47,7 +47,7 @@ Below, you can see an example theme directory structure. Each theme represents a
           js/
           images/
 
-> The active theme is set with the `activeTheme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
+> The active theme is set with the `active_theme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 
 <a name="subdirectories"></a>
 ### Subdirectories

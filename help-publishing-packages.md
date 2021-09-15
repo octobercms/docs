@@ -65,7 +65,7 @@ Simply require the `october/system` package to the desired [target version patte
 
     "require": {
         "october/system": "^2.1"
-    },
+    }
 
 #### Requiring Another Plugin
 
@@ -73,7 +73,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 
     "require": {
         "acme/blog-plugin": "^1.2"
-    },
+    }
 
 You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions).
 
@@ -83,7 +83,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 
     "require": {
         "acme/vanilla-theme": "^1.2"
-    },
+    }
 
 Make sure that this package is included in the `require` property found in the [theme information file](../themes/development#dependencies).
 
