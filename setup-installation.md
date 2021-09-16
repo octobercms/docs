@@ -9,6 +9,8 @@
 - [Minimum System Requirements](#system-requirements)
 - [Troubleshooting Installation](#troubleshoot-installation)
 
+[Watch **October CMS Installation Tutorial** on YouTube](https://www.youtube.com/watch?v=RHUwCvo7xng)
+
 October CMS is a web application platform with a simple and intuitive interface. A web platform provides a consistent structure with an emphasis on reusability so you can focus on building something unique while we handle the boring bits.
 
 October CMS makes one bold but obvious assumption: clients don't build websites; developers do. When platforms have a client-centric development process, it only results in one thing: an unhappy developer.
