@@ -172,7 +172,7 @@ Now you are free to provide the packages configuration values the same way you w
 <a name="laravel-aliases-service-providers"></a>
 ### Aliases & Service Providers
 
-By default, October CMS will automatically load Laravel packages using the `package:discover` Artisan command, which is called every time composer updates. However, you may also manually register Service Providers and Aliases provided by external Laravel packages that are used by your plugins using the the `App` facade in the `register()` method.
+If the Laravel package contains any Service Providers and Aliases, you should manually register them in your plugins using the the `App` facade in the `register()` method.
 
     public function register()
     {
