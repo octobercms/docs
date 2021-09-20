@@ -123,16 +123,6 @@ Use the `slugAttributes` method to regenerate slugs when updating a model:
     $user->slugAttributes();
     $user->save();
 
-<a name="sluggable-with-softdelete-trait"></a>
-#### Sluggable with SoftDelete trait
-
-By default, soft deleted models are ignored when the slug is generated.
-You might want to prevent slug duplication when recovering soft deleted models.
-
-Set the `$allowTrashedSlugs` attribute to `true` in order to take into account soft deleted records when generating new slugs.
-
-    protected $allowTrashedSlugs = true;
-
 <a name="sorting-reordering"></a>
 ## Sorting and Reordering
 
@@ -478,11 +468,6 @@ Under these same conditions, when the primary model is restored, all the related
 
     // Restore the user and comments
     $user->restore();
-
-<a name="soft-delete-with-sluggable-trait"></a>
-#### Soft Delete with Sluggable Trait
-
-By default, Sluggable trait will ignore soft deleted models when the slug is generated. You can enable slug generation with model restoration, [review the Sluggable](#sluggable-with-softdelete-trait) section.
 
 <a name="revisionable"></a>
 ### Revisionable
