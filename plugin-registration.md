@@ -82,7 +82,7 @@ Registration scripts should use the plugin namespace. The registration script sh
         public function registerComponents()
         {
             return [
-                'Acme\Blog\Components\Post' => 'blogPost'
+                \Acme\Blog\Components\Post::class => 'blogPost'
             ];
         }
     }
@@ -134,7 +134,7 @@ The `register` method is called immediately when the plugin is registered. The `
     public function boot()
     {
         User::extend(function($model) {
-            $model->hasOne['author'] = ['Acme\Blog\Models\Author'];
+            $model->hasOne['author'] = \Acme\Blog\Models\Author::class;
         });
     }
 
@@ -182,7 +182,7 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
             ],
             'functions' => [
                 // A static method call, i.e Form::open()
-                'form_open' => ['October\Rain\Html\Form', 'open'],
+                'form_open' => [\October\Rain\Html\Form::class, 'open'],
 
                 // Using an inline closure
                 'helloWorld' => function() { return 'Hello World!'; }
@@ -204,31 +204,23 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
     {
         return [
             'blog' => [
-                'label'       => 'Blog',
-                'url'         => Backend::url('acme/blog/posts'),
-                'icon'        => 'icon-pencil',
+                'label' => 'Blog',
+                'url' => Backend::url('acme/blog/posts'),
+                'icon' => 'icon-pencil',
                 'permissions' => ['acme.blog.*'],
-                'order'       => 500,
-                // Set counter to false to prevent the default behaviour of the main menu counter being a sum of
-                // its side menu counters
-                'counter'     => ['\Author\Plugin\Classes\MyMenuCounterService', 'getBlogMenuCount'],
-                'counterLabel'=> 'Label describing a dynamic menu counter',
-                // Optionally you can set a badge value instead of a counter to display a string instead of a numerical counter
-                'badge'       => 'New'
+                'order' => 500,
 
                 'sideMenu' => [
                     'posts' => [
-                        'label'       => 'Posts',
-                        'icon'        => 'icon-copy',
-                        'url'         => Backend::url('acme/blog/posts'),
+                        'label' => 'Posts',
+                        'icon' => 'icon-copy',
+                        'url' => Backend::url('acme/blog/posts'),
                         'permissions' => ['acme.blog.access_posts'],
-                        'counter'     => 2,
-                        'counterLabel'=> 'Label describing a static menu counter',
                     ],
                     'categories' => [
-                        'label'       => 'Categories',
-                        'icon'        => 'icon-copy',
-                        'url'         => Backend::url('acme/blog/categories'),
+                        'label' => 'Categories',
+                        'icon' => 'icon-copy',
+                        'url' => Backend::url('acme/blog/categories'),
                         'permissions' => ['acme.blog.access_categories'],
                     ]
                 ]
@@ -251,8 +243,30 @@ Key | Description
 **badge** | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
 **attributes** | an associative array of attributes and values to apply to the menu item, optional.
 **permissions** | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
-**code** | a string value that acts as an unique identifier for that menu option. **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
-**owner** | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
+
+The following are system generated value and are not be provided when registering the navigation items.
+
+Key | Description
+------------- | -------------
+**code** | a string value that acts as an unique identifier for that menu option.
+**owner** | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin".
+
+### Navigation Counters
+
+Navigation items support specifying a badge or a counter to indicate that there are items that require attention. These properties are available to parent and child menu items alike. Use the **counter** and **counterLabel** to show a numeric counter.
+
+    'blog' => [
+        // ...
+        'counter' => [\Author\Plugin\Classes\MyMenuCounterService::class, 'getCounterMethod'],
+        'counterLabel' => 'Label describing a dynamic menu counter',
+    ],
+
+Use the **badge** item to display a badge with a word, such as "New", for example.
+
+    'blog' => [
+        // ...
+        'badge' => 'New'
+    ],
 
 <a name="registering-middleware"></a>
 ## Registering Middleware
@@ -262,7 +276,7 @@ To register a custom middleware, you can apply it directly to a Backend controll
     public function boot()
     {
         \Cms\Classes\CmsController::extend(function($controller) {
-            $controller->middleware('Path\To\Custom\Middleware');
+            $controller->middleware(\Path\To\Custom\Middleware::class);
         });
     }
 
@@ -271,10 +285,10 @@ Alternatively, you can push it directly into the Kernel via the following.
     public function boot()
     {
         // Add a new middleware to beginning of the stack.
-        $this->app['Illuminate\Contracts\Http\Kernel']
+        $this->app[\Illuminate\Contracts\Http\Kernel::class]
              ->prependMiddleware('Path\To\Custom\Middleware');
 
         // Add a new middleware to end of the stack.
-        $this->app['Illuminate\Contracts\Http\Kernel']
+        $this->app[\Illuminate\Contracts\Http\Kernel::class]
              ->pushMiddleware('Path\To\Custom\Middleware');
     }
