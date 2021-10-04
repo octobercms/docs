@@ -1341,11 +1341,11 @@ You can filter the form field definitions by overriding the `filterFields` metho
 
     public function filterFields($fields, $context = null)
     {
-        if ($this->source_type == 'http') {
+        if ($this->source_type === 'http') {
             $fields->source_url->hidden = false;
             $fields->git_branch->hidden = true;
         }
-        elseif ($this->source_type == 'git') {
+        elseif ($this->source_type === 'git') {
             $fields->source_url->hidden = false;
             $fields->git_branch->hidden = false;
         }
@@ -1489,11 +1489,11 @@ As described in the [field dependencies section](#field-dependencies), you may a
 
     User::extend(function ($model) {
         $model->bindEvent('model.form.filterFields', function ($formWidget, $fields, $context) use ($model) {
-            if ($model->source_type == 'http') {
+            if ($model->source_type === 'http') {
                 $fields->source_url->hidden = false;
                 $fields->git_branch->hidden = true;
             }
-            elseif ($model->source_type == 'git') {
+            elseif ($model->source_type === 'git') {
                 $fields->source_url->hidden = false;
                 $fields->git_branch->hidden = false;
             }

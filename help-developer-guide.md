@@ -47,11 +47,16 @@ There are some exceptions to the PSR standard used by October CMS.
 <a name="psr-exception-methods"></a>
 ### Controller Methods
 
-Controller methods can have a single underscore. PSR-2 states that methods must be in **camelCase**. However, in Backend controllers October will prefix AJAX handlers with the action name to define a controlled context. For example:
+Controller methods can use underscores contrary to PSR-2 stating that methods must be in **camelCase**. In Backend controllers October CMS will prefix AJAX handlers with the action name to define a controlled context. You may also use underscores in action names. For example:
 
     public function index()
     {
         // This is the index page (index action)
+    }
+
+    public function download_pdf()
+    {
+        // This is a snake_case page (download_pdf action)
     }
 
     public function index_onDoSomething()
@@ -64,7 +69,7 @@ Controller methods can have a single underscore. PSR-2 states that methods must 
         // AJAX handler works globally for all actions
     }
 
-An exception must be granted for these scenarios.
+An exception to the PSR-2 standard is granted for these scenarios.
 
 <a name="psr-exception-newline-expressions"></a>
 ### Expressions on New Line

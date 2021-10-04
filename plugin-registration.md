@@ -237,14 +237,14 @@ Key | Description
 **label** | specifies the menu label localization string key, required.
 **icon** | an icon name from the [October CMS icon collection](../ui/icon), optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
-**url** | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
+**url** | the URL the menu item should point to (eg. `Backend::url('author/plugin/controller/action')`, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 **counterLabel** | a string value to describe the numeric reference in counter, optional.
 **badge** | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
 **attributes** | an associative array of attributes and values to apply to the menu item, optional.
 **permissions** | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
 
-The following are system generated value and are not be provided when registering the navigation items.
+The following are system generated value and are not provided when registering the navigation items.
 
 Key | Description
 ------------- | -------------
