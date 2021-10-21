@@ -210,17 +210,23 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
 `theme:copy` - duplicates an existing theme to create a new one, including the creation of child themes.
 
-    php artisan theme:copy demo
+    php artisan theme:copy <source-theme> [destination-theme]
 
-The above command will create a new theme called `demo-copy` by copying the directory and its contents. The `.themelock` file will be removed during this process.
+The following command creates a new theme called `demo-copy` from the source theme `demo` by copying the directory and its contents. The `.themelock` file will be removed during this process.
 
-To specify the new directory name, such as `mydemo`, you may supply this a second argument.
-
-    php artisan theme:copy demo mydemo
+    php artisan theme:copy demo demo-copy
 
 To create a child theme that inherits the parent theme, specify the `--child` option.
 
-    php artisan theme:copy demo mychild --child
+    php artisan theme:copy demo demo-child --child
+
+If using [database-driven themes](../cms/themes#database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
+
+    php artisan theme:copy demo --import-db
+
+To delete all the database templates at the same time, use the `--purge-db` option.
+
+    php artisan theme:copy demo --import-db --purge-db
 
 <a name="utility-commands"></a>
 ## Utilities
