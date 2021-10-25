@@ -1,4 +1,4 @@
-# CMS Pages
+# Pages
 
 - [Introduction](#introduction)
 - [Page configuration](#configuration)
@@ -77,7 +77,7 @@ You can also use regular expressions to validate parameters. To add a validation
     ...
     url = "/blog/:post_name?|^[a-z0-9\-]+$" - this will match /blog/my-blog-post
 
-It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter. 
+It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
 
     url = "/blog/:category*/:slug"
 
@@ -230,7 +230,7 @@ LESS and SCSS assets can be injected and compiled using the combiner:
     {
         $this->addCss(['assets/less/base.less']);
     }
-    
+
 The second argument of `addCss` and `addJs` allows you to provide additional attributes to your injected assets:
 
     function onStart()

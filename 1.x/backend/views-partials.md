@@ -1,4 +1,4 @@
-# Backend Views & Partials
+# Views & Partials
 
 - [Partials and hints](#partials)
     - [Hint partials](#hints)

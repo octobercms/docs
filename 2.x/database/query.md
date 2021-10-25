@@ -1,4 +1,4 @@
-# Database Queries
+# Queries
 
 - [Introduction](#introduction)
 - [Retrieving Results](#retrieving-results)

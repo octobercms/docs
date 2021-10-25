@@ -1,4 +1,4 @@
-# Developing themes
+# Developing Themes
 
 - [Theme information file](#theme-information)
 - [Version file](#version-file)
@@ -150,7 +150,7 @@ When the theme is installed for the first time, the system will attempt to insta
 ## Localization
 
 Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October backend and can be used for form labels just like [plugin localization](../plugin/localization)
-   
+
 > **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) plugin.
 
 <a name="localization-file-structure"></a>

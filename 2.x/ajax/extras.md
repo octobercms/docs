@@ -1,4 +1,4 @@
-# AJAX Extra features
+# Extra Features
 
 - [Loading Indicator](#loader-stripe)
 - [Form Validation](#ajax-validation)

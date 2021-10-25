@@ -1,4 +1,4 @@
-# AJAX Data Attributes API
+# Data Attributes API
 
 - [Data Attributes API](#data-attributes)
 - [Usage Examples](#data-attribute-examples)

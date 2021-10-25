@@ -1,4 +1,4 @@
-# Console development
+# Development
 
 - [Introduction](#introduction)
 - [Building a command](#building-a-command)

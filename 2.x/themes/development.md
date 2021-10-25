@@ -1,4 +1,4 @@
-# Developing themes
+# Developing Themes
 
 - [Theme Information File](#theme-information)
 - [Version File](#version-file)

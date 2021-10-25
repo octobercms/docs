@@ -1,4 +1,4 @@
-# CMS Partials
+# Partials
 
 - [Introduction](#introduction)
 - [Rendering partials](#rendering-partials)

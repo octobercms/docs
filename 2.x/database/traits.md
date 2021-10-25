@@ -1,4 +1,4 @@
-# Database Traits
+# Traits
 
 - [Attribute Manipulation](#attribute-manipulation)
     - [Nullable](#nullable)

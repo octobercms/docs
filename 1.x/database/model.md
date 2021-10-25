@@ -1,4 +1,4 @@
-# Active Record Model
+# Models
 
 - [Introduction](#introduction)
 - [Defining models](#defining-models)

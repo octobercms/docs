@@ -1,4 +1,4 @@
-# Using Components
+# Components
 
 - [Introduction](#introduction)
 - [Component aliases](#aliases)

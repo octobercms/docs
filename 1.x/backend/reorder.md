@@ -1,4 +1,4 @@
-# Backend sorting and reordering
+# Sorting Records
 
 - [Introduction](#introduction)
 - [Configuring the reorder behavior](#configuring-reorder)
@@ -72,7 +72,7 @@ Option | Description
 You should provide a [view file](controllers-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
     <?= $this->reorderRender() ?>
-    
+
 <a name="override-sortable-partials"></a>
 ## Override Sortable Partials
 

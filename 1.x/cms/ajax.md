@@ -1,4 +1,0 @@
-# AJAX framework
-
-@TODO REWRITE URLS
-@TODO RENAME REFS

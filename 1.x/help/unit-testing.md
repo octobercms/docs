@@ -1,4 +1,4 @@
-# Unit testing
+# Unit Testing
 
 - [Testing plugins](#testing-plugins)
 - [System testing](#system-testing)

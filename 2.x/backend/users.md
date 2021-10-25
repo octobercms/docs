@@ -1,4 +1,4 @@
-# Backend Users & Permissions
+# Users & Permissions
 
 - [Users and Permissions](#users-and-permissions)
 - [Backend User Helper](#backend-auth-facade)

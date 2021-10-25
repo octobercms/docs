@@ -1,4 +1,4 @@
-# Views & Responses
+# Response & View
 
 - [Basic Responses](#basic-responses)
     - [Attaching Headers to Responses](#attaching-headers-to-responses)

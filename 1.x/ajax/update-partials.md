@@ -1,4 +1,4 @@
-# AJAX Updating Partials
+# Updating Partials
 
 - [Pulling partial updates](#pulling-updates)
     - [Update definition](#update-definition)

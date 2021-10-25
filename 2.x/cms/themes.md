@@ -1,4 +1,4 @@
-# CMS Themes
+# Themes
 
 - [Introduction](#introduction)
 - [Directory Structure](#directory-structure)

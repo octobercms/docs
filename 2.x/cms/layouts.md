@@ -1,4 +1,4 @@
-# CMS Layouts
+# Layouts
 
 - [Introduction](#introduction)
 - [Placeholders](#placeholders)

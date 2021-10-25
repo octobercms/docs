@@ -1,4 +1,4 @@
-# Database structure and seeding
+# Structure & Seeding
 
 - [Introduction](#introduction)
 - [Migration structure](#migration-structure)

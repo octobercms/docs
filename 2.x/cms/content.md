@@ -1,4 +1,4 @@
-# CMS Content Blocks
+# Content Blocks
 
 - [Introduction](#introduction)
 - [Rendering Content Blocks](#rendering-content-blocks)

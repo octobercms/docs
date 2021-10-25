@@ -1,4 +1,4 @@
-# Extending plugins
+# Extending Plugins
 
 - [Extending with events](#extending-with-events)
     - [Subscribing to events](#subscribing-to-events)

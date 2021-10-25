@@ -1,4 +1,4 @@
-# Router service
+# Router
 
 - [Basic routing](#basic-routing)
 - [Route parameters](#route-parameters)
@@ -15,7 +15,7 @@
 <a name="basic-routing"></a>
 ## Basic routing
 
-While routing is handled automatically for the [backend controllers](../backend/controllers-ajax) and CMS pages define their own URL routes in their [page configuration](../cms/pages#configuration), the router service is useful primarily for defining fixed APIs and end points. 
+While routing is handled automatically for the [backend controllers](../backend/controllers-ajax) and CMS pages define their own URL routes in their [page configuration](../cms/pages#configuration), the router service is useful primarily for defining fixed APIs and end points.
 
 You can define these routes by creating a file named **routes.php** in a same directory as the [plugin registration file](../plugin/registration). The most basic routes simply accept a URI and a `Closure`:
 

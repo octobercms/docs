@@ -1,4 +1,4 @@
-# Database attachments
+# File Attachments
 
 - [File attachments](#file-attachments)
     - [Creating new attachments](#creating-attachments)

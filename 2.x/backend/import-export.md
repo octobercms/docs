@@ -1,4 +1,4 @@
-# Backend importing and exporting
+# Importing & Exporting
 
 - [Introduction](#introduction)
 - [Configuring the Behavior](#configuring-import-export)

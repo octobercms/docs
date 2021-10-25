@@ -1,4 +1,4 @@
-# Image Resizing
+# Image Resizer
 
 - [Introduction](#introduction)
     - [Resize Parameters](#resize-parameters)

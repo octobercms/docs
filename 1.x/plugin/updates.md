@@ -1,4 +1,4 @@
-# Version history
+# Version History
 
 - [Introduction](#introduction)
 - [Update process](#update-process)

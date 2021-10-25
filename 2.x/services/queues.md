@@ -1,4 +1,4 @@
-# Queue service
+# Queues
 
 - [Configuration](#configuration)
 - [Basic usage](#basic-usage)

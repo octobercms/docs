@@ -1,4 +1,4 @@
-# AJAX Event Handlers
+# Event Handlers
 
 - [AJAX handlers](#ajax-handlers)
     - [Calling a handler](#calling-handlers)

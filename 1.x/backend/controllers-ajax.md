@@ -1,4 +1,4 @@
-# Backend Controllers & AJAX
+# Controllers & AJAX
 
 - [Introduction](#introduction)
     - [Class definition](#class-definition)

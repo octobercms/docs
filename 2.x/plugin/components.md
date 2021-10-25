@@ -1,4 +1,4 @@
-# Component Development
+# Building Components
 
 - [Introduction](#introduction)
 - [Component Class Definition](#component-class-definition)

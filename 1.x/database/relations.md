@@ -1,4 +1,4 @@
-# Database Relationships
+# Relationships
 
 - [Introduction](#introduction)
 - [Defining relationships](#defining-relationships)

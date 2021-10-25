@@ -1,4 +1,4 @@
-# Plugin Registration
+# Registration
 
 - [Introduction](#introduction)
     - [Directory Structure](#directory-structure)

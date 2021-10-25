@@ -1,4 +1,4 @@
-# Plugin Settings & Configuration
+# Settings & Config
 
 - [Introduction](#introduction)
 - [Database settings](#database-settings)

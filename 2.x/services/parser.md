@@ -1,4 +1,4 @@
-# Parser service
+# Parser
 
 - [Introduction](#introduction)
 - [Markdown parser](#markdown-parser)

@@ -1,4 +1,4 @@
-# Scaffolding commands
+# Scaffolding
 
 - [Scaffolding Commands](#scaffolding-commands)
     - [Create a Plugin](#scaffold-create-plugin)

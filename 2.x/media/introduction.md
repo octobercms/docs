@@ -1,4 +1,4 @@
-# Media Manager
+# Introduction
 
 - [Configuration Options](#configuration-options)
 - [Audio and Video Players](#audio-and-video-players)

@@ -1,4 +1,4 @@
-# Model Mutators
+# Mutators
 
 - [Introduction](#introduction)
 - [Accessors & Mutators](#accessors-and-mutators)

@@ -1,4 +1,4 @@
-# App configuration
+# Configuration
 
 - [Environment Configuration](#environment-config)
     - [Specific Environment Files](#specific-environment-files)

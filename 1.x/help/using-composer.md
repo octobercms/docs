@@ -1,4 +1,4 @@
-# Composer
+# Using Composer
 
 - [Introduction](#introduction)
     - [Converting from Basic Install](#converting-from-basic-install)
@@ -178,15 +178,15 @@ class Plugin extends PluginBase
     {
         // Instantiate the AliasLoader
         $aliasLoader = AliasLoader::getInstance();
-        
+
         // Register the aliases provided by the packages used by your plugin
         $aliasLoader->alias('Purifier', \Mews\Purifier\Facades\Purifier::class);
-    
+
         // Register the service providers provided by the packages used by your plugin
         App::register(\Mews\Purifier\PurifierServiceProvider::class);
     }
 }
-```       
+```
 
 <a name="laravel-migrations-models"></a>
 ### Migrations & Models

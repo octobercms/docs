@@ -1,4 +1,4 @@
-# Backend forms
+# Forms
 
 - [Introduction](#introduction)
 - [Configuring the Form Behavior](#configuring-form)

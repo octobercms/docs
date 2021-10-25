@@ -1,4 +1,4 @@
-# Router service
+# Router
 
 - [Basic routing](#basic-routing)
 - [Route parameters](#route-parameters)

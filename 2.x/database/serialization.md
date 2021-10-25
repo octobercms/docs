@@ -1,4 +1,4 @@
-# Model Serialization
+# Serialization
 
 - [Introduction](#introduction)
 - [Basic usage](#basic-usage)

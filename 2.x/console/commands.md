@@ -1,4 +1,4 @@
-# Command Line Interface
+# Command List
 
 - [Setup & Maintenance](#maintenance-commands)
     - [System Update](#console-update-command)

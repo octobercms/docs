@@ -1,4 +1,4 @@
-# AJAX Extra features
+# Extra features
 
 - [Loading indicator](#loader-stripe)
 - [Form validation](#ajax-validation)
@@ -61,7 +61,7 @@ To add custom classes on AJAX invalidation, hook into the `ajaxInvalidField` and
     $(window).on('ajaxInvalidField', function(event, fieldElement, fieldName, errorMsg, isFirst) {
         $(fieldElement).closest('.form-group').addClass('has-error');
     });
-    
+
     $(document).on('ajaxPromise', '[data-request]', function() {
         $(this).closest('form').find('.form-group.has-error').removeClass('has-error');
     });

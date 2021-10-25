@@ -1,4 +1,4 @@
-# Updating
+# Upgrade Guide
 
 - [Updating to v2.0](#upgrade-v2-0)
 - [Bleeding Edge Updates](#edge-updates)

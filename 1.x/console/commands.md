@@ -1,4 +1,4 @@
-# Command Line Interface
+# Command List
 
 - [Console installation](#console-install)
     - [Quick start install](#console-install-quick)
@@ -86,7 +86,7 @@ You also may wish to inspect **config/app.php** and **config/cms.php** to change
 The `october:update` command will request updates from the October gateway. It will update the core application and plugin files, then perform a database migration.
 
     php artisan october:update
-    
+
 > **IMPORTANT**: If you are using [using composer](#console-install-composer) do **NOT** run this command without first making sure that `cms.disableCoreUpdates` is set to true. Doing so will cause conflicts between the marketplace version of October and the version available through composer. In order to update the core October installation when using composer run `composer update` instead.
 
 <a name="console-up-command"></a>
@@ -99,14 +99,14 @@ The `october:up` command will perform a database migration, creating database ta
 The inverse command `october:down` will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#plugin-refresh-command) is a useful alternative for debugging a single plugin.
 
     php artisan october:down
-    
+
 <a name="change-backend-user-password-command"></a>
 ### Change Backend user password
 
 The `october:passwd` command will allow the password of a Backend user or administrator to be changed via the command-line. This is useful if someone gets locked out of their October CMS install, or for changing the password for the default administrator account.
 
     php artisan october:passwd username password
-    
+
 You may provide the username/email and password as both the first and second argument, or you may leave the arguments blank, in which case the command will be run interactively.
 
 <a name="plugin-commands"></a>

@@ -1,4 +1,4 @@
-# AJAX JavaScript API
+# JavaScript API
 
 - [JavaScript API](#javascript-api)
 - [Usage Examples](#javascript-examples)

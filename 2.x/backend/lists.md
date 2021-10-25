@@ -1,4 +1,4 @@
-# Backend lists
+# Lists
 
 - [Introduction](#introduction)
 - [Configuring the List Behavior](#configuring-list)

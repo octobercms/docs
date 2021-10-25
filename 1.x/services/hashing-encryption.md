@@ -1,4 +1,4 @@
-# Hashing and Encryption
+# Hashing & Encryption
 
 - [Configuration](#configuration)
 - [Hashing](#hashing)

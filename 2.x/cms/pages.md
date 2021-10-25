@@ -1,4 +1,4 @@
-# CMS Pages
+# Pages
 
 - [Introduction](#introduction)
 - [Page Configuration](#configuration)

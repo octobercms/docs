@@ -1,4 +1,4 @@
-# AJAX Getting Started
+# Introduction
 
 - [Introduction](#introduction)
 - [Including the Framework](#framework-script)

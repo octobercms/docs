@@ -1,4 +1,4 @@
-# Backend Sorting and Reordering
+# Sorting Records
 
 - [Introduction](#introduction)
 - [Configuring a Behavior](#configuring-reorder)

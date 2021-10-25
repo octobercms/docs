@@ -1,4 +1,4 @@
-# Queue service
+# Queues
 
 - [Configuration](#configuration)
 - [Basic usage](#basic-usage)
@@ -226,7 +226,7 @@ Supervisor configuration files are typically stored in the `/etc/supervisor/conf
     numprocs=8
     redirect_stderr=true
     stdout_logfile=/path/to/october/worker.log
-    
+
 In this example, the `numprocs` directive will instruct Supervisor to run 8 `queue:work` processes and monitor all of them, automatically restarting them if they fail. Of course, you should change the `queue:work` portion of the command directive to reflect your desired queue connection. The `user` directive should be changed to the name of a user that has permission to run the command.
 
 ### Starting Supervisor
@@ -238,7 +238,7 @@ Once the configuration file has been created, you may update the Supervisor conf
     sudo supervisorctl update
 
     sudo supervisorctl start october-worker:*
-    
+
 For more information on Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
 
 <a name="failed-jobs"></a>
@@ -262,8 +262,8 @@ You may also define a `failed` method directly on a queue job class, allowing yo
     {
         // Called when the job is failing...
     }
-    
-The original array of `data` will also be automatically passed onto the failed method.    
+
+The original array of `data` will also be automatically passed onto the failed method.
 
 ### Retrying failed jobs
 

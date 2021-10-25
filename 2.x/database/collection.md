@@ -1,4 +1,4 @@
-# Database Collection
+# Collections
 
 - [Introduction](#introduction)
 - [Available Methods](#available-methods)
