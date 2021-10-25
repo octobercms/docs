@@ -26,48 +26,58 @@ Before using the Mailgun, SparkPost or SES drivers you will need to install [Dri
 
 To use the Mailgun driver, set the `driver` option in your `config/mail.php` configuration file to `mailgun`. Next, verify that your `config/services.php` configuration file contains the following options:
 
-    'mailgun' => [
-        'domain' => 'your-mailgun-domain',
-        'secret' => 'your-mailgun-key',
-        'endpoint' => 'api.mailgun.net', // api.eu.mailgun.net for EU
-    ],
+```php
+'mailgun' => [
+    'domain' => 'your-mailgun-domain',
+    'secret' => 'your-mailgun-key',
+    'endpoint' => 'api.mailgun.net', // api.eu.mailgun.net for EU
+],
+```
 
 #### SparkPost driver
 
 To use the SparkPost driver set the `driver` option in your `config/mail.php` configuration file to `sparkpost`. Next, verify that your `config/services.php` configuration file contains the following options:
 
-    'sparkpost' => [
-        'secret' => 'your-sparkpost-key',
-    ],
+```php
+'sparkpost' => [
+    'secret' => 'your-sparkpost-key',
+],
+```
 
 #### SES driver
 
 To use the Amazon SES driver set the `driver` option in your `config/mail.php` configuration file to `ses`. Then, verify that your `config/services.php` configuration file contains the following options:
 
-    'ses' => [
-        'key' => 'your-ses-key',
-        'secret' => 'your-ses-secret',
-        'region' => 'ses-region',  // e.g. us-east-1
-    ],
+```php
+'ses' => [
+    'key' => 'your-ses-key',
+    'secret' => 'your-ses-secret',
+    'region' => 'ses-region',  // e.g. us-east-1
+],
+```
 
 <a name="sending-mail"></a>
 ## Sending mail
 
 To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#mail-views) or [mail template](#mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
 
-    // These variables are available inside the message as Twig
-    $vars = ['name' => 'Joe', 'user' => 'Mary'];
+```php
+// These variables are available inside the message as Twig
+$vars = ['name' => 'Joe', 'user' => 'Mary'];
 
-    Mail::send('acme.blog::mail.message', $vars, function($message) {
+Mail::send('acme.blog::mail.message', $vars, function($message) {
 
-        $message->to('admin@domain.tld', 'Admin Person');
-        $message->subject('This is a reminder');
+    $message->to('admin@domain.tld', 'Admin Person');
+    $message->subject('This is a reminder');
 
-    });
+});
+```
 
 Since we are passing an array containing the `name` key in the example above, we could display the value within our e-mail view using the following Twig markup:
 
-    {{ name }}
+```twig
+{{ name }}
+```
 
 > **Note:** You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
 
@@ -75,17 +85,19 @@ Since we are passing an array containing the `name` key in the example above, we
 
 October also includes an alternative method called `sendTo` that can simplify sending mail:
 
-    // Send to address using no name
-    Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params);
+```php
+// Send to address using no name
+Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params);
 
-    // Send using an object's properties
-    Mail::sendTo($user, 'acme.blog::mail.message', $params);
+// Send using an object's properties
+Mail::sendTo($user, 'acme.blog::mail.message', $params);
 
-    // Send to multiple addresses
-    Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
+// Send to multiple addresses
+Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
 
-    // Alternatively send a raw message without parameters
-    Mail::rawTo('admin@domain.tld', 'Hello friend');
+// Alternatively send a raw message without parameters
+Mail::rawTo('admin@domain.tld', 'Hello friend');
+```
 
 The first argument in `sendTo` is used for the recipients can take different value types:
 
@@ -98,7 +110,9 @@ Collection | a collection of recipient objects, as above.
 
 The complete signature of `sendTo` is as follows:
 
-    Mail::sendTo($recipient, $message, $params, $callback, $options);
+```php
+Mail::sendTo($recipient, $message, $params, $callback, $options);
+```
 
 - `$recipient` is defined as above.
 - `$message` is the template name or message contents for raw sending.
@@ -115,30 +129,34 @@ The following custom sending `$options` are supported
 
 As previously mentioned, the third argument given to the `send` method is a `Closure` allowing you to specify various options on the e-mail message itself. Using this Closure you may specify other attributes of the message, such as carbon copies, blind carbon copies, etc:
 
+```php
     Mail::send('acme.blog::mail.welcome', $vars, function($message) {
 
         $message->from('us@example.com', 'October');
         $message->to('foo@example.com')->cc('bar@example.com');
 
     });
+```
 
 Here is a list of the available methods on the `$message` message builder instance:
 
-    $message->from($address, $name = null);
-    $message->sender($address, $name = null);
-    $message->to($address, $name = null);
-    $message->cc($address, $name = null);
-    $message->bcc($address, $name = null);
-    $message->replyTo($address, $name = null);
-    $message->subject($subject);
-    $message->priority($level);
-    $message->attach($pathToFile, array $options = []);
+```php
+$message->from($address, $name = null);
+$message->sender($address, $name = null);
+$message->to($address, $name = null);
+$message->cc($address, $name = null);
+$message->bcc($address, $name = null);
+$message->replyTo($address, $name = null);
+$message->subject($subject);
+$message->priority($level);
+$message->attach($pathToFile, array $options = []);
 
-    // Attach a file from a raw $data string...
-    $message->attachData($data, $name, array $options = []);
+// Attach a file from a raw $data string...
+$message->attachData($data, $name, array $options = []);
 
-    // Get the underlying SwiftMailer message instance...
-    $message->getSwiftMessage();
+// Get the underlying SwiftMailer message instance...
+$message->getSwiftMessage();
+```
 
 > **Note:** The message instance passed to a `Mail::send` Closure extends the [SwiftMailer](http://swiftmailer.org) message class, allowing you to call any method on that class to build your e-mail messages.
 
@@ -146,51 +164,65 @@ Here is a list of the available methods on the `$message` message builder instan
 
 By default, the view given to the `send` method is assumed to contain HTML. However, by passing an array as the first argument to the `send` method, you may specify a plain text view to send in addition to the HTML view:
 
-    Mail::send(['acme.blog::mail.html', 'acme.blog::mail.text'], $data, $callback);
+```php
+Mail::send(['acme.blog::mail.html', 'acme.blog::mail.text'], $data, $callback);
+```
 
 Or, if you only need to send a plain text e-mail, you may specify this using the `text` key in the array:
 
-    Mail::send(['text' => 'acme.blog::mail.text'], $data, $callback);
+```php
+Mail::send(['text' => 'acme.blog::mail.text'], $data, $callback);
+```
 
 #### Mailing parsed raw strings
 
 You may use the `raw` method if you wish to e-mail a raw string directly. This content will be parsed by Markdown.
 
-    Mail::raw('Text to e-mail', function ($message) {
-        //
-    });
+```php
+Mail::raw('Text to e-mail', function ($message) {
+    //
+});
+```
 
 Additionally this string will be parsed by Twig, if you wish to pass variables to this environment, use the `send` method instead, passing the content as the `raw` key.
 
-    Mail::send(['raw' => 'Text to email'], $vars, function ($message) {
-        //
-    });
+```php
+Mail::send(['raw' => 'Text to email'], $vars, function ($message) {
+    //
+});
+```
 
 #### Mailing raw strings
 
 If you pass an array containing either `text` or `html` keys, this will be an explicit request to send mail. No layout or markdown parsing is used.
 
-    Mail::raw([
-        'text' => 'This is plain text',
-        'html' => '<strong>This is HTML</strong>'
-    ], function ($message) {
-        //
-    });
+```php
+Mail::raw([
+    'text' => 'This is plain text',
+    'html' => '<strong>This is HTML</strong>'
+], function ($message) {
+    //
+});
+```
 
 <a name="attachments"></a>
 ### Attachments
 
 To add attachments to an e-mail, use the `attach` method on the `$message` object passed to your Closure. The `attach` method accepts the full path to the file as its first argument:
 
-    Mail::send('acme.blog::mail.welcome', $data, function ($message) {
-        //
+```php
+Mail::send('acme.blog::mail.welcome', $data, function ($message) {
+    //
 
-        $message->attach($pathToFile);
-    });
+    $message->attach($pathToFile);
+});
+```
 
 When attaching files to a message, you may also specify the display name and / or MIME type by passing an `array` as the second argument to the `attach` method:
 
-    $message->attach($pathToFile, ['as' => $display, 'mime' => $mime]);
+```php
+$message->attach($pathToFile, ['as' => $display, 'mime' => $mime]);
+```
 
 <a name="inline-attachments"></a>
 ### Inline attachments
@@ -199,29 +231,35 @@ When attaching files to a message, you may also specify the display name and / o
 
 Embedding inline images into your e-mails is typically cumbersome; however, there is a convenient way to attach images to your e-mails and retrieving the appropriate CID. To embed an inline image, use the `embed` method on the `message` variable within your e-mail view. Remember, the `message` variable is available to all of your mail views:
 
-    <body>
-        Here is an image:
+```twig
+<body>
+    Here is an image:
 
-        <img src="{{ message.embed(pathToFile) }}">
-    </body>
+    <img src="{{ message.embed(pathToFile) }}">
+</body>
+```
 
 If you are planning to use queued emails make sure that the path of the file is absolute. To achieve that you can simply use the [app filter](../markup/filter-app):
 
-    <body>
-        Here is an image:
-        {% set pathToFile = 'storage/app/media/path/to/file.jpg' | app %}
-        <img src="{{ message.embed(pathToFile) }}">
-    </body>   
-    
+```twig
+<body>
+    Here is an image:
+    {% set pathToFile = 'storage/app/media/path/to/file.jpg' | app %}
+    <img src="{{ message.embed(pathToFile) }}">
+</body>
+```
+
 #### Embedding raw data in mail content
 
 If you already have a raw data string you wish to embed into an e-mail message, you may use the `embedData` method on the `message` variable:
 
-    <body>
-        Here is an image from raw data:
+```twig
+<body>
+    Here is an image from raw data:
 
-        <img src="{{ message.embedData(data, name) }}">
-    </body>
+    <img src="{{ message.embedData(data, name) }}">
+</body>
+```
 
 <a name="queueing-mail"></a>
 ### Queueing mail
@@ -230,9 +268,11 @@ If you already have a raw data string you wish to embed into an e-mail message, 
 
 Since sending mail messages can drastically lengthen the response time of your application, many developers choose to queue messages for background sending. This is easy using the built-in [unified queue API](../services/queues). To queue a mail message, use the `queue` method on the `Mail` facade:
 
-    Mail::queue('acme.blog::mail.welcome', $data, function ($message) {
-        //
-    });
+```php
+Mail::queue('acme.blog::mail.welcome', $data, function ($message) {
+    //
+});
+```
 
 This method will automatically take care of pushing a job onto the queue to send the mail message in the background. Of course, you will need to [configure your queues](../services/queues) before using this feature.
 
@@ -240,21 +280,25 @@ This method will automatically take care of pushing a job onto the queue to send
 
 If you wish to delay the delivery of a queued e-mail message, you may use the `later` method. To get started, simply pass the number of seconds by which you wish to delay the sending of the message as the first argument to the method:
 
-    Mail::later(5, 'acme.blog::mail.welcome', $data, function ($message) {
-        //
-    });
+```php
+Mail::later(5, 'acme.blog::mail.welcome', $data, function ($message) {
+    //
+});
+```
 
 #### Pushing to specific queues
 
 If you wish to specify a specific queue on which to push the message, you may do so using the `queueOn` and `laterOn` methods:
 
-    Mail::queueOn('queue-name', 'acme.blog::mail.welcome', $data, function ($message) {
-        //
-    });
+```php
+Mail::queueOn('queue-name', 'acme.blog::mail.welcome', $data, function ($message) {
+    //
+});
 
-    Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($message) {
-        //
-    });
+Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($message) {
+    //
+});
+```
 
 <a name="message-content"></a>
 ## Message content
@@ -268,43 +312,49 @@ Optionally, mail views can be [registered in the Plugin registration file](#mail
 
 Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file:
 
-    plugins/                 <=== Plugins directory
-      author/                <=== "author" segment
-        plugin/              <=== "plugin" segment
-          views/             <=== View directory
-            mail/            <=== "mail" segment
-              message.htm    <=== "message" segment
+```
+plugins/                 <=== Plugins directory
+    author/                <=== "author" segment
+    plugin/              <=== "plugin" segment
+        views/             <=== View directory
+        mail/            <=== "mail" segment
+            message.htm    <=== "message" segment
+```
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
 
-    subject = "Your product has been added to OctoberCMS project"
-    ==
+```twig
+subject = "Your product has been added to OctoberCMS project"
+==
 
-    Hi {{ name }},
+Hi {{ name }},
 
-    Good news! User {{ user }} just added your product "{{ product }}" to a project.
+Good news! User {{ user }} just added your product "{{ product }}" to a project.
 
-    This message was sent using no formatting (plain text)
-    ==
+This message was sent using no formatting (plain text)
+==
 
-    <p>Hi {{ name }},</p>
+<p>Hi {{ name }},</p>
 
-    <p>Good news! User {{ user }} just added your product <strong>{{ product }}</strong> to a project.</p>
+<p>Good news! User {{ user }} just added your product <strong>{{ product }}</strong> to a project.</p>
 
-    <p>This email was sent using formatting (HTML)</p>
+<p>This email was sent using formatting (HTML)</p>
+```
 
 > **Note:** Basic Twig tags and expressions are supported in mail views.
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
-    subject = "Your product has been added to OctoberCMS project"
-    ==
+```twig
+subject = "Your product has been added to OctoberCMS project"
+==
 
-    <p>Hi {{ name }},</p>
+<p>Hi {{ name }},</p>
 
-    <p>This email does not support plain text.</p>
+<p>This email does not support plain text.</p>
 
-    <p>Sorry about that!</p>
+<p>Sorry about that!</p>
+```
 
 #### Configuration section
 
@@ -322,10 +372,12 @@ Mail templates reside in the database and can be created in the back-end area vi
 
 The process for sending these emails is the same. For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
 
-    Mail::send('this.is.my.email', $data, function($message) use ($user)
-    {
-        [...]
-    });
+```php
+Mail::send('this.is.my.email', $data, function($message) use ($user)
+{
+    [...]
+});
+```
 
 > **Note:** If the mail template does not exist in the system, this code will attempt to find a mail view with the same code.
 
@@ -352,35 +404,37 @@ System | system | Used for internal, back-end mail
 
 Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
 
-    public function registerMailTemplates()
-    {
-        return [
-            'rainlab.user::mail.activate',
-            'rainlab.user::mail.restore'
-        ];
-    }
+```php
+public function registerMailTemplates()
+{
+    return [
+        'rainlab.user::mail.activate',
+        'rainlab.user::mail.restore'
+    ];
+}
+```
 
 The method should return an array of [mail view names](#mail-views).
 
 Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [Plugin registration class](../plugin/registration#registration-file).
 
+```php
+public function registerMailPartials()
+{
+    return [
+        'tracking'  => 'acme.blog::partials.tracking',
+        'promotion' => 'acme.blog::partials.promotion',
+    ];
+}
 
-    public function registerMailPartials()
-    {
-        return [
-            'tracking'  => 'acme.blog::partials.tracking',
-            'promotion' => 'acme.blog::partials.promotion',
-        ];
-    }
-
-    public function registerMailLayouts()
-    {
-        return [
-            'marketing'    => 'acme.blog::layouts.marketing',
-            'notification' => 'acme.blog::layouts.notification',
-        ];
-    }
-
+public function registerMailLayouts()
+{
+    return [
+        'marketing'    => 'acme.blog::layouts.marketing',
+        'notification' => 'acme.blog::layouts.notification',
+    ];
+}
+```
 
 The methods should return an array of [mail view names](#mail-views). The array key will be used as `code` property for the partial or layout.
 
@@ -389,7 +443,9 @@ The methods should return an array of [mail view names](#mail-views). The array 
 
 You may register variables that are globally available to all mail templates with the `View::share` method.
 
-    View::share('site_name', 'OctoberCMS');
+```php
+View::share('site_name', 'OctoberCMS');
+```
 
 This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 
@@ -406,13 +462,17 @@ One solution is to use the `log` mail driver during local development. This driv
 
 Another solution is to set a universal recipient of all e-mails sent by the framework. This way, all the emails generated by your application will be sent to a specific address, instead of the address actually specified when sending the message. This can be done via the `to` option in your `config/mail.php` configuration file:
 
-    'to' => [
-        'address' => 'dev@example.com',
-        'name' => 'Dev Example'
-    ],
+```php
+'to' => [
+    'address' => 'dev@example.com',
+    'name' => 'Dev Example'
+],
+```
 
 #### Pretend mail mode
 
 You can dynamically disable sending mail using the `Mail::pretend` method. When the mailer is in pretend mode, messages will be written to your application's log files instead of being sent to the recipient.
 
-    Mail::pretend();
+```php
+Mail::pretend();
+```
