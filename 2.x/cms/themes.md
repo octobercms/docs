@@ -31,21 +31,23 @@ Object | Description
 
 Below, you can see an example theme directory structure. Each theme represents a separate directory, and generally, one theme is active to display the website. This example demonstrates the **website** theme directory.
 
-    themes/
-      website/           <=== Theme starts here
-        pages/           <=== Page files
-          home.htm
-        layouts/         <=== Layout files
-          default.htm
-        partials/        <=== Partial files
-          sidebar.htm
-        content/         <=== Content files
-          intro.htm
-        assets/          <=== Asset files
-          css/
-            my-styles.css
-          js/
-          images/
+```
+themes/
+    website/           <=== Theme starts here
+    pages/           <=== Page files
+        home.htm
+    layouts/         <=== Layout files
+        default.htm
+    partials/        <=== Partial files
+        sidebar.htm
+    content/         <=== Content files
+        intro.htm
+    assets/          <=== Asset files
+        css/
+        my-styles.css
+        js/
+        images/
+```
 
 > The active theme is set with the `active_theme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 
@@ -54,107 +56,119 @@ Below, you can see an example theme directory structure. Each theme represents a
 
 October CMS supports a single level of subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
-    themes/
-      website/
-        pages/
-          home.htm
-          blog/                  <=== Page subdirectory
-            archive.htm
-            category.htm
-        partials/
-          sidebar.htm
-          blog/                  <=== Partial subdirectory
-            category-list.htm
-        content/
-          footer-contacts.txt
-          home/                  <=== Content subdirectory
-            intro.htm
-        ...
+```
+themes/
+    website/
+    pages/
+        home.htm
+        blog/                  <=== Page subdirectory
+        archive.htm
+        category.htm
+    partials/
+        sidebar.htm
+        blog/                  <=== Partial subdirectory
+        category-list.htm
+    content/
+        footer-contacts.txt
+        home/                  <=== Content subdirectory
+        intro.htm
+    ...
+```
 
 To refer to a template in a subdirectory, specify the subdirectory's name before the template's name. For example, rendering the **category-list** partial from a **blog** subdirectory.
 
-    {% partial "blog/category-list" %}
+```twig
+{% partial "blog/category-list" %}
+```
 
 > **Note**: The template paths are always absolute. If, in a partial, you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
 
 <a name="template-structure"></a>
 ## Template Structure
 
-Pages, partials and layout templates can include up to 3 sections: **configuration**, **PHP code**, and **Twig markup**.
-Sections are separated with the `==` sequence.
-For example:
+Pages, partials and layout templates can include up to 3 sections: **configuration**, **PHP code**, and **Twig markup**. Sections are separated with the `==` sequence.
 
-    url = "/blog"
-    layout = "default"
-    ==
-    function onStart()
-    {
-        $this['posts'] = ...;
-    }
-    ==
-    <h3>Blog archive</h3>
-    {% for post in posts %}
-        <h4>{{ post.title }}</h4>
-        {{ post.content }}
-    {% endfor %}
+```
+url = "/blog"
+layout = "default"
+==
+function onStart()
+{
+    $this['posts'] = ...;
+}
+==
+<h3>Blog archive</h3>
+{% for post in posts %}
+    <h4>{{ post.title }}</h4>
+    {{ post.content }}
+{% endfor %}
+```
 
 <a name="configuration-section"></a>
 ### Configuration Section
 
 The configuration section sets the template parameters. Supported configuration parameters are specific for different CMS templates and described in their corresponding documentation articles. The configuration section uses the simple [INI format](http://en.wikipedia.org/wiki/INI_file), where string parameter values are enclosed within quotes. Example configuration section for a page template:
 
-    url = "/blog"
-    layout = "default"
+```ini
+url = "/blog"
+layout = "default"
 
-    [component]
-    parameter = "value"
+[component]
+parameter = "value"
+```
 
 <a name="php-section"></a>
 ### PHP Code Section
 
 The code in the PHP section executes every time before the template is rendered. The PHP section is optional for all CMS templates and its contents depend on the template type where it is defined. The PHP code section can contain optional open and close PHP tags to enable syntax highlighting in text editors. The open and close tags should always be specified on a different line to the section separator `==`.
 
-    url = "/blog"
-    layout = "default"
-    ==
-    <?
-    function onStart()
-    {
-        $this['posts'] = ...;
-    }
-    ?>
-    ==
-    <h3>Blog archive</h3>
-    {% for post in posts %}
-        <h4>{{ post.title }}</h4>
-        {{ post.content }}
-    {% endfor %}
+```
+url = "/blog"
+layout = "default"
+==
+<?
+function onStart()
+{
+    $this['posts'] = ...;
+}
+?>
+==
+<h3>Blog archive</h3>
+{% for post in posts %}
+    <h4>{{ post.title }}</h4>
+    {{ post.content }}
+{% endfor %}
+```
 
 In the PHP section, you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed. Example of using a namespace reference:
 
-    url = "/blog"
-    layout = "default"
-    ==
-    <?
-    use Acme\Blog\Classes\Post;
+```
+url = "/blog"
+layout = "default"
+==
+<?
+use Acme\Blog\Classes\Post;
 
-    function onStart()
-    {
-        $this['posts'] = Post::get();
-    }
-    ?>
-    ==
+function onStart()
+{
+    $this['posts'] = Post::get();
+}
+?>
+==
+```
 
 As a general way of setting variables, you should use the array access method on `$this`, although for simplicity you can use **object access as read-only**, for example:
 
-    // Write via array
-    $this['foo'] = 'bar';
+```php
+// Write via array
+$this['foo'] = 'bar';
 
-    // Read via array
-    echo $this['foo'];
+// Read via array
+echo $this['foo'];
 
-    // Read-only via object
-    echo $this->foo;
+// Read-only via object
+echo $this->foo;
+```
 
 <a name="twig-section"></a>
 ### Twig Markup Section

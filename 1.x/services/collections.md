@@ -15,16 +15,18 @@
 
 The `October\Rain\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
 
-    $collection = new October\Rain\Support\Collection(['stewie', 'brian', null]);
+```php
+$collection = new October\Rain\Support\Collection(['stewie', 'brian', null]);
 
-    $collection = $collection
-        ->map(function ($name) {
-            return strtoupper($name);
-        })
-        ->reject(function ($name) {
-            return empty($name);
-        })
-    ;
+$collection = $collection
+    ->map(function ($name) {
+        return strtoupper($name);
+    })
+    ->reject(function ($name) {
+        return empty($name);
+    })
+;
+```
 
 The `Collection` class allows you to chain its methods to perform fluent mapping and reducing of the underlying array. In general every `Collection` method returns an entirely new `Collection` instance.
 
@@ -33,7 +35,9 @@ The `Collection` class allows you to chain its methods to perform fluent mapping
 
 As described above, passing an array to the constructor of the `October\Rain\Support\Collection` class will return a new instance for the given array. So, creating a collection is as simple as:
 
-    $collection = new October\Rain\Support\Collection([1, 2, 3]);
+```php
+$collection = new October\Rain\Support\Collection([1, 2, 3]);
+```
 
 By default, collections of [database models](../database/model) are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
 
@@ -230,13 +234,15 @@ The `chunk` method breaks the collection into multiple, smaller collections of a
 
 This method is especially useful in [CMS pages](../cms/pages) when working with a grid system, such as [Bootstrap](http://getbootstrap.com/css/#grid). Imagine you have a collection of models you want to display in a grid:
 
-    {% for chunk in products.chunk(3) %}
-        <div class="row">
-            {% for product in chunk %}
-                <div class="col-xs-4">{{ product.name }}</div>
-            {% endfor %}
-        </div>
-    {% endfor %}
+```twig
+{% for chunk in products.chunk(3) %}
+    <div class="row">
+        {% for product in chunk %}
+            <div class="col-xs-4">{{ product.name }}</div>
+        {% endfor %}
+    </div>
+{% endfor %}
+```
 
 <a name="method-collapse"></a>
 #### `collapse()` {.collection-method}

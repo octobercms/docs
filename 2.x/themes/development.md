@@ -14,9 +14,11 @@ The theme directory could include the **theme.yaml**, **version.yaml** and **ass
 
 The theme information file **theme.yaml** contains the theme description, the author name, URL of the author's website and some other information. The file should be placed to the theme root directory:
 
-    themes/
-      demo/
-        theme.yaml    <=== Theme information file
+```
+themes/
+    demo/
+    theme.yaml    <=== Theme information file
+```
 
 The following fields are supported in the **theme.yaml** file:
 
@@ -34,39 +36,47 @@ Field | Description
 
 Example of the theme information file:
 
-    name: "October CMS Demo"
-    description: "Demonstrates the basic concepts of the front-end theming."
-    author: "October CMS"
-    homepage: "http://octobercms.com"
-    code: "Demo"
-    authorCode: "Acme"
+```yaml
+name: "October CMS Demo"
+description: "Demonstrates the basic concepts of the front-end theming."
+author: "October CMS"
+homepage: "http://octobercms.com"
+code: "Demo"
+authorCode: "Acme"
+```
 
 <a name="version-file"></a>
 ## Version File
 
 The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory:
 
-    themes/
-      demo/
-        ...
-        version.yaml    <=== Theme version file
+```
+themes/
+    demo/
+    ...
+    version.yaml    <=== Theme version file
+```
 
 The file format is following:
 
-    v1.0.1: Theme initialization
-    v1.0.2: Added more features
-    v1.0.3: Some features are removed
+```yaml
+v1.0.1: Theme initialization
+v1.0.2: Added more features
+v1.0.3: Some features are removed
+```
 
 <a name="preview-image"></a>
 ## Theme Preview Image
 
 The theme preview image is used in the back-end theme selector. The image file **theme-preview.png** should be placed to the theme's **assets/images** directory:
 
-    themes/
-      demo/
-        assets/
-          images/
-            theme-preview.png    <=== Theme preview image
+```
+themes/
+    demo/
+    assets/
+        images/
+        theme-preview.png    <=== Theme preview image
+```
 
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
 
@@ -77,74 +87,92 @@ Themes can support configuration values by defining a `form` key in the theme in
 
 The following is an example of how to define a website name configuration field called **site_name**:
 
-    name: My Theme
-    # [...]
+```yaml
+name: My Theme
+# [...]
 
-    form:
-        fields:
-            site_name:
-                label: Site name
-                comment: The website name as it should appear on the front-end
-                default: My Amazing Site!
-
-> **Note**: If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following:
-
-    \Cms\Models\ThemeData::extend(function ($model) {
-        $model->addJsonable('contact');
-    });
-
-The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup#default-variables) called `this.theme`.
-
-    <h1>Welcome to {{ this.theme.site_name }}!</h1>
-
-You may also define the configuration in a separate file, where the path is relative to the theme. The following definition will source the form fields from the file **config/fields.yaml** inside the theme.
-
-    name: My Theme
-    # [...]
-
-    form: config/fields.yaml
-
-**config/fields.yaml**:
-
+form:
     fields:
         site_name:
             label: Site name
             comment: The website name as it should appear on the front-end
             default: My Amazing Site!
+```
+
+> **Note**: If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following.
+
+```php
+\Cms\Models\ThemeData::extend(function ($model) {
+    $model->addJsonable('contact');
+});
+```
+
+The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup#default-variables) called `this.theme`.
+
+```twig
+<h1>Welcome to {{ this.theme.site_name }}!</h1>
+```
+
+You may also define the configuration in a separate file, where the path is relative to the theme. The following definition will source the form fields from the file **config/fields.yaml** inside the theme.
+
+```yaml
+name: My Theme
+# [...]
+
+form: config/fields.yaml
+```
+
+**config/fields.yaml**:
+
+```yaml
+fields:
+    site_name:
+        label: Site name
+        comment: The website name as it should appear on the front-end
+        default: My Amazing Site!
+```
 
 <a name="combiner-vars"></a>
 ### Combiner Variables
 
 Assets combined using the `|theme` [filter and combiner](../markup/filter-theme) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
-    form:
-        fields:
-            # [...]
+```yaml
+form:
+    fields:
+        # [...]
 
-            link_color:
-                label: Link color
-                type: colorpicker
-                assetVar: 'link-color'
+        link_color:
+            label: Link color
+            type: colorpicker
+            assetVar: 'link-color'
+```
 
 In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
 
-    <link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet" />
+```twig
+<link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet" />
+```
 
 Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 
-    a { color: @link-color }
+```less
+a { color: @link-color }
+```
 
 <a name="dependencies"></a>
 ## Theme Dependencies
 
 A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
 
-    name: "October CMS Demo"
-    # [...]
+```yaml
+name: "October CMS Demo"
+# [...]
 
-    require:
-        - "Acme.User"
-        - "Acme.Blog"
+require:
+    - "Acme.User"
+    - "Acme.Blog"
+```
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
 
@@ -160,21 +188,24 @@ Themes can provide backend localization keys through files placed in the **lang*
 
 Below is an example of the theme's lang directory:
 
-    themes/
-      acme/               <=== Theme directory
-        lang/             <=== Localization directory
-          en/             <=== Language directory
-            lang.php      <=== Localization file
-          fr/
-            lang.php
-
+```
+themes/
+    acme/               <=== Theme directory
+    lang/             <=== Localization directory
+        en/             <=== Language directory
+        lang.php      <=== Localization file
+        fr/
+        lang.php
+```
 
 The **lang.php** file should define and return an array of any depth, for example:
 
-    <?php return [
-        'options' => [
-            'website_name' => 'October CMS'
-        ]
-    ];
+```php
+<?php return [
+    'options' => [
+        'website_name' => 'October CMS'
+    ]
+];
+```
 
 You are then able to reference the keys using `theme.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `theme.acme::lang.options.website_name`.
