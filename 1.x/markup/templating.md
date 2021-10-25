@@ -6,15 +6,21 @@ October extends the [Twig template language](http://twig.sensiolabs.org/document
 
 Template variables are printed on the page using *double curly brackets*.
 
-    {{ variable }}
+```twig
+{{ variable }}
+```
 
 Variables can also represent *expressions*.
 
-    {{ isAjax ? 'Yes' : 'No' }}
+```twig
+{{ isAjax ? 'Yes' : 'No' }}
+```
 
 Variables can be concatenated with the `~` character.
 
-    {{ 'Your name: ' ~ name }}
+```twig
+{{ 'Your name: ' ~ name }}
+```
 
 October provides global variables under the `this` variable, as listed under the **Variables** section.
 
@@ -22,19 +28,25 @@ October provides global variables under the `this` variable, as listed under the
 
 Tags are a unique feature to Twig and are wrapped with `{% %}` characters.
 
-    {% tag %}
+```twig
+{% tag %}
+```
 
 Tags provide a more fluent way to describe template logic.
 
-    {% if stormCloudComing %}
-        Stay inside
-    {% else %}
-        Go outside and play
-    {% endif %}
+```twig
+{% if stormCloudComing %}
+    Stay inside
+{% else %}
+    Go outside and play
+{% endif %}
+```
 
 The `{% set %}` tag can be used to set variables inside the template.
 
-    {% set activePage = 'blog' %}
+```twig
+{% set activePage = 'blog' %}
+```
 
 Tags can take on many different syntaxes and are listed under the **Tags** section.
 
@@ -42,15 +54,21 @@ Tags can take on many different syntaxes and are listed under the **Tags** secti
 
 Filters act as modifiers to variables for a single instance and are applied using a *pipe symbol* followed by the filter name.
 
-    {{ 'string'|filter }}
+```twig
+{{ 'string'|filter }}
+```
 
 Filters can take arguments like a function.
 
-    {{ price|currency('USD') }}
+```twig
+{{ price|currency('USD') }}
+```
 
 Filters can be applied in succession.
 
-    {{ 'October Glory'|upper|replace({'October': 'Morning'}) }}
+```twig
+{{ 'October Glory'|upper|replace({'October': 'Morning'}) }}
+```
 
 Filters are listed under the **Filters** section.
 
@@ -58,11 +76,15 @@ Filters are listed under the **Filters** section.
 
 Functions allow logic to be executed and the return result acts as a variable.
 
-    {{ function() }}
+```twig
+{{ function() }}
+```
 
 Functions can take arguments.
 
-    {{ dump(variable) }}
+```twig
+{{ dump(variable) }}
+```
 
 Functions are listed under the **Functions** section.
 
