@@ -90,7 +90,7 @@ Functions are listed under the **Functions** section.
 
 ## Access logic
 
-The most important thing to learn about Twig is how it accesses the PHP layer. For convenience sake `{{ foo.bar }}` does the following checks on a PHP object:
+The most important thing to learn about Twig is how it accesses the PHP layer. For convenience sake `foo.bar` does the following checks on a PHP object:
 
 1. Check if `foo` is an array and `bar` a valid element.
 1. If not, and if `foo` is an object, check that `bar` is a valid property.

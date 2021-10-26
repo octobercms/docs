@@ -2,7 +2,9 @@
 
 The `| resize` filter attempts to resize the provided image source using the provided resizing configuration and outputs a URL to the resized image.
 
-    <img src="{{ 'banner.jpg' | media | resize(1920, 1080) }}" />
+```twig
+<img src="{{ 'banner.jpg' | media | resize(1920, 1080) }}" />
+```
 
 If the filter can successfully resize the provided image, then a URL to the October image resizer (`/resize/$id/$targetUrl`) will be rendered as the output of this filter until the image has been successfully resized. Once the image has been resized any future calls to this filter with the specific image and configuration combination will instead output a direct URL to the resized image.
 

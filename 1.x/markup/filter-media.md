@@ -2,8 +2,12 @@
 
 The `| media` filter returns an address relative to the public path of the [media manager library](../cms/mediamanager). The result is a URL to the media file specified in the filter parameter.
 
-    <img src="{{ 'banner.jpg' | media }}" />
+```twig
+<img src="{{ 'banner.jpg' | media }}" />
+```
 
 If the media manager address is __https://cdn.octobercms.com__ the above example would output the following:
 
-    <img src="https://cdn.octobercms.com/banner.jpg" />
+```twig
+<img src="https://cdn.octobercms.com/banner.jpg" />
+```

@@ -4,22 +4,28 @@ You can access the current session manager via `this.session` and it returns the
 
 ## Retrieving data from the session
 
-    {{ this.session.get('key') }}
+```twig
+{{ this.session.get('key') }}
+```
 
 ## Determining if an item exists in the session
 
-    {% if this.session.has('key') %}
-        <h1>we found it in the session</h1>
-    {% endif %}
+```twig
+{% if this.session.has('key') %}
+    <h1>we found it in the session</h1>
+{% endif %}
+```
 
 ## Deleting data from the session
 
 #### Remove data for a single key
 
-    {{ this.session.forget('key') }}
+```twig
+{{ this.session.forget('key') }}
+```
 
 #### Remove all session data
 
-    {{ this.session.flush() }}
-
-
+```twig
+{{ this.session.flush() }}
+```

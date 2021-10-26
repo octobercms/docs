@@ -2,18 +2,24 @@
 
 The `{% component %}` tag will parse the default markup content for a [CMS component](../cms/components) and display it on the page. Not all components provide default markup, the documentation for the plugin will guide in the correct usage.
 
-    {% component "blogPosts" %}
+```twig
+{% component "blogPosts" %}
+```
 
 This will render the component partial with a fixed name of **default.htm** and is essentially an alias for the following:
 
-    {% partial "blogPosts::default" %}
+```twig
+{% partial "blogPosts::default" %}
+```
 
 <a name="variables"></a>
 ## Variables
 
 Some components support [passing variables](../cms/components#component-variables) at render time:
 
-    {% component "blogPosts" postsPerPage="5" %}
+```twig
+{% component "blogPosts" postsPerPage="5" %}
+```
 
 <a name="customizing-components"></a>
 ## Customizing components

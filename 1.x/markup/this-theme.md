@@ -10,7 +10,9 @@ You can access the current theme object via `this.theme` and it returns the obje
 
 Converts the theme directory name to a CSS friendly identifier.
 
-    <body class="theme-{{ this.theme.id }}">
+```twig
+<body class="theme-{{ this.theme.id }}">
+```
 
 If the theme directory was **website** this would generate a class name of `theme-website`.
 
@@ -18,4 +20,6 @@ If the theme directory was **website** this would generate a class name of `them
 
 An array containing all the theme configuration values found in the `theme.yaml` file.
 
-    <meta name="description" content="{{ this.theme.config.description }}">
+```twig
+<meta name="description" content="{{ this.theme.config.description }}">
+```

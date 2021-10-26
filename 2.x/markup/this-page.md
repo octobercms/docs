@@ -10,13 +10,17 @@ You can access the current page object via `this.page` and it returns the object
 
 Reference to the layout name used by this page, if defined. Not to be confused with `this.layout`.
 
-    {{ this.page.layout }}
+```twig
+{{ this.page.layout }}
+```
 
 ### id
 
 Converts the page file name and folder name to a CSS friendly identifier.
 
-    <body class="page-{{ this.page.id }}">
+```twig
+<body class="page-{{ this.page.id }}">
+```
 
 If the page file was **home/index.htm** this would generate a class name of `page-home-index`.
 
@@ -24,33 +28,43 @@ If the page file was **home/index.htm** this would generate a class name of `pag
 
 The page title as defined by the configuration.
 
-    <h1>{{ this.page.title }}</h1>
+```twig
+<h1>{{ this.page.title }}</h1>
+```
 
 ### description
 
 The page description as defined by the configuration.
 
-    <p>{{ this.page.description }}</p>
+```twig
+<p>{{ this.page.description }}</p>
+```
 
 ### meta_title
 
 An alternative `title` field, usually more descriptive for SEO purposes.
 
-    <title>{{ this.page.meta_title }}</title>
+```twig
+<title>{{ this.page.meta_title }}</title>
+```
 
 ### meta_description
 
 An alternative `description` field, usually more descriptive for SEO purposes.
 
-    <meta name="description" content="{{ this.page.meta_description }}">
+```twig
+<meta name="description" content="{{ this.page.meta_description }}">
+```
 
 ### hidden
 
 Hidden pages are accessible only by logged-in back-end users.
 
-    {% if this.page.hidden %}
-        <p>Note to other admins: We are currently working on this page.</p>
-    {% endif %}
+```twig
+{% if this.page.hidden %}
+    <p>Note to other admins: We are currently working on this page.</p>
+{% endif %}
+```
 
 ### fileName
 

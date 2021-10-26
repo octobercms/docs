@@ -10,7 +10,9 @@ You can access the current layout object via `this.layout` and it returns the ob
 
 Converts the layout file name and folder name to a CSS friendly identifier.
 
-    <body class="layout-{{ this.layout.id }}">
+```twig
+<body class="layout-{{ this.layout.id }}">
+```
 
 If the layout file was **default.htm** this would generate a class name of `layout-default`.
 
@@ -18,4 +20,6 @@ If the layout file was **default.htm** this would generate a class name of `layo
 
 The layout description as defined by the configuration.
 
-    <meta name="description" content="{{ this.layout.description }}">
+```twig
+<meta name="description" content="{{ this.layout.description }}">
+```

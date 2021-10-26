@@ -2,11 +2,15 @@
 
 Functions prefixed with `form_` perform tasks that are useful when dealing with forms. The helper maps directly to the `Form` PHP class and its methods. For example:
 
-    {{ form_close() }}
+```twig
+{{ form_close() }}
+```
 
 is the PHP equivalent of the following:
 
-    <?= Form::close() ?>
+```php
+<?= Form::close() ?>
+```
 
 > **Note**: Methods in *camelCase* should be converted to *snake_case*.
 
@@ -14,19 +18,27 @@ is the PHP equivalent of the following:
 
 Outputs a standard `<form>` opening tag along with the `_session_key` and `_token` hidden fields for CSRF protection. If you are using the [AJAX Framework](../ajax/introduction), it is recommended that you use [`form_ajax()`](#form_ajax) instead.
 
-    {{ form_open() }}
+```twig
+{{ form_open() }}
+```
 
 Attributes can be passed in the first argument.
 
-    {{ form_open({ class: 'form-horizontal' }) }}
+```twig
+{{ form_open({ class: 'form-horizontal' }) }}
+```
 
 The above example would output as the following:
 
-    <form class="form-horizontal">
+```html
+<form class="form-horizontal">
+```
 
 There are some special options that can also be used alongside the attributes.
 
-    {{ form_open({ request: 'onUpdate' }) }}
+```twig
+{{ form_open({ request: 'onUpdate' }) }}
+```
 
 The function support the following options:
 
@@ -43,26 +55,36 @@ Option | Description
 
 Outputs an AJAX enabled FORM opening tag. The first parameter of the `form_ajax()` function is the AJAX handler name. The handler can be defined in the layout or page [PHP section](../cms/themes#php-section) code, it can also be defined in a component. You may find more information about AJAX in the [AJAX Framework](../ajax/introduction) article.
 
-    {{ form_ajax('onUpdate') }}
+```twig
+{{ form_ajax('onUpdate') }}
+```
 
 Attributes can be passed in the second argument.
 
-    {{ form_ajax('onSave', { class: 'form-horizontal'}) }}
+```twig
+{{ form_ajax('onSave', { class: 'form-horizontal'}) }}
+```
 
 The above example would output as the following:
 
-    <form data-request="onSave" class="form-horizontal">
+```html
+<form data-request="onSave" class="form-horizontal">
+```
 
 There are some special options that can also be used alongside the attributes.
 
-    {{ form_ajax('onDelete', { data: { id: 2 }, confirm: 'Really delete this record?' }) }}
+```twig
+{{ form_ajax('onDelete', { data: { id: 2 }, confirm: 'Really delete this record?' }) }}
 
-    {{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
+{{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
+```
 
 >**Note:** When attempting to reference a component's alias with `__SELF__` as an argument to `form_ajax()` you must first build the string you wish to use outside of the call itself. Example:
 
-    {% set targetPartial = "'" ~ __SELF__ ~ "::statistics': '#statsPanel'" %}
-    {{ form_ajax('onUpdate', { update: targetPartial }) }}
+```twig
+{% set targetPartial = "'" ~ __SELF__ ~ "::statistics': '#statsPanel'" %}
+{{ form_ajax('onUpdate', { update: targetPartial }) }}
+```
 
 The function support the following options:
 
@@ -79,22 +101,30 @@ Option | Description
 
 Outputs a standard FORM closing tag. This tag is generally available to provide consistency in usage.
 
-    {{ form_close() }}
+```twig
+{{ form_close() }}
+```
 
 The above example would output as the following:
 
-    </form>
+```html
+</form>
+```
 
 ## Passing Attributes to the Generated Element
 
 You can pass additional attributes to the `Form::open()` method by passing an array of attribute names and values to be rendered on the final generated `<form>` element.
 
-    <?= Form::open(array('id' => 'example', 'class' => 'something')) ?>
-        // ..
-    <?= Form::close() ?>
+```php
+<?= Form::open(array('id' => 'example', 'class' => 'something')) ?>
+    // ..
+<?= Form::close() ?>
+```
 
 The above example would output the following:
 
-    <form method="POST" action="" accept-charset="UTF-8" id="example" class="something">
+```html
+<form method="POST" action="" accept-charset="UTF-8" id="example" class="something">
 
-    </form>
+</form>
+```
