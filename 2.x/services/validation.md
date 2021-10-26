@@ -18,10 +18,12 @@ The validator class is a simple, convenient facility for validating data and ret
 
 #### Basic Validation Example
 
-    $validator = Validator::make(
-        ['name' => 'Joe'],
-        ['name' => 'required|min:5']
-    );
+```php
+$validator = Validator::make(
+    ['name' => 'Joe'],
+    ['name' => 'required|min:5']
+);
+```
 
 The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
 
@@ -29,39 +31,49 @@ The first argument passed to the `make` method is the data under validation. The
 
 Multiple rules may be delimited using either a "pipe" character, or as separate elements of an array.
 
-    $validator = Validator::make(
-        ['name' => 'Joe'],
-        ['name' => ['required', 'min:5']]
-    );
+```php
+$validator = Validator::make(
+    ['name' => 'Joe'],
+    ['name' => ['required', 'min:5']]
+);
+```
 
 #### Validating multiple fields
 
-    $validator = Validator::make(
-        [
-            'name' => 'Joe',
-            'password' => 'lamepassword',
-            'email' => 'email@example.com'
-        ],
-        [
-            'name' => 'required',
-            'password' => 'required|min:8',
-            'email' => 'required|email|unique:users'
-        ]
-    );
+```php
+$validator = Validator::make(
+    [
+        'name' => 'Joe',
+        'password' => 'lamepassword',
+        'email' => 'email@example.com'
+    ],
+    [
+        'name' => 'required',
+        'password' => 'required|min:8',
+        'email' => 'required|email|unique:users'
+    ]
+);
+```
 
 Once a `Validator` instance has been created, the `fails` (or `passes`) method may be used to perform the validation.
 
-    if ($validator->fails()) {
-        // The given data did not pass validation
-    }
+```php
+if ($validator->fails()) {
+    // The given data did not pass validation
+}
+```
 
 If validation has failed, you may retrieve the error messages from the validator.
 
-    $messages = $validator->messages();
+```php
+$messages = $validator->messages();
+```
 
 You may also access an array of the failed validation rules, without messages. To do so, use the `failed` method:
 
-    $failed = $validator->failed();
+```php
+$failed = $validator->failed();
+```
 
 #### Validating files
 
@@ -74,53 +86,67 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 
 #### Retrieving the first error message for a field
 
-    echo $messages->first('email');
+```php
+echo $messages->first('email');
+```
 
 #### Retrieving all error messages for a field
 
-    foreach ($messages->get('email') as $message) {
-        //
-    }
+```php
+foreach ($messages->get('email') as $message) {
+    //
+}
+```
 
 #### Retrieving all error messages for all fields
 
-    foreach ($messages->all() as $message) {
-        //
-    }
+```php
+foreach ($messages->all() as $message) {
+    //
+}
+```
 
 #### Determining if messages exist for a field
 
-    if ($messages->has('email')) {
-        //
-    }
+```php
+if ($messages->has('email')) {
+    //
+}
+```
 
 #### Retrieving an error message with a format
 
-    echo $messages->first('email', '<p>:message</p>');
+```php
+echo $messages->first('email', '<p>:message</p>');
+```
 
 > **Note**: By default, messages are formatted using Bootstrap compatible syntax.
 
 #### Retrieving all error messages with a format
 
-    foreach ($messages->all('<li>:message</li>') as $message) {
-        //
-    }
+```php
+foreach ($messages->all('<li>:message</li>') as $message) {
+    //
+}
+```
 
 <a name="error-messages-and-views"></a>
 ## Error Messages & Views
 
 Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October. Consider the following routes as an example:
 
-    public function onRegister()
-    {
-        $rules = [];
+```php
+public function onRegister()
+{
+    $rules = [];
 
-        $validator = Validator::make(Input::all(), $rules);
+    $validator = Validator::make(Input::all(), $rules);
 
-        if ($validator->fails()) {
-            return Redirect::to('register')->withErrors($validator);
-        }
+    if ($validator->fails()) {
+        return Redirect::to('register')->withErrors($validator);
     }
+}
+```
 
 Note that when validation fails, we pass the `Validator` instance to the Redirect using the `withErrors` method. This method will flash the error messages to the session so that they are available on the next request.
 
@@ -128,17 +154,23 @@ October will always check for errors in the session data, and automatically bind
 
 So, after redirection, you may utilize the automatically bound `errors` variable in your view:
 
-    {{ errors.first('email') }}
+```twig
+{{ errors.first('email') }}
+```
 
 ### Named error bags
 
 If you have multiple forms on a single page, you may wish to name the `MessageBag` of errors. This will allow you to retrieve the error messages for a specific form. Simply pass a name as the second argument to `withErrors`:
 
-    return Redirect::to('register')->withErrors($validator, 'login');
+```php
+return Redirect::to('register')->withErrors($validator, 'login');
+```
 
 You may then access the named `MessageBag` instance from the `$errors` variable:
 
-    {{ errors.login.first('email') }}
+```twig
+{{ errors.login.first('email') }}
+```
 
 <a name="available-validation-rules"></a>
 ## Available Validation Rules
@@ -292,19 +324,27 @@ The field under validation must exist on a given database table.
 
 #### Basic usage of exists rule
 
-    'state' => 'exists:states'
+```
+'state' => 'exists:states'
+```
 
 #### Specifying a custom column name
 
-    'state' => 'exists:states,abbreviation'
+```
+'state' => 'exists:states,abbreviation'
+```
 
 You may also specify more conditions that will be added as "where" clauses to the query:
 
-    'email' => 'exists:staff,email,account_id,1'
+```
+'email' => 'exists:staff,email,account_id,1'
+```
 
 Passing `NULL` as a "where" clause value will add a check for a `NULL` database value:
 
-    'email' => 'exists:staff,email,deleted_at,NULL'
+```
+'email' => 'exists:staff,email,deleted_at,NULL'
+```
 
 <a name="rule-image"></a>
 #### image
@@ -338,7 +378,9 @@ The file under validation must have a MIME type corresponding to one of the list
 
 #### Basic usage of MIME rule
 
-    'photo' => 'mimes:jpeg,bmp,png'
+```
+'photo' => 'mimes:jpeg,bmp,png'
+```
 
 <a name="rule-min"></a>
 #### min:_value_
@@ -424,21 +466,29 @@ The field under validation must be unique on a given database table. If the `col
 
 #### Basic usage of unique rule
 
-    'email' => 'unique:users'
+```
+'email' => 'unique:users'
+```
 
 #### Specifying a custom column name
 
-    'email' => 'unique:users,email_address'
+```
+'email' => 'unique:users,email_address'
+```
 
 #### Forcing a unique rule to ignore a given ID
 
-    'email' => 'unique:users,email_address,10'
+```
+'email' => 'unique:users,email_address,10'
+```
 
 #### Adding additional where clauses
 
 You may also specify more conditions that will be added as "where" clauses to the query:
 
-    'email' => 'unique:users,email_address,NULL,id,account_id,1'
+```
+'email' => 'unique:users,email_address,NULL,id,account_id,1'
+```
 
 In the rule above, only rows with an `account_id` of `1` would be included in the unique check.
 
@@ -454,9 +504,11 @@ The field under validation must be formatted as an URL.
 
 In some situations, you may wish to run validation checks against a field **only** if that field is present in the input array. To quickly accomplish this, add the `sometimes` rule to your rule list:
 
-    $v = Validator::make($data, [
-        'email' => 'sometimes|required|email',
-    ]);
+```php
+$v = Validator::make($data, [
+    'email' => 'sometimes|required|email',
+]);
+```
 
 In the example above, the `email` field will only be validated if it is present in the `$data` array.
 
@@ -464,22 +516,28 @@ In the example above, the `email` field will only be validated if it is present 
 
 Sometimes you may wish to require a given field only if another field has a greater value than 100. Or you may need two fields to have a given value only when another field is present. Adding these validation rules doesn't have to be a pain. First, create a `Validator` instance with your _static rules_ that never change:
 
-    $v = Validator::make($data, [
-        'email' => 'required|email',
-        'games' => 'required|numeric',
-    ]);
+```php
+$v = Validator::make($data, [
+    'email' => 'required|email',
+    'games' => 'required|numeric',
+]);
+```
 
 Let's assume our web application is for game collectors. If a game collector registers with our application and they own more than 100 games, we want them to explain why they own so many games. For example, perhaps they run a game re-sell shop, or maybe they just enjoy collecting. To conditionally add this requirement, we can use the `sometimes` method on the `Validator` instance.
 
-    $v->sometimes('reason', 'required|max:500', function($input) {
-        return $input->games >= 100;
-    });
+```php
+$v->sometimes('reason', 'required|max:500', function($input) {
+    return $input->games >= 100;
+});
+```
 
 The first argument passed to the `sometimes` method is the name of the field we are conditionally validating. The second argument is the rules we want to add. If the `Closure` passed as the third argument returns `true`, the rules will be added. This method makes it a breeze to build complex conditional validations. You may even add conditional validations for several fields at once:
 
-    $v->sometimes(['reason', 'cost'], 'required', function($input) {
-        return $input->games >= 100;
-    });
+```php
+$v->sometimes(['reason', 'cost'], 'required', function($input) {
+    return $input->games >= 100;
+});
+```
 
 > **Note**: The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
 
@@ -488,31 +546,39 @@ The first argument passed to the `sometimes` method is the name of the field we 
 
 Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
 
-    $validator = Validator::make(Input::all(), [
-        'photos.profile' => 'required|image',
-    ]);
+```php
+$validator = Validator::make(Input::all(), [
+    'photos.profile' => 'required|image',
+]);
+```
 
 You may also validate each element of an array. For example, to validate that each e-mail in a given array input field is unique, you may do the following:
 
-    $validator = Validator::make(Input::all(), [
-        'person.*.email' => 'email|unique:users',
-        'person.*.first_name' => 'required_with:person.*.last_name',
-    ]);
+```php
+$validator = Validator::make(Input::all(), [
+    'person.*.email' => 'email|unique:users',
+    'person.*.first_name' => 'required_with:person.*.last_name',
+]);
+```
 
 Likewise, you may use the `*` character when specifying your validation messages in your language files, making it a breeze to use a single validation message for array based fields:
 
-    'custom' => [
-        'person.*.email' => [
-            'unique' => 'Each person must have a unique e-mail address',
-        ]
-    ],
+```php
+'custom' => [
+    'person.*.email' => [
+        'unique' => 'Each person must have a unique e-mail address',
+    ]
+],
+```
 
 You may also use "array notation" in your validation rules if you wish. These rules will be converted to "dot notation" automatically on validation.
 
-    $validator = Validator::make(Input::all(), [
-        'photos[profile]' => 'required|image',
-        'person[][email]' => 'email|unique:users',
-    ]);
+```php
+$validator = Validator::make(Input::all(), [
+    'photos[profile]' => 'required|image',
+    'person[][email]' => 'email|unique:users',
+]);
+```
 
 <a name="custom-error-messages"></a>
 ## Custom Error Messages
@@ -521,44 +587,54 @@ If needed, you may use custom error messages for validation instead of the defau
 
 #### Passing custom messages into validator
 
-    $messages = [
-        'required' => 'The :attribute field is required.',
-    ];
+```php
+$messages = [
+    'required' => 'The :attribute field is required.',
+];
 
-    $validator = Validator::make($input, $rules, $messages);
+$validator = Validator::make($input, $rules, $messages);
+```
 
 > *Note:* The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
 
 #### Other validation placeholders
 
-    $messages = [
-        'same'    => 'The :attribute and :other must match.',
-        'size'    => 'The :attribute must be exactly :size.',
-        'between' => 'The :attribute must be between :min - :max.',
-        'in'      => 'The :attribute must be one of the following types: :values',
-    ];
+```php
+$messages = [
+    'same'    => 'The :attribute and :other must match.',
+    'size'    => 'The :attribute must be exactly :size.',
+    'between' => 'The :attribute must be between :min - :max.',
+    'in'      => 'The :attribute must be one of the following types: :values',
+];
+```
 
 #### Specifying a custom message for a given attribute
 
 Sometimes you may wish to specify a custom error messages only for a specific field:
 
-    $messages = [
-        'email.required' => 'We need to know your e-mail address!',
-    ];
+```php
+$messages = [
+    'email.required' => 'We need to know your e-mail address!',
+];
+```
 
 <a name="localization"></a>
 #### Specifying Custom Messages in Language Files
 
 In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
 
-    return  [
-        'required' => 'We need to know your e-mail address!',
-        'email.required' => 'We need to know your e-mail address!',
-    ];
+```php
+return  [
+    'required' => 'We need to know your e-mail address!',
+    'email.required' => 'We need to know your e-mail address!',
+];
+```
 
 Then in your call to `Validator::make` use the `Lang:get` to use your custom files.
 
-    Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
+```php
+Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
+```
 
 <a name="custom-validation-rules"></a>
 ## Custom Validation Rules
@@ -575,75 +651,84 @@ You can extend the Validator instance with your custom validation rule as a `Clo
 
 If you only need the functionality of a custom rule specified once throughout your plugin or application, you may use a Closure to define the rule. The first parameter defines the name of your rule, and the second parameter provides your Closure.
 
-    use Validator;
+```php
+use Validator;
 
-    public function boot()
-    {
-        Validator::extend('foo', function($attribute, $value, $parameters) {
-            return $value == 'foo';
-        });
-    }
+public function boot()
+{
+    Validator::extend('foo', function($attribute, $value, $parameters) {
+        return $value == 'foo';
+    });
+}
+```
 
 The custom validator Closure receives three arguments: the name of the `$attribute` being validated, the `$value` of the attribute, and an array of `$parameters` passed to the rule.
 
 You may also pass a class and method to the `extend` method instead of a Closure:
 
-    Validator::extend('foo', 'FooValidator@validate');
+```php
+Validator::extend('foo', 'FooValidator@validate');
+```
 
 Once the Validator has been extended with your custom rule, you will need to add it to your rules definition. For example, you may add it to the `$rules` array of your model.
 
-    public $rules = [
-        'field' => 'foo'
-    ];
+```php
+public $rules = [
+    'field' => 'foo'
+];
+```
 
 #### Using Rule objects
 
 A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation, a `validate` method which is called on validation and a `message` method which defines the default fallback error message.
 
-    <?php
-    use Illuminate\Contracts\Validation\Rule;
+```php
+use Illuminate\Contracts\Validation\Rule;
 
-    class Uppercase implements Rule
+class Uppercase implements Rule
+{
+    /**
+     * Determine if the validation rule passes.
+     *
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @return bool
+     */
+    public function passes($attribute, $value)
     {
-        /**
-         * Determine if the validation rule passes.
-         *
-         * @param  string  $attribute
-         * @param  mixed  $value
-         * @return bool
-         */
-        public function passes($attribute, $value)
-        {
-            return strtoupper($value) === $value;
-        }
-
-        /**
-         * Validation callback method.
-         *
-         * @param  string  $attribute
-         * @param  mixed  $value
-         * @param  array  $params
-         * @return bool
-         */
-        public function validate($attribute, $value, $params)
-        {
-            return $this->passes($attribute, $value);
-        }
-
-        /**
-         * Get the validation error message.
-         *
-         * @return string
-         */
-        public function message()
-        {
-            return 'The :attribute must be uppercase.';
-        }
+        return strtoupper($value) === $value;
     }
+
+    /**
+     * Validation callback method.
+     *
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @param  array  $params
+     * @return bool
+     */
+    public function validate($attribute, $value, $params)
+    {
+        return $this->passes($attribute, $value);
+    }
+
+    /**
+     * Get the validation error message.
+     *
+     * @return string
+     */
+    public function message()
+    {
+        return 'The :attribute must be uppercase.';
+    }
+}
+```
 
 To extend the Validator with your rule object, you may provide an instance of the class to the Validator `extend` method:
 
-    Validator::extend('uppercase', Uppercase::class);
+```php
+Validator::extend('uppercase', Uppercase::class);
+```
 
 `Rule` objects should be stored in the **/rules** subdirectory inside your plugin directory.
 
@@ -651,40 +736,48 @@ To extend the Validator with your rule object, you may provide an instance of th
 
 You will also need to define an error message for your custom rule. You can do so either using an inline custom message array or by adding an entry in the validation language file. This message should be placed in the first level of the array.
 
-    "foo" => "Your input was invalid!",
+```php
+"foo" => "Your input was invalid!",
 
-    "accepted" => "The :attribute must be accepted.",
+"accepted" => "The :attribute must be accepted.",
+```
 
 With `Rule` objects, you can set a fallback error message by providing a `message` method that returns a string.
 
 When creating a custom validation rule, you may sometimes need to define custom placeholder replacements for error messages. You may do so by making a call to the `replacer` method on the Validator facade. You may also do this within the `boot` method of your plugin.
 
-    public function boot()
-    {
-        Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
-            // return a message as a string
-        });
-    }
+```php
+public function boot()
+{
+    Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
+        // return a message as a string
+    });
+}
+```
 
 The callback receives 4 arguments: `$message` being the message returned by the validator, `$attribute` being the attribute which failed validation, `$rule` being the rule object and `$parameters` being the parameters defined with the validation rule. You may, for example, inject a column name into the message that was defined in the parameters:
 
-    public function boot()
-    {
-        Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
-            return str_replace(':column', $parameters[0], $message);
-        });
-    }
+```php
+public function boot()
+{
+    Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
+        return str_replace(':column', $parameters[0], $message);
+    });
+}
+```
 
 If you wish to support multiple languages with your error messages, you will need to listen for the `translator.beforeResolve` event in your plugin, as your plugin's `boot` method may be run before translation support is fully enabled.
 
-    public function boot()
-    {
-        Event::listen('translator.beforeResolve', function ($key, $replaces, $locale) {
-            if ($key === 'validation.uppercase') {
-                return Lang::get('plugin.name::lang.validation.uppercase');
-            }
-        });
-    }
+```php
+public function boot()
+{
+    Event::listen('translator.beforeResolve', function ($key, $replaces, $locale) {
+        if ($key === 'validation.uppercase') {
+            return Lang::get('plugin.name::lang.validation.uppercase');
+        }
+    });
+}
+```
 
 #### Registering a custom validator resolver
 
@@ -692,20 +785,26 @@ If you wish to provide a large number of custom rules to your application, you c
 
 To define a resolver, you may provide a Closure to the `resolver` method in the Validator facade.
 
-    Validator::resolver(function($translator, $data, $rules, $messages, $customAttributes) {
-        return new CustomValidator($translator, $data, $rules, $messages, $customAttributes);
-    });
+```php
+Validator::resolver(function($translator, $data, $rules, $messages, $customAttributes) {
+    return new CustomValidator($translator, $data, $rules, $messages, $customAttributes);
+});
+```
 
 Each rule supported within a resolver is defined using a `validateXXX` method. For example, the `foo` validation rule would look for a method called `validateFoo`. The `validate` method should return a boolean on whether a given `$value` passes validation.
 
-    public function validateFoo($attribute, $value, $parameters)
-    {
-        // return whether the value passes validation
-    }
+```php
+public function validateFoo($attribute, $value, $parameters)
+{
+    // return whether the value passes validation
+}
+```
 
 As with the Validator `replacer` method, you may sometimes need to define custom placeholder replacements for error messages. You may do this in a resolver by defining a `replaceXXX` method.
 
-    protected function replaceFoo($message, $attribute, $rule, $parameters)
-    {
-        return str_replace(':foo', $parameters[0], $message);
-    }
+```php
+protected function replaceFoo($message, $attribute, $rule, $parameters)
+{
+    return str_replace(':foo', $parameters[0], $message);
+}
+```
