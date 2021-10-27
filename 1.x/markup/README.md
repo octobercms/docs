@@ -1,3 +1,3 @@
-# Redirecting...
+# Markup Guide
 
 <Redirect to="templating" />
