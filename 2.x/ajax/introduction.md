@@ -17,13 +17,17 @@ The AJAX framework comes in two flavors, you may either use [the JavaScript API]
 
 The AJAX framework is optional in your [CMS theme](../cms/themes), to use the library you should include it by placing the `{% framework %}` tag anywhere inside your [page](../cms/pages) or [layout](../cms/layouts). This adds a reference to the October front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
 
-    <script src="{{ 'assets/javascript/jquery.js'|theme }}"></script>
+```twig
+<script src="{{ 'assets/javascript/jquery.js' | theme }}"></script>
 
-    {% framework %}
+{% framework %}
+```
 
 The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](../ajax/extras), including form validation and loading indicators.
 
-    {% framework extras %}
+```twig
+{% framework extras %}
+```
 
 <a name="how-ajax-works"></a>
 ## How AJAX Requests Work
@@ -44,31 +48,37 @@ A page can issue an AJAX request either prompted by data attributes or by using 
 
 Below is a simple example that uses the data attributes API to define an AJAX enabled form. The form will issue an AJAX request to the **onTest** handler and requests that the result container be updated with the **mypartial** partial markup.
 
-    <!-- AJAX enabled form -->
-    <form data-request="onTest" data-request-update="mypartial: '#myDiv'">
+```html
+<!-- AJAX enabled form -->
+<form data-request="onTest" data-request-update="mypartial: '#myDiv'">
 
-        <!-- Input two values -->
-        <input name="value1"> + <input name="value2">
+    <!-- Input two values -->
+    <input name="value1"> + <input name="value2">
 
-        <!-- Action button -->
-        <button type="submit">Calculate</button>
+    <!-- Action button -->
+    <button type="submit">Calculate</button>
 
-    </form>
+</form>
 
-    <!-- Result container -->
-    <div id="myDiv"></div>
+<!-- Result container -->
+<div id="myDiv"></div>
+```
 
 > **Note**: The form data for `value1` and `value2` are automatically sent with the AJAX request.
 
 The **mypartial** partial contains markup that reads the `result` variable.
 
-    The result is {{ result }}
+```twig
+The result is {{ result }}
+```
 
 The **onTest** handler method accessed the form data using the `input` [helper method](../services/helper#method-input) and the result is passed to the `result` page variable.
 
-    function onTest()
-    {
-        $this->page['result'] = input('value1') + input('value2');
-    }
+```php
+function onTest()
+{
+    $this->page['result'] = input('value1') + input('value2');
+}
+```
 
 The example could be read like this: "When the form is submitted, issue an AJAX request to the **onTest** handler. When the handler finishes, render the **mypartial** partial and inject its contents to the **#myDiv** element."

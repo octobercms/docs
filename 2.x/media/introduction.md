@@ -13,25 +13,29 @@ October CMS ships with a media manager built in, making it easy to publish large
 
 In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [filter](../markup/filter-media).
 
-    {{ 'relative/path/to/asset.jpg'|media }}
+```twig
+{{ 'relative/path/to/asset.jpg'|media }}
+```
 
 <a name="configuration-options"></a>
 ## Configuration Options
 
 There are several options that allow you to fine-tune the Media Manager, which are defined in **config/media.php** file.
 
-    /*
-    |--------------------------------------------------------------------------
-    | Ignored Files and Patterns
-    |--------------------------------------------------------------------------
-    |
-    | The media manager wil ignore file names and patterns specified here
-    |
-    */
+```php
+/*
+|--------------------------------------------------------------------------
+| Ignored Files and Patterns
+|--------------------------------------------------------------------------
+|
+| The media manager wil ignore file names and patterns specified here
+|
+*/
 
-    'ignore_files' => ['.svn', '.git', '.DS_Store', '.AppleDouble'],
+'ignore_files' => ['.svn', '.git', '.DS_Store', '.AppleDouble'],
 
-    'ignore_patterns' => ['^\..*'],
+'ignore_patterns' => ['^\..*'],
+```
 
 The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](../media/providers) on using third party providers such as Amazon S3.
 
@@ -41,35 +45,45 @@ For security reasons, uploading SVG graphic files is disabled in October CMS by 
 
 To allow the use of SVG files in the backend, simply add it to the list of image extensions.
 
-    'image_extensions' => [..., 'svg'],
+```php
+'image_extensions' => [..., 'svg'],
+```
 
 <a name="audio-and-video-players"></a>
 ## Audio and Video Players
 
 By default the system uses HTML5 audio and video tags to render audio and video files:
 
-    <video src="video.mp4" controls></video>
+```html
+<video src="video.mp4" controls></video>
+```
 
 or
 
-    <audio src="audio.mp3" controls></audio>
+```html
+<audio src="audio.mp3" controls></audio>
+```
 
 This behavior can be overridden. If there are **oc-audio-player.htm** and **oc-video-player.htm** CMS partials, they will be used for displaying audio and video contents. Inside the partials use the variable **src** to output a link to the source file. Example:
 
-    <video src="{{ src }}" width="320" height="200" controls preload></video>
+```html
+<video src="{{ src }}" width="320" height="200" controls preload></video>
+```
 
 If you don't want to use HTML5 player you can provide any other markup in the partials. There's a [third-party script](https://html5media.info/) that enables support of HTML5 video and audio tags in older browsers.
 
 As the partials are written with Twig, you can automate adding alternative video sources based on a naming convention. For example, if there's a convention that there's always a smaller resolution video for each full resolution video, and the smaller resolution file has extension "iphone.mp4", the generated markup could look like this:
 
-    <video controls>
-        <source
-            src="{{ src }}"
-            media="only screen and (min-device-width: 568px)"></source>
-        <source
-            src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
-            media="only screen and (max-device-width: 568px)"></source>
-    </video>
+```twig
+<video controls>
+    <source
+        src="{{ src }}"
+        media="only screen and (min-device-width: 568px)"></source>
+    <source
+        src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
+        media="only screen and (max-device-width: 568px)"></source>
+</video>
+```
 
 <a name="events"></a>
 ## Events
@@ -89,14 +103,18 @@ Event | Description | Parameters
 
 To hook into these events, either extend the `Media\Widgets\MediaManager` class directly
 
-    \Media\Widgets\MediaManager::extend(function($widget) {
-        $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
-            // Update custom references to path here
-        });
+```php
+\Media\Widgets\MediaManager::extend(function($widget) {
+    $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
+        // Update custom references to path here
     });
+});
+```
 
 Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Media\Widgets\MediaManager` object as the first parameter)
 
-    \Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
-        // Update custom references to path here
-    });
+```php
+\Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
+    // Update custom references to path here
+});
+```

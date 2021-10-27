@@ -24,23 +24,25 @@ Create **media** folder in the bucket. The folder name doesn't matter. This fold
 
 By default files in S3 buckets cannot be accessed directly. To make the bucket public, return to the bucket list and click the bucket. Click **Properties** button in the right sidebar. Expand **Permissions** tab. Click **Edit bucket policy** link. Paste the following code to the policy popup window. Replace the bucket name with your actual bucket name:
 
-    {
-        "Version": "2008-10-17",
-        "Id": "Policy1397632521960",
-        "Statement": [
-            {
-                "Sid": "Stmt1397633323327",
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": "*"
-                },
-                "Action": "s3:GetObject",
-                "Resource": "arn:aws:s3:::BUCKETNAME/*"
-            }
-        ]
-    }
+```json
+{
+    "Version": "2008-10-17",
+    "Id": "Policy1397632521960",
+    "Statement": [
+        {
+            "Sid": "Stmt1397633323327",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::BUCKETNAME/*"
+        }
+    ]
+}
+```
 
-Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value: 
+Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value:
 
     "arn:aws:s3:::BUCKETNAME/media/*"
 
@@ -85,19 +87,21 @@ Region | Code
 
 Example configuration after update:
 
-    'disks' => [
-        ...
-        's3' => [
-            'driver' => 's3',
-            'key'    => 'XXXXXXXXXXXXXXXXXXXX',
-            'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
-            'region' => 'us-west-2',
-            'bucket' => 'my-bucket'
-        ],
-        ...
-    ]
+```php
+'disks' => [
+    // ...
+    's3' => [
+        'driver' => 's3',
+        'key'    => 'XXXXXXXXXXXXXXXXXXXX',
+        'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
+        'region' => 'us-west-2',
+        'bucket' => 'my-bucket'
+    ],
+    // ...
+]
+```
 
-Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters: 
+Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
 Parameter | Value
 ------------- | -------------
@@ -109,14 +113,16 @@ To obtain the path of the folder, open AWS console and go to S3 section. Navigat
 
 Example storage configuration:
 
-    'storage' => [
-        ...
-        'media' => [
-            'disk'   => 's3',
-            'folder' => 'media',
-            'path' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name/media'
-        ]
+```php
+'storage' => [
+    // ...
+    'media' => [
+        'disk'   => 's3',
+        'folder' => 'media',
+        'path' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name/media'
     ]
+]
+```
 
 Congratulations! Now you're ready to use Amazon S3 with OctoberCMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
 
@@ -140,24 +146,26 @@ Parameter | Value
 **container** | the container name.
 **region** | the bucket region code, see below.
 **endpoint** | leave the value as is.
-**region** | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago. 
+**region** | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago.
 
 Example configuration after update:
 
-    'disks' => [
-        ...
-        'rackspace' => [
-            'driver'    => 'rackspace',
-            'username'  => 'october.api.cdn',
-            'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
-            'container' => 'my-bucket',
-            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-            'region'    => 'ORD'
-        ],
-        ...
-    ]
+```php
+'disks' => [
+    // ...
+    'rackspace' => [
+        'driver'    => 'rackspace',
+        'username'  => 'october.api.cdn',
+        'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
+        'container' => 'my-bucket',
+        'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
+        'region'    => 'ORD'
+    ],
+    // ...
+]
+```
 
-Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters: 
+Save **config/filesystem.php** script and open **config/cms.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
 Parameter | Value
 ------------- | -------------
@@ -165,18 +173,20 @@ Parameter | Value
 **folder** | the name of the folder you created in CDN container.
 **path** | the public path of the folder in the container, see below.
 
-To obtain the path of the folder, go to the CDN container list in Rackspace console. Click the container and open the media folder. Upload any file. After the file is uploaded, click it. The file will open in a new browser tab. Copy the file URL and remove the file name and trailing slash from it. 
+To obtain the path of the folder, go to the CDN container list in Rackspace console. Click the container and open the media folder. Upload any file. After the file is uploaded, click it. The file will open in a new browser tab. Copy the file URL and remove the file name and trailing slash from it.
 
 Example storage configuration:
 
-    'storage' => [
-        ...
-        'media' => [
-            'disk'   => 'rackspace',
-            'folder' => 'media',
-            'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
-        ]
+```php
+'storage' => [
+    // ...
+    'media' => [
+        'disk'   => 'rackspace',
+        'folder' => 'media',
+        'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
     ]
+]
+```
 
 Congratulations! Now you're ready to use Rackspace CDN with OctoberCMS.
 
@@ -185,43 +195,52 @@ Congratulations! Now you're ready to use Rackspace CDN with OctoberCMS.
 
 By default the system uses HTML5 audio and video tags to render audio and video files:
 
-    <video src="video.mp4" controls></video>
+```html
+<video src="video.mp4" controls></video>
+```
 
 or
 
-    <audio src="audio.mp3" controls></audio>
+```html
+<audio src="audio.mp3" controls></audio>
+```
 
 This behavior can be overridden. If there are **oc-audio-player.htm** and **oc-video-player.htm** CMS partials, they will be used for displaying audio and video contents. Inside the partials use the variable **src** to output a link to the source file. Example:
 
-    <video src="{{ src }}" width="320" height="200" controls preload></video>
+```html
+<video src="{{ src }}" width="320" height="200" controls preload></video>
+```
 
 If you don't want to use HTML5 player you can provide any other markup in the partials. There's a [third-party script](https://html5media.info/) that enables support of HTML5 video and audio tags in older browsers.
 
 As the partials are written with Twig, you can automate adding alternative video sources based on a naming convention. For example, if there's a convention that there's always a smaller resolution video for each full resolution video, and the smaller resolution file has extension "iphone.mp4", the generated markup could look like this:
 
-    <video controls>
-        <source
-            src="{{ src }}"
-            media="only screen and (min-device-width: 568px)"></source>
-        <source
-            src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
-            media="only screen and (max-device-width: 568px)"></source>
-    </video>
+```twig
+<video controls>
+    <source
+        src="{{ src }}"
+        media="only screen and (min-device-width: 568px)"></source>
+    <source
+        src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
+        media="only screen and (max-device-width: 568px)"></source>
+</video>
+```
 
 <a name="configuration-options"></a>
 ## Other configuration options
 
 There are several options that allow you to fine-tune the Media Manager. All of them could be defined in **config/cms.php** script, in the **storage/media** section, for example:
 
-    'storage' => [
-        ...
+```php
+'storage' => [
+    // ...
 
-        'media' => [
-            ...
-            'ignore' => ['.svn', '.git', '.DS_Store']
-        ]
-    ],
-
+    'media' => [
+        // ...
+        'ignore' => ['.svn', '.git', '.DS_Store']
+    ]
+],
+```
 
 Parameter | Value
 ------------- | -------------
@@ -249,17 +268,21 @@ Event | Description | Parameters
 
 **To hook into these events, either extend the `Backend\Widgets\MediaManager` class directly:**
 
-    Backend\Widgets\MediaManager::extend(function($widget) {
-        $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
-            // Update custom references to path here
-        });
-    });
-    
-**Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Backend\Widgets\MediaManager` object as the first parameter):**
-
-    Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
+```php
+Backend\Widgets\MediaManager::extend(function($widget) {
+    $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
         // Update custom references to path here
     });
+});
+```
+
+**Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Backend\Widgets\MediaManager` object as the first parameter):**
+
+```php
+Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
+    // Update custom references to path here
+});
+```
 
 <a name="troubleshooting"></a>
 ## Troubleshooting

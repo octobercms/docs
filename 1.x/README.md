@@ -1,0 +1,3 @@
+# Redirecting...
+
+<Redirect to="cms/themes" />

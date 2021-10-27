@@ -18,13 +18,15 @@ Media Manager uses the Local Disk provider by default. You need to install [Driv
 
 By default Media Manager works with the **storage/app/media** subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration found in the **config/system.php** config file and follow the instructions found in this article.
 
-    'storage' => [
-        'media' => [
-            'disk'   => 'local',
-            'folder' => 'media',
-            'path'   => '/storage/app/media',
-        ],
+```php
+'storage' => [
+    'media' => [
+        'disk'   => 'local',
+        'folder' => 'media',
+        'path'   => '/storage/app/media',
     ],
+],
+```
 
 <a name="amazon-s3"></a>
 ## Configuring Amazon S3 access
@@ -37,21 +39,23 @@ Create **media** folder in the bucket. The folder name doesn't matter. This fold
 
 By default files in S3 buckets cannot be accessed directly. To make the bucket public, return to the bucket list and click the bucket. Click **Properties** button in the right sidebar. Expand **Permissions** tab. Click **Edit bucket policy** link. Paste the following code to the policy popup window. Replace the bucket name with your actual bucket name:
 
-    {
-        "Version": "2008-10-17",
-        "Id": "Policy1397632521960",
-        "Statement": [
-            {
-                "Sid": "Stmt1397633323327",
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": "*"
-                },
-                "Action": "s3:GetObject",
-                "Resource": "arn:aws:s3:::BUCKETNAME/*"
-            }
-        ]
-    }
+```json
+{
+    "Version": "2008-10-17",
+    "Id": "Policy1397632521960",
+    "Statement": [
+        {
+            "Sid": "Stmt1397633323327",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::BUCKETNAME/*"
+        }
+    ]
+}
+```
 
 Click **Save** button to apply the policy. The policy gives public read-only access to all folders and directories in the bucket. If you're going to use the bucket for other needs, it's possible to setup a public access to a specific folder in the bucket, just specify the directory name in the **Resource** value:
 
@@ -98,17 +102,19 @@ Region | Code
 
 Example configuration after update:
 
-    'disks' => [
-        ...
-        's3' => [
-            'driver' => 's3',
-            'key'    => 'XXXXXXXXXXXXXXXXXXXX',
-            'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
-            'region' => 'us-west-2',
-            'bucket' => 'my-bucket'
-        ],
-        ...
-    ]
+```php
+'disks' => [
+    // ...
+    's3' => [
+        'driver' => 's3',
+        'key'    => 'XXXXXXXXXXXXXXXXXXXX',
+        'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
+        'region' => 'us-west-2',
+        'bucket' => 'my-bucket'
+    ],
+    // ...
+]
+```
 
 Save **config/filesystem.php** script and open **config/system.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
@@ -122,14 +128,16 @@ To obtain the path of the folder, open AWS console and go to S3 section. Navigat
 
 Example storage configuration:
 
-    'storage' => [
-        ...
-        'media' => [
-            'disk'   => 's3',
-            'folder' => 'media',
-            'path' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name/media'
-        ]
+```php
+'storage' => [
+    // ...
+    'media' => [
+        'disk'   => 's3',
+        'folder' => 'media',
+        'path' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name/media'
     ]
+]
+```
 
 Congratulations! Now you're ready to use Amazon S3 with October CMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
 
@@ -157,18 +165,20 @@ Parameter | Value
 
 Example configuration after update:
 
-    'disks' => [
-        ...
-        'rackspace' => [
-            'driver'    => 'rackspace',
-            'username'  => 'october.api.cdn',
-            'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
-            'container' => 'my-bucket',
-            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-            'region'    => 'ORD'
-        ],
-        ...
-    ]
+```php
+'disks' => [
+    // ...
+    'rackspace' => [
+        'driver'    => 'rackspace',
+        'username'  => 'october.api.cdn',
+        'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
+        'container' => 'my-bucket',
+        'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
+        'region'    => 'ORD'
+    ],
+    // ...
+]
+```
 
 Save **config/filesystem.php** script and open **config/system.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
 
@@ -182,14 +192,16 @@ To obtain the path of the folder, go to the CDN container list in Rackspace cons
 
 Example storage configuration:
 
-    'storage' => [
-        ...
-        'media' => [
-            'disk'   => 'rackspace',
-            'folder' => 'media',
-            'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
-        ]
+```php
+'storage' => [
+    // ...
+    'media' => [
+        'disk'   => 'rackspace',
+        'folder' => 'media',
+        'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
     ]
+]
+```
 
 Congratulations! Now you're ready to use Rackspace CDN with October CMS.
 

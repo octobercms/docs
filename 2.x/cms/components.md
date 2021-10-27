@@ -79,7 +79,9 @@ maxItems = 20
 ...
 ```
 
+::: v-pre
 However there is a way to initialize properties with values loaded from external parameters - URL parameters or [partial](partials) parameters (for components defined in partials). Use the `{{ paramName }}` syntax for values that should be loaded from partial variables:
+:::
 
 ```ini
 [demoTodo]
@@ -103,7 +105,9 @@ maxItems = {{ data.maxItems }}
 ...
 ```
 
-To load a property value from the URL parameter, use the `:paramName` syntax, where the name starts with a colon (`:`), for example:
+::: v-pre
+To load a property value from the URL parameter, use the `{{ :paramName }}` syntax, where the name starts with a colon (`:`), for example:
+:::
 
 ```ini
 [demoTodo]
