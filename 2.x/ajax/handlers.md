@@ -1,13 +1,5 @@
 # Event Handlers
 
-- [AJAX Handlers](#ajax-handlers)
-    - [Calling a Handler](#calling-handlers)
-- [Redirects in AJAX Handlers](#redirects-in-handlers)
-- [Returning Data from AJAX Handlers](#returning-data-from-handlers)
-- [Throwing an AJAX Exception](#throw-ajax-exception)
-- [Running Code Before Handlers](#before-handler)
-
-<a name="ajax-handlers"></a>
 ## AJAX Handlers
 
 AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes#php-section) or inside [components](../cms/components). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials) as part of the AJAX request.
@@ -21,7 +13,6 @@ function onSubmitContactForm()
 
 If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](../cms/components) have the lowest priority.
 
-<a name="calling-handlers"></a>
 ### Calling a Handler
 
 Every AJAX request should specify a handler name, either using the [data attributes API](../ajax/attributes-api) or the [JavaScript API](../ajax/javascript-api). When the request is made, the server will search all the registered handlers and locate the first one it finds.
@@ -54,7 +45,6 @@ Sometimes you may need to make an AJAX request for the sole purpose of updating 
 <button data-request="onAjax">Do nothing</button>
 ```
 
-<a name="redirects-in-handlers"></a>
 ## Redirects in AJAX Handlers
 
 If you need to redirect the browser to another location, return the `Redirect` object from the AJAX handler. The framework will redirect the browser as soon as the response is returned from the server. Example AJAX handler:
@@ -66,7 +56,6 @@ function onRedirectMe()
 }
 ```
 
-<a name="returning-data-from-handlers"></a>
 ## Returning Data from AJAX Handlers
 
 In advanced cases you may want to return structured data from your AJAX handlers. If an AJAX handler returns an array, you can access its elements in the `success` event handler. Example AJAX handler:
@@ -100,7 +89,6 @@ The same with the JavaScript API:
     }); return false;">
 ```
 
-<a name="throw-ajax-exception"></a>
 ## Throwing an AJAX Exception
 
 You may throw an [AJAX exception](../services/error-log#ajax-exception) using the `AjaxException` class to treat the response as an error while retaining the ability to send response contents as normal. Simply pass the response contents as the first argument of the exception.
@@ -114,7 +102,6 @@ throw new AjaxException([
 
 > **Note**: When throwing this exception type [partials will be updated](../ajax/update-partials) as normal.
 
-<a name="before-handler"></a>
 ## Running Code Before Handlers
 
 Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts#dynamic-pages) allows code to run before every AJAX handler.

@@ -1,19 +1,13 @@
 # JavaScript API
 
-- [JavaScript API](#javascript-api)
-- [Usage examples](#javascript-examples)
-- [Global AJAX events](#global-events)
-- [Usage examples](#global-events-examples)
-
-<a name="javascript-api"></a>
-## JavaScript API
-
 The JavaScript API is more powerful than the data attributes API. The `request` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
 
 The `request` method has a single required argument - the AJAX handler name. Example:
 
-    <form onsubmit="$(this).request('onProcess'); return false;">
-        ...
+```html
+<form onsubmit="$(this).request('onProcess'); return false;">
+    ...
+```
 
 The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
 
@@ -43,7 +37,6 @@ Handler | Description
 **handleFlashMessage(message, type)** | called when a flash message is provided using the **flash** option (see above).
 **handleRedirectResponse(url)** | called when the browser should redirect to another location.
 
-<a name="javascript-examples"></a>
 ## Usage examples
 
 Request a confirmation before the onDelete request is sent:
@@ -93,7 +86,6 @@ Run `onCalculate` handler and if successful, run some custom code after the defa
         });
     }})
 
-<a name="global-events"></a>
 ## Global AJAX events
 
 The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
@@ -119,7 +111,6 @@ Event | Description
 **ajaxDone** | triggered finally if the AJAX request was successful.
 **ajaxAlways** | triggered regardless if the AJAX request fails or was successful.
 
-<a name="global-events-examples"></a>
 ## Usage examples
 
 Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.

@@ -1,14 +1,7 @@
 # Updating Partials
 
-- [Pulling Partial Updates](#pulling-updates)
-    - [Update Definition](#update-definition)
-    - [Appending and Prepending Content](#appending-prepending)
-- [Pushing Partial Updates](#pushing-updates)
-- [Passing Variables to Partials](#passing-variables)
-
 When a handler executes it may prepare partials that are updated on the page, either by pushing or pulling, which can be rendered with some supplied variables.
 
-<a name="pulling-updates"></a>
 ## Pulling Partial Updates
 
 The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](../ajax/handlers).
@@ -37,7 +30,6 @@ $.request('onRefreshTime', {
 });
 ```
 
-<a name="update-definition"></a>
 ### Update Definition
 
 The definition of what should be updated is specified as a JSON-like object where:
@@ -69,7 +61,6 @@ The target element will always be on the right side since it can also be a HTML 
 mypartial: document.getElementById('myDiv')
 ```
 
-<a name="appending-prepending"></a>
 ### Appending and Prepending Content
 
 If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
@@ -84,7 +75,6 @@ If the selector string is prepended with the `^` symbol, the content will be pre
 'folder/append': '^#myDiv'
 ```
 
-<a name="pushing-updates"></a>
 ## Pushing Partial Updates
 
 Comparatively, [AJAX handlers](../ajax/handlers) can *push content updates* to the client-side browser from the server-side. To push an update the handler returns an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update.
@@ -102,7 +92,6 @@ function onRefreshTime()
 
 > **Note**: The key name must start with an identifier `#` or class `.` character to trigger a content update.
 
-<a name="passing-variables"></a>
 ## Passing Variables to Partials
 
 Depending on the execution context, an [AJAX event handler](../ajax/handlers) makes variables available to partials differently.
