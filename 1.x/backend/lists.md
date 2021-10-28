@@ -1,34 +1,8 @@
 # Lists
 
-- [Introduction](#introduction)
-- [Configuring the list behavior](#configuring-list)
-    - [Adding a toolbar](#adding-toolbar)
-    - [Filtering the list](#adding-filters)
-- [Defining list columns](#list-columns)
-    - [Column options](#column-options)
-- [Available column types](#column-types)
-- [Displaying the list](#displaying-list)
-- [Multiple list definitions](#multiple-list-definitions)
-- [Using list filters](#list-filters)
-    - [Scope options](#filter-scope-options)
-    - [Filter Dependencies](#filter-scope-options)
-    - [Available scope types](#scope-types)
-- [Extending list behavior](#extend-list-behavior)
-    - [Overriding controller action](#overriding-action)
-    - [Overriding views](#overriding-views)
-    - [Extending column definitions](#extend-list-columns)
-    - [Inject CSS row class](#inject-row-class)
-    - [Extending filter scopes](#extend-filter-scopes)
-    - [Extending the model query](#extend-model-query)
-    - [Extending the records collection](#extend-records-collection)
-    - [Custom column types](#custom-column-types)
-
-<a name="introduction"></a>
-## Introduction
-
 **List behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](#list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](#defining-list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 
@@ -41,10 +15,9 @@ List behavior depends on list [column definitions](#list-columns) and a [model c
 
 > **Note:** Very often the list and [form behavior](form) are used together in a same controller.
 
-<a name="configuring-list"></a>
 ## Configuring the list behavior
 
-The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical list behavior configuration file:
+The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a typical list behavior configuration file:
 
     # ===================================
     #  List Behavior Config
@@ -60,14 +33,14 @@ The following fields are required in the list configuration file:
 Field | Description
 ------------- | -------------
 **title** | a title for this list.
-**list** | a configuration array or reference to a list column definition file, see [list columns](#list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](#defining-list-columns).
 **modelClass** | a model class name, the list data is loaded from this model.
 
 The configuration options listed below are optional.
 
 Option | Description
 ------------- | -------------
-**filter** | filter configuration, see [filtering the list](#adding-filters).
+**filter** | filter configuration, see [filtering the list](#filtering-the-list).
 **recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
 **recordOnClick** | custom JavaScript code to execute when clicking on a record.
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
@@ -84,7 +57,6 @@ Option | Description
 **treeExpanded** | if tree nodes should be expanded by default. Default: false.
 **customViewPath** | specify a custom view path to override partials used by the list, optional.
 
-<a name="adding-toolbar"></a>
 ### Adding a toolbar
 
 To include a toolbar with the list, add the following configuration to the list configuration YAML file:
@@ -118,16 +90,14 @@ The toolbar buttons partial referred above should contain the toolbar control de
             class="btn btn-primary oc-icon-plus">New Post</a>
     </div>
 
-<a name="adding-filters"></a>
 ### Filtering the list
 
 To filter a list by user defined input, add the following list configuration to the YAML file:
 
     filter: config_filter.yaml
 
-The **filter** option should make reference to a [filter configuration file](#list-filters) path or supply an array with the configuration.
+The **filter** option should make reference to a [filter configuration file](#using-list-filters) path or supply an array with the configuration.
 
-<a name="list-columns"></a>
 ## Defining list columns
 
 List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
@@ -150,7 +120,6 @@ The next example shows the typical contents of a list column definitions file.
         name: Name
         email: Email
 
-<a name="column-options"></a>
 ### Column options
 
 For each column can specify these options (where applicable):
@@ -158,7 +127,7 @@ For each column can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
-**type** | defines how this column should be rendered (see [Column types](#column-types) below).
+**type** | defines how this column should be rendered (see [Column types](#available-column-types) below).
 **default** | specifies the default value for the column if value is empty.
 **searchable** | include this column in the list search results. Default: false.
 **invisible** | specifies if this column is hidden by default. Default: false.
@@ -174,7 +143,6 @@ Option | Description
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
-<a name="column-types"></a>
 ## Available column types
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
@@ -204,7 +172,6 @@ There are various column types that can be used for the **type** setting, these 
 - [Colorpicker](#column-colorpicker)
 </div>
 
-<a name="column-text"></a>
 ### Text
 
 `text` - displays a text column, aligned left
@@ -220,7 +187,6 @@ You can also specify a custom text format, for example **Admin:Full Name (active
         type: text
         format: Admin:%s (active)
 
-<a name="column-image"></a>
 ### Image
 
 `image` - displays an image using the built in [image resizing functionality](../services/image-resizing#resize-sources).
@@ -236,7 +202,6 @@ You can also specify a custom text format, for example **Admin:Full Name (active
 
 See the [image resizing docs](../services/image-resizing#resize-sources) for more information on what image sources are supported and what [options](../services/image-resizing#resize-parameters) are supported
 
-<a name="column-number"></a>
 ### Number
 
 `number` - displays a number column, aligned right
@@ -254,7 +219,6 @@ You can also specify a custom number format, for example currency **$ 99.00**
 
 > **Note:** Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
 
-<a name="column-switch"></a>
 ### Switch
 
 `switch` - displays a on or off state for boolean columns.
@@ -263,7 +227,6 @@ You can also specify a custom number format, for example currency **$ 99.00**
         label: Enabled
         type: switch
 
-<a name="column-datetime"></a>
 ### Date & Time
 
 `datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
@@ -288,7 +251,6 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
 
 > **Note:** the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
-<a name="column-date"></a>
 ### Date
 
 `date` - displays the column value as date format **M j, Y**
@@ -297,7 +259,6 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Date
         type: date
 
-<a name="column-time"></a>
 ### Time
 
 `time` - displays the column value as time format **g:i A**
@@ -306,7 +267,6 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Date
         type: time
 
-<a name="column-timesince"></a>
 ### Time since
 
 `timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
@@ -315,7 +275,6 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Date
         type: timesince
 
-<a name="column-timetense"></a>
 ### Time tense
 
 `timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
@@ -324,7 +283,6 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Date
         type: timetense
 
-<a name="column-select"></a>
 ### Select
 
 `select` - allows to create a column using a custom select statement. Any valid SQL SELECT statement works here.
@@ -333,7 +291,6 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Full Name
         select: concat(first_name, ' ', last_name)
 
-<a name="column-relation"></a>
 ### Relation
 
 `relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
@@ -367,7 +324,6 @@ To display a column that shows the number of related records, use the `useRelati
         relation: group
         select: name
 
-<a name="column-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name. Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`.
@@ -377,7 +333,6 @@ To display a column that shows the number of related records, use the `useRelati
         type: partial
         path: ~/plugins/acme/blog/models/comment/_content_column.htm
 
-<a name="column-colorpicker"></a>
 ### Color Picker
 
 `colorpicker` - displays a color from colorpicker column
@@ -386,14 +341,12 @@ To display a column that shows the number of related records, use the `useRelati
         label: Background
         type: colorpicker
 
-<a name="displaying-list"></a>
 ## Displaying the list
 
-Usually lists are displayed in the index [view](controllers-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
+Usually lists are displayed in the index [view](controllers-ajax) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
 
     <?= $this->listRender() ?>
 
-<a name="multiple-list-definitions"></a>
 ## Multiple list definitions
 
 The list behavior can support multiple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
@@ -407,10 +360,9 @@ Each definition can then be displayed by passing the definition name as the firs
 
     <?= $this->listRender('templates') ?>
 
-<a name="list-filters"></a>
 ## Using list filters
 
-Lists can be filtered by [adding a filter definition](#adding-filters) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+Lists can be filtered by [adding a filter definition](#filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
     # ===================================
     # Filter Scope Definitions
@@ -457,7 +409,6 @@ Lists can be filtered by [adding a filter definition](#adding-filters) to the li
             type: daterange
             conditions: created_at >= ':after' AND created_at <= ':before'
 
-<a name="filter-scope-options"></a>
 ### Scope options
 
 For each scope you can specify these options (where applicable):
@@ -465,7 +416,7 @@ For each scope you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the filter scope to the user.
-**type** | defines how this scope should be rendered (see [Scope types](#scope-types) below). Default: group.
+**type** | defines how this scope should be rendered (see [Scope types](#available-scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
@@ -474,10 +425,9 @@ Option | Description
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 **dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
 
-<a name="filter-scope-dependencies"></a>
 ### Filter Dependencies
 
-Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#filter-scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
 
     country:
         label: Country
@@ -512,7 +462,6 @@ In the above example, the `city` scope will refresh when the `country` scope has
 
 > **Note:** Scope dependencies with `type: group` are only supported at this stage.
 
-<a name="scope-types"></a>
 ### Available scope types
 
 These types can be used to determine how the filter scope should be displayed.
@@ -539,7 +488,6 @@ These types can be used to determine how the filter scope should be displayed.
 - [Text](#filter-text)
 </div>
 
-<a name="filter-group"></a>
 ### Group
 
 `group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
@@ -556,7 +504,6 @@ These types can be used to determine how the filter scope should be displayed.
             active: Active
             closed: Closed
 
-<a name="filter-checkbox"></a>
 ### Checkbox
 
 `checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
@@ -567,7 +514,6 @@ These types can be used to determine how the filter scope should be displayed.
         default: 1
         conditions: is_published <> true
 
-<a name="filter-switch"></a>
 ### Switch
 
 `switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
@@ -580,7 +526,6 @@ These types can be used to determine how the filter scope should be displayed.
             - is_approved <> true
             - is_approved = true
 
-<a name="filter-date"></a>
 ### Date
 
 `date` - displays a date picker for a single date to be selected. The values available to be used in the conditions property are:
@@ -597,7 +542,6 @@ These types can be used to determine how the filter scope should be displayed.
         yearRange: 10
         conditions: created_at >= ':filtered'
 
-<a name="filter-daterange"></a>
 ### Date Range
 
 `daterange` - displays a date picker for two dates to be selected as a date range. The values available to be used in the conditions property are:
@@ -652,7 +596,6 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
 
 > **Note:** the `ignoreTimezone` option also applies to the `date` filter type as well.
 
-<a name="filter-number"></a>
 ### Number
 
 `number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
@@ -663,7 +606,6 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         default: 14
         conditions: age >= ':filtered'
 
-<a name="filter-numberrange"></a>
 ### Number Range
 
 `numberrange` - displays inputs for two numbers to be entered as a number range. The values available to be used in the conditions property are:
@@ -681,7 +623,6 @@ You may leave either the minimum value blank to search everything up to the maxi
             1: 20
         conditions: visitors >= ':min' and visitors <= ':max'
 
-<a name="filter-text"></a>
 ### Text
 
 `text` - display text input for a string to be entered. You can specify a `size` attribute that will be injected in the input size attribute (default: 10).
@@ -692,20 +633,10 @@ You may leave either the minimum value blank to search everything up to the maxi
         conditions: username = :value
         size: 2
 
-<a name="extend-list-behavior"></a>
 ## Extending list behavior
 
 Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
 
-- [Overriding controller action](#overriding-action)
-- [Overriding views](#overriding-views)
-- [Extending column definitions](#extend-list-columns)
-- [Inject CSS row class](#inject-row-class)
-- [Extending filter scopes](#extend-filter-scopes)
-- [Extending the model query](#extend-model-query)
-- [Custom column types](#custom-column-types)
-
-<a name="overriding-action"></a>
 ### Overriding controller action
 
 You can use your own logic for the `index` action method in the controller, then optionally call the List behavior `index` parent method.
@@ -720,7 +651,6 @@ You can use your own logic for the `index` action method in the controller, then
         $this->asExtension('ListController')->index();
     }
 
-<a name="overriding-views"></a>
 ### Overriding views
 
 The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
@@ -742,7 +672,7 @@ The `ListController` behavior has a main container view that you may override by
         </div>
     </div>
 
-The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-list). The widget will look in this path for a view first, then fall back to the default location.
+The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-the-list-behavior). The widget will look in this path for a view first, then fall back to the default location.
 
     # Custom view path
     customViewPath: $/acme/blog/controllers/reviews/list
@@ -757,7 +687,6 @@ For example, to modify the list body row markup, create a file called `list/_lis
         <?php endforeach ?>
     </tr>
 
-<a name="extend-list-columns"></a>
 ### Extending column definitions
 
 You can extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
@@ -804,9 +733,8 @@ Method | Description
 **addColumns** | adds new columns to the list
 **removeColumn** | removes a column from the list
 
-Each method takes an array of columns similar to the [list column configuration](#list-columns).
+Each method takes an array of columns similar to the [list column configuration](#defining-list-columns).
 
-<a name="inject-row-class"></a>
 ### Inject CSS row class
 
 You can inject a custom css row class by adding a `listInjectRowClass` method on the controller class. This method can take two arguments, **$record** will represent a single model record and **$definition** contains the name of the List widget definition. You can return any string value containing your row classes. These classes will be added to the row's HTML markup.
@@ -833,7 +761,6 @@ A special CSS class `nolink` is available to force a row to be unclickable, even
             }
         }
 
-<a name="extend-filter-scopes"></a>
 ### Extending filter scopes
 
 You can extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
@@ -849,7 +776,7 @@ You can extend the filter scopes of another controller from outside by calling t
             ]);
         });
 
-> The array of scopes provided is similar to the [list filters configuration](#list-filters).
+> The array of scopes provided is similar to the [list filters configuration](#using-list-filters).
 
 You can also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
@@ -870,7 +797,6 @@ Method | Description
 **addScopes** | adds new scopes to filter widget
 **removeScope** | remove scope from filter widget
 
-<a name="extend-model-query"></a>
 ### Extending the model query
 
 The lookup query for the list [database model](../database/model) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
@@ -894,7 +820,7 @@ When dealing with multiple lists definitions in a same controller, you can use t
         }
     }
 
-The [list filter](#list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
+The [list filter](#using-list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
 
     public function listFilterExtendQuery($query, $scope)
     {
@@ -903,7 +829,6 @@ The [list filter](#list-filters) model query can also be extended by overriding 
         }
     }
 
-<a name="extend-records-collection"></a>
 ### Extending the records collection
 
 The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort` method on the [record collection](../database/collection) to change the sort order of the records.
@@ -915,7 +840,6 @@ The collection of records used by the list can be extended by overriding the `li
         });
     }
 
-<a name="custom-column-types"></a>
 ### Custom column types
 
 Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.

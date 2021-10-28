@@ -33,7 +33,7 @@ Model classes reside in the **models** subdirectory of a plugin directory. An ex
             User.php          <=== Model class
           Plugin.php
 
-The model configuration directory could contain the model's [list column](../backend/lists#list-columns) and [form field](../backend/forms#form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
+The model configuration directory could contain the model's [list column](../backend/lists#defining-list-columns) and [form field](../backend/forms#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
 <a name="defining-models"></a>
 ## Defining Models

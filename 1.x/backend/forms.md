@@ -1,38 +1,8 @@
 # Forms
 
-- [Introduction](#introduction)
-- [Configuring the form behavior](#configuring-form)
-    - [Create page](#form-create-page)
-    - [Update page](#form-update-page)
-    - [Preview page](#form-preview-page)
-- [Defining form fields](#form-fields)
-    - [Tab options](#form-tab-options)
-    - [Field options](#form-field-options)
-- [Available field types](#field-types)
-- [Form widgets](#form-widgets)
-- [Form views](#form-views)
-    - [Create view](#form-create-view)
-    - [Update view](#form-update-view)
-    - [Preview view](#form-preview-view)
-- [Applying conditions to fields](#field-conditions)
-    - [Input preset converter](#field-input-preset)
-    - [Trigger events](#field-trigger-events)
-    - [Field dependencies](#field-dependencies)
-    - [Preventing a field from being submitted](#prevent-field-submission)
-- [Extending form behavior](#extend-form-behavior)
-    - [Overriding controller action](#overriding-action)
-    - [Overriding controller redirect](#overriding-redirect)
-    - [Extending form model query](#extend-model-query)
-    - [Extending form fields](#extend-form-fields)
-    - [Filtering form fields](#filter-form-fields)
-- [Validating form fields](#validate-form-fields)
-
-<a name="introduction"></a>
-## Introduction
-
 **Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+Form behavior depends on form [field definitions](#defining-form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 
@@ -45,10 +15,9 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
 
 > **Note:** Very often the form and [list behavior](lists) are used together in a same controller.
 
-<a name="configuring-form"></a>
 ## Configuring the form behavior
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical form behavior configuration file:
+The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a typical form behavior configuration file:
 
     # ===================================
     #  Form Behavior Config
@@ -72,10 +41,10 @@ The following fields are required in the form configuration file:
 Field | Description
 ------------- | -------------
 **name** | the name of the object being managed by this form.
-**form** | a configuration array or reference to a form field definition file, see [form fields](#form-fields).
+**form** | a configuration array or reference to a form field definition file, see [form fields](#defining-form-fields).
 **modelClass** | a model class name, the form data is loaded and saved against this model.
 
-The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#form-create-page), [Update](#form-update-page) or [Preview](#form-preview-page) pages.
+The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#create-page), [Update](#update-page) or [Preview](#preview-page) pages.
 
 Option | Description
 ------------- | -------------
@@ -84,7 +53,6 @@ Option | Description
 **update** | a configuration array or reference to a config file for the Update page.
 **preview** | a configuration array or reference to a config file for the Preview page.
 
-<a name="form-create-page"></a>
 ### Create page
 
 To support the Create page add the following configuration to the YAML file:
@@ -105,7 +73,6 @@ Option | Description
 **flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the create page only.
 
-<a name="form-update-page"></a>
 ### Update page
 
 To support the Update page add the following configuration to the YAML file:
@@ -127,7 +94,6 @@ Option | Description
 **flashDelete** | flash message to display when record is deleted, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the update page only.
 
-<a name="form-preview-page"></a>
 ### Preview page
 
 To support the Preview page add the following configuration to the YAML file:
@@ -142,7 +108,6 @@ Option  | Description
 **title** | a page title, can refer to a [localization string](../plugin/localization).
 **form** | overrides the default form fields definitions for the preview page only.
 
-<a name="form-fields"></a>
 ## Defining form fields
 
 Form fields are defined with the YAML file. The form fields configuration is used by the form behavior for creating the form controls and binding them to the model fields. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but **fields.yaml** and **form_fields.yaml** are common names. Example form fields file location:
@@ -181,7 +146,7 @@ Fields can be placed in three areas, the **outside area**, **primary tabs** or *
         fields:
             [...]
 
-Fields from related models can be rendered with the [Relation Widget](#widget-relation) or the [Relation Manager](relations#relationship-types). The exception is a OneToOne or morphOne related field, which must be defined as **relation[field]** and then can be specified as any other field of the model:
+Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations#relationship-types). The exception is a OneToOne or morphOne related field, which must be defined as **relation[field]** and then can be specified as any other field of the model:
 
         user_name:
             label: User Name
@@ -196,7 +161,6 @@ Fields from related models can be rendered with the [Relation Widget](#widget-re
 
         [...]
 
-<a name="form-tab-options"></a>
 ### Tab options
 
 For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
@@ -236,7 +200,6 @@ Option | Description
                 label: Groups
                 tab: Groups
 
-<a name="form-field-options"></a>
 ### Field options
 
 For each field you can specify these options (where applicable):
@@ -244,7 +207,7 @@ For each field you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
-**type** | defines how this field should be rendered (see [Available fields types](#field-types) below). Default: text.
+**type** | defines how this field should be rendered (see [Available fields types](#available-field-types) below). Default: text.
 **span** | aligns the form field to one side. Options: auto, left, right, storm, full. Default: full. The parameter `storm` allows you to display the form as a Bootstrap grid, using the `cssClass` property, for example, `cssClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
 **placeholder** | if the field supports a placeholder value.
@@ -261,14 +224,13 @@ Option | Description
 **stretch** | specifies if this field stretches to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
-**trigger** | specify conditions for this field using [trigger events](#field-trigger-events).
-**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#field-input-preset).
+**trigger** | specify conditions for this field using [trigger events](#trigger-events).
+**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#input-preset-converter).
 **required** | places a red asterisk next to the field label to indicate it is required (make sure to setup validation on the model as this is not enforced by the form controller).
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 **permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
-<a name="field-types"></a>
 ## Available field types
 
 There are various native field types that can be used for the **type** setting. For more advanced form fields, a [form widget](#form-widgets) can be used instead.
@@ -302,7 +264,6 @@ There are various native field types that can be used for the **type** setting. 
 - [Widget](#field-widget)
 </div>
 
-<a name="field-text"></a>
 ### Text
 
 `text` - renders a single line text box. This is the default type used if none is specified.
@@ -311,7 +272,6 @@ There are various native field types that can be used for the **type** setting. 
         label: Blog Title
         type: text
 
-<a name="field-number"></a>
 ### Number
 
 `number` - renders a single line text box that takes numbers only.
@@ -334,7 +294,6 @@ If you would like to validate this field server-side on save to ensure that it i
 
 For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
 
-<a name="field-password"></a>
 ### Password
 
 `password ` - renders a single line password field.
@@ -343,7 +302,6 @@ For more information on model validation, please visit [the documentation page](
         label: Password
         type: password
 
-<a name="field-email"></a>
 ### Email
 
 `email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
@@ -363,7 +321,6 @@ If you would like to validate this field on save to ensure that it is a properly
 
 For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
 
-<a name="field-textarea"></a>
 ### Textarea
 
 `textarea` - renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
@@ -373,7 +330,6 @@ For more information on model validation, please visit [the documentation page](
         type: textarea
         size: large
 
-<a name="field-dropdown"></a>
 ### Dropdown
 
 `dropdown` - renders a dropdown with specified options. There are 6 ways to provide the drop-down options.
@@ -492,7 +448,6 @@ By default the dropdown has a searching feature, allowing quick selection of a v
         type: dropdown
         showSearch: false
 
-<a name="field-radio"></a>
 ### Radio List
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
@@ -518,7 +473,6 @@ Radio lists can also support a secondary description.
 
 Radio lists support the same methods for defining the options as the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
-<a name="field-balloon"></a>
 ### Balloon Selector
 
 `balloon-selector` - renders a list, where only one item can be selected at a time.
@@ -533,7 +487,6 @@ Radio lists support the same methods for defining the options as the [dropdown f
 
 Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
 
-<a name="field-checkbox"></a>
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
@@ -543,7 +496,6 @@ Balloon selectors support the same methods for defining the options as the [drop
         type: checkbox
         default: true
 
-<a name="field-checkboxlist"></a>
 ### Checkbox List
 
 `checkboxlist` - renders a list of checkboxes.
@@ -562,7 +514,6 @@ Balloon selectors support the same methods for defining the options as the [drop
 
 Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
-<a name="field-switch"></a>
 ### Switch
 
 `switch` - renders a switchbox.
@@ -574,7 +525,6 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         on: myauthor.myplugin::lang.models.mymodel.show_content.on
         off: myauthor.myplugin::lang.models.mymodel.show_content.off
 
-<a name="field-section"></a>
 ### Section
 
 `section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
@@ -584,7 +534,6 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: section
         comment: This section contains details about the user.
 
-<a name="field-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
@@ -593,7 +542,6 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: partial
         path: $/acme/blog/models/comments/_content_field.htm
 
-<a name="field-hint"></a>
 ### Hint
 
 `hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
@@ -602,7 +550,6 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: hint
         path: content_field
 
-<a name="field-widget"></a>
 ### Widget
 
 `widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
@@ -611,7 +558,6 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: Backend\FormWidgets\RichEditor
         size: huge
 
-<a name="form-widgets"></a>
 ## Form widgets
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
@@ -633,7 +579,6 @@ There are various form widgets included as standard, although it is common for p
 - [Tag list](#widget-taglist)
 </div>
 
-<a name="widget-codeeditor"></a>
 ### Code editor
 
 `codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
@@ -650,7 +595,6 @@ Option | Description
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
 
-<a name="widget-colorpicker"></a>
 ### Color picker
 `colorpicker` - renders controls to select a hexadecimal color value.
 
@@ -686,7 +630,6 @@ Supplying the available colors in the model class:
 
 If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors.
 
-<a name="widget-datatable"></a>
 ### Data table
 
 `datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.
@@ -769,7 +712,6 @@ Validation | Description
 **regex** | Validates the data against a regular expression. A string `pattern` attribute must be provided, defining the regular expression to test the data against.
 **required** | Validates that the data must be entered before saving.
 
-<a name="widget-datepicker"></a>
 ### Date picker
 
 `datepicker` - renders a text field used for selecting date and times.
@@ -789,7 +731,6 @@ Option | Description
 **showWeekNumber** | show week numbers at head of row. Default: false
 **ignoreTimezone** | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
 
-<a name="widget-fileupload"></a>
 ### File upload
 
 `fileupload` - renders a file uploader for images or regular files.
@@ -823,9 +764,8 @@ Option | Description
 **thumbOptions** | options to pass to the thumbnail generating method for the file
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
 
-> **Note:** Unlike the [Media Finder FormWidget](#widget-mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
+> **Note:** Unlike the [Media Finder FormWidget](#mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
-<a name="widget-markdowneditor"></a>
 ### Markdown editor
 
 `markdown` - renders a basic editor for markdown formatted text.
@@ -839,7 +779,6 @@ Option | Description
 ------------- | -------------
 **mode** | the expected view mode, either tab or split. Default: tab.
 
-<a name="widget-mediafinder"></a>
 ### Media finder
 
 `mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
@@ -856,9 +795,8 @@ Option | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 
-> **Note:** Unlike the [File Upload FormWidget](#widget-fileupload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
+> **Note:** Unlike the [File Upload FormWidget](#file-upload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
 
-<a name="widget-nestedform"></a>
 ### Nested Form
 `nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
 
@@ -899,10 +837,9 @@ A nested form supports the same syntax as a form itself, including tabs and seco
 
 Option | Description
 ------------- | -------------
-**form**  | same as in [form definition](#form-fields)
+**form**  | same as in [form definition](#defining-form-fields)
 **usePanelStyles** | defines if a panel like look is applied or not (defaults true)
 
-<a name="widget-recordfinder"></a>
 ### Record finder
 
 `recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.
@@ -931,7 +868,7 @@ Option | Description
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
-**list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](lists#defining-list-columns).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
 **conditions** | specifies a raw where query statement to apply to the list model query.
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
@@ -940,7 +877,6 @@ Option | Description
 **useRelation** | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
 **modelClass** | Class of the model to use for listing records when useRelation = false
 
-<a name="widget-relation"></a>
 ### Relation
 
 `relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
@@ -967,7 +903,6 @@ Option | Description
 **emptyOption** | text to display when there is no available selections.
 **scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
 
-<a name="widget-repeater"></a>
 ### Repeater
 
 `repeater` - renders a repeating set of form fields defined within.
@@ -989,7 +924,7 @@ Option | Description
 
 Option | Description
 ------------- | -------------
-**form** | a reference to form field definition file, see [backend form fields](#form-fields). Inline fields can also be used.
+**form** | a reference to form field definition file, see [backend form fields](#defining-form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
 **titleFrom** | name of field within items to use as the title for the collapsed item.
 **minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
@@ -1041,7 +976,7 @@ Option | Description
 **name** | the name of the group.
 **description** | a brief description of the group.
 **icon** | defines an icon for the group, optional.
-**fields** | form fields belonging to the group, see [backend form fields](#form-fields).
+**fields** | form fields belonging to the group, see [backend form fields](#defining-form-fields).
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute.
 
@@ -1053,7 +988,6 @@ The `style` attribute of the repeater widget controls the behaviour of repeater 
 - **collapsed:** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
 - **accordion:** Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
 
-<a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
 
 `richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
@@ -1073,7 +1007,6 @@ The available toolbar buttons are:
 
 > **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
 
-<a name="widget-sensitive"></a>
 ### Sensitive
 
 `sensitive` - renders a revealable password field that can be used for sensitive information such as API keys or secrets, configuration values, etc. A sensitive field can be toggled visible and hidden at the user's request.
@@ -1091,7 +1024,6 @@ Option | Description
 **hiddenPlaceholder** | sets the placeholder text that is used to simulate a hidden, unrevealed value. You can change this to a long or short string to emulate different length values. Default: `__hidden__`
 **hideOnTabChange** | if true, the sensitive field will automatically be hidden if the user navigates to a different tab, or minimizes their browser. Default: true
 
-<a name="widget-taglist"></a>
 ### Tag list
 
 `taglist` - renders a field for inputting a list of tags.
@@ -1124,14 +1056,12 @@ Option | Description
 **nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name
 **useKey** | use the key instead of value for saving and reading data. Default: false
 
-<a name="form-views"></a>
 ## Form views
 
-For each page your form supports [Create](#form-create-page), [Update](#form-update-page) and [Preview](#form-preview-page) you should provide a [view file](#introduction) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
+For each page your form supports [Create](#create-page), [Update](#update-page) and [Preview](#preview-page) you should provide a [view file](../backend/controllers-ajax) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
 
 The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 
-<a name="form-create-view"></a>
 ### Create view
 
 The **create.htm** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create.htm form.
@@ -1161,7 +1091,6 @@ The **create.htm** view represents the Create page that allows users to create n
 
     <?= Form::close() ?>
 
-<a name="form-update-view"></a>
 ### Update view
 
 The **update.htm** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.htm form.
@@ -1198,7 +1127,6 @@ The **update.htm** view represents the Update page that allows users to update o
 
     <?= Form::close() ?>
 
-<a name="form-preview-view"></a>
 ### Preview view
 
 The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.
@@ -1207,15 +1135,13 @@ The **preview.htm** view represents the Preview page that allows users to previe
         <?= $this->formRenderPreview() ?>
     </div>
 
-<a name="field-conditions"></a>
 ## Applying conditions to fields
 
 Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are a few ways you can do this, either by using the trigger API or field dependencies. The input preset converter is primarily used to converting field values. These options are described in more detail below.
 
-<a name="field-input-preset"></a>
 ### Input preset converter
 
-The input preset converter is defined with the `preset` [form field option](#form-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
+The input preset converter is defined with the `preset` [form field option](#field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
 
 In this example we will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
 
@@ -1252,10 +1178,9 @@ Type | Description
 **camel** | formats the copied value with camelCase
 **file** | formats the copied value as a file name with whitespace replaced with dashes
 
-<a name="field-trigger-events"></a>
 ### Trigger events
 
-Trigger events are defined with the `trigger` [form field option](#form-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
+Trigger events are defined with the `trigger` [form field option](#field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
     is_delayed:
         label: Send later
@@ -1276,13 +1201,12 @@ In the above example the `send_at` form field will only be shown if the `is_dela
 Option | Description
 ------------- | -------------
 **action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
-**field** | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#widget-repeater), only fields in that same [repeater widget](#widget-repeater) will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a [repeater widget](#widget-repeater) or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
+**field** | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#repeater), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
 **condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
 
-<a name="field-dependencies"></a>
 ### Field dependencies
 
-Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#form-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field. Examples below:
+Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field. Examples below:
 
     country:
         label: Country
@@ -1310,7 +1234,7 @@ In the above example the `state` form field will refresh when the `country` fiel
         }
     }
 
-This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering form fields](#filter-form-fields) section. An example is provided below:
+This example is useful for manipulating the model values, but it does not have access to the form field definitions. You can filter the form fields by defining a `filterFields` method inside the model, described in the [Filtering form fields](#filtering-form-fields) section. An example is provided below:
 
     dnsprovider:
         label: DNS Provider
@@ -1351,7 +1275,6 @@ And the logic for the filterFields method would be as follows:
 
 In the above example, both the `provider1` and `provider2` fields will automatically refresh whenever either the `dnsprovider` or `registrar` fields are modified. When this occurs, the full form cycle will be processed, which means that any logic defined in `filterFields` methods would be run again, allowing you to filter which fields get displayed dynamically.
 
-<a name="prevent-field-submission"></a>
 ### Preventing a field from being submitted
 
 Sometimes you may need to prevent a field from being submitted. In order to do that, just add an underscore (\_) before the name of the field in the form configuration file. Form fields beginning with an underscore are purged automatically and no longer saved to the model.
@@ -1364,12 +1287,10 @@ Sometimes you may need to prevent a field from being submitted. In order to do t
         label: Point your address on the map
         type: mapviewer
 
-<a name="extend-form-behavior"></a>
 ## Extending form behavior
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
 
-<a name="overriding-action"></a>
 ### Overriding controller action
 
 You can use your own logic for the `create`, `update` or `preview` action method in the controller, then optionally call the Form behavior parent method.
@@ -1384,7 +1305,6 @@ You can use your own logic for the `create`, `update` or `preview` action method
         return $this->asExtension('FormController')->update($recordId, $context);
     }
 
-<a name="overriding-redirect"></a>
 ### Overriding controller redirect
 
 You can specify the URL to redirect to after the model is saved by overriding the `formGetRedirectUrl` method. This method returns the location to redirect to with relative URLs being treated as backend URLs.
@@ -1394,7 +1314,6 @@ You can specify the URL to redirect to after the model is saved by overriding th
         return 'https://octobercms.com';
     }
 
-<a name="extend-model-query"></a>
 ### Extending model query
 
 The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
@@ -1404,7 +1323,6 @@ The lookup query for the form [database model](../database/model) can be extende
         $query->withTrashed();
     }
 
-<a name="extend-form-fields"></a>
 ### Extending form fields
 
 You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller class. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
@@ -1454,12 +1372,11 @@ Method | Description
 **addSecondaryTabFields** | adds new fields to the secondary tabbed area
 **removeField** | remove a field from any areas
 
-Each method takes an array of fields similar to the [form field configuration](#form-fields).
+Each method takes an array of fields similar to the [form field configuration](#defining-form-fields).
 
-<a name="filter-form-fields"></a>
 ### Filtering form fields
 
-You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#form-fields) and **$context** represents the active form context.
+You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#defining-form-fields) and **$context** represents the active form context.
 
     public function filterFields($fields, $context = null)
     {
@@ -1479,7 +1396,6 @@ You can filter the form field definitions by overriding the `filterFields` metho
 
 The above example will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies).
 
-<a name="validate-form-fields"></a>
 ## Validating form fields
 
 To validate the fields of your form you can make use of the [Validation](../database/traits#validation) trait in your model.

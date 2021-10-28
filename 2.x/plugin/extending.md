@@ -166,7 +166,7 @@ User::extend(function ($model) {
 <a name="extending-backend-form"></a>
 ### Extending Backend Forms
 
-There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms#extend-form-behavior).
+There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms#extending-form-behavior).
 
 This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
 

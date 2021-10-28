@@ -83,7 +83,7 @@ The image width should be at least 600px. The ideal aspect ratio is 1.5, for exa
 <a name="customization"></a>
 ## Theme Customization
 
-Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms#form-fields) for more information.
+Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms#defining-form-fields) for more information.
 
 The following is an example of how to define a website name configuration field called **site_name**:
 

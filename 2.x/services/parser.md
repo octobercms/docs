@@ -102,7 +102,7 @@ The array can be iterated using the following syntax:
 <a name="yaml-parser"></a>
 ## YAML Configuration Parser
 
-YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
+YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms#defining-form-fields) and [list column](../backend/lists#defining-list-columns) definitions. An example of some YAML:
 
 ```yaml
 receipt: Acme Purchase Invoice
@@ -245,7 +245,7 @@ $array = $syntax->toEditor();
 // ]
 ```
 
-You may notice the properties closely resemble the options found in [form field definitions](../backend/forms#form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
+You may notice the properties closely resemble the options found in [form field definitions](../backend/forms#defining-form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
 
 ```php
 $form = [
@@ -258,7 +258,7 @@ File::put('fields.yaml', Yaml::render($form));
 <a name="syntax-supported-tags"></a>
 ### Supported Tags
 
-There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms#field-types).
+There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms#available-field-types).
 
 #### Text
 
@@ -444,4 +444,4 @@ quote:
             type: textarea
 ```
 
-For more information about the repeater group mode see [Repeater Widget](../backend/forms#widget-repeater).
+For more information about the repeater group mode see [Repeater Widget](../backend/forms#repeater).

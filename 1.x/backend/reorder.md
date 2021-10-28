@@ -1,14 +1,5 @@
 # Sorting Records
 
-- [Introduction](#introduction)
-- [Configuring the reorder behavior](#configuring-reorder)
-- [Displaying the reorder page](#reorder-display)
-- [Override Sortable Partials](#override-sortable-partials)
-- [Extending the model query](#extend-model-query)
-
-<a name="introduction"></a>
-## Introduction
-
 **Reorder behavior** is a controller modifier that provides features for sorting and reordering database records. The behavior provides a page called Reorder using the controller action `reorder`. This page displays a list of records with a drag handle allowing them to be sorted and in some cases restructured.
 
 The behavior depends on a [model class](../database/model) which must implement one of the following [model traits](../database/traits):
@@ -33,10 +24,9 @@ In order to use the reorder behavior you should add it to the `$implement` prope
         // [...]
     }
 
-<a name="configuring-reorder"></a>
 ## Configuring the behavior
 
-The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
+The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a configuration file:
 
 	# ===================================
 	#  Reorder Behavior Config
@@ -66,14 +56,12 @@ Option | Description
 **modelClass** | a model class name, the record data is loaded from this model.
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration.
 
-<a name="reorder-display"></a>
 ## Displaying the reorder page
 
-You should provide a [view file](controllers-ajax/#introduction) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
+You should provide a [view file](controllers-ajax) with the name **reorder.htm**. This view represents the Reorder page that allows users to reorder records. Since reordering includes the toolbar, the view file will consist solely of the single `reorderRender` method call.
 
     <?= $this->reorderRender() ?>
 
-<a name="override-sortable-partials"></a>
 ## Override Sortable Partials
 
 If you need to override default view of your reorder page, you have to copy
@@ -87,7 +75,6 @@ in
 2. `plugins/yournamespace/yourplugin/yoursortablecontroller/_reorder_records.htm`
 
 
-<a name="extend-model-query"></a>
 ## Extending the model query
 
 The lookup query for the list [database model](../database/model) can be extended by overriding the `reorderExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
