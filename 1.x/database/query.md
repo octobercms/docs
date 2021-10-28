@@ -1,33 +1,9 @@
 # Queries
 
-- [Introduction](#introduction)
-- [Retrieving results](#retrieving-results)
-    - [Chunking results](#chunking-results)
-    - [Aggregates](#aggregates)
-- [Selects](#selects)
-- [Joins](#joins)
-- [Unions](#unions)
-- [Where clauses](#where-clauses)
-    - [Advanced where clauses](#advanced-where-clauses)
-    - [Conditional clauses](#conditional-clauses)
-- [Ordering, grouping, limit, & offset](#ordering-grouping-limit-and-offset)
-- [Inserts](#inserts)
-- [Updates](#updates)
-- [Deletes](#deletes)
-- [Pessimistic locking](#pessimistic-locking)
-- [Caching queries](#caching-queries)
-    - [Persistent Caching](#persistent-caching)
-    - [In-Memory Caching](#in-memory-caching)
-- [Debugging](#debugging)
-
-<a name="introduction"></a>
-## Introduction
-
 The database query builder provides a convenient, fluent interface to creating and running database queries. It can be used to perform most database operations in your application, and works on all supported database systems.
 
 > **Note:** The query builder uses PDO parameter binding to protect your application against SQL injection attacks. There is no need to clean strings being passed as bindings.
 
-<a name="retrieving-results"></a>
 ## Retrieving results
 
 #### Retrieving all rows from a table
@@ -36,7 +12,7 @@ To begin a fluent query, use the `table` method on the `Db` facade. The `table` 
 
     $users = Db::table('users')->get();
 
-Like [raw queries](../database/basics#running-queries), the `get` method returns an `array` of results where each result is an instance of the PHP `stdClass` object. You may access each column's value by accessing the column as a property of the object:
+Like [raw queries](../database/basics#running-raw-sql-queries), the `get` method returns an `array` of results where each result is an instance of the PHP `stdClass` object. You may access each column's value by accessing the column as a property of the object:
 
     foreach ($users as $user) {
         echo $user->name;
@@ -73,7 +49,6 @@ If you would like to retrieve an array containing the values of a single column,
         echo $title;
     }
 
-<a name="chunking-results"></a>
 ### Chunking results
 
 If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small "chunk" of the results at a time, and feeds each chunk into a `Closure` for processing. This method is very useful for writing [console commands](../console/development) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
@@ -105,7 +80,6 @@ If you are updating database records while chunking results, your chunk results 
 
 > **Note:** When updating or deleting records inside the chunk callback, any changes to the primary key or foreign keys could affect the chunk query. This could potentially result in records not being included in the chunked results.
 
-<a name="aggregates"></a>
 ### Aggregates
 
 The query builder also provides a variety of aggregate methods, such as `count`, `max`, `min`, `avg`, and `sum`. You may call any of these methods after constructing your query:
@@ -128,7 +102,6 @@ Instead of using the `count` method to determine if any records exist that match
 
     return Db::table('orders')->where('finalized', 1)->doesntExist();
 
-<a name="selects"></a>
 ## Selects
 
 #### Specifying a select clause
@@ -212,7 +185,6 @@ The `groupByRaw` method may be used to set a raw string as the value of the grou
                     ->groupByRaw('city, state')
                     ->get();
 
-<a name="joins"></a>
 ## Joins
 
 #### Inner join statement
@@ -278,7 +250,6 @@ You may use the `joinSub`, `leftJoinSub`, and `rightJoinSub` methods to join a q
                     $join->on('users.id', '=', 'latest_posts.user_id');
                 })->get();
 
-<a name="unions"></a>
 ## Unions
 
 The query builder also provides a quick way to "union" two queries together. For example, you may create an initial query, and then use the `union` method to union it with a second query:
@@ -293,7 +264,6 @@ The query builder also provides a quick way to "union" two queries together. For
 
 The `unionAll` method is also available and has the same method signature as `union`.
 
-<a name="where-clauses"></a>
 ## Where clauses
 
 #### Simple where clauses
@@ -374,7 +344,6 @@ The `whereNotNull` method verifies that the column's value is **not** `NULL`:
         ->whereNotNull('updated_at')
         ->get();
 
-<a name="advanced-where-clauses"></a>
 ### Advanced where clauses
 
 #### Parameter grouping
@@ -445,7 +414,6 @@ You may use `whereJsonLength` to query JSON arrays by their length:
                     ->whereJsonLength('options->languages', '>', 1)
                     ->get();
 
-<a name="conditional-clauses"></a>
 ### Conditional clauses
 
 Sometimes you may want clauses to apply to a query only when something else is true. For instance you may only want to apply a `where` statement if a given input value is present on the incoming request. You may accomplish this using the `when` method:
@@ -472,7 +440,6 @@ You may pass another Closure as the third parameter to the `when` method. This C
                     })
                     ->get();
 
-<a name="ordering-grouping-limit-and-offset"></a>
 ## Ordering, grouping, limit, & offset
 
 #### Sort order
@@ -523,7 +490,6 @@ To limit the number of results returned from the query, or to skip a given numbe
 
     $users = Db::table('users')->skip(10)->take(5)->get();
 
-<a name="inserts"></a>
 ## Inserts
 
 The query builder also provides an `insert` method for inserting records into the database table. The `insert` method accepts an array of column names and values to insert:
@@ -549,7 +515,6 @@ If the table has an auto-incrementing id, use the `insertGetId` method to insert
 
 > **Note:** When using the PostgreSQL database driver, the insertGetId method expects the auto-incrementing column to be named `id`. If you would like to retrieve the ID from a different "sequence", you may pass the sequence name as the second parameter to the `insertGetId` method.
 
-<a name="updates"></a>
 ## Updates
 
 In addition to inserting records into the database, the query builder can also update existing records using the `update` method. The `update` method, like the `insert` method, accepts an array of column and value pairs containing the columns to be updated. You may constrain the `update` query using `where` clauses:
@@ -607,7 +572,6 @@ You may also specify additional columns to update during the operation:
 
     Db::table('users')->increment('votes', 1, ['name' => 'John']);
 
-<a name="deletes"></a>
 ## Deletes
 
 The query builder may also be used to delete records from the table via the `delete` method:
@@ -622,7 +586,6 @@ If you wish to truncate the entire table, which will remove all rows and reset t
 
     Db::table('users')->truncate();
 
-<a name="pessimistic-locking"></a>
 ## Pessimistic locking
 
 The query builder also includes a few functions to help you do "pessimistic locking" on your `select` statements. To run the statement with a "shared lock", you may use the `sharedLock` method on a query. A shared lock prevents the selected rows from being modified until your transaction commits:
@@ -633,10 +596,8 @@ Alternatively, you may use the `lockForUpdate` method. A "for update" lock preve
 
     Db::table('users')->where('votes', '>', 100)->lockForUpdate()->get();
 
-<a name="caching-queries"></a>
 ## Caching queries
 
-<a name="persistent-caching"></a>
 ### Persistent caching
 
 You may easily cache the results of a query using the [Cache service](../services/cache). Simply chain the `remember` or `rememberForever` method when preparing the query.
@@ -645,7 +606,6 @@ You may easily cache the results of a query using the [Cache service](../service
 
 In this example, the results of the query will be cached for ten minutes. While the results are cached, the query will not be run against the database, and the results will be loaded from the default cache driver specified for your application.
 
-<a name="in-memory-caching"></a>
 ### In-memory caching
 
 Duplicate queries across the same request can be prevented by using in-memory caching. This feature is enabled by default for [queries prepared by a model](../database/model#retrieving-models) but not those generated directly using the `Db` facade.
@@ -666,7 +626,6 @@ If a query is stored in the cache, it will automatically be cleared when an inse
 
 > **Note**: In-memory caching is disabled entirely when running via the command-line interface (CLI).
 
-<a name="debugging"></a>
 ## Debugging
 
 You may use the `dd` or `dump` methods while building a query to dump the query bindings and SQL. The `dd` method will display the debug information and then stop executing the request. The `dump` method will display the debug information but allow the request to keep executing:

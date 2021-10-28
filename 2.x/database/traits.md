@@ -1,26 +1,9 @@
 # Traits
 
-- [Attribute Manipulation](#attribute-manipulation)
-    - [Nullable](#nullable)
-    - [Hashable](#hashable)
-    - [Purgeable](#purgeable)
-    - [Encryptable](#encryptable)
-    - [Sluggable](#sluggable)
-- [Sorting and Reordering](#sorting-reordering)
-    - [Sortable](#sortable)
-    - [Simple Tree](#simple-tree)
-    - [Nested Tree](#nested-tree)
-- [Utility Functions](#utility-functions)
-    - [Validation](#validation)
-    - [Soft Deleting](#soft-deleting)
-    - [Revisionable](#revisionable)
-
 Model traits are used to implement common functionality.
 
-<a name="attribute-manipulation"></a>
 ## Attribute Manipulation
 
-<a name="nullable"></a>
 ### Nullable
 
 Nullable attributes are set to `NULL` when left empty. To nullify attributes in your model, apply the `October\Rain\Database\Traits\Nullable` trait and declare a `$nullable` property with an array containing the attributes to nullify.
@@ -37,7 +20,6 @@ class Product extends Model
 }
 ```
 
-<a name="hashable"></a>
 ### Hashable
 
 Hashed attributes are hashed immediately when the attribute is first set on the model. To hash attributes in your model, apply the `October\Rain\Database\Traits\Hashable` trait and declare a `$hashable` property with an array containing the attributes to hash.
@@ -54,7 +36,6 @@ class User extends Model
 }
 ```
 
-<a name="purgeable"></a>
 ### Purgeable
 
 Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to purge.
@@ -77,7 +58,6 @@ The defined attributes will be purged when the model is saved, before the [model
 return $user->getOriginalPurgeValue('password_confirmation');
 ```
 
-<a name="encryptable"></a>
 ### Encryptable
 
 Similar to the [hashable trait](#hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
@@ -94,9 +74,8 @@ class User extends Model
 }
 ```
 
-> **Note**: Encrypted attributes are not compatible with [`jsonable`](model#standard-properties) attributes.
+> **Note**: Encrypted attributes are not compatible with [`jsonable`](model#supported-properties) attributes.
 
-<a name="sluggable"></a>
 ### Sluggable
 
 Slugs are meaningful codes that are commonly used in page URLs. To automatically generate a unique slug for your model, apply the `October\Rain\Database\Traits\Sluggable` trait and declare a `$slugs` property.
@@ -141,10 +120,8 @@ $user->slugAttributes();
 $user->save();
 ```
 
-<a name="sorting-reordering"></a>
 ## Sorting and Reordering
 
-<a name="sortable"></a>
 ### Sortable
 
 Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
@@ -172,7 +149,6 @@ $user->setSortableOrder($user->id, 1);
 $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 ```
 
-<a name="simple-tree"></a>
 ### Simple Tree
 
 A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To use the simple tree, apply the `October\Rain\Database\Traits\SimpleTree` trait.
@@ -228,7 +204,6 @@ In order to render all levels of items and their children, you can use recursive
 {{ SELF.renderChildren(category)|raw }}
 ```
 
-<a name="nested-tree"></a>
 ### Nested Tree
 
 The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
@@ -304,10 +279,8 @@ There are several methods for moving nodes around:
 - `makeChildOf($otherNode)`: Make the node a child of ...
 - `makeRoot()`: Make current node a root node.
 
-<a name="utility-functions"></a>
 ## Utility Functions
 
-<a name="validation"></a>
 ### Validation
 
 October models uses the built-in [Validator class](../services/validation). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
@@ -354,14 +327,12 @@ $success = $user->save();
 
 > **Note**: You can also validate a model at any time using the `validate` method.
 
-<a name="retrieving-validation-errors"></a>
 #### Retrieving Validation Errors
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
 > **Note**: The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation#working-with-error-messages) of formatting errors.
 
-<a name="overriding-validation"></a>
 #### Overriding Validation
 
 The `forceSave` method validates the model and saves regardless of whether or not there are validation errors.
@@ -373,7 +344,6 @@ $user = new User;
 $user->forceSave();
 ```
 
-<a name="custom-error-messages"></a>
 #### Custom Error Messages
 
 Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation#custom-error-messages).
@@ -410,7 +380,6 @@ class User extends Model
 
 In the above example you can write custom error messages to specific validation rules (here we used: `required`). Or you can use a `*` to select everything else (here we added a custom message to the `url` validation rule using the `*`).
 
-<a name="custom-attribute-names"></a>
 #### Custom Attribute Names
 
 You may also set custom attribute names with the `$attributeNames` array.
@@ -425,7 +394,6 @@ class User extends Model
 }
 ```
 
-<a name="dynamic-validation-rules"></a>
 #### Dynamic Validation Rules
 
 You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model#events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
@@ -440,12 +408,10 @@ public function beforeValidate()
 }
 ```
 
-<a name="custom-validation-rules"></a>
 #### Custom Validation Rules
 
 You can also create custom validation rules the [same way](../services/validation#custom-validation-rules) you would for the Validator service.
 
-<a name="soft-deleting"></a>
 ### Soft Deleting
 
 When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
@@ -477,7 +443,6 @@ if ($user->trashed()) {
 }
 ```
 
-<a name="querying-soft-deleted-models"></a>
 #### Querying Soft Deleted Models
 
 ##### Including Soft Deleted Models
@@ -532,7 +497,6 @@ $user->forceDelete();
 $user->posts()->forceDelete();
 ```
 
-<a name="soft-deleting-relations"></a>
 ### Soft Deleting Relations
 
 When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
@@ -557,7 +521,6 @@ Under these same conditions, when the primary model is restored, all the related
 $user->restore();
 ```
 
-<a name="revisionable"></a>
 ### Revisionable
 
 October CMS models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.

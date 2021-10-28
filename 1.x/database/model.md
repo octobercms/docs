@@ -1,24 +1,5 @@
 # Models
 
-- [Introduction](#introduction)
-- [Defining models](#defining-models)
-    - [Supported properties](#standard-properties)
-- [Retrieving models](#retrieving-models)
-    - [Retrieving multiple models](#retrieving-multiple-models)
-    - [Retrieving a single model](#retrieving-single-models)
-    - [Retrieving aggregates](#retrieving-aggregates)
-- [Inserting & updating models](#inserting-and-updating-models)
-    - [Basic inserts](#basic-inserts)
-    - [Basic updates](#basic-updates)
-    - [Mass assignment](#mass-assignment)
-- [Deleting models](#deleting-models)
-- [Query scopes](#query-scopes)
-- [Events](#events)
-- [Extending models](#extending-models)
-
-<a name="introduction"></a>
-## Introduction
-
 October provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
 
 Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
@@ -35,7 +16,6 @@ Model classes reside in the **models** subdirectory of a plugin directory. An ex
 
 The model configuration directory could contain the model's [list column](../backend/lists#defining-list-columns) and [form field](../backend/forms#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
-<a name="defining-models"></a>
 ## Defining models
 
 In most cases, you should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this:
@@ -56,7 +36,6 @@ In most cases, you should create one model class for each database table. All mo
 
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
-<a name="standard-properties"></a>
 ### Supported properties
 
 There are some standard properties that can be found on models, in addition to those provided by [model traits](traits). For example:
@@ -88,9 +67,8 @@ Property | Description
 **$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
 **$visible** | values are fields made visible when [serializing the model data](../database/serialization).
 **$hidden** | values are fields made hidden when [serializing the model data](../database/serialization).
-**$connection** | string that contains the [connection name](../database/basics#accessing-connections) that's utilised by the model by default.
+**$connection** | string that contains the [connection name](../database/basics#multiple-database-connections) that's utilised by the model by default.
 
-<a name="property-primary-key"></a>
 #### Primary key
 
 Models will assume that each table has a primary key column named `id`. You may define a `$primaryKey` property to override this convention.
@@ -105,7 +83,6 @@ Models will assume that each table has a primary key column named `id`. You may 
         protected $primaryKey = 'id';
     }
 
-<a name="property-incrementing"></a>
 #### Incrementing
 
 Models will assume that the primary key is an incrementing integer value, which means that by default the primary key will be cast to an integer automatically. If you wish to use a non-incrementing or a non-numeric primary key you must set the public `$incrementing` property to false.
@@ -120,7 +97,6 @@ Models will assume that the primary key is an incrementing integer value, which 
         public $incrementing = false;
     }
 
-<a name="property-timestamps"></a>
 #### Timestamps
 
 By default, a model will expect `created_at` and `updated_at` columns to exist on your tables. If you do not wish to have these columns managed automatically, set the `$timestamps` property on your model to `false`:
@@ -147,7 +123,6 @@ If you need to customize the format of your timestamps, set the `$dateFormat` pr
         protected $dateFormat = 'U';
     }
 
-<a name="property-jsonable"></a>
 #### Values stored as JSON
 
 When attributes names are passed to the `$jsonable` property, the values will be serialized and deserialized from the database as JSON:
@@ -160,21 +135,18 @@ When attributes names are passed to the `$jsonable` property, the values will be
         protected $jsonable = ['data'];
     }
 
-<a name="retrieving-models"></a>
 ## Retrieving models
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-single-models) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-a-single-model) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
 
 > **Note**: All model queries have [in-memory caching enabled](../database/query#in-memory-caching) by default. While the cache should automatically invalidate itself most of the time, sometimes you will need to use the `$model->reload()` method to flush the cache for more complex use cases.
 
-<a name="retrieving-multiple-models"></a>
 ### Retrieving multiple models
 
 Once you have created a model and [its associated database table](../database/structure#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query) allowing you to query the database table associated with the model. For example:
 
     $flights = Flight::all();
 
-<a name="accessing-column-values"></a>
 #### Accessing column values
 
 If you have a model instance, you may access the column values of the model by accessing the corresponding property. For example, let's loop through each `Flight` instance returned by our query and echo the value of the `name` column:
@@ -183,7 +155,6 @@ If you have a model instance, you may access the column values of the model by a
         echo $flight->name;
     }
 
-<a name="adding-constraints"></a>
 #### Adding additional constraints
 
 The `all` method will return all of the results in the model's table. Since each model serves as a [query builder](../database/query), you may also add constraints to queries, and then use the `get` method to retrieve the results:
@@ -195,7 +166,6 @@ The `all` method will return all of the results in the model's table. Since each
 
 > **Note:** Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query). You may use any of these methods in your model queries.
 
-<a name="returning-collections"></a>
 #### Collections
 
 For methods like `all` and `get` which retrieve multiple results, an instance of a `Collection` will be returned. This class provides [a variety of helpful methods](../database/collection) for working with your results. Of course, you can simply loop over this collection like an array:
@@ -204,7 +174,6 @@ For methods like `all` and `get` which retrieve multiple results, an instance of
         echo $flight->name;
     }
 
-<a name="chunking-results"></a>
 #### Chunking results
 
 If you need to process thousands of records, use the `chunk` command. The `chunk` method will retrieve a "chunk" of models, feeding them to a given `Closure` for processing. Using the `chunk` method will conserve memory when working with large result sets:
@@ -217,7 +186,6 @@ If you need to process thousands of records, use the `chunk` command. The `chunk
 
 The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is retrieved from the database.
 
-<a name="retrieving-single-models"></a>
 ### Retrieving a single model
 
 In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance:
@@ -228,7 +196,6 @@ In addition to retrieving all of the records for a given table, you may also ret
     // Retrieve the first model matching the query constraints
     $flight = Flight::where('active', 1)->first();
 
-<a name="model-not-found-exception"></a>
 #### Not found exceptions
 
 Sometimes you may wish to throw an exception if a model is not found. This is particularly useful in routes or controllers. The `findOrFail` and `firstOrFail` methods will retrieve the first result of the query. However, if no result is found, a `Illuminate\Database\Eloquent\ModelNotFoundException` will be thrown:
@@ -243,7 +210,6 @@ When [developing an API](../services/router), if the exception is not caught, a 
         return Flight::findOrFail($id);
     });
 
-<a name="retrieving-aggregates"></a>
 ### Retrieving aggregates
 
 You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query#aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
@@ -252,12 +218,10 @@ You may also use `count`, `sum`, `max`, and other [aggregate functions](../datab
 
     $max = Flight::where('active', 1)->max('price');
 
-<a name="inserting-and-updating-models"></a>
 ## Inserting & updating models
 
 Inserting and updating data are the cornerstone feature of models, it makes the process effortless when compared to traditional SQL statements.
 
-<a name="basic-inserts"></a>
 ### Basic inserts
 
 To create a new record in the database, simply create a new model instance, set attributes on the model, then call the `save` method:
@@ -268,7 +232,6 @@ To create a new record in the database, simply create a new model instance, set 
 
 In this example, we simply create a new instance of the `Flight` model and assign the `name` attribute. When we call the `save` method, a record will be inserted into the database. The `created_at` and `updated_at` timestamps will automatically be set too, so there is no need to set them manually.
 
-<a name="basic-updates"></a>
 ### Basic updates
 
 The `save` method may also be used to update models that already exist in the database. To update a model, you should retrieve it, set any attributes you wish to update, and then call the `save` method. Again, the `updated_at` timestamp will automatically be updated, so there is no need to manually set its value:
@@ -296,7 +259,6 @@ If you would like to perform multiple "upserts" in a single query, then you shou
 
 > **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
 
-<a name="mass-assignment"></a>
 ### Mass assignment
 
 You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create` or `fill` method.
@@ -353,7 +315,6 @@ The `firstOrNew` method, like `firstOrCreate` will attempt to locate a record in
     // Retrieve the flight by the attributes, or instantiate a new instance
     $flight = Flight::firstOrNew(['name' => 'Flight 10']);
 
-<a name="deleting-models"></a>
 ## Deleting models
 
 To delete a model, call the `delete` method on a model instance:
@@ -380,7 +341,6 @@ You may also run a delete query on a set of models. In this example, we will del
 
 > **Note**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
 
-<a name="query-scopes"></a>
 ## Query scopes
 
 Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
@@ -429,7 +389,6 @@ Now you may pass the parameters when calling the scope:
 
     $users = User::applyType('admin')->get();
 
-<a name="events"></a>
 ## Events
 
 Models fire several events, allowing you to hook into various points in the model's lifecycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
@@ -463,7 +422,6 @@ An example of using an event:
 
 > **Note:** Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
 
-<a name="basic-usage"></a>
 ### Basic usage
 
 Whenever a new model is saved for the first time, the `beforeCreate` and `afterCreate` events will fire. If a model already existed in the database and the `save` method is called, the `beforeUpdate` / `afterUpdate` events will fire. However, in both cases, the `beforeSave` / `afterSave` events will fire.
@@ -503,7 +461,6 @@ You can externally bind to [local events](../services/events) for a single insta
         $model->slug = Str::slug($model->name);
     })
 
-<a name="extending-models"></a>
 ## Extending models
 
 Since models are [equipped to use behaviors](../services/behaviors), they can be extended with the static `extend` method. The method takes a closure and passes the model object into it.

@@ -1,18 +1,9 @@
 # Mutators
 
-- [Introduction](#introduction)
-- [Accessors & mutators](#accessors-and-mutators)
-- [Date mutators](#date-mutators)
-- [Attribute casting](#attribute-casting)
-
-<a name="introduction"></a>
-## Introduction
-
 Accessors and mutators allow you to format attributes when retrieving them from a model or setting their value. For example, you may want to use the [encryption service](../services/encryption) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on the model.
 
 In addition to custom accessors and mutators, you can also automatically cast date fields to [Carbon](https://github.com/briannesbitt/Carbon) instances or even [cast text values to JSON](#attribute-casting).
 
-<a name="accessors-and-mutators"></a>
 ## Accessors & mutators
 
 #### Defining an accessor
@@ -73,7 +64,6 @@ The mutator will receive the value that is being set on the attribute, allowing 
 
 Here the `setFirstNameAttribute` function will be called with the value `Sally`. The mutator will then apply the `strtolower` function to the name and set its value in the internal `$attributes` array.
 
-<a name="date-mutators"></a>
 ## Date mutators
 
 By default, Models in October will convert the `created_at` and `updated_at` columns to instances of a [Carbon](https://github.com/briannesbitt/Carbon) object, which provides an assortment of helpful methods and extends the native PHP `DateTime` class.
@@ -116,7 +106,6 @@ By default, timestamps are formatted as `'Y-m-d H:i:s'`. If you need to customiz
         protected $dateFormat = 'U';
     }
 
-<a name="attribute-casting"></a>
 ## Attribute casting
 
 The `$casts` property on your model provides a convenient method of converting attributes to common data types. The `$casts` property should be an array where the key is the name of the attribute being cast, while the value is the type you wish to cast to the column to. The supported cast types are: `integer`, `real`, `float`, `double`, `string`, `boolean`, `object` and `array`.

@@ -796,7 +796,7 @@ data:
     searching: false
 ```
 
-> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model#standard-properties) or anything that can handle storing as an array.
+> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model#supported-properties) or anything that can handle storing as an array.
 
 #### Table configuration
 
@@ -973,7 +973,7 @@ profile:
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model#standard-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
+A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model#supported-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
 
 Option | Description
 ------------- | -------------

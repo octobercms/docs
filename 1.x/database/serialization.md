@@ -1,16 +1,7 @@
 # Serialization
 
-- [Introduction](#introduction)
-- [Basic usage](#basic-usage)
-- [Hiding attributes from JSON](#hiding-attributes-from-json)
-- [Appending values to JSON](#appending-values-to-json)
-
-<a name="introduction"></a>
-## Introduction
-
 When building JSON APIs, you will often need to convert your models and relationships to arrays or JSON. Models includes convenient methods for making these conversions, as well as controlling which attributes are included in your serializations.
 
-<a name="basic-usage"></a>
 ## Basic usage
 
 #### Converting a model to an array
@@ -47,7 +38,6 @@ Since models and collections are converted to JSON when cast to a string, you ca
         return User::all();
     });
 
-<a name="hiding-attributes-from-json"></a>
 ## Hiding attributes from JSON
 
 Sometimes you may wish to limit the attributes, such as passwords, that are included in your model's array or JSON representation. To do so, add a `$hidden` property definition to your model:
@@ -78,7 +68,6 @@ Alternatively, you may use the `$visible` property to define a white-list of att
         protected $visible = ['first_name', 'last_name'];
     }
 
-<a name="appending-values-to-json"></a>
 ## Appending values to JSON
 
 Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, first define an [accessor](../database/mutators) for the value:

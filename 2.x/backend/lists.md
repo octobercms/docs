@@ -178,7 +178,7 @@ status_code:
     displayFrom: status_label
 ```
 
-This is mostly applicable when a [model accessor](../database/mutators#accessors-and-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
+This is mostly applicable when a [model accessor](../database/mutators#accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
 
 ```php
 public function getStatusLabelAttribute()
