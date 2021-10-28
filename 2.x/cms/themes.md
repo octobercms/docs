@@ -1,19 +1,5 @@
 # Themes
 
-- [Introduction](#introduction)
-- [Directory Structure](#directory-structure)
-    - [Subdirectories](#subdirectories)
-- [Template Structure](#template-structure)
-    - [Configuration Section](#configuration-section)
-    - [PHP Code Section](#php-section)
-    - [Twig Markup Section](#twig-section)
-- [Database Driven Themes](#database-driven-themes)
-- [Child Themes](#child-themes)
-- [Theme Logging](#theme-logging)
-
-<a name="introduction"></a>
-## Introduction
-
 Themes define the appearance of your website or web application built with October CMS. They are completely file-backed and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
 
 Themes are directories that reside in the **themes** directory by default. Themes can contain the following objects:
@@ -26,14 +12,13 @@ Object | Description
 [Content files](content) | text, HTML, or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
 **Asset files** | are resource files like images, CSS, and JavaScript files.
 
-<a name="directory-structure"></a>
 ## Directory Structure
 
 Below, you can see an example theme directory structure. Each theme represents a separate directory, and generally, one theme is active to display the website. This example demonstrates the **website** theme directory.
 
 ```
 themes/
-    website/           <=== Theme starts here
+    website/         <=== Theme starts here
     pages/           <=== Page files
         home.htm
     layouts/         <=== Layout files
@@ -51,7 +36,6 @@ themes/
 
 > The active theme is set with the `active_theme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 
-<a name="subdirectories"></a>
 ### Subdirectories
 
 October CMS supports a single level of subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
@@ -83,7 +67,6 @@ To refer to a template in a subdirectory, specify the subdirectory's name before
 
 > **Note**: The template paths are always absolute. If, in a partial, you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
 
-<a name="template-structure"></a>
 ## Template Structure
 
 Pages, partials and layout templates can include up to 3 sections: **configuration**, **PHP code**, and **Twig markup**. Sections are separated with the `==` sequence.
@@ -104,7 +87,6 @@ function onStart()
 {% endfor %}
 ```
 
-<a name="configuration-section"></a>
 ### Configuration Section
 
 The configuration section sets the template parameters. Supported configuration parameters are specific for different CMS templates and described in their corresponding documentation articles. The configuration section uses the simple [INI format](http://en.wikipedia.org/wiki/INI_file), where string parameter values are enclosed within quotes. Example configuration section for a page template:
@@ -117,7 +99,6 @@ layout = "default"
 parameter = "value"
 ```
 
-<a name="php-section"></a>
 ### PHP Code Section
 
 The code in the PHP section executes every time before the template is rendered. The PHP section is optional for all CMS templates and its contents depend on the template type where it is defined. The PHP code section can contain optional open and close PHP tags to enable syntax highlighting in text editors. The open and close tags should always be specified on a different line to the section separator `==`.
@@ -170,14 +151,12 @@ echo $this['foo'];
 echo $this->foo;
 ```
 
-<a name="twig-section"></a>
 ### Twig Markup Section
 
 The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
 
 More information can be found [in the Markup guide](../markup).
 
-<a name="database-driven-themes"></a>
 ## Database Driven Themes
 
 In some cases you may not have access to write to the filesystem to make changes to the theme. Database driven themes allows you to store all changes to CMS templates in the database.
@@ -190,7 +169,6 @@ Alternatively you can enable this feature globally for all themes with the confi
 
 > **Note**: Assets files like images and stylesheets do not save in the database and cannot be modified without access to the filesystem.
 
-<a name="child-themes"></a>
 ## Child Themes
 
 Child themes allow for the possibility of theme inheritence. A good use of this is when you have a third party theme or a theme that is in read-only mode. A child theme will reference a parent and use it as a fallback source.
@@ -199,7 +177,6 @@ If a page named `home.htm` exists in the parent theme but not the child, it trea
 
 To enable this feature for a theme, navigate to **Settings > Frontend Theme**, select **Edit Properties** and select a parent from the **Parent Theme** dropdown list.
 
-<a name="child-themes-lock"></a>
 ### Theme Lock File
 
 When installing a theme from a third party, it is important to note that when the theme is updated, all the files can be overwritten. This could result in any customizations made to the theme being lost. As a safety mechanism, a file called `.themelock` is included to protect a theme from any changes that may be lost during a system update.
@@ -210,7 +187,6 @@ When the file `.themelock` is present in the theme directory:
 - The theme does not appear in the backend UI
 - The theme cannot be selected as active
 
-<a name="theme-logging"></a>
 ## Theme Logging
 
 Since layouts and pages store most of the data in flat files, you or your clients can lose content accidentally. For example, switching the layout of a page will modify the scaffold of the page and, as such, will result in data loss.

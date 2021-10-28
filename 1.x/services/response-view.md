@@ -17,7 +17,7 @@
 <a name="basic-responses"></a>
 ## Basic responses
 
-A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts#layout-life-cycle) and [AJAX handler definitions](../ajax/handlers).
+A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts#layout-execution-life-cycle) and [AJAX handler definitions](../ajax/handlers).
 
 #### Returning strings from a CMS method
 

@@ -1,20 +1,5 @@
 # Pages
 
-- [Introduction](#introduction)
-- [Page Configuration](#configuration)
-    - [URL Syntax](#url-syntax)
-- [Dynamic Pages](#dynamic-pages)
-    - [Page Execution Life Cycle](#page-life-cycle)
-    - [Sending a Custom Response](#life-cycle-response)
-    - [Handling Forms](#handling-forms)
-- [404 Page](#404-page)
-- [Error Page](#error-page)
-- [Page Variables](#page-variables)
-- [Injecting Page Assets Programmatically](#injecting-assets)
-
-<a name="introduction"></a>
-## Introduction
-
 Every website serves up at least one page and in October CMS, a page is represented with page template. Page template files reside in the **pages** directory in your theme. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension.
 
 The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages, but the [PHP section](themes#php-section) is optional. Below, you can see the simplest home page example:
@@ -25,7 +10,6 @@ url = "/"
 <h1>Hello, world!</h1>
 ```
 
-<a name="configuration"></a>
 ## Page Configuration
 
 Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](components), which are explained in another article. The following configuration parameters are supported for pages:
@@ -38,7 +22,6 @@ Parameter | Description
 **description** | the page description for the back-end interface, optional.
 **hidden** | hidden pages are accessible only by logged-in back-end users, optional.
 
-<a name="url-syntax"></a>
 ### URL Syntax
 
 The page URL is defined with the **url** configuration parameter. URLs should start with the forward slash character, and can contain parameters. URLs without parameters are fixed and strict. In the following example, the page URL is `/blog`.
@@ -114,12 +97,10 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 
 > **Note**: Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
 
-<a name="dynamic-pages"></a>
 ## Dynamic Pages
 
 Inside the [Twig section](themes#twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes#php-section), or by [Components](components). In this article, we describe how to prepare variables in the PHP section.
 
-<a name="page-life-cycle"></a>
 ### Page Execution Life Cycle
 
 There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
@@ -158,7 +139,6 @@ function onStart()
 
 The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts#dynamic-layouts) article.
 
-<a name="life-cycle-response"></a>
 ### Sending a Custom Response
 
 All methods defined in the execution life cycle have the ability to halt the process and return a response - simply return a response from the life cycle function. The example below will not load any page contents, and instead return the string *Hello world!* to the browser:
@@ -179,7 +159,6 @@ public function onStart()
 }
 ```
 
-<a name="handling-forms"></a>
 ### Handling Forms
 
 You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](markup#standard-form) function to define a form that refers to an event handler. Example:
@@ -211,17 +190,14 @@ If you want to refer to a handler defined in a specific [component](components),
 {{ form_open({ request: 'myComponent::onHandleForm' }) }}
 ```
 
-<a name="404-page"></a>
 ## 404 Page
 
 If the theme contains a page with the URL `/404`, it is displayed when the system can't find a requested page.
 
-<a name="error-page"></a>
 ## Error Page
 
 By default, any errors will be shown with a detailed error page containing the file contents, line number, and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script, and creating a page with the URL `/error`.
 
-<a name="page-variables"></a>
 ## Page Variables
 
 The properties of a page can be accessed in the [PHP code section](../cms/themes#php-section), or [Components](../cms/components) by referencing `$this->page`.
@@ -241,7 +217,6 @@ They can also be accessed in the markup using the [`this.page` variable](../mark
 
 More information can be found at [`this.page` in the Markup guide](../markup/this-page).
 
-<a name="injecting-assets"></a>
 ## Injecting Page Assets Programmatically
 
 If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layout) template. Example:

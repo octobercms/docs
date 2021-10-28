@@ -25,7 +25,7 @@ Every AJAX request should specify a handler name, either using the [data attribu
 <script> $.request('onSubmitContactForm') </script>
 ```
 
-If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components#aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
+If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components#components-aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
 
 ```html
 <button data-request="mycomponent::onSubmitContactForm">Go</button>

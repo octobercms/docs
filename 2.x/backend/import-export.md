@@ -21,7 +21,7 @@ class Products extends Controller
 
 ## Configuring the Behavior
 
-The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a configuration file:
+The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a configuration file:
 
 ```yaml
 # ===================================
@@ -116,7 +116,7 @@ Option | Description
 
 ## Import and Export Views
 
-For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax/#introduction) with the corresponding name - **import.htm** and **export.htm**.
+For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax) with the corresponding name - **import.htm** and **export.htm**.
 
 The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 

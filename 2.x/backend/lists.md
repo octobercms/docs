@@ -21,7 +21,7 @@ class Categories extends \Backend\Classes\Controller
 
 ## Configuring the List Behavior
 
-The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical list behavior configuration file:
+The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a typical list behavior configuration file:
 
 ```yaml
 # ===================================
@@ -459,7 +459,7 @@ color:
 
 ## Displaying the List
 
-Usually lists are displayed in the index [view](controllers-ajax/#introduction) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
+Usually lists are displayed in the index [view](controllers-ajax) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
 
 ```php
 <?= $this->listRender() ?>

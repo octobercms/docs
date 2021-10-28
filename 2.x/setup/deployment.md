@@ -41,7 +41,7 @@ When deploying your application to a remote server, you may be prompted to provi
 
 To avoid manually typing in these credentials, you should make sure that the [Composer auth.json file](https://getcomposer.org/doc/articles/http-basic-authentication.md) is deployed with your application.
 
-Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands#project-set-command).
+Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands#set-project).
 
     php artisan project:set <license key>
 

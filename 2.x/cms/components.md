@@ -1,23 +1,11 @@
 # Components
 
-- [Introduction](#introduction)
-- [Component Aliases](#aliases)
-- [Using External Property Values](#external-property-values)
-- [Passing Variables to Components](#component-variables)
-- [Customizing Default Markup](#customizing-default-markup)
-    - [Moving Default Markup to a Partial](#moving-default-markup)
-    - [Overriding Component Partials](#overriding-partials)
-- [The "View Bag" Component](#viewbag-component)
-- [AJAX Handlers and Partials](#ajax-handlers-partials)
-<!-- - [Soft Components](#soft-components) -->
-
 Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers) or [developing components](../plugin/components) as part of plugins.
 
 > **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials#dynamic-partials) article.
 
-<a name="introduction"></a>
 ## Introduction
 
 If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
@@ -42,7 +30,6 @@ When you refer a component, it automatically creates a page variable that matche
 
 > **Note**: If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
 
-<a name="aliases"></a>
 ## Components Aliases
 
 If there are two plugins that register components with the same name, you can attach a component by using its fully qualified class name and assigning it an *alias*:
@@ -67,7 +54,6 @@ maxItems = 10
 maxItems = 20
 ```
 
-<a name="external-property-values"></a>
 ## Using External Property Values
 
 By default property values are initialized in the Configuration section where the component is defined, and the property values are static, like this:
@@ -124,10 +110,9 @@ url = "/todo/:maxItems"
 
 In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
-<a name="component-variables"></a>
 ## Passing Variables to Components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials#partial-variables), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components#component-properties), including [external property values](#external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials#passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components#component-properties), including [external property values](#using-external-property-values).
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 
@@ -137,12 +122,10 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
 > **Note**: Not all components support passing variables when rendering.
 
-<a name="customizing-default-markup"></a>
 ## Customizing Default Markup
 
-The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. [Moving the default markup to a theme partial](#moving-default-markup) is suitable to completely overhaul a component. [Overriding the component partials](#overriding-partials) is useful for cherry picking areas to customize.
+The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. [Moving the default markup to a theme partial](#moving-default-markup-to-a-partial) is suitable to completely overhaul a component. [Overriding the component partials](#overriding-component-partials) is useful for cherry picking areas to customize.
 
-<a name="moving-default-markup"></a>
 ### Moving Default Markup to a Partial
 
 Each component can have an entry point partial called **default.htm** that is rendered when the `{% component %}` tag is called, in the following example we will assume the component is called **blogPost**.
@@ -177,7 +160,6 @@ This is the only change needed to allow the default component markup to work any
 
 This process can be repeated for all other partials found in the component partial directory.
 
-<a name="overriding-partials"></a>
 ### Overriding Component Partials
 
 All component partials can be overridden using the theme partials. If a component called **channel** uses the **title.htm** partial.
@@ -210,7 +192,6 @@ The partial subdirectory name can be customized to anything by simply assigning 
 
 Now we can override the **title.htm** partial by creating a file in our theme called **partials/foobar/title.htm**.
 
-<a name="viewbag-component"></a>
 ## The "View Bag" Component
 
 There is a special component included in October called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page:
@@ -243,7 +224,6 @@ description = "Default layout"
 
 > **Note**: The viewBag component is hidden on the back-end and is only available for file-based editing. It can also be used by other plugins to store data.
 
-<a name="ajax-handlers-partials"></a>
 ### AJAX Handlers and Partials
 
 Components may introduce [AJAX handlers](../ajax/introduction) and [partials](../cms/partials) to the a theme's lifecycle, using a prefix of the component name and two `::` symbols. For example, all the AJAX handlers defined by components are available globally.
@@ -267,7 +247,6 @@ Partials rendered from outside the component must use their fully qualified name
 Read more on [component development](../plugin/components#component-partials) to learn about component partials.
 
 <!--
-<a name="soft-components"></a>
 ## Soft Components
 
 Soft components are components in a theme that will continue to operate even if the linked component is no longer available. This allows theme and site developers to specify optional plugin components in their themes that will provide specific functionality if the plugin and/or component is present, while allowing the site to continue to function should the component no longer exist.

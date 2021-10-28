@@ -1,20 +1,7 @@
 # Development
 
-- [Introduction](#introduction)
-- [Building a command](#building-a-command)
-    - [Defining arguments](#defining-arguments)
-    - [Defining options](#defining-options)
-    - [Writing output](#writing-output)
-    - [Retrieving input](#retrieving-input)
-- [Registering commands](#registering-commands)
-- [Calling other commands](#calling-other-commands)
+In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding#create-a-console-command).
 
-<a name="introduction"></a>
-## Introduction
-
-In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding#scaffold-create-command).
-
-<a name="building-a-command"></a>
 ## Building a command
 
 If you wanted to create a console command called `acme:mycommand`, you might create the associated class for that command in a file called **plugins/acme/blog/console/MyCommand.php** and paste the following contents to get started:
@@ -70,7 +57,6 @@ Once your class is created you should fill out the `name` and `description` prop
 
 The `handle` method will be called when your command is executed. You may place any command logic in this method.
 
-<a name="defining-arguments"></a>
 ### Defining arguments
 
 Arguments are defined by returning an array value from the `getArguments` method are where you may define any arguments your command receives. For example:
@@ -92,7 +78,6 @@ When defining `arguments`, the array definition values represent the following:
 
 The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`.
 
-<a name="defining-options"></a>
 ### Defining options
 
 Options are defined by returning an array value from the `getOptions` method. Like arguments this method should return an array of commands, which are described by a list of array options. For example:
@@ -122,7 +107,6 @@ The `VALUE_NONE` option indicates that the option is simply used as a "switch":
 
     php artisan foo --option
 
-<a name="retrieving-input"></a>
 ### Retrieving input
 
 While your command is executing, you will obviously need to access the values for the arguments and options accepted by your application. To do so, you may use the `argument` and `option` methods:
@@ -143,7 +127,6 @@ While your command is executing, you will obviously need to access the values fo
 
     $options = $this->option();
 
-<a name="writing-output"></a>
 ### Writing output
 
 To send output to the console, you may use the `info`, `comment`, `question` and `error` methods. Each of these methods will use the appropriate ANSI colors for their purpose.
@@ -195,7 +178,6 @@ For long running tasks, it could be helpful to show a progress indicator. Using 
 
 For more advanced options, check out the [Symfony Progress Bar component documentation](https://symfony.com/doc/2.7/components/console/helpers/progressbar.html).
 
-<a name="registering-commands"></a>
 ## Registering commands
 
 #### Registering a console command
@@ -238,7 +220,6 @@ If you need to register commands from within a [service provider](application#se
         $this->commands('acme.mycommand');
     }
 
-<a name="calling-other-commands"></a>
 ## Calling other commands
 
 Sometimes you may wish to call other commands from your command. You may do so using the `call` method:

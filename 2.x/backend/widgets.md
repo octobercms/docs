@@ -236,7 +236,7 @@ In some cases you intentionally don't want any value to be given, for example, a
 
 Report widgets can be used on the back-end dashboard and in other back-end report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration#widget-registration).
 
-> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding#scaffold-create-reportwidget) for more information.
+> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding#create-a-report-widget) for more information.
 
 ### Report widget classes
 

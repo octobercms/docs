@@ -21,7 +21,7 @@ class Categories extends \Backend\Classes\Controller
 
 ## Configuring the Form Behavior
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax/#introduction). Below is an example of a typical form behavior configuration file.
+The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a typical form behavior configuration file.
 
 ```yaml
 # ===================================

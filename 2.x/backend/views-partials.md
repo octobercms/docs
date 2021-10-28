@@ -2,7 +2,7 @@
 
 ## Partials
 
-Back-end partials are files with the extension **htm** that reside in the [controller's views](#introduction) directory. The partial file names should start with the underscore: *_partial.htm*. Partials can be rendered from a back-end page or another partial. Use the controller's `makePartial` method to render a partial. The method takes two parameters - the partial name and the optional array of variables to pass to the partial. Example:
+Back-end partials are files with the extension **htm** that reside in the [controller's views](controllers-ajax) directory. The partial file names should start with the underscore: *_partial.htm*. Partials can be rendered from a back-end page or another partial. Use the controller's `makePartial` method to render a partial. The method takes two parameters - the partial name and the optional array of variables to pass to the partial. Example:
 
 ```php
 <?= $this->makePartial('sidebar', ['showHeader' => true]) ?>

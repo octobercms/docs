@@ -282,7 +282,7 @@ url = "/blog/hard-coded-page"
 id = "2"
 ```
 
-Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components#external-property-values):
+Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components#using-external-property-values):
 
 ```ini
 url = "/blog/:my_custom_parameter"
@@ -348,7 +348,7 @@ public function init()
 <a name="page-cycle-response"></a>
 ### Halting with a response
 
-Like all methods in the [page execution life cycle](../cms/layouts#layout-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
+Like all methods in the [page execution life cycle](../cms/layouts#layout-execution-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
 
 ```php
 public function onRun()
@@ -444,7 +444,7 @@ Multiple components can share partials by placing the partial file in a director
 <a name="referencing-self"></a>
 ### Referencing "self"
 
-Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components#aliases).
+Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components#components-aliases).
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">
@@ -520,7 +520,7 @@ public function onRun()
 <a name="component-assets"></a>
 ## Injecting page assets with components
 
-Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page#injecting-assets). Example:
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page#injecting-page-assets-programmatically). Example:
 
 ```php
 public function onRun()
