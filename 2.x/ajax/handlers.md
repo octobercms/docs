@@ -113,7 +113,7 @@ function onInit()
 }
 ```
 
-You may define an `init` method inside a [component class](../plugin/components#page-cycle-init) or [backend widget class](../backend/widgets).
+You may define an `init` method inside a [component class](../plugin/components#component-initialization) or [backend widget class](../backend/widgets).
 
 ```php
 function init()

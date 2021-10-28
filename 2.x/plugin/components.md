@@ -1,27 +1,5 @@
 # Building Components
 
-- [Introduction](#introduction)
-- [Component Class Definition](#component-class-definition)
-    - [Component Registration](#component-registration)
-- [Component Properties](#component-properties)
-    - [Dropdown and Set Properties](#dropdown-properties)
-    - [Page List Properties](#page-list-properties)
-- [Routing Parameters](#routing-parameters)
-- [Handling the Page Execution Cycle](#page-cycle)
-    - [Page Execution Life Cycle Handlers](#page-cycle-handlers)
-    - [Component Initialization](#page-cycle-init)
-    - [Halting with a Response](#page-cycle-response)
-- [AJAX Handlers](#ajax-handlers)
-- [Default Markup](#default-markup)
-- [Component Partials](#component-partials)
-    - [Referencing "self"](#referencing-self)
-    - [Unique Identifier](#unique-identifier)
-- [Rendering Partials From Code](#render-partial-method)
-- [Injecting Page Assets with Components](#component-assets)
-
-<a name="introduction"></a>
-## Introduction
-
 Components files and directories reside in the **/components** subdirectory of a plugin directory. Each component has a PHP file defining the component class and an optional component partials directory. The component partials directory name matches the component class name written in lowercase. An example of a component directory structure:
 
 ```
@@ -37,7 +15,6 @@ plugins/
 
 Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents` method.
 
-<a name="component-class-definition"></a>
 ## Component Class Definition
 
 The **component class file** defines the component functionality and [component properties](#component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
@@ -82,7 +59,6 @@ You would be able to access its `posts` method through the `blogPosts` variable.
 {% endfor %}
 ```
 
-<a name="component-registration"></a>
 ### Component Registration
 
 Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
@@ -98,7 +74,6 @@ public function registerComponents()
 
 This will register the Todo component class with the default alias name **demoTodo**. More information on using components can be found at the [CMS components article](../cms/components).
 
-<a name="component-properties"></a>
 ## Component Properties
 
 When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties` method of the component class. The next example shows how to define a component property:
@@ -132,7 +107,7 @@ Key | Description
 **required** | optional, forces field to be filled. Uses validationMessage when left empty.
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
-**depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-properties) below.
+**depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-and-set-properties) below.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 **showExternalParam** | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: **true**.
 
@@ -160,7 +135,6 @@ To access the property from the Twig partials for the component, utilize the `__
 {{ __SELF__.property('maxItems') }}
 ```
 
-<a name="dropdown-properties"></a>
 ### Dropdown and Set Properties
 
 The option list for dropdown and set properties can be static or dynamic. Static options are defined with the `options` element of the property definition. Example:
@@ -239,7 +213,6 @@ public function getStateOptions()
 }
 ```
 
-<a name="page-list-properties"></a>
 ### Page list Properties
 
 Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup#page-filter)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
@@ -262,7 +235,6 @@ public function getPostPageOptions()
 }
 ```
 
-<a name="routing-parameters"></a>
 ## Routing Parameters
 
 Components can directly access routing parameter values defined in the [URL of the page](../cms/pages#url-syntax).
@@ -305,7 +277,6 @@ If you need to access the routing parameter name:
 $this->paramName('id');
 ```
 
-<a name="page-cycle"></a>
 ## Handling the Page Execution Cycle
 
 Components can be involved in the Page execution cycle events by overriding the `onRun` method in the component class. The CMS controller executes this method every time when the page or layout loads. Inside the method you can inject variables to the Twig environment through the `page` property:
@@ -320,7 +291,6 @@ public function onRun()
 }
 ```
 
-<a name="page-cycle-handlers"></a>
 ### Page Execution Life Cycle Handlers
 
 When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes#php-section) and component classes. The sequence the handlers are executed is following:
@@ -335,7 +305,6 @@ When a page loads, October executes handler functions that could be defined in t
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
 
-<a name="page-cycle-init"></a>
 ### Component Initialization
 
 Sometimes you may wish to execute code at the time the component class is first instantiated. You may override the `init` method in the component class to handle any initialization logic, this will execute before AJAX handlers and before the page execution life cycle. For example, this method can be used for attaching another component to the page dynamically.
@@ -347,7 +316,6 @@ public function init()
 }
 ```
 
-<a name="page-cycle-response"></a>
 ### Halting With a Response
 
 Like all methods in the [page execution life cycle](../cms/layouts#layout-execution-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
@@ -373,7 +341,6 @@ public function onRun()
 }
 ```
 
-<a name="ajax-handlers"></a>
 ## AJAX Handlers
 
 Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../ajax/handlers). An example AJAX handler method defined in a component class:
@@ -389,7 +356,6 @@ public function onAddItem()
 
 If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers#calling-a-handler) article for details about using AJAX with components.
 
-<a name="default-markup"></a>
 ## Default Markup
 
 All components can come with default markup that is used when including it on a page with the `{% component %}` tag, although this is optional. Default markup is kept inside the **component partials directory**, which has the same name as the component class in lower case.
@@ -422,7 +388,6 @@ public function onRender()
 }
 ```
 
-<a name="component-partials"></a>
 ## Component Partials
 
 In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/october/demo/components/todo/pagination.htm** and displayed on the page using:
@@ -443,7 +408,6 @@ Multiple components can share partials by placing the partial file in a director
 {% partial '@shared' %}
 ```
 
-<a name="referencing-self"></a>
 ### Referencing "self"
 
 Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components#components-aliases).
@@ -468,7 +432,6 @@ If inside a component partial you need to render another component partial conca
 {% partial __SELF__~"::screenshot-list" %}
 ```
 
-<a name="unique-identifier"></a>
 ### Unique Identifier
 
 If an identical component is called twice on the same page, an `id` property can be used to reference each instance.
@@ -487,7 +450,6 @@ The ID is unique each time the component is displayed.
 {% component 'demoTodo' %}
 ```
 
-<a name="render-partial-method"></a>
 ## Rendering Partials from Code
 
 You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [path resolution logic](#component-partials) applies when you render a component partial in PHP as it does with Twig; use the `@` prefix to refer to partials within the component itself.
@@ -509,7 +471,7 @@ function onGetTemplate()
 }
 ```
 
-Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#page-cycle). This code will specifically return an XML response using the `Response` facade:
+Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#handling-the-page-execution-cycle). This code will specifically return an XML response using the `Response` facade:
 
 ```php
 public function onRun()
@@ -519,7 +481,6 @@ public function onRun()
 }
 ```
 
-<a name="component-assets"></a>
 ## Injecting Page Assets with Components
 
 Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page#injecting-page-assets-programmatically). Example:

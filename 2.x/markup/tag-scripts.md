@@ -13,7 +13,7 @@ The `{% scripts %}` tag inserts JavaScript file references to scripts injected b
 
 ## Injecting scripts
 
-Links to JavaScript files can be programmatically injected in PHP either by [components](../plugin/components#component-assets) or [pages](../cms/pages#injecting-page-assets-programmatically).
+Links to JavaScript files can be programmatically injected in PHP either by [components](../plugin/components#injecting-page-assets-with-components) or [pages](../cms/pages#injecting-page-assets-programmatically).
 
 ```php
 function onStart()

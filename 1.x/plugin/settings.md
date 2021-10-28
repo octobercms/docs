@@ -1,20 +1,7 @@
 # Settings & Config
 
-- [Introduction](#introduction)
-- [Database settings](#database-settings)
-    - [Writing to a settings model](#writing-settings)
-    - [Reading from a settings model](#reading-settings)
-- [Back-end settings pages](#backend-pages)
-    - [Settings link registration](#link-registration)
-    - [Setting the page navigation context](#settings-page-context)
-- [File-based configuration](#file-configuration)
-
-<a name="introduction"></a>
-## Introduction
-
 There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 
-<a name="database-settings"></a>
 ## Database settings
 
 You can create models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the back-end settings form. You don't need to create a database table and a controller for creating the back-end settings forms based on the settings model.
@@ -48,9 +35,8 @@ The `$settingsFields` property is required if are going to build a back-end sett
               fields.yaml    <=== Model form fields
             Settings.php     <=== Model script
 
-Settings models [can be registered](#backend-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
+Settings models [can be registered](#backend-settings-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
-<a name="writing-settings"></a>
 ### Writing to a settings model
 
 The settings model has the static `set` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
@@ -70,7 +56,6 @@ The settings model has the static `set` method that allows to save individual or
     $settings->api_key = 'ABCD';
     $settings->save();
 
-<a name="reading-settings"></a>
 ### Reading from a settings model
 
 The settings model has the static `get` method that enables you to load individual properties. Also, when you instantiate a model with the `instance` method, it loads the properties from the database and you can access them directly.
@@ -85,12 +70,10 @@ The settings model has the static `get` method that enables you to load individu
     echo Settings::get('is_activated', true);
 
 
-<a name="backend-pages"></a>
-## Back-end settings pages
+## Backend settings pages
 
 The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
-<a name="link-registration"></a>
 ### Settings link registration
 
 The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
@@ -110,7 +93,7 @@ The back-end settings navigation links can be extended by overriding the `regist
         ];
     }
 
-> **Note:** Back-end settings pages should [set the settings context](#settings-page-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+> **Note:** Back-end settings pages should [set the settings context](#setting-the-page-navigation-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
 
 The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
 
@@ -132,7 +115,6 @@ The following example creates a link to a settings model. Settings models is a p
 
 The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 
-<a name="settings-page-context"></a>
 ### Setting the page navigation context
 
 Just like [setting navigation context in the controller](../backend/controllers-ajax#setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
@@ -147,9 +129,8 @@ Just like [setting navigation context in the controller](../backend/controllers-
         SettingsManager::setContext('You.Plugin', 'settings');
     }
 
-The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#link-registration).
+The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#settings-link-registration).
 
-<a name="file-configuration"></a>
 ## File-based configuration
 
 Plugins can have a configuration file `config.php` in the `config` subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file `plugins/acme/demo/config/config.php`:

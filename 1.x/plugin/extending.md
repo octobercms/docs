@@ -1,26 +1,12 @@
 # Extending Plugins
 
-- [Extending with events](#extending-with-events)
-    - [Subscribing to events](#subscribing-to-events)
-    - [Declaring events](#declaring-events)
-- [Extending back-end views](#backend-view-events)
-- [Usage examples](#usage-examples)
-    - [Extending a User model](#extending-user-model)
-    - [Extending a backend form](#extending-backend-form)
-    - [Extending a backend list](#extending-backend-list)
-    - [Extending a component](#extending-component)
-    - [Extending the backend menu](#extending-backend-menu)
-
-
 <!-- Behaviors: Mixin concept, dynamic implement, extend constructor -->
 <!-- IoC/Facades: Replacing objects -->
 
-<a name="extending-with-events"></a>
 ## Extending with events
 
 The [Event service](../services/events) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
 
-<a name="subscribing-to-events"></a>
 ### Subscribing to events
 
 The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
@@ -44,7 +30,6 @@ User::extend(function ($model) {
 });
 ```
 
-<a name="declaring-events"></a>
 ### Declaring / Firing  events
 
 You can fire events globally (through the Event service) or locally.
@@ -82,7 +67,6 @@ $post->bindEvent('post.beforePost', function ($param1, $param2) use ($post) {
 });
 ```
 
-<a name="backend-view-events"></a>
 ## Extending backend views
 
 Sometimes you may wish to allow a backend view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent` method found in all backend controllers.
@@ -113,15 +97,13 @@ The above example would output the following markup:
 </div>
 ```
 
-<a name="usage-examples"></a>
 ## Usage examples
 
 These are some practical examples of how events can be used.
 
-<a name="extending-user-model"></a>
 ### Extending a User model
 
-This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
+This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-and-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
 
 ```php
 class Plugin extends PluginBase
@@ -157,12 +139,11 @@ class Plugin extends PluginBase
 }
 ```
 
-<a name="extending-backend-form"></a>
 ### Extending backend forms
 
 There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms#extending-form-behavior).
 
-This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-and-initialization).
 
 ```php
 class Plugin extends PluginBase
@@ -207,10 +188,9 @@ class Plugin extends PluginBase
 
 > **Note:** In some cases (adding fields that should be made translatable by [RainLab.Translate](https://github.com/rainlab/translate-plugin) for example), you may want to extend the [`backend.form.extendFieldsBefore`](https://octobercms.com/docs/api/backend/form/extendfieldsbefore) event instead.
 
-<a name="extending-backend-list"></a>
 ### Extending a backend list
 
-This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-initialization).
+This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-and-initialization).
 
 ```php
 class Plugin extends PluginBase
@@ -245,7 +225,6 @@ class Plugin extends PluginBase
 }
 ```
 
-<a name="extending-component"></a>
 ### Extending a component
 
 This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components#component-class-definition).
@@ -280,7 +259,6 @@ function onInit()
 }
 ```
 
-<a name="extending-backend-menu"></a>
 ### Extending the backend menu
 
 This example will replace the label for CMS and Pages in the backend with *...*.

@@ -1,14 +1,9 @@
 # Introduction
 
-- [Configuration Options](#configuration-options)
-- [Audio and Video Players](#audio-and-video-players)
-- [Events](#events)
-
 October CMS ships with a media manager built in, making it easy to publish larger assets such as video and photos. These assets can then be inserted to your pages and content files via the user interface.
 
 ![image](https://github.com/octobercms/docs/blob/develop/images/media-manager.png?raw=true) {.img-responsive .frame}
 
-<a name="media-links"></a>
 ## Linking to Media
 
 In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [filter](../markup/filter-media).
@@ -17,7 +12,6 @@ In most cases the complete URL will be used when inserting media assets in to yo
 {{ 'relative/path/to/asset.jpg'|media }}
 ```
 
-<a name="configuration-options"></a>
 ## Configuration Options
 
 There are several options that allow you to fine-tune the Media Manager, which are defined in **config/media.php** file.
@@ -49,7 +43,6 @@ To allow the use of SVG files in the backend, simply add it to the list of image
 'image_extensions' => [..., 'svg'],
 ```
 
-<a name="audio-and-video-players"></a>
 ## Audio and Video Players
 
 By default the system uses HTML5 audio and video tags to render audio and video files:
@@ -85,7 +78,6 @@ As the partials are written with Twig, you can automate adding alternative video
 </video>
 ```
 
-<a name="events"></a>
 ## Events
 
 The Media Manager provides a few [events](../services/events) that you can listen for in order to improve extensibility.

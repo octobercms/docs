@@ -1,19 +1,9 @@
 # Providers
 
-- [Providers](#providers)
-    - [Local Disk](#local-disk)
-    - [Amazon S3](#amazon-s3)
-    - [Rackspace CDN](#rackspace-cdn)
-- [Troubleshooting](#troubleshooting)
-
-<a name="providers"></a>
-## Providers
-
 Media Manager uses the Local Disk provider by default. You need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers) before you can use Amazon S3 or Rackspace CDN features.
 
 > **Note**: After you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
-<a name="local-disk"></a>
 ## Local Disk
 
 By default Media Manager works with the **storage/app/media** subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration found in the **config/system.php** config file and follow the instructions found in this article.
@@ -28,7 +18,6 @@ By default Media Manager works with the **storage/app/media** subdirectory of th
 ],
 ```
 
-<a name="amazon-s3"></a>
 ## Configuring Amazon S3 access
 
 To use Amazon S3 with October CMS, you should create S3 bucket, folder in the bucket and API user.
@@ -141,7 +130,6 @@ Example storage configuration:
 
 Congratulations! Now you're ready to use Amazon S3 with October CMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
 
-<a name="rackspace-cdn"></a>
 ## Configuring Rackspace CDN access
 
 To use Rackspace CDN with October CMS, you should create Rackspace CDN container, folder in the container and API user.
@@ -205,7 +193,6 @@ Example storage configuration:
 
 Congratulations! Now you're ready to use Rackspace CDN with October CMS.
 
-<a name="troubleshooting"></a>
 ## Troubleshooting
 
 The most common issue with using remote services is the SSL connection problem. If you get SSL errors, make sure that your server has fresh SSL certificates of public Certificate Authorities (CA).

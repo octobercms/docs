@@ -1,9 +1,5 @@
 # Unit Testing
 
-- [Testing plugins](#testing-plugins)
-- [System testing](#system-testing)
-
-<a name="testing-plugins"></a>
 ## Testing plugins
 
 Individual plugin test cases can be run by running `../../../vendor/bin/phpunit` in the plugin's base directory (ex. `plugins/acme/demo`.
@@ -57,7 +53,7 @@ The test class should extend the base class `PluginTestCase` and this is a speci
     php artisan plugin:refresh Acme.Blog
     [php artisan plugin:refresh <dependency>, ...]
 
-> **Note:** If your plugin uses [configuration files](../plugin/settings#file-configuration), then you will need to run `System\Classes\PluginManager::instance()->registerAll(true);` in the `setUp` method of your tests. Below is an example of a base test case class that should be used if you need to test your plugin working with other plugins instead of in isolation.
+> **Note:** If your plugin uses [configuration files](../plugin/settings#file-based-configuration), then you will need to run `System\Classes\PluginManager::instance()->registerAll(true);` in the `setUp` method of your tests. Below is an example of a base test case class that should be used if you need to test your plugin working with other plugins instead of in isolation.
 
     use System\Classes\PluginManager;
 
@@ -95,7 +91,6 @@ By default OctoberCMS uses SQLite stored in memory for the plugin testing enviro
 
 You can override the `/config/database.php` file by creating `/config/testing/database.php`. In this case variables from the latter file will be taken.
 
-<a name="system-testing"></a>
 ## System testing
 
 To perform unit testing on the core October files, you should download a development copy using Composer or cloning the Git repository. This will ensure you have the `tests/` directory necessary to run unit tests.

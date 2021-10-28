@@ -21,7 +21,7 @@ Widget classes reside inside the **widgets** directory of the plugin directory. 
 
 ### Class Definition
 
-The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). Example widget controller class definition:
+The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). Example widget controller class definition:
 
     <?php namespace Backend\Widgets;
 
@@ -109,7 +109,7 @@ Form Widget classes reside inside the **formwidgets** directory of the plugin di
 
 ### Class Definition
 
-The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). A registered widget can be used in the back-end [form field definition](../backend/forms#defining-form-fields) file. Example form widget class definition:
+The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). A registered widget can be used in the back-end [form field definition](../backend/forms#defining-form-fields) file. Example form widget class definition:
 
     namespace Backend\Widgets;
 
@@ -240,7 +240,7 @@ Report widgets can be used on the back-end dashboard and in other back-end repor
 
 ### Report widget classes
 
-The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
+The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
     plugins/
       rainlab/                    <=== Author name

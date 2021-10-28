@@ -1,27 +1,11 @@
 # Using Composer
 
-- [Introduction](#introduction)
-    - [Converting from Basic Install](#converting-from-basic-install)
-    - [Development Branch](#development-branch)
-- [Publishing Plugins or Themes](#publishing-products)
-- [Package Descriptions](#package-descriptions)
-- [Marketplace Builds](#marketplace-builds)
-- [Using Laravel Packages](#laravel-packages)
-    - [Configuration Files](#laravel-config-files)
-    - [Aliases & Service Providers](#laravel-aliases-service-providers)
-    - [Migrations & Models](#laravel-migrations-models)
-
-<a name="introduction"></a>
-## Introduction
-
 Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is recommended for more advanced users and developers. See the console command on how to [first install October using composer](../console/commands#console-install-composer).
 
-<a name="converting-from-basic-install"></a>
 ### Converting from Basic Install
 
 In order to use Composer with an October instance that has been installed using the Wizard or simple CLI installation process, simply copy the latest [`tests/` directory](https://github.com/octobercms/october/tree/develop/tests) and [`composer.json`](https://github.com/octobercms/october/tree/develop/composer.json) file from [GitHub](https://github.com/octobercms/october/tree/develop) into your October instance and then run `composer install`.
 
-<a name="development-branch"></a>
 ### Development Branch
 
 If you plan on submitting pull requests to the October CMS project via GitHub, or are actively developing a project based on October CMS and want to stay up to date with the absolute latest version, we recommend switching your composer dependencies to point to the `develop` branch where all the latest improvements and bug fixes take place. Doing this will allow you to catch any potential issues that may be introduced (as rare as they are) right when they happen and get them fixed while you're still actively working on your project instead of only discovering them several months down the road if they eventually make it into production.
@@ -32,7 +16,6 @@ If you plan on submitting pull requests to the October CMS project via GitHub, o
     "october/cms": "dev-develop",
     "laravel/framework": "~6.0",
 
-<a name="publishing-products"></a>
 ## Publishing Plugins or Themes
 
 When publishing your plugins or themes to the marketplace, you may wish to also make them available via composer. An example `composer.json` file for a plugin is included below:
@@ -68,7 +51,6 @@ Module  | `october-module`
 
 > **Reminder**: Be sure to specify any dependencies in your composer file as you would using the  `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions)
 
-<a name="package-descriptions"></a>
 ## Package Descriptions
 
 There are many different moving parts that come together to make the October CMS platform work. Here we will describe the various packages you will likely encounter:
@@ -81,7 +63,6 @@ There are many different moving parts that come together to make the October CMS
 
 - **Vendor** packages are included via Composer in either the project's `/vendor` directory or can sometimes be found in plugin-specific `/vendor` directories. The project vendor directory takes priority over and plugin vendor directories that appear in the system.
 
-<a name="marketplace-builds"></a>
 ## Marketplace Builds
 
 When you publish your plugin or theme to the marketplace, the server will conveniently pull in all the packages defined in your composer file. This makes the product ready for others to use, even if they don't use composer. Here's how it works:
@@ -100,12 +81,10 @@ It is a good idea not to include the `vendor` directory when publishing your plu
 
 If you are developing with your plugin, you can run `composer update` from the root directory. A special package called `wikimedia/composer-merge-plugin` will scan the plugins directory and merge the dependencies in to the main composer file.
 
-<a name="laravel-packages"></a>
 ## Using Laravel Packages
 
 When including Laravel packages in OctoberCMS plugins there are a few things to take note of.
 
-<a name="laravel-config-files"></a>
 ### Configuration Files
 
 Laravel packages will often provide configuration files, and they will usually come with the instructions to publish these config files to the project config folder, usually something like `php artisan vendor:publish --tag=config`.
@@ -156,9 +135,8 @@ Now you are free to provide the packages configuration values the same way you w
         ],
     ];
 
-Now the package configuration has been included natively in October CMS and the values can be changed normally using the [standard configuration approach](settings#file-configuration).
+Now the package configuration has been included natively in October CMS and the values can be changed normally using the [standard configuration approach](settings#file-based-configuration).
 
-<a name="laravel-aliases-service-providers"></a>
 ### Aliases & Service Providers
 
 By default, October CMS disables the loading of discovered packages through [Laravel's package discovery service](https://laravel.com/docs/6.x/packages#package-discovery), in order to allow packages used by plugins to be disabled if the plugin itself is disabled. Please note that packages defined in `app.providers` will still be loaded even if discovery is disabled.
@@ -188,7 +166,6 @@ class Plugin extends PluginBase
 }
 ```
 
-<a name="laravel-migrations-models"></a>
 ### Migrations & Models
 
 Laravel packages that interact with the database will often include their own database migrations and Eloquent models. Ideally you should duplicate these migrations and models to your plugin's directory and then rebase the provided Model classes to extend the base `\October\Rain\Database\Model` class instead of the base Laravel Eloquent model class to take advantage of the extended technology features found in October.

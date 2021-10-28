@@ -21,7 +21,7 @@ plugins/
 
 ### Class Definition
 
-Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration#namespaces). The most basic representation of a Controller used inside a Plugin looks like this.
+Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). The most basic representation of a Controller used inside a Plugin looks like this.
 
 ```php
 namespace Acme\Blog\Controllers;

@@ -1,31 +1,14 @@
 # Registration
 
-- [Introduction](#introduction)
-    - [Directory structure](#directory-structure)
-    - [Plugin namespaces](#namespaces)
-- [Registration file](#registration-file)
-    - [Supported methods](#registration-methods)
-    - [Basic plugin information](#basic-plugin-information)
-- [Routing and initialization](#routing-initialization)
-- [Dependency definitions](#dependency-definitions)
-- [Extending Twig](#extending-twig)
-- [Navigation menus](#navigation-menus)
-- [Registering middleware](#registering-middleware)
-- [Elevated permissions](#elevated-plugin)
-
-<a name="introduction"></a>
-## Introduction
-
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
 
 1. Define [components](components).
 1. Define [user permissions](../backend/users).
-1. Add [settings pages](settings#backend-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
+1. Add [settings pages](settings#backend-settings-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
 1. Create [database table structures and seed data](updates).
 1. Alter [functionality of the core or other plugins](events).
 1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
 
-<a name="directory-structure"></a>
 ### Directory structure
 
 Plugins reside in the **/plugins** subdirectory of the application directory. An example of a plugin directory structure:
@@ -51,12 +34,10 @@ Not all plugin directories are required. The only required file is the **Plugin.
 
 > **Note:** if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
 
-<a name="namespaces"></a>
 ### Plugin namespaces
 
 Plugin namespaces are very important, especially if you are going to publish your plugins on the [October Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
-<a name="registration-file"></a>
 ## Registration file
 
 The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
@@ -88,8 +69,7 @@ Registration scripts should use the plugin namespace. The registration script sh
         }
     }
 
-<a name="registration-methods"></a>
-### Supported methods
+### Registration methods
 
 The following methods are supported in the plugin registration class:
 
@@ -102,7 +82,7 @@ Method | Description
 **registerComponents()** | registers any [front-end components](components#component-registration) used by this plugin.
 **registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
 **registerPermissions()** | registers any [back-end permissions](../backend/users#registering-permissions) used by this plugin.
-**registerSettings()** | registers any [back-end configuration links](settings#link-registration) used by this plugin.
+**registerSettings()** | registers any [back-end configuration links](settings#settings-link-registration) used by this plugin.
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
@@ -111,7 +91,6 @@ Method | Description
 **registerMailPartials()** | registers any [mail view partials](mail#mail-template-registration) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
 
-<a name="basic-plugin-information"></a>
 ### Basic plugin information
 
 The `pluginDetails` is a required method of the plugin registration class. It should return an array containing the following keys:
@@ -125,7 +104,6 @@ Key | Description
 **iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 
-<a name="routing-initialization"></a>
 ## Routing and initialization
 
 Plugin registration files can contain two methods `boot` and `register`. With these methods you can do anything you like, like register routes or attach handlers to events.
@@ -149,7 +127,6 @@ Plugins can also supply a file named **routes.php** that contain custom routing 
 
     });
 
-<a name="dependency-definitions"></a>
 ## Dependency definitions
 
 A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
@@ -170,7 +147,6 @@ Dependency definitions will affect how the plugin operates and [how the update p
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 
-<a name="extending-twig"></a>
 ## Extending Twig
 
 Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags` method of the plugin registration class. The next example registers two Twig filters and two functions.
@@ -200,7 +176,6 @@ Custom Twig filters and functions can be registered in the CMS with the `registe
         return strtoupper($text);
     }
 
-<a name="navigation-menus"></a>
 ## Navigation menus
 
 Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
@@ -259,7 +234,6 @@ Key | Description
 **code** | a string value that acts as an unique identifier for that menu option. **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
 **owner** | a string value that specifies the menu items owner plugin or module in the format "Author.Plugin". **NOTE**: This is a system generated value and should not be provided when registering the navigation items.
 
-<a name="registering-middleware"></a>
 ## Registering middleware
 
 To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
@@ -284,10 +258,9 @@ Alternatively, you can push it directly into the Kernel via the following.
              ->pushMiddleware('Path\To\Custom\Middleware');
     }
 
-<a name="elevated-plugin"></a>
 ## Elevated permissions
 
-By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the back-end. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-initialization) for the plugin will not fire.
+By default plugins are restricted from accessing certain areas of the system. This is to prevent critical errors that may lock an administrator out from the back-end. When these areas are accessed without elevated permissions, the `boot` and `register` [initialization methods](#routing-and-initialization) for the plugin will not fire.
 
 Request | Description
 ------------- | -------------
