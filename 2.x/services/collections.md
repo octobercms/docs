@@ -1,12 +1,5 @@
 # Collections
 
-- [Introduction](#introduction)
-- [Creating collections](#creating-collections)
-- [Available methods](#available-methods)
-
-<a name="introduction"></a>
-## Introduction
-
 The `October\Rain\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
 
 ```php
@@ -24,8 +17,7 @@ $collection = $collection
 
 The `Collection` class allows you to chain its methods to perform fluent mapping and reducing of the underlying array. In general every `Collection` method returns an entirely new `Collection` instance.
 
-<a name="creating-collections"></a>
-## Creating collections
+## Creating Collections
 
 As described above, passing an array to the constructor of the `October\Rain\Support\Collection` class will return a new instance for the given array. So, creating a collection is as simple as:
 
@@ -35,8 +27,7 @@ $collection = new October\Rain\Support\Collection([1, 2, 3]);
 
 By default, collections of [database models](../database/model) are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
 
-<a name="available-methods"></a>
-## Available methods
+## Available Methods
 
 For the remainder of this documentation, we'll discuss each method available on the `Collection` class. Remember, all of these methods may be chained for fluently manipulating the underlying array. Furthermore, almost every method returns a new `Collection` instance, allowing you to preserve the original copy of the collection when necessary.
 
@@ -171,7 +162,6 @@ You may select any method from this table to see an example of its usage:
 
 </div>
 
-<a name="method-listing"></a>
 ## Method Listing
 
 <style>

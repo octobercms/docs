@@ -1,6 +1,6 @@
 # Helpers
 
-October includes a variety of "helper" PHP functions. Many of these functions are used internally by October itself, however, you are free to use them in your own plugins and applications if you find them useful.
+October CMS includes a variety of "helper" PHP functions. Many of these functions are used internally by October itself, however, you are free to use them in your own plugins and applications if you find them useful.
 
 <style>
     .collection-method-list > p {
@@ -16,6 +16,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 ### Arrays
 
 <div class="collection-method-list" markdown="1">
+
 [array_add](#method-array-add)
 [array_divide](#method-array-divide)
 [array_dot](#method-array-dot)
@@ -34,11 +35,13 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [array_where](#method-array-where)
 [head](#method-head)
 [last](#method-last)
+
 </div>
 
 ### Paths
 
 <div class="collection-method-list" markdown="1">
+
 [Path Symbols](#path-symbols)
 [app_path](#method-app-path)
 [base_path](#method-base-path)
@@ -50,11 +53,13 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [temp_path](#method-temp-path)
 [themes_path](#method-themes-path)
 [cache_path](#method-cache-path)
+
 </div>
 
 ### Strings
 
 <div class="collection-method-list" markdown="1">
+
 [camel_case](#method-camel-case)
 [class_basename](#method-class-basename)
 [e](#method-e)
@@ -72,11 +77,13 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [studly_case](#method-studly-case)
 [trans](#method-trans)
 [trans_choice](#method-trans-choice)
+
 </div>
 
 ### Miscellaneous
 
 <div class="collection-method-list" markdown="1">
+
 [asset](#method-asset)
 [config](#method-config)
 [dd](#method-dd)
@@ -92,6 +99,7 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
 [trace_log](#method-trace-log)
 [trace_sql](#method-trace-sql)
 [url](#method-url)
+
 </div>
 
 <style>
@@ -104,7 +112,6 @@ October includes a variety of "helper" PHP functions. Many of these functions ar
     }
 </style>
 
-<a name="arrays"></a>
 ## Arrays
 
 <a name="method-array-add"></a>
@@ -357,7 +364,6 @@ The `last` function returns the last element in the given array:
 
     // 300
 
-<a name="paths"></a>
 ## Paths
 
 <a name="path-symbols"></a>
@@ -476,7 +482,6 @@ You may also use the `cache_path` function to generate a fully qualified path to
 
     $path = cache_path('cms/cachefile.json');
 
-<a name="strings"></a>
 ## Strings
 
 <a name="method-camel-case"></a>
@@ -634,7 +639,6 @@ The `trans_choice` function translates the given language line with inflection:
 
     $value = trans_choice('foo.bar', $count);
 
-<a name="miscellaneous"></a>
 ## Miscellaneous
 
 <a name="method-asset"></a>

@@ -1,12 +1,5 @@
 # Cache
 
-- [Configuration](#configuration)
-- [Cache usage](#cache-usage)
-    - [Retrieving items from the cache](#retrieving-items-from-the-cache)
-    - [Storing items in the cache](#storing-items-in-the-cache)
-    - [Removing items from the cache](#removing-items-from-the-cache)
-
-<a name="configuration"></a>
 ## Configuration
 
 October provides a unified API for various caching systems and the cache configuration is located at `config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Popular caching systems like [Memcached](http://memcached.org) and [Redis](http://redis.io) are supported out of the box.
@@ -65,12 +58,10 @@ You may define an `options` array value in your Redis connection definition, all
 
 If your Redis server requires authentication, you may supply a password by adding a `password` configuration item to your Redis server configuration array.
 
-<a name="cache-usage"></a>
 ## Cache usage
 
 While most caching is handled internally by October, the `Cache` facade provides some simple methods for caching your own data.
 
-<a name="retrieving-items-from-the-cache"></a>
 ### Retrieving items from the cache
 
 The `get` method on the `Cache` facade is used to retrieve items from the cache. If the item does not exist in the cache, `null` will be returned. If you wish, you may pass a second argument to the `get` method specifying the custom default value you wish to be returned if the item doesn't exist:
@@ -127,7 +118,6 @@ If you need to retrieve an item from the cache and then delete it, you may use t
 
     $value = Cache::pull('key');
 
-<a name="storing-items-in-the-cache"></a>
 ### Storing items in the cache
 
 You may use the `put` method on the `Cache` facade to store items in the cache. When you place an item in the cache, you will need to specify the number of seconds for which the value should be cached:
@@ -150,7 +140,6 @@ The `forever` method may be used to store an item in the cache permanently. Thes
 
     Cache::forever('key', 'value');
 
-<a name="removing-items-from-the-cache"></a>
 ### Removing items from the cache
 
 You may remove items from the cache using the `forget` method on the `Cache` facade:

@@ -86,9 +86,9 @@ Method | Description
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](mail#mail-template-registration) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](mail#mail-template-registration) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](mail#mail-template-registration) supplied by this plugin.
+**registerMailLayouts()** | registers any [mail view layouts](mail#registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailTemplates()** | registers any [mail view templates](mail#registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailPartials()** | registers any [mail view partials](mail#registering-mail-layouts-templates-partials) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
 
 ### Basic plugin information

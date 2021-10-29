@@ -1,18 +1,5 @@
 # Collections
 
-- [Introduction](#introduction)
-- [Creating collections](#creating-collections)
-- [Available methods](#available-methods)
-- [Higher Order Messages](#higher-order-messages)
-- [Lazy Collections](#lazy-collections)
-    - [Introduction](#lazy-collection-introduction)
-    - [Creating Lazy Collections](#creating-lazy-collections)
-    - [The Enumerable Contract](#the-enumerable-contract)
-    - [Lazy Collection Methods](#lazy-collection-methods)
-
-<a name="introduction"></a>
-## Introduction
-
 The `October\Rain\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
 
 ```php
@@ -30,7 +17,6 @@ $collection = $collection
 
 The `Collection` class allows you to chain its methods to perform fluent mapping and reducing of the underlying array. In general every `Collection` method returns an entirely new `Collection` instance.
 
-<a name="creating-collections"></a>
 ## Creating collections
 
 As described above, passing an array to the constructor of the `October\Rain\Support\Collection` class will return a new instance for the given array. So, creating a collection is as simple as:
@@ -41,7 +27,6 @@ $collection = new October\Rain\Support\Collection([1, 2, 3]);
 
 By default, collections of [database models](../database/model) are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
 
-<a name="available-methods"></a>
 ## Available methods
 
 For the remainder of this documentation, we'll discuss each method available on the `Collection` class. Remember, all of these methods may be chained for fluently manipulating the underlying array. Furthermore, almost every method returns a new `Collection` instance, allowing you to preserve the original copy of the collection when necessary.
@@ -177,7 +162,6 @@ You may select any method from this table to see an example of its usage:
 
 </div>
 
-<a name="method-listing"></a>
 ## Method Listing
 
 <style>
@@ -2405,7 +2389,6 @@ The `zip` method merges together the values of the given array with the values o
 
     // [['Chair', 100], ['Desk', 200]]
 
-<a name="higher-order-messages"></a>
 ## Higher Order Messages
 
 Collections also provide support for "higher order messages", which are short-cuts for performing common actions on collections. The collection methods that provide higher order messages are: [`average`](#method-average), [`avg`](#method-avg), [`contains`](#method-contains), [`each`](#method-each), [`every`](#method-every), [`filter`](#method-filter), [`first`](#method-first), [`flatMap`](#method-flatmap), [`groupBy`](#method-groupby), [`keyBy`](#method-keyby), [`map`](#method-map), [`max`](#method-max), [`min`](#method-min), [`partition`](#method-partition), [`reject`](#method-reject), [`some`](#method-some), [`sortBy`](#method-sortby), [`sortByDesc`](#method-sortbydesc), [`sum`](#method-sum), and [`unique`](#method-unique).
@@ -2422,7 +2405,6 @@ Likewise, we can use the `sum` higher order message to gather the total number o
 
     return $users->sum->votes;
 
-<a name="lazy-collections"></a>
 ## Lazy Collections
 
 <a name="lazy-collection-introduction"></a>

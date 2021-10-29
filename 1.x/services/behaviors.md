@@ -1,13 +1,5 @@
 # Behaviors
 
-- [Introduction](#introduction)
-- [Comparison to traits](#compare-traits)
-- [Extending constructors](#constructor-extension)
-- [Usage example](#usage-example)
-
-<a name="introduction"></a>
-## Introduction
-
 Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to [native PHP Traits](http://php.net/manual/en/language.oop5.traits.php) except they have some distinct benefits:
 
 1. Behaviors have their own constructor.
@@ -15,7 +7,6 @@ Behaviors add the ability for classes to have *private traits*, also known as Be
 1. Methods and property names can conflict safely.
 1. Classes can be extended with behaviors dynamically.
 
-<a name="compare-traits"></a>
 ## Comparison to traits
 
 Where you might use a PHP trait like this:
@@ -35,7 +26,7 @@ A behavior is used in a similar fashion:
             'October.Rain.DeferredBinding',
         ];
     }
-    
+
 > **Note**: Implementing behaviors is case sensitive, so `RainLab.Translate.Behaviors.TranslatableModel` will work but `Rainlab.Translate.Behaviors.TranslatableModel` will not.
 
 Where you might define a trait like this:
@@ -65,15 +56,14 @@ A behavior is defined like this:
         }
     }
 
-The extended object is always passed as the first parameter to the Behavior's constructor. 
+The extended object is always passed as the first parameter to the Behavior's constructor.
 
 To summarize:
 - Extend \October\Rain\Extension\ExtensionBase to declare your class as a Behaviour
 - The class wanting to -implement- the Behaviour needs to extend \October\Rain\Extension\Extendable
 
-> **Note**: See [Using traits instead of base classes](#using-traits) 
+> **Note**: See [Using traits instead of base classes](#using-traits-instead-of-base-classes)
 
-<a name="constructor-extension"></a>
 ## Extending constructors
 
 Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend` method. The argument should pass a closure that will be called as part of the class constructor.
@@ -81,7 +71,7 @@ Any class that uses the `Extendable` or `ExtendableTrait` can have its construct
     MyNamespace\Controller::extend(function($controller) {
         //
     });
-    
+
 #### Dynamically declaring properties
 
 Properties can be declared on an extendable object by calling `addDynamicProperty` and passing a property name and value.
@@ -89,13 +79,13 @@ Properties can be declared on an extendable object by calling `addDynamicPropert
     Post::extend(function($model) {
         $model->addDynamicProperty('tagsCache', null);
     });
-    
+
 > **Note**: Attempting to set undeclared properties through normal means (`$this->foo = 'bar';`) on an object that implements the **October\Rain\Extension\ExtendableTrait** will not work. It won't throw an exception, but it will not autodeclare the property either. `addDynamicProperty` must be called in order to set previously undeclared properties on extendable objects.
 
 #### Retrieving dynamic properties
 
 Properties created dynamically can be retrieved with the getDynamicProperties function inherited from
-the ExtendableTrait.  
+the ExtendableTrait.
 
 So retrieving all dynamic properties would look like this:
 
@@ -114,7 +104,7 @@ Methods can be created to an extendable object by calling `addDynamicMethod` and
 
     Post::extend(function($model) {
         $model->addDynamicProperty('tagsCache', null);
-    
+
         $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
             if ($this->tagsCache) {
                 return $this->tagsCache;
@@ -161,7 +151,7 @@ To retrieve a list of all available methods in an `Extendable` class, you can us
      *   ...
      * ];
      */
-    
+
 #### Dynamically implementing a behavior
 
 This unique ability to extend constructors allows behaviors to be implemented dynamically, for example:
@@ -173,12 +163,11 @@ This unique ability to extend constructors allows behaviors to be implemented dy
 
         // Implement the list controller behavior dynamically
         $controller->implement[] = 'Backend.Behaviors.RelationController';
-        
+
         // Declare the relationConfig property dynamically for the RelationController behavior to use
         $controller->addDynamicProperty('relationConfig', '$/myvendor/myplugin/controllers/users/config_relation.yaml');
     });
 
-<a name="usage-example"></a>
 ## Usage example
 
 #### Behavior / Extension class
@@ -301,7 +290,6 @@ If the class name `RainLab\Translate\Behaviors\TranslatableModel` does not exist
         }
     }
 
-<a name="using-traits"></a>
 ### Using Traits instead of base classes
 
 For those cases where you may not wish to extend the `ExtensionBase` or `Extendable` classes, you can use the traits instead. Your classes will have to be implemented as follows:

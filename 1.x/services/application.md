@@ -1,11 +1,5 @@
 # Application
 
-- [Application container](#app-container)
-- [Service providers](#service-providers)
-- [Application events](#application-events)
-- [Application helpers](#application-helpers)
-
-<a name="app-container"></a>
 ## Application container
 
 The inversion of control (IoC) container is a tool for managing class dependencies. Dependency injection is a method of removing hard-coded class dependencies. Instead, the dependencies are injected at run-time, allowing for greater flexibility as dependency implementations may be swapped easily.
@@ -52,12 +46,10 @@ Now consider the following code:
 
 Since we have bound the `UserRepositoryInterface` to a concrete type, the `DbUserRepository` will automatically be injected into this controller when it is created.
 
-<a name="where-to-register"></a>
 ### Where to register bindings
 
 IoC bindings, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place IoC registration logic.
 
-<a name="service-providers"></a>
 ## Service providers
 
 Service providers are a great way to create libraries and perform group related IoC registrations in a single location. Within a service provider, you might register a custom authentication driver, register your application's repository classes with the IoC container, or even setup a custom Artisan command.
@@ -90,7 +82,6 @@ You may also register a service provider at run-time using the `App::register` m
 
     App::register('FooServiceProvider');
 
-<a name="application-events"></a>
 ## Application events
 
 #### Request events
@@ -123,7 +114,6 @@ The service container fires an event each time it resolves an object. You may li
 
 As you can see, the object being resolved will be passed to the callback, allowing you to set any additional properties on the object before it is given to its consumer.
 
-<a name="application-helpers"></a>
 ## Application helpers
 
 #### Finding the application environment

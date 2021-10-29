@@ -1,16 +1,6 @@
 # Validation
 
-- [Basic Usage](#basic-usage)
-- [Working with Error Messages](#working-with-error-messages)
-- [Error Messages & Views](#error-messages-and-views)
-- [Available Validation Rules](#available-validation-rules)
-- [Conditionally Adding Rules](#conditionally-adding-rules)
-- [Validating Arrays](#validating-arrays)
-- [Custom Error Messages](#custom-error-messages)
-- [Custom Validation Rules](#custom-validation-rules)
-
-<a name="basic-usage"></a>
-## Basic usage
+## Basic Usage
 
 The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class. It is useful when processing form data submitted by the end user.
 
@@ -79,7 +69,6 @@ $failed = $validator->failed();
 
 The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
 
-<a name="working-with-error-messages"></a>
 ## Working with Error Messages
 
 After calling the `messages` method on a `Validator` instance, you will receive a `Illuminate\Support\MessageBag` instance, which has a variety of convenient methods for working with error messages.
@@ -130,7 +119,6 @@ foreach ($messages->all('<li>:message</li>') as $message) {
 }
 ```
 
-<a name="error-messages-and-views"></a>
 ## Error Messages & Views
 
 Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October. Consider the following routes as an example:
@@ -172,7 +160,6 @@ You may then access the named `MessageBag` instance from the `$errors` variable:
 {{ errors.login.first('email') }}
 ```
 
-<a name="available-validation-rules"></a>
 ## Available Validation Rules
 
 Below is a list of all available validation rules and their function:
@@ -189,6 +176,7 @@ Below is a list of all available validation rules and their function:
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Accepted](#rule-accepted)
 - [Active URL](#rule-active-url)
 - [After (Date)](#rule-after)
@@ -230,6 +218,7 @@ Below is a list of all available validation rules and their function:
 - [Timezone](#rule-timezone)
 - [Unique (Database)](#rule-unique)
 - [URL](#rule-url)
+
 </div>
 
 <a name="rule-accepted"></a>

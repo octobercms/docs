@@ -1,15 +1,5 @@
 # Queues
 
-- [Configuration](#configuration)
-- [Basic usage](#basic-usage)
-- [Queueing closures](#queueing-closures)
-- [Running the queue worker](#running-the-queue-worker)
-- [Daemon queue worker](#daemon-queue-worker)
-- [Supervisor configuration](#supervisor-configuration)
-- [Push queues](#push-queues)
-- [Failed jobs](#failed-jobs)
-
-<a name="configuration"></a>
 ## Configuration
 
 Queues allow you to defer the processing of a time consuming task, such as sending an e-mail, until a later time, thus drastically speeding up the web requests to your application.
@@ -20,24 +10,27 @@ The queue configuration file is stored in `config/queue.php`. In this file you w
 
 Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
 
-<a name="basic-usage"></a>
 ## Basic usage
 
 #### Pushing a job onto the queue
 
 To push a new job onto the queue, use the `Queue::push` method:
 
-    Queue::push('SendEmail', ['message' => $message]);
+```php
+Queue::push('SendEmail', ['message' => $message]);
+```
 
 The first argument given to the `push` method is the name of the class that should be used to process the job. The second argument is an array of data that should be passed to the handler. A job handler should be defined like so:
 
-    class SendEmail
+```php
+class SendEmail
+{
+    public function fire($job, $data)
     {
-        public function fire($job, $data)
-        {
-            //
-        }
+        //
     }
+}
+```
 
 Notice the only method that is required is `fire`, which receives a `Job` instance as well as the array of `data` that was pushed onto the queue.
 
@@ -45,21 +38,27 @@ Notice the only method that is required is `fire`, which receives a `Job` instan
 
 If you want the job to use a method other than `fire`, you may specify the method when you push the job:
 
-    Queue::push('SendEmail@send', ['message' => $message]);
+```php
+Queue::push('SendEmail@send', ['message' => $message]);
+```
 
 #### Specifying a queue name for a job
 
 You may also specify the queue / tube a job should be sent to:
 
-    Queue::push('SendEmail@send', ['message' => $message], 'emails');
+```php
+Queue::push('SendEmail@send', ['message' => $message], 'emails');
+```
 
 #### Delaying the execution of a job
 
 Sometimes you may wish to delay the execution of a queued job. For instance, you may wish to queue a job that sends a customer an e-mail 15 minutes after sign-up. You can accomplish this using the `Queue::later` method:
 
-    $date = Carbon::now()->addMinutes(15);
+```php
+$date = Carbon::now()->addMinutes(15);
 
-    Queue::later($date, 'SendEmail', ['message' => $message]);
+Queue::later($date, 'SendEmail', ['message' => $message]);
+```
 
 In this example, we're using the [Carbon](https://github.com/briannesbitt/Carbon) date library to specify the delay we wish to assign to the job. Alternatively, you may pass the number of seconds you wish to delay as an integer.
 
@@ -73,63 +72,73 @@ If your queued job takes a model in its data, only the identifier for the model 
 
 Once you have processed a job, it must be deleted from the queue, which can be done via the `delete` method on the `Job` instance:
 
-    public function fire($job, $data)
-    {
-        // Process the job...
+```php
+public function fire($job, $data)
+{
+    // Process the job...
 
-        $job->delete();
-    }
+    $job->delete();
+}
+```
 
 #### Releasing a job back onto the queue
 
 If you wish to release a job back onto the queue, you may do so via the `release` method:
 
-    public function fire($job, $data)
-    {
-        // Process the job...
+```php
+public function fire($job, $data)
+{
+    // Process the job...
 
-        $job->release();
-    }
+    $job->release();
+}
+```
 
 You may also specify the number of seconds to wait before the job is released:
 
-    $job->release(5);
+```php
+$job->release(5);
+```
 
 #### Checking the number of run attempts
 
 If an exception occurs while the job is being processed, it will automatically be released back onto the queue. You may check the number of attempts that have been made to run the job using the `attempts` method:
 
-    if ($job->attempts() > 3) {
-        //
-    }
+```php
+if ($job->attempts() > 3) {
+    //
+}
+```
 
 #### Accessing the job ID
 
 You may also access the job identifier:
 
-    $job->getJobId();
+```php
+$job->getJobId();
+```
 
-<a name="queueing-closures"></a>
 ## Queueing closures
 
 You may also push a Closure onto the queue. This is very convenient for quick, simple tasks that need to be queued:
 
 #### Pushing a closure onto the queue
 
-    Queue::push(function($job) use ($id) {
-        Account::delete($id);
+```php
+Queue::push(function($job) use ($id) {
+    Account::delete($id);
 
-        $job->delete();
-    });
+    $job->delete();
+});
+```
 
 > **Note**: Instead of making objects available to queued Closures via the `use` directive, consider passing primary keys and re-pulling the associated models from within your queue job. This often avoids unexpected serialization behavior.
 
 When using Iron.io [push queues](#push-queues), you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
 
-<a name="running-the-queue-worker"></a>
 ## Running the queue worker
 
-October includes some [console commands](../console/commands) that will process jobs in the queue.
+October CMS includes some [console commands](../console/commands) that will process jobs in the queue.
 
 To process new jobs as they are pushed onto the queue, run the `queue:work` command:
 
@@ -171,7 +180,6 @@ In addition, you may specify the number of seconds to wait before polling for ne
 
 Note that the queue only "sleeps" if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.
 
-<a name="daemon-queue-worker"></a>
 ## Daemon queue worker
 
 By default `queue:work` will process jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the `queue:work --once` command, but at the added complexity of needing to drain the queues of currently executing jobs during your deployments.
@@ -204,7 +212,6 @@ Daemon queue workers do not restart the platform before processing each job. The
 
 Similarly, your database connection may disconnect when being used by long-running daemon. You may use the `Db::reconnect` method to ensure you have a fresh connection.
 
-<a name="supervisor-configuration"></a>
 ## Supervisor configuration
 
 ### Installing Supervisor
@@ -241,8 +248,7 @@ Once the configuration file has been created, you may update the Supervisor conf
 
 For more information on Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
 
-<a name="failed-jobs"></a>
-## Failed jobs
+## Failed Jobs
 
 Since things don't always go as planned, sometimes your queued jobs will fail. Don't worry, it happens to the best of us! There is a convenient way to specify the maximum number of times a job should be attempted. After a job has exceeded this amount of attempts, it will be inserted into a `failed_jobs` table. The failed jobs table name can be configured via the `config/queue.php` configuration file.
 
@@ -252,20 +258,24 @@ You can specify the maximum number of times a job should be attempted using the 
 
 If you would like to register an event that will be called when a queue job fails, you may use the `Queue::failing` method. This event is a great opportunity to notify your team via e-mail or another third party service.
 
-    Queue::failing(function($connection, $job, $data) {
-        //
-    });
+```php
+Queue::failing(function($connection, $job, $data) {
+    //
+});
+```
 
 You may also define a `failed` method directly on a queue job class, allowing you to perform job specific actions when a failure occurs:
 
-    public function failed($data)
-    {
-        // Called when the job is failing...
-    }
+```php
+public function failed($data)
+{
+    // Called when the job is failing...
+}
+```
 
 The original array of `data` will also be automatically passed onto the failed method.
 
-### Retrying failed jobs
+### Retrying Failed Jobs
 
 To view all of your failed jobs, you may use the `queue:failed` Artisan command:
 

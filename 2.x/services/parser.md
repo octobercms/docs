@@ -1,23 +1,7 @@
 # Parser
 
-- [Introduction](#introduction)
-- [Markdown Parser](#markdown-parser)
-- [Twig Template Parser](#twig-parser)
-- [Bracket Parser](#bracket-parser)
-- [YAML Configuration Parser](#yaml-parser)
-- [Initialization (INI) Configuration Parser](#ini-parser)
-    - [October Flavored INI](#october-ini)
-- [Dynamic Syntax Parser](#dynamic-syntax-parser)
-    - [View Mode](#syntax-view-mode)
-    - [Editor Mode](#syntax-editor-mode)
-    - [Supported Tags](#syntax-supported-tags)
+October CMS uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes) use the [Twig](#twig-template-parser) and [INI format](#initialization-ini-configuration-parser) in their template structure. Each parser is described in more detail below.
 
-<a name="introduction"></a>
-## Introduction
-
-October uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes) use the [Twig](#twig-parser) and [INI format](#ini-parser) in their template structure. Each parser is described in more detail below.
-
-<a name="markdown-parser"></a>
 ## Markdown parser
 
 Markdown allows you to write easy-to-read and easy-to-write plain text format, which then converts to HTML. The `Markdown` facade is used for parsing Markdown syntax and is based on [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/). Some quick examples of markdown:
@@ -43,7 +27,6 @@ You may also use the `|md` filter for [parsing Markdown in your front-end markup
 {{ '**Text** is bold.'|md }}
 ```
 
-<a name="twig-parser"></a>
 ## Twig Template Parser
 
 Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup), [view content](../services/response-view#views) and [mail message content](../services/mail#message-content).
@@ -62,7 +45,6 @@ $html = Twig::parse($twig, ['foo' => 'bar']);
 
 The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration#extending-twig).
 
-<a name="bracket-parser"></a>
 ## Bracket Parser
 
 October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#passing-variables-to-content-blocks). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
@@ -99,7 +81,6 @@ The array can be iterated using the following syntax:
 </ul>
 ```
 
-<a name="yaml-parser"></a>
 ## YAML Configuration Parser
 
 YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms#defining-form-fields) and [list column](../backend/lists#defining-list-columns) definitions. An example of some YAML:
@@ -130,7 +111,6 @@ The parser also supports operation in reverse, outputting YAML format from a PHP
 $yamlString = Yaml::render($array);
 ```
 
-<a name="ini-parser"></a>
 ## Initialization (INI) Configuration Parser
 
 The INI file format is a standard for defining simple configuration files, commonly used by [components inside theme templates](../cms/components). It could be considered a cousin of the YAML format, although unlike YAML, it is incredibly simple, less sensitive to typos and does not rely on indentation. It supports basic key-value pairs with sections, for example:
@@ -162,7 +142,6 @@ The parser also supports operation in reverse, outputting INI format from a PHP 
 $iniString = Ini::render($array);
 ```
 
-<a name="october-ini"></a>
 ### October Flavored INI
 
 Traditionally, the INI parser used by the PHP function `parse_ini_string` is restricted to arrays that are 3 levels deep. For example:
@@ -188,7 +167,6 @@ level2Object[level3Object][level4Object][level5Value] = "Yay!"
 ; ... to infinity and beyond!
 ```
 
-<a name="dynamic-syntax-parser"></a>
 ## Dynamic Syntax Parser
 
 Dynamic Syntax is a templating engine unique to October that fundamentally supports two modes of rendering. Parsing a template will produce two results, either a **view** or **editor** mode. Take this template text as an example, the inner part of the `{text}...{/text}` tags represents the default text for the **view** mode, while the inner attributes, `name` and `label`, are used as properties for the **editor** mode.
@@ -205,7 +183,6 @@ use October\Rain\Parse\Syntax\Parser as SyntaxParser;
 $syntax = SyntaxParser::parse($content);
 ```
 
-<a name="syntax-view-mode"></a>
 ### View Mode
 
 Let's say we used the first example above as the template content, calling the `render` method by itself will render the template with the default text:
@@ -222,14 +199,13 @@ echo $syntax->render(['websiteName' => 'October CMS']);
 // <h1>October CMS</h1>
 ```
 
-As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-parser).
+As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-template-parser).
 
 ```php
 echo $syntax->toTwig();
 // <h1>{{ websiteName }}</h1>
 ```
 
-<a name="syntax-editor-mode"></a>
 ### Editor Mode
 
 So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](http://octobercms.com/plugin/rainlab-pages) that belong to them or for [dynamically built forms used in email campaigns](http://octobercms.com/plugin/responsiv-campaign).
@@ -255,7 +231,6 @@ $form = [
 File::put('fields.yaml', Yaml::render($form));
 ```
 
-<a name="syntax-supported-tags"></a>
 ### Supported Tags
 
 There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms#available-field-types).
@@ -278,7 +253,7 @@ Multiple line input for larger blocks of text.
 {/textarea}
 ```
 
-### Dropdown
+#### Dropdown
 
 Renders a dropdown form field.
 
@@ -298,7 +273,7 @@ Renders a dropdown form field with an array returned by a static class method (t
 {dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
 ```
 
-### Radio
+#### Radio
 
 Renders a radio form field.
 

@@ -1,10 +1,5 @@
 # Session
 
-- [Configuration](#configuration)
-- [Session usage](#session-usage)
-- [Flash data](#flash-data)
-
-<a name="configuration"></a>
 ## Configuration
 
 Since HTTP driven applications are stateless, sessions provide a way to store information about the user across requests. October ships with a variety of session back-ends available for use through a clean, unified API. Support for popular back-ends such as [Memcached](http://memcached.org), [Redis](http://redis.io), and databases is included out of the box.
@@ -25,7 +20,6 @@ The session configuration is stored in `config/session.php`. Be sure to review t
 
 October uses the `flash` session key internally, so you should not add an item to the session by that name.
 
-<a name="session-usage"></a>
 ## Session usage
 
 #### Storing data in the session
@@ -84,7 +78,6 @@ If you need to regenerate the session ID, you may use the `regenerate` method:
 
     Session::regenerate();
 
-<a name="flash-data"></a>
 ## Flash data
 
 Sometimes you may wish to store items in the session only for the next request. You may do so using the `Session::flash` method. Data stored in the session using this method will only be available during the subsequent HTTP request, and then will be deleted. Flash data is primarily useful for short-lived status messages:

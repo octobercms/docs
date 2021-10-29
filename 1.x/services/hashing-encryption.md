@@ -1,15 +1,9 @@
 # Hashing & Encryption
 
-- [Configuration](#configuration)
-- [Hashing](#hashing)
-- [Encryption](#encryption)
-
-<a name="configuration"></a>
 ## Configuration
 
 When you first installed October, a random key should have been generated for you. You can confirm this by checking the `key` option of your `config/app.php` configuration file. If the key remains unchanged, you should set it to a 32 character, random string. If this value is not properly set, all encrypted values will be insecure.
 
-<a name="hashing"></a>
 ## Hashing
 
 The `Hash` facade provides secure Bcrypt hashing for storing user passwords. Bcrypt is a great choice for hashing passwords because its "work factor" is adjustable, which means that the time it takes to generate a hash can be increased as hardware power increases.
@@ -38,7 +32,6 @@ The `needsRehash` function allows you to determine if the work factor used by th
         $hashed = Hash::make('plain-text');
     }
 
-<a name="encryption"></a>
 ## Encryption
 
 You may encrypt a value using the `Crypt` facade. All encrypted values are encrypted using OpenSSL and the `AES-256-CBC` cipher. Furthermore, all encrypted values are signed with a message authentication code (MAC) to detect any modifications to the encrypted string.

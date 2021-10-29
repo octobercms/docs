@@ -1,21 +1,5 @@
 # Forms & HTML
 
-- [Introduction](#introduction)
-- [Opening a form](#opening-a-form)
-- [Form tokens & CSRF protection](#form-tokens)
-- [Form model binding](#form-model-binding)
-- [Labels](#labels)
-- [Text fields](#text)
-- [Checkboxes and radio buttons](#checkboxes-and-radio-buttons)
-- [File input](#file-input)
-- [Number input](#number)
-- [Drop-down lists](#drop-down-lists)
-- [Buttons](#buttons)
-- [Custom macros](#custom-macros)
-
-<a name="introduction"></a>
-## Introduction
-
 October provides various helpful functions with the `Html` facade, useful for dealing with HTML and forms. While most of the examples will use the PHP language all of these features translate directly to [Twig markup](../markup) with a simple conversion.
 
 ```
@@ -28,7 +12,6 @@ October provides various helpful functions with the `Html` facade, useful for de
 
 As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../markup/function-form) on using the form helper in the front-end.
 
-<a name="opening-a-form"></a>
 ## Opening a form
 
 Forms can be opened with the `Form::open` method that passes an array of attributes as the first argument:
@@ -91,7 +74,6 @@ Form::ajax('onSave', ['update' => [
 
 > **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api) are available here by dropping the `data-request-` prefix.
 
-<a name="form-tokens"></a>
 ## Form tokens
 
 #### CSRF protection
@@ -110,7 +92,6 @@ A session key used for [deferred binding](../database/relations#deferred-binding
 <?= Form::sessionKey() ?>
 ```
 
-<a name="form-model-binding"></a>
 ## Form model binding
 
 #### Opening a model form
@@ -142,7 +123,6 @@ You may pass a default value as the second argument:
 
 > **Note:** When using `Form::model`, be sure to close your form with `Form::close`!
 
-<a name="labels"></a>
 ## Labels
 
 #### Generating a label element
@@ -155,7 +135,6 @@ You may pass a default value as the second argument:
 
 > **Note:** After creating a label, any form element you create with a name matching the label name will automatically receive an ID matching the label name as well.
 
-<a name="text"></a>
 ## Text fields
 
 #### Generating A Text Input
@@ -185,7 +164,6 @@ You may pass a default value as the second argument:
 <?= Form::file($name, $attributes = []) ?>
 ```
 
-<a name="checkboxes-and-radio-buttons"></a>
 ## Checkboxes and radio buttons
 
 #### Generating a checkbox or radio input
@@ -204,7 +182,6 @@ You may pass a default value as the second argument:
 <?= Form::radio('name', 'value', true) ?>
 ```
 
-<a name="number"></a>
 ## Number
 
 #### Generating a number input
@@ -213,7 +190,6 @@ You may pass a default value as the second argument:
 <?= Form::number('name', 'value') ?>
 ```
 
-<a name="file-input"></a>
 ## File input
 
 #### Generating a file input
@@ -224,7 +200,6 @@ You may pass a default value as the second argument:
 
 > **Note:** The form must have been opened with the `files` option set to `true`.
 
-<a name="drop-down-lists"></a>
 ## Drop-down lists
 
 #### Generating a drop-down list
@@ -272,7 +247,6 @@ You may pass a default value as the second argument:
 <?= Form::selectMonth('month', 2, ['emptyOption' => 'Choose month...']) ?>
 ```
 
-<a name="buttons"></a>
 ## Buttons
 
 #### Generating a submit button
@@ -283,7 +257,6 @@ You may pass a default value as the second argument:
 
 > **Note**: Need to create a button element? Try the *button* method. It has the same signature as *submit*.
 
-<a name="custom-macros"></a>
 ## Custom macros
 
 #### Registering a form macro

@@ -1,17 +1,7 @@
 # Validation
 
-- [Basic usage](#basic-usage)
-- [Working with error messages](#working-with-error-messages)
-- [Error messages & views](#error-messages-and-views)
-- [Available validation rules](#available-validation-rules)
-- [Conditionally adding rules](#conditionally-adding-rules)
-- [Validating Arrays](#validating-arrays)
-- [Custom error messages](#custom-error-messages)
-- [Custom validation rules](#custom-validation-rules)
-
 > This section is for detailing validation with the `Validator` class. Validating a model is handled slightly differently via a trait. Please see the [Validation Trait](../database/traits#validation) section for more information on validating models.
 
-<a name="basic-usage"></a>
 ## Basic usage
 
 The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class.
@@ -189,6 +179,7 @@ Below is a list of all available validation rules and their function:
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Accepted](#rule-accepted)
 - [Active URL](#rule-active-url)
 - [After (Date)](#rule-after)
@@ -230,6 +221,7 @@ Below is a list of all available validation rules and their function:
 - [Timezone](#rule-timezone)
 - [Unique (Database)](#rule-unique)
 - [URL](#rule-url)
+
 </div>
 
 <a name="rule-accepted"></a>

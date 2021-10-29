@@ -1,15 +1,5 @@
 # Queues
 
-- [Configuration](#configuration)
-- [Basic usage](#basic-usage)
-- [Queueing closures](#queueing-closures)
-- [Running the queue worker](#running-the-queue-worker)
-- [Daemon queue worker](#daemon-queue-worker)
-- [Supervisor configuration](#supervisor-configuration)
-- [Push queues](#push-queues)
-- [Failed jobs](#failed-jobs)
-
-<a name="configuration"></a>
 ## Configuration
 
 Queues allow you to defer the processing of a time consuming task, such as sending an e-mail, until a later time, thus drastically speeding up the web requests to your application.
@@ -20,7 +10,6 @@ The queue configuration file is stored in `config/queue.php`. In this file you w
 
 Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
 
-<a name="basic-usage"></a>
 ## Basic usage
 
 #### Pushing a job onto the queue
@@ -109,7 +98,6 @@ You may also access the job identifier:
 
     $job->getJobId();
 
-<a name="queueing-closures"></a>
 ## Queueing closures
 
 You may also push a Closure onto the queue. This is very convenient for quick, simple tasks that need to be queued:
@@ -126,7 +114,6 @@ You may also push a Closure onto the queue. This is very convenient for quick, s
 
 When using Iron.io [push queues](#push-queues), you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
 
-<a name="running-the-queue-worker"></a>
 ## Running the queue worker
 
 October includes some [console commands](../console/commands) that will process jobs in the queue.
@@ -171,7 +158,6 @@ In addition, you may specify the number of seconds to wait before polling for ne
 
 Note that the queue only "sleeps" if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.
 
-<a name="daemon-queue-worker"></a>
 ## Daemon queue worker
 
 By default `queue:work` will process jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the `queue:work --once` command, but at the added complexity of needing to drain the queues of currently executing jobs during your deployments.
@@ -204,7 +190,6 @@ Daemon queue workers do not restart the platform before processing each job. The
 
 Similarly, your database connection may disconnect when being used by long-running daemon. You may use the `Db::reconnect` method to ensure you have a fresh connection.
 
-<a name="supervisor-configuration"></a>
 ## Supervisor configuration
 
 ### Installing Supervisor
@@ -241,7 +226,6 @@ Once the configuration file has been created, you may update the Supervisor conf
 
 For more information on Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
 
-<a name="failed-jobs"></a>
 ## Failed jobs
 
 Since things don't always go as planned, sometimes your queued jobs will fail. Don't worry, it happens to the best of us! There is a convenient way to specify the maximum number of times a job should be attempted. After a job has exceeded this amount of attempts, it will be inserted into a `failed_jobs` table. The failed jobs table name can be configured via the `config/queue.php` configuration file.

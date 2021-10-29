@@ -1,21 +1,5 @@
 # Errors & Logging
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-- [Exception types](#exception-types)
-    - [Application exception](#application-exception)
-    - [System exception](#system-exception)
-    - [Validation exception](#validation-exception)
-    - [AJAX exception](#ajax-exception)
-- [Exception handling](#exception-handling)
-- [HTTP exceptions](#http-exceptions)
-    - [Custom error page](#custom-error-page)
-- [Logging](#logging)
-    - [Helper functions](#helpers)
-
-<a name="introduction"></a>
-## Introduction
-
 When you first start using OctoberCMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
 
 1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
@@ -23,7 +7,6 @@ When you first start using OctoberCMS, error and exception handling is already c
 
 Log entries are always created when an error page is shown and for certain [exception types](#exception-types).
 
-<a name="configuration"></a>
 ## Configuration
 
 #### Error detail
@@ -51,12 +34,10 @@ October supports `single`, `daily`, `syslog` and `errorlog` logging modes. For e
 
     'log' => 'daily'
 
-<a name="exception-types"></a>
 ## Available exceptions
 
 October comes with several basic exception types out of the box.
 
-<a name="application-exception"></a>
 ### Application exception
 
 The `October\Rain\Exception\ApplicationException` class, aliased as `ApplicationException`, is the most common exception type that is used when a simple application condition has failed.
@@ -65,7 +46,6 @@ The `October\Rain\Exception\ApplicationException` class, aliased as `Application
 
 The error message will be simplified and will never include any sensitive information like the php file and line number.
 
-<a name="system-exception"></a>
 ### System exception
 
 The `October\Rain\Exception\SystemException` class, aliased as `SystemException`, is used for errors that are critical to the system functioning and are always logged.
@@ -74,7 +54,6 @@ The `October\Rain\Exception\SystemException` class, aliased as `SystemException`
 
 When this exception is thrown a detailed error message is shown with the file and line number where it occurred.
 
-<a name="validation-exception"></a>
 ### Validation exception
 
 The `October\Rain\Exception\ValidationException` class, aliased as `ValidationException`, is used for errors that relate directly to a form submission and an invalid field. The message should contain an array with fields and error messages.
@@ -91,7 +70,6 @@ You can also pass an instance of the [validation service](validation).
 
 When this exception is thrown the [AJAX framework](../ajax/introduction) will provide this information in a usable format and focus the first invalid field.
 
-<a name="ajax-exception"></a>
 ### AJAX exception
 
 The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is considered a "smart error" and will return the HTTP code 406. This allows them to pass response contents as if they were a successful response.
@@ -100,7 +78,6 @@ The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is
 
 When this exception is thrown the [AJAX framework](../ajax/introduction) will follow the standard error workflow but will also refresh specified partials.
 
-<a name="exception-handling"></a>
 ## Exception handling
 
 All exceptions are handled by the `October\Rain\Foundation\Exception\Handler` class. This class contains two methods: `report` and `render` that dictate if an error should be logged and how to respond to an error.
@@ -129,7 +106,6 @@ If you have several exception handlers, they should be defined from most generic
 
 Error handler registrations, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
 
-<a name="http-exceptions"></a>
 ## HTTP exceptions
 
 Some exceptions describe HTTP error codes from the server. For example, this may be a "page not found" error (404), an "unauthorized error" (401) or even a developer generated 500 error. In order to generate such a response from anywhere in your application, use the following:
@@ -142,12 +118,10 @@ The `abort` method will immediately raise an exception which will be rendered by
 
 This method may be used at any time during the request's lifecycle.
 
-<a name="custom-error-page"></a>
 ### Custom error page
 
 By default any errors will be shown with a detailed error page containing the file contents, line number and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script and creating a page with the URL `/error`.
 
-<a name="logging"></a>
 ## Logging
 
 By default October is configured to create a single log file for your application which is stored in the `storage/logs` directory. You may write information to the logs using the `Log` facade:
@@ -172,7 +146,6 @@ An array of contextual data may also be passed to the log methods. This contextu
 
     Log::info('User failed to login.', ['id' => $user->id]);
 
-<a name="helpers"></a>
 ### Helper functions
 
 There are some global helper methods available to make logging easier. The `trace_log` function is an alias for `Log::info` with support for using arrays and exceptions as the message.
