@@ -12,7 +12,6 @@ This will render the component partial with a fixed name of **default.htm** and 
 {% partial "blogPosts::default" %}
 ```
 
-<a name="variables"></a>
 ## Variables
 
 Some components support [passing variables](../cms/components#passing-variables-to-components) at render time:
@@ -21,7 +20,6 @@ Some components support [passing variables](../cms/components#passing-variables-
 {% component "blogPosts" postsPerPage="5" %}
 ```
 
-<a name="customizing-components"></a>
 ## Customizing Components
 
 In most cases the `{% component %}` tag is not needed and the markup is provided as a usage example for the component API. Components are intended to be customized, this can be done in two ways:

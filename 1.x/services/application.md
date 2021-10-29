@@ -118,7 +118,7 @@ As you can see, the object being resolved will be passed to the callback, allowi
 
 #### Finding the application environment
 
-You may use the `environment` method to discover the application environment as determined by the [environment configuration](../setup/configuration#environment-config).
+You may use the `environment` method to discover the application environment as determined by the [environment configuration](../setup/configuration#environment-configuration).
 
     // production
     App::environment();

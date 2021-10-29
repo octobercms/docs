@@ -1,16 +1,5 @@
 # Deployment
 
-- [Deployment without Composer](#deploy-plugin)
-- [Public Folder](#public-folder)
-- [Auth File](#auth-file)
-- [Shared Hosting](#shared-hosting)
-- [Web Server Configuration](#webserver-configuration)
-    - [Apache Configuration](#apache-configuration)
-    - [Nginx Configuration](#nginx-configuration)
-    - [Lighttpd Configuration](#lighttpd-configuration)
-    - [IIS Configuration](#iis-configuration)
-
-<a name="deploy-plugin"></a>
 ## Deployment without Composer
 
 ![image](https://github.com/octobercms/docs/blob/develop/images/deploy-plugin.png?raw=true){.pull-right .m-l-lg .w-100}
@@ -19,7 +8,6 @@ If your server does not have the ability to run Composer or command line tools, 
 
 <div class="clearfix"></div>
 
-<a name="public-folder"></a>
 ## Public Folder
 
 For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
@@ -34,7 +22,6 @@ The command should be performed after each system update or when a new plugin is
 
 > **Note**: For Windows operating systems, the `october:mirror` command must be performed in a console running as administrator. Therefore it is more suitable to run as part of a deployment process.
 
-<a name="auth-file"></a>
 ## Auth File
 
 When deploying your application to a remote server, you may be prompted to provide your login credentials for the October CMS website. These credentials will authenticate your Composer session as having permission to download the October CMS source code.
@@ -45,7 +32,6 @@ Alternatively, you can recreate this file using the `project:set` [artisan comma
 
     php artisan project:set <license key>
 
-<a name="shared-hosting"></a>
 ## Shared Hosting
 
 If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
@@ -56,12 +42,10 @@ You can setup this protection in the file location `config/system.php` in the se
 
 > **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your control panel and set them.
 
-<a name="webserver-configuration"></a>
 ## Web Server Configuration
 
 October CMS has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
 
-<a name="apache-configuration"></a>
 ### Apache Configuration
 
 If your webserver is running Apache there are some extra system requirements:
@@ -81,7 +65,6 @@ If you have installed to a subdirectory, you should add the name of the subdirec
 
     RewriteBase /mysubdirectory/
 
-<a name="nginx-configuration"></a>
 ### Nginx Configuration
 
 There are small changes required to configure your site in Nginx.
@@ -143,7 +126,6 @@ Use the following code in **server** section. If you have installed October into
     location ~ ^/themes/.*/assets { try_files $uri 404; }
     location ~ ^/themes/.*/resources { try_files $uri 404; }
 
-<a name="lighttpd-configuration"></a>
 ### Lighttpd Configuration
 
 If your webserver is running Lighttpd you can use the following configuration to run October CMS. Open your site configuration file with your favorite editor.
@@ -167,7 +149,6 @@ Paste the following code in the editor and change the **host address** and  **se
         )
     }
 
-<a name="iis-configuration"></a>
 ### IIS Configuration
 
 If your webserver is running Internet Information Services (IIS) you can use the following in your **web.config** configuration file to run October CMS.

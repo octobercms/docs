@@ -30,7 +30,6 @@ The following example defines a function called `input()` that takes 4 arguments
 
 > **Note**: Macro arguments don't specify default values and are always considered optional.
 
-<a name="calling-macros"></a>
 ## Calling macros
 
 Before a macro can be used it needs to be "imported" first using the `{% import %}` tag. If the macro is defined in the same template, the special `_self` variable can be used.
@@ -58,7 +57,6 @@ Alternatively you may import macros from a [system view file](../services/respon
 {% import 'acme.blog::macros' as form %}
 ```
 
-<a name="nested-macros"></a>
 ## Nested macros
 
 When you want to use a macro inside another macro from the same template, you need to import it locally.
@@ -81,7 +79,6 @@ When you want to use a macro inside another macro from the same template, you ne
 {% endmacro %}
 ```
 
-<a name="context-variable"></a>
 ## Context variable
 
 Macros don't have access to the current page variables.

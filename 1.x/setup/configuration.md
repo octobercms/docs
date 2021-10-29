@@ -1,30 +1,11 @@
 # Configuration
 
-- [Webserver configuration](#webserver-configuration)
-    - [Apache configuration](#apache-configuration)
-    - [Nginx configuration](#nginx-configuration)
-    - [Lighttpd configuration](#lighttpd-configuration)
-    - [IIS configuration](#iis-configuration)
-- [Application configuration](#app-configuration)
-    - [Debug mode](#debug-mode)
-    - [Safe mode](#safe-mode)
-    - [CSRF protection](#csrf-protection)
-    - [Bleeding edge updates](#edge-updates)
-    - [Using a public folder](#public-folder)
-    - [Using a shared hosting](#shared-hosting)
-- [Environment configuration](#environment-config)
-    - [Defining a base environment](#base-environment)
-    - [Domain driven environment](#domain-environment)
-    - [Converting to DotEnv configuration](#dotenv-configuration)
-
 All of the configuration files for October are stored in the **config/** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
 
-<a name="webserver-configuration"></a>
 ## Web server configuration
 
 October has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
 
-<a name="apache-configuration"></a>
 ### Apache configuration
 
 If your webserver is running Apache there are some extra system requirements:
@@ -44,7 +25,6 @@ If you have installed to a subdirectory, you should add the name of the subdirec
 
     RewriteBase /mysubdirectory/
 
-<a name="nginx-configuration"></a>
 ### Nginx configuration
 
 There are small changes required to configure your site in Nginx.
@@ -104,7 +84,6 @@ Use the following code in **server** section. If you have installed October into
     location ~ ^/themes/.*/assets { try_files $uri 404; }
     location ~ ^/themes/.*/resources { try_files $uri 404; }
 
-<a name="lighttpd-configuration"></a>
 ### Lighttpd configuration
 
 If your webserver is running Lighttpd you can use the following configuration to run OctoberCMS. Open your site configuration file with your favorite editor.
@@ -128,7 +107,6 @@ Paste the following code in the editor and change the **host address** and  **se
         )
     }
 
-<a name="iis-configuration"></a>
 ### IIS configuration
 
 If your webserver is running Internet Information Services (IIS) you can use the following in your **web.config** configuration file to run OctoberCMS.
@@ -158,10 +136,8 @@ If your webserver is running Internet Information Services (IIS) you can use the
         </system.webServer>
     </configuration>
 
-<a name="app-configuration"></a>
 ## Application configuration
 
-<a name="debug-mode"></a>
 ### Debug mode
 
 The debug setting is found in the `config/app.php` configuration file with the `debug` parameter and is enabled by default.
@@ -177,21 +153,18 @@ The debug mode uses the following features when enabled:
 
 > **Important**: Always set the `app.debug` setting to `false` for production environments.
 
-<a name="safe-mode"></a>
 ### Safe mode
 
 The safe mode setting is found in the `config/cms.php` configuration file with the `enableSafeMode` parameter. The default value is `null`.
 
 If safe mode is enabled, the PHP code section is disabled in CMS templates for security reasons. If set to `null`, safe mode is on when [debug mode](#debug-mode) is disabled.
 
-<a name="csrf-protection"></a>
 ### CSRF protection
 
 October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
 
 While CSRF protection is enabled by default, you can disable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
 
-<a name="edge-updates"></a>
 ### Bleeding edge updates
 
 The October platform and some marketplace plugins will implement changes in two stages to ensure overall stability and integrity of the platform. This means they have a *test build* in addition to the default *stable build*.
@@ -221,7 +194,6 @@ You can instruct the platform to prefer test builds from the marketplace by chan
     "october/cms": "dev-develop",
     "laravel/framework": "~6.0",
 
-<a name="public-folder"></a>
 ### Using a public folder
 
 For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
@@ -232,7 +204,6 @@ This will create a new directory called **public/** in the project's base direct
 
 > **Note**: The above command may need to be performed with System Administrator or *sudo* privileges. It should also be performed after each system update or when a new plugin is installed.
 
-<a name="shared-hosting"></a>
 ### Using a shared hosting
 
 If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
@@ -252,10 +223,8 @@ You can setup this protection in the file location `config/cms.php` in the secti
 
 > **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your cPanel and set them.
 
-<a name="environment-config"></a>
 ## Environment configuration
 
-<a name="base-environment"></a>
 ### Defining a base environment
 
 It is often helpful to have different configuration values based on the environment the application is running in. You can do this by setting the `APP_ENV` environment variable which by default it is set to **production**. There are two common ways to change this value:
@@ -288,7 +257,6 @@ For example, to use a different MySQL database for the `dev` environment only, c
         ]
     ];
 
-<a name="domain-environment"></a>
 ### Domain driven environment
 
 October supports using an environment detected by a specific hostname. You may place these hostnames in an environment configuration file, for example, **config/environment.php**.
@@ -304,10 +272,9 @@ Using this file contents below, when the application is accessed via **global.we
         ]
     ];
 
-<a name="dotenv-configuration"></a>
 ### Converting to DotEnv configuration
 
-As an alternative to the [base environment configuration](#base-environment) you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `october:env` command to move common config values to the environment:
+As an alternative to the [base environment configuration](#defining-a-base-environment) you may place common values in the environment instead of using configuration files. The config is then accessed using [DotEnv](https://github.com/vlucas/phpdotenv) syntax. Run the `october:env` command to move common config values to the environment:
 
     php artisan october:env
 
@@ -317,4 +284,4 @@ This will create an **.env** file in project root directory and modify configura
 
 Your `.env` file should not be committed to your application's source control, since each developer or server using your application could require a different environment configuration.
 
-It is also important that your `.env` file is not accessible to the public in production. To accomplish this, you should consider using a [public folder](#public-folder).
+It is also important that your `.env` file is not accessible to the public in production. To accomplish this, you should consider using a [public folder](#using-a-public-folder).

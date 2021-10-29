@@ -21,7 +21,6 @@ The partial name can also be a variable:
 {% partial tabName %}
 ```
 
-<a name="variables"></a>
 ## Variables
 
 You can pass variables to partials by specifying them after the partial name:
@@ -42,7 +41,6 @@ Inside the partial, variables can be accessed like any other markup variable:
 <p>Country: {{ country }}, city: {{ city }}.</p>
 ```
 
-<a name="markup-variable"></a>
 ## Passing Markup as a Variable
 
 It is possible to pass markup to a partial using the `body` attribute.
@@ -59,7 +57,6 @@ The contents are then available as the `body` variable.
 {{ body|raw }}
 ```
 
-<a name="checking-partial-exits"></a>
 ## Checking a Partial Exists
 
 In any template you can check if a partial content exists by using the `partial()` function. This lets you to generate different markup depending on whether the partial exists or not. Example:

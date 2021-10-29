@@ -50,7 +50,6 @@ Option | Description
 **files** | Determines whether the form will submit files. Accepted values: **true** and **false**.
 **model** | A model object for the form model binding.
 
-<a name="form_ajax"></a>
 ## form_ajax()
 
 Outputs an AJAX enabled FORM opening tag. The first parameter of the `form_ajax()` function is the AJAX handler name. The handler can be defined in the layout or page [PHP section](../cms/themes#php-section) code, it can also be defined in a component. You may find more information about AJAX in the [AJAX Framework](../ajax/introduction) article.

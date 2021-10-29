@@ -2,7 +2,7 @@
 
 In the past, developers have generated a Cron entry for each task they need to schedule. However, this can sometimes be a headache. Your task schedule is no longer in source control, and you must SSH into your server to add the Cron entries. The command scheduler allows you to fluently and expressively define your command schedule within the application itself, and only a single Cron entry is needed on your server.
 
-> **Note**: See the [installation guide](../setup/installation#crontab-setup) for instructions on how to set up the scheduler task.
+> **Note**: See the [installation guide](../setup/installation#setting-up-the-scheduler) for instructions on how to set up the scheduler task.
 
 ## Defining Schedules
 

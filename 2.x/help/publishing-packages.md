@@ -78,7 +78,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-Make sure that this package is included in the `require` property found in the [theme information file](../themes/development#dependencies).
+Make sure that this package is included in the `require` property found in the [theme information file](../themes/development#theme-dependencies).
 
 ### Tagging a Release
 

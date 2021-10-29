@@ -1,10 +1,5 @@
 # Image Resizer
 
-- [Introduction](#introduction)
-    - [Resize Parameters](#resize-parameters)
-    - [Available Modes](#available-modes)
-
-<a name="introduction"></a>
 ## Introduction
 
 October CMS ships with an image resizer that lets you change the shape and size of supported images. To resize an image, use the `open` method on the `Resizer` facade to target a file path.
@@ -29,7 +24,6 @@ Finally, use the `save` method to save the resized image to a new location.
 
 > **Note**: There is also a `|resize` [markup filter](../markup/filter-resize) that can be used for resizing images in your themes.
 
-<a name="resize-parameters"></a>
 ### Resize Parameters
 
 The following elements are supported in the options array are supported:
@@ -41,7 +35,6 @@ Key | Description | Default | Options
 `quality` | Quality of the resized image | `90` | `0-100`
 `sharpen` | Amount to sharpen the image | `0` | `0-100`
 
-<a name="available-modes"></a>
 ### Available Modes
 
 The `mode` option allows you to specify how the image should be resized. The available modes are as follows:

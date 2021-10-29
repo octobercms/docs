@@ -201,7 +201,7 @@ October includes a number of utility commands.
 
 ### Mirror public directory
 
-`october:mirror` - creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration#public-folder).
+`october:mirror` - creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration#using-a-public-folder).
 
 ```bash
 php artisan october:mirror public
@@ -215,7 +215,7 @@ php artisan october:mirror public --relative
 
 ### Enable DotEnv configuration
 
-`october:env` - changes common configuration values to [DotEnv syntax](../setup/configuration#dotenv-configuration).
+`october:env` - changes common configuration values to [DotEnv syntax](../setup/configuration#converting-to-dotenv-configuration).
 
     php artisan october:env
 

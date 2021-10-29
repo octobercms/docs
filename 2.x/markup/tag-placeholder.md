@@ -14,8 +14,7 @@ Content can then be injected into the placeholder in any subsequent page or part
 {% endput %}
 ```
 
-<a name="default-placeholder-content"></a>
-## Default placeholder content
+## Default Placeholder Content
 
 Placeholders can have default content that can be either replaced or complemented by a page. If the `{% put %}` tag for a placeholder with default content is not defined on a page, the default placeholder content is displayed. Example placeholder definition in the layout template:
 
@@ -34,8 +33,7 @@ The page can inject more content to the placeholder. The `{% default %}` tag spe
 {% endput %}
 ```
 
-<a name="checking-placeholder-exits"></a>
-## Checking a placeholder exists
+## Checking a Placeholder Exists
 
 In a layout template you can check if a placeholder content exists by using the `placeholder()` function. This lets you to generate different markup depending on whether the page provides a placeholder content. Example:
 
@@ -56,8 +54,7 @@ In a layout template you can check if a placeholder content exists by using the 
 {% endif %}
 ```
 
-<a name="custom-placeholder-attributes"></a>
-## Custom attributes
+## Custom Attributes
 
 The `placeholder` tag accepts two optional attributes &mdash; `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment &mdash; **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
 

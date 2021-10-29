@@ -196,7 +196,7 @@ October CMS includes a number of utility commands.
 
 ### Mirror Public Directory
 
-`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/configuration#public-folder) using symbolic linking.
+`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/configuration#using-a-public-folder) using symbolic linking.
 
     php artisan october:mirror
 

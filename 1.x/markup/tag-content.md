@@ -34,7 +34,6 @@ Content blocks can also be used in combination with [layout placeholders](../cms
 {% endput %}
 ```
 
-<a name="variables"></a>
 ## Variables
 
 You can pass variables to content blocks by specifying them after the file name:

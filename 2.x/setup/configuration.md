@@ -1,15 +1,7 @@
 # Configuration
 
-- [Environment Configuration](#environment-config)
-    - [Specific Environment Files](#specific-environment-files)
-- [Application Configuration](#app-configuration)
-    - [Debug Mode](#debug-mode)
-    - [Safe Mode](#safe-mode)
-    - [CSRF protection](#csrf-protection)
-
 All of the configuration files for October CMS are stored in the **config** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
 
-<a name="environment-config"></a>
 ## Environment Configuration
 
 It is often helpful to have different configuration values based on the environment the application is running in. To control confguration in different environments, October CMS uses a [DotEnv library](https://github.com/vlucas/phpdotenv) to make it easy to manage environment variables. These variables can override any values specified in the **config** directory.
@@ -37,7 +29,6 @@ To recap, configuration values are loaded in this order.
 
 > **Important**: Never commit your `.env` file to source control because this would be a security risk in the event an intruder gains access to your source control repository, since any sensitive credentials would get exposed.
 
-<a name="specific-environment-files"></a>
 ### Specific Environment Files
 
 In rare cases you may need to load different `.env` files for the same codebase, such as local, staging and production. The current application environment detection can be overridden by a server-level `APP_ENV` environment variable.
@@ -46,12 +37,10 @@ In rare cases you may need to load different `.env` files for the same codebase,
 
 The above example sets the `APP_ENV` value to **staging** will therefore attempt to load values from the `.env.staging` file instead.
 
-<a name="app-configuration"></a>
 ## Application Configuration
 
 Here we will cover some common configuration items and their purpose.
 
-<a name="debug-mode"></a>
 ### Debug Mode
 
 The debug setting is found in the `config/app.php` configuration file with the `debug` parameter. By default, this option looks at the value of the `APP_DEBUG` environment variable, which is stored in your `.env` file.
@@ -69,7 +58,6 @@ The debug mode uses the following features when enabled:
 
 > **Important**: Always set the `APP_DEBUG` setting to `false` in production environments.
 
-<a name="safe-mode"></a>
 ### Safe Mode
 
 The safe mode setting is found in the `config/cms.php` configuration file with the `enable_safe_mode` parameter. By default, the option sources its value from `CMS_SAFE_MODE` which can be added to your `.env` file.
@@ -80,7 +68,6 @@ When safe mode is enabled, the PHP code section is disabled in CMS templates to 
 
 This variable can be set to `true` or `false`. If set to `null`, safe mode will activate when [debug mode](#debug-mode) is disabled.
 
-<a name="csrf-protection"></a>
 ### CSRF protection
 
 October CMS provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.

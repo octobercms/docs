@@ -1,14 +1,5 @@
 # Installation
 
-- [Installing Composer](#install-composer)
-- [Installing October CMS](#install-october)
-- [Post-Installation Steps](#post-install-steps)
-    - [Review Configuration](#config-review)
-    - [Setting Up The Scheduler](#crontab-setup)
-    - [Setting Up Queue Workers](#queue-setup)
-- [Minimum System Requirements](#system-requirements)
-- [Troubleshooting Installation](#troubleshoot-installation)
-
 [Watch **October CMS Installation Tutorial** on YouTube](https://www.youtube.com/watch?v=RHUwCvo7xng)
 
 October CMS is a web application platform with a simple and intuitive interface. A web platform provides a consistent structure with an emphasis on reusability so you can focus on building something unique while we handle the boring bits.
@@ -22,14 +13,12 @@ To run October CMS locally, we recommend the following software:
 - [Laravel Valet for macOS](https://laravel.com/docs/valet)
 - [Laragon for Windows 10](https://laragon.org/)
 
-<a name="install-composer"></a>
 ## Installing Composer
 
 October CMS uses [Composer](http://getcomposer.org/) to manage its dependencies. So before getting started, you will need to make sure you have Composer installed.
 
-You should also check that your computer or server meets the [minimum system requirements](#system-requirements) for running the PHP application.
+You should also check that your computer or server meets the [minimum system requirements](#minimum-system-requirements) for running the PHP application.
 
-<a name="install-october"></a>
 ## Installing October CMS
 
 You can then create a new October CMS project by using `create-project` command in your terminal. The following creates a new project in a directory called **myoctober**.
@@ -50,12 +39,10 @@ You can then serve the application and open it in your browser.
 
 > **Note**: If you are using a project, continue reading the [Projects article](https://octobercms.com/help/site/projects) for information on how to set up your project.
 
-<a name="post-install-steps"></a>
 ## Post-Installation Steps
 
 There are some things you may need to set up after the installation is complete.
 
-<a name="config-review"></a>
 ### Review Configuration
 
 Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
@@ -64,9 +51,8 @@ For example, in production environments you may want to do the following:
 
 - Enable [CSRF protection](../setup/configuration#csrf-protection)
 - Disable [debug mode](../setup/configuration#debug-mode)
-- Use a [public folder](../setup/configuration#public-folder) for additional security
+- Use a [public folder](../setup/configuration#using-a-public-folder) for additional security
 
-<a name="crontab-setup"></a>
 ### Setting Up The Scheduler
 
 For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
@@ -77,7 +63,6 @@ Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* 
 
 > **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 
-<a name="queue-setup"></a>
 ### Setting Up Queue Workers
 
 You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
@@ -88,7 +73,6 @@ You can also run the queue as a daemon process with
 
     php artisan queue:work
 
-<a name="system-requirements"></a>
 ## Minimum System Requirements
 
 October CMS has some server requirements for web hosting:
@@ -118,7 +102,6 @@ When using Ubuntu, the following command can be run to install all required exte
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) user-defined aggregate.
 
-<a name="troubleshoot-installation"></a>
 ## Troubleshooting Installation
 
 1. **The installation hangs or freezes when I enter the license key**: This can happen in some environments when pasting the key contents. Press the ENTER key multiple times to allow the installation process to continue.
