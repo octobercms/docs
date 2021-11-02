@@ -16,7 +16,7 @@ plugins/
         Plugin.php
 ```
 
-The model configuration directory could contain the model's [list column](../backend/lists#defining-list-columns) and [form field](../backend/forms#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
+The model configuration directory could contain the model's [list column](../backend/lists.md#defining-list-columns) and [form field](../backend/forms.md#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
 ## Defining Models
 
@@ -42,7 +42,7 @@ The `$table` protected field specifies the database table corresponding the mode
 
 ### Supported Properties
 
-There are some standard properties that can be found on models, in addition to those provided by [model traits](traits). For example:
+There are some standard properties that can be found on models, in addition to those provided by [model traits](traits.md). For example:
 
 ```php
 class User extends Model
@@ -71,9 +71,9 @@ Property | Description
 **$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
 **$fillable** | values are fields accessible to [mass assignment](#mass-assignment).
 **$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
-**$visible** | values are fields made visible when [serializing the model data](../database/serialization).
-**$hidden** | values are fields made hidden when [serializing the model data](../database/serialization).
-**$connection** | string that contains the [connection name](../database/basics#multiple-database-connections) that's utilised by the model by default.
+**$visible** | values are fields made visible when [serializing the model data](../database/serialization.md).
+**$hidden** | values are fields made hidden when [serializing the model data](../database/serialization.md).
+**$connection** | string that contains the [connection name](../database/basics.md#multiple-database-connections) that's utilised by the model by default.
 
 #### Primary key
 
@@ -157,7 +157,7 @@ When requesting data from the database the model will retrieve values primarily 
 
 ### Retrieving Multiple Models
 
-Once you have created a model and [its associated database table](../database/structure#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query) allowing you to query the database table associated with the model. For example:
+Once you have created a model and [its associated database table](../database/structure.md#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query.md) allowing you to query the database table associated with the model. For example:
 
 ```php
 $flights = Flight::all();
@@ -175,7 +175,7 @@ foreach ($flights as $flight) {
 
 #### Adding additional constraints
 
-The `all` method will return all of the results in the model's table. Since each model serves as a [query builder](../database/query), you may also add constraints to queries, and then use the `get` method to retrieve the results:
+The `all` method will return all of the results in the model's table. Since each model serves as a [query builder](../database/query.md), you may also add constraints to queries, and then use the `get` method to retrieve the results:
 
 ```php
 $flights = Flight::where('active', 1)
@@ -184,11 +184,11 @@ $flights = Flight::where('active', 1)
     ->get();
 ```
 
-> **Note**: Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query). You may use any of these methods in your model queries.
+> **Note**: Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query.md). You may use any of these methods in your model queries.
 
 #### Collections
 
-For methods like `all` and `get` which retrieve multiple results, an instance of a `Collection` will be returned. This class provides [a variety of helpful methods](../database/collection) for working with your results. Of course, you can simply loop over this collection like an array:
+For methods like `all` and `get` which retrieve multiple results, an instance of a `Collection` will be returned. This class provides [a variety of helpful methods](../database/collection.md) for working with your results. Of course, you can simply loop over this collection like an array:
 
 ```php
 foreach ($flights as $flight) {
@@ -232,7 +232,7 @@ $model = Flight::findOrFail(1);
 $model = Flight::where('legs', '>', 100)->firstOrFail();
 ```
 
-When [developing an API](../services/router), if the exception is not caught, a `404` HTTP response is automatically sent back to the user, so it is not necessary to write explicit checks to return `404` responses when using these methods:
+When [developing an API](../services/router.md), if the exception is not caught, a `404` HTTP response is automatically sent back to the user, so it is not necessary to write explicit checks to return `404` responses when using these methods:
 
 ```php
 Route::get('/api/flights/{id}', function ($id) {
@@ -242,7 +242,7 @@ Route::get('/api/flights/{id}', function ($id) {
 
 ### Retrieving Aggregates
 
-You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query#aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
+You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query.md#aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
 
 ```php
 $count = Flight::where('active', 1)->count();
@@ -526,7 +526,7 @@ public function afterUpdate()
 }
 ```
 
-You can externally bind to [local events](../services/events) for a single instance of a model using the `bindEvent` method. The event name should be the same as the method override name, prefixed with `model.`.
+You can externally bind to [local events](../services/events.md) for a single instance of a model using the `bindEvent` method. The event name should be the same as the method override name, prefixed with `model.`.
 
 ```php
 $flight = new Flight;
@@ -537,7 +537,7 @@ $flight->bindEvent('model.beforeCreate', function() use ($model) {
 
 ## Extending Models
 
-Since models are [equipped to use behaviors](../services/behaviors), they can be extended with the static `extend` method. The method takes a closure and passes the model object into it.
+Since models are [equipped to use behaviors](../services/behaviors.md), they can be extended with the static `extend` method. The method takes a closure and passes the model object into it.
 
 Inside the closure you can add relations to the model. Here we extend the `Backend\Models\User` model to include a profile (has one) relationship referencing the `Acme\Demo\Models\Profile` model.
 

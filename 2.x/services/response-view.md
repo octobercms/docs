@@ -2,7 +2,7 @@
 
 ## Basic Responses
 
-A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts#layout-execution-life-cycle) and [AJAX handler definitions](../ajax/handlers).
+A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts.md#layout-execution-life-cycle) and [AJAX handler definitions](../ajax/handlers.md).
 
 #### Returning strings from a CMS method
 
@@ -29,7 +29,7 @@ public function onDoSomething()
 
 #### Returning strings from routes
 
-Returning a string from a [route definition](../services/router) will act the same as a CMS method and display the string as the response.
+Returning a string from a [route definition](../services/router.md) will act the same as a CMS method and display the string as the response.
 
 ```php
 Route::get('/', function() {
@@ -129,7 +129,7 @@ return Redirect::to('user/login');
 
 ### Returning a Redirect with Flash Data
 
-Redirecting to a new URL and [flashing data to the session](../services/session) are typically done at the same time. So, for convenience, you may create a `RedirectResponse` instance and flash data to the session in a single method chain:
+Redirecting to a new URL and [flashing data to the session](../services/session.md) are typically done at the same time. So, for convenience, you may create a `RedirectResponse` instance and flash data to the session in a single method chain:
 
 ```php
 return Redirect::to('user/login')->with('message', 'Login Failed');
@@ -171,11 +171,11 @@ The `macro` function accepts a name as its first argument, and a Closure as its 
 return Response::caps('foo');
 ```
 
-You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
+You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
 
 ## Views
 
-Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and back-end areas. Views are also used by the [Mail service](../services/mail) for providing default template content. Views are typically stored in the `views` directory of a plugin.
+Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and back-end areas. Views are also used by the [Mail service](../services/mail.md) for providing default template content. Views are typically stored in the `views` directory of a plugin.
 
 A simple view could look something like this:
 

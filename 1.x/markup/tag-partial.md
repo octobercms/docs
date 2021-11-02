@@ -1,6 +1,6 @@
 # {% partial %}
 
-The `{% partial %}` tag will parse a [CMS partial](../cms/partials) and render the partial contents on the page. To display a partial called **footer.htm**, simply pass the name after the `partial` tag quoted as a string.
+The `{% partial %}` tag will parse a [CMS partial](../cms/partials.md) and render the partial contents on the page. To display a partial called **footer.htm**, simply pass the name after the `partial` tag quoted as a string.
 
 ```twig
 {% partial "footer" %}
@@ -12,7 +12,7 @@ A partial inside a subdirectory can be rendered in the same way.
 {% partial "sidebar/menu" %}
 ```
 
-> **Note**: The [Themes documentation](../cms/themes#subdirectories) has more details on subdirectory usage.
+> **Note**: The [Themes documentation](../cms/themes.md#subdirectories) has more details on subdirectory usage.
 
 The partial name can also be a variable:
 

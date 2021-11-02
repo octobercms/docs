@@ -2,7 +2,7 @@
 
 **Form Behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-Form behavior depends on form [field definitions](#defining-form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+Form behavior depends on form [field definitions](#defining-form-fields) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -17,11 +17,11 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-> **Note**: Very often the form and [list behavior](../backend/lists) are used together in a same controller.
+> **Note**: Very often the form and [list behavior](../backend/lists.md) are used together in a same controller.
 
 ## Configuring the Form Behavior
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a typical form behavior configuration file.
+The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical form behavior configuration file.
 
 ```yaml
 # ===================================
@@ -74,7 +74,7 @@ The following configuration options are supported for the Create page.
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
 **form** | overrides the default form fields definitions for the create page only.
@@ -93,7 +93,7 @@ The following configuration options are supported for the Update page.
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
 **form** | overrides the default form fields definitions for the update page only.
@@ -111,12 +111,12 @@ The following configuration options are supported for the Preview page.
 
 Option  | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **form** | overrides the default form fields definitions for the preview page only.
 
 ### Custom Messages
 
-Specify the `customMessages` option to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
+Specify the `customMessages` option to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../plugin/localization.md).
 
 ```yaml
 customMessages:
@@ -212,14 +212,14 @@ Option | Description
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using [trigger events](#trigger-events).
 **preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#input-preset-converter).
-**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits#validation) as this is not enforced by the form controller.
+**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#validation) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
-**permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ### Nested Field Selection
 
-Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations#relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model#property-jsonable), you may use a nested field type using the **relation[field]** definition.
+Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations.md#relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#property-jsonable), you may use a nested field type using the **relation[field]** definition.
 
 ```yaml
 avatar[name]:
@@ -702,7 +702,7 @@ content:
 
 ## Form Widgets
 
-There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets#form-widgets) article.
+There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#form-widgets) article.
 
 <div class="content-list collection-method-list" markdown="1">
 - [Code Editor](#widget-codeeditor)
@@ -796,7 +796,7 @@ data:
     searching: false
 ```
 
-> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model#supported-properties) or anything that can handle storing as an array.
+> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model.md#supported-properties) or anything that can handle storing as an array.
 
 #### Table configuration
 
@@ -904,10 +904,10 @@ Option | Description
 **maxFiles** | maximum number of files allowed to be uploaded
 **useCaption** | allows a title and description to be set for the file. Default: true
 **prompt** | text to display for the upload button, applies to files only, optional
-**thumbOptions** | additional [resize options](../services/resizer#resize-parameters) for generating the thumbnail
+**thumbOptions** | additional [resize options](../services/resizer.md#resize-parameters) for generating the thumbnail
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
 
-> **Note**: Unlike the [Media Finder form widget](#mediafinder), the File Upload form widget uses [database file attachments](../database/attachments) so the field name be that of an `attachOne` or `attachMany` relationship attrbiute on your associated model.
+> **Note**: Unlike the [Media Finder form widget](#mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attrbiute on your associated model.
 
 ### Markdown Editor
 
@@ -973,7 +973,7 @@ profile:
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model#supported-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
+A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model.md#supported-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
 
 Option | Description
 ------------- | -------------
@@ -1004,12 +1004,12 @@ Option | Description
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
-**list** | a configuration array or reference to a list column definition file, see [list columns](lists#defining-list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](lists.md#defining-list-columns).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
 **conditions** | specifies a raw where query statement to apply to the list model query.
-**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
+**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 **searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**searchScope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
+**searchScope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 **useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
 **modelClass** | class of the model to use for listing records when useRelation = false
 
@@ -1041,7 +1041,7 @@ Option | Description
 **select** | a custom SQL select statement to use for the name.
 **order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
-**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
+**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always.
 
 ### Repeater
 
@@ -1217,7 +1217,7 @@ Option | Description
 
 ## Form Views
 
-For each page your form supports [Create](#create-page), [Update](#update-page) and [Preview](#preview-page) you should provide a [view file](../backend/controllers-ajax) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
+For each page your form supports [Create](#create-page), [Update](#update-page) and [Preview](#preview-page) you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
 
 The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 
@@ -1500,7 +1500,7 @@ public function formGetRedirectUrl($context = null, $model = null)
 
 ### Extending Form Model Query
 
-The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
+The lookup query for the form [database model](../database/model.md) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
 
 ```php
 public function formExtendQuery($query)
@@ -1590,4 +1590,4 @@ User::extend(function ($model) {
 
 ## Validating Form Fields
 
-To validate the fields of your form you can make use of the [Validation](../database/traits#validation) trait in your model.
+To validate the fields of your form you can make use of the [Validation](../database/traits.md#validation) trait in your model.

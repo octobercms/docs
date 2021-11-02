@@ -17,7 +17,7 @@ Each controller is represented with a PHP script which resides in the the **/con
 
 ### Class definition
 
-Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). The most basic representation of a Controller used inside a Plugin looks like this:
+Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). The most basic representation of a Controller used inside a Plugin looks like this:
 
     namespace Acme\Blog\Controllers;
 
@@ -47,7 +47,7 @@ Property | Description
 **$pageTitle** | sets the page title. Can be set in the action method.
 **$bodyClass** | body class property used for customizing the layout. Can be set in the controller constructor or action method.
 **$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
-**$layout** | specify a custom layout for the controller views (see [layouts](../backend/views-partials#layouts-and-child-layouts)).
+**$layout** | specify a custom layout for the controller views (see [layouts](../backend/views-partials.md#layouts-and-child-layouts)).
 
 ## Actions, views and routing
 
@@ -75,7 +75,7 @@ The variables passed with the `$vars` property can now be accessed directly in y
 
 ## Setting the navigation context
 
-Plugins can register the back-end navigation menus and submenus in the [plugin registration file](../plugin/registration#navigation-menus). The navigation context determines what back-end menu and submenu are active for the current back-end page. You can set the navigation context with the `BackendMenu` class:
+Plugins can register the back-end navigation menus and submenus in the [plugin registration file](../plugin/registration.md#navigation-menus). The navigation context determines what back-end menu and submenu are active for the current back-end page. You can set the navigation context with the `BackendMenu` class:
 
     BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
 
@@ -98,13 +98,13 @@ You can set the title of the back-end page with the `$pageTitle` property of the
 
 ## Using AJAX handlers
 
-The back-end AJAX framework uses the same [AJAX library](../ajax/introduction) as the front-end pages. The library is loaded automatically on the back-end pages.
+The back-end AJAX framework uses the same [AJAX library](../ajax/introduction.md) as the front-end pages. The library is loaded automatically on the back-end pages.
 
 ### Back-end AJAX handlers
 
-The back-end AJAX handlers can be defined in the controller class or [widgets](widgets). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
+The back-end AJAX handlers can be defined in the controller class or [widgets](widgets.md). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
 
-Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers)). You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
+Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers.md)). You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
 
     public function onOpenTemplate()
     {
@@ -130,7 +130,7 @@ The AJAX request can be triggered with the data attributes API or the JavaScript
         Do something
     </button>
 
-> **Note**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets#ajax-handlers) for more details.
+> **Note**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets.md#ajax-handlers) for more details.
 
 ## Controller middleware
 
@@ -151,7 +151,7 @@ public function __construct()
 }
 ```
 
-The `middleware()` method requires a callback with two arguments, `$request` providing the [request information](../services/request-input#request-information) and `$response` providing the [response object](../services/response-view#basic-responses). The callback should return the `$response` object with your modifications.
+The `middleware()` method requires a callback with two arguments, `$request` providing the [request information](../services/request-input.md#request-information) and `$response` providing the [response object](../services/response-view.md#basic-responses). The callback should return the `$response` object with your modifications.
 
 As an example, to add a `Test-Header` header to your response, you could do the following:
 

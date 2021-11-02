@@ -22,4 +22,4 @@ You can also pass a third options argument. This example will crop the image ins
 <img src="{{ 'banner.jpg'|resize(800, 600, { mode: 'crop' }) }}" />
 ```
 
-See the [image resizer article](../services/resizer#resize-parameters) for more information on the available `options` parameters.
+See the [image resizer article](../services/resizer.md#resize-parameters) for more information on the available `options` parameters.

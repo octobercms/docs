@@ -2,11 +2,11 @@
 
 In the past, developers have generated a Cron entry for each task they need to schedule. However, this can sometimes be a headache. Your task schedule is no longer in source control, and you must SSH into your server to add the Cron entries. The command scheduler allows you to fluently and expressively define your command schedule within the application itself, and only a single Cron entry is needed on your server.
 
-> **Note**: See the [installation guide](../setup/installation#setting-up-the-scheduler) for instructions on how to set up the scheduler task.
+> **Note**: See the [installation guide](../setup/installation.md#setting-up-the-scheduler) for instructions on how to set up the scheduler task.
 
 ## Defining Schedules
 
-You may define all of your scheduled tasks by overriding the `registerSchedule` method inside the [Plugin registration class](registration#registration-file). The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
+You may define all of your scheduled tasks by overriding the `registerSchedule` method inside the [Plugin registration class](registration.md#registration-file). The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
 
 To get started, let's look at an example of scheduling a task. In this example, we will schedule a `Closure` to be called every day at midnight. Within the `Closure` we will execute a database query to clear a table:
 
@@ -24,7 +24,7 @@ class Plugin extends PluginBase
 }
 ```
 
-In addition to scheduling `Closure` calls, you may also schedule [console commands](../console/commands) and operating system commands. For example, you may use the `command` method to schedule a console command:
+In addition to scheduling `Closure` calls, you may also schedule [console commands](../console/commands.md) and operating system commands. For example, you may use the `command` method to schedule a console command:
 
 ```php
 $schedule->command('cache:clear')->daily();
@@ -94,7 +94,7 @@ By default, scheduled tasks will be run even if the previous instance of the tas
 $schedule->command('emails:send')->withoutOverlapping();
 ```
 
-In this example, the `emails:send` [console command](../console/commands) will be run every minute if it is not already running. The `withoutOverlapping` method is especially useful if you have tasks that vary drastically in their execution time, preventing you from needing to predict exactly how long a given task will take.
+In this example, the `emails:send` [console command](../console/commands.md) will be run every minute if it is not already running. The `withoutOverlapping` method is especially useful if you have tasks that vary drastically in their execution time, preventing you from needing to predict exactly how long a given task will take.
 
 ## Task Output
 
@@ -106,7 +106,7 @@ $schedule->command('emails:send')
     ->sendOutputTo($filePath);
 ```
 
-Using the `emailOutputTo` method, you may e-mail the output to an e-mail address of your choice. Note that the output must first be sent to a file using the `sendOutputTo` method. Also before e-mailing the output of a task, you should configure [mail services](../services/mail):
+Using the `emailOutputTo` method, you may e-mail the output to an e-mail address of your choice. Note that the output must first be sent to a file using the `sendOutputTo` method. Also before e-mailing the output of a task, you should configure [mail services](../services/mail.md):
 
 ```php
 $schedule->command('foo')

@@ -10,7 +10,7 @@ Layout templates reside in the **/layouts** subdirectory of a theme directory. L
         </body>
     </html>
 
-To use a layout for a [page](pages) the page should refer the layout file name (without extension) in the [Configuration](themes#configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes#subdirectories) you should specify the subdirectory name. Example page template using the default.htm layout:
+To use a layout for a [page](pages.md) the page should refer the layout file name (without extension) in the [Configuration](themes.md#configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes.md#subdirectories) you should specify the subdirectory name. Example page template using the default.htm layout:
 
     url = "/"
     layout = "default"
@@ -25,9 +25,9 @@ When this page is requested its content is merged with the layout, or more preci
         </body>
     </html>
 
-Note that you can render [partials](partials) in layouts. This lets you to share the common markup elements between different layouts. For example, you can have a partial that outputs the website CSS and JavaScript links. This approach simplifies the resource management - if you want to add a JavaScript reference you should modify a single partial instead of editing all the layouts.
+Note that you can render [partials](partials.md) in layouts. This lets you to share the common markup elements between different layouts. For example, you can have a partial that outputs the website CSS and JavaScript links. This approach simplifies the resource management - if you want to add a JavaScript reference you should modify a single partial instead of editing all the layouts.
 
-The [Configuration](themes#configuration-section) section is optional for layouts. The supported configuration parameters are **name** and **description**. The parameters are optional and used in the back-end user interface. Example layout template with a description:
+The [Configuration](themes.md#configuration-section) section is optional for layouts. The supported configuration parameters are **name** and **description**. The parameters are optional and used in the back-end user interface. Example layout template with a description:
 
     description = "Basic layout example"
     ==
@@ -58,17 +58,17 @@ Pages can inject content to placeholders with the `{% put %}` and `{% endput %}`
 
     <p>The page content goes here.</p>
 
-More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder).
+More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder.md).
 
 ## Dynamic layouts
 
-Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages#dynamic-pages) documentation for details.
+Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#dynamic-pages) documentation for details.
 
 ### Layout execution life cycle
 
-Inside the layout's [PHP section](themes#php-section) you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
+Inside the layout's [PHP section](themes.md#php-section) you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
 
-The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page processing. The `onBeforePageStart` function is executed after the layout [components](components) ran, but before the page's `onStart` function is executed. The `onEnd` function is executed after the page is rendered. The sequence the handlers are executed is following:
+The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page processing. The `onBeforePageStart` function is executed after the layout [components](components.md) ran, but before the page's `onStart` function is executed. The `onEnd` function is executed after the page is rendered. The sequence the handlers are executed is following:
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.

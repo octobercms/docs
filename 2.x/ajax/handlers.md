@@ -2,7 +2,7 @@
 
 ## AJAX Handlers
 
-AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes#php-section) or inside [components](../cms/components). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials) as part of the AJAX request.
+AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes.md#php-section) or inside [components](../cms/components.md). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials.md) as part of the AJAX request.
 
 ```php
 function onSubmitContactForm()
@@ -11,11 +11,11 @@ function onSubmitContactForm()
 }
 ```
 
-If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](../cms/components) have the lowest priority.
+If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](../cms/components.md) have the lowest priority.
 
 ### Calling a Handler
 
-Every AJAX request should specify a handler name, either using the [data attributes API](../ajax/attributes-api) or the [JavaScript API](../ajax/javascript-api). When the request is made, the server will search all the registered handlers and locate the first one it finds.
+Every AJAX request should specify a handler name, either using the [data attributes API](../ajax/attributes-api.md) or the [JavaScript API](../ajax/javascript-api.md). When the request is made, the server will search all the registered handlers and locate the first one it finds.
 
 ```html
 <!-- Attributes API -->
@@ -25,7 +25,7 @@ Every AJAX request should specify a handler name, either using the [data attribu
 <script> $.request('onSubmitContactForm') </script>
 ```
 
-If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components#components-aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
+If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components.md#components-aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
 
 ```html
 <button data-request="mycomponent::onSubmitContactForm">Go</button>
@@ -91,7 +91,7 @@ The same with the JavaScript API:
 
 ## Throwing an AJAX Exception
 
-You may throw an [AJAX exception](../services/error-log#ajax-exception) using the `AjaxException` class to treat the response as an error while retaining the ability to send response contents as normal. Simply pass the response contents as the first argument of the exception.
+You may throw an [AJAX exception](../services/error-log.md#ajax-exception) using the `AjaxException` class to treat the response as an error while retaining the ability to send response contents as normal. Simply pass the response contents as the first argument of the exception.
 
 ```php
 throw new AjaxException([
@@ -100,11 +100,11 @@ throw new AjaxException([
 ]);
 ```
 
-> **Note**: When throwing this exception type [partials will be updated](../ajax/update-partials) as normal.
+> **Note**: When throwing this exception type [partials will be updated](../ajax/update-partials.md) as normal.
 
 ## Running Code Before Handlers
 
-Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts#dynamic-pages) allows code to run before every AJAX handler.
+Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts.md#dynamic-pages) allows code to run before every AJAX handler.
 
 ```php
 function onInit()
@@ -113,7 +113,7 @@ function onInit()
 }
 ```
 
-You may define an `init` method inside a [component class](../plugin/components#component-initialization) or [backend widget class](../backend/widgets).
+You may define an `init` method inside a [component class](../plugin/components.md#component-initialization) or [backend widget class](../backend/widgets.md).
 
 ```php
 function init()

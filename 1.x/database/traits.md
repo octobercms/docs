@@ -115,7 +115,7 @@ protected $allowTrashedSlugs = true;
 
 ## Revisionable
 
-October models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
+October models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations.md) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
 
 ```php
 class User extends Model
@@ -206,7 +206,7 @@ class Category extends Model
 }
 ```
 
-This trait will automatically inject two [model relations](../database/relations) called `parent` and `children`, it is the equivalent of the following definitions:
+This trait will automatically inject two [model relations](../database/relations.md) called `parent` and `children`, it is the equivalent of the following definitions:
 
 ```php
 public $belongsTo = [
@@ -299,7 +299,7 @@ $child2->makeChildOf($root);
 
 ### Deleting nodes
 
-When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](../database/model#model-events) will not be fired for the child models.
+When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](../database/model.md#model-events) will not be fired for the child models.
 
 ```php
 $child1->delete();
@@ -327,7 +327,7 @@ There are several methods for moving nodes around:
 
 ## Validation
 
-October models uses the built-in [Validator class](../services/validation). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
+October models uses the built-in [Validator class](../services/validation.md). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
 
 ```php
 class User extends Model
@@ -343,7 +343,7 @@ class User extends Model
 }
 ```
 
-> **Note**: You're free to use the [array syntax](../services/validation#validating-arrays) for validation rules as well.
+> **Note**: You're free to use the [array syntax](../services/validation.md#validating-arrays) for validation rules as well.
 
 ```php
 class User extends Model
@@ -375,7 +375,7 @@ $success = $user->save();
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
-> **Note:** The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation#working-with-error-messages) of formatting errors.
+> **Note:** The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation.md#working-with-error-messages) of formatting errors.
 
 ### Overriding validation
 
@@ -390,7 +390,7 @@ $user->forceSave();
 
 ### Custom error messages
 
-Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation#custom-error-messages).
+Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation.md#custom-error-messages).
 
 ```php
 class User extends Model
@@ -440,7 +440,7 @@ class User extends Model
 
 ### Dynamic validation rules
 
-You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model#events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
+You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model.md#events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
 
 ```php
 public function beforeValidate()
@@ -454,7 +454,7 @@ public function beforeValidate()
 
 ### Custom validation rules
 
-You can also create custom validation rules the [same way](../services/validation#custom-validation-rules) you would for the Validator service.
+You can also create custom validation rules the [same way](../services/validation.md#custom-validation-rules) you would for the Validator service.
 
 ## Soft deleting
 
@@ -497,7 +497,7 @@ As noted above, soft deleted models will automatically be excluded from query re
 $users = User::withTrashed()->where('account_id', 1)->get();
 ```
 
-The `withTrashed` method may also be used on a [relationship](relations) query:
+The `withTrashed` method may also be used on a [relationship](relations.md) query:
 
 ```php
 $flight->history()->withTrashed()->get();
@@ -543,7 +543,7 @@ $user->posts()->forceDelete();
 
 ### Soft deleting relations
 
-When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations.md#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
 
 ```php
 class User extends Model

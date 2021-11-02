@@ -1,6 +1,6 @@
 # Version History
 
-It is good practice for plugins to maintain a change log that documents any changes or improvements in the code. In addition to writing notes about changes, this process has the useful ability to execute [migration and seed files](../database/structure) in their correct order.
+It is good practice for plugins to maintain a change log that documents any changes or improvements in the code. In addition to writing notes about changes, this process has the useful ability to execute [migration and seed files](../database/structure.md) in their correct order.
 
 The change log is stored in a YAML file called `version.yaml` inside the **/updates** directory of a plugin, which co-exists with migration and seed files. This example displays a typical plugin updates directory structure:
 
@@ -21,13 +21,13 @@ During an update the system will notify the user about recent changes to plugins
 
 1. When an administrator signs in to the backend.
 1. When the system is updated using the update feature in the backend area.
-1. When the [console command](../console/commands#database-migration) `php artisan october:migrate` is called in the command line from the application directory.
+1. When the [console command](../console/commands.md#database-migration) `php artisan october:migrate` is called in the command line from the application directory.
 
-> **Note**: The plugin [initialization process](../plugin/registration#routing-and-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
+> **Note**: The plugin [initialization process](../plugin/registration.md#routing-and-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 
 ### Plugin Dependencies
 
-Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
+Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration.md#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
 
 ```php
 <?php namespace Acme\Blog;
@@ -42,7 +42,7 @@ In the example above the **Acme.Blog** plugin will not be updated until the **Ac
 
 ## Plugin Version File
 
-The **version.yaml** file, called the *Plugin Version File*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). Here is an example of a plugin version file:
+The **version.yaml** file, called the *Plugin Version File*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure.md) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](http://octobercms.com/help/site/marketplace). Here is an example of a plugin version file:
 
 ```yaml
 v1.0.1: First version
@@ -75,7 +75,7 @@ When tagging the new version `v2` from a version `v1` then the changes are not d
 
 ### Migration and Seed Files
 
-As previously described, updates also define when [migration and seed files](../database/structure) should be applied. An update line with a comment and updates:
+As previously described, updates also define when [migration and seed files](../database/structure.md) should be applied. An update line with a comment and updates:
 
 ```yaml
 v1.1.1:

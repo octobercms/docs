@@ -2,7 +2,7 @@
 
 ## Introduction
 
-October CMS provides various helpful functions with the `Html` facade, useful for dealing with HTML and forms. While most of the examples will use the PHP language all of these features translate directly to [Twig markup](../markup) with a simple conversion.
+October CMS provides various helpful functions with the `Html` facade, useful for dealing with HTML and forms. While most of the examples will use the PHP language all of these features translate directly to [Twig markup](../markup.md) with a simple conversion.
 
 ```
 // PHP
@@ -12,7 +12,7 @@ October CMS provides various helpful functions with the `Html` facade, useful fo
 {{ form_open(...) }}
 ```
 
-As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../markup/function-form) on using the form helper in the front-end.
+As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../markup/function-form.md) on using the form helper in the front-end.
 
 ## Opening a Form
 
@@ -74,13 +74,13 @@ Form::ajax('onSave', ['update' => [
 ])
 ```
 
-> **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api) are available here by dropping the `data-request-` prefix.
+> **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api.md) are available here by dropping the `data-request-` prefix.
 
 ## Form Tokens
 
 #### CSRF protection
 
-If you have [protection enabled](../setup/configuration#csrf-protection), using the `Form::open` method with `POST`, `PUT` or `DELETE` will automatically add a CSRF token to your forms as a hidden field. Alternatively, if you wish to generate the HTML for the hidden CSRF field, you may use the `token` method:
+If you have [protection enabled](../setup/configuration.md#csrf-protection), using the `Form::open` method with `POST`, `PUT` or `DELETE` will automatically add a CSRF token to your forms as a hidden field. Alternatively, if you wish to generate the HTML for the hidden CSRF field, you may use the `token` method:
 
 ```php
 <?= Form::token() ?>
@@ -88,7 +88,7 @@ If you have [protection enabled](../setup/configuration#csrf-protection), using 
 
 #### Deferred binding session key
 
-A session key used for [deferred binding](../database/relations#deferred-binding) will be added to every form as a hidden field. If you want to generate this field manually, you may use the `sessionKey` method:
+A session key used for [deferred binding](../database/relations.md#deferred-binding) will be added to every form as a hidden field. If you want to generate this field manually, you may use the `sessionKey` method:
 
 ```php
 <?= Form::sessionKey() ?>

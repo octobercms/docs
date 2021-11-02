@@ -8,7 +8,7 @@ October CMS ships with an image resizer that lets you change the shape and size 
 $image = Resizer::open('path/to/image.jpg');
 ```
 
-You may also pass an uploaded file from the [page request input](../services/request-input).
+You may also pass an uploaded file from the [page request input](../services/request-input.md).
 
 ```php
 $image = Resizer::open(Input::file('field_name'));
@@ -32,7 +32,7 @@ Finally, use the `save` method to save the resized image to a new location.
 $image->save('path/to/new/file.jpg');
 ```
 
-> **Note**: There is also a `|resize` [markup filter](../markup/filter-resize) that can be used for resizing images in your themes.
+> **Note**: There is also a `|resize` [markup filter](../markup/filter-resize.md) that can be used for resizing images in your themes.
 
 ### Resize Parameters
 

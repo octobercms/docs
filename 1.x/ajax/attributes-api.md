@@ -17,7 +17,7 @@ Attribute | Description
 **data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error. Inside the JavaScript code you can access the following variables: `this` (the page element triggered the request), the `context` object, the `textStatus` text string, and the `jqXHR` object.
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show the AJAX loading indicator. The feature uses jQuery's `show()` and `hide()` functions to manage the element visibility.
 **data-request-form** | explicitly specify a form element to use for sourcing the form data. If this is unspecified, the closest form to the triggering element is used, including if the element itself is a form.
-**data-request-flash** | when specified this option instructs the server to clear and send any flash messages with the response. This option is also used by the [extra features](../ajax/extras#flash-messages).
+**data-request-flash** | when specified this option instructs the server to clear and send any flash messages with the response. This option is also used by the [extra features](../ajax/extras.md#flash-messages).
 **data-request-files** | when specified the request will accept file uploads, this requires `FormData` interface support by the browser.
 **data-browser-validate** | when this option is specified, browser-based client side validation will be run on the request before it is submitted. This only applies to requests triggered in the context of a `<form>` element. **NOTE:** This form of validation does not play nice with complex forms where validated fields might not be visible to the user 100% of the time. Recommend that you avoid using it on anything but the most simple forms.
 **data-track-input** | can be applied to a text, number, or password input field that also has the `data-request` attribute. When defined, the input field automatically sends an AJAX request when a user types something in the field. The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the requests.
@@ -74,7 +74,7 @@ Send a POST parameter `id` with value `7` across multiple elements:
 </div>
 ```
 
-Including [file uploads](../services/request-input#files) with a request:
+Including [file uploads](../services/request-input.md#files) with a request:
 
 ```html
 <form data-request="onSubmit" data-request-files>

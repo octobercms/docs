@@ -6,7 +6,7 @@ October CMS ships with a media manager built in, making it easy to publish large
 
 ## Linking to Media
 
-In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [filter](../markup/filter-media).
+In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [filter](../markup/filter-media.md).
 
 ```twig
 {{ 'relative/path/to/asset.jpg'|media }}
@@ -31,7 +31,7 @@ There are several options that allow you to fine-tune the Media Manager, which a
 'ignore_patterns' => ['^\..*'],
 ```
 
-The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](../media/providers) on using third party providers such as Amazon S3.
+The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](../media/providers.md) on using third party providers such as Amazon S3.
 
 #### SVG uploads are disabled by default
 
@@ -80,7 +80,7 @@ As the partials are written with Twig, you can automate adding alternative video
 
 ## Events
 
-The Media Manager provides a few [events](../services/events) that you can listen for in order to improve extensibility.
+The Media Manager provides a few [events](../services/events.md) that you can listen for in order to improve extensibility.
 
 Event | Description | Parameters
 ------------- | ------------- | -------------

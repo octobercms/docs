@@ -1,14 +1,14 @@
 # Components
 
-Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
-This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers) or [developing components](../plugin/components) as part of plugins.
+This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../plugin/components.md) as part of plugins.
 
-> **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials#dynamic-partials) article.
+> **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials.md#dynamic-partials) article.
 
 ## Introduction
 
-If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
+If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes.md#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
 
 ```ini
 title = "Components demonstration"
@@ -66,7 +66,7 @@ maxItems = 20
 ```
 
 ::: v-pre
-However there is a way to initialize properties with values loaded from external parameters - URL parameters or [partial](partials) parameters (for components defined in partials). Use the `{{ paramName }}` syntax for values that should be loaded from partial variables:
+However there is a way to initialize properties with values loaded from external parameters - URL parameters or [partial](partials.md) parameters (for components defined in partials). Use the `{{ paramName }}` syntax for values that should be loaded from partial variables:
 :::
 
 ```ini
@@ -102,7 +102,7 @@ maxItems = {{ :maxItems }}
 ...
 ```
 
-The page, the component belongs to, should have a corresponding [URL parameter](pages#url-syntax) defined:
+The page, the component belongs to, should have a corresponding [URL parameter](pages.md#url-syntax) defined:
 
 ```ini
 url = "/todo/:maxItems"
@@ -112,7 +112,7 @@ In the October back-end you can use the Inspector tool for assigning external va
 
 ## Passing Variables to Components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials#passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components#component-properties), including [external property values](#using-external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#component-properties), including [external property values](#using-external-property-values).
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 
@@ -226,7 +226,7 @@ description = "Default layout"
 
 ### AJAX Handlers and Partials
 
-Components may introduce [AJAX handlers](../ajax/introduction) and [partials](../cms/partials) to the a theme's lifecycle, using a prefix of the component name and two `::` symbols. For example, all the AJAX handlers defined by components are available globally.
+Components may introduce [AJAX handlers](../ajax/introduction.md) and [partials](../cms/partials.md) to the a theme's lifecycle, using a prefix of the component name and two `::` symbols. For example, all the AJAX handlers defined by components are available globally.
 
 ```
 data-request="onMyComponentHandler"
@@ -244,7 +244,7 @@ Partials rendered from outside the component must use their fully qualified name
 {% partial 'componentName::component-partial' %}
 ```
 
-Read more on [component development](../plugin/components#component-partials) to learn about component partials.
+Read more on [component development](../plugin/components.md#component-partials) to learn about component partials.
 
 <!--
 ## Soft Components

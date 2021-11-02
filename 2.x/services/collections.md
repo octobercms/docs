@@ -25,7 +25,7 @@ As described above, passing an array to the constructor of the `October\Rain\Sup
 $collection = new October\Rain\Support\Collection([1, 2, 3]);
 ```
 
-By default, collections of [database models](../database/model) are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
+By default, collections of [database models](../database/model.md) are always returned as `Collection` instances; however, feel free to use the `Collection` class wherever it is convenient for your application.
 
 ## Available Methods
 
@@ -222,7 +222,7 @@ $chunks->toArray();
 // [[1, 2, 3, 4], [5, 6, 7]]
 ```
 
-This method is especially useful in [CMS pages](../cms/pages) when working with a grid system, such as [Bootstrap](https://getbootstrap.tld/css/#grid). Imagine you have a collection of models you want to display in a grid:
+This method is especially useful in [CMS pages](../cms/pages.md) when working with a grid system, such as [Bootstrap](https://getbootstrap.tld/css/#grid). Imagine you have a collection of models you want to display in a grid:
 
 ```twig
 {% for chunk in products.chunk(3) %}
@@ -2073,7 +2073,7 @@ $categories->all();
 <a name="method-toarray"></a>
 #### `toArray()` {.collection-method}
 
-The `toArray` method converts the collection into a plain PHP `array`. If the collection's values are [database models](../database/model), the models will also be converted to arrays:
+The `toArray` method converts the collection into a plain PHP `array`. If the collection's values are [database models](../database/model.md), the models will also be converted to arrays:
 
 ```php
 $collection = new Collection(['name' => 'Desk', 'price' => 200]);

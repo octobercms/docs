@@ -1,6 +1,6 @@
 # Content blocks
 
-Content blocks are text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout. They are designed to hold static content only and support basic templating variables. [Partials](partials) are more flexible and should be used for generating dynamic content.
+Content blocks are text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout. They are designed to hold static content only and support basic templating variables. [Partials](partials.md) are more flexible and should be used for generating dynamic content.
 
 ## Introduction
 
@@ -16,7 +16,7 @@ The extension affects the way content blocks are displayed in the back-end user 
 
 ## Rendering content blocks
 
-Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pages), [partial](partials) or [layout](layouts). Example of a page rendering a content block:
+Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pages.md), [partial](partials.md) or [layout](layouts.md). Example of a page rendering a content block:
 
     url = "/contacts"
     ==
@@ -34,7 +34,7 @@ Inside the content block, variables can be accessed using singular *curly bracke
 
     <h1>This is a demo for {name}</h1>
 
-More information can be found [in the Markup guide](../markup/tag-content).
+More information can be found [in the Markup guide](../markup/tag-content.md).
 
 ### Global variables
 
@@ -42,4 +42,4 @@ You may register variables that are globally available to all content blocks wit
 
     View::share('site_name', 'OctoberCMS');
 
-This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{site_name}` will be available inside all content blocks.
+This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration.md). Using the above example, the variable `{site_name}` will be available inside all content blocks.

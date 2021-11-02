@@ -1,6 +1,6 @@
 # Validation
 
-> This section is for detailing validation with the `Validator` class. Validating a model is handled slightly differently via a trait. Please see the [Validation Trait](../database/traits#validation) section for more information on validating models.
+> This section is for detailing validation with the `Validator` class. Validating a model is handled slightly differently via a trait. Please see the [Validation Trait](../database/traits.md#validation) section for more information on validating models.
 
 ## Basic usage
 

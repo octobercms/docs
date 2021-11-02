@@ -1,6 +1,6 @@
 # Structure & Seeding
 
-Migrations and seed files allow you to build, modify and populate database tables. They are primarily used by a [plugin update file](../plugin/updates) and are paired with the version history of a plugin. All classes are stored in the `updates` directory of a plugin. Migrations should tell a story about your database history and this story can be played both forwards and backwards to build up and tear down the tables.
+Migrations and seed files allow you to build, modify and populate database tables. They are primarily used by a [plugin update file](../plugin/updates.md) and are paired with the version history of a plugin. All classes are stored in the `updates` directory of a plugin. Migrations should tell a story about your database history and this story can be played both forwards and backwards to build up and tear down the tables.
 
 ## Migration structure
 
@@ -253,7 +253,7 @@ To drop a foreign key, you may use the `dropForeign` method. Foreign key constra
 
 ## Seeder structure
 
-Like migration files, a seeder class only contains one method by default: `run`and should extend the `Seeder` class. The `run` method is called when the update process is executed. Within this method, you may insert data into your database however you wish. You may use the [query builder](../database/query) to manually insert data or you may use your [model classes](../database/model). In the example below, we'll create a new user using the `User` model inside the `run` method:
+Like migration files, a seeder class only contains one method by default: `run`and should extend the `Seeder` class. The `run` method is called when the update process is executed. Within this method, you may insert data into your database however you wish. You may use the [query builder](../database/query.md) to manually insert data or you may use your [model classes](../database/model.md). In the example below, we'll create a new user using the `User` model inside the `run` method:
 
     <?php namespace Acme\Users\Updates;
 
@@ -276,7 +276,7 @@ Like migration files, a seeder class only contains one method by default: `run`a
         }
     }
 
-Alternatively, the same can be achieved using the `Db::table` [query builder](../database/query) method:
+Alternatively, the same can be achieved using the `Db::table` [query builder](../database/query.md) method:
 
     public function run()
     {

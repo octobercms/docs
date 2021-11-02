@@ -23,19 +23,27 @@ You should also check that your computer or server meets the [minimum system req
 
 You can then create a new October CMS project by using `create-project` command in your terminal. The following creates a new project in a directory called **myoctober**.
 
-    composer create-project october/october myoctober
+```bash
+composer create-project october/october myoctober
+```
 
 When the task finishes, run the installation command to guide you through the next steps.
 
-    php artisan october:install
+```bash
+php artisan october:install
+```
 
 Next, migrate the database with the following command.
 
-    php artisan october:migrate
+```bash
+php artisan october:migrate
+```
 
 You can then serve the application and open it in your browser.
 
-    php artisan serve
+```bash
+php artisan serve
+```
 
 > **Note**: If you are using a project, continue reading the [Projects article](https://octobercms.com/help/site/projects) for information on how to set up your project.
 
@@ -45,13 +53,13 @@ There are some things you may need to set up after the installation is complete.
 
 ### Review Configuration
 
-Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
+Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration.md) available for your circumstances.
 
 For example, in production environments you may want to do the following:
 
-- Enable [CSRF protection](../setup/configuration#csrf-protection)
-- Disable [debug mode](../setup/configuration#debug-mode)
-- Use a [public folder](../setup/configuration#using-a-public-folder) for additional security
+- Enable [CSRF protection](../setup/configuration.md#csrf-protection)
+- Disable [debug mode](../setup/configuration.md#debug-mode)
+- Use a [public folder](../setup/configuration.md#using-a-public-folder) for additional security
 
 ### Setting Up The Scheduler
 
@@ -71,7 +79,9 @@ If you decide to use the `database` queue driver, it is a good idea to add a Cro
 
 You can also run the queue as a daemon process with
 
-    php artisan queue:work
+```bash
+php artisan queue:work
+```
 
 ## Minimum System Requirements
 
@@ -97,8 +107,10 @@ Some OS distributions may require you manually install some of the necessary PHP
 
 When using Ubuntu, the following command can be run to install all required extensions:
 
-    sudo apt-get update &&
-    sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
+```bash
+sudo apt-get update &&
+sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
+```
 
 When using the SQL Server database engine, you will need to install the [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) user-defined aggregate.
 
@@ -108,7 +120,7 @@ When using the SQL Server database engine, you will need to install the [group c
 
 1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
 
-1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration#debug-mode) to see the underlying error message.
+1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration.md#debug-mode) to see the underlying error message.
 
 1. **An error 500 is displayed when updating the application**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 

@@ -60,7 +60,7 @@ The `October\Rain\Exception\ValidationException` class, aliased as `ValidationEx
 
     throw new ValidationException(['username' => 'Sorry that username is already taken!']);
 
-You can also pass an instance of the [validation service](validation).
+You can also pass an instance of the [validation service](validation.md).
 
     $validation = Validator::make(...);
 
@@ -68,7 +68,7 @@ You can also pass an instance of the [validation service](validation).
         throw new ValidationException($validation);
     }
 
-When this exception is thrown the [AJAX framework](../ajax/introduction) will provide this information in a usable format and focus the first invalid field.
+When this exception is thrown the [AJAX framework](../ajax/introduction.md) will provide this information in a usable format and focus the first invalid field.
 
 ### AJAX exception
 
@@ -76,7 +76,7 @@ The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is
 
     throw new AjaxException(['#flashMessages' => $this->renderPartial(...)]);
 
-When this exception is thrown the [AJAX framework](../ajax/introduction) will follow the standard error workflow but will also refresh specified partials.
+When this exception is thrown the [AJAX framework](../ajax/introduction.md) will follow the standard error workflow but will also refresh specified partials.
 
 ## Exception handling
 
@@ -104,7 +104,7 @@ If you have several exception handlers, they should be defined from most generic
 
 ### Where to place error handlers
 
-Error handler registrations, like [event handlers](events), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
+Error handler registrations, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
 
 ## HTTP exceptions
 

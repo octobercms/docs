@@ -45,13 +45,13 @@ Here the macro functions are assigned to the `form` variable, available to be ca
 <p>{{ form.input('password', null, 'password') }}</p>
 ```
 
-Macros can be defined in [a theme partial](../cms/partials) and imported by name. To import the macros from a partial called **macros/form.htm**, simply pass the name after the `import` tag quoted as a string.
+Macros can be defined in [a theme partial](../cms/partials.md) and imported by name. To import the macros from a partial called **macros/form.htm**, simply pass the name after the `import` tag quoted as a string.
 
 ```twig
 {% import 'macros/form' as form %}
 ```
 
-Alternatively you may import macros from a [system view file](../services/response-view#views) and these will be accepted. To import from **plugins/acme/blog/views/macros.htm** simply pass the path hint instead.
+Alternatively you may import macros from a [system view file](../services/response-view.md#views) and these will be accepted. To import from **plugins/acme/blog/views/macros.htm** simply pass the path hint instead.
 
 ```twig
 {% import 'acme.blog::macros' as form %}

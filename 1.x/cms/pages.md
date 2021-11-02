@@ -1,6 +1,6 @@
 # Pages
 
-All websites have pages. In October, pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension. The [Configuration](themes#configuration-section) and [Twig](themes#twig-section) template sections are required for pages, but the [PHP section](themes#php-section) is optional. Below, you can see the simplest home page example:
+All websites have pages. In October, pages are represented with page templates. Page template files reside in the **/pages** subdirectory of a theme directory. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension. The [Configuration](themes.md#configuration-section) and [Twig](themes.md#twig-section) template sections are required for pages, but the [PHP section](themes.md#php-section) is optional. Below, you can see the simplest home page example:
 
 ```
 url = "/"
@@ -10,13 +10,13 @@ url = "/"
 
 ## Page configuration
 
-Page configuration is defined in the [Configuration Section](themes#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](components), which are explained in another article. The following configuration parameters are supported for pages:
+Page configuration is defined in the [Configuration Section](themes.md#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](components.md), which are explained in another article. The following configuration parameters are supported for pages:
 
 Parameter | Description
 ------------- | -------------
 **url** | the page URL, required. The URL syntax is described below.
 **title** | the page title, required.
-**layout** | the page [layout](layouts), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
+**layout** | the page [layout](layouts.md), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
 **description** | the page description for the back-end interface, optional.
 **hidden** | hidden pages are accessible only by logged-in back-end users, optional.
 
@@ -30,7 +30,7 @@ url = "/blog"
 
 > **Note:** The page URL is case-insensitive by default.
 
-URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by October components or from the page [PHP code](themes#php-section) section.
+URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by October components or from the page [PHP code](themes.md#php-section) section.
 
 ```ini
 url = "/blog/post/:post_id"
@@ -99,11 +99,11 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 
 ## Dynamic pages
 
-Inside the [Twig section](themes#twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes#php-section), or by [Components](components). In this article, we describe how to prepare variables in the PHP section.
+Inside the [Twig section](themes.md#twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes.md#php-section), or by [Components](components.md). In this article, we describe how to prepare variables in the PHP section.
 
 ### Page execution life cycle
 
-There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
+There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components.md) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
 
 ```
 url = "/"
@@ -137,7 +137,7 @@ function onStart()
 </ul>
 ```
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts#dynamic-layouts) article.
+The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup.md). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts.md#dynamic-layouts) article.
 
 ### Sending a custom response
 
@@ -161,7 +161,7 @@ public function onStart()
 
 ### Handling forms
 
-You can handle standard forms with handler methods defined in the page or layout [PHP section](themes#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction) article). Use the [`form_open()`](markup#standard-form) function to define a form that refers to an event handler. Example:
+You can handle standard forms with handler methods defined in the page or layout [PHP section](themes.md#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction.md) article). Use the [`form_open()`](markup#standard-form) function to define a form that refers to an event handler. Example:
 
 ```twig
 {{ form_open({ request: 'onHandleForm' }) }}
@@ -171,7 +171,7 @@ You can handle standard forms with handler methods defined in the page or layout
 <p>Last submitted value: {{ lastValue }}</p>
 ```
 
-The `onHandleForm` function can be defined in the page or layout [PHP section](themes#php-section), like so:
+The `onHandleForm` function can be defined in the page or layout [PHP section](themes.md#php-section), like so:
 
 ```php
 function onHandleForm()
@@ -182,9 +182,9 @@ function onHandleForm()
 
 The handler loads the value with the `post` function and initializes the page's `lastValue` attribute variable which is displayed below the form in the first example.
 
-> **Note:** If a handler with the same name is defined in the page layout, the page, and a page [component](components), October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
+> **Note:** If a handler with the same name is defined in the page layout, the page, and a page [component](components.md), October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
 
-If you want to refer to a handler defined in a specific [component](components), use the component's name or alias in the handler reference:
+If you want to refer to a handler defined in a specific [component](components.md), use the component's name or alias in the handler reference:
 
 ```twig
 {{ form_open({ request: 'myComponent::onHandleForm' }) }}
@@ -200,7 +200,7 @@ By default, any errors will be shown with a detailed error page containing the f
 
 ## Page variables
 
-The properties of a page can be accessed in the [PHP code section](../cms/themes#php-section), or [Components](../cms/components) by referencing `$this->page`.
+The properties of a page can be accessed in the [PHP code section](../cms/themes.md#php-section), or [Components](../cms/components.md) by referencing `$this->page`.
 
 ```php
 function onEnd()
@@ -219,7 +219,7 @@ More information can be found at [`this.page` in the Markup guide](../markup/thi
 
 ## Injecting page assets programmatically
 
-If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes#php-section) of a page or [layout](layout) template. Example:
+If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes.md#php-section) of a page or [layout](layout.md) template. Example:
 
 ```php
 function onStart()
@@ -259,7 +259,7 @@ function onStart()
 }
 ```
 
-In order to output the injected assets on pages or [layouts](layout), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
+In order to output the injected assets on pages or [layouts](layout.md), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
 
 ```twig
 <head>

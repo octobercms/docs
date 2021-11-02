@@ -1,6 +1,6 @@
 # Basic Usage
 
-Connecting to databases and running queries is a simple process, supported by using either raw SQL, the [query builder](../database/query) or [active record models](../database/model). Managing database tables and populating seed data is handled by the [migration and seeder process](../database/structure).
+Connecting to databases and running queries is a simple process, supported by using either raw SQL, the [query builder](../database/query.md) or [active record models](../database/model.md). Managing database tables and populating seed data is handled by the [migration and seeder process](../database/structure.md).
 
 Raw SQL and using the query builder will perform faster and should be used for simple tasks. Active Record is an approach used by the popular framework, Ruby On Rails. It allows an easy interface for performing repetitive tasks like creating, reading, updating and deleting database records. You can learn more about the [active record pattern on Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern).
 
@@ -144,7 +144,7 @@ Lastly, you can commit a transaction via the `commit` method:
 Db::commit();
 ```
 
-> **Note**: Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query) and [model queries](../database/model).
+> **Note**: Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query.md) and [model queries](../database/model.md).
 
 ## Database Events
 
@@ -156,7 +156,7 @@ Db::listen(function($sql, $bindings, $time) {
 });
 ```
 
-Just like [event registration](../services/events#where-to-register-listeners), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
+Just like [event registration](../services/events.md#where-to-register-listeners), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
 
 ### Query Logging
 
@@ -178,4 +178,4 @@ However, in some cases, such as when inserting a large number of rows, this can 
 Db::connection()->disableQueryLog();
 ```
 
-> **Note**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log#helper-functions) instead.
+> **Note**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log.md#helper-functions) instead.

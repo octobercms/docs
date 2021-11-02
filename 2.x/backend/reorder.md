@@ -1,10 +1,10 @@
 # Sorting Records
 
-October CMS provides features for sorting and reordering database records. For behaviors that support structured lists, you can define a **structure** option to enable the feature. Various [model traits](../database/traits) are used to support reordering including nested sets, simple trees and sortable models.
+October CMS provides features for sorting and reordering database records. For behaviors that support structured lists, you can define a **structure** option to enable the feature. Various [model traits](../database/traits.md) are used to support reordering including nested sets, simple trees and sortable models.
 
 ## Configuring a Behavior
 
-The [List Behavior](../backend/lists) backend behavior currently support the option to reorder records using the **structure** option in the relevant definition. When defined, the page displays a list of records with a drag handle allowing them to be sorted and restructured.
+The [List Behavior](../backend/lists.md) backend behavior currently support the option to reorder records using the **structure** option in the relevant definition. When defined, the page displays a list of records with a drag handle allowing them to be sorted and restructured.
 
 ```yaml
 # ===================================
@@ -43,7 +43,7 @@ class Category extends Model
 }
 ```
 
-Read more about the [NestedTree trait in the database documentation](../database/traits#nested-tree).
+Read more about the [NestedTree trait in the database documentation](../database/traits.md#nested-tree).
 
 ### Simple Tree
 
@@ -56,7 +56,7 @@ class Category extends Model
 }
 ```
 
-Read more about the [SimpleTree trait in the database documentation](../database/traits#simple-tree).
+Read more about the [SimpleTree trait in the database documentation](../database/traits.md#simple-tree).
 
 ### Sortable Model
 
@@ -69,4 +69,4 @@ class User extends Model
 }
 ```
 
-Read more about the [Sortable trait in the database documentation](../database/traits#sortable).
+Read more about the [Sortable trait in the database documentation](../database/traits.md#sortable).

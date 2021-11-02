@@ -35,7 +35,7 @@ You may also pass a reference to any callable object or a [dedicated event class
 
 ### Where to register listeners
 
-The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
+The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods).
 
     class Plugin extends PluginBase
     {
@@ -139,7 +139,7 @@ When listening for the event, the argument also needs to be declared with the `&
 
 ### Queued events
 
-Firing events can be deferred in [conjunction with queues](../services/queues). Use the `Event::queue` method to "queue" the event for firing but not fire it immediately.
+Firing events can be deferred in [conjunction with queues](../services/queues.md). Use the `Event::queue` method to "queue" the event for firing but not fire it immediately.
 
     Event::queue('foo', [$user]);
 
@@ -149,7 +149,7 @@ You may use the `Event::flush` method to flush all queued events.
 
 ## Using classes as listeners
 
-In some cases, you may wish to use a class to handle an event rather than a Closure. Class event listeners will be resolved out of the [Application IoC container](application), providing you with the full power of dependency injection on your listeners.
+In some cases, you may wish to use a class to handle an event rather than a Closure. Class event listeners will be resolved out of the [Application IoC container](application.md), providing you with the full power of dependency injection on your listeners.
 
 ### Subscribe to individual methods
 
@@ -211,7 +211,7 @@ Once the subscriber has been defined, it may be registered with the `Event::subs
 
     Event::subscribe(new UserEventHandler);
 
-You may also use the [Application IoC container](application) to resolve your subscriber. To do so, simply pass the name of your subscriber to the `subscribe` method.
+You may also use the [Application IoC container](application.md) to resolve your subscriber. To do so, simply pass the name of your subscriber to the `subscribe` method.
 
     Event::subscribe('UserEventHandler');
 

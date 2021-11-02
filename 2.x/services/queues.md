@@ -138,7 +138,7 @@ When using Iron.io [push queues](#push-queues), you should take extra precaution
 
 ## Running the queue worker
 
-October CMS includes some [console commands](../console/commands) that will process jobs in the queue.
+October CMS includes some [console commands](../console/commands.md) that will process jobs in the queue.
 
 To process new jobs as they are pushed onto the queue, run the `queue:work` command:
 

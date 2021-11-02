@@ -4,13 +4,13 @@ When a handler executes it may prepare partials that are updated on the page, ei
 
 ## Pulling partial updates
 
-The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](../ajax/handlers).
+The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](../ajax/handlers.md).
 
 ```twig
 <div id="myDiv">{% partial 'mytime' %}</div>
 ```
 
-The [data attributes API](../ajax/attributes-api) uses the `data-request-update` attribute.
+The [data attributes API](../ajax/attributes-api.md) uses the `data-request-update` attribute.
 
 ```html
 <!-- Attributes API -->
@@ -21,7 +21,7 @@ The [data attributes API](../ajax/attributes-api) uses the `data-request-update`
 </button>
 ```
 
-The [JavaScript API](../ajax/javascript-api) uses the `update` configuration option:
+The [JavaScript API](../ajax/javascript-api.md) uses the `update` configuration option:
 
 ```js
 // JavaScript API
@@ -77,7 +77,7 @@ If the selector string is prepended with the `^` symbol, the content will be pre
 
 ## Pushing partial updates
 
-Comparatively, [AJAX handlers](../ajax/handlers) can *push content updates* to the client-side browser from the server-side. To push an update the handler returns an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update.
+Comparatively, [AJAX handlers](../ajax/handlers.md) can *push content updates* to the client-side browser from the server-side. To push an update the handler returns an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update.
 
 The following example will update an element on the page with the id **myDiv** using the contents found inside the partial **mypartial**. The `onRefreshTime` handler calls the `renderPartial` method to render the partial contents in PHP.
 
@@ -94,10 +94,10 @@ function onRefreshTime()
 
 ## Passing variables to partials
 
-Depending on the execution context, an [AJAX event handler](../ajax/handlers) makes variables available to partials differently.
+Depending on the execution context, an [AJAX event handler](../ajax/handlers.md) makes variables available to partials differently.
 
-- Use `$this[]` inside a page or layout [PHP section](../cms/themes#php-section).
-- Use `$this->page[]` inside a [component class](../plugin/components#ajax-handlers).
+- Use `$this[]` inside a page or layout [PHP section](../cms/themes.md#php-section).
+- Use `$this->page[]` inside a [component class](../plugin/components.md#ajax-handlers).
 - Use `$this->vars[]` in the [back-end area](../backend/controllers-ajax#using-ajax-handlers).
 
 These examples will provide the **result** variable to a partial for each context:

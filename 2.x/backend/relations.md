@@ -1,6 +1,6 @@
 # Relations
 
-**Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model) relationships on a page. Not to be confused with [List relation columns](lists#available-column-types) or [Form relation fields](forms#relation) that only provide simple management.
+**Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model.md) relationships on a page. Not to be confused with [List relation columns](lists.md#available-column-types) or [Form relation fields](forms.md#relation) that only provide simple management.
 
 Relation behavior depends on [relation definitions](#relation-definitions). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-the-relation-behavior).
 
@@ -19,11 +19,11 @@ class Projects extends Controller
 }
 ```
 
-> **Note**: Very often the relation behavior is used together with the [form behavior](form).
+> **Note**: Very often the relation behavior is used together with the [form behavior](form.md).
 
 ## Configuring the Relation Behavior
 
-The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
+The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
 
 The first level field in the relation configuration file defines the relationship name in the target model. For example:
 
@@ -62,23 +62,23 @@ Option | Description
 **pivot** | a reference to form field definition file, used for [relations with pivot table data](#belongs-to-many-with-pivot-data).
 **emptyMessage** | a message to display when the relationship is empty, optional.
 **readOnly** | disables the ability to add, update, delete or create relations. default: false
-**deferredBinding** | [defers all binding actions using a session key](../database/model#deferred-binding) when it is available. default: false
+**deferredBinding** | [defers all binding actions using a session key](../database/model.md#deferred-binding) when it is available. default: false
 
 These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
 
 Option | Type | Description
 ------------- | ------------- | -------------
-**form** | Form | a reference to form field definition file, see [backend form fields](forms#defining-form-fields).
-**list** | List | a reference to list column definition file, see [backend list columns](lists#defining-list-columns).
+**form** | Form | a reference to form field definition file, see [backend form fields](forms.md#defining-form-fields).
+**list** | List | a reference to list column definition file, see [backend list columns](lists.md#defining-list-columns).
 **showFlash** | Both | enables the display of flash messages after a successful action. Default: true
 **showSearch** | List | display an input for searching the records. Default: false
 **showSorting** | List | displays the sorting link on each column. Default: true
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **recordsPerPage** | List | maximum rows to display for each page.
-**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
+**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization.md).
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
-**scope** | List | specifies a [query scope method](../database/model#query-scopes) defined in the _related form model_ to apply to the list query always. The model that this relationship will be attached to (i.e. the parent model) is passed to this scope method as the second parameter (`$query` is the first).
-**filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists#using-list-filters).
+**scope** | List | specifies a [query scope method](../database/model.md#query-scopes) defined in the _related form model_ to apply to the list query always. The model that this relationship will be attached to (i.e. the parent model) is passed to this scope method as the second parameter (`$query` is the first).
+**filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists.md#using-list-filters).
 
 These configuration values can be specified only for the **view** options.
 
@@ -95,12 +95,12 @@ These configuration values can be specified only for the **manage** options.
 
 Option | Type | Description
 ------------- | ------------- | -------------
-**title** | Both | a popup title, can refer to a [localization string](../plugin/localization).
+**title** | Both | a popup title, can refer to a [localization string](../plugin/localization.md).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 ### Custom Messages
 
-Specify the `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../plugin/localization).
+Specify the `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../plugin/localization.md).
 
 ```yaml
 customMessages:
@@ -200,7 +200,7 @@ roles:
 
 ### Belongs to Many (with Pivot Data)
 
-> **Note**: Pivot data is not supported by [deferred bindings](../database/relations#deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).
+> **Note**: Pivot data is not supported by [deferred bindings](../database/relations.md#deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).
 
 1. Related records are displayed as a list (**view.list**).
 1. Clicking a record will display an update form (**pivot.form**).
@@ -313,9 +313,9 @@ $post = Post::where('id', 7)->first();
 $this->initRelation($post);
 ```
 
-> **Note**: The [form behavior](forms) will automatically initialize the model on its create, update and preview actions.
+> **Note**: The [form behavior](forms.md) will automatically initialize the model on its create, update and preview actions.
 
-The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms#preview-view) page, the **preview.htm** view contents could look like this:
+The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms.md#preview-view) page, the **preview.htm** view contents could look like this:
 
 ```php
 <?= $this->formRenderPreview() ?>
@@ -379,7 +379,7 @@ public function relationExtendViewWidget($widget, $field, $model)
 
 #### How to Remove a Column
 
-Since the widget has not completed initializing at this point of the runtime cycle you can't call `$widget->removeColumn()`. The `addColumns()` method as described in the [ListController documentation](../backend/lists#extending-column-definitions) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the `relationExtendViewWidget()` method. The following example shows how to remove a column.
+Since the widget has not completed initializing at this point of the runtime cycle you can't call `$widget->removeColumn()`. The `addColumns()` method as described in the [ListController documentation](../backend/lists.md#extending-column-definitions) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the `relationExtendViewWidget()` method. The following example shows how to remove a column.
 
 ```php
 public function relationExtendViewWidget($widget, $field, $model)
@@ -444,7 +444,7 @@ public function relationExtendManageFilterWidget($widget, $field, $model)
 }
 ```
 
-Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](../backend/lists#extending-filter-scopes).
+Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](../backend/lists.md#extending-filter-scopes).
 
 ### Extending the Refresh Results
 

@@ -5,11 +5,11 @@
 
 ## Extending with events
 
-The [Event service](../services/events) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
+The [Event service](../services/events.md) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
 
 ### Subscribing to events
 
-The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
+The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration.md#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
 
 ```php
 public function boot()
@@ -103,7 +103,7 @@ These are some practical examples of how events can be used.
 
 ### Extending a User model
 
-This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration#routing-and-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
+This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration.md#routing-and-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
 
 ```php
 class Plugin extends PluginBase
@@ -141,9 +141,9 @@ class Plugin extends PluginBase
 
 ### Extending backend forms
 
-There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms#extending-form-behavior).
+There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms.md#extending-form-behavior).
 
-This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-and-initialization).
+This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration.md#routing-and-initialization).
 
 ```php
 class Plugin extends PluginBase
@@ -190,7 +190,7 @@ class Plugin extends PluginBase
 
 ### Extending a backend list
 
-This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration#routing-and-initialization).
+This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration.md#routing-and-initialization).
 
 ```php
 class Plugin extends PluginBase
@@ -227,7 +227,7 @@ class Plugin extends PluginBase
 
 ### Extending a component
 
-This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components#component-class-definition).
+This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components.md#component-class-definition).
 
 ```php
 class Topic extends ComponentBase
@@ -245,7 +245,7 @@ class Topic extends ComponentBase
 }
 ```
 
-Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts#dynamic-pages). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
+Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts.md#dynamic-pages). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
 ```
 [topic]

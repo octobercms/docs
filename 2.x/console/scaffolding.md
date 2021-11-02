@@ -40,6 +40,6 @@ The `create:reportwidget` command generates a back-end report widget, view and b
 
 ## Create a Console Command
 
-The `create:command` command generates a [new console command](../console/development). The first parameter specifies the author and plugin name. The second parameter specifies the command name.
+The `create:command` command generates a [new console command](../console/development.md). The first parameter specifies the author and plugin name. The second parameter specifies the command name.
 
     php artisan create:command RainLab.Blog MyCommand

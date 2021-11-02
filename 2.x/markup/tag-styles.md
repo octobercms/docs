@@ -13,7 +13,7 @@ The `{% styles %}` tag renders CSS links to stylesheet files injected by the app
 
 ## Injecting styles
 
-Links to StyleSheet files can be injected in PHP either by [components](../plugin/components#injecting-page-assets-with-components) or [pages programmatically](../cms/pages#injecting-page-assets-programmatically).
+Links to StyleSheet files can be injected in PHP either by [components](../plugin/components.md#injecting-page-assets-with-components) or [pages programmatically](../cms/pages.md#injecting-page-assets-programmatically).
 
 ```php
 function onStart()
@@ -22,7 +22,7 @@ function onStart()
 }
 ```
 
-You can also inject raw markup to the `{% styles %}` tag by using the **styles** anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+You can also inject raw markup to the `{% styles %}` tag by using the **styles** anonymous [placeholder](../cms/layouts.md#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
 
 ```twig
 {% put styles %}

@@ -51,9 +51,9 @@ When enabled, this setting will show detailed error messages when they occur alo
 
 The debug mode uses the following features when enabled:
 
-1. [Detailed error pages](../cms/pages#error-page) are displayed.
+1. [Detailed error pages](../cms/pages.md#error-page) are displayed.
 1. Failed user authentication provides a specific reason.
-1. [Combined assets](../markup/filter-theme) are not minified by default.
+1. [Combined assets](../markup/filter-theme.md) are not minified by default.
 1. [Safe mode](#safe-mode) is disabled by default.
 
 > **Important**: Always set the `APP_DEBUG` setting to `false` in production environments.
@@ -70,7 +70,7 @@ This variable can be set to `true` or `false`. If set to `null`, safe mode will 
 
 ### CSRF protection
 
-October CMS provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
+October CMS provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html.md#form-tokens) the token is added to the page and submitted back with each request.
 
     ENABLE_CSRF=true
 

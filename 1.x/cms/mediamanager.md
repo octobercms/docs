@@ -241,7 +241,7 @@ Parameter | Value
 
 ## Events
 
-The Media Manager provides a few [events](../services/events) that you can listen for in order to improve extensibility.
+The Media Manager provides a few [events](../services/events.md) that you can listen for in order to improve extensibility.
 
 Event | Description | Parameters
 ------------- | ------------- | -------------

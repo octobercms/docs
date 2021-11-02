@@ -169,7 +169,7 @@ Classes commonly are placed in the `classes` directory. There is a number of cla
 
 ### Event naming
 
-When specifying [event names](../../docs/services/events). The term *after* is not used in Events, only the term *before* is used. For example:
+When specifying [event names](../../docs/services/events.md). The term *after* is not used in Events, only the term *before* is used. For example:
 
 1. **beforeSetAttribute** - this event comes *before* any default logic.
 1. **setAttribute** - this event comes *after* any default logic.

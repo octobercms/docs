@@ -12,7 +12,7 @@ To begin a fluent query, use the `table` method on the `Db` facade. The `table` 
 
     $users = Db::table('users')->get();
 
-Like [raw queries](../database/basics#running-raw-sql-queries), the `get` method returns an `array` of results where each result is an instance of the PHP `stdClass` object. You may access each column's value by accessing the column as a property of the object:
+Like [raw queries](../database/basics.md#running-raw-sql-queries), the `get` method returns an `array` of results where each result is an instance of the PHP `stdClass` object. You may access each column's value by accessing the column as a property of the object:
 
     foreach ($users as $user) {
         echo $user->name;
@@ -51,7 +51,7 @@ If you would like to retrieve an array containing the values of a single column,
 
 ### Chunking results
 
-If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small "chunk" of the results at a time, and feeds each chunk into a `Closure` for processing. This method is very useful for writing [console commands](../console/development) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
+If you need to work with thousands of database records, consider using the `chunk` method. This method retrieves a small "chunk" of the results at a time, and feeds each chunk into a `Closure` for processing. This method is very useful for writing [console commands](../console/development.md) that process thousands of records. For example, let's work with the entire `users` table in chunks of 100 records at a time:
 
     Db::table('users')->chunk(100, function($users) {
         foreach ($users as $user) {
@@ -600,7 +600,7 @@ Alternatively, you may use the `lockForUpdate` method. A "for update" lock preve
 
 ### Persistent caching
 
-You may easily cache the results of a query using the [Cache service](../services/cache). Simply chain the `remember` or `rememberForever` method when preparing the query.
+You may easily cache the results of a query using the [Cache service](../services/cache.md). Simply chain the `remember` or `rememberForever` method when preparing the query.
 
     $users = Db::table('users')->remember(10)->get();
 
@@ -608,7 +608,7 @@ In this example, the results of the query will be cached for ten minutes. While 
 
 ### In-memory caching
 
-Duplicate queries across the same request can be prevented by using in-memory caching. This feature is enabled by default for [queries prepared by a model](../database/model#retrieving-models) but not those generated directly using the `Db` facade.
+Duplicate queries across the same request can be prevented by using in-memory caching. This feature is enabled by default for [queries prepared by a model](../database/model.md#retrieving-models) but not those generated directly using the `Db` facade.
 
     Db::table('users')->get(); // Result from database
     Db::table('users')->get(); // Result from database

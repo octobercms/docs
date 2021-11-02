@@ -15,7 +15,7 @@ class User extends Model
 }
 ```
 
-Relationships like models themselves, also serve as powerful [query builders](query), accessing relationships as functions provides powerful method chaining and querying capabilities. For example:
+Relationships like models themselves, also serve as powerful [query builders](query.md), accessing relationships as functions provides powerful method chaining and querying capabilities. For example:
 
 ```php
 $user->posts()->where('is_active', true)->get();
@@ -292,7 +292,7 @@ public $belongsTo = [
 
 Many-to-many relations are slightly more complicated than `hasOne` and `hasMany` relationships. An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin". To define this relationship, three database tables are needed: `users`, `roles`, and `role_user`. The `role_user` table is derived from the alphabetical order of the related model names, and contains the `user_id` and `role_id` columns.
 
-Below is an example that shows the [database table structure](../plugin/updates#migration-files) used to create the join table.
+Below is an example that shows the [database table structure](../plugin/updates.md#migration-files) used to create the join table.
 
 ```php
 Schema::create('role_user', function($table)
@@ -760,11 +760,11 @@ Relation::morphMap([
 ]);
 ```
 
-The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
+The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods).
 
 ## Querying relations
 
-Since all types of Model relationships can be called via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of relationships also serve as [query builders](query), allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.
+Since all types of Model relationships can be called via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of relationships also serve as [query builders](query.md), allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.
 
 For example, imagine a blog system in which a `User` model has many associated `Post` models:
 
@@ -779,7 +779,7 @@ class User extends Model
 
 ### Access via Relationship Method
 
-You may query the **posts** relationship and add additional constraints to the relationship using the `posts` method. This gives you the ability to chain any of the [query builder](query) methods on the relationship.
+You may query the **posts** relationship and add additional constraints to the relationship using the `posts` method. This gives you the ability to chain any of the [query builder](query.md) methods on the relationship.
 
 ```php
 $user = User::find(1);
@@ -944,7 +944,7 @@ $users = User::with([
 ])->get();
 ```
 
-In this example, the model will only eager load posts if the post's `title` column contains the word `first`. Of course, you may call other [query builder](query) methods to further customize the eager loading operation:
+In this example, the model will only eager load posts if the post's `title` column contains the word `first`. Of course, you may call other [query builder](query.md) methods to further customize the eager loading operation:
 
 ```php
 $users = User::with([
@@ -1059,7 +1059,7 @@ $comment = $post->comments()->create([
 ]);
 ```
 
-Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model#mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
+Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model.md#mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
 
 ### Insert via Dynamic Property
 
@@ -1194,11 +1194,11 @@ $comment->save();
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
 
-You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/form) automatically, but you may want to use this feature in other places.
+You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/form.md) automatically, but you may want to use this feature in other places.
 
 ### Generating a session key
 
-The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../cms/markup#forms) generates a hidden field containing the session key automatically.
+The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../cms/markup.md#forms) generates a hidden field containing the session key automatically.
 
 ```php
 $sessionKey = uniqid('session_key', true);

@@ -45,7 +45,7 @@ Event::listen('auth.login', [$this, 'LoginHandler']);
 
 ### Where to Register Listeners
 
-The most common place is the `boot` method of a [Plugin registration file](../plugin/registration#registration-methods).
+The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods).
 
 ```php
 class Plugin extends PluginBase
@@ -177,7 +177,7 @@ Event::listen('cms.processContent', function (&$content) {
 
 ### Queued Events
 
-Firing Events can be deferred in [conjunction with queues](../services/queues). Use the `Event::queue` method to "queue" the event for firing but not fire it immediately.
+Firing Events can be deferred in [conjunction with queues](../services/queues.md). Use the `Event::queue` method to "queue" the event for firing but not fire it immediately.
 
 ```php
 Event::queue('foo', [$user]);
@@ -191,7 +191,7 @@ Event::flush('foo');
 
 ## Using Classes as Listeners
 
-In some cases, you may wish to use a class to handle an event rather than a Closure. Class event listeners will be resolved out of the [Application IoC container](application), providing you with the full power of dependency injection on your listeners.
+In some cases, you may wish to use a class to handle an event rather than a Closure. Class event listeners will be resolved out of the [Application IoC container](application.md), providing you with the full power of dependency injection on your listeners.
 
 ### Subscribe to Individual Methods
 
@@ -263,7 +263,7 @@ Once the subscriber has been defined, it may be registered with the `Event::subs
 Event::subscribe(new UserEventHandler);
 ```
 
-You may also use the [Application IoC container](application) to resolve your subscriber. To do so, simply pass the name of your subscriber to the `subscribe` method.
+You may also use the [Application IoC container](application.md) to resolve your subscriber. To do so, simply pass the name of your subscriber to the `subscribe` method.
 
 ```php
 Event::subscribe('UserEventHandler');

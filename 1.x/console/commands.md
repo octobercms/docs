@@ -1,6 +1,6 @@
 # Command List
 
-October includes several command-line interface (CLI) commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development) or speed up development with the provided [scaffolding commands](../console/scaffolding).
+October includes several command-line interface (CLI) commands and utilities that allow to install October, update it, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development.md) or speed up development with the provided [scaffolding commands](../console/scaffolding.md).
 
 ## Console installation
 
@@ -32,7 +32,7 @@ When updating October, use the composer update command as normal before performi
 
 Composer is configured to look inside plugin directories for composer dependencies and these will be included in updates.
 
-> **Note:** To use composer with an October instance that has been installed using the [Wizard installation](../setup/installation#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/octobercms/october) into your October instance and then run `composer install`.
+> **Note:** To use composer with an October instance that has been installed using the [Wizard installation](../setup/installation.md#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/octobercms/october) into your October instance and then run `composer install`.
 
 ## Setup & Maintenance
 
@@ -56,7 +56,7 @@ The `october:update` command will request updates from the October gateway. It w
 
 ### Database migration
 
-The `october:up` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
+The `october:up` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
 
     php artisan october:up
 
@@ -201,7 +201,7 @@ October includes a number of utility commands.
 
 ### Mirror public directory
 
-`october:mirror` - creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration#using-a-public-folder).
+`october:mirror` - creates a mirrored copy of the public files needed to serve the application, using symbolic linking. This command is used when [setting up a public folder](../setup/configuration.md#using-a-public-folder).
 
 ```bash
 php artisan october:mirror public
@@ -215,7 +215,7 @@ php artisan october:mirror public --relative
 
 ### Enable DotEnv configuration
 
-`october:env` - changes common configuration values to [DotEnv syntax](../setup/configuration#converting-to-dotenv-configuration).
+`october:env` - changes common configuration values to [DotEnv syntax](../setup/configuration.md#converting-to-dotenv-configuration).
 
     php artisan october:env
 

@@ -25,7 +25,7 @@ The settings model classes should extend the Model class and implement the `Syst
 
 The `$settingsCode` property is required for settings models. It defines the unique settings key which is used for saving the settings to the database.
 
-The `$settingsFields` property is required if are going to build a back-end settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [Backend forms](../backend/forms) article. The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
+The `$settingsFields` property is required if are going to build a back-end settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [Backend forms](../backend/forms.md) article. The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
 
     plugins/
       acme/
@@ -76,7 +76,7 @@ The back-end contains a dedicated area for housing settings and configuration, i
 
 ### Settings link registration
 
-The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration.md#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
 
     public function registerSettings()
     {
@@ -117,7 +117,7 @@ The optional `keywords` parameter is used by the settings search feature. If key
 
 ### Setting the page navigation context
 
-Just like [setting navigation context in the controller](../backend/controllers-ajax#setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+Just like [setting navigation context in the controller](../backend/controllers-ajax.md#setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
 
     public function __construct()
     {

@@ -30,7 +30,7 @@ When using the SQL Server database engine, you will need to install the [group c
 
 The wizard installation is the recommended way to install October for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
 
-> **Note:** If you are a developer, we recommend that you [install via Composer instead](../console/commands#console-install-composer)
+> **Note:** If you are a developer, we recommend that you [install via Composer instead](../console/commands.md#console-install-composer)
 
 1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
 1. [Download the installer archive file](http://octobercms.com/download).
@@ -49,13 +49,13 @@ The wizard installation is the recommended way to install October for **non-tech
 
 1. **An error code "liveConnection" is displayed**: The installer will test a connection to the installation server using port 80. Check that your webserver can create outgoing connections on port 80 via PHP. Contact your hosting provider or this is often found in the server firewall settings.
 
-1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration#debug-mode) to see the underlying error message.
+1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration.md#debug-mode) to see the underlying error message.
 
 > **Note:** A detailed installation log can be found in the `install_files/install.log` file.
 
 ## Command-line installation
 
-If you feel more comfortable with a command-line or want to use composer, there is a CLI install process on the [Console interface page](../console/commands#console-install).
+If you feel more comfortable with a command-line or want to use composer, there is a CLI install process on the [Console interface page](../console/commands.md#console-install).
 
 ## Post-installation steps
 
@@ -70,11 +70,11 @@ If you have used the [Wizard installer](#wizard-installation), for security reas
 
 ### Review configuration
 
-Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration) available for your circumstances.
+Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration.md) available for your circumstances.
 
-For example, in production environments you may want to enable [CSRF protection](../setup/configuration#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration#bleeding-edge-updates).
+For example, in production environments you may want to enable [CSRF protection](../setup/configuration.md#csrf-protection). While in development environments, you may want to enable [bleeding edge updates](../setup/configuration.md#bleeding-edge-updates).
 
-While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration#using-a-public-folder) for additional security.
+While most configuration is optional, we strongly recommend disabling [debug mode](../setup/configuration.md#debug-mode) for production environments. You may also want to use a [public folder](../setup/configuration.md#using-a-public-folder) for additional security.
 
 ### Setting up the scheduler
 

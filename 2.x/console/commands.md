@@ -1,6 +1,6 @@
 # Command List
 
-October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development) or speed up development with the provided [scaffolding commands](../console/scaffolding).
+October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development.md) or speed up development with the provided [scaffolding commands](../console/scaffolding.md).
 
 ## Setup & Maintenance
 
@@ -12,7 +12,7 @@ The `october:update` command will request updates from the October gateway. It w
 
 ### Database Migration
 
-The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
+The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
 
     php artisan october:migrate
 
@@ -134,7 +134,7 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
 ### Check Protected
 
-`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes#child-themes-lock) is added and a child theme is created.
+`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#child-themes-lock) is added and a child theme is created.
 
     php artisan theme:check
 
@@ -196,7 +196,7 @@ October CMS includes a number of utility commands.
 
 ### Mirror Public Directory
 
-`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/configuration#using-a-public-folder) using symbolic linking.
+`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/configuration.md#using-a-public-folder) using symbolic linking.
 
     php artisan october:mirror
 

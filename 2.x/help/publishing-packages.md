@@ -6,7 +6,7 @@ To publish your plugin or theme on the October CMS marketplace, you will need to
 
 Your package should reside in a source control repository that can be accessed by the October CMS gateway, such as [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/). For private packages, the server can access them using the credentials you provide during the publishing process.
 
-Be sure to start your package `name` ends with **-plugin** or **-theme** respectively, this will help others find your package and is in accordance with the [Developer Guide](../../help/guidelines/developer#package-naming).
+Be sure to start your package `name` ends with **-plugin** or **-theme** respectively, this will help others find your package and is in accordance with the [Developer Guide](../../help/guidelines/developer.md#package-naming).
 
 ### Publishing Plugins
 
@@ -66,7 +66,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions).
+You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration.md#dependency-definitions).
 
 #### Requiring Another Theme
 
@@ -78,7 +78,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-Make sure that this package is included in the `require` property found in the [theme information file](../themes/development#theme-dependencies).
+Make sure that this package is included in the `require` property found in the [theme information file](../themes/development.md#theme-dependencies).
 
 ### Tagging a Release
 
@@ -102,7 +102,7 @@ To create a new tag add (`-a`) the version with an optional (`-m`) message.
 git tag -a v2.0.1 -m "Version 2 is here!"
 ```
 
-In addition to tagging, you should also increment the version file found in your [plugin](../plugin/updates) or [theme](../themes/development#version-file).
+In addition to tagging, you should also increment the version file found in your [plugin](../plugin/updates.md) or [theme](../themes/development.md#version-file).
 
 ## Private Plugins and Themes
 
@@ -166,7 +166,7 @@ This will set all the package config values to be that of your plugin config val
 Config::get('purifier.encoding') === Config::get('acme.blog::purifier.encoding');
 ```
 
-Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values and the [standard configuration approach](settings#file-based-configuration).
+Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values and the [standard configuration approach](settings.md#file-based-configuration).
 
 ### Aliases & Service Providers
 

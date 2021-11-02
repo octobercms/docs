@@ -2,7 +2,7 @@
 
 **List Behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](#defining-list-columns) and a [model class](../database/model). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](#defining-list-columns) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -17,11 +17,11 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-> **Note**: Very often the list and [form behavior](../backend/forms) are used together in a same controller.
+> **Note**: Very often the list and [form behavior](../backend/forms.md) are used together in a same controller.
 
 ## Configuring the List Behavior
 
-The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a typical list behavior configuration file:
+The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical list behavior configuration file:
 
 ```yaml
 # ===================================
@@ -47,11 +47,11 @@ The configuration options listed below are optional.
 Option | Description
 ------------- | -------------
 **filter** | filter configuration, see [filtering the list](#filtering-the-list).
-**recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms).
+**recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms.md).
 **recordOnClick** | custom JavaScript code to execute when clicking on a record.
-**noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization).
-**deleteMessage** | a message to display when records are bulk deleted, can refer to a [localization string](../plugin/localization).
-**noRecordsDeletedMessage** | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../plugin/localization).
+**noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization.md).
+**deleteMessage** | a message to display when records are bulk deleted, can refer to a [localization string](../plugin/localization.md).
+**noRecordsDeletedMessage** | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../plugin/localization.md).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
 **perPageOptions** | options for number of items per page. Default: [20, 40, 80, 100, 120]
 **showPageNumbers** | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: true
@@ -60,7 +60,7 @@ Option | Description
 **defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **showCheckboxes** | displays checkboxes next to each record. Default: false.
 **showSetup** | displays the list column set up button. Default: false.
-**structure** | enables a structured list, see the [sorting and reordering article](../backend/reorder) for more details.
+**structure** | enables a structured list, see the [sorting and reordering article](../backend/reorder.md) for more details.
 **customViewPath** | specify a custom view path to override partials used by the list, optional.
 
 ### Adding a Toolbar
@@ -85,12 +85,12 @@ The search configuration supports the following options:
 
 Option | Description
 ------------- | -------------
-**prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization).
+**prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization.md).
 **mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
+**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
 **searchOnEnter** | setting this to true will make the search widget wait for the Enter key to be pressed before it starts searching (the default behavior is that it starts searching automatically after someone enters something into the search field and then pauses for a short moment).  Default: false.
 
-The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms):
+The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls.md#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms.md):
 
 ```php
 <div data-control="toolbar">
@@ -158,7 +158,7 @@ Option | Description
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
-**permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ### Custom Value Selection
 
@@ -178,7 +178,7 @@ status_code:
     displayFrom: status_label
 ```
 
-This is mostly applicable when a [model accessor](../database/mutators#accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
+This is mostly applicable when a [model accessor](../database/mutators.md#accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
 
 ```php
 public function getStatusLabelAttribute()
@@ -189,7 +189,7 @@ public function getStatusLabelAttribute()
 
 ### Nested Column Selection
 
-In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations) column or a [jsonable array](../database/model#property-jsonable). The only drawback of doing this is the column cannot use searchable or sortable options.
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#property-jsonable). The only drawback of doing this is the column cannot use searchable or sortable options.
 
 ```yaml
 content[title]:
@@ -197,7 +197,7 @@ content[title]:
     sortable: false
 ```
 
-The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model#events).
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#events).
 
 ## Available Column Types
 
@@ -254,7 +254,7 @@ avatar:
         quality: 80
 ```
 
-See the [image resizing article](../services/resizer#resize-parameters) for more information on what options are supported.
+See the [image resizing article](../services/resizer.md#resize-parameters) for more information on what options are supported.
 
 ### Number
 
@@ -386,7 +386,7 @@ full_name:
 ['open' => 'Open', 'closed' => 'Closed']
 ```
 
-The available options are defined on the model as [dropdown options](forms#field-dropdown).
+The available options are defined on the model as [dropdown options](forms.md#field-dropdown).
 
 ```yaml
 status:
@@ -407,7 +407,7 @@ status:
 
 ### Relation
 
-`relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
+`relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations.md) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
 
 ```yaml
 group_name:
@@ -459,7 +459,7 @@ color:
 
 ## Displaying the List
 
-Usually lists are displayed in the index [view](controllers-ajax) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
+Usually lists are displayed in the index [view](controllers-ajax.md) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
 
 ```php
 <?= $this->listRender() ?>
@@ -542,12 +542,12 @@ Option | Description
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#available-scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
+**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **emptyOption** | an optional label for an intentional empty selection.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer (switch, checkbox, number) or array (group, date range, number range) or string (date).
-**permissions** | the [permissions](users#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 **dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
 
 ### Filter Dependencies
@@ -1005,7 +1005,7 @@ Method | Description
 
 ### Extending the Model Query
 
-The lookup query for the list [database model](../database/model) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
+The lookup query for the list [database model](../database/model.md) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
 
 ```php
 public function listExtendQuery($query)
@@ -1057,7 +1057,7 @@ public function listFilterExtendQuery($query, $scope)
 
 ### Extending the Records Collection
 
-The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort` method on the [record collection](../database/collection) to change the sort order of the records.
+The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort` method on the [record collection](../database/collection.md) to change the sort order of the records.
 
 ```php
 public function listExtendRecords($records)
@@ -1070,7 +1070,7 @@ public function listExtendRecords($records)
 
 ### Custom Column Types
 
-Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration.md#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
 
 ```php
 public function registerListColumnTypes()

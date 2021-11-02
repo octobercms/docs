@@ -2,7 +2,7 @@
 
 ## Basic input
 
-You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input` [helper function](../services/helpers) is an alias for `Input::get`.
+You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input` [helper function](../services/helpers.md) is an alias for `Input::get`.
 
 #### Retrieving an input value
 
@@ -110,7 +110,7 @@ Since you often will want to flash input in association with a redirect to the p
 
     return Redirect::to('form')->withInput(Input::except('password'));
 
-> **Note:** You may flash other data across requests using the [Session](../services/session) class.
+> **Note:** You may flash other data across requests using the [Session](../services/session.md) class.
 
 #### Retrieving old data
 

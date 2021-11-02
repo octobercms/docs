@@ -628,7 +628,7 @@ The `studly_case` function converts the given string to `StudlyCase`:
 <a name="method-trans"></a>
 #### `trans()` {#collection-method}
 
-The `trans` function translates the given language line using your [localization files](../plugin/localization):
+The `trans` function translates the given language line using your [localization files](../plugin/localization.md):
 
     echo trans('validation.required'):
 
@@ -702,21 +702,21 @@ The `post` function obtains an input item from the request, restricted to POST v
 <a name="method-redirect"></a>
 #### `redirect()` {#collection-method}
 
-The `redirect` function return an instance of the redirector to do [redirect responses](../services/response-view#redirects):
+The `redirect` function return an instance of the redirector to do [redirect responses](../services/response-view.md#redirects):
 
     return redirect('/home');
 
 <a name="method-request"></a>
 #### `request()` {#collection-method}
 
-The `request` function returns the current [request instance](../services/request-input):
+The `request` function returns the current [request instance](../services/request-input.md):
 
     $referer = request()->header('referer');
 
 <a name="method-response"></a>
 #### `response()` {#collection-method}
 
-The `response` function creates a [response](../services/response-view) instance or obtains an instance of the response factory:
+The `response` function creates a [response](../services/response-view.md) instance or obtains an instance of the response factory:
 
     return response('Hello World', 200, $headers);
 
@@ -725,7 +725,7 @@ The `response` function creates a [response](../services/response-view) instance
 <a name="method-route"></a>
 #### `route()` {#collection-method}
 
-The `route` function generates a URL for the given [named route](../services/router):
+The `route` function generates a URL for the given [named route](../services/router.md):
 
     $url = route('routeName');
 

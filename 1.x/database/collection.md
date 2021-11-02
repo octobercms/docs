@@ -1,6 +1,6 @@
 # Collections
 
-All multi-result sets returned by a model are an instance of the `Illuminate\Database\Eloquent\Collection` object, including results retrieved via the `get` method or accessed via a relationship. The `Collection` object extends the [base collection](../services/collections), so it naturally inherits dozens of methods used to fluently work with the underlying array of models.
+All multi-result sets returned by a model are an instance of the `Illuminate\Database\Eloquent\Collection` object, including results retrieved via the `get` method or accessed via a relationship. The `Collection` object extends the [base collection](../services/collections.md), so it naturally inherits dozens of methods used to fluently work with the underlying array of models.
 
 All collections also serve as iterators, allowing you to loop over them as if they were simple PHP arrays:
 

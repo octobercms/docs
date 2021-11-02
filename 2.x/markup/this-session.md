@@ -1,6 +1,6 @@
 # this.session
 
-You can access the current session manager via `this.session` and it returns the object `Illuminate\Session\SessionManager` [current session configuration](../services/session#configuration).
+You can access the current session manager via `this.session` and it returns the object `Illuminate\Session\SessionManager` [current session configuration](../services/session.md#configuration).
 
 ## Retrieving data from the session
 

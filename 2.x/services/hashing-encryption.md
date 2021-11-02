@@ -16,7 +16,7 @@ $user->password = Hash::make('mypassword');
 $user->save();
 ```
 
-Alternatively, models can implement the [Hashable trait](../database/traits#hashable) to automatically hash attributes.
+Alternatively, models can implement the [Hashable trait](../database/traits.md#hashable) to automatically hash attributes.
 
 #### Verifying a password against a hash
 
@@ -42,7 +42,7 @@ if (Hash::needsRehash($hashed)) {
 
 You may encrypt a value using the `Crypt` facade. All encrypted values are encrypted using OpenSSL and the `AES-256-CBC` cipher. Furthermore, all encrypted values are signed with a message authentication code (MAC) to detect any modifications to the encrypted string.
 
-For example, we may use the `encrypt` method to encrypt a secret and store it on a [database model](../database/model):
+For example, we may use the `encrypt` method to encrypt a secret and store it on a [database model](../database/model.md):
 
 ```php
 $user = new User;
@@ -65,4 +65,4 @@ catch (DecryptException $ex) {
 }
 ```
 
-Alternatively, models can implement the [Encryptable trait](../database/traits#encryptable) to automatically encrypt and decrypt attributes.
+Alternatively, models can implement the [Encryptable trait](../database/traits.md#encryptable) to automatically encrypt and decrypt attributes.

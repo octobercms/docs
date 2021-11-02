@@ -6,7 +6,7 @@ When building JSON APIs, you will often need to convert your models and relation
 
 #### Converting a model to an array
 
-To convert a model and its loaded [relationships](relations) to an array, you may use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
+To convert a model and its loaded [relationships](relations.md) to an array, you may use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
 
 ```php
 $user = User::with('roles')->first();
@@ -14,7 +14,7 @@ $user = User::with('roles')->first();
 return $user->toArray();
 ```
 
-You may also convert [collections](collections) to arrays:
+You may also convert [collections](collections.md) to arrays:
 
 ```php
 $users = User::all();
@@ -84,7 +84,7 @@ class User extends Model
 
 ## Appending values to JSON
 
-Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, first define an [accessor](../database/mutators) for the value:
+Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, first define an [accessor](../database/mutators.md) for the value:
 
 ```php
 class User extends Model

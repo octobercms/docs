@@ -1,6 +1,6 @@
 # Using Composer
 
-Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is recommended for more advanced users and developers. See the console command on how to [first install October using composer](../console/commands#console-install-composer).
+Using [Composer](https://getcomposer.org/) as an alternative package manager to using the standard one-click update manager is recommended for more advanced users and developers. See the console command on how to [first install October using composer](../console/commands.md#console-install-composer).
 
 ### Converting from Basic Install
 
@@ -39,7 +39,7 @@ When publishing your plugins or themes to the marketplace, you may wish to also 
         }
     }
 
-Be sure to start your package `name` with **oc-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer#repository-naming).
+Be sure to start your package `name` with **oc-** and end it with **-plugin** or **-theme** respectively, this will help others find your package and is in  accordance with the [quality guidelines](../help/guidelines/developer.md#repository-naming).
 
 The `type` field is a key definition for ensuring that your plugin or theme arrives at the correct location upon installation. Use the following types:
 
@@ -49,7 +49,7 @@ Plugin  | `october-plugin`
 Theme   | `october-theme`
 Module  | `october-module`
 
-> **Reminder**: Be sure to specify any dependencies in your composer file as you would using the  `$require` property found in the [plugin registration file](../plugin/registration#dependency-definitions)
+> **Reminder**: Be sure to specify any dependencies in your composer file as you would using the  `$require` property found in the [plugin registration file](../plugin/registration.md#dependency-definitions)
 
 ## Package Descriptions
 
@@ -135,7 +135,7 @@ Now you are free to provide the packages configuration values the same way you w
         ],
     ];
 
-Now the package configuration has been included natively in October CMS and the values can be changed normally using the [standard configuration approach](settings#file-based-configuration).
+Now the package configuration has been included natively in October CMS and the values can be changed normally using the [standard configuration approach](settings.md#file-based-configuration).
 
 ### Aliases & Service Providers
 

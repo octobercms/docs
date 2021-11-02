@@ -1,15 +1,15 @@
 # Themes
 
-Themes define the appearance of your website or web application built with October CMS. They are completely file-backed and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages), [partials](partials), [layouts](layouts) and [content files](content) in the corresponding articles.
+Themes define the appearance of your website or web application built with October CMS. They are completely file-backed and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages.md), [partials](partials.md), [layouts](layouts.md) and [content files](content.md) in the corresponding articles.
 
 Themes are directories that reside in the **themes** directory by default. Themes can contain the following objects:
 
 Object | Description
 ------------- | -------------
-[Pages](pages) | represent the website pages.
-[Partials](partials) | contain reusable chunks of HTML markup.
-[Layouts](layouts) | define the page scaffold.
-[Content files](content) | text, HTML, or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
+[Pages](pages.md) | represent the website pages.
+[Partials](partials.md) | contain reusable chunks of HTML markup.
+[Layouts](layouts.md) | define the page scaffold.
+[Content files](content.md) | text, HTML, or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that can be edited separately from the page or layout.
 **Asset files** | are resource files like images, CSS, and JavaScript files.
 
 ## Directory Structure
@@ -153,9 +153,9 @@ echo $this->foo;
 
 ### Twig Markup Section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup.md), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration.md#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
 
-More information can be found [in the Markup guide](../markup).
+More information can be found [in the Markup guide](../markup.md).
 
 ## Database Driven Themes
 

@@ -1,6 +1,6 @@
 # File Attachments
 
-Models can support file attachments using a subset of the [polymorphic relationship](../database/relations#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
+Models can support file attachments using a subset of the [polymorphic relationship](../database/relations.md#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
 
 In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 
@@ -110,7 +110,7 @@ To output the file contents directly, use the `output` method, this will include
 echo $model->avatar->output();
 ```
 
-You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. Read more about these parameters on the [Image Resizing](../services/image-resizing#resize-parameters) page.
+You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter. Read more about these parameters on the [Image Resizing](../services/image-resizing.md#resize-parameters) page.
 
 ### Usage example
 
@@ -151,7 +151,7 @@ if (Input::hasFile('example_file')) {
 }
 ```
 
-Alternatively, you can use [deferred binding](../database/relations#deferred-binding) to defer the relationship:
+Alternatively, you can use [deferred binding](../database/relations.md#deferred-binding) to defer the relationship:
 
 ```php
 // Find the Blog Post model
@@ -197,11 +197,11 @@ Example:
 $user = $file->attachment;
 ```
 
-For more information read the [polymorphic relationships](../database/relations#polymorphic-relations)
+For more information read the [polymorphic relationships](../database/relations.md#polymorphic-relations)
 
 ### Validation example
 
-The example below uses [array validation](../services/validation#validating-arrays) to validate `$attachMany` relationships.
+The example below uses [array validation](../services/validation.md#validating-arrays) to validate `$attachMany` relationships.
 
 ```php
 use October\Rain\Database\Traits\Validation;
@@ -225,4 +225,4 @@ class Gallery extends Model
 }
 ```
 
-For more information on the `attribute.*` syntax used above, see [validating arrays](../services/validation#validating-arrays).
+For more information on the `attribute.*` syntax used above, see [validating arrays](../services/validation.md#validating-arrays).

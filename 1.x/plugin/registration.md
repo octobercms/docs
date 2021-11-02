@@ -1,12 +1,12 @@
 # Registration
 
-Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components) or back-end menus and pages. Some examples of what a plugin can do:
+Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components.md) or back-end menus and pages. Some examples of what a plugin can do:
 
-1. Define [components](components).
-1. Define [user permissions](../backend/users).
-1. Add [settings pages](settings#backend-settings-pages), [menu items](#navigation-menus), [lists](../backend/lists) and [forms](../backend/forms).
-1. Create [database table structures and seed data](updates).
-1. Alter [functionality of the core or other plugins](events).
+1. Define [components](components.md).
+1. Define [user permissions](../backend/users.md).
+1. Add [settings pages](settings.md#backend-settings-pages), [menu items](#navigation-menus), [lists](../backend/lists.md) and [forms](../backend/forms.md).
+1. Create [database table structures and seed data](updates.md).
+1. Alter [functionality of the core or other plugins](events.md).
 1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
 
 ### Directory structure
@@ -24,7 +24,7 @@ Plugins reside in the **/plugins** subdirectory of the application directory. An
           ...
           Plugin.php     <=== Plugin registration file
 
-Not all plugin directories are required. The only required file is the **Plugin.php** described below. If your plugin provides only a single [component](components), your plugin directory could be much simpler, like this:
+Not all plugin directories are required. The only required file is the **Plugin.php** described below. If your plugin provides only a single [component](components.md), your plugin directory could be much simpler, like this:
 
     plugins/
       acme/              <=== Author name
@@ -85,11 +85,11 @@ Method | Description
 **registerSettings()** | registers any [back-end configuration links](settings#settings-link-registration) used by this plugin.
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
 **registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
-**registerListColumnTypes()** | registers any [custom list column types](../backend/lists#custom-column-types) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](mail#registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](mail#registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](mail#registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling#defining-schedules) that are executed on a regular basis.
+**registerListColumnTypes()** | registers any [custom list column types](../backend/lists.md#custom-column-types) supplied by this plugin.
+**registerMailLayouts()** | registers any [mail view layouts](mail.md#registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailTemplates()** | registers any [mail view templates](mail.md#registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailPartials()** | registers any [mail view partials](mail.md#registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling.md#defining-schedules) that are executed on a regular basis.
 
 ### Basic plugin information
 
@@ -100,7 +100,7 @@ Key | Description
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon.md). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 
@@ -119,7 +119,7 @@ The `register` method is called immediately when the plugin is registered. The `
 
 > **Note:** The `boot` and `register` methods are not called during the update process to protect the system from critical errors. To overcome this limitation use [elevated permissions](#elevated-plugin).
 
-Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router). For example:
+Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router.md). For example:
 
     Route::group(['prefix' => 'api_acme_blog'], function() {
 
@@ -143,7 +143,7 @@ A plugin can depend upon other plugins by defining a `$require` property in the 
         [...]
     }
 
-Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
+Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates.md#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 
@@ -216,14 +216,14 @@ Plugins can extend the back-end navigation menus by overriding the `registerNavi
         ];
     }
 
-When you register the back-end navigation you can use [localization strings](localization) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
+When you register the back-end navigation you can use [localization strings](localization.md) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
-To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax#setting-the-navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
+To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax.md#setting-the-navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
 Key | Description
 ------------- | -------------
 **label** | specifies the menu label localization string key, required.
-**icon** | an icon name from the [October CMS icon collection](../ui/icon), optional.
+**icon** | an icon name from the [October CMS icon collection](../ui/icon.md), optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
 **url** | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
@@ -236,7 +236,7 @@ Key | Description
 
 ## Registering middleware
 
-To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax#controller-middleware), or you can extend a Controller class by using the following method.
+To register a custom middleware, you can apply it directly to a Backend controller in your plugin by using [Controller middleware](../backend/controllers-ajax.md#controller-middleware), or you can extend a Controller class by using the following method.
 
     public function boot()
     {

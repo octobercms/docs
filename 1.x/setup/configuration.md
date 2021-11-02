@@ -146,9 +146,9 @@ When enabled, this setting will show detailed error messages when they occur alo
 
 The debug mode uses the following features when enabled:
 
-1. [Detailed error pages](../cms/pages#error-page) are displayed.
+1. [Detailed error pages](../cms/pages.md#error-page) are displayed.
 1. Failed user authentication provides a specific reason.
-1. [Combined assets](../markup/filter-theme) are not minified by default.
+1. [Combined assets](../markup/filter-theme.md) are not minified by default.
 1. [Safe mode](#safe-mode) is disabled by default.
 
 > **Important**: Always set the `app.debug` setting to `false` for production environments.
@@ -161,7 +161,7 @@ If safe mode is enabled, the PHP code section is disabled in CMS templates for s
 
 ### CSRF protection
 
-October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
+October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html.md#form-tokens) the token is added to the page and submitted back with each request.
 
 While CSRF protection is enabled by default, you can disable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
 
@@ -186,7 +186,7 @@ You can instruct the platform to prefer test builds from the marketplace by chan
 
 > **Note:** For plugin developers we recommend enabling **Test updates** for your plugins listed on the marketplace, via the Plugin Settings page.
 
-> **Note:** If using [Composer](../console/commands#console-install-composer) to manage updates, then replace the default OctoberCMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch.
+> **Note:** If using [Composer](../console/commands.md#console-install-composer) to manage updates, then replace the default OctoberCMS requirements in your `composer.json` file with the following in order to download updates directly from the develop branch.
 
     "october/rain": "dev-develop as 1.0",
     "october/system": "dev-develop",

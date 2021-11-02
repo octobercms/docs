@@ -13,7 +13,7 @@ The `{% scripts %}` tag inserts JavaScript file references to scripts injected b
 
 ## Injecting scripts
 
-Links to JavaScript files can be programmatically injected in PHP either by [components](../plugin/components#injecting-page-assets-with-components) or [pages](../cms/pages#injecting-page-assets-programmatically).
+Links to JavaScript files can be programmatically injected in PHP either by [components](../plugin/components.md#injecting-page-assets-with-components) or [pages](../cms/pages.md#injecting-page-assets-programmatically).
 
 ```php
 function onStart()
@@ -22,7 +22,7 @@ function onStart()
 }
 ```
 
-You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../cms/layouts#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../cms/layouts.md#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
 
 ```twig
 {% put scripts %}

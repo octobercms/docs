@@ -21,7 +21,7 @@ class Products extends Controller
 
 ## Configuring the Behavior
 
-The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax). Below is an example of a configuration file:
+The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a configuration file:
 
 ```yaml
 # ===================================
@@ -64,7 +64,7 @@ The following configuration options are supported for the Import page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **list** | defines the list columns available for importing.
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the import is complete, optional
@@ -86,7 +86,7 @@ The following configuration options are supported for the Export page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **fileName** | the file name to use for the exported file, default **export.csv**.
 **list** | defines the list columns available for exporting.
 **form** | provides additional fields used as import options, optional.
@@ -116,7 +116,7 @@ Option | Description
 
 ## Import and Export Views
 
-For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax) with the corresponding name - **import.htm** and **export.htm**.
+For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax.md) with the corresponding name - **import.htm** and **export.htm**.
 
 The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 
@@ -281,14 +281,14 @@ class SubscriberImport extends \Backend\Models\ImportModel
 
 ## Integration with List Behavior
 
-There is an alternative approach to exporting data that uses the [list behavior](lists) to provide the export data. In order to use this feature you should have the `Backend.Behaviors.ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
+There is an alternative approach to exporting data that uses the [list behavior](lists.md) to provide the export data. In order to use this feature you should have the `Backend.Behaviors.ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
 
 ```yaml
 export:
     useList: true
 ```
 
-If you are using [multiple list definitions](lists#multiple-list-definitions), then you can supply the list definition:
+If you are using [multiple list definitions](lists.md#multiple-list-definitions), then you can supply the list definition:
 
 ```yaml
 export:

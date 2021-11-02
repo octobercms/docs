@@ -1,6 +1,6 @@
 # {% content %}
 
-The `{% content %}` tag will display a [CMS content block](../cms/content) on the page. To display content block called **contacts.htm** you pass the file name after the `content` tag quoted as a string.
+The `{% content %}` tag will display a [CMS content block](../cms/content.md) on the page. To display content block called **contacts.htm** you pass the file name after the `content` tag quoted as a string.
 
 ```twig
 {% content "contacts.htm" %}
@@ -12,7 +12,7 @@ A content block inside a subdirectory can be rendered in the same way.
 {% content "sidebar/content.htm" %}
 ```
 
-> **Note**: The [Themes documentation](../cms/themes#subdirectories) has more details on subdirectory usage.
+> **Note**: The [Themes documentation](../cms/themes.md#subdirectories) has more details on subdirectory usage.
 
 Content blocks can be rendered as plain text:
 
@@ -26,7 +26,7 @@ You can also use Markdown syntax:
 {% content "changelog.md" %}
 ```
 
-Content blocks can also be used in combination with [layout placeholders](../cms/layouts#placeholders):
+Content blocks can also be used in combination with [layout placeholders](../cms/layouts.md#placeholders):
 
 ```twig
 {% put sidebar %}
@@ -74,4 +74,4 @@ The collection of variables is accessed by using an opening and closing set of b
 </ul>
 ```
 
-> **Note**: Twig syntax is not supported in Content blocks, consider using a [CMS partial](../cms/partials) instead.
+> **Note**: Twig syntax is not supported in Content blocks, consider using a [CMS partial](../cms/partials.md) instead.

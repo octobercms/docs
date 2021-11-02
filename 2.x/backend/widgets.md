@@ -4,7 +4,7 @@ Widgets are self-contained blocks of functionality that solve different tasks. W
 
 ## Generic Widgets
 
-Widgets are the back-end equivalent of front-end [Components](../cms/components). They are similar because they are modular bundles of functionality, supply partials and are named using aliases. The key difference is that back-end widgets use YAML markup for their configuration and bind themselves to Backend pages.
+Widgets are the back-end equivalent of front-end [Components](../cms/components.md). They are similar because they are modular bundles of functionality, supply partials and are named using aliases. The key difference is that back-end widgets use YAML markup for their configuration and bind themselves to Backend pages.
 
 Widget classes reside inside the **widgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example widget directory structure looks like this:
 
@@ -21,7 +21,7 @@ Widget classes reside inside the **widgets** directory of the plugin directory. 
 
 ### Class Definition
 
-The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). Example widget controller class definition:
+The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). Example widget controller class definition:
 
     <?php namespace Backend\Widgets;
 
@@ -92,7 +92,7 @@ After binding the widget you can access it in the controller's view or partial b
 
 ## Form Widgets
 
-With form widgets you can add new control types to the back-end [forms](../backend/forms). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration#registration-methods).
+With form widgets you can add new control types to the back-end [forms](../backend/forms.md). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration.md#registration-methods).
 
 Form Widget classes reside inside the **formwidgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
 
@@ -109,7 +109,7 @@ Form Widget classes reside inside the **formwidgets** directory of the plugin di
 
 ### Class Definition
 
-The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). A registered widget can be used in the back-end [form field definition](../backend/forms#defining-form-fields) file. Example form widget class definition:
+The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). A registered widget can be used in the back-end [form field definition](../backend/forms.md#defining-form-fields) file. Example form widget class definition:
 
     namespace Backend\Widgets;
 
@@ -127,7 +127,7 @@ The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. 
 
 ### Form Widget Properties
 
-Form widgets may have properties that can be set using the [form field configuration](../backend/forms#defining-form-fields). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
+Form widgets may have properties that can be set using the [form field configuration](../backend/forms.md#defining-form-fields). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
 
     class DatePicker extends FormWidgetBase
     {
@@ -176,7 +176,7 @@ Form widgets may have properties that can be set using the [form field configura
         // ...
     }
 
-The property values then become available to set from the [form field definition](../backend/forms#defining-form-fields) when using the widget.
+The property values then become available to set from the [form field definition](../backend/forms.md#defining-form-fields) when using the widget.
 
     born_at:
         label: Date of Birth
@@ -187,7 +187,7 @@ The property values then become available to set from the [form field definition
 
 ### Form Widget Registration
 
-Plugins should register form widgets by overriding the `registerFormWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
+Plugins should register form widgets by overriding the `registerFormWidgets` method inside the [Plugin registration class](../plugin/registration.md#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
 
     public function registerFormWidgets()
     {
@@ -197,7 +197,7 @@ Plugins should register form widgets by overriding the `registerFormWidgets` met
         ];
     }
 
-The short code is optional and can be used when referencing the widget in the [Form field definitions](forms#field-widget), it should be a unique value to avoid conflicts with other form fields.
+The short code is optional and can be used when referencing the widget in the [Form field definitions](forms.md#field-widget), it should be a unique value to avoid conflicts with other form fields.
 
 ### Loading Form Data
 
@@ -234,13 +234,13 @@ In some cases you intentionally don't want any value to be given, for example, a
 
 ## Report Widgets
 
-Report widgets can be used on the back-end dashboard and in other back-end report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration#widget-registration).
+Report widgets can be used on the back-end dashboard and in other back-end report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration.md#widget-registration).
 
-> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding#create-a-report-widget) for more information.
+> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding.md#create-a-report-widget) for more information.
 
 ### Report widget classes
 
-The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration#plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
+The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
     plugins/
       rainlab/                    <=== Author name
@@ -284,7 +284,7 @@ The widget partial could contain any HTML markup you want to display in the widg
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/master/images/traffic-sources.png)
 
-Inside report widgets you can use any [charts or indicators](controls), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
+Inside report widgets you can use any [charts or indicators](controls.md), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
     <div class="report-widget">
         <h3>Top pages</h3>
@@ -330,7 +330,7 @@ Report widgets may have properties that users can manage with the Inspector:
 
 ![image](https://github.com/octobercms/docs/blob/develop/images/report-widget-inspector.png?raw=true)
 
-The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components#component-properties). Example:
+The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components.md#component-properties). Example:
 
     public function defineProperties()
     {
@@ -353,7 +353,7 @@ The properties should be defined in the `defineProperties` method of the widget 
 
 ### Report Widget Registration
 
-Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration#registration-file). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
+Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration.md#registration-file). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
 
     public function registerReportWidgets()
     {

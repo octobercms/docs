@@ -1,6 +1,6 @@
 # Development
 
-In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding#create-a-console-command).
+In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding.md#create-a-console-command).
 
 ## Building a Command
 
@@ -213,7 +213,7 @@ For more advanced options, check out the [Symfony Progress Bar component documen
 
 #### Registering a console command
 
-Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration#registration-methods) using  the `registerConsoleCommand` helper method.
+Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration.md#registration-methods) using  the `registerConsoleCommand` helper method.
 
 ```php
 class Blog extends PluginBase
@@ -238,7 +238,7 @@ Artisan::add(new Acme\Blog\Console\MyCommand);
 
 #### Registering a command in the application container
 
-If your command is registered in the [application container](../services/application#application-container), you may use the `Artisan::resolve` method to make it available to Artisan:
+If your command is registered in the [application container](../services/application.md#application-container), you may use the `Artisan::resolve` method to make it available to Artisan:
 
 ```php
 Artisan::resolve('binding.name');
@@ -246,7 +246,7 @@ Artisan::resolve('binding.name');
 
 #### Registering commands in a service provider
 
-If you need to register commands from within a [service provider](application#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](application#application-container) binding for the command:
+If you need to register commands from within a [service provider](application.md#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](application.md#application-container) binding for the command:
 
 ```php
 public function boot()
