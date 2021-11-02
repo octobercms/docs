@@ -59,7 +59,7 @@ For example, in production environments you may want to do the following:
 
 - Enable [CSRF protection](../setup/configuration.md#csrf-protection)
 - Disable [debug mode](../setup/configuration.md#debug-mode)
-- Use a [public folder](../setup/configuration.md#using-a-public-folder) for additional security
+- Use a [public folder](../setup/deployment.md#public-folder) for additional security
 
 ### Setting Up The Scheduler
 

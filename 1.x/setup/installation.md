@@ -1,6 +1,6 @@
 # Installation
 
-There are two ways you can install October, either using the [Wizard installer](#wizard-installation) or [Command-line installation](../console/commands#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
+There are two ways you can install October, either using the [Wizard installer](#wizard-installation) or [Command-line installation](../console/commands.md#console-install) instructions. Before you proceed, you should check that your server meets the minimum system requirements.
 
 ## Minimum system requirements
 
