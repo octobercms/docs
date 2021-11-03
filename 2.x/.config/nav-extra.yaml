@@ -5,7 +5,7 @@
 -
     title: Back to October CMS Docs
     icon: "/images/october-leaf.svg"
-    link: "/1.x/"
+    link: "/2.x/"
 
 #
 # Root Extras
@@ -14,4 +14,4 @@
 -
     title: Markup Guide
     icon: "/images/october-leaf.svg"
-    link: "/1.x/markup/"
+    link: "/2.x/markup/"
