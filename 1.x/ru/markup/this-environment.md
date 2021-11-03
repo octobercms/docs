@@ -1,6 +1,6 @@
 # this.environment
 
-Используйте переменную `this.environment`, чтобы узнать [текущую конфигурацию среды](./help-installation#environment-config).
+Используйте переменную `this.environment`, чтобы узнать [текущую конфигурацию среды](../help/installation#environment-config).
 
 ##Пример:
 

@@ -23,7 +23,7 @@
 
 1. Когда администратор авторизовался.
 1. Когда администратор нажал на кнопку "Обновить".
-1. Когда была вызвана [консольная команда](./console-commands#console-up-command) `php artisan october:up`.
+1. Когда была вызвана [консольная команда](../console/commands#console-up-command) `php artisan october:up`.
 
 <a name="plugin-depedencies" class="anchor"></a>
 ### Зависимости плагинов

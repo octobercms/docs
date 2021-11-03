@@ -60,7 +60,7 @@ class BlogPosts extends \Cms\Classes\ComponentBase
 <a name="component-registration"></a>
 ### Регистрация компонента
 
-Все компоненты должны быть указаны в методе `registerComponents()` [класса регистрации плагина](./plugin-registration#component-registration). Пример регистрации компонента:
+Все компоненты должны быть указаны в методе `registerComponents()` [класса регистрации плагина](../plugin/registration#component-registration). Пример регистрации компонента:
 
     public function registerComponents()
     {
@@ -260,7 +260,7 @@ id = "{{ :my_custom_parameter }}"
 <a name="page-cycle-handlers"></a>
 ### Обработчики страницы
 
-Когда страница загружается, OctoberCMS выполняет функции, которые могут быть определены в [PHP секции](./cms-themes#php-section) страницы, шаблона или в классе компонента. Последовательность выполнения обработчиков:
+Когда страница загружается, OctoberCMS выполняет функции, которые могут быть определены в [PHP секции](../cms/themes#php-section) страницы, шаблона или в классе компонента. Последовательность выполнения обработчиков:
 
 1. `onInit()` - функция шаблона.
 1. `onInit()` - функция страницы.
@@ -297,7 +297,7 @@ id = "{{ :my_custom_parameter }}"
 <a name="ajax-handlers"></a>
 ## AJAX-обработчики
 
-Компоненты могут обрабатывать события AJAX. Обработчики задаются в классе компонента так же, как и в [странице или шаблоне](./cms-ajax#ajax-handlers). Пример обработчика:
+Компоненты могут обрабатывать события AJAX. Обработчики задаются в классе компонента так же, как и в [странице или шаблоне](../cms/ajax#ajax-handlers). Пример обработчика:
 
     public function onAddItem()
     {
@@ -306,7 +306,7 @@ id = "{{ :my_custom_parameter }}"
         $this->page['result'] = $value1 + $value2;
     }
 
-Более подробно об использовании AJAX в компонентах написано [в этой статье](./cms-ajax#components-ajax-handlers).
+Более подробно об использовании AJAX в компонентах написано [в этой статье](../cms/ajax#components-ajax-handlers).
 
 <a name="default-markup"></a>
 ## Разметка по умолчанию
@@ -360,7 +360,7 @@ A relaxed method can be used that is contextual. If called inside a component pa
 <a name="referencing-self"></a>
 ### "self"
 
-Компонент может ссылаться на самого себя в фрагментах при помощи переменной `__SELF__`. По умолчанию она вернет название компонента или [алиас](./cms-components#aliases).
+Компонент может ссылаться на самого себя в фрагментах при помощи переменной `__SELF__`. По умолчанию она вернет название компонента или [алиас](../cms/components#aliases).
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">

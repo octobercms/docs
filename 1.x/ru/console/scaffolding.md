@@ -43,6 +43,6 @@
 <a name="scaffold-create-command" class="anchor" ></a>
 ### Создание консольной команды
 
-`create:command` - создает [новую консольную команду](./console-development).
+`create:command` - создает [новую консольную команду](../console/development).
 
     php artisan create:command Author.PluginName MyCommandName

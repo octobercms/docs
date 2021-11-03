@@ -3,7 +3,7 @@
 <a name="file-attachments" class="anchor" ></a>
 ## Прикрепление файла к модели
 
-Вы можете прикреплять файлы к модели, используя [полиморфные связи](./database-relations#polymorphic-relations).
+Вы можете прикреплять файлы к модели, используя [полиморфные связи](../database/relations#polymorphic-relations).
 
 In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 

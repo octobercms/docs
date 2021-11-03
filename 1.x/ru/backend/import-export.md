@@ -23,7 +23,7 @@
 <a name="configuring-import-export" class="anchor"></a>
 ## Настройка поведения
 
-Файл **config_import_export.yaml** должен лежать в [папке с представлениями](,/backend-controllers-views-ajax/#introduction) контроллера. Пример содержимого:
+Файл **config_import_export.yaml** должен лежать в [папке с представлениями](../backend/controllers-views-ajax/#introduction) контроллера. Пример содержимого:
 
     # ===================================
     #  Import/Export Behavior Config
@@ -60,7 +60,7 @@
 
 Параметры | Описание
 ------------- | -------------
-**title** | название страницы, можно использовать [локализацию](./plugin-localization).
+**title** | название страницы, можно использовать [локализацию](../plugin/localization).
 **list** | определяет столбцы списка доступных для импорта.
 **form** | дополнительные поля, опционально.
 **redirect** | страница, на которую будет перенаправлен пользователь после окончания импорта, опционально.
@@ -81,7 +81,7 @@
 
 Параметры | Описание
 ------------- | -------------
-**title** | название страницы, можно использовать [локализацию](./plugin-localization).
+**title** | название страницы, можно использовать [локализацию](../plugin/localization).
 **fileName** | название файла, по умолчанию **export.csv**.
 **list** | определяет столбцы списка доступных для экспорта.
 **form** | дополнительные поля, опционально.
@@ -91,7 +91,7 @@
 <a name="import-export-views" class="anchor"></a>
 ## Представления
 
-Для каждой страницы Импорта и Экспорта должен существовать свой файл [представления](./backend-controllers-views-ajax/#introduction) **import.htm** и **export.htm** соответственно.
+Для каждой страницы Импорта и Экспорта должен существовать свой файл [представления](../backend/controllers-views-ajax/#introduction) **import.htm** и **export.htm** соответственно.
 
 Поведение предоставляет доступ к двум методам в классе контроллера: `importRender()` и `exportRender()`, которые нужны для отображения элементов формы импорта и экспорта.
 
@@ -247,12 +247,12 @@
 <a name="list-behavior-integration" class="anchor"></a>
 ## Интеграция со списком
 
-Вы можете использовать [списки](./backend-lists) для экспорта данных. Для этого необходимо добавить `Backend.Behaviors.ListController` в свойство `$implement` класса контроллера. Пример:
+Вы можете использовать [списки](../backend/lists) для экспорта данных. Для этого необходимо добавить `Backend.Behaviors.ListController` в свойство `$implement` класса контроллера. Пример:
 
     export:
         useList: true
 
-Если вы используете [несколько списков](./backend-lists#multiple-list-definitions):
+Если вы используете [несколько списков](../backend/lists#multiple-list-definitions):
 
     export:
         useList: orders

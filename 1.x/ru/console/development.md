@@ -3,7 +3,7 @@
 <a name="introduction" class="anchor"></a>
 ## Введение
 
-В дополнение к предоставленным консольным командам, вы можете создавать свои собственные, которые должны находится в папке с плагином в подпапке **console**. Используйте инструмент командной строки - [scaffolding](./console-scaffolding#scaffold-create-command) для генерации файла.
+В дополнение к предоставленным консольным командам, вы можете создавать свои собственные, которые должны находится в папке с плагином в подпапке **console**. Используйте инструмент командной строки - [scaffolding](../console/scaffolding#scaffold-create-command) для генерации файла.
 
 <a name="building-a-command" class="anchor"></a>
 ## Создание команды
@@ -159,7 +159,7 @@
 
 #### Регистрация консольной команды
 
-После того, как Вы закончили с классом команды, не забудьте [зарегистрировать его в файле **Plugin.php**](./plugin-registration#registration-methods), используя метод `registerConsoleCommand()`:
+После того, как Вы закончили с классом команды, не забудьте [зарегистрировать его в файле **Plugin.php**](../plugin/registration#registration-methods), используя метод `registerConsoleCommand()`:
 
     class Blog extends PluginBase
     {

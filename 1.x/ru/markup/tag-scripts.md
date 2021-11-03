@@ -13,14 +13,14 @@
 
 ## Подключение скриптов
 
-Вы можете добавить произвольные скрипты на страницу в [PHP секции](./cms-pages#injecting-assets) или в [компоненте](./plugin-components#component-assets).
+Вы можете добавить произвольные скрипты на страницу в [PHP секции](../cms/pages#injecting-assets) или в [компоненте](../plugin/components#component-assets).
 
     function onStart()
     {
         $this->addJs('assets/js/app.js');
     }
 
-Также Вы можете использовать [заполнители](./cms-layouts#placeholders).
+Также Вы можете использовать [заполнители](../cms/layouts#placeholders).
 
 ```twig
 <body>
