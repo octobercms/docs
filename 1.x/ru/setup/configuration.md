@@ -101,9 +101,9 @@
 
 В режиме отладки используются следующие функции:
 
-1. Отображается [подробное описание ошибки](../cms/pages#error-page).
+1. Отображается [подробное описание ошибки](../cms/pages.md#error-page).
 1. Указывается конкретная причина при неудачной аутентификация пользователя.
-1. [Скрипты и стили](../markup/filter-theme) не минифицируются.
+1. [Скрипты и стили](../markup/filter-theme.md) не минифицируются.
 1. [Безопасный режим](#safe-mode) по умолчанию отключен.
 
 > **Важно**: Всегда указывайте значение `false` для параметра `app.debug` в рабочих проектах.
@@ -118,7 +118,7 @@
 <a name="csrf-protection" class="anchor"></a>
 ### Защита от CSRF
 
-October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html#form-tokens) the token is added to the page and submitted back with each request.
+October provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html.md#form-tokens) the token is added to the page and submitted back with each request.
 
 While CSRF protection is disabled by default, you can enable it with the `enableCsrfProtection` parameter in the `config/cms.php` configuration file.
 

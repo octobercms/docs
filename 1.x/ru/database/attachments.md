@@ -3,7 +3,7 @@
 <a name="file-attachments" class="anchor" ></a>
 ## Прикрепление файла к модели
 
-Вы можете прикреплять файлы к модели, используя [полиморфные связи](../database/relations#polymorphic-relations).
+Вы можете прикреплять файлы к модели, используя [полиморфные связи](../database/relations.md#polymorphic-relations).
 
 In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 
@@ -119,7 +119,7 @@ In the examples below the model has a single Avatar attachment model and many Ph
         $post->featured_image = Input::file('example_file');
     }
 
-В качестве альтернативы Вы можете использовать [отложенное связывание](./database/relations#deferred-binding):
+В качестве альтернативы Вы можете использовать [отложенное связывание](./database/relations.md#deferred-binding):
 
     // Поиск модели
     $post = Post::find(1);

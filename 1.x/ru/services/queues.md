@@ -120,7 +120,7 @@ When using Iron.io [push queues](#push-queues), you should take extra precaution
 <a name="running-the-queue-listener"></a>
 ## Running the queue listener
 
-October includes some [console commands](../console/commands) that will process jobs in the queue.
+October includes some [console commands](../console/commands.md) that will process jobs in the queue.
 
 #### Processing the first job on the queue
 

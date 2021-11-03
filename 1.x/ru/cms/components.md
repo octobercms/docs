@@ -1,15 +1,15 @@
 # Компоненты ( Components )
 
-Компоненты - настраиваемые элементы, которые могут быть прикреплены к любой странице или шаблону. Компоненты являются ключевой особенностью OctoberCMS. Каждый компонент позволяет расширить возможности Вашего сайта. Их основные задачи заключаются в выводе HTML кода, обработке [AJAX запросов](../cms/ajax), обработке форм и настройке отображения страниц.
+Компоненты - настраиваемые элементы, которые могут быть прикреплены к любой странице или шаблону. Компоненты являются ключевой особенностью OctoberCMS. Каждый компонент позволяет расширить возможности Вашего сайта. Их основные задачи заключаются в выводе HTML кода, обработке [AJAX запросов](../cms/ajax.md), обработке форм и настройке отображения страниц.
 
-Эта статья описывает основы работы с компонентами и не объясняет, как использовать их с AJAX. Эта тема описана в [AJAX](../cms/ajax).
+Эта статья описывает основы работы с компонентами и не объясняет, как использовать их с AJAX. Эта тема описана в [AJAX](../cms/ajax.md).
 
-> **Примечание:** Использование компонентов внутри фрагментов ограничивает их функционал (см. [динамические фрагменты](partials#dynamic-partials)).
+> **Примечание:** Использование компонентов внутри фрагментов ограничивает их функционал (см. [динамические фрагменты](partials.md#dynamic-partials)).
 
 <a name="introduction"></a>
 ## Введение
 
-Если Вы используете административный интерфейс, то можете добавлять компоненты на страницы или шаблоны, кликнув по нему в панели **Компоненты**. Если же Вы используете текстовый редактор, то должны указать его название в [Разделе Конфигурации](../cms/themes#configuration-section). Пример добавления компонента To-do на страницу:
+Если Вы используете административный интерфейс, то можете добавлять компоненты на страницы или шаблоны, кликнув по нему в панели **Компоненты**. Если же Вы используете текстовый редактор, то должны указать его название в [Разделе Конфигурации](../cms/themes.md#configuration-section). Пример добавления компонента To-do на страницу:
 
 ```
 title = "Components demonstration"
@@ -66,7 +66,7 @@ maxItems = 20
     ==
     ...
 
-Однако, вы можете инициализировать свойства при помощи внешних значений - URL параметров или параметров [фрагментов](../cms/partials) (для компонентов, определенных во фрагментах). Используйте  `{{ paramName }}` для значений, которые должы быть получены из переменных фрагмента:
+Однако, вы можете инициализировать свойства при помощи внешних значений - URL параметров или параметров [фрагментов](../cms/partials.md) (для компонентов, определенных во фрагментах). Используйте  `{{ paramName }}` для значений, которые должы быть получены из переменных фрагмента:
 
 ```
 [demoTodo]
@@ -90,7 +90,7 @@ maxItems = {{ :maxItems }}
 ...
 ```
 
-Страница, на которой находится компонент, должна иметь [соответствующий адрес](../cms/pages#url-syntax):
+Страница, на которой находится компонент, должна иметь [соответствующий адрес](../cms/pages.md#url-syntax):
 
 ```ini
 url = "/todo/:maxItems"
@@ -101,7 +101,7 @@ url = "/todo/:maxItems"
 <a name="component-variables"></a>
 ## Передача переменных в компонент
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials#partial-variables), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components#component-properties), including [external property values](#external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#partial-variables), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#component-properties), including [external property values](#external-property-values).
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 

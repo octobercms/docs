@@ -5,7 +5,7 @@
 
 **Form behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create()`, `update()` and `preview()` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+Form behavior depends on form [field definitions](#form-fields) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
     namespace Acme\Blog\Controllers;
 
@@ -16,12 +16,12 @@ Form behavior depends on form [field definitions](#form-fields) and a [model cla
         public $formConfig = 'form_config.yaml';
     }
 
-> **Note:** Very often the form and [list behavior](lists) are used together in a same controller.
+> **Note:** Very often the form and [list behavior](lists.md) are used together in a same controller.
 
 <a name="configuring-form"></a>
 ## Configuring the form behavior
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/#introduction). Below is an example of a typical form behavior configuration file:
+The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-views-ajax/.md#introduction). Below is an example of a typical form behavior configuration file:
 
     # ===================================
     #  Form Behavior Config
@@ -72,10 +72,10 @@ The following configuration options are supported for the Create page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
-**flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
+**flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization.md).
 **form** | overrides the default form fields definitions for the create page only.
 
 <a name="form-update-page"></a>
@@ -93,11 +93,11 @@ The following configuration options are supported for the Update page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
-**flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization).
-**flashDelete** | flash message to display when record is deleted, can refer to a [localization string](../plugin/localization).
+**flashSave** | flash message to display when record is saved, can refer to a [localization string](../plugin/localization.md).
+**flashDelete** | flash message to display when record is deleted, can refer to a [localization string](../plugin/localization.md).
 **form** | overrides the default form fields definitions for the update page only.
 
 <a name="form-preview-page"></a>
@@ -112,7 +112,7 @@ The following configuration options are supported for the Preview page:
 
 Option  | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization).
+**title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **form** | overrides the default form fields definitions for the preview page only.
 
 <a name="form-fields"></a>
@@ -425,7 +425,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 <a name="form-widgets"></a>
 ## Form widgets
 
-There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets) article.
+There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md) article.
 
 <div class="content-list collection-method-list" markdown="1">
 
@@ -529,12 +529,12 @@ Option | Description
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
-**list** | a configuration array or reference to a list column definition file, see [list columns](lists#list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](lists.md#list-columns).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
 **conditions** | specifies a raw where query statement to apply to the list model query.
-**scope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the list query always.
+**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always.
 **searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**searchScope** | specifies a [query scope method](../database/model#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
+**searchScope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 
 <a name="widget-mediafinder"></a>
 ### Media finder
@@ -648,7 +648,7 @@ A tag list can support three ways of defining the `options`, exactly like the [d
             - Blue
             - Orange
 
-You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations.md#many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
 
     tags:
         type: taglist
@@ -873,7 +873,7 @@ You can use your own logic for the `create()`, `update()` or `preview()` action 
 <a name="extend-model-query"></a>
 ### Extending model query
 
-The lookup query for the form [database model](../database/model) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
+The lookup query for the form [database model](../database/model.md) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
 
     public function formExtendQuery($query)
     {
@@ -958,4 +958,4 @@ The above example will set the `hidden` flag on certain fields by checking the v
 <a name="validate-form-fields"></a>
 ## Validating form fields
 
-To validate the fields of your form you can make use of the [Validation](../database/traits#validation) trait in your model.
+To validate the fields of your form you can make use of the [Validation](../database/traits.md#validation) trait in your model.

@@ -30,7 +30,7 @@
 <a name="combiner-aliases"></a>
 ### Алиасы Комбайнера
 
-Вы можете использовать алиасы, чтобы добавить, например, [AJAX framework assets](../cms/ajax#introduction) в комбайнер:
+Вы можете использовать алиасы, чтобы добавить, например, [AJAX framework assets](../cms/ajax.md#introduction) в комбайнер:
 
 ```twig
 <script src="{{ [

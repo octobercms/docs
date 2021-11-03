@@ -23,14 +23,14 @@
 <a name="throw-validation-exception" id="throw-validation-exception" class="anchor"></a>
 ### Обработка исключений
 
-Вы можете использовать класс `ValidationException` в своем обработчике для [отображения ошибок](../services/error-log#validation-exception) в форме. Метод принимает один аргумент - массив с именами полей и сообщениями об ошибках.
+Вы можете использовать класс `ValidationException` в своем обработчике для [отображения ошибок](../services/error-log.md#validation-exception) в форме. Метод принимает один аргумент - массив с именами полей и сообщениями об ошибках.
 
     function onSubmit()
     {
         throw new ValidationException(['name' => 'You must give a name!']);
     }
 
-> **Note**: You can also pass an instance of the [validation service](../services/validation) as the first argument of the exception.
+> **Note**: You can also pass an instance of the [validation service](../services/validation.md) as the first argument of the exception.
 
 <a name="error-messages" id="error-messages" class="anchor"></a>
 ### Отображение сообщений об ошибках
@@ -110,7 +110,7 @@
 
 для отображения флэш-сообщений при успешном выполнении AJAX запроса.
 
-Вы можете отобразить стандартное [флэш-сообщение](../markup/tag-flash) при загрузке страницы при помощи следующего кода на странице или макете.
+Вы можете отобразить стандартное [флэш-сообщение](../markup/tag-flash.md) при загрузке страницы при помощи следующего кода на странице или макете.
 
 ```twig
 {% flash %}

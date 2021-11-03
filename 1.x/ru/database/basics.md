@@ -3,7 +3,7 @@
 <a name="introduction" class="anchor" ></a>
 ## Введение
 
-В OctoberCMS можно настроить соединение с БД и выполнять запросы чрезвычайно просто для различных «движков» БД, будь то сырой SQL, [гибкий строитель запросов](../database/query) или [Active Record](../database/model). Работа с таблицами и начальными данными описана в разделе [Структура базы данных](../database/structure).
+В OctoberCMS можно настроить соединение с БД и выполнять запросы чрезвычайно просто для различных «движков» БД, будь то сырой SQL, [гибкий строитель запросов](../database/query.md) или [Active Record](../database/model.md). Работа с таблицами и начальными данными описана в разделе [Структура базы данных](../database/structure.md).
 
 <a name="configuration" class="anchor" ></a>
 ## Настройка
@@ -122,7 +122,7 @@
 
     Db::commit();
 
-> **Примечание:** Методы фасада DB для транзакций также контролируют транзакции [построителя запросов](../database/query) и [запросов модели](../database/model).
+> **Примечание:** Методы фасада DB для транзакций также контролируют транзакции [построителя запросов](../database/query.md) и [запросов модели](../database/model.md).
 
 <a name="database-events" class="anchor" ></a>
 ## Прослушивание событий запросов
@@ -133,7 +133,7 @@ If you would like to receive each SQL query executed by your application, you ma
         //
     });
 
-Just like [event registration](../services/events#event-registration), you may register your query listener in the `boot()` method of a [Plugin registration file](../plugin/registration#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
+Just like [event registration](../services/events.md#event-registration), you may register your query listener in the `boot()` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
 
 <a name="query-logging" class="anchor" ></a>
 ### Журнал запросов

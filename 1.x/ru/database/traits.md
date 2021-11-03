@@ -151,7 +151,7 @@ URL будет сгенерирован автоматически только 
         use \October\Rain\Database\Traits\SimpleTree;
     }
 
-Он автоматически добавит две [связи](../database/relations) `parent` и `children`, которые эквивалентны следующим описаниям:
+Он автоматически добавит две [связи](../database/relations.md) `parent` и `children`, которые эквивалентны следующим описаниям:
 
     public $belongsTo = [
         'parent'    => ['User', 'key' => 'parent_id'],
@@ -224,7 +224,7 @@ URL будет сгенерирован автоматически только 
 <a href="validation" name="validation" class="anchor"></a>
 ## Валидация
 
-Модели в OctoberCMS используют встроенный класс [валидации](../services/validation). Используйте трейт `October\Rain\Database\Traits\Validation` и свойство `$rules`, чтобы задать правила валидации:
+Модели в OctoberCMS используют встроенный класс [валидации](../services/validation.md). Используйте трейт `October\Rain\Database\Traits\Validation` и свойство `$rules`, чтобы задать правила валидации:
 
     class User extends Model
     {
@@ -238,7 +238,7 @@ URL будет сгенерирован автоматически только 
         ];
     }
 
-> **Примечание**: Вы также можете использовать [array syntax](../services/validation#basic-usage).
+> **Примечание**: Вы также можете использовать [array syntax](../services/validation.md#basic-usage).
 
 Модели автоматически проверяют себя при вызове метода `save()`.
 
@@ -257,7 +257,7 @@ URL будет сгенерирован автоматически только 
 
 Когда модель не проходит валидацию, к ней добавляется объект `Illuminate\Support\MessageBag`, который содержит сообщение об ошибке. Используйте метод `errors()` или свойство `$validationErrors`, чтобы получить экземпляр коллекции. Используйте метод `errors()->all()`, чтобы получить все ошибки. Используйте метод `validationErrors->get('attribute')`, чтобы получить сообщение об ошибки конкретного атрибута.
 
-> **Примечание:** Модель использует объект MessagesBag, который имеет [простой и элегантный метод](../services/validation#working-with-error-messages) для форматирования ошибок.
+> **Примечание:** Модель использует объект MessagesBag, который имеет [простой и элегантный метод](../services/validation.md#working-with-error-messages) для форматирования ошибок.
 
 <a href="overriding-validation" name="overriding-validation" class="anchor"></a>
 ### Переопределение валидации
@@ -311,7 +311,7 @@ URL будет сгенерирован автоматически только 
 <a href="custom-validation-rules" name="custom-validation-rules" class="anchor"></a>
 ### Пользовательские правила проверки
 
-Вы также можете создавать свои собственные [правила проверки](../services/validation#custom-validation-rules).
+Вы также можете создавать свои собственные [правила проверки](../services/validation.md#custom-validation-rules).
 
 <a href="soft-deleting" name="soft-deleting" class="anchor"></a>
 ## Soft deleting

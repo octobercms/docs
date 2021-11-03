@@ -1,6 +1,6 @@
 # {% placeholder %}
 
-Тег `{% placeholder %}` отображает содержимое между двумя тегами `{% put %}` и `{% endput %}`, которое обычно [находится внутри Шаблонов ( Макетов, Layouts )](../cms/layouts#placeholders).
+Тег `{% placeholder %}` отображает содержимое между двумя тегами `{% put %}` и `{% endput %}`, которое обычно [находится внутри Шаблонов ( Макетов, Layouts )](../cms/layouts.md#placeholders).
 
 ```twig
 {% placeholder name %}

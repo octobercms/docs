@@ -1,6 +1,6 @@
 # AJAX
 
-OctoberCMS включает в себя AJAX фреймворк, который позволяет выполнять AJAX запросы, находящиеся в [страницах](../cms/pages), [шаблонах](../cms/layouts) или [компонентах](../cms/components), и обновлять элементы страницы при помощи [фрагментов](../cms/partials). Существует два способа его использования: JavaScript API и Data attributes API. Data attributes API не требует каких-либо знаний JavaScript.
+OctoberCMS включает в себя AJAX фреймворк, который позволяет выполнять AJAX запросы, находящиеся в [страницах](../cms/pages.md), [шаблонах](../cms/layouts.md) или [компонентах](../cms/components.md), и обновлять элементы страницы при помощи [фрагментов](../cms/partials.md). Существует два способа его использования: JavaScript API и Data attributes API. Data attributes API не требует каких-либо знаний JavaScript.
 
 <a name="introduction"></a>
 ## Введение
@@ -20,7 +20,7 @@ OctoberCMS включает в себя AJAX фреймворк, который 
 <a name="how-ajax-works"></a>
 ### Как работает AJAX
 
-Вы можете использовать AJAX на любой странице при помощи **Data Attributes** или **JavaScript**. Каждый запрос вызывает **обработчик событий** на сервере и может обновлять элементы страницы при помощи [фрагментов](../cms/partials). AJAX запросы работают лучше всего с формами, так как данные формы автоматически отправляется на сервер. Последовательность выполнения AJAX запроса:
+Вы можете использовать AJAX на любой странице при помощи **Data Attributes** или **JavaScript**. Каждый запрос вызывает **обработчик событий** на сервере и может обновлять элементы страницы при помощи [фрагментов](../cms/partials.md). AJAX запросы работают лучше всего с формами, так как данные формы автоматически отправляется на сервер. Последовательность выполнения AJAX запроса:
 
 1. Клиент создает AJAX запрос, передав имя обработчика и, при необходимости, дополнительные параметры серверу.
 2. Сервер находит обработчик с таким именем и выполняет его.
@@ -45,7 +45,7 @@ OctoberCMS включает в себя AJAX фреймворк, который 
 <a name="ajax-handlers"></a>
 ## Обработчики
 
-Обработчики AJAX - PHP функции, которые могут быть определены в странице, шаблоне или внутри компонента. Они имеют название вида `onНазваниеОбработчика` и могут передавать результат на страницу. Следующий пример демонстрирует обработчик, который определен в [PHP секции](../cms/themes#php-section) страницы. Он получает два значения из формы, суммирует их и присваивает новое число переменной страницы **result**.
+Обработчики AJAX - PHP функции, которые могут быть определены в странице, шаблоне или внутри компонента. Они имеют название вида `onНазваниеОбработчика` и могут передавать результат на страницу. Следующий пример демонстрирует обработчик, который определен в [PHP секции](../cms/themes.md#php-section) страницы. Он получает два значения из формы, суммирует их и присваивает новое число переменной страницы **result**.
 
     url = "js"
     layout = "default"
@@ -60,7 +60,7 @@ OctoberCMS включает в себя AJAX фреймворк, который 
 
 > **Примечание:** Если обработчики имеют одинаковые имена, то сначала вызывается тот, который определен в странице, затем - в шаблоне, после - в компоненте.
 
-The `onInit()` methods found in the [page execution life cycle](layouts#dynamic-pages) can be used for defining code that always executes before an AJAX event is handled.
+The `onInit()` methods found in the [page execution life cycle](layouts.md#dynamic-pages) can be used for defining code that always executes before an AJAX event is handled.
 
     function onInit()
     {
@@ -204,7 +204,7 @@ JavaScript API является более мощным инструментом
 <a name="components-ajax-handlers"></a>
 ## Вызов обработчика AJAX из компонента
 
-If you need to issue a request to an AJAX handler defined in a [component](components) attached to a page or layout, you should prefix the handler name with the component short name or [alias](components#aliases). The next example demonstrates how to invoke the **onCalculate** AJAX handler defined in the imaginary **calculator** component:
+If you need to issue a request to an AJAX handler defined in a [component](components.md) attached to a page or layout, you should prefix the handler name with the component short name or [alias](components.md#aliases). The next example demonstrates how to invoke the **onCalculate** AJAX handler defined in the imaginary **calculator** component:
 
     <form data-request="calculator::onCalculate" data-request-update="calcresult: '#result'">
 

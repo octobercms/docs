@@ -14,14 +14,14 @@
 
 ## Подключение стилей
 
-Вы можете добавить произвольные стили на страницу в [PHP секции](../cms/pages#injecting-assets) или в [компоненте](../plugin/components#component-assets).
+Вы можете добавить произвольные стили на страницу в [PHP секции](../cms/pages.md#injecting-assets) или в [компоненте](../plugin/components.md#component-assets).
 
     function onStart()
     {
         $this->addCss('assets/css/hello.css');
     }
 
-Также Вы можете использовать [заполнители](../cms/layouts#placeholders).
+Также Вы можете использовать [заполнители](../cms/layouts.md#placeholders).
 
 ```twig
 <head>

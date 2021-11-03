@@ -185,13 +185,13 @@ If you already have a raw data string you wish to embed into an e-mail message, 
 
 #### Queueing a mail message
 
-Since sending mail messages can drastically lengthen the response time of your application, many developers choose to queue messages for background sending. This is easy using the built-in [unified queue API](../services/queues). To queue a mail message, use the `queue` method on the `Mail` facade:
+Since sending mail messages can drastically lengthen the response time of your application, many developers choose to queue messages for background sending. This is easy using the built-in [unified queue API](../services/queues.md). To queue a mail message, use the `queue` method on the `Mail` facade:
 
     Mail::queue('acme.blog::mail.welcome', $data, function ($message) {
         //
     });
 
-This method will automatically take care of pushing a job onto the queue to send the mail message in the background. Of course, you will need to [configure your queues](../services/queues) before using this feature.
+This method will automatically take care of pushing a job onto the queue to send the mail message in the background. Of course, you will need to [configure your queues](../services/queues.md) before using this feature.
 
 #### Delayed message queueing
 
@@ -311,7 +311,7 @@ System | system | Used for internal, back-end mail
 <a name="mail-template-registration"></a>
 ### Registering mail templates
 
-Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration#registration-file).
+Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration.md#registration-file).
 
     public function registerMailTemplates()
     {
@@ -330,7 +330,7 @@ You may register variables that are globally available to all mail templates wit
 
     View::share('site_name', 'OctoberCMS');
 
-This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
+This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration.md). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 
 <a name="mail-and-local-development"></a>
 ## Mail & local development
@@ -339,7 +339,7 @@ When developing an application that sends e-mail, you probably don't want to act
 
 #### Log driver
 
-One solution is to use the `log` mail driver during local development. This driver will write all e-mail messages to your log files for inspection. For more information on configuring your application per environment, check out the [configuration documentation](../setup/configuration).
+One solution is to use the `log` mail driver during local development. This driver will write all e-mail messages to your log files for inspection. For more information on configuring your application per environment, check out the [configuration documentation](../setup/configuration.md).
 
 #### Universal to
 

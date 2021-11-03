@@ -60,7 +60,7 @@ class BlogPosts extends \Cms\Classes\ComponentBase
 <a name="component-registration"></a>
 ### Регистрация компонента
 
-Все компоненты должны быть указаны в методе `registerComponents()` [класса регистрации плагина](../plugin/registration#component-registration). Пример регистрации компонента:
+Все компоненты должны быть указаны в методе `registerComponents()` [класса регистрации плагина](../plugin/registration.md#component-registration). Пример регистрации компонента:
 
     public function registerComponents()
     {
@@ -69,7 +69,7 @@ class BlogPosts extends \Cms\Classes\ComponentBase
         ];
     }
 
-Теперь компонент **Todo** с алиасом **demoTodo** доступен для использования. Вы можете найти больше информации в разделе [Компоненты](./cms/components).
+Теперь компонент **Todo** с алиасом **demoTodo** доступен для использования. Вы можете найти больше информации в разделе [Компоненты](./cms/components.md).
 
 <a name="component-properties"></a>
 ## Свойства компонента
@@ -213,7 +213,7 @@ Key | Description
 <a name="routing-parameters"></a>
 ## Параметры маршрутизации
 
-Компоненты могут получить доступ к параметрам маршрутизации, которые определяются в [URL страницы](./cms/pages#url-syntax).
+Компоненты могут получить доступ к параметрам маршрутизации, которые определяются в [URL страницы](./cms/pages.md#url-syntax).
 
     // Returns the URL segment value, eg: /page/:post_id
     $postId = $this->param('post_id');
@@ -260,7 +260,7 @@ id = "{{ :my_custom_parameter }}"
 <a name="page-cycle-handlers"></a>
 ### Обработчики страницы
 
-Когда страница загружается, OctoberCMS выполняет функции, которые могут быть определены в [PHP секции](../cms/themes#php-section) страницы, шаблона или в классе компонента. Последовательность выполнения обработчиков:
+Когда страница загружается, OctoberCMS выполняет функции, которые могут быть определены в [PHP секции](../cms/themes.md#php-section) страницы, шаблона или в классе компонента. Последовательность выполнения обработчиков:
 
 1. `onInit()` - функция шаблона.
 1. `onInit()` - функция страницы.
@@ -285,7 +285,7 @@ id = "{{ :my_custom_parameter }}"
 <a name="page-cycle-response"></a>
 ### Завершение с ответом
 
-Также как и все методы [жизненного цикла выполнения страницы](./cms/layouts#layout-life-cycle), метод `onRun()` в компоненте может остановить цикл и вернуть ответ браузеру. Пример с сообщением об отказе в доступе:
+Также как и все методы [жизненного цикла выполнения страницы](./cms/layouts.md#layout-life-cycle), метод `onRun()` в компоненте может остановить цикл и вернуть ответ браузеру. Пример с сообщением об отказе в доступе:
 
     public function onRun()
     {
@@ -297,7 +297,7 @@ id = "{{ :my_custom_parameter }}"
 <a name="ajax-handlers"></a>
 ## AJAX-обработчики
 
-Компоненты могут обрабатывать события AJAX. Обработчики задаются в классе компонента так же, как и в [странице или шаблоне](../cms/ajax#ajax-handlers). Пример обработчика:
+Компоненты могут обрабатывать события AJAX. Обработчики задаются в классе компонента так же, как и в [странице или шаблоне](../cms/ajax.md#ajax-handlers). Пример обработчика:
 
     public function onAddItem()
     {
@@ -306,7 +306,7 @@ id = "{{ :my_custom_parameter }}"
         $this->page['result'] = $value1 + $value2;
     }
 
-Более подробно об использовании AJAX в компонентах написано [в этой статье](../cms/ajax#components-ajax-handlers).
+Более подробно об использовании AJAX в компонентах написано [в этой статье](../cms/ajax.md#components-ajax-handlers).
 
 <a name="default-markup"></a>
 ## Разметка по умолчанию
@@ -360,7 +360,7 @@ A relaxed method can be used that is contextual. If called inside a component pa
 <a name="referencing-self"></a>
 ### "self"
 
-Компонент может ссылаться на самого себя в фрагментах при помощи переменной `__SELF__`. По умолчанию она вернет название компонента или [алиас](../cms/components#aliases).
+Компонент может ссылаться на самого себя в фрагментах при помощи переменной `__SELF__`. По умолчанию она вернет название компонента или [алиас](../cms/components.md#aliases).
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">
@@ -412,7 +412,7 @@ A relaxed method can be used that is contextual. If called inside a component pa
         'name' => 'John Smith'
     ]);
 
-Пример отображения фрагмента при помощи [AJAX-обработчика](./cms/ajax#ajax-handlers):
+Пример отображения фрагмента при помощи [AJAX-обработчика](./cms/ajax.md#ajax-handlers):
 
     function onGetTemplate()
     {

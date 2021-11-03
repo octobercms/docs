@@ -3,12 +3,12 @@
 <a href="#extending-with-events" name="extending-with-events" class="anchor"></a>
 ## События
 
-Вы можете добавлять или изменять функциональные возможности плагинов при помощи [Событий](./services/events).
+Вы можете добавлять или изменять функциональные возможности плагинов при помощи [Событий](./services/events.md).
 
 <a href="#subscribing-to-events"  name="subscribing-to-events" class="anchor"></a>
 ### Подписка на события
 
-Наиболее подходящее место для подписки на события - метод `boot()` в [файле регистрации плагина](./registration#registration-methods). Например, если Вы хотите добавить нового пользователя в список для рассылки, используйте глобальное событие **rainlab.user.register**:
+Наиболее подходящее место для подписки на события - метод `boot()` в [файле регистрации плагина](./registration.md#registration-methods). Например, если Вы хотите добавить нового пользователя в список для рассылки, используйте глобальное событие **rainlab.user.register**:
 
     public function boot()
     {

@@ -76,7 +76,7 @@
 
 ![image](https://github.com/octobercms/docs/blob/master/images/name-title-indicators.png?raw=true) {.img-responsive .frame}
 
-> **Примечание:** Если Вы используете счетчики в [виджетах](../backend/widgets#report-widgets), то нельзя использовать класс **scoreboard-item**.
+> **Примечание:** Если Вы используете счетчики в [виджетах](../backend/widgets.md#report-widgets), то нельзя использовать класс **scoreboard-item**.
 
 <a name="pie-chart" class="anchor" ></a>
 ## Круговая диаграмма

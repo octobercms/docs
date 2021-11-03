@@ -3,7 +3,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-October uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes) use the [Twig](#twig-parser) and [INI format](#ini-parser) in their template structure. Each parser is described in more detail below.
+October uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes.md) use the [Twig](#twig-parser) and [INI format](#ini-parser) in their template structure. Each parser is described in more detail below.
 
 <a name="markdown-parser"></a>
 ## Markdown parser
@@ -21,7 +21,7 @@ Use the `Markdown::parse` method to render Markdown to HTML:
 
     $html = Markdown::parse($markdown);
 
-You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md).
+You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md.md).
 
 ```twig
 {{ '**Text** is bold.'|md }}
@@ -30,7 +30,7 @@ You may also use the `|md` filter for [parsing Markdown in your front-end markup
 <a name="twig-parser"></a>
 ## Twig template parser
 
-Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup), [view content](../services/response-view#views) and [mail message content](../services/mail#message-content).
+Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup.md), [view content](../services/response-view.md#views) and [mail message content](../services/mail.md#message-content).
 
 The `Twig` facade is used for parsing Twig syntax, you may use the `Twig::parse` method to render Twig to HTML.
 
@@ -40,12 +40,12 @@ The second argument can be used for passing variables to the Twig markup.
 
     $html = Twig::parse($twig, ['foo' => 'bar']);
 
-The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration#extending-twig).
+The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration.md#extending-twig).
 
 <a name="bracket-parser"></a>
 ## Bracket parser
 
-October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content#content-variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
+October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content.md#content-variables). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
 
     use October\Rain\Parse\Bracket;
 
@@ -74,7 +74,7 @@ The array can be iterated using the following syntax:
 <a name="yaml-parser"></a>
 ## YAML configuration parser
 
-YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
+YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms.md#form-fields) and [list column](../backend/lists##list-columns) definitions. An example of some YAML:
 
     receipt:     Acme Purchase Invoice
     date:        2015-10-02
@@ -97,7 +97,7 @@ The parser also supports operation in reverse, outputting YAML format from a PHP
 <a name="ini-parser"></a>
 ## Initialization (INI) configuration parser
 
-The INI file format is a standard for defining simple configuration files, commonly used by [components inside theme templates](../cms/components). It could be considered a cousin of the YAML format, although unlike YAML, it is incredibly simple, less sensitive to typos and does not rely on indentation. It supports basic key-value pairs with sections, for example:
+The INI file format is a standard for defining simple configuration files, commonly used by [components inside theme templates](../cms/components.md). It could be considered a cousin of the YAML format, although unlike YAML, it is incredibly simple, less sensitive to typos and does not rely on indentation. It supports basic key-value pairs with sections, for example:
 
     receipt = "Acme Purchase Invoice"
     date = "2015-10-02"
@@ -187,7 +187,7 @@ To continue with the examples above, calling the `toEditor` method on the `Parse
     //     'type' => 'text'
     // ]
 
-You may notice the properties closely resemble the options found in [form field definintions](../backend/forms#form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
+You may notice the properties closely resemble the options found in [form field definintions](../backend/forms.md#form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
 
     $form = [
         'fields' => $syntax->toEditor()
@@ -198,7 +198,7 @@ You may notice the properties closely resemble the options found in [form field 
 <a name="syntax-supported-tags"></a>
 ### Supported tags
 
-There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms#field-types).
+There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms.md#field-types).
 
 #### Text
 
