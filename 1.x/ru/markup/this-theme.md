@@ -5,7 +5,7 @@ You can access the current theme object via `this.theme` and it returns the obje
 
 ## Свойства
 
-Объект `this.theme` класса `Cms\Classes\Theme` имеет прямой доступ к [полям темы](./themes/development.md#customization), а также имеет следующие свойства.
+Объект `this.theme` класса `Cms\Classes\Theme` имеет прямой доступ к [полям темы](../themes/development.md#customization), а также имеет следующие свойства.
 
 ### id
 

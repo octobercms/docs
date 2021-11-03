@@ -69,7 +69,7 @@
 
 Например, на рабочем сервере Вы, возможно, захотите включить [защиту от  CSRF](../setup/configuration.md#csrf-protection). В то время как на локальном - [Последние обновления](../setup/configuration.md#edge-updates).
 
-Мы настоятельно рекомендуем отключить [режим отладки](./setup/configuration.md#debug-mode) для опубликованных проектов.
+Мы настоятельно рекомендуем отключить [режим отладки](../setup/configuration.md#debug-mode) для опубликованных проектов.
 
 <a name="crontab-setup" class="anchor"></a>
 ### Настроить работу планировщика

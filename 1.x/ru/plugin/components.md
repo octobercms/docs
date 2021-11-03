@@ -69,7 +69,7 @@ class BlogPosts extends \Cms\Classes\ComponentBase
         ];
     }
 
-Теперь компонент **Todo** с алиасом **demoTodo** доступен для использования. Вы можете найти больше информации в разделе [Компоненты](./cms/components.md).
+Теперь компонент **Todo** с алиасом **demoTodo** доступен для использования. Вы можете найти больше информации в разделе [Компоненты](../cms/components.md).
 
 <a name="component-properties"></a>
 ## Свойства компонента
@@ -213,7 +213,7 @@ Key | Description
 <a name="routing-parameters"></a>
 ## Параметры маршрутизации
 
-Компоненты могут получить доступ к параметрам маршрутизации, которые определяются в [URL страницы](./cms/pages.md#url-syntax).
+Компоненты могут получить доступ к параметрам маршрутизации, которые определяются в [URL страницы](../cms/pages.md#url-syntax).
 
     // Returns the URL segment value, eg: /page/:post_id
     $postId = $this->param('post_id');
@@ -285,7 +285,7 @@ id = "{{ :my_custom_parameter }}"
 <a name="page-cycle-response"></a>
 ### Завершение с ответом
 
-Также как и все методы [жизненного цикла выполнения страницы](./cms/layouts.md#layout-life-cycle), метод `onRun()` в компоненте может остановить цикл и вернуть ответ браузеру. Пример с сообщением об отказе в доступе:
+Также как и все методы [жизненного цикла выполнения страницы](../cms/layouts.md#layout-life-cycle), метод `onRun()` в компоненте может остановить цикл и вернуть ответ браузеру. Пример с сообщением об отказе в доступе:
 
     public function onRun()
     {
@@ -412,7 +412,7 @@ A relaxed method can be used that is contextual. If called inside a component pa
         'name' => 'John Smith'
     ]);
 
-Пример отображения фрагмента при помощи [AJAX-обработчика](./cms/ajax.md#ajax-handlers):
+Пример отображения фрагмента при помощи [AJAX-обработчика](../cms/ajax.md#ajax-handlers):
 
     function onGetTemplate()
     {

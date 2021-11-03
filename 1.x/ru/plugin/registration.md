@@ -91,7 +91,7 @@
 **registerPermissions()** | метод регистрирует [права пользователей](../backend/users.md#permission-registration), используемые этим плагином.
 **registerSettings()** | метод регистрирует [страницы с настройками](../plugin/settings.md#link-registration), используемые этим плагином.
 **registerFormWidgets()** | метод регистрирует [виджеты с формами](../backend/widgets.md#form-widget-registration), используемые этим плагином.
-**registerReportWidgets()** | метод регистрирует [виджеты с отчетами](./backend/widgets.md#report-widget-registration), включая виджеты для панели управления.
+**registerReportWidgets()** | метод регистрирует [виджеты с отчетами](../backend/widgets.md#report-widget-registration), включая виджеты для панели управления.
 **registerMailTemplates()** | метод регистрирует [почтовые шаблоны](/plugin-mail.md#mail-template-registration).
 **registerSchedule()** | метод регистрирует [задачи](../plugin/scheduling.md#defining-schedules), которые выполняются на регулярной основе.
 

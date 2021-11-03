@@ -36,7 +36,7 @@
 <a href="event-registration" name="event-registration" class="anchor"></a>
 ### Где писать код ?
 
-Наиболее подходящее место - метод `boot` в [файле регистрации плагина](./plugin/registration.md#registration-methods).
+Наиболее подходящее место - метод `boot` в [файле регистрации плагина](../plugin/registration.md#registration-methods).
 
     class Plugin extends PluginBase
     {
@@ -141,7 +141,7 @@
 <a href="queued-events" name="queued-events" class="anchor"></a>
 ### Очередь событий
 
-Вы можете использовать метод `Event::queue`, чтобы отложить выполнение события и добавить его в [очередь](./services/queues.md).
+Вы можете использовать метод `Event::queue`, чтобы отложить выполнение события и добавить его в [очередь](../services/queues.md).
 
     Event::queue('foo', [$user]);
 
@@ -216,7 +216,7 @@
 
     Event::subscribe(new UserEventHandler);
 
-Вы также можете использовать [сервис-контейнер](./application.md) для того, чтобы получить объект своего подписчика на события:
+Вы также можете использовать [сервис-контейнер](../services/application.md) для того, чтобы получить объект своего подписчика на события:
 
     Event::subscribe('UserEventHandler');
 
