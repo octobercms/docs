@@ -1,10 +1,5 @@
 # Шаблоны ( Макеты, Layouts )
 
-- [Введение](#introduction)
-- [Заменители ( Placeholders )](#placeholders)
-- [Динамические шаблоны](#dynamic-layouts)
-    - [Жизненный цикл шаблонов](#layout-life-cycle)
-
 <a name="introduction"></a>
 ## Введение
 

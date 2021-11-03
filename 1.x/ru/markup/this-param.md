@@ -6,23 +6,27 @@
 
 Пример:
 
-    url = "/account/:tab"
-    ==
+```
+url = "/account/:tab"
+==
 
-    {% if this.param.tab == 'details' %}
+{% if this.param.tab == 'details' %}
 
-        <p>Here are all your details</p>
+    <p>Here are all your details</p>
 
-    {% elseif this.param.tab == 'history' %}
+{% elseif this.param.tab == 'history' %}
 
-        <p>You are viewing a blast from the past</p>
+    <p>You are viewing a blast from the past</p>
 
-    {% endif %}
+{% endif %}
+```
 
 Другой пример:
 
-    url = "/account/:post_id"
-    ==
-    {% set name = 'post_id' %}
+```
+url = "/account/:post_id"
+==
+{% set name = 'post_id' %}
 
-    <p>The post ID is: {{ this.param[name] }}</p>
+<p>The post ID is: {{ this.param[name] }}</p>
+```

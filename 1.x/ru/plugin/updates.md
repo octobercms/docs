@@ -1,12 +1,5 @@
 # Версионирование
 
-- [Введение](#introduction)
-- [Процесс обновления](#update-process)
-    - [Зависимости плагинов](#plugin-depedencies)
-- [Файл с версиями плагина](#version-file)
-    - [Важные обновления](#important-updates)
-    - [Миграции и начальные данные](#migration-seed-files)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

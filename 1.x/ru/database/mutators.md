@@ -1,10 +1,5 @@
 # Мутаторы (Mutators)
 
-- [Введение](#introduction)
-- [Accessors & Mutators](#accessors-and-mutators)
-- [Мутаторы дат](#date-mutators)
-- [Приведение типов](#attribute-casting)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

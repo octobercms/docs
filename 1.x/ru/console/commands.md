@@ -1,29 +1,5 @@
 # Интерфейс командной строки
 
-- [Установка](#console-install)
-    - [Быстрый старт](#console-install-quick)
-    - [Composer](#console-install-composer)
-- [Настройка и Поддержка](#maintenance-commands)
-    - [Установка системы](#console-install-command)
-    - [Обновление системы](#console-update-command)
-    - [Миграция](#console-up-command)
-- [Управление плагинами](#plugin-commands)
-    - [Установка плагина](#plugin-install-command)
-    - [Обновление плагина](#plugin-refresh-command)
-    - [Удаление плагина](#plugin-remove-command)
-- [Управление темами](#theme-commands)
-    - [Установка темы](#theme-install-command)
-    - [Список тем](#theme-list-command)
-    - [Включение темы](#theme-use-command)
-    - [Удаление темы](#theme-remove-command)
-- [Утилиты](#utility-commands)
-    - [Очистка кэша](#cache-clear-command)
-    - [Удалить Демо](#october-fresh-command)
-    - [Зеркальная копия папки public](#cache-clear-command)
-    - [Включение DotEnv](#october-env-command)
-    - [Другие команды](#october-util-command)
-
-
 OctoberCMS включает в себя несколько консольных команд и утилит, основанных на инструменте Laravel - [Artisan](http://laravel.com/docs/artisan), которые позволяют установить систему, обновить ее, а также ускорить процесс разработки. Вы можете [создавать свои команды](./console-development) или использовать уже [существующие](./console-scaffolding).
 
 <a name="console-install" class="anchor"></a>

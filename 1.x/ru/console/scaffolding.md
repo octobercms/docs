@@ -1,13 +1,5 @@
 # Основные команды
 
-- [Основные команды](#scaffolding-commands)
-    - [Создание плагина](#scaffold-create-plugin)
-    - [Создание компонента](#scaffold-create-component)
-    - [Создание модели](#scaffold-create-model)
-    - [Создание контроллера](#scaffold-create-controller)
-    - [Создание виджета](#scaffold-create-formwidget)
-    - [Создание консольной команды](#scaffold-create-command)
-
 <a name="scaffolding-commands" class="anchor" ></a>
 ## Основные команды
 

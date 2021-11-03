@@ -1,20 +1,5 @@
 # Расширение возможностей плагинов
 
-- [События](#extending-with-events)
-    - [Подписка на события](#subscribing-to-events)
-    - [Объявление событий](#declaring-events)
-- [События в административной части сайта](#backend-view-events)
-- [Примеры](#usage-examples)
-    - [Пользователь](#extending-user-model)
-    - [Форма](#extending-backend-form)
-    - [Список](#extending-backend-list)
-    - [Компонент](#extending-component)
-    - [Меню](#extending-backend-menu)
-
-
-<!-- Behaviors: Mixin concept, dynamic implement, extend constructor -->
-<!-- IoC/Facades: Replacing objects -->
-
 <a href="#extending-with-events" name="extending-with-events" class="anchor"></a>
 ## События
 
@@ -233,15 +218,17 @@
 
 Пример добавления записи в журнал при загрузке страницы с компонентом `Topic`:
 
-    [topic]
-    slug = "{{ :slug }}"
-    ==
-    function onInit()
-    {
-        $this['topic']->bindEvent('topic.post', function($post, $postUrl) {
-            trace_log('A post has been submitted at '.$postUrl);
-        });
-    }
+```
+[topic]
+slug = "{{ :slug }}"
+==
+function onInit()
+{
+    $this['topic']->bindEvent('topic.post', function($post, $postUrl) {
+        trace_log('A post has been submitted at '.$postUrl);
+    });
+}
+```
 
 <a href="#extending-backend-menu" name="extending-backend-menu" class="anchor"></a>
 ### Меню

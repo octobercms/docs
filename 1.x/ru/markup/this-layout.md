@@ -10,10 +10,14 @@
 
 Преобразует имя файла шаблона и имя папки в CSS-идентификатор.
 
-    <body class="layout-{{ this.layout.id }}">
+```twig
+<body class="layout-{{ this.layout.id }}">
+```
 
 ### description
 
 Описание шаблона (указывается в административной части сайта).
 
-    <meta name="description" content="{{ this.layout.description }}">
+```twig
+<meta name="description" content="{{ this.layout.description }}">
+```

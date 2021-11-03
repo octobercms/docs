@@ -1,29 +1,19 @@
 # Forms & HTML
 
-- [Introduction](#introduction)
-- [Opening a form](#opening-a-form)
-- [Form tokens](#form-tokens)
-- [CSRF protection](#csrf-protection)
-- [Form model binding](#form-model-binding)
-- [Labels](#labels)
-- [Text fields](#text)
-- [Checkboxes and radio buttons](#checkboxes-and-radio-buttons)
-- [File input](#file-input)
-- [Number input](#number)
-- [Drop-down lists](#drop-down-lists)
-- [Buttons](#buttons)
-- [Custom macros](#custom-macros)
-
 <a name="introduction"></a>
 ## Introduction
 
 October provides various helpful functions with the `Html` facade, useful for dealing with HTML and forms. While most of the examples will use the PHP language all of these features translate directly to [Twig markup](../markup) with a simple conversion.
 
-    // PHP
-    <?= Form::open(..) ?>
+```php
+// PHP
+<?= Form::open(..) ?>
+```
 
-    // Twig
-    {{ form_open(...) }}
+```twig
+<!-- Twig -->
+{{ form_open(...) }}
+```
 
 As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../markup/function-form) on using the form helper in the front-end.
 
@@ -206,7 +196,7 @@ You may pass a default value as the second argument:
 #### Generating a drop-down list with a range, selected value and blank option
 
     <?= Form::selectRange('number', 10, 20, 2, ['emptyOption' => 'Choose...']) ?>
-    
+
 #### Generating a list with month names
 
     <?= Form::selectMonth('month') ?>
@@ -214,7 +204,7 @@ You may pass a default value as the second argument:
 #### Generating a list with month names, selected value and blank option
 
     <?= Form::selectMonth('month', 2, ['emptyOption' => 'Choose month...']) ?>
-    
+
 <a name="buttons"></a>
 ## Buttons
 

@@ -2,11 +2,15 @@
 
 Функции, начинающиеся с `form_`, можно использовать при работе с формами. Они являются аналогами методов PHP класса `Form`. Например:
 
-    {{ form_close() }}
+```twig
+{{ form_close() }}
+```
 
 является точной копией следующего PHP выражения:
 
-    <?= Form::close() ?>
+```php
+<?= Form::close() ?>
+```
 
 > **Примечание**: Названия методов должны быть преобразованы из *camelCase* в *snake_case*.
 
@@ -14,19 +18,27 @@
 
 Отображает стандартный открывающий тег FORM (без AJAX).
 
-    {{ form_open() }}
+```twig
+{{ form_open() }}
+```
 
 Атрибуты формы могут быть переданы в качестве первого аргумента.
 
-    {{ form_open({ class: 'form-horizontal' }) }}
+```twig
+{{ form_open({ class: 'form-horizontal' }) }}
+```
 
 Результат:
 
-    <form class="form-horizontal">
+```html
+<form class="form-horizontal">
+```
 
 Существуют несколько специальных параметров, которые также могут быть использованы вместе с атрибутами.
 
-    {{ form_open({ request: 'onUpdate' }) }}
+```twig
+{{ form_open({ request: 'onUpdate' }) }}
+```
 
 Функция поддерживает следующие параметры:
 
@@ -42,21 +54,29 @@
 
 Отображает стандартный открывающий тег FORM для AJAX формы. Первый аргумент функции `form_ajax()` - название AJAX обработчика, который может быть расположен в [PHP секции](./cms-themes#php-section) или компоненте. Вы можете найти более подробную информацию в разделе [AJAX Framework](./cms-ajax).
 
-    {{ form_ajax('onUpdate') }}
+```twig
+{{ form_ajax('onUpdate') }}
+```
 
 Атрибуты формы могут быть переданы в качестве второго аргумента.
 
-    {{ form_ajax('onSave', { class: 'form-horizontal'}) }}
+```twig
+{{ form_ajax('onSave', { class: 'form-horizontal'}) }}
+```
 
 Результат:
 
-    <form data-request="onSave" class="form-horizontal">
+```html
+<form data-request="onSave" class="form-horizontal">
+```
 
 Существуют несколько специальных параметров, которые также могут быть использованы вместе с атрибутами.
 
-    {{ form_ajax('onDelete', { data: { id: 2 }, confirm: 'Really delete this record?' }) }}
+```twig
+{{ form_ajax('onDelete', { data: { id: 2 }, confirm: 'Really delete this record?' }) }}
 
-    {{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
+{{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
+```
 
 Функция поддерживает следующие параметры:
 
@@ -73,8 +93,12 @@
 
 Отображает стандартный тег закрытия FORM.
 
-    {{ form_close() }}
+```twig
+{{ form_close() }}
+```
 
 Результат:
 
-    </form>
+```html
+</form>
+```

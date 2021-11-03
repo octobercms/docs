@@ -1,10 +1,5 @@
 # Сериализация
 
-- [Введение](#introduction)
-- [Основы использования](#basic-usage)
-- [Скрытие атрибутов из JSON](#hiding-attributes-from-json)
-- [Добавление атрибутов в JSON](#appending-values-to-json)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

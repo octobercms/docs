@@ -1,19 +1,5 @@
 # События ( Events )
 
-- [Использование](#basic-usage)
-- [Подписка на события](#events-subscribing)
-    - [Где писать код ?](#event-registration)
-    - [Подписка на событие с приоритетом](#subscribing-priority)
-    - [Прерывание обработки события](#subscribing-halting)
-    - [Обработчики по шаблону (wildcard)](#wildcard-listeners)
-- [Вызов событий ( Firing events )](#events-firing)
-    - [Передача аргументов по ссылке](#event-pass-by-reference)
-    - [Очередь событий](#queued-events)
-- [Использование классов в качестве слушателей](#using-classes-as-listeners)
-    - [Определение метода-подписчика](#event-class-method)
-    - [Определение класса-подписчика](#event-class-subscribe)
-- [Трейт](#event-emitter-trait)
-
 <a href="basic-usage" name="basic-usage" class="anchor"></a>
 ## Использование
 
@@ -149,7 +135,7 @@
     Event::listen('cms.processContent', function (&$content) {
         $content = $content . 'B';
     });
-    
+
 В итоге: `$content = '111AB'`.
 
 <a href="queued-events" name="queued-events" class="anchor"></a>

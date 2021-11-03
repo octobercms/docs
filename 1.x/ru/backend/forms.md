@@ -1,30 +1,5 @@
 # Формы
 
-- [Введение](#introduction)
-- [Настройка форм](#configuring-form)
-    - [Создание содержимого](#form-create-page)
-    - [Редактирование содержимого](#form-update-page)
-    - [Предпросмотр содержимого](#form-preview-page)
-- [Поля формы](#form-fields)
-    - [Параметры вкладок](#form-tab-options)
-    - [Параметры полей](#form-field-options)
-- [Типы полей](#field-types)
-- [Виджеты](#form-widgets)
-- [Представления](#form-views)
-    - [Представление для страницы Создания содержимого](#form-create-view)
-    - [Представление для страницы Редактирования содержимого](#form-update-view)
-    - [Представление для страницы Предпросмотра содержимого](#form-preview-view)
-- [Применение условий](#field-conditions)
-    - [Input preset converter](#field-input-preset)
-    - [События](#field-trigger-events)
-    - [Зависимости](#field-dependencies)
-- [Расширение поведения форм](#extend-form-behavior)
-    - [Переопределение действия контроллера](#overriding-action)
-    - [Изменение запроса к модели](#extend-model-query)
-    - [Изменение полей формы](#extend-form-fields)
-    - [Фильтрация](#filter-form-fields)
-- [Валидация полей](#validate-form-fields)
-
 <a name="introduction"></a>
 ## Введение
 
@@ -238,6 +213,7 @@ There are various native field types that can be used for the **type** setting. 
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Text](#field-text)
 - [Number](#field-number)
 - [Password](#field-password)
@@ -251,6 +227,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Partial](#field-partial)
 - [Hint](#field-hint)
 - [Widget](#field-widget)
+
 </div>
 
 <a name="field-text"></a>
@@ -451,6 +428,7 @@ Checkbox lists support three ways of defining the options, exactly like the [dro
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets) article.
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Code editor](#widget-codeeditor)
 - [Color picker](#widget-colorpicker)
 - [Date picker](#widget-datepicker)
@@ -462,6 +440,7 @@ There are various form widgets included as standard, although it is common for p
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Markdown editor](#widget-markdowneditor)
 - [Tag list](#widget-taglist)
+
 </div>
 
 <a name="widget-codeeditor"></a>

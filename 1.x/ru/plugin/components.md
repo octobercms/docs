@@ -1,24 +1,5 @@
 # Создание компонента
 
-- [Введение](#introduction)
-- [Определение класса компонента](#component-class-definition)
-    - [Регистрация компонента](#component-registration)
-- [Свойства компонента](#component-properties)
-    - [Выпадающий список](#dropdown-properties)
-    - [Список страниц](#page-list-properties)
-- [Параметры маршрутизации](#routing-parameters)
-- [Обработка цикла выполнения страницы](#page-cycle)
-    - [Обработчики страницы](#page-cycle-handlers)
-    - [Инициализация компонента](#page-cycle-init)
-    - [Завершение с ответом](#page-cycle-response)
-- [AJAX-обработчики](#ajax-handlers)
-- [Разметка по умолчанию](#default-markup)
-- [Фрагменты компонента](#component-partials)
-    - ["self"](#referencing-self)
-    - [Уникальный идентификатор](#unique-identifier)
-- [Отображение фрагментов из кода](#render-partial-method)
-- [Добавление CSS и JS файлов на страницу](#component-assets)
-
 <a name="introduction"></a>
 ## Введение
 
@@ -38,24 +19,26 @@
 
 **Файл с классом компонента** содержит в себе [свойства](#component-properties) и возможности компонента. Его название должно совпадать с названием класса. Этот класс должен расширять класс `\Cms\Classes\ComponentBase`. Пример содержимого файла plugins/acme/blog/components/BlogPosts.php:
 
-    namespace Acme\Blog\Components;
+```php
+namespace Acme\Blog\Components;
 
-    class BlogPosts extends \Cms\Classes\ComponentBase
+class BlogPosts extends \Cms\Classes\ComponentBase
+{
+    public function componentDetails()
     {
-        public function componentDetails()
-        {
-            return [
-                'name' => 'Blog Posts',
-                'description' => 'Displays a collection of blog posts.'
-            ];
-        }
-
-        // This array becomes available on the page as {{ component.posts }}
-        public function posts()
-        {
-            return ['First Post', 'Second Post', 'Third Post'];
-        }
+        return [
+            'name' => 'Blog Posts',
+            'description' => 'Displays a collection of blog posts.'
+        ];
     }
+
+    // This array becomes available on the page as {{ component.posts }}
+    public function posts()
+    {
+        return ['First Post', 'Second Post', 'Third Post'];
+    }
+}
+```
 
 Метод `componentDetails()` является обязательным и должен вернуть массив с двумя ключами: `name` и `description`.  Имя и описание отображаются в административном интерфейсе сайта.
 
@@ -68,9 +51,11 @@
 
 Теперь Вы можете получить доступ к методу `posts()` через переменную `blogPosts`.
 
-    {% for post in blogPosts.posts %}
-        {{ post }}
-    {% endfor %}
+```twig
+{% for post in blogPosts.posts %}
+    {{ post }}
+{% endfor %}
+```
 
 <a name="component-registration"></a>
 ### Регистрация компонента
@@ -244,10 +229,12 @@ Key | Description
 
 Вариант 2:
 
-    url = "/blog/:my_custom_parameter"
+```
+url = "/blog/:my_custom_parameter"
 
-    [blogPost]
-    id = "{{ :my_custom_parameter }}"
+[blogPost]
+id = "{{ :my_custom_parameter }}"
+```
 
 В обоих случаях Вы можете получить значение при помощи метода `property()`:
 
@@ -351,52 +338,68 @@ Key | Description
 
 В дополнение к разметке по умолчанию, компоненты также могут использовать фрагменты. Если у компонента Demo ToDo есть фрагмент с навигацией, то он будет находиться в **/plugins/october/demo/components/todo/pagination.htm** и отображаться на странице, используя:
 
-    {% partial 'demoTodo::pagination' %}
+```twig
+{% partial 'demoTodo::pagination' %}
+```
 
 Вы можете использовать контекстно-зависимый метод для отображения фрагмента. Если он вызывается внутри фрагмента компонента, то будет ссылаться на самого себя. Если он вызывается внутри фрагмента темы, то будет сканировать все компоненты, используемые на странице/шаблоне, и использовать их.
 
 A relaxed method can be used that is contextual. If called inside a component partial, it will directly refer to itself. If called inside a theme partial, it will scan all components used on the page/layout for a matching partial name and use that.
 
-    {% partial '@pagination' %}
+```twig
+{% partial '@pagination' %}
+```
 
 Несколько компонентов могут использовать фрагмент, который находится в папке **components/partials**, как запасной вариант, когда обычный фрагмент компонента не может быть найден.
 Например, общий фрагмент, расположенный в **/plugins/acme/blog/components/partials/shared.htm**, может быть отображен на странице любым компонентом таким образом:
 
-    {% partial '@shared' %}
+```twig
+{% partial '@shared' %}
+```
 
 <a name="referencing-self"></a>
 ### "self"
 
 Компонент может ссылаться на самого себя в фрагментах при помощи переменной `__SELF__`. По умолчанию она вернет название компонента или [алиас](./cms-components#aliases).
 
-    <form data-request="{{__SELF__}}::onEventHandler">
-        [...]
-    </form>
+```twig
+<form data-request="{{__SELF__}}::onEventHandler">
+    [...]
+</form>
+```
 
 Компоненты могут также ссылаться на свои собственные свойства.
 
-    {% for item in __SELF__.items() %}
-        {{ item }}
-    {% endfor %}
+```twig
+{% for item in __SELF__.items() %}
+    {{ item }}
+{% endfor %}
+```
 
 Пример вывода фрагмента в фрагменте:
 
-    {% partial __SELF__~"::screenshot-list" %}
+```twig
+{% partial __SELF__~"::screenshot-list" %}
+```
 
 <a name="unique-identifier"></a>
 ### Уникальный идентификатор
 
 Если компонент вызывается дважды на одной и той же странице, то свойство `id` может быть использовано для ссылки на каждый экземпляр.
 
-    {{__SELF__.id}}
+```twig
+{{__SELF__.id}}
+```
 
 При обновлении страницы ID изменяется:
 
-    <!-- ID: demoTodo527c532e9161b -->
-    {% component 'demoTodo' %}
+```twig
+<!-- ID: demoTodo527c532e9161b -->
+{% component 'demoTodo' %}
 
-    <!-- ID: demoTodo527c532ec4c33 -->
-    {% component 'demoTodo' %}
+<!-- ID: demoTodo527c532ec4c33 -->
+{% component 'demoTodo' %}
+```
 
 <a name="render-partial-method"></a>
 ## Отображение фрагментов из кода

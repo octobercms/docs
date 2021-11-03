@@ -1,13 +1,5 @@
 # Queue service
 
-- [Configuration](#configuration)
-- [Basic usage](#basic-usage)
-- [Queueing closures](#queueing-closures)
-- [Running the queue listener](#running-the-queue-listener)
-- [Daemon queue worker](#daemon-queue-worker)
-- [Push queues](#push-queues)
-- [Failed jobs](#failed-jobs)
-
 <a name="configuration"></a>
 ## Configuration
 

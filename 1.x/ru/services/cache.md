@@ -1,11 +1,5 @@
 # Кэш
 
-- [Настройка](#configuration)
-- [Использование кэша](#cache-usage)
-    - [Получение элементов из кэша](#retrieving-items-from-the-cache)
-    - [Запись элементов в кэш](#storing-items-in-the-cache)
-    - [Удаление элементов из кэша](#removing-items-from-the-cache)
-
 <a name="configuration" class="anchor"></a>
 ## Настройка
 

@@ -1,13 +1,5 @@
 # Коллекции
 
-- [Введение](#introduction)
-- [Примеры](#usage-examples)
-- [Пользовательские коллекции](#custom-collections)
-- [Data feed](#data-feed)
-    - [Использование](#creating-feed)
-    - [Обработка результатов](#data-feed-processing)
-    - [Сортировка результатов](#data-feed-ordering)
-
 <a name="introduction" class="anchor" ></a>
 ## Введение
 

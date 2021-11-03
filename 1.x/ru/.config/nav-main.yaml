@@ -30,7 +30,6 @@
         - tag-verbatim
         - tag-for
         - tag-if
-
 -
     title: Filters
     collapsable: false
@@ -42,7 +41,6 @@
         - filter-md
         - filter-raw
         - filter-default
-
 -
     title: Functions
     collapsable: false
@@ -72,6 +70,11 @@
         - cms/components
         - cms/ajax
         - cms/mediamanager
+-
+    title: AJAX
+    children:
+        - ajax/attributes-api
+        - ajax/extras
 -
     title: Plugins
     children:

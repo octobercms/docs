@@ -1,10 +1,5 @@
 # Приложение
 
-- [Application container](#app-container)
-- [Service providers](#service-providers)
-- [Application events](#application-events)
-- [Application helpers](#application-helpers)
-
 <a name="app-container" class="anchor"></a>
 ## Application container
 

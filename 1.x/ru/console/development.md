@@ -1,14 +1,5 @@
 # Разработка команды для консоли
 
-- [Введение](#introduction)
-- [Создание команды](#building-a-command)
-    - [Определение аргументов](#defining-arguments)
-    - [Определение параметров](#defining-options)
-    - [Вывод текста в консоль](#writing-output)
-    - [Получение входных данных](#retrieving-input)
-- [Регистрация команд](#registering-commands)
-- [Вызов других команд](#calling-other-commands)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

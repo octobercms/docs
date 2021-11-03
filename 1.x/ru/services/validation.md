@@ -1,13 +1,5 @@
 # Валидация
 
-- [Использование валидации](#basic-usage)
-- [Работа с сообщениями об ошибках](#working-with-error-messages)
-- [Сообщения об ошибках и представления](#error-messages-and-views)
-- [Доступные правила валидации](#available-validation-rules)
-- [Условные правила](#conditionally-adding-rules)
-- [Собственные сообщения об ошибках](#custom-error-messages)
-- [Собственные правила проверки](#custom-validation-rules)
-
 <a name="basic-usage"></a>
 ## Использование валидации
 
@@ -125,7 +117,9 @@
 
 Таким образом, после переадресации вы можете прибегнуть к автоматически установленной в шаблоне переменной `errors`:
 
-    {{ errors.first('email') }}
+```twig
+{{ errors.first('email') }}
+```
 
 ### Именованные MessageBag
 
@@ -135,7 +129,9 @@
 
 Получить текст ошибки из `MessageBag` с именем `login`:
 
-    {{ errors.login.first('email') }}
+```twig
+{{ errors.login.first('email') }}
+```
 
 <a name="available-validation-rules"></a>
 ## Доступные правила валидации
@@ -154,6 +150,7 @@
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Accepted](#rule-accepted)
 - [Active URL](#rule-active-url)
 - [After (Date)](#rule-after)
@@ -194,6 +191,7 @@
 - [Timezone](#rule-timezone)
 - [Unique (Database)](#rule-unique)
 - [URL](#rule-url)
+
 </div>
 
 <a name="rule-accepted"></a>

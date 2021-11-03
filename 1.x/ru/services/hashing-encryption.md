@@ -1,9 +1,5 @@
 # Hashing and Encryption
 
-- [Configuration](#configuration)
-- [Hashing](#hashing)
-- [Encryption](#encryption)
-
 <a name="configuration"></a>
 ## Configuration
 

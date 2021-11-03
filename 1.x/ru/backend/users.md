@@ -1,9 +1,5 @@
 # Пользователи и права
 
-- [Ограничение доступа](#permission-registration)
-- [Ограничение доступа к административным страницам](#page-access)
-- [Ограничение доступа к функционалу](#features)
-
 <a name="permission-registration" class="anchor"></a>
 ## Ограничение доступа
 

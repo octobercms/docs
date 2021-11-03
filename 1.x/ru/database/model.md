@@ -1,20 +1,5 @@
 # Модель Активной Записи
 
-- [Введение](#introduction)
-- [Определение модели](#defining-models)
-    - [Стандартные свойства](#standard-properties)
-- [Получение нескольких моделей](#retrieving-multiple-models)
-- [Получение одной модели](#retrieving-single-models)
-    - [Агрегатирование](#retrieving-aggregates)
-- [Вставка и изменение моделей](#inserting-and-updating-models)
-    - [Вставка](#basic-inserts)
-    - [Обновление](#basic-updates)
-    - [Массовые присвоения](#mass-assignment)
-- [Удаление модели](#deleting-models)
-- [Ограничения запросов](#query-scopes)
-- [События](#events)
-- [Расширение моделей](#extending-models)
-
 <a name="introduction" class="anchor" ></a>
 ## Введение
 

@@ -1,11 +1,5 @@
 # Requests & Input
 
-- [Basic input](#basic-input)
-- [Cookies](#cookies)
-- [Old input](#old-input)
-- [Files](#files)
-- [Request information](#request-information)
-
 <a name="basic-input"></a>
 ## Basic input
 

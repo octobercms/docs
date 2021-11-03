@@ -1,20 +1,5 @@
 # Конфигурация приложения
 
-- [Конфигурация веб-сервера](#webserver-configuration)
-    - [Конфигурация Apache](#apache-configuration)
-    - [Конфигурация Nginx](#nginx-configuration)
-    - [Конфигурация Lighttpd](#lighttpd-configuration)
-    - [Конфигурация IIS](#iis-configuration)
-- [Конфигурация приложения](#app-configuration)
-    - [Режим отладки](#debug-mode)
-    - [Безопасный режим](#safe-mode)
-    - [Защита от CSRF](#csrf-protection)
-    - [Последние обновления](#edge-updates)
-    - [Конфигурация среды выполнения](#environment-config)
-- [Расширенная конфигурация](#advanced-configuration)
-    - [Использование обшей папки](#public-folder)
-    - [Расширенная конфигурация среды выполнения](#environment-config-extended)
-
 Все файлы настроек Октября хранятся в папке **config/**. Опции хорошо описаны в комментариях, так что рекомендуем внимательно изучить эти файлы.
 
 <a name="webserver-configuration" class="anchor"></a>

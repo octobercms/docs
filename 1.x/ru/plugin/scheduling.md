@@ -1,12 +1,5 @@
 # Планирование задач
 
-- [Введение](#introduction)
-- [Создание задач](#defining-schedules)
-    - [Параметры частоты выполнения](#schedule-frequency-options)
-    - [Предотвращение перекрытия задач](#preventing-task-overlaps)
-- [Вывод](#task-output)
-- [Хуки](#task-hooks)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

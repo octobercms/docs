@@ -1,16 +1,5 @@
 # Роутинг (маршрутизация)
 
-- [Простейшая маршрутизация](#basic-routing)
-- [Параметры роутов](#route-parameters)
-    - [Обязательные параметры](#required-parameters)
-    - [Необязательные параметры](#parameters-optional-parameters)
-    - [Параметры с регулярными выражениями](#parameters-regular-expression-constraints)
-- [Именованные роуты](#named-routes)
-- [Группы роутов](#route-groups)
-    - [Доменная маршрутизация](#route-group-sub-domain-routing)
-    - [Префикс пути](#route-group-prefixes)
-- [Ошибки 404](#throwing-404-errors)
-
 <a href="#basic-routing" name="basic-routing" class="anchor"></a>
 ## Простейшая маршрутизация
 
@@ -146,7 +135,7 @@
         {
             // К этому маршруту будет привязан фильтр auth.
         });
-    
+
         Route::get('user/profile', function()
         {
             // К этому маршруту также будет привязан фильтр auth.

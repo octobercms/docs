@@ -1,14 +1,5 @@
 # Настройка и конфигурация плагина
 
-- [Введение](#introduction)
-- [Настройка базы данных](#database-settings)
-    - [Запись в модель с настройками](#writing-settings)
-    - [Чтение из модели с настройками](#reading-settings)
-- [Страницы с настройками](#backend-pages)
-    - [Добавление ссылки на страницу с настройками в меню](#link-registration)
-    - [Настройка контекста](#settings-page-context)
-- [Файл конфигурации](#file-configuration)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

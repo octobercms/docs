@@ -1,15 +1,5 @@
 # Контроллеры, Представления и AJAX
 
-- [Введение](#introduction)
-    - [Создание контроллера](#class-definition)
-    - [Свойства контроллера](#controller-properties)
-- [Действия, представления и маршрутизация](#actions-views-routing)
-- [Передача данных в представление](#passing-data-to-views)
-- [Настройка контекста навигации](#navigation-context)
-- [AJAX](#ajax)
-    - [Обработчики](#ajax-handlers)
-    - [Триггеры](#triggering-ajax-requests)
-
 <a href="#introduction" name="introduction" class="anchor" ></a>
 ## Введение
 

@@ -1,18 +1,5 @@
 # AJAX
 
-- [Введение](#introduction)
-    - [Как работает AJAX](#how-ajax-works)
-- [Обработчики](#ajax-handlers)
-- [Data attributes API](#data-attributes)
-    - [Примеры](#data-attribute-examples)
-- [JavaScript API](#javascript-api)
-    - [Примеры](#javascript-examples)
-- [Вызов обработчика AJAX из компонента](#components-ajax-handlers)
-- [Глобальные события AJAX](#global-events)
-- [Возвращение данных из обработчика](#returning-data-from-handlers)
-- [Перенаправление в обработчике](#redirections-in-handlers)
-- [Сообщения](#pushing-content-updates)
-
 OctoberCMS включает в себя AJAX фреймворк, который позволяет выполнять AJAX запросы, находящиеся в [страницах](./cms-pages), [шаблонах](./cms-layouts) или [компонентах](./cms-components), и обновлять элементы страницы при помощи [фрагментов](./cms-partials). Существует два способа его использования: JavaScript API и Data attributes API. Data attributes API не требует каких-либо знаний JavaScript.
 
 <a name="introduction"></a>

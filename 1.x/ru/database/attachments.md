@@ -1,11 +1,5 @@
 # Прикрепление файлов
 
-- [Работа с файлами](#file-attachments)
-    - [Прикрепление файла к модели](#creating-attachments)
-    - [Просмотр прикрепленных файлов](#viewing-attachments)
-    - [Примеры](#attachments-usage-example)
-
-
 <a name="file-attachments" class="anchor" ></a>
 ## Прикрепление файла к модели
 

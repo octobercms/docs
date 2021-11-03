@@ -11,10 +11,14 @@ You can access the current theme object via `this.theme` and it returns the obje
 
 Преобразует имя папки с темой в CSS-идентификатор.
 
-    <body class="theme-{{ this.theme.id }}">
+```twig
+<body class="theme-{{ this.theme.id }}">
+```
 
 ### config
 
 Массив, с настройкам темы, которые были найденные в файле `theme.yaml`.
 
-    <meta name="description" content="{{ this.theme.config.description }}">
+```twig
+<meta name="description" content="{{ this.theme.config.description }}">
+```

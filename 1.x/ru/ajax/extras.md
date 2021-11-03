@@ -1,13 +1,4 @@
-# Дополнительные функции AJAX 
-
-- [Индикатор загрузки](#loader-stripe)
-- [Валидация формы](#ajax-validation)
-    - [Обработка исключений](#throw-validation-exception)
-    - [Отображение сообщений об ошибках](#error-messages)
-    - [Отображение ошибок рядом с полями](#field-errors)
-- [Индикатор загрузки на кнопке](#loader-button)
-- [Flash сообщения](#ajax-flash)
-- [Примеры](#usage-example)
+# Дополнительные функции AJAX
 
 Вы можете добавить дополнительные CSS и JavaScript файлы при помощи `{% framework extras %}` на страницу, чтобы использовать расширенные возможности AJAX фреймворка.
 
@@ -59,7 +50,7 @@
     $(window).on('ajaxInvalidField', function(event, fieldElement, fieldName, errorMsg, isFirst) {
         $(fieldElement).closest('.form-group').addClass('has-error');
     });
-    
+
     $(document).on('ajaxPromise', '[data-request]', function() {
         $(this).closest('form').find('.form-group.has-error').removeClass('has-error');
     });
@@ -116,19 +107,21 @@
     {
         Flash::success('You did it!');
     }
-    
+
 для отображения флэш-сообщений при успешном выполнении AJAX запроса.
 
 Вы можете отобразить стандартное [флэш-сообщение](./markup-tag-flash) при загрузке страницы при помощи следующего кода на странице или макете.
 
-    {% flash %}
-        <p
-            data-control="flash-message"
-            class="flash-message fade {{ type }}"
-            data-interval="5">
-            {{ message }}
-        </p>
-    {% endflash %}
+```twig
+{% flash %}
+    <p
+        data-control="flash-message"
+        class="flash-message fade {{ type }}"
+        data-interval="5">
+        {{ message }}
+    </p>
+{% endflash %}
+```
 
 <a name="usage-example" id="usage-example" class="anchor"></a>
 ## Примеры

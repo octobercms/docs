@@ -1,15 +1,5 @@
 # Основы работы с базами данных
 
-- [Введение](#introduction)
-- [Настройка](#configuration)
-    - [Чтение / Запись](#read-write-connections)
-- [Выполнение сырых SQL-запросов](#running-queries)
-- [Использование нескольких соединений с БД](#accessing-connections)
-- [Транзакции](#database-transactions)
-- [Прослушивание событий запросов](#database-events)
-    - [Журнал запросов](#query-logging)
-
-
 <a name="introduction" class="anchor" ></a>
 ## Введение
 

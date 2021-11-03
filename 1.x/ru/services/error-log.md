@@ -1,18 +1,5 @@
 # Ошибки и Логирование
 
-- [Введение](#introduction)
-- [Настройка](#configuration)
-- [Типы исключений](#exception-types)
-    - [Application exception](#application-exception)
-    - [System exception](#system-exception)
-    - [Validation exception](#validation-exception)
-    - [AJAX exception](#ajax-exception)
-- [Обработка исключений](#exception-handling)
-- [HTTP-exceptions](#http-exceptions)
-    - [Произвольная страница ошибки](#custom-error-page)
-- [Логирование](#logging)
-    - [Вспомогательные функции](#helpers)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

@@ -1,15 +1,5 @@
 # Установка OctoberCMS
 
-- [Минимальные системные требования](#system-requirements)
-- [Мастер установки](#wizard-installation)
-    - [Устранение неполадок](#troubleshoot-installation)
-- [Установка из Командной строки](#command-line-installation)
-- [Что нужно сделать после установки](#post-install-steps)
-    - [Удалить установочные файлы](#delete-install-files)
-    - [Проверить конфигурации](#config-review)
-    - [Настроить работу планировщика](#crontab-setup)
-    - [Настроить работу очередей](#queue-setup)
-
 Существует два способа установки OctoberCMS: при помощи [Мастера установки](#wizard-installation) и [Командной строки](./console-commands#console-install). Перед установкой необходимо убедиться, что Ваш сервер удовлетворяет минимальным системным требованиям.
 
 <a name="system-requirements" class="anchor"></a>

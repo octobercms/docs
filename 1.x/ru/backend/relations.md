@@ -1,15 +1,5 @@
 # Связи
 
-- [Введение](#introduction)
-- [Настройка](#configuring-relation)
-- [Типы](#relationship-types)
-    - [Has many](#has-many)
-    - [Belongs to many](#belongs-to-many)
-    - [Belongs to many (with Pivot Data)](#belongs-to-many-pivot)
-    - [Belongs to](#belongs-to)
-    - [Has one](#has-one)
-- [Менеджер связей](#relation-display)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

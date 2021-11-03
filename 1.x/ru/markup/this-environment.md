@@ -4,8 +4,10 @@
 
 ##Пример:
 
-    {% if this.environment == 'test' %}
+```twig
+{% if this.environment == 'test' %}
 
-        <div class="banner">Test Environment</div>
+    <div class="banner">Test Environment</div>
 
-    {% endif %}
+{% endif %}
+```

@@ -1,16 +1,5 @@
 # Регистрация плагина
 
-- [Введение](#introduction)
-    - [Структура плагина](#directory-structure)
-    - [Пространство имен](#namespaces)
-- [Файл регистрации](#registration-file)
-    - [Поддерживаемые методы](#registration-methods)
-    - [Основная информация о плагине](#basic-plugin-information)
-- [Роутинг и инициализация](#routing-initialization)
-- [Определения зависимостей](#dependency-definitions)
-- [Twig](#extending-twig)
-- [Меню](#navigation-menus)
-
 <a name="introduction" class="anchor" ></a>
 ## Введение
 

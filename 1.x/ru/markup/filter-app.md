@@ -2,22 +2,30 @@
 
 Фильтр `| app` возвращает адрес относительно общедоступного пути веб-сайта. Результатом является абсолютный URL-адрес, включая имя домена и протокол, до местоположения, которое указанно в параметре фильтра. Фильтр можно применять к любому пути.
 
-    <link rel="icon" href="{{ '/favicon.ico'|app }}" />
+```twig
+<link rel="icon" href="{{ '/favicon.ico'|app }}" />
+```
 
 Если __https://octobercms.info__ - адрес сайта, то результат будет следующим:
 
-    <link rel="icon" href="https://octobercms.info/favicon.ico" />
+```twig
+<link rel="icon" href="https://octobercms.info/favicon.ico" />
+```
 
 Вы также можете использовать URL адрес:
 
-    <a href="{{ '/about-us'|app }}">
-        About Us
-    </a>
+```twig
+<a href="{{ '/about-us'|app }}">
+    About Us
+</a>
+```
 
 Результат:
 
-    <a href="https://octobercms.info/about-us">
-        About us
-    </a>
+```html
+<a href="https://octobercms.info/about-us">
+    About us
+</a>
+```
 
 > **Примечание**: Фильтр `|page` рекомендуется использовать для ссылок на другие страницы.

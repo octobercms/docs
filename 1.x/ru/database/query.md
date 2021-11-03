@@ -1,20 +1,5 @@
 # Запросы к базе данных
 
-- [Введение](#introduction)
-- [Получение результатов](#retrieving-results)
-    - [Аггрегатные функции](#aggregates)
-- [Выборки (SELECT)](#selects)
-- [Объединения (JOIN)](#joins)
-- [Слияния (UNION)](#unions)
-- [Выражения с WHERE](#where-clauses)
-    - [Сложные выражения с WHERE](#advanced-where-clauses)
-- [Сортировка, группировка, ограничение и смещение](#ordering-grouping-limit-and-offset)
-- [Вставка (INSERT)](#inserts)
-- [Обновление (UPDATE)](#updates)
-- [Удаление (DELETE)](#deletes)
-- [Блокирование (lock) данных](#pessimistic-locking)
-- [Кэширование запросов](#caching-queries)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

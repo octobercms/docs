@@ -1,17 +1,5 @@
 # Трейты ( Database Traits )
 
-- [Hashable](#hashable)
-- [Purgeable](#purgeable)
-- [Encryptable](#encryptable)
-- [Sluggable](#sluggable)
-- [Revisionable](#revisionable)
-- [Sortable](#sortable)
-- [Simple Tree](#simple-tree)
-- [Nested Tree](#nested-tree)
-- [Валидация](#validation)
-- [Soft deleting](#soft-deleting)
-- [Nullable](#nullable)
-
 <a href="hashable" name="hashable" class="anchor"></a>
 ## Hashable
 
@@ -177,7 +165,7 @@ URL будет сгенерирован автоматически только 
 
     const PARENT_ID = 'my_parent_column';
 
-Коллекция моделей, которая использует этот трейт будет иметь тип `October\Rain\Database\TreeCollection`. 
+Коллекция моделей, которая использует этот трейт будет иметь тип `October\Rain\Database\TreeCollection`.
 
 Используйте метод `toNested`, чтобы получить древовидную структуру:
 
@@ -272,7 +260,7 @@ URL будет сгенерирован автоматически только 
 > **Примечание:** Модель использует объект MessagesBag, который имеет [простой и элегантный метод](./services-validation#working-with-error-messages) для форматирования ошибок.
 
 <a href="overriding-validation" name="overriding-validation" class="anchor"></a>
-### Переопределение валидации 
+### Переопределение валидации
 
 Используйте метод `forceSave()`, чтобы сохранить модель, не смотря на ошибки.
 
@@ -336,7 +324,7 @@ URL будет сгенерирован автоматически только 
 
         protected $dates = ['deleted_at'];
     }
-    
+
 > **Примечание:** Сама запись при этом не удаляется.
 
 Используйте метод `softDeletes`, чтобы добавить столбец `deleted_at` в вашу таблицу:
@@ -382,7 +370,7 @@ URL будет сгенерирован автоматически только 
     // Восстановить все удаленные модели
     $user->posts()->restore();
 
-#### Удаление мягко-удалённых моделей 
+#### Удаление мягко-удалённых моделей
 
 Используйте метод `forceDelete`, чтобы удалить мягко-удалённые модели навсегда:
 
@@ -393,7 +381,7 @@ URL будет сгенерирован автоматически только 
     $user->posts()->forceDelete();
 
 <a href="soft-deleting-relations" name="soft-deleting-relations" class="anchor"></a>
-### Мягкое удаление связей 
+### Мягкое удаление связей
 
 Используйте параметр `softDelete`, чтобы применить каскадное удаление. Например, при удалении пользователя, все принадлежащие ему комментарии будут также удалены. Пример:
 

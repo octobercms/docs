@@ -1,18 +1,5 @@
 # Виджеты
 
-- [Универсальные виджеты](#generic-widgets)
-    - [Определение класса](#generic-class-definition)
-    - [AJAX](#generic-ajax-handlers)
-    - [Привязка виджетов к контроллерам](#generic-binding)
-- [Виджеты форм](#form-widgets)
-    - [Определение класса](#form-class-definition)
-    - [Регистрация виджета](#form-widget-registration)
-- [Виджеты отчетов](#report-widgets)
-    - [Определение класса](#report-class-definition)
-    - [Свойства виджета](#report-properties)
-    - [Регистрация виджета](#report-widget-registration)
-
-
 Виджеты - автономные элементы страницы, которые выполняют различные задачи. Они всегда имеют пользовательский интерфейс и контроллер (класс виджета), который подготавливает и обрабатывает необходимые данные, используя AJAX.
 
 <a name="generic-widgets" class="anchor"></a>

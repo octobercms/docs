@@ -1,14 +1,5 @@
 # Filesystem / CDN
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-- [Basic usage](#basic-usage)
-    - [Obtaining disk instances](#obtaining-disk-instances)
-    - [Retrieving files](#retrieving-files)
-    - [Storing files](#storing-files)
-    - [Deleting files](#deleting-files)
-    - [Directories](#directories)
-
 <a name="introduction"></a>
 ## Introduction
 

@@ -2,10 +2,12 @@
 
 Тег `{% scripts %}` добавляет скрипты приложения на страницу и обычно находится перед закрывающимся тегом BODY:
 
-    <body>
-        ...
-        {% scripts %}
-    </body>
+```twig
+<body>
+    ...
+    {% scripts %}
+</body>
+```
 
 > **Примечание**: Этот тег должен быть определен только один раз.
 
@@ -20,10 +22,12 @@
 
 Также Вы можете использовать [заполнители](./cms-layouts#placeholders).
 
-    <body>
-        {% put scripts %}
-            <script type="text/javascript" src="/themes/demo/assets/js/menu.js"></script>
-        {% endput %}
-        ...
-        {% scripts %}
-    </body>
+```twig
+<body>
+    {% put scripts %}
+        <script type="text/javascript" src="/themes/demo/assets/js/menu.js"></script>
+    {% endput %}
+    ...
+    {% scripts %}
+</body>
+```

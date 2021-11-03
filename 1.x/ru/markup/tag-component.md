@@ -4,18 +4,24 @@
 
 Следующая запись отобразит фрагмент **default.htm** компонента на странице:
 
-    {% component "blogPosts" %}
+```twig
+{% component "blogPosts" %}
+```
 
 Аналогичная запись:
 
-    {% partial "blogPosts::default" %}
+```twig
+{% partial "blogPosts::default" %}
+```
 
 <a name="variables"></a>
 ## Переменные
 
 Некоторые компоненты поддеживают [передачу переменных](./cms/components#component-variables) во время отображения:
 
-    {% component "blogPosts" postsPerPage="5" %}
+```twig
+{% component "blogPosts" postsPerPage="5" %}
+```
 
 <a name="customizing-components"></a>
 ## Настройка компонентов

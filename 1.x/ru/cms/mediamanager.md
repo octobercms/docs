@@ -1,11 +1,5 @@
 # Медиа Менеджер
 
-- [Amazon S3](#amazon-s3)
-- [Rackspace CDN](#rackspace-cdn)
-- [Аудио и видео проигрыватели](#audio-and-video-players)
-- [Другие параметры конфигурации](#configuration-options)
-- [Исправление проблем](#troubleshooting)
-
 По умолчанию Медиа Менеджер работает с папкой **storage/app/media**. Вы можете изменить настройки, чтобы использовать Amazon S3 или Rackspace CDN.
 
 > Вы должны установить [Драйвера](http://octobercms.com/plugin/october-drivers) перед тем, как начать использовать Amazon S3 или Rackspace CDN.

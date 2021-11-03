@@ -1,14 +1,5 @@
 # Компоненты ( Components )
 
-- [Введение](#introduction)
-- [Псевдонимы](#aliases)
-- [Использование внешних значений](#external-property-values)
-- [Передача переменных в компонент](#component-variables)
-- [Настройка шаблона по умолчанию](#customizing-default-markup)
-    - [Перемещение разметки во фрагмент](#moving-default-markup)
-    - [Переопределение фрагментов компонента](#overriding-partials)
-- ["View Bag"](#viewbag-component)
-
 Компоненты - настраиваемые элементы, которые могут быть прикреплены к любой странице или шаблону. Компоненты являются ключевой особенностью OctoberCMS. Каждый компонент позволяет расширить возможности Вашего сайта. Их основные задачи заключаются в выводе HTML кода, обработке [AJAX запросов](./cms-ajax), обработке форм и настройке отображения страниц.
 
 Эта статья описывает основы работы с компонентами и не объясняет, как использовать их с AJAX. Эта тема описана в [AJAX](./cms-ajax).
@@ -20,19 +11,23 @@
 
 Если Вы используете административный интерфейс, то можете добавлять компоненты на страницы или шаблоны, кликнув по нему в панели **Компоненты**. Если же Вы используете текстовый редактор, то должны указать его название в [Разделе Конфигурации](./cms-themes#configuration-section). Пример добавления компонента To-do на страницу:
 
-    title = "Components demonstration"
-    url = "/components"
+```
+title = "Components demonstration"
+url = "/components"
 
-    [demoTodo]
-    maxItems = 20
-    ==
-    ...
+[demoTodo]
+maxItems = 20
+==
+...
+```
 
 Так инициализируется компонент с его свойствами, которые могут быть, а могут и не быть. Некоторые из них являются обязательными и имеют значения по умолчанию. Если Вы не уверены, какие свойства имеет компонент, то обратитесь к документации или используйте **Инспектор**. Он открывается при нажатии на компонент на странице или в панели с компонентами.
 
 При добавлении компонента на страницу он автоматически создает переменную с таким же именем:
 
-    {% component 'demoTodo' %}
+```twig
+{% component 'demoTodo' %}
+```
 
 > **Примечание:** Если два компонента с одинаковым именем добавлены на страницу и в шаблон, то первый из них перекроет свойства второго.
 
@@ -41,19 +36,25 @@
 
 Если два плагина создают компоненты с одинаковыми именами, то Вы можете добавить их на страницу или шаблон, указав полный путь. Пример:
 
-    [October\Demo\Components\Todo demoTodoAlias]
-    maxItems = 20
+```ini
+[October\Demo\Components\Todo demoTodoAlias]
+maxItems = 20
+```
 
 Первый параметр в секции - имя класса, второй - псевдоним, который используется в коде как ссылка на компонент. Пример:
 
-    {% component 'demoTodoAlias' %}
+```twig
+{% component 'demoTodoAlias' %}
+```
 
 Также псевдонимы позволяют определить несколько компонентов одного и того же класса на одной странице, указав сначала название компонента, после (через пробел) псевдоним. Пример:
 
-    [demoTodo todoA]
-    maxItems = 10
-    [demoTodo todoB]
-    maxItems = 20
+```ini
+[demoTodo todoA]
+maxItems = 10
+[demoTodo todoB]
+maxItems = 20
+```
 
 <a name="external-property-values"></a>
 ## Использование внешних значений
@@ -67,25 +68,33 @@
 
 Однако, вы можете инициализировать свойства при помощи внешних значений - URL параметров или параметров [фрагментов](./cms-partials) (для компонентов, определенных во фрагментах). Используйте  `{{ paramName }}` для значений, которые должы быть получены из переменных фрагмента:
 
-    [demoTodo]
-    maxItems = {{ maxItems }}
-    ==
-    ...
+```
+[demoTodo]
+maxItems = {{ maxItems }}
+==
+...
+```
 
 Предполагается, что в предыдущем примере компонент **demoTodo** находится во фрагменте и указана переменная **maxItems**:
 
-    {% partial 'my-todo-partial' maxItems='10' %}
+```
+{% partial 'my-todo-partial' maxItems='10' %}
+```
 
 Используйте `{{ :paramName }}`, чтобы получить значение из URL. Например:
 
-    [demoTodo]
-    maxItems = {{ :maxItems }}
-    ==
-    ...
+```
+[demoTodo]
+maxItems = {{ :maxItems }}
+==
+...
+```
 
 Страница, на которой находится компонент, должна иметь [соответствующий адрес](./cms-pages#url-syntax):
 
-    url = "/todo/:maxItems"
+```ini
+url = "/todo/:maxItems"
+```
 
 В административной части сайта Вы можете использовать Инспектора для привязки внешних значений к компоненту. Не используйте скобки `{{ }}`! Каждое свойство имеет иконку справа, при нажатии на которую, открывается поле для ввода значения, куда можно добавить название параметра `paramName` или `:paramName`.
 
@@ -96,7 +105,9 @@ Components can be designed to use variables at the time they are rendered, simil
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 
-    {% component 'demoTodoAlias' maxItems='7' %}
+```twig
+{% component 'demoTodoAlias' maxItems='7' %}
+```
 
 > **Примечание**: Not all components support passing variables when rendering.
 
@@ -110,24 +121,33 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
 Каждый компонент может иметь фрагмент **default.htm**, содержимое которого, замещает тег `{% component %}`. Пример:
 
-    url = "blog/post"
+```
+url = "blog/post"
 
-    [blogPost]
-    ==
-    {% component "blogPost" %}
+[blogPost]
+==
+{% component "blogPost" %}
+```
 
 Вы можете скопировать весь код из **components/blogpost/default.htm** и вставить его прямо в страницу или фрагмент, например, с названием **blog-post.htm**.
-    <h1>{{ __SELF__.post.title }}</h1>
-    <p>{{ __SELF__.post.description }}</p>
+
+```twig
+<h1>{{ __SELF__.post.title }}</h1>
+<p>{{ __SELF__.post.description }}</p>
+```
 
 Внутри кода Вы можете найти переменную `__SELF__`, которая указывает на объект компонента. Она должна быть заменена на **псевдоним** (в нашем примере - это **blogPost**):
 
-    <h1>{{ blogPost.post.title }}</h1>
-    <p>{{ blogPost.post.description }}</p>
+```twig
+<h1>{{ blogPost.post.title }}</h1>
+<p>{{ blogPost.post.description }}</p>
+```
 
 Теперь вы можете добавить фрагмент в страницу или шаблон:
 
-    {% partial 'blog-post.htm' %}
+```twig
+{% partial 'blog-post.htm' %}
+```
 
 <a name="overriding-partials"></a>
 ### Переопределение фрагментов компонента
@@ -159,15 +179,17 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
 Получить его можно следующим образом::
 
-    description = "Default layout"
-    ==
-    [...]
+```
+description = "Default layout"
+==
+[...]
 
-    <!-- Main navigation -->
-    <ul>
-        <li class="{{ viewBag.activeMenu == 'about' ? 'active' }}">About</li>
-        [...]
-    </ul>
+<!-- Main navigation -->
+<ul>
+    <li class="{{ viewBag.activeMenu == 'about' ? 'active' }}">About</li>
+    [...]
+</ul>
+```
 
 > **Примечание**: viewBag скрыт в административной части сайта и может редактироваться только через текстовый редактор.
 

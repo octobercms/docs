@@ -2,8 +2,12 @@
 
 Фильтр `md` преобразует Markdown текст в HTML формат.
 
-    {{ '**Text** is bold.'|md }}
+```twig
+{{ '**Text** is bold.'|md }}
+```
 
 Результат:
 
-    <strong>Text</strong> is bold.
+```html
+<strong>Text</strong> is bold.
+```

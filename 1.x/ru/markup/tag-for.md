@@ -2,59 +2,71 @@
 
 Теги `{% for %}` и `{% endfor %}` используются для перебирания значений в коллекции. При этом коллекция может быть как массивами, так и объектом.
 
-    <ul>
-        {% for user in users %}
-            <li>{{ user.username }}</li>
-        {% endfor %}
-    </ul>
+```twig
+<ul>
+    {% for user in users %}
+        <li>{{ user.username }}</li>
+    {% endfor %}
+</ul>
+```
 
 Вы также можете получить ключи и значения:
 
-    <ul>
-        {% for key, user in users %}
-            <li>{{ key }}: {{ user.username }}</li>
-        {% endfor %}
-    </ul>
+```twig
+<ul>
+    {% for key, user in users %}
+        <li>{{ key }}: {{ user.username }}</li>
+    {% endfor %}
+</ul>
+```
 
 Вы можете использовать `else`, чтобы отобразить произвольный код, когда в коллекции нет значений:
 
-    <ul>
-        {% for user in users %}
-            <li>{{ user.username }}</li>
-        {% else %}
-            <li><em>There are no users found</em></li>
-        {% endfor %}
-    </ul>
+```twig
+<ul>
+    {% for user in users %}
+        <li>{{ user.username }}</li>
+    {% else %}
+        <li><em>There are no users found</em></li>
+    {% endfor %}
+</ul>
+```
 
 ## Итерация
 
 Если Вам нужно пройтись по всей коллекции с определенным количеством значений, то Вы можете использовать `..`:
 
-    {% for i in 0..10 %}
-        - {{ i }}
-    {% endfor %}
+```twig
+{% for i in 0..10 %}
+    - {{ i }}
+{% endfor %}
+```
 
 Тогда на страница отобразятся числа от 0 до 10.
 
 Вы также можете использовать буквы вместо цифр:
 
-    {% for letter in 'a'..'z' %}
-        - {{ letter }}
-    {% endfor %}
+```twig
+{% for letter in 'a'..'z' %}
+    - {{ letter }}
+{% endfor %}
 
-    {% for letter in 'a'|upper..'z'|upper %}
-        - {{ letter }}
-    {% endfor %}
+{% for letter in 'a'|upper..'z'|upper %}
+    - {{ letter }}
+{% endfor %}
+```
 
 ## Условия
 
 К сожалению, Вы не можете использовать  `break` или `continue` в циклах. Однако Вы можете сначала отфильтровать коллекцию. Пример:
 
-    <ul>
-        {% for user in users if user.active %}
-            <li>{{ user.username }}</li>
-        {% endfor %}
-    </ul>
+```twig
+<ul>
+    {% for user in users if user.active %}
+        <li>{{ user.username }}</li>
+    {% endfor %}
+</ul>
+```
 
 ## Переменная `loop`
 
@@ -71,6 +83,8 @@
 `loop.length` | Количество элементов в коллекции
 `loop.parent` | Родительский контекст
 
-    {% for user in users %}
-        {{ loop.index }} - {{ user.username }}
-    {% endfor %}
+```twig
+{% for user in users %}
+    {{ loop.index }} - {{ user.username }}
+{% endfor %}
+```

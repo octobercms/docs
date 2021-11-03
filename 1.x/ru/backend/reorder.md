@@ -1,9 +1,5 @@
 # Сортировка
 
-- [Введение](#introduction)
-- [Настройка сортировки](#configuring-reorder)
-- [Отображение страницы с сортировкой](#reorder-display)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

@@ -1,10 +1,5 @@
 # Поведения ( Behaviors )
 
-- [Введение](#introduction)
-- [Сравнение с трейтами](#compare-traits)
-- [Расширение конструкторов](#constructor-extension)
-- [Примеры](#usage-example)
-
 <a href="introduction" name="introduction" class="anchor"></a>
 ## Введение
 
@@ -73,7 +68,7 @@
     MyNamespace\Controller::extend(function($controller) {
         //
     });
-    
+
 #### Динамическое объявление свойств
 
 Вы можете задать свойства динамически при помощи метода `addDynamicProperty`. Первый аргумент - название свойства, второй - его значение.
@@ -88,7 +83,7 @@
 
     Post::extend(function($model) {
         $model->addDynamicProperty('tagsCache', null);
-    
+
         $model->addDynamicMethod('getTagsAttribute', function() use ($model) {
             if ($this->tagsCache) {
                 return $this->tagsCache;
@@ -97,7 +92,7 @@
             }
         });
     });
-    
+
 #### Динамическая имплементация поведения
 
 Эта уникальная возможность позволяет динамически изменять поведение, например:
@@ -109,7 +104,7 @@
 
         // Implement the list controller behavior dynamically
         $controller->implement[] = 'Backend.Behaviors.RelationController';
-        
+
         // Declare the relationConfig property dynamically for the RelationController behavior to use
         $controller->addDynamicProperty('relationConfig', '$/myvendor/myplugin/controllers/users/config_relation.yaml');
     });

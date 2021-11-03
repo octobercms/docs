@@ -1,19 +1,5 @@
 # Views & Responses
 
-- [Basic responses](#basic-responses)
-    - [Attaching headers to responses](#attaching-headers-to-responses)
-    - [Attaching cookies to responses](#attaching-cookies-to-responses)
-- [Other response types](#other-response-types)
-    - [View responses](#view-responses)
-    - [JSON responses](#json-responses)
-    - [File downloads](#file-downloads)
-- [Redirects](#redirects)
-    - [Returning a redirect with flash data](#redirect-flash-data)
-    - [Redirecting to the previous URL](#redirecting-previous-url)
-    - [Redirecting to the current page](#redirecting-current-page)
-- [Response macros](#response-macros)
-- [Views](#views)
-
 <a name="basic-responses"></a>
 ## Basic responses
 
@@ -170,13 +156,15 @@ Views are a great way to store system based presentation logic, such as markup u
 
 A simple view could look something like this:
 
-    <!-- View stored in plugins/acme/blog/views/greeting.htm -->
+```html
+<!-- View stored in plugins/acme/blog/views/greeting.htm -->
 
-    <html>
-        <body>
-            <h1>Hello, {{ name }}</h1>
-        </body>
-    </html>
+<html>
+    <body>
+        <h1>Hello, {{ name }}</h1>
+    </body>
+</html>
+```
 
 Views can also be parsed using PHP templating by using the `.php` extension:
 
@@ -222,12 +210,14 @@ Sometimes you may wish to pass a view into another view. For example, given a su
 
 The sub-view can then be rendered from the parent view:
 
-    <html>
-        <body>
-            <h1>Hello!</h1>
-            {{ child|raw }}
-        </body>
-    </html>
+```twig
+<html>
+    <body>
+        <h1>Hello!</h1>
+        {{ child|raw }}
+    </body>
+</html>
+```
 
 #### Determining if a view exists
 

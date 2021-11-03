@@ -1,22 +1,5 @@
 # Списки
 
-- [Введение](#introduction)
-- [Настройка списка](#configuring-list)
-    - [Тулбар](#adding-toolbar)
-    - [Фильтрация](#adding-filters)
-- [Столбцы списка](#list-columns)
-    - [Свойства столбцов](#column-options)
-- [Типы столбцов](#column-types)
-- [Отображение списка](#displaying-list)
-- [Использование нескольких списков](#multiple-list-definitions)
-- [Использование фильтра](#list-filters)
-    - [Параметры фильтра](#filter-scope-options)
-    - [Доступные типы фильтра](#scope-types)
-- [Изменение списка](#extend-list-behavior)
-    - [Переопределение контроллера](#overriding-action)
-    - [Изменение столбцов списка](#extend-list-columns)
-    - [Изменение запроса к модели](#extend-model-query)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 
@@ -175,6 +158,7 @@
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Text](#column-text)
 - [Number](#column-number)
 - [Switch](#column-switch)
@@ -186,6 +170,7 @@
 - [Select](#column-select)
 - [Relation](#column-relation)
 - [Partial](#column-partial)
+
 </div>
 
 <a name="column-text" class="anchor"></a>

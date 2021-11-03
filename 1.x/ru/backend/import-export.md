@@ -1,17 +1,5 @@
 # Импорт и экспорт
 
-- [Введение](#introduction)
-- [Настройка поведения](#configuring-import-export)
-    - [Страница Импорта](#import-page)
-    - [Страница Экспорт](#export-page)
-- [Представления](#import-export-views)
-    - [Импорт](#import-view)
-    - [Экспорт](#export-view)
-- [Модель импорта](#import-model)
-- [Модель экспорта](#export-model)
-- [Пользовательские поля](#custom-options)
-- [Интеграция со списком](#list-behavior-integration)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

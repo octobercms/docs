@@ -1,8 +1,5 @@
 # AJAX data-* атрибуты API (AJAX Data attributes API)
 
-- [data-* атрибуты API (AJAX Data attributes API)](#data-attributes)
-- [Примеры](#data-attribute-examples)
-
 <a name="data-attributes" id="data-attributes" class="anchor"></a>
 ## data-* атрибуты API
 

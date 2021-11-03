@@ -1,18 +1,5 @@
 # Mail
 
-- [Introduction](#introduction)
-- [Sending mail](#sending-mail)
-    - [Attachments](#attachments)
-    - [Inline attachments](#inline-attachments)
-    - [Queueing mail](#queueing-mail)
-- [Message content](#message-content)
-    - [Mail views](#mail-views)
-    - [Mail templates](#mail-templates)
-    - [Mail layouts](#mail-layouts)
-    - [Registering mail templates](#mail-template-registration)
-    - [Global variables](#mail-global-variables)
-- [Mail & local development](#mail-and-local-development)
-
 <a name="introduction"></a>
 ## Introduction
 
@@ -66,7 +53,9 @@ To send a message, use the `send` method on the `Mail` facade which accepts thre
 
 Since we are passing an array containing the `name` key in the example above, we could display the value within our e-mail view using the following Twig markup:
 
-    {{ name }}
+```
+{{ name }}
+```
 
 > **Note:** You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
 
@@ -171,21 +160,25 @@ When attaching files to a message, you may also specify the display name and / o
 
 Embedding inline images into your e-mails is typically cumbersome; however, there is a convenient way to attach images to your e-mails and retrieving the appropriate CID. To embed an inline image, use the `embed` method on the `message` variable within your e-mail view. Remember, the `message` variable is available to all of your mail views:
 
-    <body>
-        Here is an image:
+```
+<body>
+    Here is an image:
 
-        <img src="{{ message.embed(pathToFile) }}">
-    </body>
+    <img src="{{ message.embed(pathToFile) }}">
+</body>
+```
 
 #### Embedding raw data in mail content
 
 If you already have a raw data string you wish to embed into an e-mail message, you may use the `embedData` method on the `message` variable:
 
-    <body>
-        Here is an image from raw data:
+```
+<body>
+    Here is an image from raw data:
 
-        <img src="{{ message.embedData(data, name) }}">
-    </body>
+    <img src="{{ message.embedData(data, name) }}">
+</body>
+```
 
 <a name="queueing-mail"></a>
 ### Queueing mail
@@ -241,34 +234,38 @@ Mail views reside in the file system and the code used represents the path to th
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
 
-    subject = "Your product has been added to OctoberCMS project"
-    ==
+```
+subject = "Your product has been added to OctoberCMS project"
+==
 
-    Hi {{ name }},
+Hi {{ name }},
 
-    Good news! User {{ user }} just added your product "{{ product }}" to a project.
+Good news! User {{ user }} just added your product "{{ product }}" to a project.
 
-    This message was sent using no formatting (plain text)
-    ==
+This message was sent using no formatting (plain text)
+==
 
-    <p>Hi {{ name }},</p>
+<p>Hi {{ name }},</p>
 
-    <p>Good news! User {{ user }} just added your product <strong>{{ product }}</strong> to a project.</p>
+<p>Good news! User {{ user }} just added your product <strong>{{ product }}</strong> to a project.</p>
 
-    <p>This email was sent using formatting (HTML)</p>
+<p>This email was sent using formatting (HTML)</p>
+```
 
 > **Note:** Basic Twig tags and expressions are supported in mail views.
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
-    subject = "Your product has been added to OctoberCMS project"
-    ==
+```
+subject = "Your product has been added to OctoberCMS project"
+==
 
-    <p>Hi {{ name }},</p>
+<p>Hi {{ name }},</p>
 
-    <p>This email does not support plain text.</p>
+<p>This email does not support plain text.</p>
 
-    <p>Sorry about that!</p>
+<p>Sorry about that!</p>
+```
 
 #### Configuration section
 

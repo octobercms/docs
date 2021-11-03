@@ -1,8 +1,5 @@
 # Юнит тесты
 
-- [Тестирование плагинов](#testing-plugins)
-- [Тестирование системы](#testing-system)
-
 <a href="#testing-plugins" name="testing-plugins" class="anchor"></a>
 ## Тестирование плагинов
 

@@ -1,9 +1,5 @@
 # Коллекции
 
-- [Введение](#introduction)
-- [Создание коллекций](#creating-collections)
-- [Доступные методы](#available-methods)
-
 <a name="introduction" class="anchor"></a>
 ## Введение
 

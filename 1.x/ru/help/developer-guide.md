@@ -1,8 +1,5 @@
  # Руководство разработчика
 
-- [Написание документации](#writing-docs)
-- [Стандарты и шаблоны для разработчиков](#developer-standards)
-
 <a href="#writing-docs" name="writing-docs" class="anchor"></a>
 ## Написание документации
 

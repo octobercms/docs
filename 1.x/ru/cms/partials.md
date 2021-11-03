@@ -1,12 +1,5 @@
 # Фрагменты (Чанки, Partials)
 
-- [Введение](#introduction)
-- [Отображение фрагментов](#rendering-partials)
-- [Передача переменных во фрагменты](#partial-variables)
-- [Динамические фрагменты](#dynamic-partials)
-    - [Жизненный цикл фрагментов](#partial-life-cycle)
-    - [Ограничения жизненного цикла](#life-cycle-limitations)
-
 <a name="introduction"></a>
 ## Введение
 
@@ -54,7 +47,7 @@ Twig тег `{% partial "partial-name" %}` выводит фрагмент на 
 <a name="dynamic-partials"></a>
 ## Динамические фрагменты
 
-Фрагменты, как и страницы, могут использовать любые возможности Twig (см. [Динамические страницы](pages#dynamic-pages)).  
+Фрагменты, как и страницы, могут использовать любые возможности Twig (см. [Динамические страницы](pages#dynamic-pages)).
 
 <a name="partial-life-cycle"></a>
 ### Жизненный цикл фрагментов

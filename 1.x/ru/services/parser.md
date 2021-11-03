@@ -1,17 +1,5 @@
 # Parser service
 
-- [Introduction](#introduction)
-- [Markdown parser](#markdown-parser)
-- [Twig template parser](#twig-parser)
-- [Bracket parser](#bracket-parser)
-- [YAML configuration parser](#yaml-parser)
-- [Initialization (INI) configuration parser](#ini-parser)
-    - [October flavored INI](#october-ini)
-- [Dynamic Syntax parser](#dynamic-syntax-parser)
-    - [View mode](#syntax-view-mode)
-    - [Editor mode](#syntax-editor-mode)
-    - [Supported tags](#syntax-supported-tags)
-
 <a name="introduction"></a>
 ## Introduction
 
@@ -35,7 +23,9 @@ Use the `Markdown::parse` method to render Markdown to HTML:
 
 You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md).
 
-    {{ '**Text** is bold.'|md }}
+```twig
+{{ '**Text** is bold.'|md }}
+```
 
 <a name="twig-parser"></a>
 ## Twig template parser
@@ -178,8 +168,10 @@ Just like any templating engine, passing an array of variables to the first argu
 
 As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-parser).
 
-    echo $syntax->toTwig();
-    // <h1>{{ websiteName }}</h1>
+```
+echo $syntax->toTwig();
+// <h1>{{ websiteName }}</h1>
+```
 
 <a name="syntax-editor-mode"></a>
 ### Editor mode
@@ -248,7 +240,9 @@ Text input for rich content (WYSIWYG).
 
 Renders in Twig as
 
-    {{ content|raw }}
+```twig
+{{ content|raw }}
+```
 
 #### Markdown
 
@@ -258,7 +252,9 @@ Text input for Markdown content.
 
 Renders in Twig as
 
-    {{ content|md }}
+```twig
+{{ content|md }}
+```
 
 <!--
 #### Checkbox
@@ -284,7 +280,9 @@ File selector for media library items. This tag value will contain the relative 
 
 Renders in Twig as
 
-    {{ logo|media }}
+```twig
+{{ logo|media }}
+```
 
 #### File upload
 
@@ -303,10 +301,12 @@ Renders a repeating section with other fields inside.
 
 Renders in Twig as
 
-    {% for fields in repeater %}
-        <h2>{{ fields.title }}</h2>
-        <p>{{ fields.content|raw }}</p>
-    {% endfor %}
+```twig
+{% for fields in repeater %}
+    <h2>{{ fields.title }}</h2>
+    <p>{{ fields.content|raw }}</p>
+{% endfor %}
+```
 
 Calling `$syntax->toEditor` will return a different array for a repeater field:
 

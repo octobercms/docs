@@ -1,10 +1,5 @@
 # Содержимое ( Content )
 
-- [Введение](#introduction)
-- [Отображение блоков с содержимым](#rendering-content-blocks)
-- [Передача переменных в блоки с содержимым](#content-variables)
-    - [Глобальные переменные](#content-global-variables)
-
 Содержимое - это блоки с текстом, html кодом или [Markdown](http://daringfireball.net/projects/markdown/syntax) текстом, которые могут редактироваться независимо от страниц и шаблонов. Могут сожержать только статический контент. Для динамического - лучше использовать [Фрагменты](./cms-partials).
 
 <a name="introduction"></a>
