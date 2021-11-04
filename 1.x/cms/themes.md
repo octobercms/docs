@@ -20,20 +20,20 @@ Below, you can see an example theme directory structure. Each October theme is r
 
 ```
 themes/
-    website/         <=== Theme starts here
-    pages/           <=== Pages directory
-        home.htm
-    layouts/         <=== Layouts directory
-        default.htm
-    partials/        <=== Partials directory
-        sidebar.htm
-    content/         <=== Content directory
-        intro.htm
-    assets/          <=== Assets directory
-        css/
+  website/           <=== Theme Starts Here
+    pages/           <=== Page Files
+      home.htm
+    layouts/         <=== Layout Files
+      default.htm
+    partials/        <=== Partial Files
+      sidebar.htm
+    content/         <=== Content Files
+      intro.htm
+    assets/          <=== Asset Files
+      css/
         my-styles.css
-        js/
-        images/
+      js/
+      images/
 ```
 
 > The active theme is set with the `activeTheme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
@@ -44,19 +44,19 @@ October supports single level subdirectories for **pages**, **partials**, **layo
 
 ```
 themes/
-    website/
+  website/
     pages/
-        home.htm
-        blog/                  <=== Subdirectory
+      home.htm
+      blog/                  <=== Page Subdirectory
         archive.htm
         category.htm
     partials/
-        sidebar.htm
-        blog/                  <=== Subdirectory
+      sidebar.htm
+      blog/                  <=== Partial Subdirectory
         category-list.htm
     content/
-        footer-contacts.txt
-        home/                  <=== Subdirectory
+      footer-contacts.txt
+      home/                  <=== Content Subdirectory
         intro.htm
     ...
 ```
