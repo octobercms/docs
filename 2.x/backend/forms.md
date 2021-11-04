@@ -285,6 +285,7 @@ There are various native field types that can be used for the **type** setting. 
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Text](#field-text)
 - [Number](#field-number)
 - [Password](#field-password)
@@ -297,6 +298,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Checkbox List](#field-checkboxlist)
 - [Switch](#field-switch)
 - [Widget](#field-widget)
+
 </div>
 
 ### Text
@@ -634,10 +636,12 @@ blog_content:
 There are non function UI elements that can be included in forms to help with the layout design.
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Section](#field-section)
 - [Hint](#field-hint)
 - [Horizontal Rule](#field-ruler)
 - [Partial](#field-partial)
+
 </div>
 
 ### Section
@@ -705,6 +709,7 @@ content:
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#form-widgets) article.
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Code Editor](#widget-codeeditor)
 - [Color Picker](#widget-colorpicker)
 - [Data Table](#widget-datatable)
@@ -719,6 +724,7 @@ There are various form widgets included as standard, although it is common for p
 - [Rich Editor / WYSIWYG](#widget-richeditor)
 - [Sensitive](#widget-sensitive)
 - [Tag List](#widget-taglist)
+
 </div>
 
 ### Code Editor

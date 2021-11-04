@@ -247,6 +247,7 @@ There are various native field types that can be used for the **type** setting. 
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Text](#field-text)
 - [Number](#field-number)
 - [Password](#field-password)
@@ -262,6 +263,7 @@ There are various native field types that can be used for the **type** setting. 
 - [Partial](#field-partial)
 - [Hint](#field-hint)
 - [Widget](#field-widget)
+
 </div>
 
 ### Text
@@ -563,6 +565,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#form-widgets) article.
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Code editor](#widget-codeeditor)
 - [Color picker](#widget-colorpicker)
 - [Data table](#widget-datatable)
@@ -577,6 +580,7 @@ There are various form widgets included as standard, although it is common for p
 - [Rich editor / WYSIWYG](#widget-richeditor)
 - [Sensitive](#widget-sensitive)
 - [Tag list](#widget-taglist)
+
 </div>
 
 ### Code editor

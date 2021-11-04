@@ -213,6 +213,7 @@ There are various column types that can be used for the **type** setting, these 
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Text](#column-text)
 - [Image](#column-image)
 - [Number](#column-number)
@@ -227,6 +228,7 @@ There are various column types that can be used for the **type** setting, these 
 - [Relation](#column-relation)
 - [Partial](#column-partial)
 - [Colorpicker](#column-colorpicker)
+
 </div>
 
 ### Text
@@ -610,6 +612,7 @@ These types can be used to determine how the filter scope should be displayed.
 </style>
 
 <div class="content-list collection-method-list" markdown="1">
+
 - [Group](#filter-group)
 - [Checkbox](#filter-checkbox)
 - [Switch](#filter-switch)
@@ -618,6 +621,7 @@ These types can be used to determine how the filter scope should be displayed.
 - [Number](#filter-number)
 - [Number range](#filter-numberrange)
 - [Text](#filter-text)
+
 </div>
 
 ### Group

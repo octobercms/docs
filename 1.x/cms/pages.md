@@ -90,10 +90,8 @@ url = "/blog/:slug?*"
 
 For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brown/make/volkswagen/beetle/retro/edit` and extract the following parameter values:
 
-<div class="content-list" markdown="1">
 - color: `brown`
 - make: `volkswagen/beetle/retro`
-</div>
 
 > **Note:** Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
 
