@@ -149,11 +149,11 @@ Form fields are defined with the YAML file. The form fields configuration is use
 
 ```
 plugins/
-    acme/
+  acme/
     blog/
-        models/            <=== Plugin Models Directory
+      models/            <=== Plugin Models Directory
         post/            <=== Model Configuration Directory
-            fields.yaml    <=== Model Form Fields Config File
+          fields.yaml    <=== Model Form Fields Config File
         Post.php         <=== model Class
 ```
 

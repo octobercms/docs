@@ -10,13 +10,13 @@ Below is an example of the plugin's lang directory:
 
 ```
 plugins/
-    acme/
-    todo/             <=== Plugin directory
-        lang/         <=== Localization directory
-        en/           <=== Language directory
-            lang.php  <=== Localization file
+  acme/
+    todo/             <=== Plugin Directory
+      lang/           <=== Localization Directory
+        en/           <=== Language Directory
+          lang.php    <=== Localization File
         fr/
-            lang.php
+          lang.php
 ```
 
 The **lang.php** file should define and return an array of any depth, for example:
@@ -52,11 +52,11 @@ echo Lang::get('acme.blog::lang.app.name');
 System users can override plugin localization strings without altering the plugins' files. This is done by adding localization files to the **lang** directory. For example, to override the lang.php file of the **acme/blog** plugin you should create the file in the following location:
 
 ```
-lang/               <=== App localization directory
-    en/             <=== Language directory
-    acme/           <=== Plugin / Module directory
-        blog/       <===^
-        lang.php    <=== Localization override file
+lang/               <=== App Localization Directory
+  en/               <=== Language Directory
+    acme/           <=== Plugin / Module Directory
+      blog/         <===^
+        lang.php    <=== Localization Override File
 ```
 
 The file could contain only strings you want to override, there is no need to replace the entire file. Example:

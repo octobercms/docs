@@ -6,13 +6,13 @@ The change log is stored in a YAML file called `version.yaml` inside the **/upda
 
 ```
 plugins/
-    author/
+  author/
     myplugin/
-        updates/                    <=== Updates directory
-        version.yaml                <=== Plugin version file
-        create_tables.php           <=== Database scripts
-        seed_the_database.php       <=== Migration file
-        create_another_table.php    <=== Migration file
+      updates/                    <=== Updates Directory
+        version.yaml                <=== Plugin Version File
+        create_tables.php           <=== Database Scripts
+        seed_the_database.php       <=== Migration File
+        create_another_table.php    <=== Migration File
 ```
 
 ## Update Process

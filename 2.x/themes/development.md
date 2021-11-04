@@ -8,8 +8,8 @@ The theme information file **theme.yaml** contains the theme description, the au
 
 ```
 themes/
-    demo/
-    theme.yaml    <=== Theme information file
+  demo/
+    theme.yaml    <=== Theme Information File
 ```
 
 The following fields are supported in the **theme.yaml** file:
@@ -43,9 +43,9 @@ The theme version file **version.yaml** defines the current theme version and th
 
 ```
 themes/
-    demo/
+  demo/
     ...
-    version.yaml    <=== Theme version file
+    version.yaml    <=== Theme Version File
 ```
 
 The file format is following:
@@ -62,10 +62,10 @@ The theme preview image is used in the back-end theme selector. The image file *
 
 ```
 themes/
-    demo/
+  demo/
     assets/
-        images/
-        theme-preview.png    <=== Theme preview image
+      images/
+        theme-preview.png    <=== Theme Preview Image
 ```
 
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
@@ -175,11 +175,11 @@ Below is an example of the theme's lang directory:
 
 ```
 themes/
-    acme/             <=== Theme directory
-    lang/             <=== Localization directory
-        en/           <=== Language directory
-        lang.php      <=== Localization file
-        fr/
+  acme/           <=== Theme directory
+    lang/         <=== Localization directory
+      en/         <=== Language directory
+        lang.php  <=== Localization file
+      fr/
         lang.php
 ```
 

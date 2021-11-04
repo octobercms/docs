@@ -6,14 +6,14 @@ Each controller is represented with a PHP script which resides in the the **/con
 
 ```
 plugins/
-    acme/
+  acme/
     blog/
-        controllers/
-        users/                <=== View directory
-            _partial.htm        <=== Partial file
-            config_form.yaml    <=== Config file
-            index.htm           <=== View file
-        Users.php             <=== Controller class
+      controllers/
+        users/                <=== View Directory
+          _partial.htm        <=== Partial File
+          config_form.yaml    <=== Config File
+          index.htm           <=== View File
+        Users.php             <=== Controller Class
         Plugin.php
 ```
 

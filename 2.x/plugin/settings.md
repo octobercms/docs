@@ -34,9 +34,9 @@ plugins/
     acme/
     demo/
         models/
-        settings/        <=== Model files directory
-            fields.yaml  <=== Model form fields
-        Settings.php     <=== Model script
+        settings/        <=== Files Directory
+            fields.yaml  <=== Form Fields
+        Settings.php     <=== Script
 ```
 
 Settings models [can be registered](#backend-settings-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.

@@ -15,25 +15,25 @@ Plugins reside in the **/plugins** subdirectory of the application directory. An
 
 ```
 plugins/
-    acme/            <=== Author name
-    blog/            <=== Plugin name
-        classes/
-        components/
-        controllers/
-        models/
-        updates/
-        ...
-        Plugin.php   <=== Plugin registration file
+  acme/            <=== Author Name
+    blog/          <=== Plugin Name
+      classes/
+      components/
+      controllers/
+      models/
+      updates/
+      ...
+      Plugin.php   <=== Plugin Registration File
 ```
 
 Not all plugin directories are required. The only required file is the **Plugin.php** described below. If your plugin provides only a single [component](components.md), your plugin directory could be much simpler, like this:
 
 ```
 plugins/
-    acme/            <=== Author name
-    blog/            <=== Plugin name
-        components/
-        Plugin.php   <=== Plugin registration file
+  acme/            <=== Author Name
+    blog/          <=== Plugin Name
+      components/
+      Plugin.php   <=== Plugin Registration File
 ```
 
 > **Note**: if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.

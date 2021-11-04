@@ -116,12 +116,12 @@ List columns are defined with the YAML file. The column configuration is used by
 
 ```
 plugins/
-    acme/
+  acme/
     blog/
-        models/                  <=== Plugin Models Directory
-        post/                  <=== Model Configuration Directory
-            list_columns.yaml    <=== Model List Columns Config File
-        Post.php               <=== model Class
+      models/                <=== Plugin Models Directory
+        post/                <=== Model Configuration Directory
+          list_columns.yaml  <=== Model List Columns Config File
+        Post.php             <=== Model Class
 ```
 
 The next example shows the typical contents of a list column definitions file.
