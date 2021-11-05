@@ -39,7 +39,7 @@ The wizard installation is the recommended way to install October for **non-tech
 1. Navigate to the install.php script in your web browser.
 1. Follow the installation instructions.
 
-![image](https://github.com/octobercms/docs/blob/master/images/wizard-installer.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/wizard-installer.png?raw=true)
 
 ### Troubleshooting installation
 

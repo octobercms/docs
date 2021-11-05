@@ -235,7 +235,7 @@
 
 Виджеты отчетов могут иметь свойства, которые пользователи могут изменять при помощи **Инспектора**:
 
-![image](https://github.com/octobercms/docs/blob/master/images/report-widget-inspector.png?raw=true)
+![image](https://github.com/octobercms/docs/blob/develop/images/report-widget-inspector.png?raw=true)
 
 [Свойства](../plugin/components.md#component-properties) должны быть определены в классе виджета в методе `defineProperties()`. Пример:
 

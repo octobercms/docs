@@ -29,7 +29,7 @@
 5. Перейдите по адресу http://ВАШДОМЕН.ru/install.php
 6. Следуйте инструкциям.
 
-![image](https://github.com/octobercms/docs/blob/master/images/wizard-installer.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/wizard-installer.png?raw=true)
 
 <a name="troubleshoot-installation" class="anchor"></a>
 ### Устранение неполадок

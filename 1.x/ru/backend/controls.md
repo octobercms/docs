@@ -35,7 +35,7 @@
 
     <?= $this->listRender() ?>
 
-![image](https://github.com/octobercms/docs/blob/master/images/list-scoreboard.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/list-scoreboard.png?raw=true)
 
 Обратите внимание на то, что надо использовать точно такие же классы, как в примере!
 
@@ -74,7 +74,7 @@
         <p class="description">37 posts remain</p>
     </div>
 
-![image](https://github.com/octobercms/docs/blob/master/images/name-title-indicators.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/name-title-indicators.png?raw=true)
 
 > **Примечание:** Если Вы используете счетчики в [виджетах](../backend/widgets.md#report-widgets), то нельзя использовать класс **scoreboard-item**.
 
@@ -95,7 +95,7 @@
         </ul>
     </div>
 
-![image](https://github.com/octobercms/docs/blob/master/images/traffic-sources.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/traffic-sources.png?raw=true)
 
 <a name="bar-chart" class="anchor" ></a>
 ## Столбиковая диаграмма (Гистограмма)
@@ -114,4 +114,4 @@
         </ul>
     </div>
 
-![image](https://github.com/octobercms/docs/blob/master/images/bar-chart.png?raw=true) {.img-responsive .frame}
+![image](https://github.com/octobercms/docs/blob/develop/images/bar-chart.png?raw=true)
