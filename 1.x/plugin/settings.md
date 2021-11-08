@@ -135,28 +135,40 @@ The first argument of the `setContext` method is the settings item owner in the 
 
 Plugins can have a configuration file `config.php` in the `config` subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file `plugins/acme/demo/config/config.php`:
 
-    <?php
+```php
+<?php
 
-    return [
-        'maxItems' => 10,
-        'display' => 5
-    ];
+return [
+    'maxItems' => 10,
+    'display' => 5
+];
+```
 
 Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist. Example:
 
-    use Config;
+```php
+use Config;
 
-    ...
+// ...
 
-    $maxItems = Config::get('acme.demo::maxItems', 50);
+$maxItems = Config::get('acme.demo::maxItems', 50);
+```
+
+You may also use a different filename for the configuration file and this affects the key name. For example, a configuration file named **custom.php** will prefix the key name with `custom`, using the following format: **Acme.Demo::custom.maxItems**. Example configuration file **plugins/acme/demo/config/custom.php**.
+
+```php
+$maxItems = Config::get('acme.demo::custom.maxItems', 50);
+```
 
 A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for different environment. Inside the overridden configuration file you can return only values you want to override:
 
-    <?php
+```php
+<?php
 
-    return [
-        'maxItems' => 20
-    ];
+return [
+    'maxItems' => 20
+];
+```
 
 If you want to use separate configurations across different environments (eg: **dev**, **production**), simply create another file in `config/author/plugin/environment/config.php`. Replace **environment** with the environment name. This will be merged with `config/author/plugin/config.php`.
 
@@ -164,10 +176,12 @@ Example:
 
 **config/author/plugin/production/config.php:**
 
-    <?php
+```php
+<?php
 
-    return [
-        'maxItems' => 25
-    ];
+return [
+    'maxItems' => 25
+];
+```
 
 This will set `maxItems` to 25 when `APP_ENV` is set to **production**.

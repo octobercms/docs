@@ -113,7 +113,7 @@ public function registerSettings()
             'description' => 'Manage user based settings.',
             'category' => 'Users',
             'icon' => 'icon-cog',
-            'class' => 'Acme\User\Models\Settings',
+            'class' => \Acme\User\Models\Settings::class,
             'order' => 500,
             'keywords' => 'security location',
             'permissions' => ['acme.users.access_settings']
@@ -144,7 +144,7 @@ The first argument of the `setContext` method is the settings item owner in the 
 
 ## File-based Configuration
 
-Plugins can have a configuration file `config.php` in the `config` subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file `plugins/acme/demo/config/config.php`:
+Plugins can have a configuration file **config.php** in the **config** subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file **plugins/acme/demo/config/config.php**.
 
 ```php
 <?php
@@ -155,13 +155,21 @@ return [
 ];
 ```
 
-Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist. Example:
+Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist.
 
 ```php
-$maxItems = \Config::get('acme.demo::maxItems', 50);
+$maxItems = Config::get('acme.demo::maxItems', 50);
 ```
 
-A plugin configuration can be overridden by the application by creating a configuration file `config/author/plugin/config.php`, for example `config/acme/todo/config.php`, or `config/acme/todo/dev/config.php` for different environment. Inside the overridden configuration file you can return only values you want to override:
+You may also use a different filename for the configuration file and this affects the key name. For example, a configuration file named **custom.php** will prefix the key name with `custom`, using the following format: **Acme.Demo::custom.maxItems**. Example configuration file **plugins/acme/demo/config/custom.php**.
+
+```php
+$maxItems = Config::get('acme.demo::custom.maxItems', 50);
+```
+
+### Overriding Configuration Values
+
+A plugin configuration file can be overridden by the application by creating a local configuration file to match, for example, to override **plugins/acme/demo/config/config.php**, create a file called **config/acme/todo/config.php**. Inside the overridden configuration file you can return only values you want to override.
 
 ```php
 <?php
@@ -171,18 +179,14 @@ return [
 ];
 ```
 
-If you want to use separate configurations across different environments (eg: **dev**, **production**), simply create another file in `config/author/plugin/environment/config.php`. Replace **environment** with the environment name. This will be merged with `config/author/plugin/config.php`.
-
-Example:
-
-**config/author/plugin/production/config.php:**
+If you want to use separate configurations across different environments (eg: **dev**, **production**), consider using the `env()` helper to pull the value from an environment variable. The `env($name, $default = null)` function accepts the environment variable name and a default value if the variable doesn't exist.
 
 ```php
 <?php
 
 return [
-    'maxItems' => 25
+    'maxItems' => env('ACME_TODO_MAX_ITEMS', 25)
 ];
 ```
 
-This will set `maxItems` to 25 when `APP_ENV` is set to **production**.
+This will change the `maxItems` value when the environment variable `ACME_TODO_MAX_ITEMS` is set to any other value.
