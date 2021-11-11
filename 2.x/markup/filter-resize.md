@@ -8,7 +8,7 @@ The `|resize` filter attempts to resize the provided image source using the prov
 
 The filter accepts three arguments: `|resize(width, height, options)`.
 
-If the filter can resize the provided image, then a URL to the image resizer (eg: `/resize/filename.png`) is returned. For subsequent requests, the a direct URL to the resized image is returned. If the filter is unable to process the provided image, then it will instead return the original URL unmodified.
+If the filter can resize the provided image, then a URL to the image resizer (eg: `/resize/filename.png`) is returned. For subsequent requests, a direct URL to the resized image is returned. If the filter is unable to process the provided image, then it will instead return the original URL unmodified.
 
 This will resize a banner.jpg media image to 1920 x 1080 ratio.
 
