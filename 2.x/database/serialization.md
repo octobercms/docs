@@ -2,7 +2,7 @@
 
 When building JSON APIs, you will often need to convert your models and relationships to arrays or JSON. Models includes convenient methods for making these conversions, as well as controlling which attributes are included in your serializations.
 
-## Basic usage
+## Basic Usage
 
 #### Converting a model to an array
 
@@ -48,7 +48,7 @@ Route::get('users', function () {
 });
 ```
 
-## Hiding attributes from JSON
+## Hiding Attributes from JSON
 
 Sometimes you may wish to limit the attributes, such as passwords, that are included in your model's array or JSON representation. To do so, add a `$hidden` property definition to your model:
 
@@ -82,7 +82,7 @@ class User extends Model
 }
 ```
 
-## Appending values to JSON
+## Appending Values to JSON
 
 Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, first define an [accessor](../database/mutators.md) for the value:
 

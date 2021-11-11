@@ -30,7 +30,7 @@ public $attachOne = [
 ];
 ```
 
-### Creating new attachments
+## Creating New Attachments
 
 For singular attach relations (`$attachOne`), you may create an attachment directly via the model relationship, by setting its value using the `Input::file` method, which reads the file data from an input upload.
 
@@ -82,7 +82,7 @@ Occasionally you may need to change a file name. You may do so by using second m
 $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefilename.jpg');
 ```
 
-### Viewing attachments
+## Viewing Attachments
 
 The `getPath` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**
 
@@ -126,7 +126,7 @@ Displaying an image on the page.
 
 Read more about the available options for `getThumb` on the [image resizer article](../services/resizer.md#resize-parameters).
 
-### Usage example
+## Usage Example
 
 This section shows a full usage example of the model attachments feature - from defining the relation in a model to displaying the uploaded image on a page.
 
@@ -213,7 +213,7 @@ $user = $file->attachment;
 
 For more information read the [polymorphic relationships](../database/relations.md#polymorphic-relations)
 
-### Validation example
+## Validation Example
 
 The example below uses [array validation](../services/validation.md#validating-arrays) to validate `$attachMany` relationships.
 

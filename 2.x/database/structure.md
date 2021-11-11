@@ -2,7 +2,7 @@
 
 Migrations and seed files allow you to build, modify and populate database tables. They are primarily used by a [plugin update file](../plugin/updates.md) and are paired with the version history of a plugin. All classes are stored in the `updates` directory of a plugin. Migrations should tell a story about your database history and this story can be played both forwards and backwards to build up and tear down the tables.
 
-## Migration structure
+## Migration Structure
 
 A migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the [schema builder](#creating-tables) to expressively create and modify tables. For example, let's look at a sample migration that creates a `october_blog_posts` table:
 
@@ -37,7 +37,7 @@ class CreatePostsTable extends Migration
 }
 ```
 
-### Creating tables
+### Creating Tables
 
 To create a new database table, use the `create` method on the `Schema` facade. The `create` method accepts two arguments. The first is the name of the table, while the second is a `Closure` which receives an object used to define the new table:
 
@@ -83,7 +83,7 @@ Schema::create('users', function ($table) {
 });
 ```
 
-### Renaming / dropping tables
+### Renaming / Dropping Tables
 
 To rename an existing database table, use the `rename` method:
 
@@ -99,7 +99,7 @@ Schema::drop('users');
 Schema::dropIfExists('users');
 ```
 
-### Creating columns
+### Creating Columns
 
 To update an existing table, we will use the `table` method on the `Schema` facade. Like the `create` method, the `table` method accepts two arguments, the name of the table and a `Closure` that receives an object we can use to add columns to the table:
 
@@ -146,7 +146,7 @@ Command  | Description
 `$table->timestamp('added_on');`  |  TIMESTAMP equivalent for the database.
 `$table->timestamps();`  |  Adds `created_at` and `updated_at` columns.
 
-#### Column modifiers
+#### Column Modifiers
 
 In addition to the column types listed above, there are several other column "modifiers" which you may use while adding the column. For example, to make the column "nullable", you may use the `nullable` method:
 
@@ -167,7 +167,7 @@ Modifier  | Description
 `->after('column')`  |  Place the column "after" another column (MySQL Only)
 `->comment('my comment')`  |  Add a comment to a column (MySQL Only)
 
-### Modifying columns
+### Modifying Columns
 
 The `change` method allows you to modify an existing column to a new type, or modify the column's attributes. For example, you may wish to increase the size of a string column. To see the `change` method in action, let's increase the size of the `name` column from 25 to 50:
 
@@ -185,7 +185,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
-#### Renaming columns
+#### Renaming Columns
 
 To rename a column, you may use the `renameColumn` method on the Schema builder:
 
@@ -197,7 +197,7 @@ Schema::table('users', function ($table) {
 
 > **Note**: Renaming columns in a table with a `enum` column is not currently supported.
 
-### Dropping columns
+### Dropping Columns
 
 To drop a column, use the `dropColumn` method on the Schema builder:
 
@@ -215,7 +215,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
-### Creating indexes
+### Creating Indexes
 
 The schema builder supports several types of indexes. First, let's look at an example that specifies a column's values should be unique. To create the index, we can simply chain the `unique` method onto the column definition:
 
@@ -241,7 +241,7 @@ In most cases you should specify a name for the index manually as the second arg
 $table->index(['account_id', 'created_at'], 'account_created');
 ```
 
-#### Available index types
+#### Available Index Types
 
 Command  | Description
 ------------- | -------------
@@ -250,7 +250,7 @@ Command  | Description
 `$table->unique('email');`  |  Add a unique index.
 `$table->index('state');`  |  Add a basic index.
 
-### Dropping indexes
+### Dropping Indexes
 
 To drop an index, you must specify the index's name. If no name was specified manually, the system will automatically generate one, simply concatenate the table name, the name of the indexed column, and the index type. Here are some examples:
 
@@ -260,7 +260,7 @@ Command  | Description
 `$table->dropUnique('users_email_unique');`  |  Drop a unique index from the "users" table.
 `$table->dropIndex('geo_state_index');`  |  Drop a basic index from the "geo" table.
 
-### Foreign key constraints
+### Foreign Key Constraints
 
 There is also support for creating foreign key constraints, which are used to force referential integrity at the database level. For example, let's define a `user_id` column on the `posts` table that references the `id` column on a `users` table:
 
@@ -295,7 +295,7 @@ To drop a foreign key, you may use the `dropForeign` method. Foreign key constra
 $table->dropForeign('posts_user_id_foreign');
 ```
 
-## Seeder structure
+## Seeder Structure
 
 Like migration files, a seeder class only contains one method by default: `run`and should extend the `Seeder` class. The `run` method is called when the update process is executed. Within this method, you may insert data into your database however you wish. You may use the [query builder](../database/query.md) to manually insert data or you may use your [model classes](../database/model.md). In the example below, we'll create a new user using the `User` model inside the `run` method:
 
@@ -310,13 +310,13 @@ class SeedUsersTable extends Seeder
     public function run()
     {
         $user = User::create([
-            'email'                 => 'user@example.com',
-            'login'                 => 'user',
-            'password'              => 'password123',
+            'email' => 'user@example.com',
+            'login' => 'user',
+            'password' => 'password123',
             'password_confirmation' => 'password123',
-            'first_name'            => 'Actual',
-            'last_name'             => 'Person',
-            'is_activated'          => true
+            'first_name' => 'Actual',
+            'last_name' => 'Person',
+            'is_activated' => true
         ]);
     }
 }
@@ -328,14 +328,14 @@ Alternatively, the same can be achieved using the `Db::table` [query builder](..
 public function run()
 {
     $user = Db::table('users')->insert([
-        'email'                 => 'user@example.com',
-        'login'                 => 'user',
-        [...]
+        'email' => 'user@example.com',
+        'login' => 'user',
+        // ...
     ]);
 }
 ```
 
-### Calling additional seeders
+### Calling Additional Seeders
 
 Within the `DatabaseSeeder` class, you may use the `call` method to execute additional seed classes. Using the `call` method allows you to break up your database seeding into multiple files so that no single seeder class becomes overwhelmingly large. Simply pass the name of the seeder class you wish to run:
 
@@ -349,8 +349,8 @@ public function run()
 {
     Model::unguard();
 
-    $this->call('Acme\Users\Updates\UserTableSeeder');
-    $this->call('Acme\Users\Updates\PostsTableSeeder');
-    $this->call('Acme\Users\Updates\CommentsTableSeeder');
+    $this->call(\Acme\Users\Updates\UserTableSeeder::class);
+    $this->call(\Acme\Users\Updates\PostsTableSeeder::class);
+    $this->call(\Acme\Users\Updates\CommentsTableSeeder::class);
 }
 ```

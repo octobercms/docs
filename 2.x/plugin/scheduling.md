@@ -36,7 +36,7 @@ The `exec` command may be used to issue a command to the operating system:
 $schedule->exec('node /home/acme/script.js')->daily();
 ```
 
-### Schedule frequency options
+### Schedule Frequency Options
 
 Of course, there are a variety of schedules you may assign to your task:
 
