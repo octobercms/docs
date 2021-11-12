@@ -43,9 +43,10 @@
         - filter-theme
         - filter-media
         - filter-resize
-        - filter-md
-        - filter-raw
         - filter-default
+        - filter-twig
+        - filter-raw
+        - filter-md
 -
     title: Functions
     collapsable: false
