@@ -45,6 +45,30 @@ description = "Basic layout example"
 </html>
 ```
 
+## Using a Dynamic Page Title
+
+The `meta_title` and `meta_description` properties of a [page](pages.md) can support parsing basic variables from the page lifecycle. The following layout template will set the page title based on the value of the active page.
+
+```html
+<html>
+    <head>
+        <title>{{ this.page.meta_title }} - October CMS</title>
+    </head>
+    <body>
+        {% page %}
+    </body>
+<html>
+```
+
+The page template can then define its title using Twig-like variable syntax using values that are available in the global environment, in this case the **post.title** value is used.
+
+```ini
+url = "/blog"
+meta_title = "{{ post.title }} - Blog"
+```
+
+> **Note**: Only basic Twig variables are supported. Filters, tags and functions cannot be used.
+
 ## Placeholders
 
 Placeholders allow pages to inject content to the layout. Placeholders are defined in the layout templates with the `{% placeholder %}` tag. The next example shows a layout template with a placeholder **head** defined in the HTML HEAD section.

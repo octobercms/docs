@@ -44,7 +44,6 @@
         - filter-media
         - filter-resize
         - filter-default
-        - filter-twig
         - filter-raw
         - filter-md
 -
