@@ -47,7 +47,7 @@ description = "Basic layout example"
 
 ## Using a Dynamic Page Title
 
-The `meta_title` and `meta_description` properties of a [page](pages.md) can support parsing basic variables from the page lifecycle. The following layout template will set the page title based on the value of the active page.
+The `meta_title` and `meta_description` properties of a [page](pages.md) support parsing variables from the page lifecycle. The following layout template will set the page title based on the value of the active page.
 
 ```html
 <html>

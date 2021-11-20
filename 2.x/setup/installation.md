@@ -27,6 +27,12 @@ You can then create a new October CMS project by using `create-project` command 
 composer create-project october/october myoctober
 ```
 
+You may also install to the current directory using this command instead.
+
+```bash
+composer create-project october/october .
+```
+
 When the task finishes, run the installation command to guide you through the next steps.
 
 ```bash
@@ -117,6 +123,12 @@ When using the SQL Server database engine, you will need to install the [group c
 ## Troubleshooting Installation
 
 1. **The installation hangs or freezes when I enter the license key**: This can happen in some environments when pasting the key contents. Press the ENTER key multiple times to allow the installation process to continue.
+
+1. **An error "Specified key was too long" is displayed during migration**: This happens when you are using an older version of MySQL or MariaDB. To resolve this issue, add the following to your **config/database.php** configuration file under the key `connections.mysql`.
+
+```php
+'varcharmax' => 191,
+```
 
 1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
 
