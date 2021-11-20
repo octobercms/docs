@@ -109,9 +109,9 @@ Support is provided for these databases with minimum requirements:
 1. PostgreSQL 9.6
 1. SQLite 3.8.8
 
-Some OS distributions may require you manually install some of the necessary PHP extensions.
+If you are using an older version of MySQL or MariaDB, you may need to [configure the index lengths](../database/structure#index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
 
-When using Ubuntu, the following command can be run to install all required extensions:
+Some OS distributions may require you manually install some of the necessary PHP extensions. When using Ubuntu, the following command can be run to install all required extensions:
 
 ```bash
 sudo apt-get update &&
@@ -124,11 +124,7 @@ When using the SQL Server database engine, you will need to install the [group c
 
 1. **The installation hangs or freezes when I enter the license key**: This can happen in some environments when pasting the key contents. Press the ENTER key multiple times to allow the installation process to continue.
 
-1. **An error "Specified key was too long" is displayed during migration**: This happens when you are using an older version of MySQL or MariaDB. To resolve this issue, add the following to your **config/database.php** configuration file under the key `connections.mysql`.
-
-```php
-'varcharmax' => 191,
-```
+1. **An error "Specified key was too long" is displayed during migration**: This happens when you are using an older version of MySQL or MariaDB. To resolve this issue, you may need to [configure the index lengths](../database/structure#index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
 
 1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
 
