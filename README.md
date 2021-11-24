@@ -13,3 +13,5 @@ This container uses the `details` HTML spec to collapse its content.
 
 Additionally, as seen above, you can use `tip`, `warning` and `danger` as containers.
 :::
+
+<Redirect to="2.x" />

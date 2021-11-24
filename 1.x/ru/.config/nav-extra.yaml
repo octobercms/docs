@@ -1,16 +1,20 @@
 #
 # Markup Extras
 #
-"/ru/markup/":
--
-    title: Back to October CMS Docs
-    icon: "/images/october-leaf.svg"
-    link: "/1.x/ru/"
+# "/ru/markup/":
+# -
+#     title: Back to October CMS Docs
+#     icon: "/images/october-leaf.svg"
+#     link: "/1.x/ru/"
 
 #
 # Root Extras
 #
 "/ru/":
+-
+    title: Home
+    icon: "/images/october-leaf.svg"
+    link: "/1.x/ru/"
 -
     title: Markup Guide
     icon: "/images/october-leaf.svg"

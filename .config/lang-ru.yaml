@@ -1,7 +1,7 @@
 version: Версия
 language: Язык
 on_this_page: На этой странице
-search_placeholder: Искать в Документах (Нажмите '/')
+search_placeholder: Искать в документации ...
 last_updated: Последнее обновление
 edit_this_page: Редактировать эту страницу
 old_version_warning: Эта статья предназначена для старой версии документации.

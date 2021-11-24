@@ -1,7 +1,7 @@
 version: Version
 language: Language
 on_this_page: On This Page
-search_placeholder: Search Docs (Press '/')
+search_placeholder: Search Documentation...
 last_updated: Last Updated
 edit_this_page: Edit This Page
 old_version_warning: This article is for an old version of the documentation.
