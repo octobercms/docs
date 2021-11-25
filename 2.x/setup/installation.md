@@ -1,6 +1,6 @@
 # Installation
 
-[Watch **October CMS Installation Tutorial** on YouTube](https://www.youtube.com/watch?v=RHUwCvo7xng)
+<VideoPreview src="https://www.youtube.com/watch?v=RHUwCvo7xng" />
 
 October CMS is a web application platform with a simple and intuitive interface. A web platform provides a consistent structure with an emphasis on reusability so you can focus on building something unique while we handle the boring bits.
 
