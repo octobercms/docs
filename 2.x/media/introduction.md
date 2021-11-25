@@ -12,6 +12,12 @@ In most cases the complete URL will be used when inserting media assets in to yo
 {{ 'relative/path/to/asset.jpg'|media }}
 ```
 
+You may also generate URLs in PHP using the `MediaLibrary` class.
+
+```php
+\Media\Classes\MediaLibrary::url('relative/path/to/asset.jpg');
+```
+
 ## Configuration Options
 
 There are several options that allow you to fine-tune the Media Manager, which are defined in **config/media.php** file.
