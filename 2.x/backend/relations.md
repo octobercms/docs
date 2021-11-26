@@ -79,6 +79,8 @@ Option | Type | Description
 **noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization.md).
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
 **scope** | List | specifies a [query scope method](../database/model.md#query-scopes) defined in the _related form model_ to apply to the list query always. The model that this relationship will be attached to (i.e. the parent model) is passed to this scope method as the second parameter (`$query` is the first).
+**searchMode** | List | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
+**searchScope** | List | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 **filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists.md#using-list-filters).
 
 These configuration values can be specified only for the **view** options.
