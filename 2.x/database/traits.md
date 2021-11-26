@@ -160,19 +160,19 @@ class Category extends Model
 }
 ```
 
-This trait will automatically inject two [model relations](../database/relations.md) called `parent` and `children`, it is the equivalent of the following definitions:
+This trait will automatically inject two [model relations](../database/relations.md) called `parent` and `children`, it is the equivalent of the following definitions.
 
 ```php
 public $belongsTo = [
-    'parent'    => ['User', 'key' => 'parent_id'],
+    'parent' => [Category ::class, 'key' => 'parent_id'],
 ];
 
 public $hasMany = [
-    'children'    => ['User', 'key' => 'parent_id'],
+    'children' => [Category ::class, 'key' => 'parent_id'],
 ];
 ```
 
-You may modify the key name used to identify the parent by defining the `PARENT_ID` constant:
+You do not need to define these relations yourself, however. you may modify the key name used to identify the parent by defining the `PARENT_ID` constant:
 
 ```php
 const PARENT_ID = 'my_parent_column';

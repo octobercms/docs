@@ -28,7 +28,8 @@ The configuration file referred in the `$relationConfig` property is defined in 
 The first level field in the relation configuration file defines the relationship name in the target model. For example:
 
 ```php
-class Invoice {
+class Invoice
+{
     public $hasMany = [
         'items' => \Acme\Pay\Models\InvoiceItem::class,
     ];
@@ -90,6 +91,7 @@ Option | Type | Description
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
 **toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add|remove`.
+**structure** | List | options to enable [sorting records](../backend/reorder) for the list.
 
 These configuration values can be specified only for the **manage** options.
 

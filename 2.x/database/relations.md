@@ -395,11 +395,23 @@ If you want your pivot table to have automatically maintained `created_at` and `
 
 ```php
 public $belongsToMany = [
-    'roles' => [\Acme\Blog\Models\Role::class, 'timestamps' => true]
+    'roles' => [
+        \Acme\Blog\Models\Role::class,
+        'timestamps' => true
+    ]
 ];
 ```
 
 If you would like to define a custom model to represent the intermediate table of your relationship, you may use `pivotModel` attribute when defining the relationship. Custom many-to-many pivot models should extend the `October\Rain\Database\Pivot` class while custom polymorphic many-to-many pivot models should extend the `October\Rain\Database\MorphPivot` class.
+
+```php
+public $belongsToMany = [
+    'roles' => [
+        \Acme\Blog\Models\Role::class,
+        'pivotModel' => \Acme\Blog\Models\UserRolePivot::class
+    ]
+];
+```
 
 These are the parameters supported for `belongsToMany` relations:
 
@@ -412,6 +424,7 @@ Argument | Description
 **relatedKey** | the key column name of the related model (inside related model table). Default: id
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot` while for polymorphic relation `October\Rain\Database\MorphPivot`.
+**pivotSortable** | specify a sort order column for the pivot table, used in combination with the [`SortableRelation` trait](../backend/reorder.md#sortable-relation-model).
 **timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
 
 ### Has Many Through
