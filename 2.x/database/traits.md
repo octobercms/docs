@@ -172,7 +172,7 @@ public $hasMany = [
 ];
 ```
 
-You do not need to define these relations yourself, however. you may modify the key name used to identify the parent by defining the `PARENT_ID` constant:
+You do not need to define these relations yourself, however, you may modify the key name used to identify the parent by defining the `PARENT_ID` constant:
 
 ```php
 const PARENT_ID = 'my_parent_column';

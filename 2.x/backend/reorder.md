@@ -73,7 +73,7 @@ Read more about the [Sortable trait in the database documentation](../database/t
 
 ## Sorting Related Records
 
-Sorting related records is possible using the [Relation Behavior](../backend/relations.md) using the following supported relation types below.
+Sorting related records is possible using the [Relation Behavior](../backend/relations.md) and the supported relation types are listed below.
 
 - [Has Many](../database/relations.md#one-to-many) uses the `Sortable` trait on the related model.
 - [Belongs To Many](../database/relations.md#many-to-many) uses the `SortableRelation` trait on the parent model (see below).
@@ -100,7 +100,7 @@ class User extends Model
 }
 ```
 
-The inside your relation configuration, you should enable the `showReorder` option and disable the `showTree` option.
+Then inside your relation configuration, you should enable the `showReorder` option and disable the `showTree` option.
 
 ```yaml
 roles:
