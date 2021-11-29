@@ -1132,13 +1132,13 @@ Option | Description
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute.
 
-#### Repeater style
+#### Repeater Style
 
 The `style` attribute of the repeater widget controls the behaviour of repeater items. There are three different types of styles available for developers:
 
-- **default:** Shows all the repeater items as expanded on page load. This is the default current behavior, and will be used if style is not defined in the repeater widget's configuration.
-- **collapsed:** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
-- **accordion:** Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
+- **default** Shows all the repeater items as expanded on page load. This is the default current behavior, and will be used if style is not defined in the repeater widget's configuration.
+- **collapsed** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
+- **accordion** Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
 
 ### Rich editor / WYSIWYG
 

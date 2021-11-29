@@ -17,7 +17,7 @@ $validator = Validator::make(
 
 The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
 
-#### Using arrays to specify rules
+#### Using Arrays to Specify Rules
 
 Multiple rules may be delimited using either a "pipe" character, or as separate elements of an array.
 
@@ -28,7 +28,7 @@ $validator = Validator::make(
 );
 ```
 
-#### Validating multiple fields
+#### Validating Multiple Fields
 
 ```php
 $validator = Validator::make(
@@ -65,7 +65,7 @@ You may also access an array of the failed validation rules, without messages. T
 $failed = $validator->failed();
 ```
 
-#### Validating files
+#### Validating Files
 
 The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
 
@@ -636,25 +636,24 @@ The recommended way of adding your own validation rule is to extend the Validato
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
 
-#### Using Rule Objects
+#### Defining a Rule Class
 
-A `Rule` object represents a single reusable validation rule for your models that extends the `October\Rain\Validation\Rule` class. The `Rule` classes should be stored in the **/rules** subdirectory of your plugin.
-
-Each rule object must provide these methods: a `passes` method which determines if a given value passes validation and a `message` method which defines the default fallback error message.
+A `Rule` class represents a single reusable validation rule for your models. At a minimum, the rule class must provide a `validate` method that determines if the validation rule passes. You may also define the `message` and `replace` methods to process the validation error message, both methods are optional.
 
 ```php
 /**
  * UppercaseRule checks if the content is uppercase.
  */
-class UppercaseRule extends \October\Rain\Validation\Rule
+class UppercaseRule
 {
     /**
-     * passes determines if the validation rule passes.
+     * validate determines if the validation rule passes.
      * @param string $attribute
      * @param mixed $value
+     * @param array $params
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function validate($attribute, $value, $params)
     {
         return strtoupper($value) === $value;
     }
@@ -665,18 +664,24 @@ class UppercaseRule extends \October\Rain\Validation\Rule
      */
     public function message()
     {
-        return 'The :attribute must be uppercase.';
+        return 'The :attribute must be uppercase (:foo).';
+    }
+
+    /**
+     * replace defines custom placeholder replacements.
+     * @return string
+     */
+    public function replace($message, $attribute, $rule, $params)
+    {
+        return str_replace(':foo', 'bar', $message);
     }
 }
 ```
 
-To extend the Validator with your rule object, you may register the class instance using the `registerValidationRule` method inside the plugin base class. This method should be called inside the boot method of a [plugin registration file](../plugin/registration.md).
+To extend the Validator with your rule object, you may provide an instance of the class to the Validator `extend` method.
 
 ```php
-public function boot()
-{
-    $this->registerValidationRule('uppercase', UppercaseRule::class);
-}
+Validator::extend('uppercase', UppercaseRule::class);
 ```
 
 The `registerValidationRule` method will extend the Validator instance, register the error message and replacer.
