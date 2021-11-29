@@ -84,13 +84,13 @@ array($name, $mode, $description, $defaultValue)
 
 The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`.
 
-### Defining options
+### Defining Options
 
 Options are defined by returning an array value from the `getOptions` method. Like arguments this method should return an array of commands, which are described by a list of array options. For example:
 
 ```php
 /**
- * Get the console command options.
+ * getOptions for the console command
  * @return array
  */
 protected function getOptions()
@@ -211,7 +211,7 @@ For more advanced options, check out the [Symfony Progress Bar component documen
 
 ## Registering Commands
 
-#### Registering a console command
+#### Registering a Console Command
 
 Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration.md#registration-methods) using  the `registerConsoleCommand` helper method.
 
@@ -220,12 +220,12 @@ class Blog extends PluginBase
 {
     public function pluginDetails()
     {
-        [...]
+        // ...
     }
 
     public function register()
     {
-        $this->registerConsoleCommand('acme.mycommand', 'Acme\Blog\Console\MyConsoleCommand');
+        $this->registerConsoleCommand('acme.mycommand', \Acme\Blog\Console\MyConsoleCommand::class);
     }
 }
 ```
@@ -236,7 +236,7 @@ Alternatively, plugins can supply a file named **init.php** in the plugin direct
 Artisan::add(new Acme\Blog\Console\MyCommand);
 ```
 
-#### Registering a command in the application container
+#### Registering a Command in the Application Container
 
 If your command is registered in the [application container](../services/application.md#application-container), you may use the `Artisan::resolve` method to make it available to Artisan:
 
@@ -244,7 +244,7 @@ If your command is registered in the [application container](../services/applica
 Artisan::resolve('binding.name');
 ```
 
-#### Registering commands in a service provider
+#### Registering Commands in a Service Provider
 
 If you need to register commands from within a [service provider](application.md#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](application.md#application-container) binding for the command:
 

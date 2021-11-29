@@ -146,7 +146,7 @@ So, after redirection, you may utilize the automatically bound `errors` variable
 {{ errors.first('email') }}
 ```
 
-### Named error bags
+### Named Error Bags
 
 If you have multiple forms on a single page, you may wish to name the `MessageBag` of errors. This will allow you to retrieve the error messages for a specific form. Simply pass a name as the second argument to `withErrors`:
 
@@ -628,13 +628,58 @@ Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 <a name="custom-validation-rules"></a>
 ## Custom Validation Rules
 
-#### Registering a custom validation rule
+#### Registering a Custom Validation Rule
 
 There are a variety of helpful validation rules; however, you may wish to specify some of your own.
 
 The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
 
 You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
+
+#### Using Rule Objects
+
+A `Rule` object represents a single reusable validation rule for your models that extends the `October\Rain\Validation\Rule` class. The `Rule` classes should be stored in the **/rules** subdirectory of your plugin.
+
+Each rule object must provide these methods: a `passes` method which determines if a given value passes validation and a `message` method which defines the default fallback error message.
+
+```php
+/**
+ * UppercaseRule checks if the content is uppercase.
+ */
+class UppercaseRule extends \October\Rain\Validation\Rule
+{
+    /**
+     * passes determines if the validation rule passes.
+     * @param string $attribute
+     * @param mixed $value
+     * @return bool
+     */
+    public function passes($attribute, $value)
+    {
+        return strtoupper($value) === $value;
+    }
+
+    /**
+     * message gets the validation error message.
+     * @return string
+     */
+    public function message()
+    {
+        return 'The :attribute must be uppercase.';
+    }
+}
+```
+
+To extend the Validator with your rule object, you may register the class instance using the `registerValidationRule` method inside the plugin base class. This method should be called inside the boot method of a [plugin registration file](../plugin/registration.md).
+
+```php
+public function boot()
+{
+    $this->registerValidationRule('uppercase', UppercaseRule::class);
+}
+```
+
+The `registerValidationRule` method will extend the Validator instance, register the error message and replacer.
 
 #### Using Closures
 
@@ -653,7 +698,7 @@ public function boot()
 
 The custom validator Closure receives three arguments: the name of the `$attribute` being validated, the `$value` of the attribute, and an array of `$parameters` passed to the rule.
 
-You may also pass a class and method to the `extend` method instead of a Closure:
+You may also pass a class and method to the `extend` method instead of a Closure.
 
 ```php
 Validator::extend('foo', 'FooValidator@validate');
@@ -667,63 +712,9 @@ public $rules = [
 ];
 ```
 
-#### Using Rule objects
-
-A `Rule` object represents a single reusable validation rule for your models that implements the `Illuminate\Contracts\Validation\Rule` contract. Each rule object must provide three methods: a `passes` method which determines if a given value passes validation, a `validate` method which is called on validation and a `message` method which defines the default fallback error message.
-
-```php
-use Illuminate\Contracts\Validation\Rule;
-
-class Uppercase implements Rule
-{
-    /**
-     * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
-     */
-    public function passes($attribute, $value)
-    {
-        return strtoupper($value) === $value;
-    }
-
-    /**
-     * Validation callback method.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @param  array  $params
-     * @return bool
-     */
-    public function validate($attribute, $value, $params)
-    {
-        return $this->passes($attribute, $value);
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return 'The :attribute must be uppercase.';
-    }
-}
-```
-
-To extend the Validator with your rule object, you may provide an instance of the class to the Validator `extend` method:
-
-```php
-Validator::extend('uppercase', Uppercase::class);
-```
-
-`Rule` objects should be stored in the **/rules** subdirectory inside your plugin directory.
-
 #### Defining the Error Message
 
-You will also need to define an error message for your custom rule. You can do so either using an inline custom message array or by adding an entry in the validation language file. This message should be placed in the first level of the array.
+You may also need to define an error message for your custom rule. You can do so either using an inline custom message array or by adding an entry in the validation language file. This message should be placed in the first level of the array.
 
 ```php
 "foo" => "Your input was invalid!",
@@ -768,7 +759,7 @@ public function boot()
 }
 ```
 
-#### Registering a custom validator resolver
+#### Registering a Custom Validator Resolver
 
 If you wish to provide a large number of custom rules to your application, you can also define a validator resolver. Note that only one resolver may be defined per Validation instance, so it is not recommended to define a resolver in plugins unless you are using your own Validation instance and not the global Validator facade.
 
