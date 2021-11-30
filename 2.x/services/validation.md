@@ -8,16 +8,14 @@ The validator class is a simple, convenient facility for validating data and ret
 
 #### Basic Validation Example
 
+The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
+
 ```php
 $validator = Validator::make(
     ['name' => 'Joe'],
     ['name' => 'required|min:5']
 );
 ```
-
-The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
-
-#### Using Arrays to Specify Rules
 
 Multiple rules may be delimited using either a "pipe" character, or as separate elements of an array.
 
@@ -28,7 +26,7 @@ $validator = Validator::make(
 );
 ```
 
-#### Validating Multiple Fields
+To validate multiple fields, simply add them to the array.
 
 ```php
 $validator = Validator::make(
@@ -44,6 +42,8 @@ $validator = Validator::make(
     ]
 );
 ```
+
+#### Checking the Validation Results
 
 Once a `Validator` instance has been created, the `fails` (or `passes`) method may be used to perform the validation.
 
@@ -121,7 +121,7 @@ foreach ($messages->all('<li>:message</li>') as $message) {
 
 ## Error Messages & Views
 
-Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October. Consider the following routes as an example:
+Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by October CMS. Consider the following AJAX handler as an example:
 
 ```php
 public function onRegister()
@@ -138,7 +138,7 @@ public function onRegister()
 
 Note that when validation fails, we pass the `Validator` instance to the Redirect using the `withErrors` method. This method will flash the error messages to the session so that they are available on the next request.
 
-October will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `errors` variable will always be available in all of your pages, on every request**, allowing you to conveniently assume the `errors` variable is always defined and can be safely used. The `errors` variable will be an instance of `MessageBag`.
+October CMS will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `errors` variable will always be available in all of your pages, on every request**, allowing you to conveniently assume the `errors` variable is always defined and can be safely used. The `errors` variable will be an instance of `MessageBag`.
 
 So, after redirection, you may utilize the automatically bound `errors` variable in your view:
 
@@ -530,7 +530,6 @@ $v->sometimes(['reason', 'cost'], 'required', function($input) {
 
 > **Note**: The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
 
-<a name="validating-arrays"></a>
 ## Validating Arrays
 
 Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
@@ -569,12 +568,11 @@ $validator = Validator::make(Input::all(), [
 ]);
 ```
 
-<a name="custom-error-messages"></a>
 ## Custom Error Messages
 
 If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
 
-#### Passing custom messages into validator
+#### Passing Custom Messages to the Validator
 
 ```php
 $messages = [
@@ -586,14 +584,14 @@ $validator = Validator::make($input, $rules, $messages);
 
 > *Note:* The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
 
-#### Other validation placeholders
+#### Other Validation Placeholders
 
 ```php
 $messages = [
-    'same'    => 'The :attribute and :other must match.',
-    'size'    => 'The :attribute must be exactly :size.',
+    'same' => 'The :attribute and :other must match.',
+    'size' => 'The :attribute must be exactly :size.',
     'between' => 'The :attribute must be between :min - :max.',
-    'in'      => 'The :attribute must be one of the following types: :values',
+    'in' => 'The :attribute must be one of the following types: :values',
 ];
 ```
 
@@ -625,25 +623,34 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
 Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 ```
 
-<a name="custom-validation-rules"></a>
 ## Custom Validation Rules
 
-#### Registering a Custom Validation Rule
+There are a variety of helpful validation rules, however, you may wish to specify some of your own. First you should decide if your rule shuld be [registered globally](#globally-registered-rules), or use [a local rule object](#local-rule-objects).
 
-There are a variety of helpful validation rules; however, you may wish to specify some of your own.
+### Globally Registered Rules
 
-The recommended way of adding your own validation rule is to extend the Validator instance via the `extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
-
-You can extend the Validator instance with your custom validation rule as a `Closure`, or as a `Rule` object.
-
-#### Defining a Rule Class
-
-A `Rule` class represents a single reusable validation rule for your models. At a minimum, the rule class must provide a `validate` method that determines if the validation rule passes. You may also define the `message` and `replace` methods to process the validation error message, both methods are optional.
+A globally registered rule can be shared throughout your application by registering it with a tag and rule class using the `Validator::extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
 
 ```php
-/**
- * UppercaseRule checks if the content is uppercase.
- */
+public function boot()
+{
+    Validator::extend('uppercase', UppercaseRule::class);
+}
+```
+
+In this instance, we have created a rule tagged **uppercase** and referenced our rule class where it becomes available to specify as a rule everywhere.
+
+```php
+$v = Validator::make($data, [
+    'shoutout' => 'required|uppercase',
+]);
+```
+
+#### Defining a Global Rule Class
+
+A global rule class represents a single reusable validation rule for your models. At a minimum, the rule class must provide a `validate` method that determines if the validation rule passes. You may also specify an optional `message` method to return a custom error message.
+
+```php
 class UppercaseRule
 {
     /**
@@ -664,7 +671,44 @@ class UppercaseRule
      */
     public function message()
     {
-        return 'The :attribute must be uppercase (:foo).';
+        return 'The :attribute must be uppercase.';
+    }
+}
+```
+
+### Passing Arguments to Rules
+
+Global rules can support passing arguments along with their definition. For example, a rule called **betwixt** may require two values. Parameters can be passed to a rule by separating with a colon (`:`) and each parameter is seperated by a comma (`,`).
+
+
+```php
+$v = Validator::make($data, [
+    'name' => 'betwixt:1,6',
+]);
+```
+
+The parameters are then passed to the validate method and become available. The error message can also be processed by defining a `replace` method.
+
+```php
+class BetwixtRule
+{
+    /**
+     * validate between start and end parameters.
+     */
+    public function validate($attribute, $value, $params)
+    {
+        [$start, $end] = $params;
+
+        return strlen($value) > $start && strlen($value) < $end;
+    }
+
+    /**
+     * message gets the validation error message.
+     * @return string
+     */
+    public function message()
+    {
+        return 'The :attribute must be between :start and :end.';
     }
 
     /**
@@ -673,123 +717,59 @@ class UppercaseRule
      */
     public function replace($message, $attribute, $rule, $params)
     {
-        return str_replace(':foo', 'bar', $message);
+        [$start, $end] = $params;
+
+        $message = str_replace(':start', $start, $message);
+
+        $message = str_replace(':end', $end, $message);
+
+        return $message;
     }
 }
 ```
 
-To extend the Validator with your rule object, you may provide an instance of the class to the Validator `extend` method.
+### Local Rule Objects
+
+The [Laravel documentation on rule objects](https://laravel.com/docs/6.x/validation#using-rule-objects) describes in more detail how to define a rule class. Specifically, the rule must implement the `Illuminate\Contracts\Validation\Rule` contract which requires a `passes` method to be defined.
 
 ```php
-Validator::extend('uppercase', UppercaseRule::class);
-```
-
-The `registerValidationRule` method will extend the Validator instance, register the error message and replacer.
-
-#### Using Closures
-
-If you only need the functionality of a custom rule specified once throughout your plugin or application, you may use a Closure to define the rule. The first parameter defines the name of your rule, and the second parameter provides your Closure.
-
-```php
-use Validator;
-
-public function boot()
+class LowercaseRule implements \Illuminate\Contracts\Validation\Rule
 {
-    Validator::extend('foo', function($attribute, $value, $parameters) {
-        return $value == 'foo';
-    });
+    /**
+     * passes checks if the rule is successful
+     * @param  string  $attribute
+     * @param  mixed  $value
+     * @return bool
+     */
+    public function passes($attribute, $value)
+    {
+        return strtolower($value) === $value;
+    }
+
+    /**
+     * message gets the validation error message.
+     * @return string
+     */
+    public function message()
+    {
+        return 'The :attribute must be lowercase.';
+    }
 }
 ```
 
-The custom validator Closure receives three arguments: the name of the `$attribute` being validated, the `$value` of the attribute, and an array of `$parameters` passed to the rule.
-
-You may also pass a class and method to the `extend` method instead of a Closure.
+Once a rule is defined, it can be passed as an insatance to the `Validator` service.
 
 ```php
-Validator::extend('foo', 'FooValidator@validate');
+$v = Validator::make($data, [
+    'name' => ['required', new LowercaseRule],
+]);
 ```
 
-Once the Validator has been extended with your custom rule, you will need to add it to your rules definition. For example, you may add it to the `$rules` array of your model.
+You may also implement the rule object in models using the `beforeValidate` method override.
 
 ```php
-public $rules = [
-    'field' => 'foo'
-];
-```
-
-#### Defining the Error Message
-
-You may also need to define an error message for your custom rule. You can do so either using an inline custom message array or by adding an entry in the validation language file. This message should be placed in the first level of the array.
-
-```php
-"foo" => "Your input was invalid!",
-
-"accepted" => "The :attribute must be accepted.",
-```
-
-With `Rule` objects, you can set a fallback error message by providing a `message` method that returns a string.
-
-When creating a custom validation rule, you may sometimes need to define custom placeholder replacements for error messages. You may do so by making a call to the `replacer` method on the Validator facade. You may also do this within the `boot` method of your plugin.
-
-```php
-public function boot()
+public function beforeValidate()
 {
-    Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
-        // return a message as a string
-    });
-}
-```
-
-The callback receives 4 arguments: `$message` being the message returned by the validator, `$attribute` being the attribute which failed validation, `$rule` being the rule object and `$parameters` being the parameters defined with the validation rule. You may, for example, inject a column name into the message that was defined in the parameters:
-
-```php
-public function boot()
-{
-    Validator::replacer('foo', function ($message, $attribute, $rule, $parameters) {
-        return str_replace(':column', $parameters[0], $message);
-    });
-}
-```
-
-If you wish to support multiple languages with your error messages, you will need to listen for the `translator.beforeResolve` event in your plugin, as your plugin's `boot` method may be run before translation support is fully enabled.
-
-```php
-public function boot()
-{
-    Event::listen('translator.beforeResolve', function ($key, $replaces, $locale) {
-        if ($key === 'validation.uppercase') {
-            return Lang::get('plugin.name::lang.validation.uppercase');
-        }
-    });
-}
-```
-
-#### Registering a Custom Validator Resolver
-
-If you wish to provide a large number of custom rules to your application, you can also define a validator resolver. Note that only one resolver may be defined per Validation instance, so it is not recommended to define a resolver in plugins unless you are using your own Validation instance and not the global Validator facade.
-
-To define a resolver, you may provide a Closure to the `resolver` method in the Validator facade.
-
-```php
-Validator::resolver(function($translator, $data, $rules, $messages, $customAttributes) {
-    return new CustomValidator($translator, $data, $rules, $messages, $customAttributes);
-});
-```
-
-Each rule supported within a resolver is defined using a `validateXXX` method. For example, the `foo` validation rule would look for a method called `validateFoo`. The `validate` method should return a boolean on whether a given `$value` passes validation.
-
-```php
-public function validateFoo($attribute, $value, $parameters)
-{
-    // return whether the value passes validation
-}
-```
-
-As with the Validator `replacer` method, you may sometimes need to define custom placeholder replacements for error messages. You may do this in a resolver by defining a `replaceXXX` method.
-
-```php
-protected function replaceFoo($message, $attribute, $rule, $parameters)
-{
-    return str_replace(':foo', $parameters[0], $message);
+    $this->rules['name'] = ['required', new LowercaseRule];
 }
 ```
