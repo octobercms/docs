@@ -676,10 +676,9 @@ class UppercaseRule
 }
 ```
 
-### Passing Arguments to Rules
+#### Passing Arguments to Rules
 
 Global rules can support passing arguments along with their definition. For example, a rule called **betwixt** may require two values. Parameters can be passed to a rule by separating with a colon (`:`) and each parameter is seperated by a comma (`,`).
-
 
 ```php
 $v = Validator::make($data, [

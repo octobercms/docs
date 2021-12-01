@@ -80,6 +80,22 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 
 Make sure that this package is included in the `require` property found in the [theme information file](../themes/development.md#theme-dependencies).
 
+#### Developing With Third Party Packages
+
+To create a new plugin or theme that uses an external package or library, you should install it to your root composer file and then copy the definition across to your plugin composer file. For example, if you want your plugin `acme/blog-plugin` to depend on the `aws/aws-sdk-php` package.
+
+1. In the root directory, run `composer require aws/aws-sdk-php`. This will install the package to the root composer file and ensure that it is compatible with other packages.
+
+2. Once completed, open the root directory **composer.json** file to locate the newly defined dependency. For example, you will see something like this:
+
+```json
+"require": {
+    "aws/aws-sdk-php": "^3.158"
+}
+```
+
+3. Copy this definition from the root **composer.json** file and include it in the **plugins/acme/blog/composer.json** file for your plugin. Now the dependency is available to your app and also required by the plugin for others to use.
+
 ### Tagging a Release
 
 Packages in October CMS follow semantic versioning and Composer uses git to determine the stability and impact of a given release.
