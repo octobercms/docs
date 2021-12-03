@@ -20,7 +20,7 @@ This will create a new directory called **public/** in the project's base direct
 
 The command should be performed after each system update or when a new plugin is installed. You may instruct October CMS to automatically do this using the `system.auto_mirror_public` configuration item.
 
-```text
+```
 AUTO_MIRROR_PUBLIC=true
 ```
 

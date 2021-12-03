@@ -26,7 +26,7 @@ widgets/
 The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). Example widget controller class definition:
 
 ```php
-<?php namespace Backend\Widgets;
+namespace Backend\Widgets;
 
 use Backend\Classes\WidgetBase;
 
@@ -255,7 +255,7 @@ When the time comes to take the user input and store it in the database, the for
 ```php
 public function getSaveValue($value)
 {
-        return $value;
+    return $value;
 }
 ```
 
@@ -264,7 +264,7 @@ In some cases you intentionally don't want any value to be given, for example, a
 ```php
 public function getSaveValue($value)
 {
-        return \Backend\Classes\FormField::NO_SAVE_DATA;
+    return \Backend\Classes\FormField::NO_SAVE_DATA;
 }
 ```
 
@@ -381,16 +381,16 @@ public function defineProperties()
 {
     return [
         'title' => [
-            'title'             => 'Widget title',
-            'default'           => 'Top Pages',
-            'type'              => 'string',
+            'title' => 'Widget title',
+            'default' => 'Top Pages',
+            'type' => 'string',
             'validationPattern' => '^.+$',
             'validationMessage' => 'The Widget Title is required.'
         ],
         'days' => [
-            'title'             => 'Number of days to display data for',
-            'default'           => '7',
-            'type'              => 'string',
+            'title' => 'Number of days to display data for',
+            'default' => '7',
+            'type' => 'string',
             'validationPattern' => '^[0-9]+$'
         ]
     ];
@@ -406,14 +406,14 @@ public function registerReportWidgets()
 {
     return [
         \RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview::class => [
-            'label'   => 'Google Analytics traffic overview',
+            'label' => 'Google Analytics traffic overview',
             'context' => 'dashboard',
             'permissions' => [
                 'rainlab.googleanalytics.widgets.traffic_overview',
             ],
         ],
         \RainLab\GoogleAnalytics\ReportWidgets\TrafficSources::class => [
-            'label'   => 'Google Analytics traffic sources',
+            'label' => 'Google Analytics traffic sources',
             'context' => 'dashboard',
             'permissions' => [
                 'rainlab.googleanaltyics.widgets.traffic_sources',
