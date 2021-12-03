@@ -7,7 +7,7 @@ The behavior depends on a [model class](../database/model.md) which must impleme
 1. [`October\Rain\Database\Traits\Sortable`](../database/traits#sortable)
 1. [`October\Rain\Database\Traits\NestedTree`](../database/traits#nestedtree)
 
->**Note**: If adding sorting to a previously unsorted model under the control of a third party is desired, you can use the [`October\Rain\Database\Behaviors\Sortable`](../database/behaviors#sortable) behavior, which can be dynamically implemented. However, you will need to ensure that the model table has a `sort_order` column present on it.
+> **Note**: If adding sorting to a previously unsorted model under the control of a third party is desired, you can use the [`October\Rain\Database\Behaviors\Sortable`](../database/behaviors#sortable) behavior, which can be dynamically implemented. However, you will need to ensure that the model table has a `sort_order` column present on it.
 
 In order to use the reorder behavior you should add it to the `$implement` property of the controller class. Also, the `$reorderConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
