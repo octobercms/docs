@@ -1,6 +1,6 @@
 # Image Resizing
 
->**Note:** The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
+> **Note**: The image resizing functionality requires a cache driver that persists cache data between requests in order to function, `array` is not a supported cache driver if you wish to use this functionality.
 
 ## Resize Parameters
 

@@ -17,7 +17,7 @@ This is event made available with the `Event::fire` method which is called as pa
 Event::fire('auth.login', [$user]);
 ```
 
->**Note:** For a list of all events available in October CMS itself, see the [API documentation](https://octobercms.com/docs/api).
+> **Note**: For a list of all events available in October CMS itself, see the [API documentation](https://octobercms.com/docs/api).
 
 ## Subscribing to Events
 

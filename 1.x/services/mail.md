@@ -227,7 +227,7 @@ If you are planning to use queued emails make sure that the path of the file is 
 ```twig
 <body>
     Here is an image:
-    {% set pathToFile = 'storage/app/media/path/to/file.jpg' | app %}
+    {% set pathToFile = 'storage/app/media/path/to/file.jpg'|app %}
     <img src="{{ message.embed(pathToFile) }}">
 </body>
 ```
@@ -374,7 +374,7 @@ By default, October comes with two primary mail layouts:
 
 Layout | Code | Description
 ------------- | ------------- | -------------
-Default | default | Used for public facing, front-end mail
+Default |default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
 
 ### Registering mail layouts, templates & partials

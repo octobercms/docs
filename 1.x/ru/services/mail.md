@@ -305,7 +305,7 @@ By default, October comes with two primary mail layouts:
 
 Layout | Code | Description
 ------------- | ------------- | -------------
-Default | default | Used for public facing, front-end mail
+Default |default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
 
 <a name="mail-template-registration"></a>

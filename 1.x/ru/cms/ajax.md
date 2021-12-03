@@ -7,15 +7,19 @@ OctoberCMS включает в себя AJAX фреймворк, который 
 
 Нужно подключить jQuery, чтобы начать использовать AJAX фреймворк. После чего необходимо вставить тег `{% framework %}` на страницу или в шаблон. Он добавит необходимые JS и CSS файлы. Пример:
 
-    <script src="{{ [
-        'assets/javascript/jquery.js',
-    ]|theme }}"></script>
+```twig
+<script src="{{ [
+    'assets/javascript/jquery.js',
+]|theme }}"></script>
 
-    {% framework %}
+{% framework %}
+```
 
 Тег `{% framework %}` имеет необязательный параметр **extras**, который добавляет индикатор загрузки (отображается вверху страницы).
 
-    {% framework extras %}
+```twig
+{% framework extras %}
+```
 
 <a name="how-ajax-works"></a>
 ### Как работает AJAX
@@ -31,42 +35,50 @@ OctoberCMS включает в себя AJAX фреймворк, который 
 
 Ниже приведен пример калькулятора, который использует **Data Attributes API**. При отправке формы вызывается обработчик [**onTest**](#ajax-handlers), код которого находится ниже. Результат расчета выводится в элементе **#result** при помощью фрагмента **calcresult**.
 
-    <form data-request="onTest" data-request-update="calcresult: '#result'">
-        <input type="text" name="value1">
-        <input type="text" name="value2">
-        <input type="submit" value="Calculate">
-    </form>
-    <div id="result"></div>
+```html
+<form data-request="onTest" data-request-update="calcresult: '#result'">
+    <input type="text" name="value1">
+    <input type="text" name="value2">
+    <input type="submit" value="Calculate">
+</form>
+<div id="result"></div>
+```
 
 Содержимое фрагмента **calcresult**:
 
-    The result is {{ result }}
+```twig
+The result is {{ result }}
+```
 
 <a name="ajax-handlers"></a>
 ## Обработчики
 
 Обработчики AJAX - PHP функции, которые могут быть определены в странице, шаблоне или внутри компонента. Они имеют название вида `onНазваниеОбработчика` и могут передавать результат на страницу. Следующий пример демонстрирует обработчик, который определен в [PHP секции](../cms/themes.md#php-section) страницы. Он получает два значения из формы, суммирует их и присваивает новое число переменной страницы **result**.
 
-    url = "js"
-    layout = "default"
-    ==
-    function onTest()
-    {
-        $value1 = post('value1');
-        $value2 = post('value2');
-        $this['result'] = $value1 + $value2;
-    }
-    ==
+```php
+url = "js"
+layout = "default"
+==
+function onTest()
+{
+    $value1 = post('value1');
+    $value2 = post('value2');
+    $this['result'] = $value1 + $value2;
+}
+==
+```
 
 > **Примечание:** Если обработчики имеют одинаковые имена, то сначала вызывается тот, который определен в странице, затем - в шаблоне, после - в компоненте.
 
 The `onInit()` methods found in the [page execution life cycle](layouts.md#dynamic-pages) can be used for defining code that always executes before an AJAX event is handled.
 
-    function onInit()
-    {
-        // This code will be executed before
-        // an AJAX request is handled.
-    }
+```php
+function onInit()
+{
+    // This code will be executed before
+    // an AJAX request is handled.
+}
+```
 
 <a name="data-attributes"></a>
 ## Data attributes API
@@ -101,32 +113,44 @@ The `onInit()` methods found in the [page execution life cycle](layouts.md#dynam
 
 Использование обработчика `onCalculate` при отправке формы и обновлением элемента, имеющего идентификатор `"result"`, фрагментом **calcresult**:
 
-    <form data-request="onCalculate" data-request-update="calcresult: '#result'">
+```html
+<form data-request="onCalculate" data-request-update="calcresult: '#result'">
+```
 
 Вызов окна с подтверждением запроса:
 
-    <form ... >
-        ...
-        <button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
+```html
+<form ... >
+    ...
+    <button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
+```
 
 Перенаправление на другую страницу после успешного запроса:
 
-    <form data-request="onLogin" data-request-redirect="/admin">
+```html
+<form data-request="onLogin" data-request-redirect="/admin">
+```
 
 Вызов окна после успешного запроса:
 
-    <form data-request="onLogin" data-request-success="alert('Yay!')">
+```html
+<form data-request="onLogin" data-request-success="alert('Yay!')">
+```
 
 Отправка параметра `mode` со значением `update`:
 
-    <form data-request="onUpdate" data-request-data="mode: 'update'">
+```html
+<form data-request="onUpdate" data-request-data="mode: 'update'">
+```
 
 Отправка параметра `id` со значением `7`:
 
-    <div data-request-data="id: 7">
-        <button data-request="onDelete">Delete</button>
-        <button data-request="onSave">Update</button>
-    </div>
+```html
+<div data-request-data="id: 7">
+    <button data-request="onDelete">Delete</button>
+    <button data-request="onSave">Update</button>
+</div>
+```
 
 <a name="javascript-api"></a>
 ## JavaScript API
@@ -135,8 +159,10 @@ JavaScript API является более мощным инструментом
 
 Метод `request()` имеет один обязательный параметр - имя обработчика. Пример:
 
-    <form onsubmit="$(this).request('onProcess'); return false;">
-        ...
+```html
+<form onsubmit="$(this).request('onProcess'); return false;">
+    ...
+```
 
 Второй параметр метода `request()` - объект с настройками. Вы можете использовать любые настройки и методы, которые совместимы с [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). Следующие параметры используются Октябрем:
 
@@ -156,57 +182,73 @@ JavaScript API является более мощным инструментом
 
 Подтверждение запроса:
 
-    $('form').request('onDelete', {
-        confirm: 'Are you sure?',
-        redirect: '/dashboard'
-    })
+```js
+$('form').request('onDelete', {
+    confirm: 'Are you sure?',
+    redirect: '/dashboard'
+})
+```
 
 Вызов обработчика `onCalculate` и обновление элемента страницы **result** с фрагментом **calcresult**:
 
-    $('form').request('onCalculate', {
-        update: {calcresult: '.result'}
-    })
+```js
+$('form').request('onCalculate', {
+    update: {calcresult: '.result'}
+})
+```
 
 Вызов обработчика `onCalculate` с дополнительной информацией:
 
-    $('form').request('onCalculate', {data: {value: 55}})
+```js
+$('form').request('onCalculate', {data: {value: 55}})
+```
 
 Вызов обработчика `onCalculate` и выполнение некоторой функции перед обновлением элемента:
 
-    $('form').request('onCalculate', {
-        update: {calcresult: '.result'},
-        beforeUpdate: function() { /* do something */ }
-    })
+```js
+$('form').request('onCalculate', {
+    update: {calcresult: '.result'},
+    beforeUpdate: function() { /* do something */ }
+})
+```
 
 Вызов обработчика `onCalculate`. При успешном результате происходит выполнение некоторой функции и обновление элемента страницы:
 
-    $('form').request('onCalculate', {success: function(data) {
-        //... do something ...
-        this.success(data);
-    }})
+```js
+$('form').request('onCalculate', {success: function(data) {
+    //... do something ...
+    this.success(data);
+}})
+```
 
 Выполнение запроса без использования формы:
 
-    $.request('onCalculate', {
-        success: function() {
-            console.log('Finished!');
-        }
-    })
+```js
+$.request('onCalculate', {
+    success: function() {
+        console.log('Finished!');
+    }
+})
+```
 
 Вызов обработчика `onCalculate`. При успешном результате происходит выполнение некоторой функции после вызова функции `success`:
 
-    $('form').request('onCalculate', {success: function(data) {
-        this.success(data).done(function() {
-            //... do something after parent success() is finished ...
-        });
-    }})
+```js
+$('form').request('onCalculate', {success: function(data) {
+    this.success(data).done(function() {
+        //... do something after parent success() is finished ...
+    });
+}})
+```
 
 <a name="components-ajax-handlers"></a>
 ## Вызов обработчика AJAX из компонента
 
 If you need to issue a request to an AJAX handler defined in a [component](components.md) attached to a page or layout, you should prefix the handler name with the component short name or [alias](components.md#aliases). The next example demonstrates how to invoke the **onCalculate** AJAX handler defined in the imaginary **calculator** component:
 
-    <form data-request="calculator::onCalculate" data-request-update="calcresult: '#result'">
+```html
+<form data-request="calculator::onCalculate" data-request-update="calcresult: '#result'">
+```
 
 <a name="global-events"></a>
 ## Глобальные события AJAX
@@ -226,48 +268,57 @@ If you need to issue a request to an AJAX handler defined in a [component](compo
 
 Пример выполнения JavaScript кода при вызове события `ajaxUpdate`:
 
-    $('.calcresult').on('ajaxUpdate', function() {
-        console.log('Updated!');
-    })
+```js
+$('.calcresult').on('ajaxUpdate', function() {
+    console.log('Updated!');
+})
+```
 
 <a name="returning-data-from-handlers"></a>
 ## Возвращение данных из обработчика
 
 В большинстве случаев Вам может понадобиться вернуть данные из обработчика. Если он вернет массив, то Вы можете получить к нему доступ в обработчике события `success` в javascript коде. Пример:
 
-    function onFetchDataFromServer()
-    {
-        /* Something server-side code */
+```php
+function onFetchDataFromServer()
+{
+    /* Something server-side code */
 
-        return [
-            'totalUsers' => 1000,
-            'totalProjects' => 937
-        ];
-    }
+    return [
+        'totalUsers' => 1000,
+        'totalProjects' => 937
+    ];
+}
+```
 
 Data attributes API:
 
-    <form data-request="onHandleForm" data-request-success="console.log(data)">
+```html
+<form data-request="onHandleForm" data-request-success="console.log(data)">
+```
 
 JavaScript API:
 
-    <form
-        onsubmit="$(this).request('onHandleForm', {
-            success: function(data) {
-                console.log(data);
-            }
-        }); return false;">
+```js
+<form
+    onsubmit="$(this).request('onHandleForm', {
+        success: function(data) {
+            console.log(data);
+        }
+    }); return false;">
+```
 
 <a name="redirections-in-handlers"></a>
 ## Перенаправление в обработчике
 
 Если Вы хотите перенаправить пользователя на другую страницу, то необходимо вернуть объект `Redirect` из обработчика. Пример:
 
-    function onRedirectMe()
-    {
-        return Redirect::to('http://google.com');
-    }
-
+```php
+function onRedirectMe()
+{
+    return Redirect::to('http://google.com');
+}
+```
 
 <a name="pushing-content-updates"></a>
 ## Сообщения
@@ -276,9 +327,11 @@ AJAX обработчики могут заменить содержимое э�
 
 Для этого необходимо вернуть массив, в котором ключ - HTML элемент, а значение - новое содержимое. Пример:
 
-    function onFlash()
-    {
-        return ['#flashMessages' => $this->renderPartial('flash-messages')];
-    }
+```php
+function onFlash()
+{
+    return ['#flashMessages' => $this->renderPartial('flash-messages')];
+}
+```
 
 > **Примечание:** Имя ключа должно начинаться с идентификатора `#` или класса `.`.

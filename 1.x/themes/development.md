@@ -121,7 +121,7 @@ fields:
 
 ### Combiner variables
 
-Assets combined using the `| theme` [filter and combiner](../markup/filter-theme.md) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+Assets combined using the `|theme` [filter and combiner](../markup/filter-theme.md) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
 ```yaml
 form:
@@ -137,7 +137,7 @@ form:
 In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
 
 ```twig
-<link href="{{ ['assets/less/theme.less'] | theme }}" rel="stylesheet">
+<link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet">
 ```
 
 Using some example content inside **themes/yourtheme/assets/less/theme.less**:

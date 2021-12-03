@@ -207,7 +207,7 @@ October includes a number of utility commands.
 php artisan october:mirror public
 ```
 
->**Note:** By default the symlinks created will be absolute symlinks, to create them as relative symlinks instead include the `--relative` option:
+> **Note**: By default the symlinks created will be absolute symlinks, to create them as relative symlinks instead include the `--relative` option:
 
 ```bash
 php artisan october:mirror public --relative

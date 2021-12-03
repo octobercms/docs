@@ -195,12 +195,14 @@ Sometimes you may wish to pass a view into another view. For example, given a su
 
 The sub-view can then be rendered from the parent view:
 
-    <html>
-        <body>
-            <h1>Hello!</h1>
-            {{ child|raw }}
-        </body>
-    </html>
+```twig
+<html>
+    <body>
+        <h1>Hello!</h1>
+        {{ child|raw }}
+    </body>
+</html>
+```
 
 #### Determining if a view exists
 
