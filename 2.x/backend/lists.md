@@ -202,15 +202,6 @@ The above example would look for the value in PHP equivalent of `$record->conten
 ## Available Column Types
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
-<style>
-    .collection-method-list {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-    .collection-method-list a {
-        display: block;
-    }
-</style>
 
 <div class="content-list collection-method-list" markdown="1">
 
@@ -599,17 +590,6 @@ public function getCityOptions($scopes = null)
 ### Available Scope Types
 
 These types can be used to determine how the filter scope should be displayed.
-
-<style>
-    .collection-method-list {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
 
 <div class="content-list collection-method-list" markdown="1">
 

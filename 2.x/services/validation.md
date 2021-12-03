@@ -164,17 +164,6 @@ You may then access the named `MessageBag` instance from the `$errors` variable:
 
 Below is a list of all available validation rules and their function:
 
-<style>
-    .collection-method-list {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
 <div class="content-list collection-method-list" markdown="1">
 
 - [Accepted](#rule-accepted)

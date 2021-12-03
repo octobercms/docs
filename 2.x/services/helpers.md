@@ -2,17 +2,6 @@
 
 October CMS includes a variety of "helper" PHP functions. Many of these functions are used internally by October itself, however, you are free to use them in your own plugins and applications if you find them useful.
 
-<style>
-    .collection-method-list > p {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
 ### Arrays
 
 <div class="collection-method-list" markdown="1">

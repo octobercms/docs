@@ -273,17 +273,6 @@ tabs:
 
 There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#available-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
-<style>
-    .collection-method-list {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
 <div class="content-list collection-method-list" markdown="1">
 
 - [Text](#field-text)

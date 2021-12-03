@@ -33,17 +33,6 @@ For the remainder of this documentation, we'll discuss each method available on 
 
 You may select any method from this table to see an example of its usage:
 
-<style>
-    .collection-method-list > p {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
 <div class="collection-method-list" markdown="1">
 
 [all](#method-all)
