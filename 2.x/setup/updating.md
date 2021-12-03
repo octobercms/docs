@@ -12,9 +12,9 @@ Please observe the following guides when performing the upgrade.
 
 If want to upgrade a v1 website to use v2, you may use the [official deployment plugin](https://octobercms.com/plugin/rainlab-deploy) as a solution to upgrading your website. Always **take a complete site backup** before performing these steps.
 
-1. Install October CMS v2 locally on your machine
-1. Deploy the Beacon files to the v1 site you want to upgrade
-1. The Deploy plugin will attempt to upgrade the site
+1. Install or upgrade to October CMS v2 locally on your machine
+2. Deploy the Beacon files to the v1 site you want to upgrade
+3. The Deploy plugin will attempt to upgrade the site during its first deployment
 
 ## Bleeding Edge Updates
 
