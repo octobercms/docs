@@ -221,6 +221,7 @@ There are various column types that can be used for the **type** setting, these 
 - [Colorpicker](#column-colorpicker)
 
 </div>
+<a name="column-text"></a>
 
 ### Text
 
@@ -232,6 +233,7 @@ full_name:
     type: text
 ```
 
+<a name="column-image"></a>
 ### Image
 
 `image` - displays an image column with the option to resize the output.
@@ -249,6 +251,7 @@ avatar:
 
 See the [image resizing article](../services/resizer.md#resize-parameters) for more information on what options are supported.
 
+<a name="column-number"></a>
 ### Number
 
 `number` - displays a number column, aligned right
@@ -270,6 +273,7 @@ price:
 
 > **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
 
+<a name="column-switch"></a>
 ### Switch
 
 `switch` - displays a on or off state for boolean columns.
@@ -280,6 +284,7 @@ enabled:
     type: switch
 ```
 
+<a name="column-datetime"></a>
 ### Date & Time
 
 `datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
@@ -310,6 +315,7 @@ created_at:
 
 > **Note**: the `useTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
+<a name="column-date"></a>
 ### Date
 
 `date` - displays the column value as date format **M j, Y**.
@@ -331,6 +337,7 @@ created_at:
 
 > **Note**: the `date` and `time` columns do not apply backend timezone conversions by default since a date and time are both required for the conversion.
 
+<a name="column-time"></a>
 ### Time
 
 `time` - displays the column value as time format **g:i A**.
@@ -341,6 +348,7 @@ created_at:
     type: time
 ```
 
+<a name="column-timesince"></a>
 ### Time Since
 
 `timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
@@ -351,6 +359,7 @@ created_at:
     type: timesince
 ```
 
+<a name="column-timetense"></a>
 ### Time Tense
 
 `timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
@@ -361,6 +370,7 @@ created_at:
     type: timetense
 ```
 
+<a name="column-select"></a>
 ### Select
 
 `select` - allows to create a column using a custom select statement. Any valid SQL SELECT statement works here.
@@ -371,6 +381,7 @@ full_name:
     select: concat(first_name, ' ', last_name)
 ```
 
+<a name="column-selectable"></a>
 ### Selectable
 
 `selectable` - takes the column value and matches it to the value in the record's available options. Take the following array as an example, if the record value is set to `open` then the **Open** value is displayed in the column.
@@ -398,6 +409,7 @@ status:
         active: Active
 ```
 
+<a name="column-relation"></a>
 ### Relation
 
 `relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations.md) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
@@ -421,6 +433,7 @@ users_count:
 
 > **Note**: Be careful not to name relations the same as existing database columns. For example, using a name `group_id` could break the group relation due to a naming conflict.
 
+<a name="column-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name.
@@ -440,6 +453,7 @@ Inside the partial these variables are available: `$value` is the default cell v
 <?php endif ?>
 ```
 
+<a name="column-colorpicker"></a>
 ### Color Picker
 
 `colorpicker` - displays a color from colorpicker column
@@ -603,6 +617,7 @@ These types can be used to determine how the filter scope should be displayed.
 - [Text](#filter-text)
 
 </div>
+<a name="filter-group"></a>
 
 ### Group
 
@@ -622,6 +637,7 @@ status:
         closed: Closed
 ```
 
+<a name="filter-checkbox"></a>
 ### Checkbox
 
 `checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
@@ -634,6 +650,7 @@ published:
     conditions: is_published <> true
 ```
 
+<a name="filter-switch"></a>
 ### Switch
 
 `switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
@@ -648,6 +665,7 @@ approved:
         - is_approved = true
 ```
 
+<a name="filter-date"></a>
 ### Date
 
 `date` - displays a date picker for a single date to be selected. The values available to be used in the conditions property are:
@@ -666,6 +684,7 @@ created_at:
     conditions: created_at >= ':filtered'
 ```
 
+<a name="filter-daterange"></a>
 ### Date Range
 
 `daterange` - displays a date picker for two dates to be selected as a date range. The values available to be used in the conditions property are:
@@ -724,6 +743,7 @@ You may also wish to set `useTimezone: false` to prevent a timezone conversion b
 > **Note**: the `useTimezone` option also applies to the `date` filter type as well.
 -->
 
+<a name="filter-number"></a>
 ### Number
 
 `number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
@@ -736,6 +756,7 @@ age:
     conditions: age >= ':filtered'
 ```
 
+<a name="filter-numberrange"></a>
 ### Number Range
 
 `numberrange` - displays inputs for two numbers to be entered as a number range. The values available to be used in the conditions property are:
@@ -755,6 +776,7 @@ visitors:
     conditions: visitors >= ':min' and visitors <= ':max'
 ```
 
+<a name="filter-text"></a>
 ### Text
 
 `text` - display text input for a string to be entered. You may specify a `size` attribute that will be injected in the input size attribute (default: 10).
@@ -971,7 +993,7 @@ You may also extend the filter scopes internally to the controller class, simply
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function listFilterExtendScopes($filter)
     {

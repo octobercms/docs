@@ -337,13 +337,6 @@ You may instruct the relation manager to render in read only mode by passing the
 
 Sometimes you may wish to modify the default relation behavior and there are several ways you can do this.
 
-- [Extending Relation Configuration](#extend-relation-config)
-- [Extending the View Widget](#extend-view-widget)
-- [Extending the Manage Widget](#extend-manage-widget)
-- [Extending the Pivot Widget](#extend-pivot-widget)
-- [Extending the Filter Widgets](#extend-filter-widgets)
-- [Extending Refresh Results](#extend-refresh-results)
-
 ### Extending Relation Configuration
 
 Provides an opportunity to manipulate the relation configuration. The following example can be used to inject a different columns.yaml file based on a property of your model.

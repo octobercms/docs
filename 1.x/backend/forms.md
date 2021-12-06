@@ -266,6 +266,7 @@ There are various native field types that can be used for the **type** setting. 
 
 </div>
 
+<a name="field-text"></a>
 ### Text
 
 `text` - renders a single line text box. This is the default type used if none is specified.
@@ -274,6 +275,7 @@ There are various native field types that can be used for the **type** setting. 
         label: Blog Title
         type: text
 
+<a name="field-number"></a>
 ### Number
 
 `number` - renders a single line text box that takes numbers only.
@@ -296,6 +298,7 @@ If you would like to validate this field server-side on save to ensure that it i
 
 For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
 
+<a name="field-password"></a>
 ### Password
 
 `password ` - renders a single line password field.
@@ -304,6 +307,7 @@ For more information on model validation, please visit [the documentation page](
         label: Password
         type: password
 
+<a name="field-email"></a>
 ### Email
 
 `email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
@@ -323,6 +327,7 @@ If you would like to validate this field on save to ensure that it is a properly
 
 For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
 
+<a name="field-textarea"></a>
 ### Textarea
 
 `textarea` - renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
@@ -332,6 +337,7 @@ For more information on model validation, please visit [the documentation page](
         type: textarea
         size: large
 
+<a name="field-dropdown"></a>
 ### Dropdown
 
 `dropdown` - renders a dropdown with specified options. There are 6 ways to provide the drop-down options.
@@ -450,6 +456,7 @@ By default the dropdown has a searching feature, allowing quick selection of a v
         type: dropdown
         showSearch: false
 
+<a name="field-radio"></a>
 ### Radio List
 
 `radio` - renders a list of radio options, where only one item can be selected at a time.
@@ -475,6 +482,7 @@ Radio lists can also support a secondary description.
 
 Radio lists support the same methods for defining the options as the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
 
+<a name="field-balloon"></a>
 ### Balloon Selector
 
 `balloon-selector` - renders a list, where only one item can be selected at a time.
@@ -489,6 +497,7 @@ Radio lists support the same methods for defining the options as the [dropdown f
 
 Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
 
+<a name="field-checkbox"></a>
 ### Checkbox
 
 `checkbox` - renders a single checkbox.
@@ -498,6 +507,7 @@ Balloon selectors support the same methods for defining the options as the [drop
         type: checkbox
         default: true
 
+<a name="field-checkboxlist"></a>
 ### Checkbox List
 
 `checkboxlist` - renders a list of checkboxes.
@@ -516,6 +526,7 @@ Balloon selectors support the same methods for defining the options as the [drop
 
 Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
 
+<a name="field-switch"></a>
 ### Switch
 
 `switch` - renders a switchbox.
@@ -527,6 +538,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         on: myauthor.myplugin::lang.models.mymodel.show_content.on
         off: myauthor.myplugin::lang.models.mymodel.show_content.off
 
+<a name="field-section"></a>
 ### Section
 
 `section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
@@ -536,6 +548,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: section
         comment: This section contains details about the user.
 
+<a name="field-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
@@ -544,6 +557,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: partial
         path: $/acme/blog/models/comments/_content_field.htm
 
+<a name="field-hint"></a>
 ### Hint
 
 `hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
@@ -552,6 +566,7 @@ Checkbox lists support the same methods for defining the options as the [dropdow
         type: hint
         path: content_field
 
+<a name="field-widget"></a>
 ### Widget
 
 `widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
@@ -582,6 +597,7 @@ There are various form widgets included as standard, although it is common for p
 - [Tag list](#widget-taglist)
 
 </div>
+<a name="widget-codeeditor"></a>
 
 ### Code editor
 
@@ -599,6 +615,7 @@ Option | Description
 **wrapWords** | breaks long lines on to a new line. Default true.
 **fontSize** | the text font size. Default: 12.
 
+<a name="widget-colorpicker"></a>
 ### Color picker
 `colorpicker` - renders controls to select a hexadecimal color value.
 
@@ -634,6 +651,7 @@ Supplying the available colors in the model class:
 
 If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors.
 
+<a name="widget-datatable"></a>
 ### Data table
 
 `datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.
@@ -716,6 +734,7 @@ Validation | Description
 **regex** | Validates the data against a regular expression. A string `pattern` attribute must be provided, defining the regular expression to test the data against.
 **required** | Validates that the data must be entered before saving.
 
+<a name="widget-datepicker"></a>
 ### Date picker
 
 `datepicker` - renders a text field used for selecting date and times.
@@ -735,6 +754,7 @@ Option | Description
 **showWeekNumber** | show week numbers at head of row. Default: false
 **ignoreTimezone** | store date and time exactly as it is displayed, ignoring the backend specified timezone preference.
 
+<a name="widget-fileupload"></a>
 ### File upload
 
 `fileupload` - renders a file uploader for images or regular files.
@@ -770,6 +790,7 @@ Option | Description
 
 > **Note:** Unlike the [Media Finder FormWidget](#mediafinder), the File Upload FormWidget uses [database file attachments](../database/attachments.md); so the field name must match a valid `attachOne` or `attachMany` relationship on the Model associated with the Form. **IMPORTANT:** Having a database column with the name used by this field type (i.e. a database column with the name of an existing `attachOne` or `attachMany` relationship) **will** cause this FormWidget to break. Use database columns with the Media Finder FormWidget and file attachment relationships with the File Upload FormWidget.
 
+<a name="widget-markdowneditor"></a>
 ### Markdown editor
 
 `markdown` - renders a basic editor for markdown formatted text.
@@ -783,6 +804,7 @@ Option | Description
 ------------- | -------------
 **mode** | the expected view mode, either tab or split. Default: tab.
 
+<a name="widget-mediafinder"></a>
 ### Media finder
 
 `mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
@@ -801,6 +823,7 @@ Option | Description
 
 > **Note:** Unlike the [File Upload FormWidget](#file-upload), the Media Finder FormWidget stores its data as a string representing the path to the image selected within the Media Library.
 
+<a name="widget-nestedform"></a>
 ### Nested Form
 `nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained.
 
@@ -844,6 +867,7 @@ Option | Description
 **form**  | same as in [form definition](#defining-form-fields)
 **usePanelStyles** | defines if a panel like look is applied or not (defaults true)
 
+<a name="widget-recordfinder"></a>
 ### Record finder
 
 `recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.
@@ -881,6 +905,7 @@ Option | Description
 **useRelation** | Flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
 **modelClass** | Class of the model to use for listing records when useRelation = false
 
+<a name="widget-relation"></a>
 ### Relation
 
 `relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
@@ -907,6 +932,7 @@ Option | Description
 **emptyOption** | text to display when there is no available selections.
 **scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always.
 
+<a name="widget-repeater"></a>
 ### Repeater
 
 `repeater` - renders a repeating set of form fields defined within.
@@ -992,6 +1018,7 @@ The `style` attribute of the repeater widget controls the behaviour of repeater 
 - **collapsed:** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
 - **accordion:** Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
 
+<a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
 
 `richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
@@ -1011,6 +1038,7 @@ The available toolbar buttons are:
 
 > **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
 
+<a name="widget-sensitive"></a>
 ### Sensitive
 
 `sensitive` - renders a revealable password field that can be used for sensitive information such as API keys or secrets, configuration values, etc. A sensitive field can be toggled visible and hidden at the user's request.
@@ -1028,6 +1056,7 @@ Option | Description
 **hiddenPlaceholder** | sets the placeholder text that is used to simulate a hidden, unrevealed value. You can change this to a long or short string to emulate different length values. Default: `__hidden__`
 **hideOnTabChange** | if true, the sensitive field will automatically be hidden if the user navigates to a different tab, or minimizes their browser. Default: true
 
+<a name="widget-taglist"></a>
 ### Tag list
 
 `taglist` - renders a field for inputting a list of tags.

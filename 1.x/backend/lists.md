@@ -174,6 +174,7 @@ There are various column types that can be used for the **type** setting, these 
 
 </div>
 
+<a name="column-text"></a>
 ### Text
 
 `text` - displays a text column, aligned left
@@ -189,6 +190,7 @@ You can also specify a custom text format, for example **Admin:Full Name (active
         type: text
         format: Admin:%s (active)
 
+<a name="column-image"></a>
 ### Image
 
 `image` - displays an image using the built in [image resizing functionality](../services/image-resizing.md#resize-sources).
@@ -204,6 +206,7 @@ You can also specify a custom text format, for example **Admin:Full Name (active
 
 See the [image resizing docs](../services/image-resizing.md#resize-sources) for more information on what image sources are supported and what [options](../services/image-resizing.md#resize-parameters) are supported
 
+<a name="column-number"></a>
 ### Number
 
 `number` - displays a number column, aligned right
@@ -221,6 +224,7 @@ You can also specify a custom number format, for example currency **$ 99.00**
 
 > **Note:** Both `text` and `number` columns support the `format` property, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php). Value must be a string.
 
+<a name="column-switch"></a>
 ### Switch
 
 `switch` - displays a on or off state for boolean columns.
@@ -229,6 +233,7 @@ You can also specify a custom number format, for example currency **$ 99.00**
         label: Enabled
         type: switch
 
+<a name="column-datetime"></a>
 ### Date & Time
 
 `datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
@@ -253,6 +258,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
 
 > **Note:** the `ignoreTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
+<a name="column-date"></a>
 ### Date
 
 `date` - displays the column value as date format **M j, Y**
@@ -261,6 +267,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Date
         type: date
 
+<a name="column-time"></a>
 ### Time
 
 `time` - displays the column value as time format **g:i A**
@@ -269,6 +276,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Date
         type: time
 
+<a name="column-timesince"></a>
 ### Time since
 
 `timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
@@ -277,6 +285,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Date
         type: timesince
 
+<a name="column-timetense"></a>
 ### Time tense
 
 `timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
@@ -285,6 +294,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Date
         type: timetense
 
+<a name="column-select"></a>
 ### Select
 
 `select` - allows to create a column using a custom select statement. Any valid SQL SELECT statement works here.
@@ -293,6 +303,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         label: Full Name
         select: concat(first_name, ' ', last_name)
 
+<a name="column-relation"></a>
 ### Relation
 
 `relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations.md) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
@@ -326,6 +337,7 @@ To display a column that shows the number of related records, use the `useRelati
         relation: group
         select: name
 
+<a name="column-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name. Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`.
@@ -335,6 +347,7 @@ To display a column that shows the number of related records, use the `useRelati
         type: partial
         path: ~/plugins/acme/blog/models/comment/_content_column.htm
 
+<a name="column-colorpicker"></a>
 ### Color Picker
 
 `colorpicker` - displays a color from colorpicker column
@@ -492,6 +505,7 @@ These types can be used to determine how the filter scope should be displayed.
 
 </div>
 
+<a name="filter-group"></a>
 ### Group
 
 `group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
@@ -508,6 +522,7 @@ These types can be used to determine how the filter scope should be displayed.
             active: Active
             closed: Closed
 
+<a name="filter-checkbox"></a>
 ### Checkbox
 
 `checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
@@ -518,6 +533,7 @@ These types can be used to determine how the filter scope should be displayed.
         default: 1
         conditions: is_published <> true
 
+<a name="filter-switch"></a>
 ### Switch
 
 `switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
@@ -530,6 +546,7 @@ These types can be used to determine how the filter scope should be displayed.
             - is_approved <> true
             - is_approved = true
 
+<a name="filter-date"></a>
 ### Date
 
 `date` - displays a date picker for a single date to be selected. The values available to be used in the conditions property are:
@@ -546,6 +563,7 @@ These types can be used to determine how the filter scope should be displayed.
         yearRange: 10
         conditions: created_at >= ':filtered'
 
+<a name="filter-daterange"></a>
 ### Date Range
 
 `daterange` - displays a date picker for two dates to be selected as a date range. The values available to be used in the conditions property are:
@@ -600,6 +618,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
 
 > **Note:** the `ignoreTimezone` option also applies to the `date` filter type as well.
 
+<a name="filter-number"></a>
 ### Number
 
 `number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
@@ -610,6 +629,7 @@ You may also wish to set `ignoreTimezone: true` to prevent a timezone conversion
         default: 14
         conditions: age >= ':filtered'
 
+<a name="filter-numberrange"></a>
 ### Number Range
 
 `numberrange` - displays inputs for two numbers to be entered as a number range. The values available to be used in the conditions property are:
@@ -627,6 +647,7 @@ You may leave either the minimum value blank to search everything up to the maxi
             1: 20
         conditions: visitors >= ':min' and visitors <= ':max'
 
+<a name="filter-text"></a>
 ### Text
 
 `text` - display text input for a string to be entered. You can specify a `size` attribute that will be injected in the input size attribute (default: 10).
