@@ -42,10 +42,11 @@ php artisan project:set <license key>
 
 If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
 
-You can setup this protection in the file location `config/system.php` in the section titled **Default Permission Mask**.
+You can setup this protection in the file location `config/system.php` in the section titled **Default Permission Mask** or via the environment variables below.
 
-```php
-'default_mask' => ['file' => '644', 'folder' => '755'],
+```
+DEFAULT_FILE_MASK=644
+DEFAULT_FOLDER_MASK=755
 ```
 
 > **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your control panel and set them.
