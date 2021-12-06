@@ -597,8 +597,8 @@ There are various form widgets included as standard, although it is common for p
 - [Tag list](#widget-taglist)
 
 </div>
-<a name="widget-codeeditor"></a>
 
+<a name="widget-codeeditor"></a>
 ### Code editor
 
 `codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
@@ -617,6 +617,7 @@ Option | Description
 
 <a name="widget-colorpicker"></a>
 ### Color picker
+
 `colorpicker` - renders controls to select a hexadecimal color value.
 
     color:

@@ -753,6 +753,7 @@ Option | Description
 
 <a name="widget-colorpicker"></a>
 ### Color Picker
+
 `colorpicker` - renders controls to select a hexadecimal color value.
 
 ```yaml

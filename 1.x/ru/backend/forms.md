@@ -462,6 +462,7 @@ Option | Description
 
 <a name="widget-colorpicker"></a>
 ### Color picker
+
 `colorpicker` - renders controls to select a hexadecimal color value.
 
     color:
