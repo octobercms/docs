@@ -4,7 +4,7 @@ October CMS provides features for sorting and reordering database records. For b
 
 ## Configuring a Behavior
 
-The [List Behavior](../backend/lists.md) backend behavior currently support the option to reorder records using the **structure** option in the relevant definition. When defined, the page displays a list of records with a drag handle allowing them to be sorted and restructured.
+The [List Behavior](../backend/lists.md) and [Relation Behavior](../backend/relations.md) backend behaviors currently support the option to reorder records using the **structure** option in the relevant definition. When defined, the page displays a list of records with a drag handle allowing them to be sorted and restructured.
 
 ```yaml
 # ===================================
@@ -70,3 +70,42 @@ class User extends Model
 ```
 
 Read more about the [Sortable trait in the database documentation](../database/traits.md#sortable).
+
+## Sorting Related Records
+
+Sorting related records is possible using the [Relation Behavior](../backend/relations.md) and the supported relation types are listed below.
+
+- [Has Many](../database/relations.md#one-to-many) uses the `Sortable` trait on the related model.
+- [Belongs To Many](../database/relations.md#many-to-many) uses the `SortableRelation` trait on the parent model (see below).
+
+### Sortable Relation Model
+
+Use the `SortableRelation` trait when records need to be sorted inside a pivot table, such as a [Belongs To Many](database/relations.md#many-to-many) relation type. This trait requires the `pivotSortable` option to be defined in the relationship where the value is the sortable column name found in the pivot table.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\SortableRelation;
+
+    /**
+     * @var array belongsToMany
+     */
+    public $belongsToMany = [
+        'roles' => [
+            Role::class,
+            'table' => 'users_roles',
+            'pivotSortable' => 'sort_order',
+        ]
+    ];
+}
+```
+
+Then inside your relation configuration, you should enable the `showReorder` option and disable the `showTree` option.
+
+```yaml
+roles:
+    #...
+    structure:
+        showReorder: true
+        showTree: false
+```
