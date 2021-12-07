@@ -19,3 +19,7 @@
     title: Markup Guide
     icon: "/images/markup-guide.svg"
     link: "/2.x/markup/"
+-
+    title: API Docs
+    icon: "/images/markup-guide.svg"
+    link: "https://octobercms.com/docs/api"
