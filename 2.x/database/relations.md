@@ -47,7 +47,6 @@ Argument | Description
 **push** | if set to false, this relation will not be saved via `push`, default: true.
 **delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
 **detach** | used by the `belongsToMany` relationships only, if set to false, the related model will be not be detached if the primary model is deleted or relationship is destroyed, default: true.
-**relationClass** | specify a custom class name for the related object.
 
 Example filter using **order** and **conditions** parameters.
 
@@ -82,35 +81,6 @@ class Category extends Model
     }
 }
 ```
-
-The **scope** parameter can also refer to a static method.
-
-```php
-public $belongsToMany = [
-    'categories' => [
-        \Acme\Blog\Models\Category::class,
-        'scope' => [self::class, 'myFilterMethod']
-    ]
-];
-
-public static myFilterMethod($query, $related, $parent)
-{
-    // ...
-}
-```
-
-Example implementation using the **relationClass** parameter.
-
-```php
-public $belongsToMany = [
-    'users' => [
-        \Backend\Models\User::class,
-        'relationClass' => \Backend\Classes\MyBelongsToMany::class
-    ]
-];
-```
-
-> **Note**: The `relationClass` should inherit the class of the specified type. For example, when using `belongsTo` the class must inherit `October\Rain\Database\Relations\BelongsTo`.
 
 ## Relationship Types
 
@@ -424,7 +394,6 @@ Argument | Description
 **relatedKey** | the key column name of the related model (inside related model table). Default: id
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot` while for polymorphic relation `October\Rain\Database\MorphPivot`.
-**pivotSortable** | specify a sort order column for the pivot table, used in combination with the [`SortableRelation` trait](../backend/reorder.md#sortable-relation-model).
 **timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
 
 ### Has Many Through
