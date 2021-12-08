@@ -88,7 +88,7 @@ form:
             default: My Amazing Site!
 ```
 
-> **Note**: If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following.
+> **Note**: If using nested fields with array syntax (`contact[name]`, `contact[email]` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following.
 
 ```php
 \Cms\Models\ThemeData::extend(function ($model) {
@@ -169,7 +169,7 @@ Themes can provide backend localization keys through files placed in the **lang*
 
 > **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) plugin.
 
-### Localization directory and file structure
+### Localization File Structure
 
 Below is an example of the theme's lang directory:
 
@@ -186,7 +186,7 @@ themes/
 The **lang.php** file should define and return an array of any depth, for example:
 
 ```php
-<?php return [
+return [
     'options' => [
         'website_name' => 'October CMS'
     ]
