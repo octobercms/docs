@@ -88,14 +88,6 @@ form:
             default: My Amazing Site!
 ```
 
-> **Note**: If using nested fields with array syntax (`contact[name]`, `contact[email` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following.
-
-```php
-\Cms\Models\ThemeData::extend(function ($model) {
-    $model->addJsonable('contact');
-});
-```
-
 The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup.md#default-variables) called `this.theme`.
 
 ```twig
@@ -111,7 +103,7 @@ name: My Theme
 form: config/fields.yaml
 ```
 
-**config/fields.yaml**:
+**themes/demo/config/fields.yaml**:
 
 ```yaml
 fields:
