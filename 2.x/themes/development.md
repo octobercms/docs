@@ -70,6 +70,21 @@ themes/
 
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
 
+## Theme Dependencies
+
+A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information-file), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
+
+```yaml
+name: "October CMS Demo"
+# [...]
+
+require:
+    - "Acme.User"
+    - "Acme.Blog"
+```
+
+When the theme is installed for the first time, the system will attempt to install the required plugins at the same time. For a streamlined experience, consider [adding these plugins to the composer depedency list](../help/publishing-packages.md#declaring-dependencies) as well.
+
 ## Theme Customization
 
 Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms.md#defining-form-fields) for more information.
@@ -113,9 +128,9 @@ fields:
         default: My Amazing Site!
 ```
 
-### Combiner Variables
+### Using Theme Data In CSS
 
-Assets combined using the `|theme` [filter and combiner](../markup/filter-theme.md) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+Sometimes you want to include a visual preference inside your theme stylesheet. You may use CSS custom properties (variables) to make these values available. In the following example, we will use a [Color Picker field type](../backend/forms.md#color-picker) to specify a custom link color.
 
 ```yaml
 form:
@@ -125,35 +140,27 @@ form:
         link_color:
             label: Link color
             type: colorpicker
-            assetVar: 'link-color'
 ```
 
-In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
+Using the above example we can define a [CMS partial](../cms/partials.md) that passes the selected value to CSS using a local stylesheet. The partial is then included in the [theme layout](../cms/layouts.md) inside the `<head>` tag.
 
-```twig
-<link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet" />
+```html
+<style>
+    :root {
+        --my-color: {{ this.theme.link_color }};
+    }
+</style>
 ```
 
-Using some example content inside **themes/yourtheme/assets/less/theme.less**:
+> **Note**: Custom property names are case sensitive so `--my-color` will be treated as a separate custom property to `--My-color`.
 
-```less
-a { color: @link-color }
+Now inside your stylesheet the custom property can be used anywhere by specifying the custom property name inside the `var()` function, in place of a regular property value.
+
+```css
+a {
+    color: var(--my-color);
+}
 ```
-
-## Theme Dependencies
-
-A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information-file), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
-
-```yaml
-name: "October CMS Demo"
-# [...]
-
-require:
-    - "Acme.User"
-    - "Acme.Blog"
-```
-
-When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
 
 ## Localization
 
