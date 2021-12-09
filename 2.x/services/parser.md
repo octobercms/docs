@@ -29,7 +29,7 @@ You may also use the `|md` filter for [parsing Markdown in your front-end markup
 
 ### Using HTML in Markdown
 
-Markdown is a superset of HTML so you can combine HTML and Markdown in the same template. When Markdown encounters a HTML tag, the Markdown syntax will deactivate for all the content inside.
+Markdown is a superset of HTML so you can combine HTML and Markdown in the same template. When Markdown encounters an HTML tag, the Markdown syntax will deactivate for all the content inside.
 
 ```html
 <div>
