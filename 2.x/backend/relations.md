@@ -19,7 +19,7 @@ class Projects extends Controller
 }
 ```
 
-> **Note**: Very often the relation behavior is used together with the [form behavior](form.md).
+> **Note**: Very often the relation behavior is used together with the [form behavior](forms.md).
 
 ## Configuring the Relation Behavior
 

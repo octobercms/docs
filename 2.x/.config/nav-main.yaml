@@ -125,6 +125,7 @@
         - backend/reorder
         - backend/import-export
         - backend/users
+        - ['https://octobercms.com/docs/ui/form', 'UI Guide']
 -
     title: Database
     children:
