@@ -11,30 +11,29 @@ Plugins are the foundation for adding new features to the CMS by extending it. T
 
 ### Directory Structure
 
-Plugins reside in the **/plugins** subdirectory of the application directory. An example of a plugin directory structure:
+Plugins reside in the **plugins** subdirectory of the application directory. An example of a plugin directory structure:
 
-```
-plugins/
-  acme/            <=== Author Name
-    blog/          <=== Plugin Name
-      classes/
-      components/
-      controllers/
-      models/
-      updates/
-      ...
-      Plugin.php   <=== Plugin Registration File
-```
+::: dir
+├── `plugins`
+|   └── acme     _<== Author Name_
+|       └── blog _<== Plugin Name_
+|           ├── classes
+|           ├── components
+|           ├── controllers
+|           ├── models
+|           ├── updates
+|           └── Plugin.php _<== Registration File_
+:::
 
 Not all plugin directories are required. The only required file is the **Plugin.php** described below. If your plugin provides only a single [component](components.md), your plugin directory could be much simpler, like this:
 
-```
-plugins/
-  acme/            <=== Author Name
-    blog/          <=== Plugin Name
-      components/
-      Plugin.php   <=== Plugin Registration File
-```
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           ├── `components`
+|           └── Plugin.php
+:::
 
 > **Note**: if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
 

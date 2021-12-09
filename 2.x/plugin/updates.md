@@ -2,18 +2,19 @@
 
 It is good practice for plugins to maintain a change log that documents any changes or improvements in the code. In addition to writing notes about changes, this process has the useful ability to execute [migration and seed files](../database/structure.md) in their correct order.
 
-The change log is stored in a YAML file called `version.yaml` inside the **/updates** directory of a plugin, which co-exists with migration and seed files. This example displays a typical plugin updates directory structure:
+The change log is stored in a YAML file called `version.yaml` inside the **updates** directory of a plugin, which co-exists with migration and seed files. This example displays a typical plugin updates directory structure:
 
-```
-plugins/
-  author/
-    myplugin/
-      updates/                    <=== Updates Directory
-        version.yaml                <=== Plugin Version File
-        create_tables.php           <=== Database Scripts
-        seed_the_database.php       <=== Migration File
-        create_another_table.php    <=== Migration File
-```
+::: dir
+├── plugins
+|   └── author
+|       └── myplugin
+|           ├── `updates`
+|           |   ├── `version.yaml`     _<== Version File_
+|           |   ├── create_tables.php _<== Database Script_
+|           |   ├── seed_the_database.php
+|           |   └── create_another_table.php
+|           └── Plugin.php
+:::
 
 ## Update Process
 

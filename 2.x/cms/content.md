@@ -20,7 +20,7 @@ Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pag
 
 This example shows a complete page rendering a content block.
 
-```
+```twig
 url = "/contacts"
 ==
 <div class="contacts">

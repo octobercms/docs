@@ -4,13 +4,13 @@ Partials contain reusable chunks of code that are used anywhere throughout your 
 
 Partial templates files reside in the **partials** directory in your theme. Partial files should have the **htm** extension. Next is an example of the simplest possible partial.
 
-```
+```html
 <p>This is a partial</p>
 ```
 
 A [Configuration](themes.md#configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the backend user interface. This example shows a partial with a description defined.
 
-```
+```twig
 description = "Demo partial"
 ==
 <p>This is a partial</p>

@@ -290,14 +290,14 @@ Optionally, mail views can be [registered in the Plugin registration file](#regi
 
 Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file:
 
-```
-plugins/               <=== Plugins Directory
-  author/              <=== "author" Segment
-    plugin/            <=== "plugin" Segment
-      views/           <=== View Directory
-        mail/          <=== "mail" Segment
-          message.htm  <=== "message" Segment
-```
+::: dir
+├── plugins
+|   └── author       _<== "author" Segment_
+|       └── myplugin _<== "plugin" Segment_
+|           └── `views`
+|               └── mail            _<== "mail" Segment_
+|                   └── message.htm _<== "message" Segment_
+:::
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
 

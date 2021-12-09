@@ -4,7 +4,7 @@ Every website serves up at least one page and in October CMS, a page is represen
 
 The [Configuration](themes.md#configuration-section) and [Twig](themes.md#twig-section) template sections are required for pages, but the [PHP section](themes.md#php-section) is optional. Below, you can see the simplest home page example:
 
-```
+```twig
 url = "/"
 ==
 <h1>Hello, world!</h1>
@@ -40,12 +40,12 @@ url = "/blog/post/:post_id"
 
 This is how you can access the URL parameter from the page's PHP section (see the [Dynamic pages](#dynamic-pages) section for more details):
 
-```
+```php
 url = "/blog/post/:post_id"
 ==
 function onStart()
 {
-    $post_id = $this->param('post_id');
+    $postId = $this->param('post_id');
 }
 ==
 ```
@@ -105,7 +105,7 @@ Inside the [Twig section](themes.md#twig-section) of a page template, you can us
 
 There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components.md) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
 
-```
+```php
 url = "/"
 ==
 function onStart()
@@ -118,7 +118,7 @@ function onStart()
 
 The next example is more complicated. It shows how to load a blog post collection from the database, and display on the page (the Acme\Blog plugin is imaginary):
 
-```
+```php
 url = "/blog"
 ==
 use Acme\Blog\Classes\Post;

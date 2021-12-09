@@ -1,17 +1,17 @@
 # Building Components
 
-Components files and directories reside in the **/components** subdirectory of a plugin directory. Each component has a PHP file defining the component class and an optional component partials directory. The component partials directory name matches the component class name written in lowercase. An example of a component directory structure:
+Components files and directories reside in the **components** subdirectory of a plugin directory. Each component has a PHP file defining the component class and an optional component partials directory. The component partials directory name matches the component class name written in lowercase. An example of a component directory structure:
 
-```
-plugins/
-  acme/
-    myplugin/
-      components/
-        componentname/       <=== Partials Directory
-          default.htm        <=== Default Markup (optional)
-        ComponentName.php    <=== Class File
-      Plugin.php
-```
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           ├── `components`
+|           |   ├── blogposts       _<== Partials Directory_
+|           |   |   └── default.htm _<== Default Markup (Optional)_
+|           |   └── BlogPosts.php   _<== Component Class_
+|           └── Plugin.php
+:::
 
 Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents` method.
 

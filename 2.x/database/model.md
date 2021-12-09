@@ -4,17 +4,18 @@ October CMS provides a beautiful and simple Active Record implementation for wor
 
 Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
 
-```
-plugins/
-  acme/
-    blog/
-      models/
-      user/             <=== Config Directory
-        columns.yaml    <=== Config Files
-        fields.yaml     <==^
-      User.php          <=== Model Class
-      Plugin.php
-```
+
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           ├── `models`
+|           |   ├── post             _<== Config Directory_
+|           |   |   ├── fields.yaml  _<== Config File_
+|           |   |   └── columns.yaml _<== Config File_
+|           |   └── Post.php         _<== Model Class_
+|           └── Plugin.php
+:::
 
 The model configuration directory could contain the model's [list column](../backend/lists.md#defining-list-columns) and [form field](../backend/forms.md#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 

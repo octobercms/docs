@@ -6,11 +6,16 @@ The theme directory could include the **theme.yaml**, **version.yaml** and **ass
 
 The theme information file **theme.yaml** contains the theme description, the author name, URL of the author's website and some other information. The file should be placed to the theme root directory:
 
-```
-themes/
-  demo/
-    theme.yaml    <=== Theme Information File
-```
+::: dir
+├── themes
+|   └── website
+|       ├── pages
+|       ├── layouts
+|       ├── partials
+|       ├── content
+|       ├── assets
+|       └── `theme.yaml` _<== Information File_
+:::
 
 The following fields are supported in the **theme.yaml** file:
 
@@ -39,16 +44,17 @@ authorCode: "Acme"
 
 ## Version File
 
-The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory:
+The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory.
 
-```
-themes/
-  demo/
-    ...
-    version.yaml    <=== Theme Version File
-```
+::: dir
+├── themes
+|   └── website
+|       ├── ...
+|       └── theme.yaml
+|       └── `version.yaml` _<== Version File_
+:::
 
-The file format is following:
+The file contains the following format.
 
 ```yaml
 v1.0.1: Theme initialization
@@ -60,13 +66,14 @@ v1.0.3: Some features are removed
 
 The theme preview image is used in the back-end theme selector. The image file **theme-preview.png** should be placed to the theme's **assets/images** directory:
 
-```
-themes/
-  demo/
-    assets/
-      images/
-        theme-preview.png    <=== Theme Preview Image
-```
+::: dir
+├── themes
+|   └── website
+|       ├── ...
+|       └── assets
+|           └── images
+|               └── `theme-preview.png` _<== Preview Image_
+:::
 
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
 
@@ -170,17 +177,17 @@ Themes can provide backend localization keys through files placed in the **lang*
 
 ### Localization File Structure
 
-Below is an example of the theme's lang directory:
+Below is an example of the theme's language directory.
 
-```
-themes/
-  acme/           <=== Theme directory
-    lang/         <=== Localization directory
-      en/         <=== Language directory
-        lang.php  <=== Localization file
-      fr/
-        lang.php
-```
+::: dir
+├── themes
+|   └── website
+|       └── `lang` _<== Localization Directory_
+|           ├── en
+|           |   └── lang.php _<== Localization File_
+|           └── fr
+|               └── lang.php
+:::
 
 The **lang.php** file should define and return an array of any depth, for example:
 

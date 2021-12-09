@@ -4,18 +4,18 @@ The October CMS backend implements an Model-View-Controller (MVC) pattern. Contr
 
 Each controller is represented with a PHP script which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.htm` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
 
-```
-plugins/
-  acme/
-    blog/
-      controllers/
-        users/                <=== View Directory
-          _partial.htm        <=== Partial File
-          config_form.yaml    <=== Config File
-          index.htm           <=== View File
-        Users.php             <=== Controller Class
-        Plugin.php
-```
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           ├── `controllers`
+|           |   ├── users                _<== View Directory_
+|           |   |   ├── _partial.htm     _<== Partial File_
+|           |   |   ├── config_form.yaml _<== Config File_
+|           |   |   └── index.htm        _<== View File_
+|           |   └── Users.php            _<== Controller Class_
+|           └── Plugin.php
+:::
 
 > **Tip**: For a practical example of using backend controllers, check out the [Beyond Behaviors tutorial series](https://octobercms.com/support/article/ob-19).
 
@@ -26,8 +26,8 @@ Controller classes must extend the `\Backend\Classes\Controller` class. As any o
 ```php
 namespace Acme\Blog\Controllers;
 
-class Posts extends \Backend\Classes\Controller {
-
+class Posts extends \Backend\Classes\Controller
+{
     public function index()    // <=== Action method
     {
 

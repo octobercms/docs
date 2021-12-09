@@ -147,15 +147,15 @@ flashDelete | :name Deleted
 
 Form fields are defined with the YAML file. The form fields configuration is used by the form behavior for creating the form controls and binding them to the model fields. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but **fields.yaml** and **form_fields.yaml** are common names. Example form fields file location:
 
-```
-plugins/
-  acme/
-    blog/
-      models/            <=== Plugin Models Directory
-        post/            <=== Model Configuration Directory
-          fields.yaml    <=== Model Form Fields Config File
-        Post.php         <=== model Class
-```
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           └── `models`
+|               ├── post            _<== Config Directory_
+|               |   └── fields.yaml _<== Config File_
+|               └── Post.php        _<== Model Class_
+:::
 
 Fields can be placed in three areas, the **outside area**, **primary tabs** or **secondary tabs**. The next example shows the typical contents of a form fields definition file.
 

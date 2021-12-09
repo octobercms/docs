@@ -16,23 +16,23 @@ Object | Description
 
 Below, you can see an example theme directory structure. Each theme represents a separate directory, and generally, one theme is active to display the website. This example demonstrates the **website** theme directory.
 
-```
-themes/
-  website/           <=== Theme Starts Here
-    pages/           <=== Page Files
-      home.htm
-    layouts/         <=== Layout Files
-      default.htm
-    partials/        <=== Partial Files
-      sidebar.htm
-    content/         <=== Content Files
-      intro.htm
-    assets/          <=== Asset Files
-      css/
-        my-styles.css
-      js/
-      images/
-```
+::: dir
+├── themes
+|   └── website  _<== Theme Starts Here_
+|       ├── `pages`
+|       │   └── index.htm
+|       ├── `layouts`
+|       │   └── default.htm
+|       ├── `partials`
+|       │   └── sidebar.htm
+|       ├── `content`
+|       │   └── footer-contacts.md
+|       └── `assets`
+|           ├── css
+|           |   └── my-styles.css
+|           ├── js
+|           └── images
+:::
 
 > The active theme is set with the `active_theme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 
@@ -40,24 +40,26 @@ themes/
 
 October CMS supports a single level of subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
-```
-themes/
-  website/
-    pages/
-      home.htm
-      blog/                  <=== Page Subdirectory
-        archive.htm
-        category.htm
-    partials/
-      sidebar.htm
-      blog/                  <=== Partial Subdirectory
-        category-list.htm
-    content/
-      footer-contacts.txt
-      home/                  <=== Content Subdirectory
-        intro.htm
-    ...
-```
+::: dir
+├── themes
+|   └── website
+|       ├── pages
+|       │   ├── index.htm
+|       │   └── `blog` _<== Page Subdirectory_
+|       │       ├── index.htm
+|       │       └── category.htm
+|       ├── layouts
+|       │   └── default.htm
+|       ├── partials
+|       │   ├── sidebar.htm
+|       │   └── `blog` _<== Partial Subdirectory_
+|       │       └── category-list.htm
+|       ├── content
+|       │   ├── footer-contacts.md
+|       │   └── `home` _<== Content Subdirectory_
+|       │       └── intro.md
+|       └── assets
+:::
 
 To refer to a template in a subdirectory, specify the subdirectory's name before the template's name. For example, rendering the **category-list** partial from a **blog** subdirectory.
 
@@ -71,7 +73,7 @@ To refer to a template in a subdirectory, specify the subdirectory's name before
 
 Pages, partials and layout templates can include up to 3 sections: **configuration**, **PHP code**, and **Twig markup**. Sections are separated with the `==` sequence.
 
-```
+```php
 url = "/blog"
 layout = "default"
 ==
@@ -103,7 +105,7 @@ parameter = "value"
 
 The code in the PHP section executes every time before the template is rendered. The PHP section is optional for all CMS templates and its contents depend on the template type where it is defined. The PHP code section can contain optional open and close PHP tags to enable syntax highlighting in text editors. The open and close tags should always be specified on a different line to the section separator `==`.
 
-```
+```php
 url = "/blog"
 layout = "default"
 ==
@@ -123,7 +125,7 @@ function onStart()
 
 In the PHP section, you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed. Example of using a namespace reference:
 
-```
+```php
 url = "/blog"
 layout = "default"
 ==

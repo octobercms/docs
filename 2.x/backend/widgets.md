@@ -8,18 +8,18 @@ Widgets are the back-end equivalent of front-end [Components](../cms/components.
 
 Widget classes reside inside the **widgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example widget directory structure looks like this:
 
-```
-widgets/
-  form/
-    partials/
-      _form.htm     <=== Partial file
-    assets/
-      js/
-        form.js     <=== JavaScript File
-      css/
-        form.css    <=== StyleSheet File
-  Form.php          <=== Widget Class
-```
+::: dir
+├── `widgets`
+|   ├── form
+|   |   ├── partials
+|   |   |   └── _form.htm _<== Partial File_
+|   |   └── assets
+|   |       ├── js
+|   |       |   └── form.js _<== JavaScript File_
+|   |       └── css
+|   |           └── form.css _<== StyleSheet File_
+|   └── Form.php _<== Widget Class_
+:::
 
 ### Class Definition
 
@@ -114,18 +114,18 @@ With form widgets you can add new control types to the back-end [forms](../backe
 
 Form Widget classes reside inside the **formwidgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
 
-```
-formwidgets/
-  form/
-    partials/
-      _form.htm     <=== Partial File
-    assets/
-      js/
-        form.js     <=== JavaScript File
-      css/
-        form.css    <=== StyleSheet File
-  Form.php          <=== Widget Class
-```
+::: dir
+├── `formwidgets`
+|   ├── colorpicker
+|   |   ├── partials
+|   |   |   └── _colorpicker.htm _<== Partial File_
+|   |   └── assets
+|   |       ├── js
+|   |       |   └── colorpicker.js _<== JavaScript File_
+|   |       └── css
+|   |           └── colorpicker.css _<== StyleSheet File_
+|   └── ColorPicker.php _<== Widget Class_
+:::
 
 ### Class Definition
 
@@ -136,12 +136,12 @@ namespace Backend\Widgets;
 
 use Backend\Classes\FormWidgetBase;
 
-class CodeEditor extends FormWidgetBase
+class ColorPicker extends FormWidgetBase
 {
     /**
      * @var string A unique alias to identify this widget.
      */
-    protected $defaultAlias = 'codeeditor';
+    protected $defaultAlias = 'colorpicker';
 
     public function render() {}
 }
@@ -219,8 +219,8 @@ Plugins should register form widgets by overriding the `registerFormWidgets` met
 public function registerFormWidgets()
 {
     return [
-        \Backend\FormWidgets\CodeEditor::class => 'codeeditor',
-        \Backend\FormWidgets\RichEditor::class => 'richeditor'
+        \Backend\FormWidgets\ColorPicker::class => 'colorpicker',
+        \Backend\FormWidgets\DatePicker::class => 'datepicker'
     ];
 }
 ```
@@ -278,16 +278,13 @@ Report widgets can be used on the back-end dashboard and in other back-end repor
 
 The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
-```
-plugins/
-  rainlab/                    <=== Author Name
-    googleanalytics/          <=== Plugin Name
-      reportwidgets/          <=== Report Widgets Directory
-        trafficsources        <=== Widget Files Directory
-          partials
-            _widget.htm
-        TrafficSources.php    <=== Widget Class File
-```
+::: dir
+├── `reportwidgets`
+|   ├── trafficsources
+|   |   └── partials
+|   |       └── _widget.htm _<== Partial File_
+|   └── TrafficSources.php _<== Widget Class_
+:::
 
 Example report widget class definition:
 
