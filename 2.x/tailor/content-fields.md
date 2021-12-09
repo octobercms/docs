@@ -8,16 +8,27 @@ You can roll your own content fields by defining a field definition file and the
 
 ### Field Definition File
 
-The first step is to create a field definition file inside your plugin, for example, **plugins/acme/blog/contentfields/MyContentField.php** with the following contents.
+Content Field definition classes reside inside the **contentfields** directory of the plugin. The inner directory name matches the name of the widget class written in lowercase. Content Fields can supply assets and partials. An example directory structure looks like this.
+
+::: dir
+├── `contentfields`
+|   ├── mycontentfield
+|   |   ├── assets
+|   |   └── partials
+|   |       └── _column_content.htm _<== Partial File_
+|   └── MyContentField.php _<== Field Class_
+:::
+
+The class defines how the field should interact with the rest of the system. For example, **plugins/acme/blog/contentfields/MyContentField.php** with the following contents.
 
 ```php
 namespace Acme\Blog\ContentFields;
 
-use Tailor\Classes\Field;
+use Tailor\Classes\ContentFieldBase;
 use October\Rain\Element\Form\FieldDefinition;
 use October\Rain\Element\Lists\ColumnDefinition;
 
-class MyContentField extends Field
+class MyContentField extends ContentFieldBase
 {
     /**
      * defineConfig will process the field configuration.
@@ -52,3 +63,21 @@ class MyContentField extends Field
     }
 }
 ```
+
+### Content Field Registration
+
+Plugins should register content fields by overriding the `registerContentFields` method inside the [Plugin registration class](../plugin/registration.md#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
+
+```php
+/**
+ * registerContentFields
+ */
+public function registerContentFields()
+{
+    return [
+        \Acme\Blog\ContentFields\MyContentField::class => 'mycontentfield'
+    ];
+}
+```
+
+The short code is used when referencing the field in the [blueprint templates](introduction.md), it should be a unique value to avoid conflicts with other form fields.
