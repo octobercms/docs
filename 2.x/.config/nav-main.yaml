@@ -79,7 +79,7 @@
 -
     title: Tailor
     children:
-        - tailor/introduction
+        - tailor/blueprints
         - tailor/sections
         - tailor/collections
         - tailor/globals

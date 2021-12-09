@@ -9,6 +9,8 @@ Sections are used to define areas of your website and are populated with content
 |           └── blog.yaml
 :::
 
+## Section Types
+
 Each section organizes its content differently according to its type. The following types are supported.
 
 Type | Purpose
@@ -17,9 +19,9 @@ Type | Purpose
 `tree` | A defined structure of pages, eg: Documentation Pages
 `feed` | A stream of time stamped pages, eg: Blog Posts
 
-### Solo Type
+### Solo Section
 
-The `solo` type will force a single entry for each section definition. This is useful for one-off content, such as a Home page or Contact Us page. Solo sections can contain only one [entry type](#entry-types).
+The `solo` type will force a single entry for each section definition. This is useful for one-off content, such as a Home page or Contact Us page.
 
 The following defines a **Homepage** section as a Single (`single`) entry type with a Welcome Message (`welcome_message`) text field.
 
@@ -33,7 +35,9 @@ fields:
         type: text
 ```
 
-### Tree Type
+Solo sections do not support the use of [entry types](#entry-types).
+
+### Tree Section
 
 The `tree` type allows multiple structured entries, allowing for parent-child relationships to exist. This is useful for nested content, such as a Documentation section.
 
@@ -58,7 +62,7 @@ maxDepth: 2
 # ...
 ```
 
-### Feed Type
+### Feed Section
 
 The `feed` type is used for time-based entries that are often listed in chronological order. This is useful for publishing recent activity, such as a Blog section.
 
