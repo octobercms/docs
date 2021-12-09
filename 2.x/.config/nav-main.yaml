@@ -77,6 +77,15 @@
         - cms/content
         - cms/components
 -
+    title: Tailor
+    children:
+        - tailor/introduction
+        - tailor/sections
+        - tailor/collections
+        - tailor/globals
+        - tailor/mixins
+        - tailor/content-fields
+-
     title: AJAX
     children:
         - ajax/introduction
