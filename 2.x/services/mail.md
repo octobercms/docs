@@ -319,7 +319,7 @@ This message was sent using no formatting (plain text)
 <p>This email was sent using formatting (HTML)</p>
 ```
 
-> **Note**: Basic Twig tags and expressions are supported in mail views.
+> **Note**: Basic Twig tags and expressions are supported in mail views, along with Markdown syntax. See the section on [using HTML in Markdown](../services/parser.md#using-html-in-markdown) for more details.
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
