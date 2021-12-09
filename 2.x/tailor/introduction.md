@@ -1,8 +1,8 @@
 # Introduction
 
-Tailor is a core module that lets you define editable structures used by your website or web application, such as a company blog or team page. Tailor automatically generates a backend user interface for managing records and provides CMS features for displaying and linking records on the frontend.
+Tailor is a core module that lets you define editable structures used by your website or web application, such as a company blog or team page. Tailor automatically generates a backend user interface for managing records and provides [CMS components](../cms/components.md) for displaying and linking records on the frontend.
 
-When using Tailor, the developer does not need to use the traditional [plugin development workflow](../plugin/registration.md). Fields are defined simply as blueprint templates and content is stored in special database tables. Navigation and permissions are also defined in the blueprint template.
+When using Tailor, you can skip the traditional [plugin development workflow](../plugin/registration.md) and go straight to defining content. Fields are defined simply as blueprint templates and content is stored in special database tables. Navigation and permissions are also defined in the blueprint template.
 
 Blueprints are directories that reside in the **app/blueprints** directory by default. Blueprints can contain the following objects.
 
@@ -55,6 +55,20 @@ blog_content:
 ```
 
 > **Note**: When first creating a blueprint, you can choose to not include a UUID and one will be automatically generated for you on the first migration.
+
+## Migrating Blueprints
+
+Blueprints and their changes are commited to the database during the normal [database migration process](../console/commands.md#database-migration). When a change is made manually to a blueprint file, be sure to run this command to update the database tables.
+
+    php artisan october:migrate
+
+## Version History
+
+By default blueprints are not configured to track changes whenever a content record is modified, you may enable version tracking with the `useVersions` attribute of a blueprint.
+
+```yaml
+useVersions: true
+```
 
 ## Defining Navigation
 

@@ -1,24 +1,86 @@
 # Sections
 
-Sections are used to define areas of your website and are populated with content entries. The content structures and entries can be structured in different ways. The blueprints are located in the **sections/** directory.
+Sections are used to define areas of your website and are populated with content entries. The content structures and entries can be organised in different ways as we describe in more detail here. The blueprints are located in the **sections** directory.
 
-Below is an example blueprint of a section:
+::: dir
+├── app
+|   └── blueprints
+|       └── `sections`
+|           └── blog.yaml
+:::
 
-```yaml
-name: Blog
-handle: blog
-type: feed
-entries:
-    # ...
-```
-
-Each section can structure its content according to its type. The following types are supported:
+Each section organizes its content differently according to its type. The following types are supported.
 
 Type | Purpose
 ------ | --------
 `solo` | A single page with dedicated fields, eg: Contact Us Page
 `tree` | A defined structure of pages, eg: Documentation Pages
 `feed` | A stream of time stamped pages, eg: Blog Posts
+
+### Solo Type
+
+The `solo` type will force a single entry for each section definition. This is useful for one-off content, such as a Home page or Contact Us page. Solo sections can contain only one [entry type](#entry-types).
+
+The following defines a **Homepage** section as a Single (`single`) entry type with a Welcome Message (`welcome_message`) text field.
+
+```yaml
+name: Homepage
+handle: homepage
+type: solo
+entries:
+    single:
+        name: Single
+        fields:
+            welcome_message:
+                label: Welcome Message
+                type: text
+```
+
+### Tree Type
+
+The `tree` type allows multiple structured entries, allowing for parent-child relationships to exist. This is useful for nested content, such as a Documentation section.
+
+The following defines a **Documentation** tree section of Article (`article`) entries, each with an Article Content (`article_content`) markdown field.
+
+```yaml
+name: Documentation
+handle: docs
+type: tree
+entries:
+    article:
+        name: Article
+        fields:
+            content:
+                label: Article Content
+                type: markdown
+```
+
+You may specify a maximum depth for the tree structure using the `maxDepth` option. In the next example there can only be a top level and a second level.
+
+```yaml
+# ...
+type: tree
+maxDepth: 2
+# ...
+```
+
+### Feed Type
+
+The `feed` type is used for time-based entries that are often listed in chronological order. This is useful for publishing recent activity, such as a Blog section.
+
+The following defines a **Blog** feed section of Regular Post (`regular_post`) entries, each with a Post Content (`content`) rich editor field.
+
+```yaml
+name: Blog
+handle: blog
+type: feed
+entries:
+    regular_post:
+        fields:
+            content:
+                label: Post Content
+                type: richeditor
+```
 
 ## Entries
 
@@ -39,12 +101,4 @@ entries:
         name: Featured Post
         fields:
             # ...
-```
-
-### Versioning
-
-Sections do not capture the version history of each change by default, you may enable version history with the `useVersions` attribute of a blueprint.
-
-```yaml
-useVersions: true
 ```

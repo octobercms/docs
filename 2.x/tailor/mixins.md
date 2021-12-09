@@ -2,6 +2,13 @@
 
 Mixins are groups of fields that are used to avoid repetition when defining content structures. For example, a Location field may be used in several places, yet we can define it once using a mixin definition.
 
+::: dir
+├── app
+|   └── blueprints
+|       └── `mixins`
+|           └── home-sections.yaml
+:::
+
 Below is an example blueprint of a mixin:
 
 ```yaml
