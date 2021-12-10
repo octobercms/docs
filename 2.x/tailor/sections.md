@@ -21,9 +21,7 @@ Type | Purpose
 
 ### Solo Section
 
-The `solo` type will force a single entry for each section definition. This is useful for one-off content, such as a Home page or Contact Us page.
-
-The following defines a **Homepage** section as a Single (`single`) entry type with a Welcome Message (`welcome_message`) text field.
+The `solo` type will force a single entry for each section definition. This is useful for one-off content, such as a Home page or Contact Us page. The following defines a **Homepage** section with a Welcome Message (`welcome_message`) text field.
 
 ```yaml
 name: Homepage
@@ -39,9 +37,7 @@ Solo sections do not support the use of [entry types](#entry-types).
 
 ### Tree Section
 
-The `tree` type allows multiple structured entries, allowing for parent-child relationships to exist. This is useful for nested content, such as a Documentation section.
-
-The following defines a **Documentation** tree section of Article (`article`) entries, each with an Article Content (`article_content`) markdown field.
+The `tree` type allows multiple structured entries, allowing for parent-child relationships to exist. This is useful for nested content, such as a Documentation section. The following defines a **Documentation** tree section with an Article Content (`article_content`) markdown field.
 
 ```yaml
 name: Documentation
@@ -64,9 +60,7 @@ maxDepth: 2
 
 ### Feed Section
 
-The `feed` type is used for time-based entries that are often listed in chronological order. This is useful for publishing recent activity, such as a Blog section.
-
-The following defines a **Blog** feed section of Regular Post (`regular_post`) entries, each with a Post Content (`content`) rich editor field.
+The `feed` type is used for time-based entries that are often listed in chronological order. This is useful for publishing recent activity, such as a Blog section. The following defines a **Blog** feed section with a Post Content (`content`) rich editor field.
 
 ```yaml
 name: Blog

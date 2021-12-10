@@ -9,11 +9,13 @@ Globals are used to define globally available content for your website. The fiel
 |           └── theme-settings.yaml
 :::
 
-Below is an example blueprint of a global:
+The following defines a **Footer Config** global with a Facebook Link (`facebook_link`) text field.
 
 ```yaml
 name: Footer Config
-handle: footer_config
+handle: footerConfig
 fields:
-    # ...
+    facebook_link:
+        label: Facebook Link
+        type: text
 ```

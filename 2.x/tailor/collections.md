@@ -9,11 +9,13 @@ Collections are used to store auxiliary data, such as menu items, categories and
 |           └── blog-categories.yaml
 :::
 
-Below is an example blueprint of a collection:
+The following defines a **Blog Categories** collection with a Description (`description`) textarea field.
 
 ```yaml
 name: Blog Categories
-handle: blog_categories
+handle: blogCategories
 fields:
-    # ...
+    description:
+        label: Description
+        type: textarea
 ```
