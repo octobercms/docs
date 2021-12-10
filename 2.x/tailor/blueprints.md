@@ -15,7 +15,7 @@ Object | Description
 
 ## Directory Structure
 
-Below, you can see an example blueprint directory structure. Each blueprint type represents a separate directory.
+Below you can see an example blueprint directory structure. Each blueprint type represents a separate directory. Blueprints can be organised in subdirectories of any nesting depth.
 
 ::: dir
 ├── app
@@ -26,8 +26,24 @@ Below, you can see an example blueprint directory structure. Each blueprint type
 |       │   └── categories.yaml
 |       ├── `globals`
 |       │   └── footer_config.yaml
-|       └── `mixins`
-|           └── blog_content.yaml
+|       ├── `mixins`
+|       |   └── blog_content.yaml
+|       └── vendor
+:::
+
+### Vendor Blueprints
+
+October CMS has a special location for blueprints provided by a third party, this makes it easy to manage and import blueprints in a single location. The **app/blueprints/vendor** directory can contain any number of vendor folders and uses the format of **author-package** for the author and package name. Blueprints are stored in their corresponding directories inside.
+
+::: dir
+├── app
+|   └── blueprints
+|       └── `vendor`
+|           └── october-demo _<== Vendor Name_
+|               ├── sections
+|               ├── collections
+|               ├── globals
+|               └── mixins
 :::
 
 ## Blueprint Structure
