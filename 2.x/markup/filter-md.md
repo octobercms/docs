@@ -11,3 +11,5 @@ The above will output the following:
 ```html
 <strong>Text</strong> is bold.
 ```
+
+See the [Markdown Parser article](../services/parser.md#markdown-parser) for more details on using Markdown.

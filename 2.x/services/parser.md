@@ -2,7 +2,7 @@
 
 October CMS uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes.md) use the [Twig](#twig-template-parser) and [INI format](#initialization-ini-configuration-parser) in their template structure. Each parser is described in more detail below.
 
-## Markdown parser
+## Markdown Parser
 
 Markdown allows you to write easy-to-read and easy-to-write plain text format, which then converts to HTML. The `Markdown` facade is used for parsing Markdown syntax and is based on [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/). Some quick examples of markdown:
 
@@ -25,6 +25,31 @@ You may also use the `|md` filter for [parsing Markdown in your front-end markup
 
 ```twig
 {{ '**Text** is bold.'|md }}
+```
+
+### Using HTML in Markdown
+
+Markdown is a superset of HTML so you can combine HTML and Markdown in the same template. When Markdown encounters an HTML tag, the Markdown syntax will deactivate for all the content inside.
+
+```html
+<div>
+    This **text** won't be parsed by *Markdown*
+</div>
+```
+
+It is important to note that the Markdown parser will only accept one HTML node per line. In the example below, the second node is not included in the output.
+
+```html
+<!-- Output: <p>Foo</p> -->
+<p>Foo</p><p>Bar</p>
+```
+
+When displaying complex HTML, especially via a Twig variable, you should wrap the variable in a single HTML node to make sure all the output is captured.
+
+```twig
+<div>
+    {{ messageBody|raw }}
+</div>
 ```
 
 ## Twig Template Parser
