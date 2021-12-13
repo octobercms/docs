@@ -164,7 +164,7 @@ You may then access the named `MessageBag` instance from the `$errors` variable:
 
 Below is a list of all available validation rules and their function:
 
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Accepted](#rule-accepted)
 - [Active URL](#rule-active-url)

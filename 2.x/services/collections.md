@@ -33,7 +33,7 @@ For the remainder of this documentation, we'll discuss each method available on 
 
 You may select any method from this table to see an example of its usage:
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [all](#method-all)
 [average](#method-average)

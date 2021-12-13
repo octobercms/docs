@@ -4,7 +4,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 ### Arrays
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [array_add](#method-array-add)
 [array_divide](#method-array-divide)
@@ -29,7 +29,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 ### Paths
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [Path Symbols](#path-symbols)
 [app_path](#method-app-path)
@@ -47,7 +47,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 ### Strings
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [camel_case](#method-camel-case)
 [class_basename](#method-class-basename)
@@ -71,7 +71,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 ### Miscellaneous
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [asset](#method-asset)
 [config](#method-config)
