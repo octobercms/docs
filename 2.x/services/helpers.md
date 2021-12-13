@@ -358,6 +358,7 @@ Symbol | Description
 ------------- | -------------
 `$` | Relative to the plugins directory
 `~` | Relative to the application directory
+`#` | Relative to the themes directory
 
 <a name="method-app-path"></a>
 #### `app_path()`
