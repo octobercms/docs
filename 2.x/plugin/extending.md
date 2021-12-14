@@ -11,7 +11,7 @@ The most common place to subscribe to an event is the `boot` method of a [Plugin
 ```php
 class Plugin extends PluginBase
 {
-    // [...]
+    // ...
 
     public function boot()
     {
@@ -224,11 +224,11 @@ class Topic extends ComponentBase
 {
     public function onPost()
     {
-        // [...]
+        // ...
 
         /*
-            * Extensibility
-            */
+         * Extensibility
+         */
         $this->fireEvent('topic.post', [$post, $postUrl]);
         Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
     }

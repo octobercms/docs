@@ -174,15 +174,15 @@ fields:
         description: When this blog post was published
         type: datepicker
 
-    [...]
+    # [...]
 
 tabs:
     fields:
-        [...]
+        # [...]
 
 secondaryTabs:
     fields:
-        [...]
+        # [...]
 ```
 
 ### Field Options
@@ -1571,7 +1571,7 @@ You can also extend the form fields internally by overriding the `formExtendFiel
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function formExtendFields($form)
     {

@@ -886,7 +886,7 @@ You may also extend the list columns internally by overriding the `listExtendCol
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function listExtendColumns($list)
     {
@@ -911,7 +911,7 @@ You may inject a custom css row class by adding a `listInjectRowClass` method on
 ```php
 class Lessons extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function listInjectRowClass($lesson, $definition = null)
     {
