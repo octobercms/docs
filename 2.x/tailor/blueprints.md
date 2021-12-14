@@ -25,9 +25,9 @@ Below you can see an example blueprint directory structure. Each blueprint type 
 |       ├── `collections`
 |       │   └── categories.yaml
 |       ├── `globals`
-|       │   └── footer_config.yaml
+|       │   └── footer-config.yaml
 |       ├── `mixins`
-|       |   └── blog_content.yaml
+|       |   └── blog-content.yaml
 |       └── vendor
 :::
 
