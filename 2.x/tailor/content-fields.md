@@ -81,3 +81,35 @@ public function registerContentFields()
 ```
 
 The short code is used when referencing the field in the [blueprint templates](introduction.md), it should be a unique value to avoid conflicts with other form fields.
+
+### Processing Config
+
+Assuming we want to include a field config item called `secondaryTitle`, it is first defined as a property on the class and then filled using the `defineConfig` override.
+
+```php
+class MyContentField extends ContentFieldBase
+{
+    /**
+     * @var string secondaryTitle
+     */
+    public $secondaryTitle;
+
+    /**
+     * defineConfig
+     */
+    public function defineConfig(array $config): void
+    {
+        if (isset($config['secondaryTitle'])) {
+            $this->secondaryTitle = $config['secondaryTitle'];
+        }
+    }
+}
+```
+
+This then becomes available:
+
+```yaml
+my_field:
+    type: mycontentfield
+    secondaryTitle: Custom value goes here
+```
