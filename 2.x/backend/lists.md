@@ -206,9 +206,10 @@ There are various column types that can be used for the **type** setting, these 
 <div class="content-list" markdown="1">
 
 - [Text](#column-text)
-- [Image](#column-image)
 - [Number](#column-number)
+- [Image](#column-image)
 - [Switch](#column-switch)
+- [Summary](#column-summary)
 - [Date & Time](#column-datetime)
 - [Date](#column-date)
 - [Time](#column-time)
@@ -221,17 +222,39 @@ There are various column types that can be used for the **type** setting, these 
 - [Colorpicker](#column-colorpicker)
 
 </div>
-<a name="column-text"></a>
 
+<a name="column-text"></a>
 ### Text
 
-`text` - displays a text column, aligned left
+`text` - displays a text column, aligned left.
 
 ```yaml
 full_name:
     label: Full Name
     type: text
 ```
+
+<a name="column-number"></a>
+### Number
+
+`number` - displays a number column, aligned right.
+
+```yaml
+age:
+    label: Age
+    type: number
+```
+
+You may also specify a custom number format, for example currency **$99.00**.
+
+```yaml
+price:
+    label: Price
+    type: number
+    format: "$%.2f"
+```
+
+> **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
 
 <a name="column-image"></a>
 ### Image
@@ -251,28 +274,6 @@ avatar:
 
 See the [image resizing article](../services/resizer.md#resize-parameters) for more information on what options are supported.
 
-<a name="column-number"></a>
-### Number
-
-`number` - displays a number column, aligned right
-
-```yaml
-age:
-    label: Age
-    type: number
-```
-
-You may also specify a custom number format, for example currency **$99.00**.
-
-```yaml
-price:
-    label: Price
-    type: number
-    format: "$%.2f"
-```
-
-> **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
-
 <a name="column-switch"></a>
 ### Switch
 
@@ -282,6 +283,36 @@ price:
 enabled:
     label: Enabled
     type: switch
+```
+
+<a name="column-summary"></a>
+### Summary
+
+`summary` - generates a summary value, strips HTML and limits length to the closest word boundary.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+```
+
+The default summary length is 40 characters, you may adjust it with the `limitChars` option.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+    limitChars: 100
+```
+
+To limit by word count instead, specify the `limitWords` option instead. You may also change the end suffix characters with the `endChars` option.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+    limitWords: 10
+    endChars: "..."
 ```
 
 <a name="column-datetime"></a>
@@ -617,8 +648,8 @@ These types can be used to determine how the filter scope should be displayed.
 - [Text](#filter-text)
 
 </div>
-<a name="filter-group"></a>
 
+<a name="filter-group"></a>
 ### Group
 
 `group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
