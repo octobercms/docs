@@ -46,7 +46,7 @@ Argument | Description
 **scope** | filters the relation using a supplied scope method.
 **push** | if set to false, this relation will not be saved via `push`, default: true.
 **delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
-**detach** | used by the `belongsToMany` relationships only, if set to false, the related model will be not be detached if the primary model is deleted or relationship is destroyed, default: true.
+**trashed** | if set to true, includes records that have been soft deleted via the [Soft Deleting trait](../database/traits.md#soft-deleting), default: false.
 **relationClass** | specify a custom class name for the related object.
 
 Example filter using **order** and **conditions** parameters.
@@ -55,7 +55,7 @@ Example filter using **order** and **conditions** parameters.
 public $belongsToMany = [
     'categories' => [
         \Acme\Blog\Models\Category::class,
-        'order'      => 'name desc',
+        'order' => 'name desc',
         'conditions' => 'is_active = 1'
     ]
 ];
@@ -422,10 +422,11 @@ Argument | Description
 **parentKey** | the key column name of the defining model (inside defining model table). Default: id
 **otherKey** | the key column name of the related model (inside pivot table). Default value is combined from model name and `_id` suffix, i.e. `role_id`
 **relatedKey** | the key column name of the related model (inside related model table). Default: id
+**timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
+**detach** | if set to false, the related model will be not be detached if the primary model is deleted or relationship is destroyed, default: true.
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot` while for polymorphic relation `October\Rain\Database\MorphPivot`.
 **pivotSortable** | specify a sort order column for the pivot table, used in combination with the [`SortableRelation` trait](../backend/reorder.md#sortable-relation-model).
-**timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
 
 ### Has Many Through
 
