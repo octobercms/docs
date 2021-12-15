@@ -1555,7 +1555,9 @@ You can extend the fields of another controller from outside by calling the `ext
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    public $implement = ['Backend.Behaviors.FormController'];
+    public $implement = [
+        \Backend\Behaviors\FormController::class
+    ];
 
     public $formConfig = 'config_form.yaml';
 }

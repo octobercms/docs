@@ -858,7 +858,9 @@ You may extend the columns of another controller from outside by calling the `ex
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    public $implement = ['Backend.Behaviors.ListController'];
+    public $implement = [
+        \Backend\Behaviors\ListController::class
+    ];
 
     public $listConfig = 'list_config.yaml';
 }
@@ -872,12 +874,17 @@ Categories::extendListColumns(function($list, $model) {
         return;
     }
 
+    // Add a new column
     $list->addColumns([
         'my_column' => [
             'label' => 'My Column'
         ]
     ]);
 
+    // Modify an existing column
+    $list->getColumn('title')->useConfig([
+        'path' => 'column_title'
+    ]);
 });
 ```
 
@@ -891,6 +898,8 @@ class Categories extends \Backend\Classes\Controller
     public function listExtendColumns($list)
     {
         $list->addColumns([...]);
+
+        $list->getColumn(...);
     }
 }
 ```

@@ -191,6 +191,26 @@ This unique ability to extend constructors allows behaviors to be implemented dy
 });
 ```
 
+To avoid conflicts with other plugins doing the same thing, it is advisable the merge the configuration using the approach below.
+
+```php
+UsersController::extend(function($controller) {
+
+    // Implement the list controller behavior dynamically
+    $controller->implementClassWith(\Backend\Behaviors\RelationController::class);
+
+    // Define property if not already defined
+    $controller->addDynamicProperty('relationConfig');
+
+    // Splice in configuration safely
+    $controller->relationConfig = $controller->mergeConfig(
+        $controller->relationConfig,
+        '$/myvendor/myplugin/controllers/users/config_relation.yaml'
+    );
+
+});
+```
+
 ## Usage Example
 
 #### Behavior / Extension class
@@ -239,7 +259,7 @@ class Controller extends \October\Rain\Extension\Extendable
      * Implement the FormController behavior
      */
     public $implement = [
-        'MyNamespace.Behaviors.FormController'
+        \MyNamespace\Behaviors\FormController::class
     ];
 
     public function otherMethod()
@@ -269,33 +289,19 @@ echo $controller->asExtension('FormController')->otherMethod();
 To check if an object has been extended with a behavior, you may use the `isClassExtendedWith` method on the object.
 
 ```php
-$controller->isClassExtendedWith('Backend.Behaviors.RelationController');
+$controller->isClassExtendedWith(\Backend\Behaviors\RelationController::class);
 ```
 
-Below is an example of dynamically extending a `UsersController` of a third-party plugin utilizing this method to avoid preventing other plugins from also extending the afore-mentioned third-party plugin.
+You can extend a class dynamically with the `extendClassWith` method.
 
 ```php
-UsersController::extend(function($controller) {
+$controller->extendClassWith(\Backend\Behaviors\RelationController::class);
+```
 
-    // Implement behavior if not already implemented
-    if (!$controller->isClassExtendedWith('Backend.Behaviors.RelationController')) {
-        $controller->implement[] = 'Backend.Behaviors.RelationController';
-    }
+The `implementClassWith` method will safely check if the class is extended with the behavior and then implement it.
 
-    // Define property if not already defined
-    if (!isset($controller->relationConfig)) {
-        $controller->addDynamicProperty('relationConfig');
-    }
-
-    // Splice in configuration safely
-    $myConfigPath = '$/myvendor/myplugin/controllers/users/config_relation.yaml';
-
-    $controller->relationConfig = $controller->mergeConfig(
-        $controller->relationConfig,
-        $myConfigPath
-    );
-
-}
+```php
+$controller->implementClassWith(\Backend\Behaviors\RelationController::class);
 ```
 
 ### Soft Definition
@@ -320,7 +326,7 @@ class User extends \October\Rain\Extension\Extendable
 
     public function __construct()
     {
-        if (class_exists('\RainLab\Translate\Behaviors\TranslatableModel')) {
+        if (class_exists(\RainLab\Translate\Behaviors\TranslatableModel::class)) {
             $this->implement[] = \RainLab\Translate\Behaviors\TranslatableModel::class;
         }
 
@@ -413,7 +419,7 @@ class AI
 The AI class is now able to use behaviours. Let's extend it and have this class implement the WaveBehaviour.
 
 ```php
-<?php namespace MyNamespace\Classes;
+namespace MyNamespace\Classes;
 
 class Robot extends AI
 {
