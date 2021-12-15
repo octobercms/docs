@@ -352,7 +352,7 @@ The process for sending these emails is the same. For example, if you create a t
 ```php
 Mail::send('this.is.my.email', $data, function($message) use ($user)
 {
-    [...]
+    // ...
 });
 ```
 

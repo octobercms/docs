@@ -174,15 +174,15 @@ fields:
         description: When this blog post was published
         type: datepicker
 
-    [...]
+    # [...]
 
 tabs:
     fields:
-        [...]
+        # [...]
 
 secondaryTabs:
     fields:
-        [...]
+        # [...]
 ```
 
 ### Field Options
@@ -273,7 +273,7 @@ tabs:
 
 There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#available-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Text](#field-text)
 - [Number](#field-number)
@@ -636,7 +636,7 @@ blog_content:
 
 There are non function UI elements that can be included in forms to help with the layout design.
 
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Section](#field-section)
 - [Hint](#field-hint)
@@ -713,7 +713,7 @@ content:
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#form-widgets) article.
 
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Code Editor](#widget-codeeditor)
 - [Color Picker](#widget-colorpicker)
@@ -1571,7 +1571,7 @@ You can also extend the form fields internally by overriding the `formExtendFiel
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function formExtendFields($form)
     {

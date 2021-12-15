@@ -203,7 +203,7 @@ The above example would look for the value in PHP equivalent of `$record->conten
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
 
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Text](#column-text)
 - [Image](#column-image)
@@ -605,7 +605,7 @@ public function getCityOptions($scopes = null)
 
 These types can be used to determine how the filter scope should be displayed.
 
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Group](#filter-group)
 - [Checkbox](#filter-checkbox)
@@ -886,7 +886,7 @@ You may also extend the list columns internally by overriding the `listExtendCol
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function listExtendColumns($list)
     {
@@ -911,7 +911,7 @@ You may inject a custom css row class by adding a `listInjectRowClass` method on
 ```php
 class Lessons extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function listInjectRowClass($lesson, $definition = null)
     {

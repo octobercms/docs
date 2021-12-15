@@ -50,7 +50,7 @@ The most common place is the `boot` method of a [Plugin registration file](../pl
 ```php
 class Plugin extends PluginBase
 {
-    [...]
+    // ...
 
     public function boot()
     {
