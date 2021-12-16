@@ -461,7 +461,7 @@ public function listStatuses($fieldName, $value, $formData)
 }
 ```
 
-You have the option to add an icon for every option which will be rendered in the dropdown field. In this case, you may specify the options as a multidimensional array with the following format **key => [label-text, label-icon]**.
+To add a custom icon for every option rendered in the dropdown field, you may specify the options as a multidimensional array with the following format **key => [label-text, label-icon]**.
 
 ```php
 public function listStatuses($fieldName, $value, $formData)
@@ -474,7 +474,7 @@ public function listStatuses($fieldName, $value, $formData)
 }
 ```
 
-Displaying a color is also supported by specifying the options as an array with the format **key => [label-text, label-color]** where the color is a hex value beginning with a hash (`#`).
+Displaying a custom color is also supported by specifying the options as an array with the format **key => [label-text, label-color]** where the color is a hex value beginning with a hash (`#`).
 
 ```php
 public function listStatuses($fieldName, $value, $formData)
