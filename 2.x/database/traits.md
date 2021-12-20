@@ -507,7 +507,7 @@ class User extends Model
     use \October\Rain\Database\Traits\SoftDelete;
 
     public $hasMany = [
-        'comments' => ['Acme\Blog\Models\Comment', 'softDelete' => true]
+        'comments' => [\Acme\Blog\Models\Comment::class, 'softDelete' => true]
     ];
 }
 ```
@@ -519,6 +519,19 @@ Under these same conditions, when the primary model is restored, all the related
 ```php
 // Restore the user and comments
 $user->restore();
+```
+
+#### Including Soft Deleted Relations
+
+Soft deleted records are not included as part of relation lookups, however, you may include them by adding the `withTrashed` scope to the query.
+
+```php
+class User extends Model
+{
+    public $hasMany = [
+        'comments' => [\Acme\Blog\Models\Comment::class, 'scope' => 'withTrashed']
+    ];
+}
 ```
 
 ### Revisionable

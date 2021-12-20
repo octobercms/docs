@@ -46,7 +46,6 @@ Argument | Description
 **scope** | filters the relation using a supplied scope method.
 **push** | if set to false, this relation will not be saved via `push`, default: true.
 **delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed, default: false.
-**trashed** | if set to true, includes records that have been soft deleted via the [Soft Deleting trait](../database/traits.md#soft-deleting), default: false.
 **relationClass** | specify a custom class name for the related object.
 
 Example filter using **order** and **conditions** parameters.
