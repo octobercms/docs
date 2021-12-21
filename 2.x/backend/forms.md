@@ -600,17 +600,35 @@ show_content:
 permissions:
     label: Permissions
     type: checkboxlist
-    # set to true to explicitly enable the "Select All", "Select None" options
-    # on lists that have <=10 items (>10 automatically enables it)
-    quickselect: true
-    default: open_account
     options:
         open_account: Open account
         close_account: Close account
         modify_account: Modify account
 ```
 
-Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
+Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
+
+```yaml
+permissions:
+    type: checkboxlist
+    options: listPermissions
+```
+
+Options can be displayed inline with each other instead of in separate rows by specifying **inline-options** as the `cssClass` on the field config.
+
+```yaml
+permissions:
+    type: checkboxlist
+    cssClass: inline-options
+```
+
+A quick select menu with "Select All" and "Select None" buttons will become visible when the list has greater than 10 items. To explicitly enable these buttons, use the `quickselect` option.
+
+```yaml
+permissions:
+    type: checkboxlist
+    quickselect: true
+```
 
 <a name="field-switch"></a>
 ### Switch
@@ -676,7 +694,7 @@ _section1:
 `hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
 
 ```yaml
-content:
+_hint1:
     type: hint
     path: content_field
 ```
@@ -684,7 +702,7 @@ content:
 A hint supports content inline to the field. The `label` and `comment` values are optional and contain the content for the heading and subheading. You may also use Markdown syntax for the values.
 
 ```yaml
-tip1:
+_tip1:
     type: hint
     mode: tip
     label: Pro Tip
@@ -694,7 +712,7 @@ tip1:
 The `mode` option supports the values: tip, info, warning, danger, success
 
 ```yaml
-warning1:
+_warning1:
     type: hint
     mode: warning
     label: Always wash your hands

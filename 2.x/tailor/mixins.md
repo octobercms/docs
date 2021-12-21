@@ -29,7 +29,7 @@ fields:
 To include these fields in your entries, like any other form field, use the `type` of **mixin** and reference the UUID in the `source` property.
 
 ```yaml
-location:
+_location:
     type: mixin
     source: 6d6a5efa-3ce7-4b9d-bddc-ac48867552cb
 ```

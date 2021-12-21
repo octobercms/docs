@@ -65,7 +65,7 @@ EntryRecord::inSection('blog')->get();
 The blueprint **uuid** is a unique identifier used when blueprints reference other blueprints. For example, when a field references a mixin.
 
 ```yaml
-blog_content:
+_blog_content:
     source: edcd102e-0525-4e4d-b07e-633ae6c18db6
     type: mixin
 ```
