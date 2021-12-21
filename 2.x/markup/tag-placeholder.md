@@ -54,6 +54,26 @@ In a layout template you can check if a placeholder content exists by using the 
 {% endif %}
 ```
 
+## Using Placeholders as Variables
+
+Placeholders can be useful for setting inherited variables, such as the active link in page navigation. The `{% put %}` tag allows you to set values directly. For example, setting the `activeNav` value to **home** inside a page template.
+
+```twig
+{% put activeNav = 'home' %}
+```
+
+The variable can be accessed inside the layout template using the `placeholder()` function. From this, we can determine the active link based on the value set by the page.
+
+```twig
+{% set active = placeholder('activeNav') %}
+
+<ul>
+    <li class="{{ active == 'home' ? 'active' }}">Home</li>
+    <li class="{{ active == 'blog' ? 'active' }}">Blog</li>
+    <li class="{{ active == 'contact' ? 'active' }}">Contact</li>
+</ul>
+```
+
 ## Custom Attributes
 
 The `placeholder` tag accepts two optional attributes &mdash; `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment &mdash; **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
