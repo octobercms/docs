@@ -1,133 +1,135 @@
-# 安装
+# Installation
 
 <VideoPreview src="https://www.youtube.com/watch?v=RHUwCvo7xng" />
 
-October CMS 是一个具有简单直观界面的 Web 应用程序平台。Web 平台提供一致的结构，并强调可重用性，因此您可以专注于构建独特的内容，而我们处理无聊的部分。
+October CMS is a web application platform with a simple and intuitive interface. A web platform provides a consistent structure with an emphasis on reusability so you can focus on building something unique while we handle the boring bits.
 
+October CMS makes one bold but obvious assumption: clients don't build websites; developers do. When platforms have a client-centric development process, it only results in one thing: an unhappy developer.
 
-无论您是 Web 开发新手还是拥有多年经验，October CMS 都是一个平台，可让您轻松为您和您的客户创建定制体验。 我们希望您与我们一起享受旅程，并在简单中发现快乐。
+Whether you're new to web development or have years of experience, October CMS is a platform that makes it easy to create bespoke experiences for you and your clients. We hope you enjoy your journey with us and discover happiness in simplicity.
 
-要在本地运行 October CMS，我们推荐以下软件：
+To run October CMS locally, we recommend the following software:
 
-- [适用于 macOS 的 Laravel Valet](https://laravel.com/docs/valet)
-- [适用于 Windows 10 的 Laragon](https://laragon.org/)
+- [Laravel Valet for macOS](https://laravel.com/docs/valet)
+- [Laragon for Windows 10](https://laragon.org/)
 
-## 安装Composer
+## Installing Composer
 
-October CMS 使用[Composer](http://getcomposer.org/) 来管理它的依赖。因此，在开始之前，您需要确保已安装 Composer。
+October CMS uses [Composer](http://getcomposer.org/) to manage its dependencies. So before getting started, you will need to make sure you have Composer installed.
 
-您还应该检查您的计算机或服务器是否满足运行 PHP 应用程序的 [最低系统要求](#minimum-system-requirements) 。
+You should also check that your computer or server meets the [minimum system requirements](#minimum-system-requirements) for running the PHP application.
 
-## 安装 October CMS
+## Installing October CMS
 
-然后，您可以在终端中使用命令`create-project`创建一个新的 October CMS 项目。下面在名为**myoctober**的目录中创建一个新项目。
+You can then create a new October CMS project by using `create-project` command in your terminal. The following creates a new project in a directory called **myoctober**.
 
 ```bash
 composer create-project october/october myoctober
 ```
 
-您也可以使用此命令安装到当前目录。
+You may also install to the current directory using this command instead.
 
 ```bash
 composer create-project october/october .
 ```
 
-任务完成后，运行安装命令以指导您完成后续步骤。
+When the task finishes, run the installation command to guide you through the next steps.
 
 ```bash
 php artisan october:install
 ```
 
-接下来，使用以下命令迁移数据库。
+Next, migrate the database with the following command.
 
 ```bash
 php artisan october:migrate
 ```
 
-然后，您可以提供应用程序并在浏览器中打开它。
+You can then serve the application and open it in your browser.
 
 ```bash
 php artisan serve
 ```
->**Note**：如果您正在使用项目，请继续阅读[项目文章](https://octobercms.com/help/site/projects) 有关如何设置项目的信息。
 
-## 安装后步骤
+> **Note**: If you are using a project, continue reading the [Projects article](https://octobercms.com/help/site/projects) for information on how to set up your project.
 
-安装完成后，您可能需要设置一些内容。
+## Post-Installation Steps
 
-###查看配置
+There are some things you may need to set up after the installation is complete.
 
-配置文件存储在应用程序的**config** 目录中。 虽然每个文件都包含每个设置的描述，但查看适用于您的情况的 [通用配置选项](../setup/configuration.md) 很重要。
+### Review Configuration
 
-例如，在生产环境中，您可能希望执行以下操作：
+Configuration files are stored in the **config** directory of the application. While each file contains descriptions for each setting, it is important to review the [common configuration options](../setup/configuration.md) available for your circumstances.
 
-- 启用[CSRF保护](../setup/configuration.md#csrf-protection)
-- 禁用[调试模式](../setup/configuration.md#debug-mode)
-- 使用 [公共文件夹](../setup/deployment.md#public-folder) 以提高安全性
+For example, in production environments you may want to do the following:
 
-###  设置调度程序
+- Enable [CSRF protection](../setup/configuration.md#csrf-protection)
+- Disable [debug mode](../setup/configuration.md#debug-mode)
+- Use a [public folder](../setup/deployment.md#public-folder) for additional security
 
-为使*计划任务*正确运行，您应该将以下 Cron 条目添加到您的服务器。 编辑 crontab 通常是使用命令 `crontab -e` 来执行的。
+### Setting Up The Scheduler
 
-     * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
 
-请务必将 **/path/to/artisan** 替换为 October CMS 根目录中 *artisan* 文件的绝对路径。 此 Cron 将每分钟调用命令调度程序。 然后 October CMS 评估所有计划的任务并运行到期的任务。
+    * * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
 
-> **注意**：如果你把这个添加到`/etc/cron.d`，你需要在`* * * * *` 之后立即指定一个用户。
+Be sure to replace **/path/to/artisan** with the absolute path to the *artisan* file in the root directory of October CMS. This Cron will call the command scheduler every minute. Then October CMS evaluates any scheduled tasks and runs the tasks that are due.
 
-###  设置队列工作者
+> **Note**: If you are adding this to `/etc/cron.d` you'll need to specify a user immediately after `* * * * *`.
 
-您可以选择设置一个外部队列来处理 *排队任务*，默认情况下，这些将由平台异步处理。这种行为可以通过在 `config/queue.php` 中设置 `default` 参数来改变。
+### Setting Up Queue Workers
 
-如果您决定使用 `database` 队列驱动程序，最好为命令 `php artisan queue:work --once` 添加一个 Crontab 条目来处理队列中的第一个可用作业。
+You may optionally set up an external queue for processing *queued jobs*, by default these will be handled asynchronously by the platform. This behavior can be changed by setting the `default` parameter in the `config/queue.php`.
 
-您还可以将队列作为守护进程运行
+If you decide to use the `database` queue driver, it is a good idea to add a Crontab entry for the command `php artisan queue:work --once` to process the first available job in the queue.
+
+You can also run the queue as a daemon process with
 
 ```bash
 php artisan queue:work
-``
+```
 
-## 最低系统要求
+## Minimum System Requirements
 
-October CMS 对服务器有一些要求：
+October CMS has some server requirements for web hosting:
 
-1. PHP 7.2.9 或更高版本
-1. Composer 2.0 或更高版本
-1. PDO PHP Extension（以及要连接的数据库的相关驱动程序）
-1. cURL PHP 扩展
-1. OpenSSL PHP 扩展
-1. Mbstring PHP 扩展
-1. ZipArchive PHP 扩展
-1. GD PHP 扩展
-1. SimpleXML PHP 扩展
+1. PHP version 7.2.9 or higher
+1. Composer 2.0 or higher
+1. PDO PHP Extension (and relevant driver for the database you want to connect to)
+1. cURL PHP Extension
+1. OpenSSL PHP Extension
+1. Mbstring PHP Extension
+1. ZipArchive PHP Extension
+1. GD PHP Extension
+1. SimpleXML PHP Extension
 
-为这些数据库提供支持的最低要求：
+Support is provided for these databases with minimum requirements:
 
-1. MySQL 5.7 或 MariaDB 10.2
+1. MySQL 5.7 or MariaDB 10.2
 1. PostgreSQL 9.6
 1. SQLite 3.8.8
 
-如果您使用的是旧版本的 MySQL 或 MariaDB，您可能需要[配置索引长度](../database/structure.md#index-lengths-using-mysql-mariadb) 以支持 `utf8mb4` 字符集.
+If you are using an older version of MySQL or MariaDB, you may need to [configure the index lengths](../database/structure.md#index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
 
-某些操作系统发行版可能需要您手动安装一些必要的 PHP 扩展。使用 Ubuntu 时，可以运行以下命令来安装所有必需的扩展：
+Some OS distributions may require you manually install some of the necessary PHP extensions. When using Ubuntu, the following command can be run to install all required extensions:
 
 ```bash
 sudo apt-get update &&
 sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
-``
+```
 
-使用 SQL Server 数据库引擎时，需要安装 [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) 用户定义聚合。
+When using the SQL Server database engine, you will need to install the [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) user-defined aggregate.
 
-## 安装疑难解答
+## Troubleshooting Installation
 
-1. **当我输入许可证密钥时安装挂起或冻结**：在某些环境中粘贴密钥内容时可能会发生这种情况。多次按 ENTER 键以允许安装过程继续。
+1. **The installation hangs or freezes when I enter the license key**: This can happen in some environments when pasting the key contents. Press the ENTER key multiple times to allow the installation process to continue.
 
-1. **迁移过程中显示错误“Specified key was too long”**：当您使用旧版本的 MySQL 或 MariaDB 时会发生这种情况。要解决此问题，您可能需要[配置索引长度](../database/structure.md#index-lengths-using-mysql-mariadb) 以支持`utf8mb4` 字符集。
+1. **An error "Specified key was too long" is displayed during migration**: This happens when you are using an older version of MySQL or MariaDB. To resolve this issue, you may need to [configure the index lengths](../database/structure.md#index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
 
-1. **打开应用程序时显示空白屏幕**：检查`/storage`文件和文件夹的权限设置是否正确，它们应该在Web服务器是可写的。
+1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
 
-1. **后端区域显示“Page not found”(404)**：如果应用程序找不到数据库，则后端会显示404页面。尝试启用 [调试模式](../setup/configuration.md#debug-mode) 以查看底层错误消息。
+1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration.md#debug-mode) to see the underlying error message.
 
-1. **更新应用程序时显示错误 500 **：您可能需要增加或禁用网络服务器的超时限制。例如，Apache 的 FastCGI 有时会将 `-idle-timeout` 选项设置为 30 秒。
+1. **An error 500 is displayed when updating the application**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 
-> **注意**：详细的系统日志可以在`storage/logs`目录中找到。
+> **Note**: A detailed system log can be found in the `storage/logs` directory.
