@@ -1,0 +1,164 @@
+#
+# Markup Nav
+#
+"/markup/":
+-
+    title: Markup
+    collapsable: false
+    children:
+        - templating
+-
+    title: Variables
+    collapsable: false
+    children:
+        - this-page
+        - this-layout
+        - this-theme
+        - this-param
+        - this-controller
+        - this-environment
+        - this-session
+-
+    title: Tags
+    collapsable: false
+    children:
+        - tag-page
+        - tag-partial
+        - tag-content
+        - tag-component
+        - tag-placeholder
+        - tag-scripts
+        - tag-styles
+        - tag-flash
+        - tag-verbatim
+        - tag-macro
+        - tag-for
+        - tag-if
+-
+    title: Filters
+    collapsable: false
+    children:
+        - filter-app
+        - filter-page
+        - filter-theme
+        - filter-media
+        - filter-resize
+        - filter-default
+        - filter-raw
+        - filter-md
+-
+    title: Functions
+    collapsable: false
+    children:
+        - function-str
+        - function-form
+        - function-html
+        - function-dump
+
+#
+# Root Nav
+#
+"/":
+-
+    title: Getting Started
+    children:
+        - setup/installation
+        - setup/configuration
+        - setup/structure
+        - setup/deployment
+        - setup/updating
+-
+    title: CMS
+    children:
+        - cms/themes
+        - cms/pages
+        - cms/partials
+        - cms/layouts
+        - cms/content
+        - cms/components
+-
+    title: AJAX
+    children:
+        - ajax/introduction
+        - ajax/handlers
+        - ajax/update-partials
+        - ajax/attributes-api
+        - ajax/javascript-api
+        - ajax/extras
+-
+    title: Media Manager
+    children:
+        - media/introduction
+        - media/providers
+-
+    title: Themes
+    children:
+        - themes/development
+-
+    title: Plugins
+    children:
+        - plugin/registration
+        - plugin/updates
+        - plugin/components
+        - plugin/settings
+        - plugin/localization
+        - plugin/scheduling
+        - plugin/extending
+-
+    title: Backend
+    children:
+        - backend/controllers-ajax
+        - backend/views-partials
+        - backend/widgets
+        - backend/forms
+        - backend/lists
+        - backend/relations
+        - backend/reorder
+        - backend/import-export
+        - backend/users
+        - ['https://octobercms.com/docs/ui/form', 'UI Guide']
+-
+    title: Database
+    children:
+        - database/basics
+        - database/structure
+        - database/query
+        - database/model
+        - database/relations
+        - database/attachments
+        - database/collection
+        - database/mutators
+        - database/serialization
+        - database/traits
+-
+    title: Services
+    children:
+        - services/application
+        - services/behaviors
+        - services/cache
+        - services/collections
+        - services/error-log
+        - services/events
+        - services/html
+        - services/resizer
+        - services/hashing-encryption
+        - services/helpers
+        - services/mail
+        - services/pagination
+        - services/parser
+        - services/queues
+        - services/request-input
+        - services/response-view
+        - services/router
+        - services/session
+        - services/storage
+        - services/validation
+-
+    title: Console
+    children:
+        - console/commands
+        - console/scaffolding
+        - console/development
+        - help/unit-testing
+        - help/publishing-packages
+        - help/developer-guide
