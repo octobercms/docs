@@ -611,14 +611,15 @@ show_content:
     comment: Flick this switch to display content
 ```
 
-Customize the switch text using the `on` and `off` options.
+You may customize the switch text by passing an array to the `options` value with false and true labels.
 
 ```yaml
 show_content:
     label: Display content
     type: switch
-    on: Yes
-    off: No
+    options:
+        - Nope
+        - Yeah
 ```
 
 <a name="field-widget"></a>
