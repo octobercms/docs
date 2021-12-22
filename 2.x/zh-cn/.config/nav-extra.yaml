@@ -1,0 +1,25 @@
+#
+# Markup Extras
+#
+# "/markup/":
+# -
+#     title: Back to October CMS Docs
+#     icon: "/images/october-leaf.svg"
+#     link: "/2.x/"
+
+#
+# Root Extras
+#
+"/":
+-
+    title: 主文档
+    icon: "/images/october-leaf.svg"
+    link: "/2.x/zh-cn/"
+-
+    title: 模板指南
+    icon: "/images/markup-guide.svg"
+    link: "/2.x/zh-cn/markup/"
+-
+    title: API 文档
+    icon: "/images/markup-guide.svg"
+    link: "https://octobercms.com/docs/api"
