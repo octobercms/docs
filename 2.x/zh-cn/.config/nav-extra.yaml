@@ -12,14 +12,14 @@
 #
 "/":
 -
-    title: Home
+    title: 主文档
     icon: "/images/october-leaf.svg"
-    link: "/2.x/"
+    link: "/2.x/zh-cn/"
 -
-    title: Markup Guide
+    title: 模板指南
     icon: "/images/markup-guide.svg"
-    link: "/2.x/markup/"
+    link: "/2.x/zh-cn/markup/"
 -
-    title: API Docs
+    title: API 文档
     icon: "/images/markup-guide.svg"
     link: "https://octobercms.com/docs/api"

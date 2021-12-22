@@ -3,12 +3,12 @@
 #
 "/markup/":
 -
-    title: Markup
+    title: 标记
     collapsable: false
     children:
         - templating
 -
-    title: Variables
+    title: 变量
     collapsable: false
     children:
         - this-page
@@ -19,7 +19,7 @@
         - this-environment
         - this-session
 -
-    title: Tags
+    title: 标签
     collapsable: false
     children:
         - tag-page
@@ -35,7 +35,7 @@
         - tag-for
         - tag-if
 -
-    title: Filters
+    title: 过滤器
     collapsable: false
     children:
         - filter-app
@@ -47,7 +47,7 @@
         - filter-raw
         - filter-md
 -
-    title: Functions
+    title: 功能
     collapsable: false
     children:
         - function-str
@@ -60,7 +60,7 @@
 #
 "/":
 -
-    title: Getting Started
+    title: 入门
     children:
         - setup/installation
         - setup/configuration
@@ -68,7 +68,7 @@
         - setup/deployment
         - setup/updating
 -
-    title: CMS
+    title: 内容管理系统(CMS)
     children:
         - cms/themes
         - cms/pages
@@ -86,16 +86,16 @@
         - ajax/javascript-api
         - ajax/extras
 -
-    title: Media Manager
+    title: 媒体
     children:
         - media/introduction
         - media/providers
 -
-    title: Themes
+    title: 主题
     children:
         - themes/development
 -
-    title: Plugins
+    title: 插件
     children:
         - plugin/registration
         - plugin/updates
@@ -105,7 +105,7 @@
         - plugin/scheduling
         - plugin/extending
 -
-    title: Backend
+    title: 后端
     children:
         - backend/controllers-ajax
         - backend/views-partials
@@ -118,7 +118,7 @@
         - backend/users
         - ['https://octobercms.com/docs/ui/form', 'UI Guide']
 -
-    title: Database
+    title: 数据库
     children:
         - database/basics
         - database/structure
@@ -131,7 +131,7 @@
         - database/serialization
         - database/traits
 -
-    title: Services
+    title: 服务
     children:
         - services/application
         - services/behaviors
@@ -154,7 +154,7 @@
         - services/storage
         - services/validation
 -
-    title: Console
+    title: 命令行
     children:
         - console/commands
         - console/scaffolding
