@@ -1,9 +1,9 @@
 version: 版本
-language: 语
-on_this_page: On This Page
-search_placeholder: Search Documentation...
-last_updated: Last Updated
-edit_this_page: Edit This Page
-old_version_warning: This article is for an old version of the documentation.
-old_version_link: View Latest Version
-header_home_link: Main Website
+language: 语言
+on_this_page: 在此页
+search_placeholder: 搜索文档...
+last_updated: 最近更新时间
+edit_this_page:  编辑这个页面
+old_version_warning:  本文适用于旧版本的文档。
+old_version_link: 查看最新版本
+header_home_link: 主页
