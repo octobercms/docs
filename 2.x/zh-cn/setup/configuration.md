@@ -1,14 +1,14 @@
-# Configuration
+# 配置
 
-All of the configuration files for October CMS are stored in the **config** directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
+October CMS 的所有配置文件都存储在 **config** 目录中。每个选项都记录在案，因此请随意浏览文件并熟悉可用的选项。
 
-## Environment Configuration
+##环境配置
 
-It is often helpful to have different configuration values based on the environment the application is running in. To control confguration in different environments, October CMS uses a [DotEnv library](https://github.com/vlucas/phpdotenv) to make it easy to manage environment variables. These variables can override any values specified in the **config** directory.
+根据应用程序运行的环境设置不同的配置值通常很有帮助。 为了控制不同环境中的配置，October CMS 使用 [DotEnv 库](https://github.com/vlucas/phpdotenv) 来实现易于管理环境变量。这些变量可以覆盖 **config** 目录中指定的任何值。
 
-In a fresh installation of October CMS, the base directory will contain a `.env.example` file that provides typical values for a local environment. During the installation process, this file will be copied to `.env` where you can make any changes.
+在全新安装的 October CMS 中，基本目录将包含一个 `.env.example` 文件，该文件为本地环境提供典型值。在安装过程中，此文件将被复制到 `.env` ，您可以在其中进行任何更改。
 
-For example, the database connection can be specified with these variables.
+例如，可以使用这些变量指定数据库连接。
 
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
@@ -17,61 +17,61 @@ For example, the database connection can be specified with these variables.
     DB_USERNAME=root
     DB_PASSWORD=
 
-Any variable in your `.env` file can be overridden by external environment variables such as server-level or system-level environment variables. For example, in Apache this line can be added to the `.htaccess` or `httpd.config` file:
+`.env` 文件中的任何变量都可以被外部环境变量覆盖，例如服务器级或系统级环境变量。例如，在 Apache 中，可以将这一行添加到 `.htaccess` 或 `httpd.config` 文件中：
 
     SetEnv DB_CONNECTION "mysql"
 
-To recap, configuration values are loaded in this order.
+回顾一下，配置值按此顺序加载。
 
-1. System environment variables
-1. Variables in the `.env` file
-1. Values in the **config** PHP files
+1. 系统环境变量
+1. `.env` 文件中的变量
+1. **config** PHP 文件中的值
 
-> **Important**: Never commit your `.env` file to source control because this would be a security risk in the event an intruder gains access to your source control repository, since any sensitive credentials would get exposed.
+> **重要**：永远不要将您的 `.env` 文件提交到源代码控制，因为如果入侵者获得对您的源代码控制存储库的访问权，这将是一个安全风险，因为任何敏感的凭据都会被暴露。
 
-### Specific Environment Files
+###特定的环境文件
 
-In rare cases you may need to load different `.env` files for the same codebase, such as local, staging and production. The current application environment detection can be overridden by a server-level `APP_ENV` environment variable.
+在极少数情况下，您可能需要为相同的代码库加载不同的 `.env` 文件，例如本地、暂存和生产。当前应用程序环境检测可以被服务器级`APP_ENV` 环境变量覆盖。
 
     SetEnv APP_ENV "staging"
 
-The above example sets the `APP_ENV` value to **staging** will therefore attempt to load values from the `.env.staging` file instead.
+上面的示例将 `APP_ENV` 值设置为 **staging** 因此将尝试从 `.env.staging` 文件加载值。
 
-## Application Configuration
+## 应用程序配置
 
-Here we will cover some common configuration items and their purpose.
+在这里，我们将介绍一些常见的配置项及其用途。
 
-### Debug Mode
+### 调试模式
 
-The debug setting is found in the `config/app.php` configuration file with the `debug` parameter. By default, this option looks at the value of the `APP_DEBUG` environment variable, which is stored in your `.env` file.
+调试设置可以在`config/app.php` 配置文件中找到带有 `debug` 的参数 。默认情况下，此选项取自存储在您的 .env 文件中的 APP_DEBUG 环境变量的值。
 
     APP_DEBUG=true
 
-When enabled, this setting will show detailed error messages when they occur along with other debugging features. While useful during development, debug mode should always be disabled when used in a live production site. This prevents potentially sensitive information from being displayed to the end-user.
+启用后，此设置将显示详细的错误消息以及其他调试功能。虽然在开发过程中很有用，但在实时生产站点中使用时应始终禁用调试模式。这可以防止向最终用户显示潜在的敏感信息。
 
-The debug mode uses the following features when enabled:
+调试模式在启用时使用以下功能:
 
-1. [Detailed error pages](../cms/pages.md#error-page) are displayed.
-1. Failed user authentication provides a specific reason.
-1. [Combined assets](../markup/filter-theme.md) are not minified by default.
-1. [Safe mode](#safe-mode) is disabled by default.
+1. 显示[详细错误页面](../uror-page)。
+1. 用户认证失败提供具体原因。
+1. [组合资产](../markup/filter-theme.md)默认不压缩。
+1. [安全模式](#safe-mode) 默认关闭。
 
-> **Important**: Always set the `APP_DEBUG` setting to `false` in production environments.
+> **重要**：在生产环境中始终将 `APP_DEBUG` 设置设置为 `false`。
 
-### Safe Mode
+### 安全模式
 
-The safe mode setting is found in the `config/cms.php` configuration file with the `enable_safe_mode` parameter. By default, the option sources its value from `CMS_SAFE_MODE` which can be added to your `.env` file.
+安全模式可以在`config/app.php` 配置文件中找到带有 `enable_safe_mode` 的参数。默认情况下，该选项的值来自 `CMS_SAFE_MODE` ，它可以添加到您的 `.env` 文件中。
 
     CMS_SAFE_MODE=null
 
-When safe mode is enabled, the PHP code section is disabled in CMS templates to prevent a user from potentially executing malicious code.
+启用安全模式后，CMS 模板中的 PHP 代码部分将被禁用，以防止用户执行潜在的恶意代码。
 
-This variable can be set to `true` or `false`. If set to `null`, safe mode will activate when [debug mode](#debug-mode) is disabled.
+此变量可以设置为 `true` 或 `false` 。如果设置为 `null`，则在禁用 [debug mode](#debug-mode) 时将激活安全模式。
 
-### CSRF protection
+### CSRF 保护
 
-October CMS provides an easy method of protecting your application from cross-site request forgeries. First a random token is placed in your user's session. Then when a [opening form tag is used](../services/html.md#form-tokens) the token is added to the page and submitted back with each request.
+October CMS 提供了一种简单的方法来保护您的应用程序免受跨站点请求伪造。首先随机令牌(token)放置在您的session中。然后，当使用 [打开表单标签](../services/html.md#form-tokens) 时，令牌被添加到页面并随每个请求提交回来。
 
     ENABLE_CSRF=true
 
-While CSRF protection is enabled by default, you can disable it with the `enable_csrf_protection` parameter in the `config/system.php` configuration file, or the sourced value from `ENABLE_CSRF` environment variable.
+虽然默认启用 CSRF 保护，但您可以使用 `config/system.php` 配置文件中的 `enable_csrf_protection` 参数或来自`ENABLE_CSRF`环境变量的源值禁用它。

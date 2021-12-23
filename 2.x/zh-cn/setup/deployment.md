@@ -1,52 +1,52 @@
-# Deployment
+# 部署
 
-## Concepts
+## 概念
 
-### Authenticating with Composer
+### 使用 Composer 进行身份验证
 
-When deploying your application with Composer, you may be prompted to provide your login credentials for the October CMS website. These credentials will authenticate your Composer session as having permission to download the October CMS source code.
+使用 Composer 部署应用程序时，系统可能会提示您提供 October CMS 网站的登录凭据。这些凭据将验证您的 Composer 会话是否有权下载 October CMS 源代码。
 
-To avoid manually typing in these credentials, you should make sure that the [Composer auth.json file](https://getcomposer.org/doc/articles/http-basic-authentication.md) is deployed with your application.
+为避免手动输入这些凭据，您应该确保 [Composer auth.json 文件](https://getcomposer.org/doc/articles/http-basic-authentication.md) 与您的应用程序一起部署。
 
-Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands.md#set-project).
+或者，您可以使用 `project:set` [artisan 命令](../console/commands.md#set-project) 重新创建此文件。
 
 ```sh
 php artisan project:set <license key>
 ```
 
-### Deployment without Composer
+### 没有 Composer 的部署
 
 <ProductIcon src="https://github.com/octobercms/docs/blob/develop/images/deploy-plugin.png?raw=true" />
 
-If your server does not have the ability to run Composer or command line tools, such as micro instances and shared environments, you may use the [official deployment plugin](https://octobercms.com/plugin/rainlab-deploy) as a solution to deploying your website.
+如果您的服务器不具备运行 Composer 或命令行工具的能力，例如微实例和共享环境，您可以使用[官方部署插件](https://octobercms.com/plugin/rainlab-deploy)作为部署您的网站的解决方案。
 
 <div class="clearfix"></div>
 
-## Security & Performance
+## 安全性和性能
 
-### Public Folder
+### 公共文件夹
 
-For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
+为了在生产环境中获得最高安全性，您可以将 Web 服务器配置为使用 **public/** 文件夹，以确保只能访问公共文件。首先，您需要使用 `october:mirror` 命令生成一个公共文件夹。
 
 ```sh
 php artisan october:mirror
 ```
 
-This will create a new directory called **public/** in the project's base directory, from here you should modify the webserver configuration to use this new path as the home directory, also known as *wwwroot*.
+这将在项目的基本目录中创建一个名为 **public/** 的新目录，您应该从这里修改网络服务器配置以使用此新路径作为主目录，也称为 *wwwroot*。
 
-The command should be performed after each system update or when a new plugin is installed. You may instruct October CMS to automatically do this using the `system.auto_mirror_public` configuration item.
+该命令应在每次系统更新或安装新插件后执行。您可以使用 `system.auto_mirror_public` 配置项指示 October CMS 自动执行此操作。
 
 ```
 AUTO_MIRROR_PUBLIC=true
 ```
 
-> **Note**: For Windows operating systems, the `october:mirror` command must be performed in a console running as administrator. Therefore it is more suitable to run as part of a deployment process.
+> **注意**：对于 Windows 操作系统，`october:mirror` 命令必须在以管理员身份运行的控制台中执行。因此，它更适合作为部署过程的一部分运行。
 
-### Improving Performance
+### 提高性能
 
-October CMS has been fine-tuned for performance and there are some extra steps you can take to increase this performance further, especially for larger sized applications.
+October CMS 已针对性能进行了微调，您可以采取一些额外的步骤来进一步提高此性能，尤其是对于大型应用程序。
 
-Disable [debug mode](../setup/configuration.md#debug-mode) and enable cache settings inside your [environment configuration](../setup/configuration.md#environment-configuration).
+禁用 [调试模式](../setup/configuration.md#debug-mode) 并启用 [环境配置](../setup/configuration.md#environment-configuration) 中的缓存设置。
 
 ```
 APP_DEBUG=false
@@ -55,38 +55,37 @@ CMS_ASSET_CACHE=true
 CMS_TWIG_CACHE=true
 ```
 
-Cache the configuration and route tables with these artisan commands.
-
+使用这些 artisan 命令缓存配置和路由。
 ```
 php artisan config:cache
 php artisan route:cache
 ```
 
-### Shared Hosting
+### 共享主机
 
-If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
+如果您与其他用户共享一台服务器，您应该防止邻居站点遭到入侵。确保所有带有密码的文件(例如像 `config/database.php` 这样的 CMS 配置文件)无法从其他用户帐户中读取，即使他们找出了您文件的绝对路径。将此类重要文件的权限设置为 600(仅对所有者进行读写，对其他任何人都没有)是一个好主意。
 
-You can setup this protection in the file location `config/system.php` in the section titled **Default Permission Mask** or via the environment variables below.
+您可以在文件位置 config/system.php 中或通过下面的环境变量设置默认权限掩码部分的保护。
 
 ```
 DEFAULT_FILE_MASK=644
 DEFAULT_FOLDER_MASK=755
 ```
 
-> **Note**: Don't forget to manually check to see if the files are already set to 644, as you may need to go into your control panel and set them.
+> **注意**：不要忘记手动检查文件是否已设置为 644，因为您可能需要进入控制面板进行设置。
 
-## Web Server Configuration
+## Web 服务器配置
 
-October CMS has basic configuration that should be applied to your webserver. Common webservers and their configuration can be found below.
+October CMS 具有应用于您的网络服务器的基本配置。常见的网络服务器及其配置可以在下面找到。
 
-### Apache Configuration
+### Apache 配置
 
-If your webserver is running Apache there are some extra system requirements:
+如果您的网络服务器正在运行 Apache，则有一些额外的系统要求：
 
-1. mod_rewrite should be installed
-1. AllowOverride option should be switched on
+1. 应安装mod_rewrite
+1. AllowOverride 选项应该打开
 
-In some cases you may need to uncomment this line in the `.htaccess` file:
+在某些情况下，您可能需要在 `.htaccess` 文件中取消注释这一行：
 
 ```
 ##
@@ -96,21 +95,21 @@ In some cases you may need to uncomment this line in the `.htaccess` file:
 # RewriteBase /
 ```
 
-If you have installed to a subdirectory, you should add the name of the subdirectory also:
+如果您已安装到子目录，则还应添加子目录的名称：
 
 ```
 RewriteBase /mysubdirectory/
 ```
 
-### Nginx Configuration
+### Nginx 配置
 
-There are small changes required to configure your site in Nginx.
+在 Nginx 中配置您的站点需要进行一些小的更改。
 
 ```sh
 nano /etc/nginx/sites-available/default
 ```
 
-Use the following code in **server** section. If you have installed October into a subdirectory, replace the first `/` in location directives with the directory October was installed under:
+在 **server** 部分使用以下代码。如果您已将October安装到子目录中，请将位置指令中的第一个 `/` 替换为October的安装目录：
 
 ```
 location / {
@@ -167,15 +166,15 @@ location ~ ^/themes/.*/assets { try_files $uri 404; }
 location ~ ^/themes/.*/resources { try_files $uri 404; }
 ```
 
-### Lighttpd Configuration
+### Lighttpd 配置
 
-If your webserver is running Lighttpd you can use the following configuration to run October CMS. Open your site configuration file with your favorite editor.
+如果您的网络服务器正在运行 Lighttpd，您可以使用以下配置来运行 October CMS。使用您喜欢的编辑器打开您的站点配置文件。
 
 ```sh
 nano /etc/lighttpd/conf-enabled/sites.conf
 ```
 
-Paste the following code in the editor and change the **host address** and  **server.document-root** to match your project.
+在编辑器中粘贴以下代码并更改 **host address** 和 **server.document-root** 以匹配您的项目。
 
 ```
 $HTTP["host"] =~ "domain.example.com" {
@@ -194,9 +193,9 @@ $HTTP["host"] =~ "domain.example.com" {
 }
 ```
 
-### IIS Configuration
+### IIS 配置
 
-If your webserver is running Internet Information Services (IIS) you can use the following in your **web.config** configuration file to run October CMS.
+如果您的网络服务器正在运行 Internet 信息服务 (IIS)，您可以在 **web.config** 配置文件中使用以下内容来运行 October CMS。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

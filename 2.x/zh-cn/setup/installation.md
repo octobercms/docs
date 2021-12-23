@@ -122,11 +122,11 @@ sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json
 
 1. **当我输入许可证密钥时安装挂起或冻结**：在某些环境中粘贴密钥内容时可能会发生这种情况。多次按 ENTER 键以允许安装过程继续。
 
-1. **迁移过程中显示错误“Specified key was too long”**：当您使用旧版本的 MySQL 或 MariaDB 时会发生这种情况。要解决此问题，您可能需要[配置索引长度](../database/structure.md#index-lengths-using-mysql-mariadb) 以支持`utf8mb4` 字符集。
+1. **迁移过程中显示错误 `Specified key was too long`**：当您使用旧版本的 MySQL 或 MariaDB 时会发生这种情况。要解决此问题，您可能需要[配置索引长度](../database/structure.md#index-lengths-using-mysql-mariadb) 以支持`utf8mb4` 字符集。
 
 1. **打开应用程序时显示空白屏幕**：检查`/storage`文件和文件夹的权限设置是否正确，它们应该在Web服务器是可写的。
 
-1. **后端区域显示“Page not found”(404)**：如果应用程序找不到数据库，则后端会显示404页面。尝试启用 [调试模式](../setup/configuration.md#debug-mode) 以查看底层错误消息。
+1. **后端区域显示 `Page not found (404)` **：如果应用程序找不到数据库，则后端会显示404页面。尝试启用 [调试模式](../setup/configuration.md#debug-mode) 以查看底层错误消息。
 
 1. **更新应用程序时显示错误 500 **：您可能需要增加或禁用网络服务器的超时限制。例如，Apache 的 FastCGI 有时会将 `-idle-timeout` 选项设置为 30 秒。
 
