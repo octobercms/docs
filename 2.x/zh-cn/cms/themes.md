@@ -1,4 +1,4 @@
-# Themes
+# 主题
 
 Themes define the appearance of your website or web application built with October CMS. They are completely file-backed and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages.md), [partials](partials.md), [layouts](layouts.md) and [content files](content.md) in the corresponding articles.
 

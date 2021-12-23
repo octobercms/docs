@@ -1,4 +1,4 @@
-# Partials
+# 部件
 
 Partials contain reusable chunks of code that are used anywhere throughout your website. They are useful for elements that repeat on different pages or layouts. One such example is a page footer used across different [page layouts](layouts.md). Partials are also a key ingredient when [updating the page content with AJAX](../ajax/update-partials.md).
 
