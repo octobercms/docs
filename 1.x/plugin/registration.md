@@ -100,7 +100,7 @@ Key | Description
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](../ui/icon.md). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](https://octobercms.com/docs/ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 
@@ -223,7 +223,7 @@ To make the sub-menu items visible, you may [set the navigation context](../back
 Key | Description
 ------------- | -------------
 **label** | specifies the menu label localization string key, required.
-**icon** | an icon name from the [October CMS icon collection](../ui/icon.md), optional.
+**icon** | an icon name from the [October CMS icon collection](https://octobercms.com/docs/ui/icon), optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
 **url** | the URL the menu item should point to (ex. `Backend::url('author/plugin/controller/action')`, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
