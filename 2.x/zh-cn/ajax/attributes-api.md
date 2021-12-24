@@ -1,6 +1,6 @@
-# Data Attributes API
+# 数据属性 API
 
-The data attributes API lets you issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
+数据属性 API 让您无需任何 JavaScript 即可发出 AJAX 请求。 在许多情况下，数据属性 API 不如 JavaScript API 冗长——你编写更少的代码来获得相同的结果。 支持的 AJAX 数据属性有：
 
 Attribute | Description
 ------------- | -------------
@@ -31,7 +31,7 @@ Element | Event
 **Text, number, and password fields** | when the text is changed and only if the `data-track-input` attribute is presented.
 **Dropdowns, checkboxes, radios** | when the element is selected.
 
-## Usage Examples
+## 使用示例
 
 Trigger the `onCalculate` handler when the form is submitted. Update the element with the identifier "result"` with the **calcresult** partial:
 

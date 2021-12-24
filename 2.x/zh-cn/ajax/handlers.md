@@ -1,6 +1,6 @@
-# Event Handlers
+# 事件处理程序
 
-## AJAX Handlers
+## AJAX 处理程序
 
 AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes.md#php-section) or inside [components](../cms/components.md). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials.md) as part of the AJAX request.
 
@@ -13,7 +13,7 @@ function onSubmitContactForm()
 
 If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](../cms/components.md) have the lowest priority.
 
-### Calling a Handler
+### 调用处理程序
 
 Every AJAX request should specify a handler name, either using the [data attributes API](../ajax/attributes-api.md) or the [JavaScript API](../ajax/javascript-api.md). When the request is made, the server will search all the registered handlers and locate the first one it finds.
 
@@ -37,7 +37,7 @@ You may want to use the [`__SELF__`](https://octobercms.com/docs/plugin/componen
 <form data-request="{{ __SELF__ }}::onCalculate" data-request-update="'{{ __SELF__ }}::calcresult': '#result'">
 ```
 
-#### Generic handler
+#### 通用处理程序
 
 Sometimes you may need to make an AJAX request for the sole purpose of updating page contents, not needing to execute any code. You may use the `onAjax` handler for this purpose. This handler is available everywhere without needing to write any code.
 
@@ -45,7 +45,7 @@ Sometimes you may need to make an AJAX request for the sole purpose of updating 
 <button data-request="onAjax">Do nothing</button>
 ```
 
-## Redirects in AJAX Handlers
+## AJAX 处理程序中的重定向
 
 If you need to redirect the browser to another location, return the `Redirect` object from the AJAX handler. The framework will redirect the browser as soon as the response is returned from the server. Example AJAX handler:
 
@@ -56,7 +56,7 @@ function onRedirectMe()
 }
 ```
 
-## Returning Data from AJAX Handlers
+## 从 AJAX 处理程序返回数据
 
 In advanced cases you may want to return structured data from your AJAX handlers. If an AJAX handler returns an array, you can access its elements in the `success` event handler. Example AJAX handler:
 
@@ -89,7 +89,7 @@ The same with the JavaScript API:
     }); return false;">
 ```
 
-## Throwing an AJAX Exception
+## 抛出 AJAX 异常
 
 You may throw an [AJAX exception](../services/error-log.md#ajax-exception) using the `AjaxException` class to treat the response as an error while retaining the ability to send response contents as normal. Simply pass the response contents as the first argument of the exception.
 
@@ -102,7 +102,7 @@ throw new AjaxException([
 
 > **Note**: When throwing this exception type [partials will be updated](../ajax/update-partials.md) as normal.
 
-## Running Code Before Handlers
+## 在处理程序之前运行代码
 
 Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts.md#dynamic-pages) allows code to run before every AJAX handler.
 

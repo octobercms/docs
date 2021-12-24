@@ -85,7 +85,7 @@ php artisan serve
 
 ```bash
 php artisan queue:work
-``
+```
 
 ## 最低系统要求
 
@@ -114,7 +114,7 @@ October CMS 对服务器有一些要求：
 ```bash
 sudo apt-get update &&
 sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
-``
+```
 
 使用 SQL Server 数据库引擎时，需要安装 [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) 用户定义聚合。
 

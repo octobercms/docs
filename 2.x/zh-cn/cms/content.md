@@ -1,24 +1,24 @@
-# Content Blocks
+# 内容块
 
-Content Blocks can be text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that are edited separately from the page or layout. They're designed to hold static content only and support basic templating variables. [Partials](partials.md) are more flexible and should be used for generating dynamic content.
+内容块可以是与页面或布局分开编辑的文本、HTML 或 [Markdown](http://daringfireball.net/projects/markdown/syntax) 块。它们旨在仅保存静态内容并支持基本模板变量。 [部件](partials.md) 更灵活，应该用于生成动态内容。
 
-## Introduction
+## 介绍
 
-Content blocks files reside in the **/content** subdirectory of a theme directory. The following extensions are supported for content files.
+内容块文件驻留在主题目录的 **/content** 子目录中。内容文件支持以下扩展名。
 
-Extension | Description
+扩展 |描述
 ------------- | -------------
-**htm** | Used for HTML markup.
-**txt** | Used for plain text.
-**md** | Used for Markdown syntax.
+**htm** |用于 HTML 标记。
+**txt** |用于纯文本。
+**MD** |用于 Markdown 语法。
 
-The extension affects a content block's display mode in the back-end user interface, either with a WYSIWYG editor, plain text editor or markdown editor. It also determines rendering the blocks on the website; for example, Markdown blocks will convert to HTML before display.
+该扩展会影响后端用户界面中内容块的显示模式，可以使用 WYSIWYG 编辑器、纯文本编辑器或 Markdown 编辑器。它还决定在网站上渲染块；例如，Markdown 块会在显示之前转换为 HTML。
 
-## Rendering Content Blocks
+## 渲染内容块
 
-Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pages.md), [partial](partials.md) or [layout](layouts.md).
+使用 `{% content 'file.htm' %}` 标签在 [page](pages.md)、[partial](partials.md) 或 [layout](layouts.md) 中呈现内容块。
 
-This example shows a complete page rendering a content block.
+此示例显示了呈现内容块的完整页面。
 
 ```
 url = "/contacts"
@@ -28,40 +28,40 @@ url = "/contacts"
 </div>
 ```
 
-Another example rendering some markdown with the `md` extension.
+另一个使用 `md` 扩展名渲染一些 Markdown 的示例。
 
 ```twig
 {% content 'my-markdown.md' %}
 ```
 
-## Passing Variables to Content Blocks
+## 将变量传递给内容块
 
-Sometimes you may need to pass variables to a content block from the external code. While content blocks do not support Twig markup, they do support using variables with basic syntax. You can pass variables to content blocks by specifying them after the content block name in the `{% content %}` tag.
+有时您可能需要将变量从外部代码传递到内容块。虽然内容块不支持 Twig 标记，但它们确实支持使用具有基本语法的变量。您可以通过在 `{% content %}` 标签中的内容块名称之后指定变量来将变量传递给内容块。
 
-Passing the variable called `name` with a value **John** to the content block.
+将名为“name”且值为 **John** 的变量传递给内容块。
 
 ```twig
 {% content 'welcome.htm' name='John' %}
 ```
 
-Inside the content block, variables can be accessed using singular *curly brackets*.
+在内容块内，可以使用单个 *大括号* 访问变量。
 
 ```
 <h1>This is a demo for {name}</h1>
 ```
 
-> **Tip**: More information on variable use can be found [in the Markup guide](../markup/tag-content.md).
+> **提示**：有关变量使用的更多信息可以在 [标记指南](../markup/tag-content.md) 中找到。
 
-### Global Variables
+### 全局变量
 
-You may register variables that are globally available to all content blocks with the `View::share` method.
+您可以使用`View::share` 方法注册对所有内容块全局可用的变量。
 
 ```php
 View::share('site_name', 'October CMS');
 ```
 
-A common area to place this method is inside the register or boot method of a [plugin registration file](../plugin/registration.md). Using the above example, the variable `{site_name}` will be available inside all content blocks.
+放置此方法的一个公共区域是在[插件注册文件](../plugin/registration.md) 的register或boot方法内。使用上面的示例，变量 `{site_name}` 将在所有内容块中可用。
 
 ```
-<p>Welcome to {site_name}</p>
+<p>欢迎来到{site_name}</p>
 ```

@@ -1,8 +1,8 @@
 # 页面
 
-Every website serves up at least one page and in October CMS, a page is represented with page template. Page template files reside in the **pages** directory in your theme. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension.
+每个网站至少提供一个页面，在 October CMS 中，一个页面用页面模板表示。 页面模板文件位于主题的 **pages** 目录中。 页面文件名不会影响路由，但根据页面的功能来命名页面是个好主意。 这些文件应具有 **htm** 扩展名。
 
-The [Configuration](themes.md#configuration-section) and [Twig](themes.md#twig-section) template sections are required for pages, but the [PHP section](themes.md#php-section) is optional. Below, you can see the simplest home page example:
+页面需要 [配置部分](themes.md#configuration-section) 和 [Twig](themes.md#twig-section) 模板部分，但 [PHP 部分](themes.md#php-section) 是可选的 . 下面，您可以看到最简单的主页示例：
 
 ```
 url = "/"
@@ -10,35 +10,35 @@ url = "/"
 <h1>Hello, world!</h1>
 ```
 
-## Page Configuration
+## 页面配置
 
-Page configuration is defined in the [Configuration Section](themes.md#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](components.md), which are explained in another article. The following configuration parameters are supported for pages:
+页面配置定义在页面模板文件的[配置部分](themes.md#configuration-section)中。 页面配置定义了路由和渲染页面及其[组件](components.md)所需的页面参数，在另一篇文章中进行了解释。 页面支持以下配置参数：
 
-Parameter | Description
+参数 | 描述
 ------------- | -------------
-**url** | the page URL, required. The URL syntax is described below.
-**title** | the page title, required.
-**layout** | the page [layout](layouts.md), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
-**description** | the page description for the back-end interface, optional.
-**hidden** | hidden pages are accessible only by logged-in back-end users, optional.
+**url** | 页面 URL，必填。 URL 语法如下所述。
+**title** | 页面标题，必填。
+**layout** | 页面 [布局](layouts.md)，可选。 如果指定，则应包含布局文件的名称，不带扩展名，例如：`default`。
+**description** | 后端界面的页面描述，可选。
+**hidden** | 隐藏页面只能由登录的后端用户访问，可选。
 
-### URL Syntax
+### URL 语法
 
-The page URL is defined with the **url** configuration parameter. URLs should start with the forward slash character, and can contain parameters. URLs without parameters are fixed and strict. In the following example, the page URL is `/blog`.
+页面 URL 使用 **url** 配置参数定义。 URL 应以正斜杠字符开头，并且可以包含参数。 没有参数的 URL 是固定且严格的。 在以下示例中，页面 URL 是 `/blog`。
 
 ```ini
 url = "/blog"
 ```
 
-> **Note**: The page URL is case-insensitive by default.
+> **注意**：页面 URL 默认不区分大小写。
 
-URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by October components or from the page [PHP code](themes.md#php-section) section.
+带参数的 URL 更灵活。 具有以下示例中定义的 URL 模式的页面将针对任何地址(如 `/blog/post/something`)显示。 URL 参数可以通过 October 组件或从页面 [PHP 代码](themes.md#php-section) 部分访问。
 
 ```ini
 url = "/blog/post/:post_id"
 ```
 
-This is how you can access the URL parameter from the page's PHP section (see the [Dynamic pages](#dynamic-pages) section for more details):
+这是从页面的 PHP 部分访问 URL 参数的方法（有关更多详细信息，请参阅 [动态页面](#dynamic-pages) 部分）：
 
 ```
 url = "/blog/post/:post_id"
@@ -50,25 +50,25 @@ function onStart()
 ==
 ```
 
-Parameter names should be compatible with PHP variable names. To make a parameter optional, add a question mark after its name:
+参数名称应与 PHP 变量名称兼容。 要使参数可选，请在其名称后添加一个问号：
 
 ```ini
 url = "/blog/post/:post_id?"
 ```
 
-Parameters in the middle of the URL cannot be optional. In the next example, the `:post_id` parameter is marked as optional, but is processed as required.
+URL 中间的参数不能是可选的。 在下一个示例中，`:post_id` 参数被标记为可选，但会按要求进行处理。
 
 ```ini
 url = "/blog/:post_id?/comments"
 ```
 
-Optional parameters can have default values which are used as fallback values in case the real parameter value is not presented in the URL. Default values cannot contain any asterisks, pipe symbols, or question marks. The default value is specified after the **question mark**. In the next example, the `category_id` parameter would be `10` for the URL `/blog/category`.
+可选参数可以具有默认值，这些默认值用作备用值，以防 URL 中未显示实际参数值。 默认值不能包含任何星号*、管道符号|或问号?。 默认值在**?**之后指定。 在下一个示例中，URL `/blog/category` 的 `category_id` 参数将为 `10`。
 
 ```ini
 url = "/blog/category/:category_id?10"
 ```
 
-You can also use regular expressions to validate parameters. To add a validation expression, add a pipe symbol after the parameter name, or a question mark, and specify the expression. The forward slash symbol is not allowed in these expressions. Examples:
+您还可以使用正则表达式来验证参数。 要添加验证表达式，请在参数名称后添加管道符号或问号，并指定表达式。 这些表达式中不允许使用正斜杠符号。 例子：
 
 ```ini
 url = "/blog/:post_id|^[0-9]+$/comments" ; this will match /blog/10/comments
@@ -78,32 +78,32 @@ url = "/blog/:post_id|^[0-9]+$" ; this will match /blog/3
 url = "/blog/:post_name?|^[a-z0-9\-]+$" ; this will match /blog/my-blog-post
 ```
 
-It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
+通过在参数后放置一个**星号**，可以使用特殊的*通配符*参数。 与常规参数不同，通配符参数可以匹配一个或多个 URL 段。 一个 URL 只能包含一个通配符参数，不能使用正则表达式，也不能跟一个可选参数。
 
 ```ini
 url = "/blog/:category*/:slug"
 ```
 
-Wildcard parameters themselves can be made optional by preceding the asterisk with the `?` character however.
+但是，通配符参数本身可以通过在星号前加上 `?` 字符来成为可选参数。
 
 ```ini
 url = "/blog/:slug?*"
 ```
 
-For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brown/make/volkswagen/beetle/retro/edit` and extract the following parameter values:
+例如，像 `/color/:color/make/:make*/edit` 这样的 URL 将匹配 `/color/brown/make/volkswagen/beetle/retro/edit` 并提取以下参数值：
 
 - color: `brown`
 - make: `volkswagen/beetle/retro`
 
-> **Note**: Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
+> **注意**：子目录不影响页面 URL - URL 仅使用 **url** 参数定义。
 
-## Dynamic Pages
+## 动态页面
 
-Inside the [Twig section](themes.md#twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes.md#php-section), or by [Components](components.md). In this article, we describe how to prepare variables in the PHP section.
+在页面模板的 [Twig 部分](themes.md#twig-section) 内，您可以使用任何 [由 October 提供的功能、过滤器和标签](../markup)。任何动态页面都需要**变量**。 在October，变量可能由页面、布局[PHP 部分](themes.md#php-section) 或[组件](components.md) 准备。在本文中，我们将在 PHP 部分描述如何准备变量。
 
-### Page Execution Life Cycle
+### 页面执行生命周期
 
-There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components.md) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
+可以在页面和布局的 PHP 部分定义特殊函数：`onInit`、`onStart` 和 `onEnd`。 `onInit` 函数在所有组件初始化时和 AJAX 请求被处理之前执行。 `onStart` 函数在页面执行开始时执行。 `onEnd` 函数在页面渲染之前和页面 [组件](components.md) 执行之后执行。在 `onStart` 和 `onEnd` 函数中，你可以将变量注入到 Twig 环境中。使用 `数组表示法` 将变量传递给页面：
 
 ```
 url = "/"
@@ -116,7 +116,7 @@ function onStart()
 <h3>{{ hello }}</h3>
 ```
 
-The next example is more complicated. It shows how to load a blog post collection from the database, and display on the page (the Acme\Blog plugin is imaginary):
+下一个例子更复杂。 它展示了如何从数据库加载博客文章集合，并显示在页面上（Acme\Blog 插件是虚构的）：
 
 ```
 url = "/blog"

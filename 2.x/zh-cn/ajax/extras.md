@@ -1,6 +1,6 @@
-# Extra Features
+# 额外功能
 
-When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in front-end CMS pages.
+使用 AJAX 框架时，您可以选择指定 **extras** 后缀，其中包括额外的 StyleSheet 和 JavaScript 文件。 在前端 CMS 页面中处理 AJAX 请求时，这些功能非常有用。
 
 ```twig
 {% framework extras %}
@@ -24,7 +24,7 @@ You may specify the `data-request-validate` attribute on a form to enable valida
 </form>
 ```
 
-### Throwing a Validation Error
+### 抛出验证错误
 
 In the server side AJAX handler you may throw a [validation exception](../services/error-log.md#validation-exception) using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error messages for the values.
 
@@ -37,7 +37,7 @@ function onSubmit()
 
 > **Note**: You can also pass an instance of the [validation service](../services/validation.md) as the first argument of the exception.
 
-### Displaying Error Messages
+### 显示错误信息
 
 Inside the form, you may display the first error message by using the `data-validate-error` attribute on a container element. The content inside the container will be set to the error message and the element will be made visible.
 
@@ -65,7 +65,7 @@ $(document).on('ajaxPromise', '[data-request]', function() {
 });
 ```
 
-### Displaying Errors with Fields
+### 用字段显示错误
 
 Alternatively, you can show validation messages for individual fields by defining an element that uses the `data-validate-for` attribute, passing the field name as the value.
 
