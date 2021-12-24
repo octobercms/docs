@@ -38,7 +38,7 @@ url = "/blog"
 url = "/blog/post/:post_id"
 ```
 
-这是从页面的 PHP 部分访问 URL 参数的方法（有关更多详细信息，请参阅 [动态页面](#dynamic-pages) 部分）：
+这是从页面的 PHP 部分访问 URL 参数的方法(有关更多详细信息，请参阅 [动态页面](#dynamic-pages) 部分)：
 
 ```
 url = "/blog/post/:post_id"
@@ -116,7 +116,7 @@ function onStart()
 <h3>{{ hello }}</h3>
 ```
 
-下一个例子更复杂。 它展示了如何从数据库加载博客文章集合，并显示在页面上（Acme\Blog 插件是虚构的）：
+下一个例子更复杂。 它展示了如何从数据库加载博客文章集合，并显示在页面上(Acme\Blog 插件是虚构的)：
 
 ```
 url = "/blog"
@@ -128,7 +128,7 @@ function onStart()
     $this['posts'] = Post::orderBy('created_at', 'desc')->get();
 }
 ==
-<h2>Latest posts</h2>
+<h2>最新帖子</h2>
 <ul>
     {% for post in posts %}
         <h3>{{ post.title }}</h3>
@@ -137,11 +137,11 @@ function onStart()
 </ul>
 ```
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup.md). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts.md#dynamic-layouts) article.
+[标记指南](../markup.md) 中描述了 October 提供的默认变量和 Twig 扩展。 [动态布局](layouts.md#dynamic-layouts) 文章描述了处理程序的执行顺序。
 
-### Sending a Custom Response
+### 发送自定义响应
 
-All methods defined in the execution life cycle have the ability to halt the process and return a response - simply return a response from the life cycle function. The example below will not load any page contents, and instead return the string *Hello world!* to the browser:
+执行生命周期中定义的所有方法都能够停止进程并返回响应——只需从生命周期函数返回响应即可。 下面的示例不会加载任何页面内容，而是将字符串 *Hello world!* 返回给浏览器：
 
 ```php
 function onStart()
@@ -150,7 +150,7 @@ function onStart()
 }
 ```
 
-A more useful example might be triggering a redirect using the `Redirect` facade:
+一个更有用的例子是使用 `Redirect` 门面触发重定向：
 
 ```php
 public function onStart()
@@ -159,19 +159,19 @@ public function onStart()
 }
 ```
 
-### Handling Forms
+### 处理表单
 
-You can handle standard forms with handler methods defined in the page or layout [PHP section](themes.md#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction.md) article). Use the [`form_open()`](markup#standard-form) function to define a form that refers to an event handler. Example:
+您可以使用在页面或布局中定义的处理程序方法处理标准表单 [PHP 部分](themes.md#php-section)(处理 AJAX 请求在 [AJAX 框架](../ajax/introduction.md) 中有说明) 文章)。 使用 [`form_open()`](markup#standard-form) 函数定义引用事件处理程序的表单。 例子：
 
 ```twig
 {{ form_open({ request: 'onHandleForm' }) }}
-    Please enter a string: <input type="text" name="value"/>
+    请输入字符串: <input type="text" name="value"/>
     <input type="submit" value="Submit me!"/>
 {{ form_close() }}
 <p>Last submitted value: {{ lastValue }}</p>
 ```
 
-The `onHandleForm` function can be defined in the page or layout [PHP section](themes.md#php-section), like so:
+`onHandleForm` 函数可以在页面或布局 [PHP section](themes.md#php-section) 中定义，如下所示：
 
 ```php
 function onHandleForm()
@@ -180,46 +180,46 @@ function onHandleForm()
 }
 ```
 
-The handler loads the value with the `post` function and initializes the page's `lastValue` attribute variable which is displayed below the form in the first example.
+处理程序使用 `post` 函数加载值并初始化页面的 `lastValue` 属性变量，该变量显示在第一个示例中的表单下方。
 
-> **Note**: If a handler with the same name is defined in the page layout, the page, and a page [component](components.md), October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
+> **注意**：如果在页面布局、页面和页面[组件](components.md)中定义了同名的处理程序，October将执行页面处理程序。 如果在组件和布局中定义了处理程序，则将执行布局处理程序。 处理程序优先级为：页面、布局、组件。
 
-If you want to refer to a handler defined in a specific [component](components.md), use the component's name or alias in the handler reference:
+如果要引用在特定 [组件](components.md) 中定义的处理程序，请在处理程序引用中使用该组件的名称或别名：
 
 ```twig
 {{ form_open({ request: 'myComponent::onHandleForm' }) }}
 ```
 
-## 404 Page
+## 404 页面
 
-If the theme contains a page with the URL `/404`, it is displayed when the system can't find a requested page.
+如果主题包含一个 URL 为 `/404` 的页面，当系统找不到请求的页面时会显示它。
 
-## Error Page
+## 错误页面
 
-By default, any errors will be shown with a detailed error page containing the file contents, line number, and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script, and creating a page with the URL `/error`.
+默认情况下，任何错误都会显示一个详细的错误页面，其中包含文件内容、行号和发生错误的堆栈跟踪。 您可以通过在 `config/app.php` 脚本中将配置值 `debug` 设置为 **false** 并使用 URL `/error` 创建一个页面来显示自定义错误页面。
 
-## Page Variables
+## 页面变量
 
-The properties of a page can be accessed in the [PHP code section](../cms/themes.md#php-section), or [Components](../cms/components.md) by referencing `$this->page`.
+可以在[PHP代码部分](../cms/themes.md#php-section)或[组件](../cms/components.md)中通过引用`$this->page`。
 
 ```php
 function onEnd()
 {
-    $this->page->meta_title = 'A different page title';
+    $this->page->meta_title = '不同的页面标题';
 }
 ```
 
-They can also be accessed in the markup using the [`this.page` variable](../markup/this-page). For example, to return the title of a page:
+也可以使用 [`this.page` 变量](../markup/this-page) 在标记中访问它们。 例如，要返回页面的标题：
 
 ```twig
-<p>The title of this page is: {{ this.page.meta_title }}</p>
+<p>这个页面的标题是: {{ this.page.meta_title }}</p>
 ```
 
-More information can be found at [`this.page` in the Markup guide](../markup/this-page).
+更多信息可以在 [标记指南中的`this.page`](../markup/this-page) 中找到。
 
-## Injecting Page Assets Programmatically
+## 以编程方式注入页面资产
 
-If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes.md#php-section) of a page or [layout](layout.md) template. Example:
+如果需要，您可以使用控制器的 `addCss` 和 `addJs` 方法将资产(CSS 和 JavaScript 文件)注入页面。 它可以在页面的 [PHP 部分](themes.md#php-section) 或 [layout](layout.md) 模板中定义的 `onStart` 函数中完成。 例子：
 
 ```php
 function onStart()
@@ -229,9 +229,9 @@ function onStart()
 }
 ```
 
-If the path specified in the `addCss` and `addJs` method argument begins with a slash (/), it will be relative to the website root. If the asset path does not begin with a slash, it is relative to the theme.
+如果 `addCss` 和 `addJs` 方法参数中指定的路径以斜杠 (/) 开头，则它将相对于网站根目录。 如果资产路径不以斜杠开头，则它是相对于主题的。
 
-Injected assets can be combined by passing them as an array:
+注入的资产可以通过将它们作为数组传递来组合：
 
 ```php
 function onStart()
@@ -241,7 +241,7 @@ function onStart()
 }
 ```
 
-LESS and SCSS assets can be injected and compiled using the combiner:
+可以使用组合器注入和编译 LESS 和 SCSS 资产：
 
 ```php
 function onStart()
@@ -250,7 +250,7 @@ function onStart()
 }
 ```
 
-The second argument of `addCss` and `addJs` allows you to provide additional attributes to your injected assets:
+`addCss` 和 `addJs` 的第二个参数允许你为注入的资产提供额外的属性：
 
 ```php
 function onStart()
@@ -259,7 +259,7 @@ function onStart()
 }
 ```
 
-In order to output the injected assets on pages or [layouts](layout.md), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
+为了在页面或 [布局](layout.md) 上输出注入的资源，请使用 [{% styles %}](../markup/tag-styles) 和 [{% scripts %}](../markup/tag-scripts)标签。 例子：
 
 ```twig
 <head>

@@ -1,26 +1,26 @@
 # 部件
 
-Partials contain reusable chunks of code that are used anywhere throughout your website. They are useful for elements that repeat on different pages or layouts. One such example is a page footer used across different [page layouts](layouts.md). Partials are also a key ingredient when [updating the page content with AJAX](../ajax/update-partials.md).
+部件包含可重用的代码块，可在整个网站的任何地方使用。 它们对于在不同页面或布局上重复的元素很有用。 一个这样的例子是跨不同[页面布局](layouts.md)使用的页脚。 在[使用 AJAX 更新页面内容](../ajax/update-partials.md) 时，部件也是一个关键因素。
 
-Partial templates files reside in the **partials** directory in your theme. Partial files should have the **htm** extension. Next is an example of the simplest possible partial.
-
-```
-<p>This is a partial</p>
-```
-
-A [Configuration](themes.md#configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the backend user interface. This example shows a partial with a description defined.
+部件模板文件位于主题的 **partials** 目录中。 部件文件应具有 **htm** 扩展名。 接下来是最简单的部件示例。
 
 ```
-description = "Demo partial"
+<p>这是部件</p>
+```
+
+[Configuration](themes.md#configuration-section) 配置部分对于部件是可选的，并且可以包含显示在后端用户界面中的可选 **description** 参数。 此示例显示了定义了描述的部分。
+
+```
+description = "演示部件"
 ==
-<p>This is a partial</p>
+<p>这是部件</p>
 ```
 
-The partial configuration section can also contain component definitions. The [Components article](components.md) explains components in more detail.
+部件配置部分还可以包含组件定义。 [组件文章](components.md) 更详细地解释了组件。
 
-## Rendering Partials
+## 渲染部件
 
-The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. Remember that if you refer a partial from a [subdirectory](themes.md#subdirectories) you should specify the subdirectory name. The `{% partial %}` tag can be used inside a page, layout or another partial. Example of a page referring to a partial:
+`{% partial "partial-name" %}` Twig 标签呈现部件。 该标签有一个必需的参数：不带扩展名的部件文件名。 请记住，如果您从 [子目录](themes.md#subdirectories) 引用部件，您应该指定子目录名称。 `{% partial %}` 标签可以在页面、布局或其他部件中使用。 引用部件的页面示例：
 
 ```twig
 <div class="sidebar">
@@ -28,9 +28,9 @@ The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a sin
 </div>
 ```
 
-## Passing Variables to Partials
+## 将变量传递给部件
 
-You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
+你会发现你经常需要将变量从外部代码传递给部件代码。 这使得分音更加有用。 例如，您可以有一个部件来呈现博客文章列表。 如果您可以将帖子集合传递给部件，则可以在博客存档页面、博客类别页面等上使用相同的部件。 您可以通过在 `{% partial %}` 标签中的部件名称之后指定变量来将变量传递给部分：
 
 ```twig
 <div class="sidebar">
@@ -38,7 +38,7 @@ You will find that you often need to pass variables to a partial from the extern
 </div>
 ```
 
-You can also assign new variables for use in the partial:
+您还可以分配新变量以用于部件：
 
 ```twig
 <div class="sidebar">
@@ -46,40 +46,40 @@ You can also assign new variables for use in the partial:
 </div>
 ```
 
-Inside the partial, variables can be accessed like any other markup variable:
+在部件内部，可以像访问任何其他标记变量一样访问变量：
 
 ```twig
-<p>Country: {{ country }}, city: {{ city }}.</p>
+<p>国家: {{ country }}, 城市: {{ city }}.</p>
 ```
 
-### Passing Markup as a Variable
+### 将标记作为变量传递
 
-It is possible to pass markup to a partial by adding the `body` attribute to the partial tag.
+通过将`body` 属性添加到partial 标签，可以将标记传递给部件。
 
 ```twig
 {% partial "card" body %}
-    This is the card contents
+    这是卡片内容
 {% endpartial %}
 ```
 
-The contents are available inside the partial as the `body` variable.
+内容在部件内部作为 `body` 变量可用。
 
 ```twig
 {{ body|raw }}
 ```
 
-Combined with the [placeholder markup tag](../markup/tag-placeholder.md), this lets you build composable partials.
+结合 [占位符标记](../markup/tag-placeholder.md)，这可以让您构建可组合的部件。
 
 ```twig
 {% partial "card" image="img.jpg" body %}
     {% put header %}
-        <h2>This is the card header</h2>
+        <h2>这是卡头</h2>
     {% endput %}
-    This is the card contents
+    这是卡片内容
 {% endpartial %}
 ```
 
-The **card** partial is composed of two content areas and an image variable.
+**card** 部件由两个内容区域和一个图像变量组成。
 
 ```twig
 <div class="header">
@@ -93,13 +93,13 @@ The **card** partial is composed of two content areas and an image variable.
 </div>
 ```
 
-## Dynamic Partials
+## 动态部件
 
-Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#dynamic-pages) documentation for details.
+部件像页面一样，可以使用任何 Twig 功能。 详情请参考[动态页面](pages.md#dynamic-pages) 文档。
 
-### Partial Execution Life Cycle
+### 部件执行生命周期
 
-There are special functions that can be defined in the PHP section of partials: `onStart` and `onEnd`. The `onStart` function is executed before the partial is rendered and before the partial [components](components.md) are executed. The `onEnd` function is executed before the partial is rendered and after the partial [components](components.md) are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the `array notation` to pass variables to the page:
+部件函数的 PHP 部分可以定义一些特殊的函数：`onStart` 和 `onEnd`。 `onStart` 函数在部件渲染之前和部件[组件](components.md) 执行之前执行。 `onEnd` 函数在部件渲染之前和部件 [组件](components.md) 执行之后执行。 在 onStart 和 onEnd 函数中，您可以将变量注入 Twig 环境。 使用 `数组` 将变量传递给页面：
 
 ```
 ==
@@ -111,14 +111,14 @@ function onStart()
 <h3>{{ hello }}</h3>
 ```
 
-The templating language provided by October is described in the [Markup Guide](../markup.md). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts.md#dynamic-layouts) article.
+[标记指南](../markup.md) 中描述了 October 提供的模板语言。 [动态布局](layouts.md#dynamic-layouts) 文章中描述了处理程序执行的整体顺序。
 
-### Life Cycle Limitations
+### 生命周期限制
 
-Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. They do not follow the standard execution process, as described in the [layout execution life cycle](layouts.md#dynamic-layouts). The following limitations should be noted:
+由于它们的实例化较晚，因此在页面呈现期间，部件对象的生命周期存在一些限制。 它们不遵循标准执行流程，如[布局执行生命周期](layouts.md#dynamic-layouts) 中所述。 应注意以下限制：
 
-1. AJAX events are not registered and won't function as normal.
-1. The life cycle functions cannot return any values.
-1. Regular POST form handling will occur at the time the partial is rendered.
+1. AJAX 事件未注册，无法正常运行。
+1. 生命周期函数不能返回任何值。
+1. 正常的 POST 表单处理将在部分渲染时发生。
 
-In general, component usage in partials is designed for basic components that render simple markup without much processing, such as a *Like* or *Tweet* button.
+通常，部件中的组件使用是为基本组件设计的，这些组件无需太多处理即可呈现简单的标记，例如 *Like* 或 *Tweet* 按钮。
