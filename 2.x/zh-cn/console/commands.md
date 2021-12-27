@@ -1,4 +1,4 @@
-# Command List
+# 命令列表
 
 October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development.md) or speed up development with the provided [scaffolding commands](../console/scaffolding.md).
 

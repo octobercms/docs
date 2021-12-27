@@ -1,8 +1,8 @@
 # 页面
 
-Every website serves up at least one page and in October CMS, a page is represented with page template. Page template files reside in the **pages** directory in your theme. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension.
+每个网站至少提供一个页面，在 October CMS 中，一个页面用页面模板表示。 页面模板文件位于主题的 **pages** 目录中。 页面文件名不会影响路由，但根据页面的功能来命名页面是个好主意。 这些文件应具有 **htm** 扩展名。
 
-The [Configuration](themes.md#configuration-section) and [Twig](themes.md#twig-section) template sections are required for pages, but the [PHP section](themes.md#php-section) is optional. Below, you can see the simplest home page example:
+页面需要 [配置部分](themes.md#configuration-section) 和 [Twig](themes.md#twig-section) 模板部分，但 [PHP 部分](themes.md#php-section) 是可选的 . 下面，您可以看到最简单的主页示例：
 
 ```
 url = "/"
@@ -10,35 +10,35 @@ url = "/"
 <h1>Hello, world!</h1>
 ```
 
-## Page Configuration
+## 页面配置
 
-Page configuration is defined in the [Configuration Section](themes.md#configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](components.md), which are explained in another article. The following configuration parameters are supported for pages:
+页面配置定义在页面模板文件的[配置部分](themes.md#configuration-section)中。 页面配置定义了路由和渲染页面及其[组件](components.md)所需的页面参数，在另一篇文章中进行了解释。 页面支持以下配置参数：
 
-Parameter | Description
+参数 | 描述
 ------------- | -------------
-**url** | the page URL, required. The URL syntax is described below.
-**title** | the page title, required.
-**layout** | the page [layout](layouts.md), optional. If specified, should contain the name of the layout file, without extension, for example: `default`.
-**description** | the page description for the back-end interface, optional.
-**hidden** | hidden pages are accessible only by logged-in back-end users, optional.
+**url** | 页面 URL，必填。 URL 语法如下所述。
+**title** | 页面标题，必填。
+**layout** | 页面 [布局](layouts.md)，可选。 如果指定，则应包含布局文件的名称，不带扩展名，例如：`default`。
+**description** | 后端界面的页面描述，可选。
+**hidden** | 隐藏页面只能由登录的后端用户访问，可选。
 
-### URL Syntax
+### URL 语法
 
-The page URL is defined with the **url** configuration parameter. URLs should start with the forward slash character, and can contain parameters. URLs without parameters are fixed and strict. In the following example, the page URL is `/blog`.
+页面 URL 使用 **url** 配置参数定义。 URL 应以正斜杠字符开头，并且可以包含参数。 没有参数的 URL 是固定且严格的。 在以下示例中，页面 URL 是 `/blog`。
 
 ```ini
 url = "/blog"
 ```
 
-> **Note**: The page URL is case-insensitive by default.
+> **注意**：页面 URL 默认不区分大小写。
 
-URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by October components or from the page [PHP code](themes.md#php-section) section.
+带参数的 URL 更灵活。 具有以下示例中定义的 URL 模式的页面将针对任何地址(如 `/blog/post/something`)显示。 URL 参数可以通过 October 组件或从页面 [PHP 代码](themes.md#php-section) 部分访问。
 
 ```ini
 url = "/blog/post/:post_id"
 ```
 
-This is how you can access the URL parameter from the page's PHP section (see the [Dynamic pages](#dynamic-pages) section for more details):
+这是从页面的 PHP 部分访问 URL 参数的方法(有关更多详细信息，请参阅 [动态页面](#dynamic-pages) 部分)：
 
 ```
 url = "/blog/post/:post_id"
@@ -50,25 +50,25 @@ function onStart()
 ==
 ```
 
-Parameter names should be compatible with PHP variable names. To make a parameter optional, add a question mark after its name:
+参数名称应与 PHP 变量名称兼容。 要使参数可选，请在其名称后添加一个问号：
 
 ```ini
 url = "/blog/post/:post_id?"
 ```
 
-Parameters in the middle of the URL cannot be optional. In the next example, the `:post_id` parameter is marked as optional, but is processed as required.
+URL 中间的参数不能是可选的。 在下一个示例中，`:post_id` 参数被标记为可选，但会按要求进行处理。
 
 ```ini
 url = "/blog/:post_id?/comments"
 ```
 
-Optional parameters can have default values which are used as fallback values in case the real parameter value is not presented in the URL. Default values cannot contain any asterisks, pipe symbols, or question marks. The default value is specified after the **question mark**. In the next example, the `category_id` parameter would be `10` for the URL `/blog/category`.
+可选参数可以具有默认值，这些默认值用作备用值，以防 URL 中未显示实际参数值。 默认值不能包含任何星号*、管道符号|或问号?。 默认值在**?**之后指定。 在下一个示例中，URL `/blog/category` 的 `category_id` 参数将为 `10`。
 
 ```ini
 url = "/blog/category/:category_id?10"
 ```
 
-You can also use regular expressions to validate parameters. To add a validation expression, add a pipe symbol after the parameter name, or a question mark, and specify the expression. The forward slash symbol is not allowed in these expressions. Examples:
+您还可以使用正则表达式来验证参数。 要添加验证表达式，请在参数名称后添加管道符号或问号，并指定表达式。 这些表达式中不允许使用正斜杠符号。 例子：
 
 ```ini
 url = "/blog/:post_id|^[0-9]+$/comments" ; this will match /blog/10/comments
@@ -78,32 +78,32 @@ url = "/blog/:post_id|^[0-9]+$" ; this will match /blog/3
 url = "/blog/:post_name?|^[a-z0-9\-]+$" ; this will match /blog/my-blog-post
 ```
 
-It is possible to use a special *wildcard* parameter by placing an **asterisk** after the parameter. Unlike regular parameters, wildcard parameters can match one or more URL segments. A URL can only ever contain a single wildcard parameter, cannot use regular expressions, or be followed by an optional parameter.
+通过在参数后放置一个**星号**，可以使用特殊的*通配符*参数。 与常规参数不同，通配符参数可以匹配一个或多个 URL 段。 一个 URL 只能包含一个通配符参数，不能使用正则表达式，也不能跟一个可选参数。
 
 ```ini
 url = "/blog/:category*/:slug"
 ```
 
-Wildcard parameters themselves can be made optional by preceding the asterisk with the `?` character however.
+但是，通配符参数本身可以通过在星号前加上 `?` 字符来成为可选参数。
 
 ```ini
 url = "/blog/:slug?*"
 ```
 
-For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brown/make/volkswagen/beetle/retro/edit` and extract the following parameter values:
+例如，像 `/color/:color/make/:make*/edit` 这样的 URL 将匹配 `/color/brown/make/volkswagen/beetle/retro/edit` 并提取以下参数值：
 
 - color: `brown`
 - make: `volkswagen/beetle/retro`
 
-> **Note**: Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
+> **注意**：子目录不影响页面 URL - URL 仅使用 **url** 参数定义。
 
-## Dynamic Pages
+## 动态页面
 
-Inside the [Twig section](themes.md#twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes.md#php-section), or by [Components](components.md). In this article, we describe how to prepare variables in the PHP section.
+在页面模板的 [Twig 部分](themes.md#twig-section) 内，您可以使用任何 [由 October 提供的功能、过滤器和标签](../markup)。任何动态页面都需要**变量**。 在October，变量可能由页面、布局[PHP 部分](themes.md#php-section) 或[组件](components.md) 准备。在本文中，我们将在 PHP 部分描述如何准备变量。
 
-### Page Execution Life Cycle
+### 页面执行生命周期
 
-There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](components.md) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
+可以在页面和布局的 PHP 部分定义特殊函数：`onInit`、`onStart` 和 `onEnd`。 `onInit` 函数在所有组件初始化时和 AJAX 请求被处理之前执行。 `onStart` 函数在页面执行开始时执行。 `onEnd` 函数在页面渲染之前和页面 [组件](components.md) 执行之后执行。在 `onStart` 和 `onEnd` 函数中，你可以将变量注入到 Twig 环境中。使用 `数组表示法` 将变量传递给页面：
 
 ```
 url = "/"
@@ -116,7 +116,7 @@ function onStart()
 <h3>{{ hello }}</h3>
 ```
 
-The next example is more complicated. It shows how to load a blog post collection from the database, and display on the page (the Acme\Blog plugin is imaginary):
+下一个例子更复杂。 它展示了如何从数据库加载博客文章集合，并显示在页面上(Acme\Blog 插件是虚构的)：
 
 ```
 url = "/blog"
@@ -128,7 +128,7 @@ function onStart()
     $this['posts'] = Post::orderBy('created_at', 'desc')->get();
 }
 ==
-<h2>Latest posts</h2>
+<h2>最新帖子</h2>
 <ul>
     {% for post in posts %}
         <h3>{{ post.title }}</h3>
@@ -137,11 +137,11 @@ function onStart()
 </ul>
 ```
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup.md). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts.md#dynamic-layouts) article.
+[标记指南](../markup.md) 中描述了 October 提供的默认变量和 Twig 扩展。 [动态布局](layouts.md#dynamic-layouts) 文章描述了处理程序的执行顺序。
 
-### Sending a Custom Response
+### 发送自定义响应
 
-All methods defined in the execution life cycle have the ability to halt the process and return a response - simply return a response from the life cycle function. The example below will not load any page contents, and instead return the string *Hello world!* to the browser:
+执行生命周期中定义的所有方法都能够停止进程并返回响应——只需从生命周期函数返回响应即可。 下面的示例不会加载任何页面内容，而是将字符串 *Hello world!* 返回给浏览器：
 
 ```php
 function onStart()
@@ -150,7 +150,7 @@ function onStart()
 }
 ```
 
-A more useful example might be triggering a redirect using the `Redirect` facade:
+一个更有用的例子是使用 `Redirect` 门面触发重定向：
 
 ```php
 public function onStart()
@@ -159,19 +159,19 @@ public function onStart()
 }
 ```
 
-### Handling Forms
+### 处理表单
 
-You can handle standard forms with handler methods defined in the page or layout [PHP section](themes.md#php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction.md) article). Use the [`form_open()`](markup#standard-form) function to define a form that refers to an event handler. Example:
+您可以使用在页面或布局中定义的处理程序方法处理标准表单 [PHP 部分](themes.md#php-section)(处理 AJAX 请求在 [AJAX 框架](../ajax/introduction.md) 中有说明) 文章)。 使用 [`form_open()`](markup#standard-form) 函数定义引用事件处理程序的表单。 例子：
 
 ```twig
 {{ form_open({ request: 'onHandleForm' }) }}
-    Please enter a string: <input type="text" name="value"/>
+    请输入字符串: <input type="text" name="value"/>
     <input type="submit" value="Submit me!"/>
 {{ form_close() }}
 <p>Last submitted value: {{ lastValue }}</p>
 ```
 
-The `onHandleForm` function can be defined in the page or layout [PHP section](themes.md#php-section), like so:
+`onHandleForm` 函数可以在页面或布局 [PHP section](themes.md#php-section) 中定义，如下所示：
 
 ```php
 function onHandleForm()
@@ -180,46 +180,46 @@ function onHandleForm()
 }
 ```
 
-The handler loads the value with the `post` function and initializes the page's `lastValue` attribute variable which is displayed below the form in the first example.
+处理程序使用 `post` 函数加载值并初始化页面的 `lastValue` 属性变量，该变量显示在第一个示例中的表单下方。
 
-> **Note**: If a handler with the same name is defined in the page layout, the page, and a page [component](components.md), October will execute the page handler. If a handler is defined in a component and a layout, the layout handler will be executed. The handler precedence is: page, layout, component.
+> **注意**：如果在页面布局、页面和页面[组件](components.md)中定义了同名的处理程序，October将执行页面处理程序。 如果在组件和布局中定义了处理程序，则将执行布局处理程序。 处理程序优先级为：页面、布局、组件。
 
-If you want to refer to a handler defined in a specific [component](components.md), use the component's name or alias in the handler reference:
+如果要引用在特定 [组件](components.md) 中定义的处理程序，请在处理程序引用中使用该组件的名称或别名：
 
 ```twig
 {{ form_open({ request: 'myComponent::onHandleForm' }) }}
 ```
 
-## 404 Page
+## 404 页面
 
-If the theme contains a page with the URL `/404`, it is displayed when the system can't find a requested page.
+如果主题包含一个 URL 为 `/404` 的页面，当系统找不到请求的页面时会显示它。
 
-## Error Page
+## 错误页面
 
-By default, any errors will be shown with a detailed error page containing the file contents, line number, and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script, and creating a page with the URL `/error`.
+默认情况下，任何错误都会显示一个详细的错误页面，其中包含文件内容、行号和发生错误的堆栈跟踪。 您可以通过在 `config/app.php` 脚本中将配置值 `debug` 设置为 **false** 并使用 URL `/error` 创建一个页面来显示自定义错误页面。
 
-## Page Variables
+## 页面变量
 
-The properties of a page can be accessed in the [PHP code section](../cms/themes.md#php-section), or [Components](../cms/components.md) by referencing `$this->page`.
+可以在[PHP代码部分](../cms/themes.md#php-section)或[组件](../cms/components.md)中通过引用`$this->page`。
 
 ```php
 function onEnd()
 {
-    $this->page->meta_title = 'A different page title';
+    $this->page->meta_title = '不同的页面标题';
 }
 ```
 
-They can also be accessed in the markup using the [`this.page` variable](../markup/this-page). For example, to return the title of a page:
+也可以使用 [`this.page` 变量](../markup/this-page) 在标记中访问它们。 例如，要返回页面的标题：
 
 ```twig
-<p>The title of this page is: {{ this.page.meta_title }}</p>
+<p>这个页面的标题是: {{ this.page.meta_title }}</p>
 ```
 
-More information can be found at [`this.page` in the Markup guide](../markup/this-page).
+更多信息可以在 [标记指南中的`this.page`](../markup/this-page) 中找到。
 
-## Injecting Page Assets Programmatically
+## 以编程方式注入页面资产
 
-If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes.md#php-section) of a page or [layout](layout.md) template. Example:
+如果需要，您可以使用控制器的 `addCss` 和 `addJs` 方法将资产(CSS 和 JavaScript 文件)注入页面。 它可以在页面的 [PHP 部分](themes.md#php-section) 或 [layout](layout.md) 模板中定义的 `onStart` 函数中完成。 例子：
 
 ```php
 function onStart()
@@ -229,9 +229,9 @@ function onStart()
 }
 ```
 
-If the path specified in the `addCss` and `addJs` method argument begins with a slash (/), it will be relative to the website root. If the asset path does not begin with a slash, it is relative to the theme.
+如果 `addCss` 和 `addJs` 方法参数中指定的路径以斜杠 (/) 开头，则它将相对于网站根目录。 如果资产路径不以斜杠开头，则它是相对于主题的。
 
-Injected assets can be combined by passing them as an array:
+注入的资产可以通过将它们作为数组传递来组合：
 
 ```php
 function onStart()
@@ -241,7 +241,7 @@ function onStart()
 }
 ```
 
-LESS and SCSS assets can be injected and compiled using the combiner:
+可以使用组合器注入和编译 LESS 和 SCSS 资产：
 
 ```php
 function onStart()
@@ -250,7 +250,7 @@ function onStart()
 }
 ```
 
-The second argument of `addCss` and `addJs` allows you to provide additional attributes to your injected assets:
+`addCss` 和 `addJs` 的第二个参数允许你为注入的资产提供额外的属性：
 
 ```php
 function onStart()
@@ -259,7 +259,7 @@ function onStart()
 }
 ```
 
-In order to output the injected assets on pages or [layouts](layout.md), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
+为了在页面或 [布局](layout.md) 上输出注入的资源，请使用 [{% styles %}](../markup/tag-styles) 和 [{% scripts %}](../markup/tag-scripts)标签。 例子：
 
 ```twig
 <head>
