@@ -29,7 +29,7 @@ You may also use the `|md` filter for [parsing Markdown in your front-end markup
 
 ### Using HTML in Markdown
 
-Markdown is a superset of HTML so you can combine HTML and Markdown in the same template. When Markdown encounters an HTML tag, the Markdown syntax will deactivate for all the content inside.
+Markdown is a superset of HTML so you can combine HTML and Markdown in the same template. When Markdown encounters any block-level HTML tag, the Markdown syntax will deactivate for all the content inside.
 
 ```html
 <div>
@@ -49,6 +49,14 @@ When displaying complex HTML, especially via a Twig variable, you should wrap th
 ```twig
 <div>
     {{ messageBody|raw }}
+</div>
+```
+
+If you intentionally want to enable Markdown inside a block-level tag, you may do this by adding `markdown` attribute to the tag with a value of `1`.
+
+```html
+<div markdown="1">
+    This **text** is now bold.
 </div>
 ```
 

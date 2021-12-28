@@ -1,6 +1,20 @@
 # Deployment
 
-## Deployment without Composer
+## Concepts
+
+### Authenticating with Composer
+
+When deploying your application with Composer, you may be prompted to provide your login credentials for the October CMS website. These credentials will authenticate your Composer session as having permission to download the October CMS source code.
+
+To avoid manually typing in these credentials, you should make sure that the [Composer auth.json file](https://getcomposer.org/doc/articles/http-basic-authentication.md) is deployed with your application.
+
+Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands.md#set-project).
+
+```sh
+php artisan project:set <license key>
+```
+
+### Deployment without Composer
 
 <ProductIcon src="https://github.com/octobercms/docs/blob/develop/images/deploy-plugin.png?raw=true" />
 
@@ -8,7 +22,9 @@ If your server does not have the ability to run Composer or command line tools, 
 
 <div class="clearfix"></div>
 
-## Public Folder
+## Security & Performance
+
+### Public Folder
 
 For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
 
@@ -26,19 +42,27 @@ AUTO_MIRROR_PUBLIC=true
 
 > **Note**: For Windows operating systems, the `october:mirror` command must be performed in a console running as administrator. Therefore it is more suitable to run as part of a deployment process.
 
-## Auth File
+### Improving Performance
 
-When deploying your application to a remote server, you may be prompted to provide your login credentials for the October CMS website. These credentials will authenticate your Composer session as having permission to download the October CMS source code.
+October CMS has been fine-tuned for performance and there are some extra steps you can take to increase this performance further, especially for larger sized applications.
 
-To avoid manually typing in these credentials, you should make sure that the [Composer auth.json file](https://getcomposer.org/doc/articles/http-basic-authentication.md) is deployed with your application.
+Disable [debug mode](../setup/configuration.md#debug-mode) and enable cache settings inside your [environment configuration](../setup/configuration.md#environment-configuration).
 
-Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands.md#set-project).
-
-```sh
-php artisan project:set <license key>
+```
+APP_DEBUG=false
+CMS_ROUTE_CACHE=true
+CMS_ASSET_CACHE=true
+CMS_TWIG_CACHE=true
 ```
 
-## Shared Hosting
+Cache the configuration and route tables with these artisan commands.
+
+```
+php artisan config:cache
+php artisan route:cache
+```
+
+### Shared Hosting
 
 If you share a server with other users, you should act as if your neighbor's site was compromised. Make sure all files with passwords (e.g. CMS configuration files like `config/database.php`) cannot be read from other user accounts, even if they figure out absolute paths of your files. Setting permissions of such important files to 600 (read and write only to the owner and nothing to anyone else) is a good idea.
 
