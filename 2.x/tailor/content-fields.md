@@ -2,7 +2,57 @@
 
 Content Fields are the cornerstone of the Tailor module and define how a field should be configured and displayed.
 
-## Definition Custom Content Fields
+## Available Content Fields
+
+This section defines the fields that are available to tailor blueprints.
+
+<div class="content-list" markdown="1">
+
+- [Mixin](#field-mixin)
+- [Collections](#field-collections)
+- [Entries](#field-entries)
+
+</div>
+
+<a name="field-mixin"></a>
+### Mixin
+
+`mixin` - includes another set of fields.
+
+```yaml
+_include1:
+    type: mixin
+    source: <uuid>
+```
+
+See the [Mixins article](../tailor/mixins.md) for more information on defining mixins.
+
+<a name="field-collections"></a>
+### Collections
+
+`collections` - links to other collections.
+
+```yaml
+categories:
+    label: Categories
+    type: collections
+    source: <uuid|handle>
+```
+
+<a name="field-entries"></a>
+### Entries
+
+`entries` - links to other entries.
+
+```yaml
+author:
+    label: Author
+    type: entries
+    source: <uuid|handle>
+    maxItems: 1
+```
+
+## Defining Custom Content Fields
 
 You can roll your own content fields by defining a field definition file and then registering it in your plugin registration file.
 
