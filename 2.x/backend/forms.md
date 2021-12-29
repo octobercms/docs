@@ -1529,6 +1529,22 @@ _map:
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
 
+### Extending the Form Configuration
+
+You may extend the form configuration dynamically using the `formGetConfig` method.
+
+```php
+public function formGetConfig()
+{
+    $config = $this->asExtension('FormController')->formGetConfig();
+
+    // Set the active tab dynamically
+    $config->form['tabs']['activeTab'] = 'Content';
+
+    return $config;
+}
+```
+
 ### Overriding Controller Action
 
 You can use your own logic for the `create`, `update` or `preview` action method in the controller, then optionally call the Form behavior parent method.

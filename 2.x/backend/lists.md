@@ -835,6 +835,24 @@ username:
 
 Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
 
+### Extending the List Configuration
+
+You may extend the list configuration dynamically using the `listGetConfig` method.
+
+```php
+public function listGetConfig($definition)
+{
+    $config = $this->asExtension('ListController')->listGetConfig($definition);
+
+    // Implement structure dynamically
+    $config->structure = [
+        'showTree' => true
+    ];
+
+    return $config;
+}
+```
+
 ### Overriding Controller Action
 
 You may use your own logic for the `index` action method in the controller, then optionally call the List behavior `index` parent method.
