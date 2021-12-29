@@ -30,7 +30,7 @@ See the [Mixins article](../tailor/mixins.md) for more information on defining m
 <a name="field-collections"></a>
 ### Collections
 
-`collections` - links to other collections.
+`collections` - links to other collections by UUID or handle.
 
 ```yaml
 categories:
@@ -50,7 +50,7 @@ categories:
 <a name="field-entries"></a>
 ### Entries
 
-`entries` - links to other entries.
+`entries` - links to other entries by UUID or handle.
 
 ```yaml
 author:
