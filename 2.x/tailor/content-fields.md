@@ -39,6 +39,14 @@ categories:
     source: <uuid|handle>
 ```
 
+To limit the number of selectable items, use the `maxItems` property.
+
+```yaml
+categories:
+    type: collections
+    maxItems: 1
+```
+
 <a name="field-entries"></a>
 ### Entries
 
@@ -49,6 +57,24 @@ author:
     label: Author
     type: entries
     source: <uuid|handle>
+```
+
+You may reference multiple entry sections by passing `source` as an array.
+
+```yaml
+author:
+    label: Author
+    type: entries
+    source:
+        - <uuid|handle>
+        - <uuid|handle>
+```
+
+To limit the number of selectable items, use the `maxItems` property.
+
+```yaml
+author:
+    type: entries
     maxItems: 1
 ```
 
