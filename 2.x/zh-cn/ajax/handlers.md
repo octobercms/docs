@@ -2,7 +2,7 @@
 
 ## AJAX 处理程序
 
-AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes.md#php-section) or inside [components](../cms/components.md). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials.md) as part of the AJAX request.
+AJAX 事件处理程序是 PHP 函数，可以在页面或布局 [PHP 部分](../cms/themes.md#php-section) 或 [组件](../cms/components.md) 内部定义。 处理程序名称应具有以下模式：`onName`。 所有处理程序都支持使用 [更新部分](../ajax/update-partials.md) 作为 AJAX 请求的一部分。
 
 ```php
 function onSubmitContactForm()
@@ -11,27 +11,27 @@ function onSubmitContactForm()
 }
 ```
 
-If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](../cms/components.md) have the lowest priority.
+如果在一个页面和布局中一起定义了两个同名的处理程序，则页面处理程序将被执行。 [components](../cms/components.md) 中定义的处理程序具有最低优先级。
 
-### 调用处理程序
+###调用处理程序
 
-Every AJAX request should specify a handler name, either using the [data attributes API](../ajax/attributes-api.md) or the [JavaScript API](../ajax/javascript-api.md). When the request is made, the server will search all the registered handlers and locate the first one it finds.
+每个 AJAX 请求都应使用 [数据属性 API](../ajax/attributes-api.md) 或 [JavaScript API](../ajax/javascript-api.md) 指定处理程序名称。 发出请求后，服务器将搜索所有已注册的处理程序并定位它找到的第一个处理程序。
 
 ```html
-<!-- Attributes API -->
+<!-- 数据属性 API -->
 <button data-request="onSubmitContactForm">Go</button>
 
 <!-- JavaScript API -->
 <script> $.request('onSubmitContactForm') </script>
 ```
 
-If two components register the same handler name, it is advised to prefix the handler with the [component short name or alias](../cms/components.md#components-aliases). If a component uses an alias of **mycomponent** the handler can be targeted with `mycomponent::onName`.
+如果两个组件注册了相同的处理程序名称，建议使用 [组件短名称或别名](../cms/components.md#components-aliases) 作为处理程序的前缀。如果组件使用 **mycomponent** 的别名，则可以使用 `mycomponent::onName` 来定位处理程序。
 
 ```html
 <button data-request="mycomponent::onSubmitContactForm">Go</button>
 ```
 
-You may want to use the [`__SELF__`](https://octobercms.com/docs/plugin/components#referencing-self) reference variable instead of the hard coded alias in case the user changes the component alias used on the page.
+您可能希望使用 [`__SELF__`](https://octobercms.com/docs/plugin/components#referencing-self) 引用变量而不是写死别名，以防用户更改页面上使用的组件别名.
 
 ```html
 <form data-request="{{ __SELF__ }}::onCalculate" data-request-update="'{{ __SELF__ }}::calcresult': '#result'">
@@ -39,31 +39,31 @@ You may want to use the [`__SELF__`](https://octobercms.com/docs/plugin/componen
 
 #### 通用处理程序
 
-Sometimes you may need to make an AJAX request for the sole purpose of updating page contents, not needing to execute any code. You may use the `onAjax` handler for this purpose. This handler is available everywhere without needing to write any code.
+有时您可能需要仅出于更新页面内容的目的而发出 AJAX 请求，而不需要执行任何代码。为此，您可以使用 `onAjax` 处理程序。此处理程序随处可用，无需编写任何代码。
 
 ```html
-<button data-request="onAjax">Do nothing</button>
+<button data-request="onAjax">啥都不做</button>
 ```
 
 ## AJAX 处理程序中的重定向
 
-If you need to redirect the browser to another location, return the `Redirect` object from the AJAX handler. The framework will redirect the browser as soon as the response is returned from the server. Example AJAX handler:
+如果您需要将浏览器重定向到另一个位置，请从 AJAX 处理程序返回 `Redirect` 对象。一旦从服务器返回响应，框架将重定向浏览器。示例 AJAX 处理程序：
 
 ```php
 function onRedirectMe()
 {
-    return Redirect::to('http://google.com');
+    return Redirect::to('http://www.huawei.com');
 }
 ```
 
 ## 从 AJAX 处理程序返回数据
 
-In advanced cases you may want to return structured data from your AJAX handlers. If an AJAX handler returns an array, you can access its elements in the `success` event handler. Example AJAX handler:
+在高级情况下，您可能希望从 AJAX 处理程序返回结构化数据。如果 AJAX 处理程序返回一个数组，您可以在 `success` 事件处理程序中访问它的元素。示例 AJAX 处理程序：
 
 ```php
 function onFetchDataFromServer()
 {
-    /* Some server-side code */
+    /* 一些服务器端代码 */
 
     return [
         'totalUsers' => 1000,
@@ -72,13 +72,13 @@ function onFetchDataFromServer()
 }
 ```
 
-The data can be fetched with the data attributes API:
+可以使用数据属性 API 获取数据：
 
 ```html
 <form data-request="onHandleForm" data-request-success="console.log(data)">
 ```
 
-The same with the JavaScript API:
+与 JavaScript API 相同：
 
 ```html
 <form
@@ -91,33 +91,33 @@ The same with the JavaScript API:
 
 ## 抛出 AJAX 异常
 
-You may throw an [AJAX exception](../services/error-log.md#ajax-exception) using the `AjaxException` class to treat the response as an error while retaining the ability to send response contents as normal. Simply pass the response contents as the first argument of the exception.
+您可以使用 `AjaxException` 类抛出 [AJAX 异常](../services/error-log.md#ajax-exception) 将响应视为错误，同时保留正常发送响应内容的能力。只需将响应内容作为异常的第一个参数传递。
 
 ```php
 throw new AjaxException([
-    'error' => 'Not enough questions',
+    'error' => '错误提示',
     'questionsNeeded' => 2
 ]);
 ```
 
-> **Note**: When throwing this exception type [partials will be updated](../ajax/update-partials.md) as normal.
+> **注意**：当抛出这个异常类型时 [部件将被更新](../ajax/update-partials.md) 正常。
 
 ## 在处理程序之前运行代码
 
-Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts.md#dynamic-pages) allows code to run before every AJAX handler.
+有时您可能希望在处理程序执行之前执行代码。将 `onInit` 函数定义为 [页面执行生命周期](../cms/layouts.md#dynamic-pages) 的一部分，允许代码在每个 AJAX 处理程序之前运行。
 
 ```php
 function onInit()
 {
-    // From a page or layout PHP code section
+    // 页面或布局 PHP 代码部分
 }
 ```
 
-You may define an `init` method inside a [component class](../plugin/components.md#component-initialization) or [backend widget class](../backend/widgets.md).
+您可以在 [组件类](../plugin/components.md#component-initialization) 或 [后端小部件类](../backend/widgets.md) 中定义一个 `init` 方法。
 
 ```php
 function init()
 {
-    // From a component or widget class
+    // 组件或小部件类
 }
 ```

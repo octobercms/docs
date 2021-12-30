@@ -1,16 +1,16 @@
-# Updating Partials
+# 更新部件
 
-When a handler executes it may prepare partials that are updated on the page, either by pushing or pulling, which can be rendered with some supplied variables.
+当处理程序执行时，它可以准备在页面上更新的部件，通过推送拉取，可以用一些提供的变量呈现。
 
-## Pulling Partial Updates
+## 拉取部件更新
 
-The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](../ajax/handlers.md).
+客户端浏览器在执行 AJAX 请求时可能会请求从服务器更新部件内容，这被认为是*拉取内容更新*。 以下代码在调用 `onRefreshTime` [事件处理程序](../ajax/handlers.md) 后呈现页面上 `#myDiv` 元素内的 **mytime** 部分。
 
 ```twig
 <div id="myDiv">{% partial 'mytime' %}</div>
 ```
 
-The [data attributes API](../ajax/attributes-api.md) uses the `data-request-update` attribute.
+[数据属性 API](../ajax/attributes-api.md) 使用 `data-request-update` 属性。
 
 ```html
 <!-- Attributes API -->
@@ -21,7 +21,7 @@ The [data attributes API](../ajax/attributes-api.md) uses the `data-request-upda
 </button>
 ```
 
-The [JavaScript API](../ajax/javascript-api.md) uses the `update` configuration option:
+[JavaScript API](../ajax/javascript-api.md) 使用 `update` 配置选项：
 
 ```js
 // JavaScript API
@@ -30,56 +30,55 @@ $.request('onRefreshTime', {
 });
 ```
 
-### Update Definition
+### 更新定义
 
-The definition of what should be updated is specified as a JSON-like object where:
+应更新内容的定义被指定为类似 JSON 的对象，其中：
 
-- the left side (key) is the **partial name**
-- the right side (value) is the **target element** to update
+- 左侧（键）是**部件名称**
+- 右侧（值）是要更新的**目标元素**
 
-The following will request to update the `#myDiv` element with **mypartial** contents.
-
+以下将请求使用 **mypartial** 内容更新 `#myDiv` 元素。
 ```
 mypartial: '#myDiv'
 ```
 
-Multiple partials are separated by commas.
+多个部件用逗号分隔。
 
 ```
 firstpartial: '#myDiv', secondpartial: '#otherDiv'
 ```
 
-If the partial name contains a slash or a dash, it is important to 'quote' the left side.
+如果部件名称包含斜杠或破折号，则“引用”左侧很重要。
 
 ```
 'folder/mypartial': '#myDiv', 'my-partial': '#myDiv'
 ```
 
-The target element will always be on the right side since it can also be a HTML element in JavaScript.
+目标元素将始终位于右侧，因为它也可以是 JavaScript 中的 HTML 元素。
 
 ```
 mypartial: document.getElementById('myDiv')
 ```
 
-### Appending and Prepending Content
+### 附加和前置内容
 
-If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
+如果选择器字符串前面带有 `@` 符号，则从服务器接收到的内容将附加到元素中，而不是替换现有内容。
 
 ```
 'folder/append': '@#myDiv'
 ```
 
-If the selector string is prepended with the `^` symbol, the content will be prepended instead.
+如果选择器字符串前面带有`^` 符号，则内容将被添加到前面。
 
 ```
 'folder/append': '^#myDiv'
 ```
 
-## Pushing Partial Updates
+## 推送部件更新
 
-Comparatively, [AJAX handlers](../ajax/handlers.md) can *push content updates* to the client-side browser from the server-side. To push an update the handler returns an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update.
+相比之下，[AJAX 处理程序](../ajax/handlers.md) 可以*将内容更新*从服务器端推送到客户端浏览器。 要推送更新，处理程序返回一个数组，其中键是要更新的 HTML 元素（使用简单的 CSS 选择器），值是要更新的内容。
 
-The following example will update an element on the page with the id **myDiv** using the contents found inside the partial **mypartial**. The `onRefreshTime` handler calls the `renderPartial` method to render the partial contents in PHP.
+下面的示例将使用在部件 **mypartial** 中找到的内容更新页面上具有 id **myDiv** 的元素。 `onRefreshTime` 处理程序调用 `renderPartial` 方法来渲染 PHP 中的部分内容。
 
 ```php
 function onRefreshTime()
@@ -90,30 +89,30 @@ function onRefreshTime()
 }
 ```
 
-> **Note**: The key name must start with an identifier `#` or class `.` character to trigger a content update.
+> **注意**：键名必须以标识符`#` 或类`.` 字符开头才能触发内容更新。
 
-## Passing Variables to Partials
+## 将变量传递给 部件
 
-Depending on the execution context, an [AJAX event handler](../ajax/handlers.md) makes variables available to partials differently.
+根据执行上下文，[AJAX 事件处理程序](../ajax/handlers.md) 使变量可用于不同部件。
 
-- Use `$this[]` inside a page or layout [PHP section](../cms/themes.md#php-section).
-- Use `$this->page[]` inside a [component class](../plugin/components.md#ajax-handlers).
-- Use `$this->vars[]` in the [back-end area](../backend/controllers-ajax#using-ajax-handlers).
+- 在页面或布局 [PHP 部分](../cms/themes.md#php-section) 中使用 `$this[]`。
+- 在 [组件类](../plugin/components.md#ajax-handlers) 中使用 `$this->page[]`。
+- 在[后端区域](../backend/controllers-ajax#using-ajax-handlers)中使用`$this->vars[]`。
 
-These examples will provide the **result** variable to a partial for each context:
+这些示例将为每个上下文的部分提供 **result** 变量：
 
 ```php
-// From page or layout PHP code section
+// 从页面或布局 PHP 代码部分
 $this['result'] = 'Hello world!';
 
-// From a component class
+// 从组件类
 $this->page['result'] = 'Hello world!';
 
-// From a backend controller or widget
+// 从后端控制器或小部件
 $this->vars['result'] = 'Hello world!';
 ```
 
-This value can then be accessed using Twig in the partial:
+然后可以在部分中使用 Twig 访问此值：
 
 ```twig
 <!-- Hello world! -->

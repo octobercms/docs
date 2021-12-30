@@ -6,15 +6,15 @@
 {% framework extras %}
 ```
 
-## Loading Indicator
+## 加载指示器
 
-The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../ajax/javascript-api.md#global-ajax-events) used by the AJAX framework.
+您应该注意到的第一个功能是在 AJAX 请求运行时显示在页面顶部的加载指示器。 该指示器挂钩到 AJAX 框架使用的 [全局事件](../ajax/javascript-api.md#global-ajax-events)。
 
-When an AJAX request starts the `ajaxPromise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajaxFail` and `ajaxDone` events are used to detect when the request finishes, where the indicator is hidden again.
+当 AJAX 请求开始时，会触发 `ajaxPromise` 事件，显示指示器并将鼠标光标置于加载状态。 `ajaxFail` 和 `ajaxDone` 事件用于检测请求何时完成，指示器在何处再次隐藏。
 
-## Form Validation
+## 表单验证
 
-You may specify the `data-request-validate` attribute on a form to enable validation features.
+您可以在表单上指定 `data-request-validate` 属性以启用验证功能。
 
 ```html
 <form
@@ -26,26 +26,26 @@ You may specify the `data-request-validate` attribute on a form to enable valida
 
 ### 抛出验证错误
 
-In the server side AJAX handler you may throw a [validation exception](../services/error-log.md#validation-exception) using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error messages for the values.
+在服务器端 AJAX 处理程序中，您可以使用 `ValidationException` 类抛出 [验证异常](../services/error-log.md#validation-exception) 以使字段无效，其中第一个参数是一个数组。 该数组应使用字段名称作为键，并使用错误消息作为值。
 
 ```php
 function onSubmit()
 {
-    throw new ValidationException(['name' => 'You must give a name!']);
+     throw new ValidationException(['name' => '你必须给一个名字！']);
 }
 ```
 
-> **Note**: You can also pass an instance of the [validation service](../services/validation.md) as the first argument of the exception.
+> **注意**：您还可以将 [验证服务](../services/validation.md) 的实例作为异常的第一个参数传递。
 
 ### 显示错误信息
 
-Inside the form, you may display the first error message by using the `data-validate-error` attribute on a container element. The content inside the container will be set to the error message and the element will be made visible.
+在表单内，您可以通过使用容器元素上的`data-validate-error`属性来显示第一条错误消息。 容器内的内容将设置为错误消息，并且元素将可见。
 
 ```html
 <div data-validate-error></div>
 ```
 
-To display multiple error messages, include an element with the `data-message` attribute. In this example the paragraph tag will be duplicated and set with content for each message that exists.
+要显示多个错误消息，请包含一个具有 `data-message` 属性的元素。 在此示例中，段落标记将被复制并设置为存在的每条消息的内容。
 
 ```html
 <div class="alert alert-danger" data-validate-error>
@@ -53,7 +53,7 @@ To display multiple error messages, include an element with the `data-message` a
 </div>
 ```
 
-To add custom classes on AJAX invalidation, hook into the `ajaxInvalidField` and `ajaxPromise` JS events.
+要在 AJAX 失效时添加自定义类，请连接到 `ajaxInvalidField` 和 `ajaxPromise` JS 事件。
 
 ```js
 $(window).on('ajaxInvalidField', function(event, fieldElement, fieldName, errorMsg, isFirst) {
@@ -67,32 +67,32 @@ $(document).on('ajaxPromise', '[data-request]', function() {
 
 ### 用字段显示错误
 
-Alternatively, you can show validation messages for individual fields by defining an element that uses the `data-validate-for` attribute, passing the field name as the value.
+或者，您可以通过定义使用 `data-validate-for` 属性的元素，将字段名称作为值传递来显示单个字段的验证消息。
 
 ```html
-<!-- Input field -->
+<!-- 输入字段 -->
 <input name="phone" />
 
-<!-- Validation message for the field -->
+<!-- 字段的验证消息 -->
 <div data-validate-for="phone"></div>
 ```
 
-If the element is left empty, it will be populated with the validation text from the server. Otherwise you can specify any text you like and it will be displayed instead.
+如果该元素为空，它将使用来自服务器的验证文本填充。 否则，您可以指定任何您喜欢的文本，它会被显示出来。
 
 ```html
 <div data-validate-for="phone">
-    Oops.. phone number is invalid!
+    糟糕.. 电话号码无效！
 </div>
 ```
 
-## Loading Button
+## 加载按钮
 
-When any element contains the `data-attach-loading` attribute, the CSS class `oc-loading` will be added to it during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
+当任何元素包含 `data-attach-loading` 属性时，CSS 类 `oc-loading` 将在 AJAX 请求期间添加到其中。 这个类将使用`:after` CSS 选择器在按钮和锚元素上生成一个*加载旋转*。
 
 ```html
 <form data-request="onSubmit">
     <button data-attach-loading>
-        Submit
+        提交
     </button>
 </form>
 
@@ -104,9 +104,9 @@ When any element contains the `data-attach-loading` attribute, the CSS class `oc
 </a>
 ```
 
-## Flash Messages
+## 闪现消息(Flash)
 
-Specify the `data-request-flash` attribute on a form to enable the use of flash messages on successful AJAX requests.
+在表单上指定 `data-request-flash` 属性，以启用对成功的 AJAX 请求使用闪现消息。
 
 ```html
 <form
@@ -116,16 +116,16 @@ Specify the `data-request-flash` attribute on a form to enable the use of flash 
 </form>
 ```
 
-Combined with use of the `Flash` facade in the event handler, a flash message will appear after the request finishes.
+结合事件处理程序中`Flash` 门面的使用，请求完成后会出现一条闪现消息。
 
 ```php
 function onSuccess()
 {
-    Flash::success('You did it!');
+    Flash::success('你做到了！');
 }
 ```
 
-To remain consistent with AJAX based flash messages, you can render a [standard flash message](../markup/tag-flash.md) when the page loads by placing this code in your page or layout.
+为了与基于 AJAX 的闪现消息保持一致，您可以在页面加载时通过将此代码放置在页面或布局中来呈现 [标准闪现消息](../markup/tag-flash.md)。
 
 ```twig
 {% flash %}
@@ -137,10 +137,9 @@ To remain consistent with AJAX based flash messages, you can render a [standard 
     </p>
 {% endflash %}
 ```
+## 用法示例
 
-## Usage Example
-
-Below is a complete example of form validation. It calls the `onDoSomething` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
+下面是一个完整的表单验证示例。 它调用触发加载提交按钮的`onDoSomething` 事件处理程序，对表单字段执行验证，然后显示成功的闪现消息。
 
 ```html
 <form
@@ -159,7 +158,7 @@ Below is a complete example of form validation. It calls the `onDoSomething` eve
     </div>
 
     <button data-attach-loading>
-        Submit
+        提交
     </button>
 
     <div class="alert alert-danger" data-validate-error>
@@ -169,7 +168,7 @@ Below is a complete example of form validation. It calls the `onDoSomething` eve
 </form>
 ```
 
-The AJAX event handler looks at the POST data sent by the client and applies some rules to the validator. If the validation fails, a `ValidationException` is thrown, otherwise a `Flash::success` message is returned.
+AJAX 事件处理程序查看客户端发送的 POST 数据并将一些规则应用于验证器。 如果验证失败，则抛出 `ValidationException`，否则返回 `Flash::success` 消息。
 
 ```php
 function onDoSomething()
@@ -187,6 +186,6 @@ function onDoSomething()
         throw new ValidationException($validation);
     }
 
-    Flash::success('Jobs done!');
+    Flash::success('工作完成!');
 }
 ```

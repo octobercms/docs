@@ -1,54 +1,54 @@
 # JavaScript API
 
-The JavaScript API is more powerful than the data attributes API. The `request` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
+JavaScript API 比数据属性 API 更强大。 `request` 方法可用于表单内或表单元素上的任何元素。 当该方法与表单中的元素一起使用时，它会被转发到表单。
 
-The `request` method has a single required argument - the AJAX handler name. Example:
+`request` 方法有一个必需的参数 - AJAX 处理程序名称。 例子：
 
 ```html
 <form onsubmit="$(this).request('onProcess'); return false;">
     ...
 ```
 
-The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
+`request` 方法的第二个参数是选项对象。 您可以使用与 [jQuery AJAX 函数](http://api.jquery.com/jQuery.ajax/) 兼容的任何选项和方法。 以下选项特定于October框架：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**update** | an object, specifies a list partials and page elements (as CSS selectors) to update: {'partial': '#select'}. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
-**confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
-**data** | an optional object specifying data to be sent to the server along with the form data: {var: 'value'}. When `files` is true, you may also include files to be uploaded in this object by using [`Blob` objects](https://developer.mozilla.org/en-US/docs/Web/API/Blob). To specify the filename of any `Blob` objects, simply set the `filename` property on the `Blob` object. (Ex. `var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {'uploaded_file': blob};`)
-**redirect** | string specifying an URL to redirect the browser to after the successful request.
-**beforeUpdate** | a callback function to execute before page elements are updated. The function gets 3 parameters: the data object received from the server, text status string, and the jqXHR object. The `this` variable inside the function resolves to the request content - an object containing 2 properties: `handler` and `options` representing the original request() parameters.
-**success** | a callback function to execute in case of a successful request. If this option is supplied it overrides the default framework's functionality: the elements are not updated, the `beforeUpdate` event is not triggered, the `ajaxUpdate` and `ajaxUpdateComplete` events are not triggered. The event handler gets 3 arguments: the data object received from the server, the text status string and the jqXHR object. However, you can still call the default framework functionality calling `this.success(...)` inside your function.
-**error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed. The handler gets 3 parameters: the jqXHR object, the text status string and the error object - see [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/).
-**complete** | a callback function execute in case of a success or an error.
-**form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
-**flash** | when true, instructs the server to clear and send any flash messages with the response. default: false
-**files** | when true, the request will accept file uploads, this requires `FormData` interface support by the browser. default: false
-**browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. This only applies to requests triggered in the context of a `<form>` element. **NOTE:** This form of validation does not play nice with complex forms where validated fields might not be visible to the user 100% of the time. Recommend that you avoid using it on anything but the most simple forms.
-**loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element, the object should support the `show()` and `hide()` functions to manage the visibility. You may pass the global object `$.oc.stripeLoadIndicator` when using the [framework extras](../ajax/extras.md).
+**update** | 一个对象，指定要更新的列表部件和页面元素(作为 CSS 选择器)：{'partial': '#select'}。如果选择器字符串前面带有 `@` 符号，则从服务器接收到的内容将附加到元素中，而不是替换现有内容。
+**confirm** | 确认字符串。如果设置，则在发送请求之前显示确认。如果用户单击取消按钮，请求将取消。
+**data** | 一个可选对象，指定要与表单数据一起发送到服务器的数据：{var: 'value'}。当 `files` 为 true 时，您还可以使用 [`Blob` 对象](https://developer.mozilla.org/en-US/docs/Web/API/Blob) 在此对象中包含要上传的文件。要指定任何`Blob` 对象的文件名，只需在`Blob` 对象上设置`filename` 属性。 (例如，`var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {'uploaded_file': blob};`)
+**redirect** | 字符串，指定请求成功后将浏览器重定向到的 URL。
+**beforeUpdate** | 在页面元素更新之前执行的回调函数。该函数获取3个参数：从服务器接收的数据对象、文本状态字符串和 jqXHR 对象。函数内的`this`变量解析为请求内容——一个包含 2 个属性的对象：`handler`和`options`代表原始 request() 参数。
+**success** | 请求成功时执行的回调函数。如果提供此选项，它会覆盖默认框架的功能：元素不会更新，不会触发 `beforeUpdate` 事件，不会触发 `ajaxUpdate` 和 `ajaxUpdateComplete` 事件。事件处理程序获得3个参数：从服务器接收的数据对象、文本状态字符串和 jqXHR 对象。但是，您仍然可以调用默认框架功能，在您的函数中调用 `this.success(...)`。
+**error** | 发生错误时执行回调函数。默认情况下会显示警报消息。如果覆盖此选项，则不会显示警报消息。处理程序获取 3 个参数：jqXHR 对象、文本状态字符串和错误对象 - 参见 [jQuery AJAX 函数](http://api.jquery.com/jQuery.ajax/)。
+**complete** | 回调函数在成功或错误的情况下执行。
+**form** | 用于获取随请求发送的表单数据的表单元素，作为选择器字符串或表单元素传递。
+**flash** | 当为true时，指示服务器清除并发送任何带有响应的闪现消息。默认值：false
+**files** | 当为 true 时，请求将接受文件上传，这需要浏览器支持 `FormData` 接口。默认值：false
+**browserValidate** | 当为 true 时，将在提交之前对请求执行基于浏览器的客户端验证。这仅适用于在 `<form>` 元素的上下文中触发的请求。 **注意：** 这种形式的验证不适用于复杂的表单，其中验证的字段可能在 100% 的时间对用户不可见。建议您避免在最简单的表单之外的任何地方使用它。
+**loading** | 请求运行时显示的可选字符串或对象。字符串应该是元素的 CSS 选择器，对象应该支持 `show()` 和 `hide()` 函数来管理可见性。使用 [额外功能](../ajax/extras.md) 时，您可以传递全局对象 `$.oc.stripeLoadIndicator`。
 
-You may also override some of the request logic by passing new functions as options. These logic handlers are available.
+您还可以通过将新函数作为选项传递来覆盖某些请求逻辑。 这些逻辑处理程序可用。
 
-Handler | Description
+处理程序 | 描述
 ------------- | -------------
-**handleConfirmMessage(message)** | called when requesting confirmation from the user.
-**handleErrorMessage(message)** | called when an error message should be displayed.
-**handleValidationMessage(message, fields)** | focuses the first invalid field when validation is used.
-**handleFlashMessage(message, type)** | called when a flash message is provided using the **flash** option (see above).
-**handleRedirectResponse(url)** | called when the browser should redirect to another location.
+**handleConfirmMessage(message)** | 在请求用户确认时调用。
+**handleErrorMessage(message)** | 在应显示错误消息时调用。
+**handleValidationMessage(message, fields)** | 使用验证时聚焦第一个无效字段。
+**handleFlashMessage(message, type)** | 当使用 **flash** 选项提供闪现消息时调用（见上文）。
+**handleRedirectResponse(url)** | 当浏览器应该重定向到另一个位置时调用。
 
-## Usage Examples
+## 用法示例
 
-Request a confirmation before the onDelete request is sent:
+在发送 onDelete 请求之前请求确认：
 
 ```js
 $('form').request('onDelete', {
-    confirm: 'Are you sure?',
+    confirm: '你确定吗?',
     redirect: '/dashboard'
 })
 ```
 
-Run `onCalculate` handler and inject the rendered **calcresult** partial into the page element with the **result** CSS class:
+运行 `onCalculate` 处理程序并将渲染的 **calcresult** 部件注入具有 **result** CSS 类的页面元素：
 
 ```js
 $('form').request('onCalculate', {
@@ -56,86 +56,86 @@ $('form').request('onCalculate', {
 })
 ```
 
-Run `onCalculate` handler with some extra data:
+使用一些额外的数据运行 `onCalculate` 处理程序：
 
 ```js
 $('form').request('onCalculate', {data: {value: 55}})
 ```
 
-Run `onCalculate` handler and run some custom code before the page elements update:
+运行 onCalculate 处理程序并在页面元素更新之前运行一些自定义代码：
 
 ```js
 $('form').request('onCalculate', {
     update: {calcresult: '.result'},
-    beforeUpdate: function() { /* do something */ }
+    beforeUpdate: function() { /* 一些处理程序 */ }
 })
 ```
 
-Run `onCalculate` handler and if successful, run some custom code and the default `success` function:
+运行 `onCalculate` 处理程序，如果成功，运行一些自定义代码和默认的 `success` 函数：
 
 ```js
 $('form').request('onCalculate', {success: function(data) {
-    //... do something ...
+    //... 一些处理程序 ...
     this.success(data);
 }})
 ```
 
-Execute a request without a FORM element:
+执行没有 表单 元素的请求：
 
 ```js
 $.request('onCalculate', {
     success: function() {
-        console.log('Finished!');
+        console.log('完成!');
     }
-})
+})       
 ```
 
-Run `onCalculate` handler and if successful, run some custom code after the default `success` function is done:
+运行 `onCalculate` 处理程序，如果成功，则在默认的 `success` 函数完成后运行一些自定义代码：
 
 ```js
 $('form').request('onCalculate', {success: function(data) {
     this.success(data).done(function() {
-        //... do something after parent success() is finished ...
+        //... 在父级 success() 完成后做一些事情 ...
     });
 }})
 ```
 
-## Global AJAX Events
+## 全局 AJAX 事件
 
-The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
+AJAX 框架在更新的元素、触发元素、表单和窗口对象上触发多个事件。 无论使用哪个 API——数据属性 API 或 JavaScript API，都会触发事件。
 
-Event | Description
+事件 | 描述
 ------------- | -------------
-**ajaxBeforeSend** | triggered on the window object before sending the request.
-**ajaxBeforeUpdate** | triggered on the form object directly after the request is complete, but before the page is updated. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxUpdate** | triggered on a page element after it has been updated with the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxUpdateComplete** | triggered on the window object after all elements are updated by the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxSuccess** | triggered on the form object after the request is successfully completed. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxError** | triggered on the form object if the request encounters an error. The handler gets 5 parameters: the event object, the context object, the error message, the status text string, and the jqXHR object.
-**ajaxErrorMessage** | triggered on the window object if the request encounters an error. The handler gets 2 parameters: the event object and error message returned from the server.
-**ajaxConfirmMessage** | triggered on the window object when `confirm` option is given. The handler gets 2 parameters: the event object and text message assigned to the handler as part of `confirm` option. This is useful for implementing custom confirm logic/interface instead of native javascript confirm box.
+**ajaxBeforeSend** | 在发送请求之前在 window 对象上触发。
+**ajaxBeforeUpdate** | 在请求完成后但在页面更新之前直接在表单对象上触发。处理程序获取 5 个参数：事件对象、上下文对象、从服务器接收的数据对象、状态文本字符串和 jqXHR 对象。
+**ajaxUpdate** | 在使用框架更新页面元素后在页面元素上触发。处理程序获取 5 个参数：事件对象、上下文对象、从服务器接收的数据对象、状态文本字符串和 jqXHR 对象。
+**ajaxUpdateComplete** | 在框架更新所有元素后在 window 对象上触发。处理程序获取 5 个参数：事件对象、上下文对象、从服务器接收的数据对象、状态文本字符串和 jqXHR 对象。
+**ajaxSuccess** | 请求成功完成后在表单对象上触发。处理程序获取 5 个参数：事件对象、上下文对象、从服务器接收的数据对象、状态文本字符串和 jqXHR 对象。
+**ajaxError** | 如果请求遇到错误，则在表单对象上触发。处理程序获取 5 个参数：事件对象、上下文对象、错误消息、状态文本字符串和 jqXHR 对象。
+**ajaxErrorMessage** | 如果请求遇到错误，则在 window 对象上触发。处理程序获取 2 个参数：事件对象和从服务器返回的错误消息。
+**ajaxConfirmMessage** | 当给出 `confirm` 选项时在 window 对象上触发。 处理程序获得 2 个参数：作为`confirm` 选项的一部分分配给处理程序的事件对象和文本消息。 这对于实现自定义确认逻辑/界面而不是原生 javascript 确认框很有用。
 
-These events are fired on the triggering element:
+这些事件在触发元素上触发：
 
-Event | Description
+事件 | 描述
 ------------- | -------------
-**ajaxSetup** | triggered before the request is formed, allowing options to be modified via the `context.options` object.
-**ajaxPromise** | triggered directly before the AJAX request is sent.
-**ajaxFail** | triggered finally if the AJAX request fails.
-**ajaxDone** | triggered finally if the AJAX request was successful.
-**ajaxAlways** | triggered regardless if the AJAX request fails or was successful.
+**ajaxSetup** | 在请求形成之前触发，允许通过 `context.options` 对象修改选项。
+**ajaxPromise** | 在发送 AJAX 请求之前直接触发。
+**ajaxFail** | 如果 AJAX 请求失败，则最终触发。
+**ajaxDone** | 如果 AJAX 请求成功，则最终触发。
+**ajaxAlways** | 无论 AJAX 请求失败还是成功都会触发。
 
-## Usage Examples
+## 用法示例
 
-Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.
+当在元素上触发 `ajaxUpdate` 事件时执行 JavaScript 代码。
 
 ```js
 $('.calcresult').on('ajaxUpdate', function() {
-    console.log('Updated!');
+    console.log('更新完成!');
 })
 ```
 
-Execute a single request that shows a Flash Message using logic handler.
+使用逻辑处理程序执行显示闪现消息的单个请求。
 
 ```js
 $.request('onDoSomething', {
@@ -146,22 +146,22 @@ $.request('onDoSomething', {
 })
 ```
 
-Applies configurations to all AJAX requests globally.
+将配置应用于全局所有 AJAX 请求。
 
 ```js
 $(document).on('ajaxSetup', function(event, context) {
-    // Enable AJAX handling of Flash messages on all AJAX requests
+    // 对所有 AJAX 请求启用闪现消息的 AJAX 处理
     context.options.flash = true
 
-    // Enable the StripeLoadIndicator on all AJAX requests
+    // 在所有 AJAX 请求上启用 StripeLoadIndicator
     context.options.loading = $.oc.stripeLoadIndicator
 
-    // Handle Error Messages by triggering a flashMsg of type error
+    // 通过触发类型错误的 flashMsg 处理错误消息
     context.options.handleErrorMessage = function(message) {
         $.oc.flashMsg({ text: message, class: 'error' })
     }
 
-    // Handle Flash Messages by triggering a flashMsg of the message type
+    // 通过触发消息类型的 flashMsg 来处理闪现消息
     context.options.handleFlashMessage = function(message, type) {
         $.oc.flashMsg({ text: message, class: type })
     }
