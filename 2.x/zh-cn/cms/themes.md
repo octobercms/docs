@@ -147,7 +147,7 @@ $this['foo'] = 'bar';
 // 通过数组读取
 echo $this['foo'];
 
-// 通过对象只读
+// 通过对象读取
 echo $this->foo;
 ```
 
