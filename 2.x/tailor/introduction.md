@@ -1,4 +1,4 @@
-# Blueprints
+# Introduction
 
 Tailor is a core module that lets you define editable structures used by your website or web application, such as a company blog or team page. Tailor automatically generates a backend user interface for managing records and provides [CMS components](../cms/components.md) for displaying and linking records on the frontend.
 
