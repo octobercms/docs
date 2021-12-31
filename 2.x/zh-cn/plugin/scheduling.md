@@ -1,4 +1,4 @@
-# Task Scheduling
+# 计划任务
 
 In the past, developers have generated a Cron entry for each task they need to schedule. However, this can sometimes be a headache. Your task schedule is no longer in source control, and you must SSH into your server to add the Cron entries. The command scheduler allows you to fluently and expressively define your command schedule within the application itself, and only a single Cron entry is needed on your server.
 

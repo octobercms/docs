@@ -1,34 +1,34 @@
-# Introduction
+# 介绍
 
-October CMS ships with a media manager built in, making it easy to publish larger assets such as video and photos. These assets can then be inserted to your pages and content files via the user interface.
+October CMS 附带了一个内置的媒体管理器，可以轻松发布更多的资产，例如视频和照片。然后可以通过用户界面将这些资产插入到您的页面和内容文件中。
 
 ![image](https://github.com/octobercms/docs/blob/develop/images/media-manager.png?raw=true)
 
-## Linking to Media
+## 链接到媒体
 
-In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [filter](../markup/filter-media.md).
+在大多数情况下，将媒体资产插入您的内容时将使用完整的 URL。但是，也可以使用 `|media` [过滤器](../markup/filter-media.md) 从它们在媒体目录中的相对路径生成这些 URL。
 
 ```twig
 {{ 'relative/path/to/asset.jpg'|media }}
 ```
 
-You may also generate URLs in PHP using the `MediaLibrary` class.
+您还可以使用`MediaLibrary` 类在 PHP 中生成 URL。
 
 ```php
 \Media\Classes\MediaLibrary::url('relative/path/to/asset.jpg');
 ```
 
-## Configuration Options
+## 配置选项
 
-There are several options that allow you to fine-tune the Media Manager, which are defined in **config/media.php** file.
+有几个选项允许您微调媒体管理器，这些选项在 **config/media.php** 文件中定义。
 
 ```php
 /*
 |--------------------------------------------------------------------------
-| Ignored Files and Patterns
+| Ignored Files and Patterns[忽略的文件和模式]
 |--------------------------------------------------------------------------
 |
-| The media manager wil ignore file names and patterns specified here
+| The media manager wil ignore file names and patterns specified here[媒体管理器将忽略此处指定的文件名和模式]
 |
 */
 
@@ -37,41 +37,41 @@ There are several options that allow you to fine-tune the Media Manager, which a
 'ignore_patterns' => ['^\..*'],
 ```
 
-The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](../media/providers.md) on using third party providers such as Amazon S3.
+指定媒体文件保存位置的配置在系统配置文件中，请参阅有关使用第三方提供商(例如 Amazon S3)的[提供商文章](../media/providers.md)。
 
-#### SVG uploads are disabled by default
+#### SVG 上传默认禁用
 
-For security reasons, uploading SVG graphic files is disabled in October CMS by default. This is because there is potential for malicious code to be executed when the SVG file renders on the page. If your administration area is open to the public, we recommend leaving this setting as normal.
+出于安全原因，默认情况下在October CMS 中禁用上传 SVG 图形文件。这是因为当 SVG 文件呈现在页面上时，可能会执行恶意代码。如果您的管理区域向公众开放，我们建议您保持正常设置。
 
-To allow the use of SVG files in the backend, simply add it to the list of image extensions.
+要允许在后端使用 SVG 文件，只需将其添加到图像扩展名列表中即可。
 
 ```php
 'image_extensions' => [..., 'svg'],
 ```
 
-## Audio and Video Players
+## 音频和视频播放器
 
-By default the system uses HTML5 audio and video tags to render audio and video files:
+默认情况下，系统使用 HTML5 音频和视频标签来渲染音频和视频文件：
 
 ```html
 <video src="video.mp4" controls></video>
 ```
 
-or
+或者
 
 ```html
 <audio src="audio.mp3" controls></audio>
 ```
 
-This behavior can be overridden. If there are **oc-audio-player.htm** and **oc-video-player.htm** CMS partials, they will be used for displaying audio and video contents. Inside the partials use the variable **src** to output a link to the source file. Example:
+此行为可以被覆盖。如果有 **oc-audio-player.htm** 和 **oc-video-player.htm** CMS 部件，它们将用于显示音频和视频内容。在部件内部使用变量 **src** 输出到源文件的链接。例子：
 
 ```html
 <video src="{{ src }}" width="320" height="200" controls preload></video>
 ```
 
-If you don't want to use HTML5 player you can provide any other markup in the partials. There's a [third-party script](https://html5media.info/) that enables support of HTML5 video and audio tags in older browsers.
+如果您不想使用 HTML5 播放器，您可以在部件中提供任何其他标记。 有一个 [第三方脚本](https://html5media.info/) 可以在旧浏览器中支持 HTML5 视频和音频标签。
 
-As the partials are written with Twig, you can automate adding alternative video sources based on a naming convention. For example, if there's a convention that there's always a smaller resolution video for each full resolution video, and the smaller resolution file has extension "iphone.mp4", the generated markup could look like this:
+由于部件是用 Twig 编写的，因此您可以根据命名约定自动添加替代视频源。 例如，如果约定每个全分辨率视频总是有一个较小分辨率的视频，并且较小分辨率的文件具有扩展名`huawei.mp4`，则生成的标记可能如下所示：
 
 ```twig
 <video controls>
@@ -79,40 +79,40 @@ As the partials are written with Twig, you can automate adding alternative video
         src="{{ src }}"
         media="only screen and (min-device-width: 568px)"></source>
     <source
-        src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
+        src="{{ src|replace({'.mp4': '.huawei.mp4'}) }}"
         media="only screen and (max-device-width: 568px)"></source>
 </video>
 ```
 
-## Events
+## 事件
 
-The Media Manager provides a few [events](../services/events.md) that you can listen for in order to improve extensibility.
+媒体管理器提供了一些 [事件](../services/events.md)，您可以监听它们以提高可扩展性。
 
-Event | Description | Parameters
+事件 |说明 |参数
 ------------- | ------------- | -------------
-**folder.delete** | Called when a folder is deleted | `(string) $path`
-**file.delete** | Called when a file is deleted | `(string) $path`
-**folder.rename** | Called when a folder is renamed | `(string) $originalPath`, `(string) $newPath`
-**file.rename** | Called when a file is renamed | `(string) $originalPath`, `(string) $newPath`
-**folder.create** | Called when a folder is created | `(string) $newFolderPath`
-**folder.move** | Called when a folder is moved | `(string) $path`, `(string) $dest`
-**file.move** | Called when a file is moved | `(string) $path`, `(string) $dest`
-**file.upload** | Called when a file is uploaded | `(string) $filePath`, `(\Symfony\Component\HttpFoundation\File\UploadedFile) $uploadedFile`
+**folder.delete** | 删除文件夹时调用 | `(string) $path`
+**file.delete** | 删除文件时调用 | `(string) $path`
+**folder.rename** | 重命名文件夹时调用 | `(string)$originalPath`,`(string)$newPath`
+**file.rename** | 重命名文件时调用 | `(string)$originalPath`,`(string)$newPath`
+**folder.create** | 创建文件夹时调用 | `(string)$newFolderPath`
+**folder.move** | 移动文件夹时调用 | `(string) $path`,`(string)$dest`
+**file.move** | 移动文件时调用 | `(string) $path`,`(string)$dest`
+**file.upload** | 上传文件时调用 | `(string)$filePath`,`(\Symfony\Component\HttpFoundation\File\UploadedFile) $uploadedFile`
 
-To hook into these events, either extend the `Media\Widgets\MediaManager` class directly
+要挂钩这些事件，请直接扩展`Media\Widgets\MediaManager` 类
 
-```php
+``php
 \Media\Widgets\MediaManager::extend(function($widget) {
     $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
-        // Update custom references to path here
+        // 在此处更新对路径的自定义引用
     });
 });
 ```
 
-Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Media\Widgets\MediaManager` object as the first parameter)
+或者通过 `Event` 门面全局监听（每个事件都以 `media.` 为前缀，并将被实例化的 `Media\Widgets\MediaManager` 对象作为第一个参数传递）
 
 ```php
 \Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
-    // Update custom references to path here
+    // 在此处更新对路径的自定义引用
 });
 ```

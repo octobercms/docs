@@ -1,94 +1,94 @@
-# Developing Themes
+# 开发主题
 
-The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the October CMS Marketplace.
+主题目录可以包括 **theme.yaml**、**version.yaml** 和 **assets/images/theme-preview.png** 文件。 这些文件对于本地开发是可选的，但对于在 October CMS 市场上发布的主题是必需的。
 
-## Theme Information File
+##主题信息文件
 
-The theme information file **theme.yaml** contains the theme description, the author name, URL of the author's website and some other information. The file should be placed to the theme root directory:
+主题信息文件 **theme.yaml** 包含主题描述、作者姓名、作者网站的 URL 以及其他一些信息。 该文件应放在主题根目录中：
 
 ```
 themes/
   demo/
-    theme.yaml    <=== Theme Information File
+    theme.yaml    <=== 主题信息文件
 ```
 
-The following fields are supported in the **theme.yaml** file:
+**theme.yaml** 文件支持以下字段:
 
-Field | Description
+领域 | 描述
 ------------- | -------------
-**name** | specifies the theme name, required.
-**author** | specifies the author name, required.
-**homepage** | specifies the author website URL, required.
-**description** | the theme description, required.
-**previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
-**code** | the theme code, optional. The value is used on the October CMS marketplace for initializing the theme code value.
-**authorCode** | the theme author code, optional. The value is used on the October CMS marketplace for defining the theme owner.
-**form** | a configuration array or reference to a form field definition file, used for [theme customization](#theme-customization), optional.
-**require** | an array of plugin names used for [theme dependencies](#theme-dependencies), optional.
+**name** | 指定主题名称，必填。
+**author** | 指定作者姓名，必填。
+**homepage** | 指定作者网站 URL，必填。
+**description** | 主题描述，必填。
+**previewImage** | 自定义预览图片，相对于主题目录的路径，例如：`assets/images/preview.png`，可选。
+**code** | 主题代码，可选。 该值在 October CMS 市场上用于初始化主题代码值。
+**authorCode** | 主题作者代码，可选。 该值在 October CMS 市场上用于定义主题所有者。
+**form** | 配置数组或对表单域定义文件的引用，用于[主题定制](#theme-customization)，可选。
+**require** | 用于 [主题依赖项](#theme-dependencies) 的插件名称数组，可选。
 
-Example of the theme information file:
+主题信息文件示例：
 
 ```yaml
 name: "October CMS Demo"
-description: "Demonstrates the basic concepts of the front-end theming."
+description: "演示前端主题的基本概念"
 author: "October CMS"
 homepage: "http://octobercms.com"
 code: "Demo"
-authorCode: "Acme"
+authorCode: "武志伟"
 ```
 
-## Version File
+## 版本文件
 
-The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory:
+主题版本文件 **version.yaml** 定义了当前的主题版本和变更日志。 该文件应放在主题根目录中：
 
 ```
 themes/
   demo/
     ...
-    version.yaml    <=== Theme Version File
+    version.yaml    <=== 主题版本文件
 ```
 
-The file format is following:
+文件格式如下：
 
 ```yaml
-v1.0.1: Theme initialization
-v1.0.2: Added more features
-v1.0.3: Some features are removed
+v1.0.1: 主题初始化
+v1.0.2: 添加了更多功能
+v1.0.3: 删除了一些功能
 ```
 
-## Theme Preview Image
+## 主题预览图片
 
-The theme preview image is used in the back-end theme selector. The image file **theme-preview.png** should be placed to the theme's **assets/images** directory:
+主题预览图像用于后端主题选择器。 图片文件**theme-preview.png** 应该放在主题的**assets/images** 目录下:
 
 ```
 themes/
   demo/
     assets/
       images/
-        theme-preview.png    <=== Theme Preview Image
+        theme-preview.png    <=== 主题预览图
 ```
 
-The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
+图像宽度应至少为 600 像素。 理想的纵横比是 1.5，例如 600x400px。
 
-## Theme Customization
+##主题定制
 
-Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms.md#defining-form-fields) for more information.
+主题可以通过在主题信息文件中定义一个 `form` 键来支持配置值。 此键应包含配置数组或对表单字段定义文件的引用，有关更多信息，请参阅 [表单字段](../backend/forms.md#defining-form-fields)。
 
-The following is an example of how to define a website name configuration field called **site_name**:
+以下是如何定义名为**site_name** 的网站名称配置字段的示例：
 
 ```yaml
-name: My Theme
+name:我的主题
 # [...]
 
 form:
     fields:
         site_name:
-            label: Site name
-            comment: The website name as it should appear on the front-end
-            default: My Amazing Site!
+            label: 站点名称
+            comment: 应出现在前端的网站名称
+            default: 我的超级网站！
 ```
 
-> **Note**: If using nested fields with array syntax (`contact[name]`, `contact[email]` etc.) you need to add the top level to the `ThemeData` model's `jsonable` array using the following.
+> **注意**：如果使用具有数组语法(`contact[name]`、`contact[email]` 等)的嵌套字段，您需要使用 下列的。
 
 ```php
 \Cms\Models\ThemeData::extend(function ($model) {
@@ -96,16 +96,16 @@ form:
 });
 ```
 
-The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup.md#default-variables) called `this.theme`.
+然后可以使用名为`this.theme`的[默认页面变量](../cms/markup.md#default-variables) 在任何主题模板中访问该值。
 
 ```twig
-<h1>Welcome to {{ this.theme.site_name }}!</h1>
+<h1>欢迎来到 {{ this.theme.site_name }}!</h1>
 ```
 
-You may also define the configuration in a separate file, where the path is relative to the theme. The following definition will source the form fields from the file **config/fields.yaml** inside the theme.
+您还可以在单独的文件中定义配置，其中路径是相对于主题的。 以下定义将从主题内的文件 **config/fields.yaml** 中获取表单字段。
 
 ```yaml
-name: My Theme
+name: 我的主题
 # [...]
 
 form: config/fields.yaml
@@ -116,14 +116,14 @@ form: config/fields.yaml
 ```yaml
 fields:
     site_name:
-        label: Site name
-        comment: The website name as it should appear on the front-end
-        default: My Amazing Site!
+        label: 站点名称
+        comment: 应出现在前端的网站名称
+        default: 我的超级网站！
 ```
 
-### Combiner Variables
+### 组合变量
 
-Assets combined using the `|theme` [filter and combiner](../markup/filter-theme.md) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+使用 `|theme` [过滤器和组合器](../markup/filter-theme.md) 组合的资产可以将值传递给过滤器，例如 LESS 过滤器。 在定义表单字段时只需指定 `assetVar` 选项，该值应包含所需的变量名称。
 
 ```yaml
 form:
@@ -136,21 +136,21 @@ form:
             assetVar: 'link-color'
 ```
 
-In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
+在上面的例子中，选择的颜色值将在 less 文件中作为 `@link-color` 可用。 假设我们有以下样式表参考：
 
 ```twig
 <link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet" />
 ```
 
-Using some example content inside **themes/yourtheme/assets/less/theme.less**:
+使用 **themes/yourtheme/assets/less/theme.less** 中的一些示例内容：
 
 ```less
 a { color: @link-color }
 ```
 
-## Theme Dependencies
+## 主题依赖
 
-A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information-file), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
+一个主题可以通过在[主题信息文件](#theme-information-file)中定义一个**require**选项来依赖插件，该选项应该提供一个被认为是需求的插件名称数组。 依赖于 **Acme.Blog** 和 **Acme.User** 的主题可以像这样定义这个需求：
 
 ```yaml
 name: "October CMS Demo"
@@ -161,29 +161,29 @@ require:
     - "Acme.Blog"
 ```
 
-When the theme is installed for the first time, the system will attempt to install the required plugins at the same time.
+首次安装主题时，系统会同时尝试安装所需的插件。
 
-## Localization
+## 多语言
 
-Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October backend and can be used for form labels just like [plugin localization](../plugin/localization.md)
+主题可以通过放置在主题目录的 **lang** 子目录中的文件提供后端多语言密钥。 这些多语言键只有在与 October 后端交互时才会自动注册，并且可以像 [插件多语言](../plugin/localization.md) 一样用于表单标签
 
-> **Note**: Translating frontend content should be handled with the [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) plugin.
+> **注意**：翻译前端内容应使用 [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) 插件处理。
 
-### Localization File Structure
+### 多语言文件结构
 
-Below is an example of the theme's lang directory:
+以下是主题的 lang 目录示例：
 
 ```
 themes/
-  acme/           <=== Theme directory
-    lang/         <=== Localization directory
-      en/         <=== Language directory
-        lang.php  <=== Localization file
+  acme/           <=== 主题目录
+    lang/         <=== 多语言目录
+      en/         <=== 语言目录
+        lang.php  <=== 多语言文件
       fr/
         lang.php
 ```
 
-The **lang.php** file should define and return an array of any depth, for example:
+**lang.php** 文件应该定义并返回一个任意深度的数组，例如：
 
 ```php
 return [
@@ -193,4 +193,4 @@ return [
 ];
 ```
 
-You are then able to reference the keys using `theme.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `theme.acme::lang.options.website_name`.
+然后你就可以使用`theme.theme-code::lang.key` 来引用这些键。 在上面的例子中，你用来引用`website_name`多语言的完整语言键是`theme.acme::lang.options.website_name`。
