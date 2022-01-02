@@ -4,7 +4,7 @@
 
 ## 拉取部件更新
 
-客户端浏览器在执行 AJAX 请求时可能会请求从服务器更新部件内容，这被认为是*拉取内容更新*。 以下代码在调用 `onRefreshTime` [事件处理程序](../ajax/handlers.md) 后呈现页面上 `#myDiv` 元素内的 **mytime** 部分。
+客户端浏览器在执行 AJAX 请求时可能会请求从服务器更新部件内容，这被认为是*拉取内容更新*。 以下代码在调用 `onRefreshTime` [事件处理程序](../ajax/handlers.md) 后呈现页面上 `#myDiv` 元素内的 **mytime** 部件。
 
 ```twig
 <div id="myDiv">{% partial 'mytime' %}</div>
@@ -78,7 +78,7 @@ mypartial: document.getElementById('myDiv')
 
 相比之下，[AJAX 处理程序](../ajax/handlers.md) 可以*将内容更新*从服务器端推送到客户端浏览器。 要推送更新，处理程序返回一个数组，其中键是要更新的 HTML 元素（使用简单的 CSS 选择器），值是要更新的内容。
 
-下面的示例将使用在部件 **mypartial** 中找到的内容更新页面上具有 id **myDiv** 的元素。 `onRefreshTime` 处理程序调用 `renderPartial` 方法来渲染 PHP 中的部分内容。
+下面的示例将使用在部件 **mypartial** 中找到的内容更新页面上具有 id **myDiv** 的元素。 `onRefreshTime` 处理程序调用 `renderPartial` 方法来渲染 PHP 中的部件内容。
 
 ```php
 function onRefreshTime()
@@ -99,7 +99,7 @@ function onRefreshTime()
 - 在 [组件类](../plugin/components.md#ajax-handlers) 中使用 `$this->page[]`。
 - 在[后端区域](../backend/controllers-ajax#using-ajax-handlers)中使用`$this->vars[]`。
 
-这些示例将为每个上下文的部分提供 **result** 变量：
+这些示例将为每个上下文的部件提供 **result** 变量：
 
 ```php
 // 从页面或布局 PHP 代码部分
@@ -112,7 +112,7 @@ $this->page['result'] = 'Hello world!';
 $this->vars['result'] = 'Hello world!';
 ```
 
-然后可以在部分中使用 Twig 访问此值：
+然后可以在部件中使用 Twig 访问此值：
 
 ```twig
 <!-- Hello world! -->

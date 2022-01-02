@@ -1,4 +1,4 @@
-# Extending Plugins
+# 扩展插件
 
 ## Extending with Events
 
