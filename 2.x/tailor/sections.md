@@ -78,13 +78,13 @@ Entries represent the content belonging to a section. They can specify a date fo
 
 ### Entry Types
 
-All entries optionally support the ability to define multiple content types for a section. For example, a blog section may have a regular post and a featured post, and these are two entry types. This is defined by the **entries** property in the section blueprint file and different fields can be specified for each type.
+All entries optionally support the ability to define multiple content types for a section. For example, a blog section may have a regular post and a featured post, and these are two entry types. Types are defined by the **groups** property in the section blueprint file and different fields can be specified for each type.
 
 ```yaml
 name: Blog
 handle: blog
 type: feed
-entries:
+groups:
     regular_post:
         name: Regular Post
         fields:
