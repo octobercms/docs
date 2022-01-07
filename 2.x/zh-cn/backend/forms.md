@@ -1,4 +1,4 @@
-# Forms
+# 表单
 
 **Form Behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
@@ -19,7 +19,7 @@ class Categories extends \Backend\Classes\Controller
 
 > **Note**: Very often the form and [list behavior](../backend/lists.md) are used together in a same controller.
 
-## Configuring the Form Behavior
+## 配置表单行为
 
 The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical form behavior configuration file.
 
@@ -59,7 +59,7 @@ Option | Description
 **update** | a configuration array or reference to a config file for the Update page.
 **preview** | a configuration array or reference to a config file for the Preview page.
 
-### Create Page
+### 创建页面
 
 To support the Create page add the following configuration to the YAML file.
 
@@ -79,7 +79,7 @@ Option | Description
 **redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
 **form** | overrides the default form fields definitions for the create page only.
 
-### Update Page
+### 更新页面
 
 To support the Update page add the following configuration to the YAML file.
 
@@ -98,7 +98,7 @@ Option | Description
 **redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
 **form** | overrides the default form fields definitions for the update page only.
 
-### Preview Page
+### 预览页面
 
 To support the Preview page add the following configuration to the YAML file:
 
@@ -114,7 +114,7 @@ Option  | Description
 **title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **form** | overrides the default form fields definitions for the preview page only.
 
-### Custom Messages
+### 自定义消息
 
 Specify the `customMessages` option to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../plugin/localization.md).
 
@@ -269,24 +269,24 @@ tabs:
             tab: Groups
 ```
 
-## Available Field Types
+## 可用字段类型
 
 There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#available-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
 
 <div class="content-list" markdown="1">
 
-- [Text](#field-text)
-- [Number](#field-number)
-- [Password](#field-password)
-- [Email](#field-email)
-- [Textarea](#field-textarea)
-- [Dropdown](#field-dropdown)
-- [Radio List](#field-radio)
-- [Balloon Selector](#field-balloon)
-- [Checkbox](#field-checkbox)
-- [Checkbox List](#field-checkboxlist)
-- [Switch](#field-switch)
-- [Widget](#field-widget)
+- [文本](#field-text)
+- [数字](#field-number)
+- [密码](#field-password)
+- [电子邮件](#field-email)
+- [文本域](#field-textarea)
+- [下拉列表](#field-dropdown)
+- [单选列表](#field-radio)
+- [气球选择器](#field-balloon)
+- [复选框](#field-checkbox)
+- [复选框列表](#field-checkboxlist)
+- [开关](#field-switch)
+- [自定义小组件](#field-widget)
 
 </div>
 
@@ -639,10 +639,10 @@ There are non function UI elements that can be included in forms to help with th
 
 <div class="content-list" markdown="1">
 
-- [Section](#field-section)
-- [Hint](#field-hint)
-- [Horizontal Rule](#field-ruler)
-- [Partial](#field-partial)
+- [分段](#field-section)
+- [提示](#field-hint)
+- [横向分隔线](#field-ruler)
+- [部件](#field-partial)
 
 </div>
 
@@ -716,20 +716,20 @@ There are various form widgets included as standard, although it is common for p
 
 <div class="content-list" markdown="1">
 
-- [Code Editor](#widget-codeeditor)
-- [Color Picker](#widget-colorpicker)
-- [Data Table](#widget-datatable)
-- [Date Picker](#widget-datepicker)
-- [File Upload](#widget-fileupload)
-- [Markdown Editor](#widget-markdowneditor)
-- [Media Finder](#widget-mediafinder)
-- [Nested Form](#widget-nestedform)
-- [Record Finder](#widget-recordfinder)
-- [Relation](#widget-relation)
-- [Repeater](#widget-repeater)
-- [Rich Editor / WYSIWYG](#widget-richeditor)
-- [Sensitive](#widget-sensitive)
-- [Tag List](#widget-taglist)
+- [代码编辑器](#widget-codeeditor)
+- [颜色选择器](#widget-colorpicker)
+- [数据表格](#widget-datatable)
+- [日期选择器](#widget-datepicker)
+- [文件上传器](#widget-fileupload)
+- [Markdown编辑器](#widget-markdowneditor)
+- [媒体选择器](#widget-mediafinder)
+- [嵌套表单](#widget-nestedform)
+- [记录查找器](#widget-recordfinder)
+- [关系](#widget-relation)
+- [循环组件](#widget-repeater)
+- [富文本编辑器 / 所见即所得编辑器](#widget-richeditor)
+- [机密信息](#widget-sensitive)
+- [标签列表](#widget-taglist)
 
 </div>
 

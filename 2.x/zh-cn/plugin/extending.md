@@ -1,12 +1,12 @@
 # 扩展插件
 
-## Extending with Events
+## 扩展事件
 
-The [Event service](../services/events.md) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
+[事件服务](../services/events.md) 是注入或修改核心类或其他插件功能的主要方式。 通过在 PHP 文件的顶部(命名空间语句之后)添加 `use Event;` 以导入 Event 服务，可以在任何类中导入该服务使用。
 
-### Subscribing to Events
+### 监听(订阅)事件
 
-The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration.md#registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
+监听事件最常见的地方是[插件注册文件](registration.md#registration-methods)的`boot`方法。 例如，当用户第一次注册时，您可能希望将他们添加到第三方邮件列表中，这可以通过监听`rainlab.user.register`全局事件来实现。
 
 ```php
 class Plugin extends PluginBase
@@ -16,64 +16,64 @@ class Plugin extends PluginBase
     public function boot()
     {
         Event::listen('rainlab.user.register', function ($user) {
-            // Code to register $user->email to mailing list
+            // 将 $user->email 注册到邮件列表的代码
         });
     }
 }
 ```
 
-The same can be achieved by extending the model's constructor and using a local event.
+可以通过扩展模型的构造函数并使用本地事件来实现相同的目的。
 
 ```php
 User::extend(function ($model) {
     $model->bindEvent('user.register', function () use ($model) {
-        // Code to register $model->email to mailing list
+        // 将 $user->email 注册到邮件列表的代码
     });
 });
 ```
 
-### Declaring / Firing Events
+### 声明/触发事件
 
-You can fire events globally (through the Event service) or locally.
+您可以全局(通过事件服务)或本地触发事件。
 
-Local events are fired by calling `fireEvent()` on an instance of an object that implements `October\Rain\Support\Traits\Emitter`. Since local events are only fired on a specific object instance, it is not required to namespace them as it is less likely that a given project would have multiple events with the same name being fired on the same objects within a local context.
+本地事件是通过在实现了`October\Rain\Support\Traits\Emitter`的对象实例上调用`fireEvent()`来触发的。 由于本地事件仅在特定对象实例上触发，因此不需要命名它们，因为给定项目不太可能在本地上下文中的相同对象上触发多个具有相同名称的事件。
 
 ```php
 $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
 ```
 
-Global events are fired by calling `Event::fire()`. As these events are global across the entire application, it is best practice to namespace them by including the vendor information in the name of the event. If your plugin Author is ACME and the plugin name is Blog, then any global events provided by the ACME.Blog plugin should be prefixed with `acme.blog`.
+全局事件通过调用 `Event::fire()` 来触发。 由于这些事件在整个应用程序中是全局的，因此最好通过在事件名称中包含供应商信息来命名它们。 如果你的插件作者是 ACME 并且插件名称是 Blog，那么 ACME.Blog 插件提供的任何全局事件都应该以 `acme.blog` 为前缀。
 
 ```php
 Event::fire('acme.blog.post.beforePost', [$firstParam, $secondParam]);
 ```
 
-If both global & local events are provided at the same place it's best practice to fire the local event before the global event so that the local event takes priority. Additionally, the global event should provide the object instance that the local event was fired on as the first parameter.
+如果在同一个地方同时提供全局和本地事件，最好的做法是在全局事件之前触发本地事件，以便本地事件优先。 此外，全局事件应提供触发本地事件的对象实例作为第一个参数。
 
 ```php
 $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
 Event::fire('rainlab.blog.beforePost', [$this, $firstParam, $secondParam]);
 ```
 
-Once this event has been subscribed to, the parameters are available in the handler method. For example:
+一旦监听了这个事件，参数就可以在处理程序方法中使用了。 例如：。 例如：
 
 ```php
-// Global
+// 全局
 Event::listen('acme.blog.post.beforePost', function ($post, $param1, $param2) {
     Log::info($post->name . 'posted. Parameters: ' . $param1 . ' ' . $param2);
 });
 
-// Local
+// 本地
 $post->bindEvent('post.beforePost', function ($param1, $param2) use ($post) {
     Log::info($post->name . 'posted. Parameters: ' . $param1 . ' ' . $param2);
 });
 ```
 
-## Extending Backend Views
+## 扩展后端视图
 
-Sometimes you may wish to allow a backend view file or partial to be extended, such as a toolbar. This is possible using the `fireViewEvent` method found in all backend controllers.
+有时您可能希望允许扩展后端视图文件或部件文件，例如工具栏。 这可以使用在所有后端控制器中找到的 `fireViewEvent` 方法来实现。
 
-Place this code in your view file:
+将此代码放在您的视图文件中：
 
 ```php
 <div class="footer-area-extension">
@@ -81,34 +81,34 @@ Place this code in your view file:
 </div>
 ```
 
-This will allow other plugins to inject HTML to this area by hooking the event and returning the desired markup.
+这将允许其他插件通过钩子事件并返回所需的标记来将 HTML 注入该区域。
 
 ```php
 Event::listen('backend.auth.extendSigninView', function ($controller, $firstParam) {
-    return '<a href="#">Sign in with Google!</a>';
+    return '<a href="#">使用 Google 登录!</a>';
 });
 ```
 
-> **Note**: The first parameter in the event handler will always be the calling object (the controller).
+> **注意**：事件处理程序中的第一个参数将始终是调用对象(控制器)。
 
-The above example would output the following markup:
+上面的示例将输出以下标记：
 
 ```html
 <div class="footer-area-extension">
-    <a href="#">Sign in with Google!</a>
+    <a href="#">使用 Google 登录!</a>
 </div>
 ```
 
-## Usage Examples
+## 用法示例
 
-These are some practical examples of how events can be used.
+这些是如何使用事件的一些实际示例。
 
-### Extending a User Model
+### 扩展用户模型
 
-This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration.md#routing-and-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
+此示例将通过绑定到其本地事件来修改 `User` 模型的 [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) 事件。 这是在[插件注册文件](registration.md#routing-and-initialization)的`boot`方法中执行的。 在这两种情况下，当访问 `$model->foo` 属性时，它将返回值 *bar*。
 
 ```php
-// Local event hook that affects all users
+// 影响所有用户的本地事件钩子
 User::extend(function ($model) {
     $model->bindEvent('model.getAttribute', function ($attribute, $value) {
         if ($attribute === 'foo') {
@@ -117,7 +117,7 @@ User::extend(function ($model) {
     });
 });
 
-// Double event hook that affects user #2 only
+// 仅影响用户 #2 的双重事件钩子
 User::extend(function ($model) {
     $model->bindEvent('model.afterFetch', function () use ($model) {
         if ($model->id !== 2) {
@@ -133,91 +133,93 @@ User::extend(function ($model) {
 });
 ```
 
-To add model validation for introduced fields, hook into the `beforeValidate` event and throw a `ValidationException` exception.
+要为引入的字段添加模型验证，请钩到 `beforeValidate` 事件并抛出 `ValidationException` 异常。
 
 ```php
 User::extend(function ($model) {
     $model->bindEvent('model.beforeValidate', function () use ($model) {
         if (!$model->billing_first_name) {
-            throw new \ValidationException(['billing_first_name' => 'First name is required']);
+            throw new \ValidationException(['billing_first_name' => '名字为必填项']);
         }
     });
 });
 ```
 
-### Extending Backend Forms
+### 扩展后端表单
 
-There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms.md#extending-form-behavior).
+有多种扩展后端表单的方法，请参阅 [后端表单](../backend/forms.md#extending-form-behavior)。
 
-This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration.md#routing-and-initialization).
+此示例将监听 `Backend\Widget\Form` 小部件的 [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) 全局事件,以此注入一些额外的表单字段。 该事件也在[插件注册文件](registration.md#routing-and-initialization)的`boot`方法中监听。
 
 ```php
-// Extend all backend form usage
+// 扩展所有后台表单使用
 Event::listen('backend.form.extendFields', function($widget) {
-    // Only apply this listener when the Users controller is being used
+    // 仅在使用 Users 控制器时应用此监听器
     if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
         return;
     }
 
-    // Only apply this listener when the User model is being modified
+    // 仅在修改 User 模型时应用此侦听器
     if (!$widget->model instanceof \RainLab\User\Models\User) {
         return;
     }
 
-    // Only apply this listener when the Form widget in question is a root-level
-    // Form widget (not a repeater, nestedform, etc)
+    // 仅当有待定的 Form 小部件是root级别时才应用此侦听器
+    // 表单小部件（不是循环组件、嵌套表单等）
     if ($widget->isNested) {
         return;
     }
 
-    // Add an extra birthday field
+    // 添加额外的生日字段
     $widget->addFields([
         'birthday' => [
-            'label'   => 'Birthday',
-            'comment' => 'Select the users birthday',
+            'label'   => '生日',
+            'comment' => '选择用户的生日',
             'type'    => 'datepicker'
         ]
     ]);
 
-    // Remove a Surname field
-    $widget->removeField('surname');
+    // 删除姓氏字段
+    $widget->removeField('姓氏');
 });
 ```
 
-> **Note**: You may also use the `backend.form.extendFieldsBefore` event to add fields.
+> **注意**：您也可以使用 `backend.form.extendFieldsBefore` 事件来添加字段。
 
-### Extending a Backend List
+### 扩展后端列表
 
-This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration.md#routing-and-initialization).
+此示例将修改 `Backend\Widget\Lists` 类的 [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) 全局事件,以此注入一些额外的列值。 该事件也在[插件注册文件](registration.md#routing-and-initialization)的`boot`方法中监听。
 
 ```php
-// Extend all backend list usage
+// 扩展所有后端列表使用
 Event::listen('backend.list.extendColumns', function ($widget) {
-    // Only for the User controller
+    // 仅用于User控制器
     if (!$widget->getController() instanceof \RainLab\User\Controllers\Users) {
         return;
     }
 
-    // Only for the User model
+    // 仅适用于User模型
     if (!$widget->model instanceof \RainLab\User\Models\User) {
         return;
     }
 
-    // Add an extra birthday column
+    // 添加额外的生日列
     $widget->addColumns([
         'birthday' => [
-            'label' => 'Birthday'
+            'label' => '生日'
         ],
     ]);
 
-    // Remove a Surname column
-    $widget->removeColumn('surname');
+    // 删除姓氏列
+    $widget->removeColumn('姓氏');
 });
 ```
 
-### Extending a Component
+### 扩展组件
 
-This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components.md#component-class-definition).
+此示例将在`Topic`组件内声明一个新的全局事件`rainlab.forum.topic.post`
+和名为`topic.post`
+的本地事件。 这是在[组件类定义](components.md#component-class-definition)中进行的。
 
 ```php
 class Topic extends ComponentBase
@@ -227,7 +229,7 @@ class Topic extends ComponentBase
         // ...
 
         /*
-         * Extensibility
+         * 可扩展性
          */
         $this->fireEvent('topic.post', [$post, $postUrl]);
         Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
@@ -235,7 +237,7 @@ class Topic extends ComponentBase
 }
 ```
 
-Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts.md#dynamic-pages). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
+接下来，这将演示如何从 [页面执行生命周期](../cms/layouts.md#dynamic-pages) 内部挂钩到这个新事件。 当在 `Topic` 组件(上述)中调用 `onPost` 事件处理程序时，这将写入跟踪日志。
 
 ```
 [topic]
@@ -244,26 +246,26 @@ slug = "{{ :slug }}"
 function onInit()
 {
     $this->topic->bindEvent('topic.post', function($post, $postUrl) {
-        trace_log('A post has been submitted at '.$postUrl);
+        trace_log('帖子已提交至 '.$postUrl);
     });
 }
 ```
 
-### Extending the Backend Menu
+### 扩展后端菜单
 
-This example will replace the label for CMS and Pages in the backend with *...*.
+此示例将使用 *...* 替换后端中 CMS 和 Pages 的标签。
 
 ```php
 Event::listen('backend.menu.extendItems', function($manager) {
 
-    // Add main menu item
+    // 添加主菜单项
     $manager->addMainMenuItems('October.Cms', [
         'cms' => [
             'label' => '...'
         ]
     ]);
 
-    // Add side menu item
+    // 添加侧边菜单项
     $manager->addSideMenuItems('October.Cms', 'cms', [
         'pages' => [
             'label' => '...'
@@ -273,18 +275,18 @@ Event::listen('backend.menu.extendItems', function($manager) {
 });
 ```
 
-Similarly, we can remove the menu items using the same event.
+同样，我们可以使用相同的事件删除菜单项。
 
 ```php
 Event::listen('backend.menu.extendItems', function($manager) {
 
-    // Remove all items
+    // 删除所有项目
     $manager->removeMainMenuItem('October.Cms', 'cms');
 
-    // Remove single item
+    // 删除单个项目
     $manager->removeSideMenuItem('October.Cms', 'cms', 'pages');
 
-    // Remove two items
+    // 删除两项
     $manager->removeSideMenuItems('October.Cms', 'cms', [
         'pages',
         'partials'
