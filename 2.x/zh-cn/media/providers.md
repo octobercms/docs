@@ -128,7 +128,7 @@
 ]
 ```
 
-恭喜！现在您已准备好将 Amazon S3 与 October CMS 结合使用。请注意，您还可以配置 Amazon CloudFront CDN 以使用您的存储桶。本文档未涉及该主题，请参阅【CloudFront 文档】(http://aws.amazon.com/cloudfront/)。配置 CloudFront 后，您需要更新存储配置中的 **path** 参数。
+恭喜！现在您已准备好将 Amazon S3 与 October CMS 结合使用。请注意，您还可以配置 Amazon CloudFront CDN 以使用您的存储桶。本文档未涉及该主题，请参阅[CloudFront 文档](http://aws.amazon.com/cloudfront/)。配置 CloudFront 后，您需要更新存储配置中的 **path** 参数。
 
 ## 配置 Rackspace CDN 访问
 

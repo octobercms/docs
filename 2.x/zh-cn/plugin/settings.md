@@ -1,13 +1,12 @@
 # 设置和配置
 
-There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
+有两种配置插件的方法 - 使用后端设置表单和配置文件。将数据库设置与后端页面一起使用可提供更好的用户体验，但它们会为初始开发带来更多开销。基于文件的配置适用于很少修改的配置。
 
-## Database Settings
+## 数据库设置
 
-You can create models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the back-end settings form. You don't need to create a database table and a controller for creating the back-end settings forms based on the settings model.
+您可以通过在模型类中实现`SettingsModel`行为来创建用于在数据库中存储设置的模型。此模型可直接用于创建后端设置表单。您不需要创建数据库表和控制器。
 
-The settings model classes should extend the Model class and implement the `\System\Behaviors\SettingsModel` behavior. The settings models, like any other models, should be defined in the **models** subdirectory of the plugin directory. The model from the next example should be defined in the `plugins/acme/demo/models/Settings.php` script.
-
+设置模型类应该扩展模型类并实现 `\System\Behaviors\SettingsModel` 行为。设置模型像其他任何模型一样，应该在插件目录的 **models** 子目录中定义。下一个示例中的模型应该在`plugins/acme/demo/models/Settings.php` 脚本中定义。
 ```php
 <?php namespace Acme\Demo\Models;
 
@@ -17,116 +16,116 @@ class Settings extends Model
 {
     public $implement = [\System\Behaviors\SettingsModel::class];
 
-    // A unique code
+    // 独一无二的标识符
     public $settingsCode = 'acme_demo_settings';
 
-    // Reference to field configuration
+    // 参考字段配置
     public $settingsFields = 'fields.yaml';
 }
 ```
 
-The `$settingsCode` property is required for settings models. It defines the unique settings key which is used for saving the settings to the database.
+设置模型需要 `$settingsCode` 属性。 它定义了用于将设置保存到数据库的唯一设置键。
 
-The `$settingsFields` property is required if are going to build a back-end settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [Backend forms](../backend/forms.md) article. The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
+如果要基于模型构建后端设置表单，则需要 `$settingsFields` 属性。 该属性指定包含表单字段定义的 YAML 文件的名称。 [后端表单](../backend/forms.md) 文章中描述了表单字段。 YAML 文件应放在名称与模型类名称匹配的小写目录中。 对于上一个示例中的模型，目录结构如下所示：
 
 ```
 plugins/
     acme/
     demo/
         models/
-        settings/        <=== Files Directory
-            fields.yaml  <=== Form Fields
-        Settings.php     <=== Script
+        settings/        <=== 文件目录
+            fields.yaml  <=== 表单文件
+        Settings.php     <=== 脚本
 ```
 
-Settings models [can be registered](#backend-settings-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
+设置模型[可以注册](#backend-settings-pages) 出现在**后端设置页面**，但这不是必需的 - 您可以像任何其他模型一样设置和读取设置值。
 
-### Writing to a Settings Model
+### 写入设置模型
 
-The settings model has the static `set` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
+设置模型具有静态`set` 方法，允许保存单个或多个值。 您还可以使用标准模型功能来设置模型属性和保存模型。
 
 ```php
 use Acme\Demo\Models\Settings;
 
-// Set a single value
+// 设置单个值
 Settings::set('api_key', 'ABCD');
 
-// Set an array of values
+// 设置一组值
 Settings::set(['api_key' => 'ABCD']);
 
-// Set object values
+// 设置对象值
 $settings = Settings::instance();
 $settings->api_key = 'ABCD';
 $settings->save();
 ```
 
-### Reading From a Settings Model
+### 从设置模型中读取
 
-The settings model has the static `get` method that enables you to load individual properties. Also, when you instantiate a model with the `instance` method, it loads the properties from the database and you can access them directly.
+设置模型具有静态`get` 方法，使您能够加载单个属性。 此外，当您使用 `instance` 方法实例化模型时，它会从数据库加载属性，您可以直接访问它们。
 
 ```php
-// Outputs: ABCD
+// 输出：ABCD
 echo Settings::instance()->api_key;
 
-// Get a single value
+// 获取单个值
 echo Settings::get('api_key');
 
-// Get a value and return a default value if it doesn't exist
+// 获取一个值，如果不存在则返回一个默认值
 echo Settings::get('is_activated', true);
 ```
 
-## Backend Settings Pages
+## 后端设置页面
 
-The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
+后端包含用于系统和和插件配置的专用区域，可以通过单击主菜单中的<strong>设置</strong>链接进行访问
 
-### Settings Link Registration
+###设置链接注册
 
-The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration.md#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+可以通过覆盖[插件注册类](registration.md#registration-file)中的`registerSettings`方法来扩展后端设置导航链接。 创建配置链接时，您有两个选项 - 创建指向特定后端页面的链接，或创建指向设置模型的链接。 下一个示例显示如何创建指向后端页面的链接。
 
 ```php
 public function registerSettings()
 {
     return [
         'location' => [
-            'label' => 'Locations',
-            'description' => 'Manage available user countries and states.',
+            'label' => '地理位置',
+            'description' => '管理可用的用户国家和州。',
             'category' => 'Users',
             'icon' => 'icon-globe',
             'url' => Backend::url('acme/user/locations'),
             'order' => 500,
-            'keywords' => 'geography place placement'
+            'keywords' => '地理 地点 位置'
         ]
     ];
 }
 ```
 
-> **Note**: Backend settings pages should [set the settings context](#setting-the-page-navigation-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+> **注意**：后端设置页面应该[配置设置的上下文](#setting-the-page-navigation-context)，以便在系统页面侧边栏中标记相应的设置菜单项是否处于活动状态。 自动检测设置模型的设置上下文。
 
-The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
+以下示例创建指向设置模型的链接。 设置模型是上面[数据库设置](#database-settings) 部分中描述的设置API 的一部分。
 
 ```php
 public function registerSettings()
 {
     return [
         'settings' => [
-            'label' => 'User Settings',
-            'description' => 'Manage user based settings.',
+            'label' => '用户设置',
+            'description' => '管理基于用户的设置。',
             'category' => 'Users',
             'icon' => 'icon-cog',
             'class' => \Acme\User\Models\Settings::class,
             'order' => 500,
-            'keywords' => 'security location',
+            'keywords' => '账号 头像 会员信息',
             'permissions' => ['acme.users.access_settings']
         ]
     ];
 }
 ```
 
-The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
+设置搜索功能使用可选的`keywords` 参数。 如果未提供关键字，则搜索仅使用设置项标签和描述。
 
-### Setting the Page Navigation Context
+### 设置页面导航上下文
 
-Just like [setting navigation context in the controller](../backend/controllers-ajax.md#setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+就像[在控制器中设置导航上下文](../backend/controllers-ajax.md#setting-the-navigation-context) 一样，后端设置页面应该配置设置的导航上下文。 为了将系统页面侧栏中的当前设置链接标记为活动，这是必需的。 使用`System\Classes\SettingsManager`类来设置设置上下文。 通常它可以在控制器构造函数中完成：
 
 ```php
 public function __construct()
@@ -140,11 +139,11 @@ public function __construct()
 }
 ```
 
-The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#settings-link-registration).
+`setContext` 方法的第一个参数是以下格式的设置项所有者：**author.plugin**。 第二个参数是设置名称，与您在[注册后端设置页面](#settings-link-registration)时提供的相同。
 
-## File-based Configuration
+## 基于文件的配置
 
-Plugins can have a configuration file **config.php** in the **config** subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file **plugins/acme/demo/config/config.php**.
+插件可以在插件目录的**config** 子目录下有一个配置文件**config.php**。 配置文件是定义并返回 **array** 的 PHP 脚本。 示例配置文件 **plugins/acme/demo/config/config.php**。
 
 ```php
 <?php
@@ -155,21 +154,21 @@ return [
 ];
 ```
 
-Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist.
+使用 `Config` 类来访问配置文件中定义的配置值。 `Config::get($name, $default = null)` 方法接受以下格式的插件和参数名称：**Acme.Demo::maxItems**。 第二个可选参数定义了如果配置参数不存在则返回的默认值。
 
 ```php
 $maxItems = Config::get('acme.demo::maxItems', 50);
 ```
 
-You may also use a different filename for the configuration file and this affects the key name. For example, a configuration file named **custom.php** will prefix the key name with `custom`, using the following format: **Acme.Demo::custom.maxItems**. Example configuration file **plugins/acme/demo/config/custom.php**.
+您还可以为配置文件使用不同的文件名，这会影响键名。 例如，名为 **custom.php** 的配置文件将使用 `custom` 作为键名的前缀，使用以下格式：**Acme.Demo::custom.maxItems**。 示例配置文件 **plugins/acme/demo/config/custom.php**。
 
 ```php
 $maxItems = Config::get('acme.demo::custom.maxItems', 50);
 ```
 
-### Overriding Configuration Values
+### 覆盖配置值
 
-A plugin configuration file can be overridden by the application by creating a local configuration file to match, for example, to override **plugins/acme/demo/config/config.php**, create a file called **config/acme/todo/config.php**. Inside the overridden configuration file you can return only values you want to override.
+一个插件配置文件可以被应用程序覆盖，通过创建一个本地配置文件来匹配，例如覆盖**plugins/acme/demo/config/config.php**，创建一个名为**config/acme/todo/config.php**的文件。 在覆盖的配置文件中，您可以只设置要覆盖的值。
 
 ```php
 <?php
@@ -179,7 +178,7 @@ return [
 ];
 ```
 
-If you want to use separate configurations across different environments (eg: **dev**, **production**), consider using the `env()` helper to pull the value from an environment variable. The `env($name, $default = null)` function accepts the environment variable name and a default value if the variable doesn't exist.
+如果您想在不同的环境中使用单独的配置(例如：**dev**、**production**)，请考虑使用 `env()` 助手从环境变量中提取值。 `env($name, $default = null)` 函数接受环境变量名称和一个默认值（如果变量不存在）。
 
 ```php
 <?php
@@ -189,4 +188,4 @@ return [
 ];
 ```
 
-This will change the `maxItems` value when the environment variable `ACME_TODO_MAX_ITEMS` is set to any other value.
+当环境变量`ACME_TODO_MAX_ITEMS`设置为任何其他值时，这将更改`maxItems`值。

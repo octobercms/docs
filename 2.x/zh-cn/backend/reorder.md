@@ -1,4 +1,4 @@
-# Sorting Records
+# 排序记录
 
 October CMS provides features for sorting and reordering database records. For behaviors that support structured lists, you can define a **structure** option to enable the feature. Various [model traits](../database/traits.md) are used to support reordering including nested sets, simple trees and sortable models.
 

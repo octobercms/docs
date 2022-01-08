@@ -1,4 +1,4 @@
-# Controllers & AJAX
+# 控制器和AJAX
 
 The October CMS backend implements an Model-View-Controller (MVC) pattern. Controllers manage backend pages and implement various features like forms and lists. This article describes how to develop backend controllers and how to configure controller behaviors.
 

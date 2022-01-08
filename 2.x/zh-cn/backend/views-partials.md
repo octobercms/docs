@@ -1,4 +1,4 @@
-# Views & Partials
+# 视图和部件
 
 ## Partials
 
