@@ -1,0 +1,21 @@
+#
+# Markup Extras
+#
+# "/markup/":
+# -
+#     title: Back to October CMS Docs
+#     icon: "/images/october-leaf.svg"
+#     link: "/3.x/"
+
+#
+# Root Extras
+#
+"/":
+-
+    title: Home
+    icon: "/images/october-leaf.svg"
+    link: "/3.x/"
+-
+    title: Markup Guide
+    icon: "/images/markup-guide.svg"
+    link: "/3.x/markup/"
