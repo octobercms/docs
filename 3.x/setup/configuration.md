@@ -41,11 +41,11 @@ Never add the `.env` file to source control. It would be a security risk in the 
 
 If a configuration file must be loaded based on the current application environment, e.g. staging or production, you can use the server-level `APP_ENV` variable. Example Apache configuration:
 
-```ini
+```text
 SetEnv APP_ENV "staging"
 ```
 
-When the `APP_ENV` variable is defined, the platform attempts to load a .env file with the suffix matching the environment name. e.g. `.env.staging`. If the file does not exist, there will be no error. Any variables defined in an environment-specific file will override values defined in the common `.env` file.
+When the `APP_ENV` variable is defined, the platform attempts to load a .env file with the suffix matching the environment name. e.g. `.env.staging`. If the file does not exist, there will be no error. If both `.env.staging` and `.env` files exist, the `.env` file is completely ignored.
 
 ## Common Configuration Parameters
 

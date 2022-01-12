@@ -29,7 +29,7 @@ Supported web servers:
 * Apache
 * Nginx
 * Lighttpd
-* Internet Information Services (IIS).
+* Internet Information Services (Microsoft IIS).
 
 ## Installing October CMS
 
