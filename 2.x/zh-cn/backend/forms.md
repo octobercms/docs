@@ -1,8 +1,8 @@
 # 表单
 
-**Form Behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
+**Form Behavior** 是一个控制器修饰符，用于轻松地将表单功能添加到后端页面。 该行为提供了三个页面，分别称为创建、更新和预览。 预览页面是更新页面的只读版本。 当您使用表单行为时，您不需要在控制器中定义 `create`、`update` 和 `preview` 操作 - 行为会为你完成。 但是，您应该提供相应的视图文件。
 
-Form behavior depends on form [field definitions](#defining-form-fields) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+表单行为取决于表单[字段定义](#defining-form-fields) 和[模型类](../database/model.md)。 为了使用表单行为，您应该将其添加到控制器类的`$implement` 属性中。 此外，应定义`$formConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -17,15 +17,15 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-> **Note**: Very often the form and [list behavior](../backend/lists.md) are used together in a same controller.
+> **注意**:表单和[列表行为](../backend/lists.md) 经常在同一个控制器中一起使用。
 
 ## 配置表单行为
 
-The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical form behavior configuration file.
+`$formConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [views 目录](controllers-ajax.md) 中。 下面是一个典型的表单行为配置文件的例子。
 
 ```yaml
 # ===================================
-#  Form Behavior Config
+#  Form Behavior Config [表单行为配置]
 # ===================================
 
 name: Blog Category
@@ -33,145 +33,145 @@ form: $/acme/blog/models/post/fields.yaml
 modelClass: Acme\Blog\Post
 
 create:
-    title: New Blog Post
+    title: 新博文
 
 update:
-    title: Edit Blog Post
+    title: 编辑博客文章
 
 preview:
-    title: View Blog Post
+    title: 查看博客文章
 ```
 
-The following fields are required in the form configuration file.
+表单配置文件中需要以下字段。
 
-Field | Description
+字段 | 描述
 ------------- | -------------
-**name** | the name of the object being managed by this form.
-**form** | a configuration array or reference to a form field definition file, see [form fields](#defining-form-fields).
-**modelClass** | a model class name, the form data is loaded and saved against this model.
+**name** | 此表单管理的对象的名称。
+**form** | 配置数组或对表单域定义文件的引用，请参阅 [表单域](#defining-form-fields)。
+**modelClass** | 一个模型类名，表单数据被加载并保存在这个模型上。
 
-The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#create-page), [Update](#update-page) or [Preview](#preview-page) pages.
+下面列出的配置选项是可选的。 如果您希望表单行为支持 [创建](#create-page)、[更新](#update-page) 或 [预览](#preview-page) 页面，请定义它们。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
-**create** | a configuration array or reference to a config file for the Create page.
-**update** | a configuration array or reference to a config file for the Update page.
-**preview** | a configuration array or reference to a config file for the Preview page.
+**defaultRedirect** | 当没有定义特定的重定向页面时，用作后备重定向页面。
+**create** | 创建页面的配置数组或对配置文件的引用。
+**update** | 更新页面的配置数组或对配置文件的引用。
+**preview** | 预览页面的配置数组或对配置文件的引用。
 
 ### 创建页面
 
-To support the Create page add the following configuration to the YAML file.
+要支持创建页面，请将以下配置添加到 YAML 文件中。
 
 ```yaml
 create:
-    title: New Blog Post
+    title: 新博客文章
     redirect: acme/blog/posts/update/:id
     redirectClose: acme/blog/posts
 ```
 
-The following configuration options are supported for the Create page.
+创建页面支持以下配置选项。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization.md).
-**redirect** | redirection page when record is saved.
-**redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
-**form** | overrides the default form fields definitions for the create page only.
+**title** | 一个页面标题，可以引用一个[多语言字符串](../plugin/localization.md)。
+**redirect** | 保存记录时的重定向页面。
+**redirectClose** | 保存记录时会吧close参数一起提交，用于保存并关闭重定向页面
+**form** | 定义创建页面的默认表单字段。
 
 ### 更新页面
 
-To support the Update page add the following configuration to the YAML file.
+要支持更新页面，请将以下配置添加到 YAML 文件中。
 
 ```yaml
 update:
-    title: Edit Blog Post
+    title: 编辑博客文章
     redirect: acme/blog/posts
 ```
 
-The following configuration options are supported for the Update page.
+更新页面支持以下配置选项。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization.md).
-**redirect** | redirection page when record is saved.
-**redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
-**form** | overrides the default form fields definitions for the update page only.
+**title** | 一个页面标题，可以引用一个[多语言字符串](../plugin/localization.md)。
+**redirect** | 保存记录时的重定向页面。
+**redirectClose** | 保存记录时会吧close参数一起提交，用于保存并关闭重定向页面
+**form** | 定义更新页面的默认表单字段。
 
 ### 预览页面
 
-To support the Preview page add the following configuration to the YAML file:
+要支持预览页面，请将以下配置添加到 YAML 文件中:
 
 ```yaml
 preview:
     title: View Blog Post
 ```
 
-The following configuration options are supported for the Preview page.
+预览页面支持以下配置选项。
 
-Option  | Description
+选项 | 描述
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization.md).
-**form** | overrides the default form fields definitions for the preview page only.
+**title** | 一个页面标题，可以引用一个[多语言字符串](../plugin/localization.md)。
+**form** | 定义预览页面的默认表单字段。
 
 ### 自定义消息
 
-Specify the `customMessages` option to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../plugin/localization.md).
+指定 `customMessages` 选项以覆盖表单控制器使用的默认消息。 这些值可以是纯文本，也可以引用 [多语言字符串](../plugin/localization.md)。
 
 ```yaml
 customMessages:
-    notFound: Did not find the thing
-    flashCreate: New thing created
-    flashUpdate: Updated that thing
-    flashDelete: Thing is gone
+    notFound: 没找到那个东西
+    flashCreate: 创造了新东西
+    flashUpdate: 更新了那个东西
+    flashDelete: 东西不见了
 ```
 
-You may also modify messages in the context of the form being displayed. The following will override the `notFound` message for the `update` context only.
+您还可以在显示的表单上下文中修改消息。 以下将仅覆盖 `update` 上下文的 `notFound` 消息。
 
 ```yaml
 update:
     customMessages:
-        notFound: Nothing found when updating
+        notFound: 更新时没有发现
 ```
 
-The following messages are available to override as custom messages.
+以下消息可用作自定义消息覆盖。
 
-Message | Default Message
+消息 | 默认消息
 ------------- | -------------
-notFound | Form record with an ID of :id could not be found.
-flashCreate | :name Created
-flashUpdate | :name Updated
-flashDelete | :name Deleted
+notFound | 找不到 ID 为 :id 的表单记录。
+flashCreate | :name 已创建
+flashUpdate | :name 更新
+flashDelete | :name 已删除
 
-## Defining Form Fields
+## 定义表单字段
 
-Form fields are defined with the YAML file. The form fields configuration is used by the form behavior for creating the form controls and binding them to the model fields. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but **fields.yaml** and **form_fields.yaml** are common names. Example form fields file location:
+表单字段是使用 YAML 文件定义的。 表单行为使用表单字段配置来创建表单控件并将它们绑定到模型字段。 该文件被放置在插件的 **models** 目录的子目录中。 子目录名称与小写的模型类名称相匹配。 文件名无关紧要，但 **fields.yaml** 和 **form_fields.yaml** 是常用名称。 示例表单字段文件位置:
 
 ```
 plugins/
   acme/
     blog/
-      models/            <=== Plugin Models Directory
-        post/            <=== Model Configuration Directory
-          fields.yaml    <=== Model Form Fields Config File
-        Post.php         <=== model Class
+      models/            <=== 插件模型目录
+        post/            <=== 模型配置目录
+          fields.yaml    <=== 模型表单字段配置文件
+        Post.php         <=== 模型类
 ```
 
-Fields can be placed in three areas, the **outside area**, **primary tabs** or **secondary tabs**. The next example shows the typical contents of a form fields definition file.
+字段可以放置在三个区域，**外部区域**、**主要选项卡**或**次要选项卡**。 下一个示例显示了表单域定义文件的典型内容。
 
 ```yaml
 # ===================================
-#  Form Field Definitions
+#  Form Field Definitions [表单字段定义]
 # ===================================
 
 fields:
     blog_title:
-        label: Blog Title
-        description: The title for this blog
+        label: 博客标题
+        description: 此博客的标题
 
     published_at:
-        label: Published date
-        description: When this blog post was published
+        label: 发布日期
+        description: 这篇博文发表的时间
         type: datepicker
 
     # [...]
@@ -185,63 +185,63 @@ secondaryTabs:
         # [...]
 ```
 
-### Field Options
+### 字段选项
 
-For each field you can specify these options (where applicable):
+对于每个字段，您可以指定这些选项(如果适用):
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**label** | a name when displaying the form field to the user.
-**type** | defines how this field should be rendered (see [Available fields types](#available-field-types) below). Default: text.
-**span** | aligns the form field to one side. Options: auto, left, right, row, full. Default: full.
-**spanClass** | used with the span `row` option to display the form as a Bootstrap grid, for example, `spanClass: col-xs-4`.
-**size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
-**placeholder** | if the field supports a placeholder value.
-**comment** | places a descriptive comment below the field.
-**commentAbove** | places a comment above the field.
-**commentHtml** | allow HTML markup inside the comment. Options: true, false.
-**default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
-**defaultFrom** | takes the default value from the value of another field.
-**tab** | assigns the field to a tab.
-**cssClass** | assigns a CSS class to the field container.
-**readOnly** | prevents the field from being modified. Options: true, false.
-**disabled** | prevents the field from being modified and excludes it from the saved data. Options: true, false.
-**hidden** | hides the field from the view and excludes it from the saved data. Options: true, false.
-**stretch** | specifies if this field stretches to fit the parent height.
-**context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
-**dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
-**trigger** | specify conditions for this field using [trigger events](#trigger-events).
-**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#input-preset-converter).
-**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#validation) as this is not enforced by the form controller.
-**attributes** | specify custom HTML attributes to add to the form field element.
-**containerAttributes** | specify custom HTML attributes to add to the form field container.
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**label** | 向用户显示表单字段时的名称。
+**type** | 定义应如何呈现此字段(请参阅下面的 [可用字段类型](#available-field-types))。默认值:text。
+**span** | 将表单域与一侧对齐。选项: auto(自动), left(左对齐), right(右对齐), row(格网布局), full(铺满)。默认值:full。
+**spanClass** | 与 span `row` 选项一起使用，将表单显示为 Bootstrap 网格，例如，`spanClass: col-xs-4`。
+**size** | 指定字段大小，例如 textarea 字段。选项:tiny(微型), small(小型), large(中型), huge(大型), giant(巨型)。
+**placeholder** | 如果该字段支持占位,则为占位符值。
+**comment** | 在字段下方放置一个描述。
+**commentAbove** | 在字段上方放置一个描述。
+**commentHtml** | 允许在描述中添加 HTML 标记。选项:true, false。
+**default** | 指定字段的默认值。对于 `dropdown`、`checkboxlist`、`radio` 和 `balloon-selector` 字段，您可以在此处指定一个选项键以使其默认选中。
+**defaultFrom** | 从另一个字段的值中获取默认值。
+**tab** | 将字段分配给选项卡。
+**cssClass** | 为字段容器分配一个 CSS 类。
+**readOnly** | 防止字段被修改。选项:true, false。
+**disabled** | 防止字段被修改并将其从保存的数据中排除。选项:true, false。
+**hidden** | 从视图中隐藏字段并将其从保存的数据中排除。选项:true, false。
+**stretch** | 指定此字段是否拉伸以适合父高度。
+**context** | 指定显示字段时应使用的上下文。上下文也可以通过在字段名称中使用 `@` 符号来传递，例如，`name@update`。
+**dependsOn** | 其他字段名称的数组，该字段[取决于](#field-dependencies)，当其他字段被修改时，该字段将更新。
+**trigger** | 使用 [触发事件](#trigger-events) 指定此字段的条件。
+**preset** | 允许字段值最初由另一个字段的值设置，使用 [输入预设转换器](#input-preset-converter) 进行转换。
+**required** | 在字段标签旁边放置一个红色星号表示它是必填项。请务必使用 [模型验证](../database/traits.md#validation)，因为表单控制器不强制执行此操作。
+**attributes** | 指定要添加到表单字段元素的自定义 HTML 属性。
+**containerAttributes** | 指定要添加到表单字段容器的自定义 HTML 属性。
+**permissions** | 当前后端用户必须拥有[权限](users.md#users-and-permissions) 才能使用该字段。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
 
-### Nested Field Selection
+### 嵌套字段选择
 
-Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations.md#relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#property-jsonable), you may use a nested field type using the **relation[field]** definition.
+来自相关模型的字段可以使用 [关系小部件](#relation) 或 [关系管理器](relations.md#relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#property-jsonable)，您可以使用 **relation[field]** 定义的嵌套字段类型。
 
 ```yaml
 avatar[name]:
-    label: Avatar
-    comment: will be saved in the Avatar table
+    label: 头像
+    comment: 将保存在头像表中
 ```
 
-The above example would fetch and save the value in PHP equivalent of `$record->avatar->name` or `$record->avatar['name']` respectively.
+上面的示例将分别获取和保存 PHP 中，相当于用 `$record->avatar->name` 或 `$record->avatar['name']` 获取值。
 
-### Tab Options
+### 选项卡选项
 
-For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
+对于每个选项卡定义，即 `tabs` 和 `secondaryTabs`，您可以指定以下选项:
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**stretch** | specifies if this tab stretches to fit the parent height.
-**defaultTab** | the default tab to assign fields to. Default: Misc.
-**activeTab** | selected tab when the form first loads, name or index. Default: 1
-**icons** | assign icons to tabs using tab names as the key.
-**lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
-**cssClass** | assigns a CSS class to the tab container.
-**paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
+**stretch** | 指定此选项卡是否拉伸以适合父高度。
+**defaultTab** | 将字段分配到的默认选项卡。 默认值:Misc。
+**activeTab** | 表单第一次加载时选择的选项卡名称或索引。 默认值:1
+**icons** | 使用选项卡名称作为键将图标分配给选项卡。
+**lazy** | 单击时要动态加载的选项卡数组。 对于包含大量内容的选项卡很有用。
+**cssClass** | 将 CSS 类分配给选项卡容器。
+**paneCssClass** | 将 CSS 类分配给单个选项卡窗格。 value 是一个数组，key 是标签索引或标签，value 是 CSS 类。 它也可以指定为字符串，在这种情况下，该值将应用于所有选项卡。
 
 ```yaml
 tabs:
@@ -260,18 +260,18 @@ tabs:
     fields:
         username:
             type: text
-            label: Username
+            label: 用户名
             tab: User
 
         groups:
             type: relation
-            label: Groups
+            label: 分组
             tab: Groups
 ```
 
 ## 可用字段类型
 
-There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#available-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
+有多种原生字段类型用于 **type** 设置。 对于基本的 UI 元素，请查看 [可用的 UI 元素](#available-ui-elements)。 对于更高级的表单字段，可以使用 [表单小部件](#form-widgets) 代替。
 
 <div class="content-list" markdown="1">
 
@@ -286,105 +286,103 @@ There are various native field types that can be used for the **type** setting. 
 - [复选框](#field-checkbox)
 - [复选框列表](#field-checkboxlist)
 - [开关](#field-switch)
-- [自定义小组件](#field-widget)
+- [自定义小部件](#field-widget)
 
 </div>
 
 <a name="field-text"></a>
-### Text
+### 文本
 
-`text` - renders a single line text box. This is the default type used if none is specified.
+`text` - 呈现单行文本框。 如果没有指定，这是默认使用的类型。
 
 ```yaml
 blog_title:
-    label: Blog Title
+    label: 博客标题
     type: text
 ```
 
 <a name="field-number"></a>
-### Number
+### 数字
 
-`number` - renders a single line text box that takes numbers only.
+`number` - 呈现一个仅接受数字的单行文本框。
 
 ```yaml
 your_age:
-    label: Your Age
+    label: 你的年龄
     type: number
-    step: 1  # defaults to 'any'
-    min: 1   # defaults to not present
-    max: 100 # defaults to not present
+    step: 1  # 默认为 '任意值'
+    min: 1   # 默认不出现
+    max: 100 # 默认不出现
 ```
 
-If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+如果您想保存时在服务器端验证此字段以确保它是数字，请在您的模型上使用 `$rules` 属性，如下所示:
 
 ```php
 /**
- * @var array Validation rules
+ * @var array 验证规则
  */
 public $rules = [
     'your_age' => 'numeric',
 ];
 ```
 
-For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
-
+有关模型验证的更多信息，请访问 [文档页面](https://octobercms.com/docs/services/validation#rule-numeric)。
 <a name="field-password"></a>
-### Password
+### 密码
 
-`password ` - renders a single line password field.
+`password ` - 呈现单行密码字段。
 
 ```yaml
 user_password:
-    label: Password
+    label: 密码
     type: password
 ```
 
 <a name="field-email"></a>
-### Email
+### 电子邮件
 
-`email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
+`email` - 呈现一个类型为 `email` 的单行文本框，在移动端浏览器中触发一个电子邮件专用键盘。
 
 ```yaml
 user_email:
-    label: Email Address
+    label: 电子邮件地址
     type: email
 ```
 
-If you would like to validate this field on save to ensure that it is a properly-formatted email address, please use the `$rules` property on your model, like so:
+如果您想在保存时验证此字段以确保它格式是正确的电子邮件地址，请在您的模型上使用 `$rules` 属性，如下所示:
 
 ```php
 /**
- * @var array Validation rules
+ * @var array 验证规则
  */
 public $rules = [
     'user_email' => 'email',
 ];
 ```
 
-For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
+有关模型验证的更多信息，请访问 [文档页面](https://octobercms.com/docs/services/validation#rule-email)。
 
 <a name="field-textarea"></a>
-### Textarea
+### 文本域
 
-`textarea` - renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
+`textarea` - 呈现一个多行文本框。 也可以使用指定的值规定大小:tiny(微型), small(小型), large(中型), huge(大型), giant(巨型)。
 
 ```yaml
 blog_contents:
-    label: Contents
+    label: 内容
     type: textarea
     size: large
 ```
 
 <a name="field-dropdown"></a>
-### Dropdown
+### 下拉列表
 
-`dropdown` - renders a dropdown with specified options. There are a number of ways to provide the dropdown options, most of them involve specify the `options` value.
+`dropdown` - 呈现带有指定选项的下拉菜单。 提供下拉选项的方法有很多种，其中大多数涉及指定 `options` 值。
 
-Option values only, where the values and labels are the same.
-
+仅选项值，其中值和标签相同。
 ```yaml
 status_type:
-    label: Blog Post Status
+    label: 博客帖子状态
     type: dropdown
     default: published
     options:
@@ -393,30 +391,30 @@ status_type:
         archived
 ```
 
-Options with key-value pair, where the value and label are independently specified.
+具有键值相对应的选项，其中值和标签是独立指定的。
 
 ```yaml
 status_type:
-    label: Blog Post Status
+    label: 博客帖子状态
     type: dropdown
     default: published
     options:
-        draft: Draft
-        published: Published
-        archived: Archived
+        draft: 草稿
+        published: 已发表
+        archived: 存档
 ```
 
-The next approaches involve using the model class in your plugin or application codebase. If the `options` value is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model.
+下一种方法涉及在插件或应用程序代码库中使用模型类。如果省略 `options` 值，则框架期望在模型中定义一个名为 `get*FieldName*Options` 的方法。
 
-Using the example below, the model class is expected to have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
+使用下面的示例，模型类应该有 `getStatusTypeOptions` 方法。此方法的第一个参数是该字段的当前值，第二个参数是整个表单的当前数据对象。此方法应返回格式为 **key => label** 的选项数组。
 
 ```yaml
 status_type:
-    label: Blog Post Status
+    label: 博客帖子状态
     type: dropdown
 ```
 
-This is an example of the model class method that supplies the dropdown options. Notice that the method name matches the column name in _TitleCase_ format.
+这是提供下拉选项的模型类方法的示例。请注意，方法名称与 _TitleCase_ 格式的列名称匹配。
 
 ```php
 public function getStatusTypeOptions($value, $formData)
@@ -425,9 +423,9 @@ public function getStatusTypeOptions($value, $formData)
 }
 ```
 
-You may also define a catch-all method that works as a fallback in cases where the dedicated method name is not defined, which will be used for all dropdown field types for the model.
+您还可以定义一个万能的方法，在未定义专用方法名称的情况下用作备用方法，该方法将用于模型的所有下拉字段类型。
 
-The first argument of this method is the field name, the second is the current value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
+该方法的第一个参数是字段名，第二个是字段的当前值，第三个是整个表单的当前数据对象。它应该返回格式为 **key => label** 的选项数组。
 
 ```php
 public function getDropdownOptions($fieldName, $value, $formData)
@@ -441,18 +439,18 @@ public function getDropdownOptions($fieldName, $value, $formData)
 }
 ```
 
-To use a custom method name, specify it explicitly in the `options` parameter and this will match exactly to the method name defined in the model.
+要使用自定义方法名称，请在 `options` 参数中明确指定它，这将与模型中定义的方法名称完全匹配。
 
-In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
+在下一个例子中，`listStatuses` 方法应该在模型类中定义。此方法接收与 `getDropdownOptions` 方法相同的所有参数，并应返回格式为 **key => label** 的选项数组。
 
 ```yaml
 status:
-    label: Blog Post Status
+    label: 博客帖子状态
     type: dropdown
     options: listStatuses
 ```
 
-This is an example of the model class custom method that supplies the dropdown options.
+这是提供下拉选项的模型类自定义方法的示例。
 
 ```php
 public function listStatuses($fieldName, $value, $formData)
@@ -461,7 +459,7 @@ public function listStatuses($fieldName, $value, $formData)
 }
 ```
 
-You have the possibility to add an icon or an image for every option which will be rendered in the dropdown field. In this case you have to specify the options as a multidimensional array with the following format **key => [label-text, label-icon]**.
+您可以为将在下拉字段中呈现的每个选项添加图标或图像。在这种情况下，您必须将选项指定为具有以下格式的多维数组 **key => [label-text, label-icon]**。
 
 ```php
 public function listStatuses($fieldName, $value, $formData)
@@ -474,16 +472,16 @@ public function listStatuses($fieldName, $value, $formData)
 }
 ```
 
-If you want to call a method on an external class, you may do it by calling a static method on any fully qualified object. Simply specify the `ClassName::method` syntax as a string in the `options` parameter.
+如果要调用外部类的方法，可以通过调用任何完全限定对象的静态方法来实现。只需在 `options` 参数中将 `ClassName::method` 语法指定为字符串。
 
 ```yaml
 status:
-    label: Blog Post Status
+    label: 博客帖子状态
     type: dropdown
     options: \MyAuthor\MyPlugin\Helpers\FormHelper::staticMethodOptions
 ```
 
-This examples shows the static method defined on any helper class. The first argument is the Model object and the second argument is the form field definition.
+此示例显示了在任何帮助程序类上定义的静态方法。第一个参数是模型对象，第二个参数是表单字段定义。
 
 ```php
 public static function staticMethodOptions($model, $formField)
@@ -492,140 +490,139 @@ public static function staticMethodOptions($model, $formField)
 }
 ```
 
-To handle cases when there is no value set on the model, you may specify an `emptyOption` value to include an empty option that can be reselected.
+要处理模型上没有设置值的情况，您可以指定一个 `emptyOption` 值以包含一个可以重新选择的空选项。
 
 ```yaml
 status:
-    label: Blog Post Status
+    label: 博客帖子状态
     type: dropdown
-    emptyOption: -- no status --
+    emptyOption: -- 无状态 --
 ```
 
-Alternatively you may use the `placeholder` option to use a "one-way" empty option that cannot be reselected.
+或者，您可以使用 `placeholder` 选项来使用无法重新选择的“占位”空选项。
 
 ```yaml
 status:
-    label: Blog Post Status
+    label: 博客帖子状态
     type: dropdown
-    placeholder: -- select a status --
+    placeholder: -- 选择一个状态 --
 ```
 
-By default the dropdown has a searching feature, allowing quick selection of a value. This can be disabled by setting the `showSearch` option to `false`.
+默认情况下，下拉菜单具有搜索功能，允许快速选择值。这可以通过将 `showSearch` 选项设置为 `false` 来禁用。
 
 ```yaml
 status:
-    label: Blog Post Status
+    label: 博客帖子状态
     type: dropdown
     showSearch: false
 ```
 
 <a name="field-radio"></a>
-### Radio List
+### 单选列表
 
-`radio` - renders a list of radio options, where only one item can be selected at a time.
+`radio` - 呈现单选选项列表，其中一次只能选择一个项目。
 
 ```yaml
 security_level:
-    label: Access Level
+    label: 访问权限
     type: radio
     default: guests
     options:
-        all: All
-        registered: Registered only
-        guests: Guests only
+        all: 全部
+        registered: 仅会员
+        guests: 仅访客
 ```
 
-Radio lists can also support a secondary description.
+单选列表也可以支持辅助描述。
 
 ```yaml
 security_level:
-    label: Access Level
+    label: 访问权限
     type: radio
     options:
-        all: [All, Guests and customers will be able to access this page.]
-        registered: [Registered only, Only logged in member will be able to access this page.]
-        guests: [Guests only, Only guest users will be able to access this page.]
+        all: [全部,访客和会员将能够访问此页面。]
+        registered: [仅会员,只有登录的会员才能访问此页面。]
+        guests: [仅访客,只有访客用户才能访问此页面。]
 ```
 
-Radio lists support the same methods for defining the options as the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
+单选列表支持与 [下拉列表类型](#field-dropdown) 相同的方法来定义选项。 对于单选列表，该方法可以返回简单数组:**key => value** ，也可以返回用于提供描述的数组:**key => [label, description]**。 通过在单选字段配置上指定 `cssClass: 'inline-options'`，选项可以彼此内联显示，而不是在单独的行中显示。
 
 <a name="field-balloon"></a>
-### Balloon Selector
+### 气球选择器
 
-`balloon-selector` - renders a list, where only one item can be selected at a time.
+`balloon-selector` - 渲染一个列表，一次只能选择一个项目。
 
 ```yaml
 gender:
-    label: Gender
+    label: 性别
     type: balloon-selector
     default: female
     options:
-        female: Female
-        male: Male
+        female: 女性
+        male: 男性
 ```
 
-Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
+气球选择器支持与 [下拉列表类型](#field-dropdown) 相同的方法来定义选项。
 
 <a name="field-checkbox"></a>
-### Checkbox
+### 复选框
 
-`checkbox` - renders a single checkbox.
+`checkbox` - 呈现单个复选框。
 
 ```yaml
 show_content:
-    label: Display content
+    label: 显示内容
     type: checkbox
     default: true
 ```
 
 <a name="field-checkboxlist"></a>
-### Checkbox List
+### 复选框列表
 
 `checkboxlist` - renders a list of checkboxes.
 
 ```yaml
 permissions:
-    label: Permissions
+    label: 权限
     type: checkboxlist
-    # set to true to explicitly enable the "Select All", "Select None" options
-    # on lists that have <=10 items (>10 automatically enables it)
+    # 在具有 <=10 项的列表上设置为 true 以显式启用“全选”、“取消全选”选项(>10 自动启用它)
     quickselect: true
-    default: open_account
+    default: 注册账户
     options:
-        open_account: Open account
-        close_account: Close account
-        modify_account: Modify account
+        open_account: 注册账户
+        close_account: 关闭账户
+        modify_account: 修改帐号
 ```
 
-Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio). Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the checkboxlist field config.
+复选框列表支持与 [下拉列表类型](#field-dropdown) 相同的方法来定义选项，并且还支持在 [单选列表类型](#field-radio) 中找到的辅助描述。 通过在 checkboxlist 字段配置中指定 `cssClass: 'inline-options'`，选项可以彼此内联显示，而不是在单独的行中显示。
 
 <a name="field-switch"></a>
-### Switch
+### 开关
 
-`switch` - renders a switchbox.
+`switch` - 渲染一个开关盒。
 
 ```yaml
 show_content:
-    label: Display content
+    label: 显示内容
     type: switch
     comment: Flick this switch to display content
 ```
 
-You may customize the switch text by passing an array to the `options` value with false and true labels.
+您可以通过将数组传递给带有 false 和 true 标签的 `options` 值来自定义开关文本。
 
 ```yaml
 show_content:
-    label: Display content
+    label: 显示内容
     type: switch
     options:
-        - Nope
-        - Yeah
+        - 关
+        - 开
 ```
 
 <a name="field-widget"></a>
-### Widget
+### 自定义小部件
 
-`widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
+`widget` - 呈现自定义表单小部件，`type` 字段可以直接引用小部件的类名或注册的别名。
 
 ```yaml
 blog_content:
@@ -633,9 +630,9 @@ blog_content:
     size: huge
 ```
 
-## Available UI Elements
+## 可用的 UI 元素
 
-There are non function UI elements that can be included in forms to help with the layout design.
+表单中可以包含非功能 UI 元素以帮助进行布局设计。
 
 <div class="content-list" markdown="1">
 
@@ -647,21 +644,20 @@ There are non function UI elements that can be included in forms to help with th
 </div>
 
 <a name="field-section"></a>
-### Section
+### 分段
 
-`section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
-
+`section` - 呈现分段标题和副标题。 `label` 和 `comment` 值是可选的，包含标题和副标题的内容。
 ```yaml
 _section1:
-    label: User details
+    label: 用户详情
     type: section
-    comment: This section contains details about the user.
+    comment: 本节包含有关用户的详细信息。
 ```
 
 <a name="field-hint"></a>
-### Hint
+### 提示
 
-`hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
+`hint` - 与 `partial` 字段相同，但呈现在提示容器中，用户可以隐藏该提示容器。
 
 ```yaml
 content:
@@ -669,30 +665,30 @@ content:
     path: content_field
 ```
 
-A hint supports content inline to the field. The `label` and `comment` values are optional and contain the content for the heading and subheading. You may also use Markdown syntax for the values.
+提示支持内联到字段的内容。 `label` 和 `comment` 值是可选的，包含标题和副标题的内容。 您也可以对值使用 Markdown 语法。
 
 ```yaml
 tip1:
     type: hint
     mode: tip
-    label: Pro Tip
-    comment: Always check to make sure this field is populated.
+    label: 提示
+    comment: 反复检查以确保该字段已填充。
 ```
 
-The `mode` option supports the values: tip, info, warning, danger, success
+`mode` 选项支持以下值:tip(提示)、info(信息)、warning(警告)、danger(危险)、success(成功)
 
 ```yaml
 warning1:
     type: hint
     mode: warning
-    label: Always wash your hands
-    comment: This is good for stopping the spread of germs.
+    label: 经常洗手
+    comment: 这有利于阻止细菌的传播。
 ```
 
 <a name="field-ruler"></a>
-### Horizontal Rule
+### 横向分隔线
 
-`ruler` - renders a horizontal rule to break up the form contents
+`ruler` - 呈现水平分隔线以分割表单内容
 
 ```yaml
 _ruler1:
@@ -700,9 +696,9 @@ _ruler1:
 ```
 
 <a name="field-partial"></a>
-### Partial
+### 部件
 
-`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
+`partial` - 渲染一个部件，`path` 值可以引用部件视图文件，否则字段名称将用作部件名称。 在部件内部，这些变量可用:`$value` 是默认字段值，`$model` 是用于字段的模型，`$field` 是配置的类对象 `Backend\Classes\FormField`。
 
 ```yaml
 content:
@@ -710,9 +706,9 @@ content:
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
-## Form Widgets
+## 表单小部件
 
-There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#form-widgets) article.
+标准中包含各种表单小部件，尽管插件通常会提供自己的自定义表单小部件。 您可以在 [表单小部件](widgets.md#form-widgets) 文章中阅读更多内容。
 
 <div class="content-list" markdown="1">
 
@@ -727,16 +723,16 @@ There are various form widgets included as standard, although it is common for p
 - [记录查找器](#widget-recordfinder)
 - [关系](#widget-relation)
 - [循环组件](#widget-repeater)
-- [富文本编辑器 / 所见即所得编辑器](#widget-richeditor)
+- [富文本编辑器/WYSIWYG编辑器](#widget-richeditor)
 - [机密信息](#widget-sensitive)
 - [标签列表](#widget-taglist)
 
 </div>
 
 <a name="widget-codeeditor"></a>
-### Code Editor
+### 代码编辑器
 
-`codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
+`codeeditor` - 为格式化代码或标记呈现纯文本编辑器。 请注意，这些选项可能会被后端中为管理员定义的代码编辑器首选项继承。
 
 ```yaml
 css_content:
@@ -745,48 +741,47 @@ css_content:
     language: html
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**language** | code language, for example, php, css, javascript, html. Default: php.
-**showGutter** | shows a gutter with line numbers. Default: true.
-**wrapWords** | breaks long lines on to a new line. Default true.
-**fontSize** | the text font size. Default: 12.
+**language** | 代码语言，例如 php、css、javascript、html。 默认值:php。
+**showGutter** | 显示带有行号的装订线。 默认值:true。
+**wrapWords** | 将长行中断到新行。 默认为true。
+**fontSize** | 文本字体大小。 默认值:12。
 
 <a name="widget-colorpicker"></a>
-### Color Picker
+### 颜色选择器
 
-`colorpicker` - renders controls to select a hexadecimal color value.
+`colorpicker` - 渲染控件以选择十六进制颜色值。
 
 ```yaml
 color:
-    label: Background
+    label: 背景色
     type: colorpicker
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**availableColors** |  list of available colors.
-**allowEmpty** | allows empty input value. Default: false
+**availableColors** | 可用颜色列表。
+**allowEmpty** | 允许输入空值。 默认值:false
 
-There are two ways to provide the available colors for the colorpicker. The first method defines the `availableColors` directly as a list of hex color codes in the YAML file:
-
+有两种方法可以为颜色选择器提供可用颜色。 第一种方法直接将`可用颜色`定义为 YAML 文件中的十六进制颜色代码列表:
 ```yaml
 color:
-    label: Background
+    label: 背景色
     type: colorpicker
     availableColors: ['#000000', '#111111', '#222222']
 ```
 
-The second method uses a specific method declared in the model class.  This method should return an array of hex colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
+第二种方法使用在模型类中声明的特定方法。 此方法应以与上述示例相同的格式返回一个十六进制颜色数组。 该方法的第一个参数是字段名，第二个是字段的当前值，第三个是整个表单的当前数据对象。
 
 ```yaml
 color:
-    label: Background
+    label: 背景色
     type: colorpicker
     availableColors: myColorList
 ```
 
-Supplying the available colors in the model class:
+在模型类中提供可用颜色:
 
 ```php
 public function myColorList($fieldName, $value, $formData)
@@ -795,12 +790,12 @@ public function myColorList($fieldName, $value, $formData)
 }
 ```
 
-If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors.
+如果 YAML 文件中未定义 `availableColors` 字段，颜色选择器将使用一组 20 种默认颜色。
 
 <a name="widget-datatable"></a>
-### Data Table
+### 数据表格
 
-`datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.
+`datatable` - 呈现一个可编辑的记录表，格式为网格。 单元格内容可以直接在网格中编辑，允许管理多行和多列信息。
 
 ```yaml
 data:
@@ -812,34 +807,34 @@ data:
     searching: false
 ```
 
-> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model.md#supported-properties) or anything that can handle storing as an array.
+> **注意**:为了将其与模型一起使用，应在 [jsonable 属性](../database/model.md#supported-properties) 或任何可以处理存储为数组的内容中定义该字段 .
 
-#### Table configuration
+#### 表配置
 
-The following lists the configuration values of the data table widget itself.
+下面列出了数据表小部件本身的配置值。
 
-Option | Description
+选项 | 描述
 ------ | -----------
-**adding** | allow records to be added to the data table. Default: `true`.
-**btnAddRowLabel** | defines a custom label for the "Add Row Above" button.
-**btnAddRowBelowLabel** | defines a custom label for the "Add Row Below" button.
-**btnDeleteRowLabel** | defines a custom label for the "Delete Row" button.
-**columns** | an array representing the column configuration of the data table. See the *Column configuration* section below.
-**deleting** | allow records to be deleted from the data table. Default: `false`.
-**dynamicHeight** | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
-**fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
-**height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
-**keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`. Only supports integer values.
-**postbackHandlerName** | specifies the AJAX handler name in which the data table content will be sent with. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
-**recordsPerPage** | the number of records to show per page. If set to `false`, the pagination will be disabled.
-**searching** | allow records to be searched via a search box. Default: `false`.
-**toolbar** | an array representing the toolbar configuration of the data table.
+**adding** | 允许将记录添加到数据表中。默认值:`true`。
+**btnAddRowLabel** | 为`在上方添加行`按钮定义标签。
+**btnAddRowBelowLabel** | 为`在下方添加行`按钮定义标签。
+**btnDeleteRowLabel** | 为`删除行`按钮定义标签。
+**columns** | 一个数组，表示数据表的列配置。请参阅下面的*列配置* 部分。
+**deleting** | 允许从数据表中删除记录。默认值:`false`。
+**dynamicHeight** | 如果为`true`，则数据表的高度将根据添加的记录扩展或缩小，直至由`height`配置值定义的最大大小。默认值:`false`。
+**fieldName** | 定义在从数据表发送的 POST 数据中使用的自定义字段名称。留空以使用默认字段别名。
+**height** | 数据表的高度，以像素为单位。如果设置为`false`，数据表将拉伸以适应字段容器。
+**keyFrom** | 用于键入每个记录的数据属性。这通常应该设置为`id`。仅支持整数值。
+**postbackHandlerName** | 指定发送数据表内容的 AJAX 处理程序名称。当设置为`null`(默认)时，将从包含数据表的表单使用的请求名称中自动检测处理程序名称。建议将其保留为 `null`。
+**recordsPerPage** | 每页显示的记录数。如果设置为`false`，分页将被禁用。
+**searching** | 允许通过搜索框搜索记录。默认值:`false`。
+**toolbar** | 一个数组，表示数据表的工具栏配置。
 
-#### Column configuration
+#### 列配置
 
-The data table widget allows for the specification of columns as an array via the `columns` configuration variable. Each column should use the field name as a key, and the following configuration variables to set up the field.
+数据表小部件允许通过 `columns` 配置变量将列指定为数组。 每列应使用字段名称作为键，并使用以下配置变量来设置字段。
 
-Example:
+例子:
 
 ```yaml
 columns:
@@ -848,89 +843,89 @@ columns:
         title: ID
         validation:
             integer:
-                message: Please enter a number
+                message: 请输入一个数字
     name:
         type: string
-        title: Name
+        title: 名称
 ```
 
-Option | Description
+选项 | 描述
 ------ | -----------
-**type** | the input type for this column's cells. Must be one of the following: `string`, `checkbox`, `dropdown` or `autocomplete`.
-**options** | for `dropdown` and `autocomplete` columns only - this specifies the AJAX handler that will return the available options, as an array. The array key is used as the value of the option, and the array value is used as the option label.
-**readOnly** | whether this column is read-only. Default: `false`.
-**title** | defines the column's title.
-**validation** | an array specifying the validation for the content of the column's cells. See the *Column validation* section below.
-**width** | defines the width of the column, in pixels.
+**type** | 此列单元格的输入类型。 必须是以下之一:`string`、`checkbox`、`dropdown` 或 `autocomplete`。
+**options** | 仅适用于 `dropdown` 和 `autocomplete` 列 - 这指定了将返回可用选项的 AJAX 处理程序，它将以数组形式返回可用选项。数组键用作选项的值，数组值用作选项标签。
+**readOnly** | 此列是否为只读。 默认值: `false`。
+**title** | 定义列的标题。
+**validation** | 一个数组，指定对列单元格内容的验证。 请参阅下面的*列验证*部分。
+**width** | 定义列的宽度，以像素为单位。
 
-#### Column validation
+#### 列验证
 
-Column cells can be validated against the below types of validation. Validation should be specified as an array, with the type of validation used as a key, and an optional message specified as the `message` attrbute for that validation.
+列单元格可以根据以下类型的验证规则进行验证。 验证应该指定为一个数组，验证类型用作键，可选消息指定为该验证的`message`属性。
 
-Validation | Description
+验证 | 描述
 ---------- | -----------
-**float** | Validates the data as a float. An optional boolean `allowNegative` attribute can be provided, allowing for negative float numbers.
-**integer** | Validates the data as an integer. An optional boolean `allowNegative` attribute can be provided, allowing for negative integers.
-**length** | Validates the data to be of a certain length. An integer `min` and `max` attribute must be provided, representing the minimum and maximum number of characters that must be entered.
-**regex** | Validates the data against a regular expression. A string `pattern` attribute must be provided, defining the regular expression to test the data against.
-**required** | Validates that the data must be entered before saving.
+**float** | 验证数据是否为浮点数。 可以提供一个可选的布尔`allowNegative`属性，允许负浮点数。
+**integer** | 验证数据是否为整数。 可以提供一个可选的布尔 `allowNegative` 属性，允许使用负整数。
+**length** | 验证数据是否具有特定长度。 必须提供整数`min`和`max`属性，表示必须输入的最小和最大字符数。
+**regex** | 根据正则表达式验证数据。 必须提供字符串`pattern`属性，定义正则表达式以测试数据。
+**required** | 验证在保存之前是否为必须输入的数据。
 
 <a name="widget-datepicker"></a>
-### Date Picker
+### 日期选择器
 
-`datepicker` - renders a text field used for selecting date and times.
+`datepicker` - 呈现用于选择日期和时间的文本字段。
 
 ```yaml
 published_at:
-    label: Published
+    label: 已发表
     type: datepicker
     mode: date
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**mode** | the expected result, either date, datetime or time. Default: datetime.
-**format** | provide an explicit date display format. Eg: Y-m-d
-**minDate** | the minimum/earliest date that can be selected.
-**maxDate** | the maximum/latest date that can be selected.
-**firstDay** | the first day of the week. Default: 0 (Sunday).
-**showWeekNumber** | show week numbers at head of row. Default: false
-**useTimezone** | convert the date and time from the backend specified timezone preference. Default: true
+**mode** | 预期的结果，日期、日期时间或时间。 默认值:日期时间。
+**format** | 提供明确的日期显示格式。 例如:Y-m-d
+**minDate** | 可以选择的最小/最早日期。
+**maxDate** | 可以选择的最大/最晚日期。
+**firstDay** | 一周的第一天。 默认值:0(星期日)。
+**showWeekNumber** | 在行首显示周数。 默认值:false
+**useTimezone** | 从后端指定的时区首选项转换日期和时间。 默认值:true
 
 <a name="widget-fileupload"></a>
-### File Upload
+### 文件上传器
 
-`fileupload` - renders a file uploader for images or regular files.
+`fileupload` - 为图像或常规文件呈现一个文件上传器。
 
 ```yaml
 avatar:
-    label: Avatar
+    label: 头像
     type: fileupload
     mode: image
     imageHeight: 260
     imageWidth: 260
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**mode** | the expected file type, either file or image. Default: image
-**imageWidth** | if using image type, the image will be resized to this width, optional
-**imageHeight** | if using image type, the image will be resized to this height, optional
-**fileTypes** | file extensions that are accepted by the uploader, optional. Eg: `zip,txt`
-**mimeTypes** | MIME types that are accepted by the uploader, either as file extension or fully qualified name, optional. Eg: `bin,txt`
-**maxFilesize** | file size in Mb that are accepted by the uploader, optional. Default: from "upload_max_filesize" param value
-**maxFiles** | maximum number of files allowed to be uploaded
-**useCaption** | allows a title and description to be set for the file. Default: true
-**prompt** | text to display for the upload button, applies to files only, optional
-**thumbOptions** | additional [resize options](../services/resizer.md#resize-parameters) for generating the thumbnail
-**attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
+**mode** | 预期的文件类型，file(文件)或image(图像)。 默认值:image
+**imageWidth** | 如果使用图像类型，图像将被调整到这个宽度，可选
+**imageHeight** | 如果使用图像类型，图像将被调整到这个高度，可选
+**fileTypes** | 上传者接受的文件扩展名，可选。 例如:`zip,txt`
+**mimeTypes** | 上传者接受的 MIME 类型，可以是文件扩展名，也可以是完全限定名，可选。 例如:`bin,txt`
+**maxFilesize** | 上传者接受的文件大小(以 Mb 为单位)，可选。 默认值:来自`upload_max_filesize`参数值
+**maxFiles** | 允许上传的最大文件数
+**useCaption** | 允许为文件设置标题和描述。 默认值:true
+**prompt** | 上传按钮显示的文本，仅适用于文件，可选
+**thumbOptions** | 用于生成缩略图的附加属性 [调整大小选项](../services/resizer.md#resize-parameters)
+**attachOnUpload** | 如果父记录存在，则在上传时自动附加上传的文件，而不是在保存父记录时使用延迟绑定来附加。默认值:false
 
-> **Note**: Unlike the [Media Finder form widget](#mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attrbiute on your associated model.
+> **注意**:与 [媒体选择器表单小部件](#mediafinder) 不同，文件上传表单小部件使用 [数据库文件附件](../database/attachments.md)，因此字段名称是关联模型上的`attachEd`或`attachMent`关系属性名称。
 
 <a name="widget-markdowneditor"></a>
-### Markdown Editor
+### Markdown 编辑器
 
-`markdown` - renders a basic editor for markdown formatted text.
+`markdown` - 为 markdown 格式的文本呈现一个基本的编辑器。
 
 ```yaml
 md_content:
@@ -939,34 +934,34 @@ md_content:
     mode: split
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**mode** | the expected view mode, either tab or split. Default: tab.
+**mode** | 预期的视图模式，tab(选项卡)或split(拆分)。 默认:tab。
 
 <a name="widget-mediafinder"></a>
-### Media Finder
+### 媒体选择器
 
-`mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
+`mediafinder` - 呈现用于从媒体库中选择项目的字段。 展开该字段会显示媒体管理器以查找文件。生成的是一个选择文件的相对路径字符串
 
 ```yaml
 background_image:
-    label: Background image
+    label: 背景图
     type: mediafinder
     mode: image
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**mode** | the expected file type, either file or image. Default: file.
-**prompt** | text to display when there is no item selected. The `%s` character represents the media manager icon.
-**imageWidth** | if using image type, the preview image will be displayed to this width, optional.
-**imageHeight** | if using image type, the preview image will be displayed to this height, optional.
+**mode** | 预期的文件类型，file(文件)或image(图像)。 默认值:file。
+**prompt** | 没有选择项目时显示的文本。 `%s` 字符代表媒体管理器图标。
+**imageWidth** | 如果使用图像类型，预览图片会显示到这个宽度，可选。
+**imageHeight** | 如果使用图片类型，预览图片会显示到这个高度，可选。
 
-> **Note**: Unlike the [File Upload form widget](#file-upload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library. It should associate to a normal attribute on your model.
+> **注意**:与 [文件上传表单小部件](#file-upload) 不同，媒体选择器表单小部件将其所选媒体文件的路径存储为字符串。 它应该与模型上的正常属性相关联。
 
 <a name="widget-nestedform"></a>
-### Nested Form
-`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained. Fields can be defined inline.
+### 嵌套表单
+`nestedform` - 呈现一个嵌套表单内容，将数据作为所包含字段的数组返回。 字段可以内联定义。
 
 ```yaml
 content:
@@ -975,101 +970,101 @@ content:
     form:
         fields:
             added_at:
-                label: Date added
+                label: 添加日期
                 type: datepicker
             details:
-                label: Details
+                label: 详情
                 type: textarea
             title:
-                label: This the title
+                label: 这是标题
                 type: text
 ```
 
-Fields can also make reference to a `fields.yaml` file.
+字段也可以引用 `fields.yaml` 文件。
 
 ```yaml
 profile:
-    label: Profile
+    label: 简介
     type: nestedform
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model.md#supported-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
+嵌套表单支持与表单本身相同的语法，包括选项卡。 [jsonable 属性](../database/model.md#supported-properties) 将采用表单定义的结构。 或者，您可以使用 `useRelation` 选项引用相关模型。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**form**  | same as in [form definition](#defining-form-fields)
-**showPanel** | places the form inside a panel container. Default: true
-**useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: false
+**form**  | 与 [表单定义](#defining-form-fields) 中的相同
+**showPanel** | 将表单放置在面板容器内。 默认值:true
+**useRelation** | 使用字段名称作为关系名称标记，以便直接在父模型上进行交互。 默认值:false
 
 <a name="widget-recordfinder"></a>
-### Record finder
+### 记录查找器
 
-`recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.
+`recordfinder` - 呈现一个包含相关记录详细信息的字段。 展开该字段会显示一个弹出列表以搜索大量记录。 仅支持单一关系。
 
 ```yaml
 user:
-    label: User
+    label: 用户
     type: recordfinder
     list: ~/plugins/rainlab/user/models/user/columns.yaml
     recordsPerPage: 10
-    title: Find Record
-    prompt: Click the Find button to find a user
+    title: 查找记录
+    prompt: 单击“查找”按钮以查找用户
     nameFrom: name
     descriptionFrom: email
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**keyFrom** | the name of column to use in the relation used for key. Default: id.
-**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
-**descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
-**title** | text to display in the title section of the popup.
-**prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
-**list** | a configuration array or reference to a list column definition file, see [list columns](lists.md#defining-list-columns).
-**recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
-**conditions** | specifies a raw where query statement to apply to the list model query.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
-**searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**searchScope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
-**useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
-**modelClass** | class of the model to use for listing records when useRelation = false
+**keyFrom** | 要在用于key的关系中使用的列的名称。默认值:id。
+**nameFrom** | 要在用于显示名称的关系中使用的列名称。默认值:name。
+**descriptionFrom** | 要在用于显示描述的关系中使用的列名。默认值:description。
+**title** | 要在弹出窗口的标题部分显示的文本。
+**prompt** | 没有选择记录时显示的文本。 `%s` 字符代表搜索图标。
+**list** | 配置数组或对列表列定义文件的引用，请参阅 [列表列](lists.md#defining-list-columns)。
+**recordsPerPage** | 每页显示的记录，使用 0 表示无页。默认值:10
+**conditions** | 指定要应用于列表模型查询的原始 where 查询语句。
+**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)始终应用于列表查询。第一个参数将包含附加其值的小部件模型，即父模型。
+**searchMode** | 将搜索策略定义为包含所有单词、任何单词或精确短语。支持的选项:all(全部), any(任意), exact(精确)。默认值:all。
+**searchScope** | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)应用于搜索查询，第一个参数将包含搜索词。
+**useRelation** | 使用字段名称作为关系名称的标志，以便直接在父模型上进行交互。默认值:true。禁用仅返回所选模型的 ID
+**modelClass** | 当 useRelation = false 时用于列出记录的模型类
 
 <a name="widget-relation"></a>
-### Relation
+### 关系
 
-`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
+`relation` - 根据字段关系类型呈现下拉列表或复选框列表。 单一关系显示一个下拉列表，多个关系显示一个复选框列表。 用于显示每个关系的标签来自 `nameFrom` 或 `select` 定义。
 
 ```yaml
 categories:
-    label: Categories
+    label: 类别
     type: relation
     nameFrom: title
 ```
 
-Alternatively, you may populate the label using a custom `select` statement. Any valid SQL statement works here.
+或者，您可以使用自定义的`select`语句填充标签。 任何有效的 SQL 语句都可以在这里使用。
 
 ```yaml
 user:
-    label: User
+    label: 用户
     type: relation
     select: concat(first_name, ' ', last_name)
 ```
 
-You can also provide a model scope to use to filter the results with the `scope` property.
+您还可以提供一个模型范围，使用 `scope` 属性过滤结果。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**nameFrom** | a model attribute name used for displaying the relation label. Default: name.
-**select** | a custom SQL select statement to use for the name.
-**order** | an order clause to sort options by. Example: `name desc`.
-**emptyOption** | text to display when there is no available selections.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always.
+**nameFrom** | 用于显示关系标签的模型属性名称。 默认值:name。
+**select** | 用于名称的自定义SQL select语句。
+**order** | 用于对选项进行排序的 order 子句。 示例:`name desc`。
+**emptyOption** | 没有可用选择时显示的文本。
+**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)始终应用于列表查询。
 
 <a name="widget-repeater"></a>
-### Repeater
+### 循环组件
 
-`repeater` - renders a repeating set of form fields defined within.
+`repeater` - 呈现定义在其中的一组重复的表单字段。
 
 ```yaml
 extra_information:
@@ -1078,45 +1073,45 @@ extra_information:
     form:
         fields:
             added_at:
-                label: Date added
+                label: 添加日期
                 type: datepicker
             details:
-                label: Details
+                label: 详情
                 type: textarea
             title_when_collapsed:
-                label: This field is the title when collapsed
+                label: 此字段是折叠时的标题
                 type: text
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**form** | a reference to form field definition file, see [backend form fields](#defining-form-fields). Inline fields can also be used.
-**prompt** | text to display for the create button. Default: Add new item.
-**titleFrom** | name of field within items to use as the title for the collapsed item.
-**minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
-**maxItems** | maximum number of items to allow within the repeater.
-**groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
-**style** | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
+**form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#defining-form-fields)。 也可以使用内联字段。
+**prompt** | 为创建按钮显示的文本。 默认值:Add new item。
+**titleFrom** | 项目中的字段名称，用作折叠项目的标题。
+**minItems** | 循环组件允许的最少项目数。 不使用组时预先显示这些项目。 例如，如果您设置 **'minItems: 1'** 第一行将被显示而不是隐藏。
+**maxItems** | 循环组件允许的最大项目数。
+**groups** | 引用一组表单字段，将循环组件置于组模式(见下文)。 也可以使用内联定义。
+**style** | 循环组件的行为样式。 可以是以下之一:`default`、`collapsed` 或 `accordion`。 有关详细信息，请参阅下面的**循环组件样式**部分。
 
-The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
+循环组件字段支持组模式，该模式允许为每次迭代选择一组自定义字段。
 
 ```yaml
 content:
     type: repeater
-    prompt: Add content block
+    prompt: 添加内容块
     groups: $/acme/blog/config/repeater_fields.yaml
 ```
 
-This is an example of a group configuration file, which would be located in **/plugins/acme/blog/config/repeater_fields.yaml**. Alternatively these definitions could be specified inline with the repeater.
+这是一个组配置文件的示例，它位于 **/plugins/acme/blog/config/repeater_fields.yaml** 中。 或者，这些定义可以与循环组件中内联指定。
 
 ```yaml
 textarea:
     name: Textarea
-    description: Basic text field
+    description: 基本文本字段
     icon: icon-file-text-o
     fields:
         text_area:
-            label: Text Content
+            label: 文字内容
             type: textarea
             size: large
 
@@ -1127,41 +1122,41 @@ quote:
     fields:
         quote_position:
             span: auto
-            label: Quote Position
+            label: 位置
             type: radio
             options:
-                left: Left
-                center: Center
-                right: Right
+                left: 左
+                center: 中
+                right: 右
         quote_content:
             span: auto
-            label: Details
+            label: 详情
             type: textarea
 ```
 
-Each group must specify a unique key and the definition supports the following options.
+每个组必须指定一个唯一键，并且支持定义以下选项。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**name** | the name of the group.
-**description** | a brief description of the group.
-**icon** | defines an icon for the group, optional.
-**fields** | form fields belonging to the group, see [backend form fields](#defining-form-fields).
+**name** | 组的名称。
+**description** | 组的简要说明。
+**icon** | 定义组的图标，可选。
+**fields** | 属于该组的表单字段，请参阅 [后端表单字段](#defining-form-fields)。
 
-> **Note**: The group key is stored along with the saved data as the `_group` attribute.
+> **注意**:组key与保存的数据一起存储为`_group`属性。
 
-#### Repeater Style
+#### 循环组件样式
 
-The `style` attribute of the repeater widget controls the behaviour of repeater items. There are three different types of styles available for developers:
+循环组件的`style`属性控制循环项目的行为。 开发人员可以使用三种不同类型的样式:
 
-- **default** Shows all the repeater items as expanded on page load. This is the default current behavior, and will be used if style is not defined in the repeater widget's configuration.
-- **collapsed** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
-- **accordion** Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
+- **default** 将所有循环项目设置为在页面加载时展开。 这是默认行为，如果在循环组件的配置中未定义样式，则将使用此行为。
+- **collapsed** 在页面加载时将所有循环项目显示为折叠(最小化)。 用户可以根据需要折叠或展开项目。
+- **accordion** 在页面加载时仅将第一个循环项目显示为展开，而所有其他中循环项目折叠。 当另一个项目展开时，任何其他展开的项目都将折叠，从而有效地使其一次仅展开一个项目。
 
 <a name="widget-richeditor"></a>
-### Rich editor / WYSIWYG
+### 富文本编辑器/WYSIWYG编辑器
 
-`richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
+`richeditor` - 为富格式文本呈现可视化编辑器，也称为所见即所得(WYSIWYG)编辑器。
 
 ```yaml
 html_content:
@@ -1170,24 +1165,24 @@ html_content:
     size: huge
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**toolbarButtons** | which buttons to show on the editor toolbar.
+**toolbarButtons** | 在编辑器工具栏上显示哪些按钮。
 
-The available toolbar buttons are:
+可用的工具栏按钮有:
 
 ```
 fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html
 ```
 
-> **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
+> **注意**:`|` 将在工具栏中插入垂直分隔线，而 `-` 将插入水平分隔线。
 
 <a name="widget-sensitive"></a>
-### Sensitive
+### 机密信息
 
-`sensitive` - renders a revealable password field that can be used for sensitive information such as API keys or secrets, configuration values, etc. A sensitive field can be toggled visible and hidden at the user's request.
+`sensitive` - 呈现可显示的密码字段，可用于敏感信息，例如 API 密钥或密码、配置值等。敏感字段可以根据用户的请求切换为可见和隐藏。
 
-A sensitive field that contains a previously entered value will have the value replaced with a placeholder value on load, preventing the value from being guessed by length or copied. Upon revealing the value, the original value is retrieved by AJAX and populated into the field.
+包含先前输入值的敏感字段将在加载时将值替换为占位符，以防止该值被长度猜测或复制。 显示该值后，AJAX 将检索原始值并将其填充到该字段中。
 
 ```yaml
 api_secret:
@@ -1196,17 +1191,17 @@ api_secret:
     hideOnTabChange: true
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**mode** | display mode for the widget, either textarea or text. Default: text
-**allowCopy** | adds a "copy" action to the sensitive field, allowing the user to copy the password without revealing it. Default: true
-**hiddenPlaceholder** | sets the placeholder text that is used to simulate a hidden, unrevealed value. You can change this to a long or short string to emulate different length values. Default: `__hidden__`
-**hideOnTabChange** | if true, the sensitive field will automatically be hidden if the user navigates to a different tab, or minimizes their browser. Default: true
+**mode** | 组件的显示模式，textarea(文本域)或text(文本)。 默认值:text
+**allowCopy** | 向敏感字段添加"复制"操作，允许用户复制密码而不泄露密码。 默认值:true
+**hiddenPlaceholder** | 设置占位符文本，用于模拟隐藏的、未显示的值。 您可以将其更改为长字符串或短字符串以模拟不同的长度值。 默认值:`__hidden__`
+**hideOnTabChange** | 如果为 true，假设用户导航到不同的选项卡或最小化浏览器，敏感字段将自动隐藏。 默认值:true
 
 <a name="widget-taglist"></a>
-### Tag list
+### 标签列表
 
-`taglist` - renders a field for inputting a list of tags.
+`taglist` - 呈现一个用于输入标签列表的字段。
 
 ```yaml
 tags:
@@ -1214,7 +1209,7 @@ tags:
     separator: space
 ```
 
-A tag list support the same methods for defining the options as the [dropdown field type](#field-dropdown).
+标签列表支持与 [下拉列表类型](#field-dropdown) 相同的方法来定义选项。
 
 ```yaml
 tags:
@@ -1225,7 +1220,7 @@ tags:
         - Orange
 ```
 
-You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+您可以使用名为 **relation** 的`mode`，其中字段名称是 [多对多关系](../database/relations#many-to-many)。 这将通过关系自动获取和分配标签。 如果支持自定义标签，则会在分配之前创建它们。
 
 ```yaml
 tags:
@@ -1233,25 +1228,24 @@ tags:
     mode: relation
 ```
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**mode** | controls how the value is returned, either string, array or relation. Default: string
-**separator** | separate tags with the specified character, either comma or space. Default: comma
-**customTags** | allows custom tags to be entered manually by the user. Default: true
-**options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options` method. Optional.
-**nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name
-**useKey** | use the key instead of value for saving and reading data. Default: false
+**mode** | 控制如何返回值，string(字符串)、array(数组)或relation(关系)。 默认值:string
+**separator** | 用指定的字符分隔标签，comma(逗号)或space(空格)。 默认值:comma
+**customTags** | 允许用户手动输入自定义标签。 默认值:true
+**options** | 指定预定义选项的方法或数组。 设置为 true 以使用模型 `get*Field*Options` 方法,可选。 
+**nameFrom** | 如果使用关系模式，则显示标签名称的模型属性名称。 默认值:name
+**useKey** | 使用 key 代替 value 来保存和读取数据。 默认值:false
 
-## Form Views
+## 表单视图
 
-For each page your form supports [Create](#create-page), [Update](#update-page) and [Preview](#preview-page) you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
+对于表单支持 [创建](#create-page)、[更新](#update-page) 和 [预览](#preview-page) 的每个页面，您应该提供一个具有相应名称的[视图文件](../backend/controllers -ajax.md) - **create.htm**、**update.htm** 和 **preview.htm**。
 
-The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
+表单行为向控制器类添加了两个方法:`formRender` 和 `formRenderPreview`。 这些方法呈现使用上述 YAML 文件配置的表单控件。
 
-### Create View
+### 创建视图
 
-The **create.htm** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create.htm form.
-
+**create.htm** 视图代表允许用户创建新记录的创建页面。 典型的创建页面包含面包屑、表单本身和表单按钮。 **data-request** 属性应该引用表单行为提供的 `onSave` AJAX 处理程序。 下面是典型的 create.htm 表单的内容。
 ```php
 <?= Form::open(['class'=>'layout']) ?>
 
@@ -1266,12 +1260,12 @@ The **create.htm** view represents the Create page that allows users to create n
                 data-request="onSave"
                 data-request-data="close:true"
                 data-hotkey="ctrl+enter, cmd+enter"
-                data-load-indicator="Creating Category..."
+                data-load-indicator="创建中..."
                 class="btn btn-default">
-                Create and Close
+                保存并关闭
             </button>
             <span class="btn-text">
-                or <a href="<?= Backend::url('acme/blog/categories') ?>">Cancel</a>
+                or <a href="<?= Backend::url('acme/blog/categories') ?>">取消</a>
             </span>
         </div>
     </div>
@@ -1279,9 +1273,9 @@ The **create.htm** view represents the Create page that allows users to create n
 <?= Form::close() ?>
 ```
 
-### Update View
+### 更新视图
 
-The **update.htm** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.htm form.
+**update.htm** 视图表示允许用户更新或删除现有记录的更新页面。 典型的更新页面包含面包屑、表单本身和表单按钮。 更新页面与创建页面非常相似，但通常有删除按钮。 **data-request** 属性应该引用表单行为提供的 `onSave` AJAX 处理程序。 以下是典型 update.htm 表单的内容。
 
 ```php
 <?= Form::open(['class'=>'layout']) ?>
@@ -1297,19 +1291,19 @@ The **update.htm** view represents the Update page that allows users to update o
                 data-request="onSave"
                 data-request-data="close:true"
                 data-hotkey="ctrl+enter, cmd+enter"
-                data-load-indicator="Saving Category..."
+                data-load-indicator="保存中..."
                 class="btn btn-default">
-                Save and Close
+                保存并关闭
             </button>
             <button
                 type="button"
                 class="oc-icon-trash-o btn-icon danger pull-right"
                 data-request="onDelete"
-                data-load-indicator="Deleting Category..."
-                data-request-confirm="Do you really want to delete this category?">
+                data-load-indicator="删除中..."
+                data-request-confirm="您真的要删除此类别吗？">
             </button>
             <span class="btn-text">
-                or <a href="<?= Backend::url('acme/blog/categories') ?>">Cancel</a>
+                or <a href="<?= Backend::url('acme/blog/categories') ?>">取消</a>
             </span>
         </div>
     </div>
@@ -1317,9 +1311,9 @@ The **update.htm** view represents the Update page that allows users to update o
 <?= Form::close() ?>
 ```
 
-### Preview View
+### 预览视图
 
-The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.
+**preview.htm** 视图代表预览页面，允许用户以只读模式预览现有记录。 典型的预览页面包含面包屑和表单本身。 下面是典型的 preview.htm 表单的内容。
 
 ```php
 <div class="form-preview">
@@ -1327,28 +1321,28 @@ The **preview.htm** view represents the Preview page that allows users to previe
 </div>
 ```
 
-## Applying Conditions to Fields
+## 对字段应用条件
 
-Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are a few ways you can do this, either by using the trigger API or field dependencies. The input preset converter is primarily used to converting field values. These options are described in more detail below.
+有时您可能希望在某些条件下操作表单字段的值或外观，例如，如果选中复选框，您可能希望隐藏输入。 有几种方法可以做到这一点，通过使用触发器 API 或字段依赖项。 输入预设转换器主要用于转换字段值。 这些选项将在下面更详细地描述。
 
-### Input Preset Converter
+### 输入预置转换器
 
-The input preset converter is defined with the `preset` [form field option](#field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
+输入预设转换器使用 `preset` [表单字段选项](#field-options) 定义，允许您将输入到元素中的文本转换为另一个输入元素中的 URL、slug 或文件名值。
 
-In this example we will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
+在此示例中，当用户在`title`字段中输入文本时，我们将自动填写`URL`字段值。 如果为 Title 输入文本 **Hello world**，则 URL 将跟随转换成 **/hello-world**。 仅当目标字段 (`url`) 为空且未触及时才会发生此行为。
 
 ```yaml
 title:
-    label: Title
+    label: 标题
 
 url:
-    label: URL
+    label: 网址
     preset:
         field: title
         type: url
 ```
 
-Alternatively, the `preset` value can also be a string that refers to the **field** only, the `type` option will then default to **slug**.
+或者，`preset` 值也可以是仅引用 **field** 的字符串，`type` 选项将默认为 **slug**。
 
 ```yaml
 slug:
@@ -1356,36 +1350,36 @@ slug:
     preset: title
 ```
 
-The following options are available for the `preset` option:
+`preset` 选项可使用以下选项:
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**field** | defines the other field name to source the value from.
-**type** | specifies the conversion type. See below for supported values.
-**prefixInput** | optional, prefixes the converted value with the value found in the supplied input element using a CSS selector.
+**field** | 定义要从中获取值的另一个字段名称。
+**type** | 指定转换类型。 有关支持的值，请参见下文。
+**prefixInput** | 可选，使用 CSS 选择器为转换后的值添加在提供的输入元素中找到的值的前缀。
 
-Following are the supported types:
+以下是支持的类型:
 
-Type | Description
+选项 | 描述
 ------------- | -------------
-**exact** | copies the exact value
-**slug** | formats the copied value as a slug
-**url** | same as slug but prefixed with a /
-**camel** | formats the copied value with camelCase
-**file** | formats the copied value as a file name with whitespace replaced with dashes
+**exact** | 复制确切的值
+**slug** | 将复制的值格式化为 slug
+**url** | 与 slug 相同，但以 / 为前缀
+**camel** | 使用 camelCase 格式化复制的值
+**file** | 将复制的值格式化为文件名，其中空格替换为破折号
 
-### Trigger Events
+### 触发事件
 
-Trigger Events are defined with the `trigger` [form field option](#field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
+触发事件是使用 `trigger` [表单字段选项](#field-options) 定义的，是一个使用 JavaScript 的基于浏览器的简单解决方案。它允许您根据另一个元素的状态更改元素属性，例如可见性或值。这是一个示例定义:
 
 ```yaml
 is_delayed:
-    label: Send later
-    comment: Place a tick in this box if you want to send this message at a later time.
+    label: 稍后发送
+    comment: 如果您想稍后发送此消息，请在此框中打勾。
     type: checkbox
 
 send_at:
-    label: Send date
+    label: 发送日期
     type: datepicker
     cssClass: field-indent
     trigger:
@@ -1394,49 +1388,49 @@ send_at:
         condition: checked
 ```
 
-In the above example the `send_at` form field will only be shown if the `is_delayed` field is checked. In other words, the field will show (action) if the other form input (field) is checked (condition). The `trigger` definition specifies these options:
+在上面的示例中，只有在选中了 `is_delayed` 字段时才会显示 `send_at` 表单字段。换句话说，如果另一个表单输入(字段)被选中(条件)，则该字段将显示(动作)。 `trigger` 定义指定了这些选项:
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
-**field** | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#repeater), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
-**condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
+**action** | 定义满足条件时应用于此字段的操作。 支持的值:show(显示), hide(隐藏), enable(启用), disable(禁用), empty(空)。
+**field** | 定义将触发操作的其他字段名称。 通常，字段名称是指同一级别表单中的字段。 例如，如果此字段位于 [循环组件部件](#repeater) 中，则只会检查同一循环组件部件中的字段。 但是，如果字段名称前面有一个插入符号 `^`，例如:`^parent_field`，它将指代循环组件或比当前字段本身高一级的字段。 此外，如果使用了多个插入符号 `^`，它将引用更高的级别:`^^grand_parent_field`、`^^^grand_grand_parent_field` 等。
+**condition** | 确定指定字段应满足的条件，以将条件视为"true"。 支持的值:checked(选中), unchecked(未选中), value[somevalue](值)。
 
-### Field Dependencies
+### 字段依赖
 
-Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field.
+表单字段可以通过定义 `dependsOn` [表单字段选项](#field-options) 来声明对其他字段的依赖关系，这提供了更强大的服务器端解决方案，用于在修改字段的依赖项时更新字段。当声明为依赖项的字段发生更改时，定义字段将使用 AJAX 框架进行更新。这提供了使用 `filterFields` 方法与字段属性交互的机会，或者更改要提供给字段的可用选项。
 
 ```yaml
 country:
-    label: Country
+    label: 国家
     type: dropdown
 
 state:
-    label: State
+    label: 状态
     type: dropdown
     dependsOn: country
 ```
 
-In the above example the `state` form field will refresh when the `country` field has a changed value. When this occurs, the current form data will be filled in the model so the dropdown options can use it.
+在上面的示例中，当 `country` 字段的值发生变化时，`state` 表单字段将刷新。发生这种情况时，当前表单数据将填充到模型中，以便下拉选项可以使用它。
 
 ```php
 public function getCountryOptions()
 {
-    return ['au' => 'Australia', 'ca' => 'Canada'];
+    return ['au' => '澳大利亚', 'ca' => '加拿大', 'zh-cn' => '中华人民共和国'];
 }
 
 public function getStateOptions()
 {
     if ($this->country == 'au') {
-        return ['act' => 'Capital Territory', 'qld' => 'Queensland', ...];
+        return ['act' => '首都地区', 'qld' => '昆士兰', ...];
     }
     elseif ($this->country == 'ca') {
-        return ['bc' => 'British Columbia', 'on' => 'Ontario', ...];
+        return ['bc' => '不列颠哥伦比亚省', 'on' => '安大略省', ...];
     }
 }
 ```
 
-You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#defining-form-fields) and **$context** represents the active form context.
+您可以通过覆盖使用的模型中的 `filterFields` 方法来过滤表单字段定义。这允许您根据模型数据操作可见性和其他字段属性。该方法有两个参数 **$fields** 将表示已由 [字段配置](#defining-form-fields) 定义的字段对象，**$context** 表示活动的表单上下文。
 
 ```php
 public function filterFields($fields, $context = null)
@@ -1456,11 +1450,11 @@ public function filterFields($fields, $context = null)
 }
 ```
 
-The above logic will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies). For example, here is the associated form field definitions.
+上述逻辑将通过检查模型属性 `source_type` 的值在某些字段上设置 `hidden` 标志。此逻辑将在表单首次加载以及由 [定义的字段依赖项](#field-dependencies) 更新时应用。例如，这里是关联的表单字段定义。
 
 ```yaml
 source_type:
-    label: Source Type
+    label: 来源类型
     type: dropdown
     options:
         git: Git
@@ -1468,55 +1462,55 @@ source_type:
         upload: Upload
 
 source_url:
-    label: Source URL
+    label: 来源网址
     type: text
     dependsOn: source_type
 
 git_branch:
-    label: Git Branch
+    label: Git 分支
     type: text
     dependsOn: source_type
 ```
 
-You may also extend other models to apply the `filterFields` logic, see the [Filtering Form Fields](#filtering-form-fields) section for more details.
+您还可以扩展其他模型以应用 `filterFields` 逻辑，有关详细信息，请参阅 [过滤表单字段](#filtering-form-fields) 部分。
 
-### Field Facades
+### 临时字段
 
-Sometimes you may need to display a field while preventing it from being submitted. A field can be defined as a facade by adding an underscore (\_) before the name of the field. These fields are purged automatically and no longer saved to the model, such as with the following `_map` field.
+有时您可能需要显示一个字段，同时阻止它被提交。 可以通过在字段名称前添加下划线 (\_) 将字段定义为临时字段。 这些字段会自动清除，不再保存到模型中，例如使用以下 `_map` 字段。
 
 ```yaml
 address:
-    label: Title
+    label: 标题
     type: text
 
 _map:
-    label: Point your address on the map
+    label: 在地图上指出您的地址
     type: mapviewer
 ```
 
-## Extending Form Behavior
+## 扩展表单行为
 
-Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
+有时您可能希望修改默认的表单行为，有几种方法可以做到这一点。
 
-### Overriding Controller Action
+### 重写控制器动作
 
-You can use your own logic for the `create`, `update` or `preview` action method in the controller, then optionally call the Form behavior parent method.
+您可以为控制器中的 `create`, `update`或`preview`操作方法使用自己的逻辑，然后可以选择调用表单行为父方法。
 
 ```php
 public function update($recordId, $context = null)
 {
     //
-    // Do any custom code here
+    // 在此处执行任何自定义代码
     //
 
-    // Call the FormController behavior update() method
+    // 调用 FormController 行为 update() 方法
     return $this->asExtension('FormController')->update($recordId, $context);
 }
 ```
 
-### Overriding Controller Redirect
+### 重写控制器重定向
 
-You can specify the URL to redirect to after the model is saved by overriding the `formGetRedirectUrl` method. This method returns the location to redirect to with relative URLs being treated as backend URLs.
+您可以通过覆盖 `formGetRedirectUrl` 方法指定保存模型后重定向 URL。 此方法返回要重定向的位置，相对 URL 被视为后端 URL。
 
 ```php
 public function formGetRedirectUrl($context = null, $model = null)
@@ -1525,9 +1519,9 @@ public function formGetRedirectUrl($context = null, $model = null)
 }
 ```
 
-### Extending Form Model Query
+### 扩展表单模型查询
 
-The lookup query for the form [database model](../database/model.md) can be extended by overriding the `formExtendQuery` method inside the controller class. This example will ensure that soft deleted records can still be found and updated, by applying the **withTrashed** scope to the query:
+可以通过覆盖控制器类中的 `formExtendQuery` 方法来扩展表单 [数据库模型](../database/model.md) 的查找查询。 此示例把 **withTrashed** 范围应用于查询来确保仍然可以找到和更新软删除的记录:
 
 ```php
 public function formExtendQuery($query)
@@ -1536,9 +1530,9 @@ public function formExtendQuery($query)
 }
 ```
 
-### Extending Form Fields
+### 扩展表单字段
 
-You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller class. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
+您可以通过调用控制器类上的`extendFormFields`静态方法从外部扩展另一个控制器的字段。 该方法可以接受三个参数，**$form** 将代表表单小部件对象，**$model** 代表表单使用的模型，**$context** 是包含表单上下文的字符串。 以这个控制器为例:
 
 ```php
 class Categories extends \Backend\Classes\Controller
@@ -1549,7 +1543,7 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. Since this has the potential to affect all forms used by this controller, it is a good idea to check the **$model** is of the correct type. Here is an example:
+使用 `extendFormFields` 方法，您可以将额外的字段添加到此控制器呈现的任何表单中。 由于这可能会影响此控制器使用的所有表单，因此最好检查 **$model** 的类型是否正确。 这是一个例子:
 
 ```php
 Categories::extendFormFields(function($form, $model, $context) {
@@ -1559,15 +1553,15 @@ Categories::extendFormFields(function($form, $model, $context) {
 
     $form->addFields([
         'my_field' => [
-            'label'   => 'My Field',
-            'comment' => 'This is a custom field I have added.',
+            'label'   => '我的字段',
+            'comment' => '这是我添加的自定义字段。',
         ],
     ]);
 
 });
 ```
 
-You can also extend the form fields internally by overriding the `formExtendFields` method inside the controller class. This will only affect the form used by the `FormController` behavior.
+您还可以通过覆盖控制器类中的 `formExtendFields` 方法在内部扩展表单字段。 这只会影响 `FormController` 行为使用的表单。
 
 ```php
 class Categories extends \Backend\Classes\Controller
@@ -1581,20 +1575,20 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-The following methods are available on the $form object.
+$form 对象可以使用以下方法。
 
-Method | Description
+方法 | 描述
 ------------- | -------------
-**addFields** | adds new fields to the outside area
-**addTabFields** | adds new fields to the tabbed area
-**addSecondaryTabFields** | adds new fields to the secondary tabbed area
-**removeField** | remove a field from any areas
+**addFields** | 向外部区域添加新字段
+**addTabFields** | 将新字段添加到选项卡区域
+**addSecondaryTabFields** | 将新字段添加到辅助选项卡式区域
+**removeField** | 从任何区域中删除字段
 
-Each method takes an array of fields similar to the [form field configuration](#defining-form-fields).
+每个方法都采用类似于 [表单字段配置](#defining-form-fields) 的字段数组。
 
-### Filtering Form Fields
+### 过滤表单字段
 
-As described in the [field dependencies section](#field-dependencies), you may also implement form field filtering by extension by hooking in to the `form.filterFields` event.
+如 [字段依赖项](#field-dependencies) 中所述，您还可以通过挂钩到 `form.filterFields` 事件来实现表单字段过滤。
 
 ```php
 User::extend(function ($model) {
@@ -1615,6 +1609,6 @@ User::extend(function ($model) {
 });
 ```
 
-## Validating Form Fields
+## 验证表单字段
 
-To validate the fields of your form you can make use of the [Validation](../database/traits.md#validation) trait in your model.
+要验证表单的字段，您可以在模型中使用 [验证](../database/traits.md#validation)特性。

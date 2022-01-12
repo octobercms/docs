@@ -1,14 +1,14 @@
 # 排序记录
 
-October CMS provides features for sorting and reordering database records. For behaviors that support structured lists, you can define a **structure** option to enable the feature. Various [model traits](../database/traits.md) are used to support reordering including nested sets, simple trees and sortable models.
+October CMS 提供了对数据库记录进行排序和重新排序的功能。 对于支持结构化列表的行为，您可以定义一个 **structure** 选项来启用该功能。 各种[模型特征](../database/traits.md) 用于支持重新排序，包括嵌套集、简单树和可排序模型。
 
-## Configuring a Behavior
+## 配置行为
 
-The [List Behavior](../backend/lists.md) backend behavior currently support the option to reorder records using the **structure** option in the relevant definition. When defined, the page displays a list of records with a drag handle allowing them to be sorted and restructured.
+[列表行为](../backend/lists.md) 后端行为当前支持使用相关定义中的 **structure** 选项重新排序记录的选项。 定义后，页面会显示带有拖动手柄的记录列表，允许对它们进行排序和重组。
 
 ```yaml
 # ===================================
-#  List Behavior Config
+#  列出行为配置
 # ===================================
 
 # ...
@@ -19,22 +19,22 @@ structure:
     maxDepth: 2
 ```
 
-The configuration options listed below can be used.
+可以使用下面列出的配置选项。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**showTree** | displays a tree hierarchy for parent/child records. Default: true.
-**treeExpanded** | if tree nodes should be expanded by default. Default: true.
-**showReorder** | displays an interface for reordering records. Default: true
-**maxDepth** | defines the maximum levels allowed for reordering. Default: null
+**showTree** | 显示父/子记录的树层次结构。 默认值：true。
+**treeExpanded** | 默认情况下是否应展开树节点。 默认值：true。
+**showReorder** | 显示用于重新排序记录的界面。 默认值：true
+**maxDepth** | 定义允许重新排序的最大级别。 默认值：null
 
-## Supported Model Types
+## 支持的模型类型
 
-Depending on the requirements, a different model interface can be used for managing nested and sorted records. The behavior will adapt depending on which trait is implemented.
+根据要求，可以使用不同的模型接口来管理嵌套和排序的记录。 行为将根据实现的特征进行调整。
 
-### Nested Set
+### 嵌套集
 
-Use the `NestedTree` trait when a fixed structure is needed. This includes parent-child relationships and when records need to be displayed in a specific order.
+当需要一个固定的结构时，使用 `NestedTree` Trait。 这包括父子关系以及何时需要以特定顺序显示记录。
 
 ```php
 class Category extends Model
@@ -43,11 +43,11 @@ class Category extends Model
 }
 ```
 
-Read more about the [NestedTree trait in the database documentation](../database/traits.md#nested-tree).
+阅读有关 [数据库文档中的 NestedTree Trait](../database/traits.md#nested-tree) 的更多信息。
 
-### Simple Tree
+### 简单树
 
-Use the `SimpleTree` trait when a basic parent-child relationship is needed.
+当需要基本的父子关系时，使用 `SimpleTree` Trait。
 
 ```php
 class Category extends Model
@@ -56,11 +56,11 @@ class Category extends Model
 }
 ```
 
-Read more about the [SimpleTree trait in the database documentation](../database/traits.md#simple-tree).
+阅读有关 [数据库文档中的 SimpleTree Trait](../database/traits.md#simple-tree) 的更多信息。
 
-### Sortable Model
+### 可排序模型
 
-Use the `Sortable` trait when records need to be displayed in a specific order.
+当需要以特定顺序显示记录时，使用 `Sortable` Trait。
 
 ```php
 class User extends Model
@@ -69,4 +69,4 @@ class User extends Model
 }
 ```
 
-Read more about the [Sortable trait in the database documentation](../database/traits.md#sortable).
+阅读更多关于[数据库文档中的可排序Trait](../database/traits.md#sortable)。
