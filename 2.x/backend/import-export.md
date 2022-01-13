@@ -89,7 +89,7 @@ Option | Description
 **title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **fileName** | the file name to use for the exported file, default **export.csv**.
 **list** | defines the list columns available for exporting.
-**form** | provides additional fields used as import options, optional.
+**form** | provides additional fields used as export options, optional.
 **redirect** | redirection page when the export is complete, optional.
 **useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
 
