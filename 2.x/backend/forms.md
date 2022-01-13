@@ -997,7 +997,7 @@ Option | Description
 <a name="widget-nestedform"></a>
 ### Nested Form
 
-`nestedform` - renders a nested form as the contents of this field, returns data as an array of the fields contained. Fields can be defined inline.
+`nestedform` - renders a nested form using a related record or [jsonable attribute](../database/model.md#supported-properties). Fields can be defined inline or using an external yaml file.
 
 ```yaml
 content:
@@ -1016,7 +1016,7 @@ content:
                 type: text
 ```
 
-Fields can also make reference to a `fields.yaml` file.
+Pass a string to the `form` option to reference an external yaml file.
 
 ```yaml
 profile:
@@ -1025,16 +1025,13 @@ profile:
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model.md#supported-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
-
 Option | Description
 ------------- | -------------
-**form**  | same as in [form definition](#defining-form-fields)
+**form** | a reference to form field definition file, see [backend form fields](#defining-form-fields). Inline fields can also be used.
 **showPanel** | places the form inside a panel container. Default: true
-**useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: false
 
 <a name="widget-recordfinder"></a>
-### Record finder
+### Record Finder
 
 `recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.
 
@@ -1100,7 +1097,7 @@ Option | Description
 <a name="widget-repeater"></a>
 ### Repeater
 
-`repeater` - renders a repeating set of form fields defined within.
+`repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../database/model.md#supported-properties).
 
 ```yaml
 extra_information:
@@ -1127,6 +1124,7 @@ Option | Description
 **minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
 **maxItems** | maximum number of items to allow within the repeater.
 **groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
+**groupKeyFrom** | the group key attribute stored along with the saved data. Default `_group`.
 **style** | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
 
 The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
@@ -1179,7 +1177,7 @@ Option | Description
 **icon** | defines an icon for the group, optional.
 **fields** | form fields belonging to the group, see [backend form fields](#defining-form-fields).
 
-> **Note**: The group key is stored along with the saved data as the `_group` attribute.
+> **Note**: The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
 
 #### Repeater Style
 
