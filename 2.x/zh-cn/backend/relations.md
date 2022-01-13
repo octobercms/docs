@@ -1,8 +1,8 @@
 # 关系
 
-**Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model.md) relationships on a page. Not to be confused with [List relation columns](lists.md#available-column-types) or [Form relation fields](forms.md#relation) that only provide simple management.
+**Relation Behavior** 是一个控制器修饰符，用于轻松管理页面上的复杂 [模型](../database/model.md) 关系。 不要与仅提供简单管理的[列关系](lists.md#available-column-types) 或 [表单关系字段](forms.md#relation) 混淆。
 
-Relation behavior depends on [relation definitions](#relationship-types). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-the-relation-behavior).
+关系行为取决于[关系定义](#relationship-types)。 为了使用关系行为，您应该将 `Backend\Behaviors\RelationController` 定义添加到控制器类的 `$implement` 字段中。 此外，应定义 `$relationConfig` 类属性，其值应参考用于[配置行为选项](#configuring-the-relation-behavior) 的 YAML 文件。
 
 ```php
 namespace Acme\Projects\Controllers;
@@ -19,13 +19,13 @@ class Projects extends Controller
 }
 ```
 
-> **Note**: Very often the relation behavior is used together with the [form behavior](forms.md).
+> **注意**：关系行为通常与 [表单行为](forms.md) 一起使用。
 
-## Configuring the Relation Behavior
+## 配置关系行为
 
-The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
+`$relationConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [视图目录](controllers-ajax.md) 中。 所需的配置取决于目标模型和相关模型之间的 [关系类型](#relationship-types)。
 
-The first level field in the relation configuration file defines the relationship name in the target model. For example:
+关系配置文件中的第一级字段定义目标模型中的关系名称。 例如：
 
 ```php
 class Invoice
@@ -36,15 +36,15 @@ class Invoice
 }
 ```
 
-An *Invoice* model with a relationship called `items` should define the first level field using the same relationship name:
+具有名为 `items` 的关系的 *Invoice* 模型应使用相同的关系名称定义第一级字段：
 
 ```yaml
 # ===================================
-#  Relation Behavior Config
+#  Relation Behavior Config[关系行为配置]
 # ===================================
 
 items:
-    label: Invoice Line Item
+    label: 发票
     view:
         list: $/acme/pay/models/invoiceitem/columns.yaml
         toolbarButtons: create|delete
@@ -53,58 +53,58 @@ items:
         recordsPerPage: 10
 ```
 
-The following options are then used for each relationship name definition:
+然后对每个关系名称定义使用以下选项：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**label** | a label for the relation, in the singular tense, required.
-**view** | configuration specific to the view container, see below.
-**manage** | configuration specific to the management popup, see below.
-**pivot** | a reference to form field definition file, used for [relations with pivot table data](#belongs-to-many-with-pivot-data).
-**emptyMessage** | a message to display when the relationship is empty, optional.
-**readOnly** | disables the ability to add, update, delete or create relations. default: false
-**deferredBinding** | [defers all binding actions using a session key](../database/model.md#deferred-binding) when it is available. default: false
+**label** | 关系的标签，单数时态，需要。
+**view** | 特定于视图容器的配置，请参阅下文。
+**manage** | 特定于管理弹出窗口的配置，请参阅下文。
+**pivot** | 对表单字段定义文件的引用，用于 [与数据透视表数据的关系](#belongs-to-many-with-pivot-data)。
+**emptyMessage** | 当关系为空时显示的消息，可选。
+**readOnly** | 禁用添加、更新、删除或创建关系的能力。 默认值：false
+**deferredBinding** | 当会话密钥可用时，[使用会话密钥延迟所有绑定操作](../database/model.md#deferred-binding)。 默认值：false
 
-These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
+可以为 **view** 或 **manage** 选项指定这些配置值，适用于列表、表单或两者的渲染类型。
 
-Option | Type | Description
+选项 | 类型 | 描述
 ------------- | ------------- | -------------
-**form** | Form | a reference to form field definition file, see [backend form fields](forms.md#defining-form-fields).
-**list** | List | a reference to list column definition file, see [backend list columns](lists.md#defining-list-columns).
-**showFlash** | Both | enables the display of flash messages after a successful action. Default: true
-**showSearch** | List | display an input for searching the records. Default: false
-**showSorting** | List | displays the sorting link on each column. Default: true
-**defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
-**recordsPerPage** | List | maximum rows to display for each page.
-**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization.md).
-**conditions** | List | specifies a raw where query statement to apply to the list model query.
-**scope** | List | specifies a [query scope method](../database/model.md#query-scopes) defined in the _related form model_ to apply to the list query always. The model that this relationship will be attached to (i.e. the parent model) is passed to this scope method as the second parameter (`$query` is the first).
-**searchMode** | List | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**searchScope** | List | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
-**filter** | List | a reference to a filter scopes definition file, see [backend list filters](lists.md#using-list-filters).
+**form** | Form | 对表单字段定义文件的引用，请参阅 [后端表单字段](forms.md#defining-form-fields)。
+**list** | List | 对列表列定义文件的引用，请参阅 [后端列表列](lists.md#defining-list-columns)。
+**showFlash** | Both | 启用成功操作后显示闪现消息。 默认值：true
+**showSearch** | List | 显示用于搜索记录的输入。默认值：false
+**showSorting** | List | 在每一列上显示排序链接。默认值：true
+**defaultSort** | List | 当未定义用户首选项时，设置默认的排序列和方向。支持带有 `column` 和 `direction` 键的字符串或数组。
+**recordsPerPage** | List | 每页显示的最大行数。
+**noRecordsMessage** | List | 未找到记录时显示的消息，可以参考 [多语言字符串](../plugin/localization.md)。
+**conditions** | List | 指定要应用于列表模型查询的原始 where 查询语句。
+**scope** | List | 指定在_相关表单模型_中定义的 [查询范围方法](../database/model.md#query-scopes) 始终应用于列表查询。此关系将附加到的模型(即父模型)作为第二个参数(`$query` 是第一个)传递给此范围方法。
+**searchMode** | List | 将搜索策略定义为包含所有单词、任何单词或精确短语。支持的选项：全部、任意、精确。默认值：全部。
+**searchScope** | List | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)应用于搜索查询，第一个参数将包含搜索词。
+**filter** | List | 对过滤器范围定义文件的引用，请参阅 [后端列表过滤器](lists.md#using-list-filters)。
 
-These configuration values can be specified only for the **view** options.
+只能为 **view** 选项指定这些配置值。
 
-Option | Type | Description
+选项 | 类型 | 描述
 ------------- | ------------- | -------------
-**showCheckboxes** | List | displays checkboxes next to each record.
-**recordUrl** | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
-**customViewPath** | List | specify a custom view path to override partials used by the list.
-**recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
-**toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: **_relation_toolbar.htm**. This option overrides the *toolbarButtons* option.
-**toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add|remove`.
-**structure** | List | options to enable [sorting records](../backend/reorder.md) for the list.
+**showCheckboxes** | List | 在每条记录旁边显示复选框。
+**recordUrl** | List | 将每个列表记录链接到另一个页面。 例如：**users/update/:id**。 `:id` 部分被替换为记录标识符。
+**customViewPath** | List | 指定自定义视图路径以覆盖列表使用的部件。
+**recordOnClick** | List | 单击记录时要执行的自定义 JavaScript 代码。
+**toolbarPartial** | Both | 使用工具栏按钮对控制器部件文件的引用。 例如：**_relation_toolbar.htm**。 此选项覆盖 *toolbarButtons* 选项。
+**toolbarButtons** | Both | 要显示的一组按钮。 这可以格式化为数组或管道分隔的字符串，或设置为 `false` 以不显示任何按钮。 可用选项有：`create`、`update`、`delete`、`add`、`remove`、`link`和`unlink`。 示例：`add|remove`。
+**structure** | List | 为列表启用 [排序记录](../backend/reorder.md) 的选项。
 
-These configuration values can be specified only for the **manage** options.
+只能为 **manage** 选项指定这些配置值。
 
-Option | Type | Description
+选项 | 类型 | 描述
 ------------- | ------------- | -------------
-**title** | Both | a popup title, can refer to a [localization string](../plugin/localization.md).
-**context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
+**title** | Both | 弹出标题，可以引用 [多语言字符串](../plugin/localization.md)。
+**context** | Form | 正在显示的表单的上下文。 可以是字符串或带键的数组：create, update。
 
-### Custom Messages
+### 自定义消息
 
-Specify the `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../plugin/localization.md).
+指定 `customMessages` 选项以覆盖关系控制器使用的默认消息。 这些值可以是纯文本，也可以引用 [多语言字符串](../plugin/localization.md)。
 
 ```yaml
 customMessages:
@@ -112,63 +112,63 @@ customMessages:
     buttonDelete: Destroy Thing
 ```
 
-You may also modify messages in the context of the related field being displayed. The following will override the `createButton` message for the `items` relation only.
+您还可以在显示的相关字段的上下文中修改消息。 以下将仅覆盖 `items` 关系的 `createButton` 消息。
 
 ```yaml
 items:
     customMessages:
-        buttonCreate: New Item!
+        buttonCreate: 新项目！
 ```
 
-The following messages are available to override as custom messages.
+以下消息可作为自定义消息覆盖。
 
-Message | Default Message
+消息 | 默认消息
 ------------- | -------------
-buttonCreate | Create :name
-buttonUpdate | Update :name
-buttonAdd | Add :name
-buttonLink | Link :name
-buttonDelete | Delete
-buttonRemove | Remove
-buttonUnlink | Unlink
-confirmDelete | Are you sure?
-confirmUnlink | Are you sure?
-titlePreviewForm | Preview :name
-titleCreateForm | Create :name
-titleUpdateForm | Update :name
-titleLinkForm | Link a New :name
-titleAddForm | Add a New :name
-titlePivotForm | Related :name Data
-flashCreate | :name Created
-flashUpdate | :name Updated
-flashDelete | :name Deleted
-flashAdd | :name Added
-flashLink | :name Linked
-flashRemove | :name Removed
-flashUnlink | :name Unlinked
+buttonCreate | 创建:name
+buttonUpdate | 更新:name
+buttonAdd | 添加:name
+buttonLink | 关联:name
+buttonDelete | 删除
+buttonRemove | 移除
+buttonUnlink | 取消关联
+confirmDelete | 你确定吗？
+confirmUnlink | 你确定吗？
+titlePreviewForm | 预览:name
+titleCreateForm | 创建:name
+titleUpdateForm | 更新:name
+titleLinkForm | 关联一个新的 :name
+titleAddForm | 添加一个新的:name
+titlePivotForm | 相关:name数据
+flashCreate | :name 已创建
+flashUpdate | :name 已更新
+flashDelete | :name 已删除
+flashAdd | :name 已添加
+flashLink | :name 已关联
+flashRemove | :name 已移除
+flashUnlink | :name 未关联
 
-## Relationship Types
+## 关系类型
 
-How the relation manager is displayed depends on the relationship definition in the target model. The relationship type will also determine the configuration requirements, these are shown in **bold**. The following relationship types are available:
+关系管理器的显示方式取决于目标模型中的关系定义。关系类型也将决定配置要求，这些以**粗体**显示。可以使用以下关系类型：
 
-### Has Many
+### 一对多关联
 
-1. Related records are displayed as a list (**view.list**).
-1. Clicking a record will display an update form (**manage.form**).
-1. Clicking *Add* will display a selection list (**manage.list**).
-1. Clicking *Create* will display a create form (**manage.form**).
-1. Clicking *Delete* will destroy the record(s).
-1. Clicking *Remove* will orphan the relationship.
+1. 相关记录显示为列表(**view.list**)。
+1. 单击记录将显示更新表单(**manage.form**)。
+1. 单击 *Add* 将显示一个选择列表 (**manage.list**)。
+1. 点击*Create*会显示一个创建表单(**manage.form**)。
+1. 点击 *Delete* 将销毁记录。
+1. 单击 *Remove* 将移除关系。
 
-For example, if a *Blog Post* has many *Comments*, the target model is set as the blog post and a list of comments is displayed, using columns from the **list** definition. Clicking on a comment opens a popup form with the fields defined in **form** to update the comment. Comments can be created in the same way. Below is an example of the relation behavior configuration file:
+例如，如果 *博客文章* 有许多 *评论*，则将目标模型设置为 blog post，并使用 **list** 定义中的列显示评论列表。单击评论会打开一个弹出表单，其中包含在 **form** 中定义的字段以更新评论。可以以相同的方式创建评论。以下是关系行为配置文件的示例：
 
 ```yaml
 # ===================================
-#  Relation Behavior Config
+#  Relation Behavior Config[关系行为配置]
 # ===================================
 
 comments:
-    label: Comment
+    label: 评论
     manage:
         form: $/acme/blog/models/comment/fields.yaml
         list: $/acme/blog/models/comment/columns.yaml
@@ -177,23 +177,23 @@ comments:
         toolbarButtons: create|delete
 ```
 
-### Belongs to Many
+### 多对多关联
 
-1. Related records are displayed as a list (**view.list**).
-1. Clicking *Add* will display a selection list (**manage.list**).
-1. Clicking *Create* will display a create form (**manage.form**).
-1. Clicking *Delete* will destroy the pivot table record(s).
-1. Clicking *Remove* will orphan the relationship.
+1. 相关记录显示为列表(**view.list**)。
+1. 单击 *Add* 将显示一个选择列表 (**manage.list**)。
+1. 点击*Create*会显示一个创建表单(**manage.form**)。
+1. 单击*Delete* 将销毁数据透视表记录。
+1. 单击 *Remove* 将移除关系。
 
-For example, if a *User* belongs to many *Roles*, the target model is set as the user and a list of roles is displayed, using columns from the **list** definition. Existing roles can be added and removed from the user. Below is an example of the relation behavior configuration file:
+例如，如果 *用户* 属于许多 *角色*，则目标模型被设置为用户，并使用 **list** 定义中的列显示角色列表。 可以从用户中添加和删除现有角色。 以下是关系行为配置文件的示例：
 
 ```yaml
 # ===================================
-#  Relation Behavior Config
+#  Relation Behavior Config[关系行为配置]
 # ===================================
 
 roles:
-    label: Role
+    label: 角色
     view:
         list: $/acme/user/models/role/columns.yaml
         toolbarButtons: add|remove
@@ -202,24 +202,24 @@ roles:
         form: $/acme/user/models/role/fields.yaml
 ```
 
-### Belongs to Many (with Pivot Data)
+### 多对多关联 (使用数据透视表)
 
-> **Note**: Pivot data is not supported by [deferred bindings](../database/relations.md#deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).
+> **注意**：[延迟绑定](../database/relations.md#deferred-binding) 目前不支持透视数据，因此父模型应该存在。 如果您的关系行为配置具有 `deferredBinding: true`，则透视数据将**不**可用于列表配置(例如`pivot[attribute]`)。
 
-1. Related records are displayed as a list (**view.list**).
-1. Clicking a record will display an update form (**pivot.form**).
-1. Clicking *Add* will display a selection list (**manage.list**), then a data entry form (**pivot.form**).
-1. Clicking *Remove* will destroy the pivot table record(s).
+1. 相关记录显示为列表(**view.list**)。
+1. 单击记录将显示更新表单(**pivot.form**)。
+1. 单击 *Add* 将显示一个选择列表 (**manage.list**)，然后是一个数据输入表单 (**pivot.form**)。
+1. 单击 *Remove* 将销毁数据透视表记录。
 
-Continuing the example in *Belongs To Many* relations, if a role also carried an expiry date, clicking on a role will open a popup form with the fields defined in **pivot** to update the expiry date. Below is an example of the relation behavior configuration file:
+继续 *多对多关联* 关系中的示例，如果角色也带有到期日期，则单击角色将打开一个弹出表单，其中包含在 **pivot** 中定义的字段以更新到期日期。 以下是关系行为配置文件的示例：
 
 ```yaml
 # ===================================
-#  Relation Behavior Config
+#  Relation Behavior Config[关系行为配置]
 # ===================================
 
 roles:
-    label: Role
+    label: 角色
     view:
         list: $/acme/user/models/role/columns.yaml
     manage:
@@ -228,52 +228,52 @@ roles:
         form: $/acme/user/models/role/fields.yaml
 ```
 
-Pivot data is available when defining form fields and list columns via the `pivot` relation, see the example below:
+通过 `pivot` 关系定义表单字段和列表列时，可以使用透视数据，请参见下面的示例：
 
 ```yaml
 # ===================================
-#  Relation Behavior Config
+#  Relation Behavior Config[关系行为配置]
 # ===================================
 
 teams:
-    label: Team
+    label: 团队
     view:
         list:
             columns:
                 name:
-                    label: Name
+                    label: 名称
                 pivot[team_color]:
-                    label: Team color
+                    label: 团队颜色
     manage:
         list:
             columns:
                 name:
-                    label: Name
+                    label: 名称
     pivot:
         form:
             fields:
                 pivot[team_color]:
-                    label: Team color
+                    label: 团队颜色
 ```
 
-### Belongs To
+### 属于
 
-1. Related record is displayed as a preview form (**view.form**).
-1. Clicking *Create* will display a create form (**manage.form**).
-1. Clicking *Update* will display an update form (**manage.form**).
-1. Clicking *Link* will display a selection list (**manage.list**).
-1. Clicking *Unlink* will orphan the relationship.
-1. Clicking *Delete* will destroy the record.
+1. 相关记录显示为预览表格(**view.form**)。
+1. 点击*Create*会显示一个创建表单(**manage.form**)。
+1. 单击 *Update* 将显示更新表单 (**manage.form**)。
+1. 单击 *Link* 将显示一个选择列表 (**manage.list**)。
+1. 单击 *Unlink* 将移除关系。
+1. 点击*Delete*会销毁记录。
 
-For example, if a *Phone* belongs to a *Person* the relation manager will display a form with the fields defined in **form**. Clicking the Link button will display a list of People to associate with the Phone. Clicking the Unlink button will dissociate the Phone with the Person.
+例如，如果 *电话* 属于 *人员*，则关系管理器将显示一个带有在 **form** 中定义的字段的表单。 单击链接按钮将显示与电话关联的人员列表。 单击取消链接按钮将取消电话与人员的关联。
 
 ```yaml
 # ===================================
-#  Relation Behavior Config
+#  Relation Behavior Config[关系行为配置]
 # ===================================
 
 person:
-    label: Person
+    label: 人员
     view:
         form: $/acme/user/models/person/fields.yaml
         toolbarButtons: link|unlink
@@ -282,24 +282,24 @@ person:
         list: $/acme/user/models/person/columns.yaml
 ```
 
-### Has One
+### 一对一关联
 
-1. Related record is displayed as a preview form (**view.form**).
-1. Clicking *Create* will display a create form (**manage.form**).
-1. Clicking *Update* will display an update form (**manage.form**).
-1. Clicking *Link* will display a selection list (**manage.list**).
-1. Clicking *Unlink* will orphan the relationship.
-1. Clicking *Delete* will destroy the record.
+1. 相关记录显示为预览表格(**view.form**)。
+1. 点击*Create*会显示一个创建表单(**manage.form**)。
+1. 单击 *Update* 将显示更新表单 (**manage.form**)。
+1. 单击 *Link* 将显示一个选择列表 (**manage.list**)。
+1. 单击 *Unlink* 将移除关系。
+1. 点击*Delete*会销毁记录。
 
-For example, if a *Person* has one *Phone* the relation manager will display form with the fields defined in **form** for the Phone. When clicking the Update button, a popup is displayed with the fields now editable. If the Person already has a Phone the fields are update, otherwise a new Phone is created for them.
+例如，如果*人员* 拥有一部*电话*，则关系管理器将显示带有在**form** 中为电话定义的字段的表单。 单击更新按钮时，会显示一个弹出窗口，其中包含现在可编辑的字段。 如果 人员 已经有电话，则字段会更新，否则会为他们创建一个新电话。
 
 ```yaml
 # ===================================
-#  Relation Behavior Config
+#  Relation Behavior Config[关系行为配置]
 # ===================================
 
 phone:
-    label: Phone
+    label: 电话
     view:
         form: $/acme/user/models/phone/fields.yaml
         toolbarButtons: update|delete
@@ -308,18 +308,18 @@ phone:
         list: $/acme/user/models/phone/columns.yaml
 ```
 
-## Displaying a Relation Manager
+## 显示关系管理器
 
-Before relations can be managed on any page, the target model must first be initialized in the controller by calling the `initRelation` method.
+在任何页面上管理关系之前，首先必须在控制器中通过调用`initRelation`方法来初始化目标模型。
 
 ```php
 $post = Post::where('id', 7)->first();
 $this->initRelation($post);
 ```
 
-> **Note**: The [form behavior](forms.md) will automatically initialize the model on its create, update and preview actions.
+> **注意**：[表单行为](forms.md) 将在创建、更新和预览操作时自动初始化模型。
 
-The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms.md#preview-view) page, the **preview.htm** view contents could look like this:
+然后可以通过调用 `relationRender` 方法为指定的关系定义显示关系管理器。 例如，如果您想在 [预览](forms.md#preview-view) 页面上显示关系管理器，则 **preview.htm** 视图内容可能如下所示：
 
 ```php
 <?= $this->formRenderPreview() ?>
@@ -327,43 +327,43 @@ The relation manager can then be displayed for a specified relation definition b
 <?= $this->relationRender('comments') ?>
 ```
 
-You may instruct the relation manager to render in read only mode by passing the option as the second argument:
+您可以通过将选项作为第二个参数传递来指示关系管理器以只读模式呈现：
 
 ```php
 <?= $this->relationRender('comments', ['readOnly' => true]) ?>
 ```
 
-## Extending Relation Behavior
+## 扩展关系行为
 
-Sometimes you may wish to modify the default relation behavior and there are several ways you can do this.
+有时您可能希望修改默认的关系行为，有几种方法可以做到这一点。
 
-### Extending Relation Configuration
+### 扩展关系配置
 
-Provides an opportunity to manipulate the relation configuration. The following example can be used to inject a different columns.yaml file based on a property of your model.
+提供修改关系配置的机会。 以下示例可用于根据模型的属性注入不同的 columns.yaml 文件。
 
 ```php
 public function relationExtendConfig($config, $field, $model)
 {
-    // Make sure the model and field matches those you want to manipulate
+    // 确保模型和字段与您要操作的匹配
     if (!$model instanceof MyModel || $field != 'myField') {
         return;
     }
 
-    // Show a different list for business customers
+    // 为企业客户显示不同的列表
     if ($model->mode == 'b2b') {
         $config->view['list'] = '$/author/plugin_name/models/mymodel/b2b_columns.yaml';
     }
 }
 ```
 
-### Extending the View Widget
+### 扩展视图小部件
 
-Provides an opportunity to manipulate the view widget. For example you might want to toggle showCheckboxes based on a property of your model.
+提供操作视图小部件的机会。例如，您可能希望根据模型的属性切换显示复选框。
 
 ```php
 public function relationExtendViewWidget($widget, $field, $model)
 {
-    // Make sure the model and field matches those you want to manipulate
+    // 确保模型和字段与您要操作的匹配
     if (!$model instanceof MyModel || $field != 'myField') {
         return;
     }
@@ -374,83 +374,83 @@ public function relationExtendViewWidget($widget, $field, $model)
 }
 ```
 
-#### How to Remove a Column
+#### 如何删除列
 
-Since the widget has not completed initializing at this point of the runtime cycle you can't call `$widget->removeColumn()`. The `addColumns()` method as described in the [ListController documentation](../backend/lists.md#extending-column-definitions) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the `relationExtendViewWidget()` method. The following example shows how to remove a column.
+由于小部件在运行时尚未完成初始化，因此您不能调用 `$widget->removeColumn()`。 [列表控制器文档](../backend/lists.md#extending-column-definitions) 中描述的 `addColumns()` 方法将按预期工作，但是要删除一个列，我们需要在 `relationExtendViewWidget()` 方法中监听 'list.extendColumns' 事件。 以下示例显示如何删除列。
 
 ```php
 public function relationExtendViewWidget($widget, $field, $model)
 {
-    // Make sure the model and field matches those you want to manipulate
+    // 确保模型和字段与您要操作的匹配
     if (!$model instanceof MyModel || $field != 'myField') {
         return;
     }
 
-    // This will work
+    // 这将起作用
     $widget->bindEvent('list.extendColumns', function () use ($widget) {
         $widget->removeColumn('my_column');
     });
 }
 ```
 
-### Extending the Manage Widget
+### 扩展管理小部件
 
-Provides an opportunity to manipulate the manage widget of your relation.
+提供操作关系的管理小部件的机会。
 
 ```php
 public function relationExtendManageWidget($widget, $field, $model)
 {
-    // Make sure the field is the expected one
+    // 确保该字段是预期的
     if ($field != 'myField') {
         return;
     }
 
-    // Manipulate widget as needed
+    // 根据需要操作小部件
 }
 ```
 
-### Extending the Pivot Widget
+### 扩展透视小部件
 
-Provides an opportunity to manipulate the pivot widget of your relation.
+提供一个机会来操作您的关系的透视小部件。
 
 ```php
 public function relationExtendPivotWidget($widget, $field, $model)
 {
-    // Make sure the field is the expected one
+    // 确保该字段是预期的
     if ($field != 'myField') {
         return;
     }
 
-    // Manipulate widget as needed
+    // 根据需要操作小部件
 }
 ```
 
-### Extending the Filter Widgets
+### 扩展过滤器小部件
 
-There are two filter widgets that may be extended using the following methods, one for the view mode and one for the manage mode of the `RelationController`.
+有两种过滤器小部件可以使用以下方法进行扩展，一种用于查看模式，一种用于`RelationController`的管理模式。
 
 ```php
 public function relationExtendViewFilterWidget($widget, $field, $model)
 {
-    // Extends the view filter widget
+    // 扩展视图过滤器小部件
 }
 
 public function relationExtendManageFilterWidget($widget, $field, $model)
 {
-    // Extends the manage filter widget
+    // 扩展管理过滤器小部件
 }
 ```
 
-Examples on how to add or remove scopes programmatically in the filter widgets can be found in the **Extending filter scopes** section of the [Backend list documentation](../backend/lists.md#extending-filter-scopes).
+关于如何在过滤器小部件中以编程方式添加或删除范围的示例可以在 [后端列表文档](../backend/lists.md#extending-filter-scopes) 的 **扩展过滤器范围** 部分中找到。
 
-### Extending the Refresh Results
+### 扩展刷新结果
 
-The view widget is often refreshed when the manage widget makes a change, you can use this method to inject additional containers when this process occurs. Return an array with the extra values to send to the browser, eg:
+当管理小部件进行更改时，视图小部件通常会刷新，您可以在此过程发生时使用此方法注入额外的容器。返回一个包含额外值的数组以发送到浏览器，例如：
 
 ```php
 public function relationExtendRefreshResults($field)
 {
-    // Make sure the field is the expected one
+    // 确保该字段是预期的字段
     if ($field != 'myField') {
         return;
     }

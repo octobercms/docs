@@ -1,8 +1,8 @@
 # 列表
 
-**List Behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
+**List Behavior** 是一个控制器修饰符，用于轻松地将记录列表添加到页面。 该行为提供了可排序和可搜索的列表及其记录上的可选链接。 该行为提供了控制器操作`索引`，但是列表可以在任何地方呈现，并且可以使用多个列表定义。
 
-List behavior depends on list [column definitions](#defining-list-columns) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+列表行为取决于列表 [列定义](#defining-list-columns) 和 [模型类](../database/model.md)。 为了使用列表行为，您应该将其添加到控制器类的 `$implement` 属性中。 此外，应定义 `$listConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -17,168 +17,167 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-> **Note**: Very often the list and [form behavior](../backend/forms.md) are used together in a same controller.
+> **注意**：列表和 [表单行为](../backend/forms.md) 通常在同一个控制器中一起使用。
 
-## Configuring the List Behavior
+## 配置列表行为
 
-The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical list behavior configuration file:
+`$listConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [视图目录](controllers-ajax.md) 中。 下面是一个典型的列表行为配置文件示例：
 
 ```yaml
 # ===================================
-#  List Behavior Config
+#  List Behavior Config[列表行为配置]
 # ===================================
 
-title: Blog Posts
+title: 博客文章
 list: ~/plugins/acme/blog/models/post/columns.yaml
 modelClass: Acme\Blog\Models\Post
 recordUrl: acme/blog/posts/update/:id
 ```
 
-The following fields are required in the list configuration file:
+列表配置文件中需要以下字段：
 
-Field | Description
+字段 | 描述
 ------------- | -------------
-**title** | a title for this list.
-**list** | a configuration array or reference to a list column definition file, see [list columns](#defining-list-columns).
-**modelClass** | a model class name, the list data is loaded from this model.
+**title** | 此列表的标题。
+**list** | 配置数组或对列表列定义文件的引用，请参阅 [列表列](#defining-list-columns)。
+**modelClass** | 一个模型类名，列表数据是从这个模型加载的。
 
-The configuration options listed below are optional.
+下面列出的配置选项是可选的。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**filter** | filter configuration, see [filtering the list](#filtering-the-list).
-**recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms.md).
-**recordOnClick** | custom JavaScript code to execute when clicking on a record.
-**noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization.md).
-**deleteMessage** | a message to display when records are bulk deleted, can refer to a [localization string](../plugin/localization.md).
-**noRecordsDeletedMessage** | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../plugin/localization.md).
-**recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
-**perPageOptions** | options for number of items per page. Default: [20, 40, 80, 100, 120]
-**showPageNumbers** | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: true
-**toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
-**showSorting** | displays the sorting link on each column. Default: true
-**defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
-**showCheckboxes** | displays checkboxes next to each record. Default: false.
-**showSetup** | displays the list column set up button. Default: false.
-**structure** | enables a structured list, see the [sorting and reordering article](../backend/reorder.md) for more details.
-**customViewPath** | specify a custom view path to override partials used by the list, optional.
+**filter** | 过滤器配置，参见[过滤列表](#filtering-the-list)。
+**recordUrl** | 将每个列表记录链接到另一个页面。例如：**users/update:id**。 `:id` 部分被替换为记录标识符。这允许您链接列表行为和 [表单行为](forms.md)。
+**recordOnClick** | 单击记录时要执行的自定义 JavaScript 代码。
+**noRecordsMessage** | 未找到记录时显示的消息，可以参考 [多语言字符串](../plugin/localization.md)。
+**deleteMessage** | 批量删除记录时显示的消息，可以参考 [多语言字符串](../plugin/localization.md)。
+**noRecordsDeletedMessage** | 当触发批量删除操作但没有删除记录时显示的消息，可以引用 [多语言字符串](../plugin/localization.md)。
+**recordsPerPage** | 每页显示的记录，使用 0 表示无分页。默认值：0
+**perPageOptions** | 每页项目数的选项。默认值：[20、40、80、100、120]
+**showPageNumbers** | 显示带分页的页码。在处理大型表时禁用此选项以提高列表性能。默认值：true
+**toolbar** | 参考工具栏小部件配置文件，或具有配置的数组(见下文)。
+**showSorting** | 在每一列上显示排序链接。默认值：true
+**defaultSort** | 当未定义用户首选项时，设置默认的排序列和方向。支持带有键 `column` 和 `direction` 的字符串或数组。
+**showCheckboxes** | 在每条记录旁边显示复选框。默认值：false。
+**showSetup** | 显示列表列设置按钮。默认值：false。
+**structure** | 启用结构化列表，请参阅 [排序和重新排序文章](../backend/reorder.md) 了解更多详细信息。
+**customViewPath** | 指定自定义视图路径以覆盖列表使用的部件，可选。
 
-### Adding a Toolbar
+### 添加工具栏
 
-To include a toolbar with the list, add the following configuration to the list configuration YAML file:
+要在列表中包含工具栏，请将以下配置添加到列表配置 YAML 文件中：
 
 ```yaml
 toolbar:
     buttons: list_toolbar
     search:
-        prompt: Find records
+        prompt: 查找记录
 ```
 
-The toolbar configuration allows:
+工具栏配置允许：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**buttons** | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.htm**
-**search** | reference to a Search Widget configuration file, or an array with configuration.
+**buttons** | 使用工具栏按钮对控制器部件文件的引用。 例如：**_list_toolbar.htm**
+**search** | 对搜索小部件配置文件或带有配置的数组的引用。
 
-The search configuration supports the following options:
+搜索配置支持以下选项：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization.md).
-**mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
-**searchOnEnter** | setting this to true will make the search widget wait for the Enter key to be pressed before it starts searching (the default behavior is that it starts searching automatically after someone enters something into the search field and then pauses for a short moment).  Default: false.
+**prompt** | 没有活动搜索时显示的占位符，可以参考 [多语言字符串](../plugin/localization.md)。
+**mode** | 将搜索策略定义为包含所有单词、任何单词或精确短语。 支持的选项： all(全部), any(任意), exact(精确)。 默认值：all。
+**scope** | 指定**列表模型**中定义的 [查询范围方法](../database/model.md#query-scopes) 以应用于搜索查询。 第一个参数将包含查询对象(根据常规范围方法)，第二个将包含搜索词，第三个将是要搜索的列的数组。
+**searchOnEnter** | 将此设置为 true 将使搜索小部件在开始搜索之前等待按下 Enter 键(默认行为是在有人在搜索字段中输入内容后自动开始搜索，然后暂停片刻)。 默认值：false。
 
-The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls.md#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms.md):
-
+上面提到的工具栏按钮应该包含带有一些按钮的工具栏部件定义。 部件还可以包含带有图表的 [记分板控件](controls.md#scoreboards)。 带有 **新帖子** 按钮的工具栏部分示例，指的是 [表单行为](forms.md) 提供的 **create** 操作：
 ```php
 <div data-control="toolbar">
     <a
         href="<?= Backend::url('acme/blog/posts/create') ?>"
-        class="btn btn-primary oc-icon-plus">New Post</a>
+        class="btn btn-primary oc-icon-plus">新帖子</a>
 </div>
 ```
 
-### Filtering the List
+### 过滤列表
 
-To filter a list by user defined input, add the following list configuration to the YAML file:
+要按用户定义的输入过滤列表，请将以下列表配置添加到 YAML 文件：
 
 ```yaml
 filter: config_filter.yaml
 ```
 
-The **filter** option should make reference to a [filter configuration file](#using-list-filters) path or supply an array with the configuration.
+**filter** 选项应引用 [过滤器配置文件](#using-list-filters) 路径或提供带有配置的数组。
 
-## Defining List Columns
+## 定义列表列
 
-List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
+列表列是使用 YAML 文件定义的。 列表行为使用列配置来创建记录表并在表单元格中显示模型列。 该文件被放置在插件的 **models** 目录的子目录中。 子目录名称与小写的模型类名称相匹配。 文件名无关紧要，但 **columns.yaml** 和 **list_columns.yaml** 是常用名称。 示例列表列文件位置：
 
 ```
 plugins/
   acme/
     blog/
-      models/                <=== Plugin Models Directory
-        post/                <=== Model Configuration Directory
-          list_columns.yaml  <=== Model List Columns Config File
-        Post.php             <=== Model Class
+      models/                <=== 插件模型目录
+        post/                <=== 模型配置目录
+          list_columns.yaml  <=== 模型列表列配置文件
+        Post.php             <=== 模型类
 ```
 
-The next example shows the typical contents of a list column definitions file.
+下一个示例显示了列表列定义文件的典型内容。
 
 ```yaml
 # ===================================
-#  List Column Definitions
+#  List Column Definitions[列表列定义]
 # ===================================
 
 columns:
-    name: Name
-    email: Email
+    name: 姓名
+    email: 电子邮件
 ```
 
-### Column Options
+### 列选项
 
-For each column can specify these options (where applicable):
+对于每一列都可以指定这些选项(如果适用)：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**label** | a name when displaying the list column to the user.
-**type** | defines how this column should be rendered (see [Column types](#available-column-types) below).
-**default** | specifies the default value for the column if value is empty.
-**searchable** | include this column in the list search results. Default: false.
-**invisible** | specifies if this column is hidden by default. Default: false.
-**sortable** | specifies if this column can be sorted. Default: true.
-**clickable** | if set to false, disables the default click behavior when the column is clicked. Default: true.
-**select** | defines a custom SQL select statement to use for the value.
-**valueFrom** | defines a model attribute to use for the source value.
-**displayFrom** | defines a model attribute to use for the display value.
-**relation** | defines a model relationship column.
-**relationCount** | display the number of related records as the column value. Must be used with the `relation` option. Default: false
-**cssClass** | assigns a CSS class to the column container.
-**headCssClass** | assigns a CSS class to the column header container.
-**width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
-**align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**label** | 向用户显示列表列时的名称。
+**type** | 定义如何呈现此列(请参阅下面的 [列类型](#available-column-types))。
+**default** | 如果值为空，则指定列的默认值。
+**searchable** | 将此列包含在列表搜索结果中。默认值：false。
+**invisible** | 指定此列是否默认隐藏。默认值：false。
+**sortable** | 指定此列是否可以排序。默认值：true。
+**clickable** | 如果设置为 false，则禁用单击列时的默认单击行为。默认值：true。
+**select** | 定义用于该值的自定义 SQL 选择语句。
+**valueFrom** | 定义用于源值的模型属性。
+**displayFrom** | 定义用于显示值的模型属性。
+**relation** | 定义模型关系列。
+**relationCount** | 将相关记录的数量显示为列值。必须与 `relation` 选项一起使用。默认值：false
+**cssClass** | 将 CSS 类分配给列容器。
+**headCssClass** | 将 CSS 类分配给列标题容器。
+**width** | 设置列宽，可以以百分比 (10%) 或像素 (50px) 指定。可能有一个没有指定宽度的列，它将被拉伸自适应。
+**align** | 指定列对齐方式。可能的值是 `left`、`right` 和 `center`。
+**permissions** | 当前后端用户必须拥有的 [权限](users.md#users-and-permissions) 才能使用该列。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
 
-### Custom Value Selection
+### 自定义值选择
 
-It is possible to change the source and display values for each column. If you want to source the column value from another column, do so with the `valueFrom` option.
+可以更改每列的源值和显示值。如果要从另一列获取列值，请使用 `valueFrom` 选项。
 
 ```yaml
 other_name:
-    label: Something Great
+    label: 好东西
     valueFrom: name
 ```
 
-If you want to keep the source column value but display a different value from the model attribute, use the `displayFrom` option.
+如果要保留源列值但显示与模型属性不同的值，请使用 `displayFrom` 选项。
 
 ```yaml
 status_code:
-    label: Status
+    label: 状态
     displayFrom: status_label
 ```
 
-This is mostly applicable when a [model accessor](../database/mutators.md#accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
+这主要适用于 [模型存取器](../database/mutators.md#accessors-mutators) 用于修改显示值的情况。这在您想要显示某个值但按不同值排序和搜索时很有用。
 
 ```php
 public function getStatusLabelAttribute()
@@ -187,60 +186,60 @@ public function getStatusLabelAttribute()
 }
 ```
 
-### Nested Column Selection
+### 嵌套列选择
 
-In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#property-jsonable). The only drawback of doing this is the column cannot use searchable or sortable options.
+在某些情况下，从嵌套数据结构中检索列值是有意义的，例如 [模型关系](../database/relations.md) 列或 [jsonable 数组](../database/model.md #property-jsonable)。这样做的唯一缺点是该列不能使用可搜索或可排序的选项。
 
 ```yaml
 content[title]:
-    name: Title
+    name: 标题
     sortable: false
 ```
 
-The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#events).
+上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该列可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#events) 在本地数据库表中复制其值。
 
-## Available Column Types
+## 可用的列类型
 
-There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
+有多种列类型可用于 **type** 设置，它们控制列表列的显示方式。除了下面指定的原生列类型外，您还可以[定义自定义列类型](#custom-column-types)。
 
 <div class="content-list" markdown="1">
 
-- [Text](#column-text)
-- [Image](#column-image)
-- [Number](#column-number)
-- [Switch](#column-switch)
-- [Date & Time](#column-datetime)
-- [Date](#column-date)
-- [Time](#column-time)
-- [Time since](#column-timesince)
-- [Time tense](#column-timetense)
+- [文本](#column-text)
+- [图片](#column-image)
+- [数字](#column-number)
+- [开关](#column-switch)
+- [日期和时间](#column-datetime)
+- [日期](#column-date)
+- [时间](#column-time)
+- [时间差](#column-timesince)
+- [时态](#column-timetense)
 - [Select](#column-select)
-- [Selectable](#column-selectable)
-- [Relation](#column-relation)
-- [Partial](#column-partial)
-- [Colorpicker](#column-colorpicker)
+- [选择](#column-selectable)
+- [关系](#column-relation)
+- [部件](#column-partial)
+- [颜色选择器](#column-colorpicker)
 
 </div>
 <a name="column-text"></a>
 
-### Text
+### 文本
 
-`text` - displays a text column, aligned left
+`text` - 显示一个文本列，左对齐
 
 ```yaml
 full_name:
-    label: Full Name
+    label: 姓名
     type: text
 ```
 
 <a name="column-image"></a>
-### Image
+### 图片
 
-`image` - displays an image column with the option to resize the output.
+`image` - 显示带有调整输出大小选项的图像列。
 
 ```yaml
 avatar:
-    label: Avatar
+    label: 头像
     type: image
     sortable: false
     width: 150
@@ -249,214 +248,214 @@ avatar:
         quality: 80
 ```
 
-See the [image resizing article](../services/resizer.md#resize-parameters) for more information on what options are supported.
+有关支持哪些选项的更多信息，请参阅 [图像调整大小文章](../services/resizer.md#resize-parameters)。
 
 <a name="column-number"></a>
-### Number
+### 数字
 
-`number` - displays a number column, aligned right
+`number` - 显示一个数字列，右对齐
 
 ```yaml
 age:
-    label: Age
+    label: 年龄
     type: number
 ```
 
-You may also specify a custom number format, for example currency **$99.00**.
+您还可以指定自定义数字格式，例如货币 **$99.00**。
 
 ```yaml
 price:
-    label: Price
+    label: 价格
     type: number
     format: "$%.2f"
 ```
 
-> **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
+> **注意**：`text`和`number`列都支持`format`属性作为字符串值，该属性遵循[PHP sprintf()函数](https://secure.php)的格式化规则.net/manual/en/function.sprintf.php)
 
 <a name="column-switch"></a>
-### Switch
+### 开关
 
-`switch` - displays a on or off state for boolean columns.
+`switch` - 显示布尔列的开或关状态。
 
 ```yaml
 enabled:
-    label: Enabled
+    label: 启用
     type: switch
 ```
 
-You may customize the switch text by passing an array to the `options` value with false and true labels.
+您可以通过将数组传递给带有 false 和 true 标签的 `options` 值来自定义开关文本。
 
 ```yaml
 enabled:
-    label: Enabled
+    label: 启用
     type: switch
     options:
-        - Nope
-        - Yeah
+        - 关
+        - 开
 ```
 
 <a name="column-datetime"></a>
-### Date & Time
+### 日期和时间
 
-`datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
+`datetime` - 将列值显示为格式化的日期和时间。下一个示例将日期显示为 **Thu, Dec 25, 1975 2:15 PM**。
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: datetime
 ```
 
-You may also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**.
+您还可以指定自定义日期格式，例如 **Thursday 25th of December 1975 02:15:16 PM**。
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: datetime
     format: l jS \of F Y h:i:s A
 ```
 
-The display value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
+显示值会自动转换为后端时区首选项，您可以使用 `useTimezone` 选项禁用它。
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: datetime
     useTimezone: false
 ```
 
-> **Note**: the `useTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
+> **注意**：`useTimezone` 选项也适用于其他与日期和时间相关的字段类型，包括 `date`、`time`、`timesince` 和 `timetense`。
 
 <a name="column-date"></a>
-### Date
+### 日期
 
-`date` - displays the column value as date format **M j, Y**.
+`date` - 将列值显示为日期格式 **M j, Y**。
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: date
 ```
 
-The backend timezone preference is not applied to this value by default. If the date includes a time, you may convert the timezone with the `useTimezone` option.
+默认情况下，后端时区首选项不会应用于此值。如果日期包含时间，您可以使用 `useTimezone` 选项转换时区。
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: date
     useTimezone: true
 ```
 
-> **Note**: the `date` and `time` columns do not apply backend timezone conversions by default since a date and time are both required for the conversion.
+> **注意**：默认情况下，`date` 和 `time` 列不应用后端时区转换，因为转换都需要日期和时间。
 
 <a name="column-time"></a>
-### Time
+### 时间
 
-`time` - displays the column value as time format **g:i A**.
+`time` - 将列值显示为时间格式 **g:i A**。
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: time
 ```
 
 <a name="column-timesince"></a>
-### Time Since
+### 时间差
 
-`timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
+`timesince` - 显示从值到当前时间的人类可读时间差。例如：**10分钟前**
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: timesince
 ```
 
 <a name="column-timetense"></a>
-### Time Tense
+### 时态
 
-`timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
+`timetense` - 使用当前日期的语法时态显示24小时制时间和日期。例如：**今天 12:49**、**昨天 4:00** 或 **2015 年 9 月 18 日 14:33**。
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: timetense
 ```
 
 <a name="column-select"></a>
 ### Select
 
-`select` - allows to create a column using a custom select statement. Any valid SQL SELECT statement works here.
+`select` - 允许使用自定义选择语句创建列。任何有效的 SQL SELECT 语句都可以在这里使用。
 
 ```yaml
 full_name:
-    label: Full Name
+    label: 姓名
     select: concat(first_name, ' ', last_name)
 ```
 
 <a name="column-selectable"></a>
-### Selectable
+### 选择
 
-`selectable` - takes the column value and matches it to the value in the record's available options. Take the following array as an example, if the record value is set to `open` then the **Open** value is displayed in the column.
+`selectable` - 获取列值并将其与记录的可用选项中的值匹配。以下面的数组为例，如果记录值设置为 `open`，那么 **Open** 值会显示在列中。
 
 ```php
 ['open' => 'Open', 'closed' => 'Closed']
 ```
 
-The available options are defined on the model as [dropdown options](forms.md#field-dropdown).
+可用选项在模型上定义为 [下拉选项](forms.md#field-dropdown)。
 
 ```yaml
 status:
-    label: Status
+    label: 状态
     type: selectable
 ```
 
-They can also be specified explicitly in the `options` value.
+它们也可以在 `options` 值中明确指定。
 
 ```yaml
 status:
-    label: Status
+    label: 状态
     type: selectable
     options:
-        pending: Pending
-        active: Active
+        pending: 未处理
+        active: 处理
 ```
 
 <a name="column-relation"></a>
-### Relation
+### 关系
 
-`relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations.md) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
+`relation` - 允许显示相关列，您可以提供关系选项。此选项的值必须是模型上活动记录[关系](../database/relations.md) 的名称。在下一个示例中，**name** 值将被转换为相关模型中的名称属性(例如：`$model->name`)。
 
 ```yaml
 group_name:
-    label: Group
+    label: 组
     relation: groups
     select: name
 ```
 
-To display a column that shows the number of related records, use the `relationCount` option.
+要显示相关记录数量的列，请使用`relationCount`选项。
 
 ```yaml
 users_count:
-    label: Users
+    label: 用户
     relation: users
     relationCount: true
     type: number
 ```
 
-> **Note**: Be careful not to name relations the same as existing database columns. For example, using a name `group_id` could break the group relation due to a naming conflict.
+> **注意**：注意不要将关系命名为与现有数据库列相同。例如，使用名称 `group_id` 可能会由于命名冲突而破坏组关系。
 
 <a name="column-partial"></a>
-### Partial
+### 部件
 
-`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name.
+`partial` - 渲染部件，`path` 值可以引用部件视图文件，否则列名称用作部件名称。
 
 ```yaml
 content:
-    label: Content
+    label: 内容
     type: partial
     path: ~/plugins/acme/blog/models/comment/_content_column.htm
 ```
 
-Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`. Here is an some example contents of the **_content_column.htm** file.
+在部件内部，这些变量可用：`$value` 是默认单元格值，`$record` 是用于单元格的模型，`$column` 是配置的类对象 `Backend\Classes\ListColumn`。这是 **_content_column.htm** 文件的一些示例内容。
 
 ```php
 <?php if ($record->is_active): ?>
@@ -465,27 +464,27 @@ Inside the partial these variables are available: `$value` is the default cell v
 ```
 
 <a name="column-colorpicker"></a>
-### Color Picker
+### 颜色选择器
 
-`colorpicker` - displays a color from colorpicker column
+`colorpicker` - 显示颜色选择器列中的颜色
 
 ```yaml
 color:
-    label: Background
+    label: 背景
     type: colorpicker
 ```
 
-## Displaying the List
+## 显示列表
 
-Usually lists are displayed in the index [view](controllers-ajax.md) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
+通常列表显示在索引 [视图](controllers-ajax.md) 文件中。由于列表包括工具栏，因此视图文件将仅包含单个 `listRender` 方法调用。
 
 ```php
 <?= $this->listRender() ?>
 ```
 
-## Multiple List Definitions
+## 多个列表定义
 
-The list behavior can support multiple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
+列表行为可以使用命名定义支持同一控制器中的多个列表。 `$listConfig` 属性可以定义为一个数组，其中键是定义名称，值是配置文件。
 
 ```php
 public $listConfig = [
@@ -494,31 +493,31 @@ public $listConfig = [
 ];
 ```
 
-Each definition can then be displayed by passing the definition name as the first argument when calling the `listRender` method:
+然后可以通过在调用 `listRender` 方法时将定义名称作为第一个参数传递过来，以此显示不同列表：
 
 ```php
 <?= $this->listRender('templates') ?>
 ```
 
-## Using List Filters
+## 使用列表过滤器
 
-Lists can be filtered by [adding a filter definition](#filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+可以通过 [添加过滤器定义](#filtering-the-list) 到列表配置来过滤列表。类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。
 
 ```yaml
 # ===================================
-# Filter Scope Definitions
+# Filter Scope Definitions [过滤范围定义]
 # ===================================
 
 scopes:
 
     category:
-        label: Category
+        label: 类别
         modelClass: Acme\Blog\Models\Category
         conditions: category_id in (:filtered)
         nameFrom: name
 
     status:
-        label: Status
+        label: 状态
         type: group
         conditions: status in (:filtered)
         options:
@@ -527,13 +526,13 @@ scopes:
             closed: Closed
 
     published:
-        label: Hide published
+        label: 隐藏已发布
         type: checkbox
         default: 1
         conditions: is_published <> true
 
     approved:
-        label: Approved
+        label: 批准
         type: switch
         default: 2
         conditions:
@@ -541,47 +540,47 @@ scopes:
             - is_approved = true
 
     created_at:
-        label: Date
+        label: 日期
         type: date
         conditions: created_at >= ':filtered'
 
     published_at:
-        label: Date
+        label: 日期
         type: daterange
         conditions: created_at >= ':after' AND created_at <= ':before'
 ```
 
-### Scope Options
+### 范围选项
 
-For each scope you can specify these options (where applicable):
+对于每个范围，您可以指定这些选项(如果适用)：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**label** | a name when displaying the filter scope to the user.
-**type** | defines how this scope should be rendered (see [Scope types](#available-scope-types) below). Default: group.
-**conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
-**options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
-**emptyOption** | an optional label for an intentional empty selection.
-**nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
-**default** | can either be integer (switch, checkbox, number) or array (group, date range, number range) or string (date).
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
-**dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
+**label** | 向用户显示过滤器范围时的名称。
+**type** | 定义应如何呈现此范围(请参阅下面的 [范围类型](#available-scope-types))。默认值：group。
+**conditions** | 指定要应用于列表模型查询的原始 where 查询语句，`:filtered` 参数表示过滤后的值。
+**scope** | 指定**列表模型**中定义的[查询范围方法](../database/model.md#query-scopes)以应用于列表查询。第一个参数将包含查询对象(根据常规范围方法)，第二个参数将包含过滤后的值
+**options** | 如果按多个项目过滤时使用的选项，此选项可以在 `modelClass` 模型中指定数组或方法名称。
+**emptyOption** | 故意为空的选择的可选标签。
+**nameFrom** | 如果按多个项目过滤，则为名称显示的属性，取自`modelClass`模型的所有记录。
+**default** | 可以是整数(开关、复选框、数字)或数组(组、日期范围、数字范围)或字符串(日期)。
+**permissions** | 当前后端用户必须拥有的 [权限](users.md#users-and-permissions) 才能使用过滤器范围。支持单个权限的字符串或仅需要一个权限即可授予访问的权限数组。
+**dependsOn** | 此范围[依赖](#filter-scope-dependencies)的字符串或其他范围名称的数组。当修改其他范围时，此范围将更新。
 
-### Filter Dependencies
+### 过滤依赖项
 
-Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
+过滤器作用域可以通过定义`dependsOn` [作用域选项](#scope-options)来声明对其他作用域的依赖关系，它提供了一个服务器端解决方案，用于在修改它们的依赖关系时更新作用域。当声明为依赖项的范围发生变化时，定义范围将动态更新。这提供了更改要提供给范围的可用选项的机会。
 
 ```yaml
 country:
-    label: Country
+    label: 国家
     type: group
     conditions: country_id in (:filtered)
     modelClass: October\Test\Models\Location
     options: getCountryOptions
 
 city:
-    label: City
+    label: 城市
     type: group
     conditions: city_id in (:filtered)
     modelClass: October\Test\Models\Location
@@ -589,7 +588,7 @@ city:
     dependsOn: country
 ```
 
-In the above example, the `city` scope will refresh when the `country` scope has changed. Any scope that defines the `dependsOn` property will be passed all current scope objects for the Filter widget, including their current values, as an array that is keyed by the scope names.
+在上面的示例中，当 `country` 范围发生变化时，`city` 范围将刷新。任何定义了 `dependsOn` 属性的作用域都将作为由作用域名称作为键的数组传递给过滤器小部件的所有当前作用域对象，包括它们的当前值。
 
 ```php
 public function getCountryOptions()
@@ -610,65 +609,65 @@ public function getCityOptions($scopes = null)
 }
 ```
 
-> **Note**: Scope dependencies with `type: group` are only supported at this stage.
+> **注意**：仅在此阶段支持具有 `type: group` 的范围依赖项。
 
-### Available Scope Types
+### 可用范围类型
 
-These types can be used to determine how the filter scope should be displayed.
+这些类型可用于确定应如何显示过滤器范围。
 
 <div class="content-list" markdown="1">
 
-- [Group](#filter-group)
-- [Checkbox](#filter-checkbox)
-- [Switch](#filter-switch)
-- [Date](#filter-date)
-- [Date range](#filter-daterange)
-- [Number](#filter-number)
-- [Number range](#filter-numberrange)
-- [Text](#filter-text)
+- [分组](#filter-group)
+- [复选框](#filter-checkbox)
+- [开关](#filter-switch)
+- [日期](#filter-date)
+- [日期范围](#filter-daterange)
+- [数字](#filter-number)
+- [数字范围](#filter-numberrange)
+- [文本](#filter-text)
 
 </div>
 <a name="filter-group"></a>
 
-### Group
+### 分组
 
-`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+`group` - 按一组项目过滤列表，通常按相关模型，并且需要 `nameFrom` 或 `options` 定义。例如：状态名称为打开、关闭等。
 
 ```yaml
 status:
-    label: Status
+    label: 状态
     type: group
     conditions: status in (:filtered)
     default:
-        pending: Pending
-        active: Active
+        pending: 待办
+        active: 处理
     options:
-        pending: Pending
-        active: Active
-        closed: Closed
+        pending: 待办
+        active: 处理
+        closed: 关闭
 ```
 
 <a name="filter-checkbox"></a>
-### Checkbox
+### 复选框
 
-`checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
+`checkbox` - 用作二进制复选框以将预定义的条件或查询应用于列表，打开或关闭。使用 0 表示关闭，使用 1 表示默认值
 
 ```yaml
 published:
-    label: Hide published
+    label: 隐藏已发布
     type: checkbox
     default: 1
     conditions: is_published <> true
 ```
 
 <a name="filter-switch"></a>
-### Switch
+### 开关
 
-`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
+`switch` - 用作在两个预定义条件或对列表的查询之间切换的开关，可以是不确定的，也可以是打开的或关闭的。使用 0 表示关闭，1 表示不确定，2 表示默认值
 
 ```yaml
 approved:
-    label: Approved
+    label: 批准
     type: switch
     default: 1
     conditions:
@@ -677,17 +676,17 @@ approved:
 ```
 
 <a name="filter-date"></a>
-### Date
+### 日期
 
-`date` - displays a date picker for a single date to be selected. The values available to be used in the conditions property are:
+`date` - 显示要选择的单个日期的日期选择器。可在条件属性中使用的值是：
 
-- `:filtered`: The selected date formatted as `Y-m-d`
-- `:before`: The selected date formatted as `Y-m-d 00:00:00`, converted from the backend timezone to the app timezone
-- `:after`: The selected date formatted as `Y-m-d 23:59:59`, converted from the backend timezone to the app timezone
+- `:filtered`: 选择的日期格式为 `Y-m-d`
+- `:before`：选择的日期格式为 `Y-m-d 00:00:00`，从后端时区转换为应用时区
+- `:after`：选择的日期格式为 `Y-m-d 23:59:59`，从后端时区转换为应用时区
 
 ```yaml
 created_at:
-    label: Date
+    label: 日期
     type: date
     minDate: '2001-01-23'
     maxDate: '2030-10-13'
@@ -696,18 +695,18 @@ created_at:
 ```
 
 <a name="filter-daterange"></a>
-### Date Range
+### 日期范围
 
-`daterange` - displays a date picker for two dates to be selected as a date range. The values available to be used in the conditions property are:
+`daterange` - 显示两个日期的日期选择器作为日期范围。 可在条件属性中使用的值是：
 
- - `:before`: The selected "before" date formatted as `Y-m-d H:i:s`
- - `:beforeDate`: The selected "before" date formatted as `Y-m-d`
- - `:after`: The selected "after" date formatted as `Y-m-d H:i:s`
- - `:afterDate`: The selected "after" date formatted as `Y-m-d`
+  - `:before`：选定的`之前`日期，格式为 `Y-m-d H:i:s`
+  - `:beforeDate`：选定的`之前`日期，格式为 `Y-m-d`
+  - `:after`：选定的`之后`日期，格式为 `Y-m-d H:i:s`
+  - `:afterDate`：选定的`之后`日期，格式为 `Y-m-d`
 
 ```yaml
 published_at:
-    label: Date
+    label: 日期
     type: daterange
     minDate: '2001-01-23'
     maxDate: '2030-10-13'
@@ -715,13 +714,13 @@ published_at:
     conditions: created_at >= ':after' AND created_at <= ':before'
 ```
 
-To use default value for Date and Date Range
+使用日期和日期范围的默认值
 
 ```php
 \MyController::extendListFilterScopes(function($filter) {
     $widget->addScopes([
         'Date Test' => [
-            'label' => 'Date Test',
+            'label' => '日期测试',
             'type' => 'daterange',
             'default' => $this->myDefaultTime(),
             'conditions' => "created_at >= ':after' AND created_at <= ':before'"
@@ -729,7 +728,7 @@ To use default value for Date and Date Range
     ]);
 });
 
-// Return value must be instance of carbon
+// 返回值必须是 carbon 的实例
 public function myDefaultTime()
 {
     return [
@@ -743,7 +742,7 @@ public function myDefaultTime()
 You may also wish to set `useTimezone: false` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
 
     published_at:
-        label: Date
+        label: 日期
         type: daterange
         minDate: '2001-01-23'
         maxDate: '2030-10-13'
@@ -755,31 +754,31 @@ You may also wish to set `useTimezone: false` to prevent a timezone conversion b
 -->
 
 <a name="filter-number"></a>
-### Number
+### 数字
 
-`number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
+`number` - 显示单个数字的输入。 该值可在条件属性中用作 `:filtered`。
 
 ```yaml
 age:
-    label: Age
+    label: 年龄
     type: number
     default: 14
     conditions: age >= ':filtered'
 ```
 
 <a name="filter-numberrange"></a>
-### Number Range
+### 数字范围
 
-`numberrange` - displays inputs for two numbers to be entered as a number range. The values available to be used in the conditions property are:
+`numberrange` - 显示两个数字的输入，作为数字范围。 可在条件属性中使用的值是：
 
-- `:min`: The minimum value, defaults to -2147483647
-- `:max`: The maximum value, defaults to 2147483647
+- `:min`: 最小值，默认为 -2147483647
+- `:max`: 最大值，默认为 2147483647
 
-You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
+您可以将最小值留空以搜索直到最大值的所有内容。反之亦然，您可以将最大值留空以搜索至最小值的所有内容。
 
 ```yaml
 visitors:
-    label: Visitor Count
+    label: 访客人数
     type: numberrange
     default:
         0: 10
@@ -788,41 +787,41 @@ visitors:
 ```
 
 <a name="filter-text"></a>
-### Text
+### 文本
 
-`text` - display text input for a string to be entered. You may specify a `size` attribute that will be injected in the input size attribute (default: 10).
+`text` - 显示要输入的字符串。 您可以指定将在输入大小属性中注入`size`属性(默认值：10)。
 
 ```yaml
 username:
-    label: Username
+    label: 用户名
     type: text
     conditions: username = :value
     size: 2
 ```
 
-## Extending List Behavior
+## 扩展列表行为
 
-Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
+有时您可能希望修改默认列表行为，有几种方法可以做到这一点。
 
-### Overriding Controller Action
+### 覆盖控制器操作
 
-You may use your own logic for the `index` action method in the controller, then optionally call the List behavior `index` parent method.
+您可以在控制器中为 `index` 操作方法使用自己的逻辑，然后可以选择调用 List 行为 `index` 父方法。
 
 ```php
 public function index()
 {
     //
-    // Do any custom code here
+    // 在这里放任何自定义代码
     //
 
-    // Call the ListController behavior index() method
+    // 调用 ListController 行为 index() 方法
     $this->asExtension('ListController')->index();
 }
 ```
 
-### Overriding Views
+### 覆盖视图
 
-The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
+`ListController` 行为有一个主容器视图，您可以通过在控制器目录中创建一个名为 `_list_container.htm` 的特殊文件来覆盖它。以下示例将向列表添加侧边栏：
 
 ```php
 <?php if ($toolbar): ?>
@@ -835,7 +834,7 @@ The `ListController` behavior has a main container view that you may override by
 
 <div class="row row-flush">
     <div class="col-sm-3">
-        [Insert sidebar here]
+        [在此处插入侧边栏]
     </div>
     <div class="col-sm-9 list-with-sidebar">
         <?= $list->render() ?>
@@ -843,16 +842,16 @@ The `ListController` behavior has a main container view that you may override by
 </div>
 ```
 
-The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-the-list-behavior). The widget will look in this path for a view first, then fall back to the default location.
+该行为将调用一个`Lists`小部件，该小部件还包含许多您可以覆盖的视图。这可以通过指定一个 `customViewPath` 选项来实现，如 [列表配置选项](#configuring-the-list-behavior) 中所述。小部件将首先在此路径中查找视图，然后回退到默认位置。
 
 ```yaml
-# Custom view path
+# 自定义视图路径
 customViewPath: $/acme/blog/controllers/reviews/list
 ```
 
-> **Note**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
+> **注意**：最好使用子目录，例如 `list`，以避免冲突。
 
-For example, to modify the list body row markup, create a file called `list/_list_body_row.htm` in your controller directory.
+例如，要修改列表正文行标记，请在控制器目录中创建一个名为 `list/_list_body_row.htm` 的文件。
 
 ```php
 <tr>
@@ -862,9 +861,9 @@ For example, to modify the list body row markup, create a file called `list/_lis
 </tr>
 ```
 
-### Extending Column Definitions
+### 扩展列定义
 
-You may extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
+您可以通过调用控制器类上的`extendListColumns`静态方法从外部扩展另一个控制器的列。此方法可以接受两个参数，**$list** 将代表 Lists 小部件对象，**$model** 代表列表使用的模型。以这个控制器为例：
 
 ```php
 class Categories extends \Backend\Classes\Controller
@@ -875,7 +874,7 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
+使用 `extendListColumns` 方法，您可以向此控制器呈现的任何列表添加额外的列。最好检查 **$model** 的类型是否正确。这是一个例子：
 
 ```php
 Categories::extendListColumns(function($list, $model) {
@@ -885,14 +884,14 @@ Categories::extendListColumns(function($list, $model) {
 
     $list->addColumns([
         'my_column' => [
-            'label' => 'My Column'
+            'label' => '我的栏目'
         ]
     ]);
 
 });
 ```
 
-You may also extend the list columns internally by overriding the `listExtendColumns` method inside the controller class.
+您还可以通过覆盖控制器类中的 `listExtendColumns` 方法在内部扩展列表列。
 
 ```php
 class Categories extends \Backend\Classes\Controller
@@ -906,18 +905,18 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-The following methods are available on the $list object.
+$list 对象可以使用以下方法。
 
-Method | Description
+方法 | 描述
 ------------- | -------------
-**addColumns** | adds new columns to the list
-**removeColumn** | removes a column from the list
+**addColumns** | 向列表中添加新列
+**removeColumn** | 从列表中删除一列
 
-Each method takes an array of columns similar to the [list column configuration](#defining-list-columns).
+每个方法都采用类似于 [列表列配置](#defining-list-columns) 的列数组。
 
-### Inject CSS Row Class
+### 注入 CSS 行类
 
-You may inject a custom css row class by adding a `listInjectRowClass` method on the controller class. This method can take two arguments, **$record** will represent a single model record and **$definition** contains the name of the List widget definition. You may return any string value containing your row classes. These classes will be added to the row's HTML markup.
+您可以通过在控制器类上添加 `listInjectRowClass` 方法来注入自定义 css 行类。此方法可以采用两个参数，**$record** 将表示单个模型记录，**$definition** 包含 List 小部件定义的名称。您可以返回包含您行类的任何字符串值。这些类将添加到行的 HTML 标记中。
 
 ```php
 class Lessons extends \Backend\Classes\Controller
@@ -926,7 +925,7 @@ class Lessons extends \Backend\Classes\Controller
 
     public function listInjectRowClass($lesson, $definition = null)
     {
-        // Strike through past lessons
+        // 回顾过去的教训
         if ($lesson->lesson_date->lt(Carbon::today())) {
             return 'strike';
         }
@@ -934,7 +933,7 @@ class Lessons extends \Backend\Classes\Controller
 }
 ```
 
-A special CSS class `nolink` is available to force a row to be unclickable, even if the `recordUrl` or `recordOnClick` options are defined for the List widget. Returning this class in an event will allow you to make records unclickable - for example, for soft-deleted rows or for informational rows:
+一个特殊的 CSS 类 `nolink` 可用于强制行不可点击，即使为 List 小部件定义了 `recordUrl` 或 `recordOnClick` 选项。在事件中返回此类将允许您使记录不可点击 - 例如，对于软删除的行或信息行：
 
 ```php
 public function listInjectRowClass($record, $value)
@@ -945,9 +944,9 @@ public function listInjectRowClass($record, $value)
 }
 ```
 
-### Overriding Column URL
+### 覆盖列 URL
 
-You may specify the click action for a column record by overriding the `listOverrideRecordUrl` method. This method can return a string for a new backend URL or an array with a complex definition.
+您可以通过覆盖 `listOverrideRecordUrl` 方法来指定列记录的单击操作。此方法可以返回新后端 URL 的字符串或具有复杂定义的数组。
 
 ```php
 public function listOverrideRecordUrl($record, $definition = null)
@@ -958,7 +957,7 @@ public function listOverrideRecordUrl($record, $definition = null)
 }
 ```
 
-To override the onclick behavior return an array with the `onclick` key and change the `url` to null.
+要覆盖 onclick 行为，请返回一个带有 `onclick` 键的数组，并将 `url` 更改为 null。
 
 ```php
 public function listOverrideRecordUrl($record, $definition = null)
@@ -969,7 +968,7 @@ public function listOverrideRecordUrl($record, $definition = null)
 }
 ```
 
-To make a column unclickable entirely return an array with the `clickable` key set to false.
+要使列完全不可点击，请返回一个数组，其中 `clickable` 键设置为 false。
 
 ```php
 public function listOverrideRecordUrl($record, $definition = null)
@@ -980,26 +979,26 @@ public function listOverrideRecordUrl($record, $definition = null)
 }
 ```
 
-### Extending Filter Scopes
+### 扩展过滤器范围
 
-You may extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
+您可以通过调用控制器类上的 `extendListFilterScopes` 静态方法从外部扩展另一个控制器的过滤器范围。此方法可以采用参数 **$filter** 来表示过滤器小部件对象。以这个控制器为例：
 
 ```php
 Categories::extendListFilterScopes(function($filter) {
-    // Add custom CSS classes to the Filter widget itself
+    // 将自定义 CSS 类添加到过滤器小部件本身
     $filter->cssClasses = array_merge($filter->cssClasses, ['my', 'array', 'of', 'classes']);
 
     $filter->addScopes([
         'my_scope' => [
-            'label' => 'My Filter Scope'
+            'label' => '我的过滤范围'
         ]
     ]);
 });
 ```
 
-> The array of scopes provided is similar to the [list filters configuration](#using-list-filters).
+> 提供的范围数组类似于 [列表过滤器配置](#using-list-filters)。
 
-You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
+您也可以在内部将过滤器范围扩展到控制器类，只需覆盖 `listFilterExtendScopes` 方法。
 
 ```php
 class Categories extends \Backend\Classes\Controller
@@ -1013,16 +1012,16 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-The following methods are available on the $filter object.
+$filter 对象可以使用以下方法。
 
-Method | Description
+方法 | 描述
 ------------- | -------------
-**addScopes** | adds new scopes to filter widget
-**removeScope** | remove scope from filter widget
+**addScopes** | 为过滤器小部件添加新范围
+**removeScope** | 从过滤器小部件中删除范围
 
-### Extending the Model Query
+### 扩展模型查询
 
-The lookup query for the list [database model](../database/model.md) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
+可以通过覆盖控制器类中的 `listExtendQuery` 方法来扩展列表 [数据库模型](../database/model.md) 的查找查询。此示例将通过将 **withTrashed** 范围应用于查询来确保软删除的记录包含在列表数据中：
 
 ```php
 public function listExtendQuery($query)
@@ -1031,7 +1030,7 @@ public function listExtendQuery($query)
 }
 ```
 
-When dealing with multiple lists definitions in a same controller, you can use the second parameter of `listExtendQuery` which contains the name of the definition :
+在同一个控制器中处理多个列表定义时，可以使用 `listExtendQuery` 的第二个参数，其中包含定义的名称：
 
 ```php
 public $listConfig = [
@@ -1047,7 +1046,7 @@ public function listExtendQuery($query, $definition)
 }
 ```
 
-You may also join other tables to aid with searching and sorting. The following will join the `post_statuses` table and introduce the `status_sort_order` and `status_name` columns to the query.
+您还可以加入其他表格以帮助搜索和排序。下面将加入 `post_statuses` 表，并在查询中引入 `status_sort_order` 和 `status_name` 列。
 
 ```php
 public function listExtendQuery($query, $definition = null)
@@ -1061,7 +1060,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-The [list filter](#using-list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
+[列表过滤器](#using-list-filters) 模型查询也可以通过覆盖 `listFilterExtendQuery` 方法来扩展：
 
 ```php
 public function listFilterExtendQuery($query, $scope)
@@ -1072,9 +1071,9 @@ public function listFilterExtendQuery($query, $scope)
 }
 ```
 
-### Extending the Records Collection
+### 扩展记录集合
 
-The collection of records used by the list can be extended by overriding the `listExtendRecords` method inside the controller class. This example uses the `sort` method on the [record collection](../database/collection.md) to change the sort order of the records.
+列表使用的记录集合可以通过覆盖控制器类中的 `listExtendRecords` 方法来扩展。此示例使用 [记录集合](../database/collection.md) 上的 `sort` 方法来更改记录的排序顺序。
 
 ```php
 public function listExtendRecords($records)
@@ -1085,18 +1084,18 @@ public function listExtendRecords($records)
 }
 ```
 
-### Custom Column Types
+### 自定义列类型
 
-Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration.md#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+自定义列表列类型可以通过[插件注册类](../plugin/registration.md#registration-methods)的`registerListColumnTypes`方法在后端注册。该方法应返回一个数组，其中键是类型名称，值是可调用函数。可调用函数接收三个参数，本机`$value`、`$column` 定义对象和模型`$record` 对象。
 
 ```php
 public function registerListColumnTypes()
 {
     return [
-        // A local method, i.e $this->evalUppercaseListColumn()
+        // 本地方法，即 $this->evalUppercaseListColumn()
         'uppercase' => [$this, 'evalUppercaseListColumn'],
 
-        // Using an inline closure
+        // 使用内联闭包
         'loveit' => function($value) { return 'I love '. $value; }
     ];
 }
@@ -1107,15 +1106,15 @@ public function evalUppercaseListColumn($value, $column, $record)
 }
 ```
 
-Using the custom list column type is as simple as calling it by name using the `type` option.
+使用自定义列表列类型就像使用 `type` 选项按名称调用它一样简单。
 
 ```yaml
 # ===================================
-#  List Column Definitions
+#  List Column Definitions[列出列定义]
 # ===================================
 
 columns:
     secret_code:
-        label: Secret code
+        label: 密码
         type: uppercase
 ```

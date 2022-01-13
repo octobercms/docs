@@ -1,28 +1,28 @@
 # 用户和权限
 
-The user management for the back-end includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the back-end.
+后端的用户管理包括角色、组、权限、密码重置和登录限制等功能。插件还可以注册权限来控制对后端功能的访问。
 
-## Users and Permissions
+## 用户和权限
 
-Access to all parts of an October CMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user.
+对October CMS实例的所有部分的访问由权限系统控制。在最低级别，有超级用户(`is_superuser` 标志设置为 true 的用户)、管理员(用户)和权限。 `\Backend\Models\User` 模型是保存有关用户的所有重要信息的容器。
 
-Super users have access to everything in the system and are only manageable by themselves or other superusers; they are not visible to nor editable by regular administrators, not even if an administrator has the `backend.manage_users` permission.
+超级用户可以访问系统中的所有内容，并且只能由他们自己或其他超级用户管理；即使管理员拥有`backend.manage_users`权限，常规管理员也无法看到或编辑它们。
 
-> **Note**: Any user with the `manage_users` permissions can manage the assignment of roles, but only to other users (not to themselves), and roles can only be created or modified by a super user.
+> **注意**：任何拥有 `manage_users` 权限的用户都可以管理角色的分配，但只能分配给其他用户(不能分配给自己)，并且角色只能由超级用户创建或修改。
 
-Permissions are string keys in the form of `author.plugin.permission_name` that are granted to users by either direct assignment on their Edit Administrator page or by inheritance through the user's Role.
+权限是 `author.plugin.permission_name` 形式的字符串key，通过在编辑管理员页面上直接分配或通过用户角色继承授予用户。
 
-When checking if a user has a specific permission, the permission settings for that user's role are inherited and then overridden by any permissions applied directly to that user. For example, if user **Bob** has role **Genius**, and role **Genius** has the `eat_cake` permission, but **Bob** has the `eat_cake` permission specifically set to deny then **Bob** will not get to `eat_cake`. However, if **Bob** has the permission `eat_vegetables` assigned directly to him, but the **Genius** role does not, then **Bob** still gets to `eat_vegetables`.
+检查用户是否具有特定权限时，该用户角色的权限设置将被继承，然后被直接应用于该用户的任何权限覆盖。例如，如果用户 **Bob** 具有角色 **Genius**，并且角色 **Genius** 具有 `eat_cake` 权限，但 **Bob** 具有专门设置为拒绝的 `eat_cake` 权限，则 * *Bob** 不会去 `eat_cake`。但是，如果 **Bob** 具有直接分配给他的 `eat_vegetables` 权限，但 **Genius** 角色没有，那么 **Bob** 仍然可以访问 `eat_vegetables`。
 
-Roles (`\Backend\Models\UserRole`) are groupings of permissions with a name and description used to identify the role. An Administrator can only have one role assigned to them at once. A Role could be assigned to multiple administrators. October ships with two system roles by default, `developer` and `publisher`. Any number of custom roles with their own combinations of permissions can be created and applied to users.
+角色 (`\Backend\Models\UserRole`) 是权限分组，具有用于识别角色的名称和描述。管理员一次只能分配一个角色。一个角色可以分配给多个管理员。October默认附带两个系统角色，`developer`和`publisher`。可以创建具有自己权限组合的任意数量的自定义角色并将其应用于用户。
 
-> **Note**: System roles (`developer`, `publisher`, and any role with `is_system` set to `true`) cannot have their permissions changed through the Backend. They are assumed to have access to all permissions, unless a given permission specifies a specific role or roles that it applies to using the `roles` array key in the definition of the permission (in which case only that specified system role has access to it).
+> **注意**：系统角色(`developer`、`publisher` 以及 `is_system` 设置为 `true` 的任何角色)不能通过后端更改其权限。假定他们有权访问所有权限，除非给定权限指定了一个或多个特定角色，它使用权限定义中的`roles`数组键(在这种情况下，只有指定的系统角色有权访问它)。
 
-Groups (`\Backend\Models\UserGroup`) are an organizational tool for grouping administrators, they can be thought of as "user categories". They have nothing to do with permissions and are strictly for organizational purposes. For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you would simply do `Mail::sendTo(UserGroup::where('code', 'head-office-staff')->get()->users, 'author.plugin::mail.important_notification', $data);`
+组(`\Backend\Models\UserGroup`)是用于对管理员进行分组的组织工具，可以将它们视为`用户类别`。它们与权限无关，仅用于组织目的。例如，如果您想向 `总公司职员` 组中的所有用户发送电子邮件，您只需执行 `Mail::sendTo(UserGroup::where('code', 'head-office-staff' )->get()->users, 'author.plugin::mail.important_notification', $data);`
 
-## Backend User Helper
+## 后端用户助手
 
-The global `BackendAuth` facade can be used for managing administrative users, which primarily inherits the `October\Rain\Auth\Manager` class. To register a new administrator user account, use the `BackendAuth::register` method.
+全局 `BackendAuth` 门面可用于管理管理用户，它主要继承 `October\Rain\Auth\Manager` 类。要注册新的管理员用户帐户，请使用 `BackendAuth::register` 方法。
 
 ```php
 $user = BackendAuth::register([
@@ -35,54 +35,54 @@ $user = BackendAuth::register([
 ]);
 ```
 
-The `BackendAuth::check` method is a quick way to check if the user is signed in. To return the user model that is signed in, use `BackendAuth::getUser` instead. Additionally, the active user will be available as `$this->user` inside any [backend controller](../backend/controllers-ajax.md).
+`BackendAuth::check` 方法是检查用户是否已登录的快速方法。要返回已登录的用户模型，请改用 `BackendAuth::getUser`。 此外，活动用户将在任何 [后端控制器](../backend/controllers-ajax.md) 中作为 `$this->user` 使用。
 
 ```php
-// Returns true if signed in.
+// 如果已登录，则返回 true。
 $loggedIn = BackendAuth::check();
 
-// Returns the signed in user
+// 返回登录用户
 $user = BackendAuth::getUser();
 
-// Returns the signed in user from a controller
+// 从控制器返回登录用户
 $user = $this->user;
 ```
 
-You may look up a user by their login name using the `BackendAuth::findUserByLogin` method.
+您可以使用 `BackendAuth::findUserByLogin` 方法通过登录名查找用户。
 
 ```php
 $user = BackendAuth::findUserByLogin('someuser');
 ```
 
-You may authenticate a user by providing their login and password with `BackendAuth::authenticate`. You can also authenticate as a user simply by passing the `Backend\Models\User` model along with `BackendAuth::login`.
+您可以通过使用 `BackendAuth::authenticate` 提供他们的登录名和密码来验证用户。 您还可以通过将 `Backend\Models\User` 模型与 `BackendAuth::login` 一起传递来以用户身份进行身份验证。
 
 ```php
-// Authenticate user by credentials
+// 通过凭据对用户进行身份验证
 $user = BackendAuth::authenticate([
     'login' => post('login'),
     'password' => post('password')
 ]);
 
-// Sign in as a specific user
+// 以特定用户身份登录
 BackendAuth::login($user);
 ```
 
-## Registering Permissions
+## 注册权限
 
-Plugins can register back-end user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration.md#registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
+插件可以通过覆盖[插件注册类](../plugin/registration.md#registration-file)中的`registerPermissions`方法来注册后端用户权限。 权限被定义为一个数组，其中键对应于权限键，值对应于权限描述。 权限密钥由作者姓名、插件名称和功能名称组成。 这是一个示例代码：
 
 ```
 acme.blog.access_categories
 ```
 
-The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the user access to [pages](#restricting-access-to-backend-pages) or [features](#restricting-access-to-features).
+下一个示例显示如何注册后端权限项。 权限是使用权限密钥和描述定义的。 在后端权限管理用户界面中，权限显示为复选框列表。 后端控制器可以使用插件定义的权限来限制用户访问 [页面](#restricting-access-to-backend-pages) 或 [功能](#restricting-access-to-features)。
 
 ```php
 public function registerPermissions()
 {
     return [
         'acme.blog.access_posts' => [
-            'label' => 'Manage the blog posts',
+            'label' => '管理博客文章',
             'tab' => 'Blog',
             'order' => 200,
         ],
@@ -91,14 +91,14 @@ public function registerPermissions()
 }
 ```
 
-You may also specify a `roles` option as an array with each value as a role API code. When a role is created with this code, it becomes a system role that always grants this permission to users with that role.
+您还可以将 `roles` 选项指定为一个数组，其中每个值作为角色 API 代码。 当使用此代码创建角色时，它会成为系统角色，该角色始终将此权限授予具有该角色的用户。
 
 ```php
 public function registerPermissions()
 {
     return [
         'acme.blog.access_categories' => [
-            'label' => 'Manage the blog categories',
+            'label' => '管理博客类别',
             'tab' => 'Blog',
             'order' => 200,
             'roles' => ['developer']
@@ -108,9 +108,9 @@ public function registerPermissions()
 }
 ```
 
-## Restricting Access to Backend Pages
+## 限制对后端页面的访问
 
-In a back-end controller class you can specify which permissions are required for access the pages provided by the controller. It's done with the `$requiredPermissions` controller's property. This property should contain an array of permission keys. If the user permissions match any permission from the list, the framework will let the user to see the controller pages.
+在后端控制器类中，您可以指定访问控制器提供的页面需要哪些权限。 它是通过 `$requiredPermissions` 控制器的属性完成的。 此属性应包含一组权限键。 如果用户权限与列表中的任何权限匹配，则框架将让用户查看控制器页面。
 
 ```php
 <?php namespace Acme\Blog\Controllers;
@@ -123,17 +123,17 @@ class Posts extends BackendController
 }
 ```
 
-You can also use the **asterisk** symbol to indicate the "all permissions" condition. In the next example the controller pages are accessible for all users who has any permissions starting with the "acme.blog." string:
+您还可以使用 **asterisk** 符号表示"所有权限"条件。 在下一个示例中，所有具有以"acme.blog."字符串开头的权限的用户都可以访问控制器页面：
 
 ```php
 public $requiredPermissions = ['acme.blog.*'];
 ```
 
-## Restricting Access to Features
+## 限制对功能的访问
 
-The back-end user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the back-end user interface. The permission methods supported by the back-end user are `hasAccess` and `hasPermission`. Both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.
+后端用户模型具有允许确定用户是否具有特定权限的方法。 您可以使用此功能来限制后端用户界面的功能。 后端用户支持的权限方式有`hasAccess`和`hasPermission`。 这两种方法都采用两个参数：权限键字符串（或键字符串数组）和一个可选参数，该参数指示与第一个参数一起列出的所有权限都是必需的。
 
-The `hasAccess` method returns **true** for any permission if the user is a superuser (`is_superuser` set to `true`). The `hasPermission` method is more strict, only returning true if the user actually has the specified permissions either in their account or through their role. Generally, `hasAccess` is the preferred method to use as it respects the absolute power of the superuser. The following example shows how to use the methods in the controller code:
+如果用户是超级用户（`is_superuser` 设置为 `true`），`hasAccess` 方法会为任何权限返回 **true**。 `hasPermission` 方法更严格，仅当用户在其帐户中或通过其角色实际上具有指定的权限时才返回 true。 通常，`hasAccess` 是首选方法，因为它尊重超级用户的绝对权力。 以下示例显示了如何使用控制器代码中的方法：
 
 ```php
 if ($this->user->hasAccess('acme.blog.*')) {
@@ -148,7 +148,7 @@ if ($this->user->hasPermission([
 }
 ```
 
-You can also use the methods in the back-end views for hiding user interface elements. The next examples demonstrates how you can hide a button on the Edit Category [back-end form](forms):
+您还可以使用后端视图中的方法来隐藏用户界面元素。 下一个示例演示如何隐藏编辑类别 [后端表单](表单)上的按钮：
 
 ```php
 <?php if ($this->user->hasAccess('acme.blog.delete_categories')): ?>
@@ -156,8 +156,8 @@ You can also use the methods in the back-end views for hiding user interface ele
         type="button"
         class="oc-icon-trash-o btn-icon danger pull-right"
         data-request="onDelete"
-        data-load-indicator="Deleting Category..."
-        data-request-confirm="Do you really want to delete this category?">
+        data-load-indicator="删除类别..."
+        data-request-confirm="你真的要删除这个类别吗?">
     </button>
 <?php endif ?>
 ```

@@ -1,8 +1,8 @@
 # 导入和导出
 
-**Import Export Behavior** is a controller modifier that provides features for importing and exporting data. The behavior provides two pages called Import and Export. The Import page allows a user to upload a CSV file and match the columns to the database. The Export page is the opposite and allows a user to download columns from the database as a CSV file. The behavior provides the controller actions `import()` and `export()`.
+**Import Export Behavior** 是一个控制器修饰符，提供用于导入和导出数据的功能。 该行为提供了两个页面，分别称为 Import 和 Export。 导入页面允许用户上传 CSV 文件并将列与数据库匹配。 导出页面正好相反，它允许用户从数据库中下载列作为 CSV 文件。 该行为提供控制器操作`import()`和`export()`。
 
-The behavior configuration is defined in two parts, each part depends on a special model class along with a list and form field definition file. To use the importing and exporting behavior you should add it to the `$implement` property of the controller class. Also, the `$importExportConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+行为配置分为两部分定义，每一部分都依赖于一个特殊的模型类以及一个列表和表单字段定义文件。 要使用导入和导出行为，您应该将其添加到控制器类的 `$implement` 属性中。 此外，应定义 `$importExportConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
 
 ```php
 namespace Acme\Shop\Controllers;
@@ -19,83 +19,83 @@ class Products extends Controller
 }
 ```
 
-## Configuring the Behavior
+## 配置行为
 
-The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a configuration file:
+`$importExportConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [视图目录](controllers-ajax.md) 中。 下面是一个配置文件的例子：
 
 ```yaml
 # ===================================
-#  Import/Export Behavior Config
+#  Import/Export Behavior Config[导入/导出行为配置]
 # ===================================
 
 import:
-    title: Import subscribers
+    title: 导入订阅者
     modelClass: Acme\Campaign\Models\SubscriberImport
     list: $/acme/campaign/models/subscriber/columns.yaml
 
 export:
-    title: Export subscribers
+    title: 导出订阅者
     modelClass: Acme\Campaign\Models\SubscriberExport
     list: $/acme/campaign/models/subscriber/columns.yaml
 ```
 
-The configuration options listed below are optional. Define them if you want the behavior to support the [Import](#import-page) or [Export](#export-page), or both.
+下面列出的配置选项是可选的。 如果您希望行为支持 [导入](#import-page) 或 [导出](#export-page) 或两者，请定义它们。
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
-**import** | a configuration array or reference to a config file for the Import page.
-**export** | a configuration array or reference to a config file for the Export page.
-**defaultFormatOptions** | a configuration array or reference to a config file for the default CSV format options.
+**defaultRedirect** | 当没有定义特定的重定向页面时，用作后备重定向页面。
+**import** | 配置数组或对导入页面的配置文件的引用。
+**export** | 配置数组或对导出页面的配置文件的引用。
+**defaultFormatOptions** | 配置数组或对默认 CSV 格式选项的配置文件的引用。
 
-### Import Page
+### 导入页面
 
-To support the Import page add the following configuration to the YAML file:
+要支持导入页面，请将以下配置添加到 YAML 文件：
 
 ```yaml
 import:
-    title: Import subscribers
+    title: 导入订阅者
     modelClass: Acme\Campaign\Models\SubscriberImport
     list: $/acme/campaign/models/subscriberimport/columns.yaml
     redirect: acme/campaign/subscribers
 ```
 
-The following configuration options are supported for the Import page:
+导入页面支持以下配置选项：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization.md).
-**list** | defines the list columns available for importing.
-**form** | provides additional fields used as import options, optional.
-**redirect** | redirection page when the import is complete, optional
-**permissions** | user permissions needed to perform the operation, optional
+**title** | 页面标题，可以引用 [多语言字符串](../plugin/localization.md)。
+**list** | 定义可用于导入的列表列。
+**form** | 提供用作导入选项的附加字段，可选。
+**redirect** | 导入完成时的重定向页面，可选
+**permissions** | 执行操作所需的用户权限，可选
 
-### Export Page
+### 导出页面
 
-To support the Export page add the following configuration to the YAML file:
+要支持导出页面，请将以下配置添加到 YAML 文件中：
 
 ```yaml
 export:
-    title: Export subscribers
+    title: 导出订阅者
     modelClass: Acme\Campaign\Models\SubscriberExport
     list: $/acme/campaign/models/subscriberexport/columns.yaml
     redirect: acme/campaign/subscribers
 ```
 
-The following configuration options are supported for the Export page:
+导出页面支持以下配置选项：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization.md).
-**fileName** | the file name to use for the exported file, default **export.csv**.
-**list** | defines the list columns available for exporting.
-**form** | provides additional fields used as import options, optional.
-**redirect** | redirection page when the export is complete, optional.
-**useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
+**title** | 页面标题，可以引用 [多语言字符串](../plugin/localization.md)。
+**fileName** | 用于导出文件的文件名，默认为 **export.csv**。
+**list** | 定义可用于导出的列表列。
+**form** | 提供用作导入选项的附加字段，可选。
+**redirect** | 导出完成时的重定向页面，可选。
+**useList** | 设置为 true 或列表定义的值以启用 [与列表集成](#list-behavior-integration)，默认值：false。
 
-### Format Options
+### 格式选项
 
-To override the default CSV format options add the following configuration to the YAML file:
+要覆盖默认的 CSV 格式选项，请将以下配置添加到 YAML 文件中：
 
 ```yaml
 defaultFormatOptions:
@@ -105,25 +105,24 @@ defaultFormatOptions:
     encoding: 'utf-8'
 ```
 
-The following configuration options (all optional) are supported for the format options:
+格式选项支持以下配置选项(都是可选的)：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**delimiter** | Delimiter character.
-**enclosure** | Enclosure character.
-**escape** | Escape character.
-**encoding** | File encoding (only used for the import).
+**delimiter** | 分隔符
+**enclosure** | 包围字符
+**escape** | 转义字符
+**encoding** | 文件编码(仅用于导入)。
 
-## Import and Export Views
+## 导入和导出视图
 
-For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax.md) with the corresponding name - **import.htm** and **export.htm**.
+对于每个页面功能的 [导入](#import-page) 和 [导出](#export-page)，您应该提供具有相应名称的 [视图文件](controllers-ajax.md) - **import.htm** 和**export.htm**。
 
-The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
+导入/导出行为向控制器类添加了两个方法：`importRender` 和 `exportRender`。 这些方法根据上述 YAML 配置文件呈现导入和导出部件。
 
-### Import View
+### 导入视图
 
-The **import.htm** view represents the Import page that allows users to import data. A typical Import page contains breadcrumbs, the import section itself, and the submission buttons. The **data-request** attribute should refer to the `onImport` AJAX handler provided by the behavior. Below is a contents of the typical import.htm view file.
-
+**import.htm** 视图表示允许用户导入数据的导入页面。 典型的导入页面包含面包屑、导入部分本身和提交按钮。 **data-request** 属性应引用行为提供的 `onImport` AJAX 处理程序。 下面是典型的 import.htm 视图文件的内容。
 ```php
 <?= Form::open(['class' => 'layout']) ?>
 
@@ -138,17 +137,16 @@ The **import.htm** view represents the Import page that allows users to import d
             data-handler="onImportLoadForm"
             data-keyboard="false"
             class="btn btn-primary">
-            Import records
+            导入记录
         </button>
     </div>
 
 <?= Form::close() ?>
 ```
 
-### Export View
+### 导出视图
 
-The **export.htm** view represents the Export page that allows users to export a file from the database. A typical Export page contains breadcrumbs, the export section itself, and the submission buttons. The **data-request** attribute should refer to the `onExport` AJAX handler provided by the behavior. Below is a contents of the typical export.htm form.
-
+**export.htm** 视图表示允许用户从数据库中导出文件的导出页面。 典型的导出页面包含面包屑、导出部分本身和提交按钮。 **data-request** 属性应引用行为提供的 `onExport` AJAX 处理程序。 下面是典型的 export.htm 表单的内容。
 ```php
 <?= Form::open(['class' => 'layout']) ?>
 
@@ -163,22 +161,22 @@ The **export.htm** view represents the Export page that allows users to export a
             data-handler="onExportLoadForm"
             data-keyboard="false"
             class="btn btn-primary">
-            Export records
+            导出记录
         </button>
     </div>
 
 <?= Form::close() ?>
 ```
 
-## Defining an Import Model
+## 定义导入模型
 
-For importing data you should create a dedicated model for this process which extends the `Backend\Models\ImportModel` class. Here is an example class definition:
+对于导入数据，您应该创建一个扩展`Backend\Models\ImportModel`类的专用模型。 这是一个示例类定义：
 
 ```php
 class SubscriberImport extends \Backend\Models\ImportModel
 {
     /**
-     * @var array The rules to be applied to the data.
+     * @var array 要应用到数据的规则。
      */
     public $rules = [];
 
@@ -202,19 +200,19 @@ class SubscriberImport extends \Backend\Models\ImportModel
 }
 ```
 
-The class must define a method called `importData` used for processing the imported data. The first parameter `$results` will contain an array containing the data to import. The second parameter `$sessionKey` will contain the session key used for the request.
+该类必须定义一个名为`importData`的方法，用于处理导入的数据。 第一个参数 `$results` 将包含一个包含要导入的数据的数组。 第二个参数 `$sessionKey` 将包含用于请求的会话密钥。
 
-Method | Description
+方法 | 描述
 ------------- | -------------
-`logUpdated()` | Called when a record is updated.
-`logCreated()` | Called when a record is created.
-`logError(rowIndex, message)` | Called when there is a problem with importing the record.
-`logWarning(rowIndex, message)` | Used to provide a soft warning, like modifying a value.
-`logSkipped(rowIndex, message)` | Used when the entire row of data was not imported (skipped).
+`logUpdated()` | 更新记录时调用。
+`logCreated()` | 创建记录时调用。
+`logError(rowIndex, message)` | 当导入记录出现问题时调用。
+`logWarning(rowIndex, message)` | 用于提供软警告，例如修改值。
+`logSkipped(rowIndex, message)` | 在未导入(跳过)整行数据时使用。
 
-## Defining an Export Model
+## 定义导出模型
 
-For exporting data you should create a dedicated model which extends the `Backend\Models\ExportModel` class. Here is an example:
+对于导出数据，您应该创建一个扩展 `Backend\Models\ExportModel` 类的专用模型。 这是一个例子：
 
 ```php
 class SubscriberExport extends \Backend\Models\ExportModel
@@ -232,11 +230,11 @@ class SubscriberExport extends \Backend\Models\ExportModel
 }
 ```
 
-The class must define a method called `exportData` used for returning the export data. The first parameter `$columns` is an array of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
+该类必须定义一个名为`exportData`的方法，用于返回导出数据。第一个参数`$columns`是要导出的列名数组。第二个参数 `$sessionKey` 将包含用于请求的会话密钥。
 
-## Custom Options
+## 自定义选项
 
-Both import and export forms support custom options that can be introduced using form fields, defined in the **form** option in the import or export configuration respectively. These values are then passed to the Import / Export model and are available during processing.
+导入和导出表单都支持可以使用表单字段引入的自定义选项，分别在导入或导出配置中的 **form** 选项中定义。然后将这些值传递给导入/导出模型，并在处理过程中可用。
 
 ```yaml
 import:
@@ -248,22 +246,22 @@ export:
     form: $/acme/campaign/models/subscriberexport/fields.yaml
 ```
 
-The form fields specified will appear on the import/export page. Here is an example `fields.yaml` file contents:
+指定的表单字段将出现在导入/导出页面上。这是一个示例 `fields.yaml` 文件内容：
 
 ```yaml
 # ===================================
-#  Form Field Definitions
+#  Form Field Definitions[表单字段定义]
 # ===================================
 
 fields:
 
     auto_create_lists:
-        label: Automatically create lists
+        label: 自动创建列表
         type: checkbox
         default: true
 ```
 
-The value of the form field above called **auto_create_lists** can be accessed using `$this->auto_create_lists` inside the `importData` method of the import model. If this were the export model, the value would be available inside the `exportData` method instead.
+上面名为 **auto_create_lists** 的表单字段的值可以使用导入模型的 `importData` 方法中的 `$this->auto_create_lists` 访问。如果这是导出模型，则该值将在 `exportData` 方法中可用。
 
 ```php
 class SubscriberImport extends \Backend\Models\ImportModel
@@ -271,7 +269,7 @@ class SubscriberImport extends \Backend\Models\ImportModel
     public function importData($results, $sessionKey = null)
     {
         if ($this->auto_create_lists) {
-            // Do something
+            // 做些什么
         }
 
         // ...
@@ -279,16 +277,16 @@ class SubscriberImport extends \Backend\Models\ImportModel
 }
 ```
 
-## Integration with List Behavior
+## 与列表行为集成
 
-There is an alternative approach to exporting data that uses the [list behavior](lists.md) to provide the export data. In order to use this feature you should have the `Backend.Behaviors.ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
+有另一种导出数据的方法，它使用 [列表行为](lists.md) 来提供导出数据。为了使用这个特性，你应该在控制器类的 `$implement` 字段中定义 `Backend.Behaviors.ListController`。您不需要使用导出视图，所有设置都将从列表中提取。这是唯一需要的配置：
 
 ```yaml
 export:
     useList: true
 ```
 
-If you are using [multiple list definitions](lists.md#multiple-list-definitions), then you can supply the list definition:
+如果您使用 [多个列表定义](lists.md#multiple-list-definitions)，那么您可以提供列表定义：
 
 ```yaml
 export:
@@ -296,7 +294,7 @@ export:
     fileName: orders.csv
 ```
 
-The `useList` option also supports extended configuration options.
+`useList` 选项还支持扩展配置选项。
 
 ```yaml
 export:
@@ -305,9 +303,9 @@ export:
         raw: true
 ```
 
-The following configuration options are supported:
+支持以下配置选项：
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**definition** | the list definition to source records from, optional.
-**raw** | output the raw attribute values from the record, default: false.
+**definition** | 从列表定义源记录，可选。
+**raw** | 从记录中输出原始属性值，默认值：false。

@@ -1,99 +1,99 @@
 # 控制器和AJAX
 
-The October CMS backend implements an Model-View-Controller (MVC) pattern. Controllers manage backend pages and implement various features like forms and lists. This article describes how to develop backend controllers and how to configure controller behaviors.
+October CMS后端实现了模型-视图-控制器(MVC)模式。 控制器管理后端页面并实现各种功能，如表单和列表。 本文介绍如何开发后端控制器以及如何配置控制器行为。
 
-Each controller is represented with a PHP script which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.htm` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
+每个控制器都由一个 PHP 脚本表示，该脚本位于插件目录的 **/controllers** 子目录中。 控制器视图是位于控制器视图目录中的`.htm`文件。 控制器视图目录名称与以小写形式的控制器类名称相匹配。 视图目录还可以包含控制器配置文件。 控制器目录结构示例：
 
 ```
 plugins/
   acme/
     blog/
       controllers/
-        users/                <=== View Directory
-          _partial.htm        <=== Partial File
-          config_form.yaml    <=== Config File
-          index.htm           <=== View File
-        Users.php             <=== Controller Class
+        users/                <=== 视图目录
+          _partial.htm        <=== 部件文件
+          config_form.yaml    <=== 配置文件
+          index.htm           <=== 视图文件
+        Users.php             <=== 控制器类
         Plugin.php
 ```
 
-> **Tip**: For a practical example of using backend controllers, check out the [Beyond Behaviors tutorial series](https://octobercms.com/support/article/ob-19).
+> **提示**：有关使用后端控制器的实际示例，请查看 [Beyond Behaviors 教程系列](https://octobercms.com/support/article/ob-19)。
 
-### Class Definition
+### 类定义
 
-Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). The most basic representation of a Controller used inside a Plugin looks like this.
+控制器类必须扩展 `\Backend\Classes\Controller` 类。 与其他任何插件类一样，控制器应该属于 [插件命名空间](../plugin/registration.md#plugin-namespaces)。 在插件中使用的控制器最基本表示如下所示。
 
 ```php
 namespace Acme\Blog\Controllers;
 
 class Posts extends \Backend\Classes\Controller {
 
-    public function index()    // <=== Action method
+    public function index()    // <=== 动作方法
     {
 
     }
 }
 ```
 
-Usually each controller implements functionality for working with a single type of data - like blog posts or categories. All backend behaviors described below assume this convention.
+通常每个控制器都实现了处理单一类型数据的功能——比如博客文章或类别。 下面描述的所有后端行为都采用这种约定。
 
-### Controller Properties
+### 控制器属性
 
-The backend controller base class defines a number of properties that allow to configure the page appearance and manage the page security:
+后端控制器基类定义了许多允许配置页面外观和管理页面安全性的属性：
 
-Property | Description
+属性 | 描述
 ------------- | -------------
-**$fatalError** | allows to store a fatal exception generated in an action method in order to display it in the view.
-**$user** | contains a reference to the the backend user object.
-**$suppressView** | allows to prevent the view display. Can be updated in the action method or in the controller constructor.
-**$params** | an array of the routed parameters.
-**$action** | a name of the action method being executed in the current request.
-**$publicActions** | defines an array of actions available without the backend user authentication. Can be overridden in the class definition.
-**$requiredPermissions** | permissions required to view this page. Can be set in the class definition or in the controller constructor. See [users & permissions](users) for details.
-**$pageTitle** | sets the page title. Can be set in the action method.
-**$bodyClass** | body class property used for customizing the layout. Can be set in the controller constructor or action method.
-**$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
-**$layout** | specify a custom layout for the controller views (see [layouts](../backend/views-partials.md#layouts-and-child-layouts)).
+**$fatalError** | 允许存储在操作方法中生成的致命异常，以便在视图中显示它。
+**$user** | 包含对后端用户对象的引用。
+**$suppressView** | 允许阻止视图显示。可以在操作方法或控制器构造函数中更新。
+**$params** | 路由参数的数组。
+**$action** | 当前请求中正在执行的操作方法的名称。
+**$publicActions** | 定义了一系列无需后端用户身份验证即可使用的操作。可以在类定义中被覆盖。
+**$requiredPermissions** | 查看此页面所需的权限。可以在类定义或控制器构造函数中设置。有关详细信息，请参阅 [用户和权限](用户)。
+**$pageTitle** | 设置页面标题。可以在action方法中设置。
+**$bodyClass** | 用于自定义布局的 body 类属性。可以在控制器构造函数或动作方法中设置。
+**$guarded** | 控制器特定的方法不能被称为动作。可以在控制器构造函数中扩展。
+**$layout** | 为控制器视图指定自定义布局(参见 [布局](../backend/views-partials.md#layouts-and-child-layouts))。
 
-## Actions, Views and Routing
+## 动作、视图和路由
 
-Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Back-end view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
+公共控制器方法(称为**actions**)与表示该操作对应页面的**视图文件**文件耦合。后端视图文件使用 PHP 语法。 **index.htm**视图文件内容示例，对应**index**动作方法：
 
 ```html
 <h1>Hello World</h1>
 ```
 
-URL of this page is made up of the author name, plugin name, controller name and action name.
+该页面的 URL 由作者名、插件名、控制器名和动作名组成。
 
     backend/[author name]/[plugin name]/[controller name]/[action name]
 
-The above Controller results in the following:
+上述控制器导致以下结果：
 
     http://example.com/backend/acme/blog/users/index
 
-## Passing Data to Views
+## 将数据传递给视图
 
-Use the controller's `$vars` property to pass any data directly to your view:
+使用控制器的 `$vars` 属性将任何数据直接传递到您的视图：
 
 ```php
 $this->vars['myVariable'] = 'value';
 ```
 
-The variables passed with the `$vars` property can now be accessed directly in your view:
+使用 `$vars` 属性传递的变量现在可以在您的视图中直接访问：
 
 ```php
-<p>The variable value is <?= $myVariable ?></p>
+<p>变量值为 <?= $myVariable ?></p>
 ```
 
-## Setting the Navigation Context
+## 设置导航上下文
 
-Plugins can register the backend navigation menus and submenus in the [plugin registration file](../plugin/registration.md#navigation-menus). The navigation context determines what backend menu and submenu are active for the current backend page. You can set the navigation context with the `BackendMenu` class:
+插件可以在[插件注册文件](../plugin/registration.md#navigation-menus)中注册后台导航菜单和子菜单。导航上下文确定当前后端页面的活动后端菜单和子菜单。您可以使用 `BackendMenu` 类设置导航上下文：
 
 ```php
 BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
 ```
 
-The first parameter specifies the author and plugin names. The second parameter sets the menu code. The optional third parameter specifies the submenu code. Usually you call the `BackendMenu::setContext` in the controller constructor.
+第一个参数指定作者和插件名称。第二个参数设置菜单代码。可选的第三个参数指定子菜单代码。通常你在控制器构造函数中调用 `BackendMenu::setContext`。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -108,21 +108,21 @@ public function __construct()
 }
 ```
 
-You can set the title of the backend page with the `$pageTitle` property of the controller class (note that the form and list behaviors can do it for you):
+您可以使用控制器类的 `$pageTitle` 属性设置后端页面的标题(请注意，表单和列表行为可以为您完成)：
 
 ```php
-$this->pageTitle = 'Blog categories';
+$this->pageTitle = '博客类别';
 ```
 
-## Using AJAX Handlers
+## 使用 AJAX 处理程序
 
-The backend AJAX framework uses the same [AJAX library](../ajax/introduction.md) as the front-end pages. The library is loaded automatically on the backend pages.
+后端 AJAX 框架使用与前端页面相同的 [AJAX 库](../ajax/introduction.md)。该库在后端页面上自动加载。
 
-### Backend AJAX Handlers
+### 后端 AJAX 处理程序
 
-The backend AJAX handlers can be defined in the controller class or [widgets](widgets.md). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
+后端 AJAX 处理程序可以在控制器类或 [小部件](widgets.md) 中定义。在控制器类中，AJAX 处理程序被定义为名称以"on"字符串开头的公共方法：**onCreateTemplate**、**onGetTemplateList** 等。
 
-Back-end AJAX handlers can return an array of data, throw an exception or redirect to another page (see [AJAX event handlers](../ajax/handlers.md)). You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
+后端 AJAX 处理程序可以返回数据数组、引发异常或重定向到另一个页面(请参阅 [AJAX 事件处理程序](../ajax/handlers.md))。您可以使用 `$this->vars` 设置变量和控制器的 `makePartial` 方法来渲染部件并将其内容作为响应数据的一部分返回。
 
 ```php
 public function onOpenTemplate()
@@ -139,26 +139,26 @@ public function onOpenTemplate()
 }
 ```
 
-### Triggering AJAX Requests
+### 触发 AJAX 请求
 
-The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [front-end AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a backend button.
+可以使用数据属性 API 或 JavaScript API 触发 AJAX 请求。详情请参阅[前端 AJAX 库](../ajax/introduction)。以下示例显示如何使用后端按钮触发请求。
 
 ```html
 <button
     type="button"
     data-request="onDoSomething"
     class="btn btn-default">
-    Do something
+    某个操作
 </button>
 ```
 
-> **Note**: You can specifically target the AJAX handler of a widget using a prefix `widget::onName`. See the [widget AJAX handler article](../backend/widgets.md#ajax-handlers) for more details.
+> **注意**：您可以使用前缀 `widget::onName` 专门针对小部件的 AJAX 处理程序。有关详细信息，请参阅 [小部件AJAX处理程序文章](../backend/widgets.md#ajax-handlers)。
 
-## Overriding a Response
+## 覆盖响应
 
-You can override responses in your backend controllers as a mechanism for making changes to the response of a HTTP request. For example, you may wish to specify a HTTP header for certain actions in your controller, or redirect users if they don't meet certain criteria.
+您可以覆盖后端控制器中的响应，作为更改 HTTP 请求响应的机制。例如，您可能希望为控制器中的某些操作指定 HTTP 标头，或者在用户不符合某些条件时重定向用户。
 
-Overriding a response is useful particularly when extending other controllers. However you may find it useful to call these methods locally.
+覆盖响应非常有用，尤其是在扩展其他控制器时。您会发现在本地调用这些方法很快捷。
 
 ```php
 \Author\Plugin\Controllers\SomeController::extend(function($controller) {
@@ -166,42 +166,42 @@ Overriding a response is useful particularly when extending other controllers. H
 });
 ```
 
-If you want to check the routed action or parameters, you can find these available in the controller `action` and `params` properties.
+如果你想检查路由的动作或参数，你可以在控制器的 `action` 和 `params` 属性中找到这些可用的。
 
 ```php
 Author\Plugin\Controllers\SomeController::extend(function($controller) {
     if ($this->action === 'index') {
-        // Only do it for the index action
+        // 仅对索引执行此操作
     }
 
     if ($this->params[0] ?? null) {
-        // Only if first parameter exists
+        // 仅当第一个参数存在时
     }
 });
 ```
 
-To add a header to your response, you may call the `setResponseHeader` method.
+要在响应中添加标头，您可以调用 `setResponseHeader` 方法。
 
 ```php
 $this->setResponseHeader('Test-Header', 'Test');
 ```
 
-To change the status code of a response, use the `setStatusCode` method.
+要更改响应的状态代码，请使用 `setStatusCode` 方法。
 
 ```php
 $this->setStatusCode(404);
 ```
 
-To override the entire response, call the `setResponse` method, this will force the response regardless of what happens on the page's lifecycle.
+要覆盖整个响应，请调用 `setResponse` 方法，这将强制响应，无论页面生命周期中发生什么。
 
 ```php
-$this->setResponse('Page Not Found');
+$this->setResponse('找不到网页');
 ```
 
-You may also pass a `Response` object to this method.
+您也可以将 `Response` 对象传递给此方法。
 
 ```php
 $this->setResponse(Response::make(...));
 ```
 
-> **Note**: Check out the [Views & Responses article](../services/response-view) for more information on building responses.
+> **注意**：查看 [视图和响应文章](../services/response-view) 了解有关构建响应的更多信息。
