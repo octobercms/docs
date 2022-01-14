@@ -1125,6 +1125,8 @@ Option | Description
 **maxItems** | maximum number of items to allow within the repeater.
 **groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
 **groupKeyFrom** | the group key attribute stored along with the saved data. Default `_group`.
+**showReorder** | displays an interface for sorting items. Default: true
+**showDuplicate** | displays an interface for cloning items. Default: true
 **style** | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
 
 The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
