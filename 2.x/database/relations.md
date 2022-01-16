@@ -91,7 +91,6 @@ The following relations types are available:
 - [Many To Many](#many-to-many)
 - [Has Many Through](#has-many-through)
 - [Polymorphic Relations](#polymorphic-relations)
-- [Many To Many Polymorphic Relations](#many-to-many-polymorphic-relations)
 
 ### One To One
 
