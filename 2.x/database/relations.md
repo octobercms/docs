@@ -90,6 +90,7 @@ The following relations types are available:
 - [One To Many](#one-to-many)
 - [Many To Many](#many-to-many)
 - [Has Many Through](#has-many-through)
+- [Has One Through](#has-one-through)
 - [Polymorphic Relations](#polymorphic-relations)
 
 ### One To One
