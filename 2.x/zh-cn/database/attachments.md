@@ -1,10 +1,10 @@
-# File Attachments
+# 文件附件
 
-Models can support file attachments using a subset of the [polymorphic relationship](../database/relations.md#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
+模型可以使用 [多态关联](../database/relations.md#polymorphic-relations) 的子集来支持文件附件。 `$attachOne` 或 `$attachMany` 关联设计用于将文件链接到称为"附件"的数据库记录。 几乎所有情况下，`System\Models\File` 模型都用于维护这种关系，其中对文件的引用作为记录存储在 `system_files` 表中，并且与父模型具有多态关联。
 
-In the examples below the model has a single Avatar attachment model and many Photo attachment models.
+在下面的示例中，模型有一个 Avatar 附件模型和许多照片附件模型。
 
-A single file attachment:
+单个文件附件：
 
 ```php
 public $attachOne = [
@@ -12,7 +12,7 @@ public $attachOne = [
 ];
 ```
 
-Multiple file attachments:
+多个文件附件：
 
 ```php
 public $attachMany = [
@@ -20,9 +20,9 @@ public $attachMany = [
 ];
 ```
 
-> **Note**: Make sure that your model's database table does not already have an attribute that uses the same name as your attachment relationship. If it does, it will cause a naming conflict and create problems.
+> **注意**：确保模型的数据库表中没有与附件关联使用相同名称的属性。 如果是这样，则会导致命名冲突并产生问题。
 
-Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`:
+受保护的附件被上传到应用程序的 **uploads/protected** 目录，从 Web 直接访问无法访问该目录。 通过将 *public* 参数设置为 `false` 来定义受保护的文件附件：
 
 ```php
 public $attachOne = [
@@ -30,33 +30,33 @@ public $attachOne = [
 ];
 ```
 
-## Creating New Attachments
+## 创建新附件
 
-For singular attach relations (`$attachOne`), you may create an attachment directly via the model relationship, by setting its value using the `Input::file` method, which reads the file data from an input upload.
+对于单一的附加关联(`$attachOne`)，您可以通过模型关联直接创建一个附件，方法是使用 `Input::file` 方法设置其值，该方法从上传输入中读取文件数据。
 
 ```php
 $model->avatar = Input::file('file_input');
 ```
 
-You may also pass a string to the `data` attribute that contains an absolute path to a local file.
+您还可以将字符串传递给 `data` 属性，其中包含本地文件的绝对路径。
 
 ```php
 $model->avatar = '/path/to/somefile.jpg';
 ```
 
-Sometimes it may also be useful to create a `File` instance directly from (raw) data:
+有时，直接从(原始)数据创建`文件`实例也可能很有用：
 
 ```php
 $file = (new System\Models\File)->fromData('Some content', 'sometext.txt');
 ```
 
-For multiple attach relations (`$attachMany`), you may use the `create` method on the relationship instead, notice the file object is associated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
+对于多个附加关联（`$attachMany`），您可以在关联上使用`create`方法，注意文件对象与`data`属性相关联。 如果您愿意，这种方法也可以用于单数关系。
 
 ```php
 $model->avatar()->create(['data' => Input::file('file_input')]);
 ```
 
-Alternatively, you can prepare a File model before hand, then manually associate the relationship later. Notice the `is_public` attribute must be set explicitly using this approach.
+或者，您可以事先准备一个文件模型，然后手动关联关系。 请注意，必须使用`is_public`这种方法设置显式属性。
 
 ```php
 $file = new System\Models\File;
@@ -67,7 +67,7 @@ $file->save();
 $model->avatar()->add($file);
 ```
 
-You can also add a file from a URL. To work this method, you need install cURL PHP Extension.
+您还可以从 URL 添加文件。 要使用此方法，您需要安装 cURL PHP 扩展。
 
 ```php
 $file = new System\Models\File;
@@ -76,21 +76,21 @@ $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg');
 $user->avatar()->add($file);
 ```
 
-Occasionally you may need to change a file name. You may do so by using second method parameter.
+有时您可能需要更改文件名。 您可以通过使用第二个方法参数来做到这一点。
 
 ```php
 $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefilename.jpg');
 ```
 
-## Viewing Attachments
+## 查看附件
 
-The `getPath` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**
+`getPath` 方法返回上传的公共文件的完整 URL。 以下代码将打印类似 **example.com/uploads/public/path/to/avatar.jpg**
 
 ```php
 echo $model->avatar->getPath();
 ```
 
-Returning multiple attachment file paths:
+返回多个附件文件路径：
 
 ```php
 foreach ($model->photos as $photo) {
@@ -98,39 +98,39 @@ foreach ($model->photos as $photo) {
 }
 ```
 
-The `getLocalPath` method will return an absolute path of an uploaded file in the local filesystem.
+`getLocalPath` 方法将返回本地文件系统中上传文件的绝对路径。
 
 ```php
 echo $model->avatar->getLocalPath();
 ```
 
-To output the file contents directly, use the `output` method, this will include the necessary headers for downloading the file:
+要直接输出文件内容，请使用 `output` 方法，这将包括下载文件所需的头文件：
 
 ```php
 echo $model->avatar->output();
 ```
 
-You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter.
+您可以使用 `getThumb` 方法调整图像大小。 该方法采用 3 个参数 - 图像宽度、图像高度和选项参数。
 
-The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
+**width** 和 **height** 参数应指定为数字或 **auto** 字词，以实现自动比例缩放。
 
 ```php
 echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
 ```
 
-Displaying an image on the page.
+在页面上显示图像。
 
 ```twig
 <img src="{{ model.avatar.getThumb(100, 100, {'mode':'exact', 'quality': 80, 'extension': 'webp'}) }}" alt="Description Image" />
 ```
 
-Read more about the available options for `getThumb` on the [image resizer article](../services/resizer.md#resize-parameters).
+在 [图像调整器文章](../services/resizer.md#resize-parameters) 上阅读有关 `getThumb` 可用选项的更多信息。
 
-## Usage Example
+## 用法示例
 
-This section shows a full usage example of the model attachments feature - from defining the relation in a model to displaying the uploaded image on a page.
+本节展示了模型附件功能的完整使用示例——从定义模型中的关联到在页面上显示上传的图像。
 
-Inside your model define a relationship to the `System\Models\File` class, for example:
+在您的模型中定义与 `System\Models\File` 类的关系，例如：
 
 ```php
 class Post extends Model
@@ -141,7 +141,7 @@ class Post extends Model
 }
 ```
 
-Build a form for uploading a file:
+构建一个用于上传文件的表单：
 
 ```php
 <?= Form::open(['files' => true]) ?>
@@ -153,40 +153,40 @@ Build a form for uploading a file:
 <?= Form::close() ?>
 ```
 
-Process the uploaded file on the server and attach it to a model:
+在服务器上处理上传的文件并将其附加到模型：
 
 ```php
-// Find the Blog Post model
+// 查找博客文章模型
 $post = Post::find(1);
 
-// Save the featured image of the Blog Post model
+// 保存博客文章模型的特色图片
 if (Input::hasFile('example_file')) {
     $post->featured_image = Input::file('example_file');
 }
 ```
 
-Alternatively, you can use [deferred binding](../database/relations.md#deferred-binding) to defer the relationship:
+或者，您可以使用 [延迟绑定](../database/relations.md#deferred-binding) 来延迟关联：
 
 ```php
-// Find the Blog Post model
+// 查找博客文章模型
 $post = Post::find(1);
 
-// Look for the postback data 'example_file' in the HTML form above
+// 在上面的 HTML 表单中查找回发数据“example_file”
 $fileFromPost = Input::file('example_file');
 
-// If it exists, save it as the featured image with a deferred session key
+// 如果存在，将其保存为带有延迟会话密钥的特色图像
 if ($fileFromPost) {
     $post->featured_image()->create(['data' => $fileFromPost], $sessionKey);
 }
 ```
 
-Display the uploaded file on a page:
+在页面上显示上传的文件：
 
 ```php
-// Find the Blog Post model again
+// 再次找到博客帖子模型
 $post = Post::find(1);
 
-// Look for the featured image address, otherwise use a default one
+// 寻找特色图片地址，否则使用默认的
 if ($post->featured_image) {
     $featuredImage = $post->featured_image->getPath();
 }
@@ -197,7 +197,7 @@ else {
 <img src="<?= $featuredImage ?>" alt="Featured Image" />
 ```
 
-If you need to access the owner of a file, you can use the `attachment` property of the `File` model:
+如果需要访问文件的所有者，可以使用 `File` 模型的 `attachment` 属性：
 
 ```php
 public $morphTo = [
@@ -205,17 +205,17 @@ public $morphTo = [
 ];
 ```
 
-Example:
+例子：
 
 ```php
 $user = $file->attachment;
 ```
 
-For more information read the [polymorphic relationships](../database/relations.md#polymorphic-relations)
+有关更多信息，请阅读 [多态关联](../database/relations.md#polymorphic-relations)
 
-## Validation Example
+## 验证示例
 
-The example below uses [array validation](../services/validation.md#validating-arrays) to validate `$attachMany` relationships.
+下面的示例使用 [数组验证](../services/validation.md#validating-arrays) 来验证 `$attachMany` 关联。
 
 ```php
 use System\Models\File;
@@ -234,8 +234,8 @@ class Gallery extends Model
         'photos.*' => 'image|max:1000|dimensions:min_width=100,min_height=100'
     ];
 
-    /* some other code */
+    /* 其他一些代码 */
 }
 ```
 
-For more information on the `attribute.*` syntax used above, see [validating arrays](../services/validation.md#validating-arrays).
+有关上面使用的 `attribute.*` 语法的更多信息，请参阅 [验证数组](../services/validation.md#validating-arrays)。

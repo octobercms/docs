@@ -1,18 +1,18 @@
-# Basic Usage
+# 基本用法
 
-Connecting to databases and running queries is a simple process, supported by using either raw SQL, the [query builder](../database/query.md) or [active record models](../database/model.md). Managing database tables and populating seed data is handled by the [migration and seeder process](../database/structure.md).
+连接到数据库和运行Select是一个简单的过程，可以使用原始 SQL、[查询生成器](../database/query.md) 或 [活动记录模型](../database/model.md) 来支持。管理数据库表和填充种子数据由[迁移和播种](../database/structure.md) 处理。
 
-Raw SQL and using the query builder will perform faster and should be used for simple tasks. Active Record is an approach used by the popular framework, Ruby On Rails. It allows an easy interface for performing repetitive tasks like creating, reading, updating and deleting database records. You can learn more about the [active record pattern on Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern).
+原始 SQL 和使用查询生成器将执行得更快，应该用于简单任务。 Active Record 是流行框架 Ruby On Rails 使用的一种方法。它允许一个简单的界面来执行重复性任务，例如创建、读取、更新和删除数据库记录。您可以了解更多关于 [Wikipedia 上的活动记录模式](http://en.wikipedia.org/wiki/Active_record_pattern)。
 
-## Configuration
+## 配置
 
-The database configuration for your application is located in the `config/database.php` file. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for all of the supported database systems are provided in this file.
+应用程序的数据库配置位于 `config/database.php` 文件中。在此文件中，您可以定义所有数据库连接，并指定默认情况下应使用哪个连接。此文件中提供了所有受支持的数据库系统的示例。
 
-### Read / Write Connections
+### 读写分离
 
-Sometimes you may wish to use one database connection for SELECT statements, and another for INSERT, UPDATE, and DELETE statements. It is easy to specify which connection is used whether you are using raw queries, the query builder or a model.
+有时候你希望 SELECT 语句使用一个数据库连接，而 INSERT，UPDATE，和 DELETE 语句使用另一个数据库连接。在 Laravel 中，无论你是使用原生查询，查询构造器，或者是 Eloquent ORM，都能轻松的实现
 
-To see how read / write connections should be configured, let's look at this example:
+为了弄明白读写分离是如何配置的，我们先来看个例子：
 
 ```php
 'mysql' => [
@@ -32,25 +32,25 @@ To see how read / write connections should be configured, let's look at this exa
 ],
 ```
 
-Note that two keys have been added to the configuration array: `read` and `write`. Both of these keys have array values containing a single key: `host`. The rest of the database options for the `read` and `write` connections will be merged from the main `mysql` array.
+注意在以上的例子中，配置数组中增加了三个键，分别是 `read`， `write` 和 `sticky`。 `read` 和 `write` 的键都包含一个键为 `host` 的数组。而 `read` 和 `write` 的其他数据库都在键为 `mysql` 的数组中。
 
-We only need to place items in the `read` and `write` arrays if we wish to override the values in the main array. So, in this case, `192.168.1.1` will be used as the "read" connection, while `192.168.1.2` will be used as the "write" connection. The database credentials, prefix, character set, and all other options in the main `mysql` array will be shared across both connections.
+如果你想重写主数组中的配置，只需要修改 `read` 和 `write` 数组即可。所以，这个例子中： `192.168.1.1`和`192.168.1.2` 将作为 「读」 连接主机，而 `192.168.1.3` 将作为 「写」 连接主机。这两个连接会共享 `mysql` 数组的各项配置，如数据库的凭据(用户名 / 密码)，前缀，字符编码等。
 
-## Running Raw SQL Queries
+## 运行原生 SQL 查询
 
-Once you have configured your database connection, you may run queries using the `Db` facade. The `Db` facade provides methods for each type of query: `select`, `update`, `insert`, `delete`, and `statement`.
+一旦配置好数据库连接后，便可以使用 `DB` facade 运行查询。 `DB` facade 为每种类型的查询提供了方法： `select`，`update`，`insert`，`delete` 和 `statement`。
 
-#### Running a select query
+#### 运行 Select 查询
 
-To run a basic query, we can use the `select` method on the `Db` facade:
+你可以使用 `DB` 门面 的 `select` 方法来运行基础的查询语句：
 
 ```php
 $users = Db::select('select * from users where active = ?', [1]);
 ```
 
-The first argument passed to the `select` method is the raw SQL query, while the second argument is any parameter bindings that need to be bound to the query. Typically, these are the values of the `where` clause constraints. Parameter binding provides protection against SQL injection.
+传递给 `select` 方法的第一个参数就是一个原生的 SQL 查询，而第二个参数则是需要绑定到查询中的参数值。通常，这些值用于约束 `where` 语句。参数绑定用于防止 SQL 注入。
 
-The `select` method will always return an `array` of results. Each result within the array will be a PHP `stdClass` object, allowing you to access the values of the results:
+`select` 方法将始终返回一个数组，数组中的每个结果都是一个 `StdClass` 对象，可以像下面这样访问结果值：
 
 ```php
 foreach ($users as $user) {
@@ -58,63 +58,63 @@ foreach ($users as $user) {
 }
 ```
 
-#### Using named bindings
+#### 使用命名绑定
 
-Instead of using `?` to represent your parameter bindings, you may execute a query using named bindings:
+除了使用 `?` 表示参数绑定外，你也可以使用命名绑定来执行一个查询：
 
 ```php
 $results = Db::select('select * from users where id = :id', ['id' => 1]);
 ```
 
-#### Running an insert statement
+#### 运行插入语句
 
-To execute an `insert` statement, you may use the `insert` method on the `Db` facade. Like `select`, this method takes the raw SQL query as its first argument and bindings as the second argument:
+可以使用 `DB` 门面 的 `insert` 方法来执行 `insert` 语句。与 `select` 一样，该方法将原生 SQL 查询作为其第一个参数，并将绑定数据作为第二个参数：
 
 ```php
 Db::insert('insert into users (id, name) values (?, ?)', [1, 'Joe']);
 ```
 
-#### Running an update statement
+#### 运行更新语句
 
-The `update` method should be used to update existing records in the database. The number of rows affected by the statement will be returned by the method:
+`update` 方法用于更新数据库中现有的记录。该方法返回受该语句影响的行数：
 
 ```php
 $affected = Db::update('update users set votes = 100 where name = ?', ['John']);
 ```
 
-#### Running a delete statement
+#### 运行删除语句
 
-The `delete` method should be used to delete records from the database. Like `update`, the number of rows deleted will be returned:
+`delete` 方法用于从数据库中删除记录。与 `update` 一样，返回受该语句影响的行数：
 
 ```php
 $deleted = Db::delete('delete from users');
 ```
 
-#### Running a general statement
+#### 运行普通语句
 
-Some database statements should not return any value. For these types of operations, you may use the `statement` method on the `Db` facade:
+有些数据库语句不会有任何返回值。对于这些语句，你可以使用 `DB` Facade 的 `statement` 方法来运行：
 
 ```php
 Db::statement('drop table users');
 ```
 
-## Multiple Database Connections
+## 使用多个数据库连接
 
-When using multiple connections, you may access each connection via the `connection` method on the `Db` facade. The `name` passed to the `connection` method should correspond to one of the connections listed in your `config/database.php` configuration file:
+当使用多个数据库连接时，你可以通过 `DB` Facade 的 `connection` 方法访问每一个连接。传递给 `connection`方法的参数 `name` 应该是 `config/database.php` 配置文件中 connections 数组中的一个值：
 
 ```php
 $users = Db::connection('foo')->select(...);
 ```
 
-You may also access the raw, underlying PDO instance using the `getPdo` method on a connection instance:
+你也可以使用一个连接实例上的 `getPdo` 方法访问底层的 PDO 实例：
 
 ```php
 $pdo = Db::connection()->getPdo();
 ```
 
-## Database Transactions
+## 数据库事务
 
-To run a set of operations within a database transaction, you may use the `transaction` method on the `Db` facade. If an exception is thrown within the transaction `Closure`, the transaction will automatically be rolled back. If the `Closure` executes successfully, the transaction will automatically be committed. You don't need to worry about manually rolling back or committing while using the `transaction` method:
+你可以使用 `DB` 门面的 `transaction` 方法在数据库事务中运行一组操作。如果事务的闭包 `Closure` 中出现一个异常，事务将会回滚。如果事务闭包 `Closure` 执行成功，事务将自动提交。一旦你使用了 `transaction` ， 就不再需要担心手动回滚或提交的问题：
 
 ```php
 Db::transaction(function () {
@@ -124,31 +124,31 @@ Db::transaction(function () {
 });
 ```
 
-#### Manually using transactions
+#### 手动使用事务
 
-If you would like to begin a transaction manually and have complete control over rollbacks and commits, you may use the `beginTransaction` method on the `Db` facade:
+如果你想要手动开始一个事务，并且对回滚和提交能够完全控制，那么你可以使用 `DB` 门面的 `beginTransaction` 方法：
 
 ```php
 Db::beginTransaction();
 ```
 
-You can rollback the transaction via the `rollBack` method:
+你可以使用 `rollBack` 方法回滚事务：
 
 ```php
 Db::rollBack();
 ```
 
-Lastly, you can commit a transaction via the `commit` method:
+最后，你可以使用 `commit` 方法提交事务：
 
 ```php
 Db::commit();
 ```
 
-> **Note**: Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query.md) and [model queries](../database/model.md).
+> **注意**：使用 `Db` 门面的事务方法还可以控制 [查询构建器](../database/query.md) 和 [模型查询](../database/model.md) 的事务。
 
-## Database Events
+## 数据库事件
 
-If you would like to receive each SQL query executed by your application, you may use the `listen` method. This method is useful for logging queries or debugging.
+如果你想监控程序执行的每一个 SQL 查询，你可以使用 `listen` 方法。这个方法对于记录查询或调试非常有用。
 
 ```php
 Db::listen(function($sql, $bindings, $time) {
@@ -156,26 +156,26 @@ Db::listen(function($sql, $bindings, $time) {
 });
 ```
 
-Just like [event registration](../services/events.md#where-to-register-listeners), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
+就像 [事件注册](../services/events.md#where-to-register-listeners)一样，您可以在 [插件注册文件](../plugin/registration.md#registration-methods) 的 `boot` 方法中注册查询侦听器。 或者，可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置此逻辑。
 
-### Query Logging
+### 查询记录
 
-When query logging is enabled, a log is kept in memory of all queries that have been run for the current request. Call the `enableQueryLog` method to enable this feature.
+启用查询日志记录后，会在内存中保存为当前请求运行的所有查询的日志。 调用 `enableQueryLog` 方法启用此功能。
 
 ```php
 Db::connection()->enableQueryLog();
 ```
 
-To get an array of the executed queries, you may use the `getQueryLog` method:
+要获取已执行查询的数组，您可以使用 `getQueryLog` 方法：
 
 ```php
 $queries = Db::getQueryLog();
 ```
 
-However, in some cases, such as when inserting a large number of rows, this can cause the application to use excess memory. To disable the log, you may use the `disableQueryLog` method:
+但是，在某些情况下，例如在插入大量行时，这可能会导致应用程序使用过多的内存。 要禁用日志，您可以使用 `disableQueryLog` 方法：
 
 ```php
 Db::connection()->disableQueryLog();
 ```
 
-> **Note**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log.md#helper-functions) instead.
+> **注意**：为了更快地调试，调用 `trace_sql` [助手函数](../services/error-log.md#helper-functions) 可能更有用。
