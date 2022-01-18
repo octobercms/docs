@@ -2,7 +2,7 @@
 
 Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugin localization files are detected by the system automatically. Using localization strings are supported natively in the back-end user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#accessing-localization-strings).
 
-> **Note**: For translating front-end content, [there are plugins that can be used](http://octobercms.com/plugin/rainlab-translate) for this purpose.
+> **Note**: For translating front-end content, [there are plugins that can be used](https://octobercms.com/plugin/rainlab-translate) for this purpose.
 
 ## Localization Directory and File Structure
 

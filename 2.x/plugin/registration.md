@@ -36,11 +36,11 @@ plugins/
       Plugin.php   <=== Plugin Registration File
 ```
 
-> **Note**: if you are developing a plugin for the [Marketplace](http://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
+> **Note**: if you are developing a plugin for the [Marketplace](https://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
 
 ### Plugin Namespaces
 
-Plugin namespaces are essential, especially if you are going to publish your plugins on the [October Marketplace](http://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
+Plugin namespaces are essential, especially if you are going to publish your plugins on the [October Marketplace](https://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
 ## Registration File
 

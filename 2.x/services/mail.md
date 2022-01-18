@@ -6,7 +6,7 @@ October CMS provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `ma
 
 ### Driver prerequisites
 
-Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
 
 #### Mailgun driver
 
