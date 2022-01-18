@@ -326,7 +326,7 @@ class TrafficSources extends ReportWidgetBase
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/master/images/traffic-sources.png)
 
-在报告小部件中，您可以使用任何 [图表或指示器](controls.md)、列表或您希望的任何其他标记。 请记住，报告小部件扩展了通用后端小部件，您可以在报告小部件中使用任何小部件功能。 下一个示例显示了一个列表报告小部件标记。
+在报告小部件中，您可以使用任何 [图表](https://octobercms.com/docs/ui/chart)、列表或您希望的任何其他标记。 请记住，报告小部件扩展了通用后端小部件，您可以在报告小部件中使用任何小部件功能。 下一个示例显示了一个列表报告小部件标记。
 
 ```html
 <div class="report-widget">

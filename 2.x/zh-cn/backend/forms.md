@@ -219,7 +219,7 @@ secondaryTabs:
 
 ### 嵌套字段选择
 
-来自相关模型的字段可以使用 [关系小部件](#relation) 或 [关系管理器](relations.md#relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#property-jsonable)，您可以使用 **relation[field]** 定义的嵌套字段类型。
+来自相关模型的字段可以使用 [关联小部件](#relation) 或 [关联管理器](relations.md#relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#property-jsonable)，您可以使用 **relation[field]** 定义的嵌套字段类型。
 
 ```yaml
 avatar[name]:
@@ -721,7 +721,7 @@ content:
 - [媒体选择器](#widget-mediafinder)
 - [嵌套表单](#widget-nestedform)
 - [记录查找器](#widget-recordfinder)
-- [关系](#widget-relation)
+- [关联](#widget-relation)
 - [循环组件](#widget-repeater)
 - [富文本编辑器/WYSIWYG编辑器](#widget-richeditor)
 - [机密信息](#widget-sensitive)
@@ -1031,9 +1031,9 @@ user:
 **modelClass** | 当 useRelation = false 时用于列出记录的模型类
 
 <a name="widget-relation"></a>
-### 关系
+### 关联(关系)
 
-`relation` - 根据字段关系类型呈现下拉列表或复选框列表。 单一关系显示一个下拉列表，多个关系显示一个复选框列表。 用于显示每个关系的标签来自 `nameFrom` 或 `select` 定义。
+`relation` - 根据字段关系类型呈现下拉列表或复选框列表。 单一关系显示一个下拉列表，多个关联显示一个复选框列表。 用于显示每个关系的标签来自 `nameFrom` 或 `select` 定义。
 
 ```yaml
 categories:

@@ -1,26 +1,26 @@
-# Models
+# 模型
 
-October CMS provides a beautiful and simple Active Record implementation for working with your database, based on [Eloquent by Laravel](http://laravel.com/docs/eloquent). Each database table has a corresponding "Model" which is used to interact with that table. Models allow you to query for data in your tables, as well as insert new records into the table.
+October CMS 基于 [Laravel 的 Eloquent](http://laravel.com/docs/eloquent) 提供了一个漂亮而简单的 Active Record 实现来处理您的数据库。 每个数据库表都有一个相应的"Model"，用于与该表进行交互。 模型允许您查询表中的数据，以及将新记录插入表中。
 
-Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
+模型类位于插件目录的 **models** 子目录中。 模型目录结构示例：
 
 ```
 plugins/
   acme/
     blog/
       models/
-      user/             <=== Config Directory
-        columns.yaml    <=== Config Files
+      user/             <=== 配置目录
+        columns.yaml    <=== 配置文件
         fields.yaml     <==^
-      User.php          <=== Model Class
+      User.php          <=== 模型类
       Plugin.php
 ```
 
-The model configuration directory could contain the model's [list column](../backend/lists.md#defining-list-columns) and [form field](../backend/forms.md#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
+模型配置目录可以包含模型的 [列表字段](../backend/lists.md#defining-list-columns) 和 [form field](../backend/forms.md#defining-form-fields) 定义 . 模型配置目录名与小写的模型类名一致。
 
-## Defining Models
+## 定义模型
 
-In most cases, you should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this:
+在大多数情况下，您应该为每个数据库表创建一个模型类。 所有模型类都必须扩展`Model`类。 插件中使用的模型的最基本表示如下所示：
 
 ```php
 namespace Acme\Blog\Models;
@@ -30,7 +30,7 @@ use Model;
 class Post extends Model
 {
     /**
-     * The table associated with the model.
+     * 与模型关联的表。
      *
      * @var string
      */
@@ -38,11 +38,11 @@ class Post extends Model
 }
 ```
 
-The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
+protected`$table`字段指定模型对应的数据库表。 表名是作者、插件和记录类型名称的蛇形命名名称。
 
-### Supported Properties
+### 支持的属性
 
-There are some standard properties that can be found on models, in addition to those provided by [model traits](traits.md). For example:
+除了 [模型特征](traits.md) 提供的那些之外，还可以在模型上找到一些标准属性。 例如：
 
 ```php
 class User extends Model
@@ -61,29 +61,29 @@ class User extends Model
 }
 ```
 
-Property | Description
+属性 |  描述
 ------------- | -------------
-**$primaryKey** | primary key name used to identify the model.
-**$incrementing** | boolean that if false indicates that the primary key is not an incrementing integer value.
-**$exists** | boolean that if true indicates that the model exists.
-**$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
-**$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
-**$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
-**$fillable** | values are fields accessible to [mass assignment](#mass-assignment).
-**$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
-**$visible** | values are fields made visible when [serializing the model data](../database/serialization.md).
-**$hidden** | values are fields made hidden when [serializing the model data](../database/serialization.md).
-**$connection** | string that contains the [connection name](../database/basics.md#multiple-database-connections) that's utilised by the model by default.
+**$primaryKey** | 用于标识模型的主键名称。
+**$incrementing** | 布尔值，如果 false 表示主键不是递增的整数值。
+**$exists** | 布尔值，如果为 true，则表示模型存在。
+**$dates** | 获取后，值将转换为 Carbon/DateTime 对象的实例。
+**$timestamps** | 布尔值，如果为 true 将自动设置 created_at 和 updated_at 字段。
+**$jsonable** | 值在保存之前被编码为 JSON，并在获取后转换为数组。
+**$fillable** | values 是 [批量赋值](#mass-assignment) 可访问的字段。
+**$guarded** | 值是受 [批量赋值](#mass-assignment) 保护的字段。
+**$visible** | 值是在 [序列化模型数据](../database/serialization.md) 时可见的字段。
+**$hidden** | 值是在 [序列化模型数据](../database/serialization.md) 时隐藏的字段。
+**$connection** | 包含模型默认使用的 [连接名称](../database/basics.md#multiple-database-connections) 的字符串。
 
-#### Primary key
+#### 主键
 
-Models will assume that each table has a primary key column named `id`. You may define a `$primaryKey` property to override this convention.
+Eloquent 也会假设每个数据表都有一个名为 `id` 的主键列。你可以定义一个受保护的 `$primaryKey` 属性来重写约定。
 
 ```php
 class Post extends Model
 {
     /**
-     * The primary key for the model.
+     * 模型的主键
      *
      * @var string
      */
@@ -91,15 +91,15 @@ class Post extends Model
 }
 ```
 
-#### Incrementing
+#### 递增
 
-Models will assume that the primary key is an incrementing integer value, which means that by default the primary key will be cast to an integer automatically. If you wish to use a non-incrementing or a non-numeric primary key you must set the public `$incrementing` property to false.
+模型将假设主键是一个自增的整数值，这意味着默认情况下主键将自动转换为整数。如果您希望使用非递增或非数字主键，则必须将 public `$incrementing`属性设置为 false
 
 ```php
 class Message extends Model
 {
     /**
-     * The primary key for the model is not an integer.
+     * 模型的主键不是整数。
      *
      * @var bool
      */
@@ -107,15 +107,15 @@ class Message extends Model
 }
 ```
 
-#### Timestamps
+#### 时间戳
 
-By default, a model will expect `created_at` and `updated_at` columns to exist on your tables. If you do not wish to have these columns managed automatically, set the `$timestamps` property on your model to `false`:
+默认情况下，模型期望你的数据表中存在 `created_at` 和 `updated_at` 。如果你不想让模型自动管理这两个字段， 请将模型中的 `$timestamps` 属性设置为 `false`：
 
 ```php
 class Post extends Model
 {
     /**
-     * Indicates if the model should be timestamped.
+     * 指示模型是否应加时间戳。
      *
      * @var bool
      */
@@ -123,13 +123,13 @@ class Post extends Model
 }
 ```
 
-If you need to customize the format of your timestamps, set the `$dateFormat` property on your model. This property determines how date attributes are stored in the database, as well as their format when the model is serialized to an array or JSON:
+如果您需要自定义时间戳的格式，请在模型上设置 `$dateFormat` 属性。此属性确定日期属性在数据库中的存储方式，以及模型序列化为数组或 JSON 时的格式：
 
 ```php
 class Post extends Model
 {
     /**
-     * The storage format of the model's date columns.
+     * 模型日期字段的存储格式。
      *
      * @var string
      */
@@ -137,35 +137,35 @@ class Post extends Model
 }
 ```
 
-#### Values stored as JSON
+#### 值存储为 JSON
 
-When attributes names are passed to the `$jsonable` property, the values will be serialized and deserialized from the database as JSON:
+当属性名称被传递给 `$jsonable` 属性时，这些值将作为 JSON 从数据库中序列化和反序列化：
 
 ```php
 class Post extends Model
 {
     /**
-     * @var array Attribute names to encode and decode using JSON.
+     * @var array 使用 JSON 编码和解码的属性名称。
      */
     protected $jsonable = ['data'];
 }
 ```
 
-## Retrieving Models
+## 检索模型
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-a-single-model) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
+当从数据库请求数据时，模型将主要使用 `get` 或 `first` 方法检索值，具体取决于您是希望 [检索多个模型](#retrieving-multiple-models) 还是 [检索单个模型]( #retrieving-a-single-model)。从模型派生的查询返回 [October\Rain\Database\Builder](../api/october/rain/database/builder) 的实例。
 
-### Retrieving Multiple Models
+### 检索多个模型
 
-Once you have created a model and [its associated database table](../database/structure.md#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query.md) allowing you to query the database table associated with the model. For example:
+一旦你创建了一个模型和[其关联的数据库表](../database/structure.md#migration-structure)，你就可以开始从你的数据库中检索数据了。将每个模型视为一个强大的 [查询构建器](../database/query.md)，允许您查询与模型关联的数据库表。例如：
 
 ```php
 $flights = Flight::all();
 ```
 
-#### Accessing column values
+#### 访问字段值
 
-If you have a model instance, you may access the column values of the model by accessing the corresponding property. For example, let's loop through each `Flight` instance returned by our query and echo the value of the `name` column:
+如果您有模型实例，则可以通过访问相应的属性来访问模型的字段值。 例如，让我们遍历查询返回的每个 `Flight` 实例并回显 `name` 字段的值：
 
 ```php
 foreach ($flights as $flight) {
@@ -173,9 +173,9 @@ foreach ($flights as $flight) {
 }
 ```
 
-#### Adding additional constraints
+#### 添加额外的约束
 
-The `all` method will return all of the results in the model's table. Since each model serves as a [query builder](../database/query.md), you may also add constraints to queries, and then use the `get` method to retrieve the results:
+`all` 方法将返回模型表中的所有结果。 由于每个模型都充当 [查询构建器](../database/query.md)，因此您还可以为查询添加约束，然后使用 `get` 方法检索结果：
 
 ```php
 $flights = Flight::where('active', 1)
@@ -184,11 +184,11 @@ $flights = Flight::where('active', 1)
     ->get();
 ```
 
-> **Note**: Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query.md). You may use any of these methods in your model queries.
+> **注意**：由于模型是查询构建器，因此您应该熟悉 [查询构建器](../database/query.md) 上可用的所有方法。 您可以在模型查询中使用这些方法中的任何一种。
 
-#### Collections
+#### 集合
 
-For methods like `all` and `get` which retrieve multiple results, an instance of a `Collection` will be returned. This class provides [a variety of helpful methods](../database/collection.md) for working with your results. Of course, you can simply loop over this collection like an array:
+对于像 `all` 和 `get` 这样检索多个结果的方法，将返回一个 `Collection` 的实例。 此类提供 [各种有用的方法](../database/collection.md) 用于处理您的结果。 当然，你可以像数组一样简单地循环这个集合：
 
 ```php
 foreach ($flights as $flight) {
@@ -196,9 +196,9 @@ foreach ($flights as $flight) {
 }
 ```
 
-#### Chunking results
+#### 分块结果
 
-If you need to process thousands of records, use the `chunk` command. The `chunk` method will retrieve a "chunk" of models, feeding them to a given `Closure` for processing. Using the `chunk` method will conserve memory when working with large result sets:
+如果你需要处理数以千计的记录，请使用 `chunk` 命令。 `chunk` 方法将检索模型的"分块"，将它们提供给给定的 `Closure` 进行处理。 在处理大型结果集时，使用 `chunk` 方法将节省内存：
 
 ```php
 Flight::chunk(200, function ($flights) {
@@ -208,23 +208,23 @@ Flight::chunk(200, function ($flights) {
 });
 ```
 
-The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is retrieved from the database.
+传递给该方法的第一个参数是您希望每个"分块"接收的记录数。 作为第二个参数传递的闭包将为从数据库中检索到的每个块调用。
 
-### Retrieving a Single Model
+### 检索单个模型
 
-In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance:
+传递到方法的第一个参数是希望每个"分块"接收的数据量。闭包作为第二个参数传递，它在每次从数据库中检索分块的时候调用。它将执行数据库查询把检索分块的结果传递给闭包方法。
 
 ```php
-// Retrieve a model by its primary key
+// 通过主键检索模型
 $flight = Flight::find(1);
 
-// Retrieve the first model matching the query constraints
+// 检索与查询约束匹配的第一个模型
 $flight = Flight::where('active', 1)->first();
 ```
 
-#### Not found exceptions
+#### "未找到"异常
 
-Sometimes you may wish to throw an exception if a model is not found. This is particularly useful in routes or controllers. The `findOrFail` and `firstOrFail` methods will retrieve the first result of the query. However, if no result is found, a `Illuminate\Database\Eloquent\ModelNotFoundException` will be thrown:
+有时你希望在未找到模型时抛出异常。这在控制器和路由中非常有用。 `findOrFail` 和 `firstOrFail` 方法会检索查询的第一个结果，如果未找到，将抛出 `Illuminate\Database\Eloquent\ModelNotFoundException` 异常：
 
 ```php
 $model = Flight::findOrFail(1);
@@ -232,7 +232,7 @@ $model = Flight::findOrFail(1);
 $model = Flight::where('legs', '>', 100)->firstOrFail();
 ```
 
-When [developing an API](../services/router.md), if the exception is not caught, a `404` HTTP response is automatically sent back to the user, so it is not necessary to write explicit checks to return `404` responses when using these methods:
+在[开发API](../services/router.md)时，如果未捕获异常，则会自动将'404'HTTP响应发送回用户，因此在使用这些方法时，无需编写显式检查以返回'404'响应：
 
 ```php
 Route::get('/api/flights/{id}', function ($id) {
@@ -240,9 +240,9 @@ Route::get('/api/flights/{id}', function ($id) {
 });
 ```
 
-### Retrieving Aggregates
+### 检索集合
 
-You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query.md#aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
+您还可以使用查询生成器提供的 `count`、`sum`、`max` 和其他 [聚合函数](../database/query.md#aggregates)。 这些方法返回适当的标量值而不是完整的模型实例：
 
 ```php
 $count = Flight::where('active', 1)->count();
@@ -250,33 +250,33 @@ $count = Flight::where('active', 1)->count();
 $max = Flight::where('active', 1)->max('price');
 ```
 
-## Inserting & Updating Models
+## 插入 & 更新模型
 
-Inserting and updating data are the cornerstone feature of models, it makes the process effortless when compared to traditional SQL statements.
+插入和更新数据是模型的基本功能，与传统的 SQL 语句相比，它使过程变得轻松。
 
-### Basic Inserts
+### 插入
 
-To create a new record in the database, simply create a new model instance, set attributes on the model, then call the `save` method:
+要在数据库中创建新记录，只需创建一个新模型实例，在模型上设置属性，然后调用 `save` 方法：
 
 ```php
 $flight = new Flight;
-$flight->name = 'Sydney to Canberra';
+$flight->name = '悉尼飞往堪培拉';
 $flight->save();
 ```
 
-In this example, we simply create a new instance of the `Flight` model and assign the `name` attribute. When we call the `save` method, a record will be inserted into the database. The `created_at` and `updated_at` timestamps will automatically be set too, so there is no need to set them manually.
+在这个例子中，我们只是创建了一个新的 `Flight` 模型实例并分配了 `name` 属性。 当我们调用 `save` 方法时，一条记录将被插入到数据库中。 `created_at` 和 `updated_at` 时间戳也会自动设置，因此无需手动设置。
 
-### Basic Updates
+### 更新
 
-The `save` method may also be used to update models that already exist in the database. To update a model, you should retrieve it, set any attributes you wish to update, and then call the `save` method. Again, the `updated_at` timestamp will automatically be updated, so there is no need to manually set its value:
+`save` 方法也可以用来更新数据库中已经存在的模型。 要更新模型，您应该检索它，设置您希望更新的任何属性，然后调用 `save` 方法。 同样，`updated_at` 时间戳将自动更新，因此无需手动设置其值：
 
 ```php
 $flight = Flight::find(1);
-$flight->name = 'Darwin to Adelaide';
+$flight->name = '上海飞往北京';
 $flight->save();
 ```
 
-Updates can also be performed against any number of models that match a given query. In this example, all flights that are `active` and have a `destination` of `San Diego` will be marked as delayed:
+还可以针对与给定查询匹配的任意数量的模型执行更新。 在此示例中，所有"活动"且"目的地"为"圣地亚哥"的航班都将被标记为延误：
 
 ```php
 Flight::where('is_active', true)
@@ -284,7 +284,7 @@ Flight::where('is_active', true)
     ->update(['delayed' => true]);
 ```
 
-The `update` method expects an array of column and value pairs representing the columns that should be updated.
+`update` 方法需要一个表示应该更新的列的字段和值的数组。
 
 <!--
 #### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
@@ -299,19 +299,19 @@ If you would like to perform multiple "upserts" in a single query, then you shou
 > **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
 -->
 
-### Mass Assignment
+### 批量赋值
 
-You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create` or `fill` method.
+你也可以使用 `create` 方法来保存新模型，此方法会返回模型实例。不过，在使用之前，您需要在模型上指定一个 `fillable` 或 `guarded` 属性，因为所有模型都默认不可进行批量赋值。注意 `fillable` 或 `guarded` 都不会影响后端表单的提交，只影响 `create` 或 `fill` 方法。
 
-A mass-assignment vulnerability occurs when a user passes an unexpected HTTP parameter through a request, and that parameter changes a column in your database you did not expect. For example, a malicious user might send an `is_admin` parameter through an HTTP request, which is then mapped onto your model's `create` method, allowing the user to escalate themselves to an administrator.
+当用户通过 HTTP 请求传入一个意外的参数，并且该参数更改了数据库中你不需要更改的字段时。比如：恶意用户可能会通过 HTTP 请求传入 `is_admin` 参数，然后将其传给 `create` 方法，此操作能让用户将自己升级成管理员。
 
-To get started, you should define which model attributes you want to make mass assignable. You may do this using the `$fillable` property on the model. For example, let's make the `name` attribute of our `Flight` model mass assignable:
+所以，在开始之前，你应该定义好模型上的哪些属性是可以被批量赋值的。你可以通过模型上的 `$fillable` 属性来实现。 例如：让 `Flight` 模型的 `name` 属性可以被批量赋值：
 
 ```php
 class Flight extends Model
 {
     /**
-     * The attributes that are mass assignable.
+     * 可批量分配的属性。
      *
      * @var array
      */
@@ -319,19 +319,19 @@ class Flight extends Model
 }
 ```
 
-Once we have made the attributes mass assignable, we can use the `create` method to insert a new record in the database. The `create` method returns the saved model instance:
+一旦我们设置好了可以批量赋值的属性，就可以通过 `create` 方法插入新数据到数据库中了。 `create` 方法将返回保存的模型实例：
 
 ```php
 $flight = Flight::create(['name' => 'Flight 10']);
 ```
 
-While `$fillable` serves as a "white list" of attributes that should be mass assignable, you may also choose to use `$guarded`. The `$guarded` property should contain an array of attributes that you do not want to be mass assignable. All other attributes not in the array will be mass assignable. So, `$guarded` functions like a "black list". Of course, you should use either `$fillable` or `$guarded` - not both:
+`$fillable` 可以看作批量赋值的「白名单」, 你也可以使用 `$guarded` 属性来实现。 `$guarded` 属性包含的是不允许批量赋值的数组。也就是说， `$guarded` 从功能上将更像是一个「黑名单」。注意：你只能使用 `$fillable` 或 `$guarded` 二者中的一个，不可同时使用：
 
 ```php
 class Flight extends Model
 {
     /**
-     * The attributes that aren't mass assignable.
+     * 不可批量分配的属性。
      *
      * @var array
      */
@@ -339,35 +339,35 @@ class Flight extends Model
 }
 ```
 
-In the example above, all attributes **except for `price`** will be mass assignable.
+在上面的示例中，**除 `price`** 之外的所有属性都可以批量赋值。
 
-#### Other creation methods
+####其他创建方式
 
-Sometimes you may wish to only instantiate a new instance of a model. You can do this using the `make` method. The `make` method will simply return a new instance without saving or creating anything.
+有时您可能希望只实例化模型的新实例。你可以使用 `make` 方法来做到这一点。 `make` 方法将简单地返回一个新实例，而不保存或创建任何内容。
 
 ```php
 $flight = Flight::make(['name' => 'Flight 10']);
 
-// Functionally the same as...
+// 功能与...相同
 $flight = new Flight;
 $flight->fill(['name' => 'Flight 10']);
 ```
 
-There are two other methods you may use to create models by mass assigning attributes: `firstOrCreate` and `firstOrNew`. The `firstOrCreate` method will attempt to locate a database record using the given column / value pairs. If the model can not be found in the database, a record will be inserted with the given attributes.
+这里有两个你可能用来批量赋值的方法： `firstOrCreate` 和 `firstOrNew`。`firstOrCreate` 方法会通过给定的 列 / 值 来匹配数据库中的数据。如果在数据库中找不到对应的模型， 则会从第一个参数的属性乃至第二个参数的属性中创建一条记录插入到数据库。
 
-The `firstOrNew` method, like `firstOrCreate` will attempt to locate a record in the database matching the given attributes. However, if a model is not found, a new model instance will be returned. Note that the model returned by `firstOrNew` has not yet been persisted to the database. You will need to call `save` manually to persist it:
+`firstOrNew` 方法像 `firstOrCreate` 方法一样尝试通过给定的属性查找数据库中的记录。不同的是，如果 `firstOrNew` 方法找不到对应的模型，会返回一个新的模型实例。注意 `firstOrNew` 返回的模型实例尚未保存到数据库中，你需要手动调用 `save` 方法来保存：
 
 ```php
-// Retrieve the flight by the attributes, otherwise create it
+// 通过属性检索航班，否则创建它
 $flight = Flight::firstOrCreate(['name' => 'Flight 10']);
 
-// Retrieve the flight by the attributes, or instantiate a new instance
+// 通过属性检索航班，或实例化一个新实例
 $flight = Flight::firstOrNew(['name' => 'Flight 10']);
 ```
 
-## Deleting Models
+## 删除模型
 
-To delete a model, call the `delete` method on a model instance:
+要删除模型，请在模型实例上调用 `delete` 方法：
 
 ```php
 $flight = Flight::find(1);
@@ -375,9 +375,9 @@ $flight = Flight::find(1);
 $flight->delete();
 ```
 
-#### Deleting an existing model by key
+#### 通过主键删除模型
 
-In the example above, we are retrieving the model from the database before calling the `delete` method. However, if you know the primary key of the model, you may delete the model without retrieving it. To do so, call the `destroy` method:
+在上面的示例中，我们在调用`delete`方法之前从数据库中检索模型。 但是，如果您知道模型的主键，则可以不检索而直接删除模型。 为此，请调用 `destroy` 方法：
 
 ```php
 Flight::destroy(1);
@@ -387,25 +387,25 @@ Flight::destroy([1, 2, 3]);
 Flight::destroy(1, 2, 3);
 ```
 
-#### Deleting Models by query
+#### 通过查询删除模型
 
-You may also run a delete query on a set of models. In this example, we will delete all flights that are marked as inactive:
+您还可以对一组模型运行删除查询。 在此示例中，我们将删除所有标记为非活动的航班：
 
 ```php
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
-> **Note**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
+> **注意**：比较重要的一点是在直接从查询中删除记录时不会触发[模型事件](#model-events)
 
-## Query Scopes
+## 查询范围
 
-Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
+范围允许您定义可以在整个应用程序中轻松重用的通用约束集。 例如，您可能需要经常检索所有被认为"受欢迎"的用户。 要定义范围，只需在模型方法前面加上 `scope`：
 
 ```php
 class User extends Model
 {
     /**
-     * Scope a query to only include popular users.
+     * 将查询范围限定为仅包括受欢迎的用户。
      */
     public function scopePopular($query)
     {
@@ -413,7 +413,7 @@ class User extends Model
     }
 
     /**
-     * Scope a query to only include active users.
+     * 将查询范围限定为仅包括活动用户。
      */
     public function scopeActive($query)
     {
@@ -422,23 +422,23 @@ class User extends Model
 }
 ```
 
-#### Utilizing a query scope
+#### 使用查询范围
 
-Once the scope has been defined, you may call the scope methods when querying the model. However, you do not need to include the `scope` prefix when calling the method. You can even chain calls to various scopes, for example:
+一旦定义了范围，您就可以在查询模型时调用范围方法。不过，在调用这些方法时不必包含 `scope` 前缀。甚至可以链式调用多个范围，例如：
 
 ```php
 $users = User::popular()->active()->orderBy('created_at')->get();
 ```
 
-#### Dynamic scopes
+#### 动态范围
 
-Sometimes you may wish to define a scope that accepts parameters. To get started, just add your additional parameters to your scope. Scope parameters should be defined after the `$query` argument:
+有时您可能希望定义一个接受参数的范围。 要开始，只需将您的附加参数添加到您的范围。 范围参数应该在 `$query` 参数之后定义：
 
 ```php
 class User extends Model
 {
     /**
-     * Scope a query to only include users of a given type.
+     * 将查询范围限定为仅包括给定类型的用户。
      */
     public function scopeApplyType($query, $type)
     {
@@ -447,38 +447,38 @@ class User extends Model
 }
 ```
 
-Now you may pass the parameters when calling the scope:
+现在您可以在调用范围时传递参数：
 
 ```php
 $users = User::applyType('admin')->get();
 ```
 
-## Events
+现在您可以在调用范围时传递参数：
+## 事件
+模型会触发几个事件，允许您连接到模型生命周期中的各个点。 每次在数据库中保存或更新特定模型类时，事件允许您轻松执行代码。 事件是通过覆盖类中的特殊方法来定义的，可以使用以下方法覆盖：
 
-Models fire several events, allowing you to hook into various points in the model's lifecycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
-
-Event | Description
+事件 | 描述
 ------------- | -------------
-**beforeCreate** | before the model is saved, when first created.
-**afterCreate** | after the model is saved, when first created.
-**beforeSave** | before the model is saved, either created or updated.
-**afterSave** | after the model is saved, either created or updated.
-**beforeValidate** | before the supplied model data is validated.
-**afterValidate** | after the supplied model data has been validated.
-**beforeUpdate** | before an existing model is saved.
-**afterUpdate** | after an existing model is saved.
-**beforeDelete** | before an existing model is deleted.
-**afterDelete** | after an existing model is deleted.
-**beforeRestore** | before a soft-deleted model is restored.
-**afterRestore** | after a soft-deleted model has been restored.
-**beforeFetch** | before an existing model is populated.
-**afterFetch** | after an existing model has been populated.
+**beforeCreate** | 在模型保存之前，首次创建时。
+**afterCreate** | 模型保存后，首次创建时。
+**beforeSave** | 在保存模型之前，创建或更新模型。
+**afterSave** | 保存模型后，创建或更新模型。
+**beforeValidate** | 在验证提供的模型数据之前。
+**afterValidate** | 提供的模型数据经过验证后。
+**beforeUpdate** | 在保存现有模型之前。
+**afterUpdate** | 保存现有模型后。
+**beforeDelete** | 在删除现有模型之前。
+**afterDelete** | 删除现有模型后。
+**beforeRestore** | 在恢复软删除的模型之前。
+**afterRestore** | 恢复软删除的模型后。
+**beforeFetch** | 在填充现有模型之前。
+**afterFetch** | 在填充现有模型之后。
 
-An example of using an event:
+使用事件的示例：
 
 ```php
 /**
- * Generate a URL slug for this model
+ * 为这个模型生成一个 URL slug
  */
 public function beforeCreate()
 {
@@ -486,17 +486,17 @@ public function beforeCreate()
 }
 ```
 
-> **Note**: Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
+> **注意**：使用 [延迟绑定](relations#deferred-binding) 创建的关系(即：文件附件)如果尚未提交，则在 `afterSave` 模型事件中将不可用。 要访问未提交的绑定，请在关系上使用 `withDeferred($sessionKey)` 方法。 示例：`$this->images()->withDeferred(post('_session_key'))->get();`
 
-### Basic usage
+### 基本用法
 
-Whenever a new model is saved for the first time, the `beforeCreate` and `afterCreate` events will fire. If a model already existed in the database and the `save` method is called, the `beforeUpdate` / `afterUpdate` events will fire. However, in both cases, the `beforeSave` / `afterSave` events will fire.
+每当第一次保存新模型时，`beforeCreate` 和 `afterCreate` 事件都会触发。 如果一个模型已经存在于数据库中并且调用了 `save` 方法，`beforeUpdate` / `afterUpdate` 事件将被触发。 但是，在这两种情况下，`beforeSave` / `afterSave` 事件都会触发。
 
-For example, let's define an event listener that populates the slug attribute when a model is first created:
+例如，让我们定义一个事件侦听器，在第一次创建模型时填充 slug 属性：
 
 ```php
 /**
- * Generate a URL slug for this model
+ * 为这个模型生成一个 URL slug
  */
 public function beforeCreate()
 {
@@ -504,7 +504,7 @@ public function beforeCreate()
 }
 ```
 
-Returning `false` from an event will cancel the `save` / `update` operation:
+从事件中返回 `false` 将取消 `save` / `update` 操作：
 
 ```php
 public function beforeCreate()
@@ -515,18 +515,18 @@ public function beforeCreate()
 }
 ```
 
-It's possible to access old values using the `original` attribute. For example:
+可以使用 `original` 属性访问旧值。 例如：
 
 ```php
 public function afterUpdate()
 {
     if ($this->title != $this->original['title']) {
-        // title changed
+        // 标题已更改
     }
 }
 ```
 
-You can externally bind to [local events](../services/events.md) for a single instance of a model using the `bindEvent` method. The event name should be the same as the method override name, prefixed with `model.`.
+您可以使用 `bindEvent` 方法从外部绑定到模型的单个实例的 [本地事件](../services/events.md)。 事件名称应与方法覆盖名称相同，前缀为`model.`。
 
 ```php
 $flight = new Flight;
@@ -535,11 +535,11 @@ $flight->bindEvent('model.beforeCreate', function() use ($model) {
 });
 ```
 
-## Extending Models
+## 扩展模型
 
-Since models are [equipped to use behaviors](../services/behaviors.md), they can be extended with the static `extend` method. The method takes a closure and passes the model object into it.
+由于模型 [配备使用行为](../services/behaviors.md)，它们可以使用静态的 `extend` 方法进行扩展。 该方法接受一个闭包并将模型对象传递给它。
 
-Inside the closure you can add relations to the model. Here we extend the `Backend\Models\User` model to include a profile (has one) relationship referencing the `Acme\Demo\Models\Profile` model.
+在闭包内，您可以向模型添加关系。 在这里，我们扩展了 `Backend\Models\User` 模型，以包含引用 `Acme\Demo\Models\Profile` 模型的配置文件（有一个）关系。
 
 ```php
 \Backend\Models\User::extend(function($model) {
@@ -547,7 +547,7 @@ Inside the closure you can add relations to the model. Here we extend the `Backe
 });
 ```
 
-This approach can also be used to bind to [local events](#events), the following code listens for the `model.beforeSave` event.
+这种方法也可以用来绑定到 [本地事件](#events)，下面的代码监听 `model.beforeSave` 事件。
 
 ```php
 \Backend\Models\User::extend(function($model) {
@@ -557,22 +557,22 @@ This approach can also be used to bind to [local events](#events), the following
 });
 ```
 
-Additionally, a few methods exist to extend protected model properties.
+此外，还有一些方法可以扩展受保护的模型属性。
 
 ```php
 \Backend\Models\User::extend(function($model) {
-    // Add cast attributes
+    // 添加演员属性
     $model->addCasts([
         'some_extended_field' => 'int',
     ]);
 
-    // Add a date attribute
+    // 添加日期属性
     $model->addDateAttribute('updated_at');
 
-    // Adds fillable or jsonable fields
+    // 添加可填充或 jsonable 字段
     $model->addFillable('first_name');
     $model->addJsonable('some_data');
 });
 ```
 
-> **Note**: Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
+> **注意**：通常放置代码的最佳位置是在插件注册类的`boot`方法中，因为这将在每个请求上运行，确保您对模型所做的扩展随处可用。

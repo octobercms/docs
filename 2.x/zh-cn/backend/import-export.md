@@ -89,7 +89,7 @@ export:
 **title** | 页面标题，可以引用 [多语言字符串](../plugin/localization.md)。
 **fileName** | 用于导出文件的文件名，默认为 **export.csv**。
 **list** | 定义可用于导出的列表列。
-**form** | 提供用作导入选项的附加字段，可选。
+**form** | 提供用作导出选项的附加字段，可选。
 **redirect** | 导出完成时的重定向页面，可选。
 **useList** | 设置为 true 或列表定义的值以启用 [与列表集成](#list-behavior-integration)，默认值：false。
 

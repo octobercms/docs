@@ -1,10 +1,10 @@
-# Structure & Seeding
+# 迁移和播种机(Seeding)
 
-Migrations and seed files allow you to build, modify and populate database tables. They are primarily used by a [plugin update file](../plugin/updates.md) and are paired with the version history of a plugin. All classes are stored in the `updates` directory of a plugin. Migrations should tell a story about your database history and this story can be played both forwards and backwards to build up and tear down the tables.
+迁移和种子文件允许您构建、修改和填充数据库表。 它们主要由 [插件更新文件](../plugin/updates.md) 使用，并与插件的版本历史记录配对。 所有类都存储在插件的`updates`目录中。 迁移应该记录一个关于您的数据库修改历史，并且这个历史可以向前和向后回滚，以建立和拆除表。
 
-## Migration Structure
+## 迁移结构
 
-A migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the [schema builder](#creating-tables) to expressively create and modify tables. For example, let's look at a sample migration that creates a `october_blog_posts` table:
+迁移文件应该定义一个扩展 `October\Rain\Database\Updates\Migration` 类并包含两个方法： `up` 和 `down`。`up` 方法是用于新增数据库的数据表、字段或者索引的，而`down` 方法应该与 `up` 方法的执行操作相反。在这两种方法中，您都可以使用 [结构生成器](#creating-tables) 来创建和修改表。 例如，让我们看一个创建 `october_blog_posts` 表的示例迁移：
 
 ```php
 <?php namespace Acme\Blog\Updates;
@@ -37,9 +37,9 @@ class CreatePostsTable extends Migration
 }
 ```
 
-### Creating Tables
+### 创建表
 
-To create a new database table, use the `create` method on the `Schema` facade. The `create` method accepts two arguments. The first is the name of the table, while the second is a `Closure` which receives an object used to define the new table:
+要创建一个新的数据库表，请使用 `Schema`门面上的 create 方法。 `create` 方法接受两个参数。 第一个是表的名称，而第二个是一个`Closure`，它接收一个用于定义新表的对象：
 
 ```php
 Schema::create('users', function ($table) {
@@ -47,11 +47,11 @@ Schema::create('users', function ($table) {
 });
 ```
 
-Of course, when creating the table, you may use any of the schema builder's [column methods](#creating-columns) to define the table's columns.
+在创建数据表时，你可以使用结构生成器的任何 [字段方法](#creating-columns) 去定义数据表的字段。
 
-#### Checking for table / column existence
+#### 检查表/列是否存在
 
-You may easily check for the existence of a table or column using the `hasTable` and `hasColumn` methods:
+你可以使用`hasTable` 和 `hasColumn`方法轻松的检查数据表和字段是否存在：
 
 ```php
 if (Schema::hasTable('users')) {
@@ -63,9 +63,9 @@ if (Schema::hasColumn('users', 'email')) {
 }
 ```
 
-#### Connection & storage engine
+#### 数据库连接和存储引擎
 
-If you want to perform a schema operation on a database connection that is not your default connection, use the `connection` method:
+如果你想要对非默认连接的数据库连接执行结构操作，请使用`connection` 方法：
 
 ```php
 Schema::connection('foo')->create('users', function ($table) {
@@ -73,7 +73,7 @@ Schema::connection('foo')->create('users', function ($table) {
 });
 ```
 
-To set the storage engine for a table, set the `engine` property on the schema builder:
+要为表设置存储引擎，请在结构生成器上设置 `engine` 属性：
 
 ```php
 Schema::create('users', function ($table) {
@@ -83,15 +83,15 @@ Schema::create('users', function ($table) {
 });
 ```
 
-### Renaming / Dropping Tables
+### 重命名 / 删除 数据表
 
-To rename an existing database table, use the `rename` method:
+重命名一个存在的数据库表，请使用 `rename`方法：
 
 ```php
 Schema::rename($from, $to);
 ```
 
-To drop an existing table, you may use the `drop` or `dropIfExists` methods:
+删除一个存在的数据表，你可以使用`drop` 或者 `dropIfExists`方法
 
 ```php
 Schema::drop('users');
@@ -99,9 +99,9 @@ Schema::drop('users');
 Schema::dropIfExists('users');
 ```
 
-### Creating Columns
+### 创建字段
 
-To update an existing table, we will use the `table` method on the `Schema` facade. Like the `create` method, the `table` method accepts two arguments, the name of the table and a `Closure` that receives an object we can use to add columns to the table:
+在`Schema` 门面中可以使用`table`方法来更新已存在的数据表。和 `create`方法一样，`table` 方法接受两个参数：一个是数据表的名字，另一个是`Closure`，它接收我们可以用来向表中添加字段的对象：
 
 ```php
 Schema::table('users', function ($table) {
@@ -109,46 +109,46 @@ Schema::table('users', function ($table) {
 });
 ```
 
-#### Available Column Types
+#### 可用的字段类型
 
-Of course, the schema builder contains a variety of column types that you may use when building your tables:
+数据库结构生成器包含构建表时可以指定的各种字段类型：
 
-Command  | Description
+命令  |  描述
 ------------- | -------------
-`$table->bigIncrements('id');`  |  Incrementing ID (primary key) using a "UNSIGNED BIG INTEGER" equivalent.
-`$table->bigInteger('votes');`  |  BIGINT equivalent for the database.
-`$table->binary('data');`  |  BLOB equivalent for the database.
-`$table->boolean('confirmed');`  |  BOOLEAN equivalent for the database.
-`$table->char('name', 4);`  |  CHAR equivalent with a length.
-`$table->date('created_at');`  |  DATE equivalent for the database.
-`$table->dateTime('created_at');`  |  DATETIME equivalent for the database.
-`$table->decimal('amount', 5, 2);`  |  DECIMAL equivalent with a precision and scale.
-`$table->double('column', 15, 8);`  |  DOUBLE equivalent with precision, 15 digits in total and 8 after the decimal point.
-`$table->enum('choices', ['foo', 'bar']);` | ENUM equivalent for the database.
-`$table->float('amount');`  |  FLOAT equivalent for the database.
-`$table->increments('id');`  |  Incrementing ID (primary key) using a "UNSIGNED INTEGER" equivalent.
-`$table->integer('votes');`  |  INTEGER equivalent for the database.
-`$table->json('options');`  |  JSON equivalent for the database.
-`$table->jsonb('options');`  |  JSONB equivalent for the database.
-`$table->longText('description');`  |  LONGTEXT equivalent for the database.
-`$table->mediumInteger('numbers');`  |  MEDIUMINT equivalent for the database.
-`$table->mediumText('description');`  |  MEDIUMTEXT equivalent for the database.
-`$table->morphs('taggable');`  |  Adds INTEGER `taggable_id` and STRING `taggable_type`.
-`$table->nullableTimestamps();`  |  Same as `timestamps()`, except allows NULLs.
-`$table->rememberToken();`  |  Adds `remember_token` as VARCHAR(100) NULL.
-`$table->smallInteger('votes');`  |  SMALLINT equivalent for the database.
-`$table->softDeletes();`  |  Adds `deleted_at` column for soft deletes.
-`$table->string('email');`  |  VARCHAR equivalent column.
-`$table->string('name', 100);`  |  VARCHAR equivalent with a length.
-`$table->text('description');`  |  TEXT equivalent for the database.
-`$table->time('sunrise');`  |  TIME equivalent for the database.
-`$table->tinyInteger('numbers');`  |  TINYINT equivalent for the database.
-`$table->timestamp('added_on');`  |  TIMESTAMP equivalent for the database.
-`$table->timestamps();`  |  Adds `created_at` and `updated_at` columns.
+`$table->bigIncrements('id');`  |  递增 ID(主键)，相当于「UNSIGNED BIG INTEGER」
+`$table->bigInteger('votes');`  | 相当于 BIGINT
+`$table->binary('data');`  |  相当于 BLOB
+`$table->boolean('confirmed');`  |  相当于 BOOLEAN
+`$table->char('name', 4);`  |  相当于带有长度的 CHAR
+`$table->date('created_at');`  |  相当于 DATE
+`$table->dateTime('created_at');`  |  相当于 DATETIME
+`$table->decimal('amount', 5, 2);`  |  相当于带有精度与基数 DECIMAL
+`$table->double('column', 15, 8);`  |  相当于带有精度与基数 DOUBLE, 共 15 位，小数点后 8 位
+`$table->enum('choices', ['foo', 'bar']);` | 相当于 ENUM
+`$table->float('amount');`  |  相当于带有精度与基数 FLOAT
+`$table->increments('id');`  |  递增的 ID (主键)，相当于「UNSIGNED INTEGER」
+`$table->integer('votes');`  |  相当于 INTEGER
+`$table->json('options');`  |  相当于 JSON
+`$table->jsonb('options');`  |  相当于 JSONB
+`$table->longText('description');`  |  相当于 LONGTEXT
+`$table->mediumInteger('numbers');`  |  相当于 MEDIUMINT
+`$table->mediumText('description');`  |  相当于 MEDIUMTEXT
+`$table->morphs('taggable');`  |  相当于加入递增的 `taggable_id` 与字符串 `taggable_type`
+`$table->nullableTimestamps();`  | 相当于可空版本的 `timestamps()` 字段
+`$table->rememberToken();`  |  相当于可空版本 VARCHAR(100) NULL 的 `remember_token` 字段
+`$table->smallInteger('votes');`  |  相当于 SMALLINT
+`$table->softDeletes();`  |  相当于为软删除添加一个可空的 `deleted_at` 字段
+`$table->string('email');`  |  相当于 VARCHAR
+`$table->string('name', 100);`  |  相当于带长度的 VARCHAR
+`$table->text('description');`  | 相当于 TEXT
+`$table->time('sunrise');`  |  相当于 TIME
+`$table->tinyInteger('numbers');`  |  相当于 TINYINT
+`$table->timestamp('added_on');`  |  相当于 TIMESTAMP
+`$table->timestamps();`  |  相当于可空的 `created_at` 和 `updated_at` TIMESTAMP
 
-#### Column Modifiers
+### 字段修饰
 
-In addition to the column types listed above, there are several other column "modifiers" which you may use while adding the column. For example, to make the column "nullable", you may use the `nullable` method:
+除了上述列出的字段类型之外，还有几个可以在添加字段到数据库表时使用的 “修饰符”。例如，如果要把字段设置为 “可空 "， 你可以使用 `nullable` 方法
 
 ```php
 Schema::table('users', function ($table) {
@@ -156,20 +156,21 @@ Schema::table('users', function ($table) {
 });
 ```
 
-Below is a list of all the available column modifiers. This list does not include the [index modifiers](#creating-indexes):
+以下是所有可用的字段修饰符的列表。此列表不包括 [索引修饰符](#creating-indexes)：
 
-Modifier  | Description
+命令  |  描述
 ------------- | -------------
-`->nullable()`  |  Allow NULL values to be inserted into the column
-`->default($value)`  |  Specify a "default" value for the column
-`->unsigned()`  |  Set `integer` columns to `UNSIGNED`
-`->first()`  |  Place the column "first" in the table (MySQL Only)
-`->after('column')`  |  Place the column "after" another column (MySQL Only)
-`->comment('my comment')`  |  Add a comment to a column (MySQL Only)
+`->nullable()`  |  此字段允许写入 NULL 值
+`->default($value)`  |  为字段指定 "默认" 值
+`->unsigned()`  |  设置 INTEGER 类型的字段为 UNSIGNED
+`->first()`  |  将此字段放置在数据表的 "首位" (MySQL)
+`->after('column')`  |   将此字段放置在其它字段 "之后" (MySQL)
+`->comment('my comment')`  |  为字段增加注释 (MySQL)
 
-### Modifying Columns
+### 修改字段
 
-The `change` method allows you to modify an existing column to a new type, or modify the column's attributes. For example, you may wish to increase the size of a string column. To see the `change` method in action, let's increase the size of the `name` column from 25 to 50:
+`change` 方法可以将现有的字段类型修改为新的类型或修改属性。
+比如，你可能想增加字符串字段的长度，可以使用 `change` 方法把 `name` 字段的长度从 25 增加到 50：
 
 ```php
 Schema::table('users', function ($table) {
@@ -177,7 +178,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
-We could also modify a column to be nullable:
+我们同样可以将字段修改为可空:
 
 ```php
 Schema::table('users', function ($table) {
@@ -185,9 +186,9 @@ Schema::table('users', function ($table) {
 });
 ```
 
-#### Renaming Columns
+#### 重命名字段
 
-To rename a column, you may use the `renameColumn` method on the Schema builder:
+可以使用结构生成器上的 `renameColumn` 方法来重命名字段。
 
 ```php
 Schema::table('users', function ($table) {
@@ -195,11 +196,11 @@ Schema::table('users', function ($table) {
 });
 ```
 
-> **Note**: Renaming columns in a table with a `enum` column is not currently supported.
+> **注意**: 当前不支持 enum 类型的字段重命名
 
-### Dropping Columns
+### 删除字段
 
-To drop a column, use the `dropColumn` method on the Schema builder:
+可以使用结构生成器上的 `dropColumn` 方法来删除字段。
 
 ```php
 Schema::table('users', function ($table) {
@@ -207,7 +208,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
-You may drop multiple columns from a table by passing an array of column names to the `dropColumn` method:
+你可以传递一个字段数组给 `dropColumn` 方法来删除多个字段：
 
 ```php
 Schema::table('users', function ($table) {
@@ -215,70 +216,70 @@ Schema::table('users', function ($table) {
 });
 ```
 
-### Creating Indexes
+### 创建索引
 
-The schema builder supports several types of indexes. First, let's look at an example that specifies a column's values should be unique. To create the index, we can simply chain the `unique` method onto the column definition:
+结构生成器支持多种类型的索引。首先，先指定字段值唯一，即简单地在字段定义之后链式调用 `unique` 方法来创建索引，例如：
 
 ```php
 $table->string('email')->unique();
 ```
 
-Alternatively, you may create the index after defining the column. For example:
+或者，你也可以在定义完字段之后创建索引。例如：
 
 ```php
 $table->unique('email');
 ```
 
-You may even pass an array of columns to an index method to create a compound index:
+你甚至可以将数组传递给索引方法来创建一个复合(或合成)索引：
 
 ```php
 $table->index(['account_id', 'created_at']);
 ```
 
-In most cases you should specify a name for the index manually as the second argument, to avoid the system automatically generating one that is too long:
+在大多数情况下，您应该手动指定索引名称作为第二个参数，以避免系统自动生成一个过长的索引：
 
 ```php
 $table->index(['account_id', 'created_at'], 'account_created');
 ```
 
-#### Available Index Types
+#### 可用的索引类型
 
 Command  | Description
 ------------- | -------------
-`$table->primary('id');`  |  Add a primary key.
-`$table->primary(['first', 'last']);`  |  Add composite keys.
-`$table->unique('email');`  |  Add a unique index.
-`$table->index('state');`  |  Add a basic index.
+`$table->primary('id');`  |  添加主键
+`$table->primary(['first', 'last']);`  |  添加复合键
+`$table->unique('email');`  |  添加唯一索引
+`$table->index('state');`  |  添加普通索引
 
-#### Index Lengths Using MySQL / MariaDB
+####  MySQL / MariaDB 的索引长度
 
-By default, October CMS uses a `utf8mb4` character set. If running a version of MySQL older than v5.7.7 or MariaDB older than v10.2.2, you'll need to manually configure the default string length generated by migrations in order for MySQL to create indexes for them. To configure the default string length, add the following to your **config/database.php** configuration file under the key `connections.mysql`.
+默认情况下，October CMS 使用 `utf8mb4` 字符集。 如果运行低于 v5.7.7 的 MySQL 版本或低于 v10.2.2 的 MariaDB，则需要手动配置迁移生成的默认字符串长度，以便 MySQL 为它们创建索引。 要配置默认字符串长度，请将以下内容添加到您的 **config/database.php** 配置文件中的键 `connections.mysql` 下。
 
 ```php
 'varcharmax' => 191,
 ```
 
-### Renaming Indexes
+### 重命名索引
 
-To rename an index, use the `renameIndex` method provided by the schema builder blueprint. This method accepts the current index name as its first argument and the desired name as its second argument.
+若要重命名索引，你需要调用 `renameIndex`方法。此方法接受当前索引名称作为其第一个参数，并将所需名称作为其第二个参数:
 
 ```php
 $table->renameIndex('from', 'to')
 ```
 
-### Dropping Indexes
+### 删除索引
 
-To drop an index, you must specify the index's name. If no name was specified manually, the system will automatically generate one, simply concatenate the table name, the name of the indexed column, and the index type. Here are some examples:
+要删除索引，您必须指定索引的名称。如果没有手动指定名称，系统会自动生成一个，只需将表名、索引列的名称和索引类型连接起来即可。这里有些例子：
 
-Command  | Description
+命令  |  描述
 ------------- | -------------
-`$table->dropPrimary('users_id_primary');`  |  Drop a primary key from the "users" table.
-`$table->dropUnique('users_email_unique');`  |  Drop a unique index from the "users" table.
-`$table->dropIndex('geo_state_index');`  |  Drop a basic index from the "geo" table.
+`$table->dropPrimary('users_id_primary');`  |  从 `users` 表中删除主键
+`$table->dropUnique('users_email_unique');`  |  从 `users` 表中删除唯一索引
+`$table->dropIndex('geo_state_index');`  |  从 `geo` 表中删除基本索引
 
-### Foreign Key Constraints
+### 外键约束
 
-There is also support for creating foreign key constraints, which are used to force referential integrity at the database level. For example, let's define a `user_id` column on the `posts` table that references the `id` column on a `users` table:
+还支持创建用于在数据库层中的强制引用完整性的外键约束。例如，让我们在 `posts` 表上定义一个引用 `users` 表的 id 字段的 `user_id` 字段：
 
 ```php
 Schema::table('posts', function ($table) {
@@ -288,7 +289,7 @@ Schema::table('posts', function ($table) {
 });
 ```
 
-As before, you may specify a name for the constraint manually by passing a second argument to the `foreign` method:
+和之前一样，您可以通过将第二个参数传递给 `foreign` 方法来手动指定约束的名称：
 
 ```php
 $table->foreign('user_id', 'user_foreign')
@@ -296,7 +297,7 @@ $table->foreign('user_id', 'user_foreign')
     ->on('users');
 ```
 
-You may also specify the desired action for the "on delete" and "on update" properties of the constraint:
+还可以为 `on delete` 和`on update` 属性指定所需的操作：
 
 ```php
 $table->foreign('user_id')
@@ -305,15 +306,15 @@ $table->foreign('user_id')
         ->onDelete('cascade');
 ```
 
-To drop a foreign key, you may use the `dropForeign` method. Foreign key constraints use the same naming convention as indexes. So, if one is not specified manually, we will concatenate the table name and the columns in the constraint then suffix the name with "_foreign":
+要删除外键，您可以使用 `dropForeign` 方法。 外键约束使用与索引相同的命名约定。 因此，如果没有手动指定，我们将连接表名和约束中的字段，然后在名称后缀"_foreign"：
 
 ```php
 $table->dropForeign('posts_user_id_foreign');
 ```
 
-## Seeder Structure
+## 播种机结构
 
-Like migration files, a seeder class only contains one method by default: `run`and should extend the `Seeder` class. The `run` method is called when the update process is executed. Within this method, you may insert data into your database however you wish. You may use the [query builder](../database/query.md) to manually insert data or you may use your [model classes](../database/model.md). In the example below, we'll create a new user using the `User` model inside the `run` method:
+像迁移文件一样，种子类默认只包含一个方法：`run`，并且应该扩展`Seeder`类。 执行更新过程时会调用 `run` 方法。 在此方法中，您可以根据需要将数据插入数据库。 您可以使用 [查询生成器](../database/query.md) 手动插入数据，也可以使用 [模型类](../database/model.md)。 在下面的示例中，我们将使用 `run` 方法中的 `User` 模型创建一个新用户：
 
 ```php
 <?php namespace Acme\Users\Updates;
@@ -338,7 +339,7 @@ class SeedUsersTable extends Seeder
 }
 ```
 
-Alternatively, the same can be achieved using the `Db::table` [query builder](../database/query.md) method:
+或者，也可以使用 `Db::table` [查询生成器](../database/query.md) 方法来实现：
 
 ```php
 public function run()
@@ -351,13 +352,13 @@ public function run()
 }
 ```
 
-### Calling Additional Seeders
+### 调用其他播种机
 
-Within the `DatabaseSeeder` class, you may use the `call` method to execute additional seed classes. Using the `call` method allows you to break up your database seeding into multiple files so that no single seeder class becomes overwhelmingly large. Simply pass the name of the seeder class you wish to run:
+在 `DatabaseSeeder` 类中，您可以使用 `call` 方法来执行其他种子类。 使用 `call` 方法允许您将数据库种子分解为多个文件，这样单个种子类就不会变得非常大。 只需传递您希望运行的种子类的名称：
 
 ```php
 /**
- * Run the database seeds.
+ * 运行数据库种子
  *
  * @return void
  */

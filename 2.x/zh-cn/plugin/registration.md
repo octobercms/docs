@@ -91,7 +91,7 @@ class Plugin extends \System\Classes\PluginBase
 **registerSettings()** | 注册此插件使用的任何 [后端配置链接](settings#settings-link-registration)。
 **registerFormWidgets()** | 注册此插件提供的任何 [后端表单小部件](../backend/widgets#form-widget-registration)。
 **registerReportWidgets()** | 注册任何 [后端报告小部件](../backend/widgets#report-widget-registration)，包括仪表板小部件。
-**registerListColumnTypes()** | 注册此插件提供的任何 [自定义列表列类型](../backend/lists.md#custom-column-types)。
+**registerListColumnTypes()** | 注册此插件提供的任何 [自定义列表字段类型](../backend/lists.md#custom-column-types)。
 **registerMailLayouts()** | 注册此插件提供的任何 [邮件视图布局](mail.md#registering-mail-layouts-templates-partials)。
 **registerMailTemplates()** | 注册此插件提供的任何 [邮件视图模板](mail.md#registering-mail-layouts-templates-partials)。
 **registerMailPartials()** | 注册此插件提供的任何 [邮件视图部件](mail.md#registering-mail-layouts-templates-partials)。

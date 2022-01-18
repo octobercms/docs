@@ -2,7 +2,7 @@
 
 **List Behavior** 是一个控制器修饰符，用于轻松地将记录列表添加到页面。 该行为提供了可排序和可搜索的列表及其记录上的可选链接。 该行为提供了控制器操作`索引`，但是列表可以在任何地方呈现，并且可以使用多个列表定义。
 
-列表行为取决于列表 [列定义](#defining-list-columns) 和 [模型类](../database/model.md)。 为了使用列表行为，您应该将其添加到控制器类的 `$implement` 属性中。 此外，应定义 `$listConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
+列表行为取决于列表 [列表字段](#defining-list-columns) 和 [模型类](../database/model.md)。 为了使用列表行为，您应该将其添加到控制器类的 `$implement` 属性中。 此外，应定义 `$listConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -39,7 +39,7 @@ recordUrl: acme/blog/posts/update/:id
 字段 | 描述
 ------------- | -------------
 **title** | 此列表的标题。
-**list** | 配置数组或对列表列定义文件的引用，请参阅 [列表列](#defining-list-columns)。
+**list** | 配置数组或对列表字段定义文件的引用，请参阅 [列表字段](#defining-list-columns)。
 **modelClass** | 一个模型类名，列表数据是从这个模型加载的。
 
 下面列出的配置选项是可选的。
@@ -59,7 +59,7 @@ recordUrl: acme/blog/posts/update/:id
 **showSorting** | 在每一列上显示排序链接。默认值：true
 **defaultSort** | 当未定义用户首选项时，设置默认的排序列和方向。支持带有键 `column` 和 `direction` 的字符串或数组。
 **showCheckboxes** | 在每条记录旁边显示复选框。默认值：false。
-**showSetup** | 显示列表列设置按钮。默认值：false。
+**showSetup** | 显示列表字段设置按钮。默认值：false。
 **structure** | 启用结构化列表，请参阅 [排序和重新排序文章](../backend/reorder.md) 了解更多详细信息。
 **customViewPath** | 指定自定义视图路径以覆盖列表使用的部件，可选。
 
@@ -87,7 +87,7 @@ toolbar:
 ------------- | -------------
 **prompt** | 没有活动搜索时显示的占位符，可以参考 [多语言字符串](../plugin/localization.md)。
 **mode** | 将搜索策略定义为包含所有单词、任何单词或精确短语。 支持的选项： all(全部), any(任意), exact(精确)。 默认值：all。
-**scope** | 指定**列表模型**中定义的 [查询范围方法](../database/model.md#query-scopes) 以应用于搜索查询。 第一个参数将包含查询对象(根据常规范围方法)，第二个将包含搜索词，第三个将是要搜索的列的数组。
+**scope** | 指定**列表模型**中定义的 [查询范围方法](../database/model.md#query-scopes) 以应用于搜索查询。 第一个参数将包含查询对象(根据常规范围方法)，第二个将包含搜索词，第三个将是要搜索的字段的数组。
 **searchOnEnter** | 将此设置为 true 将使搜索小部件在开始搜索之前等待按下 Enter 键(默认行为是在有人在搜索字段中输入内容后自动开始搜索，然后暂停片刻)。 默认值：false。
 
 上面提到的工具栏按钮应该包含带有一些按钮的工具栏部件定义。 部件还可以包含带有图表的 [记分板控件](controls.md#scoreboards)。 带有 **新帖子** 按钮的工具栏部分示例，指的是 [表单行为](forms.md) 提供的 **create** 操作：
@@ -109,9 +109,9 @@ filter: config_filter.yaml
 
 **filter** 选项应引用 [过滤器配置文件](#using-list-filters) 路径或提供带有配置的数组。
 
-## 定义列表列
+## 定义列表字段
 
-列表列是使用 YAML 文件定义的。 列表行为使用列配置来创建记录表并在表单元格中显示模型列。 该文件被放置在插件的 **models** 目录的子目录中。 子目录名称与小写的模型类名称相匹配。 文件名无关紧要，但 **columns.yaml** 和 **list_columns.yaml** 是常用名称。 示例列表列文件位置：
+列表字段是使用 YAML 文件定义的。 列表行为使用字段配置来创建记录表并在表单元格中显示模型字段。 该文件被放置在插件的 **models** 目录的子目录中。 子目录名称与小写的模型类名称相匹配。 文件名无关紧要，但 **columns.yaml** 和 **list_columns.yaml** 是常用名称。 示例列表字段文件位置：
 
 ```
 plugins/
@@ -119,15 +119,15 @@ plugins/
     blog/
       models/                <=== 插件模型目录
         post/                <=== 模型配置目录
-          list_columns.yaml  <=== 模型列表列配置文件
+          list_columns.yaml  <=== 模型列表字段配置文件
         Post.php             <=== 模型类
 ```
 
-下一个示例显示了列表列定义文件的典型内容。
+下一个示例显示了列表字段定义文件的典型内容。
 
 ```yaml
 # ===================================
-#  List Column Definitions[列表列定义]
+#  List Column Definitions[列表字段定义]
 # ===================================
 
 columns:
@@ -135,33 +135,33 @@ columns:
     email: 电子邮件
 ```
 
-### 列选项
+### 字段选项
 
-对于每一列都可以指定这些选项(如果适用)：
+对于每一字段都可以指定这些选项(如果适用)：
 
 选项 | 描述
 ------------- | -------------
-**label** | 向用户显示列表列时的名称。
-**type** | 定义如何呈现此列(请参阅下面的 [列类型](#available-column-types))。
-**default** | 如果值为空，则指定列的默认值。
-**searchable** | 将此列包含在列表搜索结果中。默认值：false。
-**invisible** | 指定此列是否默认隐藏。默认值：false。
-**sortable** | 指定此列是否可以排序。默认值：true。
-**clickable** | 如果设置为 false，则禁用单击列时的默认单击行为。默认值：true。
+**label** | 向用户显示列表字段时的名称。
+**type** | 定义如何呈现此字段(请参阅下面的 [字段类型](#available-column-types))。
+**default** | 如果值为空，则指定字段的默认值。
+**searchable** | 将此字段包含在列表搜索结果中。默认值：false。
+**invisible** | 指定此字段是否默认隐藏。默认值：false。
+**sortable** | 指定此字段是否可以排序。默认值：true。
+**clickable** | 如果设置为 false，则禁用单击字段时的默认单击行为。默认值：true。
 **select** | 定义用于该值的自定义 SQL 选择语句。
 **valueFrom** | 定义用于源值的模型属性。
 **displayFrom** | 定义用于显示值的模型属性。
-**relation** | 定义模型关系列。
-**relationCount** | 将相关记录的数量显示为列值。必须与 `relation` 选项一起使用。默认值：false
-**cssClass** | 将 CSS 类分配给列容器。
-**headCssClass** | 将 CSS 类分配给列标题容器。
-**width** | 设置列宽，可以以百分比 (10%) 或像素 (50px) 指定。可能有一个没有指定宽度的列，它将被拉伸自适应。
-**align** | 指定列对齐方式。可能的值是 `left`、`right` 和 `center`。
+**relation** | 定义模型关系字段。
+**relationCount** | 将相关记录的数量显示为字段值。必须与 `relation` 选项一起使用。默认值：false
+**cssClass** | 将 CSS 类分配给字段容器。
+**headCssClass** | 将 CSS 类分配给字段标题容器。
+**width** | 设置字段宽，可以以百分比 (10%) 或像素 (50px) 指定。可能有一个没有指定宽度的字段，它将被拉伸自适应。
+**align** | 指定字段对齐方式。可能的值是 `left`、`right` 和 `center`。
 **permissions** | 当前后端用户必须拥有的 [权限](users.md#users-and-permissions) 才能使用该列。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
 
 ### 自定义值选择
 
-可以更改每列的源值和显示值。如果要从另一列获取列值，请使用 `valueFrom` 选项。
+可以更改每列字段的源值和显示值。如果要从另一字段获取字段值，请使用 `valueFrom` 选项。
 
 ```yaml
 other_name:
@@ -169,7 +169,7 @@ other_name:
     valueFrom: name
 ```
 
-如果要保留源列值但显示与模型属性不同的值，请使用 `displayFrom` 选项。
+如果要保留源字段值但显示与模型属性不同的值，请使用 `displayFrom` 选项。
 
 ```yaml
 status_code:
@@ -186,9 +186,9 @@ public function getStatusLabelAttribute()
 }
 ```
 
-### 嵌套列选择
+### 嵌套字段选择
 
-在某些情况下，从嵌套数据结构中检索列值是有意义的，例如 [模型关系](../database/relations.md) 列或 [jsonable 数组](../database/model.md #property-jsonable)。这样做的唯一缺点是该列不能使用可搜索或可排序的选项。
+在某些情况下，从嵌套数据结构中检索字段值是有意义的，例如 [模型关联](../database/relations.md) 字段或 [jsonable 数组](../database/model.md #property-jsonable)。这样做的唯一缺点是该字段不能使用可搜索或可排序的选项。
 
 ```yaml
 content[title]:
@@ -196,11 +196,11 @@ content[title]:
     sortable: false
 ```
 
-上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该列可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#events) 在本地数据库表中复制其值。
+上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该字段可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#events) 在本地数据库表中复制其值。
 
-## 可用的列类型
+## 可用的字段类型
 
-有多种列类型可用于 **type** 设置，它们控制列表列的显示方式。除了下面指定的原生列类型外，您还可以[定义自定义列类型](#custom-column-types)。
+有多种字段类型可用于 **type** 设置，它们控制列表字段的显示方式。除了下面指定的原生字段类型外，您还可以[定义自定义字段类型](#custom-column-types)。
 
 <div class="content-list" markdown="1">
 
@@ -224,7 +224,7 @@ content[title]:
 
 ### 文本
 
-`text` - 显示一个文本列，左对齐
+`text` - 显示一个文本字段，左对齐
 
 ```yaml
 full_name:
@@ -235,7 +235,7 @@ full_name:
 <a name="column-image"></a>
 ### 图片
 
-`image` - 显示带有调整输出大小选项的图像列。
+`image` - 显示带有调整输出大小选项的图像字段。
 
 ```yaml
 avatar:
@@ -253,7 +253,7 @@ avatar:
 <a name="column-number"></a>
 ### 数字
 
-`number` - 显示一个数字列，右对齐
+`number` - 显示一个数字字段，右对齐
 
 ```yaml
 age:
@@ -270,12 +270,12 @@ price:
     format: "$%.2f"
 ```
 
-> **注意**：`text`和`number`列都支持`format`属性作为字符串值，该属性遵循[PHP sprintf()函数](https://secure.php)的格式化规则.net/manual/en/function.sprintf.php)
+> **注意**：`text`和`number`字段都支持`format`属性作为字符串值，该属性遵循[PHP sprintf()函数](https://secure.php)的格式化规则.net/manual/en/function.sprintf.php)
 
 <a name="column-switch"></a>
 ### 开关
 
-`switch` - 显示布尔列的开或关状态。
+`switch` - 显示布尔字段的开或关状态。
 
 ```yaml
 enabled:
@@ -297,7 +297,7 @@ enabled:
 <a name="column-datetime"></a>
 ### 日期和时间
 
-`datetime` - 将列值显示为格式化的日期和时间。下一个示例将日期显示为 **Thu, Dec 25, 1975 2:15 PM**。
+`datetime` - 将字段值显示为格式化的日期和时间。下一个示例将日期显示为 **Thu, Dec 25, 1975 2:15 PM**。
 
 ```yaml
 created_at:
@@ -328,7 +328,7 @@ created_at:
 <a name="column-date"></a>
 ### 日期
 
-`date` - 将列值显示为日期格式 **M j, Y**。
+`date` - 将字段值显示为日期格式 **M j, Y**。
 
 ```yaml
 created_at:
@@ -345,12 +345,12 @@ created_at:
     useTimezone: true
 ```
 
-> **注意**：默认情况下，`date` 和 `time` 列不应用后端时区转换，因为转换都需要日期和时间。
+> **注意**：默认情况下，`date` 和 `time` 字段不应用后端时区转换，因为转换都需要日期和时间。
 
 <a name="column-time"></a>
 ### 时间
 
-`time` - 将列值显示为时间格式 **g:i A**。
+`time` - 将字段值显示为时间格式 **g:i A**。
 
 ```yaml
 created_at:
@@ -383,7 +383,7 @@ created_at:
 <a name="column-select"></a>
 ### Select
 
-`select` - 允许使用自定义选择语句创建列。任何有效的 SQL SELECT 语句都可以在这里使用。
+`select` - 允许使用自定义选择语句创建字段。任何有效的 SQL SELECT 语句都可以在这里使用。
 
 ```yaml
 full_name:
@@ -394,7 +394,7 @@ full_name:
 <a name="column-selectable"></a>
 ### 选择
 
-`selectable` - 获取列值并将其与记录的可用选项中的值匹配。以下面的数组为例，如果记录值设置为 `open`，那么 **Open** 值会显示在列中。
+`selectable` - 获取字段值并将其与记录的可用选项中的值匹配。以下面的数组为例，如果记录值设置为 `open`，那么 **Open** 值会显示在字段中。
 
 ```php
 ['open' => 'Open', 'closed' => 'Closed']
@@ -422,7 +422,7 @@ status:
 <a name="column-relation"></a>
 ### 关系
 
-`relation` - 允许显示相关列，您可以提供关系选项。此选项的值必须是模型上活动记录[关系](../database/relations.md) 的名称。在下一个示例中，**name** 值将被转换为相关模型中的名称属性(例如：`$model->name`)。
+`relation` - 允许显示相关字段，您可以提供关系选项。此选项的值必须是模型上活动记录[关系](../database/relations.md) 的名称。在下一个示例中，**name** 值将被转换为相关模型中的名称属性(例如：`$model->name`)。
 
 ```yaml
 group_name:
@@ -431,7 +431,7 @@ group_name:
     select: name
 ```
 
-要显示相关记录数量的列，请使用`relationCount`选项。
+要显示相关记录数量的字段，请使用`relationCount`选项。
 
 ```yaml
 users_count:
@@ -441,12 +441,12 @@ users_count:
     type: number
 ```
 
-> **注意**：注意不要将关系命名为与现有数据库列相同。例如，使用名称 `group_id` 可能会由于命名冲突而破坏组关系。
+> **注意**：注意不要将关系命名为与现有数据库字段相同。例如，使用名称 `group_id` 可能会由于命名冲突而破坏组关系。
 
 <a name="column-partial"></a>
 ### 部件
 
-`partial` - 渲染部件，`path` 值可以引用部件视图文件，否则列名称用作部件名称。
+`partial` - 渲染部件，`path` 值可以引用部件视图文件，否则字段名称用作部件名称。
 
 ```yaml
 content:
@@ -466,7 +466,7 @@ content:
 <a name="column-colorpicker"></a>
 ### 颜色选择器
 
-`colorpicker` - 显示颜色选择器列中的颜色
+`colorpicker` - 显示颜色选择器字段中的颜色
 
 ```yaml
 color:
@@ -861,7 +861,7 @@ customViewPath: $/acme/blog/controllers/reviews/list
 </tr>
 ```
 
-### 扩展列定义
+### 扩展列表字段
 
 您可以通过调用控制器类上的`extendListColumns`静态方法从外部扩展另一个控制器的列。此方法可以接受两个参数，**$list** 将代表 Lists 小部件对象，**$model** 代表列表使用的模型。以这个控制器为例：
 
@@ -891,7 +891,7 @@ Categories::extendListColumns(function($list, $model) {
 });
 ```
 
-您还可以通过覆盖控制器类中的 `listExtendColumns` 方法在内部扩展列表列。
+您还可以通过覆盖控制器类中的 `listExtendColumns` 方法在内部扩展列表字段。
 
 ```php
 class Categories extends \Backend\Classes\Controller
@@ -909,10 +909,10 @@ $list 对象可以使用以下方法。
 
 方法 | 描述
 ------------- | -------------
-**addColumns** | 向列表中添加新列
-**removeColumn** | 从列表中删除一列
+**addColumns** | 向列表中添加新字段
+**removeColumn** | 从列表中删除一字段
 
-每个方法都采用类似于 [列表列配置](#defining-list-columns) 的列数组。
+每个方法都采用类似于 [列表字段配置](#defining-list-columns) 的字段数组。
 
 ### 注入 CSS 行类
 
@@ -944,9 +944,9 @@ public function listInjectRowClass($record, $value)
 }
 ```
 
-### 覆盖列 URL
+### 覆盖字段 URL
 
-您可以通过覆盖 `listOverrideRecordUrl` 方法来指定列记录的单击操作。此方法可以返回新后端 URL 的字符串或具有复杂定义的数组。
+您可以通过覆盖 `listOverrideRecordUrl` 方法来指定字段记录的单击操作。此方法可以返回新后端 URL 的字符串或具有复杂定义的数组。
 
 ```php
 public function listOverrideRecordUrl($record, $definition = null)
@@ -1046,7 +1046,7 @@ public function listExtendQuery($query, $definition)
 }
 ```
 
-您还可以加入其他表格以帮助搜索和排序。下面将加入 `post_statuses` 表，并在查询中引入 `status_sort_order` 和 `status_name` 列。
+您还可以加入其他表格以帮助搜索和排序。下面将加入 `post_statuses` 表，并在查询中引入 `status_sort_order` 和 `status_name` 字段。
 
 ```php
 public function listExtendQuery($query, $definition = null)
@@ -1084,9 +1084,9 @@ public function listExtendRecords($records)
 }
 ```
 
-### 自定义列类型
+### 自定义字段类型
 
-自定义列表列类型可以通过[插件注册类](../plugin/registration.md#registration-methods)的`registerListColumnTypes`方法在后端注册。该方法应返回一个数组，其中键是类型名称，值是可调用函数。可调用函数接收三个参数，本机`$value`、`$column` 定义对象和模型`$record` 对象。
+自定义列表字段类型可以通过[插件注册类](../plugin/registration.md#registration-methods)的`registerListColumnTypes`方法在后端注册。该方法应返回一个数组，其中键是类型名称，值是可调用函数。可调用函数接收三个参数，本机`$value`、`$column` 定义对象和模型`$record` 对象。
 
 ```php
 public function registerListColumnTypes()
@@ -1106,11 +1106,11 @@ public function evalUppercaseListColumn($value, $column, $record)
 }
 ```
 
-使用自定义列表列类型就像使用 `type` 选项按名称调用它一样简单。
+使用自定义列表字段类型就像使用 `type` 选项按名称调用它一样简单。
 
 ```yaml
 # ===================================
-#  List Column Definitions[列出列定义]
+#  List Column Definitions[列出列表字段]
 # ===================================
 
 columns:
