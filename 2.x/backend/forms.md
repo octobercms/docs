@@ -240,6 +240,7 @@ Option | Description
 **activeTab** | selected tab when the form first loads, name or index. Default: 1
 **icons** | assign icons to tabs using tab names as the key.
 **lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
+**linkable** | determines if the tabs can be linked using URL fragments. Default: true
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
