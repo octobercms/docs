@@ -99,7 +99,7 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 
 ## Dynamic Pages
 
-Inside the [Twig section](themes.md#twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes.md#php-section), or by [Components](components.md). In this article, we describe how to prepare variables in the PHP section.
+Inside the [Twig section](themes.md#twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup/templating.md). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes.md#php-section), or by [Components](components.md). In this article, we describe how to prepare variables in the PHP section.
 
 ### Page Execution Life Cycle
 
