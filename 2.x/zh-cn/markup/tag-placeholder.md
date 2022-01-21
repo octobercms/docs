@@ -1,12 +1,12 @@
 # {% placeholder %}
 
-The `{% placeholder %}` tag will render a placeholder section which is generally [used inside Layouts](../cms/layouts.md#placeholders). This tag will return any placeholder contents that have been added using the `{% put %}` tag, or any default content that is defined (optional).
+`{% placeholder %}` 标签将呈现一个占位符部分，该部分通常 [在Layouts中使用](../cms/layouts.md#placeholders). 此标签将返回任何使用 `{% put %}` 标签添加的占位符内容，或任何已定义的默认内容(可选)。
 
 ```twig
 {% placeholder name %}
 ```
 
-Content can then be injected into the placeholder in any subsequent page or partial.
+然后可以将内容注入到任何后续页面或部件的占位符中。
 
 ```twig
 {% put name %}
@@ -14,9 +14,9 @@ Content can then be injected into the placeholder in any subsequent page or part
 {% endput %}
 ```
 
-## Default Placeholder Content
+## 默认占位符内容
 
-Placeholders can have default content that can be either replaced or complemented by a page. If the `{% put %}` tag for a placeholder with default content is not defined on a page, the default placeholder content is displayed. Example placeholder definition in the layout template:
+占位符可以具有可以被页面替换或补充的默认内容。如果页面上未定义具有默认内容的占位符的 `{% put %}` 标签，则显示默认占位符内容。布局模板中的示例占位符定义：
 
 ```twig
 {% placeholder sidebar default %}
@@ -24,7 +24,7 @@ Placeholders can have default content that can be either replaced or complemente
 {% endplaceholder %}
 ```
 
-The page can inject more content to the placeholder. The `{% default %}` tag specifies a place where the default placeholder content should be displayed. If the tag is not used the placeholder content is completely replaced.
+页面可以向占位符注入更多内容。 `{% default %}` 标签指定了默认占位符内容应该显示的位置。如果不使用标签，占位符内容将被完全替换。
 
 ```twig
 {% put sidebar %}
@@ -33,13 +33,13 @@ The page can inject more content to the placeholder. The `{% default %}` tag spe
 {% endput %}
 ```
 
-## Checking a Placeholder Exists
+## 检查占位符是否存在
 
-In a layout template you can check if a placeholder content exists by using the `placeholder()` function. This lets you to generate different markup depending on whether the page provides a placeholder content. Example:
+在布局模板中，您可以使用 `placeholder()` 函数检查是否存在占位符内容。这使您可以根据页面是否提供占位符内容来生成不同的标记。例子：
 
 ```twig
 {% if placeholder('sidemenu') %}
-    <!-- Markup for a page with a sidebar -->
+    <!-- 带有侧边栏的页面标记 -->
     <div class="row">
         <div class="col-md-3">
             {% placeholder sidemenu %}
@@ -49,23 +49,23 @@ In a layout template you can check if a placeholder content exists by using the 
         </div>
     </div>
 {% else %}
-    <!-- Markup for a page without a sidebar -->
+    <!-- 没有侧边栏的页面的标记 -->
     {% page %}
 {% endif %}
 ```
 
-## Custom Attributes
+## 自定义属性
 
-The `placeholder` tag accepts two optional attributes &mdash; `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment &mdash; **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
+`placeholder` 标签接受两个可选属性——`title` 和 `type`. `title` 属性不被 CMS 本身使用，但可以被其他插件使用。type 属性管理占位符类型 目前支持两种类型——**text** 和 **html**. 文本占位符的内容在显示之前被转义。 title 和 type 属性应该在占位符名称和 `default` 属性之后定义(如果有的话)。 例子：
 
 ```twig
-{% placeholder ordering title="Ordering information" type="text" %}
+{% placeholder ordering title="订购信息" type="text" %}
 ```
 
-Example of a placeholder with a default content, title and type attributes.
+具有默认内容、标题和类型属性的占位符示例。
 
 ```twig
-{% placeholder ordering default title="Ordering information" type="text" %}
-    There is no ordering information for this product.
+{% placeholder ordering default title="订购信息" type="text" %}
+    该产品没有订购信息。
 {% endplaceholder %}
 ```

@@ -1,13 +1,13 @@
 # {% page %}
 
-The `{% page %}` tag renders the contents of a [page](../cms/pages.md) into a layout template.
+{% page %}` 标签将 [页面](../cms/pages.md) 的内容呈现到布局模板中。
 
-See [layouts](../cms/layouts.md) for a basic example.
+有关基本示例，请参阅 [布局](../cms/layouts.md).
 
-The `{% page %}` tag parses the raw markup from a page template. A page template may inject content both into placeholder(s) as well as define raw markup.
+`{% page %}` 标签解析来自页面模板的原始标记。 页面模板可以将内容注入占位符以及定义原始标记。
 
 ```
-description="example layout"
+description="示例布局"
 ==
 <html>
     <head>
@@ -18,19 +18,19 @@ description="example layout"
         ...
 ```
 
-Placing content in the `head` placeholder.
+将内容放在"head"占位符中。
 
 ```
-description="example page"
+description="示例页面"
 ==
 {% put head %}
     <meta name="foo" content="bar">
 {% endput %}
 
-<p>My content.</p>
+<p>我的内容.</p>
 ```
 
-The page rendered with the template would result in:
+使用模板呈现的页面将导致：
 
 ```html
 <html>
@@ -38,6 +38,6 @@ The page rendered with the template would result in:
         <meta name="foo" content="bar">
     </head>
     <body>
-        <p>My content.</p>
+        <p>我的内容.</p>
         ...
 ```

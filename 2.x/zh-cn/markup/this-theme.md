@@ -1,24 +1,23 @@
 # this.theme
 
-You can access the current theme object via `this.theme` and it returns the object `Cms\Classes\Theme`, a reference to the [theme customization object](../themes/development.md#theme-customization).
+您可以通过`this.theme`方式访问当前主题对象  并返回该对象`Cms\Classes\Theme`, 详情请参考[theme customization object](../themes/development.md#theme-customization).
 
-## Properties
+## 属性
 
-`this.theme` will provide direct access to form field values, defined by any theme customization. It also has the following properties natively.
+`this.theme` 将提供对任何主题自定义定义的表单字段值的直接访问。 它本身还具有以下属性。
 
 ### id
 
-Converts the theme directory name to a CSS friendly identifier.
+将主题目录名称转换为 CSS 友好的标识符。 
 
 ```twig
 <body class="theme-{{ this.theme.id }}">
 ```
-
-If the theme directory was **website** this would generate a class name of `theme-website`.
+如果主题目录是 **website** 这将生成一个类名 `theme-website`。
 
 ### config
 
-An array containing all the theme configuration values found in the `theme.yaml` file.
+包含在 `theme.yaml` 文件中找到的所有主题配置值的数组。
 
 ```twig
 <meta name="description" content="{{ this.theme.config.description }}">

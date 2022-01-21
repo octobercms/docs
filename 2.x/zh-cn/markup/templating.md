@@ -1,111 +1,111 @@
-# Templating
+# 模板
 
-October extends the [Twig template language](https://twig.symfony.com/doc/) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
+October 扩展了 [Twig 模板语言](https://twig.symfony.com/doc/) 增加了许多函数、标签、过滤器和变量。这些扩展允许您使用 CMS 功能并访问模板内的页面环境信息。
 
-## Variables
+## 变量
 
-Template variables are printed on the page using *double curly brackets*.
+模板变量使用*{{}}*打印在页面上。
 
 ```twig
 {{ variable }}
 ```
 
-Variables can also represent *expressions*.
+变量也可以表示*表达式*。
 
 ```twig
 {{ isAjax ? 'Yes' : 'No' }}
 ```
 
-Variables can be concatenated with the `~` character.
+变量可以与 `~` 字符连接。
 
 ```twig
 {{ 'Your name: ' ~ name }}
 ```
 
-October provides global variables under the `this` variable, as listed under the **Variables** section.
+October 在 `this` 变量下提供了全局变量，如 **变量** 部分所列。
 
-## Tags
+## 标签
 
-Tags are a unique feature to Twig and are wrapped with `{% %}` characters.
+标签是 Twig 的一项独特功能，并用 `{% %}` 字符包裹。
 
 ```twig
 {% tag %}
 ```
 
-Tags provide a more fluent way to describe template logic.
+标签提供了一种更流畅的方式来描述模板逻辑。
 
 ```twig
 {% if stormCloudComing %}
-    Stay inside
+    呆在里面
 {% else %}
-    Go outside and play
+    出去玩
 {% endif %}
 ```
 
-The `{% set %}` tag can be used to set variables inside the template.
+`{% set %}` 标签可用于在模板内设置变量。
 
 ```twig
 {% set activePage = 'blog' %}
 ```
 
-Tags can take on many different syntaxes and are listed under the **Tags** section.
+标签可以采用许多不同的语法，并列在**标签**部分下。
 
-## Filters
+## 过滤器
 
-Filters act as modifiers to variables for a single instance and are applied using a *pipe symbol* followed by the filter name.
+过滤器充当单个实例变量的修饰符，并使用*管道符号*后跟过滤器名称来应用。
 
 ```twig
 {{ 'string'|filter }}
 ```
 
-Filters can take arguments like a function.
+过滤器可以像函数一样接受参数。
 
 ```twig
 {{ price|currency('USD') }}
 ```
 
-Filters can be applied in succession.
+过滤器可以连续应用。
 
 ```twig
 {{ 'October Glory'|upper|replace({'October': 'Morning'}) }}
 ```
 
-Filters are listed under the **Filters** section.
+过滤器列在**Filters**部分下。
 
-## Functions
+## 函数
 
-Functions allow logic to be executed and the return result acts as a variable.
+函数允许执行逻辑并且返回结果充当变量。
 
 ```twig
 {{ function() }}
 ```
 
-Functions can take arguments.
+函数可以接受参数。
 
 ```twig
 {{ dump(variable) }}
 ```
 
-Functions are listed under the **Functions** section.
+函数列在 **Functions** 部分下。
 
-## Access logic
+## 访问逻辑
 
 ::: v-pre
-The most important thing to learn about Twig is how it accesses the PHP layer. For convenience sake `{{ foo.bar }}` does the following checks on a PHP object:
+了解 Twig 最重要的是它如何访问 PHP 层。为方便起见，`{{ foo.bar }}` 对 PHP 对象进行以下检查：
 :::
 
-1. Check if `foo` is an array and `bar` a valid element.
-1. If not, and if `foo` is an object, check that `bar` is a valid property.
-1. If not, and if `foo` is an object, check that `bar` is a valid method (even if bar is the constructor - use `__construct()` instead).
-1. If not, and if `foo` is an object, check that `getBar` is a valid method.
-1. If not, and if `foo` is an object, check that `isBar` is a valid method.
-1. If not, return a `null` value.
+1. 检查 `foo` 是否为数组，`bar` 是否为有效元素。
+1. 如果不是，并且如果 `foo` 是一个对象，请检查 `bar` 是否是一个有效属性。
+1. 如果不是，并且如果 `foo` 是一个对象，请检查 `bar` 是否是一个有效的方法（即使 bar 是构造函数 - 使用 `__construct()` 代替）。
+1. 如果不是，并且如果`foo`是一个对象，检查`getBar`是一个有效的方法。
+1. 如果不是，并且如果 `foo` 是一个对象，请检查 `isBar` 是否是一个有效的方法。
+1. 如果不是，则返回一个 `null` 值。
 
-## Unsupported features
+## 不支持的功能
 
-There are some features offered by Twig that are not supported by October. They are listed below next to the equivalent feature.
+Twig 提供的某些功能在October不支持。它们列在下面的等效功能旁边。
 
-Tag | Equivalent
+标签 | 相等的
 ------------- | -------------
-`{% extend %}` | Use [Layouts](http://octobercms.com/docs/cms/layouts) or `{% placeholder %}`
-`{% include %}` | Use `{% partial %}` or `{% content %}`
+`{% extend %}` | 使用 [布局](https://octobercms.com/docs/cms/layouts) 或者 `{% placeholder %}`
+`{% include %}` | 使用 `{% partial %}` 或者 `{% content %}`

@@ -2,7 +2,7 @@
 
 插件可以在插件目录的 **lang** 子目录中设置多语言文件。系统会自动检测插件多语言文件。后端用户界面菜单、表单标签等本机支持使用多语言字符串。如果您提供多语言代码而不是实际字符串，系统将尝试从多语言文件加载它。在其他情况下，您需要[使用 API](#accessing-localization-strings) 加载多语言字符串。
 
-> **注意**：翻译前端内容，【有插件可以使用】(http://octobercms.com/plugin/rainlab-translate)。
+> **注意**：翻译前端内容，[有插件可以使用](https://octobercms.com/plugin/rainlab-translate)。
 
 ## 多语言目录和文件结构
 

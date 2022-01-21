@@ -1,14 +1,14 @@
 # this.session
 
-You can access the current session manager via `this.session` and it returns the object `Illuminate\Session\SessionManager` [current session configuration](../services/session.md#configuration).
+您可以通过 `this.session` 访问当前session管理器，它会返回对象 `Illuminate\Session\SessionManager` [当前session配置](../services/session.md#configuration).
 
-## Retrieving data from the session
+## 从session检索数据
 
 ```twig
 {{ this.session.get('key') }}
 ```
 
-## Determining if an item exists in the session
+## 确定session中是否存在项目
 
 ```twig
 {% if this.session.has('key') %}
@@ -16,15 +16,15 @@ You can access the current session manager via `this.session` and it returns the
 {% endif %}
 ```
 
-## Deleting data from the session
+## 从session中删除数据
 
-#### Remove data for a single key
+#### 删除单个键的数据 
 
 ```twig
 {{ this.session.forget('key') }}
 ```
 
-#### Remove all session data
+#### 删除所有session数据 
 
 ```twig
 {{ this.session.flush() }}

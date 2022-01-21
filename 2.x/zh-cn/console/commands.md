@@ -1,246 +1,246 @@
 # 命令列表
 
-October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../console/development.md) or speed up development with the provided [scaffolding commands](../console/scaffolding.md).
+October CMS 包括几个命令行界面 (CLI) 命令和实用程序，可让您管理平台的各个方面，并加快开发过程。 控制台命令基于 Laravel 的 [Artisan](http://laravel.com/docs/artisan) 工具。 您可以[开发自己的控制台命令](../console/development.md) 或使用提供的[脚手架命令](../console/scaffolding.md) 加速开发。
 
-## Setup & Maintenance
+## 设置和维护
 
-### System Update
+### 系统更新
 
-The `october:update` command will request updates from the October gateway. It will update the core application and plugin files, then perform a database migration.
+`october:update` 命令将从 October 请求更新。 它将更新核心应用程序和插件文件，然后执行数据库迁移
 
     php artisan october:update
 
-### Database Migration
+### 数据库迁移
 
-The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
+`october:migrate` 命令将执行数据库迁移，创建数据库表并执行由系统和 [插件版本历史](../plugin/updates.md) 提供的种子脚本。 迁移命令可以运行多次，它只会执行一次迁移或种子脚本，这意味着只应用新的更改。
 
     php artisan october:migrate
 
-The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#refresh-plugin) is a useful alternative for debugging a single plugin.
+`--rollback` 选项将反转所有迁移，删除数据库表和删除数据。 使用此命令时应小心。 [插件刷新命令](#refresh-plugin) 是调试单个插件的有用替代方法。
 
     php artisan october:migrate --rollback
 
-### Change Backend User Password
+### 修改后台用户密码
 
-The `october:passwd` command allows the password of a backend administrator to be changed via the command line. This is useful if you are locked out of your October CMS install, or for changing the password for the default administrator account.
+`october:passwd` 命令允许通过命令行更改后端管理员的密码。
 
     php artisan october:passwd username password
 
-For the first argument you may pass either the login name or email address. For the second argument you may optionally pass the desired password, otherwise you will be prompted to enter one.
+第一个参数，您可以传递登录名或电子邮件地址。 第二个参数，您可以选择传递所需的密码。
 
-## Project Management
+## 项目管理
 
-October CMS includes these commands for managing your project.
+October CMS 包含这些用于管理项目的命令。
 
-### Synchronize Project
+### 同步项目
 
-`project:sync` installs all plugins and themes belonging to a project.
+`project:sync` 安装属于一个项目的所有插件和主题。
 
     php artisan project:sync
 
-### Set Project
+### 设置项目
 
-`project:set` sets the license key for the current installation.
+`project:set` 设置当前安装的许可证密钥。
 
     php artisan project:set <license key>
 
-## Plugin Management
+## 插件管理
 
-October CMS includes a number of commands for managing plugins.
+October CMS 包含许多用于管理插件的命令。
 
-### Install Plugin
+### 安装插件
 
-`plugin:install` - downloads and installs the plugin by its name. The next example will install a plugin called **AuthorName.PluginName**.
+`plugin:install` - 按名称下载并安装插件。 下一个示例将安装一个名为 **AuthorName.PluginName** 的插件。
 
     php artisan plugin:install AuthorName.PluginName
 
-You may install a plugin from a remote source using the `--from` option.
+您可以使用 `--from` 选项从远程源安装插件。
 
     php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git
 
-Use the `--want` option to specify a target branch or version.
+使用 `--want` 选项指定目标分支或版本。
 
     php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git --want=dev-develop
 
-Use the `--oc` option if your package name has the `oc` prefix.
+如果您的包名称具有 `oc` 前缀，请使用 `--oc` 选项。
 
     php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git --oc
 
-### Check Dependencies
+### 检查依赖关系
 
-`plugin:check` - performs a system wide check of installed plugin dependencies. This command will spin over every theme and plugin that is currently installed and check to see if its dependencies are also installed. If it finds any missing requirements, it will attempt to install them.
+`plugin:check` - 对已安装的插件依赖项执行系统范围的检查。 此命令将遍历当前安装的每个主题和插件，并检查是否还安装了它的依赖项。 如果它发现任何缺失的需求，它将尝试安装它们。
 
     php artisan plugin:check
 
-### Refresh Plugin
+### 刷新插件
 
-`plugin:refresh` - destroys the plugin's database tables and recreates them. This command is useful for development.
+`plugin:refresh` - 销毁插件的数据库表并重新创建它们。 该命令对开发很有用。
 
     php artisan plugin:refresh AuthorName.PluginName
 
-Use the `--rollback` option to only destroy the database tables without recreating them.
+使用 `--rollback` 仅销毁数据库表而不重新创建它们。
 
     php artisan plugin:refresh AuthorName.PluginName --rollback
 
-You may also specify a version number with the `--rollback` option to stop at a specified version.
+使用 `--rollback` 可以指定版本号在指定版本停止。
 
     php artisan plugin:refresh AuthorName.PluginName --rollback=1.0.3
 
-### List Plugins
+### 列出插件
 
-`plugin:list` - Displays a list of installed plugins and their version numbers.
+`plugin:list` - 显示已安装插件的列表及其版本号。
 
     php artisan plugin:list
 
-### Disable Plugin
+### 禁用插件
 
-`plugin:disable` - Disable an existing plugin.
+`plugin:disable` - 禁用现有插件。
 
     php artisan plugin:disable AuthorName.PluginName
 
-### Enable Plugin
+### 启用插件
 
-`plugin:enable` - Enable a disabled plugin.
+`plugin:enable` - 启用禁用的插件。
 
     php artisan plugin:enable AuthorName.PluginName
 
-### Remove Plugin
+### 删除插件
 
-`plugin:remove` - destroys the plugin's database tables and deletes the plugin files from the filesystem.
+`plugin:remove` - 销毁插件的数据库表并从文件系统中删除插件文件。
 
     php artisan plugin:remove AuthorName.PluginName
 
-## Theme Management
+## 主题管理
 
-October includes a number of commands for managing themes.
+October 包含许多用于管理主题的命令。
 
-### Install Theme
+### 安装主题
 
-`theme:install` - download and install a theme from the [Marketplace](https://octobercms.com/themes/). The following example will install the theme in `/themes/authorname-themename`
+`theme:install` - 从 [市场] (https://octobercms.com/themes/) 下载并安装主题。 以下示例将在 `/themes/authorname-themename` 中安装主题
 
     php artisan theme:install AuthorName.ThemeName
 
-You may install a theme from a remote source using the `--from` option.
+您可以使用 `--from` 选项从远程源安装主题。
 
     php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/themename-theme.git
 
-Use the `--want` option to specify a target branch or version.
+使用 `--want` 选项指定目标分支或版本。
 
     php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/themename-theme.git --want=dev-develop
 
-Use the `--oc` option if your package name has the `oc` prefix.
+如果您的包名称具有 `oc` 前缀，请使用 `--oc` 选项。
 
     php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/oc-themename-theme.git --oc
 
-### Check Protected
+### 检查受保护
 
-`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#child-themes-lock) is added and a child theme is created.
+`theme:check` - 对主题执行系统范围的检查，以查看它们是否应标记为只读并防止更改。 此命令将遍历每个主题并检查它是否已与 composer 一起安装，如果是，则添加一个 [主题锁定文件](../cms/themes.md#child-themes-lock) 并创建一个子主题 .
 
     php artisan theme:check
 
-### List Themes
+### 列出主题
 
-`theme:list` - list installed themes.
+`theme:list` - 列出已安装的主题。
 
     php artisan theme:list
 
-### Enable Theme
+### 启用主题
 
-`theme:use` - switch the active theme. The following example will switch to the theme in `/themes/rainlab-vanilla`
+`theme:use` - 切换活动主题。 以下示例将切换到 `/themes/rainlab-vanilla` 中的主题
 
     php artisan theme:use vanilla
 
-### Remove Theme
+### 删除主题
 
-`theme:remove` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
+`theme:remove` - 删除一个主题。 以下示例将删除目录`/themes/rainlab-vanilla`
 
     php artisan theme:remove vanilla
 
-### Copy Theme
+### 复制主题
 
-`theme:copy` - duplicates an existing theme to create a new one, including the creation of child themes.
+`theme:copy` - 复制现有主题以创建新主题，包括创建子主题。
 
     php artisan theme:copy <source-theme> [destination-theme]
 
-The following command creates a new theme called `demo-copy` from the source theme `demo` by copying the directory and its contents. The `.themelock` file will be removed during this process.
+以下命令通过复制目录及其内容从源主题"demo"创建一个名为"demo-copy"的新主题。 `.themelock` 文件将在此过程中被删除。
 
     php artisan theme:copy demo demo-copy
 
-To create a child theme that inherits the parent theme, specify the `--child` option.
+要创建继承父主题的子主题，请指定 `--child` 选项。
 
     php artisan theme:copy demo demo-child --child
 
-If using [database-driven themes](../cms/themes#database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
+如果使用 [数据库驱动的主题](../cms/themes#database-driven-themes)，您可以使用 `--import-db` 选项将数据库更改同步到文件系统。
 
     php artisan theme:copy demo --import-db
 
-To delete all the database templates at the same time, use the `--purge-db` option.
+要同时删除所有数据库模板，请使用 --purge-db 选项。
 
     php artisan theme:copy demo --import-db --purge-db
 
-## Utilities
+## 实用程序
 
-October CMS includes a number of utility commands.
+October CMS 包括许多实用程序命令。
 
-### Clear Application Cache
+### 清除应用程序缓存
 
-`cache:clear` - clears the application, twig and combiner cache directories. Example:
+`cache:clear` - 清除应用程序、树枝和组合器缓存目录。 例子：
 
     php artisan cache:clear
 
-### Remove Demo Data
+### 删除演示数据
 
-`october:fresh` - removes the demo theme and plugin that ships with October CMS.
+`october:fresh` - 删除October CMS 附带的演示主题和插件。
 
     php artisan october:fresh
 
-### Mirror Public Directory
+### 镜像公共目录
 
-`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/deployment.md#public-folder) using symbolic linking.
+`october:mirror` - 将使用符号链接将所有资产和资源文件镜像到 [公共文件夹](../setup/deployment.md#public-folder)。
 
     php artisan october:mirror
 
-If you want to specify a custom folder, you can pass it as the second argument, which is relative to the base directory.
+如果要指定自定义文件夹，可以将其作为第二个参数传递，该参数相对于基本目录。
 
     php artisan october:mirror mypublicfolder
 
-### Miscellaneous Commands
+### 其他命令
 
-`october:util` - a generic command to perform general utility tasks, such as cleaning up files or combining files. The arguments passed to this command will determine the task used.
+`october:util` - 执行通用实用程序任务的通用命令，例如清理文件或合并文件。 传递给此命令的参数将确定使用的任务。
 
-#### Compile Assets
+#### 编译资产
 
-Outputs combined system files for JavaScript (js), StyleSheets (less), client side language (lang), or everything (assets).
+输出 JavaScript (js)、StyleSheets (less)、客户端语言 (lang) 或所有内容 (assets) 的组合系统文件。
 
     php artisan october:util compile assets
     php artisan october:util compile lang
     php artisan october:util compile js
     php artisan october:util compile less
 
-To combine without minification, pass the `--debug` option.
+要在不缩小的情况下组合，请传递 `--debug` 选项。
 
     php artisan october:util compile js --debug
 
-#### Pull All Repos
+#### 拉取所有仓库
 
-This will execute the command `git pull` on all theme and plugin directories.
+这将在所有主题和插件目录上执行命令 `git pull`。
 
     php artisan october:util git pull
 
-#### Purge Thumbnails
+#### 清除缩略图
 
-Deletes all generated thumbnails in the uploads directory.
+删除上传目录中所有生成的缩略图。
 
     php artisan october:util purge thumbs
 
-#### Purge Uploads
+#### 清除上传
 
-Deletes files in the uploads directory that do not exist in the `system_files` table.
+删除上传目录中不存在于 `system_files` 表中的文件。
 
     php artisan october:util purge uploads
 
-#### Purge Orphans
+#### 清除遗留记录
 
-Deletes records in `system_files` table that do not belong to any other model.
+删除 `system_files` 表中不属于任何其他模型的记录。
 
     php artisan october:util purge orphans

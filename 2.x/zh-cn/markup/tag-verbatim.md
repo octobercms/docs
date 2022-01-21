@@ -1,23 +1,23 @@
 # {% verbatim %}
 
-The `{% verbatim %}` tag marks entire sections as being raw text that should not be parsed.
+`{% verbatim %}` 将HTML代码原样输出。
 
 ```twig
-{% verbatim %}<p>Hello, {{ name }}</p>{% endverbatim %}
+{% verbatim %}<p>你好, {{ name }}</p>{% endverbatim %}
 ```
 
-The above will render in the browser exactly as:
+以上将在浏览器中完全呈现：
 
 ```twig
-<p>Hello, {{ name }}</p>
+<p>你好, {{ name }}</p>
 ```
 
-For example, AngularJS uses the same templating syntax so you can decide which variables to use for each.
+例如，AngularJS 使用相同的模板语法，因此您可以决定为每个变量使用哪些变量。
 
 ```twig
-<p>Hello {{ name }}, this is parsed by Twig</p>
+<p>你好 {{ name }}, 这是由 Twig 解析的</p>
 
 {% verbatim %}
-    <p>Hello {{ name }}, this is parsed by AngularJS</p>
+    <p>你好 {{ name }}, 这是由 AngularJS 解析的</p>
 {% endverbatim %}
 ```

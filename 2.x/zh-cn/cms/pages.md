@@ -99,7 +99,7 @@ url = "/blog/:slug?*"
 
 ## 动态页面
 
-在页面模板的 [Twig 部分](themes.md#twig-section) 内，您可以使用任何 [由 October 提供的功能、过滤器和标签](../markup)。任何动态页面都需要**变量**。 在October，变量可能由页面、布局[PHP 部分](themes.md#php-section) 或[组件](components.md) 准备。在本文中，我们将在 PHP 部分描述如何准备变量。
+在页面模板的 [Twig 部分](themes.md#twig-section) 内，您可以使用任何 [由 October 提供的功能、过滤器和标签](../markup/templating.md)。任何动态页面都需要**变量**。 在October，变量可能由页面、布局[PHP 部分](themes.md#php-section) 或[组件](components.md) 准备。在本文中，我们将在 PHP 部分描述如何准备变量。
 
 ### 页面执行生命周期
 
@@ -219,7 +219,7 @@ function onEnd()
 
 ## 以编程方式注入页面资产
 
-如果需要，您可以使用控制器的 `addCss` 和 `addJs` 方法将资产(CSS 和 JavaScript 文件)注入页面。 它可以在页面的 [PHP 部分](themes.md#php-section) 或 [layout](layout.md) 模板中定义的 `onStart` 函数中完成。 例子：
+如果需要，您可以使用控制器的 `addCss` 和 `addJs` 方法将资产(CSS 和 JavaScript 文件)注入页面。 它可以在页面的 [PHP 部分](themes.md#php-section) 或 [布局](layout.md) 模板中定义的 `onStart` 函数中完成。 例子：
 
 ```php
 function onStart()

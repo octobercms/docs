@@ -1,14 +1,14 @@
-# Hashing & Encryption
+# 哈希与加密
 
-## Configuration
+## 配置
 
-When you first installed October, a random key should have been generated for you. You can confirm this by checking the `key` option of your `config/app.php` configuration file. If the key remains unchanged, you should set it to a 32 character, random string. If this value is not properly set, all encrypted values will be insecure.
+当您第一次安装October时，应该已经为您生成了一个随机密钥。 您可以通过检查 `config/app.php` 配置文件的 `key` 选项来确认这一点。 如果密钥保持不变，则应将其设置为 32 个字符的随机字符串。 如果未正确设置此值，则所有加密值都将是不安全的。
 
-## Hashing
+## 哈希(Hash)
 
-The `Hash` facade provides secure Bcrypt hashing for storing user passwords. Bcrypt is a great choice for hashing passwords because its "work factor" is adjustable, which means that the time it takes to generate a hash can be increased as hardware power increases.
+`Hash` 门面为存储用户密码提供了安全的 Bcrypt 哈希。 Bcrypt 是哈希密码的绝佳选择，因为它的"装填因子"是可调整的，这意味着生成哈希所需的时间可以随着硬件功率的增加而增加。
 
-You may hash a password by calling the `make` method on the `Hash` facade:
+您可以通过调用 `Hash` 门面上的 `make` 方法来设置哈希密码：
 
 ```php
 $user = new User;
@@ -16,21 +16,21 @@ $user->password = Hash::make('mypassword');
 $user->save();
 ```
 
-Alternatively, models can implement the [Hashable trait](../database/traits.md#hashable) to automatically hash attributes.
+或者，模型可以实现 [哈希特征](../database/traits.md#hashable) 来自动设置哈希属性。
 
-#### Verifying a password against a hash
+#### 根据哈希验证密码
 
-The `check` method allows you to verify that a given plain-text string corresponds to a given hash.
+`check` 方法允许您验证给定的纯文本字符串是否对应于给定的哈希。
 
 ```php
 if (Hash::check('plain-text', $hashedPassword)) {
-    // The passwords match...
+    // 密码匹配...
 }
 ```
 
-#### Checking if a password needs to be rehashed
+#### 检查密码是否需要重新生成哈希
 
-The `needsRehash` function allows you to determine if the work factor used by the hasher has changed since the password was hashed:
+`needsRehash` 函数允许您确定哈希器使用的装填因子是否在密码被哈希后发生了变化：
 
 ```php
 if (Hash::needsRehash($hashed)) {
@@ -38,21 +38,21 @@ if (Hash::needsRehash($hashed)) {
 }
 ```
 
-## Encryption
+## 加密
 
-You may encrypt a value using the `Crypt` facade. All encrypted values are encrypted using OpenSSL and the `AES-256-CBC` cipher. Furthermore, all encrypted values are signed with a message authentication code (MAC) to detect any modifications to the encrypted string.
+你可以使用 `Crypt` 门面加密一个值。 所有加密值都使用 OpenSSL 和`AES-256-CBC`密码进行加密。 此外，所有加密值都使用消息验证码(MAC)进行签名，以检测对加密字符串的任何修改。
 
-For example, we may use the `encrypt` method to encrypt a secret and store it on a [database model](../database/model.md):
+例如，我们可以使用 `encrypt` 方法加密一个密文并将其存储在 [数据库模型](../database/model.md) 中：
 
 ```php
 $user = new User;
-$user->secret = Crypt::encrypt('shhh no telling');
+$user->secret = Crypt::encrypt('我在村东头老槐树下藏了一箱黄金');
 $user->save();
 ```
 
-#### Decrypting a value
+#### 解密一个值
 
-Of course, you may decrypt values using the `decrypt` method on the `Crypt` facade. If the value can not be properly decrypted, such as when the MAC is invalid, an `Illuminate\Contracts\Encryption\DecryptException` exception will be thrown:
+当然，您可以使用 `Crypt` 门面上的 `decrypt` 方法解密值。 如果无法正确解密该值，例如 MAC 无效，则会抛出 `Illuminate\Contracts\Encryption\DecryptException` 异常：
 
 ```php
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -65,4 +65,4 @@ catch (DecryptException $ex) {
 }
 ```
 
-Alternatively, models can implement the [Encryptable trait](../database/traits.md#encryptable) to automatically encrypt and decrypt attributes.
+或者，模型可以实现 [加密 特征](../database/traits.md#encryptable) 来自动加密和解密属性。

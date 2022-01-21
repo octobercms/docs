@@ -1,13 +1,13 @@
 # |raw
 
-Output variables in October CMS are automatically escaped, the `|raw` filter marks the value as being "safe" and will not be escaped if `raw` is the last filter applied.
+October CMS 中的输出变量会自动转义，`|raw` 过滤器将值标记为"safe"，如果 `raw` 是最后应用的过滤器，则不会转义。
 
 ```twig
-{# This variable won't be escaped #}
+{# 这个变量不会被转义 #}
 {{ variable|raw }}
 ```
 
-Be careful when using the `raw` filter inside expressions:
+在表达式中使用 `raw` 过滤器时要注意：
 
 ```twig
 {% set hello = '<strong>Hello</strong>' %}
@@ -15,9 +15,9 @@ Be careful when using the `raw` filter inside expressions:
 
 {{ false ? '<strong>Hola</strong>' : hello|raw }}
 
-{# The above will not render the same as #}
+{# 上面的渲染不会和下面一样 #}
 {{ false ? hola : hello|raw }}
 
-{# But renders the same as #}
+{# 但呈现与下面相同 #}
 {{ (false ? hola : hello)|raw }}
 ```

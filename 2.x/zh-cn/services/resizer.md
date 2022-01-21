@@ -1,4 +1,4 @@
-# Image Resizer
+# 图像调整器
 
 ## Introduction
 

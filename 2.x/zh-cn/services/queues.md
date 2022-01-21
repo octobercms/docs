@@ -1,4 +1,4 @@
-# Queues
+# 队列
 
 ## Configuration
 
@@ -8,7 +8,7 @@ The queue configuration file is stored in `config/queue.php`. In this file you w
 
 ### Driver prerequisites
 
-Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
 
 ## Basic usage
 

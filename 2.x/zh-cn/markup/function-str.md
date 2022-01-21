@@ -1,86 +1,86 @@
 # str()
 
-Functions prefixed with `str_` perform tasks that are useful when dealing with strings. The helper maps directly to the `Str` PHP class and its methods. For example:
+以 `str_` 为前缀的函数执行处理字符串时很有用。 助手程序直接映射到 `Str` PHP 类及其方法。 例如：
 
 ```twig
 {{ str_camel() }}
 ```
 
-is the PHP equivalent of the following:
+下面写法相等于上面：
 
 ```php
 <?= Str::camel() ?>
 ```
 
-> **Note**: Methods in *camelCase* should be converted to *snake_case*.
+> **注意**: *驼峰命名* 中的方法应转换为*蛇形命名*
 
 ## str_limit()
 
-Limit the number of characters in a string.
+限制一个字符串中的字符数。
 
 ```twig
-{{ str_limit('The quick brown fox...', 100) }}
+{{ str_limit('敏捷的棕色狐狸...', 100) }}
 ```
 
-To add a suffix when limit is applied, pass it as the third argument. Defaults to `...`.
+要在应用限制时添加后缀，请将其作为第三个参数传递。 默认为`...`。
 
 ```twig
-{{ str_limit('The quick brown fox...', 100, '... Read more!') }}
+{{ str_limit('敏捷的棕色狐狸...', 100, '... 阅读更多!') }}
 ```
 
 ## str_words()
 
-Limit the number of words in a string.
+限制字符串中的单词数。
 
 ```twig
-{{ str_words('The quick brown fox...', 100) }}
+{{ str_words('敏捷的棕色狐狸...', 100) }}
 ```
 
-To add a suffix when limit is applied, pass it as the third argument. Defaults to `...`.
+要在应用限制时添加后缀，请将其作为第三个参数传递。 默认为`...`。
 
 ```twig
-{{ str_words('The quick brown fox...', 100, '... Read more!') }}
+{{ str_words('敏捷的棕色狐狸...', 100, '... 阅读更多!') }}
 ```
 
 ## str_camel()
 
-Convert a value to *camelCase*.
+将值转换为 *驼峰命名*
 
 ```twig
-// Outputs: helloWorld
+// 输出: helloWorld
 {{ str_camel('hello world') }}
 ```
 
 ## str_studly()
 
-Convert a value to *StudlyCase*.
+将值转换为 *PascalCase(单词开头字母大写格式)*。
 
 ```twig
-// Outputs: HelloWorld
+// 输出: HelloWorld
 {{ str_studly('hello world') }}
 ```
 
 ## str_snake()
 
-Convert a value to *snake_case*.
+将值转换为 *蛇形命名*。
 
 ```twig
-// Outputs: hello_world
+// 输出: hello_world
 {{ str_snake('hello world') }}
 ```
 
-The second argument can supply a delimiter.
+第二个参数可以提供分隔符。
 
 ```twig
-// Outputs: hello---world
+// 输出: hello---world
 {{ str_snake('hello world', '---') }}
 ```
 
 ## str_plural()
 
-Get the plural form of an English word.
+获取英语单词的复数形式。 
 
 ```twig
-// Outputs: chickens
+// 输出: chickens
 {{ str_plural('chicken') }}
 ```

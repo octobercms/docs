@@ -36,11 +36,11 @@ plugins/
       Plugin.php   <=== 插件注册文件
 ```
 
-> **注意**：如果您正在为[市场](http://octobercms.com/help/site/marketplace) 开发插件，则需要[updates/version.yaml](updates) 文件。
+> **注意**：如果您正在为[市场](https://octobercms.com/help/site/marketplace) 开发插件，则需要[updates/version.yaml](updates) 文件。
 
 ### 插件命名空间
 
-插件命名空间是必不可少的，特别是如果您打算在 [October市场](http://octobercms.com/plugins) 上发布您的插件。当您在市场上注册为作者时，系统会要求您提供作者代码，该代码是所有插件的根命名空间。注册时只能指定一次作者代码。 市场提供的默认作者代码由作者名字和姓氏组成：JohnSmith。注册后无法更改代码。你所有的插件命名空间都应该在根命名空间下定义，例如`\JohnSmith\Blog`。
+插件命名空间是必不可少的，特别是如果您打算在 [October市场](https://octobercms.com/plugins) 上发布您的插件。当您在市场上注册为作者时，系统会要求您提供作者代码，该代码是所有插件的根命名空间。注册时只能指定一次作者代码。 市场提供的默认作者代码由作者名字和姓氏组成：JohnSmith。注册后无法更改代码。你所有的插件命名空间都应该在根命名空间下定义，例如`\JohnSmith\Blog`。
 
 ##注册文件
 

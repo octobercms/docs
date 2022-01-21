@@ -1,24 +1,24 @@
 # this.layout
 
-You can access the current layout object via `this.layout` and it returns the object `Cms\Classes\Layout`.
+您可以通过 `this.layout` 访问当前布局对象，并返回对象 `Cms\Classes\Layout`。
 
-## Properties
+## 属性
 
-`this.layout` has the following properties.
+`this.layout` 具有以下属性。 
 
 ### id
 
-Converts the layout file name and folder name to a CSS friendly identifier.
+将布局文件名和文件夹名转换为 CSS 友好标识符。
 
 ```twig
 <body class="layout-{{ this.layout.id }}">
 ```
 
-If the layout file was **default.htm** this would generate a class name of `layout-default`.
+如果布局文件是 **default.htm** 这将生成一个类名 `layout-default`。
 
 ### description
 
-The layout description as defined by the configuration.
+配置定义的布局描述。
 
 ```twig
 <meta name="description" content="{{ this.layout.description }}">
