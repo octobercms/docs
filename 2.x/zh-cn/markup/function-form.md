@@ -1,126 +1,125 @@
 # form()
 
-Functions prefixed with `form_` perform tasks that are useful when dealing with forms. The helper maps directly to the `Form` PHP class and its methods. For example:
+以 `form_` 为前缀的函数执行处理表单时。 助手程序直接映射到`Form` PHP 类及其方法。 例如：
 
 ```twig
 {{ form_close() }}
 ```
 
-is the PHP equivalent of the following:
+下面写法相等于上面：
 
 ```php
 <?= Form::close() ?>
 ```
 
-> **Note**: Methods in *camelCase* should be converted to *snake_case*.
+> **注意**: *驼峰命名* 中的方法应转换为 *蛇形命名*.
 
 ## form_open()
 
-Outputs a standard `<form>` opening tag along with the `_session_key` and `_token` hidden fields for CSRF protection. If you are using the [AJAX Framework](../ajax/introduction.md), it is recommended that you use [`form_ajax()`](#form_ajax) instead.
+输出一个标准的 `<form>` 标签以及用于 CSRF 保护的 `_session_key` 和 `_token` 隐藏字段。如果您使用 [AJAX 框架](../ajax/introduction.md), 建议您改用 [`form_ajax()`](#form_ajax) .
 
 ```twig
 {{ form_open() }}
 ```
 
-Attributes can be passed in the first argument.
+属性可以在第一个参数中传递。
 
 ```twig
 {{ form_open({ class: 'form-horizontal' }) }}
 ```
 
-The above example would output as the following:
+上面的示例将输出如下:
 
 ```html
 <form class="form-horizontal">
 ```
 
-There are some special options that can also be used alongside the attributes.
+有一些特殊选项也可以与属性一起使用。
 
 ```twig
 {{ form_open({ request: 'onUpdate' }) }}
 ```
 
-The function support the following options:
+该函数支持以下选项： 
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**method** | Request method. Corresponds to the **method** FORM tag attribute. Eg: POST, GET, PUT, DELETE
-**request** | A handler name to execute on the server when the form is posted. See the [Handling forms](../cms/pages.md#handling-forms) article for details about the event handlers.
-**url** | Specifies URL to post the form to. Corresponds to the **action** FORM tag attribute.
-**files** | Determines whether the form will submit files. Accepted values: **true** and **false**.
-**model** | A model object for the form model binding.
+**method** | 请求方法。 对应 **method** FORM 标签属性。 例如: POST, GET, PUT, DELETE
+**request** | 发布表单时在服务器上执行的处理程序名称。 有关事件处理程序的详细信息，请参阅 [处理表单](../cms/pages.md#handling-forms)
+**url** | 指定将表单发布到的 URL。 对应 **action** FORM 标签属性。
+**files** | 确定表单是否将提交文件。 接受的值：**true** 和 **false**。
+**model** |  表单模型绑定的模型对象
 
 ## form_ajax()
 
-Outputs an AJAX enabled FORM opening tag. The first parameter of the `form_ajax()` function is the AJAX handler name. The handler can be defined in the layout or page [PHP section](../cms/themes.md#php-section) code, it can also be defined in a component. You may find more information about AJAX in the [AJAX Framework](../ajax/introduction.md) article.
+输出一个启用 AJAX 的 FORM 开始标签。 `form_ajax()` 函数的第一个参数是 AJAX 处理程序名称。处理程序可以在布局或页面 [PHP部分](../cms/themes.md#php-section) 代码中定义，也可以在组件中定义。Y您可以在[AJAX框架](../ajax/introduction.md) 文章中找到有关 AJAX 的更多信息。
 
 ```twig
 {{ form_ajax('onUpdate') }}
 ```
 
-Attributes can be passed in the second argument.
+属性可以在第二个参数中传递。
 
 ```twig
 {{ form_ajax('onSave', { class: 'form-horizontal'}) }}
 ```
 
-The above example would output as the following:
+上面的示例将输出如下：
 
 ```html
 <form data-request="onSave" class="form-horizontal">
 ```
 
-There are some special options that can also be used alongside the attributes.
+有一些特殊选项也可以与属性一起使用。 
 
 ```twig
-{{ form_ajax('onDelete', { data: { id: 2 }, confirm: 'Really delete this record?' }) }}
+{{ form_ajax('onDelete', { data: { id: 2 }, confirm: '真的要删除这条记录吗？' }) }}
 
 {{ form_ajax('onRefresh', { update: { statistics: '#statsPanel' } }) }}
 ```
 
-> **Note**: When attempting to reference a component's alias with `__SELF__` as an argument to `form_ajax()` you must first build the string you wish to use outside of the call itself. Example:
+> **注意**: 当尝试使用 `__SELF__` 作为 `form_ajax()` 的参数来引用组件的别名时，您必须首先在调用本身之外构建您希望使用的字符串。 例子：
 
 ```twig
 {% set targetPartial = "'" ~ __SELF__ ~ "::statistics': '#statsPanel'" %}
 {{ form_ajax('onUpdate', { update: targetPartial }) }}
 ```
 
-The function support the following options:
+该函数支持以下选项： 
 
-Option | Description
+选项 | 描述
 ------------- | -------------
-**success** | JavaScript string to execute on successful result.
-**error** | JavaScript string to execute on failed result.
-**confirm** | A confirmation message to display before sending the request.
-**redirect** | On successful result, redirect to a URL.
-**update** | An array of partials to update on success in the following format: { 'partial': '#element' }.
-**data** | Extra data to include with the request in the following format: { 'myvar': 'myvalue' }.
+**success** | 要在成功结果上执行的 JavaScript 字符串。
+**error** | 对失败结果执行的 JavaScript 字符串
+**confirm** |  在发送请求之前显示的确认消息。
+**redirect** | 成功后，重定向到 URL。
+**update** | 要在成功时更新的部件数组，格式如下：{ 'partial': '#element' }。
+**data** | 要包含在请求中的额外数据，格式如下：{ 'myvar': 'myvalue' }。
 
 ## form_close()
 
-Outputs a standard FORM closing tag. This tag is generally available to provide consistency in usage.
+输出一个标准的 FORM 结束标签。 此标签通常可用于提供一致性的使用。 
 
 ```twig
 {{ form_close() }}
 ```
 
-The above example would output as the following:
+上面的示例将输出如下：
 
 ```html
 </form>
 ```
 
-## Passing Attributes to the Generated Element
+## 将属性传递给生成的元素
 
-You can pass additional attributes to the `Form::open()` method by passing an array of attribute names and values to be rendered on the final generated `<form>` element.
+您可以通过传递要在最终生成的 `<form>` 元素上呈现的属性名称和值的数组来将其他属性传递给 `Form::open()` 方法。
 
 ```php
 <?= Form::open(array('id' => 'example', 'class' => 'something')) ?>
     // ..
 <?= Form::close() ?>
 ```
-
-The above example would output the following:
+上面的示例将输出以下内容：
 
 ```html
 <form method="POST" action="" accept-charset="UTF-8" id="example" class="something">

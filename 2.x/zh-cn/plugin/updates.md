@@ -42,7 +42,7 @@ class Plugin extends \System\Classes\PluginBase
 
 ##插件版本文件
 
-**version.yaml** 文件称为 *插件版本文件*，包含版本注释并以正确的顺序引用数据库脚本。 请阅读 [数据库结构](../database/structure.md) 文章以获取有关迁移文件的信息。 如果您要将插件提交到 [Marketplace](http://octobercms.com/help/site/marketplace)，则需要此文件。 这是插件版本文件的示例:
+**version.yaml** 文件称为 *插件版本文件*，包含版本注释并以正确的顺序引用数据库脚本。 请阅读 [数据库结构](../database/structure.md) 文章以获取有关迁移文件的信息。 如果您要将插件提交到 [Marketplace](https://octobercms.com/help/site/marketplace)，则需要此文件。 这是插件版本文件的示例:
 
 ```yaml
 v1.0.1: 第一版

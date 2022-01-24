@@ -1,65 +1,65 @@
 # {% partial %}
 
-The `{% partial %}` tag will parse a [CMS partial](../cms/partials.md) and render the partial contents on the page. To display a partial called **footer.htm**, simply pass the name after the `partial` tag quoted as a string.
+`{% partial %}` 标签将解析 [CMS部件](../cms/partials.md) 并在页面上呈现部件内容。要显示一个名为 **footer.htm** 的部件，只需在 `partial` 标记后传递名称作为字符串引用。
 
 ```twig
 {% partial "footer" %}
 ```
 
-A partial inside a subdirectory can be rendered in the same way.
+子目录中的部件可以以相同的方式呈现。
 
 ```twig
 {% partial "sidebar/menu" %}
 ```
 
-> **Note**: The [Themes documentation](../cms/themes.md#subdirectories) has more details on subdirectory usage.
+> **注意**:  [主题文档](../cms/themes.md#subdirectories) 有更多关于子目录使用的详细信息。
 
-The partial name can also be a variable:
+部件名称也可以是变量：
 
 ```twig
 {% set tabName = "profile" %}
 {% partial tabName %}
 ```
 
-## Variables
+## 变量
 
-You can pass variables to partials by specifying them after the partial name:
+在部件内部，变量可以像任何其他标记变量一样被访问：
 
 ```twig
 {% partial "blog-posts" posts=posts %}
 ```
 
-You can also assign new variables for use in the partial:
+您还可以分配新变量以在部件中使用：
 
 ```twig
-{% partial "location" city="Vancouver" country="Canada" %}
+{% partial "location" city="温哥华" country="加拿大" %}
 ```
 
-Inside the partial, variables can be accessed like any other markup variable:
+在部件内部，变量可以像任何其他标记变量一样被访问：
 
 ```twig
 <p>Country: {{ country }}, city: {{ city }}.</p>
 ```
 
-## Passing Markup as a Variable
+## 将标记作为变量传递
 
-It is possible to pass markup to a partial using the `body` attribute.
+可以使用 `body` 属性将标记传递给部件。
 
 ```twig
 {% partial "card" body %}
-    This is the card contents
+    这是卡片内容
 {% endpartial %}
 ```
 
-The contents are then available as the `body` variable.
+然后内容可作为 `body` 变量使用。
 
 ```twig
 {{ body|raw }}
 ```
 
-## Checking a Partial Exists
+## 检查部件是否存在
 
-In any template you can check if a partial content exists by using the `partial()` function. This lets you to generate different markup depending on whether the partial exists or not. Example:
+在任何模板中，您都可以使用 `partial()` 函数检查是否存在部件内容。这使您可以根据部件是否存在来生成不同的标记。例子：
 
 ```twig
 {% set cardPartial = 'my-cards/' ~ cardCode %}
@@ -67,6 +67,6 @@ In any template you can check if a partial content exists by using the `partial(
 {% if partial(cardPartial) %}
     {% partial cardPartial %}
 {% else %}
-    <p>Card not found!</p>
+    <p>卡片不存在!</p>
 {% endif %}
 ```

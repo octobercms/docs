@@ -32,7 +32,7 @@ themes/
 name: "October CMS Demo"
 description: "演示前端主题的基本概念"
 author: "October CMS"
-homepage: "http://octobercms.com"
+homepage: "https://octobercms.com"
 code: "Demo"
 authorCode: "武志伟"
 ```

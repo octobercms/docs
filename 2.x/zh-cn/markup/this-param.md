@@ -1,31 +1,31 @@
 # this.param
 
-You can access the current URL parameters via `this.param` and it returns a PHP array.
+您可以通过 `this.param` 访问当前 URL 参数，它会返回一个 PHP 数组。
 
-## Accessing page parameters
+## 访问页面参
 
-This example demonstrates how to access the `tab` URL parameter in a page.
+此示例演示如何访问页面中的 `tab` URL 参数。 
 
 ```
 url = "/account/:tab"
 ==
 {% if this.param.tab == 'details' %}
 
-    <p>Here are all your details</p>
+    <p>这是您的所有详细信息</p>
 
 {% elseif this.param.tab == 'history' %}
 
-    <p>You are viewing a blast from the past</p>
+    <p>你看到的是过去的爆炸</p>
 
 {% endif %}
 ```
 
-If the parameter name is also a variable, then array syntax can be used.
+如果参数名称也是变量，则可以使用数组语法。
 
 ```
 url = "/account/:post_id"
 ==
 {% set name = 'post_id' %}
 
-<p>The post ID is: {{ this.param[name] }}</p>
+<p>帖子ID是: {{ this.param[name] }}</p>
 ```

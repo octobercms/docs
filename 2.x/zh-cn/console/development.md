@@ -1,10 +1,10 @@
-# Development
+# 发展
 
-In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding.md#create-a-console-command).
+除了提供的控制台命令之外，您还可以构建自己的自定义命令来处理您的应用程序。 您可以将自定义命令存储在插件 **console** 目录中。 您可以使用 [命令行脚手架工具](../console/scaffolding.md#create-a-console-command) 生成类文件。
 
-## Building a Command
+## 创建命令
 
-If you wanted to create a console command called `acme:mycommand`, you might create the associated class for that command in a file called **plugins/acme/blog/console/MyCommand.php** and paste the following contents to get started:
+如果你想创建一个名为 `acme:mycommand` 的控制台命令，你可以在一个名为 **plugins/acme/blog/console/MyCommand.php** 的文件中为该命令创建关联的类，然后粘贴以下内容以获取 开始
 
 ```php
 <?php namespace Acme\Blog\Console;
@@ -16,14 +16,14 @@ use Symfony\Component\Console\Input\InputArgument;
 class MyCommand extends Command
 {
     /**
-     * @var string The console command name.
+     * @var string 控制台命令名称。
      */
     protected $name = 'acme:mycommand';
 
     /**
-     * @var string The console command description.
+     * @var string 控制台命令说明。
      */
-    protected $description = 'Does something cool.';
+    protected $description = '做一些很酷的事情.';
 
     /**
      * Execute the console command.
@@ -35,7 +35,7 @@ class MyCommand extends Command
     }
 
     /**
-     * Get the console command arguments.
+     * 获取控制台命令参数。
      * @return array
      */
     protected function getArguments()
@@ -44,7 +44,7 @@ class MyCommand extends Command
     }
 
     /**
-     * Get the console command options.
+     * 获取控制台命令选项。
      * @return array
      */
     protected function getOptions()
@@ -55,17 +55,17 @@ class MyCommand extends Command
 }
 ```
 
-Once your class is created you should fill out the `name` and `description` properties of the class, which will be used when displaying your command on the command `list` screen.
+创建类后，您应该填写类的 `name` 和 `description` 属性，这将在命令 `list` 屏幕上显示您的命令时使用。
 
-The `handle` method will be called when your command is executed. You may place any command logic in this method.
+执行命令时将调用 `handle` 方法。 您可以在此方法中放置任何命令逻辑。
 
-### Defining Arguments
+### 定义参数
 
-Arguments are defined by returning an array value from the `getArguments` method are where you may define any arguments your command receives. For example:
+参数是通过从 `getArguments` 方法返回一个数组值来定义的，您可以在其中定义命令接收的任何参数。 例如：
 
 ```php
 /**
- * Get the console command arguments.
+ * 获取控制台命令参数。
  * @return array
  */
 protected function getArguments()
@@ -76,21 +76,21 @@ protected function getArguments()
 }
 ```
 
-When defining `arguments`, the array definition values represent the following:
+定义 `arguments` 时，数组定义值表示如下：
 
 ```php
 array($name, $mode, $description, $defaultValue)
 ```
 
-The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`.
+参数 `mode` 可以是以下任何一种：`InputArgument::REQUIRED` 或 `InputArgument::OPTIONAL`。
 
-### Defining Options
+### 定义选项
 
-Options are defined by returning an array value from the `getOptions` method. Like arguments this method should return an array of commands, which are described by a list of array options. For example:
+选项是通过从 `getOptions` 方法返回一个数组值来定义的。 与参数一样，此方法应返回一个命令数组，这些命令由数组选项列表描述。 例如：
 
 ```php
 /**
- * getOptions for the console command
+ * 控制台命令的 getOptions
  * @return array
  */
 protected function getOptions()
@@ -101,81 +101,81 @@ protected function getOptions()
 }
 ```
 
-When defining `options`, the array definition values represent the following:
+定义 `options` 时，数组定义值表示如下：
 
 ```php
 array($name, $shortcut, $mode, $description, $defaultValue)
 ```
 
-For options, the argument `mode` may be: `InputOption::VALUE_REQUIRED`, `InputOption::VALUE_OPTIONAL`, `InputOption::VALUE_IS_ARRAY`, `InputOption::VALUE_NONE`.
+对于选项，参数 `mode` 可以是：`InputOption::VALUE_REQUIRED`、`InputOption::VALUE_OPTIONAL`、`InputOption::VALUE_IS_ARRAY`、`InputOption::VALUE_NONE`。
 
-The `VALUE_IS_ARRAY` mode indicates that the switch may be used multiple times when calling the command:
+`VALUE_IS_ARRAY`模式表示调用命令时可以多次使用该开关：
 
     php artisan foo --option=bar --option=baz
 
-The `VALUE_NONE` option indicates that the option is simply used as a "switch":
+`VALUE_NONE` 选项表示该选项仅用作"开关"：
 
     php artisan foo --option
 
-### Retrieving Input
+### 检索输入
 
-While your command is executing, you will obviously need to access the values for the arguments and options accepted by your application. To do so, you may use the `argument` and `option` methods:
+当您的命令正在执行时，您显然需要访问应用程序接受的参数和选项的值。 为此，您可以使用 `argument` 和 `option` 方法：
 
-#### Retrieving the value of a command argument
+#### 检索命令参数的值
 
 ```php
 $value = $this->argument('name');
 ```
 
-#### Retrieving all arguments
+#### 检索所有参数
 
 ```php
 $arguments = $this->argument();
 ```
 
-#### Retrieving the value of a command option
+#### 检索命令选项的值
 
 ```php
 $value = $this->option('name');
 ```
 
-#### Retrieving all options
+#### 检索所有选项
 
 ```php
 $options = $this->option();
 ```
 
-### Writing Output
+### 编写输出
 
-To send output to the console, you may use the `info`, `comment`, `question` and `error` methods. Each of these methods will use the appropriate ANSI colors for their purpose.
+要将输出发送到控制台，您可以使用 `info`、`comment`、`question` 和 `error` 方法。 这些方法中的每一个都将使用适当的 ANSI 颜色来实现其目的。
 
-#### Sending information
+#### 发送信息
 
 ```php
 $this->info('Display this on the screen');
 ```
 
-#### Sending an error message
+#### 发送错误消息
 
 ```php
 $this->error('Something went wrong!');
 ```
 
-#### Asking the user for input
+#### 询问用户输入
 
-You may also use the `ask` and `confirm` methods to prompt the user for input:
+您还可以使用 `ask` 和 `confirm` 方法提示用户输入：
 
 ```php
 $name = $this->ask('What is your name?');
 ```
 
-#### Asking the user for secret input
+#### 要求用户输入密码
 
 ```php
 $password = $this->secret('What is the password?');
 ```
 
-#### Asking the user for confirmation
+#### 要求用户确认
 
 ```php
 if ($this->confirm('Do you wish to continue? [yes|no]')) {
@@ -183,15 +183,16 @@ if ($this->confirm('Do you wish to continue? [yes|no]')) {
 }
 ```
 
-You may also specify a default value to the `confirm` method, which should be `true` or `false`:
+您还可以为 `confirm` 方法指定一个默认值，它应该是 `true` 或 `false`：
 
 ```php
 $this->confirm($question, true);
 ```
+> **注意**：对于中国开发者，我们仍建议提示信息文本采用英文，以防止服务器命令窗口无法解析文本
 
-#### Progress Bars
+#### 进度条
 
-For long running tasks, it could be helpful to show a progress indicator. Using the output object, we can start, advance and stop the Progress Bar. First, define the total number of steps the process will iterate through. Then, advance the Progress Bar after processing each item:
+对于长时间运行的任务，显示进度指示器可能会有所帮助。 使用输出对象，我们可以启动、前进和停止进度条。 首先，定义流程将迭代的步骤总数。 然后，在处理完每个项目后推进进度条：
 
 ```php
 $users = App\User::all();
@@ -207,13 +208,13 @@ foreach ($users as $user) {
 $bar->finish();
 ```
 
-For more advanced options, check out the [Symfony Progress Bar component documentation](https://symfony.com/doc/2.7/components/console/helpers/progressbar.html).
+有关更多高级选项，请查看 [Symfony 进度条组件文档](https://symfony.com/doc/2.7/components/console/helpers/progressbar.html)。
 
-## Registering Commands
+## 注册命令
 
-#### Registering a Console Command
+#### 注册控制台命令
 
-Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration.md#registration-methods) using  the `registerConsoleCommand` helper method.
+一旦你的命令类完成，你需要注册它以便它可以使用。 这通常使用 `registerConsoleCommand` 辅助方法在 [插件注册文件](../plugin/registration.md#registration-methods) 的 `register` 方法中完成。
 
 ```php
 class Blog extends PluginBase
@@ -230,23 +231,23 @@ class Blog extends PluginBase
 }
 ```
 
-Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place command registration logic. Within this file, you may use the `Artisan::add` method to register the command:
+或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置命令注册逻辑。 在此文件中，您可以使用 `Artisan::add` 方法来注册命令：
 
 ```php
 Artisan::add(new Acme\Blog\Console\MyCommand);
 ```
 
-#### Registering a Command in the Application Container
+#### 在应用程序容器中注册命令
 
-If your command is registered in the [application container](../services/application.md#application-container), you may use the `Artisan::resolve` method to make it available to Artisan:
+如果您的命令已在 [应用程序容器](../services/application.md#application-container) 中注册，您可以使用 `Artisan::resolve` 方法使其对 Artisan 可用：
 
 ```php
 Artisan::resolve('binding.name');
 ```
 
-#### Registering Commands in a Service Provider
+#### 在服务提供者中注册命令
 
-If you need to register commands from within a [service provider](application.md#service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](application.md#application-container) binding for the command:
+如果你需要在 [服务提供商](application.md#service-providers) 中注册命令，你应该从提供者的 `boot` 方法调用 `commands` 方法，传递 [容器](application.md#application -container) 绑定命令：
 
 ```php
 public function boot()
@@ -259,21 +260,21 @@ public function boot()
 }
 ```
 
-## Calling Other Commands
+## 调用其他命令
 
-Sometimes you may wish to call other commands from your command. You may do so using the `call` method:
+有时您可能希望从您的命令中调用其他命令。 您可以使用 `call` 方法这样做：
 
 ```php
 $this->call('october:migrate');
 ```
 
-You can also pass arguments as an array:
+您还可以将参数作为数组传递：
 
 ```php
 $this->call('plugin:refresh', ['name' => 'October.Demo']);
 ```
 
-As well as options:
+以及选项：
 
 ```php
 $this->call('october:update', ['--force' => true]);

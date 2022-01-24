@@ -1,45 +1,45 @@
-# Scaffolding
+# 脚手架
 
-Use the scaffolding commands to speed up the development process.
+使用脚手架命令加快开发过程。
 
-## Create a Plugin
+## 创建插件
 
-The `create:plugin` command generates a plugin folder and basic files for the plugin. The parameter specifies the author and plugin name.
+`create:plugin` 命令为插件生成一个插件文件夹和基本文件。 该参数指定作者和插件名称。
 
     php artisan create:plugin Acme.Blog
 
-## Create a Component
+## 创建一个组件
 
-The `create:component` command creates a new component class and the default component view. The first parameter specifies the author and plugin name. The second parameter specifies the component class name.
+`create:component` 命令创建一个新的组件类和默认的组件视图。 第一个参数指定作者和插件名称。 第二个参数指定组件类名。
 
     php artisan create:component Acme.Blog Post
 
-## Create a Model
+## 创建模型
 
-The `create:model` command generates the files needed for a new model. The first parameter specifies the author and plugin name. The second parameter specifies the model class name.
+`create:model` 命令生成新模型所需的文件。 第一个参数指定作者和插件名称。 第二个参数指定模型类名称。
 
     php artisan create:model Acme.Blog Post
 
-## Create a Backend Controller
+## 创建后端控制器
 
-The `create:controller` command generates a controller, configuration and view files. The first parameter specifies the author and plugin name. The second parameter specifies the controller class name.
+`create:controller` 命令生成控制器、配置和视图文件。 第一个参数指定作者和插件名称。 第二个参数指定控制器类名。
 
     php artisan create:controller Acme.Blog Posts
 
-## Create a Form Widget
+## 创建表单小部件
 
-The `create:formwidget` command generates a back-end form widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the form widget class name.
+`create:formwidget` 命令生成后端表单小部件、视图和基本资产文件。 第一个参数指定作者和插件名称。 第二个参数指定表单小部件类名。
 
     php artisan create:formwidget Acme.Blog CategorySelector
 
-## Create a Report Widget
+## 创建报告小部件
 
-The `create:reportwidget` command generates a back-end report widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the report widget class name.
+`create:reportwidget` 命令生成后端报告小部件、视图和基本资产文件。 第一个参数指定作者和插件名称。 第二个参数指定报告小部件类名。
 
     php artisan create:reportwidget Acme.Blog TopPosts
 
-## Create a Console Command
+## 创建控制台命令
 
-The `create:command` command generates a [new console command](../console/development.md). The first parameter specifies the author and plugin name. The second parameter specifies the command name.
+`create:command` 命令生成一个 [新控制台命令](../console/development.md)。 第一个参数指定作者和插件名称。 第二个参数指定命令名称。
 
     php artisan create:command RainLab.Blog MyCommand

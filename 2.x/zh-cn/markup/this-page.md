@@ -1,14 +1,14 @@
 # this.page
 
-You can access the current page object via `this.page` and it returns the object `Cms\Classes\Page`. This object can also be [accessed in the PHP code](../cms/pages/.md#page-variables).
+可以通过 `this.page` 访问当前页面对象，并返回对象 `Cms\Classes\Page`. 这个对象也可以 [在 PHP 代码中访问](../cms/pages/.md#page-variables).
 
-## Properties
+## 属性
 
-`this.page` has the following properties.
+`this.page` 具有以下属性。
 
 ### layout
 
-Reference to the layout name used by this page, if defined. Not to be confused with `this.layout`.
+引用此页面使用的布局名称(如果已定义)。不要与 `this.layout` 混淆。
 
 ```twig
 {{ this.page.layout }}
@@ -16,17 +16,17 @@ Reference to the layout name used by this page, if defined. Not to be confused w
 
 ### id
 
-Converts the page file name and folder name to a CSS friendly identifier.
+将页面文件名和文件夹名转换为 CSS 友好标识符。
 
 ```twig
 <body class="page-{{ this.page.id }}">
 ```
 
-If the page file was **home/index.htm** this would generate a class name of `page-home-index`.
+如果页面文件是 **home/index.htm** 这将生成一个类名 `page-home-index`。
 
 ### title
 
-The page title as defined by the configuration.
+配置定义的页面标题。
 
 ```twig
 <h1>{{ this.page.title }}</h1>
@@ -34,7 +34,7 @@ The page title as defined by the configuration.
 
 ### description
 
-The page description as defined by the configuration.
+配置定义的页面描述。
 
 ```twig
 <p>{{ this.page.description }}</p>
@@ -42,7 +42,7 @@ The page description as defined by the configuration.
 
 ### meta_title
 
-An alternative `title` field, usually more descriptive for SEO purposes.
+另一个`title`字段，通常对 SEO 目的更具描述性。 
 
 ```twig
 <title>{{ this.page.meta_title }}</title>
@@ -50,7 +50,7 @@ An alternative `title` field, usually more descriptive for SEO purposes.
 
 ### meta_description
 
-An alternative `description` field, usually more descriptive for SEO purposes.
+另一种`description`字段，通常对 SEO 目的更具描述性。
 
 ```twig
 <meta name="description" content="{{ this.page.meta_description }}">
@@ -58,7 +58,7 @@ An alternative `description` field, usually more descriptive for SEO purposes.
 
 ### hidden
 
-Hidden pages are accessible only by logged-in back-end users.
+隐藏页面只能由登录的后台用户访问。
 
 ```twig
 {% if this.page.hidden %}
@@ -68,8 +68,8 @@ Hidden pages are accessible only by logged-in back-end users.
 
 ### fileName
 
-Page file name in the theme with extension.
+带有扩展名的主题中的页面文件名。
 
 ### baseFileName
 
-Page file name in the theme without the extension.
+没有扩展名的主题中的页面文件名。

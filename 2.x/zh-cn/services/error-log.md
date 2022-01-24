@@ -1,4 +1,4 @@
-# Errors & Logging
+# 错误和日志
 
 When you first start using October CMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
 

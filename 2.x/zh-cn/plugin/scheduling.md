@@ -142,4 +142,4 @@ $schedule->command('emails:send')
     ->thenPing($url);
 ```
 
-> 您需要先安装 [Drivers 插件](http://octobercms.com/plugin/october-drivers)，然后才能使用 `pingBefore($url)` 或 `thenPing($url)` 功能。
+> 您需要先安装 [Drivers 插件](https://octobercms.com/plugin/october-drivers)，然后才能使用 `pingBefore($url)` 或 `thenPing($url)` 功能。

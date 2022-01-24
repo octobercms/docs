@@ -1,8 +1,8 @@
-# Helpers
+# 助手函数
 
-October CMS includes a variety of "helper" PHP functions. Many of these functions are used internally by October itself, however, you are free to use them in your own plugins and applications if you find them useful.
+October CMS 包括各种PHP"助手"函数。 其中许多功能由 October 本身在内部使用。但是如果您发现它们有用，您可以在自己的插件和应用程序中自由使用它们。
 
-### Arrays
+### 数组
 
 <div class="content-list-p" markdown="1">
 
@@ -27,7 +27,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 </div>
 
-### Paths
+### 路径
 
 <div class="content-list-p" markdown="1">
 
@@ -45,7 +45,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 </div>
 
-### Strings
+### 字符串
 
 <div class="content-list-p" markdown="1">
 
@@ -69,7 +69,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 </div>
 
-### Miscellaneous
+### 其他
 
 <div class="content-list-p" markdown="1">
 
@@ -91,12 +91,12 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 </div>
 
-## Arrays
+## 数组
 
 <a name="method-array-add"></a>
 #### `array_add()`
 
-The `array_add` function adds a given key / value pair to the array if the given key doesn't already exist in the array:
+如果数组中不存在给定的键，则 `array_add` 函数将给定的键/值成对添加到数组中：
 
     $array = array_add(['name' => 'Desk'], 'price', 100);
 
@@ -105,7 +105,7 @@ The `array_add` function adds a given key / value pair to the array if the given
 <a name="method-array-divide"></a>
 #### `array_divide()`
 
-The `array_divide` function returns two arrays, one containing the keys, and the other containing the values of the original array:
+`array_divide` 函数返回两个数组，一个包含键，另一个包含原始数组的值：
 
     list($keys, $values) = array_divide(['name' => 'Desk']);
 
@@ -116,7 +116,7 @@ The `array_divide` function returns two arrays, one containing the keys, and the
 <a name="method-array-dot"></a>
 #### `array_dot()`
 
-The `array_dot` function flattens a multi-dimensional array into a single level array that uses "dot" notation to indicate depth:
+`array_dot` 函数将多维数组扁平化为使用"点"表示法表示深度的单级数组：
 
     $array = array_dot(['foo' => ['bar' => 'baz']]);
 
@@ -125,7 +125,7 @@ The `array_dot` function flattens a multi-dimensional array into a single level 
 <a name="method-array-undot"></a>
 #### `array_undot()`
 
-The `array_undot` function is the counter-part to the `array_dot` method. It will convert a dot-notated array into a standard associative array:
+`array_undot` 函数是 `array_dot` 方法的对应部分。 它将点标记数组转换为标准关联数组：
 
     $array = array_undot([
         'foo.bar' => 'baz'
@@ -141,7 +141,7 @@ The `array_undot` function is the counter-part to the `array_dot` method. It wil
 <a name="method-array-except"></a>
 #### `array_except()`
 
-The `array_except` method removes the given key / value pairs from the array:
+`array_except` 方法从数组中删除给定的键/值对：
 
     $array = ['name' => 'Desk', 'price' => 100];
 
@@ -152,7 +152,7 @@ The `array_except` method removes the given key / value pairs from the array:
 <a name="method-array-first"></a>
 #### `array_first()`
 
-The `array_first` method returns the first element of an array passing a given truth test:
+`array_first` 方法返回通过给定真值测试的数组的第一个元素：
 
     $array = [100, 200, 300];
 
@@ -162,14 +162,14 @@ The `array_first` method returns the first element of an array passing a given t
 
     // 200
 
-A default value may also be passed as the third parameter to the method. This value will be returned if no value passes the truth test:
+默认值也可以作为第三个参数传递给该方法。 如果没有值通过真值测试，将返回此值：
 
     $value = array_first($array, $callback, $default);
 
 <a name="method-array-flatten"></a>
 #### `array_flatten()`
 
-The `array_flatten` method will flatten a multi-dimensional array into a single level.
+`array_flatten` 方法会将多维数组展平为单个级别。
 
     $array = ['name' => 'Joe', 'languages' => ['PHP', 'Ruby']];
 
@@ -180,7 +180,7 @@ The `array_flatten` method will flatten a multi-dimensional array into a single 
 <a name="method-array-forget"></a>
 #### `array_forget()`
 
-The `array_forget` method removes a given key / value pair from a deeply nested array using "dot" notation:
+`array_forget` 方法使用"点"表示法从深度嵌套的数组中删除给定的键/值对：
 
     $array = ['products' => ['desk' => ['price' => 100]]];
 
@@ -191,7 +191,7 @@ The `array_forget` method removes a given key / value pair from a deeply nested 
 <a name="method-array-get"></a>
 #### `array_get()`
 
-The `array_get` method retrieves a value from a deeply nested array using "dot" notation:
+`array_get` 方法使用"点"表示法从深度嵌套的数组中检索值：
 
     $array = ['products' => ['desk' => ['price' => 100]]];
 
@@ -199,14 +199,14 @@ The `array_get` method retrieves a value from a deeply nested array using "dot" 
 
     // ['price' => 100]
 
-The `array_get` function also accepts a default value, which will be returned if the specific key is not found:
+`array_get` 函数也接受一个默认值，如果没有找到特定的键，将返回该值：
 
     $value = array_get($array, 'names.john', 'default');
 
 <a name="method-array-only"></a>
 #### `array_only()`
 
-The `array_only` method will return only the specified key / value pairs from the given array:
+`array_only` 方法将只返回给定数组中指定的键/值对：
 
     $array = ['name' => 'Desk', 'price' => 100, 'orders' => 10];
 
@@ -217,7 +217,7 @@ The `array_only` method will return only the specified key / value pairs from th
 <a name="method-array-pluck"></a>
 #### `array_pluck()`
 
-The `array_pluck` method will pluck a list of the given key / value pairs from the array:
+`array_pluck` 方法将从数组中提取给定键/值对的列表：
 
     $array = [
         ['developer' => ['name' => 'Brian']],
@@ -231,7 +231,7 @@ The `array_pluck` method will pluck a list of the given key / value pairs from t
 <a name="method-array-pull"></a>
 #### `array_pull()`
 
-The `array_pull` method returns and removes a key / value pair from the array:
+`array_pull` 方法从数组中返回并删除一个键/值对：
 
     $array = ['name' => 'Desk', 'price' => 100];
 
@@ -244,7 +244,7 @@ The `array_pull` method returns and removes a key / value pair from the array:
 <a name="method-array-set"></a>
 #### `array_set()`
 
-The `array_set` method sets a value within a deeply nested array using "dot" notation:
+`array_set` 方法使用"点"表示法在深度嵌套的数组中设置一个值：
 
     $array = ['products' => ['desk' => ['price' => 100]]];
 
@@ -255,7 +255,7 @@ The `array_set` method sets a value within a deeply nested array using "dot" not
 <a name="method-array-sort"></a>
 #### `array_sort()`
 
-The `array_sort` method sorts the array by the results of the given Closure:
+`array_sort` 方法根据给定闭包的结果对数组进行排序：
 
     $array = [
         ['name' => 'Desk'],
@@ -276,7 +276,7 @@ The `array_sort` method sorts the array by the results of the given Closure:
 <a name="method-array-sort-recursive"></a>
 #### `array_sort_recursive()`
 
-The `array_sort_recursive` function recursively sorts the array using the `sort` function:
+`array_sort_recursive` 函数使用 `sort` 函数对数组进行递归排序：
 
     $array = [
         [
@@ -311,7 +311,7 @@ The `array_sort_recursive` function recursively sorts the array using the `sort`
 <a name="method-array-where"></a>
 #### `array_where()`
 
-The `array_where` function filters the array using the given Closure:
+`array_where` 函数使用给定的闭包过滤数组：
 
     $array = [100, '200', 300, '400', 500];
 
@@ -324,7 +324,7 @@ The `array_where` function filters the array using the given Closure:
 <a name="method-head"></a>
 #### `head()`
 
-The `head` function simply returns the first element in the given array:
+`head` 函数只返回给定数组中的第一个元素：
 
     $array = [100, 200, 300];
 
@@ -335,7 +335,7 @@ The `head` function simply returns the first element in the given array:
 <a name="method-last"></a>
 #### `last()`
 
-The `last` function returns the last element in the given array:
+`last` 函数返回给定数组中的最后一个元素：
 
     $array = [100, 200, 300];
 
@@ -343,131 +343,131 @@ The `last` function returns the last element in the given array:
 
     // 300
 
-## Paths
+## 路径
 
 <a name="path-symbols"></a>
-#### Path Symbols
+#### 路径符号
 
-Path prefix symbols can be used to create a dynamic path. For example, a path beginning with `~/` will create a path relative to the application:
+路径前缀符号可用于创建动态路径。 例如，以 `~/` 开头的路径将创建一个相对于应用程序的路径：
 
     list: ~/plugins/acme/pay/models/invoiceitem/columns.yaml
 
-These symbols are supported for creating dynamic paths:
+创建动态路径时支持这些符号：
 
-Symbol | Description
+符号 | 描述
 ------------- | -------------
-`$` | Relative to the plugins directory
-`~` | Relative to the application directory
-`#` | Relative to the themes directory
+`$` | 相对于插件目录
+`~` | 相对于应用程序目录
+`#` | 相对于主题目录
 
 <a name="method-app-path"></a>
 #### `app_path()`
 
-The `app_path` function returns the fully qualified path to the `app` directory:
+`app_path` 函数返回 `app` 目录的绝对路径：
 
     $path = app_path();
 
-You may also use the `app_path` function to generate a fully qualified path to a given file relative to the application directory:
+您还可以使用 `app_path` 函数来生成给定文件相对于应用程序目录的绝对路径：
 
     $path = app_path('Http/Controllers/Controller.php');
 
 <a name="method-base-path"></a>
 #### `base_path()`
 
-The `base_path` function returns the fully qualified path to the project root:
+`base_path` 函数返回项目根目录的绝对路径：
 
     $path = base_path();
 
-You may also use the `base_path` function to generate a fully qualified path to a given file relative to the application directory:
+您还可以使用 `base_path` 函数生成给定文件相对于应用程序目录的绝对路径：
 
     $path = base_path('vendor/bin');
 
 <a name="method-config-path"></a>
 #### `config_path($path = '')`
 
-The `config_path` function returns the fully qualified path to the application configuration directory:
+`config_path` 函数返回应用程序配置目录的绝对路径：
 
     $path = config_path();
 
-You may also use the `config_path` function to generate a fully qualified path to a given file relative to the config directory:
+你也可以使用 `config_path` 函数来生成给定文件相对于 config 目录的绝对路径：
 
     $path = config_path('dev/cms.php');
 
 <a name="method-database-path"></a>
 #### `database_path()`
 
-The `database_path` function returns the fully qualified path to the application's database directory:
+`database_path` 函数返回应用程序数据库目录的绝对路径：
 
     $path = database_path();
 
 <a name="method-plugins-path"></a>
 #### `plugins_path($path = '')`
 
-The `plugins_path` function returns the fully qualified path to the application plugin directory:
+`plugins_path` 函数返回应用程序插件目录的绝对路径：
 
     $path = plugins_path();
 
-You may also use the `plugins_path` function to generate a fully qualified path to a given file relative to the plugins directory:
+你也可以使用 `plugins_path` 函数来生成给定文件相对于插件目录的绝对路径：
 
     $path = plugins_path('author/plugin/routes.php');
 
 <a name="method-public-path"></a>
 #### `public_path()`
 
-The `public_path` function returns the fully qualified path to the `public` directory:
+`public_path` 函数返回 `public` 目录的绝对路径：
 
     $path = public_path();
 
 <a name="method-storage-path"></a>
 #### `storage_path($path = '')`
 
-The `storage_path` function returns the fully qualified path to the `storage` directory:
+`storage_path` 函数返回 `storage` 目录的绝对路径：
 
     $path = storage_path();
 
-You may also use the `storage_path` function to generate a fully qualified path to a given file relative to the storage directory:
+您还可以使用 `storage_path` 函数生成给定文件相对于存储目录的绝对路径：
 
     $path = storage_path('app/file.txt');
 
 <a name="method-temp-path"></a>
 #### `temp_path($path = '')`
 
-The `temp_path` function returns the fully qualified path to a writable directory for temporary files:
+`temp_path` 函数将绝对路径返回到临时文件的可写目录：
 
     $path = temp_path();
 
-You may also use the `temp_path` function to generate a fully qualified path to a given file relative to the temp directory:
+您还可以使用 `temp_path` 函数生成到给定文件相对于 temp 目录的绝对路径：
 
     $path = temp_path('app/file.txt');
 
 <a name="method-themes-path"></a>
 #### `themes_path($path = '')`
 
-The `themes_path` function returns the fully qualified path to the `themes` directory:
+`themes_path` 函数返回 `themes` 目录的绝对路径：
 
     $path = themes_path();
 
-You may also use the `themes_path` function to generate a fully qualified path to a given file relative to the themes directory:
+您还可以使用 `themes_path` 函数生成到给定文件相对于主题目录的绝对路径：
 
     $path = themes_path('mytheme/file.txt');
 
 <a name="method-cache-path"></a>
 #### `cache_path($path = '')`
 
-The `cache_path` function returns the fully qualified path to the application cache directory:
+`cache_path` 函数返回应用程序缓存目录的绝对路径：
 
     $path = cache_path();
 
-You may also use the `cache_path` function to generate a fully qualified path to a given file relative to the cache directory:
+您还可以使用 `cache_path` 函数生成给定文件相对于缓存目录的绝对路径：
 
     $path = cache_path('cms/cachefile.json');
 
-## Strings
+## 字符串
 
 <a name="method-camel-case"></a>
 #### `camel_case()`
 
-The `camel_case` function converts the given string to `camelCase`:
+`camel_case` 函数将给定的字符串转换为 `驼峰命名法`：
 
     $camel = camel_case('foo_bar');
 
@@ -476,7 +476,7 @@ The `camel_case` function converts the given string to `camelCase`:
 <a name="method-class-basename"></a>
 #### `class_basename()`
 
-The `class_basename` returns the class name of the given class with the class' namespace removed:
+`class_basename` 返回给定类的类名，删除了类的命名空间：
 
     $class = class_basename('Foo\Bar\Baz');
 
@@ -485,7 +485,7 @@ The `class_basename` returns the class name of the given class with the class' n
 <a name="method-e"></a>
 #### `e()`
 
-The `e` function runs `htmlentities` over the given string:
+`e` 函数在给定的字符串上运行 `htmlentities`：
 
     echo e('<html>foo</html>');
 
@@ -494,7 +494,7 @@ The `e` function runs `htmlentities` over the given string:
 <a name="method-ends-with"></a>
 #### `ends_with()`
 
-The `ends_with` function determines if the given string ends with the given value:
+`ends_with` 函数确定给定字符串是否以给定值结尾：
 
     $value = ends_with('This is my name', 'name');
 
@@ -503,7 +503,7 @@ The `ends_with` function determines if the given string ends with the given valu
 <a name="method-snake-case"></a>
 #### `snake_case()`
 
-The `snake_case` function converts the given string to `snake_case`:
+`snake_case` 函数将给定的字符串转换为 `蛇形命名法`：
 
     $snake = snake_case('fooBar');
 
@@ -512,7 +512,7 @@ The `snake_case` function converts the given string to `snake_case`:
 <a name="method-str-limit"></a>
 #### `str_limit()`
 
-The `str_limit` function limits the number of characters in a string. The function accepts a string as its first argument and the maximum number of resulting characters as its second argument:
+`str_limit` 函数限制字符串中的字符数。 该函数接受一个字符串作为它的第一个参数，并将结果字符的最大数量作为它的第二个参数：
 
     $value = str_limit('The CMS platform that gets back to basics.', 6);
 
@@ -521,7 +521,7 @@ The `str_limit` function limits the number of characters in a string. The functi
 <a name="method-starts-with"></a>
 #### `starts_with()`
 
-The `starts_with` function determines if the given string begins with the given value:
+`starts_with` 函数确定给定字符串是否以给定值开头：
 
     $value = starts_with('The cow goes moo', 'The');
 
@@ -530,7 +530,7 @@ The `starts_with` function determines if the given string begins with the given 
 <a name="method-str-contains"></a>
 #### `str_contains()`
 
-The `str_contains` function determines if the given string contains the given value:
+`str_contains` 函数确定给定字符串是否包含给定值：
 
     $value = str_contains('The bird goes tweet', 'bird');
 
@@ -539,7 +539,7 @@ The `str_contains` function determines if the given string contains the given va
 <a name="method-str-finish"></a>
 #### `str_finish()`
 
-The `str_finish` function adds a single instance of the given value to a string:
+`str_finish` 函数将给定值的单个实例添加到字符串中：
 
     $string = str_finish('this/string', '/');
 
@@ -548,7 +548,7 @@ The `str_finish` function adds a single instance of the given value to a string:
 <a name="method-str-is"></a>
 #### `str_is()`
 
-The `str_is` function determines if a given string matches a given pattern. Asterisks may be used to indicate wildcards:
+`str_is` 函数确定给定字符串是否与给定模式匹配。 星号可用于表示通配符：
 
     $value = str_is('foo*', 'foobar');
 
@@ -561,7 +561,7 @@ The `str_is` function determines if a given string matches a given pattern. Aste
 <a name="method-str-plural"></a>
 #### `str_plural()`
 
-The `str_plural` function converts a string to its plural form. This function currently only supports the English language:
+`str_plural` 函数将字符串转换为其复数形式。 该功能目前仅支持英文：
 
     $plural = str_plural('car');
 
@@ -574,14 +574,14 @@ The `str_plural` function converts a string to its plural form. This function cu
 <a name="method-str-random"></a>
 #### `str_random()`
 
-The `str_random` function generates a random string of the specified length:
+`str_random` 函数生成指定长度的随机字符串：
 
     $string = str_random(40);
 
 <a name="method-str-singular"></a>
 #### `str_singular()`
 
-The `str_singular` function converts a string to its singular form. This function currently only supports the English language:
+`str_singular` 函数将字符串转换为其单数形式。 该功能目前仅支持英文：
 
     $singular = str_singular('cars');
 
@@ -590,7 +590,7 @@ The `str_singular` function converts a string to its singular form. This functio
 <a name="method-str-slug"></a>
 #### `str_slug()`
 
-The `str_slug` function generates a URL friendly "slug" from the given string:
+`str_slug` 函数从给定的字符串生成一个 URL 友好的"slug"：
 
     $title = str_slug("October CMS", "-");
 
@@ -599,7 +599,7 @@ The `str_slug` function generates a URL friendly "slug" from the given string:
 <a name="method-studly-case"></a>
 #### `studly_case()`
 
-The `studly_case` function converts the given string to `StudlyCase`:
+`studly_case` 函数将给定的字符串转换为 `驼峰命名`：
 
     $value = studly_case('foo_bar');
 
@@ -608,95 +608,95 @@ The `studly_case` function converts the given string to `StudlyCase`:
 <a name="method-trans"></a>
 #### `trans()`
 
-The `trans` function translates the given language line using your [localization files](../plugin/localization.md):
+`trans` 函数使用您的 [多语言文件](../plugin/localization.md) 翻译成给定的语言行：
 
     echo trans('validation.required'):
 
 <a name="method-trans-choice"></a>
 #### `trans_choice()`
 
-The `trans_choice` function translates the given language line with inflection:
+`trans_choice` 函数用变形翻译给定的语言行：
 
     $value = trans_choice('foo.bar', $count);
 
-## Miscellaneous
+## 其他
 
 <a name="method-asset"></a>
 #### `asset()`
 
-Generate a URL for an asset using the current scheme of the request (HTTP or HTTPS):
+使用当前的请求方案(HTTP 或 HTTPS)为资产生成 URL：
 
     $url = asset('img/photo.jpg');
 
 <a name="method-config"></a>
 #### `config()`
 
-The `config` function gets the value of a configuration variable. The configuration values may be accessed using "dot" syntax, which includes the name of the file and the option you wish to access. A default value may be specified and is returned if the configuration option does not exist:
+`config` 函数获取配置变量的值。 可以使用"点"语法访问配置值，其中包括文件名和您希望访问的选项。 如果配置选项不存在，则可以指定默认值并返回：
 
     $value = config('app.timezone');
 
     $value = config('app.timezone', $default);
 
-The `config` helper may also be used to set configuration variables at runtime by passing an array of key / value pairs:
+`config` 助手函数也可用于在运行时通过传递键/值对数组来设置配置变量：
 
     config(['app.debug' => true]);
 
 <a name="method-dd"></a>
 #### `dd()`
 
-The `dd` function dumps the given variable and ends execution of the script:
+`dd` 函数dumps给定变量并结束脚本的执行：
 
     dd($value);
 
 <a name="method-env"></a>
 #### `env()`
 
-The `env` function gets the value of an environment variable or returns a default value:
+`env` 函数获取环境变量的值或返回默认值：
 
     $env = env('APP_ENV');
 
-    // Return a default value if the variable doesn't exist...
+    // 如果变量不存在，则返回默认值...
     $env = env('APP_ENV', 'production');
 
 <a name="method-get"></a>
 #### `get()`
 
-The `get` function obtains an input item from the request, restricted to GET variables only:
+`get` 函数从请求中获取输入项，仅限于 GET 变量：
 
     $value = get('key', $default = null)
 
 <a name="method-input"></a>
 #### `input()`
 
-The `input` function obtains an input item from the request:
+`input` 函数从请求中获取一个输入项：
 
     $value = input('key', $default = null)
 
 <a name="method-post"></a>
 #### `post()`
 
-The `post` function obtains an input item from the request, restricted to POST variables only:
+`post` 函数从请求中获取输入项，仅限于 POST 变量：
 
     $value = post('key', $default = null)
 
 <a name="method-redirect"></a>
 #### `redirect()`
 
-The `redirect` function return an instance of the redirector to do [redirect responses](../services/response-view.md#redirects):
+`redirect` 函数返回重定向的实例以执行 [重定向响应](../services/response-view.md#redirects)：
 
     return redirect('/home');
 
 <a name="method-request"></a>
 #### `request()`
 
-The `request` function returns the current [request instance](../services/request-input.md):
+`request` 函数返回当前的 [请求实例](../services/request-input.md)：
 
     $referer = request()->header('referer');
 
 <a name="method-response"></a>
 #### `response()`
 
-The `response` function creates a [response](../services/response-view.md) instance or obtains an instance of the response factory:
+`response` 函数创建一个 [响应](../services/response-view.md) 实例或获取响应工厂的一个实例：
 
     return response('Hello World', 200, $headers);
 
@@ -705,29 +705,29 @@ The `response` function creates a [response](../services/response-view.md) insta
 <a name="method-route"></a>
 #### `route()`
 
-The `route` function generates a URL for the given [named route](../services/router.md):
+`route` 函数为给定的 [路由命名](../services/router.md) 生成一个 URL：
 
     $url = route('routeName');
 
-If the route accepts parameters, you may pass them as the second argument to the method:
+如果路由接受参数，您可以将它们作为第二个参数传递给方法：
 
     $url = route('routeName', ['id' => 1]);
 
 <a name="method-secure-asset"></a>
 #### `secure_asset()`
 
-Generate a URL for an asset using HTTPS:
+使用 HTTPS 为资产生成 URL：
 
     echo secure_asset('foo/bar.zip', $title, $attributes = []);
 
 <a name="method-trace-log"></a>
 #### `trace_log()`
 
-The `trace_log` function writes a trace message to the log file.
+`trace_log` 函数向日志文件写入跟踪消息。
 
-    trace_log('This code has passed...');
+    trace_log('此代码已通过...');
 
-The function supports passing exceptions, arrays and objects:
+该函数支持传递异常、数组和对象：
 
     trace_log($exception);
 
@@ -735,14 +735,14 @@ The function supports passing exceptions, arrays and objects:
 
     trace_log($object);
 
-You may also pass multiple arguments to trace multiple messages:
+您还可以传递多个参数来跟踪多条消息：
 
     trace_log($value1, $value2, $exception, '...');
 
 <a name="method-trace-sql"></a>
 #### `trace_sql()`
 
-The `trace_sql` function enables database logging and begins to monitor all SQL output.
+`trace_sql` 函数启用数据库日志记录并开始监视所有 SQL 输出。
 
     trace_sql();
 
@@ -753,7 +753,7 @@ The `trace_sql` function enables database logging and begins to monitor all SQL 
 <a name="method-url"></a>
 #### `url()`
 
-The `url` function generates a fully qualified URL to the given path:
+`url` 函数为给定路径生成一个完整的网址路径：
 
     echo url('user/profile');
 

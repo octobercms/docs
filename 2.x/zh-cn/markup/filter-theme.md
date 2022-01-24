@@ -1,20 +1,20 @@
 # |theme
 
-The `|theme` filter returns an address relative to the active theme path of the website. The result is an absolute URL, including domain and protocol, to the asset specified in the filter parameter. Theme assets usually reside in the **assets** subdirectory of a theme directory.
+`|theme` 过滤器返回相对于网站活动主题路径的地址。 返回结果是过滤器参数中指定的主题的绝对 URL，包括域名和协议。 主题资产通常位于主题目录的 **assets** 子目录中。
 
 ```twig
 <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
 ```
 
-If the website address is __https://octobercms.com__ and the active theme is called `website` the above example would output the following:
+如果网站地址是 __https://octobercms.com__ 并且活动主题名为 `website`，则上面的示例将输出以下内容： 
 
 ```html
 <script type="text/javascript" src="http://october.com/themes/website/assets/js/menu.js"></script>
 ```
 
-## Combining CSS and JavaScript
+## 合并 CSS 和 JavaScript
 
-The filter can also be used to combine assets of the same type by passing an array of files.
+过滤器还可用于通过传递文件数组来组合相同类型的资产。
 
 ```twig
 <link href="{{ [
@@ -23,11 +23,12 @@ The filter can also be used to combine assets of the same type by passing an arr
 ]|theme }}" rel="stylesheet">
 ```
 
-> **Note**: You can enable the assets minification with the `enableAssetMinify` parameter in the `config/cms.php` script. By default the minification is disabled.
+> **注意**: 您可以使用 `config/cms.php` 文件中的 `enableAssetMinify` 参数启用资产合并。 默认情况下，合并是禁用的。
 
-### Combiner Aliases
 
-The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../ajax/introduction.md#including-the-framework) can be included in the combiner:
+### 组合器别名 
+
+资产组合器支持替换文件路径的常用别名，这些别名将以"@"符号开头。 例如 [AJAX 框架资产](../ajax/introduction.md#including-the-framework) 可以包含在组合器中:
 
 ```twig
 <script src="{{ [
@@ -38,30 +39,30 @@ The asset combiner supports common aliases that substitute file paths, these wil
 ]|theme }}"></script>
 ```
 
-The following aliases are supported:
+支持以下别名：
 
-Alias | Description
+别名 | 描述
 ------------- | -------------
-`@jquery` | Reference to the jQuery library used in the back-end. (JavaScript)
-`@framework` | AJAX framework extras, subsitute for `{% framework %}` tag. (JavaScript)
-`@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag. (JavaScript, CSS)
-`@framework.extras.js` | AJAX framework extras, (JavaScript)
-`@framework.extras.css` | AJAX framework extras, (CSS)
+`@jquery` | 引用后端使用的jQuery库. (JavaScript)
+`@framework` | AJAX 框架附加功能，代替  `{% framework %}` (JavaScript)
+`@framework.extras` | AJAX 框架附加功能，代替 `{% framework extras %}`  (JavaScript, CSS)
+`@framework.extras.js` | AJAX 框架附加功能 (JavaScript)
+`@framework.extras.css` | AJAX 框架附加功能 (CSS)
 
-The same alias can be used for JavaScript or CSS, for example `@framework.extras`. At least one explicit reference with a file extension is needed in the array to determine which is used.
+相同的别名可用于 JavaScript 或 CSS，例如 `@framework.extras`。 数组中至少需要一个带有文件扩展名的显式引用来确定使用哪个。
 
-### External Combiner Paths
+### 动态组合器路径
 
-In some cases you may wish to combine a file outside the theme, this is achieved by prefixing the path with a symbol to create a dynamic path. For example, a path beginning with `~/` will create a path relative to the application:
+在某些情况下，您可能希望在主题之外组合文件，这是通过在路径前加上符号来创建动态路径来实现的。 例如，以 `~/` 开头的路径将创建一个相对于应用程序的路径： 
 
 ```twig
 <script src="{{ ['~/modules/system/assets/js/framework.js']|theme }}"></script>
 ```
 
-These symbols are supported for creating dynamic paths:
+支持这些符号用于创建动态路径：
 
-Symbol | Description
+符号 | 描述
 ------------- | -------------
-`~` | Relative to the application directory
-`$` | Relative to the plugins directory
-`#` | Relative to the themes directory
+`~` | 相对于应用程序目录
+`$` | 相对于插件目录 
+`#` | 相对于主题目录

@@ -1,6 +1,6 @@
 # {% macro %}
 
-The `{% macro %}` tag allows you to define custom functions in your templates, similar to regular programming languages.
+`{% macro %}` 标签允许您在模板中定义自定义函数，类似于常规编程语言。
 
 ```twig
 {% macro input() %}
@@ -8,7 +8,7 @@ The `{% macro %}` tag allows you to define custom functions in your templates, s
 {% endmacro %}
 ```
 
-Alternatively you can include the name of the macro after the end tag for better readability:
+或者，您可以在结束标记后包含macro的名称以提高可读性：
 
 ```twig
 {% macro input() %}
@@ -16,7 +16,7 @@ Alternatively you can include the name of the macro after the end tag for better
 {% endmacro input %}
 ```
 
-The following example defines a function called `input()` that takes 4 arguments, the associated values are accessed as variables within the markup inside.
+以下示例定义了一个名为 `input()` 的函数，该函数接受 4 个参数，关联的值作为内部标记中的变量进行访问。
 
 ```twig
 {% macro input(name, value, type, size) %}
@@ -28,38 +28,38 @@ The following example defines a function called `input()` that takes 4 arguments
 {% endmacro %}
 ```
 
-> **Note**: Macro arguments don't specify default values and are always considered optional.
+> **注意**：macro参数不指定默认值，并且始终被认为是可选的。
 
-## Calling Macros
+## 调用宏
 
-Before a macro can be used it needs to be "imported" first using the `{% import %}` tag. If the macro is defined in the same template, the special `_self` variable can be used.
+在使用macro之前，需要先使用`{% import %}`标签"导入"它。如果macro定义在同一个模板中，可以使用特殊的`_self`变量。
 
 ```twig
 {% import _self as form %}
 ```
 
-Here the macro functions are assigned to the `form` variable, available to be called like any other function.
+在这里，macro函数被分配给 `form` 变量，可以像任何其他函数一样被调用。
 
 ```twig
 <p>{{ form.input('username') }}</p>
 <p>{{ form.input('password', null, 'password') }}</p>
 ```
 
-Macros can be defined in [a theme partial](../cms/partials.md) and imported by name. To import the macros from a partial called **macros/form.htm**, simply pass the name after the `import` tag quoted as a string.
+Macros 可以在 [主题部件](../cms/partials.md) 中定义并按名称导入. 要从名为 **macros/form.htm** 的部件导入macro，只需在 `import` 标记后传递名称作为字符串引用。
 
 ```twig
 {% import 'macros/form' as form %}
 ```
 
-Alternatively you may import macros from a [system view file](../services/response-view.md#views) and these will be accepted. To import from **plugins/acme/blog/views/macros.htm** simply pass the path hint instead.
+或者，您可以从 [系统视图文件](../services/response-view.md#views)导入macro，要从 **plugins/acme/blog/views/macros.htm** 导入，只需传递路径提示即可。
 
 ```twig
 {% import 'acme.blog::macros' as form %}
 ```
 
-## Nested Macros
+## 嵌套宏
 
-When you want to use a macro inside another macro from the same template, you need to import it locally.
+当您想在同一模板的另一个macro中使用macro时，您需要在本地导入它。
 
 ```twig
 {% macro input(name, value, type, size) %}
@@ -79,9 +79,9 @@ When you want to use a macro inside another macro from the same template, you ne
 {% endmacro %}
 ```
 
-## Context Variable
+## 上下文变量
 
-Macros don't have access to the current page variables.
+macro无权访问当前页面变量
 
 ```twig
 <!-- October CMS -->
@@ -93,7 +93,7 @@ Macros don't have access to the current page variables.
 {% endmacro %}
 ```
 
-You may pass the variables to the function using the special `_context` variable.
+您可以使用特殊的 `_context` 变量将变量传递给函数。
 
 ```twig
 {% macro myFunction(vars) %}

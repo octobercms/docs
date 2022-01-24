@@ -1,32 +1,32 @@
 # {% content %}
 
-The `{% content %}` tag will display a [CMS content block](../cms/content.md) on the page. To display content block called **contacts.htm** you pass the file name after the `content` tag quoted as a string.
+`{% content %}` 标签将在页面上显示 [CMS 内容块](../cms/content.md) 要显示名为 **contacts.htm** 的内容块，您需要在 `content` 标记后传递文件名作为字符串引用。
 
 ```twig
 {% content "contacts.htm" %}
 ```
 
-A content block inside a subdirectory can be rendered in the same way.
+子目录中的内容块可以以相同的方式呈现
 
 ```twig
 {% content "sidebar/content.htm" %}
 ```
 
-> **Note**: The [Themes documentation](../cms/themes.md#subdirectories) has more details on subdirectory usage.
+> **注意**:  [主题文档](../cms/themes.md#subdirectories) 有更多关于子目录使用的详细信息。
 
-Content blocks can be rendered as plain text:
+内容块可以呈现为纯文本：
 
 ```twig
 {% content "readme.txt" %}
 ```
 
-You can also use Markdown syntax:
+您还可以使用 Markdown 语法：
 
 ```twig
 {% content "changelog.md" %}
 ```
 
-Content blocks can also be used in combination with [layout placeholders](../cms/layouts.md#placeholders):
+内容块也可以与 [布局占位符](../cms/layouts.md#placeholders) 结合使用：
 
 ```twig
 {% put sidebar %}
@@ -34,27 +34,27 @@ Content blocks can also be used in combination with [layout placeholders](../cms
 {% endput %}
 ```
 
-## Variables
+## 变量
 
-You can pass variables to content blocks by specifying them after the file name:
+您可以通过在文件名之后指定变量来将变量传递给内容块：
 
 ```twig
 {% content "welcome.htm" name=user.name %}
 ```
 
-You can also assign new variables for use in the content:
+您还可以分配新变量以在内容中使用：
 
 ```twig
 {% content "location.htm" city="Vancouver" country="Canada" %}
 ```
 
-Inside the content, variables can be accessed using a basic syntax using singular *curly brackets*:
+在内容内部，可以使用单数*花括号*的基本语法访问变量：
 
 ```
-<p>Country: {country}, city: {city}.</p>
+<p>国家: {country}, 城市: {city}.</p>
 ```
 
-You can also pass a collection of variables as a simple array:
+您还可以将变量集合作为简单数组传递：
 
 ```twig
 {% content "welcome.htm" likes=[
@@ -64,7 +64,7 @@ You can also pass a collection of variables as a simple array:
 ] %}
 ```
 
-The collection of variables is accessed by using an opening and closing set of brackets:
+变量的集合是通过使用{}来访问的：
 
 ```
 <ul>
@@ -74,4 +74,4 @@ The collection of variables is accessed by using an opening and closing set of b
 </ul>
 ```
 
-> **Note**: Twig syntax is not supported in Content blocks, consider using a [CMS partial](../cms/partials.md) instead.
+> **注意**: 内容块不支持 Twig 语法，请考虑改用 [CMS部件](../cms/partials.md) 代替.

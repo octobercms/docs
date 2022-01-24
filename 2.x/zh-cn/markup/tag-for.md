@@ -1,6 +1,6 @@
 # {% for %}
 
-The `{% for %}` and `{% endfor %}` tags will loop over each value in a collection. A collection can be either an array or an object implementing the `Traversable` interface.
+`{% for %}` 和 `{% endfor %}` 标签将遍历集合中的每个值。 集合可以是数组，也可以是实现了 `Traversable` 接口的对象。
 
 ```twig
 <ul>
@@ -10,7 +10,7 @@ The `{% for %}` and `{% endfor %}` tags will loop over each value in a collectio
 </ul>
 ```
 
-You can also access both keys and values:
+您还可以访问键和值：
 
 ```twig
 <ul>
@@ -20,21 +20,21 @@ You can also access both keys and values:
 </ul>
 ```
 
-If the collection is empty, you can render a replacement block by using else:
+如果集合为空，您可以使用 else 渲染替换块：
 
 ```twig
 <ul>
     {% for user in users %}
         <li>{{ user.username }}</li>
     {% else %}
-        <li><em>There are no users found</em></li>
+        <li><em>没有找到用户</em></li>
     {% endfor %}
 </ul>
 ```
 
-## Looping a collection
+## 循环集合
 
-If you do need to iterate over a collection of numbers, you can use the `..` operator:
+如果确实需要遍历数字集合，可以使用 `..` 运算符:
 
 ```twig
 {% for i in 0..10 %}
@@ -42,9 +42,9 @@ If you do need to iterate over a collection of numbers, you can use the `..` ope
 {% endfor %}
 ```
 
-The above snippet of code would print all numbers from 0 to 10.
+上面的代码片段将打印从 0 到 10 的所有数字。
 
-It can also be useful with letters:
+它也可以用于字母： 
 
 ```twig
 {% for letter in 'a'..'z' %}
@@ -52,7 +52,7 @@ It can also be useful with letters:
 {% endfor %}
 ```
 
-The `..` operator can take any expression at both sides:
+`..` 运算符可以在两边使用任何表达式
 
 ```twig
 {% for letter in 'a'|upper..'z'|upper %}
@@ -60,10 +60,9 @@ The `..` operator can take any expression at both sides:
 {% endfor %}
 ```
 
-## Adding a condition
+## 添加条件
 
-Unlike in PHP there is no function to `break` or `continue` in a loop, however you can still filter the collection. The following example skips all the `users` which are not active:
-
+与 PHP 不同，循环中没有"break"或"continue"的功能，但是您仍然可以过滤集合。 以下示例跳过所有不活动的`users`：
 ```twig
 <ul>
     {% for user in users if user.active %}
@@ -72,20 +71,20 @@ Unlike in PHP there is no function to `break` or `continue` in a loop, however y
 </ul>
 ```
 
-## The loop variable
+## 循环变量
 
-Inside of a `for` loop block you can access some special variables:
+在`for`循环块的内部可以访问一些特殊变量:
 
-Variable | Description
+变量| 描述
 ------------- | -------------
-`loop.index` | The current iteration of the loop. (1 indexed)
-`loop.index0` | The current iteration of the loop. (0 indexed)
-`loop.revindex` |  The number of iterations from the end of the loop (1 indexed)
-`loop.revindex0` | The number of iterations from the end of the loop (0 indexed)
-`loop.first` | True if first iteration
-`loop.last` |  True if last iteration
-`loop.length` | The number of items in the collection
-`loop.parent` | The parent context
+`loop.index` | 循环的当前迭代。 (1索引)
+`loop.index0` | 循环的当前迭代。 (0索引)
+`loop.revindex` | 循环结束的迭代次数(1索引)
+`loop.revindex0` | 循环末尾的迭代次数(0索引)
+`loop.first` | 如果第一次迭代则为true
+`loop.last` |  如果最后一次迭代则为true
+`loop.length` | 序列中的项目数
+`loop.parent` | 父上下文
 
 ```twig
 {% for user in users %}

@@ -20,9 +20,9 @@ class Product extends Model
 }
 ```
 
-### 哈希散列
+### 哈希(Hash)
 
-哈希属性在模型上首次设置时立即进行哈希处理。 要在模型中使用散列属性，请应用 `October\Rain\Database\Traits\Hashable` 特征并声明一个 `$hashable` 属性，其中包含要散列的属性的数组。
+哈希属性在模型上首次设置时立即进行哈希处理。 要在模型中使用哈希属性，请应用 `October\Rain\Database\Traits\Hashable` 特征并声明一个 `$hashable` 属性，其中包含要设置哈希的属性的数组。
 
 ```php
 class User extends Model

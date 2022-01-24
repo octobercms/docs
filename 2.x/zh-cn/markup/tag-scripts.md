@@ -1,6 +1,6 @@
 # {% scripts %}
 
-The `{% scripts %}` tag inserts JavaScript file references to scripts injected by the application. The tag is commonly defined before the closing BODY tag:
+`{% scripts %}` 标签将 JavaScript 文件引用插入到应用程序注入的脚本中。 该标记通常在结束 BODY 标记之前定义：
 
 ```twig
 <body>
@@ -9,11 +9,11 @@ The `{% scripts %}` tag inserts JavaScript file references to scripts injected b
 </body>
 ```
 
-> **Note**: This tag should appear once only in a given page cycle to prevent duplicated references.
+>  **注意**：此标签应仅在给定的页面周期中出现一次，以防止重复引用。
 
-## Injecting scripts
+## 注入脚本
 
-Links to JavaScript files can be programmatically injected in PHP either by [components](../plugin/components.md#injecting-page-assets-with-components) or [pages](../cms/pages.md#injecting-page-assets-programmatically).
+可以通过 [组件](../plugin/components.md#injecting-page-assets-with-components) 或 [页面](../cms/pages.md#injecting-page-assets-programmatically)以编程方式将 JavaScript 文件的链接注入PHP
 
 ```php
 function onStart()
@@ -22,7 +22,7 @@ function onStart()
 }
 ```
 
-You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../cms/layouts.md#placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+您还可以使用 **scripts** [占位符](../cms/layouts.md#placeholders) 将原始标记注入到 `{% scripts %}` 标签。 在页面或布局中使用 `{% put %}` 标签将内容添加到占位符：
 
 ```twig
 {% put scripts %}

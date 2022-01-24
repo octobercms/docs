@@ -1,22 +1,22 @@
-# Cache
+# 缓存
 
-## Configuration
+## 配置
 
-October provides a unified API for various caching systems and the cache configuration is located at `config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Popular caching systems like [Memcached](http://memcached.org) and [Redis](http://redis.io) are supported out of the box.
+October 为各种缓存系统提供了统一的 API，缓存配置位于`config/cache.php`。在此文件中，您可以指定您希望在整个应用程序中默认使用的缓存驱动程序。系统为您准备了[Memcached](http://memcached.org) 和 [Redis](http://redis.io) 等流行的缓存系统。
 
-The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, October CMS is configured to use the `file` cache driver which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use an in-memory cache such as Memcached or APC. You may even configure multiple cache configurations for the same driver.
+缓存配置文件还包含文件中记录的各种其他选项，因此请务必阅读这些选项。默认情况下，October CMS 配置使用`file`缓存驱动程序，该驱动程序将序列化的缓存对象存储在文件系统中。对于较大的应用程序，建议您使用内存缓存，例如 Memcached 或 APC。您甚至可以为同一个驱动程序配置多个缓存配置。
 
-### Cache Prerequisites
+### 缓存条件
 
-#### Database
+#### 数据库
 
-The `database` cache driver uses the database in lieu of the file system. There is no other configuration required to use this type as the database structure is already available.
+`database` 缓存驱动使用数据库代替文件系统。使用此类型不需要其他配置，因为数据库结构已经可用。
 
-#### Memcached
+#### 内存缓存
 
-Using the Memcached cache requires the [Memcached PECL package](http://pecl.php.net/package/memcached) to be installed.
+使用 Memcached 缓存需要安装 [Memcached PECL 包](http://pecl.php.net/package/memcached)。
 
-The default configuration uses TCP/IP based on [Memcached::addServer](http://php.net/manual/en/memcached.addserver.php):
+默认配置使用基于 [Memcached::addServer](http://php.net/manual/en/memcached.addserver.php) 的 TCP/IP：
 
 ```php
 'memcached' => [
@@ -28,7 +28,7 @@ The default configuration uses TCP/IP based on [Memcached::addServer](http://php
 ],
 ```
 
-You may also set the `host` option to a UNIX socket path. If you do this, the `port` option should be set to `0`:
+您还可以将 `host` 选项设置为 UNIX 套接字路径。 如果你这样做，`port` 选项应该设置为 `0`：
 
 ```php
 'memcached' => [
@@ -42,9 +42,9 @@ You may also set the `host` option to a UNIX socket path. If you do this, the `p
 
 #### Redis
 
-> You need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers) before you can use the Redis cache driver.
+> 需要安装[驱动插件](https://octobercms.com/plugin/october-drivers)才能使用Redis缓存驱动。
 
-The Redis configuration for your application is located in the `config/database.php` configuration file. Within this file, you will see a `redis` array containing the Redis servers used by your application:
+应用程序的 Redis 配置位于 `config/database.php` 配置文件中。 在此文件中，您将看到一个 `redis` 数组，其中包含您的应用程序使用的 Redis 服务器：
 
 ```php
 'redis' => [
@@ -60,17 +60,17 @@ The Redis configuration for your application is located in the `config/database.
 ],
 ```
 
-You may define an `options` array value in your Redis connection definition, allowing you to specify a set of Predis [client options](https://github.com/nrk/predis/wiki/Client-Options).
+您可以在 Redis 连接定义中定义一个 `options` 数组值，允许您指定一组 Predis [客户端选项](https://github.com/nrk/predis/wiki/Client-Options)。
 
-If your Redis server requires authentication, you may supply a password by adding a `password` configuration item to your Redis server configuration array.
+如果您的 Redis 服务器需要身份验证，您可以通过将 `password`配置项添加到 Redis 服务器配置数组来提供密码。
 
-## Cache Usage
+## 缓存使用
 
-While most caching is handled internally by October, the `Cache` facade provides some simple methods for caching your own data.
+虽然大多数缓存在October内部处理，但 `Cache` 门面提供了一些简单的方法来缓存您自己的数据。
 
-### Retrieving Items from the Cache
+### 从缓存中检索项目
 
-The `get` method on the `Cache` facade is used to retrieve items from the cache. If the item does not exist in the cache, `null` will be returned. If you wish, you may pass a second argument to the `get` method specifying the custom default value you wish to be returned if the item doesn't exist:
+`Cache` 门面上的 `get` 方法用于从缓存中检索项目。 如果缓存中不存在该项目，则将返回 `null`。 如果您愿意，您可以将第二个参数传递给 `get` 方法，指定您希望在项目不存在时返回的自定义默认值：
 
 ```php
 $value = Cache::get('key');
@@ -78,7 +78,7 @@ $value = Cache::get('key');
 $value = Cache::get('key', 'default');
 ```
 
-You may even pass a `Closure` as the default value. The result of the `Closure` will be returned if the specified item does not exist in the cache. Passing a Closure allows you to defer the retrieval of default values from a database or other external service:
+你甚至可以传递一个 `Closure` 作为默认值。 如果指定的项在缓存中不存在，则返回 `Closure` 的结果。 传递闭包允许您延迟从数据库或其他外部服务中检索默认值：
 
 ```php
 $value = Cache::get('key', function() {
@@ -86,9 +86,9 @@ $value = Cache::get('key', function() {
 });
 ```
 
-#### Checking for item existence
+#### 检查项目是否存在
 
-The `has` method may be used to determine if an item exists in the cache:
+`has` 方法可用于确定缓存中是否存在项目：
 
 ```php
 if (Cache::has('key')) {
@@ -96,9 +96,9 @@ if (Cache::has('key')) {
 }
 ```
 
-#### Incrementing / decrementing values
+#### 递增/递减值
 
-The `increment` and `decrement` methods may be used to adjust the value of integer items in the cache. Both of these methods optionally accept a second argument indicating the amount by which to increment or decrement the item's value:
+`increment` 和 `decrement` 方法可用于调整缓存中整数项的值。 这两种方法都可以选择接受第二个参数，指示增加或减少项目值的数量：
 
 ```php
 Cache::increment('key');
@@ -110,9 +110,9 @@ Cache::decrement('key');
 Cache::decrement('key', $amount);
 ```
 
-#### Retrieve or update
+#### 检索或更新
 
-Sometimes you may wish to retrieve an item from the cache, but also store a default value if the requested item doesn't exist. For example, you may wish to retrieve all users from the cache or, if they don't exist, retrieve them from the database and add them to the cache. You may do this using the `Cache::remember` method:
+有时您可能希望从缓存中检索一个项目，但如果请求的项目不存在，也存储一个默认值。 例如，您可能希望从缓存中检索所有用户，或者如果它们不存在，则从数据库中检索它们并将它们添加到缓存中。 您可以使用 `Cache::remember` 方法执行此操作：
 
 ```php
 $value = Cache::remember('users', $seconds, function() {
@@ -120,9 +120,9 @@ $value = Cache::remember('users', $seconds, function() {
 });
 ```
 
-If the item does not exist in the cache, the `Closure` passed to the `remember` method will be executed and its result will be placed in the cache.
+如果缓存中不存在该项，则将执行传递给 `remember` 方法的 `Closure`，并将其结果放入缓存中。
 
-You may also combine the `remember` and `forever` methods:
+您还可以结合使用 `remember` 和 `forever` 方法：
 
 ```php
 $value = Cache::rememberForever('users', function() {
@@ -130,23 +130,23 @@ $value = Cache::rememberForever('users', function() {
 });
 ```
 
-#### Retrieve and delete
+#### 检索和删除
 
-If you need to retrieve an item from the cache and then delete it, you may use the `pull` method. Like the `get` method, `null` will be returned if the item does not exist in the cache:
+如果您需要从缓存中检索一个项目然后删除它，您可以使用 `pull` 方法。 与 `get` 方法一样，如果缓存中不存在该项，则将返回 `null`：
 
 ```php
 $value = Cache::pull('key');
 ```
 
-### Storing Items in the Cache
+### 在缓存中存储项目
 
-You may use the `put` method on the `Cache` facade to store items in the cache. When you place an item in the cache, you will need to specify the number of seconds for which the value should be cached:
+您可以使用 `Cache` 门面上的 `put` 方法将项目存储在缓存中。 当您将项目放入缓存中时，您需要指定应缓存该值的秒数：
 
 ```php
 Cache::put('key', 'value', $seconds);
 ```
 
-Instead of passing the number of seconds until the item expires, you may also pass a PHP `DateTime` instance representing the expiration time of the cached item:
+除了传递项目过期之前的秒数之外，您还可以传递一个 PHP `DateTime` 实例来表示缓存项目的过期时间：
 
 ```php
 $expiresAt = Carbon::now()->addMinutes(10);
@@ -154,32 +154,32 @@ $expiresAt = Carbon::now()->addMinutes(10);
 Cache::put('key', 'value', $expiresAt);
 ```
 
-> **Note**: We recommend using `DateTime` instances for defining all expiry lengths, in order to ensure compatibility with future versions of October CMS.
+> **注意**：我们建议使用 `DateTime` 实例来定义所有到期长度，以确保与October CMS的未来版本兼容。
 
-The `add` method will only add the item to the cache if it does not already exist in the cache store. The method will return `true` if the item is actually added to the cache. Otherwise, the method will return `false`:
+`add` 方法只会将缓存存储中不存在的项目添加到缓存中。 如果项目实际添加到缓存中，该方法将返回`true`。 否则该方法将返回 `false`：
 
 ```php
 Cache::add('key', 'value', $seconds);
 ```
 
-The `forever` method may be used to store an item in the cache permanently. These values must be manually removed from the cache using the `forget` method:
+`forever` 方法可用于将项目永久存储在缓存中。 这些值必须使用 `forget` 方法从缓存中手动删除：
 
 ```php
 Cache::forever('key', 'value');
 ```
 
-### Removing Items from the Cache
+### 从缓存中删除项目
 
-You may remove items from the cache using the `forget` method on the `Cache` facade:
+您可以使用 `Cache` 门面上的 `forget` 方法从缓存中删除项目：
 
 ```php
 Cache::forget('key');
 ```
 
-You may clear the entire caching using the `flush` method:
+您可以使用 `flush` 方法清除整个缓存：
 
 ```php
 Cache::flush();
 ```
 
-Flushing the cache **does not** respect the cache prefix and will remove all entries from the cache. Consider this carefully when clearing a cache which is shared by other applications.
+刷新缓存**不考虑**缓存前缀，将从缓存中删除所有条目。 在清除由其他应用程序共享的缓存时，请仔细考虑这一点。

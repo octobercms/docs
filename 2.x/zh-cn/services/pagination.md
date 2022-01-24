@@ -1,4 +1,4 @@
-# Pagination
+# 分页
 
 ## Basic usage
 

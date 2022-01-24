@@ -1,18 +1,18 @@
 # dump()
 
-The `dump()` function dumps information about a template variable. This is useful when debugging a template that does not behave as expected.
+`dump()` 函数输出有关模板变量的信息。 这在调试不符合预期的模板时很有用。
 
 ```twig
 {{ dump(user) }}
 ```
 
-You can inspect several variables by passing them as additional arguments:
+您可以通过将多个变量作为附加参数传递来检查它们： 
 
 ```twig
 {{ dump(user, categories) }}
 ```
 
-If you don't pass any value, all variables from the current context are dumped:
+如果您不传递任何值，则当前上下文中的所有变量都将被输出：
 
 ```twig
 {{ dump() }}

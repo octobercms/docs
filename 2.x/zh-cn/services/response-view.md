@@ -1,4 +1,4 @@
-# Response & View
+# 响应和视图
 
 ## Basic Responses
 

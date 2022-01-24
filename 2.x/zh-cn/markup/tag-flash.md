@@ -1,6 +1,6 @@
 # {% flash %}
 
-The `{% flash %}` and `{% endflash %}` tags will render any flash messages stored in the user session, set by the `Flash` PHP class. The `message` variable inside will contain the flash message text and the markup inside will repeat for multiple flash messages.
+`{% flash %}` 和 `{% endflash %}` 标签将呈现存储在用户会话中的任何闪现消息，由 `Flash` PHP 类设置。里面的 `message` 变量将包含闪现消息文本，并且里面的标记将针对多个闪现消息重复。
 
 ```twig
 <ul>
@@ -10,7 +10,7 @@ The `{% flash %}` and `{% endflash %}` tags will render any flash messages store
 </ul>
 ```
 
-You can use the `type` variable that represents the flash message type &mdash; **success**, **error**, **info** or **warning**.
+您可以使用表示闪现消息类型的 `type` 变量— **success**, **error**, **info** 或者 **warning**.
 
 ```twig
 {% flash %}
@@ -20,7 +20,7 @@ You can use the `type` variable that represents the flash message type &mdash; *
 {% endflash %}
 ```
 
-You can also specify the `type`  to filter flash messages of a given type. The next example will show only **success** messages, if there is an **error** message it won't be displayed.
+您还可以指定 `type` 来过滤给定类型的闪现消息。 下一个示例将仅显示 **success** 消息，如果有 **error** 消息将不会显示。
 
 ```twig
 {% flash success %}
@@ -28,23 +28,23 @@ You can also specify the `type`  to filter flash messages of a given type. The n
 {% endflash %}
 ```
 
-## Setting flash messages
+## 设置闪现消息
 
-Flash messages can be set by [Components](../cms/components.md) or inside the page or layout [PHP section](../cms/themes.md#php-section) with the `Flash` class.
+闪现消息可以通过 [组件](../cms/components.md) 或在页面以及布局 [PHP部分](../cms/themes.md#php-section) 中使用 `Flash` 类设置。
 
 ```php
 function onSave()
 {
-    // Sets a successful message
-    Flash::success('Settings successfully saved!');
+    // 设置成功消息
+    Flash::success('设置成功保存！');
 
-    // Sets an error message
-    Flash::error('Error saving settings');
+    // 设置错误消息
+    Flash::error('保存设置时出错');
 
-    // Sets a warning message
-    Flash::warning('There was a problem but no worries');
+    // 设置警告信息
+    Flash::warning('有问题但不用担心');
 
-    // Sets an informative message
-    Flash::info('Just a heads up about the settings');
+    // 设置信息性消息
+    Flash::info('只是对设置的提醒');
 }
 ```

@@ -1,14 +1,14 @@
 # {% if %}
 
-The `{% if %}` and `{% endif %}` tags will represent an expression and is comparable with the if statements of PHP. In the simplest form you can use it to test if an expression evaluates to `true`:
+`{％ if ％}`和`{％ endif ％}`标记将表示表达式，并且与PHP的If语句类似。在最简单的形式中，您可以使用它来测试表达式是否为`true`：
 
 ```twig
 {% if online == false %}
-    <p>The website is in maintenance mode.</p>
+    <p>该网站处于维护模式。</p>
 {% endif %}
 ```
 
-You can also test if an array is not empty:
+您还可以测试数组是否不为空：
 
 ```twig
 {% if users %}
@@ -20,38 +20,38 @@ You can also test if an array is not empty:
 {% endif %}
 ```
 
-> **Note**: If you want to test if the variable is defined, use `{% if users is defined %}` instead.
+>**注意**：如果要测试变量是否已定义，则使用`{% if users is defined %}`。
 
-You can also use `not` to check for values that evaluate to `false`:
+您也可以使用`not`来检查评估为`false`的值：
 
 ```twig
 {% if not user.subscribed %}
-    <p>You are not subscribed to our mailing list.</p>
+    <p>您没有订阅我们的邮件列表.</p>
 {% endif %}
 ```
 
-For multiple expressions `{% elseif %}` and `{% else %}` can be used:
+对于多个表达式， `{% elseif %}` 和 `{% else %}` 可以使用：
 
 ```twig
 {% if kenny.sick %}
-    Kenny is sick.
+    肯尼病了。
 {% elseif kenny.dead %}
-    You killed Kenny! You bastard!!!
+    你杀了肯尼！ 你这个混蛋！！！
 {% else %}
-    Kenny looks okay so far.
+    到目前为止，肯尼看起来还不错。
 {% endif %}
 ```
 
-## Expression rules
+## 表达式规则
 
-The rules to determine if an expression is true or false are the same as in PHP, here are the edge cases rules:
+判断表达式是真还是假的规则与 PHP 中的相同：
 
-Value | Boolean evaluation
+值 | 布尔值
 ------------- | -------------
-*empty string* | false
-*numeric zero* | false
-*whitespace-only string* | true
-*empty array* | false
-*null* | false
-*non-empty array* | true
-*object* | true
+*空字符串* | false
+*数字零* | false
+*只有空格的字符串* | true
+*空数组* | false
+*NULL* | false
+*非空数组* | true
+*对象* | true

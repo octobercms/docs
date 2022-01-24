@@ -1,18 +1,17 @@
 # |default
 
-The `|default` filter returns the value passed as the first argument if the filtered value is undefined or empty, otherwise the filtered value is returned.
-
+如果过滤后的值未定义或为空,`|default` 过滤器将返回第一个参数传递的值,否则返回过滤后的值
 ```twig
-{{ variable|default('The variable is not defined') }}
+{{ variable|default('变量未定义') }}
 
-{{ variable.foo|default('The foo property on variable is not defined') }}
+{{ variable.foo|default('变量上的 foo 属性未定义') }}
 
-{{ variable['foo']|default('The foo key in variable is not defined') }}
+{{ variable['foo']|default('变量中的 foo 键未定义') }}
 
-{{ ''|default('The variable is empty') }}
+{{ ''|default('变量为空') }}
 ```
 
-When using the `default` filter on an expression that uses variables in some method calls, be sure to use the `default` filter whenever a variable can be undefined:
+当使用 default 筛选在某些方法调用中使用变量的表达式，请确保使用 default 当变量未定义时过滤：
 
 ```twig
 {{ variable.method(foo|default('bar'))|default('bar') }}

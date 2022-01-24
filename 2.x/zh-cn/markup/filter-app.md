@@ -1,31 +1,31 @@
 # |app
 
-The `|app` filter returns an address relative to the public path of the website. The result is an absolute URL, including the domain name and protocol, to the location specified in the filter parameter. The filter can be applied to any path.
+`|app` 过滤器返回网站公共路径的地址.返回结果指向过滤器参数中指定位置的绝对URL,包括域名和协议.过滤器可以应用于任何路径.
 
 ```twig
 <link rel="icon" href="{{ '/favicon.ico'|app }}" />
 ```
 
-If the website address is __http://octobercms.com__ the above example would output the following:
+如果网站地址是 __https://octobercms.com__ 则上面的示例将输出以下内容:
 
 ```html
-<link rel="icon" href="http://octobercms.com/favicon.ico" />
+<link rel="icon" href="https://octobercms.com/favicon.ico" />
 ```
 
-It can also be used for static URLs:
+它也可以用于静态 URL:
 
 ```twig
 <a href="{{ '/about-us'|app }}">
-    About Us
+    关于我们
 </a>
 ```
 
-The above would output:
+以上将输出:
 
 ```html
-<a href="http://octobercms.com/about-us">
-    About us
+<a href="https://octobercms.com/about-us">
+    关于我们
 </a>
 ```
 
-> **Note**: The `|page` filter is recommended for linking to other pages.
+> **注意**: 推荐使用 `|page` 过滤器链接到其他页面.

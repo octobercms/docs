@@ -1,20 +1,20 @@
 # |page
 
-The `|page` filter creates a link to a page using a page file name, without an extension, as a parameter. For example, if there is the about.htm page you can use the following code to generate a link to it:
+`|page` 过滤器使用页面文件名(不带扩展名)作为参数创建指向页面的链接。 例如，如果有 about.htm 页面，您可以使用以下代码生成指向它的链接：
 
 ```twig
-<a href="{{ 'about'|page }}">About Us</a>
+<a href="{{ 'about'|page }}">关于我们</a>
 ```
 
-Remember that if you refer a page from a subdirectory you should specify the subdirectory name:
+切记，如果您从子目录引用页面，则应指定子目录名称： 
 
 ```html
-<a href="{{ 'contacts/about'|page }}">About Us</a>
+<a href="{{ 'contacts/about'|page }}">关于我们</a>
 ```
 
-> **Note**: The [Themes documentation](../cms/themes.md#subdirectories) has more details on subdirectory usage.
+> **注意**:  [主题文档](../cms/themes.md#subdirectories) 有更多关于子目录使用的细节。
 
-To access the link to a certain page from the PHP section, you can use `$this->pageUrl('page-name-without-extension')`:
+要从 PHP 部分访问特定页面的链接，您可以使用 `$this->pageUrl('page-name-without-extension')`:
 
 ```
 ==
@@ -27,13 +27,13 @@ function onStart() {
 {{ newsPage }}
 ```
 
-You can create a link to the current page by filtering an empty string:
+您可以通过过滤空字符串来创建指向当前页面的链接：
 
 ```twig
-<a href="{{ ''|page }}">Refresh page</a>
+<a href="{{ ''|page }}">刷新页面</a>
 ```
 
-To get the link to the current page in PHP, you can use `$this->pageUrl('')` with an empty string.
+要在 PHP 中获取到当前页面的链接，可以使用带有空字符串的 `$this->pageUrl('')`。
 
 ```
 ==
@@ -46,17 +46,16 @@ function onStart() {
 {{ currentUrl }}
 ```
 
-## Reverse Routing
+## 反向路由
 
-When linking to a page that has URL parameters defined, the `|page` filter supports reverse routing by passing an array as the first argument.
-
+当链接到一个带有参数的URL页面时，`|page` 过滤器通过传递一个数组作为第一个参数来支持反向路由
 ```
 url = "/blog/post/:post_id"
 ==
 [...]
 ```
 
-Given the above content is found in a CMS page file **post.htm** you can link to this page using:
+鉴于上述内容位于 CMS 页面文件 **post.htm** 中，您可以使用以下方法链接到该页面：
 
 ```twig
 <a href="{{ 'post'|page({ post_id: 10 }) }}">
@@ -64,17 +63,17 @@ Given the above content is found in a CMS page file **post.htm** you can link to
 </a>
 ```
 
-If the website address is __http://octobercms.com__ the above example would output the following:
+如果网站地址是 __https://octobercms.com__ 则上面的示例将输出以下内容：
 
 ```html
-<a href="http://octobercms.com/blog/post/10">
+<a href="https://octobercms.com/blog/post/10">
     Blog post #10
 </a>
 ```
 
-## Persistent URL Parameters
+## 持久URL参数
 
-If a URL parameter is already presented in the environment, the `|page` filter will use it automatically.
+如果环境中已经存在 URL 参数，`|page` 过滤器将自动使用它。
 
 ```
 url = "/blog/post/:post_id"
@@ -82,34 +81,34 @@ url = "/blog/post/:post_id"
 url = "/blog/post/edit/:post_id"
 ```
 
-If there are two pages, **post.htm** and **post-edit.htm**, with the above URLs defined, you can link to either page without needing to define the `post_id` parameter.
+如果有两个页面，**post.htm** 和 **post-edit.htm**，并定义了上述 URL，您可以链接到任一页面，而无需定义 `post_id` 参数。
 
 ```twig
 <a href="{{ 'post-edit'|page }}">
-    Edit this post
+    编辑这个帖子
 </a>
 ```
 
-When the above markup appears on the **post.htm** page, it will output the following:
+当上述标记出现在 **post.htm** 页面上时，它将输出以下内容：
 
 ```html
-<a href="http://octobercms.com/blog/post/edit/10">
-    Edit this post
+<a href="https://octobercms.com/blog/post/edit/10">
+    编辑这个帖子
 </a>
 ```
 
-The `post_id` value of *10* is already known and has persisted across the environments. You can disable this functionality by passing the 2nd argument as `false`:
+*10* 的 `post_id` 值是已知的，并且已在整个环境中持续存在。 您可以通过将第二个参数传递为 `false` 来禁用此功能
 
 ```twig
 <a href="{{ 'post'|page(false) }}">
-    Unknown blog post
+    未知的博文
 </a>
 ```
 
-Or by defining a different value:
+或者通过定义不同的值：
 
 ```twig
 <a href="{{ 'post'|page({ post_id: 6 }) }}">
-    Blog post #6
+    博客帖子 #6
 </a>
 ```
