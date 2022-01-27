@@ -1120,14 +1120,14 @@ Option | Description
 ------------- | -------------
 **form** | a reference to form field definition file, see [backend form fields](#defining-form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
+**displayMode** | controls how the interface is dispalyed, as either **simple** or **builder**. Default: `simple`
 **titleFrom** | name of field within items to use as the title for the collapsed item.
-**minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set **'minItems: 1'** the first row will be displayed and not hidden.
+**minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set `minItems: 1` the first row will be displayed and not hidden.
 **maxItems** | maximum number of items to allow within the repeater.
 **groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
-**groupKeyFrom** | the group key attribute stored along with the saved data. Default `_group`.
+**groupKeyFrom** | the group key attribute stored along with the saved data. Default: `_group`
 **showReorder** | displays an interface for sorting items. Default: true
 **showDuplicate** | displays an interface for cloning items. Default: true
-**style** | the behavior style to apply for repeater items. Can be one of the following: `default`, `collapsed` or `accordion`. See the **Repeater styles** section below for more information.
 
 The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
 
@@ -1180,14 +1180,6 @@ Option | Description
 **fields** | form fields belonging to the group, see [backend form fields](#defining-form-fields).
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
-
-#### Repeater Style
-
-The `style` attribute of the repeater widget controls the behaviour of repeater items. There are three different types of styles available for developers:
-
-- **default** Shows all the repeater items as expanded on page load. This is the default current behavior, and will be used if style is not defined in the repeater widget's configuration.
-- **collapsed** Shows all the repeater items as collapsed (minimised) on page load. The user can collapse or expand items as they wish.
-- **accordion** Shows only the first repeater item as expanded on load, with all others collapsed. When another item is exanded, any other expanded item is collapsed, effectively making it so that only one item is expanded at a time.
 
 <a name="widget-richeditor"></a>
 ### Rich editor / WYSIWYG
