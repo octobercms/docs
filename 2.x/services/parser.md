@@ -62,7 +62,7 @@ If you intentionally want to enable Markdown inside a block-level tag, you may d
 
 ## Twig Template Parser
 
-Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup), [view content](../services/response-view.md#views) and [mail message content](../services/mail.md#message-content).
+Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup/templating.md), [view content](../services/response-view.md#views) and [mail message content](../services/mail.md#message-content).
 
 The `Twig` facade is used for parsing Twig syntax, you may use the `Twig::parse` method to render Twig to HTML.
 
@@ -241,7 +241,7 @@ echo $syntax->toTwig();
 
 ### Editor Mode
 
-So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](http://octobercms.com/plugin/rainlab-pages) that belong to them or for [dynamically built forms used in email campaigns](http://octobercms.com/plugin/responsiv-campaign).
+So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](https://octobercms.com/plugin/rainlab-pages) that belong to them or for [dynamically built forms used in email campaigns](https://octobercms.com/plugin/responsiv-campaign).
 
 To continue with the examples above, calling the `toEditor` method on the `Parser` object will return a PHP array of properties that define how the variable should be populated, by a form builder for example.
 

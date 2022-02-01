@@ -42,7 +42,7 @@ You may also set the `host` option to a UNIX socket path. If you do this, the `p
 
 #### Redis
 
-> You need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers) before you can use the Redis cache driver.
+> You need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers) before you can use the Redis cache driver.
 
 The Redis configuration for your application is located in the `config/database.php` configuration file. Within this file, you will see a `redis` array containing the Redis servers used by your application:
 

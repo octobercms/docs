@@ -37,7 +37,7 @@ Example of the theme information file:
 name: "October CMS Demo"
 description: "Demonstrates the basic concepts of the front-end theming."
 author: "October CMS"
-homepage: "http://octobercms.com"
+homepage: "https://octobercms.com"
 code: "Demo"
 authorCode: "Acme"
 ```

@@ -168,6 +168,8 @@
         - console/commands
         - console/scaffolding
         - console/development
-        - help/unit-testing
-        - help/publishing-packages
-        - help/developer-guide
+-
+    title: Packages
+    children:
+        - packages/unit-testing
+        - packages/publishing-packages

@@ -6,10 +6,10 @@ The `|app` filter returns an address relative to the public path of the website.
 <link rel="icon" href="{{ '/favicon.ico'|app }}" />
 ```
 
-If the website address is __http://octobercms.com__ the above example would output the following:
+If the website address is __https://octobercms.com__ the above example would output the following:
 
 ```html
-<link rel="icon" href="http://octobercms.com/favicon.ico" />
+<link rel="icon" href="https://octobercms.com/favicon.ico" />
 ```
 
 It can also be used for static URLs:
@@ -23,7 +23,7 @@ It can also be used for static URLs:
 The above would output:
 
 ```html
-<a href="http://octobercms.com/about-us">
+<a href="https://octobercms.com/about-us">
     About us
 </a>
 ```

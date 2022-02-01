@@ -119,8 +119,8 @@ The following relations types are available:
 - [One To Many](#one-to-many)
 - [Many To Many](#many-to-many)
 - [Has Many Through](#has-many-through)
+- [Has One Through](#has-one-through)
 - [Polymorphic Relations](#polymorphic-relations)
-- [Many To Many Polymorphic Relations](#many-to-many-polymorphic-relations)
 
 ### One To One
 
@@ -526,13 +526,13 @@ public $hasOneThrough = [
 ];
 ```
 
-### Polymorphic relations
+## Polymorphic Relations
 
 Polymorphic relations allow a model to belong to more than one other model on a single association.
 
-### One To One
+### Polymorphic One To One
 
-#### Table structure
+#### Table Structure
 
 A one-to-one polymorphic relation is similar to a simple one-to-one relation; however, the target model can belong to more than one type of model on a single association. For example, imagine you want to store photos for your staff members and for your products. Using polymorphic relationships, you can use a single `photos` table for both of these scenarios. First, let's examine the table structure required to build this relationship:
 
@@ -554,7 +554,7 @@ photos
 
 Two important columns to note are the `imageable_id` and `imageable_type` columns on the `photos` table. The `imageable_id` column will contain the ID value of the owning staff or product, while the `imageable_type` column will contain the class name of the owning model. The `imageable_type` column is how the ORM determines which "type" of owning model to return when accessing the `imageable` relation.
 
-#### Model structure
+#### Model Structure
 
 Next, let's examine the model definitions needed to build this relationship:
 
@@ -581,7 +581,7 @@ class Product extends Model
 }
 ```
 
-#### Retrieving Polymorphic relations
+#### Retrieving Polymorphic Relations
 
 Once your database table and models are defined, you may access the relationships via your models. For example, to access the photo for a staff member, we can simply use the `photo` dynamic property:
 
@@ -601,7 +601,7 @@ $imageable = $photo->imageable;
 
 The `imageable` relation on the `Photo` model will return either a `Staff` or `Product` instance, depending on which type of model owns the photo.
 
-### One To Many
+### Polymorphic One To Many
 
 #### Table Structure
 
@@ -684,7 +684,7 @@ $comment->commentable = $video;
 $comment->save()
 ```
 
-### Many To Many
+### Polymorphic Many To Many
 
 #### Table structure
 
@@ -736,7 +736,7 @@ class Tag extends Model
 }
 ```
 
-#### Retrieving the relationship
+#### Retrieving the Relationship
 
 Once your database table and models are defined, you may access the relationships via your models. For example, to access all of the tags for a post, you can simply use the `tags` dynamic property:
 
@@ -758,7 +758,7 @@ foreach ($tag->videos as $video) {
 }
 ```
 
-#### Custom Polymorphic types
+#### Custom Polymorphic Types
 
 By default, the fully qualified class name is used to store the related model type. For instance, given the example above where a `Photo` may belong to `Staff` or a `Product`, the default `imageable_type` value is either `Acme\Blog\Models\Staff` or `Acme\Blog\Models\Product` respectively.
 
@@ -775,7 +775,7 @@ Relation::morphMap([
 
 The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods).
 
-## Querying relations
+## Querying Relations
 
 Since all types of Model relationships can be called via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of relationships also serve as [query builders](query.md), allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.
 

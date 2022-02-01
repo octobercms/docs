@@ -126,6 +126,8 @@ When using the SQL Server database engine, you will need to install the [group c
 
 1. **An error "Specified key was too long" is displayed during migration**: This happens when you are using an older version of MySQL or MariaDB. To resolve this issue, you may need to [configure the index lengths](../database/structure.md#index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
 
+1. **An error "Deprecated: Return type of offsetExists($key) should either be compatible with offsetExists(mixed $offset)..."**: This happens when using PHP 8.1 or above, use a lower version of PHP to resolve this issue. The recommended PHP version for October CMS 2.0 is PHP 8.0.
+
 1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
 
 1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration.md#debug-mode) to see the underlying error message.

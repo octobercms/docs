@@ -240,6 +240,7 @@ Option | Description
 **activeTab** | selected tab when the form first loads, name or index. Default: 1
 **icons** | assign icons to tabs using tab names as the key.
 **lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
+**linkable** | determines if the tabs can be linked using URL fragments. Default: true
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
 
@@ -956,7 +957,7 @@ Option | Description
 **thumbOptions** | additional [resize options](../services/resizer.md#resize-parameters) for generating the thumbnail
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
 
-> **Note**: Unlike the [Media Finder form widget](#mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attrbiute on your associated model.
+> **Note**: Unlike the [Media Finder form widget](#mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown Editor
@@ -992,7 +993,7 @@ Option | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 
-> **Note**: Unlike the [File Upload form widget](#file-upload), the Media Finder form widget stores its data as a string representing the path to the image selected within the Media Library. It should associate to a normal attribute on your model.
+> **Note**: Unlike the [File Upload form widget](#file-upload), the Media Finder form widget stores its data as a string representing the path to the media files selected within the Media Library. It should associate to a normal attribute on your model.
 
 <a name="widget-nestedform"></a>
 ### Nested Form

@@ -2031,24 +2031,6 @@ $collection->all();
 // [9, 18, 27, 36, 45, 54, 63, 72, 81, 90]
 ```
 
-This method can be useful when combined with factories to create [Eloquent](/docs/{{version}}/eloquent) models:
-
-```php
-$categories = Collection::times(3, function ($number) {
-    return factory(Category::class)->create(['name' => "Category No. $number"]);
-});
-
-$categories->all();
-
-/*
-    [
-        ['id' => 1, 'name' => 'Category No. 1'],
-        ['id' => 2, 'name' => 'Category No. 2'],
-        ['id' => 3, 'name' => 'Category No. 3'],
-    ]
-*/
-```
-
 <a name="method-toarray"></a>
 #### `toArray()`
 

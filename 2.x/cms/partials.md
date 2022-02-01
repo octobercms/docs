@@ -111,7 +111,19 @@ function onStart()
 <h3>{{ hello }}</h3>
 ```
 
-The templating language provided by October is described in the [Markup Guide](../markup.md). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts.md#dynamic-layouts) article.
+Externally assigned variables to the partial can be accessed in PHP using the `$this` object.
+
+```
+==
+function onStart()
+{
+    $this['location'] = $this->city . ', ' . $this->country;
+}
+==
+{{ location }} is the same as {{ city }}, {{ country }}.
+```
+
+The templating language provided by October CMS is described in the [Markup Guide](../markup.md). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts.md#dynamic-layouts) article.
 
 ### Life Cycle Limitations
 

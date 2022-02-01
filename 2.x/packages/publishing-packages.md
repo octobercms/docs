@@ -6,7 +6,7 @@ To publish your plugin or theme on the October CMS marketplace, you will need to
 
 Your package should reside in a source control repository that can be accessed by the October CMS gateway, such as [GitHub](https://github.com/) or [BitBucket](https://bitbucket.org/). For private packages, the server can access them using the credentials you provide during the publishing process.
 
-Be sure to start your package `name` ends with **-plugin** or **-theme** respectively, this will help others find your package and is in accordance with the [Developer Guide](../../help/guidelines/developer.md#package-naming).
+Be sure to start your package `name` ends with **-plugin** or **-theme** respectively, this will help others find your package and is in accordance with the [Developer Guide](https://octobercms.com/help/guidelines/developer#package-naming).
 
 ### Publishing Plugins
 
