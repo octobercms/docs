@@ -14,8 +14,8 @@ class Product extends Model
     use \October\Rain\Database\Traits\Nullable;
 
     /**
-        * @var array Nullable attributes.
-        */
+     * @var array Nullable attributes.
+     */
     protected $nullable = ['sku'];
 }
 ```
@@ -30,8 +30,8 @@ class User extends Model
     use \October\Rain\Database\Traits\Hashable;
 
     /**
-        * @var array List of attributes to hash.
-        */
+     * @var array List of attributes to hash.
+     */
     protected $hashable = ['password'];
 }
 ```
@@ -46,8 +46,8 @@ class User extends Model
     use \October\Rain\Database\Traits\Purgeable;
 
     /**
-        * @var array List of attributes to purge.
-        */
+     * @var array List of attributes to purge.
+     */
     protected $purgeable = ['password_confirmation'];
 }
 ```
@@ -68,8 +68,8 @@ class User extends Model
     use \October\Rain\Database\Traits\Encryptable;
 
     /**
-        * @var array List of attributes to encrypt.
-        */
+     * @var array List of attributes to encrypt.
+     */
     protected $encryptable = ['api_key', 'api_secret'];
 }
 ```
@@ -86,8 +86,8 @@ class User extends Model
     use \October\Rain\Database\Traits\Sluggable;
 
     /**
-        * @var array Generate slugs for these attributes.
-        */
+     * @var array Generate slugs for these attributes.
+     */
     protected $slugs = ['slug' => 'name'];
 }
 ```
@@ -531,13 +531,13 @@ class User extends Model
     use \October\Rain\Database\Traits\Revisionable;
 
     /**
-        * @var array Monitor these attributes for changes.
-        */
+     * @var array Monitor these attributes for changes.
+     */
     protected $revisionable = ['name', 'email'];
 
     /**
-        * @var array Relations
-        */
+     * @var array Relations
+     */
     public $morphMany = [
         'revision_history' => [\System\Models\Revision::class, 'name' => 'revisionable']
     ];
