@@ -50,10 +50,11 @@
     title: Functions
     collapsable: false
     children:
+        - function-abort
+        - function-dump
         - function-str
         - function-form
         - function-html
-        - function-dump
 
 #
 # Root Nav
