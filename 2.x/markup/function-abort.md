@@ -4,38 +4,32 @@ The `abort()` function aborts the successful request path by changing the respon
 
 ```twig
 {% if record.notFound %}
-    {{ abort(404) }}
+    {% do abort(404) %}
 {% endif %}
 ```
 
-To set the response code and display the theme 404 page, use the `404` code. Any other code will display the error page.
+To set the response code and display the theme 404 page, use the `404` code.
 
 ```twig
-{{ abort(404) }}
+{% do abort(404) %}
 ```
 
-To set the code in the header without changing the response, pass `false` as the second argument.
+Any other code will display the error page, with an optional message as the second argument.
 
 ```twig
-{{ abort(404, false) }}
+{% do abort(403, 'Access Denied') %}
 ```
 
-This can be used for any response code, for example, **Access Denied** status.
+To set the HTTP code in the header without changing the response contents, pass `false` as the second argument.
 
 ```twig
-{{ abort(403, false) }}
+{% do abort(404, false) %}
 ```
 
-You may also pass an error message as the second argument.
+To perform a redirect, pass the `302` (temporary) or `301` (permanent) code using the second argument as the destination, as either a CMS page name or a URL address.
 
 ```twig
-{{ abort(403, 'Access Denied') }}
-```
+{% do abort(301, 'blog/index') %}
 
-To perform a redirect, pass the `302` (temporary) or `301` (permanent) code and the second argument can be a URL or a CMS page name.
-
-```twig
-{{ abort(301, 'blog/index') }}
-
-{{ abort(302, 'https://octobercms.com') }}
+{% do abort(302, 'https://octobercms.com') %}
 ```
