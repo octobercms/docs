@@ -779,9 +779,9 @@ css_content:
 
 Option | Description
 ------------- | -------------
-**language** | code language, for example, php, css, javascript, html. Default: php.
-**showGutter** | shows a gutter with line numbers. Default: true.
-**wrapWords** | breaks long lines on to a new line. Default true.
+**language** | code language, for example, php, css, javascript, html. Default: `php`.
+**showGutter** | shows a gutter with line numbers. Default: `true`.
+**wrapWords** | breaks long lines on to a new line. Default `true`.
 **fontSize** | the text font size. Default: 12.
 
 <a name="widget-colorpicker"></a>
@@ -945,14 +945,15 @@ avatar:
 
 Option | Description
 ------------- | -------------
-**mode** | the expected file type, either file or image. Default: image
+**mode** | the expected file type, either file or image. Default: `image`
+**size** | for multiple uploads, the size of the container. Available options: tiny, small, large, huge, giant, adaptive. Default: `large`
 **imageWidth** | if using image type, the image will be resized to this width, optional
 **imageHeight** | if using image type, the image will be resized to this height, optional
 **fileTypes** | file extensions that are accepted by the uploader, optional. Eg: `zip,txt`
 **mimeTypes** | MIME types that are accepted by the uploader, either as file extension or fully qualified name, optional. Eg: `bin,txt`
 **maxFilesize** | file size in Mb that are accepted by the uploader, optional. Default: from "upload_max_filesize" param value
 **maxFiles** | maximum number of files allowed to be uploaded
-**useCaption** | allows a title and description to be set for the file. Default: true
+**useCaption** | allows a title and description to be set for the file. Default: `true`
 **prompt** | text to display for the upload button, applies to files only, optional
 **thumbOptions** | additional [resize options](../services/resizer.md#resize-parameters) for generating the thumbnail
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
