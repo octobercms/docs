@@ -1,11 +1,13 @@
 # 安装
 
-<VideoPreview src="https://www.youtube.com/watch?v=RHUwCvo7xng" />
+<VideoPreview src="https://www.bilibili.com/video/BV1aR4y177dT?share_source=copy_web" />
 
 October CMS 是一个具有简单直观界面的 Web 应用程序平台。Web 平台提供一致的结构，并强调可重用性，因此您可以专注于构建独特的内容，而我们处理无聊的部分。
 
 
 无论您是 Web 开发新手还是拥有多年经验，October CMS 都是一个平台，可让您轻松为您和您的客户创建定制体验。 我们希望您与我们一起享受旅程，并在简单中发现快乐。
+
+> October中文文档全部由[BBCTOP](https://www.bbctop.com/octobercms)工作室团队维护。
 
 要在本地运行 October CMS，我们推荐以下软件：
 

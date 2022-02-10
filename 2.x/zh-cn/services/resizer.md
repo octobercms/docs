@@ -1,59 +1,59 @@
 # 图像调整器
 
-## Introduction
+## 介绍
 
-October CMS ships with an image resizer that lets you change the shape and size of supported images. To resize an image, use the `open` method on the `Resizer` facade to target a file path.
+October CMS 附带一个图像调整器，可让您更改支持的图像的形状和大小。要调整图像大小，请使用 `Resizer` 外观上的 `open` 方法来定位文件路径。
 
 ```php
 $image = Resizer::open('path/to/image.jpg');
 ```
 
-You may also pass an uploaded file from the [page request input](../services/request-input.md).
+您还可以从  [page request input](../services/request-input.md)传递上传的文件。.
 
 ```php
 $image = Resizer::open(Input::file('field_name'));
 ```
 
-To resize the image, call the `resize` method on the object to perform the resize. The first argument is the image width, the second argument is the image height and the third argument is an array of [resize parameters](#resize-parameters) options.
+要调整图像大小，请在对象上调用 `resize` 方法来执行调整大小。第一个参数是图像宽度，第二个参数是图像高度，第三个参数是 [调整参数大小](#resize-parameters) 选项的数组.
 
 ```php
 $image->resize(800, 600, ['mode' => 'crop']);
 ```
 
-The width and height arguments are also optional, for example, to use the existing width and only adjust the height, pass the second argument as `null`. This value is then calculated using original image ratio (automatic proportional scaling) based on the `mode` option.
+宽度和高度参数也是可选的，例如，要使用现有宽度并仅调整高度，请将第二个参数传递为 `null`。然后使用基于 `mode` 选项的原始图像比例(自动比例缩放)计算该值。
 
 ```php
 $image->resize(800, null, [...]);
 ```
 
-Finally, use the `save` method to save the resized image to a new location.
+最后，使用 `save` 方法将调整大小的图像保存到新位置。
 
 ```php
 $image->save('path/to/new/file.jpg');
 ```
 
-> **Note**: There is also a `|resize` [markup filter](../markup/filter-resize.md) that can be used for resizing images in your themes.
+> **注意**: 还有一个 `|resize` [标记过滤器](../markup/filter-resize.md) 可用于调整主题中的图像大小。
 
-### Resize Parameters
+### 调整参数大小
 
-The following elements are supported in the options array are supported:
+在 options 数组中支持以下元素：
 
-Key | Description | Default | Options
+键 | 说明 | 默认 | 选项
 --- | --- | --- | ---
-`mode` | How the image should be fitted to dimensions | `auto` | `exact`, `portrait`, `landscape`, `auto`, `fit`, or `crop`
-`offset` | Offset the crop of the resized image | `[0,0]` | [left, top]
-`quality` | Quality of the resized image | `90` | `0-100`
-`sharpen` | Amount to sharpen the image | `0` | `0-100`
+`mode` | 图像应如何适应尺寸 | `auto` | `exact`, `portrait`, `landscape`, `auto`, `fit`, or `crop`
+`offset` | 偏移调整大小图像的裁剪 | `[0,0]` | [left, top]
+`quality` | 调整大小图像的质量 | `90` | `0-100`
+`sharpen` | 锐化图像的量 | `0` | `0-100`
 
-### Available Modes
+### 可用模式
 
-The `mode` option allows you to specify how the image should be resized. The available modes are as follows:
+`mode` 选项允许您指定如何调整图像大小。可用模式如下：
 
-Mode | Description
+模式 | 描述
 --- | ---
-`auto` | Automatically choose between `portrait` and `landscape` based on the image's orientation
-`exact` | Resize to the exact dimensions given, without preserving aspect ratio
-`portrait` | Resize to the given height and adapt the width to preserve aspect ratio
-`landscape` | Resize to the given width and adapt the height to preserve aspect ratio
-`crop` | Crop to the given dimensions after fitting as much of the image as possible inside those
-`fit` | Fit the image inside the given maximal dimensions, keeping the aspect ratio
+`auto` | 根据图像的方向在 `portrait` and `landscape` 之间自动选择
+`exact` |调整到给定的确切尺寸，不保留纵横比
+`portrait` | 调整到给定的高度并调整宽度以保持纵横比
+`landscape` | 调整到给定的宽度并调整高度以保持纵横比
+`crop` | 在将尽可能多的图像拟合到这些图像中后，裁剪到给定的尺寸
+`fit` | 使图像适合给定的最大尺寸，保持纵横比 

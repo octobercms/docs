@@ -324,7 +324,7 @@ class TrafficSources extends ReportWidgetBase
 </div>
 ```
 
-![image](https://raw.githubusercontent.com/octobercms/docs/master/images/traffic-sources.png)
+![image](https://i.ibb.co/dcbDJNM/traffic-sources.png)
 
 在报告小部件中，您可以使用任何 [图表](https://octobercms.com/docs/ui/chart)、列表或您希望的任何其他标记。 请记住，报告小部件扩展了通用后端小部件，您可以在报告小部件中使用任何小部件功能。 下一个示例显示了一个列表报告小部件标记。
 
@@ -372,7 +372,7 @@ class TrafficSources extends ReportWidgetBase
 
 报告小部件可能具有用户可以通过检查器管理的属性：
 
-![image](https://github.com/octobercms/docs/blob/develop/images/report-widget-inspector.png?raw=true)
+![image](https://i.ibb.co/gPCKDL8/report-widget-inspector.png)
 
 属性应该在小部件类的 `defineProperties` 方法中定义。 [组件文章](../plugin/components.md#component-properties) 中描述了这些属性。 例子：
 

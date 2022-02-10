@@ -2,7 +2,7 @@
 
 October CMS 附带了一个内置的媒体管理器，可以轻松发布更多的资产，例如视频和照片。然后可以通过用户界面将这些资产插入到您的页面和内容文件中。
 
-![image](https://github.com/octobercms/docs/blob/develop/images/media-manager.png?raw=true)
+![image](https://i.ibb.co/wNfs7KK/media-manager.png)
 
 ## 链接到媒体
 
