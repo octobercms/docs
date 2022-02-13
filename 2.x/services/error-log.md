@@ -52,7 +52,7 @@ The `October\Rain\Exception\ApplicationException` class, aliased as `Application
 throw new ApplicationException('You must be logged in to do that!');
 ```
 
-The error message will be simplified and will never include any sensitive information like the php file and line number.
+The error message will be simplified and will never include any sensitive information like the PHP file and line number.
 
 ### System Exception
 
@@ -63,6 +63,17 @@ throw new SystemException('Unable to contact the mail server API');
 ```
 
 When this exception is thrown a detailed error message is shown with the file and line number where it occurred.
+
+### Not Found Exception
+
+
+The `October\Rain\Exception\NotFoundException` class, aliased as `NotFoundException`, is used for errors that occur when a missing record is encountered.
+
+```php
+throw new NotFoundException('Record not found');
+```
+
+When this exception is thrown the standard response will change to display the nearest not found page with a 404 status code added.
 
 ### Validation Exception
 
@@ -142,7 +153,7 @@ The `abort` method will immediately raise an exception which will be rendered by
 App::abort(403, 'Unauthorized action.');
 ```
 
-This method may be used at any time during the request's lifecycle.
+This method may be used at any time during the request's lifecycle. There is also an accompanying [Twig filter for aborting requests](../markup/function-abort.md).
 
 ### Custom Error Page
 
