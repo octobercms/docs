@@ -30,13 +30,15 @@ For local development, you should set the `debug` value to `true`. In your produ
 'debug' => false,
 ```
 
-#### Log file modes
+#### Log File Modes
 
-October supports `single`, `daily`, `syslog` and `errorlog` logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the `log` value in your `config/app.php` configuration file:
+October CMS supports various drivers, including `single`, `daily`, `syslog` and `errorlog` logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the `default` value in your `config/logging.php` configuration file:
 
 ```php
-'log' => 'daily'
+'default' => env('LOG_CHANNEL', 'daily'),
 ```
+
+> More information on logging configuration can be found at the [Laravel Logging documentation](https://laravel.com/docs/6.x/logging).
 
 ## Available Exceptions
 
@@ -168,7 +170,7 @@ Log::info($error);
 Log::debug($error);
 ```
 
-#### Contextual information
+#### Contextual Information
 
 An array of contextual data may also be passed to the log methods. This contextual data will be formatted and displayed with the log message:
 
