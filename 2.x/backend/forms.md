@@ -1088,6 +1088,22 @@ user:
 
 You can also provide a model scope to use to filter the results with the `scope` property.
 
+```yaml
+user:
+    label: User
+    type: relation
+    scope: withTrashed
+```
+
+If the controller implements the [Relation Controller behavior](../backend/relations.md#configuring-the-relation-behavior) and the field is defined there, then it will be displayed using this definition. Set the `useController` property to false to disable this functionality.
+
+```yaml
+countries:
+    label: Categories
+    type: relation
+    useController: false
+```
+
 Option | Description
 ------------- | -------------
 **nameFrom** | a model attribute name used for displaying the relation label. Default: name.
@@ -1095,6 +1111,7 @@ Option | Description
 **order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
 **scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always.
+**useController** | display the field using integration with [RelationController behavior](../backend/relations.md#configuring-the-relation-behavior). Default: `true`
 
 <a name="widget-repeater"></a>
 ### Repeater
@@ -1122,7 +1139,7 @@ Option | Description
 ------------- | -------------
 **form** | a reference to form field definition file, see [backend form fields](#defining-form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
-**displayMode** | controls how the interface is dispalyed, as either **simple** or **builder**. Default: `simple`
+**displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
 **titleFrom** | name of field within items to use as the title for the collapsed item.
 **minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set `minItems: 1` the first row will be displayed and not hidden.
 **maxItems** | maximum number of items to allow within the repeater.
