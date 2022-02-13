@@ -1,18 +1,24 @@
 # html()
 
-Functions prefixed with `html_` perform tasks that are useful when dealing with html markup. The helper maps directly to the `Html` PHP class and its methods. For example:
+Functions prefixed with `html_` perform tasks that are useful when dealing with HTML markup. The helper maps directly to the `Html` PHP class and its methods. For example:
 
 ```twig
 {{ html_strip() }}
 ```
 
-is the PHP equivalent of the following:
+The above is the PHP equivalent of the following:
 
 ```php
 <?= Html::strip() ?>
 ```
 
 > **Note**: Methods in *camelCase* should be converted to *snake_case*.
+
+You may also apply the HTML functions as a Twig filter.
+
+```twig
+{{ ''|html_strip }}
+```
 
 ## html_strip()
 

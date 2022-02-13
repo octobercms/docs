@@ -6,7 +6,7 @@ Functions prefixed with `form_` perform tasks that are useful when dealing with 
 {{ form_close() }}
 ```
 
-is the PHP equivalent of the following:
+The above is the PHP equivalent of the following:
 
 ```php
 <?= Form::close() ?>
