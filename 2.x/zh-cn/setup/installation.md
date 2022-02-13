@@ -1,6 +1,11 @@
+# 欢迎
+October中文文档全部由[“超越无限”](https://www.bbctop.com)维护，[“超越无限”](https://www.bbctop.com)成立于2010年，主要从事计算机信息系统专业技术服务，包括软件应用系统开发、技术咨询、技术培训、技术支持等。作为October合作伙伴，我们共同致力于为Web开发者提供一套简约高效的编码流程，让Web开发变得更简单、高效。我们希望将好的系统分享给大家促进共同学习与进步，尽力做到既忠于原文又通俗易懂，但难免会有纰漏，若您发现翻译问题请在官方[October Doc](https://github.com/octobercms/docs/tree/feature/chinese-translation/2.x/zh-cn)提交，祝您学习愉快!
+
+>中国地区技术交流QQ群：133577127
+
 # 安装
 
-<VideoPreview src="https://www.youtube.com/watch?v=RHUwCvo7xng" />
+<VideoPreview src="https://www.bilibili.com/video/BV1aR4y177dT?share_source=copy_web" />
 
 October CMS 是一个具有简单直观界面的 Web 应用程序平台。Web 平台提供一致的结构，并强调可重用性，因此您可以专注于构建独特的内容，而我们处理无聊的部分。
 

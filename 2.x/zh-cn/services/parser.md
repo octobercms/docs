@@ -1,50 +1,50 @@
 # 解析器
 
-October CMS uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes.md) use the [Twig](#twig-template-parser) and [INI format](#initialization-ini-configuration-parser) in their template structure. Each parser is described in more detail below.
+October CMS 使用多种标准来处理标记、模板和配置。 每一个都经过精心挑选，以发挥它们的作用，使您的开发过程和学习曲线尽可能简单。 例如，[在主题中找到的对象](../cms/themes.md)在其模板结构中使用[Twig](#twig-template-parser)和[INI format](#initialization-ini-configuration-parser)格式。下面更详细地描述每个解析器。
 
-## Markdown Parser
+## Markdown解析器
 
-Markdown allows you to write easy-to-read and easy-to-write plain text format, which then converts to HTML. The `Markdown` facade is used for parsing Markdown syntax and is based on [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/). Some quick examples of markdown:
+Markdown 允许您编写易于阅读和易于编写的纯文本格式，然后将其转换为 HTML。 `Markdown` 门面用于解析 Markdown 语法，它基于 [GitHub 风格的 Markdown](https://help.github.com/articles/github-flavored-markdown/)。 一些Markdown的简单示例：
 
 ```md
-This text is **bold**, this text is *italic*, this text is ~~crossed out~~.
+这段文字是**粗体**，这段文字是*斜体*，这段文字有~~删除线~~。
 
-# The largest heading (an <h1> tag)
-## The second largest heading (an <h2> tag)
+# 最大的标题(一个 <h1> 标签)
+## 第二大标题(一个 <h2> 标签)
 ...
-###### The 6th largest heading (an <h6> tag)
+###### 第六大标题(<h6> 标签)
 ```
 
-Use the `Markdown::parse` method to render Markdown to HTML:
+使用 `Markdown::parse` 方法将 Markdown 渲染为 HTML：
 
 ```php
 $html = Markdown::parse($markdown);
 ```
 
-You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md).
+你也可以使用 `|md` 过滤器来[解析前端标记中的 Markdown](../markup/filter-md)。
 
 ```twig
 {{ '**Text** is bold.'|md }}
 ```
 
-### Using HTML in Markdown
+### 在 Markdown 中使用 HTML
 
-Markdown is a superset of HTML so you can combine HTML and Markdown in the same template. When Markdown encounters any block-level HTML tag, the Markdown syntax will deactivate for all the content inside.
+Markdown 是 HTML 的超集，因此您可以将 HTML 和 Markdown 组合在同一个模板中。 当 Markdown 遇到任何块级 HTML 标签时，Markdown 语法将对里面的所有内容停用。
 
 ```html
 <div>
-    This **text** won't be parsed by *Markdown*
+    此**文本**不会被 *Markdown* 解析
 </div>
 ```
 
-It is important to note that the Markdown parser will only accept one HTML node per line. In the example below, the second node is not included in the output.
+需要注意的是，Markdown 解析器每行只接受一个 HTML 节点。 在下面的示例中，第二个节点不包含在输出中。
 
 ```html
 <!-- Output: <p>Foo</p> -->
 <p>Foo</p><p>Bar</p>
 ```
 
-When displaying complex HTML, especially via a Twig variable, you should wrap the variable in a single HTML node to make sure all the output is captured.
+当显示复杂的 HTML 时，尤其是通过 Twig 变量，您应该将变量包装在单个 HTML 节点中，以确保捕获所有输出。
 
 ```twig
 <div>
@@ -52,35 +52,35 @@ When displaying complex HTML, especially via a Twig variable, you should wrap th
 </div>
 ```
 
-If you intentionally want to enable Markdown inside a block-level tag, you may do this by adding `markdown` attribute to the tag with a value of `1`.
+如果您有意在块级标签中启用 Markdown，您可以通过将 `markdown` 属性添加值为 `1` 的标签来实现。
 
 ```html
 <div markdown="1">
-    This **text** is now bold.
+    这个**文本**现在是粗体的。
 </div>
 ```
 
-## Twig Template Parser
+## Twig 模板解析器
 
-Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup/templating.md), [view content](../services/response-view.md#views) and [mail message content](../services/mail.md#message-content).
+Twig 是一个简单但功能强大的模板引擎，可以将 HTML 模板解析为优化的 PHP 代码，它是 [前端标记](../markup/templating.md)、[视图内容](../services/response-view.md#views) 和 [邮件内容](../services/mail.md#message-content) 背后的驱动力。
 
-The `Twig` facade is used for parsing Twig syntax, you may use the `Twig::parse` method to render Twig to HTML.
+`Twig` 门面用于解析 Twig 语法，您可以使用 `Twig::parse` 方法将 Twig 渲染为 HTML。
 
 ```php
 $html = Twig::parse($twig);
 ```
 
-The second argument can be used for passing variables to the Twig markup.
+第二个参数可用于将变量传递给 Twig 标记。
 
 ```php
 $html = Twig::parse($twig, ['foo' => 'bar']);
 ```
 
-The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration.md#extending-twig).
+可以通过 [插件注册文件](../plugin/registration.md#extending-twig) 扩展 Twig 解析器以注册自定义功能。
 
-## Bracket Parser
+## 括号解析器
 
-October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content.md#passing-variables-to-content-blocks). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
+October 还附带了一个简单的括号模板解析器作为 Twig 解析器的替代方案，目前用于将变量传递给 [主题内容块](../cms/content.md#passing-variables-to-content-blocks)。 该引擎渲染 HTML 的速度更快，旨在更适合非技术用户。 这个解析器没有门面，因此完全限定的 `October\Rain\Parse\Bracket` 类应该与 `parse` 方法一起使用。
 
 ```php
 use October\Rain\Parse\Bracket;
@@ -88,13 +88,13 @@ use October\Rain\Parse\Bracket;
 $html = Bracket::parse($content, ['foo' => 'bar']);
 ```
 
-The syntax uses singular *curly brackets* for rendering variables:
+语法使用单数*花括号*来呈现变量：
 
 ```
 <p>Hello there, {foo}</p>
 ```
 
-You may also pass an array of objects to parse as a variable.
+你也可以传递一个对象数组来解析为一个变量。
 
 ```php
 $html = Template::parse($content, ['likes' => [
@@ -104,7 +104,7 @@ $html = Template::parse($content, ['likes' => [
 ]]);
 ```
 
-The array can be iterated using the following syntax:
+可以使用以下语法迭代数组：
 
 ```
 <ul>
@@ -114,70 +114,70 @@ The array can be iterated using the following syntax:
 </ul>
 ```
 
-## YAML Configuration Parser
+## YAML 配置解析器
 
-YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms.md#defining-form-fields) and [list column](../backend/lists.md#defining-list-columns) definitions. An example of some YAML:
+YAML("YAML 不是标记语言")是一种配置格式，类似于 Markdown，它被设计为一种易于阅读和易于编写的格式，可以转换为 PHP 数组。October的后端开发几乎到处都在使用它，例如 [表单字段](../backend/forms.md#defining-form-fields) 和 [列表](../backend/lists.md #defining-list-columns) 定义。 一些 YAML 的示例：
 
 ```yaml
-receipt: Acme Purchase Invoice
+receipt: Acme 采购发票
 date: 2015-10-02
 user:
-    name: Joe
-    surname: Blogs
+    name: 乔
+    surname: 博客
 ```
 
-The `Yaml` facade is used for parsing YAML and you use the `Yaml::parse` method to render YAML to a PHP array:
+`Yaml` 门面用于解析 YAML，您使用 `Yaml::parse` 方法将 YAML 呈现为 PHP 数组：
 
 ```php
 $array = Yaml::parse($yamlString);
 ```
 
-Use the `parseFile` method to parse the contents of a file:
+使用 `parseFile` 方法解析文件的内容：
 
 ```php
 $array = Yaml::parseFile($filePath);
 ```
 
-The parser also supports operation in reverse, outputting YAML format from a PHP array. You may use the `render` method for this:
+解析器还支持反向操作，从 PHP 数组输出 YAML 格式。 您可以为此使用 `render` 方法：
 
 ```php
 $yamlString = Yaml::render($array);
 ```
 
-## Initialization (INI) Configuration Parser
+## 初始化(INI)配置解析器
 
-The INI file format is a standard for defining simple configuration files, commonly used by [components inside theme templates](../cms/components.md). It could be considered a cousin of the YAML format, although unlike YAML, it is incredibly simple, less sensitive to typos and does not rely on indentation. It supports basic key-value pairs with sections, for example:
+INI 文件格式是定义简单配置文件的标准，常用[主题模板中的组件](../cms/components.md)。 它可以被认为是 YAML 格式的表亲，尽管与 YAML 不同，它非常简单，对拼写错误不太敏感，并且不依赖缩进。 它支持具有分段的基本键值对，例如：
 
 ```ini
-receipt = "Acme Purchase Invoice"
+receipt = "Acme 采购发票"
 date = "2015-10-02"
 
 [user]
-name = "Joe"
-surname = "Blogs"
+name = "乔"
+surname = "博客"
 ```
 
-The `Ini` facade is used for parsing INI and you use the `Ini::parse` method to render INI to a PHP array:
+`Ini` 门面用于解析 INI，您使用 `Ini::parse` 方法将 INI 呈现为 PHP 数组：
 
 ```php
 $array = Ini::parse($iniString);
 ```
 
-Use the `parseFile` method to parse the contents of a file:
+使用 `parseFile` 方法解析文件的内容：
 
 ```php
 $array = Ini::parseFile($filePath);
 ```
 
-The parser also supports operation in reverse, outputting INI format from a PHP array. You may use the `render` method for this:
+解析器还支持反向操作，从 PHP 数组输出 INI 格式。 您可以为此使用 `render` 方法：
 
 ```php
 $iniString = Ini::render($array);
 ```
 
-### October Flavored INI
+### October风格INI
 
-Traditionally, the INI parser used by the PHP function `parse_ini_string` is restricted to arrays that are 3 levels deep. For example:
+传统上，PHP 函数 `parse_ini_string` 使用的 INI 解析器仅限于 3 级深度的数组。 例如：
 
 ```ini
 level1Value = "foo"
@@ -186,29 +186,29 @@ level1Array[] = "bar"
 [level1Object]
 level2Value = "hello"
 level2Array[] = "world"
-level2Object[level3Value] = "stop here"
+level2Object[level3Value] = "停在这里"
 ```
 
-October has extended this functionality with *October flavored INI* to allow arrays of infinite depth, inspired by the syntax of HTML forms. Following on from the above example, the following syntax is supported:
+受 HTML 表单语法的启发，October 使用 *October 风格的 INI* 扩展了此功能，以允许无限深度的数组。 继上述示例之后，支持以下语法：
 
 ```ini
 [level1Object]
-level2Object[level3Array][] = "Yay!"
-level2Object[level3Object][level4Value] = "Yay!"
-level2Object[level3Object][level4Array][] = "Yay!"
-level2Object[level3Object][level4Object][level5Value] = "Yay!"
-; ... to infinity and beyond!
+level2Object[level3Array][] = "耶！"
+level2Object[level3Object][level4Value] = "耶！"
+level2Object[level3Object][level4Array][] = "耶！"
+level2Object[level3Object][level4Object][level5Value] = "耶！"
+; ……无限深度！
 ```
 
-## Dynamic Syntax Parser
+## 动态语法解析器
 
-Dynamic Syntax is a templating engine unique to October that fundamentally supports two modes of rendering. Parsing a template will produce two results, either a **view** or **editor** mode. Take this template text as an example, the inner part of the `{text}...{/text}` tags represents the default text for the **view** mode, while the inner attributes, `name` and `label`, are used as properties for the **editor** mode.
+Dynamic Syntax 是October独有的模板引擎，从根本上支持两种渲染模式。 解析模板将产生两个结果，**view** 或 **editor** 模式。 以这个模板文本为例，`{text}...{/text}`标签的内部代表**view**模式的默认文本，而内部属性`name`和`label `, 用作 **editor** 模式的属性。
 
 ```
-<h1>{text name="websiteName" label="Website Name"}Our wonderful website{/text}</h1>
+<h1>{text name="websiteName" label="网站名称"}我们精彩的网站{/text}</h1>
 ```
 
-There is no facade for this parser so the fully qualified `October\Rain\Parse\Syntax\Parser` class should be used with the `parse` method. The first argument of the `parse` method takes the template content as a string and returns a `Parser` object.
+这个解析器没有门面，所以完全限定的 `October\Rain\Parse\Syntax\Parser` 类应该与 `parse` 方法一起使用。 `parse` 方法的第一个参数将模板内容作为字符串并返回一个 `Parser` 对象。
 
 ```php
 use October\Rain\Parse\Syntax\Parser as SyntaxParser;
@@ -216,45 +216,45 @@ use October\Rain\Parse\Syntax\Parser as SyntaxParser;
 $syntax = SyntaxParser::parse($content);
 ```
 
-### View Mode
+### 视图模式
 
-Let's say we used the first example above as the template content, calling the `render` method by itself will render the template with the default text:
+假设我们使用上面的第一个示例作为模板内容，自己调用 `render` 方法将使用默认文本渲染模板：
 
 ```php
 echo $syntax->render();
-// <h1>Our wonderful website</h1>
+// <h1>我们精彩的网站</h1>
 ```
 
-Just like any templating engine, passing an array of variables to the first argument of `render` will replace the variables inside the template. Here the default value of `websiteName` is replaced with our new value:
+就像任何模板引擎一样，将变量数组传递给 `render` 的第一个参数将替换模板中的变量。 这里 `websiteName` 的默认值被我们的新值替换：
 
 ```php
 echo $syntax->render(['websiteName' => 'October CMS']);
 // <h1>October CMS</h1>
 ```
 
-As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-template-parser).
+作为一项额外功能，调用 `toTwig` 方法将输出处于准备状态的模板，以供 [Twig 引擎](#twig-template-parser) 渲染。
 
 ```php
 echo $syntax->toTwig();
 // <h1>{{ websiteName }}</h1>
 ```
 
-### Editor Mode
+### 编辑器模式
 
-So far the Dynamic Syntax parser is not much different to a regular template engine, however the editor mode is where the utility of Dynamic Syntax becomes more apparent. The editor mode unlocks a new realm of possibility, for example, where [layouts inject custom form fields to pages](https://octobercms.com/plugin/rainlab-pages) that belong to them or for [dynamically built forms used in email campaigns](https://octobercms.com/plugin/responsiv-campaign).
+到目前为止，动态语法解析器与常规模板引擎没有太大区别，但是编辑器模式是动态语法的实用性变得更加明显的地方。 编辑器模式开启了一个新的可能性领域，例如，[布局将自定义表单字段注入到属于它们的页面]（https://octobercms.com/plugin/rainlab-pages）或用于[电子邮件活动中的动态构建表单](https://octobercms.com/plugin/responsiv-campaign)。
 
-To continue with the examples above, calling the `toEditor` method on the `Parser` object will return a PHP array of properties that define how the variable should be populated, by a form builder for example.
+继续上面的例子，在 `Parser` 对象上调用 `toEditor` 方法将返回一个 PHP 属性数组，这些属性定义了如何填充变量，例如由表单构建器。
 
 ```php
 $array = $syntax->toEditor();
 // 'websiteName' => [
-//     'label' => 'Website name',
-//     'default' => 'Our wonderful website',
+//     'label' => '网站名称',
+//     'default' => '我们精彩的网站',
 //     'type' => 'text'
 // ]
 ```
 
-You may notice the properties closely resemble the options found in [form field definitions](../backend/forms.md#defining-form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
+您可能会注意到这些属性与 [表单字段定义](../backend/forms.md#defining-form-fields) 中的选项非常相似。 这是故意的，因此这两个功能相互补充。 我们现在可以轻松地将上面的数组转换为 YAML 并写入 `fields.yaml` 文件：
 
 ```php
 $form = [
@@ -264,73 +264,73 @@ $form = [
 File::put('fields.yaml', Yaml::render($form));
 ```
 
-### Supported Tags
+### 支持的标签
 
-There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms.md#available-field-types).
+动态语法解析器可以使用多种标记类型，这些标记类型旨在匹配常见的 [表单字段类型](../backend/forms.md#available-field-types)。
 
-#### Text
+#### 文本
 
-Single line input for smaller blocks of text.
-
-```
-{text name="websiteName" label="Website Name"}Our wonderful website{/text}
-```
-
-#### Textarea
-
-Multiple line input for larger blocks of text.
+较小文本块的单行输入。
 
 ```
-{textarea name="websiteDescription" label="Website Description"}
-    This is our vision for things to come
+{text name="websiteName" label="网站名称"}我们精彩的网站{/text}
+```
+
+#### 文本域
+
+用于较大文本块的多行输入。
+
+```
+{textarea name="websiteDescription" label="网站说明"}
+    这是我们对未来事物的愿景
 {/textarea}
 ```
 
-#### Dropdown
+#### 下拉
 
-Renders a dropdown form field.
-
-```
-{dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
-```
-
-Renders a dropdown form field with independent values and labels.
+呈现下拉表单字段。
 
 ```
-{dropdown name="dropdown" label="Pick one" options="one:One|two:Two"}{/dropdown}
+{dropdown name="dropdown" label="选一个" options="一|二"}{/dropdown}
 ```
 
-Renders a dropdown form field with an array returned by a static class method (the class must be a fully namespaced class).
+呈现具有独立值和标签的下拉表单字段。
 
 ```
-{dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
+{dropdown name="dropdown" label="选一个" options="one:一|two:二"}{/dropdown}
 ```
 
-#### Radio
-
-Renders a radio form field.
+使用静态类方法返回的数组呈现下拉表单字段(该类必须是完全命名空间的类)。
 
 ```
-{radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
+{dropdown name="dropdown" label="选一个" options="\Path\To\Class::method"}{/dropdown}
 ```
 
-#### Variable
+#### 单选
 
-Renders the form field type exactly as defined in the `type` attribute. This tag will simply set a variable and will render in view mode as an empty string.
-
-```
-{variable type="text" name="name" label="Name"}John{/variable}
-```
-
-#### Rich editor
-
-Text input for rich content (WYSIWYG).
+呈现一个单选表单字段。
 
 ```
-{richeditor name="content" label="Main content"}Default text{/richeditor}
+{radio name="radio" label="想法？" options="y:是|n:否|m:也许"}{/radio}
 ```
 
-Renders in Twig as
+#### 变量
+
+完全按照 `type` 属性中的定义呈现表单字段类型。 该标签将简单地设置一个变量，并将在视图模式下呈现为一个空字符串。
+
+```
+{variable type="text" name="name" label="名字"}武志伟{/variable}
+```
+
+#### 富文本编辑器
+
+富文本内容的输入 (所见即所得编辑)。
+
+```
+{richeditor name="content" label="主要内容"}默认文本{/richeditor}
+```
+
+在 Twig 中呈现为
 
 ```twig
 {{ content|raw }}
@@ -338,21 +338,21 @@ Renders in Twig as
 
 #### Markdown
 
-Text input for Markdown content.
+Markdown 内容的文本输入。
 
 ```
-{markdown name="content" label="Markdown content"}Default text{/markdown}
+{markdown name="content" label="Markdown内容"}默认文本{/markdown}
 ```
 
-Renders in Twig as
+在 Twig 中呈现为
 
 ```twig
 {{ content|md }}
 ```
 
-#### Media finder
+#### 媒体查找器
 
-File selector for media library items. This tag value will contain the relative path to the file.
+媒体库项目的文件选择器。 此标记值将包含文件的相对路径。
 
 ```
 {mediafinder name="logo" label="Logo"}defaultlogo.png{/mediafinder}
@@ -364,34 +364,34 @@ Renders in Twig as
 {{ logo|media }}
 ```
 
-#### File upload
+#### 上传文件
 
-File uploader input for files. This tag value will contain the full path to the file.
+文件的文件上传器输入。 此标记值将包含文件的完整路径。
 
 ```
 {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
 ```
 
-#### Color picker
+#### 颜色选择器
 
-Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
+用于颜色选择的颜色选择器小部件。 此标记将包含选定的十六进制值。 您可以选择提供一个 `availableColors` 属性来定义可供选择的可用颜色。
 
 ```
 {colorpicker name="bg_color" label="Background colour" allowEmpty="true" availableColors="#ffffff|#000000"}{/colorpicker}
 ```
 
-#### Repeater
+#### 组合器
 
-Renders a repeating section with other fields inside.
+呈现包含其他字段的重复部分。
 
 ```
-{repeater name="content_sections" prompt="Add another content section"}
-    <h2>{text name="title" label="Title"}Title{/text}</h2>
-    <p>{textarea name="content" label="Content"}Content{/textarea}</p>
+{repeater name="content_sections" prompt="添加另一个内容部分"}
+    <h2>{text name="title" label="标题"}标题{/text}</h2>
+    <p>{textarea name="content" label="内容"}内容{/textarea}</p>
 {/repeater}
 ```
 
-Renders in Twig as
+在 Twig 中呈现为
 
 ```twig
 {% for fields in repeater %}
@@ -400,22 +400,22 @@ Renders in Twig as
 {% endfor %}
 ```
 
-Calling `$syntax->toEditor` will return a different array for a repeater field:
+调用 `$syntax->toEditor` 将为组合器字段返回一个不同的数组：
 
 ```php
 'repeater' => [
-    'label' => 'Website name',
+    'label' => '网站名称',
     'type' => 'repeater',
     'fields' => [
 
         'title' => [
-            'label' => 'Title',
-            'default' => 'Title',
+            'label' => '标题',
+            'default' => '标题',
             'type' => 'text'
         ],
         'content' => [
-            'label' => 'Content',
-            'default' => 'Content',
+            'label' => '内容',
+            'default' => '内容',
             'type' => 'textarea'
         ]
 
@@ -423,33 +423,33 @@ Calling `$syntax->toEditor` will return a different array for a repeater field:
 ]
 ```
 
-The repeater field also supports group mode, to be used with the dynamic syntax parser as follows:
+repeater 字段还支持组模式，与动态语法解析器一起使用，如下所示：
 
 ```
-{variable name="sections" type="repeater" prompt="Add another section" tab="Sections"
+{variable name="sections" type="repeater" prompt="添加其他部分" tab="部分"
         groups="$/author/plugin/repeater_fields.yaml"}{/variable}
 ```
 
-This is an example of the repeater_fields.yaml group configuration file:
+这是 repeater_fields.yaml 组配置文件的示例：
 
 ```yaml
 quote:
-    name: Quote
-    description: Quote item
+    name: 报价
+    description: 报价项目
     icon: icon-quote-right
     fields:
         quote_position:
             span: auto
-            label: Quote Position
+            label: 报价仓位
             type: radio
             options:
-                left: Left
-                center: Center
-                right: Right
+                left: 左
+                center: 中
+                right: 右
         quote_content:
             span: auto
-            label: Details
+            label: 细节
             type: textarea
 ```
 
-For more information about the repeater group mode see [Repeater Widget](../backend/forms.md#repeater).
+有关组合器组模式的更多信息，请参阅 [循环小部件](../backend/forms.md#repeater)。

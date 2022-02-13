@@ -1,28 +1,28 @@
 # 电子邮件
 
-## Introduction
+## 介绍
 
-October CMS provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings > Mail settings* or by updating the default configuration values. In these examples we will update the configuration values.
+October CMS 为 SMTP、Mailgun、SparkPost、Amazon SES、PHP 的`mail`功能和`sendmail`提供驱动程序，让您可以通过您选择的本地或基于云服务快速开始发送邮件。 有两种方法可以配置邮件服务，通过 *Settings(设置) > Mail settings(邮件设置)* 使用后端界面或更新默认配置值。 在这些示例中，我们将更新配置值。
 
-### Driver prerequisites
+### 驱动程序先决条件
 
-Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
+在使用 Mailgun、SparkPost 或 SES 驱动程序之前，您需要安装 [驱动程序插件](https://octobercms.com/plugin/october-drivers)。
 
-#### Mailgun driver
+#### Mailgun 驱动程序
 
-To use the Mailgun driver, set the `driver` option in your `config/mail.php` configuration file to `mailgun`. Next, verify that your `config/services.php` configuration file contains the following options:
+要使用 Mailgun 驱动程序，请将 `config/mail.php` 配置文件中的 `driver` 选项设置为 `mailgun`。 接下来，验证您的 `config/services.php` 配置文件是否包含以下选项：
 
 ```php
 'mailgun' => [
     'domain' => 'your-mailgun-domain',
     'secret' => 'your-mailgun-key',
-    'endpoint' => 'api.mailgun.net', // api.eu.mailgun.net for EU
+    'endpoint' => 'api.mailgun.net', // api.eu.mailgun.net 欧盟使用
 ],
 ```
 
-#### SparkPost driver
+#### SparkPost 驱动程序
 
-To use the SparkPost driver set the `driver` option in your `config/mail.php` configuration file to `sparkpost`. Next, verify that your `config/services.php` configuration file contains the following options:
+要使用 SparkPost 驱动程序，请将 `config/mail.php` 配置文件中的 `driver` 选项设置为 `sparkpost`。 接下来，验证您的 `config/services.php` 配置文件是否包含以下选项：
 
 ```php
 'sparkpost' => [
@@ -30,89 +30,89 @@ To use the SparkPost driver set the `driver` option in your `config/mail.php` co
 ],
 ```
 
-#### SES driver
+#### SES 驱动程序
 
-To use the Amazon SES driver set the `driver` option in your `config/mail.php` configuration file to `ses`. Then, verify that your `config/services.php` configuration file contains the following options:
+要使用 Amazon SES 驱动程序，请将 `config/mail.php` 配置文件中的 `driver` 选项设置为 `ses`。 然后，验证您的 `config/services.php` 配置文件是否包含以下选项：
 
 ```php
 'ses' => [
     'key' => 'your-ses-key',
     'secret' => 'your-ses-secret',
-    'region' => 'ses-region',  // e.g. us-east-1
+    'region' => 'ses-region',  // 例如 us-east-1
 ],
 ```
 
-## Sending Mail
+## 发送邮件
 
-To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#mail-views) or [mail template](#mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
+要发送消息，请使用 `Mail` 门面上的 `send` 方法，该方法接受三个参数。 第一个参数是唯一的*邮件代码*，用于定位 [邮件视图](#mail-views) 或 [邮件模板](#mail-templates)。 第二个参数是您希望传递给视图的数据数组。 第三个参数是 `Closure` 回调，它接收消息实例，允许您自定义邮件消息的收件人、主题和其他方面：
 
 ```php
-// These variables are available inside the message as Twig
+// 这些变量在消息中作为 Twig 可用
 $vars = ['name' => 'Joe', 'user' => 'Mary'];
 
 Mail::send('acme.blog::mail.message', $vars, function($message) {
 
     $message->to('admin@domain.tld', 'Admin Person');
-    $message->subject('This is a reminder');
+    $message->subject('这是一个提醒');
 
 });
 ```
 
-Since we are passing an array containing the `name` key in the example above, we could display the value within our e-mail view using the following Twig markup:
+由于我们在上面的示例中传递了一个包含 `name` 键的数组，因此我们可以使用以下 Twig 标记在我们的电子邮件视图中显示该值：
 
 ```twig
 {{ name }}
 ```
 
-> **Note**: You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
+> **注意**：你应该避免在你的消息中传递一个 `message` 变量，这个变量总是被传递并且允许 [内联嵌入附件](#attachments)。
 
-#### Quick sending
+####快速发送
 
-October also includes an alternative method called `sendTo` that can simplify sending mail:
+October还包括一种名为 `sendTo` 的替代方法，可以简化发送邮件：
 
 ```php
-// Send to address using no name
+// 发送到不使用姓名的地址
 Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params);
 
-// Send using an object's properties
+// 使用对象的属性发送
 Mail::sendTo($user, 'acme.blog::mail.message', $params);
 
-// Send to multiple addresses
+// 发送到多个地址
 Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
 
-// Alternatively send a raw message without parameters
+// 或者发送不带参数的原始消息
 Mail::rawTo('admin@domain.tld', 'Hello friend');
 ```
 
-The first argument in `sendTo` is used for the recipients can take different value types:
+`sendTo` 中的第一个参数用于收件人，可以采用不同的值类型：
 
-Type | Description
+类型 | 描述
 ------------- | -------------
-String | a single recipient address, with no name defined.
-Array | multiple recipients where the array key is the address and the value is the name.
-Object | a single recipient object, where the *email* property is used for the address and the *name* is optionally used for the name.
-Collection | a collection of recipient objects, as above.
+String | 单个收件人地址，未定义名称。
+Array | 多个收件人，其中数组键是地址，值是名称。
+Object | 单个收件人对象，其中 *email* 属性用于地址，*name* 可选地用于名称。
+Collection | 接收者对象的集合，如上。
 
-The complete signature of `sendTo` is as follows:
+`sendTo` 的完整签名如下：
 
 ```php
 Mail::sendTo($recipient, $message, $params, $callback, $options);
 ```
 
-- `$recipient` is defined as above.
-- `$message` is the template name or message contents for raw sending.
-- `$params` array of variables made available inside the template.
-- `$callback` gets called with one parameter, the message builder as described for the `send` method (optional, defaults to null). If not a callable value, works as a substitute for the next options argument.
-- `$options` custom sending options passed as an array (optional)
+- `$recipient` 的定义如上。
+- `$message` 是原始发送的模板名称或消息内容。
+- `$params` 变量数组在模板中可用。
+- `$callback` 使用一个参数调用，即为 `send` 方法描述的消息构建器 (可选，默认为 null)。 如果不是可调用值，则用作下一个选项参数的替代品。
+- `$options` 自定义发送选项作为数组传递 (可选)
 
-The following custom sending `$options` are supported
+支持以下自定义发送`$options`
 
-- **queue** specifies whether to queue the message or send it directly (optional, defaults to false).
-- **bcc** specifies whether to add recipients as Bcc or regular To addresses (defaults to false).
+- **queue** 指定是对消息进行排队还是直接发送(可选，默认为 false)。
+- **bcc** 指定是否将收件人添加为密件抄送或常规收件人地址(默认为 false)。
 
-#### Building the message
+#### 构建消息
 
-As previously mentioned, the third argument given to the `send` method is a `Closure` allowing you to specify various options on the e-mail message itself. Using this Closure you may specify other attributes of the message, such as carbon copies, blind carbon copies, etc:
+如前所述，`send`方法的第三个参数是`Closure`，允许您在电子邮件消息本身上指定各种选项。 使用此闭包，您可以指定消息的其他属性，例如抄送、密件抄送等：
 
 ```php
 Mail::send('acme.blog::mail.welcome', $vars, function($message) {
@@ -121,7 +121,7 @@ Mail::send('acme.blog::mail.welcome', $vars, function($message) {
 });
 ```
 
-Here is a list of the available methods on the `$message` message builder instance:
+以下是 `$message` 消息构建器实例上可用方法的列表：
 
 ```php
 $message->from($address, $name = null);
@@ -134,63 +134,63 @@ $message->subject($subject);
 $message->priority($level);
 $message->attach($pathToFile, array $options = []);
 
-// Attach a file from a raw $data string...
+// 从原始 $data 字符串附加文件...
 $message->attachData($data, $name, array $options = []);
 
-// Get the underlying SwiftMailer message instance...
+// 获取底层 SwiftMailer 消息实例...
 $message->getSwiftMessage();
 ```
 
-> **Note**: The message instance passed to a `Mail::send` Closure extends the [SwiftMailer](http://swiftmailer.org) message class, allowing you to call any method on that class to build your e-mail messages.
+> **注意**：传递给 `Mail::send` 闭包的消息实例扩展了 [SwiftMailer](http://swiftmailer.org) 消息类，允许您调用该类的任何方法来构建您的电子邮件 - 邮件消息。
 
-#### Mailing plain text
+#### 邮寄纯文本
 
-By default, the view given to the `send` method is assumed to contain a [mail view](#mail-views), where you may specify a plain text view to send in addition to the HTML view.
+默认情况下，`send` 方法的视图假定包含一个 [邮件视图](#mail-views)，除了 HTML 视图之外，您还可以在其中指定要发送的纯文本视图。
 
 ```php
 Mail::send('acme.blog::mail.message', $data, $callback);
 ```
 
-Or, if you only need to send a plain text e-mail, you may specify this using the `text` key in the array:
+或者，如果您只需要发送纯文本电子邮件，您可以使用数组中的 `text` 键指定：
 
 ```php
 Mail::send(['text' => 'acme.blog::mail.text'], $data, $callback);
 ```
 
-#### Mailing parsed raw strings
+#### 发送解析的原始字符串
 
-You may use the `raw` method if you wish to e-mail a raw string directly. This content will be parsed by Markdown.
+如果您希望直接通过电子邮件发送原始字符串，可以使用 `raw` 方法。 此内容将由 Markdown 解析。
 
 ```php
-Mail::raw('Text to e-mail', function ($message) {
+Mail::raw('电子邮件文本', function ($message) {
     //
 });
 ```
 
-Additionally this string will be parsed by Twig, if you wish to pass variables to this environment, use the `send` method instead, passing the content as the `raw` key.
+此外，这个字符串将由 Twig 解析，如果你想将变量传递给这个环境，请使用 `send` 方法，将内容作为 `raw` 键传递。
 
 ```php
-Mail::send(['raw' => 'Text to email'], $vars, function ($message) {
+Mail::send(['raw' => '电子邮件文本'], $vars, function ($message) {
     //
 });
 ```
 
-#### Mailing raw strings
+#### 发送原始字符串
 
-If you pass an array containing either `text` or `html` keys, this will be an explicit request to send mail. No layout or markdown parsing is used.
+如果您传递包含 `text` 或 `html` 键的数组，这将是发送邮件的显式请求。 不使用布局或Markdown解析。
 
 ```php
 Mail::raw([
-    'text' => 'This is plain text',
-    'html' => '<strong>This is HTML</strong>'
+    'text' => '这是纯文本',
+    'html' => '<strong>这是HTML</strong>'
 ], function ($message) {
     //
 });
 ```
 
-### Attachments
+### 附件
 
-To add attachments to an e-mail, use the `attach` method on the `$message` object passed to your Closure. The `attach` method accepts the full path to the file as its first argument:
+要将附件添加到电子邮件中，请在传递给闭包的 `$message` 对象上使用 `attach` 方法。 `attach` 方法接受文件的完整路径作为其第一个参数：
 
 ```php
 Mail::send('acme.blog::mail.welcome', $data, function ($message) {
@@ -200,39 +200,39 @@ Mail::send('acme.blog::mail.welcome', $data, function ($message) {
 });
 ```
 
-When attaching files to a message, you may also specify the display name and / or MIME type by passing an `array` as the second argument to the `attach` method:
+将文件附加到消息时，您还可以通过将 `array` 作为第二个参数传递给 `attach` 方法来指定显示名称和/或 MIME 类型：
 
 ```php
 $message->attach($pathToFile, ['as' => $display, 'mime' => $mime]);
 ```
 
-### Inline Attachments
+### 内联附件
 
-#### Embedding an image in mail content
+#### 在邮件内容中嵌入图像
 
-Embedding inline images into your e-mails is typically cumbersome; however, there is a convenient way to attach images to your e-mails and retrieving the appropriate CID. To embed an inline image, use the `embed` method on the `message` variable within your e-mail view. Remember, the `message` variable is available to all of your mail views:
+将内嵌图像嵌入到您的电子邮件中通常很麻烦； 但是，有一种方便的方法可以将图像附加到您的电子邮件并检索适当的 CID。 要嵌入内嵌图像，请在电子邮件视图中的 `message` 变量上使用 `embed` 方法。 请记住，`message` 变量可用于所有邮件视图：
 
 ```twig
 <body>
-    Here is an image:
+    这是一张图片:
 
     <img src="{{ message.embed(pathToFile) }}">
 </body>
 ```
 
-If you are planning to use queued emails make sure that the path of the file is absolute. To achieve that you can simply use the [app filter](../markup/filter-app.md):
+如果您打算使用排队的电子邮件，请确保文件的路径是绝对的。 为此，您可以简单地使用 [app过滤器](../markup/filter-app.md)：
 
 ```twig
 <body>
-    Here is an image:
+    这是一张图片:
     {% set pathToFile = 'storage/app/media/path/to/file.jpg'|app %}
     <img src="{{ message.embed(pathToFile) }}">
 </body>
 ```
 
-#### Embedding raw data in mail content
+#### 在邮件内容中嵌入原始数据
 
-If you already have a raw data string you wish to embed into an e-mail message, you may use the `embedData` method on the `message` variable:
+如果您已经有一个想要嵌入到电子邮件消息中的原始数据字符串，您可以在 `message` 变量上使用 `embedData` 方法：
 
 ```twig
 <body>
@@ -242,11 +242,11 @@ If you already have a raw data string you wish to embed into an e-mail message, 
 </body>
 ```
 
-### Queueing Mail
+### 排队邮件
 
-#### Queueing a mail message
+#### 排队邮件消息
 
-Since sending mail messages can drastically lengthen the response time of your application, many developers choose to queue messages for background sending. This is easy using the built-in [unified queue API](../services/queues.md). To queue a mail message, use the `queue` method on the `Mail` facade:
+由于发送邮件消息会大大延长应用程序的响应时间，因此许多开发人员选择将消息排队以进行后台发送。 这很容易使用内置的 [统一队列 API](../services/queues.md)。 要对邮件消息进行排队，请使用 `Mail` 门面的 `queue` 方法：
 
 ```php
 Mail::queue('acme.blog::mail.welcome', $data, function ($message) {
@@ -254,11 +254,11 @@ Mail::queue('acme.blog::mail.welcome', $data, function ($message) {
 });
 ```
 
-This method will automatically take care of pushing a job onto the queue to send the mail message in the background. Of course, you will need to [configure your queues](../services/queues.md) before using this feature.
+此方法将自动处理将作业推送到队列中以在后台发送邮件消息。 当然，在使用此功能之前，您需要 [配置您的队列](../services/queues.md)。
 
-#### Delayed message queueing
+#### 延迟消息队列
 
-If you wish to delay the delivery of a queued e-mail message, you may use the `later` method. To get started, simply pass the number of seconds by which you wish to delay the sending of the message as the first argument to the method:
+如果您希望延迟发送排队的电子邮件，您可以使用`later`方法。 要开始，只需将您希望延迟发送消息的秒数作为第一个参数传递给该方法：
 
 ```php
 Mail::later(5, 'acme.blog::mail.welcome', $data, function ($message) {
@@ -266,9 +266,9 @@ Mail::later(5, 'acme.blog::mail.welcome', $data, function ($message) {
 });
 ```
 
-#### Pushing to specific queues
+#### 推送到特定队列
 
-If you wish to specify a specific queue on which to push the message, you may do so using the `queueOn` and `laterOn` methods:
+如果你想指定一个特定的队列来推送消息，你可以使用 `queueOn` 和 `laterOn` 方法：
 
 ```php
 Mail::queueOn('queue-name', 'acme.blog::mail.welcome', $data, function ($message) {
@@ -280,74 +280,74 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 });
 ```
 
-## Message Content
+## 消息内容
 
-Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
+可以使用邮件视图或邮件模板在October发送邮件消息。 邮件视图由文件系统中的应用程序或插件**/views**目录中提供。 而邮件模板是通过 *System(系统) > Mail templates(邮件模板)* 使用后端界面管理的。 所有邮件消息都支持使用 Twig 进行标记。
 
-Optionally, mail views can be [registered in the Plugin registration file](#registering-mail-layouts-templates-partials) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
+或者，可以使用 `registerMailTemplates` 方法[在插件注册文件中注册]（#registering-mail-layouts-templates-partials）邮件视图。 这将自动生成一个邮件模板，并允许使用后端界面对其进行自定义。
 
-### Mail Views
+### 邮件浏览量
 
-Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file:
+邮件视图驻留在文件系统中，使用的代码表示视图文件的路径。 例如，使用代码 **author.plugin::mail.message** 发送邮件将使用以下文件中的内容：
 
 ```
-plugins/               <=== Plugins Directory
-  author/              <=== "author" Segment
-    plugin/            <=== "plugin" Segment
-      views/           <=== View Directory
-        mail/          <=== "mail" Segment
-          message.htm  <=== "message" Segment
+plugins/               <=== 插件目录
+  author/              <=== "作者"目录
+    plugin/            <=== "插件"目录
+      views/           <=== 视图目录
+        mail/          <=== "邮件"目录
+          message.htm  <=== "消息"段
 ```
 
-The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
+邮件视图文件中的内容最多可以包括 3 个部分：**配置**、**纯文本**和**HTML 标记**。 部分用 `==` 序列分隔。 例如：
 
 ```twig
-subject = "Your product has been added to October CMS project"
+subject = "您的产品已添加到October CMS项目"
 ==
 
-Hi {{ name }},
+嗨 {{ name }},
 
-Good news! User {{ user }} just added your product "{{ product }}" to a project.
+好消息！ 用户 {{ user }} 刚刚将您的产品"{{ product }}"添加到项目中。
 
-This message was sent using no formatting (plain text)
+此邮件未使用格式(纯文本)发送
 ==
 
-<p>Hi {{ name }},</p>
+<p>嗨 {{ name }},</p>
 
-<p>Good news! User {{ user }} just added your product <strong>{{ product }}</strong> to a project.</p>
+<p>好消息！ 用户 {{ user }} 刚刚将您的产品 <strong>{{ product }}</strong>添加到项目中</p>
 
-<p>This email was sent using formatting (HTML)</p>
+<p>此电子邮件是使用格式 (HTML) 发送的</p>
 ```
 
-> **Note**: Basic Twig tags and expressions are supported in mail views. Markdown syntax is also supported, see the section on [using HTML in Markdown](../services/parser.md#using-html-in-markdown) for more details.
+> **注意**：邮件视图中支持基本的 Twig 标签和表达式。 还支持 Markdown 语法，有关详细信息，请参阅 [在 Markdown 中使用 HTML](../services/parser.md#using-html-in-markdown) 部分。
 
-The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
+**plain text** 部分是可选的，视图只能包含配置和 HTML 标记部分。
 
 ```twig
-subject = "Your product has been added to October CMS project"
+subject = "您的产品已添加到October CMS项目"
 ==
 
-<p>Hi {{ name }},</p>
+<p>嗨 {{ name }},</p>
 
-<p>This email does not support plain text.</p>
+<p>此电子邮件不支持纯文本。</p>
 
-<p>Sorry about that!</p>
+<p>对此感到抱歉！</p>
 ```
 
-#### Configuration section
+#### 配置部分
 
-The configuration section sets the mail view parameters. The following configuration parameters are supported:
+配置部分设置邮件视图参数。 支持以下配置参数：
 
-Parameter | Description
+参数 | 描述
 ------------- | -------------
-**subject** | the mail message subject, required.
-**layout** | the [mail layout](#mail-layouts) code, optional. Default value is `default`.
+**subject** | 邮件主题，必填。
+**layout** | [邮件布局](#mail-layouts) 代码，可选。 默认值为`default`。
 
-### Using Mail Templates
+### 使用邮件模板
 
-Mail templates reside in the database and can be created in the back-end area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
+邮件模板驻留在数据库中，可以通过*Settings(设置) > Mail(邮件) > Mail templates(邮件模板)* 在后端区域中创建。 模板中指定的**code**是唯一标识符，一旦创建就不能更改。
 
-The process for sending these emails is the same. For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
+发送这些电子邮件的过程是相同的。 例如，如果您使用代码 *this.is.my.email* 创建模板，您可以使用以下 PHP 代码发送它：
 
 ```php
 Mail::send('this.is.my.email', $data, function($message) use ($user)
@@ -356,28 +356,28 @@ Mail::send('this.is.my.email', $data, function($message) use ($user)
 });
 ```
 
-> **Note**: If the mail template does not exist in the system, this code will attempt to find a mail view with the same code.
+> **注意**：如果系统中不存在邮件模板，此代码将尝试查找具有相同代码的邮件视图。
 
-#### Automatically generated templates
+#### 自动生成的模板
 
-Mail templates can also be generated automatically by [mail views that have been registered](#registering-mail-layouts-templates-partials). The **code** value will be the same as the mail view path (eg: author.plugin:mail.message). If the mail view has a **layout** parameter defined, this will be used to give the template a layout.
+邮件模板也可以通过[已注册的邮件视图](#registering-mail-layouts-templates-partials)自动生成。 **code** 值将与邮件视图路径相同（例如：author.plugin:mail.message）。如果邮件视图定义了 **layout** 参数，这将用于为模板提供布局。
 
-When a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the mail view can be considered a *default view*.
+首次保存生成的模板时，在发送邮件时将使用自定义的内容。 在这种情况下，可以将邮件视图视为*默认视图*。
 
-### Using Mail Layouts
+### 使用邮件布局
 
-Mail layouts can be created by selecting *Settings > Mail > Mail templates* and clicking the *Layouts* tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
+可以通过选择 *Settings(设置) > Mail(邮件) > Mail templates(邮件模板)* 并单击 *Layouts* 选项卡来创建邮件布局。这些行为就像 CMS 布局一样，它们包含邮件消息的脚手架。邮件视图和模板支持使用邮件布局。
 
-By default, October comes with two primary mail layouts:
+默认情况下，October带有两种主要的邮件布局：
 
-Layout | Code | Description
+布局 |代码 |描述
 ------------- | ------------- | -------------
-Default | default | Used for public facing, front-end mail
-System | system | Used for internal, back-end mail
+Default | default | 用于面向公众的前端邮件
+System | system | 用于内部、后端邮件
 
-### Registering mail layouts, templates & partials
+### 注册邮件布局、模板和部件
 
-Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration.md#registration-file).
+邮件视图可以注册为模板，这些模板在后端自动生成，以供定制。 可以通过 *Settings(设置) > Mail templates(邮件模板)* 菜单自定义邮件模板。 可以通过覆盖 [插件注册类](../plugin/registration.md#registration-file) 的 `registerMailTemplates` 方法来注册模板。
 
 ```php
 public function registerMailTemplates()
@@ -389,9 +389,9 @@ public function registerMailTemplates()
 }
 ```
 
-The method should return an array of [mail view names](#mail-views).
+该方法应返回 [邮件视图名称](#mail-views) 的数组。
 
-Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [Plugin registration class](../plugin/registration.md#registration-file).
+与模板一样，邮件部件和布局可以通过覆盖 [插件注册类](../plugin/registration.md#registration-file) 的 `registerMailPartials` 和 `registerMailLayouts` 方法来注册。
 
 ```php
 public function registerMailPartials()
@@ -411,40 +411,40 @@ public function registerMailLayouts()
 }
 ```
 
-The methods should return an array of [mail view names](#mail-views). The array key will be used as `code` property for the partial or layout.
+这些方法应返回 [邮件视图名称](#mail-views) 的数组。数组键将用作部件或布局的 `code` 属性。
 
-### Global Variables
+### 全局变量
 
-You may register variables that are globally available to all mail templates with the `View::share` method.
+您可以使用 `View::share` 方法注册对所有邮件模板全局可用的变量。
 
 ```php
 View::share('site_name', 'October CMS');
 ```
 
-This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration.md). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
+可以在 [插件注册文件](../plugin/registration.md) 的 register 或 boot 方法中调用此代码。使用上面的示例，变量 `{{ site_name }}` 将在所有邮件模板中可用。
 
-## Mail & local development
+## 邮件和本地开发
 
-When developing an application that sends e-mail, you probably don't want to actually send e-mails to live e-mail addresses. There are several ways to "disable" the actual sending of e-mail messages.
+在开发发送电子邮件的应用程序时，您可能不希望实际将电子邮件发送到实时电子邮件地址。有几种方法可以"禁用"电子邮件消息的实际发送。
 
-#### Log driver
+#### 日志驱动
 
-One solution is to use the `log` mail driver during local development. This driver will write all e-mail messages to your log files for inspection. For more information on configuring your application per environment, check out the [configuration documentation](../setup/configuration.md).
+一种解决方案是在本地开发期间使用 `log` 邮件驱动程序。此驱动程序会将所有电子邮件消息写入您的日志文件以供检查。有关按环境配置应用程序的更多信息，请查看 [配置文档](../setup/configuration.md)。
 
-#### Universal to
+#### 通用
 
-Another solution is to set a universal recipient of all e-mails sent by the framework. This way, all the emails generated by your application will be sent to a specific address, instead of the address actually specified when sending the message. This can be done via the `to` option in your `config/mail.php` configuration file:
+另一种解决方案是为框架发送的所有电子邮件设置一个通用收件人。这样，您的应用程序生成的所有电子邮件都将发送到特定地址，而不是发送消息时实际指定的地址。这可以通过 `config/mail.php` 配置文件中的 `to` 选项来完成：
 
 ```php
 'to' => [
     'address' => 'dev@example.com',
-    'name' => 'Dev Example'
+    'name' => '开发示例'
 ],
 ```
 
-#### Pretend mail mode
+#### 伪装邮件模式
 
-You can dynamically disable sending mail using the `Mail::pretend` method. When the mailer is in pretend mode, messages will be written to your application's log files instead of being sent to the recipient.
+您可以使用 `Mail::pretend` 方法动态禁用发送邮件。当邮件程序处于伪装模式时，消息将被写入应用程序的日志文件，而不是发送给收件人。
 
 ```php
 Mail::pretend();

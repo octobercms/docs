@@ -1,24 +1,24 @@
 # 错误和日志
 
-When you first start using October CMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
+当您第一次开始使用October CMS时，已经为您配置了错误和异常处理。 可以通过两种方式访问事件日志：
 
-1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
-1. Alternatively it can be viewed via the Administration area by navigating to *System > Logs > Event Log*.
+1.打开文件`storage/logs/system.log`可以在文件系统中查看事件日志。
+1. 或者，可以通过管理区域导航到 *System[设置] > Logs[日志] > Event Log[事件日志]* 来查看它。
 
-Log entries are always created when an error page is shown and for certain [exception types](#exception-types).
+当显示错误页面和某些 [异常类型](#exception-types) 时，始终会创建日志条目。
 
-## Configuration
+## 配置
 
-#### Error Detail
+#### 错误详情
 
-The amount of error detail your application displays through the browser is controlled by the `debug` configuration option in your `config/app.php` configuration file. By default detailed error reporting is turned *on* so it is helpful to see detailed error information which can be useful for debugging and troubleshooting issues. When this feature is turned off, when there is a problem in a page, a generic error message will be displayed.
+您的应用程序通过浏览器显示的错误详细信息的数量由 `config/app.php` 配置文件中的 `debug` 配置选项控制。 默认情况下，详细的错误报告是*打开*的，因此查看详细的错误信息对调试和解决问题很有帮助。 关闭此功能后，当页面出现问题时，将显示一般错误消息。
 
-For local development, you should set the `debug` value to `true`. In your production environment, this value should always be `false`.
+对于本地开发，您应该将 `debug` 值设置为 `true`。 在您的生产环境中，此值应始终为 `false`。
 
 ```php
 /*
 |--------------------------------------------------------------------------
-| Application Debug Mode
+| Application Debug Mode[应用程序调试模式]
 |--------------------------------------------------------------------------
 |
 | When your application is in debug mode, detailed error messages with
@@ -30,47 +30,47 @@ For local development, you should set the `debug` value to `true`. In your produ
 'debug' => false,
 ```
 
-#### Log file modes
+#### 日志文件模式
 
-October supports `single`, `daily`, `syslog` and `errorlog` logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the `log` value in your `config/app.php` configuration file:
+October 支持 `single`、`daily`、`syslog` 和 `errorlog` 日志记录模式。 例如，如果您希望使用每日日志文件而不是单个文件，您只需在 `config/app.php` 配置文件中设置 `log` 值：
 
 ```php
 'log' => 'daily'
 ```
 
-## Available Exceptions
+## 可用的异常
 
-October CMS comes with several basic exception types out of the box.
+October CMS 提供了几种预置好的基本异常类型。
 
-### Application Exception
+### 应用程序异常
 
-The `October\Rain\Exception\ApplicationException` class, aliased as `ApplicationException`, is the most common exception type that is used when a simple application condition has failed.
-
-```php
-throw new ApplicationException('You must be logged in to do that!');
-```
-
-The error message will be simplified and will never include any sensitive information like the php file and line number.
-
-### System Exception
-
-The `October\Rain\Exception\SystemException` class, aliased as `SystemException`, is used for errors that are critical to the system functioning and are always logged.
+`October\Rain\Exception\ApplicationException` 类，别名为 `ApplicationException`，是在简单应用条件失败时使用的最常见异常类型。
 
 ```php
-throw new SystemException('Unable to contact the mail server API');
+throw new ApplicationException('你必须先登录才能做到这一点！');
 ```
 
-When this exception is thrown a detailed error message is shown with the file and line number where it occurred.
+错误消息将被简化，并且永远不会包含任何敏感信息，如 php 文件和行号。
 
-### Validation Exception
+### 系统异常
 
-The `October\Rain\Exception\ValidationException` class, aliased as `ValidationException`, is used for errors that relate directly to a form submission and an invalid field. The message should contain an array with fields and error messages.
+`October\Rain\Exception\SystemException` 类，别名为 `SystemException`，用于对系统运行至关重要的错误并始终记录在案。
 
 ```php
-throw new ValidationException(['username' => 'Sorry that username is already taken!']);
+throw new SystemException('无法联系邮件服务器 API');
 ```
 
-You can also pass an instance of the [validation service](validation.md).
+抛出此异常时，会显示详细的错误消息，其中包含发生该异常的文件和行号。
+
+### 验证异常
+
+`October\Rain\Exception\ValidationException` 类，别名为 `ValidationException`，用于与表单提交和无效字段直接相关的错误。 该消息应包含一个包含字段和错误消息的数组。
+
+```php
+throw new ValidationException(['username' => '对不起，该用户名已被使用！']);
+```
+
+您还可以传递 [验证服务](validation.md) 的实例。
 
 ```php
 $validation = Validator::make(...);
@@ -80,39 +80,39 @@ if ($validation->fails()) {
 }
 ```
 
-When this exception is thrown the [AJAX framework](../ajax/introduction.md) will provide this information in a usable format and focus the first invalid field.
+当抛出此异常时，[AJAX 框架](../ajax/introduction.md) 将以可用格式提供此信息并聚焦第一个无效字段。
 
-### AJAX Exception
+### AJAX 异常
 
-The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is considered a "smart error" and will return the HTTP code 406. This allows them to pass response contents as if they were a successful response.
+`October\Rain\Exception\AjaxException` 类，别名为 `AjaxException`，被认为是"智能错误"，将返回 HTTP 代码 406。这允许它们像成功响应一样传递响应内容。
 
 ```php
 throw new AjaxException(['#flashMessages' => $this->renderPartial(...)]);
 ```
 
-When this exception is thrown the [AJAX framework](../ajax/introduction.md) will follow the standard error workflow but will also refresh specified partials.
+当抛出此异常时，[AJAX 框架](../ajax/introduction.md) 将遵循标准错误工作流程，但也会刷新指定的部件。
 
-## Exception Handling
+## 异常处理
 
-All exceptions are handled by the `October\Rain\Foundation\Exception\Handler` class. This class contains two methods: `report` and `render` that dictate if an error should be logged and how to respond to an error.
+所有异常都由 `October\Rain\Foundation\Exception\Handler` 类处理。 此类包含两个方法：`report` 和 `render`，它们指示是否应记录错误以及如何响应错误。
 
-However, you may specify custom handlers if needed using the `App::error` method. Handlers are called based on the type-hint of the Exception they handle. For example, you may create a handler that only handles `RuntimeException` instances:
+但是，如果需要，您可以使用 `App::error` 方法指定自定义处理程序。 处理程序是根据它们处理的异常的类型提示来调用的。 例如，您可以创建一个只处理 `RuntimeException` 实例的处理程序：
 
 ```php
 App::error(function(RuntimeException $exception) {
-    // Handle the exception...
+    // 处理异常...
 });
 ```
 
-If an exception handler returns a response, that response will be sent to the browser and no other error handlers will be called:
+如果异常处理程序返回响应，则该响应将被发送到浏览器，并且不会调用其他错误处理程序：
 
 ```php
 App::error(function(InvalidUserException $exception) {
-    return 'Sorry! Something is wrong with this account!';
+    return '对不起！ 此帐户有问题！';
 });
 ```
 
-To listen for PHP fatal errors, you may use the `App::fatal` method:
+要侦听 PHP 致命错误，您可以使用 `App::fatal` 方法：
 
 ```php
 App::fatal(function($exception) {
@@ -120,42 +120,42 @@ App::fatal(function($exception) {
 });
 ```
 
-If you have several exception handlers, they should be defined from most generic to most specific. So, for example, a handler that handles all exceptions of type `Exception` should be defined before a custom exception type such as `SystemException`.
+如果您有多个异常处理程序，则应按从最通用到最具体的顺序定义它们。因此，例如，处理`Exception`类型的所有异常处理程序应该在自定义异常类型（如`SystemException`）之前定义。
 
-### Where to Place Error Handlers
+### 错误处理程序的放置位置
 
-Error handler registrations, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
+错误处理程序注册，如 [事件处理程序](events.md)，通常属于`引导代码`类别。换句话说，它们让你的应用程序准备好实际处理请求，并且通常需要在实际调用路由或控制器之前执行。最常见的地方是[插件注册文件](../plugin/registration.md#registration-methods)的`boot`方法。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来注册错误处理程序。
 
-## HTTP Exceptions
+## HTTP 异常
 
-Some exceptions describe HTTP error codes from the server. For example, this may be a "page not found" error (404), an "unauthorized error" (401) or even a developer generated 500 error. In order to generate such a response from anywhere in your application, use the following:
+一些例外情况描述了来自服务器的 HTTP 错误代码。例如，这可能是`找不到页面错误(404)`、`未经授权的错误(401)` 甚至是开发人员生成的 500 错误。为了从应用程序中的任何位置生成这样的响应，请使用以下命令：
 
 ```php
 App::abort(404);
 ```
 
-The `abort` method will immediately raise an exception which will be rendered by the exception handler. Optionally, you may provide the response text:
+`abort` 方法将立即引发一个异常，该异常将由异常处理程序呈现。 或者，您可以提供响应文本：
 
 ```php
-App::abort(403, 'Unauthorized action.');
+App::abort(403, '未经授权的行为。');
 ```
 
-This method may be used at any time during the request's lifecycle.
+该方法可以在请求生命周期的任何时候使用。
 
-### Custom Error Page
+### 自定义错误页面
 
-By default any errors will be shown with a detailed error page containing the file contents, line number and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script and creating a page with the URL `/error`.
+默认情况下，任何错误都会显示一个详细的错误页面，其中包含发生错误的文件内容、行号和堆栈跟踪。 您可以通过在 `config/app.php` 脚本中将配置值 `debug` 设置为 **false** 并使用 URL `/error` 创建一个页面来显示自定义错误页面。
 
-## Logging
+## 日志记录
 
-By default October is configured to create a single log file for your application which is stored in the `storage/logs` directory. You may write information to the logs using the `Log` facade:
+默认情况下，October 配置为为您的应用程序创建一个日志文件，该文件存储在 `storage/logs` 目录中。 您可以使用 `Log` 门面将信息写入日志：
 
 ```php
 $user = User::find(1);
-Log::info('Showing user profile for user: '.$user->name);
+Log::info('显示用户的用户资料: '.$user->name);
 ```
 
-The logger provides the eight logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**.
+记录器提供 [RFC 5424](http://tools.ietf.org/html/rfc5424) 中定义的八个记录级别： **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** 和 **debug**。
 
 ```php
 Log::emergency($error);
@@ -168,28 +168,28 @@ Log::info($error);
 Log::debug($error);
 ```
 
-#### Contextual information
+#### 上下文信息
 
-An array of contextual data may also be passed to the log methods. This contextual data will be formatted and displayed with the log message:
+一组上下文数据也可以传递给日志方法。 此上下文数据将被格式化并与日志消息一起显示：
 
 ```php
-Log::info('User failed to login.', ['id' => $user->id]);
+Log::info('用户登录失败。', ['id' => $user->id]);
 ```
 
-### Helper Functions
+### 助手函数
 
-There are some global helper methods available to make logging easier. The `trace_log` function is an alias for `Log::info` with support for using arrays and exceptions as the message.
+有一些全局助手方法可用于简化日志记录。 `trace_log` 函数是 `Log::info` 的别名，支持使用数组和异常作为消息。
 
 ```php
-// Write a string value
+// 写入字符串值
 $val = 'Hello world';
-trace_log('The value is '.$val);
+trace_log('值为 '.$val);
 
-// Dump an array value
+// 转储一个数组值
 $val = ['Some', 'array', 'data'];
 trace_log($val);
 
-// Trace an exception
+// 跟踪异常
 try {
     //
 }
@@ -198,12 +198,12 @@ catch (Exception $ex) {
 }
 ```
 
-The `trace_sql` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the administration area log as this is stored in the database and would result in a feedback loop.
+`trace_sql` 函数启用数据库日志记录，调用时它将记录发送到数据库的每个命令。 这些记录仅出现在 `system.log` 文件中，不会出现在管理区域日志中，因为它存储在数据库中，会导致反馈循环。
 
 ```php
 trace_sql();
 
 Db::table('users')->count();
 
-// select count(*) as aggregate from users
+// 从用户中选择 count(*) 作为聚合
 ```

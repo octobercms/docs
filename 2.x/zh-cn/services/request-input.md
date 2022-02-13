@@ -1,22 +1,22 @@
 # 请求和输入
 
-## Basic Input
+## 基本输入
 
-You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input` [helper function](../services/helpers.md) is an alias for `Input::get`.
+您可以通过一些简单的方法访问所有用户输入。 使用 `Input` 外观时，您无需担心请求的 HTTP 谓词，因为所有谓词都以相同的方式访问输入。 全局 `input` [助手函数](../services/helpers.md) 是 `Input::get` 的别名。 `Input::get`.
 
-#### Retrieving an Input Value
+#### 检索输入值
 
 ```php
 $name = Input::get('name');
 ```
 
-#### Retrieving a Default Value if the Input Value is Absent
+#### 如果输入值不存在，则检索默认值
 
 ```php
 $name = Input::get('name', 'Sally');
 ```
 
-#### Determining if an Input Value is Present
+#### 确定输入值是否存在
 
 ```php
 if (Input::has('name')) {
@@ -24,13 +24,13 @@ if (Input::has('name')) {
 }
 ```
 
-#### Getting All Input for the Request
+#### 获取请求的所有输入 
 
 ```php
 $input = Input::all();
 ```
 
-#### Getting Only Some of the Request Input
+#### 仅获取部分请求输入
 
 ```php
 $input = Input::only('username', 'password');
@@ -38,25 +38,25 @@ $input = Input::only('username', 'password');
 $input = Input::except('credit_card');
 ```
 
-When working on forms with "array" inputs, you may use dot notation to access the arrays:
+在处理带有"array" 输入的表单时，您可以使用点符号来访问数组：
 
 ```php
 $input = Input::get('products.0.name');
 ```
 
-> **Note**: Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via `Input::get` like normal.
+> **注意**: 某些 JavaScript 库(例如 Backbone)可能会将输入作为 JSON 发送到应用程序。 您可以像往常一样通过 `Input::get` 访问这些数据。
 
 ## Cookies
 
-By default, all cookies created by the October CMS are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client. Cookies named in the `system.unencrypt_cookies` config key will not be encrypted.
+默认情况下，October CMS 创建的所有 cookie 都经过加密并使用身份验证代码签名，这意味着如果它们被客户端更改，它们将被视为无效。 在 `system.unencrypt_cookies` 配置键中命名的 cookie 不会被加密。
 
-#### Retrieving a Cookie Value
+#### 检索 Cookie 值 
 
 ```php
 $value = Cookie::get('name');
 ```
 
-#### Attaching a New Cookie to a Response
+#### 将新 Cookie 附加到响应
 
 ```php
 $response = Response::make('Hello World');
@@ -64,25 +64,25 @@ $response = Response::make('Hello World');
 $response->withCookie(Cookie::make('name', 'value', $minutes));
 ```
 
-#### Queueing a Cookie for the Next Response
+#### 为下一个响应排队 Cookie
 
-If you would like to set a cookie before a response has been created, use the `Cookie::queue` method. The cookie will automatically be attached to the final response from your application.
+如果您想在创建响应之前设置 cookie，请使用 `Cookie::queue` 方法。 cookie 将自动附加到您的应用程序的最终响应中。
 
 ```php
 Cookie::queue($name, $value, $minutes);
 ```
 
-#### Creating a Cookie That Lasts Forever
+#### 创建一个永远存在的 Cookie
 
 ```php
 $cookie = Cookie::forever('name', 'value');
 ```
 
-#### Handling Cookies Without Encryption
+#### 不加密处理 Cookie
 
-If you don't want some cookies to be encrypted or decrypted, you can specify them in configuration. This is useful, for example, when you want to pass data from frontend to server side backend via cookies, and vice versa.
+如果您不希望某些 cookie 被加密或解密，您可以在配置中指定它们。这很有用，例如，当您想通过 cookie 将数据从前端传递到服务器端后端时，反之亦然
 
-Add names of the cookies that should not be encrypted or decrypted to `unencrypt_cookies` parameter in the `config/system.php` configuration file.
+在 `config/system.php` 配置文件中的 `unencrypt_cookies` 参数中添加不应加密或解密的 cookie 名称。
 
 ```php
 'unencrypt_cookies' => [
@@ -90,7 +90,7 @@ Add names of the cookies that should not be encrypted or decrypted to `unencrypt
 ],
 ```
 
-Alternatively for plugins, you can also add these dynamically from `Plugin.php` of your plugin.
+或者，对于插件，您也可以从插件的`Plugin.php`动态添加这些。 
 
 ```php
 public function boot()
@@ -99,17 +99,16 @@ public function boot()
 }
 ```
 
-## Old Input
+## 旧的输入
 
-You may need to keep input from one request until the next request. For example, you may need to re-populate a form after checking it for validation errors.
+您可能需要保留一个请求的输入，直到下一个请求。 例如，您可能需要在检查表单是否存在验证错误后重新填充表单。
 
-#### Flashing Input to the Session
-
+#### 将输入数据闪存到Session
 ```php
 Input::flash();
 ```
 
-#### Flashing Only Some Input to the Session
+#### 仅闪存Session的某一个值
 
 ```php
 Input::flashOnly('username', 'email');
@@ -117,7 +116,7 @@ Input::flashOnly('username', 'email');
 Input::flashExcept('password');
 ```
 
-Since you often will want to flash input in association with a redirect to the previous page, you may easily chain input flashing onto a redirect.
+由于您经常希望将闪存变量与重定向到上一页相关联，因此您可以轻松地将变量闪存到重定向。
 
 ```php
 return Redirect::to('form')->withInput();
@@ -125,23 +124,23 @@ return Redirect::to('form')->withInput();
 return Redirect::to('form')->withInput(Input::except('password'));
 ```
 
-> **Note**: You may flash other data across requests using the [Session](../services/session.md) class.
+> **注意**:您可以使用 [Session](../services/session.md) 类在请求中刷新其他数据。.
 
-#### Retrieving Old Data
+#### 检索旧数据
 
 ```php
 Input::old('username');
 ```
 
-## Files
+## 文件
 
-#### Retrieving an Uploaded File
+#### 检索上传的文件
 
 ```php
 $file = Input::file('photo');
 ```
 
-#### Determining if a File was Uploaded
+#### 确定文件是否已上传
 
 ```php
 if (Input::hasFile('photo')) {
@@ -149,9 +148,9 @@ if (Input::hasFile('photo')) {
 }
 ```
 
-The object returned by the `file` method is an instance of the `Symfony\Component\HttpFoundation\File\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file.
+file` 方法返回的对象是 `Symfony\Component\HttpFoundation\File\UploadedFile` 类的一个实例，它扩展了 PHP 的 `SplFileInfo` 类并提供了多种与文件交互的方法。
 
-#### Determining if an Uploaded File is Valid
+#### 确定上传的文件是否有效
 
 ```php
 if (Input::file('photo')->isValid()) {
@@ -159,7 +158,7 @@ if (Input::file('photo')->isValid()) {
 }
 ```
 
-#### Moving an Uploaded File
+#### 移动上传的文件
 
 ```php
 Input::file('photo')->move($destinationPath);
@@ -167,47 +166,47 @@ Input::file('photo')->move($destinationPath);
 Input::file('photo')->move($destinationPath, $fileName);
 ```
 
-#### Retrieving the Path to an Uploaded File
+#### 检索上传文件的路径
 
 ```php
 $path = Input::file('photo')->getRealPath();
 ```
 
-#### Retrieving the Original Name of an Uploaded File
+#### 检索上传文件的原始名称
 
 ```php
 $name = Input::file('photo')->getClientOriginalName();
 ```
 
-#### Retrieving the Extension of an Uploaded File
+#### 检索上传文件的扩展名
 
 ```php
 $extension = Input::file('photo')->getClientOriginalExtension();
 ```
 
-#### Retrieving the Size of an Uploaded file
+#### 检索上传文件的大小
 
 ```php
 $size = Input::file('photo')->getSize();
 ```
 
-#### Retrieving the MIME Type of an Uploaded File
+#### 检索上传文件的 MIME 类型
 
 ```php
 $mime = Input::file('photo')->getMimeType();
 ```
 
-## Request Information
+## 请求信息
 
-The `Request` class provides many methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class. Here are some of the highlights.
+`Request` 类提供了许多检查应用程序 HTTP 请求的方法，并扩展了 `Symfony\Component\HttpFoundation\Request` 类。这儿是一些精彩片段。
 
-#### Retrieving the Request URI
+#### 检索请求 URI
 
 ```php
 $uri = Request::path();
 ```
 
-#### Retrieving the Request Method
+#### 检索请求方法
 
 ```php
 $method = Request::method();
@@ -217,7 +216,7 @@ if (Request::isMethod('post')) {
 }
 ```
 
-#### Determining if the Request Path Matches a Pattern
+#### 确定请求路径是否匹配模式
 
 ```php
 if (Request::is('admin/*')) {
@@ -225,31 +224,31 @@ if (Request::is('admin/*')) {
 }
 ```
 
-#### Get the Request URL
+#### 获取请求地址
 
 ```php
 $url = Request::url();
 ```
 
-#### Retrieve a Request URI Segment
+#### 检索请求 URI 
 
 ```php
 $segment = Request::segment(1);
 ```
 
-#### Retrieving a Request Header
+#### 检索请求标头
 
 ```php
 $value = Request::header('Content-Type');
 ```
 
-#### Retrieving Values from $_SERVER
+#### 从 $_SERVER 检索值
 
 ```php
 $value = Request::server('PATH_INFO');
 ```
 
-#### Determining if the Request is Over HTTPS
+#### 确定请求是否通过 HTTPS
 
 ```php
 if (Request::secure()) {
@@ -257,7 +256,7 @@ if (Request::secure()) {
 }
 ```
 
-#### Determine if the Request is Using AJAX
+#### 判断请求是否使用 AJAX
 
 ```php
 if (Request::ajax()) {
@@ -265,7 +264,7 @@ if (Request::ajax()) {
 }
 ```
 
-#### Determine if the Request has JSON Content Type
+#### 判断请求是否有 JSON 内容类型
 
 ```php
 if (Request::isJson()) {
@@ -273,7 +272,7 @@ if (Request::isJson()) {
 }
 ```
 
-#### Determine if the Request is Asking for JSON
+#### 确定请求是否请求 JSON
 
 ```php
 if (Request::wantsJson()) {
@@ -281,9 +280,9 @@ if (Request::wantsJson()) {
 }
 ```
 
-#### Checking the Requested Response Format
+#### 检查请求的响应格式
 
-The `Request::format` method will return the requested response format based on the HTTP Accept header:
+`Request::format` 方法将根据 HTTP Accept 标头返回请求的响应格式：
 
 ```php
 if (Request::format() == 'json') {

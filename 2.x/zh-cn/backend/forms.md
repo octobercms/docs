@@ -743,9 +743,9 @@ css_content:
 
 选项 | 描述
 ------------- | -------------
-**language** | 代码语言，例如 php、css、javascript、html。 默认值:php。
-**showGutter** | 显示带有行号的装订线。 默认值:true。
-**wrapWords** | 将长行中断到新行。 默认为true。
+**language** | 代码语言，例如 php、css、javascript、html。 默认值:`php`。
+**showGutter** | 显示带有行号的装订线。 默认值:`true`。
+**wrapWords** | 将长行中断到新行。 默认为`true`。
 **fontSize** | 文本字体大小。 默认值:12。
 
 <a name="widget-colorpicker"></a>
@@ -908,17 +908,18 @@ avatar:
 
 选项 | 描述
 ------------- | -------------
-**mode** | 预期的文件类型，file(文件)或image(图像)。 默认值:image
+**mode** | 预期的文件类型，file(文件)或image(图像)。 默认值:`image`
+**size** | 对于多次上传，容器的大小。 可用选项：tiny(微型), small(小型), large(中型), huge(大型), giant(巨型), adaptive(自适应)。 默认值：`large`
 **imageWidth** | 如果使用图像类型，图像将被调整到这个宽度，可选
 **imageHeight** | 如果使用图像类型，图像将被调整到这个高度，可选
 **fileTypes** | 上传者接受的文件扩展名，可选。 例如:`zip,txt`
 **mimeTypes** | 上传者接受的 MIME 类型，可以是文件扩展名，也可以是完全限定名，可选。 例如:`bin,txt`
 **maxFilesize** | 上传者接受的文件大小(以 Mb 为单位)，可选。 默认值:来自`upload_max_filesize`参数值
 **maxFiles** | 允许上传的最大文件数
-**useCaption** | 允许为文件设置标题和描述。 默认值:true
+**useCaption** | 允许为文件设置标题和描述。 默认值:`true`
 **prompt** | 上传按钮显示的文本，仅适用于文件，可选
 **thumbOptions** | 用于生成缩略图的附加属性 [调整大小选项](../services/resizer.md#resize-parameters)
-**attachOnUpload** | 如果父记录存在，则在上传时自动附加上传的文件，而不是在保存父记录时使用延迟绑定来附加。默认值:false
+**attachOnUpload** | 如果父记录存在，则在上传时自动附加上传的文件，而不是在保存父记录时使用延迟绑定来附加。默认值:`false`
 
 > **注意**:与 [媒体选择器表单小部件](#mediafinder) 不同，文件上传表单小部件使用 [数据库文件附件](../database/attachments.md)，因此字段名称是关联模型上的`attachEd`或`attachMent`关系属性名称。
 

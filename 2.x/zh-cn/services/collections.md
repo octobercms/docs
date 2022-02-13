@@ -78,76 +78,76 @@ $collection = new October\Rain\Support\Collection([1, 2, 3]);
 [last](#method-last)-返回集合中通过指定条件测试的最后一个元素
 [map](#method-map)-遍历集合并将每一个值传入给定的回调函数，可重写值
 [mapInto](#method-mapinto)-迭代集合，通过将值传递给构造函数来创建给定类的新实例
-[mapSpread](#method-mapspread)-
-[mapToGroups](#method-maptogroups)-
-[mapWithKeys](#method-mapwithkeys)-
-[max](#method-max)-
-[median](#method-median)-
-[merge](#method-merge)-
-[mergeRecursive](#method-mergerecursive)-
-[min](#method-min)-
-[mode](#method-mode)-
-[nth](#method-nth)-
-[only](#method-only)-
-[pad](#method-pad)-
-[partition](#method-partition)-
-[pipe](#method-pipe)-
-[pluck](#method-pluck)-
-[pop](#method-pop)-
-[prepend](#method-prepend)-
-[pull](#method-pull)-
-[push](#method-push)-
-[put](#method-put)-
-[random](#method-random)-
-[reduce](#method-reduce)-
-[reject](#method-reject)-
-[replace](#method-replace)-
-[replaceRecursive](#method-replacerecursive)-
-[reverse](#method-reverse)-
-[search](#method-search)-
-[shift](#method-shift)-
-[shuffle](#method-shuffle)-
-[skip](#method-skip)-
-[slice](#method-slice)-
-[some](#method-some)-
-[sort](#method-sort)-
-[sortBy](#method-sortby)-
-[sortByDesc](#method-sortbydesc)-
-[sortKeys](#method-sortkeys)-
-[sortKeysDesc](#method-sortkeysdesc)-
-[splice](#method-splice)-
-[split](#method-split)-
-[sum](#method-sum)-
-[take](#method-take)-
-[tap](#method-tap)-
-[times](#method-times)-
-[toArray](#method-toarray)-
-[toJson](#method-tojson)-
-[transform](#method-transform)-
-[union](#method-union)-
-[unique](#method-unique)-
-[uniqueStrict](#method-uniquestrict)-
-[unless](#method-unless)-
-[unlessEmpty](#method-unlessempty)-
-[unlessNotEmpty](#method-unlessnotempty)-
-[unwrap](#method-unwrap)-
-[values](#method-values)-
-[when](#method-when)-
-[whenEmpty](#method-whenempty)-
-[whenNotEmpty](#method-whennotempty)-
-[where](#method-where)-
-[whereStrict](#method-wherestrict)-
-[whereBetween](#method-wherebetween)-
-[whereIn](#method-wherein)-
-[whereInStrict](#method-whereinstrict)-
-[whereInstanceOf](#method-whereinstanceof)-
-[whereNotBetween](#method-wherenotbetween)-
-[whereNotIn](#method-wherenotin)-
-[whereNotInStrict](#method-wherenotinstrict)-
-[whereNotNull](#method-wherenotnull)-
-[whereNull](#method-wherenull)-
-[wrap](#method-wrap)-
-[zip](#method-zip)-
+[mapSpread](#method-mapspread)-迭代集合，将每个嵌套项值给指定的回调函数
+[mapToGroups](#method-maptogroups)-通过给定的回调函数对集合项进行分组
+[mapWithKeys](#method-mapwithkeys)-遍历集合传值给回调函数，并返回一个包含单个键/值对的关联数组
+[max](#method-max)-返回指定键的最大值
+[median](#method-median)-返回指定键的"中间值"
+[merge](#method-merge)-合并指定的数组或集合到原集合
+[mergeRecursive](#method-mergerecursive)-以递归的形式合并给定的数组或集合到原集合中
+[min](#method-min)-返回指定键的最小值
+[mode](#method-mode)-返回指定键的"众数"
+[nth](#method-nth)-创建由每 n 个元素取一个元素组成的一个新集合
+[only](#method-only)-返回集合中所有指定键的集合项
+[pad](#method-pad)-将使用给定的值填充数组，直到数组达到指定的大小
+[partition](#method-partition)-利用回调返回是否为真来分开通过指定条件的元素以及那些不通过指定条件的元素
+[pipe](#method-pipe)-把集合放到回调参数中并返回回调的结果
+[pluck](#method-pluck)-获取集合中指定键对应的所有值
+[pop](#method-pop)-从原集合返回并移除集合中的最后一项
+[prepend](#method-prepend)-将指定的值添加到集合的开头
+[pull](#method-pull)-把指定键对应的值从集合中移除并返回
+[push](#method-push)-把指定的值追加到集合项的末尾
+[put](#method-put)-在集合内设置给定的键和值
+[random](#method-random)-从集合中返回一个随机项
+[reduce](#method-reduce)-将每次迭代的结果传递给下一次迭代直到集合减少为单个值
+[reject](#method-reject)-使用指定的回调函数过滤集合
+[replace](#method-replace)-类似于 `merge`
+[replaceRecursive](#method-replacerecursive)-类似于 `replace`
+[reverse](#method-reverse)-用来倒转集合项的顺序，并保留原始的键
+[search](#method-search)-在集合中搜索给定的值并返回它的键
+[shift](#method-shift)-移除并返回集合的第一个元素
+[shuffle](#method-shuffle)-随机打乱元素
+[skip](#method-skip)-返回除了给定的元素数目的新集合
+[slice](#method-slice)-返回集合中给定索引开始后面的部分
+[some](#method-some)-[`contains`](#method-contains) 方法的别名
+[sort](#method-sort)-对集合进行排序
+[sortBy](#method-sortby)-将根据指定键对集合进行排序
+[sortByDesc](#method-sortbydesc)-该方法与 [`sortBy`](#method-sortby) 方法相反的顺序进行排序
+[sortKeys](#method-sortkeys)-通过底层关联数组的键来对集合进行排序
+[sortKeysDesc](#method-sortkeysdesc)-该方法与 [`sortKeys`](#method-sortkeys) 方法相反的顺序进行排序
+[splice](#method-splice)-移除并返回指定索引开始的元素片段
+[split](#method-split)-将集合按照给定的值拆分
+[sum](#method-sum)-返回集合内所有项的和
+[take](#method-take)-返回给定数量项的新集合
+[tap](#method-tap)-将给定的回调函数传入该集合
+[times](#method-times)-通过调用给定次数的回调函数来创建新集合
+[toArray](#method-toarray)-将集合转换成 PHP `array`
+[toJson](#method-tojson)-将集合转换成 JSON 字符串
+[transform](#method-transform)-遍历整个集合，并对集合中的每个元素都会调用其回调函数
+[union](#method-union)-将给定数组添加到集合中
+[unique](#method-unique)-返回集合中所有唯一项
+[uniqueStrict](#method-uniquestrict)-与 [`unique`](#method-unique) 方法一样，但是"严格"模式
+[unless](#method-unless)-当传入的第一个参数不为 `true` 的时候，将执行给定的回调函数
+[unlessEmpty](#method-unlessempty)-[`whenNotEmpty`](#method-whennotempty) 的别名方法
+[unlessNotEmpty](#method-unlessnotempty)-[`whenEmpty`](#method-whenempty) 的别名方法
+[unwrap](#method-unwrap)-静态 `unwrap` 方法返回集合内部的可用元素
+[values](#method-values)-返回键被重置为连续编号的新集合
+[when](#method-when)-当 `when` 方法的第一个参数传入为 `true` 时，将执行给定的回调函数
+[whenEmpty](#method-whenempty)-`whenEmpty` 方法是当集合为空时，将执行给定的回调函数
+[whenNotEmpty](#method-whennotempty)-当集合不为空时，将执行给定的回调函数
+[where](#method-where)-通过给定的键 / 值对查询过滤集合的结果
+[whereStrict](#method-wherestrict)-此方法和 [`where`](#method-where) 方法使用相似，但是"严格"模式
+[whereBetween](#method-wherebetween)-筛选给定范围的集合
+[whereIn](#method-wherein)-根据包含给定数组的键 / 值对来过滤集合
+[whereInStrict](#method-whereinstrict)-此方法和 [`whereIn`](#method-wherein) 方法使用相似，但是"严格"模式
+[whereInstanceOf](#method-whereinstanceof)-根据给定的类来过滤集合
+[whereNotBetween](#method-wherenotbetween)-在指定的范围内过滤集合
+[whereNotIn](#method-wherenotin)-根据未包含在指定数组的键 / 值对来对集合进行过滤
+[whereNotInStrict](#method-wherenotinstrict)-此方法与[`whereNotIn`](#method-wherenotin) 方法类似，但是"严格"模式
+[whereNotNull](#method-wherenotnull)-筛选给定键不为 NULL 的项
+[whereNull](#method-wherenull)-筛选给定键为 NULL 的项
+[wrap](#method-wrap)-将给定值封装到集合中
+[zip](#method-zip)-在与集合的值对应的索引处合并给定数组的值
 
 </div>
 

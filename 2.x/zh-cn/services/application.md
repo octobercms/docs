@@ -1,12 +1,12 @@
 # 应用
 
-## Application Container
+## 应用程序容器
 
-The inversion of control (IoC) container is a tool for managing class dependencies. Dependency injection is a method of removing hard-coded class dependencies. Instead, the dependencies are injected at run-time, allowing for greater flexibility as dependency implementations may be swapped easily.
+控制反转(IoC)容器是用于管理类依赖关系的工具。 依赖注入是一种去除硬编码类依赖的方法。 相反，依赖项是在运行时注入的，因为可以轻松交换依赖项实现，从而提供更大的灵活性。
 
-#### Binding a type into the container
+#### 将类型绑定到容器中
 
-There are two ways the IoC container can resolve dependencies: via Closure callbacks or automatic resolution. First, we'll explore Closure callbacks. First, a "type" may be bound into the container:
+IoC 容器可以通过两种方式解决依赖关系：通过闭包回调或自动解析。 首先，我们将探索闭包回调，可以将"类型"绑定到容器中：
 
 ```php
 App::bind('foo', function($app) {
@@ -14,17 +14,17 @@ App::bind('foo', function($app) {
 });
 ```
 
-#### Resolving a type from the container
+#### 从容器中解析类型
 
 ```php
 $value = App::make('foo');
 ```
 
-When the `App::make` method is called, the Closure callback is executed and the result is returned.
+当调用 `App::make` 方法时，会执行 Closure 回调并返回结果。
 
-#### Binding a "shared" type into the container
+#### 将一个"共享"类型绑定到容器中
 
-Sometimes you may wish to bind something into the container that should only be resolved once, and the same instance should be returned on subsequent calls into the container:
+有时您可能希望将某些内容绑定到只应解析一次的容器中，并且应在随后对容器的调用中返回相同的实例：
 
 ```php
 App::singleton('foo', function() {
@@ -32,9 +32,9 @@ App::singleton('foo', function() {
 });
 ```
 
-#### Binding an existing instance into the container
+#### 将现有实例绑定到容器中
 
-You may also bind an existing object instance into the container using the `instance` method:
+您还可以使用 `instance` 方法将现有对象实例绑定到容器中：
 
 ```php
 $foo = new Foo;
@@ -42,35 +42,35 @@ $foo = new Foo;
 App::instance('foo', $foo);
 ```
 
-#### Binding an interface to an implementation
+#### 将接口绑定到实现
 
-In some cases, a class may depend on an interface implementation, not a "concrete type". When this is the case, the `App::bind` method must be used to inform the container which interface implementation to inject:
+在某些情况下，类可能依赖于接口实现，而不是"具体类型"。 在这种情况下，必须使用 `App::bind` 方法来通知容器要注入哪个接口实现：
 
 ```php
 App::bind('UserRepositoryInterface', 'DbUserRepository');
 ```
 
-Now consider the following code:
+现在考虑以下代码：
 
 ```php
 $users = App::make('UserRepositoryInterface');
 ```
 
-Since we have bound the `UserRepositoryInterface` to a concrete type, the `DbUserRepository` will automatically be injected into this controller when it is created.
+由于我们已将 `UserRepositoryInterface` 绑定到具体类型，`DbUserRepository` 将在创建时自动注入此控制器。
 
-### Where to Register Bindings
+### 在哪里注册绑定
 
-IoC bindings, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place IoC registration logic.
+IoC 绑定，如 [事件处理程序](events.md)，通常属于"引导代码"类别。换句话说，它们让您的应用程序准备好实际处理请求，并且通常需要在实际调用路由或控制器之前执行。最常见的地方是[插件注册文件](../plugin/registration.md#registration-methods)的`boot`方法。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用该文件来放置 IoC 注册逻辑。
 
-## Service Providers
+## 服务提供者
 
-Service providers are a great way to create libraries and perform group related IoC registrations in a single location. Within a service provider, you might register a custom authentication driver, register your application's repository classes with the IoC container, or even setup a custom Artisan command.
+服务提供者是在单个位置创建库和执行组相关的 IoC 注册的好方法。在服务提供者中，您可以注册自定义身份验证驱动程序，使用 IoC 容器注册应用程序的存储库类，甚至设置自定义 Artisan 命令。
 
-In fact, [plugin registration files](../plugin/registration.md) inherit service providers and most of the core components include service providers. All of the registered service providers for your application are listed in the `providers` array of the `config/app.php` configuration file.
+实际上，[插件注册文件](../plugin/registration.md)继承了服务提供者，大部分核心组件都包含服务提供者。为您的应用程序注册的所有服务提供者都列在 `config/app.php` 配置文件的 `providers` 数组中。
 
-#### Defining a Service Provider
+#### 定义服务提供者
 
-To create a service provider, simply extend the `October\Rain\Support\ServiceProvider` class and define a `register` method:
+要创建服务提供者，只需扩展 `October\Rain\Support\ServiceProvider` 类并定义 `register` 方法：
 
 ```php
 use October\Rain\Support\ServiceProvider;
@@ -86,72 +86,71 @@ class FooServiceProvider extends ServiceProvider
 }
 ```
 
-Note that in the `register` method, the application IoC container is available to you via the `$this->app` property. Once you have created a provider and are ready to register it with your application, simply add it to the `providers` array in your `app` configuration file.
+请注意，在 `register` 方法中，您可以通过 `$this->app` 属性使用应用程序 IoC 容器。 一旦您创建了提供程序并准备将其注册到您的应用程序中，只需将其添加到您的 `app` 配置文件中的 `providers` 数组中。
 
-#### Registering a service provider at run-time
+#### 在运行时注册服务提供者
 
-You may also register a service provider at run-time using the `App::register` method:
+您还可以在运行时使用 `App::register` 方法注册服务提供者：
 
 ```php
 App::register('FooServiceProvider');
 ```
 
-## Application Events
+## 应用程序事件
 
-#### Request events
+#### 请求事件
 
-You can register special events before a requested is routed using the `before` and `after` methods:
+您可以使用 `before` 和 `after` 方法在请求路由之前注册特殊事件：
 
 ```php
 App::before(function ($request) {
-    // Code to execute before the request is routed
+    // 在路由请求之前执行的代码
 });
 
 App::after(function ($request) {
-    // Code to execute after the request is routed
+    // 路由请求后要执行的代码
 });
 ```
 
-#### Container events
+#### 容器事件
 
-The service container fires an event each time it resolves an object. You may listen to this event using the `resolving` method:
+服务容器每次解析对象时都会触发一个事件。 您可以使用 `resolving` 方法收听此事件：
 
 ```php
 App::resolving(function ($object, $app) {
-    // Called when container resolves object of any type...
+    // 当容器解析任何类型的对象时调用...
 });
 
 App::resolving('foo', function ($fooBar, $app) {
-    // Called when container resolves objects using hint "foo"...
+    // 当容器使用提示"foo"解析对象时调用...
 });
 
 App::resolving('Acme\Blog\Classes\FooBar', function ($fooBar, $app) {
-    // Called when container resolves objects of type "FooBar"...
+    // 当容器解析"FooBar"类型的对象时调用...
 });
 ```
 
-As you can see, the object being resolved will be passed to the callback, allowing you to set any additional properties on the object before it is given to its consumer.
+如您所见，正在解析的对象将被传递给回调，允许您在对象被提供给其使用者之前设置对象的任何其他属性。
 
-## Application Helpers
+## 应用程序助手
 
-#### Finding the application environment
+#### 查找应用环境
 
-You may use the `environment` method to discover the application environment as determined by the [environment configuration](../setup/configuration.md#environment-configuration).
+您可以使用 `environment` 方法来发现由 [环境配置](../setup/configuration.md#environment-configuration) 确定的应用程序环境。
 
 ```php
-// production
+// 生产
 App::environment();
 ```
+#### 确定执行上下文
 
-#### Determine the execution context
-
-It is possible to know if the current request is being performed in the administrative back-end area using the `runningInBackend` method.
+可以使用 `runningInBackend` 方法知道当前请求是否正在管理后端区域中执行。
 
 ```php
 App::runningInBackend();
 ```
 
-You may also use the `runningInConsole` method to check if the executing code is taking place inside the [command line interface](../console/commands.md):
+您还可以使用 `runningInConsole` 方法检查执行代码是否发生在 [命令行界面](../console/commands.md) 中：
 
 ```php
 App::runningInConsole();

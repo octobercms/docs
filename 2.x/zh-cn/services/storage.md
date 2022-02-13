@@ -1,30 +1,30 @@
 # 存储
 
-October CMS provides a powerful filesystem abstraction thanks to Laravel and the wonderful [Flysystem](https://github.com/thephpleague/flysystem) PHP package. The Flysystem integration provides simple to use drivers for working with local filesystems, Amazon S3, and Rackspace Cloud Storage. Even better, it's amazingly simple to switch between these storage options as the API remains the same for each system.
+由于 Laravel 和出色的 [Flysystem](https://github.com/thephpleague/flysystem) PHP 包，October CMS 提供了强大的文件系统抽象。 Flysystem 集成提供简单易用的驱动程序，用于处理本地文件系统、Amazon S3 和 Rackspace 云存储。 更好的是，在这些存储选项之间切换非常简单，因为每个系统的 API 保持不变。
 
-## Configuration
+## 配置
 
-The filesystem configuration file is located at `config/filesystems.php`. Within this file you may configure all of your "disks". Each disk represents a particular storage driver and storage location. Example configurations for each supported driver is included in the configuration file. So, simply modify the configuration to reflect your storage preferences and credentials.
+文件系统配置文件位于`config/filesystems.php`。 在此文件中，您可以配置所有`磁盘`。 每个磁盘代表一个特定的存储驱动程序和存储位置。 每个支持的驱动程序的示例配置都包含在配置文件中。 因此，只需修改配置以反映您的存储偏好和凭据。
 
-Of course, you may configure as many disks as you like, and may even have multiple disks that use the same driver.
+当然，您可以配置任意数量的磁盘，甚至可以有多个磁盘使用相同的驱动程序。
 
-#### The Local Driver
+#### 本地驱动程序
 
-When using the `local` driver, note that all file operations are relative to the `root` directory defined in your configuration file. By default, this value is set to the `storage/app` directory. Therefore, the following method would store a file in `storage/app/file.txt`:
+使用 `local` 驱动程序时，请注意所有文件操作都相对于配置文件中定义的 `root` 目录。 默认情况下，此值设置为 `storage/app` 目录。 因此，以下方法会将文件存储在 `storage/app/file.txt` 中：
 
 ```php
 Storage::disk('local')->put('file.txt', 'Contents');
 ```
 
-#### Other Driver Prerequisites
+#### 其他驱动程序先决条件
 
-Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
+在使用 S3 或 Rackspace 驱动程序之前，您需要安装 [Drivers 插件](https://octobercms.com/plugin/october-drivers)。
 
-## Basic Usage
+## 基本用法
 
-### Obtaining Disk Instances
+### 获取磁盘实例
 
-The `Storage` facade may be used to interact with any of your configured disks. For example, you may use the `put` method on the facade to store an avatar on the default disk. If you call methods on the `Storage` facade without first calling the `disk` method, the method call will automatically be passed to the default disk:
+`Storage` 外观可用于与您配置的任何磁盘进行交互。 例如，您可以使用外观上的 `put` 方法将头像存储在默认磁盘上。 如果你调用 `Storage` 门面的方法而不先调用 `disk` 方法，方法调用将自动传递到默认磁盘：
 
 ```php
 $user = User::find($id);
@@ -35,7 +35,7 @@ Storage::put(
 );
 ```
 
-When using multiple disks, you may access a particular disk using the `disk` method on the `Storage` facade. Of course, you may continue to chain methods to execute methods on the disk:
+当使用多个磁盘时，您可以使用 `Storage` 门面的 `disk` 方法访问特定磁盘。 当然，你可以继续链式方法在磁盘上执行方法：
 
 ```php
 $disk = Storage::disk('s3');
@@ -43,37 +43,37 @@ $disk = Storage::disk('s3');
 $contents = Storage::disk('local')->get('file.jpg')
 ```
 
-### Retrieving Files
+### 检索文件
 
-The `get` method may be used to retrieve the contents of a given file. The raw string contents of the file will be returned by the method:
+`get` 方法可用于检索给定文件的内容。 该方法将返回文件的原始字符串内容：
 
 ```php
 $contents = Storage::get('file.jpg');
 ```
 
-The `exists` method may be used to determine if a given file exists on the disk:
+`exists` 方法可用于确定给定文件是否存在于磁盘上：
 
 ```php
 $exists = Storage::disk('s3')->exists('file.jpg');
 ```
 
-#### File Meta Information
+#### 文件元信息
 
-The `size` method may be used to get the size of the file in bytes:
+`size` 方法可用于获取文件的大小（以字节为单位）：
 
 ```php
 $size = Storage::size('file1.jpg');
 ```
 
-The `lastModified` method returns the UNIX timestamp of the last time the file was modified:
+`lastModified` 方法返回文件最后一次修改的 UNIX 时间戳：
 
 ```php
 $time = Storage::lastModified('file1.jpg');
 ```
 
-### Storing Files
+### 存储文件
 
-The `put` method may be used to store a file on disk. You may also pass a PHP `resource` to the `put` method, which will use Flysystem's underlying stream support. Using streams is greatly recommended when dealing with large files:
+`put` 方法可用于在磁盘上存储文件。 你也可以将 PHP 的`resource` 传递给`put` 方法，这将使用Flysystem 的底层流支持。 处理大文件时强烈建议使用流：
 
 ```php
 Storage::put('file.jpg', $contents);
@@ -81,21 +81,21 @@ Storage::put('file.jpg', $contents);
 Storage::put('file.jpg', $resource);
 ```
 
-The `copy` method may be used to copy an existing file to a new location on the disk:
+`copy` 方法可用于将现有文件复制到磁盘上的新位置：
 
 ```php
 Storage::copy('old/file1.jpg', 'new/file1.jpg');
 ```
 
-The `move` method may be used to move an existing file to a new location:
+`move` 方法可用于将现有文件移动到新位置：
 
 ```php
 Storage::move('old/file1.jpg', 'new/file1.jpg');
 ```
 
-#### Prepending / Appending to Files
+#### 前置/附加到文件
 
-The `prepend` and `append` methods allow you to easily insert content at the beginning or end of a file:
+`prepend` 和 `append` 方法允许您轻松地在文件的开头或结尾插入内容：
 
 ```php
 Storage::prepend('file.log', 'Prepended Text');
@@ -103,9 +103,9 @@ Storage::prepend('file.log', 'Prepended Text');
 Storage::append('file.log', 'Appended Text');
 ```
 
-### Deleting Files
+### 删除文件
 
-The `delete` method accepts a single filename or an array of files to remove from the disk:
+`delete` 方法接受单个文件名或要从磁盘中删除的文件数组：
 
 ```php
 Storage::delete('file.jpg');
@@ -113,11 +113,11 @@ Storage::delete('file.jpg');
 Storage::delete(['file1.jpg', 'file2.jpg']);
 ```
 
-### Directories
+### 目录
 
-#### Get All Files Within a Directory
+#### 获取目录中的所有文件
 
-The `files` method returns an array of all of the files in a given directory. If you would like to retrieve a list of all files within a given directory including all sub-directories, you may use the `allFiles` method:
+`files` 方法返回给定目录中所有文件的数组。 如果您想检索给定目录中所有文件的列表，包括所有子目录，您可以使用 `allFiles` 方法：
 
 ```php
 $files = Storage::files($directory);
@@ -125,9 +125,9 @@ $files = Storage::files($directory);
 $files = Storage::allFiles($directory);
 ```
 
-#### Get All Directories Within a Directory
+#### 获取目录中的所有目录
 
-The `directories` method returns an array of all the directories within a given directory. Additionally, you may use the `allDirectories` method to get a list of all directories within a given directory and all of its sub-directories:
+`directories` 方法返回给定目录中所有目录的数组。 此外，您可以使用 `allDirectories` 方法获取给定目录及其所有子目录中所有目录的列表：
 
 ```php
 $directories = Storage::directories($directory);
@@ -136,17 +136,17 @@ $directories = Storage::directories($directory);
 $directories = Storage::allDirectories($directory);
 ```
 
-#### Create a Directory
+#### 创建目录
 
-The `makeDirectory` method will create the given directory, including any needed sub-directories:
+`makeDirectory` 方法将创建给定的目录，包括任何需要的子目录：
 
 ```php
 Storage::makeDirectory($directory);
 ```
 
-#### Delete a Directory
+#### 删除目录
 
-Finally, the `deleteDirectory` may be used to remove a directory, including all of its files, from the disk:
+最后，`deleteDirectory` 可以用来从磁盘中删除一个目录，包括它的所有文件：
 
 ```php
 Storage::deleteDirectory($directory);

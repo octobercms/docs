@@ -16,7 +16,7 @@ php artisan project:set <license key>
 
 ### 没有 Composer 的部署
 
-<ProductIcon src="https://github.com/octobercms/docs/blob/develop/images/deploy-plugin.png?raw=true" />
+<ProductIcon src="https://i.ibb.co/vPRZ4nB/deploy-plugin.png" />
 
 如果您的服务器不具备运行 Composer 或命令行工具的能力，例如微实例和共享环境，您可以使用[官方部署插件](https://octobercms.com/plugin/rainlab-deploy)作为部署您的网站的解决方案。
 

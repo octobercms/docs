@@ -1,15 +1,15 @@
 # 行为
 
-Behaviors add the ability for classes to have *private traits*, also known as Behaviors. These are similar to [native PHP Traits](http://php.net/manual/en/language.oop5.traits.php) except they have some distinct benefits:
+行为为类添加了具有*私有特征*的能力，也称为行为。 这些与 [原生 PHP 特征](http://php.net/manual/en/language.oop5.traits.php) 类似，但它们有一些明显的好处：
 
-1. Behaviors have their own constructor.
-1. Behaviors can have private or protected methods.
-1. Methods and property names can conflict safely.
-1. Classes can be extended with behaviors dynamically.
+1. 行为有自己的构造函数。
+1. 行为可以有私有或受保护的方法。
+1. 方法和属性名可以安全地冲突。
+1. 类可以动态扩展行为。
 
-## Comparison to Traits
+## 与特征的比较
 
-Where you might use a PHP trait like this:
+您可能会使用这样的 PHP 特征：
 
 ```php
 class MyClass
@@ -19,7 +19,7 @@ class MyClass
 }
 ```
 
-A behavior is used in a similar fashion:
+以类似的方式使用行为：
 
 ```php
 class MyClass extends \October\Rain\Extension\Extendable
@@ -31,7 +31,7 @@ class MyClass extends \October\Rain\Extension\Extendable
 }
 ```
 
-Where you might define a trait like this:
+您可以在其中定义这样的特征：
 
 ```php
 trait UtilityFunctions
@@ -43,7 +43,7 @@ trait UtilityFunctions
 }
 ```
 
-A behavior is defined like this:
+行为定义如下：
 
 ```php
 class UtilityFunctions extends \October\Rain\Extension\ExtensionBase
@@ -62,17 +62,17 @@ class UtilityFunctions extends \October\Rain\Extension\ExtensionBase
 }
 ```
 
-The extended object is always passed as the first parameter to the Behavior's constructor.
+扩展对象始终作为第一个参数传递给 Behavior 的构造函数。
 
-To summarize:
-- Extend \October\Rain\Extension\ExtensionBase to declare your class as a Behaviour
-- The class wanting to implement the Behaviour needs to extend \October\Rain\Extension\Extendable
+总结一下：
+- 扩展 \October\Rain\Extension\ExtensionBase 以将您的类声明为行为
+- 想要实现行为的类需要扩展\October\Rain\Extension\Extendable
 
-> **Note**: See [Using Traits Instead of Base Classes](#using-traits-instead-of-base-classes)
+> **注意**：参见[使用特征而不是基类](#using-traits-instead-of-base-classes)
 
-## Extending Constructors
+## 扩展构造函数
 
-Any class that uses the `Extendable` or `ExtendableTrait` can have its constructor extended with the static `extend` method. The argument should pass a closure that will be called as part of the class constructor.
+任何使用 `Extendable` 或 `ExtendableTrait` 的类都可以使用静态 `extend` 方法扩展其构造函数。 参数应该传递一个闭包，该闭包将作为类构造函数的一部分调用。
 
 ```php
 MyNamespace\Controller::extend(function($controller) {
@@ -80,9 +80,9 @@ MyNamespace\Controller::extend(function($controller) {
 });
 ```
 
-#### Dynamically Declaring Properties
+#### 动态声明属性
 
-Properties can be declared on an extendable object by calling `addDynamicProperty` and passing a property name and value.
+可以通过调用`addDynamicProperty`并传递属性名称和值来在可扩展对象上声明属性。
 
 ```php
 Post::extend(function($model) {
@@ -90,31 +90,31 @@ Post::extend(function($model) {
 });
 ```
 
-> **Note**: Attempting to set undeclared properties directly on the object that implements the **October\Rain\Extension\ExtendableTrait** will throw an expection.
+> **注意**：尝试直接在实现了 **October\Rain\Extension\ExtendableTrait** 的对象上设置未声明的属性将会抛出异常。
 
-#### Retrieving Dynamic Properties
+#### 检索动态属性
 
-Properties created dynamically can be retrieved with the getDynamicProperties function inherited from
-the ExtendableTrait.
+动态创建的属性可以使用继承自的 getDynamicProperties 函数检索
+可扩展特征。
 
-So retrieving all dynamic properties would look like this:
+因此检索所有动态属性将如下所示：
 
 ```php
 $model->getDynamicProperties();
 ```
 
-This will return an associative array [key => value], with the key being the dynamic property name
-and the value being the property value.
+这将返回一个关联数组 [key => value]，其中键是动态属性名称
+并且值是属性值。
 
-If we know what property we want we can simply append the key (property name) to the function:
+如果我们知道我们想要什么属性，我们可以简单地将键(属性名称)附加到函数中：
 
 ```php
 $model->getDynamicProperties()[$key];
 ```
 
-#### Dynamically Creating Methods
+#### 动态创建方法
 
-Methods can be created to an extendable object by calling `addDynamicMethod` and passing a method name and callable object, like a `Closure`.
+可以通过调用`addDynamicMethod`并传递方法名称和可调用对象(如`Closure`)为可扩展对象创建方法。
 
 ```php
 Post::extend(function($model) {
@@ -130,9 +130,9 @@ Post::extend(function($model) {
 });
 ```
 
-#### Checking the Existence of a Method
+#### 检查方法的存在
 
-You can check for the existence of a method in an `Extendable` class by using the `methodExists` method - similar to the PHP `method_exists()` function. This will detect both standard methods and dynamic methods that have been added through a `addDynamicMethod` call. `methodExists` accepts one parameter: a string of the method name to check the existence of.
+您可以使用 `methodExists` 方法检查 `Extendable` 类中是否存在方法 - 类似于 PHP 的 `method_exists()` 函数。 这将检测通过`addDynamicMethod`调用添加的标准方法和动态方法。 `methodExists` 接受一个参数：用于检查是否存在的方法名称字符串。
 
 ```php
 Post::extend(function($model) {
@@ -147,9 +147,9 @@ $post->methodExists('getTagsAttribute'); // true
 $post->methodExists('missingMethod'); // false
 ```
 
-#### List All Available Methods
+#### 列出所有可用的方法
 
-To retrieve a list of all available methods in an `Extendable` class, you can use the `getClassMethods` method. This method operates similar to the PHP `get_class_methods()` function in that it returns an array of available methods in a class, but in addition to defined methods in the class, it will also list any methods provided by an extension or through an `addDynamicMethod` call.
+要检索 `Extendable` 类中所有可用方法的列表，可以使用 `getClassMethods` 方法。 此方法的操作类似于 PHP `get_class_methods()` 函数，因为它返回类中可用方法的数组，但除了类中定义的方法之外，它还将列出由扩展或通过 `addDynamicMethod` 调用提供的任何方法。
 
 ```php
 Post::extend(function($model) {
@@ -172,28 +172,28 @@ $methods = $post->getClassMethods();
  */
 ```
 
-#### Dynamically Implementing a Behavior
+#### 动态实现行为
 
-This unique ability to extend constructors allows behaviors to be implemented dynamically, for example:
+这种扩展构造函数的独特能力允许动态实现行为，例如：
 
 ```php
 /**
- * Extend the RainLab.Users controller to include the RelationController behavior too
+ * 扩展 RainLab.Users 控制器，使其包含 RelationController 行为
  */
 \RainLab\Users\Controllers\Users::extend(function($controller) {
 
-    // Implement the list controller behavior dynamically
+    // 动态实现列表控制器行为
     $controller->implementClassWith(\Backend\Behaviors\RelationController::class);
 
-    // Declare the relationConfig property dynamically for the RelationController behavior to use
+    // 动态声明要使用的 RelationController 行为的 relationConfig 属性
     $controller->addDynamicProperty('relationConfig', '$/myvendor/myplugin/controllers/users/config_relation.yaml');
 
 });
 ```
 
-## Usage Example
+## 用法示例
 
-#### Behavior / Extension class
+#### 行为/扩展类
 
 ```php
 <?php namespace MyNamespace\Behaviors;
@@ -201,7 +201,7 @@ This unique ability to extend constructors allows behaviors to be implemented dy
 class FormController extends \October\Rain\Extension\ExtensionBase
 {
     /**
-     * @var Reference to the extended object.
+     * @var 对扩展对象的引用。
      */
     protected $controller;
 
@@ -215,19 +215,19 @@ class FormController extends \October\Rain\Extension\ExtensionBase
 
     public function someMethod()
     {
-        return "I come from the FormController Behavior!";
+        return "我来自FormController Behavior！";
     }
 
     public function otherMethod()
     {
-        return "You might not see me...";
+        return "你可能看不到我...";
     }
 }
 ```
 
-#### Extending a Class
+#### 扩展一个类
 
-This `Controller` class will implement the `FormController` behavior and then the methods will become available (mixed in) to the class. We will override the `otherMethod` method.
+这个 `Controller` 类将实现 `FormController` 行为，然后方法将变得可用于(混合)该类。 我们将覆盖 `otherMethod` 方法。
 
 ```php
 <?php namespace MyNamespace;
@@ -236,7 +236,7 @@ class Controller extends \October\Rain\Extension\Extendable
 {
 
     /**
-     * Implement the FormController behavior
+     * 实现 FormController 行为
      */
     public $implement = [
         'MyNamespace.Behaviors.FormController'
@@ -244,50 +244,50 @@ class Controller extends \October\Rain\Extension\Extendable
 
     public function otherMethod()
     {
-        return "I come from the main Controller!";
+        return "我来自主控制器！";
     }
 }
 ```
 
-#### Using the Extension
+#### 使用扩展
 
 ```php
 $controller = new MyNamespace\Controller;
 
-// Prints: I come from the FormController Behavior!
+// 打印：我来自FormController Behavior！
 echo $controller->someMethod();
 
-// Prints: I come from the main Controller!
+// 打印：我来自主控制器！
 echo $controller->otherMethod();
 
-// Prints: You might not see me...
+// 打印：你可能看不到我...
 echo $controller->asExtension('FormController')->otherMethod();
 ```
 
-#### Detecting Utilized Extensions
+#### 检测使用的扩展
 
-To check if an object has been extended with a behavior, you may use the `isClassExtendedWith` method on the object.
+要检查一个对象是否已经扩展了一个行为，你可以在对象上使用 `isClassExtendedWith` 方法。
 
 ```php
 $controller->isClassExtendedWith('Backend.Behaviors.RelationController');
 ```
 
-Below is an example of dynamically extending a `UsersController` of a third-party plugin utilizing this method to avoid preventing other plugins from also extending the afore-mentioned third-party plugin.
+下面是一个使用该方法动态扩展第三方插件的`UsersController`的示例，以避免阻止其他插件也扩展上述第三方插件。
 
 ```php
 UsersController::extend(function($controller) {
 
-    // Implement behavior if not already implemented
+    // 如果尚未实现，则实现行为
     if (!$controller->isClassExtendedWith('Backend.Behaviors.RelationController')) {
         $controller->implement[] = 'Backend.Behaviors.RelationController';
     }
 
-    // Define property if not already defined
+    // 如果尚未定义，则定义属性
     if (!isset($controller->relationConfig)) {
         $controller->addDynamicProperty('relationConfig');
     }
 
-    // Splice in configuration safely
+    // 安全拼接配置
     $myConfigPath = '$/myvendor/myplugin/controllers/users/config_relation.yaml';
 
     $controller->relationConfig = $controller->mergeConfig(
@@ -298,9 +298,9 @@ UsersController::extend(function($controller) {
 }
 ```
 
-### Soft Definition
+### 软定义
 
-If a behavior class does not exist, like a trait, a *Class not found* error will be thrown. In some cases you may wish to suppress this error, for conditional implementation if a behavior is present in the system. You can do this by placing an `@` symbol at the beginning of the class name.
+如果行为类不存在，例如特征，则会抛出 *Class not found* 错误。 在某些情况下，如果系统中存在行为，您可能希望抑制此错误，以便有条件地执行。 您可以通过在类名的开头放置一个 `@` 符号来做到这一点。
 
 ```php
 class User extends \October\Rain\Extension\Extendable
@@ -311,7 +311,7 @@ class User extends \October\Rain\Extension\Extendable
 }
 ```
 
-If the class name `RainLab\Translate\Behaviors\TranslatableModel` does not exist, no error will be thrown. This is the equivalent of the following code:
+如果类名 `RainLab\Translate\Behaviors\TranslatableModel` 不存在，则不会抛出错误。 这等效于以下代码：
 
 ```php
 class User extends \October\Rain\Extension\Extendable
@@ -329,11 +329,11 @@ class User extends \October\Rain\Extension\Extendable
 }
 ```
 
-### Using Traits Instead of Base Classes
+### 使用Traits而不是基类
 
-Sometimes your class may already extend a parent class outside of your source control, making it so you are unable to extend the `ExtensionBase` or `Extendable` classes. Instead you can use these traits and your classes will have to be implemented as follows.
+有时您的类可能已经在源代码控制之外扩展了父类，因此您无法扩展`ExtensionBase`或`Extendable`类。 相反，您可以使用这些特征，并且您的类必须按如下方式实现。
 
-First let's create the class that will act as a Behaviour, ie. can be implemented by other classes.
+首先让我们创建一个行为类，即。 可以由其他类实现。
 
 ```php
 <?php namespace MyNamespace\Behaviors;
@@ -343,7 +343,7 @@ class WaveBehaviour
     use \October\Rain\Extension\ExtensionTrait;
 
     /**
-     * When using the Extensiontrait, your behaviour also has to implement this method
+     * 使用 Extensiontrait 时，您的行为也必须实现此方法
      * @see \October\Rain\Extension\ExtensionBase
      */
     public static function extend(callable $callback)
@@ -358,7 +358,7 @@ class WaveBehaviour
 }
 ```
 
-Now let's create the class that is able to implement behaviours using the ExtendableTrait.
+现在让我们使用 ExtendableTrait 创建能够实现行为的类。
 
 ```php
 class AI
@@ -366,7 +366,7 @@ class AI
     use \October\Rain\Extension\ExtendableTrait;
 
     /**
-     * @var array Extensions implemented by this class.
+     * @var array 此类实现的扩展。
      */
     public $implement;
 
@@ -405,12 +405,12 @@ class AI
 
     public function youGotBrains()
     {
-        echo "I've got an AI!<br>";
+        echo "我有一个人工智能！<br>";
     }
 }
 ```
 
-The AI class is now able to use behaviours. Let's extend it and have this class implement the WaveBehaviour.
+AI 类现在可以使用行为了。 让我们扩展它并让此类实现 WaveBehaviour。
 
 ```php
 <?php namespace MyNamespace\Classes;
@@ -423,29 +423,29 @@ class Robot extends AI
 
     public function identify()
     {
-        echo "I'm a Robot<br>";
+        echo "我是机器人<br>";
         echo $this->youGotBrains();
         echo $this->wave();
     }
 }
 ```
 
-You can now utilize the Robot as follows:
+您现在可以按如下方式使用Robot：
 
 ```php
 $robot = new Robot();
 $robot->identify();
 ```
 
-Which will output:
+这将输出：
 
 ```
-I'm a Robot
-I've got an AI!
+我是机器人
+我有一个人工智能！
 *waves*
 ```
 
-Remember:
+记住：
 
-- When using the `ExtensionTrait` the methods from `ExtensionBase` should be applied to the class.
-- When using the `ExtendableTrait` the methods from `Extendable` should be applied to the class.
+- 使用 `ExtensionTrait` 时，应将 `ExtensionBase` 中的方法应用到该类。
+- 使用 `ExtendableTrait` 时，应将 `Extendable` 中的方法应用于该类。
