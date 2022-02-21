@@ -1,7 +1,7 @@
 #
 # Markup Nav
 #
-"/markup/":
+"/zh-cn/markup/":
 -
     title: 标记
     collapsable: false
@@ -58,7 +58,7 @@
 #
 # Root Nav
 #
-"/":
+"/zh-cn/":
 -
     title: 入门
     children:

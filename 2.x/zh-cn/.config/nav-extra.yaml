@@ -10,7 +10,7 @@
 #
 # Root Extras
 #
-"/":
+"/zh-cn/":
 -
     title: 主文档
     icon: "/images/october-leaf.svg"
