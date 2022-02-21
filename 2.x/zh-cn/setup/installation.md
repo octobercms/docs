@@ -1,6 +1,6 @@
 # 安装
 
-<VideoPreview src="https://www.bilibili.com/video/BV1aR4y177dT?share_source=copy_web" />
+<VideoPreview src="https://www.bilibili.com/video/BV1aR4y177dT" customThumbnail="https://i.ibb.co/pyYmxp2/YouTube.jpg" />
 
 October CMS 是一个具有简单直观界面的 Web 应用程序平台。Web 平台提供一致的结构，并强调可重用性，因此您可以专注于构建独特的内容，而我们处理无聊的部分。
 
