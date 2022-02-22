@@ -105,7 +105,7 @@ throw new AjaxException([
 
 ## 在处理程序之前运行代码
 
-有时您可能希望在处理程序执行之前执行代码。将 `onInit` 函数定义为 [页面执行生命周期](../cms/layouts.md#oc-dynamic-pages) 的一部分，允许代码在每个 AJAX 处理程序之前运行。
+有时您可能希望在处理程序执行之前执行代码。将 `onInit` 函数定义为 [页面执行生命周期](../cms/layouts.md#oc-dynamic-layouts) 的一部分，允许代码在每个 AJAX 处理程序之前运行。
 
 ```php
 function onInit()

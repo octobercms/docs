@@ -143,6 +143,7 @@ flashCreate | :name 已创建
 flashUpdate | :name 更新
 flashDelete | :name 已删除
 
+<a id="oc-defining-form-fields"></a>
 ## 定义表单字段
 
 表单字段是使用 YAML 文件定义的。 表单行为使用表单字段配置来创建表单控件并将它们绑定到模型字段。 该文件被放置在插件的 **models** 目录的子目录中。 子目录名称与小写的模型类名称相匹配。 文件名无关紧要，但 **fields.yaml** 和 **form_fields.yaml** 是常用名称。 示例表单字段文件位置:
@@ -1490,6 +1491,7 @@ _map:
     type: mapviewer
 ```
 
+<a id="oc-extending-form-behavior"></a>
 ## 扩展表单行为
 
 有时您可能希望修改默认的表单行为，有几种方法可以做到这一点。

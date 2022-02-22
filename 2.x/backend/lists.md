@@ -110,6 +110,7 @@ filter: config_filter.yaml
 
 The **filter** option should make reference to a [filter configuration file](#using-list-filters) path or supply an array with the configuration.
 
+<a id="oc-defining-list-columns"></a>
 ## Defining List Columns
 
 List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
@@ -862,6 +863,7 @@ For example, to modify the list body row markup, create a file called `list/_lis
 </tr>
 ```
 
+<a id="oc-extending-column-definitions"></a>
 ### Extending Column Definitions
 
 You may extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
@@ -980,6 +982,7 @@ public function listOverrideRecordUrl($record, $definition = null)
 }
 ```
 
+<a id="oc-extending-filter-scopes"></a>
 ### Extending Filter Scopes
 
 You may extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
@@ -1085,6 +1088,7 @@ public function listExtendRecords($records)
 }
 ```
 
+<a id="oc-custom-column-types"></a>
 ### Custom Column Types
 
 Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration.md#oc-registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.

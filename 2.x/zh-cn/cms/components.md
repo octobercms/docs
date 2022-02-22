@@ -30,6 +30,7 @@ maxItems = 20
 
 > **注意**：如果将两个同名组件一起分配给一个页面和布局，页面组件会覆盖布局组件的任何属性。
 
+<a id="oc-components-aliases"></a>
 ## 组件别名
 
 如果有两个插件注册了同名的组件，您可以通过使用其完全限定的类名并为其分配一个 *alias* 来附加一个组件：
@@ -53,6 +54,8 @@ maxItems = 10
 [demoTodo todoB]
 maxItems = 20
 ```
+
+<a id="oc-using-external-property-values"></a>
 ## 使用外部属性值
 
 默认情况下，属性值在定义组件的配置部分初始化，并且属性值是静态的，如下所示：
@@ -109,6 +112,7 @@ url = "/todo/:maxItems"
 
 在 October的后端中，您可以使用 检查器(Inspector) 工具为组件属性分配外部值。在检查器中，您不需要使用大括号输入参数名称。 检查器中的每个字段在右侧都有一个图标，用于打开外部参数名称编辑器。对于部件变量，输入参数名称为 `paramName`，或者为 URL 参数输入 `:paramName`。
 
+<a id="oc-passing-variables-to-components"></a>
 ## 将变量传递给组件
 
 组件可以设计成在渲染的时候使用变量，类似于[部件变量](partials.md#oc-passing-variables-to-partials)，可以在`{% component %}` 中的组件名后指定标签。指定的变量将显式覆盖 [组件属性](../plugin/components.md#oc-component-properties) 的值，包括 [外部属性值](#using-external-property-values)。
@@ -125,6 +129,7 @@ url = "/todo/:maxItems"
 
 组件提供的标记通常用作组件的使用示例。在某些情况下，您可能希望修改组件的外观和输出。 [将默认标记移动到主题部分](#moving-default-markup-to-a-partial) 适用于彻底检修组件。 [覆盖组件部分](#overriding-component-partials) 对局部区域进行自定义很有用。
 
+<a id="oc-moving-default-markup-to-a-partial"></a>
 ### 将默认标记移动到部件
 
 每个组件都可以有一个名为 **default.htm** 的入口点部分，它会在调用 `{% component %}` 标签时呈现，在以下示例中，我们假设组件名为 **blogPost**。
@@ -159,6 +164,7 @@ url = "blog/post"
 
 对于在组件部分目录中找到的所有其他部件，可以重复此过程。
 
+<a id="oc-overriding-component-partials"></a>
 ### 覆盖组件部件
 
 可以使用主题部件覆盖所有组件部件。如果名为 **channel** 的组件使用 **title.htm** 部件。

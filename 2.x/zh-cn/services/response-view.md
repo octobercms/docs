@@ -2,7 +2,7 @@
 
 ## 基本响应
 
-几乎可以从页面使用的 PHP 方法返回响应。这包括  [布局执行生命周期](../cms/layouts.md#oc-layout-execution-life-cycle) 和 [AJAX 处理程序定义](../ajax/handlers.md)中包含的所有 CMS 方法.
+几乎可以从页面使用的 PHP 方法返回响应。这包括  [布局执行生命周期](../cms/layouts.md#oc-dynamic-layouts) 和 [AJAX 处理程序定义](../ajax/handlers.md)中包含的所有 CMS 方法.
 
 #### 从 CMS 方法返回字符串
 

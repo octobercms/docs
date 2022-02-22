@@ -237,7 +237,7 @@ class Topic extends ComponentBase
 }
 ```
 
-接下来，这将演示如何从 [页面执行生命周期](../cms/layouts.md#oc-dynamic-pages) 内部挂钩到这个新事件。 当在 `Topic` 组件(上述)中调用 `onPost` 事件处理程序时，这将写入跟踪日志。
+接下来，这将演示如何从 [页面执行生命周期](../cms/layouts.md#oc-dynamic-layouts) 内部挂钩到这个新事件。 当在 `Topic` 组件(上述)中调用 `onPost` 事件处理程序时，这将写入跟踪日志。
 
 ```
 [topic]

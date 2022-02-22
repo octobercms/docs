@@ -452,4 +452,4 @@ quote:
             type: textarea
 ```
 
-For more information about the repeater group mode see [Repeater Widget](../backend/forms.md#oc-repeater).
+For more information about the repeater group mode see [Repeater Widget](../backend/forms.md#widget-repeater).

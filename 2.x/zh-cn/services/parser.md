@@ -452,4 +452,4 @@ quote:
             type: textarea
 ```
 
-有关组合器组模式的更多信息，请参阅 [循环小部件](../backend/forms.md#oc-repeater)。
+有关组合器组模式的更多信息，请参阅 [循环小部件](../backend/forms.md#widget-repeater)。

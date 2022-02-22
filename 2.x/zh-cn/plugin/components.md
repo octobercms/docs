@@ -319,7 +319,7 @@ public function init()
 
 ### 停止响应
 
-和[页面执行生命周期](../cms/layouts.md#oc-layout-execution-life-cycle)中的所有方法一样，如果组件中的`onRun`方法有返回值，这将在此停止循环 指向并将响应返回给浏览器。 这里我们使用 `Response` 门面返回一个访问被拒绝的消息：
+和[页面执行生命周期](../cms/layouts.md#oc-dynamic-layouts)中的所有方法一样，如果组件中的`onRun`方法有返回值，这将在此停止循环 指向并将响应返回给浏览器。 这里我们使用 `Response` 门面返回一个访问被拒绝的消息：
 
 ```php
 public function onRun()

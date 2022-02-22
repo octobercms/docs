@@ -109,6 +109,7 @@ filter: config_filter.yaml
 
 **filter** 选项应引用 [过滤器配置文件](#using-list-filters) 路径或提供带有配置的数组。
 
+<a id="oc-defining-list-columns"></a>
 ## 定义列表字段
 
 列表字段是使用 YAML 文件定义的。 列表行为使用字段配置来创建记录表并在表单元格中显示模型字段。 该文件被放置在插件的 **models** 目录的子目录中。 子目录名称与小写的模型类名称相匹配。 文件名无关紧要，但 **columns.yaml** 和 **list_columns.yaml** 是常用名称。 示例列表字段文件位置：
@@ -861,6 +862,7 @@ customViewPath: $/acme/blog/controllers/reviews/list
 </tr>
 ```
 
+<a id="oc-extending-column-definitions"></a>
 ### 扩展列表字段
 
 您可以通过调用控制器类上的`extendListColumns`静态方法从外部扩展另一个控制器的列。此方法可以接受两个参数，**$list** 将代表 Lists 小部件对象，**$model** 代表列表使用的模型。以这个控制器为例：
@@ -979,6 +981,7 @@ public function listOverrideRecordUrl($record, $definition = null)
 }
 ```
 
+<a id="oc-extending-filter-scopes"></a>
 ### 扩展过滤器范围
 
 您可以通过调用控制器类上的 `extendListFilterScopes` 静态方法从外部扩展另一个控制器的过滤器范围。此方法可以采用参数 **$filter** 来表示过滤器小部件对象。以这个控制器为例：
@@ -1084,6 +1087,7 @@ public function listExtendRecords($records)
 }
 ```
 
+<a id="oc-custom-column-types"></a>
 ### 自定义字段类型
 
 自定义列表字段类型可以通过[插件注册类](../plugin/registration.md#oc-registration-methods)的`registerListColumnTypes`方法在后端注册。该方法应返回一个数组，其中键是类型名称，值是可调用函数。可调用函数接收三个参数，本机`$value`、`$column` 定义对象和模型`$record` 对象。

@@ -96,6 +96,7 @@ layout = "default"
 
 More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder.md).
 
+<a id="oc-dynamic-layouts"></a>
 ## Dynamic Layouts
 
 Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#oc-dynamic-pages) documentation for details.

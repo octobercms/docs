@@ -70,6 +70,7 @@ public function render()
 }
 ```
 
+<a id="oc-ajax-handlers"></a>
 ### AJAX 处理程序
 
 小部件实现与 [后端控制器](controllers-ajax#oc-ajax) 相同的 AJAX 方法。 AJAX 处理程序是小部件类的公共方法，其名称以 **on** 前缀开头。 小部件 AJAX 处理程序和后端控制器的 AJAX 处理程序之间的唯一区别是，当您在小部件中引用它时，您应该使用小部件的 `getEventHandler` 方法来返回小部件的处理程序名称。

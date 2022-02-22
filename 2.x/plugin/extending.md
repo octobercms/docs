@@ -235,7 +235,7 @@ class Topic extends ComponentBase
 }
 ```
 
-Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts.md#oc-dynamic-pages). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
+Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts.md#oc-dynamic-layouts). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
 ```
 [topic]

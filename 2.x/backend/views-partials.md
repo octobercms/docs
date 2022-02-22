@@ -41,6 +41,7 @@ If you're using hints, you may find it useful to check if the user has hidden th
 <?php endif ?>
 ```
 
+<a id="oc-layouts-and-child-layouts"></a>
 ## Layouts and Child Layouts
 
 Back-end layouts reside in an optional **layouts/** directory of a plugin. A custom layout is set with the `$layout` property of the controller object. It defaults to the system layout called  `default`.

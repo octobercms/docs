@@ -70,6 +70,7 @@ public function render()
 }
 ```
 
+<a id="oc-ajax-handlers"></a>
 ### AJAX Handlers
 
 Widgets implement the same AJAX approach as the [back-end controllers](controllers-ajax#oc-ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.

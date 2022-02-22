@@ -96,6 +96,7 @@ layout = "default"
 
 关于占位符的更多信息可以在 [标记指南](../markup/tag-placeholder.md) 中找到。
 
+<a id="oc-dynamic-layouts"></a>
 ## 动态布局
 
 布局，就像页面一样，可以使用任何 Twig 功能。详情请参考[动态页面](pages.md#oc-dynamic-pages) 文档。

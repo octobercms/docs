@@ -320,7 +320,7 @@ public function init()
 
 ### Halting With a Response
 
-Like all methods in the [page execution life cycle](../cms/layouts.md#oc-layout-execution-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
+Like all methods in the [page execution life cycle](../cms/layouts.md#oc-dynamic-layouts), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
 
 ```php
 public function onRun()
