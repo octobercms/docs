@@ -85,6 +85,7 @@ $this->vars['myVariable'] = 'value';
 <p>变量值为 <?= $myVariable ?></p>
 ```
 
+<a id="oc-setting-the-navigation-context"></a>
 ## 设置导航上下文
 
 插件可以在[插件注册文件](../plugin/registration.md#oc-navigation-menus)中注册后台导航菜单和子菜单。导航上下文确定当前后端页面的活动后端菜单和子菜单。您可以使用 `BackendMenu` 类设置导航上下文：

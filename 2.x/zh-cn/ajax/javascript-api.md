@@ -87,7 +87,7 @@ $.request('onCalculate', {
     success: function() {
         console.log('完成!');
     }
-})       
+})
 ```
 
 运行 `onCalculate` 处理程序，如果成功，则在默认的 `success` 函数完成后运行一些自定义代码：
@@ -100,6 +100,7 @@ $('form').request('onCalculate', {success: function(data) {
 }})
 ```
 
+<a id="oc-global-ajax-events"></a>
 ## 全局 AJAX 事件
 
 AJAX 框架在更新的元素、触发元素、表单和窗口对象上触发多个事件。 无论使用哪个 API——数据属性 API 或 JavaScript API，都会触发事件。

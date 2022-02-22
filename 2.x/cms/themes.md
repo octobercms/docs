@@ -99,7 +99,7 @@ layout = "default"
 parameter = "value"
 ```
 
-<a id="php-section"></a>
+<a id="oc-php-section"></a>
 ### PHP Code Section
 
 The code in the PHP section executes every time before the template is rendered. The PHP section is optional for all CMS templates and its contents depend on the template type where it is defined. The PHP code section can contain optional open and close PHP tags to enable syntax highlighting in text editors. The open and close tags should always be specified on a different line to the section separator `==`.

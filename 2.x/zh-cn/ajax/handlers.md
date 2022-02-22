@@ -13,6 +13,7 @@ function onSubmitContactForm()
 
 如果在一个页面和布局中一起定义了两个同名的处理程序，则页面处理程序将被执行。 [components](../cms/components.md) 中定义的处理程序具有最低优先级。
 
+<a id="oc-calling-a-handler"></a>
 ###调用处理程序
 
 每个 AJAX 请求都应使用 [数据属性 API](../ajax/attributes-api.md) 或 [JavaScript API](../ajax/javascript-api.md) 指定处理程序名称。 发出请求后，服务器将搜索所有已注册的处理程序并定位它找到的第一个处理程序。

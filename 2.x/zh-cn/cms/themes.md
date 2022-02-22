@@ -99,7 +99,7 @@ layout = "default"
 parameter = "value"
 ```
 
-<a id="php-section"></a>
+<a id="oc-php-section"></a>
 ### PHP 代码部分
 
 PHP 部分中的代码每次在呈现模板之前都会执行。 PHP 部分对于所有 CMS 模板都是可选的，其内容取决于定义它的模板类型。 PHP 代码部分可以包含可选的打开和关闭 PHP 标记，以在文本编辑器中启用语法高亮显示。 打开和关闭标签应始终在与节分隔符 `==` 不同的行上指定。

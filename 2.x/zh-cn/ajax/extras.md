@@ -104,6 +104,7 @@ $(document).on('ajaxPromise', '[data-request]', function() {
 </a>
 ```
 
+<a id="oc-flash-messages"></a>
 ## 闪现消息(Flash)
 
 在表单上指定 `data-request-flash` 属性，以启用对成功的 AJAX 请求使用闪现消息。

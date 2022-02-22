@@ -13,6 +13,7 @@ function onSubmitContactForm()
 
 If two handlers with the same name are defined in a page and layout together, the page handler will be executed. The handlers defined in [components](../cms/components.md) have the lowest priority.
 
+<a id="oc-calling-a-handler"></a>
 ### Calling a Handler
 
 Every AJAX request should specify a handler name, either using the [data attributes API](../ajax/attributes-api.md) or the [JavaScript API](../ajax/javascript-api.md). When the request is made, the server will search all the registered handlers and locate the first one it finds.

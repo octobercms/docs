@@ -269,6 +269,7 @@ tabs:
             tab: Groups
 ```
 
+<a id="oc-available-field-types"></a>
 ## 可用字段类型
 
 有多种原生字段类型用于 **type** 设置。 对于基本的 UI 元素，请查看 [可用的 UI 元素](#available-ui-elements)。 对于更高级的表单字段，可以使用 [表单小部件](#form-widgets) 代替。

@@ -270,6 +270,7 @@ tabs:
             tab: Groups
 ```
 
+<a id="oc-available-field-types"></a>
 ## Available Field Types
 
 There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#available-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.

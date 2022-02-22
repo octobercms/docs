@@ -4,6 +4,7 @@ October CMS 包含一个框架，该框架带来了一整套AJAX功能，允许�
 
 AJAX 框架有两种风格，你可以使用 [JavaScript API](../ajax/javascript-api.md) 或 [数据属性 API](../ajax/attributes-api.md)。数据属性 API 不需要任何 JavaScript 知识即可在 October使用 AJAX。
 
+<a id="oc-including-the-framework"></a>
 ## 包含框架
 
 AJAX 框架在您的 [CMS 主题](../cms/themes.md)，要使用该库，您应该通过将"{% framework %}"标记放在 [页面](../cms/pages.md) 或 [布局](../cms/layouts.md)。这添加了对 October前端 JavaScript 库的引用。该库需要jQuery，因此应首先加载它，例如：
