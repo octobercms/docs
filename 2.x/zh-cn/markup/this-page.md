@@ -1,6 +1,6 @@
 # this.page
 
-可以通过 `this.page` 访问当前页面对象，并返回对象 `Cms\Classes\Page`. 这个对象也可以 [在 PHP 代码中访问](../cms/pages/.md#page-variables).
+可以通过 `this.page` 访问当前页面对象，并返回对象 `Cms\Classes\Page`. 这个对象也可以 [在 PHP 代码中访问](../cms/pages.md#page-variables).
 
 ## 属性
 
@@ -42,7 +42,7 @@
 
 ### meta_title
 
-另一个`title`字段，通常对 SEO 目的更具描述性。 
+另一个`title`字段，通常对 SEO 目的更具描述性。
 
 ```twig
 <title>{{ this.page.meta_title }}</title>

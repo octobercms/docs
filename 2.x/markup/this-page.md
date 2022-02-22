@@ -1,6 +1,6 @@
 # this.page
 
-You can access the current page object via `this.page` and it returns the object `Cms\Classes\Page`. This object can also be [accessed in the PHP code](../cms/pages/.md#page-variables).
+You can access the current page object via `this.page` and it returns the object `Cms\Classes\Page`. This object can also be [accessed in the PHP code](../cms/pages.md#page-variables).
 
 ## Properties
 
