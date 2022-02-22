@@ -8,7 +8,7 @@ When using the AJAX framework, you have the option to specify the **extras** suf
 
 ## Loading Indicator
 
-The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../ajax/javascript-api.md#global-ajax-events) used by the AJAX framework.
+The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../ajax/javascript-api.md#oc-global-ajax-events) used by the AJAX framework.
 
 When an AJAX request starts the `ajaxPromise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajaxFail` and `ajaxDone` events are used to detect when the request finishes, where the indicator is hidden again.
 
@@ -26,7 +26,7 @@ You may specify the `data-request-validate` attribute on a form to enable valida
 
 ### Throwing a Validation Error
 
-In the server side AJAX handler you may throw a [validation exception](../services/error-log.md#validation-exception) using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error messages for the values.
+In the server side AJAX handler you may throw a [validation exception](../services/error-log.md#oc-validation-exception) using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error messages for the values.
 
 ```php
 function onSubmit()

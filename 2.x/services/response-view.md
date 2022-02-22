@@ -2,7 +2,7 @@
 
 ## Basic Responses
 
-A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts.md#layout-execution-life-cycle) and [AJAX handler definitions](../ajax/handlers.md).
+A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts.md#oc-layout-execution-life-cycle) and [AJAX handler definitions](../ajax/handlers.md).
 
 #### Returning strings from a CMS method
 
@@ -171,7 +171,7 @@ The `macro` function accepts a name as its first argument, and a Closure as its 
 return Response::caps('foo');
 ```
 
-You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
+You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
 
 ## Views
 

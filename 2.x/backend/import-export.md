@@ -288,7 +288,7 @@ export:
     useList: true
 ```
 
-If you are using [multiple list definitions](lists.md#multiple-list-definitions), then you can supply the list definition:
+If you are using [multiple list definitions](lists.md#oc-multiple-list-definitions), then you can supply the list definition:
 
 ```yaml
 export:

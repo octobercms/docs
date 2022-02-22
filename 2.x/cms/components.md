@@ -4,11 +4,11 @@ Components are configurable building elements that can be attached to any page, 
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../plugin/components.md) as part of plugins.
 
-> **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials.md#dynamic-partials) article.
+> **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials.md#oc-dynamic-partials) article.
 
 ## Introduction
 
-If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes.md#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
+If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes.md#oc-configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
 
 ```ini
 title = "Components demonstration"
@@ -102,7 +102,7 @@ maxItems = {{ :maxItems }}
 ...
 ```
 
-The page, the component belongs to, should have a corresponding [URL parameter](pages.md#url-syntax) defined:
+The page, the component belongs to, should have a corresponding [URL parameter](pages.md#oc-url-syntax) defined:
 
 ```ini
 url = "/todo/:maxItems"
@@ -112,7 +112,7 @@ In the October back-end you can use the Inspector tool for assigning external va
 
 ## Passing Variables to Components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#component-properties), including [external property values](#using-external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#oc-passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including [external property values](#using-external-property-values).
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 
@@ -244,7 +244,7 @@ Partials rendered from outside the component must use their fully qualified name
 {% partial 'componentName::component-partial' %}
 ```
 
-Read more on [component development](../plugin/components.md#component-partials) to learn about component partials.
+Read more on [component development](../plugin/components.md#oc-component-partials) to learn about component partials.
 
 <!--
 ## Soft Components

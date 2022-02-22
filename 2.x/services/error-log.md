@@ -126,7 +126,7 @@ If you have several exception handlers, they should be defined from most generic
 
 ### Where to Place Error Handlers
 
-Error handler registrations, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
+Error handler registrations, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
 
 ## HTTP Exceptions
 

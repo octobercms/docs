@@ -134,7 +134,7 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
 ### Check Protected
 
-`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#child-themes-lock) is added and a child theme is created.
+`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#oc-child-themes-lock) is added and a child theme is created.
 
     php artisan theme:check
 
@@ -170,7 +170,7 @@ To create a child theme that inherits the parent theme, specify the `--child` op
 
     php artisan theme:copy demo demo-child --child
 
-If using [database-driven themes](../cms/themes#database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
+If using [database-driven themes](../cms/themes#oc-database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
 
     php artisan theme:copy demo --import-db
 
@@ -196,7 +196,7 @@ October CMS includes a number of utility commands.
 
 ### Mirror Public Directory
 
-`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/deployment.md#public-folder) using symbolic linking.
+`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/deployment.md#oc-public-folder) using symbolic linking.
 
     php artisan october:mirror
 

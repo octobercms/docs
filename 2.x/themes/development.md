@@ -72,7 +72,7 @@ The image width should be at least 600px. The ideal aspect ratio is 1.5, for exa
 
 ## Theme Customization
 
-Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms.md#defining-form-fields) for more information.
+Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms.md#oc-defining-form-fields) for more information.
 
 The following is an example of how to define a website name configuration field called **site_name**:
 
@@ -96,7 +96,7 @@ form:
 });
 ```
 
-The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup.md#default-variables) called `this.theme`.
+The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup.md#oc-default-variables) called `this.theme`.
 
 ```twig
 <h1>Welcome to {{ this.theme.site_name }}!</h1>

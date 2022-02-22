@@ -74,7 +74,7 @@ class User extends Model
 }
 ```
 
-> **Note**: Encrypted attributes are not compatible with [`jsonable`](model#supported-properties) attributes.
+> **Note**: Encrypted attributes are not compatible with [`jsonable`](model#oc-supported-properties) attributes.
 
 ### Sluggable
 
@@ -253,7 +253,7 @@ $child2->makeChildOf($root);
 
 #### Deleting Nodes
 
-When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](../database/model.md#model-events) will not be fired for the child models.
+When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](../database/model.md#oc-model-events) will not be fired for the child models.
 
 ```php
 $child1->delete();
@@ -299,7 +299,7 @@ class User extends Model
 }
 ```
 
-You may also use [array syntax](../services/validation.md#validating-arrays) for validation rules.
+You may also use [array syntax](../services/validation.md#oc-validating-arrays) for validation rules.
 
 ```php
 class User extends Model
@@ -331,7 +331,7 @@ $success = $user->save();
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
-> **Note**: The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation.md#working-with-error-messages) of formatting errors.
+> **Note**: The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation.md#oc-working-with-error-messages) of formatting errors.
 
 #### Overriding Validation
 
@@ -346,7 +346,7 @@ $user->forceSave();
 
 #### Custom Error Messages
 
-Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation.md#custom-error-messages).
+Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation.md#oc-custom-error-messages).
 
 ```php
 class User extends Model
@@ -396,7 +396,7 @@ class User extends Model
 
 #### Dynamic Validation Rules
 
-You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model.md#events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
+You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model.md#oc-events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
 
 ```php
 public function beforeValidate()
@@ -410,7 +410,7 @@ public function beforeValidate()
 
 #### Custom Validation Rules
 
-You can also create custom validation rules the [same way](../services/validation.md#custom-validation-rules) you would for the Validator service.
+You can also create custom validation rules the [same way](../services/validation.md#oc-custom-validation-rules) you would for the Validator service.
 
 ### Soft Deleting
 
@@ -499,7 +499,7 @@ $user->posts()->forceDelete();
 
 ### Soft Deleting Relations
 
-When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations.md#detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations.md#oc-detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
 
 ```php
 class User extends Model

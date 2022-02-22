@@ -16,7 +16,7 @@ plugins/
       Plugin.php
 ```
 
-The model configuration directory could contain the model's [list column](../backend/lists.md#defining-list-columns) and [form field](../backend/forms.md#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
+The model configuration directory could contain the model's [list column](../backend/lists.md#oc-defining-list-columns) and [form field](../backend/forms.md#oc-defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
 ## Defining Models
 
@@ -73,7 +73,7 @@ Property | Description
 **$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
 **$visible** | values are fields made visible when [serializing the model data](../database/serialization.md).
 **$hidden** | values are fields made hidden when [serializing the model data](../database/serialization.md).
-**$connection** | string that contains the [connection name](../database/basics.md#multiple-database-connections) that's utilised by the model by default.
+**$connection** | string that contains the [connection name](../database/basics.md#oc-multiple-database-connections) that's utilised by the model by default.
 
 #### Primary key
 
@@ -157,7 +157,7 @@ When requesting data from the database the model will retrieve values primarily 
 
 ### Retrieving Multiple Models
 
-Once you have created a model and [its associated database table](../database/structure.md#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query.md) allowing you to query the database table associated with the model. For example:
+Once you have created a model and [its associated database table](../database/structure.md#oc-migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query.md) allowing you to query the database table associated with the model. For example:
 
 ```php
 $flights = Flight::all();
@@ -242,7 +242,7 @@ Route::get('/api/flights/{id}', function ($id) {
 
 ### Retrieving Aggregates
 
-You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query.md#aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
+You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query.md#oc-aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
 
 ```php
 $count = Flight::where('active', 1)->count();
@@ -486,7 +486,7 @@ public function beforeCreate()
 }
 ```
 
-> **Note**: Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
+> **Note**: Relationships created with [deferred-binding](relations#oc-deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
 
 ### Basic usage
 

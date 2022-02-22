@@ -319,7 +319,7 @@ This message was sent using no formatting (plain text)
 <p>This email was sent using formatting (HTML)</p>
 ```
 
-> **Note**: Basic Twig tags and expressions are supported in mail views. Markdown syntax is also supported, see the section on [using HTML in Markdown](../services/parser.md#using-html-in-markdown) for more details.
+> **Note**: Basic Twig tags and expressions are supported in mail views. Markdown syntax is also supported, see the section on [using HTML in Markdown](../services/parser.md#oc-using-html-in-markdown) for more details.
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
@@ -377,7 +377,7 @@ System | system | Used for internal, back-end mail
 
 ### Registering mail layouts, templates & partials
 
-Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration.md#registration-file).
+Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration.md#oc-registration-file).
 
 ```php
 public function registerMailTemplates()
@@ -391,7 +391,7 @@ public function registerMailTemplates()
 
 The method should return an array of [mail view names](#mail-views).
 
-Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [Plugin registration class](../plugin/registration.md#registration-file).
+Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [Plugin registration class](../plugin/registration.md#oc-registration-file).
 
 ```php
 public function registerMailPartials()

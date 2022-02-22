@@ -12,4 +12,4 @@ The above will output the following:
 <strong>Text</strong> is bold.
 ```
 
-See the [Markdown Parser article](../services/parser.md#markdown-parser) for more details on using Markdown.
+See the [Markdown Parser article](../services/parser.md#oc-markdown-parser) for more details on using Markdown.

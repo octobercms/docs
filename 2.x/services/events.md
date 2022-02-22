@@ -45,7 +45,7 @@ Event::listen('auth.login', [$this, 'LoginHandler']);
 
 ### Where to Register Listeners
 
-The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods).
+The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods).
 
 ```php
 class Plugin extends PluginBase

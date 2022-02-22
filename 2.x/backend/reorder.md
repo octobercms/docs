@@ -43,7 +43,7 @@ class Category extends Model
 }
 ```
 
-Read more about the [NestedTree trait in the database documentation](../database/traits.md#nested-tree).
+Read more about the [NestedTree trait in the database documentation](../database/traits.md#oc-nested-tree).
 
 ### Simple Tree
 
@@ -56,7 +56,7 @@ class Category extends Model
 }
 ```
 
-Read more about the [SimpleTree trait in the database documentation](../database/traits.md#simple-tree).
+Read more about the [SimpleTree trait in the database documentation](../database/traits.md#oc-simple-tree).
 
 ### Sortable Model
 
@@ -69,4 +69,4 @@ class User extends Model
 }
 ```
 
-Read more about the [Sortable trait in the database documentation](../database/traits.md#sortable).
+Read more about the [Sortable trait in the database documentation](../database/traits.md#oc-sortable).

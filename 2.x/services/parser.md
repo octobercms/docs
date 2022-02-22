@@ -62,7 +62,7 @@ If you intentionally want to enable Markdown inside a block-level tag, you may d
 
 ## Twig Template Parser
 
-Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup/templating.md), [view content](../services/response-view.md#views) and [mail message content](../services/mail.md#message-content).
+Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup/templating.md), [view content](../services/response-view.md#oc-views) and [mail message content](../services/mail.md#oc-message-content).
 
 The `Twig` facade is used for parsing Twig syntax, you may use the `Twig::parse` method to render Twig to HTML.
 
@@ -76,11 +76,11 @@ The second argument can be used for passing variables to the Twig markup.
 $html = Twig::parse($twig, ['foo' => 'bar']);
 ```
 
-The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration.md#extending-twig).
+The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration.md#oc-extending-twig).
 
 ## Bracket Parser
 
-October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content.md#passing-variables-to-content-blocks). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
+October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content.md#oc-passing-variables-to-content-blocks). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
 
 ```php
 use October\Rain\Parse\Bracket;
@@ -116,7 +116,7 @@ The array can be iterated using the following syntax:
 
 ## YAML Configuration Parser
 
-YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms.md#defining-form-fields) and [list column](../backend/lists.md#defining-list-columns) definitions. An example of some YAML:
+YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field](../backend/forms.md#oc-defining-form-fields) and [list column](../backend/lists.md#oc-defining-list-columns) definitions. An example of some YAML:
 
 ```yaml
 receipt: Acme Purchase Invoice
@@ -254,7 +254,7 @@ $array = $syntax->toEditor();
 // ]
 ```
 
-You may notice the properties closely resemble the options found in [form field definitions](../backend/forms.md#defining-form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
+You may notice the properties closely resemble the options found in [form field definitions](../backend/forms.md#oc-defining-form-fields). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
 
 ```php
 $form = [
@@ -266,7 +266,7 @@ File::put('fields.yaml', Yaml::render($form));
 
 ### Supported Tags
 
-There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms.md#available-field-types).
+There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../backend/forms.md#oc-available-field-types).
 
 #### Text
 
@@ -452,4 +452,4 @@ quote:
             type: textarea
 ```
 
-For more information about the repeater group mode see [Repeater Widget](../backend/forms.md#repeater).
+For more information about the repeater group mode see [Repeater Widget](../backend/forms.md#oc-repeater).

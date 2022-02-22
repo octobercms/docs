@@ -66,7 +66,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration.md#dependency-definitions).
+You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration.md#oc-dependency-definitions).
 
 #### Requiring Another Theme
 
@@ -78,7 +78,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-Make sure that this package is included in the `require` property found in the [theme information file](../themes/development.md#theme-dependencies).
+Make sure that this package is included in the `require` property found in the [theme information file](../themes/development.md#oc-theme-dependencies).
 
 #### Developing With Third Party Packages
 
@@ -118,7 +118,7 @@ To create a new tag add (`-a`) the version with an optional (`-m`) message.
 git tag -a v2.0.1 -m "Version 2 is here!"
 ```
 
-In addition to tagging, you should also increment the version file found in your [plugin](../plugin/updates.md) or [theme](../themes/development.md#version-file).
+In addition to tagging, you should also increment the version file found in your [plugin](../plugin/updates.md) or [theme](../themes/development.md#oc-version-file).
 
 ## Private Plugins and Themes
 
@@ -182,7 +182,7 @@ This will set all the package config values to be that of your plugin config val
 Config::get('purifier.encoding') === Config::get('acme.blog::purifier.encoding');
 ```
 
-Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values and the [standard configuration approach](settings.md#file-based-configuration).
+Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values and the [standard configuration approach](settings.md#oc-file-based-configuration).
 
 ### Aliases & Service Providers
 

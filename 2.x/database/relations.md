@@ -262,7 +262,7 @@ public $belongsTo = [
 
 Many-to-many relations are slightly more complicated than `hasOne` and `hasMany` relationships. An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin". To define this relationship, three database tables are needed: `users`, `roles`, and `role_user`. The `role_user` table is derived from the alphabetical order of the related model names, and contains the `user_id` and `role_id` columns.
 
-Below is an example that shows the [database table structure](../plugin/updates.md#migration-files) used to create the join table.
+Below is an example that shows the [database table structure](../plugin/updates.md#oc-migration-files) used to create the join table.
 
 ```php
 Schema::create('role_user', function($table)
@@ -742,7 +742,7 @@ Relation::morphMap([
 ]);
 ```
 
-The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods).
+The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods).
 
 ## Querying Relations
 
@@ -1041,7 +1041,7 @@ $comment = $post->comments()->create([
 ]);
 ```
 
-Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model.md#mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
+Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model.md#oc-mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
 
 ### Insert via Dynamic Property
 
@@ -1180,7 +1180,7 @@ You can defer any number of **slave** models against a **master** model using a 
 
 ### Generating a session key
 
-The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../cms/markup.md#forms) generates a hidden field containing the session key automatically.
+The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../cms/markup.md#oc-forms) generates a hidden field containing the session key automatically.
 
 ```php
 $sessionKey = uniqid('session_key', true);

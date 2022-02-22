@@ -87,10 +87,10 @@ Option | Description
 ------------- | -------------
 **prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization.md).
 **mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
 **searchOnEnter** | setting this to true will make the search widget wait for the Enter key to be pressed before it starts searching (the default behavior is that it starts searching automatically after someone enters something into the search field and then pauses for a short moment).  Default: false.
 
-The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls.md#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms.md):
+The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls.md#oc-scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms.md):
 
 ```php
 <div data-control="toolbar">
@@ -158,7 +158,7 @@ Option | Description
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ### Custom Value Selection
 
@@ -178,7 +178,7 @@ status_code:
     displayFrom: status_label
 ```
 
-This is mostly applicable when a [model accessor](../database/mutators.md#accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
+This is mostly applicable when a [model accessor](../database/mutators.md#oc-accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
 
 ```php
 public function getStatusLabelAttribute()
@@ -189,7 +189,7 @@ public function getStatusLabelAttribute()
 
 ### Nested Column Selection
 
-In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#property-jsonable). The only drawback of doing this is the column cannot use searchable or sortable options.
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#oc-property-jsonable). The only drawback of doing this is the column cannot use searchable or sortable options.
 
 ```yaml
 content[title]:
@@ -197,7 +197,7 @@ content[title]:
     sortable: false
 ```
 
-The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#events).
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#oc-events).
 
 ## Available Column Types
 
@@ -249,7 +249,7 @@ avatar:
         quality: 80
 ```
 
-See the [image resizing article](../services/resizer.md#resize-parameters) for more information on what options are supported.
+See the [image resizing article](../services/resizer.md#oc-resize-parameters) for more information on what options are supported.
 
 <a name="column-number"></a>
 ### Number
@@ -401,7 +401,7 @@ full_name:
 ['open' => 'Open', 'closed' => 'Closed']
 ```
 
-The available options are defined on the model as [dropdown options](forms.md#field-dropdown).
+The available options are defined on the model as [dropdown options](forms.md#oc-field-dropdown).
 
 ```yaml
 status:
@@ -560,12 +560,12 @@ Option | Description
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#available-scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **emptyOption** | an optional label for an intentional empty selection.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer (switch, checkbox, number) or array (group, date range, number range) or string (date).
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 **dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
 
 ### Filter Dependencies
@@ -1087,7 +1087,7 @@ public function listExtendRecords($records)
 
 ### Custom Column Types
 
-Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration.md#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration.md#oc-registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
 
 ```php
 public function registerListColumnTypes()

@@ -81,7 +81,7 @@ The back-end contains a dedicated area for housing settings and configuration, i
 
 ### Settings Link Registration
 
-The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration.md#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration.md#oc-registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
 
 ```php
 public function registerSettings()
@@ -126,7 +126,7 @@ The optional `keywords` parameter is used by the settings search feature. If key
 
 ### Setting the Page Navigation Context
 
-Just like [setting navigation context in the controller](../backend/controllers-ajax.md#setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+Just like [setting navigation context in the controller](../backend/controllers-ajax.md#oc-setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
 
 ```php
 public function __construct()

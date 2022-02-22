@@ -1,6 +1,6 @@
 # File Attachments
 
-Models can support file attachments using a subset of the [polymorphic relationship](../database/relations.md#polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
+Models can support file attachments using a subset of the [polymorphic relationship](../database/relations.md#oc-polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
 
 In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 
@@ -124,7 +124,7 @@ Displaying an image on the page.
 <img src="{{ model.avatar.getThumb(100, 100, {'mode':'exact', 'quality': 80, 'extension': 'webp'}) }}" alt="Description Image" />
 ```
 
-Read more about the available options for `getThumb` on the [image resizer article](../services/resizer.md#resize-parameters).
+Read more about the available options for `getThumb` on the [image resizer article](../services/resizer.md#oc-resize-parameters).
 
 ## Usage Example
 
@@ -165,7 +165,7 @@ if (Input::hasFile('example_file')) {
 }
 ```
 
-Alternatively, you can use [deferred binding](../database/relations.md#deferred-binding) to defer the relationship:
+Alternatively, you can use [deferred binding](../database/relations.md#oc-deferred-binding) to defer the relationship:
 
 ```php
 // Find the Blog Post model
@@ -211,11 +211,11 @@ Example:
 $user = $file->attachment;
 ```
 
-For more information read the [polymorphic relationships](../database/relations.md#polymorphic-relations)
+For more information read the [polymorphic relationships](../database/relations.md#oc-polymorphic-relations)
 
 ## Validation Example
 
-The example below uses [array validation](../services/validation.md#validating-arrays) to validate `$attachMany` relationships.
+The example below uses [array validation](../services/validation.md#oc-validating-arrays) to validate `$attachMany` relationships.
 
 ```php
 use System\Models\File;
@@ -238,4 +238,4 @@ class Gallery extends Model
 }
 ```
 
-For more information on the `attribute.*` syntax used above, see [validating arrays](../services/validation.md#validating-arrays).
+For more information on the `attribute.*` syntax used above, see [validating arrays](../services/validation.md#oc-validating-arrays).

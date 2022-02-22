@@ -2,11 +2,11 @@
 
 In the past, developers have generated a Cron entry for each task they need to schedule. However, this can sometimes be a headache. Your task schedule is no longer in source control, and you must SSH into your server to add the Cron entries. The command scheduler allows you to fluently and expressively define your command schedule within the application itself, and only a single Cron entry is needed on your server.
 
-> **Note**: See the [installation guide](../setup/installation.md#setting-up-the-scheduler) for instructions on how to set up the scheduler task.
+> **Note**: See the [installation guide](../setup/installation.md#oc-setting-up-the-scheduler) for instructions on how to set up the scheduler task.
 
 ## Defining Schedules
 
-You may define all of your scheduled tasks by overriding the `registerSchedule` method inside the [Plugin registration class](registration.md#registration-file). The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
+You may define all of your scheduled tasks by overriding the `registerSchedule` method inside the [Plugin registration class](registration.md#oc-registration-file). The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
 
 To get started, let's look at an example of scheduling a task. In this example, we will schedule a `Closure` to be called every day at midnight. Within the `Closure` we will execute a database query to clear a table:
 

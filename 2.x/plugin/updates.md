@@ -21,13 +21,13 @@ During an update the system will notify the user about recent changes to plugins
 
 1. When an administrator signs in to the backend.
 1. When the system is updated using the update feature in the backend area.
-1. When the [console command](../console/commands.md#database-migration) `php artisan october:migrate` is called in the command line from the application directory.
+1. When the [console command](../console/commands.md#oc-database-migration) `php artisan october:migrate` is called in the command line from the application directory.
 
-> **Note**: The plugin [initialization process](../plugin/registration.md#routing-and-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
+> **Note**: The plugin [initialization process](../plugin/registration.md#oc-routing-and-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 
 ### Plugin Dependencies
 
-Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration.md#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
+Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration.md#oc-dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
 
 ```php
 <?php namespace Acme\Blog;

@@ -63,7 +63,7 @@ You would be able to access its `posts` method through the `blogPosts` variable.
 
 ### Component Registration
 
-Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration.md#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
+Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration.md#oc-registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
 
 ```php
 public function registerComponents()
@@ -217,7 +217,7 @@ public function getStateOptions()
 
 ### Page list Properties
 
-Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup.md#page-filter)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
+Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup.md#oc-page-filter)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
 
 ```php
 public function defineProperties()
@@ -239,7 +239,7 @@ public function getPostPageOptions()
 
 ## Routing Parameters
 
-Components can directly access routing parameter values defined in the [URL of the page](../cms/pages.md#url-syntax).
+Components can directly access routing parameter values defined in the [URL of the page](../cms/pages.md#oc-url-syntax).
 
 ```php
 // Returns the URL segment value, eg: /page/:post_id
@@ -257,7 +257,7 @@ url = "/blog/hard-coded-page"
 id = "2"
 ```
 
-Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components.md#using-external-property-values):
+Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components.md#oc-using-external-property-values):
 
 ```ini
 url = "/blog/:my_custom_parameter"
@@ -295,7 +295,7 @@ public function onRun()
 
 ### Page Execution Life Cycle Handlers
 
-When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes.md#php-section) and component classes. The sequence the handlers are executed is following:
+When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes.md#oc-php-section) and component classes. The sequence the handlers are executed is following:
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.
@@ -320,7 +320,7 @@ public function init()
 
 ### Halting With a Response
 
-Like all methods in the [page execution life cycle](../cms/layouts.md#layout-execution-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
+Like all methods in the [page execution life cycle](../cms/layouts.md#oc-layout-execution-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
 
 ```php
 public function onRun()
@@ -356,7 +356,7 @@ public function onAddItem()
 }
 ```
 
-If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers.md#calling-a-handler) article for details about using AJAX with components.
+If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers.md#oc-calling-a-handler) article for details about using AJAX with components.
 
 ## Default Markup
 
@@ -412,7 +412,7 @@ Multiple components can share partials by placing the partial file in a director
 
 ### Referencing "self"
 
-Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components.md#components-aliases).
+Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components.md#oc-components-aliases).
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">
@@ -485,7 +485,7 @@ public function onRun()
 
 ## Injecting Page Assets with Components
 
-Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page.md#injecting-page-assets-programmatically). Example:
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page.md#oc-injecting-page-assets-programmatically). Example:
 
 ```php
 public function onRun()

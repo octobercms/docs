@@ -212,14 +212,14 @@ Option | Description
 **dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using [trigger events](#trigger-events).
 **preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#input-preset-converter).
-**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#validation) as this is not enforced by the form controller.
+**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#oc-validation) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ### Nested Field Selection
 
-Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations.md#relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#property-jsonable), you may use a nested field type using the **relation[field]** definition.
+Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations.md#oc-relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#oc-property-jsonable), you may use a nested field type using the **relation[field]** definition.
 
 ```yaml
 avatar[name]:
@@ -713,7 +713,7 @@ content:
 
 ## Form Widgets
 
-There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#form-widgets) article.
+There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#oc-form-widgets) article.
 
 <div class="content-list" markdown="1">
 
@@ -813,7 +813,7 @@ data:
     searching: false
 ```
 
-> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model.md#supported-properties) or anything that can handle storing as an array.
+> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model.md#oc-supported-properties) or anything that can handle storing as an array.
 
 #### Table configuration
 
@@ -924,7 +924,7 @@ Option | Description
 **maxFiles** | maximum number of files allowed to be uploaded
 **useCaption** | allows a title and description to be set for the file. Default: `true`
 **prompt** | text to display for the upload button, applies to files only, optional
-**thumbOptions** | additional [resize options](../services/resizer.md#resize-parameters) for generating the thumbnail
+**thumbOptions** | additional [resize options](../services/resizer.md#oc-resize-parameters) for generating the thumbnail
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
 
 > **Note**: Unlike the [Media Finder form widget](#mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
@@ -996,7 +996,7 @@ profile:
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model.md#supported-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
+A nested form supports the same syntax as a form itself, including tabs. The [jsonable attribute](../database/model.md#oc-supported-properties) will take the structure of your form definition. Alternatively, you can reference a related model with the `useRelation` option.
 
 Option | Description
 ------------- | -------------
@@ -1028,12 +1028,12 @@ Option | Description
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
-**list** | a configuration array or reference to a list column definition file, see [list columns](lists.md#defining-list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](lists.md#oc-defining-list-columns).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
 **conditions** | specifies a raw where query statement to apply to the list model query.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 **searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**searchScope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
+**searchScope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 **useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
 **modelClass** | class of the model to use for listing records when useRelation = false
 
@@ -1066,7 +1066,7 @@ Option | Description
 **select** | a custom SQL select statement to use for the name.
 **order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always.
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the list query always.
 
 <a name="widget-repeater"></a>
 ### Repeater
@@ -1227,7 +1227,7 @@ tags:
         - Orange
 ```
 
-You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#oc-many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
 
 ```yaml
 tags:
@@ -1619,4 +1619,4 @@ User::extend(function ($model) {
 
 ## Validating Form Fields
 
-To validate the fields of your form you can make use of the [Validation](../database/traits.md#validation) trait in your model.
+To validate the fields of your form you can make use of the [Validation](../database/traits.md#oc-validation) trait in your model.

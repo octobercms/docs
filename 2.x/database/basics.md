@@ -156,7 +156,7 @@ Db::listen(function($sql, $bindings, $time) {
 });
 ```
 
-Just like [event registration](../services/events.md#where-to-register-listeners), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
+Just like [event registration](../services/events.md#oc-where-to-register-listeners), you may register your query listener in the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place this logic.
 
 ### Query Logging
 
@@ -178,4 +178,4 @@ However, in some cases, such as when inserting a large number of rows, this can 
 Db::connection()->disableQueryLog();
 ```
 
-> **Note**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log.md#helper-functions) instead.
+> **Note**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log.md#oc-helper-functions) instead.
