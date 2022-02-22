@@ -95,9 +95,9 @@ function onRefreshTime()
 
 根据执行上下文，[AJAX 事件处理程序](../ajax/handlers.md) 使变量可用于不同部件。
 
-- 在页面或布局 [PHP 部分](../cms/themes.md#php-section) 中使用 `$this[]`。
-- 在 [组件类](../plugin/components.md#ajax-handlers) 中使用 `$this->page[]`。
-- 在[后端区域](../backend/controllers-ajax#using-ajax-handlers)中使用`$this->vars[]`。
+- 在页面或布局 [PHP 部分](../cms/themes.md#oc-php-section) 中使用 `$this[]`。
+- 在 [组件类](../plugin/components.md#oc-ajax-handlers) 中使用 `$this->page[]`。
+- 在[后端区域](../backend/controllers-ajax#oc-using-ajax-handlers)中使用`$this->vars[]`。
 
 这些示例将为每个上下文的部件提供 **result** 变量：
 

@@ -4,7 +4,7 @@
 
 验证器类是一个简单、方便的工具，用于通过`验证器`类验证数据和检索验证错误消息。 在处理最终用户提交的表单数据时很有用。
 
-> **注意**：使用模型时，October CMS 附带一个有用的 [验证特征](../database/traits.md#validation)，它实现了 `Validator` 类并支持相同的规则定义。
+> **注意**：使用模型时，October CMS 附带一个有用的 [验证特征](../database/traits.md#oc-validation)，它实现了 `Validator` 类并支持相同的规则定义。
 
 #### 基本验证示例
 

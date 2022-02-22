@@ -64,7 +64,7 @@ class PostTest extends PluginTestCase
     php artisan plugin:refresh Acme.Blog
     [php artisan plugin:refresh <dependency>, ...]
 
-> **注意**：如果你的插件使用[配置文件](../plugin/settings.md#file-based-configuration)，那么你需要运行`System\Classes\PluginManager::instance()-> registerAll(true);` 在测试的 `setUp` 方法中。 下面是一个基本测试用例类的示例，如果您需要测试您的插件与其他插件一起工作而不是孤立地工作，则应使用该类。
+> **注意**：如果你的插件使用[配置文件](../plugin/settings.md#oc-file-based-configuration)，那么你需要运行`System\Classes\PluginManager::instance()-> registerAll(true);` 在测试的 `setUp` 方法中。 下面是一个基本测试用例类的示例，如果您需要测试您的插件与其他插件一起工作而不是孤立地工作，则应使用该类。
 
 ```php
 use System\Classes\PluginManager;

@@ -8,7 +8,7 @@
 
 为避免手动输入这些凭据，您应该确保 [Composer auth.json 文件](https://getcomposer.org/doc/articles/http-basic-authentication.md) 与您的应用程序一起部署。
 
-或者，您可以使用 `project:set` [artisan 命令](../console/commands.md#set-project) 重新创建此文件。
+或者，您可以使用 `project:set` [artisan 命令](../console/commands.md#oc-set-project) 重新创建此文件。
 
 ```sh
 php artisan project:set <license key>
@@ -46,7 +46,7 @@ AUTO_MIRROR_PUBLIC=true
 
 October CMS 已针对性能进行了微调，您可以采取一些额外的步骤来进一步提高此性能，尤其是对于大型应用程序。
 
-禁用 [调试模式](../setup/configuration.md#debug-mode) 并启用 [环境配置](../setup/configuration.md#environment-configuration) 中的缓存设置。
+禁用 [调试模式](../setup/configuration.md#oc-debug-mode) 并启用 [环境配置](../setup/configuration.md#oc-environment-configuration) 中的缓存设置。
 
 ```
 APP_DEBUG=false

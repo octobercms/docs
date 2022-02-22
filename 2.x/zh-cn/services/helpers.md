@@ -682,7 +682,7 @@ October CMS 包括各种PHP"助手"函数。 其中许多功能由 October 本�
 <a name="method-redirect"></a>
 #### `redirect()`
 
-`redirect` 函数返回重定向的实例以执行 [重定向响应](../services/response-view.md#redirects)：
+`redirect` 函数返回重定向的实例以执行 [重定向响应](../services/response-view.md#oc-redirects)：
 
     return redirect('/home');
 

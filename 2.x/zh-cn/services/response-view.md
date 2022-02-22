@@ -2,7 +2,7 @@
 
 ## 基本响应
 
-几乎可以从页面使用的 PHP 方法返回响应。这包括  [布局执行生命周期](../cms/layouts.md#layout-execution-life-cycle) 和 [AJAX 处理程序定义](../ajax/handlers.md)中包含的所有 CMS 方法.
+几乎可以从页面使用的 PHP 方法返回响应。这包括  [布局执行生命周期](../cms/layouts.md#oc-layout-execution-life-cycle) 和 [AJAX 处理程序定义](../ajax/handlers.md)中包含的所有 CMS 方法.
 
 #### 从 CMS 方法返回字符串
 
@@ -171,7 +171,7 @@ Response::macro('caps', function($value) {
 return Response::caps('foo');
 ```
 
-您可以在 [插件注册文件](../plugin/registration.md#registration-methods).的 `boot` 方法中定义宏。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置宏注册。
+您可以在 [插件注册文件](../plugin/registration.md#oc-registration-methods).的 `boot` 方法中定义宏。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置宏注册。
 
 ## 视图
 

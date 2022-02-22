@@ -260,7 +260,7 @@ public $belongsTo = [
 
 多对多关联比 `hasOne` 和 `hasMany` 关联稍微复杂些。举个例子，一个用户可以拥有很多种角色，同时这些角色也被其他用户共享。例如，许多用户可能都有 "管理员"这个角色。要定义这种关联，需要三个数据库表： `users`，`roles` 和 `role_user`。`role_user` 表的命名是由关联的两个模型按照字母顺序来的，并且包含了 `user_id` 和 `role_id` 字段。
 
-下面是一个显示用于创建连接表的[数据库表结构](../plugin/updates.md#migration-files)的示例。
+下面是一个显示用于创建连接表的[数据库表结构](../plugin/updates.md#oc-migration-files)的示例。
 
 ```php
 Schema::create('role_user', function($table)
@@ -741,7 +741,7 @@ Relation::morphMap([
 ]);
 ```
 
-在 [插件注册文件](../plugin/registration.md#registration-methods) 的 `boot` 方法中注册 `morphMap` 的最常见位置。
+在 [插件注册文件](../plugin/registration.md#oc-registration-methods) 的 `boot` 方法中注册 `morphMap` 的最常见位置。
 
 ## 查询关联
 
@@ -1039,7 +1039,7 @@ $comment = $post->comments()->create([
 ]);
 ```
 
-在使用 `create` 方法之前，请务必查看有关属性 [批量赋值](model.md#mass-assignment) 的文档，因为 PHP 数组中的属性受模型的"可填充"定义的限制。
+在使用 `create` 方法之前，请务必查看有关属性 [批量赋值](model.md#oc-mass-assignment) 的文档，因为 PHP 数组中的属性受模型的"可填充"定义的限制。
 
 ### 通过动态属性插入
 
@@ -1178,7 +1178,7 @@ $comment->save();
 
 ### 生成会话密钥
 
-延迟绑定需要会话密钥。您可以将会话密钥视为事务标识符。相同的会话密钥应该用于绑定/解除绑定关联和保存主模型。您可以使用 PHP `uniqid()` 函数生成会话密钥。请注意，[表单助手](../cms/markup.md#forms) 会自动生成一个包含会话密钥的隐藏字段。
+延迟绑定需要会话密钥。您可以将会话密钥视为事务标识符。相同的会话密钥应该用于绑定/解除绑定关联和保存主模型。您可以使用 PHP `uniqid()` 函数生成会话密钥。请注意，[表单助手](../cms/markup.md#oc-forms) 会自动生成一个包含会话密钥的隐藏字段。
 
 ```php
 $sessionKey = uniqid('session_key', true);

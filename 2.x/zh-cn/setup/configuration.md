@@ -70,7 +70,7 @@ October CMS 的所有配置文件都存储在 **config** 目录中。每个选�
 
 ### CSRF 保护
 
-October CMS 提供了一种简单的方法来保护您的应用程序免受跨站点请求伪造。首先随机令牌(token)放置在您的session中。然后，当使用 [打开表单标签](../services/html.md#form-tokens) 时，令牌被添加到页面并随每个请求提交回来。
+October CMS 提供了一种简单的方法来保护您的应用程序免受跨站点请求伪造。首先随机令牌(token)放置在您的session中。然后，当使用 [打开表单标签](../services/html.md#oc-form-tokens) 时，令牌被添加到页面并随每个请求提交回来。
 
     ENABLE_CSRF=true
 

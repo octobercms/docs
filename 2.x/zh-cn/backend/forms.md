@@ -212,14 +212,14 @@ secondaryTabs:
 **dependsOn** | 其他字段名称的数组，该字段[取决于](#field-dependencies)，当其他字段被修改时，该字段将更新。
 **trigger** | 使用 [触发事件](#trigger-events) 指定此字段的条件。
 **preset** | 允许字段值最初由另一个字段的值设置，使用 [输入预设转换器](#input-preset-converter) 进行转换。
-**required** | 在字段标签旁边放置一个红色星号表示它是必填项。请务必使用 [模型验证](../database/traits.md#validation)，因为表单控制器不强制执行此操作。
+**required** | 在字段标签旁边放置一个红色星号表示它是必填项。请务必使用 [模型验证](../database/traits.md#oc-validation)，因为表单控制器不强制执行此操作。
 **attributes** | 指定要添加到表单字段元素的自定义 HTML 属性。
 **containerAttributes** | 指定要添加到表单字段容器的自定义 HTML 属性。
-**permissions** | 当前后端用户必须拥有[权限](users.md#users-and-permissions) 才能使用该字段。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
+**permissions** | 当前后端用户必须拥有[权限](users.md#oc-users-and-permissions) 才能使用该字段。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
 
 ### 嵌套字段选择
 
-来自相关模型的字段可以使用 [关联小部件](#relation) 或 [关联管理器](relations.md#relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#property-jsonable)，您可以使用 **relation[field]** 定义的嵌套字段类型。
+来自相关模型的字段可以使用 [关联小部件](#relation) 或 [关联管理器](relations.md#oc-relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#oc-property-jsonable)，您可以使用 **relation[field]** 定义的嵌套字段类型。
 
 ```yaml
 avatar[name]:
@@ -708,7 +708,7 @@ content:
 
 ## 表单小部件
 
-标准中包含各种表单小部件，尽管插件通常会提供自己的自定义表单小部件。 您可以在 [表单小部件](widgets.md#form-widgets) 文章中阅读更多内容。
+标准中包含各种表单小部件，尽管插件通常会提供自己的自定义表单小部件。 您可以在 [表单小部件](widgets.md#oc-form-widgets) 文章中阅读更多内容。
 
 <div class="content-list" markdown="1">
 
@@ -807,7 +807,7 @@ data:
     searching: false
 ```
 
-> **注意**:为了将其与模型一起使用，应在 [jsonable 属性](../database/model.md#supported-properties) 或任何可以处理存储为数组的内容中定义该字段 .
+> **注意**:为了将其与模型一起使用，应在 [jsonable 属性](../database/model.md#oc-supported-properties) 或任何可以处理存储为数组的内容中定义该字段 .
 
 #### 表配置
 
@@ -918,7 +918,7 @@ avatar:
 **maxFiles** | 允许上传的最大文件数
 **useCaption** | 允许为文件设置标题和描述。 默认值:`true`
 **prompt** | 上传按钮显示的文本，仅适用于文件，可选
-**thumbOptions** | 用于生成缩略图的附加属性 [调整大小选项](../services/resizer.md#resize-parameters)
+**thumbOptions** | 用于生成缩略图的附加属性 [调整大小选项](../services/resizer.md#oc-resize-parameters)
 **attachOnUpload** | 如果父记录存在，则在上传时自动附加上传的文件，而不是在保存父记录时使用延迟绑定来附加。默认值:`false`
 
 > **注意**:与 [媒体选择器表单小部件](#mediafinder) 不同，文件上传表单小部件使用 [数据库文件附件](../database/attachments.md)，因此字段名称是关联模型上的`attachEd`或`attachMent`关系属性名称。
@@ -990,7 +990,7 @@ profile:
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-嵌套表单支持与表单本身相同的语法，包括选项卡。 [jsonable 属性](../database/model.md#supported-properties) 将采用表单定义的结构。 或者，您可以使用 `useRelation` 选项引用相关模型。
+嵌套表单支持与表单本身相同的语法，包括选项卡。 [jsonable 属性](../database/model.md#oc-supported-properties) 将采用表单定义的结构。 或者，您可以使用 `useRelation` 选项引用相关模型。
 
 选项 | 描述
 ------------- | -------------
@@ -1022,12 +1022,12 @@ user:
 **descriptionFrom** | 要在用于显示描述的关系中使用的列名。默认值:description。
 **title** | 要在弹出窗口的标题部分显示的文本。
 **prompt** | 没有选择记录时显示的文本。 `%s` 字符代表搜索图标。
-**list** | 配置数组或对列表列定义文件的引用，请参阅 [列表列](lists.md#defining-list-columns)。
+**list** | 配置数组或对列表列定义文件的引用，请参阅 [列表列](lists.md#oc-defining-list-columns)。
 **recordsPerPage** | 每页显示的记录，使用 0 表示无页。默认值:10
 **conditions** | 指定要应用于列表模型查询的原始 where 查询语句。
-**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)始终应用于列表查询。第一个参数将包含附加其值的小部件模型，即父模型。
+**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)始终应用于列表查询。第一个参数将包含附加其值的小部件模型，即父模型。
 **searchMode** | 将搜索策略定义为包含所有单词、任何单词或精确短语。支持的选项:all(全部), any(任意), exact(精确)。默认值:all。
-**searchScope** | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)应用于搜索查询，第一个参数将包含搜索词。
+**searchScope** | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)应用于搜索查询，第一个参数将包含搜索词。
 **useRelation** | 使用字段名称作为关系名称的标志，以便直接在父模型上进行交互。默认值:true。禁用仅返回所选模型的 ID
 **modelClass** | 当 useRelation = false 时用于列出记录的模型类
 
@@ -1060,7 +1060,7 @@ user:
 **select** | 用于名称的自定义SQL select语句。
 **order** | 用于对选项进行排序的 order 子句。 示例:`name desc`。
 **emptyOption** | 没有可用选择时显示的文本。
-**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)始终应用于列表查询。
+**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)始终应用于列表查询。
 
 <a name="widget-repeater"></a>
 ### 循环组件
@@ -1221,7 +1221,7 @@ tags:
         - Orange
 ```
 
-您可以使用名为 **relation** 的`mode`，其中字段名称是 [多对多关系](../database/relations#many-to-many)。 这将通过关系自动获取和分配标签。 如果支持自定义标签，则会在分配之前创建它们。
+您可以使用名为 **relation** 的`mode`，其中字段名称是 [多对多关系](../database/relations#oc-many-to-many)。 这将通过关系自动获取和分配标签。 如果支持自定义标签，则会在分配之前创建它们。
 
 ```yaml
 tags:
@@ -1234,7 +1234,7 @@ tags:
 **mode** | 控制如何返回值，string(字符串)、array(数组)或relation(关系)。 默认值:string
 **separator** | 用指定的字符分隔标签，comma(逗号)或space(空格)。 默认值:comma
 **customTags** | 允许用户手动输入自定义标签。 默认值:true
-**options** | 指定预定义选项的方法或数组。 设置为 true 以使用模型 `get*Field*Options` 方法,可选。 
+**options** | 指定预定义选项的方法或数组。 设置为 true 以使用模型 `get*Field*Options` 方法,可选。
 **nameFrom** | 如果使用关系模式，则显示标签名称的模型属性名称。 默认值:name
 **useKey** | 使用 key 代替 value 来保存和读取数据。 默认值:false
 
@@ -1612,4 +1612,4 @@ User::extend(function ($model) {
 
 ## 验证表单字段
 
-要验证表单的字段，您可以在模型中使用 [验证](../database/traits.md#validation)特性。
+要验证表单的字段，您可以在模型中使用 [验证](../database/traits.md#oc-validation)特性。

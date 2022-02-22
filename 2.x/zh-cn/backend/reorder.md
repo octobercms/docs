@@ -43,7 +43,7 @@ class Category extends Model
 }
 ```
 
-阅读有关 [数据库文档中的 NestedTree Trait](../database/traits.md#nested-tree) 的更多信息。
+阅读有关 [数据库文档中的 NestedTree Trait](../database/traits.md#oc-nested-tree) 的更多信息。
 
 ### 简单树
 
@@ -56,7 +56,7 @@ class Category extends Model
 }
 ```
 
-阅读有关 [数据库文档中的 SimpleTree Trait](../database/traits.md#simple-tree) 的更多信息。
+阅读有关 [数据库文档中的 SimpleTree Trait](../database/traits.md#oc-simple-tree) 的更多信息。
 
 ### 可排序模型
 
@@ -69,4 +69,4 @@ class User extends Model
 }
 ```
 
-阅读更多关于[数据库文档中的可排序Trait](../database/traits.md#sortable)。
+阅读更多关于[数据库文档中的可排序Trait](../database/traits.md#oc-sortable)。

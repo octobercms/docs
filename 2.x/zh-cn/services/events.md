@@ -45,7 +45,7 @@ Event::listen('auth.login', [$this, 'LoginHandler']);
 
 ### 在哪里注册监听器
 
-最常见的地方是[插件注册文件](../plugin/registration.md#registration-methods)的`boot`方法。
+最常见的地方是[插件注册文件](../plugin/registration.md#oc-registration-methods)的`boot`方法。
 
 ```php
 class Plugin extends PluginBase

@@ -30,7 +30,7 @@
 
 ## 设置闪现消息
 
-闪现消息可以通过 [组件](../cms/components.md) 或在页面以及布局 [PHP部分](../cms/themes.md#php-section) 中使用 `Flash` 类设置。
+闪现消息可以通过 [组件](../cms/components.md) 或在页面以及布局 [PHP部分](../cms/themes.md#oc-php-section) 中使用 `Flash` 类设置。
 
 ```php
 function onSave()

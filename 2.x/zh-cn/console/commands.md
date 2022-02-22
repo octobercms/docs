@@ -134,7 +134,7 @@ October 包含许多用于管理主题的命令。
 
 ### 检查受保护
 
-`theme:check` - 对主题执行系统范围的检查，以查看它们是否应标记为只读并防止更改。 此命令将遍历每个主题并检查它是否已与 composer 一起安装，如果是，则添加一个 [主题锁定文件](../cms/themes.md#child-themes-lock) 并创建一个子主题 .
+`theme:check` - 对主题执行系统范围的检查，以查看它们是否应标记为只读并防止更改。 此命令将遍历每个主题并检查它是否已与 composer 一起安装，如果是，则添加一个 [主题锁定文件](../cms/themes.md#oc-child-themes-lock) 并创建一个子主题 .
 
     php artisan theme:check
 
@@ -170,7 +170,7 @@ October 包含许多用于管理主题的命令。
 
     php artisan theme:copy demo demo-child --child
 
-如果使用 [数据库驱动的主题](../cms/themes#database-driven-themes)，您可以使用 `--import-db` 选项将数据库更改同步到文件系统。
+如果使用 [数据库驱动的主题](../cms/themes#oc-database-driven-themes)，您可以使用 `--import-db` 选项将数据库更改同步到文件系统。
 
     php artisan theme:copy demo --import-db
 
@@ -196,7 +196,7 @@ October CMS 包括许多实用程序命令。
 
 ### 镜像公共目录
 
-`october:mirror` - 将使用符号链接将所有资产和资源文件镜像到 [公共文件夹](../setup/deployment.md#public-folder)。
+`october:mirror` - 将使用符号链接将所有资产和资源文件镜像到 [公共文件夹](../setup/deployment.md#oc-public-folder)。
 
     php artisan october:mirror
 

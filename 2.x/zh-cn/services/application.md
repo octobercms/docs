@@ -60,7 +60,7 @@ $users = App::make('UserRepositoryInterface');
 
 ### 在哪里注册绑定
 
-IoC 绑定，如 [事件处理程序](events.md)，通常属于"引导代码"类别。换句话说，它们让您的应用程序准备好实际处理请求，并且通常需要在实际调用路由或控制器之前执行。最常见的地方是[插件注册文件](../plugin/registration.md#registration-methods)的`boot`方法。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用该文件来放置 IoC 注册逻辑。
+IoC 绑定，如 [事件处理程序](events.md)，通常属于"引导代码"类别。换句话说，它们让您的应用程序准备好实际处理请求，并且通常需要在实际调用路由或控制器之前执行。最常见的地方是[插件注册文件](../plugin/registration.md#oc-registration-methods)的`boot`方法。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用该文件来放置 IoC 注册逻辑。
 
 ## 服务提供者
 
@@ -136,7 +136,7 @@ App::resolving('Acme\Blog\Classes\FooBar', function ($fooBar, $app) {
 
 #### 查找应用环境
 
-您可以使用 `environment` 方法来发现由 [环境配置](../setup/configuration.md#environment-configuration) 确定的应用程序环境。
+您可以使用 `environment` 方法来发现由 [环境配置](../setup/configuration.md#oc-environment-configuration) 确定的应用程序环境。
 
 ```php
 // 生产

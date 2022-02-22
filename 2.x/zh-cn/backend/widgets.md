@@ -23,7 +23,7 @@ widgets/
 
 ### 类定义
 
-通用小部件类必须扩展 `Backend\Classes\WidgetBase` 类。 与任何其他插件类一样，通用小部件控制器应属于 [插件命名空间](../plugin/registration.md#plugin-namespaces)。 小部件控制器类定义示例：
+通用小部件类必须扩展 `Backend\Classes\WidgetBase` 类。 与任何其他插件类一样，通用小部件控制器应属于 [插件命名空间](../plugin/registration.md#oc-plugin-namespaces)。 小部件控制器类定义示例：
 
 ```php
 namespace Backend\Widgets;
@@ -72,7 +72,7 @@ public function render()
 
 ### AJAX 处理程序
 
-小部件实现与 [后端控制器](controllers-ajax#ajax) 相同的 AJAX 方法。 AJAX 处理程序是小部件类的公共方法，其名称以 **on** 前缀开头。 小部件 AJAX 处理程序和后端控制器的 AJAX 处理程序之间的唯一区别是，当您在小部件中引用它时，您应该使用小部件的 `getEventHandler` 方法来返回小部件的处理程序名称。
+小部件实现与 [后端控制器](controllers-ajax#oc-ajax) 相同的 AJAX 方法。 AJAX 处理程序是小部件类的公共方法，其名称以 **on** 前缀开头。 小部件 AJAX 处理程序和后端控制器的 AJAX 处理程序之间的唯一区别是，当您在小部件中引用它时，您应该使用小部件的 `getEventHandler` 方法来返回小部件的处理程序名称。
 
 ```php
 <a
@@ -110,7 +110,7 @@ public function __construct()
 
 ## 表单小部件
 
-使用表单小部件，您可以将新的控件类型添加到后端 [表单](../backend/forms.md)。 它们提供了为模型提供数据的常见功能。 表单小部件必须在 [插件注册文件](../plugin/registration.md#registration-methods) 中注册。
+使用表单小部件，您可以将新的控件类型添加到后端 [表单](../backend/forms.md)。 它们提供了为模型提供数据的常见功能。 表单小部件必须在 [插件注册文件](../plugin/registration.md#oc-registration-methods) 中注册。
 
 表单小部件类驻留在插件目录的 **formwidgets** 目录中。 目录名称与小写字母编写的小部件类的名称相匹配。 小部件可以提供资产和部件。表单小部件目录结构示例：
 
@@ -129,7 +129,7 @@ formwidgets/
 
 ### 类定义
 
-表单小部件类必须扩展 `Backend\Classes\FormWidgetBase` 类。 与任何其他插件类一样，通用小部件控制器应属于 [插件命名空间](../plugin/registration.md#plugin-namespaces)。 已注册的小部件可以在后端 [表单字段定义](../backend/forms.md#defining-form-fields) 文件中使用。 示例表单小部件类定义：
+表单小部件类必须扩展 `Backend\Classes\FormWidgetBase` 类。 与任何其他插件类一样，通用小部件控制器应属于 [插件命名空间](../plugin/registration.md#oc-plugin-namespaces)。 已注册的小部件可以在后端 [表单字段定义](../backend/forms.md#oc-defining-form-fields) 文件中使用。 示例表单小部件类定义：
 
 ```php
 namespace Backend\Widgets;
@@ -149,7 +149,7 @@ class CodeEditor extends FormWidgetBase
 
 ### 表单小部件属性
 
-表单小部件可能具有可以使用 [表单字段配置](../backend/forms.md#defining-form-fields) 设置的属性。 只需在类上定义可配置属性，然后调用 `fillFromConfig` 方法将它们填充到 `init` 方法定义中。
+表单小部件可能具有可以使用 [表单字段配置](../backend/forms.md#oc-defining-form-fields) 设置的属性。 只需在类上定义可配置属性，然后调用 `fillFromConfig` 方法将它们填充到 `init` 方法定义中。
 
 ```php
 class DatePicker extends FormWidgetBase
@@ -200,7 +200,7 @@ class DatePicker extends FormWidgetBase
 }
 ```
 
-然后，在使用小部件时，可以从 [表单字段定义](../backend/forms.md#defining-form-fields) 设置属性值。
+然后，在使用小部件时，可以从 [表单字段定义](../backend/forms.md#oc-defining-form-fields) 设置属性值。
 
 ```yaml
 born_at:
@@ -213,7 +213,7 @@ born_at:
 
 ### 表单小部件注册
 
-插件应该通过覆盖 [插件注册类](../plugin/registration.md#registration-file) 中的 `registerFormWidgets` 方法来注册表单小部件。 该方法返回一个数组，其中包含键中的小部件类和小部件短代码作为值。 例子：
+插件应该通过覆盖 [插件注册类](../plugin/registration.md#oc-registration-file) 中的 `registerFormWidgets` 方法来注册表单小部件。 该方法返回一个数组，其中包含键中的小部件类和小部件短代码作为值。 例子：
 
 ```php
 public function registerFormWidgets()
@@ -225,7 +225,7 @@ public function registerFormWidgets()
 }
 ```
 
-短代码是可选的，可以在[表单字段定义](forms.md#field-widget)中引用小部件时使用，它应该是一个唯一的值，以避免与其他表单字段冲突。
+短代码是可选的，可以在[表单字段定义](forms.md#oc-field-widget)中引用小部件时使用，它应该是一个唯一的值，以避免与其他表单字段冲突。
 
 ### 加载表单数据
 
@@ -270,13 +270,13 @@ public function getSaveValue($value)
 
 ## 报告小部件
 
-报表小部件可用于后端仪表板和其他后端报表容器。 报告小部件必须在 [插件注册文件](../plugin/registration.md#widget-registration) 中注册。
+报表小部件可用于后端仪表板和其他后端报表容器。 报告小部件必须在 [插件注册文件](../plugin/registration.md#oc-widget-registration) 中注册。
 
-> 您可以使用`create:reportwidget` 命令轻松构建报表小部件。 有关详细信息，请参阅 [脚手架命令](../console/scaffolding.md#create-a-report-widget)。
+> 您可以使用`create:reportwidget` 命令轻松构建报表小部件。 有关详细信息，请参阅 [脚手架命令](../console/scaffolding.md#oc-create-a-report-widget)。
 
 ### 报告小部件类
 
-报告小部件类应扩展 `Backend\Classes\ReportWidgetBase` 类。 与任何其他插件类一样，通用小部件控制器应属于 [插件命名空间](../plugin/registration.md#plugin-namespaces)。 该类应覆盖 `render` 方法以呈现小部件本身。 与所有后端小部件类似，报表小部件使用部件和特殊的目录布局。 示例目录布局：
+报告小部件类应扩展 `Backend\Classes\ReportWidgetBase` 类。 与任何其他插件类一样，通用小部件控制器应属于 [插件命名空间](../plugin/registration.md#oc-plugin-namespaces)。 该类应覆盖 `render` 方法以呈现小部件本身。 与所有后端小部件类似，报表小部件使用部件和特殊的目录布局。 示例目录布局：
 
 ```
 plugins/
@@ -374,7 +374,7 @@ class TrafficSources extends ReportWidgetBase
 
 ![image](https://i.ibb.co/gPCKDL8/report-widget-inspector.png)
 
-属性应该在小部件类的 `defineProperties` 方法中定义。 [组件文章](../plugin/components.md#component-properties) 中描述了这些属性。 例子：
+属性应该在小部件类的 `defineProperties` 方法中定义。 [组件文章](../plugin/components.md#oc-component-properties) 中描述了这些属性。 例子：
 
 ```php
 public function defineProperties()
@@ -399,7 +399,7 @@ public function defineProperties()
 
 ### 报告小部件注册
 
-插件可以通过覆盖[插件注册类](../plugin/registration.md#registration-file)中的`registerReportWidgets`方法来注册报告小部件。 该方法应返回一个数组，其中包含键中的小部件类和值中的小部件配置(标签、上下文和所需权限)。 例子：
+插件可以通过覆盖[插件注册类](../plugin/registration.md#oc-registration-file)中的`registerReportWidgets`方法来注册报告小部件。 该方法应返回一个数组，其中包含键中的小部件类和值中的小部件配置(标签、上下文和所需权限)。 例子：
 
 ```php
 public function registerReportWidgets()

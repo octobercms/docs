@@ -68,7 +68,7 @@ October CMS 使用 [Composer](https://getcomposer.org/) 发布包并且完全兼
 }
 ```
 
-您还应该确保此包包含在 [插件注册文件](../plugin/registration.md#dependency-definitions) 中的 `$require` 属性中。
+您还应该确保此包包含在 [插件注册文件](../plugin/registration.md#oc-dependency-definitions) 中的 `$require` 属性中。
 
 
 #### 其他主题
@@ -81,7 +81,7 @@ October CMS 使用 [Composer](https://getcomposer.org/) 发布包并且完全兼
 }
 ```
 
-确保此包包含在 [主题信息文件](../themes/development.md#theme-dependencies) 中的 `require` 属性中。
+确保此包包含在 [主题信息文件](../themes/development.md#oc-theme-dependencies) 中的 `require` 属性中。
 
 #### 使用第三方软件包进行开发
 
@@ -121,7 +121,7 @@ v2.0
 git tag -a v2.0.1 -m "Version 2 is here!"
 ```
 
-除了标记之外，您还应该增加在 [插件](../plugin/updates.md) 或 [主题](../themes/development.md#version-file) 中找到的版本文件。
+除了标记之外，您还应该增加在 [插件](../plugin/updates.md) 或 [主题](../themes/development.md#oc-version-file) 中找到的版本文件。
 
 ## 私人插件和主题
 

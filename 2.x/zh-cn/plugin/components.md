@@ -63,7 +63,7 @@ url = "/blog"
 
 ### 组件注册
 
-组件必须通过覆盖[插件注册类](registration.md#registration-file)内的`registerComponents`方法来注册。 这会告诉 CMS 有关该组件的信息，并提供一个 **短名称** 以供使用。 注册组件的示例：
+组件必须通过覆盖[插件注册类](registration.md#oc-registration-file)内的`registerComponents`方法来注册。 这会告诉 CMS 有关该组件的信息，并提供一个 **短名称** 以供使用。 注册组件的示例：
 
 ```php
 public function registerComponents()
@@ -218,7 +218,7 @@ public function getStateOptions()
 
 ### 页面列表属性
 
-有时组件需要创建指向网站页面的链接。 例如，博客文章列表包含指向博客文章详细信息页面的链接。 在这种情况下，组件应该知道帖子详细信息页面文件名(然后它可以使用 [页面 Twig 过滤器](../cms/markup.md#page-filter))。 October包括一个用于创建动态下拉列表页面的助手。 下一个示例定义了 postPage 属性，该属性显示页面列表：
+有时组件需要创建指向网站页面的链接。 例如，博客文章列表包含指向博客文章详细信息页面的链接。 在这种情况下，组件应该知道帖子详细信息页面文件名(然后它可以使用 [页面 Twig 过滤器](../cms/markup.md#oc-page-filter))。 October包括一个用于创建动态下拉列表页面的助手。 下一个示例定义了 postPage 属性，该属性显示页面列表：
 
 ```php
 public function defineProperties()
@@ -240,7 +240,7 @@ public function getPostPageOptions()
 
 ## 路由参数
 
-组件可以直接访问[页面的URL](../cms/pages.md#url-syntax)中定义的路由参数值。
+组件可以直接访问[页面的URL](../cms/pages.md#oc-url-syntax)中定义的路由参数值。
 
 ```php
 // 返回 URL 段值，例如：/page/:post_id
@@ -258,7 +258,7 @@ url = "/blog/hard-coded-page"
 id = "2"
 ```
 
-或者，可以使用 [外部属性值](../cms/components.md#using-external-property-values) 从页面 URL 动态引用该值：
+或者，可以使用 [外部属性值](../cms/components.md#oc-using-external-property-values) 从页面 URL 动态引用该值：
 
 ```ini
 url = "/blog/:my_custom_parameter"
@@ -295,7 +295,7 @@ public function onRun()
 
 ### 页面执行生命周期处理程序
 
-当页面加载时，October 会执行可以在布局，页面 [PHP 部分](../cms/themes.md#php-section) 和组件类中定义的处理程序函数。 处理程序的执行顺序如下：
+当页面加载时，October 会执行可以在布局，页面 [PHP 部分](../cms/themes.md#oc-php-section) 和组件类中定义的处理程序函数。 处理程序的执行顺序如下：
 
 1.布局`onInit()`函数。
 1.页面`onInit()`函数。
@@ -319,7 +319,7 @@ public function init()
 
 ### 停止响应
 
-和[页面执行生命周期](../cms/layouts.md#layout-execution-life-cycle)中的所有方法一样，如果组件中的`onRun`方法有返回值，这将在此停止循环 指向并将响应返回给浏览器。 这里我们使用 `Response` 门面返回一个访问被拒绝的消息：
+和[页面执行生命周期](../cms/layouts.md#oc-layout-execution-life-cycle)中的所有方法一样，如果组件中的`onRun`方法有返回值，这将在此停止循环 指向并将响应返回给浏览器。 这里我们使用 `Response` 门面返回一个访问被拒绝的消息：
 
 ```php
 public function onRun()
@@ -355,7 +355,7 @@ public function onAddItem()
 }
 ```
 
-如果这个组件的别名是 *demoTodo* 这个处理程序可以通过 `demoTodo::onAddItem` 访问。 有关在组件中使用 AJAX 的详细信息，请参阅 [调用组件中定义的 AJAX 处理程序](../ajax/handlers.md#calling-a-handler) 文章。
+如果这个组件的别名是 *demoTodo* 这个处理程序可以通过 `demoTodo::onAddItem` 访问。 有关在组件中使用 AJAX 的详细信息，请参阅 [调用组件中定义的 AJAX 处理程序](../ajax/handlers.md#oc-calling-a-handler) 文章。
 
 ## 默认标记
 
@@ -411,7 +411,7 @@ public function onRender()
 
 ### 引用"自己"
 
-组件可以通过使用 `__SELF__` 变量在它们的部件内部引用自己。默认情况下，它将返回组件的短名称或 [别名](../cms/components.md#components-aliases)。
+组件可以通过使用 `__SELF__` 变量在它们的部件内部引用自己。默认情况下，它将返回组件的短名称或 [别名](../cms/components.md#oc-components-aliases)。
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">
@@ -484,7 +484,7 @@ public function onRun()
 
 ## 使用组件注入页面资产
 
-组件可以将资产(CSS 和 JavaScript 文件)注入到它们所附加的页面或布局中。 使用控制器的 `addCss` 和 `addJs` 方法将资产添加到 CMS 控制器。 它可以在组件的 `onRun` 方法中完成。 请阅读有关[在页面文章中注入资产](../cms/page.md#injecting-page-assets-programmatically)的更多详细信息。 例子：
+组件可以将资产(CSS 和 JavaScript 文件)注入到它们所附加的页面或布局中。 使用控制器的 `addCss` 和 `addJs` 方法将资产添加到 CMS 控制器。 它可以在组件的 `onRun` 方法中完成。 请阅读有关[在页面文章中注入资产](../cms/page.md#oc-injecting-page-assets-programmatically)的更多详细信息。 例子：
 
 ```php
 public function onRun()

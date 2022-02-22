@@ -6,13 +6,13 @@
 <a href="{{ 'about'|page }}">关于我们</a>
 ```
 
-切记，如果您从子目录引用页面，则应指定子目录名称： 
+切记，如果您从子目录引用页面，则应指定子目录名称：
 
 ```html
 <a href="{{ 'contacts/about'|page }}">关于我们</a>
 ```
 
-> **注意**:  [主题文档](../cms/themes.md#subdirectories) 有更多关于子目录使用的细节。
+> **注意**:  [主题文档](../cms/themes.md#oc-subdirectories) 有更多关于子目录使用的细节。
 
 要从 PHP 部分访问特定页面的链接，您可以使用 `$this->pageUrl('page-name-without-extension')`:
 

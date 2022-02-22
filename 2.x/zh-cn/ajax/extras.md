@@ -8,7 +8,7 @@
 
 ## 加载指示器
 
-您应该注意到的第一个功能是在 AJAX 请求运行时显示在页面顶部的加载指示器。 该指示器挂钩到 AJAX 框架使用的 [全局事件](../ajax/javascript-api.md#global-ajax-events)。
+您应该注意到的第一个功能是在 AJAX 请求运行时显示在页面顶部的加载指示器。 该指示器挂钩到 AJAX 框架使用的 [全局事件](../ajax/javascript-api.md#oc-global-ajax-events)。
 
 当 AJAX 请求开始时，会触发 `ajaxPromise` 事件，显示指示器并将鼠标光标置于加载状态。 `ajaxFail` 和 `ajaxDone` 事件用于检测请求何时完成，指示器在何处再次隐藏。
 
@@ -26,7 +26,7 @@
 
 ### 抛出验证错误
 
-在服务器端 AJAX 处理程序中，您可以使用 `ValidationException` 类抛出 [验证异常](../services/error-log.md#validation-exception) 以使字段无效，其中第一个参数是一个数组。 该数组应使用字段名称作为键，并使用错误消息作为值。
+在服务器端 AJAX 处理程序中，您可以使用 `ValidationException` 类抛出 [验证异常](../services/error-log.md#oc-validation-exception) 以使字段无效，其中第一个参数是一个数组。 该数组应使用字段名称作为键，并使用错误消息作为值。
 
 ```php
 function onSubmit()

@@ -16,7 +16,7 @@ plugins/
       Plugin.php
 ```
 
-模型配置目录可以包含模型的 [列表字段](../backend/lists.md#defining-list-columns) 和 [form field](../backend/forms.md#defining-form-fields) 定义 . 模型配置目录名与小写的模型类名一致。
+模型配置目录可以包含模型的 [列表字段](../backend/lists.md#oc-defining-list-columns) 和 [form field](../backend/forms.md#oc-defining-form-fields) 定义 . 模型配置目录名与小写的模型类名一致。
 
 ## 定义模型
 
@@ -73,7 +73,7 @@ class User extends Model
 **$guarded** | 值是受 [批量赋值](#mass-assignment) 保护的字段。
 **$visible** | 值是在 [序列化模型数据](../database/serialization.md) 时可见的字段。
 **$hidden** | 值是在 [序列化模型数据](../database/serialization.md) 时隐藏的字段。
-**$connection** | 包含模型默认使用的 [连接名称](../database/basics.md#multiple-database-connections) 的字符串。
+**$connection** | 包含模型默认使用的 [连接名称](../database/basics.md#oc-multiple-database-connections) 的字符串。
 
 #### 主键
 
@@ -157,7 +157,7 @@ class Post extends Model
 
 ### 检索多个模型
 
-一旦你创建了一个模型和[其关联的数据库表](../database/structure.md#migration-structure)，你就可以开始从你的数据库中检索数据了。将每个模型视为一个强大的 [查询构建器](../database/query.md)，允许您查询与模型关联的数据库表。例如：
+一旦你创建了一个模型和[其关联的数据库表](../database/structure.md#oc-migration-structure)，你就可以开始从你的数据库中检索数据了。将每个模型视为一个强大的 [查询构建器](../database/query.md)，允许您查询与模型关联的数据库表。例如：
 
 ```php
 $flights = Flight::all();
@@ -242,7 +242,7 @@ Route::get('/api/flights/{id}', function ($id) {
 
 ### 检索集合
 
-您还可以使用查询生成器提供的 `count`、`sum`、`max` 和其他 [聚合函数](../database/query.md#aggregates)。 这些方法返回适当的标量值而不是完整的模型实例：
+您还可以使用查询生成器提供的 `count`、`sum`、`max` 和其他 [聚合函数](../database/query.md#oc-aggregates)。 这些方法返回适当的标量值而不是完整的模型实例：
 
 ```php
 $count = Flight::where('active', 1)->count();
@@ -486,7 +486,7 @@ public function beforeCreate()
 }
 ```
 
-> **注意**：使用 [延迟绑定](relations#deferred-binding) 创建的关系(即：文件附件)如果尚未提交，则在 `afterSave` 模型事件中将不可用。 要访问未提交的绑定，请在关系上使用 `withDeferred($sessionKey)` 方法。 示例：`$this->images()->withDeferred(post('_session_key'))->get();`
+> **注意**：使用 [延迟绑定](relations#oc-deferred-binding) 创建的关系(即：文件附件)如果尚未提交，则在 `afterSave` 模型事件中将不可用。 要访问未提交的绑定，请在关系上使用 `withDeferred($sessionKey)` 方法。 示例：`$this->images()->withDeferred(post('_session_key'))->get();`
 
 ### 基本用法
 

@@ -62,7 +62,7 @@ Markdown 是 HTML 的超集，因此您可以将 HTML 和 Markdown 组合在同�
 
 ## Twig 模板解析器
 
-Twig 是一个简单但功能强大的模板引擎，可以将 HTML 模板解析为优化的 PHP 代码，它是 [前端标记](../markup/templating.md)、[视图内容](../services/response-view.md#views) 和 [邮件内容](../services/mail.md#message-content) 背后的驱动力。
+Twig 是一个简单但功能强大的模板引擎，可以将 HTML 模板解析为优化的 PHP 代码，它是 [前端标记](../markup/templating.md)、[视图内容](../services/response-view.md#oc-views) 和 [邮件内容](../services/mail.md#oc-message-content) 背后的驱动力。
 
 `Twig` 门面用于解析 Twig 语法，您可以使用 `Twig::parse` 方法将 Twig 渲染为 HTML。
 
@@ -76,11 +76,11 @@ $html = Twig::parse($twig);
 $html = Twig::parse($twig, ['foo' => 'bar']);
 ```
 
-可以通过 [插件注册文件](../plugin/registration.md#extending-twig) 扩展 Twig 解析器以注册自定义功能。
+可以通过 [插件注册文件](../plugin/registration.md#oc-extending-twig) 扩展 Twig 解析器以注册自定义功能。
 
 ## 括号解析器
 
-October 还附带了一个简单的括号模板解析器作为 Twig 解析器的替代方案，目前用于将变量传递给 [主题内容块](../cms/content.md#passing-variables-to-content-blocks)。 该引擎渲染 HTML 的速度更快，旨在更适合非技术用户。 这个解析器没有门面，因此完全限定的 `October\Rain\Parse\Bracket` 类应该与 `parse` 方法一起使用。
+October 还附带了一个简单的括号模板解析器作为 Twig 解析器的替代方案，目前用于将变量传递给 [主题内容块](../cms/content.md#oc-passing-variables-to-content-blocks)。 该引擎渲染 HTML 的速度更快，旨在更适合非技术用户。 这个解析器没有门面，因此完全限定的 `October\Rain\Parse\Bracket` 类应该与 `parse` 方法一起使用。
 
 ```php
 use October\Rain\Parse\Bracket;
@@ -116,7 +116,7 @@ $html = Template::parse($content, ['likes' => [
 
 ## YAML 配置解析器
 
-YAML("YAML 不是标记语言")是一种配置格式，类似于 Markdown，它被设计为一种易于阅读和易于编写的格式，可以转换为 PHP 数组。October的后端开发几乎到处都在使用它，例如 [表单字段](../backend/forms.md#defining-form-fields) 和 [列表](../backend/lists.md #defining-list-columns) 定义。 一些 YAML 的示例：
+YAML("YAML 不是标记语言")是一种配置格式，类似于 Markdown，它被设计为一种易于阅读和易于编写的格式，可以转换为 PHP 数组。October的后端开发几乎到处都在使用它，例如 [表单字段](../backend/forms.md#oc-defining-form-fields) 和 [列表](../backend/lists.md #defining-list-columns) 定义。 一些 YAML 的示例：
 
 ```yaml
 receipt: Acme 采购发票
@@ -254,7 +254,7 @@ $array = $syntax->toEditor();
 // ]
 ```
 
-您可能会注意到这些属性与 [表单字段定义](../backend/forms.md#defining-form-fields) 中的选项非常相似。 这是故意的，因此这两个功能相互补充。 我们现在可以轻松地将上面的数组转换为 YAML 并写入 `fields.yaml` 文件：
+您可能会注意到这些属性与 [表单字段定义](../backend/forms.md#oc-defining-form-fields) 中的选项非常相似。 这是故意的，因此这两个功能相互补充。 我们现在可以轻松地将上面的数组转换为 YAML 并写入 `fields.yaml` 文件：
 
 ```php
 $form = [
@@ -266,7 +266,7 @@ File::put('fields.yaml', Yaml::render($form));
 
 ### 支持的标签
 
-动态语法解析器可以使用多种标记类型，这些标记类型旨在匹配常见的 [表单字段类型](../backend/forms.md#available-field-types)。
+动态语法解析器可以使用多种标记类型，这些标记类型旨在匹配常见的 [表单字段类型](../backend/forms.md#oc-available-field-types)。
 
 #### 文本
 
@@ -452,4 +452,4 @@ quote:
             type: textarea
 ```
 
-有关组合器组模式的更多信息，请参阅 [循环小部件](../backend/forms.md#repeater)。
+有关组合器组模式的更多信息，请参阅 [循环小部件](../backend/forms.md#oc-repeater)。

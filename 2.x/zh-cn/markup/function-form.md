@@ -40,19 +40,19 @@
 {{ form_open({ request: 'onUpdate' }) }}
 ```
 
-该函数支持以下选项： 
+该函数支持以下选项：
 
 选项 | 描述
 ------------- | -------------
 **method** | 请求方法。 对应 **method** FORM 标签属性。 例如: POST, GET, PUT, DELETE
-**request** | 发布表单时在服务器上执行的处理程序名称。 有关事件处理程序的详细信息，请参阅 [处理表单](../cms/pages.md#handling-forms)
+**request** | 发布表单时在服务器上执行的处理程序名称。 有关事件处理程序的详细信息，请参阅 [处理表单](../cms/pages.md#oc-handling-forms)
 **url** | 指定将表单发布到的 URL。 对应 **action** FORM 标签属性。
 **files** | 确定表单是否将提交文件。 接受的值：**true** 和 **false**。
 **model** |  表单模型绑定的模型对象
 
 ## form_ajax()
 
-输出一个启用 AJAX 的 FORM 开始标签。 `form_ajax()` 函数的第一个参数是 AJAX 处理程序名称。处理程序可以在布局或页面 [PHP部分](../cms/themes.md#php-section) 代码中定义，也可以在组件中定义。Y您可以在[AJAX框架](../ajax/introduction.md) 文章中找到有关 AJAX 的更多信息。
+输出一个启用 AJAX 的 FORM 开始标签。 `form_ajax()` 函数的第一个参数是 AJAX 处理程序名称。处理程序可以在布局或页面 [PHP部分](../cms/themes.md#oc-php-section) 代码中定义，也可以在组件中定义。Y您可以在[AJAX框架](../ajax/introduction.md) 文章中找到有关 AJAX 的更多信息。
 
 ```twig
 {{ form_ajax('onUpdate') }}
@@ -70,7 +70,7 @@
 <form data-request="onSave" class="form-horizontal">
 ```
 
-有一些特殊选项也可以与属性一起使用。 
+有一些特殊选项也可以与属性一起使用。
 
 ```twig
 {{ form_ajax('onDelete', { data: { id: 2 }, confirm: '真的要删除这条记录吗？' }) }}
@@ -85,7 +85,7 @@
 {{ form_ajax('onUpdate', { update: targetPartial }) }}
 ```
 
-该函数支持以下选项： 
+该函数支持以下选项：
 
 选项 | 描述
 ------------- | -------------
@@ -98,7 +98,7 @@
 
 ## form_close()
 
-输出一个标准的 FORM 结束标签。 此标签通常可用于提供一致性的使用。 
+输出一个标准的 FORM 结束标签。 此标签通常可用于提供一致性的使用。
 
 ```twig
 {{ form_close() }}

@@ -2,11 +2,11 @@
 
 过去，开发人员会为他们需要安排的每个任务生成一个 Cron 条目。然而，这有时会让人头疼。您的计划任务不再受源代码控制，您必须通过 SSH 连接到您的服务器才能添加 Cron 条目。命令调度程序允许您在应用程序本身中流畅而明确地定义命令调度，并且您的服务器上只需要一个 Cron 条目。
 
-> **注意**：有关如何设置计划任务的说明，请参阅[安装指南](../setup/installation.md#setting-up-the-scheduler)。
+> **注意**：有关如何设置计划任务的说明，请参阅[安装指南](../setup/installation.md#oc-setting-up-the-scheduler)。
 
 ## 定义时间表
 
-您可以通过覆盖[插件注册类](registration.md#registration-file) 中的`registerSchedule` 方法来定义所有计划任务。该方法将采用单个 `$schedule` 参数，用于定义命令及其频率。
+您可以通过覆盖[插件注册类](registration.md#oc-registration-file) 中的`registerSchedule` 方法来定义所有计划任务。该方法将采用单个 `$schedule` 参数，用于定义命令及其频率。
 
 首先，让我们看一个计划任务的示例。在这个例子中，我们将安排一个 `Closure` 每天午夜调用。在 `Closure` 中，我们将执行一个数据库查询来清除一个表：
 

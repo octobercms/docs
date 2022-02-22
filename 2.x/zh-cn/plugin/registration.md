@@ -4,7 +4,7 @@
 
 1. 定义[组件](components.md)。
 1. 定义[用户权限](../backend/users.md)。
-1. 添加[设置页面](settings.md#backend-settings-pages)、[菜单项](#navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md）。
+1. 添加[设置页面](settings.md#oc-backend-settings-pages)、[菜单项](#navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md）。
 1. 创建[数据库表结构和种子数据](updates.md)。
 1. 更改[核心或其他插件的功能](events.md)。
 1. 提供类、[后端控制器](../backend/controllers-ajax)、视图、资产等文件。
@@ -85,17 +85,17 @@ class Plugin extends \System\Classes\PluginBase
 **register()** | register 方法，在插件首次注册时调用。
 **boot()** | boot 方法，在请求路由之前调用。
 **registerMarkupTags()** | 注册可在 CMS 中使用的 [附加标记标签](#extending-twig)。
-**registerComponents()** | 注册此插件使用的任何 [前端组件](components#component-registration)。
+**registerComponents()** | 注册此插件使用的任何 [前端组件](components#oc-component-registration)。
 **registerNavigation()** | 为这个插件注册[后端导航菜单项](#navigation-menus)。
-**registerPermissions()** | 注册此插件使用的任何 [后端权限](../backend/users#registering-permissions)。
-**registerSettings()** | 注册此插件使用的任何 [后端配置链接](settings#settings-link-registration)。
-**registerFormWidgets()** | 注册此插件提供的任何 [后端表单小部件](../backend/widgets#form-widget-registration)。
-**registerReportWidgets()** | 注册任何 [后端报告小部件](../backend/widgets#report-widget-registration)，包括仪表板小部件。
-**registerListColumnTypes()** | 注册此插件提供的任何 [自定义列表字段类型](../backend/lists.md#custom-column-types)。
-**registerMailLayouts()** | 注册此插件提供的任何 [邮件视图布局](mail.md#registering-mail-layouts-templates-partials)。
-**registerMailTemplates()** | 注册此插件提供的任何 [邮件视图模板](mail.md#registering-mail-layouts-templates-partials)。
-**registerMailPartials()** | 注册此插件提供的任何 [邮件视图部件](mail.md#registering-mail-layouts-templates-partials)。
-**registerSchedule()** | 注册定期执行的 [计划任务](../plugin/scheduling.md#defining-schedules)。
+**registerPermissions()** | 注册此插件使用的任何 [后端权限](../backend/users#oc-registering-permissions)。
+**registerSettings()** | 注册此插件使用的任何 [后端配置链接](settings#oc-settings-link-registration)。
+**registerFormWidgets()** | 注册此插件提供的任何 [后端表单小部件](../backend/widgets#oc-form-widget-registration)。
+**registerReportWidgets()** | 注册任何 [后端报告小部件](../backend/widgets#oc-report-widget-registration)，包括仪表板小部件。
+**registerListColumnTypes()** | 注册此插件提供的任何 [自定义列表字段类型](../backend/lists.md#oc-custom-column-types)。
+**registerMailLayouts()** | 注册此插件提供的任何 [邮件视图布局](mail.md#oc-registering-mail-layouts-templates-partials)。
+**registerMailTemplates()** | 注册此插件提供的任何 [邮件视图模板](mail.md#oc-registering-mail-layouts-templates-partials)。
+**registerMailPartials()** | 注册此插件提供的任何 [邮件视图部件](mail.md#oc-registering-mail-layouts-templates-partials)。
+**registerSchedule()** | 注册定期执行的 [计划任务](../plugin/scheduling.md#oc-defining-schedules)。
 
 ### 基本插件信息
 
@@ -151,7 +151,7 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
-依赖定义将影响插件的运行方式和[更新过程如何应用更新](../plugin/updates.md#update-process)。 安装过程将尝试自动安装任何依赖项，但是如果在系统中检测到没有任何依赖项的插件，它将被禁用以防止系统错误。
+依赖定义将影响插件的运行方式和[更新过程如何应用更新](../plugin/updates.md#oc-update-process)。 安装过程将尝试自动安装任何依赖项，但是如果在系统中检测到没有任何依赖项的插件，它将被禁用以防止系统错误。
 
 依赖定义可能很复杂，但应注意防止循环引用。 依赖图应该始终是有向的，循环依赖被认为是设计错误。
 
@@ -222,7 +222,7 @@ public function registerNavigation()
 
 当您注册后端导航时，您可以将 [多语言字符串](localization.md) 用于 `label` 值。 后端导航也可以由`permissions` 值控制并对应于定义的[后端用户权限](../backend/users)。 后端导航出现在整个导航菜单项上的顺序由 `order` 值控制。 较高的数字意味着该项目将在菜单项的顺序中稍后出现，而较低的数字意味着它将较早出现。
 
-要使子菜单项可见，您可以在后端控制器中使用 `BackendMenu::setContext [设置导航上下文](../backend/controllers-ajax.md#setting-the-navigation-context) ` 方法。 这将使父菜单项处于活动状态并在侧菜单中显示子项。
+要使子菜单项可见，您可以在后端控制器中使用 `BackendMenu::setContext [设置导航上下文](../backend/controllers-ajax.md#oc-setting-the-navigation-context) ` 方法。 这将使父菜单项处于活动状态并在侧菜单中显示子项。
 
 键 | 描述
 ------------- | -------------

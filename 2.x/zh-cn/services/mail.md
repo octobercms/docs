@@ -319,7 +319,7 @@ subject = "您的产品已添加到October CMS项目"
 <p>此电子邮件是使用格式 (HTML) 发送的</p>
 ```
 
-> **注意**：邮件视图中支持基本的 Twig 标签和表达式。 还支持 Markdown 语法，有关详细信息，请参阅 [在 Markdown 中使用 HTML](../services/parser.md#using-html-in-markdown) 部分。
+> **注意**：邮件视图中支持基本的 Twig 标签和表达式。 还支持 Markdown 语法，有关详细信息，请参阅 [在 Markdown 中使用 HTML](../services/parser.md#oc-using-html-in-markdown) 部分。
 
 **plain text** 部分是可选的，视图只能包含配置和 HTML 标记部分。
 
@@ -377,7 +377,7 @@ System | system | 用于内部、后端邮件
 
 ### 注册邮件布局、模板和部件
 
-邮件视图可以注册为模板，这些模板在后端自动生成，以供定制。 可以通过 *Settings(设置) > Mail templates(邮件模板)* 菜单自定义邮件模板。 可以通过覆盖 [插件注册类](../plugin/registration.md#registration-file) 的 `registerMailTemplates` 方法来注册模板。
+邮件视图可以注册为模板，这些模板在后端自动生成，以供定制。 可以通过 *Settings(设置) > Mail templates(邮件模板)* 菜单自定义邮件模板。 可以通过覆盖 [插件注册类](../plugin/registration.md#oc-registration-file) 的 `registerMailTemplates` 方法来注册模板。
 
 ```php
 public function registerMailTemplates()
@@ -391,7 +391,7 @@ public function registerMailTemplates()
 
 该方法应返回 [邮件视图名称](#mail-views) 的数组。
 
-与模板一样，邮件部件和布局可以通过覆盖 [插件注册类](../plugin/registration.md#registration-file) 的 `registerMailPartials` 和 `registerMailLayouts` 方法来注册。
+与模板一样，邮件部件和布局可以通过覆盖 [插件注册类](../plugin/registration.md#oc-registration-file) 的 `registerMailPartials` 和 `registerMailLayouts` 方法来注册。
 
 ```php
 public function registerMailPartials()

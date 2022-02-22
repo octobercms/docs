@@ -72,7 +72,7 @@ themes/
 
 ## 主题定制
 
-主题可以通过在主题信息文件中定义一个 `form` 键来支持配置值。 此键应包含配置数组或对表单字段定义文件的引用，有关更多信息，请参阅 [表单字段](../backend/forms.md#defining-form-fields)。
+主题可以通过在主题信息文件中定义一个 `form` 键来支持配置值。 此键应包含配置数组或对表单字段定义文件的引用，有关更多信息，请参阅 [表单字段](../backend/forms.md#oc-defining-form-fields)。
 
 以下是如何定义名为**site_name** 的网站名称配置字段的示例：
 
@@ -96,7 +96,7 @@ form:
 });
 ```
 
-然后可以使用名为`this.theme`的[默认页面变量](../cms/markup.md#default-variables) 在任何主题模板中访问该值。
+然后可以使用名为`this.theme`的[默认页面变量](../cms/markup.md#oc-default-variables) 在任何主题模板中访问该值。
 
 ```twig
 <h1>欢迎来到 {{ this.theme.site_name }}!</h1>

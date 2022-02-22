@@ -13,7 +13,7 @@
 
 ## 注入样式
 
-可以通过[部件](../plugin/components.md#injecting-page-assets-with-components) 或者 [页面编程方式](../cms/pages.md#injecting-page-assets-programmatically)在 PHP 中注入样式表文件的链接
+可以通过[部件](../plugin/components.md#oc-injecting-page-assets-with-components) 或者 [页面编程方式](../cms/pages.md#oc-injecting-page-assets-programmatically)在 PHP 中注入样式表文件的链接
 
 ```php
 function onStart()
@@ -22,7 +22,7 @@ function onStart()
 }
 ```
 
-您还可以使用 **styles** [占位符](../cms/layouts.md#placeholders) 将原始标记注入到 `{% styles %}` 标签。 在页面或布局中使用 `{% put %}` 标签将内容添加到占位符：
+您还可以使用 **styles** [占位符](../cms/layouts.md#oc-placeholders) 将原始标记注入到 `{% styles %}` 标签。 在页面或布局中使用 `{% put %}` 标签将内容添加到占位符：
 
 ```twig
 {% put styles %}

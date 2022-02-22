@@ -8,7 +8,7 @@
 <p>这是部件</p>
 ```
 
-[Configuration](themes.md#configuration-section) 配置部分对于部件是可选的，并且可以包含显示在后端用户界面中的可选 **description** 参数。 此示例显示了定义了描述的部分。
+[Configuration](themes.md#oc-configuration-section) 配置部分对于部件是可选的，并且可以包含显示在后端用户界面中的可选 **description** 参数。 此示例显示了定义了描述的部分。
 
 ```
 description = "演示部件"
@@ -20,7 +20,7 @@ description = "演示部件"
 
 ## 渲染部件
 
-`{% partial "partial-name" %}` Twig 标签呈现部件。 该标签有一个必需的参数：不带扩展名的部件文件名。 请记住，如果您从 [子目录](themes.md#subdirectories) 引用部件，您应该指定子目录名称。 `{% partial %}` 标签可以在页面、布局或其他部件中使用。 引用部件的页面示例：
+`{% partial "partial-name" %}` Twig 标签呈现部件。 该标签有一个必需的参数：不带扩展名的部件文件名。 请记住，如果您从 [子目录](themes.md#oc-subdirectories) 引用部件，您应该指定子目录名称。 `{% partial %}` 标签可以在页面、布局或其他部件中使用。 引用部件的页面示例：
 
 ```twig
 <div class="sidebar">
@@ -95,7 +95,7 @@ description = "演示部件"
 
 ## 动态部件
 
-部件像页面一样，可以使用任何 Twig 功能。 详情请参考[动态页面](pages.md#dynamic-pages) 文档。
+部件像页面一样，可以使用任何 Twig 功能。 详情请参考[动态页面](pages.md#oc-dynamic-pages) 文档。
 
 ### 部件执行生命周期
 
@@ -111,11 +111,11 @@ function onStart()
 <h3>{{ hello }}</h3>
 ```
 
-[标记指南](../markup.md) 中描述了 October 提供的模板语言。 [动态布局](layouts.md#dynamic-layouts) 文章中描述了处理程序执行的整体顺序。
+[标记指南](../markup.md) 中描述了 October 提供的模板语言。 [动态布局](layouts.md#oc-dynamic-layouts) 文章中描述了处理程序执行的整体顺序。
 
 ### 生命周期限制
 
-由于它们的实例化较晚，因此在页面呈现期间，部件对象的生命周期存在一些限制。 它们不遵循标准执行流程，如[布局执行生命周期](layouts.md#dynamic-layouts) 中所述。 应注意以下限制：
+由于它们的实例化较晚，因此在页面呈现期间，部件对象的生命周期存在一些限制。 它们不遵循标准执行流程，如[布局执行生命周期](layouts.md#oc-dynamic-layouts) 中所述。 应注意以下限制：
 
 1. AJAX 事件未注册，无法正常运行。
 1. 生命周期函数不能返回任何值。

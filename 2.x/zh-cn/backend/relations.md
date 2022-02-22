@@ -1,6 +1,6 @@
 # 关系
 
-**Relation Behavior** 是一个控制器修饰符，用于轻松管理页面上的复杂 [模型](../database/model.md) 关系。 不要与仅提供简单管理的[列关系](lists.md#available-column-types) 或 [表单关系字段](forms.md#relation) 混淆。
+**Relation Behavior** 是一个控制器修饰符，用于轻松管理页面上的复杂 [模型](../database/model.md) 关系。 不要与仅提供简单管理的[列关系](lists.md#oc-available-column-types) 或 [表单关系字段](forms.md#oc-relation) 混淆。
 
 关系行为取决于[关系定义](#relationship-types)。 为了使用关系行为，您应该将 `Backend\Behaviors\RelationController` 定义添加到控制器类的 `$implement` 字段中。 此外，应定义 `$relationConfig` 类属性，其值应参考用于[配置行为选项](#configuring-the-relation-behavior) 的 YAML 文件。
 
@@ -63,14 +63,14 @@ items:
 **pivot** | 对表单字段定义文件的引用，用于 [与数据透视表数据的关系](#belongs-to-many-with-pivot-data)。
 **emptyMessage** | 当关系为空时显示的消息，可选。
 **readOnly** | 禁用添加、更新、删除或创建关系的能力。 默认值：false
-**deferredBinding** | 当会话密钥可用时，[使用会话密钥延迟所有绑定操作](../database/model.md#deferred-binding)。 默认值：false
+**deferredBinding** | 当会话密钥可用时，[使用会话密钥延迟所有绑定操作](../database/model.md#oc-deferred-binding)。 默认值：false
 
 可以为 **view** 或 **manage** 选项指定这些配置值，适用于列表、表单或两者的渲染类型。
 
 选项 | 类型 | 描述
 ------------- | ------------- | -------------
-**form** | Form | 对表单字段定义文件的引用，请参阅 [后端表单字段](forms.md#defining-form-fields)。
-**list** | List | 对列表列定义文件的引用，请参阅 [后端列表列](lists.md#defining-list-columns)。
+**form** | Form | 对表单字段定义文件的引用，请参阅 [后端表单字段](forms.md#oc-defining-form-fields)。
+**list** | List | 对列表列定义文件的引用，请参阅 [后端列表列](lists.md#oc-defining-list-columns)。
 **showFlash** | Both | 启用成功操作后显示闪现消息。 默认值：true
 **showSearch** | List | 显示用于搜索记录的输入。默认值：false
 **showSorting** | List | 在每一列上显示排序链接。默认值：true
@@ -78,10 +78,10 @@ items:
 **recordsPerPage** | List | 每页显示的最大行数。
 **noRecordsMessage** | List | 未找到记录时显示的消息，可以参考 [多语言字符串](../plugin/localization.md)。
 **conditions** | List | 指定要应用于列表模型查询的原始 where 查询语句。
-**scope** | List | 指定在_相关表单模型_中定义的 [查询范围方法](../database/model.md#query-scopes) 始终应用于列表查询。此关系将附加到的模型(即父模型)作为第二个参数(`$query` 是第一个)传递给此范围方法。
+**scope** | List | 指定在_相关表单模型_中定义的 [查询范围方法](../database/model.md#oc-query-scopes) 始终应用于列表查询。此关系将附加到的模型(即父模型)作为第二个参数(`$query` 是第一个)传递给此范围方法。
 **searchMode** | List | 将搜索策略定义为包含所有单词、任何单词或精确短语。支持的选项：全部、任意、精确。默认值：全部。
-**searchScope** | List | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)应用于搜索查询，第一个参数将包含搜索词。
-**filter** | List | 对过滤器范围定义文件的引用，请参阅 [后端列表过滤器](lists.md#using-list-filters)。
+**searchScope** | List | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)应用于搜索查询，第一个参数将包含搜索词。
+**filter** | List | 对过滤器范围定义文件的引用，请参阅 [后端列表过滤器](lists.md#oc-using-list-filters)。
 
 只能为 **view** 选项指定这些配置值。
 
@@ -204,7 +204,7 @@ roles:
 
 ### 多对多关联 (使用数据透视表)
 
-> **注意**：[延迟绑定](../database/relations.md#deferred-binding) 目前不支持透视数据，因此父模型应该存在。 如果您的关系行为配置具有 `deferredBinding: true`，则透视数据将**不**可用于列表配置(例如`pivot[attribute]`)。
+> **注意**：[延迟绑定](../database/relations.md#oc-deferred-binding) 目前不支持透视数据，因此父模型应该存在。 如果您的关系行为配置具有 `deferredBinding: true`，则透视数据将**不**可用于列表配置(例如`pivot[attribute]`)。
 
 1. 相关记录显示为列表(**view.list**)。
 1. 单击记录将显示更新表单(**pivot.form**)。
@@ -319,7 +319,7 @@ $this->initRelation($post);
 
 > **注意**：[表单行为](forms.md) 将在创建、更新和预览操作时自动初始化模型。
 
-然后可以通过调用 `relationRender` 方法为指定的关系定义显示关系管理器。 例如，如果您想在 [预览](forms.md#preview-view) 页面上显示关系管理器，则 **preview.htm** 视图内容可能如下所示：
+然后可以通过调用 `relationRender` 方法为指定的关系定义显示关系管理器。 例如，如果您想在 [预览](forms.md#oc-preview-view) 页面上显示关系管理器，则 **preview.htm** 视图内容可能如下所示：
 
 ```php
 <?= $this->formRenderPreview() ?>
@@ -376,7 +376,7 @@ public function relationExtendViewWidget($widget, $field, $model)
 
 #### 如何删除列
 
-由于小部件在运行时尚未完成初始化，因此您不能调用 `$widget->removeColumn()`。 [列表控制器文档](../backend/lists.md#extending-column-definitions) 中描述的 `addColumns()` 方法将按预期工作，但是要删除一个列，我们需要在 `relationExtendViewWidget()` 方法中监听 'list.extendColumns' 事件。 以下示例显示如何删除列。
+由于小部件在运行时尚未完成初始化，因此您不能调用 `$widget->removeColumn()`。 [列表控制器文档](../backend/lists.md#oc-extending-column-definitions) 中描述的 `addColumns()` 方法将按预期工作，但是要删除一个列，我们需要在 `relationExtendViewWidget()` 方法中监听 'list.extendColumns' 事件。 以下示例显示如何删除列。
 
 ```php
 public function relationExtendViewWidget($widget, $field, $model)
@@ -441,7 +441,7 @@ public function relationExtendManageFilterWidget($widget, $field, $model)
 }
 ```
 
-关于如何在过滤器小部件中以编程方式添加或删除范围的示例可以在 [后端列表文档](../backend/lists.md#extending-filter-scopes) 的 **扩展过滤器范围** 部分中找到。
+关于如何在过滤器小部件中以编程方式添加或删除范围的示例可以在 [后端列表文档](../backend/lists.md#oc-extending-filter-scopes) 的 **扩展过滤器范围** 部分中找到。
 
 ### 扩展刷新结果
 

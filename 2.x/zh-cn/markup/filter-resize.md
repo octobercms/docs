@@ -22,4 +22,4 @@
 <img src="{{ 'banner.jpg'|resize(800, 600, { mode: 'crop' }) }}" />
 ```
 
-有关可用 `options` 参数的更多信息，请参阅[图像调整器文章](../services/resizer.md#resize-parameters) f
+有关可用 `options` 参数的更多信息，请参阅[图像调整器文章](../services/resizer.md#oc-resize-parameters) f

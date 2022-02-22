@@ -1,6 +1,6 @@
 # this.environment
 
-您可以通过 `this.environment` 访问当前环境对象，它会返回一个引用 [当前环境配置](../setup/configuration.md#environment-configuration)的字符串。
+您可以通过 `this.environment` 访问当前环境对象，它会返回一个引用 [当前环境配置](../setup/configuration.md#oc-environment-configuration)的字符串。
 
 ## 例子
 

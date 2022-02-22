@@ -6,7 +6,7 @@
 <script type="text/javascript" src="{{ 'assets/js/menu.js'|theme }}"></script>
 ```
 
-如果网站地址是 __https://octobercms.com__ 并且活动主题名为 `website`，则上面的示例将输出以下内容： 
+如果网站地址是 __https://octobercms.com__ 并且活动主题名为 `website`，则上面的示例将输出以下内容：
 
 ```html
 <script type="text/javascript" src="http://october.com/themes/website/assets/js/menu.js"></script>
@@ -26,9 +26,9 @@
 > **注意**: 您可以使用 `config/cms.php` 文件中的 `enableAssetMinify` 参数启用资产合并。 默认情况下，合并是禁用的。
 
 
-### 组合器别名 
+### 组合器别名
 
-资产组合器支持替换文件路径的常用别名，这些别名将以"@"符号开头。 例如 [AJAX 框架资产](../ajax/introduction.md#including-the-framework) 可以包含在组合器中:
+资产组合器支持替换文件路径的常用别名，这些别名将以"@"符号开头。 例如 [AJAX 框架资产](../ajax/introduction.md#oc-including-the-framework) 可以包含在组合器中:
 
 ```twig
 <script src="{{ [
@@ -53,7 +53,7 @@
 
 ### 动态组合器路径
 
-在某些情况下，您可能希望在主题之外组合文件，这是通过在路径前加上符号来创建动态路径来实现的。 例如，以 `~/` 开头的路径将创建一个相对于应用程序的路径： 
+在某些情况下，您可能希望在主题之外组合文件，这是通过在路径前加上符号来创建动态路径来实现的。 例如，以 `~/` 开头的路径将创建一个相对于应用程序的路径：
 
 ```twig
 <script src="{{ ['~/modules/system/assets/js/framework.js']|theme }}"></script>
@@ -64,5 +64,5 @@
 符号 | 描述
 ------------- | -------------
 `~` | 相对于应用程序目录
-`$` | 相对于插件目录 
+`$` | 相对于插件目录
 `#` | 相对于主题目录

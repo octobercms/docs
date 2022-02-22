@@ -21,7 +21,7 @@ plugins/
 
 ### 类定义
 
-控制器类必须扩展 `\Backend\Classes\Controller` 类。 与其他任何插件类一样，控制器应该属于 [插件命名空间](../plugin/registration.md#plugin-namespaces)。 在插件中使用的控制器最基本表示如下所示。
+控制器类必须扩展 `\Backend\Classes\Controller` 类。 与其他任何插件类一样，控制器应该属于 [插件命名空间](../plugin/registration.md#oc-plugin-namespaces)。 在插件中使用的控制器最基本表示如下所示。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -53,7 +53,7 @@ class Posts extends \Backend\Classes\Controller {
 **$pageTitle** | 设置页面标题。可以在action方法中设置。
 **$bodyClass** | 用于自定义布局的 body 类属性。可以在控制器构造函数或动作方法中设置。
 **$guarded** | 控制器特定的方法不能被称为动作。可以在控制器构造函数中扩展。
-**$layout** | 为控制器视图指定自定义布局(参见 [布局](../backend/views-partials.md#layouts-and-child-layouts))。
+**$layout** | 为控制器视图指定自定义布局(参见 [布局](../backend/views-partials.md#oc-layouts-and-child-layouts))。
 
 ## 动作、视图和路由
 
@@ -87,7 +87,7 @@ $this->vars['myVariable'] = 'value';
 
 ## 设置导航上下文
 
-插件可以在[插件注册文件](../plugin/registration.md#navigation-menus)中注册后台导航菜单和子菜单。导航上下文确定当前后端页面的活动后端菜单和子菜单。您可以使用 `BackendMenu` 类设置导航上下文：
+插件可以在[插件注册文件](../plugin/registration.md#oc-navigation-menus)中注册后台导航菜单和子菜单。导航上下文确定当前后端页面的活动后端菜单和子菜单。您可以使用 `BackendMenu` 类设置导航上下文：
 
 ```php
 BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
@@ -152,7 +152,7 @@ public function onOpenTemplate()
 </button>
 ```
 
-> **注意**：您可以使用前缀 `widget::onName` 专门针对小部件的 AJAX 处理程序。有关详细信息，请参阅 [小部件AJAX处理程序文章](../backend/widgets.md#ajax-handlers)。
+> **注意**：您可以使用前缀 `widget::onName` 专门针对小部件的 AJAX 处理程序。有关详细信息，请参阅 [小部件AJAX处理程序文章](../backend/widgets.md#oc-ajax-handlers)。
 
 ## 覆盖响应
 

@@ -80,7 +80,7 @@ echo Settings::get('is_activated', true);
 
 ###设置链接注册
 
-可以通过覆盖[插件注册类](registration.md#registration-file)中的`registerSettings`方法来扩展后端设置导航链接。 创建配置链接时，您有两个选项 - 创建指向特定后端页面的链接，或创建指向设置模型的链接。 下一个示例显示如何创建指向后端页面的链接。
+可以通过覆盖[插件注册类](registration.md#oc-registration-file)中的`registerSettings`方法来扩展后端设置导航链接。 创建配置链接时，您有两个选项 - 创建指向特定后端页面的链接，或创建指向设置模型的链接。 下一个示例显示如何创建指向后端页面的链接。
 
 ```php
 public function registerSettings()
@@ -125,7 +125,7 @@ public function registerSettings()
 
 ### 设置页面导航上下文
 
-就像[在控制器中设置导航上下文](../backend/controllers-ajax.md#setting-the-navigation-context) 一样，后端设置页面应该配置设置的导航上下文。 为了将系统页面侧栏中的当前设置链接标记为活动，这是必需的。 使用`System\Classes\SettingsManager`类来设置设置上下文。 通常它可以在控制器构造函数中完成：
+就像[在控制器中设置导航上下文](../backend/controllers-ajax.md#oc-setting-the-navigation-context) 一样，后端设置页面应该配置设置的导航上下文。 为了将系统页面侧栏中的当前设置链接标记为活动，这是必需的。 使用`System\Classes\SettingsManager`类来设置设置上下文。 通常它可以在控制器构造函数中完成：
 
 ```php
 public function __construct()

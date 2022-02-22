@@ -80,7 +80,7 @@ Form::ajax('onSave', ['update' => [
 
 #### CSRF 保护
 
-如果您启用了 [CSRF保护](../setup/configuration.md#csrf-protection)，使用 `Form::open` 方法和 `POST`、`PUT` 或 `DELETE` 将自动添加一个 CSRF 令牌到 您的表单作为隐藏字段。 或者，如果您希望为隐藏的 CSRF 字段生成 HTML，您可以使用 `token` 方法：
+如果您启用了 [CSRF保护](../setup/configuration.md#oc-csrf-protection)，使用 `Form::open` 方法和 `POST`、`PUT` 或 `DELETE` 将自动添加一个 CSRF 令牌到 您的表单作为隐藏字段。 或者，如果您希望为隐藏的 CSRF 字段生成 HTML，您可以使用 `token` 方法：
 
 ```php
 <?= Form::token() ?>
@@ -88,7 +88,7 @@ Form::ajax('onSave', ['update' => [
 
 #### 延迟绑定会话密钥
 
-用于 [延迟绑定](../database/relations.md#deferred-binding) 的会话密钥将作为隐藏字段添加到每个表单中。 如果你想手动生成这个字段，你可以使用 `sessionKey` 方法：
+用于 [延迟绑定](../database/relations.md#oc-deferred-binding) 的会话密钥将作为隐藏字段添加到每个表单中。 如果你想手动生成这个字段，你可以使用 `sessionKey` 方法：
 
 ```php
 <?= Form::sessionKey() ?>

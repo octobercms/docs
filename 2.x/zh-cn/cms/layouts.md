@@ -12,7 +12,7 @@
 </html>
 ```
 
-要为 [页面](pages.md) 使用布局，该页面应引用 [Configuration](themes.md#configuration-section) 部分中的布局文件名(不带扩展名)。请记住，如果您从 [子目录](themes.md#subdirectories) 引用布局，则应指定子目录名称。使用 default.htm 布局的示例页面模板：
+要为 [页面](pages.md) 使用布局，该页面应引用 [Configuration](themes.md#oc-configuration-section) 部分中的布局文件名(不带扩展名)。请记住，如果您从 [子目录](themes.md#oc-subdirectories) 引用布局，则应指定子目录名称。使用 default.htm 布局的示例页面模板：
 
 ```
 url = "/"
@@ -33,7 +33,7 @@ layout = "default"
 
 请注意，您可以在布局中渲染 [部件](partials.md)。这使您可以在不同布局之间共享公共标记元素。例如，您可以有一个部件输出网站 CSS 和 JavaScript 链接。这种方法简化了资源管理 - 如果您想添加 JavaScript 引用，您应该修改单个部件而不是编辑所有布局。
 
-[Configuration](themes.md#configuration-section) 部件对于布局是可选的。支持的配置参数是 **name** 和 **description**。这些参数是可选的，用于后端用户界面。带有描述的示例布局模板：
+[Configuration](themes.md#oc-configuration-section) 部件对于布局是可选的。支持的配置参数是 **name** 和 **description**。这些参数是可选的，用于后端用户界面。带有描述的示例布局模板：
 
 ```twig
 description = "基本布局示例"
@@ -98,11 +98,11 @@ layout = "default"
 
 ## 动态布局
 
-布局，就像页面一样，可以使用任何 Twig 功能。详情请参考[动态页面](pages.md#dynamic-pages) 文档。
+布局，就像页面一样，可以使用任何 Twig 功能。详情请参考[动态页面](pages.md#oc-dynamic-pages) 文档。
 
 ### 布局执行生命周期
 
-在布局的 [PHP 部分](themes.md#php-section) 中，您可以定义以下用于处理页面执行生命周期的函数：`onInit`、`onStart`、`onBeforePageStart` 和 `onEnd`。
+在布局的 [PHP 部分](themes.md#oc-php-section) 中，您可以定义以下用于处理页面执行生命周期的函数：`onInit`、`onStart`、`onBeforePageStart` 和 `onEnd`。
 
 `onInit` 函数在所有组件初始化时和 AJAX 请求被处理之前执行。 `onStart` 函数在页面处理开始时执行。 `onBeforePageStart` 函数在布局 [组件](components.md) 运行之后执行，但在页面的 `onStart` 函数执行之前。 `onEnd` 函数在页面呈现后执行。处理程序的执行顺序如下：
 

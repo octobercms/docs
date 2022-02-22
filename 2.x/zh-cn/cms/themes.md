@@ -154,7 +154,7 @@ echo $this->foo;
 
 ### Twig标记部分
 
-Twig 部分定义了模板要呈现的标记。在 Twig 部分，您可以使用函数、标签和过滤器 [由 October CMS 提供](../markup.md)，所有 [native Twig 功能](https://twig.symfony.com/doc/) ，或那些[由插件提供](../plugin/registration.md#extending-twig)。 Twig 部分的内容取决于模板类型(页面、布局或部件)。您可以在文档中进一步找到有关特定 Twig 对象的更多信息。
+Twig 部分定义了模板要呈现的标记。在 Twig 部分，您可以使用函数、标签和过滤器 [由 October CMS 提供](../markup.md)，所有 [native Twig 功能](https://twig.symfony.com/doc/) ，或那些[由插件提供](../plugin/registration.md#oc-extending-twig)。 Twig 部分的内容取决于模板类型(页面、布局或部件)。您可以在文档中进一步找到有关特定 Twig 对象的更多信息。
 
 可以在 [标记指南](../markup.md) 中找到更多信息。
 

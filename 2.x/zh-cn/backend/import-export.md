@@ -286,7 +286,7 @@ export:
     useList: true
 ```
 
-如果您使用 [多个列表定义](lists.md#multiple-list-definitions)，那么您可以提供列表定义：
+如果您使用 [多个列表定义](lists.md#oc-multiple-list-definitions)，那么您可以提供列表定义：
 
 ```yaml
 export:

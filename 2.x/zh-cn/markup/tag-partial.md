@@ -12,7 +12,7 @@
 {% partial "sidebar/menu" %}
 ```
 
-> **注意**:  [主题文档](../cms/themes.md#subdirectories) 有更多关于子目录使用的详细信息。
+> **注意**:  [主题文档](../cms/themes.md#oc-subdirectories) 有更多关于子目录使用的详细信息。
 
 部件名称也可以是变量：
 

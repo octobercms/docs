@@ -2,7 +2,7 @@
 
 ## 基本路由
 
-虽然为 [后端控制器](../backend/controllers-ajax.md) 自动处理路由，但 CMS 页面在其 [页面配置](../cms/pages.md#configuration) 中定义了自己的 URL 路由， 路由器服务主要用于定义固定的 API 和端点。
+虽然为 [后端控制器](../backend/controllers-ajax.md) 自动处理路由，但 CMS 页面在其 [页面配置](../cms/pages.md#oc-configuration) 中定义了自己的 URL 路由， 路由器服务主要用于定义固定的 API 和端点。
 
 您可以通过在与 [插件注册文件](../plugin/registration.md) 相同的目录中创建一个名为 **routes.php** 的文件来定义这些路由。 最基本的路由只接受一个 URI 和一个`闭包`：
 

@@ -14,7 +14,7 @@
 $users = Db::table('users')->get();
 ```
 
-与 [原生查询](../database/basics.md#running-raw-sql-queries) 类似，`get` 方法返回结果的`array`，其中每个结果都是 PHP `stdClass` 对象的一个实例。 您可以通过将字段作为对象的属性来访问每一列的值：
+与 [原生查询](../database/basics.md#oc-running-raw-sql-queries) 类似，`get` 方法返回结果的`array`，其中每个结果都是 PHP `stdClass` 对象的一个实例。 您可以通过将字段作为对象的属性来访问每一列的值：
 
 ```php
 foreach ($users as $user) {
@@ -68,7 +68,7 @@ foreach ($roles as $name => $title) {
 Db::select('select * from sometable where name = :name', ['name' => 'Charles']);
 ```
 
-有关详细信息，请参阅有关 [运行原生 SQL 查询](../database/basics.md#running-raw-sql-queries) 的文章。
+有关详细信息，请参阅有关 [运行原生 SQL 查询](../database/basics.md#oc-running-raw-sql-queries) 的文章。
 
 ### 分块结果
 

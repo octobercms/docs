@@ -1,6 +1,6 @@
 # 文件附件
 
-模型可以使用 [多态关联](../database/relations.md#polymorphic-relations) 的子集来支持文件附件。 `$attachOne` 或 `$attachMany` 关联设计用于将文件链接到称为"附件"的数据库记录。 几乎所有情况下，`System\Models\File` 模型都用于维护这种关系，其中对文件的引用作为记录存储在 `system_files` 表中，并且与父模型具有多态关联。
+模型可以使用 [多态关联](../database/relations.md#oc-polymorphic-relations) 的子集来支持文件附件。 `$attachOne` 或 `$attachMany` 关联设计用于将文件链接到称为"附件"的数据库记录。 几乎所有情况下，`System\Models\File` 模型都用于维护这种关系，其中对文件的引用作为记录存储在 `system_files` 表中，并且与父模型具有多态关联。
 
 在下面的示例中，模型有一个 Avatar 附件模型和许多照片附件模型。
 
@@ -124,7 +124,7 @@ echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
 <img src="{{ model.avatar.getThumb(100, 100, {'mode':'exact', 'quality': 80, 'extension': 'webp'}) }}" alt="Description Image" />
 ```
 
-在 [图像调整器文章](../services/resizer.md#resize-parameters) 上阅读有关 `getThumb` 可用选项的更多信息。
+在 [图像调整器文章](../services/resizer.md#oc-resize-parameters) 上阅读有关 `getThumb` 可用选项的更多信息。
 
 ## 用法示例
 
@@ -165,7 +165,7 @@ if (Input::hasFile('example_file')) {
 }
 ```
 
-或者，您可以使用 [延迟绑定](../database/relations.md#deferred-binding) 来延迟关联：
+或者，您可以使用 [延迟绑定](../database/relations.md#oc-deferred-binding) 来延迟关联：
 
 ```php
 // 查找博客文章模型
@@ -211,11 +211,11 @@ public $morphTo = [
 $user = $file->attachment;
 ```
 
-有关更多信息，请阅读 [多态关联](../database/relations.md#polymorphic-relations)
+有关更多信息，请阅读 [多态关联](../database/relations.md#oc-polymorphic-relations)
 
 ## 验证示例
 
-下面的示例使用 [数组验证](../services/validation.md#validating-arrays) 来验证 `$attachMany` 关联。
+下面的示例使用 [数组验证](../services/validation.md#oc-validating-arrays) 来验证 `$attachMany` 关联。
 
 ```php
 use System\Models\File;
@@ -238,4 +238,4 @@ class Gallery extends Model
 }
 ```
 
-有关上面使用的 `attribute.*` 语法的更多信息，请参阅 [验证数组](../services/validation.md#validating-arrays)。
+有关上面使用的 `attribute.*` 语法的更多信息，请参阅 [验证数组](../services/validation.md#oc-validating-arrays)。

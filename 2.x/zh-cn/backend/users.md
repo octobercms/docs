@@ -69,7 +69,7 @@ BackendAuth::login($user);
 
 ## 注册权限
 
-插件可以通过覆盖[插件注册类](../plugin/registration.md#registration-file)中的`registerPermissions`方法来注册后端用户权限。 权限被定义为一个数组，其中键对应于权限键，值对应于权限描述。 权限密钥由作者姓名、插件名称和功能名称组成。 这是一个示例代码：
+插件可以通过覆盖[插件注册类](../plugin/registration.md#oc-registration-file)中的`registerPermissions`方法来注册后端用户权限。 权限被定义为一个数组，其中键对应于权限键，值对应于权限描述。 权限密钥由作者姓名、插件名称和功能名称组成。 这是一个示例代码：
 
 ```
 acme.blog.access_categories

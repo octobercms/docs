@@ -74,7 +74,7 @@ class User extends Model
 }
 ```
 
-> **注意**：加密属性与 [`jsonable`](model#supported-properties) 属性不兼容。
+> **注意**：加密属性与 [`jsonable`](model#oc-supported-properties) 属性不兼容。
 
 ### 别名
 
@@ -253,7 +253,7 @@ $child2->makeChildOf($root);
 
 #### 删除节点
 
-当使用 `delete` 方法删除节点时，该节点的所有后代也将被删除。 请注意，不会为子模型触发删除[模型事件](../database/model.md#model-events)。
+当使用 `delete` 方法删除节点时，该节点的所有后代也将被删除。 请注意，不会为子模型触发删除[模型事件](../database/model.md#oc-model-events)。
 
 ```php
 $child1->delete();
@@ -299,7 +299,7 @@ class User extends Model
 }
 ```
 
-您也可以使用 [数组语法](../services/validation.md#validating-arrays) 来验证规则。
+您也可以使用 [数组语法](../services/validation.md#oc-validating-arrays) 来验证规则。
 
 ```php
 class User extends Model
@@ -331,7 +331,7 @@ $success = $user->save();
 
 当模型验证失败时，一个 `Illuminate\Support\MessageBag` 对象会附加到模型上。 包含验证失败消息的对象。 使用 `errors` 方法或 `$validationErrors` 属性检索验证错误消息集合实例。 使用 `errors()->all()` 检索所有验证错误。 使用 `validationErrors->get('attribute')` 检索 *specific* 属性的错误。
 
-> **注意**：模型利用 MessagesBag 对象，该对象具有 [简单而优雅的方法](../services/validation.md#working-with-error-messages) 格式化错误。
+> **注意**：模型利用 MessagesBag 对象，该对象具有 [简单而优雅的方法](../services/validation.md#oc-working-with-error-messages) 格式化错误。
 
 #### 覆盖验证
 
@@ -346,7 +346,7 @@ $user->forceSave();
 
 #### 自定义错误消息
 
-就像 Validator 类一样，您可以使用 [相同的语法](../services/validation.md#custom-error-messages) 设置自定义错误消息。
+就像 Validator 类一样，您可以使用 [相同的语法](../services/validation.md#oc-custom-error-messages) 设置自定义错误消息。
 
 ```php
 class User extends Model
@@ -396,7 +396,7 @@ class User extends Model
 
 #### 动态验证规则
 
-您可以通过覆盖 `beforeValidate` [模型事件](../database/model.md#events) 方法来动态应用规则。 这里我们检查 `is_remote` 属性是否为 `false`，然后动态设置 `latitude` 和 `longitude` 属性为必填字段。
+您可以通过覆盖 `beforeValidate` [模型事件](../database/model.md#oc-events) 方法来动态应用规则。 这里我们检查 `is_remote` 属性是否为 `false`，然后动态设置 `latitude` 和 `longitude` 属性为必填字段。
 
 ```php
 public function beforeValidate()
@@ -499,7 +499,7 @@ $user->posts()->forceDelete();
 
 ### 软删除关联
 
-当两个相关模型启用了软删除时，您可以通过在 [关联定义](../database/relations.md#detailed-relationships) 中定义 `softDelete` 选项来级联删除事件。 在这个例子中，如果用户模型被软删除，属于该用户的评论也将被软删除。
+当两个相关模型启用了软删除时，您可以通过在 [关联定义](../database/relations.md#oc-detailed-relationships) 中定义 `softDelete` 选项来级联删除事件。 在这个例子中，如果用户模型被软删除，属于该用户的评论也将被软删除。
 
 ```php
 class User extends Model

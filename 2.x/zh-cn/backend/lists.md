@@ -87,10 +87,10 @@ toolbar:
 ------------- | -------------
 **prompt** | 没有活动搜索时显示的占位符，可以参考 [多语言字符串](../plugin/localization.md)。
 **mode** | 将搜索策略定义为包含所有单词、任何单词或精确短语。 支持的选项： all(全部), any(任意), exact(精确)。 默认值：all。
-**scope** | 指定**列表模型**中定义的 [查询范围方法](../database/model.md#query-scopes) 以应用于搜索查询。 第一个参数将包含查询对象(根据常规范围方法)，第二个将包含搜索词，第三个将是要搜索的字段的数组。
+**scope** | 指定**列表模型**中定义的 [查询范围方法](../database/model.md#oc-query-scopes) 以应用于搜索查询。 第一个参数将包含查询对象(根据常规范围方法)，第二个将包含搜索词，第三个将是要搜索的字段的数组。
 **searchOnEnter** | 将此设置为 true 将使搜索小部件在开始搜索之前等待按下 Enter 键(默认行为是在有人在搜索字段中输入内容后自动开始搜索，然后暂停片刻)。 默认值：false。
 
-上面提到的工具栏按钮应该包含带有一些按钮的工具栏部件定义。 部件还可以包含带有图表的 [记分板控件](controls.md#scoreboards)。 带有 **新帖子** 按钮的工具栏部分示例，指的是 [表单行为](forms.md) 提供的 **create** 操作：
+上面提到的工具栏按钮应该包含带有一些按钮的工具栏部件定义。 部件还可以包含带有图表的 [记分板控件](controls.md#oc-scoreboards)。 带有 **新帖子** 按钮的工具栏部分示例，指的是 [表单行为](forms.md) 提供的 **create** 操作：
 ```php
 <div data-control="toolbar">
     <a
@@ -157,7 +157,7 @@ columns:
 **headCssClass** | 将 CSS 类分配给字段标题容器。
 **width** | 设置字段宽，可以以百分比 (10%) 或像素 (50px) 指定。可能有一个没有指定宽度的字段，它将被拉伸自适应。
 **align** | 指定字段对齐方式。可能的值是 `left`、`right` 和 `center`。
-**permissions** | 当前后端用户必须拥有的 [权限](users.md#users-and-permissions) 才能使用该列。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
+**permissions** | 当前后端用户必须拥有的 [权限](users.md#oc-users-and-permissions) 才能使用该列。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
 
 ### 自定义值选择
 
@@ -177,7 +177,7 @@ status_code:
     displayFrom: status_label
 ```
 
-这主要适用于 [模型存取器](../database/mutators.md#accessors-mutators) 用于修改显示值的情况。这在您想要显示某个值但按不同值排序和搜索时很有用。
+这主要适用于 [模型存取器](../database/mutators.md#oc-accessors-mutators) 用于修改显示值的情况。这在您想要显示某个值但按不同值排序和搜索时很有用。
 
 ```php
 public function getStatusLabelAttribute()
@@ -196,7 +196,7 @@ content[title]:
     sortable: false
 ```
 
-上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该字段可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#events) 在本地数据库表中复制其值。
+上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该字段可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#oc-events) 在本地数据库表中复制其值。
 
 ## 可用的字段类型
 
@@ -248,7 +248,7 @@ avatar:
         quality: 80
 ```
 
-有关支持哪些选项的更多信息，请参阅 [图像调整大小文章](../services/resizer.md#resize-parameters)。
+有关支持哪些选项的更多信息，请参阅 [图像调整大小文章](../services/resizer.md#oc-resize-parameters)。
 
 <a name="column-number"></a>
 ### 数字
@@ -400,7 +400,7 @@ full_name:
 ['open' => 'Open', 'closed' => 'Closed']
 ```
 
-可用选项在模型上定义为 [下拉选项](forms.md#field-dropdown)。
+可用选项在模型上定义为 [下拉选项](forms.md#oc-field-dropdown)。
 
 ```yaml
 status:
@@ -559,12 +559,12 @@ scopes:
 **label** | 向用户显示过滤器范围时的名称。
 **type** | 定义应如何呈现此范围(请参阅下面的 [范围类型](#available-scope-types))。默认值：group。
 **conditions** | 指定要应用于列表模型查询的原始 where 查询语句，`:filtered` 参数表示过滤后的值。
-**scope** | 指定**列表模型**中定义的[查询范围方法](../database/model.md#query-scopes)以应用于列表查询。第一个参数将包含查询对象(根据常规范围方法)，第二个参数将包含过滤后的值
+**scope** | 指定**列表模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)以应用于列表查询。第一个参数将包含查询对象(根据常规范围方法)，第二个参数将包含过滤后的值
 **options** | 如果按多个项目过滤时使用的选项，此选项可以在 `modelClass` 模型中指定数组或方法名称。
 **emptyOption** | 故意为空的选择的可选标签。
 **nameFrom** | 如果按多个项目过滤，则为名称显示的属性，取自`modelClass`模型的所有记录。
 **default** | 可以是整数(开关、复选框、数字)或数组(组、日期范围、数字范围)或字符串(日期)。
-**permissions** | 当前后端用户必须拥有的 [权限](users.md#users-and-permissions) 才能使用过滤器范围。支持单个权限的字符串或仅需要一个权限即可授予访问的权限数组。
+**permissions** | 当前后端用户必须拥有的 [权限](users.md#oc-users-and-permissions) 才能使用过滤器范围。支持单个权限的字符串或仅需要一个权限即可授予访问的权限数组。
 **dependsOn** | 此范围[依赖](#filter-scope-dependencies)的字符串或其他范围名称的数组。当修改其他范围时，此范围将更新。
 
 ### 过滤依赖项
@@ -1086,7 +1086,7 @@ public function listExtendRecords($records)
 
 ### 自定义字段类型
 
-自定义列表字段类型可以通过[插件注册类](../plugin/registration.md#registration-methods)的`registerListColumnTypes`方法在后端注册。该方法应返回一个数组，其中键是类型名称，值是可调用函数。可调用函数接收三个参数，本机`$value`、`$column` 定义对象和模型`$record` 对象。
+自定义列表字段类型可以通过[插件注册类](../plugin/registration.md#oc-registration-methods)的`registerListColumnTypes`方法在后端注册。该方法应返回一个数组，其中键是类型名称，值是可调用函数。可调用函数接收三个参数，本机`$value`、`$column` 定义对象和模型`$record` 对象。
 
 ```php
 public function registerListColumnTypes()

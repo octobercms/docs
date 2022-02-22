@@ -17,7 +17,7 @@
 **data-request-complete** |  指定在请求成功完成或遇到错误时要执行的 JavaScript 代码。
 **data-request-loading** |  为在请求运行时要显示的元素指定 CSS 选择器。您可以使用此选项来显示 AJAX 加载指示器。该功能使用 jQuery 的 `show()` 和 `hide()` 函数来管理元素可见性。
 **data-request-form** |  明确指定用于获取表单数据的表单元素。如果未指定，则使用与触发元素最接近的表单，包括元素本身是否为表单。
-**data-request-flash** |  指定时，此选项指示服务器清除并发送任何带有响应的快速消息。 [额外功能](../ajax/extras.md#flash-messages) 也使用此选项。
+**data-request-flash** |  指定时，此选项指示服务器清除并发送任何带有响应的快速消息。 [额外功能](../ajax/extras.md#oc-flash-messages) 也使用此选项。
 **data-request-files** |  指定请求将接受文件上传时，这需要浏览器支持 `FormData` 接口。
 **data-browser-validate** |  指定的基于浏览器的客户端验证，将在请求提交之前运行时。
 **data-track-input** |  可以应用于同样具有 `data-request` 属性的文本、数字或密码输入字段。定义后，输入字段会在用户在字段中键入内容时自动发送 AJAX 请求。可选属性值可以定义时间间隔，以毫秒为单位，框架在发送请求之前等待。
@@ -74,7 +74,7 @@
 </div>
 ```
 
-在请求中包含 [文件上传](../services/request-input.md#files)：
+在请求中包含 [文件上传](../services/request-input.md#oc-files)：
 
 ```html
 <form data-request="onSubmit" data-request-files>

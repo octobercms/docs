@@ -156,7 +156,7 @@ Db::listen(function($sql, $bindings, $time) {
 });
 ```
 
-就像 [事件注册](../services/events.md#where-to-register-listeners)一样，您可以在 [插件注册文件](../plugin/registration.md#registration-methods) 的 `boot` 方法中注册查询侦听器。 或者，可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置此逻辑。
+就像 [事件注册](../services/events.md#oc-where-to-register-listeners)一样，您可以在 [插件注册文件](../plugin/registration.md#oc-registration-methods) 的 `boot` 方法中注册查询侦听器。 或者，可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置此逻辑。
 
 ### 查询记录
 
@@ -178,4 +178,4 @@ $queries = Db::getQueryLog();
 Db::connection()->disableQueryLog();
 ```
 
-> **注意**：为了更快地调试，调用 `trace_sql` [助手函数](../services/error-log.md#helper-functions) 可能更有用。
+> **注意**：为了更快地调试，调用 `trace_sql` [助手函数](../services/error-log.md#oc-helper-functions) 可能更有用。

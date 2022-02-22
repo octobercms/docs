@@ -13,7 +13,7 @@
 
 ## 变量
 
-某些组件在渲染时支持 [传递变量](../cms/components.md#passing-variables-to-components) :
+某些组件在渲染时支持 [传递变量](../cms/components.md#oc-passing-variables-to-components) :
 
 ```twig
 {% component "blogPosts" postsPerPage="5" %}
@@ -23,5 +23,5 @@
 
 在大多数情况下，不需要 `{% component %}` 标签，并且提供标记作为组件 API 的使用示例。 组件旨在定制，这可以通过两种方式完成：
 
-1. [将默认标记移动到部件](../cms/components.md#moving-default-markup-to-a-partial)
-1. [覆盖组件部件](../cms/components.md#overriding-component-partials)
+1. [将默认标记移动到部件](../cms/components.md#oc-moving-default-markup-to-a-partial)
+1. [覆盖组件部件](../cms/components.md#oc-overriding-component-partials)
