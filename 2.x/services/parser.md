@@ -1,6 +1,6 @@
 # Parser
 
-October CMS uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes.md) use the [Twig](#twig-template-parser) and [INI format](#initialization-ini-configuration-parser) in their template structure. Each parser is described in more detail below.
+October CMS uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes.md) use the [Twig](#oc-twig-template-parser) and [INI format](#oc-ini-configuration-parser) in their template structure. Each parser is described in more detail below.
 
 <a id="oc-markdown-parser"></a>
 ## Markdown Parser
@@ -62,6 +62,7 @@ If you intentionally want to enable Markdown inside a block-level tag, you may d
 </div>
 ```
 
+<a id="oc-twig-template-parser"></a>
 ## Twig Template Parser
 
 Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup/templating.md), [view content](../services/response-view.md#oc-views) and [mail message content](../services/mail.md#oc-message-content).
@@ -146,6 +147,7 @@ The parser also supports operation in reverse, outputting YAML format from a PHP
 $yamlString = Yaml::render($array);
 ```
 
+<a id="oc-ini-configuration-parser"></a>
 ## Initialization (INI) Configuration Parser
 
 The INI file format is a standard for defining simple configuration files, commonly used by [components inside theme templates](../cms/components.md). It could be considered a cousin of the YAML format, although unlike YAML, it is incredibly simple, less sensitive to typos and does not rely on indentation. It supports basic key-value pairs with sections, for example:
@@ -234,7 +236,7 @@ echo $syntax->render(['websiteName' => 'October CMS']);
 // <h1>October CMS</h1>
 ```
 
-As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#twig-template-parser).
+As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#oc-twig-template-parser).
 
 ```php
 echo $syntax->toTwig();

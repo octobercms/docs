@@ -118,7 +118,7 @@ Route::get('user/profile', ['as' => 'profile', function () {
 
 #### Route Groups & Named Routes
 
-If you are using [route groups](#route-groups), you may specify an `as` keyword in the route group attribute array, allowing you to set a common route name prefix for all routes within the group:
+If you are using [route groups](#oc-route-groups), you may specify an `as` keyword in the route group attribute array, allowing you to set a common route name prefix for all routes within the group:
 
 ```php
 Route::group(['as' => 'admin::'], function () {
@@ -148,6 +148,7 @@ Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
 $url = Url::route('profile', ['id' => 1]);
 ```
 
+<a id="oc-route-groups"></a>
 ## Route Groups
 
 Route groups allow you to share route attributes across a large number of routes without needing to define those attributes on each individual route. Shared attributes are specified in an array format as the first parameter to the `Route::group` method.

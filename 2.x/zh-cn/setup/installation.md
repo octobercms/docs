@@ -20,7 +20,7 @@ October中文文档全部由["超越无限"](https://octobercms.com/partners/pro
 
 October CMS 使用[Composer](http://getcomposer.org/) 来管理它的依赖。因此，在开始之前，您需要确保已安装 Composer。
 
-您还应该检查您的计算机或服务器是否满足运行 PHP 应用程序的 [最低系统要求](#minimum-system-requirements) 。
+您还应该检查您的计算机或服务器是否满足运行 PHP 应用程序的 [最低系统要求](#oc-minimum-system-requirements) 。
 
 ## 安装 October CMS
 
@@ -92,6 +92,7 @@ php artisan serve
 php artisan queue:work
 ```
 
+<a id="oc-minimum-system-requirements"></a>
 ## 最低系统要求
 
 October CMS 对服务器有一些要求：

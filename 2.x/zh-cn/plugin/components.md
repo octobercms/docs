@@ -112,7 +112,7 @@ public function defineProperties()
 **required** | 可选，强制填充字段。留空时使用validationMessage。
 **placeholder** | 字符串和下拉属性的可选占位符。
 **options** | 下拉属性的可选选项数组。
-**depends** | 下拉属性所依赖的属性名称数组。请参阅下面的 [下拉属性](#dropdown-and-set-properties)。
+**depends** | 下拉属性所依赖的属性名称数组。请参阅下面的 [下拉属性](#oc-dropdown-and-set-properties)。
 **group** | 一个可选的组名。组在检查器中创建部件以简化用户体验。在多个属性中使用相同的组名来组合它们。
 **showExternalParam** | 为检查器中的属性指定外部参数编辑器的可见性。默认值：**true**。
 
@@ -140,7 +140,8 @@ $properties = $this->getProperties();
 {{ __SELF__.property('maxItems') }}
 ```
 
-###下拉和设置属性
+<a id="oc-dropdown-and-set-properties"></a>
+### 下拉和设置属性
 
 下拉列表和设置属性的选项列表可以是静态的或动态的。 静态选项是用属性定义的`options` 元素定义的。 例子：
 
@@ -283,6 +284,7 @@ $this->property('id');
 $this->paramName('id');
 ```
 
+<a id="oc-handling-the-page-execution-cycle"></a>
 ## 处理页面执行周期
 
 通过覆盖组件类中的`onRun` 方法，组件可以参与到页面执行循环事件中。 每次页面或布局加载时，CMS 控制器都会执行此方法。 在该方法中，您可以通过 `page` 属性将变量注入到 Twig 环境中：
@@ -478,7 +480,7 @@ function onGetTemplate()
 }
 ```
 
-另一个示例可能是通过从 `onRun` [页面循环方法](#handling-the-page-execution-cycle) 返回一个值来覆盖整个页面视图响应。 此代码将使用 `Response` 门面专门返回一个 XML 响应：
+另一个示例可能是通过从 `onRun` [页面循环方法](#oc-handling-the-page-execution-cycle) 返回一个值来覆盖整个页面视图响应。 此代码将使用 `Response` 门面专门返回一个 XML 响应：
 
 ```php
 public function onRun()

@@ -40,7 +40,6 @@ $collection = new October\Rain\Support\Collection([1, 2, 3]);
 [avg](#method-avg)-获取指定数组key的平均值
 [chunk](#method-chunk)-集合分块
 [collapse](#method-collapse)-多维数组转一维数组
-[collect](#method-collect)-返回一个新的 `Collection` 实例
 [combine](#method-combine)-数组key和数组value组合合并
 [concat](#method-concat)-集合末端附加指定数组或集合
 [contains](#method-contains)-检查集合是否包含指定的元素
@@ -242,43 +241,6 @@ $combined->all();
 
 // ['name' => 'George', 'age' => 29]
 ```
-
-<a name="method-collect"></a>
-#### `collect()`
-
-`collect` 方法返回一个新的 `Collection` 实例，其中包含当前集合中的项目：
-
-```php
-$collectionA = new Collection([1, 2, 3]);
-
-$collectionB = $collectionA->collect();
-
-$collectionB->all();
-
-// [1, 2, 3]
-```
-
-`collect` 方法主要用于将 [懒集合](#lazy-collections) 转换为标准的 `Collection` 实例：
-
-```php
-$lazyCollection = LazyCollection::make(function () {
-    yield 1;
-    yield 2;
-    yield 3;
-});
-
-$collection = $lazyCollection->collect();
-
-get_class($collection);
-
-// 'October\Rain\Support\Collection'
-
-$collection->all();
-
-// [1, 2, 3]
-```
-
-> **提示**：当你有一个 `Enumerable` 的实例并且需要一个非懒集合实例时，`collect` 方法特别有用。 由于 `collect()` 是 `Enumerable` 合约的一部分，您可以安全地使用它来获取 `Collection` 实例。
 
 <a name="method-concat"></a>
 #### `concat()`

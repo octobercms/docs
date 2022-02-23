@@ -88,13 +88,14 @@ class Category extends Model
 
 The following relations types are available:
 
-- [One To One](#one-to-one)
-- [One To Many](#one-to-many)
-- [Many To Many](#many-to-many)
-- [Has Many Through](#has-many-through)
-- [Has One Through](#has-one-through)
-- [Polymorphic Relations](#polymorphic-relations)
+- [One To One](#relation-one-to-one)
+- [One To Many](#relation-one-to-many)
+- [Many To Many](#relation-many-to-many)
+- [Has Many Through](#relation-has-many-through)
+- [Has One Through](#relation-has-one-through)
+- [Polymorphic Relations](#relation-polymorphic-relations)
 
+<a id="relation-one-to-one"></a>
 ### One To One
 
 A one-to-one relationship is a very basic relation. For example, a `User` model might be associated with one `Phone`. To define this relationship, we add a `phone` entry to the `$hasOne` property on the `User` model.
@@ -184,6 +185,7 @@ public $belongsTo = [
 ];
 ```
 
+<a id="relation-one-to-many"></a>
 ### One To Many
 
 A one-to-many relationship is used to define relationships where a single model owns any amount of other models. For example, a blog post may have an infinite number of comments. Like all other relationships, one-to-many relationships are defined adding an entry to the `$hasMany` property on your model:
@@ -260,6 +262,7 @@ public $belongsTo = [
 ];
 ```
 
+<a id="relation-many-to-many"></a>
 ### Many To Many
 
 Many-to-many relations are slightly more complicated than `hasOne` and `hasMany` relationships. An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin". To define this relationship, three database tables are needed: `users`, `roles`, and `role_user`. The `role_user` table is derived from the alphabetical order of the related model names, and contains the `user_id` and `role_id` columns.
@@ -398,6 +401,7 @@ Argument | Description
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot` while for polymorphic relation `October\Rain\Database\MorphPivot`.
 **timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
 
+<a id="relation-has-many-through"></a>
 ### Has Many Through
 
 The has-many-through relationship provides a convenient short-cut for accessing distant relations via an intermediate relation. For example, a `Country` model might have many `Post` models through an intermediate `User` model. In this example, you could easily gather all blog posts for a given country. Let's look at the tables required to define this relationship:
@@ -450,6 +454,7 @@ public $hasManyThrough = [
 ];
 ```
 
+<a id="relation-has-one-through"></a>
 ### Has One Through
 
 The has-one-through relationship links models through a single intermediate relation. For example, if each supplier has one user, and each user is associated with one user history record, then the supplier model may access the user's history through the user. Let's look at the database tables necessary to define this relationship:
@@ -497,7 +502,7 @@ public $hasOneThrough = [
 ];
 ```
 
-<a id="oc-polymorphic-relations"></a>
+<a id="relation-polymorphic-relations"></a>
 ## Polymorphic Relations
 
 Polymorphic relations allow a model to belong to more than one other model on a single association.
@@ -747,6 +752,7 @@ Relation::morphMap([
 
 The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods).
 
+<a id="oc-querying-relations"></a>
 ## Querying Relations
 
 Since all types of Model relationships can be called via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of relationships also serve as [query builders](query.md), allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.
@@ -786,7 +792,7 @@ foreach ($user->posts as $post) {
 }
 ```
 
-Dynamic properties are "lazy loading", meaning they will only load their relationship data when you actually access them. Because of this, developers often use [eager loading](#eager-loading) to pre-load relationships they know will be accessed after loading the model. Eager loading provides a significant reduction in SQL queries that must be executed to load a model's relations.
+Dynamic properties are "lazy loading", meaning they will only load their relationship data when you actually access them. Because of this, developers often use [eager loading](#oc-eager-loading) to pre-load relationships they know will be accessed after loading the model. Eager loading provides a significant reduction in SQL queries that must be executed to load a model's relations.
 
 ### Querying Relationship Existence
 
@@ -858,6 +864,7 @@ $user->loadCount(['roles' => function ($query) {
 }])
 ```
 
+<a id="oc-eager-loading"></a>
 ## Eager Loading
 
 When accessing relationships as properties, the relationship data is "lazy loaded". This means the relationship data is not actually loaded until you first access the property. However, models can "eager load" relationships at the time you query the parent model. Eager loading alleviates the N + 1 query problem. To illustrate the N + 1 query problem, consider a `Book` model that is related to `Author`:
@@ -963,7 +970,7 @@ $books->load([
 
 ## Inserting Related Models
 
-Just like you would [query a relationship](#querying-relations), October supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
+Just like you would [query a relationship](#oc-querying-relations), October supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
 
 ### Insert via Relationship Method
 

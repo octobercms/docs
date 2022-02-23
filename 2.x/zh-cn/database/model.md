@@ -70,8 +70,8 @@ class User extends Model
 **$dates** | 获取后，值将转换为 Carbon/DateTime 对象的实例。
 **$timestamps** | 布尔值，如果为 true 将自动设置 created_at 和 updated_at 字段。
 **$jsonable** | 值在保存之前被编码为 JSON，并在获取后转换为数组。
-**$fillable** | values 是 [批量赋值](#mass-assignment) 可访问的字段。
-**$guarded** | 值是受 [批量赋值](#mass-assignment) 保护的字段。
+**$fillable** | values 是 [批量赋值](#oc-mass-assignment) 可访问的字段。
+**$guarded** | 值是受 [批量赋值](#oc-mass-assignment) 保护的字段。
 **$visible** | 值是在 [序列化模型数据](../database/serialization.md) 时可见的字段。
 **$hidden** | 值是在 [序列化模型数据](../database/serialization.md) 时隐藏的字段。
 **$connection** | 包含模型默认使用的 [连接名称](../database/basics.md#oc-multiple-database-connections) 的字符串。
@@ -154,8 +154,9 @@ class Post extends Model
 
 ## 检索模型
 
-当从数据库请求数据时，模型将主要使用 `get` 或 `first` 方法检索值，具体取决于您是希望 [检索多个模型](#retrieving-multiple-models) 还是 [检索单个模型]( #retrieving-a-single-model)。从模型派生的查询返回 [October\Rain\Database\Builder](../api/october/rain/database/builder) 的实例。
+当从数据库请求数据时，模型将主要使用 `get` 或 `first` 方法检索值，具体取决于您是希望 [检索多个模型](#oc-retrieving-multiple-models) 还是 [检索单个模型](#oc-retrieving-a-single-model)。从模型派生的查询返回 [October\Rain\Database\Builder](../api/october/rain/database/builder) 的实例。
 
+<a id="oc-retrieving-multiple-models"></a>
 ### 检索多个模型
 
 一旦你创建了一个模型和[其关联的数据库表](../database/structure.md#oc-migration-structure)，你就可以开始从你的数据库中检索数据了。将每个模型视为一个强大的 [查询构建器](../database/query.md)，允许您查询与模型关联的数据库表。例如：
@@ -211,6 +212,7 @@ Flight::chunk(200, function ($flights) {
 
 传递给该方法的第一个参数是您希望每个"分块"接收的记录数。 作为第二个参数传递的闭包将为从数据库中检索到的每个块调用。
 
+<a id="oc-retrieving-a-single-model"></a>
 ### 检索单个模型
 
 传递到方法的第一个参数是希望每个"分块"接收的数据量。闭包作为第二个参数传递，它在每次从数据库中检索分块的时候调用。它将执行数据库查询把检索分块的结果传递给闭包方法。
@@ -384,7 +386,7 @@ Flight::destroy(1, 2, 3);
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
-> **注意**：比较重要的一点是在直接从查询中删除记录时不会触发[模型事件](#model-events)
+> **注意**：比较重要的一点是在直接从查询中删除记录时不会触发[模型事件](#oc-model-events)
 
 <a id="oc-query-scopes"></a>
 ## 查询范围
@@ -538,7 +540,7 @@ $flight->bindEvent('model.beforeCreate', function() use ($model) {
 });
 ```
 
-这种方法也可以用来绑定到 [本地事件](#events)，下面的代码监听 `model.beforeSave` 事件。
+这种方法也可以用来绑定到 [本地事件](#oc-model-events)，下面的代码监听 `model.beforeSave` 事件。
 
 ```php
 \Backend\Models\User::extend(function($model) {

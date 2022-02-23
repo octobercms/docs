@@ -1,6 +1,6 @@
 # File Attachments
 
-Models can support file attachments using a subset of the [polymorphic relationship](../database/relations.md#oc-polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
+Models can support file attachments using a subset of the [polymorphic relationship](../database/relations.md#relation-polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
 
 In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 
@@ -211,7 +211,7 @@ Example:
 $user = $file->attachment;
 ```
 
-For more information read the [polymorphic relationships](../database/relations.md#oc-polymorphic-relations)
+For more information read the [polymorphic relationships](../database/relations.md#relation-polymorphic-relations)
 
 ## Validation Example
 

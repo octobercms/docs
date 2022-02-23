@@ -2,7 +2,7 @@
 
 **Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model.md) relationships on a page. Not to be confused with [List relation columns](lists.md#oc-available-column-types) or [Form relation fields](forms.md#widget-relation) that only provide simple management.
 
-Relation behavior depends on [relation definitions](#relationship-types). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#oc-configuring-the-relation-behavior).
+Relation behavior depends on [relation definitions](#oc-relationship-types). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#oc-configuring-the-relation-behavior).
 
 ```php
 namespace Acme\Projects\Controllers;
@@ -24,7 +24,7 @@ class Projects extends Controller
 <a id="oc-configuring-the-relation-behavior"></a>
 ## Configuring the Relation Behavior
 
-The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
+The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). The required configuration depends on the [relationship type](#oc-relationship-types) between the target model and the related model.
 
 The first level field in the relation configuration file defines the relationship name in the target model. For example:
 
@@ -148,6 +148,7 @@ flashLink | :name Linked
 flashRemove | :name Removed
 flashUnlink | :name Unlinked
 
+<a id="oc-relationship-types"></a>
 ## Relationship Types
 
 How the relation manager is displayed depends on the relationship definition in the target model. The relationship type will also determine the configuration requirements, these are shown in **bold**. The following relationship types are available:

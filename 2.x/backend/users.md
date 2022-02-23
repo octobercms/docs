@@ -76,7 +76,7 @@ Plugins can register back-end user permissions by overriding the `registerPermis
 acme.blog.access_categories
 ```
 
-The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the user access to [pages](#restricting-access-to-backend-pages) or [features](#restricting-access-to-features).
+The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the user access to [pages](#oc-restricting-access-to-backend-pages) or [features](#oc-restricting-access-to-features).
 
 ```php
 public function registerPermissions()
@@ -109,6 +109,7 @@ public function registerPermissions()
 }
 ```
 
+<a id="oc-restricting-access-to-backend-pages"></a>
 ## Restricting Access to Backend Pages
 
 In a back-end controller class you can specify which permissions are required for access the pages provided by the controller. It's done with the `$requiredPermissions` controller's property. This property should contain an array of permission keys. If the user permissions match any permission from the list, the framework will let the user to see the controller pages.
@@ -130,6 +131,7 @@ You can also use the **asterisk** symbol to indicate the "all permissions" condi
 public $requiredPermissions = ['acme.blog.*'];
 ```
 
+<a id="oc-restricting-access-to-features"></a>
 ## Restricting Access to Features
 
 The back-end user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the back-end user interface. The permission methods supported by the back-end user are `hasAccess` and `hasPermission`. Both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.

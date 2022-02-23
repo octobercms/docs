@@ -40,7 +40,7 @@ url = "/blog"
 url = "/blog/post/:post_id"
 ```
 
-这是从页面的 PHP 部分访问 URL 参数的方法(有关更多详细信息，请参阅 [动态页面](#dynamic-pages) 部分)：
+这是从页面的 PHP 部分访问 URL 参数的方法(有关更多详细信息，请参阅 [动态页面](#oc-dynamic-pages) 部分)：
 
 ```
 url = "/blog/post/:post_id"
@@ -99,6 +99,7 @@ url = "/blog/:slug?*"
 
 > **注意**：子目录不影响页面 URL - URL 仅使用 **url** 参数定义。
 
+<a id="oc-dynamic-pages"></a>
 ## 动态页面
 
 在页面模板的 [Twig 部分](themes.md#oc-twig-section) 内，您可以使用任何 [由 October 提供的功能、过滤器和标签](../markup/templating.md)。任何动态页面都需要**变量**。 在October，变量可能由页面、布局[PHP 部分](themes.md#oc-php-section) 或[组件](components.md) 准备。在本文中，我们将在 PHP 部分描述如何准备变量。

@@ -5,7 +5,7 @@
 1.打开文件`storage/logs/system.log`可以在文件系统中查看事件日志。
 1. 或者，可以通过管理区域导航到 *System[设置] > Logs[日志] > Event Log[事件日志]* 来查看它。
 
-当显示错误页面和某些 [异常类型](#exception-types) 时，始终会创建日志条目。
+当显示错误页面和某些 [异常类型](#oc-exception-types) 时，始终会创建日志条目。
 
 ## 配置
 
@@ -38,6 +38,7 @@ October 支持 `single`、`daily`、`syslog` 和 `errorlog` 日志记录模式�
 'log' => 'daily'
 ```
 
+<a id="oc-exception-types"></a>
 ## 可用的异常
 
 October CMS 提供了几种预置好的基本异常类型。

@@ -2,6 +2,7 @@
 
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the October CMS Marketplace.
 
+<a id="oc-theme-information-file"></a>
 ## Theme Information File
 
 The theme information file **theme.yaml** contains the theme description, the author name, URL of the author's website and some other information. The file should be placed to the theme root directory:
@@ -23,8 +24,8 @@ Field | Description
 **previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
 **code** | the theme code, optional. The value is used on the October CMS marketplace for initializing the theme code value.
 **authorCode** | the theme author code, optional. The value is used on the October CMS marketplace for defining the theme owner.
-**form** | a configuration array or reference to a form field definition file, used for [theme customization](#theme-customization), optional.
-**require** | an array of plugin names used for [theme dependencies](#theme-dependencies), optional.
+**form** | a configuration array or reference to a form field definition file, used for [theme customization](#oc-theme-customization), optional.
+**require** | an array of plugin names used for [theme dependencies](#oc-theme-dependencies), optional.
 
 Example of the theme information file:
 
@@ -153,7 +154,7 @@ a { color: @link-color }
 <a id="oc-theme-dependencies"></a>
 ## Theme Dependencies
 
-A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information-file), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
+A theme can depend on plugins by defining a **require** option in the [Theme information file](#oc-theme-information-file), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:
 
 ```yaml
 name: "October CMS Demo"

@@ -84,7 +84,7 @@ return Response::make($content)->withCookie('name', 'value');
 
 ### 查看响应
 
-如果您需要访问 `Response` 类方法，但又想返回  [视图](#views) 作为响应内容，可以使用 `Response::view` 方法方便：
+如果您需要访问 `Response` 类方法，但又想返回  [视图](#oc-views) 作为响应内容，可以使用 `Response::view` 方法方便：
 
 ```php
 return Response::view('acme.blog::hello')->header('Content-Type', $type);

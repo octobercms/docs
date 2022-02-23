@@ -18,7 +18,7 @@ plugins/
 <a id="oc-update-process"></a>
 ## Update Process
 
-During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#important-updates). Any given migration or seed file will only be excuted once after a successful update. October executes the update process automatically when any of the following occurs:
+During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#oc-important-updates). Any given migration or seed file will only be excuted once after a successful update. October executes the update process automatically when any of the following occurs:
 
 1. When an administrator signs in to the backend.
 1. When the system is updated using the update feature in the backend area.
@@ -64,6 +64,7 @@ As you can see above, there should be a key that represents the version number f
 v1.0.1: A single comment that uses no update scripts.
 ```
 
+<a id="oc-important-updates"></a>
 ### Important Updates
 
 Sometimes a plugin needs to introduce features that will break websites already using the plugin. To prevent the changes from being deployed automatically, you should increase the **major** segment of the version string (`major.minor.patch`). An example of an important update comment is below.

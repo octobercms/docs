@@ -17,7 +17,7 @@ To run October CMS locally, we recommend the following software:
 
 October CMS uses [Composer](http://getcomposer.org/) to manage its dependencies. So before getting started, you will need to make sure you have Composer installed.
 
-You should also check that your computer or server meets the [minimum system requirements](#minimum-system-requirements) for running the PHP application.
+You should also check that your computer or server meets the [minimum system requirements](#oc-minimum-system-requirements) for running the PHP application.
 
 ## Installing October CMS
 
@@ -90,6 +90,7 @@ You can also run the queue as a daemon process with
 php artisan queue:work
 ```
 
+<a id="oc-minimum-system-requirements"></a>
 ## Minimum System Requirements
 
 October CMS has some server requirements for web hosting:

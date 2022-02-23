@@ -5,7 +5,7 @@
 <a id="oc-migration-structure"></a>
 ## 迁移结构
 
-迁移文件应该定义一个扩展 `October\Rain\Database\Updates\Migration` 类并包含两个方法： `up` 和 `down`。`up` 方法是用于新增数据库的数据表、字段或者索引的，而`down` 方法应该与 `up` 方法的执行操作相反。在这两种方法中，您都可以使用 [结构生成器](#creating-tables) 来创建和修改表。 例如，让我们看一个创建 `october_blog_posts` 表的示例迁移：
+迁移文件应该定义一个扩展 `October\Rain\Database\Updates\Migration` 类并包含两个方法： `up` 和 `down`。`up` 方法是用于新增数据库的数据表、字段或者索引的，而`down` 方法应该与 `up` 方法的执行操作相反。在这两种方法中，您都可以使用 [结构生成器](#oc-creating-tables) 来创建和修改表。 例如，让我们看一个创建 `october_blog_posts` 表的示例迁移：
 
 ```php
 <?php namespace Acme\Blog\Updates;
@@ -38,6 +38,7 @@ class CreatePostsTable extends Migration
 }
 ```
 
+<a id="oc-creating-tables"></a>
 ### 创建表
 
 要创建一个新的数据库表，请使用 `Schema`门面上的 create 方法。 `create` 方法接受两个参数。 第一个是表的名称，而第二个是一个`Closure`，它接收一个用于定义新表的对象：
@@ -158,7 +159,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
-以下是所有可用的字段修饰符的列表。此列表不包括 [索引修饰符](#creating-indexes)：
+以下是所有可用的字段修饰符的列表。此列表不包括 [索引修饰符](#oc-creating-indexes)：
 
 命令  |  描述
 ------------- | -------------
@@ -218,6 +219,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
+<a id="oc-creating-indexes"></a>
 ### 创建索引
 
 结构生成器支持多种类型的索引。首先，先指定字段值唯一，即简单地在字段定义之后链式调用 `unique` 方法来创建索引，例如：

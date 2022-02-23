@@ -1,6 +1,6 @@
 # 文件附件
 
-模型可以使用 [多态关联](../database/relations.md#oc-polymorphic-relations) 的子集来支持文件附件。 `$attachOne` 或 `$attachMany` 关联设计用于将文件链接到称为"附件"的数据库记录。 几乎所有情况下，`System\Models\File` 模型都用于维护这种关系，其中对文件的引用作为记录存储在 `system_files` 表中，并且与父模型具有多态关联。
+模型可以使用 [多态关联](../database/relations.md#relation-polymorphic-relations) 的子集来支持文件附件。 `$attachOne` 或 `$attachMany` 关联设计用于将文件链接到称为"附件"的数据库记录。 几乎所有情况下，`System\Models\File` 模型都用于维护这种关系，其中对文件的引用作为记录存储在 `system_files` 表中，并且与父模型具有多态关联。
 
 在下面的示例中，模型有一个 Avatar 附件模型和许多照片附件模型。
 
@@ -211,7 +211,7 @@ public $morphTo = [
 $user = $file->attachment;
 ```
 
-有关更多信息，请阅读 [多态关联](../database/relations.md#oc-polymorphic-relations)
+有关更多信息，请阅读 [多态关联](../database/relations.md#relation-polymorphic-relations)
 
 ## 验证示例
 

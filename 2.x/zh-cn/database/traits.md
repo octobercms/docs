@@ -53,7 +53,7 @@ class User extends Model
 }
 ```
 
-保存模型时，在触发 [模型事件](#model-events) 之前，将清除定义的属性，包括验证。 使用 `getOriginalPurgeValue` 查找已清除的值。
+保存模型时，在触发 [模型事件](#oc-model-events) 之前，将清除定义的属性，包括验证。 使用 `getOriginalPurgeValue` 查找已清除的值。
 
 ```php
 return $user->getOriginalPurgeValue('password_confirmation');
@@ -62,7 +62,7 @@ return $user->getOriginalPurgeValue('password_confirmation');
 <a id="oc-encryptable"></a>
 ### 可加密
 
-与 [哈希散列](#hashable) 类似，加密属性在设置时被加密，但在检索到属性时也会被解密。 要加密模型中的属性，请应用 `October\Rain\Database\Traits\Encryptable` 特征并使用包含要加密的属性的数组声明 `$encryptable` 属性。
+与 [哈希散列](#oc-hashable) 类似，加密属性在设置时被加密，但在检索到属性时也会被解密。 要加密模型中的属性，请应用 `October\Rain\Database\Traits\Encryptable` 特征并使用包含要加密的属性的数组声明 `$encryptable` 属性。
 
 ```php
 class User extends Model

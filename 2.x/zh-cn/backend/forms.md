@@ -216,7 +216,7 @@ secondaryTabs:
 **context** | 指定显示字段时应使用的上下文。上下文也可以通过在字段名称中使用 `@` 符号来传递，例如，`name@update`。
 **dependsOn** | 其他字段名称的数组，该字段[取决于](#oc-field-dependencies)，当其他字段被修改时，该字段将更新。
 **trigger** | 使用 [触发事件](#oc-trigger-events) 指定此字段的条件。
-**preset** | 允许字段值最初由另一个字段的值设置，使用 [输入预设转换器](#input-preset-converter) 进行转换。
+**preset** | 允许字段值最初由另一个字段的值设置，使用 [输入预设转换器](#oc-input-preset-converter) 进行转换。
 **required** | 在字段标签旁边放置一个红色星号表示它是必填项。请务必使用 [模型验证](../database/traits.md#oc-validation)，因为表单控制器不强制执行此操作。
 **attributes** | 指定要添加到表单字段元素的自定义 HTML 属性。
 **containerAttributes** | 指定要添加到表单字段容器的自定义 HTML 属性。
@@ -929,7 +929,7 @@ avatar:
 **thumbOptions** | 用于生成缩略图的附加属性 [调整大小选项](../services/resizer.md#oc-resize-parameters)
 **attachOnUpload** | 如果父记录存在，则在上传时自动附加上传的文件，而不是在保存父记录时使用延迟绑定来附加。默认值:`false`
 
-> **注意**:与 [媒体选择器表单小部件](#mediafinder) 不同，文件上传表单小部件使用 [数据库文件附件](../database/attachments.md)，因此字段名称是关联模型上的`attachEd`或`attachMent`关系属性名称。
+> **注意**:与 [媒体选择器表单小部件](#widget-mediafinder) 不同，文件上传表单小部件使用 [数据库文件附件](../database/attachments.md)，因此字段名称是关联模型上的`attachEd`或`attachMent`关系属性名称。
 
 <a name="widget-markdowneditor"></a>
 ### Markdown 编辑器
@@ -966,7 +966,7 @@ background_image:
 **imageWidth** | 如果使用图像类型，预览图片会显示到这个宽度，可选。
 **imageHeight** | 如果使用图片类型，预览图片会显示到这个高度，可选。
 
-> **注意**:与 [文件上传表单小部件](#file-upload) 不同，媒体选择器表单小部件将其所选媒体文件的路径存储为字符串。 它应该与模型上的正常属性相关联。
+> **注意**:与 [文件上传表单小部件](#widget-fileupload) 不同，媒体选择器表单小部件将其所选媒体文件的路径存储为字符串。 它应该与模型上的正常属性相关联。
 
 <a name="widget-nestedform"></a>
 ### 嵌套表单
@@ -1335,6 +1335,7 @@ tags:
 
 有时您可能希望在某些条件下操作表单字段的值或外观，例如，如果选中复选框，您可能希望隐藏输入。 有几种方法可以做到这一点，通过使用触发器 API 或字段依赖项。 输入预设转换器主要用于转换字段值。 这些选项将在下面更详细地描述。
 
+<a id="oc-input-preset-converter"></a>
 ### 输入预置转换器
 
 输入预设转换器使用 `preset` [表单字段选项](#oc-field-options) 定义，允许您将输入到元素中的文本转换为另一个输入元素中的 URL、slug 或文件名值。
@@ -1484,7 +1485,7 @@ git_branch:
     dependsOn: source_type
 ```
 
-您还可以扩展其他模型以应用 `filterFields` 逻辑，有关详细信息，请参阅 [过滤表单字段](#filtering-form-fields) 部分。
+您还可以扩展其他模型以应用 `filterFields` 逻辑，有关详细信息，请参阅 [过滤表单字段](#oc-filtering-form-fields) 部分。
 
 ### 临时字段
 
@@ -1599,6 +1600,7 @@ $form 对象可以使用以下方法。
 
 每个方法都采用类似于 [表单字段配置](#oc-defining-form-fields) 的字段数组。
 
+<a id="oc-filtering-form-fields"></a>
 ### 过滤表单字段
 
 如 [字段依赖项](#oc-field-dependencies) 中所述，您还可以通过挂钩到 `form.filterFields` 事件来实现表单字段过滤。

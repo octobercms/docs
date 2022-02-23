@@ -47,7 +47,7 @@ The configuration options listed below are optional.
 
 Option | Description
 ------------- | -------------
-**filter** | filter configuration, see [filtering the list](#filtering-the-list).
+**filter** | filter configuration, see [filtering the list](#oc-filtering-the-list).
 **recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms.md).
 **recordOnClick** | custom JavaScript code to execute when clicking on a record.
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization.md).
@@ -101,6 +101,7 @@ The toolbar buttons partial referred above should contain the toolbar control de
 </div>
 ```
 
+<a id="oc-filtering-the-list"></a>
 ### Filtering the List
 
 To filter a list by user defined input, add the following list configuration to the YAML file:
@@ -109,7 +110,7 @@ To filter a list by user defined input, add the following list configuration to 
 filter: config_filter.yaml
 ```
 
-The **filter** option should make reference to a [filter configuration file](#using-list-filters) path or supply an array with the configuration.
+The **filter** option should make reference to a [filter configuration file](#oc-using-list-filters) path or supply an array with the configuration.
 
 <a id="oc-defining-list-columns"></a>
 ## Defining List Columns
@@ -204,7 +205,7 @@ The above example would look for the value in PHP equivalent of `$record->conten
 <a id="oc-available-column-types"></a>
 ## Available Column Types
 
-There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
+There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#oc-custom-column-types).
 
 <div class="content-list" markdown="1">
 
@@ -507,7 +508,7 @@ Each definition can then be displayed by passing the definition name as the firs
 <a id="oc-using-list-filters"></a>
 ## Using List Filters
 
-Lists can be filtered by [adding a filter definition](#filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+Lists can be filtered by [adding a filter definition](#oc-filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
 ```yaml
 # ===================================
@@ -556,6 +557,7 @@ scopes:
         conditions: created_at >= ':after' AND created_at <= ':before'
 ```
 
+<a id="oc-scope-options"></a>
 ### Scope Options
 
 For each scope you can specify these options (where applicable):
@@ -571,11 +573,12 @@ Option | Description
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer (switch, checkbox, number) or array (group, date range, number range) or string (date).
 **permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
-**dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
+**dependsOn** | a string or an array of other scope names that this scope [depends on](#oc-filter-scope-dependencies). When the other scopes are modified, this scope will update.
 
+<a id="oc-filter-scope-dependencies"></a>
 ### Filter Dependencies
 
-Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#oc-scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
 
 ```yaml
 country:
@@ -1005,7 +1008,7 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-> The array of scopes provided is similar to the [list filters configuration](#using-list-filters).
+> The array of scopes provided is similar to the [list filters configuration](#oc-using-list-filters).
 
 You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
@@ -1069,7 +1072,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-The [list filter](#using-list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
+The [list filter](#oc-using-list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
 
 ```php
 public function listFilterExtendQuery($query, $scope)

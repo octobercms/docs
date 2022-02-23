@@ -40,7 +40,7 @@ URLs with parameters are more flexible. A page with the URL pattern defined in t
 url = "/blog/post/:post_id"
 ```
 
-This is how you can access the URL parameter from the page's PHP section (see the [Dynamic pages](#dynamic-pages) section for more details):
+This is how you can access the URL parameter from the page's PHP section (see the [Dynamic pages](#oc-dynamic-pages) section for more details):
 
 ```
 url = "/blog/post/:post_id"
@@ -99,6 +99,7 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 
 > **Note**: Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
 
+<a id="oc-dynamic-pages"></a>
 ## Dynamic Pages
 
 Inside the [Twig section](themes.md#oc-twig-section) of a page template, you can use any [functions, filters, and tags provided by October](../markup/templating.md). Any dynamic page requires **variables**. In October, variables may be prepared by the page, layout [PHP section](themes.md#oc-php-section), or by [Components](components.md). In this article, we describe how to prepare variables in the PHP section.

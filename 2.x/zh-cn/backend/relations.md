@@ -2,7 +2,7 @@
 
 **Relation Behavior** 是一个控制器修饰符，用于轻松管理页面上的复杂 [模型](../database/model.md) 关系。 不要与仅提供简单管理的[列关系](lists.md#oc-available-column-types) 或 [表单关系字段](forms.md#widget-relation) 混淆。
 
-关系行为取决于[关系定义](#relationship-types)。 为了使用关系行为，您应该将 `Backend\Behaviors\RelationController` 定义添加到控制器类的 `$implement` 字段中。 此外，应定义 `$relationConfig` 类属性，其值应参考用于[配置行为选项](#oc-configuring-the-relation-behavior) 的 YAML 文件。
+关系行为取决于[关系定义](#oc-relationship-types)。 为了使用关系行为，您应该将 `Backend\Behaviors\RelationController` 定义添加到控制器类的 `$implement` 字段中。 此外，应定义 `$relationConfig` 类属性，其值应参考用于[配置行为选项](#oc-configuring-the-relation-behavior) 的 YAML 文件。
 
 ```php
 namespace Acme\Projects\Controllers;
@@ -24,7 +24,7 @@ class Projects extends Controller
 <a id="oc-configuring-the-relation-behavior"></a>
 ## 配置关系行为
 
-`$relationConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [视图目录](controllers-ajax.md) 中。 所需的配置取决于目标模型和相关模型之间的 [关系类型](#relationship-types)。
+`$relationConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [视图目录](controllers-ajax.md) 中。 所需的配置取决于目标模型和相关模型之间的 [关系类型](#oc-relationship-types)。
 
 关系配置文件中的第一级字段定义目标模型中的关系名称。 例如：
 
@@ -148,6 +148,7 @@ flashLink | :name 已关联
 flashRemove | :name 已移除
 flashUnlink | :name 未关联
 
+<a id="oc-relationship-types"></a>
 ## 关系类型
 
 关系管理器的显示方式取决于目标模型中的关系定义。关系类型也将决定配置要求，这些以**粗体**显示。可以使用以下关系类型：

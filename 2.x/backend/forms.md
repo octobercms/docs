@@ -216,7 +216,7 @@ Option | Description
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#oc-field-dependencies), when the other fields are modified, this field will update.
 **trigger** | specify conditions for this field using [trigger events](#oc-trigger-events).
-**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#input-preset-converter).
+**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#oc-input-preset-converter).
 **required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#oc-validation) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
@@ -935,7 +935,7 @@ Option | Description
 **thumbOptions** | additional [resize options](../services/resizer.md#oc-resize-parameters) for generating the thumbnail
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
 
-> **Note**: Unlike the [Media Finder form widget](#mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
+> **Note**: Unlike the [Media Finder form widget](#widget-mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown Editor
@@ -971,7 +971,7 @@ Option | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 
-> **Note**: Unlike the [File Upload form widget](#file-upload), the Media Finder form widget stores its data as a string representing the path to the media files selected within the Media Library. It should associate to a normal attribute on your model.
+> **Note**: Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the media files selected within the Media Library. It should associate to a normal attribute on your model.
 
 <a name="widget-nestedform"></a>
 ### Nested Form
@@ -1342,6 +1342,7 @@ The **preview.htm** view represents the Preview page that allows users to previe
 
 Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are a few ways you can do this, either by using the trigger API or field dependencies. The input preset converter is primarily used to converting field values. These options are described in more detail below.
 
+<a id="oc-input-preset-converter"></a>
 ### Input Preset Converter
 
 The input preset converter is defined with the `preset` [form field option](#oc-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
@@ -1491,7 +1492,7 @@ git_branch:
     dependsOn: source_type
 ```
 
-You may also extend other models to apply the `filterFields` logic, see the [Filtering Form Fields](#filtering-form-fields) section for more details.
+You may also extend other models to apply the `filterFields` logic, see the [Filtering Form Fields](#oc-filtering-form-fields) section for more details.
 
 ### Field Facades
 
@@ -1606,6 +1607,7 @@ Method | Description
 
 Each method takes an array of fields similar to the [form field configuration](#oc-defining-form-fields).
 
+<a id="oc-filtering-form-fields"></a>
 ### Filtering Form Fields
 
 As described in the [field dependencies section](#oc-field-dependencies), you may also implement form field filtering by extension by hooking in to the `form.filterFields` event.

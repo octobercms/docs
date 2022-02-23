@@ -118,7 +118,7 @@ Route::get('user/profile', ['as' => 'profile', function () {
 
 #### 路由分组和命名路由
 
-如果您使用 [路由分组](#route-groups)，您可以在路由组属性数组中指定一个 `as` 关键字，允许您为组内的所有路由设置一个通用的路由名称前缀：
+如果您使用 [路由分组](#oc-route-groups)，您可以在路由组属性数组中指定一个 `as` 关键字，允许您为组内的所有路由设置一个通用的路由名称前缀：
 
 ```php
 Route::group(['as' => 'admin::'], function () {
@@ -148,6 +148,7 @@ Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
 $url = Url::route('profile', ['id' => 1]);
 ```
 
+<a id="oc-route-groups"></a>
 ## 路由组
 
 路由组允许您在大量路由之间共享路由属性，而无需在每个单独的路由上定义这些属性。 共享属性以数组格式指定为 `Route::group` 方法的第一个参数。

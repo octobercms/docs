@@ -53,7 +53,7 @@ class User extends Model
 }
 ```
 
-The defined attributes will be purged when the model is saved, before the [model events](#model-events) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
+The defined attributes will be purged when the model is saved, before the [model events](#oc-model-events) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
 
 ```php
 return $user->getOriginalPurgeValue('password_confirmation');
@@ -62,7 +62,7 @@ return $user->getOriginalPurgeValue('password_confirmation');
 <a id="oc-encryptable"></a>
 ### Encryptable
 
-Similar to the [hashable trait](#hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
+Similar to the [hashable trait](#oc-hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
 
 ```php
 class User extends Model

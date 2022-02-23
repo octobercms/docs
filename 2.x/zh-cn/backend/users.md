@@ -76,7 +76,7 @@ BackendAuth::login($user);
 acme.blog.access_categories
 ```
 
-下一个示例显示如何注册后端权限项。 权限是使用权限密钥和描述定义的。 在后端权限管理用户界面中，权限显示为复选框列表。 后端控制器可以使用插件定义的权限来限制用户访问 [页面](#restricting-access-to-backend-pages) 或 [功能](#restricting-access-to-features)。
+下一个示例显示如何注册后端权限项。 权限是使用权限密钥和描述定义的。 在后端权限管理用户界面中，权限显示为复选框列表。 后端控制器可以使用插件定义的权限来限制用户访问 [页面](#oc-restricting-access-to-backend-pages) 或 [功能](#oc-restricting-access-to-features)。
 
 ```php
 public function registerPermissions()
@@ -109,6 +109,7 @@ public function registerPermissions()
 }
 ```
 
+<a id="oc-restricting-access-to-backend-pages"></a>
 ## 限制对后端页面的访问
 
 在后端控制器类中，您可以指定访问控制器提供的页面需要哪些权限。 它是通过 `$requiredPermissions` 控制器的属性完成的。 此属性应包含一组权限键。 如果用户权限与列表中的任何权限匹配，则框架将让用户查看控制器页面。
@@ -130,6 +131,7 @@ class Posts extends BackendController
 public $requiredPermissions = ['acme.blog.*'];
 ```
 
+<a id="oc-restricting-access-to-features"></a>
 ## 限制对功能的访问
 
 后端用户模型具有允许确定用户是否具有特定权限的方法。 您可以使用此功能来限制后端用户界面的功能。 后端用户支持的权限方式有`hasAccess`和`hasPermission`。 这两种方法都采用两个参数：权限键字符串（或键字符串数组）和一个可选参数，该参数指示与第一个参数一起列出的所有权限都是必需的。

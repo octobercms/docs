@@ -8,6 +8,7 @@ October CMS 使用 [Composer](https://getcomposer.org/) 发布包并且完全兼
 
 确保以 **-plugin** 或 **-theme** 开头的包 `name` 分别以 **-plugin** 或 **-theme** 结尾，这将有助于其他人找到您的包，并且符合 [开发者指南](../../ 帮助/指南/developer.md#package-naming）。
 
+<a id="oc-publishing-plugins"></a>
 ### 发布插件
 
 发布插件时，`composer.json` 文件至少应包含此 JSON 内容。 请注意，包名必须以 **-plugin** 结尾，并包含 `composer/installers` 包作为依赖项。
@@ -25,6 +26,7 @@ October CMS 使用 [Composer](https://getcomposer.org/) 发布包并且完全兼
 
 代码为 **Acme.Blog** 的插件将具有 `acme/blog-plugin` 的 composer 包名称，并将安装在 **plugins/acme/blog** 目录中。
 
+<a id="oc-publishing-themes"></a>
 ### 发布主题
 
 发布主题时，`composer.json` 文件至少应包含此 JSON 内容。 请注意，包名必须以 **-theme** 结尾，并包含 `composer/installers` 包作为依赖项。
@@ -125,7 +127,7 @@ git tag -a v2.0.1 -m "Version 2 is here!"
 
 ## 私人插件和主题
 
-Composer 允许您将来自 GitHub 和其他提供商的私有存储库添加到您的 October CMS 项目中。 确保您分别遵循了 [发布插件](#publishing-plugins) 和 [主题](#publishing-themes) 的相同说明。
+Composer 允许您将来自 GitHub 和其他提供商的私有存储库添加到您的 October CMS 项目中。 确保您分别遵循了 [发布插件](#oc-publishing-plugins) 和 [主题](#oc-publishing-themes) 的相同说明。
 
 在所有情况下，您都应该将您的私有插件或主题的副本存储在主项目可用的某个位置。 `plugin:install` 和 `theme:install` 命令可用于从远程或本地源安装私人插件。 这会将位置添加到您的作曲家文件中，并像安装任何其他软件包一样安装它。
 
@@ -162,9 +164,9 @@ Laravel 包通常会提供配置文件，您应该将此配置复制到插件目
 
 ```php
 return [
-    'encoding'      => 'UTF-8',
-    'finalize'      => true,
-    'cachePath'     => storage_path('app/purifier'),
+    'encoding' => 'UTF-8',
+    'finalize' => true,
+    'cachePath' => storage_path('app/purifier'),
     'cacheFileMode' => 0755,
 ];
 ```

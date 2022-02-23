@@ -17,7 +17,7 @@ October CMS 包括几个命令行界面 (CLI) 命令和实用程序，可让您�
 
     php artisan october:migrate
 
-`--rollback` 选项将反转所有迁移，删除数据库表和删除数据。 使用此命令时应小心。 [插件刷新命令](#refresh-plugin) 是调试单个插件的有用替代方法。
+`--rollback` 选项将反转所有迁移，删除数据库表和删除数据。 使用此命令时应小心。 [插件刷新命令](#oc-refresh-plugin) 是调试单个插件的有用替代方法。
 
     php artisan october:migrate --rollback
 
@@ -74,6 +74,7 @@ October CMS 包含许多用于管理插件的命令。
 
     php artisan plugin:check
 
+<a id="oc-refresh-plugin"></a>
 ### 刷新插件
 
 `plugin:refresh` - 销毁插件的数据库表并重新创建它们。 该命令对开发很有用。

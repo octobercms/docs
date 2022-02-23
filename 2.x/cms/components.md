@@ -115,7 +115,7 @@ In the October back-end you can use the Inspector tool for assigning external va
 <a id="oc-passing-variables-to-components"></a>
 ## Passing Variables to Components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#oc-passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including [external property values](#using-external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#oc-passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including [external property values](#oc-using-external-property-values).
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 
@@ -127,7 +127,7 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
 ## Customizing Default Markup
 
-The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. [Moving the default markup to a theme partial](#moving-default-markup-to-a-partial) is suitable to completely overhaul a component. [Overriding the component partials](#overriding-component-partials) is useful for cherry picking areas to customize.
+The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. [Moving the default markup to a theme partial](#oc-moving-default-markup-to-a-partial) is suitable to completely overhaul a component. [Overriding the component partials](#oc-overriding-component-partials) is useful for cherry picking areas to customize.
 
 <a id="oc-moving-default-markup-to-a-partial"></a>
 ### Moving Default Markup to a Partial

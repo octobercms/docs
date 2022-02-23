@@ -4,7 +4,7 @@
 
 1. 定义[组件](components.md)。
 1. 定义[用户权限](../backend/users.md)。
-1. 添加[设置页面](settings.md#oc-backend-settings-pages)、[菜单项](#navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md）。
+1. 添加[设置页面](settings.md#oc-backend-settings-pages)、[菜单项](#oc-navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md）。
 1. 创建[数据库表结构和种子数据](updates.md)。
 1. 更改[核心或其他插件的功能](events.md)。
 1. 提供类、[后端控制器](../backend/controllers-ajax)、视图、资产等文件。
@@ -87,9 +87,9 @@ class Plugin extends \System\Classes\PluginBase
 **pluginDetails()** | 返回有关插件的信息。
 **register()** | register 方法，在插件首次注册时调用。
 **boot()** | boot 方法，在请求路由之前调用。
-**registerMarkupTags()** | 注册可在 CMS 中使用的 [附加标记标签](#extending-twig)。
+**registerMarkupTags()** | 注册可在 CMS 中使用的 [附加标记标签](#oc-extending-twig)。
 **registerComponents()** | 注册此插件使用的任何 [前端组件](components#oc-component-registration)。
-**registerNavigation()** | 为这个插件注册[后端导航菜单项](#navigation-menus)。
+**registerNavigation()** | 为这个插件注册[后端导航菜单项](#oc-navigation-menus)。
 **registerPermissions()** | 注册此插件使用的任何 [后端权限](../backend/users#oc-registering-permissions)。
 **registerSettings()** | 注册此插件使用的任何 [后端配置链接](settings#oc-settings-link-registration)。
 **registerFormWidgets()** | 注册此插件提供的任何 [后端表单小部件](../backend/widgets#oc-form-widget-registration)。
@@ -140,7 +140,7 @@ Route::get('api_acme_blog/cleanup_posts', function() {
 <a id="oc-dependency-definitions"></a>
 ## 依赖定义
 
-插件可以通过在[插件注册文件](#registration-file) 中定义`$require` 属性来依赖其他插件，该属性应包含被视为需求的插件名称数组。 依赖 **Acme.User** 插件的插件可以通过以下方式声明此要求：
+插件可以通过在[插件注册文件](#oc-registration-file) 中定义`$require` 属性来依赖其他插件，该属性应包含被视为需求的插件名称数组。 依赖 **Acme.User** 插件的插件可以通过以下方式声明此要求：
 
 ```php
 namespace Acme\Blog;
@@ -195,7 +195,7 @@ public function makeTextAllCaps($text)
 <a id="oc-navigation-menus"></a>
 ## 导航菜单
 
-插件可以通过覆盖[插件注册类](#registration-file)的`registerNavigation`方法来扩展后端导航菜单。 本节向您展示如何将菜单项添加到后端导航区域。 注册具有两个子菜单项的顶级导航菜单项的示例：
+插件可以通过覆盖[插件注册类](#oc-registration-file)的`registerNavigation`方法来扩展后端导航菜单。 本节向您展示如何将菜单项添加到后端导航区域。 注册具有两个子菜单项的顶级导航菜单项的示例：
 
 ```php
 public function registerNavigation()

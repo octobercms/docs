@@ -47,7 +47,7 @@ recordUrl: acme/blog/posts/update/:id
 
 选项 | 描述
 ------------- | -------------
-**filter** | 过滤器配置，参见[过滤列表](#filtering-the-list)。
+**filter** | 过滤器配置，参见[过滤列表](#oc-filtering-the-list)。
 **recordUrl** | 将每个列表记录链接到另一个页面。例如：**users/update:id**。 `:id` 部分被替换为记录标识符。这允许您链接列表行为和 [表单行为](forms.md)。
 **recordOnClick** | 单击记录时要执行的自定义 JavaScript 代码。
 **noRecordsMessage** | 未找到记录时显示的消息，可以参考 [多语言字符串](../plugin/localization.md)。
@@ -100,6 +100,7 @@ toolbar:
 </div>
 ```
 
+<a id="oc-filtering-the-list"></a>
 ### 过滤列表
 
 要按用户定义的输入过滤列表，请将以下列表配置添加到 YAML 文件：
@@ -108,7 +109,7 @@ toolbar:
 filter: config_filter.yaml
 ```
 
-**filter** 选项应引用 [过滤器配置文件](#using-list-filters) 路径或提供带有配置的数组。
+**filter** 选项应引用 [过滤器配置文件](#oc-using-list-filters) 路径或提供带有配置的数组。
 
 <a id="oc-defining-list-columns"></a>
 ## 定义列表字段
@@ -203,7 +204,7 @@ content[title]:
 <a id="oc-available-column-types"></a>
 ## 可用的字段类型
 
-有多种字段类型可用于 **type** 设置，它们控制列表字段的显示方式。除了下面指定的原生字段类型外，您还可以[定义自定义字段类型](#custom-column-types)。
+有多种字段类型可用于 **type** 设置，它们控制列表字段的显示方式。除了下面指定的原生字段类型外，您还可以[定义自定义字段类型](#oc-custom-column-types)。
 
 <div class="content-list" markdown="1">
 
@@ -506,7 +507,7 @@ public $listConfig = [
 <a id="oc-using-list-filters"></a>
 ## 使用列表过滤器
 
-可以通过 [添加过滤器定义](#filtering-the-list) 到列表配置来过滤列表。类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。
+可以通过 [添加过滤器定义](#oc-filtering-the-list) 到列表配置来过滤列表。类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。
 
 ```yaml
 # ===================================
@@ -555,6 +556,7 @@ scopes:
         conditions: created_at >= ':after' AND created_at <= ':before'
 ```
 
+<a id="oc-scope-options"></a>
 ### 范围选项
 
 对于每个范围，您可以指定这些选项(如果适用)：
@@ -570,11 +572,12 @@ scopes:
 **nameFrom** | 如果按多个项目过滤，则为名称显示的属性，取自`modelClass`模型的所有记录。
 **default** | 可以是整数(开关、复选框、数字)或数组(组、日期范围、数字范围)或字符串(日期)。
 **permissions** | 当前后端用户必须拥有的 [权限](users.md#oc-users-and-permissions) 才能使用过滤器范围。支持单个权限的字符串或仅需要一个权限即可授予访问的权限数组。
-**dependsOn** | 此范围[依赖](#filter-scope-dependencies)的字符串或其他范围名称的数组。当修改其他范围时，此范围将更新。
+**dependsOn** | 此范围[依赖](#oc-filter-scope-dependencies)的字符串或其他范围名称的数组。当修改其他范围时，此范围将更新。
 
+<a id="oc-filter-scope-dependencies"></a>
 ### 过滤依赖项
 
-过滤器作用域可以通过定义`dependsOn` [作用域选项](#scope-options)来声明对其他作用域的依赖关系，它提供了一个服务器端解决方案，用于在修改它们的依赖关系时更新作用域。当声明为依赖项的范围发生变化时，定义范围将动态更新。这提供了更改要提供给范围的可用选项的机会。
+过滤器作用域可以通过定义`dependsOn` [作用域选项](#oc-scope-options)来声明对其他作用域的依赖关系，它提供了一个服务器端解决方案，用于在修改它们的依赖关系时更新作用域。当声明为依赖项的范围发生变化时，定义范围将动态更新。这提供了更改要提供给范围的可用选项的机会。
 
 ```yaml
 country:
@@ -1004,7 +1007,7 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-> 提供的范围数组类似于 [列表过滤器配置](#using-list-filters)。
+> 提供的范围数组类似于 [列表过滤器配置](#oc-using-list-filters)。
 
 您也可以在内部将过滤器范围扩展到控制器类，只需覆盖 `listFilterExtendScopes` 方法。
 
@@ -1068,7 +1071,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-[列表过滤器](#using-list-filters) 模型查询也可以通过覆盖 `listFilterExtendQuery` 方法来扩展：
+[列表过滤器](#oc-using-list-filters) 模型查询也可以通过覆盖 `listFilterExtendQuery` 方法来扩展：
 
 ```php
 public function listFilterExtendQuery($query, $scope)

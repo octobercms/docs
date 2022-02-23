@@ -1,6 +1,6 @@
 # 解析器
 
-October CMS 使用多种标准来处理标记、模板和配置。 每一个都经过精心挑选，以发挥它们的作用，使您的开发过程和学习曲线尽可能简单。 例如，[在主题中找到的对象](../cms/themes.md)在其模板结构中使用[Twig](#twig-template-parser)和[INI format](#initialization-ini-configuration-parser)格式。下面更详细地描述每个解析器。
+October CMS 使用多种标准来处理标记、模板和配置。 每一个都经过精心挑选，以发挥它们的作用，使您的开发过程和学习曲线尽可能简单。 例如，[在主题中找到的对象](../cms/themes.md)在其模板结构中使用[Twig](#oc-twig-template-parser)和[INI format](#oc-ini-configuration-parser)格式。下面更详细地描述每个解析器。
 
 <a id="oc-markdown-parser"></a>
 ## Markdown解析器
@@ -62,6 +62,7 @@ Markdown 是 HTML 的超集，因此您可以将 HTML 和 Markdown 组合在同�
 </div>
 ```
 
+<a id="oc-twig-template-parser"></a>
 ## Twig 模板解析器
 
 Twig 是一个简单但功能强大的模板引擎，可以将 HTML 模板解析为优化的 PHP 代码，它是 [前端标记](../markup/templating.md)、[视图内容](../services/response-view.md#oc-views) 和 [邮件内容](../services/mail.md#oc-message-content) 背后的驱动力。
@@ -146,6 +147,7 @@ $array = Yaml::parseFile($filePath);
 $yamlString = Yaml::render($array);
 ```
 
+<a id="oc-ini-configuration-parser"></a>
 ## 初始化(INI)配置解析器
 
 INI 文件格式是定义简单配置文件的标准，常用[主题模板中的组件](../cms/components.md)。 它可以被认为是 YAML 格式的表亲，尽管与 YAML 不同，它非常简单，对拼写错误不太敏感，并且不依赖缩进。 它支持具有分段的基本键值对，例如：
@@ -234,7 +236,7 @@ echo $syntax->render(['websiteName' => 'October CMS']);
 // <h1>October CMS</h1>
 ```
 
-作为一项额外功能，调用 `toTwig` 方法将输出处于准备状态的模板，以供 [Twig 引擎](#twig-template-parser) 渲染。
+作为一项额外功能，调用 `toTwig` 方法将输出处于准备状态的模板，以供 [Twig 引擎](#oc-twig-template-parser) 渲染。
 
 ```php
 echo $syntax->toTwig();

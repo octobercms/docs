@@ -115,7 +115,7 @@ url = "/todo/:maxItems"
 <a id="oc-passing-variables-to-components"></a>
 ## 将变量传递给组件
 
-组件可以设计成在渲染的时候使用变量，类似于[部件变量](partials.md#oc-passing-variables-to-partials)，可以在`{% component %}` 中的组件名后指定标签。指定的变量将显式覆盖 [组件属性](../plugin/components.md#oc-component-properties) 的值，包括 [外部属性值](#using-external-property-values)。
+组件可以设计成在渲染的时候使用变量，类似于[部件变量](partials.md#oc-passing-variables-to-partials)，可以在`{% component %}` 中的组件名后指定标签。指定的变量将显式覆盖 [组件属性](../plugin/components.md#oc-component-properties) 的值，包括 [外部属性值](#oc-using-external-property-values)。
 
 在此示例中，组件的 **maxItems** 属性将在组件呈现时设置为 *7*：
 
@@ -127,7 +127,7 @@ url = "/todo/:maxItems"
 
 ## 自定义默认标记
 
-组件提供的标记通常用作组件的使用示例。在某些情况下，您可能希望修改组件的外观和输出。 [将默认标记移动到主题部分](#moving-default-markup-to-a-partial) 适用于彻底检修组件。 [覆盖组件部分](#overriding-component-partials) 对局部区域进行自定义很有用。
+组件提供的标记通常用作组件的使用示例。在某些情况下，您可能希望修改组件的外观和输出。 [将默认标记移动到主题部分](#oc-moving-default-markup-to-a-partial) 适用于彻底检修组件。 [覆盖组件部分](#oc-overriding-component-partials) 对局部区域进行自定义很有用。
 
 <a id="oc-moving-default-markup-to-a-partial"></a>
 ### 将默认标记移动到部件

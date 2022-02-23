@@ -620,8 +620,9 @@ Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 <a id="oc-custom-validation-rules"></a>
 ## 自定义验证规则
 
-有许多有用的验证规则，但是，您可能希望指定一些您自己的规则。 首先，您应该决定您的规则是应该[全局注册](#globally-registered-rules)，还是使用[本地规则对象](#local-rule-objects)。
+有许多有用的验证规则，但是，您可能希望指定一些您自己的规则。 首先，您应该决定您的规则是应该[全局注册](#oc-globally-registered-rules)，还是使用[本地规则对象](#oc-local-rule-objects)。
 
+<a id="oc-globally-registered-rules"></a>
 ### 全局注册规则
 
 通过使用"Validator:：extend"方法将全局注册的规则注册到标记和规则类，可以在整个应用程序中共享该规则。在October CMS插件中，可以将其添加到`插件中的` boot()`回调方法中。php注册文件。
@@ -722,6 +723,7 @@ class BetwixtRule
 }
 ```
 
+<a id="oc-local-rule-objects"></a>
 ### 本地规则对象
 
 [关于规则对象的 Laravel 文档](https://laravel.com/docs/6.x/validation#using-rule-objects) 更详细地描述了如何定义规则类。 具体来说，规则必须实现 `Illuminate\Contracts\Validation\Rule` 合约，该合约需要定义 `passes` 方法。

@@ -4,7 +4,7 @@ Plugins are the foundation for adding new features to the CMS by extending it. T
 
 1. Define [components](components.md).
 1. Define [user permissions](../backend/users.md).
-1. Add [settings pages](settings.md#oc-backend-settings-pages), [menu items](#navigation-menus), [lists](../backend/lists.md) and [forms](../backend/forms.md).
+1. Add [settings pages](settings.md#oc-backend-settings-pages), [menu items](#oc-navigation-menus), [lists](../backend/lists.md) and [forms](../backend/forms.md).
 1. Create [database table structures and seed data](updates.md).
 1. Alter [functionality of the core or other plugins](events.md).
 1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
@@ -87,9 +87,9 @@ Method | Description
 **pluginDetails()** | returns information about the plugin.
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
-**registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
+**registerMarkupTags()** | registers [additional markup tags](#oc-extending-twig) that can be used in the CMS.
 **registerComponents()** | registers any [front-end components](components#oc-component-registration) used by this plugin.
-**registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
+**registerNavigation()** | registers [back-end navigation menu items](#oc-navigation-menus) for this plugin.
 **registerPermissions()** | registers any [back-end permissions](../backend/users#oc-registering-permissions) used by this plugin.
 **registerSettings()** | registers any [back-end configuration links](settings#oc-settings-link-registration) used by this plugin.
 **registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#oc-form-widget-registration) supplied by this plugin.
@@ -140,7 +140,7 @@ Route::get('api_acme_blog/cleanup_posts', function() {
 <a id="oc-dependency-definitions"></a>
 ## Dependency Definitions
 
-A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
+A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#oc-registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
 
 ```php
 namespace Acme\Blog;
@@ -195,7 +195,7 @@ public function makeTextAllCaps($text)
 <a id="oc-navigation-menus"></a>
 ## Navigation Menus
 
-Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
+Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#oc-registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
 ```php
 public function registerNavigation()

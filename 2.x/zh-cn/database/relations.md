@@ -88,13 +88,14 @@ class Category extends Model
 
 可以使用以下关联类型：
 
-- [一对一](#one-to-one)
-- [一对多](#one-to-many)
-- [多对多](#many-to-many)
-- [远程一对多](#has-many-through)
-- [多态关联](#polymorphic-relations)
-- [多对多 (多态关联)](#many-to-many-polymorphic-relations)
+- [一对一](#relation-one-to-one)
+- [一对多](#relation-one-to-many)
+- [多对多](#relation-many-to-many)
+- [远程一对多](#relation-has-many-through)
+- [多态关联](#relation-has-one-through)
+- [多对多 (多态关联)](#relation-polymorphic-relations)
 
+<a id="relation-one-to-one"></a>
 ### 一对一
 
 一对一是最基本的关联关系。例如，一个 `User` 模型可能关联一个 `Phone` 模型。为了定义这个关联，我们要在 `User` 模型中写一个 `phone` 方法。在 `phone` 方法内部调用 `hasOne` 方法并返回其结果:
@@ -183,6 +184,7 @@ public $belongsTo = [
 ];
 ```
 
+<a id="relation-one-to-many"></a>
 ### 一对多
 
 『一对多』关联用于定义单个模型拥有任意数量的其它关联模型。例如，一篇博客文章可能会有无限多条评论。正如其它所有的模型关联一样，一对多关联的定义也是在 模型中写一个`$hasMany`方法：
@@ -258,6 +260,7 @@ public $belongsTo = [
 ];
 ```
 
+<a id="relation-many-to-many"></a>
 ### 多对多
 
 多对多关联比 `hasOne` 和 `hasMany` 关联稍微复杂些。举个例子，一个用户可以拥有很多种角色，同时这些角色也被其他用户共享。例如，许多用户可能都有 "管理员"这个角色。要定义这种关联，需要三个数据库表： `users`，`roles` 和 `role_user`。`role_user` 表的命名是由关联的两个模型按照字母顺序来的，并且包含了 `user_id` 和 `role_id` 字段。
@@ -396,6 +399,7 @@ public $belongsToMany = [
 **pivotModel** | 指定访问中间关联时要返回的自定义模型类。 默认为 `October\Rain\Database\Pivot` 而对于多态关联为 `October\Rain\Database\MorphPivot`。
 **timestamps** | 如果为true，则关联表应包含`created_at`和`updated_at`字段。 默认值：false
 
+<a id="relation-has-many-through"></a>
 ### 远程一对多关联
 
 远程"一对多"关联提供了方便、简短的方式通过中间的关联来获得远层的关联。例如，一个 `Country` 模型可以通过中间的 `User` 模型获得多个 `Post` 模型。在这个例子中，你可以轻易地收集给定国家和地区的所有博客文章。让我们来看看定义这种关联所需的数据表：
@@ -448,6 +452,7 @@ public $hasManyThrough = [
 ];
 ```
 
+<a id="relation-has-one-through"></a>
 ### 远程一对一
 
 远程一对一关联通过一个中间关联模型实现。
@@ -496,7 +501,7 @@ public $hasOneThrough = [
 ];
 ```
 
-<a id="oc-polymorphic-relations"></a>
+<a id="relation-polymorphic-relations"></a>
 ## 多态关联
 
 多态关联允许目标模型借助单个关联从属于多个模型。
@@ -746,6 +751,7 @@ Relation::morphMap([
 
 在 [插件注册文件](../plugin/registration.md#oc-registration-methods) 的 `boot` 方法中注册 `morphMap` 的最常见位置。
 
+<a id="oc-querying-relations"></a>
 ## 查询关联
 
 由于模型关联的所有类型都通过方法定义，你可以调用这些方法，而无需真实执行关联查询。另外，所有模型关联类型用作 [查询构造器](query.md)，允许你在数据库上执行 SQL 之前，持续通过链式调用添加约束。
@@ -785,7 +791,7 @@ foreach ($user->posts as $post) {
 }
 ```
 
-动态属性是"懒加载"的，这意味着它们仅在你真实访问关联数据时才被载入。因此，开发者经常使用 [预加载](#eager-loading) 预先加载那些他们确知在载入模型后将访问的关联。对载入模型关联中必定被执行的 SQL 查询而言，预加载显著减少了查询的执行次数。
+动态属性是"懒加载"的，这意味着它们仅在你真实访问关联数据时才被载入。因此，开发者经常使用 [预加载](#oc-eager-loading) 预先加载那些他们确知在载入模型后将访问的关联。对载入模型关联中必定被执行的 SQL 查询而言，预加载显著减少了查询的执行次数。
 
 ### 查询已存在的关联
 
@@ -809,6 +815,7 @@ $posts = Post::has('comments', '>=', 3)->get();
 // 获取拥有至少一条带有投票评论的文章...
 $posts = Post::has('comments.votes')->get();
 ```
+
 如果需要更多功能，可以使用 `whereHas` 和 `orWhereHas` 方法将"where"条件放到 `has` 查询上。这些方法允许你向关联加入自定义约束，比如检查评论内容：
 
 ```php
@@ -856,6 +863,7 @@ $user->loadCount(['roles' => function ($query) {
 }])
 ```
 
+<a id="oc-eager-loading"></a>
 ## 预加载
 
 当以属性方式访问关联时，关联数据"懒加载"。这意味着直到第一次访问属性时关联数据才会被真实加载。不过 Eloquent 能在查询父模型时"预先载入"子关联。预加载可以缓解 N + 1 查询问题。为了说明 N + 1 查询问题，考虑  `Book` 模型关联到 `Author` 的情形：
@@ -961,7 +969,7 @@ $books->load([
 
 ## 插入关联模型
 
-就像[查询关系](#querying-relations) 一样，October支持使用方法或动态属性方法定义关联。 例如，也许您需要为 `Post` 模型插入一个新的 `Comment`。 您可以直接从关联中插入 `Comment`，而不是手动设置 `Comment` 上的 `post_id` 属性。
+就像[查询关系](#oc-querying-relations) 一样，October支持使用方法或动态属性方法定义关联。 例如，也许您需要为 `Post` 模型插入一个新的 `Comment`。 您可以直接从关联中插入 `Comment`，而不是手动设置 `Comment` 上的 `post_id` 属性。
 
 ### 通过关联方法插入
 

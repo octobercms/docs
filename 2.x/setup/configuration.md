@@ -56,10 +56,11 @@ The debug mode uses the following features when enabled:
 1. [Detailed error pages](../cms/pages.md#oc-error-page) are displayed.
 1. Failed user authentication provides a specific reason.
 1. [Combined assets](../markup/filter-theme.md) are not minified by default.
-1. [Safe mode](#safe-mode) is disabled by default.
+1. [Safe mode](#oc-safe-mode) is disabled by default.
 
 > **Important**: Always set the `APP_DEBUG` setting to `false` in production environments.
 
+<a id="oc-safe-mode"></a>
 ### Safe Mode
 
 The safe mode setting is found in the `config/cms.php` configuration file with the `enable_safe_mode` parameter. By default, the option sources its value from `CMS_SAFE_MODE` which can be added to your `.env` file.

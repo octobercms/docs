@@ -5,7 +5,7 @@ When you first start using October CMS, error and exception handling is already 
 1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
 1. Alternatively it can be viewed via the Administration area by navigating to *System > Logs > Event Log*.
 
-Log entries are always created when an error page is shown and for certain [exception types](#exception-types).
+Log entries are always created when an error page is shown and for certain [exception types](#oc-exception-types).
 
 ## Configuration
 
@@ -40,6 +40,7 @@ October CMS supports various drivers, including `single`, `daily`, `syslog` and 
 
 > More information on logging configuration can be found at the [Laravel Logging documentation](https://laravel.com/docs/6.x/logging).
 
+<a id="oc-exception-types"></a>
 ## Available Exceptions
 
 October CMS comes with several basic exception types out of the box.

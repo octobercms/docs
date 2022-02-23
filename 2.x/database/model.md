@@ -68,8 +68,8 @@ Property | Description
 **$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
 **$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
 **$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
-**$fillable** | values are fields accessible to [mass assignment](#mass-assignment).
-**$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
+**$fillable** | values are fields accessible to [mass assignment](#oc-mass-assignment).
+**$guarded** | values are fields guarded from [mass assignment](#oc-mass-assignment).
 **$visible** | values are fields made visible when [serializing the model data](../database/serialization.md).
 **$hidden** | values are fields made hidden when [serializing the model data](../database/serialization.md).
 **$connection** | string that contains the [connection name](../database/basics.md#oc-multiple-database-connections) that's utilised by the model by default.
@@ -152,8 +152,9 @@ class Post extends Model
 
 ## Retrieving Models
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-a-single-model) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#oc-retrieving-multiple-models) or [retrieve a single model](#oc-retrieving-a-single-model) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
 
+<a id="oc-retrieving-multiple-models"></a>
 ### Retrieving Multiple Models
 
 Once you have created a model and [its associated database table](../database/structure.md#oc-migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query.md) allowing you to query the database table associated with the model. For example:
@@ -209,6 +210,7 @@ Flight::chunk(200, function ($flights) {
 
 The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is retrieved from the database.
 
+<a id="oc-retrieving-a-single-model"></a>
 ### Retrieving a Single Model
 
 In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance:
@@ -382,7 +384,7 @@ You may also run a delete query on a set of models. In this example, we will del
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
-> **Note**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
+> **Note**: It is important to mention that [model events](#oc-model-events) will not fire when deleting records directly from a query.
 
 <a id="oc-query-scopes"></a>
 ## Query Scopes
@@ -536,7 +538,7 @@ Inside the closure you can add relations to the model. Here we extend the `Backe
 });
 ```
 
-This approach can also be used to bind to [local events](#events), the following code listens for the `model.beforeSave` event.
+This approach can also be used to bind to [local events](#oc-model-events), the following code listens for the `model.beforeSave` event.
 
 ```php
 \Backend\Models\User::extend(function($model) {

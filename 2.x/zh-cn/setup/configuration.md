@@ -56,10 +56,11 @@ October CMS 的所有配置文件都存储在 **config** 目录中。每个选�
 1. 显示[详细错误页面](../uror-page)。
 1. 用户认证失败提供具体原因。
 1. [组合资产](../markup/filter-theme.md)默认不压缩。
-1. [安全模式](#safe-mode) 默认关闭。
+1. [安全模式](#oc-safe-mode) 默认关闭。
 
 > **重要**：在生产环境中始终将 `APP_DEBUG` 设置设置为 `false`。
 
+<a id="oc-safe-mode"></a>
 ### 安全模式
 
 安全模式可以在`config/app.php` 配置文件中找到带有 `enable_safe_mode` 的参数。默认情况下，该选项的值来自 `CMS_SAFE_MODE` ，它可以添加到您的 `.env` 文件中。

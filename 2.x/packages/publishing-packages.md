@@ -8,6 +8,7 @@ Your package should reside in a source control repository that can be accessed b
 
 Be sure to start your package `name` ends with **-plugin** or **-theme** respectively, this will help others find your package and is in accordance with the [Developer Guide](https://octobercms.com/help/guidelines/developer#package-naming).
 
+<a id="oc-publishing-plugins"></a>
 ### Publishing Plugins
 
 When publishing your plugin the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-plugin** and include the `composer/installers` package as a dependency.
@@ -25,6 +26,7 @@ When publishing your plugin the `composer.json` file should have this JSON conte
 
 A plugin with the code **Acme.Blog** will have a composer package name of `acme/blog-plugin` and will be installed in the **plugins/acme/blog** directory.
 
+<a id="oc-publishing-themes"></a>
 ### Publishing Themes
 
 When publishing your theme the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-theme** and include the `composer/installers` package as a dependency.
@@ -122,7 +124,7 @@ In addition to tagging, you should also increment the version file found in your
 
 ## Private Plugins and Themes
 
-Composer allows you to add private repositories from GitHub and other providers to your October CMS projects. Make sure you have followed the same instructions for [publishing plugins](#publishing-plugins) and [themes](#publishing-themes) respectively.
+Composer allows you to add private repositories from GitHub and other providers to your October CMS projects. Make sure you have followed the same instructions for [publishing plugins](#oc-publishing-plugins) and [themes](#oc-publishing-themes) respectively.
 
 In all cases, you should have a copy of your private plugin or theme stored somewhere available to the main project. The `plugin:install` and `theme:install` commands can be used to install private plugins from either a remote or local source. This will add the location to your composer file and install it like any other package.
 
@@ -158,9 +160,9 @@ Laravel packages will often provide configuration files, you should duplicate th
 
 ```php
 return [
-    'encoding'      => 'UTF-8',
-    'finalize'      => true,
-    'cachePath'     => storage_path('app/purifier'),
+    'encoding' => 'UTF-8',
+    'finalize' => true,
+    'cachePath' => storage_path('app/purifier'),
     'cacheFileMode' => 0755,
 ];
 ```

@@ -112,7 +112,7 @@ Key | Description
 **required** | optional, forces field to be filled. Uses validationMessage when left empty.
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
-**depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-and-set-properties) below.
+**depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#oc-dropdown-and-set-properties) below.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 **showExternalParam** | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: **true**.
 
@@ -140,6 +140,7 @@ To access the property from the Twig partials for the component, utilize the `__
 {{ __SELF__.property('maxItems') }}
 ```
 
+<a id="oc-dropdown-and-set-properties"></a>
 ### Dropdown and Set Properties
 
 The option list for dropdown and set properties can be static or dynamic. Static options are defined with the `options` element of the property definition. Example:
@@ -282,6 +283,7 @@ If you need to access the routing parameter name:
 $this->paramName('id');
 ```
 
+<a id="oc-handling-the-page-execution-cycle"></a>
 ## Handling the Page Execution Cycle
 
 Components can be involved in the Page execution cycle events by overriding the `onRun` method in the component class. The CMS controller executes this method every time when the page or layout loads. Inside the method you can inject variables to the Twig environment through the `page` property:
@@ -479,7 +481,7 @@ function onGetTemplate()
 }
 ```
 
-Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#handling-the-page-execution-cycle). This code will specifically return an XML response using the `Response` facade:
+Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#oc-handling-the-page-execution-cycle). This code will specifically return an XML response using the `Response` facade:
 
 ```php
 public function onRun()

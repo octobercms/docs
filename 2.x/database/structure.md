@@ -5,7 +5,7 @@ Migrations and seed files allow you to build, modify and populate database table
 <a id="oc-migration-structure"></a>
 ## Migration Structure
 
-A migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the [schema builder](#creating-tables) to expressively create and modify tables. For example, let's look at a sample migration that creates a `october_blog_posts` table:
+A migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the [schema builder](#oc-creating-tables) to expressively create and modify tables. For example, let's look at a sample migration that creates a `october_blog_posts` table:
 
 ```php
 <?php namespace Acme\Blog\Updates;
@@ -38,6 +38,7 @@ class CreatePostsTable extends Migration
 }
 ```
 
+<a id="oc-creating-tables"></a>
 ### Creating Tables
 
 To create a new database table, use the `create` method on the `Schema` facade. The `create` method accepts two arguments. The first is the name of the table, while the second is a `Closure` which receives an object used to define the new table:
@@ -158,7 +159,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
-Below is a list of all the available column modifiers. This list does not include the [index modifiers](#creating-indexes):
+Below is a list of all the available column modifiers. This list does not include the [index modifiers](#oc-creating-indexes):
 
 Modifier  | Description
 ------------- | -------------
@@ -217,6 +218,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
+<a id="oc-creating-indexes"></a>
 ### Creating Indexes
 
 The schema builder supports several types of indexes. First, let's look at an example that specifies a column's values should be unique. To create the index, we can simply chain the `unique` method onto the column definition:

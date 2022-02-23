@@ -84,7 +84,7 @@ The `Response` facade may be used to conveniently generate other types of respon
 
 ### View Responses
 
-If you need access to the `Response` class methods, but want to return a [view](#views) as the response content, you may use the `Response::view` method for convenience:
+If you need access to the `Response` class methods, but want to return a [view](#oc-views) as the response content, you may use the `Response::view` method for convenience:
 
 ```php
 return Response::view('acme.blog::hello')->header('Content-Type', $type);

@@ -618,8 +618,9 @@ Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 <a id="oc-custom-validation-rules"></a>
 ## Custom Validation Rules
 
-There are a variety of helpful validation rules, however, you may wish to specify some of your own. First you should decide if your rule shuld be [registered globally](#globally-registered-rules), or use [a local rule object](#local-rule-objects).
+There are a variety of helpful validation rules, however, you may wish to specify some of your own. First you should decide if your rule shuld be [registered globally](#oc-globally-registered-rules), or use [a local rule object](#oc-local-rule-objects).
 
+<a id="oc-globally-registered-rules"></a>
 ### Globally Registered Rules
 
 A globally registered rule can be shared throughout your application by registering it with a tag and rule class using the `Validator::extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
@@ -720,6 +721,7 @@ class BetwixtRule
 }
 ```
 
+<a id="oc-local-rule-objects"></a>
 ### Local Rule Objects
 
 The [Laravel documentation on rule objects](https://laravel.com/docs/6.x/validation#using-rule-objects) describes in more detail how to define a rule class. Specifically, the rule must implement the `Illuminate\Contracts\Validation\Rule` contract which requires a `passes` method to be defined.
