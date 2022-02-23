@@ -27,6 +27,7 @@ $user->posts()->where('is_active', true)->get();
 $user->posts;
 ```
 
+<a id="oc-detailed-relationships"></a>
 ### 详细定义
 
 每个定义都可以是一个数组，其中键是关联名称，值是细节数组。 详细信息数组的第一个值始终是关联模型类名称，所有其他值都是必须具有键名的参数。
@@ -494,6 +495,7 @@ public $hasOneThrough = [
 ];
 ```
 
+<a id="oc-polymorphic-relations"></a>
 ## 多态关联
 
 多态关联允许目标模型借助单个关联从属于多个模型。

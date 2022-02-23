@@ -40,6 +40,7 @@ class Post extends Model
 
 protected`$table`字段指定模型对应的数据库表。 表名是作者、插件和记录类型名称的蛇形命名名称。
 
+<a id="oc-supported-properties"></a>
 ### 支持的属性
 
 除了 [模型特征](traits.md) 提供的那些之外，还可以在模型上找到一些标准属性。 例如：
@@ -397,6 +398,7 @@ $deletedRows = Flight::where('active', 0)->delete();
 
 > **注意**：比较重要的一点是在直接从查询中删除记录时不会触发[模型事件](#model-events)
 
+<a id="oc-query-scopes"></a>
 ## 查询范围
 
 范围允许您定义可以在整个应用程序中轻松重用的通用约束集。 例如，您可能需要经常检索所有被认为"受欢迎"的用户。 要定义范围，只需在模型方法前面加上 `scope`：

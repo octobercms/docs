@@ -20,6 +20,7 @@ class Product extends Model
 }
 ```
 
+<a id="oc-hashable"></a>
 ### 哈希(Hash)
 
 哈希属性在模型上首次设置时立即进行哈希处理。 要在模型中使用哈希属性，请应用 `October\Rain\Database\Traits\Hashable` 特征并声明一个 `$hashable` 属性，其中包含要设置哈希的属性的数组。
@@ -58,6 +59,7 @@ class User extends Model
 return $user->getOriginalPurgeValue('password_confirmation');
 ```
 
+<a id="oc-encryptable"></a>
 ### 可加密
 
 与 [哈希散列](#hashable) 类似，加密属性在设置时被加密，但在检索到属性时也会被解密。 要加密模型中的属性，请应用 `October\Rain\Database\Traits\Encryptable` 特征并使用包含要加密的属性的数组声明 `$encryptable` 属性。
@@ -122,6 +124,7 @@ $user->save();
 
 ## 排序和重新排序
 
+<a id="oc-sortable"></a>
 ### 可排序
 
 排序后的模型将在 `sort_order` 中存储一个数字值，它维护集合中每个单独模型的排序顺序。 要为模型存储排序顺序，请应用 `October\Rain\Database\Traits\Sortable` 特征并确保您的架构定义了一个字段供其使用(例如: `$table->integer('sort_order')->default(0);`)。
@@ -149,6 +152,7 @@ $user->setSortableOrder($user->id, 1);
 $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 ```
 
+<a id="oc-simple-tree"></a>
 ### 基本树形结构
 
 一个基本树形结构将使用 `parent_id` 字段维护模型之间的父子关系。 要使用基本树形结构，请应用 `October\Rain\Database\Traits\SimpleTree` 特征。
@@ -204,6 +208,7 @@ Category::all()->toNested();
 {{ SELF.renderChildren(category)|raw }}
 ```
 
+<a id="oc-nested-tree"></a>
 ### 嵌套集合模型
 
 [嵌套集合模型](https://en.wikipedia.org/wiki/Nested_set_model) 是一种高级技术，用于使用 `parent_id`、`nest_left`、`nest_right` 和 `nest_depth` 字段维护模型之间的层次结构。 要使用嵌套集模型，请应用 `October\Rain\Database\Traits\NestedTree` 特征。 `SimpleTree` 特征的所有特性在此模型中固有可用。
@@ -281,6 +286,7 @@ $node->getLevel()
 
 ## 实用函数
 
+<a id="oc-validation"></a>
 ### 验证
 
 October模型使用内置的 [验证类](../services/validation.md)。 验证规则在模型类中定义为名为`$rules`的属性，并且该类必须使用特征`October\Rain\Database\Traits\Validation`：

@@ -2,6 +2,7 @@
 
 迁移和种子文件允许您构建、修改和填充数据库表。 它们主要由 [插件更新文件](../plugin/updates.md) 使用，并与插件的版本历史记录配对。 所有类都存储在插件的`updates`目录中。 迁移应该记录一个关于您的数据库修改历史，并且这个历史可以向前和向后回滚，以建立和拆除表。
 
+<a id="oc-migration-structure"></a>
 ## 迁移结构
 
 迁移文件应该定义一个扩展 `October\Rain\Database\Updates\Migration` 类并包含两个方法： `up` 和 `down`。`up` 方法是用于新增数据库的数据表、字段或者索引的，而`down` 方法应该与 `up` 方法的执行操作相反。在这两种方法中，您都可以使用 [结构生成器](#creating-tables) 来创建和修改表。 例如，让我们看一个创建 `october_blog_posts` 表的示例迁移：
@@ -251,6 +252,7 @@ Command  | Description
 `$table->unique('email');`  |  添加唯一索引
 `$table->index('state');`  |  添加普通索引
 
+<a id="oc-index-lengths-using-mysql-mariadb"></a>
 ####  MySQL / MariaDB 的索引长度
 
 默认情况下，October CMS 使用 `utf8mb4` 字符集。 如果运行低于 v5.7.7 的 MySQL 版本或低于 v10.2.2 的 MariaDB，则需要手动配置迁移生成的默认字符串长度，以便 MySQL 为它们创建索引。 要配置默认字符串长度，请将以下内容添加到您的 **config/database.php** 配置文件中的键 `connections.mysql` 下。

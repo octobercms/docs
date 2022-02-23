@@ -107,6 +107,7 @@ Db::table('users')->where('active', false)
 
 > **Note**: When updating or deleting records inside the chunk callback, any changes to the primary key or foreign keys could affect the chunk query. This could potentially result in records not being included in the chunked results.
 
+<a id="oc-aggregates"></a>
 ### Aggregates
 
 The query builder also provides a variety of aggregate methods, such as `count`, `max`, `min`, `avg`, and `sum`. You may call any of these methods after constructing your query:

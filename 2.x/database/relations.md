@@ -27,6 +27,7 @@ Accessing a relationship as a property is also possible:
 $user->posts;
 ```
 
+<a id="oc-detailed-relationships"></a>
 ### Detailed Definitions
 
 Each definition can be an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are parameters that must have a key name.
@@ -495,6 +496,7 @@ public $hasOneThrough = [
 ];
 ```
 
+<a id="oc-polymorphic-relations"></a>
 ## Polymorphic Relations
 
 Polymorphic relations allow a model to belong to more than one other model on a single association.

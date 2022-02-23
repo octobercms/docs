@@ -220,7 +220,7 @@ Option | Description
 
 ### Nested Field Selection
 
-Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations.md#oc-relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#oc-property-jsonable), you may use a nested field type using the **relation[field]** definition.
+Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations.md#oc-relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#oc-supported-properties), you may use a nested field type using the **relation[field]** definition.
 
 ```yaml
 avatar[name]:

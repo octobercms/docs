@@ -30,9 +30,7 @@ use Model;
 class Post extends Model
 {
     /**
-     * The table associated with the model.
-     *
-     * @var string
+     * @var string table associated with the model.
      */
     protected $table = 'acme_blog_posts';
 }
@@ -40,6 +38,7 @@ class Post extends Model
 
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
+<a id="oc-supported-properties"></a>
 ### Supported Properties
 
 There are some standard properties that can be found on models, in addition to those provided by [model traits](traits.md). For example:
@@ -397,6 +396,7 @@ $deletedRows = Flight::where('active', 0)->delete();
 
 > **Note**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
 
+<a id="oc-query-scopes"></a>
 ## Query Scopes
 
 Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:

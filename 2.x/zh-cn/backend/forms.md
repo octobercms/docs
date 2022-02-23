@@ -220,7 +220,7 @@ secondaryTabs:
 
 ### 嵌套字段选择
 
-来自相关模型的字段可以使用 [关联小部件](#relation) 或 [关联管理器](relations.md#oc-relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#oc-property-jsonable)，您可以使用 **relation[field]** 定义的嵌套字段类型。
+来自相关模型的字段可以使用 [关联小部件](#relation) 或 [关联管理器](relations.md#oc-relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#oc-supported-properties)，您可以使用 **relation[field]** 定义的嵌套字段类型。
 
 ```yaml
 avatar[name]:

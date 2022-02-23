@@ -20,6 +20,7 @@ class Product extends Model
 }
 ```
 
+<a id="oc-hashable"></a>
 ### Hashable
 
 Hashed attributes are hashed immediately when the attribute is first set on the model. To hash attributes in your model, apply the `October\Rain\Database\Traits\Hashable` trait and declare a `$hashable` property with an array containing the attributes to hash.
@@ -58,6 +59,7 @@ The defined attributes will be purged when the model is saved, before the [model
 return $user->getOriginalPurgeValue('password_confirmation');
 ```
 
+<a id="oc-encryptable"></a>
 ### Encryptable
 
 Similar to the [hashable trait](#hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
@@ -122,6 +124,7 @@ $user->save();
 
 ## Sorting and Reordering
 
+<a id="oc-sortable"></a>
 ### Sortable
 
 Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
@@ -149,6 +152,7 @@ $user->setSortableOrder($user->id, 1);
 $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 ```
 
+<a id="oc-simple-tree"></a>
 ### Simple Tree
 
 A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To use the simple tree, apply the `October\Rain\Database\Traits\SimpleTree` trait.
@@ -204,6 +208,7 @@ In order to render all levels of items and their children, you can use recursive
 {{ SELF.renderChildren(category)|raw }}
 ```
 
+<a id="oc-nested-tree"></a>
 ### Nested Tree
 
 The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
@@ -281,6 +286,7 @@ There are several methods for moving nodes around:
 
 ## Utility Functions
 
+<a id="oc-validation"></a>
 ### Validation
 
 October models uses the built-in [Validator class](../services/validation.md). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
