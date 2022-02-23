@@ -48,7 +48,7 @@ Schema::create('users', function ($table) {
 });
 ```
 
-在创建数据表时，你可以使用结构生成器的任何 [字段方法](#creating-columns) 去定义数据表的字段。
+在创建数据表时，你可以使用结构生成器的任何 [字段方法](#oc-creating-columns) 去定义数据表的字段。
 
 #### 检查表/列是否存在
 
@@ -100,6 +100,7 @@ Schema::drop('users');
 Schema::dropIfExists('users');
 ```
 
+<a id="oc-creating-columns"></a>
 ### 创建字段
 
 在`Schema` 门面中可以使用`table`方法来更新已存在的数据表。和 `create`方法一样，`table` 方法接受两个参数：一个是数据表的名字，另一个是`Closure`，它接收我们可以用来向表中添加字段的对象：

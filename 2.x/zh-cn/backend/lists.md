@@ -2,7 +2,7 @@
 
 **List Behavior** 是一个控制器修饰符，用于轻松地将记录列表添加到页面。 该行为提供了可排序和可搜索的列表及其记录上的可选链接。 该行为提供了控制器操作`索引`，但是列表可以在任何地方呈现，并且可以使用多个列表定义。
 
-列表行为取决于列表 [列表字段](#defining-list-columns) 和 [模型类](../database/model.md)。 为了使用列表行为，您应该将其添加到控制器类的 `$implement` 属性中。 此外，应定义 `$listConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
+列表行为取决于列表 [列表字段](#oc-defining-list-columns) 和 [模型类](../database/model.md)。 为了使用列表行为，您应该将其添加到控制器类的 `$implement` 属性中。 此外，应定义 `$listConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -40,7 +40,7 @@ recordUrl: acme/blog/posts/update/:id
 字段 | 描述
 ------------- | -------------
 **title** | 此列表的标题。
-**list** | 配置数组或对列表字段定义文件的引用，请参阅 [列表字段](#defining-list-columns)。
+**list** | 配置数组或对列表字段定义文件的引用，请参阅 [列表字段](#oc-defining-list-columns)。
 **modelClass** | 一个模型类名，列表数据是从这个模型加载的。
 
 下面列出的配置选项是可选的。
@@ -919,7 +919,7 @@ $list 对象可以使用以下方法。
 **addColumns** | 向列表中添加新字段
 **removeColumn** | 从列表中删除一字段
 
-每个方法都采用类似于 [列表字段配置](#defining-list-columns) 的字段数组。
+每个方法都采用类似于 [列表字段配置](#oc-defining-list-columns) 的字段数组。
 
 ### 注入 CSS 行类
 

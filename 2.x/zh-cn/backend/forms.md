@@ -2,7 +2,7 @@
 
 **Form Behavior** 是一个控制器修饰符，用于轻松地将表单功能添加到后端页面。 该行为提供了三个页面，分别称为创建、更新和预览。 预览页面是更新页面的只读版本。 当您使用表单行为时，您不需要在控制器中定义 `create`、`update` 和 `preview` 操作 - 行为会为你完成。 但是，您应该提供相应的视图文件。
 
-表单行为取决于表单[字段定义](#defining-form-fields) 和[模型类](../database/model.md)。 为了使用表单行为，您应该将其添加到控制器类的`$implement` 属性中。 此外，应定义`$formConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
+表单行为取决于表单[字段定义](#oc-defining-form-fields) 和[模型类](../database/model.md)。 为了使用表单行为，您应该将其添加到控制器类的`$implement` 属性中。 此外，应定义`$formConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -47,10 +47,10 @@ preview:
 字段 | 描述
 ------------- | -------------
 **name** | 此表单管理的对象的名称。
-**form** | 配置数组或对表单域定义文件的引用，请参阅 [表单域](#defining-form-fields)。
+**form** | 配置数组或对表单域定义文件的引用，请参阅 [表单域](#oc-defining-form-fields)。
 **modelClass** | 一个模型类名，表单数据被加载并保存在这个模型上。
 
-下面列出的配置选项是可选的。 如果您希望表单行为支持 [创建](#create-page)、[更新](#update-page) 或 [预览](#preview-page) 页面，请定义它们。
+下面列出的配置选项是可选的。 如果您希望表单行为支持 [创建](#oc-create-page)、[更新](#oc-update-page) 或 [预览](#oc-preview-page) 页面，请定义它们。
 
 选项 | 描述
 ------------- | -------------
@@ -59,6 +59,7 @@ preview:
 **update** | 更新页面的配置数组或对配置文件的引用。
 **preview** | 预览页面的配置数组或对配置文件的引用。
 
+<a id="oc-create-page"></a>
 ### 创建页面
 
 要支持创建页面，请将以下配置添加到 YAML 文件中。
@@ -79,6 +80,7 @@ create:
 **redirectClose** | 保存记录时会吧close参数一起提交，用于保存并关闭重定向页面
 **form** | 定义创建页面的默认表单字段。
 
+<a id="oc-update-page"></a>
 ### 更新页面
 
 要支持更新页面，请将以下配置添加到 YAML 文件中。
@@ -98,6 +100,7 @@ update:
 **redirectClose** | 保存记录时会吧close参数一起提交，用于保存并关闭重定向页面
 **form** | 定义更新页面的默认表单字段。
 
+<a id="oc-preview-page"></a>
 ### 预览页面
 
 要支持预览页面，请将以下配置添加到 YAML 文件中:
@@ -211,8 +214,8 @@ secondaryTabs:
 **hidden** | 从视图中隐藏字段并将其从保存的数据中排除。选项:true, false。
 **stretch** | 指定此字段是否拉伸以适合父高度。
 **context** | 指定显示字段时应使用的上下文。上下文也可以通过在字段名称中使用 `@` 符号来传递，例如，`name@update`。
-**dependsOn** | 其他字段名称的数组，该字段[取决于](#field-dependencies)，当其他字段被修改时，该字段将更新。
-**trigger** | 使用 [触发事件](#trigger-events) 指定此字段的条件。
+**dependsOn** | 其他字段名称的数组，该字段[取决于](#oc-field-dependencies)，当其他字段被修改时，该字段将更新。
+**trigger** | 使用 [触发事件](#oc-trigger-events) 指定此字段的条件。
 **preset** | 允许字段值最初由另一个字段的值设置，使用 [输入预设转换器](#input-preset-converter) 进行转换。
 **required** | 在字段标签旁边放置一个红色星号表示它是必填项。请务必使用 [模型验证](../database/traits.md#oc-validation)，因为表单控制器不强制执行此操作。
 **attributes** | 指定要添加到表单字段元素的自定义 HTML 属性。
@@ -221,7 +224,7 @@ secondaryTabs:
 
 ### 嵌套字段选择
 
-来自相关模型的字段可以使用 [关联小部件](#relation) 或 [关联管理器](relations.md#oc-relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#oc-supported-properties)，您可以使用 **relation[field]** 定义的嵌套字段类型。
+来自相关模型的字段可以使用 [关联小部件](#relation-widget) 或 [关联管理器](relations.md#oc-relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#oc-supported-properties)，您可以使用 **relation[field]** 定义的嵌套字段类型。
 
 ```yaml
 avatar[name]:
@@ -999,7 +1002,7 @@ profile:
 
 选项 | 描述
 ------------- | -------------
-**form**  | 与 [表单定义](#defining-form-fields) 中的相同
+**form**  | 与 [表单定义](#oc-defining-form-fields) 中的相同
 **showPanel** | 将表单放置在面板容器内。 默认值:true
 **useRelation** | 使用字段名称作为关系名称标记，以便直接在父模型上进行交互。 默认值:false
 
@@ -1091,7 +1094,7 @@ extra_information:
 
 选项 | 描述
 ------------- | -------------
-**form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#defining-form-fields)。 也可以使用内联字段。
+**form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#oc-defining-form-fields)。 也可以使用内联字段。
 **prompt** | 为创建按钮显示的文本。 默认值:Add new item。
 **titleFrom** | 项目中的字段名称，用作折叠项目的标题。
 **minItems** | 循环组件允许的最少项目数。 不使用组时预先显示这些项目。 例如，如果您设置 **'minItems: 1'** 第一行将被显示而不是隐藏。
@@ -1147,7 +1150,7 @@ quote:
 **name** | 组的名称。
 **description** | 组的简要说明。
 **icon** | 定义组的图标，可选。
-**fields** | 属于该组的表单字段，请参阅 [后端表单字段](#defining-form-fields)。
+**fields** | 属于该组的表单字段，请参阅 [后端表单字段](#oc-defining-form-fields)。
 
 > **注意**:组key与保存的数据一起存储为`_group`属性。
 
@@ -1245,7 +1248,7 @@ tags:
 
 ## 表单视图
 
-对于表单支持 [创建](#create-page)、[更新](#update-page) 和 [预览](#preview-page) 的每个页面，您应该提供一个具有相应名称的[视图文件](../backend/controllers -ajax.md) - **create.htm**、**update.htm** 和 **preview.htm**。
+对于表单支持 [创建](#oc-create-page)、[更新](#oc-update-page) 和 [预览](#oc-preview-page) 的每个页面，您应该提供一个具有相应名称的[视图文件](../backend/controllers -ajax.md) - **create.htm**、**update.htm** 和 **preview.htm**。
 
 表单行为向控制器类添加了两个方法:`formRender` 和 `formRenderPreview`。 这些方法呈现使用上述 YAML 文件配置的表单控件。
 
@@ -1375,6 +1378,7 @@ slug:
 **camel** | 使用 camelCase 格式化复制的值
 **file** | 将复制的值格式化为文件名，其中空格替换为破折号
 
+<a id="oc-trigger-events"></a>
 ### 触发事件
 
 触发事件是使用 `trigger` [表单字段选项](#oc-field-options) 定义的，是一个使用 JavaScript 的基于浏览器的简单解决方案。它允许您根据另一个元素的状态更改元素属性，例如可见性或值。这是一个示例定义:
@@ -1403,6 +1407,7 @@ send_at:
 **field** | 定义将触发操作的其他字段名称。 通常，字段名称是指同一级别表单中的字段。 例如，如果此字段位于 [循环组件部件](#widget-repeater) 中，则只会检查同一循环组件部件中的字段。 但是，如果字段名称前面有一个插入符号 `^`，例如:`^parent_field`，它将指代循环组件或比当前字段本身高一级的字段。 此外，如果使用了多个插入符号 `^`，它将引用更高的级别:`^^grand_parent_field`、`^^^grand_grand_parent_field` 等。
 **condition** | 确定指定字段应满足的条件，以将条件视为"true"。 支持的值:checked(选中), unchecked(未选中), value[somevalue](值)。
 
+<a id="oc-field-dependencies"></a>
 ### 字段依赖
 
 表单字段可以通过定义 `dependsOn` [表单字段选项](#oc-field-options) 来声明对其他字段的依赖关系，这提供了更强大的服务器端解决方案，用于在修改字段的依赖项时更新字段。当声明为依赖项的字段发生更改时，定义字段将使用 AJAX 框架进行更新。这提供了使用 `filterFields` 方法与字段属性交互的机会，或者更改要提供给字段的可用选项。
@@ -1437,7 +1442,7 @@ public function getStateOptions()
 }
 ```
 
-您可以通过覆盖使用的模型中的 `filterFields` 方法来过滤表单字段定义。这允许您根据模型数据操作可见性和其他字段属性。该方法有两个参数 **$fields** 将表示已由 [字段配置](#defining-form-fields) 定义的字段对象，**$context** 表示活动的表单上下文。
+您可以通过覆盖使用的模型中的 `filterFields` 方法来过滤表单字段定义。这允许您根据模型数据操作可见性和其他字段属性。该方法有两个参数 **$fields** 将表示已由 [字段配置](#oc-defining-form-fields) 定义的字段对象，**$context** 表示活动的表单上下文。
 
 ```php
 public function filterFields($fields, $context = null)
@@ -1457,7 +1462,7 @@ public function filterFields($fields, $context = null)
 }
 ```
 
-上述逻辑将通过检查模型属性 `source_type` 的值在某些字段上设置 `hidden` 标志。此逻辑将在表单首次加载以及由 [定义的字段依赖项](#field-dependencies) 更新时应用。例如，这里是关联的表单字段定义。
+上述逻辑将通过检查模型属性 `source_type` 的值在某些字段上设置 `hidden` 标志。此逻辑将在表单首次加载以及由 [定义的字段依赖项](#oc-field-dependencies) 更新时应用。例如，这里是关联的表单字段定义。
 
 ```yaml
 source_type:
@@ -1592,11 +1597,11 @@ $form 对象可以使用以下方法。
 **addSecondaryTabFields** | 将新字段添加到辅助选项卡式区域
 **removeField** | 从任何区域中删除字段
 
-每个方法都采用类似于 [表单字段配置](#defining-form-fields) 的字段数组。
+每个方法都采用类似于 [表单字段配置](#oc-defining-form-fields) 的字段数组。
 
 ### 过滤表单字段
 
-如 [字段依赖项](#field-dependencies) 中所述，您还可以通过挂钩到 `form.filterFields` 事件来实现表单字段过滤。
+如 [字段依赖项](#oc-field-dependencies) 中所述，您还可以通过挂钩到 `form.filterFields` 事件来实现表单字段过滤。
 
 ```php
 User::extend(function ($model) {

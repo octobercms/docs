@@ -2,7 +2,7 @@
 
 **List Behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](#defining-list-columns) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](#oc-defining-list-columns) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -40,7 +40,7 @@ The following fields are required in the list configuration file:
 Field | Description
 ------------- | -------------
 **title** | a title for this list.
-**list** | a configuration array or reference to a list column definition file, see [list columns](#defining-list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](#oc-defining-list-columns).
 **modelClass** | a model class name, the list data is loaded from this model.
 
 The configuration options listed below are optional.
@@ -920,7 +920,7 @@ Method | Description
 **addColumns** | adds new columns to the list
 **removeColumn** | removes a column from the list
 
-Each method takes an array of columns similar to the [list column configuration](#defining-list-columns).
+Each method takes an array of columns similar to the [list column configuration](#oc-defining-list-columns).
 
 ### Inject CSS Row Class
 

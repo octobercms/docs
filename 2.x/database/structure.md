@@ -48,7 +48,7 @@ Schema::create('users', function ($table) {
 });
 ```
 
-Of course, when creating the table, you may use any of the schema builder's [column methods](#creating-columns) to define the table's columns.
+Of course, when creating the table, you may use any of the schema builder's [column methods](#oc-creating-columns) to define the table's columns.
 
 #### Checking for table / column existence
 
@@ -100,6 +100,7 @@ Schema::drop('users');
 Schema::dropIfExists('users');
 ```
 
+<a id="oc-creating-columns"></a>
 ### Creating Columns
 
 To update an existing table, we will use the `table` method on the `Schema` facade. Like the `create` method, the `table` method accepts two arguments, the name of the table and a `Closure` that receives an object we can use to add columns to the table:
