@@ -20,6 +20,7 @@ class Product extends Model
 }
 ```
 
+<a id="oc-hashable"></a>
 ### 哈希(Hash)
 
 哈希属性在模型上首次设置时立即进行哈希处理。 要在模型中使用哈希属性，请应用 `October\Rain\Database\Traits\Hashable` 特征并声明一个 `$hashable` 属性，其中包含要设置哈希的属性的数组。
@@ -52,15 +53,16 @@ class User extends Model
 }
 ```
 
-保存模型时，在触发 [模型事件](#model-events) 之前，将清除定义的属性，包括验证。 使用 `getOriginalPurgeValue` 查找已清除的值。
+保存模型时，在触发 [模型事件](#oc-model-events) 之前，将清除定义的属性，包括验证。 使用 `getOriginalPurgeValue` 查找已清除的值。
 
 ```php
 return $user->getOriginalPurgeValue('password_confirmation');
 ```
 
+<a id="oc-encryptable"></a>
 ### 可加密
 
-与 [哈希散列](#hashable) 类似，加密属性在设置时被加密，但在检索到属性时也会被解密。 要加密模型中的属性，请应用 `October\Rain\Database\Traits\Encryptable` 特征并使用包含要加密的属性的数组声明 `$encryptable` 属性。
+与 [哈希散列](#oc-hashable) 类似，加密属性在设置时被加密，但在检索到属性时也会被解密。 要加密模型中的属性，请应用 `October\Rain\Database\Traits\Encryptable` 特征并使用包含要加密的属性的数组声明 `$encryptable` 属性。
 
 ```php
 class User extends Model
@@ -74,7 +76,7 @@ class User extends Model
 }
 ```
 
-> **注意**：加密属性与 [`jsonable`](model#supported-properties) 属性不兼容。
+> **注意**：加密属性与 [`jsonable`](model#oc-supported-properties) 属性不兼容。
 
 ### 别名
 
@@ -122,6 +124,7 @@ $user->save();
 
 ## 排序和重新排序
 
+<a id="oc-sortable"></a>
 ### 可排序
 
 排序后的模型将在 `sort_order` 中存储一个数字值，它维护集合中每个单独模型的排序顺序。 要为模型存储排序顺序，请应用 `October\Rain\Database\Traits\Sortable` 特征并确保您的架构定义了一个字段供其使用(例如: `$table->integer('sort_order')->default(0);`)。
@@ -149,6 +152,7 @@ $user->setSortableOrder($user->id, 1);
 $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 ```
 
+<a id="oc-simple-tree"></a>
 ### 基本树形结构
 
 一个基本树形结构将使用 `parent_id` 字段维护模型之间的父子关系。 要使用基本树形结构，请应用 `October\Rain\Database\Traits\SimpleTree` 特征。
@@ -204,6 +208,7 @@ Category::all()->toNested();
 {{ SELF.renderChildren(category)|raw }}
 ```
 
+<a id="oc-nested-tree"></a>
 ### 嵌套集合模型
 
 [嵌套集合模型](https://en.wikipedia.org/wiki/Nested_set_model) 是一种高级技术，用于使用 `parent_id`、`nest_left`、`nest_right` 和 `nest_depth` 字段维护模型之间的层次结构。 要使用嵌套集模型，请应用 `October\Rain\Database\Traits\NestedTree` 特征。 `SimpleTree` 特征的所有特性在此模型中固有可用。
@@ -253,7 +258,7 @@ $child2->makeChildOf($root);
 
 #### 删除节点
 
-当使用 `delete` 方法删除节点时，该节点的所有后代也将被删除。 请注意，不会为子模型触发删除[模型事件](../database/model.md#model-events)。
+当使用 `delete` 方法删除节点时，该节点的所有后代也将被删除。 请注意，不会为子模型触发删除[模型事件](../database/model.md#oc-model-events)。
 
 ```php
 $child1->delete();
@@ -281,6 +286,7 @@ $node->getLevel()
 
 ## 实用函数
 
+<a id="oc-validation"></a>
 ### 验证
 
 October模型使用内置的 [验证类](../services/validation.md)。 验证规则在模型类中定义为名为`$rules`的属性，并且该类必须使用特征`October\Rain\Database\Traits\Validation`：
@@ -299,7 +305,7 @@ class User extends Model
 }
 ```
 
-您也可以使用 [数组语法](../services/validation.md#validating-arrays) 来验证规则。
+您也可以使用 [数组语法](../services/validation.md#oc-validating-arrays) 来验证规则。
 
 ```php
 class User extends Model
@@ -331,7 +337,7 @@ $success = $user->save();
 
 当模型验证失败时，一个 `Illuminate\Support\MessageBag` 对象会附加到模型上。 包含验证失败消息的对象。 使用 `errors` 方法或 `$validationErrors` 属性检索验证错误消息集合实例。 使用 `errors()->all()` 检索所有验证错误。 使用 `validationErrors->get('attribute')` 检索 *specific* 属性的错误。
 
-> **注意**：模型利用 MessagesBag 对象，该对象具有 [简单而优雅的方法](../services/validation.md#working-with-error-messages) 格式化错误。
+> **注意**：模型利用 MessagesBag 对象，该对象具有 [简单而优雅的方法](../services/validation.md#oc-working-with-error-messages) 格式化错误。
 
 #### 覆盖验证
 
@@ -346,7 +352,7 @@ $user->forceSave();
 
 #### 自定义错误消息
 
-就像 Validator 类一样，您可以使用 [相同的语法](../services/validation.md#custom-error-messages) 设置自定义错误消息。
+就像 Validator 类一样，您可以使用 [相同的语法](../services/validation.md#oc-custom-error-messages) 设置自定义错误消息。
 
 ```php
 class User extends Model
@@ -396,7 +402,7 @@ class User extends Model
 
 #### 动态验证规则
 
-您可以通过覆盖 `beforeValidate` [模型事件](../database/model.md#events) 方法来动态应用规则。 这里我们检查 `is_remote` 属性是否为 `false`，然后动态设置 `latitude` 和 `longitude` 属性为必填字段。
+您可以通过覆盖 `beforeValidate` [模型事件](../database/model.md#oc-model-events) 方法来动态应用规则。 这里我们检查 `is_remote` 属性是否为 `false`，然后动态设置 `latitude` 和 `longitude` 属性为必填字段。
 
 ```php
 public function beforeValidate()
@@ -499,7 +505,7 @@ $user->posts()->forceDelete();
 
 ### 软删除关联
 
-当两个相关模型启用了软删除时，您可以通过在 [关联定义](../database/relations.md#detailed-relationships) 中定义 `softDelete` 选项来级联删除事件。 在这个例子中，如果用户模型被软删除，属于该用户的评论也将被软删除。
+当两个相关模型启用了软删除时，您可以通过在 [关联定义](../database/relations.md#oc-detailed-relationships) 中定义 `softDelete` 选项来级联删除事件。 在这个例子中，如果用户模型被软删除，属于该用户的评论也将被软删除。
 
 ```php
 class User extends Model

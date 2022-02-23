@@ -39,7 +39,7 @@ export:
     list: $/acme/campaign/models/subscriber/columns.yaml
 ```
 
-下面列出的配置选项是可选的。 如果您希望行为支持 [导入](#import-page) 或 [导出](#export-page) 或两者，请定义它们。
+下面列出的配置选项是可选的。 如果您希望行为支持 [导入](#oc-import-page) 或 [导出](#oc-export-page) 或两者，请定义它们。
 
 选项 | 描述
 ------------- | -------------
@@ -48,6 +48,7 @@ export:
 **export** | 配置数组或对导出页面的配置文件的引用。
 **defaultFormatOptions** | 配置数组或对默认 CSV 格式选项的配置文件的引用。
 
+<a id="oc-import-page"></a>
 ### 导入页面
 
 要支持导入页面，请将以下配置添加到 YAML 文件：
@@ -70,6 +71,7 @@ import:
 **redirect** | 导入完成时的重定向页面，可选
 **permissions** | 执行操作所需的用户权限，可选
 
+<a id="oc-export-page"></a>
 ### 导出页面
 
 要支持导出页面，请将以下配置添加到 YAML 文件中：
@@ -91,7 +93,7 @@ export:
 **list** | 定义可用于导出的列表列。
 **form** | 提供用作导出选项的附加字段，可选。
 **redirect** | 导出完成时的重定向页面，可选。
-**useList** | 设置为 true 或列表定义的值以启用 [与列表集成](#list-behavior-integration)，默认值：false。
+**useList** | 设置为 true 或列表定义的值以启用 [与列表集成](#oc-list-behavior-integration)，默认值：false。
 
 ### 格式选项
 
@@ -116,7 +118,7 @@ defaultFormatOptions:
 
 ## 导入和导出视图
 
-对于每个页面功能的 [导入](#import-page) 和 [导出](#export-page)，您应该提供具有相应名称的 [视图文件](controllers-ajax.md) - **import.htm** 和**export.htm**。
+对于每个页面功能的 [导入](#oc-import-page) 和 [导出](#oc-export-page)，您应该提供具有相应名称的 [视图文件](controllers-ajax.md) - **import.htm** 和**export.htm**。
 
 导入/导出行为向控制器类添加了两个方法：`importRender` 和 `exportRender`。 这些方法根据上述 YAML 配置文件呈现导入和导出部件。
 
@@ -277,6 +279,7 @@ class SubscriberImport extends \Backend\Models\ImportModel
 }
 ```
 
+<a id="oc-list-behavior-integration"></a>
 ## 与列表行为集成
 
 有另一种导出数据的方法，它使用 [列表行为](lists.md) 来提供导出数据。为了使用这个特性，你应该在控制器类的 `$implement` 字段中定义 `Backend.Behaviors.ListController`。您不需要使用导出视图，所有设置都将从列表中提取。这是唯一需要的配置：
@@ -286,7 +289,7 @@ export:
     useList: true
 ```
 
-如果您使用 [多个列表定义](lists.md#multiple-list-definitions)，那么您可以提供列表定义：
+如果您使用 [多个列表定义](lists.md#oc-multiple-list-definitions)，那么您可以提供列表定义：
 
 ```yaml
 export:

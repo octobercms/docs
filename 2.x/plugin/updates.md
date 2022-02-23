@@ -16,19 +16,20 @@ The change log is stored in a YAML file called `version.yaml` inside the **updat
 |           └── Plugin.php
 :::
 
+<a id="oc-update-process"></a>
 ## Update Process
 
-During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#important-updates). Any given migration or seed file will only be excuted once after a successful update. October executes the update process automatically when any of the following occurs:
+During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#oc-important-updates). Any given migration or seed file will only be excuted once after a successful update. October executes the update process automatically when any of the following occurs:
 
 1. When an administrator signs in to the backend.
 1. When the system is updated using the update feature in the backend area.
-1. When the [console command](../console/commands.md#database-migration) `php artisan october:migrate` is called in the command line from the application directory.
+1. When the [console command](../console/commands.md#oc-database-migration) `php artisan october:migrate` is called in the command line from the application directory.
 
-> **Note**: The plugin [initialization process](../plugin/registration.md#routing-and-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
+> **Note**: The plugin [initialization process](../plugin/registration.md#oc-routing-and-initialization) is disabled during the update process, this should be a consideration in migration and seeding scripts.
 
 ### Plugin Dependencies
 
-Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration.md#dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
+Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration.md#oc-dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
 
 ```php
 <?php namespace Acme\Blog;
@@ -64,6 +65,7 @@ As you can see above, there should be a key that represents the version number f
 v1.0.1: A single comment that uses no update scripts.
 ```
 
+<a id="oc-important-updates"></a>
 ### Important Updates
 
 Sometimes a plugin needs to introduce features that will break websites already using the plugin. To prevent the changes from being deployed automatically, you should increase the **major** segment of the version string (`major.minor.patch`). An example of an important update comment is below.
@@ -74,6 +76,7 @@ v2.1.0: This is an important update from v1 that contains breaking changes.
 
 When tagging the new version `v2` from a version `v1` then the changes are not deployed as part of a regular update. The user must install the plugin again to receive the latest version via Composer.
 
+<a id="oc-migration-files"></a>
 ### Migration and Seed Files
 
 As previously described, updates also define when [migration and seed files](../database/structure.md) should be applied. An update line with a comment and updates:

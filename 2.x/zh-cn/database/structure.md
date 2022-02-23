@@ -2,9 +2,10 @@
 
 迁移和种子文件允许您构建、修改和填充数据库表。 它们主要由 [插件更新文件](../plugin/updates.md) 使用，并与插件的版本历史记录配对。 所有类都存储在插件的`updates`目录中。 迁移应该记录一个关于您的数据库修改历史，并且这个历史可以向前和向后回滚，以建立和拆除表。
 
+<a id="oc-migration-structure"></a>
 ## 迁移结构
 
-迁移文件应该定义一个扩展 `October\Rain\Database\Updates\Migration` 类并包含两个方法： `up` 和 `down`。`up` 方法是用于新增数据库的数据表、字段或者索引的，而`down` 方法应该与 `up` 方法的执行操作相反。在这两种方法中，您都可以使用 [结构生成器](#creating-tables) 来创建和修改表。 例如，让我们看一个创建 `october_blog_posts` 表的示例迁移：
+迁移文件应该定义一个扩展 `October\Rain\Database\Updates\Migration` 类并包含两个方法： `up` 和 `down`。`up` 方法是用于新增数据库的数据表、字段或者索引的，而`down` 方法应该与 `up` 方法的执行操作相反。在这两种方法中，您都可以使用 [结构生成器](#oc-creating-tables) 来创建和修改表。 例如，让我们看一个创建 `october_blog_posts` 表的示例迁移：
 
 ```php
 <?php namespace Acme\Blog\Updates;
@@ -37,6 +38,7 @@ class CreatePostsTable extends Migration
 }
 ```
 
+<a id="oc-creating-tables"></a>
 ### 创建表
 
 要创建一个新的数据库表，请使用 `Schema`门面上的 create 方法。 `create` 方法接受两个参数。 第一个是表的名称，而第二个是一个`Closure`，它接收一个用于定义新表的对象：
@@ -47,7 +49,7 @@ Schema::create('users', function ($table) {
 });
 ```
 
-在创建数据表时，你可以使用结构生成器的任何 [字段方法](#creating-columns) 去定义数据表的字段。
+在创建数据表时，你可以使用结构生成器的任何 [字段方法](#oc-creating-columns) 去定义数据表的字段。
 
 #### 检查表/列是否存在
 
@@ -99,6 +101,7 @@ Schema::drop('users');
 Schema::dropIfExists('users');
 ```
 
+<a id="oc-creating-columns"></a>
 ### 创建字段
 
 在`Schema` 门面中可以使用`table`方法来更新已存在的数据表。和 `create`方法一样，`table` 方法接受两个参数：一个是数据表的名字，另一个是`Closure`，它接收我们可以用来向表中添加字段的对象：
@@ -156,7 +159,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
-以下是所有可用的字段修饰符的列表。此列表不包括 [索引修饰符](#creating-indexes)：
+以下是所有可用的字段修饰符的列表。此列表不包括 [索引修饰符](#oc-creating-indexes)：
 
 命令  |  描述
 ------------- | -------------
@@ -216,6 +219,7 @@ Schema::table('users', function ($table) {
 });
 ```
 
+<a id="oc-creating-indexes"></a>
 ### 创建索引
 
 结构生成器支持多种类型的索引。首先，先指定字段值唯一，即简单地在字段定义之后链式调用 `unique` 方法来创建索引，例如：
@@ -251,6 +255,7 @@ Command  | Description
 `$table->unique('email');`  |  添加唯一索引
 `$table->index('state');`  |  添加普通索引
 
+<a id="oc-index-lengths-using-mysql-mariadb"></a>
 ####  MySQL / MariaDB 的索引长度
 
 默认情况下，October CMS 使用 `utf8mb4` 字符集。 如果运行低于 v5.7.7 的 MySQL 版本或低于 v10.2.2 的 MariaDB，则需要手动配置迁移生成的默认字符串长度，以便 MySQL 为它们创建索引。 要配置默认字符串长度，请将以下内容添加到您的 **config/database.php** 配置文件中的键 `connections.mysql` 下。

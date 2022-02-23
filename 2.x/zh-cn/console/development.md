@@ -1,6 +1,6 @@
 # 发展
 
-除了提供的控制台命令之外，您还可以构建自己的自定义命令来处理您的应用程序。 您可以将自定义命令存储在插件 **console** 目录中。 您可以使用 [命令行脚手架工具](../console/scaffolding.md#create-a-console-command) 生成类文件。
+除了提供的控制台命令之外，您还可以构建自己的自定义命令来处理您的应用程序。 您可以将自定义命令存储在插件 **console** 目录中。 您可以使用 [命令行脚手架工具](../console/scaffolding.md#oc-create-a-console-command) 生成类文件。
 
 ## 创建命令
 
@@ -214,7 +214,7 @@ $bar->finish();
 
 #### 注册控制台命令
 
-一旦你的命令类完成，你需要注册它以便它可以使用。 这通常使用 `registerConsoleCommand` 辅助方法在 [插件注册文件](../plugin/registration.md#registration-methods) 的 `register` 方法中完成。
+一旦你的命令类完成，你需要注册它以便它可以使用。 这通常使用 `registerConsoleCommand` 辅助方法在 [插件注册文件](../plugin/registration.md#oc-registration-methods) 的 `register` 方法中完成。
 
 ```php
 class Blog extends PluginBase
@@ -239,7 +239,7 @@ Artisan::add(new Acme\Blog\Console\MyCommand);
 
 #### 在应用程序容器中注册命令
 
-如果您的命令已在 [应用程序容器](../services/application.md#application-container) 中注册，您可以使用 `Artisan::resolve` 方法使其对 Artisan 可用：
+如果您的命令已在 [应用程序容器](../services/application.md#oc-application-container) 中注册，您可以使用 `Artisan::resolve` 方法使其对 Artisan 可用：
 
 ```php
 Artisan::resolve('binding.name');
@@ -247,7 +247,7 @@ Artisan::resolve('binding.name');
 
 #### 在服务提供者中注册命令
 
-如果你需要在 [服务提供商](application.md#service-providers) 中注册命令，你应该从提供者的 `boot` 方法调用 `commands` 方法，传递 [容器](application.md#application -container) 绑定命令：
+如果你需要在 [服务提供商](application.md#oc-service-providers) 中注册命令，你应该从提供者的 `boot` 方法调用 `commands` 方法，传递 [容器](application.md#application -container) 绑定命令：
 
 ```php
 public function boot()

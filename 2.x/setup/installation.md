@@ -17,7 +17,7 @@ To run October CMS locally, we recommend the following software:
 
 October CMS uses [Composer](http://getcomposer.org/) to manage its dependencies. So before getting started, you will need to make sure you have Composer installed.
 
-You should also check that your computer or server meets the [minimum system requirements](#minimum-system-requirements) for running the PHP application.
+You should also check that your computer or server meets the [minimum system requirements](#oc-minimum-system-requirements) for running the PHP application.
 
 ## Installing October CMS
 
@@ -63,10 +63,11 @@ Configuration files are stored in the **config** directory of the application. W
 
 For example, in production environments you may want to do the following:
 
-- Enable [CSRF protection](../setup/configuration.md#csrf-protection)
-- Disable [debug mode](../setup/configuration.md#debug-mode)
-- Use a [public folder](../setup/deployment.md#public-folder) for additional security
+- Enable [CSRF protection](../setup/configuration.md#oc-csrf-protection)
+- Disable [debug mode](../setup/configuration.md#oc-debug-mode)
+- Use a [public folder](../setup/deployment.md#oc-public-folder) for additional security
 
+<a id="oc-setting-up-the-scheduler"></a>
 ### Setting Up The Scheduler
 
 For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.
@@ -89,6 +90,7 @@ You can also run the queue as a daemon process with
 php artisan queue:work
 ```
 
+<a id="oc-minimum-system-requirements"></a>
 ## Minimum System Requirements
 
 October CMS has some server requirements for web hosting:
@@ -109,7 +111,7 @@ Support is provided for these databases with minimum requirements:
 1. PostgreSQL 9.6
 1. SQLite 3.8.8
 
-If you are using an older version of MySQL or MariaDB, you may need to [configure the index lengths](../database/structure.md#index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
+If you are using an older version of MySQL or MariaDB, you may need to [configure the index lengths](../database/structure.md#oc-index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
 
 Some OS distributions may require you manually install some of the necessary PHP extensions. When using Ubuntu, the following command can be run to install all required extensions:
 
@@ -124,13 +126,13 @@ When using the SQL Server database engine, you will need to install the [group c
 
 1. **The installation hangs or freezes when I enter the license key**: This can happen in some environments when pasting the key contents. Press the ENTER key multiple times to allow the installation process to continue.
 
-1. **An error "Specified key was too long" is displayed during migration**: This happens when you are using an older version of MySQL or MariaDB. To resolve this issue, you may need to [configure the index lengths](../database/structure.md#index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
+1. **An error "Specified key was too long" is displayed during migration**: This happens when you are using an older version of MySQL or MariaDB. To resolve this issue, you may need to [configure the index lengths](../database/structure.md#oc-index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
 
 1. **An error "Deprecated: Return type of offsetExists($key) should either be compatible with offsetExists(mixed $offset)..."**: This happens when using PHP 8.1 or above, use a lower version of PHP to resolve this issue. The recommended PHP version for October CMS 2.0 is PHP 8.0.
 
 1. **A blank screen is displayed when opening the application**: Check the permissions are set correctly on the `/storage` files and folders, they should be writable for the web server.
 
-1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration.md#debug-mode) to see the underlying error message.
+1. **The back-end area displays "Page not found" (404)**: If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration.md#oc-debug-mode) to see the underlying error message.
 
 1. **An error 500 is displayed when updating the application**: You may need to increase or disable the timeout limit on your webserver. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
 

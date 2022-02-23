@@ -14,7 +14,7 @@
 $users = Db::table('users')->get();
 ```
 
-与 [原生查询](../database/basics.md#running-raw-sql-queries) 类似，`get` 方法返回结果的`array`，其中每个结果都是 PHP `stdClass` 对象的一个实例。 您可以通过将字段作为对象的属性来访问每一列的值：
+与 [原生查询](../database/basics.md#oc-running-raw-sql-queries) 类似，`get` 方法返回结果的`array`，其中每个结果都是 PHP `stdClass` 对象的一个实例。 您可以通过将字段作为对象的属性来访问每一列的值：
 
 ```php
 foreach ($users as $user) {
@@ -68,7 +68,7 @@ foreach ($roles as $name => $title) {
 Db::select('select * from sometable where name = :name', ['name' => 'Charles']);
 ```
 
-有关详细信息，请参阅有关 [运行原生 SQL 查询](../database/basics.md#running-raw-sql-queries) 的文章。
+有关详细信息，请参阅有关 [运行原生 SQL 查询](../database/basics.md#oc-running-raw-sql-queries) 的文章。
 
 ### 分块结果
 
@@ -107,6 +107,7 @@ Db::table('users')->where('active', false)
 
 > **注意**：在块的回调里面更新或删除记录时，对主键或外键的任何更改都可能影响块查询。 这可能会导致记录没有包含在分块结果中。
 
+<a id="oc-aggregates"></a>
 ### 聚合
 
 查询构造器还提供了各种聚合方法，比如 `count`, `max`，`min`， `avg`，还有 `sum`。你可以在构造查询后调用任何方法：
@@ -600,7 +601,7 @@ $users = Db::table('users')
     ->get();
 ```
 
-对于更高级的 `having` 语法，参见 [`havingRaw`](#aggregates) 方法.
+对于更高级的 `having` 语法，参见 [`havingRaw`](#oc-aggregates) 方法.
 
 #### 限制和偏移(分页)
 

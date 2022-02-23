@@ -1,6 +1,6 @@
 # {% placeholder %}
 
-`{% placeholder %}` 标签将呈现一个占位符部分，该部分通常 [在Layouts中使用](../cms/layouts.md#placeholders). 此标签将返回任何使用 `{% put %}` 标签添加的占位符内容，或任何已定义的默认内容(可选)。
+`{% placeholder %}` 标签将呈现一个占位符部分，该部分通常 [在Layouts中使用](../cms/layouts.md#oc-placeholders). 此标签将返回任何使用 `{% put %}` 标签添加的占位符内容，或任何已定义的默认内容(可选)。
 
 ```twig
 {% placeholder name %}

@@ -36,6 +36,7 @@ themes/
 
 > 活动主题通过`config/cms.php` 文件中的`active_theme` 参数或System > CMS > Front-end(中文后台可在设置>前端主题中选择)后端页面上的主题选择器设置。 使用主题选择器设置的主题会覆盖 `config/cms.php` 文件中的值。
 
+<a id="oc-subdirectories"></a>
 ### 子目录
 
 October CMS 支持 **pages**、**partials**、**layouts** 和 **content** 文件的单级子目录，而 **assets** 目录可以具有无限的深度。 这种方法简化了大型网站的组织。 在下面的示例目录结构中，**pages** 和 **partials** 目录包含 **blog** 子目录，**content** 目录包含 **home** 子目录。
@@ -87,6 +88,7 @@ function onStart()
 {% endfor %}
 ```
 
+<a id="oc-configuration-section"></a>
 ### 配置部分
 
 配置部分设置模板参数。 支持的配置参数特定于不同的 CMS 模板，并在其相应的文档文章中进行了描述。 配置部分使用简单的 [INI格式](http://en.wikipedia.org/wiki/INI_file)，其中字符串参数值用引号括起来。 页面模板的示例配置部分：
@@ -99,6 +101,7 @@ layout = "default"
 parameter = "value"
 ```
 
+<a id="oc-php-section"></a>
 ### PHP 代码部分
 
 PHP 部分中的代码每次在呈现模板之前都会执行。 PHP 部分对于所有 CMS 模板都是可选的，其内容取决于定义它的模板类型。 PHP 代码部分可以包含可选的打开和关闭 PHP 标记，以在文本编辑器中启用语法高亮显示。 打开和关闭标签应始终在与节分隔符 `==` 不同的行上指定。
@@ -151,9 +154,10 @@ echo $this['foo'];
 echo $this->foo;
 ```
 
+<a id="oc-twig-section"></a>
 ### Twig标记部分
 
-Twig 部分定义了模板要呈现的标记。在 Twig 部分，您可以使用函数、标签和过滤器 [由 October CMS 提供](../markup.md)，所有 [native Twig 功能](https://twig.symfony.com/doc/) ，或那些[由插件提供](../plugin/registration.md#extending-twig)。 Twig 部分的内容取决于模板类型(页面、布局或部件)。您可以在文档中进一步找到有关特定 Twig 对象的更多信息。
+Twig 部分定义了模板要呈现的标记。在 Twig 部分，您可以使用函数、标签和过滤器 [由 October CMS 提供](../markup.md)，所有 [native Twig 功能](https://twig.symfony.com/doc/) ，或那些[由插件提供](../plugin/registration.md#oc-extending-twig)。 Twig 部分的内容取决于模板类型(页面、布局或部件)。您可以在文档中进一步找到有关特定 Twig 对象的更多信息。
 
 可以在 [标记指南](../markup.md) 中找到更多信息。
 
@@ -169,6 +173,7 @@ Twig 部分定义了模板要呈现的标记。在 Twig 部分，您可以使用
 
 > **注意**：图像和样式表等资产文件不会保存在数据库中，并且无法在没有访问文件系统的情况下进行修改。
 
+<a id="oc-child-themes"></a>
 ## 子主题
 
 子主题允许主题继承的可能性。当您有第三方主题或处于只读模式的主题时，这是一个很好的用途。子主题将引用父主题并将其用作备份。

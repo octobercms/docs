@@ -36,6 +36,7 @@
 
 如果你想重写主数组中的配置，只需要修改 `read` 和 `write` 数组即可。所以，这个例子中： `192.168.1.1`和`192.168.1.2` 将作为 「读」 连接主机，而 `192.168.1.3` 将作为 「写」 连接主机。这两个连接会共享 `mysql` 数组的各项配置，如数据库的凭据(用户名 / 密码)，前缀，字符编码等。
 
+<a id="oc-running-raw-sql-queries"></a>
 ## 运行原生 SQL 查询
 
 一旦配置好数据库连接后，便可以使用 `DB` facade 运行查询。 `DB` facade 为每种类型的查询提供了方法： `select`，`update`，`insert`，`delete` 和 `statement`。
@@ -98,6 +99,7 @@ $deleted = Db::delete('delete from users');
 Db::statement('drop table users');
 ```
 
+<a id="oc-multiple-database-connections"></a>
 ## 使用多个数据库连接
 
 当使用多个数据库连接时，你可以通过 `DB` Facade 的 `connection` 方法访问每一个连接。传递给 `connection`方法的参数 `name` 应该是 `config/database.php` 配置文件中 connections 数组中的一个值：
@@ -156,7 +158,7 @@ Db::listen(function($sql, $bindings, $time) {
 });
 ```
 
-就像 [事件注册](../services/events.md#where-to-register-listeners)一样，您可以在 [插件注册文件](../plugin/registration.md#registration-methods) 的 `boot` 方法中注册查询侦听器。 或者，可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置此逻辑。
+就像 [事件注册](../services/events.md#oc-where-to-register-listeners)一样，您可以在 [插件注册文件](../plugin/registration.md#oc-registration-methods) 的 `boot` 方法中注册查询侦听器。 或者，可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置此逻辑。
 
 ### 查询记录
 
@@ -178,4 +180,4 @@ $queries = Db::getQueryLog();
 Db::connection()->disableQueryLog();
 ```
 
-> **注意**：为了更快地调试，调用 `trace_sql` [助手函数](../services/error-log.md#helper-functions) 可能更有用。
+> **注意**：为了更快地调试，调用 `trace_sql` [助手函数](../services/error-log.md#oc-helper-functions) 可能更有用。

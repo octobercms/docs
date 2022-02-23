@@ -34,6 +34,7 @@ url = "/contacts"
 {% content 'my-markdown.md' %}
 ```
 
+<a id="oc-passing-variables-to-content-blocks"></a>
 ## 将变量传递给内容块
 
 有时您可能需要将变量从外部代码传递到内容块。虽然内容块不支持 Twig 标记，但它们确实支持使用具有基本语法的变量。您可以通过在 `{% content %}` 标签中的内容块名称之后指定变量来将变量传递给内容块。

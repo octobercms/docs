@@ -5,7 +5,7 @@
 1.打开文件`storage/logs/system.log`可以在文件系统中查看事件日志。
 1. 或者，可以通过管理区域导航到 *System[设置] > Logs[日志] > Event Log[事件日志]* 来查看它。
 
-当显示错误页面和某些 [异常类型](#exception-types) 时，始终会创建日志条目。
+当显示错误页面和某些 [异常类型](#oc-exception-types) 时，始终会创建日志条目。
 
 ## 配置
 
@@ -38,6 +38,7 @@ October 支持 `single`、`daily`、`syslog` 和 `errorlog` 日志记录模式�
 'log' => 'daily'
 ```
 
+<a id="oc-exception-types"></a>
 ## 可用的异常
 
 October CMS 提供了几种预置好的基本异常类型。
@@ -62,6 +63,7 @@ throw new SystemException('无法联系邮件服务器 API');
 
 抛出此异常时，会显示详细的错误消息，其中包含发生该异常的文件和行号。
 
+<a id="oc-validation-exception"></a>
 ### 验证异常
 
 `October\Rain\Exception\ValidationException` 类，别名为 `ValidationException`，用于与表单提交和无效字段直接相关的错误。 该消息应包含一个包含字段和错误消息的数组。
@@ -82,6 +84,7 @@ if ($validation->fails()) {
 
 当抛出此异常时，[AJAX 框架](../ajax/introduction.md) 将以可用格式提供此信息并聚焦第一个无效字段。
 
+<a id="oc-ajax-exception"></a>
 ### AJAX 异常
 
 `October\Rain\Exception\AjaxException` 类，别名为 `AjaxException`，被认为是"智能错误"，将返回 HTTP 代码 406。这允许它们像成功响应一样传递响应内容。
@@ -124,7 +127,7 @@ App::fatal(function($exception) {
 
 ### 错误处理程序的放置位置
 
-错误处理程序注册，如 [事件处理程序](events.md)，通常属于`引导代码`类别。换句话说，它们让你的应用程序准备好实际处理请求，并且通常需要在实际调用路由或控制器之前执行。最常见的地方是[插件注册文件](../plugin/registration.md#registration-methods)的`boot`方法。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来注册错误处理程序。
+错误处理程序注册，如 [事件处理程序](events.md)，通常属于`引导代码`类别。换句话说，它们让你的应用程序准备好实际处理请求，并且通常需要在实际调用路由或控制器之前执行。最常见的地方是[插件注册文件](../plugin/registration.md#oc-registration-methods)的`boot`方法。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来注册错误处理程序。
 
 ## HTTP 异常
 
@@ -176,6 +179,7 @@ Log::debug($error);
 Log::info('用户登录失败。', ['id' => $user->id]);
 ```
 
+<a id="oc-helper-functions"></a>
 ### 助手函数
 
 有一些全局助手方法可用于简化日志记录。 `trace_log` 函数是 `Log::info` 的别名，支持使用数组和异常作为消息。

@@ -27,7 +27,7 @@ The filter can also be used to combine assets of the same type by passing an arr
 
 ### Combiner Aliases
 
-The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../ajax/introduction.md#including-the-framework) can be included in the combiner:
+The asset combiner supports common aliases that substitute file paths, these will begin with the `@` symbol. For example the [AJAX framework assets](../ajax/introduction.md#oc-including-the-framework) can be included in the combiner:
 
 ```twig
 <script src="{{ [

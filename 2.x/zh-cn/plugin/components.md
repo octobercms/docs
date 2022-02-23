@@ -13,11 +13,12 @@ plugins/
       Plugin.php
 ```
 
-组件必须[在插件注册类中注册](#component-registration) 使用`registerComponents` 方法。
+组件必须[在插件注册类中注册](#oc-component-registration) 使用`registerComponents` 方法。
 
+<a id="oc-component-class-definition"></a>
 ## 组件类定义
 
-**组件类文件**定义了组件功能和[组件属性](#component-properties)。 组件类文件名应与组件类名匹配。 组件类应该扩展`\Cms\Classes\ComponentBase` 类。 下一个示例中的组件应该在 plugins/acme/blog/components/BlogPosts.php 文件中定义。
+**组件类文件**定义了组件功能和[组件属性](#oc-component-properties)。 组件类文件名应与组件类名匹配。 组件类应该扩展`\Cms\Classes\ComponentBase` 类。 下一个示例中的组件应该在 plugins/acme/blog/components/BlogPosts.php 文件中定义。
 
 ```php
 namespace Acme\Blog\Components;
@@ -61,9 +62,10 @@ url = "/blog"
 {% endfor %}
 ```
 
+<a id="oc-component-registration"></a>
 ### 组件注册
 
-组件必须通过覆盖[插件注册类](registration.md#registration-file)内的`registerComponents`方法来注册。 这会告诉 CMS 有关该组件的信息，并提供一个 **短名称** 以供使用。 注册组件的示例：
+组件必须通过覆盖[插件注册类](registration.md#oc-registration-file)内的`registerComponents`方法来注册。 这会告诉 CMS 有关该组件的信息，并提供一个 **短名称** 以供使用。 注册组件的示例：
 
 ```php
 public function registerComponents()
@@ -76,6 +78,7 @@ public function registerComponents()
 
 这将使用默认别名 **demoTodo** 注册 Todo 组件类。 有关使用组件的更多信息，请参见 [CMS 组件文章](../cms/components.md)。
 
+<a id="oc-component-properties"></a>
 ## 组件属性
 
 当您将组件添加到页面或布局时，您可以使用属性对其进行配置。 属性是用组件类的`defineProperties` 方法定义的。 下一个示例显示如何定义组件属性：
@@ -109,7 +112,7 @@ public function defineProperties()
 **required** | 可选，强制填充字段。留空时使用validationMessage。
 **placeholder** | 字符串和下拉属性的可选占位符。
 **options** | 下拉属性的可选选项数组。
-**depends** | 下拉属性所依赖的属性名称数组。请参阅下面的 [下拉属性](#dropdown-and-set-properties)。
+**depends** | 下拉属性所依赖的属性名称数组。请参阅下面的 [下拉属性](#oc-dropdown-and-set-properties)。
 **group** | 一个可选的组名。组在检查器中创建部件以简化用户体验。在多个属性中使用相同的组名来组合它们。
 **showExternalParam** | 为检查器中的属性指定外部参数编辑器的可见性。默认值：**true**。
 
@@ -137,7 +140,8 @@ $properties = $this->getProperties();
 {{ __SELF__.property('maxItems') }}
 ```
 
-###下拉和设置属性
+<a id="oc-dropdown-and-set-properties"></a>
+### 下拉和设置属性
 
 下拉列表和设置属性的选项列表可以是静态的或动态的。 静态选项是用属性定义的`options` 元素定义的。 例子：
 
@@ -218,7 +222,7 @@ public function getStateOptions()
 
 ### 页面列表属性
 
-有时组件需要创建指向网站页面的链接。 例如，博客文章列表包含指向博客文章详细信息页面的链接。 在这种情况下，组件应该知道帖子详细信息页面文件名(然后它可以使用 [页面 Twig 过滤器](../cms/markup.md#page-filter))。 October包括一个用于创建动态下拉列表页面的助手。 下一个示例定义了 postPage 属性，该属性显示页面列表：
+有时组件需要创建指向网站页面的链接。 例如，博客文章列表包含指向博客文章详细信息页面的链接。 在这种情况下，组件应该知道帖子详细信息页面文件名(然后它可以使用 [页面 Twig 过滤器](../markup/filter-page.md))。 October包括一个用于创建动态下拉列表页面的助手。 下一个示例定义了 postPage 属性，该属性显示页面列表：
 
 ```php
 public function defineProperties()
@@ -240,14 +244,14 @@ public function getPostPageOptions()
 
 ## 路由参数
 
-组件可以直接访问[页面的URL](../cms/pages.md#url-syntax)中定义的路由参数值。
+组件可以直接访问[页面的URL](../cms/pages.md#oc-url-syntax)中定义的路由参数值。
 
 ```php
 // 返回 URL 段值，例如：/page/:post_id
 $postId = $this->param('post_id');
 ```
 
-在某些情况下，[组件属性](#component-properties) 可能充当硬编码值或从 URL 引用该值。
+在某些情况下，[组件属性](#oc-component-properties) 可能充当硬编码值或从 URL 引用该值。
 
 这个硬编码示例显示了使用标识符"2"的博客文章：
 
@@ -258,7 +262,7 @@ url = "/blog/hard-coded-page"
 id = "2"
 ```
 
-或者，可以使用 [外部属性值](../cms/components.md#using-external-property-values) 从页面 URL 动态引用该值：
+或者，可以使用 [外部属性值](../cms/components.md#oc-using-external-property-values) 从页面 URL 动态引用该值：
 
 ```ini
 url = "/blog/:my_custom_parameter"
@@ -280,6 +284,7 @@ $this->property('id');
 $this->paramName('id');
 ```
 
+<a id="oc-handling-the-page-execution-cycle"></a>
 ## 处理页面执行周期
 
 通过覆盖组件类中的`onRun` 方法，组件可以参与到页面执行循环事件中。 每次页面或布局加载时，CMS 控制器都会执行此方法。 在该方法中，您可以通过 `page` 属性将变量注入到 Twig 环境中：
@@ -295,7 +300,7 @@ public function onRun()
 
 ### 页面执行生命周期处理程序
 
-当页面加载时，October 会执行可以在布局，页面 [PHP 部分](../cms/themes.md#php-section) 和组件类中定义的处理程序函数。 处理程序的执行顺序如下：
+当页面加载时，October 会执行可以在布局，页面 [PHP 部分](../cms/themes.md#oc-php-section) 和组件类中定义的处理程序函数。 处理程序的执行顺序如下：
 
 1.布局`onInit()`函数。
 1.页面`onInit()`函数。
@@ -307,6 +312,7 @@ public function onRun()
 1.页面`onEnd()`函数。
 1.布局`onEnd()`函数。
 
+<a id="oc-component-initialization"></a>
 ### 组件初始化
 
 有时您可能希望在组件类第一次实例化时执行代码。 您可以覆盖组件类中的 `init` 方法来处理任何初始化逻辑，这将在 AJAX 处理程序和页面执行生命周期之前执行。 例如，此方法可用于将另一个组件动态附加到页面。
@@ -319,7 +325,7 @@ public function init()
 
 ### 停止响应
 
-和[页面执行生命周期](../cms/layouts.md#layout-execution-life-cycle)中的所有方法一样，如果组件中的`onRun`方法有返回值，这将在此停止循环 指向并将响应返回给浏览器。 这里我们使用 `Response` 门面返回一个访问被拒绝的消息：
+和[页面执行生命周期](../cms/layouts.md#oc-dynamic-layouts)中的所有方法一样，如果组件中的`onRun`方法有返回值，这将在此停止循环 指向并将响应返回给浏览器。 这里我们使用 `Response` 门面返回一个访问被拒绝的消息：
 
 ```php
 public function onRun()
@@ -342,6 +348,7 @@ public function onRun()
 }
 ```
 
+<a id="oc-ajax-handlers"></a>
 ## AJAX 处理程序
 
 组件可以承载 AJAX 事件处理程序。 它们在组件类中的定义与在 [页面或布局代码](../ajax/handlers.md) 中定义的完全一样。 在组件类中定义的示例 AJAX 处理程序方法：
@@ -355,7 +362,7 @@ public function onAddItem()
 }
 ```
 
-如果这个组件的别名是 *demoTodo* 这个处理程序可以通过 `demoTodo::onAddItem` 访问。 有关在组件中使用 AJAX 的详细信息，请参阅 [调用组件中定义的 AJAX 处理程序](../ajax/handlers.md#calling-a-handler) 文章。
+如果这个组件的别名是 *demoTodo* 这个处理程序可以通过 `demoTodo::onAddItem` 访问。 有关在组件中使用 AJAX 的详细信息，请参阅 [调用组件中定义的 AJAX 处理程序](../ajax/handlers.md#oc-calling-a-handler) 文章。
 
 ## 默认标记
 
@@ -371,7 +378,7 @@ url = "/todo"
 {% component 'demoTodo' %}
 ```
 
-默认标记还可以采用在渲染时覆盖 [组件属性](#component-properties) 的参数。
+默认标记还可以采用在渲染时覆盖 [组件属性](#oc-component-properties) 的参数。
 
 ```twig
 {% component 'demoTodo' maxItems="7" %}
@@ -389,6 +396,7 @@ public function onRender()
 }
 ```
 
+<a id="oc-component-partials"></a>
 ## 组件部件
 
 除了默认标记之外，组件还可以提供可在前端或默认标记本身内使用的附加部件。如果 Demo ToDo 组件有一个 **pagination** 部件，它将位于 **/plugins/october/demo/components/todo/pagination.htm** 并使用以下命令显示在页面上：
@@ -411,7 +419,7 @@ public function onRender()
 
 ### 引用"自己"
 
-组件可以通过使用 `__SELF__` 变量在它们的部件内部引用自己。默认情况下，它将返回组件的短名称或 [别名](../cms/components.md#components-aliases)。
+组件可以通过使用 `__SELF__` 变量在它们的部件内部引用自己。默认情况下，它将返回组件的短名称或 [别名](../cms/components.md#oc-components-aliases)。
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">
@@ -453,7 +461,7 @@ public function onRender()
 
 ## 从代码渲染部件
 
-您可以使用 `renderPartial` 方法以编程方式在 PHP 代码中渲染组件部件。 这将检查名为`component-partial.htm`的部件的组件，并将结果作为字符串返回。 第二个参数用于传递视图变量。 当你在 PHP 中渲染组件部件时，同样的 [路径解析逻辑](#component-partials) 也适用于 Twig； 使用 `@` 前缀来引用组件本身内的部件。
+您可以使用 `renderPartial` 方法以编程方式在 PHP 代码中渲染组件部件。 这将检查名为`component-partial.htm`的部件的组件，并将结果作为字符串返回。 第二个参数用于传递视图变量。 当你在 PHP 中渲染组件部件时，同样的 [路径解析逻辑](#oc-component-partials) 也适用于 Twig； 使用 `@` 前缀来引用组件本身内的部件。
 
 ```php
 $content = $this->renderPartial('@component-partial.htm');
@@ -472,7 +480,7 @@ function onGetTemplate()
 }
 ```
 
-另一个示例可能是通过从 `onRun` [页面循环方法](#handling-the-page-execution-cycle) 返回一个值来覆盖整个页面视图响应。 此代码将使用 `Response` 门面专门返回一个 XML 响应：
+另一个示例可能是通过从 `onRun` [页面循环方法](#oc-handling-the-page-execution-cycle) 返回一个值来覆盖整个页面视图响应。 此代码将使用 `Response` 门面专门返回一个 XML 响应：
 
 ```php
 public function onRun()
@@ -482,9 +490,10 @@ public function onRun()
 }
 ```
 
+<a id="oc-injecting-page-assets-with-components"></a>
 ## 使用组件注入页面资产
 
-组件可以将资产(CSS 和 JavaScript 文件)注入到它们所附加的页面或布局中。 使用控制器的 `addCss` 和 `addJs` 方法将资产添加到 CMS 控制器。 它可以在组件的 `onRun` 方法中完成。 请阅读有关[在页面文章中注入资产](../cms/page.md#injecting-page-assets-programmatically)的更多详细信息。 例子：
+组件可以将资产(CSS 和 JavaScript 文件)注入到它们所附加的页面或布局中。 使用控制器的 `addCss` 和 `addJs` 方法将资产添加到 CMS 控制器。 它可以在组件的 `onRun` 方法中完成。 请阅读有关[在页面文章中注入资产](../cms/pages.md#oc-injecting-page-assets-programmatically)的更多详细信息。 例子：
 
 ```php
 public function onRun()

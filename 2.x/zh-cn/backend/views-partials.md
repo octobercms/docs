@@ -41,6 +41,7 @@
 <?php endif ?>
 ```
 
+<a id="oc-layouts-and-child-layouts"></a>
 ## 布局和子布局
 
 后端布局驻留在插件的可选 **layouts/** 目录中。 使用控制器对象的 `$layout` 属性设置自定义布局。 系统布局默认称为`default`。

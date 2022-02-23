@@ -32,7 +32,7 @@ class SendEmail
 }
 ```
 
-请注意，唯一需要的方法是`fire`，它接收一个`Job`实例以及推送到队列中的`data`数组 
+请注意，唯一需要的方法是`fire`，它接收一个`Job`实例以及推送到队列中的`data`数组
 
 #### 指定自定义处理程序方法
 
@@ -42,7 +42,7 @@ class SendEmail
 Queue::push('SendEmail@send', ['message' => $message]);
 ```
 
-#### 为作业指定队列名称 
+#### 为作业指定队列名称
 
 您还可以指定应将作业发送到的队列/管道：
 
@@ -70,7 +70,7 @@ Queue::later($date, 'SendEmail', ['message' => $message]);
 
 #### 删除已处理的作业
 
-处理完作业后，必须将其从队列中删除，这可以通过 `Job` 实例上的 `delete` 方法完成： 
+处理完作业后，必须将其从队列中删除，这可以通过 `Job` 实例上的 `delete` 方法完成：
 
 ```php
 public function fire($job, $data)
@@ -122,7 +122,7 @@ $job->getJobId();
 
 你也可以将 Closure 推送到队列中。 这对于需要排队的快速、简单的任务非常方便：
 
-#### 将闭包推入队列 
+#### 将闭包推入队列
 
 ```php
 Queue::push(function($job) use ($id) {
@@ -134,17 +134,17 @@ Queue::push(function($job) use ($id) {
 
 > **注意**: 不要通过 `use` 指令让队列中的闭包可以使用对象，而是考虑传递主键并从队列作业中重新拉出关联的模型。 这通常可以避免意外的序列化行为。
 
-使用 Iron.io [推送队列](#push-queues)时, 您应该采取额外的预防措施排队闭包。 接收队列消息的端点应检查令牌以验证请求实际上来自 Iron.io。例如，您的推送队列端点应该类似于: `https://example.com/queue/receive?token=SecretToken`.然后，您可以在编组队列请求之前检查应用程序中秘密令牌的值。
+使用 Iron.io 推送队列 时, 您应该采取额外的预防措施排队闭包。 接收队列消息的端点应检查令牌以验证请求实际上来自 Iron.io。例如，您的推送队列端点应该类似于: `https://example.com/queue/receive?token=SecretToken`.然后，您可以在编组队列请求之前检查应用程序中秘密令牌的值。
 
 ## 运行队列工作者
 
-October CMS 包括一些 [控制台命令](../console/commands.md) 它们将处理队列中的作业。 
+October CMS 包括一些 [控制台命令](../console/commands.md) 它们将处理队列中的作业。
 
 要在新作业被推送到队列时对其进行处理，请运行 `queue:work` 命令：
 
     php artisan queue:work
 
-此任务启动后，它将继续运行，直到手动停止。 您可以使用例如[Supervisor](#supervisor-configuration)之类的进程监视器来确保队列工作者不会停止运行。
+此任务启动后，它将继续运行，直到手动停止。 您可以使用例如[Supervisor](#oc-supervisor-configuration)之类的进程监视器来确保队列工作者不会停止运行。
 
 队列工作进程将启动的应用程序状态存储在内存中。 启动后，它们将无法识别您的代码中的更改。 部署更改时，重新启动队列工作程序。
 
@@ -212,6 +212,7 @@ October CMS 包括一些 [控制台命令](../console/commands.md) 它们将处�
 
 同样，您的数据库连接在被长时间运行的守护程序使用时可能会断开。你可以使用 `Db::reconnect` 方法来确保你有一个新的连接。
 
+<a id="oc-supervisor-configuration"></a>
 ## 主管配置
 
 ### 安装主管

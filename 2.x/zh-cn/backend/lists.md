@@ -2,7 +2,7 @@
 
 **List Behavior** 是一个控制器修饰符，用于轻松地将记录列表添加到页面。 该行为提供了可排序和可搜索的列表及其记录上的可选链接。 该行为提供了控制器操作`索引`，但是列表可以在任何地方呈现，并且可以使用多个列表定义。
 
-列表行为取决于列表 [列表字段](#defining-list-columns) 和 [模型类](../database/model.md)。 为了使用列表行为，您应该将其添加到控制器类的 `$implement` 属性中。 此外，应定义 `$listConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
+列表行为取决于列表 [列表字段](#oc-defining-list-columns) 和 [模型类](../database/model.md)。 为了使用列表行为，您应该将其添加到控制器类的 `$implement` 属性中。 此外，应定义 `$listConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -19,6 +19,7 @@ class Categories extends \Backend\Classes\Controller
 
 > **注意**：列表和 [表单行为](../backend/forms.md) 通常在同一个控制器中一起使用。
 
+<a id="oc-configuring-the-list-behavior"></a>
 ## 配置列表行为
 
 `$listConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [视图目录](controllers-ajax.md) 中。 下面是一个典型的列表行为配置文件示例：
@@ -39,14 +40,14 @@ recordUrl: acme/blog/posts/update/:id
 字段 | 描述
 ------------- | -------------
 **title** | 此列表的标题。
-**list** | 配置数组或对列表字段定义文件的引用，请参阅 [列表字段](#defining-list-columns)。
+**list** | 配置数组或对列表字段定义文件的引用，请参阅 [列表字段](#oc-defining-list-columns)。
 **modelClass** | 一个模型类名，列表数据是从这个模型加载的。
 
 下面列出的配置选项是可选的。
 
 选项 | 描述
 ------------- | -------------
-**filter** | 过滤器配置，参见[过滤列表](#filtering-the-list)。
+**filter** | 过滤器配置，参见[过滤列表](#oc-filtering-the-list)。
 **recordUrl** | 将每个列表记录链接到另一个页面。例如：**users/update:id**。 `:id` 部分被替换为记录标识符。这允许您链接列表行为和 [表单行为](forms.md)。
 **recordOnClick** | 单击记录时要执行的自定义 JavaScript 代码。
 **noRecordsMessage** | 未找到记录时显示的消息，可以参考 [多语言字符串](../plugin/localization.md)。
@@ -87,10 +88,10 @@ toolbar:
 ------------- | -------------
 **prompt** | 没有活动搜索时显示的占位符，可以参考 [多语言字符串](../plugin/localization.md)。
 **mode** | 将搜索策略定义为包含所有单词、任何单词或精确短语。 支持的选项： all(全部), any(任意), exact(精确)。 默认值：all。
-**scope** | 指定**列表模型**中定义的 [查询范围方法](../database/model.md#query-scopes) 以应用于搜索查询。 第一个参数将包含查询对象(根据常规范围方法)，第二个将包含搜索词，第三个将是要搜索的字段的数组。
+**scope** | 指定**列表模型**中定义的 [查询范围方法](../database/model.md#oc-query-scopes) 以应用于搜索查询。 第一个参数将包含查询对象(根据常规范围方法)，第二个将包含搜索词，第三个将是要搜索的字段的数组。
 **searchOnEnter** | 将此设置为 true 将使搜索小部件在开始搜索之前等待按下 Enter 键(默认行为是在有人在搜索字段中输入内容后自动开始搜索，然后暂停片刻)。 默认值：false。
 
-上面提到的工具栏按钮应该包含带有一些按钮的工具栏部件定义。 部件还可以包含带有图表的 [记分板控件](controls.md#scoreboards)。 带有 **新帖子** 按钮的工具栏部分示例，指的是 [表单行为](forms.md) 提供的 **create** 操作：
+上面提到的工具栏按钮应该包含带有一些按钮的工具栏部件定义。 部件还可以包含带有图表的 [记分板控件](https://octobercms.com/docs/ui/scoreboard)。 带有 **新帖子** 按钮的工具栏部分示例，指的是 [表单行为](forms.md) 提供的 **create** 操作：
 ```php
 <div data-control="toolbar">
     <a
@@ -99,6 +100,7 @@ toolbar:
 </div>
 ```
 
+<a id="oc-filtering-the-list"></a>
 ### 过滤列表
 
 要按用户定义的输入过滤列表，请将以下列表配置添加到 YAML 文件：
@@ -107,8 +109,9 @@ toolbar:
 filter: config_filter.yaml
 ```
 
-**filter** 选项应引用 [过滤器配置文件](#using-list-filters) 路径或提供带有配置的数组。
+**filter** 选项应引用 [过滤器配置文件](#oc-using-list-filters) 路径或提供带有配置的数组。
 
+<a id="oc-defining-list-columns"></a>
 ## 定义列表字段
 
 列表字段是使用 YAML 文件定义的。 列表行为使用字段配置来创建记录表并在表单元格中显示模型字段。 该文件被放置在插件的 **models** 目录的子目录中。 子目录名称与小写的模型类名称相匹配。 文件名无关紧要，但 **columns.yaml** 和 **list_columns.yaml** 是常用名称。 示例列表字段文件位置：
@@ -142,7 +145,7 @@ columns:
 选项 | 描述
 ------------- | -------------
 **label** | 向用户显示列表字段时的名称。
-**type** | 定义如何呈现此字段(请参阅下面的 [字段类型](#available-column-types))。
+**type** | 定义如何呈现此字段(请参阅下面的 [字段类型](#oc-available-column-types))。
 **default** | 如果值为空，则指定字段的默认值。
 **searchable** | 将此字段包含在列表搜索结果中。默认值：false。
 **invisible** | 指定此字段是否默认隐藏。默认值：false。
@@ -157,7 +160,7 @@ columns:
 **headCssClass** | 将 CSS 类分配给字段标题容器。
 **width** | 设置字段宽，可以以百分比 (10%) 或像素 (50px) 指定。可能有一个没有指定宽度的字段，它将被拉伸自适应。
 **align** | 指定字段对齐方式。可能的值是 `left`、`right` 和 `center`。
-**permissions** | 当前后端用户必须拥有的 [权限](users.md#users-and-permissions) 才能使用该列。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
+**permissions** | 当前后端用户必须拥有的 [权限](users.md#oc-users-and-permissions) 才能使用该列。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
 
 ### 自定义值选择
 
@@ -177,7 +180,7 @@ status_code:
     displayFrom: status_label
 ```
 
-这主要适用于 [模型存取器](../database/mutators.md#accessors-mutators) 用于修改显示值的情况。这在您想要显示某个值但按不同值排序和搜索时很有用。
+这主要适用于 [模型存取器](../database/mutators.md#oc-accessors-mutators) 用于修改显示值的情况。这在您想要显示某个值但按不同值排序和搜索时很有用。
 
 ```php
 public function getStatusLabelAttribute()
@@ -196,11 +199,12 @@ content[title]:
     sortable: false
 ```
 
-上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该字段可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#events) 在本地数据库表中复制其值。
+上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该字段可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#oc-model-events) 在本地数据库表中复制其值。
 
+<a id="oc-available-column-types"></a>
 ## 可用的字段类型
 
-有多种字段类型可用于 **type** 设置，它们控制列表字段的显示方式。除了下面指定的原生字段类型外，您还可以[定义自定义字段类型](#custom-column-types)。
+有多种字段类型可用于 **type** 设置，它们控制列表字段的显示方式。除了下面指定的原生字段类型外，您还可以[定义自定义字段类型](#oc-custom-column-types)。
 
 <div class="content-list" markdown="1">
 
@@ -248,7 +252,7 @@ avatar:
         quality: 80
 ```
 
-有关支持哪些选项的更多信息，请参阅 [图像调整大小文章](../services/resizer.md#resize-parameters)。
+有关支持哪些选项的更多信息，请参阅 [图像调整大小文章](../services/resizer.md#oc-resize-parameters)。
 
 <a name="column-number"></a>
 ### 数字
@@ -482,6 +486,7 @@ color:
 <?= $this->listRender() ?>
 ```
 
+<a id="oc-multiple-list-definitions"></a>
 ## 多个列表定义
 
 列表行为可以使用命名定义支持同一控制器中的多个列表。 `$listConfig` 属性可以定义为一个数组，其中键是定义名称，值是配置文件。
@@ -499,9 +504,10 @@ public $listConfig = [
 <?= $this->listRender('templates') ?>
 ```
 
+<a id="oc-using-list-filters"></a>
 ## 使用列表过滤器
 
-可以通过 [添加过滤器定义](#filtering-the-list) 到列表配置来过滤列表。类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。
+可以通过 [添加过滤器定义](#oc-filtering-the-list) 到列表配置来过滤列表。类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。
 
 ```yaml
 # ===================================
@@ -550,6 +556,7 @@ scopes:
         conditions: created_at >= ':after' AND created_at <= ':before'
 ```
 
+<a id="oc-scope-options"></a>
 ### 范围选项
 
 对于每个范围，您可以指定这些选项(如果适用)：
@@ -557,19 +564,20 @@ scopes:
 选项 | 描述
 ------------- | -------------
 **label** | 向用户显示过滤器范围时的名称。
-**type** | 定义应如何呈现此范围(请参阅下面的 [范围类型](#available-scope-types))。默认值：group。
+**type** | 定义应如何呈现此范围(请参阅下面的 [范围类型](#oc-available-scope-types))。默认值：group。
 **conditions** | 指定要应用于列表模型查询的原始 where 查询语句，`:filtered` 参数表示过滤后的值。
-**scope** | 指定**列表模型**中定义的[查询范围方法](../database/model.md#query-scopes)以应用于列表查询。第一个参数将包含查询对象(根据常规范围方法)，第二个参数将包含过滤后的值
+**scope** | 指定**列表模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)以应用于列表查询。第一个参数将包含查询对象(根据常规范围方法)，第二个参数将包含过滤后的值
 **options** | 如果按多个项目过滤时使用的选项，此选项可以在 `modelClass` 模型中指定数组或方法名称。
 **emptyOption** | 故意为空的选择的可选标签。
 **nameFrom** | 如果按多个项目过滤，则为名称显示的属性，取自`modelClass`模型的所有记录。
 **default** | 可以是整数(开关、复选框、数字)或数组(组、日期范围、数字范围)或字符串(日期)。
-**permissions** | 当前后端用户必须拥有的 [权限](users.md#users-and-permissions) 才能使用过滤器范围。支持单个权限的字符串或仅需要一个权限即可授予访问的权限数组。
-**dependsOn** | 此范围[依赖](#filter-scope-dependencies)的字符串或其他范围名称的数组。当修改其他范围时，此范围将更新。
+**permissions** | 当前后端用户必须拥有的 [权限](users.md#oc-users-and-permissions) 才能使用过滤器范围。支持单个权限的字符串或仅需要一个权限即可授予访问的权限数组。
+**dependsOn** | 此范围[依赖](#oc-filter-scope-dependencies)的字符串或其他范围名称的数组。当修改其他范围时，此范围将更新。
 
+<a id="oc-filter-scope-dependencies"></a>
 ### 过滤依赖项
 
-过滤器作用域可以通过定义`dependsOn` [作用域选项](#scope-options)来声明对其他作用域的依赖关系，它提供了一个服务器端解决方案，用于在修改它们的依赖关系时更新作用域。当声明为依赖项的范围发生变化时，定义范围将动态更新。这提供了更改要提供给范围的可用选项的机会。
+过滤器作用域可以通过定义`dependsOn` [作用域选项](#oc-scope-options)来声明对其他作用域的依赖关系，它提供了一个服务器端解决方案，用于在修改它们的依赖关系时更新作用域。当声明为依赖项的范围发生变化时，定义范围将动态更新。这提供了更改要提供给范围的可用选项的机会。
 
 ```yaml
 country:
@@ -611,6 +619,7 @@ public function getCityOptions($scopes = null)
 
 > **注意**：仅在此阶段支持具有 `type: group` 的范围依赖项。
 
+<a id="oc-available-scope-types"></a>
 ### 可用范围类型
 
 这些类型可用于确定应如何显示过滤器范围。
@@ -842,7 +851,7 @@ public function index()
 </div>
 ```
 
-该行为将调用一个`Lists`小部件，该小部件还包含许多您可以覆盖的视图。这可以通过指定一个 `customViewPath` 选项来实现，如 [列表配置选项](#configuring-the-list-behavior) 中所述。小部件将首先在此路径中查找视图，然后回退到默认位置。
+该行为将调用一个`Lists`小部件，该小部件还包含许多您可以覆盖的视图。这可以通过指定一个 `customViewPath` 选项来实现，如 [列表配置选项](#oc-configuring-the-list-behavior) 中所述。小部件将首先在此路径中查找视图，然后回退到默认位置。
 
 ```yaml
 # 自定义视图路径
@@ -861,6 +870,7 @@ customViewPath: $/acme/blog/controllers/reviews/list
 </tr>
 ```
 
+<a id="oc-extending-column-definitions"></a>
 ### 扩展列表字段
 
 您可以通过调用控制器类上的`extendListColumns`静态方法从外部扩展另一个控制器的列。此方法可以接受两个参数，**$list** 将代表 Lists 小部件对象，**$model** 代表列表使用的模型。以这个控制器为例：
@@ -912,7 +922,7 @@ $list 对象可以使用以下方法。
 **addColumns** | 向列表中添加新字段
 **removeColumn** | 从列表中删除一字段
 
-每个方法都采用类似于 [列表字段配置](#defining-list-columns) 的字段数组。
+每个方法都采用类似于 [列表字段配置](#oc-defining-list-columns) 的字段数组。
 
 ### 注入 CSS 行类
 
@@ -979,6 +989,7 @@ public function listOverrideRecordUrl($record, $definition = null)
 }
 ```
 
+<a id="oc-extending-filter-scopes"></a>
 ### 扩展过滤器范围
 
 您可以通过调用控制器类上的 `extendListFilterScopes` 静态方法从外部扩展另一个控制器的过滤器范围。此方法可以采用参数 **$filter** 来表示过滤器小部件对象。以这个控制器为例：
@@ -996,7 +1007,7 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-> 提供的范围数组类似于 [列表过滤器配置](#using-list-filters)。
+> 提供的范围数组类似于 [列表过滤器配置](#oc-using-list-filters)。
 
 您也可以在内部将过滤器范围扩展到控制器类，只需覆盖 `listFilterExtendScopes` 方法。
 
@@ -1060,7 +1071,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-[列表过滤器](#using-list-filters) 模型查询也可以通过覆盖 `listFilterExtendQuery` 方法来扩展：
+[列表过滤器](#oc-using-list-filters) 模型查询也可以通过覆盖 `listFilterExtendQuery` 方法来扩展：
 
 ```php
 public function listFilterExtendQuery($query, $scope)
@@ -1084,9 +1095,10 @@ public function listExtendRecords($records)
 }
 ```
 
+<a id="oc-custom-column-types"></a>
 ### 自定义字段类型
 
-自定义列表字段类型可以通过[插件注册类](../plugin/registration.md#registration-methods)的`registerListColumnTypes`方法在后端注册。该方法应返回一个数组，其中键是类型名称，值是可调用函数。可调用函数接收三个参数，本机`$value`、`$column` 定义对象和模型`$record` 对象。
+自定义列表字段类型可以通过[插件注册类](../plugin/registration.md#oc-registration-methods)的`registerListColumnTypes`方法在后端注册。该方法应返回一个数组，其中键是类型名称，值是可调用函数。可调用函数接收三个参数，本机`$value`、`$column` 定义对象和模型`$record` 对象。
 
 ```php
 public function registerListColumnTypes()

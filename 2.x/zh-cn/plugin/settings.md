@@ -2,6 +2,7 @@
 
 有两种配置插件的方法 - 使用后端设置表单和配置文件。将数据库设置与后端页面一起使用可提供更好的用户体验，但它们会为初始开发带来更多开销。基于文件的配置适用于很少修改的配置。
 
+<a id="oc-database-settings"></a>
 ## 数据库设置
 
 您可以通过在模型类中实现`SettingsModel`行为来创建用于在数据库中存储设置的模型。此模型可直接用于创建后端设置表单。您不需要创建数据库表和控制器。
@@ -38,7 +39,7 @@ plugins/
         Settings.php     <=== 脚本
 ```
 
-设置模型[可以注册](#backend-settings-pages) 出现在**后端设置页面**，但这不是必需的 - 您可以像任何其他模型一样设置和读取设置值。
+设置模型[可以注册](#oc-backend-settings-pages) 出现在**后端设置页面**，但这不是必需的 - 您可以像任何其他模型一样设置和读取设置值。
 
 ### 写入设置模型
 
@@ -74,13 +75,15 @@ echo Settings::get('api_key');
 echo Settings::get('is_activated', true);
 ```
 
+<a id="oc-backend-settings-pages"></a>
 ## 后端设置页面
 
 后端包含用于系统和和插件配置的专用区域，可以通过单击主菜单中的<strong>设置</strong>链接进行访问
 
-###设置链接注册
+<a id="oc-settings-link-registration"></a>
+### 设置链接注册
 
-可以通过覆盖[插件注册类](registration.md#registration-file)中的`registerSettings`方法来扩展后端设置导航链接。 创建配置链接时，您有两个选项 - 创建指向特定后端页面的链接，或创建指向设置模型的链接。 下一个示例显示如何创建指向后端页面的链接。
+可以通过覆盖[插件注册类](registration.md#oc-registration-file)中的`registerSettings`方法来扩展后端设置导航链接。 创建配置链接时，您有两个选项 - 创建指向特定后端页面的链接，或创建指向设置模型的链接。 下一个示例显示如何创建指向后端页面的链接。
 
 ```php
 public function registerSettings()
@@ -99,9 +102,9 @@ public function registerSettings()
 }
 ```
 
-> **注意**：后端设置页面应该[配置设置的上下文](#setting-the-page-navigation-context)，以便在系统页面侧边栏中标记相应的设置菜单项是否处于活动状态。 自动检测设置模型的设置上下文。
+> **注意**：后端设置页面应该[配置设置的上下文](#oc-setting-the-page-navigation-context)，以便在系统页面侧边栏中标记相应的设置菜单项是否处于活动状态。 自动检测设置模型的设置上下文。
 
-以下示例创建指向设置模型的链接。 设置模型是上面[数据库设置](#database-settings) 部分中描述的设置API 的一部分。
+以下示例创建指向设置模型的链接。 设置模型是上面[数据库设置](#oc-database-settings) 部分中描述的设置API 的一部分。
 
 ```php
 public function registerSettings()
@@ -123,9 +126,10 @@ public function registerSettings()
 
 设置搜索功能使用可选的`keywords` 参数。 如果未提供关键字，则搜索仅使用设置项标签和描述。
 
+<a id="oc-setting-the-page-navigation-context"></a>
 ### 设置页面导航上下文
 
-就像[在控制器中设置导航上下文](../backend/controllers-ajax.md#setting-the-navigation-context) 一样，后端设置页面应该配置设置的导航上下文。 为了将系统页面侧栏中的当前设置链接标记为活动，这是必需的。 使用`System\Classes\SettingsManager`类来设置设置上下文。 通常它可以在控制器构造函数中完成：
+就像[在控制器中设置导航上下文](../backend/controllers-ajax.md#oc-setting-the-navigation-context) 一样，后端设置页面应该配置设置的导航上下文。 为了将系统页面侧栏中的当前设置链接标记为活动，这是必需的。 使用`System\Classes\SettingsManager`类来设置设置上下文。 通常它可以在控制器构造函数中完成：
 
 ```php
 public function __construct()
@@ -139,8 +143,9 @@ public function __construct()
 }
 ```
 
-`setContext` 方法的第一个参数是以下格式的设置项所有者：**author.plugin**。 第二个参数是设置名称，与您在[注册后端设置页面](#settings-link-registration)时提供的相同。
+`setContext` 方法的第一个参数是以下格式的设置项所有者：**author.plugin**。 第二个参数是设置名称，与您在[注册后端设置页面](#oc-settings-link-registration)时提供的相同。
 
+<a id="oc-file-based-configuration"></a>
 ## 基于文件的配置
 
 插件可以在插件目录的**config** 子目录下有一个配置文件**config.php**。 配置文件是定义并返回 **array** 的 PHP 脚本。 示例配置文件 **plugins/acme/demo/config/config.php**。

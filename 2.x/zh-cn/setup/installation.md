@@ -20,7 +20,7 @@ October中文文档全部由["超越无限"](https://octobercms.com/partners/pro
 
 October CMS 使用[Composer](http://getcomposer.org/) 来管理它的依赖。因此，在开始之前，您需要确保已安装 Composer。
 
-您还应该检查您的计算机或服务器是否满足运行 PHP 应用程序的 [最低系统要求](#minimum-system-requirements) 。
+您还应该检查您的计算机或服务器是否满足运行 PHP 应用程序的 [最低系统要求](#oc-minimum-system-requirements) 。
 
 ## 安装 October CMS
 
@@ -65,10 +65,11 @@ php artisan serve
 
 例如，在生产环境中，您可能希望执行以下操作：
 
-- 启用[CSRF保护](../setup/configuration.md#csrf-protection)
-- 禁用[调试模式](../setup/configuration.md#debug-mode)
-- 使用 [公共文件夹](../setup/deployment.md#public-folder) 以提高安全性
+- 启用[CSRF保护](../setup/configuration.md#oc-csrf-protection)
+- 禁用[调试模式](../setup/configuration.md#oc-debug-mode)
+- 使用 [公共文件夹](../setup/deployment.md#oc-public-folder) 以提高安全性
 
+<a id="oc-setting-up-the-scheduler"></a>
 ###  设置调度程序
 
 为使*计划任务*正确运行，您应该将以下 Cron 条目添加到您的服务器。 编辑 crontab 通常是使用命令 `crontab -e` 来执行的。
@@ -91,6 +92,7 @@ php artisan serve
 php artisan queue:work
 ```
 
+<a id="oc-minimum-system-requirements"></a>
 ## 最低系统要求
 
 October CMS 对服务器有一些要求：
@@ -111,7 +113,7 @@ October CMS 对服务器有一些要求：
 1. PostgreSQL 9.6
 1. SQLite 3.8.8
 
-如果您使用的是旧版本的 MySQL 或 MariaDB，您可能需要[配置索引长度](../database/structure.md#index-lengths-using-mysql-mariadb) 以支持 `utf8mb4` 字符集.
+如果您使用的是旧版本的 MySQL 或 MariaDB，您可能需要[配置索引长度](../database/structure.md#oc-index-lengths-using-mysql-mariadb) 以支持 `utf8mb4` 字符集.
 
 某些操作系统发行版可能需要您手动安装一些必要的 PHP 扩展。使用 Ubuntu 时，可以运行以下命令来安装所有必需的扩展：
 
@@ -126,11 +128,11 @@ sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json
 
 1. **当我输入许可证密钥时安装挂起或冻结**：在某些环境中粘贴密钥内容时可能会发生这种情况。多次按 ENTER 键以允许安装过程继续。
 
-1. **迁移过程中显示错误 `Specified key was too long`**：当您使用旧版本的 MySQL 或 MariaDB 时会发生这种情况。要解决此问题，您可能需要[配置索引长度](../database/structure.md#index-lengths-using-mysql-mariadb) 以支持`utf8mb4` 字符集。
+1. **迁移过程中显示错误 `Specified key was too long`**：当您使用旧版本的 MySQL 或 MariaDB 时会发生这种情况。要解决此问题，您可能需要[配置索引长度](../database/structure.md#oc-index-lengths-using-mysql-mariadb) 以支持`utf8mb4` 字符集。
 
 1. **打开应用程序时显示空白屏幕**：检查`/storage`文件和文件夹的权限设置是否正确，它们应该在Web服务器是可写的。
 
-1. **后端区域显示 `Page not found (404)` **：如果应用程序找不到数据库，则后端会显示404页面。尝试启用 [调试模式](../setup/configuration.md#debug-mode) 以查看底层错误消息。
+1. **后端区域显示 `Page not found (404)` **：如果应用程序找不到数据库，则后端会显示404页面。尝试启用 [调试模式](../setup/configuration.md#oc-debug-mode) 以查看底层错误消息。
 
 1. **更新应用程序时显示错误 500 **：您可能需要增加或禁用网络服务器的超时限制。例如，Apache 的 FastCGI 有时会将 `-idle-timeout` 选项设置为 30 秒。
 

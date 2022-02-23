@@ -68,7 +68,7 @@ To summarize:
 - Extend \October\Rain\Extension\ExtensionBase to declare your class as a Behaviour
 - The class wanting to implement the Behaviour needs to extend \October\Rain\Extension\Extendable
 
-> **Note**: See [Using Traits Instead of Base Classes](#using-traits-instead-of-base-classes)
+> **Note**: See [Using Traits Instead of Base Classes](#oc-using-traits-instead-of-base-classes)
 
 ## Extending Constructors
 
@@ -335,6 +335,7 @@ class User extends \October\Rain\Extension\Extendable
 }
 ```
 
+<a id="oc-using-traits-instead-of-base-classes"></a>
 ### Using Traits Instead of Base Classes
 
 Sometimes your class may already extend a parent class outside of your source control, making it so you are unable to extend the `ExtensionBase` or `Extendable` classes. Instead you can use these traits and your classes will have to be implemented as follows.

@@ -16,7 +16,7 @@ plugins/
       Plugin.php
 ```
 
-模型配置目录可以包含模型的 [列表字段](../backend/lists.md#defining-list-columns) 和 [form field](../backend/forms.md#defining-form-fields) 定义 . 模型配置目录名与小写的模型类名一致。
+模型配置目录可以包含模型的 [列表字段](../backend/lists.md#oc-defining-list-columns) 和 [form field](../backend/forms.md#oc-defining-form-fields) 定义 . 模型配置目录名与小写的模型类名一致。
 
 ## 定义模型
 
@@ -40,6 +40,7 @@ class Post extends Model
 
 protected`$table`字段指定模型对应的数据库表。 表名是作者、插件和记录类型名称的蛇形命名名称。
 
+<a id="oc-supported-properties"></a>
 ### 支持的属性
 
 除了 [模型特征](traits.md) 提供的那些之外，还可以在模型上找到一些标准属性。 例如：
@@ -69,11 +70,11 @@ class User extends Model
 **$dates** | 获取后，值将转换为 Carbon/DateTime 对象的实例。
 **$timestamps** | 布尔值，如果为 true 将自动设置 created_at 和 updated_at 字段。
 **$jsonable** | 值在保存之前被编码为 JSON，并在获取后转换为数组。
-**$fillable** | values 是 [批量赋值](#mass-assignment) 可访问的字段。
-**$guarded** | 值是受 [批量赋值](#mass-assignment) 保护的字段。
+**$fillable** | values 是 [批量赋值](#oc-mass-assignment) 可访问的字段。
+**$guarded** | 值是受 [批量赋值](#oc-mass-assignment) 保护的字段。
 **$visible** | 值是在 [序列化模型数据](../database/serialization.md) 时可见的字段。
 **$hidden** | 值是在 [序列化模型数据](../database/serialization.md) 时隐藏的字段。
-**$connection** | 包含模型默认使用的 [连接名称](../database/basics.md#multiple-database-connections) 的字符串。
+**$connection** | 包含模型默认使用的 [连接名称](../database/basics.md#oc-multiple-database-connections) 的字符串。
 
 #### 主键
 
@@ -153,11 +154,12 @@ class Post extends Model
 
 ## 检索模型
 
-当从数据库请求数据时，模型将主要使用 `get` 或 `first` 方法检索值，具体取决于您是希望 [检索多个模型](#retrieving-multiple-models) 还是 [检索单个模型]( #retrieving-a-single-model)。从模型派生的查询返回 [October\Rain\Database\Builder](../api/october/rain/database/builder) 的实例。
+当从数据库请求数据时，模型将主要使用 `get` 或 `first` 方法检索值，具体取决于您是希望 [检索多个模型](#oc-retrieving-multiple-models) 还是 [检索单个模型](#oc-retrieving-a-single-model)。从模型派生的查询返回 [October\Rain\Database\Builder](../api/october/rain/database/builder) 的实例。
 
+<a id="oc-retrieving-multiple-models"></a>
 ### 检索多个模型
 
-一旦你创建了一个模型和[其关联的数据库表](../database/structure.md#migration-structure)，你就可以开始从你的数据库中检索数据了。将每个模型视为一个强大的 [查询构建器](../database/query.md)，允许您查询与模型关联的数据库表。例如：
+一旦你创建了一个模型和[其关联的数据库表](../database/structure.md#oc-migration-structure)，你就可以开始从你的数据库中检索数据了。将每个模型视为一个强大的 [查询构建器](../database/query.md)，允许您查询与模型关联的数据库表。例如：
 
 ```php
 $flights = Flight::all();
@@ -210,6 +212,7 @@ Flight::chunk(200, function ($flights) {
 
 传递给该方法的第一个参数是您希望每个"分块"接收的记录数。 作为第二个参数传递的闭包将为从数据库中检索到的每个块调用。
 
+<a id="oc-retrieving-a-single-model"></a>
 ### 检索单个模型
 
 传递到方法的第一个参数是希望每个"分块"接收的数据量。闭包作为第二个参数传递，它在每次从数据库中检索分块的时候调用。它将执行数据库查询把检索分块的结果传递给闭包方法。
@@ -242,7 +245,7 @@ Route::get('/api/flights/{id}', function ($id) {
 
 ### 检索集合
 
-您还可以使用查询生成器提供的 `count`、`sum`、`max` 和其他 [聚合函数](../database/query.md#aggregates)。 这些方法返回适当的标量值而不是完整的模型实例：
+您还可以使用查询生成器提供的 `count`、`sum`、`max` 和其他 [聚合函数](../database/query.md#oc-aggregates)。 这些方法返回适当的标量值而不是完整的模型实例：
 
 ```php
 $count = Flight::where('active', 1)->count();
@@ -286,19 +289,7 @@ Flight::where('is_active', true)
 
 `update` 方法需要一个表示应该更新的列的字段和值的数组。
 
-<!--
-#### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
-
-If you would like to perform multiple "upserts" in a single query, then you should use the `upsert` method instead. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of the columns that should be updated if a matching record already exists in the database. The `upsert` method will automatically set the `created_at` and `updated_at` timestamps if timestamps are enabled on the model:
-
-    MyVendor\MyPlugin\Models\Flight::upsert([
-        ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
-        ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
-    ], ['departure', 'destination'], ['price']);
-
-> **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
--->
-
+<a id="oc-mass-assignment"></a>
 ### 批量赋值
 
 你也可以使用 `create` 方法来保存新模型，此方法会返回模型实例。不过，在使用之前，您需要在模型上指定一个 `fillable` 或 `guarded` 属性，因为所有模型都默认不可进行批量赋值。注意 `fillable` 或 `guarded` 都不会影响后端表单的提交，只影响 `create` 或 `fill` 方法。
@@ -395,8 +386,9 @@ Flight::destroy(1, 2, 3);
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
-> **注意**：比较重要的一点是在直接从查询中删除记录时不会触发[模型事件](#model-events)
+> **注意**：比较重要的一点是在直接从查询中删除记录时不会触发[模型事件](#oc-model-events)
 
+<a id="oc-query-scopes"></a>
 ## 查询范围
 
 范围允许您定义可以在整个应用程序中轻松重用的通用约束集。 例如，您可能需要经常检索所有被认为"受欢迎"的用户。 要定义范围，只需在模型方法前面加上 `scope`：
@@ -453,8 +445,9 @@ class User extends Model
 $users = User::applyType('admin')->get();
 ```
 
-现在您可以在调用范围时传递参数：
+<a id="oc-model-events"></a>
 ## 事件
+
 模型会触发几个事件，允许您连接到模型生命周期中的各个点。 每次在数据库中保存或更新特定模型类时，事件允许您轻松执行代码。 事件是通过覆盖类中的特殊方法来定义的，可以使用以下方法覆盖：
 
 事件 | 描述
@@ -486,7 +479,7 @@ public function beforeCreate()
 }
 ```
 
-> **注意**：使用 [延迟绑定](relations#deferred-binding) 创建的关系(即：文件附件)如果尚未提交，则在 `afterSave` 模型事件中将不可用。 要访问未提交的绑定，请在关系上使用 `withDeferred($sessionKey)` 方法。 示例：`$this->images()->withDeferred(post('_session_key'))->get();`
+> **注意**：使用 [延迟绑定](relations#oc-deferred-binding) 创建的关系(即：文件附件)如果尚未提交，则在 `afterSave` 模型事件中将不可用。 要访问未提交的绑定，请在关系上使用 `withDeferred($sessionKey)` 方法。 示例：`$this->images()->withDeferred(post('_session_key'))->get();`
 
 ### 基本用法
 
@@ -547,7 +540,7 @@ $flight->bindEvent('model.beforeCreate', function() use ($model) {
 });
 ```
 
-这种方法也可以用来绑定到 [本地事件](#events)，下面的代码监听 `model.beforeSave` 事件。
+这种方法也可以用来绑定到 [本地事件](#oc-model-events)，下面的代码监听 `model.beforeSave` 事件。
 
 ```php
 \Backend\Models\User::extend(function($model) {

@@ -16,7 +16,7 @@ $user->password = Hash::make('mypassword');
 $user->save();
 ```
 
-或者，模型可以实现 [哈希特征](../database/traits.md#hashable) 来自动设置哈希属性。
+或者，模型可以实现 [哈希特征](../database/traits.md#oc-hashable) 来自动设置哈希属性。
 
 #### 根据哈希验证密码
 
@@ -65,4 +65,4 @@ catch (DecryptException $ex) {
 }
 ```
 
-或者，模型可以实现 [加密 特征](../database/traits.md#encryptable) 来自动加密和解密属性。
+或者，模型可以实现 [加密 特征](../database/traits.md#oc-encryptable) 来自动加密和解密属性。

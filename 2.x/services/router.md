@@ -2,7 +2,7 @@
 
 ## Basic Routing
 
-While routing is handled automatically for the [backend controllers](../backend/controllers-ajax.md) and CMS pages define their own URL routes in their [page configuration](../cms/pages.md#configuration), the router service is useful primarily for defining fixed APIs and end points.
+While routing is handled automatically for the [backend controllers](../backend/controllers-ajax.md) and CMS pages define their own URL routes in their [page configuration](../cms/pages.md#oc-configuration), the router service is useful primarily for defining fixed APIs and end points.
 
 You can define these routes by creating a file named **routes.php** in a same directory as the [plugin registration file](../plugin/registration.md). The most basic routes simply accept a URI and a `Closure`:
 
@@ -118,7 +118,7 @@ Route::get('user/profile', ['as' => 'profile', function () {
 
 #### Route Groups & Named Routes
 
-If you are using [route groups](#route-groups), you may specify an `as` keyword in the route group attribute array, allowing you to set a common route name prefix for all routes within the group:
+If you are using [route groups](#oc-route-groups), you may specify an `as` keyword in the route group attribute array, allowing you to set a common route name prefix for all routes within the group:
 
 ```php
 Route::group(['as' => 'admin::'], function () {
@@ -148,6 +148,7 @@ Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
 $url = Url::route('profile', ['id' => 1]);
 ```
 
+<a id="oc-route-groups"></a>
 ## Route Groups
 
 Route groups allow you to share route attributes across a large number of routes without needing to define those attributes on each individual route. Shared attributes are specified in an array format as the first parameter to the `Route::group` method.

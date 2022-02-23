@@ -2,7 +2,7 @@
 
 **Form Behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-Form behavior depends on form [field definitions](#defining-form-fields) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+Form behavior depends on form [field definitions](#oc-defining-form-fields) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -47,10 +47,10 @@ The following fields are required in the form configuration file.
 Field | Description
 ------------- | -------------
 **name** | the name of the object being managed by this form.
-**form** | a configuration array or reference to a form field definition file, see [form fields](#defining-form-fields).
+**form** | a configuration array or reference to a form field definition file, see [form fields](#oc-defining-form-fields).
 **modelClass** | a model class name, the form data is loaded and saved against this model.
 
-The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#create-page), [Update](#update-page) or [Preview](#preview-page) pages.
+The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#oc-create-page), [Update](#oc-update-page) or [Preview](#oc-preview-page) pages.
 
 Option | Description
 ------------- | -------------
@@ -59,6 +59,7 @@ Option | Description
 **update** | a configuration array or reference to a config file for the Update page.
 **preview** | a configuration array or reference to a config file for the Preview page.
 
+<a id="oc-create-page"></a>
 ### Create Page
 
 To support the Create page add the following configuration to the YAML file.
@@ -79,6 +80,7 @@ Option | Description
 **redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
 **form** | overrides the default form fields definitions for the create page only.
 
+<a id="oc-update-page"></a>
 ### Update Page
 
 To support the Update page add the following configuration to the YAML file.
@@ -98,6 +100,7 @@ Option | Description
 **redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
 **form** | overrides the default form fields definitions for the update page only.
 
+<a id="oc-preview-page"></a>
 ### Preview Page
 
 To support the Preview page add the following configuration to the YAML file:
@@ -143,6 +146,7 @@ flashCreate | :name Created
 flashUpdate | :name Updated
 flashDelete | :name Deleted
 
+<a id="oc-defining-form-fields"></a>
 ## Defining Form Fields
 
 Form fields are defined with the YAML file. The form fields configuration is used by the form behavior for creating the form controls and binding them to the model fields. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but **fields.yaml** and **form_fields.yaml** are common names. Example form fields file location:
@@ -185,6 +189,7 @@ secondaryTabs:
         # [...]
 ```
 
+<a id="oc-field-options"></a>
 ### Field Options
 
 For each field you can specify these options (where applicable):
@@ -192,7 +197,7 @@ For each field you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
-**type** | defines how this field should be rendered (see [Available fields types](#available-field-types) below). Default: text.
+**type** | defines how this field should be rendered (see [Available fields types](#oc-available-field-types) below). Default: text.
 **span** | aligns the form field to one side. Options: auto, left, right, row, full. Default: full.
 **spanClass** | used with the span `row` option to display the form as a Bootstrap grid, for example, `spanClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
@@ -209,17 +214,17 @@ Option | Description
 **hidden** | hides the field from the view and excludes it from the saved data. Options: true, false.
 **stretch** | specifies if this field stretches to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
-**dependsOn** | an array of other field names this field [depends on](#field-dependencies), when the other fields are modified, this field will update.
-**trigger** | specify conditions for this field using [trigger events](#trigger-events).
-**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#input-preset-converter).
-**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#validation) as this is not enforced by the form controller.
+**dependsOn** | an array of other field names this field [depends on](#oc-field-dependencies), when the other fields are modified, this field will update.
+**trigger** | specify conditions for this field using [trigger events](#oc-trigger-events).
+**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#oc-input-preset-converter).
+**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#oc-validation) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ### Nested Field Selection
 
-Fields from related models can be rendered with the [Relation Widget](#relation) or the [Relation Manager](relations.md#relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#property-jsonable), you may use a nested field type using the **relation[field]** definition.
+Fields from related models can be rendered with the [Relation Widget](#relation-widget) or the [Relation Manager](relations.md#oc-relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#oc-supported-properties), you may use a nested field type using the **relation[field]** definition.
 
 ```yaml
 avatar[name]:
@@ -270,9 +275,10 @@ tabs:
             tab: Groups
 ```
 
+<a id="oc-available-field-types"></a>
 ## Available Field Types
 
-There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#available-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
+There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#oc-available-ui-elements). For more advanced form fields, a [form widget](#oc-form-widgets) can be used instead.
 
 <div class="content-list" markdown="1">
 
@@ -665,6 +671,7 @@ blog_content:
     size: huge
 ```
 
+<a id="oc-available-ui-elements"></a>
 ## Available UI Elements
 
 There are non function UI elements that can be included in forms to help with the layout design.
@@ -742,9 +749,10 @@ content:
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
+<a id="oc-form-widgets"></a>
 ## Form Widgets
 
-There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#form-widgets) article.
+There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#oc-form-widgets) article.
 
 <div class="content-list" markdown="1">
 
@@ -844,7 +852,7 @@ data:
     searching: false
 ```
 
-> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model.md#supported-properties) or anything that can handle storing as an array.
+> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model.md#oc-supported-properties) or anything that can handle storing as an array.
 
 #### Table configuration
 
@@ -955,10 +963,10 @@ Option | Description
 **maxFiles** | maximum number of files allowed to be uploaded
 **useCaption** | allows a title and description to be set for the file. Default: `true`
 **prompt** | text to display for the upload button, applies to files only, optional
-**thumbOptions** | additional [resize options](../services/resizer.md#resize-parameters) for generating the thumbnail
+**thumbOptions** | additional [resize options](../services/resizer.md#oc-resize-parameters) for generating the thumbnail
 **attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
 
-> **Note**: Unlike the [Media Finder form widget](#mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
+> **Note**: Unlike the [Media Finder form widget](#widget-mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
 
 <a name="widget-markdowneditor"></a>
 ### Markdown Editor
@@ -1003,12 +1011,12 @@ Option | Description
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 **maxItems** | maximum number of items that can be selected.
 
-> **Note**: Unlike the [File Upload form widget](#file-upload), the Media Finder form widget stores its data as a string representing the path to the media files selected within the Media Library. It should associate to an attribute on your model and if it is a [jsonable attribute](../database/model.md#supported-properties) will support multiple selections.
+> **Note**: Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the media files selected within the Media Library. It should associate to a normal attribute on your model.
 
 <a name="widget-nestedform"></a>
 ### Nested Form
 
-`nestedform` - renders a nested form using a related record or [jsonable attribute](../database/model.md#supported-properties). Fields can be defined inline or using an external yaml file.
+`nestedform` - renders a nested form using a related record or [jsonable attribute](../database/model.md#oc-supported-properties). Fields can be defined inline or using an external yaml file.
 
 ```yaml
 content:
@@ -1065,12 +1073,12 @@ Option | Description
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **title** | text to display in the title section of the popup.
 **prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
-**list** | a configuration array or reference to a list column definition file, see [list columns](lists.md#defining-list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](lists.md#oc-defining-list-columns).
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
 **conditions** | specifies a raw where query statement to apply to the list model query.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 **searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**searchScope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
+**searchScope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 **useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
 **modelClass** | class of the model to use for listing records when useRelation = false
 
@@ -1119,13 +1127,13 @@ Option | Description
 **select** | a custom SQL select statement to use for the name.
 **order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **related form model** to apply to the list query always.
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the list query always.
 **useController** | display the field using integration with [RelationController behavior](../backend/relations.md#configuring-the-relation-behavior). Default: `true`
 
 <a name="widget-repeater"></a>
 ### Repeater
 
-`repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../database/model.md#supported-properties).
+`repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../database/model.md#oc-supported-properties).
 
 ```yaml
 extra_information:
@@ -1146,7 +1154,7 @@ extra_information:
 
 Option | Description
 ------------- | -------------
-**form** | a reference to form field definition file, see [backend form fields](#defining-form-fields). Inline fields can also be used.
+**form** | a reference to form field definition file, see [backend form fields](#oc-defining-form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
 **displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
 **titleFrom** | name of field within items to use as the title for the collapsed item.
@@ -1205,7 +1213,7 @@ Option | Description
 **name** | the name of the group.
 **description** | a brief description of the group.
 **icon** | defines an icon for the group, optional.
-**fields** | form fields belonging to the group, see [backend form fields](#defining-form-fields).
+**fields** | form fields belonging to the group, see [backend form fields](#oc-defining-form-fields).
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
 
@@ -1276,7 +1284,7 @@ tags:
         - Orange
 ```
 
-You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#oc-many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
 
 ```yaml
 tags:
@@ -1295,7 +1303,7 @@ Option | Description
 
 ## Form Views
 
-For each page your form supports [Create](#create-page), [Update](#update-page) and [Preview](#preview-page) you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
+For each page your form supports [Create](#oc-create-page), [Update](#oc-update-page) and [Preview](#oc-preview-page) you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
 
 The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 
@@ -1368,6 +1376,7 @@ The **update.htm** view represents the Update page that allows users to update o
 <?= Form::close() ?>
 ```
 
+<a id="oc-preview-view"></a>
 ### Preview View
 
 The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.
@@ -1382,9 +1391,10 @@ The **preview.htm** view represents the Preview page that allows users to previe
 
 Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked. There are a few ways you can do this, either by using the trigger API or field dependencies. The input preset converter is primarily used to converting field values. These options are described in more detail below.
 
+<a id="oc-input-preset-converter"></a>
 ### Input Preset Converter
 
-The input preset converter is defined with the `preset` [form field option](#field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
+The input preset converter is defined with the `preset` [form field option](#oc-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
 
 In this example we will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
 
@@ -1425,9 +1435,10 @@ Type | Description
 **camel** | formats the copied value with camelCase
 **file** | formats the copied value as a file name with whitespace replaced with dashes
 
+<a id="oc-trigger-events"></a>
 ### Trigger Events
 
-Trigger Events are defined with the `trigger` [form field option](#field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
+Trigger Events are defined with the `trigger` [form field option](#oc-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
 ```yaml
 is_delayed:
@@ -1450,12 +1461,13 @@ In the above example the `send_at` form field will only be shown if the `is_dela
 Option | Description
 ------------- | -------------
 **action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
-**field** | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#repeater), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
+**field** | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#widget-repeater), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
 **condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
 
+<a id="oc-field-dependencies"></a>
 ### Field Dependencies
 
-Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field.
+Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#oc-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field.
 
 ```yaml
 country:
@@ -1487,7 +1499,7 @@ public function getStateOptions()
 }
 ```
 
-You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#defining-form-fields) and **$context** represents the active form context.
+You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#oc-defining-form-fields) and **$context** represents the active form context.
 
 ```php
 public function filterFields($fields, $context = null)
@@ -1507,7 +1519,7 @@ public function filterFields($fields, $context = null)
 }
 ```
 
-The above logic will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#field-dependencies). For example, here is the associated form field definitions.
+The above logic will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#oc-field-dependencies). For example, here is the associated form field definitions.
 
 ```yaml
 source_type:
@@ -1529,7 +1541,7 @@ git_branch:
     dependsOn: source_type
 ```
 
-You may also extend other models to apply the `filterFields` logic, see the [Filtering Form Fields](#filtering-form-fields) section for more details.
+You may also extend other models to apply the `filterFields` logic, see the [Filtering Form Fields](#oc-filtering-form-fields) section for more details.
 
 ### Field Facades
 
@@ -1545,6 +1557,7 @@ _map:
     type: mapviewer
 ```
 
+<a id="oc-extending-form-behavior"></a>
 ## Extending Form Behavior
 
 Sometimes you may wish to modify the default form behavior and there are several ways you can do this.
@@ -1659,11 +1672,12 @@ Method | Description
 **addSecondaryTabFields** | adds new fields to the secondary tabbed area
 **removeField** | remove a field from any areas
 
-Each method takes an array of fields similar to the [form field configuration](#defining-form-fields).
+Each method takes an array of fields similar to the [form field configuration](#oc-defining-form-fields).
 
+<a id="oc-filtering-form-fields"></a>
 ### Filtering Form Fields
 
-As described in the [field dependencies section](#field-dependencies), you may also implement form field filtering by extension by hooking in to the `form.filterFields` event.
+As described in the [field dependencies section](#oc-field-dependencies), you may also implement form field filtering by extension by hooking in to the `form.filterFields` event.
 
 ```php
 User::extend(function ($model) {
@@ -1686,4 +1700,4 @@ User::extend(function ($model) {
 
 ## Validating Form Fields
 
-To validate the fields of your form you can make use of the [Validation](../database/traits.md#validation) trait in your model.
+To validate the fields of your form you can make use of the [Validation](../database/traits.md#oc-validation) trait in your model.

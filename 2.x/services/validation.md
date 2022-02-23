@@ -4,7 +4,7 @@
 
 The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class. It is useful when processing form data submitted by the end user.
 
-> **Note**: When working with models, October CMS ships with a useful [Validation Trait](../database/traits.md#validation) that implements the `Validator` class and supports the same rule definitions.
+> **Note**: When working with models, October CMS ships with a useful [Validation Trait](../database/traits.md#oc-validation) that implements the `Validator` class and supports the same rule definitions.
 
 #### Basic Validation Example
 
@@ -69,6 +69,7 @@ $failed = $validator->failed();
 
 The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
 
+<a id="oc-working-with-error-messages"></a>
 ## Working with Error Messages
 
 After calling the `messages` method on a `Validator` instance, you will receive a `Illuminate\Support\MessageBag` instance, which has a variety of convenient methods for working with error messages.
@@ -519,6 +520,7 @@ $v->sometimes(['reason', 'cost'], 'required', function($input) {
 
 > **Note**: The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
 
+<a id="oc-validating-arrays"></a>
 ## Validating Arrays
 
 Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
@@ -557,6 +559,7 @@ $validator = Validator::make(Input::all(), [
 ]);
 ```
 
+<a id="oc-custom-error-messages"></a>
 ## Custom Error Messages
 
 If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
@@ -612,10 +615,12 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
 Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 ```
 
+<a id="oc-custom-validation-rules"></a>
 ## Custom Validation Rules
 
-There are a variety of helpful validation rules, however, you may wish to specify some of your own. First you should decide if your rule shuld be [registered globally](#globally-registered-rules), or use [a local rule object](#local-rule-objects).
+There are a variety of helpful validation rules, however, you may wish to specify some of your own. First you should decide if your rule shuld be [registered globally](#oc-globally-registered-rules), or use [a local rule object](#oc-local-rule-objects).
 
+<a id="oc-globally-registered-rules"></a>
 ### Globally Registered Rules
 
 A globally registered rule can be shared throughout your application by registering it with a tag and rule class using the `Validator::extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
@@ -716,6 +721,7 @@ class BetwixtRule
 }
 ```
 
+<a id="oc-local-rule-objects"></a>
 ### Local Rule Objects
 
 The [Laravel documentation on rule objects](https://laravel.com/docs/6.x/validation#using-rule-objects) describes in more detail how to define a rule class. Specifically, the rule must implement the `Illuminate\Contracts\Validation\Rule` contract which requires a `passes` method to be defined.

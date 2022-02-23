@@ -8,6 +8,7 @@ Your package should reside in a source control repository that can be accessed b
 
 Be sure to start your package `name` ends with **-plugin** or **-theme** respectively, this will help others find your package and is in accordance with the [Developer Guide](https://octobercms.com/help/guidelines/developer#package-naming).
 
+<a id="oc-publishing-plugins"></a>
 ### Publishing Plugins
 
 When publishing your plugin the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-plugin** and include the `composer/installers` package as a dependency.
@@ -25,6 +26,7 @@ When publishing your plugin the `composer.json` file should have this JSON conte
 
 A plugin with the code **Acme.Blog** will have a composer package name of `acme/blog-plugin` and will be installed in the **plugins/acme/blog** directory.
 
+<a id="oc-publishing-themes"></a>
 ### Publishing Themes
 
 When publishing your theme the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-theme** and include the `composer/installers` package as a dependency.
@@ -66,7 +68,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration.md#dependency-definitions).
+You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration.md#oc-dependency-definitions).
 
 #### Requiring Another Theme
 
@@ -78,7 +80,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-Make sure that this package is included in the `require` property found in the [theme information file](../themes/development.md#theme-dependencies).
+Make sure that this package is included in the `require` property found in the [theme information file](../themes/development.md#oc-theme-dependencies).
 
 #### Developing With Third Party Packages
 
@@ -118,11 +120,11 @@ To create a new tag add (`-a`) the version with an optional (`-m`) message.
 git tag -a v2.0.1 -m "Version 2 is here!"
 ```
 
-In addition to tagging, you should also increment the version file found in your [plugin](../plugin/updates.md) or [theme](../themes/development.md#version-file).
+In addition to tagging, you should also increment the version file found in your [plugin](../plugin/updates.md) or [theme](../themes/development.md#oc-version-file).
 
 ## Private Plugins and Themes
 
-Composer allows you to add private repositories from GitHub and other providers to your October CMS projects. Make sure you have followed the same instructions for [publishing plugins](#publishing-plugins) and [themes](#publishing-themes) respectively.
+Composer allows you to add private repositories from GitHub and other providers to your October CMS projects. Make sure you have followed the same instructions for [publishing plugins](#oc-publishing-plugins) and [themes](#oc-publishing-themes) respectively.
 
 In all cases, you should have a copy of your private plugin or theme stored somewhere available to the main project. The `plugin:install` and `theme:install` commands can be used to install private plugins from either a remote or local source. This will add the location to your composer file and install it like any other package.
 
@@ -158,9 +160,9 @@ Laravel packages will often provide configuration files, you should duplicate th
 
 ```php
 return [
-    'encoding'      => 'UTF-8',
-    'finalize'      => true,
-    'cachePath'     => storage_path('app/purifier'),
+    'encoding' => 'UTF-8',
+    'finalize' => true,
+    'cachePath' => storage_path('app/purifier'),
     'cacheFileMode' => 0755,
 ];
 ```
@@ -182,7 +184,7 @@ This will set all the package config values to be that of your plugin config val
 Config::get('purifier.encoding') === Config::get('acme.blog::purifier.encoding');
 ```
 
-Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values and the [standard configuration approach](settings.md#file-based-configuration).
+Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values and the [standard configuration approach](settings.md#oc-file-based-configuration).
 
 ### Aliases & Service Providers
 

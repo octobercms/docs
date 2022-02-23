@@ -682,7 +682,7 @@ The `post` function obtains an input item from the request, restricted to POST v
 <a name="method-redirect"></a>
 #### `redirect()`
 
-The `redirect` function return an instance of the redirector to do [redirect responses](../services/response-view.md#redirects):
+The `redirect` function return an instance of the redirector to do [redirect responses](../services/response-view.md#oc-redirects):
 
     return redirect('/home');
 

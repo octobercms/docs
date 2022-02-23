@@ -8,7 +8,7 @@ When deploying your application with Composer, you may be prompted to provide yo
 
 To avoid manually typing in these credentials, you should make sure that the [Composer auth.json file](https://getcomposer.org/doc/articles/http-basic-authentication.md) is deployed with your application.
 
-Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands.md#set-project).
+Alternatively, you can recreate this file using the `project:set` [artisan command](../console/commands.md#oc-set-project).
 
 ```sh
 php artisan project:set <license key>
@@ -24,6 +24,7 @@ If your server does not have the ability to run Composer or command line tools, 
 
 ## Security & Performance
 
+<a id="oc-public-folder"></a>
 ### Public Folder
 
 For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.
@@ -46,7 +47,7 @@ AUTO_MIRROR_PUBLIC=true
 
 October CMS has been fine-tuned for performance and there are some extra steps you can take to increase this performance further, especially for larger sized applications.
 
-Disable [debug mode](../setup/configuration.md#debug-mode) and enable cache settings inside your [environment configuration](../setup/configuration.md#environment-configuration).
+Disable [debug mode](../setup/configuration.md#oc-debug-mode) and enable cache settings inside your [environment configuration](../setup/configuration.md#oc-environment-configuration).
 
 ```
 APP_DEBUG=false

@@ -5,7 +5,7 @@ When you first start using October CMS, error and exception handling is already 
 1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
 1. Alternatively it can be viewed via the Administration area by navigating to *System > Logs > Event Log*.
 
-Log entries are always created when an error page is shown and for certain [exception types](#exception-types).
+Log entries are always created when an error page is shown and for certain [exception types](#oc-exception-types).
 
 ## Configuration
 
@@ -40,6 +40,7 @@ October CMS supports various drivers, including `single`, `daily`, `syslog` and 
 
 > More information on logging configuration can be found at the [Laravel Logging documentation](https://laravel.com/docs/6.x/logging).
 
+<a id="oc-exception-types"></a>
 ## Available Exceptions
 
 October CMS comes with several basic exception types out of the box.
@@ -75,6 +76,7 @@ throw new NotFoundException('Record not found');
 
 When this exception is thrown the standard response will change to display the nearest not found page with a 404 status code added.
 
+<a id="oc-validation-exception"></a>
 ### Validation Exception
 
 The `October\Rain\Exception\ValidationException` class, aliased as `ValidationException`, is used for errors that relate directly to a form submission and an invalid field. The message should contain an array with fields and error messages.
@@ -95,6 +97,7 @@ if ($validation->fails()) {
 
 When this exception is thrown the [AJAX framework](../ajax/introduction.md) will provide this information in a usable format and focus the first invalid field.
 
+<a id="oc-ajax-exception"></a>
 ### AJAX Exception
 
 The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is considered a "smart error" and will return the HTTP code 406. This allows them to pass response contents as if they were a successful response.
@@ -137,7 +140,7 @@ If you have several exception handlers, they should be defined from most generic
 
 ### Where to Place Error Handlers
 
-Error handler registrations, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
+Error handler registrations, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
 
 ## HTTP Exceptions
 
@@ -189,6 +192,7 @@ An array of contextual data may also be passed to the log methods. This contextu
 Log::info('User failed to login.', ['id' => $user->id]);
 ```
 
+<a id="oc-helper-functions"></a>
 ### Helper Functions
 
 There are some global helper methods available to make logging easier. The `trace_log` function is an alias for `Log::info` with support for using arrays and exceptions as the message.

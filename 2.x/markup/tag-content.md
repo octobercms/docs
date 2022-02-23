@@ -12,7 +12,7 @@ A content block inside a subdirectory can be rendered in the same way.
 {% content "sidebar/content.htm" %}
 ```
 
-> **Note**: The [Themes documentation](../cms/themes.md#subdirectories) has more details on subdirectory usage.
+> **Note**: The [Themes documentation](../cms/themes.md#oc-subdirectories) has more details on subdirectory usage.
 
 Content blocks can be rendered as plain text:
 
@@ -26,7 +26,7 @@ You can also use Markdown syntax:
 {% content "changelog.md" %}
 ```
 
-Content blocks can also be used in combination with [layout placeholders](../cms/layouts.md#placeholders):
+Content blocks can also be used in combination with [layout placeholders](../cms/layouts.md#oc-placeholders):
 
 ```twig
 {% put sidebar %}

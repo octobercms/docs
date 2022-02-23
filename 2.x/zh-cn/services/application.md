@@ -1,5 +1,6 @@
 # 应用
 
+<a id="oc-application-container"></a>
 ## 应用程序容器
 
 控制反转(IoC)容器是用于管理类依赖关系的工具。 依赖注入是一种去除硬编码类依赖的方法。 相反，依赖项是在运行时注入的，因为可以轻松交换依赖项实现，从而提供更大的灵活性。
@@ -60,8 +61,9 @@ $users = App::make('UserRepositoryInterface');
 
 ### 在哪里注册绑定
 
-IoC 绑定，如 [事件处理程序](events.md)，通常属于"引导代码"类别。换句话说，它们让您的应用程序准备好实际处理请求，并且通常需要在实际调用路由或控制器之前执行。最常见的地方是[插件注册文件](../plugin/registration.md#registration-methods)的`boot`方法。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用该文件来放置 IoC 注册逻辑。
+IoC 绑定，如 [事件处理程序](events.md)，通常属于"引导代码"类别。换句话说，它们让您的应用程序准备好实际处理请求，并且通常需要在实际调用路由或控制器之前执行。最常见的地方是[插件注册文件](../plugin/registration.md#oc-registration-methods)的`boot`方法。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用该文件来放置 IoC 注册逻辑。
 
+<a id="oc-service-providers"></a>
 ## 服务提供者
 
 服务提供者是在单个位置创建库和执行组相关的 IoC 注册的好方法。在服务提供者中，您可以注册自定义身份验证驱动程序，使用 IoC 容器注册应用程序的存储库类，甚至设置自定义 Artisan 命令。
@@ -136,7 +138,7 @@ App::resolving('Acme\Blog\Classes\FooBar', function ($fooBar, $app) {
 
 #### 查找应用环境
 
-您可以使用 `environment` 方法来发现由 [环境配置](../setup/configuration.md#environment-configuration) 确定的应用程序环境。
+您可以使用 `environment` 方法来发现由 [环境配置](../setup/configuration.md#oc-environment-configuration) 确定的应用程序环境。
 
 ```php
 // 生产

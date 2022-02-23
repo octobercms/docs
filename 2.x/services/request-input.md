@@ -133,6 +133,7 @@ return Redirect::to('form')->withInput(Input::except('password'));
 Input::old('username');
 ```
 
+<a id="oc-files"></a>
 ## Files
 
 #### Retrieving an Uploaded File

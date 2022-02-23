@@ -2,7 +2,7 @@
 
 每个网站至少提供一个页面，在 October CMS 中，一个页面用页面模板表示。 页面模板文件位于主题的 **pages** 目录中。 页面文件名不会影响路由，但根据页面的功能来命名页面是个好主意。 这些文件应具有 **htm** 扩展名。
 
-页面需要 [配置部分](themes.md#configuration-section) 和 [Twig](themes.md#twig-section) 模板部分，但 [PHP 部分](themes.md#php-section) 是可选的 . 下面，您可以看到最简单的主页示例：
+页面需要 [配置部分](themes.md#oc-configuration-section) 和 [Twig](themes.md#oc-twig-section) 模板部分，但 [PHP 部分](themes.md#oc-php-section) 是可选的 . 下面，您可以看到最简单的主页示例：
 
 ```
 url = "/"
@@ -10,9 +10,10 @@ url = "/"
 <h1>Hello, world!</h1>
 ```
 
+<a id="oc-configuration"></a>
 ## 页面配置
 
-页面配置定义在页面模板文件的[配置部分](themes.md#configuration-section)中。 页面配置定义了路由和渲染页面及其[组件](components.md)所需的页面参数，在另一篇文章中进行了解释。 页面支持以下配置参数：
+页面配置定义在页面模板文件的[配置部分](themes.md#oc-configuration-section)中。 页面配置定义了路由和渲染页面及其[组件](components.md)所需的页面参数，在另一篇文章中进行了解释。 页面支持以下配置参数：
 
 参数 | 描述
 ------------- | -------------
@@ -22,6 +23,7 @@ url = "/"
 **description** | 后端界面的页面描述，可选。
 **hidden** | 隐藏页面只能由登录的后端用户访问，可选。
 
+<a id="oc-url-syntax"></a>
 ### URL 语法
 
 页面 URL 使用 **url** 配置参数定义。 URL 应以正斜杠字符开头，并且可以包含参数。 没有参数的 URL 是固定且严格的。 在以下示例中，页面 URL 是 `/blog`。
@@ -32,13 +34,13 @@ url = "/blog"
 
 > **注意**：页面 URL 默认不区分大小写。
 
-带参数的 URL 更灵活。 具有以下示例中定义的 URL 模式的页面将针对任何地址(如 `/blog/post/something`)显示。 URL 参数可以通过 October 组件或从页面 [PHP 代码](themes.md#php-section) 部分访问。
+带参数的 URL 更灵活。 具有以下示例中定义的 URL 模式的页面将针对任何地址(如 `/blog/post/something`)显示。 URL 参数可以通过 October 组件或从页面 [PHP 代码](themes.md#oc-php-section) 部分访问。
 
 ```ini
 url = "/blog/post/:post_id"
 ```
 
-这是从页面的 PHP 部分访问 URL 参数的方法(有关更多详细信息，请参阅 [动态页面](#dynamic-pages) 部分)：
+这是从页面的 PHP 部分访问 URL 参数的方法(有关更多详细信息，请参阅 [动态页面](#oc-dynamic-pages) 部分)：
 
 ```
 url = "/blog/post/:post_id"
@@ -97,9 +99,10 @@ url = "/blog/:slug?*"
 
 > **注意**：子目录不影响页面 URL - URL 仅使用 **url** 参数定义。
 
+<a id="oc-dynamic-pages"></a>
 ## 动态页面
 
-在页面模板的 [Twig 部分](themes.md#twig-section) 内，您可以使用任何 [由 October 提供的功能、过滤器和标签](../markup/templating.md)。任何动态页面都需要**变量**。 在October，变量可能由页面、布局[PHP 部分](themes.md#php-section) 或[组件](components.md) 准备。在本文中，我们将在 PHP 部分描述如何准备变量。
+在页面模板的 [Twig 部分](themes.md#oc-twig-section) 内，您可以使用任何 [由 October 提供的功能、过滤器和标签](../markup/templating.md)。任何动态页面都需要**变量**。 在October，变量可能由页面、布局[PHP 部分](themes.md#oc-php-section) 或[组件](components.md) 准备。在本文中，我们将在 PHP 部分描述如何准备变量。
 
 ### 页面执行生命周期
 
@@ -137,7 +140,7 @@ function onStart()
 </ul>
 ```
 
-[标记指南](../markup.md) 中描述了 October 提供的默认变量和 Twig 扩展。 [动态布局](layouts.md#dynamic-layouts) 文章描述了处理程序的执行顺序。
+[标记指南](../markup.md) 中描述了 October 提供的默认变量和 Twig 扩展。 [动态布局](layouts.md#oc-dynamic-layouts) 文章描述了处理程序的执行顺序。
 
 ### 发送自定义响应
 
@@ -159,9 +162,10 @@ public function onStart()
 }
 ```
 
+<a id="oc-handling-forms"></a>
 ### 处理表单
 
-您可以使用在页面或布局中定义的处理程序方法处理标准表单 [PHP 部分](themes.md#php-section)(处理 AJAX 请求在 [AJAX 框架](../ajax/introduction.md) 中有说明) 文章)。 使用 [`form_open()`](markup#standard-form) 函数定义引用事件处理程序的表单。 例子：
+您可以使用在页面或布局中定义的处理程序方法处理标准表单 [PHP 部分](themes.md#oc-php-section)(处理 AJAX 请求在 [AJAX 框架](../ajax/introduction.md) 中有说明) 文章)。 使用 [`form_open()`](markup#oc-standard-form) 函数定义引用事件处理程序的表单。 例子：
 
 ```twig
 {{ form_open({ request: 'onHandleForm' }) }}
@@ -171,7 +175,7 @@ public function onStart()
 <p>Last submitted value: {{ lastValue }}</p>
 ```
 
-`onHandleForm` 函数可以在页面或布局 [PHP section](themes.md#php-section) 中定义，如下所示：
+`onHandleForm` 函数可以在页面或布局 [PHP section](themes.md#oc-php-section) 中定义，如下所示：
 
 ```php
 function onHandleForm()
@@ -194,13 +198,15 @@ function onHandleForm()
 
 如果主题包含一个 URL 为 `/404` 的页面，当系统找不到请求的页面时会显示它。
 
+<a id="oc-error-page"></a>
 ## 错误页面
 
 默认情况下，任何错误都会显示一个详细的错误页面，其中包含文件内容、行号和发生错误的堆栈跟踪。 您可以通过在 `config/app.php` 脚本中将配置值 `debug` 设置为 **false** 并使用 URL `/error` 创建一个页面来显示自定义错误页面。
 
+<a id="oc-page-variables"></a>
 ## 页面变量
 
-可以在[PHP代码部分](../cms/themes.md#php-section)或[组件](../cms/components.md)中通过引用`$this->page`。
+可以在[PHP代码部分](../cms/themes.md#oc-php-section)或[组件](../cms/components.md)中通过引用`$this->page`。
 
 ```php
 function onEnd()
@@ -217,9 +223,10 @@ function onEnd()
 
 更多信息可以在 [标记指南中的`this.page`](../markup/this-page) 中找到。
 
+<a id="oc-injecting-page-assets-programmatically"></a>
 ## 以编程方式注入页面资产
 
-如果需要，您可以使用控制器的 `addCss` 和 `addJs` 方法将资产(CSS 和 JavaScript 文件)注入页面。 它可以在页面的 [PHP 部分](themes.md#php-section) 或 [布局](layout.md) 模板中定义的 `onStart` 函数中完成。 例子：
+如果需要，您可以使用控制器的 `addCss` 和 `addJs` 方法将资产(CSS 和 JavaScript 文件)注入页面。 它可以在页面的 [PHP 部分](themes.md#oc-php-section) 或 [布局](layout.md) 模板中定义的 `onStart` 函数中完成。 例子：
 
 ```php
 function onStart()

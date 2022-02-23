@@ -12,7 +12,7 @@ Layout template files reside in the **layouts** directory in your theme. Layout 
 </html>
 ```
 
-To use a layout for a [page](pages.md) the page should refer the layout file name (without extension) in the [Configuration](themes.md#configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes.md#subdirectories) you should specify the subdirectory name. Example page template using the default.htm layout:
+To use a layout for a [page](pages.md) the page should refer the layout file name (without extension) in the [Configuration](themes.md#oc-configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes.md#oc-subdirectories) you should specify the subdirectory name. Example page template using the default.htm layout:
 
 ```twig
 url = "/"
@@ -33,7 +33,7 @@ When this page is requested its content is merged with the layout, or more preci
 
 Note that you can render [partials](partials.md) in layouts. This lets you to share the common markup elements between different layouts. For example, you can have a partial that outputs the website CSS and JavaScript links. This approach simplifies the resource management - if you want to add a JavaScript reference you should modify a single partial instead of editing all the layouts.
 
-The [Configuration](themes.md#configuration-section) section is optional for layouts. The supported configuration parameters are **name** and **description**. The parameters are optional and used in the back-end user interface. Example layout template with a description:
+The [Configuration](themes.md#oc-configuration-section) section is optional for layouts. The supported configuration parameters are **name** and **description**. The parameters are optional and used in the back-end user interface. Example layout template with a description:
 
 ```twig
 description = "Basic layout example"
@@ -69,6 +69,7 @@ meta_title = "{{ post.title }} - Blog"
 
 > **Note**: Only basic Twig variables are supported. Filters, tags and functions cannot be used.
 
+<a id="oc-placeholders"></a>
 ## Placeholders
 
 Placeholders allow pages to inject content to the layout. Placeholders are defined in the layout templates with the `{% placeholder %}` tag. The next example shows a layout template with a placeholder **head** defined in the HTML HEAD section.
@@ -96,13 +97,14 @@ layout = "default"
 
 More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder.md).
 
+<a id="oc-dynamic-layouts"></a>
 ## Dynamic Layouts
 
-Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#dynamic-pages) documentation for details.
+Layouts, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#oc-dynamic-pages) documentation for details.
 
 ### Layout Execution Life Cycle
 
-Inside the layout's [PHP section](themes.md#php-section) you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
+Inside the layout's [PHP section](themes.md#oc-php-section) you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
 
 The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page processing. The `onBeforePageStart` function is executed after the layout [components](components.md) ran, but before the page's `onStart` function is executed. The `onEnd` function is executed after the page is rendered. The sequence the handlers are executed is following:
 

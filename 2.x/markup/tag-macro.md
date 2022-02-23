@@ -51,7 +51,7 @@ Macros can be defined in [a theme partial](../cms/partials.md) and imported by n
 {% import 'macros/form' as form %}
 ```
 
-Alternatively you may import macros from a [system view file](../services/response-view.md#views) and these will be accepted. To import from **plugins/acme/blog/views/macros.htm** simply pass the path hint instead.
+Alternatively you may import macros from a [system view file](../services/response-view.md#oc-views) and these will be accepted. To import from **plugins/acme/blog/views/macros.htm** simply pass the path hint instead.
 
 ```twig
 {% import 'acme.blog::macros' as form %}

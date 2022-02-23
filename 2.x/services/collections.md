@@ -40,7 +40,6 @@ You may select any method from this table to see an example of its usage:
 [avg](#method-avg)
 [chunk](#method-chunk)
 [collapse](#method-collapse)
-[collect](#method-collect)
 [combine](#method-combine)
 [concat](#method-concat)
 [contains](#method-contains)
@@ -242,43 +241,6 @@ $combined->all();
 
 // ['name' => 'George', 'age' => 29]
 ```
-
-<a name="method-collect"></a>
-#### `collect()`
-
-The `collect` method returns a new `Collection` instance with the items currently in the collection:
-
-```php
-$collectionA = new Collection([1, 2, 3]);
-
-$collectionB = $collectionA->collect();
-
-$collectionB->all();
-
-// [1, 2, 3]
-```
-
-The `collect` method is primarily useful for converting [lazy collections](#lazy-collections) into standard `Collection` instances:
-
-```php
-$lazyCollection = LazyCollection::make(function () {
-    yield 1;
-    yield 2;
-    yield 3;
-});
-
-$collection = $lazyCollection->collect();
-
-get_class($collection);
-
-// 'October\Rain\Support\Collection'
-
-$collection->all();
-
-// [1, 2, 3]
-```
-
-> **Tip**: The `collect` method is especially useful when you have an instance of `Enumerable` and need a non-lazy collection instance. Since `collect()` is part of the `Enumerable` contract, you can safely use it to get a `Collection` instance.
 
 <a name="method-concat"></a>
 #### `concat()`

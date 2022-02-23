@@ -6,7 +6,7 @@
 
 ### 监听(订阅)事件
 
-监听事件最常见的地方是[插件注册文件](registration.md#registration-methods)的`boot`方法。 例如，当用户第一次注册时，您可能希望将他们添加到第三方邮件列表中，这可以通过监听`rainlab.user.register`全局事件来实现。
+监听事件最常见的地方是[插件注册文件](registration.md#oc-registration-methods)的`boot`方法。 例如，当用户第一次注册时，您可能希望将他们添加到第三方邮件列表中，这可以通过监听`rainlab.user.register`全局事件来实现。
 
 ```php
 class Plugin extends PluginBase
@@ -105,7 +105,7 @@ Event::listen('backend.auth.extendSigninView', function ($controller, $firstPara
 
 ### 扩展用户模型
 
-此示例将通过绑定到其本地事件来修改 `User` 模型的 [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) 事件。 这是在[插件注册文件](registration.md#routing-and-initialization)的`boot`方法中执行的。 在这两种情况下，当访问 `$model->foo` 属性时，它将返回值 *bar*。
+此示例将通过绑定到其本地事件来修改 `User` 模型的 [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) 事件。 这是在[插件注册文件](registration.md#oc-routing-and-initialization)的`boot`方法中执行的。 在这两种情况下，当访问 `$model->foo` 属性时，它将返回值 *bar*。
 
 ```php
 // 影响所有用户的本地事件钩子
@@ -147,9 +147,9 @@ User::extend(function ($model) {
 
 ### 扩展后端表单
 
-有多种扩展后端表单的方法，请参阅 [后端表单](../backend/forms.md#extending-form-behavior)。
+有多种扩展后端表单的方法，请参阅 [后端表单](../backend/forms.md#oc-extending-form-behavior)。
 
-此示例将监听 `Backend\Widget\Form` 小部件的 [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) 全局事件,以此注入一些额外的表单字段。 该事件也在[插件注册文件](registration.md#routing-and-initialization)的`boot`方法中监听。
+此示例将监听 `Backend\Widget\Form` 小部件的 [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) 全局事件,以此注入一些额外的表单字段。 该事件也在[插件注册文件](registration.md#oc-routing-and-initialization)的`boot`方法中监听。
 
 ```php
 // 扩展所有后台表单使用
@@ -188,7 +188,7 @@ Event::listen('backend.form.extendFields', function($widget) {
 
 ### 扩展后端列表
 
-此示例将修改 `Backend\Widget\Lists` 类的 [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) 全局事件,以此注入一些额外的列值。 该事件也在[插件注册文件](registration.md#routing-and-initialization)的`boot`方法中监听。
+此示例将修改 `Backend\Widget\Lists` 类的 [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) 全局事件,以此注入一些额外的列值。 该事件也在[插件注册文件](registration.md#oc-routing-and-initialization)的`boot`方法中监听。
 
 ```php
 // 扩展所有后端列表使用
@@ -219,7 +219,7 @@ Event::listen('backend.list.extendColumns', function ($widget) {
 
 此示例将在`Topic`组件内声明一个新的全局事件`rainlab.forum.topic.post`
 和名为`topic.post`
-的本地事件。 这是在[组件类定义](components.md#component-class-definition)中进行的。
+的本地事件。 这是在[组件类定义](components.md#oc-component-class-definition)中进行的。
 
 ```php
 class Topic extends ComponentBase
@@ -237,7 +237,7 @@ class Topic extends ComponentBase
 }
 ```
 
-接下来，这将演示如何从 [页面执行生命周期](../cms/layouts.md#dynamic-pages) 内部挂钩到这个新事件。 当在 `Topic` 组件(上述)中调用 `onPost` 事件处理程序时，这将写入跟踪日志。
+接下来，这将演示如何从 [页面执行生命周期](../cms/layouts.md#oc-dynamic-layouts) 内部挂钩到这个新事件。 当在 `Topic` 组件(上述)中调用 `onPost` 事件处理程序时，这将写入跟踪日志。
 
 ```
 [topic]

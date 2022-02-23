@@ -2,7 +2,7 @@
 
 ## AJAX 处理程序
 
-AJAX 事件处理程序是 PHP 函数，可以在页面或布局 [PHP 部分](../cms/themes.md#php-section) 或 [组件](../cms/components.md) 内部定义。 处理程序名称应具有以下模式：`onName`。 所有处理程序都支持使用 [更新部分](../ajax/update-partials.md) 作为 AJAX 请求的一部分。
+AJAX 事件处理程序是 PHP 函数，可以在页面或布局 [PHP 部分](../cms/themes.md#oc-php-section) 或 [组件](../cms/components.md) 内部定义。 处理程序名称应具有以下模式：`onName`。 所有处理程序都支持使用 [更新部分](../ajax/update-partials.md) 作为 AJAX 请求的一部分。
 
 ```php
 function onSubmitContactForm()
@@ -13,6 +13,7 @@ function onSubmitContactForm()
 
 如果在一个页面和布局中一起定义了两个同名的处理程序，则页面处理程序将被执行。 [components](../cms/components.md) 中定义的处理程序具有最低优先级。
 
+<a id="oc-calling-a-handler"></a>
 ###调用处理程序
 
 每个 AJAX 请求都应使用 [数据属性 API](../ajax/attributes-api.md) 或 [JavaScript API](../ajax/javascript-api.md) 指定处理程序名称。 发出请求后，服务器将搜索所有已注册的处理程序并定位它找到的第一个处理程序。
@@ -25,7 +26,7 @@ function onSubmitContactForm()
 <script> $.request('onSubmitContactForm') </script>
 ```
 
-如果两个组件注册了相同的处理程序名称，建议使用 [组件短名称或别名](../cms/components.md#components-aliases) 作为处理程序的前缀。如果组件使用 **mycomponent** 的别名，则可以使用 `mycomponent::onName` 来定位处理程序。
+如果两个组件注册了相同的处理程序名称，建议使用 [组件短名称或别名](../cms/components.md#oc-components-aliases) 作为处理程序的前缀。如果组件使用 **mycomponent** 的别名，则可以使用 `mycomponent::onName` 来定位处理程序。
 
 ```html
 <button data-request="mycomponent::onSubmitContactForm">Go</button>
@@ -91,7 +92,7 @@ function onFetchDataFromServer()
 
 ## 抛出 AJAX 异常
 
-您可以使用 `AjaxException` 类抛出 [AJAX 异常](../services/error-log.md#ajax-exception) 将响应视为错误，同时保留正常发送响应内容的能力。只需将响应内容作为异常的第一个参数传递。
+您可以使用 `AjaxException` 类抛出 [AJAX 异常](../services/error-log.md#oc-ajax-exception) 将响应视为错误，同时保留正常发送响应内容的能力。只需将响应内容作为异常的第一个参数传递。
 
 ```php
 throw new AjaxException([
@@ -104,7 +105,7 @@ throw new AjaxException([
 
 ## 在处理程序之前运行代码
 
-有时您可能希望在处理程序执行之前执行代码。将 `onInit` 函数定义为 [页面执行生命周期](../cms/layouts.md#dynamic-pages) 的一部分，允许代码在每个 AJAX 处理程序之前运行。
+有时您可能希望在处理程序执行之前执行代码。将 `onInit` 函数定义为 [页面执行生命周期](../cms/layouts.md#oc-dynamic-layouts) 的一部分，允许代码在每个 AJAX 处理程序之前运行。
 
 ```php
 function onInit()
@@ -113,7 +114,7 @@ function onInit()
 }
 ```
 
-您可以在 [组件类](../plugin/components.md#component-initialization) 或 [后端小部件类](../backend/widgets.md) 中定义一个 `init` 方法。
+您可以在 [组件类](../plugin/components.md#oc-component-initialization) 或 [后端小部件类](../backend/widgets.md) 中定义一个 `init` 方法。
 
 ```php
 function init()

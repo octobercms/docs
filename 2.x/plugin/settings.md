@@ -2,6 +2,7 @@
 
 There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 
+<a id="oc-database-settings"></a>
 ## Database Settings
 
 You can create models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the back-end settings form. You don't need to create a database table and a controller for creating the back-end settings forms based on the settings model.
@@ -49,14 +50,14 @@ The `$settingsFields` property is required if are going to build a back-end sett
 |           └── Plugin.php
 :::
 
-Settings models [can be registered](#backend-settings-pages) to appear on the **Backend Settings area**, but it is not a requirement - you can set and read settings values like any other model.
+Settings models [can be registered](#oc-backend-settings-pages) to appear on the **Backend Settings area**, but it is not a requirement - you can set and read settings values like any other model.
 
 ### Writing to a Settings Model
 
 The settings model has the static `set` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
 
 ```php
-use Acme\Demo\Models\Settings;
+use Acme\Demo\Models\UserSetting;
 
 // Set a single value
 UserSetting::set('api_key', 'ABCD');
@@ -85,13 +86,15 @@ echo UserSetting::get('api_key');
 echo UserSetting::get('is_activated', true);
 ```
 
+<a id="oc-backend-settings-pages"></a>
 ## Backend Settings Pages
 
 The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
+<a id="oc-settings-link-registration"></a>
 ### Settings Link Registration
 
-The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration.md#registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [Plugin registration class](registration.md#oc-registration-file). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
 
 ```php
 public function registerSettings()
@@ -110,9 +113,9 @@ public function registerSettings()
 }
 ```
 
-> **Note**: Backend settings pages should [set the settings context](#setting-the-page-navigation-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+> **Note**: Backend settings pages should [set the settings context](#oc-setting-the-page-navigation-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
 
-The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#database-settings) section.
+The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#oc-database-settings) section.
 
 ```php
 public function registerSettings()
@@ -134,9 +137,10 @@ public function registerSettings()
 
 The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 
+<a id="oc-setting-the-page-navigation-context"></a>
 ### Setting the Page Navigation Context
 
-Just like [setting navigation context in the controller](../backend/controllers-ajax.md#setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+Just like [setting navigation context in the controller](../backend/controllers-ajax.md#oc-setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
 
 ```php
 public function __construct()
@@ -150,8 +154,9 @@ public function __construct()
 }
 ```
 
-The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#settings-link-registration).
+The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#oc-settings-link-registration).
 
+<a id="oc-file-based-configuration"></a>
 ## File-based Configuration
 
 Plugins can have a configuration file **config.php** in the **config** subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file **plugins/acme/demo/config/config.php**.

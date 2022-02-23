@@ -44,7 +44,7 @@ October CMS 为 SMTP、Mailgun、SparkPost、Amazon SES、PHP 的`mail`功能和
 
 ## 发送邮件
 
-要发送消息，请使用 `Mail` 门面上的 `send` 方法，该方法接受三个参数。 第一个参数是唯一的*邮件代码*，用于定位 [邮件视图](#mail-views) 或 [邮件模板](#mail-templates)。 第二个参数是您希望传递给视图的数据数组。 第三个参数是 `Closure` 回调，它接收消息实例，允许您自定义邮件消息的收件人、主题和其他方面：
+要发送消息，请使用 `Mail` 门面上的 `send` 方法，该方法接受三个参数。 第一个参数是唯一的*邮件代码*，用于定位 [邮件视图](#oc-mail-views) 或 [邮件模板](#oc-mail-templates)。 第二个参数是您希望传递给视图的数据数组。 第三个参数是 `Closure` 回调，它接收消息实例，允许您自定义邮件消息的收件人、主题和其他方面：
 
 ```php
 // 这些变量在消息中作为 Twig 可用
@@ -64,7 +64,7 @@ Mail::send('acme.blog::mail.message', $vars, function($message) {
 {{ name }}
 ```
 
-> **注意**：你应该避免在你的消息中传递一个 `message` 变量，这个变量总是被传递并且允许 [内联嵌入附件](#attachments)。
+> **注意**：你应该避免在你的消息中传递一个 `message` 变量，这个变量总是被传递并且允许 [内联嵌入附件](#oc-attachments)。
 
 ####快速发送
 
@@ -145,7 +145,7 @@ $message->getSwiftMessage();
 
 #### 邮寄纯文本
 
-默认情况下，`send` 方法的视图假定包含一个 [邮件视图](#mail-views)，除了 HTML 视图之外，您还可以在其中指定要发送的纯文本视图。
+默认情况下，`send` 方法的视图假定包含一个 [邮件视图](#oc-mail-views)，除了 HTML 视图之外，您还可以在其中指定要发送的纯文本视图。
 
 ```php
 Mail::send('acme.blog::mail.message', $data, $callback);
@@ -188,6 +188,7 @@ Mail::raw([
 });
 ```
 
+<a id="oc-attachments"></a>
 ### 附件
 
 要将附件添加到电子邮件中，请在传递给闭包的 `$message` 对象上使用 `attach` 方法。 `attach` 方法接受文件的完整路径作为其第一个参数：
@@ -280,12 +281,14 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 });
 ```
 
+<a id="oc-message-content"></a>
 ## 消息内容
 
 可以使用邮件视图或邮件模板在October发送邮件消息。 邮件视图由文件系统中的应用程序或插件**/views**目录中提供。 而邮件模板是通过 *System(系统) > Mail templates(邮件模板)* 使用后端界面管理的。 所有邮件消息都支持使用 Twig 进行标记。
 
-或者，可以使用 `registerMailTemplates` 方法[在插件注册文件中注册]（#registering-mail-layouts-templates-partials）邮件视图。 这将自动生成一个邮件模板，并允许使用后端界面对其进行自定义。
+或者，可以使用 `registerMailTemplates` 方法[在插件注册文件中注册]（#oc-registering-mail-layouts-templates-partials）邮件视图。 这将自动生成一个邮件模板，并允许使用后端界面对其进行自定义。
 
+<a id="oc-mail-views"></a>
 ### 邮件浏览量
 
 邮件视图驻留在文件系统中，使用的代码表示视图文件的路径。 例如，使用代码 **author.plugin::mail.message** 发送邮件将使用以下文件中的内容：
@@ -319,7 +322,7 @@ subject = "您的产品已添加到October CMS项目"
 <p>此电子邮件是使用格式 (HTML) 发送的</p>
 ```
 
-> **注意**：邮件视图中支持基本的 Twig 标签和表达式。 还支持 Markdown 语法，有关详细信息，请参阅 [在 Markdown 中使用 HTML](../services/parser.md#using-html-in-markdown) 部分。
+> **注意**：邮件视图中支持基本的 Twig 标签和表达式。 还支持 Markdown 语法，有关详细信息，请参阅 [在 Markdown 中使用 HTML](../services/parser.md#oc-using-html-in-markdown) 部分。
 
 **plain text** 部分是可选的，视图只能包含配置和 HTML 标记部分。
 
@@ -341,8 +344,9 @@ subject = "您的产品已添加到October CMS项目"
 参数 | 描述
 ------------- | -------------
 **subject** | 邮件主题，必填。
-**layout** | [邮件布局](#mail-layouts) 代码，可选。 默认值为`default`。
+**layout** | [邮件布局](#oc-mail-layouts) 代码，可选。 默认值为`default`。
 
+<a id="oc-mail-templates"></a>
 ### 使用邮件模板
 
 邮件模板驻留在数据库中，可以通过*Settings(设置) > Mail(邮件) > Mail templates(邮件模板)* 在后端区域中创建。 模板中指定的**code**是唯一标识符，一旦创建就不能更改。
@@ -360,10 +364,11 @@ Mail::send('this.is.my.email', $data, function($message) use ($user)
 
 #### 自动生成的模板
 
-邮件模板也可以通过[已注册的邮件视图](#registering-mail-layouts-templates-partials)自动生成。 **code** 值将与邮件视图路径相同（例如：author.plugin:mail.message）。如果邮件视图定义了 **layout** 参数，这将用于为模板提供布局。
+邮件模板也可以通过[已注册的邮件视图](#oc-registering-mail-layouts-templates-partials)自动生成。 **code** 值将与邮件视图路径相同（例如：author.plugin:mail.message）。如果邮件视图定义了 **layout** 参数，这将用于为模板提供布局。
 
 首次保存生成的模板时，在发送邮件时将使用自定义的内容。 在这种情况下，可以将邮件视图视为*默认视图*。
 
+<a id="oc-mail-layouts"></a>
 ### 使用邮件布局
 
 可以通过选择 *Settings(设置) > Mail(邮件) > Mail templates(邮件模板)* 并单击 *Layouts* 选项卡来创建邮件布局。这些行为就像 CMS 布局一样，它们包含邮件消息的脚手架。邮件视图和模板支持使用邮件布局。
@@ -375,9 +380,10 @@ Mail::send('this.is.my.email', $data, function($message) use ($user)
 Default | default | 用于面向公众的前端邮件
 System | system | 用于内部、后端邮件
 
+<a id="oc-registering-mail-layouts-templates-partials"></a>
 ### 注册邮件布局、模板和部件
 
-邮件视图可以注册为模板，这些模板在后端自动生成，以供定制。 可以通过 *Settings(设置) > Mail templates(邮件模板)* 菜单自定义邮件模板。 可以通过覆盖 [插件注册类](../plugin/registration.md#registration-file) 的 `registerMailTemplates` 方法来注册模板。
+邮件视图可以注册为模板，这些模板在后端自动生成，以供定制。 可以通过 *Settings(设置) > Mail templates(邮件模板)* 菜单自定义邮件模板。 可以通过覆盖 [插件注册类](../plugin/registration.md#oc-registration-file) 的 `registerMailTemplates` 方法来注册模板。
 
 ```php
 public function registerMailTemplates()
@@ -389,9 +395,9 @@ public function registerMailTemplates()
 }
 ```
 
-该方法应返回 [邮件视图名称](#mail-views) 的数组。
+该方法应返回 [邮件视图名称](#oc-mail-views) 的数组。
 
-与模板一样，邮件部件和布局可以通过覆盖 [插件注册类](../plugin/registration.md#registration-file) 的 `registerMailPartials` 和 `registerMailLayouts` 方法来注册。
+与模板一样，邮件部件和布局可以通过覆盖 [插件注册类](../plugin/registration.md#oc-registration-file) 的 `registerMailPartials` 和 `registerMailLayouts` 方法来注册。
 
 ```php
 public function registerMailPartials()
@@ -411,7 +417,7 @@ public function registerMailLayouts()
 }
 ```
 
-这些方法应返回 [邮件视图名称](#mail-views) 的数组。数组键将用作部件或布局的 `code` 属性。
+这些方法应返回 [邮件视图名称](#oc-mail-views) 的数组。数组键将用作部件或布局的 `code` 属性。
 
 ### 全局变量
 

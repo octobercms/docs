@@ -30,7 +30,7 @@ You can also specify the `type`  to filter flash messages of a given type. The n
 
 ## Setting flash messages
 
-Flash messages can be set by [Components](../cms/components.md) or inside the page or layout [PHP section](../cms/themes.md#php-section) with the `Flash` class.
+Flash messages can be set by [Components](../cms/components.md) or inside the page or layout [PHP section](../cms/themes.md#oc-php-section) with the `Flash` class.
 
 ```php
 function onSave()

@@ -2,7 +2,7 @@
 
 ## 基本路由
 
-虽然为 [后端控制器](../backend/controllers-ajax.md) 自动处理路由，但 CMS 页面在其 [页面配置](../cms/pages.md#configuration) 中定义了自己的 URL 路由， 路由器服务主要用于定义固定的 API 和端点。
+虽然为 [后端控制器](../backend/controllers-ajax.md) 自动处理路由，但 CMS 页面在其 [页面配置](../cms/pages.md#oc-configuration) 中定义了自己的 URL 路由， 路由器服务主要用于定义固定的 API 和端点。
 
 您可以通过在与 [插件注册文件](../plugin/registration.md) 相同的目录中创建一个名为 **routes.php** 的文件来定义这些路由。 最基本的路由只接受一个 URI 和一个`闭包`：
 
@@ -118,7 +118,7 @@ Route::get('user/profile', ['as' => 'profile', function () {
 
 #### 路由分组和命名路由
 
-如果您使用 [路由分组](#route-groups)，您可以在路由组属性数组中指定一个 `as` 关键字，允许您为组内的所有路由设置一个通用的路由名称前缀：
+如果您使用 [路由分组](#oc-route-groups)，您可以在路由组属性数组中指定一个 `as` 关键字，允许您为组内的所有路由设置一个通用的路由名称前缀：
 
 ```php
 Route::group(['as' => 'admin::'], function () {
@@ -148,6 +148,7 @@ Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
 $url = Url::route('profile', ['id' => 1]);
 ```
 
+<a id="oc-route-groups"></a>
 ## 路由组
 
 路由组允许您在大量路由之间共享路由属性，而无需在每个单独的路由上定义这些属性。 共享属性以数组格式指定为 `Route::group` 方法的第一个参数。

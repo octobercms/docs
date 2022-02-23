@@ -12,7 +12,7 @@ Remember that if you refer a page from a subdirectory you should specify the sub
 <a href="{{ 'contacts/about'|page }}">About Us</a>
 ```
 
-> **Note**: The [Themes documentation](../cms/themes.md#subdirectories) has more details on subdirectory usage.
+> **Note**: The [Themes documentation](../cms/themes.md#oc-subdirectories) has more details on subdirectory usage.
 
 To access the link to a certain page from the PHP section, you can use `$this->pageUrl('page-name-without-extension')`:
 

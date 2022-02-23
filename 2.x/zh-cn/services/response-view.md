@@ -2,7 +2,7 @@
 
 ## 基本响应
 
-几乎可以从页面使用的 PHP 方法返回响应。这包括  [布局执行生命周期](../cms/layouts.md#layout-execution-life-cycle) 和 [AJAX 处理程序定义](../ajax/handlers.md)中包含的所有 CMS 方法.
+几乎可以从页面使用的 PHP 方法返回响应。这包括  [布局执行生命周期](../cms/layouts.md#oc-dynamic-layouts) 和 [AJAX 处理程序定义](../ajax/handlers.md)中包含的所有 CMS 方法.
 
 #### 从 CMS 方法返回字符串
 
@@ -84,7 +84,7 @@ return Response::make($content)->withCookie('name', 'value');
 
 ### 查看响应
 
-如果您需要访问 `Response` 类方法，但又想返回  [视图](#views) 作为响应内容，可以使用 `Response::view` 方法方便：
+如果您需要访问 `Response` 类方法，但又想返回  [视图](#oc-views) 作为响应内容，可以使用 `Response::view` 方法方便：
 
 ```php
 return Response::view('acme.blog::hello')->header('Content-Type', $type);
@@ -119,6 +119,7 @@ return Response::download($pathToFile)->deleteFileAfterSend(true);
 
 > **注意**: 管理文件下载的 Symfony HttpFoundation 要求正在下载的文件具有 ASCII 文件名。
 
+<a id="oc-redirects"></a>
 ## 重定向
 
 定向响应通常是 `Illuminate\Http\RedirectResponse` 类的实例，并包含将用户重定向到另一个 URL 所需的正确标头。 生成 `RedirectResponse` 实例的最简单方法是使用 `Redirect` 外观上的 `to` 方法。
@@ -171,8 +172,9 @@ Response::macro('caps', function($value) {
 return Response::caps('foo');
 ```
 
-您可以在 [插件注册文件](../plugin/registration.md#registration-methods).的 `boot` 方法中定义宏。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置宏注册。
+您可以在 [插件注册文件](../plugin/registration.md#oc-registration-methods).的 `boot` 方法中定义宏。或者，插件可以在插件目录中提供一个名为 **init.php** 的文件，您可以使用它来放置宏注册。
 
+<a id="oc-views"></a>
 ## 视图
 
 视图是存储基于系统的表示逻辑的好方法，例如 API 或端点使用的标记，或与 CMS 和后端区域共享的标记 [邮件服务](../services/mail.md) 也使用视图来提供默认模板内容。视图通常存储在插件的 `views` 目录中。

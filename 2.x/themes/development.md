@@ -2,6 +2,7 @@
 
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the October CMS Marketplace.
 
+<a id="oc-theme-information-file"></a>
 ## Theme Information File
 
 The theme information file **theme.yaml** contains the theme description, the author name, URL of the author's website and some other information. The file should be placed to the theme root directory:
@@ -28,8 +29,8 @@ Field | Description
 **previewImage** | custom preview image, path relative to the theme directory, eg: `assets/images/preview.png`, optional.
 **code** | the theme code, optional. The value is used on the October CMS marketplace for initializing the theme code value.
 **authorCode** | the theme author code, optional. The value is used on the October CMS marketplace for defining the theme owner.
-**form** | a configuration array or reference to a form field definition file, used for [theme customization](#theme-customization), optional.
-**require** | an array of plugin names used for [theme dependencies](#theme-dependencies), optional.
+**form** | a configuration array or reference to a form field definition file, used for [theme customization](#oc-theme-customization), optional.
+**require** | an array of plugin names used for [theme dependencies](#oc-theme-dependencies), optional.
 
 Example of the theme information file:
 
@@ -42,6 +43,7 @@ code: "Demo"
 authorCode: "Acme"
 ```
 
+<a id="oc-version-file"></a>
 ## Version File
 
 The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory.
@@ -92,9 +94,10 @@ require:
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time. For a streamlined experience, consider [adding these plugins to the composer depedency list](../help/publishing-packages.md#declaring-dependencies) as well.
 
+<a id="oc-theme-customization"></a>
 ## Theme Customization
 
-Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms.md#defining-form-fields) for more information.
+Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms.md#oc-defining-form-fields) for more information.
 
 The following is an example of how to define a website name configuration field called **site_name**:
 
@@ -110,7 +113,7 @@ form:
             default: My Amazing Site!
 ```
 
-The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup.md#default-variables) called `this.theme`.
+The value can then be accessed inside any of the Theme templates using the [global Twig variable](../markup/this-theme.md) called `this.theme`.
 
 ```twig
 <h1>Welcome to {{ this.theme.site_name }}!</h1>
@@ -137,7 +140,7 @@ fields:
 
 ### Using Theme Data In CSS
 
-Sometimes you want to include a visual preference inside your theme stylesheet. You may use CSS custom properties (variables) to make these values available. In the following example, we will use a [Color Picker field type](../backend/forms.md#color-picker) to specify a custom link color.
+Sometimes you want to include a visual preference inside your theme stylesheet. You may use CSS custom properties (variables) to make these values available. In the following example, we will use a [Color Picker field type](../backend/forms.md#widget-colorpicker) to specify a custom link color.
 
 ```yaml
 form:

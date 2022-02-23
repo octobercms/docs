@@ -32,12 +32,14 @@
 
     php artisan create:formwidget Acme.Blog CategorySelector
 
+<a id="oc-create-a-report-widget"></a>
 ## 创建报告小部件
 
 `create:reportwidget` 命令生成后端报告小部件、视图和基本资产文件。 第一个参数指定作者和插件名称。 第二个参数指定报告小部件类名。
 
     php artisan create:reportwidget Acme.Blog TopPosts
 
+<a id="oc-create-a-console-command"></a>
 ## 创建控制台命令
 
 `create:command` 命令生成一个 [新控制台命令](../console/development.md)。 第一个参数指定作者和插件名称。 第二个参数指定命令名称。

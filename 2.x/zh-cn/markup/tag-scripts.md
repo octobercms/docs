@@ -13,7 +13,7 @@
 
 ## 注入脚本
 
-可以通过 [组件](../plugin/components.md#injecting-page-assets-with-components) 或 [页面](../cms/pages.md#injecting-page-assets-programmatically)以编程方式将 JavaScript 文件的链接注入PHP
+可以通过 [组件](../plugin/components.md#oc-injecting-page-assets-with-components) 或 [页面](../cms/pages.md#oc-injecting-page-assets-programmatically)以编程方式将 JavaScript 文件的链接注入PHP
 
 ```php
 function onStart()
@@ -22,7 +22,7 @@ function onStart()
 }
 ```
 
-您还可以使用 **scripts** [占位符](../cms/layouts.md#placeholders) 将原始标记注入到 `{% scripts %}` 标签。 在页面或布局中使用 `{% put %}` 标签将内容添加到占位符：
+您还可以使用 **scripts** [占位符](../cms/layouts.md#oc-placeholders) 将原始标记注入到 `{% scripts %}` 标签。 在页面或布局中使用 `{% put %}` 标签将内容添加到占位符：
 
 ```twig
 {% put scripts %}

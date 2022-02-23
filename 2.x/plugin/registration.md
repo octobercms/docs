@@ -4,7 +4,7 @@ Plugins are the foundation for adding new features to the CMS by extending it. T
 
 1. Define [components](components.md).
 1. Define [user permissions](../backend/users.md).
-1. Add [settings pages](settings.md#backend-settings-pages), [menu items](#navigation-menus), [lists](../backend/lists.md) and [forms](../backend/forms.md).
+1. Add [settings pages](settings.md#oc-backend-settings-pages), [menu items](#oc-navigation-menus), [lists](../backend/lists.md) and [forms](../backend/forms.md).
 1. Create [database table structures and seed data](updates.md).
 1. Alter [functionality of the core or other plugins](events.md).
 1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
@@ -35,12 +35,14 @@ Not all plugin directories are required. The only required file is the **Plugin.
 |           └── Plugin.php
 :::
 
-> **Note**: if you are developing a plugin for the [Marketplace](https://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
+> **Note**: if you are developing a plugin for the [Marketplace](https://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates.md) file is required.
 
+<a id="oc-plugin-namespaces"></a>
 ### Plugin Namespaces
 
 Plugin namespaces are essential, especially if you are going to publish your plugins on the [October Marketplace](https://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
+<a id="oc-registration-file"></a>
 ## Registration File
 
 The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
@@ -74,6 +76,7 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
+<a id="oc-registration-methods"></a>
 ### Registration Methods
 
 The following methods are supported in the plugin registration class:
@@ -83,18 +86,18 @@ Method | Description
 **pluginDetails()** | returns information about the plugin.
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
-**registerMarkupTags()** | registers [additional markup tags](#extending-twig) that can be used in the CMS.
-**registerComponents()** | registers any [front-end components](components#component-registration) used by this plugin.
-**registerNavigation()** | registers [back-end navigation menu items](#navigation-menus) for this plugin.
-**registerPermissions()** | registers any [back-end permissions](../backend/users#registering-permissions) used by this plugin.
-**registerSettings()** | registers any [back-end configuration links](settings#settings-link-registration) used by this plugin.
-**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#form-widget-registration) supplied by this plugin.
-**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#report-widget-registration), including the dashboard widgets.
-**registerListColumnTypes()** | registers any [custom list column types](../backend/lists.md#custom-column-types) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](mail.md#registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](mail.md#registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](mail.md#registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling.md#defining-schedules) that are executed on a regular basis.
+**registerMarkupTags()** | registers [additional markup tags](#oc-extending-twig) that can be used in the CMS.
+**registerComponents()** | registers any [front-end components](components#oc-component-registration) used by this plugin.
+**registerNavigation()** | registers [back-end navigation menu items](#oc-navigation-menus) for this plugin.
+**registerPermissions()** | registers any [back-end permissions](../backend/users#oc-registering-permissions) used by this plugin.
+**registerSettings()** | registers any [back-end configuration links](settings#oc-settings-link-registration) used by this plugin.
+**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#oc-form-widget-registration) supplied by this plugin.
+**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#oc-report-widget-registration), including the dashboard widgets.
+**registerListColumnTypes()** | registers any [custom list column types](../backend/lists.md#oc-custom-column-types) supplied by this plugin.
+**registerMailLayouts()** | registers any [mail view layouts](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailTemplates()** | registers any [mail view templates](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailPartials()** | registers any [mail view partials](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling.md#oc-defining-schedules) that are executed on a regular basis.
 
 ### Basic Plugin Information
 
@@ -109,6 +112,7 @@ Key | Description
 **iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 
+<a id="oc-routing-and-initialization"></a>
 ## Routing and Initialization
 
 Plugin registration files can contain two methods `boot` and `register`. With these methods you can do anything you like, like register routes or attach handlers to events.
@@ -132,9 +136,10 @@ Route::get('api_acme_blog/cleanup_posts', function() {
 });
 ```
 
+<a id="oc-dependency-definitions"></a>
 ## Dependency Definitions
 
-A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
+A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#oc-registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
 
 ```php
 namespace Acme\Blog;
@@ -150,10 +155,11 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
-Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates.md#update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
+Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates.md#oc-update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 
+<a id="oc-extending-twig"></a>
 ## Extending Twig
 
 Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags` method of the plugin registration class. The next example registers two Twig filters and two functions.
@@ -185,9 +191,10 @@ public function makeTextAllCaps($text)
 }
 ```
 
+<a id="oc-navigation-menus"></a>
 ## Navigation Menus
 
-Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
+Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#oc-registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:
 
 ```php
 public function registerNavigation()
@@ -221,7 +228,7 @@ public function registerNavigation()
 
 When you register the back-end navigation you can use [localization strings](localization.md) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
-To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax.md#setting-the-navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
+To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax.md#oc-setting-the-navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 
 Key | Description
 ------------- | -------------

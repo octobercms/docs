@@ -4,11 +4,11 @@
 
 本文介绍了组件的基础知识，并没有解释如何使用 [AJAX组件](../ajax/handlers.md) 或 [开发组件](../plugin/components.md) 作为插件的一部分。
 
-> **注意**：在局部组件中使用组件的功能有限，[动态局部组件](partials.md#dynamic-partials) 文章中对此进行了更详细的描述。
+> **注意**：在局部组件中使用组件的功能有限，[动态局部组件](partials.md#oc-dynamic-partials) 文章中对此进行了更详细的描述。
 
 ## 介绍
 
-如果您使用后端用户界面，您可以通过单击“组件”面板中的组件将组件添加到您的页面、部件和布局。如果您使用文本编辑器，您可以通过将组件名称添加到模板文件的 [Configuration](themes.md#configuration-section) 部分，将组件附加到页面或布局。下一个示例演示如何向页面添加演示 To-do 组件：
+如果您使用后端用户界面，您可以通过单击“组件”面板中的组件将组件添加到您的页面、部件和布局。如果您使用文本编辑器，您可以通过将组件名称添加到模板文件的 [Configuration](themes.md#oc-configuration-section) 部分，将组件附加到页面或布局。下一个示例演示如何向页面添加演示 To-do 组件：
 
 ```ini
 title = "Components demonstration"
@@ -30,6 +30,7 @@ maxItems = 20
 
 > **注意**：如果将两个同名组件一起分配给一个页面和布局，页面组件会覆盖布局组件的任何属性。
 
+<a id="oc-components-aliases"></a>
 ## 组件别名
 
 如果有两个插件注册了同名的组件，您可以通过使用其完全限定的类名并为其分配一个 *alias* 来附加一个组件：
@@ -53,6 +54,8 @@ maxItems = 10
 [demoTodo todoB]
 maxItems = 20
 ```
+
+<a id="oc-using-external-property-values"></a>
 ## 使用外部属性值
 
 默认情况下，属性值在定义组件的配置部分初始化，并且属性值是静态的，如下所示：
@@ -101,7 +104,7 @@ maxItems = {{ :maxItems }}
 ...
 ```
 
-组件所属的页面应该有一个对应的[URL参数](pages.md#url-syntax)定义：
+组件所属的页面应该有一个对应的[URL参数](pages.md#oc-url-syntax)定义：
 
 ```ini
 url = "/todo/:maxItems"
@@ -109,9 +112,10 @@ url = "/todo/:maxItems"
 
 在 October的后端中，您可以使用 检查器(Inspector) 工具为组件属性分配外部值。在检查器中，您不需要使用大括号输入参数名称。 检查器中的每个字段在右侧都有一个图标，用于打开外部参数名称编辑器。对于部件变量，输入参数名称为 `paramName`，或者为 URL 参数输入 `:paramName`。
 
+<a id="oc-passing-variables-to-components"></a>
 ## 将变量传递给组件
 
-组件可以设计成在渲染的时候使用变量，类似于[部件变量](partials.md#passing-variables-to-partials)，可以在`{% component %}` 中的组件名后指定标签。指定的变量将显式覆盖 [组件属性](../plugin/components.md#component-properties) 的值，包括 [外部属性值](#using-external-property-values)。
+组件可以设计成在渲染的时候使用变量，类似于[部件变量](partials.md#oc-passing-variables-to-partials)，可以在`{% component %}` 中的组件名后指定标签。指定的变量将显式覆盖 [组件属性](../plugin/components.md#oc-component-properties) 的值，包括 [外部属性值](#oc-using-external-property-values)。
 
 在此示例中，组件的 **maxItems** 属性将在组件呈现时设置为 *7*：
 
@@ -123,8 +127,9 @@ url = "/todo/:maxItems"
 
 ## 自定义默认标记
 
-组件提供的标记通常用作组件的使用示例。在某些情况下，您可能希望修改组件的外观和输出。 [将默认标记移动到主题部分](#moving-default-markup-to-a-partial) 适用于彻底检修组件。 [覆盖组件部分](#overriding-component-partials) 对局部区域进行自定义很有用。
+组件提供的标记通常用作组件的使用示例。在某些情况下，您可能希望修改组件的外观和输出。 [将默认标记移动到主题部分](#oc-moving-default-markup-to-a-partial) 适用于彻底检修组件。 [覆盖组件部分](#oc-overriding-component-partials) 对局部区域进行自定义很有用。
 
+<a id="oc-moving-default-markup-to-a-partial"></a>
 ### 将默认标记移动到部件
 
 每个组件都可以有一个名为 **default.htm** 的入口点部分，它会在调用 `{% component %}` 标签时呈现，在以下示例中，我们假设组件名为 **blogPost**。
@@ -159,6 +164,7 @@ url = "blog/post"
 
 对于在组件部分目录中找到的所有其他部件，可以重复此过程。
 
+<a id="oc-overriding-component-partials"></a>
 ### 覆盖组件部件
 
 可以使用主题部件覆盖所有组件部件。如果名为 **channel** 的组件使用 **title.htm** 部件。
@@ -242,7 +248,7 @@ data-request="componentName::onMyComponentHandler"
 {% partial 'componentName::component-partial' %}
 ```
 
-阅读更多关于 [组件开发](../plugin/components.md#component-partials) 以了解组件部分。
+阅读更多关于 [组件开发](../plugin/components.md#oc-component-partials) 以了解组件部分。
 
 <!--
 ## Soft Components

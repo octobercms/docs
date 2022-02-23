@@ -76,11 +76,12 @@ Form::ajax('onSave', ['update' => [
 
 > **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api.md) are available here by dropping the `data-request-` prefix.
 
+<a id="oc-form-tokens"></a>
 ## Form Tokens
 
 #### CSRF protection
 
-If you have [protection enabled](../setup/configuration.md#csrf-protection), using the `Form::open` method with `POST`, `PUT` or `DELETE` will automatically add a CSRF token to your forms as a hidden field. Alternatively, if you wish to generate the HTML for the hidden CSRF field, you may use the `token` method:
+If you have [protection enabled](../setup/configuration.md#oc-csrf-protection), using the `Form::open` method with `POST`, `PUT` or `DELETE` will automatically add a CSRF token to your forms as a hidden field. Alternatively, if you wish to generate the HTML for the hidden CSRF field, you may use the `token` method:
 
 ```php
 <?= Form::token() ?>
@@ -88,7 +89,7 @@ If you have [protection enabled](../setup/configuration.md#csrf-protection), usi
 
 #### Deferred binding session key
 
-A session key used for [deferred binding](../database/relations.md#deferred-binding) will be added to every form as a hidden field. If you want to generate this field manually, you may use the `sessionKey` method:
+A session key used for [deferred binding](../database/relations.md#oc-deferred-binding) will be added to every form as a hidden field. If you want to generate this field manually, you may use the `sessionKey` method:
 
 ```php
 <?= Form::sessionKey() ?>

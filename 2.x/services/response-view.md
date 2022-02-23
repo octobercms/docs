@@ -2,7 +2,7 @@
 
 ## Basic Responses
 
-A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts.md#layout-execution-life-cycle) and [AJAX handler definitions](../ajax/handlers.md).
+A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts.md#oc-dynamic-layouts) and [AJAX handler definitions](../ajax/handlers.md).
 
 #### Returning strings from a CMS method
 
@@ -84,7 +84,7 @@ The `Response` facade may be used to conveniently generate other types of respon
 
 ### View Responses
 
-If you need access to the `Response` class methods, but want to return a [view](#views) as the response content, you may use the `Response::view` method for convenience:
+If you need access to the `Response` class methods, but want to return a [view](#oc-views) as the response content, you may use the `Response::view` method for convenience:
 
 ```php
 return Response::view('acme.blog::hello')->header('Content-Type', $type);
@@ -119,6 +119,7 @@ return Response::download($pathToFile)->deleteFileAfterSend(true);
 
 > **Note**: Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
 
+<a id="oc-redirects"></a>
 ## Redirects
 
 Redirect responses are typically instances of the `Illuminate\Http\RedirectResponse` class, and contain the proper headers needed to redirect the user to another URL. The simplest way to generate a `RedirectResponse` instance is to use the `to` method on the `Redirect` facade.
@@ -171,8 +172,9 @@ The `macro` function accepts a name as its first argument, and a Closure as its 
 return Response::caps('foo');
 ```
 
-You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
+You may define your macros in the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
 
+<a id="oc-views"></a>
 ## Views
 
 Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and back-end areas. Views are also used by the [Mail service](../services/mail.md) for providing default template content. Views are typically stored in the `views` directory of a plugin.

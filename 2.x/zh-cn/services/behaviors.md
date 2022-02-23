@@ -68,7 +68,7 @@ class UtilityFunctions extends \October\Rain\Extension\ExtensionBase
 - 扩展 \October\Rain\Extension\ExtensionBase 以将您的类声明为行为
 - 想要实现行为的类需要扩展\October\Rain\Extension\Extendable
 
-> **注意**：参见[使用特征而不是基类](#using-traits-instead-of-base-classes)
+> **注意**：参见[使用特征而不是基类](#oc-using-traits-instead-of-base-classes)
 
 ## 扩展构造函数
 
@@ -329,6 +329,7 @@ class User extends \October\Rain\Extension\Extendable
 }
 ```
 
+<a id="oc-using-traits-instead-of-base-classes"></a>
 ### 使用Traits而不是基类
 
 有时您的类可能已经在源代码控制之外扩展了父类，因此您无法扩展`ExtensionBase`或`Extendable`类。 相反，您可以使用这些特征，并且您的类必须按如下方式实现。

@@ -19,6 +19,7 @@ Event::fire('auth.login', [$user]);
 
 > **注意**：有关 October CMS 本身中可用的所有事件的列表，请参阅 [API 文档](https://octobercms.com/docs/api)。
 
+<a id="oc-subscribing-to-events"></a>
 ## 监听事件
 
 `Event::listen` 方法主要用于监听事件，可以在应用程序代码中的任何位置完成。 第一个参数是事件名称。
@@ -27,7 +28,7 @@ Event::fire('auth.login', [$user]);
 Event::listen('acme.blog.myevent', ...);
 ```
 
-第二个参数可以是一个闭包，它指定触发事件时应该发生什么。 闭包可以接受一些可选的参数，由 [触发事件](#firing-events) 提供。
+第二个参数可以是一个闭包，它指定触发事件时应该发生什么。 闭包可以接受一些可选的参数，由 [触发事件](#oc-firing-events) 提供。
 
 ```php
 Event::listen('acme.blog.myevent', function($arg1, $arg2) {
@@ -35,7 +36,7 @@ Event::listen('acme.blog.myevent', function($arg1, $arg2) {
 });
 ```
 
-您还可以传递对任何可调用对象或 [专用事件类](#using-classes-as-listeners) 的引用，并将使用它来代替。
+您还可以传递对任何可调用对象或 [专用事件类](#oc-using-classes-as-listeners) 的引用，并将使用它来代替。
 
 ```php
 Event::listen('auth.login', [$this, 'LoginHandler']);
@@ -43,9 +44,10 @@ Event::listen('auth.login', [$this, 'LoginHandler']);
 
 > **注意**：可调用方法可以选择指定全部、部分或不指定任何参数。 无论哪种方式，事件都不会引发任何错误，除非它指定太多。
 
+<a id="oc-where-to-register-listeners"></a>
 ### 在哪里注册监听器
 
-最常见的地方是[插件注册文件](../plugin/registration.md#registration-methods)的`boot`方法。
+最常见的地方是[插件注册文件](../plugin/registration.md#oc-registration-methods)的`boot`方法。
 
 ```php
 class Plugin extends PluginBase
@@ -81,6 +83,7 @@ Event::listen('auth.login', function() { ... }, 10);
 Event::listen('auth.login', function() { ... }, 5);
 ```
 
+<a id="oc-halting-events"></a>
 ### 停止事件
 
 有时您可能希望停止将事件传播给其他监听器。 您可以通过从监听器返回 `false` 来执行此操作：
@@ -115,6 +118,7 @@ Event::listen('foo.*', function($event, $params) {
 });
 ```
 
+<a id="oc-firing-events"></a>
 ## 触发事件
 
 您可以在代码中的任何位置使用 `Event::fire` 方法来使逻辑可扩展。 这意味着其他开发人员，甚至您自己的内部代码，都可以"挂钩"到这一个代码并注入特定的逻辑。 第一个参数应该是事件名称。
@@ -129,13 +133,13 @@ Event::fire('myevent');
 Event::fire('acme.blog.myevent');
 ```
 
-第二个参数是一个值数组，将作为参数传递给监听它的 [事件监听器](#subscribing-to-events)。
+第二个参数是一个值数组，将作为参数传递给监听它的 [事件监听器](#oc-subscribing-to-events)。
 
 ```php
 Event::fire('acme.blog.myevent', [$arg1, $arg2]);
 ```
 
-第三个参数指定事件是否应该是 [停止事件](#halting-events)，这意味着如果返回"非 null"值，它应该停止。此参数默认设置为 false。
+第三个参数指定事件是否应该是 [停止事件](#oc-halting-events)，这意味着如果返回"非 null"值，它应该停止。此参数默认设置为 false。
 
 ```php
 Event::fire('acme.blog.myevent', [...], true);
@@ -189,6 +193,7 @@ Event::queue('foo', [$user]);
 Event::flush('foo');
 ```
 
+<a id="oc-using-classes-as-listeners"></a>
 ## 使用类作为监听器
 
 在某些情况下，您可能希望使用类而不是闭包来处理事件。类事件监听器将从 [Application IoC 容器](application.md) 中解析出来，为您提供监听器依赖注入的全部功能。

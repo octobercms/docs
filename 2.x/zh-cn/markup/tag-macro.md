@@ -51,7 +51,7 @@ Macros 可以在 [主题部件](../cms/partials.md) 中定义并按名称导入.
 {% import 'macros/form' as form %}
 ```
 
-或者，您可以从 [系统视图文件](../services/response-view.md#views)导入macro，要从 **plugins/acme/blog/views/macros.htm** 导入，只需传递路径提示即可。
+或者，您可以从 [系统视图文件](../services/response-view.md#oc-views)导入macro，要从 **plugins/acme/blog/views/macros.htm** 导入，只需传递路径提示即可。
 
 ```twig
 {% import 'acme.blog::macros' as form %}

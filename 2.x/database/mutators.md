@@ -2,8 +2,9 @@
 
 Accessors and mutators allow you to format attributes when retrieving them from a model or setting their value. For example, you may want to use the [encryption service](../services/encryption.md) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on the model.
 
-In addition to custom accessors and mutators, you can also automatically cast date fields to [Carbon](https://github.com/briannesbitt/Carbon) instances or even [cast text values to JSON](#attribute-casting).
+In addition to custom accessors and mutators, you can also automatically cast date fields to [Carbon](https://github.com/briannesbitt/Carbon) instances or even [cast text values to JSON](#oc-attribute-casting).
 
+<a id="oc-accessors-mutators"></a>
 ## Accessors & Mutators
 
 #### Defining an Accessor
@@ -122,6 +123,7 @@ class Flight extends Model
 }
 ```
 
+<a id="oc-attribute-casting"></a>
 ## Attribute Casting
 
 The `$casts` property on your model provides a convenient method of converting attributes to common data types. The `$casts` property should be an array where the key is the name of the attribute being cast, while the value is the type you wish to cast to the column to. The supported cast types are: `integer`, `real`, `float`, `double`, `string`, `boolean`, `object` and `array`.

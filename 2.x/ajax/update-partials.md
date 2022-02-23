@@ -96,9 +96,9 @@ function onRefreshTime()
 
 Depending on the execution context, an [AJAX event handler](../ajax/handlers.md) makes variables available to partials differently.
 
-- Use `$this[]` inside a page or layout [PHP section](../cms/themes.md#php-section).
-- Use `$this->page[]` inside a [component class](../plugin/components.md#ajax-handlers).
-- Use `$this->vars[]` in the [back-end area](../backend/controllers-ajax#using-ajax-handlers).
+- Use `$this[]` inside a page or layout [PHP section](../cms/themes.md#oc-php-section).
+- Use `$this->page[]` inside a [component class](../plugin/components.md#oc-ajax-handlers).
+- Use `$this->vars[]` in the [back-end area](../backend/controllers-ajax#oc-using-ajax-handlers).
 
 These examples will provide the **result** variable to a partial for each context:
 

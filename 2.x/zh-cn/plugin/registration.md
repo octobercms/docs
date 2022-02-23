@@ -4,7 +4,7 @@
 
 1. 定义[组件](components.md)。
 1. 定义[用户权限](../backend/users.md)。
-1. 添加[设置页面](settings.md#backend-settings-pages)、[菜单项](#navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md）。
+1. 添加[设置页面](settings.md#oc-backend-settings-pages)、[菜单项](#oc-navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md）。
 1. 创建[数据库表结构和种子数据](updates.md)。
 1. 更改[核心或其他插件的功能](events.md)。
 1. 提供类、[后端控制器](../backend/controllers-ajax)、视图、资产等文件。
@@ -36,12 +36,14 @@ plugins/
       Plugin.php   <=== 插件注册文件
 ```
 
-> **注意**：如果您正在为[市场](https://octobercms.com/help/site/marketplace) 开发插件，则需要[updates/version.yaml](updates) 文件。
+> **注意**：如果您正在为[市场](https://octobercms.com/help/site/marketplace) 开发插件，则需要[updates/version.yaml](updates.md) 文件。
 
+<a id="oc-plugin-namespaces"></a>
 ### 插件命名空间
 
 插件命名空间是必不可少的，特别是如果您打算在 [October市场](https://octobercms.com/plugins) 上发布您的插件。当您在市场上注册为作者时，系统会要求您提供作者代码，该代码是所有插件的根命名空间。注册时只能指定一次作者代码。 市场提供的默认作者代码由作者名字和姓氏组成：JohnSmith。注册后无法更改代码。你所有的插件命名空间都应该在根命名空间下定义，例如`\JohnSmith\Blog`。
 
+<a id="oc-registration-file"></a>
 ## 注册文件
 
 **Plugin.php** 文件，称为*插件注册文件*，是一个初始化脚本，声明了插件的核心功能和信息。注册文件可以提供以下内容：
@@ -75,6 +77,7 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
+<a id="oc-registration-methods"></a>
 ### 注册方法
 
 插件注册类支持以下方法：
@@ -84,18 +87,18 @@ class Plugin extends \System\Classes\PluginBase
 **pluginDetails()** | 返回有关插件的信息。
 **register()** | register 方法，在插件首次注册时调用。
 **boot()** | boot 方法，在请求路由之前调用。
-**registerMarkupTags()** | 注册可在 CMS 中使用的 [附加标记标签](#extending-twig)。
-**registerComponents()** | 注册此插件使用的任何 [前端组件](components#component-registration)。
-**registerNavigation()** | 为这个插件注册[后端导航菜单项](#navigation-menus)。
-**registerPermissions()** | 注册此插件使用的任何 [后端权限](../backend/users#registering-permissions)。
-**registerSettings()** | 注册此插件使用的任何 [后端配置链接](settings#settings-link-registration)。
-**registerFormWidgets()** | 注册此插件提供的任何 [后端表单小部件](../backend/widgets#form-widget-registration)。
-**registerReportWidgets()** | 注册任何 [后端报告小部件](../backend/widgets#report-widget-registration)，包括仪表板小部件。
-**registerListColumnTypes()** | 注册此插件提供的任何 [自定义列表字段类型](../backend/lists.md#custom-column-types)。
-**registerMailLayouts()** | 注册此插件提供的任何 [邮件视图布局](mail.md#registering-mail-layouts-templates-partials)。
-**registerMailTemplates()** | 注册此插件提供的任何 [邮件视图模板](mail.md#registering-mail-layouts-templates-partials)。
-**registerMailPartials()** | 注册此插件提供的任何 [邮件视图部件](mail.md#registering-mail-layouts-templates-partials)。
-**registerSchedule()** | 注册定期执行的 [计划任务](../plugin/scheduling.md#defining-schedules)。
+**registerMarkupTags()** | 注册可在 CMS 中使用的 [附加标记标签](#oc-extending-twig)。
+**registerComponents()** | 注册此插件使用的任何 [前端组件](components#oc-component-registration)。
+**registerNavigation()** | 为这个插件注册[后端导航菜单项](#oc-navigation-menus)。
+**registerPermissions()** | 注册此插件使用的任何 [后端权限](../backend/users#oc-registering-permissions)。
+**registerSettings()** | 注册此插件使用的任何 [后端配置链接](settings#oc-settings-link-registration)。
+**registerFormWidgets()** | 注册此插件提供的任何 [后端表单小部件](../backend/widgets#oc-form-widget-registration)。
+**registerReportWidgets()** | 注册任何 [后端报告小部件](../backend/widgets#oc-report-widget-registration)，包括仪表板小部件。
+**registerListColumnTypes()** | 注册此插件提供的任何 [自定义列表字段类型](../backend/lists.md#oc-custom-column-types)。
+**registerMailLayouts()** | 注册此插件提供的任何 [邮件视图布局](mail.md#oc-registering-mail-layouts-templates-partials)。
+**registerMailTemplates()** | 注册此插件提供的任何 [邮件视图模板](mail.md#oc-registering-mail-layouts-templates-partials)。
+**registerMailPartials()** | 注册此插件提供的任何 [邮件视图部件](mail.md#oc-registering-mail-layouts-templates-partials)。
+**registerSchedule()** | 注册定期执行的 [计划任务](../plugin/scheduling.md#oc-defining-schedules)。
 
 ### 基本插件信息
 
@@ -110,6 +113,7 @@ class Plugin extends \System\Classes\PluginBase
 **iconSvg** | 用于代替标准图标的 SVG 图标。 SVG 图标应该是一个矩形并且可以支持颜色，可选。
 **homepage** | 指向作者网站地址的链接，可选。
 
+<a id="oc-routing-and-initialization"></a>
 ## 路由和初始化
 
 插件注册文件可以包含两个方法`boot`和`register`。 使用这些方法，您可以做任何您喜欢的事情，例如注册路由或将处理程序附加到事件。
@@ -133,9 +137,10 @@ Route::get('api_acme_blog/cleanup_posts', function() {
 });
 ```
 
+<a id="oc-dependency-definitions"></a>
 ## 依赖定义
 
-插件可以通过在[插件注册文件](#registration-file) 中定义`$require` 属性来依赖其他插件，该属性应包含被视为需求的插件名称数组。 依赖 **Acme.User** 插件的插件可以通过以下方式声明此要求：
+插件可以通过在[插件注册文件](#oc-registration-file) 中定义`$require` 属性来依赖其他插件，该属性应包含被视为需求的插件名称数组。 依赖 **Acme.User** 插件的插件可以通过以下方式声明此要求：
 
 ```php
 namespace Acme\Blog;
@@ -151,10 +156,11 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
-依赖定义将影响插件的运行方式和[更新过程如何应用更新](../plugin/updates.md#update-process)。 安装过程将尝试自动安装任何依赖项，但是如果在系统中检测到没有任何依赖项的插件，它将被禁用以防止系统错误。
+依赖定义将影响插件的运行方式和[更新过程如何应用更新](../plugin/updates.md#oc-update-process)。 安装过程将尝试自动安装任何依赖项，但是如果在系统中检测到没有任何依赖项的插件，它将被禁用以防止系统错误。
 
 依赖定义可能很复杂，但应注意防止循环引用。 依赖图应该始终是有向的，循环依赖被认为是设计错误。
 
+<a id="oc-extending-twig"></a>
 ## 扩展Twig
 
 可以使用插件注册类的`registerMarkupTags` 方法在CMS中注册自定义Twig过滤器和函数。下一个示例注册两个 Twig 过滤器和两个函数。
@@ -186,9 +192,10 @@ public function makeTextAllCaps($text)
 }
 ```
 
+<a id="oc-navigation-menus"></a>
 ## 导航菜单
 
-插件可以通过覆盖[插件注册类](#registration-file)的`registerNavigation`方法来扩展后端导航菜单。 本节向您展示如何将菜单项添加到后端导航区域。 注册具有两个子菜单项的顶级导航菜单项的示例：
+插件可以通过覆盖[插件注册类](#oc-registration-file)的`registerNavigation`方法来扩展后端导航菜单。 本节向您展示如何将菜单项添加到后端导航区域。 注册具有两个子菜单项的顶级导航菜单项的示例：
 
 ```php
 public function registerNavigation()
@@ -222,7 +229,7 @@ public function registerNavigation()
 
 当您注册后端导航时，您可以将 [多语言字符串](localization.md) 用于 `label` 值。 后端导航也可以由`permissions` 值控制并对应于定义的[后端用户权限](../backend/users)。 后端导航出现在整个导航菜单项上的顺序由 `order` 值控制。 较高的数字意味着该项目将在菜单项的顺序中稍后出现，而较低的数字意味着它将较早出现。
 
-要使子菜单项可见，您可以在后端控制器中使用 `BackendMenu::setContext [设置导航上下文](../backend/controllers-ajax.md#setting-the-navigation-context) ` 方法。 这将使父菜单项处于活动状态并在侧菜单中显示子项。
+要使子菜单项可见，您可以在后端控制器中使用 `BackendMenu::setContext [设置导航上下文](../backend/controllers-ajax.md#oc-setting-the-navigation-context) ` 方法。 这将使父菜单项处于活动状态并在侧菜单中显示子项。
 
 键 | 描述
 ------------- | -------------

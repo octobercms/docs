@@ -14,7 +14,7 @@ $image = Resizer::open('path/to/image.jpg');
 $image = Resizer::open(Input::file('field_name'));
 ```
 
-要调整图像大小，请在对象上调用 `resize` 方法来执行调整大小。第一个参数是图像宽度，第二个参数是图像高度，第三个参数是 [调整参数大小](#resize-parameters) 选项的数组.
+要调整图像大小，请在对象上调用 `resize` 方法来执行调整大小。第一个参数是图像宽度，第二个参数是图像高度，第三个参数是 [调整参数大小](#oc-resize-parameters) 选项的数组.
 
 ```php
 $image->resize(800, 600, ['mode' => 'crop']);
@@ -34,6 +34,7 @@ $image->save('path/to/new/file.jpg');
 
 > **注意**: 还有一个 `|resize` [标记过滤器](../markup/filter-resize.md) 可用于调整主题中的图像大小。
 
+<a id="oc-resize-parameters"></a>
 ### 调整参数大小
 
 在 options 数组中支持以下元素：
@@ -56,4 +57,4 @@ $image->save('path/to/new/file.jpg');
 `portrait` | 调整到给定的高度并调整宽度以保持纵横比
 `landscape` | 调整到给定的宽度并调整高度以保持纵横比
 `crop` | 在将尽可能多的图像拟合到这些图像中后，裁剪到给定的尺寸
-`fit` | 使图像适合给定的最大尺寸，保持纵横比 
+`fit` | 使图像适合给定的最大尺寸，保持纵横比

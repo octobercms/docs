@@ -8,7 +8,7 @@ Partial templates files reside in the **partials** directory in your theme. Part
 <p>This is a partial</p>
 ```
 
-A [Configuration](themes.md#configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the backend user interface. This example shows a partial with a description defined.
+A [Configuration](themes.md#oc-configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the backend user interface. This example shows a partial with a description defined.
 
 ```twig
 description = "Demo partial"
@@ -20,7 +20,7 @@ The partial configuration section can also contain component definitions. The [C
 
 ## Rendering Partials
 
-The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. Remember that if you refer a partial from a [subdirectory](themes.md#subdirectories) you should specify the subdirectory name. The `{% partial %}` tag can be used inside a page, layout or another partial. Example of a page referring to a partial:
+The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. Remember that if you refer a partial from a [subdirectory](themes.md#oc-subdirectories) you should specify the subdirectory name. The `{% partial %}` tag can be used inside a page, layout or another partial. Example of a page referring to a partial:
 
 ```twig
 <div class="sidebar">
@@ -28,6 +28,7 @@ The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a sin
 </div>
 ```
 
+<a id="oc-passing-variables-to-partials"></a>
 ## Passing Variables to Partials
 
 You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
@@ -93,9 +94,10 @@ The **card** partial is composed of two content areas and an image variable.
 </div>
 ```
 
+<a id="oc-dynamic-partials"></a>
 ## Dynamic Partials
 
-Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#dynamic-pages) documentation for details.
+Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#oc-dynamic-pages) documentation for details.
 
 ### Partial Execution Life Cycle
 
@@ -123,11 +125,11 @@ function onStart()
 {{ location }} is the same as {{ city }}, {{ country }}.
 ```
 
-The templating language provided by October CMS is described in the [Markup Guide](../markup.md). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts.md#dynamic-layouts) article.
+The templating language provided by October CMS is described in the [Markup Guide](../markup.md). The overall sequence the handlers are executed is described in the [Dynamic layouts](layouts.md#oc-dynamic-layouts) article.
 
 ### Life Cycle Limitations
 
-Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. They do not follow the standard execution process, as described in the [layout execution life cycle](layouts.md#dynamic-layouts). The following limitations should be noted:
+Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. They do not follow the standard execution process, as described in the [layout execution life cycle](layouts.md#oc-dynamic-layouts). The following limitations should be noted:
 
 1. AJAX events are not registered and won't function as normal.
 1. The life cycle functions cannot return any values.

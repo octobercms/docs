@@ -101,6 +101,7 @@ $('form').request('onCalculate', {success: function(data) {
 }})
 ```
 
+<a id="oc-global-ajax-events"></a>
 ## Global AJAX Events
 
 The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.

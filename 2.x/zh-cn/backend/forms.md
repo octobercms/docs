@@ -2,7 +2,7 @@
 
 **Form Behavior** 是一个控制器修饰符，用于轻松地将表单功能添加到后端页面。 该行为提供了三个页面，分别称为创建、更新和预览。 预览页面是更新页面的只读版本。 当您使用表单行为时，您不需要在控制器中定义 `create`、`update` 和 `preview` 操作 - 行为会为你完成。 但是，您应该提供相应的视图文件。
 
-表单行为取决于表单[字段定义](#defining-form-fields) 和[模型类](../database/model.md)。 为了使用表单行为，您应该将其添加到控制器类的`$implement` 属性中。 此外，应定义`$formConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
+表单行为取决于表单[字段定义](#oc-defining-form-fields) 和[模型类](../database/model.md)。 为了使用表单行为，您应该将其添加到控制器类的`$implement` 属性中。 此外，应定义`$formConfig` 类属性，其值应参考用于配置行为选项的 YAML 文件。
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -47,10 +47,10 @@ preview:
 字段 | 描述
 ------------- | -------------
 **name** | 此表单管理的对象的名称。
-**form** | 配置数组或对表单域定义文件的引用，请参阅 [表单域](#defining-form-fields)。
+**form** | 配置数组或对表单域定义文件的引用，请参阅 [表单域](#oc-defining-form-fields)。
 **modelClass** | 一个模型类名，表单数据被加载并保存在这个模型上。
 
-下面列出的配置选项是可选的。 如果您希望表单行为支持 [创建](#create-page)、[更新](#update-page) 或 [预览](#preview-page) 页面，请定义它们。
+下面列出的配置选项是可选的。 如果您希望表单行为支持 [创建](#oc-create-page)、[更新](#oc-update-page) 或 [预览](#oc-preview-page) 页面，请定义它们。
 
 选项 | 描述
 ------------- | -------------
@@ -59,6 +59,7 @@ preview:
 **update** | 更新页面的配置数组或对配置文件的引用。
 **preview** | 预览页面的配置数组或对配置文件的引用。
 
+<a id="oc-create-page"></a>
 ### 创建页面
 
 要支持创建页面，请将以下配置添加到 YAML 文件中。
@@ -79,6 +80,7 @@ create:
 **redirectClose** | 保存记录时会吧close参数一起提交，用于保存并关闭重定向页面
 **form** | 定义创建页面的默认表单字段。
 
+<a id="oc-update-page"></a>
 ### 更新页面
 
 要支持更新页面，请将以下配置添加到 YAML 文件中。
@@ -98,6 +100,7 @@ update:
 **redirectClose** | 保存记录时会吧close参数一起提交，用于保存并关闭重定向页面
 **form** | 定义更新页面的默认表单字段。
 
+<a id="oc-preview-page"></a>
 ### 预览页面
 
 要支持预览页面，请将以下配置添加到 YAML 文件中:
@@ -143,6 +146,7 @@ flashCreate | :name 已创建
 flashUpdate | :name 更新
 flashDelete | :name 已删除
 
+<a id="oc-defining-form-fields"></a>
 ## 定义表单字段
 
 表单字段是使用 YAML 文件定义的。 表单行为使用表单字段配置来创建表单控件并将它们绑定到模型字段。 该文件被放置在插件的 **models** 目录的子目录中。 子目录名称与小写的模型类名称相匹配。 文件名无关紧要，但 **fields.yaml** 和 **form_fields.yaml** 是常用名称。 示例表单字段文件位置:
@@ -185,6 +189,7 @@ secondaryTabs:
         # [...]
 ```
 
+<a id="oc-field-options"></a>
 ### 字段选项
 
 对于每个字段，您可以指定这些选项(如果适用):
@@ -192,7 +197,7 @@ secondaryTabs:
 选项 | 描述
 ------------- | -------------
 **label** | 向用户显示表单字段时的名称。
-**type** | 定义应如何呈现此字段(请参阅下面的 [可用字段类型](#available-field-types))。默认值:text。
+**type** | 定义应如何呈现此字段(请参阅下面的 [可用字段类型](#oc-available-field-types))。默认值:text。
 **span** | 将表单域与一侧对齐。选项: auto(自动), left(左对齐), right(右对齐), row(格网布局), full(铺满)。默认值:full。
 **spanClass** | 与 span `row` 选项一起使用，将表单显示为 Bootstrap 网格，例如，`spanClass: col-xs-4`。
 **size** | 指定字段大小，例如 textarea 字段。选项:tiny(微型), small(小型), large(中型), huge(大型), giant(巨型)。
@@ -209,17 +214,17 @@ secondaryTabs:
 **hidden** | 从视图中隐藏字段并将其从保存的数据中排除。选项:true, false。
 **stretch** | 指定此字段是否拉伸以适合父高度。
 **context** | 指定显示字段时应使用的上下文。上下文也可以通过在字段名称中使用 `@` 符号来传递，例如，`name@update`。
-**dependsOn** | 其他字段名称的数组，该字段[取决于](#field-dependencies)，当其他字段被修改时，该字段将更新。
-**trigger** | 使用 [触发事件](#trigger-events) 指定此字段的条件。
-**preset** | 允许字段值最初由另一个字段的值设置，使用 [输入预设转换器](#input-preset-converter) 进行转换。
-**required** | 在字段标签旁边放置一个红色星号表示它是必填项。请务必使用 [模型验证](../database/traits.md#validation)，因为表单控制器不强制执行此操作。
+**dependsOn** | 其他字段名称的数组，该字段[取决于](#oc-field-dependencies)，当其他字段被修改时，该字段将更新。
+**trigger** | 使用 [触发事件](#oc-trigger-events) 指定此字段的条件。
+**preset** | 允许字段值最初由另一个字段的值设置，使用 [输入预设转换器](#oc-input-preset-converter) 进行转换。
+**required** | 在字段标签旁边放置一个红色星号表示它是必填项。请务必使用 [模型验证](../database/traits.md#oc-validation)，因为表单控制器不强制执行此操作。
 **attributes** | 指定要添加到表单字段元素的自定义 HTML 属性。
 **containerAttributes** | 指定要添加到表单字段容器的自定义 HTML 属性。
-**permissions** | 当前后端用户必须拥有[权限](users.md#users-and-permissions) 才能使用该字段。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
+**permissions** | 当前后端用户必须拥有[权限](users.md#oc-users-and-permissions) 才能使用该字段。支持单个权限的字符串或仅需要一个权限即可授予访问权限的权限数组。
 
 ### 嵌套字段选择
 
-来自相关模型的字段可以使用 [关联小部件](#relation) 或 [关联管理器](relations.md#relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#property-jsonable)，您可以使用 **relation[field]** 定义的嵌套字段类型。
+来自相关模型的字段可以使用 [关联小部件](#relation-widget) 或 [关联管理器](relations.md#oc-relationship-types) 呈现。 但是，如果关系类型是单数或 [jsonable 数组](../database/model.md#oc-supported-properties)，您可以使用 **relation[field]** 定义的嵌套字段类型。
 
 ```yaml
 avatar[name]:
@@ -269,9 +274,10 @@ tabs:
             tab: Groups
 ```
 
+<a id="oc-available-field-types"></a>
 ## 可用字段类型
 
-有多种原生字段类型用于 **type** 设置。 对于基本的 UI 元素，请查看 [可用的 UI 元素](#available-ui-elements)。 对于更高级的表单字段，可以使用 [表单小部件](#form-widgets) 代替。
+有多种原生字段类型用于 **type** 设置。 对于基本的 UI 元素，请查看 [可用的 UI 元素](#oc-available-ui-elements)。 对于更高级的表单字段，可以使用 [表单小部件](#oc-form-widgets) 代替。
 
 <div class="content-list" markdown="1">
 
@@ -630,6 +636,7 @@ blog_content:
     size: huge
 ```
 
+<a id="oc-available-ui-elements"></a>
 ## 可用的 UI 元素
 
 表单中可以包含非功能 UI 元素以帮助进行布局设计。
@@ -706,9 +713,10 @@ content:
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
+<a id="oc-form-widgets"></a>
 ## 表单小部件
 
-标准中包含各种表单小部件，尽管插件通常会提供自己的自定义表单小部件。 您可以在 [表单小部件](widgets.md#form-widgets) 文章中阅读更多内容。
+标准中包含各种表单小部件，尽管插件通常会提供自己的自定义表单小部件。 您可以在 [表单小部件](widgets.md#oc-form-widgets) 文章中阅读更多内容。
 
 <div class="content-list" markdown="1">
 
@@ -807,7 +815,7 @@ data:
     searching: false
 ```
 
-> **注意**:为了将其与模型一起使用，应在 [jsonable 属性](../database/model.md#supported-properties) 或任何可以处理存储为数组的内容中定义该字段 .
+> **注意**:为了将其与模型一起使用，应在 [jsonable 属性](../database/model.md#oc-supported-properties) 或任何可以处理存储为数组的内容中定义该字段 .
 
 #### 表配置
 
@@ -918,10 +926,10 @@ avatar:
 **maxFiles** | 允许上传的最大文件数
 **useCaption** | 允许为文件设置标题和描述。 默认值:`true`
 **prompt** | 上传按钮显示的文本，仅适用于文件，可选
-**thumbOptions** | 用于生成缩略图的附加属性 [调整大小选项](../services/resizer.md#resize-parameters)
+**thumbOptions** | 用于生成缩略图的附加属性 [调整大小选项](../services/resizer.md#oc-resize-parameters)
 **attachOnUpload** | 如果父记录存在，则在上传时自动附加上传的文件，而不是在保存父记录时使用延迟绑定来附加。默认值:`false`
 
-> **注意**:与 [媒体选择器表单小部件](#mediafinder) 不同，文件上传表单小部件使用 [数据库文件附件](../database/attachments.md)，因此字段名称是关联模型上的`attachEd`或`attachMent`关系属性名称。
+> **注意**:与 [媒体选择器表单小部件](#widget-mediafinder) 不同，文件上传表单小部件使用 [数据库文件附件](../database/attachments.md)，因此字段名称是关联模型上的`attachEd`或`attachMent`关系属性名称。
 
 <a name="widget-markdowneditor"></a>
 ### Markdown 编辑器
@@ -958,7 +966,7 @@ background_image:
 **imageWidth** | 如果使用图像类型，预览图片会显示到这个宽度，可选。
 **imageHeight** | 如果使用图片类型，预览图片会显示到这个高度，可选。
 
-> **注意**:与 [文件上传表单小部件](#file-upload) 不同，媒体选择器表单小部件将其所选媒体文件的路径存储为字符串。 它应该与模型上的正常属性相关联。
+> **注意**:与 [文件上传表单小部件](#widget-fileupload) 不同，媒体选择器表单小部件将其所选媒体文件的路径存储为字符串。 它应该与模型上的正常属性相关联。
 
 <a name="widget-nestedform"></a>
 ### 嵌套表单
@@ -990,11 +998,11 @@ profile:
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-嵌套表单支持与表单本身相同的语法，包括选项卡。 [jsonable 属性](../database/model.md#supported-properties) 将采用表单定义的结构。 或者，您可以使用 `useRelation` 选项引用相关模型。
+嵌套表单支持与表单本身相同的语法，包括选项卡。 [jsonable 属性](../database/model.md#oc-supported-properties) 将采用表单定义的结构。 或者，您可以使用 `useRelation` 选项引用相关模型。
 
 选项 | 描述
 ------------- | -------------
-**form**  | 与 [表单定义](#defining-form-fields) 中的相同
+**form**  | 与 [表单定义](#oc-defining-form-fields) 中的相同
 **showPanel** | 将表单放置在面板容器内。 默认值:true
 **useRelation** | 使用字段名称作为关系名称标记，以便直接在父模型上进行交互。 默认值:false
 
@@ -1022,12 +1030,12 @@ user:
 **descriptionFrom** | 要在用于显示描述的关系中使用的列名。默认值:description。
 **title** | 要在弹出窗口的标题部分显示的文本。
 **prompt** | 没有选择记录时显示的文本。 `%s` 字符代表搜索图标。
-**list** | 配置数组或对列表列定义文件的引用，请参阅 [列表列](lists.md#defining-list-columns)。
+**list** | 配置数组或对列表列定义文件的引用，请参阅 [列表列](lists.md#oc-defining-list-columns)。
 **recordsPerPage** | 每页显示的记录，使用 0 表示无页。默认值:10
 **conditions** | 指定要应用于列表模型查询的原始 where 查询语句。
-**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)始终应用于列表查询。第一个参数将包含附加其值的小部件模型，即父模型。
+**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)始终应用于列表查询。第一个参数将包含附加其值的小部件模型，即父模型。
 **searchMode** | 将搜索策略定义为包含所有单词、任何单词或精确短语。支持的选项:all(全部), any(任意), exact(精确)。默认值:all。
-**searchScope** | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)应用于搜索查询，第一个参数将包含搜索词。
+**searchScope** | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)应用于搜索查询，第一个参数将包含搜索词。
 **useRelation** | 使用字段名称作为关系名称的标志，以便直接在父模型上进行交互。默认值:true。禁用仅返回所选模型的 ID
 **modelClass** | 当 useRelation = false 时用于列出记录的模型类
 
@@ -1060,7 +1068,7 @@ user:
 **select** | 用于名称的自定义SQL select语句。
 **order** | 用于对选项进行排序的 order 子句。 示例:`name desc`。
 **emptyOption** | 没有可用选择时显示的文本。
-**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#query-scopes)始终应用于列表查询。
+**scope** | 指定在**相关表单模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)始终应用于列表查询。
 
 <a name="widget-repeater"></a>
 ### 循环组件
@@ -1086,7 +1094,7 @@ extra_information:
 
 选项 | 描述
 ------------- | -------------
-**form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#defining-form-fields)。 也可以使用内联字段。
+**form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#oc-defining-form-fields)。 也可以使用内联字段。
 **prompt** | 为创建按钮显示的文本。 默认值:Add new item。
 **titleFrom** | 项目中的字段名称，用作折叠项目的标题。
 **minItems** | 循环组件允许的最少项目数。 不使用组时预先显示这些项目。 例如，如果您设置 **'minItems: 1'** 第一行将被显示而不是隐藏。
@@ -1142,7 +1150,7 @@ quote:
 **name** | 组的名称。
 **description** | 组的简要说明。
 **icon** | 定义组的图标，可选。
-**fields** | 属于该组的表单字段，请参阅 [后端表单字段](#defining-form-fields)。
+**fields** | 属于该组的表单字段，请参阅 [后端表单字段](#oc-defining-form-fields)。
 
 > **注意**:组key与保存的数据一起存储为`_group`属性。
 
@@ -1221,7 +1229,7 @@ tags:
         - Orange
 ```
 
-您可以使用名为 **relation** 的`mode`，其中字段名称是 [多对多关系](../database/relations#many-to-many)。 这将通过关系自动获取和分配标签。 如果支持自定义标签，则会在分配之前创建它们。
+您可以使用名为 **relation** 的`mode`，其中字段名称是 [多对多关系](../database/relations#oc-many-to-many)。 这将通过关系自动获取和分配标签。 如果支持自定义标签，则会在分配之前创建它们。
 
 ```yaml
 tags:
@@ -1234,13 +1242,13 @@ tags:
 **mode** | 控制如何返回值，string(字符串)、array(数组)或relation(关系)。 默认值:string
 **separator** | 用指定的字符分隔标签，comma(逗号)或space(空格)。 默认值:comma
 **customTags** | 允许用户手动输入自定义标签。 默认值:true
-**options** | 指定预定义选项的方法或数组。 设置为 true 以使用模型 `get*Field*Options` 方法,可选。 
+**options** | 指定预定义选项的方法或数组。 设置为 true 以使用模型 `get*Field*Options` 方法,可选。
 **nameFrom** | 如果使用关系模式，则显示标签名称的模型属性名称。 默认值:name
 **useKey** | 使用 key 代替 value 来保存和读取数据。 默认值:false
 
 ## 表单视图
 
-对于表单支持 [创建](#create-page)、[更新](#update-page) 和 [预览](#preview-page) 的每个页面，您应该提供一个具有相应名称的[视图文件](../backend/controllers -ajax.md) - **create.htm**、**update.htm** 和 **preview.htm**。
+对于表单支持 [创建](#oc-create-page)、[更新](#oc-update-page) 和 [预览](#oc-preview-page) 的每个页面，您应该提供一个具有相应名称的[视图文件](../backend/controllers -ajax.md) - **create.htm**、**update.htm** 和 **preview.htm**。
 
 表单行为向控制器类添加了两个方法:`formRender` 和 `formRenderPreview`。 这些方法呈现使用上述 YAML 文件配置的表单控件。
 
@@ -1312,6 +1320,7 @@ tags:
 <?= Form::close() ?>
 ```
 
+<a id="oc-preview-view"></a>
 ### 预览视图
 
 **preview.htm** 视图代表预览页面，允许用户以只读模式预览现有记录。 典型的预览页面包含面包屑和表单本身。 下面是典型的 preview.htm 表单的内容。
@@ -1326,9 +1335,10 @@ tags:
 
 有时您可能希望在某些条件下操作表单字段的值或外观，例如，如果选中复选框，您可能希望隐藏输入。 有几种方法可以做到这一点，通过使用触发器 API 或字段依赖项。 输入预设转换器主要用于转换字段值。 这些选项将在下面更详细地描述。
 
+<a id="oc-input-preset-converter"></a>
 ### 输入预置转换器
 
-输入预设转换器使用 `preset` [表单字段选项](#field-options) 定义，允许您将输入到元素中的文本转换为另一个输入元素中的 URL、slug 或文件名值。
+输入预设转换器使用 `preset` [表单字段选项](#oc-field-options) 定义，允许您将输入到元素中的文本转换为另一个输入元素中的 URL、slug 或文件名值。
 
 在此示例中，当用户在`title`字段中输入文本时，我们将自动填写`URL`字段值。 如果为 Title 输入文本 **Hello world**，则 URL 将跟随转换成 **/hello-world**。 仅当目标字段 (`url`) 为空且未触及时才会发生此行为。
 
@@ -1369,9 +1379,10 @@ slug:
 **camel** | 使用 camelCase 格式化复制的值
 **file** | 将复制的值格式化为文件名，其中空格替换为破折号
 
+<a id="oc-trigger-events"></a>
 ### 触发事件
 
-触发事件是使用 `trigger` [表单字段选项](#field-options) 定义的，是一个使用 JavaScript 的基于浏览器的简单解决方案。它允许您根据另一个元素的状态更改元素属性，例如可见性或值。这是一个示例定义:
+触发事件是使用 `trigger` [表单字段选项](#oc-field-options) 定义的，是一个使用 JavaScript 的基于浏览器的简单解决方案。它允许您根据另一个元素的状态更改元素属性，例如可见性或值。这是一个示例定义:
 
 ```yaml
 is_delayed:
@@ -1394,12 +1405,13 @@ send_at:
 选项 | 描述
 ------------- | -------------
 **action** | 定义满足条件时应用于此字段的操作。 支持的值:show(显示), hide(隐藏), enable(启用), disable(禁用), empty(空)。
-**field** | 定义将触发操作的其他字段名称。 通常，字段名称是指同一级别表单中的字段。 例如，如果此字段位于 [循环组件部件](#repeater) 中，则只会检查同一循环组件部件中的字段。 但是，如果字段名称前面有一个插入符号 `^`，例如:`^parent_field`，它将指代循环组件或比当前字段本身高一级的字段。 此外，如果使用了多个插入符号 `^`，它将引用更高的级别:`^^grand_parent_field`、`^^^grand_grand_parent_field` 等。
+**field** | 定义将触发操作的其他字段名称。 通常，字段名称是指同一级别表单中的字段。 例如，如果此字段位于 [循环组件部件](#widget-repeater) 中，则只会检查同一循环组件部件中的字段。 但是，如果字段名称前面有一个插入符号 `^`，例如:`^parent_field`，它将指代循环组件或比当前字段本身高一级的字段。 此外，如果使用了多个插入符号 `^`，它将引用更高的级别:`^^grand_parent_field`、`^^^grand_grand_parent_field` 等。
 **condition** | 确定指定字段应满足的条件，以将条件视为"true"。 支持的值:checked(选中), unchecked(未选中), value[somevalue](值)。
 
+<a id="oc-field-dependencies"></a>
 ### 字段依赖
 
-表单字段可以通过定义 `dependsOn` [表单字段选项](#field-options) 来声明对其他字段的依赖关系，这提供了更强大的服务器端解决方案，用于在修改字段的依赖项时更新字段。当声明为依赖项的字段发生更改时，定义字段将使用 AJAX 框架进行更新。这提供了使用 `filterFields` 方法与字段属性交互的机会，或者更改要提供给字段的可用选项。
+表单字段可以通过定义 `dependsOn` [表单字段选项](#oc-field-options) 来声明对其他字段的依赖关系，这提供了更强大的服务器端解决方案，用于在修改字段的依赖项时更新字段。当声明为依赖项的字段发生更改时，定义字段将使用 AJAX 框架进行更新。这提供了使用 `filterFields` 方法与字段属性交互的机会，或者更改要提供给字段的可用选项。
 
 ```yaml
 country:
@@ -1431,7 +1443,7 @@ public function getStateOptions()
 }
 ```
 
-您可以通过覆盖使用的模型中的 `filterFields` 方法来过滤表单字段定义。这允许您根据模型数据操作可见性和其他字段属性。该方法有两个参数 **$fields** 将表示已由 [字段配置](#defining-form-fields) 定义的字段对象，**$context** 表示活动的表单上下文。
+您可以通过覆盖使用的模型中的 `filterFields` 方法来过滤表单字段定义。这允许您根据模型数据操作可见性和其他字段属性。该方法有两个参数 **$fields** 将表示已由 [字段配置](#oc-defining-form-fields) 定义的字段对象，**$context** 表示活动的表单上下文。
 
 ```php
 public function filterFields($fields, $context = null)
@@ -1451,7 +1463,7 @@ public function filterFields($fields, $context = null)
 }
 ```
 
-上述逻辑将通过检查模型属性 `source_type` 的值在某些字段上设置 `hidden` 标志。此逻辑将在表单首次加载以及由 [定义的字段依赖项](#field-dependencies) 更新时应用。例如，这里是关联的表单字段定义。
+上述逻辑将通过检查模型属性 `source_type` 的值在某些字段上设置 `hidden` 标志。此逻辑将在表单首次加载以及由 [定义的字段依赖项](#oc-field-dependencies) 更新时应用。例如，这里是关联的表单字段定义。
 
 ```yaml
 source_type:
@@ -1473,7 +1485,7 @@ git_branch:
     dependsOn: source_type
 ```
 
-您还可以扩展其他模型以应用 `filterFields` 逻辑，有关详细信息，请参阅 [过滤表单字段](#filtering-form-fields) 部分。
+您还可以扩展其他模型以应用 `filterFields` 逻辑，有关详细信息，请参阅 [过滤表单字段](#oc-filtering-form-fields) 部分。
 
 ### 临时字段
 
@@ -1489,6 +1501,7 @@ _map:
     type: mapviewer
 ```
 
+<a id="oc-extending-form-behavior"></a>
 ## 扩展表单行为
 
 有时您可能希望修改默认的表单行为，有几种方法可以做到这一点。
@@ -1585,11 +1598,12 @@ $form 对象可以使用以下方法。
 **addSecondaryTabFields** | 将新字段添加到辅助选项卡式区域
 **removeField** | 从任何区域中删除字段
 
-每个方法都采用类似于 [表单字段配置](#defining-form-fields) 的字段数组。
+每个方法都采用类似于 [表单字段配置](#oc-defining-form-fields) 的字段数组。
 
+<a id="oc-filtering-form-fields"></a>
 ### 过滤表单字段
 
-如 [字段依赖项](#field-dependencies) 中所述，您还可以通过挂钩到 `form.filterFields` 事件来实现表单字段过滤。
+如 [字段依赖项](#oc-field-dependencies) 中所述，您还可以通过挂钩到 `form.filterFields` 事件来实现表单字段过滤。
 
 ```php
 User::extend(function ($model) {
@@ -1612,4 +1626,4 @@ User::extend(function ($model) {
 
 ## 验证表单字段
 
-要验证表单的字段，您可以在模型中使用 [验证](../database/traits.md#validation)特性。
+要验证表单的字段，您可以在模型中使用 [验证](../database/traits.md#oc-validation)特性。

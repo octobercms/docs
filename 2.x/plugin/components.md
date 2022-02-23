@@ -13,11 +13,12 @@ Components files and directories reside in the **components** subdirectory of a 
 |           └── Plugin.php
 :::
 
-Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents` method.
+Components must be [registered in the Plugin registration class](#oc-component-registration) with the `registerComponents` method.
 
+<a id="oc-component-class-definition"></a>
 ## Component Class Definition
 
-The **component class file** defines the component functionality and [component properties](#component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
+The **component class file** defines the component functionality and [component properties](#oc-component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
 
 ```php
 namespace Acme\Blog\Components;
@@ -61,9 +62,10 @@ You would be able to access its `posts` method through the `blogPosts` variable.
 {% endfor %}
 ```
 
+<a id="oc-component-registration"></a>
 ### Component Registration
 
-Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration.md#registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
+Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration.md#oc-registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
 
 ```php
 public function registerComponents()
@@ -76,6 +78,7 @@ public function registerComponents()
 
 This will register the Todo component class with the default alias name **demoTodo**. More information on using components can be found at the [CMS components article](../cms/components.md).
 
+<a id="oc-component-properties"></a>
 ## Component Properties
 
 When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties` method of the component class. The next example shows how to define a component property:
@@ -109,7 +112,7 @@ Key | Description
 **required** | optional, forces field to be filled. Uses validationMessage when left empty.
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
-**depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#dropdown-and-set-properties) below.
+**depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#oc-dropdown-and-set-properties) below.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 **showExternalParam** | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: **true**.
 
@@ -137,6 +140,7 @@ To access the property from the Twig partials for the component, utilize the `__
 {{ __SELF__.property('maxItems') }}
 ```
 
+<a id="oc-dropdown-and-set-properties"></a>
 ### Dropdown and Set Properties
 
 The option list for dropdown and set properties can be static or dynamic. Static options are defined with the `options` element of the property definition. Example:
@@ -215,9 +219,9 @@ public function getStateOptions()
 }
 ```
 
-### Page list Properties
+### Page List Properties
 
-Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup.md#page-filter)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
+Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../markup/filter-page.md)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
 
 ```php
 public function defineProperties()
@@ -239,14 +243,14 @@ public function getPostPageOptions()
 
 ## Routing Parameters
 
-Components can directly access routing parameter values defined in the [URL of the page](../cms/pages.md#url-syntax).
+Components can directly access routing parameter values defined in the [URL of the page](../cms/pages.md#oc-url-syntax).
 
 ```php
 // Returns the URL segment value, eg: /page/:post_id
 $postId = $this->param('post_id');
 ```
 
-In some cases a [component property](#component-properties) may act as a hard coded value or reference the value from the URL.
+In some cases a [component property](#oc-component-properties) may act as a hard coded value or reference the value from the URL.
 
 This hard coded example shows the blog post with an identifier `2` being used:
 
@@ -257,7 +261,7 @@ url = "/blog/hard-coded-page"
 id = "2"
 ```
 
-Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components.md#using-external-property-values):
+Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components.md#oc-using-external-property-values):
 
 ```ini
 url = "/blog/:my_custom_parameter"
@@ -279,6 +283,7 @@ If you need to access the routing parameter name:
 $this->paramName('id');
 ```
 
+<a id="oc-handling-the-page-execution-cycle"></a>
 ## Handling the Page Execution Cycle
 
 Components can be involved in the Page execution cycle events by overriding the `onRun` method in the component class. The CMS controller executes this method every time when the page or layout loads. Inside the method you can inject variables to the Twig environment through the `page` property:
@@ -295,7 +300,7 @@ public function onRun()
 
 ### Page Execution Life Cycle Handlers
 
-When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes.md#php-section) and component classes. The sequence the handlers are executed is following:
+When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes.md#oc-php-section) and component classes. The sequence the handlers are executed is following:
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.
@@ -307,6 +312,7 @@ When a page loads, October executes handler functions that could be defined in t
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
 
+<a id="oc-component-initialization"></a>
 ### Component Initialization
 
 Sometimes you may wish to execute code at the time the component class is first instantiated. You may override the `init` method in the component class to handle any initialization logic, this will execute before AJAX handlers and before the page execution life cycle. For example, this method can be used for attaching another component to the page dynamically.
@@ -320,7 +326,7 @@ public function init()
 
 ### Halting With a Response
 
-Like all methods in the [page execution life cycle](../cms/layouts.md#layout-execution-life-cycle), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
+Like all methods in the [page execution life cycle](../cms/layouts.md#oc-dynamic-layouts), if the `onRun` method in a component returns a value, this will stop the cycle at this point and return the response to the browser. Here we return an access denied message using the `Response` facade:
 
 ```php
 public function onRun()
@@ -343,6 +349,7 @@ public function onRun()
 }
 ```
 
+<a id="oc-ajax-handlers"></a>
 ## AJAX Handlers
 
 Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../ajax/handlers.md). An example AJAX handler method defined in a component class:
@@ -356,7 +363,7 @@ public function onAddItem()
 }
 ```
 
-If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers.md#calling-a-handler) article for details about using AJAX with components.
+If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers.md#oc-calling-a-handler) article for details about using AJAX with components.
 
 ## Default Markup
 
@@ -372,7 +379,7 @@ url = "/todo"
 {% component 'demoTodo' %}
 ```
 
-The default markup can also take parameters that override the [component properties](#component-properties) at the time they are rendered.
+The default markup can also take parameters that override the [component properties](#oc-component-properties) at the time they are rendered.
 
 ```twig
 {% component 'demoTodo' maxItems="7" %}
@@ -390,6 +397,7 @@ public function onRender()
 }
 ```
 
+<a id="oc-component-partials"></a>
 ## Component Partials
 
 In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/october/demo/components/todo/pagination.htm** and displayed on the page using:
@@ -412,7 +420,7 @@ Multiple components can share partials by placing the partial file in a director
 
 ### Referencing "self"
 
-Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components.md#components-aliases).
+Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components.md#oc-components-aliases).
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">
@@ -454,7 +462,7 @@ The ID is unique each time the component is displayed.
 
 ## Rendering Partials from Code
 
-You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [path resolution logic](#component-partials) applies when you render a component partial in PHP as it does with Twig; use the `@` prefix to refer to partials within the component itself.
+You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [path resolution logic](#oc-component-partials) applies when you render a component partial in PHP as it does with Twig; use the `@` prefix to refer to partials within the component itself.
 
 ```php
 $content = $this->renderPartial('@component-partial.htm');
@@ -473,7 +481,7 @@ function onGetTemplate()
 }
 ```
 
-Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#handling-the-page-execution-cycle). This code will specifically return an XML response using the `Response` facade:
+Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#oc-handling-the-page-execution-cycle). This code will specifically return an XML response using the `Response` facade:
 
 ```php
 public function onRun()
@@ -483,9 +491,10 @@ public function onRun()
 }
 ```
 
+<a id="oc-injecting-page-assets-with-components"></a>
 ## Injecting Page Assets with Components
 
-Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page.md#injecting-page-assets-programmatically). Example:
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/pages.md#oc-injecting-page-assets-programmatically). Example:
 
 ```php
 public function onRun()

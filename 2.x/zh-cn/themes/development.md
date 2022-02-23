@@ -2,7 +2,8 @@
 
 主题目录可以包括 **theme.yaml**、**version.yaml** 和 **assets/images/theme-preview.png** 文件。 这些文件对于本地开发是可选的，但对于在 October CMS 市场上发布的主题是必需的。
 
-##主题信息文件
+<a id="oc-theme-information-file"></a>
+## 主题信息文件
 
 主题信息文件 **theme.yaml** 包含主题描述、作者姓名、作者网站的 URL 以及其他一些信息。 该文件应放在主题根目录中：
 
@@ -23,8 +24,8 @@ themes/
 **previewImage** | 自定义预览图片，相对于主题目录的路径，例如：`assets/images/preview.png`，可选。
 **code** | 主题代码，可选。 该值在 October CMS 市场上用于初始化主题代码值。
 **authorCode** | 主题作者代码，可选。 该值在 October CMS 市场上用于定义主题所有者。
-**form** | 配置数组或对表单域定义文件的引用，用于[主题定制](#theme-customization)，可选。
-**require** | 用于 [主题依赖项](#theme-dependencies) 的插件名称数组，可选。
+**form** | 配置数组或对表单域定义文件的引用，用于[主题定制](#oc-theme-customization)，可选。
+**require** | 用于 [主题依赖项](#oc-theme-dependencies) 的插件名称数组，可选。
 
 主题信息文件示例：
 
@@ -37,6 +38,7 @@ code: "Demo"
 authorCode: "武志伟"
 ```
 
+<a id="oc-version-file"></a>
 ## 版本文件
 
 主题版本文件 **version.yaml** 定义了当前的主题版本和变更日志。 该文件应放在主题根目录中：
@@ -70,9 +72,10 @@ themes/
 
 图像宽度应至少为 600 像素。 理想的纵横比是 1.5，例如 600x400px。
 
+<a id="oc-theme-customization"></a>
 ## 主题定制
 
-主题可以通过在主题信息文件中定义一个 `form` 键来支持配置值。 此键应包含配置数组或对表单字段定义文件的引用，有关更多信息，请参阅 [表单字段](../backend/forms.md#defining-form-fields)。
+主题可以通过在主题信息文件中定义一个 `form` 键来支持配置值。 此键应包含配置数组或对表单字段定义文件的引用，有关更多信息，请参阅 [表单字段](../backend/forms.md#oc-defining-form-fields)。
 
 以下是如何定义名为**site_name** 的网站名称配置字段的示例：
 
@@ -96,7 +99,7 @@ form:
 });
 ```
 
-然后可以使用名为`this.theme`的[默认页面变量](../cms/markup.md#default-variables) 在任何主题模板中访问该值。
+然后可以使用名为`this.theme`的[默认页面变量](../markup/this-theme.md) 在任何主题模板中访问该值。
 
 ```twig
 <h1>欢迎来到 {{ this.theme.site_name }}!</h1>
@@ -148,9 +151,10 @@ form:
 a { color: @link-color }
 ```
 
+<a id="oc-theme-dependencies"></a>
 ## 主题依赖
 
-一个主题可以通过在[主题信息文件](#theme-information-file)中定义一个**require**选项来依赖插件，该选项应该提供一个被认为是需求的插件名称数组。 依赖于 **Acme.Blog** 和 **Acme.User** 的主题可以像这样定义这个需求：
+一个主题可以通过在[主题信息文件](#oc-theme-information-file)中定义一个**require**选项来依赖插件，该选项应该提供一个被认为是需求的插件名称数组。 依赖于 **Acme.Blog** 和 **Acme.User** 的主题可以像这样定义这个需求：
 
 ```yaml
 name: "October CMS Demo"

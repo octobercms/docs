@@ -12,7 +12,7 @@
 {% content "sidebar/content.htm" %}
 ```
 
-> **注意**:  [主题文档](../cms/themes.md#subdirectories) 有更多关于子目录使用的详细信息。
+> **注意**:  [主题文档](../cms/themes.md#oc-subdirectories) 有更多关于子目录使用的详细信息。
 
 内容块可以呈现为纯文本：
 
@@ -26,7 +26,7 @@
 {% content "changelog.md" %}
 ```
 
-内容块也可以与 [布局占位符](../cms/layouts.md#placeholders) 结合使用：
+内容块也可以与 [布局占位符](../cms/layouts.md#oc-placeholders) 结合使用：
 
 ```twig
 {% put sidebar %}

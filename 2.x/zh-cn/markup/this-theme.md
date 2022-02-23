@@ -1,6 +1,6 @@
 # this.theme
 
-您可以通过`this.theme`方式访问当前主题对象  并返回该对象`Cms\Classes\Theme`, 详情请参考[theme customization object](../themes/development.md#theme-customization).
+您可以通过`this.theme`方式访问当前主题对象  并返回该对象`Cms\Classes\Theme`, 详情请参考[theme customization object](../themes/development.md#oc-theme-customization).
 
 ## 属性
 
@@ -8,7 +8,7 @@
 
 ### id
 
-将主题目录名称转换为 CSS 友好的标识符。 
+将主题目录名称转换为 CSS 友好的标识符。
 
 ```twig
 <body class="theme-{{ this.theme.id }}">
