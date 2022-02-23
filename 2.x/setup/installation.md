@@ -111,6 +111,8 @@ Support is provided for these databases with minimum requirements:
 1. PostgreSQL 9.6
 1. SQLite 3.8.8
 
+Please note that October CMS v2 is not compatible with PHP 8.1, the [version 3 beta](https://octobercms.com/support/article/rn-28) is available to meet this requirement. It is recommended to downgrade to PHP 8.0 and use version 2 for the best stability and support.
+
 If you are using an older version of MySQL or MariaDB, you may need to [configure the index lengths](../database/structure.md#oc-index-lengths-using-mysql-mariadb) to support the `utf8mb4` character set.
 
 Some OS distributions may require you manually install some of the necessary PHP extensions. When using Ubuntu, the following command can be run to install all required extensions:
