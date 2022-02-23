@@ -1,0 +1,166 @@
+#
+# Markup Nav
+#
+"/zh-cn/markup/":
+-
+    title: 标记
+    collapsable: false
+    children:
+        - templating
+-
+    title: 变量
+    collapsable: false
+    children:
+        - this-page
+        - this-layout
+        - this-theme
+        - this-param
+        - this-controller
+        - this-environment
+        - this-session
+-
+    title: 标签
+    collapsable: false
+    children:
+        - tag-page
+        - tag-partial
+        - tag-content
+        - tag-component
+        - tag-placeholder
+        - tag-scripts
+        - tag-styles
+        - tag-flash
+        - tag-verbatim
+        - tag-macro
+        - tag-for
+        - tag-if
+-
+    title: 过滤器
+    collapsable: false
+    children:
+        - filter-app
+        - filter-page
+        - filter-theme
+        - filter-media
+        - filter-resize
+        - filter-default
+        - filter-raw
+        - filter-md
+-
+    title: 功能
+    collapsable: false
+    children:
+        - function-str
+        - function-form
+        - function-html
+        - function-dump
+
+#
+# Root Nav
+#
+"/zh-cn/":
+-
+    title: 入门
+    children:
+        - setup/installation
+        - setup/configuration
+        - setup/structure
+        - setup/deployment
+        - setup/updating
+-
+    title: 内容管理系统(CMS)
+    children:
+        - cms/themes
+        - cms/pages
+        - cms/partials
+        - cms/layouts
+        - cms/content
+        - cms/components
+-
+    title: AJAX
+    children:
+        - ajax/introduction
+        - ajax/handlers
+        - ajax/update-partials
+        - ajax/attributes-api
+        - ajax/javascript-api
+        - ajax/extras
+-
+    title: 媒体
+    children:
+        - media/introduction
+        - media/providers
+-
+    title: 主题
+    children:
+        - themes/development
+-
+    title: 插件
+    children:
+        - plugin/registration
+        - plugin/updates
+        - plugin/components
+        - plugin/settings
+        - plugin/localization
+        - plugin/scheduling
+        - plugin/extending
+-
+    title: 后端
+    children:
+        - backend/controllers-ajax
+        - backend/views-partials
+        - backend/widgets
+        - backend/forms
+        - backend/lists
+        - backend/relations
+        - backend/reorder
+        - backend/import-export
+        - backend/users
+        - ['https://octobercms.com/docs/ui/form', 'UI Guide']
+-
+    title: 数据库
+    children:
+        - database/basics
+        - database/structure
+        - database/query
+        - database/model
+        - database/relations
+        - database/attachments
+        - database/collection
+        - database/mutators
+        - database/serialization
+        - database/traits
+-
+    title: 服务
+    children:
+        - services/application
+        - services/behaviors
+        - services/cache
+        - services/collections
+        - services/error-log
+        - services/events
+        - services/html
+        - services/resizer
+        - services/hashing-encryption
+        - services/helpers
+        - services/mail
+        - services/pagination
+        - services/parser
+        - services/queues
+        - services/request-input
+        - services/response-view
+        - services/router
+        - services/session
+        - services/storage
+        - services/validation
+-
+    title: 命令行
+    children:
+        - console/commands
+        - console/scaffolding
+        - console/development
+-
+    title: 发布包和测试
+    children:
+        - packages/unit-testing
+        - packages/publishing-packages

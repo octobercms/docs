@@ -20,7 +20,7 @@ Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pag
 
 This example shows a complete page rendering a content block.
 
-```
+```twig
 url = "/contacts"
 ==
 <div class="contacts">
@@ -34,6 +34,7 @@ Another example rendering some markdown with the `md` extension.
 {% content 'my-markdown.md' %}
 ```
 
+<a id="oc-passing-variables-to-content-blocks"></a>
 ## Passing Variables to Content Blocks
 
 Sometimes you may need to pass variables to a content block from the external code. While content blocks do not support Twig markup, they do support using variables with basic syntax. You can pass variables to content blocks by specifying them after the content block name in the `{% content %}` tag.

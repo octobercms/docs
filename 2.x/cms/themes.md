@@ -16,48 +16,51 @@ Object | Description
 
 Below, you can see an example theme directory structure. Each theme represents a separate directory, and generally, one theme is active to display the website. This example demonstrates the **website** theme directory.
 
-```
-themes/
-  website/           <=== Theme Starts Here
-    pages/           <=== Page Files
-      home.htm
-    layouts/         <=== Layout Files
-      default.htm
-    partials/        <=== Partial Files
-      sidebar.htm
-    content/         <=== Content Files
-      intro.htm
-    assets/          <=== Asset Files
-      css/
-        my-styles.css
-      js/
-      images/
-```
+::: dir
+├── themes
+|   └── website  _<== Theme Starts Here_
+|       ├── `pages`
+|       │   └── index.htm
+|       ├── `layouts`
+|       │   └── default.htm
+|       ├── `partials`
+|       │   └── sidebar.htm
+|       ├── `content`
+|       │   └── footer-contacts.md
+|       └── `assets`
+|           ├── css
+|           |   └── my-styles.css
+|           ├── js
+|           └── images
+:::
 
 > The active theme is set with the `active_theme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 
+<a id="oc-subdirectories"></a>
 ### Subdirectories
 
 October CMS supports a single level of subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
-```
-themes/
-  website/
-    pages/
-      home.htm
-      blog/                  <=== Page Subdirectory
-        archive.htm
-        category.htm
-    partials/
-      sidebar.htm
-      blog/                  <=== Partial Subdirectory
-        category-list.htm
-    content/
-      footer-contacts.txt
-      home/                  <=== Content Subdirectory
-        intro.htm
-    ...
-```
+::: dir
+├── themes
+|   └── website
+|       ├── pages
+|       │   ├── index.htm
+|       │   └── `blog` _<== Page Subdirectory_
+|       │       ├── index.htm
+|       │       └── category.htm
+|       ├── layouts
+|       │   └── default.htm
+|       ├── partials
+|       │   ├── sidebar.htm
+|       │   └── `blog` _<== Partial Subdirectory_
+|       │       └── category-list.htm
+|       ├── content
+|       │   ├── footer-contacts.md
+|       │   └── `home` _<== Content Subdirectory_
+|       │       └── intro.md
+|       └── assets
+:::
 
 To refer to a template in a subdirectory, specify the subdirectory's name before the template's name. For example, rendering the **category-list** partial from a **blog** subdirectory.
 
@@ -71,7 +74,7 @@ To refer to a template in a subdirectory, specify the subdirectory's name before
 
 Pages, partials and layout templates can include up to 3 sections: **configuration**, **PHP code**, and **Twig markup**. Sections are separated with the `==` sequence.
 
-```
+```php
 url = "/blog"
 layout = "default"
 ==
@@ -87,6 +90,7 @@ function onStart()
 {% endfor %}
 ```
 
+<a id="oc-configuration-section"></a>
 ### Configuration Section
 
 The configuration section sets the template parameters. Supported configuration parameters are specific for different CMS templates and described in their corresponding documentation articles. The configuration section uses the simple [INI format](http://en.wikipedia.org/wiki/INI_file), where string parameter values are enclosed within quotes. Example configuration section for a page template:
@@ -99,11 +103,12 @@ layout = "default"
 parameter = "value"
 ```
 
+<a id="oc-php-section"></a>
 ### PHP Code Section
 
 The code in the PHP section executes every time before the template is rendered. The PHP section is optional for all CMS templates and its contents depend on the template type where it is defined. The PHP code section can contain optional open and close PHP tags to enable syntax highlighting in text editors. The open and close tags should always be specified on a different line to the section separator `==`.
 
-```
+```php
 url = "/blog"
 layout = "default"
 ==
@@ -123,7 +128,7 @@ function onStart()
 
 In the PHP section, you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed. Example of using a namespace reference:
 
-```
+```php
 url = "/blog"
 layout = "default"
 ==
@@ -151,9 +156,10 @@ echo $this['foo'];
 echo $this->foo;
 ```
 
+<a id="oc-twig-section"></a>
 ### Twig Markup Section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup.md), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration.md#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup.md), all the [native Twig features](https://twig.symfony.com/doc/), or those [provided by plugins](../plugin/registration.md#oc-extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
 
 More information can be found [in the Markup guide](../markup.md).
 
@@ -169,6 +175,7 @@ Alternatively you can enable this feature globally for all themes with the confi
 
 > **Note**: Assets files like images and stylesheets do not save in the database and cannot be modified without access to the filesystem.
 
+<a id="oc-child-themes"></a>
 ## Child Themes
 
 Child themes allow for the possibility of theme inheritence. A good use of this is when you have a third party theme or a theme that is in read-only mode. A child theme will reference a parent and use it as a fallback source.

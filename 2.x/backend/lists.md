@@ -2,7 +2,7 @@
 
 **List Behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](#defining-list-columns) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](#oc-defining-list-columns) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -19,6 +19,7 @@ class Categories extends \Backend\Classes\Controller
 
 > **Note**: Very often the list and [form behavior](../backend/forms.md) are used together in a same controller.
 
+<a id="oc-configuring-the-list-behavior"></a>
 ## Configuring the List Behavior
 
 The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical list behavior configuration file:
@@ -39,14 +40,14 @@ The following fields are required in the list configuration file:
 Field | Description
 ------------- | -------------
 **title** | a title for this list.
-**list** | a configuration array or reference to a list column definition file, see [list columns](#defining-list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](#oc-defining-list-columns).
 **modelClass** | a model class name, the list data is loaded from this model.
 
 The configuration options listed below are optional.
 
 Option | Description
 ------------- | -------------
-**filter** | filter configuration, see [filtering the list](#filtering-the-list).
+**filter** | filter configuration, see [filtering the list](#oc-filtering-the-list).
 **recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms.md).
 **recordOnClick** | custom JavaScript code to execute when clicking on a record.
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../plugin/localization.md).
@@ -87,10 +88,10 @@ Option | Description
 ------------- | -------------
 **prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../plugin/localization.md).
 **mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
 **searchOnEnter** | setting this to true will make the search widget wait for the Enter key to be pressed before it starts searching (the default behavior is that it starts searching automatically after someone enters something into the search field and then pauses for a short moment).  Default: false.
 
-The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls.md#scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms.md):
+The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](https://octobercms.com/docs/ui/scoreboard) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms.md):
 
 ```php
 <div data-control="toolbar">
@@ -100,6 +101,7 @@ The toolbar buttons partial referred above should contain the toolbar control de
 </div>
 ```
 
+<a id="oc-filtering-the-list"></a>
 ### Filtering the List
 
 To filter a list by user defined input, add the following list configuration to the YAML file:
@@ -108,21 +110,22 @@ To filter a list by user defined input, add the following list configuration to 
 filter: config_filter.yaml
 ```
 
-The **filter** option should make reference to a [filter configuration file](#using-list-filters) path or supply an array with the configuration.
+The **filter** option should make reference to a [filter configuration file](#oc-using-list-filters) path or supply an array with the configuration.
 
+<a id="oc-defining-list-columns"></a>
 ## Defining List Columns
 
 List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
 
-```
-plugins/
-  acme/
-    blog/
-      models/                <=== Plugin Models Directory
-        post/                <=== Model Configuration Directory
-          list_columns.yaml  <=== Model List Columns Config File
-        Post.php             <=== Model Class
-```
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           └── `models`
+|               ├── post             _<== Config Directory_
+|               |   └── columns.yaml _<== Config File_
+|               └── Post.php         _<== Model Class_
+:::
 
 The next example shows the typical contents of a list column definitions file.
 
@@ -143,7 +146,7 @@ For each column can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
-**type** | defines how this column should be rendered (see [Column types](#available-column-types) below).
+**type** | defines how this column should be rendered (see [Column types](#oc-available-column-types) below).
 **default** | specifies the default value for the column if value is empty.
 **searchable** | include this column in the list search results. Default: false.
 **invisible** | specifies if this column is hidden by default. Default: false.
@@ -158,7 +161,7 @@ Option | Description
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ### Custom Value Selection
 
@@ -178,7 +181,7 @@ status_code:
     displayFrom: status_label
 ```
 
-This is mostly applicable when a [model accessor](../database/mutators.md#accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
+This is mostly applicable when a [model accessor](../database/mutators.md#oc-accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
 
 ```php
 public function getStatusLabelAttribute()
@@ -189,7 +192,7 @@ public function getStatusLabelAttribute()
 
 ### Nested Column Selection
 
-In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#property-jsonable). The only drawback of doing this is the column cannot use searchable or sortable options.
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#oc-supported-properties). The only drawback of doing this is the column cannot use searchable or sortable options.
 
 ```yaml
 content[title]:
@@ -197,27 +200,20 @@ content[title]:
     sortable: false
 ```
 
-The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#events).
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#oc-model-events).
 
+<a id="oc-available-column-types"></a>
 ## Available Column Types
 
-There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
-<style>
-    .collection-method-list {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-    .collection-method-list a {
-        display: block;
-    }
-</style>
+There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#oc-custom-column-types).
 
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Text](#column-text)
-- [Image](#column-image)
 - [Number](#column-number)
+- [Image](#column-image)
 - [Switch](#column-switch)
+- [Summary](#column-summary)
 - [Date & Time](#column-datetime)
 - [Date](#column-date)
 - [Time](#column-time)
@@ -231,9 +227,10 @@ There are various column types that can be used for the **type** setting, these 
 
 </div>
 
+<a name="column-text"></a>
 ### Text
 
-`text` - displays a text column, aligned left
+`text` - displays a text column, aligned left.
 
 ```yaml
 full_name:
@@ -241,26 +238,10 @@ full_name:
     type: text
 ```
 
-### Image
-
-`image` - displays an image column with the option to resize the output.
-
-```yaml
-avatar:
-    label: Avatar
-    type: image
-    sortable: false
-    width: 150
-    height: 150
-    options:
-        quality: 80
-```
-
-See the [image resizing article](../services/resizer.md#resize-parameters) for more information on what options are supported.
-
+<a name="column-number"></a>
 ### Number
 
-`number` - displays a number column, aligned right
+`number` - displays a number column, aligned right.
 
 ```yaml
 age:
@@ -279,6 +260,25 @@ price:
 
 > **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
 
+<a name="column-image"></a>
+### Image
+
+`image` - displays an image column with the option to resize the output.
+
+```yaml
+avatar:
+    label: Avatar
+    type: image
+    sortable: false
+    width: 150
+    height: 150
+    options:
+        quality: 80
+```
+
+See the [image resizing article](../services/resizer.md#oc-resize-parameters) for more information on what options are supported.
+
+<a name="column-switch"></a>
 ### Switch
 
 `switch` - displays a on or off state for boolean columns.
@@ -289,6 +289,48 @@ enabled:
     type: switch
 ```
 
+<a name="column-summary"></a>
+### Summary
+
+`summary` - generates a summary value, strips HTML and limits length to the closest word boundary.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+```
+
+The default summary length is 40 characters, you may adjust it with the `limitChars` option.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+    limitChars: 100
+```
+
+To limit by word count instead, specify the `limitWords` option instead. You may also change the end suffix characters with the `endChars` option.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+    limitWords: 10
+    endChars: "..."
+```
+
+You may customize the switch text by passing an array to the `options` value with false and true labels.
+
+```yaml
+enabled:
+    label: Enabled
+    type: switch
+    options:
+        - Nope
+        - Yeah
+```
+
+<a name="column-datetime"></a>
 ### Date & Time
 
 `datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
@@ -319,6 +361,7 @@ created_at:
 
 > **Note**: the `useTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
 
+<a name="column-date"></a>
 ### Date
 
 `date` - displays the column value as date format **M j, Y**.
@@ -340,6 +383,7 @@ created_at:
 
 > **Note**: the `date` and `time` columns do not apply backend timezone conversions by default since a date and time are both required for the conversion.
 
+<a name="column-time"></a>
 ### Time
 
 `time` - displays the column value as time format **g:i A**.
@@ -350,6 +394,7 @@ created_at:
     type: time
 ```
 
+<a name="column-timesince"></a>
 ### Time Since
 
 `timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
@@ -360,6 +405,7 @@ created_at:
     type: timesince
 ```
 
+<a name="column-timetense"></a>
 ### Time Tense
 
 `timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
@@ -370,6 +416,7 @@ created_at:
     type: timetense
 ```
 
+<a name="column-select"></a>
 ### Select
 
 `select` - allows to create a column using a custom select statement. Any valid SQL SELECT statement works here.
@@ -380,6 +427,7 @@ full_name:
     select: concat(first_name, ' ', last_name)
 ```
 
+<a name="column-selectable"></a>
 ### Selectable
 
 `selectable` - takes the column value and matches it to the value in the record's available options. Take the following array as an example, if the record value is set to `open` then the **Open** value is displayed in the column.
@@ -407,6 +455,7 @@ status:
         active: Active
 ```
 
+<a name="column-relation"></a>
 ### Relation
 
 `relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations.md) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
@@ -430,6 +479,7 @@ users_count:
 
 > **Note**: Be careful not to name relations the same as existing database columns. For example, using a name `group_id` could break the group relation due to a naming conflict.
 
+<a name="column-partial"></a>
 ### Partial
 
 `partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name.
@@ -449,6 +499,7 @@ Inside the partial these variables are available: `$value` is the default cell v
 <?php endif ?>
 ```
 
+<a name="column-colorpicker"></a>
 ### Color Picker
 
 `colorpicker` - displays a color from colorpicker column
@@ -467,6 +518,7 @@ Usually lists are displayed in the index [view](controllers-ajax.md) file. Since
 <?= $this->listRender() ?>
 ```
 
+<a id="oc-multiple-list-definitions"></a>
 ## Multiple List Definitions
 
 The list behavior can support multiple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
@@ -484,9 +536,10 @@ Each definition can then be displayed by passing the definition name as the firs
 <?= $this->listRender('templates') ?>
 ```
 
+<a id="oc-using-list-filters"></a>
 ## Using List Filters
 
-Lists can be filtered by [adding a filter definition](#filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+Lists can be filtered by [adding a filter definition](#oc-filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
 ```yaml
 # ===================================
@@ -535,6 +588,7 @@ scopes:
         conditions: created_at >= ':after' AND created_at <= ':before'
 ```
 
+<a id="oc-scope-options"></a>
 ### Scope Options
 
 For each scope you can specify these options (where applicable):
@@ -542,19 +596,20 @@ For each scope you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the filter scope to the user.
-**type** | defines how this scope should be rendered (see [Scope types](#available-scope-types) below). Default: group.
+**type** | defines how this scope should be rendered (see [Scope types](#oc-available-scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](../database/model.md#query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **emptyOption** | an optional label for an intentional empty selection.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
 **default** | can either be integer (switch, checkbox, number) or array (group, date range, number range) or string (date).
-**permissions** | the [permissions](users.md#users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
-**dependsOn** | a string or an array of other scope names that this scope [depends on](#filter-scope-dependencies). When the other scopes are modified, this scope will update.
+**permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**dependsOn** | a string or an array of other scope names that this scope [depends on](#oc-filter-scope-dependencies). When the other scopes are modified, this scope will update.
 
+<a id="oc-filter-scope-dependencies"></a>
 ### Filter Dependencies
 
-Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#oc-scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
 
 ```yaml
 country:
@@ -596,22 +651,12 @@ public function getCityOptions($scopes = null)
 
 > **Note**: Scope dependencies with `type: group` are only supported at this stage.
 
+<a id="oc-available-scope-types"></a>
 ### Available Scope Types
 
 These types can be used to determine how the filter scope should be displayed.
 
-<style>
-    .collection-method-list {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
-<div class="content-list collection-method-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Group](#filter-group)
 - [Checkbox](#filter-checkbox)
@@ -624,6 +669,7 @@ These types can be used to determine how the filter scope should be displayed.
 
 </div>
 
+<a name="filter-group"></a>
 ### Group
 
 `group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
@@ -642,6 +688,7 @@ status:
         closed: Closed
 ```
 
+<a name="filter-checkbox"></a>
 ### Checkbox
 
 `checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
@@ -654,6 +701,7 @@ published:
     conditions: is_published <> true
 ```
 
+<a name="filter-switch"></a>
 ### Switch
 
 `switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
@@ -668,6 +716,7 @@ approved:
         - is_approved = true
 ```
 
+<a name="filter-date"></a>
 ### Date
 
 `date` - displays a date picker for a single date to be selected. The values available to be used in the conditions property are:
@@ -686,6 +735,7 @@ created_at:
     conditions: created_at >= ':filtered'
 ```
 
+<a name="filter-daterange"></a>
 ### Date Range
 
 `daterange` - displays a date picker for two dates to be selected as a date range. The values available to be used in the conditions property are:
@@ -744,6 +794,7 @@ You may also wish to set `useTimezone: false` to prevent a timezone conversion b
 > **Note**: the `useTimezone` option also applies to the `date` filter type as well.
 -->
 
+<a name="filter-number"></a>
 ### Number
 
 `number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
@@ -756,6 +807,7 @@ age:
     conditions: age >= ':filtered'
 ```
 
+<a name="filter-numberrange"></a>
 ### Number Range
 
 `numberrange` - displays inputs for two numbers to be entered as a number range. The values available to be used in the conditions property are:
@@ -775,6 +827,7 @@ visitors:
     conditions: visitors >= ':min' and visitors <= ':max'
 ```
 
+<a name="filter-text"></a>
 ### Text
 
 `text` - display text input for a string to be entered. You may specify a `size` attribute that will be injected in the input size attribute (default: 10).
@@ -790,6 +843,24 @@ username:
 ## Extending List Behavior
 
 Sometimes you may wish to modify the default list behavior and there are several ways you can do this.
+
+### Extending the List Configuration
+
+You may extend the list configuration dynamically using the `listGetConfig` method.
+
+```php
+public function listGetConfig($definition)
+{
+    $config = $this->asExtension('ListController')->listGetConfig($definition);
+
+    // Implement structure dynamically
+    $config->structure = [
+        'showTree' => true
+    ];
+
+    return $config;
+}
+```
 
 ### Overriding Controller Action
 
@@ -830,7 +901,7 @@ The `ListController` behavior has a main container view that you may override by
 </div>
 ```
 
-The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-the-list-behavior). The widget will look in this path for a view first, then fall back to the default location.
+The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#oc-configuring-the-list-behavior). The widget will look in this path for a view first, then fall back to the default location.
 
 ```yaml
 # Custom view path
@@ -849,6 +920,7 @@ For example, to modify the list body row markup, create a file called `list/_lis
 </tr>
 ```
 
+<a id="oc-extending-column-definitions"></a>
 ### Extending Column Definitions
 
 You may extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
@@ -856,7 +928,9 @@ You may extend the columns of another controller from outside by calling the `ex
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    public $implement = ['Backend.Behaviors.ListController'];
+    public $implement = [
+        \Backend\Behaviors\ListController::class
+    ];
 
     public $listConfig = 'list_config.yaml';
 }
@@ -870,12 +944,17 @@ Categories::extendListColumns(function($list, $model) {
         return;
     }
 
+    // Add a new column
     $list->addColumns([
         'my_column' => [
             'label' => 'My Column'
         ]
     ]);
 
+    // Modify an existing column
+    $list->getColumn('title')->useConfig([
+        'path' => 'column_title'
+    ]);
 });
 ```
 
@@ -884,11 +963,13 @@ You may also extend the list columns internally by overriding the `listExtendCol
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function listExtendColumns($list)
     {
         $list->addColumns([...]);
+
+        $list->getColumn(...);
     }
 }
 ```
@@ -900,7 +981,7 @@ Method | Description
 **addColumns** | adds new columns to the list
 **removeColumn** | removes a column from the list
 
-Each method takes an array of columns similar to the [list column configuration](#defining-list-columns).
+Each method takes an array of columns similar to the [list column configuration](#oc-defining-list-columns).
 
 ### Inject CSS Row Class
 
@@ -909,7 +990,7 @@ You may inject a custom css row class by adding a `listInjectRowClass` method on
 ```php
 class Lessons extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function listInjectRowClass($lesson, $definition = null)
     {
@@ -967,6 +1048,7 @@ public function listOverrideRecordUrl($record, $definition = null)
 }
 ```
 
+<a id="oc-extending-filter-scopes"></a>
 ### Extending Filter Scopes
 
 You may extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
@@ -984,14 +1066,14 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-> The array of scopes provided is similar to the [list filters configuration](#using-list-filters).
+> The array of scopes provided is similar to the [list filters configuration](#oc-using-list-filters).
 
 You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    [...]
+    // ...
 
     public function listFilterExtendScopes($filter)
     {
@@ -1048,7 +1130,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-The [list filter](#using-list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
+The [list filter](#oc-using-list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
 
 ```php
 public function listFilterExtendQuery($query, $scope)
@@ -1072,9 +1154,10 @@ public function listExtendRecords($records)
 }
 ```
 
+<a id="oc-custom-column-types"></a>
 ### Custom Column Types
 
-Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration.md#registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration.md#oc-registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
 
 ```php
 public function registerListColumnTypes()

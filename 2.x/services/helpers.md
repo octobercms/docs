@@ -2,20 +2,9 @@
 
 October CMS includes a variety of "helper" PHP functions. Many of these functions are used internally by October itself, however, you are free to use them in your own plugins and applications if you find them useful.
 
-<style>
-    .collection-method-list > p {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
 ### Arrays
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [array_add](#method-array-add)
 [array_divide](#method-array-divide)
@@ -40,7 +29,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 ### Paths
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [Path Symbols](#path-symbols)
 [app_path](#method-app-path)
@@ -58,7 +47,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 ### Strings
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [camel_case](#method-camel-case)
 [class_basename](#method-class-basename)
@@ -82,7 +71,7 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 
 ### Miscellaneous
 
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [asset](#method-asset)
 [config](#method-config)
@@ -369,6 +358,7 @@ Symbol | Description
 ------------- | -------------
 `$` | Relative to the plugins directory
 `~` | Relative to the application directory
+`#` | Relative to the themes directory
 
 <a name="method-app-path"></a>
 #### `app_path()`
@@ -692,7 +682,7 @@ The `post` function obtains an input item from the request, restricted to POST v
 <a name="method-redirect"></a>
 #### `redirect()`
 
-The `redirect` function return an instance of the redirector to do [redirect responses](../services/response-view.md#redirects):
+The `redirect` function return an instance of the redirector to do [redirect responses](../services/response-view.md#oc-redirects):
 
     return redirect('/home');
 

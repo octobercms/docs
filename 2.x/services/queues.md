@@ -8,7 +8,7 @@ The queue configuration file is stored in `config/queue.php`. In this file you w
 
 ### Driver prerequisites
 
-Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
 
 ## Basic usage
 
@@ -134,7 +134,7 @@ Queue::push(function($job) use ($id) {
 
 > **Note**: Instead of making objects available to queued Closures via the `use` directive, consider passing primary keys and re-pulling the associated models from within your queue job. This often avoids unexpected serialization behavior.
 
-When using Iron.io [push queues](#push-queues), you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
+When using Iron.io push queues, you should take extra precaution queueing Closures. The end-point that receives your queue messages should check for a token to verify that the request is actually from Iron.io. For example, your push queue end-point should be something like: `https://example.com/queue/receive?token=SecretToken`. You may then check the value of the secret token in your application before marshalling the queue request.
 
 ## Running the queue worker
 
@@ -144,7 +144,7 @@ To process new jobs as they are pushed onto the queue, run the `queue:work` comm
 
     php artisan queue:work
 
-Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](#supervisor-configuration) to ensure that the queue worker does not stop running.
+Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](#oc-supervisor-configuration) to ensure that the queue worker does not stop running.
 
 Queue worker processes store the booted application state in memory. They will not recognize changes in your code after they have been started. When deploying changes, restart queue workers.
 
@@ -212,6 +212,7 @@ Daemon queue workers do not restart the platform before processing each job. The
 
 Similarly, your database connection may disconnect when being used by long-running daemon. You may use the `Db::reconnect` method to ensure you have a fresh connection.
 
+<a id="oc-supervisor-configuration"></a>
 ## Supervisor configuration
 
 ### Installing Supervisor

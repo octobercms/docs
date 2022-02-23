@@ -33,25 +33,13 @@ For the remainder of this documentation, we'll discuss each method available on 
 
 You may select any method from this table to see an example of its usage:
 
-<style>
-    .collection-method-list > p {
-        column-count: 3; -moz-column-count: 3; -webkit-column-count: 3;
-        column-gap: 2em; -moz-column-gap: 2em; -webkit-column-gap: 2em;
-    }
-
-    .collection-method-list a {
-        display: block;
-    }
-</style>
-
-<div class="collection-method-list" markdown="1">
+<div class="content-list-p" markdown="1">
 
 [all](#method-all)
 [average](#method-average)
 [avg](#method-avg)
 [chunk](#method-chunk)
 [collapse](#method-collapse)
-[collect](#method-collect)
 [combine](#method-combine)
 [concat](#method-concat)
 [contains](#method-contains)
@@ -253,43 +241,6 @@ $combined->all();
 
 // ['name' => 'George', 'age' => 29]
 ```
-
-<a name="method-collect"></a>
-#### `collect()`
-
-The `collect` method returns a new `Collection` instance with the items currently in the collection:
-
-```php
-$collectionA = new Collection([1, 2, 3]);
-
-$collectionB = $collectionA->collect();
-
-$collectionB->all();
-
-// [1, 2, 3]
-```
-
-The `collect` method is primarily useful for converting [lazy collections](#lazy-collections) into standard `Collection` instances:
-
-```php
-$lazyCollection = LazyCollection::make(function () {
-    yield 1;
-    yield 2;
-    yield 3;
-});
-
-$collection = $lazyCollection->collect();
-
-get_class($collection);
-
-// 'October\Rain\Support\Collection'
-
-$collection->all();
-
-// [1, 2, 3]
-```
-
-> **Tip**: The `collect` method is especially useful when you have an instance of `Enumerable` and need a non-lazy collection instance. Since `collect()` is part of the `Enumerable` contract, you can safely use it to get a `Collection` instance.
 
 <a name="method-concat"></a>
 #### `concat()`
@@ -2040,24 +1991,6 @@ $collection = Collection::times(10, function ($number) {
 $collection->all();
 
 // [9, 18, 27, 36, 45, 54, 63, 72, 81, 90]
-```
-
-This method can be useful when combined with factories to create [Eloquent](/docs/{{version}}/eloquent) models:
-
-```php
-$categories = Collection::times(3, function ($number) {
-    return factory(Category::class)->create(['name' => "Category No. $number"]);
-});
-
-$categories->all();
-
-/*
-    [
-        ['id' => 1, 'name' => 'Category No. 1'],
-        ['id' => 2, 'name' => 'Category No. 2'],
-        ['id' => 3, 'name' => 'Category No. 3'],
-    ]
-*/
 ```
 
 <a name="method-toarray"></a>

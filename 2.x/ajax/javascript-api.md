@@ -18,7 +18,8 @@ Option | Description
 **data** | an optional object specifying data to be sent to the server along with the form data: {var: 'value'}. When `files` is true, you may also include files to be uploaded in this object by using [`Blob` objects](https://developer.mozilla.org/en-US/docs/Web/API/Blob). To specify the filename of any `Blob` objects, simply set the `filename` property on the `Blob` object. (Ex. `var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {'uploaded_file': blob};`)
 **redirect** | string specifying an URL to redirect the browser to after the successful request.
 **beforeUpdate** | a callback function to execute before page elements are updated. The function gets 3 parameters: the data object received from the server, text status string, and the jqXHR object. The `this` variable inside the function resolves to the request content - an object containing 2 properties: `handler` and `options` representing the original request() parameters.
-**success** | a callback function to execute in case of a successful request. If this option is supplied it overrides the default framework's functionality: the elements are not updated, the `beforeUpdate` event is not triggered, the `ajaxUpdate` and `ajaxUpdateComplete` events are not triggered. The event handler gets 3 arguments: the data object received from the server, the text status string and the jqXHR object. However, you can still call the default framework functionality calling `this.success(...)` inside your function.
+**afterUpdate** | a callback function identical to `beforeUpdate` except it executes after the page elements are updated.
+**success** | a callback function to execute in case of a successful request. If this option is supplied it overrides the default framework functionality: the elements are not updated, the `beforeUpdate` and `afterUpdate` callbacks are not triggered, the `ajaxUpdate` and `ajaxUpdateComplete` events are not triggered. The event handler gets 3 arguments: the data object received from the server, the text status string and the jqXHR object. However, you can still call the default framework functionality calling `this.success(...)` inside your function.
 **error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed. The handler gets 3 parameters: the jqXHR object, the text status string and the error object - see [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/).
 **complete** | a callback function execute in case of a success or an error.
 **form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
@@ -100,6 +101,7 @@ $('form').request('onCalculate', {success: function(data) {
 }})
 ```
 
+<a id="oc-global-ajax-events"></a>
 ## Global AJAX Events
 
 The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.

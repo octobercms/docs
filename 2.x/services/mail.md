@@ -6,7 +6,7 @@ October CMS provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `ma
 
 ### Driver prerequisites
 
-Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
 
 #### Mailgun driver
 
@@ -44,7 +44,7 @@ To use the Amazon SES driver set the `driver` option in your `config/mail.php` c
 
 ## Sending Mail
 
-To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#mail-views) or [mail template](#mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
+To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#oc-mail-views) or [mail template](#oc-mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:
 
 ```php
 // These variables are available inside the message as Twig
@@ -64,7 +64,7 @@ Since we are passing an array containing the `name` key in the example above, we
 {{ name }}
 ```
 
-> **Note**: You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
+> **Note**: You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#oc-attachments).
 
 #### Quick sending
 
@@ -145,7 +145,7 @@ $message->getSwiftMessage();
 
 #### Mailing plain text
 
-By default, the view given to the `send` method is assumed to contain a [mail view](#mail-views), where you may specify a plain text view to send in addition to the HTML view.
+By default, the view given to the `send` method is assumed to contain a [mail view](#oc-mail-views), where you may specify a plain text view to send in addition to the HTML view.
 
 ```php
 Mail::send('acme.blog::mail.message', $data, $callback);
@@ -188,6 +188,7 @@ Mail::raw([
 });
 ```
 
+<a id="oc-attachments"></a>
 ### Attachments
 
 To add attachments to an e-mail, use the `attach` method on the `$message` object passed to your Closure. The `attach` method accepts the full path to the file as its first argument:
@@ -280,24 +281,26 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 });
 ```
 
+<a id="oc-message-content"></a>
 ## Message Content
 
 Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
-Optionally, mail views can be [registered in the Plugin registration file](#registering-mail-layouts-templates-partials) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
+Optionally, mail views can be [registered in the Plugin registration file](#oc-registering-mail-layouts-templates-partials) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
+<a id="oc-mail-views"></a>
 ### Mail Views
 
 Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file:
 
-```
-plugins/               <=== Plugins Directory
-  author/              <=== "author" Segment
-    plugin/            <=== "plugin" Segment
-      views/           <=== View Directory
-        mail/          <=== "mail" Segment
-          message.htm  <=== "message" Segment
-```
+::: dir
+├── plugins
+|   └── author       _<== "author" Segment_
+|       └── myplugin _<== "plugin" Segment_
+|           └── `views`
+|               └── mail            _<== "mail" Segment_
+|                   └── message.htm _<== "message" Segment_
+:::
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
 
@@ -319,7 +322,7 @@ This message was sent using no formatting (plain text)
 <p>This email was sent using formatting (HTML)</p>
 ```
 
-> **Note**: Basic Twig tags and expressions are supported in mail views.
+> **Note**: Basic Twig tags and expressions are supported in mail views. Markdown syntax is also supported, see the section on [using HTML in Markdown](../services/parser.md#oc-using-html-in-markdown) for more details.
 
 The **plain text** section is optional and a view can contain only the configuration and HTML markup sections.
 
@@ -341,8 +344,9 @@ The configuration section sets the mail view parameters. The following configura
 Parameter | Description
 ------------- | -------------
 **subject** | the mail message subject, required.
-**layout** | the [mail layout](#mail-layouts) code, optional. Default value is `default`.
+**layout** | the [mail layout](#oc-mail-layouts) code, optional. Default value is `default`.
 
+<a id="oc-mail-templates"></a>
 ### Using Mail Templates
 
 Mail templates reside in the database and can be created in the back-end area via *Settings > Mail > Mail templates*. The **code** specified in the template is a unique identifier and cannot be changed once created.
@@ -350,9 +354,8 @@ Mail templates reside in the database and can be created in the back-end area vi
 The process for sending these emails is the same. For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
 
 ```php
-Mail::send('this.is.my.email', $data, function($message) use ($user)
-{
-    [...]
+Mail::send('this.is.my.email', $data, function($message) use ($user) {
+    // ...
 });
 ```
 
@@ -360,10 +363,11 @@ Mail::send('this.is.my.email', $data, function($message) use ($user)
 
 #### Automatically generated templates
 
-Mail templates can also be generated automatically by [mail views that have been registered](#registering-mail-layouts-templates-partials). The **code** value will be the same as the mail view path (eg: author.plugin:mail.message). If the mail view has a **layout** parameter defined, this will be used to give the template a layout.
+Mail templates can also be generated automatically by [mail views that have been registered](#oc-registering-mail-layouts-templates-partials). The **code** value will be the same as the mail view path (eg: author.plugin:mail.message). If the mail view has a **layout** parameter defined, this will be used to give the template a layout.
 
 When a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the mail view can be considered a *default view*.
 
+<a id="oc-mail-layouts"></a>
 ### Using Mail Layouts
 
 Mail layouts can be created by selecting *Settings > Mail > Mail templates* and clicking the *Layouts* tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
@@ -375,9 +379,10 @@ Layout | Code | Description
 Default | default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
 
+<a id="oc-registering-mail-layouts-templates-partials"></a>
 ### Registering mail layouts, templates & partials
 
-Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration.md#registration-file).
+Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration.md#oc-registration-file).
 
 ```php
 public function registerMailTemplates()
@@ -389,9 +394,9 @@ public function registerMailTemplates()
 }
 ```
 
-The method should return an array of [mail view names](#mail-views).
+The method should return an array of [mail view names](#oc-mail-views).
 
-Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [Plugin registration class](../plugin/registration.md#registration-file).
+Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [Plugin registration class](../plugin/registration.md#oc-registration-file).
 
 ```php
 public function registerMailPartials()
@@ -411,7 +416,7 @@ public function registerMailLayouts()
 }
 ```
 
-The methods should return an array of [mail view names](#mail-views). The array key will be used as `code` property for the partial or layout.
+The methods should return an array of [mail view names](#oc-mail-views). The array key will be used as `code` property for the partial or layout.
 
 ### Global Variables
 

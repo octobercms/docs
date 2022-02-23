@@ -14,7 +14,7 @@ The `config` directory contains all the application configuration files. Each fi
 
 ### Modules Directory
 
-The `modules` directory contains the core packages that are included with October CMS, providing [core functionality](#modules-directory) that is common across the system. Modules are loaded automatically based on their presence in the file system by default, however, you can manually specify which modules to load with the `system.load_modules` configuration item. The system module must be loaded at a minimum for the application to operate.
+The `modules` directory contains the core packages that are included with October CMS, providing [core functionality](#oc-modules-directory) that is common across the system. Modules are loaded automatically based on their presence in the file system by default, however, you can manually specify which modules to load with the `system.load_modules` configuration item. The system module must be loaded at a minimum for the application to operate.
 
 ### Plugins Directory
 
@@ -34,6 +34,7 @@ The `themes` directory contains static file content that is used to manage the f
 
 The `vendor` directory contains packages are included via Composer in either the project's `/vendor` directory or can sometimes be found in plugin-specific `/vendor` directories. The project vendor directory takes priority over and plugin vendor directories that appear in the system.
 
+<a id="oc-modules-directory"></a>
 ## Modules Directory
 
 ### System Module

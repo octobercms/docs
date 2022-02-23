@@ -6,27 +6,27 @@ Widgets are self-contained blocks of functionality that solve different tasks. W
 
 Widgets are the back-end equivalent of front-end [Components](../cms/components.md). They are similar because they are modular bundles of functionality, supply partials and are named using aliases. The key difference is that back-end widgets use YAML markup for their configuration and bind themselves to Backend pages.
 
-Widget classes reside inside the **widgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example widget directory structure looks like this:
+Widget classes reside inside the **widgets** directory of the plugin directory. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example widget directory structure looks like this:
 
-```
-widgets/
-  form/
-    partials/
-      _form.htm     <=== Partial file
-    assets/
-      js/
-        form.js     <=== JavaScript File
-      css/
-        form.css    <=== StyleSheet File
-  Form.php          <=== Widget Class
-```
+::: dir
+├── `widgets`
+|   ├── form
+|   |   ├── partials
+|   |   |   └── _form.htm _<== Partial File_
+|   |   └── assets
+|   |       ├── js
+|   |       |   └── form.js _<== JavaScript File_
+|   |       └── css
+|   |           └── form.css _<== StyleSheet File_
+|   └── Form.php _<== Widget Class_
+:::
 
 ### Class Definition
 
-The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). Example widget controller class definition:
+The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#oc-plugin-namespaces). Example widget controller class definition:
 
 ```php
-<?php namespace Backend\Widgets;
+namespace Backend\Widgets;
 
 use Backend\Classes\WidgetBase;
 
@@ -70,9 +70,10 @@ public function render()
 }
 ```
 
+<a id="oc-ajax-handlers"></a>
 ### AJAX Handlers
 
-Widgets implement the same AJAX approach as the [back-end controllers](controllers-ajax#ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
+Widgets implement the same AJAX approach as the [back-end controllers](controllers-ajax#oc-ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
 
 ```php
 <a
@@ -108,40 +109,41 @@ After binding the widget you can access it in the controller's view or partial b
 <?= $this->widget->myWidget->render() ?>
 ```
 
+<a id="oc-form-widgets"></a>
 ## Form Widgets
 
-With form widgets you can add new control types to the back-end [forms](../backend/forms.md). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration.md#registration-methods).
+With form widgets you can add new control types to the back-end [forms](../backend/forms.md). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration.md#oc-registration-methods).
 
-Form Widget classes reside inside the **formwidgets** directory of the plugin directory. The directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
+Form Widget classes reside inside the **formwidgets** directory of the plugin directory. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
 
-```
-formwidgets/
-  form/
-    partials/
-      _form.htm     <=== Partial File
-    assets/
-      js/
-        form.js     <=== JavaScript File
-      css/
-        form.css    <=== StyleSheet File
-  Form.php          <=== Widget Class
-```
+::: dir
+├── `formwidgets`
+|   ├── colorpicker
+|   |   ├── partials
+|   |   |   └── _colorpicker.htm _<== Partial File_
+|   |   └── assets
+|   |       ├── js
+|   |       |   └── colorpicker.js _<== JavaScript File_
+|   |       └── css
+|   |           └── colorpicker.css _<== StyleSheet File_
+|   └── ColorPicker.php _<== Widget Class_
+:::
 
 ### Class Definition
 
-The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). A registered widget can be used in the back-end [form field definition](../backend/forms.md#defining-form-fields) file. Example form widget class definition:
+The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#oc-plugin-namespaces). A registered widget can be used in the back-end [form field definition](../backend/forms.md#oc-defining-form-fields) file. Example form widget class definition:
 
 ```php
 namespace Backend\Widgets;
 
 use Backend\Classes\FormWidgetBase;
 
-class CodeEditor extends FormWidgetBase
+class ColorPicker extends FormWidgetBase
 {
     /**
      * @var string A unique alias to identify this widget.
      */
-    protected $defaultAlias = 'codeeditor';
+    protected $defaultAlias = 'colorpicker';
 
     public function render() {}
 }
@@ -149,7 +151,7 @@ class CodeEditor extends FormWidgetBase
 
 ### Form Widget Properties
 
-Form widgets may have properties that can be set using the [form field configuration](../backend/forms.md#defining-form-fields). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
+Form widgets may have properties that can be set using the [form field configuration](../backend/forms.md#oc-defining-form-fields). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
 
 ```php
 class DatePicker extends FormWidgetBase
@@ -200,7 +202,7 @@ class DatePicker extends FormWidgetBase
 }
 ```
 
-The property values then become available to set from the [form field definition](../backend/forms.md#defining-form-fields) when using the widget.
+The property values then become available to set from the [form field definition](../backend/forms.md#oc-defining-form-fields) when using the widget.
 
 ```yaml
 born_at:
@@ -213,14 +215,14 @@ born_at:
 
 ### Form Widget Registration
 
-Plugins should register form widgets by overriding the `registerFormWidgets` method inside the [Plugin registration class](../plugin/registration.md#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
+Plugins should register form widgets by overriding the `registerFormWidgets` method inside the [Plugin registration class](../plugin/registration.md#oc-registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
 
 ```php
 public function registerFormWidgets()
 {
     return [
-        \Backend\FormWidgets\CodeEditor::class => 'codeeditor',
-        \Backend\FormWidgets\RichEditor::class => 'richeditor'
+        \Backend\FormWidgets\ColorPicker::class => 'colorpicker',
+        \Backend\FormWidgets\DatePicker::class => 'datepicker'
     ];
 }
 ```
@@ -255,7 +257,7 @@ When the time comes to take the user input and store it in the database, the for
 ```php
 public function getSaveValue($value)
 {
-        return $value;
+    return $value;
 }
 ```
 
@@ -264,30 +266,27 @@ In some cases you intentionally don't want any value to be given, for example, a
 ```php
 public function getSaveValue($value)
 {
-        return \Backend\Classes\FormField::NO_SAVE_DATA;
+    return \Backend\Classes\FormField::NO_SAVE_DATA;
 }
 ```
 
 ## Report Widgets
 
-Report widgets can be used on the back-end dashboard and in other back-end report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration.md#widget-registration).
+Report widgets can be used on the back-end dashboard and in other back-end report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration.md).
 
-> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding.md#create-a-report-widget) for more information.
+> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding.md#oc-create-a-report-widget) for more information.
 
 ### Report Widget Classes
 
-The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
+The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#oc-plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
-```
-plugins/
-  rainlab/                    <=== Author Name
-    googleanalytics/          <=== Plugin Name
-      reportwidgets/          <=== Report Widgets Directory
-        trafficsources        <=== Widget Files Directory
-          partials
-            _widget.htm
-        TrafficSources.php    <=== Widget Class File
-```
+::: dir
+├── `reportwidgets`
+|   ├── trafficsources
+|   |   └── partials
+|   |       └── _widget.htm _<== Partial File_
+|   └── TrafficSources.php _<== Widget Class_
+:::
 
 Example report widget class definition:
 
@@ -326,7 +325,7 @@ The widget partial could contain any HTML markup you want to display in the widg
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/master/images/traffic-sources.png)
 
-Inside report widgets you can use any [charts or indicators](controls.md), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
+Inside report widgets you can use any [charts or indicators](https://octobercms.com/docs/ui/chart), lists or any other markup you wish. Remember that the report widgets extend the generic back-end widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
 ```html
 <div class="report-widget">
@@ -374,23 +373,23 @@ Report widgets may have properties that users can manage with the Inspector:
 
 ![image](https://github.com/octobercms/docs/blob/develop/images/report-widget-inspector.png?raw=true)
 
-The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components.md#component-properties). Example:
+The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components.md#oc-component-properties). Example:
 
 ```php
 public function defineProperties()
 {
     return [
         'title' => [
-            'title'             => 'Widget title',
-            'default'           => 'Top Pages',
-            'type'              => 'string',
+            'title' => 'Widget title',
+            'default' => 'Top Pages',
+            'type' => 'string',
             'validationPattern' => '^.+$',
             'validationMessage' => 'The Widget Title is required.'
         ],
         'days' => [
-            'title'             => 'Number of days to display data for',
-            'default'           => '7',
-            'type'              => 'string',
+            'title' => 'Number of days to display data for',
+            'default' => '7',
+            'type' => 'string',
             'validationPattern' => '^[0-9]+$'
         ]
     ];
@@ -399,21 +398,21 @@ public function defineProperties()
 
 ### Report Widget Registration
 
-Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration.md#registration-file). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
+Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration.md#oc-registration-file). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
 
 ```php
 public function registerReportWidgets()
 {
     return [
         \RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview::class => [
-            'label'   => 'Google Analytics traffic overview',
+            'label' => 'Google Analytics traffic overview',
             'context' => 'dashboard',
             'permissions' => [
                 'rainlab.googleanalytics.widgets.traffic_overview',
             ],
         ],
         \RainLab\GoogleAnalytics\ReportWidgets\TrafficSources::class => [
-            'label'   => 'Google Analytics traffic sources',
+            'label' => 'Google Analytics traffic sources',
             'context' => 'dashboard',
             'permissions' => [
                 'rainlab.googleanaltyics.widgets.traffic_sources',

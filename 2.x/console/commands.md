@@ -10,13 +10,14 @@ The `october:update` command will request updates from the October gateway. It w
 
     php artisan october:update
 
+<a id="oc-database-migration"></a>
 ### Database Migration
 
 The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
 
     php artisan october:migrate
 
-The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#refresh-plugin) is a useful alternative for debugging a single plugin.
+The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#oc-refresh-plugin) is a useful alternative for debugging a single plugin.
 
     php artisan october:migrate --rollback
 
@@ -38,6 +39,7 @@ October CMS includes these commands for managing your project.
 
     php artisan project:sync
 
+<a id="oc-set-project"></a>
 ### Set Project
 
 `project:set` sets the license key for the current installation.
@@ -72,6 +74,7 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
     php artisan plugin:check
 
+<a id="oc-refresh-plugin"></a>
 ### Refresh Plugin
 
 `plugin:refresh` - destroys the plugin's database tables and recreates them. This command is useful for development.
@@ -134,7 +137,7 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
 ### Check Protected
 
-`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#child-themes-lock) is added and a child theme is created.
+`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#oc-child-themes) is added and a child theme is created.
 
     php artisan theme:check
 
@@ -170,7 +173,7 @@ To create a child theme that inherits the parent theme, specify the `--child` op
 
     php artisan theme:copy demo demo-child --child
 
-If using [database-driven themes](../cms/themes#database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
+If using [database-driven themes](../cms/themes#oc-database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
 
     php artisan theme:copy demo --import-db
 
@@ -196,7 +199,7 @@ October CMS includes a number of utility commands.
 
 ### Mirror Public Directory
 
-`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/deployment.md#public-folder) using symbolic linking.
+`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/deployment.md#oc-public-folder) using symbolic linking.
 
     php artisan october:mirror
 

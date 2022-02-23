@@ -2,6 +2,7 @@
 
 The user management for the back-end includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the back-end.
 
+<a id="oc-users-and-permissions"></a>
 ## Users and Permissions
 
 Access to all parts of an October CMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user.
@@ -69,13 +70,13 @@ BackendAuth::login($user);
 
 ## Registering Permissions
 
-Plugins can register back-end user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration.md#registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
+Plugins can register back-end user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration.md#oc-registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
 
 ```
 acme.blog.access_categories
 ```
 
-The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the user access to [pages](#restricting-access-to-backend-pages) or [features](#restricting-access-to-features).
+The next example shows how to register back-end permission items. Permissions are defined with a permission key and description. In the back-end permission management user interface permissions are displayed as a checkbox list. Back-end controllers can use permissions defined by plugins for restricting the user access to [pages](#oc-restricting-access-to-backend-pages) or [features](#oc-restricting-access-to-features).
 
 ```php
 public function registerPermissions()
@@ -108,6 +109,7 @@ public function registerPermissions()
 }
 ```
 
+<a id="oc-restricting-access-to-backend-pages"></a>
 ## Restricting Access to Backend Pages
 
 In a back-end controller class you can specify which permissions are required for access the pages provided by the controller. It's done with the `$requiredPermissions` controller's property. This property should contain an array of permission keys. If the user permissions match any permission from the list, the framework will let the user to see the controller pages.
@@ -129,6 +131,7 @@ You can also use the **asterisk** symbol to indicate the "all permissions" condi
 public $requiredPermissions = ['acme.blog.*'];
 ```
 
+<a id="oc-restricting-access-to-features"></a>
 ## Restricting Access to Features
 
 The back-end user model has methods that allow to determine whether the user has specific permissions. You can use this feature in order to limit the functionality of the back-end user interface. The permission methods supported by the back-end user are `hasAccess` and `hasPermission`. Both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.

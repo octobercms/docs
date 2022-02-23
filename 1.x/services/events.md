@@ -2,8 +2,6 @@
 
 ## Basic usage
 
->**Note:** For a list of all events available in OctoberCMS itself, see the [api documentation](https://octobercms.com/docs/api/translator/beforeresolve).
-
 The `Event` class provides a simple observer implementation, allowing you to subscribe and listen for events in your application. For example, you may listen for when a user signs in and update their last login date.
 
     Event::listen('auth.login', function($user) {
@@ -14,6 +12,8 @@ The `Event` class provides a simple observer implementation, allowing you to sub
 This is event made available with the `Event::fire` method which is called as part of the user sign in logic, thereby making the logic extensible.
 
     Event::fire('auth.login', [$user]);
+
+> **Note**: For a list of all available events see the [API documentation](https://octobercms.com/docs/api).
 
 ## Subscribing to events
 

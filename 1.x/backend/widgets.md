@@ -222,14 +222,14 @@ When the time comes to take the user input and store it in the database, the for
 
     public function getSaveValue($value)
     {
-         return $value;
+        return $value;
     }
 
 In some cases you intentionally don't want any value to be given, for example, a form widget that displays information without saving anything. Return the special constant called `FormField::NO_SAVE_DATA` derived from the `Backend\Classes\FormField` class to have the value ignored.
 
     public function getSaveValue($value)
     {
-         return \Backend\Classes\FormField::NO_SAVE_DATA;
+        return \Backend\Classes\FormField::NO_SAVE_DATA;
     }
 
 ## Report Widgets

@@ -50,10 +50,11 @@
     title: Functions
     collapsable: false
     children:
+        - function-abort
+        - function-dump
         - function-str
         - function-form
         - function-html
-        - function-dump
 
 #
 # Root Nav
@@ -76,6 +77,15 @@
         - cms/layouts
         - cms/content
         - cms/components
+-
+    title: Tailor
+    children:
+        - tailor/introduction
+        - tailor/sections
+        - tailor/collections
+        - tailor/globals
+        - tailor/mixins
+        - tailor/content-fields
 -
     title: AJAX
     children:
@@ -116,6 +126,7 @@
         - backend/reorder
         - backend/import-export
         - backend/users
+        - ['https://octobercms.com/docs/ui/form', 'UI Guide']
 -
     title: Database
     children:
@@ -158,6 +169,8 @@
         - console/commands
         - console/scaffolding
         - console/development
-        - help/unit-testing
-        - help/publishing-packages
-        - help/developer-guide
+-
+    title: Packages
+    children:
+        - packages/unit-testing
+        - packages/publishing-packages

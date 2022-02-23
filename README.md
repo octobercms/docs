@@ -4,14 +4,6 @@ home: true
 
 # October CMS Docs
 
-::: warning Note
-This repo is currently under development. For the latest, please visit [October CMS Docs](https://octobercms.com/docs)
-:::
-
-::: details View More Details
-This container uses the `details` HTML spec to collapse its content.
-
-Additionally, as seen above, you can use `tip`, `warning` and `danger` as containers.
-:::
+Welcome to the October CMS documentation. You can find the published version by visiting the [October CMS Docs](https://docs.octobercms.com) website. For contributions and translations, you may submit suggestions by clicking the **Edit this Page** button or [contact us directly](https://octobercms.com/contact) for support.
 
 <Redirect to="2.x" />

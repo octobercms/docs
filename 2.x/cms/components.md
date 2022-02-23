@@ -4,11 +4,11 @@ Components are configurable building elements that can be attached to any page, 
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../plugin/components.md) as part of plugins.
 
-> **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials.md#dynamic-partials) article.
+> **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials.md#oc-dynamic-partials) article.
 
 ## Introduction
 
-If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes.md#configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
+If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes.md#oc-configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
 
 ```ini
 title = "Components demonstration"
@@ -30,6 +30,7 @@ When you refer a component, it automatically creates a page variable that matche
 
 > **Note**: If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
 
+<a id="oc-components-aliases"></a>
 ## Components Aliases
 
 If there are two plugins that register components with the same name, you can attach a component by using its fully qualified class name and assigning it an *alias*:
@@ -54,6 +55,7 @@ maxItems = 10
 maxItems = 20
 ```
 
+<a id="oc-using-external-property-values"></a>
 ## Using External Property Values
 
 By default property values are initialized in the Configuration section where the component is defined, and the property values are static, like this:
@@ -102,7 +104,7 @@ maxItems = {{ :maxItems }}
 ...
 ```
 
-The page, the component belongs to, should have a corresponding [URL parameter](pages.md#url-syntax) defined:
+The page, the component belongs to, should have a corresponding [URL parameter](pages.md#oc-url-syntax) defined:
 
 ```ini
 url = "/todo/:maxItems"
@@ -110,9 +112,10 @@ url = "/todo/:maxItems"
 
 In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
+<a id="oc-passing-variables-to-components"></a>
 ## Passing Variables to Components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#component-properties), including [external property values](#using-external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#oc-passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including [external property values](#oc-using-external-property-values).
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 
@@ -124,8 +127,9 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
 ## Customizing Default Markup
 
-The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. [Moving the default markup to a theme partial](#moving-default-markup-to-a-partial) is suitable to completely overhaul a component. [Overriding the component partials](#overriding-component-partials) is useful for cherry picking areas to customize.
+The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. [Moving the default markup to a theme partial](#oc-moving-default-markup-to-a-partial) is suitable to completely overhaul a component. [Overriding the component partials](#oc-overriding-component-partials) is useful for cherry picking areas to customize.
 
+<a id="oc-moving-default-markup-to-a-partial"></a>
 ### Moving Default Markup to a Partial
 
 Each component can have an entry point partial called **default.htm** that is rendered when the `{% component %}` tag is called, in the following example we will assume the component is called **blogPost**.
@@ -160,6 +164,7 @@ This is the only change needed to allow the default component markup to work any
 
 This process can be repeated for all other partials found in the component partial directory.
 
+<a id="oc-overriding-component-partials"></a>
 ### Overriding Component Partials
 
 All component partials can be overridden using the theme partials. If a component called **channel** uses the **title.htm** partial.
@@ -244,7 +249,7 @@ Partials rendered from outside the component must use their fully qualified name
 {% partial 'componentName::component-partial' %}
 ```
 
-Read more on [component development](../plugin/components.md#component-partials) to learn about component partials.
+Read more on [component development](../plugin/components.md#oc-component-partials) to learn about component partials.
 
 <!--
 ## Soft Components

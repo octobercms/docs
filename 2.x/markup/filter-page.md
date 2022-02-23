@@ -12,7 +12,7 @@ Remember that if you refer a page from a subdirectory you should specify the sub
 <a href="{{ 'contacts/about'|page }}">About Us</a>
 ```
 
-> **Note**: The [Themes documentation](../cms/themes.md#subdirectories) has more details on subdirectory usage.
+> **Note**: The [Themes documentation](../cms/themes.md#oc-subdirectories) has more details on subdirectory usage.
 
 To access the link to a certain page from the PHP section, you can use `$this->pageUrl('page-name-without-extension')`:
 
@@ -64,10 +64,10 @@ Given the above content is found in a CMS page file **post.htm** you can link to
 </a>
 ```
 
-If the website address is __http://octobercms.com__ the above example would output the following:
+If the website address is __https://octobercms.com__ the above example would output the following:
 
 ```html
-<a href="http://octobercms.com/blog/post/10">
+<a href="https://octobercms.com/blog/post/10">
     Blog post #10
 </a>
 ```
@@ -93,7 +93,7 @@ If there are two pages, **post.htm** and **post-edit.htm**, with the above URLs 
 When the above markup appears on the **post.htm** page, it will output the following:
 
 ```html
-<a href="http://octobercms.com/blog/post/edit/10">
+<a href="https://octobercms.com/blog/post/edit/10">
     Edit this post
 </a>
 ```

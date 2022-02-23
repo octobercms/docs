@@ -43,7 +43,7 @@ class Category extends Model
 }
 ```
 
-Read more about the [NestedTree trait in the database documentation](../database/traits.md#nested-tree).
+Read more about the [NestedTree trait in the database documentation](../database/traits.md#oc-nested-tree).
 
 ### Simple Tree
 
@@ -56,7 +56,7 @@ class Category extends Model
 }
 ```
 
-Read more about the [SimpleTree trait in the database documentation](../database/traits.md#simple-tree).
+Read more about the [SimpleTree trait in the database documentation](../database/traits.md#oc-simple-tree).
 
 ### Sortable Model
 
@@ -69,15 +69,16 @@ class User extends Model
 }
 ```
 
-Read more about the [Sortable trait in the database documentation](../database/traits.md#sortable).
+Read more about the [Sortable trait in the database documentation](../database/traits.md#oc-sortable).
 
 ## Sorting Related Records
 
 Sorting related records is possible using the [Relation Behavior](../backend/relations.md) and the supported relation types are listed below.
 
-- [Has Many](../database/relations.md#one-to-many) uses the `Sortable` trait on the related model.
-- [Belongs To Many](../database/relations.md#many-to-many) uses the `SortableRelation` trait on the parent model (see below).
+- [Has Many](../database/relations.md#relation-one-to-many) uses the `Sortable` trait on the related model.
+- [Belongs To Many](../database/relations.md#relation-many-to-many) uses the `SortableRelation` trait on the parent model (see below).
 
+<a id="oc-sortable-relation-model"></a>
 ### Sortable Relation Model
 
 Use the `SortableRelation` trait when records need to be sorted inside a pivot table, such as a [Belongs To Many](database/relations.md#many-to-many) relation type. This trait requires the `pivotSortable` option to be defined in the relationship where the value is the sortable column name found in the pivot table.

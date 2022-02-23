@@ -24,13 +24,11 @@ sudo apt-get update &&
 sudo apt-get install php php-ctype php-curl php-xml php-fileinfo php-gd php-json php-mbstring php-mysql php-sqlite3 php-zip
 ```
 
-When using the SQL Server database engine, you will need to install the [group concatenation](https://groupconcat.codeplex.com/) user-defined aggregate.
+When using the SQL Server database engine, you will need to install the [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr) user-defined aggregate.
 
 ## Wizard installation
 
 The wizard installation is the recommended way to install October for **non-technical users**. It is simpler than the command-line installation and doesn't require any special skills.
-
-> **Note:** If you are a developer, we recommend that you [install via Composer instead](../console/commands.md#console-install-composer)
 
 1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
 1. [Download the installer archive file](http://octobercms.com/download).
@@ -40,6 +38,8 @@ The wizard installation is the recommended way to install October for **non-tech
 1. Follow the installation instructions.
 
 ![image](https://github.com/octobercms/docs/blob/develop/images/wizard-installer.png?raw=true)
+
+> **Note:** The wizard installer will install October CMS v1.0 that uses the [Laravel 5.5 Framework](https://laravel.com/docs/5.5).
 
 ### Troubleshooting installation
 

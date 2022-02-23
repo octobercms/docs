@@ -227,7 +227,7 @@ If you are planning to use queued emails make sure that the path of the file is 
 ```twig
 <body>
     Here is an image:
-    {% set pathToFile = 'storage/app/media/path/to/file.jpg' | app %}
+    {% set pathToFile = 'storage/app/media/path/to/file.jpg'|app %}
     <img src="{{ message.embed(pathToFile) }}">
 </body>
 ```

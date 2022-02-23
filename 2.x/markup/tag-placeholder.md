@@ -1,6 +1,6 @@
 # {% placeholder %}
 
-The `{% placeholder %}` tag will render a placeholder section which is generally [used inside Layouts](../cms/layouts.md#placeholders). This tag will return any placeholder contents that have been added using the `{% put %}` tag, or any default content that is defined (optional).
+The `{% placeholder %}` tag will render a placeholder section which is generally [used inside Layouts](../cms/layouts.md#oc-placeholders). This tag will return any placeholder contents that have been added using the `{% put %}` tag, or any default content that is defined (optional).
 
 ```twig
 {% placeholder name %}
@@ -52,6 +52,26 @@ In a layout template you can check if a placeholder content exists by using the 
     <!-- Markup for a page without a sidebar -->
     {% page %}
 {% endif %}
+```
+
+## Using Placeholders as Variables
+
+Placeholders can be useful for setting inherited variables, such as the active link in page navigation. The `{% put %}` tag allows you to set values directly. For example, setting the `activeNav` value to **home** inside a page template.
+
+```twig
+{% put activeNav = 'home' %}
+```
+
+The variable can be accessed inside the layout template using the `placeholder()` function. From this, we can determine the active link based on the value set by the page.
+
+```twig
+{% set active = placeholder('activeNav') %}
+
+<ul>
+    <li class="{{ active == 'home' ? 'active' }}">Home</li>
+    <li class="{{ active == 'blog' ? 'active' }}">Blog</li>
+    <li class="{{ active == 'contact' ? 'active' }}">Contact</li>
+</ul>
 ```
 
 ## Custom Attributes

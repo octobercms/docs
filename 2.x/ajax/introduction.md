@@ -1,15 +1,16 @@
 # Introduction
 
-October CMS includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes.md) and anywhere in the [back-end administration area](../backend/controllers-ajax#using-ajax-handlers).
+October CMS includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes.md) and anywhere in the [back-end administration area](../backend/controllers-ajax#oc-using-ajax-handlers).
 
 The AJAX framework comes in two flavors, you may either use [the JavaScript API](../ajax/javascript-api.md) or [the data attributes API](../ajax/attributes-api.md). The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
 
+<a id="oc-including-the-framework"></a>
 ## Including the Framework
 
 The AJAX framework is optional in your [CMS theme](../cms/themes.md), to use the library you should include it by placing the `{% framework %}` tag anywhere inside your [page](../cms/pages.md) or [layout](../cms/layouts.md). This adds a reference to the October front-end JavaScript library. The library requires jQuery so it should be loaded first, for example:
 
 ```twig
-<script src="{{ 'assets/javascript/jquery.js' | theme }}"></script>
+<script src="{{ 'assets/javascript/jquery.js'|theme }}"></script>
 
 {% framework %}
 ```

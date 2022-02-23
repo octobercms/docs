@@ -1,6 +1,6 @@
-# | default
+# |default
 
-The `| default` filter returns the value passed as the first argument if the filtered value is undefined or empty, otherwise the filtered value is returned.
+The `|default` filter returns the value passed as the first argument if the filtered value is undefined or empty, otherwise the filtered value is returned.
 
 ```twig
 {{ variable|default('The variable is not defined') }}

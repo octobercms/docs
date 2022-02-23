@@ -15,27 +15,31 @@
 
 По умолчанию файлы в корзине не могут быть доступны напрямую. Чтобы сделать корзину отркытой для всех, вернитесь в их список и выберите ту, которую создали. Дальше нажмите на кнопку **Properties** справа. Отркойте вкладку **Permissions**. Нажмите на **Edit bucket policy**. Вставьте следующий код в попап окно (не забудьте заменить название корзины):
 
-    {
-        "Version": "2008-10-17",
-        "Id": "Policy1397632521960",
-        "Statement": [
-            {
-                "Sid": "Stmt1397633323327",
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": "*"
-                },
-                "Action": "s3:GetObject",
-                "Resource": "arn:aws:s3:::BUCKETNAME/*"
-            }
-        ]
-    }
+```json
+{
+    "Version": "2008-10-17",
+    "Id": "Policy1397632521960",
+    "Statement": [
+        {
+            "Sid": "Stmt1397633323327",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::BUCKETNAME/*"
+        }
+    ]
+}
+```
 
 Нажмите кнопку **Save**. Вы измените права на read-only на все папки и файлы в корзине. Также возможно настроить публичный доступ до определенной папки в корзине:
 
-    ...
-    "Resource": "arn:aws:s3:::BUCKETNAME/media/*"
-    ...
+```json
+...
+"Resource": "arn:aws:s3:::BUCKETNAME/media/*"
+...
+```
 
 Вы также должны создать API пользователя, которого OctoberCMS будет использовать для управления файлами в корзине. В AWS консоли перейдите в раздел IAM. Нажмите на вкладку Users и создайте нового пользователя с любым именем. Обратите внимание на то, чтобы было отмечено "Generate an access key for each user". После того, как AWS создаст нового юзера, вы можете посмотреть его **Access Key ID** и **Secret Access Key**. Скопируйте эти ключи, они вам еще пригодятся.
 
@@ -66,17 +70,19 @@
 
 Пример:
 
-    'disks' => [
-        ...
-        's3' => [
-            'driver' => 's3',
-            'key'    => 'XXXXXXXXXXXXXXXXXXXX',
-            'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
-            'region' => 'us-west-2',
-            'bucket' => 'my-bucket'
-        ],
-        ...
-    ]
+```php
+'disks' => [
+    // ...
+    's3' => [
+        'driver' => 's3',
+        'key'    => 'XXXXXXXXXXXXXXXXXXXX',
+        'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
+        'region' => 'us-west-2',
+        'bucket' => 'my-bucket'
+    ],
+    // ...
+]
+```
 
 Сохраните файл **config/filesystem.php** и откройте **config/cms.php**. Найдите раздел **storage**, **media**. Измените значения **disk**, **folder** и **path**:
 
@@ -88,14 +94,16 @@
 
 Пример:
 
-    'storage' => [
-        ...
-        'media' => [
-            'disk'   => 's3',
-            'folder' => 'media',
-            'path' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name/media'
-        ]
+```php
+'storage' => [
+    // ...
+    'media' => [
+        'disk'   => 's3',
+        'folder' => 'media',
+        'path' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name/media'
     ]
+]
+```
 
 Поздравляем! Теперь вы может использовать Amazon S3.
 
@@ -125,19 +133,20 @@ To use Rackspace CDN with OctoberCMS, you should create Rackspace CDN container,
 
 Пример:
 
-    'disks' => [
-        ...
-        'rackspace' => [
-            'driver'    => 'rackspace',
-            'username'  => 'october.api.cdn',
-            'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
-            'container' => 'my-bucket',
-            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-            'region'    => 'ORD'
-        ],
-        ...
-    ]
-
+```php
+'disks' => [
+    ...
+    'rackspace' => [
+        'driver'    => 'rackspace',
+        'username'  => 'october.api.cdn',
+        'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
+        'container' => 'my-bucket',
+        'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
+        'region'    => 'ORD'
+    ],
+    // ...
+]
+```
 
 Сохраните файл **config/filesystem.php** и откройте **config/cms.php**. Найдите раздел **storage**, **media**. Измените значения **disk**, **folder** и **path**:
 
@@ -149,14 +158,16 @@ To use Rackspace CDN with OctoberCMS, you should create Rackspace CDN container,
 
 Пример:
 
-    'storage' => [
-        ...
-        'media' => [
-            'disk'   => 'rackspace',
-            'folder' => 'media',
-            'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
-        ]
+```php
+'storage' => [
+    // ...
+    'media' => [
+        'disk'   => 'rackspace',
+        'folder' => 'media',
+        'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
     ]
+]
+```
 
 Поздравляем! Теперь вы может использовать Rackspace CDN.
 
@@ -165,41 +176,50 @@ To use Rackspace CDN with OctoberCMS, you should create Rackspace CDN container,
 
 По умолчанию система использует HTML5 audio и video теги для отображения медиафайлов:
 
-    <video src="video.mp4" controls></video>
+```html
+<video src="video.mp4" controls></video>
+```
 
 или
 
-    <audio src="audio.mp3" controls></audio>
+```html
+<audio src="audio.mp3" controls></audio>
+```
 
 Вы можете использовать **oc-audio-player.html** и **oc-video-player.html** фрагменты, чтобы переопределить их отображение. Используйте переменную **src** внутри фрагментов, чтобы получить ссылку на файл. Пример:
 
-    <video src="{{ src }}" width="320" height="200" controls preload></video>
+```twig
+<video src="{{ src }}" width="320" height="200" controls preload></video>
+```
 
 Вы также можете использовать Twig разметку, чтобы, например, подргужать нужное видео под нужное разрешение:
 
-    <video controls>
-        <source
-            src="{{ src }}"
-            media="only screen and (min-device-width: 568px)"></source>
-        <source
-            src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
-            media="only screen and (max-device-width: 568px)"></source>
-    </video>
+```twig
+<video controls>
+    <source
+        src="{{ src }}"
+        media="only screen and (min-device-width: 568px)"></source>
+    <source
+        src="{{ src|replace({'.mp4': '.iphone.mp4'}) }}"
+        media="only screen and (max-device-width: 568px)"></source>
+</video>
+```
 
 <a name="configuration-options"></a>
 ## Другие параметры конфигурации
 
 Существуют некоторые дополнительные параметры Медиа Менеджера, которые Вы можете использовать. Все они находятся в файле **config/cms.php**, в разделе **storage/media**. Например:
 
-    'storage' => [
-        ...
+```php
+'storage' => [
+    // ...
 
-        'media' => [
-            ...
-            'ignore' => ['.svn', '.git', '.DS_Store']
-        ]
-    ],
-
+    'media' => [
+        // ...
+        'ignore' => ['.svn', '.git', '.DS_Store']
+    ]
+],
+```
 
 Ключ | Значение
 ------------- | -------------

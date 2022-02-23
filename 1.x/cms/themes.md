@@ -2,7 +2,7 @@
 
 Themes define the appearance of your website or web application built with October. October themes are completely file-backed and can be managed with any version control system, for example, Git. This page gives you the high-level description of October themes. You will find more details about [pages](pages.md), [partials](partials.md), [layouts](layouts.md) and [content files](content.md) in the corresponding articles.
 
->**NOTE:** Themes can store templates in the database if `cms.databaseTemplates` is enabled, see the [database driven themes](#database-driven-themes) section for more information.
+> **Note**: Themes can store templates in the database if `cms.databaseTemplates` is enabled, see the [database driven themes](#database-driven-themes) section for more information.
 
 Themes are directories that reside in the **/themes** directory by default. Themes can contain the following objects:
 
@@ -155,7 +155,7 @@ echo $this->foo;
 
 ### Twig markup section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October](../markup.md), all the [native Twig features](http://twig.sensiolabs.org/documentation), or those [provided by plugins](../plugin/registration.md#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October](../markup.md), all the [native Twig features](https://twig.symfony.com/doc/), or those [provided by plugins](../plugin/registration.md#extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
 
 More information can be found [in the Markup guide](../markup.md).
 
@@ -175,4 +175,4 @@ October CMS comes with another very useful feature, disabled by default, called 
 
 Files modified in the database are cached to indicate that they should be loaded from the database.
 
->**NOTE:** All CMS template objects (ex. `Layout`, `Page`, `Content`, `Partial`, `Meta`, etc) are stored in the database when this feature is enabled and a change is made to the template in question; however theme asset files will **not** be.
+> **Note**: All CMS template objects (ex. `Layout`, `Page`, `Content`, `Partial`, `Meta`, etc) are stored in the database when this feature is enabled and a change is made to the template in question; however theme asset files will **not** be.

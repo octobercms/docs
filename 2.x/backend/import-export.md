@@ -39,7 +39,7 @@ export:
     list: $/acme/campaign/models/subscriber/columns.yaml
 ```
 
-The configuration options listed below are optional. Define them if you want the behavior to support the [Import](#import-page) or [Export](#export-page), or both.
+The configuration options listed below are optional. Define them if you want the behavior to support the [Import](#oc-import-page) or [Export](#oc-export-page), or both.
 
 Option | Description
 ------------- | -------------
@@ -48,6 +48,7 @@ Option | Description
 **export** | a configuration array or reference to a config file for the Export page.
 **defaultFormatOptions** | a configuration array or reference to a config file for the default CSV format options.
 
+<a id="oc-import-page"></a>
 ### Import Page
 
 To support the Import page add the following configuration to the YAML file:
@@ -70,6 +71,7 @@ Option | Description
 **redirect** | redirection page when the import is complete, optional
 **permissions** | user permissions needed to perform the operation, optional
 
+<a id="oc-export-page"></a>
 ### Export Page
 
 To support the Export page add the following configuration to the YAML file:
@@ -89,9 +91,9 @@ Option | Description
 **title** | a page title, can refer to a [localization string](../plugin/localization.md).
 **fileName** | the file name to use for the exported file, default **export.csv**.
 **list** | defines the list columns available for exporting.
-**form** | provides additional fields used as import options, optional.
+**form** | provides additional fields used as export options, optional.
 **redirect** | redirection page when the export is complete, optional.
-**useList** | set to true or the value of a list definition to enable [integration with Lists](#list-behavior-integration), default: false.
+**useList** | set to true or the value of a list definition to enable [integration with Lists](#oc-list-behavior-integration), default: false.
 
 ### Format Options
 
@@ -116,7 +118,7 @@ Option | Description
 
 ## Import and Export Views
 
-For each page feature [Import](#import-page) and [Export](#export-page) you should provide a [view file](controllers-ajax.md) with the corresponding name - **import.htm** and **export.htm**.
+For each page feature [Import](#oc-import-page) and [Export](#oc-export-page) you should provide a [view file](controllers-ajax.md) with the corresponding name - **import.htm** and **export.htm**.
 
 The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 
@@ -279,16 +281,17 @@ class SubscriberImport extends \Backend\Models\ImportModel
 }
 ```
 
+<a id="oc-list-behavior-integration"></a>
 ## Integration with List Behavior
 
-There is an alternative approach to exporting data that uses the [list behavior](lists.md) to provide the export data. In order to use this feature you should have the `Backend.Behaviors.ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
+There is an alternative approach to exporting data that uses the [list behavior](lists.md) to provide the export data. In order to use this feature you should have the `Backend\Behaviors\ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
 
 ```yaml
 export:
     useList: true
 ```
 
-If you are using [multiple list definitions](lists.md#multiple-list-definitions), then you can supply the list definition:
+If you are using [multiple list definitions](lists.md#oc-multiple-list-definitions), then you can supply the list definition:
 
 ```yaml
 export:

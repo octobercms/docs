@@ -14,7 +14,7 @@ You may also pass an uploaded file from the [page request input](../services/req
 $image = Resizer::open(Input::file('field_name'));
 ```
 
-To resize the image, call the `resize` method on the object to perform the resize. The first argument is the image width, the second argument is the image height and the third argument is an array of [resize parameters](#resize-parameters) options.
+To resize the image, call the `resize` method on the object to perform the resize. The first argument is the image width, the second argument is the image height and the third argument is an array of [resize parameters](#oc-resize-parameters) options.
 
 ```php
 $image->resize(800, 600, ['mode' => 'crop']);
@@ -34,6 +34,7 @@ $image->save('path/to/new/file.jpg');
 
 > **Note**: There is also a `|resize` [markup filter](../markup/filter-resize.md) that can be used for resizing images in your themes.
 
+<a id="oc-resize-parameters"></a>
 ### Resize Parameters
 
 The following elements are supported in the options array are supported:

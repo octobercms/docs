@@ -240,14 +240,14 @@ In order to render all levels of items and their children, you can use recursive
     {% if item.children is not empty %}
         <ul>
             {% for child in item.children %}
-                <li>{{ child.name }}{{ SELF.renderChildren(child) | raw }}</li>
+                <li>{{ child.name }}{{ SELF.renderChildren(child)|raw }}</li>
             {% endfor %}
         </ul>
     {% endif %}
 {% endmacro %}
 
 {% import _self as SELF %}
-{{ SELF.renderChildren(category) | raw }}
+{{ SELF.renderChildren(category)|raw }}
 ```
 
 ## Nested Tree

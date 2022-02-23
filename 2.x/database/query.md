@@ -14,7 +14,7 @@ To begin a fluent query, use the `table` method on the `Db` facade. The `table` 
 $users = Db::table('users')->get();
 ```
 
-Like [raw queries](../database/basics.md#running-raw-sql-queries), the `get` method returns an `array` of results where each result is an instance of the PHP `stdClass` object. You may access each column's value by accessing the column as a property of the object:
+Like [raw queries](../database/basics.md#oc-running-raw-sql-queries), the `get` method returns an `array` of results where each result is an instance of the PHP `stdClass` object. You may access each column's value by accessing the column as a property of the object:
 
 ```php
 foreach ($users as $user) {
@@ -68,7 +68,7 @@ Sometimes it makes sense to perform a query using plain SQL, you can do this wit
 Db::select('select * from sometable where name = :name', ['name' => 'Charles']);
 ```
 
-See the article on [Running Raw SQL Queries](../database/basics.md#running-raw-sql-queries) for more information.
+See the article on [Running Raw SQL Queries](../database/basics.md#oc-running-raw-sql-queries) for more information.
 
 ### Chunking Results
 
@@ -107,6 +107,7 @@ Db::table('users')->where('active', false)
 
 > **Note**: When updating or deleting records inside the chunk callback, any changes to the primary key or foreign keys could affect the chunk query. This could potentially result in records not being included in the chunked results.
 
+<a id="oc-aggregates"></a>
 ### Aggregates
 
 The query builder also provides a variety of aggregate methods, such as `count`, `max`, `min`, `avg`, and `sum`. You may call any of these methods after constructing your query:
@@ -597,7 +598,7 @@ $users = Db::table('users')
     ->get();
 ```
 
-For more advanced `having` statements, you may wish to use the [`havingRaw`](#aggregates) method.
+For more advanced `having` statements, you may wish to use the [`havingRaw`](#oc-aggregates) method.
 
 #### Limit and offset
 

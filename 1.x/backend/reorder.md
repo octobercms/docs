@@ -7,45 +7,48 @@ The behavior depends on a [model class](../database/model.md) which must impleme
 1. [`October\Rain\Database\Traits\Sortable`](../database/traits#sortable)
 1. [`October\Rain\Database\Traits\NestedTree`](../database/traits#nestedtree)
 
->**NOTE**: If adding sorting to a previously unsorted model under the control of a third party is desired, you can use the [`October\Rain\Database\Behaviors\Sortable`](../database/behaviors#sortable) behavior, which can be dynamically implemented. However, you will need to ensure that the model table has a `sort_order` column present on it.
+> **Note**: If adding sorting to a previously unsorted model under the control of a third party is desired, you can use the [`October\Rain\Database\Behaviors\Sortable`](../database/behaviors#sortable) behavior, which can be dynamically implemented. However, you will need to ensure that the model table has a `sort_order` column present on it.
 
 In order to use the reorder behavior you should add it to the `$implement` property of the controller class. Also, the `$reorderConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
-    namespace Acme\Shop\Controllers;
+```php
+namespace Acme\Shop\Controllers;
 
-    class Categories extends Controller
-    {
-        public $implement = [
-            'Backend.Behaviors.ReorderController',
-        ];
+class Categories extends Controller
+{
+    public $implement = [
+        'Backend.Behaviors.ReorderController',
+    ];
 
-        public $reorderConfig = 'config_reorder.yaml';
+    public $reorderConfig = 'config_reorder.yaml';
 
-        // [...]
-    }
+    // [...]
+}
+```
 
 ## Configuring the behavior
 
 The configuration file referred in the `$reorderConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a configuration file:
 
-	# ===================================
-	#  Reorder Behavior Config
-	# ===================================
+```yaml
+# ===================================
+#  Reorder Behavior Config
+# ===================================
 
-	# Reorder Title
-	title: Reorder Categories
+# Reorder Title
+title: Reorder Categories
 
-	# Attribute name
-	nameFrom: title
+# Attribute name
+nameFrom: title
 
-	# Model Class name
-	modelClass: Acme\Shop\Models\Category
+# Model Class name
+modelClass: Acme\Shop\Models\Category
 
-	# Toolbar widget configuration
-	toolbar:
-	    # Partial for toolbar buttons
-	    buttons: reorder_toolbar
-
+# Toolbar widget configuration
+toolbar:
+    # Partial for toolbar buttons
+    buttons: reorder_toolbar
+```
 
 The configuration options listed below can be used.
 
@@ -79,7 +82,9 @@ in
 
 The lookup query for the list [database model](../database/model.md) can be extended by overriding the `reorderExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
 
-	public function reorderExtendQuery($query)
-	{
-	    $query->withTrashed();
-	}
+```php
+public function reorderExtendQuery($query)
+{
+    $query->withTrashed();
+}
+```

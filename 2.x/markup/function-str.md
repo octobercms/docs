@@ -6,13 +6,19 @@ Functions prefixed with `str_` perform tasks that are useful when dealing with s
 {{ str_camel() }}
 ```
 
-is the PHP equivalent of the following:
+The above is the PHP equivalent of the following:
 
 ```php
 <?= Str::camel() ?>
 ```
 
 > **Note**: Methods in *camelCase* should be converted to *snake_case*.
+
+You may also apply the string functions as a Twig filter.
+
+```twig
+{{ ''|str_camel }}
+```
 
 ## str_limit()
 

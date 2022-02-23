@@ -16,15 +16,13 @@ Or if you don't have curl:
 
     php -r "eval('?>'.file_get_contents('https://octobercms.com/api/installer'));"
 
+> **Note:** The quick start install will install October CMS v1.0 that uses the [Laravel 5.5 Framework](https://laravel.com/docs/5.5).
+
 ### Composer install
 
 Download the application source code by using `create-project` in your terminal. The following command will install to a directory called **/myoctober**.
 
-    composer create-project october/october myoctober
-
-Once this task has finished, open the file **config/cms.php** and enable the `disableCoreUpdates` setting. This will disable core updates from being delivered by the October gateway.
-
-    'disableCoreUpdates' => true,
+    composer create-project october/october:1.1.* myoctober
 
 When updating October, use the composer update command as normal before performing a [database migration](#database-migration).
 
@@ -32,7 +30,7 @@ When updating October, use the composer update command as normal before performi
 
 Composer is configured to look inside plugin directories for composer dependencies and these will be included in updates.
 
-> **Note:** To use composer with an October instance that has been installed using the [Wizard installation](../setup/installation.md#wizard-installation), simply copy the `tests/` directory and `composer.json` file from [GitHub](https://github.com/octobercms/october) into your October instance and then run `composer install`.
+> **Note:** The composer command will install October CMS v1.1 that uses the [Laravel 6 Framework](https://laravel.com/docs/6.x).
 
 ## Setup & Maintenance
 
@@ -207,7 +205,7 @@ October includes a number of utility commands.
 php artisan october:mirror public
 ```
 
->**Note:** By default the symlinks created will be absolute symlinks, to create them as relative symlinks instead include the `--relative` option:
+> **Note**: By default the symlinks created will be absolute symlinks, to create them as relative symlinks instead include the `--relative` option:
 
 ```bash
 php artisan october:mirror public --relative

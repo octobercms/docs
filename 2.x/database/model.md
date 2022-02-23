@@ -4,19 +4,20 @@ October CMS provides a beautiful and simple Active Record implementation for wor
 
 Model classes reside in the **models** subdirectory of a plugin directory. An example of a model directory structure:
 
-```
-plugins/
-  acme/
-    blog/
-      models/
-      user/             <=== Config Directory
-        columns.yaml    <=== Config Files
-        fields.yaml     <==^
-      User.php          <=== Model Class
-      Plugin.php
-```
 
-The model configuration directory could contain the model's [list column](../backend/lists.md#defining-list-columns) and [form field](../backend/forms.md#defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           ├── `models`
+|           |   ├── post             _<== Config Directory_
+|           |   |   ├── fields.yaml  _<== Config File_
+|           |   |   └── columns.yaml _<== Config File_
+|           |   └── Post.php         _<== Model Class_
+|           └── Plugin.php
+:::
+
+The model configuration directory could contain the model's [list column](../backend/lists.md#oc-defining-list-columns) and [form field](../backend/forms.md#oc-defining-form-fields) definitions. The model configuration directory name matches the model class name written in lowercase.
 
 ## Defining Models
 
@@ -30,9 +31,7 @@ use Model;
 class Post extends Model
 {
     /**
-     * The table associated with the model.
-     *
-     * @var string
+     * @var string table associated with the model.
      */
     protected $table = 'acme_blog_posts';
 }
@@ -40,6 +39,7 @@ class Post extends Model
 
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
+<a id="oc-supported-properties"></a>
 ### Supported Properties
 
 There are some standard properties that can be found on models, in addition to those provided by [model traits](traits.md). For example:
@@ -69,11 +69,11 @@ Property | Description
 **$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
 **$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
 **$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
-**$fillable** | values are fields accessible to [mass assignment](#mass-assignment).
-**$guarded** | values are fields guarded from [mass assignment](#mass-assignment).
+**$fillable** | values are fields accessible to [mass assignment](#oc-mass-assignment).
+**$guarded** | values are fields guarded from [mass assignment](#oc-mass-assignment).
 **$visible** | values are fields made visible when [serializing the model data](../database/serialization.md).
 **$hidden** | values are fields made hidden when [serializing the model data](../database/serialization.md).
-**$connection** | string that contains the [connection name](../database/basics.md#multiple-database-connections) that's utilised by the model by default.
+**$connection** | string that contains the [connection name](../database/basics.md#oc-multiple-database-connections) that's utilised by the model by default.
 
 #### Primary key
 
@@ -153,11 +153,12 @@ class Post extends Model
 
 ## Retrieving Models
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#retrieving-multiple-models) or [retrieve a single model](#retrieving-a-single-model) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#oc-retrieving-multiple-models) or [retrieve a single model](#oc-retrieving-a-single-model) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
 
+<a id="oc-retrieving-multiple-models"></a>
 ### Retrieving Multiple Models
 
-Once you have created a model and [its associated database table](../database/structure.md#migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query.md) allowing you to query the database table associated with the model. For example:
+Once you have created a model and [its associated database table](../database/structure.md#oc-migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query.md) allowing you to query the database table associated with the model. For example:
 
 ```php
 $flights = Flight::all();
@@ -210,6 +211,7 @@ Flight::chunk(200, function ($flights) {
 
 The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is retrieved from the database.
 
+<a id="oc-retrieving-a-single-model"></a>
 ### Retrieving a Single Model
 
 In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance:
@@ -242,7 +244,7 @@ Route::get('/api/flights/{id}', function ($id) {
 
 ### Retrieving Aggregates
 
-You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query.md#aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
+You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query.md#oc-aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
 
 ```php
 $count = Flight::where('active', 1)->count();
@@ -286,19 +288,7 @@ Flight::where('is_active', true)
 
 The `update` method expects an array of column and value pairs representing the columns that should be updated.
 
-<!--
-#### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
-
-If you would like to perform multiple "upserts" in a single query, then you should use the `upsert` method instead. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of the columns that should be updated if a matching record already exists in the database. The `upsert` method will automatically set the `created_at` and `updated_at` timestamps if timestamps are enabled on the model:
-
-    MyVendor\MyPlugin\Models\Flight::upsert([
-        ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
-        ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
-    ], ['departure', 'destination'], ['price']);
-
-> **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
--->
-
+<a id="oc-mass-assignment"></a>
 ### Mass Assignment
 
 You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create` or `fill` method.
@@ -395,8 +385,9 @@ You may also run a delete query on a set of models. In this example, we will del
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
-> **Note**: It is important to mention that [model events](#model-events) will not fire when deleting records directly from a query.
+> **Note**: It is important to mention that [model events](#oc-model-events) will not fire when deleting records directly from a query.
 
+<a id="oc-query-scopes"></a>
 ## Query Scopes
 
 Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
@@ -453,6 +444,7 @@ Now you may pass the parameters when calling the scope:
 $users = User::applyType('admin')->get();
 ```
 
+<a id="oc-model-events"></a>
 ## Events
 
 Models fire several events, allowing you to hook into various points in the model's lifecycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
@@ -486,9 +478,9 @@ public function beforeCreate()
 }
 ```
 
-> **Note**: Relationships created with [deferred-binding](relations#deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
+> **Note**: Relationships created with [deferred-binding](relations#oc-deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
 
-### Basic usage
+### Basic Usage
 
 Whenever a new model is saved for the first time, the `beforeCreate` and `afterCreate` events will fire. If a model already existed in the database and the `save` method is called, the `beforeUpdate` / `afterUpdate` events will fire. However, in both cases, the `beforeSave` / `afterSave` events will fire.
 
@@ -547,7 +539,7 @@ Inside the closure you can add relations to the model. Here we extend the `Backe
 });
 ```
 
-This approach can also be used to bind to [local events](#events), the following code listens for the `model.beforeSave` event.
+This approach can also be used to bind to [local events](#oc-model-events), the following code listens for the `model.beforeSave` event.
 
 ```php
 \Backend\Models\User::extend(function($model) {

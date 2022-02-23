@@ -18,7 +18,7 @@ Storage::disk('local')->put('file.txt', 'Contents');
 
 #### Other Driver Prerequisites
 
-Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](http://octobercms.com/plugin/october-drivers).
+Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
 
 ## Basic Usage
 

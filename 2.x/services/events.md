@@ -17,8 +17,9 @@ This is event made available with the `Event::fire` method which is called as pa
 Event::fire('auth.login', [$user]);
 ```
 
->**Note:** For a list of all events available in October CMS itself, see the [API documentation](https://octobercms.com/docs/api).
+> **Note**: For a list of all events available in October CMS itself, see the [API documentation](https://octobercms.com/docs/api).
 
+<a id="oc-subscribing-to-events"></a>
 ## Subscribing to Events
 
 The `Event::listen` method is primarily used to subscribe to events and can be done from anywhere within your application code. The first argument is the event name.
@@ -27,7 +28,7 @@ The `Event::listen` method is primarily used to subscribe to events and can be d
 Event::listen('acme.blog.myevent', ...);
 ```
 
-The second argument can be a closure that specifies what should happen when the event is fired. The closure can accept optional some arguments, provided by [the firing event](#firing-events).
+The second argument can be a closure that specifies what should happen when the event is fired. The closure can accept optional some arguments, provided by [the firing event](#oc-firing-events).
 
 ```php
 Event::listen('acme.blog.myevent', function($arg1, $arg2) {
@@ -35,7 +36,7 @@ Event::listen('acme.blog.myevent', function($arg1, $arg2) {
 });
 ```
 
-You may also pass a reference to any callable object or a [dedicated event class](#using-classes-as-listeners) and this will be used instead.
+You may also pass a reference to any callable object or a [dedicated event class](#oc-using-classes-as-listeners) and this will be used instead.
 
 ```php
 Event::listen('auth.login', [$this, 'LoginHandler']);
@@ -43,14 +44,15 @@ Event::listen('auth.login', [$this, 'LoginHandler']);
 
 > **Note**: The callable method can choose to specify all, some or none of the arguments. Either way the event will not throw any errors unless it specifies too many.
 
+<a id="oc-where-to-register-listeners"></a>
 ### Where to Register Listeners
 
-The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#registration-methods).
+The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods).
 
 ```php
 class Plugin extends PluginBase
 {
-    [...]
+    // ...
 
     public function boot()
     {
@@ -81,6 +83,7 @@ Event::listen('auth.login', function() { ... }, 10);
 Event::listen('auth.login', function() { ... }, 5);
 ```
 
+<a id="oc-halting-events"></a>
 ### Halting Events
 
 Sometimes you may wish to stop the propagation of an event to other listeners. You may do so using by returning `false` from your listener:
@@ -115,6 +118,7 @@ Event::listen('foo.*', function($event, $params) {
 });
 ```
 
+<a id="oc-firing-events"></a>
 ## Firing Events
 
 You may use the `Event::fire` method anywhere in your code to make the logic extensible. This means other developers, or even your own internal code, can "hook" to this point of code and inject specific logic. The first argument of should be the event name.
@@ -129,13 +133,13 @@ It is always a good idea to prefix event names with your plugin namespace code, 
 Event::fire('acme.blog.myevent');
 ```
 
-The second argument is an array of values that will be passed as arguments to [the event listener](#subscribing-to-events) subscribing to it.
+The second argument is an array of values that will be passed as arguments to [the event listener](#oc-subscribing-to-events) subscribing to it.
 
 ```php
 Event::fire('acme.blog.myevent', [$arg1, $arg2]);
 ```
 
-The third argument specifies whether the event should be a [halting event](#halting-events), meaning it should halt if a "non null" value is returned. This argument is set to false by default.
+The third argument specifies whether the event should be a [halting event](#oc-halting-events), meaning it should halt if a "non null" value is returned. This argument is set to false by default.
 
 ```php
 Event::fire('acme.blog.myevent', [...], true);
@@ -189,6 +193,7 @@ You may use the `Event::flush` method to flush all queued events.
 Event::flush('foo');
 ```
 
+<a id="oc-using-classes-as-listeners"></a>
 ## Using Classes as Listeners
 
 In some cases, you may wish to use a class to handle an event rather than a Closure. Class event listeners will be resolved out of the [Application IoC container](application.md), providing you with the full power of dependency injection on your listeners.

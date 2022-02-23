@@ -1,6 +1,6 @@
 # Templating
 
-October extends the [Twig template language](http://twig.sensiolabs.org/documentation) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
+October extends the [Twig template language](https://twig.symfony.com/doc/) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
 
 ## Variables
 
@@ -107,5 +107,5 @@ There are some features offered by Twig that are not supported by October. They 
 
 Tag | Equivalent
 ------------- | -------------
-`{% extend %}` | Use [Layouts](http://octobercms.com/docs/cms/layouts) or `{% placeholder %}`
+`{% extend %}` | Use [Layouts](https://octobercms.com/docs/cms/layouts) or `{% placeholder %}`
 `{% include %}` | Use `{% partial %}` or `{% content %}`

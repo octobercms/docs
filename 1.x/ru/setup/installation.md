@@ -15,7 +15,7 @@
 
 Для некоторых операционных систем требуются ручная установка PHP JSON extension (Ubuntu `apt-get install php5-json`).
 
-Если Вы используете SQL Server, то Вам потребуется установить [group concatenation](https://groupconcat.codeplex.com/).
+Если Вы используете SQL Server, то Вам потребуется установить [group concatenation](https://github.com/orlando-colamatteo/ms-sql-server-group-concat-sqlclr).
 
 <a name="wizard-installation" class="anchor"></a>
 ## Мастер установки

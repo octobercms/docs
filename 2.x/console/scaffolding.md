@@ -32,12 +32,14 @@ The `create:formwidget` command generates a back-end form widget, view and basic
 
     php artisan create:formwidget Acme.Blog CategorySelector
 
+<a id="oc-create-a-report-widget"></a>
 ## Create a Report Widget
 
 The `create:reportwidget` command generates a back-end report widget, view and basic asset files. The first parameter specifies the author and plugin name. The second parameter specifies the report widget class name.
 
     php artisan create:reportwidget Acme.Blog TopPosts
 
+<a id="oc-create-a-console-command"></a>
 ## Create a Console Command
 
 The `create:command` command generates a [new console command](../console/development.md). The first parameter specifies the author and plugin name. The second parameter specifies the command name.
