@@ -215,9 +215,9 @@ public function getStateOptions()
 }
 ```
 
-### Page list Properties
+### Page List Properties
 
-Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../cms/markup.md#oc-page-filter)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
+Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../markup/filter-page.md)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
 
 ```php
 public function defineProperties()
@@ -485,7 +485,7 @@ public function onRun()
 
 ## Injecting Page Assets with Components
 
-Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/page.md#oc-injecting-page-assets-programmatically). Example:
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/pages.md#oc-injecting-page-assets-programmatically). Example:
 
 ```php
 public function onRun()

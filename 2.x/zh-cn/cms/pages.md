@@ -10,6 +10,7 @@ url = "/"
 <h1>Hello, world!</h1>
 ```
 
+<a id="oc-configuration"></a>
 ## 页面配置
 
 页面配置定义在页面模板文件的[配置部分](themes.md#oc-configuration-section)中。 页面配置定义了路由和渲染页面及其[组件](components.md)所需的页面参数，在另一篇文章中进行了解释。 页面支持以下配置参数：
@@ -22,6 +23,7 @@ url = "/"
 **description** | 后端界面的页面描述，可选。
 **hidden** | 隐藏页面只能由登录的后端用户访问，可选。
 
+<a id="oc-url-syntax"></a>
 ### URL 语法
 
 页面 URL 使用 **url** 配置参数定义。 URL 应以正斜杠字符开头，并且可以包含参数。 没有参数的 URL 是固定且严格的。 在以下示例中，页面 URL 是 `/blog`。
@@ -159,6 +161,7 @@ public function onStart()
 }
 ```
 
+<a id="oc-handling-forms"></a>
 ### 处理表单
 
 您可以使用在页面或布局中定义的处理程序方法处理标准表单 [PHP 部分](themes.md#oc-php-section)(处理 AJAX 请求在 [AJAX 框架](../ajax/introduction.md) 中有说明) 文章)。 使用 [`form_open()`](markup#oc-standard-form) 函数定义引用事件处理程序的表单。 例子：
@@ -194,10 +197,12 @@ function onHandleForm()
 
 如果主题包含一个 URL 为 `/404` 的页面，当系统找不到请求的页面时会显示它。
 
+<a id="oc-error-page"></a>
 ## 错误页面
 
 默认情况下，任何错误都会显示一个详细的错误页面，其中包含文件内容、行号和发生错误的堆栈跟踪。 您可以通过在 `config/app.php` 脚本中将配置值 `debug` 设置为 **false** 并使用 URL `/error` 创建一个页面来显示自定义错误页面。
 
+<a id="oc-page-variables"></a>
 ## 页面变量
 
 可以在[PHP代码部分](../cms/themes.md#oc-php-section)或[组件](../cms/components.md)中通过引用`$this->page`。
@@ -217,6 +222,7 @@ function onEnd()
 
 更多信息可以在 [标记指南中的`this.page`](../markup/this-page) 中找到。
 
+<a id="oc-injecting-page-assets-programmatically"></a>
 ## 以编程方式注入页面资产
 
 如果需要，您可以使用控制器的 `addCss` 和 `addJs` 方法将资产(CSS 和 JavaScript 文件)注入页面。 它可以在页面的 [PHP 部分](themes.md#oc-php-section) 或 [布局](layout.md) 模板中定义的 `onStart` 函数中完成。 例子：

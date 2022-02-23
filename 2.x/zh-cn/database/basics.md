@@ -36,6 +36,7 @@
 
 如果你想重写主数组中的配置，只需要修改 `read` 和 `write` 数组即可。所以，这个例子中： `192.168.1.1`和`192.168.1.2` 将作为 「读」 连接主机，而 `192.168.1.3` 将作为 「写」 连接主机。这两个连接会共享 `mysql` 数组的各项配置，如数据库的凭据(用户名 / 密码)，前缀，字符编码等。
 
+<a id="oc-running-raw-sql-queries"></a>
 ## 运行原生 SQL 查询
 
 一旦配置好数据库连接后，便可以使用 `DB` facade 运行查询。 `DB` facade 为每种类型的查询提供了方法： `select`，`update`，`insert`，`delete` 和 `statement`。
@@ -98,6 +99,7 @@ $deleted = Db::delete('delete from users');
 Db::statement('drop table users');
 ```
 
+<a id="oc-multiple-database-connections"></a>
 ## 使用多个数据库连接
 
 当使用多个数据库连接时，你可以通过 `DB` Facade 的 `connection` 方法访问每一个连接。传递给 `connection`方法的参数 `name` 应该是 `config/database.php` 配置文件中 connections 数组中的一个值：

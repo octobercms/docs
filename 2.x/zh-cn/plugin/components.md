@@ -218,7 +218,7 @@ public function getStateOptions()
 
 ### 页面列表属性
 
-有时组件需要创建指向网站页面的链接。 例如，博客文章列表包含指向博客文章详细信息页面的链接。 在这种情况下，组件应该知道帖子详细信息页面文件名(然后它可以使用 [页面 Twig 过滤器](../cms/markup.md#oc-page-filter))。 October包括一个用于创建动态下拉列表页面的助手。 下一个示例定义了 postPage 属性，该属性显示页面列表：
+有时组件需要创建指向网站页面的链接。 例如，博客文章列表包含指向博客文章详细信息页面的链接。 在这种情况下，组件应该知道帖子详细信息页面文件名(然后它可以使用 [页面 Twig 过滤器](../markup/filter-page.md))。 October包括一个用于创建动态下拉列表页面的助手。 下一个示例定义了 postPage 属性，该属性显示页面列表：
 
 ```php
 public function defineProperties()
@@ -484,7 +484,7 @@ public function onRun()
 
 ## 使用组件注入页面资产
 
-组件可以将资产(CSS 和 JavaScript 文件)注入到它们所附加的页面或布局中。 使用控制器的 `addCss` 和 `addJs` 方法将资产添加到 CMS 控制器。 它可以在组件的 `onRun` 方法中完成。 请阅读有关[在页面文章中注入资产](../cms/page.md#oc-injecting-page-assets-programmatically)的更多详细信息。 例子：
+组件可以将资产(CSS 和 JavaScript 文件)注入到它们所附加的页面或布局中。 使用控制器的 `addCss` 和 `addJs` 方法将资产添加到 CMS 控制器。 它可以在组件的 `onRun` 方法中完成。 请阅读有关[在页面文章中注入资产](../cms/pages.md#oc-injecting-page-assets-programmatically)的更多详细信息。 例子：
 
 ```php
 public function onRun()

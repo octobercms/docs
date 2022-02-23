@@ -96,7 +96,7 @@ form:
 });
 ```
 
-然后可以使用名为`this.theme`的[默认页面变量](../cms/markup.md#oc-default-variables) 在任何主题模板中访问该值。
+然后可以使用名为`this.theme`的[默认页面变量](../markup/this-theme.md) 在任何主题模板中访问该值。
 
 ```twig
 <h1>欢迎来到 {{ this.theme.site_name }}!</h1>

@@ -10,6 +10,7 @@ October CMS 包括几个命令行界面 (CLI) 命令和实用程序，可让您�
 
     php artisan october:update
 
+<a id="oc-database-migration"></a>
 ### 数据库迁移
 
 `october:migrate` 命令将执行数据库迁移，创建数据库表并执行由系统和 [插件版本历史](../plugin/updates.md) 提供的种子脚本。 迁移命令可以运行多次，它只会执行一次迁移或种子脚本，这意味着只应用新的更改。
@@ -38,6 +39,7 @@ October CMS 包含这些用于管理项目的命令。
 
     php artisan project:sync
 
+<a id="oc-set-project"></a>
 ### 设置项目
 
 `project:set` 设置当前安装的许可证密钥。
@@ -134,7 +136,7 @@ October 包含许多用于管理主题的命令。
 
 ### 检查受保护
 
-`theme:check` - 对主题执行系统范围的检查，以查看它们是否应标记为只读并防止更改。 此命令将遍历每个主题并检查它是否已与 composer 一起安装，如果是，则添加一个 [主题锁定文件](../cms/themes.md#oc-child-themes-lock) 并创建一个子主题 .
+`theme:check` - 对主题执行系统范围的检查，以查看它们是否应标记为只读并防止更改。 此命令将遍历每个主题并检查它是否已与 composer 一起安装，如果是，则添加一个 [主题锁定文件](../cms/themes.md#oc-child-themes) 并创建一个子主题 .
 
     php artisan theme:check
 

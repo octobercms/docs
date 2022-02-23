@@ -396,7 +396,7 @@ class User extends Model
 
 #### Dynamic Validation Rules
 
-You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model.md#oc-events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
+You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model.md#oc-model-events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
 
 ```php
 public function beforeValidate()

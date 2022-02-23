@@ -96,7 +96,7 @@ form:
 });
 ```
 
-The value can then be accessed inside any of the Theme templates using the [default page variable](../cms/markup.md#oc-default-variables) called `this.theme`.
+The value can then be accessed inside any of the Theme templates using the [global Twig variable](../markup/this-theme.md) called `this.theme`.
 
 ```twig
 <h1>Welcome to {{ this.theme.site_name }}!</h1>

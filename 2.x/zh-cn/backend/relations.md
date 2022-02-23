@@ -63,7 +63,7 @@ items:
 **pivot** | 对表单字段定义文件的引用，用于 [与数据透视表数据的关系](#belongs-to-many-with-pivot-data)。
 **emptyMessage** | 当关系为空时显示的消息，可选。
 **readOnly** | 禁用添加、更新、删除或创建关系的能力。 默认值：false
-**deferredBinding** | 当会话密钥可用时，[使用会话密钥延迟所有绑定操作](../database/model.md#oc-deferred-binding)。 默认值：false
+**deferredBinding** | 当会话密钥可用时，[使用会话密钥延迟所有绑定操作](../database/relations.md#oc-deferred-binding)。 默认值：false
 
 可以为 **view** 或 **manage** 选项指定这些配置值，适用于列表、表单或两者的渲染类型。
 

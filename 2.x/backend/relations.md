@@ -63,7 +63,7 @@ Option | Description
 **pivot** | a reference to form field definition file, used for [relations with pivot table data](#belongs-to-many-with-pivot-data).
 **emptyMessage** | a message to display when the relationship is empty, optional.
 **readOnly** | disables the ability to add, update, delete or create relations. default: false
-**deferredBinding** | [defers all binding actions using a session key](../database/model.md#oc-deferred-binding) when it is available. default: false
+**deferredBinding** | [defers all binding actions using a session key](../database/relations.md#oc-deferred-binding) when it is available. default: false
 
 These configuration values can be specified for the **view** or **manage** options, where applicable to the render type of list, form or both.
 

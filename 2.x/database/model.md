@@ -453,6 +453,7 @@ Now you may pass the parameters when calling the scope:
 $users = User::applyType('admin')->get();
 ```
 
+<a id="oc-model-events"></a>
 ## Events
 
 Models fire several events, allowing you to hook into various points in the model's lifecycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
@@ -488,7 +489,7 @@ public function beforeCreate()
 
 > **Note**: Relationships created with [deferred-binding](relations#oc-deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
 
-### Basic usage
+### Basic Usage
 
 Whenever a new model is saved for the first time, the `beforeCreate` and `afterCreate` events will fire. If a model already existed in the database and the `save` method is called, the `beforeUpdate` / `afterUpdate` events will fire. However, in both cases, the `beforeSave` / `afterSave` events will fire.
 

@@ -10,6 +10,7 @@ url = "/"
 <h1>Hello, world!</h1>
 ```
 
+<a id="oc-configuration"></a>
 ## Page Configuration
 
 Page configuration is defined in the [Configuration Section](themes.md#oc-configuration-section) of the page template file. The page configuration defines the page parameters, required for the routing and rendering the page and its [Components](components.md), which are explained in another article. The following configuration parameters are supported for pages:
@@ -22,6 +23,7 @@ Parameter | Description
 **description** | the page description for the back-end interface, optional.
 **hidden** | hidden pages are accessible only by logged-in back-end users, optional.
 
+<a id="oc-url-syntax"></a>
 ### URL Syntax
 
 The page URL is defined with the **url** configuration parameter. URLs should start with the forward slash character, and can contain parameters. URLs without parameters are fixed and strict. In the following example, the page URL is `/blog`.
@@ -159,6 +161,7 @@ public function onStart()
 }
 ```
 
+<a id="oc-handling-forms"></a>
 ### Handling Forms
 
 You can handle standard forms with handler methods defined in the page or layout [PHP section](themes.md#oc-php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction.md) article). Use the [`form_open()`](markup#oc-standard-form) function to define a form that refers to an event handler. Example:
@@ -194,10 +197,12 @@ If you want to refer to a handler defined in a specific [component](components.m
 
 If the theme contains a page with the URL `/404`, it is displayed when the system can't find a requested page.
 
+<a id="oc-error-page"></a>
 ## Error Page
 
 By default, any errors will be shown with a detailed error page containing the file contents, line number, and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script, and creating a page with the URL `/error`.
 
+<a id="oc-page-variables"></a>
 ## Page Variables
 
 The properties of a page can be accessed in the [PHP code section](../cms/themes.md#oc-php-section), or [Components](../cms/components.md) by referencing `$this->page`.
@@ -217,6 +222,7 @@ They can also be accessed in the markup using the [`this.page` variable](../mark
 
 More information can be found at [`this.page` in the Markup guide](../markup/this-page).
 
+<a id="oc-injecting-page-assets-programmatically"></a>
 ## Injecting Page Assets Programmatically
 
 If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes.md#oc-php-section) of a page or [layout](layout.md) template. Example:

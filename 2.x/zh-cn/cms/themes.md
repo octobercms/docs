@@ -36,6 +36,7 @@ themes/
 
 > 活动主题通过`config/cms.php` 文件中的`active_theme` 参数或System > CMS > Front-end(中文后台可在设置>前端主题中选择)后端页面上的主题选择器设置。 使用主题选择器设置的主题会覆盖 `config/cms.php` 文件中的值。
 
+<a id="oc-subdirectories"></a>
 ### 子目录
 
 October CMS 支持 **pages**、**partials**、**layouts** 和 **content** 文件的单级子目录，而 **assets** 目录可以具有无限的深度。 这种方法简化了大型网站的组织。 在下面的示例目录结构中，**pages** 和 **partials** 目录包含 **blog** 子目录，**content** 目录包含 **home** 子目录。
@@ -170,6 +171,7 @@ Twig 部分定义了模板要呈现的标记。在 Twig 部分，您可以使用
 
 > **注意**：图像和样式表等资产文件不会保存在数据库中，并且无法在没有访问文件系统的情况下进行修改。
 
+<a id="oc-child-themes"></a>
 ## 子主题
 
 子主题允许主题继承的可能性。当您有第三方主题或处于只读模式的主题时，这是一个很好的用途。子主题将引用父主题并将其用作备份。

@@ -36,6 +36,7 @@ themes/
 
 > The active theme is set with the `active_theme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
 
+<a id="oc-subdirectories"></a>
 ### Subdirectories
 
 October CMS supports a single level of subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
@@ -170,6 +171,7 @@ Alternatively you can enable this feature globally for all themes with the confi
 
 > **Note**: Assets files like images and stylesheets do not save in the database and cannot be modified without access to the filesystem.
 
+<a id="oc-child-themes"></a>
 ## Child Themes
 
 Child themes allow for the possibility of theme inheritence. A good use of this is when you have a third party theme or a theme that is in read-only mode. A child theme will reference a parent and use it as a fallback source.

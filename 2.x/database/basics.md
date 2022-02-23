@@ -36,6 +36,7 @@ Note that two keys have been added to the configuration array: `read` and `write
 
 We only need to place items in the `read` and `write` arrays if we wish to override the values in the main array. So, in this case, `192.168.1.1` will be used as the "read" connection, while `192.168.1.2` will be used as the "write" connection. The database credentials, prefix, character set, and all other options in the main `mysql` array will be shared across both connections.
 
+<a id="oc-running-raw-sql-queries"></a>
 ## Running Raw SQL Queries
 
 Once you have configured your database connection, you may run queries using the `Db` facade. The `Db` facade provides methods for each type of query: `select`, `update`, `insert`, `delete`, and `statement`.
@@ -98,6 +99,7 @@ Some database statements should not return any value. For these types of operati
 Db::statement('drop table users');
 ```
 
+<a id="oc-multiple-database-connections"></a>
 ## Multiple Database Connections
 
 When using multiple connections, you may access each connection via the `connection` method on the `Db` facade. The `name` passed to the `connection` method should correspond to one of the connections listed in your `config/database.php` configuration file:

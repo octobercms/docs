@@ -396,7 +396,7 @@ class User extends Model
 
 #### 动态验证规则
 
-您可以通过覆盖 `beforeValidate` [模型事件](../database/model.md#oc-events) 方法来动态应用规则。 这里我们检查 `is_remote` 属性是否为 `false`，然后动态设置 `latitude` 和 `longitude` 属性为必填字段。
+您可以通过覆盖 `beforeValidate` [模型事件](../database/model.md#oc-model-events) 方法来动态应用规则。 这里我们检查 `is_remote` 属性是否为 `false`，然后动态设置 `latitude` 和 `longitude` 属性为必填字段。
 
 ```php
 public function beforeValidate()

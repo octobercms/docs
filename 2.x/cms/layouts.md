@@ -69,6 +69,7 @@ meta_title = "{{ post.title }} - Blog"
 
 > **Note**: Only basic Twig variables are supported. Filters, tags and functions cannot be used.
 
+<a id="oc-placeholders"></a>
 ## Placeholders
 
 Placeholders allow pages to inject content to the layout. Placeholders are defined in the layout templates with the `{% placeholder %}` tag. The next example shows a layout template with a placeholder **head** defined in the HTML HEAD section.

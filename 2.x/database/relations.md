@@ -1172,21 +1172,22 @@ $comment->text = 'Edit to this comment!';
 $comment->save();
 ```
 
+<a id="oc-deferred-binding"></a>
 ## Deferred Binding
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
 
 You can defer any number of **slave** models against a **master** model using a **session key**. When the master record is saved along with the session key, the relationships to slave records are updated automatically for you. Deferred bindings are supported in the back-end [Form behavior](../backend/form.md) automatically, but you may want to use this feature in other places.
 
-### Generating a session key
+### Generating a Session Key
 
-The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../cms/markup.md#oc-forms) generates a hidden field containing the session key automatically.
+The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../markup/function-form.md) generates a hidden field containing the session key automatically.
 
 ```php
 $sessionKey = uniqid('session_key', true);
 ```
 
-### Defer a relation binding
+### Defer a Relation Binding
 
 The comment in the next example will not be added to the post unless the post is saved.
 
@@ -1201,7 +1202,7 @@ $post->comments()->add($comment, $sessionKey);
 
 > **Note**: the `$post` object has not been saved but the relationship will be created if the saving happens.
 
-### Defer a relation unbinding
+### Defer a Relation Unbinding
 
 The comment in the next example will not be deleted unless the post is saved.
 
@@ -1211,7 +1212,7 @@ $post = Post::find(1);
 $post->comments()->remove($comment, $sessionKey);
 ```
 
-### List all bindings
+### List All Bindings
 
 Use the `withDeferred` method of a relation to load all records, including deferred. The results will include existing relations as well.
 
@@ -1219,7 +1220,7 @@ Use the `withDeferred` method of a relation to load all records, including defer
 $post->comments()->withDeferred($sessionKey)->get();
 ```
 
-### Cancel all bindings
+### Cancel All Bindings
 
 It's a good idea to cancel deferred binding and delete the slave objects rather than leaving them as orphans.
 
@@ -1227,7 +1228,7 @@ It's a good idea to cancel deferred binding and delete the slave objects rather 
 $post->cancelDeferred($sessionKey);
 ```
 
-### Commit all bindings
+### Commit All Bindings
 
 You can commit (bind or unbind) all deferred bindings when you save the master model by providing the session key with the second argument of the `save` method.
 
@@ -1243,7 +1244,7 @@ The same approach works with the model's `create` method:
 $post = Post::create(['title' => 'First blog post'], $sessionKey);
 ```
 
-### Lazily commit bindings
+### Lazily Commit Bindings
 
 If you are unable to supply the `$sessionKey` when saving, you can commit the bindings at any time using the the next code:
 
@@ -1251,7 +1252,7 @@ If you are unable to supply the `$sessionKey` when saving, you can commit the bi
 $post->commitDeferred($sessionKey);
 ```
 
-### Clean up orphaned bindings
+### Clean Up Orphaned Bindings
 
 Destroys all bindings that have not been committed and are older than 1 day:
 

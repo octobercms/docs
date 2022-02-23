@@ -197,7 +197,7 @@ content[title]:
     sortable: false
 ```
 
-上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该字段可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#oc-events) 在本地数据库表中复制其值。
+上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该字段可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#oc-model-events) 在本地数据库表中复制其值。
 
 ## 可用的字段类型
 

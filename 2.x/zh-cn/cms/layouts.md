@@ -69,6 +69,7 @@ meta_title = "{{ post.title }} - Blog"
 
 > **注意**：仅支持基本的 Twig 变量。不能使用过滤器、标签和函数。
 
+<a id="oc-placeholders"></a>
 ## 占位符
 
 占位符允许页面向布局注入内容。占位符在布局模板中使用 `{% placeholder %}` 标签定义。下一个示例显示了一个布局模板，其中在 HTML HEAD 中定义了一个占位符 **head**。

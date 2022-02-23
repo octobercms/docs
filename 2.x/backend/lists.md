@@ -198,7 +198,7 @@ content[title]:
     sortable: false
 ```
 
-The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#oc-events).
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#oc-model-events).
 
 ## Available Column Types
 
