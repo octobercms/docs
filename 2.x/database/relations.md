@@ -83,6 +83,7 @@ class Category extends Model
 }
 ```
 
+<a id="oc-relationship-types"></a>
 ## Relationship Types
 
 The following relations types are available:

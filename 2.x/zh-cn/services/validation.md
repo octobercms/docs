@@ -69,6 +69,7 @@ $failed = $validator->failed();
 
 `Validator` 类提供了一些用于验证文件的规则，例如 `size`、`mimes` 等。 验证文件时，您可以简单地将它们与您的其他数据一起传递给验证器。
 
+<a id="oc-working-with-error-messages"></a>
 ## 处理错误信息
 
 在 `Validator` 实例上调用 `messages` 方法后，您将收到一个 `Illuminate\Support\MessageBag` 实例，该实例具有多种处理错误消息的便捷方法。
@@ -521,6 +522,7 @@ $v->sometimes(['reason', 'cost'], 'required', function($input) {
 
 >**注意**：传递给您的 `Closure` 的 `$input` 参数将是 `Illuminate\Support\Fluent` 的一个实例，并且可以用作访问您的输入和文件的对象。
 
+<a id="oc-validating-arrays"></a>
 ## 验证数组
 
 验证基于数组的表单输入字段并不一定很麻烦。 您可以使用"点符号"来验证数组内的属性。 例如，如果传入的 HTTP 请求包含 `photos[profile]` 字段，您可以像这样验证它：
@@ -559,6 +561,7 @@ $validator = Validator::make(Input::all(), [
 ]);
 ```
 
+<a id="oc-custom-error-messages"></a>
 ## 自定义错误消息
 
 您可以使用自定义错误消息而不是默认值进行验证。 有几种方法可以指定自定义消息。
@@ -614,6 +617,7 @@ return  [
 Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 ```
 
+<a id="oc-custom-validation-rules"></a>
 ## 自定义验证规则
 
 有许多有用的验证规则，但是，您可能希望指定一些您自己的规则。 首先，您应该决定您的规则是应该[全局注册](#globally-registered-rules)，还是使用[本地规则对象](#local-rule-objects)。

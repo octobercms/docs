@@ -90,7 +90,7 @@ Option | Description
 **scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the search query. The first argument will contain the query object (as per a regular scope method), the second will contain the search term, and the third will be an array of the columns to be searched.
 **searchOnEnter** | setting this to true will make the search widget wait for the Enter key to be pressed before it starts searching (the default behavior is that it starts searching automatically after someone enters something into the search field and then pauses for a short moment).  Default: false.
 
-The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](controls.md#oc-scoreboards) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms.md):
+The toolbar buttons partial referred above should contain the toolbar control definition with some buttons. The partial could also contain a [scoreboard control](https://octobercms.com/docs/ui/scoreboard) with charts. Example of a toolbar partial with the **New Post** button referring to the **create** action provided by the [form behavior](forms.md):
 
 ```php
 <div data-control="toolbar">
@@ -200,6 +200,7 @@ content[title]:
 
 The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#oc-model-events).
 
+<a id="oc-available-column-types"></a>
 ## Available Column Types
 
 There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#custom-column-types).
@@ -402,7 +403,7 @@ full_name:
 ['open' => 'Open', 'closed' => 'Closed']
 ```
 
-The available options are defined on the model as [dropdown options](forms.md#oc-field-dropdown).
+The available options are defined on the model as [dropdown options](forms.md#field-dropdown).
 
 ```yaml
 status:
@@ -484,6 +485,7 @@ Usually lists are displayed in the index [view](controllers-ajax.md) file. Since
 <?= $this->listRender() ?>
 ```
 
+<a id="oc-multiple-list-definitions"></a>
 ## Multiple List Definitions
 
 The list behavior can support multiple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
@@ -501,6 +503,7 @@ Each definition can then be displayed by passing the definition name as the firs
 <?= $this->listRender('templates') ?>
 ```
 
+<a id="oc-using-list-filters"></a>
 ## Using List Filters
 
 Lists can be filtered by [adding a filter definition](#filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.

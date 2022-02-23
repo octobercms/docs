@@ -69,6 +69,7 @@ php artisan serve
 - 禁用[调试模式](../setup/configuration.md#oc-debug-mode)
 - 使用 [公共文件夹](../setup/deployment.md#oc-public-folder) 以提高安全性
 
+<a id="oc-setting-up-the-scheduler"></a>
 ###  设置调度程序
 
 为使*计划任务*正确运行，您应该将以下 Cron 条目添加到您的服务器。 编辑 crontab 通常是使用命令 `crontab -e` 来执行的。

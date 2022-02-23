@@ -43,6 +43,7 @@ Event::listen('auth.login', [$this, 'LoginHandler']);
 
 > **Note**: The callable method can choose to specify all, some or none of the arguments. Either way the event will not throw any errors unless it specifies too many.
 
+<a id="oc-where-to-register-listeners"></a>
 ### Where to Register Listeners
 
 The most common place is the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods).

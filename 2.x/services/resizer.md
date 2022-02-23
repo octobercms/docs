@@ -34,6 +34,7 @@ $image->save('path/to/new/file.jpg');
 
 > **Note**: There is also a `|resize` [markup filter](../markup/filter-resize.md) that can be used for resizing images in your themes.
 
+<a id="oc-resize-parameters"></a>
 ### Resize Parameters
 
 The following elements are supported in the options array are supported:

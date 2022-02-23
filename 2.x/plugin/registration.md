@@ -36,12 +36,14 @@ plugins/
       Plugin.php   <=== Plugin Registration File
 ```
 
-> **Note**: if you are developing a plugin for the [Marketplace](https://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates) file is required.
+> **Note**: if you are developing a plugin for the [Marketplace](https://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates.md) file is required.
 
+<a id="oc-plugin-namespaces"></a>
 ### Plugin Namespaces
 
 Plugin namespaces are essential, especially if you are going to publish your plugins on the [October Marketplace](https://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
+<a id="oc-registration-file"></a>
 ## Registration File
 
 The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
@@ -75,6 +77,7 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
+<a id="oc-registration-methods"></a>
 ### Registration Methods
 
 The following methods are supported in the plugin registration class:
@@ -110,6 +113,7 @@ Key | Description
 **iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 
+<a id="oc-routing-and-initialization"></a>
 ## Routing and Initialization
 
 Plugin registration files can contain two methods `boot` and `register`. With these methods you can do anything you like, like register routes or attach handlers to events.
@@ -133,6 +137,7 @@ Route::get('api_acme_blog/cleanup_posts', function() {
 });
 ```
 
+<a id="oc-dependency-definitions"></a>
 ## Dependency Definitions
 
 A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
@@ -155,6 +160,7 @@ Dependency definitions will affect how the plugin operates and [how the update p
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 
+<a id="oc-extending-twig"></a>
 ## Extending Twig
 
 Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags` method of the plugin registration class. The next example registers two Twig filters and two functions.
@@ -186,6 +192,7 @@ public function makeTextAllCaps($text)
 }
 ```
 
+<a id="oc-navigation-menus"></a>
 ## Navigation Menus
 
 Plugins can extend the back-end navigation menus by overriding the `registerNavigation` method of the [Plugin registration class](#registration-file). This section shows you how to add menu items to the back-end navigation area. An example of registering a top-level navigation menu item with two sub-menu items:

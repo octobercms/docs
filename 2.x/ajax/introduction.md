@@ -62,7 +62,7 @@ The **mypartial** partial contains markup that reads the `result` variable.
 The result is {{ result }}
 ```
 
-The **onTest** handler method accessed the form data using the `input` [helper method](../services/helper.md#oc-method-input) and the result is passed to the `result` page variable.
+The **onTest** handler method accessed the form data using the `input` [helper method](../services/helper.md#method-input) and the result is passed to the `result` page variable.
 
 ```php
 function onTest()

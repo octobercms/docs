@@ -1,6 +1,6 @@
 # this.session
 
-您可以通过 `this.session` 访问当前session管理器，它会返回对象 `Illuminate\Session\SessionManager` [当前session配置](../services/session.md#oc-configuration).
+您可以通过 `this.session` 访问当前session管理器，它会返回对象 `Illuminate\Session\SessionManager` [当前session配置](../services/session.md).
 
 ## 从session检索数据
 

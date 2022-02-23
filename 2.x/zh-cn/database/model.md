@@ -287,19 +287,7 @@ Flight::where('is_active', true)
 
 `update` 方法需要一个表示应该更新的列的字段和值的数组。
 
-<!--
-#### Update or Insert / `upsert()` (Batch query to process multiple rows in one DB call)
-
-If you would like to perform multiple "upserts" in a single query, then you should use the `upsert` method instead. The method's first argument consists of the values to insert or update, while the second argument lists the column(s) that uniquely identify records within the associated table. The method's third and final argument is an array of the columns that should be updated if a matching record already exists in the database. The `upsert` method will automatically set the `created_at` and `updated_at` timestamps if timestamps are enabled on the model:
-
-    MyVendor\MyPlugin\Models\Flight::upsert([
-        ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
-        ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
-    ], ['departure', 'destination'], ['price']);
-
-> **Note::** All databases except SQL Server require the columns in the second argument of the `upsert` method to have a "primary" or "unique" index.
--->
-
+<a id="oc-mass-assignment"></a>
 ### 批量赋值
 
 你也可以使用 `create` 方法来保存新模型，此方法会返回模型实例。不过，在使用之前，您需要在模型上指定一个 `fillable` 或 `guarded` 属性，因为所有模型都默认不可进行批量赋值。注意 `fillable` 或 `guarded` 都不会影响后端表单的提交，只影响 `create` 或 `fill` 方法。

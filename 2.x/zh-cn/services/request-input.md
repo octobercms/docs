@@ -24,7 +24,7 @@ if (Input::has('name')) {
 }
 ```
 
-#### 获取请求的所有输入 
+#### 获取请求的所有输入
 
 ```php
 $input = Input::all();
@@ -50,7 +50,7 @@ $input = Input::get('products.0.name');
 
 默认情况下，October CMS 创建的所有 cookie 都经过加密并使用身份验证代码签名，这意味着如果它们被客户端更改，它们将被视为无效。 在 `system.unencrypt_cookies` 配置键中命名的 cookie 不会被加密。
 
-#### 检索 Cookie 值 
+#### 检索 Cookie 值
 
 ```php
 $value = Cookie::get('name');
@@ -90,7 +90,7 @@ $cookie = Cookie::forever('name', 'value');
 ],
 ```
 
-或者，对于插件，您也可以从插件的`Plugin.php`动态添加这些。 
+或者，对于插件，您也可以从插件的`Plugin.php`动态添加这些。
 
 ```php
 public function boot()
@@ -132,6 +132,7 @@ return Redirect::to('form')->withInput(Input::except('password'));
 Input::old('username');
 ```
 
+<a id="oc-files"></a>
 ## 文件
 
 #### 检索上传的文件
@@ -230,7 +231,7 @@ if (Request::is('admin/*')) {
 $url = Request::url();
 ```
 
-#### 检索请求 URI 
+#### 检索请求 URI
 
 ```php
 $segment = Request::segment(1);

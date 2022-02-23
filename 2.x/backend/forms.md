@@ -1321,6 +1321,7 @@ The **update.htm** view represents the Update page that allows users to update o
 <?= Form::close() ?>
 ```
 
+<a id="oc-preview-view"></a>
 ### Preview View
 
 The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.

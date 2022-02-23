@@ -24,6 +24,7 @@ php artisan project:set <license key>
 
 ## 安全性和性能
 
+<a id="oc-public-folder"></a>
 ### 公共文件夹
 
 为了在生产环境中获得最高安全性，您可以将 Web 服务器配置为使用 **public/** 文件夹，以确保只能访问公共文件。首先，您需要使用 `october:mirror` 命令生成一个公共文件夹。

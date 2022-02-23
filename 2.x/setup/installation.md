@@ -67,6 +67,7 @@ For example, in production environments you may want to do the following:
 - Disable [debug mode](../setup/configuration.md#oc-debug-mode)
 - Use a [public folder](../setup/deployment.md#oc-public-folder) for additional security
 
+<a id="oc-setting-up-the-scheduler"></a>
 ### Setting Up The Scheduler
 
 For *scheduled tasks* to operate correctly, you should add the following Cron entry to your server. Editing the crontab is commonly performed with the command `crontab -e`.

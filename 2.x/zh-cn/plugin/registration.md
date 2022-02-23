@@ -36,12 +36,14 @@ plugins/
       Plugin.php   <=== 插件注册文件
 ```
 
-> **注意**：如果您正在为[市场](https://octobercms.com/help/site/marketplace) 开发插件，则需要[updates/version.yaml](updates) 文件。
+> **注意**：如果您正在为[市场](https://octobercms.com/help/site/marketplace) 开发插件，则需要[updates/version.yaml](updates.md) 文件。
 
+<a id="oc-plugin-namespaces"></a>
 ### 插件命名空间
 
 插件命名空间是必不可少的，特别是如果您打算在 [October市场](https://octobercms.com/plugins) 上发布您的插件。当您在市场上注册为作者时，系统会要求您提供作者代码，该代码是所有插件的根命名空间。注册时只能指定一次作者代码。 市场提供的默认作者代码由作者名字和姓氏组成：JohnSmith。注册后无法更改代码。你所有的插件命名空间都应该在根命名空间下定义，例如`\JohnSmith\Blog`。
 
+<a id="oc-registration-file"></a>
 ## 注册文件
 
 **Plugin.php** 文件，称为*插件注册文件*，是一个初始化脚本，声明了插件的核心功能和信息。注册文件可以提供以下内容：
@@ -75,6 +77,7 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
+<a id="oc-registration-methods"></a>
 ### 注册方法
 
 插件注册类支持以下方法：
@@ -110,6 +113,7 @@ class Plugin extends \System\Classes\PluginBase
 **iconSvg** | 用于代替标准图标的 SVG 图标。 SVG 图标应该是一个矩形并且可以支持颜色，可选。
 **homepage** | 指向作者网站地址的链接，可选。
 
+<a id="oc-routing-and-initialization"></a>
 ## 路由和初始化
 
 插件注册文件可以包含两个方法`boot`和`register`。 使用这些方法，您可以做任何您喜欢的事情，例如注册路由或将处理程序附加到事件。
@@ -133,6 +137,7 @@ Route::get('api_acme_blog/cleanup_posts', function() {
 });
 ```
 
+<a id="oc-dependency-definitions"></a>
 ## 依赖定义
 
 插件可以通过在[插件注册文件](#registration-file) 中定义`$require` 属性来依赖其他插件，该属性应包含被视为需求的插件名称数组。 依赖 **Acme.User** 插件的插件可以通过以下方式声明此要求：
@@ -155,6 +160,7 @@ class Plugin extends \System\Classes\PluginBase
 
 依赖定义可能很复杂，但应注意防止循环引用。 依赖图应该始终是有向的，循环依赖被认为是设计错误。
 
+<a id="oc-extending-twig"></a>
 ## 扩展Twig
 
 可以使用插件注册类的`registerMarkupTags` 方法在CMS中注册自定义Twig过滤器和函数。下一个示例注册两个 Twig 过滤器和两个函数。
@@ -186,6 +192,7 @@ public function makeTextAllCaps($text)
 }
 ```
 
+<a id="oc-navigation-menus"></a>
 ## 导航菜单
 
 插件可以通过覆盖[插件注册类](#registration-file)的`registerNavigation`方法来扩展后端导航菜单。 本节向您展示如何将菜单项添加到后端导航区域。 注册具有两个子菜单项的顶级导航菜单项的示例：

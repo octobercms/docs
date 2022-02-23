@@ -280,6 +280,7 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 });
 ```
 
+<a id="oc-message-content"></a>
 ## 消息内容
 
 可以使用邮件视图或邮件模板在October发送邮件消息。 邮件视图由文件系统中的应用程序或插件**/views**目录中提供。 而邮件模板是通过 *System(系统) > Mail templates(邮件模板)* 使用后端界面管理的。 所有邮件消息都支持使用 Twig 进行标记。
@@ -375,6 +376,7 @@ Mail::send('this.is.my.email', $data, function($message) use ($user)
 Default | default | 用于面向公众的前端邮件
 System | system | 用于内部、后端邮件
 
+<a id="oc-registering-mail-layouts-templates-partials"></a>
 ### 注册邮件布局、模板和部件
 
 邮件视图可以注册为模板，这些模板在后端自动生成，以供定制。 可以通过 *Settings(设置) > Mail templates(邮件模板)* 菜单自定义邮件模板。 可以通过覆盖 [插件注册类](../plugin/registration.md#oc-registration-file) 的 `registerMailTemplates` 方法来注册模板。

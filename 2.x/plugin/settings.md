@@ -75,6 +75,7 @@ echo Settings::get('api_key');
 echo Settings::get('is_activated', true);
 ```
 
+<a id="oc-backend-settings-pages"></a>
 ## Backend Settings Pages
 
 The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
@@ -142,6 +143,7 @@ public function __construct()
 
 The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#settings-link-registration).
 
+<a id="oc-file-based-configuration"></a>
 ## File-based Configuration
 
 Plugins can have a configuration file **config.php** in the **config** subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file **plugins/acme/demo/config/config.php**.

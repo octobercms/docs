@@ -76,6 +76,7 @@ Form::ajax('onSave', ['update' => [
 
 > **注意**：大多数[来自 AJAX 框架的数据属性](../ajax/attributes-api.md) 都可以通过删除 `data-request-` 前缀在此处使用。
 
+<a id="oc-form-tokens"></a>
 ## 表单标记
 
 #### CSRF 保护

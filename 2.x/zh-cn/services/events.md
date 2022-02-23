@@ -43,6 +43,7 @@ Event::listen('auth.login', [$this, 'LoginHandler']);
 
 > **注意**：可调用方法可以选择指定全部、部分或不指定任何参数。 无论哪种方式，事件都不会引发任何错误，除非它指定太多。
 
+<a id="oc-where-to-register-listeners"></a>
 ### 在哪里注册监听器
 
 最常见的地方是[插件注册文件](../plugin/registration.md#oc-registration-methods)的`boot`方法。

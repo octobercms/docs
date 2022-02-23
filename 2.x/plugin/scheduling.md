@@ -4,6 +4,7 @@ In the past, developers have generated a Cron entry for each task they need to s
 
 > **Note**: See the [installation guide](../setup/installation.md#oc-setting-up-the-scheduler) for instructions on how to set up the scheduler task.
 
+<a id="oc-defining-schedules"></a>
 ## Defining Schedules
 
 You may define all of your scheduled tasks by overriding the `registerSchedule` method inside the [Plugin registration class](registration.md#oc-registration-file). The method will take a single `$schedule` argument and is used for defining commands along with their frequency.
@@ -18,7 +19,7 @@ class Plugin extends PluginBase
     public function registerSchedule($schedule)
     {
         $schedule->call(function () {
-            \Db::table('recent_users')->delete();
+            Db::table('recent_users')->delete();
         })->daily();
     }
 }

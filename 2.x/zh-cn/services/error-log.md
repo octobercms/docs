@@ -62,6 +62,7 @@ throw new SystemException('无法联系邮件服务器 API');
 
 抛出此异常时，会显示详细的错误消息，其中包含发生该异常的文件和行号。
 
+<a id="oc-validation-exception"></a>
 ### 验证异常
 
 `October\Rain\Exception\ValidationException` 类，别名为 `ValidationException`，用于与表单提交和无效字段直接相关的错误。 该消息应包含一个包含字段和错误消息的数组。
@@ -82,6 +83,7 @@ if ($validation->fails()) {
 
 当抛出此异常时，[AJAX 框架](../ajax/introduction.md) 将以可用格式提供此信息并聚焦第一个无效字段。
 
+<a id="oc-ajax-exception"></a>
 ### AJAX 异常
 
 `October\Rain\Exception\AjaxException` 类，别名为 `AjaxException`，被认为是"智能错误"，将返回 HTTP 代码 406。这允许它们像成功响应一样传递响应内容。
@@ -176,6 +178,7 @@ Log::debug($error);
 Log::info('用户登录失败。', ['id' => $user->id]);
 ```
 
+<a id="oc-helper-functions"></a>
 ### 助手函数
 
 有一些全局助手方法可用于简化日志记录。 `trace_log` 函数是 `Log::info` 的别名，支持使用数组和异常作为消息。

@@ -64,6 +64,7 @@ throw new SystemException('Unable to contact the mail server API');
 
 When this exception is thrown a detailed error message is shown with the file and line number where it occurred.
 
+<a id="oc-validation-exception"></a>
 ### Validation Exception
 
 The `October\Rain\Exception\ValidationException` class, aliased as `ValidationException`, is used for errors that relate directly to a form submission and an invalid field. The message should contain an array with fields and error messages.
@@ -84,6 +85,7 @@ if ($validation->fails()) {
 
 When this exception is thrown the [AJAX framework](../ajax/introduction.md) will provide this information in a usable format and focus the first invalid field.
 
+<a id="oc-ajax-exception"></a>
 ### AJAX Exception
 
 The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is considered a "smart error" and will return the HTTP code 406. This allows them to pass response contents as if they were a successful response.
@@ -178,6 +180,7 @@ An array of contextual data may also be passed to the log methods. This contextu
 Log::info('User failed to login.', ['id' => $user->id]);
 ```
 
+<a id="oc-helper-functions"></a>
 ### Helper Functions
 
 There are some global helper methods available to make logging easier. The `trace_log` function is an alias for `Log::info` with support for using arrays and exceptions as the message.

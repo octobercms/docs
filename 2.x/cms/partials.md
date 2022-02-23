@@ -28,6 +28,7 @@ The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a sin
 </div>
 ```
 
+<a id="oc-passing-variables-to-partials"></a>
 ## Passing Variables to Partials
 
 You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
@@ -93,6 +94,7 @@ The **card** partial is composed of two content areas and an image variable.
 </div>
 ```
 
+<a id="oc-dynamic-partials"></a>
 ## Dynamic Partials
 
 Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#oc-dynamic-pages) documentation for details.

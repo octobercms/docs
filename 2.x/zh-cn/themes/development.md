@@ -37,6 +37,7 @@ code: "Demo"
 authorCode: "武志伟"
 ```
 
+<a id="oc-version-file"></a>
 ## 版本文件
 
 主题版本文件 **version.yaml** 定义了当前的主题版本和变更日志。 该文件应放在主题根目录中：
@@ -70,6 +71,7 @@ themes/
 
 图像宽度应至少为 600 像素。 理想的纵横比是 1.5，例如 600x400px。
 
+<a id="oc-theme-customization"></a>
 ## 主题定制
 
 主题可以通过在主题信息文件中定义一个 `form` 键来支持配置值。 此键应包含配置数组或对表单字段定义文件的引用，有关更多信息，请参阅 [表单字段](../backend/forms.md#oc-defining-form-fields)。
@@ -148,6 +150,7 @@ form:
 a { color: @link-color }
 ```
 
+<a id="oc-theme-dependencies"></a>
 ## 主题依赖
 
 一个主题可以通过在[主题信息文件](#theme-information-file)中定义一个**require**选项来依赖插件，该选项应该提供一个被认为是需求的插件名称数组。 依赖于 **Acme.Blog** 和 **Acme.User** 的主题可以像这样定义这个需求：

@@ -83,6 +83,7 @@ class Category extends Model
 }
 ```
 
+<a id="oc-relationship-types"></a>
 ## 关联类型
 
 可以使用以下关联类型：

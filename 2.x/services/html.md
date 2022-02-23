@@ -76,6 +76,7 @@ Form::ajax('onSave', ['update' => [
 
 > **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api.md) are available here by dropping the `data-request-` prefix.
 
+<a id="oc-form-tokens"></a>
 ## Form Tokens
 
 #### CSRF protection

@@ -15,6 +15,7 @@ plugins/
 
 组件必须[在插件注册类中注册](#component-registration) 使用`registerComponents` 方法。
 
+<a id="oc-component-class-definition"></a>
 ## 组件类定义
 
 **组件类文件**定义了组件功能和[组件属性](#component-properties)。 组件类文件名应与组件类名匹配。 组件类应该扩展`\Cms\Classes\ComponentBase` 类。 下一个示例中的组件应该在 plugins/acme/blog/components/BlogPosts.php 文件中定义。
@@ -76,6 +77,7 @@ public function registerComponents()
 
 这将使用默认别名 **demoTodo** 注册 Todo 组件类。 有关使用组件的更多信息，请参见 [CMS 组件文章](../cms/components.md)。
 
+<a id="oc-component-properties"></a>
 ## 组件属性
 
 当您将组件添加到页面或布局时，您可以使用属性对其进行配置。 属性是用组件类的`defineProperties` 方法定义的。 下一个示例显示如何定义组件属性：
@@ -307,6 +309,7 @@ public function onRun()
 1.页面`onEnd()`函数。
 1.布局`onEnd()`函数。
 
+<a id="oc-component-initialization"></a>
 ### 组件初始化
 
 有时您可能希望在组件类第一次实例化时执行代码。 您可以覆盖组件类中的 `init` 方法来处理任何初始化逻辑，这将在 AJAX 处理程序和页面执行生命周期之前执行。 例如，此方法可用于将另一个组件动态附加到页面。
@@ -342,6 +345,7 @@ public function onRun()
 }
 ```
 
+<a id="oc-ajax-handlers"></a>
 ## AJAX 处理程序
 
 组件可以承载 AJAX 事件处理程序。 它们在组件类中的定义与在 [页面或布局代码](../ajax/handlers.md) 中定义的完全一样。 在组件类中定义的示例 AJAX 处理程序方法：
@@ -389,6 +393,7 @@ public function onRender()
 }
 ```
 
+<a id="oc-component-partials"></a>
 ## 组件部件
 
 除了默认标记之外，组件还可以提供可在前端或默认标记本身内使用的附加部件。如果 Demo ToDo 组件有一个 **pagination** 部件，它将位于 **/plugins/october/demo/components/todo/pagination.htm** 并使用以下命令显示在页面上：
@@ -482,6 +487,7 @@ public function onRun()
 }
 ```
 
+<a id="oc-injecting-page-assets-with-components"></a>
 ## 使用组件注入页面资产
 
 组件可以将资产(CSS 和 JavaScript 文件)注入到它们所附加的页面或布局中。 使用控制器的 `addCss` 和 `addJs` 方法将资产添加到 CMS 控制器。 它可以在组件的 `onRun` 方法中完成。 请阅读有关[在页面文章中注入资产](../cms/pages.md#oc-injecting-page-assets-programmatically)的更多详细信息。 例子：

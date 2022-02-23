@@ -74,6 +74,7 @@ echo Settings::get('api_key');
 echo Settings::get('is_activated', true);
 ```
 
+<a id="oc-backend-settings-pages"></a>
 ## 后端设置页面
 
 后端包含用于系统和和插件配置的专用区域，可以通过单击主菜单中的<strong>设置</strong>链接进行访问
@@ -141,6 +142,7 @@ public function __construct()
 
 `setContext` 方法的第一个参数是以下格式的设置项所有者：**author.plugin**。 第二个参数是设置名称，与您在[注册后端设置页面](#settings-link-registration)时提供的相同。
 
+<a id="oc-file-based-configuration"></a>
 ## 基于文件的配置
 
 插件可以在插件目录的**config** 子目录下有一个配置文件**config.php**。 配置文件是定义并返回 **array** 的 PHP 脚本。 示例配置文件 **plugins/acme/demo/config/config.php**。

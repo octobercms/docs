@@ -2,6 +2,7 @@
 
 October CMS uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes.md) use the [Twig](#twig-template-parser) and [INI format](#initialization-ini-configuration-parser) in their template structure. Each parser is described in more detail below.
 
+<a id="oc-markdown-parser"></a>
 ## Markdown Parser
 
 Markdown allows you to write easy-to-read and easy-to-write plain text format, which then converts to HTML. The `Markdown` facade is used for parsing Markdown syntax and is based on [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/). Some quick examples of markdown:
@@ -27,6 +28,7 @@ You may also use the `|md` filter for [parsing Markdown in your front-end markup
 {{ '**Text** is bold.'|md }}
 ```
 
+<a id="oc-using-html-in-markdown"></a>
 ### Using HTML in Markdown
 
 Markdown is a superset of HTML so you can combine HTML and Markdown in the same template. When Markdown encounters any block-level HTML tag, the Markdown syntax will deactivate for all the content inside.

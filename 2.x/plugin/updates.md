@@ -15,6 +15,7 @@ plugins/
         create_another_table.php    <=== Migration File
 ```
 
+<a id="oc-update-process"></a>
 ## Update Process
 
 During an update the system will notify the user about recent changes to plugins, it can also prompt them about [important or breaking changes](#important-updates). Any given migration or seed file will only be excuted once after a successful update. October executes the update process automatically when any of the following occurs:
@@ -73,6 +74,7 @@ v2.1.0: This is an important update from v1 that contains breaking changes.
 
 When tagging the new version `v2` from a version `v1` then the changes are not deployed as part of a regular update. The user must install the plugin again to receive the latest version via Composer.
 
+<a id="oc-migration-files"></a>
 ### Migration and Seed Files
 
 As previously described, updates also define when [migration and seed files](../database/structure.md) should be applied. An update line with a comment and updates:

@@ -15,6 +15,7 @@ plugins/
 
 Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents` method.
 
+<a id="oc-component-class-definition"></a>
 ## Component Class Definition
 
 The **component class file** defines the component functionality and [component properties](#component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
@@ -76,6 +77,7 @@ public function registerComponents()
 
 This will register the Todo component class with the default alias name **demoTodo**. More information on using components can be found at the [CMS components article](../cms/components.md).
 
+<a id="oc-component-properties"></a>
 ## Component Properties
 
 When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties` method of the component class. The next example shows how to define a component property:
@@ -307,6 +309,7 @@ When a page loads, October executes handler functions that could be defined in t
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
 
+<a id="oc-component-initialization"></a>
 ### Component Initialization
 
 Sometimes you may wish to execute code at the time the component class is first instantiated. You may override the `init` method in the component class to handle any initialization logic, this will execute before AJAX handlers and before the page execution life cycle. For example, this method can be used for attaching another component to the page dynamically.
@@ -343,6 +346,7 @@ public function onRun()
 }
 ```
 
+<a id="oc-ajax-handlers"></a>
 ## AJAX Handlers
 
 Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../ajax/handlers.md). An example AJAX handler method defined in a component class:
@@ -390,6 +394,7 @@ public function onRender()
 }
 ```
 
+<a id="oc-component-partials"></a>
 ## Component Partials
 
 In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/october/demo/components/todo/pagination.htm** and displayed on the page using:
@@ -483,6 +488,7 @@ public function onRun()
 }
 ```
 
+<a id="oc-injecting-page-assets-with-components"></a>
 ## Injecting Page Assets with Components
 
 Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/pages.md#oc-injecting-page-assets-programmatically). Example:

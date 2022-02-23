@@ -37,6 +37,7 @@ code: "Demo"
 authorCode: "Acme"
 ```
 
+<a id="oc-version-file"></a>
 ## Version File
 
 The theme version file **version.yaml** defines the current theme version and the change log. The file should be placed to the theme root directory:
@@ -70,6 +71,7 @@ themes/
 
 The image width should be at least 600px. The ideal aspect ratio is 1.5, for example 600x400px.
 
+<a id="oc-theme-customization"></a>
 ## Theme Customization
 
 Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms.md#oc-defining-form-fields) for more information.
@@ -148,6 +150,7 @@ Using some example content inside **themes/yourtheme/assets/less/theme.less**:
 a { color: @link-color }
 ```
 
+<a id="oc-theme-dependencies"></a>
 ## Theme Dependencies
 
 A theme can depend on plugins by defining a **require** option in the [Theme information file](#theme-information-file), the option should supply an array of plugin names that are considered requirements. A theme that depends on **Acme.Blog** and **Acme.User** can define this requirement like so:

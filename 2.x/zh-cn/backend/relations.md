@@ -1,6 +1,6 @@
 # 关系
 
-**Relation Behavior** 是一个控制器修饰符，用于轻松管理页面上的复杂 [模型](../database/model.md) 关系。 不要与仅提供简单管理的[列关系](lists.md#oc-available-column-types) 或 [表单关系字段](forms.md#oc-relation) 混淆。
+**Relation Behavior** 是一个控制器修饰符，用于轻松管理页面上的复杂 [模型](../database/model.md) 关系。 不要与仅提供简单管理的[列关系](lists.md#oc-available-column-types) 或 [表单关系字段](forms.md#widget-relation) 混淆。
 
 关系行为取决于[关系定义](#relationship-types)。 为了使用关系行为，您应该将 `Backend\Behaviors\RelationController` 定义添加到控制器类的 `$implement` 字段中。 此外，应定义 `$relationConfig` 类属性，其值应参考用于[配置行为选项](#configuring-the-relation-behavior) 的 YAML 文件。
 

@@ -90,7 +90,7 @@ toolbar:
 **scope** | 指定**列表模型**中定义的 [查询范围方法](../database/model.md#oc-query-scopes) 以应用于搜索查询。 第一个参数将包含查询对象(根据常规范围方法)，第二个将包含搜索词，第三个将是要搜索的字段的数组。
 **searchOnEnter** | 将此设置为 true 将使搜索小部件在开始搜索之前等待按下 Enter 键(默认行为是在有人在搜索字段中输入内容后自动开始搜索，然后暂停片刻)。 默认值：false。
 
-上面提到的工具栏按钮应该包含带有一些按钮的工具栏部件定义。 部件还可以包含带有图表的 [记分板控件](controls.md#oc-scoreboards)。 带有 **新帖子** 按钮的工具栏部分示例，指的是 [表单行为](forms.md) 提供的 **create** 操作：
+上面提到的工具栏按钮应该包含带有一些按钮的工具栏部件定义。 部件还可以包含带有图表的 [记分板控件](https://octobercms.com/docs/ui/scoreboard)。 带有 **新帖子** 按钮的工具栏部分示例，指的是 [表单行为](forms.md) 提供的 **create** 操作：
 ```php
 <div data-control="toolbar">
     <a
@@ -199,6 +199,7 @@ content[title]:
 
 上面的示例将分别在 PHP 中查找相当于 `$record->content->title` 或 `$record->content['title']` 的值。为了使该字段可搜索并且出于性能原因，我们建议使用 [模型事件](../database/model.md#oc-model-events) 在本地数据库表中复制其值。
 
+<a id="oc-available-column-types"></a>
 ## 可用的字段类型
 
 有多种字段类型可用于 **type** 设置，它们控制列表字段的显示方式。除了下面指定的原生字段类型外，您还可以[定义自定义字段类型](#custom-column-types)。
@@ -401,7 +402,7 @@ full_name:
 ['open' => 'Open', 'closed' => 'Closed']
 ```
 
-可用选项在模型上定义为 [下拉选项](forms.md#oc-field-dropdown)。
+可用选项在模型上定义为 [下拉选项](forms.md#field-dropdown)。
 
 ```yaml
 status:
@@ -483,6 +484,7 @@ color:
 <?= $this->listRender() ?>
 ```
 
+<a id="oc-multiple-list-definitions"></a>
 ## 多个列表定义
 
 列表行为可以使用命名定义支持同一控制器中的多个列表。 `$listConfig` 属性可以定义为一个数组，其中键是定义名称，值是配置文件。
@@ -500,6 +502,7 @@ public $listConfig = [
 <?= $this->listRender('templates') ?>
 ```
 
+<a id="oc-using-list-filters"></a>
 ## 使用列表过滤器
 
 可以通过 [添加过滤器定义](#filtering-the-list) 到列表配置来过滤列表。类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。

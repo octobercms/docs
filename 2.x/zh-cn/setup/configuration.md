@@ -2,6 +2,7 @@
 
 October CMS 的所有配置文件都存储在 **config** 目录中。每个选项都记录在案，因此请随意浏览文件并熟悉可用的选项。
 
+<a id="oc-environment-configuration"></a>
 ## 环境配置
 
 根据应用程序运行的环境设置不同的配置值通常很有帮助。 为了控制不同环境中的配置，October CMS 使用 [DotEnv 库](https://github.com/vlucas/phpdotenv) 来实现易于管理环境变量。这些变量可以覆盖 **config** 目录中指定的任何值。
@@ -41,6 +42,7 @@ October CMS 的所有配置文件都存储在 **config** 目录中。每个选�
 
 在这里，我们将介绍一些常见的配置项及其用途。
 
+<a id="oc-debug-mode"></a>
 ### 调试模式
 
 调试设置可以在`config/app.php` 配置文件中找到带有 `debug` 的参数 。默认情况下，此选项取自存储在您的 .env 文件中的 APP_DEBUG 环境变量的值。
@@ -68,6 +70,7 @@ October CMS 的所有配置文件都存储在 **config** 目录中。每个选�
 
 此变量可以设置为 `true` 或 `false` 。如果设置为 `null`，则在禁用 [debug mode](#debug-mode) 时将激活安全模式。
 
+<a id="oc-csrf-protection"></a>
 ### CSRF 保护
 
 October CMS 提供了一种简单的方法来保护您的应用程序免受跨站点请求伪造。首先随机令牌(token)放置在您的session中。然后，当使用 [打开表单标签](../services/html.md#oc-form-tokens) 时，令牌被添加到页面并随每个请求提交回来。

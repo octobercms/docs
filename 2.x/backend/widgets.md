@@ -109,6 +109,7 @@ After binding the widget you can access it in the controller's view or partial b
 <?= $this->widget->myWidget->render() ?>
 ```
 
+<a id="oc-form-widgets"></a>
 ## Form Widgets
 
 With form widgets you can add new control types to the back-end [forms](../backend/forms.md). They provide features that are common to supplying data for models. Form widgets must be registered in the [Plugin registration file](../plugin/registration.md#oc-registration-methods).
@@ -226,7 +227,7 @@ public function registerFormWidgets()
 }
 ```
 
-The short code is optional and can be used when referencing the widget in the [Form field definitions](forms.md#oc-field-widget), it should be a unique value to avoid conflicts with other form fields.
+The short code is optional and can be used when referencing the widget in the [Form field definitions](forms.md#field-widget), it should be a unique value to avoid conflicts with other form fields.
 
 ### Loading Form Data
 
@@ -271,7 +272,7 @@ public function getSaveValue($value)
 
 ## Report Widgets
 
-Report widgets can be used on the back-end dashboard and in other back-end report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration.md#oc-widget-registration).
+Report widgets can be used on the back-end dashboard and in other back-end report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration.md).
 
 > You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding.md#oc-create-a-report-widget) for more information.
 

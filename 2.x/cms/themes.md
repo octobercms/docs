@@ -88,6 +88,7 @@ function onStart()
 {% endfor %}
 ```
 
+<a id="oc-configuration-section"></a>
 ### Configuration Section
 
 The configuration section sets the template parameters. Supported configuration parameters are specific for different CMS templates and described in their corresponding documentation articles. The configuration section uses the simple [INI format](http://en.wikipedia.org/wiki/INI_file), where string parameter values are enclosed within quotes. Example configuration section for a page template:
@@ -153,6 +154,7 @@ echo $this['foo'];
 echo $this->foo;
 ```
 
+<a id="oc-twig-section"></a>
 ### Twig Markup Section
 
 The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup.md), all the [native Twig features](https://twig.symfony.com/doc/), or those [provided by plugins](../plugin/registration.md#oc-extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.

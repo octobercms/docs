@@ -88,6 +88,7 @@ function onStart()
 {% endfor %}
 ```
 
+<a id="oc-configuration-section"></a>
 ### 配置部分
 
 配置部分设置模板参数。 支持的配置参数特定于不同的 CMS 模板，并在其相应的文档文章中进行了描述。 配置部分使用简单的 [INI格式](http://en.wikipedia.org/wiki/INI_file)，其中字符串参数值用引号括起来。 页面模板的示例配置部分：
@@ -153,6 +154,7 @@ echo $this['foo'];
 echo $this->foo;
 ```
 
+<a id="oc-twig-section"></a>
 ### Twig标记部分
 
 Twig 部分定义了模板要呈现的标记。在 Twig 部分，您可以使用函数、标签和过滤器 [由 October CMS 提供](../markup.md)，所有 [native Twig 功能](https://twig.symfony.com/doc/) ，或那些[由插件提供](../plugin/registration.md#oc-extending-twig)。 Twig 部分的内容取决于模板类型(页面、布局或部件)。您可以在文档中进一步找到有关特定 Twig 对象的更多信息。

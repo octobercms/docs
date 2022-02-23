@@ -109,6 +109,7 @@ public function __construct()
 <?= $this->widget->myWidget->render() ?>
 ```
 
+<a id="oc-form-widgets"></a>
 ## 表单小部件
 
 使用表单小部件，您可以将新的控件类型添加到后端 [表单](../backend/forms.md)。 它们提供了为模型提供数据的常见功能。 表单小部件必须在 [插件注册文件](../plugin/registration.md#oc-registration-methods) 中注册。
@@ -226,7 +227,7 @@ public function registerFormWidgets()
 }
 ```
 
-短代码是可选的，可以在[表单字段定义](forms.md#oc-field-widget)中引用小部件时使用，它应该是一个唯一的值，以避免与其他表单字段冲突。
+短代码是可选的，可以在[表单字段定义](forms.md#field-widget)中引用小部件时使用，它应该是一个唯一的值，以避免与其他表单字段冲突。
 
 ### 加载表单数据
 
@@ -271,7 +272,7 @@ public function getSaveValue($value)
 
 ## 报告小部件
 
-报表小部件可用于后端仪表板和其他后端报表容器。 报告小部件必须在 [插件注册文件](../plugin/registration.md#oc-widget-registration) 中注册。
+报表小部件可用于后端仪表板和其他后端报表容器。 报告小部件必须在 [插件注册文件](../plugin/registration.md) 中注册。
 
 > 您可以使用`create:reportwidget` 命令轻松构建报表小部件。 有关详细信息，请参阅 [脚手架命令](../console/scaffolding.md#oc-create-a-report-widget)。
 

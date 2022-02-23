@@ -24,6 +24,7 @@ If your server does not have the ability to run Composer or command line tools, 
 
 ## Security & Performance
 
+<a id="oc-public-folder"></a>
 ### Public Folder
 
 For ultimate security in production environments you may configure your web server to use a **public/** folder to ensure only public files can be accessed. First you will need to spawn a public folder using the `october:mirror` command.

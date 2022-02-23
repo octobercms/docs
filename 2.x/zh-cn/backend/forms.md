@@ -1314,6 +1314,7 @@ tags:
 <?= Form::close() ?>
 ```
 
+<a id="oc-preview-view"></a>
 ### 预览视图
 
 **preview.htm** 视图代表预览页面，允许用户以只读模式预览现有记录。 典型的预览页面包含面包屑和表单本身。 下面是典型的 preview.htm 表单的内容。

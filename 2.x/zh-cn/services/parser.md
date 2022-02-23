@@ -2,6 +2,7 @@
 
 October CMS 使用多种标准来处理标记、模板和配置。 每一个都经过精心挑选，以发挥它们的作用，使您的开发过程和学习曲线尽可能简单。 例如，[在主题中找到的对象](../cms/themes.md)在其模板结构中使用[Twig](#twig-template-parser)和[INI format](#initialization-ini-configuration-parser)格式。下面更详细地描述每个解析器。
 
+<a id="oc-markdown-parser"></a>
 ## Markdown解析器
 
 Markdown 允许您编写易于阅读和易于编写的纯文本格式，然后将其转换为 HTML。 `Markdown` 门面用于解析 Markdown 语法，它基于 [GitHub 风格的 Markdown](https://help.github.com/articles/github-flavored-markdown/)。 一些Markdown的简单示例：
@@ -27,6 +28,7 @@ $html = Markdown::parse($markdown);
 {{ '**Text** is bold.'|md }}
 ```
 
+<a id="oc-using-html-in-markdown"></a>
 ### 在 Markdown 中使用 HTML
 
 Markdown 是 HTML 的超集，因此您可以将 HTML 和 Markdown 组合在同一个模板中。 当 Markdown 遇到任何块级 HTML 标签时，Markdown 语法将对里面的所有内容停用。

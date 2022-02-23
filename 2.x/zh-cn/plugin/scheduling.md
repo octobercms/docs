@@ -4,6 +4,7 @@
 
 > **注意**：有关如何设置计划任务的说明，请参阅[安装指南](../setup/installation.md#oc-setting-up-the-scheduler)。
 
+<a id="oc-defining-schedules"></a>
 ## 定义时间表
 
 您可以通过覆盖[插件注册类](registration.md#oc-registration-file) 中的`registerSchedule` 方法来定义所有计划任务。该方法将采用单个 `$schedule` 参数，用于定义命令及其频率。

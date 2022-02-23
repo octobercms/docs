@@ -280,6 +280,7 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 });
 ```
 
+<a id="oc-message-content"></a>
 ## Message Content
 
 Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
@@ -375,6 +376,7 @@ Layout | Code | Description
 Default | default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
 
+<a id="oc-registering-mail-layouts-templates-partials"></a>
 ### Registering mail layouts, templates & partials
 
 Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration.md#oc-registration-file).
