@@ -64,7 +64,7 @@ Mail::send('acme.blog::mail.message', $vars, function($message) {
 {{ name }}
 ```
 
-> **注意**：你应该避免在你的消息中传递一个 `message` 变量，这个变量总是被传递并且允许 [内联嵌入附件](#attachments)。
+> **注意**：你应该避免在你的消息中传递一个 `message` 变量，这个变量总是被传递并且允许 [内联嵌入附件](#oc-attachments)。
 
 ####快速发送
 
@@ -188,6 +188,7 @@ Mail::raw([
 });
 ```
 
+<a id="oc-attachments"></a>
 ### 附件
 
 要将附件添加到电子邮件中，请在传递给闭包的 `$message` 对象上使用 `attach` 方法。 `attach` 方法接受文件的完整路径作为其第一个参数：

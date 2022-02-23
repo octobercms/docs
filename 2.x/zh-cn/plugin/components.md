@@ -13,12 +13,12 @@ plugins/
       Plugin.php
 ```
 
-组件必须[在插件注册类中注册](#component-registration) 使用`registerComponents` 方法。
+组件必须[在插件注册类中注册](#oc-component-registration) 使用`registerComponents` 方法。
 
 <a id="oc-component-class-definition"></a>
 ## 组件类定义
 
-**组件类文件**定义了组件功能和[组件属性](#component-properties)。 组件类文件名应与组件类名匹配。 组件类应该扩展`\Cms\Classes\ComponentBase` 类。 下一个示例中的组件应该在 plugins/acme/blog/components/BlogPosts.php 文件中定义。
+**组件类文件**定义了组件功能和[组件属性](#oc-component-properties)。 组件类文件名应与组件类名匹配。 组件类应该扩展`\Cms\Classes\ComponentBase` 类。 下一个示例中的组件应该在 plugins/acme/blog/components/BlogPosts.php 文件中定义。
 
 ```php
 namespace Acme\Blog\Components;
@@ -62,6 +62,7 @@ url = "/blog"
 {% endfor %}
 ```
 
+<a id="oc-component-registration"></a>
 ### 组件注册
 
 组件必须通过覆盖[插件注册类](registration.md#oc-registration-file)内的`registerComponents`方法来注册。 这会告诉 CMS 有关该组件的信息，并提供一个 **短名称** 以供使用。 注册组件的示例：
@@ -249,7 +250,7 @@ public function getPostPageOptions()
 $postId = $this->param('post_id');
 ```
 
-在某些情况下，[组件属性](#component-properties) 可能充当硬编码值或从 URL 引用该值。
+在某些情况下，[组件属性](#oc-component-properties) 可能充当硬编码值或从 URL 引用该值。
 
 这个硬编码示例显示了使用标识符"2"的博客文章：
 
@@ -375,7 +376,7 @@ url = "/todo"
 {% component 'demoTodo' %}
 ```
 
-默认标记还可以采用在渲染时覆盖 [组件属性](#component-properties) 的参数。
+默认标记还可以采用在渲染时覆盖 [组件属性](#oc-component-properties) 的参数。
 
 ```twig
 {% component 'demoTodo' maxItems="7" %}
@@ -458,7 +459,7 @@ public function onRender()
 
 ## 从代码渲染部件
 
-您可以使用 `renderPartial` 方法以编程方式在 PHP 代码中渲染组件部件。 这将检查名为`component-partial.htm`的部件的组件，并将结果作为字符串返回。 第二个参数用于传递视图变量。 当你在 PHP 中渲染组件部件时，同样的 [路径解析逻辑](#component-partials) 也适用于 Twig； 使用 `@` 前缀来引用组件本身内的部件。
+您可以使用 `renderPartial` 方法以编程方式在 PHP 代码中渲染组件部件。 这将检查名为`component-partial.htm`的部件的组件，并将结果作为字符串返回。 第二个参数用于传递视图变量。 当你在 PHP 中渲染组件部件时，同样的 [路径解析逻辑](#oc-component-partials) 也适用于 Twig； 使用 `@` 前缀来引用组件本身内的部件。
 
 ```php
 $content = $this->renderPartial('@component-partial.htm');

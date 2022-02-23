@@ -68,7 +68,7 @@ The safe mode setting is found in the `config/cms.php` configuration file with t
 
 When safe mode is enabled, the PHP code section is disabled in CMS templates to prevent a user from potentially executing malicious code.
 
-This variable can be set to `true` or `false`. If set to `null`, safe mode will activate when [debug mode](#debug-mode) is disabled.
+This variable can be set to `true` or `false`. If set to `null`, safe mode will activate when [debug mode](#oc-debug-mode) is disabled.
 
 <a id="oc-csrf-protection"></a>
 ### CSRF protection

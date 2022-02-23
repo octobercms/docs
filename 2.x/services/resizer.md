@@ -14,7 +14,7 @@ You may also pass an uploaded file from the [page request input](../services/req
 $image = Resizer::open(Input::file('field_name'));
 ```
 
-To resize the image, call the `resize` method on the object to perform the resize. The first argument is the image width, the second argument is the image height and the third argument is an array of [resize parameters](#resize-parameters) options.
+To resize the image, call the `resize` method on the object to perform the resize. The first argument is the image width, the second argument is the image height and the third argument is an array of [resize parameters](#oc-resize-parameters) options.
 
 ```php
 $image->resize(800, 600, ['mode' => 'crop']);

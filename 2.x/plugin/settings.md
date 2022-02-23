@@ -39,7 +39,7 @@ plugins/
         Settings.php     <=== Script
 ```
 
-Settings models [can be registered](#backend-settings-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
+Settings models [can be registered](#oc-backend-settings-pages) to appear on the **back-end Settings page**, but it is not a requirement - you can set and read settings values like any other model.
 
 ### Writing to a Settings Model
 

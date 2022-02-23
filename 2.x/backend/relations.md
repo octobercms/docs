@@ -2,7 +2,7 @@
 
 **Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model.md) relationships on a page. Not to be confused with [List relation columns](lists.md#oc-available-column-types) or [Form relation fields](forms.md#widget-relation) that only provide simple management.
 
-Relation behavior depends on [relation definitions](#relationship-types). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#configuring-the-relation-behavior).
+Relation behavior depends on [relation definitions](#relationship-types). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#oc-configuring-the-relation-behavior).
 
 ```php
 namespace Acme\Projects\Controllers;
@@ -21,6 +21,7 @@ class Projects extends Controller
 
 > **Note**: Very often the relation behavior is used together with the [form behavior](forms.md).
 
+<a id="oc-configuring-the-relation-behavior"></a>
 ## Configuring the Relation Behavior
 
 The configuration file referred in the `$relationConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). The required configuration depends on the [relationship type](#relationship-types) between the target model and the related model.
@@ -60,7 +61,7 @@ Option | Description
 **label** | a label for the relation, in the singular tense, required.
 **view** | configuration specific to the view container, see below.
 **manage** | configuration specific to the management popup, see below.
-**pivot** | a reference to form field definition file, used for [relations with pivot table data](#belongs-to-many-with-pivot-data).
+**pivot** | a reference to form field definition file, used for [relations with pivot table data](#oc-belongs-to-many-with-pivot-data).
 **emptyMessage** | a message to display when the relationship is empty, optional.
 **readOnly** | disables the ability to add, update, delete or create relations. default: false
 **deferredBinding** | [defers all binding actions using a session key](../database/relations.md#oc-deferred-binding) when it is available. default: false
@@ -202,6 +203,7 @@ roles:
         form: $/acme/user/models/role/fields.yaml
 ```
 
+<a id="oc-belongs-to-many-with-pivot-data"></a>
 ### Belongs to Many (with Pivot Data)
 
 > **Note**: Pivot data is not supported by [deferred bindings](../database/relations.md#oc-deferred-binding) at this time, so the parent model should exist. If your relation behavior config has `deferredBinding: true`, the pivot data will **not** be available to use in the list configuration (ex.`pivot[attribute]`).

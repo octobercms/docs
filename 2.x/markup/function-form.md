@@ -16,7 +16,7 @@ is the PHP equivalent of the following:
 
 ## form_open()
 
-Outputs a standard `<form>` opening tag along with the `_session_key` and `_token` hidden fields for CSRF protection. If you are using the [AJAX Framework](../ajax/introduction.md), it is recommended that you use [`form_ajax()`](#form_ajax) instead.
+Outputs a standard `<form>` opening tag along with the `_session_key` and `_token` hidden fields for CSRF protection. If you are using the [AJAX Framework](../ajax/introduction.md), it is recommended that you use [`form_ajax()`](#oc-form-ajax) instead.
 
 ```twig
 {{ form_open() }}
@@ -50,6 +50,7 @@ Option | Description
 **files** | Determines whether the form will submit files. Accepted values: **true** and **false**.
 **model** | A model object for the form model binding.
 
+<a id="oc-form-ajax"></a>
 ## form_ajax()
 
 Outputs an AJAX enabled FORM opening tag. The first parameter of the `form_ajax()` function is the AJAX handler name. The handler can be defined in the layout or page [PHP section](../cms/themes.md#oc-php-section) code, it can also be defined in a component. You may find more information about AJAX in the [AJAX Framework](../ajax/introduction.md) article.

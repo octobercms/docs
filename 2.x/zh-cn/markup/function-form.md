@@ -16,7 +16,7 @@
 
 ## form_open()
 
-输出一个标准的 `<form>` 标签以及用于 CSRF 保护的 `_session_key` 和 `_token` 隐藏字段。如果您使用 [AJAX 框架](../ajax/introduction.md), 建议您改用 [`form_ajax()`](#form_ajax) .
+输出一个标准的 `<form>` 标签以及用于 CSRF 保护的 `_session_key` 和 `_token` 隐藏字段。如果您使用 [AJAX 框架](../ajax/introduction.md), 建议您改用 [`form_ajax()`](#oc-form-ajax) .
 
 ```twig
 {{ form_open() }}
@@ -50,6 +50,7 @@
 **files** | 确定表单是否将提交文件。 接受的值：**true** 和 **false**。
 **model** |  表单模型绑定的模型对象
 
+<a id="oc-form-ajax"></a>
 ## form_ajax()
 
 输出一个启用 AJAX 的 FORM 开始标签。 `form_ajax()` 函数的第一个参数是 AJAX 处理程序名称。处理程序可以在布局或页面 [PHP部分](../cms/themes.md#oc-php-section) 代码中定义，也可以在组件中定义。Y您可以在[AJAX框架](../ajax/introduction.md) 文章中找到有关 AJAX 的更多信息。

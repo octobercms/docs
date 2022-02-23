@@ -14,7 +14,7 @@ $image = Resizer::open('path/to/image.jpg');
 $image = Resizer::open(Input::file('field_name'));
 ```
 
-要调整图像大小，请在对象上调用 `resize` 方法来执行调整大小。第一个参数是图像宽度，第二个参数是图像高度，第三个参数是 [调整参数大小](#resize-parameters) 选项的数组.
+要调整图像大小，请在对象上调用 `resize` 方法来执行调整大小。第一个参数是图像宽度，第二个参数是图像高度，第三个参数是 [调整参数大小](#oc-resize-parameters) 选项的数组.
 
 ```php
 $image->resize(800, 600, ['mode' => 'crop']);

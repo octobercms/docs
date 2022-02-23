@@ -1024,7 +1024,7 @@ $pivotData = ['expires' => $expires];
 $user->roles()->add($role, $pivotData);
 ```
 
-`add` 方法的第二个参数还可以指定 [延迟绑定](#deferred-binding) 在作为字符串传递时使用的会话密钥。 在这些情况下，可以将透视数据作为第三个参数提供。
+`add` 方法的第二个参数还可以指定 [延迟绑定](#oc-deferred-binding) 在作为字符串传递时使用的会话密钥。 在这些情况下，可以将透视数据作为第三个参数提供。
 
 ```php
 $user->roles()->add($role, $sessionKey, $pivotData);
@@ -1078,7 +1078,7 @@ $post->comments = null;
 $post->save();
 ```
 
-与 [延迟绑定]](#deferred-binding) 类似，在不存在的模型上定义的关联在内存中被延迟，直到它们被保存。 在此示例中，帖子尚不存在，因此无法通过 `$post->comments` 在评论上设置 `post_id` 属性。 因此，关联会延迟到通过调用`save`方法创建帖子为止。
+与 [延迟绑定](#oc-deferred-binding) 类似，在不存在的模型上定义的关联在内存中被延迟，直到它们被保存。 在此示例中，帖子尚不存在，因此无法通过 `$post->comments` 在评论上设置 `post_id` 属性。 因此，关联会延迟到通过调用`save`方法创建帖子为止。
 
 ```php
 $comment = Comment::find(1);

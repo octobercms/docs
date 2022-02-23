@@ -13,12 +13,12 @@ plugins/
       Plugin.php
 ```
 
-Components must be [registered in the Plugin registration class](#component-registration) with the `registerComponents` method.
+Components must be [registered in the Plugin registration class](#oc-component-registration) with the `registerComponents` method.
 
 <a id="oc-component-class-definition"></a>
 ## Component Class Definition
 
-The **component class file** defines the component functionality and [component properties](#component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
+The **component class file** defines the component functionality and [component properties](#oc-component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
 
 ```php
 namespace Acme\Blog\Components;
@@ -62,6 +62,7 @@ You would be able to access its `posts` method through the `blogPosts` variable.
 {% endfor %}
 ```
 
+<a id="oc-component-registration"></a>
 ### Component Registration
 
 Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration.md#oc-registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
@@ -248,7 +249,7 @@ Components can directly access routing parameter values defined in the [URL of t
 $postId = $this->param('post_id');
 ```
 
-In some cases a [component property](#component-properties) may act as a hard coded value or reference the value from the URL.
+In some cases a [component property](#oc-component-properties) may act as a hard coded value or reference the value from the URL.
 
 This hard coded example shows the blog post with an identifier `2` being used:
 
@@ -376,7 +377,7 @@ url = "/todo"
 {% component 'demoTodo' %}
 ```
 
-The default markup can also take parameters that override the [component properties](#component-properties) at the time they are rendered.
+The default markup can also take parameters that override the [component properties](#oc-component-properties) at the time they are rendered.
 
 ```twig
 {% component 'demoTodo' maxItems="7" %}
@@ -459,7 +460,7 @@ The ID is unique each time the component is displayed.
 
 ## Rendering Partials from Code
 
-You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [path resolution logic](#component-partials) applies when you render a component partial in PHP as it does with Twig; use the `@` prefix to refer to partials within the component itself.
+You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [path resolution logic](#oc-component-partials) applies when you render a component partial in PHP as it does with Twig; use the `@` prefix to refer to partials within the component itself.
 
 ```php
 $content = $this->renderPartial('@component-partial.htm');

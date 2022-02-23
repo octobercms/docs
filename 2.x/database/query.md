@@ -598,7 +598,7 @@ $users = Db::table('users')
     ->get();
 ```
 
-For more advanced `having` statements, you may wish to use the [`havingRaw`](#aggregates) method.
+For more advanced `having` statements, you may wish to use the [`havingRaw`](#oc-aggregates) method.
 
 #### Limit and offset
 

@@ -1026,7 +1026,7 @@ $pivotData = ['expires' => $expires];
 $user->roles()->add($role, $pivotData);
 ```
 
-The second argument of the `add` method can also specify the session key used by [deferred binding](#deferred-binding) when passed as a string. In these cases the pivot data can be provided as the third argument instead.
+The second argument of the `add` method can also specify the session key used by [deferred binding](#oc-deferred-binding) when passed as a string. In these cases the pivot data can be provided as the third argument instead.
 
 ```php
 $user->roles()->add($role, $sessionKey, $pivotData);
@@ -1080,7 +1080,7 @@ $post->comments = null;
 $post->save();
 ```
 
-Similar to [deferred binding](#deferred-binding), relationships defined on non-existent models are deferred in memory until they are saved. In this example the post does not exist yet, so the `post_id` attribute cannot be set on the comment via `$post->comments`. Therefore the association is deferred until the post is created by calling the `save` method.
+Similar to [deferred binding](#oc-deferred-binding), relationships defined on non-existent models are deferred in memory until they are saved. In this example the post does not exist yet, so the `post_id` attribute cannot be set on the comment via `$post->comments`. Therefore the association is deferred until the post is created by calling the `save` method.
 
 ```php
 $comment = Comment::find(1);

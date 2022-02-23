@@ -601,7 +601,7 @@ $users = Db::table('users')
     ->get();
 ```
 
-对于更高级的 `having` 语法，参见 [`havingRaw`](#aggregates) 方法.
+对于更高级的 `having` 语法，参见 [`havingRaw`](#oc-aggregates) 方法.
 
 #### 限制和偏移(分页)
 

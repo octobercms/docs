@@ -2,7 +2,7 @@
 
 **Relation Behavior** 是一个控制器修饰符，用于轻松管理页面上的复杂 [模型](../database/model.md) 关系。 不要与仅提供简单管理的[列关系](lists.md#oc-available-column-types) 或 [表单关系字段](forms.md#widget-relation) 混淆。
 
-关系行为取决于[关系定义](#relationship-types)。 为了使用关系行为，您应该将 `Backend\Behaviors\RelationController` 定义添加到控制器类的 `$implement` 字段中。 此外，应定义 `$relationConfig` 类属性，其值应参考用于[配置行为选项](#configuring-the-relation-behavior) 的 YAML 文件。
+关系行为取决于[关系定义](#relationship-types)。 为了使用关系行为，您应该将 `Backend\Behaviors\RelationController` 定义添加到控制器类的 `$implement` 字段中。 此外，应定义 `$relationConfig` 类属性，其值应参考用于[配置行为选项](#oc-configuring-the-relation-behavior) 的 YAML 文件。
 
 ```php
 namespace Acme\Projects\Controllers;
@@ -21,6 +21,7 @@ class Projects extends Controller
 
 > **注意**：关系行为通常与 [表单行为](forms.md) 一起使用。
 
+<a id="oc-configuring-the-relation-behavior"></a>
 ## 配置关系行为
 
 `$relationConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [视图目录](controllers-ajax.md) 中。 所需的配置取决于目标模型和相关模型之间的 [关系类型](#relationship-types)。
@@ -60,7 +61,7 @@ items:
 **label** | 关系的标签，单数时态，需要。
 **view** | 特定于视图容器的配置，请参阅下文。
 **manage** | 特定于管理弹出窗口的配置，请参阅下文。
-**pivot** | 对表单字段定义文件的引用，用于 [与数据透视表数据的关系](#belongs-to-many-with-pivot-data)。
+**pivot** | 对表单字段定义文件的引用，用于 [与数据透视表数据的关系](#oc-belongs-to-many-with-pivot-data)。
 **emptyMessage** | 当关系为空时显示的消息，可选。
 **readOnly** | 禁用添加、更新、删除或创建关系的能力。 默认值：false
 **deferredBinding** | 当会话密钥可用时，[使用会话密钥延迟所有绑定操作](../database/relations.md#oc-deferred-binding)。 默认值：false
@@ -202,6 +203,7 @@ roles:
         form: $/acme/user/models/role/fields.yaml
 ```
 
+<a id="oc-belongs-to-many-with-pivot-data"></a>
 ### 多对多关联 (使用数据透视表)
 
 > **注意**：[延迟绑定](../database/relations.md#oc-deferred-binding) 目前不支持透视数据，因此父模型应该存在。 如果您的关系行为配置具有 `deferredBinding: true`，则透视数据将**不**可用于列表配置(例如`pivot[attribute]`)。

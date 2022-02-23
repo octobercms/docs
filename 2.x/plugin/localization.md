@@ -1,6 +1,6 @@
 # Localization
 
-Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugin localization files are detected by the system automatically. Using localization strings are supported natively in the back-end user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#accessing-localization-strings).
+Plugins can have localization files in the **lang** subdirectory of the plugin directory. Plugin localization files are detected by the system automatically. Using localization strings are supported natively in the back-end user interface menus, form labels, etc. - if you provide the localization key instead of a real string, the system will try to load it from the localization file. In other cases you need to load the localization string [with the API](#oc-accessing-localization-strings).
 
 > **Note**: For translating front-end content, [there are plugins that can be used](https://octobercms.com/plugin/rainlab-translate) for this purpose.
 
@@ -39,6 +39,7 @@ return [
 ];
 ```
 
+<a id="oc-accessing-localization-strings"></a>
 ## Accessing Localization Strings
 
 The localization strings can be loaded with the `Lang` class. The parameter it accepts is the localization key string that consists of the plugin name, the localization file name and the path to the localization string inside the array returned from the file. The next example loads the **app.name** string from the plugins/acme/blog/lang/en/lang.php file (the language is set with the `locale` parameter in the `config/app.php` configuration file):

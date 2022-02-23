@@ -19,6 +19,7 @@ class Categories extends \Backend\Classes\Controller
 
 > **Note**: Very often the list and [form behavior](../backend/forms.md) are used together in a same controller.
 
+<a id="oc-configuring-the-list-behavior"></a>
 ## Configuring the List Behavior
 
 The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical list behavior configuration file:
@@ -144,7 +145,7 @@ For each column can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
-**type** | defines how this column should be rendered (see [Column types](#available-column-types) below).
+**type** | defines how this column should be rendered (see [Column types](#oc-available-column-types) below).
 **default** | specifies the default value for the column if value is empty.
 **searchable** | include this column in the list search results. Default: false.
 **invisible** | specifies if this column is hidden by default. Default: false.
@@ -562,7 +563,7 @@ For each scope you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the filter scope to the user.
-**type** | defines how this scope should be rendered (see [Scope types](#available-scope-types) below). Default: group.
+**type** | defines how this scope should be rendered (see [Scope types](#oc-available-scope-types) below). Default: group.
 **conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
 **scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
@@ -616,6 +617,7 @@ public function getCityOptions($scopes = null)
 
 > **Note**: Scope dependencies with `type: group` are only supported at this stage.
 
+<a id="oc-available-scope-types"></a>
 ### Available Scope Types
 
 These types can be used to determine how the filter scope should be displayed.
@@ -847,7 +849,7 @@ The `ListController` behavior has a main container view that you may override by
 </div>
 ```
 
-The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#configuring-the-list-behavior). The widget will look in this path for a view first, then fall back to the default location.
+The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#oc-configuring-the-list-behavior). The widget will look in this path for a view first, then fall back to the default location.
 
 ```yaml
 # Custom view path

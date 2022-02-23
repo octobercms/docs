@@ -186,6 +186,7 @@ secondaryTabs:
         # [...]
 ```
 
+<a id="oc-field-options"></a>
 ### 字段选项
 
 对于每个字段，您可以指定这些选项(如果适用):
@@ -193,7 +194,7 @@ secondaryTabs:
 选项 | 描述
 ------------- | -------------
 **label** | 向用户显示表单字段时的名称。
-**type** | 定义应如何呈现此字段(请参阅下面的 [可用字段类型](#available-field-types))。默认值:text。
+**type** | 定义应如何呈现此字段(请参阅下面的 [可用字段类型](#oc-available-field-types))。默认值:text。
 **span** | 将表单域与一侧对齐。选项: auto(自动), left(左对齐), right(右对齐), row(格网布局), full(铺满)。默认值:full。
 **spanClass** | 与 span `row` 选项一起使用，将表单显示为 Bootstrap 网格，例如，`spanClass: col-xs-4`。
 **size** | 指定字段大小，例如 textarea 字段。选项:tiny(微型), small(小型), large(中型), huge(大型), giant(巨型)。
@@ -273,7 +274,7 @@ tabs:
 <a id="oc-available-field-types"></a>
 ## 可用字段类型
 
-有多种原生字段类型用于 **type** 设置。 对于基本的 UI 元素，请查看 [可用的 UI 元素](#available-ui-elements)。 对于更高级的表单字段，可以使用 [表单小部件](#form-widgets) 代替。
+有多种原生字段类型用于 **type** 设置。 对于基本的 UI 元素，请查看 [可用的 UI 元素](#oc-available-ui-elements)。 对于更高级的表单字段，可以使用 [表单小部件](#oc-form-widgets) 代替。
 
 <div class="content-list" markdown="1">
 
@@ -632,6 +633,7 @@ blog_content:
     size: huge
 ```
 
+<a id="oc-available-ui-elements"></a>
 ## 可用的 UI 元素
 
 表单中可以包含非功能 UI 元素以帮助进行布局设计。
@@ -708,6 +710,7 @@ content:
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
+<a id="oc-form-widgets"></a>
 ## 表单小部件
 
 标准中包含各种表单小部件，尽管插件通常会提供自己的自定义表单小部件。 您可以在 [表单小部件](widgets.md#oc-form-widgets) 文章中阅读更多内容。
@@ -1331,7 +1334,7 @@ tags:
 
 ### 输入预置转换器
 
-输入预设转换器使用 `preset` [表单字段选项](#field-options) 定义，允许您将输入到元素中的文本转换为另一个输入元素中的 URL、slug 或文件名值。
+输入预设转换器使用 `preset` [表单字段选项](#oc-field-options) 定义，允许您将输入到元素中的文本转换为另一个输入元素中的 URL、slug 或文件名值。
 
 在此示例中，当用户在`title`字段中输入文本时，我们将自动填写`URL`字段值。 如果为 Title 输入文本 **Hello world**，则 URL 将跟随转换成 **/hello-world**。 仅当目标字段 (`url`) 为空且未触及时才会发生此行为。
 
@@ -1374,7 +1377,7 @@ slug:
 
 ### 触发事件
 
-触发事件是使用 `trigger` [表单字段选项](#field-options) 定义的，是一个使用 JavaScript 的基于浏览器的简单解决方案。它允许您根据另一个元素的状态更改元素属性，例如可见性或值。这是一个示例定义:
+触发事件是使用 `trigger` [表单字段选项](#oc-field-options) 定义的，是一个使用 JavaScript 的基于浏览器的简单解决方案。它允许您根据另一个元素的状态更改元素属性，例如可见性或值。这是一个示例定义:
 
 ```yaml
 is_delayed:
@@ -1397,12 +1400,12 @@ send_at:
 选项 | 描述
 ------------- | -------------
 **action** | 定义满足条件时应用于此字段的操作。 支持的值:show(显示), hide(隐藏), enable(启用), disable(禁用), empty(空)。
-**field** | 定义将触发操作的其他字段名称。 通常，字段名称是指同一级别表单中的字段。 例如，如果此字段位于 [循环组件部件](#repeater) 中，则只会检查同一循环组件部件中的字段。 但是，如果字段名称前面有一个插入符号 `^`，例如:`^parent_field`，它将指代循环组件或比当前字段本身高一级的字段。 此外，如果使用了多个插入符号 `^`，它将引用更高的级别:`^^grand_parent_field`、`^^^grand_grand_parent_field` 等。
+**field** | 定义将触发操作的其他字段名称。 通常，字段名称是指同一级别表单中的字段。 例如，如果此字段位于 [循环组件部件](#widget-repeater) 中，则只会检查同一循环组件部件中的字段。 但是，如果字段名称前面有一个插入符号 `^`，例如:`^parent_field`，它将指代循环组件或比当前字段本身高一级的字段。 此外，如果使用了多个插入符号 `^`，它将引用更高的级别:`^^grand_parent_field`、`^^^grand_grand_parent_field` 等。
 **condition** | 确定指定字段应满足的条件，以将条件视为"true"。 支持的值:checked(选中), unchecked(未选中), value[somevalue](值)。
 
 ### 字段依赖
 
-表单字段可以通过定义 `dependsOn` [表单字段选项](#field-options) 来声明对其他字段的依赖关系，这提供了更强大的服务器端解决方案，用于在修改字段的依赖项时更新字段。当声明为依赖项的字段发生更改时，定义字段将使用 AJAX 框架进行更新。这提供了使用 `filterFields` 方法与字段属性交互的机会，或者更改要提供给字段的可用选项。
+表单字段可以通过定义 `dependsOn` [表单字段选项](#oc-field-options) 来声明对其他字段的依赖关系，这提供了更强大的服务器端解决方案，用于在修改字段的依赖项时更新字段。当声明为依赖项的字段发生更改时，定义字段将使用 AJAX 框架进行更新。这提供了使用 `filterFields` 方法与字段属性交互的机会，或者更改要提供给字段的可用选项。
 
 ```yaml
 country:

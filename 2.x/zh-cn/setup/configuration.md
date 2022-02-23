@@ -68,7 +68,7 @@ October CMS 的所有配置文件都存储在 **config** 目录中。每个选�
 
 启用安全模式后，CMS 模板中的 PHP 代码部分将被禁用，以防止用户执行潜在的恶意代码。
 
-此变量可以设置为 `true` 或 `false` 。如果设置为 `null`，则在禁用 [debug mode](#debug-mode) 时将激活安全模式。
+此变量可以设置为 `true` 或 `false` 。如果设置为 `null`，则在禁用 [debug mode](#oc-debug-mode) 时将激活安全模式。
 
 <a id="oc-csrf-protection"></a>
 ### CSRF 保护

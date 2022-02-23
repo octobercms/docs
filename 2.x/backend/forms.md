@@ -186,6 +186,7 @@ secondaryTabs:
         # [...]
 ```
 
+<a id="oc-field-options"></a>
 ### Field Options
 
 For each field you can specify these options (where applicable):
@@ -193,7 +194,7 @@ For each field you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
-**type** | defines how this field should be rendered (see [Available fields types](#available-field-types) below). Default: text.
+**type** | defines how this field should be rendered (see [Available fields types](#oc-available-field-types) below). Default: text.
 **span** | aligns the form field to one side. Options: auto, left, right, row, full. Default: full.
 **spanClass** | used with the span `row` option to display the form as a Bootstrap grid, for example, `spanClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
@@ -274,7 +275,7 @@ tabs:
 <a id="oc-available-field-types"></a>
 ## Available Field Types
 
-There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#available-ui-elements). For more advanced form fields, a [form widget](#form-widgets) can be used instead.
+There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#oc-available-ui-elements). For more advanced form fields, a [form widget](#oc-form-widgets) can be used instead.
 
 <div class="content-list" markdown="1">
 
@@ -636,6 +637,7 @@ blog_content:
     size: huge
 ```
 
+<a id="oc-available-ui-elements"></a>
 ## Available UI Elements
 
 There are non function UI elements that can be included in forms to help with the layout design.
@@ -713,6 +715,7 @@ content:
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
+<a id="oc-form-widgets"></a>
 ## Form Widgets
 
 There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#oc-form-widgets) article.
@@ -1338,7 +1341,7 @@ Sometimes you may want to manipulate the value or appearance of a form field und
 
 ### Input Preset Converter
 
-The input preset converter is defined with the `preset` [form field option](#field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
+The input preset converter is defined with the `preset` [form field option](#oc-field-options) and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
 
 In this example we will automatically fill out the `url` field value when a user enters text in the `title` field. If the text **Hello world** is typed in for the Title, the URL will follow suit with the converted value of **/hello-world**. This behavior will only occur when the destination field (`url`) is empty and untouched.
 
@@ -1381,7 +1384,7 @@ Type | Description
 
 ### Trigger Events
 
-Trigger Events are defined with the `trigger` [form field option](#field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
+Trigger Events are defined with the `trigger` [form field option](#oc-field-options) and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
 ```yaml
 is_delayed:
@@ -1404,12 +1407,12 @@ In the above example the `send_at` form field will only be shown if the `is_dela
 Option | Description
 ------------- | -------------
 **action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
-**field** | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#repeater), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
+**field** | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#widget-repeater), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
 **condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
 
 ### Field Dependencies
 
-Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field.
+Form fields can declare dependencies on other fields by defining the `dependsOn` [form field option](#oc-field-options) which provides a more robust server side solution for updating fields when their dependencies are modified. When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field.
 
 ```yaml
 country:

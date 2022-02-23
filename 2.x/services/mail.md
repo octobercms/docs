@@ -64,7 +64,7 @@ Since we are passing an array containing the `name` key in the example above, we
 {{ name }}
 ```
 
-> **Note**: You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#attachments).
+> **Note**: You should avoid passing a `message` variable in your message, this variable is always passed and allows the [inline embedding of attachments](#oc-attachments).
 
 #### Quick sending
 
@@ -188,6 +188,7 @@ Mail::raw([
 });
 ```
 
+<a id="oc-attachments"></a>
 ### Attachments
 
 To add attachments to an e-mail, use the `attach` method on the `$message` object passed to your Closure. The `attach` method accepts the full path to the file as its first argument:

@@ -19,6 +19,7 @@ class Categories extends \Backend\Classes\Controller
 
 > **注意**：列表和 [表单行为](../backend/forms.md) 通常在同一个控制器中一起使用。
 
+<a id="oc-configuring-the-list-behavior"></a>
 ## 配置列表行为
 
 `$listConfig` 属性中引用的配置文件以 YAML 格式定义。 该文件应放置在控制器的 [视图目录](controllers-ajax.md) 中。 下面是一个典型的列表行为配置文件示例：
@@ -143,7 +144,7 @@ columns:
 选项 | 描述
 ------------- | -------------
 **label** | 向用户显示列表字段时的名称。
-**type** | 定义如何呈现此字段(请参阅下面的 [字段类型](#available-column-types))。
+**type** | 定义如何呈现此字段(请参阅下面的 [字段类型](#oc-available-column-types))。
 **default** | 如果值为空，则指定字段的默认值。
 **searchable** | 将此字段包含在列表搜索结果中。默认值：false。
 **invisible** | 指定此字段是否默认隐藏。默认值：false。
@@ -561,7 +562,7 @@ scopes:
 选项 | 描述
 ------------- | -------------
 **label** | 向用户显示过滤器范围时的名称。
-**type** | 定义应如何呈现此范围(请参阅下面的 [范围类型](#available-scope-types))。默认值：group。
+**type** | 定义应如何呈现此范围(请参阅下面的 [范围类型](#oc-available-scope-types))。默认值：group。
 **conditions** | 指定要应用于列表模型查询的原始 where 查询语句，`:filtered` 参数表示过滤后的值。
 **scope** | 指定**列表模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)以应用于列表查询。第一个参数将包含查询对象(根据常规范围方法)，第二个参数将包含过滤后的值
 **options** | 如果按多个项目过滤时使用的选项，此选项可以在 `modelClass` 模型中指定数组或方法名称。
@@ -615,6 +616,7 @@ public function getCityOptions($scopes = null)
 
 > **注意**：仅在此阶段支持具有 `type: group` 的范围依赖项。
 
+<a id="oc-available-scope-types"></a>
 ### 可用范围类型
 
 这些类型可用于确定应如何显示过滤器范围。
@@ -846,7 +848,7 @@ public function index()
 </div>
 ```
 
-该行为将调用一个`Lists`小部件，该小部件还包含许多您可以覆盖的视图。这可以通过指定一个 `customViewPath` 选项来实现，如 [列表配置选项](#configuring-the-list-behavior) 中所述。小部件将首先在此路径中查找视图，然后回退到默认位置。
+该行为将调用一个`Lists`小部件，该小部件还包含许多您可以覆盖的视图。这可以通过指定一个 `customViewPath` 选项来实现，如 [列表配置选项](#oc-configuring-the-list-behavior) 中所述。小部件将首先在此路径中查找视图，然后回退到默认位置。
 
 ```yaml
 # 自定义视图路径
