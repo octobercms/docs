@@ -62,10 +62,10 @@ The contents are then available as the `body` variable.
 In any template you can check if a partial content exists by using the `partial()` function. This lets you to generate different markup depending on whether the partial exists or not. Example:
 
 ```twig
-{% set cardPartial = 'my-cards/' ~ cardCode %}
+{% set cardPartial = partial('my-cards/' ~ cardCode) %}
 
-{% if partial(cardPartial) %}
-    {% partial cardPartial %}
+{% if cardPartial %}
+    {{ cardPartial|raw }}
 {% else %}
     <p>Card not found!</p>
 {% endif %}
