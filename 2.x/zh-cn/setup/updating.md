@@ -8,6 +8,12 @@
 - [Laravel v6.0 LTS 升级指南](https://octobercms.com/support/article/rn-11)
 - [October CMS v2.1 稳定版](https://octobercms.com/support/article/rn-27)
 
+## 更新到 v3.0(测试版)
+
+如果需要使用 PHP 8.1，您可以使用以下指南升级到OctoberCMS v3的beta副本。
+
+- [OctoberCMS 3.0 Beta - 抢先体验](https://octobercms.com/support/article/rn-28)
+
 #### 使用 Deploy 插件升级
 
 如果想把v1网站升级使用v2，可以使用[官方部署插件](https://octobercms.com/plugin/rainlab-deploy)作为升级网站的解决方案。在执行这些步骤之前，始终**进行完整的站点备份**。

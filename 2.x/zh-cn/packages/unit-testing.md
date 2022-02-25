@@ -2,7 +2,7 @@
 
 ## 测试插件
 
-单个插件测试用例可以通过在插件的基本目录中运行`../../../vendor/bin/phpunit`来运行（例如`plugins/acme/demo`）。
+单个插件测试用例可以通过在插件的基本目录中运行`../../../vendor/bin/phpunit`来运行(例如`plugins/acme/demo`)。
 
 ### 创建插件测试
 

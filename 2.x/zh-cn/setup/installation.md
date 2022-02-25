@@ -12,9 +12,8 @@ October CMS 是一个具有简单直观界面的 Web 应用程序平台。Web �
 - [适用于 macOS 的 Laravel Valet](https://laravel.com/docs/valet)
 - [适用于 Windows 10 的 Laragon](https://laragon.org/)
 
-## 欢迎
 
-October中文文档全部由["超越无限"](https://octobercms.com/partners/profile/bbctop)维护，您可以在我们的[企业介绍](https://octobercms.com/partners/profile/bbctop)页面加入中国开发者社区
+> October中文文档全部由["超越无限"](https://octobercms.com/partners/profile/bbctop)维护，您可以在我们的[企业介绍](https://octobercms.com/partners/profile/bbctop)页面加入中国开发者社区
 
 ## 安装Composer
 
@@ -59,7 +58,7 @@ php artisan serve
 
 安装完成后，您可能需要设置一些内容。
 
-###查看配置
+### 查看配置
 
 配置文件存储在应用程序的**config** 目录中。 虽然每个文件都包含每个设置的描述，但查看适用于您的情况的 [通用配置选项](../setup/configuration.md) 很重要。
 
@@ -99,7 +98,7 @@ October CMS 对服务器有一些要求：
 
 1. PHP 7.2.9 或更高版本
 1. Composer 2.0 或更高版本
-1. PDO PHP Extension（以及要连接的数据库的相关驱动程序）
+1. PDO PHP Extension(以及要连接的数据库的相关驱动程序)
 1. cURL PHP 扩展
 1. OpenSSL PHP 扩展
 1. Mbstring PHP 扩展
@@ -112,6 +111,8 @@ October CMS 对服务器有一些要求：
 1. MySQL 5.7 或 MariaDB 10.2
 1. PostgreSQL 9.6
 1. SQLite 3.8.8
+
+请注意，October CMS v2 与 PHP 8.1 不兼容，[v3 beta](https://octobercms.com/support/article/rn-28) 可满足此要求。 建议降级到 PHP 8.0 并使用版本2以获得最佳稳定性和支持。
 
 如果您使用的是旧版本的 MySQL 或 MariaDB，您可能需要[配置索引长度](../database/structure.md#oc-index-lengths-using-mysql-mariadb) 以支持 `utf8mb4` 字符集.
 

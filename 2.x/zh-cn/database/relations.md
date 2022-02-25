@@ -391,10 +391,10 @@ public $belongsToMany = [
 参数 | 描述
 ------------- | -------------
 **table** | 连接表的名称。
-**key** | 定义模型键的字段名称（在数据透视表内）。 默认值由模型名称和`_id`后缀组合而成，即`user_id`
-**parentKey** | 定义模型键的字段名称（在定义模型表中）。 默认值：id
-**otherKey** | 关联模型键的字段名称（在数据透视表内）。 默认值由模型名称和`_id`后缀组合而成，即`role_id`
-**relatedKey** | 关联模型键的字段名称（在关联模型表内）。 默认值：id
+**key** | 定义模型键的字段名称(在数据透视表内)。 默认值由模型名称和`_id`后缀组合而成，即`user_id`
+**parentKey** | 定义模型键的字段名称(在定义模型表中)。 默认值：id
+**otherKey** | 关联模型键的字段名称(在数据透视表内)。 默认值由模型名称和`_id`后缀组合而成，即`role_id`
+**relatedKey** | 关联模型键的字段名称(在关联模型表内)。 默认值：id
 **pivot** | 在中间表中找到的关联字段数组，属性可通过 `$model->pivot` 获得。
 **pivotModel** | 指定访问中间关联时要返回的自定义模型类。 默认为 `October\Rain\Database\Pivot` 而对于多态关联为 `October\Rain\Database\MorphPivot`。
 **timestamps** | 如果为true，则关联表应包含`created_at`和`updated_at`字段。 默认值：false

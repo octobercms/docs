@@ -37,7 +37,7 @@
 <a id="oc-modules-directory"></a>
 ## 模块目录
 
-###系统模块
+### 系统模块
 
 `system` 模块包含October CMS 的核心功能，是必需的模块。它具有其他模块使用的共享逻辑。
 
