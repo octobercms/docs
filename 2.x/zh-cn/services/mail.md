@@ -66,7 +66,7 @@ Mail::send('acme.blog::mail.message', $vars, function($message) {
 
 > **注意**：你应该避免在你的消息中传递一个 `message` 变量，这个变量总是被传递并且允许 [内联嵌入附件](#oc-attachments)。
 
-####快速发送
+#### 快速发送
 
 October还包括一种名为 `sendTo` 的替代方法，可以简化发送邮件：
 
@@ -286,7 +286,7 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 
 可以使用邮件视图或邮件模板在October发送邮件消息。 邮件视图由文件系统中的应用程序或插件**/views**目录中提供。 而邮件模板是通过 *System(系统) > Mail templates(邮件模板)* 使用后端界面管理的。 所有邮件消息都支持使用 Twig 进行标记。
 
-或者，可以使用 `registerMailTemplates` 方法[在插件注册文件中注册]（#oc-registering-mail-layouts-templates-partials）邮件视图。 这将自动生成一个邮件模板，并允许使用后端界面对其进行自定义。
+或者，可以使用 `registerMailTemplates` 方法[在插件注册文件中注册](#oc-registering-mail-layouts-templates-partials)邮件视图。 这将自动生成一个邮件模板，并允许使用后端界面对其进行自定义。
 
 <a id="oc-mail-views"></a>
 ### 邮件浏览量
@@ -364,7 +364,7 @@ Mail::send('this.is.my.email', $data, function($message) use ($user)
 
 #### 自动生成的模板
 
-邮件模板也可以通过[已注册的邮件视图](#oc-registering-mail-layouts-templates-partials)自动生成。 **code** 值将与邮件视图路径相同（例如：author.plugin:mail.message）。如果邮件视图定义了 **layout** 参数，这将用于为模板提供布局。
+邮件模板也可以通过[已注册的邮件视图](#oc-registering-mail-layouts-templates-partials)自动生成。 **code** 值将与邮件视图路径相同(例如：author.plugin:mail.message)。如果邮件视图定义了 **layout** 参数，这将用于为模板提供布局。
 
 首次保存生成的模板时，在发送邮件时将使用自定义的内容。 在这种情况下，可以将邮件视图视为*默认视图*。
 

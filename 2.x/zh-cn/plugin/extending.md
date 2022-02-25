@@ -165,7 +165,7 @@ Event::listen('backend.form.extendFields', function($widget) {
     }
 
     // 仅当有待定的 Form 小部件是root级别时才应用此侦听器
-    // 表单小部件（不是循环组件、嵌套表单等）
+    // 表单小部件(不是循环组件、嵌套表单等)
     if ($widget->isNested) {
         return;
     }

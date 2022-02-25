@@ -53,7 +53,7 @@ October CMS 的所有配置文件都存储在 **config** 目录中。每个选�
 
 调试模式在启用时使用以下功能:
 
-1. 显示[详细错误页面](../uror-page)。
+1. 显示[详细错误页面](../cms/pages.md#oc-error-page)。
 1. 用户认证失败提供具体原因。
 1. [组合资产](../markup/filter-theme.md)默认不压缩。
 1. [安全模式](#oc-safe-mode) 默认关闭。

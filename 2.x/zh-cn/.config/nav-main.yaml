@@ -68,7 +68,7 @@
         - setup/deployment
         - setup/updating
 -
-    title: 内容管理系统(CMS)
+    title: CMS
     children:
         - cms/themes
         - cms/pages

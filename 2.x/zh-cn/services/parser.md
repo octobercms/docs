@@ -245,7 +245,7 @@ echo $syntax->toTwig();
 
 ### 编辑器模式
 
-到目前为止，动态语法解析器与常规模板引擎没有太大区别，但是编辑器模式是动态语法的实用性变得更加明显的地方。 编辑器模式开启了一个新的可能性领域，例如，[布局将自定义表单字段注入到属于它们的页面]（https://octobercms.com/plugin/rainlab-pages）或用于[电子邮件活动中的动态构建表单](https://octobercms.com/plugin/responsiv-campaign)。
+到目前为止，动态语法解析器与常规模板引擎没有太大区别，但是编辑器模式是动态语法的实用性变得更加明显的地方。 编辑器模式开启了一个新的可能性领域，例如，[布局将自定义表单字段注入到属于它们的页面](https://octobercms.com/plugin/rainlab-pages)或用于[电子邮件活动中的动态构建表单](https://octobercms.com/plugin/responsiv-campaign)。
 
 继续上面的例子，在 `Parser` 对象上调用 `toEditor` 方法将返回一个 PHP 属性数组，这些属性定义了如何填充变量，例如由表单构建器。
 
