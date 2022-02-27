@@ -4,7 +4,7 @@
 
 1. 定义[组件](components.md)。
 1. 定义[用户权限](../backend/users.md)。
-1. 添加[设置页面](settings.md#oc-backend-settings-pages)、[菜单项](#oc-navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md）。
+1. 添加[设置页面](settings.md#oc-backend-settings-pages)、[菜单项](#oc-navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md)。
 1. 创建[数据库表结构和种子数据](updates.md)。
 1. 更改[核心或其他插件的功能](events.md)。
 1. 提供类、[后端控制器](../backend/controllers-ajax)、视图、资产等文件。
@@ -236,7 +236,7 @@ public function registerNavigation()
 **label** | 指定菜单标签多语言字符串键，必需。
 **icon** | 来自 [October CMS 图标集](../ui/icon.md) 的图标名称，可选。
 **iconSvg** | 用于代替标准图标的SVG图标，SVG图标应该是一个矩形并且可以支持颜色，可选。
-**url** | 菜单项应指向的 URL（例如，`Backend::url('author/plugin/controller/action')`，必需。
+**url** | 菜单项应指向的 URL(例如，`Backend::url('author/plugin/controller/action')`，必需。
 **counter** | 要在菜单图标附近输出的数值。 该值应该是一个数字或一个返回数字的可调用对象，可选。
 **counterLabel** | 一个字符串值，用于描述计数器中的数字引用，可选。
 **badge** | 一个字符串值来代替计数器输出，该值应该是一个字符串，如果设置，将覆盖badge属性，可选。

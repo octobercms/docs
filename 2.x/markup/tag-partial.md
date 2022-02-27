@@ -59,13 +59,25 @@ The contents are then available as the `body` variable.
 
 ## Checking a Partial Exists
 
-In any template you can check if a partial content exists by using the `partial()` function. This lets you to generate different markup depending on whether the partial exists or not. Example:
+In any template you can check if a partial content exists by using the `partial()` function. This lets you to generate different markup depending on whether the partial exists or not.
 
 ```twig
 {% set cardPartial = 'my-cards/' ~ cardCode %}
 
 {% if partial(cardPartial) %}
     {% partial cardPartial %}
+{% else %}
+    <p>Card not found!</p>
+{% endif %}
+```
+
+Alternatively, if your partial is non-idempotent you can set a variable and render with the `|raw` filter.
+
+```twig
+{% set cardPartial = partial('my-cards/' ~ cardCode) %}
+
+{% if cardPartial %}
+    {{ cardPartial|raw }}
 {% else %}
     <p>Card not found!</p>
 {% endif %}

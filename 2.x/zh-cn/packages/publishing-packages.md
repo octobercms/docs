@@ -6,7 +6,7 @@ October CMS 使用 [Composer](https://getcomposer.org/) 发布包并且完全兼
 
 您的包应该驻留在可以由October CMS 网关访问的源代码控制存储库中，例如 [GitHub](https://github.com/) 或 [BitBucket](https://bitbucket.org/)。 对于私有包，服务器可以使用您在发布过程中提供的凭据访问它们。
 
-确保以 **-plugin** 或 **-theme** 开头的包 `name` 分别以 **-plugin** 或 **-theme** 结尾，这将有助于其他人找到您的包，并且符合 [开发者指南](../../ 帮助/指南/developer.md#package-naming）。
+确保以 **-plugin** 或 **-theme** 开头的包 `name` 分别以 **-plugin** 或 **-theme** 结尾，这将有助于其他人找到您的包，并且符合 [开发者指南](../../ 帮助/指南/developer.md#package-naming)。
 
 <a id="oc-publishing-plugins"></a>
 ### 发布插件
@@ -188,7 +188,7 @@ public function boot()
 Config::get('purifier.encoding') === Config::get('acme.blog::purifier.encoding');
 ```
 
-现在，您可以按照常规插件配置值和[standard configuration approach]（settings.md#file-based configuration）的方式自由提供软件包配置值。
+现在，您可以按照常规插件配置值和[standard configuration approach](settings.md#file-based configuration)的方式自由提供软件包配置值。
 
 ### 别名和服务提供商
 

@@ -50,7 +50,7 @@ $model->avatar = '/path/to/somefile.jpg';
 $file = (new System\Models\File)->fromData('Some content', 'sometext.txt');
 ```
 
-对于多个附加关联（`$attachMany`），您可以在关联上使用`create`方法，注意文件对象与`data`属性相关联。 如果您愿意，这种方法也可以用于单数关系。
+对于多个附加关联(`$attachMany`)，您可以在关联上使用`create`方法，注意文件对象与`data`属性相关联。 如果您愿意，这种方法也可以用于单数关系。
 
 ```php
 $model->avatar()->create(['data' => Input::file('file_input')]);

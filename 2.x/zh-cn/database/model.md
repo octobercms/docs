@@ -332,7 +332,7 @@ class Flight extends Model
 
 在上面的示例中，**除 `price`** 之外的所有属性都可以批量赋值。
 
-####其他创建方式
+#### 其他创建方式
 
 有时您可能希望只实例化模型的新实例。你可以使用 `make` 方法来做到这一点。 `make` 方法将简单地返回一个新实例，而不保存或创建任何内容。
 
@@ -532,7 +532,7 @@ $flight->bindEvent('model.beforeCreate', function() use ($model) {
 
 由于模型 [配备使用行为](../services/behaviors.md)，它们可以使用静态的 `extend` 方法进行扩展。 该方法接受一个闭包并将模型对象传递给它。
 
-在闭包内，您可以向模型添加关系。 在这里，我们扩展了 `Backend\Models\User` 模型，以包含引用 `Acme\Demo\Models\Profile` 模型的配置文件（有一个）关系。
+在闭包内，您可以向模型添加关系。 在这里，我们扩展了 `Backend\Models\User` 模型，以包含引用 `Acme\Demo\Models\Profile` 模型的配置文件(有一个)关系。
 
 ```php
 \Backend\Models\User::extend(function($model) {

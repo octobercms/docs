@@ -59,7 +59,7 @@ $exists = Storage::disk('s3')->exists('file.jpg');
 
 #### 文件元信息
 
-`size` 方法可用于获取文件的大小（以字节为单位）：
+`size` 方法可用于获取文件的大小(以字节为单位)：
 
 ```php
 $size = Storage::size('file1.jpg');
