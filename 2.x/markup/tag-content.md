@@ -75,3 +75,31 @@ The collection of variables is accessed by using an opening and closing set of b
 ```
 
 > **Note**: Twig syntax is not supported in Content blocks, consider using a [CMS partial](../cms/partials.md) instead.
+
+## Setting Contents to a Twig Variable
+
+In any template you can set the contents to a variable with the `content()` function. This lets you manipulate the output before display. Remember to use the `|raw` filter to prevent output escaping.
+
+```twig
+{% set welcomeContent = content('welcome.htm') %}
+
+{{ welcomeContent|raw }}
+```
+
+You may also pass variables to the content as the second argument.
+
+```twig
+{% set welcomeContent = content('welcome.htm', { foo: 'bar' }) %}
+```
+
+## Checking a Content File Exists
+
+The `content()` function can be used to check if a content exists without rendering the contents. To prevent the rendering of the content, pass the second argument as false and it will return true or false if the content file is found.
+
+```twig
+{% if content('welcome.htm', false) %}
+    {% content 'welcome.htm' %}
+{% else %}
+    <p>Welcome content not found!</p>
+{% endif %}
+```
