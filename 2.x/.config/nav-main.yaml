@@ -51,6 +51,7 @@
     collapsable: false
     children:
         - function-abort
+        - function-redirect
         - function-dump
         - function-str
         - function-form
