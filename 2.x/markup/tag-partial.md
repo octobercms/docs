@@ -75,10 +75,10 @@ You may also pass variables to the partial as the second argument.
 
 ## Checking a Partial Exists
 
-The `partial()` function can be used to check if a partial exists without rendering the contents. To prevent the rendering of the partial, pass the second argument as false and it will return true or false if the partial is found.
+The `hasPartial()` function can be used to check if a partial exists without rendering the contents, it will return true or false if the partial is found.
 
 ```twig
-{% if partial('my-cards/card', false) %}
+{% if hasPartial('my-cards/card') %}
     {% partial 'my-cards/card' %}
 {% else %}
     <p>Card not found!</p>

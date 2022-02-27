@@ -94,10 +94,10 @@ You may also pass variables to the content as the second argument.
 
 ## Checking a Content File Exists
 
-The `content()` function can be used to check if a content exists without rendering the contents. To prevent the rendering of the content, pass the second argument as false and it will return true or false if the content file is found.
+The `hasContent()` function can be used to check if a content exists without rendering the contents. To prevent the rendering of the content, pass the second argument as false and it will return true or false if the content file is found.
 
 ```twig
-{% if content('welcome.htm', false) %}
+{% if hasContent('welcome.htm') %}
     {% content 'welcome.htm' %}
 {% else %}
     <p>Welcome content not found!</p>
