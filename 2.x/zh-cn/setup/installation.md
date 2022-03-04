@@ -96,7 +96,7 @@ php artisan queue:work
 
 October CMS 对服务器有一些要求：
 
-1. PHP 7.2.9 或更高版本
+1. PHP 7.4 或更高版本
 1. Composer 2.0 或更高版本
 1. PDO PHP Extension(以及要连接的数据库的相关驱动程序)
 1. cURL PHP 扩展
