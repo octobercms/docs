@@ -634,7 +634,7 @@ public function getCityOptions($scopes = null)
 - [数字](#filter-number)
 - [数字范围](#filter-numberrange)
 - [文本](#filter-text)
-- [Clear](#filter-clear)
+- [清除](#filter-clear)
 
 </div>
 <a name="filter-group"></a>
@@ -795,13 +795,13 @@ username:
 ```
 
 <a name="filter-clear"></a>
-### Clear
+### 清除
 
-`clear` - adds a button that clears all the filters and their values.
+`clear` - 添加一个清除所有过滤器及其值的按钮。
 
 ```yaml
 clear:
-    label: Clear Filters
+    label: 清除过滤器
     type: clear
 ```
 
