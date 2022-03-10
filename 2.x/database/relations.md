@@ -481,7 +481,8 @@ public $hasManyThrough = [
         'key' => 'my_country_id',
         'through' => \Acme\Blog\Models\User::class,
         'throughKey' => 'my_user_id',
-        'otherKey' => 'my_id'
+        'otherKey' => 'my_id',
+        'secondOtherKey' => 'my_country_id'
     ],
 ];
 ```
@@ -529,7 +530,8 @@ public $hasOneThrough = [
         'key' => 'supplier_id',
         'through' => \Acme\Supplies\Model\User::class,
         'throughKey' => 'user_id',
-        'otherKey' => 'id'
+        'otherKey' => 'id',
+        'secondOtherKey' => 'my_country_id'
     ],
 ];
 ```
