@@ -239,7 +239,6 @@ public function registerNavigation()
 **url** | 菜单项应指向的 URL(例如，`Backend::url('author/plugin/controller/action')`，必需。
 **counter** | 要在菜单图标附近输出的数值。 该值应该是一个数字或一个返回数字的可调用对象，可选。
 **counterLabel** | 一个字符串值，用于描述计数器中的数字引用，可选。
-**badge** | 一个字符串值来代替计数器输出，该值应该是一个字符串，如果设置，将覆盖badge属性，可选。
 **attributes** | 要应用于菜单项的属性和值的关联数组，可选。
 **permissions** | 后端用户必须拥有的一组权限才能查看菜单项(注意：直接访问 URL 仍然需要单独的权限检查)，可选。
 
@@ -259,15 +258,6 @@ public function registerNavigation()
     // ...
     'counter' => [\Author\Plugin\Classes\MyMenuCounterService::class, 'getCounterMethod'],
     'counterLabel' => '描述动态菜单计数器的标签',
-],
-```
-
-例如，使用 **badge** 显示带有单词的徽章，例如`New`。
-
-```php
-'blog' => [
-    // ...
-    'badge' => 'New'
 ],
 ```
 
