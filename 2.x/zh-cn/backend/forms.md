@@ -505,7 +505,7 @@ status:
     emptyOption: -- 无状态 --
 ```
 
-或者，您可以使用 `placeholder` 选项来使用无法重新选择的“占位”空选项。
+或者，您可以使用 `placeholder` 选项来使用无法重新选择的"占位"空选项。
 
 ```yaml
 status:
@@ -591,7 +591,7 @@ show_content:
 permissions:
     label: 权限
     type: checkboxlist
-    # 在具有 <=10 项的列表上设置为 true 以显式启用“全选”、“取消全选”选项(>10 自动启用它)
+    # 在具有 <=10 项的列表上设置为 true 以显式启用"全选"、"取消全选"选项(>10 自动启用它)
     quickselect: true
     default: 注册账户
     options:
@@ -1018,7 +1018,7 @@ user:
     list: ~/plugins/rainlab/user/models/user/columns.yaml
     recordsPerPage: 10
     title: 查找记录
-    prompt: 单击“查找”按钮以查找用户
+    prompt: 单击"查找"按钮以查找用户
     nameFrom: name
     descriptionFrom: email
 ```

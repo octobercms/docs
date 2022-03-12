@@ -49,7 +49,7 @@ $validator = Validator::make(
 
 ```php
 if ($validator->fails()) {
-    // The given data did not pass validation
+    // 给定数据未通过验证
 }
 ```
 

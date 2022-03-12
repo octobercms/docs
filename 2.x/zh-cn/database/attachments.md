@@ -148,7 +148,7 @@ class Post extends Model
 
     <input name="example_file" type="file">
 
-    <button type="submit">Upload File</button>
+    <button type="submit">上传文件</button>
 
 <?= Form::close() ?>
 ```
@@ -171,7 +171,7 @@ if (Input::hasFile('example_file')) {
 // 查找博客文章模型
 $post = Post::find(1);
 
-// 在上面的 HTML 表单中查找回发数据“example_file”
+// 在上面的 HTML 表单中查找回发数据"example_file"
 $fileFromPost = Input::file('example_file');
 
 // 如果存在，将其保存为带有延迟会话密钥的特色图像

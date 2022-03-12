@@ -57,16 +57,30 @@
 {{ body|raw }}
 ```
 
-## 检查部件是否存在
+## 将部件内容设置为 Twig 变量
 
-在任何模板中，您都可以使用 `partial()` 函数检查是否存在部件内容。这使您可以根据部件是否存在来生成不同的标记。例子：
+在任何模板中，您都可以使用 `partial()` 函数将部件内容设置为变量。 这使您可以在显示之前操作输出。 请记住使用 `|raw` 过滤器来防止输出转义。
 
 ```twig
-{% set cardPartial = 'my-cards/' ~ cardCode %}
+{% set cardPartial = partial('my-cards/card') %}
 
-{% if partial(cardPartial) %}
-    {% partial cardPartial %}
+{{ cardPartial|raw }}
+```
+
+您也可以将变量作为第二个参数传递给部分。
+
+```twig
+{% set cardPartial = partial('my-cards/card', { foo: 'bar' }) %}
+```
+
+## 检查部件是否存在
+
+`hasPartial()` 函数可用于在不渲染内容的情况下检查部件是否存在，如果找到部分，它将返回 true 或 false。
+
+```twig
+{% if hasPartial('my-cards/card') %}
+    {% partial 'my-cards/card' %}
 {% else %}
-    <p>卡片不存在!</p>
+    <p>未找到卡片</p>
 {% endif %}
 ```

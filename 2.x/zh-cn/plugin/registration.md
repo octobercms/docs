@@ -247,7 +247,7 @@ public function registerNavigation()
 键 | 描述
 ------------- | -------------
 **code** | 作为该菜单选项的唯一标识符的字符串值。
-**owner** | 以“Author.Plugin”格式指定菜单项所有者插件或模块的字符串值。
+**owner** | 以"Author.Plugin"格式指定菜单项所有者插件或模块的字符串值。
 
 ### 导航计数器
 
