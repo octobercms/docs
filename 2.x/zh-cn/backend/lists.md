@@ -634,6 +634,7 @@ public function getCityOptions($scopes = null)
 - [数字](#filter-number)
 - [数字范围](#filter-numberrange)
 - [文本](#filter-text)
+- [Clear](#filter-clear)
 
 </div>
 <a name="filter-group"></a>
@@ -747,21 +748,6 @@ public function myDefaultTime()
 }
 ```
 
-<!--
-You may also wish to set `useTimezone: false` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
-
-    published_at:
-        label: 日期
-        type: daterange
-        minDate: '2001-01-23'
-        maxDate: '2030-10-13'
-        yearRange: 10
-        conditions: created_at >= ':after' AND created_at <= ':before'
-        useTimezone: false
-
-> **Note**: the `useTimezone` option also applies to the `date` filter type as well.
--->
-
 <a name="filter-number"></a>
 ### 数字
 
@@ -806,6 +792,17 @@ username:
     type: text
     conditions: username = :value
     size: 2
+```
+
+<a name="filter-clear"></a>
+### Clear
+
+`clear` - adds a button that clears all the filters and their values.
+
+```yaml
+clear:
+    label: Clear Filters
+    type: clear
 ```
 
 ## 扩展列表行为

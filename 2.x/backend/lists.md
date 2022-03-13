@@ -666,6 +666,7 @@ These types can be used to determine how the filter scope should be displayed.
 - [Number](#filter-number)
 - [Number range](#filter-numberrange)
 - [Text](#filter-text)
+- [Clear](#filter-clear)
 
 </div>
 
@@ -779,21 +780,6 @@ public function myDefaultTime()
 }
 ```
 
-<!--
-You may also wish to set `useTimezone: false` to prevent a timezone conversion between the date that is displayed and the date stored in the database, since by default the backend timezone preference is applied to the display value.
-
-    published_at:
-        label: Date
-        type: daterange
-        minDate: '2001-01-23'
-        maxDate: '2030-10-13'
-        yearRange: 10
-        conditions: created_at >= ':after' AND created_at <= ':before'
-        useTimezone: false
-
-> **Note**: the `useTimezone` option also applies to the `date` filter type as well.
--->
-
 <a name="filter-number"></a>
 ### Number
 
@@ -838,6 +824,17 @@ username:
     type: text
     conditions: username = :value
     size: 2
+```
+
+<a name="filter-clear"></a>
+### Clear
+
+`clear` - adds a button that clears all the filters and their values.
+
+```yaml
+clear:
+    label: Clear Filters
+    type: clear
 ```
 
 ## Extending List Behavior
