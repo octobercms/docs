@@ -1506,6 +1506,22 @@ _map:
 
 有时您可能希望修改默认的表单行为，有几种方法可以做到这一点。
 
+### 扩展表单配置
+
+您可以使用 `formGetConfig` 方法动态扩展表单配置。
+
+```php
+public function formGetConfig()
+{
+    $config = $this->asExtension('FormController')->formGetConfig();
+
+    // 动态设置活动选项卡
+    $config->form['tabs']['activeTab'] = 'Content';
+
+    return $config;
+}
+```
+
 ### 重写控制器动作
 
 您可以为控制器中的 `create`, `update`或`preview`操作方法使用自己的逻辑，然后可以选择调用表单行为父方法。
