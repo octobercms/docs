@@ -809,6 +809,24 @@ clear:
 
 有时您可能希望修改默认列表行为，有几种方法可以做到这一点。
 
+### 扩展列表配置
+
+您可以使用 `listGetConfig` 方法动态扩展列表配置。
+
+```php
+public function listGetConfig($definition)
+{
+    $config = $this->asExtension('ListController')->listGetConfig($definition);
+
+    // 动态实现结构
+    $config->structure = [
+        'showTree' => true
+    ];
+
+    return $config;
+}
+```
+
 ### 覆盖控制器操作
 
 您可以在控制器中为 `index` 操作方法使用自己的逻辑，然后可以选择调用 List 行为 `index` 父方法。
