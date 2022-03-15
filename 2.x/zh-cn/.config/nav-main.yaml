@@ -112,6 +112,7 @@
         - backend/widgets
         - backend/forms
         - backend/lists
+        - backend/filters
         - backend/relations
         - backend/reorder
         - backend/import-export
