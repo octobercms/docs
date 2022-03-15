@@ -106,10 +106,10 @@ toolbar:
 要按用户定义的输入过滤列表，请将以下列表配置添加到 YAML 文件：
 
 ```yaml
-filter: config_filter.yaml
+filter: $/acme/blog/models/post/scopes.yaml
 ```
 
-**filter** 选项应引用 [过滤器配置文件](../backend/filters.md#oc-using-list-filters) 路径或提供带有配置的数组。
+**filter** 选项应引用 [过滤器配置文件](../backend/filters.md) 路径或提供带有配置的数组。
 
 <a id="oc-defining-list-columns"></a>
 ## 定义列表字段
@@ -721,7 +721,7 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-> 提供的范围数组类似于 [列表过滤器配置](../backend/filters.md#oc-using-list-filters)。
+> 提供的范围数组类似于 [列表过滤器配置](../backend/filters.md)。
 
 您也可以在内部将过滤器范围扩展到控制器类，只需覆盖 `listFilterExtendScopes` 方法。
 
@@ -785,7 +785,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-[列表过滤器](../backend/filters.md#oc-using-list-filters) 模型查询也可以通过覆盖 `listFilterExtendQuery` 方法来扩展：
+[列表过滤器](../backend/filters.md) 模型查询也可以通过覆盖 `listFilterExtendQuery` 方法来扩展：
 
 ```php
 public function listFilterExtendQuery($query, $scope)

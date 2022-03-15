@@ -82,7 +82,7 @@ items:
 **scope** | List | 指定在_相关表单模型_中定义的 [查询范围方法](../database/model.md#oc-query-scopes) 始终应用于列表查询。此关系将附加到的模型(即父模型)作为第二个参数(`$query` 是第一个)传递给此范围方法。
 **searchMode** | List | 将搜索策略定义为包含所有单词、任何单词或精确短语。支持的选项：全部、任意、精确。默认值：全部。
 **searchScope** | List | 指定**相关表单模型**中定义的[查询范围方法](../database/model.md#oc-query-scopes)应用于搜索查询，第一个参数将包含搜索词。
-**filter** | List | 对过滤器范围定义文件的引用，请参阅 [后端列表过滤器](../backend/filters.md#oc-using-list-filters)。
+**filter** | List | 对过滤器范围定义文件的引用，请参阅 [后端列表过滤器](../backend/filters.md)。
 
 只能为 **view** 选项指定这些配置值。
 

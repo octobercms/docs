@@ -107,10 +107,10 @@ The toolbar buttons partial referred above should contain the toolbar control de
 To filter a list by user defined input, add the following list configuration to the YAML file:
 
 ```yaml
-filter: config_filter.yaml
+filter: $/acme/blog/models/post/scopes.yaml
 ```
 
-The **filter** option should make reference to a [filter configuration file](../backend/filters.md#oc-using-list-filters) path or supply an array with the configuration.
+The **filter** option should make reference to a [filter configuration file](../backend/filters.md) path or supply an array with the configuration.
 
 <a id="oc-defining-list-columns"></a>
 ## Defining List Columns
@@ -762,7 +762,7 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-> The array of scopes provided is similar to the [list filters configuration](../backend/filters.md#oc-using-list-filters).
+> The array of scopes provided is similar to the [list filters configuration](../backend/filters.md).
 
 You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
@@ -826,7 +826,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-The [list filter](../backend/filters.md#oc-using-list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
+The [list filter](../backend/filters.md) model query can also be extended by overriding the `listFilterExtendQuery` method:
 
 ```php
 public function listFilterExtendQuery($query, $scope)
