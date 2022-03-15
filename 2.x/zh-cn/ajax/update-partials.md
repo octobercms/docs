@@ -48,7 +48,7 @@ mypartial: '#myDiv'
 firstpartial: '#myDiv', secondpartial: '#otherDiv'
 ```
 
-如果部件名称包含斜杠或破折号，则“引用”左侧很重要。
+如果部件名称包含斜杠或破折号，则"引用"左侧很重要。
 
 ```
 'folder/mypartial': '#myDiv', 'my-partial': '#myDiv'

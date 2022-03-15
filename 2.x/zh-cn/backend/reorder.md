@@ -23,10 +23,10 @@ structure:
 
 选项 | 描述
 ------------- | -------------
-**showTree** | 显示父/子记录的树层次结构。 默认值：true。
-**treeExpanded** | 默认情况下是否应展开树节点。 默认值：true。
-**showReorder** | 显示用于重新排序记录的界面。 默认值：true
-**maxDepth** | 定义允许重新排序的最大级别。 默认值：null
+**showTree** | 显示父/子记录的树层次结构。 默认值：`true`。
+**treeExpanded** | 默认情况下是否应展开树节点。 默认值：`true`。
+**showReorder** | 显示用于重新排序记录的界面。 默认值：`true`
+**maxDepth** | 定义允许重新排序的最大级别。 默认值：`null`
 
 ## 支持的模型类型
 
@@ -70,3 +70,43 @@ class User extends Model
 ```
 
 阅读更多关于[数据库文档中的可排序Trait](../database/traits.md#oc-sortable)。
+
+## 对相关记录进行排序
+
+可以使用 [Relation Behavior](../backend/relations.md) 对相关记录进行排序，下面列出了支持的关系类型。
+
+- [一对多](../database/relations.md#relation-one-to-many)在相关模型上使用 `Sortable` 特征。
+- [多对多](../database/relations.md#relation-many-to-many)在父模型上使用 `SortableRelation` 特征(见下文).
+
+<a id="oc-sortable-relation-model"></a>
+### 可排序的关系模型
+
+当需要在数据透视表中对记录进行排序时，使用 `SortableRelation` 特征，例如 [多对多](database/relations.md#many-to-many) 关系类型。 此特征需要在关系中定义 `pivotSortable` 选项，其中值是在数据透视表中找到的可排序列名称。
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\SortableRelation;
+
+    /**
+     * @var array belongsToMany
+     */
+    public $belongsToMany = [
+        'roles' => [
+            Role::class,
+            'table' => 'users_roles',
+            'pivotSortable' => 'sort_order',
+        ]
+    ];
+}
+```
+
+然后在您的关系配置中，您应该启用 `showReorder` 选项并禁用 `showTree` 选项。
+
+```yaml
+roles:
+    #...
+    structure:
+        showReorder: true
+        showTree: false
+```

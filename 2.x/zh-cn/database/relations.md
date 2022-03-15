@@ -45,10 +45,10 @@ public $hasMany = [
 **order** | 多条记录的排序顺序。
 **conditions** | 使用原始 where 查询语句过滤关联。
 **scope** | 使用提供的范围方法过滤关联。
-**push** | 如果设置为 false，则不会通过 `push` 保存此关联，默认值：true。
-**delete** | 如果设置为true，如果主模型被删除或关联被破坏，关联模型将被删除，默认：false。
-**replicate** | if set to true, the related model will duplicated or associated via the `replicate` method. Default: `false`.
-**detach** | 仅供`belongsToMany`关联使用，如果设置为false，则如果主模型被删除或关联被破坏，关联模型将不会被分离，默认：true。
+**push** | 如果设置为 false，则不会通过 `push` 保存此关联，默认值：`true`。
+**delete** | 如果设置为true，如果主模型被删除或关联被破坏，关联模型将被删除，默认：`false`。
+**replicate** | 如果设置为 true，相关模型将通过 `replicate` 方法复制或关联。 默认值：`false`。
+**relationClass** | 为相关对象指定自定义类名。
 
 使用 **order** 和 **conditions** 参数的过滤器示例。
 

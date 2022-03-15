@@ -172,7 +172,7 @@ Route::group(['domain' => '{account}.example.com'], function () {
 ```php
 Route::group(['prefix' => 'admin'], function () {
     Route::get('users', function () {
-        // Matches The "/admin/users" URL
+        // " 匹配"/admin/users" URL
     });
 });
 ```
@@ -182,7 +182,7 @@ Route::group(['prefix' => 'admin'], function () {
 ```php
 Route::group(['prefix' => 'accounts/{account_id}'], function () {
     Route::get('detail', function ($account_id) {
-        // Matches The accounts/{account_id}/detail URL
+        // 匹配 accounts/{account_id}/detail URL
     });
 });
 ```

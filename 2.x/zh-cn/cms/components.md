@@ -8,7 +8,7 @@
 
 ## 介绍
 
-如果您使用后端用户界面，您可以通过单击“组件”面板中的组件将组件添加到您的页面、部件和布局。如果您使用文本编辑器，您可以通过将组件名称添加到模板文件的 [Configuration](themes.md#oc-configuration-section) 部分，将组件附加到页面或布局。下一个示例演示如何向页面添加演示 To-do 组件：
+如果您使用后端用户界面，您可以通过单击"组件"面板中的组件将组件添加到您的页面、部件和布局。如果您使用文本编辑器，您可以通过将组件名称添加到模板文件的 [Configuration](themes.md#oc-configuration-section) 部分，将组件附加到页面或布局。下一个示例演示如何向页面添加演示 To-do 组件：
 
 ```ini
 title = "Components demonstration"

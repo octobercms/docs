@@ -132,7 +132,7 @@ $files = Storage::allFiles($directory);
 ```php
 $directories = Storage::directories($directory);
 
-// Recursive...
+// 递归...
 $directories = Storage::allDirectories($directory);
 ```
 

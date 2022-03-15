@@ -229,7 +229,7 @@ public function registerNavigation()
 
 当您注册后端导航时，您可以将 [多语言字符串](localization.md) 用于 `label` 值。 后端导航也可以由`permissions` 值控制并对应于定义的[后端用户权限](../backend/users)。 后端导航出现在整个导航菜单项上的顺序由 `order` 值控制。 较高的数字意味着该项目将在菜单项的顺序中稍后出现，而较低的数字意味着它将较早出现。
 
-要使子菜单项可见，您可以在后端控制器中使用 `BackendMenu::setContext [设置导航上下文](../backend/controllers-ajax.md#oc-setting-the-navigation-context) ` 方法。 这将使父菜单项处于活动状态并在侧菜单中显示子项。
+要使子菜单项可见，您可以在后端控制器中使用 `BackendMenu::setContext` [设置导航上下文](../backend/controllers-ajax.md#oc-setting-the-navigation-context)方法。 这将使父菜单项处于活动状态并在侧菜单中显示子项。
 
 键 | 描述
 ------------- | -------------
@@ -247,7 +247,7 @@ public function registerNavigation()
 键 | 描述
 ------------- | -------------
 **code** | 作为该菜单选项的唯一标识符的字符串值。
-**owner** | 以“Author.Plugin”格式指定菜单项所有者插件或模块的字符串值。
+**owner** | 以"Author.Plugin"格式指定菜单项所有者插件或模块的字符串值。
 
 ### 导航计数器
 
