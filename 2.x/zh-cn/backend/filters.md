@@ -1,6 +1,25 @@
 # Filters
 
-可以通过 [添加过滤器定义](../backend/lists.md#oc-filtering-the-list) 到列表配置来过滤列表。类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。
+October CMS provides features for filtering database records. For behaviors that support filters, you can define a **filter** option to enable the feature. Scopes are often stored in the model configuration directory as **scopes.yaml**.
+
+## Configuring a Behavior
+
+可以通过 [添加过滤器定义](../backend/lists.md#oc-filtering-the-list) 到列表配置来过滤列表。
+
+```yaml
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# ...
+
+# Displays the list filter
+filter: $/october/test/models/user/scopes.yaml
+```
+
+## Defining Filter Scopes
+
+类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。
 
 ```yaml
 # ===================================
@@ -113,7 +132,7 @@ public function getCityOptions($scopes = null)
 > **注意**：仅在此阶段支持具有 `type: group` 的范围依赖项。
 
 <a id="oc-available-scope-types"></a>
-### 可用范围类型
+## 可用范围类型
 
 这些类型可用于确定应如何显示过滤器范围。
 

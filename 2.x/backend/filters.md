@@ -1,6 +1,25 @@
 # Filters
 
-Lists can be filtered by [adding a filter definition](../backend/lists.md#oc-filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+October CMS provides features for filtering database records. For behaviors that support filters, you can define a **filter** option to enable the feature. Scopes are often stored in the model configuration directory as **scopes.yaml**.
+
+## Configuring a Behavior
+
+The [List Behavior](../backend/lists.md) and [Relation Behavior](../backend/relations.md) can be filtered by [adding a filter definition](../backend/lists.md#oc-filtering-the-list) to the configuration.
+
+```yaml
+# ===================================
+#  List Behavior Config
+# ===================================
+
+# ...
+
+# Displays the list filter
+filter: $/october/test/models/user/scopes.yaml
+```
+
+## Defining Filter Scopes
+
+Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
 ```yaml
 # ===================================
@@ -113,7 +132,7 @@ public function getCityOptions($scopes = null)
 > **Note**: Scope dependencies with `type: group` are only supported at this stage.
 
 <a id="oc-available-scope-types"></a>
-### Available Scope Types
+## Available Scope Types
 
 These types can be used to determine how the filter scope should be displayed.
 
