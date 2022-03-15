@@ -77,8 +77,8 @@ Option | Description
 ------------- | -------------
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be rendered (see [Scope types](#oc-available-scope-types) below). Default: group.
-**conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
-**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
+**conditions** | enables or disables condition functions or specifies a raw where query statement to apply to each condition, see the scope type definition for details.
+**modelScope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **emptyOption** | an optional label for an intentional empty selection.
 **nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
@@ -138,17 +138,127 @@ These types can be used to determine how the filter scope should be displayed.
 
 <div class="content-list" markdown="1">
 
+- [Text](#filter-text)
+- [Number](#filter-number)
 - [Group](#filter-group)
 - [Checkbox](#filter-checkbox)
 - [Switch](#filter-switch)
 - [Date](#filter-date)
-- [Date range](#filter-daterange)
-- [Number](#filter-number)
-- [Number range](#filter-numberrange)
-- [Text](#filter-text)
+- [Date Range](#filter-daterange)
 - [Clear](#filter-clear)
 
 </div>
+
+<a name="filter-text"></a>
+### Text
+
+`text` - filter using a plain text input with either `exact` or `contains` condition logic.
+
+```yaml
+username:
+    label: Username
+    type: text
+```
+
+To only allow finding the exact text pass **exact** as a `condition`. To find results that contain any part of the text pass **contains** to the conditions instead.
+
+```yaml
+username:
+    label: Username
+    type: text
+    conditions:
+        exact: true
+```
+
+You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
+
+```yaml
+username:
+    label: Username
+    type: text
+    conditions:
+        exact: username = :value
+        contains: username like '%:value%'
+```
+
+Alternatively, you may define a custom `modelScope` in the model using the following example.
+
+```yaml
+username:
+    label: Username
+    type: text
+    modelScope: textFilter
+```
+
+The **scopeTextFilter** method definition.
+
+```php
+function scopeTextFilter($query, $scope)
+{
+    if ($scope->condition === 'exact') {
+        $query->where('username', $scope->value);
+    }
+    else {
+        $query->where('username', 'LIKE', "%{$scope->value}%");
+    }
+}
+```
+
+<a name="filter-number"></a>
+### Number
+
+`number` - filter using a numeric value using `exact`, `between`, `greater` and `lesser` condition logic.
+
+```yaml
+age:
+    label: Age
+    type: number
+    default: 14
+    conditions:
+        greater: true
+```
+
+You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
+
+```yaml
+age:
+    label: Age
+    type: number
+    conditions:
+        greater: age >= :value
+        between: age >= ':min' and age <= ':max'
+```
+
+Alternatively, you may define a custom `modelScope` in the model using the following example.
+
+```yaml
+age:
+    label: Age
+    type: text
+    modelScope: numberFilter
+```
+
+The **scopeNumberFilter** method definition.
+
+```php
+function scopeNumberFilter($query, $scope)
+{
+    if ($scope->condition === 'equals') {
+        $query->where('age', $scope->value);
+    }
+    elseif ($scope->condition === 'between') {
+        $query
+            ->where('age', '>=', $scope->min)
+            ->where('age', '<=', $scope->max);
+    }
+    elseif ($scope->condition === 'greater') {
+        $query->where('age', '>=', $scope->value);
+    }
+    else {
+        $query->where('age', '<=', $scope->value);
+    }
+}
+```
 
 <a name="filter-group"></a>
 ### Group
@@ -258,52 +368,6 @@ public function myDefaultTime()
         1 => Carbon::parse('2012-04-02'),
     ];
 }
-```
-
-<a name="filter-number"></a>
-### Number
-
-`number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
-
-```yaml
-age:
-    label: Age
-    type: number
-    default: 14
-    conditions: age >= ':filtered'
-```
-
-<a name="filter-numberrange"></a>
-### Number Range
-
-`numberrange` - displays inputs for two numbers to be entered as a number range. The values available to be used in the conditions property are:
-
-- `:min`: The minimum value, defaults to -2147483647
-- `:max`: The maximum value, defaults to 2147483647
-
-You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
-
-```yaml
-visitors:
-    label: Visitor Count
-    type: numberrange
-    default:
-        0: 10
-        1: 20
-    conditions: visitors >= ':min' and visitors <= ':max'
-```
-
-<a name="filter-text"></a>
-### Text
-
-`text` - display text input for a string to be entered. You may specify a `size` attribute that will be injected in the input size attribute (default: 10).
-
-```yaml
-username:
-    label: Username
-    type: text
-    conditions: username = :value
-    size: 2
 ```
 
 <a name="filter-clear"></a>

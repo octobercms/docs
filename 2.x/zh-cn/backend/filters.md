@@ -149,8 +149,8 @@ public function getCityOptions($scopes = null)
 - [清除](#filter-clear)
 
 </div>
-<a name="filter-group"></a>
 
+<a name="filter-group"></a>
 ### 分组
 
 `group` - 按一组项目过滤列表，通常按相关模型，并且需要 `nameFrom` 或 `options` 定义。例如：状态名称为打开、关闭等。
