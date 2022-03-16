@@ -190,7 +190,7 @@ username:
     modelScope: textFilter
 ```
 
-The **scopeTextFilter** method definition.
+The **scopeTextFilter** method definition where the value is found in `$scope->value`.
 
 ```php
 function scopeTextFilter($query, $scope)
@@ -238,7 +238,7 @@ age:
     modelScope: numberFilter
 ```
 
-The **scopeNumberFilter** method definition.
+The **scopeNumberFilter** method definition with values found in `$scope->value`, `$scope->min` and `$scope->max`.
 
 ```php
 function scopeNumberFilter($query, $scope)
@@ -263,20 +263,90 @@ function scopeNumberFilter($query, $scope)
 <a name="filter-group"></a>
 ### Group
 
-`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+`group` - filter using a group of multiple items, usually by a related model or an array of predefined options.
+
+To filter by a model, specify the `modelClass` and `nameFrom` properties to specify which model and attribute to use.
+
+```yaml
+roles:
+    type: group
+    label: Role
+    nameFrom: name
+    modelClass: October\Test\Models\Role
+```
+
+To filter by an array, specify an `options` property.
 
 ```yaml
 status:
     label: Status
     type: group
-    conditions: status in (:filtered)
-    default:
-        pending: Pending
-        active: Active
     options:
         pending: Pending
         active: Active
         closed: Closed
+```
+
+You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
+
+```yaml
+status:
+    label: Status
+    type: group
+    conditions: status in (:value)
+    # ...
+```
+
+You may pass also pass a `default` value.
+
+```yaml
+status:
+    # ...
+    default:
+        pending: Pending
+        active: Active
+```
+
+You may define a custom `modelScope` in the model using the following example.
+
+```yaml
+roles:
+    type: group
+    label: Role
+    nameFrom: name
+    modelClass: October\Test\Models\Role
+    modelScope: groupFilter
+```
+
+The **scopeGroupFilter** method definition where the value is found in `$scope->value`.
+
+```php
+public function scopeGroupFilter($query, $scope)
+{
+    return $query->whereHas('roles', function($q) use ($scope) {
+        $q->whereIn('id', $scope->value);
+    });
+}
+```
+
+You may dynamically supply `options` by passing a model method.
+
+```yaml
+roles:
+    type: group
+    label: Role
+    nameFrom: name
+    modelClass: October\Test\Models\Role
+    options: getRoleGroupOptions
+```
+
+The **getRoleGroupOptions** method definition.
+
+```php
+public function getRoleGroupOptions()
+{
+    return $this->whereNull('parent_id')->pluck('name', 'id')->all();
+}
 ```
 
 <a name="filter-checkbox"></a>
