@@ -31,13 +31,13 @@ scopes:
     category:
         label: Category
         modelClass: Acme\Blog\Models\Category
-        conditions: category_id in (:filtered)
+        conditions: category_id in (:value)
         nameFrom: name
 
     status:
         label: Status
         type: group
-        conditions: status in (:filtered)
+        conditions: status in (:value)
         options:
             pending: Pending
             active: Active
@@ -60,12 +60,9 @@ scopes:
     created_at:
         label: Date
         type: date
-        conditions: created_at >= ':filtered'
-
-    published_at:
-        label: Date
-        type: daterange
-        conditions: created_at >= ':after' AND created_at <= ':before'
+        conditions:
+            after: created_at >= ':value'
+            between: created_at >= ':after' AND created_at <= ':before'
 ```
 
 <a id="oc-scope-options"></a>
@@ -81,10 +78,11 @@ Option | Description
 **modelScope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
 **emptyOption** | an optional label for an intentional empty selection.
-**nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
-**default** | can either be integer (switch, checkbox, number) or array (group, date range, number range) or string (date).
+**default** | supply a default value for the filter, as either array, string or integer depending on the filter value.
 **permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 **dependsOn** | a string or an array of other scope names that this scope [depends on](#oc-filter-scope-dependencies). When the other scopes are modified, this scope will update.
+**nameFrom** | a model attribute name used for displaying the filter label. Default: name.
+**valueFrom** | defines a model attribute to use for the source value. Default comes from the scope name.
 
 <a id="oc-filter-scope-dependencies"></a>
 ### Filter Dependencies
@@ -95,14 +93,14 @@ Filter scopes can declare dependencies on other scopes by defining the `dependsO
 country:
     label: Country
     type: group
-    conditions: country_id in (:filtered)
+    conditions: country_id in (:value)
     modelClass: October\Test\Models\Location
     options: getCountryOptions
 
 city:
     label: City
     type: group
-    conditions: city_id in (:filtered)
+    conditions: city_id in (:value)
     modelClass: October\Test\Models\Location
     options: getCityOptions
     dependsOn: country
@@ -118,18 +116,14 @@ public function getCountryOptions()
 
 public function getCityOptions($scopes = null)
 {
-    if (!empty($scopes['country']->value)) {
-        return City::whereIn('country_id', array_keys($scopes['country']->value))
-            ->lists('name', 'id')
-        ;
+    if ($countryScope = ($scopes['country'] ?? null)) {
+        return City::whereIn('country_id', $countryScope->value)->lists('name', 'id');
     }
     else {
         return City::lists('name', 'id');
     }
 }
 ```
-
-> **Note**: Scope dependencies with `type: group` are only supported at this stage.
 
 <a id="oc-available-scope-types"></a>
 ## Available Scope Types
@@ -144,7 +138,6 @@ These types can be used to determine how the filter scope should be displayed.
 - [Number](#filter-number)
 - [Group](#filter-group)
 - [Date](#filter-date)
-
 
 </div>
 
@@ -164,7 +157,7 @@ published:
 <a name="filter-switch"></a>
 ### Switch
 
-`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
+`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value.
 
 ```yaml
 approved:
@@ -324,14 +317,14 @@ status:
     # ...
 ```
 
-You may also pass a `default` value.
+You may also pass a `default` value as an array with selected keys.
 
 ```yaml
 status:
     # ...
     default:
-        pending: Pending
-        active: Active
+        - pending
+        - active
 ```
 
 You may define a custom `modelScope` in the model using the following example.
