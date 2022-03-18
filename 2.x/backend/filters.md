@@ -138,16 +138,43 @@ These types can be used to determine how the filter scope should be displayed.
 
 <div class="content-list" markdown="1">
 
+- [Checkbox](#filter-checkbox)
+- [Switch](#filter-switch)
 - [Text](#filter-text)
 - [Number](#filter-number)
 - [Group](#filter-group)
-- [Checkbox](#filter-checkbox)
-- [Switch](#filter-switch)
 - [Date](#filter-date)
-- [Date Range](#filter-daterange)
-- [Clear](#filter-clear)
+
 
 </div>
+
+<a name="filter-checkbox"></a>
+### Checkbox
+
+`checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
+
+```yaml
+published:
+    label: Hide published
+    type: checkbox
+    default: 1
+    conditions: is_published <> true
+```
+
+<a name="filter-switch"></a>
+### Switch
+
+`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
+
+```yaml
+approved:
+    label: Approved
+    type: switch
+    default: 1
+    conditions:
+        - is_approved <> true
+        - is_approved = true
+```
 
 <a name="filter-text"></a>
 ### Text
@@ -218,7 +245,7 @@ age:
         greater: true
 ```
 
-You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
+You may pass custom SQL to the conditions as a string where `:value`, `:min` and `:max` contain the filtered values.
 
 ```yaml
 age:
@@ -297,7 +324,7 @@ status:
     # ...
 ```
 
-You may pass also pass a `default` value.
+You may also pass a `default` value.
 
 ```yaml
 status:
@@ -349,42 +376,37 @@ public function getRoleGroupOptions()
 }
 ```
 
-<a name="filter-checkbox"></a>
-### Checkbox
-
-`checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
-
-```yaml
-published:
-    label: Hide published
-    type: checkbox
-    default: 1
-    conditions: is_published <> true
-```
-
-<a name="filter-switch"></a>
-### Switch
-
-`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
-
-```yaml
-approved:
-    label: Approved
-    type: switch
-    default: 1
-    conditions:
-        - is_approved <> true
-        - is_approved = true
-```
-
 <a name="filter-date"></a>
 ### Date
 
-`date` - displays a date picker for a single date to be selected. The values available to be used in the conditions property are:
+`date` - filer using a date value using `equals`, `between`, `before` and `after` condition logic.
 
-- `:filtered`: The selected date formatted as `Y-m-d`
-- `:before`: The selected date formatted as `Y-m-d 00:00:00`, converted from the backend timezone to the app timezone
-- `:after`: The selected date formatted as `Y-m-d 23:59:59`, converted from the backend timezone to the app timezone
+```yaml
+created_at:
+    label: Created
+    type: date
+```
+
+To only allow finding the exact date pass **equals** as a `condition`. To find results that contain any part of the text pass **between**, **before** or **after** to the conditions instead.
+
+```yaml
+created_at:
+    label: Created
+    type: date
+    conditions:
+        equals: true
+```
+
+You may pass a `default` value, ensuring it is wrapped in quotes to represent a string.
+
+```yaml
+created_at:
+    label: Created
+    type: date
+    default: '2020-01-02'
+```
+
+You may set the `minDate` and `maxDate` to determine the minimum and maximum available date range.
 
 ```yaml
 created_at:
@@ -392,61 +414,55 @@ created_at:
     type: date
     minDate: '2001-01-23'
     maxDate: '2030-10-13'
-    yearRange: 10
-    conditions: created_at >= ':filtered'
 ```
 
-<a name="filter-daterange"></a>
-### Date Range
-
-`daterange` - displays a date picker for two dates to be selected as a date range. The values available to be used in the conditions property are:
-
- - `:before`: The selected "before" date formatted as `Y-m-d H:i:s`
- - `:beforeDate`: The selected "before" date formatted as `Y-m-d`
- - `:after`: The selected "after" date formatted as `Y-m-d H:i:s`
- - `:afterDate`: The selected "after" date formatted as `Y-m-d`
+You may pass custom SQL to the conditions as a string with supporting values.
 
 ```yaml
-published_at:
-    label: Date
-    type: daterange
-    minDate: '2001-01-23'
-    maxDate: '2030-10-13'
-    yearRange: 10
-    conditions: created_at >= ':after' AND created_at <= ':before'
+created_at:
+    label: Created
+    type: date
+    conditions:
+        before: created_at <= ':value'
+        between: created_at >= ':after' AND created_at <= ':before'
 ```
 
-To use default value for Date and Date Range
+The following parameters are supported.
+
+- `:value`: selected date formatted as `Y-m-d 00:00:00`
+- `:valueDate`: selected date formatted as `Y-m-d`
+- `:before`: before date formatted as `Y-m-d 00:00:00`
+- `:beforeDate`: before date formatted as `Y-m-d`
+- `:after`: afterwards date formatted as `Y-m-d 00:00:00`
+- `:afterDate`: afterwards date formatted as `Y-m-d`
+
+Alternatively, you may define a custom `modelScope` in the model using the following example.
+
+```yaml
+created_at:
+    label: Created
+    type: date
+    modelScope: dateFilter
+```
+
+The **scopeDateFilter** method definition with values found in `$scope->value`, `$scope->before` and `$scope->after`.
 
 ```php
-\MyController::extendListFilterScopes(function($filter) {
-    $widget->addScopes([
-        'Date Test' => [
-            'label' => 'Date Test',
-            'type' => 'daterange',
-            'default' => $this->myDefaultTime(),
-            'conditions' => "created_at >= ':after' AND created_at <= ':before'"
-        ],
-    ]);
-});
-
-// Return value must be instance of carbon
-public function myDefaultTime()
+function scopeDateFilter($query, $scope)
 {
-    return [
-        0 => Carbon::parse('2012-02-02'),
-        1 => Carbon::parse('2012-04-02'),
-    ];
+    if ($scope->condition === 'equals') {
+        $query->where('created_at', $scope->value);
+    }
+    elseif ($scope->condition === 'between') {
+        $query
+            ->where('created_at', '>=', $scope->after)
+            ->where('created_at', '<=', $scope->before);
+    }
+    elseif ($scope->condition === 'after') {
+        $query->where('created_at', '>=', $scope->after);
+    }
+    else {
+        $query->where('created_at', '<=', $scope->before);
+    }
 }
-```
-
-<a name="filter-clear"></a>
-### Clear
-
-`clear` - adds a button that clears all the filters and their values.
-
-```yaml
-clear:
-    label: Clear Filters
-    type: clear
 ```
