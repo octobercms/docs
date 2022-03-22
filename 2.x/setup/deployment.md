@@ -14,7 +14,7 @@ Alternatively, you can recreate this file using the `project:set` [artisan comma
 php artisan project:set <license key>
 ```
 
-If the abvoe command is not available, you may create the file using composer instead.
+If the above command is not available, you may create the file using composer instead.
 
 ```sh
 ​composer config --auth http-basic.gateway.octobercms.com <email address> <license key>
