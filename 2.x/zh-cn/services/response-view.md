@@ -80,7 +80,7 @@ return Response::make($content)->withCookie('name', 'value');
 
 ## 其他响应类型
 
-`Response` 外观可用于方便地生成其他类型的响应实例。
+`Response` 门面可用于方便地生成其他类型的响应实例。
 
 ### 查看响应
 
@@ -122,7 +122,7 @@ return Response::download($pathToFile)->deleteFileAfterSend(true);
 <a id="oc-redirects"></a>
 ## 重定向
 
-定向响应通常是 `Illuminate\Http\RedirectResponse` 类的实例，并包含将用户重定向到另一个 URL 所需的正确标头。 生成 `RedirectResponse` 实例的最简单方法是使用 `Redirect` 外观上的 `to` 方法。
+定向响应通常是 `Illuminate\Http\RedirectResponse` 类的实例，并包含将用户重定向到另一个 URL 所需的正确标头。 生成 `RedirectResponse` 实例的最简单方法是使用 `Redirect` 门面上的 `to` 方法。
 
 ```php
 return Redirect::to('user/login');
