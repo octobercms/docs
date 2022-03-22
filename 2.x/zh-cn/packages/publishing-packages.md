@@ -192,7 +192,7 @@ Config::get('purifier.encoding') === Config::get('acme.blog::purifier.encoding')
 
 ### 别名和服务提供商
 
-如果 Laravel 包包含任何服务提供者和别名，您应该使用 `register()` 方法中的 `App` 外观在插件中手动注册它们。
+如果 Laravel 包包含任何服务提供者和别名，您应该使用 `register()` 方法中的 `App` 门面在插件中手动注册它们。
 
 ```php
 public function register()

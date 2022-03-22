@@ -2,7 +2,7 @@
 
 ## 介绍
 
-October CMS 附带一个图像调整器，可让您更改支持的图像的形状和大小。要调整图像大小，请使用 `Resizer` 外观上的 `open` 方法来定位文件路径。
+October CMS 附带一个图像调整器，可让您更改支持的图像的形状和大小。要调整图像大小，请使用 `Resizer` 门面上的 `open` 方法来定位文件路径。
 
 ```php
 $image = Resizer::open('path/to/image.jpg');

@@ -14,7 +14,7 @@
 php artisan project:set <license key>
 ```
 
-If the above command is not available, you may create the file using composer instead.
+如果上述命令不可用，您可以使用 composer 创建文件。
 
 ```sh
 ​composer config --auth http-basic.gateway.octobercms.com <email address> <license key>

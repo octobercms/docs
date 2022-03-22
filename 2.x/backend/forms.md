@@ -1046,7 +1046,7 @@ profile:
 
 Option | Description
 ------------- | -------------
-**form** | a reference to form field definition file, see [backend form fields](#defining-form-fields). Inline fields can also be used.
+**form** | a reference to form field definition file, see [backend form fields](#oc-defining-form-fields). Inline fields can also be used.
 **showPanel** | places the form inside a panel container. Default: true
 
 <a name="widget-recordfinder"></a>
