@@ -14,6 +14,12 @@
 php artisan project:set <license key>
 ```
 
+If the above command is not available, you may create the file using composer instead.
+
+```sh
+​composer config --auth http-basic.gateway.octobercms.com <email address> <license key>
+```
+
 ### 没有 Composer 的部署
 
 <ProductIcon src="https://i.ibb.co/vPRZ4nB/deploy-plugin.png" />
