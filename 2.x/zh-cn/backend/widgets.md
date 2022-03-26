@@ -333,7 +333,7 @@ class Discount extends FormWidgetBase
 }
 ```
 
-The property values then become available to set from the [form field definition](../backend/forms.md#oc-defining-form-fields) when using the widget.
+The property values then become available to set from the [filter scope definition](../backend/filters.md#oc-defining-filter-scopes) when using the widget.
 
 ```yaml
 discount:
