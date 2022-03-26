@@ -30,28 +30,28 @@ filter: $/october/test/models/user/scopes.yaml
 scopes:
 
     category:
-        label: 类别
+        label: Category
         modelClass: Acme\Blog\Models\Category
-        conditions: category_id in (:filtered)
+        conditions: category_id in (:value)
         nameFrom: name
 
     status:
-        label: 状态
+        label: Status
         type: group
-        conditions: status in (:filtered)
+        conditions: status in (:value)
         options:
             pending: Pending
             active: Active
             closed: Closed
 
     published:
-        label: 隐藏已发布
+        label: Hide published
         type: checkbox
         default: 1
         conditions: is_published <> true
 
     approved:
-        label: 批准
+        label: Approved
         type: switch
         default: 2
         conditions:
@@ -59,14 +59,11 @@ scopes:
             - is_approved = true
 
     created_at:
-        label: 日期
+        label: Date
         type: date
-        conditions: created_at >= ':filtered'
-
-    published_at:
-        label: 日期
-        type: daterange
-        conditions: created_at >= ':after' AND created_at <= ':before'
+        conditions:
+            after: created_at >= ':value'
+            between: created_at >= ':after' AND created_at <= ':before'
 ```
 
 <a id="oc-scope-options"></a>
@@ -86,6 +83,8 @@ scopes:
 **default** | 可以是整数(开关、复选框、数字)或数组(组、日期范围、数字范围)或字符串(日期)。
 **permissions** | 当前后端用户必须拥有的 [权限](users.md#oc-users-and-permissions) 才能使用过滤器范围。支持单个权限的字符串或仅需要一个权限即可授予访问的权限数组。
 **dependsOn** | 此范围[依赖](#oc-filter-scope-dependencies)的字符串或其他范围名称的数组。当修改其他范围时，此范围将更新。
+**nameFrom** | a model attribute name used for displaying the filter label. Default: name.
+**valueFrom** | defines a model attribute to use for the source value. Default comes from the scope name.
 
 <a id="oc-filter-scope-dependencies"></a>
 ### 过滤依赖项
@@ -126,6 +125,30 @@ public function getCityOptions($scopes = null)
         return City::lists('name', 'id');
     }
 }
+```
+
+You can filter the filter scope definitions by overriding the `filterScopes` method inside the Model used. This allows you to manipulate visibility and other scope properties based on other scope values. The method takes two arguments **$scopes** will represent an object of the fields already defined by the [scope configuration](#oc-defining-filter-scopes) and **$context** represents the active filter context.
+
+```php
+public function filterScopes($scopes, $context = null)
+{
+    if ($scopes->disable_roles->value) {
+        $scopes->roles->hidden = true;
+    }
+}
+```
+
+The above logic will hide the `roles` scope if the `disable_roles` value is checked. The logic will be applied when the filter first loads and also when updated by a scope dependency. For example, here is the associated filter scope definitions.
+
+```yaml
+disable_roles:
+    type: checkbox
+    label: Disable Roles
+
+roles:
+    type: text
+    label: Role
+    dependsOn: disable_roles
 ```
 
 > **注意**：仅在此阶段支持具有 `type: group` 的范围依赖项。

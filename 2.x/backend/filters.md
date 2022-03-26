@@ -126,6 +126,30 @@ public function getCityOptions($scopes = null)
 }
 ```
 
+You can filter the filter scope definitions by overriding the `filterScopes` method inside the Model used. This allows you to manipulate visibility and other scope properties based on other scope values. The method takes two arguments **$scopes** will represent an object of the fields already defined by the [scope configuration](#oc-defining-filter-scopes) and **$context** represents the active filter context.
+
+```php
+public function filterScopes($scopes, $context = null)
+{
+    if ($scopes->disable_roles->value) {
+        $scopes->roles->hidden = true;
+    }
+}
+```
+
+The above logic will hide the `roles` scope if the `disable_roles` value is checked. The logic will be applied when the filter first loads and also when updated by a scope dependency. For example, here is the associated filter scope definitions.
+
+```yaml
+disable_roles:
+    type: checkbox
+    label: Disable Roles
+
+roles:
+    type: text
+    label: Role
+    dependsOn: disable_roles
+```
+
 <a id="oc-available-scope-types"></a>
 ## Available Scope Types
 
