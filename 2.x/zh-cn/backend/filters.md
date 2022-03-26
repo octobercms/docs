@@ -17,6 +17,7 @@ October CMS provides features for filtering database records. For behaviors that
 filter: $/october/test/models/user/scopes.yaml
 ```
 
+<a id="oc-defining-filter-scopes"></a>
 ## Defining Filter Scopes
 
 类似地，过滤器由它们自己的包含过滤器范围的配置文件驱动，每个范围都是可以过滤列表的一个方面。下一个示例显示了过滤器定义文件的典型内容。
@@ -119,9 +120,7 @@ public function getCountryOptions()
 public function getCityOptions($scopes = null)
 {
     if (!empty($scopes['country']->value)) {
-        return City::whereIn('country_id', array_keys($scopes['country']->value))
-            ->lists('name', 'id')
-        ;
+        return City::whereIn('country_id', $scopes['country']->value)->lists('name', 'id');
     }
     else {
         return City::lists('name', 'id');

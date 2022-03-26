@@ -17,6 +17,7 @@ The [List Behavior](../backend/lists.md) and [Relation Behavior](../backend/rela
 filter: $/october/test/models/user/scopes.yaml
 ```
 
+<a id="oc-defining-filter-scopes"></a>
 ## Defining Filter Scopes
 
 Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
@@ -80,14 +81,14 @@ Option | Description
 **emptyOption** | an optional label for an intentional empty selection.
 **default** | supply a default value for the filter, as either array, string or integer depending on the filter value.
 **permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
-**dependsOn** | a string or an array of other scope names that this scope [depends on](#oc-filter-scope-dependencies). When the other scopes are modified, this scope will update.
+**dependsOn** | a string or an array of other scope names that this scope [depends on](#oc-filter-scope-dependencies). When the other scopes are modified, this scope will reset.
 **nameFrom** | a model attribute name used for displaying the filter label. Default: name.
 **valueFrom** | defines a model attribute to use for the source value. Default comes from the scope name.
 
 <a id="oc-filter-scope-dependencies"></a>
 ### Filter Dependencies
 
-Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#oc-scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#oc-scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will reset and update dynamically. This provides an opportunity to change the available options to be provided to the scope.
 
 ```yaml
 country:
@@ -116,8 +117,8 @@ public function getCountryOptions()
 
 public function getCityOptions($scopes = null)
 {
-    if ($countryScope = ($scopes['country'] ?? null)) {
-        return City::whereIn('country_id', $countryScope->value)->lists('name', 'id');
+    if (!empty($scopes['country']->value)) {
+        return City::whereIn('country_id', $scopes['country']->value)->lists('name', 'id');
     }
     else {
         return City::lists('name', 'id');
