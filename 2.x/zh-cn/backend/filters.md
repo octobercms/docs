@@ -30,13 +30,13 @@ filter: $/october/test/models/user/scopes.yaml
 scopes:
 
     category:
-        label: Category
+        label: 类别
         modelClass: Acme\Blog\Models\Category
         conditions: category_id in (:value)
         nameFrom: name
 
     status:
-        label: Status
+        label: 状态
         type: group
         conditions: status in (:value)
         options:
@@ -45,13 +45,13 @@ scopes:
             closed: Closed
 
     published:
-        label: Hide published
+        label: 隐藏已发布
         type: checkbox
         default: 1
         conditions: is_published <> true
 
     approved:
-        label: Approved
+        label: 批准
         type: switch
         default: 2
         conditions:
@@ -59,7 +59,7 @@ scopes:
             - is_approved = true
 
     created_at:
-        label: Date
+        label: 日期
         type: date
         conditions:
             after: created_at >= ':value'
