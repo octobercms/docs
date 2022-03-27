@@ -161,6 +161,7 @@ These types can be used to determine how the filter scope should be displayed.
 - [Switch](#filter-switch)
 - [Text](#filter-text)
 - [Number](#filter-number)
+- [Dropdown](#filter-dropdown)
 - [Group](#filter-group)
 - [Date](#filter-date)
 
@@ -305,6 +306,41 @@ function scopeNumberFilter($query, $scope)
 }
 ```
 
+<a name="filter-dropdown"></a>
+### Dropdown
+
+`dropdown` - filter using a single selection of multiple items.
+
+```yaml
+status:
+    label: Status
+    type: dropdown
+    options:
+        pending: Pending
+        active: Active
+        closed: Closed
+```
+
+You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
+
+```yaml
+status:
+    label: Status
+    type: dropdown
+    conditions: status = :value
+    # ...
+```
+
+
+You may dynamically supply `options` by passing a model method.
+
+```yaml
+roles:
+    label: Status
+    type: dropdown
+    options: getStatusOptions
+```
+
 <a name="filter-group"></a>
 ### Group
 
@@ -324,21 +360,20 @@ To filter by an array, specify an `options` property.
 
 ```yaml
 status:
-    label: Status
+    label: Role
     type: group
     options:
-        pending: Pending
-        active: Active
-        closed: Closed
+        developer: Developer
+        publisher: Publisher
 ```
 
 You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
 
 ```yaml
 status:
-    label: Status
+    label: Role
     type: group
-    conditions: status in (:value)
+    conditions: role in (:value)
     # ...
 ```
 
@@ -348,16 +383,16 @@ You may also pass a `default` value as an array with selected keys.
 status:
     # ...
     default:
-        - pending
-        - active
+        - developer
+        - publisher
 ```
 
 You may define a custom `modelScope` in the model using the following example.
 
 ```yaml
 roles:
-    type: group
     label: Role
+    type: group
     nameFrom: name
     modelClass: October\Test\Models\Role
     modelScope: groupFilter
@@ -378,8 +413,8 @@ You may dynamically supply `options` by passing a model method.
 
 ```yaml
 roles:
-    type: group
     label: Role
+    type: group
     nameFrom: name
     modelClass: October\Test\Models\Role
     options: getRoleGroupOptions

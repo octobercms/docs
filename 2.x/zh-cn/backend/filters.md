@@ -160,36 +160,15 @@ roles:
 
 <div class="content-list" markdown="1">
 
-- [分组](#filter-group)
 - [复选框](#filter-checkbox)
 - [开关](#filter-switch)
-- [日期](#filter-date)
-- [日期范围](#filter-daterange)
-- [数字](#filter-number)
-- [数字范围](#filter-numberrange)
 - [文本](#filter-text)
-- [清除](#filter-clear)
+- [数字](#filter-number)
+- [Dropdown](#filter-dropdown)
+- [分组](#filter-group)
+- [日期](#filter-date)
 
 </div>
-
-<a name="filter-group"></a>
-### 分组
-
-`group` - 按一组项目过滤列表，通常按相关模型，并且需要 `nameFrom` 或 `options` 定义。例如：状态名称为打开、关闭等。
-
-```yaml
-status:
-    label: 状态
-    type: group
-    conditions: status in (:filtered)
-    default:
-        pending: 待办
-        active: 处理
-    options:
-        pending: 待办
-        active: 处理
-        closed: 关闭
-```
 
 <a name="filter-checkbox"></a>
 ### 复选框
@@ -219,6 +198,86 @@ approved:
         - is_approved = true
 ```
 
+<a name="filter-text"></a>
+### 文本
+
+`text` - 显示要输入的字符串。 您可以指定将在输入大小属性中注入`size`属性(默认值：10)。
+
+```yaml
+username:
+    label: 用户名
+    type: text
+    conditions: username = :value
+    size: 2
+```
+
+<a name="filter-number"></a>
+### 数字
+
+`number` - 显示单个数字的输入。 该值可在条件属性中用作 `:filtered`。
+
+```yaml
+age:
+    label: 年龄
+    type: number
+    default: 14
+    conditions: age >= ':filtered'
+```
+
+<a name="filter-dropdown"></a>
+### Dropdown
+
+`dropdown` - filter using a single selection of multiple items.
+
+```yaml
+status:
+    label: Status
+    type: dropdown
+    options:
+        pending: Pending
+        active: Active
+        closed: Closed
+```
+
+You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
+
+```yaml
+status:
+    label: Status
+    type: dropdown
+    conditions: status = :value
+    # ...
+```
+
+
+You may dynamically supply `options` by passing a model method.
+
+```yaml
+roles:
+    label: Status
+    type: dropdown
+    options: getStatusOptions
+```
+
+<a name="filter-group"></a>
+### 分组
+
+`group` - 按一组项目过滤列表，通常按相关模型，并且需要 `nameFrom` 或 `options` 定义。例如：状态名称为打开、关闭等。
+
+```yaml
+status:
+    label: 状态
+    type: group
+    conditions: status in (:filtered)
+    default:
+        pending: 待办
+        active: 处理
+    options:
+        pending: 待办
+        active: 处理
+        closed: 关闭
+```
+
 <a name="filter-date"></a>
 ### 日期
 
@@ -236,105 +295,4 @@ created_at:
     maxDate: '2030-10-13'
     yearRange: 10
     conditions: created_at >= ':filtered'
-```
-
-<a name="filter-daterange"></a>
-### 日期范围
-
-`daterange` - 显示两个日期的日期选择器作为日期范围。 可在条件属性中使用的值是：
-
-  - `:before`：选定的`之前`日期，格式为 `Y-m-d H:i:s`
-  - `:beforeDate`：选定的`之前`日期，格式为 `Y-m-d`
-  - `:after`：选定的`之后`日期，格式为 `Y-m-d H:i:s`
-  - `:afterDate`：选定的`之后`日期，格式为 `Y-m-d`
-
-```yaml
-published_at:
-    label: 日期
-    type: daterange
-    minDate: '2001-01-23'
-    maxDate: '2030-10-13'
-    yearRange: 10
-    conditions: created_at >= ':after' AND created_at <= ':before'
-```
-
-使用日期和日期范围的默认值
-
-```php
-\MyController::extendListFilterScopes(function($filter) {
-    $widget->addScopes([
-        'Date Test' => [
-            'label' => '日期测试',
-            'type' => 'daterange',
-            'default' => $this->myDefaultTime(),
-            'conditions' => "created_at >= ':after' AND created_at <= ':before'"
-        ],
-    ]);
-});
-
-// 返回值必须是 carbon 的实例
-public function myDefaultTime()
-{
-    return [
-        0 => Carbon::parse('2012-02-02'),
-        1 => Carbon::parse('2012-04-02'),
-    ];
-}
-```
-
-<a name="filter-number"></a>
-### 数字
-
-`number` - 显示单个数字的输入。 该值可在条件属性中用作 `:filtered`。
-
-```yaml
-age:
-    label: 年龄
-    type: number
-    default: 14
-    conditions: age >= ':filtered'
-```
-
-<a name="filter-numberrange"></a>
-### 数字范围
-
-`numberrange` - 显示两个数字的输入，作为数字范围。 可在条件属性中使用的值是：
-
-- `:min`: 最小值，默认为 -2147483647
-- `:max`: 最大值，默认为 2147483647
-
-您可以将最小值留空以搜索直到最大值的所有内容。反之亦然，您可以将最大值留空以搜索至最小值的所有内容。
-
-```yaml
-visitors:
-    label: 访客人数
-    type: numberrange
-    default:
-        0: 10
-        1: 20
-    conditions: visitors >= ':min' and visitors <= ':max'
-```
-
-<a name="filter-text"></a>
-### 文本
-
-`text` - 显示要输入的字符串。 您可以指定将在输入大小属性中注入`size`属性(默认值：10)。
-
-```yaml
-username:
-    label: 用户名
-    type: text
-    conditions: username = :value
-    size: 2
-```
-
-<a name="filter-clear"></a>
-### 清除
-
-`clear` - 添加一个清除所有过滤器及其值的按钮。
-
-```yaml
-clear:
-    label: 清除过滤器
-    type: clear
 ```
