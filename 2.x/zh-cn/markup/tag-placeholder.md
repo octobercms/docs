@@ -35,10 +35,10 @@
 
 ## 检查占位符是否存在
 
-在布局模板中，您可以使用 `placeholder()` 函数检查是否存在占位符内容。这使您可以根据页面是否提供占位符内容来生成不同的标记。例子：
+在布局模板中，您可以使用 `hasPlaceholder()` 函数检查是否存在占位符内容。这使您可以根据页面是否提供占位符内容来生成不同的标记。例子：
 
 ```twig
-{% if placeholder('sidemenu') %}
+{% if hasPlaceholder('sidemenu') %}
     <!-- 带有侧边栏的页面标记 -->
     <div class="row">
         <div class="col-md-3">
