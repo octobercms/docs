@@ -1095,6 +1095,8 @@ extra_information:
 ------------- | -------------
 **form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#oc-defining-form-fields)。 也可以使用内联字段。
 **prompt** | 为创建按钮显示的文本。 默认值:Add new item。
+**displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
+**itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
 **titleFrom** | 项目中的字段名称，用作折叠项目的标题。
 **minItems** | 循环组件允许的最少项目数。 不使用组时预先显示这些项目。 例如，如果您设置 **'minItems: 1'** 第一行将被显示而不是隐藏。
 **maxItems** | 循环组件允许的最大项目数。

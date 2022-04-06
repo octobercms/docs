@@ -1157,6 +1157,7 @@ Option | Description
 **form** | a reference to form field definition file, see [backend form fields](#oc-defining-form-fields). Inline fields can also be used.
 **prompt** | text to display for the create button. Default: Add new item.
 **displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
+**itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
 **titleFrom** | name of field within items to use as the title for the collapsed item.
 **minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set `minItems: 1` the first row will be displayed and not hidden.
 **maxItems** | maximum number of items to allow within the repeater.
