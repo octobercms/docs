@@ -1096,11 +1096,15 @@ extra_information:
 ------------- | -------------
 **form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#oc-defining-form-fields)。 也可以使用内联字段。
 **prompt** | 为创建按钮显示的文本。 默认值:Add new item。
+**displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
+**itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
 **titleFrom** | 项目中的字段名称，用作折叠项目的标题。
 **minItems** | 循环组件允许的最少项目数。 不使用组时预先显示这些项目。 例如，如果您设置 **'minItems: 1'** 第一行将被显示而不是隐藏。
 **maxItems** | 循环组件允许的最大项目数。
 **groups** | 引用一组表单字段，将循环组件置于组模式(见下文)。 也可以使用内联定义。
-**style** | 循环组件的行为样式。 可以是以下之一:`default`、`collapsed` 或 `accordion`。 有关详细信息，请参阅下面的**循环组件样式**部分。
+**groupKeyFrom** | the group key attribute stored along with the saved data. Default: `_group`
+**showReorder** | displays an interface for sorting items. Default: true
+**showDuplicate** | displays an interface for cloning items. Default: true
 
 循环组件字段支持组模式，该模式允许为每次迭代选择一组自定义字段。
 
