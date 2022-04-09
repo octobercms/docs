@@ -95,10 +95,34 @@ The toolbar buttons partial referred above should contain the toolbar control de
 
 ```php
 <div data-control="toolbar">
-    <a
-        href="<?= Backend::url('acme/blog/posts/create') ?>"
-        class="btn btn-primary oc-icon-plus">New Post</a>
+    <a href="<?= Backend::url('acme/blog/posts/create') ?>"
+        class="btn btn-primary oc-icon-plus">
+        New Post
+    </a>
 </div>
+```
+
+When using list checkboxes, you may toggle a button's enabled state with the `data-list-checked-trigger` attribute.
+
+```php
+<button
+    type="button"
+    class="btn btn-primary"
+    data-list-checked-trigger>
+    Delete Selected
+</button>
+```
+
+You may also pass the checked values to an AJAX request using the `data-list-checked-request` attribute.
+
+```php
+<button
+    type="button"
+    class="btn btn-primary"
+    data-request="onDelete"
+    data-list-checked-request>
+    Delete Selected
+</button>
 ```
 
 <a id="oc-filtering-the-list"></a>
