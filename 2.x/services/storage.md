@@ -1,6 +1,6 @@
 # Storage
 
-October CMS provides a powerful filesystem abstraction thanks to Laravel and the wonderful [Flysystem](https://github.com/thephpleague/flysystem) PHP package. The Flysystem integration provides simple to use drivers for working with local filesystems, Amazon S3, and Rackspace Cloud Storage. Even better, it's amazingly simple to switch between these storage options as the API remains the same for each system.
+October CMS provides a powerful filesystem abstraction thanks to Laravel and the wonderful [Flysystem](https://github.com/thephpleague/flysystem) PHP package. The Flysystem integration provides simple to use drivers for working with local filesystems and Amazon S3. Even better, it's amazingly simple to switch between these storage options as the API remains the same for each system.
 
 ## Configuration
 
@@ -18,7 +18,7 @@ Storage::disk('local')->put('file.txt', 'Contents');
 
 #### Other Driver Prerequisites
 
-Before using the S3 or Rackspace drivers, you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
+Before using the S3 driver, you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
 
 ## Basic Usage
 
