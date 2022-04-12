@@ -15,51 +15,35 @@ Object | Description
 
 ## Directory Structure
 
-Below you can see an example blueprint directory structure. Each blueprint type represents a separate directory. Blueprints can be organised in subdirectories of any nesting depth.
+Below you can see an example blueprint directory structure. Each blueprint can reside in any directory and any file name can be used. Blueprints can be organised in subdirectories of any nesting depth.
 
 ::: dir
 ├── app
 |   └── blueprints  _<== Blueprints Start Here_
-|       ├── `sections`
-|       │   └── blog.yaml
-|       ├── `collections`
-|       │   └── categories.yaml
-|       ├── `globals`
-|       │   └── footer-config.yaml
-|       ├── `mixins`
-|       |   └── blog-content.yaml
-|       └── vendor
-:::
-
-### Vendor Blueprints
-
-October CMS has a special location for blueprints provided by a third party, this makes it easy to manage and import blueprints in a single location. The **app/blueprints/vendor** directory can contain any number of vendor folders and uses the format of **author-package** for the author and package name. Blueprints are stored in their corresponding directories inside.
-
-::: dir
-├── app
-|   └── blueprints
-|       └── `vendor`
-|           └── october-demo _<== Vendor Name_
-|               ├── sections
-|               ├── collections
-|               ├── globals
-|               └── mixins
+|       ├── `blog`
+|       │   └── Blog.yaml
+|       │   └── Authors.yaml
+|       ├── `about`
+|       │   └── About.yaml
+|       ├── `wiki`
+|       │   └── Wiki.yaml
 :::
 
 ## Blueprint Structure
 
-Blueprints are defined using the YAML syntax and will always contain two identifiers, a unique UUID and a user-friendly handle. The filename and folder of a blueprint is used to organise blueprints and is not used as an identifier. All other properties are defined in the blueprint's relevant documentation article.
+Blueprints are defined using the YAML syntax and will always contain three identifiers, a unique UUID, a user-friendly handle and the blueprint type. The filename and folder of a blueprint is used to organise blueprints and is not used as an identifier. All other properties are defined in the blueprint's relevant documentation article.
 
 ```yaml
 uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6
-handle: blog
+handle: Blog
+type: entry
 name: 'Blog Section'
 ```
 
 The blueprint **handle** is a human readible approach to referencing a blueprint object. Using the above blueprint as a reference, we can reference the entries using the handle.
 
 ```php
-EntryRecord::inSection('blog')->get();
+EntryRecord::inSection('Blog')->get();
 ```
 
 The blueprint **uuid** is a unique identifier used when blueprints reference other blueprints. For example, when a field references a mixin.
@@ -76,8 +60,9 @@ _blog_content:
 
 Blueprints and their structure are migrated in the database during the normal [database migration process](../console/commands.md#database-migration). When a change is made manually to a blueprint file, you should run the `october:migrate` command to update the database tables.
 
-    php artisan october:migrate
+    php artisan tailor:migrate
 
+<!--
 ## Version History
 
 By default blueprints are not configured to track changes whenever a content record is modified, you may enable version tracking with the `useVersions` attribute of a blueprint.
@@ -85,6 +70,7 @@ By default blueprints are not configured to track changes whenever a content rec
 ```yaml
 useVersions: true
 ```
+-->
 
 ## Defining Navigation
 

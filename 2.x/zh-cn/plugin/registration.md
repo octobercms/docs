@@ -4,7 +4,7 @@
 
 1. 定义[组件](components.md)。
 1. 定义[用户权限](../backend/users.md)。
-1. 添加[设置页面](settings.md#oc-backend-settings-pages)、[菜单项](#oc-navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md）。
+1. 添加[设置页面](settings.md#oc-backend-settings-pages)、[菜单项](#oc-navigation-menus)、[列表](../backend/lists.md) 和[表单](.. /backend/forms.md)。
 1. 创建[数据库表结构和种子数据](updates.md)。
 1. 更改[核心或其他插件的功能](events.md)。
 1. 提供类、[后端控制器](../backend/controllers-ajax)、视图、资产等文件。
@@ -229,17 +229,16 @@ public function registerNavigation()
 
 当您注册后端导航时，您可以将 [多语言字符串](localization.md) 用于 `label` 值。 后端导航也可以由`permissions` 值控制并对应于定义的[后端用户权限](../backend/users)。 后端导航出现在整个导航菜单项上的顺序由 `order` 值控制。 较高的数字意味着该项目将在菜单项的顺序中稍后出现，而较低的数字意味着它将较早出现。
 
-要使子菜单项可见，您可以在后端控制器中使用 `BackendMenu::setContext [设置导航上下文](../backend/controllers-ajax.md#oc-setting-the-navigation-context) ` 方法。 这将使父菜单项处于活动状态并在侧菜单中显示子项。
+要使子菜单项可见，您可以在后端控制器中使用 `BackendMenu::setContext` [设置导航上下文](../backend/controllers-ajax.md#oc-setting-the-navigation-context)方法。 这将使父菜单项处于活动状态并在侧菜单中显示子项。
 
 键 | 描述
 ------------- | -------------
 **label** | 指定菜单标签多语言字符串键，必需。
 **icon** | 来自 [October CMS 图标集](../ui/icon.md) 的图标名称，可选。
 **iconSvg** | 用于代替标准图标的SVG图标，SVG图标应该是一个矩形并且可以支持颜色，可选。
-**url** | 菜单项应指向的 URL（例如，`Backend::url('author/plugin/controller/action')`，必需。
+**url** | 菜单项应指向的 URL(例如，`Backend::url('author/plugin/controller/action')`，必需。
 **counter** | 要在菜单图标附近输出的数值。 该值应该是一个数字或一个返回数字的可调用对象，可选。
 **counterLabel** | 一个字符串值，用于描述计数器中的数字引用，可选。
-**badge** | 一个字符串值来代替计数器输出，该值应该是一个字符串，如果设置，将覆盖badge属性，可选。
 **attributes** | 要应用于菜单项的属性和值的关联数组，可选。
 **permissions** | 后端用户必须拥有的一组权限才能查看菜单项(注意：直接访问 URL 仍然需要单独的权限检查)，可选。
 
@@ -248,7 +247,7 @@ public function registerNavigation()
 键 | 描述
 ------------- | -------------
 **code** | 作为该菜单选项的唯一标识符的字符串值。
-**owner** | 以“Author.Plugin”格式指定菜单项所有者插件或模块的字符串值。
+**owner** | 以"Author.Plugin"格式指定菜单项所有者插件或模块的字符串值。
 
 ### 导航计数器
 
@@ -259,15 +258,6 @@ public function registerNavigation()
     // ...
     'counter' => [\Author\Plugin\Classes\MyMenuCounterService::class, 'getCounterMethod'],
     'counterLabel' => '描述动态菜单计数器的标签',
-],
-```
-
-例如，使用 **badge** 显示带有单词的徽章，例如`New`。
-
-```php
-'blog' => [
-    // ...
-    'badge' => 'New'
 ],
 ```
 

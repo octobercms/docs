@@ -68,7 +68,7 @@
         - setup/deployment
         - setup/updating
 -
-    title: 内容管理系统(CMS)
+    title: CMS
     children:
         - cms/themes
         - cms/pages
@@ -112,6 +112,7 @@
         - backend/widgets
         - backend/forms
         - backend/lists
+        - backend/filters
         - backend/relations
         - backend/reorder
         - backend/import-export

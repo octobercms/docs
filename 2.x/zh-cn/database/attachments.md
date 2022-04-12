@@ -50,7 +50,7 @@ $model->avatar = '/path/to/somefile.jpg';
 $file = (new System\Models\File)->fromData('Some content', 'sometext.txt');
 ```
 
-对于多个附加关联（`$attachMany`），您可以在关联上使用`create`方法，注意文件对象与`data`属性相关联。 如果您愿意，这种方法也可以用于单数关系。
+对于多个附加关联(`$attachMany`)，您可以在关联上使用`create`方法，注意文件对象与`data`属性相关联。 如果您愿意，这种方法也可以用于单数关系。
 
 ```php
 $model->avatar()->create(['data' => Input::file('file_input')]);
@@ -148,7 +148,7 @@ class Post extends Model
 
     <input name="example_file" type="file">
 
-    <button type="submit">Upload File</button>
+    <button type="submit">上传文件</button>
 
 <?= Form::close() ?>
 ```
@@ -171,7 +171,7 @@ if (Input::hasFile('example_file')) {
 // 查找博客文章模型
 $post = Post::find(1);
 
-// 在上面的 HTML 表单中查找回发数据“example_file”
+// 在上面的 HTML 表单中查找回发数据"example_file"
 $fileFromPost = Input::file('example_file');
 
 // 如果存在，将其保存为带有延迟会话密钥的特色图像

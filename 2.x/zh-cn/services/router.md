@@ -26,7 +26,7 @@ Route::delete('foo/bar', function () {
 
 #### 注册多个动态的路由
 
-有时您可能需要注册一个响应多个 HTTP 动态的路由。 你可以使用 `Route` 外观上的 `match` 方法来做到这一点：
+有时您可能需要注册一个响应多个 HTTP 动态的路由。 你可以使用 `Route` 门面上的 `match` 方法来做到这一点：
 
 ```php
 Route::match(['get', 'post'], '/', function () {
@@ -172,7 +172,7 @@ Route::group(['domain' => '{account}.example.com'], function () {
 ```php
 Route::group(['prefix' => 'admin'], function () {
     Route::get('users', function () {
-        // Matches The "/admin/users" URL
+        // " 匹配"/admin/users" URL
     });
 });
 ```
@@ -182,7 +182,7 @@ Route::group(['prefix' => 'admin'], function () {
 ```php
 Route::group(['prefix' => 'accounts/{account_id}'], function () {
     Route::get('detail', function ($account_id) {
-        // Matches The accounts/{account_id}/detail URL
+        // 匹配 accounts/{account_id}/detail URL
     });
 });
 ```

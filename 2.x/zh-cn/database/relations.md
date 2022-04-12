@@ -45,9 +45,10 @@ public $hasMany = [
 **order** | 多条记录的排序顺序。
 **conditions** | 使用原始 where 查询语句过滤关联。
 **scope** | 使用提供的范围方法过滤关联。
-**push** | 如果设置为 false，则不会通过 `push` 保存此关联，默认值：true。
-**delete** | 如果设置为true，如果主模型被删除或关联被破坏，关联模型将被删除，默认：false。
-**detach** | 仅供`belongsToMany`关联使用，如果设置为false，则如果主模型被删除或关联被破坏，关联模型将不会被分离，默认：true。
+**push** | 如果设置为 false，则不会通过 `push` 保存此关联，默认值：`true`。
+**delete** | 如果设置为true，如果主模型被删除或关联被破坏，关联模型将被删除，默认：`false`。
+**replicate** | 如果设置为 true，相关模型将通过 `replicate` 方法复制或关联。 默认值：`false`。
+**relationClass** | 为相关对象指定自定义类名。
 
 使用 **order** 和 **conditions** 参数的过滤器示例。
 
@@ -391,10 +392,10 @@ public $belongsToMany = [
 参数 | 描述
 ------------- | -------------
 **table** | 连接表的名称。
-**key** | 定义模型键的字段名称（在数据透视表内）。 默认值由模型名称和`_id`后缀组合而成，即`user_id`
-**parentKey** | 定义模型键的字段名称（在定义模型表中）。 默认值：id
-**otherKey** | 关联模型键的字段名称（在数据透视表内）。 默认值由模型名称和`_id`后缀组合而成，即`role_id`
-**relatedKey** | 关联模型键的字段名称（在关联模型表内）。 默认值：id
+**key** | 定义模型键的字段名称(在数据透视表内)。 默认值由模型名称和`_id`后缀组合而成，即`user_id`
+**parentKey** | 定义模型键的字段名称(在定义模型表中)。 默认值：id
+**otherKey** | 关联模型键的字段名称(在数据透视表内)。 默认值由模型名称和`_id`后缀组合而成，即`role_id`
+**relatedKey** | 关联模型键的字段名称(在关联模型表内)。 默认值：id
 **pivot** | 在中间表中找到的关联字段数组，属性可通过 `$model->pivot` 获得。
 **pivotModel** | 指定访问中间关联时要返回的自定义模型类。 默认为 `October\Rain\Database\Pivot` 而对于多态关联为 `October\Rain\Database\MorphPivot`。
 **timestamps** | 如果为true，则关联表应包含`created_at`和`updated_at`字段。 默认值：false

@@ -14,6 +14,12 @@ Alternatively, you can recreate this file using the `project:set` [artisan comma
 php artisan project:set <license key>
 ```
 
+If the above command is not available, you may create the file using composer instead.
+
+```sh
+​composer config --auth http-basic.gateway.octobercms.com <email address> <license key>
+```
+
 ### Deployment without Composer
 
 <ProductIcon src="https://github.com/octobercms/docs/blob/develop/images/deploy-plugin.png?raw=true" />

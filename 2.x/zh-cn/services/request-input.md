@@ -2,7 +2,7 @@
 
 ## 基本输入
 
-您可以通过一些简单的方法访问所有用户输入。 使用 `Input` 外观时，您无需担心请求的 HTTP 谓词，因为所有谓词都以相同的方式访问输入。 全局 `input` [助手函数](../services/helpers.md) 是 `Input::get` 的别名。 `Input::get`.
+您可以通过一些简单的方法访问所有用户输入。 使用 `Input` 门面时，您无需担心请求的 HTTP 谓词，因为所有谓词都以相同的方式访问输入。 全局 `input` [助手函数](../services/helpers.md) 是 `Input::get` 的别名。 `Input::get`.
 
 #### 检索输入值
 

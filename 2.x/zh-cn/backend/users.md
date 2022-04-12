@@ -134,9 +134,9 @@ public $requiredPermissions = ['acme.blog.*'];
 <a id="oc-restricting-access-to-features"></a>
 ## 限制对功能的访问
 
-后端用户模型具有允许确定用户是否具有特定权限的方法。 您可以使用此功能来限制后端用户界面的功能。 后端用户支持的权限方式有`hasAccess`和`hasPermission`。 这两种方法都采用两个参数：权限键字符串（或键字符串数组）和一个可选参数，该参数指示与第一个参数一起列出的所有权限都是必需的。
+后端用户模型具有允许确定用户是否具有特定权限的方法。 您可以使用此功能来限制后端用户界面的功能。 后端用户支持的权限方式有`hasAccess`和`hasPermission`。 这两种方法都采用两个参数：权限键字符串(或键字符串数组)和一个可选参数，该参数指示与第一个参数一起列出的所有权限都是必需的。
 
-如果用户是超级用户（`is_superuser` 设置为 `true`），`hasAccess` 方法会为任何权限返回 **true**。 `hasPermission` 方法更严格，仅当用户在其帐户中或通过其角色实际上具有指定的权限时才返回 true。 通常，`hasAccess` 是首选方法，因为它尊重超级用户的绝对权力。 以下示例显示了如何使用控制器代码中的方法：
+如果用户是超级用户(`is_superuser` 设置为 `true`)，`hasAccess` 方法会为任何权限返回 **true**。 `hasPermission` 方法更严格，仅当用户在其帐户中或通过其角色实际上具有指定的权限时才返回 true。 通常，`hasAccess` 是首选方法，因为它尊重超级用户的绝对权力。 以下示例显示了如何使用控制器代码中的方法：
 
 ```php
 if ($this->user->hasAccess('acme.blog.*')) {

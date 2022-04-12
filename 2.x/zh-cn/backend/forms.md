@@ -505,7 +505,7 @@ status:
     emptyOption: -- 无状态 --
 ```
 
-或者，您可以使用 `placeholder` 选项来使用无法重新选择的“占位”空选项。
+或者，您可以使用 `placeholder` 选项来使用无法重新选择的"占位"空选项。
 
 ```yaml
 status:
@@ -591,7 +591,7 @@ show_content:
 permissions:
     label: 权限
     type: checkboxlist
-    # 在具有 <=10 项的列表上设置为 true 以显式启用“全选”、“取消全选”选项(>10 自动启用它)
+    # 在具有 <=10 项的列表上设置为 true 以显式启用"全选"、"取消全选"选项(>10 自动启用它)
     quickselect: true
     default: 注册账户
     options:
@@ -970,7 +970,8 @@ background_image:
 
 <a name="widget-nestedform"></a>
 ### 嵌套表单
-`nestedform` - 呈现一个嵌套表单内容，将数据作为所包含字段的数组返回。 字段可以内联定义。
+
+`nestedform` - 使用相关记录或 [jsonable 属性](../database/model.md#oc-supported-properties) 呈现嵌套表单。 可以内联或使用外部 yaml 文件定义字段。
 
 ```yaml
 content:
@@ -989,7 +990,7 @@ content:
                 type: text
 ```
 
-字段也可以引用 `fields.yaml` 文件。
+向 `form` 选项传递一个字符串以引用外部 yaml 文件。
 
 ```yaml
 profile:
@@ -998,13 +999,11 @@ profile:
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-嵌套表单支持与表单本身相同的语法，包括选项卡。 [jsonable 属性](../database/model.md#oc-supported-properties) 将采用表单定义的结构。 或者，您可以使用 `useRelation` 选项引用相关模型。
-
 选项 | 描述
 ------------- | -------------
-**form**  | 与 [表单定义](#oc-defining-form-fields) 中的相同
-**showPanel** | 将表单放置在面板容器内。 默认值:true
-**useRelation** | 使用字段名称作为关系名称标记，以便直接在父模型上进行交互。 默认值:false
+**form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#oc-defining-form-fields)。 也可以使用内联字段。
+**showPanel** | 将表单放置在面板容器中。 默认值：`true`
+
 
 <a name="widget-recordfinder"></a>
 ### 记录查找器
@@ -1018,7 +1017,7 @@ user:
     list: ~/plugins/rainlab/user/models/user/columns.yaml
     recordsPerPage: 10
     title: 查找记录
-    prompt: 单击“查找”按钮以查找用户
+    prompt: 单击"查找"按钮以查找用户
     nameFrom: name
     descriptionFrom: email
 ```
@@ -1073,7 +1072,7 @@ user:
 <a name="widget-repeater"></a>
 ### 循环组件
 
-`repeater` - 呈现定义在其中的一组重复的表单字段。
+`repeater` - 使用相关记录或 [jsonable 属性](../database/model.md#supported-properties) 呈现一组重复的表单字段。
 
 ```yaml
 extra_information:
@@ -1096,11 +1095,16 @@ extra_information:
 ------------- | -------------
 **form** | 对表单字段定义文件的引用，请参阅 [后端表单字段](#oc-defining-form-fields)。 也可以使用内联字段。
 **prompt** | 为创建按钮显示的文本。 默认值:Add new item。
+**displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
+**itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
 **titleFrom** | 项目中的字段名称，用作折叠项目的标题。
 **minItems** | 循环组件允许的最少项目数。 不使用组时预先显示这些项目。 例如，如果您设置 **'minItems: 1'** 第一行将被显示而不是隐藏。
 **maxItems** | 循环组件允许的最大项目数。
 **groups** | 引用一组表单字段，将循环组件置于组模式(见下文)。 也可以使用内联定义。
-**style** | 循环组件的行为样式。 可以是以下之一:`default`、`collapsed` 或 `accordion`。 有关详细信息，请参阅下面的**循环组件样式**部分。
+**groupKeyFrom** | 与保存的数据一起存储的组key属性。 默认值：`_group`
+**showReorder** | 显示用于排序项目的界面。 默认值: `true`
+**showDuplicate** | 显示复制项目的界面。 默认值: `true`
+
 
 循环组件字段支持组模式，该模式允许为每次迭代选择一组自定义字段。
 
@@ -1152,7 +1156,7 @@ quote:
 **icon** | 定义组的图标，可选。
 **fields** | 属于该组的表单字段，请参阅 [后端表单字段](#oc-defining-form-fields)。
 
-> **注意**:组key与保存的数据一起存储为`_group`属性。
+> **注意**:组key与保存的数据一起存储为`_group`属性。 这可以使用 `groupKeyFrom` 选项进行自定义。
 
 #### 循环组件样式
 
@@ -1505,6 +1509,22 @@ _map:
 ## 扩展表单行为
 
 有时您可能希望修改默认的表单行为，有几种方法可以做到这一点。
+
+### 扩展表单配置
+
+您可以使用 `formGetConfig` 方法动态扩展表单配置。
+
+```php
+public function formGetConfig()
+{
+    $config = $this->asExtension('FormController')->formGetConfig();
+
+    // 动态设置活动选项卡
+    $config->form['tabs']['activeTab'] = 'Content';
+
+    return $config;
+}
+```
 
 ### 重写控制器动作
 

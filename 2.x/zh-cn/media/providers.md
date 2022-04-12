@@ -22,7 +22,7 @@
 
 要将 Amazon S3 与 October CMS 一起使用，您应该创建 S3 存储桶、存储桶中的文件夹和 API 用户。
 
-注册 Amazon AWS 账户或使用您现有的账户登录 AWS 控制台。 打开 S3 管理面板。 创建一个新存储桶并为其分配任意名称（存储桶的名称将成为您的公共文件 URL 的一部分）。
+注册 Amazon AWS 账户或使用您现有的账户登录 AWS 控制台。 打开 S3 管理面板。 创建一个新存储桶并为其分配任意名称(存储桶的名称将成为您的公共文件 URL 的一部分)。
 
 在存储桶中创建 **media** 文件夹。 文件夹名称无关紧要。 该文件夹将是您媒体库的根目录。
 
@@ -63,7 +63,7 @@
 **bucket** | 您的存储桶名称。
 **region** | 存储桶区域代码，见下文。
 
-您可以在 S3 管理控制台的存储桶属性中找到存储桶区域。 “属性”选项卡显示区域名称，例如俄勒冈州。 S3 驱动程序配置需要存储桶代码。 使用此表查找存储桶的代码（您也可以查看 [AWS 文档](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)）：
+您可以在 S3 管理控制台的存储桶属性中找到存储桶区域。 "属性"选项卡显示区域名称，例如俄勒冈州。 S3 驱动程序配置需要存储桶代码。 使用此表查找存储桶的代码(您也可以查看 [AWS 文档](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region))：
 
 地区 | 代码
 ------------- | -------------
@@ -138,13 +138,13 @@
 
 在容器中创建 **media** 文件夹。文件夹名称无关紧要。该文件夹将是您媒体库的根目录。
 
-您应该创建一个 API 用户，October CMS 将使用它来管理 CDN 容器中的文件。在 Rackspace 控制台中打开帐户/用户管理页面。点击**Create user**按钮。填写用户名（例如october.cdn.api）、密码、安全问题和答案。在 **Product Access** 部分选择 **Custom**，然后在 CDN 行中选择 **Admin**。在 **Account** 部分使用 **No Access** 角色，在 **Contact Information** 部分使用 **Technical Contact** 类型。保存用户帐户。保存帐户后，您将看到“登录详细信息”部分，其中 **API 密钥** 行包含您需要在 10 月 CMS 配置文件中使用的值。
+您应该创建一个 API 用户，October CMS 将使用它来管理 CDN 容器中的文件。在 Rackspace 控制台中打开帐户/用户管理页面。点击**Create user**按钮。填写用户名(例如october.cdn.api)、密码、安全问题和答案。在 **Product Access** 部分选择 **Custom**，然后在 CDN 行中选择 **Admin**。在 **Account** 部分使用 **No Access** 角色，在 **Contact Information** 部分使用 **Technical Contact** 类型。保存用户帐户。保存帐户后，您将看到"登录详细信息"部分，其中 **API 密钥** 行包含您需要在 OctoberCMS 配置文件中使用的值。
 
-现在您拥有更新 10 月 CMS 配置的所有信息。打开 **config/filesystem.php** 脚本并找到 **disks** 部分。它已经包含了 Rackspace 配置，需要替换 API 凭证和容器信息参数：
+现在您拥有更新 OctoberCMS 配置的所有信息。打开 **config/filesystem.php** 脚本并找到 **disks** 部分。它已经包含了 Rackspace 配置，需要替换 API 凭证和容器信息参数：
 
 参数 |值
 ------------- | -------------
-**username** | Rackspace 用户名（例如 october.cdn.api）。
+**username** | Rackspace 用户名(例如 october.cdn.api)。
 **key** | 您可以从 Rackspace 用户配置文件页面复制的用户 **API 密钥**。
 **container** | 容器名称。
 **region** | 存储桶区域代码，见下文。

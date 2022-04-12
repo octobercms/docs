@@ -89,11 +89,11 @@ The following configuration options are supported for the Export page:
 Option | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../plugin/localization.md).
-**fileName** | the file name to use for the exported file, default **export.csv**.
+**fileName** | the file name to use for the exported file without extension. Default `export`
 **list** | defines the list columns available for exporting.
 **form** | provides additional fields used as export options, optional.
 **redirect** | redirection page when the export is complete, optional.
-**useList** | set to true or the value of a list definition to enable [integration with Lists](#oc-list-behavior-integration), default: false.
+**useList** | set to true or the value of a list definition to enable [integration with Lists](#oc-list-behavior-integration). Default: `false`.
 
 ### Format Options
 
@@ -180,7 +180,7 @@ For importing data you should create a dedicated model for this process which ex
 class SubscriberImport extends \Backend\Models\ImportModel
 {
     /**
-     * @var array The rules to be applied to the data.
+     * @var array rules to be applied to the data.
      */
     public $rules = [];
 
@@ -195,7 +195,7 @@ class SubscriberImport extends \Backend\Models\ImportModel
 
                 $this->logCreated();
             }
-            catch (\Exception $ex) {
+            catch (Exception $ex) {
                 $this->logError($row, $ex->getMessage());
             }
 

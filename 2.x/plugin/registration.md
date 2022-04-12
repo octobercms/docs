@@ -238,7 +238,6 @@ Key | Description
 **url** | the URL the menu item should point to (eg. `Backend::url('author/plugin/controller/action')`, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.
 **counterLabel** | a string value to describe the numeric reference in counter, optional.
-**badge** | a string value to output in place of the counter, the value should be a string and will override the badge property if set, optional.
 **attributes** | an associative array of attributes and values to apply to the menu item, optional.
 **permissions** | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
 
@@ -251,22 +250,13 @@ Key | Description
 
 ### Navigation Counters
 
-Navigation items support specifying a badge or a counter to indicate that there are items that require attention. These properties are available to parent and child menu items alike. Use the **counter** and **counterLabel** to show a numeric counter.
+Navigation items support specifying a counter to indicate that there are items that require attention. These properties are available to parent and child menu items alike. Use the **counter** and **counterLabel** to show a numeric counter.
 
 ```php
 'blog' => [
     // ...
     'counter' => [\Author\Plugin\Classes\MyMenuCounterService::class, 'getCounterMethod'],
     'counterLabel' => 'Label describing a dynamic menu counter',
-],
-```
-
-Use the **badge** item to display a badge with a word, such as "New", for example.
-
-```php
-'blog' => [
-    // ...
-    'badge' => 'New'
 ],
 ```
 

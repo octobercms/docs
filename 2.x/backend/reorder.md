@@ -23,10 +23,11 @@ The configuration options listed below can be used.
 
 Option | Description
 ------------- | -------------
-**showTree** | displays a tree hierarchy for parent/child records. Default: true.
-**treeExpanded** | if tree nodes should be expanded by default. Default: true.
-**showReorder** | displays an interface for reordering records. Default: true
-**maxDepth** | defines the maximum levels allowed for reordering. Default: null
+**showTree** | displays a tree hierarchy for parent/child records. Default: `true`
+**treeExpanded** | if tree nodes should be expanded by default. Default: `true`
+**showReorder** | displays an interface for reordering records. Default: `true`
+**maxDepth** | defines the maximum levels allowed for reordering. Default: `null`
+**dragRow** | allow dragging the entire row in addition to the reorder handle. Default: `true`
 
 ## Supported Model Types
 

@@ -24,7 +24,7 @@ Storage::disk('local')->put('file.txt', 'Contents');
 
 ### 获取磁盘实例
 
-`Storage` 外观可用于与您配置的任何磁盘进行交互。 例如，您可以使用外观上的 `put` 方法将头像存储在默认磁盘上。 如果你调用 `Storage` 门面的方法而不先调用 `disk` 方法，方法调用将自动传递到默认磁盘：
+`Storage` 门面可用于与您配置的任何磁盘进行交互。 例如，您可以使用门面上的 `put` 方法将头像存储在默认磁盘上。 如果你调用 `Storage` 门面的方法而不先调用 `disk` 方法，方法调用将自动传递到默认磁盘：
 
 ```php
 $user = User::find($id);
@@ -59,7 +59,7 @@ $exists = Storage::disk('s3')->exists('file.jpg');
 
 #### 文件元信息
 
-`size` 方法可用于获取文件的大小（以字节为单位）：
+`size` 方法可用于获取文件的大小(以字节为单位)：
 
 ```php
 $size = Storage::size('file1.jpg');
@@ -132,7 +132,7 @@ $files = Storage::allFiles($directory);
 ```php
 $directories = Storage::directories($directory);
 
-// Recursive...
+// 递归...
 $directories = Storage::allDirectories($directory);
 ```
 

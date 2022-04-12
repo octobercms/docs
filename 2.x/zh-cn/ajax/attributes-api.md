@@ -8,7 +8,7 @@
 **data-request-confirm** |  指定确认消息。在发送请求之前会显示确认信息。如果用户单击取消按钮，则不会发送请求。
 **data-request-redirect** |  指定在成功的 AJAX 请求后重定向浏览器的 URL。
 **data-request-url** |  指定将请求发送到的 URL。默认值：`window.location.href`
-**data-request-update** |  指定要更新的部件和页面元素（CSS 选择器）的列表。格式如下：`partial: selector, partial: selector`。在某些情况下需要使用引号，例如：`'my-partial': '#myelement'`。如果选择器字符串前面带有 `@` 符号，则从服务器接收到的内容将附加到元素中，而不是替换现有内容。如果选择器字符串前面带有`^` 符号，则内容将被添加到前面。
+**data-request-update** |  指定要更新的部件和页面元素(CSS 选择器)的列表。格式如下：`partial: selector, partial: selector`。在某些情况下需要使用引号，例如：`'my-partial': '#myelement'`。如果选择器字符串前面带有 `@` 符号，则从服务器接收到的内容将附加到元素中，而不是替换现有内容。如果选择器字符串前面带有`^` 符号，则内容将被添加到前面。
 **data-request-ajax-global** |  默认为false。设置 true 以启用 jQuery [ajax 事件](http://api.jquery.com/category/ajax/global-ajax-event-handlers/) 全局：`ajaxStart`、`ajaxStop`、`ajaxComplete`、`ajaxError` 、`ajaxSuccess` 和 `ajaxSend`。
 **data-request-data** |  指定要发送到服务器的其他 POST 参数。格式如下：`var: value, var: value`。如果需要，请使用引号：`var: 'some string'`。该属性可以在触发元素上使用，例如在也具有 data-request 属性的按钮上，在触发元素的最近元素上以及在父表单元素上。该框架合并了 `data-request-data` 属性的值。如果不同元素上的属性定义了同名参数，则框架使用以下优先级：触发元素`data-request-data`，更接近的父元素`data-request-data`，表单输入数据。
 **data-request-before-update** |  指定在页面内容更新之前直接执行的 JavaScript 代码。

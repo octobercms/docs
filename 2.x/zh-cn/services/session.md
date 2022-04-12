@@ -22,7 +22,7 @@ October CMS 在内部使用 `flash` Session密钥，因此您不应使用该名�
 
 #### 在Session中存储数据
 
-使用 `Session` 外观，您可以调用各种函数来与底层数据进行交互。 例如，`put` 方法在Session中存储了一条新数据：
+使用 `Session` 门面，您可以调用各种函数来与底层数据进行交互。 例如，`put` 方法在Session中存储了一条新数据：
 
 ```php
 Session::put('key', 'value');

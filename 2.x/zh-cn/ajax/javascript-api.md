@@ -34,7 +34,7 @@ JavaScript API 比数据属性 API 更强大。 `request` 方法可用于表单�
 **handleConfirmMessage(message)** | 在请求用户确认时调用。
 **handleErrorMessage(message)** | 在应显示错误消息时调用。
 **handleValidationMessage(message, fields)** | 使用验证时聚焦第一个无效字段。
-**handleFlashMessage(message, type)** | 当使用 **flash** 选项提供闪现消息时调用（见上文）。
+**handleFlashMessage(message, type)** | 当使用 **flash** 选项提供闪现消息时调用(见上文)。
 **handleRedirectResponse(url)** | 当浏览器应该重定向到另一个位置时调用。
 
 ## 用法示例

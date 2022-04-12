@@ -51,6 +51,7 @@
     collapsable: false
     children:
         - function-abort
+        - function-redirect
         - function-dump
         - function-str
         - function-form
@@ -122,6 +123,7 @@
         - backend/widgets
         - backend/forms
         - backend/lists
+        - backend/filters
         - backend/relations
         - backend/reorder
         - backend/import-export
