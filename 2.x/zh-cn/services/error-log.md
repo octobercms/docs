@@ -51,7 +51,7 @@ October CMS 提供了几种预置好的基本异常类型。
 throw new ApplicationException('你必须先登录才能做到这一点！');
 ```
 
-错误消息将被简化，并且永远不会包含任何敏感信息，如 php 文件和行号。
+错误消息将被简化，并且永远不会包含任何敏感信息，如 PHP 文件和行号。
 
 ### 系统异常
 
@@ -62,6 +62,17 @@ throw new SystemException('无法联系邮件服务器 API');
 ```
 
 抛出此异常时，会显示详细的错误消息，其中包含发生该异常的文件和行号。
+
+### 未找到异常
+
+
+`October\Rain\Exception\NotFoundException` 类，别名为 `NotFoundException`，用于在遇到缺失记录时发生的错误。
+
+```php
+throw new NotFoundException('记录不存在');
+```
+
+当抛出此异常时，标准响应将更改为显示最近的未找到页面，并添加了 404 状态代码。
 
 <a id="oc-validation-exception"></a>
 ### 验证异常
@@ -143,7 +154,7 @@ App::abort(404);
 App::abort(403, '未经授权的行为。');
 ```
 
-该方法可以在请求生命周期的任何时候使用。
+该方法可以在请求生命周期的任何时候使用。还有一个[用于中止请求的 Twig 过滤器](../markup/function-abort.md).
 
 ### 自定义错误页面
 

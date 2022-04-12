@@ -1,12 +1,12 @@
 # Providers
 
-Media Manager uses the Local Disk provider by default. You need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers) before you can use Amazon S3 or Rackspace CDN features.
+Media Manager uses the Local Disk provider by default. You need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers) before you can use Amazon S3 features.
 
 > **Note**: After you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
 ## Local Disk
 
-By default Media Manager works with the **storage/app/media** subdirectory of the installation directory. In order to use Amazon S3 or Rackspace CDN, you should update the system configuration found in the **config/system.php** config file and follow the instructions found in this article.
+By default Media Manager works with the **storage/app/media** subdirectory of the installation directory. In order to use Amazon S3, you should update the system configuration found in the **config/system.php** config file and follow the instructions found in this article.
 
 ```php
 'storage' => [
@@ -129,69 +129,6 @@ Example storage configuration:
 ```
 
 Congratulations! Now you're ready to use Amazon S3 with October CMS. Note that you can also configure Amazon CloudFront CDN  to work with your bucket. This topic is not covered in this document, please refer to [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, you will need to update the **path** parameter in the storage configuration.
-
-## Configuring Rackspace CDN access
-
-To use Rackspace CDN with October CMS, you should create Rackspace CDN container, folder in the container and API user.
-
-Log into Rackspace management console and navigate to Storage / Files page. Create a new container. The container name doesn't matter, it will be a part of your public file URLs. Select **Public (Enabled CDN)** type for the new container.
-
-Create **media** folder in the container. The folder name doesn't matter. This folder will be a root of your Media Library.
-
-You should create an API user that October CMS will use for managing files in the CDN container. Open Account / User Management page in Rackspace console. Click **Create user** button. Fill in the user name (for example october.cdn.api), password, security question and answer. In the **Product Access** section select **Custom** and in the CDN row select **Admin**. Use **No Access** role in the **Account** section and use **Technical Contact** type in the **Contact Information** section. Save the user account. After saving the account you will see the Login Details section with the **API Key** row that contains a value you need to use in October CMS configuration files.
-
-Now you have all the information to update October CMS configuration. Open **config/filesystem.php** script and find the **disks** section. It already contains Rackspace configuration, you need to replace the API credentials and container information parameters:
-
-Parameter | Value
-------------- | -------------
-**username** | Rackspace user name (for example october.cdn.api).
-**key** | the user's **API Key** that you can copy from Rackspace user profile page.
-**container** | the container name.
-**region** | the bucket region code, see below.
-**endpoint** | leave the value as is.
-**region** | you can find the region in the CDN container list in Rackspace control panel. The code is a 3-letter value, for example it's **ORD** for Chicago.
-
-Example configuration after update:
-
-```php
-'disks' => [
-    // ...
-    'rackspace' => [
-        'driver'    => 'rackspace',
-        'username'  => 'october.api.cdn',
-        'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
-        'container' => 'my-bucket',
-        'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-        'region'    => 'ORD'
-    ],
-    // ...
-]
-```
-
-Save **config/filesystem.php** script and open **config/system.php** script. Find the section **storage**. In the **media** parameter update **disk**, **folder** and **path** parameters:
-
-Parameter | Value
-------------- | -------------
-**disk** | use **rackspace** value.
-**folder** | the name of the folder you created in CDN container.
-**path** | the public path of the folder in the container, see below.
-
-To obtain the path of the folder, go to the CDN container list in Rackspace console. Click the container and open the media folder. Upload any file. After the file is uploaded, click it. The file will open in a new browser tab. Copy the file URL and remove the file name and trailing slash from it.
-
-Example storage configuration:
-
-```php
-'storage' => [
-    // ...
-    'media' => [
-        'disk'   => 'rackspace',
-        'folder' => 'media',
-        'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
-    ]
-]
-```
-
-Congratulations! Now you're ready to use Rackspace CDN with October CMS.
 
 ## Troubleshooting
 

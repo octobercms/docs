@@ -23,10 +23,11 @@ structure:
 
 选项 | 描述
 ------------- | -------------
-**showTree** | 显示父/子记录的树层次结构。 默认值：`true`。
-**treeExpanded** | 默认情况下是否应展开树节点。 默认值：`true`。
+**showTree** | 显示父/子记录的树层次结构。 默认值：`true`
+**treeExpanded** | 默认情况下是否应展开树节点。 默认值：`true`
 **showReorder** | 显示用于重新排序记录的界面。 默认值：`true`
 **maxDepth** | 定义允许重新排序的最大级别。 默认值：`null`
+**dragRow** | allow dragging the entire row in addition to the reorder handle. Default: `true`
 
 ## 支持的模型类型
 
