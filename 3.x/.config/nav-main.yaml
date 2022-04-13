@@ -76,29 +76,75 @@
 #
 "/extend/":
 -
+    title: Extend
+    children:
+        - introduction
+-
     title: Plugins
     children:
         - plugin/registration
         - plugin/updates
-        - plugin/components
-        - plugin/settings
         - plugin/localization
         - plugin/scheduling
         - plugin/extending
+        - plugin/unit-testing
+-
+    title: System
+    children:
+        - system/tailor-fields
+        - system/cms-components
 -
     title: Backend
     children:
-        - backend/controllers-ajax
-        - backend/views-partials
-        - backend/widgets
-        - backend/forms
-        - backend/lists
-        - backend/filters
-        - backend/relations
-        - backend/reorder
-        - backend/import-export
+        - backend/controllers
+        - backend/views
+        - backend/ajax
+        - backend/navigation
         - backend/users
-        - ['https://octobercms.com/docs/ui/form', 'UI Guide']
+        - backend/permissions
+-
+    title: Forms
+    children:
+        - forms/forms
+        - forms/relations
+-
+    title: Lists
+    children:
+        - lists/lists
+        - lists/filters
+        - lists/reorder
+-
+    title: Import / Export
+    children:
+        - importexport/controller
+        - importexport/import-model
+        - importexport/export-model
+-
+    title: Settings
+    children:
+        - settings/settings
+        - settings/file-settings
+        - settings/model-settings
+-
+    title: Widgets
+    children:
+        - widgets/widgets
+        - widgets/form-widgets
+        - widgets/filter-widgets
+        - widgets/report-widgets
+-
+    title: Database
+    children:
+        - database/basics
+        - database/structure
+        - database/query
+        - database/model
+        - database/relations
+        - database/attachments
+        - database/collection
+        - database/mutators
+        - database/serialization
+        - database/traits
 -
     title: Services
     children:
@@ -106,7 +152,7 @@
         - services/behaviors
         - services/cache
         - services/collections
-        - services/error-log
+        - services/exceptions
         - services/events
         - services/html
         - services/resizer
@@ -122,6 +168,10 @@
         - services/session
         - services/storage
         - services/validation
+-
+    title: Resources
+    children:
+        - resources/publishing-packages
 
 #
 # Markup Nav
@@ -133,80 +183,52 @@
     children:
         - templating
 -
-    title: Variables
+    title: Properties
     collapsable: false
     children:
-        - this-page
-        - this-layout
-        - this-theme
-        - this-param
-        - this-controller
-        - this-environment
-        - this-session
+        - property/this-page
+        - property/this-layout
+        - property/this-theme
+        - property/this-param
+        - property/this-controller
+        - property/this-environment
+        - property/this-session
 -
     title: Tags
     collapsable: false
     children:
-        - tag-page
-        - tag-partial
-        - tag-content
-        - tag-component
-        - tag-placeholder
-        - tag-scripts
-        - tag-styles
-        - tag-flash
-        - tag-verbatim
-        - tag-macro
-        - tag-for
-        - tag-if
+        - tag/page
+        - tag/partial
+        - tag/content
+        - tag/component
+        - tag/placeholder
+        - tag/scripts
+        - tag/styles
+        - tag/flash
+        - tag/verbatim
+        - tag/macro
+        - tag/for
+        - tag/if
 -
     title: Filters
     collapsable: false
     children:
-        - filter-app
-        - filter-page
-        - filter-theme
-        - filter-media
-        - filter-resize
-        - filter-default
-        - filter-raw
-        - filter-md
+        - filter/app
+        - filter/page
+        - filter/theme
+        - filter/media
+        - filter/resize
+        - filter/default
+        - filter/raw
+        - filter/md
 -
     title: Functions
     collapsable: false
     children:
-        - function-str
-        - function-form
-        - function-html
-        - function-dump
-
-#
-# Frontend Nav
-#
-"/cms/":
--
-    title: Themes
-    children:
-        - themes
-        - pages
-        - partials
-        - layouts
-        - content
-        - components
--
-    title: AJAX
-    children:
-        - ajax/introduction
-        - ajax/handlers
-        - ajax/update-partials
-        - ajax/attributes-api
-        - ajax/javascript-api
-        - ajax/extras
--
-    title: Media Manager
-    children:
-        - media/introduction
-        - media/providers
+        - function/str
+        - function/form
+        - function/html
+        - function/dump
 
 #
 # Tailor Nav
@@ -223,15 +245,60 @@
         - content-fields
 
 #
+# Frontend Nav
+#
+"/cms/":
+-
+    title: CMS
+    children:
+        - introduction
+-
+    title: Themes
+    children:
+        - themes/themes
+        - themes/pages
+        - themes/partials
+        - themes/layouts
+        - themes/content
+        - themes/components
+        - themes/settings
+-
+    title: AJAX
+    children:
+        - ajax/introduction
+        - ajax/handlers
+        - ajax/update-partials
+        - ajax/attributes-api
+        - ajax/javascript-api
+        - ajax/extras
+-
+    title: Media Manager
+    children:
+        - media/introduction
+        - media/providers
+
+#
 # Root Nav
 #
 "/":
 -
     title: Getting Started
+    collapsable: false
     children:
         - setup/installation
-        - setup/configuration
         - setup/directory-structure
         - setup/scheduler
         - setup/deployment
-        - setup/web-server-configuration
+-
+    title: Configuration
+    collapsable: false
+    children:
+        - config/configuration
+        - config/web-server-configuration
+        - config/errors-logging
+-
+    title: Resources
+    collapsable: false
+    children:
+        - resources/updating-october
+        - resources/installing-packages

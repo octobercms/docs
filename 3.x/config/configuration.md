@@ -1,4 +1,4 @@
-# Configuration
+# Common Configuration
 
 <p class="subtitle">Learn how to configure and fine-tune October CMS.</p>
 

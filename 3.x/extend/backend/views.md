@@ -1,4 +1,4 @@
-# Views & Partials
+# Rendering Views
 
 ## Partials
 
