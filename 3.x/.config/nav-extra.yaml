@@ -8,7 +8,7 @@
     title: CMS Guide
     icon: "/images/markup-guide.svg"
     prefix: "/3.x/cms/"
-    link: "/3.x/cms/introduction.html"
+    link: "/3.x/cms/themes/themes.html"
 -
     title: Tailor Guide
     icon: "/images/markup-guide.svg"
@@ -23,7 +23,7 @@
     title: Extending October CMS
     icon: "/images/markup-guide.svg"
     prefix: "/3.x/extend/"
-    link: "/3.x/extend/introduction.html"
+    link: "/3.x/extend/plugin/registration.html"
 -
     title: Backend Elements
     icon: "/images/markup-guide.svg"

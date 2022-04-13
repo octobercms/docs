@@ -76,10 +76,6 @@
 #
 "/extend/":
 -
-    title: Extend
-    children:
-        - introduction
--
     title: Plugins
     children:
         - plugin/registration
@@ -172,6 +168,7 @@
     title: Resources
     children:
         - resources/publishing-packages
+        - resources/using-laravel-packages
 
 #
 # Markup Nav
@@ -251,17 +248,19 @@
 -
     title: CMS
     children:
-        - introduction
--
-    title: Themes
-    children:
         - themes/themes
         - themes/pages
         - themes/partials
         - themes/layouts
         - themes/content
         - themes/components
+-
+    title: Advanced Themes
+    children:
         - themes/settings
+        - themes/child-themes
+        - themes/database-themes
+        - themes/seeding-themes
 -
     title: AJAX
     children:
