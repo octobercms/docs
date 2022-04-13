@@ -1,4 +1,4 @@
-# Extending Plugins
+# Extending Concepts
 
 ## Extending with Events
 

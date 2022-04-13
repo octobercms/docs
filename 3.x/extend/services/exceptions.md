@@ -1,5 +1,6 @@
-<a id="oc-exception-types"></a>
 ## Available Exceptions
+
+<a id="oc-exception-types"></a>
 
 October CMS comes with several basic exception types out of the box.
 

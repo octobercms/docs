@@ -1,4 +1,4 @@
-# Settings & Config
+# Settings Page
 
 There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 

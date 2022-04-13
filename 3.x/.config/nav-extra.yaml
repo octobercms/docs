@@ -23,7 +23,7 @@
     title: Extending October CMS
     icon: "/images/markup-guide.svg"
     prefix: "/3.x/extend/"
-    link: "/3.x/extend/plugin/registration.html"
+    link: "/3.x/extend/system/plugins.html"
 -
     title: Backend Elements
     icon: "/images/markup-guide.svg"

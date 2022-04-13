@@ -76,60 +76,62 @@
 #
 "/extend/":
 -
-    title: Plugins
+    title: Core Overview
     children:
-        - plugin/registration
-        - plugin/updates
-        - plugin/localization
-        - plugin/scheduling
-        - plugin/extending
-        - plugin/unit-testing
+        - system/plugins
+        - system/models
+        - system/controllers
+        - system/views
+        - system/behaviors
+        - system/widgets
+        - system/ajax
 -
-    title: System
+    title: Extending the Core
     children:
-        - system/tailor-fields
-        - system/cms-components
+        - extending
+        - tailor-fields
+        - cms-components
 -
-    title: Backend
+    title: Advanced Topics
     children:
-        - backend/controllers
-        - backend/views
-        - backend/ajax
+        - system/application
+        - system/localization
+        - system/scheduling
+        - system/unit-testing
+-
+    title: Backend Panel
+    children:
         - backend/navigation
         - backend/users
         - backend/permissions
+        - backend/report-widgets
 -
-    title: Forms
+    title: Form Design
     children:
         - forms/forms
         - forms/relations
+        - forms/form-widgets
 -
-    title: Lists
+    title: List Design
     children:
         - lists/lists
         - lists/filters
         - lists/reorder
+        - lists/filter-widgets
 -
-    title: Import / Export
+    title: Import & Export Design
     children:
         - importexport/controller
         - importexport/import-model
         - importexport/export-model
 -
-    title: Settings
+    title: Settings & Config
     children:
         - settings/settings
         - settings/file-settings
         - settings/model-settings
 -
-    title: Widgets
-    children:
-        - widgets/widgets
-        - widgets/form-widgets
-        - widgets/filter-widgets
-        - widgets/report-widgets
--
-    title: Database
+    title: Database Access
     children:
         - database/basics
         - database/structure
@@ -138,14 +140,13 @@
         - database/relations
         - database/attachments
         - database/collection
+        - database/pagination
         - database/mutators
         - database/serialization
         - database/traits
 -
-    title: Services
+    title: Available Services
     children:
-        - services/application
-        - services/behaviors
         - services/cache
         - services/collections
         - services/exceptions
@@ -155,7 +156,6 @@
         - services/hashing-encryption
         - services/helpers
         - services/mail
-        - services/pagination
         - services/parser
         - services/queues
         - services/request-input

@@ -1,4 +1,4 @@
-# Relations
+# Relation Controller
 
 **Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model.md) relationships on a page. Not to be confused with [List relation columns](lists.md#oc-available-column-types) or [Form relation fields](forms.md#widget-relation) that only provide simple management.
 

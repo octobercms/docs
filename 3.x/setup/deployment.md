@@ -12,12 +12,18 @@ That scenario applies if you have SSH access and have Composer installed on the 
 * run `composer install` in the project directory
 * update the configuration files.
 
-Keep in mind that the Composer's [auth.json](https://getcomposer.org/doc/articles/http-basic-authentication.md) file from your source October CMS installation must be added to the project repository. The file is automatically generated when you install October CMS for the first time. It includes the license key information and is required for authenticating Composer requests to the October CMS Gateway.
+Keep in mind that the Composer's [auth.json](https://getcomposer.org/doc/articles/http-basic-authentication.md) file from your source October CMS installation must be added to the server. The file is automatically generated when you install October CMS for the first time. It includes the license key information and is required for authenticating Composer requests to the October CMS Gateway.
 
 Alternatively, you can recreate the file with the [project:set](../console/commands.html#set-project) artisan command before running composer install.
 
 ```bash
 php artisan project:set <license key>
+```
+
+If the above command is not available, you may create the file using composer instead.
+
+```bash
+​composer config --auth http-basic.gateway.octobercms.com <email address> <license key>
 ```
 
 ## Deploying without Composer

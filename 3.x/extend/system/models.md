@@ -1,4 +1,4 @@
-# Version History
+# Models
 
 It is good practice for plugins to maintain a change log that documents any changes or improvements in the code. In addition to writing notes about changes, this process has the useful ability to execute [migration and seed files](../database/structure.md) in their correct order.
 

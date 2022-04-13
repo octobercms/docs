@@ -1,7 +1,6 @@
-# Application
+# Application Container
 
 <a id="oc-application-container"></a>
-## Application Container
 
 The inversion of control (IoC) container is a tool for managing class dependencies. Dependency injection is a method of removing hard-coded class dependencies. Instead, the dependencies are injected at run-time, allowing for greater flexibility as dependency implementations may be swapped easily.
 

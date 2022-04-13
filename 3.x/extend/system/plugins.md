@@ -1,4 +1,4 @@
-# Registration
+# Plugins
 
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components.md) or back-end menus and pages. Some examples of what a plugin can do:
 
