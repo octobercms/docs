@@ -1,4 +1,129 @@
 #
+# Elements Nav
+#
+"/element/":
+-
+    title: Element
+    children:
+        - definitions
+-
+    title: Form Fields
+    children:
+        - form/field-text
+        - form/field-number
+        - form/field-password
+        - form/field-email
+        - form/field-textarea
+        - form/field-dropdown
+        - form/field-radio
+        - form/field-balloon
+        - form/field-checkbox
+        - form/field-checkboxlist
+        - form/field-switch
+-
+    title: Form UI
+    children:
+        - form/ui-section
+        - form/ui-hint
+        - form/ui-ruler
+        - form/ui-partial
+-
+    title: Form Widgets
+    children:
+        - form/widget-codeeditor
+        - form/widget-colorpicker
+        - form/widget-datatable
+        - form/widget-datepicker
+        - form/widget-fileupload
+        - form/widget-markdown
+        - form/widget-mediafinder
+        - form/widget-nestedform
+        - form/widget-recordfinder
+        - form/widget-relation
+        - form/widget-repeater
+        - form/widget-richeditor
+        - form/widget-sensitive
+        - form/widget-taglist
+-
+    title: List Columns
+    children:
+        - lists/column-text
+        - lists/column-number
+        - lists/column-image
+        - lists/column-switch
+        - lists/column-summary
+        - lists/column-datetime
+        - lists/column-date
+        - lists/column-time
+        - lists/column-timesince
+        - lists/column-timetense
+        - lists/column-selectable
+        - lists/column-partial
+        - lists/column-colorpicker
+-
+    title: Filter Scopes
+    children:
+        - filter/scope-checkbox
+        - filter/scope-switch
+        - filter/scope-text
+        - filter/scope-number
+        - filter/scope-dropdown
+        - filter/scope-group
+        - filter/scope-date
+
+#
+# Backend Nav
+#
+"/extend/":
+-
+    title: Plugins
+    children:
+        - plugin/registration
+        - plugin/updates
+        - plugin/components
+        - plugin/settings
+        - plugin/localization
+        - plugin/scheduling
+        - plugin/extending
+-
+    title: Backend
+    children:
+        - backend/controllers-ajax
+        - backend/views-partials
+        - backend/widgets
+        - backend/forms
+        - backend/lists
+        - backend/filters
+        - backend/relations
+        - backend/reorder
+        - backend/import-export
+        - backend/users
+        - ['https://octobercms.com/docs/ui/form', 'UI Guide']
+-
+    title: Services
+    children:
+        - services/application
+        - services/behaviors
+        - services/cache
+        - services/collections
+        - services/error-log
+        - services/events
+        - services/html
+        - services/resizer
+        - services/hashing-encryption
+        - services/helpers
+        - services/mail
+        - services/pagination
+        - services/parser
+        - services/queues
+        - services/request-input
+        - services/response-view
+        - services/router
+        - services/session
+        - services/storage
+        - services/validation
+
+#
 # Markup Nav
 #
 "/markup/":
@@ -54,6 +179,48 @@
         - function-form
         - function-html
         - function-dump
+
+#
+# Frontend Nav
+#
+"/cms/":
+-
+    title: Themes
+    children:
+        - themes
+        - pages
+        - partials
+        - layouts
+        - content
+        - components
+-
+    title: AJAX
+    children:
+        - ajax/introduction
+        - ajax/handlers
+        - ajax/update-partials
+        - ajax/attributes-api
+        - ajax/javascript-api
+        - ajax/extras
+-
+    title: Media Manager
+    children:
+        - media/introduction
+        - media/providers
+
+#
+# Tailor Nav
+#
+"/tailor/":
+-
+    title: Tailor
+    children:
+        - introduction
+        - sections
+        - collections
+        - globals
+        - mixins
+        - content-fields
 
 #
 # Root Nav

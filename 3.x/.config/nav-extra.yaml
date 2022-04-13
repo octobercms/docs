@@ -1,21 +1,25 @@
-#
-# Markup Extras
-#
-# "/markup/":
-# -
-#     title: Back to October CMS Docs
-#     icon: "/images/october-leaf.svg"
-#     link: "/3.x/"
-
-#
-# Root Extras
-#
 "/":
 -
-    title: Home
+    title: Getting Started
     icon: "/images/october-leaf.svg"
-    link: "/3.x/"
+    link: "/3.x/setup/installation.html"
 -
-    title: Markup Guide
+    title: Tailor Guide
     icon: "/images/markup-guide.svg"
-    link: "/3.x/markup/"
+    link: "/3.x/tailor/introduction.html"
+-
+    title: CMS Guide
+    icon: "/images/markup-guide.svg"
+    link: "/3.x/cms/themes.html"
+-
+    title: CMS Markup
+    icon: "/images/markup-guide.svg"
+    link: "/3.x/markup/templating.html"
+-
+    title: Extending October CMS
+    icon: "/images/markup-guide.svg"
+    link: "/3.x/extend/introduction.html"
+-
+    title: Backend Elements
+    icon: "/images/markup-guide.svg"
+    link: "/3.x/element/definitions.html"
