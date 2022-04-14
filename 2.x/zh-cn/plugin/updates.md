@@ -15,17 +15,6 @@ plugins/
         create_another_table.php    <=== 迁移文件
 ```
 
-<a id="oc-update-process"></a>
-## 更新过程
-
-在更新过程中，系统会通知用户最近对插件的更改，它还可以提示他们[重要或重大更改](#oc-important-updates)。任何给定的迁移或种子文件在成功更新后只会被执行一次。发生以下任一情况时，October 会自动执行更新过程:
-
-1. 当管理员登录后台时。
-1. 当系统使用后台区域的更新功能进行更新时。
-1. 当从应用程序目录调用[控制台命令](../console/commands.md#oc-database-migration)`php artisan october:migrate`命令时。
-
-> **注意**:插件[初始化过程](../plugin/registration.md#oc-routing-and-initialization)在更新过程中被禁用，这应该是迁移和播种脚本中的一个考虑因素。
-
 ### 插件依赖
 
 根据[插件注册文件中定义的依赖项](../plugin/registration.md#oc-dependency-definitions)，以特定顺序更新应用。在所有依赖项都首先更新之前，不会更新依赖的插件。

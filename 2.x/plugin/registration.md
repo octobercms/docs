@@ -155,7 +155,7 @@ class Plugin extends \System\Classes\PluginBase
 }
 ```
 
-Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates.md#oc-update-process). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
+Dependency definitions will affect how the plugin operates and [how the update process applies updates](../plugin/updates.md). The installation process will attempt to install any dependencies automatically, however if a plugin is detected in the system without any of its dependencies it will be disabled to prevent system errors.
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 

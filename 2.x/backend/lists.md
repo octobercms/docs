@@ -313,6 +313,17 @@ enabled:
     type: switch
 ```
 
+You may customize the switch text by passing an array to the `options` value with false and true labels.
+
+```yaml
+enabled:
+    label: Enabled
+    type: switch
+    options:
+        - Nope
+        - Yeah
+```
+
 <a name="column-summary"></a>
 ### Summary
 
@@ -341,17 +352,6 @@ html_content:
     type: summary
     limitWords: 10
     endChars: "..."
-```
-
-You may customize the switch text by passing an array to the `options` value with false and true labels.
-
-```yaml
-enabled:
-    label: Enabled
-    type: switch
-    options:
-        - Nope
-        - Yeah
 ```
 
 <a name="column-datetime"></a>
