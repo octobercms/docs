@@ -7,8 +7,8 @@ The following defines a **Location** collection with Country (`country_code`) an
 ```yaml
 uuid: 6d6a5efa-3ce7-4b9d-bddc-ac48867552cb
 name: Location
-handle: location
-group: General
+handle: Fields\Location
+
 fields:
     country_code:
         label: Country

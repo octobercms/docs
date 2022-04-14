@@ -11,13 +11,13 @@ Below you can see an example blueprint directory structure. Each blueprint can r
 
 ::: dir
 ├── app
-|   └── blueprints  _<== Blueprints Start Here_
-|       ├── `blog`
+|   └── `blueprints`  _<== Blueprints Start Here_
+|       ├── blog
 |       │   └── blog.yaml
 |       │   └── author.yaml
-|       ├── `about`
+|       ├── about
 |       │   └── about.yaml
-|       ├── `wiki`
+|       ├── wiki
 |       │   └── article.yaml
 :::
 
@@ -76,7 +76,9 @@ Type | Description
 
 Blueprints and their structure are migrated in the database during the normal database migration process. When a change is made manually to a blueprint file, you should run the `october:migrate` command to update the database tables.
 
-    php artisan october:migrate
+```bash
+php artisan october:migrate
+```
 
 ::: tip
 Blueprints are cached when debug mode is turned off. The migration command can also be used to clear the blueprint cache.

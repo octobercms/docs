@@ -1,6 +1,6 @@
 # Defining Navigation
 
-In the backend area, sections will be listed under the Content menu item, with globals and collections listed under the Settings menu item (by default). You may control this behavior using the **navigation** property in the blueprint file. The following code will set an icon and specify the order of appearance.
+In the backend area, entries will be listed under the Content menu item with globals listed under the Settings menu item (by default). You may control this behavior using the **navigation** property in the blueprint file. The following code will set an icon and specify the order of appearance.
 
 ```yaml
 navigation:

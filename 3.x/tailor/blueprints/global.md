@@ -6,7 +6,8 @@ The following defines a **Footer Config** global with a Facebook Link (`facebook
 
 ```yaml
 name: Footer Config
-handle: footerConfig
+handle: Site\Footer
+
 fields:
     facebook_link:
         label: Facebook Link

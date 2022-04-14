@@ -244,6 +244,13 @@
         - blueprints/entry
         - blueprints/global
         - blueprints/mixin
+-
+    title: CMS Components
+    children:
+        - components/section
+        - components/collection
+        - components/global
+        - components/resources
 
 #
 # Frontend Nav

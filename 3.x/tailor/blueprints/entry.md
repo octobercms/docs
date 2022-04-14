@@ -17,8 +17,8 @@ Type | Purpose
 The `single` type will force a single entry for each section definition. This is useful for one-off content, such as a Home page or Contact Us page. The following defines a **Homepage** section with a Welcome Message (`welcome_message`) text field.
 
 ```yaml
-name: Homepage
-handle: homepage
+name: Homepage Content
+handle: Homepage
 type: single
 
 fields:
@@ -32,8 +32,8 @@ fields:
 The `structure` type allows multiple structured entries, allowing for parent-child relationships to exist. This is useful for nested content, such as a Documentation section. The following defines a **Documentation** tree section with an Article Content (`article_content`) markdown field.
 
 ```yaml
-name: Documentation
-handle: docs
+name: Documentation Article
+handle: Docs\Article
 type: structure
 
 fields:
@@ -58,8 +58,8 @@ structure:
 The `stream` type is used for time-based entries that are often listed in chronological order. This is useful for publishing recent activity, such as a Blog section. The following defines a **Blog** feed section with a Post Content (`content`) rich editor field.
 
 ```yaml
-name: Blog
-handle: blog
+name: Blog Post
+handle: Blog\Post
 type: stream
 
 fields:
@@ -73,9 +73,10 @@ fields:
 All entries optionally support the ability to define multiple content groups for a section. For example, a blog section may have a regular post and a featured post, and these are two entry groups. Entry groups are defined by the **groups** property in the section blueprint file and different fields can be specified for each type.
 
 ```yaml
-name: Blog
-handle: blog
+name: Blog Post
+handle: Blog\Post
 type: feed
+
 groups:
     regular_post:
         name: Regular Post
