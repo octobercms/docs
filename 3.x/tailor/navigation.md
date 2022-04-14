@@ -8,19 +8,19 @@ navigation:
     order: 200
 ```
 
-To place an item in the Settings area. The **category** definition can be a string or a settings constant reference, eg. `CATEGORY_COLLECTIONS`.
+To place an item in the Settings area, set the **parent** to `settings`. The **category** definition can be a string or a settings constant reference, eg. `CATEGORY_COLLECTIONS`.
 
 ```yaml
 navigation:
-    mode: settings
+    parent: settings
     category: Collections
 ```
 
-To place an item in the Content area.
+To place an item in the Content area, set the **parent** to `content`.
 
 ```yaml
 navigation:
-    mode: content
+    parent: content
 ```
 
 To place the item as a primary navigation item. A **primaryNavigation** definition is needed.
@@ -32,14 +32,12 @@ primaryNavigation:
     order: 500
 
 navigation:
-    mode: primary
     label: Main Menu Item
 ```
 
-To place the item as a secondary navigation item. The **parent** property should specify the UUID of a primary navigation item.
+To place the item as a secondary navigation item. The **parent** property should specify the UUID or handle of a primary navigation item.
 
 ```yaml
 navigation:
-    mode: secondary
-    parent: 6947ff28-b660-47d7-9240-24ca6d58aeae
+    parent: <handle|uuid>
 ```
