@@ -1,18 +1,21 @@
 # Content Fields
 
-Content Fields are the cornerstone of the Tailor module and define how a field should be configured and displayed.
+Content Fields are the cornerstone of the Tailor module and define how a field should be configured and displayed. These definitions are often found under the **fields** property of a blueprint.
+
+```yaml
+fields:
+    name:
+        label: Full Name
+        type: text
+```
 
 ## Available Content Fields
 
-This section defines the fields that are available to tailor blueprints.
+This section defines the fields that are available to tailor blueprints. These are the values that can be used for the **type** property of a field definition. All of the [Form Field Elements](../element/definitions.md) can be used as a tailor definition.
 
-<div class="content-list" markdown="1">
+### Tailor Specific Fields
 
-- [Mixin](#field-mixin)
-- [Collections](#field-collections)
-- [Entries](#field-entries)
-
-</div>
+There are also some fields that can only be used inside blueprints.
 
 <a name="field-mixin"></a>
 ### Mixin
@@ -22,30 +25,10 @@ This section defines the fields that are available to tailor blueprints.
 ```yaml
 _include1:
     type: mixin
-    source: <uuid>
-```
-
-See the [Mixins article](../tailor/mixins.md) for more information on defining mixins.
-
-<a name="field-collections"></a>
-### Collections
-
-`collections` - links to other collections by UUID or handle.
-
-```yaml
-categories:
-    label: Categories
-    type: collections
     source: <uuid|handle>
 ```
 
-To limit the number of selectable items, use the `maxItems` property.
-
-```yaml
-categories:
-    type: collections
-    maxItems: 1
-```
+See the [Mixins article](blueprints/mixin.md) for more information on defining mixins.
 
 <a name="field-entries"></a>
 ### Entries

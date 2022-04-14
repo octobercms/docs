@@ -82,9 +82,9 @@
         - system/models
         - system/controllers
         - system/views
+        - system/ajax
         - system/behaviors
         - system/widgets
-        - system/ajax
 -
     title: Extending the Core
     children:
@@ -96,6 +96,7 @@
     children:
         - system/application
         - system/localization
+        - system/routing
         - system/scheduling
         - system/unit-testing
 -
@@ -235,11 +236,14 @@
     title: Tailor
     children:
         - introduction
-        - sections
-        - collections
-        - globals
-        - mixins
         - content-fields
+        - navigation
+-
+    title: Blueprints
+    children:
+        - blueprints/entry
+        - blueprints/global
+        - blueprints/mixin
 
 #
 # Frontend Nav
