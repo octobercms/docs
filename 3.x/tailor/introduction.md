@@ -2,7 +2,7 @@
 
 Tailor is a feature that defines file-based content structures used by your website, such as a company blog or team page. Tailor automatically generates a backend user interface for managing records and provides CMS Components for displaying and linking records on the frontend.
 
-When using Tailor you can skip the traditional plugin development workflow and go straight to defining content. Fields are defined simply as blueprint templates and content is stored in special database tables. Navigation and permissions are also defined in the blueprint template.
+When using Tailor you can skip the traditional plugin development workflow and go straight to defining content. Fields are defined simply as blueprint templates and content is stored in special database tables. The blueprint template can also specify navigation and other modifiers.
 
 ## Directory Structure
 

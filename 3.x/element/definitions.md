@@ -1,28 +1,55 @@
 # Definitions
 
-October CMS uses elements to define structures such as Lists, Forms and Filters.
+October CMS uses elements to define structures such as Lists, Forms and Filters. Every definition can be found in the sidebar navigation.
 
+<a id="oc-defining-form-fields"></a>
 <a id="oc-available-field-types"></a>
-## Available Field Types
+## Form Fields
 
-There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#oc-available-ui-elements). For more advanced form fields, a [form widget](#oc-form-widgets) can be used instead.
+Form Fields, Form UI and Form Widgets are field definitions used by forms, such as a text input. These are commonly referred to by the following areas:
 
-<a id="oc-available-ui-elements"></a>
-## Available UI Elements
+- Tailor Content Fields
+- Backend Form Controller
+- Backend Relation Controller
 
-There are non function UI elements that can be included in forms to help with the layout design.
+All form fields are identified as their individual **type** property.
 
-<a id="oc-form-widgets"></a>
-## Form Widgets
+```yaml
+myfield:
+    type: textarea
+    # ...
+```
 
-There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#oc-form-widgets) article.
+Form Fields contain generic and simple fields. Form UI is for user interface elements that can be included in forms to help with the layout design. Form Widgets will often introduce more complex functionality, it is common for plugins to provide their own custom form widgets.
 
 <a id="oc-available-column-types"></a>
-## Available Column Types
+## List Columns
 
-There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#oc-custom-column-types).
+List Columns are column definitions used by lists. These are referred to by the following areas.
+
+- Backend List Controller
+- Backend Relation Controller
+
+All list columns are identified as their individual **type** property.
+
+```yaml
+mycolumn:
+    type: number
+    # ...
+```
 
 <a id="oc-available-scope-types"></a>
-## Available Scope Types
+## Filter Scopes
 
-These types can be used to determine how the filter scope should be displayed.
+Filter Scopes are scope definitions used by filters, often in conjunction with a list. Similar to list columns these are referenced by the following areas:
+
+- Backend List Controller
+- Backend Relation Controller
+
+All filter scopes are identified as their individual **type** property.
+
+```yaml
+myscope:
+    type: date
+    # ...
+```

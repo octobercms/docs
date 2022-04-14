@@ -5,11 +5,19 @@ Globals are used to define globally available content for your website. The fiel
 The following defines a **Footer Config** global with a Facebook Link (`facebook_link`) text field.
 
 ```yaml
-name: Footer Config
 handle: Site\Footer
+name: Footer Config
 
 fields:
     facebook_link:
         label: Facebook Link
         type: text
 ```
+
+The following properties are supported by the global blueprint.
+
+Property | Description
+-------- | -------------
+**handle** | A meaningful and unique code to identify the entry.
+**name** | The label to display when working with this entry.
+**fields** | form fields belonging to the group, see [backend form fields](#oc-defining-form-fields).
