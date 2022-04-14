@@ -17,7 +17,9 @@ Each controller is represented with a PHP script which resides in the the **/con
 |           └── Plugin.php
 :::
 
-> **Tip**: For a practical example of using backend controllers, check out the [Beyond Behaviors tutorial series](https://octobercms.com/support/article/ob-19).
+:::tip
+For a practical example of using backend controllers, check out the [Beyond Behaviors tutorial series](https://octobercms.com/support/article/ob-19).
+:::
 
 ### Class Definition
 

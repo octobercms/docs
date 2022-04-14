@@ -1,8 +1,22 @@
 # Rendering Views
 
+Views reside in a directory that shares the same name as the controller.
+
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           ├── controllers
+|           |   ├── users                _<== View Directory_
+|           |   |   ├── `_partial.htm`     _<== Partial File_
+|           |   |   └── `index.htm`        _<== View File_
+|           |   └── Users.php            _<== Controller Class_
+|           └── Plugin.php
+:::
+
 ## Partials
 
-Back-end partials are files with the extension **htm** that reside in the [controller's views](controllers-ajax) directory. The partial file names should start with the underscore: *_partial.htm*. Partials can be rendered from a back-end page or another partial. Use the controller's `makePartial` method to render a partial. The method takes two parameters - the partial name and the optional array of variables to pass to the partial. Example:
+Backend partials are files with the extension **htm** that reside in the [controller's views](controllers-ajax) directory. The partial file names should start with the underscore: *_partial.htm*. Partials can be rendered from a backend page or another partial. Use the controller's `makePartial` method to render a partial. The method takes two parameters - the partial name and the optional array of variables to pass to the partial. Example:
 
 ```php
 <?= $this->makePartial('sidebar', ['showHeader' => true]) ?>
@@ -44,7 +58,7 @@ If you're using hints, you may find it useful to check if the user has hidden th
 <a id="oc-layouts-and-child-layouts"></a>
 ## Layouts and Child Layouts
 
-Back-end layouts reside in an optional **layouts/** directory of a plugin. A custom layout is set with the `$layout` property of the controller object. It defaults to the system layout called  `default`.
+Backend layouts reside in an optional **layouts/** directory of a plugin. A custom layout is set with the `$layout` property of the controller object. It defaults to the system layout called  `default`.
 
 ```php
 /**
@@ -99,4 +113,4 @@ This layout uses two placeholders, a primary content area called **form-contents
 <?php Block::endPut() ?>
 ```
 
-The layout is executed in the final section by overriding the **body** placeholder used by every back-end layout. It wraps everything with a `<form />` HTML tag and renders the child layout called **form-with-sidebar**. This file is located in `modules\backend\layouts\form-with-sidebar.htm`.
+The layout is executed in the final section by overriding the **body** placeholder used by every backend layout. It wraps everything with a `<form />` HTML tag and renders the child layout called **form-with-sidebar**. This file is located in `modules\backend\layouts\form-with-sidebar.htm`.

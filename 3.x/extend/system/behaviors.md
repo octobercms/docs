@@ -65,10 +65,8 @@ class UtilityFunctions extends \October\Rain\Extension\ExtensionBase
 The extended object is always passed as the first parameter to the Behavior's constructor.
 
 To summarize:
-- Extend \October\Rain\Extension\ExtensionBase to declare your class as a Behaviour
-- The class wanting to implement the Behaviour needs to extend \October\Rain\Extension\Extendable
-
-> **Note**: See [Using Traits Instead of Base Classes](#oc-using-traits-instead-of-base-classes)
+- Extend `October\Rain\Extension\ExtensionBase` to declare your class as a Behavior
+- The class wanting to implement the Behaviour needs to extend `October\Rain\Extension\Extendable`
 
 ## Extending Constructors
 
@@ -221,12 +219,12 @@ UsersController::extend(function($controller) {
 class FormController extends \October\Rain\Extension\ExtensionBase
 {
     /**
-     * @var Reference to the extended object.
+     * @var Controller controller is a reference to the extended object.
      */
     protected $controller;
 
     /**
-     * Constructor
+     * __construct
      */
     public function __construct($controller)
     {
@@ -254,9 +252,8 @@ This `Controller` class will implement the `FormController` behavior and then th
 
 class Controller extends \October\Rain\Extension\Extendable
 {
-
     /**
-     * Implement the FormController behavior
+     * implement the FormController behavior
      */
     public $implement = [
         \MyNamespace\Behaviors\FormController::class
@@ -334,125 +331,3 @@ class User extends \October\Rain\Extension\Extendable
     }
 }
 ```
-
-<a id="oc-using-traits-instead-of-base-classes"></a>
-### Using Traits Instead of Base Classes
-
-Sometimes your class may already extend a parent class outside of your source control, making it so you are unable to extend the `ExtensionBase` or `Extendable` classes. Instead you can use these traits and your classes will have to be implemented as follows.
-
-First let's create the class that will act as a Behaviour, ie. can be implemented by other classes.
-
-```php
-<?php namespace MyNamespace\Behaviors;
-
-class WaveBehaviour
-{
-    use \October\Rain\Extension\ExtensionTrait;
-
-    /**
-     * When using the Extensiontrait, your behaviour also has to implement this method
-     * @see \October\Rain\Extension\ExtensionBase
-     */
-    public static function extend(callable $callback)
-    {
-        self::extensionExtendCallback($callback);
-    }
-
-    public function wave()
-    {
-        echo "*waves*<br>";
-    }
-}
-```
-
-Now let's create the class that is able to implement behaviours using the ExtendableTrait.
-
-```php
-class AI
-{
-    use \October\Rain\Extension\ExtendableTrait;
-
-    /**
-     * @var array Extensions implemented by this class.
-     */
-    public $implement;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->extendableConstruct();
-    }
-
-    public function __get($name)
-    {
-        return $this->extendableGet($name);
-    }
-
-    public function __set($name, $value)
-    {
-        $this->extendableSet($name, $value);
-    }
-
-    public function __call($name, $params)
-    {
-        return $this->extendableCall($name, $params);
-    }
-
-    public static function __callStatic($name, $params)
-    {
-        return self::extendableCallStatic($name, $params);
-    }
-
-    public static function extend(callable $callback)
-    {
-        self::extendableExtendCallback($callback);
-    }
-
-    public function youGotBrains()
-    {
-        echo "I've got an AI!<br>";
-    }
-}
-```
-
-The AI class is now able to use behaviours. Let's extend it and have this class implement the WaveBehaviour.
-
-```php
-namespace MyNamespace\Classes;
-
-class Robot extends AI
-{
-    public $implement = [
-        \MyNamespace\Behaviors\WaveBehaviour::class
-    ];
-
-    public function identify()
-    {
-        echo "I'm a Robot<br>";
-        echo $this->youGotBrains();
-        echo $this->wave();
-    }
-}
-```
-
-You can now utilize the Robot as follows:
-
-```php
-$robot = new Robot();
-$robot->identify();
-```
-
-Which will output:
-
-```
-I'm a Robot
-I've got an AI!
-*waves*
-```
-
-Remember:
-
-- When using the `ExtensionTrait` the methods from `ExtensionBase` should be applied to the class.
-- When using the `ExtendableTrait` the methods from `Extendable` should be applied to the class.

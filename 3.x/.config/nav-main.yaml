@@ -95,6 +95,7 @@
     title: Advanced Topics
     children:
         - system/application
+        - system/sending-mail
         - system/localization
         - system/routing
         - system/scheduling
@@ -156,12 +157,10 @@
         - services/resizer
         - services/hashing-encryption
         - services/helpers
-        - services/mail
         - services/parser
         - services/queues
         - services/request-input
         - services/response-view
-        - services/router
         - services/session
         - services/storage
         - services/validation
@@ -306,6 +305,7 @@
         - config/configuration
         - config/web-server-configuration
         - config/database
+        - config/mail
         - config/errors-logging
 -
     title: Resources

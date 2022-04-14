@@ -1,4 +1,4 @@
-# Filters
+# Filtering Records
 
 October CMS provides features for filtering database records. For behaviors that support filters, you can define a **filter** option to enable the feature. Scopes are often stored in the model configuration directory as **scopes.yaml**.
 
