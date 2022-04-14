@@ -32,14 +32,14 @@ type: entry
 name: Post
 ```
 
-The blueprint **handle** is a human readible approach to referencing a blueprint object. Using the above blueprint as a reference, we can reference the entries using the handle.
+The blueprint **handle** is a human readible approach to referencing a blueprint object. Using the above blueprint as a reference, we can reference the entries using the handle. Handles follow the PHP naming convention for namespaces and can be organised with the backslash `\` separator.
 
 ```ini
 [section blog]
 handle = "Blog\Post"
 ```
 
-The blueprint **uuid** is a unique identifier used when blueprints reference other blueprints. For example, when a field references a mixin.
+The blueprint **uuid** is a unique identifier used when blueprints reference other blueprints. For example, when a field references a mixin. When first creating a blueprint, you can choose to not include a UUID and one will be magically created for you on the first migration.
 
 ```yaml
 _blog_content:
@@ -47,24 +47,9 @@ _blog_content:
     type: mixin
 ```
 
-::: tip
-When first creating a blueprint, you can choose to not include a UUID and one will be magically created for you on the first migration.
-:::
-
 ## Blueprint Types
 
 The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify form field definitions.
-
-<!--
-Entry (Authors) - a model with no special attributes, supports drafts and versions
-  ^- Single (Landing Page) - a model that has only 1 entry
-  ^- Structure (Wiki, Categories) - a model that can support parent/child relationships and has a fullslug
-  ^- Stream (Blog) - a model with entries that are chronologically ordered
-Global (Setting pages) - a plain model with no special attributes, only has 1 entry, does not support drafts or versions
-Mixin - a group of form fields that can be blended with field definitions
-
-Blueprints can contain the following objects.
--->
 
 Type | Description
 ------------- | -------------

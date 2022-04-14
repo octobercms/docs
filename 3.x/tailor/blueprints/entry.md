@@ -8,9 +8,10 @@ While an entry type has no specific behavior, there is also several variants tha
 
 Type | Purpose
 ------ | --------
+`entry` | A basic entry for common purposes
 `single` | A single entry with dedicated fields, eg: Contact Us Page
-`structure` | A defined structure of pages, eg: Documentation Pages
-`stream` | A stream of time stamped pages, eg: Blog Posts
+`structure` | A defined structure of entries, eg: Documentation Pages
+`stream` | A stream of time stamped entries, eg: Blog Posts
 
 ### Single Entries
 
