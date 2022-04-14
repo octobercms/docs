@@ -1,4 +1,4 @@
-# Structure & Seeding
+# Migrations & Seeding
 
 Migrations and seed files allow you to build, modify and populate database tables. They are primarily used by a [plugin update file](../plugin/updates.md) and are paired with the version history of a plugin. All classes are stored in the `updates` directory of a plugin. Migrations should tell a story about your database history and this story can be played both forwards and backwards to build up and tear down the tables.
 

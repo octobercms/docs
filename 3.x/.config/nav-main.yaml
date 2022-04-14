@@ -135,9 +135,9 @@
     title: Database Access
     children:
         - database/basics
-        - database/structure
-        - database/query
         - database/model
+        - database/query
+        - database/structure
         - database/relations
         - database/attachments
         - database/collection
@@ -305,6 +305,7 @@
     children:
         - config/configuration
         - config/web-server-configuration
+        - config/database
         - config/errors-logging
 -
     title: Resources
