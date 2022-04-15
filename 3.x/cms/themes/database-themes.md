@@ -10,7 +10,7 @@ To enable this feature for a single theme, navigate to **Settings > Frontend The
 
 Alternatively you can enable this feature globally for all themes with the config item `cms.database_templates` or using the environment variable.
 
-```env
+```text
 CMS_DB_TEMPLATES=true
 ```
 

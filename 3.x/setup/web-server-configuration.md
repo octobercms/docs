@@ -1,6 +1,7 @@
+---
+subtitle: Learn how to configure and secure your server and tune up the application performance.
+---
 # Web Server Configuration
-
-<p class="subtitle">Learn how to configure and secure your server and tune up the application performance.</p>
 
 ## Security & Performance
 
@@ -50,7 +51,7 @@ php artisan route:cache
 
 ### Shared Hosting Security
 
-In shared hosting environments, extra steps must be done to protect your project files from other users that share the server with you. 
+In shared hosting environments, extra steps must be done to protect your project files from other users that share the server with you.
 
 ::: warning
 Consult with your hosting provider for suitable permission masks. The general rule is that the application files must not be accessible by other users. All files must be accessible and manageable by the owner user and the web server. Configuration files must be accessible by the owner user and web server, but the web server must not be able to change them.

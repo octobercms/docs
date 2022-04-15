@@ -86,13 +86,7 @@
         - system/behaviors
         - system/widgets
 -
-    title: Extending the Core
-    children:
-        - extending
-        - tailor-fields
-        - cms-components
--
-    title: Advanced Topics
+    title: Extra Topics
     children:
         - system/application
         - system/sending-mail
@@ -100,6 +94,12 @@
         - system/routing
         - system/scheduling
         - system/unit-testing
+-
+    title: Extending the Core
+    children:
+        - extending
+        - tailor-fields
+        - cms-components
 -
     title: Backend Panel
     children:
@@ -133,11 +133,11 @@
         - settings/file-settings
         - settings/model-settings
 -
-    title: Database Access
+    title: Database Layer
     children:
         - database/basics
-        - database/model
         - database/query
+        - database/model
         - database/structure
         - database/relations
         - database/attachments
@@ -265,14 +265,14 @@
         - themes/content
         - themes/components
 -
-    title: Advanced Themes
+    title: Theme Development
     children:
         - themes/settings
         - themes/child-themes
         - themes/database-themes
         - themes/seeding-themes
 -
-    title: AJAX
+    title: AJAX Framework
     children:
         - ajax/introduction
         - ajax/handlers
@@ -302,11 +302,11 @@
     title: Configuration
     collapsable: false
     children:
-        - config/configuration
-        - config/web-server-configuration
-        - config/database
-        - config/mail
-        - config/errors-logging
+        - setup/configuration
+        - setup/web-server-configuration
+        - setup/database-config
+        - setup/mail-config
+        - setup/errors-logging
 -
     title: Resources
     collapsable: false

@@ -1,6 +1,7 @@
+---
+subtitle: Learn how to install October CMS on a server.
+---
 # Installation
-
-<p class="subtitle">Learn how to install October CMS on a server.</p>
 
 <VideoBlockLink src="https://www.youtube.com/watch?v=RHUwCvo7xng" title="Installation Tutorial" description="This video describes how to create a project, purchase a license and install October CMS for the first time." prompt="Watch the tutorial"/>
 
@@ -10,7 +11,7 @@ Before installing October CMS, ensure the target system meets the minimum requir
 
 * PHP version 7.2.9 or higher
 * Composer 2.0 or higher
-* PDO PHP Extension (and a relevant driver for the database server you want to connect to)
+* PDO PHP Extension
 * cURL PHP Extension
 * OpenSSL PHP Extension
 * Mbstring PHP Extension
@@ -20,7 +21,7 @@ Before installing October CMS, ensure the target system meets the minimum requir
 
 Supported database servers:
 
-* MySQL 5.7 or MariaDB 10.2. For older versions of MySQL or MariaDB, you may need to [configure the index lengths](../database/structure.md#index-lengths-using-mysql-mariadb) to support the utf8mb4 character set.
+* MySQL 5.7 or MariaDB 10.2. For older versions of MySQL or MariaDB, you may need to [configure the index lengths](../setup/database.md#oc-index-lengths-using-mysql-mariadb) to support the utf8mb4 character set.
 * PostgreSQL 9.6
 * SQLite 3.8.8.
 
@@ -34,7 +35,7 @@ Supported web servers:
 ## Installing October CMS
 
 ::: aside
-You should configure a virtual host on the web server to access the installation directory. For local development you can use [Laravel Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/****) or the built-in Laravel development server.
+You should configure a virtual host on the web server to access the installation directory. For local development you can use [Laravel Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/) or the built-in Laravel development server.
 :::
 
 October CMS is a PHP web application that uses [Composer](http://getcomposer.org/) to manage its dependencies. Ensure that Composer is installed before you begin. The [License Key](https://octobercms.com/help/site/projects#project-id) will be required to complete the installation.
@@ -97,7 +98,7 @@ It can happen in some environments when pasting the license key contents. Press 
 :::
 
 ::: details An error "Specified key was too long" is displayed during migration
-It can happen with older versions of MySQL or MariaDB. [Configuring the index lengths](../database/structure.md#index-lengths-using-mysql-mariadb) to support the utf8mb4 character set can help to resolve this issue.
+It can happen with older versions of MySQL or MariaDB. [Configuring the index lengths](../setup/database.md#index-lengths-using-mysql-mariadb) to support the utf8mb4 character set can help to resolve this issue.
 :::
 
 ::: details A blank screen is displayed when opening the application

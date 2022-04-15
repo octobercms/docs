@@ -1,3 +1,6 @@
+---
+subtitle: Similar to partials but used for static content.
+---
 # Content Blocks
 
 Content Blocks can be text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that are edited separately from the page or layout. They're designed to hold static content only and support basic templating variables. [Partials](partials.md) are more flexible and should be used for generating dynamic content.

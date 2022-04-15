@@ -1,9 +1,12 @@
+---
+subtitle: Find errors and other log messages about your website.
+---
 # Errors & Logging
 
 When you first start using October CMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
 
 1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
-1. Alternatively it can be viewed via the Administration area by navigating to *System > Logs > Event Log*.
+1. Alternatively it can be viewed via the Administration area by navigating to *System → Logs → Event Log*.
 
 Log entries are always created when an error page is shown and for certain [exception types](#oc-exception-types).
 

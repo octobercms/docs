@@ -1,3 +1,6 @@
+---
+subtitle: Learn how to install and manage plugins and themes.
+---
 # Installing Plugins & Themes
 
 ## Project Management

@@ -1,6 +1,9 @@
+---
+subtitle: Define the appearance of your website built with October CMS.
+---
 # Themes
 
-Themes define the appearance of your website or web application built with October CMS. They are completely file-based and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages.md), [partials](partials.md), [layouts](layouts.md) and [content files](content.md) in the corresponding articles.
+Themes are completely file-based and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages.md), [partials](partials.md), [layouts](layouts.md) and [content files](content.md) in the corresponding articles.
 
 Themes are directories that reside in the **themes** directory by default. Themes can contain the following objects:
 

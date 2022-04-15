@@ -1,6 +1,9 @@
+---
+subtitle: Chunks of HTML code that are used anywhere throughout your website.
+---
 # Partials
 
-Partials contain reusable chunks of code that are used anywhere throughout your website. They are useful for elements that repeat on different pages or layouts. One such example is a page footer used across different [page layouts](layouts.md). Partials are also a key ingredient when [updating the page content with AJAX](../ajax/update-partials.md).
+Partials are useful for elements that repeat on different pages or layouts. One such example is a page footer used across different [page layouts](layouts.md). Partials are also a key ingredient when [updating the page content with AJAX](../ajax/update-partials.md).
 
 Partial templates files reside in the **partials** directory in your theme. Partial files should have the **htm** extension. Next is an example of the simplest possible partial.
 

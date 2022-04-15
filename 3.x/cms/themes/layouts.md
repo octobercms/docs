@@ -1,3 +1,6 @@
+---
+subtitle: Define the scaffold for each page on your website.
+---
 # Layouts
 
 Layouts define a common scaffold for your pages, which usually means everything that repeats on every page, such as a header and a footer. They will almost always contain HTML code such as HEAD, TITLE and BODY tags.

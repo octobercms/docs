@@ -1,6 +1,7 @@
+---
+subtitle: Deploy October CMS project to a private or shared server.
+---
 # Deployment
-
-<p class="subtitle">Deploy October CMS project to a private or shared server.</p>
 
 October CMS projects can be deployed using Composer and the official Deploy plugin.
 

@@ -1,6 +1,9 @@
+---
+subtitle: Configurable building blocks that can be attached to any page, partial or layout.
+---
 # Components
 
-Components are configurable building elements that can be attached to any page, partial or layout. Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../plugin/components.md) as part of plugins.
 
@@ -250,47 +253,3 @@ Partials rendered from outside the component must use their fully qualified name
 ```
 
 Read more on [component development](../plugin/components.md#oc-component-partials) to learn about component partials.
-
-<!--
-## Soft Components
-
-Soft components are components in a theme that will continue to operate even if the linked component is no longer available. This allows theme and site developers to specify optional plugin components in their themes that will provide specific functionality if the plugin and/or component is present, while allowing the site to continue to function should the component no longer exist.
-
-When soft components are present on a page and the component is unavailable, no output is generated for the component.
-
-You can define soft components by prefixing the component name with an `@` symbol.
-
-```
-url = "mypage"
-
-[@channel]
-==
-{% component "channel" %}
-```
-
-In this example, should the `channel` component not be available, the `{% component "channel" %}` tag will be ignored when the page is rendered.
-
-Soft components also work with aliases as well:
-
-```
-url = "mypage"
-
-[@channel channelSection]
-==
-{% component "channelSection" %}
-```
-
-As soft components do not contain any of the data that the component may provide normally if the component is not available, you must take care to ensure that any custom markup will gracefully handle any missing component information. For example:
-
-```
-url = "mypage"
-
-[@channel]
-==
-{% if channel.name %}
-    <div class="channel">
-        {% channel.name %}
-    </div>
-{% endif %}
-```
--->

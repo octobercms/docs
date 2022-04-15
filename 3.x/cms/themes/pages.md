@@ -1,3 +1,6 @@
+---
+subtitle: Hold the content for each URL on your website.
+---
 # Pages
 
 Every website serves up at least one page and in October CMS, a page is represented with page template. Page template files reside in the **pages** directory in your theme. Page file names do not affect the routing, but it's a good idea to name your pages according to the page's function. The files should have the **htm** extension.

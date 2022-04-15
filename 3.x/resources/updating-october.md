@@ -1,3 +1,6 @@
+---
+subtitle: Instructions for keeping your October CMS website up to date.
+---
 # Updating October CMS
 
 The `october:update` command will request updates from the October gateway. It will update the core application and plugin files, then perform a database migration.

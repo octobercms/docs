@@ -1,11 +1,6 @@
 # Permissions
 
-The user management for the back-end includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also register permissions that control access to the features in the back-end.
-
-<a id="oc-users-and-permissions"></a>
-## Users and Permissions
-
-Access to all parts of an October CMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `\Backend\Models\User` models are the containers that hold all the important information about a user.
+Access to all parts of an October CMS instance is controlled by the Permissions system. At the lowest level, there are Super Users (users with the `is_superuser` flag set to true), Administrators (users) and permissions. The `Backend\Models\User` models are the containers that hold all the important information about a user.
 
 Super users have access to everything in the system and are only manageable by themselves or other superusers; they are not visible to nor editable by regular administrators, not even if an administrator has the `backend.manage_users` permission.
 
@@ -20,53 +15,6 @@ Roles (`\Backend\Models\UserRole`) are groupings of permissions with a name and 
 > **Note**: System roles (`developer`, `publisher`, and any role with `is_system` set to `true`) cannot have their permissions changed through the Backend. They are assumed to have access to all permissions, unless a given permission specifies a specific role or roles that it applies to using the `roles` array key in the definition of the permission (in which case only that specified system role has access to it).
 
 Groups (`\Backend\Models\UserGroup`) are an organizational tool for grouping administrators, they can be thought of as "user categories". They have nothing to do with permissions and are strictly for organizational purposes. For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you would simply do `Mail::sendTo(UserGroup::where('code', 'head-office-staff')->get()->users, 'author.plugin::mail.important_notification', $data);`
-
-## Backend User Helper
-
-The global `BackendAuth` facade can be used for managing administrative users, which primarily inherits the `October\Rain\Auth\Manager` class. To register a new administrator user account, use the `BackendAuth::register` method.
-
-```php
-$user = BackendAuth::register([
-    'first_name' => 'Some',
-    'last_name' => 'User',
-    'login' => 'someuser',
-    'email' => 'some@website.tld',
-    'password' => 'changeme',
-    'password_confirmation' => 'changeme'
-]);
-```
-
-The `BackendAuth::check` method is a quick way to check if the user is signed in. To return the user model that is signed in, use `BackendAuth::getUser` instead. Additionally, the active user will be available as `$this->user` inside any [backend controller](../backend/controllers-ajax.md).
-
-```php
-// Returns true if signed in.
-$loggedIn = BackendAuth::check();
-
-// Returns the signed in user
-$user = BackendAuth::getUser();
-
-// Returns the signed in user from a controller
-$user = $this->user;
-```
-
-You may look up a user by their login name using the `BackendAuth::findUserByLogin` method.
-
-```php
-$user = BackendAuth::findUserByLogin('someuser');
-```
-
-You may authenticate a user by providing their login and password with `BackendAuth::authenticate`. You can also authenticate as a user simply by passing the `Backend\Models\User` model along with `BackendAuth::login`.
-
-```php
-// Authenticate user by credentials
-$user = BackendAuth::authenticate([
-    'login' => post('login'),
-    'password' => post('password')
-]);
-
-// Sign in as a specific user
-BackendAuth::login($user);
-```
 
 ## Registering Permissions
 

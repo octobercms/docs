@@ -1,6 +1,7 @@
+---
+subtitle: Learn how to configure and fine-tune October CMS.
+---
 # Common Configuration
-
-<p class="subtitle">Learn how to configure and fine-tune October CMS.</p>
 
 All of the configuration files for October CMS are stored in the `config` directory. Each configuration parameter has inline documentation.
 
@@ -37,7 +38,7 @@ Configuration values are loaded in this order:
 Never add the `.env` file to source control. It would be a security risk in the event an intruder gains access to the repository.
 :::
 
-#### Environment-Specific Configuration Files
+### Environment-Specific Configuration Files
 
 If a configuration file must be loaded based on the current application environment, e.g. staging or production, you can use the server-level `APP_ENV` variable. Example Apache configuration:
 
@@ -51,7 +52,7 @@ When the `APP_ENV` variable is defined, the platform attempts to load a .env fil
 
 There are several important commonly used configuration parameters.
 
-#### Debug Mode
+### Debug Mode
 
 The `debug` parameter can be found in the `config/app.php` file. By default, the value is loaded from the `APP_DEBUG` environment variable. After the installation, the debug mode is enabled in the `.env` file:
 
@@ -68,7 +69,7 @@ Features provided by the debug mode:
 * [combined assets](../markup/filter-theme.md) are not minified by default
 * [safe mode](../setup/configuration.md#safe-mode) is disabled by default.
 
-#### Safe Mode
+### Safe Mode
 
 The `enable_safe_mode` parameter can be found in the `config/cms.php` file. By default, the value is loaded from the `CMS_SAFE_MODE` environment variable. Safe mode disables the [PHP code section](../cms/themes.md#php-code-section) in CMS templates.
 
@@ -78,8 +79,7 @@ The parameter can take one of the following values:
 * `false` - safe mode is disabled
 * `null` - safe mode is active if [debug mode](../setup/configuration.md#debug-mode) is disabled.
 
-
-#### CSRF protection
+### CSRF protection
 
 October CMS provides a built-in [Cross-Site Request Forgery](https://owasp.org/www-community/attacks/csrf) prevention mechanism. When CSRF protection is enabled, October CMS stores a random token in the user's session. The [form opening tag](../services/html.md#opening-a-form) and the [form token tag](../services/html.md#form-tokens) add a hidden field with the token value to the form. For all POST, PUT or DELETE requests, the platform checks whether the submitted token value matches the one stored in the user session.
 
