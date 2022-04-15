@@ -1,6 +1,6 @@
 # Relation Controller
 
-**Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model.md) relationships on a page. Not to be confused with [List relation columns](lists.md#oc-available-column-types) or [Form relation fields](forms.md#widget-relation) that only provide simple management.
+**Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model.md) relationships on a page.
 
 Relation behavior depends on [relation definitions](#oc-relationship-types). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#oc-configuring-the-relation-behavior).
 
@@ -70,8 +70,8 @@ These configuration values can be specified for the **view** or **manage** optio
 
 Option | Type | Description
 ------------- | ------------- | -------------
-**form** | Form | a reference to form field definition file, see [backend form fields](forms.md#oc-defining-form-fields).
-**list** | List | a reference to list column definition file, see [backend list columns](lists.md#oc-defining-list-columns).
+**form** | Form | a reference to form field definition file, see [backend form fields](../../element/definitions.md).
+**list** | List | a reference to list column definition file, see [backend list columns](../../element/definitions.md).
 **showFlash** | Both | enables the display of flash messages after a successful action. Default: true
 **showSearch** | List | display an input for searching the records. Default: false
 **showSorting** | List | displays the sorting link on each column. Default: true

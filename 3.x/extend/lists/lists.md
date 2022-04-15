@@ -2,7 +2,7 @@
 
 **List Behavior** is a controller modifier used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](#oc-defining-list-columns) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -40,7 +40,7 @@ The following fields are required in the list configuration file:
 Field | Description
 ------------- | -------------
 **title** | a title for this list.
-**list** | a configuration array or reference to a list column definition file, see [list columns](#oc-defining-list-columns).
+**list** | a configuration array or reference to a list column definition file, see [list columns](../../element/definitions.md).
 **modelClass** | a model class name, the list data is loaded from this model.
 
 The configuration options listed below are optional.
@@ -136,7 +136,6 @@ filter: $/acme/blog/models/post/scopes.yaml
 
 The **filter** option should make reference to a [filter configuration file](../backend/filters.md) path or supply an array with the configuration.
 
-<a id="oc-defining-list-columns"></a>
 ## Defining List Columns
 
 List columns are defined with the YAML file. The column configuration is used by the list behavior for creating the record table and displaying model columns in the table cells. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but the **columns.yaml** and **list_columns.yaml** are common names. Example list columns file location:
@@ -170,7 +169,7 @@ For each column can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
-**type** | defines how this column should be rendered (see [Column types](#oc-available-column-types) below).
+**type** | defines how this column should be rendered, see [list column definitions](../../element/definitions.md).
 **default** | specifies the default value for the column if value is empty.
 **searchable** | include this column in the list search results. Default: false.
 **invisible** | specifies if this column is hidden by default. Default: false.
@@ -226,38 +225,9 @@ content[title]:
 
 The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#oc-model-events).
 
-<a id="oc-available-column-types"></a>
-## Available Column Types
+### Direct SQL Selection
 
-There are various column types that can be used for the **type** setting, these control how the list column is displayed. In addition to the native column types specified below, you may also [define custom column types](#oc-custom-column-types).
-
-<div class="content-list" markdown="1">
-
-- [Text](#column-text)
-- [Number](#column-number)
-- [Image](#column-image)
-- [Switch](#column-switch)
-- [Summary](#column-summary)
-- [Date & Time](#column-datetime)
-- [Date](#column-date)
-- [Time](#column-time)
-- [Time since](#column-timesince)
-- [Time tense](#column-timetense)
-- [Selectable](#column-selectable)
-- [Partial](#column-partial)
-- [Colorpicker](#column-colorpicker)
-
-
-<!-- Non Types -->
-- [Relation](#column-relation)
-- [Select](#column-select)
-
-</div>
-
-<a name="column-select"></a>
-### Select
-
-`select` - allows to create a column using a custom select statement. Any valid SQL SELECT statement works here.
+The `select` property allows you to create a column using a custom select statement. Any valid SQL SELECT statement works here.
 
 ```yaml
 full_name:
@@ -265,10 +235,9 @@ full_name:
     select: concat(first_name, ' ', last_name)
 ```
 
-<a name="column-relation"></a>
-### Relation
+### Related Column Selection
 
-`relation` - allows to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations.md) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
+The `relation` property allows you to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations.md) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
 
 ```yaml
 group_name:
@@ -287,7 +256,9 @@ users_count:
     type: number
 ```
 
-> **Note**: Be careful not to name relations the same as existing database columns. For example, using a name `group_id` could break the group relation due to a naming conflict.
+::: warning
+Be careful not to name relations the same as existing database columns. For example, using a name `group_id` could break the group relation due to a naming conflict.
+:::
 
 ## Displaying the List
 
@@ -456,7 +427,7 @@ Method | Description
 **addColumns** | adds new columns to the list
 **removeColumn** | removes a column from the list
 
-Each method takes an array of columns similar to the [list column configuration](#oc-defining-list-columns).
+Each method takes an array of columns similar to the [list column configuration](../../element/definitions.md).
 
 ### Inject CSS Row Class
 

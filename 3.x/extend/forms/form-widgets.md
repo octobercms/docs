@@ -21,7 +21,7 @@ Form Widget classes reside inside the **formwidgets** directory of the plugin di
 
 ### Class Definition
 
-The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. A registered widget can be used in the backend [form field definition](../backend/forms.md#oc-defining-form-fields) file. Example form widget class definition:
+The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. A registered widget can be used in the backend [form field definition](../../element/definitions.md) file. Example form widget class definition:
 
 ```php
 namespace Backend\FormWidgets;
@@ -41,7 +41,7 @@ class ColorPicker extends FormWidgetBase
 
 ### Form Widget Properties
 
-Form widgets may have properties that can be set using the [form field configuration](../backend/forms.md#oc-defining-form-fields). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
+Form widgets may have properties that can be set using the [form field configuration](../../element/definitions.md). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
 
 ```php
 class DatePicker extends FormWidgetBase
@@ -92,7 +92,7 @@ class DatePicker extends FormWidgetBase
 }
 ```
 
-The property values then become available to set from the [form field definition](../backend/forms.md#oc-defining-form-fields) when using the widget.
+The property values then become available to set from the [form field definition](../../element/definitions.md) when using the widget.
 
 ```yaml
 born_at:

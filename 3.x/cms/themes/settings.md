@@ -1,3 +1,6 @@
+---
+subtitle: Learn how to customize the theme management features.
+---
 # Theme Settings
 
 The theme directory could include the **theme.yaml**, **version.yaml** and **assets/images/theme-preview.png** files. These files are optional for the local development but required for themes published on the October CMS Marketplace.
@@ -97,7 +100,7 @@ When the theme is installed for the first time, the system will attempt to insta
 <a id="oc-theme-customization"></a>
 ## Theme Customization
 
-Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form fields](../backend/forms.md#oc-defining-form-fields) for more information.
+Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form field definitions](../../element/definitions.md) for more information.
 
 The following is an example of how to define a website name configuration field called **site_name**:
 

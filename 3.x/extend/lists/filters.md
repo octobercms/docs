@@ -17,7 +17,6 @@ The [List Behavior](../backend/lists.md) and [Relation Behavior](../backend/rela
 filter: $/october/test/models/user/scopes.yaml
 ```
 
-<a id="oc-defining-filter-scopes"></a>
 ## Defining Filter Scopes
 
 Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
@@ -74,7 +73,7 @@ For each scope you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the filter scope to the user.
-**type** | defines how this scope should be rendered (see [Scope types](#oc-available-scope-types) below). Default: group.
+**type** | defines how this scope should be , see [filter scope definitions](../../element/definitions.md). Default: group.
 **conditions** | enables or disables condition functions or specifies a raw where query statement to apply to each condition, see the scope type definition for details.
 **modelScope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
@@ -126,7 +125,7 @@ public function getCityOptions($scopes = null)
 }
 ```
 
-You can filter the filter scope definitions by overriding the `filterScopes` method inside the Model used. This allows you to manipulate visibility and other scope properties based on other scope values. The method takes two arguments **$scopes** will represent an object of the fields already defined by the [scope configuration](#oc-defining-filter-scopes) and **$context** represents the active filter context.
+You can filter the filter scope definitions by overriding the `filterScopes` method inside the Model used. This allows you to manipulate visibility and other scope properties based on other scope values. The method takes two arguments **$scopes** will represent an object of the scopes already defined by the scope configuration and **$context** represents the active filter context.
 
 ```php
 public function filterScopes($scopes, $context = null)
@@ -149,21 +148,3 @@ roles:
     label: Role
     dependsOn: disable_roles
 ```
-
-<a id="oc-available-scope-types"></a>
-## Available Scope Types
-
-These types can be used to determine how the filter scope should be displayed.
-
-<div class="content-list" markdown="1">
-
-- [Checkbox](#filter-checkbox)
-- [Switch](#filter-switch)
-- [Text](#filter-text)
-- [Number](#filter-number)
-- [Dropdown](#filter-dropdown)
-- [Group](#filter-group)
-- [Date](#filter-date)
-
-</div>
-

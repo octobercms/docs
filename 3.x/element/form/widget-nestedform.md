@@ -30,5 +30,5 @@ profile:
 
 Option | Description
 ------------- | -------------
-**form** | a reference to form field definition file, see [backend form fields](#oc-defining-form-fields). Inline fields can also be used.
+**form** | inline field definitions or a reference to form field definition file.
 **showPanel** | places the form inside a panel container. Default: true

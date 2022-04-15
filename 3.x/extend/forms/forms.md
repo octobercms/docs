@@ -2,7 +2,7 @@
 
 **Form Behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-Form behavior depends on form [field definitions](#oc-defining-form-fields) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+Form behavior depends on form [field definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -47,7 +47,7 @@ The following fields are required in the form configuration file.
 Field | Description
 ------------- | -------------
 **name** | the name of the object being managed by this form.
-**form** | a configuration array or reference to a form field definition file, see [form fields](#oc-defining-form-fields).
+**form** | a configuration array or reference to a form field definition file, see [form fields](../../element/definitions.md).
 **modelClass** | a model class name, the form data is loaded and saved against this model.
 
 The configuration options listed below are optional. Define them if you want the form behavior to support the [Create](#oc-create-page), [Update](#oc-update-page) or [Preview](#oc-preview-page) pages.
@@ -146,7 +146,6 @@ flashCreate | :name Created
 flashUpdate | :name Updated
 flashDelete | :name Deleted
 
-<a id="oc-defining-form-fields"></a>
 ## Defining Form Fields
 
 Form fields are defined with the YAML file. The form fields configuration is used by the form behavior for creating the form controls and binding them to the model fields. The file is placed to a subdirectory of the **models** directory of a plugin. The subdirectory name matches the model class name written in lowercase. The file name doesn't matter, but **fields.yaml** and **form_fields.yaml** are common names. Example form fields file location:
@@ -197,7 +196,7 @@ For each field you can specify these options (where applicable):
 Option | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
-**type** | defines how this field should be rendered (see [Available fields types](#oc-available-field-types) below). Default: text.
+**type** | defines how this field should be rendered, see [form field definitions](../../element/definitions.md). Default: text.
 **span** | aligns the form field to one side. Options: auto, left, right, row, full. Default: full.
 **spanClass** | used with the span `row` option to display the form as a Bootstrap grid, for example, `spanClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: tiny, small, large, huge, giant.
@@ -224,7 +223,6 @@ Option | Description
 
 ### Nested Field Selection
 
-Fields from related models can be rendered with the [Relation Widget](#relation-widget) or the [Relation Manager](relations.md#oc-relationship-types). However, if the relationship type is singular, or a [jsonable array](../database/model.md#oc-supported-properties), you may use a nested field type using the **relation[field]** definition.
 
 ```yaml
 avatar[name]:
@@ -275,76 +273,15 @@ tabs:
             tab: Groups
 ```
 
-<a id="oc-available-field-types"></a>
-## Available Field Types
+### Custom Field Types
 
-There are various native field types that can be used for the **type** setting. For basic UI elements, take a look at the [available UI elements](#oc-available-ui-elements). For more advanced form fields, a [form widget](#oc-form-widgets) can be used instead.
-
-<div class="content-list" markdown="1">
-
-- [Text](#field-text)
-- [Number](#field-number)
-- [Password](#field-password)
-- [Email](#field-email)
-- [Textarea](#field-textarea)
-- [Dropdown](#field-dropdown)
-- [Radio List](#field-radio)
-- [Balloon Selector](#field-balloon)
-- [Checkbox](#field-checkbox)
-- [Checkbox List](#field-checkboxlist)
-- [Switch](#field-switch)
-- [Widget](#field-widget)
-
-</div>
-
-<a name="field-widget"></a>
-### Widget
-
-`widget` - renders a custom form widget, the `type` field can refer directly to the class name of the widget or the registered alias name.
+There are various native field types that can be used for the **type** setting. To learn more, take a look at the available [form field definitions](../../element/definitions.md). It is possible to render a field directly by specifying the PHP class name of a [form field widget](form-widgets.md).
 
 ```yaml
 blog_content:
     type: Backend\FormWidgets\RichEditor
     size: huge
 ```
-
-<a id="oc-available-ui-elements"></a>
-## Available UI Elements
-
-There are non function UI elements that can be included in forms to help with the layout design.
-
-<div class="content-list" markdown="1">
-
-- [Section](#field-section)
-- [Hint](#field-hint)
-- [Horizontal Rule](#field-ruler)
-- [Partial](#field-partial)
-
-</div>
-
-<a id="oc-form-widgets"></a>
-## Form Widgets
-
-There are various form widgets included as standard, although it is common for plugins to provide their own custom form widgets. You can read more on the [Form Widgets](widgets.md#oc-form-widgets) article.
-
-<div class="content-list" markdown="1">
-
-- [Code Editor](#widget-codeeditor)
-- [Color Picker](#widget-colorpicker)
-- [Data Table](#widget-datatable)
-- [Date Picker](#widget-datepicker)
-- [File Upload](#widget-fileupload)
-- [Markdown Editor](#widget-markdowneditor)
-- [Media Finder](#widget-mediafinder)
-- [Nested Form](#widget-nestedform)
-- [Record Finder](#widget-recordfinder)
-- [Relation](#widget-relation)
-- [Repeater](#widget-repeater)
-- [Rich Editor / WYSIWYG](#widget-richeditor)
-- [Sensitive](#widget-sensitive)
-- [Tag List](#widget-taglist)
-
-</div>
 
 ## Form Views
 
@@ -544,7 +481,7 @@ public function getStateOptions()
 }
 ```
 
-You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](#oc-defining-form-fields) and **$context** represents the active form context.
+You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](../../element/definitions.md) and **$context** represents the active form context.
 
 ```php
 public function filterFields($fields, $context = null)
@@ -717,7 +654,7 @@ Method | Description
 **addSecondaryTabFields** | adds new fields to the secondary tabbed area
 **removeField** | remove a field from any areas
 
-Each method takes an array of fields similar to the [form field configuration](#oc-defining-form-fields).
+Each method takes an array of fields similar to the [form field configuration](../../element/definitions.md).
 
 <a id="oc-filtering-form-fields"></a>
 ### Filtering Form Fields

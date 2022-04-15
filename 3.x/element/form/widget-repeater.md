@@ -21,7 +21,7 @@ extra_information:
 
 Option | Description
 ------------- | -------------
-**form** | a reference to form field definition file, see [backend form fields](#oc-defining-form-fields). Inline fields can also be used.
+**form** | inline field definitions or a reference to form field definition file.
 **prompt** | text to display for the create button. Default: Add new item.
 **displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
 **itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
@@ -81,6 +81,6 @@ Option | Description
 **name** | the name of the group.
 **description** | a brief description of the group.
 **icon** | defines an icon for the group, optional.
-**fields** | form fields belonging to the group, see [backend form fields](#oc-defining-form-fields).
+**fields** | form fields belonging to the group.
 
 > **Note**: The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.

@@ -21,7 +21,7 @@ Before installing October CMS, ensure the target system meets the minimum requir
 
 Supported database servers:
 
-* MySQL 5.7 or MariaDB 10.2. For older versions of MySQL or MariaDB, you may need to [configure the index lengths](../setup/database.md#oc-index-lengths-using-mysql-mariadb) to support the utf8mb4 character set.
+* MySQL 5.7 or MariaDB 10.2. For older versions of MySQL or MariaDB, you may need to [configure the index lengths](../setup/database-config.md#oc-index-lengths-using-mysql-mariadb) to support the utf8mb4 character set.
 * PostgreSQL 9.6
 * SQLite 3.8.8.
 
@@ -98,7 +98,7 @@ It can happen in some environments when pasting the license key contents. Press 
 :::
 
 ::: details An error "Specified key was too long" is displayed during migration
-It can happen with older versions of MySQL or MariaDB. [Configuring the index lengths](../setup/database.md#index-lengths-using-mysql-mariadb) to support the utf8mb4 character set can help to resolve this issue.
+It can happen with older versions of MySQL or MariaDB. [Configuring the index lengths](../setup/database-config.md#index-lengths-using-mysql-mariadb) to support the utf8mb4 character set can help to resolve this issue.
 :::
 
 ::: details A blank screen is displayed when opening the application

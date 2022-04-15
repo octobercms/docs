@@ -147,7 +147,7 @@ php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/
 
 ### Check Protected
 
-`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#oc-child-themes) is added and a child theme is created.
+`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes/child-themes.md) is added and a child theme is created.
 
 ```bash
 php artisan theme:check

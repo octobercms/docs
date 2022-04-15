@@ -91,4 +91,4 @@ The following configuration is recommended for production environments:
 
 * CSRF protection is enabled
 * debug mode is disabled
-* use the [public folder](../setup/web-server-configuration.md#public-folder) for additional security.
+* use the [public folder](../setup/web-server-config.md#public-folder) for additional security.

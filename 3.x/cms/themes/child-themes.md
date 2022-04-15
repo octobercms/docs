@@ -1,12 +1,13 @@
+---
+subtitle: Override a theme by creating a child version.
+---
 # Child Themes
-
-<a id="oc-child-themes"></a>
 
 Child themes allow for the possibility of theme inheritence. A good use of this is when you have a third party theme or a theme that is in read-only mode. A child theme will reference a parent and use it as a fallback source.
 
 If a page named `home.htm` exists in the parent theme but not the child, it treats it the same as if it did; the URL is active, and you can open the page like normal. When saving the page in the backend area, a new file is created in the child theme to override the contents.
 
-To enable this feature for a theme, navigate to **Settings > Frontend Theme**, select **Edit Properties** and select a parent from the **Parent Theme** dropdown list.
+To enable this feature for a theme, navigate to **Settings → Frontend Theme**, select **Edit Properties** and select a parent from the **Parent Theme** dropdown list.
 
 ## Theme Lock File
 
