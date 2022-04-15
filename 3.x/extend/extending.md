@@ -1,4 +1,31 @@
-# Extending Concepts
+---
+subtitle: Learn about the common methods used to extend October CMS.
+---
+# Extension Methodology
+
+## Extending by Plugin Registration
+
+In almost all situations, extending October CMS happens in the plugin registration file, which is essentially a [Laravel Service Provider](https://laravel.com/docs/9.x/providers).
+
+The following extension methods are supported in the plugin registration class:
+
+Method | Description
+------------- | -------------
+**register()** | register method, called when the plugin is first registered, called before `boot`.
+**boot()** | boot method, called right before the request route, called after `register`.
+**registerMarkupTags()** | registers [additional markup tags](#oc-extending-twig) that can be used in the CMS.
+**registerComponents()** | registers any [front-end components](components#oc-component-registration) used by this plugin.
+**registerNavigation()** | registers [back-end navigation menu items](#oc-navigation-menus) for this plugin.
+**registerPermissions()** | registers any [back-end permissions](../backend/users#oc-registering-permissions) used by this plugin.
+**registerSettings()** | registers any [back-end configuration links](settings#oc-settings-link-registration) used by this plugin.
+**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#oc-form-widget-registration) supplied by this plugin.
+**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#oc-report-widget-registration), including the dashboard widgets.
+**registerListColumnTypes()** | registers any [custom list column types](../backend/lists.md#oc-custom-column-types) supplied by this plugin.
+**registerMailLayouts()** | registers any [mail view layouts](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailTemplates()** | registers any [mail view templates](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailPartials()** | registers any [mail view partials](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling.md#oc-defining-schedules) that are executed on a regular basis.
+**registerContentFields()** | registers [content fields](../extend/tailor-fields.md) that are used by Tailor blueprints.
 
 ## Extending with Events
 
@@ -6,7 +33,7 @@ The [Event service](../services/events.md) is the primary way to inject or modif
 
 ### Subscribing to Events
 
-The most common place to subscribe to an event is the `boot` method of a [Plugin registration file](registration.md#oc-registration-methods). For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
+The most common place to subscribe to an event is the `boot` method of the plugin registration file. For example, when a user is first registered you might want to add them to a third party mailing list, this could be achieved by subscribing to a `rainlab.user.register` global event.
 
 ```php
 class Plugin extends PluginBase
@@ -105,7 +132,7 @@ These are some practical examples of how events can be used.
 
 ### Extending a User Model
 
-This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the [Plugin registration file](registration.md#oc-routing-and-initialization). In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
+This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the plugin registration file. In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
 
 ```php
 // Local event hook that affects all users
@@ -149,7 +176,7 @@ User::extend(function ($model) {
 
 There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms.md#oc-extending-form-behavior).
 
-This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration.md#oc-routing-and-initialization).
+This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the plugin registration file.
 
 ```php
 // Extend all backend form usage
@@ -188,7 +215,7 @@ Event::listen('backend.form.extendFields', function($widget) {
 
 ### Extending a Backend List
 
-This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the [Plugin registration file](registration.md#oc-routing-and-initialization).
+This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the plugin registration file.
 
 ```php
 // Extend all backend list usage

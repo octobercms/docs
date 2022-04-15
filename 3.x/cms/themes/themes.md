@@ -1,5 +1,5 @@
 ---
-subtitle: Define the appearance of your website built with October CMS.
+subtitle: Define the appearance of your website or web application.
 ---
 # Themes
 

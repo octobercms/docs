@@ -45,12 +45,12 @@ Plugin namespaces are essential, especially if you are going to publish your plu
 <a id="oc-registration-file"></a>
 ## Registration File
 
-The **Plugin.php** file, called the *Plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
+The **Plugin.php** file, called the *plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
 
 1. Information about the plugin, its name, and author.
 1. Registration methods for extending the CMS.
 
-Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is `pluginDetails`. An example Plugin registration file:
+Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is `pluginDetails`. An example plugin registration file is below.
 
 ```php
 namespace Acme\Blog;
@@ -75,29 +75,6 @@ class Plugin extends \System\Classes\PluginBase
     }
 }
 ```
-
-<a id="oc-registration-methods"></a>
-### Registration Methods
-
-The following methods are supported in the plugin registration class:
-
-Method | Description
-------------- | -------------
-**pluginDetails()** | returns information about the plugin.
-**register()** | register method, called when the plugin is first registered.
-**boot()** | boot method, called right before the request route.
-**registerMarkupTags()** | registers [additional markup tags](#oc-extending-twig) that can be used in the CMS.
-**registerComponents()** | registers any [front-end components](components#oc-component-registration) used by this plugin.
-**registerNavigation()** | registers [back-end navigation menu items](#oc-navigation-menus) for this plugin.
-**registerPermissions()** | registers any [back-end permissions](../backend/users#oc-registering-permissions) used by this plugin.
-**registerSettings()** | registers any [back-end configuration links](settings#oc-settings-link-registration) used by this plugin.
-**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#oc-form-widget-registration) supplied by this plugin.
-**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#oc-report-widget-registration), including the dashboard widgets.
-**registerListColumnTypes()** | registers any [custom list column types](../backend/lists.md#oc-custom-column-types) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling.md#oc-defining-schedules) that are executed on a regular basis.
 
 ### Basic Plugin Information
 
@@ -139,7 +116,7 @@ Route::get('api_acme_blog/cleanup_posts', function() {
 <a id="oc-dependency-definitions"></a>
 ## Dependency Definitions
 
-A plugin can depend upon other plugins by defining a `$require` property in the [Plugin registration file](#oc-registration-file), the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
+A plugin can depend upon other plugins by defining a `$require` property in the plugin registration file, the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
 
 ```php
 namespace Acme\Blog;

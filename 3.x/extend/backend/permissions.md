@@ -18,7 +18,7 @@ Groups (`\Backend\Models\UserGroup`) are an organizational tool for grouping adm
 
 ## Registering Permissions
 
-Plugins can register back-end user permissions by overriding the `registerPermissions` method inside the [Plugin registration class](../plugin/registration.md#oc-registration-file). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
+Plugins can register back-end user permissions by overriding the `registerPermissions` method inside the [plugin registration file](../extending.md). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code:
 
 ```
 acme.blog.access_categories

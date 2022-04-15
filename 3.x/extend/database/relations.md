@@ -784,7 +784,7 @@ Relation::morphMap([
 ]);
 ```
 
-The most common place to register the `morphMap` in the `boot` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods).
+The most common place to register the `morphMap` in the `boot` method of a [plugin registration file](../extending.md).
 
 <a id="oc-querying-relations"></a>
 ## Querying Relations

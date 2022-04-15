@@ -242,7 +242,7 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 
 Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
 
-Optionally, mail views can be [registered in the Plugin registration file](#oc-registering-mail-layouts-templates-partials) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
+Optionally, mail views can be [registered in the plugin registration file](#oc-registering-mail-layouts-templates-partials) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
 <a id="oc-mail-views"></a>
 ### Mail Views
@@ -336,9 +336,9 @@ Default | default | Used for public facing, front-end mail
 System | system | Used for internal, back-end mail
 
 <a id="oc-registering-mail-layouts-templates-partials"></a>
-### Registering mail layouts, templates & partials
+### Registering Mail Layouts, Templates & Partials
 
-Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [Plugin registration class](../plugin/registration.md#oc-registration-file).
+Mail views can be registered as templates that are automatically generated in the back-end ready for customization. Mail templates can be customized via the *Settings > Mail templates* menu. The templates can be registered by overriding the `registerMailTemplates` method of the [plugin registration file](../extending.md).
 
 ```php
 public function registerMailTemplates()
@@ -352,13 +352,13 @@ public function registerMailTemplates()
 
 The method should return an array of [mail view names](#oc-mail-views).
 
-Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [Plugin registration class](../plugin/registration.md#oc-registration-file).
+Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [plugin registration file](../extending.md).
 
 ```php
 public function registerMailPartials()
 {
     return [
-        'tracking'  => 'acme.blog::partials.tracking',
+        'tracking' => 'acme.blog::partials.tracking',
         'promotion' => 'acme.blog::partials.promotion',
     ];
 }
@@ -366,7 +366,7 @@ public function registerMailPartials()
 public function registerMailLayouts()
 {
     return [
-        'marketing'    => 'acme.blog::layouts.marketing',
+        'marketing' => 'acme.blog::layouts.marketing',
         'notification' => 'acme.blog::layouts.notification',
     ];
 }
@@ -383,4 +383,3 @@ View::share('site_name', 'October CMS');
 ```
 
 This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration.md). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
-

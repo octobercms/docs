@@ -603,7 +603,7 @@ public function listExtendRecords($records)
 <a id="oc-custom-column-types"></a>
 ### Custom Column Types
 
-Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [Plugin registration class](../plugin/registration.md#oc-registration-methods). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
+Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [plugin registration file](../extending.md). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
 
 ```php
 public function registerListColumnTypes()

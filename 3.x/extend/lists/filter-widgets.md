@@ -1,6 +1,6 @@
 # Filter Widgets
 
-With filter widgets you can add new scope types to the backend [filters](../backend/filters.md). They provide features that are common to filtering lists. Filter widgets must be registered in the [Plugin registration file](../plugin/registration.md#oc-registration-methods).
+With filter widgets you can add new scope types to the backend [filters](../backend/filters.md). They provide features that are common to filtering lists. Filter widgets must be registered in the [plugin registration file](../extending.md).
 
 Filter Widget classes reside inside the **filterwidgets** directory of the plugin directory. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
 
@@ -72,7 +72,7 @@ discount:
 
 ### Filter Widget Registration
 
-Plugins should register filter widgets by overriding the `registerFilterWidgets` method inside the [Plugin registration class](../plugin/registration.md#oc-registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
+Plugins should register filter widgets by overriding the `registerFilterWidgets` method inside the [plugin registration file](../extending.md). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
 
 ```php
 public function registerFilterWidgets()

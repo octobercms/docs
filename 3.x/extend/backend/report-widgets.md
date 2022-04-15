@@ -1,6 +1,6 @@
 # Report Widgets
 
-Report widgets can be used on the backend dashboard and in other backend report containers. Report widgets must be registered in the [Plugin registration file](../plugin/registration.md).
+Report widgets can be used on the backend dashboard and in other backend report containers. Report widgets must be registered in the [plugin registration file](../extending.md).
 
 > You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding.md#oc-create-a-report-widget) for more information.
 
@@ -126,7 +126,7 @@ public function defineProperties()
 
 ### Report Widget Registration
 
-Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [Plugin registration class](../plugin/registration.md#oc-registration-file). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
+Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [plugin registration file](../extending.md). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
 
 ```php
 public function registerReportWidgets()

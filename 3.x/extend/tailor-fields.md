@@ -62,7 +62,7 @@ class MyContentField extends ContentFieldBase
 
 ### Content Field Registration
 
-Plugins should register content fields by overriding the `registerContentFields` method inside the [Plugin registration class](../plugin/registration.md#registration-file). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
+Plugins should register content fields by overriding the `registerContentFields` method inside the [plugin registration file](./extending.md). The method returns an array containing the widget class in the keys and widget short code as the value. Example:
 
 ```php
 /**

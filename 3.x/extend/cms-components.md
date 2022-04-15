@@ -7,13 +7,13 @@ Components files and directories reside in the **components** subdirectory of a 
 |   └── acme
 |       └── blog
 |           ├── `components`
-|           |   ├── blogposts       _<== Partials Directory_
+|           |   ├── blogposts _<== Partials Directory_
 |           |   |   └── default.htm _<== Default Markup (Optional)_
-|           |   └── BlogPosts.php   _<== Component Class_
+|           |   └── BlogPosts.php _<== Component Class_
 |           └── Plugin.php
 :::
 
-Components must be [registered in the Plugin registration class](#oc-component-registration) with the `registerComponents` method.
+Components must be [registered in the plugin registration file](../extend/extending.md) with the `registerComponents` method.
 
 <a id="oc-component-class-definition"></a>
 ## Component Class Definition
@@ -65,7 +65,7 @@ You would be able to access its `posts` method through the `blogPosts` variable.
 <a id="oc-component-registration"></a>
 ### Component Registration
 
-Components must be registered by overriding the `registerComponents` method inside the [Plugin registration class](registration.md#oc-registration-file). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
+Components must be registered by overriding the `registerComponents` method inside the [plugin registration file](../extend/extending.md). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
 
 ```php
 public function registerComponents()
