@@ -93,6 +93,7 @@
         - system/localization
         - system/routing
         - system/scheduling
+        - system/console-commands
         - system/unit-testing
 -
     title: Extending the CMS
@@ -235,18 +236,21 @@
 "/tailor/":
 -
     title: Tailor
+    collapsable: false
     children:
         - introduction
         - content-fields
         - navigation
 -
     title: Blueprints
+    collapsable: false
     children:
         - blueprints/entry
         - blueprints/global
         - blueprints/mixin
 -
     title: CMS Components
+    collapsable: false
     children:
         - components/section
         - components/collection
@@ -305,7 +309,7 @@
     collapsable: false
     children:
         - setup/configuration
-        - setup/web-server-configuration
+        - setup/web-server-config
         - setup/database-config
         - setup/mail-config
         - setup/errors-logging

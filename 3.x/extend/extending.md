@@ -11,15 +11,15 @@ The following extension methods are supported in the plugin registration class:
 
 Method | Description
 ------------- | -------------
-**register()** | register method, called when the plugin is first registered, called before `boot`.
-**boot()** | boot method, called right before the request route, called after `register`.
+**register()** | called when the plugin is first registered, called before `boot`.
+**boot()** | called right before the request route, called after `register`.
 **registerMarkupTags()** | registers [additional markup tags](../extend/twig-tags.md) that can be used in the CMS.
 **registerComponents()** | registers any [front-end components](components#oc-component-registration) used by this plugin.
-**registerNavigation()** | registers [back-end navigation menu items](#oc-navigation-menus) for this plugin.
-**registerPermissions()** | registers any [back-end permissions](../backend/users#oc-registering-permissions) used by this plugin.
-**registerSettings()** | registers any [back-end configuration links](settings#oc-settings-link-registration) used by this plugin.
-**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#oc-form-widget-registration) supplied by this plugin.
-**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#oc-report-widget-registration), including the dashboard widgets.
+**registerNavigation()** | registers [backend navigation menu items](#oc-navigation-menus) for this plugin.
+**registerPermissions()** | registers any [backend permissions](../backend/users#oc-registering-permissions) used by this plugin.
+**registerSettings()** | registers any [backend configuration links](settings#oc-settings-link-registration) used by this plugin.
+**registerFormWidgets()** | registers any [backend form widgets](../backend/widgets#oc-form-widget-registration) supplied by this plugin.
+**registerReportWidgets()** | registers any [backend report widgets](../backend/widgets#oc-report-widget-registration), including the dashboard widgets.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists.md#oc-custom-column-types) supplied by this plugin.
 **registerMailLayouts()** | registers any [mail view layouts](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.

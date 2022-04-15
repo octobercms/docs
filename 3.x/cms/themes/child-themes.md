@@ -11,7 +11,7 @@ To enable this feature for a theme, navigate to **Settings → Frontend Theme**,
 
 ## Theme Lock File
 
-When installing a theme from a third party, it is important to note that when the theme is updated, all the files can be overwritten. This could result in any customizations made to the theme being lost. As a safety mechanism, a file called `.themelock` is included to protect a theme from any changes that may be lost during a system update.
+When installing a theme from a third party using Composer, it is important to note that when the theme is updated, all the files can be overwritten. This could result in any customizations made to the theme being lost. As a safety mechanism, a file called `.themelock` is included to protect a theme from any changes that may be lost during a system update.
 
 When the file `.themelock` is present in the theme directory:
 

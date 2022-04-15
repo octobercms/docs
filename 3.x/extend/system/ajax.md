@@ -3,7 +3,7 @@ subtitle: Discover how to use AJAX in the backend panel.
 ---
 # AJAX
 
-The backend uses the same [AJAX library as the CMS](../../cms/ajax/introduction.md) pages. The library is loaded automatically on the backend pages.
+The backend panel uses the same [AJAX library as the CMS](../../cms/ajax/introduction.md) pages. The library is included and loaded automatically on the backend pages.
 
 ## Backend AJAX Handlers
 

@@ -1,3 +1,6 @@
+---
+subtitle: Learn where page content is stored and rendered.
+---
 # Rendering Views
 
 Views reside in a directory that shares the same name as the controller.

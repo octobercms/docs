@@ -1,3 +1,6 @@
+---
+subtitle: Learn how to send mail and create templates.
+---
 # Sending Mail
 
 To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique *mail code* used to locate either the [mail view](#oc-mail-views) or [mail template](#oc-mail-templates). The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message:

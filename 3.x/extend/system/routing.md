@@ -1,10 +1,31 @@
+---
+subtitle: Useful for defining fixed APIs and endpoints.
+---
 # Routing
+
+While routing is handled automatically for the [backend controllers](../backend/controllers-ajax.md) and CMS pages define their own URL routes in their [page configuration](../cms/pages.md#oc-configuration). Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router.md).
+
+::: dir
+├── plugins
+|   └── acme _<== Author Name_
+|       └── blog _<== Plugin Name_
+|           ├── controllers
+|           ├── models
+|           ├── Plugin.php
+|           └── `routes.php` _<== Routes File_
+:::
+
+Below is some example content.
+
+```php
+Route::get('api_acme_blog/cleanup_posts', function() {
+    return Posts::cleanUp();
+});
+```
 
 ## Basic Routing
 
-While routing is handled automatically for the [backend controllers](../backend/controllers-ajax.md) and CMS pages define their own URL routes in their [page configuration](../cms/pages.md#oc-configuration), the router service is useful primarily for defining fixed APIs and end points.
-
-You can define these routes by creating a file named **routes.php** in a same directory as the [plugin registration file](../plugin/registration.md). The most basic routes simply accept a URI and a `Closure`:
+The most basic routes simply accept a URI and a `Closure`.
 
 ```php
 Route::get('/', function () {
@@ -26,7 +47,7 @@ Route::delete('foo/bar', function () {
 
 #### Registering a route for multiple verbs
 
-Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method on the `Route` facade:
+Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method on the `Route` facade.
 
 ```php
 Route::match(['get', 'post'], '/', function () {

@@ -1,6 +1,9 @@
+---
+subtitle: Create pages that implement various features like forms and lists.
+---
 # Controllers
 
-The October CMS backend implements an Model-View-Controller (MVC) pattern. Controllers manage backend pages and implement various features like forms and lists. This article describes how to develop backend controllers and how to configure controller behaviors.
+The October CMS backend implements an Model-View-Controller (MVC) pattern. This article describes how to develop backend controllers and how to configure controller behaviors.
 
 Each controller is represented with a PHP script which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.htm` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
 
