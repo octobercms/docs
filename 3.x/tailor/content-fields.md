@@ -15,9 +15,8 @@ This section defines the fields that are available to tailor blueprints. These a
 
 ### Tailor Specific Fields
 
-There are also some fields that can only be used inside blueprints.
+There are specific field types that can only be used inside blueprints.
 
-<a name="field-mixin"></a>
 ### Mixin
 
 `mixin` - includes another set of fields.
@@ -30,7 +29,6 @@ _include1:
 
 See the [Mixins article](blueprints/mixin.md) for more information on defining mixins.
 
-<a name="field-entries"></a>
 ### Entries
 
 `entries` - links to other entries by UUID or handle.
@@ -40,17 +38,6 @@ author:
     label: Author
     type: entries
     source: <uuid|handle>
-```
-
-You may reference multiple entry sections by passing `source` as an array.
-
-```yaml
-author:
-    label: Author
-    type: entries
-    source:
-        - <uuid|handle>
-        - <uuid|handle>
 ```
 
 To limit the number of selectable items, use the `maxItems` property.

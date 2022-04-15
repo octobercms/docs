@@ -3,18 +3,22 @@ subtitle: The foundation for adding new features to the CMS by extending it.
 ---
 # Plugins
 
-This article describes the component registration. The registration process allows plugins to declare their features such as [components](components.md) or back-end menus and pages. Some examples of what a plugin can do:
+::: aside
+Plugins are identified with a unique code, for example, a plugin called `Acme.Blog` is found in the directory **plugins/acme/blog**.
+:::
+
+This article describes the component registration. The registration process allows plugins to declare their features such as [components](components.md) or backend menus and pages. Here are some examples of what a plugin can do.
 
 1. Define [components](components.md).
 1. Define [user permissions](../backend/users.md).
 1. Add [settings pages](settings.md#oc-backend-settings-pages), [menu items](#oc-navigation-menus), [lists](../backend/lists.md) and [forms](../backend/forms.md).
 1. Create [database table structures and seed data](updates.md).
 1. Alter [functionality of the core or other plugins](events.md).
-1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
+1. Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
 
 ### Directory Structure
 
-Plugins reside in the **plugins** subdirectory of the application directory. An example of a plugin directory structure:
+Plugins reside in the **plugins** directory of the application directory. An example of a plugin directory structure is below.
 
 ::: dir
 ├── `plugins`
