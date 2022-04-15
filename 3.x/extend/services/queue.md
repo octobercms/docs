@@ -1,4 +1,4 @@
-# Queues
+# Queue
 
 ## Configuration
 

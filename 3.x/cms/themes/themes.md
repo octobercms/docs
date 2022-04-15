@@ -162,7 +162,7 @@ echo $this->foo;
 <a id="oc-twig-section"></a>
 ### Twig Markup Section
 
-The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup.md), all the [native Twig features](https://twig.symfony.com/doc/), or those [provided by plugins](../plugin/registration.md#oc-extending-twig). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
+The Twig section defines the markup to be rendered by the template. In the Twig section, you can use functions, tags, and filters [provided by October CMS](../markup.md), all the [native Twig features](https://twig.symfony.com/doc/), or [those provided by plugins](../../extend/twig-tags.md). The content of the Twig section depends on the template type (page, layout, or partial). You can find more information about specific Twig objects further in the documentation.
 
 More information can be found [in the Markup guide](../markup.md).
 

@@ -70,40 +70,26 @@ public function render()
 }
 ```
 
-<a id="oc-ajax-handlers"></a>
-### AJAX Handlers
-
-Widgets implement the same AJAX approach as the [backend controllers](controllers-ajax#oc-ajax). The AJAX handlers are public methods of the widget class with names starting with the **on** prefix. The only difference between the widget AJAX handlers and backend controller's AJAX handlers is that you should use the widget's `getEventHandler` method to return the widget's handler name when you refer to it in the widget partials.
-
-```php
-<a
-    href="javascript:;"
-    data-request="<?= $this->getEventHandler('onPaginate') ?>"
-    title="Next page">Next</a>
-```
-
-When called from a widget class or partial the AJAX handler will target itself. For example, if the widget uses the alias of **mywidget** the handler will be targeted with `mywidget::onName`. The above would output the following attribute value:
-
-```html
-data-request="mywidget::onPaginate"
-```
-
 ### Binding Widgets to Controllers
 
-A widget should be bound to a [backend controller](controllers-ajax) before you can start using it in a backend page or partial. Use the widget's `bindToController` method for binding it to a controller. The best place to initialize a widget is the controller's constructor. Example:
+::: aside
+Binding to a controller is also required to make [AJAX handlers](ajax.md) available.
+:::
+
+A widget should be bound to a backend controller before you can start using it in a backend page or partial. Use the widget's `bindToController` method for binding it to a controller. The best place to initialize a widget is the controller's constructor.
+
+For example, creating a new widget instance and binding it.
 
 ```php
-public function __construct()
+public function beforeDisplay()
 {
-    parent::__construct();
-
     $myWidget = new MyWidgetClass($this);
     $myWidget->alias = 'myWidget';
     $myWidget->bindToController();
 }
 ```
 
-After binding the widget you can access it in the controller's view or partial by its alias:
+After binding the widget you can access it in the controller's view or partial by its alias.
 
 ```php
 <?= $this->widget->myWidget->render() ?>

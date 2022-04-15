@@ -1,4 +1,4 @@
-# Hashing & Encryption
+# Hash & Crypt
 
 ## Configuration
 

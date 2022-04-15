@@ -136,38 +136,6 @@ Dependency definitions will affect how the plugin operates and [how the update p
 
 Dependency definitions can be complex but care should be taken to prevent circular references. The dependency graph should always be directed and a circular dependency is considered a design error.
 
-<a id="oc-extending-twig"></a>
-## Extending Twig
-
-Custom Twig filters and functions can be registered in the CMS with the `registerMarkupTags` method of the plugin registration class. The next example registers two Twig filters and two functions.
-
-```php
-public function registerMarkupTags()
-{
-    return [
-        'filters' => [
-            // A global function, i.e str_plural()
-            'plural' => 'str_plural',
-
-            // A local method, i.e $this->makeTextAllCaps()
-            'uppercase' => [$this, 'makeTextAllCaps']
-        ],
-        'functions' => [
-            // A static method call, i.e Form::open()
-            'form_open' => [\October\Rain\Html\Form::class, 'open'],
-
-            // Using an inline closure
-            'helloWorld' => function() { return 'Hello World!'; }
-        ]
-    ];
-}
-
-public function makeTextAllCaps($text)
-{
-    return strtoupper($text);
-}
-```
-
 ## Registering Middleware
 
 To register a custom middleware, you can extend a Controller class by using the following method.

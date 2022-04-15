@@ -5,7 +5,7 @@ subtitle: Learn about the common methods used to extend October CMS.
 
 ## Extending by Plugin Registration
 
-In almost all situations, extending October CMS happens in the plugin registration file, which is essentially a [Laravel Service Provider](https://laravel.com/docs/9.x/providers).
+In almost all situations, extending October CMS happens in the plugin registration file, which is essentially a [Laravel Service Provider](https://laravel.com/docs/9.x/providers). The registration file is called **Plugin.php** and is found in the root directory of a plugin.
 
 The following extension methods are supported in the plugin registration class:
 
@@ -13,7 +13,7 @@ Method | Description
 ------------- | -------------
 **register()** | register method, called when the plugin is first registered, called before `boot`.
 **boot()** | boot method, called right before the request route, called after `register`.
-**registerMarkupTags()** | registers [additional markup tags](#oc-extending-twig) that can be used in the CMS.
+**registerMarkupTags()** | registers [additional markup tags](../extend/twig-tags.md) that can be used in the CMS.
 **registerComponents()** | registers any [front-end components](components#oc-component-registration) used by this plugin.
 **registerNavigation()** | registers [back-end navigation menu items](#oc-navigation-menus) for this plugin.
 **registerPermissions()** | registers any [back-end permissions](../backend/users#oc-registering-permissions) used by this plugin.

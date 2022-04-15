@@ -1,4 +1,4 @@
-# Forms & HTML
+# Form & HTML
 
 ## Introduction
 

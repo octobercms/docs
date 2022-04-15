@@ -57,6 +57,29 @@ Property | Description
 **$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
 **$layout** | specify a custom layout for the controller views (see [layouts](../backend/views-partials.md#oc-layouts-and-child-layouts)).
 
+## Initialization Logic
+
+Controllers may perform initialization logic in the native `__construct` method.
+
+::: warning
+Logic inside the constructor is not protected and should not handle any sensitive logic.
+```php
+public function __construct()
+{
+    parent::__construct();
+}
+```
+:::
+
+The `beforeDisplay` method is called after the permission checks happen and most logic should be placed here. This includes initializing widgets and other shared components.
+
+```php
+public function beforeDisplay()
+{
+    // Initialize widgets, handle file uploads, etc.
+}
+```
+
 ## Actions, Views and Routing
 
 Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Back-end view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
@@ -67,11 +90,15 @@ Public controller methods, called **actions** are coupled to **view files** whic
 
 URL of this page is made up of the author name, plugin name, controller name and action name.
 
-    backend/[author name]/[plugin name]/[controller name]/[action name]
+```text
+backend/[author name]/[plugin name]/[controller name]/[action name]
+```
 
 The above Controller results in the following:
 
-    http://example.com/backend/acme/blog/users/index
+```text
+https://example.com/backend/acme/blog/users/index
+```
 
 ## Passing Data to Views
 

@@ -1,3 +1,6 @@
+---
+subtitle: Extending Tailor with custom content fields.
+---
 # Building Tailor Fields
 
 You can roll your own content fields by defining a field definition file and then registering it in your plugin registration file.

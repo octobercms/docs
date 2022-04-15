@@ -76,28 +76,29 @@
 #
 "/extend/":
 -
-    title: Core Overview
+    title: System Overview
     children:
         - system/plugins
         - system/models
         - system/controllers
         - system/views
-        - system/ajax
         - system/behaviors
         - system/widgets
+        - system/ajax
 -
-    title: Extra Topics
+    title: Advanced Overview
     children:
-        - system/application
+        - system/exceptions
         - system/sending-mail
         - system/localization
         - system/routing
         - system/scheduling
         - system/unit-testing
 -
-    title: Extending the Core
+    title: Extending the CMS
     children:
         - extending
+        - twig-tags
         - tailor-fields
         - cms-components
 -
@@ -110,15 +111,15 @@
 -
     title: Form Design
     children:
-        - forms/forms
-        - forms/relations
+        - forms/form-controller
+        - forms/relation-controller
         - forms/form-widgets
 -
     title: List Design
     children:
-        - lists/lists
+        - lists/list-controller
+        - lists/structures
         - lists/filters
-        - lists/reorder
         - lists/filter-widgets
 -
     title: Import & Export Design
@@ -149,16 +150,17 @@
 -
     title: Available Services
     children:
+        - services/application
         - services/cache
-        - services/collections
-        - services/exceptions
-        - services/events
+        - services/collection
+        - services/log
+        - services/event
         - services/html
         - services/resizer
-        - services/hashing-encryption
+        - services/hash-crypt
         - services/helpers
         - services/parser
-        - services/queues
+        - services/queue
         - services/request-input
         - services/response-view
         - services/session

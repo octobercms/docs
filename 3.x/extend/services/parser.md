@@ -79,7 +79,7 @@ The second argument can be used for passing variables to the Twig markup.
 $html = Twig::parse($twig, ['foo' => 'bar']);
 ```
 
-The Twig parser can be extended to register custom features via [the plugin registration file](../plugin/registration.md#oc-extending-twig).
+The Twig parser can be extended to register custom features via [the plugin registration file](../twig-tags.md).
 
 ## Bracket Parser
 

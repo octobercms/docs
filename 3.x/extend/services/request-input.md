@@ -1,4 +1,4 @@
-# Requests & Input
+# Request & Input
 
 ## Basic Input
 
