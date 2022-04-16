@@ -1,5 +1,9 @@
 # Definitions
 
+::: aside
+← Use the sidebar to see all the available options.
+:::
+
 October CMS uses elements to define structures such as Lists, Forms and Filters. Every definition can be found in the sidebar navigation.
 
 ## Form Fields

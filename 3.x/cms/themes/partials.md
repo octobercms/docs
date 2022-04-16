@@ -23,7 +23,11 @@ The partial configuration section can also contain component definitions. The [C
 
 ## Rendering Partials
 
-The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. Remember that if you refer a partial from a [subdirectory](themes.md#oc-subdirectories) you should specify the subdirectory name. The `{% partial %}` tag can be used inside a page, layout or another partial. Example of a page referring to a partial:
+::: aside
+Remember that if you refer a partial from a subdirectory you should specify the subdirectory name.
+:::
+
+The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. The `{% partial %}` tag can be used inside a page, layout or another partial. Example of a page referring to a partial:
 
 ```twig
 <div class="sidebar">

@@ -1,6 +1,7 @@
+---
+subtitle: A widget specifically made for use in a form.
+---
 # Form Widgets
-
-<a id="oc-form-widgets"></a>
 
 With form widgets you can add new control types to the backend [forms](../backend/forms.md). They provide features that are common to supplying data for models. Form widgets must be registered in the [plugin registration file](../extending.md).
 

@@ -1,3 +1,6 @@
+---
+subtitle: Learn how to customize the import process.
+---
 # Defining an Import Model
 
 For importing data you should create a dedicated model for this process which extends the `Backend\Models\ImportModel` class. Here is an example class definition:

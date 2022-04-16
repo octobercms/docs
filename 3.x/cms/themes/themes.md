@@ -3,6 +3,10 @@ subtitle: Define the appearance of your website or web application.
 ---
 # Themes
 
+::: aside
+The active theme is set with the `active_theme` item in the `config/cms.php` file or via the  **Settings → Frontend Theme** backend panel. The backend setting overrides the value in the `config/cms.php` file.
+:::
+
 Themes are completely file-based and can be managed with any version control system, for example, Git. This page gives you a high-level description of October themes. You will find more details about [pages](pages.md), [partials](partials.md), [layouts](layouts.md) and [content files](content.md) in the corresponding articles.
 
 Themes are directories that reside in the **themes** directory by default. Themes can contain the following objects:
@@ -37,9 +41,6 @@ Below, you can see an example theme directory structure. Each theme represents a
 |           └── images
 :::
 
-> The active theme is set with the `active_theme` parameter in the `config/cms.php` file or with the Theme Selector on the System > CMS > Front-end Theme backend page. The theme set with the Theme Selector overrides the value in the `config/cms.php` file.
-
-<a id="oc-subdirectories"></a>
 ### Subdirectories
 
 October CMS supports a single level of subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
@@ -67,11 +68,14 @@ October CMS supports a single level of subdirectories for **pages**, **partials*
 
 To refer to a template in a subdirectory, specify the subdirectory's name before the template's name. For example, rendering the **category-list** partial from a **blog** subdirectory.
 
+
+::: tip
+The template paths are always absolute. If in a partial you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
+
 ```twig
 {% partial "blog/category-list" %}
 ```
-
-> **Note**: The template paths are always absolute. If, in a partial, you render another partial from the same subdirectory, you still need to specify the subdirectory's name.
+:::
 
 ## Template Structure
 
@@ -170,6 +174,6 @@ More information can be found [in the Markup guide](../markup.md).
 
 Since layouts and pages store most of the data in flat files, you or your clients can lose content accidentally. For example, switching the layout of a page will modify the scaffold of the page and, as such, will result in data loss.
 
-October CMS can record every change made to a theme called Theme Logging, and this feature is disabled by default. To enable Theme Logging, go to **Settings > Log Settings** and enable **Log Theme Changes**.
+October CMS can record every change made to a theme called Theme Logging, and this feature is disabled by default. To enable Theme Logging, go to **Settings → Log Settings** and enable **Log Theme Changes**.
 
-You may now view the theme changelog via **Settings > Theme Log** where you can observe an overview of each change. You can use this information to decide the appropriate action to aid the regression of these changes, if necessary.
+You may now view the theme changelog via **Settings → Theme Log** where you can observe an overview of each change. You can use this information to decide the appropriate action to aid the regression of these changes, if necessary.

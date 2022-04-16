@@ -15,7 +15,11 @@ Layout template files reside in the **layouts** directory in your theme. Layout 
 </html>
 ```
 
-To use a layout for a [page](pages.md) the page should refer the layout file name (without extension) in the [Configuration](themes.md#oc-configuration-section) section. Remember that if you refer a layout from a [subdirectory](themes.md#oc-subdirectories) you should specify the subdirectory name. Example page template using the default.htm layout:
+::: aside
+Remember that if you refer a layout from a subdirectory you should specify the subdirectory name.
+:::
+
+To use a layout for a [page](pages.md) the page should refer the layout file name (without extension) in the [Configuration](themes.md#oc-configuration-section) section. Below is an example page template using the **default.htm** layout.
 
 ```twig
 url = "/"

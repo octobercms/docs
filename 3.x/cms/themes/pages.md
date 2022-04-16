@@ -31,11 +31,14 @@ Parameter | Description
 
 The page URL is defined with the **url** configuration parameter. URLs should start with the forward slash character, and can contain parameters. URLs without parameters are fixed and strict. In the following example, the page URL is `/blog`.
 
+::: tip
+The page URL is case-insensitive by default.
+
 ```ini
 url = "/blog"
 ```
+:::
 
-> **Note**: The page URL is case-insensitive by default.
 
 URLs with parameters are more flexible. A page with the URL pattern defined in the following example would be displayed for any address like `/blog/post/something`. URL parameters can be accessed by October components or from the page [PHP code](themes.md#oc-php-section) section.
 
@@ -100,7 +103,9 @@ For example, a URL like `/color/:color/make/:make*/edit` will match `/color/brow
 - color: `brown`
 - make: `volkswagen/beetle/retro`
 
-> **Note**: Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
+::: tip
+Subdirectories do not affect page URLs - the URL is defined only with the **url** parameter.
+:::
 
 <a id="oc-dynamic-pages"></a>
 ## Dynamic Pages

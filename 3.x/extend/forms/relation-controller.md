@@ -1,6 +1,9 @@
+---
+subtitle: Manage related records in any context, usually from a form.
+---
 # Relation Controller
 
-**Relation Behavior** is a controller modifier used for easily managing complex [model](../database/model.md) relationships on a page.
+The `Backend\Behaviors\RelationController` class is a controller behavior used for easily managing complex [model](../database/model.md) relationships on a page.
 
 Relation behavior depends on [relation definitions](#oc-relationship-types). In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for [configuring the behavior options](#oc-configuring-the-relation-behavior).
 

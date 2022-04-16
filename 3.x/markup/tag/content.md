@@ -12,7 +12,9 @@ A content block inside a subdirectory can be rendered in the same way.
 {% content "sidebar/content.htm" %}
 ```
 
-> **Note**: The [Themes documentation](../cms/themes.md#oc-subdirectories) has more details on subdirectory usage.
+::: tip
+The [Themes documentation](../../cms/themes/themes.md) has more details on subdirectory usage.
+:::
 
 Content blocks can be rendered as plain text:
 

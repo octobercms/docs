@@ -1,6 +1,9 @@
+---
+subtitle: Adds form management features to any backend page.
+---
 # Form Controller
 
-**Form Behavior** is a controller modifier used for easily adding form functionality to a back-end page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
+The `Backend\Behaviors\FormController` class is a controller behavior used for easily adding form functionality to a backend page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
 Form behavior depends on form [field definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
 
@@ -191,9 +194,9 @@ secondaryTabs:
 <a id="oc-field-options"></a>
 ### Field Options
 
-For each field you can specify these options (where applicable):
+For each field you can specify these common properties, where applicable.
 
-Option | Description
+Property | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered, see [form field definitions](../../element/definitions.md). Default: text.

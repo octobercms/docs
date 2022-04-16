@@ -1,3 +1,6 @@
+---
+subtitle: Learn how to customize the export process.
+---
 # Defining an Export Model
 
 For exporting data you should create a dedicated model which extends the `Backend\Models\ExportModel` class. Here is an example:

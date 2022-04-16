@@ -12,7 +12,9 @@ A partial inside a subdirectory can be rendered in the same way.
 {% partial "sidebar/menu" %}
 ```
 
-> **Note**: The [Themes documentation](../cms/themes.md#oc-subdirectories) has more details on subdirectory usage.
+::: tip
+The [Themes documentation](../../cms/themes/themes.md) has more details on subdirectory usage.
+:::
 
 The partial name can also be a variable:
 
