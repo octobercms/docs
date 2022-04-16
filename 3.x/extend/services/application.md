@@ -1,12 +1,10 @@
-# Application Container
-
-<a id="oc-application-container"></a>
+# Application
 
 The inversion of control (IoC) container is a tool for managing class dependencies. Dependency injection is a method of removing hard-coded class dependencies. Instead, the dependencies are injected at run-time, allowing for greater flexibility as dependency implementations may be swapped easily.
 
-#### Binding a type into the container
+#### Binding To The Container
 
-There are two ways the IoC container can resolve dependencies: via Closure callbacks or automatic resolution. First, we'll explore Closure callbacks. First, a "type" may be bound into the container:
+There are two ways the IoC container can resolve dependencies: via Closure callbacks or automatic resolution. First, we'll explore Closure callbacks. First, a "type" may be bound into the container.
 
 ```php
 App::bind('foo', function($app) {
@@ -14,7 +12,7 @@ App::bind('foo', function($app) {
 });
 ```
 
-#### Resolving a type from the container
+#### Resolving From The container
 
 ```php
 $value = App::make('foo');

@@ -7,11 +7,17 @@ October CMS provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `ma
 
 ## Driver Prerequisites
 
-Before using the Mailgun, SparkPost or SES drivers you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
+In most cases you can use the SMTP driver and it will be supported by most mailing providers. However, using the API-based drivers are often a simpler and faster approach.
 
 ### Mailgun driver
 
-To use the Mailgun driver, set the `driver` option in your `config/mail.php` configuration file to `mailgun`. Next, verify that your `config/services.php` configuration file contains the following options:
+To use the Mailgun driver, install Symfony's Mailgun Mailer transport via Composer.
+
+```bash
+composer require symfony/mailgun-mailer symfony/http-client
+```
+
+Next, set the `driver` option in your `config/mail.php` configuration file to `mailgun`. Next, verify that your `config/services.php` configuration file contains the following options:
 
 ```php
 'mailgun' => [
@@ -21,19 +27,31 @@ To use the Mailgun driver, set the `driver` option in your `config/mail.php` con
 ],
 ```
 
-### SparkPost driver
+### Postmark Driver
 
-To use the SparkPost driver set the `driver` option in your `config/mail.php` configuration file to `sparkpost`. Next, verify that your `config/services.php` configuration file contains the following options:
+To use the Postmark driver, install Symfony's Postmark Mailer transport via Composer.
+
+```bash
+composer require symfony/postmark-mailer symfony/http-client
+```
+
+Next, set the `default` option in your application's `config/mail.php` configuration file to postmark. After configuring your application's default mailer, verify that your `config/services.php` configuration file contains the following.
 
 ```php
-'sparkpost' => [
-    'secret' => 'your-sparkpost-key',
+'postmark' => [
+    'token' => env('POSTMARK_TOKEN'),
 ],
 ```
 
 ### SES driver
 
-To use the Amazon SES driver set the `driver` option in your `config/mail.php` configuration file to `ses`. Then, verify that your `config/services.php` configuration file contains the following options:
+To use the Amazon SES driver you must first install the Amazon AWS SDK for PHP. You may install this library via the Composer package manager.
+
+```bash
+composer require aws/aws-sdk-php
+```
+
+Next, set the `driver` option in your `config/mail.php` configuration file to `ses`. Then, verify that your `config/services.php` configuration file contains the following options:
 
 ```php
 'ses' => [

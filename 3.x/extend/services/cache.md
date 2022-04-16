@@ -14,21 +14,21 @@ The `database` cache driver uses the database in lieu of the file system. There 
 
 #### Memcached
 
-Using the Memcached cache requires the [Memcached PECL package](http://pecl.php.net/package/memcached) to be installed.
-
-The default configuration uses TCP/IP based on [Memcached::addServer](http://php.net/manual/en/memcached.addserver.php):
+Using the Memcached cache requires the [Memcached PECL package](http://pecl.php.net/package/memcached) to be installed. The default configuration uses TCP/IP based on [Memcached::addServer](http://php.net/manual/en/memcached.addserver.php).
 
 ```php
 'memcached' => [
-    [
-        'host' => '127.0.0.1',
-        'port' => 11211,
-        'weight' => 100
+    'servers' => [
+        [
+            'host' => env('MEMCACHED_HOST', '127.0.0.1'),
+            'port' => env('MEMCACHED_PORT', 11211),
+            'weight' => 100,
+        ],
     ],
 ],
 ```
 
-You may also set the `host` option to a UNIX socket path. If you do this, the `port` option should be set to `0`:
+You may also set the `host` option to a UNIX socket path. If you do this, the `port` option should be set to `0`.
 
 ```php
 'memcached' => [
@@ -42,7 +42,9 @@ You may also set the `host` option to a UNIX socket path. If you do this, the `p
 
 #### Redis
 
-> You need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers) before you can use the Redis cache driver.
+::: tip
+Before using a Redis cache with Laravel, you will need to either install the PhpRedis PHP extension via PECL or install the `predis/predis` package (~1.0) via Composer.
+:::
 
 The Redis configuration for your application is located in the `config/database.php` configuration file. Within this file, you will see a `redis` array containing the Redis servers used by your application:
 
@@ -63,6 +65,18 @@ The Redis configuration for your application is located in the `config/database.
 You may define an `options` array value in your Redis connection definition, allowing you to specify a set of Predis [client options](https://github.com/nrk/predis/wiki/Client-Options).
 
 If your Redis server requires authentication, you may supply a password by adding a `password` configuration item to your Redis server configuration array.
+
+#### DynamoDB
+
+Before using the DynamoDB cache driver, you should create a DynamoDB cache table to store all of the cached data, typically it is named `cache`. You can name the table anything based on the value of the `stores.dynamodb.table` configuration value within your application's `cache` configuration file.
+
+```php
+'dynamodb' => [
+    'table' => env('DYNAMODB_CACHE_TABLE', 'cache'),
+],
+```
+
+This table should also have a string partition key with a name that corresponds to the value of the `stores.dynamodb.attributes.key` configuration item within your application's cache configuration file. By default, the partition key should be named `key`.
 
 ## Cache Usage
 

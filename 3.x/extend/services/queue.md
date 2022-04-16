@@ -6,9 +6,15 @@ Queues allow you to defer the processing of a time consuming task, such as sendi
 
 The queue configuration file is stored in `config/queue.php`. In this file you will find connection configurations for each of the queue drivers that are included, such as a database, [Beanstalkd](http://kr.github.com/beanstalkd), [IronMQ](http://iron.io), [Amazon SQS](http://aws.amazon.com/sqs), [Redis](http://redis.io), null, and synchronous (for local use) driver. The `null` queue driver simply discards queued jobs so they are never executed.
 
-### Driver prerequisites
+### Driver Prerequisites
 
-Before using the Amazon SQS, Beanstalkd, IronMQ or Redis drivers you will need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers).
+The following dependencies are needed for the listed queue drivers. These dependencies may be installed via the Composer package manager.
+
+Connection | Package
+------------- | -------------
+Amazon SQS | `aws/aws-sdk-php ~3.0`
+Beanstalkd | `pda/pheanstalk ~4.0`
+Redis | `predis/predis ~1.0` or phpredis PHP extension
 
 ## Basic usage
 

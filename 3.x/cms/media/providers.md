@@ -1,8 +1,12 @@
 # Providers
 
-Media Manager uses the Local Disk provider by default. You need to install [Drivers plugin](https://octobercms.com/plugin/october-drivers) before you can use Amazon S3 features.
+Media Manager uses the Local Disk provider by default. You need to install the Flysystem S3 package before you can use Amazon S3 features.
 
-> **Note**: After you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
+```bash
+composer require -W league/flysystem-aws-s3-v3 "^3.0"
+```
+
+After you change Media Manager configuration, you should reset its cache. You can do that with pressing the **Refresh** button in the Media Manager toolbar.
 
 ## Local Disk
 

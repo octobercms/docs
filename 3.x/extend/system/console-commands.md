@@ -238,7 +238,7 @@ Artisan::add(new Acme\Blog\Console\MyCommand);
 
 #### Registering a Command in the Application Container
 
-If your command is registered in the [application container](../services/application.md#oc-application-container), you may use the `Artisan::resolve` method to make it available to Artisan:
+If your command is registered in the [application container](../services/application.md), you may use the `Artisan::resolve` method to make it available to Artisan:
 
 ```php
 Artisan::resolve('binding.name');
@@ -246,7 +246,7 @@ Artisan::resolve('binding.name');
 
 #### Registering Commands in a Service Provider
 
-If you need to register commands from within a [service provider](application.md#oc-service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](application.md#oc-application-container) binding for the command:
+If you need to register commands from within a [service provider](application.md#oc-service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](../services/application.md) binding for the command:
 
 ```php
 public function boot()
