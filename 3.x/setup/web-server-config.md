@@ -167,7 +167,7 @@ $HTTP["host"] =~ "domain.example.com" {
 ```
 :::
 
-:::details Internet Information Services (Microsoft IIS)
+:::details Microsoft IIS
 Use the following configuration in the `web.config` file to run October CMS on IIS:
 
 ```xml

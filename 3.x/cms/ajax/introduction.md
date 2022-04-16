@@ -1,6 +1,6 @@
 # Introduction
 
-October CMS includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes.md) and anywhere in the [back-end administration area](../backend/controllers-ajax#oc-using-ajax-handlers).
+October CMS includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in [CMS themes](../cms/themes.md) and anywhere in the [backend panel](../backend/controllers-ajax#oc-using-ajax-handlers).
 
 The AJAX framework comes in two flavors, you may either use [the JavaScript API](../ajax/javascript-api.md) or [the data attributes API](../ajax/attributes-api.md). The data attributes API doesn't require any JavaScript knowledge to use AJAX with October.
 

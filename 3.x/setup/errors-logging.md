@@ -6,7 +6,7 @@ subtitle: Find errors and other log messages about your website.
 When you first start using October CMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
 
 1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
-1. Alternatively it can be viewed via the Administration area by navigating to *System → Logs → Event Log*.
+1. Alternatively it can be viewed via the backend panel by navigating to **Settings → Event Log**.
 
 Log entries are always created when an error page is shown and for certain [exception types](../extend/system/exceptions.md).
 
@@ -41,4 +41,9 @@ October CMS supports various drivers, including `single`, `daily`, `syslog` and 
 'default' => env('LOG_CHANNEL', 'daily'),
 ```
 
-> More information on logging configuration can be found at the [Laravel Logging documentation](https://laravel.com/docs/6.x/logging).
+
+#### See Also
+
+::: also
+* [Laravel Logging Documentation](https://laravel.com/docs/9.x/logging)
+:::

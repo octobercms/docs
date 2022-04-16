@@ -51,7 +51,7 @@ catch (Exception $ex) {
 }
 ```
 
-The `trace_sql` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the administration area log as this is stored in the database and would result in a feedback loop.
+The `trace_sql` function enables database logging, when called it will log every command sent to the database. These records only appear in the `system.log` file and will not appear in the backend panel log as this is stored in the database and would result in a feedback loop.
 
 ```php
 trace_sql();

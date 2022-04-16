@@ -21,9 +21,13 @@ When adding a crontab file to /etc/cron.d, specify a user name after `* * * * *`
 
 ## Setting Up Queue Workers
 
-You may optionally set up a queue driver for processing [queued jobs](../services/queues.html). The queue driver can be configured in the `config/queue.php` file.
+You may optionally set up a queue driver for processing [queued jobs](../extend/services/queue.md). The queue driver can be configured in the `config/queue.php` file.
 
 For the database queue driver, you can set up a cron job running the command that invokes the first job available in the queue: `php artisan queue:work --once`.
+
+```bash
+* * * * * php /october/artisan queue:work --once >> /dev/null 2>&1
+```
 
 Alternatively, it is possible to run the queue as a daemon process with
 
@@ -31,8 +35,9 @@ Alternatively, it is possible to run the queue as a daemon process with
 php artisan queue:work
 ```
 
-#### See also
+#### See Also
 
 ::: also
-* [Queues](../services/queues.html)
+* [Task Scheduling](../extend/system/scheduling.md)
+* [Queues](../extend/services/queue.md)
 :::

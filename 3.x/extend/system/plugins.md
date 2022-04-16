@@ -7,7 +7,7 @@ subtitle: The foundation for adding new features to the CMS by extending it.
 Plugins are identified with a unique code, for example, a plugin called `Acme.Blog` is found in the directory **plugins/acme/blog**.
 :::
 
-This article describes the component registration. The registration process allows plugins to declare their features such as [components](components.md) or backend menus and pages. Here are some examples of what a plugin can do.
+This article describes plugins and their registration functions. The registration process allows plugins to declare their features such as [components](components.md) or backend menus and pages. Here are some examples of what a plugin can do.
 
 1. Define [components](components.md).
 1. Define [user permissions](../backend/users.md).

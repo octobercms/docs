@@ -33,7 +33,7 @@ When it comes to displaying a field in a list or filter, each field has its own 
 Property | Description
 ------------- | -------------
 **column** | defines how to display the field in a list, see [list column definitions](../element/definitions.md).
-**scope** | defines how to display the field in a list, see [filter scope definitions](../element/definitions.md).
+**scope** | defines how to display the field in a filter, see [filter scope definitions](../element/definitions.md).
 
 If the **column** or **scope** values are set to `false` then the field will not be displayed in either.
 

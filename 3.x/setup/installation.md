@@ -30,7 +30,7 @@ Supported web servers:
 * Apache
 * Nginx
 * Lighttpd
-* Internet Information Services (Microsoft IIS).
+* Microsoft IIS
 
 ## Installing October CMS
 
@@ -58,13 +58,13 @@ Run the installation command:
 php artisan october:install
 ```
 
-The last step is the migration command that will initialize the database. Alternatively, October CMS can initialize the database when you first access the Administration Area.
+The last step is the migration command that will initialize the database. Alternatively, October CMS can initialize the database when you first access the backend panel.
 
 ```bash
 php artisan october:migrate
 ```
 
-When the process finishes, you can access the Administration Area in a browser and create the administrator user profile. If you are using the built-in web server, you can launch it with the following command:
+When the process finishes, you can access the backend panel in a browser and create the administrator user profile. If you are using the built-in web server, you can launch it with the following command:
 
 ```bash
 php artisan serve
@@ -105,7 +105,7 @@ It can happen with older versions of MySQL or MariaDB. [Configuring the index le
 Check the permissions are set correctly on the /storage files and subdirectories. They must be writable for the web server.
 :::
 
-::: details The Administration Area area displays "Page not found" (404)
+::: details The backend panel displays "Page not found" (404)
 If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration.md#debug-mode) to see the underlying error message.
 :::
 
@@ -113,7 +113,7 @@ If the application cannot find the database then a 404 page will be shown for th
 The request timeout on the web server should be increased or disabled. For example, Apache's FastCGI sometimes has the -idle-timeout option set to 30 seconds.
 :::
 
-#### See also
+#### See Also
 
 ::: also
 * [Production Configuration](../setup/configuration.md#production-configuration)

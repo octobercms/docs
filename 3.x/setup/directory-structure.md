@@ -34,14 +34,14 @@ The `modules` directory contains the core packages of October CMS, providing cor
 * `system` - defines the core functionality of October CMS and is a required module.
 * `cms` - introduces functionality for rendering the frontend website theme. It is responsible for routing requests to pages, rendering
 * `pages` and handling AJAX requests.
-* `backend` - responsible for displaying the Administration Area pages.
-* `editor` - introduces a user interface for editing CMS templates in the Administration Area.
-* `media` - introduces a media file management user interface in the Administration Area. It allows back-end users to upload media files like images or video files and include them in other places, for example, blog posts.
+* `backend` - responsible for displaying the backend panel pages.
+* `editor` - introduces a user interface for editing CMS templates in the backend panel.
+* `media` - introduces a media file management user interface in the backend panel. It allows back-end users to upload media files like images or video files and include them in other places, for example, blog posts.
 * `tailor` - introduces the October CMS Tailor features.
 
 ## Themes Directory
 
-The `themes` directory contains subdirectories for front-end website CMS themes. CMS themes include template files for the website pages, layouts, partials, assets, and other files. The active theme is set using the `cms.active_theme` configuration parameter and can be overridden from the Administration Area Settings page.
+The `themes` directory contains subdirectories for front-end website CMS themes. CMS themes include template files for the website pages, layouts, partials, assets, and other files. The active theme is set using the `cms.active_theme` configuration parameter and can be overridden from the backend panel settings page.
 
 ## Vendor Directory
 

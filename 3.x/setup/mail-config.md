@@ -87,3 +87,9 @@ You can dynamically disable sending mail using the `Mail::pretend` method. When 
 ```php
 Mail::pretend();
 ```
+
+#### See Also
+
+::: also
+* [Sending Mail](../extend/system/sending-mail.md)
+:::
