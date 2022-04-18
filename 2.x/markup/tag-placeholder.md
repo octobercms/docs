@@ -35,10 +35,10 @@ The page can inject more content to the placeholder. The `{% default %}` tag spe
 
 ## Checking a Placeholder Exists
 
-In a layout template you can check if a placeholder content exists by using the `hasPlaceholder()` function. This lets you to generate different markup depending on whether the page provides a placeholder content. Example:
+In a layout template you can check if a placeholder content exists by using the `placeholder()` function. This lets you to generate different markup depending on whether the page provides a placeholder content. Example:
 
 ```twig
-{% if hasPlaceholder('sidemenu') %}
+{% if placeholder('sidemenu') %}
     <!-- Markup for a page with a sidebar -->
     <div class="row">
         <div class="col-md-3">

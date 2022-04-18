@@ -131,10 +131,10 @@ You may also pass the checked values to an AJAX request using the `data-list-che
 To filter a list by user defined input, add the following list configuration to the YAML file:
 
 ```yaml
-filter: $/acme/blog/models/post/scopes.yaml
+filter: config_filter.yaml
 ```
 
-The **filter** option should make reference to a [filter configuration file](../backend/filters.md) path or supply an array with the configuration.
+The **filter** option should make reference to a [filter configuration file](#oc-using-list-filters) path or supply an array with the configuration.
 
 <a id="oc-defining-list-columns"></a>
 ## Defining List Columns
@@ -243,16 +243,202 @@ There are various column types that can be used for the **type** setting, these 
 - [Time](#column-time)
 - [Time since](#column-timesince)
 - [Time tense](#column-timetense)
+- [Select](#column-select)
 - [Selectable](#column-selectable)
+- [Relation](#column-relation)
 - [Partial](#column-partial)
 - [Colorpicker](#column-colorpicker)
 
-
-<!-- Non Types -->
-- [Relation](#column-relation)
-- [Select](#column-select)
-
 </div>
+
+<a name="column-text"></a>
+### Text
+
+`text` - displays a text column, aligned left.
+
+```yaml
+full_name:
+    label: Full Name
+    type: text
+```
+
+<a name="column-number"></a>
+### Number
+
+`number` - displays a number column, aligned right.
+
+```yaml
+age:
+    label: Age
+    type: number
+```
+
+You may also specify a custom number format, for example currency **$99.00**.
+
+```yaml
+price:
+    label: Price
+    type: number
+    format: "$%.2f"
+```
+
+> **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
+
+<a name="column-image"></a>
+### Image
+
+`image` - displays an image column with the option to resize the output.
+
+```yaml
+avatar:
+    label: Avatar
+    type: image
+    sortable: false
+    width: 150
+    height: 150
+    options:
+        quality: 80
+```
+
+See the [image resizing article](../services/resizer.md#oc-resize-parameters) for more information on what options are supported.
+
+<a name="column-switch"></a>
+### Switch
+
+`switch` - displays a on or off state for boolean columns.
+
+```yaml
+enabled:
+    label: Enabled
+    type: switch
+```
+
+You may customize the switch text by passing an array to the `options` value with false and true labels.
+
+```yaml
+enabled:
+    label: Enabled
+    type: switch
+    options:
+        - Nope
+        - Yeah
+```
+
+<a name="column-summary"></a>
+### Summary
+
+`summary` - generates a summary value, strips HTML and limits length to the closest word boundary.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+```
+
+The default summary length is 40 characters, you may adjust it with the `limitChars` option.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+    limitChars: 100
+```
+
+To limit by word count instead, specify the `limitWords` option instead. You may also change the end suffix characters with the `endChars` option.
+
+```yaml
+html_content:
+    label: Content
+    type: summary
+    limitWords: 10
+    endChars: "..."
+```
+
+<a name="column-datetime"></a>
+### Date & Time
+
+`datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
+
+```yaml
+created_at:
+    label: Date
+    type: datetime
+```
+
+You may also specify a custom date format, for example **Thursday 25th of December 1975 02:15:16 PM**.
+
+```yaml
+created_at:
+    label: Date
+    type: datetime
+    format: l jS \of F Y h:i:s A
+```
+
+The display value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
+
+```yaml
+created_at:
+    label: Date
+    type: datetime
+    useTimezone: false
+```
+
+> **Note**: the `useTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
+
+<a name="column-date"></a>
+### Date
+
+`date` - displays the column value as date format **M j, Y**.
+
+```yaml
+created_at:
+    label: Date
+    type: date
+```
+
+The backend timezone preference is not applied to this value by default. If the date includes a time, you may convert the timezone with the `useTimezone` option.
+
+```yaml
+created_at:
+    label: Date
+    type: date
+    useTimezone: true
+```
+
+> **Note**: the `date` and `time` columns do not apply backend timezone conversions by default since a date and time are both required for the conversion.
+
+<a name="column-time"></a>
+### Time
+
+`time` - displays the column value as time format **g:i A**.
+
+```yaml
+created_at:
+    label: Date
+    type: time
+```
+
+<a name="column-timesince"></a>
+### Time Since
+
+`timesince` - displays a human readable time difference from the value to the current time. Eg: **10 minutes ago**
+
+```yaml
+created_at:
+    label: Date
+    type: timesince
+```
+
+<a name="column-timetense"></a>
+### Time Tense
+
+`timetense` - displays 24-hour time and the day using the grammatical tense of the current date. Eg: **Today at 12:49**, **Yesterday at 4:00** or **18 Sep 2015 at 14:33**.
+
+```yaml
+created_at:
+    label: Date
+    type: timetense
+```
 
 <a name="column-select"></a>
 ### Select
@@ -263,6 +449,34 @@ There are various column types that can be used for the **type** setting, these 
 full_name:
     label: Full Name
     select: concat(first_name, ' ', last_name)
+```
+
+<a name="column-selectable"></a>
+### Selectable
+
+`selectable` - takes the column value and matches it to the value in the record's available options. Take the following array as an example, if the record value is set to `open` then the **Open** value is displayed in the column.
+
+```php
+['open' => 'Open', 'closed' => 'Closed']
+```
+
+The available options are defined on the model as [dropdown options](forms.md#field-dropdown).
+
+```yaml
+status:
+    label: Status
+    type: selectable
+```
+
+They can also be specified explicitly in the `options` value.
+
+```yaml
+status:
+    label: Status
+    type: selectable
+    options:
+        pending: Pending
+        active: Active
 ```
 
 <a name="column-relation"></a>
@@ -289,6 +503,37 @@ users_count:
 
 > **Note**: Be careful not to name relations the same as existing database columns. For example, using a name `group_id` could break the group relation due to a naming conflict.
 
+<a name="column-partial"></a>
+### Partial
+
+`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the column name is used as the partial name.
+
+```yaml
+content:
+    label: Content
+    type: partial
+    path: ~/plugins/acme/blog/models/comment/_content_column.htm
+```
+
+Inside the partial these variables are available: `$value` is the default cell value, `$record` is the model used for the cell and `$column` is the configured class object `Backend\Classes\ListColumn`. Here is an some example contents of the **_content_column.htm** file.
+
+```php
+<?php if ($record->is_active): ?>
+    <?= e($value) ?>
+<?php endif ?>
+```
+
+<a name="column-colorpicker"></a>
+### Color Picker
+
+`colorpicker` - displays a color from colorpicker column
+
+```yaml
+color:
+    label: Background
+    type: colorpicker
+```
+
 ## Displaying the List
 
 Usually lists are displayed in the index [view](controllers-ajax.md) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
@@ -313,6 +558,307 @@ Each definition can then be displayed by passing the definition name as the firs
 
 ```php
 <?= $this->listRender('templates') ?>
+```
+
+<a id="oc-using-list-filters"></a>
+## Using List Filters
+
+Lists can be filtered by [adding a filter definition](#oc-filtering-the-list) to the list configuration. Similarly filters are driven by their own configuration file that contain filter scopes, each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
+
+```yaml
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+
+    category:
+        label: Category
+        modelClass: Acme\Blog\Models\Category
+        conditions: category_id in (:filtered)
+        nameFrom: name
+
+    status:
+        label: Status
+        type: group
+        conditions: status in (:filtered)
+        options:
+            pending: Pending
+            active: Active
+            closed: Closed
+
+    published:
+        label: Hide published
+        type: checkbox
+        default: 1
+        conditions: is_published <> true
+
+    approved:
+        label: Approved
+        type: switch
+        default: 2
+        conditions:
+            - is_approved <> true
+            - is_approved = true
+
+    created_at:
+        label: Date
+        type: date
+        conditions: created_at >= ':filtered'
+
+    published_at:
+        label: Date
+        type: daterange
+        conditions: created_at >= ':after' AND created_at <= ':before'
+```
+
+<a id="oc-scope-options"></a>
+### Scope Options
+
+For each scope you can specify these options (where applicable):
+
+Option | Description
+------------- | -------------
+**label** | a name when displaying the filter scope to the user.
+**type** | defines how this scope should be rendered (see [Scope types](#oc-available-scope-types) below). Default: group.
+**conditions** | specifies a raw where query statement to apply to the list model query, the `:filtered` parameter represents the filtered value(s).
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s)
+**options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
+**emptyOption** | an optional label for an intentional empty selection.
+**nameFrom** | if filtering by multiple items, the attribute to display for the name, taken from all records of the `modelClass` model.
+**default** | can either be integer (switch, checkbox, number) or array (group, date range, number range) or string (date).
+**permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**dependsOn** | a string or an array of other scope names that this scope [depends on](#oc-filter-scope-dependencies). When the other scopes are modified, this scope will update.
+
+<a id="oc-filter-scope-dependencies"></a>
+### Filter Dependencies
+
+Filter scopes can declare dependencies on other scopes by defining the `dependsOn` [scope option](#oc-scope-options), which provide a server-side solution for updating scopes when their dependencies are modified. When the scopes that are declared as dependencies change, the defining scope will update dynamically. This provides an opportunity to change the available options to be provided to the scope.
+
+```yaml
+country:
+    label: Country
+    type: group
+    conditions: country_id in (:filtered)
+    modelClass: October\Test\Models\Location
+    options: getCountryOptions
+
+city:
+    label: City
+    type: group
+    conditions: city_id in (:filtered)
+    modelClass: October\Test\Models\Location
+    options: getCityOptions
+    dependsOn: country
+```
+
+In the above example, the `city` scope will refresh when the `country` scope has changed. Any scope that defines the `dependsOn` property will be passed all current scope objects for the Filter widget, including their current values, as an array that is keyed by the scope names.
+
+```php
+public function getCountryOptions()
+{
+    return Country::lists('name', 'id');
+}
+
+public function getCityOptions($scopes = null)
+{
+    if (!empty($scopes['country']->value)) {
+        return City::whereIn('country_id', array_keys($scopes['country']->value))
+            ->lists('name', 'id')
+        ;
+    }
+    else {
+        return City::lists('name', 'id');
+    }
+}
+```
+
+> **Note**: Scope dependencies with `type: group` are only supported at this stage.
+
+<a id="oc-available-scope-types"></a>
+### Available Scope Types
+
+These types can be used to determine how the filter scope should be displayed.
+
+<div class="content-list" markdown="1">
+
+- [Group](#filter-group)
+- [Checkbox](#filter-checkbox)
+- [Switch](#filter-switch)
+- [Date](#filter-date)
+- [Date range](#filter-daterange)
+- [Number](#filter-number)
+- [Number range](#filter-numberrange)
+- [Text](#filter-text)
+- [Clear](#filter-clear)
+
+</div>
+
+<a name="filter-group"></a>
+### Group
+
+`group` - filters the list by a group of items, usually by a related model and requires a `nameFrom` or `options` definition. Eg: Status name as open, closed, etc.
+
+```yaml
+status:
+    label: Status
+    type: group
+    conditions: status in (:filtered)
+    default:
+        pending: Pending
+        active: Active
+    options:
+        pending: Pending
+        active: Active
+        closed: Closed
+```
+
+<a name="filter-checkbox"></a>
+### Checkbox
+
+`checkbox` - used as a binary checkbox to apply a predefined condition or query to the list, either on or off. Use 0 for off and 1 for on for default value
+
+```yaml
+published:
+    label: Hide published
+    type: checkbox
+    default: 1
+    conditions: is_published <> true
+```
+
+<a name="filter-switch"></a>
+### Switch
+
+`switch` - used as a switch to toggle between two predefined conditions or queries to the list, either indeterminate, on or off. Use 0 for off, 1 for indeterminate and 2 for on for default value
+
+```yaml
+approved:
+    label: Approved
+    type: switch
+    default: 1
+    conditions:
+        - is_approved <> true
+        - is_approved = true
+```
+
+<a name="filter-date"></a>
+### Date
+
+`date` - displays a date picker for a single date to be selected. The values available to be used in the conditions property are:
+
+- `:filtered`: The selected date formatted as `Y-m-d`
+- `:before`: The selected date formatted as `Y-m-d 00:00:00`, converted from the backend timezone to the app timezone
+- `:after`: The selected date formatted as `Y-m-d 23:59:59`, converted from the backend timezone to the app timezone
+
+```yaml
+created_at:
+    label: Date
+    type: date
+    minDate: '2001-01-23'
+    maxDate: '2030-10-13'
+    yearRange: 10
+    conditions: created_at >= ':filtered'
+```
+
+<a name="filter-daterange"></a>
+### Date Range
+
+`daterange` - displays a date picker for two dates to be selected as a date range. The values available to be used in the conditions property are:
+
+ - `:before`: The selected "before" date formatted as `Y-m-d H:i:s`
+ - `:beforeDate`: The selected "before" date formatted as `Y-m-d`
+ - `:after`: The selected "after" date formatted as `Y-m-d H:i:s`
+ - `:afterDate`: The selected "after" date formatted as `Y-m-d`
+
+```yaml
+published_at:
+    label: Date
+    type: daterange
+    minDate: '2001-01-23'
+    maxDate: '2030-10-13'
+    yearRange: 10
+    conditions: created_at >= ':after' AND created_at <= ':before'
+```
+
+To use default value for Date and Date Range
+
+```php
+\MyController::extendListFilterScopes(function($filter) {
+    $widget->addScopes([
+        'Date Test' => [
+            'label' => 'Date Test',
+            'type' => 'daterange',
+            'default' => $this->myDefaultTime(),
+            'conditions' => "created_at >= ':after' AND created_at <= ':before'"
+        ],
+    ]);
+});
+
+// Return value must be instance of carbon
+public function myDefaultTime()
+{
+    return [
+        0 => Carbon::parse('2012-02-02'),
+        1 => Carbon::parse('2012-04-02'),
+    ];
+}
+```
+
+<a name="filter-number"></a>
+### Number
+
+`number` - displays input for a single number to be entered. The value is available to be used in the conditions property as `:filtered`.
+
+```yaml
+age:
+    label: Age
+    type: number
+    default: 14
+    conditions: age >= ':filtered'
+```
+
+<a name="filter-numberrange"></a>
+### Number Range
+
+`numberrange` - displays inputs for two numbers to be entered as a number range. The values available to be used in the conditions property are:
+
+- `:min`: The minimum value, defaults to -2147483647
+- `:max`: The maximum value, defaults to 2147483647
+
+You may leave either the minimum value blank to search everything up to the maximum value, and vice versa, you may leave the maximum value blank to search everything at least the minimum value.
+
+```yaml
+visitors:
+    label: Visitor Count
+    type: numberrange
+    default:
+        0: 10
+        1: 20
+    conditions: visitors >= ':min' and visitors <= ':max'
+```
+
+<a name="filter-text"></a>
+### Text
+
+`text` - display text input for a string to be entered. You may specify a `size` attribute that will be injected in the input size attribute (default: 10).
+
+```yaml
+username:
+    label: Username
+    type: text
+    conditions: username = :value
+    size: 2
+```
+
+<a name="filter-clear"></a>
+### Clear
+
+`clear` - adds a button that clears all the filters and their values.
+
+```yaml
+clear:
+    label: Clear Filters
+    type: clear
 ```
 
 ## Extending List Behavior
@@ -541,7 +1087,7 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-> The array of scopes provided is similar to the [list filters configuration](../backend/filters.md).
+> The array of scopes provided is similar to the [list filters configuration](#oc-using-list-filters).
 
 You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
@@ -605,7 +1151,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-The [list filter](../backend/filters.md) model query can also be extended by overriding the `listFilterExtendQuery` method:
+The [list filter](#oc-using-list-filters) model query can also be extended by overriding the `listFilterExtendQuery` method:
 
 ```php
 public function listFilterExtendQuery($query, $scope)

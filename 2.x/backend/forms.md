@@ -297,6 +297,369 @@ There are various native field types that can be used for the **type** setting. 
 
 </div>
 
+<a name="field-text"></a>
+### Text
+
+`text` - renders a single line text box. This is the default type used if none is specified.
+
+```yaml
+blog_title:
+    label: Blog Title
+    type: text
+```
+
+<a name="field-number"></a>
+### Number
+
+`number` - renders a single line text box that takes numbers only.
+
+```yaml
+your_age:
+    label: Your Age
+    type: number
+    step: 1  # defaults to 'any'
+    min: 1   # defaults to not present
+    max: 100 # defaults to not present
+```
+
+If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+
+```php
+/**
+ * @var array Validation rules
+ */
+public $rules = [
+    'your_age' => 'numeric',
+];
+```
+
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
+
+<a name="field-password"></a>
+### Password
+
+`password ` - renders a single line password field.
+
+```yaml
+user_password:
+    label: Password
+    type: password
+```
+
+<a name="field-email"></a>
+### Email
+
+`email` - renders a single line text box with the type of `email`, triggering an email-specialised keyboard in mobile browsers.
+
+```yaml
+user_email:
+    label: Email Address
+    type: email
+```
+
+If you would like to validate this field on save to ensure that it is a properly-formatted email address, please use the `$rules` property on your model, like so:
+
+```php
+/**
+ * @var array Validation rules
+ */
+public $rules = [
+    'user_email' => 'email',
+];
+```
+
+For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-email).
+
+<a name="field-textarea"></a>
+### Textarea
+
+`textarea` - renders a multiline text box. A size can also be specified with possible values: tiny, small, large, huge, giant.
+
+```yaml
+blog_contents:
+    label: Contents
+    type: textarea
+    size: large
+```
+
+<a name="field-dropdown"></a>
+### Dropdown
+
+`dropdown` - renders a dropdown with specified options. There are a number of ways to provide the dropdown options, most of them involve specify the `options` value.
+
+Option values only, where the values and labels are the same.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options:
+        draft
+        published
+        archived
+```
+
+Options with key-value pair, where the value and label are independently specified.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+    options:
+        draft: Draft
+        published: Published
+        archived: Archived
+```
+
+The next approaches involve using the model class in your plugin or application codebase. If the `options` value is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model.
+
+Using the example below, the model class is expected to have the `getStatusTypeOptions` method. The first argument of this method is the current value of this field and the second is the current data object for the entire form. This method should return an array of options in the format **key => label**.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+```
+
+This is an example of the model class method that supplies the dropdown options. Notice that the method name matches the column name in _TitleCase_ format.
+
+```php
+public function getStatusTypeOptions($value, $formData)
+{
+    return ['all' => 'All', ...];
+}
+```
+
+You may also define a catch-all method that works as a fallback in cases where the dedicated method name is not defined, which will be used for all dropdown field types for the model.
+
+The first argument of this method is the field name, the second is the current value of the field, and the third is the current data object for the entire form. It should return an array of options in the format **key => label**.
+
+```php
+public function getDropdownOptions($fieldName, $value, $formData)
+{
+    if ($fieldName == 'status') {
+        return ['all' => 'All', ...];
+    }
+    else {
+        return ['' => '-- none --'];
+    }
+}
+```
+
+To use a custom method name, specify it explicitly in the `options` parameter and this will match exactly to the method name defined in the model.
+
+In the next example the `listStatuses` method should be defined in the model class. This method receives all the same arguments as the `getDropdownOptions` method, and should return an array of options in the format **key => label**.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    options: listStatuses
+```
+
+This is an example of the model class custom method that supplies the dropdown options.
+
+```php
+public function listStatuses($fieldName, $value, $formData)
+{
+    return ['published' => 'Published', ...];
+}
+```
+
+To add a custom icon for every option rendered in the dropdown field, you may specify the options as a multidimensional array with the following format **key => [label-text, label-icon]**.
+
+```php
+public function listStatuses($fieldName, $value, $formData)
+{
+    return [
+        'published' => ['Published', 'icon-check-circle'],
+        'unpublished' => ['Unpublished', 'icon-minus-circle'],
+        'draft' => ['Draft', 'icon-clock-o']
+    ];
+}
+```
+
+Displaying a custom color is also supported by specifying the options as an array with the format **key => [label-text, label-color]** where the color is a hex value beginning with a hash (`#`).
+
+```php
+public function listStatuses($fieldName, $value, $formData)
+{
+    return [
+        'published' => ['Published', '#666666'],
+        'unpublished' => ['Unpublished', '#ff9999'],
+        'draft' => ['Draft', '#ff0000']
+    ];
+}
+```
+
+If you want to call a method on an external class, you may do it by calling a static method on any fully qualified object. Simply specify the `ClassName::method` syntax as a string in the `options` parameter.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    options: \MyAuthor\MyPlugin\Helpers\FormHelper::staticMethodOptions
+```
+
+This examples shows the static method defined on any helper class. The first argument is the Model object and the second argument is the form field definition.
+
+```php
+public static function staticMethodOptions($model, $formField)
+{
+    return ['published' => 'Published', ...];
+}
+```
+
+To handle cases when there is no value set on the model, you may specify an `emptyOption` value to include an empty option that can be reselected.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    emptyOption: -- no status --
+```
+
+Alternatively you may use the `placeholder` option to use a "one-way" empty option that cannot be reselected.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    placeholder: -- select a status --
+```
+
+By default the dropdown has a searching feature, allowing quick selection of a value. This can be disabled by setting the `showSearch` option to `false`.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    showSearch: false
+```
+
+<a name="field-radio"></a>
+### Radio List
+
+`radio` - renders a list of radio options, where only one item can be selected at a time.
+
+```yaml
+security_level:
+    label: Access Level
+    type: radio
+    default: guests
+    options:
+        all: All
+        registered: Registered only
+        guests: Guests only
+```
+
+Radio lists can also support a secondary description.
+
+```yaml
+security_level:
+    label: Access Level
+    type: radio
+    options:
+        all: [All, Guests and customers will be able to access this page.]
+        registered: [Registered only, Only logged in member will be able to access this page.]
+        guests: [Guests only, Only guest users will be able to access this page.]
+```
+
+Radio lists support the same methods for defining the options as the [dropdown field type](#field-dropdown). For radio lists the method could return either the simple array: **key => value** or an array of arrays for providing the descriptions: **key => [label, description]**. Options can be displayed inline with each other instead of in separate rows by specifying `cssClass: 'inline-options'` on the radio field config.
+
+<a name="field-balloon"></a>
+### Balloon Selector
+
+`balloon-selector` - renders a list, where only one item can be selected at a time.
+
+```yaml
+gender:
+    label: Gender
+    type: balloon-selector
+    default: female
+    options:
+        female: Female
+        male: Male
+```
+
+Balloon selectors support the same methods for defining the options as the [dropdown field type](#field-dropdown).
+
+<a name="field-checkbox"></a>
+### Checkbox
+
+`checkbox` - renders a single checkbox.
+
+```yaml
+show_content:
+    label: Display content
+    type: checkbox
+    default: true
+```
+
+<a name="field-checkboxlist"></a>
+### Checkbox List
+
+`checkboxlist` - renders a list of checkboxes.
+
+```yaml
+permissions:
+    label: Permissions
+    type: checkboxlist
+    options:
+        open_account: Open account
+        close_account: Close account
+        modify_account: Modify account
+```
+
+Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
+
+```yaml
+permissions:
+    type: checkboxlist
+    options: listPermissions
+```
+
+Options can be displayed inline with each other instead of in separate rows by specifying **inline-options** as the `cssClass` on the field config.
+
+```yaml
+permissions:
+    type: checkboxlist
+    cssClass: inline-options
+```
+
+A quick select menu with "Select All" and "Select None" buttons will become visible when the list has greater than 10 items. To explicitly enable these buttons, use the `quickselect` option.
+
+```yaml
+permissions:
+    type: checkboxlist
+    quickselect: true
+```
+
+<a name="field-switch"></a>
+### Switch
+
+`switch` - renders a switchbox.
+
+```yaml
+show_content:
+    label: Display content
+    type: switch
+    comment: Flick this switch to display content
+```
+
+You may customize the switch text by passing an array to the `options` value with false and true labels.
+
+```yaml
+show_content:
+    label: Display content
+    type: switch
+    options:
+        - Nope
+        - Yeah
+```
+
 <a name="field-widget"></a>
 ### Widget
 
@@ -322,6 +685,70 @@ There are non function UI elements that can be included in forms to help with th
 
 </div>
 
+<a name="field-section"></a>
+### Section
+
+`section` - renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
+
+```yaml
+_section1:
+    label: User details
+    type: section
+    comment: This section contains details about the user.
+```
+
+<a name="field-hint"></a>
+### Hint
+
+`hint` - identical to a `partial` field but renders inside a hint container that can be hidden by the user.
+
+```yaml
+_hint1:
+    type: hint
+    path: content_field
+```
+
+A hint supports content inline to the field. The `label` and `comment` values are optional and contain the content for the heading and subheading. You may also use Markdown syntax for the values.
+
+```yaml
+_tip1:
+    type: hint
+    mode: tip
+    label: Pro Tip
+    comment: Always check to make sure this field is populated.
+```
+
+The `mode` option supports the values: tip, info, warning, danger, success
+
+```yaml
+_warning1:
+    type: hint
+    mode: warning
+    label: Always wash your hands
+    comment: This is good for stopping the spread of germs.
+```
+
+<a name="field-ruler"></a>
+### Horizontal Rule
+
+`ruler` - renders a horizontal rule to break up the form contents
+
+```yaml
+_ruler1:
+    type: ruler
+```
+
+<a name="field-partial"></a>
+### Partial
+
+`partial` - renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name. Inside the partial these variables are available: `$value` is the default field value, `$model` is the model used for the field and `$field` is the configured class object `Backend\Classes\FormField`.
+
+```yaml
+content:
+    type: partial
+    path: $/acme/blog/models/comments/_content_field.htm
+```
+
 <a id="oc-form-widgets"></a>
 ## Form Widgets
 
@@ -345,6 +772,535 @@ There are various form widgets included as standard, although it is common for p
 - [Tag List](#widget-taglist)
 
 </div>
+
+<a name="widget-codeeditor"></a>
+### Code Editor
+
+`codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.
+
+```yaml
+css_content:
+    type: codeeditor
+    size: huge
+    language: html
+```
+
+Option | Description
+------------- | -------------
+**language** | code language, for example, php, css, javascript, html. Default: `php`.
+**showGutter** | shows a gutter with line numbers. Default: `true`.
+**wrapWords** | breaks long lines on to a new line. Default `true`.
+**fontSize** | the text font size. Default: 12.
+
+<a name="widget-colorpicker"></a>
+### Color Picker
+
+`colorpicker` - renders controls to select a hexadecimal color value.
+
+```yaml
+color:
+    label: Background
+    type: colorpicker
+```
+
+Option | Description
+------------- | -------------
+**availableColors** |  list of available colors.
+**allowEmpty** | allows empty input value. Default: false
+
+There are two ways to provide the available colors for the colorpicker. The first method defines the `availableColors` directly as a list of hex color codes in the YAML file:
+
+```yaml
+color:
+    label: Background
+    type: colorpicker
+    availableColors: ['#000000', '#111111', '#222222']
+```
+
+The second method uses a specific method declared in the model class.  This method should return an array of hex colors in the same format as in the example above. The first argument of this method is the field name, the second is the currect value of the field, and the third is the current data object for the entire form.
+
+```yaml
+color:
+    label: Background
+    type: colorpicker
+    availableColors: myColorList
+```
+
+Supplying the available colors in the model class:
+
+```php
+public function myColorList($fieldName, $value, $formData)
+{
+    return ['#000000', '#111111', '#222222']
+}
+```
+
+If the `availableColors` field in not defined in the YAML file, the colorpicker uses a set of 20 default colors.
+
+<a name="widget-datatable"></a>
+### Data Table
+
+`datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.
+
+```yaml
+data:
+    type: datatable
+    adding: true
+    deleting: true
+    columns: []
+    recordsPerPage: false
+    searching: false
+```
+
+> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model.md#oc-supported-properties) or anything that can handle storing as an array.
+
+#### Table configuration
+
+The following lists the configuration values of the data table widget itself.
+
+Option | Description
+------ | -----------
+**adding** | allow records to be added to the data table. Default: `true`.
+**btnAddRowLabel** | defines a custom label for the "Add Row Above" button.
+**btnAddRowBelowLabel** | defines a custom label for the "Add Row Below" button.
+**btnDeleteRowLabel** | defines a custom label for the "Delete Row" button.
+**columns** | an array representing the column configuration of the data table. See the *Column configuration* section below.
+**deleting** | allow records to be deleted from the data table. Default: `false`.
+**dynamicHeight** | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
+**fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
+**height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
+**keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`. Only supports integer values.
+**postbackHandlerName** | specifies the AJAX handler name in which the data table content will be sent with. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
+**recordsPerPage** | the number of records to show per page. If set to `false`, the pagination will be disabled.
+**searching** | allow records to be searched via a search box. Default: `false`.
+**toolbar** | an array representing the toolbar configuration of the data table.
+
+#### Column configuration
+
+The data table widget allows for the specification of columns as an array via the `columns` configuration variable. Each column should use the field name as a key, and the following configuration variables to set up the field.
+
+Example:
+
+```yaml
+columns:
+    id:
+        type: string
+        title: ID
+        validation:
+            integer:
+                message: Please enter a number
+    name:
+        type: string
+        title: Name
+```
+
+Option | Description
+------ | -----------
+**type** | the input type for this column's cells. Must be one of the following: `string`, `checkbox`, `dropdown` or `autocomplete`.
+**options** | for `dropdown` and `autocomplete` columns only - this specifies the AJAX handler that will return the available options, as an array. The array key is used as the value of the option, and the array value is used as the option label.
+**readOnly** | whether this column is read-only. Default: `false`.
+**title** | defines the column's title.
+**validation** | an array specifying the validation for the content of the column's cells. See the *Column validation* section below.
+**width** | defines the width of the column, in pixels.
+
+#### Column validation
+
+Column cells can be validated against the below types of validation. Validation should be specified as an array, with the type of validation used as a key, and an optional message specified as the `message` attrbute for that validation.
+
+Validation | Description
+---------- | -----------
+**float** | Validates the data as a float. An optional boolean `allowNegative` attribute can be provided, allowing for negative float numbers.
+**integer** | Validates the data as an integer. An optional boolean `allowNegative` attribute can be provided, allowing for negative integers.
+**length** | Validates the data to be of a certain length. An integer `min` and `max` attribute must be provided, representing the minimum and maximum number of characters that must be entered.
+**regex** | Validates the data against a regular expression. A string `pattern` attribute must be provided, defining the regular expression to test the data against.
+**required** | Validates that the data must be entered before saving.
+
+<a name="widget-datepicker"></a>
+### Date Picker
+
+`datepicker` - renders a text field used for selecting date and times.
+
+```yaml
+published_at:
+    label: Published
+    type: datepicker
+    mode: date
+```
+
+Option | Description
+------------- | -------------
+**mode** | the expected result, either date, datetime or time. Default: datetime.
+**format** | provide an explicit date display format. Eg: Y-m-d
+**minDate** | the minimum/earliest date that can be selected.
+**maxDate** | the maximum/latest date that can be selected.
+**firstDay** | the first day of the week. Default: 0 (Sunday).
+**showWeekNumber** | show week numbers at head of row. Default: false
+**useTimezone** | convert the date and time from the backend specified timezone preference. Default: true
+
+<a name="widget-fileupload"></a>
+### File Upload
+
+`fileupload` - renders a file uploader for images or regular files.
+
+```yaml
+avatar:
+    label: Avatar
+    type: fileupload
+    mode: image
+    imageHeight: 260
+    imageWidth: 260
+```
+
+Option | Description
+------------- | -------------
+**mode** | the expected file type, either file or image. Default: `image`
+**size** | for multiple uploads, the size of the container. Available options: tiny, small, large, huge, giant, adaptive. Default: `large`
+**imageWidth** | if using image type, the image will be resized to this width, optional
+**imageHeight** | if using image type, the image will be resized to this height, optional
+**fileTypes** | file extensions that are accepted by the uploader, optional. Eg: `zip,txt`
+**mimeTypes** | MIME types that are accepted by the uploader, either as file extension or fully qualified name, optional. Eg: `bin,txt`
+**maxFilesize** | file size in Mb that are accepted by the uploader, optional. Default: from "upload_max_filesize" param value
+**maxFiles** | maximum number of files allowed to be uploaded
+**useCaption** | allows a title and description to be set for the file. Default: `true`
+**prompt** | text to display for the upload button, applies to files only, optional
+**thumbOptions** | additional [resize options](../services/resizer.md#oc-resize-parameters) for generating the thumbnail
+**attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
+
+> **Note**: Unlike the [Media Finder form widget](#widget-mediafinder), the File Upload form widget uses [database file attachments](../database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
+
+<a name="widget-markdowneditor"></a>
+### Markdown Editor
+
+`markdown` - renders a basic editor for markdown formatted text.
+
+```yaml
+md_content:
+    type: markdown
+    size: huge
+    mode: split
+```
+
+Option | Description
+------------- | -------------
+**mode** | the expected view mode, either tab or split. Default: tab.
+
+<a name="widget-mediafinder"></a>
+### Media Finder
+
+`mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
+
+```yaml
+whitepaper_file:
+    label: Whitepaper PDF
+    type: mediafinder
+```
+
+Set the `mode` to image to display a preview of the selected image.
+
+```yaml
+background_image:
+    label: Background Image
+    type: mediafinder
+    mode: image
+```
+
+Option | Description
+------------- | -------------
+**mode** | the expected file type, either file or image. Default: `file`.
+**imageWidth** | if using image type, the preview image will be displayed to this width, optional.
+**imageHeight** | if using image type, the preview image will be displayed to this height, optional.
+**maxItems** | maximum number of items that can be selected.
+
+> **Note**: Unlike the [File Upload form widget](#widget-fileupload), the Media Finder form widget stores its data as a string representing the path to the media files selected within the Media Library. It should associate to a normal attribute on your model.
+
+<a name="widget-nestedform"></a>
+### Nested Form
+
+`nestedform` - renders a nested form using a related record or [jsonable attribute](../database/model.md#oc-supported-properties). Fields can be defined inline or using an external yaml file.
+
+```yaml
+content:
+    type: nestedform
+    showPanel: false
+    form:
+        fields:
+            added_at:
+                label: Date added
+                type: datepicker
+            details:
+                label: Details
+                type: textarea
+            title:
+                label: This the title
+                type: text
+```
+
+Pass a string to the `form` option to reference an external yaml file.
+
+```yaml
+profile:
+    label: Profile
+    type: nestedform
+    form: $/october/demo/models/profile/fields.yaml
+```
+
+Option | Description
+------------- | -------------
+**form** | a reference to form field definition file, see [backend form fields](#oc-defining-form-fields). Inline fields can also be used.
+**showPanel** | places the form inside a panel container. Default: true
+
+<a name="widget-recordfinder"></a>
+### Record Finder
+
+`recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.
+
+```yaml
+user:
+    label: User
+    type: recordfinder
+    list: ~/plugins/rainlab/user/models/user/columns.yaml
+    recordsPerPage: 10
+    title: Find Record
+    prompt: Click the Find button to find a user
+    nameFrom: name
+    descriptionFrom: email
+```
+
+Option | Description
+------------- | -------------
+**keyFrom** | the name of column to use in the relation used for key. Default: id.
+**nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
+**descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
+**title** | text to display in the title section of the popup.
+**prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
+**list** | a configuration array or reference to a list column definition file, see [list columns](lists.md#oc-defining-list-columns).
+**recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
+**conditions** | specifies a raw where query statement to apply to the list model query.
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the list query always. The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
+**searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
+**searchScope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
+**useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: true. Disable to return just the selected model's ID
+**modelClass** | class of the model to use for listing records when useRelation = false
+
+<a name="widget-relation"></a>
+### Relation
+
+`relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
+
+```yaml
+categories:
+    label: Categories
+    type: relation
+    nameFrom: title
+```
+
+Alternatively, you may populate the label using a custom `select` statement. Any valid SQL statement works here.
+
+```yaml
+user:
+    label: User
+    type: relation
+    select: concat(first_name, ' ', last_name)
+```
+
+You can also provide a model scope to use to filter the results with the `scope` property.
+
+```yaml
+user:
+    label: User
+    type: relation
+    scope: withTrashed
+```
+
+If the controller implements the [Relation Controller behavior](../backend/relations.md#configuring-the-relation-behavior) and the field is defined there, then it will be displayed using this definition. Set the `useController` property to false to disable this functionality.
+
+```yaml
+countries:
+    label: Categories
+    type: relation
+    useController: false
+```
+
+Option | Description
+------------- | -------------
+**nameFrom** | a model attribute name used for displaying the relation label. Default: name.
+**select** | a custom SQL select statement to use for the name.
+**order** | an order clause to sort options by. Example: `name desc`.
+**emptyOption** | text to display when there is no available selections.
+**scope** | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the **related form model** to apply to the list query always.
+**useController** | display the field using integration with [RelationController behavior](../backend/relations.md#configuring-the-relation-behavior). Default: `true`
+
+<a name="widget-repeater"></a>
+### Repeater
+
+`repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../database/model.md#oc-supported-properties).
+
+```yaml
+extra_information:
+    type: repeater
+    titleFrom: title_when_collapsed
+    form:
+        fields:
+            added_at:
+                label: Date added
+                type: datepicker
+            details:
+                label: Details
+                type: textarea
+            title_when_collapsed:
+                label: This field is the title when collapsed
+                type: text
+```
+
+Option | Description
+------------- | -------------
+**form** | a reference to form field definition file, see [backend form fields](#oc-defining-form-fields). Inline fields can also be used.
+**prompt** | text to display for the create button. Default: Add new item.
+**displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
+**itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
+**titleFrom** | name of field within items to use as the title for the collapsed item.
+**minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set `minItems: 1` the first row will be displayed and not hidden.
+**maxItems** | maximum number of items to allow within the repeater.
+**groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
+**groupKeyFrom** | the group key attribute stored along with the saved data. Default: `_group`
+**showReorder** | displays an interface for sorting items. Default: true
+**showDuplicate** | displays an interface for cloning items. Default: true
+
+The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
+
+```yaml
+content:
+    type: repeater
+    prompt: Add content block
+    groups: $/acme/blog/config/repeater_fields.yaml
+```
+
+This is an example of a group configuration file, which would be located in **/plugins/acme/blog/config/repeater_fields.yaml**. Alternatively these definitions could be specified inline with the repeater.
+
+```yaml
+textarea:
+    name: Textarea
+    description: Basic text field
+    icon: icon-file-text-o
+    fields:
+        text_area:
+            label: Text Content
+            type: textarea
+            size: large
+
+quote:
+    name: Quote
+    description: Quote item
+    icon: icon-quote-right
+    fields:
+        quote_position:
+            span: auto
+            label: Quote Position
+            type: radio
+            options:
+                left: Left
+                center: Center
+                right: Right
+        quote_content:
+            span: auto
+            label: Details
+            type: textarea
+```
+
+Each group must specify a unique key and the definition supports the following options.
+
+Option | Description
+------------- | -------------
+**name** | the name of the group.
+**description** | a brief description of the group.
+**icon** | defines an icon for the group, optional.
+**fields** | form fields belonging to the group, see [backend form fields](#oc-defining-form-fields).
+
+> **Note**: The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
+
+<a name="widget-richeditor"></a>
+### Rich editor / WYSIWYG
+
+`richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.
+
+```yaml
+html_content:
+    type: richeditor
+    toolbarButtons: bold|italic
+    size: huge
+```
+
+Option | Description
+------------- | -------------
+**toolbarButtons** | which buttons to show on the editor toolbar.
+
+The available toolbar buttons are:
+
+```
+fullscreen, bold, italic, underline, strikeThrough, subscript, superscript, fontFamily, fontSize, |, color, emoticons, inlineStyle, paragraphStyle, |, paragraphFormat, align, formatOL, formatUL, outdent, indent, quote, insertHR, -, insertLink, insertImage, insertVideo, insertAudio, insertFile, insertTable, undo, redo, clearFormatting, selectAll, html
+```
+
+> **Note**: `|` will insert a vertical separator line in the toolbar and `-` a horizontal one.
+
+<a name="widget-sensitive"></a>
+### Sensitive
+
+`sensitive` - renders a revealable password field that can be used for sensitive information such as API keys or secrets, configuration values, etc. A sensitive field can be toggled visible and hidden at the user's request.
+
+A sensitive field that contains a previously entered value will have the value replaced with a placeholder value on load, preventing the value from being guessed by length or copied. Upon revealing the value, the original value is retrieved by AJAX and populated into the field.
+
+```yaml
+api_secret:
+    type: sensitive
+    allowCopy: false
+    hideOnTabChange: true
+```
+
+Option | Description
+------------- | -------------
+**mode** | display mode for the widget, either textarea or text. Default: text
+**allowCopy** | adds a "copy" action to the sensitive field, allowing the user to copy the password without revealing it. Default: true
+**hiddenPlaceholder** | sets the placeholder text that is used to simulate a hidden, unrevealed value. You can change this to a long or short string to emulate different length values. Default: `__hidden__`
+**hideOnTabChange** | if true, the sensitive field will automatically be hidden if the user navigates to a different tab, or minimizes their browser. Default: true
+
+<a name="widget-taglist"></a>
+### Tag list
+
+`taglist` - renders a field for inputting a list of tags.
+
+```yaml
+tags:
+    type: taglist
+    separator: space
+```
+
+A tag list support the same methods for defining the options as the [dropdown field type](#field-dropdown).
+
+```yaml
+tags:
+    type: taglist
+    options:
+        - Red
+        - Blue
+        - Orange
+```
+
+You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../database/relations#oc-many-to-many). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+
+```yaml
+tags:
+    type: taglist
+    mode: relation
+```
+
+Option | Description
+------------- | -------------
+**mode** | controls how the value is returned, either string, array or relation. Default: string
+**separator** | separate tags with the specified character, either comma or space. Default: comma
+**customTags** | allows custom tags to be entered manually by the user. Default: true
+**options** | specifies a method or array for predefined options. Set to true to use model `get*Field*Options` method. Optional.
+**nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: name
+**useKey** | use the key instead of value for saving and reading data. Default: false
 
 ## Form Views
 
