@@ -3,7 +3,7 @@ subtitle: Adds resource configuration to a page, including variables and assets.
 ---
 # Resources
 
-The `resources` component can create new variables, add headers and inject assets to the page.
+The `resources` component can create new variables, add headers and inject assets to the page. The resources component can be used on any page, layout or partial.
 
 ## Available Properties
 
@@ -19,8 +19,6 @@ Property | Description
 **headers** | Includes headers with the page response.
 
 ## Basic Usage
-
-The following adds the resources component to the page. The resources component can be used on any page, layout or partial.
 
 The following example uses the `vars` property to create a new variable called **activeNav** and this variable becomes available to the page life-cycle, this includes layouts for that page or partials that are used on the page. The variable is accessed using the `{{ activeNav }}` Twig variable.
 

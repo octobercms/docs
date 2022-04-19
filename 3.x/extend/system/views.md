@@ -10,10 +10,10 @@ Views reside in a directory that shares the same name as the controller.
 |   └── acme
 |       └── blog
 |           ├── controllers
-|           |   ├── users                _<== View Directory_
-|           |   |   ├── `_partial.htm`     _<== Partial File_
-|           |   |   └── `index.htm`        _<== View File_
-|           |   └── Users.php            _<== Controller Class_
+|           |   ├── users  _← View Directory_
+|           |   |   ├── `_partial.htm`  _← Partial File_
+|           |   |   └── `index.htm`  _← View File_
+|           |   └── Users.php  _← Controller Class_
 |           └── Plugin.php
 :::
 

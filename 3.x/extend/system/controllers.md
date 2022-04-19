@@ -12,11 +12,11 @@ Each controller is represented with a PHP script which resides in the the **/con
 |   └── acme
 |       └── blog
 |           ├── `controllers`
-|           |   ├── users                _<== View Directory_
-|           |   |   ├── _partial.htm     _<== Partial File_
-|           |   |   ├── config_form.yaml _<== Config File_
-|           |   |   └── index.htm        _<== View File_
-|           |   └── Users.php            _<== Controller Class_
+|           |   ├── users  _← View Directory_
+|           |   |   ├── _partial.htm  _← Partial File_
+|           |   |   ├── config_form.yaml  _← Config File_
+|           |   |   └── index.htm  _← View File_
+|           |   └── Users.php  _← Controller Class_
 |           └── Plugin.php
 :::
 
@@ -33,7 +33,7 @@ namespace Acme\Blog\Controllers;
 
 class Posts extends \Backend\Classes\Controller
 {
-    public function index()    // <=== Action method
+    public function index()    // ← Action method
     {
 
     }
@@ -85,7 +85,7 @@ public function beforeDisplay()
 
 ## Actions, Views and Routing
 
-Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Back-end view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
+Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
 
 ```html
 <h1>Hello World</h1>

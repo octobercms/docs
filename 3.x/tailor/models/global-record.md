@@ -5,6 +5,8 @@ subtitle: The model returned when looking up a global blueprint.
 
 The `Tailor\Models\GlobalRecord` model is used to store content for a global.
 
+## Available Attributes
+
 In addition to the defined form fields, the following attributes can be found on the retrieved model.
 
 Attribute | Description

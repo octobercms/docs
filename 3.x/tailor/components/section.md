@@ -3,7 +3,7 @@ subtitle: Define a content section that links to a specific entry.
 ---
 # Section
 
-The `section` component defines a website section with a supporting entry.
+The `section` component defines a website section with a supporting entry. This section will be used when previewing the entry from the backend panel.
 
 ## Available Properties
 
@@ -18,9 +18,7 @@ Property | Description
 
 ## Basic Usage
 
-The following creates a section for the **Blog\Author** entry and locates it using the `:slug` routing parameter. This page will be used when previewing the blog authors in the backend panel.
-
-The component is assigned a name **author** using the component alias and this is the variable name that becomes available to the page. The author name is displayed as a title by accessing the `{{ author.title }}` Twig variable.
+The following creates a section for the **Blog\Author** entry and locates it using the `:slug` routing parameter. The component is assigned a name **author** using the component alias and this is the variable name that becomes available to the page. The author name is displayed as a title by accessing the `{{ author.title }}` Twig variable.
 
 ```ini
 url = "author/:slug"
