@@ -17,12 +17,11 @@ Attribute | Description
 **title** | A title descriptor for the entry, for example, **My Blog Post**.
 **slug** | A slug identifier for the entry, for example, `my-blog-post`.
 **is_enabled** | Determines if the entry is currently visible.
-**published_at** | The published date for the entry.
 **created_at** | The creation date for the entry.
 **updated_at** | The last updated date for the entry.
-**published_at_date** | The published date, or the creation date, if none is specified.
 **expired_at** | The expiry date for the entry.
-**draft_mode** | A special flag for determining the draft status.
+**published_at** | The published date for the entry.
+**published_at_date** | The published date, or if none is specified, the creation date.
 
 ### Structure Entries
 
@@ -31,7 +30,8 @@ If an entry type is a `structure`, it will have some extra attributes.
 Attribute | Description
 -------- | -------------
 **fullslug** | A slug identifier that includes parent slugs, for example, `parent-slug/child-slug`.
-**parent_id** | The Primary Key of the parent record.
+**parent** | The parent record for this entry, if available.
+**children** | The child records for this entry, if available.
 
 ### Stream Entries
 
