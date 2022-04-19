@@ -256,6 +256,12 @@
         - components/collection
         - components/global
         - components/resources
+-
+    title: Models
+    collapsable: false
+    children:
+        - models/entry-record
+        - models/global-record
 
 #
 # Frontend Nav

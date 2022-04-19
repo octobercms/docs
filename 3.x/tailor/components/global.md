@@ -16,3 +16,9 @@ Accessing a global property.
     <p>{{ blogConfig.about_this_blog }}</p>
 {% endif %}
 ```
+
+The following properties are supported by the component.
+
+Property | Description
+-------- | -------------
+**handle** | The handle of the [global blueprint](../blueprints/global.md).

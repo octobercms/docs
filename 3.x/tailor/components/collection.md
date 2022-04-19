@@ -16,3 +16,9 @@ Looping over the entries.
     <h1>{{ post.title }}</h1>
 {% endfor %}
 ```
+
+The following properties are supported by the component.
+
+Property | Description
+-------- | -------------
+**handle** | The handle of the [entry blueprint](../blueprints/entry.md).
