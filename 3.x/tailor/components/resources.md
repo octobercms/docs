@@ -1,3 +1,6 @@
+---
+subtitle: Adds resource configuration to a page, including variables and assets.
+---
 # Resources
 
 Reference assets and variables included on this page.

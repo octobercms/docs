@@ -1,3 +1,6 @@
+---
+subtitle: Easily define settings and globally available content.
+---
 # Global
 
 Globals are used to define globally available content for your website. The field values are often used in [CMS layouts](../cms/layouts) and contain settings, such as social networking links.

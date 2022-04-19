@@ -1,3 +1,6 @@
+---
+subtitle: Learn how Tailor can transform the way you design content.
+---
 # Introduction
 
 Tailor is a feature that defines file-based content structures used by your website, such as a company blog or team page. Tailor automatically generates a backend user interface for managing records and provides CMS Components for displaying and linking records on the frontend.
@@ -32,7 +35,11 @@ type: entry
 name: Post
 ```
 
-The blueprint **handle** is a human readible approach to referencing a blueprint object. Using the above blueprint as a reference, we can reference the entries using the handle. Handles follow the PHP naming convention for namespaces and can be organised with the backslash `\` separator.
+The blueprint **handle** is a human readible approach to referencing a blueprint object. Using the above blueprint as a reference, we can reference the entries using the handle.
+
+::: tip
+Handles follow a similar naming convention to PHP namespaces and can be organised with the backslash `\` separator.
+:::
 
 ```ini
 [section blog]

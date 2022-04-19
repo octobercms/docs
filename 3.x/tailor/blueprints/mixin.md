@@ -1,3 +1,6 @@
+---
+subtitle: Reuse content field definitions over and over again.
+---
 # Mixin
 
 Mixins are groups of fields that are used to avoid repetition when defining content structures. For example, a Location field may be used in several places, yet we can define it once using a mixin definition.

@@ -1,6 +1,9 @@
+---
+subtitle: Learn about using Twig templating to display dynamic content.
+---
 # Templating
 
-October extends the [Twig template language](https://twig.symfony.com/doc/) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
+October CMS extends the [Twig template language](https://twig.symfony.com/doc/) with a number of functions, tags, filters and variables. These extensions allow you to use the CMS features and access the page environment information inside your templates.
 
 ## Variables
 

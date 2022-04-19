@@ -1,3 +1,6 @@
+---
+subtitle: Display multiple content entries on the page.
+---
 # Collection
 
 Displays a collection of entries.

@@ -1,3 +1,6 @@
+---
+subtitle: Include new menu items in the backend panel for managing content.
+---
 # Defining Navigation
 
 In the backend area, entries will be listed under the Content menu item with globals listed under the Settings menu item (by default). You may control this behavior using the **navigation** property in the blueprint file. The following code will set an icon and specify the order of appearance.

@@ -1,3 +1,6 @@
+---
+subtitle: Define a content section that links to a specific entry.
+---
 # Section
 
 Defines a website section with a supporting entry.

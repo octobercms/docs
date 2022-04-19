@@ -1,3 +1,6 @@
+---
+subtitle: The basic building block for content.
+---
 # Entry
 
 An entry blueprint is the standard content structure used to define areas of your website. The content structures and entries can be organised in different ways as we describe in more detail here.

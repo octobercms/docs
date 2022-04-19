@@ -1,3 +1,6 @@
+---
+subtitle: Make a global blueprint available to the page or layout.
+---
 # Global
 
 Makes globals available to the page.
