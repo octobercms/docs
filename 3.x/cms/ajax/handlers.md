@@ -105,7 +105,7 @@ throw new AjaxException([
 
 ## Running Code Before Handlers
 
-Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [page execution life cycle](../cms/layouts.md#oc-dynamic-layouts) allows code to run before every AJAX handler.
+Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [Layout Execution Life Cycle](../../cms/themes/layouts.md) allows code to run before every AJAX handler.
 
 ```php
 function onInit()

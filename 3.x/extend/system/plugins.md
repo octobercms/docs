@@ -7,14 +7,14 @@ subtitle: The foundation for adding new features to the CMS by extending it.
 Plugins are identified with a unique code, for example, a plugin called `Acme.Blog` is found in the directory **plugins/acme/blog**.
 :::
 
-This article describes plugins and their registration functions. The registration process allows plugins to declare their features such as [components](components.md) or backend menus and pages. Here are some examples of what a plugin can do.
+This article describes plugins and their registration functions. The registration process allows plugins to declare their features such as CMS components or backend navigation and pages. Here are some examples of what a plugin can do.
 
-1. Define [components](components.md).
-1. Define [user permissions](../backend/users.md).
-1. Add [settings pages](settings.md#oc-backend-settings-pages), [menu items](#oc-navigation-menus), [lists](../backend/lists.md) and [forms](../backend/forms.md).
-1. Create [database table structures and seed data](updates.md).
-1. Alter [functionality of the core or other plugins](events.md).
-1. Provide classes, [backend controllers](../backend/controllers-ajax), views, assets, and other files.
+1. Create database table structures and seed data.
+1. Define [CMS components](../cms-components.md).
+1. Define [user permissions](../backend/permissions.md).
+1. Add [settings pages](../settings/settings.md), [navigation items](../backend/navigation.md), [lists](../lists/list-controller.md) and [forms](../forms/form-controller.md).
+1. Alter [functionality of the core or other plugins](../extending.md).
+1. Provide classes, [backend controllers](../system/controllers.md), views, assets and other files.
 
 ### Directory Structure
 
@@ -22,17 +22,17 @@ Plugins reside in the **plugins** directory of the application directory. An exa
 
 ::: dir
 ├── `plugins`
-|   └── acme _<== Author Name_
-|       └── blog _<== Plugin Name_
+|   └── acme  _← Author Name_
+|       └── blog  _← Plugin Name_
 |           ├── classes
 |           ├── components
 |           ├── controllers
 |           ├── models
 |           ├── updates
-|           └── Plugin.php _<== Registration File_
+|           └── Plugin.php  _← Registration File_
 :::
 
-Not all plugin directories are required. The only required file is the **Plugin.php** described below. If your plugin provides only a single [component](components.md), your plugin directory could be much simpler, like this:
+Not all plugin directories are required. The only required file is the **Plugin.php** described below. If your plugin provides only a single component, your plugin directory could be much simpler, like this.
 
 ::: dir
 ├── plugins
@@ -41,8 +41,6 @@ Not all plugin directories are required. The only required file is the **Plugin.
 |           ├── `components`
 |           └── Plugin.php
 :::
-
-> **Note**: if you are developing a plugin for the [Marketplace](https://octobercms.com/help/site/marketplace), the [updates/version.yaml](updates.md) file is required.
 
 <a id="oc-plugin-namespaces"></a>
 ### Plugin Namespaces
@@ -194,7 +192,9 @@ v2.0.0: Important update
 v2.0.1: Latest version
 ```
 
-> **Note**: The `version.yaml` file should always use the first line for a text update that describes the changes and the remaining lines for update scripts. For more verbose updates, consider using a dedicated changelog file.
+::: tip
+The `version.yaml` file should always use the first line for a text update that describes the changes and the remaining lines for update scripts. For more verbose updates, consider using a dedicated changelog file.
+:::
 
 As you can see above, there should be a key that represents the version number followed by the update message, which is either a string or an array containing update messages. For updates that refer to migration or seeding files, lines that are script file names can be placed in any position. An example of a comment with no associated update files.
 
@@ -239,33 +239,5 @@ use October\Rain\Database\Updates\Migration;
 class SomeUpgradeFile extends Migration
 {
     ///
-}
-```
-
-## Registering Middleware
-
-To register a custom middleware, you can extend a Controller class by using the following method.
-
-```php
-public function boot()
-{
-    \Cms\Classes\CmsController::extend(function($controller) {
-        $controller->middleware(\Path\To\Custom\Middleware::class);
-    });
-}
-```
-
-Alternatively, you can push it directly into the Kernel via the following.
-
-```php
-public function boot()
-{
-    // Add a new middleware to beginning of the stack.
-    $this->app[\Illuminate\Contracts\Http\Kernel::class]
-            ->prependMiddleware('Path\To\Custom\Middleware');
-
-    // Add a new middleware to end of the stack.
-    $this->app[\Illuminate\Contracts\Http\Kernel::class]
-            ->pushMiddleware('Path\To\Custom\Middleware');
 }
 ```

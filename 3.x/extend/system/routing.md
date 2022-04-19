@@ -1,7 +1,7 @@
 ---
 subtitle: Useful for defining fixed APIs and endpoints.
 ---
-# Routing
+# Routing & Middleware
 
 While routing is handled automatically for the [backend controllers](../system/controllers.md) and CMS pages define their own URL routes in their [page configuration](../../cms/themes/pages.md). Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router.md).
 
@@ -234,6 +234,34 @@ Route::middleware(['Path\To\Your\Middleware'])->group(function() {
 ```
 
 You can of course add more than one middleware in a group, just one is used in the above examples for convenience.
+
+## Global Middleware
+
+To register a global middleware, you can extend the `Cms\Classes\CmsController` or `Backend\Classes\BackendController` controller class by using the following method.
+
+```php
+public function boot()
+{
+    \Cms\Classes\CmsController::extend(function($controller) {
+        $controller->middleware(\Path\To\Custom\Middleware::class);
+    });
+}
+```
+
+Alternatively, you can push it directly into the Kernel via the `boot()` registration method.
+
+```php
+public function boot()
+{
+    // Add a new middleware to beginning of the stack.
+    $this->app[\Illuminate\Contracts\Http\Kernel::class]
+            ->prependMiddleware('Path\To\Custom\Middleware');
+
+    // Add a new middleware to end of the stack.
+    $this->app[\Illuminate\Contracts\Http\Kernel::class]
+            ->pushMiddleware('Path\To\Custom\Middleware');
+}
+```
 
 ## Throwing 404 Errors
 

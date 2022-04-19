@@ -3,7 +3,7 @@ subtitle: Similar to partials but used for static content.
 ---
 # Content Blocks
 
-Content Blocks can be text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that are edited separately from the page or layout. They're designed to hold static content only and support basic templating variables. [Partials](partials.md) are more flexible and should be used for generating dynamic content.
+Content Blocks can be text, HTML or [Markdown](http://daringfireball.net/projects/markdown/syntax) blocks that are edited separately from the page or layout. They're designed to hold static content only and support basic templating variables. [Partials](./partials.md) are more flexible and should be used for generating dynamic content.
 
 ## Introduction
 
@@ -19,7 +19,7 @@ The extension affects a content block's display mode in the back-end user interf
 
 ## Rendering Content Blocks
 
-Use the `{% content 'file.htm' %}` tag to render a content block in a [page](pages.md), [partial](partials.md) or [layout](layouts.md).
+Use the `{% content 'file.htm' %}` tag to render a content block in a [page](./pages.md), [partial](./partials.md) or [layout](./layouts.md).
 
 This example shows a complete page rendering a content block.
 
@@ -37,7 +37,6 @@ Another example rendering some markdown with the `md` extension.
 {% content 'my-markdown.md' %}
 ```
 
-<a id="oc-passing-variables-to-content-blocks"></a>
 ## Passing Variables to Content Blocks
 
 Sometimes you may need to pass variables to a content block from the external code. While content blocks do not support Twig markup, they do support using variables with basic syntax. You can pass variables to content blocks by specifying them after the content block name in the `{% content %}` tag.
@@ -54,7 +53,9 @@ Inside the content block, variables can be accessed using singular *curly bracke
 <h1>This is a demo for {name}</h1>
 ```
 
-> **Tip**: More information on variable use can be found [in the Markup guide](../markup/tag-content.md).
+::: tip
+More information on variable use can be found in the [Markup guide](../../markup/tag/content.md).
+:::
 
 ### Global Variables
 
@@ -64,8 +65,14 @@ You may register variables that are globally available to all content blocks wit
 View::share('site_name', 'October CMS');
 ```
 
-A common area to place this method is inside the register or boot method of a [plugin registration file](../plugin/registration.md). Using the above example, the variable `{site_name}` will be available inside all content blocks.
+A common area to place this method is inside the register or boot method of a [plugin registration file](../../extend/system/plugins.md). Using the above example, the variable `{site_name}` will be available inside all content blocks.
 
 ```
 <p>Welcome to {site_name}</p>
 ```
+
+#### See Also
+
+::: also
+* [Content Twig Tag](../../markup/tag/content.md)
+:::

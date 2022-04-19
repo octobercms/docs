@@ -28,7 +28,7 @@ You can also use Markdown syntax:
 {% content "changelog.md" %}
 ```
 
-Content blocks can also be used in combination with [layout placeholders](../cms/layouts.md#oc-placeholders):
+Content blocks can also be used in combination with [layout placeholders](../../cms/themes/layouts.md).
 
 ```twig
 {% put sidebar %}

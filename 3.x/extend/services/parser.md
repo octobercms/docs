@@ -83,7 +83,7 @@ The Twig parser can be extended to register custom features via [the plugin regi
 
 ## Bracket Parser
 
-October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../cms/content.md#oc-passing-variables-to-content-blocks). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
+October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../../cms/themes/content.md). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
 
 ```php
 use October\Rain\Parse\Bracket;

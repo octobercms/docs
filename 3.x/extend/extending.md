@@ -13,23 +13,23 @@ Method | Description
 ------------- | -------------
 **register()** | called when the plugin is first registered, called before `boot`.
 **boot()** | called right before the request route, called after `register`.
-**registerMarkupTags()** | registers [additional markup tags](../extend/twig-tags.md) that can be used in the CMS.
-**registerComponents()** | registers any [front-end components](components#oc-component-registration) used by this plugin.
-**registerNavigation()** | registers [backend navigation menu items](#oc-navigation-menus) for this plugin.
-**registerPermissions()** | registers any [backend permissions](../backend/users#oc-registering-permissions) used by this plugin.
-**registerSettings()** | registers any [backend configuration links](settings#oc-settings-link-registration) used by this plugin.
-**registerFormWidgets()** | registers any [backend form widgets](../backend/widgets#oc-form-widget-registration) supplied by this plugin.
-**registerReportWidgets()** | registers any [backend report widgets](../backend/widgets#oc-report-widget-registration), including the dashboard widgets.
-**registerListColumnTypes()** | registers any [custom list column types](../backend/lists.md#oc-custom-column-types) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerSchedule()** | registers [scheduled tasks](../plugin/scheduling.md#oc-defining-schedules) that are executed on a regular basis.
+**registerMarkupTags()** | registers [additional markup tags](./twig-tags.md) that can be used in the CMS.
+**registerComponents()** | registers any [CMS components](./cms-components.md) used by this plugin.
+**registerNavigation()** | registers [backend navigation menu items](./backend/navigation.md) for this plugin.
+**registerPermissions()** | registers any [backend permissions](./backend/permissions.md) used by this plugin.
+**registerSettings()** | registers any [backend configuration links](./settings/settings.md) used by this plugin.
+**registerFormWidgets()** | registers any [backend form widgets](./forms/form-widgets.md) supplied by this plugin.
+**registerReportWidgets()** | registers any [backend report widgets](./backend/report-widgets.md), including the dashboard widgets.
+**registerListColumnTypes()** | registers any [custom list column types](./lists/list-controller.md) supplied by this plugin.
+**registerMailLayouts()** | registers any [mail view layouts](./system/sending-mail.md) supplied by this plugin.
+**registerMailTemplates()** | registers any [mail view templates](./system/sending-mail.md) supplied by this plugin.
+**registerMailPartials()** | registers any [mail view partials](./system/sending-mail.md) supplied by this plugin.
+**registerSchedule()** | registers [scheduled tasks](./system/scheduling.md) that are executed on a regular basis.
 **registerContentFields()** | registers [content fields](../extend/tailor-fields.md) that are used by Tailor blueprints.
 
 ## Extending with Events
 
-The [Event service](../services/events.md) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
+The [Event service](./services/event.md) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
 
 ### Subscribing to Events
 
@@ -211,7 +211,9 @@ Event::listen('backend.form.extendFields', function($widget) {
 });
 ```
 
-> **Note**: You may also use the `backend.form.extendFieldsBefore` event to add fields.
+::: tip
+You may also use the `backend.form.extendFieldsBefore` event to add fields.
+:::
 
 ### Extending a Backend List
 
@@ -262,7 +264,7 @@ class Topic extends ComponentBase
 }
 ```
 
-Next this will demonstrate how to hook to this new event from inside the [page execution life cycle](../cms/layouts.md#oc-dynamic-layouts). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
+Next this will demonstrate how to hook to this new event from inside the [Layout Execution Life Cycle](../cms/themes/layouts.md). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
 ```
 [topic]

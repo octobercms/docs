@@ -2,7 +2,7 @@
 
 ## Basic Responses
 
-A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [layout execution life cycle](../cms/layouts.md#oc-dynamic-layouts) and [AJAX handler definitions](../ajax/handlers.md).
+A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [Layout Execution Life Cycle](../../cms/themes/layouts.md) and [AJAX handler definitions](../../cms/ajax/handlers.md).
 
 #### Returning strings from a CMS method
 

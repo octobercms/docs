@@ -3,11 +3,13 @@ subtitle: Configurable building blocks that can be attached to any page, partial
 ---
 # Components
 
-Components are key features of October. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+Components are key features of October CMS. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
-This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../plugin/components.md) as part of plugins.
+This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../../extend/cms-components.md) as part of plugins.
 
-> **Note**: Using components inside partials has limited functionality, this is described in more detail in the [dynamic partials](partials.md#oc-dynamic-partials) article.
+::: warning
+Using components inside partials has limited functionality, this is described in more detail in the [Dynamic Partials section](./partials.md) of the documentation.
+:::
 
 ## Introduction
 
@@ -118,7 +120,7 @@ In the October back-end you can use the Inspector tool for assigning external va
 <a id="oc-passing-variables-to-components"></a>
 ## Passing Variables to Components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md#oc-passing-variables-to-partials), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including [external property values](#oc-using-external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including [external property values](#oc-using-external-property-values).
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 

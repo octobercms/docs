@@ -22,7 +22,7 @@ function onStart()
 }
 ```
 
-You can also inject raw markup to the `{% scripts %}` tag by using the **scripts**  anonymous [placeholder](../cms/layouts.md#oc-placeholders). Use the `{% put %}` tag in pages or layouts to add content to the placeholder:
+You can also inject raw markup to the `{% scripts %}` tag by using the **scripts** anonymous placeholder [in the layout](../../cms/themes/layouts.md). Use the `{% put %}` tag in pages or layouts to add content to the placeholder.
 
 ```twig
 {% put scripts %}
