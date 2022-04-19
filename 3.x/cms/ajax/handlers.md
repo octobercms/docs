@@ -2,7 +2,7 @@
 
 ## AJAX Handlers
 
-AJAX event handlers are PHP functions that can be defined in the page or layout [PHP section](../cms/themes.md#oc-php-section) or inside [components](../cms/components.md). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials.md) as part of the AJAX request.
+AJAX event handlers are PHP functions that can be defined in the page or layout PHP section or [inside components](../themes/components.md). Handler names should have the following pattern: `onName`. All handlers support the use of [updating partials](../ajax/update-partials.md) as part of the AJAX request.
 
 ```php
 function onSubmitContactForm()

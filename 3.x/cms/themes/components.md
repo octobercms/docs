@@ -11,7 +11,7 @@ This article describes the components basics and doesn't explain how to use [com
 
 ## Introduction
 
-If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the [Configuration](themes.md#oc-configuration-section) section of the template file. The next example demonstrates how to add a demo To-do component to a page:
+If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the configuration section of the template file. The next example demonstrates how to add a demo To-Do component to a page.
 
 ```ini
 title = "Components demonstration"
@@ -97,7 +97,7 @@ maxItems = {{ data.maxItems }}
 ```
 
 ::: v-pre
-To load a property value from the URL parameter, use the `{{ :paramName }}` syntax, where the name starts with a colon (`:`), for example:
+To load a property value from the URL parameter, use the `{{ :paramName }}` syntax, where the name starts with a colon (`:`), for example.
 :::
 
 ```ini
@@ -107,7 +107,7 @@ maxItems = {{ :maxItems }}
 ...
 ```
 
-The page, the component belongs to, should have a corresponding [URL parameter](pages.md#oc-url-syntax) defined:
+The page that the component belongs to should have a corresponding [URL parameter](pages.md) defined.
 
 ```ini
 url = "/todo/:maxItems"

@@ -197,3 +197,9 @@ public function extendDatabaseTable($table)
     $table->mediumText($this->fieldName)->nullable();
 }
 ```
+
+#### See Also
+
+::: also
+* [Tailor Content Fields](../tailor/content-fields.md)
+:::

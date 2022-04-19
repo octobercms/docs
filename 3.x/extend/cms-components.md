@@ -246,7 +246,7 @@ public function getPostPageOptions()
 
 ## Routing Parameters
 
-Components can directly access routing parameter values defined in the [URL of the page](../cms/pages.md#oc-url-syntax).
+Components can directly access routing parameter values defined in the [URL of the page](../cms/themes/pages.md).
 
 ```php
 // Returns the URL segment value, eg: /page/:post_id
@@ -303,7 +303,7 @@ public function onRun()
 
 ### Page Execution Life Cycle Handlers
 
-When a page loads, October executes handler functions that could be defined in the layout and page [PHP section](../cms/themes.md#oc-php-section) and component classes. The sequence the handlers are executed is following:
+When a page loads, October executes handler functions that could be defined in the layout and page PHP section and component classes. The sequence the handlers are executed is as follows.
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.
@@ -497,7 +497,7 @@ public function onRun()
 <a id="oc-injecting-page-assets-with-components"></a>
 ## Injecting Page Assets with Components
 
-Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method. Please read more details about [injecting assets in the Pages article](../cms/pages.md#oc-injecting-page-assets-programmatically). Example:
+Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method.
 
 ```php
 public function onRun()

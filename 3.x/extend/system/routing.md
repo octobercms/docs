@@ -3,7 +3,7 @@ subtitle: Useful for defining fixed APIs and endpoints.
 ---
 # Routing
 
-While routing is handled automatically for the [backend controllers](../backend/controllers-ajax.md) and CMS pages define their own URL routes in their [page configuration](../cms/pages.md#oc-configuration). Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router.md).
+While routing is handled automatically for the [backend controllers](../system/controllers.md) and CMS pages define their own URL routes in their [page configuration](../../cms/themes/pages.md). Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router.md).
 
 ::: dir
 ├── plugins

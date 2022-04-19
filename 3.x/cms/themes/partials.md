@@ -11,7 +11,7 @@ Partial templates files reside in the **partials** directory in your theme. Part
 <p>This is a partial</p>
 ```
 
-A [Configuration](themes.md#oc-configuration-section) section is optional for partials and can contain the optional **description** parameter which is displayed in the backend user interface. This example shows a partial with a description defined.
+A configuration section is optional for partials and can contain the optional **description** parameter that is displayed in the backend user interface. This example shows a partial with a description defined.
 
 ```twig
 description = "Demo partial"
@@ -104,7 +104,7 @@ The **card** partial is composed of two content areas and an image variable.
 <a id="oc-dynamic-partials"></a>
 ## Dynamic Partials
 
-Partials, like pages, can use any Twig features. Please refer to the [Dynamic pages](pages.md#oc-dynamic-pages) documentation for details.
+Partials, like pages, can use any Twig features. Please refer to the [Dynamic Pages section](pages.md) of the documentation for details.
 
 ### Partial Execution Life Cycle
 

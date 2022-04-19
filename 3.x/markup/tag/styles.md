@@ -13,7 +13,7 @@ The `{% styles %}` tag renders CSS links to stylesheet files injected by the app
 
 ## Injecting styles
 
-Links to StyleSheet files can be injected in PHP either by [components](../plugin/components.md#oc-injecting-page-assets-with-components) or [pages programmatically](../cms/pages.md#oc-injecting-page-assets-programmatically).
+Links to StyleSheet files can be programmatically injected in PHP either by [components](../../extend/cms-components.md) or [pages](../../cms/themes/pages.md).
 
 ```php
 function onStart()
