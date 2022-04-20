@@ -42,12 +42,10 @@ Not all plugin directories are required. The only required file is the **Plugin.
 |           └── Plugin.php
 :::
 
-<a id="oc-plugin-namespaces"></a>
 ### Plugin Namespaces
 
-Plugin namespaces are essential, especially if you are going to publish your plugins on the [October Marketplace](https://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
+Plugin namespaces are essential, especially if you are going to publish your plugins on the [October CMS Marketplace](https://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
 
-<a id="oc-registration-file"></a>
 ## Registration File
 
 The **Plugin.php** file, called the *plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
@@ -121,7 +119,6 @@ App::after({
 });
 ```
 
-<a id="oc-dependency-definitions"></a>
 ## Dependency Definitions
 
 A plugin can depend upon other plugins by defining a `$require` property in the plugin registration file, the property should contain an array of plugin names that are considered requirements. A plugin that depends on the **Acme.User** plugin can declare this requirement in the following way:
@@ -164,10 +161,10 @@ The change log is stored in a YAML file called `version.yaml` inside the **updat
 
 ### Plugin Dependencies
 
-Updates are applied in a specific order, based on the [defined dependencies in the plugin registration file](../plugin/registration.md#oc-dependency-definitions). Plugins that are dependant will not be updated until all their dependencies have been updated first.
+Updates are applied in a specific order, based on the defined dependencies in the plugin registration file. Plugins that are dependant will not be updated until all their dependencies have been updated first.
 
 ```php
-<?php namespace Acme\Blog;
+namespace Acme\Blog;
 
 class Plugin extends \System\Classes\PluginBase
 {
@@ -179,7 +176,7 @@ In the example above the **Acme.Blog** plugin will not be updated until the **Ac
 
 ## Plugin Version File
 
-The **version.yaml** file, called the *Plugin Version File*, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure.md) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](https://octobercms.com/help/site/marketplace). Here is an example of a plugin version file:
+The **version.yaml** file, called the Plugin Version File, contains the version comments and refers to database scripts in the correct order. Please read the [Database structure](../database/structure.md) article for information about the migration files. This file is required if you're going to submit the plugin to the [Marketplace](https://octobercms.com/help/site/marketplace). Here is an example of a plugin version file.
 
 ```yaml
 v1.0.1: First version
@@ -202,7 +199,6 @@ As you can see above, there should be a key that represents the version number f
 v1.0.1: A single comment that uses no update scripts.
 ```
 
-<a id="oc-important-updates"></a>
 ### Important Updates
 
 Sometimes a plugin needs to introduce features that will break websites already using the plugin. To prevent the changes from being deployed automatically, you should increase the **major** segment of the version string (`major.minor.patch`). An example of an important update comment is below.
@@ -213,7 +209,6 @@ v2.1.0: This is an important update from v1 that contains breaking changes.
 
 When tagging the new version `v2` from a version `v1` then the changes are not deployed as part of a regular update. The user must install the plugin again to receive the latest version via Composer.
 
-<a id="oc-migration-files"></a>
 ### Migration and Seed Files
 
 As previously described, updates also define when [migration and seed files](../database/structure.md) should be applied. An update line with a comment and updates:
@@ -241,3 +236,9 @@ class SomeUpgradeFile extends Migration
     ///
 }
 ```
+
+#### See Also
+
+::: also
+* [Database Migrations and Seeding](../database/structure.md)
+:::

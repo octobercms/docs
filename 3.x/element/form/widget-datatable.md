@@ -12,7 +12,9 @@ data:
     searching: false
 ```
 
-> **Note**: In order to use this with a model, the field should be defined in the [jsonable property](../database/model.md#oc-supported-properties) or anything that can handle storing as an array.
+::: tip
+In order to use this with a model, the field should be defined in the [jsonable property](../../extend/system/models.md) or anything that can handle storing as an array.
+:::
 
 #### Table configuration
 

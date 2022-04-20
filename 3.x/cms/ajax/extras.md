@@ -109,7 +109,6 @@ When any element contains the `data-attach-loading` attribute, the CSS class `oc
 </a>
 ```
 
-<a id="oc-flash-messages"></a>
 ## Flash Messages
 
 Specify the `data-request-flash` attribute on a form to enable the use of flash messages on successful AJAX requests.

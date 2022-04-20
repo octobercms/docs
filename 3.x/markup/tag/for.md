@@ -32,7 +32,7 @@ If the collection is empty, you can render a replacement block by using else:
 </ul>
 ```
 
-## Looping a collection
+## Looping a Collection
 
 If you do need to iterate over a collection of numbers, you can use the `..` operator:
 
@@ -60,7 +60,7 @@ The `..` operator can take any expression at both sides:
 {% endfor %}
 ```
 
-## Adding a condition
+## Adding a Condition
 
 Unlike in PHP there is no function to `break` or `continue` in a loop, however you can still filter the collection. The following example skips all the `users` which are not active:
 
@@ -72,7 +72,7 @@ Unlike in PHP there is no function to `break` or `continue` in a loop, however y
 </ul>
 ```
 
-## The loop variable
+## The Loop Variable
 
 Inside of a `for` loop block you can access some special variables:
 

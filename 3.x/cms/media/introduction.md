@@ -6,7 +6,7 @@ October CMS ships with a media manager built in, making it easy to publish large
 
 ## Linking to Media
 
-In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [filter](../markup/filter-media.md).
+In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [twig filter](../../markup/filter/media.md).
 
 ```twig
 {{ 'relative/path/to/asset.jpg'|media }}
@@ -15,7 +15,7 @@ In most cases the complete URL will be used when inserting media assets in to yo
 You may also generate URLs in PHP using the `MediaLibrary` class.
 
 ```php
-\Media\Classes\MediaLibrary::url('relative/path/to/asset.jpg');
+Media\Classes\MediaLibrary::url('relative/path/to/asset.jpg');
 ```
 
 ## Configuration Options
@@ -37,7 +37,7 @@ There are several options that allow you to fine-tune the Media Manager, which a
 'ignore_patterns' => ['^\..*'],
 ```
 
-The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](../media/providers.md) on using third party providers such as Amazon S3.
+The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](./providers.md) on using third party providers such as Amazon S3.
 
 #### SVG uploads are disabled by default
 
@@ -86,7 +86,7 @@ As the partials are written with Twig, you can automate adding alternative video
 
 ## Events
 
-The Media Manager provides a few [events](../services/events.md) that you can listen for in order to improve extensibility.
+The Media Manager provides [a few events](../../extend/extending.md) that you can listen for in order to improve extensibility.
 
 Event | Description | Parameters
 ------------- | ------------- | -------------
@@ -99,20 +99,20 @@ Event | Description | Parameters
 **file.move** | Called when a file is moved | `(string) $path`, `(string) $dest`
 **file.upload** | Called when a file is uploaded | `(string) $filePath`, `(\Symfony\Component\HttpFoundation\File\UploadedFile) $uploadedFile`
 
-To hook into these events, either extend the `Media\Widgets\MediaManager` class directly
+To hook into these events, either extend the `Media\Widgets\MediaManager` class directly.
 
 ```php
-\Media\Widgets\MediaManager::extend(function($widget) {
+Media\Widgets\MediaManager::extend(function($widget) {
     $widget->bindEvent('file.rename', function ($originalPath, $newPath) {
         // Update custom references to path here
     });
 });
 ```
 
-Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Media\Widgets\MediaManager` object as the first parameter)
+Or listen globally via the `Event` facade (each event is prefixed with `media.` and will be passed the instantiated `Media\Widgets\MediaManager` object as the first parameter).
 
 ```php
-\Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
+Event::listen('media.file.rename', function($widget, $originalPath, $newPath) {
     // Update custom references to path here
 });
 ```

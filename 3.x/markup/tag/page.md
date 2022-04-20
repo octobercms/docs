@@ -1,8 +1,8 @@
 # {% page %}
 
-The `{% page %}` tag renders the contents of a [page](../cms/pages.md) into a layout template.
+The `{% page %}` tag renders the contents of a [page](../../cms/themes/pages.md) into a layout template.
 
-See [layouts](../cms/layouts.md) for a basic example.
+See [layouts](../../cms/themes/layouts.md) for a basic example.
 
 The `{% page %}` tag parses the raw markup from a page template. A page template may inject content both into placeholder(s) as well as define raw markup.
 

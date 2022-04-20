@@ -95,7 +95,6 @@ require:
 
 When the theme is installed for the first time, the system will attempt to install the required plugins at the same time. For a streamlined experience, consider [adding these plugins to the composer depedency list](../../extend/resources/publishing-packages.md) as well.
 
-<a id="oc-theme-customization"></a>
 ## Theme Customization
 
 Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form field definitions](../../element/definitions.md) for more information.

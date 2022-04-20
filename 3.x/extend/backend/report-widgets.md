@@ -6,7 +6,7 @@ Report widgets can be used on the backend dashboard and in other backend report 
 
 ### Report Widget Classes
 
-The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#oc-plugin-namespaces). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
+The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../system/plugins.md). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
 ::: dir
 ├── `reportwidgets`

@@ -218,7 +218,7 @@ public function getStatusLabelAttribute()
 
 ### Nested Column Selection
 
-In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../database/model.md#oc-supported-properties). The only drawback of doing this is the column cannot use searchable or sortable options.
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../database/relations.md) column or a [jsonable array](../system/models.md). The only drawback of doing this is the column cannot use searchable or sortable options.
 
 ```yaml
 content[title]:

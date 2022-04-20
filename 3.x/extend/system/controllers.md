@@ -5,7 +5,7 @@ subtitle: Create pages that implement various features like forms and lists.
 
 The October CMS backend implements an Model-View-Controller (MVC) pattern. This article describes how to develop backend controllers and how to configure controller behaviors.
 
-Each controller is represented with a PHP script which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.htm` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
+Each controller is represented with a PHP script which resides in the the **/controllers** subdirectory of a Plugin directory. Controller views are `.php` files that reside in the controller view directory. The controller view directory name matches the controller class name written in lowercase. The view directory can also contain controller configuration files. An example of a controller directory structure:
 
 ::: dir
 ├── plugins
@@ -13,9 +13,9 @@ Each controller is represented with a PHP script which resides in the the **/con
 |       └── blog
 |           ├── `controllers`
 |           |   ├── users  _← View Directory_
-|           |   |   ├── _partial.htm  _← Partial File_
 |           |   |   ├── config_form.yaml  _← Config File_
-|           |   |   └── index.htm  _← View File_
+|           |   |   ├── _partial.php  _← Partial File_
+|           |   |   └── index.php  _← View File_
 |           |   └── Users.php  _← Controller Class_
 |           └── Plugin.php
 :::
@@ -26,7 +26,7 @@ For a practical example of using backend controllers, check out the [Beyond Beha
 
 ### Class Definition
 
-Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../plugin/registration.md#oc-plugin-namespaces). The most basic representation of a Controller used inside a Plugin looks like this.
+Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../system/plugins.md). The most basic representation of a Controller used inside a Plugin looks like this.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -58,7 +58,7 @@ Property | Description
 **$pageTitle** | sets the page title. Can be set in the action method.
 **$bodyClass** | body class property used for customizing the layout. Can be set in the controller constructor or action method.
 **$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
-**$layout** | specify a custom layout for the controller views (see [layouts](../backend/views-partials.md#oc-layouts-and-child-layouts)).
+**$layout** | specify a custom layout for the [controller views](../system/views.md).
 
 ## Initialization Logic
 
@@ -85,7 +85,7 @@ public function beforeDisplay()
 
 ## Actions, Views and Routing
 
-Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.htm** view file contents, corresponding to the **index** action method:
+Public controller methods, called **actions** are coupled to **view files** which represent the page corresponding the action. Backend view files use PHP syntax. Example of the **index.php** view file contents, corresponding to the `index` action method.
 
 ```html
 <h1>Hello World</h1>
@@ -120,7 +120,7 @@ The variables passed with the `$vars` property can now be accessed directly in y
 <a id="oc-setting-the-navigation-context"></a>
 ## Setting the Navigation Context
 
-Plugins can register the backend navigation menus and submenus in the [plugin registration file](../plugin/registration.md#oc-navigation-menus). The navigation context determines what backend menu and submenu are active for the current backend page. You can set the navigation context with the `BackendMenu` class:
+Plugins can register the backend navigation menus and submenus in the [plugin registration file](../backend/navigation.md). The navigation context determines what backend menu and submenu are active for the current backend page. You can set the navigation context with the `BackendMenu` class:
 
 ```php
 BackendMenu::setContext('Acme.Blog', 'blog', 'categories');
@@ -144,7 +144,7 @@ public function __construct()
 You can set the title of the backend page with the `$pageTitle` property of the controller class (note that the form and list behaviors can do it for you):
 
 ```php
-$this->pageTitle = 'Blog categories';
+$this->pageTitle = 'Blog Categories';
 ```
 
 ## Overriding a Response
@@ -197,4 +197,10 @@ You may also pass a `Response` object to this method.
 $this->setResponse(Response::make(...));
 ```
 
-> **Note**: Check out the [Views & Responses article](../services/response-view) for more information on building responses.
+View the [Views & Responses article](../services/response-view.md) for more information on building responses.
+
+#### See Also
+
+::: also
+* [Views and Responses](../services/response-view.md)
+:::

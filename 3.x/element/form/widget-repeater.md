@@ -1,6 +1,6 @@
 # Repeater
 
-`repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../database/model.md#oc-supported-properties).
+`repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../../extend/system/models.md).
 
 ```yaml
 extra_information:
@@ -83,4 +83,6 @@ Option | Description
 **icon** | defines an icon for the group, optional.
 **fields** | form fields belonging to the group.
 
-> **Note**: The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
+::: tip
+The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
+:::

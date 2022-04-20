@@ -15,9 +15,9 @@ By default Media Manager works with the **storage/app/media** subdirectory of th
 ```php
 'storage' => [
     'media' => [
-        'disk'   => 'local',
+        'disk' => 'local',
         'folder' => 'media',
-        'path'   => '/storage/app/media',
+        'path' => '/storage/app/media',
     ],
 ],
 ```
@@ -67,31 +67,31 @@ Parameter | Value
 **bucket** | your bucket name.
 **region** | the bucket region code, see below.
 
-You can find the bucket region in S3 management console, in the bucket properties. The Properties tab displays the region name, for example Oregon. S3 driver configuration requires a bucket code. Use this table to find code for your bucket (you can also take a look at [AWS documentation](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)):
+You can find the bucket region in S3 management console, in the bucket properties. The Properties tab displays the region name, for example Oregon. S3 driver configuration requires a bucket code. Use this table to find code for your bucket (you can also take a look at [AWS documentation](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)).
 
 Region | Code
 ------------- | -------------
-<span class="nowrap">**US East (Ohio)**</span> | us-east-2
-<span class="nowrap">**US East (N. Virginia)**</span> | us-east-1
-<span class="nowrap">**US West (N. California)**</span> | us-west-1
-<span class="nowrap">**US West (Oregon)**</span> | us-west-2
-<span class="nowrap">**Asia Pacific (Hong Kong)**</span> | ap-east-1
-<span class="nowrap">**Asia Pacific (Mumbai)**</span> | ap-south-1
-<span class="nowrap">**Asia Pacific (Osaka-Local)**</span> | ap-northeast-3
-<span class="nowrap">**Asia Pacific (Seoul)**</span> | ap-northeast-2
-<span class="nowrap">**Asia Pacific (Singapore)**</span> | ap-southeast-1
-<span class="nowrap">**Asia Pacific (Sydney)**</span> | ap-southeast-2
-<span class="nowrap">**Asia Pacific (Tokyo)**</span> | ap-northeast-1
-<span class="nowrap">**Canada (Central)**</span> | ca-central-1
-<span class="nowrap">**China (Beijing)**</span> | cn-north-1
-<span class="nowrap">**China (Ningxia)**</span> | cn-northwest-1
-<span class="nowrap">**EU (Frankfurt)**</span> | eu-central-1
-<span class="nowrap">**EU (Ireland)**</span> | eu-west-1
-<span class="nowrap">**EU (London)**</span> | eu-west-2
-<span class="nowrap">**EU (Paris)**</span> | eu-west-3
-<span class="nowrap">**EU (Stockholm)**</span> | eu-north-1
-<span class="nowrap">**South America (São Paulo)**</span> | sa-east-1
-<span class="nowrap">**Middle East (Bahrain)**</span> | me-south-1
+**US East (Ohio)** | us-east-2
+**US East (N. Virginia)** | us-east-1
+**US West (N. California)** | us-west-1
+**US West (Oregon)** | us-west-2
+**Asia Pacific (Hong Kong)** | ap-east-1
+**Asia Pacific (Mumbai)** | ap-south-1
+**Asia Pacific (Osaka-Local)** | ap-northeast-3
+**Asia Pacific (Seoul)** | ap-northeast-2
+**Asia Pacific (Singapore)** | ap-southeast-1
+**Asia Pacific (Sydney)** | ap-southeast-2
+**Asia Pacific (Tokyo)** | ap-northeast-1
+**Canada (Central)** | ca-central-1
+**China (Beijing)** | cn-north-1
+**China (Ningxia)** | cn-northwest-1
+**EU (Frankfurt)** | eu-central-1
+**EU (Ireland)** | eu-west-1
+**EU (London)** | eu-west-2
+**EU (Paris)** | eu-west-3
+**EU (Stockholm)** | eu-north-1
+**South America (São Paulo)** | sa-east-1
+**Middle East (Bahrain)** | me-south-1
 
 Example configuration after update:
 

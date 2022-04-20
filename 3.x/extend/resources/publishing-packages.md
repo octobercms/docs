@@ -68,7 +68,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../plugin/registration.md#oc-dependency-definitions).
+You should also make sure that this package is included in the `$require` property found in the [plugin registration file](../system/plugins.md).
 
 #### Requiring Another Theme
 

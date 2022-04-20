@@ -12,7 +12,9 @@ The above is the PHP equivalent of the following:
 <?= Str::camel() ?>
 ```
 
-> **Note**: Methods in *camelCase* should be converted to *snake_case*.
+::: warning
+Methods in *camelCase* should be converted to *snake_case*.
+:::
 
 You may also apply the string functions as a Twig filter.
 

@@ -1,6 +1,6 @@
 # {% content %}
 
-The `{% content %}` tag will display a [CMS content block](../cms/content.md) on the page. To display content block called **contacts.htm** you pass the file name after the `content` tag quoted as a string.
+The `{% content %}` tag will display a [CMS content block](../../cms/themes/content.md) on the page. To display content block called **contacts.htm** you pass the file name after the `content` tag quoted as a string.
 
 ```twig
 {% content "contacts.htm" %}

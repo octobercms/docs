@@ -15,7 +15,7 @@ Widget classes reside inside the **widgets** directory of the plugin directory. 
 ├── `widgets`
 |   ├── form
 |   |   ├── partials
-|   |   |   └── _form.htm _<== Partial File_
+|   |   |   └── _form.php _<== Partial File_
 |   |   └── assets
 |   |       ├── js
 |   |       |   └── form.js _<== JavaScript File_
@@ -26,7 +26,7 @@ Widget classes reside inside the **widgets** directory of the plugin directory. 
 
 ### Class Definition
 
-The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../plugin/registration.md#oc-plugin-namespaces). Example widget controller class definition:
+The generic widget classes must extend the `Backend\Classes\WidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../system/plugins.md). Example widget controller class definition:
 
 ```php
 namespace Backend\Widgets;

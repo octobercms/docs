@@ -42,7 +42,7 @@ For multiple expressions `{% elseif %}` and `{% else %}` can be used:
 {% endif %}
 ```
 
-## Expression rules
+## Expression Rules
 
 The rules to determine if an expression is true or false are the same as in PHP, here are the edge cases rules:
 

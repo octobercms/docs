@@ -297,7 +297,7 @@ public $belongsTo = [
 
 Many-to-many relations are slightly more complicated than `hasOne` and `hasMany` relationships. An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin". To define this relationship, three database tables are needed: `users`, `roles`, and `role_user`. The `role_user` table is derived from the alphabetical order of the related model names, and contains the `user_id` and `role_id` columns.
 
-Below is an example that shows the [database table structure](../plugin/updates.md#oc-migration-files) used to create the join table.
+Below is an example that shows the [database table structure](../database/structure.md) used to create the join table.
 
 ```php
 Schema::create('role_user', function($table)
@@ -1085,7 +1085,7 @@ $comment = $post->comments()->create([
 ]);
 ```
 
-Before using the `create` method, be sure to review the documentation on attribute [mass assignment](model.md#oc-mass-assignment) as the attributes in the PHP array are restricted by the model's "fillable" definition.
+Before using the `create` method, be sure to review the documentation on attribute [mass assignment](../system/models.md) as the attributes in the PHP array are restricted by the model's "fillable" definition.
 
 ### Insert via Dynamic Property
 

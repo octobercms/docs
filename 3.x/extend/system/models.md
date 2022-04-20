@@ -23,7 +23,7 @@ The model configuration directory could contain the model's [form field and list
 
 ## Defining Models
 
-In most cases, you should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this:
+In most cases, you should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this.
 
 ```php
 namespace Acme\Blog\Models;
@@ -32,16 +32,12 @@ use Model;
 
 class Post extends Model
 {
-    /**
-     * @var string table associated with the model.
-     */
     protected $table = 'acme_blog_posts';
 }
 ```
 
 The `$table` protected field specifies the database table corresponding the model. The table name is a snake case name of the author, plugin and pluralized record type name.
 
-<a id="oc-supported-properties"></a>
 ### Supported Properties
 
 There are some standard properties that can be found on models, in addition to those provided by [model traits](traits.md). For example:
@@ -71,24 +67,19 @@ Property | Description
 **$dates** | values are converted to an instance of Carbon/DateTime objects after fetching.
 **$timestamps** | boolean that if true will automatically set created_at and updated_at fields.
 **$jsonable** | values are encoded as JSON before saving and converted to arrays after fetching.
-**$fillable** | values are fields accessible to [mass assignment](#oc-mass-assignment).
-**$guarded** | values are fields guarded from [mass assignment](#oc-mass-assignment).
+**$fillable** | values are fields accessible to mass assignment.
+**$guarded** | values are fields guarded from mass assignment.
 **$visible** | values are fields made visible when [serializing the model data](../database/serialization.md).
 **$hidden** | values are fields made hidden when [serializing the model data](../database/serialization.md).
-**$connection** | string that contains the [connection name](../database/basics.md#oc-multiple-database-connections) that's utilised by the model by default.
+**$connection** | string that contains the [connection name](../../setup/database-config.md) that's utilised by the model by default.
 
-#### Primary key
+#### Primary Key
 
 Models will assume that each table has a primary key column named `id`. You may define a `$primaryKey` property to override this convention.
 
 ```php
 class Post extends Model
 {
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
     protected $primaryKey = 'id';
 }
 ```
@@ -100,55 +91,44 @@ Models will assume that the primary key is an incrementing integer value, which 
 ```php
 class Message extends Model
 {
-    /**
-     * The primary key for the model is not an integer.
-     *
-     * @var bool
-     */
     public $incrementing = false;
 }
 ```
 
 #### Timestamps
 
-By default, a model will expect `created_at` and `updated_at` columns to exist on your tables. If you do not wish to have these columns managed automatically, set the `$timestamps` property on your model to `false`:
+By default, a model will expect `created_at` and `updated_at` columns to exist on your tables. If you do not wish to have these columns managed automatically, set the `$timestamps` property on your model to `false`.
 
 ```php
 class Post extends Model
 {
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
     public $timestamps = false;
 }
 ```
 
-If you need to customize the format of your timestamps, set the `$dateFormat` property on your model. This property determines how date attributes are stored in the database, as well as their format when the model is serialized to an array or JSON:
+If you need to customize the format of your timestamps, set the `$dateFormat` property on your model. This property determines how date attributes are stored in the database, as well as their format when the model is serialized to an array or JSON.
 
 ```php
 class Post extends Model
 {
-    /**
-     * The storage format of the model's date columns.
-     *
-     * @var string
-     */
     protected $dateFormat = 'U';
 }
 ```
 
 #### Values stored as JSON
 
-When attributes names are passed to the `$jsonable` property, the values will be serialized and deserialized from the database as JSON:
+When attributes names are passed to the `$jsonable` property, the values will be serialized and deserialized from the database as JSON.
 
 ```php
 class Post extends Model
 {
-    /**
-     * @var array Attribute names to encode and decode using JSON.
-     */
     protected $jsonable = ['data'];
 }
 ```
+
+#### See Also
+
+::: also
+* [Querying a Model](../database/model.md)
+* [Model Traits](../database/traits.md)
+:::
