@@ -1,3 +1,6 @@
+---
+subtitle: Learn more about the extras included with the AJAX framework.
+---
 # Extra Features
 
 When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in front-end CMS pages.
@@ -8,7 +11,7 @@ When using the AJAX framework, you have the option to specify the **extras** suf
 
 ## Loading Indicator
 
-The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to [global events](../ajax/javascript-api.md#oc-global-ajax-events) used by the AJAX framework.
+The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to global events used by [the JavaScript AJAX framework](./javascript-api.md).
 
 When an AJAX request starts the `ajaxPromise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajaxFail` and `ajaxDone` events are used to detect when the request finishes, where the indicator is hidden again.
 
@@ -26,7 +29,7 @@ You may specify the `data-request-validate` attribute on a form to enable valida
 
 ### Throwing a Validation Error
 
-In the server side AJAX handler you may throw a [validation exception](../services/error-log.md#oc-validation-exception) using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error messages for the values.
+In the server side AJAX handler you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error messages for the values.
 
 ```php
 function onSubmit()
@@ -35,7 +38,9 @@ function onSubmit()
 }
 ```
 
-> **Note**: You can also pass an instance of the [validation service](../services/validation.md) as the first argument of the exception.
+::: tip
+You can also pass an instance of the [validation service](../../extend/services/validation.md) as the first argument of the exception.
+:::
 
 ### Displaying Error Messages
 
@@ -87,7 +92,7 @@ If the element is left empty, it will be populated with the validation text from
 
 ## Loading Button
 
-When any element contains the `data-attach-loading` attribute, the CSS class `oc-loading` will be added to it during the AJAX request. This class will spawn a *loading spinner* on button and anchor elements using the `:after` CSS selector.
+When any element contains the `data-attach-loading` attribute, the CSS class `oc-loading` will be added to it during the AJAX request. This class will spawn a loading spinner on button and anchor elements using the `:after` CSS selector.
 
 ```html
 <form data-request="onSubmit">
@@ -126,7 +131,7 @@ function onSuccess()
 }
 ```
 
-To remain consistent with AJAX based flash messages, you can render a [standard flash message](../markup/tag-flash.md) when the page loads by placing this code in your page or layout.
+To remain consistent with AJAX based flash messages, you can render a [standard flash message](../../markup/tag/flash.md) when the page loads by placing this code in your page or layout.
 
 ```twig
 {% flash %}

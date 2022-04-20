@@ -243,7 +243,7 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
 <a id="oc-message-content"></a>
 ## Message Content
 
-Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via *System > Mail templates*. All mail messages support using Twig for markup.
+Mail messages can be sent in October using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the back-end interface via **Settings → Mail Templates**. All mail messages support using Twig for markup.
 
 Optionally, mail views can be [registered in the plugin registration file](#oc-registering-mail-layouts-templates-partials) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the back-end interface.
 
@@ -254,11 +254,11 @@ Mail views reside in the file system and the code used represents the path to th
 
 ::: dir
 ├── plugins
-|   └── author       _<== "author" Segment_
-|       └── myplugin _<== "plugin" Segment_
+|   └── author  _← "author" Segment_
+|       └── myplugin  _← "plugin" Segment_
 |           └── `views`
-|               └── mail            _<== "mail" Segment_
-|                   └── message.htm _<== "message" Segment_
+|               └── mail  _← "mail" Segment_
+|                   └── message.htm  _← "message" Segment_
 :::
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:

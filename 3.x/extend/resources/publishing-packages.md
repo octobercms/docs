@@ -120,7 +120,7 @@ To create a new tag add (`-a`) the version with an optional (`-m`) message.
 git tag -a v2.0.1 -m "Version 2 is here!"
 ```
 
-In addition to tagging, you should also increment the version file found in your [plugin](../plugin/updates.md) or [theme](../themes/development.md#oc-version-file).
+In addition to tagging, you should also increment the version file found in your [plugin version file](../system/plugins.md) or [theme settings](../../cms/themes/settings.md).
 
 ## Private Plugins and Themes
 

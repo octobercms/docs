@@ -21,7 +21,7 @@ When the file `.themelock` is present in the theme directory:
 
 ## Creating a New Child Theme
 
-The `theme:copy` command can be used to create a new child theme. The following command creates a new theme called `demo-copy` from the source theme `demo` by copying the directory and its contents. The `.themelock` file will be removed during this process.
+The `theme:copy` command can be used to create new themes, including child themes. The following command creates a new theme called `demo-copy` from the source theme `demo` by copying the directory and its contents. The `.themelock` file will be removed during this process.
 
 ```bash
 php artisan theme:copy demo demo-copy

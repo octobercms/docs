@@ -1,16 +1,19 @@
+---
+subtitle: Learn more about the updating your content dynamically.
+---
 # Updating Partials
 
 When a handler executes it may prepare partials that are updated on the page, either by pushing or pulling, which can be rendered with some supplied variables.
 
 ## Pulling Partial Updates
 
-The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](../ajax/handlers.md).
+The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](./handlers.md).
 
 ```twig
 <div id="myDiv">{% partial 'mytime' %}</div>
 ```
 
-The [data attributes API](../ajax/attributes-api.md) uses the `data-request-update` attribute.
+The [data attributes API](./attributes-api.md) uses the `data-request-update` attribute.
 
 ```html
 <!-- Attributes API -->
@@ -21,7 +24,7 @@ The [data attributes API](../ajax/attributes-api.md) uses the `data-request-upda
 </button>
 ```
 
-The [JavaScript API](../ajax/javascript-api.md) uses the `update` configuration option:
+The [JavaScript API](./javascript-api.md) uses the `update` configuration option:
 
 ```js
 // JavaScript API
@@ -39,25 +42,25 @@ The definition of what should be updated is specified as a JSON-like object wher
 
 The following will request to update the `#myDiv` element with **mypartial** contents.
 
-```
+```js
 mypartial: '#myDiv'
 ```
 
 Multiple partials are separated by commas.
 
-```
+```js
 firstpartial: '#myDiv', secondpartial: '#otherDiv'
 ```
 
 If the partial name contains a slash or a dash, it is important to 'quote' the left side.
 
-```
+```js
 'folder/mypartial': '#myDiv', 'my-partial': '#myDiv'
 ```
 
 The target element will always be on the right side since it can also be a HTML element in JavaScript.
 
-```
+```js
 mypartial: document.getElementById('myDiv')
 ```
 
@@ -65,19 +68,23 @@ mypartial: document.getElementById('myDiv')
 
 If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 
-```
+```js
 'folder/append': '@#myDiv'
 ```
 
 If the selector string is prepended with the `^` symbol, the content will be prepended instead.
 
-```
+```js
 'folder/append': '^#myDiv'
 ```
 
 ## Pushing Partial Updates
 
-Comparatively, [AJAX handlers](../ajax/handlers.md) can *push content updates* to the client-side browser from the server-side. To push an update the handler returns an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update.
+Comparatively, [AJAX handlers](./handlers.md) can push content updates to the client-side browser from the server-side. To push an update the handler returns an array where the key is a HTML element to update (using a simple CSS selector) and the value is the content to update.
+
+::: aside
+The key name must start with an identifier `#` or class `.` character to trigger a content update.
+:::
 
 The following example will update an element on the page with the id **myDiv** using the contents found inside the partial **mypartial**. The `onRefreshTime` handler calls the `renderPartial` method to render the partial contents in PHP.
 
@@ -90,11 +97,9 @@ function onRefreshTime()
 }
 ```
 
-> **Note**: The key name must start with an identifier `#` or class `.` character to trigger a content update.
-
 ## Passing Variables to Partials
 
-Depending on the execution context, an [AJAX event handler](../ajax/handlers.md) makes variables available to partials differently.
+Depending on the execution context, an [AJAX event handler](./handlers.md) makes variables available to partials differently.
 
 - Use `$this[]` inside a page or layout [PHP section](../themes/themes.md).
 - Use `$this->page[]` inside a [component class](../themes/components.md).

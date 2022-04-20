@@ -1,3 +1,6 @@
+---
+subtitle: Interact with handlers using JavaScript code.
+---
 # JavaScript API
 
 The JavaScript API is more powerful than the data attributes API. The `request` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
@@ -9,11 +12,11 @@ The `request` method has a single required argument - the AJAX handler name. Exa
     ...
 ```
 
-The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October framework:
+The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October CMS framework.
 
 Option | Description
 ------------- | -------------
-**update** | an object, specifies a list partials and page elements (as CSS selectors) to update: {'partial': '#select'}. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
+**update** | an object, specifies a list partials and page elements (as CSS selectors) to update: `{'partial': '#select'}`. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 **confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
 **data** | an optional object specifying data to be sent to the server along with the form data: {var: 'value'}. When `files` is true, you may also include files to be uploaded in this object by using [`Blob` objects](https://developer.mozilla.org/en-US/docs/Web/API/Blob). To specify the filename of any `Blob` objects, simply set the `filename` property on the `Blob` object. (Ex. `var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {'uploaded_file': blob};`)
 **redirect** | string specifying an URL to redirect the browser to after the successful request.
@@ -40,7 +43,7 @@ Handler | Description
 
 ## Usage Examples
 
-Request a confirmation before the onDelete request is sent:
+Request a confirmation before the `onDelete` request is sent.
 
 ```js
 $('form').request('onDelete', {
@@ -49,7 +52,7 @@ $('form').request('onDelete', {
 })
 ```
 
-Run `onCalculate` handler and inject the rendered **calcresult** partial into the page element with the **result** CSS class:
+Run `onCalculate` handler and inject the rendered **calcresult** partial into the page element with the **result** CSS class.
 
 ```js
 $('form').request('onCalculate', {
@@ -57,13 +60,13 @@ $('form').request('onCalculate', {
 })
 ```
 
-Run `onCalculate` handler with some extra data:
+Run `onCalculate` handler with some extra data.
 
 ```js
 $('form').request('onCalculate', {data: {value: 55}})
 ```
 
-Run `onCalculate` handler and run some custom code before the page elements update:
+Run `onCalculate` handler and run some custom code before the page elements update.
 
 ```js
 $('form').request('onCalculate', {
@@ -72,7 +75,7 @@ $('form').request('onCalculate', {
 })
 ```
 
-Run `onCalculate` handler and if successful, run some custom code and the default `success` function:
+Run `onCalculate` handler and if successful, run some custom code and the default `success` function.
 
 ```js
 $('form').request('onCalculate', {success: function(data) {
@@ -81,7 +84,7 @@ $('form').request('onCalculate', {success: function(data) {
 }})
 ```
 
-Execute a request without a FORM element:
+Execute a request without a FORM element.
 
 ```js
 $.request('onCalculate', {
@@ -91,17 +94,16 @@ $.request('onCalculate', {
 })
 ```
 
-Run `onCalculate` handler and if successful, run some custom code after the default `success` function is done:
+Run `onCalculate` handler and if successful, run some custom code after the default `success` function is done.
 
 ```js
-$('form').request('onCalculate', {success: function(data) {
+$('form').request('onCalculate', { success: function(data) {
     this.success(data).done(function() {
-        //... do something after parent success() is finished ...
+        // ... do something after parent success() is finished ...
     });
 }})
 ```
 
-<a id="oc-global-ajax-events"></a>
 ## Global AJAX Events
 
 The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.

@@ -366,7 +366,7 @@ public function onAddItem()
 }
 ```
 
-If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. Please see the [Calling AJAX handlers defined in components](../ajax/handlers.md#oc-calling-a-handler) article for details about using AJAX with components.
+If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. See the [AJAX handlers article](../cms/ajax/handlers.md) to learn about using AJAX with components.
 
 ## Default Markup
 

@@ -73,7 +73,7 @@ public function render()
 }
 ```
 
-### Binding Widgets to Controllers
+## Binding Widgets to Controllers
 
 ::: aside
 Binding to a controller is also required to make [AJAX handlers](ajax.md) available.
@@ -96,4 +96,15 @@ After binding the widget you can access it in the controller's view or partial b
 
 ```php
 <?= $this->widget->myWidget->render() ?>
+```
+
+## Running Code Before AJAX Handlers
+
+Sometimes you may want code to execute before an AJAX handler executes. Defining an `init`  method allows code to run before every AJAX handler.
+
+```php
+function init()
+{
+    // From a widget class
+}
 ```
