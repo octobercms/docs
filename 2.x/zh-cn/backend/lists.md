@@ -96,9 +96,35 @@ toolbar:
 <div data-control="toolbar">
     <a
         href="<?= Backend::url('acme/blog/posts/create') ?>"
-        class="btn btn-primary oc-icon-plus">新帖子</a>
+        class="btn btn-primary oc-icon-plus">
+        新帖子
+   </a>
 </div>
 ```
+
+使用列表复选框时，您可以使用 `data-list-checked-trigger` 属性切换按钮的启用状态。
+
+```php
+<button
+    type="button"
+    class="btn btn-primary"
+    data-list-checked-trigger>
+    删除所选
+</button>
+```
+
+您还可以使用 `data-list-checked-request` 属性将检查的值传递给 AJAX 请求。
+
+```php
+<button
+    type="button"
+    class="btn btn-primary"
+    data-request="onDelete"
+    data-list-checked-request>
+    删除所选
+</button>
+```
+
 
 <a id="oc-filtering-the-list"></a>
 ### 过滤列表
