@@ -3,7 +3,7 @@ subtitle: Configurable building blocks that can be attached to any page, partial
 ---
 # Components
 
-Components are key features of October CMS. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are handling [AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+Components are key features of October CMS. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are [handling AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../../extend/cms-components.md) as part of plugins.
 
@@ -27,18 +27,19 @@ maxItems = 20
 
 This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the October back-end. The Inspector opens when you click a component in the page or layout component panel.
 
-When you refer a component, it automatically creates a page variable that matches the component name (`demoTodo` in the previous example). Components that provide HTML markup can be rendered on a page with the `{% component %}` tag, like this:
+::: aside
+If two components with the same name are assigned to a page and layout together, the page component will take priority.
+:::
+
+When you refer a component, it automatically creates a page variable that matches the component name (`demoTodo` in the previous example). Components that provide HTML markup can be rendered on a page with the `{% component %}` tag, like the following.
 
 ```twig
 {% component 'demoTodo' %}
 ```
 
-> **Note**: If two components with the same name are assigned to a page and layout together, the page component overrides any properties of the layout component.
-
-<a id="oc-components-aliases"></a>
 ## Components Aliases
 
-If there are two plugins that register components with the same name, you can attach a component by using its fully qualified class name and assigning it an *alias*:
+If there are two plugins that register components with the same name, you can attach a component by using its fully qualified class name and assigning it an *alias*.
 
 ```ini
 [October\Demo\Components\Todo demoTodoAlias]
@@ -60,7 +61,6 @@ maxItems = 10
 maxItems = 20
 ```
 
-<a id="oc-using-external-property-values"></a>
 ## Using External Property Values
 
 By default property values are initialized in the Configuration section where the component is defined, and the property values are static, like this:
@@ -117,10 +117,9 @@ url = "/todo/:maxItems"
 
 In the October back-end you can use the Inspector tool for assigning external values to component properties. In the Inspector you don't need to use the curly brackets to enter the parameter name. Each field in the Inspector has an icon on the right side, which opens the external parameter name editor. Enter the parameter name as `paramName` for partial variables or `:paramName` for URL parameters.
 
-<a id="oc-passing-variables-to-components"></a>
 ## Passing Variables to Components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](partials.md), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including [external property values](#oc-using-external-property-values).
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](./partials.md), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including external property values.
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 
@@ -128,18 +127,15 @@ In this example, the **maxItems** property of the component will be set to *7* a
 {% component 'demoTodoAlias' maxItems='7' %}
 ```
 
-> **Note**: Not all components support passing variables when rendering.
-
 ## Customizing Default Markup
 
-The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. [Moving the default markup to a theme partial](#oc-moving-default-markup-to-a-partial) is suitable to completely overhaul a component. [Overriding the component partials](#oc-overriding-component-partials) is useful for cherry picking areas to customize.
+The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. Moving the default markup to a theme partial is suitable to completely overhaul a component. Overriding the component partials is useful for cherry picking areas to customize.
 
-<a id="oc-moving-default-markup-to-a-partial"></a>
 ### Moving Default Markup to a Partial
 
 Each component can have an entry point partial called **default.htm** that is rendered when the `{% component %}` tag is called, in the following example we will assume the component is called **blogPost**.
 
-```
+```ini
 url = "blog/post"
 
 [blogPost]
@@ -169,12 +165,11 @@ This is the only change needed to allow the default component markup to work any
 
 This process can be repeated for all other partials found in the component partial directory.
 
-<a id="oc-overriding-component-partials"></a>
 ### Overriding Component Partials
 
 All component partials can be overridden using the theme partials. If a component called **channel** uses the **title.htm** partial.
 
-```
+```ini
 url = "mypage"
 
 [channel]
@@ -194,7 +189,7 @@ Segment | Description
 
 The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed:
 
-```
+```ini
 [channel foobar]
 ==
 {% component "foobar" %}
@@ -204,9 +199,13 @@ Now we can override the **title.htm** partial by creating a file in our theme ca
 
 ## The "View Bag" Component
 
-There is a special component included in October called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page:
+::: aside
+The viewBag component is hidden in the backend panel and is only available for file-based editing. It can also be used by other plugins to store data.
+:::
 
-```
+There is a special component included in October CMS called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page.
+
+```ini
 title = "About"
 url = "/about.html"
 layout = "default"
@@ -218,9 +217,9 @@ activeMenu = "about"
 <p>Page content...</p>
 ```
 
-Any property defined for the component is then made available inside the page, layout, or partial markup using the `viewBag` variable. For example, in this layout the **active** class is added to the list item if the `viewBag.activeMenu` value is set to **about**:
+Any property defined for the component is then made available inside the page, layout, or partial markup using the `viewBag` variable. For example, in this layout the **active** class is added to the list item if the `viewBag.activeMenu` value is set to **about**.
 
-```
+```twig
 description = "Default layout"
 ==
 [...]
@@ -232,19 +231,17 @@ description = "Default layout"
 </ul>
 ```
 
-> **Note**: The viewBag component is hidden on the back-end and is only available for file-based editing. It can also be used by other plugins to store data.
-
 ### AJAX Handlers and Partials
 
-Components may introduce [AJAX handlers](../ajax/introduction.md) and [partials](../cms/partials.md) to the a theme's lifecycle, using a prefix of the component name and two `::` symbols. For example, all the AJAX handlers defined by components are available globally.
+Components may introduce [AJAX handlers](../ajax/introduction.md) and [partials](./partials.md) to the a theme's lifecycle, using a prefix of the component name and two `::` symbols. For example, all the AJAX handlers defined by components are available globally.
 
-```
+```html
 data-request="onMyComponentHandler"
 ```
 
 However, if there is a conflict in naming, the fully qualified name can be used.
 
-```
+```html
 data-request="componentName::onMyComponentHandler"
 ```
 
@@ -254,4 +251,10 @@ Partials rendered from outside the component must use their fully qualified name
 {% partial 'componentName::component-partial' %}
 ```
 
-Read more on [component development](../plugin/components.md#oc-component-partials) to learn about component partials.
+Read more on [component development](../../extend/cms-components.md) to learn about component partials.
+
+#### See Also
+
+::: also
+* [CMS Component Development](../../extend/cms-components.md)
+:::

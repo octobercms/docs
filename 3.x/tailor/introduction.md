@@ -1,5 +1,5 @@
 ---
-subtitle: Learn how Tailor can transform the way you design content.
+subtitle: Tailor transforms the way you design content.
 ---
 # Introduction
 
@@ -24,7 +24,21 @@ Below you can see an example blueprint directory structure. Each blueprint can r
 |       │   └── article.yaml
 :::
 
+## Blueprint Types
+
+The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify [form field definitions](../element/definitions.md).
+
+Type | Description
+------------- | -------------
+[Entry](blueprints/entry.md) | the standard content structure that supports drafts.
+[Global](blueprints/global.md) | a single record in the database and is often used for settings and configuration.
+[Mixin](blueprints/mixin.md) | defines reusable field definitions that can be imported and mixed in with other field definitions.
+
 ## Blueprint Structure
+
+::: aside
+Blueprints are 100% portable. They use internal identifiers and can reside in any directory with any file name.
+:::
 
 Blueprints are defined using the YAML syntax and will always contain three identifiers, a unique UUID, a user-friendly handle and the blueprint type. The filename and folder of a blueprint is used to organise blueprints and is not used as an identifier. All other properties are defined in the blueprint's relevant documentation article.
 
@@ -53,16 +67,6 @@ _blog_content:
     source: edcd102e-0525-4e4d-b07e-633ae6c18db6
     type: mixin
 ```
-
-## Blueprint Types
-
-The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify form field definitions.
-
-Type | Description
-------------- | -------------
-[Entry](blueprints/entry.md) | the standard content structure that supports drafts.
-[Global](blueprints/global.md) | a single record in the database and is often used for settings and configuration.
-[Mixin](blueprints/mixin.md) | defines reusable field definitions that can be imported and mixed in with other field definitions.
 
 ## Migrating Blueprints
 

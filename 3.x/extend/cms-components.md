@@ -264,7 +264,7 @@ url = "/blog/hard-coded-page"
 id = "2"
 ```
 
-Alternatively the value can be referenced dynamically from the page URL using an [external property value](../cms/components.md#oc-using-external-property-values):
+Alternatively the value can be referenced dynamically from the page URL using an [external property value in a component](../cms/themes/components.md).
 
 ```ini
 url = "/blog/:my_custom_parameter"
@@ -423,7 +423,7 @@ Multiple components can share partials by placing the partial file in a director
 
 ### Referencing "self"
 
-Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the component's short name or [alias](../cms/components.md#oc-components-aliases).
+Components can reference themselves inside their partials by using the `__SELF__` variable. By default it will return the [component's short name or alias](../cms/themes/components.md).
 
 ```twig
 <form data-request="{{__SELF__}}::onEventHandler">

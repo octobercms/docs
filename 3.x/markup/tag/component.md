@@ -14,7 +14,7 @@ This will render the component partial with a fixed name of **default.htm** and 
 
 ## Variables
 
-Some components support [passing variables](../cms/components.md#oc-passing-variables-to-components) at render time:
+Some components support passing variables to them at render time.
 
 ```twig
 {% component "blogPosts" postsPerPage="5" %}
@@ -24,5 +24,13 @@ Some components support [passing variables](../cms/components.md#oc-passing-vari
 
 In most cases the `{% component %}` tag is not needed and the markup is provided as a usage example for the component API. Components are intended to be customized, this can be done in two ways:
 
-1. [Moving default markup to a partial](../cms/components.md#oc-moving-default-markup-to-a-partial)
-1. [Overriding component partials](../cms/components.md#oc-overriding-component-partials)
+1. Moving the default markup to a partial
+1. Overriding component partials using the theme
+
+The [CMS Components article](../../cms/themes/components.md) outlines the process of customizing default markup.
+
+#### See Also
+
+::: also
+* [CMS Components](../../cms/themes/components.md)
+:::
