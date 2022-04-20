@@ -1,12 +1,12 @@
 # 供应商
 
-默认情况下，媒体管理器使用本地磁盘提供程序。 您需要先安装 [驱动插件](https://octobercms.com/plugin/october-drivers)，然后才能使用 Amazon S3 或 Rackspace CDN 功能。
+默认情况下，媒体管理器使用本地磁盘提供程序。 您需要先安装 [驱动插件](https://octobercms.com/plugin/october-drivers)，然后才能使用 Amazon S3 功能。
 
 > **注意**：更改媒体管理器配置后，您应该重置其缓存。 您可以通过按下媒体管理器工具栏中的 **Refresh** 按钮来实现。
 
 ## 本地磁盘
 
-默认情况下，媒体管理器使用安装目录的 **storage/app/media** 子目录。 为了使用 Amazon S3 或 Rackspace CDN，您应该更新 **config/system.php** 配置文件中的系统配置，并按照本文中的说明进行操作。
+默认情况下，媒体管理器使用安装目录的 **storage/app/media** 子目录。 为了使用 Amazon S3，您应该更新 **config/system.php** 配置文件中的系统配置，并按照本文中的说明进行操作。
 
 ```php
 'storage' => [
@@ -130,68 +130,6 @@
 
 恭喜！现在您已准备好将 Amazon S3 与 October CMS 结合使用。请注意，您还可以配置 Amazon CloudFront CDN 以使用您的存储桶。本文档未涉及该主题，请参阅[CloudFront 文档](http://aws.amazon.com/cloudfront/)。配置 CloudFront 后，您需要更新存储配置中的 **path** 参数。
 
-## 配置 Rackspace CDN 访问
-
-要将 Rackspace CDN 与 October CMS 一起使用，您应该创建 Rackspace CDN 容器、容器中的文件夹和 API 用户。
-
-登录 Rackspace 管理控制台并导航到存储/文件页面。创建一个新容器。容器名称无关紧要，它将成为您的公共文件 URL 的一部分。为新容器选择 **Public (Enabled CDN)** 类型。
-
-在容器中创建 **media** 文件夹。文件夹名称无关紧要。该文件夹将是您媒体库的根目录。
-
-您应该创建一个 API 用户，October CMS 将使用它来管理 CDN 容器中的文件。在 Rackspace 控制台中打开帐户/用户管理页面。点击**Create user**按钮。填写用户名(例如october.cdn.api)、密码、安全问题和答案。在 **Product Access** 部分选择 **Custom**，然后在 CDN 行中选择 **Admin**。在 **Account** 部分使用 **No Access** 角色，在 **Contact Information** 部分使用 **Technical Contact** 类型。保存用户帐户。保存帐户后，您将看到"登录详细信息"部分，其中 **API 密钥** 行包含您需要在 OctoberCMS 配置文件中使用的值。
-
-现在您拥有更新 OctoberCMS 配置的所有信息。打开 **config/filesystem.php** 脚本并找到 **disks** 部分。它已经包含了 Rackspace 配置，需要替换 API 凭证和容器信息参数：
-
-参数 |值
-------------- | -------------
-**username** | Rackspace 用户名(例如 october.cdn.api)。
-**key** | 您可以从 Rackspace 用户配置文件页面复制的用户 **API 密钥**。
-**container** | 容器名称。
-**region** | 存储桶区域代码，见下文。
-**endpoint** | 保持原样。
-**region** | 您可以在 Rackspace 控制面板的 CDN 容器列表中找到该区域。 代码是一个 3 个字母的值，例如它是 **ORD** 代表芝加哥。
-
-更新后的示例配置:
-
-```php
-'disks' => [
-    // ...
-    'rackspace' => [
-        'driver'    => 'rackspace',
-        'username'  => 'october.api.cdn',
-        'key'       => 'xx00000000xxxxxx0x0x0x000xx0x0x0',
-        'container' => 'my-bucket',
-        'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-        'region'    => 'ORD'
-    ],
-    // ...
-]
-```
-
-保存 **config/filesystem.php** 脚本并打开 **config/system.php** 脚本。 找到**storage**部分。 在**media**参数中更新**disk**、**folder**和**path**参数：
-
-参数 | 值
-------------- | -------------
-**disk** | 使用 **rackspace** 值。
-**folder** | 您在 CDN 容器中创建的文件夹的名称。
-**path** | 容器中文件夹的公共路径，见下文。
-
-要获取文件夹的路径，请转到 Rackspace 控制台中的 CDN 容器列表。 单击容器并打开媒体文件夹。 上传任何文件。 文件上传后，点击它。 该文件将在新的浏览器选项卡中打开。 复制文件 URL 并从中删除文件名和尾部斜杠。
-
-示例存储配置：
-
-```php
-'storage' => [
-    // ...
-    'media' => [
-        'disk'   => 'rackspace',
-        'folder' => 'media',
-        'path' => 'https://xxxxxxxxx-xxxxxxxxx.r00.cf0.rackcdn.com/media'
-    ]
-]
-```
-
-恭喜！ 现在您已准备好将 Rackspace CDN 与 October CMS 一起使用。
 
 ## 故障排除
 
