@@ -1,6 +1,6 @@
 # 存储
 
-由于 Laravel 和出色的 [Flysystem](https://github.com/thephpleague/flysystem) PHP 包，October CMS 提供了强大的文件系统抽象。 Flysystem 集成提供简单易用的驱动程序，用于处理本地文件系统、Amazon S3 和 Rackspace 云存储。 更好的是，在这些存储选项之间切换非常简单，因为每个系统的 API 保持不变。
+由于 Laravel 和出色的 [Flysystem](https://github.com/thephpleague/flysystem) PHP 包，October CMS 提供了强大的文件系统抽象。 Flysystem 集成提供简单易用的驱动程序，用于处理本地文件系统和Amazon S3云存储。 更好的是，在这些存储选项之间切换非常简单，因为每个系统的 API 保持不变。
 
 ## 配置
 
@@ -18,7 +18,7 @@ Storage::disk('local')->put('file.txt', 'Contents');
 
 #### 其他驱动程序先决条件
 
-在使用 S3 或 Rackspace 驱动程序之前，您需要安装 [Drivers 插件](https://octobercms.com/plugin/october-drivers)。
+在使用 S3 驱动程序之前，您需要安装 [Drivers 插件](https://octobercms.com/plugin/october-drivers)。
 
 ## 基本用法
 
