@@ -35,7 +35,7 @@ Supported web servers:
 ## Installing October CMS
 
 ::: aside
-You should configure a virtual host on the web server to access the installation directory. For local development you can use [Laravel Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/) or the built-in Laravel development server.
+You should configure a virtual host on the web server to access the installation directory. For local development you can use [Laravel Sail](../resources/using-laravel-sail.md), [Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/) or the built-in Laravel development server.
 :::
 
 October CMS is a PHP web application that uses [Composer](http://getcomposer.org/) to manage its dependencies. Ensure that Composer is installed before you begin. The [License Key](https://octobercms.com/help/site/projects#project-id) will be required to complete the installation.

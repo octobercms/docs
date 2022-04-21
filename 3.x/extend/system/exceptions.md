@@ -33,7 +33,6 @@ throw new NotFoundException('Record not found');
 
 When this exception is thrown the standard response will change to display the nearest not found page with a 404 status code added.
 
-<a id="oc-validation-exception"></a>
 ### Validation Exception
 
 The `October\Rain\Exception\ValidationException` class, aliased as `ValidationException`, is used for errors that relate directly to a form submission and an invalid field. The message should contain an array with fields and error messages.
@@ -42,7 +41,7 @@ The `October\Rain\Exception\ValidationException` class, aliased as `ValidationEx
 throw new ValidationException(['username' => 'Sorry that username is already taken!']);
 ```
 
-You can also pass an instance of the [validation service](validation.md).
+You can also pass an instance of the [validation service](../services/validation.md).
 
 ```php
 $validation = Validator::make(...);
@@ -52,9 +51,8 @@ if ($validation->fails()) {
 }
 ```
 
-When this exception is thrown the [AJAX framework](../ajax/introduction.md) will provide this information in a usable format and focus the first invalid field.
+When this exception is thrown the [AJAX framework](./ajax.md) will provide this information in a usable format and focus the first invalid field.
 
-<a id="oc-ajax-exception"></a>
 ### AJAX Exception
 
 The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is considered a "smart error" and will return the HTTP code 406. This allows them to pass response contents as if they were a successful response.
@@ -63,7 +61,7 @@ The `October\Rain\Exception\AjaxException` class, aliased as `AjaxException`, is
 throw new AjaxException(['#flashMessages' => $this->renderPartial(...)]);
 ```
 
-When this exception is thrown the [AJAX framework](../ajax/introduction.md) will follow the standard error workflow but will also refresh specified partials.
+When this exception is thrown the [AJAX framework](./ajax.md) will follow the standard error workflow but will also refresh specified partials.
 
 ## Exception Handling
 
@@ -77,7 +75,7 @@ App::error(function(RuntimeException $exception) {
 });
 ```
 
-If an exception handler returns a response, that response will be sent to the browser and no other error handlers will be called:
+If an exception handler returns a response, that response will be sent to the browser and no other error handlers will be called.
 
 ```php
 App::error(function(InvalidUserException $exception) {
@@ -97,23 +95,23 @@ If you have several exception handlers, they should be defined from most generic
 
 ### Where to Place Error Handlers
 
-Error handler registrations, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [plugin registration file](../extending.md). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
+Error handler registrations generally fall under the category of bootstrap code. In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [plugin registration file](../extending.md). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place error handler registrations.
 
 ## HTTP Exceptions
 
-Some exceptions describe HTTP error codes from the server. For example, this may be a "page not found" error (404), an "unauthorized error" (401) or even a developer generated 500 error. In order to generate such a response from anywhere in your application, use the following:
+Some exceptions describe HTTP error codes from the server. For example, this may be a "page not found" error (404), an "unauthorized error" (401) or even a developer generated 500 error. In order to generate such a response from anywhere in your application, use the following.
 
 ```php
 App::abort(404);
 ```
 
-The `abort` method will immediately raise an exception which will be rendered by the exception handler. Optionally, you may provide the response text:
+The `abort` method will immediately raise an exception which will be rendered by the exception handler. Optionally, you may provide the response text.
 
 ```php
 App::abort(403, 'Unauthorized action.');
 ```
 
-This method may be used at any time during the request's lifecycle. There is also an accompanying [Twig filter for aborting requests](../markup/function-abort.md).
+This method may be used at any time during the request's lifecycle. There is also an accompanying [Twig filter for aborting requests](../../markup/function/abort.md).
 
 ### Custom Error Page
 

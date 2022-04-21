@@ -327,3 +327,4 @@
     children:
         - resources/updating-october
         - resources/installing-packages
+        - resources/using-laravel-sail

@@ -7,7 +7,7 @@ The backend panel uses the same [AJAX library as the CMS](../../cms/ajax/introdu
 
 ## Backend AJAX Handlers
 
-The backend AJAX handlers can be defined in the controller class or [widgets](widgets.md). In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
+The backend AJAX handlers can be defined in the controller class or widgets. In the controller class the AJAX handlers are defined as public methods with the name starting with "on" string: **onCreateTemplate**, **onGetTemplateList**, etc.
 
 Backend AJAX handlers can return an array of data, throw an exception or redirect to another page. You can use `$this->vars` to set variables and the controller's `makePartial` method to render a partial and return its contents as a part of the response data.
 
@@ -72,3 +72,9 @@ When called from a widget class or partial the AJAX handler will target itself. 
 ```html
 data-request="mywidget::onPaginate"
 ```
+
+#### See Also
+
+::: also
+* [AJAX Framework Guide](../../cms/ajax/introduction.md)
+:::
