@@ -3,21 +3,19 @@ subtitle: Learn how to send mail and create templates.
 ---
 # Sending Mail
 
-This article describes how to build mail content, including using layouts and partials and then the methods used to send them.
-
-Basic Twig tags and expressions are supported in mail content. Markdown syntax is also supported, see the section on [using HTML in Markdown](../services/parser.md#oc-using-html-in-markdown) for more details.
+This article describes how to build mail content, including using layouts and partials and then the methods used to send them. Basic Twig tags and expressions are supported in mail content. Markdown syntax is also supported, see the section on [using HTML in Markdown](../services/parser.md) for more details.
 
 ## Message Content
 
-Mail messages can be sent in October CMS using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the backend panel via **Settings → Mail Templates**. All mail messages support using Twig and Markdown syntax.
+Mail messages can be sent in October CMS using either mail views or mail templates. A mail view is supplied by the application or plugin in the file system in the **/views** directory. Whereas a mail template is managed using the backend panel via **Settings → Mail Templates**.
 
-Optionally, mail views can be registered in the [plugin registration file](../extending.md) with the `registerMailTemplates` method. This will automatically generate a mail template and allows them to be customized using the backend interface.
+Optionally, mail views can be registered in the [plugin registration file](../extending.md) with the `registerMailTemplates` method. This automatically seeds a mail template allowing them to be customized using the backend panel.
 
-### Defining Mail Templates in the Backend Panel
+### Defining Templates in the Backend Panel
 
 You can create mail templates stored in the database using backend panel via **Settings → Mail Templates**. The **code** given to template is a unique identifier and cannot be changed once created.
 
-For example, if you create a template with code *this.is.my.email* you can send it using this PHP code:
+For example, if you create a template with code `this.is.my.email` you can send it using this PHP code:
 
 ```php
 Mail::send('this.is.my.email', $data, function($message) use ($user) {
@@ -29,7 +27,7 @@ Mail::send('this.is.my.email', $data, function($message) use ($user) {
 If the mail template does not exist in the system, this code will attempt to find a mail view in the filesystem with the same code.
 :::
 
-### Defining Mail Layouts in the Backend Panel
+### Defining Layouts in the Backend Panel
 
 Mail layouts can be created by selecting **Settings → Mail Templates** and clicking the **Layouts** tab. These behave just like CMS layouts, they contain the scaffold for the mail message. Mail views and templates support the use of mail layouts.
 
@@ -40,7 +38,7 @@ Layout | Code | Description
 Default | default | Used for public facing, frontend mail.
 System | system | Used for internal, backend mail.
 
-### Defining Mail Views in the Filesystem
+### Defining Views in the Filesystem
 
 Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file.
 
@@ -72,7 +70,7 @@ Parameter | Description
 **subject** | the mail message subject, required.
 **layout** | the mail layout code, optional. Default value is `default`.
 
-### Registering Mail Layouts, Templates & Partials
+### Registering Layouts, Templates & Partials
 
 ::: aside
 The **code** value in the backend panel will be the same as the mail view path. For example, `author.plugin:mail.message`.
@@ -356,3 +354,9 @@ Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($mess
     //
 });
 ```
+
+#### See Also
+
+::: also
+* [Mail Configuration](../../setup/mail-config.md)
+:::
