@@ -176,34 +176,45 @@ a {
 
 ## Localization
 
-::: aside
-The [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) can help with translating the content in your theme.
-:::
-
-Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October backend and can be used for form labels just like [plugin localization](../../extend/system/localization.md).
+Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October CMS backend panel and can be used for form labels just like [plugin localization](../../extend/system/localization.md).
 
 ### Localization File Structure
 
-Below is an example of the theme's language directory.
+Below is an example of the theme's **lang** directory.
 
 ::: dir
 ├── themes
 |   └── website
 |       └── `lang`  _← Localization Directory_
-|           ├── en
-|           |   └── lang.php  _← Localization File_
-|           └── fr
-|               └── lang.php
+|           ├── en.json  _← Localization File_
+|           └── fr.json  _← Localization File_
 :::
 
-The **lang.php** file should define and return an array of any depth, for example:
+The localization file is a JSON file where strings use the "default" translation of the string as the key. For example, if your application has a French translation, you should create a `lang/fr.json` file.
 
-```php
-return [
-    'options' => [
-        'website_name' => 'October CMS'
-    ]
-];
+```json
+{
+    "I love programming.": "j'adore programmer"
+}
 ```
 
-You are then able to reference the keys using `theme.theme-code::lang.key`. In the above example, the full language key you would use to reference the "website_name" localization key would be `theme.acme::lang.options.website_name`.
+You are also able to define code-based keys by using the complete language key in the JSON file, for example, `theme.options.website_name` for the **acme** theme can be used.
+
+```json
+{
+    "theme.options.website_name": "October CMS"
+}
+```
+
+Language strings can be accessed in your theme files using the `trans` Twig filter.
+
+::: tip
+View [the markup guide](../../markup/filter/trans.md) to learn more about translation in Twig.
+```twig
+<!-- j'adore programmer -->
+{{ 'I love programming.'|trans }}
+
+<!-- October CMS -->
+{{ 'theme.options.website_name'|trans }}
+```
+:::

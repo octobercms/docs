@@ -216,6 +216,7 @@
         - filter/app
         - filter/page
         - filter/theme
+        - filter/trans
         - filter/media
         - filter/resize
         - filter/default
