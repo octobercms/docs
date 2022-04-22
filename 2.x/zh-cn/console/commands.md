@@ -151,13 +151,13 @@ October 包含许多用于管理主题的命令。
 
 `theme:use` - 切换活动主题。 以下示例将切换到 `/themes/rainlab-vanilla` 中的主题
 
-    php artisan theme:use vanilla
+    php artisan theme:use rainlab-vanilla
 
 ### 删除主题
 
 `theme:remove` - 删除一个主题。 以下示例将删除目录`/themes/rainlab-vanilla`
 
-    php artisan theme:remove vanilla
+    php artisan theme:remove rainlab-vanilla
 
 ### 复制主题
 
