@@ -151,13 +151,13 @@ Use the `--oc` option if your package name has the `oc` prefix.
 
 `theme:use` - switch the active theme. The following example will switch to the theme in `/themes/rainlab-vanilla`
 
-    php artisan theme:use vanilla
+    php artisan theme:use rainlab-vanilla
 
 ### Remove Theme
 
 `theme:remove` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
 
-    php artisan theme:remove vanilla
+    php artisan theme:remove rainlab-vanilla
 
 ### Copy Theme
 
