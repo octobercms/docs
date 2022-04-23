@@ -1,6 +1,13 @@
-# Console Commands
+---
+subtitle: Create your own commands that run in the console.
+---
+# Building Console Commands
 
-In addition to the provided console commands, you may also build your own custom commands for working with your application. You may store your custom commands within the plugin **console** directory. You can generate the class file using the [command line scaffolding tool](../console/scaffolding.md#oc-create-a-console-command).
+To build your own custom commands for working with your application, store them within the plugin **console** directory. You can generate the class file using the command line scaffolding tool.
+
+```bash
+php artisan create:command RainLab.Blog MyCommandClass
+```
 
 ## Building a Command
 

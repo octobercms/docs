@@ -3,19 +3,19 @@ subtitle: Useful for defining fixed APIs and endpoints.
 ---
 # Routing & Middleware
 
-While routing is handled automatically for the [backend controllers](../system/controllers.md) and CMS pages define their own URL routes in their [page configuration](../../cms/themes/pages.md). Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [router service](../services/router.md).
+While routing is handled automatically for the [backend controllers](../system/controllers.md) and CMS pages define their own URL routes in their [page configuration](../../cms/themes/pages.md). Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [Laravel router service](https://laravel.com/docs/9.x/routing).
 
 ::: dir
 ├── plugins
-|   └── acme _<== Author Name_
-|       └── blog _<== Plugin Name_
+|   └── acme  _← Author Name_
+|       └── blog  _← Plugin Name_
 |           ├── controllers
 |           ├── models
 |           ├── Plugin.php
-|           └── `routes.php` _<== Routes File_
+|           └── `routes.php`  _← Routes File_
 :::
 
-Below is some example content.
+Using this approach, routes are defined in PHP using the `Route` facade. Below is an example route that becomes available via **https://yoursite.tld/api_acme_blog/cleanup_posts** using a GET request.
 
 ```php
 Route::get('api_acme_blog/cleanup_posts', function() {
@@ -23,9 +23,15 @@ Route::get('api_acme_blog/cleanup_posts', function() {
 });
 ```
 
+You may generate URLs to your routes using the `Url` facade.
+
+```php
+$url = Url::to('api_acme_blog/cleanup_posts');
+```
+
 ## Basic Routing
 
-The most basic routes simply accept a URI and a `Closure`.
+To define routes, the PHP method will assocaite to the HTTP method, which supports `get`, `post`, `patch`, `put`, `options` and `delete`. The most basic routes simply accept a URI and a `Closure`.
 
 ```php
 Route::get('/', function () {
@@ -45,9 +51,9 @@ Route::delete('foo/bar', function () {
 });
 ```
 
-#### Registering a route for multiple verbs
+### Registering Multiple Methods
 
-Sometimes you may need to register a route that responds to multiple HTTP verbs. You may do so using the `match` method on the `Route` facade.
+Sometimes you may need to register a route that responds to multiple HTTP methods. You may do so using the `match` method.
 
 ```php
 Route::match(['get', 'post'], '/', function () {
@@ -55,7 +61,7 @@ Route::match(['get', 'post'], '/', function () {
 });
 ```
 
-You may even register a route that responds to all HTTP verbs using the `any` method:
+You may even register a route that responds to all HTTP methods using the `any` method.
 
 ```php
 Route::any('foo', function () {
@@ -63,19 +69,34 @@ Route::any('foo', function () {
 });
 ```
 
-#### Generating URLs to routes
+## Routing to a Class
 
-You may generate URLs to your routes using the `Url` facade:
+For larger applications it is preferable to organize routes inside classes instead of a closure. The best place to put these classes is in the **handlers** directory. The route can be referenced as an array that takes the class name and method name. In this example the `/install` route is mapped to the `Installer` class and `install` method.
 
 ```php
-$url = Url::to('foo');
+Route::any('/install', [Installer::class, 'index']);
+```
+
+Next, define the class and the route inside. In this example the file is located in **app/handlers/Installer.php**.
+
+```php
+namespace App\Handlers;
+
+class Installer extends \Illuminate\Routing\Controller
+{
+    /**
+     * Route: /install
+     */
+    public function install()
+    {
+        return 'Welcome!';
+    }
+}
 ```
 
 ## Route Parameters
 
-### Required Parameters
-
-Sometimes you will need to capture segments of the URI within your route, for example, you may need to capture a user's ID from the URL. You may do so by defining route parameters:
+To capture segments of the URI within your route, you may do so by defining route parameters. Ror example, capturing a user's ID from the URL.
 
 ```php
 Route::get('user/{id}', function ($id) {
@@ -83,7 +104,7 @@ Route::get('user/{id}', function ($id) {
 });
 ```
 
-You may define as many route parameters as required by your route:
+You may define as many route parameters as required by your route.
 
 ```php
 Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
@@ -91,9 +112,11 @@ Route::get('posts/{post}/comments/{comment}', function ($postId, $commentId) {
 });
 ```
 
-Route parameters are always encased within singular *curly brackets*. The parameters will be passed into your route's `Closure` when the route is executed.
+Route parameters are always encased within singular curly brackets. The parameters will be passed into your route's `Closure` when the route is executed.
 
-> **Note**: Route parameters cannot contain the `-` character. Use an underscore (`_`) instead.
+::: warning
+Route parameters cannot contain the `-` character, use an underscore (`_`) instead.
+:::
 
 ### Optional Parameters
 
@@ -111,7 +134,7 @@ Route::get('user/{name?}', function ($name = 'John') {
 
 ### Regular Expression Constraints
 
-You may constrain the format of your route parameters using the `where` method on a route instance. The `where` method accepts the name of the parameter and a regular expression defining how the parameter should be constrained:
+You may constrain the format of your route parameters using the `where` method on a route instance. The `where` method accepts the name of the parameter and a regular expression defining how the parameter should be constrained.
 
 ```php
 Route::get('user/{name}', function ($name) {
@@ -139,7 +162,7 @@ Route::get('user/profile', ['as' => 'profile', function () {
 
 #### Route Groups & Named Routes
 
-If you are using [route groups](#oc-route-groups), you may specify an `as` keyword in the route group attribute array, allowing you to set a common route name prefix for all routes within the group:
+If you are using route groups (below), you may specify an `as` keyword in the route group attribute array, allowing you to set a common route name prefix for all routes within the group:
 
 ```php
 Route::group(['as' => 'admin::'], function () {
@@ -169,7 +192,6 @@ Route::get('user/{id}/profile', ['as' => 'profile', function ($id) {
 $url = Url::route('profile', ['id' => 1]);
 ```
 
-<a id="oc-route-groups"></a>
 ## Route Groups
 
 Route groups allow you to share route attributes across a large number of routes without needing to define those attributes on each individual route. Shared attributes are specified in an array format as the first parameter to the `Route::group` method.
@@ -214,22 +236,22 @@ Registering middleware inside your plugin's `boot()` method will register it glo
 If you want to register middleware to one route at a time you should do it like this:
 
 ```php
-Route::get('info', 'Acme\News@info')->middleware('Path\To\Your\Middleware');
+Route::get('info', [\App\News::class, 'info'])->middleware(\Path\To\Your\Middleware::class);
 ```
 
 For route groups it could be done like this:
 
 ```php
-Route::group(['middleware' => 'Path\To\Your\Middleware'], function() {
-    Route::get('info', 'Acme\News@info');
+Route::group(['middleware' => \Path\To\Your\Middleware::class], function() {
+    Route::get('info', [\App\News::class, 'info']);
 });
 ```
 
 And finally, if you want to assign a group of middleware to just one route you can it like this
 
 ```php
-Route::middleware(['Path\To\Your\Middleware'])->group(function() {
-    Route::get('info', 'Acme\News@info');
+Route::middleware([\Path\To\Your\Middleware::class])->group(function() {
+    Route::get('info', [\App\News::class, 'info']);
 });
 ```
 
@@ -243,7 +265,7 @@ To register a global middleware, you can extend the `Cms\Classes\CmsController` 
 public function boot()
 {
     \Cms\Classes\CmsController::extend(function($controller) {
-        $controller->middleware(\Path\To\Custom\Middleware::class);
+        $controller->middleware(\App\Middleware::class);
     });
 }
 ```
@@ -255,22 +277,26 @@ public function boot()
 {
     // Add a new middleware to beginning of the stack.
     $this->app[\Illuminate\Contracts\Http\Kernel::class]
-            ->prependMiddleware('Path\To\Custom\Middleware');
+            ->prependMiddleware(\App\Middleware::class);
 
     // Add a new middleware to end of the stack.
     $this->app[\Illuminate\Contracts\Http\Kernel::class]
-            ->pushMiddleware('Path\To\Custom\Middleware');
+            ->pushMiddleware(\App\Middleware::class);
 }
 ```
 
 ## Throwing 404 Errors
 
-There are two ways to manually trigger a 404 error from a route. First, you may use the `abort` helper. The `abort` helper simply throws a `Symfony\Component\HttpFoundation\Exception\HttpException` with the specified status code:
+There are two ways to manually trigger a 404 error from a route. First, you may use the `abort` helper. The `abort` helper simply throws a `Symfony\Component\HttpFoundation\Exception\HttpException` with the specified status code.
 
 ```php
 App::abort(404);
 ```
 
-Secondly, you may manually throw an instance of `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`.
+You may also manually throw an instance of `October\Rain\Exception\NotFoundException`. More information on handling 404 exceptions and using custom responses for these errors may be found in the [errors & logging](../system/exceptions.md) section of the documentation.
 
-More information on handling 404 exceptions and using custom responses for these errors may be found in the [errors & logging](../services/error-log) section of the documentation.
+#### See Also
+
+::: also
+* [Laravel Routing](https://laravel.com/docs/9.x/routing)
+:::

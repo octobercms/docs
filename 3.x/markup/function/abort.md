@@ -1,3 +1,6 @@
+---
+subtitle: Twig Function
+---
 # abort()
 
 The `abort()` function aborts the successful request path by changing the response code and contents. This is useful for setting a custom HTTP code or displaying the 404 page when a record is not found.

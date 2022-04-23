@@ -1,3 +1,6 @@
+---
+subtitle: Twig Filter
+---
 # |trans
 
 The `|trans` and `|transchoice` filters translate the value passed in using the applications localization configuration. The localization strings can be loaded by passing the default translation of your string.

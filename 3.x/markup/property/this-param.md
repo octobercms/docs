@@ -1,3 +1,6 @@
+---
+subtitle: Twig Property
+---
 # this.param
 
 You can access the current URL parameters via `this.param` and it returns a PHP array.
@@ -6,7 +9,7 @@ You can access the current URL parameters via `this.param` and it returns a PHP 
 
 This example demonstrates how to access the `tab` URL parameter in a page.
 
-```
+```twig
 url = "/account/:tab"
 ==
 {% if this.param.tab == 'details' %}
@@ -22,7 +25,7 @@ url = "/account/:tab"
 
 If the parameter name is also a variable, then array syntax can be used.
 
-```
+```twig
 url = "/account/:post_id"
 ==
 {% set name = 'post_id' %}

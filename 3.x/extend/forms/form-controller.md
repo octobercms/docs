@@ -142,12 +142,14 @@ update:
 
 The following messages are available to override as custom messages.
 
+::: details View the list of available messages
 Message | Default Message
 ------------- | -------------
 notFound | Form record with an ID of :id could not be found.
 flashCreate | :name Created
 flashUpdate | :name Updated
 flashDelete | :name Deleted
+:::
 
 ## Defining Form Fields
 

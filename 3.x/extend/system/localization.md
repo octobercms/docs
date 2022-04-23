@@ -48,7 +48,7 @@ Laravel offers a PHP-based translation method as a supported alternative to usin
 
 ## Accessing Localization Strings
 
-The localization strings can be loaded with the `__` function helper by passing the default translation of your string.
+The localization strings can be loaded with the `__()` helper function by passing the default translation of your string.
 
 ```php
 echo __('I love programming.');

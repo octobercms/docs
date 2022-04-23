@@ -93,7 +93,6 @@
         - system/localization
         - system/routing
         - system/scheduling
-        - system/console-commands
         - system/unit-testing
 -
     title: Extending the CMS
@@ -102,6 +101,7 @@
         - twig-tags
         - tailor-fields
         - cms-components
+        - console-commands
 -
     title: Backend Panel
     children:
@@ -158,6 +158,7 @@
         - services/event
         - services/html
         - services/resizer
+        - services/http
         - services/hash-crypt
         - services/helpers
         - services/parser

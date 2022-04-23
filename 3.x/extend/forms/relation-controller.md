@@ -32,7 +32,7 @@ The configuration file referred in the `$relationConfig` property is defined in 
 The first level field in the relation configuration file defines the relationship name in the target model. For example:
 
 ```php
-class Invoice
+class Invoice extends Model
 {
     public $hasMany = [
         'items' => \Acme\Pay\Models\InvoiceItem::class,
@@ -126,6 +126,7 @@ items:
 
 The following messages are available to override as custom messages.
 
+::: details View the list of available messages
 Message | Default Message
 ------------- | -------------
 buttonCreate | Create :name
@@ -150,6 +151,7 @@ flashAdd | :name Added
 flashLink | :name Linked
 flashRemove | :name Removed
 flashUnlink | :name Unlinked
+:::
 
 <a id="oc-relationship-types"></a>
 ## Relationship Types
