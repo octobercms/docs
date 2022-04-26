@@ -1,3 +1,6 @@
+---
+subtitle: Twig Tag
+---
 # {% flash %}
 
 The `{% flash %}` and `{% endflash %}` tags will render any flash messages stored in the user session, set by the `Flash` PHP class. The `message` variable inside will contain the flash message text and the markup inside will repeat for multiple flash messages.

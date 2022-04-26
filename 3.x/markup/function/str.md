@@ -1,3 +1,6 @@
+---
+subtitle: Twig Function
+---
 # str()
 
 Functions prefixed with `str_` perform tasks that are useful when dealing with strings. The helper maps directly to the `Str` PHP class and its methods. For example:

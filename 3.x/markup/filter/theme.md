@@ -1,3 +1,6 @@
+---
+subtitle: Twig Filter
+---
 # |theme
 
 The `|theme` filter returns an address relative to the active theme path of the website. The result is an absolute URL, including domain and protocol, to the asset specified in the filter parameter. Theme assets usually reside in the **assets** subdirectory of a theme directory.

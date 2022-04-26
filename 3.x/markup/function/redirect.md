@@ -1,3 +1,6 @@
+---
+subtitle: Twig Function
+---
 # redirect()
 
 The `redirect()` function redirects the response to a URL or theme page.

@@ -1,3 +1,6 @@
+---
+subtitle: Twig Filter
+---
 # |media
 
 The `|media` filter returns an address relative to the public path of the [media manager library](../../cms/media/introduction.md). The result is a URL to the media file specified in the filter parameter.

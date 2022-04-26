@@ -1,3 +1,6 @@
+---
+subtitle: Twig Function
+---
 # dump()
 
 The `dump()` function dumps information about a template variable. This is useful when debugging a template that does not behave as expected.

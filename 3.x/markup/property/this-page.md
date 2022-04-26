@@ -1,3 +1,6 @@
+---
+subtitle: Twig Property
+---
 # this.page
 
 You can access the current page object via `this.page` and it returns the object `Cms\Classes\Page`. This object can also be accessed in the [PHP code of a page](../../cms/themes/pages.md) as `$this->page`.

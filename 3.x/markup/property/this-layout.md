@@ -1,3 +1,6 @@
+---
+subtitle: Twig Property
+---
 # this.layout
 
 You can access the current layout object via `this.layout` and it returns the object `Cms\Classes\Layout`.

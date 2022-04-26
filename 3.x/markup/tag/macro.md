@@ -1,3 +1,6 @@
+---
+subtitle: Twig Tag
+---
 # {% macro %}
 
 The `{% macro %}` tag allows you to define custom functions in your templates, similar to regular programming languages.

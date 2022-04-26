@@ -1,3 +1,6 @@
+---
+subtitle: Twig Function
+---
 # html()
 
 Functions prefixed with `html_` perform tasks that are useful when dealing with HTML markup. The helper maps directly to the `Html` PHP class and its methods. For example:

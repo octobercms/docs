@@ -17,4 +17,6 @@ price:
     format: "$%.2f"
 ```
 
-> **Note**: Both `text` and `number` columns support the `format` property as a string value, this property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
+::: tip
+The `format` property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
+:::

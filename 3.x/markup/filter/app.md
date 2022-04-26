@@ -1,3 +1,6 @@
+---
+subtitle: Twig Filter
+---
 # |app
 
 The `|app` filter returns an address relative to the public path of the website. The result is an absolute URL, including the domain name and protocol, to the location specified in the filter parameter. The filter can be applied to any path.

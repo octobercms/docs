@@ -1,3 +1,6 @@
+---
+subtitle: Twig Tag
+---
 # {% scripts %}
 
 The `{% scripts %}` tag inserts JavaScript file references to scripts injected by the application. The tag is commonly defined before the closing BODY tag:

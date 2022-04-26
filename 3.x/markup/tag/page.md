@@ -1,3 +1,6 @@
+---
+subtitle: Twig Tag
+---
 # {% page %}
 
 The `{% page %}` tag renders the contents of a [page](../../cms/themes/pages.md) into a layout template.

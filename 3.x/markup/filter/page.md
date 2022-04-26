@@ -1,3 +1,6 @@
+---
+subtitle: Twig Filter
+---
 # |page
 
 The `|page` filter creates a link to a page using a page file name, without an extension, as a parameter. For example, if there is the about.htm page you can use the following code to generate a link to it:

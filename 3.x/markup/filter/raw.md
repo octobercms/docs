@@ -1,3 +1,6 @@
+---
+subtitle: Twig Filter
+---
 # |raw
 
 Output variables in October CMS are automatically escaped, the `|raw` filter marks the value as being "safe" and will not be escaped if `raw` is the last filter applied.

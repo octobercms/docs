@@ -1,3 +1,6 @@
+---
+subtitle: Twig Filter
+---
 # |resize
 
 The `|resize` filter attempts to resize the provided image source using the provided resizing configuration and outputs a URL to the resized image.

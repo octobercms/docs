@@ -1,3 +1,6 @@
+---
+subtitle: Twig Property
+---
 # this.session
 
 You can access the current session manager via `this.session` and it returns the object `Illuminate\Session\SessionManager` [current session configuration](../../extend/services/session.md).

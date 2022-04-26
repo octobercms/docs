@@ -1,3 +1,6 @@
+---
+subtitle: Twig Tag
+---
 # {% for %}
 
 The `{% for %}` and `{% endfor %}` tags will loop over each value in a collection. A collection can be either an array or an object implementing the `Traversable` interface.

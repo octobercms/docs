@@ -506,6 +506,17 @@ public function filterFields($fields, $context = null)
 }
 ```
 
+The `$context` value will contain the form context (create, update, etc.) when displaying and saving the form, however, when the form is being refreshed the context will always be set to **refresh**. This is useful for populating fields with new values without forcing it to be the saved value. The following will reset the parent name value if the parent value is changed during a refresh but won't affect the save value.
+
+```php
+public function filterFields($fields, $context = null)
+{
+    if ($context === 'refresh' && $this->parent) {
+        $fields->parent_name->value = $this->parent->name;
+    }
+}
+```
+
 The above logic will set the `hidden` flag on certain fields by checking the value of the Model attribute `source_type`. This logic will be applied when the form first loads and also when updated by a [defined field dependency](#oc-field-dependencies). For example, here is the associated form field definitions.
 
 ```yaml
