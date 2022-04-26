@@ -48,7 +48,13 @@ Plugin namespaces are essential, especially if you are going to publish your plu
 
 ## Registration File
 
-The **Plugin.php** file, called the *plugin registration file*, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
+The `create:plugin` command generates a plugin folder and basic files for the plugin. The first argument specifies the author and plugin name.
+
+```bash
+php artisan create:plugin Acme.Blog
+```
+
+The **Plugin.php** file, called the plugin registration file, is an initialization script that declares a plugin's core functions and information. Registration files can provide the following:
 
 1. Information about the plugin, its name, and author.
 1. Registration methods for extending the CMS.

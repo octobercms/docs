@@ -4,7 +4,6 @@ Report widgets can be used on the backend dashboard and in other backend report 
 
 > You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding.md#oc-create-a-report-widget) for more information.
 
-### Report Widget Classes
 
 The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../system/plugins.md). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
@@ -16,7 +15,15 @@ The report widget classes should extend the `Backend\Classes\ReportWidgetBase` c
 |   └── TrafficSources.php _<== Widget Class_
 :::
 
-Example report widget class definition:
+### Class Definition
+
+The `create:reportwidget` command generates a backend report widget, view and basic asset files. The first argument specifies the author and plugin name. The second argument specifies the report widget class name.
+
+```bash
+php artisan create:reportwidget Acme.Blog TopPosts
+```
+
+The report widget classes must extend the `Backend\Classes\ReportWidgetBase` class. Example report widget class definition:
 
 ```php
 namespace RainLab\GoogleAnalytics\ReportWidgets;

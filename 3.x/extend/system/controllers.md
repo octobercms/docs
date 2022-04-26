@@ -26,6 +26,12 @@ For a practical example of using backend controllers, check out the [Beyond Beha
 
 ### Class Definition
 
+The `create:controller` command generates a controller, configuration and view files. The first argument specifies the author and plugin name. The second argument specifies the controller class name.
+
+```bash
+php artisan create:controller Acme.Blog Posts
+```
+
 Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../system/plugins.md). The most basic representation of a Controller used inside a Plugin looks like this.
 
 ```php

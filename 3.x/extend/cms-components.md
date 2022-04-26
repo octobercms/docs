@@ -21,7 +21,13 @@ Components must be [registered in the plugin registration file](../extend/extend
 <a id="oc-component-class-definition"></a>
 ## Component Class Definition
 
-The **component class file** defines the component functionality and [component properties](#oc-component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
+The `create:component` command creates a new component class and the default component view. The first argument specifies the author and plugin name. The second argument specifies the component class name.
+
+```bash
+php artisan create:component Acme.Blog Post
+```
+
+The component class file defines the component functionality and [component properties](#oc-component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
 
 ```php
 namespace Acme\Blog\Components;

@@ -23,6 +23,12 @@ The model configuration directory could contain the model's [form field and list
 
 ## Defining Models
 
+The `create:model` command generates the files needed for a new model. The first argument specifies the author and plugin name. The second argument specifies the model class name.
+
+```bash
+php artisan create:model Acme.Blog Post
+```
+
 In most cases, you should create one model class for each database table. All model classes must extend the `Model` class. The most basic representation of a model used inside a Plugin looks like this.
 
 ```php
