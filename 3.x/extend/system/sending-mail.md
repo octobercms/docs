@@ -35,12 +35,12 @@ By default, October CMS comes with two default mail layouts.
 
 Layout | Code | Description
 ------------- | ------------- | -------------
-Default | default | Used for public facing, frontend mail.
-System | system | Used for internal, backend mail.
+Default | `default` | Used for public facing, frontend mail.
+System | `system` | Used for internal, backend mail.
 
 ### Defining Views in the Filesystem
 
-Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code **author.plugin::mail.message** would use the content in following file.
+Mail views reside in the file system and the code used represents the path to the view file. For example sending mail with the code `author.plugin::mail.message` would use the content in following file.
 
 ::: dir
 ├── plugins
@@ -54,6 +54,7 @@ Mail views reside in the file system and the code used represents the path to th
 The content inside a mail view file can includes 2 sections: **configuration** and **message content**. Sections are separated with the `==` sequence. For example:
 
 ```twig
+layout = "default"
 subject = "Your product has been added to October CMS project"
 ==
 Hi {{ name }},
@@ -63,12 +64,36 @@ Hi {{ name }},
 
 #### Configuration Section
 
-The configuration section sets the mail view parameters. The following configuration parameters are supported.
+The configuration section sets the mail view properties. The following configuration properties are supported.
 
-Parameter | Description
+Property | Description
 ------------- | -------------
 **subject** | the mail message subject, required.
-**layout** | the mail layout code, optional. Default value is `default`.
+**layout** | the mail layout code or view, optional. Default value is `default`.
+
+#### File-based Layouts
+
+To reference a file-based layout, you may pass the view code to the **layout** property. For example, this mail view references a layout of `acme.blog::mail.custom-layout`.
+
+```ini
+layout = "acme.blog::mail.custom-layout"
+subject = "Your product has been added to October CMS project"
+==
+...
+```
+
+Using the code above, it will attempt to load the layout content from the path **plugins/acme/blog/views/mail/custom.layout-htm** and these contents are an example.
+
+```twig
+<html>
+<body>
+    <h1>HTML Contents</h1>
+    <div>
+        {{ content|raw }}
+    </div>
+</body>
+</html>
+```
 
 ### Registering Layouts, Templates & Partials
 

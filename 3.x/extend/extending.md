@@ -266,7 +266,7 @@ class Topic extends ComponentBase
 
 Next this will demonstrate how to hook to this new event from inside the [Layout Execution Life Cycle](../cms/themes/layouts.md). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
-```
+```php
 [topic]
 slug = "{{ :slug }}"
 ==
