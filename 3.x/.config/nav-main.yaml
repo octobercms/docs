@@ -194,6 +194,7 @@
         - property/this-controller
         - property/this-environment
         - property/this-session
+        - property/this-method
 -
     title: Tags
     collapsable: false
@@ -227,8 +228,10 @@
     title: Functions
     collapsable: false
     children:
-        - function/abort
+        - function/ajax-handler
+        - function/response
         - function/redirect
+        - function/abort
         - function/dump
         - function/str
         - function/form
@@ -301,6 +304,10 @@
     children:
         - media/introduction
         - media/providers
+-
+    title: Resources
+    children:
+        - resources/building-apis
 
 #
 # Root Nav
