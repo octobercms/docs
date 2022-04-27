@@ -24,10 +24,10 @@ Components must be [registered in the plugin registration file](../extend/extend
 The `create:component` command creates a new component class and the default component view. The first argument specifies the author and plugin name. The second argument specifies the component class name.
 
 ```bash
-php artisan create:component Acme.Blog Post
+php artisan create:component Acme.Blog BlogPosts
 ```
 
-The component class file defines the component functionality and [component properties](#oc-component-properties). The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the plugins/acme/blog/components/BlogPosts.php file.
+The component class file defines the component functionality and component properties. The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the **plugins/acme/blog/components/BlogPosts.php** file.
 
 ```php
 namespace Acme\Blog\Components;
@@ -54,7 +54,7 @@ class BlogPosts extends \Cms\Classes\ComponentBase
 
 The `componentDetails` method is required. The method should return an array with two keys: `name` and `description`. The name and description are display in the CMS back-end user interface.
 
-When this [component is attached to a page or layout](../cms/components.md), the class properties and methods become available on the page through the component variable, which name matches the component short name or the alias. For example, if the BlogPost component from the previous example was defined on a page with its short name:
+When this [component is attached to a page or layout](../cms/themes/components.md), the class properties and methods become available on the page through the component variable, which name matches the component short name or the alias. For example, if the BlogPost component from the previous example was defined on a page with its short name:
 
 ```ini
 url = "/blog"
@@ -71,7 +71,6 @@ You would be able to access its `posts` method through the `blogPosts` variable.
 {% endfor %}
 ```
 
-<a id="oc-component-registration"></a>
 ### Component Registration
 
 Components must be registered by overriding the `registerComponents` method inside the [plugin registration file](../extend/extending.md). This tells the CMS about the Component and provides a **short name** for using it. An example of registering a component:
@@ -85,9 +84,8 @@ public function registerComponents()
 }
 ```
 
-This will register the Todo component class with the default alias name **demoTodo**. More information on using components can be found at the [CMS components article](../cms/components.md).
+This will register the Todo component class with the default alias name **demoTodo**. More information on using components can be found at the [CMS components article](../cms/themes/components.md).
 
-<a id="oc-component-properties"></a>
 ## Component Properties
 
 When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties` method of the component class. The next example shows how to define a component property:
@@ -121,7 +119,7 @@ Key | Description
 **required** | optional, forces field to be filled. Uses validationMessage when left empty.
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
-**depends** | an array of property names a dropdown property depends on. See the [dropdown properties](#oc-dropdown-and-set-properties) below.
+**depends** | an array of property names a dropdown property depends on. See the dropdown properties below.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 **showExternalParam** | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: **true**.
 
@@ -169,7 +167,7 @@ public function defineProperties()
 }
 ```
 
-The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown or set property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition:
+The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown or set property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition.
 
 ```php
 public function defineProperties()
@@ -189,7 +187,7 @@ public function getCountryOptions()
 }
 ```
 
-Dynamic dropdown and set lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country:
+Dynamic dropdown and set lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country.
 
 ```php
 public function defineProperties()
@@ -211,7 +209,7 @@ public function defineProperties()
 }
 ```
 
-In order to load the state list you should know what country is currently selected in the Inspector. The Inspector POSTs all property values to the `getPropertyOptions` handler, so you can do the following:
+In order to load the state list you should know what country is currently selected in the Inspector. The Inspector POSTs all property values to the `getPropertyOptions` handler, so you can do the following.
 
 ```php
 public function getStateOptions()
@@ -230,7 +228,7 @@ public function getStateOptions()
 
 ### Page List Properties
 
-Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../markup/filter-page.md)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
+Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../markup/filter/page.md)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
 
 ```php
 public function defineProperties()
@@ -259,9 +257,7 @@ Components can directly access routing parameter values defined in the [URL of t
 $postId = $this->param('post_id');
 ```
 
-In some cases a [component property](#oc-component-properties) may act as a hard coded value or reference the value from the URL.
-
-This hard coded example shows the blog post with an identifier `2` being used:
+In some cases a component property may act as a hard coded value or reference the value from the URL. This hard coded example shows the blog post with an identifier `2` being used:
 
 ```ini
 url = "/blog/hard-coded-page"
@@ -292,7 +288,6 @@ If you need to access the routing parameter name:
 $this->paramName('id');
 ```
 
-<a id="oc-handling-the-page-execution-cycle"></a>
 ## Handling the Page Execution Cycle
 
 Components can be involved in the Page execution cycle events by overriding the `onRun` method in the component class. The CMS controller executes this method every time when the page or layout loads. Inside the method you can inject variables to the Twig environment through the `page` property:
@@ -321,7 +316,6 @@ When a page loads, October executes handler functions that could be defined in t
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
 
-<a id="oc-component-initialization"></a>
 ### Component Initialization
 
 Sometimes you may wish to execute code at the time the component class is first instantiated. You may override the `init` method in the component class to handle any initialization logic, this will execute before AJAX handlers and before the page execution life cycle. For example, this method can be used for attaching another component to the page dynamically.
@@ -358,10 +352,9 @@ public function onRun()
 }
 ```
 
-<a id="oc-ajax-handlers"></a>
 ## AJAX Handlers
 
-Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../ajax/handlers.md). An example AJAX handler method defined in a component class:
+Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../cms/ajax/handlers.md). An example AJAX handler method defined in a component class:
 
 ```php
 public function onAddItem()
@@ -388,7 +381,7 @@ url = "/todo"
 {% component 'demoTodo' %}
 ```
 
-The default markup can also take parameters that override the [component properties](#oc-component-properties) at the time they are rendered.
+The default markup can also take parameters that override the component properties at the time they are rendered.
 
 ```twig
 {% component 'demoTodo' maxItems="7" %}
@@ -406,7 +399,6 @@ public function onRender()
 }
 ```
 
-<a id="oc-component-partials"></a>
 ## Component Partials
 
 In addition to the default markup, components can also offer additional partials that can be used on the front-end or within the default markup itself. If the Demo ToDo component had a **pagination** partial, it would be located in **/plugins/october/demo/components/todo/pagination.htm** and displayed on the page using:
@@ -471,7 +463,7 @@ The ID is unique each time the component is displayed.
 
 ## Rendering Partials from Code
 
-You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same [path resolution logic](#oc-component-partials) applies when you render a component partial in PHP as it does with Twig; use the `@` prefix to refer to partials within the component itself.
+You may programmatically render component partials inside the PHP code using the `renderPartial` method. This will check the component for the partial named `component-partial.htm` and return the result as a string. The second parameter is used for passing view variables. The same path resolution logic applies when you render a component partial in PHP as it does with Twig; use the `@` prefix to refer to partials within the component itself.
 
 ```php
 $content = $this->renderPartial('@component-partial.htm');
@@ -481,7 +473,7 @@ $content = $this->renderPartial('@component-partial.htm', [
 ]);
 ```
 
-For example, to render a partial as a response to an [AJAX handler](../ajax/handlers.md):
+For example, to render a partial as a response to an [AJAX handler](../cms/ajax/handlers.md):
 
 ```php
 function onGetTemplate()
@@ -490,7 +482,7 @@ function onGetTemplate()
 }
 ```
 
-Another example could be overriding the entire page view response by returning a value from the `onRun` [page cycle method](#oc-handling-the-page-execution-cycle). This code will specifically return an XML response using the `Response` facade:
+Another example could be overriding the entire page view response by returning a value from the `onRun` page execution cycle. This code will specifically return an XML response using the `Response` facade:
 
 ```php
 public function onRun()
@@ -500,7 +492,6 @@ public function onRun()
 }
 ```
 
-<a id="oc-injecting-page-assets-with-components"></a>
 ## Injecting Page Assets with Components
 
 Components can inject assets (CSS and JavaScript files) to pages or layouts they're attached to. Use the controller's `addCss` and `addJs` methods to add assets to the CMS controllers. It could be done in the component's `onRun` method.
@@ -512,9 +503,9 @@ public function onRun()
 }
 ```
 
-If the path specified in the `addCss` and `addJs` method argument begins with a slash (/) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
+If the path specified in the `addCss` and `addJs` method argument begins with a slash (`/`) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
 
-The `addCss` and `addJs` methods provide a second argument that defines the attributes of your injected asset as an array. A special attribute - `build` - is available, that will suffix your injected assets with the current version of the plugin specified. This can be used to refresh cached assets when a plugin is upgraded.
+The `addCss` and `addJs` methods provide a second argument that defines the attributes of your injected asset as an array. A special attribute called `build` is available, that will suffix your injected assets with the current version of the plugin specified. This can be used to refresh cached assets when a plugin is upgraded.
 
 ```php
 public function onRun()

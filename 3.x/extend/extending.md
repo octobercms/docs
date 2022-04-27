@@ -29,7 +29,7 @@ Method | Description
 
 ## Extending with Events
 
-The [Event service](./services/event.md) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event;` to the top of your PHP file (after the namespace statement) to import the Event facade.
+The [Event service](./services/event.md) is the primary way to inject or modify the functionality of core classes or other plugins. This service can be imported for use in any class by adding `use Event` to the top of your PHP file (after the namespace statement) to import the Event facade.
 
 ### Subscribing to Events
 
@@ -61,9 +61,7 @@ User::extend(function ($model) {
 
 ### Declaring / Firing Events
 
-You can fire events globally (through the Event service) or locally.
-
-Local events are fired by calling `fireEvent()` on an instance of an object that implements `October\Rain\Support\Traits\Emitter`. Since local events are only fired on a specific object instance, it is not required to namespace them as it is less likely that a given project would have multiple events with the same name being fired on the same objects within a local context.
+Fire events locally by calling `fireEvent()` on an instance of an object that implements `October\Rain\Support\Traits\Emitter`. Since local events are only fired on a specific object instance, it is not required to namespace them as it is less likely that a given project would have multiple events with the same name being fired on the same objects within a local context.
 
 ```php
 $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
@@ -75,7 +73,7 @@ Global events are fired by calling `Event::fire()`. As these events are global a
 Event::fire('acme.blog.post.beforePost', [$firstParam, $secondParam]);
 ```
 
-If both global & local events are provided at the same place it's best practice to fire the local event before the global event so that the local event takes priority. Additionally, the global event should provide the object instance that the local event was fired on as the first parameter.
+If both global and local events are provided at the same place it's best practice to fire the local event before the global event so that the local event takes priority. Additionally, the global event should provide the object instance that the local event was fired on as the first parameter.
 
 ```php
 $this->fireEvent('post.beforePost', [$firstParam, $secondParam]);
@@ -116,7 +114,9 @@ Event::listen('backend.auth.extendSigninView', function ($controller, $firstPara
 });
 ```
 
-> **Note**: The first parameter in the event handler will always be the calling object (the controller).
+::: tip
+The first parameter in the event handler will always be the calling object (the controller).
+:::
 
 The above example would output the following markup:
 
@@ -132,7 +132,7 @@ These are some practical examples of how events can be used.
 
 ### Extending a User Model
 
-This example will modify the [`model.getAttribute`](https://octobercms.com/docs/api/model/beforegetattribute) event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the plugin registration file. In both cases, when the `$model->foo` attribute is accessed it will return the value *bar*.
+This example will modify the `model.getAttribute` event of the `User` model by binding to its local event. This is carried out inside the `boot` method of the plugin registration file. In both cases, when the `$model->foo` attribute is accessed it will return the value **bar**.
 
 ```php
 // Local event hook that affects all users
@@ -174,9 +174,11 @@ User::extend(function ($model) {
 
 ### Extending Backend Forms
 
-There are a number of ways to extend backend forms, see [Backend Forms](../backend/forms.md#oc-extending-form-behavior).
+::: aside
+There are a number of ways to extend backend forms, see the [Backend Controller article](./forms/form-controller.md) for more information.
+:::
 
-This example will listen to the [`backend.form.extendFields`](https://octobercms.com/docs/api/backend/form/extendfields) global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the plugin registration file.
+This example will listen to the `backend.form.extendFields` global event of the `Backend\Widget\Form` widget and inject some extra fields when the Form widget is being used to modify a user. This event is also subscribed inside the `boot` method of the plugin registration file.
 
 ```php
 // Extend all backend form usage
@@ -200,9 +202,9 @@ Event::listen('backend.form.extendFields', function($widget) {
     // Add an extra birthday field
     $widget->addFields([
         'birthday' => [
-            'label'   => 'Birthday',
+            'label' => 'Birthday',
             'comment' => 'Select the users birthday',
-            'type'    => 'datepicker'
+            'type' => 'datepicker'
         ]
     ]);
 
@@ -217,7 +219,7 @@ You may also use the `backend.form.extendFieldsBefore` event to add fields.
 
 ### Extending a Backend List
 
-This example will modify the [`backend.list.extendColumns`](https://octobercms.com/docs/api/backend/list/extendcolumns) global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the plugin registration file.
+This example will modify the `backend.list.extendColumns` global event of the `Backend\Widget\Lists` class and inject some extra columns values under the conditions that the list is being used to modify a user. This event is also subscribed inside the `boot` method of the plugin registration file.
 
 ```php
 // Extend all backend list usage
@@ -246,7 +248,7 @@ Event::listen('backend.list.extendColumns', function ($widget) {
 
 ### Extending a Component
 
-This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [Component class definition](components.md#oc-component-class-definition).
+This example will declare a new global event `rainlab.forum.topic.post` and local event called `topic.post` inside a `Topic` component. This is carried out in the [component class definition](./cms-components.md).
 
 ```php
 class Topic extends ComponentBase
@@ -270,12 +272,14 @@ Next this will demonstrate how to hook to this new event from inside the [Layout
 [topic]
 slug = "{{ :slug }}"
 ==
+<?
 function onInit()
 {
     $this->topic->bindEvent('topic.post', function($post, $postUrl) {
         trace_log('A post has been submitted at '.$postUrl);
     });
 }
+?>
 ```
 
 ### Extending the Backend Menu
@@ -320,3 +324,9 @@ Event::listen('backend.menu.extendItems', function($manager) {
     ]);
 });
 ```
+
+#### See Also
+
+::: also
+* [Event Service](./services/event.md)
+:::

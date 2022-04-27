@@ -119,7 +119,7 @@ In the October back-end you can use the Inspector tool for assigning external va
 
 ## Passing Variables to Components
 
-Components can be designed to use variables at the time they are rendered, similar to [Partial variables](./partials.md), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../plugin/components.md#oc-component-properties), including external property values.
+Components can be designed to use variables at the time they are rendered, similar to [Partial variables](./partials.md), they can be specified after the component name in the `{% component %}` tag. The specified variables will explicitly override the value of the [component properties](../../extend/cms-components.md), including external property values.
 
 In this example, the **maxItems** property of the component will be set to *7* at the time the component is rendered:
 

@@ -1,10 +1,10 @@
 ---
-subtitle: Defining API routes using CMS Pages.
+subtitle: Learn how to build a simple API using CMS Pages.
 ---
 # Building Theme-based APIs
 
 ::: aside
-View the [routing article](../../extend/system/routing.md) if you prefer to define routes using PHP instead.
+View the [routing article](../../extend/system/routing.md) if you prefer to define API routes using PHP instead.
 :::
 
 When working with client-side frameworks such as Vue.js or React, it will be necessary to consume server-side APIs. These can be defined using your theme where each page represents an API endpoint.
@@ -22,9 +22,9 @@ handle = "Blog\Post"
 {% do response(posts) %}
 ```
 
-## Checking the HTTP method
+## Checking the HTTP Method
 
-Use the `this.method` property to check the request method.
+Use the `this.method` [Twig property](../../markup/property/this-method.md) to check the request method.
 
 ```twig
 {% if this.method == 'GET' %}
@@ -36,7 +36,7 @@ Use the `this.method` property to check the request method.
 
 ## Aborting the Request
 
-The `abort()` function can be used to abort the request with a 404 response.
+The `abort()` [Twig function](../../markup/function/abort.md) can be used to abort the request with a 404 response.
 
 ```twig
 url = "/api/blog/post/:slug"
@@ -65,7 +65,7 @@ url = "/api/blog/post
 {% endif %}
 ```
 
-The result of calling the handler can be returned directly to the browser.
+The result of calling the handler can be returned directly to the browser. The respond includes any variables set on the page and/or array values returned by the function.
 
 ```twig
 {% do response(ajaxHandler('onSubmitPost')) %}

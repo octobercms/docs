@@ -6,7 +6,7 @@ subtitle: Create your own commands that run in the console.
 To build your own custom commands for working with your application, store them within the plugin **console** directory. You can generate the class file using the command line scaffolding tool. The first argument specifies the author and plugin name. The second argument specifies the command name.
 
 ```bash
-php artisan create:command RainLab.Blog MyCommandClass
+php artisan create:command RainLab.Blog MyCommand
 ```
 
 ## Building a Command
@@ -14,7 +14,7 @@ php artisan create:command RainLab.Blog MyCommandClass
 If you wanted to create a console command called `acme:mycommand`, you might create the associated class for that command in a file called **plugins/acme/blog/console/MyCommand.php** and paste the following contents to get started:
 
 ```php
-<?php namespace Acme\Blog\Console;
+namespace Acme\Blog\Console;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -118,11 +118,15 @@ For options, the argument `mode` may be: `InputOption::VALUE_REQUIRED`, `InputOp
 
 The `VALUE_IS_ARRAY` mode indicates that the switch may be used multiple times when calling the command:
 
-    php artisan foo --option=bar --option=baz
+```bash
+php artisan foo --option=bar --option=baz
+```
 
 The `VALUE_NONE` option indicates that the option is simply used as a "switch":
 
-    php artisan foo --option
+```bash
+php artisan foo --option
+```
 
 ### Retrieving Input
 
@@ -201,9 +205,9 @@ $this->confirm($question, true);
 For long running tasks, it could be helpful to show a progress indicator. Using the output object, we can start, advance and stop the Progress Bar. First, define the total number of steps the process will iterate through. Then, advance the Progress Bar after processing each item:
 
 ```php
-$users = App\User::all();
+$users = User::all();
 
-$bar = $this->output->createProgressBar(count($users));
+$bar = $this->output->createProgressBar($users->count());
 
 foreach ($users as $user) {
     $this->performTask($user);
@@ -214,13 +218,13 @@ foreach ($users as $user) {
 $bar->finish();
 ```
 
-For more advanced options, check out the [Symfony Progress Bar component documentation](https://symfony.com/doc/2.7/components/console/helpers/progressbar.html).
+For more advanced options, check out the [Symfony Progress Bar component documentation](https://symfony.com/doc/current/components/console/helpers/progressbar.html).
 
 ## Registering Commands
 
 #### Registering a Console Command
 
-Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [Plugin registration file](../plugin/registration.md#oc-registration-methods) using  the `registerConsoleCommand` helper method.
+Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [plugin registration file](./extending.md) using  the `registerConsoleCommand` helper method.
 
 ```php
 class Blog extends PluginBase
@@ -237,7 +241,7 @@ class Blog extends PluginBase
 }
 ```
 
-Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place command registration logic. Within this file, you may use the `Artisan::add` method to register the command:
+Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place command registration logic. Within this file, you may use the `Artisan::add` method to register the command.
 
 ```php
 Artisan::add(new Acme\Blog\Console\MyCommand);
@@ -245,25 +249,10 @@ Artisan::add(new Acme\Blog\Console\MyCommand);
 
 #### Registering a Command in the Application Container
 
-If your command is registered in the [application container](../services/application.md), you may use the `Artisan::resolve` method to make it available to Artisan:
+If your command is registered in the [application container](./services/application.md), you may use the `Artisan::resolve` method to make it available to Artisan.
 
 ```php
 Artisan::resolve('binding.name');
-```
-
-#### Registering Commands in a Service Provider
-
-If you need to register commands from within a [service provider](application.md#oc-service-providers), you should call the `commands` method from the provider's `boot` method, passing the [container](../services/application.md) binding for the command:
-
-```php
-public function boot()
-{
-    $this->app->singleton('acme.mycommand', function() {
-        return new \Acme\Blog\Console\MyConsoleCommand;
-    });
-
-    $this->commands('acme.mycommand');
-}
 ```
 
 ## Calling Other Commands

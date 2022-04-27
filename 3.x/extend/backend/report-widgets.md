@@ -108,7 +108,7 @@ Report widgets may have properties that users can manage with the Inspector:
 
 ![image](https://github.com/octobercms/docs/blob/develop/images/report-widget-inspector.png?raw=true)
 
-The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../plugin/components.md#oc-component-properties). Example:
+The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../cms-components.md). Example:
 
 ```php
 public function defineProperties()
