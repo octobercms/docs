@@ -1,16 +1,16 @@
 # Settings Page
 
-There are two ways to configure plugins - with back-end settings forms and with configuration files. Using database settings with back-end pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
+There are two ways to configure plugins - with backend settings forms and with configuration files. Using database settings with backend pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 
 <a id="oc-backend-settings-pages"></a>
 ## Backend Settings Pages
 
-The back-end contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
+The backend contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
 <a id="oc-settings-link-registration"></a>
 ### Settings Link Registration
 
-The back-end settings navigation links can be extended by overriding the `registerSettings` method inside the [plugin registration file](../extending.md). When you create a configuration link you have two options - create a link to a specific back-end page, or create a link to a settings model. The next example shows how to create a link to a back-end page.
+The backend settings navigation links can be extended by overriding the `registerSettings` method inside the [plugin registration file](../extending.md). When you create a configuration link you have two options - create a link to a specific backend page, or create a link to a settings model. The next example shows how to create a link to a backend page.
 
 ```php
 public function registerSettings()
@@ -56,18 +56,18 @@ The optional `keywords` parameter is used by the settings search feature. If key
 <a id="oc-setting-the-page-navigation-context"></a>
 ### Setting the Page Navigation Context
 
-Just like [setting navigation context in the controller](../backend/controllers-ajax.md#oc-setting-the-navigation-context), Back-end settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
+Just like setting navigation context in the [backend controller](../system/controllers.md), backend settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
 
 ```php
 public function __construct()
 {
     parent::__construct();
 
-    [...]
+    // ...
 
     BackendMenu::setContext('October.System', 'system', 'settings');
     SettingsManager::setContext('You.Plugin', 'settings');
 }
 ```
 
-The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the back-end settings page](#oc-settings-link-registration).
+The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the backend settings page](#oc-settings-link-registration).

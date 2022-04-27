@@ -11,6 +11,16 @@ navigation:
     order: 200
 ```
 
+The following properties are supported by the `navigation` and `primaryNavigation` definition.
+
+Property | Description
+------------- | -------------
+**label** | specifies the menu label localization string key, required.
+**order** | a numerical weight when determining the display order.
+**parent** | links the navigation item to a parent item using a blueprint handle.
+**icon** | an icon name from the [October CMS icon collection](https://octobercms.com/docs/ui/icon), optional.
+**iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
+
 To place an item in the Settings area, set the **parent** to `settings`. The **category** definition can be a string or a settings constant reference, eg. `CATEGORY_COLLECTIONS`.
 
 ```yaml

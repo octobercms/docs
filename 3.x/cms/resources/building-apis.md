@@ -60,12 +60,13 @@ In some cases you may wish to call an AJAX handler of a component or inside the 
 url = "/api/blog/post
 ==
 {% set result = ajaxHandler('onSubmitPost') %}
+
 {% if not result.error %}
     {% do response({ success: true }) %}
 {% endif %}
 ```
 
-The result of calling the handler can be returned directly to the browser. The respond includes any variables set on the page and/or array values returned by the function.
+You may also call a handler and pass it directly as a response. The response includes variables set on the page and array values returned by the function.
 
 ```twig
 {% do response(ajaxHandler('onSubmitPost')) %}
