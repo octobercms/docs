@@ -56,3 +56,57 @@ Exception | Status Code
 `ValidationException` | 422 Unprocessable Entity
 `ApplicationException` | 400 Bad Request
 `Exception` | 500 Internal Server Error
+
+## Handling Redirects
+
+If the AJAX handler caused a redirect, this will be available on the **redirect** property and can be returned directly. For example
+
+```php
+function onRedirect()
+{
+    return Redirect::to('https://octobercms.com');
+}
+```
+
+The following will redirect to the browser as a response.
+
+```twig
+{% do response(ajaxHandler('onTest')) %}
+```
+
+The object contains the **redirect** messages alongside the data.
+
+```json
+{
+    "data": [],
+    "redirect": "https://octobercms.com"
+}
+```
+
+## Handling Flash Messages
+
+If flash messages were used, these will be available in the **flash** property. Take the following handler as an example.
+
+```php
+function onTest()
+{
+    Flash::success('Test successful');
+}
+```
+
+Calling the handler and sending as a response.
+
+```twig
+{% do response(ajaxHandler('onTest')) %}
+```
+
+The output contains the **flash** messages alongside the data.
+
+```json
+{
+    "data": [],
+    "flash": {
+        "success": "Test successful"
+    }
+}
+```

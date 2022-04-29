@@ -123,7 +123,6 @@ The variables passed with the `$vars` property can now be accessed directly in y
 <p>The variable value is <?= $myVariable ?></p>
 ```
 
-<a id="oc-setting-the-navigation-context"></a>
 ## Setting the Navigation Context
 
 Plugins can register the backend navigation menus and submenus in the [plugin registration file](../backend/navigation.md). The navigation context determines what backend menu and submenu are active for the current backend page. You can set the navigation context with the `BackendMenu` class:

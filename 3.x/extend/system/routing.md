@@ -299,4 +299,5 @@ You may also manually throw an instance of `October\Rain\Exception\NotFoundExcep
 
 ::: also
 * [Laravel Routing](https://laravel.com/docs/9.x/routing)
+* [Eloquent API Resources](https://laravel.com/docs/9.x/eloquent-resources)
 :::
