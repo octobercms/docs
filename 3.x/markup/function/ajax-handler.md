@@ -9,13 +9,41 @@ The `ajaxHandler()` function runs an AJAX handler inside Twig and prepares a `Cm
 {% set result = ajaxHandler('onResetPassword') %}
 ```
 
-Any variables returned from the handler or set on the page during the handler call will be available in the result.
+The following properties can be expected in the resulting object.
+
+Property | Data
+------------- | -------------
+**data** | data set or returned by the handler, also available by directly calling the object.
+**error** | an error was thrown during the handler execution.
+**flash** | flash messages set by the handler.
+**redirect** | the handler returned a redirect.
+
+## Accessing Data
+
+Take the following AJAX handler definition.
+
+```php
+function onResetPassword()
+{
+    $this['someVariable'] = 'someValue';
+}
+```
+
+Next is an, an example of calling the **onResetPassword** handler.
+
+```twig
+{% set result = ajaxHandler('onResetPassword') %}
+```
+
+The **data** variables returned from the handler or set on the page during the handler call will be available via resulting variable.
 
 ```twig
 {{ result.someVariable }}
 ```
 
-When building APIs the response can be passed directly to  the `response()` [Twig function](./response.md).
+## Using Responses
+
+When [building APIs in your theme](../../cms/resources/building-apis.md), the response can be passed directly to  the `response()` [Twig function](./response.md).
 
 ```twig
 {% do response(ajaxHandler('onResetPassword')) %}
