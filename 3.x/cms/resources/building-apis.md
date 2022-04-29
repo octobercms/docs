@@ -11,7 +11,7 @@ When working with client-side frameworks such as Vue.js or React, it will be nec
 
 The page represents a transformation layer that sits between your CMS Components and the JSON responses that are actually returned to your application's users. Most objects, such as models and collections, support JSON serialization and can be returned directly as a response.
 
-## Basic Definition
+## Sending a Response
 
 In the simplest form, an API resource can be composed by returning a Twig variable using the `response()` [Twig function](../../markup/function/response.md). This function overrides the page contents and returns a custom response to the browser.
 
