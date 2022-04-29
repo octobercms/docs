@@ -113,7 +113,7 @@ redirect = "api/unauthenticated"
 
 ## Working with Resources
 
-The companion  `resource()` [Twig function](../../markup/function/response.md) can be used for dealing with models and collections. All data returned will be wrapped in the **data** attribute automatically or if placed there explicitly. Wrapping the response provides a consistent interface.
+The companion `resource()` [Twig function](../../markup/function/response.md) can be used for dealing with models and collections. All data returned will be wrapped in the **data** attribute automatically or if placed there explicitly. Wrapping the response provides a consistent interface and pipes through the resource resolver.
 
 ### Models & Collections
 
@@ -127,7 +127,7 @@ handle = "Blog\Post"
 entrySlug = "{{ :slug }}"
 ==
 {% if post %}
-    {% do resource(post) %}
+    {% do response(resource(post)) %}
 {% else %}
     {% do abort(404) %}
 {% endif %}
@@ -141,7 +141,7 @@ url = "/api/blog/posts"
 [collection posts]
 handle = "Blog\Post"
 ==
-{% do resource(posts) %}
+{% do response(resource(posts)) %}
 ```
 
 ### Pagination
@@ -149,7 +149,7 @@ handle = "Blog\Post"
 When responding with a paginated collection, extra information can be found in the **links** and **meta** attributes of the response.
 
 ```twig
-{% do resource(posts.paginate(3)) %}
+{% do response(resource(posts.paginate(3))) %}
 ```
 
 The above will output the following JSON format.

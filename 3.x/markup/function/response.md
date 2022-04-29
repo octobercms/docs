@@ -31,7 +31,13 @@ You may also pass custom headers as the third argument.
 
 ## resource()
 
-The `resource()` is similar to the response function except it should be used when handling models or collections. All data returned will be wrapped in the **data** attribute automatically or if placed there explicitly. Wrapping the response provides a consistent interface.
+The `resource()` function converts a resource to a consistent response type and should be used when handling models or collections.
+
+```twig
+{% do response(resource(model)) %}
+```
+
+All data returned will be wrapped in the **data** attribute automatically or if placed there explicitly. Wrapping the response provides a consistent interface.
 
 ```json
 {
@@ -52,4 +58,13 @@ If a resource support pagination, the output will be specially crafted to includ
     },
     "meta": {}
 }
+```
+
+Resources are resolved using a resolver that developers can use to customize their output. It's possible to construct a response with multiple resource resolvers.
+
+```twig
+{% do response({
+    user: resource(user),
+    posts: resource(user.posts)
+}) %}
 ```
