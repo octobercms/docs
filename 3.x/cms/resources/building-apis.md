@@ -16,6 +16,8 @@ The page represents a transformation layer that sits between your CMS Components
 In the simplest form, an API resource can be composed by returning a Twig variable using the `response()` [Twig function](../../markup/function/response.md). This function overrides the page contents and returns a custom response to the browser.
 
 ```twig
+url = "/api/foobar
+==
 {% do response({ foo: 'bar' }) %}
 ```
 
