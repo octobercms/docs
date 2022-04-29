@@ -62,6 +62,30 @@ The contents are then available as the `body` variable.
 {{ body|raw }}
 ```
 
+### Composable Partials
+
+Composable partials are possible when combined with the `{% placeholder %}` [Twig tag](./placeholder.md). The following partial defines a `header` and a `body` section where HTML content can be added.
+
+```twig
+<div class="header">
+    {% placeholder header %}
+</div>
+<div class="body">
+    {{ body|raw }}
+</div>
+```
+
+Next, you can include the `{% put %}` tag inside the `body` to compose the partial result with two HTML content sections.
+
+```twig
+{% partial "card" body %}
+    {% put header %}
+        <h2>This is the card header</h2>
+    {% endput %}
+    <p>This is the card contents</p>
+{% endpartial %}
+```
+
 ## Setting Partial Contents to a Twig Variable
 
 In any template you can set the partial contents to a variable with the `partial()` function. This lets you manipulate the output before display. Remember to use the `|raw` filter to prevent output escaping.

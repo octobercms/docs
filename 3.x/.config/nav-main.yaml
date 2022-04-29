@@ -305,7 +305,7 @@
         - media/introduction
         - media/providers
 -
-    title: Resources
+    title: API Resources
     children:
         - resources/building-apis
 
