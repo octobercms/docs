@@ -113,7 +113,7 @@ redirect = "api/unauthenticated"
 
 ## Working with Resources
 
-An alternative `response()` [Twig function](../../markup/function/response.md) can be used for dealing with models and collections. All data returned will be wrapped in the **data** attribute automatically or if placed there explicitly. Wrapping the response provides a consistent interface.
+The companion  `resource()` [Twig function](../../markup/function/response.md) can be used for dealing with models and collections. All data returned will be wrapped in the **data** attribute automatically or if placed there explicitly. Wrapping the response provides a consistent interface.
 
 ### Models & Collections
 
