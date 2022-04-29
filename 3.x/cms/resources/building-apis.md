@@ -154,21 +154,21 @@ The above will output the following JSON format.
 
 ```json
 {
-    "data": [...],
+    "data": {},
     "links": {
-        "first": "https://yoursite.tld/blog/posts?page=1",
-        "last": "https://yoursite.tld/blog/posts?page=1",
+        "first": "https://yoursite.tld/api/blog/posts?page=1",
+        "last": "https://yoursite.tld/api/blog/posts?page=1",
         "prev": null,
         "next": null
     },
     "meta": {
-        "path": "https://yoursite.tld/blog/posts",
+        "path": "https://yoursite.tld/api/blog/posts",
         "per_page": 3,
+        "total": 2,
         "current_page": 1,
         "last_page": 1,
         "from": 1,
-        "to": 2,
-        "total": 2
+        "to": 2
     }
 }
 ```

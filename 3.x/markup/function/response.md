@@ -35,7 +35,7 @@ The `resource()` is similar to the response function except it should be used wh
 
 ```json
 {
-    "data": {...}
+    "data": {}
 }
 ```
 
@@ -43,8 +43,13 @@ If a resource support pagination, the output will be specially crafted to includ
 
 ```json
 {
-    "data": {...},
-    "links": {...},
-    "meta": {...}
+    "data": {},
+    "links": {
+        "first": "...",
+        "last": "...",
+        "prev": "...",
+        "next": "..."
+    },
+    "meta": {}
 }
 ```

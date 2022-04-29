@@ -277,11 +277,11 @@ public function boot()
 {
     // Add a new middleware to beginning of the stack.
     $this->app[\Illuminate\Contracts\Http\Kernel::class]
-            ->prependMiddleware(\App\Middleware::class);
+        ->prependMiddleware(\App\Middleware::class);
 
     // Add a new middleware to end of the stack.
     $this->app[\Illuminate\Contracts\Http\Kernel::class]
-            ->pushMiddleware(\App\Middleware::class);
+        ->pushMiddleware(\App\Middleware::class);
 }
 ```
 

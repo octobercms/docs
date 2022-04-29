@@ -78,7 +78,7 @@ The object contains the **redirect** messages alongside the data.
 
 ```json
 {
-    "data": [],
+    "data": {},
     "redirect": "https://octobercms.com"
 }
 ```
@@ -104,7 +104,7 @@ The output contains the **flash** messages alongside the data.
 
 ```json
 {
-    "data": [],
+    "data": {},
     "flash": {
         "success": "Test successful"
     }
