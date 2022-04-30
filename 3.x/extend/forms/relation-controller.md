@@ -80,7 +80,7 @@ Option | Type | Description
 **showSorting** | List | displays the sorting link on each column. Default: true
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **recordsPerPage** | List | maximum rows to display for each page.
-**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../plugin/localization.md).
+**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../system/localization.md).
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
 **scope** | List | specifies a [query scope method](../database/model.md#oc-query-scopes) defined in the _related form model_ to apply to the list query always. The model that this relationship will be attached to (i.e. the parent model) is passed to this scope method as the second parameter (`$query` is the first).
 **searchMode** | List | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
@@ -103,12 +103,12 @@ These configuration values can be specified only for the **manage** options.
 
 Option | Type | Description
 ------------- | ------------- | -------------
-**title** | Both | a popup title, can refer to a [localization string](../plugin/localization.md).
+**title** | Both | a popup title, can refer to a [localization string](../system/localization.md).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: create, update.
 
 ### Custom Messages
 
-Specify the `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../plugin/localization.md).
+Specify the `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../system/localization.md).
 
 ```yaml
 customMessages:
@@ -327,7 +327,7 @@ $this->initRelation($post);
 
 > **Note**: The [form behavior](forms.md) will automatically initialize the model on its create, update and preview actions.
 
-The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](forms.md#oc-preview-view) page, the **preview.htm** view contents could look like this:
+The relation manager can then be displayed for a specified relation definition by calling the `relationRender` method. For example, if you want to display the relation manager on the [Preview](./form-controller.md) page, the **preview.htm** view contents could look like this:
 
 ```php
 <?= $this->formRenderPreview() ?>
@@ -353,7 +353,7 @@ Provides an opportunity to manipulate the relation configuration. The following 
 public function relationExtendConfig($config, $field, $model)
 {
     // Make sure the model and field matches those you want to manipulate
-    if (!$model instanceof MyModel || $field != 'myField') {
+    if (!$model instanceof MyModel || $field !== 'myField') {
         return;
     }
 
@@ -372,7 +372,7 @@ Provides an opportunity to manipulate the view widget. For example you might wan
 public function relationExtendViewWidget($widget, $field, $model)
 {
     // Make sure the model and field matches those you want to manipulate
-    if (!$model instanceof MyModel || $field != 'myField') {
+    if (!$model instanceof MyModel || $field !== 'myField') {
         return;
     }
 
@@ -390,7 +390,7 @@ Since the widget has not completed initializing at this point of the runtime cyc
 public function relationExtendViewWidget($widget, $field, $model)
 {
     // Make sure the model and field matches those you want to manipulate
-    if (!$model instanceof MyModel || $field != 'myField') {
+    if (!$model instanceof MyModel || $field !== 'myField') {
         return;
     }
 
@@ -409,7 +409,7 @@ Provides an opportunity to manipulate the manage widget of your relation.
 public function relationExtendManageWidget($widget, $field, $model)
 {
     // Make sure the field is the expected one
-    if ($field != 'myField') {
+    if ($field !== 'myField') {
         return;
     }
 
@@ -425,7 +425,7 @@ Provides an opportunity to manipulate the pivot widget of your relation.
 public function relationExtendPivotWidget($widget, $field, $model)
 {
     // Make sure the field is the expected one
-    if ($field != 'myField') {
+    if ($field !== 'myField') {
         return;
     }
 
@@ -459,7 +459,7 @@ The view widget is often refreshed when the manage widget makes a change, you ca
 public function relationExtendRefreshResults($field)
 {
     // Make sure the field is the expected one
-    if ($field != 'myField') {
+    if ($field !== 'myField') {
         return;
     }
 

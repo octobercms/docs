@@ -68,7 +68,7 @@ The following configuration options are supported for the Import page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization.md).
+**title** | a page title, can refer to a [localization string](../system/localization.md).
 **list** | defines the list columns available for importing.
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the import is complete, optional
@@ -91,7 +91,7 @@ The following configuration options are supported for the Export page:
 
 Option | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../plugin/localization.md).
+**title** | a page title, can refer to a [localization string](../system/localization.md).
 **fileName** | the file name to use for the exported file without extension. Default `export`
 **list** | defines the list columns available for exporting.
 **form** | provides additional fields used as export options, optional.

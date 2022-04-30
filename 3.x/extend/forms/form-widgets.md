@@ -1,5 +1,5 @@
 ---
-subtitle: A widget specifically made for use in a form.
+subtitle: A widget specifically made for use as a form field.
 ---
 # Form Widgets
 

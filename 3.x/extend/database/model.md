@@ -359,7 +359,7 @@ It's possible to access old values using the `original` attribute. For example:
 ```php
 public function afterUpdate()
 {
-    if ($this->title != $this->original['title']) {
+    if ($this->title !== $this->original['title']) {
         // title changed
     }
 }

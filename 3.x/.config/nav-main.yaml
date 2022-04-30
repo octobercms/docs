@@ -6,6 +6,7 @@
     title: Element
     children:
         - definitions
+        - field-conditions
 -
     title: Form Fields
     children:
@@ -114,6 +115,7 @@
     children:
         - forms/form-controller
         - forms/relation-controller
+        - forms/field-dependencies
         - forms/form-widgets
 -
     title: List Design

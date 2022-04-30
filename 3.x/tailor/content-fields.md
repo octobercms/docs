@@ -28,6 +28,8 @@ Property | Description
 **default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
 **tab** | assigns the field to a tab.
 **validation** | defines validation rules for the form field.
+**trigger** | specify conditions for this field using [trigger events](../element/field-conditions.md).
+**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](../element/field-conditions.md).
 
 ## List and Filter Properties
 
