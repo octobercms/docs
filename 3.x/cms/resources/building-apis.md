@@ -9,7 +9,7 @@ View the [routing article](../../extend/system/routing.md) if you prefer to defi
 
 When working with client-side frameworks such as Vue.js or React, it will be necessary to consume server-side APIs. These can be defined using your theme where each page represents an API endpoint.
 
-The page represents a transformation layer that sits between your CMS Components and the JSON responses that are actually returned to your application's users. Most objects, such as models and collections, support JSON serialization and can be returned directly as a response.
+The page represents a transformation layer that sits between your CMS Components and the JSON responses that are returned to your application. Most objects, such as models and collections, support JSON serialization and can be returned directly as a response.
 
 ## Sending a Response
 
@@ -113,7 +113,7 @@ redirect = "api/unauthenticated"
 
 ## Working with Resources
 
-The companion `resource()` [Twig function](../../markup/function/response.md) can be used for dealing with models and collections. All data returned will be wrapped in the **data** attribute automatically or if placed there explicitly. Wrapping the response provides a consistent interface and pipes through the resource resolver.
+When working with models and collections, it is recommended to return data wrapped in the **data** attribute. Wrapping the response provides a consistent interface.
 
 ### Models & Collections
 
@@ -127,7 +127,9 @@ handle = "Blog\Post"
 entrySlug = "{{ :slug }}"
 ==
 {% if post %}
-    {% do response(resource(post)) %}
+    {% do response({
+        data: post
+    }) %}
 {% else %}
     {% do abort(404) %}
 {% endif %}
@@ -141,15 +143,47 @@ url = "/api/blog/posts"
 [collection posts]
 handle = "Blog\Post"
 ==
-{% do response(resource(posts)) %}
+{% do response({
+    data: posts
+}) %}
+```
+
+### Building a Custom Collection
+
+Use the `collect()`[Twig function](../../markup/function/collect.md) to process a collection for a response. The `push` method is used to push items on to the collection and it can be used to customize each result.
+
+```twig
+{% set result = collect() %}
+
+{% for post in posts %}
+    {% do result.push({
+        id: post.id,
+        title: post.title,
+        email: post.author.email,
+        created_at: post.created_at,
+        updated_at: post.updated_at
+    }) %}
+{% endfor %}
+
+{% do response({
+    data: result
+}) %}
 ```
 
 ### Pagination
 
-When responding with a paginated collection, extra information can be found in the **links** and **meta** attributes of the response.
+When responding with a paginated collection, it is recommended to use the `pager()` [Twig function](../../markup/function/pager.md) to construct the response using the **links** and **meta** attributes.
 
 ```twig
-{% do response(resource(posts.paginate(3))) %}
+{% set posts = blog.paginate(3) %}
+
+{% set pager = pager(posts) %}
+
+{% do response({
+    data: posts,
+    links: pager.links,
+    meta: pager.meta
+}) %}
 ```
 
 The above will output the following JSON format.
@@ -178,6 +212,6 @@ The above will output the following JSON format.
 #### See Also
 
 ::: also
-* [response / resource Twig Function](../../markup/function/response.md)
-* [ajaxHandler Twig Function](../../markup/function/ajax-handler.md)
+* [Response Twig Function](../../markup/function/response.md)
+* [AJAX Handler Twig Function](../../markup/function/ajax-handler.md)
 :::

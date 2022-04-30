@@ -180,12 +180,10 @@
 "/markup/":
 -
     title: Markup
-    collapsable: false
     children:
         - templating
 -
     title: Properties
-    collapsable: false
     children:
         - property/this-page
         - property/this-layout
@@ -197,7 +195,6 @@
         - property/this-method
 -
     title: Tags
-    collapsable: false
     children:
         - tag/page
         - tag/partial
@@ -213,7 +210,6 @@
         - tag/if
 -
     title: Filters
-    collapsable: false
     children:
         - filter/app
         - filter/page
@@ -226,11 +222,12 @@
         - filter/md
 -
     title: Functions
-    collapsable: false
     children:
         - function/ajax-handler
         - function/response
         - function/redirect
+        - function/collect
+        - function/pager
         - function/abort
         - function/dump
         - function/str

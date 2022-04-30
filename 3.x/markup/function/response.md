@@ -29,6 +29,7 @@ You may also pass custom headers as the third argument.
 {% do response('Bad Request', 400, {'X-Failure-Reason': 'Not wearing shoes'}) %}
 ```
 
+<!--
 ## resource()
 
 The `resource()` function converts a resource to a consistent response type and should be used when handling models or collections.
@@ -68,3 +69,4 @@ Resources are resolved using a resolver that developers can use to customize the
     posts: resource(user.posts)
 }) %}
 ```
+-->
