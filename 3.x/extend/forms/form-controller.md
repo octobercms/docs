@@ -5,7 +5,7 @@ subtitle: Adds form management features to any backend page.
 
 The `Backend\Behaviors\FormController` class is a controller behavior used for easily adding form functionality to a backend page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-Form behavior depends on form [field definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+Form behavior depends on form [field definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior properties.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -47,17 +47,17 @@ preview:
     title: View Blog Post
 ```
 
-The following fields are required in the form configuration file.
+The following properties are required in the form configuration file.
 
-Field | Description
+Property | Description
 ------------- | -------------
 **name** | the name of the object being managed by this form.
 **form** | a configuration array or reference to a form field definition file, see [form fields](../../element/definitions.md).
 **modelClass** | a model class name, the form data is loaded and saved against this model.
 
-The configuration options listed below are optional. Define them if you want the form behavior to support the Create, Update or Preview pages.
+The configuration properties listed below are optional. Define them if you want the form behavior to support the Create, Update or Preview pages.
 
-Option | Description
+Property | Description
 ------------- | -------------
 **defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
 **create** | a configuration array or reference to a config file for the Create page.
@@ -75,9 +75,9 @@ create:
     redirectClose: acme/blog/posts
 ```
 
-The following configuration options are supported for the Create page.
+The following properties are supported for the Create page.
 
-Option | Description
+Property | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../system/localization.md).
 **redirect** | redirection page when record is saved.
@@ -94,9 +94,9 @@ update:
     redirect: acme/blog/posts
 ```
 
-The following configuration options are supported for the Update page.
+The following properties are supported for the Update page.
 
-Option | Description
+Property | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../system/localization.md).
 **redirect** | redirection page when record is saved.
@@ -112,16 +112,16 @@ preview:
     title: View Blog Post
 ```
 
-The following configuration options are supported for the Preview page.
+The following properties are supported for the Preview page.
 
-Option  | Description
+Property  | Description
 ------------- | -------------
 **title** | a page title, can refer to a [localization string](../system/localization.md).
 **form** | overrides the default form fields definitions for the preview page only.
 
 ### Custom Messages
 
-Specify the `customMessages` option to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../system/localization.md).
+Specify the `customMessages` property to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../system/localization.md).
 
 ```yaml
 customMessages:
@@ -201,7 +201,7 @@ Property | Description
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered, see [form field definitions](../../element/definitions.md). Default: `text`.
 **span** | aligns the form field to one side. Options: `auto`, `left`, `right`, `row`, `full`. Default: `full`.
-**spanClass** | used with the span `row` option to display the form as a Bootstrap grid, for example, `spanClass: col-xs-4`.
+**spanClass** | used with the span `row` property to display the form as a Bootstrap grid, for example, `spanClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.

@@ -101,9 +101,9 @@ It will also handle redirects automatically. See the [Twig function article](../
 
 Middleware allows you to apply common logic to multiple endpoints, such as checking authentication or throttling requests. A [CMS layout](../themes/layouts.md) can be used to apply logic to multiple pages and the layout logic executes before the page logic. Remember to include the `{% page %}` [Twig tag](../../markup/tag/page.md) so the page logic is included.
 
-```twig
-## layouts/api.htm
+For example, a layout named **api.htm** can have any conditional logic.
 
+```twig
 description = "API Authentication"
 ==
 {% if someCondition %}
@@ -116,8 +116,6 @@ description = "API Authentication"
 Every page that uses the layout will have the conditions of the layout applied.
 
 ```twig
-## pages/api/blog/post.htm
-
 layout = "api"
 ==
 {% do response({ success: true }) %}

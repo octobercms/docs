@@ -5,7 +5,7 @@ subtitle: Manage related records in any context, usually from a form.
 
 The `Backend\Behaviors\RelationController` class is a controller behavior used for easily managing complex [model](../database/model.md) relationships on a page.
 
-Relation behavior depends on relation types specified below. In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+Relation behavior depends on relation types specified below. In order to use the relation behavior you should add the `Backend\Behaviors\RelationController` definition to the `$implement` field of the controller class. Also, the `$relationConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior properties.
 
 ```php
 namespace Acme\Projects\Controllers;
@@ -96,7 +96,7 @@ Property | Type | Description
 **recordUrl** | List | link each list record to another page. Eg: **users/update/:id**. The `:id` part is replaced with the record identifier.
 **customViewPath** | List | specify a custom view path to override partials used by the list.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
-**toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: `_relation_toolbar.htm`. This option overrides the `toolbarButtons` option.
+**toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: `_relation_toolbar.php`. This property overrides the `toolbarButtons` property.
 **toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add|remove`.
 **structure** | List | options to enable [sorting records](../lists/structures.md) for the list.
 
@@ -109,7 +109,7 @@ Property | Type | Description
 
 ### Custom Messages
 
-Specify the `customMessages` option to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../system/localization.md).
+Specify the `customMessages` property to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../system/localization.md).
 
 ```yaml
 customMessages:
@@ -334,7 +334,7 @@ The relation manager can then be displayed for a specified relation definition b
 <?= $this->relationRender('comments') ?>
 ```
 
-You may instruct the relation manager to render in read only mode by passing the option as the second argument.
+You may instruct the relation manager to render in read only mode by passing the property as the second argument.
 
 ```php
 <?= $this->relationRender('comments', ['readOnly' => true]) ?>

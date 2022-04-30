@@ -120,7 +120,7 @@ At a basic level the filter widget should show a label and its current state to 
 
 ### Displaying the Filter Form
 
-When a user clicks on the filter label, a form is displayed so that they may specify how to apply the filter. The `renderForm` method is used to display the filter form and should correspond to a `_discount_form.htm` partial.
+When a user clicks on the filter label, a form is displayed so that they may specify how to apply the filter. The `renderForm` method is used to display the filter form and should correspond to a `_discount_form.php` partial.
 
 ```php
 /**

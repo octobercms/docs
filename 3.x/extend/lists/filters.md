@@ -7,7 +7,7 @@ October CMS provides features for filtering database records. For behaviors that
 
 ## Configuring a Behavior
 
-The [List Behavior](../backend/lists.md) and [Relation Behavior](../backend/relations.md) can be filtered by [adding a filter definition](../backend/lists.md#oc-filtering-the-list) to the configuration.
+The [List Behavior](../backend/lists.md) and [Relation Behavior](../backend/relations.md) can be filtered by [adding a filter definition](../backend/lists.md) to the configuration.
 
 ```yaml
 # ===================================

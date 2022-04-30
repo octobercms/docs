@@ -178,14 +178,14 @@ The **export.htm** view represents the Export page that allows users to export a
 <a id="oc-list-behavior-integration"></a>
 ## Integration with List Behavior
 
-There is an alternative approach to exporting data that uses the [list behavior](lists.md) to provide the export data. In order to use this feature you should have the `Backend\Behaviors\ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
+There is an alternative approach to exporting data that uses the [list behavior](../lists/list-controller.md) to provide the export data. In order to use this feature you should have the `Backend\Behaviors\ListController` definition to the `$implement` field of the controller class. You do not need to use an export view and all the settings will be pulled from the list. Here is the only configuration needed:
 
 ```yaml
 export:
     useList: true
 ```
 
-If you are using [multiple list definitions](lists.md#oc-multiple-list-definitions), then you can supply the list definition:
+If you are using [multiple list definitions](../lists/list-controller.md), then you can supply the list definition.
 
 ```yaml
 export:

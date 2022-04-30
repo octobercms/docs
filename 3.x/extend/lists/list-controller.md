@@ -5,7 +5,7 @@ subtitle: Adds list management features to any backend page.
 
 The `Backend\Behaviors\ListController` class is a controller behavior used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior options.
+List behavior depends on list [column definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior properties.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -20,16 +20,17 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-> **Note**: Very often the list and [form behavior](../backend/forms.md) are used together in a same controller.
+::: tip
+Very often the list and [form controller](../forms/form-controller.md) are used together in a same controller.
+:::
 
-<a id="oc-configuring-the-list-behavior"></a>
 ## Configuring the List Behavior
 
-The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical list behavior configuration file:
+The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical list behavior configuration file.
 
 ```yaml
 # ===================================
-#  List Behavior Config
+##  List Behavior Config
 # ===================================
 
 title: Blog Posts
@@ -38,20 +39,20 @@ modelClass: Acme\Blog\Models\Post
 recordUrl: acme/blog/posts/update/:id
 ```
 
-The following fields are required in the list configuration file:
+The following properties are required in the list configuration file.
 
-Field | Description
+Property | Description
 ------------- | -------------
 **title** | a title for this list.
 **list** | a configuration array or reference to a list column definition file, see [list columns](../../element/definitions.md).
 **modelClass** | a model class name, the list data is loaded from this model.
 
-The configuration options listed below are optional.
+The configuration properties listed below are optional.
 
-Option | Description
+Property | Description
 ------------- | -------------
-**filter** | filter configuration, see [filtering the list](#oc-filtering-the-list).
-**recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](forms.md).
+**filter** | filter configuration, see [list filters](./filters.md).
+**recordUrl** | link each list record to another page. Eg: **users/update:id**. The `:id` part is replaced with the record identifier. This allows you to link the list behavior and the [form behavior](../forms/form-controller.md).
 **recordOnClick** | custom JavaScript code to execute when clicking on a record.
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../system/localization.md).
 **deleteMessage** | a message to display when records are bulk deleted, can refer to a [localization string](../system/localization.md).
@@ -64,7 +65,7 @@ Option | Description
 **defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
 **showCheckboxes** | displays checkboxes next to each record. Default: false.
 **showSetup** | displays the list column set up button. Default: false.
-**structure** | enables a structured list, see the [sorting and reordering article](../backend/reorder.md) for more details.
+**structure** | enables a structured list, see the [sorting records article](./structures.md) for more details.
 **customViewPath** | specify a custom view path to override partials used by the list, optional.
 
 ### Adding a Toolbar
@@ -80,14 +81,14 @@ toolbar:
 
 The toolbar configuration allows:
 
-Option | Description
+Property | Description
 ------------- | -------------
 **buttons** | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.htm**
 **search** | reference to a Search Widget configuration file, or an array with configuration.
 
-The search configuration supports the following options:
+The search configuration supports the following properties:
 
-Option | Description
+Property | Description
 ------------- | -------------
 **prompt** | a placeholder to display when there is no active search, can refer to a [localization string](../system/localization.md).
 **mode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: all.
@@ -128,7 +129,6 @@ You may also pass the checked values to an AJAX request using the `data-list-che
 </button>
 ```
 
-<a id="oc-filtering-the-list"></a>
 ### Filtering the List
 
 To filter a list by user defined input, add the following list configuration to the YAML file:
@@ -137,7 +137,7 @@ To filter a list by user defined input, add the following list configuration to 
 filter: $/acme/blog/models/post/scopes.yaml
 ```
 
-The **filter** option should make reference to a [filter configuration file](../backend/filters.md) path or supply an array with the configuration.
+The **filter** property should make reference to a [filter configuration file](../backend/filters.md) path or supply an array with the configuration.
 
 ## Defining List Columns
 
@@ -165,11 +165,11 @@ columns:
     email: Email
 ```
 
-### Column Options
+### Column Properties
 
-For each column can specify these options (where applicable):
+For each column can specify these properties (where applicable):
 
-Option | Description
+Property | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
 **type** | defines how this column should be rendered, see [list column definitions](../../element/definitions.md).
@@ -187,7 +187,7 @@ Option | Description
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
-**permissions** | the [permissions](users.md#oc-users-and-permissions) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](../backend/permissions.md) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ### Custom Value Selection
 
@@ -207,7 +207,7 @@ status_code:
     displayFrom: status_label
 ```
 
-This is mostly applicable when a [model accessor](../database/mutators.md#oc-accessors-mutators) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
+This is mostly applicable when a [model accessor](../database/mutators.md) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
 
 ```php
 public function getStatusLabelAttribute()
@@ -226,7 +226,7 @@ content[title]:
     sortable: false
 ```
 
-The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md#oc-model-events).
+The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../database/model.md).
 
 ### Direct SQL Selection
 
@@ -249,7 +249,7 @@ group_name:
     select: name
 ```
 
-To display a column that shows the number of related records, use the `relationCount` option.
+To display a column that shows the number of related records, use the `relationCount` property.
 
 ```yaml
 users_count:
@@ -265,13 +265,12 @@ Be careful not to name relations the same as existing database columns. For exam
 
 ## Displaying the List
 
-Usually lists are displayed in the index [view](controllers-ajax.md) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
+Usually lists are displayed in the [index view](../system/views.md) file. Since lists include the toolbar, the view file will consist solely of the single `listRender` method call.
 
 ```php
 <?= $this->listRender() ?>
 ```
 
-<a id="oc-multiple-list-definitions"></a>
 ## Multiple List Definitions
 
 The list behavior can support multiple lists in the same controller using named definitions. The `$listConfig` property can be defined as an array where the key is a definition name and the value is the configuration file.
@@ -283,7 +282,7 @@ public $listConfig = [
 ];
 ```
 
-Each definition can then be displayed by passing the definition name as the first argument when calling the `listRender` method:
+Each definition can then be displayed by passing the definition name as the first argument when calling the `listRender` method.
 
 ```php
 <?= $this->listRender('templates') ?>
@@ -329,7 +328,7 @@ public function index()
 
 ### Overriding Views
 
-The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.htm` in your controller directory. The following example will add a sidebar to the list:
+The `ListController` behavior has a main container view that you may override by creating a special file named `_list_container.php` in your controller directory. The following example will add a sidebar to the list:
 
 ```php
 <?php if ($toolbar): ?>
@@ -350,16 +349,18 @@ The `ListController` behavior has a main container view that you may override by
 </div>
 ```
 
-The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` option as described in the [list configuration options](#oc-configuring-the-list-behavior). The widget will look in this path for a view first, then fall back to the default location.
+The behavior will invoke a `Lists` widget that also contains numerous views that you may override. This is possible by specifying a `customViewPath` property as described in the list configuration options. The widget will look in this path for a view first, then fall back to the default location.
 
 ```yaml
 # Custom view path
 customViewPath: $/acme/blog/controllers/reviews/list
 ```
 
-> **Note**: It is a good idea to use a sub-directory, for example `list`, to avoid conflicts.
+::: tip
+It is a good idea to use a sub-directory, for example called `list`, to avoid conflicts.
+:::
 
-For example, to modify the list body row markup, create a file called `list/_list_body_row.htm` in your controller directory.
+For example, to modify the list body row markup, create a file called `list/_list_body_row.php` in your controller directory.
 
 ```php
 <tr>
@@ -369,10 +370,9 @@ For example, to modify the list body row markup, create a file called `list/_lis
 </tr>
 ```
 
-<a id="oc-extending-column-definitions"></a>
 ### Extending Column Definitions
 
-You may extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example:
+You may extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example.
 
 ```php
 class Categories extends \Backend\Classes\Controller
@@ -385,7 +385,7 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example:
+Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example.
 
 ```php
 Categories::extendListColumns(function($list, $model) {
@@ -429,6 +429,7 @@ Method | Description
 ------------- | -------------
 **addColumns** | adds new columns to the list
 **removeColumn** | removes a column from the list
+**getColumn** | returns an existing column definition
 
 Each method takes an array of columns similar to the [list column configuration](../../element/definitions.md).
 
@@ -451,7 +452,7 @@ class Lessons extends \Backend\Classes\Controller
 }
 ```
 
-A special CSS class `nolink` is available to force a row to be unclickable, even if the `recordUrl` or `recordOnClick` options are defined for the List widget. Returning this class in an event will allow you to make records unclickable - for example, for soft-deleted rows or for informational rows:
+A special CSS class `nolink` is available to force a row to be unclickable, even if the `recordUrl` or `recordOnClick` properties are defined for the list widget. Returning this class in an event will allow you to make records unclickable - for example, for soft-deleted rows or for informational rows:
 
 ```php
 public function listInjectRowClass($record, $value)
@@ -497,15 +498,17 @@ public function listOverrideRecordUrl($record, $definition = null)
 }
 ```
 
-<a id="oc-extending-filter-scopes"></a>
 ### Extending Filter Scopes
 
 You may extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
 
 ```php
 Categories::extendListFilterScopes(function($filter) {
-    // Add custom CSS classes to the Filter widget itself
-    $filter->cssClasses = array_merge($filter->cssClasses, ['my', 'array', 'of', 'classes']);
+    // Add custom CSS classes to the filter widget
+    $filter->cssClasses = array_merge(
+        $filter->cssClasses,
+        ['my', 'array', 'of', 'classes']
+    );
 
     $filter->addScopes([
         'my_scope' => [
@@ -515,7 +518,7 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-> The array of scopes provided is similar to the [list filters configuration](../backend/filters.md).
+The array of scopes provided is the same as the [list filters configuration](./filters.md).
 
 You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
@@ -537,6 +540,7 @@ Method | Description
 ------------- | -------------
 **addScopes** | adds new scopes to filter widget
 **removeScope** | remove scope from filter widget
+**getScope** | returns an existing scope definition
 
 ### Extending the Model Query
 
@@ -603,7 +607,6 @@ public function listExtendRecords($records)
 }
 ```
 
-<a id="oc-custom-column-types"></a>
 ### Custom Column Types
 
 Custom list column types can be registered in the back-end with the `registerListColumnTypes` method of the [plugin registration file](../extending.md). The method should return an array where the key is the type name and the value is a callable function. The callable function receives three arguments, the native `$value`, the `$column` definition object and the model `$record` object.
@@ -626,7 +629,7 @@ public function evalUppercaseListColumn($value, $column, $record)
 }
 ```
 
-Using the custom list column type is as simple as calling it by name using the `type` option.
+Using the custom list column type is as simple as calling it by name using the `type` property.
 
 ```yaml
 # ===================================

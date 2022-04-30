@@ -22,9 +22,9 @@ structure:
     maxDepth: 2
 ```
 
-The configuration options listed below can be used.
+The configuration properties listed below can be used.
 
-Option | Description
+Property | Description
 ------------- | -------------
 **showTree** | displays a tree hierarchy for parent/child records. Default: `true`
 **treeExpanded** | if tree nodes should be expanded by default. Default: `true`
