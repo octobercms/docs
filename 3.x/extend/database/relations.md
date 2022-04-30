@@ -113,7 +113,6 @@ public $belongsToMany = [
 
 > **Note**: The `relationClass` should inherit the class of the specified type. For example, when using `belongsTo` the class must inherit `October\Rain\Database\Relations\BelongsTo`.
 
-<a id="oc-relationship-types"></a>
 ## Relationship Types
 
 The following relations types are available:

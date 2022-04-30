@@ -144,10 +144,10 @@ The following messages are available to override as custom messages.
 ::: details View the list of available messages
 Message | Default Message
 ------------- | -------------
-notFound | Form record with an ID of :id could not be found.
-flashCreate | :name Created
-flashUpdate | :name Updated
-flashDelete | :name Deleted
+**notFound** | Form record with an ID of :id could not be found.
+**flashCreate** | :name Created
+**flashUpdate** | :name Updated
+**flashDelete** | :name Deleted
 :::
 
 ## Defining Form Fields
@@ -224,21 +224,27 @@ Property | Description
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 **permissions** | the [permissions](../backend/permissions.md) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
-### Nested Field Selection
+### Tab Properties
+
+An example of specifying field definitions in tabs.
 
 ```yaml
-avatar[name]:
-    label: Avatar
-    comment: will be saved in the Avatar table
+tabs:
+    fields:
+        username:
+            type: text
+            label: Username
+            tab: User
+
+        groups:
+            type: relation
+            label: Groups
+            tab: Groups
 ```
 
-The above example would fetch and save the value in PHP equivalent of `$record->avatar->name` or `$record->avatar['name']` respectively.
+For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these properties.
 
-### Tab Options
-
-For each tab definition, namely `tabs` and `secondaryTabs`, you can specify these options:
-
-Option | Description
+Property | Description
 ------------- | -------------
 **stretch** | specifies if this tab stretches to fit the parent height.
 **defaultTab** | the default tab to assign fields to. Default: Misc.
@@ -248,6 +254,8 @@ Option | Description
 **linkable** | determines if the tabs can be linked using URL fragments. Default: `true`
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
+
+An example applying properties to tabs.
 
 ```yaml
 tabs:
@@ -267,15 +275,7 @@ tabs:
         Groups: icon-group
 
     fields:
-        username:
-            type: text
-            label: Username
-            tab: User
-
-        groups:
-            type: relation
-            label: Groups
-            tab: Groups
+        # [...]
 ```
 
 ### Custom Field Types
@@ -286,6 +286,30 @@ There are various native field types that can be used for the **type** setting. 
 blog_content:
     type: Backend\FormWidgets\RichEditor
     size: huge
+```
+
+### Nested Field Selection
+
+```yaml
+avatar[name]:
+    label: Avatar
+    comment: will be saved in the Avatar table
+```
+
+The above example would fetch and save the value in PHP equivalent of `$record->avatar->name` or `$record->avatar['name']` respectively.
+
+### Field Facades
+
+Sometimes you may need to display a field while preventing it from being submitted. A field can be defined as a facade by adding an underscore (\_) before the name of the field. These fields are purged automatically and no longer saved to the model, such as with the following `_map` field.
+
+```yaml
+address:
+    label: Title
+    type: text
+
+_map:
+    label: Point your address on the map
+    type: mapviewer
 ```
 
 ## Form Views
@@ -371,20 +395,6 @@ The **preview.htm** view represents the Preview page that allows users to previe
 <div class="form-preview">
     <?= $this->formRenderPreview() ?>
 </div>
-```
-
-### Field Facades
-
-Sometimes you may need to display a field while preventing it from being submitted. A field can be defined as a facade by adding an underscore (\_) before the name of the field. These fields are purged automatically and no longer saved to the model, such as with the following `_map` field.
-
-```yaml
-address:
-    label: Title
-    type: text
-
-_map:
-    label: Point your address on the map
-    type: mapviewer
 ```
 
 ## Extending Form Behavior

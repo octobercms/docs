@@ -3,7 +3,7 @@ subtitle: A widget specifically made for use as a form field.
 ---
 # Form Widgets
 
-With form widgets you can add new control types to the backend [forms](../backend/forms.md). They provide features that are common to supplying data for models. Form widgets must be registered in the [plugin registration file](../extending.md).
+With form widgets you can add new control types to the backend forms. They provide features that are common to supplying data for models. Form widgets must be registered in the [plugin registration file](../extending.md).
 
 Form Widget classes reside inside the **formwidgets** directory of a plugin. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
 
@@ -124,7 +124,7 @@ public function registerFormWidgets()
 }
 ```
 
-The short code is optional and can be used when referencing the widget in the [Form field definitions](forms.md#field-widget), it should be a unique value to avoid conflicts with other form fields.
+The short code is optional and can be used when referencing the widget in the [form field definitions](./form-controller.md), it should be a unique value to avoid conflicts with other form fields.
 
 ### Loading Form Data
 
