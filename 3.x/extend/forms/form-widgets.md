@@ -25,7 +25,7 @@ Form Widget classes reside inside the **formwidgets** directory of a plugin. The
 The `create:formwidget` command generates a backend form widget, view and basic asset files. The first argument specifies the author and plugin name. The second argument specifies the form widget class name.
 
 ```bash
-php artisan create:formwidget Acme.Blog CategorySelector
+php artisan create:formwidget Acme.Blog ColorPicker
 ```
 
 The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. A registered widget can be used in the backend [form field definition](../../element/definitions.md) file. Example form widget class definition:
