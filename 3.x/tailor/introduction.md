@@ -14,7 +14,7 @@ Below you can see an example blueprint directory structure. Each blueprint can r
 
 ::: dir
 ├── app
-|   └── `blueprints`  _<== Blueprints Start Here_
+|   └── `blueprints`  _← Blueprints Start Here_
 |       ├── blog
 |       │   └── blog.yaml
 |       │   └── author.yaml

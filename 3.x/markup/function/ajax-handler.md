@@ -138,3 +138,9 @@ The output contains the **flash** messages alongside the data.
     }
 }
 ```
+
+#### See Also
+
+::: also
+* [Building API Resources](../../cms/resources/building-apis.md)
+:::

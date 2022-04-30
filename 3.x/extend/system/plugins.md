@@ -158,8 +158,8 @@ The change log is stored in a YAML file called `version.yaml` inside the **updat
 |   └── author
 |       └── myplugin
 |           ├── `updates`
-|           |   ├── `version.yaml`     _<== Version File_
-|           |   ├── create_tables.php _<== Database Script_
+|           |   ├── `version.yaml`  _← Version File_
+|           |   ├── create_tables.php  _← Database Script_
 |           |   ├── seed_the_database.php
 |           |   └── create_another_table.php
 |           └── Plugin.php

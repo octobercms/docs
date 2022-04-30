@@ -12,10 +12,10 @@ Model classes reside in the **models** subdirectory of a plugin directory. An ex
 |   └── acme
 |       └── blog
 |           ├── `models`
-|           |   ├── post             _<== Config Directory_
-|           |   |   ├── fields.yaml  _<== Config File_
-|           |   |   └── columns.yaml _<== Config File_
-|           |   └── Post.php         _<== Model Class_
+|           |   ├── post  _← Config Directory_
+|           |   |   ├── fields.yaml  _← Config File_
+|           |   |   └── columns.yaml  _← Config File_
+|           |   └── Post.php  _← Model Class_
 |           └── Plugin.php
 :::
 

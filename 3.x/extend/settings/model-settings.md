@@ -42,9 +42,9 @@ The `$settingsFields` property is required if are going to build a back-end sett
 |   └── acme
 |       └── demo
 |           ├── models
-|           |   ├── usersetting     _<== Config Directory_
-|           |   |   └── fields.yaml _<== Form Fields_
-|           |   └── `UserSetting.php` _<== Model Class_
+|           |   ├── usersetting  _← Config Directory_
+|           |   |   └── fields.yaml  _← Form Fields_
+|           |   └── `UserSetting.php`  _← Model Class_
 |           └── Plugin.php
 :::
 

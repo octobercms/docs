@@ -148,9 +148,9 @@ List columns are defined with the YAML file. The column configuration is used by
 |   └── acme
 |       └── blog
 |           └── `models`
-|               ├── post             _<== Config Directory_
-|               |   └── columns.yaml _<== Config File_
-|               └── Post.php         _<== Model Class_
+|               ├── post  _← Config Directory_
+|               |   └── columns.yaml  _← Config File_
+|               └── Post.php  _← Model Class_
 :::
 
 The next example shows the typical contents of a list column definitions file.

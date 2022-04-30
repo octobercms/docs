@@ -160,9 +160,9 @@ Form fields are defined with the YAML file. The form fields configuration is use
 |   └── acme
 |       └── blog
 |           └── `models`
-|               ├── post            _<== Config Directory_
-|               |   └── fields.yaml _<== Config File_
-|               └── Post.php        _<== Model Class_
+|               ├── post  _← Config Directory_
+|               |   └── fields.yaml  _← Config File_
+|               └── Post.php  _← Model Class_
 :::
 
 Fields can be placed in three areas, the **outside area**, **primary tabs** or **secondary tabs**. The next example shows the typical contents of a form fields definition file.

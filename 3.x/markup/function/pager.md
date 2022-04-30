@@ -48,3 +48,9 @@ An example in JSON format.
     }
 }
 ```
+
+#### See Also
+
+::: also
+* [Building API Resources](../../cms/resources/building-apis.md)
+:::

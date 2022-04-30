@@ -70,3 +70,9 @@ Resources are resolved using a resolver that developers can use to customize the
 }) %}
 ```
 -->
+
+#### See Also
+
+::: also
+* [Building API Resources](../../cms/resources/building-apis.md)
+:::

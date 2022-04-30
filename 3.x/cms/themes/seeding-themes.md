@@ -12,12 +12,12 @@ Below you can see an example seed directory structure. The **blueprints** direct
 ::: dir
 ├── themes
 |   └── mywebsite
-|       └── `seeds` _<== Theme Seed Directory_
+|       └── `seeds`  _← Theme Seed Directory_
 |           ├── blueprints
-|           |   └── post.yaml _<== Blueprint File_
+|           |   └── post.yaml  _← Blueprint File_
 |           ├── data
-|           |   └── blog-posts.json _<== Data File_
-|           └── data.yaml _<== Seeding Script_
+|           |   └── blog-posts.json  _← Data File_
+|           └── data.yaml  _← Seeding Script_
 :::
 
 ## Importing Blueprints

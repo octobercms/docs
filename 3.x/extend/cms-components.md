@@ -10,9 +10,9 @@ Components files and directories reside in the **components** subdirectory of a 
 |   └── acme
 |       └── blog
 |           ├── `components`
-|           |   ├── blogposts _<== Partials Directory_
-|           |   |   └── default.htm _<== Default Markup (Optional)_
-|           |   └── BlogPosts.php _<== Component Class_
+|           |   ├── blogposts  _← Partials Directory_
+|           |   |   └── default.htm  _← Default Markup (Optional)_
+|           |   └── BlogPosts.php  _← Component Class_
 |           └── Plugin.php
 :::
 

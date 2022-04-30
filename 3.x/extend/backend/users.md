@@ -1,6 +1,9 @@
+---
+subtitle: Learn about user management in the backend panel.
+---
 # Users
 
-The user management for the backend panel includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also [register permissions](permissions.md) that control access to the features in the backend.
+The user management for the backend panel includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also [register permissions](./permissions.md) that control access to the features in the backend.
 
 ## Backend User Helper
 
@@ -17,7 +20,7 @@ $user = BackendAuth::register([
 ]);
 ```
 
-The `BackendAuth::check` method is a quick way to check if the user is signed in. To return the user model that is signed in, use `BackendAuth::getUser` instead. Additionally, the active user will be available as `$this->user` inside any [backend controller](../backend/controllers-ajax.md).
+The `BackendAuth::check` method is a quick way to check if the user is signed in. To return the user model that is signed in, use `BackendAuth::getUser` instead. Additionally, the active user will be available as `$this->user` inside any [backend controller](../system/controllers.md).
 
 ```php
 // Returns true if signed in.

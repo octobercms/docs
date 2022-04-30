@@ -5,19 +5,19 @@ subtitle: A widget specifically made for use in a form.
 
 With form widgets you can add new control types to the backend [forms](../backend/forms.md). They provide features that are common to supplying data for models. Form widgets must be registered in the [plugin registration file](../extending.md).
 
-Form Widget classes reside inside the **formwidgets** directory of the plugin directory. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
+Form Widget classes reside inside the **formwidgets** directory of a plugin. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
 
 ::: dir
 ├── `formwidgets`
 |   ├── colorpicker
 |   |   ├── partials
-|   |   |   └── _colorpicker.htm _<== Partial File_
+|   |   |   └── _colorpicker.htm  _← Partial File_
 |   |   └── assets
 |   |       ├── js
-|   |       |   └── colorpicker.js _<== JavaScript File_
+|   |       |   └── colorpicker.js  _← JavaScript File_
 |   |       └── css
-|   |           └── colorpicker.css _<== StyleSheet File_
-|   └── ColorPicker.php _<== Widget Class_
+|   |           └── colorpicker.css  _← StyleSheet File_
+|   └── ColorPicker.php  _← Widget Class_
 :::
 
 ### Class Definition

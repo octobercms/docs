@@ -166,7 +166,7 @@ php artisan theme:list
 `theme:use` - switch the active theme. The following example will switch to the theme in `/themes/rainlab-vanilla`
 
 ```bash
-php artisan theme:use vanilla
+php artisan theme:use rainlab-vanilla
 ```
 
 ### Remove Theme
@@ -174,7 +174,7 @@ php artisan theme:use vanilla
 `theme:remove` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
 
 ```bash
-php artisan theme:remove vanilla
+php artisan theme:remove rainlab-vanilla
 ```
 
 ### Copy Theme

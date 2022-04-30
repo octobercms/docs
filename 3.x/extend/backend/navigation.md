@@ -1,3 +1,6 @@
+---
+subtitle: Learn how to include new menu items in the backend panel.
+---
 # Navigation
 
 Plugins can extend the backend navigation menus by overriding the `registerNavigation` method of the [plugin registration file](../extending.md). This section shows you how to add menu items to the backend navigation area. An example of registering a top-level navigation menu item with two sub-menu items:

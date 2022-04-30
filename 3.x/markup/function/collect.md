@@ -31,3 +31,9 @@ Passing an array as the first argument will initialize the collection with items
     { title: item.title, ... }
 ]) %}
 ```
+
+#### See Also
+
+::: also
+* [Building API Resources](../../cms/resources/building-apis.md)
+:::

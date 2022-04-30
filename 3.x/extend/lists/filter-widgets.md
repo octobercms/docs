@@ -8,14 +8,14 @@ Filter Widget classes reside inside the **filterwidgets** directory of the plugi
 ├── `filterwidgets`
 |   ├── discount
 |   |   ├── partials
-|   |   |   └── _discount.htm _<== Partial File_
+|   |   |   └── _discount.htm  _← Partial File_
 |   |   |   └── _discount_form.htm
 |   |   └── assets
 |   |       ├── js
-|   |       |   └── discount.js _<== JavaScript File_
+|   |       |   └── discount.js  _← JavaScript File_
 |   |       └── css
-|   |           └── discount.css _<== StyleSheet File_
-|   └── Discount.php _<== Widget Class_
+|   |           └── discount.css  _← StyleSheet File_
+|   └── Discount.php  _← Widget Class_
 :::
 
 ### Class Definition

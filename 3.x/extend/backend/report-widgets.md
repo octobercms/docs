@@ -1,21 +1,21 @@
+---
+subtitle: A widget specifically made for use in the dashboard.
+---
 # Report Widgets
 
 Report widgets can be used on the backend dashboard and in other backend report containers. Report widgets must be registered in the [plugin registration file](../extending.md).
 
-> You can easily scaffold a report widget using the `create:reportwidget` command. See [scaffolding commands](../console/scaffolding.md#oc-create-a-report-widget) for more information.
-
-
-The report widget classes should extend the `Backend\Classes\ReportWidgetBase` class. As any other plugin class, generic widget controllers should belong to the [plugin namespace](../system/plugins.md). The class should override the `render` method in order to render the widget itself. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
+The report widget classes reside inside the **reportwidgets** directory of a plugin. As any other plugin class, generic widget controllers should belong to the plugin namespace. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
 ::: dir
 ├── `reportwidgets`
 |   ├── trafficsources
 |   |   └── partials
-|   |       └── _widget.htm _<== Partial File_
-|   └── TrafficSources.php _<== Widget Class_
+|   |       └── _widget.htm  _← Partial File_
+|   └── TrafficSources.php  _← Widget Class_
 :::
 
-### Class Definition
+## Class Definition
 
 The `create:reportwidget` command generates a backend report widget, view and basic asset files. The first argument specifies the author and plugin name. The second argument specifies the report widget class name.
 
@@ -23,7 +23,7 @@ The `create:reportwidget` command generates a backend report widget, view and ba
 php artisan create:reportwidget Acme.Blog TopPosts
 ```
 
-The report widget classes must extend the `Backend\Classes\ReportWidgetBase` class. Example report widget class definition:
+The report widget classes must extend the `Backend\Classes\ReportWidgetBase` class. Example report widget class definition. The class should override the `render` method in order to render the widget itself.
 
 ```php
 namespace RainLab\GoogleAnalytics\ReportWidgets;
@@ -58,7 +58,7 @@ The widget partial could contain any HTML markup you want to display in the widg
 </div>
 ```
 
-![image](https://raw.githubusercontent.com/octobercms/docs/master/images/traffic-sources.png)
+![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/traffic-sources.png)
 
 Inside report widgets you can use any [charts or indicators](https://octobercms.com/docs/ui/chart), lists or any other markup you wish. Remember that the report widgets extend the generic backend widgets and you can use any widget functionality in your report widgets. The next example shows a list report widget markup.
 
@@ -102,11 +102,11 @@ Inside report widgets you can use any [charts or indicators](https://octobercms.
 </div>
 ```
 
-### Report Widget Properties
+## Report Widget Properties
 
 Report widgets may have properties that users can manage with the Inspector:
 
-![image](https://github.com/octobercms/docs/blob/develop/images/report-widget-inspector.png?raw=true)
+![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/report-widget-inspector.png)
 
 The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../cms-components.md). Example:
 
@@ -131,7 +131,7 @@ public function defineProperties()
 }
 ```
 
-### Report Widget Registration
+## Report Widget Registration
 
 Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [plugin registration file](../extending.md). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
 
