@@ -1,8 +1,11 @@
+---
+subtitle: A widget specifically made for use in a filter.
+---
 # Filter Widgets
 
-With filter widgets you can add new scope types to the backend [filters](../backend/filters.md). They provide features that are common to filtering lists. Filter widgets must be registered in the [plugin registration file](../extending.md).
+With filter widgets you can add new scope types to the backend filters. They provide features that are common to filtering lists. Filter widgets must be registered in the [plugin registration file](../extending.md).
 
-Filter Widget classes reside inside the **filterwidgets** directory of the plugin directory. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
+Filter Widget classes reside inside the **filterwidgets** directory of the plugin directory. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this.
 
 ::: dir
 ├── `filterwidgets`
@@ -20,7 +23,13 @@ Filter Widget classes reside inside the **filterwidgets** directory of the plugi
 
 ### Class Definition
 
-The filter widget classes must extend the `Backend\Classes\FilterWidgetBase` class. A registered widget can be used in the backend [filter field definition](../../element/definitions.md) file. Example form widget class definition:
+The `create:filterwidget` command generates a backend filter widget, view and basic asset files. The first argument specifies the author and plugin name. The second argument specifies the form widget class name.
+
+```bash
+php artisan create:filterwidget Acme.Blog Discount
+```
+
+The filter widget classes must extend the `Backend\Classes\FilterWidgetBase` class. A registered widget can be used in the backend [filter field definition](../../element/definitions.md) file. Example form widget class definition.
 
 ```php
 namespace Backend\FilterWidgets;
@@ -143,25 +152,27 @@ The contents should contain the form values and buttons to apply or clear the fi
 <div class="filter-box">
     <div class="filter-facet">
         <div class="facet-item is-grow">
-            <select name="Filter[value]" class="form-control custom-select <?= $allowSearch ? '' : 'select-no-search' ?> input-sm">
+            <select name="Filter[value]" class="form-control form-control-sm custom-select <?= $allowSearch ? '' : 'select-no-search' ?>">
                 <option value="1" <?= $scope->value === '1' ? 'selected="selected"' : '' ?>>has a discount</option>
                 <option value="0" <?= $scope->value === '0' ? 'selected="selected"' : '' ?>>does not have a discount</option>
             </select>
         </div>
     </div>
     <div class="filter-buttons">
-        <button class="btn btn-xs btn-primary" data-filter-action="apply">
+        <button class="btn btn-sm btn-primary" data-filter-action="apply">
             Apply
         </button>
         <div class="flex-grow-1"></div>
-        <button class="btn btn-xs btn-secondary" data-filter-action="clear">
+        <button class="btn btn-sm btn-secondary" data-filter-action="clear">
             Clear
         </button>
     </div>
 </div>
 ```
 
-> **Note**: The `$value` variable will contain an array of the selected values. This array will be merged with the `$scope` variable for convenience, so you can access the active value via `$scope->value`. In summary, use `$value` to check if a scope is applied and `$scope` to access the values.
+::: tip
+The `$value` variable will contain an array of the selected values. This array will be merged with the `$scope` variable for convenience, so you can access the active value via `$scope->value`. In summary, use `$value` to check if a scope is applied and `$scope` to access the values.
+:::
 
 ### Capturing the Filter Value
 

@@ -5,7 +5,7 @@ subtitle: A widget specifically made for use as a form field.
 
 With form widgets you can add new control types to the backend forms. They provide features that are common to supplying data for models. Form widgets must be registered in the [plugin registration file](../extending.md).
 
-Form Widget classes reside inside the **formwidgets** directory of a plugin. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this:
+Form Widget classes reside inside the **formwidgets** directory of a plugin. The inner directory name matches the name of the widget class written in lowercase. Widgets can supply assets and partials. An example form widget directory structure looks like this.
 
 ::: dir
 ├── `formwidgets`
@@ -28,7 +28,7 @@ The `create:formwidget` command generates a backend form widget, view and basic 
 php artisan create:formwidget Acme.Blog ColorPicker
 ```
 
-The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. A registered widget can be used in the backend [form field definition](../../element/definitions.md) file. Example form widget class definition:
+The form widget classes must extend the `Backend\Classes\FormWidgetBase` class. A registered widget can be used in the backend [form field definition](../../element/definitions.md) file. Example form widget class definition.
 
 ```php
 namespace Backend\FormWidgets;

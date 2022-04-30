@@ -430,7 +430,7 @@ Argument | Description
 **detach** | if set to false, the related model will be not be detached if the primary model is deleted or relationship is destroyed, default: true.
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot` while for polymorphic relation `October\Rain\Database\MorphPivot`.
-**pivotSortable** | specify a sort order column for the pivot table, used in combination with the [`SortableRelation` trait](../backend/reorder.md#oc-sortable-relation-model).
+**pivotSortable** | specify a sort order column for the pivot table, used in combination with the `SortableRelation` [model trait](../backend/reorder.md).
 
 <a id="relation-has-many-through"></a>
 ### Has Many Through
