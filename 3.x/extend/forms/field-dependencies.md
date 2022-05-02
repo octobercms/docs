@@ -92,6 +92,43 @@ git_branch:
     dependsOn: source_type
 ```
 
+## Updating with AJAX
+
+In some cases you may wish to run an AJAX handler manually when a field value changes. You may use the `changeHandler` property to specify an AJAX handler. The following example will call the **onChangeContent** AJAX handler when the value is changed.
+
+```yaml
+content:
+    label: Content
+    type: textarea
+    changeHandler: onChangeContent
+```
+
+The AJAX handler can be added to the controller in the normal way. The following displays a message using the `Flash` facade when the field updates.
+
+```php
+public function onChangeContent()
+{
+    Flash::success('Great job!');
+}
+```
+
+If you wish to update other fields, use the `formRefreshFields` method provided by the form controller.
+
+```php
+public function onChangeContent()
+{
+    return $this->formRefreshFields('is_positive');
+}
+```
+
+You may also update multiple fields at once by passing an array.
+
+```php
+public function onChangeContent()
+{
+    return $this->formRefreshFields(['is_positive', 'internal_comments']);
+}
+```
 
 #### See Also
 
