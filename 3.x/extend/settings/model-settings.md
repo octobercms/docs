@@ -35,7 +35,7 @@ class UserSetting extends Model
 
 The `$settingsCode` property is required for settings models. It defines the unique settings key which is used for saving the settings to the database.
 
-The `$settingsFields` property is required if are going to build a back-end settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [Backend forms](../backend/forms.md) article. The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
+The `$settingsFields` property is required if are going to build a back-end settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [form controller article](../forms/form-controller.md). The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
 
 ::: dir
 ├── plugins
@@ -48,7 +48,7 @@ The `$settingsFields` property is required if are going to build a back-end sett
 |           └── Plugin.php
 :::
 
-Settings models [can be registered](#oc-backend-settings-pages) to appear on the **Backend Settings area**, but it is not a requirement - you can set and read settings values like any other model.
+Settings models [can be registered](./settings.md) to appear on the **Backend Settings area**, but it is not a requirement - you can set and read settings values like any other model.
 
 ### Writing to a Settings Model
 

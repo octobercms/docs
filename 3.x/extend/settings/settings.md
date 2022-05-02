@@ -2,7 +2,6 @@
 
 There are two ways to configure plugins - with backend settings forms and with configuration files. Using database settings with backend pages provide a better user experience, but they carry more overhead for the initial development. File-based configuration is suitable for configuration that is rarely modified.
 
-<a id="oc-backend-settings-pages"></a>
 ## Backend Settings Pages
 
 The backend contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.

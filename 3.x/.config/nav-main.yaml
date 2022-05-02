@@ -127,9 +127,8 @@
 -
     title: Import & Export Design
     children:
-        - importexport/controller
-        - importexport/import-model
-        - importexport/export-model
+        - importexport/importexport-controller
+        - importexport/importexport-model
 -
     title: Settings & Config
     children:
