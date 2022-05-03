@@ -215,6 +215,7 @@ Option | Description
 **stretch** | specifies if this field stretches to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](#oc-field-dependencies), when the other fields are modified, this field will update.
+**changeHandler** | the name of an AJAX handler to call when the field value is changed, optional.
 **trigger** | specify conditions for this field using [trigger events](#oc-trigger-events).
 **preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](#oc-input-preset-converter).
 **required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#oc-validation) as this is not enforced by the form controller.

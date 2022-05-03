@@ -215,6 +215,7 @@ secondaryTabs:
 **stretch** | 指定此字段是否拉伸以适合父高度。
 **context** | 指定显示字段时应使用的上下文。上下文也可以通过在字段名称中使用 `@` 符号来传递，例如，`name@update`。
 **dependsOn** | 其他字段名称的数组，该字段[取决于](#oc-field-dependencies)，当其他字段被修改时，该字段将更新。
+**changeHandler** | the name of an AJAX handler to call when the field value is changed, optional.
 **trigger** | 使用 [触发事件](#oc-trigger-events) 指定此字段的条件。
 **preset** | 允许字段值最初由另一个字段的值设置，使用 [输入预设转换器](#oc-input-preset-converter) 进行转换。
 **required** | 在字段标签旁边放置一个红色星号表示它是必填项。请务必使用 [模型验证](../database/traits.md#oc-validation)，因为表单控制器不强制执行此操作。
