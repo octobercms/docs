@@ -12,7 +12,9 @@ The session configuration is stored in `config/session.php`. Be sure to review t
 - `memcached` / `redis` - sessions are stored in one of these fast, cache based stores.
 - `array` - sessions are stored in a simple PHP array and will not be persisted across requests.
 
-> **Note**: The array driver is typically used for running unit tests to prevent session data from persisting.
+::: tip
+The array driver is typically used for running unit tests to prevent session data from persisting.
+:::
 
 #### Reserved keys
 

@@ -1,6 +1,6 @@
 # Collection
 
-The `October\Rain\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements:
+The `October\Rain\Support\Collection` class provides a fluent, convenient wrapper for working with arrays of data. For example, check out the following code. We'll create a new collection instance from the array, run the `strtoupper` function on each element, and then remove all empty elements.
 
 ```php
 $collection = new October\Rain\Support\Collection(['stewie', 'brian', null]);

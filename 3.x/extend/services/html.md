@@ -2,7 +2,7 @@
 
 ## Introduction
 
-October CMS provides various helpful functions with the `Html` facade, useful for dealing with HTML and forms. While most of the examples will use the PHP language all of these features translate directly to [Twig markup](../markup.md) with a simple conversion.
+October CMS provides various helpful functions with the `Html` facade, useful for dealing with HTML and forms. While most of the examples will use the PHP language all of these features translate directly to [Twig markup](../../markup/templating.md) with a simple conversion.
 
 ```
 // PHP
@@ -12,7 +12,7 @@ October CMS provides various helpful functions with the `Html` facade, useful fo
 {{ form_open(...) }}
 ```
 
-As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../markup/function-form.md) on using the form helper in the front-end.
+As you can see above, in Twig all functions prefixed with `form_` will bind directly to the `Form` facade and provide access to the methods using *snake_case*. See the [markup guide for more information](../../markup/function/form.md) on using the form helper in the front-end.
 
 ## Opening a Form
 
@@ -30,7 +30,9 @@ By default, a `POST` method will be assumed, however, you are free to specify an
 Form::open(['url' => 'foo/bar', 'method' => 'put'])
 ```
 
-> **Note**: Since HTML forms only support `POST` and `GET`, `PUT` and `DELETE` methods will be spoofed by automatically adding a `_method` hidden field to your form.
+::: tip
+Since HTML forms only support `POST` and `GET`, `PUT` and `DELETE` methods will be spoofed by automatically adding a `_method` hidden field to your form.
+:::
 
 You may pass in regular HTML attributes as well:
 
@@ -74,14 +76,15 @@ Form::ajax('onSave', ['update' => [
 ])
 ```
 
-> **Note**: Most [data attributes from the AJAX framework](../ajax/attributes-api.md) are available here by dropping the `data-request-` prefix.
+::: tip
+Most [data attributes from the AJAX framework](../../cms/ajax/attributes-api.md) are available here by dropping the `data-request-` prefix.
+:::
 
-<a id="oc-form-tokens"></a>
 ## Form Tokens
 
 #### CSRF protection
 
-If you have [protection enabled](../setup/configuration.md#oc-csrf-protection), using the `Form::open` method with `POST`, `PUT` or `DELETE` will automatically add a CSRF token to your forms as a hidden field. Alternatively, if you wish to generate the HTML for the hidden CSRF field, you may use the `token` method:
+If you have [protection enabled](../../setup/configuration.md), using the `Form::open` method with `POST`, `PUT` or `DELETE` will automatically add a CSRF token to your forms as a hidden field. Alternatively, if you wish to generate the HTML for the hidden CSRF field, you may use the `token` method:
 
 ```php
 <?= Form::token() ?>
@@ -124,7 +127,9 @@ You may pass a default value as the second argument:
 <?= Form::value('name', 'John Travolta') ?>
 ```
 
-> **Note**: When using `Form::model`, be sure to close your form with `Form::close`!
+::: warning
+When using `Form::model`, be sure to close your form with `Form::close`!
+:::
 
 ## Labels
 
@@ -140,7 +145,9 @@ You may pass a default value as the second argument:
 <?= Form::label('email', 'E-Mail Address', ['class' => 'awesome']) ?>
 ```
 
-> **Note**: After creating a label, any form element you create with a name matching the label name will automatically receive an ID matching the label name as well.
+::: tip
+After creating a label, any form element you create with a name matching the label name will automatically receive an ID matching the label name as well.
+:::
 
 ## Text Fields
 
@@ -156,7 +163,9 @@ You may pass a default value as the second argument:
 <?= Form::text('email', 'emailaddress@example.com') ?>
 ```
 
-> **Note**: The *hidden* and *textarea* methods have the same signature as the *text* method.
+::: tip
+The **hidden** and **textarea** methods have the same signature as the **text** method.
+:::
 
 #### Generating a password input
 
@@ -256,17 +265,19 @@ You may pass a default value as the second argument:
 
 ## Buttons
 
-#### Generating a submit button
+#### Generating a Submit Button
 
 ```php
 <?= Form::submit('Click Me!') ?>
 ```
 
-> **Note**: Need to create a button element? Try the *button* method. It has the same signature as *submit*.
+::: tip
+Need to create a button element? Try the **button** method. It has the same signature as **submit**.
+:::
 
 ## Custom Macros
 
-#### Registering a form macro
+#### Registering a Form Macro
 
 It's easy to define your own custom Form class helpers called "macros". Here's how it works. First, simply register the macro with a given name and a Closure:
 

@@ -26,7 +26,7 @@ To push a new job onto the queue, use the `Queue::push` method:
 Queue::push('SendEmail', ['message' => $message]);
 ```
 
-The first argument given to the `push` method is the name of the class that should be used to process the job. The second argument is an array of data that should be passed to the handler. A job handler should be defined like so:
+The first argument given to the `push` method is the name of the class that should be used to process the job. The second argument is an array of data that should be passed to the handler. A job handler should be defined like so.
 
 ```php
 class SendEmail
@@ -138,63 +138,77 @@ Queue::push(function($job) use ($id) {
 });
 ```
 
-> **Note**: Instead of making objects available to queued Closures via the `use` directive, consider passing primary keys and re-pulling the associated models from within your queue job. This often avoids unexpected serialization behavior.
+::: tip
+Instead of making objects available to queued Closures via the `use` directive, consider passing primary keys and re-pulling the associated models from within your queue job. This often avoids unexpected serialization behavior.
+:::
 
 ## Running the queue worker
 
-October CMS includes some [console commands](../console/commands.md) that will process jobs in the queue.
+October CMS includes some console commands that will process jobs in the queue. To process new jobs as they are pushed onto the queue, run the `queue:work` command:
 
-To process new jobs as they are pushed onto the queue, run the `queue:work` command:
-
-    php artisan queue:work
+```bash
+php artisan queue:work
+```
 
 Once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](#oc-supervisor-configuration) to ensure that the queue worker does not stop running.
 
 Queue worker processes store the booted application state in memory. They will not recognize changes in your code after they have been started. When deploying changes, restart queue workers.
 
-#### Processing a single job
+#### Processing a Single Job
 
 To process only the first job on the queue, use the `--once` option:
 
-    php artisan queue:work --once
+```bash
+php artisan queue:work --once
+```
 
-#### Specifying the connection & Queue
+#### Specifying the Connection & Queue
 
 You may also specify which queue connection the worker should utilize:
 
-    php artisan queue:work --once connection
+```bash
+php artisan queue:work --once connection
+```
 
 You may pass a comma-delimited list of queue connections to the `work` command to set queue priorities:
 
-    php artisan queue:work --once --queue=high,low
+```bash
+php artisan queue:work --once --queue=high,low
+```
 
 In this example, jobs on the `high` queue will always be processed before moving onto jobs from the `low` queue.
 
-#### Specifying the job timeout parameter
+#### Specifying the Job Timeout Parameter
 
 You may also set the length of time (in seconds) each job should be allowed to run:
 
-    php artisan queue:work --once --timeout=60
+```bash
+php artisan queue:work --once --timeout=60
+```
 
-#### Specifying queue sleep duration
+#### Specifying Queue Sleep Duration
 
 In addition, you may specify the number of seconds to wait before polling for new jobs:
 
-    php artisan queue:work --once --sleep=5
+```bash
+php artisan queue:work --once --sleep=5
+```
 
 Note that the queue only "sleeps" if no jobs are on the queue. If more jobs are available, the queue will continue to work them without sleeping.
 
-## Daemon queue worker
+## Daemon Queue Worker
 
 By default `queue:work` will process jobs without ever re-booting the framework. This results in a significant reduction of CPU usage when compared to the `queue:work --once` command, but at the added complexity of needing to drain the queues of currently executing jobs during your deployments.
 
 To start a queue worker in daemon mode, simply omit the `--once` flag:
 
-    php artisan queue:work connection
+```bash
+php artisan queue:work connection
 
-    php artisan queue:work connection --sleep=3
+php artisan queue:work connection --sleep=3
 
-    php artisan queue:work connection --sleep=3 --tries=3
+php artisan queue:work connection --sleep=3 --tries=3
+```
 
 You may use the `php artisan help queue:work` command to view all of the available options.
 
@@ -204,11 +218,15 @@ The simplest way to deploy an application using daemon queue workers is to put t
 
 The easiest way to restart your workers is to include the following command in your deployment script:
 
-    php artisan queue:restart
+```bash
+php artisan queue:restart
+```
 
 This command will instruct all queue workers to restart after they finish processing their current job.
 
-> **Note**: This command relies on the cache system to schedule the restart. By default, APCu does not work for CLI commands. If you are using APCu, add `apc.enable_cli=1` to your APCu configuration.
+::: tip
+This command relies on the cache system to schedule the restart. By default, APCu does not work for CLI commands. If you are using APCu, add `apc.enable_cli=1` to your APCu configuration.
+:::
 
 ### Coding for daemon queue workers
 
@@ -217,27 +235,31 @@ Daemon queue workers do not restart the platform before processing each job. The
 Similarly, your database connection may disconnect when being used by long-running daemon. You may use the `Db::reconnect` method to ensure you have a fresh connection.
 
 <a id="oc-supervisor-configuration"></a>
-## Supervisor configuration
+## Supervisor Configuration
 
 ### Installing Supervisor
 
 Supervisor is a process monitor for the Linux operating system, and will automatically restart your `queue:work` process if it fails. To install Supervisor on Ubuntu, you may use the following command:
 
-    sudo apt-get install supervisor
+```bash
+sudo apt-get install supervisor
+```
 
 ### Configuring Supervisor
 
-Supervisor configuration files are typically stored in the `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `october-worker.conf` file that starts and monitors a `queue:work` process:
+Supervisor configuration files are typically stored in the `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `october-worker.conf` file that starts and monitors a `queue:work` process.
 
-    [program:october-worker]
-    process_name=%(program_name)s_%(process_num)02d
-    command=php /path/to/october/artisan queue:work --sleep=3 --tries=3
-    autostart=true
-    autorestart=true
-    user=october
-    numprocs=8
-    redirect_stderr=true
-    stdout_logfile=/path/to/october/worker.log
+```ini
+[program:october-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /path/to/october/artisan queue:work --sleep=3 --tries=3
+autostart=true
+autorestart=true
+user=october
+numprocs=8
+redirect_stderr=true
+stdout_logfile=/path/to/october/worker.log
+```
 
 In this example, the `numprocs` directive will instruct Supervisor to run 8 `queue:work` processes and monitor all of them, automatically restarting them if they fail. Of course, you should change the `queue:work` portion of the command directive to reflect your desired queue connection. The `user` directive should be changed to the name of a user that has permission to run the command.
 
@@ -245,11 +267,13 @@ In this example, the `numprocs` directive will instruct Supervisor to run 8 `que
 
 Once the configuration file has been created, you may update the Supervisor configuration and start the processes using the following commands:
 
-    sudo supervisorctl reread
+```bash
+sudo supervisorctl reread
 
-    sudo supervisorctl update
+sudo supervisorctl update
 
-    sudo supervisorctl start october-worker:*
+sudo supervisorctl start october-worker:*
+```
 
 For more information on Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
 
@@ -259,7 +283,9 @@ Since things don't always go as planned, sometimes your queued jobs will fail. D
 
 You can specify the maximum number of times a job should be attempted using the `--tries` switch on the `queue:work` command:
 
-    php artisan queue:work connection-name --tries=3
+```bash
+php artisan queue:work connection-name --tries=3
+```
 
 If you would like to register an event that will be called when a queue job fails, you may use the `Queue::failing` method. This event is a great opportunity to notify your team via e-mail or another third party service.
 
@@ -284,16 +310,24 @@ The original array of `data` will also be automatically passed onto the failed m
 
 To view all of your failed jobs, you may use the `queue:failed` Artisan command:
 
-    php artisan queue:failed
+```bash
+php artisan queue:failed
+```
 
 The `queue:failed` command will list the job ID, connection, queue, and failure time. The job ID may be used to retry the failed job. For instance, to retry a failed job that has an ID of 5, the following command should be issued:
 
-    php artisan queue:retry 5
+```bash
+php artisan queue:retry 5
+```
 
 If you would like to delete a failed job, you may use the `queue:forget` command:
 
-    php artisan queue:forget 5
+```bash
+php artisan queue:forget 5
+```
 
 To delete all of your failed jobs, you may use the `queue:flush` command:
 
-    php artisan queue:flush
+```bash
+php artisan queue:flush
+```

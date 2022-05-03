@@ -29,7 +29,7 @@ public function onDoSomething()
 
 #### Returning strings from routes
 
-Returning a string from a [route definition](../services/router.md) will act the same as a CMS method and display the string as the response.
+Returning a string from a [route definition](../system/routing.md) will act the same as a CMS method and display the string as the response.
 
 ```php
 Route::get('/', function() {
@@ -84,7 +84,7 @@ The `Response` facade may be used to conveniently generate other types of respon
 
 ### View Responses
 
-If you need access to the `Response` class methods, but want to return a [view](#oc-views) as the response content, you may use the `Response::view` method for convenience:
+If you need access to the `Response` class methods, but want to return a view as the response content, you may use the `Response::view` method for convenience:
 
 ```php
 return Response::view('acme.blog::hello')->header('Content-Type', $type);
@@ -117,9 +117,10 @@ return Response::download($pathToFile, $name, $headers);
 return Response::download($pathToFile)->deleteFileAfterSend(true);
 ```
 
-> **Note**: Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
+::: tip
+Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
+:::
 
-<a id="oc-redirects"></a>
 ## Redirects
 
 Redirect responses are typically instances of the `Illuminate\Http\RedirectResponse` class, and contain the proper headers needed to redirect the user to another URL. The simplest way to generate a `RedirectResponse` instance is to use the `to` method on the `Redirect` facade.
@@ -130,13 +131,15 @@ return Redirect::to('user/login');
 
 ### Returning a Redirect with Flash Data
 
-Redirecting to a new URL and [flashing data to the session](../services/session.md) are typically done at the same time. So, for convenience, you may create a `RedirectResponse` instance and flash data to the session in a single method chain:
+Redirecting to a new URL and [flashing data to the session](./session.md) are typically done at the same time. So, for convenience, you may create a `RedirectResponse` instance and flash data to the session in a single method chain:
 
 ```php
 return Redirect::to('user/login')->with('message', 'Login Failed');
 ```
 
-> **Note**: Since the `with` method flashes data to the session, you may retrieve the data using the typical `Session::get` method.
+::: tip
+Since the `with` method flashes data to the session, you may retrieve the data using the typical `Session::get` method.
+:::
 
 #### Redirecting to the Previous URL
 
@@ -174,10 +177,9 @@ return Response::caps('foo');
 
 You may define your macros in the `boot` method of a [plugin registration file](../extending.md). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place macro registrations.
 
-<a id="oc-views"></a>
 ## Views
 
-Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and back-end areas. Views are also used by the [Mail service](../services/mail.md) for providing default template content. Views are typically stored in the `views` directory of a plugin.
+Views are a great way to store system based presentation logic, such as markup used by an API or end point, or markup that is shared with the CMS and back-end areas. Views are also used by the [Mail service](../system/sending-mail.md) for providing default template content. Views are typically stored in the `views` directory of a plugin.
 
 A simple view could look something like this:
 
@@ -211,7 +213,9 @@ return View::make('acme.blog::greeting', ['name' => 'Charlie']);
 
 The first argument is a "path hint" that contains the plugin name, separated by two colons `::`, followed by the view file name. The second argument passed to `View::make` is an array of data that should be made available to the view.
 
-> **Note**: The path hint is case sensitive and the plugin name should always be in lowercase.
+::: tip
+The path hint is case sensitive and the plugin name should always be in lowercase.
+:::
 
 #### Passing data to views
 

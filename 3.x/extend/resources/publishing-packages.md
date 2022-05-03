@@ -8,7 +8,6 @@ Your package should reside in a source control repository that can be accessed b
 
 Be sure to start your package `name` ends with **-plugin** or **-theme** respectively, this will help others find your package and is in accordance with the [Developer Guide](https://octobercms.com/help/guidelines/developer#package-naming).
 
-<a id="oc-publishing-plugins"></a>
 ### Publishing Plugins
 
 When publishing your plugin the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-plugin** and include the `composer/installers` package as a dependency.
@@ -26,7 +25,6 @@ When publishing your plugin the `composer.json` file should have this JSON conte
 
 A plugin with the code **Acme.Blog** will have a composer package name of `acme/blog-plugin` and will be installed in the **plugins/acme/blog** directory.
 
-<a id="oc-publishing-themes"></a>
 ### Publishing Themes
 
 When publishing your theme the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-theme** and include the `composer/installers` package as a dependency.
@@ -80,7 +78,7 @@ Navigate to your theme or plugin directory and open the composer.json file to in
 }
 ```
 
-Make sure that this package is included in the `require` property found in the [theme information file](../themes/development.md#oc-theme-dependencies).
+Make sure that this package is included in the `require` property found in the [theme information file](../../cms/themes/settings.md).
 
 #### Developing With Third Party Packages
 
@@ -102,7 +100,7 @@ To create a new plugin or theme that uses an external package or library, you sh
 
 Packages in October CMS follow semantic versioning and Composer uses git to determine the stability and impact of a given release.
 
-#### Listing your tags
+#### Listing Your Tags
 
 Use the `git tag` command to list the existing tags for your package.
 
@@ -112,7 +110,7 @@ v1.0
 v2.0
 ```
 
-#### Creating a new tag
+#### Creating a New Tag
 
 To create a new tag add (`-a`) the version with an optional (`-m`) message.
 
@@ -124,11 +122,11 @@ In addition to tagging, you should also increment the version file found in your
 
 ## Private Plugins and Themes
 
-Composer allows you to add private repositories from GitHub and other providers to your October CMS projects. Make sure you have followed the same instructions for [publishing plugins](#oc-publishing-plugins) and [themes](#oc-publishing-themes) respectively.
+Composer allows you to add private repositories from GitHub and other providers to your October CMS projects. Make sure you have followed the same instructions for publishing plugins and themes respectively.
 
 In all cases, you should have a copy of your private plugin or theme stored somewhere available to the main project. The `plugin:install` and `theme:install` commands can be used to install private plugins from either a remote or local source. This will add the location to your composer file and install it like any other package.
 
-#### Install from a remote source
+#### Install from a Remote Source
 
 Use the `--from` option to specify the location to your remote source when installing.
 

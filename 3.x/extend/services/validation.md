@@ -71,7 +71,6 @@ $failed = $validator->failed();
 
 The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
 
-<a id="oc-working-with-error-messages"></a>
 ## Working with Error Messages
 
 After calling the `messages` method on a `Validator` instance, you will receive a `Illuminate\Support\MessageBag` instance, which has a variety of convenient methods for working with error messages.
@@ -151,7 +150,7 @@ So, after redirection, you may utilize the automatically bound `errors` variable
 
 ### Named Error Bags
 
-If you have multiple forms on a single page, you may wish to name the `MessageBag` of errors. This will allow you to retrieve the error messages for a specific form. Simply pass a name as the second argument to `withErrors`:
+If you have multiple forms on a single page, you may wish to name the `MessageBag` of errors. This will allow you to retrieve the error messages for a specific form. Simply pass a name as the second argument to `withErrors`.
 
 ```php
 return Redirect::to('register')->withErrors($validator, 'login');
@@ -484,9 +483,10 @@ In the rule above, only rows with an `account_id` of `1` would be included in th
 
 The field under validation must be formatted as an URL.
 
-> **Note**: This function uses PHP's `filter_var` method.
+::: tip
+This function uses PHP's `filter_var` method.
+:::
 
-<a name="conditionally-adding-rules"></a>
 ## Conditionally Adding Rules
 
 In some situations, you may wish to run validation checks against a field **only** if that field is present in the input array. To quickly accomplish this, add the `sometimes` rule to your rule list:
@@ -499,7 +499,7 @@ $v = Validator::make($data, [
 
 In the example above, the `email` field will only be validated if it is present in the `$data` array.
 
-#### Complex conditional validation
+#### Complex Conditional Validation
 
 Sometimes you may wish to require a given field only if another field has a greater value than 100. Or you may need two fields to have a given value only when another field is present. Adding these validation rules doesn't have to be a pain. First, create a `Validator` instance with your _static rules_ that never change:
 
@@ -526,9 +526,10 @@ $v->sometimes(['reason', 'cost'], 'required', function($input) {
 });
 ```
 
-> **Note**: The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
+::: tip
+The `$input` parameter passed to your `Closure` will be an instance of `Illuminate\Support\Fluent` and may be used as an object to access your input and files.
+:::
 
-<a id="oc-validating-arrays"></a>
 ## Validating Arrays
 
 Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
@@ -567,7 +568,6 @@ $validator = Validator::make(Input::all(), [
 ]);
 ```
 
-<a id="oc-custom-error-messages"></a>
 ## Custom Error Messages
 
 If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
@@ -582,7 +582,9 @@ $messages = [
 $validator = Validator::make($input, $rules, $messages);
 ```
 
-> *Note:* The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
+::: tip
+The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
+:::
 
 #### Other Validation Placeholders
 
@@ -595,7 +597,7 @@ $messages = [
 ];
 ```
 
-#### Specifying a custom message for a given attribute
+#### Specifying a Custom Message for a Given Attribute
 
 Sometimes you may wish to specify a custom error messages only for a specific field:
 
@@ -605,7 +607,6 @@ $messages = [
 ];
 ```
 
-<a name="localization"></a>
 #### Specifying Custom Messages in Language Files
 
 In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
@@ -623,12 +624,10 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
 Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
 ```
 
-<a id="oc-custom-validation-rules"></a>
 ## Custom Validation Rules
 
-There are a variety of helpful validation rules, however, you may wish to specify some of your own. First you should decide if your rule shuld be [registered globally](#oc-globally-registered-rules), or use [a local rule object](#oc-local-rule-objects).
+There are a variety of helpful validation rules, however, you may wish to specify some of your own. First you should decide if your rule should be registered globally, or use a local rule object.
 
-<a id="oc-globally-registered-rules"></a>
 ### Globally Registered Rules
 
 A globally registered rule can be shared throughout your application by registering it with a tag and rule class using the `Validator::extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
@@ -729,7 +728,6 @@ class BetwixtRule
 }
 ```
 
-<a id="oc-local-rule-objects"></a>
 ### Local Rule Objects
 
 The [Laravel documentation on rule objects](https://laravel.com/docs/6.x/validation#using-rule-objects) describes in more detail how to define a rule class. Specifically, the rule must implement the `Illuminate\Contracts\Validation\Rule` contract which requires a `passes` method to be defined.

@@ -58,14 +58,13 @@ Since we have bound the `UserRepositoryInterface` to a concrete type, the `DbUse
 
 ### Where to Register Bindings
 
-IoC bindings, like [event handlers](events.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [plugin registration file](../extending.md). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place IoC registration logic.
+IoC bindings, like [event handlers](./event.md), generally fall under the category of "bootstrap code". In other words, they prepare your application to actually handle requests, and usually need to be executed before a route or controller is actually called. The most common place is the `boot` method of a [plugin registration file](../extending.md). Alternatively, plugins can supply a file named **init.php** in the plugin directory that you can use to place IoC registration logic.
 
-<a id="oc-service-providers"></a>
 ## Service Providers
 
 Service providers are a great way to create libraries and perform group related IoC registrations in a single location. Within a service provider, you might register a custom authentication driver, register your application's repository classes with the IoC container, or even setup a custom Artisan command.
 
-In fact, [plugin registration files](../plugin/registration.md) inherit service providers and most of the core components include service providers. All of the registered service providers for your application are listed in the `providers` array of the `config/app.php` configuration file.
+In fact, [plugin registration files](../system/plugins.md) inherit service providers and most of the core components include service providers. All of the registered service providers for your application are listed in the `providers` array of the `config/app.php` configuration file.
 
 #### Defining a Service Provider
 
@@ -87,9 +86,9 @@ class FooServiceProvider extends ServiceProvider
 
 Note that in the `register` method, the application IoC container is available to you via the `$this->app` property. Once you have created a provider and are ready to register it with your application, simply add it to the `providers` array in your `app` configuration file.
 
-#### Registering a service provider at run-time
+#### Registering a Service Provider at Runtime
 
-You may also register a service provider at run-time using the `App::register` method:
+You may also register a service provider at run-time using the `App::register` method.
 
 ```php
 App::register('FooServiceProvider');
@@ -97,9 +96,9 @@ App::register('FooServiceProvider');
 
 ## Application Events
 
-#### Request events
+#### Request Events
 
-You can register special events before a requested is routed using the `before` and `after` methods:
+You can register special events before a requested is routed using the `before` and `after` methods.
 
 ```php
 App::before(function ($request) {
@@ -111,9 +110,9 @@ App::after(function ($request) {
 });
 ```
 
-#### Container events
+#### Container Events
 
-The service container fires an event each time it resolves an object. You may listen to this event using the `resolving` method:
+The service container fires an event each time it resolves an object. You may listen to this event using the `resolving` method.
 
 ```php
 App::resolving(function ($object, $app) {
@@ -133,16 +132,16 @@ As you can see, the object being resolved will be passed to the callback, allowi
 
 ## Application Helpers
 
-#### Finding the application environment
+#### Finding the Application Environment
 
-You may use the `environment` method to discover the application environment as determined by the [environment configuration](../setup/configuration.md#oc-environment-configuration).
+You may use the `environment` method to discover the application environment as determined by the [environment configuration](../../setup/configuration.md).
 
 ```php
 // production
 App::environment();
 ```
 
-#### Determine the execution context
+#### Determine the Execution Context
 
 It is possible to know if the current request is being performed in the administrative back-end area using the `runningInBackend` method.
 
@@ -150,7 +149,7 @@ It is possible to know if the current request is being performed in the administ
 App::runningInBackend();
 ```
 
-You may also use the `runningInConsole` method to check if the executing code is taking place inside the [command line interface](../console/commands.md):
+You may also use the `runningInConsole` method to check if the executing code is taking place inside the [command line interface](../console-commands.md):
 
 ```php
 App::runningInConsole();

@@ -1,8 +1,7 @@
 # Parser
 
-October CMS uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../cms/themes.md) use the [Twig](#oc-twig-template-parser) and [INI format](#oc-ini-configuration-parser) in their template structure. Each parser is described in more detail below.
+October CMS uses several standards for processing markup, templates and configuration. Each has been carefully selected to serve their role in making your development process and learning curve as simple as possible. As an example, the [objects found in a theme](../../cms/themes/themes.md) use the Twig and INI format in their template structure. Each parser is described in more detail below.
 
-<a id="oc-markdown-parser"></a>
 ## Markdown Parser
 
 Markdown allows you to write easy-to-read and easy-to-write plain text format, which then converts to HTML. The `Markdown` facade is used for parsing Markdown syntax and is based on [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown/). Some quick examples of markdown:
@@ -22,13 +21,12 @@ Use the `Markdown::parse` method to render Markdown to HTML:
 $html = Markdown::parse($markdown);
 ```
 
-You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md).
+You may also use the `|md` filter for [parsing Markdown in your front-end markup](../../markup/filter/md.md).
 
 ```twig
 {{ '**Text** is bold.'|md }}
 ```
 
-<a id="oc-using-html-in-markdown"></a>
 ### Using HTML in Markdown
 
 Markdown is a superset of HTML so you can combine HTML and Markdown in the same template. When Markdown encounters any block-level HTML tag, the Markdown syntax will deactivate for all the content inside.
@@ -62,10 +60,9 @@ If you intentionally want to enable Markdown inside a block-level tag, you may d
 </div>
 ```
 
-<a id="oc-twig-template-parser"></a>
 ## Twig Template Parser
 
-Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../markup/templating.md), [view content](../services/response-view.md#oc-views) and [mail message content](../system/sending-mail.md).
+Twig is a simple but powerful template engine that parses HTML templates in to optimized PHP code, it the driving force behind [the front-end markup](../../markup/templating.md), [view content](./response-view.md) and [mail message content](../system/sending-mail.md).
 
 The `Twig` facade is used for parsing Twig syntax, you may use the `Twig::parse` method to render Twig to HTML.
 
@@ -83,7 +80,7 @@ The Twig parser can be extended to register custom features via [the plugin regi
 
 ## Bracket Parser
 
-October also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../../cms/themes/content.md). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
+October CMS also ships with a simple bracket template parser as an alternative to the Twig parser, currently used for passing variables to [theme content blocks](../../cms/themes/content.md). This engine is faster to render HTML and is designed to be more suitable for non-technical users. There is no facade for this parser so the fully qualified `October\Rain\Parse\Bracket` class should be used with the `parse` method.
 
 ```php
 use October\Rain\Parse\Bracket;
@@ -147,10 +144,9 @@ The parser also supports operation in reverse, outputting YAML format from a PHP
 $yamlString = Yaml::render($array);
 ```
 
-<a id="oc-ini-configuration-parser"></a>
 ## Initialization (INI) Configuration Parser
 
-The INI file format is a standard for defining simple configuration files, commonly used by [components inside theme templates](../cms/components.md). It could be considered a cousin of the YAML format, although unlike YAML, it is incredibly simple, less sensitive to typos and does not rely on indentation. It supports basic key-value pairs with sections, for example:
+The INI file format is a standard for defining simple configuration files, commonly used by [components inside theme templates](../../cms/themes/components.md). It could be considered a cousin of the YAML format, although unlike YAML, it is incredibly simple, less sensitive to typos and does not rely on indentation. It supports basic key-value pairs with sections, for example:
 
 ```ini
 receipt = "Acme Purchase Invoice"
@@ -236,7 +232,7 @@ echo $syntax->render(['websiteName' => 'October CMS']);
 // <h1>October CMS</h1>
 ```
 
-As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the [Twig engine](#oc-twig-template-parser).
+As a bonus feature, calling the `toTwig` method will output the template in a prepared state for rendering by the Twig engine.
 
 ```php
 echo $syntax->toTwig();
@@ -276,7 +272,7 @@ There are various tag types that can be used with the Dynamic Syntax parser, the
 
 Single line input for smaller blocks of text.
 
-```
+```html
 {text name="websiteName" label="Website Name"}Our wonderful website{/text}
 ```
 
@@ -284,7 +280,7 @@ Single line input for smaller blocks of text.
 
 Multiple line input for larger blocks of text.
 
-```
+```html
 {textarea name="websiteDescription" label="Website Description"}
     This is our vision for things to come
 {/textarea}
@@ -294,27 +290,27 @@ Multiple line input for larger blocks of text.
 
 Renders a dropdown form field.
 
-```
+```html
 {dropdown name="dropdown" label="Pick one" options="One|Two"}{/dropdown}
 ```
 
 Renders a dropdown form field with independent values and labels.
 
-```
+```html
 {dropdown name="dropdown" label="Pick one" options="one:One|two:Two"}{/dropdown}
 ```
 
 Renders a dropdown form field with an array returned by a static class method (the class must be a fully namespaced class).
 
-```
-{dropdown name="dropdown" label="Pick one" options="\Path\To\Class::method"}{/dropdown}
+```html
+{dropdown name="dropdown" label="Pick one" options="Path\To\Class::method"}{/dropdown}
 ```
 
 #### Radio
 
 Renders a radio form field.
 
-```
+```html
 {radio name="radio" label="Thoughts?" options="y:Yes|n:No|m:Maybe"}{/radio}
 ```
 
@@ -322,7 +318,7 @@ Renders a radio form field.
 
 Renders the form field type exactly as defined in the `type` attribute. This tag will simply set a variable and will render in view mode as an empty string.
 
-```
+```html
 {variable type="text" name="name" label="Name"}John{/variable}
 ```
 
@@ -330,7 +326,7 @@ Renders the form field type exactly as defined in the `type` attribute. This tag
 
 Text input for rich content (WYSIWYG).
 
-```
+```html
 {richeditor name="content" label="Main content"}Default text{/richeditor}
 ```
 
@@ -344,7 +340,7 @@ Renders in Twig as
 
 Text input for Markdown content.
 
-```
+```html
 {markdown name="content" label="Markdown content"}Default text{/markdown}
 ```
 
@@ -358,7 +354,7 @@ Renders in Twig as
 
 File selector for media library items. This tag value will contain the relative path to the file.
 
-```
+```html
 {mediafinder name="logo" label="Logo"}defaultlogo.png{/mediafinder}
 ```
 
@@ -372,7 +368,7 @@ Renders in Twig as
 
 File uploader input for files. This tag value will contain the full path to the file.
 
-```
+```html
 {fileupload name="logo" label="Logo"}defaultlogo.png{/fileupload}
 ```
 
@@ -380,7 +376,7 @@ File uploader input for files. This tag value will contain the full path to the 
 
 Color picker widget for color selection. This tag will contain the selected hexadecimal value. You may optionally provide an `availableColors` attribute to define the available colours for selection.
 
-```
+```html
 {colorpicker name="bg_color" label="Background colour" allowEmpty="true" availableColors="#ffffff|#000000"}{/colorpicker}
 ```
 
@@ -388,7 +384,7 @@ Color picker widget for color selection. This tag will contain the selected hexa
 
 Renders a repeating section with other fields inside.
 
-```
+```html
 {repeater name="content_sections" prompt="Add another content section"}
     <h2>{text name="title" label="Title"}Title{/text}</h2>
     <p>{textarea name="content" label="Content"}Content{/textarea}</p>
@@ -429,7 +425,7 @@ Calling `$syntax->toEditor` will return a different array for a repeater field:
 
 The repeater field also supports group mode, to be used with the dynamic syntax parser as follows:
 
-```
+```html
 {variable name="sections" type="repeater" prompt="Add another section" tab="Sections"
         groups="$/author/plugin/repeater_fields.yaml"}{/variable}
 ```
@@ -456,4 +452,4 @@ quote:
             type: textarea
 ```
 
-For more information about the repeater group mode see [Repeater Widget](../backend/forms.md#widget-repeater).
+For more information about the repeater group mode see [Repeater Widget](../../element/form/widget-repeater.md).

@@ -2,7 +2,7 @@
 
 ## Basic Input
 
-You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input` [helper function](../services/helpers.md) is an alias for `Input::get`.
+You may access all user input with a few simple methods. You do not need to worry about the HTTP verb for the request when using the `Input` facade, as input is accessed in the same way for all verbs. The global `input` [helper function](./helpers.md) is an alias for `Input::get`.
 
 #### Retrieving an Input Value
 
@@ -44,7 +44,9 @@ When working on forms with "array" inputs, you may use dot notation to access th
 $input = Input::get('products.0.name');
 ```
 
-> **Note**: Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via `Input::get` like normal.
+::: tip
+Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via `Input::get` like normal.
+:::
 
 ## Cookies
 
@@ -125,7 +127,9 @@ return Redirect::to('form')->withInput();
 return Redirect::to('form')->withInput(Input::except('password'));
 ```
 
-> **Note**: You may flash other data across requests using the [Session](../services/session.md) class.
+::: tip
+You may flash other data across requests using the [Session](./session.md) class.
+:::
 
 #### Retrieving Old Data
 
@@ -133,7 +137,6 @@ return Redirect::to('form')->withInput(Input::except('password'));
 Input::old('username');
 ```
 
-<a id="oc-files"></a>
 ## Files
 
 #### Retrieving an Uploaded File

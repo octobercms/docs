@@ -1,6 +1,6 @@
 # Log
 
-By default October is configured to create a single log file for your application which is stored in the `storage/logs` directory. You may write information to the logs using the `Log` facade:
+By default October is configured to create a single log file for your application which is stored in the `storage/logs` directory. You may write information to the logs using the `Log` facade.
 
 ```php
 $user = User::find(1);
@@ -28,7 +28,6 @@ An array of contextual data may also be passed to the log methods. This contextu
 Log::info('User failed to login.', ['id' => $user->id]);
 ```
 
-<a id="oc-helper-functions"></a>
 ### Helper Functions
 
 There are some global helper methods available to make logging easier. The `trace_log` function is an alias for `Log::info` with support for using arrays and exceptions as the message.

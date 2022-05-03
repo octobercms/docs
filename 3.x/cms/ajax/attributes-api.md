@@ -77,7 +77,7 @@ Send a POST parameter `id` with value `7` across multiple elements.
 </div>
 ```
 
-Including [file uploads](../services/request-input.md#oc-files) with a request.
+Including [file uploads](../../extend/services/request-input.md) with a request.
 
 ```html
 <form data-request="onSubmit" data-request-files>
