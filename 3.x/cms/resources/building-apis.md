@@ -39,6 +39,26 @@ In most cases you will be converting component variables to a response.
 }) %}
 ```
 
+### Collections
+
+The `collect()`[Twig function](../../markup/function/collect.md) builds a collection for a response. The `push` method is used to push items on to the collection and it can be used to customize each result.
+
+```twig
+{% set result = collect() %}
+
+{% for post in posts %}
+    {% do result.push({
+        id: post.id,
+        title: post.title,
+        email: post.author.email,
+        created_at: post.created_at,
+        updated_at: post.updated_at
+    }) %}
+{% endfor %}
+
+{% do response(result) %}
+```
+
 ## Conditions
 
 All Twig conditions can be used in the markup to affect the response and the last response call is the one that will be sent to the browser.
@@ -71,6 +91,30 @@ The `abort()` [Twig function](../../markup/function/abort.md) can be used to abo
 
 Since the API is defined in the Markup section of the page or layout, all components and life-cycle events are available.
 
+### Using Layouts as Middleware
+
+Middleware allows you to apply common logic to multiple endpoints, such as checking authentication or throttling requests. A [CMS layout](../themes/layouts.md) can be used to apply logic to multiple pages and the layout logic executes before the page logic. Remember to include the `{% page %}` [Twig tag](../../markup/tag/page.md) so the page logic is included.
+
+For example, a layout named **api.htm** can have any conditional logic.
+
+```twig
+description = "API Authentication"
+==
+{% if someCondition %}
+    {% page %}
+{% else %}
+    {% do abort(400, 'Condition not met') %}
+{% endif %}
+```
+
+Every page that uses the layout will have the conditions of the layout applied.
+
+```twig
+layout = "api"
+==
+{% do response({ success: true }) %}
+```
+
 ### Calling AJAX Handlers
 
 In some cases you may wish to call an AJAX handler of a component or inside the page. This is possible using the `ajaxHandler()` [Twig function](../../markup/function/ajax-handler.md).
@@ -96,30 +140,6 @@ You may also call a handler and pass it directly as a response. The response inc
 ```
 
 It will also handle redirects automatically. See the [Twig function article](../../markup/function/ajax-handler.md) for more details.
-
-### Using Layouts as Middleware
-
-Middleware allows you to apply common logic to multiple endpoints, such as checking authentication or throttling requests. A [CMS layout](../themes/layouts.md) can be used to apply logic to multiple pages and the layout logic executes before the page logic. Remember to include the `{% page %}` [Twig tag](../../markup/tag/page.md) so the page logic is included.
-
-For example, a layout named **api.htm** can have any conditional logic.
-
-```twig
-description = "API Authentication"
-==
-{% if someCondition %}
-    {% page %}
-{% else %}
-    {% do abort(400, 'Condition not met') %}
-{% endif %}
-```
-
-Every page that uses the layout will have the conditions of the layout applied.
-
-```twig
-layout = "api"
-==
-{% do response({ success: true }) %}
-```
 
 ## Working with Resources
 
@@ -155,28 +175,6 @@ handle = "Blog\Post"
 ==
 {% do response({
     data: posts
-}) %}
-```
-
-### Building a Custom Collection
-
-Use the `collect()`[Twig function](../../markup/function/collect.md) to process a collection for a response. The `push` method is used to push items on to the collection and it can be used to customize each result.
-
-```twig
-{% set result = collect() %}
-
-{% for post in posts %}
-    {% do result.push({
-        id: post.id,
-        title: post.title,
-        email: post.author.email,
-        created_at: post.created_at,
-        updated_at: post.updated_at
-    }) %}
-{% endfor %}
-
-{% do response({
-    data: result
 }) %}
 ```
 
