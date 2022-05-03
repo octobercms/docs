@@ -13,10 +13,10 @@ October CMS uses elements to define structures such as Lists, Forms and Filters.
 
 Form Fields, Form UI and Form Widgets are field definitions used by forms, such as a text input. These are commonly referred to by the following areas:
 
-- CMS Theme Settings
-- Tailor Content Fields
-- Backend Form Controller
-- Backend Relation Controller
+- [CMS Theme Settings](../cms/themes/settings.md)
+- [Tailor Content Fields](../tailor/content-fields.md)
+- [Backend Form Controller](../extend/forms/form-controller.md)
+- [Backend Relation Controller](../extend/forms/relation-controller.md)
 
 All form fields are identified as their individual **type** property.
 
@@ -32,8 +32,8 @@ Form Fields contain generic and simple fields. Form UI is for user interface ele
 
 List Columns are column definitions used by lists. These are referred to by the following areas.
 
-- Backend List Controller
-- Backend Relation Controller
+- [Backend List Controller](../extend/lists/list-controller.md)
+- [Backend Relation Controller](../extend/forms/relation-controller.md)
 
 All list columns are identified as their individual **type** property.
 
@@ -47,8 +47,8 @@ mycolumn:
 
 Filter Scopes are scope definitions used by filters, often in conjunction with a list. Similar to list columns these are referenced by the following areas:
 
-- Backend List Controller
-- Backend Relation Controller
+- [Backend List Controller](../extend/lists/list-controller.md)
+- [Backend Relation Controller](../extend/forms/relation-controller.md)
 
 All filter scopes are identified as their individual **type** property.
 

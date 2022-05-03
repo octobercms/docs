@@ -25,13 +25,70 @@ send_at:
         condition: checked
 ```
 
-In the above example the `send_at` form field will only be shown if the `is_delayed` field is checked. In other words, the field will show (action) if the other form input (field) is checked (condition). The `trigger` definition specifies these options:
+In the above example the `send_at` form field will only be shown if the `is_delayed` field is checked. In other words, the field will show (action) if the other form input (field) is checked (condition).
 
-Option | Description
+The `trigger` definition specifies these properties.
+
+Property | Description
 ------------- | -------------
 **action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
-**field** | defines the other field name that will trigger the action. Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](#widget-repeater), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself. Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
+**field** | defines the other field name that will trigger the action.
 **condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
+
+### Multiple Actions
+
+You may combine multiple actions by separating them with a pipe `|` symbol. The following will both display and empty the input when the trigger condition is met.
+
+```yaml
+trigger:
+    action: show|empty
+    condition: checked
+    field: name
+```
+
+### Multiple Value Conditions
+
+When using the `value[]` condition, you may look for multiple values by passing extra values after the first one, which takes the format `value[][]`.
+
+```yaml
+trigger:
+    action: show
+    condition: value[csv][csv_custom]
+    field: file_format
+```
+
+### Referencing Parent Fields
+
+Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](./form/widget-repeater.md), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself.
+
+In the example below, the `colors` field will be shown when the `type` field is set to **Complex**.
+
+```yaml
+fields:
+    type:
+        label: Type
+        type: dropdown
+        options:
+            1: Simple
+            2: Complex
+
+    content:
+        label: Content
+        type: nestedform
+        form:
+            fields:
+                colors:
+                    label: Colors
+                    type: colorpicker
+                    trigger:
+                        action: show
+                        field: ^type
+                        condition: value[2]
+```
+
+::: tip
+Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
+:::
 
 ## Input Preset Converter
 
