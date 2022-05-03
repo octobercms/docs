@@ -23,7 +23,7 @@ You may also use a different filename for the configuration file and this affect
 $maxItems = Config::get('acme.demo::custom.maxItems', 50);
 ```
 
-### Overriding Configuration Values
+## Overriding Configuration Values
 
 A plugin configuration file can be overridden by the application by creating a local configuration file to match, for example, to override **plugins/acme/demo/config/config.php**, create a file called **config/acme/todo/config.php**. Inside the overridden configuration file you can return only values you want to override.
 

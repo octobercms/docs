@@ -1,17 +1,16 @@
 # Basic Usage
 
-Connecting to databases and running queries is a simple process, supported by using either raw SQL, the [query builder](../database/query.md) or [active record models](../database/model.md). Managing database tables and populating seed data is handled by the [migration and seeder process](../database/structure.md).
+Connecting to databases and running queries is a simple process, supported by using either raw SQL, the [query builder](./query.md) or [active record models](./model.md). Managing database tables and populating seed data is handled by the [migration and seeder process](./structure.md).
 
 Raw SQL and using the query builder will perform faster and should be used for simple tasks. Active Record is an approach used by the popular framework, Ruby On Rails. It allows an easy interface for performing repetitive tasks like creating, reading, updating and deleting database records. You can learn more about the [active record pattern on Wikipedia](http://en.wikipedia.org/wiki/Active_record_pattern).
 
-<a id="oc-running-raw-sql-queries"></a>
 ## Running Raw SQL Queries
 
 Once you have configured your database connection, you may run queries using the `Db` facade. The `Db` facade provides methods for each type of query: `select`, `update`, `insert`, `delete`, and `statement`.
 
-#### Running a select query
+### Selecting Records
 
-To run a basic query, we can use the `select` method on the `Db` facade:
+To run a basic query, use the `select` method on the `Db` facade.
 
 ```php
 $users = Db::select('select * from users where active = ?', [1]);
@@ -27,23 +26,19 @@ foreach ($users as $user) {
 }
 ```
 
-#### Using named bindings
-
-Instead of using `?` to represent your parameter bindings, you may execute a query using named bindings:
+Instead of using `?` to represent your parameter bindings, you may execute a query using named bindings.
 
 ```php
 $results = Db::select('select * from users where id = :id', ['id' => 1]);
 ```
 
-#### Running an insert statement
+### Modifying Records
 
-To execute an `insert` statement, you may use the `insert` method on the `Db` facade. Like `select`, this method takes the raw SQL query as its first argument and bindings as the second argument:
+To execute an `insert` statement, you may use the `insert` method on the `Db` facade. Like `select`, this method takes the raw SQL query as its first argument and bindings as the second argument.
 
 ```php
 Db::insert('insert into users (id, name) values (?, ?)', [1, 'Joe']);
 ```
-
-#### Running an update statement
 
 The `update` method should be used to update existing records in the database. The number of rows affected by the statement will be returned by the method:
 
@@ -51,32 +46,29 @@ The `update` method should be used to update existing records in the database. T
 $affected = Db::update('update users set votes = 100 where name = ?', ['John']);
 ```
 
-#### Running a delete statement
-
 The `delete` method should be used to delete records from the database. Like `update`, the number of rows deleted will be returned:
 
 ```php
 $deleted = Db::delete('delete from users');
 ```
 
-#### Running a general statement
+### General Statements
 
-Some database statements should not return any value. For these types of operations, you may use the `statement` method on the `Db` facade:
+Some database statements should not return any value. For these types of operations, you may use the `statement` method on the `Db` facade.
 
 ```php
 Db::statement('drop table users');
 ```
 
-<a id="oc-multiple-database-connections"></a>
 ## Multiple Database Connections
 
-When using multiple connections, you may access each connection via the `connection` method on the `Db` facade. The `name` passed to the `connection` method should correspond to one of the connections listed in your `config/database.php` configuration file:
+When [using multiple connections](../../setup/database-config.md), you may access each connection via the `connection` method on the `Db` facade. The `name` passed to the `connection` method should correspond to one of the connections listed in your `config/database.php` configuration file.
 
 ```php
 $users = Db::connection('foo')->select(...);
 ```
 
-You may also access the raw, underlying PDO instance using the `getPdo` method on a connection instance:
+You may also access the raw, underlying PDO instance using the `getPdo` method on a connection instance.
 
 ```php
 $pdo = Db::connection()->getPdo();
@@ -84,7 +76,7 @@ $pdo = Db::connection()->getPdo();
 
 ## Database Transactions
 
-To run a set of operations within a database transaction, you may use the `transaction` method on the `Db` facade. If an exception is thrown within the transaction `Closure`, the transaction will automatically be rolled back. If the `Closure` executes successfully, the transaction will automatically be committed. You don't need to worry about manually rolling back or committing while using the `transaction` method:
+To run a set of operations within a database transaction, you may use the `transaction` method on the `Db` facade. If an exception is thrown within the transaction `Closure`, the transaction will automatically be rolled back. If the `Closure` executes successfully, the transaction will automatically be committed. You don't need to worry about manually rolling back or committing while using the `transaction` method.
 
 ```php
 Db::transaction(function () {
@@ -93,8 +85,6 @@ Db::transaction(function () {
     Db::table('posts')->delete();
 });
 ```
-
-#### Manually using transactions
 
 If you would like to begin a transaction manually and have complete control over rollbacks and commits, you may use the `beginTransaction` method on the `Db` facade:
 
@@ -114,7 +104,9 @@ Lastly, you can commit a transaction via the `commit` method:
 Db::commit();
 ```
 
-> **Note**: Using the `Db` facade's transaction methods also controls transactions for the [query builder](../database/query.md) and [model queries](../database/model.md).
+::: tip
+Using the `Db` facade's transaction methods also controls transactions for the [query builder](./query.md) and [model queries](./model.md).
+:::
 
 ## Database Events
 
@@ -148,4 +140,6 @@ However, in some cases, such as when inserting a large number of rows, this can 
 Db::connection()->disableQueryLog();
 ```
 
-> **Note**: For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/error-log.md#oc-helper-functions) instead.
+::: tip
+For quicker debugging it may be more useful to call the `trace_sql` [helper function](../services/log.md) instead.
+:::

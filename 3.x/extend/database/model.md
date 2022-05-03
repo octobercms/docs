@@ -1,19 +1,18 @@
 # Model Queries
 
-When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to [retrieve multiple models](#oc-retrieving-multiple-models) or [retrieve a single model](#oc-retrieving-a-single-model) respectively. Queries that derive from a Model return an instance of [October\Rain\Database\Builder](../api/october/rain/database/builder).
+When requesting data from the database the model will retrieve values primarily using the `get` or `first` methods, depending on whether you wish to retrieve multiple models or retrieve a single model respectively. Queries that derive from a Model return an instance of `October\Rain\Database\Builder`.
 
-<a id="oc-retrieving-multiple-models"></a>
-### Retrieving Multiple Models
+## Retrieving Multiple Models
 
-Once you have created a model and [its associated database table](../database/structure.md#oc-migration-structure), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](../database/query.md) allowing you to query the database table associated with the model. For example:
+Once you have created a model and [its associated database table](./structure.md), you are ready to start retrieving data from your database. Think of each model as a powerful [query builder](./query.md) allowing you to query the database table associated with the model.
 
 ```php
 $flights = Flight::all();
 ```
 
-#### Accessing column values
+### Accessing Column Values
 
-If you have a model instance, you may access the column values of the model by accessing the corresponding property. For example, let's loop through each `Flight` instance returned by our query and echo the value of the `name` column:
+If you have a model instance, you may access the column values of the model by accessing the corresponding property. For example, let's loop through each `Flight` instance returned by our query and echo the value of the `name` column.
 
 ```php
 foreach ($flights as $flight) {
@@ -21,9 +20,9 @@ foreach ($flights as $flight) {
 }
 ```
 
-#### Adding additional constraints
+### Adding Additional Constraints
 
-The `all` method will return all of the results in the model's table. Since each model serves as a [query builder](../database/query.md), you may also add constraints to queries, and then use the `get` method to retrieve the results:
+The `all` method will return all of the results in the model's table. Since each model serves as a [query builder](./query.md), you may also add constraints to queries, and then use the `get` method to retrieve the results:
 
 ```php
 $flights = Flight::where('active', 1)
@@ -32,11 +31,13 @@ $flights = Flight::where('active', 1)
     ->get();
 ```
 
-> **Note**: Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](../database/query.md). You may use any of these methods in your model queries.
+::: tip
+Since models are query builders, you should familiarize yourself with all of the methods available on the [query builder](./query.md). You may use any of these methods in your model queries.
+:::
 
-#### Collections
+### Collections
 
-For methods like `all` and `get` which retrieve multiple results, an instance of a `Collection` will be returned. This class provides [a variety of helpful methods](../database/collection.md) for working with your results. Of course, you can simply loop over this collection like an array:
+For methods like `all` and `get` which retrieve multiple results, an instance of a `Collection` will be returned. This class provides [a variety of helpful methods](./collection.md) for working with your results. Of course, you can simply loop over this collection like an array.
 
 ```php
 foreach ($flights as $flight) {
@@ -44,9 +45,9 @@ foreach ($flights as $flight) {
 }
 ```
 
-#### Chunking results
+### Chunking Results
 
-If you need to process thousands of records, use the `chunk` command. The `chunk` method will retrieve a "chunk" of models, feeding them to a given `Closure` for processing. Using the `chunk` method will conserve memory when working with large result sets:
+If you need to process thousands of records, use the `chunk` command. The `chunk` method will retrieve a "chunk" of models, feeding them to a given `Closure` for processing. Using the `chunk` method will conserve memory when working with large result sets.
 
 ```php
 Flight::chunk(200, function ($flights) {
@@ -58,10 +59,9 @@ Flight::chunk(200, function ($flights) {
 
 The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is retrieved from the database.
 
-<a id="oc-retrieving-a-single-model"></a>
-### Retrieving a Single Model
+## Retrieving a Single Model
 
-In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance:
+In addition to retrieving all of the records for a given table, you may also retrieve single records using `find` and `first`. Instead of returning a collection of models, these methods return a single model instance.
 
 ```php
 // Retrieve a model by its primary key
@@ -71,9 +71,9 @@ $flight = Flight::find(1);
 $flight = Flight::where('active', 1)->first();
 ```
 
-#### Not found exceptions
+### Not Found Exceptions
 
-Sometimes you may wish to throw an exception if a model is not found. This is particularly useful in routes or controllers. The `findOrFail` and `firstOrFail` methods will retrieve the first result of the query. However, if no result is found, a `Illuminate\Database\Eloquent\ModelNotFoundException` will be thrown:
+Sometimes you may wish to throw an exception if a model is not found. This is particularly useful in routes or controllers. The `findOrFail` and `firstOrFail` methods will retrieve the first result of the query. However, if no result is found, a `Illuminate\Database\Eloquent\ModelNotFoundException` will be thrown.
 
 ```php
 $model = Flight::findOrFail(1);
@@ -81,7 +81,7 @@ $model = Flight::findOrFail(1);
 $model = Flight::where('legs', '>', 100)->firstOrFail();
 ```
 
-When [developing an API](../services/router.md), if the exception is not caught, a `404` HTTP response is automatically sent back to the user, so it is not necessary to write explicit checks to return `404` responses when using these methods:
+When [developing an API](../system/routing.md), if the exception is not caught, a `404` HTTP response is automatically sent back to the user, so it is not necessary to write explicit checks to return `404` responses when using these methods.
 
 ```php
 Route::get('/api/flights/{id}', function ($id) {
@@ -91,7 +91,7 @@ Route::get('/api/flights/{id}', function ($id) {
 
 ### Retrieving Aggregates
 
-You may also use `count`, `sum`, `max`, and other [aggregate functions](../database/query.md#oc-aggregates) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
+You may also use `count`, `sum`, `max`, and other [aggregate functions](./query.md) provided by the query builder. These methods return the appropriate scalar value instead of a full model instance:
 
 ```php
 $count = Flight::where('active', 1)->count();
@@ -135,7 +135,6 @@ Flight::where('is_active', true)
 
 The `update` method expects an array of column and value pairs representing the columns that should be updated.
 
-<a id="oc-mass-assignment"></a>
 ### Mass Assignment
 
 You may also use the `create` method to save a new model in a single line. The inserted model instance will be returned to you from the method. However, before doing so, you will need to specify either a `fillable` or `guarded` attribute on the model, as all models protect against mass-assignment. Note that neither `fillable` or `guarded` affect the submission of backend forms, only the use of `create` or `fill` method.
@@ -148,9 +147,7 @@ To get started, you should define which model attributes you want to make mass a
 class Flight extends Model
 {
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * @var array fillable attributes that are mass assignable.
      */
     protected $fillable = ['name'];
 }
@@ -178,7 +175,7 @@ class Flight extends Model
 
 In the example above, all attributes **except for `price`** will be mass assignable.
 
-#### Other creation methods
+### Other Creation Methods
 
 Sometimes you may wish to only instantiate a new instance of a model. You can do this using the `make` method. The `make` method will simply return a new instance without saving or creating anything.
 
@@ -212,8 +209,6 @@ $flight = Flight::find(1);
 $flight->delete();
 ```
 
-#### Deleting an existing model by key
-
 In the example above, we are retrieving the model from the database before calling the `delete` method. However, if you know the primary key of the model, you may delete the model without retrieving it. To do so, call the `destroy` method:
 
 ```php
@@ -224,26 +219,25 @@ Flight::destroy([1, 2, 3]);
 Flight::destroy(1, 2, 3);
 ```
 
-#### Deleting Models by query
-
 You may also run a delete query on a set of models. In this example, we will delete all flights that are marked as inactive:
 
 ```php
 $deletedRows = Flight::where('active', 0)->delete();
 ```
 
-> **Note**: It is important to mention that [model events](#oc-model-events) will not fire when deleting records directly from a query.
+::: warning
+It is important to mention that [model events](../system/models.md) will not fire when deleting records directly from a query.
+:::
 
-<a id="oc-query-scopes"></a>
 ## Query Scopes
 
-Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`:
+Scopes allow you to define common sets of constraints that you may easily re-use throughout your application. For example, you may need to frequently retrieve all users that are considered "popular". To define a scope, simply prefix a model method with `scope`.
 
 ```php
 class User extends Model
 {
     /**
-     * Scope a query to only include popular users.
+     * scopePopular query to only include popular users.
      */
     public function scopePopular($query)
     {
@@ -251,7 +245,7 @@ class User extends Model
     }
 
     /**
-     * Scope a query to only include active users.
+     * scopeActive query to only include active users.
      */
     public function scopeActive($query)
     {
@@ -260,15 +254,11 @@ class User extends Model
 }
 ```
 
-#### Utilizing a query scope
-
 Once the scope has been defined, you may call the scope methods when querying the model. However, you do not need to include the `scope` prefix when calling the method. You can even chain calls to various scopes, for example:
 
 ```php
 $users = User::popular()->active()->orderBy('created_at')->get();
 ```
-
-#### Dynamic scopes
 
 Sometimes you may wish to define a scope that accepts parameters. To get started, just add your additional parameters to your scope. Scope parameters should be defined after the `$query` argument:
 
@@ -291,127 +281,8 @@ Now you may pass the parameters when calling the scope:
 $users = User::applyType('admin')->get();
 ```
 
-<a id="oc-model-events"></a>
-## Events
+#### See Also
 
-Models fire several events, allowing you to hook into various points in the model's lifecycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
-
-Event | Description
-------------- | -------------
-**beforeCreate** | before the model is saved, when first created.
-**afterCreate** | after the model is saved, when first created.
-**beforeSave** | before the model is saved, either created or updated.
-**afterSave** | after the model is saved, either created or updated.
-**beforeValidate** | before the supplied model data is validated.
-**afterValidate** | after the supplied model data has been validated.
-**beforeUpdate** | before an existing model is saved.
-**afterUpdate** | after an existing model is saved.
-**beforeDelete** | before an existing model is deleted.
-**afterDelete** | after an existing model is deleted.
-**beforeRestore** | before a soft-deleted model is restored.
-**afterRestore** | after a soft-deleted model has been restored.
-**beforeFetch** | before an existing model is populated.
-**afterFetch** | after an existing model has been populated.
-
-An example of using an event:
-
-```php
-/**
- * Generate a URL slug for this model
- */
-public function beforeCreate()
-{
-    $this->slug = Str::slug($this->name);
-}
-```
-
-> **Note**: Relationships created with [deferred-binding](relations#oc-deferred-binding) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred($sessionKey)` method on the relation. Example: `$this->images()->withDeferred(post('_session_key'))->get();`
-
-### Basic Usage
-
-Whenever a new model is saved for the first time, the `beforeCreate` and `afterCreate` events will fire. If a model already existed in the database and the `save` method is called, the `beforeUpdate` / `afterUpdate` events will fire. However, in both cases, the `beforeSave` / `afterSave` events will fire.
-
-For example, let's define an event listener that populates the slug attribute when a model is first created:
-
-```php
-/**
- * Generate a URL slug for this model
- */
-public function beforeCreate()
-{
-    $this->slug = Str::slug($this->name);
-}
-```
-
-Returning `false` from an event will cancel the `save` / `update` operation:
-
-```php
-public function beforeCreate()
-{
-    if (!$user->isValid()) {
-        return false;
-    }
-}
-```
-
-It's possible to access old values using the `original` attribute. For example:
-
-```php
-public function afterUpdate()
-{
-    if ($this->title !== $this->original['title']) {
-        // title changed
-    }
-}
-```
-
-You can externally bind to [local events](../services/events.md) for a single instance of a model using the `bindEvent` method. The event name should be the same as the method override name, prefixed with `model.`.
-
-```php
-$flight = new Flight;
-$flight->bindEvent('model.beforeCreate', function() use ($model) {
-    $model->slug = Str::slug($model->name);
-});
-```
-
-## Extending Models
-
-Since models are [equipped to use behaviors](../services/behaviors.md), they can be extended with the static `extend` method. The method takes a closure and passes the model object into it.
-
-Inside the closure you can add relations to the model. Here we extend the `Backend\Models\User` model to include a profile (has one) relationship referencing the `Acme\Demo\Models\Profile` model.
-
-```php
-\Backend\Models\User::extend(function($model) {
-    $model->hasOne['profile'] = ['Acme\Demo\Models\Profile', 'key' => 'user_id'];
-});
-```
-
-This approach can also be used to bind to [local events](#oc-model-events), the following code listens for the `model.beforeSave` event.
-
-```php
-\Backend\Models\User::extend(function($model) {
-    $model->bindEvent('model.beforeSave', function() use ($model) {
-        // ...
-    });
-});
-```
-
-Additionally, a few methods exist to extend protected model properties.
-
-```php
-\Backend\Models\User::extend(function($model) {
-    // Add cast attributes
-    $model->addCasts([
-        'some_extended_field' => 'int',
-    ]);
-
-    // Add a date attribute
-    $model->addDateAttribute('updated_at');
-
-    // Adds fillable or jsonable fields
-    $model->addFillable('first_name');
-    $model->addJsonable('some_data');
-});
-```
-
-> **Note**: Typically the best place to place code is within your plugin registration class `boot` method as this will be run on every request ensuring that the extensions you make to the model are available everywhere.
+::: also
+* [Models Article](../system/models.md)
+:::

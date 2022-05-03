@@ -49,7 +49,7 @@ The `$settingsFields` property is required if are going to build a backend setti
 
 Settings models can be registered to appear on the [settings area in the backend panel](./settings.md), but it is not a requirement - you can set and read settings values like any other model.
 
-### Writing to a Settings Model
+## Writing to a Settings Model
 
 The settings model has the static `set` method that allows to save individual or multiple values. You can also use the standard model features for setting the model properties and saving the model.
 
@@ -68,7 +68,7 @@ $settings->api_key = 'ABCD';
 $settings->save();
 ```
 
-### Reading From a Settings Model
+## Reading From a Settings Model
 
 The settings model has the static `get` method that enables you to load individual properties. Also, when you instantiate a model with the `instance` method, it loads the properties from the database and you can access them directly.
 

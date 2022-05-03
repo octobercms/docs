@@ -53,7 +53,7 @@ class User extends Model
 }
 ```
 
-The defined attributes will be purged when the model is saved, before the [model events](#oc-model-events) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
+The defined attributes will be purged when the model is saved, before the [model events](../system/models.md) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
 
 ```php
 return $user->getOriginalPurgeValue('password_confirmation');
@@ -260,7 +260,7 @@ $child2->makeChildOf($root);
 
 #### Deleting Nodes
 
-When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](../database/model.md#oc-model-events) will not be fired for the child models.
+When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](../system/models.md) will not be fired for the child models.
 
 ```php
 $child1->delete();
@@ -404,7 +404,7 @@ class User extends Model
 
 #### Dynamic Validation Rules
 
-You can apply rules dynamically by overriding the `beforeValidate` [model event](../database/model.md#oc-model-events) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
+You can apply rules dynamically by overriding the `beforeValidate` [model event](../system/models.md) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
 
 ```php
 public function beforeValidate()
