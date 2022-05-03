@@ -14,11 +14,13 @@
 -
     title: Home
     icon: "/images/october-leaf.svg"
-    link: "/2.x/"
+    prefix: "/2.x/"
+    link: "/2.x/setup/installation.html"
 -
     title: Markup Guide
     icon: "/images/markup-guide.svg"
-    link: "/2.x/markup/"
+    prefix: "/2.x/markup/"
+    link: "/2.x/markup/templating.html"
 -
     title: API Docs
     icon: "/images/markup-guide.svg"
