@@ -16,7 +16,7 @@ $user->password = Hash::make('mypassword');
 $user->save();
 ```
 
-Alternatively, models can implement the [Hashable trait](../database/traits.md#oc-hashable) to automatically hash attributes.
+Alternatively, models can implement the [Hashable trait](../database/traits.md) to automatically hash attributes.
 
 #### Verifying a password against a hash
 
@@ -65,4 +65,4 @@ catch (DecryptException $ex) {
 }
 ```
 
-Alternatively, models can implement the [Encryptable trait](../database/traits.md#oc-encryptable) to automatically encrypt and decrypt attributes.
+Alternatively, models can implement the [Encryptable trait](../database/traits.md) to automatically encrypt and decrypt attributes.

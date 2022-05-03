@@ -1,8 +1,8 @@
 # Collections
 
-All multi-result sets returned by a model are an instance of the `Illuminate\Database\Eloquent\Collection` object, including results retrieved via the `get` method or accessed via a relationship. The `Collection` object extends the [base collection](../services/collections.md), so it naturally inherits dozens of methods used to fluently work with the underlying array of models.
+All multi-result sets returned by a model are an instance of the `October\Rain\Database\Collection` object, including results retrieved via the `get` method or accessed via a relationship. The `Collection` object extends the [base collection](../services/collections.md), so it naturally inherits dozens of methods used to fluently work with the underlying array of models.
 
-All collections also serve as iterators, allowing you to loop over them as if they were simple PHP arrays:
+All collections also serve as iterators, allowing you to loop over them as if they were simple PHP arrays.
 
 ```php
 $users = User::where('is_active', true)->get();
@@ -12,7 +12,7 @@ foreach ($users as $user) {
 }
 ```
 
-However, collections are much more powerful than arrays and expose a variety of map / reduce operations using an intuitive interface. For example, let's filter all active models and gather the name for each filtered user:
+However, collections are much more powerful than arrays and expose a variety of map / reduce operations using an intuitive interface. For example, let's filter all active models and gather the name for each filtered user.
 
 ```php
 $users = User::get();
@@ -25,13 +25,15 @@ $names = $users->filter(function ($user) {
     });
 ```
 
-> **Note**: While most model collection methods return a new instance of an `Eloquent` collection, the `pluck`, `keys`, `zip`, `collapse`, `flatten` and `flip` methods return a base collection instance. Likewise, if a `map` operation returns a collection that does not contain any models, it will be automatically cast to a base collection.
+::: tip
+While most model collection methods return a new instance of an `Eloquent` collection, the `pluck`, `keys`, `zip`, `collapse`, `flatten` and `flip` methods return a base collection instance. Likewise, if a `map` operation returns a collection that does not contain any models, it will be automatically cast to a base collection.
+:::
 
 ## Available Methods
 
 All model collections extend the base collection object; therefore, they inherit all of the powerful methods provided by the base collection class.
 
-In addition, the `Illuminate\Database\Eloquent\Collection` class provides a superset of methods to aid with managing your model collections. Most methods return `Illuminate\Database\Eloquent\Collection` instances; however, some methods return a base `Illuminate\Support\Collection` instance.
+In addition, the `October\Rain\Database\Collection` class provides a superset of methods to aid with managing your model collections. Most methods return `October\Rain\Database\Collection` instances; however, some methods return a base `Illuminate\Support\Collection` instance.
 
 **contains($key, $operator = null, $value = null)**
 

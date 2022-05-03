@@ -89,7 +89,7 @@ If you have [protection enabled](../setup/configuration.md#oc-csrf-protection), 
 
 #### Deferred binding session key
 
-A session key used for [deferred binding](../database/relations.md#oc-deferred-binding) will be added to every form as a hidden field. If you want to generate this field manually, you may use the `sessionKey` method:
+A session key used for [deferred binding](../database/relations.md) will be added to every form as a hidden field. If you want to generate this field manually, you may use the `sessionKey` method:
 
 ```php
 <?= Form::sessionKey() ?>

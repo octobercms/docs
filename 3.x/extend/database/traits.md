@@ -20,7 +20,6 @@ class Product extends Model
 }
 ```
 
-<a id="oc-hashable"></a>
 ### Hashable
 
 Hashed attributes are hashed immediately when the attribute is first set on the model. To hash attributes in your model, apply the `October\Rain\Database\Traits\Hashable` trait and declare a `$hashable` property with an array containing the attributes to hash.
@@ -59,10 +58,9 @@ The defined attributes will be purged when the model is saved, before the [model
 return $user->getOriginalPurgeValue('password_confirmation');
 ```
 
-<a id="oc-encryptable"></a>
 ### Encryptable
 
-Similar to the [hashable trait](#oc-hashable), encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
+Similar to the `Hashable` trait, encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
 
 ```php
 class User extends Model
@@ -126,7 +124,6 @@ $user->save();
 
 ## Sorting and Reordering
 
-<a id="oc-sortable"></a>
 ### Sortable
 
 Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
@@ -154,7 +151,6 @@ $user->setSortableOrder($user->id, 1);
 $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 ```
 
-<a id="oc-simple-tree"></a>
 ### Simple Tree
 
 A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To use the simple tree, apply the `October\Rain\Database\Traits\SimpleTree` trait.
@@ -166,7 +162,7 @@ class Category extends Model
 }
 ```
 
-This trait will automatically inject two [model relations](../database/relations.md) called `parent` and `children`, it is the equivalent of the following definitions.
+This trait will automatically inject two [model relations](./relations.md) called `parent` and `children`, it is the equivalent of the following definitions.
 
 ```php
 public $belongsTo = [
@@ -196,21 +192,19 @@ In order to render all levels of items and their children, you can use recursive
 
 ```twig
 {% macro renderChildren(item) %}
-    {% import _self as SELF %}
     {% if item.children is not empty %}
         <ul>
             {% for child in item.children %}
-                <li>{{ child.name }}{{ SELF.renderChildren(child)|raw }}</li>
+                <li>{{ child.name }}{{ _self_.renderChildren(child)|raw }}</li>
             {% endfor %}
         </ul>
     {% endif %}
 {% endmacro %}
 
-{% import _self as SELF %}
-{{ SELF.renderChildren(category)|raw }}
+{% import _self as nav %}
+{{ nav.renderChildren(category)|raw }}
 ```
 
-<a id="oc-nested-tree"></a>
 ### Nested Tree
 
 The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
@@ -288,10 +282,9 @@ There are several methods for moving nodes around:
 
 ## Utility Functions
 
-<a id="oc-validation"></a>
 ### Validation
 
-October models uses the built-in [Validator class](../services/validation.md). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`:
+October CMS models uses the built-in [Validator class](../services/validation.md). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`.
 
 ```php
 class User extends Model
@@ -307,7 +300,7 @@ class User extends Model
 }
 ```
 
-You may also use [array syntax](../services/validation.md#oc-validating-arrays) for validation rules.
+You may also use [array syntax](../services/validation.md) for validation rules.
 
 ```php
 class User extends Model
@@ -333,13 +326,17 @@ $user->password = 'passw0rd';
 $success = $user->save();
 ```
 
-> **Note**: You can also validate a model at any time using the `validate` method.
+::: tip
+You can also validate a model at any time using the `validate` method.
+:::
 
 #### Retrieving Validation Errors
 
 When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
 
-> **Note**: The Model leverages the MessagesBag object which has a [simple and elegant method](../services/validation.md#oc-working-with-error-messages) of formatting errors.
+::: tip
+The Model leverages the `MessagesBag` object which has a [simple and elegant method](../services/validation.md) of formatting errors.
+:::
 
 #### Overriding Validation
 
@@ -354,7 +351,7 @@ $user->forceSave();
 
 #### Custom Error Messages
 
-Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation.md#oc-custom-error-messages).
+Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation.md).
 
 ```php
 class User extends Model
@@ -418,7 +415,7 @@ public function beforeValidate()
 
 #### Custom Validation Rules
 
-You can also create custom validation rules the [same way](../services/validation.md#oc-custom-validation-rules) you would for the Validator service.
+You can also create custom validation rules the [same way](../services/validation.md) you would for the `Validator` service.
 
 ### Soft Deleting
 
@@ -461,7 +458,7 @@ As noted above, soft deleted models will automatically be excluded from query re
 $users = User::withTrashed()->where('account_id', 1)->get();
 ```
 
-The `withTrashed` method may also be used on a [relationship](relations.md) query:
+The `withTrashed` method may also be used on a [relationship](./relations.md) query:
 
 ```php
 $flight->history()->withTrashed()->get();
@@ -507,7 +504,7 @@ $user->posts()->forceDelete();
 
 ### Soft Deleting Relations
 
-When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](../database/relations.md#oc-detailed-relationships). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](./relations.md). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
 
 ```php
 class User extends Model
@@ -520,7 +517,9 @@ class User extends Model
 }
 ```
 
-> **Note**: If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+::: tip
+If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+:::
 
 Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
 
@@ -544,7 +543,7 @@ class User extends Model
 
 ### Revisionable
 
-October CMS models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](relations.md) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
+October CMS models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](./relations.md) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
 
 ```php
 class User extends Model

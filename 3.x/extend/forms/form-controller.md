@@ -220,7 +220,7 @@ Property | Description
 **changeHandler** | the name of an AJAX handler to call when the field value is changed, optional.
 **trigger** | specify conditions for this field using [trigger events](../../element/field-conditions.md).
 **preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](../../element/field-conditions.md).
-**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use [validation on the model](../database/traits.md#oc-validation) as this is not enforced by the form controller.
+**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use the [validation trait on the model](../database/traits.md) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 **permissions** | the [permissions](../backend/permissions.md) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
@@ -540,4 +540,4 @@ User::extend(function ($model) {
 
 ## Validating Form Fields
 
-To validate the fields of your form you can make use of the [Validation](../database/traits.md#oc-validation) trait in your model.
+To validate the fields of your form you can make use of the [Validation trait](../database/traits.md) in your model.

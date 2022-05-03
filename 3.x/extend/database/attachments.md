@@ -1,6 +1,6 @@
 # File Attachments
 
-Models can support file attachments using a subset of the [polymorphic relationship](../database/relations.md#relation-polymorphic-relations). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
+Models can support file attachments using a subset of the [polymorphic relationship](./relations.md). The `$attachOne` or `$attachMany` relations are designed for linking a file to a database record called "attachments". In almost all cases the `System\Models\File` model is used to safekeep this relationship where reference to the files are stored as records in the `system_files` table and have a polymorphic relation to the parent model.
 
 In the examples below the model has a single Avatar attachment model and many Photo attachment models.
 
@@ -8,7 +8,7 @@ A single file attachment:
 
 ```php
 public $attachOne = [
-    'avatar' => 'System\Models\File'
+    'avatar' => \System\Models\File::class
 ];
 ```
 
@@ -16,13 +16,15 @@ Multiple file attachments:
 
 ```php
 public $attachMany = [
-    'photos' => 'System\Models\File'
+    'photos' => \System\Models\File::class
 ];
 ```
 
-> **Note**: Make sure that your model's database table does not already have an attribute that uses the same name as your attachment relationship. If it does, it will cause a naming conflict and create problems.
+::: warning
+Make sure that your model's database table does not already have an attribute that uses the same name as your attachment relationship. If it does, it will cause a naming conflict and create problems.
+:::
 
-Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`:
+Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`.
 
 ```php
 public $attachOne = [
@@ -124,7 +126,7 @@ Displaying an image on the page.
 <img src="{{ model.avatar.getThumb(100, 100, {'mode':'exact', 'quality': 80, 'extension': 'webp'}) }}" alt="Description Image" />
 ```
 
-Read more about the available options for `getThumb` on the [image resizer article](../services/resizer.md#oc-resize-parameters).
+Read more about the available options for `getThumb` on the [image resizer article](../services/resizer.md).
 
 ## Usage Example
 
@@ -136,7 +138,7 @@ Inside your model define a relationship to the `System\Models\File` class, for e
 class Post extends Model
 {
     public $attachOne = [
-        'featured_image' => 'System\Models\File'
+        'featured_image' => \System\Models\File::class
     ];
 }
 ```
@@ -165,7 +167,7 @@ if (Input::hasFile('example_file')) {
 }
 ```
 
-Alternatively, you can use [deferred binding](../database/relations.md#oc-deferred-binding) to defer the relationship:
+Alternatively, you can use [deferred binding](./relations.md) to defer the relationship.
 
 ```php
 // Find the Blog Post model
@@ -211,11 +213,11 @@ Example:
 $user = $file->attachment;
 ```
 
-For more information read the [polymorphic relationships](../database/relations.md#relation-polymorphic-relations)
+For more information read the [polymorphic relationships](./relations.md#relation-polymorphic-relations)
 
 ## Validation Example
 
-The example below uses [array validation](../services/validation.md#oc-validating-arrays) to validate `$attachMany` relationships.
+The example below uses [array validation](../services/validation.md) to validate `$attachMany` relationships.
 
 ```php
 use System\Models\File;
@@ -238,4 +240,4 @@ class Gallery extends Model
 }
 ```
 
-For more information on the `attribute.*` syntax used above, see [validating arrays](../services/validation.md#oc-validating-arrays).
+For more information on the `attribute.*` syntax used above, see the [validation article](../services/validation.md) on validating arrays.

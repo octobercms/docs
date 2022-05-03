@@ -15,20 +15,19 @@ class User extends Model
 }
 ```
 
-Relationships like models themselves, also serve as powerful [query builders](query.md), accessing relationships as functions provides powerful method chaining and querying capabilities. For example:
+Relationships like models themselves, also serve as powerful [query builders](./query.md), accessing relationships as functions provides powerful method chaining and querying capabilities. For example:
 
 ```php
 $user->posts()->where('is_active', true)->get();
 ```
 
-Accessing a relationship as a property is also possible:
+Accessing a relationship as a property is also possible.
 
 ```php
 $user->posts;
 ```
 
-<a id="oc-detailed-relationships"></a>
-### Detailed Definitions
+## Detailed Definitions
 
 Each definition can be an array where the key is the relation name and the value is a detail array. The detail array's first value is always the related model class name and all other values are parameters that must have a key name.
 
@@ -111,11 +110,13 @@ public $belongsToMany = [
 ];
 ```
 
-> **Note**: The `relationClass` should inherit the class of the specified type. For example, when using `belongsTo` the class must inherit `October\Rain\Database\Relations\BelongsTo`.
+::: tip
+The `relationClass` should inherit the class of the specified type. For example, when using `belongsTo` the class must inherit `October\Rain\Database\Relations\BelongsTo`.
+:::
 
 ## Relationship Types
 
-The following relations types are available:
+The following relations types are available.
 
 - [One To One](#relation-one-to-one)
 - [One To Many](#relation-one-to-many)
@@ -130,7 +131,7 @@ The following relations types are available:
 A one-to-one relationship is a very basic relation. For example, a `User` model might be associated with one `Phone`. To define this relationship, we add a `phone` entry to the `$hasOne` property on the `User` model.
 
 ```php
-<?php namespace Acme\Blog\Models;
+namespace Acme\Blog\Models;
 
 use Model;
 
@@ -142,13 +143,13 @@ class User extends Model
 }
 ```
 
-Once the relationship is defined, we may retrieve the related record using the model property of the same name. These properties are dynamic and allow you to access them as if they were regular attributes on the model:
+Once the relationship is defined, we may retrieve the related record using the model property of the same name. These properties are dynamic and allow you to access them as if they were regular attributes on the model.
 
 ```php
 $phone = User::find(1)->phone;
 ```
 
-The model assumes the foreign key of the relationship based on the model name. In this case, the `Phone` model is automatically assumed to have a `user_id` foreign key. If you wish to override this convention, you may pass the `key` parameter to the definition:
+The model assumes the foreign key of the relationship based on the model name. In this case, the `Phone` model is automatically assumed to have a `user_id` foreign key. If you wish to override this convention, you may pass the `key` parameter to the definition.
 
 ```php
 public $hasOne = [
@@ -164,7 +165,7 @@ public $hasOne = [
 ];
 ```
 
-#### Defining the inverse of the relation
+#### Defining the Inverse of the Relation
 
 Now that we can access the `Phone` model from our `User`. Let's do the opposite and define a relationship on the `Phone` model that will let us access the `User` that owns the phone. We can define the inverse of a `hasOne` relationship using the `$belongsTo` property:
 
@@ -193,7 +194,7 @@ public $belongsTo = [
 ];
 ```
 
-#### Default models
+#### Default Models
 
 The `belongsTo` relationship lets you define a default model that will be returned if the given relationship is `null`. This pattern is often referred to as the [Null Object pattern](https://en.wikipedia.org/wiki/Null_Object_pattern) and can help remove conditional checks in your code. In the following example, the `user` relation will return an empty `Acme\Blog\Models\User` model if no `user` is attached to the post.
 
@@ -296,7 +297,7 @@ public $belongsTo = [
 
 Many-to-many relations are slightly more complicated than `hasOne` and `hasMany` relationships. An example of such a relationship is a user with many roles, where the roles are also shared by other users. For example, many users may have the role of "Admin". To define this relationship, three database tables are needed: `users`, `roles`, and `role_user`. The `role_user` table is derived from the alphabetical order of the related model names, and contains the `user_id` and `role_id` columns.
 
-Below is an example that shows the [database table structure](../database/structure.md) used to create the join table.
+Below is an example that shows the [database table structure](./structure.md) used to create the join table.
 
 ```php
 Schema::create('role_user', function($table)
@@ -355,7 +356,7 @@ public $belongsToMany = [
 ];
 ```
 
-#### Defining the inverse of the relationship
+#### Defining the Inverse of the Relationship
 
 To define the inverse of a many-to-many relationship, you simply place another `$belongsToMany` property on your related model. To continue our user roles example, let's define the `users` relationship on the `Role` model:
 
@@ -370,7 +371,7 @@ class Role extends Model
 
 As you can see, the relationship is defined exactly the same as its `User` counterpart, with the exception of simply referencing the `Acme\Blog\Models\User` model. Since we're reusing the `$belongsToMany` property, all of the usual table and key customization options are available when defining the inverse of many-to-many relationships.
 
-#### Retrieving intermediate table columns
+#### Retrieving Intermediate Table Columns
 
 As you have already learned, working with many-to-many relations requires the presence of an intermediate join table. Models provide some very helpful ways of interacting with this table. For example, let's assume our `User` object has many `Role` objects that it is related to. After accessing this relationship, we may access the intermediate table using the `pivot` attribute on the models:
 
@@ -430,7 +431,7 @@ Argument | Description
 **detach** | if set to false, the related model will be not be detached if the primary model is deleted or relationship is destroyed, default: true.
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot` while for polymorphic relation `October\Rain\Database\MorphPivot`.
-**pivotSortable** | specify a sort order column for the pivot table, used in combination with the `SortableRelation` [model trait](../backend/reorder.md).
+**pivotSortable** | specify a sort order column for the pivot table, used in combination with the `SortableRelation` [model trait](../lists/structures.md).
 
 <a id="relation-has-many-through"></a>
 ### Has Many Through
@@ -788,7 +789,7 @@ The most common place to register the `morphMap` in the `boot` method of a [plug
 <a id="oc-querying-relations"></a>
 ## Querying Relations
 
-Since all types of Model relationships can be called via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of relationships also serve as [query builders](query.md), allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.
+Since all types of Model relationships can be called via functions, you may call those functions to obtain an instance of the relationship without actually executing the relationship queries. In addition, all types of relationships also serve as [query builders](./query.md), allowing you to continue to chain constraints onto the relationship query before finally executing the SQL against your database.
 
 For example, imagine a blog system in which a `User` model has many associated `Post` models:
 
@@ -803,7 +804,7 @@ class User extends Model
 
 ### Access via Relationship Method
 
-You may query the **posts** relationship and add additional constraints to the relationship using the `posts` method. This gives you the ability to chain any of the [query builder](query.md) methods on the relationship.
+You may query the **posts** relationship and add additional constraints to the relationship using the `posts` method. This gives you the ability to chain any of the [query builder](./query.md) methods on the relationship.
 
 ```php
 $user = User::find(1);
@@ -825,7 +826,7 @@ foreach ($user->posts as $post) {
 }
 ```
 
-Dynamic properties are "lazy loading", meaning they will only load their relationship data when you actually access them. Because of this, developers often use [eager loading](#oc-eager-loading) to pre-load relationships they know will be accessed after loading the model. Eager loading provides a significant reduction in SQL queries that must be executed to load a model's relations.
+Dynamic properties are "lazy loading", meaning they will only load their relationship data when you actually access them. Because of this, developers often use eager loading (see below) to preload relationships they know will be accessed after loading the model. Eager loading provides a significant reduction in SQL queries that must be executed to load a model's relations.
 
 ### Querying Relationship Existence
 
@@ -897,10 +898,9 @@ $user->loadCount(['roles' => function ($query) {
 }])
 ```
 
-<a id="oc-eager-loading"></a>
 ## Eager Loading
 
-When accessing relationships as properties, the relationship data is "lazy loaded". This means the relationship data is not actually loaded until you first access the property. However, models can "eager load" relationships at the time you query the parent model. Eager loading alleviates the N + 1 query problem. To illustrate the N + 1 query problem, consider a `Book` model that is related to `Author`:
+When accessing relationships as properties, the relationship data is "lazy loaded". This means the relationship data is not actually loaded until you first access the property. However, models can "eager load" relationships at the time you query the parent model. Eager loading alleviates the N + 1 query problem. To illustrate the N + 1 query problem, consider a `Book` model that is related to `Author`.
 
 ```php
 class Book extends Model
@@ -941,7 +941,7 @@ select * from books
 select * from authors where id in (1, 2, 3, 4, 5, ...)
 ```
 
-#### Eager loading multiple relationships
+#### Eager Loading Multiple Relationships
 
 Sometimes you may need to eager load several different relationships in a single operation. To do so, just pass additional arguments to the `with` method:
 
@@ -949,7 +949,7 @@ Sometimes you may need to eager load several different relationships in a single
 $books = Book::with('author', 'publisher')->get();
 ```
 
-#### Nested eager loading
+#### Nested Eager Loading
 
 To eager load nested relationships, you may use "dot" syntax. For example, let's eager load all of the book's authors and all of the author's personal contacts in one statement:
 
@@ -969,7 +969,7 @@ $users = User::with([
 ])->get();
 ```
 
-In this example, the model will only eager load posts if the post's `title` column contains the word `first`. Of course, you may call other [query builder](query.md) methods to further customize the eager loading operation:
+In this example, the model will only eager load posts if the post's `title` column contains the word `first`. Of course, you may call other [query builder](./query.md) methods to further customize the eager loading operation:
 
 ```php
 $users = User::with([
@@ -1003,13 +1003,13 @@ $books->load([
 
 ## Inserting Related Models
 
-Just like you would [query a relationship](#oc-querying-relations), October supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
+Just like you would query a relationship, October CMS supports defining a relationship using a method or dynamic property approach. For example, perhaps you need to insert a new `Comment` for a `Post` model. Instead of manually setting the `post_id` attribute on the `Comment`, you may insert the `Comment` directly from the relationship.
 
 ### Insert via Relationship Method
 
 October provides convenient methods for adding new models to relationships. Primarily models can be added to a relationship or removed from a relationship. In each case the relationship is associated or disassociated respectively.
 
-#### Add method
+#### Add Method
 
 Use the `add` method to associate a new relationship.
 
@@ -1034,7 +1034,7 @@ $post->comments()->addMany([
 ]);
 ```
 
-#### Remove method
+#### Remove Method
 
 Comparatively, the `remove` method can be used to disassociate a relationship, making it an orphaned record.
 
@@ -1054,7 +1054,7 @@ In the case of a "belongs to" relationship, you may use the `dissociate` method,
 $post->author()->dissociate();
 ```
 
-#### Adding with pivot data
+#### Adding with Pivot Data
 
 When working with a many-to-many relationship, the `add` method accepts an array of additional intermediate "pivot" table attributes as its second argument as an array.
 
@@ -1066,13 +1066,13 @@ $pivotData = ['expires' => $expires];
 $user->roles()->add($role, $pivotData);
 ```
 
-The second argument of the `add` method can also specify the session key used by [deferred binding](#oc-deferred-binding) when passed as a string. In these cases the pivot data can be provided as the third argument instead.
+The second argument of the `add` method can also specify the session key used by deferred binding when passed as a string. In these cases the pivot data can be provided as the third argument instead.
 
 ```php
 $user->roles()->add($role, $sessionKey, $pivotData);
 ```
 
-#### Create method
+#### Create Method
 
 While `add` and `addMany` accept a full model instance, you may also use the `create` method, that accepts a PHP array of attributes, creates a model, and inserts it into the database.
 
@@ -1084,7 +1084,7 @@ $comment = $post->comments()->create([
 ]);
 ```
 
-Before using the `create` method, be sure to review the documentation on attribute [mass assignment](../system/models.md) as the attributes in the PHP array are restricted by the model's "fillable" definition.
+Before using the `create` method, be sure to review the documentation on attribute [mass assignment](./model.md) as the attributes in the PHP array are restricted by the model's "fillable" definition.
 
 ### Insert via Dynamic Property
 
@@ -1120,7 +1120,7 @@ $post->comments = null;
 $post->save();
 ```
 
-Similar to [deferred binding](#oc-deferred-binding), relationships defined on non-existent models are deferred in memory until they are saved. In this example the post does not exist yet, so the `post_id` attribute cannot be set on the comment via `$post->comments`. Therefore the association is deferred until the post is created by calling the `save` method.
+Similar to deferred binding, relationships defined on non-existent models are deferred in memory until they are saved. In this example the post does not exist yet, so the `post_id` attribute cannot be set on the comment via `$post->comments`. Therefore the association is deferred until the post is created by calling the `save` method.
 
 ```php
 $comment = Comment::find(1);
@@ -1215,7 +1215,6 @@ $comment->text = 'Edit to this comment!';
 $comment->save();
 ```
 
-<a id="oc-deferred-binding"></a>
 ## Deferred Binding
 
 Deferred bindings allows you to postpone model relationships binding until the master record commits the changes. This is particularly useful if you need to prepare some models (such as file uploads) and associate them to another model that doesn't exist yet.
@@ -1224,7 +1223,7 @@ You can defer any number of **slave** models against a **master** model using a 
 
 ### Generating a Session Key
 
-The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../markup/function-form.md) generates a hidden field containing the session key automatically.
+The session key is required for deferred bindings. You can think of a session key as of a transaction identifier. The same session key should be used for binding/unbinding relationships and saving the master model. You can generate the session key with PHP `uniqid()` function. Note that the [form helper](../../markup/function/form.md) generates a hidden field containing the session key automatically.
 
 ```php
 $sessionKey = uniqid('session_key', true);
@@ -1243,7 +1242,9 @@ $post = new Post;
 $post->comments()->add($comment, $sessionKey);
 ```
 
-> **Note**: the `$post` object has not been saved but the relationship will be created if the saving happens.
+::: tip
+The `$post` object has not been saved but the relationship will be created if the saving happens.
+:::
 
 ### Defer a Relation Unbinding
 
@@ -1303,7 +1304,9 @@ Destroys all bindings that have not been committed and are older than 1 day:
 October\Rain\Database\Models\DeferredBinding::cleanUp(1);
 ```
 
-> **Note**: October CMS automatically destroys deferred bindings that are older than 5 days. It happens when a backend user logs into the system.
+::: tip
+October CMS automatically destroys deferred bindings that are older than 5 days using garbage collection.
+:::
 
 ### Disable Deferred Binding
 
@@ -1322,4 +1325,7 @@ public function __construct()
 }
 ```
 
-> **Note**: This will disable deferred binding entirely for any model's you apply this override to.
+::: tip
+This will disable deferred binding entirely for any model's you apply this override to.
+:::
+

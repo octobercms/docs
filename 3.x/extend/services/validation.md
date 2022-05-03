@@ -4,7 +4,9 @@
 
 The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class. It is useful when processing form data submitted by the end user.
 
-> **Note**: When working with models, October CMS ships with a useful [Validation Trait](../database/traits.md#oc-validation) that implements the `Validator` class and supports the same rule definitions.
+::: tip
+When working with models, October CMS ships with a useful [Validation Trait](../database/traits.md) that implements the `Validator` class and supports the same rule definitions.
+:::
 
 #### Basic Validation Example
 
