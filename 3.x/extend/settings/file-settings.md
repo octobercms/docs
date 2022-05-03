@@ -1,9 +1,6 @@
 # File Settings
 
-<a id="oc-file-based-configuration"></a>
-## File-based Configuration
-
-Plugins can have a configuration file **config.php** in the **config** subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file **plugins/acme/demo/config/config.php**.
+Plugins can use file-based configuration using a file named **config.php** in the **config** subdirectory of the plugin directory. The configuration files are PHP scripts that define and return an **array**. Example configuration file **plugins/acme/demo/config/config.php**.
 
 ```php
 <?php
@@ -14,13 +11,13 @@ return [
 ];
 ```
 
-Use the `Config` class for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **Acme.Demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist.
+Use the `Config` facade for accessing the configuration values defined in the configuration file. The `Config::get($name, $default = null)` method accepts the plugin and the parameter name in the following format: **acme.demo::maxItems**. The second optional parameter defines the default value to return if the configuration parameter doesn't exist.
 
 ```php
 $maxItems = Config::get('acme.demo::maxItems', 50);
 ```
 
-You may also use a different filename for the configuration file and this affects the key name. For example, a configuration file named **custom.php** will prefix the key name with `custom`, using the following format: **Acme.Demo::custom.maxItems**. Example configuration file **plugins/acme/demo/config/custom.php**.
+You may also use a different filename for the configuration file and this affects the key name. For example, a configuration file named **custom.php** will prefix the key name with `custom`, using the following format: **acme.demo::custom.maxItems**. Example configuration file **plugins/acme/demo/config/custom.php**.
 
 ```php
 $maxItems = Config::get('acme.demo::custom.maxItems', 50);

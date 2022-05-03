@@ -1,7 +1,7 @@
 ---
 subtitle: Learn how to build a simple API using CMS Pages.
 ---
-# Building API Resources
+# Building API Endpoints
 
 ::: aside
 View the [routing article](../../extend/system/routing.md) if you prefer to define API routes using PHP instead.

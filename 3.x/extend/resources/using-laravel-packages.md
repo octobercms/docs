@@ -32,7 +32,7 @@ This will set all the package config values to be that of your plugin config val
 Config::get('purifier.encoding') === Config::get('acme.blog::purifier.encoding');
 ```
 
-Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values and the [standard configuration approach](settings.md#oc-file-based-configuration).
+Now you are free to provide the packages configuration values the same way you would with regular plugin configuration values and the [standard configuration approach](../settings/file-settings.md).
 
 ### Aliases & Service Providers
 

@@ -6,7 +6,6 @@ There are two ways to configure plugins - with backend settings forms and with c
 
 The backend contains a dedicated area for housing settings and configuration, it can be accessed by clicking the <strong>Settings</strong> link in the main menu. The Settings page contains a list of links to the configuration pages registered by the system and other plugins.
 
-<a id="oc-settings-link-registration"></a>
 ### Settings Link Registration
 
 The backend settings navigation links can be extended by overriding the `registerSettings` method inside the [plugin registration file](../extending.md). When you create a configuration link you have two options - create a link to a specific backend page, or create a link to a settings model. The next example shows how to create a link to a backend page.
@@ -28,9 +27,11 @@ public function registerSettings()
 }
 ```
 
-> **Note**: Backend settings pages should [set the settings context](#oc-setting-the-page-navigation-context) in order to mark the corresponding settings menu item active in the System page sidebar. Settings context for settings models is detected automatically.
+::: tip
+Backend settings pages set the settings context in the controller to mark the menu item as active in the system page sidebar. Settings context for settings models is detected automatically.
+:::
 
-The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [Database settings](#oc-database-settings) section.
+The following example creates a link to a settings model. Settings models is a part of the settings API which is described above in the [model settings article](./model-settings.md).
 
 ```php
 public function registerSettings()
@@ -52,7 +53,6 @@ public function registerSettings()
 
 The optional `keywords` parameter is used by the settings search feature. If keywords are not provided, the search uses only the settings item label and description.
 
-<a id="oc-setting-the-page-navigation-context"></a>
 ### Setting the Page Navigation Context
 
 Just like setting navigation context in the [backend controller](../system/controllers.md), backend settings pages should set the settings navigation context. It's required in order to mark the current settings link in the System page sidebar as active. Use the `System\Classes\SettingsManager` class to set the settings context. Usually it could be done in the controller constructor:
@@ -65,8 +65,8 @@ public function __construct()
     // ...
 
     BackendMenu::setContext('October.System', 'system', 'settings');
-    SettingsManager::setContext('You.Plugin', 'settings');
+    SettingsManager::setContext('Your.Plugin', 'settings');
 }
 ```
 
-The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when [registering the backend settings page](#oc-settings-link-registration).
+The first argument of the `setContext` method is the settings item owner in the following format: **author.plugin**. The second argument is the setting name, the same as you provided when registering the backend settings page.
