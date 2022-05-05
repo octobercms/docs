@@ -29,12 +29,12 @@ Inside the partial these variables are available.
 - `$model` is the [model used](../../extend/system/models.md) for the field
 - `$field` is the configured class object `Backend\Classes\FormField`
 
-For example.
+Here is an some example contents of the **_content_field.htm** file.
 
 ```php
-<?= $field->label ?>
-<?= $model->id ?>
-<?= $value ?>
+<?php if ($model->is_active): ?>
+    <p><?= $field->label ?> is active</p>
+<?php endif ?>
 ```
 
 #### See Also

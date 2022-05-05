@@ -17,4 +17,6 @@ created_at:
     useTimezone: true
 ```
 
-> **Note**: the `date` and `time` columns do not apply backend timezone conversions by default since a date and time are both required for the conversion.
+::: tip
+The `date` and `time` columns do not apply backend timezone conversions by default since a date and time are both required for the conversion.
+:::

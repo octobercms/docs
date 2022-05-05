@@ -27,7 +27,7 @@ user:
     scope: withTrashed
 ```
 
-If the controller implements the [Relation Controller behavior](../backend/relations.md#configuring-the-relation-behavior) and the field is defined there, then it will be displayed using this definition. Set the `useController` property to false to disable this functionality.
+If the controller implements the [Relation Controller behavior](../../extend/forms/relation-controller.md) and the field is defined there, then it will be displayed using this definition. Set the `useController` property to false to disable this functionality.
 
 ```yaml
 countries:
@@ -43,4 +43,4 @@ Option | Description
 **order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
 **scope** | specifies a [query scope method](../../extend/database/model.md) defined in the **related form model** to apply to the list query always.
-**useController** | display the field using integration with [RelationController behavior](../backend/relations.md#configuring-the-relation-behavior). Default: `true`
+**useController** | display the field using integration with [Relation Controller behavior](../../extend/forms/relation-controller.md). Default: `true`

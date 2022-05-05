@@ -6,7 +6,7 @@
 ['open' => 'Open', 'closed' => 'Closed']
 ```
 
-The available options are defined on the model as [dropdown options](forms.md#field-dropdown).
+The available options are defined on the model as [dropdown options](../form/field-dropdown.md).
 
 ```yaml
 status:

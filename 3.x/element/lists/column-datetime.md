@@ -26,4 +26,7 @@ created_at:
     useTimezone: false
 ```
 
-> **Note**: the `useTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
+::: tip
+The `useTimezone` option also applies to other date and time related field types, including `date`, `time`, `timesince` and `timetense`.
+:::
+
