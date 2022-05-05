@@ -123,7 +123,7 @@ Use the following code in **server** section. If you have installed October into
 location / {
     # Let October CMS handle everything by default.
     # The path not resolved by October CMS router will return October CMS's 404 page.
-    # Everything that does not match with the whitelist below will fall into this.
+    # Everything that does not match with the allowlist below will fall into this.
     rewrite ^/.*$ /index.php last;
 }
 
@@ -133,7 +133,7 @@ location ~ ^/index.php {
 
 }
 
-# Whitelist
+# Allowlist
 location ~ ^/favicon\.ico { try_files $uri /index.php; }
 location ~ ^/sitemap\.xml { try_files $uri /index.php; }
 location ~ ^/robots\.txt { try_files $uri /index.php; }
@@ -212,7 +212,7 @@ If your webserver is running Internet Information Services (IIS) you can use the
         <rewrite>
             <rules>
                 <clear />
-                <rule name="October CMS to handle all non-whitelisted URLs" stopProcessing="true">
+                <rule name="October CMS to handle all non-allowlisted URLs" stopProcessing="true">
                     <match url="^(.*)$" ignoreCase="false" />
                     <conditions logicalGrouping="MatchAll">
                         <add input="{REQUEST_FILENAME}" matchType="IsFile" pattern="^/.well-known/*" negate="true" />

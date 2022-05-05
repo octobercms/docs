@@ -315,7 +315,7 @@ Once we have made the attributes mass assignable, we can use the `create` method
 $flight = Flight::create(['name' => 'Flight 10']);
 ```
 
-While `$fillable` serves as a "white list" of attributes that should be mass assignable, you may also choose to use `$guarded`. The `$guarded` property should contain an array of attributes that you do not want to be mass assignable. All other attributes not in the array will be mass assignable. So, `$guarded` functions like a "black list". Of course, you should use either `$fillable` or `$guarded` - not both:
+While `$fillable` serves as an "allow list" of attributes that should be mass assignable, you may also choose to use `$guarded`. The `$guarded` property should contain an array of attributes that you do not want to be mass assignable. All other attributes not in the array will be mass assignable. So, `$guarded` functions like a "block list". Of course, you should use either `$fillable` or `$guarded` - not both:
 
 ```php
 class Flight extends Model
