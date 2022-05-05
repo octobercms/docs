@@ -60,7 +60,7 @@ Property | Description
 **$params** | an array of the routed parameters.
 **$action** | a name of the action method being executed in the current request.
 **$publicActions** | defines an array of actions available without the backend user authentication. Can be overridden in the class definition.
-**$requiredPermissions** | permissions required to view this page. Can be set in the class definition or in the controller constructor. See [users & permissions](users) for details.
+**$requiredPermissions** | permissions required to view this page. Can be set in the class definition or in the controller constructor. See [users & permissions](../backend/users.md) for details.
 **$pageTitle** | sets the page title. Can be set in the action method.
 **$bodyClass** | body class property used for customizing the layout. Can be set in the controller constructor or action method.
 **$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.

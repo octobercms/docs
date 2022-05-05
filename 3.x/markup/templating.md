@@ -106,7 +106,7 @@ The most important thing to learn about Twig is how it accesses the PHP layer. F
 
 ## Unsupported features
 
-There are some features offered by Twig that are not supported by October. They are listed below next to the equivalent feature.
+There are some features offered by Twig that are not supported by October CMS. They are listed below next to the equivalent feature.
 
 Tag | Equivalent
 ------------- | -------------

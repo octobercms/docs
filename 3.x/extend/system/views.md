@@ -19,7 +19,7 @@ Views reside in a directory that shares the same name as the controller.
 
 ## Partials
 
-Backend partials are files with the extension **php** that reside in the [controller's views](./controllers.md) directory. The partial file names should start with the underscore: *_partial.php*. Partials can be rendered from a backend page or another partial. Use the controller's `makePartial` method to render a partial. The method takes two parameters - the partial name and the optional array of variables to pass to the partial. Example:
+Backend partials are files with the extension **php** that reside in the [controller's view](./controllers.md) directory. The partial file names should start with the underscore: **_partial.php**. Partials can be rendered from a backend page or another partial. Use the controller's `makePartial` method to render a partial. The method takes two parameters - the partial name and the optional array of variables to pass to the partial. Example:
 
 ```php
 <?= $this->makePartial('sidebar', ['showHeader' => true]) ?>
