@@ -1,6 +1,6 @@
 # Horizontal Rule
 
-`ruler` - renders a horizontal rule to break up the form contents
+The `ruler` UI element simply renders a horizontal rule to break up the form contents.
 
 ```yaml
 _ruler1:
