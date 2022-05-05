@@ -224,4 +224,4 @@ App::abort(404);
 
 Secondly, you may manually throw an instance of `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`.
 
-More information on handling 404 exceptions and using custom responses for these errors may be found in the [errors & logging](../services/error-log) section of the documentation.
+More information on handling 404 exceptions and using custom responses for these errors may be found in the [errors & logging](../services/error-log.md) section of the documentation.

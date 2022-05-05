@@ -2,11 +2,11 @@
 
 Plugins are the foundation for adding new features to the CMS by extending it. This article describes the component registration. The registration process allows plugins to declare their features such as [components](components.md) or back-end menus and pages. Some examples of what a plugin can do:
 
-1. Define [components](components.md).
+1. Define [components](./components.md).
 1. Define [user permissions](../backend/users.md).
 1. Add [settings pages](settings.md#oc-backend-settings-pages), [menu items](#oc-navigation-menus), [lists](../backend/lists.md) and [forms](../backend/forms.md).
 1. Create [database table structures and seed data](updates.md).
-1. Alter [functionality of the core or other plugins](events.md).
+1. Alter [functionality of the core or other plugins](../services/events.md).
 1. Provide classes, [back-end controllers](../backend/controllers-ajax), views, assets, and other files.
 
 ### Directory Structure
@@ -87,16 +87,16 @@ Method | Description
 **register()** | register method, called when the plugin is first registered.
 **boot()** | boot method, called right before the request route.
 **registerMarkupTags()** | registers [additional markup tags](#oc-extending-twig) that can be used in the CMS.
-**registerComponents()** | registers any [front-end components](components#oc-component-registration) used by this plugin.
+**registerComponents()** | registers any [front-end components](./components.md#oc-component-registration) used by this plugin.
 **registerNavigation()** | registers [back-end navigation menu items](#oc-navigation-menus) for this plugin.
 **registerPermissions()** | registers any [back-end permissions](../backend/users#oc-registering-permissions) used by this plugin.
-**registerSettings()** | registers any [back-end configuration links](settings#oc-settings-link-registration) used by this plugin.
-**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets#oc-form-widget-registration) supplied by this plugin.
-**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets#oc-report-widget-registration), including the dashboard widgets.
+**registerSettings()** | registers any [back-end configuration links](settings.md#oc-settings-link-registration) used by this plugin.
+**registerFormWidgets()** | registers any [back-end form widgets](../backend/widgets.md#oc-form-widget-registration) supplied by this plugin.
+**registerReportWidgets()** | registers any [back-end report widgets](../backend/widgets.md#oc-report-widget-registration), including the dashboard widgets.
 **registerListColumnTypes()** | registers any [custom list column types](../backend/lists.md#oc-custom-column-types) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailTemplates()** | registers any [mail view templates](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailLayouts()** | registers any [mail view layouts](../services/mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailTemplates()** | registers any [mail view templates](../services/mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
+**registerMailPartials()** | registers any [mail view partials](../services/mail.md#oc-registering-mail-layouts-templates-partials) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](../plugin/scheduling.md#oc-defining-schedules) that are executed on a regular basis.
 
 ### Basic Plugin Information
@@ -226,7 +226,7 @@ public function registerNavigation()
 }
 ```
 
-When you register the back-end navigation you can use [localization strings](localization.md) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
+When you register the back-end navigation you can use [localization strings](localization.md) for the `label` values. Back-end navigation can also be controlled by the `permissions` values and correspond to defined [back-end user permissions](../backend/users.md). The order in which the back-end navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
 To make the sub-menu items visible, you may [set the navigation context](../backend/controllers-ajax.md#oc-setting-the-navigation-context) in the back-end controller using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 

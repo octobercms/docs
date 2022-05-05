@@ -173,7 +173,7 @@ To create a child theme that inherits the parent theme, specify the `--child` op
 
     php artisan theme:copy demo demo-child --child
 
-If using [database-driven themes](../cms/themes#oc-database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
+If using [database-driven themes](../cms/themes.md#oc-database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
 
     php artisan theme:copy demo --import-db
 

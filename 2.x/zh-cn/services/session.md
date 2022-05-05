@@ -2,7 +2,7 @@
 
 ## 配置
 
-由于 HTTP 驱动的应用程序是无状态的，Session提供了一种跨请求存储用户信息的方法。 October 附带了各种Session后端，可通过一个干净、统一的 API 使用。 对流行后端的支持，例如 [Memcached](http://memcached.org)、[Redis](http://redis.io)，以及直接可用的数据库。
+由于 HTTP 驱动的应用程序是无状态的，Session提供了一种跨请求存储用户信息的方法。 October 附带了各种Session后端，可通过一个干净、统一的 API 使用。 对流行后端的支持，例如 [Memcached](http://memcached.org)、[Redis](https://redis.io)，以及直接可用的数据库。
 
 Session配置存储在 `config/session.php` 中。 请务必查看此文件中提供给您的有据可查的选项。 默认情况下，October 配置为使用 `file` Session驱动程序，该驱动程序适用于大多数应用程序。
 

@@ -82,7 +82,7 @@ Sorting related records is possible using the [Relation Behavior](../backend/rel
 <a id="oc-sortable-relation-model"></a>
 ### Sortable Relation Model
 
-Use the `SortableRelation` trait when records need to be sorted inside a pivot table, such as a [Belongs To Many](database/relations.md#many-to-many) relation type. This trait requires the `pivotSortable` option to be defined in the relationship where the value is the sortable column name found in the pivot table.
+Use the `SortableRelation` trait when records need to be sorted inside a pivot table, such as a [Belongs To Many](../database/relations.md#many-to-many) relation type. This trait requires the `pivotSortable` option to be defined in the relationship where the value is the sortable column name found in the pivot table.
 
 ```php
 class User extends Model

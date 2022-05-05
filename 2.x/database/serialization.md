@@ -14,7 +14,7 @@ $user = User::with('roles')->first();
 return $user->toArray();
 ```
 
-You may also convert [collections](collections.md) to arrays:
+You may also convert [collections](./collection.md) to arrays:
 
 ```php
 $users = User::all();

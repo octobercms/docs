@@ -140,7 +140,7 @@
     $user = User::find(1);
     Log::info('Showing user profile for user: '.$user->name);
 
-Существует восемь уровней логгирования, которые определены в [RFC 5424](http://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** и **debug**.
+Существует восемь уровней логгирования, которые определены в [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** и **debug**.
 
     Log::emergency($error);
     Log::alert($error);

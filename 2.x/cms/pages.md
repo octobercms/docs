@@ -140,7 +140,7 @@ function onStart()
 </ul>
 ```
 
-The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup.md). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts.md#oc-dynamic-layouts) article.
+The default variables and Twig extensions provided by October are described in the [Markup Guide](../markup/templating.md). The sequence that the handlers are executed in is described by the [Dynamic layouts](layouts.md#oc-dynamic-layouts) article.
 
 ### Sending a Custom Response
 
@@ -165,7 +165,7 @@ public function onStart()
 <a id="oc-handling-forms"></a>
 ### Handling Forms
 
-You can handle standard forms with handler methods defined in the page or layout [PHP section](themes.md#oc-php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction.md) article). Use the [`form_open()`](markup#oc-standard-form) function to define a form that refers to an event handler. Example:
+You can handle standard forms with handler methods defined in the page or layout [PHP section](themes.md#oc-php-section) (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction.md) article). Use the [`form_open()`](../markup/templating.md#oc-standard-form) function to define a form that refers to an event handler. Example:
 
 ```twig
 {{ form_open({ request: 'onHandleForm' }) }}
@@ -215,18 +215,18 @@ function onEnd()
 }
 ```
 
-They can also be accessed in the markup using the [`this.page` variable](../markup/this-page). For example, to return the title of a page:
+They can also be accessed in the markup using the [`this.page` variable](../markup/this-page.md). For example, to return the title of a page:
 
 ```twig
 <p>The title of this page is: {{ this.page.meta_title }}</p>
 ```
 
-More information can be found at [`this.page` in the Markup guide](../markup/this-page).
+More information can be found at [`this.page` in the Markup guide](../markup/this-page.md).
 
 <a id="oc-injecting-page-assets-programmatically"></a>
 ## Injecting Page Assets Programmatically
 
-If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes.md#oc-php-section) of a page or [layout](layout.md) template. Example:
+If needed, you can inject assets (CSS and JavaScript files) into pages with the controller's `addCss` and `addJs` methods. It could be done in the `onStart` function defined in the [PHP section](themes.md#oc-php-section) of a page or [layout](layouts.md) template. Example:
 
 ```php
 function onStart()
@@ -266,7 +266,7 @@ function onStart()
 }
 ```
 
-In order to output the injected assets on pages or [layouts](layout.md), use the [{% styles %}](../markup/tag-styles) and [{% scripts %}](../markup/tag-scripts) tags. Example:
+In order to output the injected assets on pages or [layouts](layouts.md), use the [{% styles %}](../markup/tag-styles.md) and [{% scripts %}](../markup/tag-scripts.md) tags. Example:
 
 ```twig
 <head>

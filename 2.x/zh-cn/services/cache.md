@@ -2,7 +2,7 @@
 
 ## 配置
 
-October 为各种缓存系统提供了统一的 API，缓存配置位于`config/cache.php`。在此文件中，您可以指定您希望在整个应用程序中默认使用的缓存驱动程序。系统为您准备了[Memcached](http://memcached.org) 和 [Redis](http://redis.io) 等流行的缓存系统。
+October 为各种缓存系统提供了统一的 API，缓存配置位于`config/cache.php`。在此文件中，您可以指定您希望在整个应用程序中默认使用的缓存驱动程序。系统为您准备了[Memcached](http://memcached.org) 和 [Redis](https://redis.io) 等流行的缓存系统。
 
 缓存配置文件还包含文件中记录的各种其他选项，因此请务必阅读这些选项。默认情况下，October CMS 配置使用`file`缓存驱动程序，该驱动程序将序列化的缓存对象存储在文件系统中。对于较大的应用程序，建议您使用内存缓存，例如 Memcached 或 APC。您甚至可以为同一个驱动程序配置多个缓存配置。
 

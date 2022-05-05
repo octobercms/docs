@@ -4,7 +4,7 @@
 
 队列允许您将耗时任务(例如发送电子邮件)的处理推迟到稍后的时间，从而大大加快了对应用程序的 Web 请求。
 
-队列配置文件存储在 `config/queue.php` 中。在此文件中，您将找到包含的每个队列驱动程序的连接配置，例如数据库、 [Beanstalkd](http://kr.github.com/beanstalkd), [IronMQ](http://iron.io), [Amazon SQS](http://aws.amazon.com/sqs), [Redis](http://redis.io), null,和同步(供本地使用)驱动程序。 `null` 队列驱动程序只是丢弃排队的任务，因此它们永远不会被执行。
+队列配置文件存储在 `config/queue.php` 中。在此文件中，您将找到包含的每个队列驱动程序的连接配置，例如数据库、 [Beanstalkd](https://beanstalkd.github.io), [IronMQ](http://iron.io), [Amazon SQS](https://aws.amazon.com/sqs/), [Redis](https://redis.io), null,和同步(供本地使用)驱动程序。 `null` 队列驱动程序只是丢弃排队的任务，因此它们永远不会被执行。
 
 ### 驱动程序先决条件
 

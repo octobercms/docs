@@ -1,6 +1,6 @@
 # |media
 
-The `|media` filter returns an address relative to the public path of the [media manager library](../cms/mediamanager.md). The result is a URL to the media file specified in the filter parameter.
+The `|media` filter returns an address relative to the public path of the [media manager library](../media/introduction.md). The result is a URL to the media file specified in the filter parameter.
 
 ```twig
 <img src="{{ 'banner.jpg'|media }}" />

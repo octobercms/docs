@@ -1,6 +1,6 @@
 # Mutators
 
-Accessors and mutators allow you to format attributes when retrieving them from a model or setting their value. For example, you may want to use the [encryption service](../services/encryption.md) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on the model.
+Accessors and mutators allow you to format attributes when retrieving them from a model or setting their value. For example, you may want to use the [encryption service](../services/hashing-encryption.md) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on the model.
 
 In addition to custom accessors and mutators, you can also automatically cast date fields to [Carbon](https://github.com/briannesbitt/Carbon) instances or even [cast text values to JSON](#oc-attribute-casting).
 

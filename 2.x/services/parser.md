@@ -22,7 +22,7 @@ Use the `Markdown::parse` method to render Markdown to HTML:
 $html = Markdown::parse($markdown);
 ```
 
-You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md).
+You may also use the `|md` filter for [parsing Markdown in your front-end markup](../markup/filter-md.md).
 
 ```twig
 {{ '**Text** is bold.'|md }}

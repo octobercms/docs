@@ -142,7 +142,7 @@ public function onOpenTemplate()
 
 ### Triggering AJAX Requests
 
-The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [front-end AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a backend button.
+The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [front-end AJAX library](../ajax/introduction.md) for details. The following example shows how to trigger a request with a backend button.
 
 ```html
 <button
@@ -205,4 +205,4 @@ You may also pass a `Response` object to this method.
 $this->setResponse(Response::make(...));
 ```
 
-> **Note**: Check out the [Views & Responses article](../services/response-view) for more information on building responses.
+> **Note**: Check out the [Views & Responses article](../services/response-view.md) for more information on building responses.

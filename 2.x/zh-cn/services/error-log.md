@@ -169,7 +169,7 @@ $user = User::find(1);
 Log::info('显示用户的用户资料: '.$user->name);
 ```
 
-记录器提供 [RFC 5424](http://tools.ietf.org/html/rfc5424) 中定义的八个记录级别： **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** 和 **debug**。
+记录器提供 [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424) 中定义的八个记录级别： **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** 和 **debug**。
 
 ```php
 Log::emergency($error);

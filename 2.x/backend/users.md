@@ -151,7 +151,7 @@ if ($this->user->hasPermission([
 }
 ```
 
-You can also use the methods in the back-end views for hiding user interface elements. The next examples demonstrates how you can hide a button on the Edit Category [back-end form](forms):
+You can also use the methods in the back-end views for hiding user interface elements. The next examples demonstrates how you can hide a button on the Edit Category [back-end form](forms.md):
 
 ```php
 <?php if ($this->user->hasAccess('acme.blog.delete_categories')): ?>

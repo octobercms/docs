@@ -76,7 +76,7 @@ class User extends Model
 }
 ```
 
-> **Note**: Encrypted attributes are not compatible with [`jsonable`](model#oc-supported-properties) attributes.
+> **Note**: Encrypted attributes are not compatible with [`jsonable`](model.md#oc-supported-properties) attributes.
 
 ### Sluggable
 

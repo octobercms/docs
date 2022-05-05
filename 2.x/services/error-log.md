@@ -171,7 +171,7 @@ $user = User::find(1);
 Log::info('Showing user profile for user: '.$user->name);
 ```
 
-The logger provides the eight logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**.
+The logger provides the eight logging levels defined in [RFC 5424](https://datatracker.ietf.org/doc/html/rfc5424): **emergency**, **alert**, **critical**, **error**, **warning**, **notice**, **info** and **debug**.
 
 ```php
 Log::emergency($error);
