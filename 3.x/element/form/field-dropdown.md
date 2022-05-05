@@ -1,32 +1,76 @@
 # Dropdown
 
-`dropdown` - renders a dropdown with specified options. There are a number of ways to provide the dropdown options, most of them involve specify the `options` value.
-
-Option values only, where the values and labels are the same.
+The `dropdown` field renders a dropdown with specified options. There are a number of ways to provide the dropdown options, most of them involve specify the `options` value.
 
 ```yaml
 status_type:
-    label: Blog Post Status
     type: dropdown
-    default: published
-    options:
-        draft
-        published
-        archived
-```
-
-Options with key-value pair, where the value and label are independently specified.
-
-```yaml
-status_type:
     label: Blog Post Status
-    type: dropdown
-    default: published
     options:
         draft: Draft
         published: Published
         archived: Archived
 ```
+
+The following properties are supported.
+
+Property | Description
+------------- | -------------
+**options** | available options for the dropdown, as an array or method name.
+**default** | a default value to use for new records.
+**emptyOption** | text to display when allowing an empty option.
+**placeholder** | text to display when the field is empty.
+**showSearch** | allow the user to search options. Default: `true`.
+
+Generally `options` are defined with key-value pair, where the value and label are independently specified.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    options:
+        draft: Draft
+        published: Published
+        archived: Archived
+```
+
+You may use the `default` property to set a default value, where the value is the key of the option.
+
+```yaml
+status_type:
+    label: Blog Post Status
+    type: dropdown
+    default: published
+```
+
+To handle cases when there is no value set, you may specify an `emptyOption` value to include an empty option that can be reselected.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    emptyOption: -- no status --
+```
+
+Alternatively you may use the `placeholder` option to use a "one-way" empty option that cannot be reselected.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    placeholder: -- select a status --
+```
+
+By default the dropdown has a searching feature, allowing quick selection of a value. This can be disabled by setting the `showSearch` option to false.
+
+```yaml
+status:
+    label: Blog Post Status
+    type: dropdown
+    showSearch: false
+```
+
+## Server-side Options
 
 The next approaches involve using the model class in your plugin or application codebase. If the `options` value is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model.
 
@@ -125,31 +169,4 @@ public static function staticMethodOptions($model, $formField)
 {
     return ['published' => 'Published', ...];
 }
-```
-
-To handle cases when there is no value set on the model, you may specify an `emptyOption` value to include an empty option that can be reselected.
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    emptyOption: -- no status --
-```
-
-Alternatively you may use the `placeholder` option to use a "one-way" empty option that cannot be reselected.
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    placeholder: -- select a status --
-```
-
-By default the dropdown has a searching feature, allowing quick selection of a value. This can be disabled by setting the `showSearch` option to `false`.
-
-```yaml
-status:
-    label: Blog Post Status
-    type: dropdown
-    showSearch: false
 ```

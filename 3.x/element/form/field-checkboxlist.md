@@ -1,6 +1,6 @@
 # Checkbox List
 
-`checkboxlist` - renders a list of checkboxes.
+The `checkboxlist` field renders a list of checkboxes. Checkbox lists support the same methods for defining the options as the [dropdown field type](./field-dropdown.md) and also support secondary descriptions, found in the [radio field type](./field-radio.md).
 
 ```yaml
 permissions:
@@ -12,12 +12,23 @@ permissions:
         modify_account: Modify account
 ```
 
-Checkbox lists support the same methods for defining the options as the [dropdown field type](#field-dropdown) and also support secondary descriptions, found in the [radio field type](#field-radio).
+The following properties are supported.
+
+Property | Description
+------------- | -------------
+**options** | available options for the dropdown, as an array or method name.
+**default** | a default value to use for new records.
+**quickselect** | show the quick selection buttons.
+**cssClass** | used for setting the options as inline.
+
+You may use the `default` property to set a default value, where the value is the key of the option.
+
 
 ```yaml
 permissions:
+    label: Permissions
     type: checkboxlist
-    options: listPermissions
+    default: open_account
 ```
 
 Options can be displayed inline with each other instead of in separate rows by specifying **inline-options** as the `cssClass` on the field config.
@@ -35,3 +46,10 @@ permissions:
     type: checkboxlist
     quickselect: true
 ```
+
+#### See Also
+
+::: also
+* [Dropdown Form Field](./field-dropdown.md)
+* [Radio Form Field](./field-radio.md)
+:::

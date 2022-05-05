@@ -11,4 +11,4 @@ md_content:
 
 Option | Description
 ------------- | -------------
-**mode** | the expected view mode, either tab or split. Default: tab.
+**mode** | the expected view mode, either tab or split. Default: `tab`.

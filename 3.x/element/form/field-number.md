@@ -1,25 +1,58 @@
 # Number
 
-`number` - renders a single line text box that takes numbers only.
+The `number` field renders a single line text box that takes numbers only.
 
 ```yaml
 your_age:
     label: Your Age
     type: number
-    step: 1  # defaults to 'any'
-    min: 1   # defaults to not present
-    max: 100 # defaults to not present
 ```
 
-If you would like to validate this field server-side on save to ensure that it is numeric, please use the `$rules` property on your model, like so:
+The following properties are supported.
+
+Property | Description
+------------- | -------------
+**min** | the client-side minimum value, default `null`.
+**max** | the client-side maximum value, default `null`.
+**step** | the client-side step increment, default `any`.
+
+You may use the `min` and `max` properties to constrain the input by minimum and maximum values. The following will only accept an input between 1 and 100.
+
+```yaml
+your_age:
+    label: Your Age
+    type: number
+    min: 1
+    max: 100
+```
+
+Use the `step` property to control the increments that the number can be increased or decreased by, this value defaults to **any**.
+
+```yaml
+your_age:
+    label: Your Age
+    type: number
+    step: 10
+```
+
+## Server-side Validation
+
+If you would like to validate this field server-side on save to ensure that it is numeric. When working with tailor fields, use the `validation` property.
+
+```yaml
+your_age:
+    label: Your Age
+    type: number
+    validation:
+        - numeric
+```
+
+When working with models, use the `$rules` property on your model, like so.
 
 ```php
-/**
- * @var array Validation rules
- */
 public $rules = [
     'your_age' => 'numeric',
 ];
 ```
 
-For more information on model validation, please visit [the documentation page](https://octobercms.com/docs/services/validation#rule-numeric).
+For more information on model validation, please visit the [validation service article](../../extend/services/validation.md#rule-numeric).
