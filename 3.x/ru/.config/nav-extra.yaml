@@ -20,7 +20,7 @@
     prefix: "/3.x/markup/"
     link: "/3.x/markup/templating.html"
 -
-    title: Расширяем October CMS
+    title: Расширение October CMS
     icon: "/images/markup-guide.svg"
     prefix: "/3.x/extend/"
     link: "/3.x/extend/system/plugins.html"
