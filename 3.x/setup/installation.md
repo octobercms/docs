@@ -9,7 +9,7 @@ subtitle: Learn how to install October CMS on a server.
 
 Before installing October CMS, ensure the target system meets the minimum requirements:
 
-* PHP version 7.2.9 or higher
+* PHP version 8.0.0 or higher
 * Composer 2.0 or higher
 * PDO PHP Extension
 * cURL PHP Extension
