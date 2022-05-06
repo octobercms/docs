@@ -1,21 +1,21 @@
 ---
 subtitle: Learn how to configure and fine-tune October CMS.
 ---
-# Common Configuration
+# Общая конфигурация
 
-All of the configuration files for October CMS are stored in the `config` directory. Each configuration parameter has inline documentation.
+Все файлы конфигурации для October CMS хранятся в директории `config`. Каждый параметр конфигурации имеет встроенную документацию.
 
-## Environment Configuration
+## Конфигурация окружения
 
-Many of October CMS parameters can be configured using environment variables. Environment variables can be set on the server level, or defined for the [web application's virtual host](https://httpd.apache.org/docs/2.4/env.html).
+Многие параметры October CMS можно настроить с помощью переменных окружения. Переменные окружения могут быть установлены на уровне сервера или определены для [виртуального хоста веб-приложения](https://httpd.apache.org/docs/2.4/env.html).
 
 ::: aside
-October CMS uses the [DotEnv library](https://github.com/vlucas/phpdotenv) to make it easy to manage environment variables.
+October CMS использует [библиотеку DotEnv](https://github.com/vlucas/phpdotenv) чтобы упростить управление переменными окружения.
 :::
 
-Environment variables can also be defined in the `.env` file that the installation script automatically creates in the project root directory. In a fresh installation of October CMS, the base directory contains a `.env.example` file that provides typical values for a local environment.
+Переменные окружения также можно указать в файле `.env`. Этот файл автоматически создается скриптом установки системы в корневой директории проекта. В чистой установке October CMS, в корневой директории есть файл `.env.example`, который демонстрирует типичные значения для локального окружения.
 
-For example, the database connection can be specified with these variables:
+Пример параметров, с помощью которых можно указать параметры соединения с базой данных:
 
 ```ini
 DB_CONNECTION=mysql
@@ -26,69 +26,69 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Any variable in the `.env` file can be overridden by external environment variables defined on the server or virtual host level.
+Любая переменная в файле `.env` может быть переопределена переменными внешнего окружения, определенными на уровне сервера или виртуального хоста.
 
-Configuration values are loaded in this order:
+Значения конфигурации загружаются в следующем порядке:
 
-1. system environment variables
-2. variables in the .env file
-3. values in the configuration PHP files.
+1. системные переменные окружения
+2. переменные в файле .env
+3. значения в файлах конфигурации
 
 ::: warning
-Never add the `.env` file to source control. It would be a security risk in the event an intruder gains access to the repository.
+Никогда не добавляйте файл `.env` в систему контроля версий. Если злоумышленник получит доступ к репозиторию, это будет представлять угрозу безопасности проекта.
 :::
 
-### Environment-Specific Configuration Files
+### Файлы конфигурации для конкретных сред
 
-If a configuration file must be loaded based on the current application environment, e.g. staging or production, you can use the server-level `APP_ENV` variable. Example Apache configuration:
+Если файл конфигурации должен быть загружен на основе текущего окружения приложения, например для staging или production окружения вы можете использовать переменную `APP_ENV` на уровне сервера. Пример конфигурации Apache:
 
 ```text
 SetEnv APP_ENV "staging"
 ```
 
-When the `APP_ENV` variable is defined, the platform attempts to load a .env file with the suffix matching the environment name. e.g. `.env.staging`. If the file does not exist, there will be no error. If both `.env.staging` and `.env` files exist, the `.env` file is completely ignored.
+Когда определена переменная `APP_ENV`, платформа пытается загрузить файл `.env` с суффиксом, соответствующим окружению. например `.env.staging`. Если файл не существует, ошибки не будет. Если файлы `.env.staging` и `.env` существуют, файл `.env` полностью игнорируется.
 
-## Common Configuration Parameters
+## Общие параметры конфигурации
 
-There are several important commonly used configuration parameters.
+Есть несколько важных, часто используемых параметров конфигурации.
 
-### Debug Mode
+### Режим отладки (debug)
 
-The `debug` parameter can be found in the `config/app.php` file. By default, the value is loaded from the `APP_DEBUG` environment variable. After the installation, the debug mode is enabled in the `.env` file:
+Параметр `debug` можно найти в файле `config/app.php`. По умолчанию значение загружается из переменной окружения `APP_DEBUG`. После установки системы, в файле `.env` режим отладки включен по умолчанию:
 
 ```ini
 APP_DEBUG=true
 ```
 
-When enabled, the debug mode shows detailed error messages when they occur, along with other debugging features. While useful during development, the debug mode must be disabled on a live production site. It prevents potentially sensitive information from being displayed to website visitors.
+Когда режим отладки включен, система показывает подробные сообщения об ошибках, вместе с дополнительной информации для отладки. Режим отладки должен быть обязательно отключен в боевом окружении. Иначе потенциально чувствительная информация будет показана посетителям сайта.
 
-Features provided by the debug mode:
+Возможности, предоставляемые режимом отладки:
 
-* [detailed error messages](../cms/pages.md#error-page)
-* failed user authentication provides a specific reason
-* [combined assets](../markup/filter-theme.md) are not minified by default
-* [safe mode](../setup/configuration.md#safe-mode) is disabled by default.
+* [детальные сообщения об ошибках](../cms/pages.md#error-page)
+* при неудачной попытке авторизации отображается причина ошибки
+* [комбинированные ассеты](../markup/filter-theme.md) не минифицируются по умолчанию
+* [безопасный режим](../setup/configuration.md#safe-mode) отключен.
 
-### Safe Mode
+### Безопасный режим
 
-The `enable_safe_mode` parameter can be found in the `config/cms.php` file. By default, the value is loaded from the `CMS_SAFE_MODE` environment variable. Safe mode disables the [PHP code section](../cms/themes.md#php-code-section) in CMS templates.
+Параметр `enable_safe_mode` можно найти в файле `config/cms.php`. По умолчанию значение загружается из переменной окружения `CMS_SAFE_MODE`. Безопасный режим отключает [PHP секции](../cms/themes.md#php-code-section) в шаблонах CMS.
 
-The parameter can take one of the following values:
+Параметр может принимать одно из следующих значений:
 
-* `true` - safe mode is enabled
-* `false` - safe mode is disabled
-* `null` - safe mode is active if [debug mode](../setup/configuration.md#debug-mode) is disabled.
+* `true` - безопасный режим включен
+* `false` - безопасный режим отключен
+* `null` - безопасный режим активен если [режим отладки](../setup/configuration.md#debug-mode) отключен.
 
-### CSRF protection
+### CSRF защита
 
-October CMS provides a built-in [Cross-Site Request Forgery](https://owasp.org/www-community/attacks/csrf) prevention mechanism. When CSRF protection is enabled, October CMS stores a random token in the user's session. The [form opening tag](../services/html.md#opening-a-form) and the [form token tag](../services/html.md#form-tokens) add a hidden field with the token value to the form. For all POST, PUT or DELETE requests, the platform checks whether the submitted token value matches the one stored in the user session.
+October CMS имеет встроенный механизм защиты от [Межсайтовой подделки запроса](https://owasp.org/www-community/attacks/csrf). Когда защита CSRF включена, October CMS хранит случайный токен в сеансе пользователя. [Тег открытия формы](../services/html.md#opening-a-form) и [тег токен формы](../services/html.md#form-tokens) добавляют в форму скрытое поле со значением токена. Для всех запросов POST, PUT или DELETE платформа проверяет, соответствует ли отправленное значение токена значению, хранящемуся в сеансе пользователя.
 
-CSRF protection is enabled by default. The `enable_csrf_protection` parameter can be found in the `config/system.php` file. By default, the value is loaded from the `ENABLE_CSRF` environment variable.
+CSRF защита включена по умолчанию. Параметр `enable_csrf_protection` находится в файле `config/system.php`. По умолчанию, значение загружается из переменной окружения `ENABLE_CSRF`.
 
-## Production Configuration
+## Конфигурация боевого окружения
 
-The following configuration is recommended for production environments:
+Следующая конфигурация рекомендуется для боевого окружения:
 
-* CSRF protection is enabled
-* debug mode is disabled
-* use the [public folder](../setup/web-server-config.md#public-folder) for additional security.
+* CSRF защита включена
+* режим отладки выкючен
+* используйте [директорию public](../setup/web-server-config.md#public-folder) для дополнительной защиты.

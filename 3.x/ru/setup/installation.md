@@ -35,18 +35,18 @@ subtitle: Узнайте как установить October CMS на серве
 ## Установка October CMS
 
 ::: aside
-Вы должны сконфигурировать виртуальный хост на веб-сервере с доступом к папке где будет установлен October CMS. Для локальной разработки вы можете использовать [Laravel Sail](../resources/using-laravel-sail.md), [Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/) или встроенный в Laravel сервер разработки.
+Вы должны сконфигурировать виртуальный хост на веб-сервере с доступом к директории где будет установлен October CMS. Для локальной разработки вы можете использовать [Laravel Sail](../resources/using-laravel-sail.md), [Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/) или встроенный в Laravel сервер разработки.
 :::
 
 October CMS — это PHP веб-приложение, использующее [Composer](http://getcomposer.org/) для управления своими зависимостями. Прежде чем начать, убедитесь, что Composer установлен. [Лицензионный ключ](https://octobercms.com/help/site/projects#project-id) потребуется для завершения установки.
 
-Чтобы установить платформу, инициализируйте проект с помощью команды `create-project` в терминале. Следующая команда создает новый проект в папке с именем *myoctober*:
+Чтобы установить платформу, инициализируйте проект с помощью команды `create-project` в терминале. Следующая команда создает новый проект в директории с именем *myoctober*:
 
 ```bash
 composer create-project october/october myoctober
 ```
 
-Когда команда завершится, войдите в папку проекта:
+Когда команда завершится, войдите в директорию проекта:
 
 ```bash
 cd myoctober
@@ -71,7 +71,7 @@ php artisan serve
 ```
 
 ::: warning
-Если вы устанавливаете платформу на рабочий веб-сервер, ознакомьтесь с рекомендациями, перечисленными в разделе: [Конфигурация боевой среды](../setup/configuration.md#production-configuration).
+Если вы устанавливаете платформу на рабочий веб-сервер, ознакомьтесь с рекомендациями, перечисленными в разделе: [Конфигурация боевого окружения](../setup/configuration.md#production-configuration).
 :::
 
 ## Нестабильные новейшие обновления
@@ -116,5 +116,5 @@ php artisan serve
 #### See Also
 
 ::: also
-* [Конфигурация боевой среды](../setup/configuration.md#production-configuration)
+* [Конфигурация боевого окружения](../setup/configuration.md#production-configuration)
 :::
