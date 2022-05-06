@@ -1,0 +1,31 @@
+"/":
+-
+    title: Начало работы
+    icon: "/images/october-leaf.svg"
+    prefix: "/3.x/"
+    link: "/3.x/setup/installation.html"
+-
+    title: Руководство по CMS
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/cms/"
+    link: "/3.x/cms/themes/themes.html"
+-
+    title: Руководство по Tailor
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/tailor/"
+    link: "/3.x/tailor/introduction.html"
+-
+    title: Разметка CMS
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/markup/"
+    link: "/3.x/markup/templating.html"
+-
+    title: Расширяем October CMS
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/extend/"
+    link: "/3.x/extend/system/plugins.html"
+-
+    title: Элементы Бекенд панели
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/element/"
+    link: "/3.x/element/definitions.html"
