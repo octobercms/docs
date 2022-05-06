@@ -25,7 +25,7 @@
     prefix: "/3.x/extend/"
     link: "/3.x/extend/system/plugins.html"
 -
-    title: Элементы Бекенд панели
+    title: Элементы бэкэнд-панели
     icon: "/images/markup-guide.svg"
     prefix: "/3.x/element/"
     link: "/3.x/element/definitions.html"

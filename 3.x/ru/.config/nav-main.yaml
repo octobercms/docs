@@ -104,7 +104,7 @@
         - cms-components
         - console-commands
 -
-    title: Бекенд панель
+    title: Бэкэнд-панель
     children:
         - backend/navigation
         - backend/users
