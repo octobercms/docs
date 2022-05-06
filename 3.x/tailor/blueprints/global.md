@@ -3,7 +3,7 @@ subtitle: Easily define settings and globally available content.
 ---
 # Global
 
-Globals are used to define globally available content for your website. The field values are often used in [CMS layouts](../cms/layouts) and contain settings, such as social networking links.
+Globals are used to define globally available content for your website. The field values are often used in [CMS layouts](../../cms/themes/layouts.md) and contain settings, such as social networking links.
 
 The following defines a **Footer Config** global with a Facebook Link (`facebook_link`) text field.
 
