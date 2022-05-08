@@ -18,7 +18,7 @@ The `october:migrate` command will perform a database migration, creating databa
 php artisan october:migrate
 ```
 
-The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](#oc-refresh-plugin) is a useful alternative for debugging a single plugin.
+The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The [plugin refresh command](../resources/installing-packages.md#oc-refresh-plugin) is a useful alternative for debugging a single plugin.
 
 ```bash
 php artisan october:migrate --rollback
