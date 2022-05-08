@@ -1,48 +1,48 @@
 ---
-subtitle: Learn how to install October CMS with a local Docker environment.
+subtitle: Узнайте, как установить October CMS в локальной среде Docker.
 ---
-# Installing with Laravel Sail
+# Установка с помощью Laravel Sail
 
 ::: aside
-Since the web server runs seperately from your operating system, commands are called using `sail artisan` instead of `php artisan`.
+Поскольку веб-сервер работает отдельно от вашей операционной системы, команды вызываются с использованием `sail artisan` вместо `php artisan`.
 :::
 
-[Laravel Sail](https://laravel.com/docs/9.x/sail) is a command-line interface for interacting with a local Docker development environment. It helps you get started by automating the process of setting up the web server and database. These instructions teach you how to use Sail and October CMS together to get up and running.
+[Laravel Sail](https://laravel.com/docs/9.x/sail) — это интерфейс командной строки для взаимодействия с локальной средой разработки Docker. Это поможет вам начать работу, автоматизировав процесс настройки веб-сервера и базы данных. Эти инструкции научат вас, как использовать Sail и October CMS вместе.
 
-## Getting Started
+## Приступаем к работе
 
-The instructions to install Sail will differ depending on your operating system. Also a different build URL is used to install October CMS. By default this URL only installs the base environment with a MySQL service.
+Инструкции по установке Sail будут различаться в зависимости от вашей операционной системы. Также для установки October CMS используется другой URL сборки. По умолчанию этот URL устанавливает только базовую среду со службой MySQL.
 
 ::: tip
-Replace `example-app` with any directory name and this is where October CMS will be installed.
+Замените `example-app` на любое имя директории, в котором будет установлен October CMS.
 ```bash
 curl -s "https://octobercms.com/api/laravelsail/example-app" | bash
 ```
 :::
 
-With this different URL in mind, get started by following the specific Laravel guide for your operating system.
+Имея в виду этот другой URL-адрес, начните работу, следуя конкретному руководству Laravel для вашей операционной системы.
 
 - [macOS](https://laravel.com/docs/9.x/installation#getting-started-on-macos)
 - [Windows](https://laravel.com/docs/9.x/installation#getting-started-on-windows)
 - [Linux](https://laravel.com/docs/9.x/installation#getting-started-on-linux)
 
-Once everything is ready, you are prompted to run these commands to start the web server.
+Когда все будет готово, вам будет предложено выполнить эти команды для запуска веб-сервера.
 
 ```bash
 cd example-app
 ./vendor/bin/sail up
 ```
 
-Next, open another console window, navigate to the same directory and run these commands to install October CMS. The database settings are preconfigured and ready to go.
+Затем откройте другое окно консоли, перейдите в тот же каталог и выполните эти команды для установки October CMS. Параметры базы данных предварительно настроены и готовы к работе.
 
 ```bash
 ./vendor/bin/sail artisan october:install
 ```
 
-After the installation is complete, open the website using the `http://localhost` address.
+После завершения установки откройте веб-сайт, используя адрес `http://localhost`.
 
-#### See Also
+#### Смотрите также
 
 ::: also
-* [Laravel Sail Documentation](https://laravel.com/docs/9.x/sail)
+* [Документация Laravel Sail](https://laravel.com/docs/9.x/sail)
 :::
