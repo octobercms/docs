@@ -1,35 +1,35 @@
 ---
-subtitle: Deploy October CMS project to a private or shared server.
+subtitle: Деплоинг October CMS проекта на приватный или shared сервер.
 ---
-# Deployment
+# Деплоинг
 
-October CMS projects can be deployed using Composer and the official Deploy plugin.
+October CMS проекты могут быть развернуты используя Composer и официальный плагин Deploy.
 
-## Deploying with Composer
+## Деплоинг используя Composer
 
-That scenario applies if you have SSH access and have Composer installed on the target server. Deploying October CMS projects with Composer is the same as deploying any other Composer project:
+Этот сценарий применим, если у вас есть доступ по SSH и Composer установлен на целевом сервере. Процесс развертывания проекта на October CMS с помощью Composer аналогичен развертыванию любого другого проекта Composer:
 
-* clone the project repository on the server.
-* copy the `auth.json` file manually to the server.
-* run `composer install` in the project directory.
-* update the configuration files.
+* склонируйте проект из репозитория в папку на сервере.
+* скопируйте файл `auth.json` в корневую директорию проекта.
+* выполните `composer install` в директории проекта.
+* обновите файлы конфигурации.
 
-Keep in mind that the Composer's [auth.json](https://getcomposer.org/doc/articles/http-basic-authentication.md) file from your source October CMS installation must be added to the server. The file is automatically generated when you install October CMS for the first time. It includes the license key information and is required for authenticating Composer requests to the October CMS Gateway.
+Учитывайте что файл [auth.json](https://getcomposer.org/doc/articles/http-basic-authentication.md) должен быть добавлен из директории где устанавливался проект в директорию проекта на сервере. Файл создается автоматически при первой установке October CMS. Он включает информацию о лицензионном ключе и требуется для аутентификации запросов Composer к шлюзу October CMS.
 
-Alternatively, you can recreate the `auth.json` file with the [project:set](../console/commands.html#set-project) artisan command before running composer install.
+Вы можете создать файл `auth.json` заново, используя artisan команду [project:set](../console/commands.html#set-project) до выполнения `composer install`.
 
 ```bash
 php artisan project:set <license key>
 ```
 
-If the above command is not available, you may create the `auth.json` file using composer instead.
+Если команда выше не доступна, вы можете создать файл `auth.json` используя composer.
 
 ```bash
 ​composer config --auth http-basic.gateway.octobercms.com <email address> <license key>
 ```
 
-## Deploying without Composer
+## Деплоинг без Composer
 
-<VideoBlockLink src="https://www.youtube.com/watch?v=Lx9X3CfXwfw" title="One-click Deploy" description="This video describes how to deploy your project to a remote server without Composer." prompt="Watch the tutorial"/>
+<VideoBlockLink src="https://www.youtube.com/watch?v=Lx9X3CfXwfw" title="Deploy в один клик" description="В этом видео описывается, как развернуть проект на удаленном сервере без Composer." prompt="Смотреть инструкцию"/>
 
-If you don't have SSH access to the server or can't run Composer commands for any reason, there is an option to deploy an October CMS project using the official <LinkWithIcon text="Deploy Plugin" icon="https://d2f5cg397c40hu.cloudfront.net/storage/app/uploads/public/optimized/local/c99/b52/eb1c99b52eb1dde393bb7ef60e4c861b062.png" href="https://octobercms.com/plugin/rainlab-deploy"/>.
+Если у вас нет SSH-доступа к серверу или вы не можете запускать команды Composer по какой-либо причине, есть возможность развернуть October CMS проект с помощью официального <LinkWithIcon text="плагина Deploy" icon="https://d2f5cg397c40hu.cloudfront.net/storage/app/uploads/public/optimized/local/c99/b52/eb1c99b52eb1dde393bb7ef60e4c861b062.png" href="https://octobercms.com/plugin/rainlab-deploy"/>.
