@@ -1,23 +1,23 @@
 ---
-subtitle: Learn how to set up services for sending mail.
+subtitle: Узнайте, как настроить службы для отправки почты.
 ---
-# Mail Configuration
+# Конфигурация почтовой службы
 
-October CMS provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings → Mail Settings* or by updating the default configuration values. In these examples we will update the configuration values.
+October CMS предоставляет драйверы для SMTP, Mailgun, SparkPost, Amazon SES, PHP-функции mail и sendmail, что позволяет вам быстро приступить к отправке почты через локальную или облачную службу по вашему выбору. Существует два способа настроить почтовые службы: либо с помощью внутреннего интерфейса в разделе *Настройки → Настройки почты*, либо путем обновления значений конфигурации по умолчанию. В этих примерах мы будем обновлять значения конфигурации.
 
-## Driver Prerequisites
+## Требования драйверов
 
-In most cases you can use the SMTP driver and it will be supported by most mailing providers. However, using the API-based drivers are often a simpler and faster approach.
+В большинстве случаев вы можете использовать драйвер SMTP, и он будет поддерживаться большинством почтовых провайдеров. Однако использование драйверов на основе API часто является более простым и быстрым подходом.
 
-### Mailgun driver
+### Драйвер Mailgun
 
-To use the Mailgun driver, install Symfony's Mailgun Mailer transport via Composer.
+Чтобы использовать драйвер Mailgun, установите Mailgun Mailer transport используя Composer.
 
 ```bash
 composer require symfony/mailgun-mailer symfony/http-client
 ```
 
-Next, set the `driver` option in your `config/mail.php` configuration file to `mailgun`. Next, verify that your `config/services.php` configuration file contains the following options:
+Затем установите для параметра `driver` в файле конфигурации `config/mail.php` значение `mailgun`. Затем убедитесь, что ваш файл конфигурации `config/services.php` содержит следующие параметры:
 
 ```php
 'mailgun' => [
@@ -27,15 +27,15 @@ Next, set the `driver` option in your `config/mail.php` configuration file to `m
 ],
 ```
 
-### Postmark Driver
+### Драйвер Postmark
 
-To use the Postmark driver, install Symfony's Postmark Mailer transport via Composer.
+Чтобы использовать драйвер Postmark, установите Postmark Mailer transport используя Composer.
 
 ```bash
 composer require symfony/postmark-mailer symfony/http-client
 ```
 
-Next, set the `default` option in your application's `config/mail.php` configuration file to postmark. After configuring your application's default mailer, verify that your `config/services.php` configuration file contains the following.
+Затем установите параметр `default` в файле конфигурации `config/mail.php` вашего приложения на `postmark`. Затем убедитесь, что ваш файл конфигурации `config/services.php` содержит следующие параметры:
 
 ```php
 'postmark' => [
@@ -43,15 +43,15 @@ Next, set the `default` option in your application's `config/mail.php` configura
 ],
 ```
 
-### SES driver
+### Драйвер SES
 
-To use the Amazon SES driver you must first install the Amazon AWS SDK for PHP. You may install this library via the Composer package manager.
+Чтобы использовать драйвер Amazon SES, необходимо сначала установить Amazon AWS SDK для PHP. Вы можете установить эту библиотеку используя Composer.
 
 ```bash
 composer require aws/aws-sdk-php
 ```
 
-Next, set the `driver` option in your `config/mail.php` configuration file to `ses`. Then, verify that your `config/services.php` configuration file contains the following options:
+Затем установите параметр `default` в файле конфигурации `config/mail.php` вашего приложения на `ses`. Затем убедитесь, что ваш файл конфигурации `config/services.php` содержит следующие параметры:
 
 ```php
 'ses' => [
@@ -61,17 +61,17 @@ Next, set the `driver` option in your `config/mail.php` configuration file to `s
 ],
 ```
 
-## Mail & Local Development
+## Почта и локальная разработка  
 
-When developing an application that sends e-mail, you probably don't want to actually send e-mails to live e-mail addresses. There are several ways to "disable" the actual sending of e-mail messages.
+При разработке приложения, отправляющего электронную почту, вы, вероятно, не хотите на самом деле отправлять электронные письма на действующие адреса электронной почты. Есть несколько способов «отключить» фактическую отправку сообщений электронной почты.
 
-### Log Driver
+### Драйвер Log
 
-One solution is to use the `log` mail driver during local development. This driver will write all e-mail messages to your log files for inspection. For more information on configuring your application per environment, check out the [configuration documentation](../setup/configuration.md).
+Одним из решений является использование почтового драйвера `log` во время локальной разработки. Этот драйвер будет записывать все сообщения электронной почты в файлы журнала для проверки. Для получения дополнительной информации о настройке вашего приложения для каждой среды ознакомьтесь с [документацией по настройке](../setup/configuration.md).
 
-### Universal To
+### Универсальный получатель
 
-Another solution is to set a universal recipient of all e-mails sent by the framework. This way, all the emails generated by your application will be sent to a specific address, instead of the address actually specified when sending the message. This can be done via the `to` option in your `config/mail.php` configuration file:
+Другое решение — установить универсального получателя всех электронных писем, отправляемых фреймворком. Таким образом, все электронные письма, сгенерированные вашим приложением, будут отправляться на определенный адрес, а не на адрес, фактически указанный при отправке сообщения. Это можно сделать с помощью параметра `to` в файле конфигурации `config/mail.php`:
 
 ```php
 'to' => [
@@ -80,16 +80,16 @@ Another solution is to set a universal recipient of all e-mails sent by the fram
 ],
 ```
 
-### Pretend Mail Mode
+### Динамически отключить отправку
 
-You can dynamically disable sending mail using the `Mail::pretend` method. When the mailer is in pretend mode, messages will be written to your application's log files instead of being sent to the recipient.
+Вы можете динамически отключить отправку почты с помощью метода `Mail::pretend`. Когда почтовая программа находится в этом режиме, сообщения будут записываться в лог-файлы вашего приложения, а не отправляться получателю.
 
 ```php
 Mail::pretend();
 ```
 
-#### See Also
+#### Смотрите также
 
 ::: also
-* [Sending Mail](../extend/system/sending-mail.md)
+* [Отправка писем](../extend/system/sending-mail.md)
 :::

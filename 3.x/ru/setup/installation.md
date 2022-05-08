@@ -113,7 +113,7 @@ php artisan serve
 Время ожидания запроса на веб-сервере должно быть увеличено или отключено. Например, Apache FastCGI иногда имеет опцию -idle-timeout, установленную на 30 секунд.
 :::
 
-#### See Also
+#### Смотрите также
 
 ::: also
 * [Конфигурация боевого окружения](../setup/configuration.md#production-configuration)
