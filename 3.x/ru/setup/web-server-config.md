@@ -1,39 +1,39 @@
 ---
-subtitle: Learn how to configure and secure your server and tune up the application performance.
+subtitle: Узнайте как настроить и защитить ваш сервер и тонко настроить производительность приложения.
 ---
-# Web Server Configuration
+# Конфигурация веб-сервера
 
-## Security & Performance
+## Безопасность и производительность
 
-### Public Folder
+### Директория Public
 
-In the default configuration, the entire October CMS root directory is open for web access. For ultimate security in production environments, you may configure the web server to use a public folder to ensure only files in specific directories can be accessed.
+В конфигурации по умолчанию весь корневой каталог October CMS открыт для веб-доступа. Для максимальной безопасности в боевых окружениях вы можете настроить веб-сервер на работу внутри `public` директории, чтобы обеспечить доступ только к файлам внутри нее.
 
-First you will need to spawn a public folder using the `october:mirror` command:
+Сначала вам нужно будет создать `public` директорию с помощью команды `october:mirror`:
 
 ```bash
 php artisan october:mirror
 ```
 
-It will create a new directory called `public` in the project's root directory. Inside the directory, the command creates symbolic links to assets and resources directories for all plugins, modules and themes existing in the project.
+Это создаст новую директорию `public` в корневой директории проекта. Внутри этой директории, команда создаст символические ссылки к ассетам и ресурсам для всех плагинов, модулей и шаблонам существующих в проекте.
 
 ::: tip
-In Apache, the server and virtual host document location is managed with the `DocumentRoot` directive.
+В Apache расположение документов сервера и виртуального хоста управляется директивой `DocumentRoot`.
 :::
 
-The web server configuration must be updated to point to the public directory instead of the project's root directory.
+Конфигурацию веб-сервера необходимо обновить, чтобы она указывала на директорию `public`, а не на корневой каталог проекта.
 
 ::: aside
-In Windows operating systems, the `october:mirror` command can only be executed in a console running as administrator.
+В операционных системах Windows команду `october:mirror` можно выполнить только в консоли, работающей от имени администратора.
 :::
 
-The `october:mirror` command should be performed after each system update or when a new plugin is installed. You may instruct October CMS to run the command each time after updating the project with the Composer. The auto mirroring feature is managed with the `system.auto_mirror_public` configuration parameter.
+Команду `october:mirror` следует выполнять после каждого обновления системы или при установке нового плагина. Вы можете заставить October CMS запускать команду каждый раз после обновления проекта с помощью Composer. Функция управляется параметром конфигурации `system.auto_mirror_public`.
 
-### Improving Performance
+### Улучшаем производительность
 
-This section describes steps that can help to increase the application performance for larger applications.
+В этом разделе описаны шаги, которые могут помочь повысить производительность больших приложений.
 
-Disable [debug mode](../setup/configuration.html#debug-mode) and enable cache. For example, if you are using the `.env` file:
+Отключите [режим отладки](../setup/configuration.html#debug-mode) и включите кэш. Пример, если вы используете`.env` файл:
 
 ```ini
 APP_DEBUG=false
@@ -42,45 +42,45 @@ CMS_ASSET_CACHE=true
 CMS_TWIG_CACHE=true
 ```
 
-Cache the configuration and route tables with these artisan commands:
+Закэшируйте конфигурацию и таблицу роутов с помощью этих команд:
 
 ```ini
 php artisan config:cache
 php artisan route:cache
 ```
 
-### Shared Hosting Security
+### Безопасность на Shared хостингах
 
-In shared hosting environments, extra steps must be done to protect your project files from other users that share the server with you.
+Используя Shared хостинги, необходимо выполнить несколько действий чтобы полностью защититься от пользователей, которые делят с вами хостинг.
 
 ::: warning
-Consult with your hosting provider for suitable permission masks. The general rule is that the application files must not be accessible by other users. All files must be accessible and manageable by the owner user and the web server. Configuration files must be accessible by the owner user and web server, but the web server must not be able to change them.
+Проконсультируйтесь с вашим хостинг-провайдером о подходящих масках разрешений. Общее правило заключается в том, что файлы приложения не должны быть доступны другим пользователям. Все файлы должны быть доступны и управляться пользователем-владельцем и веб-сервером. Файлы конфигурации должны быть доступны пользователю-владельцу и веб-серверу, но веб-сервер не должен иметь возможности изменять их.
 :::
 
-October CMS can automatically set permissions for new files and directories. The default permissions are managed with the `system.default_mask.file` and `system.default_mask.folder` configuration parameters. For example, if you are using the `.env` file to declare the environment variables:
+October CMS может автоматически устанавливать разрешения для новых файлов и каталогов. Разрешения по умолчанию управляются параметрами конфигурации `system.default_mask.file` и `system.default_mask.folder`. Пример, если вы используете файл `.env` для объявления переменных среды:
 
 ```ini
 DEFAULT_FILE_MASK=644
 DEFAULT_FOLDER_MASK=755
 ```
 
-## Server-specific Configuration
+## Конфигурация определенного сервера
 
-This section describes the configuration for various web servers.
+В этом разделе описывается конфигурация различных веб-серверов.
 
 ::: details Apache
-To run October CMS applications, the Apache server must have the following configuration:
+Для запуска приложений October CMS сервер Apache должен иметь следующую конфигурацию:
 
-* the [mod_rewrite module](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html) must be installed
-* the [AllowOverride directive](https://httpd.apache.org/docs/2.4/mod/core.html#AllowOverride) for the application directory must have the `All` value.
+* модуль [mod_rewrite](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html) должен быть установлен
+* директива [AllowOverride](https://httpd.apache.org/docs/2.4/mod/core.html#AllowOverride) для директории приложения должна быть установлена `All`.
 
-In some cases you may need to uncomment the [RewriteBase directive](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html#rewritebase) in the project’s `.htaccess` file:
+В некоторых случаях вам нужно раскомментировать директиву [RewriteBase](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html#rewritebase) внутри файла `.htaccess`:
 
 ```text
 # RewriteBase /
 ```
 
-If you have installed October CMS to a subdirectory, add its name to the directive value. In this way, you can have URLs like example.com/subdirectory/page.
+Если вы установили October CMS в субдиректорию, добавьте ее имя к значению директивы. Таким образом, вы можете иметь такие URL-адреса, как `example.com/subdirectory/page`.
 
 ```text
 # RewriteBase /subdirectory/
@@ -88,7 +88,7 @@ If you have installed October CMS to a subdirectory, add its name to the directi
 :::
 
 ::: details Nginx
-Use the following code in the server section of the Nginx site configuration. If you have installed October CMS into a subdirectory, replace the first `/` in location directives with the subdirectory name.
+Используйте следующий код в разделе сервера конфигурации сайта Nginx. Если вы установили October CMS в субдиректорию, замените первый `/` в директивах местоположения именем субдиректории.
 
 ```text
 location / {
@@ -147,7 +147,7 @@ location ~ ^/themes/.*/resources { try_files $uri 404; }
 :::
 
 ::: details Lighttpd
-Paste the following code in the Lighttpd sites configuration file and change the `host address` and `server.document-root` to match your project’s location.
+Вставьте следующий код в файл конфигурации сайтов Lighttpd и измените `host address` и `server.document-root`, чтобы они соответствовали местоположению вашего проекта.
 
 ```text
 $HTTP["host"] =~ "domain.example.com" {
@@ -168,7 +168,7 @@ $HTTP["host"] =~ "domain.example.com" {
 :::
 
 :::details Microsoft IIS
-Use the following configuration in the `web.config` file to run October CMS on IIS:
+Используйте следующую конфигурацию в файле `web.config` для запуска October CMS на IIS:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
