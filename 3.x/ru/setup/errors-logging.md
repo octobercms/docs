@@ -1,22 +1,22 @@
 ---
-subtitle: Find errors and other log messages about your website.
+subtitle: Найдите ошибки и другие сообщения журнала вашего веб-сайта.
 ---
-# Errors & Logging
+# Ошибки и журналирование
 
-When you first start using October CMS, error and exception handling is already configured for you. There are two ways the event log can be accessed:
+Когда вы впервые начинаете использовать October CMS, для вас уже настроена обработка ошибок и исключений. Доступ к журналу событий можно получить двумя способами:
 
-1. The event log can be viewed in the file system by opening the file `storage/logs/system.log`.
-1. Alternatively it can be viewed via the backend panel by navigating to **Settings → Event Log**.
+1. Журнал событий можно просмотреть в файловой системе, открыв файл `storage/logs/system.log`.
+1. Кроме того, его можно просмотреть через внутреннюю панель, открыв **Настройки → Журнал событий**.
 
-Log entries are always created when an error page is shown and for certain [exception types](../extend/system/exceptions.md).
+Записи журнала всегда создаются при отображении страницы с ошибкой и для определенных [исключений](../extend/system/exceptions.md).
 
-## Configuration
+## Конфигурация
 
-#### Error Detail
+#### Детализация ошибок
 
-The amount of error detail your application displays through the browser is controlled by the `debug` configuration option in your `config/app.php` configuration file. By default detailed error reporting is turned *on* so it is helpful to see detailed error information which can be useful for debugging and troubleshooting issues. When this feature is turned off, when there is a problem in a page, a generic error message will be displayed.
+Количество сведений об ошибках, отображаемых вашим приложением в браузере, контролируется параметром `debug` в конфигурационном файле `config/app.php`. По умолчанию подробные отчеты об ошибках *включены*, это полезно для отладки и устранения неполадок. Когда эта функция отключена, при возникновении проблемы на странице будет отображаться общее сообщение об ошибке.
 
-For local development, you should set the `debug` value to `true`. In your production environment, this value should always be `false`.
+Для локальной разработки вы должны установить значение `debug` в `true`. В вашем боевом окружении это значение всегда должно быть `false`.
 
 ```php
 /*
@@ -33,17 +33,17 @@ For local development, you should set the `debug` value to `true`. In your produ
 'debug' => false,
 ```
 
-#### Log File Modes
+#### Режимы файла журнала
 
-October CMS supports various drivers, including `single`, `daily`, `syslog` and `errorlog` logging modes. For example, if you wish to use daily log files instead of a single file, you should simply set the `default` value in your `config/logging.php` configuration file:
+October CMS поддерживает различные драйверы, такие как: `single`, `daily`, `syslog` и `errorlog`. Например, если вы хотите использовать файлы ежедневного журнала вместо одного файла, вы должны просто установить значение `default` в вашем файле конфигурации `config/logging.php`:
 
 ```php
 'default' => env('LOG_CHANNEL', 'daily'),
 ```
 
 
-#### See Also
+#### Смотрите также
 
 ::: also
-* [Laravel Logging Documentation](https://laravel.com/docs/9.x/logging)
+* [Документация Laravel об ошибках и журналировании](https://laravel.com/docs/9.x/logging)
 :::
