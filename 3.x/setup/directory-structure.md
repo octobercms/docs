@@ -38,8 +38,7 @@ The `storage` directory contains log files, cache files, sessions and other file
 The `modules` directory contains the core packages of October CMS, providing core functionality that is common across the system. By default, modules are loaded automatically based on their presence in the file system. However, it is possible to specify which modules to load with the `system.load_modules` configuration parameter. The `system` module must be loaded at a minimum for the application to operate.
 
 * `system` - defines the core functionality of October CMS and is a required module.
-* `cms` - introduces functionality for rendering the frontend website theme. It is responsible for routing requests to pages, rendering
-* `pages` and handling AJAX requests.
+* `cms` - introduces functionality for rendering the frontend website theme. It is responsible for routing requests to pages, rendering pages and handling AJAX requests.
 * `backend` - responsible for displaying the backend panel pages.
 * `editor` - introduces a user interface for editing CMS templates in the backend panel.
 * `media` - introduces a media file management user interface in the backend panel. It allows back-end users to upload media files like images or video files and include them in other places, for example, blog posts.
