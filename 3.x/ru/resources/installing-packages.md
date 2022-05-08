@@ -1,185 +1,185 @@
 ---
-subtitle: Learn how to install and manage plugins and themes.
+subtitle: Узнайте, как устанавливать плагины и шаблоны и управлять ими.
 ---
-# Installing Plugins & Themes
+# Установка плагинов и шаблонов
 
-## Project Management
+## Управление проектом
 
-October CMS includes these commands for managing your project.
+October CMS включает эти команды для управления вашим проектом.
 
-### Synchronize Project
+### Синхронизация проекта
 
-`project:sync` installs all plugins and themes belonging to a project.
+`project:sync` устанавливает все плагины и темы, принадлежащие проекту.
 
 ```bash
 php artisan project:sync
 ```
 
 <a id="oc-set-project"></a>
-### Set Project
+### Установить проект
 
-`project:set` sets the license key for the current installation.
+`project:set` устанавливает лицензионный ключ для установленного October CMS.
 
 ```bash
 php artisan project:set <license key>
 ```
 
-## Plugin Management
+## Управление плагинами
 
-October CMS includes a number of commands for managing plugins.
+October CMS включает ряд команд для управления плагинами.
 
 ### Install Plugin
 
-`plugin:install` - downloads and installs the plugin by its name. The next example will install a plugin called **AuthorName.PluginName**.
+`plugin:install` - загружает и устанавливает плагин по его имени. В следующем примере будет установлен плагин с именем **AuthorName.PluginName**.
 
 ```bash
 php artisan plugin:install AuthorName.PluginName
 ```
 
-You may install a plugin from a remote source using the `--from` option.
+Вы можете установить плагин из удаленного источника, используя опцию `--from`.
 
 ```bash
 php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git
 ```
 
-Use the `--want` option to specify a target branch or version.
+Используйте параметр `--want`, чтобы выбрать определенную ветку или версию.
 
 ```bash
 php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git --want=dev-develop
 ```
 
-Use the `--oc` option if your package name has the `oc` prefix.
+Используйте параметр `--oc`, если имя вашего пакета имеет префикс `oc`.
 
 ```bash
 php artisan plugin:install AuthorName.PluginName --from=git@github.com:authorname/pluginname-plugin.git --oc
 ```
 
-### Check Dependencies
+### Проверка зависимостей
 
-`plugin:check` - performs a system wide check of installed plugin dependencies. This command will spin over every theme and plugin that is currently installed and check to see if its dependencies are also installed. If it finds any missing requirements, it will attempt to install them.
+`plugin:check` - выполняет общесистемную проверку зависимостей установленных плагинов. Эта команда проверяет каждую тему и плагин, которые установлены в системе, и наличие их зависимостей. Если он обнаружит какие-либо отсутствующие зависимости, он попытается их установить.
 
 ```bash
 php artisan plugin:check
 ```
 
 <a id="oc-refresh-plugin"></a>
-### Refresh Plugin
+### Перезагрузить плагин
 
-`plugin:refresh` - destroys the plugin's database tables and recreates them. This command is useful for development.
+`plugin:refresh` - уничтожает таблицы базы данных плагина и создает их заново. Эта команда полезна для разработки.
 
 ```bash
 php artisan plugin:refresh AuthorName.PluginName
 ```
 
-Use the `--rollback` option to only destroy the database tables without recreating them.
+Используйте параметр `--rollback`, чтобы только уничтожить таблицы базы данных, не создавая их заново.
 
 ```bash
 php artisan plugin:refresh AuthorName.PluginName --rollback
 ```
 
-You may also specify a version number with the `--rollback` option to stop at a specified version.
+Так-же в параметр `--rollback` можно указать версию, чтобы выполнить сброс только до нее.
 
 ```bash
 php artisan plugin:refresh AuthorName.PluginName --rollback=1.0.3
 ```
 
-### List Plugins
+### Список плагинов
 
-`plugin:list` - Displays a list of installed plugins and their version numbers.
+`plugin:list` - Отображает список установленных плагинов и их версии.
 
 ```bash
 php artisan plugin:list
 ```
 
-### Disable Plugin
+### Отключить плагин
 
-`plugin:disable` - Disable an existing plugin.
+`plugin:disable` - Отключает установленный плагин.
 
 ```bash
 php artisan plugin:disable AuthorName.PluginName
 ```
 
-### Enable Plugin
+### Включить плагин
 
-`plugin:enable` - Enable a disabled plugin.
+`plugin:enable` - Включает установленный плагин.
 
 ```bash
 php artisan plugin:enable AuthorName.PluginName
 ```
 
-### Remove Plugin
+### Удалить плагин
 
-`plugin:remove` - destroys the plugin's database tables and deletes the plugin files from the filesystem.
+`plugin:remove` - уничтожает таблицы базы данных плагина и удаляет его файлы из файловой системы.
 
 ```bash
 php artisan plugin:remove AuthorName.PluginName
 ```
 
-## Theme Management
+## Управление шаблонами
 
-October includes a number of commands for managing themes.
+October включает ряд команд для управления шаблонами.
 
-### Install Theme
+### Установка шаблона
 
-`theme:install` - download and install a theme from the [Marketplace](https://octobercms.com/themes/). The following example will install the theme in `/themes/authorname-themename`
+`theme:install` - загружает и устанавливает шаблон из [маркетплейса](https://octobercms.com/themes/). В следующем примере шаблон будет установлен в `/themes/authorname-themename`
 
 ```bash
 php artisan theme:install AuthorName.ThemeName
 ```
 
-You may install a theme from a remote source using the `--from` option.
+Вы можете установить шаблон из иного источника, используя параметр `--from`.
 
 ```bash
 php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/themename-theme.git
 ```
 
-Use the `--want` option to specify a target branch or version.
+Используйте параметр `--want`, чтобы выбрать определенную ветку или версию.
 
 ```bash
 php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/themename-theme.git --want=dev-develop
 ```
 
-Use the `--oc` option if your package name has the `oc` prefix.
+Используйте параметр `--oc`, если имя вашего пакета имеет префикс `oc`.
 
 ```bash
 php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/oc-themename-theme.git --oc
 ```
 
-### Check Protected
+### Проверить шаблоны на защищенность
 
-`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes/child-themes.md) is added and a child theme is created.
+`theme:check` - выполняет общесистемную проверку шаблонов, чтобы определить, должны ли они быть помечены как доступные только для чтения и защищенные от изменений. Эта команда проверяет каждый шаблон, была ли она установлена через Composer, если да, то будет добавлен [файл блокировки темы](../cms/themes/child-themes.md) и создана дочерняя тема.
 
 ```bash
 php artisan theme:check
 ```
 
-### List Themes
+### Список шаблонов
 
-`theme:list` - list installed themes.
+`theme:list` - список установленных шаблонов.
 
 ```bash
 php artisan theme:list
 ```
 
-### Enable Theme
+### Использовать шаблон
 
-`theme:use` - switch the active theme. The following example will switch to the theme in `/themes/rainlab-vanilla`
+`theme:use` - переключиться на активный шаблон. В следующем примере будет переключено на шаблон `/themes/rainlab-vanilla`
 
 ```bash
 php artisan theme:use rainlab-vanilla
 ```
 
-### Remove Theme
+### Удалить шаблон
 
-`theme:remove` - delete a theme. The following example will delete the directory `/themes/rainlab-vanilla`
+`theme:remove` - удаляет шаблон. В следующем примере будет удалена директория `/themes/rainlab-vanilla`
 
 ```bash
 php artisan theme:remove rainlab-vanilla
 ```
 
-### Copy Theme
+### Скопировать шаблон
 
-`theme:copy` - duplicates an existing theme to create a new one, including the creation of child themes.
+`theme:copy` - копирует установленный шаблон и создает новый, включая все дочерние шаблоны.
 
 ```bash
 php artisan theme:copy <source-theme> [destination-theme]
