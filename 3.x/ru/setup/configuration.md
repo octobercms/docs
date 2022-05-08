@@ -1,5 +1,5 @@
 ---
-subtitle: Learn how to configure and fine-tune October CMS.
+subtitle: Узнайте как сконфигурировать и тонко настроить October CMS.
 ---
 # Общая конфигурация
 
