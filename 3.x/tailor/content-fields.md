@@ -77,7 +77,6 @@ Property | Description
 **maxItems** | limits the number of entries that can be selected.
 **displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`. Default: `relation`.
 
-
 To limit the number of selectable items, use the `maxItems` property.
 
 ```yaml
