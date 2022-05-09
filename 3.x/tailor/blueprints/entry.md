@@ -107,7 +107,7 @@ All entries optionally support the ability to define multiple content groups for
 
 ```yaml
 handle: Blog\Post
-type: feed
+type: stream
 name: Blog Post
 
 groups:
