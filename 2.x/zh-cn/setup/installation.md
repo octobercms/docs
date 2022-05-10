@@ -26,13 +26,13 @@ October CMS 使用[Composer](http://getcomposer.org/) 来管理它的依赖。�
 然后，您可以在终端中使用命令`create-project`创建一个新的 October CMS 项目。下面在名为**myoctober**的目录中创建一个新项目。
 
 ```bash
-composer create-project october/october myoctober
+composer create-project october/october myoctober "^2.0"
 ```
 
 您也可以使用此命令安装到当前目录。
 
 ```bash
-composer create-project october/october .
+composer create-project october/october . "^2.0"
 ```
 
 任务完成后，运行安装命令以指导您完成后续步骤。
