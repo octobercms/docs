@@ -1,87 +1,87 @@
 ---
-subtitle: Interact with handlers using HTML attributes.
+subtitle: Взаимодействуйте с обработчиками, используя атрибуты HTML.
 ---
-# Data Attributes API
+# Атрибуты API Data
 
-The data attributes API lets you issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
+Data атрибуты позволяют вам вызывать AJAX запрос без написания JavaScript кода. В большинстве случаев data атрибуты намного компактнее чем JavaScript код - вы пишите меньше кода, но получаете одинаковый результат. Список поддерживаемых data атрибутов:
 
-data-request Attribute | Description
+data-request атрибут | Описание
 ------------- | -------------
-**data-request** | specifies the AJAX handler name.
-**data-request-confirm** | specifies a confirmation message. The confirmation is displayed before the request is sent. If the user clicks the Cancel button the request isn't sent.
-**data-request-redirect** | specifies a URL to redirect the browser after the successful AJAX request.
-**data-request-url** | specifies a URL to which the request is sent. default: `window.location.href`
-**data-request-update** | specifies a list of partials and page elements (CSS selectors) to update. The format is as follows: `partial: selector, partial: selector`. Usage of quotes is required in some cases, for example: `'my-partial': '#myelement'`. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content. If the selector string is prepended with the `^` symbol, the content will be prepended instead.
-**data-request-ajax-global** | false by default. Set true to enable [jQuery ajax events](http://api.jquery.com/category/ajax/global-ajax-event-handlers/) globally : `ajaxStart`, `ajaxStop`, `ajaxComplete`, `ajaxError`, `ajaxSuccess` and `ajaxSend`.
-**data-request-data** | specifies additional POST parameters to be sent to the server. The format is following: `var: value, var: value`. Use quotes if needed: `var: 'some string'`. The attribute can be used on the triggering element, for example on the button that also has the `data-request` attribute, on the closest element of the triggering element and on the parent form element. The framework merges values of the `data-request-data` attributes. If the attribute on different elements defines parameters with the same name, the framework uses the following priority: the triggering element `data-request-data`, the closer parent elements `data-request-data`, the form input data.
-**data-request-before-update** | specifies JavaScript code to execute directly before the page contents are updated.
-**data-request-success** | specifies JavaScript code to execute after the request is successfully completed.
-**data-request-error** | specifies JavaScript code to execute if the request encounters an error.
-**data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error.
-**data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show the AJAX loading indicator. The feature uses jQuery's `show()` and `hide()` functions to manage the element visibility.
-**data-request-form** | explicitly specify a form element to use for sourcing the form data. If this is unspecified, the closest form to the triggering element is used, including if the element itself is a form.
-**data-request-flash** | when specified this option instructs the server to clear and send any flash messages with the response. This option is also used by the [extra features](./extras.md).
-**data-request-files** | when specified the request will accept file uploads, this requires `FormData` interface support by the browser.
-**data-browser-validate** | when specified browser-based client side validation will run on the request before it submits.
-**data-track-input** | can be applied to a text, number, or password input field that also has the `data-request` attribute. When defined, the input field automatically sends an AJAX request when a user types something in the field. The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the requests.
+**data-request** | Имя AJAX обработчика.
+**data-request-confirm** | Сообщение для подтверждения. Сообщение с подтверждением появляется перед запросом. Если пользователь нажал "отменить", запрос не будет отправлен.
+**data-request-redirect** | URL на который браузер выполнит редирект после успешного запроса.
+**data-request-url** | URL на который будет отправлен запрос. по умолчанию: `window.location.href`
+**data-request-update** | Список фрагментов и элементов страницы (CSS селекторы) для обновления. Формат: `partial: selector, partial: selector`. Использование кавычек обязательно в некоторых случаях, пример: `'my-partial': '#myelement'`. Если селектор имеет в начале строки символ `@`, контент полученный от сервера будет добавлен в конец элемента, вместо его замены. Если селектор имеет в начале строки символ `^`, контент полученный от сервера будет добавлен в начало элемента, вместо его замены
+**data-request-ajax-global** | `false` по умолчанию. `true` для включения [jQuery ajax событий](http://api.jquery.com/category/ajax/global-ajax-event-handlers/) глобально : `ajaxStart`, `ajaxStop`, `ajaxComplete`, `ajaxError`, `ajaxSuccess` и `ajaxSend`.
+**data-request-data** | Дополнительные `POST` данные для отправки на сервер. Формат: `var: value, var: value`. Можно использовать кавычки: `var: 'some string'`. Этот атрибут может быть указан в элементе, который вызвал событие, например, кнопка которая имеет `data-request` атрибут, на ближайшем элементе от элемента вызывавшего событие и на родительской форме. Фреймворк автоматически объединяет данные `data-request-data` атрибутов. Если разные элементы передают одинаковые параметры, фреймворк будет объеденять по следующим приоритетам: элемент вызвавший событие `data-request-data`, ближайший элемент `data-request-data`, и данные формы.
+**data-request-before-update** | JavaScript код, который должен быть исполнен прямо перед тем как содержимое страницы обновится.
+**data-request-success** | JavaScript код, который должен быть исполнен после того как запрос успешно выполнен.
+**data-request-error** | JavaScript код, который должен быть исполнен после того как запрос вернулся с ошибкой.
+**data-request-complete** | JavaScript код, который должен быть исполнен после того как запрос успешно выполнен или вернулся с ошибкой.
+**data-request-loading** | CSS селектор элемента, который должен быть отображен пока запрос выполняется. Вы можете использовать эту опцию чтобы показать элемент загрузки. Использует функции jQuery `show()` и `hide()` для взаимодействия с элементом загрузки.
+**data-request-form** |  CSS селектор формы, из которой надо брать данные для запроса. Если не указано, фреймворк сам заберет данные из ближайшей формы или если элемент вызывающий запрос находится внутри формы, соберет данные из нее.
+**data-request-flash** | Когда указан, передает инструкции серверу чтобы очистить и передать любые Flash сообщения с ответом на запрос. Эта опция так же используется [дополнительными возможностями](./extras.md).
+**data-request-files** | Когда указан, фреймворк прикрепит файлы к запросу, интерфейс `FormData` должен поддерживаться браузером.
+**data-browser-validate** | Когда указан, будет выполнена валидация внутри браузера на стороне клиента перед отправкой запроса.
+**data-track-input** | Может быть использован для элемента `text`, `number`, или `password`, у которых указан `data-request` атрибут. Когда включено, поле автоматически будет отправлять запросы когда пользователь взаимодействует с полем (пишет, меняет значения). Чтобы указать интервал отправки данных, можно указать значение атрибута в миллисекундах, чтобы фреймворк ждал между запросами определенное время.
 
-When the `data-request` attribute is specified for an element, the element triggers an AJAX request when a user interacts with it. Depending on the type of element, the request is triggered on the following events:
+Когда атрибут `data-request` указан, элемент вызывает AJAX запрос когда пользователь взаимодействует с ним. В зависимости от поля, запрос вызывается следующими событиями:
 
-Element | Event
+Элемент | Событие
 ------------- | -------------
-**Forms** | when the form is submitted.
-**Links, buttons** | when the element is clicked.
-**Text, number, and password fields** | when the text is changed and only if the `data-track-input` attribute is presented.
-**Dropdowns, checkboxes, radios** | when the element is selected.
+**Формы** | Когда форма отправлена.
+**Ссылки, кнопки** | Когда на элемент кликнули.
+**Текст, число, и пароль** | Когда содержимое полей изменено (`change`), или если указан `data-track-input` сразу при вводе данных пользователем (`input`).
+**Выпадающие списки, чекбоксы, радиокнопки** | Когда элемент выбран (`change`).
 
-## Usage Examples
+## Примеры использования
 
-Trigger the `onCalculate` handler when the form is submitted. Update the element with the identifier "result"` with the **calcresult** partial.
+Задача: Вызов обработчика `onCalculate` при отправке формы. После выполнения обработчика необходимо обновить элемент с ID `result` содержимым фрагмента **calcresult**.
 
 ```html
 <form data-request="onCalculate" data-request-update="calcresult: '#result'">
 ```
 
-Request a confirmation when the Delete button is clicked before the request is sent.
+Задача: Запросить подтверждение действия при нажатии на кнопку "Удалить" перед отправкой формы.
 
 ```html
 <form ... >
     ...
-    <button data-request="onDelete" data-request-confirm="Are you sure?">Delete</button>
+    <button data-request="onDelete" data-request-confirm="Are you sure?">Удалить</button>
 ```
 
-Redirect to another page after the successful request.
+Задача: Редирект на другую страницу после успешно выполненного запроса.
 
 ```html
 <form data-request="onLogin" data-request-redirect="/admin">
 ```
 
-Show a popup window after the successful request.
+Задача: Показать всплывающее окно после успешно выполненного запроса.
 
 ```html
-<form data-request="onLogin" data-request-success="alert('Yay!')">
+<form data-request="onLogin" data-request-success="alert('Ура!')">
 ```
 
-Send a POST parameter `mode` with a value `update`.
+Задача: Отправить POST параметр `mode` со значением `update`.
 
 ```html
 <form data-request="onUpdate" data-request-data="mode: 'update'">
 ```
 
-Send a POST parameter `id` with value `7` across multiple elements.
+Задача: Прикрепить один POST параметр `id` со значением `7` сразу к нескольким элементам.
 
 ```html
 <div data-request-data="id: 7">
-    <button data-request="onDelete">Delete</button>
-    <button data-request="onSave">Update</button>
+    <button data-request="onDelete">Удалить</button>
+    <button data-request="onSave">Обновить</button>
 </div>
 ```
 
-Including [file uploads](../../extend/services/request-input.md) with a request.
+Задача: Прикрепить [загружаемые файлы](../../extend/services/request-input.md) с запросом.
 
 ```html
 <form data-request="onSubmit" data-request-files>
     <input type="file" name="photo" accept="image/*" />
-    <button type="submit">Submit</button>
+    <button type="submit">Отправить</button>
 </form>
 ```
