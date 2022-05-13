@@ -55,7 +55,7 @@ October CMS 使用 [Composer](https://getcomposer.org/) 发布包并且完全兼
 
 ```json
 "require": {
-    "october/system": "^2.1"
+    "october/system": ">=2.1"
 }
 ```
 
