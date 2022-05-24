@@ -52,6 +52,18 @@ $user = BackendAuth::authenticate([
 BackendAuth::login($user);
 ```
 
+## Groups
+
+Groups (`Backend\Models\UserGroup`) are an organizational tool for grouping administrators, they are not related to [user permissions](./permissions.md) and are strictly for organizational purposes, such as notifications.
+
+For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you could find the user group along with the users in that group.
+
+```php
+$staff = UserGroup::where('code', 'head-office-staff')->get()->users;
+
+Mail::sendTo($staff, 'author.plugin::mail.important_notification');
+```
+
 ## Change Backend User Password
 
 The `october:passwd` command allows the password of a backend administrator to be changed via the command line. This is useful if you are locked out of your October CMS install, or for changing the password for the default administrator account.

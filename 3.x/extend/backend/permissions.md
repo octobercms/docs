@@ -42,18 +42,6 @@ October CMS ships with two system roles by default, `developer` and `publisher`.
 System roles cannot have their permissions changed through the backend panel, however, they can be deleted if not required.
 :::
 
-### Groups
-
-Groups (`Backend\Models\UserGroup`) are an organizational tool for grouping administrators, they have nothing to do with permissions and are strictly for organizational purposes, such as notifications.
-
-For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you would simply do
-
-```php
-$staff = UserGroup::where('code', 'head-office-staff')->get()->users;
-
-Mail::sendTo($staff, 'author.plugin::mail.important_notification');
-```
-
 ## Registering Permissions
 
 Plugins can register backend user permissions by overriding the `registerPermissions` method inside the [plugin registration file](../extending.md). The permissions are defined as an array with keys corresponding the permission keys and values corresponding the permission descriptions. The permission keys consist of the author name, the plugin name and the feature name. Here is an example code.

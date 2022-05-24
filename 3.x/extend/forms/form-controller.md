@@ -64,7 +64,7 @@ Property | Description
 **update** | a configuration array or reference to a config file for the Update page.
 **preview** | a configuration array or reference to a config file for the Preview page.
 **customMessages** | customize the messages used in the Form Controllers.
-**permissions** | apply restrictions to actions provided by the Form Controller.
+**permissions** | apply restrictions to certain actions provided by the Form Controller.
 
 ### Create Page
 
