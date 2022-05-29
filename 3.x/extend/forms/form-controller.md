@@ -63,6 +63,8 @@ Property | Description
 **create** | a configuration array or reference to a config file for the Create page.
 **update** | a configuration array or reference to a config file for the Update page.
 **preview** | a configuration array or reference to a config file for the Preview page.
+**customMessages** | customize the messages used in the Form Controllers.
+**permissions** | apply restrictions to certain actions provided by the Form Controller.
 
 ### Create Page
 
@@ -148,6 +150,27 @@ Message | Default Message
 **flashCreate** | :name Created
 **flashUpdate** | :name Updated
 **flashDelete** | :name Deleted
+:::
+
+### Restricting with Permissions
+
+Specify the `permissions` property to apply restrictions to actions provided by the Form Controller. Use [permission values](../backend/permissions.md) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+
+```yaml
+permissions:
+    modelCreate: admins.manage.create
+    modelDelete: admins.manage.delete
+```
+
+The following properties are available to override as required permissions.
+
+::: details View the list of available messages
+Message | Default Message
+------------- | -------------
+**modelCreate** | required to create new records.
+**modelUpdate** | required to modify existing records.
+**modelPreview** | required to preview existing records.
+**modelDelete** | required to delete existing records.
 :::
 
 ## Defining Form Fields

@@ -3,25 +3,15 @@ subtitle: Learn how to control permissions in the backend panel.
 ---
 # Permissions
 
-## Access Levels
+Permissions allow users to have specific privileges and functions in the backend panel. An example might be the ability to create or delete a record, or view the server logs. These permissions are based on the role assigned and can be granted on a per-user basis.
 
-Access to all parts of an October CMS instance is controlled by the permissions system. At the lowest level, there are super users, administrators and permissions. The `Backend\Models\User` models are the containers that hold all the important information about a user.
+## Permission Codes
 
-### Super Users
+Permissions codes define a single permission and are string keys that use a "dot" notation, for example, `some.area.permission_name`. These permissions are granted to users by either direct assignment or by inheritance through their role.
 
-Super users have access to everything in the system and are only manageable by themselves or other super users; they are not visible to nor editable by regular administrators, not even if an administrator has the `backend.manage_users` permission.
+When checking if a user has a specific permission, the permission for that user's role are inherited and then overridden by any permissions applied directly to that user. For example:
 
-::: tip
-Any user with the `manage_users` permissions can manage the assignment of roles, but only to other users (not to themselves), and roles can only be created or modified by a super user.
-:::
-
-### Administrators
-
-Permissions are string keys in the form of `author.plugin.permission_name` that are granted to users by either direct assignment on their Edit Administrator page or by inheritance through the user's Role.
-
-When checking if a user has a specific permission, the permission settings for that user's role are inherited and then overridden by any permissions applied directly to that user. For example:
-
-- If user **Bob** has role **Genius**; and
+- If user **Bob** has role called **Genius**; and
 - Role **Genius** has the `eat_cake` permission; but
 - **Bob** has the `eat_cake` permission specifically set to deny; then
 - **Bob** will not get to `eat_cake`.
@@ -32,27 +22,57 @@ However:
 - The **Genius** role does not, then;
 - **Bob** still gets to `eat_vegetables`.
 
-### Roles
+### Nested Permissions
 
-Roles (`Backend\Models\UserRole`) are groupings of permissions with a name and description used to identify the role. An administrator can only have one role assigned to them at once.
+Permission codes support a nested structure to provide a cleaner interface when selecting permissions. To nest a permission code the "dot" value must be a direct descendant of its parent and unlimited nesting is supported.
 
-October CMS ships with two system roles by default, `developer` and `publisher`. Any number of custom roles with their own combinations of permissions can be created and applied to users.
+In the following example, the `manage_entries` permission must be granted for the `manage_entries.create` and `manage_entries.publish` codes to become available. Visually it is represented like this:
 
-::: tip
-System roles cannot have their permissions changed through the backend panel, however, they can be deleted if not required.
+::: dir
+├── manage_entries
+|   ├── manage_entries.create
+|   └── manage_entries.publish
+└── delete_entries
 :::
 
-### Groups
+## Access Levels
 
-Groups (`Backend\Models\UserGroup`) are an organizational tool for grouping administrators, they have nothing to do with permissions and are strictly for organizational purposes, such as notifications.
-
-For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you would simply do
+Access to all parts of an October CMS instance is controlled by the permissions system. The `BackendAuth::userHasAccess` method is a quick way to check if the current user is logged in and has permission to a specific area.
 
 ```php
-$staff = UserGroup::where('code', 'head-office-staff')->get()->users;
-
-Mail::sendTo($staff, 'author.plugin::mail.important_notification');
+// Returns true if the user has permission
+$permissionGranted = BackendAuth::userHasAccess('utilities.logs');
 ```
+
+### Super Users
+
+Administrators can be granted a special flag called a "super user" that allows access to all areas. When granted, the permission system is bypassed with access to all areas. Super users are not visible to other regular administrators.
+
+::: warning
+Any super user can create and remove other super users, so it should only be granted to the highest level administrator or owner of the application.
+:::
+
+### Roles
+
+Roles use the `Backend\Models\UserRole` model and are groupings of permissions with a name and description used to identify the role. An administrator can only have one role assigned to them at once.
+
+October CMS ships with two default system roles called `developer` and `publisher`. Any number of custom roles with their own combinations of permissions can be created and applied to users.
+
+::: tip
+System roles cannot change their permissions however they can be deleted if not required.
+:::
+
+### Role Hierarchy
+
+Each role is assigned a ranked position in the backend panel, represented as the `sort_order` column in the database. This allows a basic organisational structure to be established where users can only manage roles lower than their own role.
+
+In the following example, the **Senior Editor** can manage all the users, outranking **Staff Writer** and **Fact Checker** roles. Whereas, the **Fact Checker** role cannot see users or manage permissions above them, in the **Staff Writer** and **Senior Editor** roles.
+
+- Senior Editor
+- Staff Writer
+- Fact Checker
+
+If the **Manage Admins → Manage Roles** permission is granted, users can manage their own users, permissions and roles existing below their current role.
 
 ## Registering Permissions
 
@@ -118,16 +138,16 @@ public $requiredPermissions = ['acme.blog.*'];
 
 ## Restricting Access to Features
 
-The backend user model has methods that allow determining whether the user has specific permissions. You can use this feature in order to limit the functionality of the backend user interface. The permission methods supported by the backend user are `hasAccess` and `hasPermission`. Both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.
+The backend user model has methods that allow determining whether the user has specific permissions. You can use this feature in order to limit the functionality of the backend user interface. The permission methods supported by the backend user are `userHasAccess` and `userHasPermission`. Both methods take two parameters: the permission key string (or an array of key strings) and an optional parameter indicating that all permissions listed with the first parameters are required.
 
-The `hasAccess` method returns **true** for any permission if the user is a super user. The `hasPermission` method is more strict, only returning true if the user actually has the specified permissions either in their account or through their role. Generally, `hasAccess` is the preferred method to use as it respects the absolute power of the super user. The following example shows how to use the methods in the controller code.
+The `userHasAccess` method returns **true** for any permission if the user is a super user. The `userHasPermission` method is more strict, only returning true if the user actually has the specified permissions either in their account or through their role. Generally, `userHasAccess` is the preferred method to use as it respects the absolute power of the super user. The following example shows how to use the methods in the controller code.
 
 ```php
-if ($this->user->hasAccess('acme.blog.*')) {
+if (BackendAuth::userHasAccess('acme.blog.*')) {
     // ...
 }
 
-if ($this->user->hasPermission([
+if (BackendAuth::userHasPermission([
     'acme.blog.access_posts',
     'acme.blog.access_categories'
 ])) {
@@ -138,10 +158,10 @@ if ($this->user->hasPermission([
 You can also use the methods in the backend views for hiding user interface elements. The next example demonstrates how you can hide a button on a [backend form](../forms/form-controller.md).
 
 ```php
-<?php if ($this->user->hasAccess('acme.blog.delete_categories')): ?>
+<?php if (BackendAuth::userHasAccess('acme.blog.delete_categories')): ?>
     <button
         type="button"
-        class="oc-icon-trash-o btn-icon danger pull-right"
+        class="oc-icon-trash-o btn-icon danger"
         data-request="onDelete"
         data-load-indicator="Deleting Category..."
         data-request-confirm="Do you really want to delete this category?">

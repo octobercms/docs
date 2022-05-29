@@ -98,20 +98,18 @@ Property | Description
 
 ### Format Options
 
-To override the default CSV format options add the following configuration to the YAML file:
+To override the default format options add the following configuration to the YAML file:
 
 ```yaml
 defaultFormatOptions:
-    delimiter: ';'
-    enclosure: '"'
-    escape: '\'
-    encoding: 'utf-8'
+    fileFormat: json
 ```
 
 The following configuration properties (all optional) are supported for the format options:
 
 Property | Description
 ------------- | -------------
+**fileFormat** | File format as either `json` or `csv`, default: `csv`.
 **delimiter** | Delimiter character.
 **enclosure** | Enclosure character.
 **escape** | Escape character.

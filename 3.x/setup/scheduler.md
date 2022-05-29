@@ -35,6 +35,24 @@ Alternatively, it is possible to run the queue as a daemon process with
 php artisan queue:work
 ```
 
+## Cron Without Command Line
+
+If the cron table is not made available by your web host, you can instead call a public URL every X number of minutes. For example, if a plugin requires that you run the following command every 15 minutes.
+
+```bash
+php artisan campaign:run
+```
+
+This requires some PHP coding as a solution, using the `Artisan` facade along with a [routes file](../extend/system/routing.md) to build an endpoint that calls this command. For example, a **routes.php** file may contain the following.
+
+```php
+Route::get('/campaign-run', function () {
+    return Artisan::call('campaign:run');
+});
+```
+
+When opening the URL `/campaign-run` the artisan command will be called.
+
 #### See Also
 
 ::: also

@@ -3,7 +3,7 @@ subtitle: Learn about user management in the backend panel.
 ---
 # Users
 
-The user management for the backend panel includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also [register permissions](./permissions.md) that control access to the features in the backend.
+The user management for the backend panel works with administrators where the `Backend\Models\User` model is the container that hold all the important information about a user. It includes features like roles, groups, permissions, password resets and sign-in throttling. Plugins can also [register permissions](./permissions.md) that control access to the features in the backend.
 
 ## Backend User Helper
 
@@ -28,9 +28,6 @@ $loggedIn = BackendAuth::check();
 
 // Returns the signed in user
 $user = BackendAuth::getUser();
-
-// Returns the signed in user from a controller
-$user = $this->user;
 ```
 
 You may look up a user by their login name using the `BackendAuth::findUserByLogin` method.
@@ -50,6 +47,18 @@ $user = BackendAuth::authenticate([
 
 // Sign in as a specific user
 BackendAuth::login($user);
+```
+
+## Groups
+
+User groups use the `Backend\Models\UserGroup` model and are an organizational tool for grouping administrators, they are not related to [user permissions](./permissions.md) and are strictly for organizational purposes, such as notifications.
+
+For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you could find the user group along with the users in that group.
+
+```php
+$staff = UserGroup::where('code', 'head-office-staff')->get()->users;
+
+Mail::sendTo($staff, 'author.plugin::mail.important_notification');
 ```
 
 ## Change Backend User Password
