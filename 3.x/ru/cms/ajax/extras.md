@@ -1,23 +1,23 @@
 ---
-subtitle: Learn more about the extras included with the AJAX framework.
+subtitle: Узнайте больше о дополнительных возможностях AJAX фреймворка.
 ---
-# Extra Features
+# Дополнительные возможности
 
-When using the AJAX framework, you have the option to specify the **extras** suffix which includes additional StyleSheet and JavaScript files. These features are useful when working with AJAX requests in front-end CMS pages.
+При использовании AJAX фреймворка у вас есть возможность указать суффикс **extras**, который подключит дополнительные файлы CSS и JS. Эти дополнительные функции полезны при работе с AJAX на фронтенде.
 
 ```twig
 {% framework extras %}
 ```
 
-## Loading Indicator
+## Индикатор загрузки
 
-The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to global events used by [the JavaScript AJAX framework](./javascript-api.md).
+Первая функция, на которую следует обратить внимание, — это индикатор загрузки, который отображается в верхней части страницы при выполнении AJAX запроса. Индикатор подключается к глобальным событиям, используемым [JavaScript фреймворком AJAX](./javascript-api.md).
 
-When an AJAX request starts the `ajaxPromise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajaxFail` and `ajaxDone` events are used to detect when the request finishes, where the indicator is hidden again.
+Когда запускается запрос AJAX, срабатывает событие ajaxPromise, которое отображает индикатор и переводит курсор мыши в состояние загрузки. События `ajaxFail` и `ajaxDone` используются для определения момента завершения запроса, когда индикатор снова скрывается.
 
-## Form Validation
+## Валидация форм
 
-You may specify the `data-request-validate` attribute on a form to enable validation features.
+Вы можете указать атрибут `data-request-validate` в форме, чтобы включить функции валидации.
 
 ```html
 <form
@@ -27,30 +27,30 @@ You may specify the `data-request-validate` attribute on a form to enable valida
 </form>
 ```
 
-### Throwing a Validation Error
+### Возвращение ошибки валидации
 
-In the server side AJAX handler you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid, where the first argument is an array. The array should use field names for the keys and the error messages for the values.
+В обработчике AJAX на стороне сервера вы можете сгенерировать [исключение валидации](../../extend/system/exceptions.md), используя класс `ValidationException`, чтобы определить поле с ошибкой, где первым аргументом является массив. Массив должен использовать имена полей для ключей и сообщения об ошибках для значений.
 
 ```php
 function onSubmit()
 {
-    throw new ValidationException(['name' => 'You must give a name!']);
+    throw new ValidationException(['name' => 'Вы должны указать имя!']);
 }
 ```
 
 ::: tip
-You can also pass an instance of the [validation service](../../extend/services/validation.md) as the first argument of the exception.
+Вы также можете передать экземпляр [службы валидации](../../extend/services/validation.md) в качестве первого аргумента исключения.
 :::
 
-### Displaying Error Messages
+### Отображение сообщения ошибок
 
-Inside the form, you may display the first error message by using the `data-validate-error` attribute on a container element. The content inside the container will be set to the error message and the element will be made visible.
+Внутри формы вы можете отобразить первое сообщение об ошибке, используя атрибут `data-validate-error` в элементе-контейнере. Содержимому внутри контейнера будет присвоено сообщение об ошибке, и элемент станет видимым.
 
 ```html
 <div data-validate-error></div>
 ```
 
-To display multiple error messages, include an element with the `data-message` attribute. In this example the paragraph tag will be duplicated and set with content for each message that exists.
+Чтобы отобразить несколько сообщений об ошибках, включите элемент с атрибутом `data-message`. В этом примере тег абзаца будет дублироваться и устанавливаться с содержимым для каждого существующего сообщения.
 
 ```html
 <div class="alert alert-danger" data-validate-error>
@@ -58,7 +58,7 @@ To display multiple error messages, include an element with the `data-message` a
 </div>
 ```
 
-To add custom classes on AJAX invalidation, hook into the `ajaxInvalidField` and `ajaxPromise` JS events.
+Чтобы добавить пользовательские css классы для AJAX ошибок, слушайте JS-события `ajaxInvalidField` и `ajaxPromise`.
 
 ```js
 $(window).on('ajaxInvalidField', function(event, fieldElement, fieldName, errorMsg, isFirst) {
@@ -70,34 +70,34 @@ $(document).on('ajaxPromise', '[data-request]', function() {
 });
 ```
 
-### Displaying Errors with Fields
+### Отображение ошибок у полей формы
 
-Alternatively, you can show validation messages for individual fields by defining an element that uses the `data-validate-for` attribute, passing the field name as the value.
+Вы можете отображать сообщения с ошибками валидации для отдельных полей, указав элемент, который использует атрибут `data-validate-for`, передав имя поля в качестве значения.
 
 ```html
-<!-- Input field -->
+<!-- Input поле -->
 <input name="phone" />
 
-<!-- Validation message for the field -->
+<!-- Сообщение с ошибкой для этого поля -->
 <div data-validate-for="phone"></div>
 ```
 
-If the element is left empty, it will be populated with the validation text from the server. Otherwise you can specify any text you like and it will be displayed instead.
+Если элемент оставить пустым, он будет заполнен сообщением с ошибкой с сервера. В противном случае вы можете указать любой текст, который вам нравится, и он будет отображаться вместо него.
 
 ```html
 <div data-validate-for="phone">
-    Oops.. phone number is invalid!
+    Ой.. Номер телефна не правильный!
 </div>
 ```
 
-## Loading Button
+## Кнопка с индикатором загрузки
 
-When any element contains the `data-attach-loading` attribute, the CSS class `oc-loading` will be added to it during the AJAX request. This class will spawn a loading spinner on button and anchor elements using the `:after` CSS selector.
+Когда какой-либо элемент содержит атрибут `data-attach-loading`, во время AJAX-запроса к нему будет добавлен класс CSS `oc-loading`. Этот класс создаст индикатор загрузки на кнопке и якорных элементах с помощью CSS-селектора `:after`.
 
 ```html
 <form data-request="onSubmit">
     <button data-attach-loading>
-        Submit
+        Отправить
     </button>
 </form>
 
@@ -105,13 +105,13 @@ When any element contains the `data-attach-loading` attribute, the CSS class `oc
     href="#"
     data-request="onDoSomething"
     data-attach-loading>
-    Do something
+    Сделай что-нибудь
 </a>
 ```
 
-## Flash Messages
+## Флэш-сообщения
 
-Specify the `data-request-flash` attribute on a form to enable the use of flash messages on successful AJAX requests.
+Укажите в форме атрибут `data-request-flash`, чтобы включить поддержку флэш-сообщений при успешных запросах AJAX.
 
 ```html
 <form
@@ -121,7 +121,7 @@ Specify the `data-request-flash` attribute on a form to enable the use of flash 
 </form>
 ```
 
-Combined with use of the `Flash` facade in the event handler, a flash message will appear after the request finishes.
+Используя фасад `Flash` в обработчике AJAX запроса, после завершения запроса появится мгновенное сообщение.
 
 ```php
 function onSuccess()
@@ -130,7 +130,7 @@ function onSuccess()
 }
 ```
 
-To remain consistent with AJAX based flash messages, you can render a [standard flash message](../../markup/tag/flash.md) when the page loads by placing this code in your page or layout.
+Альтернативно вы можете вывести [стандартное флэш сообщение](../../markup/tag/flash.md) при загрузке страницы, указав этот код в теле шаблона.
 
 ```twig
 {% flash %}
@@ -143,9 +143,9 @@ To remain consistent with AJAX based flash messages, you can render a [standard 
 {% endflash %}
 ```
 
-## Usage Example
+## Пример использования
 
-Below is a complete example of form validation. It calls the `onDoSomething` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
+Ниже приведен полный пример валидации формы. Он вызывает обработчик события `onDoSomething`, который триггерит кнопку выводя индикатор загрузки в нее, выполняет валидацию полей формы, а затем отображает успешное флэш-сообщение.
 
 ```html
 <form
@@ -164,7 +164,7 @@ Below is a complete example of form validation. It calls the `onDoSomething` eve
     </div>
 
     <button data-attach-loading>
-        Submit
+        Отправить
     </button>
 
     <div class="alert alert-danger" data-validate-error>
@@ -174,7 +174,7 @@ Below is a complete example of form validation. It calls the `onDoSomething` eve
 </form>
 ```
 
-The AJAX event handler looks at the POST data sent by the client and applies some rules to the validator. If the validation fails, a `ValidationException` is thrown, otherwise a `Flash::success` message is returned.
+AJAX обработчик просматривает данные POST, отправленные клиентом, и применяет некоторые правила к валидатору. Если валидация не пройдена, выдается исключение `ValidationException`, в противном случае возвращается сообщение `Flash::success`.
 
 ```php
 function onDoSomething()
@@ -192,6 +192,6 @@ function onDoSomething()
         throw new ValidationException($validation);
     }
 
-    Flash::success('Jobs done!');
+    Flash::success('Задача выполнена!');
 }
 ```
