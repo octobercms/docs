@@ -1,58 +1,58 @@
 ---
-subtitle: Interact with handlers using JavaScript code.
+subtitle: Взаимодействуйте с обработчиками с помощью JavaScript.
 ---
 # JavaScript API
 
-The JavaScript API is more powerful than the data attributes API. The `request` method can be used with any element that is inside a form, or on a form element. When the method is used with an element inside a form, it is forwarded to the form.
+API JavaScript более гибкий, чем API атрибутов данных. Метод `request` можно использовать с любым элементом внутри формы или с элементом формы. Когда метод используется с элементом внутри формы, он перенаправляется в форму.
 
-The `request` method has a single required argument - the AJAX handler name. Example:
+Метод `request` имеет единственный обязательный аргумент — имя обработчика AJAX. Пример:
 
 ```html
 <form onsubmit="$(this).request('onProcess'); return false;">
     ...
 ```
 
-The second argument of the `request` method is the options object. You can use any option and method compatible with the [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/). The following options are specific for the October CMS framework.
+Вторым аргументом метода `request` является объект параметров. Вы можете использовать любые параметры и методы, совместимые с [jQuery AJAX функциями] (http://api.jquery.com/jQuery.ajax/). Следующие параметры только для фреймворка October CMS.
 
-Option | Description
+Параметр | Описание
 ------------- | -------------
-**update** | an object, specifies a list partials and page elements (as CSS selectors) to update: `{'partial': '#select'}`. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
-**confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
-**data** | an optional object specifying data to be sent to the server along with the form data: {var: 'value'}. When `files` is true, you may also include files to be uploaded in this object by using [`Blob` objects](https://developer.mozilla.org/en-US/docs/Web/API/Blob). To specify the filename of any `Blob` objects, simply set the `filename` property on the `Blob` object. (Ex. `var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {'uploaded_file': blob};`)
-**redirect** | string specifying an URL to redirect the browser to after the successful request.
-**beforeUpdate** | a callback function to execute before page elements are updated. The function gets 3 parameters: the data object received from the server, text status string, and the jqXHR object. The `this` variable inside the function resolves to the request content - an object containing 2 properties: `handler` and `options` representing the original request() parameters.
-**afterUpdate** | a callback function identical to `beforeUpdate` except it executes after the page elements are updated.
-**success** | a callback function to execute in case of a successful request. If this option is supplied it overrides the default framework functionality: the elements are not updated, the `beforeUpdate` and `afterUpdate` callbacks are not triggered, the `ajaxUpdate` and `ajaxUpdateComplete` events are not triggered. The event handler gets 3 arguments: the data object received from the server, the text status string and the jqXHR object. However, you can still call the default framework functionality calling `this.success(...)` inside your function.
-**error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed. The handler gets 3 parameters: the jqXHR object, the text status string and the error object - see [jQuery AJAX function](http://api.jquery.com/jQuery.ajax/).
-**complete** | a callback function execute in case of a success or an error.
-**form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
-**flash** | when true, instructs the server to clear and send any flash messages with the response. default: false
-**files** | when true, the request will accept file uploads, this requires `FormData` interface support by the browser. default: false
-**browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
-**loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element, the object should support the `show()` and `hide()` functions to manage the visibility. You may pass the global object `$.oc.stripeLoadIndicator` when using the [framework extras](../ajax/extras.md).
+**update** | объект, указывает список фрагментов которые надо обновить: `{'partial': '#select'}`. Если перед строкой селектора стоит символ `@`, содержимое, полученное с сервера, будет добавлено к элементу вместо замены существующего содержимого.
+**confirm** | строка подтверждения. Если указано, перед отправкой запроса отображается подтверждение. Если пользователь нажимает кнопку «Отмена», запрос отменяется.
+**data** | необязательный объект, определяющий данные для отправки на сервер вместе с данными формы: {var: 'value'}. Если для `files` установлено значение true, вы также можете включить файлы для загрузки в этот объект с помощью [объектов `Blob`](https://developer.mozilla.org/en-US/docs/Web/API/Blob). Чтобы указать имя файла любого объекта `Blob`, просто установите свойство `filename` в объекте `Blob`. (Например, `var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {'uploaded_file': blob};`)
+**redirect** | строка, указывающая URL-адрес для перенаправления браузера после успешного запроса.
+**beforeUpdate** | колбэк, выполняемый перед обновлением элементов страницы. Функция получает 3 параметра: объект данных полученный от сервера, текстовую строку состояния и объект jqXHR. Переменная `this` внутри функции относится к содержимому запроса – объект, содержащий 2 свойства: `handler` и `options`, представляющие исходные параметры request().
+**afterUpdate** | колбэк идентичный `beforeUpdate`, кроме того что он выполняется после обновления содержимого страницы.
+**success** | колбэк функция, выполняемая в случае успешного запроса. Если указан этот параметр, он переопределяет стандартные методы фреймворка: элементы не обновляются, колбэки `beforeUpdate` и `afterUpdate` не запускаются, события `ajaxUpdate` и `ajaxUpdateComplete` не запускаются. Обработчик события получает 3 аргумента: объект данных полученный от сервера, текстовую строку состояния и объект jqXHR. Тем не менее, вы все равно можете вызвать стандартные функции фреймворка, вызвав `this.success(...)` внутри вашей функции.
+**error** | колбэк, выполняемый в случае ошибки. По умолчанию отображается предупреждающее сообщение. Если этот параметр переопределен, предупреждающее сообщение не будет отображаться. Обработчик получает 3 параметра: объект jqXHR, текстовую строку состояния и объект ошибки — см. [функция jQuery AJAX](http://api.jquery.com/jQuery.ajax/).
+**complete** | колбэк, вызываемый после `success` или `error`.
+**form** | элемент формы, используемый для получения данных формы, отправленных с запросом, либо переданный как строка селектора, либо как элемент формы.
+**flash** | когда true, указывает серверу очищать и отправлять любые флэш-сообщения с ответом. по умолчанию: false
+**files** | когда true, запрос будет принимать загрузку файлов, для этого требуется поддержка интерфейса `FormData` браузером. по умолчанию: false
+**browserValidate** | когда true, перед отправкой запроса будет выполняться валидация на стороне клиента в его браузере. Применяется только к запросам, инициированным в контексте элемента `<form>`.
+**loading** | необязательная строка или объект, который будет отображаться при выполнении запроса. Строка должна быть селектором CSS для элемента, объект должен поддерживать функции `show()` и `hide()` для управления отображением. Вы можете передать глобальный объект `$.oc.stripeLoadIndicator` при использовании [дополнительных возможностях фреймворка](../ajax/extras.md).
 
-You may also override some of the request logic by passing new functions as options. These logic handlers are available.
+Вы также можете переопределить часть логики запроса, передав новые функции в качестве параметров. Доступны следующие логические обработчики.
 
-Handler | Description
+Обработчик | Описание
 ------------- | -------------
-**handleConfirmMessage(message)** | called when requesting confirmation from the user.
-**handleErrorMessage(message)** | called when an error message should be displayed.
-**handleValidationMessage(message, fields)** | focuses the first invalid field when validation is used.
-**handleFlashMessage(message, type)** | called when a flash message is provided using the **flash** option (see above).
-**handleRedirectResponse(url)** | called when the browser should redirect to another location.
+**handleConfirmMessage(message)** | вызывается при запросе подтверждения от пользователя.
+**handleErrorMessage(message)** | вызывается, когда должно отображаться сообщение об ошибке.
+**handleValidationMessage(message, fields)** | фокусирует первое недопустимое поле при использовании валидации.
+**handleFlashMessage(message, type)** | вызывается, когда передается флэш-сообщение с использованием опции **flash** (см. выше).
+**handleRedirectResponse(url)** | вызывается, когда браузер должен совершить редирект.
 
-## Usage Examples
+## Примеры использования
 
-Request a confirmation before the `onDelete` request is sent.
+Запросить подтверждение перед отправкой запроса в хандлер `onDelete`.
 
 ```js
 $('form').request('onDelete', {
-    confirm: 'Are you sure?',
+    confirm: 'Вы уверены?',
     redirect: '/dashboard'
 })
 ```
 
-Run `onCalculate` handler and inject the rendered **calcresult** partial into the page element with the **result** CSS class.
+Запустить `onCalculate` обработчик и вставить содержимое фрагмента **calcresult** в элементы страницы с классом **result**.
 
 ```js
 $('form').request('onCalculate', {
@@ -60,22 +60,22 @@ $('form').request('onCalculate', {
 })
 ```
 
-Run `onCalculate` handler with some extra data.
+Запустить `onCalculate` обработчик с дополнительными данными.
 
 ```js
 $('form').request('onCalculate', {data: {value: 55}})
 ```
 
-Run `onCalculate` handler and run some custom code before the page elements update.
+Запустить `onCalculate` обработчик и запустить кастомный код перед обновление содержимого страницы.
 
 ```js
 $('form').request('onCalculate', {
     update: {calcresult: '.result'},
-    beforeUpdate: function() { /* do something */ }
+    beforeUpdate: function() { /* сделай что-нибудь */ }
 })
 ```
 
-Run `onCalculate` handler and if successful, run some custom code and the default `success` function.
+Запустить `onCalculate` обработчик и если он успешно отработал, выполнить кастомный код и стандартную функцию `success`.
 
 ```js
 $('form').request('onCalculate', {success: function(data) {
@@ -84,7 +84,7 @@ $('form').request('onCalculate', {success: function(data) {
 }})
 ```
 
-Execute a request without a FORM element.
+Отправить запрос без элемента Form.
 
 ```js
 $.request('onCalculate', {
@@ -94,52 +94,52 @@ $.request('onCalculate', {
 })
 ```
 
-Run `onCalculate` handler and if successful, run some custom code after the default `success` function is done.
+Запустить `onCalculate` обработчик и если он успешно отработал, выполнить стандартную функцию `success` и после кастомный код.
 
 ```js
 $('form').request('onCalculate', { success: function(data) {
     this.success(data).done(function() {
-        // ... do something after parent success() is finished ...
+        // ... Сделай что-нибудь после выполнения стандартного success()
     });
 }})
 ```
 
-## Global AJAX Events
+## Глобальные AJAX события 
 
-The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API.
+AJAX фреймворк вызывает несколько событий для обновленных элементов, инициирующего элемента, формы и объекта окна. События вызываются независимо от того, какой API использовался — API атрибутов данных или API JavaScript.
 
-Event | Description
+Событие | Описание
 ------------- | -------------
-**ajaxBeforeSend** | triggered on the window object before sending the request.
-**ajaxBeforeUpdate** | triggered on the form object directly after the request is complete, but before the page is updated. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
+**ajaxBeforeSend** | срабатывает на объекте `window` перед отправкой запроса.
+**ajaxBeforeUpdate** | срабатывает в объекте формы сразу после завершения запроса, но до обновления страницы. Обработчик получает 5 параметров: объект события, объект контекста, объект данных, полученных от сервера, текстовую строку статуса и объект jqXHR.
 **ajaxUpdate** | triggered on a page element after it has been updated with the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxUpdateComplete** | triggered on the window object after all elements are updated by the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxSuccess** | triggered on the form object after the request is successfully completed. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the jqXHR object.
-**ajaxError** | triggered on the form object if the request encounters an error. The handler gets 5 parameters: the event object, the context object, the error message, the status text string, and the jqXHR object.
-**ajaxErrorMessage** | triggered on the window object if the request encounters an error. The handler gets 2 parameters: the event object and error message returned from the server.
-**ajaxConfirmMessage** | triggered on the window object when `confirm` option is given. The handler gets 2 parameters: the event object and text message assigned to the handler as part of `confirm` option. This is useful for implementing custom confirm logic/interface instead of native javascript confirm box.
+**ajaxUpdateComplete** | срабатывает на объекте `window` после того, как все элементы обновлены фреймворком. Обработчик получает 5 параметров: объект события, объект контекста, объект данных, полученных от сервера, текстовую строку статуса и объект jqXHR.
+**ajaxSuccess** | срабатывает в объекте формы после успешного выполнения запроса. Обработчик получает 5 параметров: объект события, объект контекста, объект данных, полученных от сервера, текстовую строку статуса и объект jqXHR.
+**ajaxError** | срабатывает в объекте формы, если запрос обнаруживает ошибку. Обработчик получает 5 параметров: объект события, объект контекста, сообщение об ошибке, текстовую строку состояния и объект jqXHR.
+**ajaxErrorMessage** | срабатывает для объекта `window`, если запрос обнаруживает ошибку. Обработчик получает 2 параметра: объект события и сообщение об ошибке, возвращаемое сервером.
+**ajaxConfirmMessage** | срабатывает для объекта `window`, когда указана опция `confirm`. Обработчик получает 2 параметра: объект события и текстовое сообщение, назначенное обработчику как часть опции `confirm`. Это полезно для реализации пользовательской логики/интерфейса подтверждения вместо стандартного окна подтверждения javascript.
 
-These events are fired on the triggering element:
+Эти события запускаются на инициирующем элементе:
 
-Event | Description
+Событие | Описание
 ------------- | -------------
-**ajaxSetup** | triggered before the request is formed, allowing options to be modified via the `context.options` object.
-**ajaxPromise** | triggered directly before the AJAX request is sent.
-**ajaxFail** | triggered finally if the AJAX request fails.
-**ajaxDone** | triggered finally if the AJAX request was successful.
-**ajaxAlways** | triggered regardless if the AJAX request fails or was successful.
+**ajaxSetup** |запускается до формирования запроса, что позволяет изменять параметры с помощью объекта `context.options`.
+**ajaxPromise** | запускается непосредственно перед отправкой запроса AJAX.
+**ajaxFail** | запускается если запрос AJAX терпит неудачу.
+**ajaxDone** | запускается если запрос AJAX был успешным.
+**ajaxAlways** | срабатывает независимо от того, был ли запрос AJAX неудачным или успешным.
 
-## Usage Examples
+## Примеры использования
 
-Executes JavaScript code when the `ajaxUpdate` event is triggered on an element.
+Выполняет код JavaScript, когда для элемента запускается событие `ajaxUpdate`.
 
 ```js
 $('.calcresult').on('ajaxUpdate', function() {
-    console.log('Updated!');
+    console.log('Обновлено!');
 })
 ```
 
-Execute a single request that shows a Flash Message using logic handler.
+Выполнение одного запроса, который отобразит кастомное флэш-сообщение.
 
 ```js
 $.request('onDoSomething', {
@@ -150,22 +150,22 @@ $.request('onDoSomething', {
 });
 ```
 
-Applies configurations to all AJAX requests globally.
+Применяет конфигурации ко всем AJAX запросам глобально.
 
 ```js
 $(document).on('ajaxSetup', function(event, context) {
-    // Enable AJAX handling of Flash messages on all AJAX requests
+    // Включить поддержку флэш-сообщений для всех AJAX запросов
     context.options.flash = true;
 
-    // Enable the StripeLoadIndicator on all AJAX requests
+    // Включить StripeLoadIndicator для всех AJAX запросов 
     context.options.loading = $.oc.stripeLoadIndicator;
 
-    // Handle Error Messages by triggering a flashMsg of type error
+    // Обрабатывайте сообщения об ошибках, вызывая flashMsg типа error
     context.options.handleErrorMessage = function(message) {
         $.oc.flashMsg({ text: message, class: 'error' });
     }
 
-    // Handle Flash Messages by triggering a flashMsg of the message type
+    // Обрабатывайте сообщения об ошибках, вызывая flashMsg типа type
     context.options.handleFlashMessage = function(message, type) {
         $.oc.flashMsg({ text: message, class: type });
     }
