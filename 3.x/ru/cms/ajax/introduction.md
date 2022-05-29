@@ -1,19 +1,19 @@
 ---
-subtitle: A simple AJAX framework that ships with October CMS.
+subtitle: Простой AJAX фреймворк в October CMS.
 ---
-# Introduction
+# Введение
 
-October CMS includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in CMS themes and anywhere in the backend panel.
+October CMS включает в себя фреймворк, предоставляющий полный набор AJAX возможностей, которые позволяют загружать данные с сервера без обновления страницы в браузере. Эту же библиотеку можно использовать в темах CMS и в любом месте бэкенд-панели.
 
-The AJAX framework comes in two flavors, you may either use [the JavaScript API](./javascript-api.md) or [the data attributes API](./attributes-api.md). The data attributes API doesn't require any JavaScript knowledge to use AJAX with October CMS.
+AJAX фреймворк поставляется в двух вариантах: вы можете использовать [API JavaScript] (./javascript-api.md) или [API атрибутов данных] (./attributes-api.md). API атрибутов данных не требует знания JavaScript для использования AJAX с October CMS.
 
-## Including the Framework
+## Подключение AJAX фреймворка
 
 ::: aside
-The AJAX framework is optional in your CMS theme and you can always include your preferred framework instead.
+Фреймворк AJAX является необязательным в вашем CMS шаблоне, и вы всегда можете вместо него включить любой другой предпочитаемый фреймворк.
 :::
 
-When working with your [CMS theme](../../cms/themes/themes.md), using the library is as simple as including it with a Twig tag. Place the `{% framework %}` tag anywhere inside your page or layout. This adds a reference to the October CMS frontend JavaScript library. The library requires jQuery so it should be loaded first, for example.
+При работе с [CMS шаблоном](../../cms/themes/themes.md) подключить AJAX фреймворк используя TWIG очень просто. Поместите тег `{% framework %}` в любом месте вашей страницы или макета. Это добавляет библиотеку JavaScript. Библиотека требует jQuery, поэтому она должна быть загружена первой.
 
 ```twig
 <script src="{{ 'assets/javascript/jquery.js'|theme }}"></script>
@@ -21,54 +21,54 @@ When working with your [CMS theme](../../cms/themes/themes.md), using the librar
 {% framework %}
 ```
 
-The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](./extras.md), including form validation, pagination styles and loading indicators.
+Тег `{% framework %}` поддерживает необязательный параметр **extras**. Если этот параметр указан, тег добавляет файлы CSS и JavaScript для [дополнительных функций](./extras.md), включая валидацию формы, стили пагинации и индикаторы загрузки.
 
 ```twig
 {% framework extras %}
 ```
 
-## How AJAX Requests Work
+## Как работают AJAX запросы
 
-A page can issue an AJAX request either prompted by data attributes or by using JavaScript. Each request invokes an **event handler** -- also called an [AJAX handler](./handlers.md) -- on the server and can update page elements using partials. AJAX requests work best with forms, since the form data is automatically sent to the server. Here is request workflow:
+Страница может выдать запрос AJAX либо по запросу атрибутов данных, либо с помощью JavaScript. Каждый запрос вызывает **обработчик событий** — также называемый [AJAX обработчик] (./handlers.md) — на сервере и может обновлять элементы страницы, используя фрагменты. AJAX запросы лучше всего работают с формами, поскольку данные формы автоматически отправляются на сервер. Вот рабочий процесс запроса:
 
-1. The client browser issues an AJAX request by providing the handler name and other optional parameters.
-2. The server finds the [AJAX handler](./handlers.md) and executes it.
-3. The handler executes the required business logic and updates the environment by injecting page variables.
-4. The server [renders partials](./update-partials.md) requested by the client with the `update` option.
-5. The server sends the response, containing the rendered partials markup.
-6. The client-side framework updates page elements with the partials data received from the server.
+1. Браузер клиента отправляет запрос AJAX, передавая имя обработчика и другие необязательные параметры.
+2. Сервер находит [AJAX обработчик](./handlers.md) и выполняет его.
+3. Обработчик выполняет необходимую бизнес-логику и обновляет окружение, вводя переменные страницы.
+4. Сервер [рендерит фрагменты](./update-partials.md), запрошенные клиентом с опцией `update`.
+5. Сервер отправляет ответ, содержащий обновленные фрагменты.
+6. AJAX фреймворк на стороне клиента обновляет элементы страницы новыми фрагментами, полученными в ответе с сервера.
 
-## Usage Example
+## Пример использования
 
-Below is a simple example that uses the data attributes API to define an AJAX enabled form. The form will issue an AJAX request to the **onTest** handler and requests that the result container be updated with the **mypartial** partial markup.
+Ниже приведен простой пример, в котором используется API атрибутов данных для определения формы с поддержкой AJAX. Форма отправит запрос AJAX к обработчику **onTest** и запросит обновление элемента с результатами фрагментом **mypartial**.
 
 ::: tip
-The form data for `value1` and `value2` are automatically sent with the AJAX request.
+Данные формы `value1` и `value2` автоматически отправляются с запросом AJAX.
 
 ```html
-<!-- AJAX enabled form -->
+<!-- AJAX форма -->
 <form data-request="onTest" data-request-update="mypartial: '#myDiv'">
 
-    <!-- Input two values -->
+    <!-- Два инпута с параметрами -->
     <input name="value1"> + <input name="value2">
 
-    <!-- Action button -->
-    <button type="submit">Calculate</button>
+    <!-- Кнопка отправки -->
+    <button type="submit">Расчитать</button>
 
 </form>
 
-<!-- Result container -->
+<!-- Элемент для результата -->
 <div id="myDiv"></div>
 ```
 :::
 
-The **mypartial** partial contains markup that reads the `result` variable.
+Фрагмент **mypartial** содержит разметку, которая считывает переменную `result`.
 
 ```twig
-The result is {{ result }}
+Результат: {{ result }}
 ```
 
-The **onTest** handler method accessed the form data using the `input` [helper method](../../extend/services/helpers.md) and the result is passed to the `result` page variable.
+Обработчик **onTest** обращается к данным формы с помощью `input` [вспомогательного метода](../../extend/services/helpers.md), и результат передается в переменную страницы `result`.
 
 ```php
 function onTest()
@@ -77,12 +77,12 @@ function onTest()
 }
 ```
 
-The example could be read like this: "When the form is submitted, issue an AJAX request to the **onTest** handler. When the handler finishes, render the **mypartial** partial and inject its contents to the **#myDiv** element."
+Пример можно прочитать так: «Когда форма отправлена, отправьте запрос AJAX обработчику **onTest**. Когда обработчик закончит работу, возьмите фрагмент **mypartial** и вставьте его содержимое в **элемент #myDiv**."
 
-#### See Also
+#### Смотрите также
 
 ::: also
 * [JavaScript API](./javascript-api.md)
-* [Data Attributes API](./attributes-api.md)
-* [Extra Framework Features](./extras.md)
+* [API атрибутов данных](./attributes-api.md)
+* [Дополнительные возможности фреймворка](./extras.md)
 :::
