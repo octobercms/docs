@@ -188,7 +188,7 @@ public function boot()
 Config::get('purifier.encoding') === Config::get('acme.blog::purifier.encoding');
 ```
 
-现在，您可以按照常规插件配置值和[standard configuration approach](settings.md#file-based configuration)的方式自由提供软件包配置值。
+现在，您可以按照常规插件配置值和[标准配置方法](settings.md#file-based configuration)的方式自由提供软件包配置值。
 
 ### 别名和服务提供商
 
