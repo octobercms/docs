@@ -33,7 +33,7 @@ The `october:mirror` command should be performed after each system update or whe
 
 This section describes steps that increase the application performance and is recommended for all production environments since it will drastically improve the page load time.
 
-In the configuration, disable [debug mode](../setup/configuration.html#debug-mode) and the enable caching layers. For example, if you are using the `.env` file:
+In the configuration, disable [debug mode](../setup/configuration.html#debug-mode) and enable the caching layers. For example, if you are using the `.env` file:
 
 ```ini
 APP_DEBUG=false
