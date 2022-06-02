@@ -31,9 +31,9 @@ The `october:mirror` command should be performed after each system update or whe
 
 ### Improving Performance
 
-This section describes steps that can help to increase the application performance for larger applications.
+This section describes steps that increase the application performance and is recommended for all production environments since it will drastically improve the page load time.
 
-Disable [debug mode](../setup/configuration.html#debug-mode) and enable cache. For example, if you are using the `.env` file:
+In the configuration, disable [debug mode](../setup/configuration.html#debug-mode) and the enable caching layers. For example, if you are using the `.env` file:
 
 ```ini
 APP_DEBUG=false
@@ -42,11 +42,12 @@ CMS_ASSET_CACHE=true
 CMS_TWIG_CACHE=true
 ```
 
-Cache the configuration and route tables with these artisan commands:
+In the console, cache the system structure with these commands:
 
-```ini
-php artisan config:cache
-php artisan route:cache
+```bash
+php artisan october:optimize
+
+composer dump-autoload --optimize
 ```
 
 ### Shared Hosting Security

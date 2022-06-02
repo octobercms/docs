@@ -24,7 +24,7 @@ The `|md_safe` filter will parse Markdown with safe mode enabled, that completel
 The following JavaScript will not execute:
 
 ```twig
-{{ "<a href="javascript:alert(1)">click me</a>"|md_safe }}
+{{ '<a href="javascript:alert(1)">click me</a>'|md_safe }}
 ```
 
 ## |md_clean
@@ -32,7 +32,7 @@ The following JavaScript will not execute:
 The `md_clean` filter will parse Markdown with more HTML support than `|md_safe` because it uses a sanitizer to remove any potentially dangerous code.
 
 ```twig
-{{ "<script>alert(1)</script>"|md_clean }}
+{{ '<script>alert(1)</script>'|md_clean }}
 ```
 
 #### See Also
