@@ -28,7 +28,7 @@ The [JavaScript API](./javascript-api.md) uses the `update` configuration option
 
 ```js
 // JavaScript API
-$.request('onRefreshTime', {
+oc.request('#mybutton', 'onRefreshTime', {
     update: { mytime: '#myDiv' }
 });
 ```
