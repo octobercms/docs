@@ -7,7 +7,7 @@ A concept included with the [AJAX framework extra features](./extras.md) is turb
 
 ## Disable Routing
 
-To disable PJAX routing on a specific page, you may trigger a full reload by including the `turbo-visit-control` meta tag in the page's head section.
+To disable PJAX routing on a specific page, you may trigger a full reload by including the `turbo-visit-control` meta tag in the head section of the page. This will disable the feature for incoming requests only.
 
 ```html
 <head>
@@ -15,11 +15,10 @@ To disable PJAX routing on a specific page, you may trigger a full reload by inc
 </head>
 ```
 
-To completely disable PJAX in your website, add the `data-turbo="false"` to the html element on every page.
+To completely disable PJAX in your website, set the value to `disable`. This will disable the feature for incoming and outgoing requests.
 
 ```html
-<html data-turbo="false">
-    ...
+<meta name="turbo-visit-control" content="disable" />
 ```
 
 ## Disable for Specific Links
