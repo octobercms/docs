@@ -3,7 +3,7 @@ subtitle: Learn how links are routed using the AJAX framework.
 ---
 # Turbo Routing
 
-A concept included with the [AJAX framework extra features](./extras.md) is turbo routing, which is an implementation of PJAX (push state and AJAX). This gives performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load.
+A concept included with the [AJAX framework extra features](./extras.md) is turbo routing as an implementation of PJAX (push state and AJAX). This gives performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load.
 
 ## Disable Routing
 
