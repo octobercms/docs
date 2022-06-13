@@ -61,6 +61,38 @@ For example, if you website lives in `/app` and you don't want the links to appl
 </head>
 ```
 
+## Working with JavaScript
+
+When working with PJAX, the page contents may load before the scripts are ready, which differs from the usual browser behavior. To overcome this the global `render` event handler is called every time the page loads and is ready to run scripts.
+
+```js
+addEventListener('render', function() {
+    // Page and scripts are loaded and ready
+});
+```
+
+When a page visit occurs and JavaScript components are initialized, it is important that these function are idempotent. In simple terms, an idempotent function is safe to apply multiple times without changing the result beyond its initial application.
+
+One technique for making a function idempotent is to keep track of whether you've already performed it by adding a value to the `dataset` property on each processed element.
+
+```js
+addEventListener('render', function() {
+    // Find my control
+    var myControl = document.querySelector('.my-control');
+
+    // Halt because it has already been initialized
+    if (myControl.dataset.hasMyControl) {
+        return;
+    }
+
+    // Initialize since this is the first time
+    myControl.dataset.hasMyControl = true;
+    initializeMyControl(myControl);
+});
+```
+
+Another simpler approach is to allow the function to run multiple times and apply idempotence techniques internally. For example, check to see if a menu divider already exists first before creating a new one.
+
 ## Global Events
 
 The AJAX framework triggers several events during the navigation lifecycle and page responses. The events are usually triggered on the `document` object with details available on the `event.detail` property.
