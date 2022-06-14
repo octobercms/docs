@@ -13,11 +13,9 @@ The AJAX framework comes in two flavors, you may either use [the JavaScript API]
 The AJAX framework is optional in your CMS theme and you can always include your preferred framework instead.
 :::
 
-When working with your [CMS theme](../../cms/themes/themes.md), using the library is as simple as including it with a Twig tag. Place the `{% framework %}` tag anywhere inside your page or layout. This adds a reference to the October CMS frontend JavaScript library. The library requires jQuery so it should be loaded first, for example.
+When working with your [CMS theme](../../cms/themes/themes.md), using the library is as simple as including it with a Twig tag. Place the `{% framework %}` tag anywhere inside your page or layout. This adds a reference to the October CMS frontend JavaScript library, for example.
 
 ```twig
-<script src="{{ 'assets/javascript/jquery.js'|theme }}"></script>
-
 {% framework %}
 ```
 

@@ -34,8 +34,6 @@ The asset combiner supports common aliases that substitute file paths, these wil
 
 ```twig
 <script src="{{ [
-    '@jquery',
-    '@framework',
     '@framework.extras',
     'assets/javascript/app.js'
 ]|theme }}"></script>
@@ -45,13 +43,12 @@ The following aliases are supported:
 
 Alias | Description
 ------------- | -------------
-`@jquery` | Reference to the jQuery library supplied by the system (JavaScript)
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag (JavaScript)
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag (JavaScript, CSS)
-`@framework.extras.js` | AJAX framework extras (JavaScript)
-`@framework.extras.css` | AJAX framework extras (CSS)
 
-The same alias can be used for JavaScript or CSS, for example `@framework.extras`. At least one explicit reference with a file extension is needed in the array to determine which is used.
+:: tip
+The same alias can be used for JavaScript or CSS, for example `@framework.extras`. At least one other reference with a CSS or JS file extension is needed in the array to determine which to use.
+:::
 
 ### External Combiner Paths
 
