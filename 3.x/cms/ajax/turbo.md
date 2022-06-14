@@ -3,7 +3,7 @@ subtitle: Learn how links are routed using the AJAX framework.
 ---
 # Turbo Routing
 
-A concept included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called turbo routing. This gives performance benefits of a single page application without the added complexity of a client-side framework.  When you click a link, the page is automatically swapped client-side without the cost of a full page load. You may programmatically visit a link with the following:
+A concept included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called turbo routing. This gives performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load. You may programmatically visit a link with the following:
 
 ```js
 oc.AjaxTurbo.visit(location);
@@ -67,7 +67,7 @@ When working with PJAX, the page contents may load before the scripts are ready,
 
 ```js
 addEventListener('render', function() {
-    // Page and scripts are loaded and ready
+    // Page has rendered something new and scripts are ready
 });
 ```
 
