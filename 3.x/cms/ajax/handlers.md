@@ -27,7 +27,7 @@ Every AJAX request should specify a handler name, either using the [data attribu
 <button data-request="onSubmitContactForm">Go</button>
 
 <!-- JavaScript API -->
-<script> $.request('onSubmitContactForm') </script>
+<script> oc.request('#mybutton', 'onSubmitContactForm') </script>
 ```
 
 ### Generic Handler

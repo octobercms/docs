@@ -176,7 +176,7 @@ a {
 
 ## Localization
 
-Themes can provide backend localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically only when interacting with the October CMS backend panel and can be used for form labels just like [plugin localization](../../extend/system/localization.md).
+Themes can provide localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically and can be used inside the theme contents or as backend form labels similar to [plugin localization](../../extend/system/localization.md).
 
 ### Localization File Structure
 

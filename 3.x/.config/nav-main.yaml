@@ -302,6 +302,7 @@
         - ajax/attributes-api
         - ajax/javascript-api
         - ajax/extras
+        - ajax/turbo
 -
     title: Media Manager
     children:

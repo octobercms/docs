@@ -21,7 +21,7 @@ When working with your [CMS theme](../../cms/themes/themes.md), using the librar
 {% framework %}
 ```
 
-The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](./extras.md), including form validation, pagination styles and loading indicators.
+The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](./extras.md), including form validation, pagination styles, loading indicators and [turbo-charged routing](./turbo.md).
 
 ```twig
 {% framework extras %}

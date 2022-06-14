@@ -13,7 +13,7 @@ When using the AJAX framework, you have the option to specify the **extras** suf
 
 The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to global events used by [the JavaScript AJAX framework](./javascript-api.md).
 
-When an AJAX request starts the `ajaxPromise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajaxFail` and `ajaxDone` events are used to detect when the request finishes, where the indicator is hidden again.
+When an AJAX request starts the `ajax:promise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajax:fail` and `ajax:done` events are used to detect when the request finishes, where the indicator is hidden again.
 
 ## Form Validation
 
@@ -23,7 +23,7 @@ You may specify the `data-request-validate` attribute on a form to enable valida
 <form
     data-request="onSubmit"
     data-request-validate>
-    <!-- ... -->
+    ...
 </form>
 ```
 
@@ -58,15 +58,18 @@ To display multiple error messages, include an element with the `data-message` a
 </div>
 ```
 
-To add custom classes on AJAX invalidation, hook into the `ajaxInvalidField` and `ajaxPromise` JS events.
+To add custom classes on AJAX invalidation, hook into the `ajax:invalid-field` and `ajax:promise` JavaScript events.
 
 ```js
-$(window).on('ajaxInvalidField', function(event, fieldElement, fieldName, errorMsg, isFirst) {
-    $(fieldElement).closest('.form-group').addClass('has-error');
+window.addEventListener('ajax:invalid-field', function(event) {
+    { fieldElement, fieldName, errorMsg, isFirst } = event.detail;
+    fieldElement.classList.add('has-error');
 });
 
-$(document).on('ajaxPromise', '[data-request]', function() {
-    $(this).closest('form').find('.form-group.has-error').removeClass('has-error');
+document.addEventListener('ajax:promise', function(event) {
+    event.target.closest('form').querySelectorAll('.has-error').forEach(function(el) {
+        el.classList.remove('has-error');
+    });
 });
 ```
 
