@@ -19,7 +19,7 @@ To disable PJAX routing on a specific page, you may trigger a full reload by inc
 </head>
 ```
 
-To completely disable PJAX in your website, set the value to `disable`. This will disable the feature for incoming and outgoing requests.
+To completely disable PJAX in your website, set the value to `disable`. This will disable the feature for all incoming and outgoing requests.
 
 ```html
 <meta name="turbo-visit-control" content="disable" />
@@ -49,9 +49,27 @@ In some cases you may want to include static elements on the page, these are ele
 <div id="main-navigation" data-turbo-permanent>...</div>
 ```
 
+## Detecting a Cached Page Load
+
+You can detect when the page contents are sourced from the cache with the `data-turbo-preview` attribute on the HTML element. Expressed in JavaScript as:
+
+```js
+if (document.documentElement.hasAttribute('data-turbo-preview')) {
+    // Page shown is loaded from cache
+}
+```
+
+Or using a StyleSheet:
+
+```css
+html[data-turbo-preview] {
+    /* Hide overlays from previous view */
+}
+```
+
 ## Setting a Root Path
 
-By default, PJAX links are used for all links within the same domain name and a visit to any other URL will fallback to a full page load. In some cases, your application may live in a subdirectory and the links should only apply to the root path.
+By default, PJAX is used for all links within the same domain name and a visit to any other URL will fallback to a full page load. In some cases, your application may live in a subdirectory and the links should only apply to the root path.
 
 For example, if you website lives in `/app` and you don't want the links to apply to a different site in `/docs` then you may restrict the links to a root path. You may set the root path by including the `turbo-root` meta tag in the page's head section.
 
@@ -115,7 +133,7 @@ Event | Description
 The following JavaScript will run every time a page loads.
 
 ```js
-document.addEventListener('page:load', function() {
+addEventListener('page:load', function() {
     // ...
 });
 ```

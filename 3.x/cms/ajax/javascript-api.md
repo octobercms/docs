@@ -155,7 +155,7 @@ oc.request('onDoSomething', {
 Applies configurations to all AJAX requests globally.
 
 ```js
-document.addEventListener('ajax:setup', function(event) {
+addEventListener('ajax:setup', function(event) {
     var context = event.detail.context;
 
     // Enable AJAX handling of Flash messages on all AJAX requests

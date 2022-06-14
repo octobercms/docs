@@ -61,12 +61,12 @@ To display multiple error messages, include an element with the `data-message` a
 To add custom classes on AJAX invalidation, hook into the `ajax:invalid-field` and `ajax:promise` JavaScript events.
 
 ```js
-window.addEventListener('ajax:invalid-field', function(event) {
+addEventListener('ajax:invalid-field', function(event) {
     { fieldElement, fieldName, errorMsg, isFirst } = event.detail;
     fieldElement.classList.add('has-error');
 });
 
-document.addEventListener('ajax:promise', function(event) {
+addEventListener('ajax:promise', function(event) {
     event.target.closest('form').querySelectorAll('.has-error').forEach(function(el) {
         el.classList.remove('has-error');
     });
