@@ -3,10 +3,16 @@ subtitle: Learn how links are routed using the AJAX framework.
 ---
 # Turbo Router
 
-A concept included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called the turbo router. It gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load. You may programmatically visit a link with the following:
+A concept included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called the turbo router. It gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load. You may programmatically visit a link with the following.
 
 ```js
 oc.AjaxTurbo.visit(location);
+```
+
+To replace the current URL without adding it to the navigation history, similar to `window.history.replaceState`, set the `action` option to **replace**.
+
+```js
+oc.AjaxTurbo.visit(location, { action: 'replace' });
 ```
 
 ## Disable Routing
@@ -81,20 +87,22 @@ For example, if you website lives in `/app` and you don't want the links to appl
 
 ## Working with JavaScript
 
-When working with PJAX, the page contents may load before the scripts are ready, which differs from the usual browser behavior. To overcome this the global `render` event handler is called every time the page loads and is ready to run scripts.
+When working with PJAX, the page contents may load before the scripts are ready, which differs from the usual browser behavior. To overcome this, use the `page:after-load` event handler is called every time the page and scripts are loaded.
 
 ```js
-addEventListener('render', function() {
+addEventListener('page:after-load', function() {
     // Page has rendered something new and scripts are ready
 });
 ```
+
+### Making Controls Idempotent
 
 When a page visit occurs and JavaScript components are initialized, it is important that these function are idempotent. In simple terms, an idempotent function is safe to apply multiple times without changing the result beyond its initial application.
 
 One technique for making a function idempotent is to keep track of whether you've already performed it by adding a value to the `dataset` property on each processed element.
 
 ```js
-addEventListener('render', function() {
+addEventListener('page:after-load', function() {
     // Find my control
     var myControl = document.querySelector('.my-control');
 
@@ -111,6 +119,22 @@ addEventListener('render', function() {
 
 Another simpler approach is to allow the function to run multiple times and apply idempotence techniques internally. For example, check to see if a menu divider already exists first before creating a new one.
 
+### Disposing Controls
+
+In some cases you may bind global events for a specific page only, for example, binding a hot key to a certain action.
+
+```js
+addEventListener('keydown', myKeyDownFunction);
+```
+
+To prevent this event from leaking to other pages, you should remove the event using the `page:before-render` method, which will destroy any events and controls. The event can be used once to dispose of controls and events safely.
+
+```js
+addEventListener('page:before-render', function() {
+    removeEventListener('keydown', myKeyDownFunction);
+}, { once: true });
+```
+
 ## Global Events
 
 The AJAX framework triggers several events during the navigation lifecycle and page responses. The events are usually triggered on the `document` object with details available on the `event.detail` property.
@@ -126,7 +150,7 @@ Event | Description
 **page:before-render** | triggered before the page content is rendered.
 **page:render** | triggered after the page is rendered. This is fired twice, once from cache and once again after requesting the new page content.
 **page:load** | triggered once after the initial page load and again every time a page is visited.
-**page:after-load** | triggered after the page scripts are loaded dynamically. This is not called on the initial page load.
+**page:after-load** | triggered every time new scripts are loaded, except for the initial page load.
 
 ## Usage Examples
 
