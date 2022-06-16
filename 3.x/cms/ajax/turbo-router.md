@@ -6,18 +6,26 @@ subtitle: Learn how links are routed using the AJAX framework.
 A concept included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called the turbo router. It gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load. You may programmatically visit a link with the following.
 
 ```js
-oc.AjaxTurbo.visit(location);
+oc.visit(location);
 ```
 
 To replace the current URL without adding it to the navigation history, similar to `window.history.replaceState`, set the `action` option to **replace**.
 
 ```js
-oc.AjaxTurbo.visit(location, { action: 'replace' });
+oc.visit(location, { action: 'replace' });
+```
+
+To check if the turbo router is enabled and should be used.
+
+```js
+if (oc.useTurbo && oc.useTurbo()) {
+    // Use PJAX
+}
 ```
 
 ## Disable Routing
 
-To disable PJAX routing on a specific page, you may trigger a full reload by including the `turbo-visit-control` meta tag in the head section of the page. This will disable the feature for incoming requests only.
+To disable PJAX routing on a specific page, you may trigger a full reload by including the `turbo-visit-control` meta tag in the head section of the page with the `reload` value. This will disable the feature for incoming requests only.
 
 ```html
 <head>
@@ -87,10 +95,10 @@ For example, if you website lives in `/app` and you don't want the links to appl
 
 ## Working with JavaScript
 
-When working with PJAX, the page contents may load dynamically, which differs from the usual browser behavior. To overcome this, use the `page:load` event handler is called every time the page loads.
+When working with PJAX, the page contents may load dynamically, which differs from the usual browser behavior. To overcome this, use the `page:loaded` event handler is called every time the page loads.
 
 ```js
-addEventListener('page:load', function() {
+addEventListener('page:loaded', function() {
     // Page has rendered something new
 });
 ```
@@ -102,7 +110,7 @@ When a page visit occurs and JavaScript components are initialized, it is import
 One technique for making a function idempotent is to keep track of whether you've already performed it by adding a value to the `dataset` property on each processed element.
 
 ```js
-addEventListener('page:load', function() {
+addEventListener('page:loaded', function() {
     // Find my control
     var myControl = document.querySelector('.my-control');
 
@@ -127,10 +135,10 @@ In some cases you may bind global events for a specific page only, for example, 
 addEventListener('keydown', myKeyDownFunction);
 ```
 
-To prevent this event from leaking to other pages, you should remove the event using the `page:before-render` method, which will destroy any events and controls. The event can be used once to dispose of controls and events safely.
+To prevent this event from leaking to other pages, you should remove the event using the `page:unload` method, which will destroy any events and controls. The event can be used once to dispose of controls and events safely.
 
 ```js
-addEventListener('page:before-render', function() {
+addEventListener('page:unload', function() {
     removeEventListener('keydown', myKeyDownFunction);
 }, { once: true });
 ```
@@ -150,7 +158,8 @@ Event | Description
 **page:before-render** | triggered before the page content is rendered.
 **page:render** | triggered after the page is rendered. This is fired twice, once from cache and once again after requesting the new page content.
 **page:load** | triggered once after the initial page load and again every time a page is visited.
-**page:after-load** | triggered every time new scripts are loaded, except for the initial page load.
+**page:loaded** | identical to `page:load` except will wait for all newly added scripts to load.
+**page:unload** | called when an an a previously loaded page should be disposed.
 
 ## Usage Examples
 
