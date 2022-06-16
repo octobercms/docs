@@ -3,7 +3,7 @@ subtitle: Learn how links are routed using the AJAX framework.
 ---
 # Turbo Router
 
-A concept included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called the turbo router. It gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load. You may programmatically visit a link with the following.
+A feature included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called the turbo router. It gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load. You may programmatically visit a link with the following.
 
 ```js
 oc.visit(location);
@@ -173,7 +173,7 @@ addEventListener('page:load', function() {
 
 ## Working with Hot Reloading
 
-The turbo router may interfere if you are developing your website with hot reloading or browser sync technology, such as with [Laravel Mix](https://laravel-mix.com/) in development mode using `laravel-mix & browsersync`. To overcome this, add the following code to your webpack `browserSync` configuration.
+In some cases, the turbo router may interfere when you are developing your website with hot reloading or browser sync technology, such as with [Laravel Mix](https://laravel-mix.com/) in development mode using `laravel-mix & browsersync`. To overcome this add the following code to your webpack `browserSync` configuration.
 
 ```js
 snippetOptions: {
