@@ -87,11 +87,11 @@ For example, if you website lives in `/app` and you don't want the links to appl
 
 ## Working with JavaScript
 
-When working with PJAX, the page contents may load before the scripts are ready, which differs from the usual browser behavior. To overcome this, use the `page:after-load` event handler is called every time the page and scripts are loaded.
+When working with PJAX, the page contents may load dynamically, which differs from the usual browser behavior. To overcome this, use the `page:load` event handler is called every time the page loads.
 
 ```js
-addEventListener('page:after-load', function() {
-    // Page has rendered something new and scripts are ready
+addEventListener('page:load', function() {
+    // Page has rendered something new
 });
 ```
 
@@ -102,7 +102,7 @@ When a page visit occurs and JavaScript components are initialized, it is import
 One technique for making a function idempotent is to keep track of whether you've already performed it by adding a value to the `dataset` property on each processed element.
 
 ```js
-addEventListener('page:after-load', function() {
+addEventListener('page:load', function() {
     // Find my control
     var myControl = document.querySelector('.my-control');
 
