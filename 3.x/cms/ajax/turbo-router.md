@@ -170,3 +170,18 @@ addEventListener('page:load', function() {
     // ...
 });
 ```
+
+## Working with Hot Reloading
+
+The turbo router may interfere if you are developing your website with hot reloading or browser sync technology, such as with [Laravel Mix](https://laravel-mix.com/) in development mode using `laravel-mix & browsersync`. To overcome this, add the following code to your webpack `browserSync` configuration.
+
+```js
+snippetOptions: {
+    rule: {
+        match: /<\/head>/i,
+        fn: function (snippet, match) {
+            return '<meta name="turbo-visit-control" content="disable" />';
+        }
+   }
+}
+```
