@@ -18,6 +18,7 @@ data-request Attribute | Description
 **data-request-error** | specifies JavaScript code to execute if the request encounters an error.
 **data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error.
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show an AJAX loading indicator. The feature uses CSS display `block` and `none` attributes to manage the element visibility.
+**data-request-progress-bar** | enable the progress bar when an AJAX request occurs. Default `true` when using [extra features](./extras.md), otherwise `false`.
 **data-request-form** | explicitly specify a form element to use for sourcing the form data. If this is unspecified, the closest form to the triggering element is used, including if the element itself is a form.
 **data-request-flash** | when specified this option instructs the server to clear and send any flash messages with the response. This option is also used by the [extra features](./extras.md).
 **data-request-files** | when specified the request will accept file uploads using the `FormData` interface.
