@@ -16,7 +16,7 @@ The third argument of the `oc.request` method is an options object. The followin
 
 Option | Description
 ------------- | -------------
-**update** | an object, specifies a list partials and page elements (as CSS selectors) to update: `{'partial': '#select'}`. If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content. If the selector string is prepended with the `^` symbol, the content will be prepended instead.
+**update** | an object, specifies a list partials and page elements (as CSS selectors) to update: `{'partial': '#select'}`. The selector string should start with a `#` or `.` character, except you may also prepend the it with `@` to append contents to the element, `^` to prepend, `!` to replace with and `=` to use any CSS selector.
 **confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
 **data** | an optional object specifying data to be sent to the server along with the form data: `{var: 'value'}`. You may also include files to be uploaded in this object by using [`Blob` objects](https://developer.mozilla.org/en-US/docs/Web/API/Blob). To specify the filename of any `Blob` objects, simply set the `filename` property on the `Blob` object. (Eg. `var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {uploaded_file: blob};`)
 **redirect** | string specifying an URL to redirect the browser to after the successful request.
