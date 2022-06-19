@@ -65,10 +65,10 @@ All Twig conditions can be used in the markup to affect the response and the las
 
 ### Checking the HTTP Method
 
-Use the `this.method` [Twig property](../../markup/property/this-method.md) to check the request method.
+Use the `this.request.method` [Twig property](../../markup/property/this-request.md) to check the request method.
 
 ```twig
-{% if this.method == 'GET' %}
+{% if this.request.method == 'GET' %}
     <!-- Do GET Logic -->
 {% else %}
     <!-- Method Unsupported -->
