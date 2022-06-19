@@ -12,3 +12,13 @@ You can access the current request method object via `this.method` and it return
     <!-- Do POST Logic -->
 {% endif %}
 ```
+
+## this.ajax
+
+To check if the current request uses the AJAX header, access the `this.ajax` property.
+
+```twig
+{% if this.ajax %}
+    Request was submitted via AJAX
+{% endif %}
+```
