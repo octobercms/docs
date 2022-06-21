@@ -17,7 +17,7 @@ You can access the current request method object via `this.request.method` and i
 {% endif %}
 ```
 
-## this.ajax
+## this.request.ajax
 
 To check if the current request uses the AJAX header, access the `this.request.ajax` property.
 
@@ -27,7 +27,7 @@ To check if the current request uses the AJAX header, access the `this.request.a
 {% endif %}
 ```
 
-## this.turbo
+## this.request.pjax
 
 To check if the current request was made using the [Turbo Router](../../cms/ajax/turbo-router.md), access the `this.request.pjax` property.
 
