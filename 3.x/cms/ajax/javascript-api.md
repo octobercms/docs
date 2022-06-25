@@ -48,7 +48,6 @@ Handler | Description
 Request a confirmation before the `onDelete` request is sent.
 
 ```js
-
 oc.request('#myform', 'onDelete', {
     confirm: 'Are you sure?',
     redirect: '/dashboard'
