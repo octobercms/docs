@@ -3,17 +3,15 @@ subtitle: Programatically test and harden your business logic.
 ---
 # Unit Testing
 
-## Testing Plugins
-
 Individual plugin test cases can be run by running `phpunit` in the plugin's base directory (ex. `plugins/acme/demo`). If `phpunit` is not available globally, you may call it from the root vendor directory.
 
 ```bash
 ../../../vendor/bin/phpunit
 ```
 
-### Creating Plugin Tests
+## Creating Plugin Tests
 
-Plugins can be tested by creating a file called `phpunit.xml` in the base directory with the following content, for example, in a file **/plugins/acme/blog/phpunit.xml**:
+The first step to testing plugins is to create a file called **phpunit.xml** in the base directory of the plugin. Here is an example of a file named **/plugins/acme/blog/phpunit.xml** for the `Acme.Blog` plugin.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -47,14 +45,17 @@ Plugins can be tested by creating a file called `phpunit.xml` in the base direct
 </phpunit>
 ```
 
-Then a **tests** directory can be created to contain the test classes. The file structure should mimic the base directory with classes having a `Test` suffix. Using a namespace for the class is also recommended.
+## Creating a Test Class
+
+All tests should be placed in the **tests** directory that is used store the test classes. Class names should use a `Test` suffic and a namespace for the class is optional. The test class should extend the `PluginTestCase` base class and this is a special class that will set up the October CMS database stored in memory, as part of the `setUp` method.
 
 ```php
-namespace Acme\Blog\Tests\Models;
-
 use Acme\Blog\Models\Post;
 use PluginTestCase;
 
+/**
+ * PostTest tests the posts
+ */
 class PostTest extends PluginTestCase
 {
     public function testCreateFirstPost()
@@ -65,7 +66,9 @@ class PostTest extends PluginTestCase
 }
 ```
 
-The test class should extend the base class `PluginTestCase` and this is a special class that will set up the October database stored in memory, as part of the `setUp` method. It will also refresh the plugin being tested, along with any of the defined dependencies in the plugin registration file. This is the equivalent of running the following before each test:
+## Working with the Database
+
+By default, plugin tests will automatically migrate the database tables for core modules, the plugin itself and any dependencies of the plugin. This is the equivalent of running the following before each test.
 
 ```bash
 php artisan october:migrate
@@ -73,37 +76,30 @@ php artisan plugin:refresh Acme.Blog
 [php artisan plugin:refresh <dependency>, ...]
 ```
 
-If your plugin uses [configuration files](../settings/file-settings.md), then you will need to run `System\Classes\PluginManager::instance()->registerAll(true);` in the `setUp` method of your tests. Below is an example of a base test case class that should be used if you need to test your plugin working with other plugins instead of in isolation.
+You may disable this feature by setting the `autoMigrate` property to false in the test class. This is applicable when the test does not make use of the database.
 
 ```php
-use System\Classes\PluginManager;
-
-class BaseTestCase extends PluginTestCase
+class PostTest extends PluginTestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
+    /**
+     * @var bool autoMigrate feature disabled for this test.
+     */
+    protected $autoMigrate = false;
+}
+```
 
-        // Get the plugin manager
-        $pluginManager = PluginManager::instance();
+You can manually migrate plugins with the `migratePlugin` method when setting up the test. The `migrateModules` method can also be used to make the system tables available.
 
-        // Register the plugins to make features like file configuration available
-        $pluginManager->registerAll(true);
+```php
+public function setUp(): void
+{
+    parent::setUp();
 
-        // Boot all the plugins to test with dependencies of this plugin
-        $pluginManager->bootAll(true);
-    }
+    // Migrate core modules
+    $this->migrateModules();
 
-    public function tearDown(): void
-    {
-        parent::tearDown();
-
-        // Get the plugin manager
-        $pluginManager = PluginManager::instance();
-
-        // Ensure that plugins are registered again for the next test
-        $pluginManager->unregisterAll();
-    }
+    // Migrate the blog plugin
+    $this->migratePlugin('Acme.Blog');
 }
 ```
 
@@ -114,4 +110,27 @@ By default unit tests use SQLite stored in memory for the plugin testing environ
 ```xml
 <env name="DB_CONNECTION" value="sqlite" />
 <env name="DB_DATABASE" value=":memory:" />
+```
+
+## Registering and Booting Plugins
+
+In the test environment, plugins are not registered or booted automatically. This gives granular control over the testing environment and prevents other plugins from interfering. You can enable automatic loading of all plugins by setting the `autoRegister` property to true.
+
+```php
+/**
+ * @var bool autoRegister performs plugin boot and registration.
+ */
+protected $autoRegister = true;
+```
+
+Alternatively, you can manually register and boot a plugin with the `loadPlugin` method.
+
+```php
+public function setUp(): void
+{
+    parent::setUp();
+
+    // Runs register() and boot() methods
+    $this->loadPlugin('Acme.Blog');
+}
 ```
