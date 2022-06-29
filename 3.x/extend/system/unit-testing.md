@@ -111,26 +111,3 @@ By default unit tests use SQLite stored in memory for the plugin testing environ
 <env name="DB_CONNECTION" value="sqlite" />
 <env name="DB_DATABASE" value=":memory:" />
 ```
-
-## Registering and Booting Plugins
-
-In the test environment, plugins are not registered or booted automatically. This gives granular control over the testing environment and prevents other plugins from interfering. You can enable automatic loading of all plugins by setting the `autoRegister` property to true.
-
-```php
-/**
- * @var bool autoRegister performs plugin boot and registration.
- */
-protected $autoRegister = true;
-```
-
-Alternatively, you can manually register and boot a plugin with the `loadPlugin` method.
-
-```php
-public function setUp(): void
-{
-    parent::setUp();
-
-    // Runs register() and boot() methods
-    $this->loadPlugin('Acme.Blog');
-}
-```
