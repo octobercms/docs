@@ -66,9 +66,41 @@ class PostTest extends PluginTestCase
 }
 ```
 
+## Registering and Booting Plugins
+
+In the test environment, the plugin itself and any dependencies of the plugin are registered and booted automatically. This gives finer control over the testing environment and prevents other plugins in the system from interfering with things like event registration. You can disable automatic loading of the current plugin by setting the `autoRegister` property to false.
+
+```php
+/**
+ * @var bool autoRegister feature disabled for this test.
+ */
+protected $autoRegister = false;
+```
+
+You can manually register and boot a plugin with the `loadPlugin` method. In some cases, you will need to migrate the plugin manually as well (see below).
+
+```php
+public function setUp(): void
+{
+    parent::setUp();
+
+    // Runs register() and boot() methods
+    $this->loadPlugin('Acme.Blog');
+}
+```
+
+The following registration methods are available.
+
+Method Name | Purpose
+------------- | -------------
+**loadAllPlugins()** | Loads all plugins found in the system.
+**loadCurrentPlugin()** | Loads the current plugin and its dependencies.
+**loadPlugin($code)** | Loads a single plugin using its code, eg: `Acme.Blog`.
+**loadPlugins($codes)** | Loads multiple plugins as an array of codes.
+
 ## Working with the Database
 
-By default, plugin tests will automatically migrate the database tables for core modules, the plugin itself and any dependencies of the plugin. This is the equivalent of running the following before each test.
+By default, plugin tests will automatically migrate the database tables for core modules, the current plugin and its dependencies. This is the equivalent of running the following before each test.
 
 ```bash
 php artisan october:migrate
@@ -103,6 +135,15 @@ public function setUp(): void
 }
 ```
 
+The following migration methods are available.
+
+Method Name | Purpose
+------------- | -------------
+**migrateDatabase()** | Migrate the entire database, the same as `october:migrate`.
+**migrateModules()** | Migrate only the core modules.
+**migrateCurrentPlugin()** | Migrate the current plugin and its dependencies.
+**migratePlugin($code)** | Migrates a specific plugin using its code, eg: `Acme.Blog`.
+
 ### Changing the Database
 
 By default unit tests use SQLite stored in memory for the plugin testing environment. You can modify this setting in the `phpunit.xml` file. The values here are based on the `/config/database.php` configuration file.
@@ -110,27 +151,4 @@ By default unit tests use SQLite stored in memory for the plugin testing environ
 ```xml
 <env name="DB_CONNECTION" value="sqlite" />
 <env name="DB_DATABASE" value=":memory:" />
-```
-
-## Registering and Booting Plugins
-
-In the test environment, plugins are not registered or booted automatically. This gives granular control over the testing environment and prevents other plugins from interfering. You can enable automatic loading of all plugins by setting the `autoRegister` property to true.
-
-```php
-/**
- * @var bool autoRegister performs plugin boot and registration.
- */
-protected $autoRegister = true;
-```
-
-Alternatively, you can manually register and boot a plugin with the `loadPlugin` method.
-
-```php
-public function setUp(): void
-{
-    parent::setUp();
-
-    // Runs register() and boot() methods
-    $this->loadPlugin('Acme.Blog');
-}
 ```
