@@ -80,10 +80,10 @@ function scopeDateFilter($query, $scope)
             ->where('created_at', '<=', $scope->before);
     }
     elseif ($scope->condition === 'after') {
-        $query->where('created_at', '>=', $scope->after);
+        $query->where('created_at', '>=', $scope->value);
     }
     else {
-        $query->where('created_at', '<=', $scope->before);
+        $query->where('created_at', '<=', $scope->value);
     }
 }
 ```
