@@ -224,7 +224,7 @@ For more advanced options, check out the [Symfony Progress Bar component documen
 
 #### Registering a Console Command
 
-Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [plugin registration file](./extending.md) using  the `registerConsoleCommand` helper method.
+Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [plugin registration file](./extending.md) using the `registerConsoleCommand` helper method.
 
 ```php
 class Blog extends PluginBase

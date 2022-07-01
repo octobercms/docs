@@ -630,12 +630,12 @@ There are a variety of helpful validation rules, however, you may wish to specif
 
 ### Globally Registered Rules
 
-A globally registered rule can be shared throughout your application by registering it with a tag and rule class using the `Validator::extend` method. In an October CMS plugin, this can be added to the `boot()` callback method inside your `Plugin.php` registration file.
+A globally registered rule can be shared throughout your application by registering it with a tag and rule class. This is typically done in the `register` method of a [plugin registration file](../extending.md) using the `registerValidationRule` helper method.
 
 ```php
-public function boot()
+public function register()
 {
-    Validator::extend('uppercase', UppercaseRule::class);
+    $this->registerValidationRule('uppercase', UppercaseRule::class);
 }
 ```
 
