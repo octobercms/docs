@@ -81,3 +81,29 @@ php artisan october:migrate
 ::: tip
 Blueprints are cached when debug mode is turned off. The migration command can also be used to clear the blueprint cache.
 :::
+
+### Refreshing Content
+
+You may delete all the content managed by Tailor using the `tailor:refresh` command.
+
+```bash
+php artisan tailor:refresh
+```
+
+To refresh a single blueprint use the `--handle` option.
+
+```bash
+php artisan tailor:refresh --handle="Blog\Post"
+```
+
+<!--
+### Pruning Content
+
+As a general rule Tailor will never drop table columns and delete content. If a field is removed, the column will be renamed instead of dropped. For example, an old field named `content` may appear as `x_content_fb418fac` in the database table. Tables for old blueprints are also kept in case they are ever restored.
+
+You may prune unused database column with the `tailor:prune` command.
+
+```bash
+php artisan tailor:prune
+```
+-->
