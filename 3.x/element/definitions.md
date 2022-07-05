@@ -28,6 +28,16 @@ myfield:
 
 Form Fields contain generic and simple fields. Form UI is for user interface elements that can be included in forms to help with the layout design. Form Widgets will often introduce more complex functionality, it is common for plugins to provide their own custom form widgets.
 
+### Tailor Fields
+
+There are some fields that are only available inside tailor blueprints. Like form fields, these values are used as the **type** property of a field definition.
+
+```yaml
+author:
+    type: entries
+    # ...
+```
+
 ## List Columns
 
 List Columns are column definitions used by lists. These are referred to by the following areas.

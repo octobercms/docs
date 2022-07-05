@@ -12,6 +12,10 @@ fields:
         type: text
 ```
 
+::: tip
+A complete list of available fields can be found in the [Backend Elements section](../element/definitions.md).
+:::
+
 For each field you can specify these common properties, where applicable.
 
 Property | Description
@@ -41,57 +45,6 @@ Property | Description
 **scope** | defines how to display the field in a filter, see [filter scope definitions](../element/definitions.md).
 
 If the **column** or **scope** values are set to `false` then the field will not be displayed in either.
-
-## Tailor Specific Fields
-
-This section outlines the field types that are only available inside tailor blueprints. Like form fields, these values are used as the **type** property of a field definition.
-
-### Mixin
-
-`mixin` - includes another set of fields.
-
-```yaml
-_include1:
-    type: mixin
-    source: <uuid|handle>
-```
-
-See the [Mixins article](blueprints/mixin.md) for more information on defining mixins.
-
-### Entries
-
-`entries` - links to other entries by UUID or handle.
-
-```yaml
-author:
-    label: Author
-    type: entries
-    source: <uuid|handle>
-```
-
-The following properties are supported.
-
-Property | Description
-------------- | -------------
-**source** | the related blueprint UUID or handle name.
-**maxItems** | limits the number of entries that can be selected.
-**displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`. Default: `relation`.
-
-To limit the number of selectable items, use the `maxItems` property.
-
-```yaml
-author:
-    type: entries
-    maxItems: 1
-```
-
-To display a record finder instead of the typical control, use the `displayMode` property. This mode is only available when one item is selectable.
-
-```yaml
-author:
-    type: entries
-    displayMode: recordfinder
-```
 
 #### See Also
 

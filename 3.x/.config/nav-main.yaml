@@ -46,6 +46,11 @@
         - form/widget-sensitive
         - form/widget-taglist
 -
+    title: Tailor Fields
+    children:
+        - content/field-mixin
+        - content/field-entries
+-
     title: List Columns
     children:
         - lists/column-text
