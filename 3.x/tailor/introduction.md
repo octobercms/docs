@@ -90,10 +90,10 @@ You may delete all the content managed by Tailor using the `tailor:refresh` comm
 php artisan tailor:refresh
 ```
 
-To refresh a single blueprint use the `--handle` option.
+To refresh a single blueprint use the `--blueprint` option and specify its handle.
 
 ```bash
-php artisan tailor:refresh --handle="Blog\Post"
+php artisan tailor:refresh --blueprint="Blog\Post"
 ```
 
 <!--
