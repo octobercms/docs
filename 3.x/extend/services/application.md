@@ -98,7 +98,7 @@ App::register('FooServiceProvider');
 
 #### Request Events
 
-You can register special events before a requested is routed using the `before` and `after` methods.
+You can register special events before a request is routed using the `before` and `after` methods.
 
 ```php
 App::before(function ($request) {
