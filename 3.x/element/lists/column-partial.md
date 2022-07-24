@@ -21,7 +21,7 @@ You may specify a fully qualified `path` to access partials outside the controll
 content:
     label: Content
     type: partial
-    path: ~/plugins/acme/blog/models/comment/_content_column.htm
+    path: ~/plugins/acme/blog/models/comment/_content_column.php
 ```
 
 Inside the partial these variables are available.
@@ -30,7 +30,7 @@ Inside the partial these variables are available.
 - `$record` is the model used for the cell
 - `$column` is the configured class object `Backend\Classes\ListColumn`
 
-Here is an some example contents of the **_content_column.htm** file.
+Here is an some example contents of the **_content_column.php** file.
 
 ```php
 <?php if ($record->is_active): ?>
