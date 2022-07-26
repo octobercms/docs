@@ -23,8 +23,8 @@ Option | Description
 **maxFiles** | maximum number of files allowed to be uploaded
 **useCaption** | allows a title and description to be set for the file. Default: `true`
 **prompt** | text to display for the upload button, applies to files only, optional
-**thumbOptions** | additional [resize options](../../extend/services/resizer.md) for generating the thumbnail
-**attachOnUpload** | Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Default: false
+**thumbOptions** | additional [resize options](../../extend/services/resizer.md) for generating the thumbnail, or pass `false` to disable thumb generation.
+**deferredBinding** | use deferred binding when uploading a file, when available. Disable this to attach the file immediately on upload instead of when saving. Default: `true`
 
 ::: tip
 Unlike the [Media Finder form widget](./widget-mediafinder.md), the File Upload form widget uses [database file attachments](../../extend/database/attachments.md) so the field name be that of an `attachOne` or `attachMany` relationship attribute on your associated model.

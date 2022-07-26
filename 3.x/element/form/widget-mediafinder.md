@@ -23,6 +23,7 @@ Option | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 **maxItems** | maximum number of items that can be selected.
+**thumbOptions** | additional [resize options](../../extend/services/resizer.md) for generating the thumbnail, or pass `false` to disable thumb generation.
 
 ::: tip
 Unlike the [File Upload form widget](./widget-fileupload.md), the Media Finder form widget stores its data as a string representing the path to the media files selected within the Media Library. It should associate to a normal attribute on your model.
