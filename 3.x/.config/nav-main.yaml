@@ -341,4 +341,5 @@
     children:
         - resources/updating-october
         - resources/installing-packages
+        - ['https://octobercms.com/docker-dev-image', 'Development Docker Image']
         - resources/using-laravel-sail
