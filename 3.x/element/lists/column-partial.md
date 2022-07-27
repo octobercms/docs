@@ -13,7 +13,7 @@ The following properties are supported.
 
 Property | Description
 ------------- | -------------
-**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the field name.
+**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the column name.
 
 You may specify a fully qualified `path` to access partials outside the controller scope.
 
