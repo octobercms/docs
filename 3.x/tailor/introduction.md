@@ -49,6 +49,9 @@ uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6
 handle: Blog\Post
 type: entry
 name: Post
+
+fields:
+    # [...]
 ```
 
 The blueprint **handle** is a human readible approach to referencing a blueprint object. Using the above blueprint as a reference, we can reference the entries using the handle.

@@ -8,6 +8,11 @@
         - definitions
         - field-conditions
 -
+    title: Tailor Fields
+    children:
+        - content/field-mixin
+        - content/field-entries
+-
     title: Form Fields
     children:
         - form/field-text
@@ -45,11 +50,6 @@
         - form/widget-richeditor
         - form/widget-sensitive
         - form/widget-taglist
--
-    title: Tailor Fields
-    children:
-        - content/field-mixin
-        - content/field-entries
 -
     title: List Columns
     children:
