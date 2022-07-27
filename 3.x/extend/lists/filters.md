@@ -10,9 +10,7 @@ October CMS provides features for filtering database records. For behaviors that
 The [List Controller](./list-controller.md) and [Relation Controller](../forms/form-controller.md) backend behaviors can be filtered by adding a **filter** property to the configuration. When defined, the available filters are shown above the list.
 
 ```yaml
-# ===================================
-#  List Behavior Config
-# ===================================
+# config_list.yaml
 
 # ...
 
@@ -25,10 +23,7 @@ filter: $/october/test/models/user/scopes.yaml
 Similarly filters are driven by their own configuration file that contain filter **scopes**. Each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
 
 ```yaml
-# ===================================
-# Filter Scope Definitions
-# ===================================
-
+# scopes.yaml
 scopes:
 
     category:

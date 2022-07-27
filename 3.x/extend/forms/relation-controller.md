@@ -44,10 +44,7 @@ class Invoice extends Model
 An `Invoice` model with a relationship called `items` should define the first level field using the same relationship name.
 
 ```yaml
-# ===================================
-#  Relation Behavior Config
-# ===================================
-
+# config_relation.yaml
 items:
     label: Invoice Line Item
     view:
@@ -170,10 +167,7 @@ How the relation manager is displayed depends on the relationship definition in 
 For example, if a **Blog Post** has many **Comments**, the target model is set as the blog post and a list of comments is displayed, using columns from the `list` definition. Clicking on a comment opens a popup form with the fields defined in `form` to update the comment. Comments can be created in the same way. Below is an example of the relation behavior configuration file.
 
 ```yaml
-# ===================================
-#  Relation Behavior Config
-# ===================================
-
+# config_relation.yaml
 comments:
     label: Comment
     manage:
@@ -195,10 +189,7 @@ comments:
 For example, if a **User** belongs to many **Roles**, the target model is set as the user and a list of roles is displayed, using columns from the `list` definition. Existing roles can be added and removed from the user. Below is an example of the relation behavior configuration file.
 
 ```yaml
-# ===================================
-#  Relation Behavior Config
-# ===================================
-
+# config_relation.yaml
 roles:
     label: Role
     view:
@@ -219,10 +210,7 @@ roles:
 Continuing the example in **Belongs To Many** relations, if a role also carried an expiry date, clicking on a role will open a popup form with the fields defined in `pivot` to update the expiry date. Below is an example of the relation behavior configuration file.
 
 ```yaml
-# ===================================
-#  Relation Behavior Config
-# ===================================
-
+# config_relation.yaml
 roles:
     label: Role
     view:
@@ -236,10 +224,7 @@ roles:
 Pivot data is available when defining form fields and list columns via the `pivot` relation, see the example below.
 
 ```yaml
-# ===================================
-#  Relation Behavior Config
-# ===================================
-
+# config_relation.yaml
 teams:
     label: Team
     view:
@@ -273,10 +258,7 @@ teams:
 For example, if a **Phone** belongs to a **Person** the relation manager will display a form with the fields defined in `form`. Clicking the Link button will display a list of People to associate with the Phone. Clicking the Unlink button will dissociate the Phone with the Person.
 
 ```yaml
-# ===================================
-#  Relation Behavior Config
-# ===================================
-
+# config_relation.yaml
 person:
     label: Person
     view:
@@ -299,10 +281,7 @@ person:
 For example, if a **Person** has one **Phone** the relation manager will display form with the fields defined in `form` for the Phone. When clicking the Update button, a popup is displayed with the fields now editable. If the Person already has a Phone the fields are update, otherwise a new Phone is created for them.
 
 ```yaml
-# ===================================
-#  Relation Behavior Config
-# ===================================
-
+# config_relation.yaml
 phone:
     label: Phone
     view:

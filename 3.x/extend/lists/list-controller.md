@@ -16,7 +16,7 @@ class Categories extends \Backend\Classes\Controller
         \Backend\Behaviors\ListController::class
     ];
 
-    public $listConfig = 'list_config.yaml';
+    public $listConfig = 'config_list.yaml';
 }
 ```
 
@@ -29,10 +29,7 @@ Very often the list and [form controller](../forms/form-controller.md) are used 
 The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical list behavior configuration file.
 
 ```yaml
-# ===================================
-##  List Behavior Config
-# ===================================
-
+# config_list.yaml
 title: Blog Posts
 list: ~/plugins/acme/blog/models/post/columns.yaml
 modelClass: Acme\Blog\Models\Post
@@ -156,10 +153,7 @@ List columns are defined with the YAML file. The column configuration is used by
 The next example shows the typical contents of a list column definitions file.
 
 ```yaml
-# ===================================
-#  List Column Definitions
-# ===================================
-
+# columns.yaml
 columns:
     name: Name
     email: Email
@@ -381,7 +375,7 @@ class Categories extends \Backend\Classes\Controller
         \Backend\Behaviors\ListController::class
     ];
 
-    public $listConfig = 'list_config.yaml';
+    public $listConfig = 'config_list.yaml';
 }
 ```
 
@@ -632,10 +626,7 @@ public function evalUppercaseListColumn($value, $column, $record)
 Using the custom list column type is as simple as calling it by name using the `type` property.
 
 ```yaml
-# ===================================
-#  List Column Definitions
-# ===================================
-
+# columns.yaml
 columns:
     secret_code:
         label: Secret code

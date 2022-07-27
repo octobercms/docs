@@ -72,6 +72,7 @@ The class must define a method called `exportData` used for returning the export
 Both import and export forms support custom options that can be introduced using form fields, defined in the **form** option in the import or export configuration respectively. These values are then passed to the Import / Export model and are available during processing.
 
 ```yaml
+# config_import_export.yaml
 import:
     # ...
     form: $/acme/campaign/models/subscriberimport/fields.yaml
@@ -84,10 +85,7 @@ export:
 The form fields specified will appear on the import/export page. Here is an example `fields.yaml` file contents:
 
 ```yaml
-# ===================================
-#  Form Field Definitions
-# ===================================
-
+# fields.yaml
 fields:
 
     auto_create_lists:

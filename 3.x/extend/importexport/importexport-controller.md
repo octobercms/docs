@@ -27,10 +27,7 @@ class Products extends Controller
 The configuration file referred in the `$importExportConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](../system/views.md). Below is an example of a configuration file.
 
 ```yaml
-# ===================================
-#  Import/Export Behavior Config
-# ===================================
-
+# config_import_export.yaml
 import:
     title: Import subscribers
     modelClass: Acme\Campaign\Models\SubscriberImport

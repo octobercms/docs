@@ -29,10 +29,7 @@ Very often the form and [list controller](../lists/list-controller.md) are used 
 The configuration file referred in the `$formConfig` property is defined in YAML format. The file should be placed into the [controller's view directory](../system/views.md). Below is an example of a typical form behavior configuration file.
 
 ```yaml
-# ===================================
-#  Form Behavior Config
-# ===================================
-
+# config_form.yaml
 name: Blog Category
 form: $/acme/blog/models/post/fields.yaml
 modelClass: Acme\Blog\Post
@@ -190,10 +187,7 @@ Form fields are defined with the YAML file. The form fields configuration is use
 Fields can be placed in three areas, the **outside area**, **primary tabs** or **secondary tabs**. The next example shows the typical contents of a form fields definition file.
 
 ```yaml
-# ===================================
-#  Form Field Definitions
-# ===================================
-
+# fields.yaml
 fields:
     blog_title:
         label: Blog Title
