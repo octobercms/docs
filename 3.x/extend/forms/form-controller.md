@@ -240,6 +240,7 @@ Property | Description
 **required** | places a red asterisk next to the field label to indicate it is required. Be sure to use the [validation trait on the model](../database/traits.md) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
+**order** | a numerical weight when determining the display order, default value increments at 100 points per field.
 **permissions** | the [permissions](../backend/permissions.md) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ### Tab Properties
