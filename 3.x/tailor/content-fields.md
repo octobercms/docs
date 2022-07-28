@@ -37,19 +37,73 @@ Property | Description
 
 ## List and Filter Properties
 
-When it comes to displaying a field in a list or filter, each field has its own default settings. You may override these settings with these properties.
+When it comes to displaying a field in a list or filter, each field has its own default settings. You may override these settings on a per field basis and this is suitable for minor adjustments. For more complex use cases, we recommend defining columns and scopes separately from the fields (see below).
 
 Property | Description
 ------------- | -------------
 **column** | defines how to display the field in a list, see [list column definitions](../element/definitions.md).
 **scope** | defines how to display the field in a filter, see [filter scope definitions](../element/definitions.md).
 
-If the **column** or **scope** values are set to `false` then the field will not be displayed in either.
+### Field Configuration
+
+An example can be specifying a different label for each using the `column` or `scope` properties of the field.
 
 ```yaml
 myfield:
-    type: textarea
+    label: Form Label
+    column:
+        label: List Label
+    scope:
+        label: Filter Label
+```
+
+If the are set to `false` then the field will disable and prevent it from being displayed.
+
+```yaml
+myfield:
+    label: Form Label
     column: false
+    scope: false
+```
+
+### External Configuration
+
+You may define the scopes and columns separately from the form fields by using the `columns` and `scopes` property in the blueprint. When using external configuration, the default view will be replaced by only the defined fields.
+
+```yaml
+scopes:
+    myfield:
+        label: Filter Label
+        # [...]
+
+columns:
+    myfield:
+        label: List Label
+        # [...]
+
+fields:
+    myfield:
+        label: Form Label
+        # [...]
+```
+
+List columns have short-hand values that can be used. Passing a string will replace the label, passing `true` will include the default column, passing `false` will remove the column and passing `null` will make the column invisible.
+
+```yaml
+columns:
+    myfield: List Label   # New Label
+    showfield: true       # Shown
+    otherfield: false     # Hidden
+    lastfield: null       # Invisible
+```
+
+Filter scopes have a similar short-hand values to the list columns that can be used.
+
+```yaml
+scopes:
+    myfield: Filter Label # New Label
+    otherfield: true      # Shown
+    otherfield: false     # Hidden
 ```
 
 #### See Also
