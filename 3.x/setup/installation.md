@@ -105,6 +105,10 @@ It can happen with older versions of MySQL or MariaDB. [Configuring the index le
 Check the permissions are set correctly on the /storage files and subdirectories. They must be writable for the web server.
 :::
 
+::: details Invalid security token error when logging in
+Check to make sure that there are no missing subdirectories in the storage/framework path. You may need to add the [sessions, cache and views directories](https://github.com/octobercms/october-private/tree/develop/storage/framework).
+:::
+
 ::: details The backend panel displays "Page not found" (404)
 If the application cannot find the database then a 404 page will be shown for the back-end. Try enabling [debug mode](../setup/configuration.md#debug-mode) to see the underlying error message.
 :::

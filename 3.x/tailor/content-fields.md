@@ -92,9 +92,9 @@ List columns have short-hand values that can be used. Passing a string will repl
 ```yaml
 columns:
     myfield: List Label   # New Label
-    showfield: true       # Shown
-    otherfield: false     # Hidden
-    lastfield: null       # Invisible
+    myfield: true         # Shown
+    myfield: false        # Hidden
+    myfield: null         # Invisible
 ```
 
 Filter scopes have a similar short-hand values to the list columns that can be used.
@@ -102,8 +102,8 @@ Filter scopes have a similar short-hand values to the list columns that can be u
 ```yaml
 scopes:
     myfield: Filter Label # New Label
-    otherfield: true      # Shown
-    otherfield: false     # Hidden
+    myfield: true         # Shown
+    myfield: false        # Hidden
 ```
 
 #### See Also
