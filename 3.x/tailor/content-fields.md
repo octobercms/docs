@@ -110,6 +110,34 @@ scopes:
     myfield: false        # Hidden
 ```
 
+## Form Field Validation
+
+You may specify validation rules for form fields using the `validation` field property, see [the validation article](../extend/services/validation.md) for rule definitions.
+
+```yaml
+fields:
+    myfield:
+        label: Featured Text
+        validation: "required|min:15"
+```
+
+Validation rules can also be defined externally in the blueprint file using the `validation` blueprint property. This allows you to set custom attribute names and validation messages.
+
+```yaml
+validation:
+    rules:
+        myfield: "required|min:15"
+    attributeNames:
+        myfield: My Field
+    customMessages:
+        myfield.min: "My field has to be at least 15 characters long"
+
+fields:
+    myfield:
+        label: Form Label
+        # [...]
+```
+
 #### See Also
 
 ::: also
