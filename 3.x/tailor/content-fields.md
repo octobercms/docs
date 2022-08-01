@@ -3,6 +3,10 @@ subtitle: Get started by defining form fields for your content.
 ---
 # Content Fields
 
+::: aside
+You may build custom content fields by [extending tailor](../extend/tailor-fields.md).
+:::
+
 Content Fields are the cornerstone of the Tailor module and define how a field should be configured and displayed. These definitions are often found under the **fields** property of a blueprint.
 
 ```yaml
