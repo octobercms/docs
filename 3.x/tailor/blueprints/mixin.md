@@ -27,7 +27,7 @@ Property | Description
 -------- | -------------
 **handle** | A meaningful and unique code to identify the entry.
 **name** | The label to display when working with this entry.
-**fields** | form fields belonging to the group, see [backend form fields](../../element/definitions.md).
+**fields** | form fields belonging to the group, see [backend form fields](../../element/form-fields.md).
 
 
 ## Using the Mixin

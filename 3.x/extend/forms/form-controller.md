@@ -5,7 +5,7 @@ subtitle: Adds form management features to any backend page.
 
 The `Backend\Behaviors\FormController` class is a controller behavior used for easily adding form functionality to a backend page. The behavior provides three pages called Create, Update and Preview. The Preview page is a read-only version of the Update page. When you use the form behavior you don't need to define the `create`, `update` and `preview` actions in the controller - the behavior does it for you. However you should provide the corresponding view files.
 
-Form behavior depends on form [field definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior properties.
+Form behavior depends on form [field definitions](../../element/form-fields.md) and a [model class](../database/model.md). In order to use the form behavior you should add it to the `$implement` property of the controller class. Also, the `$formConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior properties.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -49,7 +49,7 @@ The following properties are required in the form configuration file.
 Property | Description
 ------------- | -------------
 **name** | the name of the object being managed by this form.
-**form** | a configuration array or reference to a form field definition file, see [form fields](../../element/definitions.md).
+**form** | a configuration array or reference to a form field definition file, see [form fields](../../element/form-fields.md).
 **modelClass** | a model class name, the form data is loaded and saved against this model.
 
 The configuration properties listed below are optional. Define them if you want the form behavior to support the Create, Update or Preview pages.
@@ -216,7 +216,7 @@ For each field you can specify these common properties, where applicable.
 Property | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
-**type** | defines how this field should be rendered, see [form field definitions](../../element/definitions.md). Default: `text`.
+**type** | defines how this field should be rendered, see [form field definitions](../../element/form-fields.md). Default: `text`.
 **span** | aligns the form field to one side. Options: `auto`, `left`, `right`, `row`, `full`. Default: `full`.
 **spanClass** | used with the span `row` property to display the form as a Bootstrap grid, for example, `spanClass: col-xs-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
@@ -235,8 +235,8 @@ Property | Description
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
 **dependsOn** | an array of other field names this field [depends on](./field-dependencies.md), when the other fields are modified, this field will update.
 **changeHandler** | the name of an AJAX handler to call when the field value is changed, optional.
-**trigger** | specify conditions for this field using [trigger events](../../element/field-conditions.md).
-**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](../../element/field-conditions.md).
+**trigger** | specify conditions for this field using [trigger events](../../element/form-fields.md).
+**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](../../element/form-fields.md).
 **required** | places a red asterisk next to the field label to indicate it is required. Be sure to use the [validation trait on the model](../database/traits.md) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
@@ -299,7 +299,7 @@ tabs:
 
 ### Custom Field Types
 
-There are various native field types that can be used for the **type** setting. To learn more, take a look at the available [form field definitions](../../element/definitions.md). It is possible to render a field directly by specifying the PHP class name of a [form field widget](form-widgets.md).
+There are various native field types that can be used for the **type** setting. To learn more, take a look at the available [form field definitions](../../element/form-fields.md). It is possible to render a field directly by specifying the PHP class name of a [form field widget](form-widgets.md).
 
 ```yaml
 blog_content:
@@ -530,7 +530,7 @@ Method | Description
 **addSecondaryTabFields** | adds new fields to the secondary tabbed area
 **removeField** | remove a field from any areas
 
-Each method takes an array of fields similar to the [form field configuration](../../element/definitions.md).
+Each method takes an array of fields similar to the [form field configuration](../../element/form-fields.md).
 
 <a id="oc-filtering-form-fields"></a>
 ### Filtering Form Fields

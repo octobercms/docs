@@ -28,7 +28,7 @@ Below you can see an example blueprint directory structure. Each blueprint can r
 
 ## Blueprint Types
 
-The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify [form field definitions](../element/definitions.md).
+The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify [form field definitions](../element/form-fields.md).
 
 Type | Description
 ------------- | -------------

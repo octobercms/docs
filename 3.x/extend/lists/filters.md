@@ -70,7 +70,7 @@ For each scope you can specify these properties (where applicable).
 Property | Description
 ------------- | -------------
 **label** | a name when displaying the filter scope to the user.
-**type** | defines how this scope should be , see [filter scope definitions](../../element/definitions.md). Default: `group`.
+**type** | defines how this scope should be displayed, see [filter scope definitions](../../element/filter-scopes.md). Default: `group`.
 **conditions** | enables or disables condition functions or specifies a raw where query statement to apply to each condition, see the scope type definition for details.
 **modelScope** | specifies a [query scope method](../database/model.md) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s).
 **options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.

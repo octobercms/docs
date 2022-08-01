@@ -71,8 +71,8 @@ These configuration values can be specified for the **view** or **manage** prope
 
 Property | Type | Description
 ------------- | ------------- | -------------
-**form** | Form | a reference to form field definition file, see [backend form fields](../../element/definitions.md).
-**list** | List | a reference to list column definition file, see [backend list columns](../../element/definitions.md).
+**form** | Form | a reference to form field definition file, see [backend form fields](../../element/form-fields.md).
+**list** | List | a reference to list column definition file, see [backend list columns](../../element/list-columns.md).
 **showFlash** | Both | enables the display of flash messages after a successful action. Default: `true`
 **showSearch** | List | display an input for searching the records. Default: `false`
 **showSorting** | List | displays the sorting link on each column. Default: `true`

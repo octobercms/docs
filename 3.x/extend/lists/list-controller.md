@@ -5,7 +5,7 @@ subtitle: Adds list management features to any backend page.
 
 The `Backend\Behaviors\ListController` class is a controller behavior used for easily adding a record list to a page. The behavior provides the sortable and searchable list with optional links on its records. The behavior provides the controller action `index` however the list can be rendered anywhere and multiple list definitions can be used.
 
-List behavior depends on list [column definitions](../../element/definitions.md) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior properties.
+List behavior depends on list [column definitions](../../element/list-columns.md) and a [model class](../database/model.md). In order to use the list behavior you should add it to the `$implement` property of the controller class. Also, the `$listConfig` class property should be defined and its value should refer to the YAML file used for configuring the behavior properties.
 
 ```php
 namespace Acme\Blog\Controllers;
@@ -41,7 +41,7 @@ The following properties are required in the list configuration file.
 Property | Description
 ------------- | -------------
 **title** | a title for this list.
-**list** | a configuration array or reference to a list column definition file, see [list columns](../../element/definitions.md).
+**list** | a configuration array or reference to a list column definition file, see [list columns](../../element/list-columns.md).
 **modelClass** | a model class name, the list data is loaded from this model.
 
 The configuration properties listed below are optional.
@@ -166,7 +166,7 @@ For each column can specify these properties (where applicable):
 Property | Description
 ------------- | -------------
 **label** | a name when displaying the list column to the user.
-**type** | defines how this column should be rendered, see [list column definitions](../../element/definitions.md).
+**type** | defines how this column should be rendered, see [list column definitions](../../element/list-columns.md).
 **default** | specifies the default value for the column if value is empty.
 **searchable** | include this column in the list search results. Default: false.
 **invisible** | specifies if this column is hidden by default. Default: false.
@@ -426,7 +426,7 @@ Method | Description
 **removeColumn** | removes a column from the list
 **getColumn** | returns an existing column definition
 
-Each method takes an array of columns similar to the [list column configuration](../../element/definitions.md).
+Each method takes an array of columns similar to the [list column configuration](../../element/list-columns.md).
 
 ### Inject CSS Row Class
 

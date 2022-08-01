@@ -1,11 +1,44 @@
 ---
-subtitle: Learn how to apply conditions to form fields.
+subtitle: Learn about the different form field types.
 ---
-# Field Conditions
+# Defining Form Fields
+
+::: aside
+← Use the sidebar to see all the available form fields.
+:::
+
+Form Fields, Form UI and Form Widgets are field definitions used by forms, such as a text input. These are commonly referred to by the following areas:
+
+- [CMS Theme Settings](../cms/themes/settings.md)
+- [Tailor Content Fields](../tailor/content-fields.md)
+- [Backend Form Controller](../extend/forms/form-controller.md)
+- [Backend Relation Controller](../extend/forms/relation-controller.md)
+
+All form fields are identified as their individual **type** property.
+
+```yaml
+myfield:
+    type: textarea
+    # ...
+```
+
+Form Fields contain generic and simple fields. Form UI is for user interface elements that can be included in forms to help with the layout design. Form Widgets will often introduce more complex functionality, it is common for plugins to provide their own custom form widgets.
+
+### Tailor Fields
+
+There are some fields that are only available inside tailor blueprints. Like form fields, these values are used as the **type** property of a field definition.
+
+```yaml
+author:
+    type: entries
+    # ...
+```
+
+## Field Conditions
 
 Sometimes you may want to manipulate the value or appearance of a form field under certain conditions, for example, you may want to hide an input if a checkbox is ticked or preset the value of another field.
 
-## Trigger Events
+### Trigger Events
 
 Trigger Events are defined with the `trigger` form field property and is a simple browser based solution that uses JavaScript. It allows you to change elements attributes such as visibility or value, based on another elements' state. Here is a sample definition:
 
@@ -35,7 +68,7 @@ Property | Description
 **field** | defines the other field name that will trigger the action.
 **condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
 
-### Multiple Actions
+#### Multiple Actions
 
 You may combine multiple actions by separating them with a pipe `|` symbol. The following will both display and empty the input when the trigger condition is met.
 
@@ -46,7 +79,7 @@ trigger:
     field: name
 ```
 
-### Multiple Value Conditions
+#### Multiple Value Conditions
 
 When using the `value[]` condition, you may look for multiple values by passing extra values after the first one, which takes the format `value[][]`.
 
@@ -57,7 +90,7 @@ trigger:
     field: file_format
 ```
 
-### Referencing Parent Fields
+#### Referencing Parent Fields
 
 Normally the field name refers to a field in the same level form. For example, if this field is in a [repeater widget](./form/widget-repeater.md), only fields in that same repeater widget will be checked. However, if the field name is preceded by a caret symbol `^` like: `^parent_field`, it will refer to a repeater widget or form one level higher than the field itself.
 
@@ -90,7 +123,7 @@ fields:
 Additionally, if more than one caret `^` is used, it will refer that many levels higher: `^^grand_parent_field`, `^^^grand_grand_parent_field`, etc.
 :::
 
-## Input Preset Converter
+### Input Preset Converter
 
 The input preset converter is defined with the `preset` form field property and allows you to convert text entered into an element to a URL, slug or file name value in another input element.
 

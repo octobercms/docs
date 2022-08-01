@@ -5,8 +5,9 @@
 -
     title: Element
     children:
-        - definitions
-        - field-conditions
+        - form-fields
+        - list-columns
+        - filter-scopes
 -
     title: Tailor Fields
     children:
