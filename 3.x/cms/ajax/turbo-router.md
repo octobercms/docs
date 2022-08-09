@@ -143,6 +143,20 @@ addEventListener('page:unload', function() {
 }, { once: true });
 ```
 
+### Pausing Rendering
+
+If you would like to close some elements like dropdowns or off-canvas menus before loading a new page, you can pause the `page:before-render` event by preventing the default behavior and resuming it with the `resume()` function in the event detail.
+
+```js
+addEventListener('page:before-render', async (event) => {
+    event.preventDefault();
+
+    await animateOut();
+
+    event.detail.resume();
+});
+```
+
 ## Global Events
 
 The AJAX framework triggers several events during the navigation lifecycle and page responses. The events are usually triggered on the `document` object with details available on the `event.detail` property.
