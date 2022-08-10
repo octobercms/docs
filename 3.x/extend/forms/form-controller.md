@@ -459,14 +459,14 @@ public function update($recordId, $context = null)
 
 ### Overriding Form Save Data
 
-You may use the `formBeforeSave` override (or equivalent) to change the save values of the form before it is saved or updated. To fetch the current save value of field use the `formGetSaveValue(key)` method and to override the save value of a field use the `formSetSaveValue(key, value)` method.
+You may use the `formBeforeSave` override (or equivalent) to change the save values of the form before it is saved or updated. To override the save value of a field use the `formSetSaveValue(key, value)` method.
 
 ```php
 public function formBeforeSave($model)
 {
     // When locale dropdown is set to "custom", override with the _custom_locale text field
-    if ($this->formGetSaveValue('locale') === 'custom') {
-        $this->formSetSaveValue('locale', $this->formGetSaveValue('_custom_locale'));
+    if (post('MyModel[locale]') === 'custom') {
+        $this->formSetSaveValue('locale', post('MyModel[_custom_locale]'));
     }
 }
 ```
