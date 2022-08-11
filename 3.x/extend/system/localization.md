@@ -135,6 +135,26 @@ By default this will override the active locale, the third argument can specify 
 Lang::set('I love programming.', 'Le codage est le meilleur!', 'fr');
 ```
 
+## Contributing Language Strings
+
+If you discover incorrect translations in October CMS for your language, you may fix them by visiting the [repository on GitHub](https://github.com/octobercms/october/tree/develop/modules) and submitting a pull request. In this example we will modify the Dutch language that uses the `nl` language code. The language files are distributed among the various modules so you may need to check multiple files to find the language string, in this example, we know the string is located in the Tailor module.
+
+1. Open the [GitHub repository](https://github.com/octobercms/october/tree/develop/modules).
+2. Click on **tailor**, then **lang** to open the language directory for Tailor
+3. Click on the **nl.json** file to open the language file for Dutch
+4. At the top right, click the pencil icon to **Edit this file**
+
+In the file you will see the English version on the left side and the Dutch version on the right side, for example:
+
+```json
+{
+  "Manage Entries": "Invoer beheren",
+  "Create :name Entry": "Maak :name invoer"
+}
+```
+
+When making the update, only modify the right side which contains the translated value. Some values may contain variables such as `:name` and these should be left intact. Once completed, click the **Commit changes** button to submit a new Pull Request. It will be reviewed by the team and included in subsequent releases.
+
 #### See Also
 
 ::: also
