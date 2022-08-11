@@ -502,7 +502,7 @@ $user->forceDelete();
 $user->posts()->forceDelete();
 ```
 
-### Soft Deleting Relations
+#### Soft Deleting Relations
 
 When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](./relations.md). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
 
@@ -540,6 +540,30 @@ class User extends Model
     ];
 }
 ```
+
+### Multi Site
+
+When applying multi-site to a model, only records shown for the active site are available using a `site_id` column set on the record. To enable multi-site for a model, apply the `October\Rain\Database\Traits\Multisite` trait to the model and define the propagation fields to the `$propagated` property:
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Multisite;
+
+    protected $propagated = ['api_code'];
+}
+```
+
+To add a `site_id` column to your table, you may use the `integer` method from a migration. A `site_root_id` may also be used to link records together using a root record.
+
+```php
+Schema::table('posts', function ($table) {
+    $table->integer('site_id')->nullable()->index();
+    $table->integer('site_root_id')->nullable()->index();
+});
+```
+
+Now, when a record is created it will be assigned to the active site and switching to a different site will propagate a new record automatically. When updating a record, propagated fields are copied to every record belonging to the root record.
 
 ### Revisionable
 
