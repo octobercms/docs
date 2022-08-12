@@ -25,7 +25,7 @@ Option | Description
 **prompt** | text to display for the create button. Default: Add new item.
 **displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
 **itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
-**titleFrom** | name of field within items to use as the title for the collapsed item.
+**titleFrom** | name of field within items to use as the title for the collapsed item, optional.
 **minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set `minItems: 1` the first row will be displayed and not hidden.
 **maxItems** | maximum number of items to allow within the repeater.
 **groups** | references a group of form fields placing the repeater in group mode (see below). An inline definition can also be used.
@@ -81,6 +81,7 @@ Option | Description
 **name** | the name of the group.
 **description** | a brief description of the group.
 **icon** | defines an icon for the group, optional.
+**titleFrom** | name of a field for the item title, optional.
 **fields** | form fields belonging to the group.
 
 ::: tip

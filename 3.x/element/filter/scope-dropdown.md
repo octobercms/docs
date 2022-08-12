@@ -28,5 +28,6 @@ You may dynamically supply `options` by passing a model method.
 roles:
     label: Status
     type: dropdown
+    emptyOption: All
     options: getStatusOptions
 ```

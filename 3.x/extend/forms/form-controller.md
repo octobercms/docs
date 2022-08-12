@@ -322,7 +322,7 @@ public function formGetConfig()
 
 ### Overriding Controller Action
 
-You can use your own logic for the `create`, `update` or `preview` action method in the controller, then optionally call the Form behavior parent method.
+You may use your own logic for the `create`, `update` or `preview` action method in the controller, then optionally call the Form behavior parent method.
 
 ```php
 public function update($recordId, $context = null)
@@ -333,6 +333,20 @@ public function update($recordId, $context = null)
 
     // Call the FormController behavior update() method
     return $this->asExtension('FormController')->update($recordId, $context);
+}
+```
+
+### Overriding Form Save Data
+
+You may use the `formBeforeSave` override (or equivalent) to change the save values of the form before it is saved or updated. To override the save value of a field use the `formSetSaveValue(key, value)` method.
+
+```php
+public function formBeforeSave($model)
+{
+    // When locale dropdown is set to "custom", override with the _custom_locale text field
+    if (post('MyModel[locale]') === 'custom') {
+        $this->formSetSaveValue('locale', post('MyModel[_custom_locale]'));
+    }
 }
 ```
 
@@ -383,7 +397,7 @@ Categories::extendFormFields(function($form, $model, $context) {
 
     $form->addFields([
         'my_field' => [
-            'label'   => 'My Field',
+            'label' => 'My Field',
             'comment' => 'This is a custom field I have added.',
         ],
     ]);
