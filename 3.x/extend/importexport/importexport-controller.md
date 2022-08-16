@@ -107,6 +107,7 @@ The following configuration properties (all optional) are supported for the form
 Property | Description
 ------------- | -------------
 **fileFormat** | File format as either `json` or `csv`, default: `csv`.
+**customJson** | Use a custom format for the `json` format type.
 **delimiter** | Delimiter character.
 **enclosure** | Enclosure character.
 **escape** | Escape character.

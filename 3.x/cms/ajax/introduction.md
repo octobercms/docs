@@ -19,10 +19,10 @@ When working with your [CMS theme](../../cms/themes/themes.md), using the librar
 {% framework %}
 ```
 
-The `{% framework %}` tag supports the optional **extras** parameter. If this parameter is specified, the tag adds StyleSheet and JavaScript files for [extra features](./extras.md), including form validation, loading indicators and [turbo-charged routing](./turbo-router.md).
+The `{% framework %}` tag supports the optional **extras** and **turbo** parameters. If these parameter are specified, the tag adds StyleSheet and JavaScript files for [extra features](./extras.md), including form validation, loading indicators and [turbo-charged routing](./turbo-router.md).
 
 ```twig
-{% framework extras %}
+{% framework extras turbo %}
 ```
 
 ## How AJAX Requests Work

@@ -106,7 +106,7 @@ Check the permissions are set correctly on the /storage files and subdirectories
 :::
 
 ::: details Invalid security token error when logging in
-Check to make sure that there are no missing subdirectories in the storage/framework path. You may need to add the [sessions, cache and views directories](https://github.com/octobercms/october-private/tree/develop/storage/framework).
+Check to ensure no missing subdirectories in the storage/framework path. You may need to add the [sessions, cache and views directories](https://github.com/octobercms/october-private/tree/develop/storage/framework).
 :::
 
 ::: details The backend panel displays "Page not found" (404)
