@@ -1,7 +1,7 @@
 ---
 subtitle: Learn how to translate content using multiple sites
 ---
-# Multisite
+# Multisite & Localization
 
 The multisite feature lets you manage multiple websites from a single October CMS installation and assign content dependent on the domain name. For example, an e-commerce store with different country-specific sub-sites. You can also use it to manage translations for a localized website.
 
@@ -11,15 +11,43 @@ You can create sites by visiting the admin panel's **Settings → Manage Sites**
 
 The following configuration defines each site:
 
-* Enabled - determines if you can access the site on the front end.
-* Name - specifies the site name.
-* Unique Code - specifies a unique site code for lookup using APIs.
-* Theme - the CMS theme to use when this site is active.
-* Locale - the application locale used for this site.
-* Timezone - the timezone to use for this site.
-* Custom application URL - the URL to use when this site is active, for things like mail templates or when the link policy forces the URL.
-* Use a CMS route prefix - defines a prefix to include before every page route. It can identify this site when using a shared hostname.
-* Define matching hostnames - restricts the site to specific hostnames. You should enable this for production sites for security reasons. Wildcard values are supported, e.g.: `*.mydomain.tld`.
-* Display a color for this site - when enabled, displays a banner at the top of the admin panel. Useful to identify the active site or distinguish different environments, for example, red for development, green for staging and no color for production.
+- **Enabled** - determines if you can access the site on the front end.
+- **Name** - specifies the site name.
+- **Unique Code** - specifies a unique site code for lookup using APIs.
+- **Theme** - the CMS theme to use when this site is active.
+- **Locale** - the application locale used for this site.
+- **Timezone** - the timezone to use for this site.
+- **Custom application URL** - the URL to use when this site is active, for things like mail templates or when the link policy forces the URL.
+- **Use a CMS route prefix** - defines a prefix to include before every page route. It can identify this site when using a shared hostname.
+- **Define matching hostnames** - restricts the site to specific hostnames. You should enable this for production sites for security reasons. Wildcard values are supported, e.g.: `*.mydomain.tld`.
+- **Display a color for this site** - when enabled, displays a banner at the top of the admin panel. Useful to identify the active site or distinguish different environments, for example, red for development, green for staging and no color for production.
 
 When you create more than one site, each can be selected in the admin panel using the site selection dropdown menu.
+
+## Site Picker Component
+
+The `sitePicker` component lets you manage links to other sites. The best place to include this is in your page or layout template.
+
+```yaml
+[sitePicker]
+==
+{% set availableSites = sitePicker.sites %}
+```
+
+The following is an example of displaying a dropdown that switches between sites. It is used in conjunction with the `this.site` [Twig property](../../markup/property/this-site.md).
+
+```twig
+<select class="form-control" onchange="window.location.assign(this.value)">
+    {% for site in sitePicker.sites %}
+        <option value="{{ site.url }}" {{ this.site.code == site.code ? 'selected' }}>{{ site.name }}</option>
+    {% endfor %}
+</select>
+```
+
+Another example is generating alternative page links using meta tags
+
+```twig
+{% for site in sitePicker.sites %}
+    <link rel="alternate" hreflang="{{ site.locale }}" href="{{ site.url }}" />
+{% endfor %}
+```
