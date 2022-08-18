@@ -311,8 +311,9 @@
         - media/introduction
         - media/providers
 -
-    title: API Resources
+    title: Resources
     children:
+        - resources/multisite
         - resources/building-apis
 
 #
