@@ -62,7 +62,7 @@ The `app/assets` directory contains asset files, such as JavaScript, CSS and ima
 
 ### Blueprints Directory
 
-The `app/blueprints` directory contains [content blueprint](../tailor/introduction.md) files used by Tailor.
+The `app/blueprints` directory contains [content blueprint](../cms/tailor/introduction.md) files used by Tailor.
 
 ### Others Directories
 

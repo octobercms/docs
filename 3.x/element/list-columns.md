@@ -1,7 +1,7 @@
 ---
 subtitle: Learn how to define columns in a list structure.
 ---
-# Defining List Columns
+# List Columns
 
 ::: aside
 ← Use the sidebar to see all the available list columns.

@@ -3,7 +3,7 @@ subtitle: Populate blueprints and database records with sample content.
 ---
 # Seeding Themes
 
-Themes support the ability to import sample content from seed scripts, including database content and [Tailor blueprints](../../tailor/introduction.md). A specific folder inside the theme called **seeds** is used along with a directory structure to provide the content.
+Themes support the ability to import sample content from seed scripts, including database content and [Tailor blueprints](../../cms/tailor/introduction.md). A specific folder inside the theme called **seeds** is used along with a directory structure to provide the content.
 
 ## Directory Structure
 

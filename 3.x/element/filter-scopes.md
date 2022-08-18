@@ -1,7 +1,7 @@
 ---
 subtitle: Learn how to filter lists using scopes.
 ---
-# Defining Filter Scopes
+# Filter Scopes
 
 ::: aside
 ← Use the sidebar to see all the available filter scopes.

@@ -3,7 +3,7 @@
 #
 "/element/":
 -
-    title: Element
+    title: Definitions
     children:
         - form-fields
         - list-columns
@@ -79,7 +79,7 @@
 #
 "/extend/":
 -
-    title: System Overview
+    title: Basic Overview
     children:
         - system/plugins
         - system/models
@@ -88,15 +88,6 @@
         - system/behaviors
         - system/widgets
         - system/ajax
--
-    title: Advanced Overview
-    children:
-        - system/exceptions
-        - system/sending-mail
-        - system/localization
-        - system/routing
-        - system/scheduling
-        - system/unit-testing
 -
     title: Extending the CMS
     children:
@@ -137,6 +128,15 @@
         - settings/settings
         - settings/file-settings
         - settings/model-settings
+-
+    title: Advanced Overview
+    children:
+        - system/exceptions
+        - system/sending-mail
+        - system/localization
+        - system/routing
+        - system/scheduling
+        - system/unit-testing
 -
     title: Database Layer
     children:
@@ -244,39 +244,6 @@
         - function/html
 
 #
-# Tailor Nav
-#
-"/tailor/":
--
-    title: Tailor
-    collapsable: false
-    children:
-        - introduction
-        - content-fields
-        - navigation
--
-    title: Blueprints
-    collapsable: false
-    children:
-        - blueprints/entry
-        - blueprints/global
-        - blueprints/mixin
--
-    title: CMS Components
-    collapsable: false
-    children:
-        - components/section
-        - components/collection
-        - components/global
-        - components/resources
--
-    title: Models
-    collapsable: false
-    children:
-        - models/entry-record
-        - models/global-record
-
-#
 # Frontend Nav
 #
 "/cms/":
@@ -289,6 +256,15 @@
         - themes/layouts
         - themes/content
         - themes/components
+-
+    title: Tailor Content
+    children:
+        - tailor/introduction
+        - tailor/blueprints
+        - tailor/content-fields
+        - tailor/navigation
+        - tailor/components
+        - tailor/models
 -
     title: Theme Development
     children:

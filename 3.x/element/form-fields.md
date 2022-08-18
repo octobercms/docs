@@ -1,7 +1,7 @@
 ---
 subtitle: Learn about the different form field types.
 ---
-# Defining Form Fields
+# Form Fields
 
 ::: aside
 ← Use the sidebar to see all the available form fields.
@@ -10,7 +10,7 @@ subtitle: Learn about the different form field types.
 Form Fields, Form UI and Form Widgets are field definitions used by forms, such as a text input. These are commonly referred to by the following areas:
 
 - [CMS Theme Settings](../cms/themes/settings.md)
-- [Tailor Content Fields](../tailor/content-fields.md)
+- [Tailor Content Fields](../cms/tailor/content-fields.md)
 - [Backend Form Controller](../extend/forms/form-controller.md)
 - [Backend Relation Controller](../extend/forms/relation-controller.md)
 
