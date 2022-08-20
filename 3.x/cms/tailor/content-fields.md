@@ -38,6 +38,7 @@ Property | Description
 **validation** | defines validation rules for the form field, see [the validation article](../extend/services/validation.md) for rule definitions.
 **trigger** | specify conditions for this field using [trigger events](../element/form-fields.md).
 **preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](../element/form-fields.md).
+**translatable** | disables translation for this field when using the `multisite` in the blueprint definition.
 
 ## List and Filter Properties
 

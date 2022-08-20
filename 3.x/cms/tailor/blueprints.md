@@ -31,6 +31,7 @@ Property | Description
 **groups** | references a group of form fields placing the entry in group mode (see below).
 **structure** | structure configuration supplied when using the `structure` type.
 **drafts** | enables drafts for this entry. Default: `false`
+**multisite** | enables multisite for this entry, supported values: `true`, `false`, `sync`. Default: `false`
 
 ### Entry Variants
 

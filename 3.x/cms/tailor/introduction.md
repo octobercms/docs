@@ -73,6 +73,36 @@ _blog_content:
     type: mixin
 ```
 
+## Integration with Multisite
+
+Blueprints do not use [multisite capabilities](../resources/multisite.md) by default. You may use the `multisite` property to enable this. When enabled, records can be unique to each configured site.
+
+```yaml
+handle: Blog\Post
+type: entry
+# ...
+multisite: true
+```
+
+You may also set the value to **sync** to keep the records synchronized across sites, which is helpful for categories and tags. When using sync, each record will always exist on every site, although the content can be different.
+
+```yaml
+multisite: sync
+```
+
+When multisite is enabled, all fields in the blueprint become translatable. To keep the same value for a field, set the `translatable` property to false. In this example, when saving the record the **name** field will be copied to every site when it is saved.
+
+```yaml
+# ...
+multisite: true
+
+fields:
+    name:
+        label: Full Name
+        type: text
+        translatable: false
+```
+
 ## Migrating Blueprints
 
 Blueprints and their structure are migrated in the database during the normal database migration process. When a change is made manually to a blueprint file, you should run the `october:migrate` command to update the database tables.
