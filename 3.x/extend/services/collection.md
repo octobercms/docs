@@ -206,7 +206,7 @@ This method is especially useful in [CMS pages](../cms/pages.md) when working wi
 {% for chunk in products.chunk(3) %}
     <div class="row">
         {% for product in chunk %}
-            <div class="col-xs-4">{{ product.name }}</div>
+            <div class="col-4">{{ product.name }}</div>
         {% endfor %}
     </div>
 {% endfor %}
