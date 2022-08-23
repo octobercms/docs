@@ -46,6 +46,10 @@ The following will request to update the `#myDiv` element with **mypartial** con
 mypartial: '#myDiv'
 ```
 
+::: tip
+The selector must start with a `#` or `.` character to be valid.
+:::
+
 Multiple partials are separated by commas.
 
 ```js
@@ -76,6 +80,14 @@ If the selector string is prepended with the `^` symbol, the content will be pre
 
 ```js
 'folder/append': '^#myDiv'
+```
+
+### Using Custom HTML Selectors
+
+If the selector string begins with an `=` symbol, then you can use any custom HTML selector to target an element.
+
+```js
+'folder/append': '=[data-field-name="address"]'
 ```
 
 ## Pushing Partial Updates
