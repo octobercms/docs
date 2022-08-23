@@ -543,14 +543,14 @@ class User extends Model
 
 ### Multi Site
 
-When applying multi-site to a model, only records belonging to the active site are available to manage. The active site is attached to the `site_id` column set on the record. To enable multi-site for a model, apply the `October\Rain\Database\Traits\Multisite` trait and define the fields to propagate across all records using the `$propagated` property:
+When applying multi-site to a model, only records belonging to the active site are available to manage. The active site is attached to the `site_id` column set on the record. To enable multi-site for a model, apply the `October\Rain\Database\Traits\Multisite` trait and define the fields to propagate across all records using the `$propagatable` property:
 
 ```php
 class User extends Model
 {
     use \October\Rain\Database\Traits\Multisite;
 
-    protected $propagated = ['api_code'];
+    protected $propagatable = ['api_code'];
 }
 ```
 
