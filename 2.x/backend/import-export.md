@@ -291,6 +291,16 @@ export:
     useList: true
 ```
 
+Then add link to _list_toolbar.htm:
+
+```php
+<a
+  href="<?= Backend::url('acme/campaign/subscribers/export') ?>"
+  class="btn btn-default oc-icon-download">
+  Export records
+ </a>
+```
+
 If you are using [multiple list definitions](lists.md#oc-multiple-list-definitions), then you can supply the list definition:
 
 ```yaml
