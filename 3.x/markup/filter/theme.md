@@ -45,6 +45,8 @@ Alias | Description
 ------------- | -------------
 `@framework` | AJAX framework extras, subsitute for `{% framework %}` tag (JavaScript)
 `@framework.extras` | AJAX framework extras, subsitute for `{% framework extras %}` tag (JavaScript, CSS)
+`@framework.turbo` | AJAX framework turbo, subsitute for `{% framework turbo %}` tag (JavaScript)
+`@framework.bundle` | AJAX framework bundle, subsitute for `{% framework extras turbo %}` tag (JavaScript, CSS)
 
 :: tip
 The same alias can be used for JavaScript or CSS, for example `@framework.extras`. At least one other reference with a CSS or JS file extension is needed in the array to determine which to use.
