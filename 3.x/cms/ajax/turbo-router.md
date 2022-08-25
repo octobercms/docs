@@ -63,7 +63,33 @@ In some cases you may want to include static elements on the page, these are ele
 <div id="main-navigation" data-turbo-permanent>...</div>
 ```
 
-## Detecting a Cached Page Load
+## Setting a Root Path
+
+By default, PJAX is used for all links within the same domain name and a visit to any other URL will fallback to a full page load. In some cases, your application may live in a subdirectory and the links should only apply to the root path.
+
+For example, if you website lives in `/app` and you don't want the links to apply to a different site in `/docs` then you may restrict the links to a root path. You may set the root path by including the `turbo-root` meta tag in the page's head section.
+
+```html
+<head>
+    <meta name="turbo-root" content="/app">
+</head>
+```
+
+## Page Caching
+
+With caching enabled, the turbo router speeds up a website's performance by displaying revisited pages without accessing the network, making the website feel faster. When clicking a link, the contents are shown from the browser's local storage while the page requests the background. The latest page shows when the network request is complete, meaning the page renders twice.
+
+### Listening for the Cache Event
+
+You may listen to the `page:before-cache` event if you need to prepare the document before it enters the cache. You can use this for things like resetting forms, collapsing UI elements or tearing down any third-party controls, so the page is ready to be displayed again.
+
+```js
+addEventListener('page:before-cache', function() {
+    // Close any open submenus, etc.
+});
+```
+
+### Detecting a Cached Page Load
 
 You can detect when the page contents are sourced from the cache with the `data-turbo-preview` attribute on the HTML element. Expressed in JavaScript as:
 
@@ -81,15 +107,13 @@ html[data-turbo-preview] {
 }
 ```
 
-## Setting a Root Path
+### Disabling the Cache
 
-By default, PJAX is used for all links within the same domain name and a visit to any other URL will fallback to a full page load. In some cases, your application may live in a subdirectory and the links should only apply to the root path.
-
-For example, if you website lives in `/app` and you don't want the links to apply to a different site in `/docs` then you may restrict the links to a root path. You may set the root path by including the `turbo-root` meta tag in the page's head section.
+You can disable the page cache for individual pages by using the `turbo-cache-control` meta tag in the page's head section. Settings this value to **no-cache** will disable the cache entirely. You can also set this to **no-preview** to keep the cached version when navigating using the browser's Back and Forward buttons.
 
 ```html
 <head>
-    <meta name="turbo-root" content="/app">
+    <meta name="turbo-cache-control" content="no-cache">
 </head>
 ```
 
@@ -143,9 +167,9 @@ addEventListener('page:unload', function() {
 }, { once: true });
 ```
 
-### Pausing Rendering
+### Pause Rendering
 
-If you would like to close some elements like dropdowns or off-canvas menus before loading a new page, you can pause the `page:before-render` event by preventing the default behavior and resuming it with the `resume()` function in the event detail.
+If you would like to animate some elements like dropdowns or off-canvas menus before loading a new page, you can pause the `page:before-render` event by preventing the default behavior and resuming it with the `resume()` function in the event detail.
 
 ```js
 addEventListener('page:before-render', async (event) => {
@@ -156,6 +180,10 @@ addEventListener('page:before-render', async (event) => {
     event.detail.resume();
 });
 ```
+
+::: warning
+Keep in mind that the **page:before-render** event may fire twice, once from cache and once again after requesting the new page content.
+:::
 
 ## Global Events
 
