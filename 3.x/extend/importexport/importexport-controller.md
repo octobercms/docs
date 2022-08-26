@@ -180,6 +180,16 @@ export:
     useList: true
 ```
 
+Then simply add button to the [list toolbar](../lists/list-controller.md):
+
+```php
+<a
+    href="<?= Backend::url('acme/campaign/subscribers/export') ?>"
+    class="btn btn-default oc-icon-download">
+    Export Records
+</a>
+```
+
 If you are using [multiple list definitions](../lists/list-controller.md), then you can supply the list definition.
 
 ```yaml

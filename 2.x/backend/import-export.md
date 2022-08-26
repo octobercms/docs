@@ -291,14 +291,14 @@ export:
     useList: true
 ```
 
-Then add link to _list_toolbar.htm:
+Then simply add button to the [list toolbar](./lists.md):
 
 ```php
 <a
-  href="<?= Backend::url('acme/campaign/subscribers/export') ?>"
-  class="btn btn-default oc-icon-download">
-  Export records
- </a>
+    href="<?= Backend::url('acme/campaign/subscribers/export') ?>"
+    class="btn btn-default oc-icon-download">
+    Export Records
+</a>
 ```
 
 If you are using [multiple list definitions](lists.md#oc-multiple-list-definitions), then you can supply the list definition:
