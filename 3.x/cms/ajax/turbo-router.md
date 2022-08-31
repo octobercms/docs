@@ -185,6 +185,21 @@ addEventListener('page:before-render', async (event) => {
 Keep in mind that the **page:before-render** event may fire twice, once from cache and once again after requesting the new page content.
 :::
 
+### Inline Script Elements
+
+The turbo router maintains the scripts within the `<head>` tag of the page by comparing the differences. If you use script tags in the `<body>` tag then the script will be executed every time the page renders, which may be undesirable.
+
+You may include `data-turbo-eval="false"` to prevent the script from executing again after rendering, however, it will still be called on the initial page load.
+
+```html
+<body>
+    <script data-turbo-eval="false" src="{{ ['@framework.bundle']|theme }}"></script>
+</body>
+```
+::: tip
+If you are placing scripts in the `<body>` tag for performance reasons, consider moving it to the `<head>` tag and using `<script defer>` instead.
+:::
+
 ## Global Events
 
 The AJAX framework triggers several events during the navigation lifecycle and page responses. The events are usually triggered on the `document` object with details available on the `event.detail` property.
