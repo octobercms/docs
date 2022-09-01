@@ -289,6 +289,16 @@ export:
     useList: true
 ```
 
+Then simply add button to the [list toolbar](./lists.md):
+
+```php
+<a
+    href="<?= Backend::url('acme/campaign/subscribers/export') ?>"
+    class="btn btn-default oc-icon-download">
+    Export Records
+</a>
+```
+
 如果您使用 [多个列表定义](lists.md#oc-multiple-list-definitions)，那么您可以提供列表定义：
 
 ```yaml
