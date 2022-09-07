@@ -154,7 +154,6 @@ Property | Description
 **fields** | form fields belonging to the group, see [backend form fields](../../element/form-fields.md).
 **multisite** | enables multisite for this entry, supported values: `true`, `false`. Default: `false`
 
-
 ## Mixin
 
 Mixins are groups of fields that are used to avoid repetition when defining content structures. For example, a Location field may be used in several places, yet we can define it once using a mixin definition.
