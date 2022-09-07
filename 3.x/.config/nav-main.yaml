@@ -51,6 +51,7 @@
         - form/widget-richeditor
         - form/widget-sensitive
         - form/widget-taglist
+        - form/widget-boxes
 -
     title: List Columns
     children:
