@@ -209,8 +209,6 @@
         - tag/content
         - tag/component
         - tag/placeholder
-        - tag/scripts
-        - tag/styles
         - tag/flash
         - tag/verbatim
         - tag/macro
