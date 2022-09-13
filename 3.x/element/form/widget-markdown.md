@@ -6,9 +6,8 @@
 md_content:
     type: markdown
     size: huge
-    mode: split
 ```
 
 Option | Description
 ------------- | -------------
-**mode** | the expected view mode, either tab or split. Default: `tab`.
+**sideBySide** | enables the side-by-side display mode by default. Default: `true`.
