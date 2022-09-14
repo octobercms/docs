@@ -12,6 +12,7 @@ The following properties are supported.
 
 Property | Description
 ------------- | -------------
+**linkText** | text to display for the link, optional.
 **attributes** | an array of HTML attributes to pass to the anchor element.
 
 Use the `attributes` property to add custom HTML attributes.
