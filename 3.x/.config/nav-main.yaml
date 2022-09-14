@@ -62,6 +62,7 @@
         - lists/column-summary
         - lists/column-datetime
         - lists/column-selectable
+        - lists/column-linkage
         - lists/column-partial
         - lists/column-colorpicker
 -
