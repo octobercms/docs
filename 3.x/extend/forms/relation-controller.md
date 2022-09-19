@@ -53,9 +53,9 @@ items:
     view:
         list: $/acme/pay/models/invoiceitem/columns.yaml
         toolbarButtons: create|delete
+        recordsPerPage: 10
     manage:
         form: $/acme/pay/models/invoiceitem/fields.yaml
-        recordsPerPage: 10
 ```
 
 The following properties are then used for each relationship name definition.
