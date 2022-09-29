@@ -103,3 +103,50 @@ Alternatively, you can look it up using the UUID and the `findForGlobalUuid` met
 // Return a global using the UUID
 Tailor\Models\GlobalRecord::findForGlobal('7b193500-ac0b-481f-a79c-2a362646364d');
 ```
+
+## Extending Tailor Models
+
+In some cases you may want to combine tailor models with [regular database models](../../extend/system/models.md).
+
+### Associating Tailor to Regular Models
+
+Introducing model relationships to tailor is when tailor will make a reference to a regular model, for example a model defined by a plugin. This involves creating a custom tailor field that will give complete access to the model and database tables.
+
+Inside the content field class definition, the `extendModelObject` method allows the content field to extend the record model, along with `extendDatabaseTable` to add a column to the database table.
+
+```php
+class MyContentField extends ContentFieldBase
+{
+    public function extendModelObject($model)
+    {
+        $model->belongsTo[$this->fieldName] = MyOtherModel::class;
+    }
+
+    public function extendDatabaseTable($table)
+    {
+        $table->mediumText($this->fieldName . '_id')->nullable();
+    }
+}
+```
+
+Learn more about building [custom tailor fields here](../extend/tailor-fields.md).
+
+### Associating Regular Models to Tailor
+
+Since all Tailor models share the same model class, some additional attributes are needed in your relationship definitions. The `Tailor\Traits\BlueprintRelationModel` implements these attributes to reference tailor models, supporting Belongs To and Belongs To Many relationships.
+
+When the trait `BlueprintRelationModel` is implemented in your models, you can supply a `blueprint` property along with the blueprint UUID referencing the tailor blueprint. The following will establish a Belongs To relationship to the `Tailor\Models\EntryRecord` class called **author**.
+
+```php
+class Product extends Model
+{
+    use \Tailor\Traits\BlueprintRelationModel;
+
+    public $belongsTo = [
+        'author' => [
+            \Tailor\Models\EntryRecord::class,
+            'blueprint' => '6947ff28-b660-47d7-9240-24ca6d58aeae'
+        ]
+    ];
+}
+```
