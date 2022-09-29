@@ -176,9 +176,9 @@ The `trigger` definition specifies these properties.
 
 Property | Description
 ------------- | -------------
-**action** | defines the action applied to this field when the condition is met. Supported values: show, hide, enable, disable, empty.
+**action** | defines the action applied to this field when the condition is met. Supported values: `show`, `hide`, `enable`, `disable`, `empty`, `fill[somevalue]`.
 **field** | defines the other field name that will trigger the action.
-**condition** | determines the condition the specified field should satisfy for the condition to be considered "true". Supported values: checked, unchecked, value[somevalue].
+**condition** | determines the condition the specified field should satisfy for the condition to be considered `true`. Supported values: `checked`, `unchecked`, `value[somevalue]`.
 
 #### Multiple Actions
 
