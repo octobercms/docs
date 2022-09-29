@@ -133,7 +133,7 @@ Learn more about building [custom tailor fields here](../extend/tailor-fields.md
 
 ### Associating Regular Models to Tailor
 
-Since all Tailor models share the same model class, some additional attributes are needed in your relationship definitions. The `Tailor\Traits\BlueprintRelationModel` implements these attributes to reference tailor models, supporting Belongs To and Belongs To Many relationships.
+Since all tailor models share the same model class, some additional attributes are needed in your relationship definitions. The `Tailor\Traits\BlueprintRelationModel` implements these attributes to reference tailor models, supporting Belongs To and Belongs To Many relationships.
 
 When the trait `BlueprintRelationModel` is implemented in your models, you can supply a `blueprint` property along with the blueprint UUID referencing the tailor blueprint. The following will establish a Belongs To relationship to the `Tailor\Models\EntryRecord` class called **author**.
 
