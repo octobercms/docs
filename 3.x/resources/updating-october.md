@@ -27,7 +27,7 @@ php artisan october:migrate --rollback
 
 If your starting point is October CMS 2.0, please observe the following guides when performing the upgrade.
 
-- [October CMS v3.0 Upgrade Guide](https://octobercms.com/support/article/rn-28)
+- [October CMS v3.0 Upgrade Guide](https://octobercms.com/support/article/rn-30)
 - [October CMS v3.1 Stable Release](https://octobercms.com/support/article/rn-32)
 
 If your starting point is October CMS 1.0, please observe these guides before continuing with the above guides.

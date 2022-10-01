@@ -62,7 +62,6 @@ php artisan plugin:install AuthorName.PluginName --from=git@github.com:authornam
 php artisan plugin:check
 ```
 
-<a id="oc-refresh-plugin"></a>
 ### Refresh Plugin
 
 `plugin:refresh` - destroys the plugin's database tables and recreates them. This command is useful for development.
