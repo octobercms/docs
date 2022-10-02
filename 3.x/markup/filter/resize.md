@@ -26,3 +26,20 @@ You can also pass a third options argument. This example will crop the image ins
 ```
 
 See the [image resizer article](../../extend/services/resizer.md) for more information on the available `options` parameters.
+
+## Available Sources
+
+You may reference images from multiple sources, including the following paths:
+
+- `/app`
+- `/plugins`
+- `/themes`
+- `/modules`
+- `/storage/app/uploads`
+- `/storage/app/media`
+
+For example:
+
+```twig
+{{ '/plugins/acme/blog/assets/images/someimage.png'|resize(...) }}
+```

@@ -29,7 +29,7 @@ The `create:filterwidget` command generates a backend filter widget, view and ba
 php artisan create:filterwidget Acme.Blog Discount
 ```
 
-The filter widget classes must extend the `Backend\Classes\FilterWidgetBase` class. A registered widget can be used in the backend [filter field definition](../../element/definitions.md) file. Example form widget class definition.
+The filter widget classes must extend the `Backend\Classes\FilterWidgetBase` class. A registered widget can be used in the backend [filter field definition](../../element/filter-scopes.md) file. Example form widget class definition.
 
 ```php
 namespace Backend\FilterWidgets;
@@ -46,7 +46,7 @@ class Discount extends FilterWidgetBase
 
 ## Filter Widget Properties
 
-Filter widgets may have properties that can be set using the [filter scope configuration](../../element/definitions.md). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
+Filter widgets may have properties that can be set using the [filter scope configuration](../../element/filter-scopes.md). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
 
 ```php
 class Discount extends FormWidgetBase
@@ -70,7 +70,7 @@ class Discount extends FormWidgetBase
 }
 ```
 
-The property values then become available to set from the [filter scope definition](../../element/definitions.md) when using the widget.
+The property values then become available to set from the [filter scope definition](../../element/filter-scopes.md) when using the widget.
 
 ```yaml
 discount:

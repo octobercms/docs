@@ -9,7 +9,6 @@ user:
     list: ~/plugins/rainlab/user/models/user/columns.yaml
     recordsPerPage: 10
     title: Find Record
-    prompt: Click the Find button to find a user
     nameFrom: name
     descriptionFrom: email
 ```
@@ -20,7 +19,6 @@ Option | Description
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: name.
 **descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
 **title** | text to display in the title section of the popup.
-**prompt** | text to display when there is no record selected. The `%s` character represents the search icon.
 **list** | a configuration array or reference to a list column definition file.
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: 10
 **conditions** | specifies a raw where query statement to apply to the list model query.

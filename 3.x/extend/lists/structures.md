@@ -10,9 +10,7 @@ October CMS provides features for sorting and reordering database records. For b
 The [List Controller](./list-controller.md) and [Relation Controller](../forms/form-controller.md) backend behaviors currently support the option to reorder records using the **structure** property in the relevant definition. When defined, the page displays a list of records with a drag handle allowing them to be sorted and restructured.
 
 ```yaml
-# ===================================
-#  List Behavior Config
-# ===================================
+# config_list.yaml
 
 # ...
 

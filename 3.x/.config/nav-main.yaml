@@ -3,10 +3,11 @@
 #
 "/element/":
 -
-    title: Element
+    title: Definitions
     children:
-        - definitions
-        - field-conditions
+        - form-fields
+        - list-columns
+        - filter-scopes
 -
     title: Tailor Fields
     children:
@@ -50,6 +51,7 @@
         - form/widget-richeditor
         - form/widget-sensitive
         - form/widget-taglist
+        - form/widget-boxes
 -
     title: List Columns
     children:
@@ -60,6 +62,7 @@
         - lists/column-summary
         - lists/column-datetime
         - lists/column-selectable
+        - lists/column-linkage
         - lists/column-partial
         - lists/column-colorpicker
 -
@@ -78,7 +81,7 @@
 #
 "/extend/":
 -
-    title: System Overview
+    title: Basic Overview
     children:
         - system/plugins
         - system/models
@@ -87,15 +90,6 @@
         - system/behaviors
         - system/widgets
         - system/ajax
--
-    title: Advanced Overview
-    children:
-        - system/exceptions
-        - system/sending-mail
-        - system/localization
-        - system/routing
-        - system/scheduling
-        - system/unit-testing
 -
     title: Extending the CMS
     children:
@@ -136,6 +130,15 @@
         - settings/settings
         - settings/file-settings
         - settings/model-settings
+-
+    title: Advanced Overview
+    children:
+        - system/exceptions
+        - system/sending-mail
+        - system/localization
+        - system/routing
+        - system/scheduling
+        - system/unit-testing
 -
     title: Database Layer
     children:
@@ -196,6 +199,7 @@
         - property/this-controller
         - property/this-environment
         - property/this-session
+        - property/this-site
         - property/this-request
 -
     title: Tags
@@ -206,8 +210,6 @@
         - tag/content
         - tag/component
         - tag/placeholder
-        - tag/scripts
-        - tag/styles
         - tag/flash
         - tag/verbatim
         - tag/macro
@@ -242,39 +244,6 @@
         - function/html
 
 #
-# Tailor Nav
-#
-"/tailor/":
--
-    title: Tailor
-    collapsable: false
-    children:
-        - introduction
-        - content-fields
-        - navigation
--
-    title: Blueprints
-    collapsable: false
-    children:
-        - blueprints/entry
-        - blueprints/global
-        - blueprints/mixin
--
-    title: CMS Components
-    collapsable: false
-    children:
-        - components/section
-        - components/collection
-        - components/global
-        - components/resources
--
-    title: Models
-    collapsable: false
-    children:
-        - models/entry-record
-        - models/global-record
-
-#
 # Frontend Nav
 #
 "/cms/":
@@ -287,6 +256,15 @@
         - themes/layouts
         - themes/content
         - themes/components
+-
+    title: Tailor Content
+    children:
+        - tailor/introduction
+        - tailor/blueprints
+        - tailor/content-fields
+        - tailor/navigation
+        - tailor/components
+        - tailor/models
 -
     title: Theme Development
     children:
@@ -310,8 +288,9 @@
         - media/introduction
         - media/providers
 -
-    title: API Resources
+    title: Resources
     children:
+        - resources/multisite
         - resources/building-apis
 
 #

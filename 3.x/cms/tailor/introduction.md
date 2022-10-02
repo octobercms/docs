@@ -28,7 +28,7 @@ Below you can see an example blueprint directory structure. Each blueprint can r
 
 ## Blueprint Types
 
-The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify [form field definitions](../element/definitions.md).
+The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify [form field definitions](../element/form-fields.md).
 
 Type | Description
 ------------- | -------------
@@ -71,6 +71,36 @@ The blueprint **uuid** is a unique identifier used when blueprints reference oth
 _blog_content:
     source: edcd102e-0525-4e4d-b07e-633ae6c18db6
     type: mixin
+```
+
+## Integration with Multisite
+
+Blueprints do not use [multisite capabilities](../resources/multisite.md) by default. You may use the `multisite` property to enable this. When enabled, records can be unique to each configured site.
+
+```yaml
+handle: Blog\Post
+type: entry
+# ...
+multisite: true
+```
+
+You may also set the value to **sync** to keep the records synchronized across sites, which is helpful for categories and tags. When using sync, each record will always exist on every site, although the content can be different.
+
+```yaml
+multisite: sync
+```
+
+When multisite is enabled, all fields in the blueprint become translatable. To keep the same value for a field, set the `translatable` property to false. In this example, when saving the record the **name** field will be copied to every site when it is saved.
+
+```yaml
+# ...
+multisite: true
+
+fields:
+    name:
+        label: Full Name
+        type: text
+        translatable: false
 ```
 
 ## Migrating Blueprints

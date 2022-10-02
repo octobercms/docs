@@ -116,7 +116,7 @@ The array can be iterated using the following syntax:
 
 ## YAML Configuration Parser
 
-YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October, such as [form field and list column definitions](../../element/definitions.md). An example of some YAML:
+YAML ("YAML Ain't Markup Language") is a configuration format, similar to Markdown it was designed to be an easy-to-read and easy-to-write format that converts to a PHP array. It is used practically everywhere for the back-end development of October CMS, such as [form field definitions](../../element/form-fields.md). An example of some YAML:
 
 ```yaml
 receipt: Acme Purchase Invoice
@@ -254,7 +254,7 @@ $array = $syntax->toEditor();
 // ]
 ```
 
-You may notice the properties closely resemble the options found in [form field definitions](../../element/definitions.md). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
+You may notice the properties closely resemble the options found in [form field definitions](../../element/form-fields.md). This is intentional so the two features compliment each other. We could now easily convert the array above to YAML and write to a `fields.yaml` file:
 
 ```php
 $form = [
@@ -266,7 +266,7 @@ File::put('fields.yaml', Yaml::render($form));
 
 ### Supported Tags
 
-There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../../element/definitions.md).
+There are various tag types that can be used with the Dynamic Syntax parser, these are designed to match common [form field types](../../element/form-fields.md).
 
 #### Text
 

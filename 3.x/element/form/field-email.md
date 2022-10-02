@@ -16,8 +16,7 @@ If you would like to validate this field on save to ensure that it is a properly
 user_email:
     label: Email Address
     type: email
-    validation:
-        - email
+    validation: email
 ```
 
 When working with models, use the `$rules` property on your model, like so.

@@ -541,18 +541,22 @@ class User extends Model
 }
 ```
 
-### Multi Site
+### Multisite
 
-When applying multi-site to a model, only records belonging to the active site are available to manage. The active site is attached to the `site_id` column set on the record. To enable multi-site for a model, apply the `October\Rain\Database\Traits\Multisite` trait and define the fields to propagate across all records using the `$propagated` property:
+When applying multisite to a model, only records belonging to the active site are available to manage. The active site is attached to the `site_id` column set on the record. To enable multi-site for a model, apply the `October\Rain\Database\Traits\Multisite` trait and define the attributes to propagate across all records using the `$propagatable` property:
 
 ```php
 class User extends Model
 {
     use \October\Rain\Database\Traits\Multisite;
 
-    protected $propagated = ['api_code'];
+    protected $propagatable = ['api_code'];
 }
 ```
+
+::: tip
+The `$propagatable` is required by the multisite trait but can be left as an empty array to disable propagation of any attribute.
+:::
 
 To add a `site_id` column to your table, you may use the `integer` method from a migration. A `site_root_id` may also be used to link records together using a root record.
 
@@ -564,6 +568,14 @@ Schema::table('posts', function ($table) {
 ```
 
 Now, when a record is created it will be assigned to the active site and switching to a different site will propagate a new record automatically. When updating a record, propagated fields are copied to every record belonging to the root record.
+
+#### Enforcing Synchronization
+
+In some cases, all records must exist for every site, such as categories and tags. You may force every record to exist across all sites by setting the `$propagatableSync` property to true, which is false by default. Once enabled, after a model is saved, it will create the same model for other sites if they do not already exist.
+
+```php
+protected $propagatableSync = true;
+```
 
 ### Revisionable
 

@@ -1,5 +1,5 @@
 ---
-subtitle: Used to extend controllers and models with common functionality.
+subtitle: Remix classes together with common functionality.
 ---
 # Behaviors
 

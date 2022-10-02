@@ -1,5 +1,5 @@
 ---
-subtitle: Self-contained blocks of functionality that solve different tasks.
+subtitle: Self-contained blocks of functionality solving different tasks.
 ---
 # Widgets
 

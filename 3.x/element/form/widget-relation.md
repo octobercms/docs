@@ -40,7 +40,7 @@ Option | Description
 ------------- | -------------
 **nameFrom** | a model attribute name used for displaying the relation label. Default: name.
 **select** | a custom SQL select statement to use for the name.
-**order** | an order clause to sort options by. Example: `name desc`.
 **emptyOption** | text to display when there is no available selections.
 **scope** | specifies a [query scope method](../../extend/database/model.md) defined in the **related form model** to apply to the list query always.
 **useController** | display the field using integration with [Relation Controller behavior](../../extend/forms/relation-controller.md). Default: `true`
+**defaultSort** | sets a default sorting column and direction, supports a string for the column name or an array with keys `column` and `direction`.

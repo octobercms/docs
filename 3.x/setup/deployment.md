@@ -22,12 +22,6 @@ Alternatively, you can recreate the `auth.json` file with the [project:set](../c
 php artisan project:set <license key>
 ```
 
-If the above command is not available, you may create the `auth.json` file using composer instead.
-
-```bash
-​composer config --auth http-basic.gateway.octobercms.com <email address> <license key>
-```
-
 ## Deploying without Composer
 
 <VideoBlockLink src="https://www.youtube.com/watch?v=Lx9X3CfXwfw" title="One-click Deploy" description="This video describes how to deploy your project to a remote server without Composer." prompt="Watch the tutorial"/>

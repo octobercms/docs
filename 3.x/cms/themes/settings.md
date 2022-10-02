@@ -97,7 +97,7 @@ When the theme is installed for the first time, the system will attempt to insta
 
 ## Theme Customization
 
-Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form field definitions](../../element/definitions.md) for more information.
+Themes can support configuration values by defining a `form` key in the theme information file. This key should contain a configuration array or reference to a form field definition file, see [form field definitions](../../element/form-fields.md) for more information.
 
 The following is an example of how to define a website name configuration field called **site_name**:
 
@@ -140,7 +140,7 @@ fields:
 
 ### Using Theme Data In CSS
 
-Sometimes you want to include a visual preference inside your theme stylesheet. You may use CSS custom properties (variables) to make these values available. In the following example, we will use a [Color Picker field type](../../element/definitions.md) to specify a custom link color.
+Sometimes you want to include a visual preference inside your theme stylesheet. You may use CSS custom properties (variables) to make these values available. In the following example, we will use a [Color Picker field type](../../element/form/widget-colorpicker.md) to specify a custom link color.
 
 ```yaml
 form:

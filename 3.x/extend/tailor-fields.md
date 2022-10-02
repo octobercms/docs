@@ -132,7 +132,7 @@ my_field:
 
 ## Defining the Backend Element
 
-The content field can define how it appears in the backend panel as a form field, list column and filter scope. The resulting object in each case is fluent configuration object that supports a method chain or an array via the `useConfig` method. See the [defining content fields article](../tailor/content-fields.md) for more information.
+The content field can define how it appears in the backend panel as a form field, list column and filter scope. The resulting object in each case is fluent configuration object that supports a method chain or an array via the `useConfig` method. See the [defining content fields article](../cms/tailor/content-fields.md) for more information.
 
 ### Form Field
 
@@ -201,5 +201,5 @@ public function extendDatabaseTable($table)
 #### See Also
 
 ::: also
-* [Tailor Content Fields](../tailor/content-fields.md)
+* [Tailor Content Fields](../cms/tailor/content-fields.md)
 :::

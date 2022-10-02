@@ -285,5 +285,5 @@ In order to output the injected assets on pages or [layouts](./layouts.md), use 
 ```
 
 ::: tip
-More information on `{% styles %}` and `{% scripts %}` tags can be found at [the Markup guide](../../markup/tag/styles.md).
+More information on `{% styles %}` and `{% scripts %}` tags can be found at [the Markup guide](../../markup/tag/placeholder.md).
 :::

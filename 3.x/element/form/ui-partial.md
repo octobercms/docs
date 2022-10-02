@@ -12,14 +12,13 @@ The following properties are supported.
 
 Property | Description
 ------------- | -------------
-**path** | path to a [partial view file](../../extend/system/views.md), defaults to the field name.
+**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the field name.
 
 You may specify a fully qualified `path` to access partials outside the controller scope.
 
 ```yaml
 content:
     type: partial
-    path: content_field
     path: $/acme/blog/models/comments/_content_field.htm
 ```
 
@@ -37,8 +36,24 @@ Here is an some example contents of the **_content_field.htm** file.
 <?php endif ?>
 ```
 
+## Using View Templates
+
+You may pass a view template code as the `path` to access view service templates inside the plugin. The following code would be found at the path **plugins/acme/blog/views/formfields/content.php**.
+
+```yaml
+content:
+    type: partial
+    path: acme.blog::formfields.content
+```
+
+:::tip
+The path must contain the `::` characters to activate the view service.
+:::
+
 #### See Also
 
 ::: also
 * [Hint Form UI](./ui-hint.md)
+* [Rendering Controller Views](../../extend/system/views.md)
+* [Response & View Service](../../extend/services/response-view.md)
 :::

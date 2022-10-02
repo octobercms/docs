@@ -3,7 +3,7 @@ subtitle: Learn how fields can depend on other fields.
 ---
 # Field Dependencies
 
-Akin to [field conditions](../../element/field-conditions.md), form fields can declare dependencies on other fields by defining the `dependsOn` form field property. This provides a more robust server-side solution for updating fields when their dependencies are modified.
+Akin to [form field conditions](../../element/form-fields.md), form fields can declare dependencies on other fields by defining the `dependsOn` form field property. This provides a more robust server-side solution for updating fields when their dependencies are modified.
 
 When the fields that are declared as dependencies change, the defining field will update using the AJAX framework. This provides an opportunity to interact with the field's properties using the `filterFields` methods or changing available options to be provided to the field.
 
@@ -39,7 +39,7 @@ public function getStateOptions()
 
 ## Filtering Fields
 
-You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](../../element/definitions.md) and **$context** represents the active form context.
+You can filter the form field definitions by overriding the `filterFields` method inside the Model used. This allows you to manipulate visibility and other field properties based on the model data. The method takes two arguments **$fields** will represent an object of the fields already defined by the [field configuration](../../element/form-fields.md) and **$context** represents the active form context.
 
 ```php
 public function filterFields($fields, $context = null)
@@ -133,5 +133,5 @@ public function onChangeContent()
 #### See Also
 
 ::: also
-* [Field Conditions](../../element/field-conditions.md)
+* [Form Field Conditions](../../element/form-fields.md)
 :::

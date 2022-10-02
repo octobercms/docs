@@ -137,7 +137,7 @@ Lang::set('I love programming.', 'Le codage est le meilleur!', 'fr');
 
 ## Contributing Language Strings
 
-If you discover incorrect translations in October CMS for your language, you may fix them by visiting the [repository on GitHub](https://github.com/octobercms/october/tree/develop/modules) and submitting a pull request. In this example, we will modify the Dutch language that uses the `nl` language code. The language files are distributed among the various modules, so you may need to check multiple files to find the language string; in this example, we know the string is located in the Tailor module.
+If you discover missing or incorrect translations in October CMS, you may visit the [repository on GitHub](https://github.com/octobercms/october/tree/develop/modules) to suggest updates for your language using a pull request. The language files are found in the various modules, so you may need to check multiple files to find the correct language string. In this example, we will modify the Dutch language using the `nl` language code and we know the string is located in the Tailor module.
 
 1. Open the [GitHub repository](https://github.com/octobercms/october/tree/develop/modules).
 2. Click on **tailor**, then **lang** to open the language directory for Tailor

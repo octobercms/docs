@@ -10,12 +10,7 @@
     prefix: "/3.x/cms/"
     link: "/3.x/cms/themes/themes.html"
 -
-    title: Tailor Guide
-    icon: "/images/markup-guide.svg"
-    prefix: "/3.x/tailor/"
-    link: "/3.x/tailor/introduction.html"
--
-    title: CMS Markup
+    title: Markup Guide
     icon: "/images/markup-guide.svg"
     prefix: "/3.x/markup/"
     link: "/3.x/markup/templating.html"
@@ -25,7 +20,7 @@
     prefix: "/3.x/extend/"
     link: "/3.x/extend/system/plugins.html"
 -
-    title: Backend Elements
+    title: API Handbook
     icon: "/images/markup-guide.svg"
     prefix: "/3.x/element/"
-    link: "/3.x/element/definitions.html"
+    link: "/3.x/element/form-fields.html"

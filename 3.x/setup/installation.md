@@ -74,9 +74,22 @@ php artisan serve
 If you are installing the platform on a production web server, review the recommendations listed in the [Production Configuration](../setup/configuration.md#production-configuration) article.
 :::
 
+## Wizard Installation
+
+The wizard installation is an alternative way to install October CMS without using Composer. It is simpler than the command-line installation and doesn't require any special skills.
+
+1. Prepare a directory on your server that is empty. It can be a sub-directory, domain root or a sub-domain.
+1. [Download the installer archive file](https://octobercms.com/download).
+1. Unpack the installer archive to the prepared directory.
+1. Grant writing permissions on the installation directory and all its subdirectories and files.
+1. Navigate to the `install.php` script in your web browser.
+1. Follow the installation instructions.
+
+![image](https://github.com/octobercms/docs/blob/develop/images/wizard-installer.png?raw=true)
+
 ## Bleeding Edge Updates
 
-To receive bleeding edge updates of October CMS, target the `develop` branch in the composer.json file:
+To receive bleeding edge updates of October CMS, target the `develop` branch in the composer.json file. For example:
 
 ```json
 "october/all": "dev-develop",
@@ -103,6 +116,10 @@ It can happen with older versions of MySQL or MariaDB. [Configuring the index le
 
 ::: details A blank screen is displayed when opening the application
 Check the permissions are set correctly on the /storage files and subdirectories. They must be writable for the web server.
+:::
+
+::: details Invalid security token error when logging in
+Check to ensure no missing subdirectories in the storage/framework path. You may need to add the [sessions, cache and views directories](https://github.com/octobercms/october-private/tree/develop/storage/framework).
 :::
 
 ::: details The backend panel displays "Page not found" (404)

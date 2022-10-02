@@ -43,8 +43,7 @@ If you would like to validate this field server-side on save to ensure that it i
 your_age:
     label: Your Age
     type: number
-    validation:
-        - numeric
+    validation: numeric
 ```
 
 When working with models, use the `$rules` property on your model, like so.
