@@ -4,7 +4,7 @@ subtitle: Get started by defining form fields for your content.
 # Content Fields
 
 ::: aside
-You may build custom content fields by [extending tailor](../extend/tailor-fields.md).
+You may build custom content fields by [extending tailor](../../extend/tailor-fields.md).
 :::
 
 Content Fields are the cornerstone of the Tailor module and define how a field should be configured and displayed. These definitions are often found under the **fields** property of a blueprint.
@@ -17,7 +17,7 @@ fields:
 ```
 
 ::: tip
-A complete list of available fields can be found in the [Backend Elements section](../element/form-fields.md).
+A complete list of available fields can be found in the [Backend Elements section](../../element/form-fields.md).
 :::
 
 For each field you can specify these common properties, where applicable.
@@ -25,7 +25,7 @@ For each field you can specify these common properties, where applicable.
 Property | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
-**type** | defines how this field should be rendered, see [form field definitions](../element/form-fields.md). Default: text.
+**type** | defines how this field should be rendered, see [form field definitions](../../element/form-fields.md). Default: text.
 **span** | aligns the form field to one side. Options: auto, left, right, row, full, adaptive. Default: `full`.
 **spanClass** | used with the span `row` option to display the form as a Bootstrap grid, for example, `spanClass: col-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field.
@@ -35,9 +35,9 @@ Property | Description
 **commentHtml** | allow HTML markup inside the comment. Options: `true`, `false`.
 **default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
 **tab** | assigns the field to a tab.
-**validation** | defines validation rules for the form field, see [the validation article](../extend/services/validation.md) for rule definitions.
-**trigger** | specify conditions for this field using [trigger events](../element/form-fields.md).
-**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](../element/form-fields.md).
+**validation** | defines validation rules for the form field, see [the validation article](../../extend/services/validation.md) for rule definitions.
+**trigger** | specify conditions for this field using [trigger events](../../element/form-fields.md).
+**preset** | allows the field value to be initially set by the value of another field, converted using the [input preset converter](../../element/form-fields.md).
 **translatable** | disables translation for this field when using the `multisite` in the blueprint definition.
 
 ## List and Filter Properties
@@ -46,8 +46,8 @@ When it comes to displaying a field in a list or filter, each field has its own 
 
 Property | Description
 ------------- | -------------
-**column** | defines how to display the field in a list, see [list column definitions](../element/list-columns.md).
-**scope** | defines how to display the field in a filter, see [filter scope definitions](../element/filter-scopes.md).
+**column** | defines how to display the field in a list, see [list column definitions](../../element/list-columns.md).
+**scope** | defines how to display the field in a filter, see [filter scope definitions](../../element/filter-scopes.md).
 
 ### Field Configuration
 
@@ -113,7 +113,7 @@ scopes:
 
 ## Form Field Validation
 
-You may specify validation rules for form fields using the `validation` field property, see [the validation article](../extend/services/validation.md) for rule definitions.
+You may specify validation rules for form fields using the `validation` field property, see [the validation article](../../extend/services/validation.md) for rule definitions.
 
 ```yaml
 fields:
@@ -142,6 +142,6 @@ fields:
 #### See Also
 
 ::: also
-* [Defining Form Fields](../element/form-fields.md)
-* [Building Tailor Fields](../extend/tailor-fields.md)
+* [Defining Form Fields](../../element/form-fields.md)
+* [Building Tailor Fields](../../extend/tailor-fields.md)
 :::

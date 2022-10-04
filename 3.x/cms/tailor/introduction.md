@@ -28,13 +28,13 @@ Below you can see an example blueprint directory structure. Each blueprint can r
 
 ## Blueprint Types
 
-The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify [form field definitions](../element/form-fields.md).
+The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify [form field definitions](../../element/form-fields.md).
 
 Type | Description
 ------------- | -------------
-[Entry](blueprints/entry.md) | the standard content structure that supports drafts.
-[Global](blueprints/global.md) | a single record in the database and is often used for settings and configuration.
-[Mixin](blueprints/mixin.md) | defines reusable field definitions that can be imported and mixed in with other field definitions.
+Entry | the standard content structure that supports drafts.
+Global | a single record in the database and is often used for settings and configuration.
+Mixin | defines reusable field definitions that can be imported and mixed in with other field definitions.
 
 ## Blueprint Structure
 

@@ -126,7 +126,7 @@ groups:
 ```
 
 ::: tip
-It is recommended to use [mixin blueprints](mixin.md) to group common field definitions.
+It is recommended to use [mixin blueprints](#mixin) to group common field definitions.
 :::
 
 ## Global

@@ -129,7 +129,7 @@ class MyContentField extends ContentFieldBase
 }
 ```
 
-Learn more about building [custom tailor fields here](../extend/tailor-fields.md).
+Learn more about building [custom tailor fields here](../../extend/tailor-fields.md).
 
 ### Associating Regular Models to Tailor
 

@@ -13,7 +13,7 @@ The following properties are supported by the component.
 
 Property | Description
 -------- | -------------
-**handle** | The handle of the [entry blueprint](../blueprints/entry.md).
+**handle** | The handle of the [entry blueprint](./blueprints.md).
 **entrySlug** | The value to use to look up the entry by its `slug` attribute.
 **fullSlug** | Use the full slug when looking up the entry, structured entries only. Default: `false`
 **entryDefault** | Make this the default page when previewing the entry. Default: `true`.
@@ -44,7 +44,7 @@ In most cases you will want to display a 404 page when a record cannot be found.
 
 ### Accessing the Entry Type
 
-When using the [Content Groups](../blueprints/entry.md) feature of the entry blueprint, you may access the group code using the `entry_type` attribute. For example, a post may have a content group of **regular_post** and **markdown_post** where the content is handled differently.
+When using the [Content Groups](./blueprints.md) feature of the entry blueprint, you may access the group code using the `entry_type` attribute. For example, a post may have a content group of **regular_post** and **markdown_post** where the content is handled differently.
 
 ```twig
 {% if post.entry_type == 'markdown_post' %}
@@ -79,7 +79,7 @@ The following properties are supported by the component.
 
 Property | Description
 -------- | -------------
-**handle** | The handle of the [entry blueprint](../blueprints/entry.md).
+**handle** | The handle of the [entry blueprint](./blueprints.md).
 
 ### Basic Usage
 
@@ -130,7 +130,7 @@ The following properties are supported by the component.
 
 Property | Description
 -------- | -------------
-**handle** | The handle of the [global blueprint](../blueprints/global.md).
+**handle** | The handle of the [global blueprint](./blueprints.md).
 
 ### Basic Usage
 
