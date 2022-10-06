@@ -11,7 +11,7 @@ You can create sites by visiting the admin panel's **Settings → Manage Sites**
 
 The following configuration defines each site:
 
-- **Enabled** - determines if you can access the site on the front end.
+- **Enabled** - determines if you can access the site on the front end and admin panel.
 - **Name** - specifies the site name.
 - **Unique Code** - specifies a unique site code for lookup using APIs.
 - **Theme** - the CMS theme to use when this site is active.
@@ -51,3 +51,20 @@ Another example is generating alternative page links using meta tags
     <link rel="alternate" hreflang="{{ site.locale }}" href="{{ site.url }}" />
 {% endfor %}
 ```
+
+## Detecting Site from Browser Language
+
+October CMS is configured to automatically detect a matching site based on the browser's preferred language based when the following conditions are met.
+
+- The primary site has a CMS route prefix set
+- There are no other sites matching the base URL
+
+For example, if the primary site is **English** with a route prefix of `/en` and another site **French** has a prefix of `/fr` then the following behavior can be observed.
+
+Base URL | Behavior
+-------- | --------
+https://yoursite.tld/en | Displays the **English** site
+https://yoursite.tld/fr | Displays the **French** site
+https://yoursite.tld | Redirect based on language preference
+
+When the user visits the base URL, their preferred language is automatically detected and will be redirected to a matching site. The matching site is based on its locale value and if no match is found then the primary site is used.
