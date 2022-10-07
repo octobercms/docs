@@ -52,9 +52,9 @@ Another example is generating alternative page links using meta tags
 {% endfor %}
 ```
 
-## Detecting Site from Browser Language
+## Browser Language Detection
 
-October CMS is configured to automatically detect a matching site based on the browser's preferred language based when the following conditions are met.
+October CMS is configured to automatically detect a matching site based on the browser's preferred language when the following conditions are met.
 
 - The primary site has a CMS route prefix set
 - There are no other sites matching the base URL
