@@ -3,6 +3,8 @@ subtitle: Learn how to translate content using multiple sites
 ---
 # Multisite & Localization
 
+<VideoBlockLink src="https://www.youtube.com/watch?v=_kX7P3SEHg8" title="Multisite Demo" description="This video demonstrates how to create multilingual sites with October CMS Multisite." prompt="Watch the demonstration" />
+
 The multisite feature lets you manage multiple websites from a single October CMS installation and assign content dependent on the domain name. For example, an e-commerce store with different country-specific sub-sites. You can also use it to manage translations for a localized website.
 
 ## Managing Sites
