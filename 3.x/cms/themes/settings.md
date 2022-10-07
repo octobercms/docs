@@ -138,7 +138,7 @@ fields:
         default: My Amazing Site!
 ```
 
-### Using Theme Data In CSS
+### Using Theme Data in CSS
 
 Sometimes you want to include a visual preference inside your theme stylesheet. You may use CSS custom properties (variables) to make these values available. In the following example, we will use a [Color Picker field type](../../element/form/widget-colorpicker.md) to specify a custom link color.
 
@@ -172,6 +172,33 @@ Now inside your stylesheet the custom property can be used anywhere by specifyin
 a {
     color: var(--my-color);
 }
+```
+
+### Using Theme Data with Combined Assets
+
+Assets combined using the `|theme` [filter and combiner](../markup/filter-theme.md) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+
+```yaml
+form:
+    fields:
+        # [...]
+
+        link_color:
+            label: Link color
+            type: colorpicker
+            assetVar: 'link-color'
+```
+
+In the above example, the color value selected will be available inside the less file as `@link-color`. Assuming we have the following stylesheet reference:
+
+```twig
+<link href="{{ ['assets/less/theme.less']|theme }}" rel="stylesheet">
+```
+
+Using some example content inside **themes/yourtheme/assets/less/theme.less**:
+
+```less
+a { color: @link-color }
 ```
 
 ## Localization
