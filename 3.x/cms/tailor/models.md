@@ -47,32 +47,41 @@ Attribute | Description
 
 ### PHP Interface
 
-To look up an entry using PHP, you may use the `inSection` static method and pass the handle to return a prepared database query.
+To work with an entry using PHP, you may use the `Tailor\Models\EntryRecord` model and call the `inSection` static method, passing the handle to return a prepared database query.
 
 ```php
 // Return all entries by the handle
-Tailor\Models\EntryRecord::inSection('Blog\Posts')->get();
+EntryRecord::inSection('Blog\Post')->get();
 ```
 
 Alternatively, you can look it up using the UUID and the `inSectionUuid` method.
 
 ```php
 // Return all entries by the UUID
-Tailor\Models\EntryRecord::inSectionUuid('a63fabaf-7c0b-4c74-b36f-7abf1a3ad1c1')->get();
+EntryRecord::inSectionUuid('a63fabaf-7c0b-4c74-b36f-7abf1a3ad1c1')->get();
 ```
 
 If an entry type is a `single`, you can use the `findSingleForSection` method to look up the entry.
 
 ```php
 // Return a single entry by the handle
-Tailor\Models\EntryRecord::findSingleForSection('Homepage');
+EntryRecord::findSingleForSection('Homepage');
 ```
 
 Likewise, the `findSingleForSectionUuid` can be used for looking up by the UUID.
 
 ```php
 // Return a single entry by the UUID
-Tailor\Models\EntryRecord::findSingleForSectionUuid('3328c303-7989-462e-b866-27e7037ba275');
+EntryRecord::findSingleForSectionUuid('3328c303-7989-462e-b866-27e7037ba275');
+```
+
+The `inSection` method can be used to create records dynamically.
+
+```php
+// Create a new blog post entry
+$post = EntryRecord::inSection('Blog\Post');
+$post->title = 'Imported Post';
+$post->save();
 ```
 
 ## Global Record
@@ -90,18 +99,18 @@ Attribute | Description
 
 ### PHP Interface
 
-To look up a global using PHP, you may use the `findForGlobal` static method and pass the handle.
+To look up a global using PHP, you may use the `Tailor\Models\GlobalRecord` model and call the `findForGlobal` static method, passing the handle.
 
 ```php
 // Return a global using the handle
-Tailor\Models\GlobalRecord::findForGlobal('Blog\Settings');
+GlobalRecord::findForGlobal('Blog\Settings');
 ```
 
 Alternatively, you can look it up using the UUID and the `findForGlobalUuid` method.
 
 ```php
 // Return a global using the UUID
-Tailor\Models\GlobalRecord::findForGlobal('7b193500-ac0b-481f-a79c-2a362646364d');
+GlobalRecord::findForGlobal('7b193500-ac0b-481f-a79c-2a362646364d');
 ```
 
 ## Extending Tailor Models
