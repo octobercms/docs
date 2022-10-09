@@ -51,11 +51,11 @@ October CMS 使用 [Composer](https://getcomposer.org/) 发布包并且完全兼
 
 #### October CMS的版本
 
-只需将 `october/system` 软件包要求为所需的 [目标版本模式](https://getcomposer.org/doc/articles/versions.md)。 以下将要求平台安装使用October CMS 2.1版本
+只需将 `october/rain` 软件包要求为所需的 [目标版本模式](https://getcomposer.org/doc/articles/versions.md)。 以下将要求平台安装使用October CMS 2.1版本
 
 ```json
 "require": {
-    "october/system": ">=2.1"
+    "october/rain": ">=2.1"
 }
 ```
 

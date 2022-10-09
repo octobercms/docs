@@ -50,11 +50,11 @@ Plugins and themes alike can require a specific version of October CMS and also 
 
 #### Requiring a Version of October CMS
 
-Simply require the `october/system` package to the desired [target version pattern](https://getcomposer.org/doc/articles/versions.md). The following will require that the platform installation uses version 2.1 of October CMS or above.
+Simply require the `october/rain` package to the desired [target version pattern](https://getcomposer.org/doc/articles/versions.md). The following will require that the platform installation uses version 2.1 of October CMS or above.
 
 ```json
 "require": {
-    "october/system": ">=2.1"
+    "october/rain": ">=2.1"
 }
 ```
 
