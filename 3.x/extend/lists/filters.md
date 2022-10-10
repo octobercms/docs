@@ -21,7 +21,7 @@ filter: $/october/test/models/user/scopes.yaml
 ## Defining Filter Scopes
 
 ::: aside
-The available filter scope properties can be found on the [filter scope definitions](../../element/filter-scopes.md.md) page.
+The available filter scope properties can be found on the [filter scope definitions](../../element/filter-scopes.md) page.
 :::
 
 Similarly filters are driven by their own configuration file that contain filter **scopes**. Each scope is an aspect by which the list can be filtered. The next example shows a typical contents of the filter definition file.
