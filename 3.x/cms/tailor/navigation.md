@@ -54,3 +54,9 @@ To place the item as a secondary navigation item. The **parent** property should
 navigation:
     parent: <handle|uuid>
 ```
+
+You may also completely disable the navigation by setting the **navigation** property to `false`.
+
+```yaml
+navigation: false
+```
