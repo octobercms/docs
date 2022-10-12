@@ -36,6 +36,8 @@ Entry | the standard content structure that supports drafts.
 Global | a single record in the database and is often used for settings and configuration.
 Mixin | defines reusable field definitions that can be imported and mixed in with other field definitions.
 
+Each blueprint type is described in more detail in the [Blueprints article](./blueprints.md).
+
 ## Blueprint Structure
 
 ::: aside

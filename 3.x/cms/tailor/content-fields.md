@@ -139,6 +139,26 @@ fields:
         # [...]
 ```
 
+## Modifying Core Fields
+
+Each blueprint record has several core fields as [defined by attributes on the model](./models.md). You can modify these fields under certain conditions.
+
+An Entry is enabled by default; however, we can modify this by specifying a new default value for the `is_enabled` field.
+
+```yaml
+fields:
+    is_enabled:
+        default: false
+```
+
+The `title` field placeholder is generated based on the blueprint name in _New [Entry] Name_ format. You can customize this to something more useful depending on the use-case, for example, _First and Last Name_, _Event Title_ or _Location Name_.
+
+```yaml
+fields:
+    title:
+        placeholder: Event Title
+```
+
 #### See Also
 
 ::: also
