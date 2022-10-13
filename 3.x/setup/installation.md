@@ -130,6 +130,10 @@ If the application cannot find the database then a 404 page will be shown for th
 The request timeout on the web server should be increased or disabled. For example, Apache's FastCGI sometimes has the -idle-timeout option set to 30 seconds.
 :::
 
+::: details Zend OPcache API is restricted by "restrict_api" configuration directive
+This issue can appear when internals try to use the OPcache internals. This can be disabled by setting the **force_bytecode_invalidation** configuration to `false` inside the **config/cms.php** file.
+:::
+
 #### See Also
 
 ::: also
