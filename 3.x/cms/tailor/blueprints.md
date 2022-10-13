@@ -33,6 +33,8 @@ Property | Description
 **drafts** | enables drafts for this entry. Default: `false`
 **multisite** | enables multisite for this entry, supported values: `true`, `false`, `sync`. Default: `false`
 **customMessages** | customize the messages used in the user interface (see below).
+**showExport** | displays a toolbar button for exporting records. Default: `true`.
+**showImport** | displays a toolbar button for importing records. Default: `true`.
 
 ### Entry Variants
 
