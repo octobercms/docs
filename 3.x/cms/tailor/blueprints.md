@@ -32,6 +32,7 @@ Property | Description
 **structure** | structure configuration supplied when using the `structure` type.
 **drafts** | enables drafts for this entry. Default: `false`
 **multisite** | enables multisite for this entry, supported values: `true`, `false`, `sync`. Default: `false`
+**customMessages** | customize the messages used in the user interface (see below).
 
 ### Entry Variants
 
@@ -127,6 +128,23 @@ groups:
 
 ::: tip
 It is recommended to use [mixin blueprints](#mixin) to group common field definitions.
+:::
+
+### Custom Messages
+
+Specify the `customMessages` property to override the default messages used by the interface. The values can be plain text or can refer to a [localization string](../../extend/system/localization.md).
+
+```yaml
+customMessages:
+    buttonCreate: Create New Event
+```
+
+The following messages are available to override as custom messages.
+
+::: details View the list of available messages
+Message | Default Message
+------------- | -------------
+**buttonCreate** | Create :name Entry
 :::
 
 ## Global
