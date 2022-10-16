@@ -29,6 +29,7 @@ Option | Description
 **form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
 **flash** | when true, instructs the server to clear and send any flash messages with the response. default: `false`
 **files** | when true, the request will accept file uploads using the `FormData` interface. default: `false`
+**download** | when true, file downloads are accepted with a `Content-Disposition` response. When a string, the downloaded filename can be specified. default: `false`
 **bulk** | when true, the request be sent as JSON for bulk data transactions. default: `false`
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
