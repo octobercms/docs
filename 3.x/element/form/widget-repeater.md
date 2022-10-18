@@ -20,6 +20,7 @@ Option | Description
 **form** | inline field definitions or a reference to form field definition file.
 **prompt** | text to display for the create button. Default: Add new item.
 **displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
+**useTabs** | shows tabs when enabled, allowing fields to specify a `tab` property. Default `false`
 **itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
 **titleFrom** | name of field within items to use as the title for the collapsed item, optional.
 **minItems** | minimum items required. Pre-displays those items when not using groups. For example if you set `minItems: 1` the first row will be displayed and not hidden.
@@ -41,6 +42,23 @@ extra_information:
             title_when_collapsed:
                 label: This field is the title when collapsed
                 type: text
+```
+
+The repeater fields can be grouped in to tabs by setting the `useTabs` property to `true`.
+
+```yaml
+extra_information:
+    type: repeater
+    useTabs: true
+    form:
+        added_at:
+            label: Date added
+            type: datepicker
+            tab: Date
+        details:
+            label: Details
+            type: textarea
+            tab: Details
 ```
 
 #### Grouped Repeaters
@@ -95,6 +113,7 @@ Option | Description
 **icon** | defines an icon for the group, optional.
 **titleFrom** | name of a field for the item title, optional.
 **fields** | form fields belonging to the group.
+**useTabs** | shows tabs for the group only, optional.
 
 ::: tip
 The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
