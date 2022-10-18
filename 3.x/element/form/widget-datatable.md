@@ -16,8 +16,6 @@ data:
 In order to use this with a model, the field should be defined in the [jsonable property](../../extend/system/models.md) or anything that can handle storing as an array.
 :::
 
-#### Table Configuration
-
 The following lists the configuration values of the data table widget itself.
 
 Option | Description

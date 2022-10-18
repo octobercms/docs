@@ -5,7 +5,6 @@
 ```yaml
 extra_information:
     type: repeater
-    titleFrom: title_when_collapsed
     form:
         fields:
             added_at:
@@ -14,9 +13,6 @@ extra_information:
             details:
                 label: Details
                 type: textarea
-            title_when_collapsed:
-                label: This field is the title when collapsed
-                type: text
 ```
 
 Option | Description
@@ -33,7 +29,23 @@ Option | Description
 **showReorder** | displays an interface for sorting items. Default: true
 **showDuplicate** | displays an interface for cloning items. Default: true
 
-The repeater field supports a group mode which allows a custom set of fields to be chosen for each iteration.
+The `titleFrom` property can be used to specify the value used when the repeater is collapsed.
+
+```yaml
+extra_information:
+    type: repeater
+    titleFrom: title_when_collapsed
+    form:
+        fields:
+            # ...
+            title_when_collapsed:
+                label: This field is the title when collapsed
+                type: text
+```
+
+#### Grouped Repeaters
+
+The repeater field supports a group mode using `groups` that allows a custom set of fields to be chosen for each iteration.
 
 ```yaml
 content:
