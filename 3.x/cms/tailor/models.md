@@ -110,7 +110,7 @@ Alternatively, you can look it up using the UUID and the `findForGlobalUuid` met
 
 ```php
 // Return a global using the UUID
-GlobalRecord::findForGlobal('7b193500-ac0b-481f-a79c-2a362646364d');
+GlobalRecord::findForGlobalUuid('7b193500-ac0b-481f-a79c-2a362646364d');
 ```
 
 ## Extending Tailor Models
