@@ -7,10 +7,6 @@ Components are key features of October CMS. Each component implements some funct
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../../extend/cms-components.md) as part of plugins.
 
-::: warning
-Using components inside partials has limited functionality, this is described in more detail in the [Dynamic Partials section](./partials.md) of the documentation.
-:::
-
 ## Introduction
 
 If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the configuration section of the template file. The next example demonstrates how to add a demo To-Do component to a page.
@@ -36,6 +32,10 @@ When you refer a component, it automatically creates a page variable that matche
 ```twig
 {% component 'demoTodo' %}
 ```
+
+::: warning
+Using components inside partials has limited functionality, this is described in more detail in the [Dynamic Partials section](./partials.md) of the documentation.
+:::
 
 ## Components Aliases
 
