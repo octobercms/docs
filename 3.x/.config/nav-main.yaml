@@ -28,13 +28,6 @@
         - form/field-checkboxlist
         - form/field-switch
 -
-    title: Form UI
-    children:
-        - form/ui-section
-        - form/ui-hint
-        - form/ui-ruler
-        - form/ui-partial
--
     title: Form Widgets
     children:
         - form/widget-codeeditor
@@ -52,6 +45,13 @@
         - form/widget-sensitive
         - form/widget-taglist
         - form/widget-boxes
+-
+    title: Form UI
+    children:
+        - form/ui-section
+        - form/ui-hint
+        - form/ui-ruler
+        - form/ui-partial
 -
     title: List Columns
     children:
@@ -81,7 +81,7 @@
 #
 "/extend/":
 -
-    title: Basic Overview
+    title: System Design
     children:
         - system/plugins
         - system/models
@@ -90,6 +90,15 @@
         - system/behaviors
         - system/widgets
         - system/ajax
+-
+    title: Core Concepts
+    children:
+        - system/exceptions
+        - system/sending-mail
+        - system/localization
+        - system/routing
+        - system/scheduling
+        - system/unit-testing
 -
     title: Extending the CMS
     children:
@@ -120,7 +129,7 @@
         - lists/filters
         - lists/filter-widgets
 -
-    title: Import & Export Design
+    title: Import & Export
     children:
         - importexport/importexport-controller
         - importexport/importexport-model
@@ -131,16 +140,7 @@
         - settings/file-settings
         - settings/model-settings
 -
-    title: Advanced Overview
-    children:
-        - system/exceptions
-        - system/sending-mail
-        - system/localization
-        - system/routing
-        - system/scheduling
-        - system/unit-testing
--
-    title: Database Layer
+    title: Database
     children:
         - database/basics
         - database/query
@@ -154,7 +154,7 @@
         - database/serialization
         - database/traits
 -
-    title: Available Services
+    title: Services
     children:
         - services/application
         - services/cache
@@ -257,7 +257,7 @@
         - themes/content
         - themes/components
 -
-    title: Tailor Content
+    title: Tailor
     children:
         - tailor/introduction
         - tailor/blueprints

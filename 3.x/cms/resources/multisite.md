@@ -70,3 +70,7 @@ https://yoursite.tld/fr | Displays the **French** site
 https://yoursite.tld | Redirect based on language preference
 
 When the user visits the base URL, their preferred language is automatically detected and will be redirected to a matching site. The matching site is based on its locale value and if no match is found then the primary site is used.
+
+::: tip
+You can modify this behavior using the `redirect_policy` value found in the **config/cms.php** file.
+:::

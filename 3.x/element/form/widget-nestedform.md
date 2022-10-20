@@ -19,7 +19,7 @@ content:
                 type: text
 ```
 
-Pass a string to the `form` option to reference an external yaml file.
+Pass a string to the `form` property to reference an external yaml file.
 
 ```yaml
 profile:

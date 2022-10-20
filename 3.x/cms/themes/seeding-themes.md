@@ -15,6 +15,8 @@ Below you can see an example seed directory structure. The **blueprints** direct
 |       └── `seeds`  _← Theme Seed Directory_
 |           ├── blueprints
 |           |   └── post.yaml  _← Blueprint File_
+|           ├── lang
+|           |   └── en.json  _← Language File_
 |           ├── data
 |           |   └── blog-posts.json  _← Data File_
 |           └── data.yaml  _← Seeding Script_
@@ -28,6 +30,9 @@ Since blueprints do not depend on any specific file or directory structure, they
 
 When importing blueprints, simply place the blueprint files in the **blueprints** directory. It does not use any configuration, when seeding all blueprints are simply copied to the **app/blueprints** directory. A new directory is created inside that has the same name as the theme. The blueprints are placed inside this new directory.
 
+## Importing Languages
+
+As an optional feature, languages can be imported to the **app/lang** directory by placing the [JSON language files](../../extend/system/localization.md) in the **lang** directory. This makes it possible to translate labels and other descriptions inside blueprints. If a language file already exists in the application language directory, then the language strings will be merged together.
 
 ## Importing Data
 
