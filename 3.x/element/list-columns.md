@@ -15,9 +15,10 @@ List Columns are column definitions used by lists. These are referred to by the 
 All list columns are identified as their individual **type** property.
 
 ```yaml
-mycolumn:
-    type: number
-    # ...
+columns:
+    mycolumn:
+        type: number
+        # ...
 ```
 
 ## Column Properties

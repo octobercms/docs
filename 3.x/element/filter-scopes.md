@@ -15,9 +15,10 @@ Filter Scopes are scope definitions used by filters, often in conjunction with a
 All filter scopes are identified as their individual **type** property.
 
 ```yaml
-myscope:
-    type: date
-    # ...
+scopes:
+    myscope:
+        type: date
+        # ...
 ```
 
 ## Scope Properties

@@ -17,9 +17,10 @@ Form Fields, Form UI and Form Widgets are field definitions used by forms, such 
 All form fields are identified as their individual **type** property.
 
 ```yaml
-myfield:
-    type: textarea
-    # ...
+fields:
+    myfield:
+        type: textarea
+        # ...
 ```
 
 Form Fields contain generic and simple fields. Form UI is for user interface elements that can be included in forms to help with the layout design. Form Widgets will often introduce more complex functionality, it is common for plugins to provide their own custom form widgets. Tailor Fields are fields that are only available inside tailor blueprints.
