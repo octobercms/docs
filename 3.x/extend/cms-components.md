@@ -98,8 +98,12 @@ public function defineProperties()
             'description' => 'The most amount of todo items allowed',
             'default' => 10,
             'type' => 'string',
-            'validationPattern' => '^[0-9]+$',
-            'validationMessage' => 'The Max Items property can contain only numeric symbols'
+            'validation' => [
+                'regex' => [
+                    'message' => 'The Max Items property can contain only numeric symbols.',
+                    'pattern' => '^[0-9]+$'
+                ]
+            ]
         ]
     ];
 }

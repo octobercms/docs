@@ -108,7 +108,7 @@ Report widgets may have properties that users can manage with the Inspector:
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/report-widget-inspector.png)
 
-The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [components article](../cms-components.md). Example:
+The properties should be defined in the `defineProperties` method of the widget class. The properties are described in the [inspector types](../../element/inspector-types.md).
 
 ```php
 public function defineProperties()
@@ -118,14 +118,22 @@ public function defineProperties()
             'title' => 'Widget title',
             'default' => 'Top Pages',
             'type' => 'string',
-            'validationPattern' => '^.+$',
-            'validationMessage' => 'The Widget Title is required.'
+            'validation' => [
+                'required' => [
+                    'message' => 'The Widget Title is required.'
+                ],
+            ]
         ],
         'days' => [
             'title' => 'Number of days to display data for',
             'default' => '7',
             'type' => 'string',
-            'validationPattern' => '^[0-9]+$'
+            'validation' => [
+                'regex' => [
+                    'message' => 'The days property can contain only numeric symbols.',
+                    'pattern' => '^[0-9]+$'
+                ]
+            ]
         ]
     ];
 }
@@ -133,7 +141,7 @@ public function defineProperties()
 
 ## Report Widget Registration
 
-Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [plugin registration file](../extending.md). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values. Example:
+Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [plugin registration file](../extending.md). The method should return an array containing the widget classes in the keys and widget configuration (label, context, and required permissions) in the values.
 
 ```php
 public function registerReportWidgets()
