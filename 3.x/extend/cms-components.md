@@ -109,7 +109,11 @@ public function defineProperties()
 }
 ```
 
-The method should return an array with the property keys as indexes and property parameters as values. The property keys are used for accessing the component property values inside the component class. The property parameters and available types are described in the [inspector types article](../element/inspector-types.md).
+The method should return an array with the property keys as indexes and property parameters as values. The property keys are used for accessing the component property values inside the component class.
+
+::: tip
+The property parameters and available types are described in the [inspector types article](../element/inspector-types.md).
+:::
 
 Inside the component you can read the property value with the `property` method:
 
