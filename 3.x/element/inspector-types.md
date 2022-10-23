@@ -40,6 +40,6 @@ Key | Description
 **required** | optional, forces field to be filled. Uses validationMessage when left empty.
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
-**depends** | an array of property names a dropdown property depends on. See the dropdown properties below.
+**depends** | an array of property names a dropdown property depends on. See the [dropdown type](./inspector/type-dropdown.md) for more information.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 **showExternalParam** | specifies visibility of the external parameter editor for the property in the Inspector. Default value: **true**.

@@ -80,14 +80,14 @@
     title: Inspector Types
     children:
         - inspector/type-string
-        # - inspector/type-stringlist
+        - inspector/type-stringlist
         - inspector/type-text
         - inspector/type-autocomplete
         - inspector/type-checkbox
         - inspector/type-dropdown
         - inspector/type-dictionary
         - inspector/type-object
-        # - inspector/type-objectlist
+        - inspector/type-objectlist
         - inspector/type-set
 
 #
