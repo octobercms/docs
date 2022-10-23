@@ -42,4 +42,4 @@ Key | Description
 **options** | optional array of options for dropdown properties.
 **depends** | an array of property names a dropdown property depends on. See the dropdown properties below.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
-**showExternalParam** | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: **true**.
+**showExternalParam** | specifies visibility of the external parameter editor for the property in the Inspector. Default value: **true**.
