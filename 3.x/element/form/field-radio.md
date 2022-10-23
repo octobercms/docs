@@ -50,7 +50,7 @@ security_level:
     cssClass: inline-options
 ```
 
-## Server-side Options
+## Dynamic Options
 
 Radio lists support the same methods for defining the options as the [dropdown field type](./field-dropdown.md).
 

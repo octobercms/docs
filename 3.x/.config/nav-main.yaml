@@ -8,6 +8,7 @@
         - form-fields
         - list-columns
         - filter-scopes
+        - inspector-types
 -
     title: Tailor Fields
     children:

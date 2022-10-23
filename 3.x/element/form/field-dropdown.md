@@ -70,7 +70,7 @@ status:
     showSearch: false
 ```
 
-## Server-side Options
+## Dynamic Options
 
 The next approaches involve using the model class in your plugin or application codebase. If the `options` value is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model.
 
