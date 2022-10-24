@@ -280,13 +280,6 @@
         - tailor/components
         - tailor/models
 -
-    title: Theme Development
-    children:
-        - themes/settings
-        - themes/child-themes
-        - themes/database-themes
-        - themes/seeding-themes
--
     title: AJAX Framework
     children:
         - ajax/introduction
@@ -301,6 +294,13 @@
     children:
         - media/introduction
         - media/providers
+-
+    title: Theme Development
+    children:
+        - themes/settings
+        - themes/child-themes
+        - themes/database-themes
+        - themes/seeding-themes
 -
     title: Resources
     children:
