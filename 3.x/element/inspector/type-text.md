@@ -1,3 +1,6 @@
+---
+subtitle: Inspector Type
+---
 # Text
 
 The `text` inspector type allows entering multi-line long text values in a popup window. The editor doesn't have any specific parameters. The optional `default` parameter for the editor should contain a string.

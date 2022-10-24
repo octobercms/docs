@@ -1,3 +1,6 @@
+---
+subtitle: Inspector Type
+---
 # Dictionary
 
 The `dictionary` inspector type allows the creation of key-value pairs with a simple user interface consisting of a table with two columns. The `default` parameter, if specified, should contain a key-value object.

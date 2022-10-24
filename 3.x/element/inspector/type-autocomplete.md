@@ -1,3 +1,6 @@
+---
+subtitle: Inspector Type
+---
 # Autocomplete
 
 The `autocomplete` inspector type works like the `string` editor, except it includes auto competion features. Available options can be specified statically with the `options` parameter or loaded dynamically.

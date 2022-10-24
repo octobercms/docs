@@ -1,3 +1,6 @@
+---
+subtitle: Inspector Type
+---
 # Dropdown
 
 The `dropdown` inspector type is used to make a single from a set of predefined options. The option list for dropdown and set properties can be static or dynamic. Static options are defined with the `options` element of the property definition.

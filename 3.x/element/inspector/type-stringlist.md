@@ -1,3 +1,6 @@
+---
+subtitle: Inspector Type
+---
 # String List
 
 The `stringList` inspector type allows users to enter lists of strings. The editor opens in a popup window and displays a text area. Each line of text represents an element in the result array. The optional `default` parameter should contain an array of strings.

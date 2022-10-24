@@ -1,3 +1,6 @@
+---
+subtitle: Inspector Type
+---
 # Checkbox
 
 The `checkbox` inspector type is represented with a checkbox in the interface. This property doesn't have any special parameters. The `default` parameter, if specified, should contain a boolean value or string values `true`, `false`, `1`, `0`.
