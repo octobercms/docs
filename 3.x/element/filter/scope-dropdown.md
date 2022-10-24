@@ -1,3 +1,6 @@
+---
+subtitle: Filter Scope
+---
 # Dropdown
 
 `dropdown` - filter using a single selection of multiple items.

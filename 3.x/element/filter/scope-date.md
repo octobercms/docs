@@ -1,3 +1,6 @@
+---
+subtitle: Filter Scope
+---
 # Date
 
 `date` - filer using a date value using `equals`, `between`, `before` and `after` condition logic.
