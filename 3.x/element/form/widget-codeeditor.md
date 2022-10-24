@@ -1,3 +1,6 @@
+---
+subtitle: Form Widget
+---
 # Code Editor
 
 `codeeditor` - renders a plaintext editor for formatted code or markup. Note the options may be inherited by the code editor preferences defined for the Administrator in the back-end.

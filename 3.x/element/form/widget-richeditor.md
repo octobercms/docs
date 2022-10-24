@@ -1,3 +1,6 @@
+---
+subtitle: Form Widget
+---
 # Rich Editor / WYSIWYG
 
 `richeditor` - renders a visual editor for rich formatted text, also known as a WYSIWYG editor.

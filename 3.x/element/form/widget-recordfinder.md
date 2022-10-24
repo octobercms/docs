@@ -1,3 +1,6 @@
+---
+subtitle: Form Widget
+---
 # Record Finder
 
 `recordfinder` - renders a field with details of a related record. Expanding the field displays a popup list to search large amounts of records. Supported by singular relationships only.

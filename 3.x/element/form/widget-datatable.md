@@ -1,3 +1,6 @@
+---
+subtitle: Form Widget
+---
 # Data Table
 
 `datatable` - renders an editable table of records, formatted as a grid. Cell content can be editable directly in the grid, allowing for the management of several rows and columns of information.

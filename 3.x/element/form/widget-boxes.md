@@ -1,3 +1,6 @@
+---
+subtitle: Form Widget
+---
 # Boxes
 
 `boxes` - renders a box editor for building visual pages. This feature is provided by the premium [Boxes](https://octobercms.com/plugin/offline-boxes) plugin. Once licensed, you may install it with the following command.

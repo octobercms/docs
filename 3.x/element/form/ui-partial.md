@@ -1,3 +1,6 @@
+---
+subtitle: Form UI
+---
 # Partial
 
 The `partial` UI element renders a partial, the `path` value can refer to a partial view file otherwise the field name is used as the partial name.

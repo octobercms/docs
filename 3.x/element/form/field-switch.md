@@ -1,3 +1,6 @@
+---
+subtitle: Form Field
+---
 # Switch
 
 The `switch` field renders a switch box. Similar to a [checkbox field](./field-checkbox.md) except displayed as a toggle switch.
