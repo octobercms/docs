@@ -29,7 +29,6 @@ The following form fields are available:
 
 [Mixin](./content/field-mixin.md)
 [Entries](./content/field-entries.md)
-
 [Text](./form/field-text.md)
 [Number](./form/field-number.md)
 [Password](./form/field-password.md)
@@ -41,7 +40,6 @@ The following form fields are available:
 [Checkbox](./form/field-checkbox.md)
 [Checkbox List](./form/field-checkboxlist.md)
 [Switch](./form/field-switch.md)
-
 [Code Editor](./form/widget-codeeditor.md)
 [Color Picker](./form/widget-colorpicker.md)
 [Data Table](./form/widget-datatable.md)
@@ -57,7 +55,6 @@ The following form fields are available:
 [Sensitive](./form/widget-sensitive.md)
 [Tag List](./form/widget-taglist.md)
 [Boxes](./form/widget-boxes.md)
-
 [Section](./form/ui-section.md)
 [Hint](./form/ui-hint.md)
 [Ruler](./form/ui-ruler.md)

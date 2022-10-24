@@ -21,6 +21,22 @@ scopes:
         # ...
 ```
 
+## Available Scopes
+
+The following filter scopes are available:
+
+<div class="content-list-p" markdown="1">
+
+[Checkbox](./filter/scope-checkbox.md)
+[Switch](./filter/scope-switch.md)
+[Text](./filter/scope-text.md)
+[Number](./filter/scope-number.md)
+[Dropdown](./filter/scope-dropdown.md)
+[Group](./filter/scope-group.md)
+[Date](./filter/scope-date.md)
+
+</div>
+
 ## Scope Properties
 
 For each scope you can specify these properties (where applicable).
