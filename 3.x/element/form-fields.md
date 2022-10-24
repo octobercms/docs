@@ -3,10 +3,6 @@ subtitle: Learn about the different form field types.
 ---
 # Form Fields
 
-::: aside
-← Use the sidebar to see all the available form fields.
-:::
-
 Form Fields, Form UI and Form Widgets are field definitions used by forms, such as a text input. These are commonly referred to by the following areas:
 
 - [CMS Theme Settings](../cms/themes/settings.md)
@@ -24,6 +20,50 @@ fields:
 ```
 
 Form Fields contain generic and simple fields. Form UI is for user interface elements that can be included in forms to help with the layout design. Form Widgets will often introduce more complex functionality, it is common for plugins to provide their own custom form widgets. Tailor Fields are fields that are only available inside tailor blueprints.
+
+## Available Fields
+
+The following form fields are available:
+
+<div class="content-list-p" markdown="1">
+
+[Mixin](./content/field-mixin.md)
+[Entries](./content/field-entries.md)
+
+[Text](./form/field-text.md)
+[Number](./form/field-number.md)
+[Password](./form/field-password.md)
+[Email](./form/field-email.md)
+[Textarea](./form/field-textarea.md)
+[Dropdown](./form/field-dropdown.md)
+[Radio List](./form/field-radio.md)
+[Balloon Selector](./form/field-balloon.md)
+[Checkbox](./form/field-checkbox.md)
+[Checkbox List](./form/field-checkboxlist.md)
+[Switch](./form/field-switch.md)
+
+[Code Editor](./form/widget-codeeditor.md)
+[Color Picker](./form/widget-colorpicker.md)
+[Data Table](./form/widget-datatable.md)
+[Date Picker](./form/widget-datepicker.md)
+[File Upload](./form/widget-fileupload.md)
+[Markdown Editor](./form/widget-markdown.md)
+[Media Finder](./form/widget-mediafinder.md)
+[Nested Form](./form/widget-nestedform.md)
+[Record Finder](./form/widget-recordfinder.md)
+[Relation](./form/widget-relation.md)
+[Repeater](./form/widget-repeater.md)
+[Rich Editor](./form/widget-richeditor.md)
+[Sensitive](./form/widget-sensitive.md)
+[Tag List](./form/widget-taglist.md)
+[Boxes](./form/widget-boxes.md)
+
+[Section](./form/ui-section.md)
+[Hint](./form/ui-hint.md)
+[Ruler](./form/ui-ruler.md)
+[Partial](./form/ui-partial.md)
+
+</div>
 
 ## Field Properties
 
