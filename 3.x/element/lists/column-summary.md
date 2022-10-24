@@ -1,3 +1,6 @@
+---
+subtitle: List Column
+---
 # Summary
 
 `summary` - generates a summary value, strips HTML and limits length to the closest word boundary.

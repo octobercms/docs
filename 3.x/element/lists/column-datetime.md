@@ -1,3 +1,6 @@
+---
+subtitle: List Column
+---
 # Date & Time
 
 `datetime` - displays the column value as a formatted date and time. The next example displays dates as **Thu, Dec 25, 1975 2:15 PM**.
