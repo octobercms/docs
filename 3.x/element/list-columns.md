@@ -21,6 +21,25 @@ columns:
         # ...
 ```
 
+## Available Columns
+
+The following list columns are available:
+
+<div class="content-list-p" markdown="1">
+
+[Text](./lists/column-text.md)
+[Number](./lists/column-number.md)
+[Image](./lists/column-image.md)
+[Switch](./lists/column-switch.md)
+[Summary](./lists/column-summary.md)
+[Date & Time](./lists/column-datetime.md)
+[Selectable](./lists/column-selectable.md)
+[Linkage](./lists/column-linkage.md)
+[Partial](./lists/column-partial.md)
+[Color Picker](./lists/column-colorpicker.md)
+
+</div>
+
 ## Column Properties
 
 For each column can specify these properties (where applicable):
