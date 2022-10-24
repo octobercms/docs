@@ -3,10 +3,6 @@ subtitle: Learn how to define component properties.
 ---
 # Inspector Types
 
-::: aside
-← Use the sidebar to see all the available inspector types.
-:::
-
 Inspector Types are property types used by CMS components. These are referenced by the following areas:
 
 - [CMS Component Classes](../extend/cms-components.md)
@@ -24,6 +20,25 @@ public function defineProperties()
     ];
 }
 ```
+
+## Available Types
+
+The following inspector types are available:
+
+<div class="content-list-p" markdown="1">
+
+[String](./inspector/type-string.md)
+[String List](./inspector/type-stringlist.md)
+[Text](./inspector/type-text.md)
+[Autocomplete](./inspector/type-autocomplete.md)
+[Checkbox](./inspector/type-checkbox.md)
+[Dropdown](./inspector/type-dropdown.md)
+[Dictionary](./inspector/type-dictionary.md)
+[Object](./inspector/type-object.md)
+[Object List](./inspector/type-objectlist.md)
+[Set](./inspector/type-set.md)
+
+</div>
 
 ## Available Properties
 
