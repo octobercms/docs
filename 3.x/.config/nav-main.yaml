@@ -89,6 +89,9 @@
         - inspector/type-object
         - inspector/type-objectlist
         - inspector/type-set
+        # Types only supported by v3 Inspector
+        # - inspector/type-table
+        # - inspector/type-mediafinder
 
 #
 # Backend Nav

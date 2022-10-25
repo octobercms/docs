@@ -7,7 +7,7 @@ Inspector Types are property types used by CMS components. These are referenced 
 
 - [CMS Component Classes](../extend/cms-components.md)
 
-All component types are identified as their individual **type** property.
+All inspector types are identified as their individual **type** property.
 
 ```php
 public function defineProperties()
