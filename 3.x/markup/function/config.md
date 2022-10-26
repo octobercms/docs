@@ -32,3 +32,7 @@ The above is the PHP equivalent of the following:
 ```php
 <?= env('APP_ENV', 'production') ?>
 ```
+
+::: warning
+The `config()` and `env()` functions are not available when [safe mode is enabled](../../setup/configuration.md).
+:::

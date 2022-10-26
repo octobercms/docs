@@ -9,7 +9,7 @@ The supplied value will be automatically converted to the current timezone, depe
 
 To output the current date time value:
 
-```
+```twig
 {{ carbon('now') }}
 ```
 
