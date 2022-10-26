@@ -13,14 +13,41 @@ To output the current date time value:
 {{ carbon('now') }}
 ```
 
+## format
+
 The `format` method can be used to apply various formats.
 
 ```twig
 Meeting starts at {{ carbon(event.start_at).format('H:i') }} in Johannesburg.
 ```
 
+## formatLocalized
+
 Format a local time/date according to locale settings, this is the equivalent to `strftime` in PHP.
 
 ```twig
 {{ carbon(article.created_at).formatLocalized('%d.%m.%Y %H:%M:%S') }}
+```
+
+## diffForHumans
+
+The `diffForHumans` method will render the difference between a date and now in human readible text.
+
+```twig
+{{ carbon(post.published_at).diffForHumans() }}
+```
+
+## Cache Busting URLs
+
+You can use the format to produce cache busting URLs.
+
+```twig
+// Outputs: 10.26.22.22.53.31
+carbon('now').format('m.d.y.H.i.s')
+```
+
+Then build the URL like the following.
+
+```twig
+<img src="{{ 'assets/images/image_file.jpg'|theme }}?{{ carbon('now').format('m.d.y.H.i.s') }}" alt="" />
 ```

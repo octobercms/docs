@@ -53,6 +53,15 @@ To add a suffix when limit is applied, pass it as the third argument. Defaults t
 {{ str_words('The quick brown fox...', 100, '... Read more!') }}
 ```
 
+## str_replace
+
+Replace all occurrences of the search string with the replacement string.
+
+```twig
+// Outputs: Bob
+{{ 'Alice'|str_replace('Alice', 'Bob') }}
+```
+
 ## str_camel()
 
 Convert a value to *camelCase*.
@@ -89,9 +98,90 @@ The second argument can supply a delimiter.
 
 ## str_plural()
 
-Get the plural form of an English word.
+Gets the plural form of an English word.
 
 ```twig
 // Outputs: chickens
 {{ str_plural('chicken') }}
+```
+
+## str_upper()
+
+Makes a string uppercase.
+
+```twig
+// Outputs: Hello I'm JACK
+Hello I'm {{ 'Jack'|str_upper }}
+```
+
+## str_lower()
+
+Makes a string lowercase.
+
+```twig
+// Outputs: Hello I'm jack
+Hello I'm {{ 'JACK'|str_lower }}
+```
+
+## str_ucfirst()
+
+Makes a string's first character uppercase.
+
+```twig
+// Outputs: Hello I'm Jack
+Hello I'm {{ 'jack'|str_ucfirst }}
+```
+
+## str_lcfirst()
+
+Makes a string's first character lowercase.
+
+```twig
+// Outputs: Hello I'm jack
+Hello I'm {{ 'Jack'|str_lcfirst }}
+```
+
+## str_repeat()
+
+Repeats a string.
+
+```twig
+// Outputs: We are the best best best!
+We are the {{ 'best '|str_repeat(3) }}!
+```
+
+## str_pad_both
+
+Pads a string to a certain length with another string from both sides.
+
+```twig
+// Outputs: ooxxxoo
+{{ 'xxx'|str_pad_both(7, 'o') }}
+```
+
+## str_pad_left
+
+Pads a string to a certain length with another string from left side.
+
+```twig
+// Outputs: ooxxx
+{{ 'xxx'|str_pad_left(5, 'o') }}
+```
+
+## str_pad_right
+
+Pads a string to a certain length with another string from right side.
+
+```twig
+// Outputs: xxxoo
+{{ 'xxx'|str_pad_right(5, 'o') }}
+```
+
+## str_reverse
+
+Reverses a string.
+
+```twig
+// Outputs: !dlrow olleH
+{{ 'Hello world!'|str_reverse }}
 ```
