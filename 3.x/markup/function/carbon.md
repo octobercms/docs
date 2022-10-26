@@ -5,7 +5,7 @@ subtitle: Twig Function
 
 The `carbon()` function can be used to handle dates and times using Twig, prepared with a [Carbon object](https://carbon.nesbot.com/docs/) and all its available functions.
 
-The supplied value will be automatically converted to the current timezone, depending on the context of the request this will either be the `backend.timezone` or `cms.timezone` configuration setting.
+The supplied value will be automatically converted to the current timezone depending on the `cms.timezone` configuration setting, which can be set using a [site definition](../../cms/resources/multisite.md).
 
 To output the current date time value:
 
