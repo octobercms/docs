@@ -216,8 +216,8 @@
         - property/this-controller
         - property/this-environment
         - property/this-session
-        - property/this-site
         - property/this-request
+        - property/this-site
 -
     title: Tags
     collapsable: false
@@ -253,6 +253,8 @@
         - function/response
         - function/redirect
         - function/collect
+        - function/config
+        - function/carbon
         - function/pager
         - function/abort
         - function/dump
