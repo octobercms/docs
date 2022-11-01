@@ -51,7 +51,25 @@ Mail views reside in the file system and the code used represents the path to th
 |                   └── message.htm  _← "message" Segment_
 :::
 
-The content inside a mail view file can includes 2 sections: **configuration** and **message content**. Sections are separated with the `==` sequence. For example:
+The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
+
+```twig
+subject = "Your product has been added to October CMS project"
+==
+Hi {{ name }},
+
+Good news! User {{ user }} just added your product "{{ product }}" to a project.
+
+This message was sent using no formatting (plain text)
+==
+<p>Hi {{ name }},</p>
+
+<p><strong>Good news!</strong> User {{ user }} just added your product "{{ product }}" to a project.</p>
+
+<p>This email was sent using formatting (HTML)</p>
+```
+
+The **plain text** section is optional and a view can contain only the **configuration** and **HTML markup** sections. Markup syntax is also supported as an alternative syntax.
 
 ```twig
 layout = "default"
