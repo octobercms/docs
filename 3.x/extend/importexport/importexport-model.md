@@ -3,6 +3,8 @@ subtitle: Learn how to customize the import and export process.
 ---
 # Import Export Model
 
+Import and Export models define the logic used when processing the import or export action, extending the `Backend\Models\ImportModel` and `Backend\Models\ExportModel` models respectively. These models are designed to be used with the [Import Export Controller](./importexport-controller.md), however, it is possible to work with them directly in PHP.
+
 ## Import Model
 
 For importing data you should create a dedicated model for this process which extends the `Backend\Models\ImportModel` class. Here is an example class definition:
@@ -45,6 +47,26 @@ Method | Description
 `logWarning(rowIndex, message)` | Used to provide a soft warning, like modifying a value.
 `logSkipped(rowIndex, message)` | Used when the entire row of data was not imported (skipped).
 
+### Importing with PHP
+
+Use the `importFile` method process an import manually from a local file stored on the disk.
+
+```php
+$importModel = new MyImportClass;
+
+$importModel->file_format = 'json';
+
+$importModel->importFile('/path/to/import/file.json');
+```
+
+If the file is coming from an uploaded file use the `Input` facade to access the local path.
+
+```php
+$importModel->importFile(
+    Input::file('file')->getRealPath()
+);
+```
+
 ## Export Model
 
 For exporting data you should create a dedicated model which extends the `Backend\Models\ExportModel` class. Here is an example:
@@ -66,6 +88,20 @@ class SubscriberExport extends \Backend\Models\ExportModel
 ```
 
 The class must define a method called `exportData` used for returning the export data. The first parameter `$columns` is an array of column names to export. The second parameter `$sessionKey` will contain the session key used for the request.
+
+### Exporting with PHP
+
+Use the `exportDownload` method to process an export manually and return a download response.
+
+```php
+$exportColumns = ['id', 'title'];
+
+$exportModel = new MyExportClass;
+
+$exportModel->file_format = 'json';
+
+return $exportModel->exportDownload('myexportfile.json', ['columns' => $exportColumns]);
+```
 
 ## Custom Options
 
