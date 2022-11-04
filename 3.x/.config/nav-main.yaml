@@ -162,8 +162,8 @@
         - database/basics
         - database/query
         - database/model
-        - database/structure
         - database/relations
+        - database/structure
         - database/attachments
         - database/collection
         - database/pagination
