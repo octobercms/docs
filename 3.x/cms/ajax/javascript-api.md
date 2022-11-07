@@ -161,7 +161,7 @@ Applies configurations to all AJAX requests globally.
 
 ```js
 addEventListener('ajax:setup', function(event) {
-    var context = event.detail.context;
+    const { context } = event.detail;
 
     // Enable AJAX handling of Flash messages on all AJAX requests
     context.options.flash = true;
@@ -174,6 +174,25 @@ addEventListener('ajax:setup', function(event) {
     // Handle Flash Messages by triggering a flashMsg of the message type
     context.options.handleFlashMessage = function(message, type) {
         oc.flashMsg({ text: message, class: type });
+    }
+});
+```
+
+Using a supplied `promise` from the event detail.
+
+```js
+addEventListener('ajax:confirm-message', function(event) {
+    const { message, promise } = event.detail;
+
+    // Prevent default behavior
+    event.preventDefault();
+
+    // Handle promise
+    if (confirm(message)) {
+        promise.resolve();
+    }
+    else {
+        promise.reject();
     }
 });
 ```
