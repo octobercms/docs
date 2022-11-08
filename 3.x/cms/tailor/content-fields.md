@@ -100,14 +100,14 @@ fields:
         # [...]
 ```
 
-List columns have short-hand values that can be used. Passing a string will replace the label, passing `true` will include the default column, passing `false` will remove the column and passing `null` will make the column invisible.
+List columns have short-hand values that can be used. Passing a string will replace the label, passing `true` will include the default column, passing `false` will remove the column and passing `invisible` will make the column invisible.
 
 ```yaml
 columns:
     myfield: List Label   # New Label
     myfield: true         # Shown
     myfield: false        # Hidden
-    myfield: null         # Invisible
+    myfield: invisible    # Invisible
 ```
 
 Filter scopes have a similar short-hand values to the list columns that can be used.
