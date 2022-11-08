@@ -71,6 +71,14 @@ myfield:
     scope: false
 ```
 
+The `column` type can be set to `invisible` to make it hidden from the list by default.
+
+```yaml
+myfield:
+    label: Form Label
+    column: invisible
+```
+
 ### External Configuration
 
 You may define the scopes and columns separately from the form fields by using the `columns` and `scopes` property in the blueprint. When using external configuration, the default view will be replaced by only the defined fields.
