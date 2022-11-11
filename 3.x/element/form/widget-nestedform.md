@@ -34,4 +34,5 @@ profile:
 Option | Description
 ------------- | -------------
 **form** | inline field definitions or a reference to form field definition file.
-**showPanel** | places the form inside a panel container. Default: true
+**showPanel** | places the form inside a panel container. Default: `true`
+**defaultCreate** | if a related record is not found, attempt to create one. Default: `false`
