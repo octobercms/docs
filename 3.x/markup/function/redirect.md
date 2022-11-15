@@ -13,7 +13,7 @@ To perform a redirect, pass the first argument as the destination, as either a C
 {% endif %}
 ```
 
-Page parameters can be passed as the second arguement.
+Page parameters can be passed as the second argument.
 
 ```twig
 {% do redirect('docs', { slug: 'home' }) %}

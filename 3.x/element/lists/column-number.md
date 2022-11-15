@@ -1,3 +1,6 @@
+---
+subtitle: List Column
+---
 # Number
 
 `number` - displays a number column, aligned right.

@@ -90,15 +90,19 @@ Including [file uploads](../../extend/services/request-input.md) with a request.
 
 Including [file downloads](../../extend/services/response-view.md) with a response.
 
+```html
 <button data-request="onDownloadFile" data-request-download>
     Download
 </button>
+```
 
 To specify a custom filename and open the download in a new window, such as previewing a PDF.
 
+```html
 <button
     data-request="onDownloadFile"
     data-request-download="sample.pdf"
     data-browser-target="_blank">
     Download
 </button>
+```

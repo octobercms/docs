@@ -3,10 +3,6 @@ subtitle: Learn how to define columns in a list structure.
 ---
 # List Columns
 
-::: aside
-← Use the sidebar to see all the available list columns.
-:::
-
 List Columns are column definitions used by lists. These are referred to by the following areas.
 
 - [Backend List Controller](../extend/lists/list-controller.md)
@@ -15,10 +11,30 @@ List Columns are column definitions used by lists. These are referred to by the 
 All list columns are identified as their individual **type** property.
 
 ```yaml
-mycolumn:
-    type: number
-    # ...
+columns:
+    mycolumn:
+        type: number
+        # ...
 ```
+
+## Available Columns
+
+The following list columns are available:
+
+<div class="content-list-p" markdown="1">
+
+[Text](./lists/column-text.md)
+[Number](./lists/column-number.md)
+[Image](./lists/column-image.md)
+[Switch](./lists/column-switch.md)
+[Summary](./lists/column-summary.md)
+[Date & Time](./lists/column-datetime.md)
+[Selectable](./lists/column-selectable.md)
+[Linkage](./lists/column-linkage.md)
+[Partial](./lists/column-partial.md)
+[Color Picker](./lists/column-colorpicker.md)
+
+</div>
 
 ## Column Properties
 

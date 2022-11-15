@@ -16,9 +16,8 @@ Components files and directories reside in the **components** subdirectory of a 
 |           └── Plugin.php
 :::
 
-Components must be [registered in the plugin registration file](../extend/extending.md) with the `registerComponents` method.
+Components must be [registered in the plugin registration file](../extend/extending.md) with the `registerComponents` method. Components can be configured using properties and their [inspector type definitions](../element/inspector-types.md).
 
-<a id="oc-component-class-definition"></a>
 ## Component Class Definition
 
 The `create:component` command creates a new component class and the default component view. The first argument specifies the author and plugin name. The second argument specifies the component class name.
@@ -88,7 +87,7 @@ This will register the Todo component class with the default alias name **demoTo
 
 ## Component Properties
 
-When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties` method of the component class. The next example shows how to define a component property:
+When you add a component to a page or layout you can configure it using properties. The properties are defined with the `defineProperties` method of the component class. The next example shows how to define a component property using a **string** inspector type.
 
 ```php
 public function defineProperties()
@@ -99,29 +98,22 @@ public function defineProperties()
             'description' => 'The most amount of todo items allowed',
             'default' => 10,
             'type' => 'string',
-            'validationPattern' => '^[0-9]+$',
-            'validationMessage' => 'The Max Items property can contain only numeric symbols'
+            'validation' => [
+                'regex' => [
+                    'message' => 'The Max Items property can contain only numeric symbols.',
+                    'pattern' => '^[0-9]+$'
+                ]
+            ]
         ]
     ];
 }
 ```
 
-The method should return an array with the property keys as indexes and property parameters as values. The property keys are used for accessing the component property values inside the component class. The property parameters are defined with an array with the following keys:
+The method should return an array with the property keys as indexes and property parameters as values. The property keys are used for accessing the component property values inside the component class.
 
-Key | Description
-------------- | -------------
-**title** | required, the property title, it is used by the component Inspector in the CMS back-end.
-**description** | required, the property description, it is used by the component Inspector in the CMS back-end.
-**default** | optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
-**type** | optional, specifies the property type. The type defines the way how the property is displayed in the Inspector. Currently supported types are **string**, **checkbox**, **dropdown** and **set**. Default value: **string**.
-**validationPattern** | optional Regular Expression to use when a user enters the property value in the Inspector. The validation can be used only with **string** properties.
-**validationMessage** | optional error message to display if the validation fails.
-**required** | optional, forces field to be filled. Uses validationMessage when left empty.
-**placeholder** | optional placeholder for string and dropdown properties.
-**options** | optional array of options for dropdown properties.
-**depends** | an array of property names a dropdown property depends on. See the dropdown properties below.
-**group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
-**showExternalParam** | specifies visibility of the External Parameter editor for the property in the Inspector. Default value: **true**.
+::: tip
+The property parameters and available types are described in the [inspector types article](../element/inspector-types.md).
+:::
 
 Inside the component you can read the property value with the `property` method:
 
@@ -145,107 +137,6 @@ To access the property from the Twig partials for the component, utilize the `__
 
 ```twig
 {{ __SELF__.property('maxItems') }}
-```
-
-<a id="oc-dropdown-and-set-properties"></a>
-### Dropdown and Set Properties
-
-The option list for dropdown and set properties can be static or dynamic. Static options are defined with the `options` element of the property definition. Example:
-
-```php
-public function defineProperties()
-{
-    return [
-        'units' => [
-            'title' => 'Units',
-            'type' => 'dropdown',
-            'default' => 'imperial',
-            'placeholder' => 'Select units',
-            'options' => ['metric' => 'Metric', 'imperial' => 'Imperial']
-        ]
-    ];
-}
-```
-
-The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown or set property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition.
-
-```php
-public function defineProperties()
-{
-    return [
-        'country' => [
-            'title' => 'Country',
-            'type' => 'dropdown',
-            'default' => 'us'
-        ]
-    ];
-}
-
-public function getCountryOptions()
-{
-    return ['us' => 'United states', 'ca' => 'Canada'];
-}
-```
-
-Dynamic dropdown and set lists can depend on other properties. For example, the state list could depend on the selected country. The dependencies are declared with the `depends` parameter in the property definition. The next example defines two dynamic dropdown properties and the state list depends on the country.
-
-```php
-public function defineProperties()
-{
-    return [
-        'country' => [
-            'title' => 'Country',
-            'type' => 'dropdown',
-            'default' => 'us'
-        ],
-        'state' => [
-            'title' => 'State',
-            'type' => 'dropdown',
-            'default' => 'dc',
-            'depends' => ['country'],
-            'placeholder' => 'Select a state'
-        ]
-    ];
-}
-```
-
-In order to load the state list you should know what country is currently selected in the Inspector. The Inspector POSTs all property values to the `getPropertyOptions` handler, so you can do the following.
-
-```php
-public function getStateOptions()
-{
-    // Load the country property value from POST
-    $countryCode = post('country');
-
-    $states = [
-        'ca' => ['ab' => 'Alberta', 'bc' => 'British columbia'],
-        'us' => ['al' => 'Alabama', 'ak' => 'Alaska']
-    ];
-
-    return $states[$countryCode];
-}
-```
-
-### Page List Properties
-
-Sometimes components need to create links to the website pages. For example, the blog post list contains links to the blog post details page. In this case the component should know the post details page file name (then it can use the [page Twig filter](../markup/filter/page.md)). October includes a helper for creating dynamic dropdown page lists. The next example defines the postPage property which displays a list of pages:
-
-```php
-public function defineProperties()
-{
-        return [
-            'postPage' => [
-                'title' => 'Post page',
-                'type' => 'dropdown',
-                'default' => 'blog/post'
-            ]
-        ];
-}
-
-public function getPostPageOptions()
-{
-    return Page::sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
-}
 ```
 
 ## Routing Parameters
@@ -513,3 +404,9 @@ public function onRun()
     $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', ['defer' => true]);
 }
 ```
+
+#### See Also
+
+::: also
+* [Inspector Types](../element/inspector-types.md)
+:::

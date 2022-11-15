@@ -15,7 +15,7 @@ You can access the current session manager via `this.session` and it returns the
 
 ```twig
 {% if this.session.has('key') %}
-    <h1>we found it in the session</h1>
+    <h1>We found key in the session</h1>
 {% endif %}
 ```
 

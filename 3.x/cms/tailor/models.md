@@ -84,6 +84,28 @@ $post->title = 'Imported Post';
 $post->save();
 ```
 
+### Extending Model Constructor
+
+Similar to [extending regular models](../../extend/extending.md), you may extend the `EntryRecord` model constructor using the `extendInSection` method to target a specific blueprint.
+
+```php
+EntryRecord::extendInSection('Blog\Post', function($model) {
+    $model->bindEvent('model.beforeSave', function () use ($model) {
+        // Model has been saved!
+    });
+});
+```
+
+The `extendInSectionUuid` method can also be used for more precise targeting. This approach will not throw an exception if the blueprint is not found.
+
+```php
+EntryRecord::extendInSectionUuid('3328c303-7989-462e-b866-27e7037ba275', function($model) {
+    $model->bindEvent('model.afterDelete', function () use ($model) {
+        // Model has been deleted!
+    });
+});
+```
+
 ## Global Record
 
 The `Tailor\Models\GlobalRecord` model is used to store content for a global.
@@ -103,14 +125,36 @@ To look up a global using PHP, you may use the `Tailor\Models\GlobalRecord` mode
 
 ```php
 // Return a global using the handle
-GlobalRecord::findForGlobal('Blog\Settings');
+GlobalRecord::findForGlobal('Blog\Config');
 ```
 
 Alternatively, you can look it up using the UUID and the `findForGlobalUuid` method.
 
 ```php
 // Return a global using the UUID
-GlobalRecord::findForGlobal('7b193500-ac0b-481f-a79c-2a362646364d');
+GlobalRecord::findForGlobalUuid('7b193500-ac0b-481f-a79c-2a362646364d');
+```
+
+### Extending Model Constructor
+
+Similar to [extending regular models](../../extend/extending.md), you may extend the `GlobalRecord` model constructor using the `extendInGlobal` method to target a specific blueprint.
+
+```php
+GlobalRecord::extendInGlobal('Blog\Config', function($model) {
+    $model->bindEvent('model.beforeSave', function () use ($model) {
+        // Model has been saved!
+    });
+});
+```
+
+The `extendInGlobalUuid` method can also be used for more precise targeting. This approach will not throw an exception if the blueprint is not found.
+
+```php
+GlobalRecord::extendInGlobalUuid('7b193500-ac0b-481f-a79c-2a362646364d', function($model) {
+    $model->bindEvent('model.afterDelete', function () use ($model) {
+        // Model has been deleted!
+    });
+});
 ```
 
 ## Extending Tailor Models

@@ -2,6 +2,12 @@
 
 Migrations and seed files allow you to build, modify and populate database tables. They are primarily used by a [plugin update file](../system/plugins.md) and are paired with the version history of a plugin. All classes are stored in the `updates` directory of a plugin. Migrations should tell a story about your database history and this story can be played both forwards and backwards to build up and tear down the tables.
 
+You may generate a migration file using the command line scaffolding tool. The first argument specifies the author and plugin name. The second argument specifies the migration name.
+
+```bash
+php artisan create:migration Acme.Blog CreatePostsTable
+```
+
 ## Migration Structure
 
 A migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the schema builder to expressively create and modify tables. For example, let's look at a sample migration that creates a `october_blog_posts` table:

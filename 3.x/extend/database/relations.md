@@ -860,6 +860,30 @@ $posts = Post::whereHas('comments', function ($query) {
 })->get();
 ```
 
+#### Inline Relationship Existence Queries
+
+To query a relationship's existence with a single condition to a relationship query, it is more convenient to use the `whereRelation`, `orWhereRelation`, `whereMorphRelation` or `orWhereMorphRelation` methods.
+
+```php
+$posts = Post::whereRelation('comments', 'is_approved', false)->get();
+```
+
+#### Querying Relationship Absence
+
+You may pass the name of the relationship to the `doesntHave` and `orDoesntHave` methods to limit your results based on the absence of a relationship.
+
+```php
+$posts = Post::doesntHave('comments')->get();
+```
+
+The `whereDoesntHave` and `orWhereDoesntHave` methods can add extra query constraints to your `doesntHave` queries.
+
+```php
+$posts = Post::whereDoesntHave('comments', function ($query) {
+    $query->where('content', 'like', 'code%');
+})->get();
+```
+
 ### Counting Related Records
 
 In some scenarios you may want to count the number of related records found in a given relationship definition. The `withCount` method can be used to include a `{relation}_count` column with the selected models.

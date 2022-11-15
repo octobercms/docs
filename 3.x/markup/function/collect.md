@@ -32,6 +32,41 @@ Passing an array as the first argument will initialize the collection with items
 ]) %}
 ```
 
+## shuffle
+
+The `shuffle()` method shuffles the collection.
+
+```twig
+{{ collect(songs).shuffle() }}
+```
+
+In a foreach loop.
+
+```twig
+{% for fruit in collect(['apple', 'banana', 'orange']).shuffle() %}
+    {{ fruit }}
+{% endfor %}
+```
+
+## sortBy
+
+The `sortBy()` and `sortByDesc` methods can sort a collection by given field (key).
+
+```twig
+collect(data).sortBy('age')
+```
+
+For example:
+
+```twig
+// Output: John David
+{% set data = [{'name': 'David', 'age': 31}, {'name': 'John', 'age': 28}] %}
+
+{% for item in collect(data).sortBy('age') %}
+    {{ item.name }}&nbsp;
+{% endfor %}
+```
+
 #### See Also
 
 ::: also

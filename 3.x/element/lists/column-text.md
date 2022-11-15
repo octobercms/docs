@@ -1,3 +1,6 @@
+---
+subtitle: List Column
+---
 # Text
 
 `text` - displays a text column, aligned left.

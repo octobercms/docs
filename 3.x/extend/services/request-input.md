@@ -133,8 +133,16 @@ You may flash other data across requests using the [Session](./session.md) class
 
 #### Retrieving Old Data
 
+Fetch individual input value.
+
 ```php
 Input::old('username');
+```
+
+Fetch all old input values.
+
+```php
+$data = Input::old();
 ```
 
 ## Files

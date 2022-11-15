@@ -1,3 +1,6 @@
+---
+subtitle: Form Field
+---
 # Radio List
 
 The `radio` field renders a list of radio options, where only one item can be selected at a time. Radio fields support the same methods for defining the options as the [dropdown field type](./field-dropdown.md).
@@ -50,7 +53,7 @@ security_level:
     cssClass: inline-options
 ```
 
-## Server-side Options
+## Dynamic Options
 
 Radio lists support the same methods for defining the options as the [dropdown field type](./field-dropdown.md).
 

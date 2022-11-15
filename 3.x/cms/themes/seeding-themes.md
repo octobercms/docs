@@ -96,3 +96,7 @@ You may also use the `--root` option to instruct the command to import the bluep
 ```bash
 php artisan theme:seed <theme name> --root
 ```
+
+:::tip
+You may also seed a theme using the admin panel by navigating to **Settings → Frontend Theme → Manage → Seed Content**.
+:::

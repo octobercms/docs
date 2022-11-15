@@ -1,3 +1,6 @@
+---
+subtitle: List Column
+---
 # Linkage
 
 The `linkage` column displays a hyperlink to the specified page.

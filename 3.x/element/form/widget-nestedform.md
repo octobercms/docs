@@ -1,3 +1,6 @@
+---
+subtitle: Form Widget
+---
 # Nested Form
 
 `nestedform` - renders a nested form using a related record or [jsonable attribute](../../extend/system/models.md). Fields can be defined inline or using an external yaml file.
@@ -31,4 +34,5 @@ profile:
 Option | Description
 ------------- | -------------
 **form** | inline field definitions or a reference to form field definition file.
-**showPanel** | places the form inside a panel container. Default: true
+**showPanel** | places the form inside a panel container. Default: `true`
+**defaultCreate** | if a related record is not found, attempt to create one. Default: `false`

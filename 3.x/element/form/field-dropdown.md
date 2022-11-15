@@ -1,3 +1,6 @@
+---
+subtitle: Form Field
+---
 # Dropdown
 
 The `dropdown` field renders a dropdown with specified options. There are a number of ways to provide the dropdown options, most of them involve specify the `options` value.
@@ -70,7 +73,7 @@ status:
     showSearch: false
 ```
 
-## Server-side Options
+## Dynamic Options
 
 The next approaches involve using the model class in your plugin or application codebase. If the `options` value is omitted, the framework expects a method with the name `get*FieldName*Options` to be defined in the model.
 

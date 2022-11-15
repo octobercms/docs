@@ -8,6 +8,7 @@
         - form-fields
         - list-columns
         - filter-scopes
+        - inspector-types
 -
     title: Tailor Fields
     children:
@@ -79,15 +80,18 @@
     title: Inspector Types
     children:
         - inspector/type-string
-        # - inspector/type-stringlist
+        - inspector/type-stringlist
         - inspector/type-text
         - inspector/type-autocomplete
         - inspector/type-checkbox
         - inspector/type-dropdown
         - inspector/type-dictionary
         - inspector/type-object
-        # - inspector/type-objectlist
+        - inspector/type-objectlist
         - inspector/type-set
+        # Types only supported by v3 Inspector
+        # - inspector/type-table
+        # - inspector/type-mediafinder
 
 #
 # Backend Nav
@@ -158,8 +162,8 @@
         - database/basics
         - database/query
         - database/model
-        - database/structure
         - database/relations
+        - database/structure
         - database/attachments
         - database/collection
         - database/pagination
@@ -212,8 +216,8 @@
         - property/this-controller
         - property/this-environment
         - property/this-session
-        - property/this-site
         - property/this-request
+        - property/this-site
 -
     title: Tags
     collapsable: false
@@ -249,6 +253,8 @@
         - function/response
         - function/redirect
         - function/collect
+        - function/config
+        - function/carbon
         - function/pager
         - function/abort
         - function/dump
@@ -279,13 +285,6 @@
         - tailor/components
         - tailor/models
 -
-    title: Theme Development
-    children:
-        - themes/settings
-        - themes/child-themes
-        - themes/database-themes
-        - themes/seeding-themes
--
     title: AJAX Framework
     children:
         - ajax/introduction
@@ -300,6 +299,13 @@
     children:
         - media/introduction
         - media/providers
+-
+    title: Theme Development
+    children:
+        - themes/settings
+        - themes/child-themes
+        - themes/database-themes
+        - themes/seeding-themes
 -
     title: Resources
     children:

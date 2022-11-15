@@ -62,7 +62,7 @@ To add custom classes on AJAX invalidation, hook into the `ajax:invalid-field` a
 
 ```js
 addEventListener('ajax:invalid-field', function(event) {
-    { fieldElement, fieldName, errorMsg, isFirst } = event.detail;
+    const { fieldElement, fieldName, errorMsg, isFirst } = event.detail;
     fieldElement.classList.add('has-error');
 });
 

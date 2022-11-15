@@ -1,3 +1,6 @@
+---
+subtitle: List Column
+---
 # Switch
 
 `switch` - displays a on or off state for boolean columns.

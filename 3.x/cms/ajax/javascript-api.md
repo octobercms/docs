@@ -111,25 +111,27 @@ oc.request('#myform', 'onCalculate', {
 
 ## Global AJAX Events
 
-The AJAX framework triggers several events on the updated elements, triggering element, form, and the window object. The events are triggered regardless on which API was used - the data attributes API or the JavaScript API. Extra details are available on the `event.detail` property.
+The AJAX framework triggers events on the updated elements, triggering element, form, and window object. The events are triggered regardless of which API was used - the data attributes API or the JavaScript API.
+
+Extra details are available on the `event.detail` property of the event handler. Unless otherwise specified, the handler details are the `context` object, the `data` object received from the server, the `responseCode` and the `xhr` object.
 
 Event | Description
 ------------- | -------------
-**ajax:before-send** | triggered on the window object before sending the request.
-**ajax:before-update** | triggered on the form object directly after the request is complete, but before the page is updated. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the XHR object.
-**ajax:update** | triggered on a page element after it has been updated with the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the XHR object.
-**ajax:update-complete** | triggered on the window object after all elements are updated by the framework. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the XHR object.
+**ajax:before-send** | triggered on the window object before sending the request. The handler details provide the `context` object.
+**ajax:before-update** | triggered on the form object directly after the request is complete, but before the page is updated.
+**ajax:update** | triggered on a page element after it has been updated with the framework.
+**ajax:update-complete** | triggered on the window object after all elements are updated by the framework.
 **ajax:request-success** | triggered on the form object after the request is successfully completed. The handler gets 5 parameters: the event object, the context object, the data object received from the server, the status text string, and the XHR object.
-**ajax:request-error** | triggered on the form object if the request encounters an error. The handler gets 5 parameters: the event object, the context object, the error message, the status text string, and the XHR object.
-**ajax:error-message** | triggered on the window object if the request encounters an error. The handler gets 2 parameters: the event object and error message returned from the server.
-**ajax:confirm-message** | triggered on the window object when `confirm` option is given. The handler gets 2 parameters: the event object and text message assigned to the handler as part of `confirm` option. This is useful for implementing custom confirm logic/interface instead of native javascript confirm box.
+**ajax:request-error** | triggered on the form object if the request encounters an error.
+**ajax:error-message** | triggered on the window object if the request encounters an error. The handler has a `message` detail with the error message returned from the server.
+**ajax:confirm-message** | triggered on the window object when `confirm` option is given. The handler has a `message` detail with a text message assigned to the handler as part of `confirm` option. A `promise` detail is also provided to defer or cancel the outcome, this is useful for implementing custom confirm logic/interface instead of native javascript confirm box.
 
 These events are fired on the triggering element:
 
 Event | Description
 ------------- | -------------
-**ajax:setup** | triggered before the request is formed, allowing options to be modified via the `context.options` object.
-**ajax:promise** | triggered directly before the AJAX request is sent.
+**ajax:setup** | triggered before the request is formed. The handler details provide the `context` object, allowing options to be modified via the `context.options` property.
+**ajax:promise** | triggered directly before the AJAX request is sent. The handler details provide the `context` object.
 **ajax:fail** | triggered finally if the AJAX request fails.
 **ajax:done** | triggered finally if the AJAX request was successful.
 **ajax:always** | triggered regardless if the AJAX request fails or was successful.
@@ -159,7 +161,7 @@ Applies configurations to all AJAX requests globally.
 
 ```js
 addEventListener('ajax:setup', function(event) {
-    var context = event.detail.context;
+    const { context } = event.detail;
 
     // Enable AJAX handling of Flash messages on all AJAX requests
     context.options.flash = true;
@@ -172,6 +174,25 @@ addEventListener('ajax:setup', function(event) {
     // Handle Flash Messages by triggering a flashMsg of the message type
     context.options.handleFlashMessage = function(message, type) {
         oc.flashMsg({ text: message, class: type });
+    }
+});
+```
+
+Using a supplied `promise` from the event detail.
+
+```js
+addEventListener('ajax:confirm-message', function(event) {
+    const { message, promise } = event.detail;
+
+    // Prevent default behavior
+    event.preventDefault();
+
+    // Handle promise
+    if (confirm(message)) {
+        promise.resolve();
+    }
+    else {
+        promise.reject();
     }
 });
 ```

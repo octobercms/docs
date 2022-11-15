@@ -30,7 +30,15 @@ You may also apply the HTML functions as a Twig filter.
 Removes HTML from a string.
 
 ```twig
-{{ html_strip('<strong>Hello world</strong>') }}
+// Outputs: Hello world
+{{ '<strong>Hello world</strong>'|html_strip }}
+```
+
+You may pass the first argument as allowable tags.
+
+```twig
+// Outputs: <p>Text</p>
+{{ '<p><b>Text</b></p>'|html_strip('<p>') }}
 ```
 
 ## html_limit()
@@ -38,13 +46,13 @@ Removes HTML from a string.
 Limits HTML with specific length with a proper tag handling.
 
 ```twig
-{{ html_limit('<p>Post content...</p>', 100) }}
+{{ '<p>Post content...</p>'|html_limit(100) }}
 ```
 
-To add a suffix when limit is applied, pass it as the third argument. Defaults to `...`.
+To add a suffix when limit is applied, pass it as the second argument. Defaults to `...`.
 
 ```twig
-{{ html_limit('<p>Post content...</p>', 100, '... Read more!') }}
+{{ '<p>Post content...</p>'|html_limit(100, '... Read more!') }}
 ```
 
 ## html_clean()
@@ -52,7 +60,7 @@ To add a suffix when limit is applied, pass it as the third argument. Defaults t
 Cleans HTML to prevent most XSS attacks.
 
 ```twig
-{{ html_clean('<script>window.location = "http://google.com"</script>') }}
+{{ '<script>window.location = "http://google.com"</script>'|html_clean }}
 ```
 
 ## html_email()
@@ -60,14 +68,20 @@ Cleans HTML to prevent most XSS attacks.
 Obfuscates an e-mail address to prevent spam-bots from sniffing it.
 
 ```twig
-{{ html_email('a@b.c') }}
+{{ 'me@mysite.tld'|html_email }}
 ```
 
 For example:
 
 ```twig
-<a href="mailto: {{ html_email('a@b.c')|raw }}">Email me</a>
+<a href="mailto: {{ 'me@mysite.tld'|html_email }}">Email me</a>
 
 <!-- The above will output -->
 <a href="mailto: &#109;&#97;&#105;&#108;&#x74;o&#x3a;&#97;&#64;b.&#x63;">Email me</a>
 ```
+
+## html_mailto()
+
+Outputs a complete anchor link with obfuscated email.
+
+{{ 'me@mysite.tld'|html_mailto }}

@@ -1,3 +1,6 @@
+---
+subtitle: Form Widget
+---
 # Color Picker
 
 `colorpicker` - renders controls to select a hexadecimal color value.

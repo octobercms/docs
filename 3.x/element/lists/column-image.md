@@ -1,3 +1,6 @@
+---
+subtitle: List Column
+---
 # Image
 
 The `image` column displays an image column with the option to resize the output.
