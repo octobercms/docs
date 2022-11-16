@@ -110,8 +110,19 @@ Several typical issues can occur during or after installation.
 It can happen in some environments when pasting the license key contents. Press the ENTER key several times to allow the installation process to continue.
 :::
 
+::: details An error "Unable to get local issuer certificate" is displayed during installation
+The complete error may read `cURL error 60: SSL certificate problem: unable to get local issuer certificate`.
+
+Download [this certificate file](https://curl.se/ca/cacert.pem) and save it as `cacert.pem`. Open your **php.ini** file and insert or edit the following line. You may need to restart Apache for the changes to take effect.
+```
+curl.cainfo = "/path/to/cacert.pem"
+```
+:::
+
 ::: details An error "Specified key was too long" is displayed during migration
-It can happen with older versions of MySQL or MariaDB. [Configuring the index lengths](../setup/database-config.md#index-lengths-using-mysql-mariadb) to support the utf8mb4 character set can help to resolve this issue.
+The complete error may read `SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes`
+
+This can happen with older versions of MySQL or MariaDB. [Configuring the index lengths](../setup/database-config.md#index-lengths-using-mysql-mariadb) to support the utf8mb4 character set can help to resolve this issue.
 :::
 
 ::: details A blank screen is displayed when opening the application
