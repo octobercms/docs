@@ -11,42 +11,108 @@ featured_page:
     type: pagefinder
 ```
 
-The resulting schema value looks like this:
+The resulting schema values may look like this:
 
 ```
-october://cms-page?reference=about
+october://cms-page@link/about
+
+october://blog-post@link/2?cms_page=blog/post
 ```
 
-### Creating New Page Types
+## Creating New Page Types
 
-Plugins can extend the page finder with new page types.
+Plugins can extend the page finder with new page types using the following events.
 
-- `cms.pageFinder.listTypes` event handler should return a list of pages types supported by the plugin.
-- `cms.pageFinder.getTypeInfo` event handler returns detailed information about a page type.
-- `cms.pageFinder.resolveItem` event handler "resolves" page information and returns the actual item URL, title, an indicator whether the item is currently active, and subitems, if any.
+- `cms.pageLookup.listTypes` event handler should return a list of pages types supported by the plugin.
+- `cms.pageLookup.getTypeInfo` event handler returns detailed information about a page type.
+- `cms.pageLookup.resolveItem` event handler "resolves" page information and returns the actual item URL, title, an indicator whether the item is currently active, and subitems, if any.
 
-The next example shows an event handler registration code for the Blog plugin. The Blog plugin registers two item types. As you can see, the Blog plugin uses the Category class to handle the events. That's a recommended approach.
+The next example shows an event handler registration code in the `boot` method of a plugin. This example shows how a blog post plugin may contribute links by definiting its types and offloading logic to the `Post` model.
 
 ```php
 public function boot()
 {
-    Event::listen('cms.pageFinder.listTypes', function() {
+    Event::listen('cms.pageLookup.listTypes', function() {
         return [
             'blog-post' => 'Blog Post',
             'blog-category' => 'Blog Category',
         ];
     });
 
-    Event::listen('cms.pageFinder.getTypeInfo', function($type) {
+    Event::listen('cms.pageLookup.getTypeInfo', function($type) {
         if ($type == 'blog-post') {
             return Post::getMenuTypeInfo($type);
         }
     });
 
-    Event::listen('cms.pageFinder.resolveItem', function($type, $item, $url, $theme) {
+    Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme) {
         if ($type == 'blog-post') {
             return Post::resolveMenuItem($item, $url, $theme);
         }
     });
 }
+```
+
+### Registering New Page Types
+
+New page types are registered with the `cms.pageLookup.listTypes` event handlers. The handler should return an associative array with the type codes in indexes and type names in values. It's highly recommended to use the plugin name in the type codes, to avoid conflicts with other page type providers. For example:
+
+```php
+return [
+    'my-plugin-item-type' => 'My Plugin Menu Item Type'
+];
+```
+
+### Returning Information About a Page Type
+
+Plugins should provide detailed information about the supported page types with the `cms.pageLookup.getTypeInfo` event handlers. The handler gets a single parameter - the page type code (one of the codes you registered with the `cms.pageLookup.listTypes` handler). The handler code must check whether the requested item type code belongs to the plugin. The handler should return an associative array in the following format.
+
+```php
+return [
+    'references' => [
+        11 => 'News',
+        12 => 'Tutorials',
+        13 => 'Philosophy',
+    ],
+    'cmsPages' => [...]
+]
+```
+
+The `references` element is a list objects the page could refer to. For example, the **Blog Category** page type returns a list of the blog categories. Some object supports nesting, for example static pages. Other objects don't support nesting, for example the blog categories. The format of the `references` value depends on whether the references have subitems or not. The format for references without subitems is the following.
+
+```php
+'references' => [
+    'item-key' => 'Item title'
+]
+```
+
+The format for references with subitems is the following.
+
+```php
+'references' => [
+    'item-key' => [
+        'title' => 'Item title',
+        'items' => [...]
+    ]
+]
+```
+
+The `cmsPages` is a list of CMS pages that can display objects supported by the page type. For example, for the **Blog Category** item type the page list contains pages that host the `blogPosts` component. That component can display a blog category contents. The `cmsPages` element should be an array of the `Cms\Classes\Page` objects.
+
+The following `withComponent` method will find all pages that use the `blogPosts` component, for the active theme.
+
+```php
+'cmsPages' => Page::withComponent('blogPosts')->get();
+```
+
+Use `whereComponent` to find all pages using the `section` component where the property `entrySlug` is set to true.
+
+```php
+'cmsPages' => Page::whereComponent('section', 'entrySlug', true)->get();
+```
+
+Use `inTheme` to find pages in another theme by passing the theme code.
+
+```php
+'cmsPages' => Page::inTheme('demo')->withComponent('blogPosts')->get();
 ```
