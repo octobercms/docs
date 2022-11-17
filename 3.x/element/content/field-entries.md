@@ -69,7 +69,7 @@ basic_entries:
 This would refer to the `App\Classes\ScopeHelper` class that may look a file located in **app/classes/ScopeHelper.php**, for example.
 
 ```php
-<?php namespace App\Classes;
+namespace App\Classes;
 
 class ScopeHelper
 {
