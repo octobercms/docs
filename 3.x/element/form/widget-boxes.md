@@ -3,14 +3,16 @@ subtitle: Form Widget
 ---
 # Boxes
 
-`boxes` - renders a box editor for building visual pages. This feature is provided by the premium [Boxes](https://octobercms.com/plugin/offline-boxes) plugin. Once licensed, you may install it with the following command.
+`boxes` - renders a box editor for building visual pages and works like a frontend page builder.
+
+This feature is introduced by installing the premium [Boxes](https://octobercms.com/plugin/offline-boxes) plugin. Once licensed, you may install it with the following command.
 
 ```bash
 php artisan plugin:install OFFLINE.Boxes
 ```
 
 ::: tip
-Find out more about the Boxes plugin at [the product page](https://boxes.offline.ch/).
+Learn more about the Boxes plugin at [the product page](https://boxes.offline.ch/).
 :::
 
 To display the Editor in a Tailor backend form, define a form field like this:
