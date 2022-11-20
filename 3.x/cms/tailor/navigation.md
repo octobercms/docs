@@ -55,6 +55,15 @@ navigation:
     parent: <handle|uuid>
 ```
 
+To disable the secondary navigation, define the **primaryNavigation** for a single blueprint without it being a parent for any other blueprints.
+
+```yaml
+primaryNavigation:
+    label: Page
+    icon: icon-magic
+    order: 500
+```
+
 You may also completely disable the navigation by setting the **navigation** property to `false`.
 
 ```yaml
