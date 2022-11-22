@@ -43,6 +43,7 @@
         - form/widget-relation
         - form/widget-repeater
         - form/widget-richeditor
+        - form/widget-pagefinder
         - form/widget-sensitive
         - form/widget-taglist
         - form/widget-boxes
@@ -238,6 +239,7 @@
     children:
         - filter/app
         - filter/page
+        - filter/link
         - filter/theme
         - filter/trans
         - filter/media

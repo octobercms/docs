@@ -11,13 +11,23 @@ featured_page:
     type: pagefinder
 ```
 
-The resulting schema values may look like this:
+The resulting schema values may look like this.
 
 ```
-october://cms-page@link/about
-
 october://blog-post@link/2?cms_page=blog/post
 ```
+
+## Linking to Pages
+
+Use the `|link` [Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
+
+```twig
+{{ featured_page|link }}
+```
+
+::: tip
+View the [Link filter article](../../markup/filter/link.md) to learn more.
+:::
 
 ## Creating New Page Types
 
@@ -116,3 +126,39 @@ Use `inTheme` to find pages in another theme by passing the theme code.
 ```php
 'cmsPages' => Page::inTheme('demo')->withComponent('blogPosts')->get();
 ```
+
+##### Resolving Page Links
+
+When the page finder generates links, every item should **resolved** by the plugin that supplies the item type. The process of resolving involves generating the real item URL, determining whether the item is active, and generating the subitems (if required). Plugins should register the `cms.pageLookup.resolveItem` event handler in order to resolve items. The event handler takes four arguments:
+
+- `$type` - the item type name. Plugins must only handle item types they provide and ignore other types.
+- `$item` - the item object (`Cms\Models\PageLookupItem`). The item object represents the item configuration provided by the user. The object has the following properties: `title`, `type`, `reference`, `cmsPage`, `nesting`.
+- `$url` - specifies the current absolute URL, in lower case. Always use the `Url::to()` helper to generate item links and compare them with the current URL.
+- `$theme` - the current theme object (`Cms\Classes\Theme`).
+
+The event handler should return an array. The array keys depend on whether the item contains subitems or not. Expected result format:
+
+```php
+return [
+    'url' => 'https://example.tld/blog/category/another-category',
+    'isActive' => true,
+    'items' => [
+        [
+            'title' => 'Another category',
+            'url' => 'https://example.tld/blog/category/another-category',
+            'isActive' => true
+        ],
+        [
+            'title' => 'News',
+            'url' => 'https://example.tld/blog/category/news',
+            'isActive' => false
+        ]
+    ]
+];
+```
+
+The `url` and `isActive` elements are required for items that point to a specific page, but it's not always the case. For example, an **All Pages** item type wouldn't have a specific page to point to since it generates multiple items. In this case, the items should be listed in the `items` element.
+
+::: tip
+As the resolving process occurs every time when the front-end page is rendered, it's a good idea to cache all the information required for resolving items, if that's possible.
+:::
