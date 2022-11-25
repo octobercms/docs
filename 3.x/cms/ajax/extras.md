@@ -9,11 +9,25 @@ When using the AJAX framework, you have the option to specify the **extras** suf
 {% framework extras %}
 ```
 
-## Loading Indicator
+## Progress Bar
 
-The first feature you should notice is a loading indicator that is displayed on the top of the page when an AJAX request runs. The indicator hooks in to global events used by [the JavaScript AJAX framework](./javascript-api.md).
+The first feature you should notice is a progress bar that is displayed on the top of the page when an AJAX request runs.
 
-When an AJAX request starts the `ajax:promise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajax:fail` and `ajax:done` events are used to detect when the request finishes, where the indicator is hidden again.
+The progress bar listens for the AJAX event used by [the JavaScript AJAX framework](./javascript-api.md). When an AJAX request starts the `ajax:promise` event is fired that displays the indicator and puts the mouse cursor in a loading state. The `ajax:fail` and `ajax:done` events are used to detect when the request finishes, where the indicator is hidden again.
+
+You may display the progress bar using JavaScript using the `oc.progressBar` object and `show` / `hide` functions.
+
+```js
+oc.progressBar.show();
+
+oc.progressBar.hide();
+```
+
+You can disable the progress bar for a request using the `progressBar` option of an AJAX request.
+
+```js
+oc.ajax('onSilentRequest', { progressBar: false });
+```
 
 ## Form Validation
 
@@ -112,6 +126,14 @@ When any element contains the `data-attach-loading` attribute, the CSS class `oc
 </a>
 ```
 
+You can manually add the loader to a button using the `oc.attachLoader` object and `show` / `hide` functions passing the element selector or object as the first argument.
+
+```js
+oc.attachLoader.show('.some-button');
+
+oc.attachLoader.hide('.some-button');
+```
+
 ## Flash Messages
 
 Specify the `data-request-flash` attribute on a form to enable the use of flash messages on successful AJAX requests.
@@ -144,6 +166,16 @@ To remain consistent with AJAX based flash messages, you can render a [standard 
         {{ message }}
     </p>
 {% endflash %}
+```
+
+You may display a flash message using JavaScript using the `oc.flashMsg` function. A type can be specified as either `success`, `error` or `warning`. An optional `interval` can be specified to control how long the flash message is displayed in seconds.
+
+```js
+oc.flashMsg({
+    message: 'The record has been successfully saved. This message will go away in 1 second.',
+    type: 'success',
+    interval: 1
+});
 ```
 
 ## Usage Example
