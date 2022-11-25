@@ -44,8 +44,7 @@ public function boot()
 {
     Event::listen('cms.pageLookup.listTypes', function() {
         return [
-            'blog-post' => 'Blog Post',
-            'blog-category' => 'Blog Category',
+            'blog-post' => 'Blog Post'
         ];
     });
 
@@ -132,11 +131,21 @@ Use `inTheme` to find pages in another theme by passing the theme code.
 When the page finder generates links, every item should **resolved** by the plugin that supplies the item type. The process of resolving involves generating the real item URL, determining whether the item is active, and generating the subitems (if required). Plugins should register the `cms.pageLookup.resolveItem` event handler in order to resolve items. The event handler takes four arguments:
 
 - `$type` - the item type name. Plugins must only handle item types they provide and ignore other types.
-- `$item` - the item object (`Cms\Models\PageLookupItem`). The item object represents the item configuration provided by the user. The object has the following properties: `title`, `type`, `reference`, `cmsPage`, `nesting`.
+- `$item` - the item object (`Cms\Models\PageLookupItem`). The item object represents the item configuration provided by the user. The object has the following properties: `title`, `type`, `reference`, `cmsPage`.
 - `$url` - specifies the current absolute URL, in lower case. Always use the `Url::to()` helper to generate item links and compare them with the current URL.
 - `$theme` - the current theme object (`Cms\Classes\Theme`).
 
-The event handler should return an array. The array keys depend on whether the item contains subitems or not. Expected result format:
+The event handler should return an array.
+
+```php
+return [
+    'title' => 'Some Category',
+    'url' => 'https://example.tld/blog/category/some-category',
+    'isActive' => true,
+]
+```
+
+The `items` array key determines if the item contains subitems.
 
 ```php
 return [
