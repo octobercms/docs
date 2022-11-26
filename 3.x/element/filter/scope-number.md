@@ -9,9 +9,17 @@ subtitle: Filter Scope
 age:
     label: Age
     type: number
-    default: 14
     conditions:
         greater: true
+```
+
+You may set `default` value to set the default filter value.
+
+```yaml
+age:
+    label: Age
+    type: number
+    default: 14
 ```
 
 You may pass custom SQL to the conditions as a string where `:value`, `:min` and `:max` contain the filtered values.
