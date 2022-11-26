@@ -92,7 +92,7 @@ The same with the JavaScript API.
 
 ```html
 <form
-    onsubmit="$(this).request('onHandleForm', {
+    onsubmit="oc.request(this, 'onHandleForm', {
         success: function(data) {
             console.log(data);
         }
