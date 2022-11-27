@@ -46,14 +46,7 @@ If two components register the same handler name, it is advised to prefix the ha
 <button data-request="mycomponent::onSubmitContactForm">Go</button>
 ```
 
-You may want to use the `__SELF__` reference variable instead of the hard coded alias in case the user changes the component alias used on the page. See the [Component Development article](../../extend/cms-components.md) to learn more.
-
-```html
-<form
-    data-request="{{ __SELF__ }}::onCalculate"
-    data-request-update="'{{ __SELF__ }}::calcresult': '#result'"
->
-```
+See the [Component Development article](../../extend/cms-components.md) to learn more.
 
 ## Redirects in AJAX Handlers
 
