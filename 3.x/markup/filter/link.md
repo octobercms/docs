@@ -9,6 +9,14 @@ The `|link` filter returns a link generated using the `october://` output schema
 <a href="{{ 'october://cms-page@link/about'|link }}" />
 ```
 
+# |links
+
+The `|links` filter will parse HTML for multiple links and resolve them as HTTP links in the output.
+
+```twig
+{{ post.content|links }}
+```
+
 ## link()
 
 The complimentary `link()` function is used to extract more detailed information about a link.

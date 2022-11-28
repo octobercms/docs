@@ -17,6 +17,12 @@ The resulting schema values may look like this.
 october://blog-post@link/2?cms_page=blog/post
 ```
 
+It uses the following format to store the selected value.
+
+```
+october://<TYPE>@link/<REFERENCE>?<PARAM>=<VALUE>
+```
+
 ## Linking to Pages
 
 Use the `|link` [Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
@@ -26,7 +32,7 @@ Use the `|link` [Twig filter](../../markup/filter/link.md) to convert the page f
 ```
 
 ::: tip
-View the [Link filter article](../../markup/filter/link.md) to learn more.
+View the [Link filter article](../../markup/filter/link.md) to learn more about processing page finder references.
 :::
 
 ## Creating New Page Types
