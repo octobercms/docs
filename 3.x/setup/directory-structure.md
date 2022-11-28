@@ -9,7 +9,7 @@ October CMS uses a modular structure where most programming features are found i
 
 ### App Directory
 
-The `app` directory contains application specific code. The contents of this directory are explored in more detail after this section. In summary, this area contains business logic that doesn't belong in traditional plugins.
+The `app` directory contains application specific code. The contents of this directory are explored in more detail after this section. In summary, this area contains business logic that doesn't belong in traditional plugins. Most of the plugin features are available in this directory.
 
 ### Bootstrap Directory
 
@@ -66,4 +66,4 @@ The `app/blueprints` directory contains [content blueprint](../cms/tailor/introd
 
 ### Others Directories
 
-You may create any directory in here, such as `models` or `controllers`. These will be autoloaded in the `App` namespace. For example, the file **app/models/Customer.php** will be available in PHP as `App\Models\Customer`.
+You may create any directory in here, just like a plugin, such as `models` or `controllers`. These will be autoloaded in the `App` namespace. For example, the file **app/models/Customer.php** will be available in PHP as `App\Models\Customer`.
