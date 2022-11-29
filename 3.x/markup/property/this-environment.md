@@ -3,7 +3,7 @@ subtitle: Twig Property
 ---
 # this.environment
 
-You can access the current environment object via `this.environment` and it returns a string that references the [current environment configuration](../setup/configuration.html#environment-configuration).
+You can access the current environment object via `this.environment` and it returns a string that references the [current environment configuration](../../setup/configuration.md).
 
 ## Example
 
