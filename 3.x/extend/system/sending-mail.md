@@ -100,7 +100,7 @@ subject = "Your product has been added to October CMS project"
 ...
 ```
 
-Using the code above, it will attempt to load the layout content from the path **plugins/acme/blog/views/mail/custom.layout-htm** and these contents are an example.
+Using the code above, it will attempt to load the layout content from the path **plugins/acme/blog/views/mail/custom-layout.htm** and these contents are an example.
 
 ```twig
 <html>
