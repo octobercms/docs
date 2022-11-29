@@ -13,4 +13,4 @@ md_content:
 
 Option | Description
 ------------- | -------------
-**sideBySide** | enables the side-by-side display mode by default. Default: `true`.
+**sideBySide** | enables the side-by-side display mode by default. Default: `false`.
