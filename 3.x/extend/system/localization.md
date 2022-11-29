@@ -162,5 +162,6 @@ If the language key does not exist or you cannot find it, you may [contact us fo
 #### See Also
 
 ::: also
+* [Theme Localization](../../cms/themes/localization.md)
 * [Laravel Localization](https://laravel.com/docs/9.x/localization)
 :::

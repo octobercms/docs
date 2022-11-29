@@ -305,6 +305,7 @@
     title: Theme Development
     children:
         - themes/settings
+        - themes/localization
         - themes/child-themes
         - themes/database-themes
         - themes/seeding-themes
