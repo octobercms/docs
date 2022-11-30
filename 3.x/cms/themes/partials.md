@@ -37,7 +37,7 @@ The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a sin
 
 ## Passing Variables to Partials
 
-You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
+You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag.
 
 ```twig
 <div class="sidebar">
@@ -45,7 +45,7 @@ You will find that you often need to pass variables to a partial from the extern
 </div>
 ```
 
-You can also assign new variables for use in the partial:
+You can also provide new variables for use in the partial.
 
 ```twig
 <div class="sidebar">
@@ -53,13 +53,40 @@ You can also assign new variables for use in the partial:
 </div>
 ```
 
-Inside the partial, variables can be accessed like any other markup variable:
+Inside the partial, variables can be accessed like any other markup variable.
 
 ```twig
 <p>Country: {{ country }}, city: {{ city }}.</p>
 ```
 
-### Passing Markup as a Variable
+### Variable Scope
+
+The partial contents will have access to the variables from the current context and the additional ones provided.
+
+```twig
+{% partial 'mypartial' foo='bar' %}
+```
+
+In the following example, the `foo` variable will be available inside the `mypartial` partial template.
+
+```twig
+{% set foo = 'bar' %}
+{% partial 'mypartial' %}
+```
+
+You can disable access to the context by appending the `only` keyword. In this example, only the `foo` variable will be accessible.
+
+```twig
+{% partial 'mypartial' foo='bar' only %}
+```
+
+In the next example, no variables will be accessible.
+
+```twig
+{% partial 'mypartial' only %}
+```
+
+### Parsing Markup as a Variable
 
 It is possible to pass markup to a partial by adding the `body` attribute to the partial tag.
 
