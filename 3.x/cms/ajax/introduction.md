@@ -45,7 +45,7 @@ The form data for `value1` and `value2` are automatically sent with the AJAX req
 
 ```html
 <!-- AJAX enabled form -->
-<form data-request="onTest" data-request-update="mypartial: '#myDiv'">
+<form data-request="onTest" data-request-update="{ mypartial: '#myDiv' }">
 
     <!-- Input two values -->
     <input name="value1"> + <input name="value2">

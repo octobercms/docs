@@ -237,7 +237,7 @@ The **create.htm** view represents the Create page that allows users to create n
             <button
                 type="button"
                 data-request="onSave"
-                data-request-data="close:true"
+                data-request-data="{ close: true }"
                 data-hotkey="ctrl+enter, cmd+enter"
                 data-load-indicator="Creating Category..."
                 class="btn btn-default">
@@ -268,7 +268,7 @@ The **update.htm** view represents the Update page that allows users to update o
             <button
                 type="button"
                 data-request="onSave"
-                data-request-data="close:true"
+                data-request-data="{ close: true }"
                 data-hotkey="ctrl+enter, cmd+enter"
                 data-load-indicator="Saving Category..."
                 class="btn btn-default">

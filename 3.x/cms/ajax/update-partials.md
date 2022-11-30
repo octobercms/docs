@@ -19,7 +19,7 @@ The [data attributes API](./attributes-api.md) uses the `data-request-update` at
 <!-- Attributes API -->
 <button
     data-request="onRefreshTime"
-    data-request-update="mytime: '#myDiv'">
+    data-request-update="{ mytime: '#myDiv' }">
     Go
 </button>
 ```
@@ -43,7 +43,7 @@ The definition of what should be updated is specified as a JSON-like object wher
 The following will request to update the `#myDiv` element with **mypartial** contents.
 
 ```js
-mypartial: '#myDiv'
+{ mypartial: '#myDiv' }
 ```
 
 ::: tip
@@ -53,19 +53,19 @@ The selector must start with a `#` or `.` character to be valid.
 Multiple partials are separated by commas.
 
 ```js
-firstpartial: '#myDiv', secondpartial: '#otherDiv'
+{ firstpartial: '#myDiv', secondpartial: '#otherDiv' }
 ```
 
 If the partial name contains a slash or a dash, it is important to 'quote' the left side.
 
 ```js
-'folder/mypartial': '#myDiv', 'my-partial': '#myDiv'
+{ 'folder/mypartial': '#myDiv', 'my-partial': '#myDiv' }
 ```
 
 The target element will always be on the right side since it can also be a HTML element in JavaScript.
 
 ```js
-mypartial: document.getElementById('myDiv')
+{ 'folder/mypartial': document.getElementById('myDiv') }
 ```
 
 ### Appending and Prepending Content
@@ -73,7 +73,7 @@ mypartial: document.getElementById('myDiv')
 If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 
 ```js
-'folder/append-partial': '@#myDiv'
+{ 'folder/append-partial': '@#myDiv' }
 ```
 
 Alternatively, you may add the `data-request-update-append` attribute to the target element.
@@ -85,7 +85,7 @@ Alternatively, you may add the `data-request-update-append` attribute to the tar
 If the selector string is prepended with the `^` symbol, the content will be prepended instead.
 
 ```js
-'folder/prepend-partial': '^#myDiv'
+{ 'folder/prepend-partial': '^#myDiv' }
 ```
 
 Alternatively, you may add the `data-request-update-prepend` attribute to the target element.
@@ -99,7 +99,7 @@ Alternatively, you may add the `data-request-update-prepend` attribute to the ta
 If the selector string begins with an `!` symbol, the target element will be replaced by the new content. This is useful for self contained partial updates where the content contains the target element definition.
 
 ```js
-'folder/replace-partial': '!#myDiv'
+{ 'folder/replace-partial': '!#myDiv' }
 ```
 
 Alternatively, you may add the `data-request-update-replace` attribute to the target element.
@@ -113,7 +113,7 @@ Alternatively, you may add the `data-request-update-replace` attribute to the ta
 If the selector string begins with an `=` symbol, then you can use any custom HTML selector to target an element.
 
 ```js
-'folder/append': '=[data-field-name="address"]'
+{ 'folder/append': '=[data-field-name="address"]' }
 ```
 
 ## Pushing Partial Updates

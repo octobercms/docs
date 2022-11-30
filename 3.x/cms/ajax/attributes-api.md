@@ -41,7 +41,7 @@ Element | Event
 Trigger the `onCalculate` handler when the form is submitted. Update the element with the identifier "result"` with the **calcresult** partial.
 
 ```html
-<form data-request="onCalculate" data-request-update="calcresult: '#result'">
+<form data-request="onCalculate" data-request-update="{ calcresult: '#result' }">
 ```
 
 Request a confirmation when the Delete button is clicked before the request is sent.
@@ -67,13 +67,13 @@ Show a popup window after the successful request.
 Send a POST parameter `mode` with a value `update`.
 
 ```html
-<form data-request="onUpdate" data-request-data="mode: 'update'">
+<form data-request="onUpdate" data-request-data="{ mode: 'update' }">
 ```
 
 Send a POST parameter `id` with value `7` across multiple elements.
 
 ```html
-<div data-request-data="id: 7">
+<div data-request-data="{ id: 7 }">
     <button data-request="onDelete">Delete</button>
     <button data-request="onSave">Update</button>
 </div>
