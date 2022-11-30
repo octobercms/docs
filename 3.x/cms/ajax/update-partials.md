@@ -73,13 +73,39 @@ mypartial: document.getElementById('myDiv')
 If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 
 ```js
-'folder/append': '@#myDiv'
+'folder/append-partial': '@#myDiv'
+```
+
+Alternatively, you may add the `data-request-update-append` attribute to the target element.
+
+```html
+<div id="myDiv" data-request-update-append></div>
 ```
 
 If the selector string is prepended with the `^` symbol, the content will be prepended instead.
 
 ```js
-'folder/append': '^#myDiv'
+'folder/prepend-partial': '^#myDiv'
+```
+
+Alternatively, you may add the `data-request-update-prepend` attribute to the target element.
+
+```html
+<div id="myDiv" data-request-update-prepend></div>
+```
+
+### Replacing the Element with Content
+
+If the selector string begins with an `!` symbol, the target element will be replaced by the new content. This is useful for self contained partial updates where the content contains the target element definition.
+
+```js
+'folder/replace-partial': '!#myDiv'
+```
+
+Alternatively, you may add the `data-request-update-replace` attribute to the target element.
+
+```html
+<div id="myDiv" data-request-update-replace></div>
 ```
 
 ### Using Custom HTML Selectors
