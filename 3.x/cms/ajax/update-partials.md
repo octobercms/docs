@@ -76,10 +76,10 @@ If the selector string is prepended with the `@` symbol, the content received fr
 { 'folder/append-partial': '@#myDiv' }
 ```
 
-Alternatively, you may add the `data-request-update-append` attribute to the target element.
+Alternatively, you may add the `data-request-update-mode` attribute to the target element.
 
 ```html
-<div id="myDiv" data-request-update-append></div>
+<div id="myDiv" data-request-update-mode="append"></div>
 ```
 
 If the selector string is prepended with the `^` symbol, the content will be prepended instead.
@@ -88,10 +88,10 @@ If the selector string is prepended with the `^` symbol, the content will be pre
 { 'folder/prepend-partial': '^#myDiv' }
 ```
 
-Alternatively, you may add the `data-request-update-prepend` attribute to the target element.
+Alternatively, you may add the `data-request-update-mode` attribute to the target element.
 
 ```html
-<div id="myDiv" data-request-update-prepend></div>
+<div id="myDiv" data-request-update-mode="prepend"></div>
 ```
 
 ### Replacing the Element with Content
@@ -102,10 +102,10 @@ If the selector string begins with an `!` symbol, the target element will be rep
 { 'folder/replace-partial': '!#myDiv' }
 ```
 
-Alternatively, you may add the `data-request-update-replace` attribute to the target element.
+Alternatively, you may add the `data-request-update-mode` attribute to the target element.
 
 ```html
-<div id="myDiv" data-request-update-replace></div>
+<div id="myDiv" data-request-update-mode="replace"></div>
 ```
 
 ### Using Custom HTML Selectors
