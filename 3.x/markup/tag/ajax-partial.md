@@ -13,7 +13,7 @@ The `{% ajaxPartial %}` tag renders partial contents on the page and includes su
 {% ajaxPartial "contact-form" %}
 ```
 
-The Twig tag wraps the partial contents with a special HTML tag on the first load only. Subsequent loads via AJAX requests for this partial will not include the wrapper tag.
+The partial contents are wrapped with a specific HTML tag on the first load only. Subsequent updates of the partial via AJAX do not include the wrapper tag.
 
 ```html
 <div data-request-update-partial="contact-form">
@@ -23,7 +23,7 @@ The Twig tag wraps the partial contents with a special HTML tag on the first loa
 
 ## Short Update Syntax
 
-When an AJAX partial is used, you no longer need to use a selector to update it, just pass `true` to the [data attributes API](../../cms/ajax/attributes-api.md) when using the `data-request-update` attribute.
+When an AJAX partial is used, you no longer need to use a selector to update it. Just pass `true` to the [data attributes API](../../cms/ajax/attributes-api.md) when using the `data-request-update` attribute.
 
 ```html
 <button
