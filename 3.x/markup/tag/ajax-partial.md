@@ -13,7 +13,7 @@ The `{% ajaxPartial %}` tag renders partial contents on the page that includes [
 {% ajaxPartial "contact-form" %}
 ```
 
-The tag wraps the contents with a special HTML tag for the first load only. Subsequent AJAX requests that call on the partial will not include this wrapper.
+The tag wraps the contents with a special HTML tag for the first load only. Subsequent AJAX requests using the partial will not include this wrapper.
 
 ```html
 <div data-request-update-partial="contact-form">
