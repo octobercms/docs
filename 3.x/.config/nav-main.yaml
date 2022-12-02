@@ -225,6 +225,7 @@
     children:
         - tag/page
         - tag/partial
+        - tag/ajax-partial
         - tag/content
         - tag/component
         - tag/placeholder

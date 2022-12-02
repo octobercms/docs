@@ -27,7 +27,7 @@ The partial configuration section can also contain component definitions. The [C
 Remember that if you refer a partial from a subdirectory you should specify the subdirectory name.
 :::
 
-The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. The `{% partial %}` tag can be used inside a page, layout or another partial. Example of a page referring to a partial:
+The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. The `{% partial %}` tag can be used inside a page, layout or another partial. The following is an example of a page referring to a partial.
 
 ```twig
 <div class="sidebar">
@@ -64,26 +64,26 @@ Inside the partial, variables can be accessed like any other markup variable.
 The partial contents will have access to the variables from the current context and the additional ones provided.
 
 ```twig
-{% partial 'mypartial' foo='bar' %}
+{% partial "mypartial" foo="bar" %}
 ```
 
 In the following example, the `foo` variable will be available inside the `mypartial` partial template.
 
 ```twig
-{% set foo = 'bar' %}
-{% partial 'mypartial' %}
+{% set foo = "bar" %}
+{% partial "mypartial" %}
 ```
 
 You can disable access to the context by appending the `only` keyword. In this example, only the `foo` variable will be accessible.
 
 ```twig
-{% partial 'mypartial' foo='bar' only %}
+{% partial "mypartial" foo="bar" only %}
 ```
 
 In the next example, no variables will be accessible.
 
 ```twig
-{% partial 'mypartial' only %}
+{% partial "mypartial" only %}
 ```
 
 ### Parsing Markup as a Variable
@@ -133,14 +133,16 @@ Partials, like pages, can use any Twig features. Please refer to the [Dynamic Pa
 
 ### Partial Execution Life Cycle
 
-There are special functions that can be defined in the PHP section of partials: `onStart` and `onEnd`. The `onStart` function is executed before the partial is rendered and before the [partial components](./components.md) are executed. The `onEnd` function is executed before the partial is rendered and after the partial components are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the _array notation_ to pass variables to the page.
+There are special functions that can be defined in the PHP section of partials: `onStart` and `onEnd`. The `onStart` function is executed before the partial is rendered and before the [partial components](./components.md) are executed. The `onEnd` function is executed before the partial is rendered and after the partial components are executed. In the `onStart` and `onEnd` functions you can inject variables to the Twig environment. Use the `$this` with array notation to pass variables to the page.
 
 ```php
 ==
+<?
 function onStart()
 {
     $this['hello'] = "Hello world!";
 }
+?>
 ==
 <h3>{{ hello }}</h3>
 ```
@@ -149,28 +151,31 @@ Externally assigned variables to the partial can be accessed in PHP using the `$
 
 ```php
 ==
+<?
 function onStart()
 {
     $this['location'] = $this->city . ', ' . $this->country;
 }
+?>
 ==
-{{ location }} is the same as {{ city }}, {{ country }}.
+<p>{{ location }} is the same as {{ city }}, {{ country }}.</p>
 ```
 
 The templating language provided by October CMS is described in the [Markup Guide](../../markup/templating.md). The overall sequence the handlers are executed is described in the [Dynamic Layouts section](./layouts.md) of the documentation.
 
-### Life Cycle Limitations
+### Calling AJAX Handlers in Partials
 
-Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. They do not follow the standard execution process, as described in the [Layout Execution Life Cycle section](./layouts.md). The following limitations should be noted:
+Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. To overcome this, you may use the `{% ajaxPartial %}` to allow AJAX handlers to be called inside your partial.
 
-1. AJAX events are not registered and won't function as normal.
-1. The life cycle functions cannot return any values.
-1. Regular POST form handling will occur at the time the partial is rendered.
+```twig
+{% ajaxPartial "contact-form" %}
+```
 
-In general, component usage in partials is designed for basic components that render simple markup without much processing, such as a *Like* or *Tweet* button.
+View the [AJAX Partial Twig Tag](../../markup/tag/ajax-partial.md) to learn more about how it works.
 
 #### See Also
 
 ::: also
 * [Partial Twig Tag](../../markup/tag/partial.md)
+* [AJAX Partial Twig Tag](../../markup/tag/ajax-partial.md)
 :::

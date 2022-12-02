@@ -91,7 +91,7 @@ Placeholders allow pages to inject content to the layout. Placeholders are defin
 
 Pages can inject content to placeholders with the `{% put %}` and `{% endput %}` tags. The following example demonstrates a simple page template which injects a CSS link to the placeholder **head** defined in the previous example.
 
-```
+```twig
 url = "/my-page"
 layout = "default"
 ==
@@ -112,7 +112,7 @@ Layouts, like pages, can use any Twig features. Please refer to the [Dynamic Pag
 
 Inside the layout's PHP section you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
 
-The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page processing. The `onBeforePageStart` function is executed after the layout [components](components.md) ran, but before the page's `onStart` function is executed. The `onEnd` function is executed after the page is rendered. The sequence the handlers are executed is following:
+The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page processing. The `onBeforePageStart` function is executed after the layout [components](./components.md) ran, but before the page's `onStart` function is executed. The `onEnd` function is executed after the page is rendered. The sequence the handlers are executed is following:
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.

@@ -111,7 +111,7 @@ Inside the Twig section of a page template, you can use any [functions, filters,
 
 ### Page Execution Life Cycle
 
-There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](./components.md) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use `array notation` to pass variables to the page:
+There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](./components.md) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use the `$this` with array notation to pass variables to the page.
 
 ```php
 url = "/"
