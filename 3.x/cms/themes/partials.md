@@ -165,13 +165,22 @@ The templating language provided by October CMS is described in the [Markup Guid
 
 ### Calling AJAX Handlers in Partials
 
-Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. To overcome this, you may use the `{% ajaxPartial %}` to allow AJAX handlers to be called inside your partial.
+Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of regular partials. To overcome this, you may use the `{% ajaxPartial %}` to allow AJAX handlers to be called inside your partial.
 
 ```twig
 {% ajaxPartial "contact-form" %}
 ```
 
-View the [AJAX Partial Twig Tag](../../markup/tag/ajax-partial.md) to learn more about how it works.
+::: tip
+See the [AJAX Partial Twig Tag article](../../markup/tag/ajax-partial.md) to learn more about the `{% ajaxPartial %}` tag.
+:::
+
+When calling a handler from within an AJAX partial, the life cycle operates differently compared to a regular AJAX handler.
+
+1. The handler runs after the partial's `onEnd` function.
+1. The complete page life cycle runs, including logic in the layout, page and parent partials.
+1. All variables are available during the request, including variables set using Twig.
+1. The partial life cycle functions do not support returning any values.
 
 #### See Also
 

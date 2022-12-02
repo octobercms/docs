@@ -233,7 +233,7 @@ description = "Default layout"
 
 ### AJAX Handlers and Partials
 
-Components may introduce [AJAX handlers](../ajax/introduction.md) and [partials](./partials.md) to the a theme's lifecycle, using a prefix of the component name and two `::` symbols. For example, all the AJAX handlers defined by components are available globally.
+Components may introduce [AJAX handlers](../ajax/introduction.md) and [partials](./partials.md) to the a theme's life cycle, using a prefix of the component name and two `::` symbols. For example, all the AJAX handlers defined by components are available globally.
 
 ```html
 data-request="onMyComponentHandler"

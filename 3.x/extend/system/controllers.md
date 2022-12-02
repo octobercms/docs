@@ -190,7 +190,7 @@ To change the status code of a response, use the `setStatusCode` method.
 $this->setStatusCode(404);
 ```
 
-To override the entire response, call the `setResponse` method, this will force the response regardless of what happens on the page's lifecycle.
+To override the entire response, call the `setResponse` method, this will force the response regardless of what happens on the page's life cycle.
 
 ```php
 $this->setResponse('Page Not Found');

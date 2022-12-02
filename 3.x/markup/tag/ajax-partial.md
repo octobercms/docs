@@ -7,13 +7,13 @@ subtitle: Twig Tag
 This tag extends the [`{% partial %}` Twig tag](./partial.md).
 :::
 
-The `{% ajaxPartial %}` tag renders partial contents on the page that includes [AJAX handler support](../../cms/ajax/introduction.md), self-updating and a shorter update syntax.
+The `{% ajaxPartial %}` tag renders partial contents on the page and includes support for [AJAX handlers](../../cms/ajax/introduction.md), self-updating and short update syntax.
 
 ```twig
 {% ajaxPartial "contact-form" %}
 ```
 
-The tag wraps the contents with a special HTML tag for the first load only. Subsequent AJAX requests using the partial will not include this wrapper.
+The Twig tag wraps the partial contents with a special HTML tag on the first load only. Subsequent loads via AJAX requests for this partial will not include the wrapper tag.
 
 ```html
 <div data-request-update-partial="contact-form">
@@ -23,7 +23,7 @@ The tag wraps the contents with a special HTML tag for the first load only. Subs
 
 ## Short Update Syntax
 
-When using the tag, you no longer need to use a selector to update it, just pass `true` to the [data attributes API](../../cms/ajax/attributes-api.md) uses the `data-request-update` attribute.
+When an AJAX partial is used, you no longer need to use a selector to update it, just pass `true` to the [data attributes API](../../cms/ajax/attributes-api.md) when using the `data-request-update` attribute.
 
 ```html
 <button
@@ -33,7 +33,7 @@ When using the tag, you no longer need to use a selector to update it, just pass
 </button>
 ```
 
-You may also update the partial from inside itself using the special `_self` partial name.
+You may also update the partial from inside itself using `_self` as the partial name.
 
 ```html
 <button
@@ -45,7 +45,7 @@ You may also update the partial from inside itself using the special `_self` par
 
 ## Calling AJAX Handlers
 
-When the AJAX framework sees a call inside an AJAX partial, it will trigger a capturing page lifecycle that makes the AJAX handlers defined in partials available.
+When calling an AJAX handler from inside an AJAX partial, a capturing page life cycle is triggered that enables the use of AJAX handlers within the requested partials.
 
 The following example shows how to submit a simple contact form using a self-updating partial.
 

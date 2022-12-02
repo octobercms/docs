@@ -210,7 +210,7 @@ If you are placing scripts in the `<body>` tag for performance reasons, consider
 
 ## Global Events
 
-The AJAX framework triggers several events during the navigation lifecycle and page responses. The events are usually triggered on the `document` object with details available on the `event.detail` property.
+The AJAX framework triggers several events during the navigation life cycle and page responses. The events are usually triggered on the `document` object with details available on the `event.detail` property.
 
 Event | Description
 ------------- | -------------
