@@ -124,6 +124,31 @@ The `onInit` function is executed when all components are initialized and before
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
 
+### Priority Layouts
+
+Layouts can specify an `is_priorty` attribute in their settings to activate priority mode. In normal circumstances, the layout contents render after the page contents. This allows the page to manipulate layout properties, like the title or meta description. Visually the order looks like this.
+
+```text
+Layout (3) ← Page (1) → Partials (2)
+```
+
+In priority mode, the layout uses a more natural load order where the `{% page %}` tag renders inline with the layout contents. However, there is no support for placeholders when using this mode. The priority layout load order looks more like this.
+
+```text
+Layout (1) → Page (2) → Partials (3)
+```
+
+This is particularly useful when [building API endpoints](../resources/building-apis.md). In the following example, the page logic will not run since the page tag is never called.
+
+```twig
+description = "API Layout"
+is_priority = 1
+==
+{% if false %}
+    {% page %}
+{% endif %}
+```
+
 #### See Also
 
 ::: also

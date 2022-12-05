@@ -93,17 +93,18 @@ Since the API is defined in the Markup section of the page or layout, all compon
 
 ### Using Layouts as Middleware
 
-Middleware allows you to apply common logic to multiple endpoints, such as checking authentication or throttling requests. A [CMS layout](../themes/layouts.md) can be used to apply logic to multiple pages and the layout logic executes before the page logic. Remember to include the `{% page %}` [Twig tag](../../markup/tag/page.md) so the page logic is included.
+Middleware allows you to apply common logic to multiple endpoints, such as checking authentication or throttling requests. A [CMS layout with priority mode](../themes/layouts.md) can be used to apply logic to multiple pages and the layout logic executes before the page logic.
 
-For example, a layout named **api.htm** can have any conditional logic.
+Remember to include the [`{% page %}` Twig tag](../../markup/tag/page.md) so the page logic is included. For example, a layout named **api.htm** can have any conditional logic.
 
 ```twig
 description = "API Authentication"
+is_priority = 1
 ==
 {% if someCondition %}
     {% page %}
 {% else %}
-    {% do abort(400, 'Condition not met') %}
+    {% do response({ message: 'Condition not met' }, 400) %}
 {% endif %}
 ```
 
@@ -115,9 +116,13 @@ layout = "api"
 {% do response({ success: true }) %}
 ```
 
+::: warning
+Always use [priority mode in the layout](../themes/layouts.md) so the layout contents run first.
+:::
+
 ### Calling AJAX Handlers
 
-In some cases you may wish to call an AJAX handler of a component or inside the page. This is possible using the `ajaxHandler()` [Twig function](../../markup/function/ajax-handler.md).
+In some cases you may wish to call an AJAX handler of a component or inside the page. This is possible using the [`ajaxHandler()` Twig function](../../markup/function/ajax-handler.md).
 
 ```twig
 url = "/api/signin
@@ -127,7 +132,7 @@ url = "/api/signin
 {% set result = ajaxHandler('onSignin') %}
 
 {% if result.error %}
-    {% abort('Login Failed', 401) %}
+    {% do response({ message: 'Login Failed' }, 401) %}
 {% else %}
     {% do response({ success: true }) %}
 {% endif %}

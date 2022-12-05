@@ -23,7 +23,7 @@ The partial contents are wrapped with a specific HTML tag on the first load only
 
 ## Short Update Syntax
 
-When an AJAX partial is used, you no longer need to use a selector to update it. Just pass `true` to the [data attributes API](../../cms/ajax/attributes-api.md) when using the `data-request-update` attribute.
+When an AJAX partial is used, you no longer need to specify a selector to update it. Just pass `true` to the [data attributes API](../../cms/ajax/attributes-api.md) when using the `data-request-update` attribute.
 
 ```html
 <button
