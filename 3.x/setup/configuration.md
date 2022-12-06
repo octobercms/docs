@@ -81,7 +81,7 @@ The parameter can take one of the following values:
 
 ### CSRF protection
 
-October CMS provides a built-in [Cross-Site Request Forgery](https://owasp.org/www-community/attacks/csrf) prevention mechanism. When CSRF protection is enabled, October CMS stores a random token in the user's session. The [form opening tag](../services/html.md#opening-a-form) and the [form token tag](../services/html.md#form-tokens) add a hidden field with the token value to the form. For all POST, PUT or DELETE requests, the platform checks whether the submitted token value matches the one stored in the user session.
+October CMS provides a built-in [Cross-Site Request Forgery](https://owasp.org/www-community/attacks/csrf) prevention mechanism. When CSRF protection is enabled, October CMS stores a random token in the user's session. The [form opening tag](../extend/services/html.md#opening-a-form) and the [form token tag](../extend/services/html.md#form-tokens) add a hidden field with the token value to the form. For all POST, PUT or DELETE requests, the platform checks whether the submitted token value matches the one stored in the user session.
 
 CSRF protection is enabled by default. The `enable_csrf_protection` parameter can be found in the `config/system.php` file. By default, the value is loaded from the `ENABLE_CSRF` environment variable.
 
@@ -91,4 +91,4 @@ The following configuration is recommended for production environments:
 
 * CSRF protection is enabled
 * debug mode is disabled
-* use the [public folder](../setup/web-server-config.md#public-folder) for additional security.
+* use the [public folder](../setup/web-server-config.md#public-folder) for additional security
