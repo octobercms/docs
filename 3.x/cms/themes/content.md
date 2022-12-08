@@ -11,11 +11,12 @@ Content blocks files reside in the **/content** subdirectory of a theme director
 
 Extension | Description
 ------------- | -------------
-**htm** | Used for HTML markup.
+**html** | Used for HTML markup (WYSIWYG).
+**htm** | Used for HTML markup (code).
 **txt** | Used for plain text.
 **md** | Used for Markdown syntax.
 
-The extension affects a content block's display mode in the back-end user interface, either with a WYSIWYG editor, plain text editor or markdown editor. It also determines rendering the blocks on the website; for example, Markdown blocks will convert to HTML before display.
+The extension affects a content block's display mode in the back-end user interface, either with a WYSIWYG editor, code editor or markdown editor. It also determines rendering the blocks on the website; for example, Markdown blocks will convert to HTML before display.
 
 ## Rendering Content Blocks
 
