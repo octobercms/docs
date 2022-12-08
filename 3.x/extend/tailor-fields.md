@@ -5,8 +5,6 @@ subtitle: Extending Tailor with custom content fields.
 
 You can roll your own content fields by defining a field definition file and then registering it in your plugin registration file.
 
-## Field Definition File
-
 Content Field definition classes reside inside the **contentfields** directory of the plugin. The inner directory name matches the name of the widget class written in lowercase. Content Fields can supply assets and partials. An example directory structure looks like this.
 
 ::: dir
@@ -18,7 +16,16 @@ Content Field definition classes reside inside the **contentfields** directory o
 |   └── MyContentField.php  _← Field Class_
 :::
 
-The class defines how the field should interact with the rest of the system. For example, **plugins/acme/blog/contentfields/MyContentField.php** with the following contents.
+### Class Definition
+
+The `create:contentfield` command generates a content field class. The first argument specifies the author and plugin name. The second argument specifies the content field class name.
+
+```bash
+php artisan create:contentfield Acme.Blog IconPicker
+```
+
+The content field class must extend the `Backend\Classes\FormWidgetBase` class.
+A registered content field can be used in [Tailor form fields](../element/form-fields.md) and blueprints.  The class defines how the field should interact with the rest of the system. For example, **plugins/acme/blog/contentfields/MyContentField.php** with the following contents.
 
 ```php
 namespace Acme\Blog\ContentFields;
@@ -30,53 +37,17 @@ use October\Contracts\Element\FilterElement;
 
 class MyContentField extends ContentFieldBase
 {
-    /**
-     * defineConfig will process the field configuration.
-     */
-    public function defineConfig(array $config)
-    {
-        // ...
-    }
+    public function defineConfig(array $config) {}
 
-    /**
-     * defineFormField will define how a field is displayed in a form.
-     */
-    public function defineFormField(FormElement $form, $context = null)
-    {
-        // ...
-    }
+    public function defineFormField(FormElement $form, $context = null) {}
 
-    /**
-     * defineListColumn will define how a field is displayed in a list.
-     */
-    public function defineListColumn(ListElement $list, $context = null)
-    {
-        // ...
-    }
+    public function defineListColumn(ListElement $list, $context = null) {}
 
-    /**
-     * defineFilterScope will define how a field is displayed in a filter.
-     */
-    public function defineFilterScope(FilterElement $filter, $context = null)
-    {
-        // ...
-    }
+    public function defineFilterScope(FilterElement $filter, $context = null) {}
 
-    /**
-     * extendModelObject will extend the record model.
-     */
-    public function extendModelObject($model)
-    {
-        // ...
-    }
+    public function extendModelObject($model) {}
 
-    /**
-     * extendDatabaseTable adds any required columns to the database.
-     */
-    public function extendDatabaseTable($table)
-    {
-        // ...
-    }
+    public function extendDatabaseTable($table) {}
 }
 ```
 

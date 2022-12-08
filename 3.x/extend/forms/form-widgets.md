@@ -38,7 +38,7 @@ use Backend\Classes\FormWidgetBase;
 class ColorPicker extends FormWidgetBase
 {
     /**
-     * @var string A unique alias to identify this widget.
+     * @var string defaultAlias to identify this widget.
      */
     protected $defaultAlias = 'colorpicker';
 
