@@ -1,5 +1,5 @@
 ---
-subtitle: Hold the content for each URL on your website.
+subtitle: Define a URL for each page on your website.
 ---
 # Pages
 

@@ -1,5 +1,5 @@
 ---
-subtitle: Available components used by Tailor.
+subtitle: The available CMS components provided by Tailor.
 ---
 # Components
 

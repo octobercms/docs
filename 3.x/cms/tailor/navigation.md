@@ -1,5 +1,5 @@
 ---
-subtitle: Include new menu items in the backend panel for managing content.
+subtitle: The menu items for managing the content in the admin panel.
 ---
 # Defining Navigation
 

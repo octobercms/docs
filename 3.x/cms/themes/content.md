@@ -1,5 +1,5 @@
 ---
-subtitle: Similar to partials but used for static content.
+subtitle: Dedicated files for storing and updating page content.
 ---
 # Content Blocks
 

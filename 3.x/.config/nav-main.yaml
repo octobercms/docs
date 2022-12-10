@@ -288,7 +288,7 @@
         - tailor/components
         - tailor/models
 -
-    title: AJAX Framework
+    title: AJAX
     children:
         - ajax/introduction
         - ajax/handlers

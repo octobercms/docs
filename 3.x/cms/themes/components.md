@@ -1,15 +1,15 @@
 ---
-subtitle: Configurable building blocks that can be attached to any page, partial or layout.
+subtitle: Configurable controllers that can be attached to any page, partial or layout.
 ---
 # Components
 
-Components are key features of October CMS. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are [handling AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
+Components are a key feature of building scalable and modern solutions with October CMS. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are [handling AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
 This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../../extend/cms-components.md) as part of plugins.
 
 ## Introduction
 
-If you use the back-end user interface you can add components to your pages, partials and layouts by clicking the component in the Components panel. If you use a text editor you can attach a component to a page or layout by adding its name to the configuration section of the template file. The next example demonstrates how to add a demo To-Do component to a page.
+Components can be found in the Editor in the admin panel. You can add components to your pages, partials and layouts by clicking the Components toolbar button on any open document. If you use a text editor you can attach a component to a page or layout by adding its name to the configuration section of the template file. The next example demonstrates how to add a demo To-Do component to a page.
 
 ```ini
 title = "Components demonstration"
@@ -18,10 +18,10 @@ url = "/components"
 [demoTodo]
 maxItems = 20
 ==
-...
+<!-- HTML Content Here -->
 ```
 
-This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the October back-end. The Inspector opens when you click a component in the page or layout component panel.
+This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the Editor admin panel. The Inspector opens when you click a component in the page or layout component panel.
 
 ::: aside
 If two components with the same name are assigned to a page and layout together, the page component will take priority.

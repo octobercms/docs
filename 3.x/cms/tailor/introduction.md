@@ -1,5 +1,5 @@
 ---
-subtitle: Tailor transforms the way you design content.
+subtitle: Tailor the website content to your exact needs.
 ---
 # Introduction
 

@@ -1,5 +1,5 @@
 ---
-subtitle: Available blueprints types.
+subtitle: The template structure for your website content.
 ---
 # Blueprints
 

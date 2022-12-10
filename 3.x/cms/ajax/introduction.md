@@ -3,7 +3,7 @@ subtitle: A simple AJAX framework that ships with October CMS.
 ---
 # Introduction
 
-October CMS includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in CMS themes and anywhere in the backend panel.
+October CMS includes an AJAX framework that brings a full suite of capabilities, allowing you to load data from the server without refreshing the browser. The same library can be used in CMS themes and anywhere in the admin panel.
 
 The AJAX framework comes in two flavors, you may either use [the JavaScript API](./javascript-api.md) or [the data attributes API](./attributes-api.md). The data attributes API doesn't require any JavaScript knowledge to use AJAX with October CMS.
 
@@ -63,7 +63,7 @@ The form data for `value1` and `value2` are automatically sent with the AJAX req
 The **mypartial** partial contains markup that reads the `result` variable.
 
 ```twig
-The result is {{ result }}
+<p>The answer is {{ result }}</p>
 ```
 
 The **onTest** handler method accessed the form data using the `input` [helper method](../../extend/services/helpers.md) and the result is passed to the `result` page variable.

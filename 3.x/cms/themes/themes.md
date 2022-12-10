@@ -1,5 +1,5 @@
 ---
-subtitle: Define the appearance of your website or web application.
+subtitle: Build your website using a simple file structure.
 ---
 # Themes
 

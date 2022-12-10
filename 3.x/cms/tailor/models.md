@@ -1,5 +1,5 @@
 ---
-subtitle: The available models in Tailor.
+subtitle: The available models provided by Tailor.
 ---
 # Models
 

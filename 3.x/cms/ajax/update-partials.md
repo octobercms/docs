@@ -7,10 +7,14 @@ When a handler executes it may prepare partials that are updated on the page, ei
 
 ## Pulling Partial Updates
 
-The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*. The following code renders the **mytime** partial inside the `#myDiv` element on the page after calling the `onRefreshTime` [event handler](./handlers.md).
+The client browser may request partials to be updated from the server when it performs an AJAX request, which is considered *pulling a content update*.
+
+Using the [`{% partial %}` tag](../../markup/tag/partial.md), the following code renders the **mytime** partial inside a `#myDiv` element on the page when calling the `onRefreshTime` [event handler](./handlers.md).
 
 ```twig
-<div id="myDiv">{% partial 'mytime' %}</div>
+<div id="myDiv">
+    {% partial 'mytime' %}
+</div>
 ```
 
 The [data attributes API](./attributes-api.md) uses the `data-request-update` attribute.
@@ -33,7 +37,35 @@ oc.request('#mybutton', 'onRefreshTime', {
 });
 ```
 
-### Update Definition
+## Self-Updating Partials
+
+The [`{% ajaxPartial %}` tag](../../markup/tag/ajax-partial.md) is dedicated to rendering AJAX partials.
+
+```twig
+{% ajaxPartial 'mytime' %}
+```
+
+When using this tag, the contents are wrapped in a container for you, so you can update the partial by name alone. Simply pass the `true` value instead of a container selector.
+
+```html
+<button
+    data-request="onRefreshTime"
+    data-request-update="{ mytime: true }">
+    Go
+</button>
+```
+
+You may also use the partial name `_self` for updating a partial from within itself.
+
+```js
+{ _self: true }
+```
+
+::: tip
+See the [AJAX Partial Twig Tag article](../../markup/tag/ajax-partial.md) to learn more about the `{% ajaxPartial %}` tag.
+:::
+
+## Update Definition
 
 The definition of what should be updated is specified as a JSON-like object where:
 

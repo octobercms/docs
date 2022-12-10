@@ -1,5 +1,5 @@
 ---
-subtitle: Define the scaffold for each page on your website.
+subtitle: Define the scaffold for your website pages.
 ---
 # Layouts
 
