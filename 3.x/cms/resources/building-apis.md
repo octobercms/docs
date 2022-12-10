@@ -117,7 +117,7 @@ layout = "api"
 ```
 
 ::: warning
-Always use [priority mode in the layout](../themes/layouts.md) so the layout contents run first.
+Always use [priority mode in the layout](../themes/layouts.md) to ensure the layout contents run first.
 :::
 
 ### Calling AJAX Handlers
