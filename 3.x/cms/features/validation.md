@@ -7,13 +7,13 @@ Validating forms checks the user input against a set of predfined rules.
 
 ## Performing Validation
 
-Include the `data-request-validate` attribute on a HTML form tag to enable validation features. The following is a minimal example of form validation.
+To enable validation features, include the `data-request-validate` attribute on a HTML form tag. The following is a minimal example of form validation.
 
 ```html
 <form data-request="onSubmit" data-request-validate>
-    Name: <input type="text" name="name">
+    Name: <input type="text" name="name" />
 
-    Email: <input type="text" name="email">
+    Email: <input type="text" name="email" />
 
     <button type="submit">
         Submit Form
@@ -21,7 +21,7 @@ Include the `data-request-validate` attribute on a HTML form tag to enable valid
 </form>
 ```
 
-In your [AJAX handler](../ajax/handlers.md) you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid. The supplied array (first argument) should use field names for the keys and the error messages for the values.
+Inside your [AJAX handler](../ajax/handlers.md), you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid. The supplied array (first argument) should use field names for the keys and the error messages for the values.
 
 ```php
 function onSubmit()
@@ -32,11 +32,36 @@ function onSubmit()
 }
 ```
 
-When the AJAX framework encounters the `ValidationException`, it will automatically focus the first invalid field and display an error message.
+When the AJAX framework encounters the `ValidationException`, it will automatically focus the first invalid field and display error messages, if configured.
+
+### Validating a Single Field
+
+In some cases you may want to validate a single field when the value changes. By including the `data-track-input` attribute alongside the `data-request` attribute, the AJAX framework will submit a request when a user types something in to the field.
+
+```html
+<form data-request-validate>
+    Username: <input name="username" data-request="onCheckUsername" data-track-input />
+</form>
+```
+
+A dedicated AJAX handler can be used to validate the field. If no exception is thrown, it can be considered valid.
+
+```php
+function onCheckUsername()
+{
+    if (true) {
+        throw new ValidationException(['username' => 'Username is taken!']);
+    }
+}
+```
 
 ### Using the Validation Service
 
-For more complex validation, you may use the [`Validator` service](../../extend/services/validation.md) to apply rules in bulk.
+::: aside
+View the [Validation article](../../extend/services/validation.md) to learn about the different rules you can use here.
+:::
+
+For more complex validation, you may use the `Validator` class to apply rules in bulk. The `validate` method provides an easy way to perform the validation and throw an exception. At a minimum, the data (first argument) and rules (second argument) should be supplied to this method.
 
 ```php
 function onSubmit()
@@ -52,6 +77,29 @@ function onSubmit()
 
     Flash::success('Jobs done!');
 }
+```
+
+### Custom Error Messages & Attributes
+
+To change the deafult validation messages, you may pass custom messages to the `validate` method. The keys in the messages array (third argument) follow the `attribute.rule` format.
+
+```php
+$messages = [
+    'email.required' => 'Please type something for the email...',
+    'email.email' => 'That email is not an email...!'
+];
+
+Validator::validate($data, $rules, $messages);
+```
+
+If you want to keep the default validation messages, and only change the `:attribute` name used, pass custom attributes as an array (fourth argument).
+
+```php
+$attributeNames = [
+    'email' => 'e-mail address'
+];
+
+Validator::validate($data, $rules, [], $attributeNames);
 ```
 
 ## Displaying Error Messages
@@ -107,15 +155,24 @@ If the element is left empty, it will be populated with the validation text from
 
 ## Complete Usage Example
 
-Below is a complete example of form validation. It calls the `onDoSomething` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
+Below is a complete example of form validation. It calls the `onSubmitForm` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
 
 The `data-request-flash` attribute is used to [enable flash messages](./flash-messages.md) and display the validation message. The `data-attach-loading` attribute is used to display a [loading indicator](./loaders.md) and prevent double submissions from misclicks.
 
 ```html
 <form
-    data-request="onDoSomething"
+    data-request="onSubmitForm"
     data-request-validate
     data-request-flash>
+
+    <div>
+        <label>Username</label>
+        <input name="username"
+            data-request="onCheckUsername"
+            data-track-input
+            data-attach-loading />
+        <span data-validate-for="username"></span>
+    </div>
 
     <div>
         <label>Name</label>
@@ -140,10 +197,12 @@ The `data-request-flash` attribute is used to [enable flash messages](./flash-me
 </form>
 ```
 
-The AJAX event handler looks at the POST data sent by the client and applies some rules to the validator. If the validation fails, a `ValidationException` is thrown, otherwise a `Flash::success` message is returned.
+The `onSubmitForm` AJAX event handler looks at the POST data sent by the client and applies some rules to the validator. If the validation fails, a `ValidationException` is thrown, otherwise a `Flash::success` message is returned.
+
+The `onCheckUsername` checks to see if a username is available, currently hard-coded to prevent names **admin** and **jeff** from being entered.
 
 ```php
-function onDoSomething()
+function onSubmitForm()
 {
     $data = post();
 
@@ -153,5 +212,14 @@ function onDoSomething()
     ]);
 
     Flash::success('Jobs done!');
+}
+
+function onCheckUsername()
+{
+    $usernameTaken = in_array(strtolower(trim(post('username'))), ['admin', 'jeff']);
+
+    if ($usernameTaken) {
+        throw new ValidationException(['username' => 'Username is taken!']);
+    }
 }
 ```
