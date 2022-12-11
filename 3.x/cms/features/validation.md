@@ -1,0 +1,157 @@
+---
+subtitle: Validate form submissions using the AJAX framework.
+---
+# Form Validation
+
+Validating forms checks the user input against a set of predfined rules.
+
+## Performing Validation
+
+Include the `data-request-validate` attribute on a HTML form tag to enable validation features. The following is a minimal example of form validation.
+
+```html
+<form data-request="onSubmit" data-request-validate>
+    Name: <input type="text" name="name">
+
+    Email: <input type="text" name="email">
+
+    <button type="submit">
+        Submit Form
+    </button>
+</form>
+```
+
+In your [AJAX handler](../ajax/handlers.md) you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid. The supplied array (first argument) should use field names for the keys and the error messages for the values.
+
+```php
+function onSubmit()
+{
+    if (!post('name')) {
+        throw new ValidationException(['name' => 'You must give a name!']);
+    }
+}
+```
+
+When the AJAX framework encounters the `ValidationException`, it will automatically focus the first invalid field and display an error message.
+
+### Using the Validation Service
+
+For more complex validation, you may use the [`Validator` service](../../extend/services/validation.md) to apply rules in bulk.
+
+```php
+function onSubmit()
+{
+    $data = post();
+
+    Validator::validate($data, [
+        'name' => 'required',
+        'email' => 'required|email',
+    ]);
+
+    // The code will not reach here if validation fails
+
+    Flash::success('Jobs done!');
+}
+```
+
+## Displaying Error Messages
+
+Inside the form, you may display the first error message by using the `data-validate-error` attribute on a container element. The content inside the container will be set to the error message and the element will be made visible.
+
+```html
+<div data-validate-error></div>
+```
+
+To display multiple error messages, include an element with the `data-message` attribute. In this example the paragraph tag will be duplicated and set with content for each message that exists.
+
+```html
+<div class="alert alert-danger" data-validate-error>
+    <p data-message></p>
+</div>
+```
+
+To implement custom functionality for the error messages, hook into the `ajax:invalid-field` event to display the field and `ajax:promise` to reset the form on a new submission. The JavaScript events used are found in the [AJAX JavaScript API](../ajax/javascript-api.md).
+
+```js
+addEventListener('ajax:invalid-field', function(event) {
+    const { fieldElement, fieldName, errorMsg, isFirst } = event.detail;
+    fieldElement.classList.add('has-error');
+});
+
+addEventListener('ajax:promise', function(event) {
+    event.target.closest('form').querySelectorAll('.has-error').forEach(function(el) {
+        el.classList.remove('has-error');
+    });
+});
+```
+
+## Displaying Errors with Fields
+
+If you prefer to show validation messages for individual fields, define an element that uses the `data-validate-for` attribute, passing the field name as the value.
+
+```html
+<!-- Input field -->
+<input name="phone" />
+
+<!-- Validation message for the field -->
+<div data-validate-for="phone"></div>
+```
+
+If the element is left empty, it will be populated with the validation text from the server. Otherwise you can specify any text you like and it will be displayed instead.
+
+```html
+<div data-validate-for="phone">
+    Oops.. phone number is invalid!
+</div>
+```
+
+## Complete Usage Example
+
+Below is a complete example of form validation. It calls the `onDoSomething` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
+
+The `data-request-flash` attribute is used to [enable flash messages](./flash-messages.md) and display the validation message. The `data-attach-loading` attribute is used to display a [loading indicator](./loaders.md) and prevent double submissions from misclicks.
+
+```html
+<form
+    data-request="onDoSomething"
+    data-request-validate
+    data-request-flash>
+
+    <div>
+        <label>Name</label>
+        <input name="name" />
+        <span data-validate-for="name"></span>
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input name="email" />
+        <span data-validate-for="email"></span>
+    </div>
+
+    <button type="submit" data-attach-loading>
+        Submit
+    </button>
+
+    <div class="alert alert-danger" data-validate-error>
+        <p data-message></p>
+    </div>
+
+</form>
+```
+
+The AJAX event handler looks at the POST data sent by the client and applies some rules to the validator. If the validation fails, a `ValidationException` is thrown, otherwise a `Flash::success` message is returned.
+
+```php
+function onDoSomething()
+{
+    $data = post();
+
+    Validator::validate($data, [
+        'name' => 'required',
+        'email' => 'required|email',
+    ]);
+
+    Flash::success('Jobs done!');
+}
+```

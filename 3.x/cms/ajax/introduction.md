@@ -19,7 +19,15 @@ When working with your [CMS theme](../../cms/themes/themes.md), using the librar
 {% framework %}
 ```
 
-The `{% framework %}` tag supports the optional **extras** and **turbo** parameters. If these parameter are specified, the tag adds StyleSheet and JavaScript files for [extra features](./extras.md), including form validation, loading indicators and [turbo-charged routing](./turbo-router.md).
+### Extra Features
+
+The `{% framework %}` tag supports an optional **extras** parameter that includes additional StyleSheet and JavaScript files, for extra features including [form validation](../features/validation.md), [loading indicators](../features/loaders.md), and [flash messages](../features/flash-messages.md).
+
+```twig
+{% framework extras %}
+```
+
+You may also include the **turbo** parameter to enable [turbo-charged routing](./turbo-router.md) on every page.
 
 ```twig
 {% framework extras turbo %}

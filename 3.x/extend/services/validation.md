@@ -1,14 +1,12 @@
 # Validation
 
-## Basic Usage
-
 The validator class is a simple, convenient facility for validating data and retrieving validation error messages via the `Validator` class. It is useful when processing form data submitted by the end user.
 
 ::: tip
 When working with models, October CMS ships with a useful [Validation Trait](../database/traits.md) that implements the `Validator` class and supports the same rule definitions.
 :::
 
-#### Basic Validation Example
+## Basic Usage
 
 The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
 
@@ -45,7 +43,7 @@ $validator = Validator::make(
 );
 ```
 
-#### Checking the Validation Results
+### Checking the Validation Results
 
 Once a `Validator` instance has been created, the `fails` (or `passes`) method may be used to perform the validation.
 
@@ -67,7 +65,25 @@ You may also access an array of the failed validation rules, without messages. T
 $failed = $validator->failed();
 ```
 
-#### Validating Files
+### Shorter Syntax
+
+As a shorter way to validate the form, you can use the `validate` method directly.
+
+```php
+Validator::validate($data, $rules);
+```
+
+The above method perform the equivalent functionality as the following code. This also demonstrates how you can pass the validator instance directly to the [validation exception](../system/exceptions.md) (first argument).
+
+```php
+$validation = Validator::make($data, $rules);
+
+if ($validation->fails()) {
+    throw new ValidationException($validation);
+}
+```
+
+### Validating Files
 
 The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
 

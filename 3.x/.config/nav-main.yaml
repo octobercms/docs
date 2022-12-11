@@ -295,8 +295,13 @@
         - ajax/update-partials
         - ajax/attributes-api
         - ajax/javascript-api
-        - ajax/extras
         - ajax/turbo-router
+-
+    title: Features
+    children:
+        - features/validation
+        - features/loaders
+        - features/flash-messages
 -
     title: Media Manager
     children:
