@@ -1,5 +1,5 @@
 ---
-subtitle: A simple AJAX framework that ships with October CMS.
+subtitle: October CMS ships with a simple and lean AJAX framework.
 ---
 # Introduction
 

@@ -216,9 +216,10 @@ function onSubmitForm()
 
 function onCheckUsername()
 {
-    $usernameTaken = in_array(strtolower(trim(post('username'))), ['admin', 'jeff']);
+    $username = strtolower(trim(post('username')));
+    $isTaken = in_array($username, ['admin', 'jeff']);
 
-    if ($usernameTaken) {
+    if ($isTaken) {
         throw new ValidationException(['username' => 'Username is taken!']);
     }
 }

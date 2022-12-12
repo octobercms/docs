@@ -161,18 +161,21 @@ Applies configurations to all AJAX requests globally.
 
 ```js
 addEventListener('ajax:setup', function(event) {
-    const { context } = event.detail;
+    const { options } = event.detail.context;
 
     // Enable AJAX handling of Flash messages on all AJAX requests
-    context.options.flash = true;
+    options.flash = true;
+
+    // Disable the progress bar for all AJAX requests
+    options.progressBar = false;
 
     // Handle Error Messages by triggering a flashMsg of type error
-    context.options.handleErrorMessage = function(message) {
+    options.handleErrorMessage = function(message) {
         oc.flashMsg({ text: message, class: 'error' });
     }
 
     // Handle Flash Messages by triggering a flashMsg of the message type
-    context.options.handleFlashMessage = function(message, type) {
+    options.handleFlashMessage = function(message, type) {
         oc.flashMsg({ text: message, class: type });
     }
 });

@@ -99,7 +99,7 @@ addEventListener('page:before-cache', function() {
 
 ### Detecting a Cached Page Load
 
-You can detect when the page contents are sourced from the cache with the `data-turbo-preview` attribute on the HTML element. Expressed in JavaScript as:
+You can detect when the page contents are sourced from the cache with the `data-turbo-preview` attribute on the HTML element. Expressed in JavaScript as the following.
 
 ```js
 if (document.documentElement.hasAttribute('data-turbo-preview')) {
@@ -107,7 +107,7 @@ if (document.documentElement.hasAttribute('data-turbo-preview')) {
 }
 ```
 
-Or using a StyleSheet:
+Or using a StyleSheet with the following.
 
 ```css
 html[data-turbo-preview] {

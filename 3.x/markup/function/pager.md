@@ -26,6 +26,10 @@ Template | Detail
 `simple` | Renders pagination with only next and previous buttons.<br>Location: `~/modules/system/views/pagination/simple.htm`
 `ajax` | Renders AJAX paginated records.<br>Location: `~/modules/system/views/pagination/ajax.htm`
 
+::: tip
+To use custom pagination markup, start with the file locations above and copy the contents to a partial inside your theme.
+:::
+
 ## Array Template
 
 The `array` template is used by default with the `pager()` function and extracts the paginated links and meta data from a paginated query. This is particularly useful when [building API endpoints](../../cms/resources/building-apis.md) but it can also be used to access the variables within Twig.
