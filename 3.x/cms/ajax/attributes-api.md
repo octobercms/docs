@@ -20,7 +20,7 @@ data-request Attribute | Description
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show an AJAX loading indicator. The feature uses CSS display `block` and `none` attributes to manage the element visibility.
 **data-request-progress-bar** | enable the progress bar when an AJAX request occurs. Default `true` when using [extra features](./introduction.md), otherwise `false`.
 **data-request-form** | explicitly specify a form element to use for sourcing the form data. If this is unspecified, the closest form to the triggering element is used, including if the element itself is a form.
-**data-request-flash** | when included, instructs the server to clear and send any flash messages with the response. When a value is supplied, it refers to a [self updating partial](../../markup/tag/ajax-partial.md) name, and disables the default behavior. This option is used by the [flash messages features](../features/flash-messages.md).
+**data-request-flash** | when included, instructs the server to clear and send any flash messages with the response. This option is used by the [flash messages features](../features/flash-messages.md).
 **data-request-files** | when specified the request will accept file uploads using the `FormData` interface.
 **data-request-download** | when specified file downloads are accepted with a `Content-Disposition` response. This attribute can be added anonymously or set to the downloaded filename.
 **data-request-bulk** | when specified the request be sent as JSON for bulk data transactions.

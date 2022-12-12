@@ -70,7 +70,11 @@ To change the appearance of the flash message, target the `.oc-flash-message` CS
 
 ## Custom Flash Messages
 
-To display inline flash messages or completely change the default flash message markup, create a new partial in your theme with the custom content. For example, a partial named **flash-messages.htm** may contain the following.
+::: aside
+See the [AJAX Partial Twig Tag article](../../markup/tag/flash.md) to learn more about the `{% flash %}` tag.
+:::
+
+To display inline flash messages or completely change the default flash message markup, create a new partial in your theme with the custom content. For example, create a new partial named **flash-messages.htm** and paste in the following content.
 
 ```twig
 {% flash %}
@@ -80,11 +84,7 @@ To display inline flash messages or completely change the default flash message 
 {% endflash %}
 ```
 
-::: tip
-See the [AJAX Partial Twig Tag article](../../markup/tag/flash.md) to learn more about the `{% flash %}` tag.
-:::
-
-Next, include the flash message in your forms (or layout) as [a self-updating partial](../../markup/tag/ajax-partial.md) using the `{% ajaxPartial %}` tag. Referencing the partial name using `data-request-flash` will automatically update this partial and disable the in-built flash messages.
+Next, include the partial in your form as [a self-updating partial](../../markup/tag/ajax-partial.md) using the `{% ajaxPartial %}` tag. Referencing the partial name in `data-request-update` will automatically update this partial and disable the in-built flash messages.
 
 ```twig
 <form>
@@ -94,35 +94,25 @@ Next, include the flash message in your forms (or layout) as [a self-updating pa
 
     <button
         data-request="onSave"
-        data-request-flash="flash-messages">
+        data-request-update="{ flash-messages: true }">
         Save
     </button>
 </form>
 ```
 
+Alternatively, you can include the partial inside a layout, and update it globally instead of adding the `data-request-flash` every element. Add the `ajax-request-update` meta tag in the head section of the page, and set the content attribute to [update the partial globally](../ajax/update-partials.md).
+
+```html
+<head>
+    <meta name="ajax-request-update" content="{ flash-messages: true }" />
+</head>
+<body>
+    <!-- Updates with every AJAX request -->
+    {% ajaxPartial 'flash-messages' %}
+</body>
+```
+
 ## Working with JavaScript
-
-### Enable Flash Messages Globally
-
-The following will force all AJAX requests to use (and flush) flash messages.
-
-```js
-addEventListener('ajax:setup', function(event) {
-    const { options } = event.detail.context;
-    options.flash = true;
-});
-```
-
-You may also specify a self-updating partial name to include this partial update with every request.
-
-```js
-addEventListener('ajax:setup', function(event) {
-    const { options } = event.detail.context;
-    options.flash = 'flash-messages';
-});
-```
-
-### Display a Flash Message Manually
 
 Use the `oc.flashMsg` function to display a flash message using JavaScript. A type can be specified as either `success`, `error` or `warning`. An optional `interval` can be specified to control how long the flash message is displayed in seconds.
 
