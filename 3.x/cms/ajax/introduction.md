@@ -90,5 +90,4 @@ The example could be read like this: "When the form is submitted, issue an AJAX 
 ::: also
 * [JavaScript API](./javascript-api.md)
 * [Data Attributes API](./attributes-api.md)
-* [Extra Framework Features](./extras.md)
 :::

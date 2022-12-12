@@ -7,7 +7,7 @@ subtitle: Twig Tag
 This tag extends the [`{% partial %}` Twig tag](./partial.md).
 :::
 
-The `{% ajaxPartial %}` tag renders partial contents on the page and includes support for [AJAX handlers](../../cms/ajax/introduction.md), self-updating and short update syntax.
+The `{% ajaxPartial %}` tag renders partial contents on the page and includes support for [AJAX handlers](../../cms/ajax/introduction.md), self-updating and short update syntax. This is commonly referred to as a self-updating partial.
 
 ```twig
 {% ajaxPartial "contact-form" %}

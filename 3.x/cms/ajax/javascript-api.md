@@ -27,13 +27,13 @@ Option | Description
 **error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed. The event handler gets 3 arguments: the data object received from the server, the HTTP status code and the XHR object.
 **complete** | a callback function execute in case of a success or an error.
 **form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
-**flash** | when true, instructs the server to clear and send any flash messages with the response. default: `false`
+**flash** | when true, instructs the server to clear and send any flash messages with the response. When a value is supplied, it refers to [self updating partial](../../markup/tag/ajax-partial.md) name, and disables the default behavior. default: `false`
 **files** | when true, the request will accept file uploads using the `FormData` interface. default: `false`
 **download** | when true, file downloads are accepted with a `Content-Disposition` response. When a string, the downloaded filename can be specified. default: `false`
 **bulk** | when true, the request be sent as JSON for bulk data transactions. default: `false`
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
-**progressBar** | enable the progress bar when an AJAX request occurs. Default `true` when using [extra features](./extras.md), otherwise `false`.
+**progressBar** | enable the progress bar when an AJAX request occurs. Default `true` when using [extra features](./introduction.md), otherwise `false`.
 
 You may also override some of the request logic by passing new functions as options. These logic handlers are available.
 

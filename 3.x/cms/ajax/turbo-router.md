@@ -3,7 +3,7 @@ subtitle: Learn how links are routed using the AJAX framework.
 ---
 # Turbo Router
 
-A feature included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called the turbo router. It gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load.
+Turbo routing is an implementation of PJAX (push state and AJAX) that gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load.
 
 ```twig
 {% framework turbo %}
@@ -139,25 +139,37 @@ addEventListener('page:loaded', function() {
 
 When a page visit occurs and JavaScript components are initialized, it is important that these function are idempotent. In simple terms, an idempotent function is safe to apply multiple times without changing the result beyond its initial application.
 
-One technique for making a function idempotent is to keep track of whether you've already performed it by adding a value to the `dataset` property on each processed element.
+One technique for making a function idempotent is to keep track of whether you've already performed it by adding a value to the `dataset` property on each processed element. This is useful for external scripts.
 
 ```js
 addEventListener('page:loaded', function() {
     // Find my control
     var myControl = document.querySelector('.my-control');
 
-    // Halt because it has already been initialized
-    if (myControl.dataset.hasMyControl) {
-        return;
-    }
+    // Check if control has already been initialized
+    if (!myControl.dataset.hasMyControl) {
+        myControl.dataset.hasMyControl = true;
 
-    // Initialize since this is the first time
-    myControl.dataset.hasMyControl = true;
-    initializeMyControl(myControl);
+        // Initialize since this is the first time
+        initializeMyControl(myControl);
+    }
 });
 ```
 
-Another simpler approach is to allow the function to run multiple times and apply idempotence techniques internally. For example, check to see if a menu divider already exists first before creating a new one.
+For inline scripts, you can set a value on the `window` element to prevent global events from registering multiple times. The `hasLoadedPromise` key should be a unique name of your choice.
+
+```js
+if (!window.hasLoadedPromise) {
+    window.hasLoadedPromise = true;
+
+    // Bind this event once per session
+    addEventListener('ajax:promise', function(event) {
+        //
+    });
+}
+```
+
+As general advice, a simpler approach is to allow the function to run multiple times and apply idempotence techniques internally. For example, check to see if a menu divider already exists first before creating a new one.
 
 ### Disposing Controls
 
