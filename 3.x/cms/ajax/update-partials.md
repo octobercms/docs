@@ -37,7 +37,7 @@ oc.request('#mybutton', 'onRefreshTime', {
 });
 ```
 
-## Self-Updating Partials
+### Self-Updating Partials
 
 The [`{% ajaxPartial %}` tag](../../markup/tag/ajax-partial.md) is dedicated to rendering AJAX partials.
 
@@ -64,6 +64,16 @@ You may also use the partial name `_self` for updating a partial from within its
 ::: tip
 See the [AJAX Partial Twig Tag article](../../markup/tag/ajax-partial.md) to learn more about the `{% ajaxPartial %}` tag.
 :::
+
+### Global Partial Updates
+
+In some cases, such as with [flash messages](../../cms/features/flash-messages.md), you may wish to include a specific partial update with every response. To merge an update definition with every AJAX request, add the `ajax-request-update` meta tag in the head section of the page, and set the content attribute to an update definition.
+
+```html
+<head>
+    <meta name="ajax-request-update" content="{ flash-messages: true }" />
+</head>
+```
 
 ## Update Definition
 
