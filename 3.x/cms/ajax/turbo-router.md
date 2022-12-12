@@ -135,6 +135,32 @@ addEventListener('page:loaded', function() {
 });
 ```
 
+### Inline Script Elements
+
+The turbo router maintains the scripts within the `<head>` tag of the page by comparing the differences. If you use script tags in the `<body>` tag then the script will be executed every time the page renders, which may be undesirable.
+
+You may include `data-turbo-eval="false"` to only allow the script to be executed on the first page load. The script will not be called for any PJAX requests.
+
+```html
+<body>
+    <script data-turbo-eval="false" src="{{ ['@framework.bundle']|theme }}"></script>
+</body>
+```
+::: tip
+If you are placing scripts in the `<body>` tag for performance reasons, consider moving it to the `<head>` tag and using `<script defer>` instead.
+:::
+
+To execute inline JavaScript code only once, regardless of first page load or PJAX request, set a unique value to the `data-turbo-eval-once` attribute. The unique value (e.g `myAjaxPromise`) is used to determine if the script has been seen before.
+
+```html
+<script data-turbo-eval-once="myAjaxPromise">
+    // This script will run once only
+    addEventListener('ajax:promise', function(event) {
+        //
+    });
+</script>
+```
+
 ### Making Controls Idempotent
 
 When a page visit occurs and JavaScript components are initialized, it is important that these function are idempotent. In simple terms, an idempotent function is safe to apply multiple times without changing the result beyond its initial application.
@@ -154,19 +180,6 @@ addEventListener('page:loaded', function() {
         initializeMyControl(myControl);
     }
 });
-```
-
-For inline scripts, you can set a value on the `window` element to prevent global events from registering multiple times. The `hasLoadedPromise` key should be a unique name of your choice.
-
-```js
-if (!window.hasLoadedPromise) {
-    window.hasLoadedPromise = true;
-
-    // Bind this event once per session
-    addEventListener('ajax:promise', function(event) {
-        //
-    });
-}
 ```
 
 As general advice, a simpler approach is to allow the function to run multiple times and apply idempotence techniques internally. For example, check to see if a menu divider already exists first before creating a new one.
@@ -203,21 +216,6 @@ addEventListener('page:before-render', async (event) => {
 
 ::: warning
 Keep in mind that the **page:before-render** event may fire twice, once from cache and once again after requesting the new page content.
-:::
-
-### Inline Script Elements
-
-The turbo router maintains the scripts within the `<head>` tag of the page by comparing the differences. If you use script tags in the `<body>` tag then the script will be executed every time the page renders, which may be undesirable.
-
-You may include `data-turbo-eval="false"` to prevent the script from executing again after rendering, however, it will still be called on the initial page load.
-
-```html
-<body>
-    <script data-turbo-eval="false" src="{{ ['@framework.bundle']|theme }}"></script>
-</body>
-```
-::: tip
-If you are placing scripts in the `<body>` tag for performance reasons, consider moving it to the `<head>` tag and using `<script defer>` instead.
 :::
 
 ## Global Events

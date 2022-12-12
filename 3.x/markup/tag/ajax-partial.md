@@ -16,7 +16,7 @@ The `{% ajaxPartial %}` tag renders partial contents on the page and includes su
 The partial contents are wrapped with a specific HTML tag on the first load only. Subsequent updates of the partial via AJAX do not include the wrapper tag.
 
 ```html
-<div data-request-update-partial="contact-form">
+<div data-ajax-partial="contact-form">
     ... Contents go here ...
 </div>
 ```
