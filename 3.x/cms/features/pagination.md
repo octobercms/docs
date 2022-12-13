@@ -3,7 +3,7 @@ subtitle: Learn how to display pagination links.
 ---
 # Pagination
 
-October CMS includes pagination features out of the box, it integrates with standard templates and offers complete flexibility for custom markup. Paginated records are integrated closely with the [model pagination queries](../../extend/database/pagination.md) and the [`pager()` Twig function](../../markup/function/pager.md).
+October CMS includes pagination features out of the box, it integrates with standard templates and offers complete flexibility for custom markup. Paginated records are integrated closely with [model pagination queries](../../extend/database/pagination.md) and the [`pager()` Twig function](../../markup/function/pager.md).
 
 ## Paginating Data
 
@@ -50,11 +50,13 @@ handle = "Blog\Category"
 {% set comments = comments.paginateCustom(10, 'commentPage') %}
 ```
 
-Set the `withQuery` option to preserve the page number for other pagination instances (optional). This results in the query string containing both page numbers, for example,<br>`?postPage=1&commentPage=2`.
+Set the `withQuery` option to preserve the page number for other pagination instances (optional).
 
 ```twig
 {{ pager(categories, { withQuery: true }) }}
 ```
+
+This results in the query string containing both page numbers, for example,<br>`?postPage=1&commentPage=2`.
 
 ### Using Custom Pagination Markup
 
