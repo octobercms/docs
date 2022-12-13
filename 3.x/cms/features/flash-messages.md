@@ -3,7 +3,7 @@ subtitle: Give your users an update on the outcome of a request.
 ---
 # Flash Messages
 
-Flash Messages are a handy way to let the user know the outcome of a request, either as a sucess or failure. Simply use the `Flash` facade to display a message after the request finishes. Flash messages are usually set inside [AJAX handlers](../ajax/handlers.md), inside [Component logic](../themes/components.md) or inside the page or layout [PHP section](../themes/themes.md).
+Flash Messages are a handy way to let the user know the outcome of a request, either as a sucess or failure. Simply use the `Flash` facade to display a message after the request finishes. Flash messages are usually set inside [AJAX handlers](../ajax/handlers.md), inside [Component logic](../../extend/cms-components.md) or inside the page or layout [PHP section](../themes/themes.md).
 
 ```php
 function onSave()

@@ -302,6 +302,7 @@
         - features/validation
         - features/loaders
         - features/flash-messages
+        - features/pagination
 -
     title: Media Manager
     children:

@@ -5,8 +5,16 @@ subtitle: Twig Function
 
 The `pager()` function is used to handle [paginated records](../../extend/database/pagination.md) (first argument). It returns an object containing details about the records, including the page numbers and next / previous links. When treated as a string, it will render default HTML markup.
 
+Once you have retrieved the results, you may display the results and render the page links using the `pager()` Twig function.
+
 ```twig
-{{ pager(records, options) }}
+<div class="container">
+    {% for user in users %}
+        {{ user.name }}
+    {% endfor %}
+</div>
+
+{{ pager(users) }}
 ```
 
 The following configurable options are supported (second argument).
@@ -14,7 +22,30 @@ The following configurable options are supported (second argument).
 Option | Description
 ------------- | -------------
 **template** | specify a default template or [view name](../../extend/services/response-view.md). Example: `app::my-custom-view`
+**partial** | specify a [partial name](../../cms/themes/partials.md) in the theme (CMS only). Example: `my-partial`
 **withQuery** | include any existing query parameters with the generated links. Default: `false`
+**appends** | an optional array of values to include in the query parameters.
+**fragment** | an optional fragment string to include in the URLs.
+
+## Modifying the URL
+
+Use the `withQuery` to preserve the existing query string in the URL.
+
+```twig
+{{ pager(records, { withQuery: true }) }}
+```
+
+You may add to the query string of pagination links using the `appends` method. For example, to append `&sort=votes` to each pagination link, you should make the following call to `appends`.
+
+```twig
+{{ pager(records, { appends: { sort: 'votes' } }) }}
+```
+
+If you wish to append a "hash fragment" to the pagination URLs, you may use the `fragment` method. For example, to append `#foo` to the end of each pagination link, make the following call to the `fragment` method.
+
+```twig
+{{ pager(records, { fragment: 'foo' }) }}
+```
 
 ## Accessing Pager Variables
 
@@ -159,10 +190,10 @@ Template | Detail
 `simple` | Renders pagination with only next and previous buttons.<br>Location: `~/modules/system/views/pagination/simple.htm`
 `ajax` | Renders AJAX paginated records.<br>Location: `~/modules/system/views/pagination/ajax.htm`
 
-Then render as a partial by passing the records to the `paginator` variable.
+Then render as a partial by passing the `partial` option to the pager.
 
 ```twig
-{% partial 'my-custom-pagination' paginator=records %}
+{{ pager(records, { partial: 'my-custom-pagination' }) }}
 ```
 
 #### See Also

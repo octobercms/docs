@@ -43,6 +43,16 @@ You may also update the partial from inside itself using `_self` as the partial 
 </button>
 ```
 
+You may also pass the `^` symbol to prepend and the `@` symbol to append content to the container instead of replacing it.
+
+```html
+<button
+    data-request="onRefresh"
+    data-request-update="{ _self: '@' }">
+    Append
+</button>
+```
+
 ## Calling AJAX Handlers
 
 When calling an AJAX handler from inside an AJAX partial, a capturing page life cycle is triggered that enables the use of AJAX handlers within the requested partials.
