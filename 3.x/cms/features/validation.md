@@ -55,7 +55,7 @@ function onCheckUsername()
 }
 ```
 
-### Using the Validation Service
+## Using the Validation Service
 
 ::: aside
 View the [Validation article](../../extend/services/validation.md) to learn about the different rules you can use here.
@@ -133,7 +133,7 @@ addEventListener('ajax:promise', function(event) {
 });
 ```
 
-## Displaying Errors with Fields
+### Displaying Errors with Fields
 
 If you prefer to show validation messages for individual fields, define an element that uses the `data-validate-for` attribute, passing the field name as the value.
 
@@ -157,13 +157,13 @@ If the element is left empty, it will be populated with the validation text from
 
 Below is a complete example of form validation. It calls the `onSubmitForm` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
 
-The `data-request-flash` attribute is used to [enable flash messages](./flash-messages.md) and display the validation message. The `data-attach-loading` attribute is used to display a [loading indicator](./loaders.md) and prevent double submissions from misclicks.
+The `data-request-flash` attribute is used to [enable flash messages](./flash-messages.md) for successful messages and display the validation message. The `data-attach-loading` attribute is used to display a [loading indicator](./loaders.md) and prevent double submissions from misclicks.
 
 ```html
 <form
     data-request="onSubmitForm"
     data-request-validate
-    data-request-flash>
+    data-request-flash="success">
 
     <div>
         <label>Username</label>

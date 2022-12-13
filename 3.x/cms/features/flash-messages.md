@@ -36,6 +36,12 @@ The AJAX framework has built-in support for flash messages, simply specify the `
 </form>
 ```
 
+To only display a specific flash message type, you may pass the value to the attribute &mdash; **success**, **error**, **info** or **warning**. Multiple values are separated by commas.
+
+```html
+<form data-request-flash="success,warning"></form>
+```
+
 To ensure flash messages are also displayed when the browser is redirected, you should render a [inline flash message](../../markup/tag/flash.md) when the page loads by placing this code in your page or layout.
 
 ```twig
@@ -71,7 +77,7 @@ To change the appearance of the flash message, target the `.oc-flash-message` CS
 ## Custom Flash Messages
 
 ::: aside
-See the [AJAX Partial Twig Tag article](../../markup/tag/flash.md) to learn more about the `{% flash %}` tag.
+See the [Flash Twig Tag article](../../markup/tag/flash.md) to learn more about the `{% flash %}` tag.
 :::
 
 To display inline flash messages or completely change the default flash message markup, create a new partial in your theme with the custom content. For example, create a new partial named **flash-messages.htm** and paste in the following content.
