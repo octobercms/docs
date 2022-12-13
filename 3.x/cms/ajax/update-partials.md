@@ -114,40 +114,20 @@ The target element will always be on the right side since it can also be a HTML 
 
 If the selector string is prepended with the `@` symbol, the content received from the server will be appended to the element, instead of replacing the existing content.
 
-```js
-{ 'folder/append-partial': '@#myDiv' }
-```
-
-Alternatively, you may add the `data-request-update-mode` attribute to the target element.
-
-```html
-<div id="myDiv" data-request-update-mode="append"></div>
-```
-
 If the selector string is prepended with the `^` symbol, the content will be prepended instead.
 
 ```js
+{ 'folder/append-partial': '@#myDiv' }
+
 { 'folder/prepend-partial': '^#myDiv' }
 ```
 
-Alternatively, you may add the `data-request-update-mode` attribute to the target element.
+Alternatively, you may add the `data-ajax-update-mode` attribute to the target element.
 
 ```html
-<div id="myDiv" data-request-update-mode="prepend"></div>
-```
+<div id="myDiv" data-ajax-update-mode="append"></div>
 
-### Replacing the Element with Content
-
-If the selector string begins with an `!` symbol, the target element will be replaced by the new content. This is useful for self contained partial updates where the content contains the target element definition.
-
-```js
-{ 'folder/replace-partial': '!#myDiv' }
-```
-
-Alternatively, you may add the `data-request-update-mode` attribute to the target element.
-
-```html
-<div id="myDiv" data-request-update-mode="replace"></div>
+<div id="myDiv" data-ajax-update-mode="prepend"></div>
 ```
 
 ### Using Custom HTML Selectors

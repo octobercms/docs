@@ -123,7 +123,7 @@ The companion `ajaxPager()` function will render a AJAX-enabled pagination templ
 
 ### Default Template
 
-The `default` template is used by standard pagiantion and outputs the following. It is used by deafult with the `paginate()` method on a database query.
+The `default` template renders the default pagination template. It is used by default with the `paginate()` method on a database query.
 
 ```html
 <ul class="pagination">
@@ -139,9 +139,11 @@ The `default` template is used by standard pagiantion and outputs the following.
 </ul>
 ```
 
+File Location: `~/modules/system/views/pagination/default.htm`
+
 ### Simple Template
 
-The `simple` template is used by simplified pagiantion and outputs the following. It is used by deafult with the `simplePaginate()` method on a database query.
+The `simple` template renders pagination with only next and previous buttons. It is used by default with the `simplePaginate()` method on a database query.
 
 ```html
 <ul class="pagination">
@@ -154,9 +156,11 @@ The `simple` template is used by simplified pagiantion and outputs the following
 </ul>
 ```
 
+File Location: `~/modules/system/views/pagination/simple.htm`
+
 ### AJAX Template
 
-The `ajax` template is used by AJAX enabled pagiantion and outputs the following. It is used by deafult with the `paginate()` method on a database query and the `ajaxPager()` function.
+The `ajax` template renders AJAX paginated records. It is used by default with the `paginate()` method on a database query and the `ajaxPager()` function.
 
 ```html
 <ul class="pagination">
@@ -180,21 +184,13 @@ The `ajax` template is used by AJAX enabled pagiantion and outputs the following
 </ul>
 ```
 
+File Location: `~/modules/system/views/pagination/ajax.htm`
+
 ## Using Custom Markup
 
-To use custom pagination markup, start with the file locations below and copy the contents to a partial inside your theme.
-
-Template | Detail
-------------- | -------------
-`default` | Renders the default pagination template.<br>Location: `~/modules/system/views/pagination/default.htm`
-`simple` | Renders pagination with only next and previous buttons.<br>Location: `~/modules/system/views/pagination/simple.htm`
-`ajax` | Renders AJAX paginated records.<br>Location: `~/modules/system/views/pagination/ajax.htm`
-
-Then render as a partial by passing the `partial` option to the pager.
-
-```twig
-{{ pager(records, { partial: 'my-custom-pagination' }) }}
-```
+::: tip
+Visit the [Pagination feature article](../../cms/features/pagination.md) for instructions on how to use custom pagination markup.
+:::
 
 #### See Also
 
