@@ -11,13 +11,13 @@ To enable validation features, include the `data-request-validate` attribute on 
 
 ```html
 <form data-request="onSubmit" data-request-validate>
-    Name: <input type="text" name="name" />
+    <label>Name</label>
+    <input name="name" />
 
-    Email: <input type="text" name="email" />
+    <label>Email</label>
+    <input name="email" />
 
-    <button type="submit">
-        Submit Form
-    </button>
+    <button>Submit</button>
 </form>
 ```
 
@@ -40,7 +40,8 @@ In some cases you may want to validate a single field when the value changes. By
 
 ```html
 <form data-request-validate>
-    Username: <input name="username" data-request="onCheckUsername" data-track-input />
+    <label>Username</label>
+    <input name="username" data-request="onCheckUsername" data-track-input />
 </form>
 ```
 
@@ -118,21 +119,6 @@ To display multiple error messages, include an element with the `data-message` a
 </div>
 ```
 
-To implement custom functionality for the error messages, hook into the `ajax:invalid-field` event to display the field and `ajax:promise` to reset the form on a new submission. The JavaScript events used are found in the [AJAX JavaScript API](../ajax/javascript-api.md).
-
-```js
-addEventListener('ajax:invalid-field', function(event) {
-    const { fieldElement, fieldName, errorMsg, isFirst } = event.detail;
-    fieldElement.classList.add('has-error');
-});
-
-addEventListener('ajax:promise', function(event) {
-    event.target.closest('form').querySelectorAll('.has-error').forEach(function(el) {
-        el.classList.remove('has-error');
-    });
-});
-```
-
 ### Displaying Errors with Fields
 
 If you prefer to show validation messages for individual fields, define an element that uses the `data-validate-for` attribute, passing the field name as the value.
@@ -153,6 +139,23 @@ If the element is left empty, it will be populated with the validation text from
 </div>
 ```
 
+## Working with JavaScript
+
+To implement custom functionality for the error messages, hook into the `ajax:invalid-field` event to display the field and `ajax:promise` to reset the form on a new submission. The JavaScript events used are found in the [AJAX JavaScript API](../ajax/javascript-api.md).
+
+```js
+addEventListener('ajax:invalid-field', function(event) {
+    const { fieldElement, fieldName, errorMsg, isFirst } = event.detail;
+    fieldElement.classList.add('has-error');
+});
+
+addEventListener('ajax:promise', function(event) {
+    event.target.closest('form').querySelectorAll('.has-error').forEach(function(el) {
+        el.classList.remove('has-error');
+    });
+});
+```
+
 ## Complete Usage Example
 
 Below is a complete example of form validation. It calls the `onSubmitForm` event handler that triggers a loading submit button, performs validation on the form fields, then displays a successful flash message.
@@ -164,7 +167,6 @@ The `data-request-flash` attribute is used to [enable flash messages](./flash-me
     data-request="onSubmitForm"
     data-request-validate
     data-request-flash="success">
-
     <div>
         <label>Username</label>
         <input name="username"
@@ -175,31 +177,24 @@ The `data-request-flash` attribute is used to [enable flash messages](./flash-me
     </div>
 
     <div>
-        <label>Name</label>
-        <input name="name" />
-        <span data-validate-for="name"></span>
-    </div>
-
-    <div>
         <label>Email</label>
         <input name="email" />
         <span data-validate-for="email"></span>
     </div>
 
-    <button type="submit" data-attach-loading>
+    <button data-attach-loading>
         Submit
     </button>
 
     <div class="alert alert-danger" data-validate-error>
         <p data-message></p>
     </div>
-
 </form>
 ```
 
 The `onSubmitForm` AJAX event handler looks at the POST data sent by the client and applies some rules to the validator. If the validation fails, a `ValidationException` is thrown, otherwise a `Flash::success` message is returned.
 
-The `onCheckUsername` checks to see if a username is available, currently hard-coded to prevent names **admin** and **jeff** from being entered.
+The `onCheckUsername` checks to see if a username is available, currently hard-coded to prevent names **admin** and **jeff** from being entered. It is checked twice, when the user types something in and when the user submits the form.
 
 ```php
 function onSubmitForm()
@@ -207,9 +202,11 @@ function onSubmitForm()
     $data = post();
 
     Validator::validate($data, [
-        'name' => 'required',
+        'username' => 'required',
         'email' => 'required|email',
     ]);
+
+    $this->onCheckUsername();
 
     Flash::success('Jobs done!');
 }
@@ -224,3 +221,9 @@ function onCheckUsername()
     }
 }
 ```
+
+#### See Also
+
+::: also
+* [Validation service](../../extend/services/validation.md)
+:::

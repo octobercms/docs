@@ -96,7 +96,8 @@ Next, include the partial in your form as [a self-updating partial](../../markup
 <form>
     {% ajaxPartial 'flash-messages' %}
 
-    Title: <input type="text" name="title" />
+    <label>Title</label>
+    <input name="title" />
 
     <button
         data-request="onSave"

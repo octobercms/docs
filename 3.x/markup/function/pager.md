@@ -3,47 +3,39 @@ subtitle: Twig Function
 ---
 # pager()
 
-The `pager()` function is used to handle [paginated records](../../extend/database/pagination.md). By default it returns an array containing details about the records, including the page numbers and next / previous links.
-
-The array template (default) is used for JSON and Twig variables.
+The `pager()` function is used to handle [paginated records](../../extend/database/pagination.md) (first argument). It returns an object containing details about the records, including the page numbers and next / previous links. When treated as a string, it will render default HTML markup.
 
 ```twig
-{% set pager = pager(posts) %}
+{{ pager(records, options) }}
 ```
 
-You may render pagination HTML by specify a custom template name with the pager configuration (second argument).
+The following configurable options are supported (second argument).
 
-```yaml
-{{ pager(posts, { template: 'default' }) }}
-```
-
-The available templates are below and described in more detail further.
-
-Template | Detail
+Option | Description
 ------------- | -------------
-`array` | Returns a detailed array object, default.
-`default` | Renders the default pagination template.<br>Location: `~/modules/system/views/pagination/default.htm`
-`simple` | Renders pagination with only next and previous buttons.<br>Location: `~/modules/system/views/pagination/simple.htm`
-`ajax` | Renders AJAX paginated records.<br>Location: `~/modules/system/views/pagination/ajax.htm`
+**template** | specify a default template or [view name](../../extend/services/response-view.md). Example: `app::my-custom-view`
+**withQuery** | include any existing query parameters with the generated links. Default: `false`
 
-::: tip
-To use custom pagination markup, start with the file locations above and copy the contents to a partial inside your theme.
-:::
+## Accessing Pager Variables
 
-## Array Template
-
-The `array` template is used by default with the `pager()` function and extracts the paginated links and meta data from a paginated query. This is particularly useful when [building API endpoints](../../cms/resources/building-apis.md) but it can also be used to access the variables within Twig.
+Setting the `pager()` function to a variable extracts the paginated links and meta data from a paginated query. This is particularly useful when [building API endpoints](../../cms/resources/building-apis.md) (JSON) but it can also be used to access the variables within Twig.
 
 Starting with a paginated collection.
 
 ```twig
-{% set posts = blogModel.paginate(3) %}
+{% set records = postModel.paginate(3) %}
 ```
 
-The `pager()` function will return the array details.
+The `pager()` function will return an extracted object.
 
 ```twig
-{% set pager = pager(posts) %}
+{% set paginator = pager(records) %}
+```
+
+Where each variable can be accessed.
+
+```twig
+<a href="{{ paginator.links.first }}"></a>
 ```
 
 The returned object is divided in to **links** and **meta** with the following attributes.
@@ -84,9 +76,23 @@ An example in JSON format.
 }
 ```
 
-## Default Template
+## Rendering the Pager
 
-The `default` template is used by standard pagiantion and outputs the following.
+When rendering the `pager()` function directly, accessing it as a string, it will render a default system template for displaying paginated links.
+
+```twig
+{{ pager(records) }}
+```
+
+The companion `ajaxPager()` function will render a AJAX-enabled pagination template (see AJAX template below). Ideally, this should be used inside an [AJAX partial](../tag/ajax-partial.md).
+
+```twig
+{{ ajaxPager(records) }}
+```
+
+### Default Template
+
+The `default` template is used by standard pagiantion and outputs the following. It is used by deafult with the `paginate()` method on a database query.
 
 ```html
 <ul class="pagination">
@@ -102,9 +108,9 @@ The `default` template is used by standard pagiantion and outputs the following.
 </ul>
 ```
 
-## Simple Template
+### Simple Template
 
-The `simple` template is used by simplified pagiantion and outputs the following.
+The `simple` template is used by simplified pagiantion and outputs the following. It is used by deafult with the `simplePaginate()` method on a database query.
 
 ```html
 <ul class="pagination">
@@ -117,9 +123,9 @@ The `simple` template is used by simplified pagiantion and outputs the following
 </ul>
 ```
 
-## AJAX Template
+### AJAX Template
 
-The `ajax` template is used by AJAX enabled pagiantion and outputs the following.
+The `ajax` template is used by AJAX enabled pagiantion and outputs the following. It is used by deafult with the `paginate()` method on a database query and the `ajaxPager()` function.
 
 ```html
 <ul class="pagination">
@@ -143,9 +149,26 @@ The `ajax` template is used by AJAX enabled pagiantion and outputs the following
 </ul>
 ```
 
+## Using Custom Markup
+
+To use custom pagination markup, start with the file locations below and copy the contents to a partial inside your theme.
+
+Template | Detail
+------------- | -------------
+`default` | Renders the default pagination template.<br>Location: `~/modules/system/views/pagination/default.htm`
+`simple` | Renders pagination with only next and previous buttons.<br>Location: `~/modules/system/views/pagination/simple.htm`
+`ajax` | Renders AJAX paginated records.<br>Location: `~/modules/system/views/pagination/ajax.htm`
+
+Then render as a partial by passing the records to the `paginator` variable.
+
+```twig
+{% partial 'my-custom-pagination' paginator=records %}
+```
+
 #### See Also
 
 ::: also
 * [Building API Resources](../../cms/resources/building-apis.md)
+* [CMS Pagination](../../cms/features/pagination.md)
 * [Model Pagination](../../extend/database/pagination.md)
 :::

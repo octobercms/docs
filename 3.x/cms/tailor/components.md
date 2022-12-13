@@ -117,7 +117,7 @@ You could also apply pagination to the collection with the `paginate()` method i
 {% set authorPosts = posts.whereRelation(...).paginate(10) %}
 
 <!-- Display the pagination navigation -->
-{{ authorPosts.links|raw }}
+{{ pager(authorPosts) }}
 ```
 
 ## Global

@@ -8,39 +8,38 @@ When working with models, October CMS ships with a useful [Validation Trait](../
 
 ## Basic Usage
 
-The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
+In most cases you should first capture the user input and pass it to the `make` method (first argument) and include the validation rules that should be applied to the data (second argument). In the following example, we capture the postback user input with the `post()` helper function.
 
 ```php
-$validator = Validator::make(
-    ['name' => 'Joe'],
-    ['name' => 'required|min:5']
-);
+$data = post();
+
+$validator = Validator::make($data, [
+    'name' => 'required|min:5'
+]);
 ```
 
 Multiple rules may be delimited using either a "pipe" character, or as separate elements of an array.
 
 ```php
-$validator = Validator::make(
-    ['name' => 'Joe'],
-    ['name' => ['required', 'min:5']]
-);
+$validator = Validator::make($data, [
+    'name' => ['required', 'min:5']
+]);
 ```
 
 To validate multiple fields, simply add them to the array.
 
 ```php
-$validator = Validator::make(
-    [
-        'name' => 'Joe',
-        'password' => 'lamepassword',
-        'email' => 'email@example.com'
-    ],
-    [
-        'name' => 'required',
-        'password' => 'required|min:8',
-        'email' => 'required|email|unique:users'
-    ]
-);
+$data = [
+    'name' => 'Joe',
+    'password' => 'lamepassword',
+    'email' => 'email@example.com'
+];
+
+$validator = Validator::make($data, [
+    'name' => 'required',
+    'password' => 'required|min:8',
+    'email' => 'required|email|unique:users'
+]);
 ```
 
 ### Checking the Validation Results
@@ -321,25 +320,25 @@ The field under validation must exist on a given database table.
 
 #### Basic usage of exists rule
 
-```
+```php
 'state' => 'exists:states'
 ```
 
 #### Specifying a custom column name
 
-```
+```php
 'state' => 'exists:states,abbreviation'
 ```
 
 You may also specify more conditions that will be added as "where" clauses to the query:
 
-```
+```php
 'email' => 'exists:staff,email,account_id,1'
 ```
 
 Passing `NULL` as a "where" clause value will add a check for a `NULL` database value:
 
-```
+```php
 'email' => 'exists:staff,email,deleted_at,NULL'
 ```
 
@@ -375,7 +374,7 @@ The file under validation must have a MIME type corresponding to one of the list
 
 #### Basic usage of MIME rule
 
-```
+```php
 'photo' => 'mimes:jpeg,bmp,png'
 ```
 
@@ -468,19 +467,19 @@ The field under validation must be unique on a given database table. If the `col
 
 #### Basic usage of unique rule
 
-```
+```php
 'email' => 'unique:users'
 ```
 
 #### Specifying a custom column name
 
-```
+```php
 'email' => 'unique:users,email_address'
 ```
 
 #### Forcing a unique rule to ignore a given ID
 
-```
+```php
 'email' => 'unique:users,email_address,10'
 ```
 
@@ -488,7 +487,7 @@ The field under validation must be unique on a given database table. If the `col
 
 You may also specify more conditions that will be added as "where" clauses to the query:
 
-```
+```php
 'email' => 'unique:users,email_address,NULL,id,account_id,1'
 ```
 
