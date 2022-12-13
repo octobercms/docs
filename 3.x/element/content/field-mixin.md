@@ -11,4 +11,4 @@ _include1:
     source: <uuid|handle>
 ```
 
-See the [Mixins article](../../cms/tailor/blueprints/mixin.md) for more information on defining mixins.
+See the [Blueprints article](../../cms/tailor/blueprints.md) for more information on defining mixins.
