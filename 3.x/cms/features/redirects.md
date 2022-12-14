@@ -45,6 +45,12 @@ function onRedirect()
 }
 ```
 
+You may use the `pageUrl` method to return the URL as a string instead.
+
+```php
+$postPage = Cms::pageUrl('blog/post', ['slug' => 'foobar']);
+```
+
 ## Redirects in Twig
 
 The [`redirect()` Twig function](../../markup/function/redirect.md) can be used to redirect the user from within the page markup.
