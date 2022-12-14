@@ -300,6 +300,7 @@
     title: Features
     children:
         - features/validation
+        - features/uploads
         - features/downloads
         - features/loaders
         - features/flash-messages
