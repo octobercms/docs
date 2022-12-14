@@ -62,14 +62,12 @@ function onCheckUsername()
 View the [Validation article](../../extend/services/validation.md) to learn about the different rules you can use here.
 :::
 
-For more complex validation, you may use the `Validator` class to apply rules in bulk. The `validate` method provides an easy way to perform the validation and throw an exception. At a minimum, the data (first argument) and rules (second argument) should be supplied to this method.
+For more complex validation, you may use the `Request` facade to apply rules to the user input in bulk. The `validate` method performs validation using the specified rules (first argument), and returns the attributes and values that were validated as an array. It also throws a `ValidationException` if the validation fails.
 
 ```php
 function onSubmit()
 {
-    $data = post();
-
-    Validator::validate($data, [
+    $data = Request::validate([
         'name' => 'required',
         'email' => 'required|email',
     ]);
@@ -90,7 +88,7 @@ $messages = [
     'email.email' => 'That email is not an email...!'
 ];
 
-Validator::validate($data, $rules, $messages);
+$data = Request::validate($rules, $messages);
 ```
 
 If you want to keep the default validation messages, and only change the `:attribute` name used, pass custom attributes as an array (fourth argument).
@@ -100,7 +98,7 @@ $attributeNames = [
     'email' => 'e-mail address'
 ];
 
-Validator::validate($data, $rules, [], $attributeNames);
+$data = Request::validate($rules, [], $attributeNames);
 ```
 
 ## Displaying Error Messages
@@ -199,9 +197,7 @@ The `onCheckUsername` checks to see if a username is available, currently hard-c
 ```php
 function onSubmitForm()
 {
-    $data = post();
-
-    Validator::validate($data, [
+    $data = Request::validate([
         'username' => 'required',
         'email' => 'required|email',
     ]);

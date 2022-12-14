@@ -64,15 +64,33 @@ You may also access an array of the failed validation rules, without messages. T
 $failed = $validator->failed();
 ```
 
-### Shorter Syntax
+### Validating Files
 
-As a shorter way to validate the form, you can use the `validate` method directly.
+The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
 
 ```php
-Validator::validate($data, $rules);
+$data = files() + post();
+
+$validator = Validator::make($data, [...]);
 ```
 
-The above method perform the equivalent functionality as the following code. This also demonstrates how you can pass the validator instance directly to the [validation exception](../system/exceptions.md) (first argument).
+::: warning
+It is not recommended to use unfiltered `input()` values here since it contains GET values that can be used to potentially craft malicious links.
+:::
+
+## Throwing a Validation Exception
+
+In most cases, you'll be validating user input submitted using a form, and if validation fails, throwing a `ValidationException` is a compatible action. As a shorter way to validate the form, you can use the `validate` method directly.
+
+```php
+$data = Validator::validate($data, $rules);
+```
+
+::: tip
+The `validate` method returns filtered user data, the attributes and values that were validated.
+:::
+
+The above method performs the equivalent functionality as the following code. It also demonstrates how you can pass the validator instance directly to the [validation exception](../system/exceptions.md) (first argument).
 
 ```php
 $validation = Validator::make($data, $rules);
@@ -82,9 +100,15 @@ if ($validation->fails()) {
 }
 ```
 
-### Validating Files
+### Validating the Request
 
-The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
+Another option is to use the `Request` facade to perform validation on all user input. This removes the need to supply the data so you can just supply the rules (first argument). The `validate` method returns filtered user data, the attributes and values that were validated.
+
+```php
+$data = Request::validate($rules);
+```
+
+The return value from `validate` is filtered by the validation rules. If the field is not defined in the rules, it won't be included in this data.
 
 ## Working with Error Messages
 
@@ -145,7 +169,7 @@ public function onRegister()
 {
     $rules = [];
 
-    $validator = Validator::make(Input::all(), $rules);
+    $validator = Validator::make(input(), $rules);
 
     if ($validator->fails()) {
         return Redirect::to('register')->withErrors($validator);
@@ -550,7 +574,7 @@ The `$input` parameter passed to your `Closure` will be an instance of `Illumina
 Validating array based form input fields doesn't have to be a pain. You may use "dot notation" to validate attributes within an array. For example, if the incoming HTTP request contains a `photos[profile]` field, you may validate it like so:
 
 ```php
-$validator = Validator::make(Input::all(), [
+$validator = Validator::make(input(), [
     'photos.profile' => 'required|image',
 ]);
 ```
@@ -558,7 +582,7 @@ $validator = Validator::make(Input::all(), [
 You may also validate each element of an array. For example, to validate that each e-mail in a given array input field is unique, you may do the following:
 
 ```php
-$validator = Validator::make(Input::all(), [
+$validator = Validator::make(input(), [
     'person.*.email' => 'email|unique:users',
     'person.*.first_name' => 'required_with:person.*.last_name',
 ]);
@@ -577,7 +601,7 @@ Likewise, you may use the `*` character when specifying your validation messages
 You may also use "array notation" in your validation rules if you wish. These rules will be converted to "dot notation" automatically on validation.
 
 ```php
-$validator = Validator::make(Input::all(), [
+$validator = Validator::make(input(), [
     'photos[profile]' => 'required|image',
     'person[][email]' => 'email|unique:users',
 ]);
@@ -657,7 +681,7 @@ public function register()
 In this instance, we have created a rule tagged **uppercase** and referenced our rule class where it becomes available to specify as a rule everywhere.
 
 ```php
-$v = Validator::make($data, [
+Validator::make($data, [
     'shoutout' => 'required|uppercase',
 ]);
 ```
