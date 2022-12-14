@@ -303,6 +303,7 @@
         - features/loaders
         - features/flash-messages
         - features/pagination
+        - features/redirects
 -
     title: Media Manager
     children:
