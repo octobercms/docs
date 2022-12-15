@@ -16,11 +16,6 @@ To enable validation features, include the `data-request-validate` attribute on 
         <input name="name" />
     </div>
 
-    <div>
-        <label>Email</label>
-        <input name="email" />
-    </div>
-
     <button data-attach-loading>
         Submit
     </button>
