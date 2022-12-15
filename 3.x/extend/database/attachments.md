@@ -140,7 +140,7 @@ To output the file contents directly, use the `output` method, this return a [re
 return $model->avatar->output();
 ```
 
-You can echo the output by chaining the `send` method.
+You can output the contents to the browser by chaining the `send` method.
 
 ```php
 $model->avatar->output()->send();

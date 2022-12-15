@@ -1,5 +1,5 @@
 ---
-subtitle: Give your users an update on the outcome of a request.
+subtitle: Display a message about the outcome of a request.
 ---
 # Flash Messages
 

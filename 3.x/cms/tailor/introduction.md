@@ -1,5 +1,5 @@
 ---
-subtitle: Tailor the website content to your exact needs.
+subtitle: Tailor website content to your exact requirements.
 ---
 # Introduction
 

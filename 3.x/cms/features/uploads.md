@@ -10,9 +10,15 @@ October CMS provides simple features for uploading files through form submission
 To enable file uploads on a form, include the `data-request-files` attribute on a HTML form tag. The following is a minimal example uploading a file.
 
 ```html
-<form data-request="onUploadFile" data-request-files>
-    <input name="uploaded_file" type="file">
-    <button>Upload</button>
+<form data-request="onUploadFiles" data-request-files>
+    <div>
+        <label>Single File</label>
+        <input name="single_file" type="file" multiple>
+    </div>
+
+    <button data-attach-loading>
+        Upload
+    </button>
 </form>
 ```
 
@@ -25,9 +31,9 @@ Inside your [AJAX handler](../ajax/handlers.md), use the `files()` helper functi
 The following stores the upload in the **storage/app/userfiles** directory using a generated file name.
 
 ```php
-function onSubmit()
+function onUploadFiles()
 {
-    $filePath = files('uploaded_file')->store('userfiles');
+    $filePath = files('single_file')->store('userfiles');
 
     // ...
 
@@ -40,18 +46,18 @@ function onSubmit()
 When the `multiple` attribute is included with the file input, the `files()` helper will return an array instead.
 
 ```html
-<form data-request="onUploadFiles" data-request-files>
-    <input name="uploaded_files" type="file" multiple>
-    <button>Upload</button>
-</form>
+<div>
+    <label>Multi File</label>
+    <input name="multi_file" type="file" multiple>
+</div>
 ```
 
 ```php
-function onSubmit()
+function onUploadFiles()
 {
     $filePaths = [];
 
-    foreach (files('uploaded_files') as $file) {
+    foreach (files('multi_file') as $file) {
         $filePaths[] = $file->store('userfiles');
     }
 
@@ -66,14 +72,14 @@ function onSubmit()
 Just like [regular form validation](./validation.md), files can be validated using the `Request` facade and `validate` method. Use the `.*` suffix when validating multiple items. The following checks that the uploaded file is an image and not greater than 1MB in size.
 
 ```php
-function onUploadFile()
+function onUploadFiles()
 {
     Request::validate([
-        'uploaded_file' => 'required|image|max:1024',
-        'uploaded_files.*' => 'required|image|max:1024',
+        'single_file' => 'required|image|max:1024',
+        'multi_file.*' => 'required|image|max:1024',
     ]);
 
-    Flash::success('File is valid!');
+    Flash::success('Files are valid!');
 }
 ```
 

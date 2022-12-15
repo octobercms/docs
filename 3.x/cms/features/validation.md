@@ -11,13 +11,19 @@ To enable validation features, include the `data-request-validate` attribute on 
 
 ```html
 <form data-request="onSubmit" data-request-validate>
-    <label>Name</label>
-    <input name="name" />
+    <div>
+        <label>Name</label>
+        <input name="name" />
+    </div>
 
-    <label>Email</label>
-    <input name="email" />
+    <div>
+        <label>Email</label>
+        <input name="email" />
+    </div>
 
-    <button>Submit</button>
+    <button data-attach-loading>
+        Submit
+    </button>
 </form>
 ```
 
@@ -40,8 +46,10 @@ In some cases you may want to validate a single field when the value changes. By
 
 ```html
 <form data-request-validate>
-    <label>Username</label>
-    <input name="username" data-request="onCheckUsername" data-track-input />
+    <div>
+        <label>Username</label>
+        <input name="username" data-request="onCheckUsername" data-track-input />
+    </div>
 </form>
 ```
 

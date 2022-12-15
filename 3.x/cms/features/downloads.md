@@ -10,30 +10,23 @@ October CMS provides simple features for downloading files in responses. The fea
 To enable file downloads, include the `data-request-download` attribute on a HTML form or button tag. The following is a minimal example of downloading a file.
 
 ```html
-<button
-    data-request="onExport"
-    data-request-download>
+<button data-request="onExport" data-request-download>
     Download
 </button>
 ```
 
-If the `data-request-download="..."` attribute is set on the request trigger, the filename in this attribute will be given to the downloaded file.
+If the `data-request-download="..."` attribute is set on the request trigger, the filename in this attribute will be given to the downloaded file. The following produces a file named **data.csv**.
 
 ```html
-<button
-    data-request="onDownloadDocument"
-    data-request-download="hello-friends.txt">
+<button data-request="onExport" data-request-download="data.csv">
     Download Document
-</a>
+</button>
 ```
 
 To open the file in a new browser window, typically used for previewing PDFs, set the `data-browser-target` attribute to `_blank`.
 
 ```html
-<button
-    data-request="onExport"
-    data-request-download
-    data-browser-target="_blank">
+<button data-request="onExport" data-request-download data-browser-target="_blank">
     Open in New Window
 </button>
 ```

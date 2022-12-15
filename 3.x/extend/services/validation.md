@@ -6,6 +6,55 @@ The validator class is a simple, convenient facility for validating data and ret
 When working with models, October CMS ships with a useful [Validation Trait](../database/traits.md) that implements the `Validator` class and supports the same rule definitions.
 :::
 
+Below is a list of all available validation rules:
+
+<div class="content-list" markdown="1">
+
+- [Accepted](#rule-accepted)
+- [Active URL](#rule-active-url)
+- [After (Date)](#rule-after)
+- [Alpha](#rule-alpha)
+- [Alpha Dash](#rule-alpha-dash)
+- [Alpha Numeric](#rule-alpha-num)
+- [Array](#rule-array)
+- [Before (Date)](#rule-before)
+- [Between](#rule-between)
+- [Boolean](#rule-boolean)
+- [Confirmed](#rule-confirmed)
+- [Date](#rule-date)
+- [Date Format](#rule-date-format)
+- [Different](#rule-different)
+- [Digits](#rule-digits)
+- [Digits Between](#rule-digits-between)
+- [E-Mail](#rule-email)
+- [Exists (Database)](#rule-exists)
+- [Image (File)](#rule-image)
+- [In](#rule-in)
+- [Integer](#rule-integer)
+- [IP Address](#rule-ip)
+- [Max](#rule-max)
+- [MIME Types](#rule-mimes)
+- [Min](#rule-min)
+- [Not In](#rule-not-in)
+- [Nullable](#rule-nullable)
+- [Numeric](#rule-numeric)
+- [Regular Expression](#rule-regex)
+- [Required](#rule-required)
+- [Required If](#rule-required-if)
+- [Required Unless](#rule-required-unless)
+- [Required With](#rule-required-with)
+- [Required With All](#rule-required-with-all)
+- [Required Without](#rule-required-without)
+- [Required Without All](#rule-required-without-all)
+- [Same](#rule-same)
+- [Size](#rule-size)
+- [String](#rule-string)
+- [Timezone](#rule-timezone)
+- [Unique (Database)](#rule-unique)
+- [URL](#rule-url)
+
+</div>
+
 ## Basic Usage
 
 In most cases you should first capture the user input and pass it to the `make` method (first argument) and include the validation rules that should be applied to the data (second argument). In the following example, we capture the postback user input with the `post()` helper function.
@@ -203,54 +252,7 @@ You may then access the named `MessageBag` instance from the `$errors` variable:
 
 ## Available Validation Rules
 
-Below is a list of all available validation rules and their function:
-
-<div class="content-list" markdown="1">
-
-- [Accepted](#rule-accepted)
-- [Active URL](#rule-active-url)
-- [After (Date)](#rule-after)
-- [Alpha](#rule-alpha)
-- [Alpha Dash](#rule-alpha-dash)
-- [Alpha Numeric](#rule-alpha-num)
-- [Array](#rule-array)
-- [Before (Date)](#rule-before)
-- [Between](#rule-between)
-- [Boolean](#rule-boolean)
-- [Confirmed](#rule-confirmed)
-- [Date](#rule-date)
-- [Date Format](#rule-date-format)
-- [Different](#rule-different)
-- [Digits](#rule-digits)
-- [Digits Between](#rule-digits-between)
-- [E-Mail](#rule-email)
-- [Exists (Database)](#rule-exists)
-- [Image (File)](#rule-image)
-- [In](#rule-in)
-- [Integer](#rule-integer)
-- [IP Address](#rule-ip)
-- [Max](#rule-max)
-- [MIME Types](#rule-mimes)
-- [Min](#rule-min)
-- [Not In](#rule-not-in)
-- [Nullable](#rule-nullable)
-- [Numeric](#rule-numeric)
-- [Regular Expression](#rule-regex)
-- [Required](#rule-required)
-- [Required If](#rule-required-if)
-- [Required Unless](#rule-required-unless)
-- [Required With](#rule-required-with)
-- [Required With All](#rule-required-with-all)
-- [Required Without](#rule-required-without)
-- [Required Without All](#rule-required-without-all)
-- [Same](#rule-same)
-- [Size](#rule-size)
-- [String](#rule-string)
-- [Timezone](#rule-timezone)
-- [Unique (Database)](#rule-unique)
-- [URL](#rule-url)
-
-</div>
+Below are all available validation rules and their functions.
 
 <a name="rule-accepted"></a>
 #### accepted

@@ -7,10 +7,14 @@ In some cases you may wish to redirect the user to a new page after submitting a
 
 ```html
 <form data-request="onSignup">
-    <label>Email</label>
-    <input name="email" />
+    <div>
+        <label>Email</label>
+        <input name="email" />
+    </div>
 
-    <button>Sign Up</button>
+    <button data-attach-loading>
+        Sign Up
+    </button>
 </form>
 ```
 
