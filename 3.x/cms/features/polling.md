@@ -1,5 +1,5 @@
 ---
-subtitle: Used for lazy loading and repeated updates.
+subtitle: Used for lazy loading and repeating updates.
 ---
 # Polling
 
@@ -59,15 +59,15 @@ For repeated requests to update content, you can set the `data-auto-submit` to a
     data-auto-submit="2000"></div>
 ```
 
-This partial displays a random number and includes a "div" element to automatically update itself. The resulting update also contains the element, so the request is repeated continuously every 2 seconds.
+This partial displays a countdown timer and includes a "div" element to automatically update itself. The resulting update also contains the element, so the request is repeated continuously every 2 seconds.
 
-The polling can be stopped by not including the element in subsequent requests, for example the following would stop polling if the `winnerChosen` variable is set to true.
+The polling can be stopped by not including the element in subsequent requests, for example the following would stop polling if the `launchDone` variable is set to true.
 
 ```twig
-{% if not winnerChosen %}
+{% if not launchDone %}
     <div
         data-request="onAjax"
         data-request-update="_self: true"
-        data-auto-submit="2"></div>
+        data-auto-submit="2000"></div>
 {% endif %}
 ```
