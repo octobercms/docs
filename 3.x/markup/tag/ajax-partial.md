@@ -27,7 +27,7 @@ When an AJAX partial is used, you no longer need to specify a selector to update
 
 ```html
 <button
-    data-request="onRefreshContactForm"
+    data-request="onRefresh"
     data-request-update="{ contact-form: true }">
     Refresh
 </button>
@@ -51,6 +51,22 @@ You may also pass the `^` symbol to prepend and the `@` symbol to append content
     data-request-update="{ _self: '@' }">
     Append
 </button>
+```
+
+## Lazy Loading Partials
+
+The `{% ajaxPartial %}` accepts a `lazy` attribute that will defer rendering the content until the page loads.
+
+```twig
+{% ajaxPartial "posts" lazy %}
+```
+
+The `lazy body` attributes allow specifying the initial content before loading, followed by the `{% endpartial %}` tag.
+
+```twig
+{% ajaxPartial 'posts' lazy body %}
+    <p>Loading posts...</p>
+{% endpartial %}
 ```
 
 ## Calling AJAX Handlers

@@ -306,6 +306,7 @@
         - features/flash-messages
         - features/pagination
         - features/redirects
+        - features/polling
 -
     title: Media Manager
     children:

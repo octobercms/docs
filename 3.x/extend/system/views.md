@@ -130,7 +130,7 @@ Event::listen('backend.layout.extendHead', function ($controller) {
 The controller is available (first argument) to the event, this can be used to target specific controllers. The following adds specific CSS styles to the tailor entries controller only.
 
 ```php
-\Event::listen('backend.layout.extendHead', function ($controller) {
+Event::listen('backend.layout.extendHead', function ($controller) {
     if ($controller instanceof \Tailor\Controllers\Entries) {
         return '<styles> /* ... */ </styles>';
     }
