@@ -64,7 +64,7 @@ Backend layouts reside in an optional **layouts/** directory of a plugin. A cust
 
 ```php
 /**
- * @var string Layout to use for the view.
+ * @var string layout to use for the view.
  */
 public $layout = 'mycustomlayout';
 ```
@@ -73,7 +73,7 @@ Layouts also provide the option to attach custom CSS classes to the BODY tag. Th
 
 ```php
 /**
- * @var string Body CSS class to add to the layout.
+ * @var string bodyClass (CSS) to add to the layout.
  */
 public $bodyClass = 'compact-container';
 ```
@@ -116,3 +116,23 @@ This layout uses two placeholders, a primary content area called **form-contents
 ```
 
 The layout is executed in the final section by overriding the **body** placeholder used by every backend layout. It wraps everything with a `<form />` HTML tag and renders the child layout called **form-with-sidebar**. This file is located in **modules/backend/layouts/form-with-sidebar.php**.
+
+## Extending the Layout
+
+The `fireViewEvent` is used in several areas to [extend the backend area](../extending.md). The `backend.layout.extendHead` event can be used to extend the head element of the layout. The return value should contain the markup to include. The following adds a JavaScript file to every backend page.
+
+```php
+Event::listen('backend.layout.extendHead', function ($controller) {
+    return '<script src="/app/assets/js/myscript.js"></script>';
+});
+```
+
+The controller is available (first argument) to the event, this can be used to target specific controllers. The following adds specific CSS styles to the tailor entries controller only.
+
+```php
+\Event::listen('backend.layout.extendHead', function ($controller) {
+    if ($controller instanceof \Tailor\Controllers\Entries) {
+        return '<styles> /* ... */ </styles>';
+    }
+});
+```

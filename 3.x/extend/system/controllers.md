@@ -164,15 +164,15 @@ Overriding a response is useful particularly when extending other controllers. H
 });
 ```
 
-If you want to check the routed action or parameters, you can find these available in the controller `action` and `params` properties.
+If you want to check the routed action or parameters, you can find these available in the controller `getAction` and `getParams` methods.
 
 ```php
 Author\Plugin\Controllers\SomeController::extend(function($controller) {
-    if ($this->action === 'index') {
+    if ($controller->getAction() === 'index') {
         // Only do it for the index action
     }
 
-    if ($this->params[0] ?? null) {
+    if ($controller->getParams()[0] ?? null) {
         // Only if first parameter exists
     }
 });
