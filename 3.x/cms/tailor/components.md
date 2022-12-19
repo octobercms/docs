@@ -120,6 +120,14 @@ You could also apply pagination to the collection with the `paginate()` method i
 {{ pager(authorPosts) }}
 ```
 
+### Eager Loading Related Records
+
+In some cases, and for performance reasons, you may wish to eager load related records. Use the `load` method on the collection, passing the relation name. In the next example, the `categories` relation will be loaded with every post in the collection.
+
+```twig
+{% do authorPosts.load('categories') %}
+```
+
 ## Global
 
 The `global` component makes a global record available to the page, layout or partial. The global component can be used on any page, layout or partial.

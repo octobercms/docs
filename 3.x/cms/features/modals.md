@@ -53,12 +53,12 @@ The button to trigger the modal is paired with an AJAX request to request the pa
 
 ## Modal Container
 
-The following modal definition is generic and can be added to any page or layout. It contains two `modal-dialog` elements. The first is used as the target for the partial contents, and the second is used to show a loading state while the request loads.
+The following modal definition is generic and can be added to any page or layout. It contains two `modal-dialog` elements. The first is used as the target container for the partial contents, and the second is used to show a loading state while the request loads.
 
 ```html
 <div class="modal fade" id="siteModal">
     <div class="modal-dialog" id="siteModalContent">
-        <!-- Partial Contents Go Here -->
+        <!-- Partial Contents Will Go Here -->
     </div>
 
     <div class="modal-dialog modal-loading">
@@ -74,7 +74,7 @@ The following modal definition is generic and can be added to any page or layout
 </div>
 ```
 
-For the loading status, a stylesheet is used to show the loading dialog during an AJAX request, which is decided by the `data-ajax-updating` attribute. This attribute is added to an element when it is a candidate for a partial update.
+For the loading status, a stylesheet is used to show the loading dialog during an AJAX request, which is decided by the `data-ajax-updating` attribute. This attribute is added to an element when it is a candidate for a partial update and a request is pending.
 
 ```css
 .modal-dialog[data-ajax-updating],
