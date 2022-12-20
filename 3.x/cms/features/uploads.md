@@ -13,7 +13,7 @@ To enable file uploads on a form, include the `data-request-files` attribute on 
 <form data-request="onUploadFiles" data-request-files>
     <div>
         <label>Single File</label>
-        <input name="single_file" type="file" multiple>
+        <input name="single_file" type="file">
     </div>
 
     <button data-attach-loading>

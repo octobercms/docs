@@ -3,7 +3,13 @@ subtitle: Learn how to set up services for sending mail.
 ---
 # Mail Configuration
 
-October CMS provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice. There are two ways to configure mail services, either using the back-end interface via *Settings → Mail Settings* or by updating the default configuration values. In these examples we will update the configuration values.
+October CMS provides drivers for SMTP, Mailgun, SparkPost, Amazon SES, PHP's `mail` function, and `sendmail`, allowing you to quickly get started sending mail through a local or cloud based service of your choice.
+
+There are two ways to configure mail services, either using the admin panel via **Settings → Mail Settings** or by updating the default configuration values. In these examples we will update the file-based configuration values.
+
+::: tip
+​The mail settings screen in the admin panel will override the settings provided by the file-based configuration. Clicking the **Reset to Default** button will update the mail settings to the latest. If you do not click **Save** on this form, then the settings will continue to be sourced from the configuration files.
+:::
 
 ## Driver Prerequisites
 
