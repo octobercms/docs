@@ -1,5 +1,5 @@
 ---
-subtitle: Adds a collection of Tailor records to a page or layout.
+subtitle: Adds a collection of model records to the page.
 ---
 # Collection
 
@@ -17,7 +17,7 @@ Property | Description
 
 The following adds a collection of **Blog\Post** entries to the page. The collection is accessed in Twig by looping the default `collection` variable.
 
-```twig
+```ini
 [collection]
 handle = "Blog\Post"
 ==
@@ -28,7 +28,7 @@ handle = "Blog\Post"
 
 When multiple collections are used on the same page, the component can be assigned a name **posts** using the component alias and this is the variable name that becomes available to the page. The following collection is accessed using the `posts` variable instead.
 
-```twig
+```ini
 [collection posts]
 handle = "Blog\Post"
 ==

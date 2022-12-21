@@ -1,5 +1,5 @@
 ---
-subtitle: Adds a global Tailor record to a page or layout.
+subtitle: Adds global configuration to the page.
 ---
 # Global
 

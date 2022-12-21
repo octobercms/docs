@@ -1,5 +1,5 @@
 ---
-subtitle: Attaches common resources to a page or layout.
+subtitle: Inject assets, variables and headers to the page.
 ---
 # Resources
 

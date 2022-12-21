@@ -1,5 +1,5 @@
 ---
-subtitle: Defines a website section with a dedicated URL.
+subtitle: Define a website section with a dedicated URL.
 ---
 # Section
 
@@ -20,7 +20,7 @@ Property | Description
 
 The following creates a section for the **Blog\Author** entry and locates it using the `:slug` routing parameter. The author name is displayed as a title by accessing the `{{ section.title }}` Twig variable.
 
-```twig
+```ini
 url = "author/:slug"
 
 [section]
@@ -32,7 +32,7 @@ entrySlug = "{{ :slug }}"
 
 When multiple sections are used on the same page, the component alias can be used to assign a different the variable name available to the page. The following component alias **author** makes the title available using the `{{ author.title }}` Twig variable instead.
 
-```twig
+```ini
 [section author]
 handle = "Blog\Author"
 ==
