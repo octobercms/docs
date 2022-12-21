@@ -47,9 +47,11 @@ Attribute | Description
 **published_at_month** | The numerical month the entry was published.
 **published_at_year** | The numerical year the entry was published.
 
-### PHP Interface
+### Retrieving Multiple Entries
 
-To work with an entry using PHP, you may use the `Tailor\Models\EntryRecord` model and call the `inSection` static method, passing the handle to return a prepared database query. Alternatively, you can look it up using the UUID and the `inSectionUuid` method.
+To work with an entry using PHP, you may use the `Tailor\Models\EntryRecord` model and call the `inSection` static method, passing the handle to return a prepared [database model query](../../extend/database/query.md). Alternatively, you can look it up using the UUID and the `inSectionUuid` method.
+
+The following `get` method query returns [a collection of records](../../extend/services/collection.md).
 
 ```php
 $records = EntryRecord::inSection('Blog\Post')->get();
@@ -57,7 +59,27 @@ $records = EntryRecord::inSection('Blog\Post')->get();
 $records = EntryRecord::inSectionUuid('a63fabaf-7c0b-4c74-b36f-7abf1a3ad1c1')->get();
 ```
 
-If an entry type is a `single`, you can use the `findSingleForSection` method to look up the entry. Likewise, the `findSingleForSectionUuid` can be used for looking up by the UUID. These methods will ensure a record exists during lookup.
+#### Eager Loading Relations
+
+When working with related fields, including [repeater fields](../../element/form/widget-repeater.md), you can eager load them on the collection using the `load` method. This method makes the related content available as a single query and is best for performance.
+
+The following eager loads the **categories** field and adds it to the result, along with an example of passing multiple related fields.
+
+```php
+$records->load('categories');
+
+$records->load(['categories', 'author']);
+```
+
+### Retrieving a Single Entry
+
+Combined with the `where` constraint, you may find a single record with the `first` method. The following will find an entry where the slug is equal to **first-post**.
+
+```php
+$record = EntryRecord::inSection('Blog\Post')->where('slug', 'first-post')->first();
+```
+
+If an [entry type](../tailor/blueprints.md) is set to `single`, you can use the `findSingleForSection` method to look up the entry. Likewise, the `findSingleForSectionUuid` can be used for looking up by the UUID. These methods will ensure a record exists during lookup.
 
 ```php
 $record = EntryRecord::findSingleForSection('Homepage');
@@ -65,21 +87,14 @@ $record = EntryRecord::findSingleForSection('Homepage');
 $record = EntryRecord::findSingleForSectionUuid('3328c303-7989-462e-b866-27e7037ba275');
 ```
 
-The `inSection` method can be used to create records dynamically.
+### Inserting & Updating Entries
+
+The `inSection` method can be used to create records dynamically. The following will create a new blog post entry. The same code can be used to update an existing record after retrieving it first.
 
 ```php
-// Create a new blog post entry
 $post = EntryRecord::inSection('Blog\Post');
 $post->title = 'Imported Post';
 $post->save();
-```
-
-### Eager Loading Related Records
-
-In some cases, and for performance reasons, you may wish to eager load related records. Use the `load` method on the collection, passing the relation name. In the next example, the `categories` relation will be loaded with every post in the collection.
-
-```twig
-{% do authorPosts.load('categories') %}
 ```
 
 ## Global Record
@@ -95,7 +110,7 @@ Attribute | Description
 **id** | The Primary Key found in the database.
 **blueprint_uuid** | The UUID of the associated blueprint.
 
-### PHP Interface
+### Retrieving a Global Record
 
 To look up a global using PHP, you may use the `Tailor\Models\GlobalRecord` model and call the `findForGlobal` static method, passing the handle. Alternatively, you can look it up using the UUID and the `findForGlobalUuid` method.
 
