@@ -3,13 +3,15 @@ subtitle: The available models provided by Tailor.
 ---
 # Models
 
+This article describes how to interact with Tailor using PHP and the available models.
+
 ## Entry Record
 
 The `Tailor\Models\EntryRecord` model is used to store content for an entry.
 
 ### Available Attributes
 
-In addition to the defined form fields, the following attributes can be found on the retrieved model.
+In addition to your defined form fields, the following attributes can be found on the retrieved model.
 
 Attribute | Description
 -------- | -------------
@@ -47,32 +49,20 @@ Attribute | Description
 
 ### PHP Interface
 
-To work with an entry using PHP, you may use the `Tailor\Models\EntryRecord` model and call the `inSection` static method, passing the handle to return a prepared database query.
+To work with an entry using PHP, you may use the `Tailor\Models\EntryRecord` model and call the `inSection` static method, passing the handle to return a prepared database query. Alternatively, you can look it up using the UUID and the `inSectionUuid` method.
 
 ```php
-// Return all entries by the handle
-EntryRecord::inSection('Blog\Post')->get();
+$records = EntryRecord::inSection('Blog\Post')->get();
+
+$records = EntryRecord::inSectionUuid('a63fabaf-7c0b-4c74-b36f-7abf1a3ad1c1')->get();
 ```
 
-Alternatively, you can look it up using the UUID and the `inSectionUuid` method.
+If an entry type is a `single`, you can use the `findSingleForSection` method to look up the entry. Likewise, the `findSingleForSectionUuid` can be used for looking up by the UUID. These methods will ensure a record exists during lookup.
 
 ```php
-// Return all entries by the UUID
-EntryRecord::inSectionUuid('a63fabaf-7c0b-4c74-b36f-7abf1a3ad1c1')->get();
-```
+$record = EntryRecord::findSingleForSection('Homepage');
 
-If an entry type is a `single`, you can use the `findSingleForSection` method to look up the entry.
-
-```php
-// Return a single entry by the handle
-EntryRecord::findSingleForSection('Homepage');
-```
-
-Likewise, the `findSingleForSectionUuid` can be used for looking up by the UUID.
-
-```php
-// Return a single entry by the UUID
-EntryRecord::findSingleForSectionUuid('3328c303-7989-462e-b866-27e7037ba275');
+$record = EntryRecord::findSingleForSectionUuid('3328c303-7989-462e-b866-27e7037ba275');
 ```
 
 The `inSection` method can be used to create records dynamically.
@@ -84,26 +74,12 @@ $post->title = 'Imported Post';
 $post->save();
 ```
 
-### Extending Model Constructor
+### Eager Loading Related Records
 
-Similar to [extending regular models](../../extend/extending.md), you may extend the `EntryRecord` model constructor using the `extendInSection` method to target a specific blueprint.
+In some cases, and for performance reasons, you may wish to eager load related records. Use the `load` method on the collection, passing the relation name. In the next example, the `categories` relation will be loaded with every post in the collection.
 
-```php
-EntryRecord::extendInSection('Blog\Post', function($model) {
-    $model->bindEvent('model.beforeSave', function () use ($model) {
-        // Model has been saved!
-    });
-});
-```
-
-The `extendInSectionUuid` method can also be used for more precise targeting. This approach will not throw an exception if the blueprint is not found.
-
-```php
-EntryRecord::extendInSectionUuid('3328c303-7989-462e-b866-27e7037ba275', function($model) {
-    $model->bindEvent('model.afterDelete', function () use ($model) {
-        // Model has been deleted!
-    });
-});
+```twig
+{% do authorPosts.load('categories') %}
 ```
 
 ## Global Record
@@ -121,23 +97,27 @@ Attribute | Description
 
 ### PHP Interface
 
-To look up a global using PHP, you may use the `Tailor\Models\GlobalRecord` model and call the `findForGlobal` static method, passing the handle.
+To look up a global using PHP, you may use the `Tailor\Models\GlobalRecord` model and call the `findForGlobal` static method, passing the handle. Alternatively, you can look it up using the UUID and the `findForGlobalUuid` method.
 
 ```php
-// Return a global using the handle
 GlobalRecord::findForGlobal('Blog\Config');
-```
 
-Alternatively, you can look it up using the UUID and the `findForGlobalUuid` method.
-
-```php
-// Return a global using the UUID
 GlobalRecord::findForGlobalUuid('7b193500-ac0b-481f-a79c-2a362646364d');
 ```
 
-### Extending Model Constructor
+## Extending Model Constructors
 
-Similar to [extending regular models](../../extend/extending.md), you may extend the `GlobalRecord` model constructor using the `extendInGlobal` method to target a specific blueprint.
+Similar to [extending regular models](../../extend/extending.md), you may extend the `EntryRecord` model constructor using the `extendInSection` method to target a specific blueprint. The `extendInSectionUuid` method can also be used for more precise targeting.
+
+```php
+EntryRecord::extendInSection('Blog\Post', function($model) {
+    $model->bindEvent('model.afterDelete', function () use ($model) {
+        // Model has been deleted!
+    });
+});
+```
+
+The `GlobalRecord` model constructor also supports extension using the `extendInGlobal` and `extendInGlobalUuid` methods to target a specific blueprint.
 
 ```php
 GlobalRecord::extendInGlobal('Blog\Config', function($model) {
@@ -147,15 +127,9 @@ GlobalRecord::extendInGlobal('Blog\Config', function($model) {
 });
 ```
 
-The `extendInGlobalUuid` method can also be used for more precise targeting. This approach will not throw an exception if the blueprint is not found.
-
-```php
-GlobalRecord::extendInGlobalUuid('7b193500-ac0b-481f-a79c-2a362646364d', function($model) {
-    $model->bindEvent('model.afterDelete', function () use ($model) {
-        // Model has been deleted!
-    });
-});
-```
+::: tip
+The `extendInSectionUuid` and `extendInGlobalUuid` methods will not throw an exception if the blueprint is not found.
+:::
 
 ## Extending Tailor Models
 
