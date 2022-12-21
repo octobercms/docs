@@ -611,9 +611,7 @@ $validator = Validator::make(input(), [
 
 ## Custom Error Messages
 
-If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages.
-
-#### Passing Custom Messages to the Validator
+If needed, you may use custom error messages for validation instead of the defaults. There are several ways to specify custom messages. The following shows how to pass custom messages to the validator instance.
 
 ```php
 $messages = [
@@ -623,11 +621,7 @@ $messages = [
 $validator = Validator::make($input, $rules, $messages);
 ```
 
-::: tip
-The `:attribute` place-holder will be replaced by the actual name of the field under validation. You may also utilize other place-holders in validation messages.
-:::
-
-#### Other Validation Placeholders
+The `:attribute` placeholder will be replaced by the actual name of the field under validation. You may also utilize other placeholders in validation messages. The following shows some other validation placeholders you may encounter.
 
 ```php
 $messages = [
@@ -638,9 +632,7 @@ $messages = [
 ];
 ```
 
-#### Specifying a Custom Message for a Given Attribute
-
-Sometimes you may wish to specify a custom error messages only for a specific field:
+Sometimes you may wish to specify a custom error messages only for a specific field. The following will specify a custom message for the `email` attribute when using the **required** rule.
 
 ```php
 $messages = [
@@ -648,9 +640,9 @@ $messages = [
 ];
 ```
 
-#### Specifying Custom Messages in Language Files
+### Specifying Custom Messages in Language Files
 
-In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the `lang/xx/validation.php` language file for your plugin.
+In some cases, you may wish to specify your custom messages in a language file instead of passing them directly to the `Validator`. To do so, add your messages to an array in the **lang/xx/validation.php** language file for your plugin.
 
 ```php
 return  [
@@ -663,6 +655,39 @@ Then in your call to `Validator::make` use the `Lang:get` to use your custom fil
 
 ```php
 Validator::make($formValues, $validations, Lang::get('acme.blog::validation'));
+```
+
+### Overriding Validation Messages Globally
+
+The default message strings for the validator are located in the **modules/system/lang/xx/validation.php** file. We recommend opening this file to locate all the available messages.
+
+The file contains an array of messages for each validation rule. There is a `custom` attribute for custom error messages using the "attribute.rule" naming convention, and a `attributes` attribute to store custom attribute names.
+
+```php
+return [
+    'required' => 'The :attribute field is required!',
+    // ...
+
+    'custom' => [
+        // ...
+    ],
+
+    'attributes' => [
+        // ...
+    ]
+];
+```
+
+You can modify any of these values by creating a new file in the app directory, for example, for the `en` locale, create a file called **app/lang/system/en/validation.php**. The values inside this file will override the default values and you can include just the values you want modified.
+
+```php
+return [
+    'required' => 'Sorry, we need that field (:attribute) you gave!',
+
+    'attributes' => [
+        'email' => 'email address'
+    ],
+];
 ```
 
 ## Custom Validation Rules
@@ -814,3 +839,5 @@ public function beforeValidate()
     $this->rules['name'] = ['required', new LowercaseRule];
 }
 ```
+
+
