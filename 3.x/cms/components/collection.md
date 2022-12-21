@@ -15,9 +15,20 @@ Property | Description
 
 ## Basic Usage
 
-The following adds a collection of **Blog\Post** entries to the page. The component is assigned a name **posts** using the component alias and this is the variable name that becomes available to the page. The collection is looped over in Twig by accessing the `posts` collection and a `{% for %}` loop.
+The following adds a collection of **Blog\Post** entries to the page. The collection is accessed in Twig by looping the default `collection` variable.
 
-```ini
+```twig
+[collection]
+handle = "Blog\Post"
+==
+{% for post in collection %}
+    <h1>{{ post.title }}</h1>
+{% endfor %}
+```
+
+When multiple collections are used on the same page, the component can be assigned a name **posts** using the component alias and this is the variable name that becomes available to the page. The following collection is accessed using the `posts` variable instead.
+
+```twig
 [collection posts]
 handle = "Blog\Post"
 ==
@@ -26,31 +37,41 @@ handle = "Blog\Post"
 {% endfor %}
 ```
 
-## Applying Queries to the Collection
+## Performing Queries
 
-When accessing the component variable using a method it will switch to a database query. For example, to only show entries that have a field `color` with the value **blue** use the `where` query method. Using the `{% set %}` Twig tag will assign the result to a new variable.
+When accessing the component variable using a method it will switch to a [database model query](../../extend/database/query.md). For example, to only show entries that have a field `color` with the value **blue** use the `where` query method. Using the `{% set %}` Twig tag will assign the result to a new variable.
 
 ```twig
-<!-- Lists posts that have the color blue -->
 {% set bluePosts = posts.where('color', 'blue').get() %}
 ```
 
-To show only posts that have a related author, you can use the `whereRelation` query method. To complete the query, proceed with the `get()` method.
+To show only posts that have a related author, you can use the `whereRelation` query method. To complete the query, proceed with the `get()` method. The following lists posts that are assigned to the `author` with a slug set to **bella-vista**.
 
 ```twig
-<!-- Lists posts that are owned by Bella Vista -->
 {% set authorPosts = posts.whereRelation('author', 'slug', 'bella-vista').get() %}
 ```
 
-You could also apply pagination to the collection with the `paginate()` method instead.
+### Accessing the Entry Type
+
+To filter records by their entry type, perform a `where()` query using the `content_group` attribute. The following will list posts that use the entry type code **featured_post**.
 
 ```twig
-<!-- Paginate posts at 10 per page -->
+{% set featuredPosts = posts.where('content_group', 'featured_post').get() %}
+```
+
+### Paginating Records
+
+You could also apply pagination to the collection with the `paginate()` method instead. The following will paginate the posts at **10** per page and displays the paginated navigation.
+
+```twig
 {% set authorPosts = posts.whereRelation(...).paginate(10) %}
 
-<!-- Display the pagination navigation -->
 {{ pager(authorPosts) }}
 ```
+
+::: tip
+See the [Pagination feature](../features/pagination.md) to learn more about paging records.
+:::
 
 ## Eager Loading Related Records
 
@@ -59,3 +80,9 @@ In some cases, and for performance reasons, you may wish to eager load related r
 ```twig
 {% do authorPosts.load('categories') %}
 ```
+
+#### See Also
+
+::: also
+* [Pagination](../features/pagination.md)
+:::

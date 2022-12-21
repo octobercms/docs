@@ -109,7 +109,9 @@ fields:
 
 ### Content Groups
 
-All entries optionally support the ability to define multiple content groups for a section. For example, a blog section may have a regular post and a featured post, and these are two entry groups. Entry groups are defined by the **groups** property in the section blueprint file and different **fields** can be specified for each type.
+All entries optionally support the ability to define multiple content groups for a section. For example, a blog section may have a regular post and a featured post, and these are two entry groups.
+
+Entry groups are defined by the **groups** property in the section blueprint file and different **fields** can be specified for each type. The selected group value is available as the `content_group` attribute on the record.
 
 ```yaml
 handle: Blog\Post
