@@ -285,8 +285,14 @@
         - tailor/blueprints
         - tailor/content-fields
         - tailor/navigation
-        - tailor/components
         - tailor/models
+-
+    title: Components
+    children:
+        - components/section
+        - components/collection
+        - components/global
+        - components/resources
 -
     title: AJAX
     children:

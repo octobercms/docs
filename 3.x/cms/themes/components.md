@@ -5,7 +5,7 @@ subtitle: Configurable controllers that can be attached to any page, partial or 
 
 Components are a key feature of building scalable and modern solutions with October CMS. Each component implements some functionality that extends your website. Components can output HTML markup on a page, but it is not necessary - other important features of components are [handling AJAX requests](../ajax/introduction.md), handling form postbacks and handling the page execution cycle, that allows to inject variables to pages or implement the website security.
 
-This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md) or [developing components](../../extend/cms-components.md) as part of plugins.
+This article describes the components basics and doesn't explain how to use [components with AJAX](../ajax/handlers.md), [developing components](../../extend/cms-components.md) as part of plugins, or the [components included](../components/section.md) with October CMS.
 
 ## Introduction
 
