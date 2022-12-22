@@ -108,7 +108,7 @@ Example configuration after update:
         'secret' => 'xxxXxXX+XxxxxXXxXxxxxxxXxxXXXXXXXxxxX9Xx',
         'region' => 'us-west-2',
         'bucket' => 'my-bucket',
-        'url' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name'
+        'url' => 'https://s3-us-west-2.amazonaws.com/your-bucket-name',
         'visibility' => 'public',
         'throw' => false
     ],
