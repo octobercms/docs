@@ -68,7 +68,7 @@ class PostTest extends PluginTestCase
 
 ## Registering and Booting Plugins
 
-In the test environment, the plugin itself and any dependencies of the plugin are registered and booted automatically. This gives finer control over the testing environment and prevents other plugins in the system from interfering with things like event registration. You can disable automatic loading of the current plugin by setting the `autoRegister` property to false.
+In the test environment, the plugin itself and any dependencies of the plugin are registered and booted automatically. This gives finer control over the testing environment and prevents other plugins in the system from interfering with things like event registration. You can disable automatic loading of the current plugin by setting the `autoRegister` property to `false`.
 
 ```php
 /**

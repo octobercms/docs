@@ -280,49 +280,6 @@ function onInit()
 ?>
 ```
 
-### Extending the Backend Menu
-
-This example will replace the label for CMS and Pages in the backend with *...*.
-
-```php
-Event::listen('backend.menu.extendItems', function($manager) {
-
-    // Add main menu item
-    $manager->addMainMenuItems('October.Cms', [
-        'cms' => [
-            'label' => '...'
-        ]
-    ]);
-
-    // Add side menu item
-    $manager->addSideMenuItems('October.Cms', 'cms', [
-        'pages' => [
-            'label' => '...'
-        ]
-    ]);
-
-});
-```
-
-Similarly, we can remove the menu items using the same event.
-
-```php
-Event::listen('backend.menu.extendItems', function($manager) {
-
-    // Remove all items
-    $manager->removeMainMenuItem('October.Cms', 'cms');
-
-    // Remove single item
-    $manager->removeSideMenuItem('October.Cms', 'cms', 'pages');
-
-    // Remove two items
-    $manager->removeSideMenuItems('October.Cms', 'cms', [
-        'pages',
-        'partials'
-    ]);
-});
-```
-
 #### See Also
 
 ::: also

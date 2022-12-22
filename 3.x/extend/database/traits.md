@@ -586,25 +586,19 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Revisionable;
 
-    /**
-     * @var array Monitor these attributes for changes.
-     */
     protected $revisionable = ['name', 'email'];
 
-    /**
-     * @var array Relations
-     */
     public $morphMany = [
         'revision_history' => [\System\Models\Revision::class, 'name' => 'revisionable']
     ];
 }
 ```
 
-By default 500 records will be kept, however this can be modified by declaring a `$revisionableLimit` property on the model with a new limit value.
+By default a maximum number of 500 records will be kept, however, this can be modified by declaring a `$revisionableLimit` property on the model with a new limit value.
 
 ```php
 /**
- * @var int Maximum number of revision records to keep.
+ * @var int revisionableLimit as the maximum number records to keep.
  */
 public $revisionableLimit = 8;
 ```

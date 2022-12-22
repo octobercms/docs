@@ -69,3 +69,50 @@ Navigation items support specifying a counter to indicate that there are items t
     'counterLabel' => 'Label describing a dynamic menu counter',
 ],
 ```
+
+## Extending the Backend Menu
+
+The `backend.menu.extendItems` [event listener](../extending.md) can be used to modify the existing navigation items, after the system and plugins have registered their navigation items. The event returns a navigation `$manager` instance that supports the following methods.
+
+Method | Description
+------------- | -------------
+**addMainMenuItems($owner, $definitions)** | Add or update a main menu definition
+**getMainMenuItem($owner, $code)** | Retrieve an existing main menu definition
+**removeMainMenuItem($owner, $code)** | Delete an existing main menu definition
+**addSideMenuItems($owner, $code, $definitions)** | Add or update a side menu definition
+**getSideMenuItem($owner, $code, $sideCode)** | Retrieve an existing side menu definition
+**removeSideMenuItem($owner, $code, $sideCode)** | Delete an existing side menu definition
+
+When retrieving a menu item, the object supports method chaining to update its properties. The following example will replace the label for the Editor with **Code Editor**.
+
+```php
+Event::listen('backend.menu.extendItems', function($manager) {
+    $manager->getMainMenuItem('October.Editor', 'editor')->label('Code Editor');
+});
+```
+
+The next example will change the label to **News** and add a **9** counter to the Acme Blog plugin.
+
+```php
+Event::listen('backend.menu.extendItems', function($manager) {
+    $manager->getMainMenuItem('Acme.Blog', 'blog')
+        ->getSideMenuItem('posts')
+        ->label('News')
+        ->counter(9);
+});
+```
+
+Similarly, we can remove the menu items using the same event. The following example will remove all items, remove a single item, and remove multiple items, respectively.
+
+```php
+Event::listen('backend.menu.extendItems', function($manager) {
+    $manager->removeMainMenuItem('Acme.Blog', 'blog');
+
+    $manager->removeSideMenuItem('Acme.Blog', 'blog', 'posts');
+
+    $manager->removeSideMenuItems('Acme.Blog', 'blog', [
+        'posts',
+        'categories'
+    ]);
+});
+```
