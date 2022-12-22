@@ -171,11 +171,18 @@ public function onStart()
 
 You can handle standard forms with handler methods defined in the page or layout PHP section (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction.md) article). Use the `form_open()` [Twig function](../../markup/function/form.md) to define a form that refers to an event handler.
 
-```twig
-{{ form_open({ request: 'onHandleForm' }) }}
-    Please enter a string: <input type="text" name="value"/>
-    <input type="submit" value="Submit me!"/>
-{{ form_close() }}
+```html
+<form data-request="onHandleForm">
+    <div>
+        <label>Please enter a string</label>
+        <input name="value"/>
+    </div>
+
+    <button data-attach-loading>
+        Submit
+    </button>
+</form>
+
 <p>Last submitted value: {{ lastValue }}</p>
 ```
 
@@ -196,8 +203,8 @@ If a handler with the same name is defined in the page layout, the page, and a [
 
 If you want to refer to a handler defined in a specific component, use the component's name or alias in the handler reference:
 
-```twig
-{{ form_open({ request: 'myComponent::onHandleForm' }) }}
+```html
+<form data-request="myComponent::onHandleForm">...</form>
 ```
 
 ## 404 Page

@@ -401,7 +401,6 @@ Categories::extendFormFields(function($form, $model, $context) {
             'comment' => 'This is a custom field I have added.',
         ],
     ]);
-
 });
 ```
 
