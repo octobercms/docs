@@ -215,9 +215,13 @@ If the theme contains a page with the URL `/404`, it is displayed when the syste
 
 By default, any errors will be shown with a detailed error page containing the file contents, line number, and stack trace where the error occurred. You can display a custom error page by setting the configuration value `debug` to **false** in the `config/app.php` script, and creating a page with the URL `/error`.
 
-## Page Variables
+## Setting the Page Title
 
-The properties of a page can be accessed in the PHP code section or [Components](./components.md) by referencing `$this->page`.
+Setting the page title can be done inside PHP, using the Page Object, or inside Twig, using the [placeholder tag](../../markup/tag/placeholder.md).
+
+### Using Page Properties
+
+The properties of a page can be accessed in the PHP code section or [Components](./components.md) by referencing `$this->page`. The following sets the `meta_title` attribute to a new value.
 
 ```php
 function onEnd()
@@ -226,14 +230,38 @@ function onEnd()
 }
 ```
 
-They can also be accessed in the markup using the `this.page` variable. For example, to return the title of a page:
+The `{{ this.page }}` variable can be accessed in Twig using the `this.page` variable. For example, to return the `meta_title` attribute inside a layout.
 
 ```twig
-<p>The title of this page is: {{ this.page.meta_title }}</p>
+<title>{{ this.page.meta_title }}</title>
 ```
 
 ::: tip
 More information on `this.page` can be found in [the Markup guide](../../markup/property/this-page.md).
+:::
+
+### Using Placeholder Variables
+
+The `{% put %}` tag allows you to store a value inside a placeholder variable. The following sets the `pageTitle` variable.
+
+```twig
+{% put pageTitle = 'Yet another page title' %}
+```
+
+The `placeholder()` Twig function is used to access the variable inside the layout.
+
+```twig
+<title>{{ placeholder('pageTitle') }}</title>
+```
+
+A default value (second argument) can be supplied as a fallback.
+
+```twig
+<title>{{ placeholder('pageTitle', this.page.meta_title) }}</title>
+```
+
+::: tip
+More information on the placeholder tag can be found in [placeholder tag article](../../markup/tag/placeholder.md).
 :::
 
 ## Injecting Page Assets Programmatically
