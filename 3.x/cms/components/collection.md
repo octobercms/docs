@@ -12,6 +12,10 @@ The following properties are supported by the component.
 Property | Description
 -------- | -------------
 **handle** | The handle of the [entry blueprint](./blueprints.md).
+**recordsPerPage** | Number of records to display on a single page. Leave empty to disable pagination.
+**pageNumber** | This value is used to determine what page the user is on.
+**sortColumn** | Column name the records should be ordered by.
+**sortDirection** | Direction the records should be ordered by. Supported values are `asc` and `desc`.
 
 ## Basic Usage
 

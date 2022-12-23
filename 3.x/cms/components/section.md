@@ -13,7 +13,7 @@ Property | Description
 -------- | -------------
 **handle** | The handle of the [entry blueprint](./blueprints.md).
 **entrySlug** | The value to use to look up the entry by its `slug` attribute. Usually set to a URL parameters. Example: `{{ :slug }}`
-**fullSlug** | Use the full slug when looking up the entry, structured entries only. Default: `false`
+**entryColumn** | Use this column when looking up the entry. Supported values are `slug`, `fullslug` and `id`. Default: `slug`
 **entryDefault** | Make this the default page when previewing the entry. Default: `true`.
 
 ## Basic Usage
