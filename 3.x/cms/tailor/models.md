@@ -59,18 +59,6 @@ $records = EntryRecord::inSection('Blog\Post')->get();
 $records = EntryRecord::inSectionUuid('a63fabaf-7c0b-4c74-b36f-7abf1a3ad1c1')->get();
 ```
 
-#### Eager Loading Relations
-
-When working with related fields, including [repeater fields](../../element/form/widget-repeater.md), you can eager load them on the collection using the `load` method. This method makes the related content available as a single query and is best for performance.
-
-The following eager loads the **categories** field and adds it to the result, along with an example of passing multiple related fields.
-
-```php
-$records->load('categories');
-
-$records->load(['categories', 'author']);
-```
-
 ### Retrieving a Single Entry
 
 Combined with the `where` constraint, you may find a single record with the `first` method. The following will find an entry where the slug is equal to **first-post**.
@@ -119,6 +107,47 @@ GlobalRecord::findForGlobal('Blog\Config');
 
 GlobalRecord::findForGlobalUuid('7b193500-ac0b-481f-a79c-2a362646364d');
 ```
+
+## Working With Related Fields
+
+Related fields can include [repeater fields](../../element/form/widget-repeater.md) and [entries fields](../../element/content/field-entries.md), and there are some extra steps needed to read and write to these fields.
+
+### Eager Loading Relations
+
+When reading related fields, you can eager load them on the collection using the `load` method. This method makes the related content available as a single query and is best for performance.
+
+The following eager loads the **categories** field and adds it to the result, along with an example of passing multiple related fields.
+
+```php
+$records->load('categories');
+
+$records->load(['categories', 'author']);
+```
+
+### Creating Related Fields
+
+When writing related fields, you can call the relation name as a method to return the relationship definition, then a subsequent `create()` method can be called, which returns the newly created relation.
+
+The following locates the first blog post in the **Blog\Post** section and then creates an assocaited category.
+
+```php
+$post = EntryRecord::inSection('Blog\Post')->first();
+
+$post->categories()->create(['title' => 'Test', 'price' => '100']);
+```
+
+If the category already exists, use the `add()` method instead. The following adds the first blog category to the first blog post.
+
+```php
+$post = EntryRecord::inSection('Blog\Post')->first();
+$category = EntryRecord::inSection('Blog\Category')->first();
+
+$post->categories()->add($category);
+```
+
+::: tip
+View the [relations article](../../extend/database/relations.md) to learn more about model relationships.
+:::
 
 ## Extending Model Constructors
 
