@@ -83,7 +83,7 @@ type: structure
 
 structure:
     maxDepth: 2
-# ...
+    # ...
 ```
 
 The following values are supported by the `structure` property.
@@ -91,6 +91,9 @@ The following values are supported by the `structure` property.
 Property | Description
 -------- | -------------
 **maxDepth** | Maximum depth for the structure. Default: `0` for unlimited.
+**treeExpanded** | if tree nodes should be expanded by default. Default: `true`
+**showReorder** | displays an interface for reordering records. Default: `true`
+**showSorting** | allows sorting records, disables the structure when sorted. Default: `true`
 
 #### Stream Entries
 
