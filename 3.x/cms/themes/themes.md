@@ -43,7 +43,7 @@ Below, you can see an example theme directory structure. Each theme represents a
 
 ### Subdirectories
 
-October CMS supports a single level of subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
+October CMS supports unlimited depth of subdirectories for **pages**, **partials**, **layouts**, **content** and **assets** directories. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
 ::: dir
 ├── themes
