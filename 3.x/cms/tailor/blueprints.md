@@ -62,7 +62,7 @@ fields:
 
 #### Structure Entries
 
-The `structure` type allows multiple structured entries, allowing for parent-child relationships to exist. This is useful for nested content, such as a Documentation section. The following defines a **Documentation** tree section with an Article Content (`article_content`) markdown field.
+The `structure` type allows multiple structured entries, allowing for parent-child relationships to exist. This is useful for nested content, such as a Documentation section. Entries of the type `structure` are sortable. Their sort order can be adjusted by dragging them in the list view. The following defines a **Documentation** tree section with an Article Content (`article_content`) markdown field.
 
 ```yaml
 handle: Docs\Article
