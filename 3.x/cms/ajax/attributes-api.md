@@ -13,6 +13,7 @@ data-request Attribute | Description
 **data-request-url** | specifies a URL to which the request is sent. default: `window.location.href`
 **data-request-update** | specifies a list of partials and page elements (CSS selectors) to update. The format is as follows: `partial: selector, partial: selector`. Usage of quotes is required in some cases, for example: `'my-partial': '#myelement'`. The selector string should start with a `#` or `.` character, except you may also prepend it with `@` to append contents to the element, `^` to prepend, `!` to replace with and `=` to use any CSS selector.
 **data-request-data** | specifies additional POST parameters to be sent to the server. The format is following: `var: value, var: value`. Use quotes if needed: `var: 'some string'`. The attribute can be used on the triggering element, for example on the button that also has the `data-request` attribute, on the closest element of the triggering element and on the parent form element. The framework merges values of the `data-request-data` attributes. If the attribute on different elements defines parameters with the same name, the framework uses the following priority: the triggering element `data-request-data`, the closer parent elements `data-request-data`, the form input data.
+**data-request-query** | specifies additional GET parameters to be sent to the server and added to the current URL query string.
 **data-request-before-update** | specifies JavaScript code to execute directly before the page contents are updated.
 **data-request-success** | specifies JavaScript code to execute after the request is successfully completed.
 **data-request-error** | specifies JavaScript code to execute if the request encounters an error.
@@ -80,6 +81,12 @@ Send a POST parameter `id` with value `7` across multiple elements.
     <button data-request="onSave">Update</button>
 </div>
 ```
+
+Send a GET parameter `page` with value `6` on the current request.
+
+<button data-request="onSetPage" data-request-query="{ page: 6 }">
+    Page 6
+</button>
 
 Including [file uploads](../../extend/services/request-input.md) with a request.
 
