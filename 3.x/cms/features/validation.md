@@ -146,8 +146,8 @@ To implement custom functionality for the error messages, hook into the `ajax:in
 
 ```js
 addEventListener('ajax:invalid-field', function(event) {
-    const { fieldElement, fieldName, errorMsg, isFirst } = event.detail;
-    fieldElement.classList.add('has-error');
+    const { element, fieldName, errorMsg, isFirst } = event.detail;
+    element.classList.add('has-error');
 });
 
 addEventListener('ajax:promise', function(event) {
