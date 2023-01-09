@@ -54,16 +54,17 @@ Property | Description
 **noRecordsMessage** | a message to display when no records are found, can refer to a [localization string](../system/localization.md).
 **deleteMessage** | a message to display when records are bulk deleted, can refer to a [localization string](../system/localization.md).
 **noRecordsDeletedMessage** | a message to display when a bulk delete action is triggered, but no records were deleted, can refer to a [localization string](../system/localization.md).
-**recordsPerPage** | records to display per page, use 0 for no pages. Default: 0
-**perPageOptions** | options for number of items per page. Default: [20, 40, 80, 100, 120]
-**showPageNumbers** | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: true
+**recordsPerPage** | records to display per page, use 0 for no pages. Default: `0`
+**perPageOptions** | options for number of items per page. Default: `[20, 40, 80, 100, 120]`
+**showPageNumbers** | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: `true`
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
-**showSorting** | displays the sorting link on each column. Default: true
+**showSorting** | displays the sorting link on each column. Default: `true`
 **defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
-**showCheckboxes** | displays checkboxes next to each record. Default: false.
-**showSetup** | displays the list column set up button. Default: false.
+**showCheckboxes** | displays checkboxes next to each record. Default: `false`.
+**showSetup** | displays the list column set up button. Default: `false`.
 **structure** | enables a structured list, see the [sorting records article](./structures.md) for more details.
 **customViewPath** | specify a custom view path to override partials used by the list, optional.
+**customPageName** | specify a custom variable name to use in the page URL for paginated records. Default: `page`.
 
 ### Adding a Toolbar
 
