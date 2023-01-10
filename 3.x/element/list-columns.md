@@ -45,15 +45,16 @@ Property | Description
 **label** | a name when displaying the list column to the user.
 **type** | defines how this column should be rendered.
 **default** | specifies the default value for the column if value is empty.
-**searchable** | include this column in the list search results. Default: false.
-**invisible** | specifies if this column is hidden by default. Default: false.
-**sortable** | specifies if this column can be sorted. Default: true.
+**searchable** | include this column in the list search results. Default: `false`.
+**invisible** | specifies if this column is hidden by default. Default: `false`.
+**sortable** | specifies if this column can be sorted. Default: `true`.
+**sortableDefault** | specifies if this column is sorted by default. This should only be used on a single sortable column. Supported values: `asc`, `desc`.
 **clickable** | if set to false, disables the default click behavior when the column is clicked. Default: true.
 **select** | defines a custom SQL select statement to use for the value.
 **valueFrom** | defines a model attribute to use for the source value.
 **displayFrom** | defines a model attribute to use for the display value.
 **relation** | defines a model relationship column.
-**relationCount** | display the number of related records as the column value. Must be used with the `relation` option. Default: false
+**relationCount** | display the number of related records as the column value. Must be used with the `relation` option. Default: `false`
 **cssClass** | assigns a CSS class to the column container.
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.

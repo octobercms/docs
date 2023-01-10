@@ -20,7 +20,7 @@ This outputs a partial with initial content that includes a `data-auto-submit` d
 ```html
 <div
     data-request="onAjax"
-    data-request-update="_self: true"
+    data-request-update="{ _self: true }"
     data-auto-submit></div>
 ```
 
@@ -55,7 +55,7 @@ For repeated requests to update content, you can set the `data-auto-submit` to a
 
 <div
     data-request="onAjax"
-    data-request-update="_self: true"
+    data-request-update="{ _self: true }"
     data-auto-submit="2000"></div>
 ```
 
@@ -67,7 +67,7 @@ The polling can be stopped by not including the element in subsequent requests, 
 {% if not launchDone %}
     <div
         data-request="onAjax"
-        data-request-update="_self: true"
+        data-request-update="{ _self: true }"
         data-auto-submit="2000"></div>
 {% endif %}
 ```
