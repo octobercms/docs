@@ -1,9 +1,9 @@
 ---
-subtitle: Chunks of HTML code that are used anywhere throughout your website.
+subtitle: Reuse chunks of HTML code anywhere in website.
 ---
 # Partials
 
-Partials are useful for elements that repeat on different pages or layouts. One such example is a page footer used across different [page layouts](./layouts.md). Partials are also a key ingredient when [updating the page content with AJAX](../ajax/update-partials.md).
+Partials are powerful elements that can repeat HTML on different pages or layouts, for example, a page footer used across different [page layouts](./layouts.md). Partials are also a powerful tool for dynamically [updating the page content with AJAX](../ajax/update-partials.md).
 
 Partial templates files reside in the **partials** directory in your theme. Partial files should have the **htm** extension. Next is an example of the simplest possible partial.
 
@@ -27,7 +27,7 @@ The partial configuration section can also contain component definitions. The [C
 Remember that if you refer a partial from a subdirectory you should specify the subdirectory name.
 :::
 
-The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. The `{% partial %}` tag can be used inside a page, layout or another partial. Example of a page referring to a partial:
+The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a single required parameter - the partial file name without the extension. The `{% partial %}` tag can be used inside a page, layout or another partial. The following is an example of a page referring to a partial.
 
 ```twig
 <div class="sidebar">
@@ -37,7 +37,7 @@ The `{% partial "partial-name" %}` Twig tag renders a partial. The tag has a sin
 
 ## Passing Variables to Partials
 
-You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag:
+You will find that you often need to pass variables to a partial from the external code. This makes partials even more useful. For example, you can have a partial that renders a list of blog posts. If you can pass the post collection to the partial, the same partial could be used on the blog archive page, on the blog category page and so on. You can pass variables to partials by specifying them after the partial name in the `{% partial %}` tag.
 
 ```twig
 <div class="sidebar">
@@ -45,7 +45,7 @@ You will find that you often need to pass variables to a partial from the extern
 </div>
 ```
 
-You can also assign new variables for use in the partial:
+You can also provide new variables for use in the partial.
 
 ```twig
 <div class="sidebar">
@@ -53,13 +53,40 @@ You can also assign new variables for use in the partial:
 </div>
 ```
 
-Inside the partial, variables can be accessed like any other markup variable:
+Inside the partial, variables can be accessed like any other markup variable.
 
 ```twig
 <p>Country: {{ country }}, city: {{ city }}.</p>
 ```
 
-### Passing Markup as a Variable
+### Variable Scope
+
+The partial contents will have access to the variables from the current context and the additional ones provided.
+
+```twig
+{% partial "mypartial" foo="bar" %}
+```
+
+In the following example, the `foo` variable will be available inside the `mypartial` partial template.
+
+```twig
+{% set foo = "bar" %}
+{% partial "mypartial" %}
+```
+
+You can disable access to the context by appending the `only` keyword. In this example, only the `foo` variable will be accessible.
+
+```twig
+{% partial "mypartial" foo="bar" only %}
+```
+
+In the next example, no variables will be accessible.
+
+```twig
+{% partial "mypartial" only %}
+```
+
+### Parsing Markup as a Variable
 
 It is possible to pass markup to a partial by adding the `body` attribute to the partial tag.
 
@@ -106,14 +133,16 @@ Partials, like pages, can use any Twig features. Please refer to the [Dynamic Pa
 
 ### Partial Execution Life Cycle
 
-There are special functions that can be defined in the PHP section of partials: `onStart` and `onEnd`. The `onStart` function is executed before the partial is rendered and before the [partial components](./components.md) are executed. The `onEnd` function is executed before the partial is rendered and after the partial components are executed. In the onStart and onEnd functions you can inject variables to the Twig environment. Use the _array notation_ to pass variables to the page.
+There are special functions that can be defined in the PHP section of partials: `onStart` and `onEnd`. The `onStart` function is executed before the partial is rendered and before the [partial components](./components.md) are executed. The `onEnd` function is executed before the partial is rendered and after the partial components are executed. In the `onStart` and `onEnd` functions you can inject variables to the Twig environment. Use the `$this` with array notation to pass variables to the page.
 
 ```php
 ==
+<?
 function onStart()
 {
     $this['hello'] = "Hello world!";
 }
+?>
 ==
 <h3>{{ hello }}</h3>
 ```
@@ -122,28 +151,40 @@ Externally assigned variables to the partial can be accessed in PHP using the `$
 
 ```php
 ==
+<?
 function onStart()
 {
     $this['location'] = $this->city . ', ' . $this->country;
 }
+?>
 ==
-{{ location }} is the same as {{ city }}, {{ country }}.
+<p>{{ location }} is the same as {{ city }}, {{ country }}.</p>
 ```
 
 The templating language provided by October CMS is described in the [Markup Guide](../../markup/templating.md). The overall sequence the handlers are executed is described in the [Dynamic Layouts section](./layouts.md) of the documentation.
 
-### Life Cycle Limitations
+### Calling AJAX Handlers in Partials
 
-Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of partials. They do not follow the standard execution process, as described in the [Layout Execution Life Cycle section](./layouts.md). The following limitations should be noted:
+Since they are instantiated late, during the time the page is rendered, some limitations apply to the life cycle of regular partials. To overcome this, you may use the `{% ajaxPartial %}` to allow AJAX handlers to be called inside your partial.
 
-1. AJAX events are not registered and won't function as normal.
-1. The life cycle functions cannot return any values.
-1. Regular POST form handling will occur at the time the partial is rendered.
+```twig
+{% ajaxPartial "contact-form" %}
+```
 
-In general, component usage in partials is designed for basic components that render simple markup without much processing, such as a *Like* or *Tweet* button.
+::: tip
+See the [AJAX Partial Twig Tag article](../../markup/tag/ajax-partial.md) to learn more about the `{% ajaxPartial %}` tag.
+:::
+
+When calling a handler from within an AJAX partial, the life cycle operates differently compared to a regular AJAX handler.
+
+1. The handler runs after the partial's `onEnd` function.
+1. The complete page life cycle runs, including logic in the layout, page and parent partials.
+1. All variables are available during the request, including variables set using Twig.
+1. The partial life cycle functions do not support returning any values.
 
 #### See Also
 
 ::: also
 * [Partial Twig Tag](../../markup/tag/partial.md)
+* [AJAX Partial Twig Tag](../../markup/tag/ajax-partial.md)
 :::

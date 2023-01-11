@@ -19,6 +19,7 @@ Option | Description
 **update** | an object, specifies a list partials and page elements (as CSS selectors) to update: `{'partial': '#select'}`. The selector string should start with a `#` or `.` character, except you may also prepend it with `@` to append contents to the element, `^` to prepend, `!` to replace with and `=` to use any CSS selector.
 **confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
 **data** | an optional object specifying data to be sent to the server along with the form data: `{var: 'value'}`. You may also include files to be uploaded in this object by using [`Blob` objects](https://developer.mozilla.org/en-US/docs/Web/API/Blob). To specify the filename of any `Blob` objects, simply set the `filename` property on the `Blob` object. (Eg. `var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {uploaded_file: blob};`)
+**query** | an optional object specifying data to be added to the current URL query string.
 **headers** | an optional object specifying header values to be sent to the server with the request.
 **redirect** | string specifying an URL to redirect the browser to after the successful request.
 **beforeUpdate** | a callback function to execute before page elements are updated. The function gets 3 parameters: the data object received from the server, HTTP status code, and the XHR object. The `this` variable inside the function resolves to the request content - an object containing 2 properties: `handler` and `options` representing the original request() parameters.
@@ -33,7 +34,7 @@ Option | Description
 **bulk** | when true, the request be sent as JSON for bulk data transactions. default: `false`
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
-**progressBar** | enable the progress bar when an AJAX request occurs. Default `true` when using [extra features](./extras.md), otherwise `false`.
+**progressBar** | enable the progress bar when an AJAX request occurs. Default `true` when using [extra features](./introduction.md), otherwise `false`.
 
 You may also override some of the request logic by passing new functions as options. These logic handlers are available.
 
@@ -161,18 +162,21 @@ Applies configurations to all AJAX requests globally.
 
 ```js
 addEventListener('ajax:setup', function(event) {
-    const { context } = event.detail;
+    const { options } = event.detail.context;
 
     // Enable AJAX handling of Flash messages on all AJAX requests
-    context.options.flash = true;
+    options.flash = true;
+
+    // Disable the progress bar for all AJAX requests
+    options.progressBar = false;
 
     // Handle Error Messages by triggering a flashMsg of type error
-    context.options.handleErrorMessage = function(message) {
+    options.handleErrorMessage = function(message) {
         oc.flashMsg({ text: message, class: 'error' });
     }
 
     // Handle Flash Messages by triggering a flashMsg of the message type
-    context.options.handleFlashMessage = function(message, type) {
+    options.handleFlashMessage = function(message, type) {
         oc.flashMsg({ text: message, class: type });
     }
 });

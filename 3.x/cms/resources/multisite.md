@@ -1,7 +1,7 @@
 ---
 subtitle: Learn how to translate content using multiple sites
 ---
-# Multisite & Localization
+# Multisite
 
 <VideoBlockLink src="https://www.youtube.com/watch?v=_kX7P3SEHg8" title="Multisite Demo" description="This video demonstrates how to create multilingual sites with October CMS Multisite." prompt="Watch the demonstration" />
 
@@ -73,4 +73,10 @@ When the user visits the base URL, their preferred language is automatically det
 
 ::: tip
 You can modify this behavior using the `redirect_policy` value found in the **config/cms.php** file.
+:::
+
+#### See Also
+
+::: also
+* [Theme Localization](../themes/localization.md)
 :::

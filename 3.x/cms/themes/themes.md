@@ -1,5 +1,5 @@
 ---
-subtitle: Define the appearance of your website or web application.
+subtitle: Build your website using a simple file structure.
 ---
 # Themes
 
@@ -43,7 +43,7 @@ Below, you can see an example theme directory structure. Each theme represents a
 
 ### Subdirectories
 
-October CMS supports unlimited depth of subdirectories for **pages**, **partials**, **layouts**, **content** and **assets** directories. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
+October CMS supports a depth of five subdirectories for **pages**, **partials**, **layouts** and **content** files, while the **assets** directory can have an unlimited depth. This approach simplifies the organization of large websites. In the example directory structure below, the **pages** and **partials** directories contain the **blog** subdirectory, and the **content** directory contains the **home** subdirectory.
 
 ::: dir
 ├── themes

@@ -14,3 +14,11 @@ If the media manager address is __https://cdn.octobercms.com__ the above example
 ```html
 <img src="https://cdn.octobercms.com/banner.jpg" />
 ```
+
+## PHP Interface
+
+You may generate URLs in PHP using the `MediaLibrary` class.
+
+```php
+Media\Classes\MediaLibrary::url('relative/path/to/asset.jpg');
+```

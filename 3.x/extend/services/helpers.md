@@ -77,9 +77,10 @@ October CMS includes a variety of "helper" PHP functions. Many of these function
 [config](#method-config)
 [dd](#method-dd)
 [env](#method-env)
-[get](#method-get)
 [input](#method-input)
+[get](#method-get)
 [post](#method-post)
+[files](#method-files)
 [redirect](#method-redirect)
 [request](#method-request)
 [response](#method-response)
@@ -779,6 +780,15 @@ $env = env('APP_ENV');
 $env = env('APP_ENV', 'production');
 ```
 
+<a name="method-input"></a>
+#### `input()`
+
+The `input` function obtains an input item from all request values, including files.
+
+```php
+$value = input('key', $default = null)
+```
+
 <a name="method-get"></a>
 #### `get()`
 
@@ -788,15 +798,6 @@ The `get` function obtains an input item from the request, restricted to GET var
 $value = get('key', $default = null)
 ```
 
-<a name="method-input"></a>
-#### `input()`
-
-The `input` function obtains an input item from the request:
-
-```php
-$value = input('key', $default = null)
-```
-
 <a name="method-post"></a>
 #### `post()`
 
@@ -804,6 +805,15 @@ The `post` function obtains an input item from the request, restricted to POST v
 
 ```php
 $value = post('key', $default = null)
+```
+
+<a name="method-files"></a>
+#### `files()`
+
+The `files` function obtains an file item from the request:
+
+```php
+$value = files('key', $default = null)
 ```
 
 <a name="method-redirect"></a>

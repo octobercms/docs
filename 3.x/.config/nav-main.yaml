@@ -43,6 +43,7 @@
         - form/widget-relation
         - form/widget-repeater
         - form/widget-richeditor
+        - form/widget-pagefinder
         - form/widget-sensitive
         - form/widget-taglist
         - form/widget-boxes
@@ -224,6 +225,7 @@
     children:
         - tag/page
         - tag/partial
+        - tag/ajax-partial
         - tag/content
         - tag/component
         - tag/placeholder
@@ -238,6 +240,7 @@
     children:
         - filter/app
         - filter/page
+        - filter/link
         - filter/theme
         - filter/trans
         - filter/media
@@ -282,18 +285,35 @@
         - tailor/blueprints
         - tailor/content-fields
         - tailor/navigation
-        - tailor/components
         - tailor/models
 -
-    title: AJAX Framework
+    title: Components
+    children:
+        - components/section
+        - components/collection
+        - components/global
+        - components/resources
+-
+    title: AJAX
     children:
         - ajax/introduction
         - ajax/handlers
         - ajax/update-partials
         - ajax/attributes-api
         - ajax/javascript-api
-        - ajax/extras
         - ajax/turbo-router
+-
+    title: Features
+    children:
+        - features/validation
+        - features/uploads
+        - features/downloads
+        - features/loaders
+        - features/flash-messages
+        - features/pagination
+        - features/redirects
+        - features/polling
+        - features/modals
 -
     title: Media Manager
     children:
@@ -303,6 +323,7 @@
     title: Theme Development
     children:
         - themes/settings
+        - themes/localization
         - themes/child-themes
         - themes/database-themes
         - themes/seeding-themes

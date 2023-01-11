@@ -107,7 +107,7 @@ return Response::json(['name' => 'Steve', 'state' => 'CA'])
 
 ### File Downloads
 
-The `download` method may be used to generate a response that forces the user's browser to download the file at the given path. The `download` method accepts a file name as the second argument to the method, which will determine the file name that is seen by the user downloading the file. Finally, you may pass an array of HTTP headers as the third argument to the method:
+The `download` method may be used to generate a response that forces the user's browser to download the file at the given path (first argument). The `download` method optionally accepts a file name (second argument), which will determine the file name that is seen by the user downloading the file, and an array of HTTP headers (third argument).
 
 ```php
 return Response::download($pathToFile);
@@ -120,6 +120,26 @@ return Response::download($pathToFile)->deleteFileAfterSend(true);
 ::: tip
 Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
 :::
+
+#### Streamed Downloads
+
+In some cases you may want to convert a string response to a downloadable response without having to write the contents to disk. Use the `streamDownload` method to solve this, the method accepts a callback (first argument), filename (second argument), and an optional array of headers (third argument).
+
+```php
+return Response::streamDownload(function() {
+    echo 'CSV Contents...';
+}, 'export.csv');
+```
+
+### File Responses
+
+The `file` method is be used to display a file, such as an image or PDF, directly in the user's browser instead of initiating a download. This method accepts the path to the file (first argument) and an array of headers (second argument).
+
+```php
+return Response::file($pathToFile);
+
+return Response::file($pathToFile, $headers);
+```
 
 ## Redirects
 
@@ -217,7 +237,7 @@ The first argument is a "path hint" that contains the plugin name, separated by 
 The path hint is case sensitive and the plugin name should always be in lowercase.
 :::
 
-#### Passing data to views
+#### Passing Data to Views
 
 ```php
 // Using conventional approach
@@ -239,7 +259,7 @@ It is also possible to share a piece of data across all views:
 View::share('name', 'Steve');
 ```
 
-#### Passing a sub-view to a view
+#### Passing a Sub-view to a View
 
 Sometimes you may wish to pass a view into another view. For example, given a sub-view stored at `plugins/acme/blog/views/child/view.php`, we could pass it to another view like so:
 
@@ -260,7 +280,7 @@ The sub-view can then be rendered from the parent view:
 </html>
 ```
 
-#### Determining if a view exists
+#### Determining If a View Exists
 
 If you need to check if a view exists, use the `View::exists` method:
 
@@ -269,3 +289,10 @@ if (View::exists('acme.blog::mail.customer')) {
     //
 }
 ```
+
+#### See Also
+
+::: also
+* [Uploads & Downloads](../../cms/features/upload-download.md)
+* [Laravel Responses](https://laravel.com/docs/9.x/responses)
+:::

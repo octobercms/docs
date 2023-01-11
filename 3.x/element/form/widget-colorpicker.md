@@ -13,8 +13,9 @@ color:
 
 Option | Description
 ------------- | -------------
-**availableColors** |  list of available colors.
-**allowEmpty** | allows empty input value. Default: false
+**availableColors** | list of available colors as an array.
+**allowEmpty** | allows empty input value. Default: `false`
+**allowCustom** | allows selection of a custom color. Default: `true`
 
 There are two ways to provide the available colors for the colorpicker. The first method defines the `availableColors` directly as a list of hex color codes in the YAML file:
 

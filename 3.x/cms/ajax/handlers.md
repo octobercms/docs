@@ -3,9 +3,11 @@ subtitle: Design your API and update the page dynamically.
 ---
 # Event Handlers
 
+AJAX event handlers are API endpoints for the AJAX framework to communicate with the server. They can respond with raw data, redirect the browser or dynamically update partials on the page.
+
 ## AJAX Handlers
 
-AJAX event handlers are PHP functions that can be defined in the page or layout PHP section or [inside components](../themes/components.md). Handler names should use the `onSomething` pattern, for example, `onName`. All handlers support the use of [updating partials](./update-partials.md) as part of the AJAX request.
+To create an AJAX handler, define it as a PHP function the page, partial or layout PHP section, or [inside CMS components](../themes/components.md). Handler names should use the `onSomething` pattern, for example, `onName`. All handlers support the use of [updating partials](./update-partials.md) as part of the AJAX request.
 
 ```php
 function onSubmitContactForm()
@@ -27,7 +29,33 @@ Every AJAX request should specify a handler name, either using the [data attribu
 <button data-request="onSubmitContactForm">Go</button>
 
 <!-- JavaScript API -->
-<script> oc.request('#mybutton', 'onSubmitContactForm') </script>
+<script> oc.ajax('onSubmitContactForm') </script>
+```
+
+### Form Serialization
+
+When an AJAX request occurs inside a HTML form tag, all the input values of the form are available to the handler. In the example below, the `first_name` value will be sent with the request.
+
+```html
+<form id="myForm">
+    <input name="first_name" />
+    <button data-request="onSubmitContactForm">Go</button>
+</form>
+```
+
+The JavaScript API support this logic with the `oc.request` function.
+
+```html
+<script> oc.request('#myForm', 'onSubmitContactForm') </script>
+```
+
+You may use the `input()` PHP function to access the variable.
+
+```php
+function onSubmitContactForm()
+{
+    $firstName = input('first_name');
+}
 ```
 
 ### Generic Handler
@@ -84,12 +112,11 @@ The data can be fetched with the data attributes API.
 The same with the JavaScript API.
 
 ```html
-<form
-    onsubmit="oc.request(this, 'onHandleForm', {
+<form onsubmit="oc.request(this, 'onHandleForm', {
         success: function(data) {
             console.log(data);
         }
-    }); return false;"
+    }); return false"
 >
 ```
 
@@ -102,6 +129,23 @@ throw new AjaxException([
     'error' => 'Not enough questions',
     'questionsNeeded' => 2
 ]);
+```
+
+These errors are handled by the AJAX framework.
+
+```html
+<form data-request="onHandleForm" data-request-error="console.log(data)">
+```
+
+The same with the JavaScript API.
+
+```html
+<form onsubmit="oc.request(this, 'onHandleForm', {
+        error: function(data) {
+            console.log(data);
+        }
+    }); return false"
+>
 ```
 
 ::: tip

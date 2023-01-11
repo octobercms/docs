@@ -71,10 +71,6 @@ The `handle` method will be called when your command is executed. You may place 
 Arguments are defined by returning an array value from the `getArguments` method are where you may define any arguments your command receives. For example:
 
 ```php
-/**
- * Get the console command arguments.
- * @return array
- */
 protected function getArguments()
 {
     return [
@@ -96,10 +92,6 @@ The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `I
 Options are defined by returning an array value from the `getOptions` method. Like arguments this method should return an array of commands, which are described by a list of array options. For example:
 
 ```php
-/**
- * getOptions for the console command
- * @return array
- */
 protected function getOptions()
 {
     return [

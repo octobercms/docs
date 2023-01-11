@@ -3,12 +3,70 @@ subtitle: Twig Function
 ---
 # pager()
 
-The `pager()` function extracts the paginated links and meta data from a paginated query.
+The `pager()` function is used to handle [paginated records](../../extend/database/pagination.md) (first argument). It returns an object containing details about the records, including the page numbers and next / previous links. When treated as a string, it will render default HTML markup.
+
+Once you have retrieved the results, you may display the results and render the page links using the `pager()` Twig function.
 
 ```twig
-{% set posts = blog.paginate(3) %}
+<div class="container">
+    {% for user in users %}
+        {{ user.name }}
+    {% endfor %}
+</div>
 
-{% set pager = pager(posts) %}
+{{ pager(users) }}
+```
+
+The following configurable options are supported (second argument).
+
+Option | Description
+------------- | -------------
+**template** | specify a default template or [view name](../../extend/services/response-view.md). Example: `app::my-custom-view`
+**partial** | specify a [partial name](../../cms/themes/partials.md) in the theme (CMS only). Example: `my-partial`
+**withQuery** | include any existing query parameters with the generated links. Default: `false`
+**appends** | an optional array of values to include in the query parameters.
+**fragment** | an optional fragment string to include in the URLs.
+
+## Modifying the URL
+
+Use the `withQuery` to preserve the existing query string in the URL.
+
+```twig
+{{ pager(records, { withQuery: true }) }}
+```
+
+You may add to the query string of pagination links using the `appends` method. For example, to append `&sort=votes` to each pagination link, you should make the following call to `appends`.
+
+```twig
+{{ pager(records, { appends: { sort: 'votes' } }) }}
+```
+
+If you wish to append a "hash fragment" to the pagination URLs, you may use the `fragment` method. For example, to append `#foo` to the end of each pagination link, make the following call to the `fragment` method.
+
+```twig
+{{ pager(records, { fragment: 'foo' }) }}
+```
+
+## Accessing Pager Variables
+
+Setting the `pager()` function to a variable extracts the paginated links and meta data from a paginated query. This is particularly useful when [building API endpoints](../../cms/resources/building-apis.md) (JSON) but it can also be used to access the variables within Twig.
+
+Starting with a paginated collection.
+
+```twig
+{% set records = postModel.paginate(3) %}
+```
+
+The `pager()` function will return an extracted object.
+
+```twig
+{% set paginator = pager(records) %}
+```
+
+Where each variable can be accessed.
+
+```twig
+<a href="{{ paginator.links.first }}"></a>
 ```
 
 The returned object is divided in to **links** and **meta** with the following attributes.
@@ -49,8 +107,95 @@ An example in JSON format.
 }
 ```
 
+## Rendering the Pager
+
+When rendering the `pager()` function directly, accessing it as a string, it will render a default system template for displaying paginated links.
+
+```twig
+{{ pager(records) }}
+```
+
+The companion `ajaxPager()` function will render a AJAX-enabled pagination template (see AJAX template below). Ideally, this should be used inside an [AJAX partial](../tag/ajax-partial.md).
+
+```twig
+{{ ajaxPager(records) }}
+```
+
+### Default Template
+
+The `default` template renders the default pagination template. It is used by default with the `paginate()` method on a database query.
+
+```html
+<ul class="pagination">
+    <li class="page-item first">
+        <span class="page-link">&larr;</span>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="?page=1">1</a>
+    </li>
+    <li class="page-item last">
+        <a class="page-link" href="?page=2">&rarr;</a>
+    </li>
+</ul>
+```
+
+File Location: `~/modules/system/views/pagination/default.htm`
+
+### Simple Template
+
+The `simple` template renders pagination with only next and previous buttons. It is used by default with the `simplePaginate()` method on a database query.
+
+```html
+<ul class="pagination">
+    <li class="page-item first">
+        <span class="page-link">&larr;</span>
+    </li>
+    <li class="page-item last">
+        <a class="page-link" href="?page=2">&rarr;</a>
+    </li>
+</ul>
+```
+
+File Location: `~/modules/system/views/pagination/simple.htm`
+
+### AJAX Template
+
+The `ajax` template renders AJAX paginated records. It is used by default with the `paginate()` method on a database query and the `ajaxPager()` function.
+
+```html
+<ul class="pagination">
+    <li class="page-item first">
+        <span class="page-link">&larr;</span>
+    </li>
+    <li class="page-item">
+        <a
+            class="page-link"
+            data-request="onAjax"
+            data-request-data="{ page: 1 }"
+            data-request-update="{ _self: true }">1</a>
+    </li>
+    <li class="page-item last">
+        <a
+            class="page-link"
+            data-request="onAjax"
+            data-request-data="{ page: 2 }"
+            data-request-update="{ _self: true }">&rarr;</a>
+    </li>
+</ul>
+```
+
+File Location: `~/modules/system/views/pagination/ajax.htm`
+
+## Using Custom Markup
+
+::: tip
+Visit the [Pagination feature article](../../cms/features/pagination.md) for instructions on how to use custom pagination markup.
+:::
+
 #### See Also
 
 ::: also
 * [Building API Resources](../../cms/resources/building-apis.md)
+* [CMS Pagination](../../cms/features/pagination.md)
+* [Model Pagination](../../extend/database/pagination.md)
 :::

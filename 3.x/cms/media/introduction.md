@@ -6,17 +6,15 @@ October CMS ships with a media manager built in, making it easy to publish large
 
 ## Linking to Media
 
-In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [twig filter](../../markup/filter/media.md).
+In most cases the complete URL will be used when inserting media assets in to your content. However, it is also possible to generate these URLs from their relative paths in the media directory using the `|media` [Twig filter](../../markup/filter/media.md).
 
 ```twig
 {{ 'relative/path/to/asset.jpg'|media }}
 ```
 
-You may also generate URLs in PHP using the `MediaLibrary` class.
-
-```php
-Media\Classes\MediaLibrary::url('relative/path/to/asset.jpg');
-```
+::: tip
+View the [Media filter article](../../markup/filter/media.md) to learn more.
+:::
 
 ## Configuration Options
 

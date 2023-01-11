@@ -17,6 +17,7 @@ The [List Controller](./list-controller.md) and [Relation Controller](../forms/f
 structure:
     showTree: true
     showReorder: true
+    showSorting: false
     maxDepth: 2
 ```
 
@@ -27,6 +28,7 @@ Property | Description
 **showTree** | displays a tree hierarchy for parent/child records. Default: `true`
 **treeExpanded** | if tree nodes should be expanded by default. Default: `true`
 **showReorder** | displays an interface for reordering records. Default: `true`
+**showSorting** | allows sorting records, disables the structure when sorted. Default: `true`
 **maxDepth** | defines the maximum levels allowed for reordering. Default: `null`
 **dragRow** | allow dragging the entire row in addition to the reorder handle. Default: `true`
 

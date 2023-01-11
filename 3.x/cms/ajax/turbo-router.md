@@ -3,7 +3,7 @@ subtitle: Learn how links are routed using the AJAX framework.
 ---
 # Turbo Router
 
-A feature included with the [AJAX framework extra features](./extras.md) is an implementation of PJAX (push state and AJAX) called the turbo router. It gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load.
+Turbo routing is an implementation of PJAX (push state and AJAX) that gives the performance benefits of a single page application without the added complexity of a client-side framework. When you click a link, the page is automatically swapped client-side without the cost of a full page load.
 
 ```twig
 {% framework turbo %}
@@ -99,7 +99,7 @@ addEventListener('page:before-cache', function() {
 
 ### Detecting a Cached Page Load
 
-You can detect when the page contents are sourced from the cache with the `data-turbo-preview` attribute on the HTML element. Expressed in JavaScript as:
+You can detect when the page contents are sourced from the cache with the `data-turbo-preview` attribute on the HTML element. Expressed in JavaScript as the following.
 
 ```js
 if (document.documentElement.hasAttribute('data-turbo-preview')) {
@@ -107,7 +107,7 @@ if (document.documentElement.hasAttribute('data-turbo-preview')) {
 }
 ```
 
-Or using a StyleSheet:
+Or using a StyleSheet with the following.
 
 ```css
 html[data-turbo-preview] {
@@ -135,29 +135,54 @@ addEventListener('page:loaded', function() {
 });
 ```
 
+### Inline Script Elements
+
+The turbo router maintains the scripts within the `<head>` tag of the page by comparing the differences. If you use script tags in the `<body>` tag then the script will be executed every time the page renders, which may be undesirable.
+
+You may include `data-turbo-eval="false"` to only allow the script to be executed on the first page load. The script will not be called for any PJAX requests.
+
+```html
+<body>
+    <script data-turbo-eval="false" src="{{ ['@framework.bundle']|theme }}"></script>
+</body>
+```
+::: tip
+If you are placing scripts in the `<body>` tag for performance reasons, consider moving it to the `<head>` tag and using `<script defer>` instead.
+:::
+
+To execute inline JavaScript code only once, regardless of first page load or PJAX request, set a unique value to the `data-turbo-eval-once` attribute. The unique value (e.g `myAjaxPromise`) is used to determine if the script has been seen before.
+
+```html
+<script data-turbo-eval-once="myAjaxPromise">
+    // This script will run once only
+    addEventListener('ajax:promise', function(event) {
+        //
+    });
+</script>
+```
+
 ### Making Controls Idempotent
 
 When a page visit occurs and JavaScript components are initialized, it is important that these function are idempotent. In simple terms, an idempotent function is safe to apply multiple times without changing the result beyond its initial application.
 
-One technique for making a function idempotent is to keep track of whether you've already performed it by adding a value to the `dataset` property on each processed element.
+One technique for making a function idempotent is to keep track of whether you've already performed it by adding a value to the `dataset` property on each processed element. This is useful for external scripts.
 
 ```js
 addEventListener('page:loaded', function() {
     // Find my control
     var myControl = document.querySelector('.my-control');
 
-    // Halt because it has already been initialized
-    if (myControl.dataset.hasMyControl) {
-        return;
-    }
+    // Check if control has already been initialized
+    if (!myControl.dataset.hasMyControl) {
+        myControl.dataset.hasMyControl = true;
 
-    // Initialize since this is the first time
-    myControl.dataset.hasMyControl = true;
-    initializeMyControl(myControl);
+        // Initialize since this is the first time
+        initializeMyControl(myControl);
+    }
 });
 ```
 
-Another simpler approach is to allow the function to run multiple times and apply idempotence techniques internally. For example, check to see if a menu divider already exists first before creating a new one.
+As general advice, a simpler approach is to allow the function to run multiple times and apply idempotence techniques internally. For example, check to see if a menu divider already exists first before creating a new one.
 
 ### Disposing Controls
 
@@ -193,24 +218,9 @@ addEventListener('page:before-render', async (event) => {
 Keep in mind that the **page:before-render** event may fire twice, once from cache and once again after requesting the new page content.
 :::
 
-### Inline Script Elements
-
-The turbo router maintains the scripts within the `<head>` tag of the page by comparing the differences. If you use script tags in the `<body>` tag then the script will be executed every time the page renders, which may be undesirable.
-
-You may include `data-turbo-eval="false"` to prevent the script from executing again after rendering, however, it will still be called on the initial page load.
-
-```html
-<body>
-    <script data-turbo-eval="false" src="{{ ['@framework.bundle']|theme }}"></script>
-</body>
-```
-::: tip
-If you are placing scripts in the `<body>` tag for performance reasons, consider moving it to the `<head>` tag and using `<script defer>` instead.
-:::
-
 ## Global Events
 
-The AJAX framework triggers several events during the navigation lifecycle and page responses. The events are usually triggered on the `document` object with details available on the `event.detail` property.
+The AJAX framework triggers several events during the navigation life cycle and page responses. The events are usually triggered on the `document` object with details available on the `event.detail` property.
 
 Event | Description
 ------------- | -------------

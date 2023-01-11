@@ -8,6 +8,8 @@ You may access all user input with a few simple methods. You do not need to worr
 
 ```php
 $name = Input::get('name');
+
+$name = input('name');
 ```
 
 #### Retrieving a Default Value if the Input Value is Absent
@@ -147,13 +149,15 @@ $data = Input::old();
 
 ## Files
 
-#### Retrieving an Uploaded File
+You can retrieve  uploaded files from the request using the `file` method on the `Input` facade or the global `files()` helper.
 
 ```php
 $file = Input::file('photo');
+
+$file = files('photo');
 ```
 
-#### Determining if a File was Uploaded
+To determine if a file is present on the request, use the `hasFile` method.
 
 ```php
 if (Input::hasFile('photo')) {
@@ -161,52 +165,88 @@ if (Input::hasFile('photo')) {
 }
 ```
 
-The object returned by the `file` method is an instance of the `Symfony\Component\HttpFoundation\File\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file.
-
-#### Determining if an Uploaded File is Valid
+In addition to checking if the file is present, you may verify that there were no problems uploading the file via the isValid method.
 
 ```php
-if (Input::file('photo')->isValid()) {
+if ($file->isValid()) {
     //
 }
 ```
 
-#### Moving an Uploaded File
+The returned file object has a variety of methods related to the uploaded file.
+
+Method Name | Purpose
+------------- | -------------
+**move($destinationPath, $fileName)** | Moves the uploaded file to a local path
+**store($folder, $disk)** | Stores the file using the [storage service](../../extend/services/storage.md).
+**storeAs($folder, $name, $disk)** | Stores the file with a specific name using the [storage service](../../extend/services/storage.md).
+**extension()** | Guesses the extension based on the file contents
+**getRealPath()** | Returns the local path
+**getClientOriginalName()** | Returns the original name
+**getClientOriginalExtension()** | Returns the original extension
+**getSize()** | Returns the size
+**getMimeType()** | Returns the MIME type
+
+An example of moving an uploaded file.
 
 ```php
-Input::file('photo')->move($destinationPath);
+$file->move($destinationPath);
 
-Input::file('photo')->move($destinationPath, $fileName);
+$file->move($destinationPath, $fileName);
 ```
 
-#### Retrieving the Path to an Uploaded File
+Examples of [storing an uploaded file](./storage.md) in a folder (first argument) and an optional disk (second argument).
 
 ```php
-$path = Input::file('photo')->getRealPath();
+$file->store($folder);
+
+$file->store($folder, 's3');
 ```
 
-#### Retrieving the Original Name of an Uploaded File
+::: warning
+The folder names `media`, `resources`, `uploads` or `public` are reserved.
+:::
+
+Examples of `storeAs` storing the file with a custom disk name (second argument). The `storePubliclyAs` stores the file with public visibility.
 
 ```php
-$name = Input::file('photo')->getClientOriginalName();
+$file->storeAs($folder, 'avatar');
+
+$file->storeAs($folder, 'avatar', 's3');
+
+$file->storePublicly($folder, 's3');
+
+$file->storePubliclyAs($folder, 'avatar', 's3');
 ```
 
-#### Retrieving the Extension of an Uploaded File
+An example of retrieving the path to an uploaded file.
 
 ```php
-$extension = Input::file('photo')->getClientOriginalExtension();
+$path = $file->getRealPath();
 ```
 
-#### Retrieving the Size of an Uploaded file
+An example of retrieving the original name of an uploaded file.
 
 ```php
-$size = Input::file('photo')->getSize();
+$name = $file->getClientOriginalName();
 ```
 
-#### Retrieving the MIME Type of an Uploaded File
+Retrieving the extension of an uploaded file.
 
 ```php
-$mime = Input::file('photo')->getMimeType();
+$extension = $file->getClientOriginalExtension();
+```
+
+Retrieving the size of an uploaded file.
+
+```php
+$size = $file->getSize();
+```
+
+Retrieving the MIME type of an uploaded file.
+
+```php
+$mime = $file->getMimeType();
 ```
 
 ## Request Information

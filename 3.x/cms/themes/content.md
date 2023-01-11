@@ -1,5 +1,5 @@
 ---
-subtitle: Similar to partials but used for static content.
+subtitle: Dedicated files for storing and updating page content.
 ---
 # Content Blocks
 
@@ -11,8 +11,8 @@ Content blocks files reside in the **/content** subdirectory of a theme director
 
 Extension | Description
 ------------- | -------------
-**html** | Used for HTML markup (WYSIWYG).
-**htm** | Used for HTML markup (code).
+**html** | Used for HTML markup (WYSIWYG editor).
+**htm** | Used for HTML markup (code editor).
 **txt** | Used for plain text.
 **md** | Used for Markdown syntax.
 
@@ -28,7 +28,7 @@ This example shows a complete page rendering a content block.
 url = "/contacts"
 ==
 <div class="contacts">
-    {% content 'contacts.htm' %}
+    {% content 'contacts.html' %}
 </div>
 ```
 

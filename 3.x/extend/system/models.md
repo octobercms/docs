@@ -134,7 +134,7 @@ class Post extends Model
 
 ## Model Events
 
-Models fire several events, allowing you to hook into various points in the model's lifecycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
+Models fire several events, allowing you to hook into various points in the model's life cycle. Events allow you to easily execute code each time a specific model class is saved or updated in the database. Events are defined by overriding special methods in the class, the following method overrides are available:
 
 Event | Description
 ------------- | -------------
@@ -153,12 +153,11 @@ Event | Description
 **beforeFetch** | before an existing model is populated.
 **afterFetch** | after an existing model has been populated.
 
-An example of using an event:
+The following is an example of using an event.
 
 ```php
 public function beforeCreate()
 {
-    // Generate a URL slug for this model
     $this->slug = Str::slug($this->name);
 }
 ```
@@ -171,12 +170,9 @@ Relationships created with [deferred bindings](../database/relations.md) (i.e: f
 
 Whenever a new model is saved for the first time, the `beforeCreate` and `afterCreate` events will fire. If a model already existed in the database and the `save` method is called, the `beforeUpdate` / `afterUpdate` events will fire. However, in both cases, the `beforeSave` / `afterSave` events will fire.
 
-For example, let's define an event listener that populates the slug attribute when a model is first created:
+For example, let's define an event listener that populates the `slug` attribute when a model is first created.
 
 ```php
-/**
- * Generate a URL slug for this model
- */
 public function beforeCreate()
 {
     $this->slug = Str::slug($this->name);

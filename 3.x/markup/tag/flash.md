@@ -3,6 +3,10 @@ subtitle: Twig Tag
 ---
 # {% flash %}
 
+::: aside
+View the [Flash Messages article](../../cms/features/flash-messages.md) to learn more about using flash messages.
+:::
+
 The `{% flash %}` and `{% endflash %}` tags will render any flash messages stored in the user session, set by the `Flash` PHP class. The `message` variable inside will contain the flash message text and the markup inside will repeat for multiple flash messages.
 
 ```twig
@@ -31,23 +35,8 @@ You can also specify the `type`  to filter flash messages of a given type. The n
 {% endflash %}
 ```
 
-## Setting flash messages
+#### See Also
 
-Flash messages can be set by [Components](../../cms/themes/components.md) or inside the page or layout PHP section with the `Flash` class.
-
-```php
-function onSave()
-{
-    // Sets a successful message
-    Flash::success('Settings successfully saved!');
-
-    // Sets an error message
-    Flash::error('Error saving settings');
-
-    // Sets a warning message
-    Flash::warning('There was a problem but no worries');
-
-    // Sets an informative message
-    Flash::info('Just a heads up about the settings');
-}
-```
+::: also
+* [Flash Messages](../../cms/features/flash-messages.md)
+:::

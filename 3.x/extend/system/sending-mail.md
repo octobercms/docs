@@ -15,10 +15,10 @@ Optionally, mail views can be registered in the [plugin registration file](../ex
 
 You can create mail templates stored in the database using backend panel via **Settings → Mail Templates**. The **code** given to template is a unique identifier and cannot be changed once created.
 
-For example, if you create a template with code `this.is.my.email` you can send it using this PHP code:
+For example, if you create a template with code `my-template` you can send it using this PHP code:
 
 ```php
-Mail::send('this.is.my.email', $data, function($message) use ($user) {
+Mail::send('my-template', $data, function($message) {
     // ...
 });
 ```
@@ -89,6 +89,80 @@ Property | Description
 **subject** | the mail message subject, required.
 **layout** | the mail layout code or view, optional. Default value is `default`.
 
+### Registering Templates, Layouts & Partials
+
+::: aside
+The **code** value in the backend panel will be the same as the mail view path. For example, `author.plugin:mail.message`.
+:::
+
+Mail views can be registered as default templates created in the backend panel. Templates are registered by overriding the `registerMailTemplates` method of the [plugin registration file](../extending.md). The method should return an array of mail view names.
+
+```php
+public function registerMailTemplates()
+{
+    return [
+        'templates' => [
+            // ...Templates defined here
+        ],
+        'layouts' => [
+            // ...Layouts defined here
+        ],
+        'partials' => [
+            // ...Partials defined here
+        ]
+    ];
+}
+```
+
+In the backend panel, when a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the registered mail views can be considered default or fallback views.
+
+#### Registering a Template
+
+The `templates` key in the registration array is used for registering views as mail templates.
+
+```php
+'templates' => [
+    'rainlab.user::mail.activate',
+    'rainlab.user::mail.restore'
+]
+```
+
+#### Registering a Layout
+
+The `layouts` key is used to register layouts and each layout needs a unique `code` to identify it.
+
+```php
+'layouts' => [
+    'marketing' => 'acme.blog::layouts.marketing',
+    'notification' => 'acme.blog::layouts.notification',
+]
+```
+
+The layout can now be referenced in templates using the `code` value.
+
+```ini
+layout = "marketing"
+==
+Page contents...
+```
+
+#### Registering a Partial
+
+Like layouts, mail partials can be registered with the `partials` key and each partial needs a unique `code` to identify it.
+
+```php
+'partials' => [
+    'tracking' => 'acme.blog::partials.tracking',
+    'promotion' => 'acme.blog::partials.promotion',
+]
+```
+
+The partial can now be referenced in templates using the `{% partial %}` tag and `code` value.
+
+```twig
+{% partial 'tracking' %}
+```
+
 #### File-based Layouts
 
 To reference a file-based layout, you may pass the view code to the **layout** property. For example, this mail view references a layout of `acme.blog::mail.custom-layout`.
@@ -113,45 +187,9 @@ Using the code above, it will attempt to load the layout content from the path *
 </html>
 ```
 
-### Registering Layouts, Templates & Partials
-
-::: aside
-The **code** value in the backend panel will be the same as the mail view path. For example, `author.plugin:mail.message`.
+::: warning
+The contents of file-based layouts cannot be edited in the admin panel.
 :::
-
-Mail views can be registered as default templates created in the backend panel. Templates are registered by overriding the `registerMailTemplates` method of the [plugin registration file](../extending.md). The method should return an array of mail view names.
-
-```php
-public function registerMailTemplates()
-{
-    return [
-        'rainlab.user::mail.activate',
-        'rainlab.user::mail.restore'
-    ];
-}
-```
-
-Like templates, mail partials and layouts can be registered by overriding the `registerMailPartials` and `registerMailLayouts` methods of the [plugin registration file](../extending.md). The methods should return an array of mail view names. The array key will be used as `code` property for the partial or layout.
-
-```php
-public function registerMailPartials()
-{
-    return [
-        'tracking' => 'acme.blog::partials.tracking',
-        'promotion' => 'acme.blog::partials.promotion',
-    ];
-}
-
-public function registerMailLayouts()
-{
-    return [
-        'marketing' => 'acme.blog::layouts.marketing',
-        'notification' => 'acme.blog::layouts.notification',
-    ];
-}
-```
-
-In the backend panel, when a generated template is saved for the first time, the customized content will be used when sending mail for the assigned code. In this context, the registered mail views can be considered default or fallback views.
 
 ### Global Variables
 
@@ -172,10 +210,8 @@ To send a message, use the `send` method on the `Mail` facade which accepts thre
 $vars = ['name' => 'Joe', 'user' => 'Mary'];
 
 Mail::send('acme.blog::mail.message', $vars, function($message) {
-
     $message->to('admin@domain.tld', 'Admin Person');
     $message->subject('This is a reminder');
-
 });
 ```
 

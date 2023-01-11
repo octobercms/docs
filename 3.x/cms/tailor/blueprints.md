@@ -1,5 +1,5 @@
 ---
-subtitle: Available blueprints types.
+subtitle: The template structure for your website content.
 ---
 # Blueprints
 
@@ -83,7 +83,7 @@ type: structure
 
 structure:
     maxDepth: 2
-# ...
+    # ...
 ```
 
 The following values are supported by the `structure` property.
@@ -91,6 +91,9 @@ The following values are supported by the `structure` property.
 Property | Description
 -------- | -------------
 **maxDepth** | Maximum depth for the structure. Default: `0` for unlimited.
+**treeExpanded** | if tree nodes should be expanded by default. Default: `true`
+**showReorder** | displays an interface for reordering records. Default: `true`
+**showSorting** | allows sorting records, disables the structure when sorted. Default: `true`
 
 #### Stream Entries
 
@@ -109,7 +112,9 @@ fields:
 
 ### Content Groups
 
-All entries optionally support the ability to define multiple content groups for a section. For example, a blog section may have a regular post and a featured post, and these are two entry groups. Entry groups are defined by the **groups** property in the section blueprint file and different **fields** can be specified for each type.
+All entries optionally support the ability to define multiple content groups for a section. For example, a blog section may have a regular post and a featured post, and these are two entry groups.
+
+Entry groups are defined by the **groups** property in the section blueprint file and different **fields** can be specified for each type. The selected group value is available as the `content_group` attribute on the record.
 
 ```yaml
 handle: Blog\Post

@@ -1,9 +1,9 @@
 ---
-subtitle: A simple AJAX framework that ships with October CMS.
+subtitle: October CMS ships with a simple and lean AJAX framework.
 ---
 # Introduction
 
-October CMS includes a framework that brings a full suite of AJAX capabilities which allow you to load data from the server without a browser page refresh. The same library can be used in CMS themes and anywhere in the backend panel.
+October CMS includes an AJAX framework that brings a full suite of capabilities, allowing you to load data from the server without refreshing the browser. The same library can be used in CMS themes and anywhere in the admin panel.
 
 The AJAX framework comes in two flavors, you may either use [the JavaScript API](./javascript-api.md) or [the data attributes API](./attributes-api.md). The data attributes API doesn't require any JavaScript knowledge to use AJAX with October CMS.
 
@@ -19,7 +19,15 @@ When working with your [CMS theme](../../cms/themes/themes.md), using the librar
 {% framework %}
 ```
 
-The `{% framework %}` tag supports the optional **extras** and **turbo** parameters. If these parameter are specified, the tag adds StyleSheet and JavaScript files for [extra features](./extras.md), including form validation, loading indicators and [turbo-charged routing](./turbo-router.md).
+### Extra Features
+
+The `{% framework %}` tag supports an optional **extras** parameter that includes additional StyleSheet and JavaScript files, for extra features including [form validation](../features/validation.md), [loading indicators](../features/loaders.md), and [flash messages](../features/flash-messages.md).
+
+```twig
+{% framework extras %}
+```
+
+You may also include the **turbo** parameter to enable [turbo-charged routing](./turbo-router.md) on every page.
 
 ```twig
 {% framework extras turbo %}
@@ -45,7 +53,7 @@ The form data for `value1` and `value2` are automatically sent with the AJAX req
 
 ```html
 <!-- AJAX enabled form -->
-<form data-request="onTest" data-request-update="mypartial: '#myDiv'">
+<form data-request="onTest" data-request-update="{ mypartial: '#myDiv' }">
 
     <!-- Input two values -->
     <input name="value1"> + <input name="value2">
@@ -63,7 +71,7 @@ The form data for `value1` and `value2` are automatically sent with the AJAX req
 The **mypartial** partial contains markup that reads the `result` variable.
 
 ```twig
-The result is {{ result }}
+<p>The answer is {{ result }}</p>
 ```
 
 The **onTest** handler method accessed the form data using the `input` [helper method](../../extend/services/helpers.md) and the result is passed to the `result` page variable.
@@ -82,5 +90,4 @@ The example could be read like this: "When the form is submitted, issue an AJAX 
 ::: also
 * [JavaScript API](./javascript-api.md)
 * [Data Attributes API](./attributes-api.md)
-* [Extra Framework Features](./extras.md)
 :::

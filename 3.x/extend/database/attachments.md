@@ -28,7 +28,7 @@ Protected attachments are uploaded to the application's **uploads/protected** di
 
 ```php
 public $attachOne = [
-    'avatar' => ['System\Models\File', 'public' => false]
+    'avatar' => [\System\Models\File::class, 'public' => false]
 ];
 ```
 
@@ -86,47 +86,71 @@ $file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefil
 
 ## Viewing Attachments
 
-The `getPath` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**
+The `getUrl` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**.
 
 ```php
-echo $model->avatar->getPath();
+echo $model->avatar->getUrl();
 ```
 
-Returning multiple attachment file paths:
+Returning multiple attachment file paths.
 
 ```php
 foreach ($model->photos as $photo) {
-    echo $photo->getPath();
+    echo $photo->getUrl();
 }
 ```
 
-The `getLocalPath` method will return an absolute path of an uploaded file in the local filesystem.
+Displaying a file on the page using Twig.
+
+```twig
+<img src="{{ model.avatar.url }}" alt="Description Image" />
+```
+
+### Accessing the Local Path
+
+The `getLocalPath` method will return an absolute path of an uploaded file in the local filesystem. If using an external driver such as S3, this method will download the contents to a temporary location in the local filesystem.
 
 ```php
 echo $model->avatar->getLocalPath();
 ```
 
-To output the file contents directly, use the `output` method, this will include the necessary headers for downloading the file:
+## Resizing Thumbs
 
-```php
-echo $model->avatar->output();
-```
-
-You can resize an image with the `getThumb` method. The method takes 3 parameters - image width, image height and the options parameter.
+You can resize an image with the `getThumbUrl` method. The method takes 3 parameters - image width, image height and the options parameter.
 
 The **width** and **height** parameters should be specified as a number or as the **auto** word for the automatic proportional scaling.
 
 ```php
-echo $model->avatar->getThumb(100, 100, ['mode' => 'crop']);
+echo $model->avatar->getThumbUrl(100, 100, ['mode' => 'crop']);
 ```
 
-Displaying an image on the page.
+Displaying an image on the page using Twig.
 
 ```twig
-<img src="{{ model.avatar.getThumb(100, 100, {'mode':'exact', 'quality': 80, 'extension': 'webp'}) }}" alt="Description Image" />
+<img src="{{ model.avatar.thumbUrl(100, 100, { mode: 'exact', quality: 80, extension: 'webp' }) }}" alt="Description Image" />
 ```
 
-Read more about the available options for `getThumb` on the [image resizer article](../services/resizer.md).
+Read more about the available options for `getThumbUrl` on the [image resizer article](../services/resizer.md).
+
+## Output and Download
+
+To output the file contents directly, use the `output` method, this return a [response object](../services/response-view.md) that will include the necessary headers for displaying the file in a browser.
+
+```php
+return $model->avatar->output();
+```
+
+You can output the contents to the browser by chaining the `send` method.
+
+```php
+$model->avatar->output()->send();
+```
+
+Return the `download` method to download the file as a response.
+
+```php
+return $model->avatar->download();
+```
 
 ## Usage Example
 
@@ -190,7 +214,7 @@ $post = Post::find(1);
 
 // Look for the featured image address, otherwise use a default one
 if ($post->featured_image) {
-    $featuredImage = $post->featured_image->getPath();
+    $featuredImage = $post->featured_image->getUrl();
 }
 else {
     $featuredImage = 'http://placehold.it/220x300';
@@ -232,7 +256,7 @@ class Gallery extends Model
     ];
 
     public $rules = [
-        'photos'   => 'required',
+        'photos' => 'required',
         'photos.*' => 'image|max:1000|dimensions:min_width=100,min_height=100'
     ];
 

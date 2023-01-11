@@ -13,6 +13,12 @@ To output the current date time value:
 {{ carbon('now') }}
 ```
 
+To specify a custom value:
+
+```
+{{ carbon('2024-01-01 02:13:23') }}
+```
+
 ## format
 
 The `format` method can be used to apply various formats.

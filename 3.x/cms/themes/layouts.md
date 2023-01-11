@@ -1,5 +1,5 @@
 ---
-subtitle: Define the scaffold for each page on your website.
+subtitle: Define the scaffold for your website pages.
 ---
 # Layouts
 
@@ -54,7 +54,7 @@ description = "Basic layout example"
 
 ## Using a Dynamic Page Title
 
-The `meta_title` and `meta_description` properties of a [page](pages.md) support parsing variables from the page lifecycle. The following layout template will set the page title based on the value of the active page.
+The `meta_title` and `meta_description` properties of a [page](pages.md) support parsing variables from the page life cycle. The following layout template will set the page title based on the value of the active page.
 
 ```html
 <html>
@@ -91,7 +91,7 @@ Placeholders allow pages to inject content to the layout. Placeholders are defin
 
 Pages can inject content to placeholders with the `{% put %}` and `{% endput %}` tags. The following example demonstrates a simple page template which injects a CSS link to the placeholder **head** defined in the previous example.
 
-```
+```twig
 url = "/my-page"
 layout = "default"
 ==
@@ -112,7 +112,7 @@ Layouts, like pages, can use any Twig features. Please refer to the [Dynamic Pag
 
 Inside the layout's PHP section you can define the following functions for handling the page execution life cycle: `onInit`, `onStart`, `onBeforePageStart` and `onEnd`.
 
-The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page processing. The `onBeforePageStart` function is executed after the layout [components](components.md) ran, but before the page's `onStart` function is executed. The `onEnd` function is executed after the page is rendered. The sequence the handlers are executed is following:
+The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed in the beginning of the page processing. The `onBeforePageStart` function is executed after the layout [components](./components.md) ran, but before the page's `onStart` function is executed. The `onEnd` function is executed after the page is rendered. The sequence the handlers are executed is following:
 
 1. Layout `onInit()` function.
 1. Page `onInit()` function.
@@ -123,6 +123,31 @@ The `onInit` function is executed when all components are initialized and before
 1. Page components `onRun()` method.
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
+
+### Priority Layouts
+
+Layouts can specify an `is_priorty` attribute in their settings to activate priority mode. In normal circumstances, the layout contents render after the page contents. This allows the page to manipulate layout properties, like the title or meta description. Visually the order looks like this.
+
+```text
+Layout (3) ← Page (1) → Partials (2)
+```
+
+In priority mode, the layout uses a more natural load order where the `{% page %}` tag renders inline with the layout contents. However, there is no support for placeholders when using this mode. The priority layout load order looks more like this.
+
+```text
+Layout (1) → Page (2) → Partials (3)
+```
+
+This is particularly useful when [building API endpoints](../resources/building-apis.md). In the following example, the page logic will not run since the page tag is never called.
+
+```twig
+description = "API Layout"
+is_priority = 1
+==
+{% if false %}
+    {% page %}
+{% endif %}
+```
 
 #### See Also
 

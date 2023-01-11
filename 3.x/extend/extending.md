@@ -21,9 +21,7 @@ Method | Description
 **registerFormWidgets()** | registers any [backend form widgets](./forms/form-widgets.md) supplied by this plugin.
 **registerReportWidgets()** | registers any [backend report widgets](./backend/report-widgets.md), including the dashboard widgets.
 **registerListColumnTypes()** | registers any [custom list column types](./lists/list-controller.md) supplied by this plugin.
-**registerMailLayouts()** | registers any [mail view layouts](./system/sending-mail.md) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](./system/sending-mail.md) supplied by this plugin.
-**registerMailPartials()** | registers any [mail view partials](./system/sending-mail.md) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](./system/scheduling.md) that are executed on a regular basis.
 **registerContentFields()** | registers [content fields](../extend/tailor-fields.md) that are used by Tailor blueprints.
 
@@ -257,16 +255,14 @@ class Topic extends ComponentBase
     {
         // ...
 
-        /*
-         * Extensibility
-         */
         $this->fireEvent('topic.post', [$post, $postUrl]);
+
         Event::fire('rainlab.forum.topic.post', [$this, $post, $postUrl]);
     }
 }
 ```
 
-Next this will demonstrate how to hook to this new event from inside the [Layout Execution Life Cycle](../cms/themes/layouts.md). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
+Next this will demonstrate how to hook this new event from inside the [Layout Execution Life Cycle](../cms/themes/layouts.md). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
 ```php
 [topic]
@@ -280,49 +276,6 @@ function onInit()
     });
 }
 ?>
-```
-
-### Extending the Backend Menu
-
-This example will replace the label for CMS and Pages in the backend with *...*.
-
-```php
-Event::listen('backend.menu.extendItems', function($manager) {
-
-    // Add main menu item
-    $manager->addMainMenuItems('October.Cms', [
-        'cms' => [
-            'label' => '...'
-        ]
-    ]);
-
-    // Add side menu item
-    $manager->addSideMenuItems('October.Cms', 'cms', [
-        'pages' => [
-            'label' => '...'
-        ]
-    ]);
-
-});
-```
-
-Similarly, we can remove the menu items using the same event.
-
-```php
-Event::listen('backend.menu.extendItems', function($manager) {
-
-    // Remove all items
-    $manager->removeMainMenuItem('October.Cms', 'cms');
-
-    // Remove single item
-    $manager->removeSideMenuItem('October.Cms', 'cms', 'pages');
-
-    // Remove two items
-    $manager->removeSideMenuItems('October.Cms', 'cms', [
-        'pages',
-        'partials'
-    ]);
-});
 ```
 
 #### See Also
