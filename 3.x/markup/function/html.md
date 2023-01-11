@@ -84,4 +84,6 @@ For example:
 
 Outputs a complete anchor link with obfuscated email.
 
+```twig
 {{ 'me@mysite.tld'|html_mailto }}
+```
