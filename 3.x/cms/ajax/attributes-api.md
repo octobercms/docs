@@ -84,9 +84,11 @@ Send a POST parameter `id` with value `7` across multiple elements.
 
 Send a GET parameter `page` with value `6` on the current request.
 
+```html
 <button data-request="onSetPage" data-request-query="{ page: 6 }">
     Page 6
 </button>
+```
 
 Including [file uploads](../../extend/services/request-input.md) with a request.
 
