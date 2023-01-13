@@ -31,6 +31,7 @@ Property | Description
 **showSorting** | allows sorting records, disables the structure when sorted. Default: `true`
 **maxDepth** | defines the maximum levels allowed for reordering. Default: `null`
 **dragRow** | allow dragging the entire row in addition to the reorder handle. Default: `true`
+**permissions** | the [permissions](../../extend/backend/permissions.md) that the current backend user must have to modify the structure. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 
 ## Supported Model Types
 
