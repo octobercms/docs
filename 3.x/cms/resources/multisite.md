@@ -36,23 +36,7 @@ The `sitePicker` component lets you manage links to other sites. The best place 
 {% set availableSites = sitePicker.sites %}
 ```
 
-The following is an example of displaying a dropdown that switches between sites. It is used in conjunction with the `this.site` [Twig property](../../markup/property/this-site.md).
-
-```twig
-<select class="form-control" onchange="window.location.assign(this.value)">
-    {% for site in sitePicker.sites %}
-        <option value="{{ site.url }}" {{ this.site.code == site.code ? 'selected' }}>{{ site.name }}</option>
-    {% endfor %}
-</select>
-```
-
-Another example is generating alternative page links using meta tags
-
-```twig
-{% for site in sitePicker.sites %}
-    <link rel="alternate" hreflang="{{ site.locale }}" href="{{ site.url }}" />
-{% endfor %}
-```
+View the [Site Picker component](../components/sitepicker.md) article to learn how to display site URLs and generating alternative page links.
 
 ## Browser Language Detection
 
