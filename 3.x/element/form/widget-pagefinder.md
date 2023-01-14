@@ -11,29 +11,31 @@ featured_page:
     type: pagefinder
 ```
 
-The resulting schema values may look like this.
-
-```
-october://blog-post@link/2?cms_page=blog/post
-```
-
-It uses the following format to store the selected value.
+The resulting value uses the following format.
 
 ```
 october://<TYPE>@link/<REFERENCE>?<PARAM>=<VALUE>
 ```
 
+For example the selected value stored may look like the following.
+
+```
+october://blog-post@link/2?cms_page=blog/post
+```
+
 ## Linking to Pages
 
-Use the `|link` [Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
+Use the [`|link` Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
 
 ```twig
 {{ featured_page|link }}
 ```
 
-::: tip
-View the [Link filter article](../../markup/filter/link.md) to learn more about processing page finder references.
-:::
+Use the [`|content` Twig filter](../../markup/tag/content.md) to process HTML markup and replace all links within the content.
+
+```twig
+{{ blog_html|content }}
+```
 
 ## Creating New Page Types
 
