@@ -77,7 +77,8 @@ Event::listen('cms.pageLookup.getTypeInfo', function($type) {
                 12 => 'Tutorials',
                 13 => 'Philosophy',
             ],
-            'cmsPages' => Page::withComponent('blogPosts')->all()
+            'cmsPages' => Page::withComponent('blogPosts')->all(),
+            'nesting' => false
         ];
     }
 });
@@ -85,7 +86,7 @@ Event::listen('cms.pageLookup.getTypeInfo', function($type) {
 
 #### References
 
-The `references` element is a list objects the page could refer to. For example, the **Blog Category** page type returns a list of the blog categories. Some object supports nesting, for example static pages. Other objects don't support nesting, for example the blog categories. The format of the `references` value depends on whether the references have subitems or not. The format for references without subitems is the following.
+The `references` element is a list objects the page could refer to. For example, the **Blog Category** page type returns a list of the blog categories. Some object supports nesting, for example, complete page listings. Other objects don't support nesting, for example, blog categories. The format of the `references` value depends on whether the references have subitems or not. The format for references without subitems is the following.
 
 ```php
 'references' => [
@@ -148,6 +149,14 @@ Use `inTheme` to find pages in another theme by passing the theme code.
 'cmsPages' => Page::inTheme('demo')->withComponent('blogPosts')->all();
 ```
 
+#### Nesting
+
+If the item type supports multiple items, the `nesting` array key should be set to `true`. This allows nested items to be displayed at the appropriate times, for example, nested items cannot be selected from editor menus.
+
+```php
+'nesting' => true,
+```
+
 ### Resolving Page Links
 
 When the page finder generates links, every item should **resolved** by the plugin that supplies the item type. The process of resolving involves generating the real item URL, determining whether the item is active, and generating the subitems (if required).
@@ -166,6 +175,10 @@ Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme)
     if ($type === 'blog-post') {
         return [...];
     }
+
+    if ($item->nesting || $item->type == 'all-blog-posts') {
+        return [...];
+    }
 });
 ```
 
@@ -179,13 +192,12 @@ return [
 ];
 ```
 
-It is also possible for a resolved page link to return multiple items. For example, an **All Pages** item type wouldn't have a specific page to point to since it can have multiple links. In these cases, the items should be listed in the `items` element, along with setting `nesting` to `true`.
+It is also possible for a resolved page link to return multiple items. For example, an **All Pages** item type wouldn't have a specific page to point to since it can have multiple links. In these cases, the items should be listed in the `items` element. The `items` element should only be provided if the menu item's `nesting` property is `true`.
 
 ```php
 return [
     'url' => 'https://example.tld/blog/category/another-category',
     'isActive' => true,
-    'nesting' => true,
     'items' => [
         [
             'title' => 'Another category',
