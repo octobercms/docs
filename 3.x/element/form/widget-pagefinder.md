@@ -54,12 +54,22 @@ public function boot()
 
 ### Registering New Page Types
 
-The `cms.pageLookup.listTypes` event handler returns a list of pages types supported by the plugin The handler should return an associative array with the type codes in indexes and type names in values. It's highly recommended to use the plugin name in the type codes, to avoid conflicts with other page type providers. For example:
+The `cms.pageLookup.listTypes` event handler returns a list of pages types supported by the plugin. The handler should return an associative array with the type codes in indexes and type names in values. It's highly recommended to use the plugin name in the type codes, to avoid conflicts with other page type providers. For example:
 
 ```php
 Event::listen('cms.pageLookup.listTypes', function() {
     return [
         'blog-post' => 'Blog Post'
+    ];
+});
+```
+
+For pages types that support nested subitems, such as linking to all blog posts, the type name value should be an array where the last item is set to `true`. This will exclude it from scenarios where only one link can be selected. The following marks the **blog-posts** type with nesting support.
+
+```php
+Event::listen('cms.pageLookup.listTypes', function() {
+    return [
+        'blog-posts' => ['All Blog Posts', true]
     ];
 });
 ```
@@ -77,8 +87,7 @@ Event::listen('cms.pageLookup.getTypeInfo', function($type) {
                 12 => 'Tutorials',
                 13 => 'Philosophy',
             ],
-            'cmsPages' => Page::withComponent('blogPosts')->all(),
-            'nesting' => false
+            'cmsPages' => Page::withComponent('blogPosts')->all()
         ];
     }
 });
@@ -149,14 +158,6 @@ Use `inTheme` to find pages in another theme by passing the theme code.
 'cmsPages' => Page::inTheme('demo')->withComponent('blogPosts')->all();
 ```
 
-#### Nesting
-
-If the item type supports multiple items, the `nesting` array key should be set to `true`. This allows nested items to be displayed at the appropriate times, for example, nested items cannot be selected from editor menus.
-
-```php
-'nesting' => true,
-```
-
 ### Resolving Page Links
 
 When the page finder generates links, every item should **resolved** by the plugin that supplies the item type. The process of resolving involves generating the real item URL, determining whether the item is active, and generating the subitems (if required).
@@ -164,7 +165,7 @@ When the page finder generates links, every item should **resolved** by the plug
 The `cms.pageLookup.resolveItem` event handler resolves page information and returns the actual item URL, title, an indicator whether the item is currently active, and subitems, if any. The event handler takes four arguments:
 
 - `$type` - the item type name. Plugins must only handle item types they provide and ignore other types.
-- `$item` - the item object (`Cms\Models\PageLookupItem`). The item object represents the item configuration provided by the user. The object has the following properties: `title`, `type`, `reference`, `cmsPage`, `nesting`.
+- `$item` - the item object (`Cms\Models\PageLookupItem`). The item object represents the item configuration provided by the user. The object has the following properties: `title`, `type`, `reference`, `cmsPage`.
 - `$url` - specifies the current absolute URL, in lower case. Always use the `Url::to()` helper to generate item links and compare them with the current URL.
 - `$theme` - the current theme object (`Cms\Classes\Theme`).
 
@@ -176,7 +177,7 @@ Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme)
         return [...];
     }
 
-    if ($item->nesting || $item->type == 'all-blog-posts') {
+    if ($item->type == 'all-blog-posts') {
         return [...];
     }
 });
@@ -192,7 +193,7 @@ return [
 ];
 ```
 
-It is also possible for a resolved page link to return multiple items. For example, an **All Pages** item type wouldn't have a specific page to point to since it can have multiple links. In these cases, the items should be listed in the `items` element. The `items` element should only be provided if the menu item's `nesting` property is `true`.
+It is also possible for a resolved page link to return multiple items. For example, an **All Pages** item type wouldn't have a specific page to point to since it can have multiple links. In these cases, the items should be listed in the `items` element. The `items` element should only be provided for items marked as nested.
 
 ```php
 return [
