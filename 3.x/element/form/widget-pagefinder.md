@@ -17,6 +17,10 @@ The selected value is stored using the following format.
 october://<TYPE>@link/<REFERENCE>?<PARAM>=<VALUE>
 ```
 
+Option | Description
+------------- | -------------
+**singleMode** | only allows items to be selected that resovle to a single URL. Default: `false`
+
 ## Linking to Pages
 
 Use the [`|link` Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
