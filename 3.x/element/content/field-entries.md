@@ -79,3 +79,22 @@ class ScopeHelper
     }
 }
 ```
+
+## List Column Display
+
+By default, the entries field will display as a hyperlink to the related record.
+
+### Display as a Counter
+
+To display the list column to show a counter of related records, you may use the following [column configuration](../list-columns.md). The `relation` property should be set to the field name, with `relationCount` set to `true` and a `number` column type.
+
+```yaml
+categories:
+    label: Categories
+    type: entries
+    # ...
+    column:
+        relation: categories
+        relationCount: true
+        type: number
+```
