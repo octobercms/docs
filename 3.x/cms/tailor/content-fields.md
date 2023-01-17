@@ -167,6 +167,14 @@ fields:
         placeholder: Event Title
 ```
 
+In some cases the `title` field may not be required, such as using a [single blueprint](./blueprints.md),you may set the `hidden` property to `true`. Hiding the title will disable the in-built validation for this field.
+
+```yaml
+fields:
+    title:
+        hidden: true
+```
+
 #### See Also
 
 ::: also
