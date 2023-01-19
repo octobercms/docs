@@ -23,3 +23,15 @@ price:
 ::: tip
 The `format` property follows the formatting rules of the [PHP sprintf() function](https://secure.php.net/manual/en/function.sprintf.php)
 :::
+
+## Counting Relations
+
+The `number` column type is commonly used alongside the `relationCount` property to count the number of related records. The following definition will count the number of records associated to **users** relation of the model.
+
+```yaml
+users_count:
+    label: Users
+    type: number
+    relation: users
+    relationCount: true
+```

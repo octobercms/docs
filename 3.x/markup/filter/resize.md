@@ -43,3 +43,23 @@ For example:
 ```twig
 {{ '/plugins/acme/blog/assets/images/someimage.png'|resize(...) }}
 ```
+
+## PHP Interface
+
+You may resize images in PHP using the `System\Classes\ResizeImages` and `resize` method. The return value is a URL location to the resized image.
+
+```php
+ResizeImages::resize('path/to/asset.jpg');
+```
+
+The method accepts a width (second argument), height (third argument) and [resizer options](../../extend/services/resizer.md) (fourth argument).
+
+```php
+ResizeImages::resize('path/to/asset.jpg', 800, 600, ['mode' => 'crop']);
+```
+
+#### See Also
+
+::: also
+* [Resizer Service](../../extend/services/resizer.md)
+:::

@@ -48,7 +48,7 @@ When the `multiple` attribute is included with the file input, the `files()` hel
 ```html
 <div>
     <label>Multi File</label>
-    <input name="multi_file" type="file" multiple>
+    <input name="multi_file[]" type="file" multiple>
 </div>
 ```
 

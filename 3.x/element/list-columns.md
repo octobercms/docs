@@ -127,9 +127,9 @@ To display a column that shows the number of related records, use the `relationC
 ```yaml
 users_count:
     label: Users
+    type: number
     relation: users
     relationCount: true
-    type: number
 ```
 
 ::: warning

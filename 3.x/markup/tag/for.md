@@ -65,12 +65,14 @@ The `..` operator can take any expression at both sides:
 
 ## Adding a Condition
 
-Unlike in PHP there is no function to `break` or `continue` in a loop, however you can still filter the collection. The following example skips all the `users` which are not active:
+Unlike in PHP there is no function to `break` or `continue` in a loop, however you can still filter the collection. The following example skips all the `users` that are not active.
 
 ```twig
 <ul>
-    {% for user in users if user.active %}
-        <li>{{ user.username }}</li>
+    {% for user in users %}
+        {% if user.active %}
+            <li>{{ user.username }}</li>
+        {% endif %}
     {% endfor %}
 </ul>
 ```

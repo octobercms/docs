@@ -11,29 +11,29 @@ featured_page:
     type: pagefinder
 ```
 
-The resulting schema values may look like this.
-
-```
-october://blog-post@link/2?cms_page=blog/post
-```
-
-It uses the following format to store the selected value.
+The selected value is stored using the following format.
 
 ```
 october://<TYPE>@link/<REFERENCE>?<PARAM>=<VALUE>
 ```
 
+Option | Description
+------------- | -------------
+**singleMode** | only allows items to be selected that resovle to a single URL. Default: `false`
+
 ## Linking to Pages
 
-Use the `|link` [Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
+Use the [`|link` Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
 
 ```twig
 {{ featured_page|link }}
 ```
 
-::: tip
-View the [Link filter article](../../markup/filter/link.md) to learn more about processing page finder references.
-:::
+Use the [`|content` Twig filter](../../markup/tag/content.md) to process HTML markup and replace all links within the content.
+
+```twig
+{{ blog_html|content }}
+```
 
 ## Creating New Page Types
 
@@ -58,12 +58,22 @@ public function boot()
 
 ### Registering New Page Types
 
-The `cms.pageLookup.listTypes` event handler returns a list of pages types supported by the plugin The handler should return an associative array with the type codes in indexes and type names in values. It's highly recommended to use the plugin name in the type codes, to avoid conflicts with other page type providers. For example:
+The `cms.pageLookup.listTypes` event handler returns a list of pages types supported by the plugin. The handler should return an associative array with the type codes in indexes and type names in values. It's highly recommended to use the plugin name in the type codes, to avoid conflicts with other page type providers. For example:
 
 ```php
 Event::listen('cms.pageLookup.listTypes', function() {
     return [
         'blog-post' => 'Blog Post'
+    ];
+});
+```
+
+For pages types that support nested subitems, such as linking to all blog posts, the type name value should be an array where the last item is set to `true`. This will exclude it from scenarios where only one link can be selected. The following marks the **blog-posts** type with nesting support.
+
+```php
+Event::listen('cms.pageLookup.listTypes', function() {
+    return [
+        'blog-posts' => ['All Blog Posts', true]
     ];
 });
 ```
@@ -81,13 +91,15 @@ Event::listen('cms.pageLookup.getTypeInfo', function($type) {
                 12 => 'Tutorials',
                 13 => 'Philosophy',
             ],
-            'cmsPages' => Page::withComponent('blogPosts')->all();
+            'cmsPages' => Page::withComponent('blogPosts')->all()
         ];
     }
 });
 ```
 
-The `references` element is a list objects the page could refer to. For example, the **Blog Category** page type returns a list of the blog categories. Some object supports nesting, for example static pages. Other objects don't support nesting, for example the blog categories. The format of the `references` value depends on whether the references have subitems or not. The format for references without subitems is the following.
+#### References
+
+The `references` element is a list objects the page could refer to. For example, the **Blog Category** page type returns a list of the blog categories. Some object supports nesting, for example, complete page listings. Other objects don't support nesting, for example, blog categories. The format of the `references` value depends on whether the references have subitems or not. The format for references without subitems is the following.
 
 ```php
 'references' => [
@@ -128,6 +140,8 @@ $iterator = function($records) use (&$iterator) {
 return ['references' => $iterator($records)];
 ```
 
+#### CMS Pages
+
 The `cmsPages` is a list of CMS pages that can display objects supported by the page type. For example, for the **Blog Category** item type the page list contains pages that host the `blogPosts` component. That component can display a blog category contents. The `cmsPages` element should be an array of the `Cms\Classes\Page` objects.
 
 The following `withComponent` method will find all pages that use the `blogPosts` component, for the active theme.
@@ -148,7 +162,7 @@ Use `inTheme` to find pages in another theme by passing the theme code.
 'cmsPages' => Page::inTheme('demo')->withComponent('blogPosts')->all();
 ```
 
-##### Resolving Page Links
+### Resolving Page Links
 
 When the page finder generates links, every item should **resolved** by the plugin that supplies the item type. The process of resolving involves generating the real item URL, determining whether the item is active, and generating the subitems (if required).
 
@@ -159,21 +173,31 @@ The `cms.pageLookup.resolveItem` event handler resolves page information and ret
 - `$url` - specifies the current absolute URL, in lower case. Always use the `Url::to()` helper to generate item links and compare them with the current URL.
 - `$theme` - the current theme object (`Cms\Classes\Theme`).
 
-The event handler should return an array.
+The event handler should check for a matched `type` and return an array.
 
 ```php
 Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme) {
-    if ($type == 'blog-post') {
-        return [
-            'title' => 'Some Category',
-            'url' => 'https://example.tld/blog/category/some-category',
-            'isActive' => true,
-        ];
+    if ($type === 'blog-post') {
+        return [...];
+    }
+
+    if ($item->type == 'all-blog-posts') {
+        return [...];
     }
 });
 ```
 
-The `items` array key determines if the item contains subitems.
+The `url` and `isActive` elements are required for items that point to a specific page.
+
+```php
+return [
+    'title' => 'Some Category',
+    'url' => 'https://example.tld/blog/category/some-category',
+    'isActive' => true,
+];
+```
+
+It is also possible for a resolved page link to return multiple items. For example, an **All Pages** item type wouldn't have a specific page to point to since it can have multiple links. In these cases, the items should be listed in the `items` element. The `items` element should only be provided for items marked as nested.
 
 ```php
 return [
@@ -194,13 +218,16 @@ return [
 ];
 ```
 
-The `url` and `isActive` elements are required for items that point to a specific page, but it's not always the case. For example, an **All Pages** item type wouldn't have a specific page to point to since it generates multiple items. In this case, the items should be listed in the `items` element.
+#### Usage Example
 
 The following is a basic example of resolving a page URL by looking up a model and page URL using the `Cms\Classes\Controller` class and `pageUrl` method.
 
 ```php
-function($type, $item, $url, $theme)
-{
+Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme) {
+    if ($type !== 'my-model') {
+        return;
+    }
+
     $model = MyModel::find($item->reference);
     $controller = new Controller($theme);
 
@@ -209,10 +236,13 @@ function($type, $item, $url, $theme)
         'slug' => $model->slug
     ]);
 
-    return $url;
-}
+    return [
+        'title' => $model->title,
+        'url' => $url
+    ];
+})
 ```
 
 ::: tip
-As the resolving process occurs every time when the front-end page is rendered, it's a good idea to cache all the information required for resolving items, if that's possible.
+As the resolving process occurs every time the frontend page is rendered, it is a good idea to cache all the information required for resolving items, if possible.
 :::

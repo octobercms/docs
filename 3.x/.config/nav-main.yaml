@@ -293,6 +293,7 @@
         - components/collection
         - components/global
         - components/resources
+        - components/sitepicker
 -
     title: AJAX
     children:

@@ -1,7 +1,7 @@
 ---
 subtitle: Inspector Type
 ---
-## Object List
+# Object List
 
 The `objectList` inspector type allows users to create multiple objects with a pre-defined structure. For example, it could be used for creating a list of person, where each person has a name and address.
 
