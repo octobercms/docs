@@ -75,26 +75,3 @@ echo UserSetting::get('api_key');
 // Get a value and return a default value if it doesn't exist
 echo UserSetting::get('is_activated', true);
 ```
-
-## Integration with Multisite
-
-Settings models can provide different configuration values for each site defined by [multisite configuration](../../cms/resources/multisite.md). To enable multisite, include the `October\Rain\Database\Traits\Multisite` [trait](../database/traits.md) inside the model and define a `$propagatable` property, which can specify fields that propagate across all sites.
-
-```php
-namespace Acme\Demo\Models;
-
-class UserSetting extends \Model
-{
-    use \October\Rain\Database\Traits\Multisite;
-
-    public $implement = [
-        \System\Behaviors\SettingsModel::class
-    ];
-
-    public $settingsCode = 'acme_demo_settings';
-
-    public $settingsFields = 'fields.yaml';
-
-    protected $propagatable = [];
-}
-```
