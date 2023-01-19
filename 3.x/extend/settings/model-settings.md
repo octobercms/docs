@@ -1,40 +1,10 @@
 # Model Settings
 
+Model settings keep values stored in the database and can be overriden by the user interface in the backend panel.
+
 ## Database Settings
 
-Plugins can use database-driven configuration using models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the backend settings form. You don't need to create a database table and a controller for creating the backend settings forms based on the settings model.
-
-The settings model classes should extend the Model class and implement the `System\Behaviors\SettingsModel` behavior. The settings models, like any other models, should be defined in the **models** subdirectory of the plugin directory. The model from the next example should be defined in the `plugins/acme/demo/models/UserSetting.php` file.
-
-```php
-namespace Acme\Demo\Models;
-
-use Model;
-
-class UserSetting extends Model
-{
-    /**
-     * @var array implement these behaviors
-     */
-    public $implement = [
-        \System\Behaviors\SettingsModel::class
-    ];
-
-    /**
-     * @var string settingsCode unique to this model
-     */
-    public $settingsCode = 'acme_demo_settings';
-
-    /**
-     * @var string settingsFields configuration
-     */
-    public $settingsFields = 'fields.yaml';
-}
-```
-
-The `$settingsCode` property is required for settings models. It defines the unique settings key which is used for saving the settings to the database.
-
-The `$settingsFields` property is required if you are going to build a backend settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [form controller article](../forms/form-controller.md). The YAML file should be placed to the directory with the name matching the model class name in lowercase. For the model from the previous example the directory structure would look like this:
+Plugins can use database-driven configuration using models for storing settings in the database by implementing the `SettingsModel` behavior in a model class. This model can be used directly for creating the backend settings form. You don't need to create a database table and a controller for creating the backend settings forms based on the settings model. An example of a model setting directory structure:
 
 ::: dir
 ├── plugins
@@ -48,6 +18,29 @@ The `$settingsFields` property is required if you are going to build a backend s
 :::
 
 Settings models can be registered to appear on the [settings area in the backend panel](./settings.md), but it is not a requirement - you can set and read settings values like any other model.
+
+### Model Class Definition
+
+The settings model classes should extend the Model class and implement the `System\Behaviors\SettingsModel` [behavior](../system/behaviors.md). The settings models, like any other models, should be defined in the **models** subdirectory of the plugin directory. The model from the next example should be defined in the **plugins/acme/demo/models/UserSetting.php** file.
+
+```php
+namespace Acme\Demo\Models;
+
+class UserSetting extends \Model
+{
+    public $implement = [
+        \System\Behaviors\SettingsModel::class
+    ];
+
+    public $settingsCode = 'acme_demo_settings';
+
+    public $settingsFields = 'fields.yaml';
+}
+```
+
+The `$settingsCode` property is required for settings models. It defines the unique settings key which is used for saving the settings to the database.
+
+The `$settingsFields` property is required if you are going to build a backend settings form based on the model. The property specifies a name of the YAML file containing the form fields definition. The form fields are described in the [form controller article](../forms/form-controller.md). The YAML file should be placed to the directory with the name matching the model class name in lowercase.
 
 ## Writing to a Settings Model
 
@@ -81,4 +74,27 @@ echo UserSetting::get('api_key');
 
 // Get a value and return a default value if it doesn't exist
 echo UserSetting::get('is_activated', true);
+```
+
+## Integration with Multisite
+
+Settings models can provide different configuration values for each site defined by [multisite configuration](../../cms/resources/multisite.md). To enable multisite, include the `October\Rain\Database\Traits\Multisite` [trait](../database/traits.md) inside the model and define a `$propagatable` property, which can specify fields that propagate across all sites.
+
+```php
+namespace Acme\Demo\Models;
+
+class UserSetting extends \Model
+{
+    use \October\Rain\Database\Traits\Multisite;
+
+    public $implement = [
+        \System\Behaviors\SettingsModel::class
+    ];
+
+    public $settingsCode = 'acme_demo_settings';
+
+    public $settingsFields = 'fields.yaml';
+
+    protected $propagatable = [];
+}
 ```
