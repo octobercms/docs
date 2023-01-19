@@ -32,7 +32,7 @@ The `create:controller` command generates a controller, configuration and view f
 php artisan create:controller Acme.Blog Posts
 ```
 
-Controller classes must extend the `\Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../system/plugins.md). The most basic representation of a Controller used inside a Plugin looks like this.
+Controller classes must extend the `Backend\Classes\Controller` class. As any other plugin class, controllers should belong to the [plugin namespace](../system/plugins.md). The most basic representation of a Controller used inside a Plugin looks like this.
 
 ```php
 namespace Acme\Blog\Controllers;

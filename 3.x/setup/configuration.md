@@ -46,7 +46,7 @@ If a configuration file must be loaded based on the current application environm
 SetEnv APP_ENV "staging"
 ```
 
-When the `APP_ENV` variable is defined, the platform attempts to load a .env file with the suffix matching the environment name. e.g. `.env.staging`. If the file does not exist, there will be no error. If both `.env.staging` and `.env` files exist, the `.env` file is completely ignored.
+When the `APP_ENV` variable is defined, the platform attempts to load a .env file with the suffix matching the environment name. e.g. **.env.staging**. If the file does not exist, there will be no error. If both **.env.staging** and **.env** files exist, the **.env** file is completely ignored.
 
 ## Common Configuration Parameters
 
