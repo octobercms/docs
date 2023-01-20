@@ -38,7 +38,7 @@ function onSignup()
 }
 ```
 
-### Redirecting to a CMS Page
+## Redirecting to a CMS Page
 
 The `Cms` facade and `redirect` method can be used to redirect to specific CMS page (first argument) and any optional route parameters (second argument).
 
@@ -73,6 +73,44 @@ This function accepts a URL or a CMS page name.
     {% do redirect('/signup-complete') %}
 {% endif %}
 ```
+
+## Redirects in AJAX
+
+The [AJAX framework](../ajax/introduction.md) supports redirects with the `data-request-redirect` attribute. The attribute value should specify a URL location to redirect after a successful AJAX request completes.
+
+```html
+<button
+    data-request="onAjax"
+    data-request-redirect="/signup-complete">
+    Save and Redirect
+</button>
+```
+
+The [turbo router](../ajax/turbo-router.md) supports historical redirects with the `data-browser-redirect` attribute. The attribute can be attached to any hyperlink or AJAX request element, and only triggers when there is a previous browser history state.
+
+The attribute value can be set to `referrer` to redirect to the previous URL, when available.
+
+```html
+<button
+    data-request="onRedirect"
+    data-browser-redirect="referrer">
+    Save and Back
+</button>
+```
+
+The attribute value can be set to `back` to navigate using the back button instead.
+
+```html
+<a
+    href="/home"
+    data-browser-redirect="back">
+    Go Back
+</a>
+```
+
+::: warning
+The `data-browser-redirect` attribute should be used in combination with a traditional redirect as fallback location.
+:::
 
 #### See Also
 
