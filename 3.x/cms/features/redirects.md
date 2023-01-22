@@ -86,7 +86,7 @@ The [AJAX framework](../ajax/introduction.md) supports redirects with the `data-
 </button>
 ```
 
-The [turbo router](../ajax/turbo-router.md) supports historical redirects with the `data-browser-redirect-back` attribute. The attribute can be attached to any hyperlink or AJAX request element, and only triggers when there is a previous browser history state.
+The [turbo router](../ajax/turbo-router.md) supports historical redirects with the `data-browser-redirect-back` attribute. The attribute can be attached to any hyperlink or AJAX request element, overriding a redirect response, and only triggers when there is a previous browser history state.
 
 ```html
 <button
