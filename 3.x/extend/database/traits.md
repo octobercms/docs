@@ -577,6 +577,14 @@ In some cases, all records must exist for every site, such as categories and tag
 protected $propagatableSync = true;
 ```
 
+#### Saving Models
+
+Models saved with the multisite trait do not propagate by default. Use the `savePropagate` method to ensure the propagation rules take effect.
+
+```php
+$model->savePropagate();
+```
+
 ### Revisionable
 
 October CMS models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](./relations.md) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
