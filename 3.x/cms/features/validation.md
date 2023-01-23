@@ -3,7 +3,7 @@ subtitle: Validate form submissions using the AJAX framework.
 ---
 # Validation
 
-Validating forms checks the user input against a set of predfined rules.
+Validating forms checks the user input against a set of predefined rules.
 
 ## Performing Validation
 
