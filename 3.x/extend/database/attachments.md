@@ -66,16 +66,22 @@ $model->avatar = (new File)->fromUrl('https://example.tld/avatar.jpg', 'customna
 
 ### Handling Multiple Attachments
 
-For multiple attach relations (`$attachMany`), you may use the `create` method on the relationship instead, notice the file object is associated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
+For multiple attach relations (`$attachMany`), you can pass an array of values from the `files()` function.
 
 ```php
-$model->avatar()->create(['data' => files('file_input')]);
+$model->photos = (array) files('multi_file');
+```
+
+You may use the `create` method to append a file on an existing relationship instead, notice the file object is associated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
+
+```php
+$model->photos()->create(['data' => files('file_input')]);
 ```
 
 You may use the `add` method on the relationship to work directly with a `System\Models\File` model.
 
 ```php
-$model->avatar()->add((new File)->fromFile('/path/to/somefile.jpg'));
+$model->photos()->add((new File)->fromFile('/path/to/somefile.jpg'));
 ```
 
 Alternatively, you can prepare a File model before hand, then manually associate the relationship later. Notice the `is_public` attribute must be set explicitly using this approach.
@@ -86,7 +92,7 @@ $file->data = files('file_input');
 $file->is_public = true;
 $file->save();
 
-$model->avatar()->add($file);
+$model->photos()->add($file);
 ```
 
 ## Viewing Attachments
