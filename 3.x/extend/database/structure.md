@@ -326,7 +326,7 @@ class SeedUsersTable extends Seeder
     public function run()
     {
         $user = User::create([
-            'email' => 'user@example.com',
+            'email' => 'user@example.tld',
             'login' => 'user',
             'password' => 'password123',
             'password_confirmation' => 'password123',
@@ -344,7 +344,7 @@ Alternatively, the same can be achieved using the `Db::table` [query builder](./
 public function run()
 {
     $user = Db::table('users')->insert([
-        'email' => 'user@example.com',
+        'email' => 'user@example.tld',
         'login' => 'user',
         // ...
     ]);

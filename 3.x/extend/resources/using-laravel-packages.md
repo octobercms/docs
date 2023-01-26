@@ -53,6 +53,6 @@ public function register()
 
 Laravel packages that interact with the database will often include their own database migrations and Eloquent models. You should duplicate these migrations and models to your plugin's directory.
 
-Be sure to change the Model classes to extend the base `\October\Rain\Database\Model` class instead of the base Laravel Eloquent model class to take advantage of the extended technology features found in October CMS.
+Be sure to change the Model classes to extend the base `October\Rain\Database\Model` class instead of the base Laravel Eloquent model class to take advantage of the extended technology features found in October CMS.
 
 It is also a good idea to rename the database tables and prefix them with your author code and plugin name. For example, a table with the name `posts` should be renamed to `rainlab_blog_posts`.

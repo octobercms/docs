@@ -589,7 +589,7 @@ The query builder also provides an `insert` method for inserting records into th
 
 ```php
 Db::table('users')->insert(
-    ['email' => 'john@example.com', 'votes' => 0]
+    ['email' => 'john@example.tld', 'votes' => 0]
 );
 ```
 
@@ -597,8 +597,8 @@ You may even insert several records into the table with a single call to `insert
 
 ```php
 Db::table('users')->insert([
-    ['email' => 'taylor@example.com', 'votes' => 0],
-    ['email' => 'dayle@example.com', 'votes' => 0]
+    ['email' => 'taylor@example.tld', 'votes' => 0],
+    ['email' => 'dayle@example.tld', 'votes' => 0]
 ]);
 ```
 
@@ -608,7 +608,7 @@ If the table has an auto-incrementing id, use the `insertGetId` method to insert
 
 ```php
 $id = Db::table('users')->insertGetId(
-    ['email' => 'john@example.com', 'votes' => 0]
+    ['email' => 'john@example.tld', 'votes' => 0]
 );
 ```
 
@@ -635,7 +635,7 @@ The `updateOrInsert` method will first attempt to locate a matching database rec
 ```php
 Db::table('users')
     ->updateOrInsert(
-        ['email' => 'john@example.com', 'name' => 'John'],
+        ['email' => 'john@example.tld', 'name' => 'John'],
         ['votes' => '2']
     );
 ```

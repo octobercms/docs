@@ -44,7 +44,7 @@ Not all plugin directories are required. The only required file is the **Plugin.
 
 ### Plugin Namespaces
 
-Plugin namespaces are essential, especially if you are going to publish your plugins on the [October CMS Marketplace](https://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `\JohnSmith\Blog`.
+Plugin namespaces are essential, especially if you are going to publish your plugins on the [October CMS Marketplace](https://octobercms.com/plugins). When you register as an author on the Marketplace you will be asked for the author code which should be used as a root namespace for all your plugins. You can specify the author code only once, when you register. The default author code offered by the Marketplace consists of the author first and last name: JohnSmith. The code cannot be changed after you register. All your plugin namespaces should be defined under the root namespace, for example `JohnSmith\Blog`.
 
 ## Registration File
 
@@ -59,7 +59,7 @@ The **Plugin.php** file, called the plugin registration file, is an initializati
 1. Information about the plugin, its name, and author.
 1. Registration methods for extending the CMS.
 
-Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `\System\Classes\PluginBase` class. The only required method of the plugin registration class is `pluginDetails`. An example plugin registration file is below.
+Registration scripts should use the plugin namespace. The registration script should define a class with the name `Plugin` that extends the `System\Classes\PluginBase` class. The only required method of the plugin registration class is `pluginDetails`. An example plugin registration file is below.
 
 ```php
 namespace Acme\Blog;

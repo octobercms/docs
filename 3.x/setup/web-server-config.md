@@ -81,7 +81,7 @@ In some cases you may need to uncomment the [RewriteBase directive](https://http
 # RewriteBase /
 ```
 
-If you have installed October CMS to a subdirectory, add its name to the directive value. In this way, you can have URLs like example.com/subdirectory/page.
+If you have installed October CMS to a subdirectory, add its name to the directive value. In this way, you can have URLs like example.tld/subdirectory/page.
 
 ```text
 # RewriteBase /subdirectory/
@@ -151,7 +151,7 @@ location ~ ^/themes/.*/resources { try_files $uri 404; }
 Paste the following code in the Lighttpd sites configuration file and change the `host address` and `server.document-root` to match your project’s location.
 
 ```text
-$HTTP["host"] =~ "domain.example.com" {
+$HTTP["host"] =~ "domain.example.tld" {
     server.document-root = "/var/www/example/"
 
     url.rewrite-once = (

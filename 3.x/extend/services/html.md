@@ -160,7 +160,7 @@ After creating a label, any form element you create with a name matching the lab
 #### Specifying a default value
 
 ```php
-<?= Form::text('email', 'emailaddress@example.com') ?>
+<?= Form::text('email', 'emailaddress@example.tld') ?>
 ```
 
 ::: tip

@@ -275,8 +275,8 @@ As previously mentioned, the third argument given to the `send` method is a `Clo
 
 ```php
 Mail::send('acme.blog::mail.welcome', $vars, function($message) {
-    $message->from('us@example.com', 'October');
-    $message->to('foo@example.com')->cc('bar@example.com');
+    $message->from('us@example.tld', 'October');
+    $message->to('foo@example.tld')->cc('bar@example.tld');
 });
 ```
 
