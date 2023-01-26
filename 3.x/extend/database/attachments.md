@@ -220,6 +220,7 @@ if ($fileFromPost) {
 Display the uploaded file on a page:
 
 ```php
+<?php
 // Find the Blog Post model again
 $post = Post::find(1);
 
@@ -230,6 +231,7 @@ if ($post->featured_image) {
 else {
     $featuredImage = 'http://placehold.it/220x300';
 }
+?>
 
 <img src="<?= $featuredImage ?>" alt="Featured Image" />
 ```
