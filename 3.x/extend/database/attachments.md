@@ -21,10 +21,10 @@ public $attachMany = [
 ```
 
 ::: warning
-Make sure that your model's database table does not already have an attribute that uses the same name as your attachment relationship. If it does, it will cause a naming conflict and create problems.
+To avoid a naming collision, make sure that your model's database table does not already have an attribute that uses the same name as your attachment relationship.
 :::
 
-Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the *public* argument to `false`.
+Protected attachments are uploaded to the application's **uploads/protected** directory which is not accessible for the direct access from the Web. A protected file attachment is defined by setting the `public` property to `false`.
 
 ```php
 public $attachOne = [
@@ -34,59 +34,64 @@ public $attachOne = [
 
 ## Creating New Attachments
 
-For singular attach relations (`$attachOne`), you may create an attachment directly via the model relationship, by setting its value using the `Input::file` method, which reads the file data from an input upload.
+For singular attach relations (`$attachOne`), you may create an attachment directly via the model relationship, by setting its value using the `files` function, which reads the file data from an input upload.
 
 ```php
-$model->avatar = Input::file('file_input');
+$model->avatar = files('file_input');
 ```
 
-You may also pass a string to the `data` attribute that contains an absolute path to a local file.
+To associate a new file from a local path, use the `System\Models\File` model and `fromFile` method.
 
 ```php
-$model->avatar = '/path/to/somefile.jpg';
+$model->avatar = (new File)->fromFile('/path/to/somefile.jpg');
 ```
 
-Sometimes it may also be useful to create a `File` instance directly from (raw) data:
+To create a file directly from (raw) data, use the `fromData` method to pass the contents (first argument) and a file name (second argument).
 
 ```php
-$file = (new System\Models\File)->fromData('Some content', 'sometext.txt');
+$model->avatar = (new File)->fromData('Some content', 'sometext.txt');
 ```
+
+You can also add a file from a URL using the `fromUrl` method. To use this method, you need install cURL PHP Extension.
+
+```php
+$model->avatar = (new File)->fromUrl('https://example.tld/path/to/avatar.jpg');
+```
+
+Optionally, you may specify a custom file name (second argument).
+
+```php
+$model->avatar = (new File)->fromUrl('https://example.tld/avatar.jpg', 'customname.jpg');
+```
+
+### Handling Multiple Attachments
 
 For multiple attach relations (`$attachMany`), you may use the `create` method on the relationship instead, notice the file object is associated to the `data` attribute. This approach can be used for singular relations too, if you prefer.
 
 ```php
-$model->avatar()->create(['data' => Input::file('file_input')]);
+$model->avatar()->create(['data' => files('file_input')]);
+```
+
+You may use the `add` method on the relationship to work directly with a `System\Models\File` model.
+
+```php
+$model->avatar()->add((new File)->fromFile('/path/to/somefile.jpg'));
 ```
 
 Alternatively, you can prepare a File model before hand, then manually associate the relationship later. Notice the `is_public` attribute must be set explicitly using this approach.
 
 ```php
 $file = new System\Models\File;
-$file->data = Input::file('file_input');
+$file->data = files('file_input');
 $file->is_public = true;
 $file->save();
 
 $model->avatar()->add($file);
 ```
 
-You can also add a file from a URL. To work this method, you need install cURL PHP Extension.
-
-```php
-$file = new System\Models\File;
-$file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg');
-
-$user->avatar()->add($file);
-```
-
-Occasionally you may need to change a file name. You may do so by using second method parameter.
-
-```php
-$file->fromUrl('https://example.com/uploads/public/path/to/avatar.jpg', 'somefilename.jpg');
-```
-
 ## Viewing Attachments
 
-The `getUrl` method returns the full URL of an uploaded public file. The following code would print something like **example.com/uploads/public/path/to/avatar.jpg**.
+The `getUrl` method returns the full URL of an uploaded public file. The following code would print something like **example.tld/uploads/public/path/to/avatar.jpg**.
 
 ```php
 echo $model->avatar->getUrl();
@@ -259,8 +264,6 @@ class Gallery extends Model
         'photos' => 'required',
         'photos.*' => 'image|max:1000|dimensions:min_width=100,min_height=100'
     ];
-
-    /* some other code */
 }
 ```
 
