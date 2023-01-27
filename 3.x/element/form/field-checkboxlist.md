@@ -23,9 +23,9 @@ Property | Description
 **default** | a default value to use for new records.
 **quickselect** | show the quick selection buttons.
 **cssClass** | used for setting the options as inline.
+**inlineOptions** | display the options side-by-side instead of stacked, when less than 10 options.
 
 You may use the `default` property to set a default value, where the value is the key of the option.
-
 
 ```yaml
 permissions:
@@ -34,12 +34,12 @@ permissions:
     default: open_account
 ```
 
-Options can be displayed inline with each other instead of in separate rows by specifying **inline-options** as the `cssClass` on the field config.
+Options can be displayed inline with each other instead of in separate rows by setting the `inlineOptions` property to a `true` value. This only applies when there are less than 10 available options.
 
 ```yaml
 permissions:
     type: checkboxlist
-    cssClass: inline-options
+    inlineOptions: true
 ```
 
 A quick select menu with "Select All" and "Select None" buttons will become visible when the list has greater than 10 items. To explicitly enable these buttons, use the `quickselect` option.
