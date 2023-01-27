@@ -119,7 +119,7 @@ See the [file attachments article](../../extend/database/attachments.md) to lear
 #### See Also
 
 ::: also
-* [File Attachments](../../extend/database/attachments.md)
 * [Requests and Input](../../extend/services/request-input.md)
 * [Storage Disks](../../extend/services/storage.md)
+* [File Attachments](../../extend/database/attachments.md)
 :::

@@ -44,7 +44,7 @@ The button to trigger the modal is paired with an AJAX request to request the pa
     type="button"
     class="btn btn-primary"
     data-request="onAjax"
-    data-request-update="my-modal-content: '#siteModalContent'"
+    data-request-update="{ my-modal-content: '#siteModalContent' }"
     data-bs-toggle="modal"
     data-bs-target="#siteModal">
     Launch demo modal
