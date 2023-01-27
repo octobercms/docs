@@ -33,6 +33,16 @@ Property | Data
 **items** | an array containing generated child items, optional.
 **isActive** | set to true if the link is currently active.
 
+You may also request nested child items by passing the `nesting` option to `true` (second argument), which populates the `items` property on the result.
+
+```twig
+{% set resolved = link('october://...', { nesting: true }) %}
+
+{% for subitem in resolved.items %}
+    {{ subitem.url }}
+{% endfor %}
+```
+
 ## PHP Interface
 
 You may resolve links in PHP using the `Cms\Classes\PageLookup` class. The `url` method returns a string to the public URL.
@@ -48,3 +58,9 @@ $page = Cms\Classes\PageLookup::resolve('october://cms-page@link/about');
 
 echo $page->url;
 ```
+
+#### See Also
+
+::: also
+* [Page Finder Form Widget](../../element/form/widget-pagefinder.md)
+:::
