@@ -234,6 +234,7 @@ Event | Description
 **page:render** | triggered after the page is rendered. This is fired twice, once from cache and once again after requesting the new page content.
 **page:load** | triggered once after the initial page load and again every time a page is visited.
 **page:loaded** | identical to `page:load` except will wait for all newly added scripts to load.
+**page:updated** | similar to `DOMContentLoaded` except triggered only when a page is visited.
 **page:unload** | called when a previously loaded page should be disposed.
 
 ## Usage Examples
