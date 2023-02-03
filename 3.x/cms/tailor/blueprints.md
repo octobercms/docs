@@ -209,18 +209,18 @@ Property | Description
 
 ### Using the Mixin
 
-To include these fields in your entries, like any other form field, use the `type` of **mixin** and reference the UUID in the `source` property.
+To include these fields in your entries, like any other form field, use the `type` of **mixin** and reference the UUID or handle in the `source` property.
 
 ```yaml
-_location:
-    type: mixin
-    source: 6d6a5efa-3ce7-4b9d-bddc-ac48867552cb
-```
-
-You may also reference the mixin by its handle.
-
-```yaml
-_location:
+_location_fields:
     type: mixin
     source: Fields\Location
 ```
+
+See the [Mixin field](../../element/content/field-mixin.md) for more information on using mixins.
+
+#### See Also
+
+::: also
+* [Mixin Content Field](../../element/content/field-mixin.md)
+:::
