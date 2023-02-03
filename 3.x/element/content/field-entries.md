@@ -91,7 +91,7 @@ class ScopeHelper
 
 ## Defining the Inverse Relation
 
-In some cases you may wish to access the relationship in reverse, such as finding all posts that belong to a certain category. The `inverse` property can be used to link the relationship in the opposite direction.
+In some cases you may wish to access the relationship in reverse, such as finding all posts that belong to a certain category. The `inverse` property can be used to link the relationship in the opposite direction, where the property value is set to the field name in the source blueprint.
 
 For example, if a **Blog\Post** blueprint has a `categories` relationship already defined.
 
@@ -101,7 +101,7 @@ categories:
     source: Blog\Category
 ```
 
-The **Blog\Category** blueprint can include a `posts` field as the `inverse` of the `categories` field found in the `source` blueprint (above). The field can be excluded from forms by setting the `hidden` value to `true`, and this is optional.
+The **Blog\Category** blueprint can include a `posts` field as the `inverse` of the `categories` field found in the source blueprint (above). The field can be excluded from forms by setting the `hidden` value to `true`, and this is optional.
 
 ```yaml
 posts:
