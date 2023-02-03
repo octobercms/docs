@@ -165,7 +165,7 @@ public $hasOne = [
 ];
 ```
 
-#### Defining the Inverse of the Relation
+#### Defining the Inverse Relation
 
 Now that we can access the `Phone` model from our `User`. Let's do the opposite and define a relationship on the `Phone` model that will let us access the `User` that owns the phone. We can define the inverse of a `hasOne` relationship using the `$belongsTo` property:
 
@@ -255,7 +255,7 @@ public $hasMany = [
 ];
 ```
 
-#### Defining the inverse of the relation
+#### Defining the Inverse Relation
 
 Now that we can access all of a post's comments, let's define a relationship to allow a comment to access its parent post. To define the inverse of a `hasMany` relationship, define the `$belongsTo` property on the child model:
 
@@ -356,7 +356,7 @@ public $belongsToMany = [
 ];
 ```
 
-#### Defining the Inverse of the Relationship
+#### Defining the Inverse Relation
 
 To define the inverse of a many-to-many relationship, you simply place another `$belongsToMany` property on your related model. To continue our user roles example, let's define the `users` relationship on the `Role` model:
 
@@ -733,7 +733,7 @@ class Post extends Model
 }
 ```
 
-#### Defining the inverse of the relationship
+#### Defining the Inverse Relation
 
 Next, on the `Tag` model, you should define a relation for each of its related models. So, for this example, we will define a `posts` relation and a `videos` relation:
 
