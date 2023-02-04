@@ -136,7 +136,7 @@ This can be targeted using a StyleSheet attribute value selector.
     display: none;
 }
 
-form[data-ajax-progress=onPayment] .is-payment-loading {
+form[data-ajax-progress=onPay] .is-payment-loading {
     display: block;
 }
 ```
