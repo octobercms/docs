@@ -83,9 +83,43 @@ function onUploadFiles()
 }
 ```
 
+## Uploading to Models
+
+When working with models that are configured to use [file attachments](../../extend/database/attachments.md), including Tailor models that use the [File upload widget](../../element/form/widget-fileupload.md), you save file uploads directly on the model.
+
+The simplest approach is to set the attribute on the model directly using the `files()` helper. This supports singular and multiple file uploads.
+
+```php
+function onUploadFiles()
+{
+    $model = new MyModel;
+
+    $model->avatar = files('single_file');
+
+    $model->save();
+
+    // ...
+
+    Flash::success('File saved');
+}
+```
+
+You may also set the attribute to a `System\Models\File` model object directly for various use cases.
+
+```php
+$model->avatar = (new File)->fromFile('/path/to/somefile.jpg');
+
+$model->avatar = (new File)->fromData('Some content', 'sometext.txt');
+
+$model->avatar = (new File)->fromUrl('https://example.tld/path/to/avatar.jpg');
+```
+
+See the [file attachments article](../../extend/database/attachments.md) to learn more about working with model-based file attachments.
+
 #### See Also
 
 ::: also
 * [Requests and Input](../../extend/services/request-input.md)
 * [Storage Disks](../../extend/services/storage.md)
+* [File Attachments](../../extend/database/attachments.md)
 :::

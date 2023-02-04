@@ -111,7 +111,7 @@ When calling the `render` method from a Twig template, be sure to use the `|raw`
 
 #### Customizing the Paginator URI
 
-The `setPath` method allows you to customize the URI used by the paginator when generating links. For example, if you want the paginator to generate links like `http://example.com/custom/url?page=N`, you should pass `custom/url` to the `setPath` method:
+The `setPath` method allows you to customize the URI used by the paginator when generating links. For example, if you want the paginator to generate links like `http://example.tld/custom/url?page=N`, you should pass `custom/url` to the `setPath` method:
 
 ```php
 $users = User::paginate(15);

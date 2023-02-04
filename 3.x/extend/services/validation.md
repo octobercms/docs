@@ -81,7 +81,7 @@ To validate multiple fields, simply add them to the array.
 $data = [
     'name' => 'Joe',
     'password' => 'lamepassword',
-    'email' => 'email@example.com'
+    'email' => 'email@example.tld'
 ];
 
 $validator = Validator::make($data, [

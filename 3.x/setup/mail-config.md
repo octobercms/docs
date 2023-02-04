@@ -81,7 +81,7 @@ Another solution is to set a universal recipient of all e-mails sent by the fram
 
 ```php
 'to' => [
-    'address' => 'dev@example.com',
+    'address' => 'dev@example.tld',
     'name' => 'Dev Example'
 ],
 ```

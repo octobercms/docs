@@ -18,9 +18,10 @@ Property | Description
 ------------- | -------------
 **source** | the related blueprint UUID or handle name.
 **maxItems** | limits the number of entries that can be selected.
-**displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`. Default: `relation`.
+**displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`, `taglist`. Default: `relation`.
 **conditions** | specifies a raw where query statement to apply to the model query.
 **scope** | applies a [query scope method](../../extend/database/model.md) to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
+**inverse** | when defined as an inverse relationship, the name of the related field in the source blueprint.
 
 To limit the number of selectable items, use the `maxItems` property.
 
@@ -36,6 +37,14 @@ To display a record finder instead of the typical control, use the `displayMode`
 author:
     type: entries
     displayMode: recordfinder
+```
+
+When multiple items are available, the `displayMode` supports selecting items using a tag list.
+
+```yaml
+author:
+    type: entries
+    displayMode: taglist
 ```
 
 ## Applying Conditions
@@ -78,6 +87,28 @@ class ScopeHelper
         return $query->where('is_featured', true);
     }
 }
+```
+
+## Defining the Inverse Relation
+
+In some cases you may wish to access the relationship in reverse, such as finding all posts that belong to a certain category. The `inverse` property can be used to link the relationship in the opposite direction, where the property value is set to the field name in the source blueprint.
+
+For example, if a **Blog\Post** blueprint has a `categories` relationship already defined.
+
+```yaml
+categories:
+    type: entries
+    source: Blog\Category
+```
+
+The **Blog\Category** blueprint can include a `posts` field as the `inverse` of the `categories` field found in the source blueprint (above). The field can be excluded from forms by setting the `hidden` value to `true`, and this is optional.
+
+```yaml
+posts:
+    type: entries
+    source: Blog\Post
+    inverse: categories
+    hidden: true
 ```
 
 ## List Column Display

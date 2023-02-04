@@ -193,11 +193,31 @@ The `url` and `isActive` elements are required for items that point to a specifi
 return [
     'title' => 'Some Category',
     'url' => 'https://example.tld/blog/category/some-category',
-    'isActive' => true,
+    'isActive' => true
 ];
 ```
 
-It is also possible for a resolved page link to return multiple items. For example, an **All Pages** item type wouldn't have a specific page to point to since it can have multiple links. In these cases, the items should be listed in the `items` element. The `items` element should only be provided for items marked as nested.
+### Resolving Nested Page Links
+
+It is also possible for a resolved page link to return multiple items. For example, an **All Pages** item type wouldn't have a specific page to point to since it can have multiple links.
+
+In these cases, the resolver will request subitems when the `$item` argument has a `nesting` property set to true.
+
+```php
+Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme) {
+    // Resolve item
+    $result = [...];
+
+    // Subitems requested
+    if ($item->nesting) {
+        $result['items'] = [...];
+    }
+
+    return $result;
+});
+```
+
+the items should be listed in the `items` element. The `items` element should only be provided for items marked as nested.
 
 ```php
 return [
@@ -218,9 +238,9 @@ return [
 ];
 ```
 
-#### Usage Example
+### Usage Example
 
-The following is a basic example of resolving a page URL by looking up a model and page URL using the `Cms\Classes\Controller` class and `pageUrl` method.
+The following is a basic example of resolving a page URL by looking up a model and page URL using the `Cms\Classes\Controller` class and `pageUrl` method. It also processes child items recursively using the `children` relationship on the model, when requested using `$item->nesting`.
 
 ```php
 Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme) {
@@ -229,20 +249,61 @@ Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme)
     }
 
     $model = MyModel::find($item->reference);
+    if (!$model) {
+        return;
+    }
+
     $controller = new Controller($theme);
 
-    $url = $controller->pageUrl($item->cmsPage, [
+    $pageUrl = $controller->pageUrl($item->cmsPage, [
         'id' => $model->id,
         'slug' => $model->slug
     ]);
 
-    return [
+    $result = [
+        'url' => $pageUrl,
+        'isActive' => $pageUrl == $url,
         'title' => $model->title,
-        'url' => $url
+        'mtime' => $model->updated_at,
     ];
+
+    if (!$item->nesting) {
+        return $result;
+    }
+
+    $iterator = function($children) use (&$iterator, &$item, &$theme, $url, $controller) {
+        $branch = [];
+
+        foreach ($children as $child) {
+            $childUrl = $controller->pageUrl($item->cmsPage, [
+                'id' => $model->id,
+                'slug' => $model->slug
+            ]);
+
+            $childItem = [
+                'url' => $childUrl,
+                'isActive' => $childUrl == $url,
+                'title' => $child->title,
+                'mtime' => $child->updated_at,
+            ];
+
+            if ($child->children) {
+                $childItem['items'] = $iterator($child->children);
+            }
+
+            $branch[] = $childItem;
+        }
+
+        return $branch;
+    };
+
+    $result['items'] = $iterator($model->children);
+
+    return $result;
 })
 ```
 
 ::: tip
 As the resolving process occurs every time the frontend page is rendered, it is a good idea to cache all the information required for resolving items, if possible.
 :::
+

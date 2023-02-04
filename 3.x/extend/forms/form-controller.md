@@ -252,6 +252,12 @@ The **create.htm** view represents the Create page that allows users to create n
 <?= Form::close() ?>
 ```
 
+To track unsaved changes and display a warning when navigating away from the form, include the `data-change-monitor` attribute on the form opening tag.
+
+```php
+<?= Form::open(['class' => 'layout', 'data-change-monitor' => true]) ?>
+```
+
 ### Update View
 
 The **update.htm** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.htm form.

@@ -25,6 +25,7 @@ For each field you can specify these common properties, where applicable.
 Property | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
+**shortLabel** | a shorter label to use in lists and filters.
 **type** | defines how this field should be rendered, see [form field definitions](../../element/form-fields.md). Default: text.
 **span** | aligns the form field to one side. Options: auto, left, right, row, full, adaptive. Default: `full`.
 **spanClass** | used with the span `row` option to display the form as a Bootstrap grid, for example, `spanClass: col-4`.

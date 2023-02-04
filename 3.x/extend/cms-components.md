@@ -26,7 +26,7 @@ The `create:component` command creates a new component class and the default com
 php artisan create:component Acme.Blog BlogPosts
 ```
 
-The component class file defines the component functionality and component properties. The component class file name should match the component class name. Component classes should extend the `\Cms\Classes\ComponentBase` class. The component from the next example should be defined in the **plugins/acme/blog/components/BlogPosts.php** file.
+The component class file defines the component functionality and component properties. The component class file name should match the component class name. Component classes should extend the `Cms\Classes\ComponentBase` class. The component from the next example should be defined in the **plugins/acme/blog/components/BlogPosts.php** file.
 
 ```php
 namespace Acme\Blog\Components;

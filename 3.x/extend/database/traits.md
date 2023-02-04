@@ -319,7 +319,7 @@ Models validate themselves automatically when the `save` method is called.
 ```php
 $user = new User;
 $user->name = 'Actual Person';
-$user->email = 'a.person@example.com';
+$user->email = 'a.person@example.tld';
 $user->password = 'passw0rd';
 
 // Returns false if model is invalid

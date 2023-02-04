@@ -118,7 +118,7 @@ Using the `emailOutputTo` method, you may e-mail the output to an e-mail address
 $schedule->command('foo')
     ->daily()
     ->sendOutputTo($filePath)
-    ->emailOutputTo('foo@example.com');
+    ->emailOutputTo('foo@example.tld');
 ```
 
 ::: tip

@@ -106,7 +106,7 @@ backend/[author name]/[plugin name]/[controller name]/[action name]
 The above Controller results in the following:
 
 ```text
-https://example.com/backend/acme/blog/users/index
+https://example.tld/backend/acme/blog/users/index
 ```
 
 ## Passing Data to Views

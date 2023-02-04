@@ -22,6 +22,7 @@ Property | Description
 **options** | available options for the dropdown, as an array or method name.
 **default** | a default value to use for new records.
 **cssClass** | used for setting the options as inline.
+**inlineOptions** | display the options side-by-side instead of stacked.
 
 You may use the `default` property to set a default value, where the value is the key of the option.
 
@@ -44,13 +45,13 @@ security_level:
         guests: [Guests only, Only guest users will be able to access this page.]
 ```
 
-To visually display the options side-by-side instead of stacked, use the `cssClass` property to specify a value of **inline-options**.
+To visually display the options side-by-side instead of stacked, set the `inlineOptions` property to a `true` value.
 
 ```yaml
 security_level:
     type: radio
     label: Access Level
-    cssClass: inline-options
+    inlineOptions: true
 ```
 
 ## Dynamic Options
