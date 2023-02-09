@@ -255,7 +255,9 @@ Route::middleware([\Path\To\Your\Middleware::class])->group(function() {
 });
 ```
 
-You can of course add more than one middleware in a group ; just one is used in the above examples for convenience.
+::: tip
+You can add more than one middleware in a group, only one is used in the above examples for convenience.
+:::
 
 ## Global Middleware
 
