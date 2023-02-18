@@ -22,6 +22,12 @@ content:
                 type: text
 ```
 
+Option | Description
+------------- | -------------
+**form** | inline field definitions or a reference to form field definition file.
+**showPanel** | places the form inside a panel container. Default: `true`
+**defaultCreate** | if a related record is not found, attempt to create one. Default: `false`
+
 Pass a string to the `form` property to reference an external yaml file.
 
 ```yaml
@@ -31,8 +37,19 @@ profile:
     form: $/october/demo/models/profile/fields.yaml
 ```
 
-Option | Description
-------------- | -------------
-**form** | inline field definitions or a reference to form field definition file.
-**showPanel** | places the form inside a panel container. Default: `true`
-**defaultCreate** | if a related record is not found, attempt to create one. Default: `false`
+Like any other form, the nested form widget supports the use of tabs by placing the fields under the `tabs` or `secondaryTabs` properties of the `form` definition.
+
+```yaml
+tabbed_content:
+  type: nestedform
+  form:
+    tabs:
+      fields:
+        # ...
+```
+
+#### See Also
+
+::: also
+* [Repeater Form Widget](./widget-repeater.md)
+:::
