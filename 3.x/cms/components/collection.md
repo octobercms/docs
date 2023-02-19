@@ -82,13 +82,13 @@ See the [Pagination feature](../features/pagination.md) to learn more about pagi
 To search records, use the [`searchWhere()` method](../../extend/database/query.md) to perform a search query on a column's value. The following will search for records the supplied term and columns using a case insensitive query.
 
 ```twig
-{% set foundPages = pages.searchWhere(searchTerm, ['title', 'content']) %}
+{% set foundPages = pages.searchWhere(searchTerm, ['title', 'content']).get() %}
 ```
 
 You may also use the [`searchWhereRelation()` method](../../extend/database/relations.md) to search related records, where the relation name is included in the method for querying the relationship existence.
 
 ```twig
-{% set foundPages = pages.searchWhereRelation(searchTerm, 'builder', ['title', 'content']) %}
+{% set foundPages = pages.searchWhereRelation(searchTerm, 'author', 'title').get() %}
 ```
 
 ## Eager Loading Related Records
