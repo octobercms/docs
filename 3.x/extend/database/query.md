@@ -411,6 +411,22 @@ $users = Db::table('users')
     ->get();
 ```
 
+### Search Statement
+
+The `searchWhere` and `orSearchWhere` methods can be used to perform a search query on a column's value. The method will add to the query using the search term (first argument) and search columns (second argument) using a case insensitive LIKE query.
+
+```php
+$pages = Db::table('posts')
+    ->searchWhere('foo bar', ['title', 'content'])
+    ->get();
+```
+
+By default each word in the search term will be searched, however, you can modify this behavior by suppling a mode (third argument), with the following modes supported.
+
+- **all**: result must contain all words (default)
+- **any**: result can contain any word
+- **exact**: result must contain the exact phrase
+
 ## Compound Where Clauses
 
 Sometimes you may need to create more advanced where clauses such as "where exists" or nested parameter groupings. The Laravel query builder can handle these as well. To get started, let's look at an example of grouping constraints within parenthesis:

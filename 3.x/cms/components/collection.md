@@ -77,6 +77,20 @@ You could also apply pagination to the collection with the `paginate()` method i
 See the [Pagination feature](../features/pagination.md) to learn more about paging records.
 :::
 
+### Searching Records
+
+To search records, use the [`searchWhere()` method](../../extend/database/query.md) to perform a search query on a column's value. The following will search for records the supplied term and columns using a case insensitive query.
+
+```twig
+{% set foundPages = pages.searchWhere(searchTerm, ['title', 'content']) %}
+```
+
+You may also use the [`searchWhereRelation()` method](../../extend/database/relations.md) to search related records, where the relation name is included in the method for querying the relationship existence.
+
+```twig
+{% set foundPages = pages.searchWhereRelation(searchTerm, 'builder', ['title', 'content']) %}
+```
+
 ## Eager Loading Related Records
 
 In some cases, and for performance reasons, you may wish to eager load related records. Use the `load` method on the collection, passing the relation name. In the next example, the `categories` relation will be loaded with every post in the collection.

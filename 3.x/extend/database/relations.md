@@ -868,6 +868,12 @@ To query a relationship's existence with a single condition to a relationship qu
 $posts = Post::whereRelation('comments', 'is_approved', false)->get();
 ```
 
+The `searchWhereRelation` or `orSearchWhereRelation` methods are available for searching relation columns. Similar to [search queries](./query.md), the method will add to the query using the search term (first argument), the relationship name (second argument) and search columns (third argument) using a case insensitive LIKE query.
+
+```php
+$posts = Post::searchWhereRelation('foo bar', 'comments', ['content'])->get();
+```
+
 #### Querying Relationship Absence
 
 You may pass the name of the relationship to the `doesntHave` and `orDoesntHave` methods to limit your results based on the absence of a relationship.
