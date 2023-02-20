@@ -48,7 +48,7 @@ To ensure flash messages are also displayed when the browser is redirected, you 
 {% flash %}
     <p
         data-control="flash-message"
-        class="flash-message fade {{ type }}"
+        data-type="{{ type }}"
         data-interval="5">
         {{ message }}
     </p>
