@@ -88,7 +88,7 @@ To search records, use the [`searchWhere()` method](../../extend/database/query.
 You may also use the [`searchWhereRelation()` method](../../extend/database/relations.md) to search related records, where the relation name is included in the method for querying the relationship existence.
 
 ```twig
-{% set foundPages = pages.searchWhereRelation(searchTerm, 'author', 'title').get() %}
+{% set foundPages = pages.searchWhereRelation(searchTerm, 'author', ['title']).get() %}
 ```
 
 ## Eager Loading Related Records

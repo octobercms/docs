@@ -413,7 +413,7 @@ $users = Db::table('users')
 
 ### Search Statement
 
-The `searchWhere` and `orSearchWhere` methods can be used to perform a search query on a column's value. The method will add to the query using the search term (first argument) and search columns (second argument) using a case insensitive LIKE query.
+The `searchWhere` and `orSearchWhere` methods can be used to perform a search query on a column's value. The method will add to the query using the search term (first argument) and search columns (second argument) using a case insensitive `like` query.
 
 ```php
 $pages = Db::table('posts')
@@ -421,11 +421,29 @@ $pages = Db::table('posts')
     ->get();
 ```
 
+The example above will produce the following SQL, where each column and value has `lower()` applied to it:
+
+```sql
+select * from users where
+    (title like '%foo%' and title like '%bar%') or
+    (content like '%foo%' and content like '%bar%')
+```
+
 By default each word in the search term will be searched, however, you can modify this behavior by suppling a mode (third argument), with the following modes supported.
 
 - **all**: result must contain all words (default)
 - **any**: result can contain any word
 - **exact**: result must contain the exact phrase
+
+```php
+$query->searchWhere('foo bar', ['title', 'content'], 'exact');
+```
+
+The `exact` search example above will produce the following SQL:
+
+```sql
+select * from users where (title like '%foo bar%' or content like '%foo bar%')
+```
 
 ## Compound Where Clauses
 
