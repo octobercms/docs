@@ -24,6 +24,6 @@ php artisan project:set <license key>
 
 ## Deploying without Composer
 
-<VideoBlockLink src="https://www.youtube.com/watch?v=Lx9X3CfXwfw" title="One-click Deploy" description="This video describes how to deploy your project to a remote server without Composer." prompt="Watch the tutorial"/>
+<VideoBlockLink src="https://www.youtube.com/watch?v=Lx9X3CfXwfw" title="Deploy Tutorial" description="This video describes how to deploy your project to a remote server without Composer." prompt="Watch the tutorial"/>
 
 If you don't have SSH access to the server or can't run Composer commands for any reason, there is an option to deploy an October CMS project using the official <LinkWithIcon text="Deploy Plugin" icon="https://d2f5cg397c40hu.cloudfront.net/storage/app/uploads/public/optimized/local/c99/b52/eb1c99b52eb1dde393bb7ef60e4c861b062.png" href="https://octobercms.com/plugin/rainlab-deploy"/>.
