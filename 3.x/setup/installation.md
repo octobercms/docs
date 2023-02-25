@@ -76,7 +76,6 @@ If you are installing the platform on a production web server, review the recomm
 
 ## Wizard Installation
 
-
 <VideoBlockLink src="https://www.youtube.com/watch?v=ypyOiVCxaQg" title="Wizard Tutorial" description="This video guides you through the process of installing October CMS using the easy-to-use Wizard installer." prompt="Watch the tutorial" />
 
 The wizard installation is an alternative way to install October CMS without using Composer. It is simpler than the command-line installation and doesn't require any special skills.

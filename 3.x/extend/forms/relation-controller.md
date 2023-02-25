@@ -84,6 +84,7 @@ Property | Type | Description
 **searchMode** | List | defines the search strategy to either contain all words, any word or exact phrase. Supported options: `all`, `any`, `exact`. Default: `all`.
 **searchScope** | List | specifies a [model query scope](../database/model.md) method defined in the related form model to apply to the search query, the first argument will contain the search term.
 **filter** | List | a reference to a filter scopes definition file, see [backend list filters](../lists/filters.md).
+**customPageName** | List | specify a custom variable name to use in the page URL for paginated records. Set to `false` to disable storing the page number in the URL.
 
 These configuration values can be specified only for the **view** property.
 

@@ -64,7 +64,7 @@ Property | Description
 **showSetup** | displays the list column set up button. Default: `false`.
 **structure** | enables a structured list, see the [sorting records article](./structures.md) for more details.
 **customViewPath** | specify a custom view path to override partials used by the list, optional.
-**customPageName** | specify a custom variable name to use in the page URL for paginated records. Default: `page`.
+**customPageName** | specify a custom variable name to use in the page URL for paginated records. Set to `false` to disable storing the page number in the URL. Default: `page`.
 
 ### Adding a Toolbar
 
