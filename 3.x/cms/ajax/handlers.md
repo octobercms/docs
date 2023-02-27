@@ -32,6 +32,8 @@ Every AJAX request should specify a handler name, either using the [data attribu
 <script> oc.ajax('onSubmitContactForm') </script>
 ```
 
+Handlers defined by pages, layouts and components are all registered automatically. If you are calling a handler from inside a partial, use the [`{% ajaxPartial %}` Twig tag](../../markup/tag/ajax-partial.md), which adjusts the page cycle to register its handlers.
+
 ### Form Serialization
 
 When an AJAX request occurs inside a HTML form tag, all the input values of the form are available to the handler. In the example below, the `first_name` value will be sent with the request.

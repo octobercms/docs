@@ -7,7 +7,6 @@ subtitle: Filter Scope
 
 ```yaml
 status:
-    label: Status
     type: dropdown
     options:
         pending: Pending
@@ -19,7 +18,6 @@ You may pass custom SQL to the conditions as a string where `:value` contains th
 
 ```yaml
 status:
-    label: Status
     type: dropdown
     conditions: status = :value
     # ...
@@ -29,8 +27,16 @@ You may dynamically supply `options` by passing a model method.
 
 ```yaml
 roles:
-    label: Status
     type: dropdown
     emptyOption: All
     options: getStatusOptions
+```
+
+The dropdown filter does not display a label, the `emptyOption` property can be used to set the default state.
+
+```yaml
+status:
+    type: dropdown
+    emptyOption: Select Status
+    # ...
 ```

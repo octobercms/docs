@@ -47,7 +47,7 @@ extra_information:
                 type: text
 ```
 
-The repeater fields can be grouped in to tabs by setting the `useTabs` property to `true`.
+The repeater fields supports the use of tabs by setting the `useTabs` property to `true`.
 
 ```yaml
 extra_information:
