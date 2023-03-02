@@ -17,15 +17,15 @@ Option | Description
 **maxDate** | the maximum/latest date that can be selected.
 **firstDay** | the first day of the week. Default: `0` (Sunday).
 **showWeekNumber** | show week numbers at head of row. Default: `false`
-**useTimezone** | convert the date and time from the backend specified timezone preference. Default: `false`
+**useTimezone** | convert the date and time from the backend specified timezone preference. Default: `true`
 
-The backend timezone preference is not applied to this value by default. If the date includes a time, you may convert the timezone with the `useTimezone` option.
+The filtered value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
 
 ```yaml
 created_at:
     label: Created
     type: date
-    useTimezone: true
+    useTimezone: false
 ```
 
 To only allow finding the exact date pass **equals** as a `condition`. To find results that contain any part of the text pass **between**, **before** or **after** to the conditions instead.
