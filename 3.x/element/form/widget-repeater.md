@@ -64,7 +64,7 @@ extra_information:
             tab: Details
 ```
 
-#### Grouped Repeaters
+## Grouped Repeaters
 
 The repeater field supports a group mode using `groups` that allows a custom set of fields to be chosen for each iteration.
 
@@ -121,3 +121,63 @@ Option | Description
 ::: tip
 The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
 :::
+
+## Example of Using Related Records
+
+The repeater form widget will automatically detect if the model attribute is a related field and use it. The following provides an example implementation that you may use. For example, if your model uses a `hasMany` relation that refers to a **RepeaterItem** model the repeater will use this related model for each item.
+
+```php
+public $hasMany = [
+    'extra_information' => [
+        RepeaterItem::class,
+        'key' => 'parent_id',
+        'delete' => true
+    ],
+];
+```
+
+A simple [database table schema](../../extend/database/structure.md) for the model can be defined that includes a reference to the parent model `id` and a serialized JSON `value` for dynamic attributes (see below).
+
+```php
+Schema::create('acme_blog_repeater_items', function($table) {
+    $table->increments('id');
+    $table->integer('parent_id')->unsigned()->nullable()->index();
+    $table->mediumText('value')->nullable();
+    $table->timestamps();
+});
+```
+
+The model extends the `October\Rain\Database\ExpandoModel` base class to allow dynamic attributes set on the model and saved in the database, in JSON format. The model can [include attachments](../../extend/database/attachments.md) and any other related fields.
+
+```php
+use October\Rain\Database\ExpandoModel;
+
+class RepeaterItem extends ExpandoModel
+{
+    public $table = 'acme_blog_repeater_items';
+
+    protected $expandoPassthru = ['parent_id'];
+
+    public $attachMany = [
+        'photos' => \System\Models\File::class,
+    ];
+}
+```
+
+Finally, the repeater item can be specified as a form field with accompanying form field definitions, including fields that use [model relationships](../../extend/database/relations.md).
+
+```yaml
+extra_information:
+    type: repeater
+    form:
+        fields:
+            title:
+                label: title
+            is_enabled:
+                label: Enabled
+                type: switch
+            photos:
+                label: Photos
+                type: fileupload
+                mode: image
+```
