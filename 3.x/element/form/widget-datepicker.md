@@ -21,7 +21,7 @@ Option | Description
 **firstDay** | the first day of the week. Default: `0` (Sunday).
 **twelveHour** | display a 12-hour clock for selecting time. Default: `false`
 **showWeekNumber** | show week numbers at head of row. Default: `false`
-**useTimezone** | convert the date and time from the backend specified timezone preference. Default: `true`
+**useTimezone** | convert the date and time from the backend specified timezone preference.
 
 Use the `time` mode to display a time picker and toggle 24-hour or 12-hour display with the `twelveHour` property.
 

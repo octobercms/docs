@@ -63,6 +63,14 @@ You may re-enable when an ancestor has disabled:
 </div>
 ```
 
+## Disable Visit Scrolling
+
+Every visit scrolls to the top of the page like most links in a browser. However, in some cases preserving the scroll position is useful, such as situations where links act like filters. You may disable visit scrolling using the `data-turbo-no-scroll` attribute on the link element.
+
+```html
+<a href="/" data-turbo-no-scroll>Filter</a>
+```
+
 ## Persisting Page Elements
 
 In some cases you may want to include static elements on the page, these are elements that should not be refreshed when the page updates. Use the `data-turbo-permanent` attribute on the parent element. The element must also supply and `id` attribute so the original page can be matched with the new page, including event listeners.

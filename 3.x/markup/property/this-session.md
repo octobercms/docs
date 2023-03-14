@@ -3,15 +3,19 @@ subtitle: Twig Property
 ---
 # this.session
 
-You can access the current session manager via `this.session` and it returns the object `Illuminate\Session\SessionManager` [current session configuration](../../extend/services/session.md).
+You can access the current session manager via `this.session` and it returns the object `Illuminate\Session\Store` [current session configuration](../../extend/services/session.md).
 
-## Retrieving data from the session
+## this.session.get()
+
+You can retrieve data from the session by passing the key name to `this.session.get` as the first argument.
 
 ```twig
 {{ this.session.get('key') }}
 ```
 
-## Determining if an item exists in the session
+## this.session.has()
+
+The `this.session.has` method can eetermine if an item exists in the session.
 
 ```twig
 {% if this.session.has('key') %}
@@ -19,15 +23,15 @@ You can access the current session manager via `this.session` and it returns the
 {% endif %}
 ```
 
-## Deleting data from the session
+## this.session.forget
 
-#### Remove data for a single key
+The `this.session.forget` will delete a single key (first argument) from the session.
 
 ```twig
 {{ this.session.forget('key') }}
 ```
 
-#### Remove all session data
+To remove all the session data, use `this.session.flush` instead.
 
 ```twig
 {{ this.session.flush() }}

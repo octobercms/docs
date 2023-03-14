@@ -36,12 +36,6 @@ The AJAX framework has built-in support for flash messages, simply specify the `
 </form>
 ```
 
-To only display a specific flash message type, you may pass the value to the attribute &mdash; **success**, **error**, **info** or **warning**. Multiple values are separated by commas.
-
-```html
-<form data-request-flash="success,warning"></form>
-```
-
 To ensure flash messages are also displayed when the browser is redirected, you should render a [inline flash message](../../markup/tag/flash.md) when the page loads by placing this code in your page or layout.
 
 ```twig
@@ -53,6 +47,20 @@ To ensure flash messages are also displayed when the browser is redirected, you 
         {{ message }}
     </p>
 {% endflash %}
+```
+
+To only display a specific flash message type, you may pass the value to the attribute &mdash; **success**, **error**, **info**, **warning** or **validate**. Multiple values are separated by commas.
+
+```html
+<form data-request-flash="success,warning"></form>
+```
+
+When using [validation features](./validation.md) in combination with the `data-request-flash` attribute, the validation errors take priority and suppress the flash message. To display both at the same time, include the **validate** type with the attribute.
+
+```html
+<form
+    data-request-validate
+    data-request-flash="success,error,validate">
 ```
 
 ### Styling the Flash Message

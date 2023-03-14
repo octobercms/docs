@@ -1345,17 +1345,14 @@ Sometimes you might need to disable deferred binding entirely for a given model,
 ```php
 public function __construct()
 {
-    $result = parent::__construct(...func_get_args());
+    parent::__construct(...func_get_args());
 
     $this->bindEvent('model.saveInternal', function () {
         $this->sessionKey = null;
     });
-
-    return $result;
 }
 ```
 
 ::: tip
 This will disable deferred binding entirely for any model's you apply this override to.
 :::
-

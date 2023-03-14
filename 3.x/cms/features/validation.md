@@ -140,6 +140,16 @@ If the element is left empty, it will be populated with the validation text from
 </div>
 ```
 
+### Displaying Errors with Flash Messages
+
+When using validation features in combination with the [`data-request-flash` attribute](./flash-messages.md), the validation errors take priority and suppress the flash message. To display both at the same time, set the attribute to a wildcard (`*`) to display all flash message types, including validation.
+
+```html
+<form
+    data-request-validate
+    data-request-flash="*">
+```
+
 ## Working with JavaScript
 
 To implement custom functionality for the error messages, hook into the `ajax:invalid-field` event to display the field and `ajax:promise` to reset the form on a new submission. The JavaScript events used are found in the [AJAX JavaScript API](../ajax/javascript-api.md).
@@ -167,7 +177,7 @@ The `data-request-flash` attribute is used to [enable flash messages](./flash-me
 <form
     data-request="onSubmitForm"
     data-request-validate
-    data-request-flash="success">
+    data-request-flash>
     <div>
         <label>Username</label>
         <input name="username"

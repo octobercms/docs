@@ -11,6 +11,23 @@ created_at:
     type: date
 ```
 
+Option | Description
+------------- | -------------
+**minDate** | the minimum/earliest date that can be selected.
+**maxDate** | the maximum/latest date that can be selected.
+**firstDay** | the first day of the week. Default: `0` (Sunday).
+**showWeekNumber** | show week numbers at head of row. Default: `false`
+**useTimezone** | convert the date and time from the backend specified timezone preference. Default: `true`
+
+The filtered value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
+
+```yaml
+created_at:
+    label: Created
+    type: date
+    useTimezone: false
+```
+
 To only allow finding the exact date pass **equals** as a `condition`. To find results that contain any part of the text pass **between**, **before** or **after** to the conditions instead.
 
 ```yaml
