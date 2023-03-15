@@ -300,8 +300,7 @@ Many-to-many relations are slightly more complicated than `hasOne` and `hasMany`
 Below is an example that shows the [database table structure](./structure.md) used to create the join table.
 
 ```php
-Schema::create('role_user', function($table)
-{
+Schema::create('role_user', function($table) {
     $table->integer('user_id')->unsigned();
     $table->integer('role_id')->unsigned();
     $table->primary(['user_id', 'role_id']);
