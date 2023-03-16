@@ -77,7 +77,7 @@ Property | Type | Description
 **showFlash** | Both | enables the display of flash messages after a successful action. Default: `true`
 **showSearch** | List | display an input for searching the records. Default: `false`
 **showSorting** | List | displays the sorting link on each column. Default: `true`
-**defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
+**defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **recordsPerPage** | List | maximum rows to display for each page.
 **noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../system/localization.md).
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
