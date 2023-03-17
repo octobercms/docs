@@ -423,7 +423,7 @@ The following methods are available on the `$filter` object. The scopes availabl
 
 Method | Description
 ------------- | -------------
-**addScopes** | adds new scopes to filter widget
+**addScopes** | adds new scopes to filter widget using [list filters configuration](./filters.md)
 **removeScope** | remove scope from filter widget
 **getScope** | returns an existing scope definition
 
