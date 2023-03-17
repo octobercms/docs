@@ -27,11 +27,11 @@ The following `conditions` are available for filtering.
 Condition | Description
 ------------- | -------------
 **equals** | is within the selected date from start to end of day
+**notEquals** | is not within the selected date from start to end of day
 **between** | is between the two selected dates
 **before** | is before the selected date
 **after** | is after the selected date
 
-<!-- **notEquals** | is not within the selected date from start to end of day -->
 
 The filtered value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
 
