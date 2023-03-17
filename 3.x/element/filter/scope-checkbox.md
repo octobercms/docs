@@ -17,7 +17,7 @@ The following properties are available for the filter.
 Property | Description
 ------------- | -------------
 **default** | set to true to make the filter checked by default. Default `false`.
-**select** | a custom SQL select statement to use for the filter.
+**conditions** | a custom SQL select statement to use for the filter.
 
 You may set `default` value to make the filter checked by default.
 

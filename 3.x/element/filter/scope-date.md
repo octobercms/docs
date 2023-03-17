@@ -27,10 +27,11 @@ The following `conditions` are available for filtering.
 Condition | Description
 ------------- | -------------
 **equals** | is within the selected date from start to end of day
-**notEquals** | is not within the selected date from start to end of day
 **between** | is between the two selected dates
 **before** | is before the selected date
 **after** | is after the selected date
+
+<!-- **notEquals** | is not within the selected date from start to end of day -->
 
 The filtered value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
 
@@ -90,7 +91,9 @@ The following parameters are supported.
 - `:after`: afterwards date formatted as `Y-m-d 00:00:00`
 - `:afterDate`: afterwards date formatted as `Y-m-d`
 
-Alternatively, you may define a custom `modelScope` in the model using the following example.
+## PHP Interface
+
+For access in PHP, you may define a custom `modelScope` in the model using the following example.
 
 ```yaml
 created_at:

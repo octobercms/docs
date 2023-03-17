@@ -14,6 +14,14 @@ status:
         closed: Closed
 ```
 
+The following properties are available for the filter.
+
+Property | Description
+------------- | -------------
+**options** | available options for the filter, as an array or method name.
+**conditions** | a custom SQL select statement to use for the filter.
+**emptyOption** | text to display when there is no available selections.
+
 You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
 
 ```yaml
