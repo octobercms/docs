@@ -441,11 +441,13 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-The `listFilterExtendRefreshResults` method can override the AJAX update response when the list filters are updated. It is called when the list is refreshed, and should return an array of additional partial updates.
+The `listExtendRefreshResults` method can override the AJAX update response when the list updates, and should return an array of additional partial updates. The `listGetFilterWidget` will return the filter widget for access to the scopes.
 
 ```php
-public function listFilterExtendRefreshResults($filter, $result)
+public function listExtendRefreshResults($filter, $result)
 {
+    $statusCode = $this->listGetFilterWidget()->getScope('status_code')->value;
+
     return ['#my-partial-id' => $this->makePartial(...)];
 }
 ```
