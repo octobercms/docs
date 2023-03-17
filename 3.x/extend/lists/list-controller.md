@@ -59,7 +59,7 @@ Property | Description
 **showPageNumbers** | displays page numbers with pagination. Disable this to improve list performance when working with large tables. Default: `true`
 **toolbar** | reference to a Toolbar Widget configuration file, or an array with configuration (see below).
 **showSorting** | displays the sorting link on each column. Default: `true`
-**defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`.
+**defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **showCheckboxes** | displays checkboxes next to each record. Default: `false`.
 **showSetup** | displays the list column set up button. Default: `false`.
 **structure** | enables a structured list, see the [sorting records article](./structures.md) for more details.

@@ -9,11 +9,22 @@ To filter by a model, specify the `modelClass` and `nameFrom` properties to spec
 
 ```yaml
 roles:
-    type: group
     label: Role
+    type: group
     nameFrom: name
     modelClass: October\Test\Models\Role
 ```
+
+The following properties are available for the filter.
+
+Property | Description
+------------- | -------------
+**options** | available options for the filter, as an array or method name.
+**conditions** | a custom SQL select statement to use for the filter.
+**nameFrom** | the column name to use in the model class, used for displaying the name. Default: `name`.
+**modelClass** | class of the model to use for the available filter records
+nameFrom
+**modelScope** | applies a [query scope method](../../extend/database/model.md) to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 
 To filter by an array, specify an `options` property.
 
@@ -45,6 +56,8 @@ status:
         - developer
         - publisher
 ```
+
+## PHP Interface
 
 You may define a custom `modelScope` in the model using the following example.
 

@@ -11,13 +11,27 @@ created_at:
     type: date
 ```
 
-Option | Description
+The following properties are available for the filter.
+
+Property | Description
 ------------- | -------------
 **minDate** | the minimum/earliest date that can be selected.
 **maxDate** | the maximum/latest date that can be selected.
 **firstDay** | the first day of the week. Default: `0` (Sunday).
 **showWeekNumber** | show week numbers at head of row. Default: `false`
 **useTimezone** | convert the date and time from the backend specified timezone preference. Default: `true`
+**conditions** | for each condition, set to `true` or `false` to make it available, or as a string, can be custom SQL statement for selected conditions. Default: `true`.
+
+The following `conditions` are available for filtering.
+
+Condition | Description
+------------- | -------------
+**equals** | is within the selected date from start to end of day
+**between** | is between the two selected dates
+**before** | is before the selected date
+**after** | is after the selected date
+
+<!-- **notEquals** | is not within the selected date from start to end of day -->
 
 The filtered value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
 
@@ -77,7 +91,9 @@ The following parameters are supported.
 - `:after`: afterwards date formatted as `Y-m-d 00:00:00`
 - `:afterDate`: afterwards date formatted as `Y-m-d`
 
-Alternatively, you may define a custom `modelScope` in the model using the following example.
+## PHP Interface
+
+For access in PHP, you may define a custom `modelScope` in the model using the following example.
 
 ```yaml
 created_at:
@@ -93,6 +109,9 @@ function scopeDateFilter($query, $scope)
 {
     if ($scope->condition === 'equals') {
         $query->where('created_at', $scope->value);
+    }
+    elseif ($scope->condition === 'notEquals') {
+        $query->where('created_at', '<>', $scope->value);
     }
     elseif ($scope->condition === 'between') {
         $query

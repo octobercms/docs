@@ -126,7 +126,15 @@ $user->save();
 
 ### Sortable
 
-Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use (example: `$table->integer('sort_order')->default(0);`).
+Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To add the `sort_order` column to your table, you may use the `integer` method inside a migration.
+
+```php
+Schema::table('users', function ($table) {
+    $table->integer('sort_order')->default(0);
+});
+```
+
+To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use.
 
 ```php
 class User extends Model
@@ -135,7 +143,7 @@ class User extends Model
 }
 ```
 
-You may modify the key name used to identify the sort order by defining the `SORT_ORDER` constant:
+You may modify the key name used to identify the sort order by defining the `SORT_ORDER` constant.
 
 ```php
 const SORT_ORDER = 'my_sort_order_column';
@@ -153,7 +161,15 @@ $user->setSortableOrder([1, 2, 3], [3, 2, 1]);
 
 ### Simple Tree
 
-A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To use the simple tree, apply the `October\Rain\Database\Traits\SimpleTree` trait.
+A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To add the `parent_id` column to your table, you may use the `integer` method inside a migration.
+
+```php
+Schema::table('categories', function ($table) {
+    $table->integer('parent_id')->nullable()->unsigned();
+});
+```
+
+To use the simple tree, apply the `October\Rain\Database\Traits\SimpleTree` trait.
 
 ```php
 class Category extends Model
@@ -207,7 +223,18 @@ In order to render all levels of items and their children, you can use recursive
 
 ### Nested Tree
 
-The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
+The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To add these columns to your table, you may use these methods inside a migration.
+
+```php
+Schema::table('categories', function ($table) {
+    $table->integer('parent_id')->nullable()->unsigned();
+    $table->integer('nest_left')->nullable();
+    $table->integer('nest_right')->nullable();
+    $table->integer('nest_depth')->nullable();
+});
+```
+
+To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
 
 ```php
 class Category extends Model

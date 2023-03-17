@@ -12,12 +12,18 @@ is_published:
     conditions: is_published <> true
 ```
 
+The following properties are available for the filter.
+
+Property | Description
+------------- | -------------
+**default** | set to true to make the filter checked by default. Default `false`.
+**conditions** | a custom SQL select statement to use for the filter.
+
 You may set `default` value to make the filter checked by default.
 
 ```yaml
 is_published:
     label: Hide Published
     type: checkbox
-    conditions: #...
     default: 1
 ```
