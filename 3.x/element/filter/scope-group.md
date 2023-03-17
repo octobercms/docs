@@ -46,6 +46,8 @@ status:
         - publisher
 ```
 
+## PHP Interface
+
 You may define a custom `modelScope` in the model using the following example.
 
 ```yaml

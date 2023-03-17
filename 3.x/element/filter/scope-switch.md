@@ -14,12 +14,18 @@ is_approved:
         - is_approved = true
 ```
 
+The following properties are available for the filter.
+
+Property | Description
+------------- | -------------
+**default** | set to true to make the filter checked by default. Default `false`.
+**select** | an array with custom SQL select statement to use for the filter, included for when the conditions is indeterminate (first item) and is checked (second item).
+
 You may set `default` value to set the default filter value. Use `0` for off, `1` for indeterminate and `2` for on for default value.
 
 ```yaml
 is_approved:
     label: Approved
     type: switch
-    conditions: #...
     default: 1
 ```
