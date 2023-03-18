@@ -7,7 +7,7 @@ October CMS provides features for filtering database records. For behaviors that
 
 ## Configuring a Behavior
 
-The [List Controller](./list-controller.md) and [Relation Controller](../forms/form-controller.md) backend behaviors can be filtered by adding a **filter** property to the configuration. When defined, the available filters are shown above the list.
+The [List Controller](./list-controller.md) and [Relation Controller](../forms/relation-controller.md) backend behaviors can be filtered by adding a **filter** property to the configuration. When defined, the available filters are shown above the list.
 
 ```yaml
 # config_list.yaml
