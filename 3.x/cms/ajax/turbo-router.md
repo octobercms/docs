@@ -91,6 +91,16 @@ For example, if you website lives in `/app` and you don't want the links to appl
 </head>
 ```
 
+## Native Error Pages
+
+When using PJAX and the server responds with an error code, such as 404 or 500 status, the complete html element is replaced, including scripts and stylesheets. This prevents accidentally replacing the body element with content not produced by the same application code.
+
+You may disable this behavior by including the `turbo-visit-control` meta tag in the head section of the page with the `error` value. This will tell the turbo router that the error page content is produced by the native application.
+
+```html
+<meta name="turbo-visit-control" content="error">
+```
+
 ## Page Caching
 
 With caching enabled, the turbo router speeds up a website's performance by displaying revisited pages without accessing the network, making the website feel faster. When clicking a link, the contents are shown from the browser's local storage while the page requests the background. The latest page shows when the network request is complete, meaning the page renders twice.
