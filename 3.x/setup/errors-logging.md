@@ -41,7 +41,6 @@ October CMS supports various drivers, including `single`, `daily`, `syslog` and 
 'default' => env('LOG_CHANNEL', 'daily'),
 ```
 
-
 #### See Also
 
 ::: also

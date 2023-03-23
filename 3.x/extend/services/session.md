@@ -74,26 +74,38 @@ Session::forget('key');
 Session::flush();
 ```
 
-## Regenerating the Session Identifier
+## Regenerating the Session
 
-If you need to regenerate the session ID, you may use the `regenerate` method:
+If you need to regenerate the session ID, you may use the `regenerate` method.
 
 ```php
 Session::regenerate();
 ```
 
+To regenerate the session ID and remove all data from the session in a single statement, you may use the `invalidate` method.
+
+```php
+Session::invalidate();
+```
+
 ## Flash Data
 
-Sometimes you may wish to store items in the session only for the next request. You may do so using the `Session::flash` method. Data stored in the session using this method will only be available during the subsequent HTTP request, and then will be deleted. Flash data is primarily useful for short-lived status messages:
+Sometimes you may wish to store items in the session only for the next request. You may do so using the `Session::flash` method. Data stored in the session using this method will only be available during the subsequent HTTP request, and then will be deleted. Flash data is primarily useful for short-lived status messages.
 
 ```php
 Session::flash('key', 'value');
 ```
 
-If you need to keep your flash data around for even more requests, you may use the `reflash` method, which will keep all of the flash data around for an additional request. If you only need to keep specific flash data around, you may use the `keep` method:
+If you need to keep your flash data around for even more requests, you may use the `reflash` method, which will keep all of the flash data around for an additional request. If you only need to keep specific flash data around, you may use the `keep` method.
 
 ```php
 Session::reflash();
 
 Session::keep(['username', 'email']);
 ```
+
+#### See Also
+
+::: also
+* [Laravel HTTP Session](https://laravel.com/docs/9.x/session)
+:::
