@@ -63,7 +63,7 @@ categories:
     conditions: is_featured = true
 ```
 
-### PHP Query Scope
+### PHP Query Scopes
 
 You may limit the related query using a PHP method with the `scope` property.
 

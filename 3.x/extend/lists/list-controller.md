@@ -401,7 +401,7 @@ public function listOverrideRecordUrl($record, $definition = null)
 
 ### Extending Filter Scopes
 
-You may extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument **$filter** which will represent the Filter widget object. Take this controller for example:
+You may extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument `$filter` which will represent the Filter widget object.
 
 ```php
 Categories::extendListFilterScopes(function($filter) {
@@ -419,7 +419,13 @@ Categories::extendListFilterScopes(function($filter) {
 });
 ```
 
-The array of scopes provided is the same as the [list filters configuration](./filters.md).
+The following methods are available on the `$filter` object. The scopes available are the same as the [list filters configuration](./filters.md).
+
+Method | Description
+------------- | -------------
+**addScopes** | adds new scopes to filter widget using [list filters configuration](./filters.md)
+**removeScope** | remove scope from filter widget
+**getScope** | returns an existing scope definition
 
 You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
 
@@ -435,13 +441,16 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-The following methods are available on the $filter object.
+The `listExtendRefreshResults` method can override the AJAX update response when the list updates, and should return an array of additional partial updates. The `listGetFilterWidget` will return the filter widget for access to the scopes.
 
-Method | Description
-------------- | -------------
-**addScopes** | adds new scopes to filter widget
-**removeScope** | remove scope from filter widget
-**getScope** | returns an existing scope definition
+```php
+public function listExtendRefreshResults($filter, $result)
+{
+    $statusCode = $this->listGetFilterWidget()->getScope('status_code')->value;
+
+    return ['#my-partial-id' => $this->makePartial(...)];
+}
+```
 
 ### Extending the Model Query
 

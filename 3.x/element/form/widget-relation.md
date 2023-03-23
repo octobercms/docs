@@ -41,7 +41,36 @@ user:
     select: concat(first_name, ' ', last_name)
 ```
 
-## Filtering Available Records
+## Applying Conditions
+
+You can filter the available records using SQL or PHP conditions using the approaches below.
+
+### SQL Query Condition
+
+You may limit the related model using a raw SQL query using the `conditions` property.
+
+```yaml
+user:
+    label: User
+    type: relation
+    conditions: is_featured = true
+```
+
+The value also supports simple parameters parsed from the parent model attributes. The parameter names begin with a colon (`:`) character.
+
+```yaml
+country:
+    label: Country
+    type: relation
+
+state:
+    label: State
+    type: relation
+    dependsOn: country
+    conditions: custom_country_id = :country_id
+```
+
+### PHP Query Scopes
 
 You can provide a model scope to use to filter the results with the `scope` property.
 
@@ -62,8 +91,8 @@ country:
 state:
     label: State
     type: relation
-    scope: filterStates
     dependsOn: country
+    scope: filterStates
 ```
 
 The `scope` value **filterStates** translates to the `scopeFilterStates` method defined in the `State` model. The `$model` (second argument) supplied to the [model query scope](../../extend/database/model.md) lets you capture the selected country and filter the available options.
