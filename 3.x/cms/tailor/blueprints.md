@@ -32,6 +32,7 @@ Property | Description
 **structure** | structure configuration supplied when using the `structure` type.
 **drafts** | enables drafts for this entry. Default: `false`
 **multisite** | enables multisite for this entry, supported values: `true`, `false`, `sync`. Default: `false`
+**pagefinder** | includes blueprint type in the [pagefinder form widget](../../element/form/widget-pagefinder.md), supported values: `true`, `false`, `item` or `list`. Default: `true`
 **customMessages** | customize the messages used in the user interface (see below).
 **showExport** | displays a toolbar button for exporting records. Default: `true`.
 **showImport** | displays a toolbar button for importing records. Default: `true`.
@@ -152,6 +153,8 @@ The following messages are available to override as custom messages.
 Message | Default Message
 ------------- | -------------
 **buttonCreate** | Create :name Entry
+**pagefinderItemType** | :name Entry
+**pagefinderListType** | All :name Entries
 :::
 
 ## Global
