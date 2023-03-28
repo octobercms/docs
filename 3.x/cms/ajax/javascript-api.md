@@ -34,7 +34,7 @@ Option | Description
 **bulk** | when true, the request be sent as JSON for bulk data transactions. default: `false`
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
-**progressBar** | enable the progress bar when an AJAX request occurs. Default `true` when using [extra features](./introduction.md), otherwise `false`.
+**progressBar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
 
 You may also override some of the request logic by passing new functions as options. These logic handlers are available.
 
