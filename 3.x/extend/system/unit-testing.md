@@ -3,11 +3,15 @@ subtitle: Programatically test and harden your business logic.
 ---
 # Unit Testing
 
-Individual plugin test cases can be run by running `phpunit` in the plugin's base directory (ex. `plugins/acme/demo`). If `phpunit` is not available globally, you may call it from the root vendor directory.
+Individual plugin test cases can be performed using the `plugin:test` artisan command, followed by the plugin code. For example, the following command will the tests found in **plugins/acme/demo** directory.
 
 ```bash
-../../../vendor/bin/phpunit
+php artisan plugin:test acme.demo
 ```
+
+::: tip
+If you have `phpunit` installed globally, you can also call this from the plugin directory.
+:::
 
 ## Creating Plugin Tests
 
