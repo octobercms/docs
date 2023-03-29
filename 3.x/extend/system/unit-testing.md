@@ -30,8 +30,9 @@ The first step to testing plugins is to create a file called **phpunit.xml** in 
     stopOnFailure="false"
 >
     <testsuites>
-        <testsuite name="Plugin Unit Test Suite">
+        <testsuite name="Plugin Test Suite">
             <directory>./tests</directory>
+            <exclude>./tests/browser</exclude>
         </testsuite>
     </testsuites>
     <php>
@@ -51,15 +52,17 @@ The first step to testing plugins is to create a file called **phpunit.xml** in 
 
 ## Creating a Test Class
 
+The `create:test` command generates a test class. The first argument specifies the author and plugin name. The second argument specifies the test class name, which must end in **Test**.
+
+```bash
+php artisan create:test Acme.Blog UserTest
+```
+
 All tests should be placed in the **tests** directory that is used store the test classes. Class names should use a `Test` suffic and a namespace for the class is optional. The test class should extend the `PluginTestCase` base class and this is a special class that will set up the October CMS database stored in memory, as part of the `setUp` method.
 
 ```php
 use Acme\Blog\Models\Post;
-use PluginTestCase;
 
-/**
- * PostTest tests the posts
- */
 class PostTest extends PluginTestCase
 {
     public function testCreateFirstPost()
