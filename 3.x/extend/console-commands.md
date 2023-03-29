@@ -23,126 +23,120 @@ use Symfony\Component\Console\Input\InputArgument;
 class MyCommand extends Command
 {
     /**
-     * @var string The console command name.
+     * @var string signature for the console command.
      */
-    protected $name = 'acme:mycommand';
+    protected $signature = 'acme:mycommand {user}';
 
     /**
-     * @var string The console command description.
+     * @var string description for the console command.
      */
     protected $description = 'Does something cool.';
 
     /**
-     * Execute the console command.
-     * @return void
+     * handle executes the console command.
      */
     public function handle()
     {
-        $this->output->writeln('Hello world!');
-    }
+        $username = $this->argument('user');
 
-    /**
-     * Get the console command arguments.
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [];
+        $this->output->writeln("Hello {$username}!");
     }
-
-    /**
-     * Get the console command options.
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [];
-    }
-
 }
 ```
 
-Once your class is created you should fill out the `name` and `description` properties of the class, which will be used when displaying your command on the command `list` screen.
+Once your class is created you should fill out the `signature` and `description` properties of the class, which will be used when displaying your command on the command `list` screen.
 
 The `handle` method will be called when your command is executed. You may place any command logic in this method.
 
 ### Defining Arguments
 
-Arguments are defined by returning an array value from the `getArguments` method are where you may define any arguments your command receives. For example:
+All user supplied arguments and options are wrapped in curly braces in the signature. In the following example, the command defines one required argument: user:
+
+Arguments are defined in the signature as wrapped curly braces, where you may define any arguments your command receives. For example:
 
 ```php
-protected function getArguments()
-{
-    return [
-        ['example', InputArgument::REQUIRED, 'An example argument.'],
-    ];
-}
+protected $signature = 'mail:send {user}';
 ```
 
-When defining `arguments`, the array definition values represent the following:
+You may also make arguments optional by placing a question mark (`?`) after the argument name.
 
 ```php
-array($name, $mode, $description, $defaultValue)
+protected $signature = 'mail:send {user?}';
 ```
 
-The argument `mode` may be any of the following: `InputArgument::REQUIRED` or `InputArgument::OPTIONAL`.
+Alternatively, supply a default value with an equal sign (`=`) followed by the default value.
+
+```php
+protected $signature = 'mail:send {user=foo}';
+```
 
 ### Defining Options
 
-Options are defined by returning an array value from the `getOptions` method. Like arguments this method should return an array of commands, which are described by a list of array options. For example:
+Options, like arguments, are another form of user input and are defined by two hyphens (`--`) in the signature. Options can can optionally receive a value, without a value, they serve as a boolean switch value. For example, a switch value named **queue**.
 
 ```php
-protected function getOptions()
-{
-    return [
-        ['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
-    ];
-}
+protected $signature = 'mail:send {user} {--queue}';
 ```
 
-When defining `options`, the array definition values represent the following:
+In this example, the `--queue` switch may be specified when calling the command. If the `--queue` switch is passed, the value of the option will be `true`. Otherwise, the value will be `false`.
+
+```bash
+php artisan mail:send 1 --queue
+```
+
+When an option expects a value, you should suffix the input name with an equal sign (`=`).
 
 ```php
-array($name, $shortcut, $mode, $description, $defaultValue)
+protected $signature = 'mail:send {user} {--queue=}';
 ```
 
-For options, the argument `mode` may be: `InputOption::VALUE_REQUIRED`, `InputOption::VALUE_OPTIONAL`, `InputOption::VALUE_IS_ARRAY`, `InputOption::VALUE_NONE`.
-
-The `VALUE_IS_ARRAY` mode indicates that the switch may be used multiple times when calling the command:
+In this case, the option can accept a value, otherwise the value will be `null`.
 
 ```bash
-php artisan foo --option=bar --option=baz
+php artisan mail:send 1 --queue=default
 ```
 
-The `VALUE_NONE` option indicates that the option is simply used as a "switch":
+You may also specify a default value with an equal sign (`=`) followed by the default value.
+
+```php
+protected $signature = 'mail:send {user} {--queue=default}';
+```
+
+Shortcuts are a shorter syntax when triggering an option.
+
+```php
+protected $signature = 'mail:send {user} {--Q|queue}';
+```
+
+There is an important difference when calling a shortcut. It should be prefixed with a single hyphen (`-`) and no equal sign is used to supply a value.
 
 ```bash
-php artisan foo --option
+php artisan mail:send 1 -Qdefault
 ```
 
 ### Retrieving Input
 
-While your command is executing, you will obviously need to access the values for the arguments and options accepted by your application. To do so, you may use the `argument` and `option` methods:
+While your command is executing, you will obviously need to access the values for the arguments and options accepted by your application. To do so, you may use the `argument` and `option` methods.
 
-#### Retrieving the value of a command argument
+Supply a name to the `argument` method to retrieve the value of a command argument.
 
 ```php
 $value = $this->argument('name');
 ```
 
-#### Retrieving all arguments
+Without a name, it will retrieve all arguments.
 
 ```php
 $arguments = $this->argument();
 ```
 
-#### Retrieving the value of a command option
+Passing a name to the `option` method will retrieve the value of a command option.
 
 ```php
 $value = $this->option('name');
 ```
 
-#### Retrieving all options
+Without a name, it will retrieve all options.
 
 ```php
 $options = $this->option();
@@ -152,33 +146,31 @@ $options = $this->option();
 
 To send output to the console, you may use the `info`, `comment`, `question` and `error` methods. Each of these methods will use the appropriate ANSI colors for their purpose.
 
-#### Sending information
+The `info` method sends information back to the user.
 
 ```php
 $this->info('Display this on the screen');
 ```
 
-#### Sending an error message
+The `error` method is used for sending an error message.
 
 ```php
 $this->error('Something went wrong!');
 ```
 
-#### Asking the user for input
-
-You may also use the `ask` and `confirm` methods to prompt the user for input:
+You may also use the `ask` and `confirm` methods to prompt the user for input.
 
 ```php
 $name = $this->ask('What is your name?');
 ```
 
-#### Asking the user for secret input
+The `secret` method is used for asking the user for secret input.
 
 ```php
 $password = $this->secret('What is the password?');
 ```
 
-#### Asking the user for confirmation
+The `confirm` method asks the user for confirmation and returns `true` if the user accepts.
 
 ```php
 if ($this->confirm('Do you wish to continue? [yes|no]')) {
@@ -186,31 +178,11 @@ if ($this->confirm('Do you wish to continue? [yes|no]')) {
 }
 ```
 
-You may also specify a default value to the `confirm` method, which should be `true` or `false`:
+You may also specify a default value to the `confirm` method, which should be `true` or `false`.
 
 ```php
 $this->confirm($question, true);
 ```
-
-#### Progress Bars
-
-For long running tasks, it could be helpful to show a progress indicator. Using the output object, we can start, advance and stop the Progress Bar. First, define the total number of steps the process will iterate through. Then, advance the Progress Bar after processing each item:
-
-```php
-$users = User::all();
-
-$bar = $this->output->createProgressBar($users->count());
-
-foreach ($users as $user) {
-    $this->performTask($user);
-
-    $bar->advance();
-}
-
-$bar->finish();
-```
-
-For more advanced options, check out the [Symfony Progress Bar component documentation](https://symfony.com/doc/current/components/console/helpers/progressbar.html).
 
 ## Registering Commands
 
@@ -249,20 +221,26 @@ Artisan::resolve('binding.name');
 
 ## Calling Other Commands
 
-Sometimes you may wish to call other commands from your command. You may do so using the `call` method:
+Sometimes you may wish to call other commands from your command. You may do so using the `call` method.
 
 ```php
 $this->call('october:migrate');
 ```
 
-You can also pass arguments as an array:
+You can also pass arguments as an array.
 
 ```php
 $this->call('plugin:refresh', ['name' => 'October.Demo']);
 ```
 
-As well as options:
+As well as options.
 
 ```php
 $this->call('october:update', ['--force' => true]);
 ```
+
+#### See Also
+
+::: also
+* [Laravel Artisan Console Documentation](https://laravel.com/docs/9.x/artisan)
+:::
