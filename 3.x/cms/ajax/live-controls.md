@@ -1,12 +1,11 @@
 ---
-subtitle: Robust, observable and disposable controls defined anywhere using JavaScript.
+subtitle: Build robust HTML controls tethered with JavaScript.
 ---
-# Building Controls
+# Live Controls
 
-October CMS includes a simple implementation of [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) that lets you define elements that magically detect when they are added or removed from the page, called observable controls.
+October CMS includes a simple implementation of [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver), where you can define HTML controls that detect when they are on the page. Now, elements can be introduced (and dismissed) via [AJAX updates](./update-partials.md) or [turbo router](./turbo-router.md) page updates, without needing to worry about initializing their JavaScript code.
 
 ## Registering an Observable Control
-
 
 ::: aside
 This function is idempotent, so calling it multiple times will take the first seen definition.
