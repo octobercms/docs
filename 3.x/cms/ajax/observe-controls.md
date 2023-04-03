@@ -80,7 +80,7 @@ Child elements can be assigned using any selector, either with CSS or data attri
 
 ```html
 <div data-control="hello">
-    <input data-name-input disabled />
+    <input class="name" disabled />
 </div>
 ```
 
@@ -89,7 +89,7 @@ The parent control element is available via `this.element` and child elements se
 ```js
 class extends oc.ControlBase {
     init() {
-        this.$name = this.element.querySelector('[data-name-input]');
+        this.$name = this.element.querySelector('input.name');
     }
 
     connect() {
@@ -101,46 +101,16 @@ class extends oc.ControlBase {
 
 ## Working with Events
 
-Observable controls support binding events either globally or locally.
-
-::: tip
-To prevent memory leaks, it is important to unbind events so they are captured by garbage collection.
-:::
-
-### Global Events
-
-Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) can refer to a class method to make removal easy.
-
-```js
-class extends oc.ControlBase {
-    connect() {
-        addEventListener('keydown', this.onKeyDown);
-    }
-
-    disconnect() {
-        removeEventListener('keydown', this.onKeyDown);
-    }
-
-    onKeyDown(event) {
-        if (event.key === 'Escape') {
-            // Escape button was pressed
-        }
-    }
-}
-```
+Observable controls support binding events either locally or globally.
 
 ### Local Events
 
-Local events can bind to elements within the control using the `listen` and `forget` functions. When the function takes the event name (first argument) and event handler function (second argument), it will bind the listener to the control element itself.
+Local events can bind to elements within the control using the `listen` function, and these events will unbind automatically. When the function takes the event name (first argument) and event handler function (second argument), it will bind the listener to the control element itself.
 
 ```js
 class extends oc.ControlBase {
     connect() {
         this.listen('dblclick', this.onDoubleClick);
-    }
-
-    disconnect() {
-        this.forget('dblclick', this.onDoubleClick);
     }
 
     onDoubleClick() {
@@ -157,12 +127,67 @@ class extends oc.ControlBase {
         this.listen('click', '.toolbar-find-button', this.onClickFindButton);
     }
 
-    disconnect() {
-        this.forget('click', '.toolbar-find-button', this.onClickFindButton);
-    }
-
     onClickFindButton() {
         console.log('You clicked the find button inside the control!');
     }
 }
+```
+
+### Global Events
+
+Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) refers to the class method of the same instance.
+
+```js
+class extends oc.ControlBase {
+    connect() {
+        addEventListener('keydown', this.onKeyDown);
+    }
+
+    disconnect() {
+        removeEventListener('keydown', this.onKeyDown);
+    }
+
+    onKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            // Escape button was pressed
+        }
+    }
+}
+```
+
+::: tip
+To prevent memory leaks, it is important to unbind global events so they are captured by garbage collection.
+:::
+
+## Usage Example
+
+The following example has a basic HTML form with a name input and greeting button. The control class initializes the input and output elements and then watches for the click event on the Greet button. When the Greet button is pressed, the output shows a greeting that displays the entered name.
+
+```html
+<div data-control="hello-world">
+    <input type="text" class="name" />
+
+    <button class="greet">
+        Greet
+    </button>
+
+    <span class="output"></span>
+</div>
+
+<script>
+oc.registerControl('hello-world', class extends oc.ControlBase {
+    init() {
+        this.$name = this.element.querySelector('input.name');
+        this.$output = this.element.querySelector('span.output');
+    }
+
+    connect() {
+        this.listen('click', 'button.greet', this.onGreet);
+    }
+
+    onGreet() {
+        this.$output.textContent = `Hello, ${this.$name.value}!`;
+    }
+});
+</script>
 ```
