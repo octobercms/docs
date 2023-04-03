@@ -54,13 +54,13 @@ class extends oc.ControlBase {
 
 ### Configuration
 
-All data attributes on the element make up its configuration. The data attributes are converted from to camelCase, without the `data-` prefix.
+All `data-` attributes on the control element make up its available configuration.
 
 ```html
 <div data-control="hello" data-favorite-color="red"></div>
 ```
 
-Configuration values can be accessed via `this.config`. For exmaple, the `data-favorite-color` attribute will be available as `this.config.favoriteColor`.
+Configuration values can be accessed via the `this.config` property. The data attributes are converted from to camelCase, without the `data-` prefix, for example, the `data-favorite-color` attribute is accessed as `this.config.favoriteColor`.
 
 ```js
 class extends oc.ControlBase {
@@ -84,7 +84,7 @@ Child elements can be assigned using any selector, either with CSS or data attri
 </div>
 ```
 
-The parent control element is available via `this.element` and child elements selected with `querySelector` for a single element, or `querySelectorAll` for multiple elements.
+The parent control element is available via `this.element`. Any child element can be selected with `querySelector` for a single element, or `querySelectorAll` for multiple elements.
 
 ```js
 class extends oc.ControlBase {
@@ -101,7 +101,7 @@ class extends oc.ControlBase {
 
 ## Working with Events
 
-Observable controls support binding events either locally or globally.
+Observable controls support binding events either locally or globally. Local events are unbound automatically, whereas global events need to unbind themselves manually via the `disconnect` method.
 
 ### Local Events
 
