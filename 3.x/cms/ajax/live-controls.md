@@ -3,7 +3,7 @@ subtitle: Build robust HTML controls tethered with JavaScript.
 ---
 # Live Controls
 
-October CMS includes a simple implementation of [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver), where you can define HTML controls that detect when they are on the page. Now, elements can be introduced (and dismissed) via [AJAX updates](./update-partials.md) or [turbo router](./turbo-router.md) page updates, without needing to worry about initializing their JavaScript code.
+October CMS includes a simple implementation of [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver), where you can define HTML controls that detect when they are added or removed from the page. Now it's possible to initialize or uninitialize controls that are added or removed via [AJAX](./update-partials.md) or [turbo router](./turbo-router.md) updates.
 
 ## Registering an Observable Control
 
@@ -19,13 +19,13 @@ oc.registerControl('hello', class extends oc.ControlBase {
 });
 ```
 
-The control name is used to link the control on the page using the `data-control` attribute. For example, a control registered with the name **hello** monitors the page for any element with the `data-control="hello"` attribute attached to it.
+The control name is used to link to a DOM element representing the control, using the `data-control` attribute. For example, a control registered with the name **hello** monitors the page for any element with the `data-control="hello"` attribute attached to it.
 
 ```html
 <div data-control="hello"></div>
 ```
 
-Inside the class definition, the `connect` and `disconnect` methods are called when the control has been included or removed from the page. This can happen at any time since the observer is always watching for changes.
+The `connect` and `disconnect` methods within the class definition are triggered whenever the control is added or removed from the page. This can occur at any time, as the observer continuously monitors for DOM changes.
 
 ```js
 class extends oc.ControlBase {
@@ -41,7 +41,7 @@ class extends oc.ControlBase {
 
 ## Initializing a Control
 
-The `init` method establishes the control, including its default configuration and any child elements.
+The `init` method allows you to load the default configuration for the control and configure its child elements.
 
 ```js
 class extends oc.ControlBase {
@@ -75,7 +75,7 @@ class extends oc.ControlBase {
 
 ### Child Elements
 
-Child elements can be assigned using any selector, either with CSS or data attributes.
+Any selector, whether CSS or data attributes, can be used to select child elements within the parent control class.
 
 ```html
 <div data-control="hello">
@@ -100,11 +100,11 @@ class extends oc.ControlBase {
 
 ## Working with Events
 
-Observable controls support binding events either locally or globally. Local events are unbound automatically, whereas global events need to unbind themselves manually via the `disconnect` method.
+Observable controls can bind events either locally or globally. Local events are automatically unbound, while global events need to be manually unbound using the `disconnect` method.
 
 ### Local Events
 
-Local events can bind to elements within the control using the `listen` function, and these events will unbind automatically. When the function takes the event name (first argument) and event handler function (second argument), it will bind the listener to the control element itself.
+You can bind a local event handler using the listen function, and these handlers will automatically unbind. To bind a listener to the control element itself, pass the event name and the event handler function to the `listen` function.
 
 ```js
 class extends oc.ControlBase {
@@ -118,7 +118,7 @@ class extends oc.ControlBase {
 }
 ```
 
-When the function takes a selector (second argument) and an event handler (third argument), it will bind to anything that matches the selector at any time.
+To bind a local event handler to a child element, pass the event name, CSS selector, and event handler function.
 
 ```js
 class extends oc.ControlBase {
@@ -134,7 +134,7 @@ class extends oc.ControlBase {
 
 ### Global Events
 
-Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) refers to the class method of the same instance.
+Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) refers to the class method of the same control instance.
 
 ```js
 class extends oc.ControlBase {
@@ -160,7 +160,7 @@ To prevent memory leaks, it is important to unbind global events so they are cap
 
 ## Usage Example
 
-The following example has a basic HTML form with a name input and greeting button. The control class initializes the input and output elements and then watches for the click event on the Greet button. When the Greet button is pressed, the output shows a greeting that displays the entered name.
+The following example demonstrates a basic HTML form that includes a name input and a greeting button. The control class initializes the input and output elements, and then listens for the click event on the Greet button. When the Greet button is clicked, the output element displays a greeting that includes the entered name.
 
 ```html
 <div data-control="hello-world">

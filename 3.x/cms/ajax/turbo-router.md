@@ -182,7 +182,7 @@ To execute inline JavaScript code only once, regardless of first page load or PJ
 ### Making Controls Idempotent
 
 ::: aside
-October CMS provides a complimentary library that is used to make building [observable controls](./observe-controls.md) easy.
+October CMS provides a complimentary library that is used to make building [idempotent controls](./observe-controls.md) easy.
 :::
 
 When a page visit occurs and JavaScript components are initialized, it is important that these function are idempotent. In simple terms, an idempotent function is safe to apply multiple times without changing the result beyond its initial application.
