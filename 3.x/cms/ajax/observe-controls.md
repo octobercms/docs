@@ -69,7 +69,7 @@ class extends oc.ControlBase {
     }
 
     connect() {
-        console.log('Your favorite color is: ' + this.favoriteColor);
+        console.log(`Favorite color? ${this.favoriteColor}!`);
     }
 }
 ```
@@ -171,7 +171,8 @@ The following example has a basic HTML form with a name input and greeting butto
         Greet
     </button>
 
-    <span class="output"></span>
+    <span class="output">
+    </span>
 </div>
 
 <script>
