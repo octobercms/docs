@@ -158,6 +158,20 @@ class extends oc.ControlBase {
 To prevent memory leaks, it is important to unbind global events so they are captured by garbage collection.
 :::
 
+## Referencing Other Controls
+
+The `oc.fetchControl` function is used to return a control class from an existing control element, this accepts an object or selector. The resulting object may call methods or access properties on the control class definition.
+
+```js
+const searchControl = oc.fetchControl('[data-control=search]');
+```
+
+Use the `oc.fetchControls` function to retrieve multiple instances.
+
+```js
+const resultControls = oc.fetchControls('[data-control=results]');
+```
+
 ## Usage Example
 
 The following example demonstrates a basic HTML form that includes a name input and a greeting button. The control class initializes the input and output elements, and then listens for the click event on the Greet button. When the Greet button is clicked, the output element displays a greeting that includes the entered name.
