@@ -1,5 +1,5 @@
 ---
-subtitle: Build robust HTML controls tethered with JavaScript.
+subtitle: Build robust HTML controls tethered to JavaScript.
 ---
 # Live Controls
 
