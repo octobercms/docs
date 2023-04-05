@@ -43,7 +43,7 @@ username:
     type: text
     conditions:
         exact: username = :value
-        contains: username like '%:value%'
+        contains: username like %:value%
 ```
 
 ## PHP Interface
