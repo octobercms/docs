@@ -215,7 +215,7 @@ The `trigger` definition specifies these properties.
 Property | Description
 ------------- | -------------
 **action** | defines the action applied to this field when the condition is met. Supported values: `show`, `hide`, `enable`, `disable`, `empty`, `fill[somevalue]`.
-**field** | defines the other field name that will trigger the action.
+**field** | reference to the other field name that triggers the action. Example: `color` or `color[]`.
 **condition** | determines the condition the specified field should satisfy for the condition to be considered `true`. Supported values: `checked`, `unchecked`, `value[somevalue]`.
 
 #### Multiple Actions
@@ -238,6 +238,17 @@ trigger:
     action: show
     condition: value[csv][csv_custom]
     field: file_format
+```
+
+#### Multiple Field Values
+
+Some fields, such as [Checkbox List](./form/field-checkboxlist.md) and [Tag List](./form/widget-taglist.md), will store their values as an array. When referencing these fields, the field name should use an array suffix (`[]`) to look at all possible values. For example, if a `colors` field name supports multiple values, the field name `colors[]` should be used as a reference.
+
+```yaml
+trigger:
+    action: show
+    condition: value[red][green]
+    field: colors[]
 ```
 
 #### Referencing Parent Fields
