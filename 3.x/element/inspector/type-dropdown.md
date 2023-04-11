@@ -26,9 +26,18 @@ The generated output is a string value corresponding to the selected option, for
 "unit": "metric"
 ```
 
+The following [configuration values](../inspector-types.md) are commonly used.
+
+Property | Description
+------------- | -------------
+**title** | title for the property.
+**description** | a brief description of the property, optional.
+**default** | specifies a default string value, optional.
+**options** | array of options for dropdown properties, optional if defining a `get*PropertyName*Options` method.
+
 ## Dynamic Options
 
-The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown or set property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*Property*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition.
+The list of options could be fetched dynamically from the server when the Inspector is displayed. If the `options` parameter is omitted in a dropdown or set property definition the option list is considered dynamic. The component class must define a method returning the option list. The method should have a name in the following format: `get*PropertyName*Options`, where **Property** is the property name, for example: `getCountryOptions`. The method returns an array of options with the option values as keys and option labels as values. Example of a dynamic dropdown list definition.
 
 ```php
 public function defineProperties()

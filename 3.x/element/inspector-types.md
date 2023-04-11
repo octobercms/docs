@@ -40,22 +40,26 @@ The following inspector types are available:
 
 </div>
 
-## Available Properties
+## Available Configuration
 
-The property parameters are defined with an array with the following keys:
+The property parameters are defined with an array with the following keys.
 
 Key | Description
 ------------- | -------------
-**title** | required, the property title, it is used by the component Inspector in the CMS back-end.
-**description** | required, the property description, it is used by the component Inspector in the CMS back-end.
-**default** | optional, the default property value to use when the component is added to a page or layout in the CMS back-end.
+**title** | required, the property title, it is used by the component Inspector in the CMS backend.
+**description** | required, the property description, it is used by the component Inspector in the CMS backend.
+**default** | optional, the default property value to use when the component is added to a page or layout in the CMS backend.
 **type** | specifies the property type, which defines how the property is displayed in the Inspector.
 **validation** | optional, specifies validation rules for the property value (see below).
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
+**items** | optional array of items for set-based properties.
 **depends** | an array of property names a dropdown property depends on. See the [dropdown type](./inspector/type-dropdown.md) for more information.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
-**showExternalParam** | specifies visibility of the external parameter editor for the property in the Inspector. Default value: **true**.
+**showExternalParam** | specifies visibility of the external parameter editor for the property in the Inspector. Default: `true`.
+**ignoreIfDefault** | set to `true` to exclude the output from the array if the selection matches default value. Default: `false`
+**ignoreIfEmpty** | set to `true` to exclude the output from the array if the selection has an empty value. Default: `false`
+**sortOrder** | specify a custom position as an integer for the property in the available list.
 
 ## Validation Rules
 

@@ -23,3 +23,11 @@ The generated output is a string value corresponding to the selected option, for
 ```json
 "items": ["String 1", "String 2", "String 3"]
 ```
+
+The following [configuration values](../inspector-types.md) are commonly used.
+
+Property | Description
+------------- | -------------
+**title** | title for the property.
+**description** | a brief description of the property, optional.
+**default** | specifies a default value as an array, optional.

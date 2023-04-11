@@ -24,6 +24,16 @@ The generated output is an array value corresponding to the selected options, fo
 "condition": "start"
 ```
 
+The following [configuration values](../inspector-types.md) are commonly used.
+
+Property | Description
+------------- | -------------
+**title** | title for the property.
+**description** | a brief description of the property, optional.
+**default** | specifies a default string value, optional.
+**options** | array of options for dropdown properties, optional if defining a `get*PropertyName*Options` method.
+**showExternalParam** | unsupported, and should be set to `false`.
+
 ::: warning
 This type does not support the external parameter editor as specified by the `showExternalParam` property.
 :::

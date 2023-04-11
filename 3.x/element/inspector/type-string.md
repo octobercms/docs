@@ -23,3 +23,12 @@ The generated output is a string value corresponding to the selected option, for
 ```json
 "firstName": "Sam"
 ```
+
+The following [configuration values](../inspector-types.md) are commonly used.
+
+Property | Description
+------------- | -------------
+**title** | title for the property.
+**description** | a brief description of the property, optional.
+**default** | specifies a default string value, optional.
+**showExternalParam** | specifies visibility of the external parameter editor for the property in the Inspector. Default: `true`.

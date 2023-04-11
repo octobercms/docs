@@ -23,3 +23,11 @@ The generated output is `0` (unchecked) or `1` (checked), for example:
 ```json
 "enabled": 1
 ```
+
+The following [configuration values](../inspector-types.md) are commonly used.
+
+Property | Description
+------------- | -------------
+**title** | title for the property.
+**description** | a brief description of the property, optional.
+**default** | specifies a default as `true` or `false`, optional.

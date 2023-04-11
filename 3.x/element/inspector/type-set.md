@@ -27,15 +27,14 @@ The generated output is an array value corresponding to the selected options, fo
 "units": ["metric", "imperial"]
 ```
 
-The following properties are supported.
+The following [configuration values](../inspector-types.md) are commonly used.
 
 Property | Description
 ------------- | -------------
-**title** | title for the inspector type.
-**description** | a brief description of the inspector type, optional.
+**title** | title for the property.
+**description** | a brief description of the property, optional.
 **items** | an array of available items as keys and values, optional if defining a `get*PropertyName*Options` method.
 **default** | an array of selected items by default containing keys only.
-**ignoreIfDefault** | set to `true` to exclude the output from the array if the selection matches default value. Default: false
 
 The `default` parameter, if specified, should be an array listing item keys selected by default.
 
