@@ -47,6 +47,16 @@ The generated output is an object, for example:
 }
 ```
 
+The following [configuration values](../inspector-types.md) are commonly used and supported.
+
+Property | Description
+------------- | -------------
+**title** | title for the property.
+**description** | a brief description of the property, optional.
+**properties** | an array of nested property definitions.
+**default** | an array of populated items by default containing keys and values.
+**ignoreIfPropertyEmpty** | set to an array of values that should be excluded from the output if the value is empty.
+
 ::: warning
 This type does not support the external parameter editor as specified by the `showExternalParam` property.
 :::

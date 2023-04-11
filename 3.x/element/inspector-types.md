@@ -53,7 +53,6 @@ Key | Description
 **validation** | optional, specifies validation rules for the property value (see below).
 **placeholder** | optional placeholder for string and dropdown properties.
 **options** | optional array of options for dropdown properties.
-**items** | optional array of items for set-based properties.
 **depends** | an array of property names a dropdown property depends on. See the [dropdown type](./inspector/type-dropdown.md) for more information.
 **group** | an optional group name. Groups create sections in the Inspector simplifying the user experience. Use a same group name in multiple properties to combine them.
 **showExternalParam** | specifies visibility of the external parameter editor for the property in the Inspector. Default: `true`.

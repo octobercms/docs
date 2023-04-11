@@ -27,7 +27,7 @@ The generated output is an array value corresponding to the selected options, fo
 "units": ["metric", "imperial"]
 ```
 
-The following [configuration values](../inspector-types.md) are commonly used.
+The following [configuration values](../inspector-types.md) are commonly used and supported.
 
 Property | Description
 ------------- | -------------

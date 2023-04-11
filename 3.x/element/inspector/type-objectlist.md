@@ -41,6 +41,16 @@ By default the generated output is a non-associative array, for example:
 ]
 ```
 
+The following [configuration values](../inspector-types.md) are commonly used and supported.
+
+Property | Description
+------------- | -------------
+**title** | title for the property.
+**description** | a brief description of the property, optional.
+**keyProperty** | use this property key as the title, found in the **itemProperties** definitions.
+**titleProperty** | use this property name as the title, found in the **itemProperties** definitions.
+**itemProperties** | an array of nested property definitions.
+
 ::: warning
 The Object List inspector type doesn't support default values.
 :::
