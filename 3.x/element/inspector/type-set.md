@@ -12,7 +12,10 @@ public function defineProperties()
         'units' => [
             'title' => 'Select Muitple Units',
             'type' => 'set',
-            'options' => ['metric' => 'Metric', 'imperial' => 'Imperial']
+            'items' => [
+                'metric' => 'Metric',
+                'imperial' => 'Imperial'
+            ]
         ]
     ];
 }
@@ -24,6 +27,16 @@ The generated output is an array value corresponding to the selected options, fo
 "units": ["metric", "imperial"]
 ```
 
+The following properties are supported.
+
+Property | Description
+------------- | -------------
+**title** | title for the inspector type.
+**description** | a brief description of the inspector type, optional.
+**items** | an array of available items as keys and values, optional if defining a `get*PropertyName*Options` method.
+**default** | an array of selected items by default containing keys only.
+**ignoreIfDefault** | set to `true` to exclude the output from the array if the selection matches default value. Default: false
+
 The `default` parameter, if specified, should be an array listing item keys selected by default.
 
 ```php
@@ -33,7 +46,7 @@ public function defineProperties()
         'context' => [
             'title' => 'Context',
             'type' => 'set',
-            'options' => [
+            'items' => [
                 'create' => 'Create',
                 'update' => 'Update',
                 'preview' => 'Preview'
@@ -41,6 +54,15 @@ public function defineProperties()
             'default' => ['create', 'update']
         ]
     ];
+}
+```
+
+The specify the `items` dynamically, use create a method called `get*PropertyName*Options` defined in the model.
+
+```php
+public function getContextOptions()
+{
+    return ContextModel::pluck('name', 'code')->all();
 }
 ```
 
