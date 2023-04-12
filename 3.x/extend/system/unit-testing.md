@@ -3,7 +3,7 @@ subtitle: Programatically test and harden your business logic.
 ---
 # Unit Testing
 
-Individual plugin test cases can be performed using the `plugin:test` artisan command, followed by the plugin code. For example, the following command will the tests found in **plugins/acme/demo** directory.
+Individual plugin test cases can be performed using the `plugin:test` artisan command, followed by the plugin code. For example, the following command will run the tests found in **plugins/acme/demo** directory.
 
 ```bash
 php artisan plugin:test acme.demo
