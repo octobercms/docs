@@ -273,24 +273,16 @@ For example, to modify the list body row markup, create a file called `list/_lis
 
 ### Extending Column Definitions
 
-You may extend the columns of another controller from outside by calling the `extendListColumns` static method on the controller class. This method can take two arguments, **$list** will represent the Lists widget object and **$model** represents the model used by the list. Take this controller for example.
+You may extend the columns of another controller from outside by binding to the `backend.list.extendColumns` [global event](../services/event.md). The event function will take a `$list` argument that represents the `Backend\Widgets\Lists` object, where you can use the `getController` and `getModel` methods to check the execution context.
+
+Since this event has the potential to affect all lists, it is essential to check that the controller and model is of the correct type. Here is an example using the `addColumns` method to add new columns to the event log list, and modify an existing column.
 
 ```php
-class Categories extends \Backend\Classes\Controller
-{
-    public $implement = [
-        \Backend\Behaviors\ListController::class
-    ];
-
-    public $listConfig = 'config_list.yaml';
-}
-```
-
-Using the `extendListColumns` method you can add extra columns to any list rendered by this controller. It is a good idea to check the **$model** is of the correct type. Here is an example.
-
-```php
-Categories::extendListColumns(function($list, $model) {
-    if (!$model instanceof MyModel) {
+Event::listen('backend.list.extendColumns', function($list) {
+    if (
+        !$list->getController() instanceof \System\Controllers\EventLogs ||
+        !$list->getModel() instanceof \System\Models\EventLog
+    ) {
         return;
     }
 
@@ -308,12 +300,14 @@ Categories::extendListColumns(function($list, $model) {
 });
 ```
 
-You may also extend the list columns internally by overriding the `listExtendColumns` method inside the controller class.
+You may also extend the list columns internally by overriding the `listExtendColumns` method inside the controller class. This will only affect the list used by the `ListController` behavior.
 
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    // ...
+    public $implement = [
+        \Backend\Behaviors\ListController::class
+    ];
 
     public function listExtendColumns($list)
     {
@@ -324,7 +318,7 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-The following methods are available on the $list object.
+The following methods are available on the `$list` object.
 
 Method | Description
 ------------- | -------------
@@ -401,22 +395,48 @@ public function listOverrideRecordUrl($record, $definition = null)
 
 ### Extending Filter Scopes
 
-You may extend the filter scopes of another controller from outside by calling the `extendListFilterScopes` static method on the controller class. This method can take the argument `$filter` which will represent the Filter widget object.
+You may extend the filter scopes of another controller by binding to the `backend.filter.extendScopes` [global event](../services/event.md). This method can take the argument `$filter` which will represent the `Backend\Widgets\Filter` object, where you can use the `getController`, `getModel` and `getContext` methods to check the execution context.
+
+Since this event has the potential to affect all filters, it is essential to check that the controller and model is of the correct type. Here is an example using the `addScopes` method to add new fields to the event log list, and adjust the CSS classes.
 
 ```php
-Categories::extendListFilterScopes(function($filter) {
-    // Add custom CSS classes to the filter widget
-    $filter->cssClasses = array_merge(
-        $filter->cssClasses,
-        ['my', 'array', 'of', 'classes']
-    );
+Event::listen('backend.filter.extendScopes', function($filter) {
+    if (
+        !$filter->getController() instanceof \System\Controllers\EventLogs ||
+        !$filter->getModel() instanceof \System\Models\EventLog
+    ) {
+        return;
+    }
 
+    // Add a new scope
     $filter->addScopes([
         'my_scope' => [
             'label' => 'My Filter Scope'
         ]
     ]);
+
+    // Add custom CSS classes to the filter widget
+    $filter->cssClasses = array_merge(
+        $filter->cssClasses,
+        ['my-array', 'of-classes']
+    );
 });
+```
+
+You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
+
+```php
+class Categories extends \Backend\Classes\Controller
+{
+    public $implement = [
+        \Backend\Behaviors\ListController::class
+    ];
+
+    public function listFilterExtendScopes($filter)
+    {
+        $filter->addScopes([...]);
+    }
+}
 ```
 
 The following methods are available on the `$filter` object. The scopes available are the same as the [list filters configuration](./filters.md).
@@ -427,21 +447,9 @@ Method | Description
 **removeScope** | remove scope from filter widget
 **getScope** | returns an existing scope definition
 
-You may also extend the filter scopes internally to the controller class, simply override the `listFilterExtendScopes` method.
+#### Extending the Filter Response
 
-```php
-class Categories extends \Backend\Classes\Controller
-{
-    // ...
-
-    public function listFilterExtendScopes($filter)
-    {
-        $filter->addScopes([...]);
-    }
-}
-```
-
-The `listExtendRefreshResults` method can override the AJAX update response when the list updates, and should return an array of additional partial updates. The `listGetFilterWidget` will return the filter widget for access to the scopes.
+The `listExtendRefreshResults` method can interact with the AJAX update response when the list updates, and should return an array of additional partial updates. The `listGetFilterWidget` will return the filter widget for access to the scopes.
 
 ```php
 public function listExtendRefreshResults($filter, $result)

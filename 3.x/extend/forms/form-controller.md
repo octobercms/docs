@@ -380,16 +380,15 @@ public function formExtendQuery($query)
 
 ### Extending Form Fields
 
-You may extend the fields of another controller from outside by binding to the `backend.form.extendFields` [global event](../services/event.md). The event function will take a `$widget` argument that represents the Form widget object, where you can use the `getController`, `getModel`
- and `getContext` methods to check the execution context.
+You may extend the fields of another controller from outside by binding to the `backend.form.extendFields` [global event](../services/event.md). The event function will take a `$form` argument that represents the `Backend\Widgets\Form` object, where you can use the `getController`, `getModel` and `getContext` methods to check the execution context.
 
 Since this event has the potential to affect all forms, it is essential to check that the controller and model is of the correct type. Here is an example using the `addFields` method to add new fields to the mail settings form.
 
 ```php
-Event::listen('backend.form.extendFields', function($widget) {
+Event::listen('backend.form.extendFields', function($form) {
     if (
-        !$widget->getController() instanceof \System\Controllers\Settings ||
-        !$widget->getModel() instanceof \System\Models\MailSetting
+        !$form->getController() instanceof \System\Controllers\Settings ||
+        !$form->getModel() instanceof \System\Models\MailSetting
     ) {
         return;
     }
@@ -408,7 +407,9 @@ You can also extend the form fields internally by overriding the `formExtendFiel
 ```php
 class Categories extends \Backend\Classes\Controller
 {
-    // ...
+    public $implement = [
+        \Backend\Behaviors\FormController::class
+    ];
 
     public function formExtendFields($form)
     {
@@ -417,7 +418,7 @@ class Categories extends \Backend\Classes\Controller
 }
 ```
 
-The following methods are available on the $form object.
+The following methods are available on the `$form` object.
 
 Method | Description
 ------------- | -------------
