@@ -380,24 +380,17 @@ public function formExtendQuery($query)
 
 ### Extending Form Fields
 
-You can extend the fields of another controller from outside by calling the `extendFormFields` static method on the controller class. This method can take three arguments, **$form** will represent the Form widget object, **$model** represents the model used by the form and **$context** is a string containing the form context. Take this controller for example:
+You may extend the fields of another controller from outside by binding to the `backend.form.extendFields` [global event](../services/event.md). The event function will take a `$widget` argument that represents the Form widget object, where you can use the `getController`, `getModel`
+ and `getContext` methods to check the execution context.
+
+Since this event has the potential to affect all forms, it is essential to check that the controller and model is of the correct type. Here is an example using the `addFields` method to add new fields to the mail settings form.
 
 ```php
-class Categories extends \Backend\Classes\Controller
-{
-    public $implement = [
-        \Backend\Behaviors\FormController::class
-    ];
-
-    public $formConfig = 'config_form.yaml';
-}
-```
-
-Using the `extendFormFields` method you can add extra fields to any form rendered by this controller. Since this has the potential to affect all forms used by this controller, it is a good idea to check the **$model** is of the correct type. Here is an example:
-
-```php
-Categories::extendFormFields(function($form, $model, $context) {
-    if (!$model instanceof MyModel) {
+Event::listen('backend.form.extendFields', function($widget) {
+    if (
+        !$widget->getController() instanceof \System\Controllers\Settings ||
+        !$widget->getModel() instanceof \System\Models\MailSetting
+    ) {
         return;
     }
 
@@ -435,7 +428,6 @@ Method | Description
 
 Each method takes an array of fields similar to the [form field configuration](../../element/form-fields.md).
 
-<a id="oc-filtering-form-fields"></a>
 ### Filtering Form Fields
 
 As described in the [field dependencies section](./field-dependencies.md), you may also implement form field filtering by extension by hooking in to the `form.filterFields` event.
