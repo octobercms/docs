@@ -40,10 +40,11 @@ For each scope you can specify these properties (where applicable).
 Property | Description
 ------------- | -------------
 **label** | a name when displaying the filter scope to the user.
-**type** | defines how this scope should be displayed,. Default: `group`.
+**type** | defines how this scope should be displayed. Default: `group`.
 **conditions** | enables or disables condition functions or specifies a raw where query statement to apply to each condition, see the scope type definition for details.
 **modelScope** | specifies a [query scope method](../extend/database/model.md) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s).
-**options** | options to use if filtering by multiple items, this option can specify an array or a method name in the `modelClass` model.
+**options** | options to use if filtering by multiple items, supplied as an array.
+**optionsMethod** | request options from a method name defined on the model or as a static method call, eg `Class::method`.
 **emptyOption** | an optional label for an intentional empty selection.
 **default** | supply a default value for the filter, as either array, string or integer depending on the filter value.
 **permissions** | the [permissions](../extend/backend/permissions.md) that the current backend user must have in order for the filter scope to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.

@@ -19,7 +19,8 @@ The following properties are available for the filter.
 
 Property | Description
 ------------- | -------------
-**options** | available options for the filter, as an array or method name.
+**options** | available options for the filter, as an array.
+**optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
 **conditions** | a custom SQL select statement to use for the filter.
 **nameFrom** | the column name to use in the model class, used for displaying the name. Default: `name`.
 **modelClass** | class of the model to use for the available filter records

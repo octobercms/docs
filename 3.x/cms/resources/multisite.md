@@ -62,6 +62,7 @@ You can modify this behavior using the `redirect_policy` value found in the **co
 #### See Also
 
 ::: also
+* [Multisite Features](https://octobercms.com/features/multisite)
 * [Theme Localization](../themes/localization.md)
 * [Site Picker Component](../components/sitepicker.md)
 * [Multisite Trait](../../extend/database/traits.md)

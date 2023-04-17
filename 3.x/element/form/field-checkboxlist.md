@@ -19,7 +19,8 @@ The following properties are supported.
 
 Property | Description
 ------------- | -------------
-**options** | available options for the dropdown, as an array or method name.
+**options** | available options for the list, as an array.
+**optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
 **default** | a default value to use for new records.
 **quickselect** | show the quick selection buttons.
 **cssClass** | used for setting the options as inline.
