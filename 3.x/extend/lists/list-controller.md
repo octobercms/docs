@@ -135,7 +135,7 @@ To filter a list by user defined input, add the following list configuration to 
 filter: $/acme/blog/models/post/scopes.yaml
 ```
 
-The **filter** property should make reference to a [filter configuration file](../backend/filters.md) path or supply an array with the configuration.
+The **filter** property should make reference to a [filter configuration file](./filters.md) path or supply an array with the configuration.
 
 ## Defining List Columns
 
@@ -501,7 +501,7 @@ public function listExtendQuery($query, $definition = null)
 }
 ```
 
-The [list filter](../backend/filters.md) model query can also be extended by overriding the `listFilterExtendQuery` method:
+The [list filter](./filters.md) model query can also be extended by overriding the `listFilterExtendQuery` method.
 
 ```php
 public function listFilterExtendQuery($query, $scope)
