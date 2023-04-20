@@ -235,4 +235,5 @@ function onCheckUsername()
 
 ::: also
 * [Validation service](../../extend/services/validation.md)
+* [Validation trait](../../extend/database/traits.md)
 :::

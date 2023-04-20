@@ -348,8 +348,8 @@ In addition to customizing the name of the joining table, you may also customize
 public $belongsToMany = [
     'roles' => [
         \Acme\Blog\Models\Role::class,
-        'table'    => 'acme_blog_role_user',
-        'key'      => 'my_user_id',
+        'table' => 'acme_blog_role_user',
+        'key' => 'my_user_id',
         'otherKey' => 'my_role_id'
     ]
 ];
