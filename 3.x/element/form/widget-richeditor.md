@@ -15,6 +15,8 @@ html_content:
 Option | Description
 ------------- | -------------
 **toolbarButtons** | which buttons to show on the editor toolbar.
+**size** | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
+**resizable** | set to `true` to include resizable margins. Default: `false`.
 
 The available toolbar buttons are:
 

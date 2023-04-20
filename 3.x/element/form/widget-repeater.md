@@ -72,39 +72,48 @@ The repeater field supports a group mode using `groups` that allows a custom set
 content:
     type: repeater
     prompt: Add content block
-    groups: $/acme/blog/config/repeater_fields.yaml
+    groups: $/acme/blog/config/fields_repeater.yaml
 ```
 
-This is an example of a group configuration file, which would be located in **/plugins/acme/blog/config/repeater_fields.yaml**. Alternatively these definitions could be specified inline with the repeater.
+This is an example of a group configuration file, which would be located in **/plugins/acme/blog/config/fields_repeater.yaml**. For better organization, the `groups` can specify one file per group definition.
 
 ```yaml
-textarea:
-    name: Textarea
-    description: Basic text field
-    icon: icon-file-text-o
-    fields:
-        text_area:
-            label: Text Content
-            type: textarea
-            size: large
+groups:
+    textarea: $/acme/blog/config/fields_textarea.yaml
+    quote: $/acme/blog/config/fields_quote.yaml
+```
 
-quote:
-    name: Quote
-    description: Quote item
-    icon: icon-quote-right
-    fields:
-        quote_position:
-            span: auto
-            label: Quote Position
-            type: radio
-            options:
-                left: Left
-                center: Center
-                right: Right
-        quote_content:
-            span: auto
-            label: Details
-            type: textarea
+Alternatively, the definitions could be specified inline with the repeater.
+
+```yaml
+groups:
+    textarea:
+        name: Textarea
+        description: Basic text field
+        icon: icon-file-text-o
+        fields:
+            text_area:
+                label: Text Content
+                type: textarea
+                size: large
+
+    quote:
+        name: Quote
+        description: Quote item
+        icon: icon-quote-right
+        fields:
+            quote_position:
+                span: auto
+                label: Quote Position
+                type: radio
+                options:
+                    left: Left
+                    center: Center
+                    right: Right
+            quote_content:
+                span: auto
+                label: Details
+                type: textarea
 ```
 
 Each group must specify a unique key and the definition supports the following options.
