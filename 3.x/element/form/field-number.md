@@ -11,10 +11,14 @@ your_age:
     type: number
 ```
 
-The following properties are supported.
+
+The following [field properties](../form-fields.md) are supported and commonly used.
 
 Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
 **min** | the client-side minimum value, default `null`.
 **max** | the client-side maximum value, default `null`.
 **step** | the client-side step increment, default `any`.

@@ -11,6 +11,15 @@ blog_title:
     label: Blog Title
 ```
 
+The following [field properties](../form-fields.md) are commonly used.
+
+Property | Description
+------------- | -------------
+**label** | a name when displaying the form field to the user.
+**placeholder** | text to display in the field when it is empty.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
+
 You may use the `default` property to set a default value.
 
 ```yaml

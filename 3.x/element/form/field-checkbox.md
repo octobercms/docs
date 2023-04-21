@@ -11,10 +11,11 @@ show_content:
     label: Display content
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are commonly used.
 
 Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
 **default** | a default value to use for new records.
 **comment** | text to display below the checkbox.
 

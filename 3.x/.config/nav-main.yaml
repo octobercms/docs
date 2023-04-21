@@ -15,6 +15,13 @@
         - content/field-mixin
         - content/field-entries
 -
+    title: Form UI
+    children:
+        - form/ui-section
+        - form/ui-hint
+        - form/ui-ruler
+        - form/ui-partial
+-
     title: Form Fields
     children:
         - form/field-text
@@ -47,13 +54,6 @@
         - form/widget-sensitive
         - form/widget-taglist
         - form/widget-boxes
--
-    title: Form UI
-    children:
-        - form/ui-section
-        - form/ui-hint
-        - form/ui-ruler
-        - form/ui-partial
 -
     title: List Columns
     children:

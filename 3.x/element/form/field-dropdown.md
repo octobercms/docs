@@ -15,15 +15,17 @@ status_type:
         archived: Archived
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are supported and commonly used.
 
 Property | Description
 ------------- | -------------
+**title** | title for the form field.
+**placeholder** | text to display when the field is empty.
+**default** | a default value to use for new records.
+**comment** | places a descriptive comment below the field.
 **options** | available options for the dropdown, as an array.
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
-**default** | a default value to use for new records.
 **emptyOption** | text to display when allowing an empty option.
-**placeholder** | text to display when the field is empty.
 **showSearch** | allow the user to search options. Default: `true`.
 
 Generally `options` are defined with key-value pair, where the value and label are independently specified.

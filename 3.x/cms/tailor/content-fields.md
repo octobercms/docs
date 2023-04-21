@@ -33,7 +33,7 @@ Property | Description
 **placeholder** | if the field supports a placeholder value.
 **comment** | places a descriptive comment below the field.
 **commentAbove** | places a comment above the field.
-**commentHtml** | allow HTML markup inside the comment. Options: `true`, `false`.
+**commentHtml** | allow HTML markup inside the comment. Default: `false`.
 **default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
 **tab** | assigns the field to a tab.
 **validation** | defines validation rules for the form field, see [the validation article](../../extend/services/validation.md) for rule definitions.

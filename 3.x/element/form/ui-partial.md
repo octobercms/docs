@@ -11,7 +11,7 @@ content:
     path: content_field
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are supported.
 
 Property | Description
 ------------- | -------------

@@ -12,7 +12,7 @@ _section1:
     comment: This section contains details about the user.
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are supported.
 
 Property | Description
 ------------- | -------------

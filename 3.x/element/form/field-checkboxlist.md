@@ -15,10 +15,11 @@ permissions:
         modify_account: Modify account
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are supported and commonly used.
 
 Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
 **options** | available options for the list, as an array.
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
 **default** | a default value to use for new records.

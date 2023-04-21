@@ -11,13 +11,15 @@ blog_contents:
     label: Contents
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are supported and commonly used.
 
 Property | Description
 ------------- | -------------
-**size** | the field size. Supported values: tiny, small, large, huge, giant. Default: `large`.
-**default** | a default value to use for new records.
+**title** | title for the form field.
+**default** | specifies a default string value, optional.
 **placeholder** | text to display when the field is empty.
+**comment** | places a descriptive comment below the field.
+**size** | the field size in height. Supported values: `tiny`, `small`, `large`, `huge`, `giant`. Default: `large`.
 
 You may specify how large the field size should be with the `size` property.
 

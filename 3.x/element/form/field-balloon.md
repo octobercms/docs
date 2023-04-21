@@ -15,13 +15,15 @@ gender:
         male: Male
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are commonly used.
 
 Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**default** | a default value to use for new records.
+**comment** | places a descriptive comment below the field.
 **options** | available options for the dropdown, as an array.
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
-**default** | a default value to use for new records.
 
 You may use the `default` property to set a default value, where the value is the key of the option.
 

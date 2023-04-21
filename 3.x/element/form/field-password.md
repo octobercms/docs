@@ -11,6 +11,13 @@ user_password:
     type: password
 ```
 
+The following [field properties](../form-fields.md) are commonly used.
+
+Property | Description
+------------- | -------------
+**title** | title for the form field.
+**comment** | places a descriptive comment below the field.
+
 ::: tip
 Take a look at the [Sensitive form widget](./widget-sensitive.md) for a field that can capture and display sensitive values.
 :::
