@@ -11,8 +11,13 @@ whitepaper_file:
     type: mediafinder
 ```
 
-Option | Description
+The following [field properties](../form-fields.md) are supported and commonly used.
+
+Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
 **mode** | the expected file type, either `file`, `folder` or `image`. Default: `file`.
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.

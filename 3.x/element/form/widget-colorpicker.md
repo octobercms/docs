@@ -11,8 +11,13 @@ color:
     type: colorpicker
 ```
 
-Option | Description
+The following [field properties](../form-fields.md) are supported and commonly used.
+
+Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
 **availableColors** | list of available colors as an array.
 **allowEmpty** | allows empty input value. Default: `false`
 **allowCustom** | allows selection of a custom color. Default: `true`

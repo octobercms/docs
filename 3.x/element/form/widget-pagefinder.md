@@ -17,9 +17,14 @@ The selected value is stored using the following format.
 october://<TYPE>@link/<REFERENCE>?<PARAM>=<VALUE>
 ```
 
-Option | Description
+The following [field properties](../form-fields.md) are supported and commonly used.
+
+Property | Description
 ------------- | -------------
-**singleMode** | only allows items to be selected that resovle to a single URL. Default: `false`
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
+**singleMode** | only allows items to be selected that resolve to a single URL. Default: `false`
 
 ## Linking to Pages
 

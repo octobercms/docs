@@ -11,10 +11,12 @@ categories:
     type: relation
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are supported and commonly used.
 
 Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**comment** | places a descriptive comment below the field.
 **nameFrom** | a model attribute name used for displaying the relation label. Default: name.
 **select** | a custom SQL select statement to use for the name.
 **emptyOption** | text to display when there is no available selections.

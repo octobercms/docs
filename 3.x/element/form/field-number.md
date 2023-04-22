@@ -11,7 +11,6 @@ your_age:
     type: number
 ```
 
-
 The following [field properties](../form-fields.md) are supported and commonly used.
 
 Property | Description

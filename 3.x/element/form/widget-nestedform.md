@@ -22,8 +22,12 @@ content:
                 type: text
 ```
 
-Option | Description
+The following [field properties](../form-fields.md) are supported and commonly used.
+
+Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**comment** | places a descriptive comment below the field.
 **form** | inline field definitions or a reference to form field definition file.
 **showPanel** | places the form inside a panel container. Default: `true`
 **defaultCreate** | if a related record is not found, attempt to create one. Default: `false`

@@ -12,11 +12,16 @@ html_content:
     size: huge
 ```
 
-Option | Description
+The following [field properties](../form-fields.md) are supported and commonly used.
+
+Property | Description
 ------------- | -------------
-**toolbarButtons** | which buttons to show on the editor toolbar.
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
+**toolbarButtons** | which buttons to show on the editor toolbar. Example: `bold|italic`
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
-**resizable** | set to `true` to include resizable margins. Default: `false`.
+**showMargins** | set to `true` to include resizable document margins. Default: `false`.
 
 The available toolbar buttons are:
 

@@ -12,8 +12,13 @@ css_content:
     language: html
 ```
 
-Option | Description
+The following [field properties](../form-fields.md) are supported and commonly used.
+
+Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
 **language** | code language, for example, php, css, javascript, html. Default: `php`.
 **showGutter** | shows a gutter with line numbers. Default: `true`.
 **wrapWords** | breaks long lines on to a new line. Default `true`.

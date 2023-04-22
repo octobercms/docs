@@ -18,8 +18,13 @@ extra_information:
                 type: textarea
 ```
 
-Option | Description
+The following [field properties](../form-fields.md) are supported and commonly used.
+
+Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default array value, optional.
+**comment** | places a descriptive comment below the field.
 **form** | inline field definitions or a reference to form field definition file.
 **prompt** | text to display for the create button. Default: Add new item.
 **displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`

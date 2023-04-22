@@ -19,10 +19,13 @@ data:
 In order to use this with a model, the field should be defined in the [jsonable property](../../extend/system/models.md) or anything that can handle storing as an array.
 :::
 
-The following lists the configuration values of the data table widget itself.
+The following [field properties](../form-fields.md) are supported and commonly used.
 
-Option | Description
+Property | Description
 ------ | -----------
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
 **adding** | allow records to be added to the data table. Default: `true`.
 **btnAddRowLabel** | defines a custom label for the "Add Row Above" button.
 **btnAddRowBelowLabel** | defines a custom label for the "Add Row Below" button.

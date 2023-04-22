@@ -11,10 +11,13 @@ tags:
     separator: space
 ```
 
-The following properties are supported.
+The following [field properties](../form-fields.md) are supported and commonly used.
 
 Property | Description
 ------------- | -------------
+**label** | a name when displaying the form field to the user.
+**default** | specifies a default string value, optional.
+**comment** | places a descriptive comment below the field.
 **mode** | controls how the value is returned, either `string`, `array` or `relation`. Default: `string`
 **separator** | separate tags with the specified character, either `comma` or `space`. Default: `comma`
 **customTags** | allows custom tags to be entered manually by the user. Default: `true`
