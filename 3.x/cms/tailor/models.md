@@ -128,12 +128,18 @@ $records->load(['categories', 'author']);
 
 When writing related fields, you can call the relation name as a method to return the relationship definition, then a subsequent `create()` method can be called, which returns the newly created relation.
 
-The following locates the first blog post in the **Blog\Post** section and then creates an assocaited category.
+The following locates the first blog post in the **Blog\Post** section and then creates an associated category.
 
 ```php
 $post = EntryRecord::inSection('Blog\Post')->first();
 
 $post->categories()->create(['title' => 'Test', 'price' => '100']);
+```
+
+Use the `make()` method to create a new empty model instance.
+
+```php
+$category = $post->categories()->make();
 ```
 
 If the category already exists, use the `add()` method instead. The following adds the first blog category to the first blog post.

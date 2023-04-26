@@ -889,6 +889,28 @@ $posts = Post::whereDoesntHave('comments', function ($query) {
 })->get();
 ```
 
+### Querying Belongs To Relationships
+
+When querying for the children of a "belongs to" relationship, you may find it more convenient to use the whereBelongsTo method, which will automatically determine the proper relationship and foreign key for the given model.
+
+```php
+$posts = Post::whereBelongsTo($user)->get();
+```
+
+You may also provide a collection instance to the `whereBelongsTo` method. This will retrieve models that belong to any of the parent models within the collection.
+
+```php
+$users = User::where('vip', true)->get();
+
+$posts = Post::whereBelongsTo($users)->get();
+```
+
+By default, the relationship associated with the given model based on the class name of the model; however, you may specify the relationship name as the first argument, followed by the models.
+
+```php
+$posts = Post::whereBelongsTo('author', $user)->get();
+```
+
 ### Counting Related Records
 
 In some scenarios you may want to count the number of related records found in a given relationship definition. The `withCount` method can be used to include a `{relation}_count` column with the selected models.

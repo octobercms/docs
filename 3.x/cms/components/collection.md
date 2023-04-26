@@ -55,6 +55,14 @@ To show only posts that have a related author, you can use the `whereRelation` q
 {% set authorPosts = posts.whereRelation('author', 'slug', 'bella-vista').get() %}
 ```
 
+For singular relations, you may find it more convenient to use the `whereBelongsTo` method, that automatically determines the "belongs to" association. The method accepts the related field name (first argument), and a single model or a collection of models (second argument).
+
+```twig
+{% set authors = authors.where('is_featured', true).get() %}
+
+{% set posts = posts.whereBelongsTo('author', authors).get() %}
+```
+
 ### Accessing the Entry Type
 
 To filter records by their entry type, perform a `where()` query using the `content_group` attribute. The following will list posts that use the entry type code **featured_post**.

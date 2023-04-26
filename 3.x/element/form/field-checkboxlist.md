@@ -26,6 +26,7 @@ Property | Description
 **quickselect** | show the quick selection buttons.
 **cssClass** | used for setting the options as inline.
 **inlineOptions** | display the options side-by-side instead of stacked, when less than 10 options.
+**placeholder** | a message to display when there are no records selected (preview context).
 
 You may use the `default` property to set a default value, where the value is the key of the option.
 

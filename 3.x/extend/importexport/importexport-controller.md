@@ -54,7 +54,7 @@ To support the Import page add the following configuration to the YAML file.
 
 ```yaml
 import:
-    title: Import subscribers
+    title: Import Subscribers
     modelClass: Acme\Campaign\Models\SubscriberImport
     list: $/acme/campaign/models/subscriberimport/columns.yaml
     redirect: acme/campaign/subscribers
@@ -76,7 +76,7 @@ To support the Export page add the following configuration to the YAML file.
 
 ```yaml
 export:
-    title: Export subscribers
+    title: Export Subscribers
     modelClass: Acme\Campaign\Models\SubscriberExport
     list: $/acme/campaign/models/subscriberexport/columns.yaml
     redirect: acme/campaign/subscribers
