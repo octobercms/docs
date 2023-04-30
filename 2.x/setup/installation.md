@@ -24,10 +24,16 @@ You should also check that your computer or server meets the [minimum system req
 You can then create a new October CMS project by using `create-project` command in your terminal. The following creates a new project in a directory called **myoctober**.
 
 ```bash
-composer create-project october/october myoctober "^2.0"
+composer create-project october/october myoctober
 ```
 
 You may also install to the current directory using this command instead.
+
+```bash
+composer create-project october/october .
+```
+
+The above commands install the latest version of October CMS, if you want to install v2.0, use the command below instead.
 
 ```bash
 composer create-project october/october . "^2.0"
