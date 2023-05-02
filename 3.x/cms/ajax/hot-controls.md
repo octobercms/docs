@@ -1,7 +1,7 @@
 ---
 subtitle: Build observable HTML controls tethered to JavaScript.
 ---
-# Live Controls
+# Hot Controls
 
 October CMS includes a simple implementation of [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver), where you can define HTML controls that detect when they are added or removed from the page. Now it's possible to initialize or uninitialize controls that are added or removed via [AJAX](./update-partials.md) or [turbo router](./turbo-router.md) updates.
 
