@@ -83,10 +83,10 @@ App::error(function(InvalidUserException $exception) {
 });
 ```
 
-To listen for PHP fatal errors, you may use the `App::fatal` method:
+To listen for PHP fatal errors, you may use check for the Error exception type:
 
 ```php
-App::fatal(function($exception) {
+App::error(function(Error $exception) {
     //
 });
 ```
