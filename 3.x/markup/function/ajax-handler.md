@@ -20,7 +20,7 @@ Property | Data
 
 ## Accessing Data
 
-Take the following AJAX handler definition.
+Variables assigned to the page are available to the resulting object. Take the following AJAX handler definition.
 
 ```php
 function onResetPassword()
@@ -57,13 +57,25 @@ When returning as a response, the data will be available in JSON as the **data**
 }
 ```
 
+The page variables are not included with the response for security reasons. Call the `withPageVars` method to include them with the response.
+
+```twig
+{% do response(ajaxHandler('onResetPassword').withPageVars()) %}
+```
+
+The `withVars` method can be used to include additional data with the response.
+
+```twig
+{% do response(ajaxHandler('onResetPassword').withVars({ 'token': 'foobar' })) %}
+```
+
 ## Handling Errors
 
 If an exception occurs during the handler, the error message will be available in the **error.message** property. If the error is a `ValidationException` then the invalid fields can be found in the **error.fields** property.
 
 ```twig
 {% if result.error %}
-    An error occured: {{ result.error.message }}
+    An error occurred: {{ result.error.message }}
 {% endif %}
 ```
 
@@ -72,7 +84,7 @@ If an exception occurs, the error information will be available as the **error**
 ```json
 {
     "error": {
-        "message": "An error occured"
+        "message": "An error occurred"
     }
 }
 ```
