@@ -23,6 +23,12 @@ The `--rollback` option will reverse all migrations, dropping database tables an
 php artisan october:migrate --rollback
 ```
 
+The `--skip-errors` option will ignore any exceptions that occur during the migration process. This can be useful in cases where tables already exist, but version information should still be applied.
+
+```bash
+php artisan october:migrate --skip-errors
+```
+
 ## Upgrade Guide from v1 and v2
 
 If your starting point is October CMS 2.0, please observe the following guides when performing the upgrade.
