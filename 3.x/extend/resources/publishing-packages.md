@@ -139,11 +139,11 @@ git tag -a v2.0.1 -m "Version 2 is here!"
 
 ### Incrementing the Version File
 
-In addition to tagging, you should also increment the version file found in your [plugin version file](../system/plugins.md) or [theme settings](../../cms/themes/settings.md). This file instructs the October CMS gateway about the latest version, and contains previous the version history.
+In addition to tagging, you should also increment the version file found in your [plugin version file](../system/plugins.md) or [theme settings](../../cms/themes/settings.md). This file instructs the October CMS gateway about the latest version, and contains the previous version history.
 
 To help understand how this works:
 
-- The gateway use the version file found in the **default branch** of the repo.
+- The gateway uses the version file found in the **default branch** of the repo.
 - Composer will install and update using the **latest stable tag** of the repo.
 
 This means the version file in the default branch should always match the latest stable tag in Git.
