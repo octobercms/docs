@@ -14,7 +14,7 @@ Connection | Package
 ------------- | -------------
 Amazon SQS | `aws/aws-sdk-php ~3.0`
 Beanstalkd | `pda/pheanstalk ~4.0`
-Redis | `predis/predis ~1.0` or phpredis PHP extension
+Redis      | `predis/predis ~1.0` or phpredis PHP extension
 
 ## Basic usage
 
