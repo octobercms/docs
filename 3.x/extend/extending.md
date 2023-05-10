@@ -5,7 +5,7 @@ subtitle: Learn about the common methods used to extend October CMS.
 
 ## Extending by Plugin Registration
 
-In almost all situations, extending October CMS happens in the plugin registration file, which is essentially a [Laravel Service Provider](https://laravel.com/docs/9.x/providers). The registration file is called **Plugin.php** and is found in the root directory of a plugin.
+In almost all situations, extending October CMS happens in the plugin registration file, which is essentially a [Laravel Service Provider](https://laravel.com/docs/10.x/providers). The registration file is called **Plugin.php** and is found in the root directory of a plugin.
 
 The following extension methods are available to override in the plugin registration class:
 

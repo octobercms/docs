@@ -107,5 +107,5 @@ Session::keep(['username', 'email']);
 #### See Also
 
 ::: also
-* [Laravel HTTP Session](https://laravel.com/docs/9.x/session)
+* [Laravel HTTP Session](https://laravel.com/docs/10.x/session)
 :::

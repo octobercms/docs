@@ -43,7 +43,7 @@ Using JSON files for localization is the preferred method of translation where s
 ```
 
 ::: tip
-Laravel offers a PHP-based translation method as a supported alternative to using JSON. View the [Laravel Localization article](https://laravel.com/docs/9.x/localization) to learn more.
+Laravel offers a PHP-based translation method as a supported alternative to using JSON. View the [Laravel Localization article](https://laravel.com/docs/10.x/localization) to learn more.
 :::
 
 ## Accessing Localization Strings
@@ -163,5 +163,5 @@ If the language key does not exist or you cannot find it, you may [contact us fo
 
 ::: also
 * [Theme Localization](../../cms/themes/localization.md)
-* [Laravel Localization](https://laravel.com/docs/9.x/localization)
+* [Laravel Localization](https://laravel.com/docs/10.x/localization)
 :::
