@@ -32,19 +32,19 @@ function onStart() {
 {{ newsPage }}
 ```
 
-You can create a link to the current page by filtering an empty string:
+You can create a link to the current page by filtering the `this` variable.
 
 ```twig
-<a href="{{ ''|page }}">Refresh page</a>
+<a href="{{ this|page }}">Refresh page</a>
 ```
 
-To get the link to the current page in PHP, you can use `$this->pageUrl('')` with an empty string.
+To get the link to the current page in PHP, call the `$this->pageUrl()` method without any arguments.
 
 ```
 ==
 <?php
 function onStart() {
-    $this['currentUrl'] = $this->pageUrl('');
+    $this['currentUrl'] = $this->pageUrl();
 }
 ?>
 ==
