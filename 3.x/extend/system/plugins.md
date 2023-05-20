@@ -243,6 +243,9 @@ class SomeUpgradeFile extends Migration
 }
 ```
 
+### Activate your plugin
+Now that your plugin is created, you need to activate it in order to use it in your project. See [Installing packages](../resources/installing-packages.md#enable-plugin).
+
 #### See Also
 
 ::: also
