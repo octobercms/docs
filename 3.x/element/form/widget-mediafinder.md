@@ -36,8 +36,8 @@ background_image:
 You may set the `mode` to **folder** to only allow selecting a media folder path.
 
 ```yaml
-media_gallery:
-    label: Media Gallery
+media_folder:
+    label: Media Folder
     type: mediafinder
     mode: folder
 ```
@@ -45,3 +45,17 @@ media_gallery:
 ::: tip
 Unlike the [File Upload form widget](./widget-fileupload.md), the Media Finder form widget stores its data as a string representing the path to the media files selected within the Media Library. It should associate to a normal attribute on your model.
 :::
+
+## Selecting Multiple Items
+
+The media finder will attempt to guess if multiple items can be selected based on the [jsonable attribute](../../extend/system/models.md) in the model, which is a requirement for storing multiple items.
+
+You may limit the number of items that can be selected using the `maxItems` property.
+
+```yaml
+media_gallery:
+    label: Image
+    type: mediafinder
+    mode: image
+    maxItems: 10
+```
