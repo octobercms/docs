@@ -24,13 +24,16 @@ Use the `{% content 'file.htm' %}` tag to render a content block in a [page](./p
 
 This example shows a complete page rendering a content block.
 
-```twig
+::: cmstemplate
+```ini
 url = "/contacts"
-==
+```
+```twig
 <div class="contacts">
     {% content 'contacts.html' %}
 </div>
 ```
+:::
 
 Another example rendering some markdown with the `md` extension.
 
@@ -50,7 +53,7 @@ Passing the variable called `name` with a value **John** to the content block.
 
 Inside the content block, variables can be accessed using singular *curly brackets*.
 
-```
+```html
 <h1>This is a demo for {name}</h1>
 ```
 
@@ -68,7 +71,7 @@ View::share('site_name', 'October CMS');
 
 A common area to place this method is inside the register or boot method of a [plugin registration file](../../extend/system/plugins.md). Using the above example, the variable `{site_name}` will be available inside all content blocks.
 
-```
+```html
 <p>Welcome to {site_name}</p>
 ```
 

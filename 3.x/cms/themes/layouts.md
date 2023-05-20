@@ -21,12 +21,15 @@ Remember that if you refer a layout from a subdirectory you should specify the s
 
 To use a layout for a [page](./pages.md), the page should refer the layout file name (without extension) in the configuration section. Below is an example page template using the **default.htm** layout.
 
-```twig
+::: cmstemplate
+```ini
 url = "/"
 layout = "default"
-==
+```
+```twig
 <p>Hello, world!</p>
 ```
+:::
 
 When this page is requested its content is merged with the layout, or more precisely - the layout's `{% page %}` tag is replaced with the page content. The previous examples would generate the following markup:
 
@@ -42,15 +45,18 @@ Note that you can [render partials](./partials.md) in layouts. This lets you to 
 
 The configuration section is optional for layouts. The supported configuration parameters are **name** and **description**. The parameters are optional and used in the back-end user interface. Example layout template with a description:
 
-```twig
+::: cmstemplate
+```ini
 description = "Basic layout example"
-==
+```
+```twig
 <html>
     <body>
         {% page %}
     </body>
 </html>
 ```
+:::
 
 ## Using a Dynamic Page Title
 
@@ -91,16 +97,19 @@ Placeholders allow pages to inject content to the layout. Placeholders are defin
 
 Pages can inject content to placeholders with the `{% put %}` and `{% endput %}` tags. The following example demonstrates a simple page template which injects a CSS link to the placeholder **head** defined in the previous example.
 
-```twig
+::: cmstemplate
+```ini
 url = "/my-page"
 layout = "default"
-==
+```
+```twig
 {% put head %}
     <link href="/themes/demo/assets/css/page.css" rel="stylesheet">
 {% endput %}
 
 <p>The page content goes here.</p>
 ```
+:::
 
 More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder.md).
 
@@ -140,14 +149,17 @@ Layout (1) → Page (2) → Partials (3)
 
 This is particularly useful when [building API endpoints](../resources/building-apis.md). In the following example, the page logic will not run since the page tag is never called.
 
-```twig
+::: cmstemplate
+```ini
 description = "API Layout"
 is_priority = 1
-==
+```
+```twig
 {% if false %}
     {% page %}
 {% endif %}
 ```
+:::
 
 #### See Also
 

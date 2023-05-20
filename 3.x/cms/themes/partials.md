@@ -13,11 +13,14 @@ Partial templates files reside in the **partials** directory in your theme. Part
 
 A configuration section is optional for partials and can contain the optional **description** parameter that is displayed in the backend user interface. This example shows a partial with a description defined.
 
-```twig
+::: cmstemplate
+```ini
 description = "Demo partial"
-==
+```
+```html
 <p>This is a partial</p>
 ```
+:::
 
 The partial configuration section can also contain component definitions. The [Components article](./components.md) explains components in more detail.
 
@@ -135,31 +138,39 @@ Partials, like pages, can use any Twig features. Please refer to the [Dynamic Pa
 
 There are special functions that can be defined in the PHP section of partials: `onStart` and `onEnd`. The `onStart` function is executed before the partial is rendered and before the [partial components](./components.md) are executed. The `onEnd` function is executed before the partial is rendered and after the partial components are executed. In the `onStart` and `onEnd` functions you can inject variables to the Twig environment. Use the `$this` with array notation to pass variables to the page.
 
+::: cmstemplate
+```ini
+```
 ```php
-==
 <?
 function onStart()
 {
     $this['hello'] = "Hello world!";
 }
 ?>
-==
+```
+```twig
 <h3>{{ hello }}</h3>
 ```
+:::
 
 Externally assigned variables to the partial can be accessed in PHP using the `$this` object.
 
+::: cmstemplate
+```ini
+```
 ```php
-==
 <?
 function onStart()
 {
     $this['location'] = $this->city . ', ' . $this->country;
 }
 ?>
-==
+```
+```twig
 <p>{{ location }} is the same as {{ city }}, {{ country }}.</p>
 ```
+:::
 
 The templating language provided by October CMS is described in the [Markup Guide](../../markup/templating.md). The overall sequence the handlers are executed is described in the [Dynamic Layouts section](./layouts.md) of the documentation.
 
