@@ -7,11 +7,14 @@ Every website serves up at least one page and in October CMS, a page is represen
 
 The Configuration and Twig template sections are required for pages, but the PHP section is optional. Below, you can see the simplest home page example.
 
-```twig
+::: cmstemplate
+```ini
 url = "/"
-==
+```
+```twig
 <h1>Hello, world!</h1>
 ```
+:::
 
 ## Page Configuration
 

@@ -26,7 +26,8 @@ The following example uses the `vars` property to create a new variable called *
 ```ini
 [resources]
 vars[activeNav] = 'blog'
-==
+```
+```twig
 {% if activeNav === 'blog' %}
     <p>The blog is active!</p>
 {% endif %}

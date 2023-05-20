@@ -30,11 +30,14 @@ When you create more than one site, each can be selected in the admin panel usin
 
 The `sitePicker` component lets you manage links to other sites. The best place to include this is in your page or layout template.
 
-```twig
+::: cmstemplate
+```ini
 [sitePicker]
-==
+```
+```twig
 {% set availableSites = sitePicker.sites %}
 ```
+:::
 
 View the [Site Picker component](../components/sitepicker.md) article to learn how to display site URLs and generating alternative page links.
 
