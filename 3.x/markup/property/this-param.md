@@ -5,13 +5,15 @@ subtitle: Twig Property
 
 You can access the current URL parameters via `this.param` and it returns a PHP array.
 
-## Accessing page parameters
+## Accessing Page Parameters
 
 This example demonstrates how to access the `tab` URL parameter in a page.
 
-```twig
+::: cmstemplate
+```ini
 url = "/account/:tab"
-==
+```
+```twig
 {% if this.param.tab == 'details' %}
 
     <p>Here are all your details</p>
@@ -22,13 +24,17 @@ url = "/account/:tab"
 
 {% endif %}
 ```
+:::
 
 If the parameter name is also a variable, then array syntax can be used.
 
-```twig
+::: cmstemplate
+```ini
 url = "/account/:post_id"
-==
+```
+```twig
 {% set name = 'post_id' %}
 
 <p>The post ID is: {{ this.param[name] }}</p>
 ```
+:::

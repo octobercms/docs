@@ -75,34 +75,42 @@ When calling an AJAX handler from inside an AJAX partial, a capturing page life 
 
 The following example shows how to submit a simple contact form using a self-updating partial.
 
-```php
+::: cmstemplate
+```ini
 description = "Self Updating Partial"
-==
+```
+```php
 <?
 function onSubmitContactForm()
 {
     $this['submitted'] = true;
 }
 ?>
-==
+```
+```twig
 {% if submitted %}
     <p>Thank you for contacting us!</p>
 {% endif %}
+
 <button
     data-request="onSubmitContactForm"
     data-request-update="{ _self: true }">
     Submit
 </button>
 ```
+:::
 
 Partials that use [CMS components](../../cms/themes/components.md) will also have their AJAX handlers made available.
 
-```html
+::: cmstemplate
+```ini
 [contactForm]
-==
+```
+```html
 <button
     data-request="contactForm::onSubmit"
     data-request-update="{ _self: true }">
     Submit
 </button>
 ```
+:::

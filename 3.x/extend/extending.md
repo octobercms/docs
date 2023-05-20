@@ -264,10 +264,12 @@ class Topic extends ComponentBase
 
 Next this will demonstrate how to hook this new event from inside the [Layout Execution Life Cycle](../cms/themes/layouts.md). This will write to the trace log when the `onPost` event handler is called inside the `Topic` component (above).
 
-```php
+::: cmstemplate
+```ini
 [topic]
 slug = "{{ :slug }}"
-==
+```
+```php
 <?
 function onInit()
 {
@@ -277,6 +279,7 @@ function onInit()
 }
 ?>
 ```
+:::
 
 #### See Also
 
