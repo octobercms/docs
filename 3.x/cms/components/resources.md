@@ -22,6 +22,7 @@ Property | Description
 
 The following example uses the `vars` property to create a new variable called **activeNav** and this variable becomes available to the page life-cycle, this includes layouts for that page or partials that are used on the page. The variable is accessed using the `{{ activeNav }}` Twig variable.
 
+::: cmstemplate
 ```ini
 [resources]
 vars[activeNav] = 'blog'
@@ -30,6 +31,7 @@ vars[activeNav] = 'blog'
     <p>The blog is active!</p>
 {% endif %}
 ```
+:::
 
 ## Injecting Variables
 
@@ -68,13 +70,16 @@ If a layout includes the standard `{% scripts %}` and `{% styles %}` tags, then 
 
 Assets loaded using the resources component should be in a specific folder inside the theme as described in the available properties. An example could be a partial named **blocks/carousel.htm**
 
+::: cmstemplate
 ```ini
 [resources]
 less[] = "blocks/carousel.less"
 js[] = "blocks/carousel.js"
-==
+```
+```html
 <!-- Carousel Contents Here -->
 ```
+:::
 
 Now when the partial is loaded on the page, the scripts and stylesheets will be injected to the layout. The assets should be located in the **assets/js/blocks/carousel.js** and **assets/less/blocks/carousel.less** directories respectively.
 
@@ -91,14 +96,16 @@ Using the partial twice on the page will only inject the assets once.
 
 As an example of defining custom headers, you may wish to render XML content on a page instead of HTML content. This is possible by injecting a `Content-Type` header in to the page and giving it a value of **text/xml**. This header value will be sent with the response when the page loads.
 
+::: cmstemplate
 ```ini
 url = "/blog/rss"
 
 [resources]
 headers[Content-Type] = 'text/xml'
-==
+```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <!-- RSS contents here --/>
+    <!-- RSS contents here -->
 </rss>
 ```

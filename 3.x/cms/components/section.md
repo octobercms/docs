@@ -20,7 +20,7 @@ Property | Description
 
 The following creates a section for the **Blog\Author** entry and locates it using the default `:slug` [URL parameter](../themes/pages.md). The author name is displayed as a title by accessing the `{{ section.title }}` Twig variable.
 
-::: ochtm
+::: cmstemplate
 ```ini
 url = "author/:slug"
 
@@ -34,7 +34,7 @@ handle = "Blog\Author"
 
 When multiple sections are used on the same page, the component alias can be used to assign a different the variable name available to the page. The following component alias **author** makes the title available using the `{{ author.title }}` Twig variable instead.
 
-::: ochtm
+::: cmstemplate
 ```ini
 [section author]
 handle = "Blog\Author"
@@ -124,7 +124,7 @@ identifier = "fullslug"
 
 As an alternative approach, we recommend targeting the **id** and placing it at the end of the URL instead. This allows the record to be moved around freely without breaking links in your website. The following example shows how to achieve this with a redirect for any previously used URLs.
 
-::: ochtm
+::: cmstemplate
 ```ini
 url = "/wiki/:fullslug*/:id"
 

@@ -7,11 +7,14 @@ The `sitePicker` component provides tools for working with [Multisite configurat
 
 ## Basic Usage
 
-```twig
+::: cmstemplate
+```ini
 [sitePicker]
-==
+```
+```twig
 {% set availableSites = sitePicker.sites %}
 ```
+:::
 
 The following is an example of displaying a dropdown that switches between sites. It is used in conjunction with the `this.site` [Twig property](../../markup/property/this-site.md).
 
