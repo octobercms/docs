@@ -41,14 +41,14 @@ The **data.yaml** file contains a specific format used for importing content in 
 ```yaml
 -
     name: Blog Post Data
-    class: Tailor\Models\EntryRecordImport
+    class: Tailor\Models\RecordImport
     file: seeds/data/blog-posts.json
     attributes:
         file_format: json
         blueprint_uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6
 -
     name: Blog Category Data
-    class: Tailor\Models\EntryRecordImport
+    class: Tailor\Models\RecordImport
     file: seeds/data/blog-categories.json
     attributes:
         file_format: json
