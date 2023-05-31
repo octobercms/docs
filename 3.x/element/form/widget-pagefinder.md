@@ -276,7 +276,7 @@ Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme)
         return $result;
     }
 
-    $iterator = function($children) use (&$iterator, &$item, &$theme, $url, $controller) {
+    $iterator = function($children) use (&$iterator, &$item, &$theme, $url, $controller, $model) {
         $branch = [];
 
         foreach ($children as $child) {
@@ -305,7 +305,7 @@ Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme)
     $result['items'] = $iterator($model->children);
 
     return $result;
-})
+});
 ```
 
 ::: tip
