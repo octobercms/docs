@@ -192,11 +192,11 @@ addEventListener('hello:ready', function(ev) {
 });
 ```
 
-The second argument contains options where you may pass `detail` to the event.
+The second argument contains options where you may pass `detail` to the event, the following detail data is accessible via **ev.detail.foo** in the listener.
 
 ```js
 this.dispatch('ready', { detail: {
-    'foo': 'bar'
+    foo: 'bar'
 }});
 ```
 
