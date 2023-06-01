@@ -98,6 +98,20 @@ class extends oc.ControlBase {
 }
 ```
 
+## Referencing Other Controls
+
+The `oc.fetchControl` function is used to return a control class from an existing control element, this accepts an object or selector. The resulting object may call methods or access properties on the control class definition.
+
+```js
+const searchControl = oc.fetchControl('[data-control=search]');
+```
+
+Use the `oc.fetchControls` function to retrieve multiple instances.
+
+```js
+const resultControls = oc.fetchControls('[data-control=results]');
+```
+
 ## Working with Events
 
 Observable controls can bind events either locally or globally. Local events are automatically unbound, while global events need to be manually unbound using the `disconnect` method.
@@ -158,18 +172,44 @@ class extends oc.ControlBase {
 To prevent memory leaks, it is important to unbind global events so they are captured by garbage collection.
 :::
 
-## Referencing Other Controls
+### Dispatching Events
 
-The `oc.fetchControl` function is used to return a control class from an existing control element, this accepts an object or selector. The resulting object may call methods or access properties on the control class definition.
+Controls can dispatch events by passing an event name to the `dispatch` function. The event is triggered on the DOM element and the event name is prefixed with the control name. In the following example, if the control is registered with a name **hello**, the event will be named **hello:ready**.
 
 ```js
-const searchControl = oc.fetchControl('[data-control=search]');
+class extends oc.ControlBase {
+    connect() {
+        this.dispatch('ready');
+    }
+}
 ```
 
-Use the `oc.fetchControls` function to retrieve multiple instances.
+Now you can listen when the control is connected and grab the object using `oc.fetchControl` on the event target.
 
 ```js
-const resultControls = oc.fetchControls('[data-control=results]');
+addEventListener('hello:ready', function(ev) {
+    const helloControl = oc.fetchControl(ev.target);
+});
+```
+
+The second argument contains options where you may pass `detail` to the event.
+
+```js
+this.dispatch('ready', { detail: {
+    'foo': 'bar'
+}});
+```
+
+You may also specify a different `target` where the default is the attached element.
+
+```js
+this.dispatch('ready', { target: window });
+```
+
+Setting the `prefix` to false will make the event name global, the following triggers an event name of **hello-ready** instead of **hello:hello-ready**.
+
+```js
+this.dispatch('hello-ready', { prefix: false });
 ```
 
 ## Usage Example
