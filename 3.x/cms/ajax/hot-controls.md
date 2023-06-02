@@ -177,11 +177,11 @@ To prevent memory leaks, it is important to unbind global events so they are cap
 Controls can dispatch events by passing an event name to the `dispatch` function. The event is triggered on the DOM element and the event name is prefixed with the control name. In the following example, if the control is registered with a name **hello**, the event will be named **hello:ready**.
 
 ```js
-class extends oc.ControlBase {
+oc.registerControl('hello', class extends oc.ControlBase {
     connect() {
         this.dispatch('ready');
     }
-}
+});
 ```
 
 Now you can listen when the control is connected and grab the object using `oc.fetchControl` on the event target.
