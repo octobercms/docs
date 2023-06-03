@@ -56,9 +56,9 @@ User groups use the `Backend\Models\UserGroup` model and are an organizational t
 For instance, if you wanted to send an email to all users that are in the group `Head Office Staff`, you could find the user group along with the users in that group.
 
 ```php
-$staff = UserGroup::where('code', 'head-office-staff')->get()->users;
+$group = UserGroup::where('code', 'head-office-staff')->first();
 
-Mail::sendTo($staff, 'author.plugin::mail.important_notification');
+Mail::sendTo($group->users, 'author.plugin::mail.important_notification');
 ```
 
 ## Change Backend User Password

@@ -7,7 +7,7 @@ subtitle: Learn how to configure and secure your server and tune up the applicat
 
 ### Public Folder
 
-In the default configuration, the entire October CMS root directory is open for web access. For ultimate security in production environments, you may configure the web server to use a public folder to ensure only files in specific directories can be accessed.
+In the default configuration, the October CMS directory sits at the root level for web access. For ultimate security in production environments, you should configure the web server to use a public folder to ensure only files in specific directories can be accessed.
 
 First you will need to spawn a public folder using the `october:mirror` command:
 
@@ -63,6 +63,26 @@ October CMS can automatically set permissions for new files and directories. The
 ```ini
 DEFAULT_FILE_MASK=644
 DEFAULT_FOLDER_MASK=755
+```
+
+### Safe Mode
+
+Safe mode is an extra level of protection that prevents running arbitrary PHP code by disabling the PHP code section in the editor. Safe mode will also enable a secure Twig environment, which restricts unsafe method calls.
+
+The `cms.safe_mode` parameter can be found in the `config/cms.php` file. By default, the value is loaded from the `CMS_SAFE_MODE` environment variable. Safe mode disables the [PHP code section](../cms/themes.md#php-code-section) in CMS templates.
+
+The parameter can take one of the following values:
+
+- `true` - safe mode is enabled
+- `false` - safe mode is disabled
+- `null` - safe mode is active if [debug mode](../setup/configuration.md#debug-mode) is disabled.
+
+If you plan on using safe mode in production, you should also enable it for development to check that your theme works with the secure Twig environment. You may need to modify plugins to allow calling methods using the `October\Contracts\Twig\CallsAnyMethod` and `October\Contracts\Twig\CallsMethods` interfaces.
+
+Alternatively, you can change to a more relaxed  Twig policy with the `cms.security_policy_v1` configuration value, which blocks unsafe methods instead.
+
+```ini
+CMS_SECURITY_POLICY_V1=true
 ```
 
 ## Server-specific Configuration

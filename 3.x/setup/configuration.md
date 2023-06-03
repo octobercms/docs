@@ -48,36 +48,25 @@ SetEnv APP_ENV "staging"
 
 When the `APP_ENV` variable is defined, the platform attempts to load a .env file with the suffix matching the environment name. e.g. **.env.staging**. If the file does not exist, there will be no error. If both **.env.staging** and **.env** files exist, the **.env** file is completely ignored.
 
-## Common Configuration Parameters
+## Production Configuration
 
-There are several important commonly used configuration parameters.
+There are several important commonly used configuration parameters that should be established for production environments.
 
 ### Debug Mode
 
-The `debug` parameter can be found in the `config/app.php` file. By default, the value is loaded from the `APP_DEBUG` environment variable. After the installation, the debug mode is enabled in the `.env` file:
+The `debug` parameter can be found in the `config/app.php` file, and should be disabled in production. By default, the value is loaded from the `APP_DEBUG` environment variable. After the installation, the debug mode is enabled in the `.env` file.
 
 ```ini
-APP_DEBUG=true
+APP_DEBUG=false
 ```
 
 When enabled, the debug mode shows detailed error messages when they occur, along with other debugging features. While useful during development, the debug mode must be disabled on a live production site. It prevents potentially sensitive information from being displayed to website visitors.
 
-Features provided by the debug mode:
+Features provided when debug mode is enabled:
 
-* [detailed error messages](../cms/pages.md#error-page)
-* failed user authentication provides a specific reason
-* [combined assets](../markup/filter-theme.md) are not minified by default
-* [safe mode](../setup/configuration.md#safe-mode) is disabled by default.
-
-### Safe Mode
-
-The `safe_mode` parameter can be found in the `config/cms.php` file. By default, the value is loaded from the `CMS_SAFE_MODE` environment variable. Safe mode disables the [PHP code section](../cms/themes.md#php-code-section) in CMS templates.
-
-The parameter can take one of the following values:
-
-* `true` - safe mode is enabled
-* `false` - safe mode is disabled
-* `null` - safe mode is active if [debug mode](../setup/configuration.md#debug-mode) is disabled.
+- [detailed error messages](../cms/pages.md#error-page)
+- failed user authentication provides a specific reason
+- [combined assets](../markup/filter-theme.md) are not minified by default
 
 ### CSRF protection
 
@@ -85,10 +74,22 @@ October CMS provides a built-in [Cross-Site Request Forgery](https://owasp.org/w
 
 CSRF protection is enabled by default. The `enable_csrf_protection` parameter can be found in the `config/system.php` file. By default, the value is loaded from the `ENABLE_CSRF` environment variable.
 
-## Production Configuration
+### Public Folder
 
-The following configuration is recommended for production environments:
+A [public folder](../setup/web-server-config.md) is recommended to be used in production environments to isolate the internal files from the public files. This is an extra layer of redundancy used in addition to the [web server configuration](../setup/web-server-config.md), which only exposes the index PHP file and static asset files.
 
-* CSRF protection is enabled
-* debug mode is disabled
-* use the [public folder](../setup/web-server-config.md#public-folder) for additional security
+### Fallback Theme
+
+The [active CMS theme](../cms/themes/themes.md) is commonly sourced from the database. An issue that can occur in production environments is when the database connection fails, the demo theme or a general error screen is shown instead. To solve this, be sure to set a fallback theme in the file-based configuration.
+
+The fallback active theme is set in the `config/cms.php` file and is loaded from the `ACTIVE_THEME` environment variable. Check to make sure this is set to a valid theme since this value will be used in the absence of a database.
+
+```ini
+ACTIVE_THEME=my-theme
+```
+
+#### See Also
+
+::: also
+* [Web Server Configuration](../setup/web-server-config.md)
+:::
