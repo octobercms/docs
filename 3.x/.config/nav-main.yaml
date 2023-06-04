@@ -278,6 +278,7 @@
         - themes/layouts
         - themes/content
         - themes/components
+        - themes/snippets
 -
     title: Tailor
     children:
