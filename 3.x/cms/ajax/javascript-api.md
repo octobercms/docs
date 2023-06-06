@@ -22,10 +22,10 @@ Option | Description
 **query** | an optional object specifying data to be added to the current URL query string.
 **headers** | an optional object specifying header values to be sent to the server with the request.
 **redirect** | string specifying an URL to redirect the browser to after the successful request.
-**beforeUpdate** | a callback function to execute before page elements are updated. The function gets 3 parameters: the data object received from the server, HTTP status code, and the XHR object. The `this` variable inside the function resolves to the request content - an object containing 2 properties: `handler` and `options` representing the original request() parameters.
+**beforeUpdate** | a callback function to execute before page elements are updated. The `this` variable inside the function resolves to the request content - an object containing 2 properties: `handler` and `options` representing the original request() parameters.
 **afterUpdate** | a callback function identical to `beforeUpdate` except it executes after the page elements are updated.
-**success** | a callback function to execute in case of a successful request. If this option is supplied it overrides the default framework functionality: the elements are not updated, the `beforeUpdate` and `afterUpdate` callbacks are not triggered, the `ajax:update` and `ajax:update-complete` events are not triggered. The event handler gets 3 arguments: the data object received from the server, the HTTP status code and the XHR object. However, you can still call the default framework functionality calling `this.success(...)` inside your function.
-**error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed. The event handler gets 3 arguments: the data object received from the server, the HTTP status code and the XHR object.
+**success** | a callback function to execute in case of a successful request. If this option is supplied it overrides the default framework functionality: the elements are not updated, the `beforeUpdate` and `afterUpdate` callbacks are not triggered, the `ajax:update` and `ajax:update-complete` events are not triggered. To call the default framework functionality, use `this.success(...)` inside your function.
+**error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed.
 **complete** | a callback function execute in case of a success or an error.
 **form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
 **flash** | when true, instructs the server to clear and send any flash messages with the response. default: `false`
@@ -35,6 +35,12 @@ Option | Description
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
 **progressBar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
+
+The **beforeUpdate**, **afterUpdate**, **success**, **error**, and **complete** options all take functions with three arguments: the data object received from the server, the HTTP status code and the XHR object.
+
+```js
+success: function(data, responseCode, xhr) { }
+```
 
 You may also override some of the request logic by passing new functions as options. These logic handlers are available.
 
