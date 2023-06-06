@@ -133,9 +133,31 @@ The `onInit` function is executed when all components are initialized and before
 1. Page `onEnd()` function.
 1. Layout `onEnd()` function.
 
+### Method and Variable Access
+
+The nearest context is used when accessing variables and methods inside partials, pages and layouts. Take the following [PHP code section](./themes.md) definition.
+
+```php
+function onStart()
+{
+    $this['myVariable'] = 'foo';
+}
+
+function myMethod()
+{
+    return 'bar';
+}
+```
+
+In the above example, accessing `myVariable` or `this.myMethod()` inside Twig will check the existence in the following order:
+
+1. Partial
+1. Page
+1. Layout
+
 ### Priority Layouts
 
-Layouts can specify an `is_priorty` attribute in their settings to activate priority mode. In normal circumstances, the layout contents render after the page contents. This allows the page to manipulate layout properties, like the title or meta description. Visually the order looks like this.
+Layouts can specify an `is_priority` attribute in their settings to activate priority mode. In normal circumstances, the layout contents render after the page contents. This allows the page to manipulate layout properties, like the title or meta description. Visually the order looks like this.
 
 ```text
 Layout (3) ← Page (1) → Partials (2)

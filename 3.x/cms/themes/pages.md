@@ -135,7 +135,7 @@ function onStart()
 ```
 :::
 
-The next example is more complicated. It shows how to load a blog post collection from the database, and display on the page (the Acme\Blog plugin is imaginary).
+The next example is more complicated. It shows how to load a blog post collection from the database, and display on the page (the `Acme\Blog` plugin is imaginary).
 
 ::: cmstemplate
 ```ini

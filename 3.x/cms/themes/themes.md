@@ -138,7 +138,7 @@ function onStart()
 ```
 :::
 
-In the PHP section, you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed. Example of using a namespace reference:
+In the PHP section, you can only define functions and refer to namespaces with the PHP `use` keyword. No other PHP code is allowed in the PHP section. This is because the PHP section is converted to a PHP class when the page is parsed. Here is an example of using a namespace reference.
 
 ::: cmstemplate
 ```ini
@@ -171,6 +171,28 @@ echo $this['foo'];
 // Read-only via object
 echo $this->foo;
 ```
+
+When defining functions, they become available as methods via the `$this` property in PHP and `this` variable in Twig. The following example defines a **doSomething** function and calls the method in both places.
+
+::: cmstemplate
+```ini
+url = "/"
+```
+```php
+function onStart()
+{
+    $this['foo'] = $this->doSomething();
+}
+
+function doSomething()
+{
+    return 'bar';
+}
+```
+```twig
+<h3>{{ this.doSomething() }}</h3>
+```
+:::
 
 ### Twig Markup Section
 
