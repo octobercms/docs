@@ -171,3 +171,67 @@ function timeToSeconds($time = '') {
 {% endif %}
 ```
 :::
+
+### Basic Contact Form
+
+The next snippet displays a basic contact form and provides a way to handle the submission logic, it does not include code for [validating the form](../features/validation.md) and [sending the email](../../extend/system/sending-mail.md).
+
+The snippet has no properties, the publisher only needs to include the widget on the page, and it outputs a contact form with a success message.
+
+::: cmstemplate
+```ini
+## partials/contact-form.htm
+
+[viewBag]
+snippetCode = "contactForm"
+snippetName = "Contact Form"
+snippetDescription = "Display a contact form"
+```
+```php
+function onSubmitContact()
+{
+    $this['submitted'] = true;
+}
+```
+```twig
+{% if not submitted %}
+    <h3>Tell us what you think!</h3>
+    <form data-request="onSubmitContact" data-request-update="{ _self: true }">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input name="name" type="text" class="form-control">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <input name="email" type="email" class="form-control">
+                    <label>Email Address</label>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 form-floating">
+            <textarea class="form-control h-100"></textarea>
+            <label>Message</label>
+        </div>
+        <div class="form-buttons d-flex pt-2">
+            <div>
+                <button type="submit" class="btn btn-primary btn-pill">Submit</button>
+            </div>
+        </div>
+    </form>
+{% else %}
+    <div class="alert alert-success">
+        Thanks for contacting us!
+    </div>
+{% endif %}
+```
+:::
+
+#### See Also
+
+::: also
+* [CMS Partials](./partials.md)
+* [Developing Components](../../extend/cms-components.md)
+:::
