@@ -51,6 +51,10 @@ class extends oc.ControlBase {
 }
 ```
 
+::: tip
+The `init` method is called once per control and `connect` is called every time the control is added or removed from the DOM, for example, when moving the element to a new location.
+:::
+
 ### Configuration
 
 All `data-` attributes on the control element make up its available configuration.
@@ -110,6 +114,12 @@ Use the `oc.fetchControls` function to retrieve multiple instances.
 
 ```js
 const resultControls = oc.fetchControls('[data-control=results]');
+```
+
+The `oc.importControl` function can be used to return a control class that has been registered, which can be useful for calling static methods on the class.
+
+```js
+const searchControlClass = oc.importControl('search');
 ```
 
 ## Working with Events
