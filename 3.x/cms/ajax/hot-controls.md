@@ -158,19 +158,19 @@ class extends oc.ControlBase {
 
 ### Global Events
 
-Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) refers to the class method of the same control instance.
+Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) refers to the class method of the same control instance. The `proxy` method is called to bind the current context to the function call.
 
 ```js
 class extends oc.ControlBase {
     connect() {
-        addEventListener('keydown', this.onKeyDown);
+        addEventListener('keydown', this.proxy(this.onKeyDown));
     }
 
     disconnect() {
-        removeEventListener('keydown', this.onKeyDown);
+        removeEventListener('keydown', this.proxy(this.onKeyDown));
     }
 
-    onKeyDown = (event) => {
+    onKeyDown(event) => {
         if (event.key === 'Escape') {
             // Escape button was pressed
         }
