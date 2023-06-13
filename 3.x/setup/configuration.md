@@ -78,7 +78,7 @@ CSRF protection is enabled by default. The `enable_csrf_protection` parameter ca
 
 A [public folder](../setup/web-server-config.md) is recommended to be used in production environments to isolate the internal files from the public files. This is an extra layer of redundancy used in addition to the [web server configuration](../setup/web-server-config.md), which only exposes the index PHP file and static asset files.
 
-### Fallback Theme
+### Setting a Fallback Theme
 
 The [active CMS theme](../cms/themes/themes.md) is commonly sourced from the database. An issue that can occur in production environments is when the database connection fails, the demo theme or a general error screen is shown instead. To solve this, be sure to set a fallback theme in the file-based configuration.
 
@@ -88,7 +88,7 @@ The fallback active theme is set in the `config/cms.php` file and is loaded from
 ACTIVE_THEME=my-theme
 ```
 
-### Disable Editor
+### Disabling the Editor
 
 One of the unique aspects of October CMS is the ability to update a website directly and safely in production, for example, making minor adjustments to HTML or quickly adding new pages. This is great for smaller applications, however, for larger applications it may be inappropriate to make changes directly in production.
 
