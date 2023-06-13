@@ -65,7 +65,7 @@ When using the [Content Groups](./blueprints.md) feature of the entry blueprint,
 
 ## Using the Full Slug
 
-If the entry type is a `structure`, then it will have a **fullslug** attribute available. To use the full slug in the page URL it should be defined as a [wildcard URL parameter](..//themes/pages.md). The `fullSlug` property of the component should be enabled.
+If the entry type is a `structure`, then it will have a **fullslug** attribute available. To use the full slug in the page URL it should be defined as a [wildcard URL parameter](..//themes/pages.md). The `entryColumn` property of the component should be set to `slug`.
 
 ```ini
 url = "/wiki/:slug*"
@@ -73,5 +73,5 @@ url = "/wiki/:slug*"
 [section wiki]
 handle = "Wiki\Article"
 entrySlug = "{{ :slug }}"
-fullSlug = 1
+entryColumn = "slug"
 ```
