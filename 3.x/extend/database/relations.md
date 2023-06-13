@@ -93,7 +93,7 @@ public $belongsToMany = [
     ]
 ];
 
-public static myFilterMethod($query, $related, $parent)
+public static function myFilterMethod($query, $related, $parent)
 {
     // ...
 }
