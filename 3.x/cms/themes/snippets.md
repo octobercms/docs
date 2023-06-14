@@ -1,18 +1,16 @@
 ---
-subtitle: Bridges the gap between publishers and developers.
+subtitle: Bridge the gap between developers and publishers.
 ---
 # Snippets
 
-Snippets are CMS partials that can be inserted into the [rich editor](../../element/form/widget-richeditor.md) and configured using the [inspector tool](../../element/inspector-types.md). When available, a button to insert snippets is displayed in toolbar and can be added into the editor with a mouse click.
+Snippets are blocks inserted into the [rich editor](../../element/form/widget-richeditor.md) or [markdown editor](../../element/form/widget-markdown.md), and configured with the [inspector tool](../../element/inspector-types.md). When the feature is available, an insert snippets button is shown in toolbar, and selecting a snippet will insert it into the editor.
 
-This feature allows developers to define reusable and configurable pieces of content, and there are many possible applications and examples of using snippets:
+Snippets can be defined as [partials](./partials.md) or [components](./components.md), allowing developers to define reusable and configurable pieces of content. There are many possible applications and examples of using snippets:
 
 - Embedded videos - output a configured YouTube video or Twitch streams.
 - Google Maps snippet - outputs a map centered on specific coordinates with predefined zoom factor. That snippet would be great for pages that explain directions.
 - Universal commenting system - allows visitors to post comments to any page.
 - Third-party integrations - for example with Yelp or TripAdvisor for displaying extra information on a page.
-
-## Processing Snippet Content
 
 When including snippets in your page content, the [`|content` Twig filter](../../markup/tag/content.md) is needed to process and render the snippets as part of the output.
 
@@ -76,7 +74,7 @@ The publisher sets the **Blog Post ID** for the blog post, and it outputs a link
 
 ::: cmstemplate
 ```ini
-## partials/blog-post-reference.htm
+## partials/snippets/blog-post-reference.htm
 
 [viewBag]
 snippetCode = "blogPostReference"
@@ -120,7 +118,7 @@ The publisher sets the **Video URL** and **Start At** snippet values, and it out
 
 ::: cmstemplate
 ```ini
-## File: partials/snippets/youtube-video.htm
+## partials/snippets/youtube-video.htm
 
 [viewBag]
 snippetCode = "youtubeVideo"
@@ -153,7 +151,8 @@ function urlToCode($link = '')
 }
 
 // Converts 15:00 to 900
-function timeToSeconds($time = '') {
+function timeToSeconds($time = '')
+{
     $parts = explode(':', $time);
     if (count($parts) === 3) {
         return $parts[0] * 3600 + $parts[1] * 60 + $parts[2];
@@ -188,7 +187,7 @@ The snippet has no properties, the publisher only needs to include the widget on
 
 ::: cmstemplate
 ```ini
-## partials/contact-form.htm
+## partials/snippets/contact-form.htm
 
 [viewBag]
 snippetCode = "contactForm"

@@ -90,15 +90,19 @@ ACTIVE_THEME=my-theme
 
 ### Disabling the Editor
 
-One of the unique aspects of October CMS is the ability to update a website directly and safely in production, for example, making minor adjustments to HTML or quickly adding new pages. This is great for smaller applications, however, for larger applications it may be inappropriate to make changes directly in production.
+One of the unique aspects of October CMS is its ability to make website updates safely in production, for example, making minor adjustments to HTML or quickly adding new pages. This is great for smaller applications, whereas larger applications may be more strict about production changes.
 
-If you want to disable editing the website files in production, remove the Editor using one of the following methods, in addition to making the [app and themes directories](./directory-structure.md) read-only.
+To disable production changes, you may remove the Editor using one of the following methods.
 
 - load only required modules using the `system.load_modules` configuration
 - do not deploy the Editor files found in the [modules directory](./directory-structure.md)
 - use [permissions](../extend/backend/permissions.md) to prevent access to the Editor
 
-Alternatively, you may keep the Editor active in production and [enable safe mode](../setup/web-server-config.md) instead. Safe mode allows updating HTML, CSS and other files, but blocks updating the PHP code section and any potentially unsafe Twig functions.
+::: tip
+It is also a good idea to make the [app and themes directories](./directory-structure.md) read-only.
+:::
+
+Alternatively, [enable safe mode](../setup/web-server-config.md) to keep the Editor active in production. Safe mode allows updating HTML, CSS and other files, but blocks updating the PHP code section and any potentially unsafe Twig functions.
 
 #### See Also
 
