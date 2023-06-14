@@ -12,6 +12,14 @@ This feature allows developers to define reusable and configurable pieces of con
 - Universal commenting system - allows visitors to post comments to any page.
 - Third-party integrations - for example with Yelp or TripAdvisor for displaying extra information on a page.
 
+## Processing Snippet Content
+
+When including snippets in your page content, the [`|content` Twig filter](../../markup/tag/content.md) is needed to process and render the snippets as part of the output.
+
+```twig
+{{ blog_html|content }}
+```
+
 ## Creating Snippets from Partials
 
 Partial-based snippets provide simpler functionality and usually are just containers for HTML markup, or markup generated with Twig in a snippet.
