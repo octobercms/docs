@@ -9,6 +9,7 @@
         - list-columns
         - filter-scopes
         - inspector-types
+        - define-options
 -
     title: Tailor Fields
     children:
