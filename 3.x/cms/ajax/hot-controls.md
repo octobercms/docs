@@ -128,7 +128,7 @@ Observable controls can bind events either locally or globally. Local events are
 
 ### Local Events
 
-You can bind a local event handler using the listen function, and these handlers will automatically unbind. To bind a listener to the control element itself, pass the event name and the event handler function to the `listen` function.
+You can bind a local event handler using the `listen` function, and these handlers will automatically unbind. To bind a listener to the control element itself, pass the event name and the event handler function to the `listen` function.
 
 ```js
 class extends oc.ControlBase {
@@ -152,6 +152,24 @@ class extends oc.ControlBase {
 
     onClickFindButton() {
         console.log('You clicked the find button inside the control!');
+    }
+}
+```
+
+You may also bind to a DOM object, pass the event name, HTML element, and the event handler function.
+
+```js
+class extends oc.ControlBase {
+    init() {
+        this.$name = this.element.querySelector('input.name');
+    }
+
+    connect() {
+        this.listen('click', this.$name, this.onClickNameInput);
+    }
+
+    onClickNameInput() {
+        console.log('You clicked the name input inside the control!');
     }
 }
 ```
