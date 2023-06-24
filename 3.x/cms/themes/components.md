@@ -132,11 +132,55 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
 ## Customizing Default Markup
 
-The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. Moving the default markup to a theme partial is suitable to completely overhaul a component. Overriding the component partials is useful for cherry picking areas to customize.
+::: aside
+The default markup in a component is boilerplate code, with the aim to provide a simple example of how it can be used.
+:::
+
+There are two ways to customize the default markup of a component:
+
+- copy the default markup in to your theme
+- override a component partial one at a time
+
+Overriding a component partial has a very limited subset of uses. In most cases, converting a component's partial to a CMS partial is much easier, and there is little difference in doing it this way.
+
+As an example, take a look at a blog component rendered like this.
+
+::: cmstemplate
+```ini
+[blog]
+```
+```twig
+{% component 'blog' %}
+```
+:::
+
+The code above is effectively the same as doing this.
+
+::: cmstemplate
+```ini
+[blog]
+```
+```twig
+{% partial 'blog::default' %}
+```
+:::
+
+If you copy the **default.htm** partial from the component to your theme as a **blog-default.htm** partial, you can render it the same way.
+
+::: cmstemplate
+```ini
+[blog]
+```
+```twig
+{% partial 'blog-default' %}
+```
+:::
+
+Here we can see it simple to use CMS partials to customize the content, and it demonstrates the true power of components. There are only rare cases where the theme should override components partials and this is covered in more detail below.
 
 ### Moving Default Markup to a Partial
 
-Each component can have an entry point partial called **default.htm** that is rendered when the `{% component %}` tag is called, in the following example we will assume the component is called **blogPost**.
+Each component will have an entry point partial called **default.htm** that is rendered when the `{% component %}` tag is called, in the following example we will assume the component is called **blogPost**.
 
 ::: cmstemplate
 ```ini
@@ -166,14 +210,16 @@ Inside the markup you may notice references to a variable called `__SELF__`, thi
 This is the only change needed to allow the default component markup to work anywhere inside the theme. Now the component markup can be customized and rendered using the theme partial.
 
 ```twig
-{% partial 'blog-post.htm' %}
+{% partial 'blog-post' %}
 ```
 
 This process can be repeated for all other partials found in the component partial directory.
 
 ### Overriding Component Partials
 
-All component partials can be overridden using the theme partials. If a component called **channel** uses the **title.htm** partial.
+All component partials can be overridden using the theme partials. This is useful when a component has a strict implementation and introduces as an option to configure specific areas of its markup.
+
+As an example, if a component called **channel** uses the **title.htm** partial.
 
 ::: cmstemplate
 ```ini
@@ -196,7 +242,7 @@ Segment | Description
 **channel** | the component alias (a partial subdirectory)
 **title.htm** | the component partial to override
 
-The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed:
+The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed.
 
 ::: cmstemplate
 ```ini
@@ -207,7 +253,7 @@ The partial subdirectory name can be customized to anything by simply assigning 
 ```
 :::
 
-Now we can override the **title.htm** partial by creating a file in our theme called **partials/foobar/title.htm**.
+Now we can override the **title.htm** partial by creating a file in our theme called **partials/foobar/title.htm** instead.
 
 ## The "View Bag" Component
 
