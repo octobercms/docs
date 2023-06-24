@@ -1,8 +1,8 @@
 # Queue
 
-## Configuration
-
 Queues allow you to defer the processing of a time consuming task, such as sending an e-mail, until a later time, thus drastically speeding up the web requests to your application.
+
+## Configuration
 
 The queue configuration file is stored in `config/queue.php`. In this file you will find connection configurations for each of the queue drivers that are included, such as a database, [Beanstalkd](https://beanstalkd.github.io), [Amazon SQS](https://aws.amazon.com/sqs/), [Redis](https://redis.io), null, and synchronous (for local use) driver. The `null` queue driver simply discards queued jobs so they are never executed.
 
@@ -16,17 +16,15 @@ Amazon SQS | `aws/aws-sdk-php ~3.0`
 Beanstalkd | `pda/pheanstalk ~4.0`
 Redis      | `predis/predis ~1.0` or phpredis PHP extension
 
-## Basic usage
+## Basic Usage
 
-#### Pushing a job onto the queue
-
-To push a new job onto the queue, use the `Queue::push` method:
+To push a new job onto the queue, use the `Queue::push` method.
 
 ```php
-Queue::push('SendEmail', ['message' => $message]);
+Queue::push(SendEmail::class, ['message' => $message]);
 ```
 
-The first argument given to the `push` method is the name of the class that should be used to process the job. The second argument is an array of data that should be passed to the handler. A job handler should be defined like so.
+The first argument given to the `push` method is the name of the class that should be used to process the job. The second argument is an array of data that should be passed to the handler. A job handler could be defined as a file **app/SendEmail.php** like so.
 
 ```php
 class SendEmail
@@ -38,11 +36,7 @@ class SendEmail
 }
 ```
 
-Notice the only method that is required is `fire`, which receives a `Job` instance as well as the array of `data` that was pushed onto the queue.
-
-#### Specifying a custom handler method
-
-If you want the job to use a method other than `fire`, you may specify the method when you push the job:
+Notice the only method that is required is `fire`, which receives a `Job` instance as well as the array of `data` that was pushed onto the queue. If you want the job to use a method other than `fire`, you may specify the method when you push the job:
 
 ```php
 Queue::push('SendEmail@send', ['message' => $message]);
