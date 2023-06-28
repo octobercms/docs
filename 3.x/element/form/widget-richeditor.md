@@ -89,3 +89,26 @@ The available toolbar buttons are:
 ::: tip
 The `|` character will insert a vertical separator line in the toolbar.
 :::
+
+## Registering a Custom Button
+
+The following JavaScript code can be used to register a custom button as a command.
+
+```js
+oc.richEditorRegisterButton('insertCustomThing', {
+    title: 'Insert Something',
+    icon: '<i class="icon-star"></i>',
+    undo: true,
+    focus: true,
+    refreshOnCallback: true,
+    callback: function () {
+        this.html.insert('<strong>My Custom Thing!</strong>');
+    }
+});
+```
+
+Then add the button to the default collection.
+
+```js
+oc.richEditorButtons.splice(0, 0, 'insertCustomThing');
+```
