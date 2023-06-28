@@ -57,7 +57,7 @@ You may define a custom `modelScope` in the model using the following example.
 ```yaml
 age:
     label: Age
-    type: text
+    type: number
     modelScope: numberFilter
 ```
 
