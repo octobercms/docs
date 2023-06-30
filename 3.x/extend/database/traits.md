@@ -330,15 +330,10 @@ class User extends Model
 You may also use [array syntax](../services/validation.md) for validation rules.
 
 ```php
-class User extends Model
-{
-    use \October\Rain\Database\Traits\Validation;
-
-    public $rules = [
-        'links.*.url' => 'required|url',
-        'links.*.anchor' => 'required'
-    ];
-}
+public $rules = [
+    'links.*.url' => 'required|url',
+    'links.*.anchor' => 'required'
+];
 ```
 
 Models validate themselves automatically when the `save` method is called.
@@ -356,6 +351,24 @@ $success = $user->save();
 ::: tip
 You can also validate a model at any time using the `validate` method.
 :::
+
+#### Enhanced Validation Rules
+
+The `unique` validation rule is automatically configured and does not require a table name to be specified.
+
+```php
+public $rules = [
+    'name' => 'unique',
+];
+```
+
+The `required` validation rule supports **create** and **update** modifiers to only apply when a model is created or updated respectively. The following is only required when the model does not already exist.
+
+```php
+public $rules = [
+    'password' => 'required:create',
+];
+```
 
 #### Retrieving Validation Errors
 

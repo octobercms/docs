@@ -264,13 +264,16 @@ All components can come with default markup that is used when including it on a 
 
 The default component markup should be placed in a file named **default.htm**. For example, the default markup for the Demo ToDo component is defined in the file **/plugins/october/demo/components/todo/default.htm**. It can then be inserted anywhere on the page by using the `{% component %}` tag:
 
-```
+::: cmstemplate
+```ini
 url = "/todo"
 
 [demoTodo]
-==
+```
+```twig
 {% component 'demoTodo' %}
 ```
+:::
 
 The default markup can also take parameters that override the component properties at the time they are rendered.
 

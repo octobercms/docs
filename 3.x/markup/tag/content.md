@@ -111,7 +111,9 @@ The `hasContent()` function can be used to check if a content exists without ren
 
 ## Parsing Content as a String
 
-When the `{% content %}` tag is used, it will resolve links created by the [page finder form widget](../../element/form/widget-pagefinder.md). The `|content` filter will parse HTML for multiple links and resolve them as HTTP links in the output.
+When using the `{% content %}` tag, it will resolve [CMS snippets](../../cms/themes/snippets.md) and links created by the [page finder form widget](../../element/form/widget-pagefinder.md) automatically.
+
+Similarly, the `|content` filter can be used to parse a HTML string for multiple content objects and resolve them in the output.
 
 ```twig
 {{ post.content|content }}
@@ -126,6 +128,7 @@ The `|md` filter can also be used to parse Markdown content found in a string.
 #### See Also
 
 ::: also
+* [CMS Snippets](../../cms/themes/snippets.md)
 * [Link Twig Filter](../../markup/filter/link.md)
 * [Markdown Twig Filter](../../markup/filter/md.md)
 :::

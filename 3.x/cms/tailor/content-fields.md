@@ -148,6 +148,22 @@ fields:
         # [...]
 ```
 
+The `unique` validation rule is automatically configured and does not require a table name to be specified.
+
+```yaml
+unique_field:
+    label: Unique Field
+    validation: unique
+```
+
+The `required` validation rule supports **create** and **update** modifiers to only apply when a model is created or updated respectively. The following is only required when the model does not already exist.
+
+```yaml
+password:
+    label: Password
+    validation: "required:create"
+```
+
 ## Modifying Core Fields
 
 Each blueprint record has several core fields as [defined by attributes on the model](./models.md). You can modify these fields under certain conditions.

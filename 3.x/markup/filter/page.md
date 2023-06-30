@@ -19,47 +19,60 @@ Remember that if you refer a page from a subdirectory you should specify the sub
 The [Themes documentation](../../cms/themes/themes.md) has more details on subdirectory usage.
 :::
 
-To access the link to a certain page from the PHP section, you can use `$this->pageUrl('page-name-without-extension')`:
+To access the link to a certain page from the PHP section, you can use `$this->pageUrl('page-name-without-extension')`.
 
+::: cmstemplate
+```ini
 ```
-==
+```php
 <?
-function onStart() {
+function onStart()
+{
     $this['newsPage'] = $this->pageUrl('blog/overview');
 }
 ?>
-==
+```
+```twig
 {{ newsPage }}
 ```
+:::
 
-You can create a link to the current page by filtering an empty string:
+You can create a link to the current page by filtering the `this` variable.
 
 ```twig
-<a href="{{ ''|page }}">Refresh page</a>
+<a href="{{ this|page }}">Refresh page</a>
 ```
 
-To get the link to the current page in PHP, you can use `$this->pageUrl('')` with an empty string.
+To get the link to the current page in PHP, call the `$this->pageUrl()` method without any arguments.
 
+::: cmstemplate
+```ini
 ```
-==
-<?php
-function onStart() {
-    $this['currentUrl'] = $this->pageUrl('');
+```php
+<?
+function onStart()
+{
+    $this['currentUrl'] = $this->pageUrl();
 }
 ?>
-==
+```
+```twig
 {{ currentUrl }}
 ```
+:::
 
 ## Reverse Routing
 
 When linking to a page that has URL parameters defined, the `|page` filter supports reverse routing by passing an array as the first argument.
 
-```
+::: cmstemplate
+```ini
 url = "/blog/post/:post_id"
-==
+```
+```twig
 [...]
 ```
+:::
 
 Given the above content is found in a CMS page file **post.htm** you can link to this page using:
 
@@ -81,7 +94,7 @@ If the website address is __https://octobercms.com__ the above example would out
 
 If a URL parameter is already presented in the environment, the `|page` filter will use it automatically.
 
-```
+```ini
 url = "/blog/post/:post_id"
 
 url = "/blog/post/edit/:post_id"

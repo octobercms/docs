@@ -222,7 +222,7 @@ Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme)
 });
 ```
 
-the items should be listed in the `items` element. The `items` element should only be provided for items marked as nested.
+The items should be listed in the `items` element. The `items` element should only be provided for items marked as nested.
 
 ```php
 return [
@@ -242,6 +242,45 @@ return [
     ]
 ];
 ```
+
+### Resolving Other Site Links
+
+It is possible for a resolved page link to return other sites that contain this page link. This is where the `$item` argument may contain a `sites` property that is set to true. The `Site` and `Cms` facades are helpful here, see the example below.
+
+```php
+Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme) {
+    // Resolve item
+    $result = [...];
+
+    $page = \Cms\Classes\Page::loadCached($theme, $item->reference);
+
+    // Sites requested
+    if ($item->sites) {
+        $sites = [];
+        if (Site::hasMultiSite()) {
+            foreach (Site::listEnabled() as $site) {
+                $url = Cms::siteUrl($page, $site, [
+                    'id' => $record->id,
+                    'slug' => $record->slug,
+                    'fullslug' => $record->fullslug
+                ]);
+
+                $sites[] = [
+                    'url' => $url,
+                    'id' => $site->id,
+                    'code' => $site->code,
+                    'locale' => $site->hard_locale,
+                ];
+            }
+        }
+        $result['sites'] = $sites;
+    }
+
+    return $result;
+});
+```
+
+The resulting item should contain a `sites` array with a site definition object, each with a set `url` on the object.
 
 ### Usage Example
 

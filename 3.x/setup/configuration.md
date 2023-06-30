@@ -78,7 +78,7 @@ CSRF protection is enabled by default. The `enable_csrf_protection` parameter ca
 
 A [public folder](../setup/web-server-config.md) is recommended to be used in production environments to isolate the internal files from the public files. This is an extra layer of redundancy used in addition to the [web server configuration](../setup/web-server-config.md), which only exposes the index PHP file and static asset files.
 
-### Fallback Theme
+### Setting a Fallback Theme
 
 The [active CMS theme](../cms/themes/themes.md) is commonly sourced from the database. An issue that can occur in production environments is when the database connection fails, the demo theme or a general error screen is shown instead. To solve this, be sure to set a fallback theme in the file-based configuration.
 
@@ -88,17 +88,21 @@ The fallback active theme is set in the `config/cms.php` file and is loaded from
 ACTIVE_THEME=my-theme
 ```
 
-### Disable Editor
+### Disabling the Editor
 
-One of the unique aspects of October CMS is the ability to update a website directly and safely in production, for example, making minor adjustments to HTML or quickly adding new pages. This is great for smaller applications, however, for larger applications it may be inappropriate to make changes directly in production.
+One of the unique aspects of October CMS is its ability to make website updates safely in production, for example, making minor adjustments to HTML or quickly adding new pages. This is great for smaller applications, whereas larger applications may be more strict about production changes.
 
-If you want to disable editing the website files in production, remove the Editor using one of the following methods, in addition to making the [app and themes directories](./directory-structure.md) read-only.
+To disable production changes, you may remove the Editor using one of the following methods.
 
 - load only required modules using the `system.load_modules` configuration
 - do not deploy the Editor files found in the [modules directory](./directory-structure.md)
 - use [permissions](../extend/backend/permissions.md) to prevent access to the Editor
 
-Alternatively, you may keep the Editor active in production and [enable safe mode](../setup/web-server-config.md) instead. Safe mode allows updating HTML, CSS and other files, but blocks updating the PHP code section and any potentially unsafe Twig functions.
+::: tip
+It is also a good idea to make the [app and themes directories](./directory-structure.md) read-only.
+:::
+
+Alternatively, [enable safe mode](../setup/web-server-config.md) to keep the Editor active in production. Safe mode allows updating HTML, CSS and other files, but blocks updating the PHP code section and any potentially unsafe Twig functions.
 
 #### See Also
 

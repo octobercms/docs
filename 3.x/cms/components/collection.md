@@ -21,25 +21,31 @@ Property | Description
 
 The following adds a collection of **Blog\Post** entries to the page. The collection is accessed in Twig by looping the default `collection` variable.
 
+::: cmstemplate
 ```ini
 [collection]
 handle = "Blog\Post"
-==
+```
+```twig
 {% for post in collection %}
     <h1>{{ post.title }}</h1>
 {% endfor %}
 ```
+:::
 
 When multiple collections are used on the same page, the component can be assigned a name **posts** using the component alias and this is the variable name that becomes available to the page. The following collection is accessed using the `posts` variable instead.
 
+::: cmstemplate
 ```ini
 [collection posts]
 handle = "Blog\Post"
-==
+```
+```twig
 {% for post in posts %}
     <h1>{{ post.title }}</h1>
 {% endfor %}
 ```
+:::
 
 ## Performing Queries
 

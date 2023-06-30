@@ -15,11 +15,14 @@ The page represents a transformation layer that sits between your CMS Components
 
 In the simplest form, an API resource can be composed by returning a Twig variable using the `response()` [Twig function](../../markup/function/response.md). This function overrides the page contents and returns a custom response to the browser.
 
-```twig
+::: cmstemplate
+```ini
 url = "/api/foobar
-==
+```
+```twig
 {% do response({ foo: 'bar' }) %}
 ```
+:::
 
 The above call will return a response with a `application/json` content type.
 
@@ -97,24 +100,30 @@ Middleware allows you to apply common logic to multiple endpoints, such as check
 
 Remember to include the [`{% page %}` Twig tag](../../markup/tag/page.md) so the page logic is included. For example, a layout named **api.htm** can have any conditional logic.
 
-```twig
+::: cmstemplate
+```ini
 description = "API Authentication"
 is_priority = 1
-==
+```
+```twig
 {% if someCondition %}
     {% page %}
 {% else %}
     {% do response({ message: 'Condition not met' }, 400) %}
 {% endif %}
 ```
+:::
 
 Every page that uses the layout will have the conditions of the layout applied.
 
-```twig
+::: cmstemplate
+```ini
 layout = "api"
-==
+```
+```twig
 {% do response({ success: true }) %}
 ```
+:::
 
 ::: warning
 Always use [priority mode in the layout](../themes/layouts.md) to ensure the layout contents run first.
@@ -124,11 +133,13 @@ Always use [priority mode in the layout](../themes/layouts.md) to ensure the lay
 
 In some cases you may wish to call an AJAX handler of a component or inside the page. This is possible using the [`ajaxHandler()` Twig function](../../markup/function/ajax-handler.md).
 
-```twig
+::: cmstemplate
+```ini
 url = "/api/signin
 
 [account]
-==
+```
+```twig
 {% set result = ajaxHandler('onSignin') %}
 
 {% if result.error %}
@@ -137,6 +148,7 @@ url = "/api/signin
     {% do response({ success: true }) %}
 {% endif %}
 ```
+:::
 
 You may also call a handler and pass it directly as a response. The response includes variables set on the page and array values returned by the function.
 
@@ -154,13 +166,15 @@ When working with models and collections, it is recommended to return data wrapp
 
 Returning a model resource.
 
-```twig
+::: cmstemplate
+```ini
 url = "/api/blog/post/:slug"
 
 [section post]
 handle = "Blog\Post"
 entrySlug = "{{ :slug }}"
-==
+```
+```twig
 {% if post %}
     {% do response({
         data: post
@@ -169,19 +183,23 @@ entrySlug = "{{ :slug }}"
     {% do abort(404) %}
 {% endif %}
 ```
+:::
 
 Returning a collection resource.
 
-```twig
+::: cmstemplate
+```ini
 url = "/api/blog/posts"
 
 [collection posts]
 handle = "Blog\Post"
-==
+```
+```twig
 {% do response({
     data: posts
 }) %}
 ```
+:::
 
 ### Pagination
 

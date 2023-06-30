@@ -30,11 +30,14 @@ When you create more than one site, each can be selected in the admin panel usin
 
 The `sitePicker` component lets you manage links to other sites. The best place to include this is in your page or layout template.
 
-```twig
+::: cmstemplate
+```ini
 [sitePicker]
-==
+```
+```twig
 {% set availableSites = sitePicker.sites %}
 ```
+:::
 
 View the [Site Picker component](../components/sitepicker.md) article to learn how to display site URLs and generating alternative page links.
 
@@ -58,6 +61,17 @@ When the user visits the base URL, their preferred language is automatically det
 ::: tip
 You can modify this behavior using the `redirect_policy` value found in the **config/cms.php** file.
 :::
+
+## Multisite Role Restrictions
+
+Site definitions can restrict their visibility based on the administrator role, which allows you to use dedicated administrator roles to manage a specific sites. To enable the multisite role restrictions feature:
+
+1. Navigate to **Manage Sites** and select a site definition
+2. Place check in the **Define administrator roles** checkbox.
+3. Select the roles allowed to view the site.
+4. Click **Save**.
+
+When enabled, the site will only be visible in the backend panel to administrators that are specified in the field. For example, to create a site that is only accessible to Developers, select the **Developer** role in the field.
 
 #### See Also
 

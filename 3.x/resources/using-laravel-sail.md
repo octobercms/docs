@@ -7,7 +7,7 @@ subtitle: Learn how to install October CMS with a local Docker environment.
 Since the web server runs seperately from your operating system, commands are called using `sail artisan` instead of `php artisan`.
 :::
 
-[Laravel Sail](https://laravel.com/docs/9.x/sail) is a command-line interface for interacting with a local Docker development environment. It helps you get started by automating the process of setting up the web server and database. These instructions teach you how to use Sail and October CMS together to get up and running.
+[Laravel Sail](https://laravel.com/docs/10.x/sail) is a command-line interface for interacting with a local Docker development environment. It helps you get started by automating the process of setting up the web server and database. These instructions teach you how to use Sail and October CMS together to get up and running.
 
 ## Getting Started
 
@@ -22,9 +22,9 @@ curl -s "https://octobercms.com/api/laravelsail/example-app" | bash
 
 With this different URL in mind, get started by following the specific Laravel guide for your operating system.
 
-- [macOS](https://laravel.com/docs/9.x/installation#getting-started-on-macos)
-- [Windows](https://laravel.com/docs/9.x/installation#getting-started-on-windows)
-- [Linux](https://laravel.com/docs/9.x/installation#getting-started-on-linux)
+- [macOS](https://laravel.com/docs/10.x/installation#getting-started-on-macos)
+- [Windows](https://laravel.com/docs/10.x/installation#getting-started-on-windows)
+- [Linux](https://laravel.com/docs/10.x/installation#getting-started-on-linux)
 
 Once everything is ready, you are prompted to run these commands to start the web server.
 
@@ -44,5 +44,5 @@ After the installation is complete, open the website using the `http://localhost
 #### See Also
 
 ::: also
-* [Laravel Sail Documentation](https://laravel.com/docs/9.x/sail)
+* [Laravel Sail Documentation](https://laravel.com/docs/10.x/sail)
 :::

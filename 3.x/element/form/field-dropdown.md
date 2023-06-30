@@ -165,7 +165,7 @@ If you want to call a method on an external class, you may do it by calling a st
 status:
     label: Blog Post Status
     type: dropdown
-    options: \MyAuthor\MyPlugin\Helpers\FormHelper::staticMethodOptions
+    options: MyAuthor\MyPlugin\Helpers\FormHelper::staticMethodOptions
 ```
 
 This examples shows the static method defined on any helper class. The first argument is the Model object and the second argument is the form field definition.

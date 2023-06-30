@@ -51,6 +51,10 @@ class extends oc.ControlBase {
 }
 ```
 
+::: tip
+The `init` method is called once per control and `connect` is called every time the control is added or removed from the DOM, for example, when moving the element to a new location.
+:::
+
 ### Configuration
 
 All `data-` attributes on the control element make up its available configuration.
@@ -100,7 +104,7 @@ class extends oc.ControlBase {
 
 ## Referencing Other Controls
 
-The `oc.fetchControl` function is used to return a control class from an existing control element, this accepts an object or selector. The resulting object may call methods or access properties on the control class definition.
+The `oc.fetchControl` function is used to return a control class from an existing control element, this accepts a selector string, or an element directly. The resulting instance support method calls or accessing properties found on the control class definition.
 
 ```js
 const searchControl = oc.fetchControl('[data-control=search]');
@@ -112,13 +116,19 @@ Use the `oc.fetchControls` function to retrieve multiple instances.
 const resultControls = oc.fetchControls('[data-control=results]');
 ```
 
+The `oc.importControl` function can be used to return a control class that has been registered, which can be useful for calling static methods on the class. The function accepts the control identifier as a string.
+
+```js
+const searchControlClass = oc.importControl('search');
+```
+
 ## Working with Events
 
 Observable controls can bind events either locally or globally. Local events are automatically unbound, while global events need to be manually unbound using the `disconnect` method.
 
 ### Local Events
 
-You can bind a local event handler using the listen function, and these handlers will automatically unbind. To bind a listener to the control element itself, pass the event name and the event handler function to the `listen` function.
+You can bind a local event handler using the `listen` function, and these handlers will automatically unbind. To bind a listener to the control element itself, pass the event name and the event handler function to the `listen` function.
 
 ```js
 class extends oc.ControlBase {
@@ -146,21 +156,39 @@ class extends oc.ControlBase {
 }
 ```
 
+You may also bind to a DOM object, pass the event name, HTML element, and the event handler function.
+
+```js
+class extends oc.ControlBase {
+    init() {
+        this.$name = this.element.querySelector('input.name');
+    }
+
+    connect() {
+        this.listen('click', this.$name, this.onClickNameInput);
+    }
+
+    onClickNameInput() {
+        console.log('You clicked the name input inside the control!');
+    }
+}
+```
+
 ### Global Events
 
-Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) refers to the class method of the same control instance.
+Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) refers to the class method of the same control instance. The `proxy` method is called to bind the current context to the function call.
 
 ```js
 class extends oc.ControlBase {
     connect() {
-        addEventListener('keydown', this.onKeyDown);
+        addEventListener('keydown', this.proxy(this.onKeyDown));
     }
 
     disconnect() {
-        removeEventListener('keydown', this.onKeyDown);
+        removeEventListener('keydown', this.proxy(this.onKeyDown));
     }
 
-    onKeyDown = (event) => {
+    onKeyDown(event) => {
         if (event.key === 'Escape') {
             // Escape button was pressed
         }

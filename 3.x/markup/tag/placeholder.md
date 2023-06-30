@@ -105,7 +105,7 @@ October CMS defines static placeholders that are used by the system. Packages wi
 
 ### {% scripts %}
 
-The `{% scripts %}` tag inserts JavaScript file references to scripts injected by the application. The tag is commonly defined before the closing BODY tag:
+The `{% scripts %}` tag inserts JavaScript file references to scripts injected by the application. The tag is commonly defined before the closing BODY tag.
 
 ```twig
 <body>
@@ -137,7 +137,7 @@ You can also inject raw markup to the `{% scripts %}` tag by using the **scripts
 
 ### {% styles %}
 
-The `{% styles %}` tag renders CSS links to stylesheet files injected by the application. The tag is commonly defined in the HEAD section of a page or layout:
+The `{% styles %}` tag renders CSS links to stylesheet files injected by the application. The tag is commonly defined in the HEAD section of a page or layout.
 
 ```twig
 <head>
@@ -164,5 +164,28 @@ You can also inject raw markup to the `{% styles %}` tag by using the **styles**
 ```twig
 {% put styles %}
     <link href="/themes/demo/assets/css/page.css" rel="stylesheet" />
+{% endput %}
+```
+
+### {% meta %}
+
+The `{% meta %}` tag renders meta content, such as open graph information. The tag is commonly defined in the HEAD section of a page or layout, placed before the styles and scripts.
+
+```twig
+<head>
+    {% meta %}
+    ...
+</head>
+```
+
+> **Note**: This tag should appear once only in a given page cycle to prevent duplicated references.
+
+#### Injecting Meta Data
+
+You can inject raw markup to the `{% meta %}` tag by using the **meta** anonymous placeholder [in the layout](../../cms/themes/layouts.md). Use the `{% put %}` tag in pages or layouts to add content to the placeholder.
+
+```twig
+{% put meta %}
+    <meta name="turbo-visit-control" content="error">
 {% endput %}
 ```

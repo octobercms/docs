@@ -43,5 +43,5 @@ The `_` and `__` filters are interchangable with the `trans` and `trans_choice` 
 
 ::: also
 * [CMS Theme Localization](../../cms/themes/settings.md)
-* [Laravel Localization](https://laravel.com/docs/9.x/localization)
+* [Laravel Localization](https://laravel.com/docs/10.x/localization)
 :::

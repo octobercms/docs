@@ -1,6 +1,6 @@
 # HTTP Client
 
-The `Http` class provides features used for opening connections via the HTTP protocol. You can use it to make outgoing connections to other applications and services. This client is supplied by the Laravel framework and you can learn about all the possible features in the [Laravel documentation article](https://laravel.com/docs/9.x/http-client).
+The `Http` class provides features used for opening connections via the HTTP protocol. You can use it to make outgoing connections to other applications and services. This client is supplied by the Laravel framework and you can learn about all the possible features in the [Laravel documentation article](https://laravel.com/docs/10.x/http-client).
 
 ## Basic Usage
 
@@ -116,5 +116,5 @@ $response->onError(callable $callback);
 #### See Also
 
 ::: also
-* [Laravel HTTP Client](https://laravel.com/docs/9.x/http-client)
+* [Laravel HTTP Client](https://laravel.com/docs/10.x/http-client)
 :::

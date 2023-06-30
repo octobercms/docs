@@ -7,11 +7,14 @@ Every website serves up at least one page and in October CMS, a page is represen
 
 The Configuration and Twig template sections are required for pages, but the PHP section is optional. Below, you can see the simplest home page example.
 
-```twig
+::: cmstemplate
+```ini
 url = "/"
-==
+```
+```twig
 <h1>Hello, world!</h1>
 ```
+:::
 
 ## Page Configuration
 
@@ -46,15 +49,19 @@ url = "/blog/post/:post_id"
 
 This is how you can access the URL parameter from the page's PHP section (see the Dynamic Pages section for more details).
 
-```php
+::: cmstemplate
+```ini
 url = "/blog/post/:post_id"
-==
+```
+```php
 function onStart()
 {
     $postId = $this->param('post_id');
 }
-==
 ```
+```twig
+```
+:::
 
 Parameter names should be compatible with PHP variable names. To make a parameter optional, add a question mark after its name:
 
@@ -113,29 +120,36 @@ Inside the Twig section of a page template, you can use any [functions, filters,
 
 There are special functions that can be defined in the PHP section of pages and layouts: `onInit`, `onStart`, and `onEnd`. The `onInit` function is executed when all components are initialized and before AJAX requests are handled. The `onStart` function is executed during the beginning of the page execution. The `onEnd` function is executed before the page is rendered and after the page [components](./components.md) are executed. In the `onStart` and `onEnd` functions, you can inject variables into the Twig environment. Use the `$this` with array notation to pass variables to the page.
 
-```php
+::: cmstemplate
+```ini
 url = "/"
-==
+```
+```php
 function onStart()
 {
     $this['hello'] = "Hello world!";
 }
-==
+```
+```twig
 <h3>{{ hello }}</h3>
 ```
+:::
 
-The next example is more complicated. It shows how to load a blog post collection from the database, and display on the page (the Acme\Blog plugin is imaginary).
+The next example is more complicated. It shows how to load a blog post collection from the database, and display on the page (the `Acme\Blog` plugin is imaginary).
 
-```php
+::: cmstemplate
+```ini
 url = "/blog"
-==
+```
+```php
 use Acme\Blog\Classes\Post;
 
 function onStart()
 {
     $this['posts'] = Post::orderBy('created_at', 'desc')->get();
 }
-==
+```
+```twig
 <h2>Latest posts</h2>
 <ul>
     {% for post in posts %}
@@ -144,6 +158,7 @@ function onStart()
     {% endfor %}
 </ul>
 ```
+:::
 
 The default variables and Twig extensions provided by October CMS are described in the [Markup Guide](../../markup/templating.md). The sequence that the handlers are executed in is described by the [Dynamic Layouts section](./layouts.md).
 

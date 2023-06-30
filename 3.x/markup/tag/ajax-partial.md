@@ -71,38 +71,52 @@ The `lazy body` attributes allow specifying the initial content before loading, 
 
 ## Calling AJAX Handlers
 
-When calling an AJAX handler from inside an AJAX partial, a capturing page life cycle is triggered that enables the use of AJAX handlers within the requested partials.
+When calling an AJAX handler from inside an AJAX partial, a capturing page life cycle (see below) is triggered that enables the use of AJAX handlers within the requested partials.
 
 The following example shows how to submit a simple contact form using a self-updating partial.
 
-```php
+::: cmstemplate
+```ini
 description = "Self Updating Partial"
-==
+```
+```php
 <?
 function onSubmitContactForm()
 {
     $this['submitted'] = true;
 }
 ?>
-==
+```
+```twig
 {% if submitted %}
     <p>Thank you for contacting us!</p>
 {% endif %}
+
 <button
     data-request="onSubmitContactForm"
     data-request-update="{ _self: true }">
     Submit
 </button>
 ```
+:::
 
 Partials that use [CMS components](../../cms/themes/components.md) will also have their AJAX handlers made available.
 
-```html
+::: cmstemplate
+```ini
 [contactForm]
-==
+```
+```html
 <button
     data-request="contactForm::onSubmit"
     data-request-update="{ _self: true }">
     Submit
 </button>
 ```
+:::
+
+### Capture Lifecycle
+
+When calling a handler from an AJAX partial, it will trigger a different lifecycle, called the capture lifecycle. ​The capture lifecycle renders the entire page, however it renders the contents into the void. This way, the page is initialized completely, including all the used partials and AJAX handlers.
+
+Since it counts as a complete page render, this may mean the `onRun` [component method](../../extend/cms-components.md) is called when an AJAX partial handler is used. ​You can use `Request::ajax()` [helper method](../../extend/services/request-input.md) to determine if the request is occurring as the result of an AJAX request.

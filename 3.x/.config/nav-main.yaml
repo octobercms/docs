@@ -9,6 +9,7 @@
         - list-columns
         - filter-scopes
         - inspector-types
+        - define-options
 -
     title: Tailor Fields
     children:
@@ -278,6 +279,7 @@
         - themes/layouts
         - themes/content
         - themes/components
+        - themes/snippets
 -
     title: Tailor
     children:

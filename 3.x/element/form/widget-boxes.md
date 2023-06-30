@@ -27,14 +27,16 @@ fields:
 
 In your frontend, you can then use the render method on your field to get the rendered HTML content:
 
+::: cmstemplate
 ```ini
 [section yourSectionVar]
 handle = "Your\Handle"
 entrySlug = "{{ :slug }}"
-==
-
+```
+```twig
 {{ yourSectionVar.boxes_content.render|raw }}
 ```
+:::
 
 #### See Also
 

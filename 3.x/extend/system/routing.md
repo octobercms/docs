@@ -3,7 +3,7 @@ subtitle: Useful for defining fixed APIs and endpoints.
 ---
 # Routing & Middleware
 
-While routing is handled automatically for the [backend controllers](../system/controllers.md) and CMS pages define their own URL routes in their [page configuration](../../cms/themes/pages.md). Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [Laravel router service](https://laravel.com/docs/9.x/routing).
+While routing is handled automatically for the [backend controllers](../system/controllers.md) and CMS pages define their own URL routes in their [page configuration](../../cms/themes/pages.md). Plugins can also supply a file named **routes.php** that contain custom routing logic, as defined in the [Laravel router service](https://laravel.com/docs/10.x/routing).
 
 ::: dir
 ├── plugins
@@ -300,6 +300,6 @@ You may also manually throw an instance of `October\Rain\Exception\NotFoundExcep
 #### See Also
 
 ::: also
-* [Laravel Routing](https://laravel.com/docs/9.x/routing)
-* [Eloquent API Resources](https://laravel.com/docs/9.x/eloquent-resources)
+* [Laravel Routing](https://laravel.com/docs/10.x/routing)
+* [Eloquent API Resources](https://laravel.com/docs/10.x/eloquent-resources)
 :::

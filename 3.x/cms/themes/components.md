@@ -11,15 +11,18 @@ This article describes the components basics and doesn't explain how to use [com
 
 Components can be found in the Editor in the admin panel. You can add components to your pages, partials and layouts by clicking the Components toolbar button on any open document. If you use a text editor you can attach a component to a page or layout by adding its name to the configuration section of the template file. The next example demonstrates how to add a demo To-Do component to a page.
 
+::: cmstemplate
 ```ini
 title = "Components demonstration"
 url = "/components"
 
 [demoTodo]
 maxItems = 20
-==
+```
+```twig
 <!-- HTML Content Here -->
 ```
+:::
 
 This initializes the component with the properties that are defined in the component section. Many components have properties, but it is not a requirement. Some properties are required, and some properties have default values. If you are not sure what properties are supported by a component, refer to the documentation provided by the developer, or use the Inspector in the Editor admin panel. The Inspector opens when you click a component in the page or layout component panel.
 
@@ -129,19 +132,66 @@ In this example, the **maxItems** property of the component will be set to *7* a
 
 ## Customizing Default Markup
 
-The markup provided by components is generally intended as a usage example for the Component. In some cases you may wish to modify the appearance and output of a component. Moving the default markup to a theme partial is suitable to completely overhaul a component. Overriding the component partials is useful for cherry picking areas to customize.
+::: aside
+The default markup in a component is boilerplate code, with the aim to provide a simple example of how it can be used.
+:::
+
+There are two ways to customize the default markup of a component:
+
+- copy the default markup in to your theme
+- override a component partial one at a time
+
+Overriding a component partial has a very limited subset of uses. In most cases, converting a component's partial to a CMS partial is much easier, and there is little difference in doing it this way.
+
+As an example, take a look at a blog component rendered like this.
+
+::: cmstemplate
+```ini
+[blog]
+```
+```twig
+{% component 'blog' %}
+```
+:::
+
+The code above is effectively the same as doing this.
+
+::: cmstemplate
+```ini
+[blog]
+```
+```twig
+{% partial 'blog::default' %}
+```
+:::
+
+If you copy the **default.htm** partial from the component to your theme as a **blog-default.htm** partial, you can render it the same way.
+
+::: cmstemplate
+```ini
+[blog]
+```
+```twig
+{% partial 'blog-default' %}
+```
+:::
+
+Here we can see it simple to use CMS partials to customize the content, and it demonstrates the true power of components. There are only rare cases where the theme should override components partials and this is covered in more detail below.
 
 ### Moving Default Markup to a Partial
 
-Each component can have an entry point partial called **default.htm** that is rendered when the `{% component %}` tag is called, in the following example we will assume the component is called **blogPost**.
+Each component will have an entry point partial called **default.htm** that is rendered when the `{% component %}` tag is called, in the following example we will assume the component is called **blogPost**.
 
+::: cmstemplate
 ```ini
 url = "blog/post"
 
 [blogPost]
-==
+```
+```twig
 {% component "blogPost" %}
 ```
+:::
 
 The output will be rendered from the plugin directory **components/blogpost/default.htm**. You can copy all the markup from this file and paste it directly in the page or to a new partial, called **blog-post.htm** for example.
 
@@ -160,22 +210,27 @@ Inside the markup you may notice references to a variable called `__SELF__`, thi
 This is the only change needed to allow the default component markup to work anywhere inside the theme. Now the component markup can be customized and rendered using the theme partial.
 
 ```twig
-{% partial 'blog-post.htm' %}
+{% partial 'blog-post' %}
 ```
 
 This process can be repeated for all other partials found in the component partial directory.
 
 ### Overriding Component Partials
 
-All component partials can be overridden using the theme partials. If a component called **channel** uses the **title.htm** partial.
+All component partials can be overridden using the theme partials. This is useful when a component has a strict implementation and introduces as an option to configure specific areas of its markup.
 
+As an example, if a component called **channel** uses the **title.htm** partial.
+
+::: cmstemplate
 ```ini
 url = "mypage"
 
 [channel]
-==
+```
+```twig
 {% component "channel" %}
 ```
+:::
 
 We can override the partial by creating a file in our theme called **partials/channel/title.htm**.
 
@@ -187,15 +242,18 @@ Segment | Description
 **channel** | the component alias (a partial subdirectory)
 **title.htm** | the component partial to override
 
-The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed:
+The partial subdirectory name can be customized to anything by simply assigning the component an alias of the same name. For example, by assigning the **channel** component with a different alias **foobar** the override directory is also changed.
 
+::: cmstemplate
 ```ini
 [channel foobar]
-==
+```
+```twig
 {% component "foobar" %}
 ```
+:::
 
-Now we can override the **title.htm** partial by creating a file in our theme called **partials/foobar/title.htm**.
+Now we can override the **title.htm** partial by creating a file in our theme called **partials/foobar/title.htm** instead.
 
 ## The "View Bag" Component
 
@@ -205,6 +263,7 @@ The viewBag component is hidden in the backend panel and is only available for f
 
 There is a special component included in October CMS called `viewBag` that can be used on any page or layout. It allows ad hoc properties to be defined and accessed inside the markup area easily as variables. A good usage example is defining an active menu item inside a page.
 
+::: cmstemplate
 ```ini
 title = "About"
 url = "/about.html"
@@ -212,24 +271,28 @@ layout = "default"
 
 [viewBag]
 activeMenu = "about"
-==
-
+```
+```twig
 <p>Page content...</p>
 ```
+:::
 
 Any property defined for the component is then made available inside the page, layout, or partial markup using the `viewBag` variable. For example, in this layout the **active** class is added to the list item if the `viewBag.activeMenu` value is set to **about**.
 
-```twig
+::: cmstemplate
+```ini
 description = "Default layout"
-==
-[...]
+```
+```twig
+...
 
 <!-- Main navigation -->
 <ul>
     <li class="{{ viewBag.activeMenu == 'about' ? 'active' }}">About</li>
-    [...]
+    ...
 </ul>
 ```
+:::
 
 ### AJAX Handlers and Partials
 

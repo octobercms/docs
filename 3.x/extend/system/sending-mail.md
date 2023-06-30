@@ -53,32 +53,42 @@ Mail views reside in the file system and the code used represents the path to th
 
 The content inside a mail view file can include up to 3 sections: **configuration**, **plain text**, and **HTML markup**. Sections are separated with the `==` sequence. For example:
 
-```twig
+::: cmstemplate
+```ini
 subject = "Your product has been added to October CMS project"
-==
+```
+```twig
 Hi {{ name }},
 
 Good news! User {{ user }} just added your product "{{ product }}" to a project.
 
 This message was sent using no formatting (plain text)
-==
+```
+```twig
 <p>Hi {{ name }},</p>
 
-<p><strong>Good news!</strong> User {{ user }} just added your product "{{ product }}" to a project.</p>
+<p>
+    <strong>Good news!</strong>
+    User {{ user }} just added your product "{{ product }}" to a project.
+</p>
 
 <p>This email was sent using formatting (HTML)</p>
 ```
+:::
 
 The **plain text** section is optional and a view can contain only the **configuration** and **HTML markup** sections. Markup syntax is also supported as an alternative syntax.
 
-```twig
+::: cmstemplate
+```ini
 layout = "default"
 subject = "Your product has been added to October CMS project"
-==
+```
+```twig
 Hi {{ name }},
 
 **Good news!** User {{ user }} just added your product "{{ product }}" to a project.
 ```
+:::
 
 #### Configuration Section
 
@@ -140,11 +150,14 @@ The `layouts` key is used to register layouts and each layout needs a unique `co
 
 The layout can now be referenced in templates using the `code` value.
 
+::: cmstemplate
 ```ini
 layout = "marketing"
-==
+```
+```twig
 Page contents...
 ```
+:::
 
 #### Registering a Partial
 

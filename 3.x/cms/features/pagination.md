@@ -9,14 +9,17 @@ October CMS includes pagination features out of the box, it integrates with stan
 
 A paginated set of data can come from [Component logic](../../extend/cms-components.md), inside the page or layout [PHP section](../themes/themes.md), or from [a Tailor component](../tailor/components.md). The following is an example of a page requesting paginated data from a Tailor component, stepping through the records at **10** per page.
 
-```twig
+::: cmstemplate
+```ini
 url = "/blog"
 
 [collection]
 handle = "Blog\Post"
-==
+```
+```twig
 {% set posts = collection.paginate(10) %}
 ```
+:::
 
 Now the `posts` variable is available. We can loop through each record and display the pagination links.
 
@@ -36,7 +39,8 @@ Now the `posts` variable is available. We can loop through each record and displ
 
 By default the pagination will take the current page number from the `?page` query string, so the same page number will be used when displaying two or more sets of paginated data. To solve this problem, use the `paginateCustom` method and specify a unique parameter name.
 
-```twig
+::: cmstemplate
+```ini
 url = "/blog"
 
 [collection blog]
@@ -44,11 +48,13 @@ handle = "Blog\Post"
 
 [collection category]
 handle = "Blog\Category"
-==
+```
+```twig
 {% set posts = blog.paginateCustom(10, 'postPage') %}
 
 {% set comments = comments.paginateCustom(10, 'commentPage') %}
 ```
+:::
 
 Set the `withQuery` option to preserve the page number for other pagination instances (optional).
 
@@ -92,24 +98,29 @@ Use the `ajaxPager()` Twig function to update paginated records dynamically usin
 
 Then render the partial on the page using the [`{% ajaxPartial %}` Twig tag](../../markup/tag/ajax-partial.md).
 
-```twig
+::: cmstemplate
+```ini
 url = "/blog"
 
 [collection blog]
 handle = "Blog\Post"
-==
+```
+```twig
 {% set posts = blog.paginate(10) %}
 
 <h3>Latest Posts</h3>
 {% ajaxPartial 'latest-posts' %}
 ```
+:::
 
 Alternatively, you can encapsulate all the logic inside the partial to make it completely portable.
 
-```twig
+::: cmstemplate
+```ini
 [collection blog]
 handle = "Blog\Post"
-==
+```
+```twig
 {% set posts = blog.paginate(10) %}
 
 <div>
@@ -122,14 +133,18 @@ handle = "Blog\Post"
     {{ ajaxPager(posts) }}
 </nav>
 ```
+:::
 
 The partial can then be rendered anywhere on a page or layout without any additional configuration.
 
-```twig
+::: cmstemplate
+```ini
 url = "/blog"
-==
+```
+```twig
 {% ajaxPartial 'latest-posts' %}
 ```
+:::
 
 ## Load More Pagination
 
@@ -162,11 +177,14 @@ The button element leverages a combination of AJAX data attributes to perform [a
 
 The partial should be rendered using  [`{% ajaxPartial %}` Twig tag](../../markup/tag/ajax-partial.md).
 
-```twig
+::: cmstemplate
+```ini
 url = "/blog"
-==
+```
+```twig
 {% ajaxPartial 'load-more-posts' %}
 ```
+:::
 
 #### See Also
 
