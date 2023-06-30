@@ -53,7 +53,7 @@ optionsMethod: getMyOptionsFromModel
 The method name can also be a static method on any object.
 
 ```yaml
-options: MyAuthor\MyPlugin\Helpers\FormHelper::getMyStaticMethodOptions
+optionsMethod: MyAuthor\MyPlugin\Helpers\FormHelper::getMyStaticMethodOptions
 ```
 
 ## Option Presets
