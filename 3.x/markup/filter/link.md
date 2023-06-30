@@ -33,13 +33,23 @@ Property | Data
 **items** | an array containing generated child items, optional.
 **isActive** | set to true if the link is currently active.
 
-You may also request nested child items by passing the `nesting` option to `true` (second argument), which populates the `items` property on the result.
+You may request nested child items by passing the `nesting` option to `true` (second argument), which populates the `items` property on the result.
 
 ```twig
 {% set resolved = link('october://...', { nesting: true }) %}
 
 {% for subitem in resolved.items %}
     {{ subitem.url }}
+{% endfor %}
+```
+
+You may request other site URLs by passing the `sites` option to `true`, which populates the `sites` property on the result.
+
+```twig
+{% set resolved = link('october://...', { sites: true }) %}
+
+{% for site in resolved.sites %}
+    {{ site.url }}
 {% endfor %}
 ```
 
