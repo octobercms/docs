@@ -77,6 +77,53 @@ public function onDownload()
 }
 ```
 
+
+## Usage Example
+
+The following example shows a CMS page that can be used to download a [model file attachment](../../extend/database/attachments.md) with a custom file name. It takes the attachment `id` and `disk_name` parameters to validate the file, before returning the response to the browser with a custom file name taken from the `file_name` parameter (optional).
+
+::: cmstemplate
+```ini
+## pages/download-file.htm
+
+title = "Download File"
+url = "/download-file/:id/:disk_name/:file_name?"
+layout = "default"
+```
+```php
+function onStart()
+{
+    $file = System\Models\File::find($this->param('id'));
+    if (!$file || !$file->isPublic()) {
+        throw new NotFoundException;
+    }
+
+    if ($file->disk_name !== $this->param('disk_name')) {
+        throw new NotFoundException;
+    }
+
+    $customFileName = $this->param('file_name');
+    if ($customFileName) {
+        $file->file_name = $customFileName;
+    }
+
+    return $file->download();
+}
+```
+```twig
+```
+:::
+
+You may then link to this page in Twig with the following markup, where the `file` variable is an instance of `System\Models\File`.
+
+```twig
+{{ 'download-file'|page({
+    id: file.id,
+    disk_name: file.disk_name,
+    file_name: 'my-custom-name.png'
+}) }}
+```
+
 #### See Also
 
 ::: also
