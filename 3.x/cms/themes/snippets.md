@@ -29,7 +29,7 @@ The snippet properties are optional and can be defined with the grid control on 
 Column         | Description
 -------------- | -----------
 Property Title | specifies the property title, visible to the end user in the snippet inspector popup window.
-Property Code  | specifies the property code, used for accessing the property values in the partial markup.
+Code           | specifies the property code, used for accessing the property values in the partial markup.
 Type           | the property type, available types are `string`, `dropdown` and `checkbox`.
 Default        | the default property value, for checkbox properties use `0` and `1` values.
 Options        | the option list for the dropdown properties.
@@ -60,6 +60,18 @@ public function registerPageSnippets()
 ::: tip
 The same component can be registered with `registerPageSnippets` and `registerComponents` to be used in CMS pages and content editors.
 :::
+
+To enable the use of AJAX, rendered snippets are be wrapped in an [AJAX partial](../../markup/tag/ajax-partial.md) by default. You may disable this by setting `snippetAjax` to `false` in the [component class definition](../../extend/cms-components.md).
+
+```php
+public function componentDetails()
+{
+    return [
+        // ...
+        'snippetAjax' => false
+    ];
+}
+```
 
 ## Usage Examples
 
