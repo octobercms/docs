@@ -91,7 +91,13 @@ The wizard installation is an alternative way to install October CMS without usi
 
 ## Bleeding Edge Updates
 
-To receive bleeding edge updates of October CMS, target the `develop` branch in the composer.json file. For example:
+To receive bleeding edge updates of October CMS, change the minimum stability setting to `dev`.
+
+```bash
+composer config minimum-stability dev
+```
+
+Then target the `develop` branch in the composer.json file. For example:
 
 ```json
 "october/all": "dev-develop",
