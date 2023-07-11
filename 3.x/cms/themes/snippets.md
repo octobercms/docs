@@ -121,7 +121,6 @@ value = "{{ post_id }}"
 ```
 :::
 
-
 ### Embedding a YouTube Video
 
 The following snippet implements a YouTube embed video as a [CMS partial](./partials.md). It includes a method for extracting the YouTube code from a browser URL and converting a time string to seconds.
@@ -139,7 +138,7 @@ snippetDescription = "Embed a Youtube Video on the page"
 snippetProperties[url][title] = "Video URL"
 snippetProperties[url][type] = "string"
 snippetProperties[start_at][title] = "Start At"
-snippetProperties[url][type] = "string"
+snippetProperties[start_at][type] = "string"
 ```
 ```php
 // Converts https://www.youtube.com/watch?v=k_H2zJ7UZfs to k_H2zJ7UZfs
