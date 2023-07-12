@@ -70,4 +70,5 @@ Preset | Description
 ------ | -----------
 **icons** | Lists available icon names (eg: `oc-icon-calendar`)
 **locales** | Lists available locales (eg: `en-au`)
-**localeIcons** | Lists locales with their icons as flags (eg: `[en-au, flag-au]`)
+**flags** | Lists locales with their icons as flags (eg: `[en-au, flag-au]`)
+**timezones** | Lists available timezones (eg: `Australia/Sydney`)
