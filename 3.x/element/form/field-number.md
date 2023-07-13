@@ -56,7 +56,7 @@ When working with models, use the `$rules` property on your model, like so.
 
 ```php
 public $rules = [
-    'your_age' => 'numeric',
+    'your_age' => ['numeric'],
 ];
 ```
 

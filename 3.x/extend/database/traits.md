@@ -319,10 +319,10 @@ class User extends Model
     use \October\Rain\Database\Traits\Validation;
 
     public $rules = [
-        'name' => 'required|between:4,16',
-        'email' => 'required|email',
-        'password' => 'required|alpha_num|between:4,8|confirmed',
-        'password_confirmation' => 'required|alpha_num|between:4,8'
+        'name' => ['required', 'between:4,16'],
+        'email' => ['required', 'email'],
+        'password' => ['required', 'alpha_num', 'between:4,8', 'confirmed'],
+        'password_confirmation' => ['required', 'alpha_num', 'between:4,8']
     ];
 }
 ```
@@ -331,8 +331,8 @@ You may also use [array syntax](../services/validation.md) for validation rules.
 
 ```php
 public $rules = [
-    'links.*.url' => 'required|url',
-    'links.*.anchor' => 'required'
+    'links.*.url' => ['required', 'url'],
+    'links.*.anchor' => ['required']
 ];
 ```
 
@@ -358,7 +358,7 @@ The `unique` validation rule is automatically configured and does not require a 
 
 ```php
 public $rules = [
-    'name' => 'unique',
+    'name' => ['unique'],
 ];
 ```
 
@@ -366,7 +366,7 @@ The `required` validation rule supports **create** and **update** modifiers to o
 
 ```php
 public $rules = [
-    'password' => 'required:create',
+    'password' => ['required:create'],
 ];
 ```
 
@@ -398,7 +398,7 @@ class User extends Model
 {
     public $customMessages = [
         'required' => 'The :attribute field is required.',
-        ...
+        // ...
     ];
 }
 ```
@@ -411,8 +411,8 @@ class User extends Model
     use \October\Rain\Database\Traits\Validation;
 
     public $rules = [
-        'links.*.url' => 'required|url',
-        'links.*.anchor' => 'required'
+        'links.*.url' => ['required', 'url'],
+        'links.*.anchor' => ['required'],
     ];
 
     public $customMessages = [
@@ -434,7 +434,7 @@ class User extends Model
 {
     public $attributeNames = [
         'email' => 'Email Address',
-        ...
+        // ...
     ];
 }
 ```

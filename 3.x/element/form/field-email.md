@@ -35,7 +35,7 @@ When working with models, use the `$rules` property on your model, like so.
 
 ```php
 public $rules = [
-    'user_email' => 'email',
+    'user_email' => ['email'],
 ];
 ```
 
