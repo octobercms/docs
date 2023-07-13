@@ -61,14 +61,14 @@ public function registerPageSnippets()
 The same component can be registered with `registerPageSnippets` and `registerComponents` to be used in CMS pages and content editors.
 :::
 
-To enable the use of AJAX, rendered snippets are be wrapped in an [AJAX partial](../../markup/tag/ajax-partial.md) by default. You may disable this by setting `snippetAjax` to `false` in the [component class definition](../../extend/cms-components.md).
+To enable the use of AJAX handlers, snippets can be rendered using an [AJAX partial](../../markup/tag/ajax-partial.md). You may enable this by setting `snippetAjax` to `true` in the [component class definition](../../extend/cms-components.md).
 
 ```php
 public function componentDetails()
 {
     return [
         // ...
-        'snippetAjax' => false
+        'snippetAjax' => true
     ];
 }
 ```
@@ -194,7 +194,7 @@ function timeToSeconds($time = '')
 
 The next snippet displays a basic contact form and provides a way to handle the submission logic, it does not include code for [validating the form](../features/validation.md) and [sending the email](../../extend/system/sending-mail.md).
 
-The snippet has no properties, the publisher only needs to include the widget on the page, and it outputs a contact form with a success message.
+The snippet has no properties, the publisher only needs to include the widget on the page, and it outputs a contact form with a success message. The `snippetAjax` attribute is set to `1` to enable the use of AJAX handlers.
 
 ::: cmstemplate
 ```ini
@@ -204,6 +204,7 @@ The snippet has no properties, the publisher only needs to include the widget on
 snippetCode = "contactForm"
 snippetName = "Contact Form"
 snippetDescription = "Display a contact form"
+snippetAjax = 1
 ```
 ```php
 function onSubmitContact()
