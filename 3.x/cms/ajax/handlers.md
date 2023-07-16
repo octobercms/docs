@@ -206,7 +206,7 @@ For example, if you want to show an alert that a document has already been updat
 ```php
 public function onUpdate()
 {
-    $this->dispatchBrowserEvent('stale-document');
+    $this->dispatchBrowserEvent('app:stale-document');
 
     throw new AjaxException;
 }
@@ -216,7 +216,7 @@ public function onUpdate()
 You can listen to this event in the browser using a generic listener. This example prompts the user before resubmitting the request with a `force` flag set in the data.
 
 ```js
-addEventListener('stale-document', function (event) {
+addEventListener('app:stale-document', function (event) {
     if (confirm('Another user has updated this document, proceed?')) {
         oc.request(event.target, 'onUpdate', { data: {
             force: true
