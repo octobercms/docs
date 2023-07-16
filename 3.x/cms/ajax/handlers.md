@@ -122,6 +122,26 @@ The same with the JavaScript API.
 >
 ```
 
+## Running Code Before Handlers
+
+Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [Layout Execution Life Cycle](../../cms/themes/layouts.md) allows code to run before every AJAX handler.
+
+```php
+function onInit()
+{
+    // From a page or layout PHP code section
+}
+```
+
+You may define an `init` method inside a [CMS component class](../../extend/cms-components.md).
+
+```php
+function init()
+{
+    // From a component or widget class
+}
+```
+
 ## Throwing an AJAX Exception
 
 You may throw an [AJAX exception](../../extend/system/exceptions.md) using the `AjaxException` class to treat the response as an error while retaining the ability to send response contents as normal. Simply pass the response contents as the first argument of the exception.
@@ -156,19 +176,19 @@ When throwing this exception type [partials will be updated](./update-partials.m
 
 ## Dispatching Browser Events
 
-You may dispatch JavaScript events from an AJAX handler using the `dispatchBrowserEvent` method. This method takes any event name (first argument) and detail variables to pass to the event (second argument). Dispatched events are triggered in an AJAX response after the request completes and before partials are updated.
+::: aside
+Dispatched events are triggered in an AJAX response after the request completes and before partials are updated.
+:::
+
+You may dispatch JavaScript events from AJAX handlers using the `dispatchBrowserEvent` method. This method takes any event name (first argument) and detail variables to pass to the event (second argument), the variables must be compatible with JSON serialization.
 
 ```php
 function onPerformAction()
 {
     $this->dispatchBrowserEvent('app:update-profile');
+
+    $this->dispatchBrowserEvent('app:update-profile', ['name' => 'Jeff']);
 }
-```
-
-The second argument can be used to pass variables with the event, the values must be compatible with JSON serialization.
-
-```php
-$this->dispatchBrowserEvent('app:update-profile', ['name' => 'Jeff']);
 ```
 
 In the browser, use the `addEventListener` to listen for the dispatched event when the AJAX request completes. The event variables are available via the `event.detail` object.
@@ -179,33 +199,28 @@ addEventListener('app:update-profile', function (event) {
 });
 ```
 
-Throwing an `AjaxException` or `ValidationException` will halt the process and include dispatched events.
+For example, if you want to show an alert that a document has already been updated by another user, you could dispatch an event to the browser and throw an `AjaxException` to halt the process.
 
+::: tip
+`AjaxException` and `ValidationException` are halting exceptions that support dispatched events.
 ```php
-function onPerformAction()
+public function onUpdate()
 {
-    $this->dispatchBrowserEvent('app:update-profile');
+    $this->dispatchBrowserEvent('stale-document');
 
     throw new AjaxException;
 }
 ```
+:::
 
-## Running Code Before Handlers
+You can listen to this event in the browser using a generic listener. This example prompts the user before resubmitting the request with a `force` flag set in the data.
 
-Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [Layout Execution Life Cycle](../../cms/themes/layouts.md) allows code to run before every AJAX handler.
-
-```php
-function onInit()
-{
-    // From a page or layout PHP code section
-}
-```
-
-You may define an `init` method inside a [CMS component class](../../extend/cms-components.md).
-
-```php
-function init()
-{
-    // From a component or widget class
-}
+```js
+addEventListener('stale-document', function (event) {
+    if (confirm('Another user has updated this document, proceed?')) {
+        oc.request(event.target, 'onUpdate', { data: {
+            force: true
+        }});
+    }
+});
 ```
