@@ -154,6 +154,42 @@ The same with the JavaScript API.
 When throwing this exception type [partials will be updated](./update-partials.md) as normal.
 :::
 
+## Dispatching Browser Events
+
+You may dispatch JavaScript events from an AJAX handler using the `dispatchBrowserEvent` method. This method takes any event name (first argument) and detail variables to pass to the event (second argument). Dispatched events are triggered in an AJAX response after the request completes and before partials are updated.
+
+```php
+function onPerformAction()
+{
+    $this->dispatchBrowserEvent('app:update-profile');
+}
+```
+
+The second argument can be used to pass variables with the event, the values must be compatible with JSON serialization.
+
+```php
+$this->dispatchBrowserEvent('app:update-profile', ['name' => 'Jeff']);
+```
+
+In the browser, use the `addEventListener` to listen for the dispatched event when the AJAX request completes. The event variables are available via the `event.detail` object.
+
+```js
+addEventListener('app:update-profile', function (event) {
+    alert('Profile updated with name: ' + event.detail.name);
+});
+```
+
+Throwing an `AjaxException` or `ValidationException` will halt the process and include dispatched events.
+
+```php
+function onPerformAction()
+{
+    $this->dispatchBrowserEvent('app:update-profile');
+
+    throw new AjaxException;
+}
+```
+
 ## Running Code Before Handlers
 
 Sometimes you may want code to execute before a handler executes. Defining an `onInit` function as part of the [Layout Execution Life Cycle](../../cms/themes/layouts.md) allows code to run before every AJAX handler.
