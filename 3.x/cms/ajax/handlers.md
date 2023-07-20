@@ -224,3 +224,11 @@ addEventListener('app:stale-document', function (event) {
     }
 });
 ```
+
+To prevent the partials from updating as part of the response, call `preventDefault()` on the event object.
+
+```js
+addEventListener('app:stale-document', function (event) {
+    event.preventDefault();
+});
+```
