@@ -71,12 +71,8 @@ For the loading status, a stylesheet is used to show the loading dialog during a
 
 ```css
 .modal-dialog[data-ajax-updating],
-.modal-loading {
+.modal-dialog:not([data-ajax-updating]) + .modal-loading {
     display: none;
-}
-
-.modal-dialog[data-ajax-updating] + .modal-loading {
-    display: block;
 }
 ```
 
