@@ -137,10 +137,6 @@ Lang::set('I love programming.', 'Le codage est le meilleur!', 'fr');
 
 ## Contributing Language Strings
 
-::: aside
-_We would like to take this opportunity to sincerely thank all of the wonderful people who contribute translations. From everyone at the October CMS team, **thank you!**_
-:::
-
 October CMS uses a service called Crowdin to better manage translations for popular languages. It also performs automated machine translations using Google's translation API for all other languages. If you discover missing or incorrect translations in October CMS, please follow the instructions below.
 
 ### Using Crowdin
