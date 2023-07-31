@@ -44,7 +44,7 @@ The button to trigger the modal is paired with an AJAX request to request the pa
     type="button"
     class="btn btn-primary"
     data-request="onAjax"
-    data-request-update="{ my-modal-content: '#siteModalContent' }"
+    data-request-update="{ 'my-modal-content': '#siteModalContent' }"
     data-bs-toggle="modal"
     data-bs-target="#siteModal">
     Launch demo modal
@@ -56,20 +56,13 @@ The button to trigger the modal is paired with an AJAX request to request the pa
 The following modal definition is generic and can be added to any page or layout. It contains two `modal-dialog` elements. The first is used as the target container for the partial contents, and the second is used to show a loading state while the request loads.
 
 ```html
-<div class="modal fade" id="siteModal">
-    <div class="modal-dialog" id="siteModalContent">
+<div class="modal" id="siteModal">
+    <div class="modal-dialog modal-dialog-centered" id="siteModalContent">
         <!-- Partial Contents Will Go Here -->
     </div>
 
-    <div class="modal-dialog modal-loading">
-        <div class="modal-content">
-            <div class="modal-header">
-                Loading
-            </div>
-            <div class="modal-body">
-                <p>Please wait...</p>
-            </div>
-        </div>
+    <div class="modal-dialog modal-dialog-centered modal-loading">
+        <div class="spinner-border text-light mx-auto"></div>
     </div>
 </div>
 ```
@@ -78,12 +71,8 @@ For the loading status, a stylesheet is used to show the loading dialog during a
 
 ```css
 .modal-dialog[data-ajax-updating],
-.modal-loading {
+.modal-dialog:not([data-ajax-updating]) + .modal-loading {
     display: none;
-}
-
-.modal-dialog[data-ajax-updating] + .modal-loading {
-    display: block;
 }
 ```
 

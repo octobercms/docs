@@ -26,7 +26,7 @@ Very often the list and [form controller](../forms/form-controller.md) are used 
 
 ## Configuring the List Behavior
 
-The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](controllers-ajax.md). Below is an example of a typical list behavior configuration file.
+The configuration file referred in the `$listConfig` property is defined in YAML format. The file should be placed into the controller's [views directory](../system/controllers.md). Below is an example of a typical list behavior configuration file.
 
 ```yaml
 # config_list.yaml
