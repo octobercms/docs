@@ -27,6 +27,29 @@ You can also pass a third options argument. This example will crop the image ins
 
 See the [image resizer article](../../extend/services/resizer.md) for more information on the available `options` parameters.
 
+## Custom Filenames
+
+The resizer will assign a random filename to resized images by default. You may use the original filename by passing the `true` to `filename` option to the resizer.
+
+```twig
+<img src="{{ 'banner.jpg'|resize(800, 600, { filename: true }) }}" />
+```
+
+The `filename` option also supports a custom filename. The filename should not contain an extension since the original one is used.
+
+```twig
+<img src="{{ 'banner.jpg'|resize(800, 600, { filename: 'my-seo-friendly-name' }) }}" />
+```
+
+You may modify the extension with the `extension` option. This process will attempt to convert from one file type to another, for example, converting a JPG to a PNG file.
+
+```twig
+<img src="{{ 'banner.jpg'|resize(800, 600, {
+    filename: 'my-seo-friendly-name',
+    extension: 'png'
+}) }}" />
+```
+
 ## Available Sources
 
 You may reference images from multiple sources, including the following paths:
