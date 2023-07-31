@@ -35,7 +35,7 @@ The resizer will assign a random filename to resized images by default. You may 
 <img src="{{ 'banner.jpg'|resize(800, 600, { filename: true }) }}" />
 ```
 
-The `filename` option also supports a custom filename. The filename should not contain an extension since the original one is used.
+The `filename` option also supports a custom filename as a string. The filename should not contain an extension since the original one is used.
 
 ```twig
 <img src="{{ 'banner.jpg'|resize(800, 600, { filename: 'my-seo-friendly-name' }) }}" />
