@@ -18,3 +18,13 @@ Property | Description
 ------------- | -------------
 **label** | title text for the section.
 **comment** | secondary text for the section.
+**displayMode** | determines how to display the section, as either `simple` or `heading`. Default: `heading`
+
+To display a simple comment instead of a heading in the section, set the `displayMode` property.
+
+```yaml
+_section1:
+    type: section
+    label: These fields are used to calculate some other fields.
+    displayMode: simple
+```
