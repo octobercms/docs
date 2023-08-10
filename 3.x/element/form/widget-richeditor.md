@@ -112,3 +112,11 @@ Then add the button to the default collection.
 ```js
 oc.richEditorButtons.splice(0, 0, 'insertCustomThing');
 ```
+
+When registering the JavaScript, it should come after the assets registered by the Rich Editor. You may extend the `RichEditor` class constructor to achieve this.
+
+```php
+\Backend\FormWidgets\RichEditor::extend(function($controller) {
+    $controller->addJs('/plugins/october/test/assets/js/custom-button.js');
+});
+```
