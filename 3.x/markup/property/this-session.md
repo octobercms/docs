@@ -15,7 +15,7 @@ You can retrieve data from the session by passing the key name to `this.session.
 
 ## this.session.has()
 
-The `this.session.has` method can eetermine if an item exists in the session.
+The `this.session.has` method can determine if an item exists in the session.
 
 ```twig
 {% if this.session.has('key') %}
@@ -23,16 +23,30 @@ The `this.session.has` method can eetermine if an item exists in the session.
 {% endif %}
 ```
 
-## this.session.forget
+## this.session.put()
+
+The `this.session.put` method is used to store session data.
+
+```twig
+{% do this.session.put('my-preference', 'value') %}
+```
+
+## this.session.forget()
 
 The `this.session.forget` will delete a single key (first argument) from the session.
 
 ```twig
-{{ this.session.forget('key') }}
+{% do this.session.forget('key') %}
 ```
 
 To remove all the session data, use `this.session.flush` instead.
 
 ```twig
-{{ this.session.flush() }}
+{% do this.session.flush() %}
 ```
+
+#### See Also
+
+::: also
+* [Session Service](../../extend/services/session.md)
+:::
