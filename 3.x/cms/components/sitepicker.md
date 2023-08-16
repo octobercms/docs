@@ -54,5 +54,5 @@ In the example below, each site will have a `url` set to the CMS page found in *
 #### See Also
 
 ::: also
-* [Theme Localization](../resources/multisite.md)
+* [Multisite](../resources/multisite.md)
 :::

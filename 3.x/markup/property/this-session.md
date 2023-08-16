@@ -13,6 +13,12 @@ You can retrieve data from the session by passing the key name to `this.session.
 {{ this.session.get('key') }}
 ```
 
+You may also pass a default value as the second argument.
+
+```twig
+{{ this.session.get('key', 'default') }}
+```
+
 ## this.session.has()
 
 The `this.session.has` method can determine if an item exists in the session.
