@@ -18,7 +18,7 @@ Property | Description
 ------------- | -------------
 **source** | the related blueprint UUID or handle name.
 **maxItems** | limits the number of entries that can be selected.
-**displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`, `taglist`. Default: `relation`.
+**displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`, `taglist`, `controller`. Default: `relation`.
 **conditions** | specifies a raw where query statement to apply to the model query.
 **scope** | applies a [query scope method](../../extend/database/model.md) to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
 **inverse** | when defined as an inverse relationship, the name of the related field in the source blueprint.
@@ -45,6 +45,14 @@ When multiple items are available, the `displayMode` supports selecting items us
 author:
     type: entries
     displayMode: taglist
+```
+
+To create, update and delete items within the form, set the `displayMode` to controller to show an advanced management mode.
+
+```yaml
+author:
+    type: entries
+    displayMode: controller
 ```
 
 ## Applying Conditions
