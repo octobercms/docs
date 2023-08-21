@@ -78,6 +78,7 @@ The available toolbar buttons are:
 - insertAudio
 - insertFile
 - insertTable
+- insertSnippet
 - undo
 - redo
 - clearFormatting

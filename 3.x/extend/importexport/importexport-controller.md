@@ -106,7 +106,7 @@ The following configuration properties (all optional) are supported for the form
 
 Property | Description | Format
 -------- | ----------- | ------
-**fileFormat** | File format as either `json`, `csv` or `csv_custom`, default: `csv`. |
+**fileFormat** | File format as either `json`, `csv` or `csv_custom`, default: `json`. |
 **customJson** | Use a custom format for the `json` format type. | JSON
 **firstRowTitles** | First row contains headers, import only. | CSV
 **delimiter** | Delimiter character. | CSV (Custom)
