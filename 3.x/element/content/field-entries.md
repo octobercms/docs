@@ -47,14 +47,6 @@ author:
     displayMode: taglist
 ```
 
-To create, update and delete items within the form, set the `displayMode` to controller to show an advanced management mode.
-
-```yaml
-author:
-    type: entries
-    displayMode: controller
-```
-
 ## Applying Conditions
 
 You can restrict the related query using SQL or PHP using the approaches below. In the examples, the related record has a field called `is_featured` that renders as a checkbox. We can limit the related records to only those that have this checkbox marked.
@@ -136,4 +128,33 @@ categories:
         relation: categories
         relationCount: true
         type: number
+```
+
+## Advanced Record Management
+
+To create, update and delete items within the form, set the `displayMode` to controller to show an advanced management mode, powered by [Relation Controller behavior](../../extend/forms/relation-controller.md).
+
+```yaml
+author:
+    type: entries
+    displayMode: controller
+```
+
+If the blueprint has `navigation` set to `false` then the default buttons will show **Create** and **Delete**. If the navigation is defined, then the buttons show **Add** and **Remove**. You may customize the buttons with the `toolbarButtons` property.
+
+```yaml
+author:
+    type: entries
+    toolbarButtons: create|add|remove|delete
+```
+
+The various messages used in the relation controller are taken from the source blueprint `customMessages`, property, and you may also modify them using the `customMessages` on the field definition.
+
+```yaml
+author:
+    type: entries
+    customMessages:
+        buttonCreate: New Author
+        titleUpdateForm: Update Author
+        titleCreateForm: Create Author
 ```

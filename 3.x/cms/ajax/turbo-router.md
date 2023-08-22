@@ -153,7 +153,7 @@ addEventListener('render', function() {
 });
 ```
 
-The `oc.pageReady` function can be used to wait for the page to be ready before calling some code. This function returns a promise that is resolved after all the page scripts have loaded.
+The `oc.pageReady` function is used call code when the page and scripts are ready. The function returns a promise that is resolved after all the page scripts have loaded, or immediately if they are already loaded.
 
 ```js
 oc.pageReady().then(() => {

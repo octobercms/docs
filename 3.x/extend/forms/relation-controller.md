@@ -134,8 +134,11 @@ Message | Default Message
 **buttonAdd** | Add :name
 **buttonLink** | Link :name
 **buttonDelete** | Delete
+**buttonDeleteMany** | Delete Selected
 **buttonRemove** | Remove
+**buttonRemoveMany** | Remove Selected
 **buttonUnlink** | Unlink
+**buttonUnlinkMany** | Unlink Selected
 **confirmDelete** | Are you sure?
 **confirmUnlink** | Are you sure?
 **titlePreviewForm** | Preview :name
