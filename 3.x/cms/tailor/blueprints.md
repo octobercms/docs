@@ -153,6 +153,9 @@ The following messages are available to override as custom messages.
 Message | Default Message
 ------------- | -------------
 **buttonCreate** | Create :name Entry
+**titleIndexList** | Manage :name Entries
+**titleCreateForm** | Create :name
+**titleUpdateForm** | Update :name
 **pagefinderItemType** | :name Entry
 **pagefinderListType** | All :name Entries
 :::
