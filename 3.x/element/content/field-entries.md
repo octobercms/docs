@@ -18,7 +18,7 @@ Property | Description
 ------------- | -------------
 **source** | the related blueprint UUID or handle name.
 **maxItems** | limits the number of entries that can be selected.
-**displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`, `taglist`, `controller`. Default: `relation`.
+**displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`, `taglist`. Default: `relation`.
 **conditions** | specifies a raw where query statement to apply to the model query.
 **scope** | applies a [query scope method](../../extend/database/model.md) to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
 **inverse** | when defined as an inverse relationship, the name of the related field in the source blueprint.
@@ -128,33 +128,4 @@ categories:
         relation: categories
         relationCount: true
         type: number
-```
-
-## Advanced Record Management
-
-To create, update and delete items within the form, set the `displayMode` to controller to show an advanced management mode, powered by [Relation Controller behavior](../../extend/forms/relation-controller.md).
-
-```yaml
-author:
-    type: entries
-    displayMode: controller
-```
-
-If the blueprint has `navigation` set to `false` then the default buttons will show **Create** and **Delete**. If the navigation is defined, then the buttons show **Add** and **Remove**. You may customize the buttons with the `toolbarButtons` property.
-
-```yaml
-author:
-    type: entries
-    toolbarButtons: create|add|remove|delete
-```
-
-The various messages used in the relation controller are taken from the source blueprint `customMessages`, property, and you may also modify them using the `customMessages` on the field definition.
-
-```yaml
-author:
-    type: entries
-    customMessages:
-        buttonCreate: New Author
-        titleUpdateForm: Update Author
-        titleCreateForm: Create Author
 ```

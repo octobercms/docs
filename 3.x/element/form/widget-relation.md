@@ -24,7 +24,6 @@ Property | Description
 **scope** | applies a [query scope method](../../extend/database/model.md) to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
 **defaultSort** | sets a default sorting column and direction, supports a string for the column name or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **useController** | automatically detects if this field configured with [Relation Controller behavior](../../extend/forms/relation-controller.md) and use it. Default: `true`
-**controller** | specifies an array to manually configure integration with the [Relation Controller behavior](../../extend/forms/relation-controller.md).
 
 Use the `nameFrom` property to customize the label used for the related record.
 
@@ -119,4 +118,3 @@ countries:
     type: relation
     useController: false
 ```
-
