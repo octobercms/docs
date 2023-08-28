@@ -47,7 +47,7 @@ age:
     type: number
     conditions:
         greater: age >= :value
-        between: age >= ':min' and age <= ':max'
+        between: age >= :min and age <= :max
 ```
 
 ## PHP Interface

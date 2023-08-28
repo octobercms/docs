@@ -28,7 +28,7 @@ You may pass custom SQL to the conditions as a string where `:value` contains th
 ```yaml
 status:
     type: dropdown
-    conditions: status = :value
+    conditions: status = ':value'
     # ...
 ```
 
