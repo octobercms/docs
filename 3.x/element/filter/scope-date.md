@@ -77,8 +77,8 @@ created_at:
     label: Created
     type: date
     conditions:
-        before: created_at <= ':value'
-        between: created_at >= ':after' AND created_at <= ':before'
+        before: created_at <= :value
+        between: created_at >= :after AND created_at <= :before
 ```
 
 The following parameters are supported.
