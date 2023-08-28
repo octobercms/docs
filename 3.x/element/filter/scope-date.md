@@ -32,7 +32,6 @@ Condition | Description
 **before** | is before the selected date
 **after** | is after the selected date
 
-
 The filtered value is automatically converted to the backend timezone preference, you may disable this using the `useTimezone` option.
 
 ```yaml
