@@ -39,12 +39,12 @@
     title: Components
     collapsable: false
     children:
-        - components/catalog
         - components/cart
+        - components/catalog
         - components/checkout
+        - components/session
         - components/registration
         - components/authentication
-        - components/session
         - components/new-password
         - components/profile-details
         - components/security-details
