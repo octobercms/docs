@@ -1,0 +1,16 @@
+"/":
+-
+    title: Merchant Guide
+    icon: "/images/october-leaf.svg"
+    prefix: "/shop/4.x/merchant/"
+    link: "/shop/4.x/merchant/introduction.html"
+-
+    title: Developer Guide
+    icon: "/images/markup-guide.svg"
+    prefix: "/shop/4.x/developer/"
+    link: "/shop/4.x/developer/introduction.html"
+-
+    title: API Handbook
+    icon: "/images/markup-guide.svg"
+    prefix: "/4.x/element/"
+    link: "/4.x/element/form-fields.html"

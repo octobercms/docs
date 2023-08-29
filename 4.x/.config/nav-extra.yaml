@@ -2,25 +2,25 @@
 -
     title: Getting Started
     icon: "/images/october-leaf.svg"
-    prefix: "/3.x/"
-    link: "/3.x/setup/installation.html"
+    prefix: "/4.x/"
+    link: "/4.x/setup/installation.html"
 -
     title: CMS Guide
     icon: "/images/markup-guide.svg"
-    prefix: "/3.x/cms/"
-    link: "/3.x/cms/themes/themes.html"
+    prefix: "/4.x/cms/"
+    link: "/4.x/cms/themes/themes.html"
 -
     title: Markup Guide
     icon: "/images/markup-guide.svg"
-    prefix: "/3.x/markup/"
-    link: "/3.x/markup/templating.html"
+    prefix: "/4.x/markup/"
+    link: "/4.x/markup/templating.html"
 -
     title: Extending October CMS
     icon: "/images/markup-guide.svg"
-    prefix: "/3.x/extend/"
-    link: "/3.x/extend/system/plugins.html"
+    prefix: "/4.x/extend/"
+    link: "/4.x/extend/system/plugins.html"
 -
     title: API Handbook
     icon: "/images/markup-guide.svg"
-    prefix: "/3.x/element/"
-    link: "/3.x/element/form-fields.html"
+    prefix: "/4.x/element/"
+    link: "/4.x/element/form-fields.html"
