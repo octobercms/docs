@@ -1,5 +1,9 @@
 "/":
 -
+    title: Home
+    icon: "/images/october-leaf.svg"
+    link: "/"
+-
     title: Merchant Guide
     icon: "/images/october-leaf.svg"
     prefix: "/shop/4.x/merchant/"
@@ -9,6 +13,11 @@
     icon: "/images/markup-guide.svg"
     prefix: "/shop/4.x/developer/"
     link: "/shop/4.x/developer/introduction.html"
+-
+    title: Markup Guide
+    icon: "/images/markup-guide.svg"
+    prefix: "/4.x/markup/"
+    link: "/4.x/markup/templating.html"
 -
     title: API Handbook
     icon: "/images/markup-guide.svg"

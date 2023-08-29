@@ -1,5 +1,9 @@
 "/":
 -
+    title: Home
+    icon: "/images/october-leaf.svg"
+    link: "/"
+-
     title: Getting Started
     icon: "/images/october-leaf.svg"
     prefix: "/4.x/"
@@ -10,15 +14,15 @@
     prefix: "/4.x/cms/"
     link: "/4.x/cms/themes/themes.html"
 -
-    title: Markup Guide
-    icon: "/images/markup-guide.svg"
-    prefix: "/4.x/markup/"
-    link: "/4.x/markup/templating.html"
--
     title: Extending October CMS
     icon: "/images/markup-guide.svg"
     prefix: "/4.x/extend/"
     link: "/4.x/extend/system/plugins.html"
+-
+    title: Markup Guide
+    icon: "/images/markup-guide.svg"
+    prefix: "/4.x/markup/"
+    link: "/4.x/markup/templating.html"
 -
     title: API Handbook
     icon: "/images/markup-guide.svg"

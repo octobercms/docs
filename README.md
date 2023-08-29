@@ -1,9 +1,6 @@
 ---
 home: true
 ---
-
-# October CMS Docs
-
 Welcome to the October CMS documentation. You can find the published version by visiting the [October CMS Docs](https://docs.octobercms.com) website.
 ### Documentation Contents
 
