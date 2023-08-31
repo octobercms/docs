@@ -213,6 +213,10 @@ Property | Description
 **name** | The label to display when working with this entry.
 **fields** | form fields belonging to the group, see [backend form fields](../../element/form-fields.md).
 
+::: tip
+Consider prefixing the mixin file and field names with an underscore (\_) to make the blueprint type easy to find. For example: `_location-fields.yaml`
+:::
+
 ### Using the Mixin
 
 To include these fields in your entries, like any other form field, use the `type` of **mixin** and reference the UUID or handle in the `source` property.
