@@ -39,7 +39,7 @@ Property | Description
 
 ### Entry Variants
 
-While an entry type has no specific behavior, there is also several variants that can be used for organising content. The following types are variants of an entry.
+While an entry type has no specific behavior, there are also several variants that can be used for organising content. The following types are variants of an entry.
 
 - **entry** is a basic entry for common purposes.
 - **single** is a single entry with dedicated fields, eg: Contact Us Page.
