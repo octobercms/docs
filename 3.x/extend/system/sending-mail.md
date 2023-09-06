@@ -277,10 +277,12 @@ Mail::sendTo($recipient, $message, $params, $callback, $options);
 - `$callback` gets called with one parameter, the message builder as described for the `send` method (optional, defaults to null). If not a callable value, works as a substitute for the next options argument.
 - `$options` custom sending options passed as an array (optional)
 
-The following custom sending `$options` are supported
+The following custom sending `$options` are supported.
 
-- **queue** specifies whether to queue the message or send it directly (optional, defaults to false).
-- **bcc** specifies whether to add recipients as Bcc or regular To addresses (defaults to false).
+Option | Description
+------------- | -------------
+**queue** | specifies whether to queue the message or send it directly, optional. Default: `false`.
+**bcc** | specifies whether to add recipients as Bcc or regular To addresses. Default: `false`.
 
 ### Building the Message
 
