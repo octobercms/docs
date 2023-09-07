@@ -21,7 +21,7 @@ The following configuration defines each site:
 - **Timezone** - the timezone to use for this site.
 - **Custom application URL** - the URL to use when this site is active, for things like mail templates or when the link policy forces the URL.
 - **Use a CMS route prefix** - defines a prefix to include before every page route. It can identify this site when using a shared hostname.
-- **Define matching hostnames** - restricts the site to specific hostnames. You should enable this for production sites for security reasons. Wildcard values are supported, e.g.: `*.mydomain.tld`.
+- **Define matching hostnames** - matches the site using specific hostnames. You should enable this for production sites for security reasons. Wildcard values are supported, e.g.: `*.mydomain.tld`.
 - **Display a color for this site** - when enabled, displays a banner at the top of the admin panel. Useful to identify the active site or distinguish different environments, for example, red for development, green for staging and no color for production.
 
 When you create more than one site, each can be selected in the admin panel using the site selection dropdown menu.
