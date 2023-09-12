@@ -73,6 +73,14 @@ Site definitions can restrict their visibility based on the administrator role, 
 
 When enabled, the site will only be visible in the backend panel to administrators that are specified in the field. For example, to create a site that is only accessible to Developers, select the **Developer** role in the field.
 
+## Multisite Features
+
+There are some core features that are not multisite-enabled by default, such as the mail configuration. You may selectively enable multisite features using the **config/multisite.php** file found under the `features` section. The following feature keys are available to use with multiple site definitions.
+
+Feature | Description
+------- | --------------------------
+`backend_mail_setting` | Mail configuration found in the admin panel
+
 #### See Also
 
 ::: also
