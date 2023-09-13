@@ -44,8 +44,9 @@ Argument | Description
 **order** | sorting order for multiple records.
 **conditions** | filters the relation using a raw where query statement.
 **scope** | filters the relation using a supplied scope method.
-**push** | if set to false, this relation will not be saved via the `push` method. Default: `true`
-**delete** | if set to true, the related model will be deleted if the primary model is deleted or relationship is destroyed. Default: `false`
+**push** | if set to `false`, this relation will not be saved via the `push` method. Default: `true`
+**delete** | if set to `true`, the related model will be deleted if the primary model is deleted or relationship is destroyed. Default: `false`
+**softDelete** | if set to `true`, the related model will be soft deleted if the [primary model is soft deleted](./traits.md). Default: `false`
 **replicate** | if set to true, the related model will duplicated or associated via the `replicate` method. Default: `false`.
 **relationClass** | specify a custom class name for the related object.
 
