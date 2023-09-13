@@ -21,7 +21,7 @@ Property | Description
 **toolbarButtons** | buttons to show on the editor toolbar. Example: `bold|italic`
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
 **showMargins** | set to `true` to include resizable document margins. Default: `false`.
-**inlineMode** | uses line breaks instead of paragraph wrappers for each new line. Default `false`.
+**useLineBreaks** | uses line breaks instead of paragraph wrappers for each new line. Default `false`.
 
 You may specify how large the field size should be with the `size` property.
 
