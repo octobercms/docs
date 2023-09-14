@@ -1309,7 +1309,7 @@ You can commit (bind or unbind) all deferred bindings when you save the master m
 ```php
 $post = new Post;
 $post->title = "First blog post";
-$post->save(null, $sessionKey);
+$post->save(['sessionKey' => $sessionKey]);
 ```
 
 The same approach works with the model's `create` method:
