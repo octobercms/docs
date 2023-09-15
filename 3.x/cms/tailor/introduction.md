@@ -56,7 +56,7 @@ fields:
     # [...]
 ```
 
-The blueprint **handle** is a human readible approach to referencing a blueprint object. Using the above blueprint as a reference, we can reference the entries using the handle.
+The blueprint **handle** is a human-readable approach to referencing a blueprint object. Using the above blueprint as a reference, we can reference the entries using the handle.
 
 ::: tip
 Handles follow a similar naming convention to PHP namespaces and can be organised with the backslash `\` separator.
