@@ -66,7 +66,7 @@ Property | Description
 **emptyMessage** | a message to display when the relationship is empty, optional.
 **readOnly** | disables the ability to add, update, delete or create relations. Default: `false`
 **deferredBinding** | [defers all binding actions using a session key](../database/relations.md) when it is available. default: `false`
-**popupSize** | change the size of the management popups used, either: giant, huge, large, small, tiny or adaptive. Default: `huge`
+**popupSize** | change the size of the management popups used, either: `giant`, `huge`, `large`, `small`, `tiny` or `adaptive`. Default: `huge`
 
 These configuration values can be specified for the **view** or **manage** properties, where applicable to the render type of list, form or both.
 

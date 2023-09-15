@@ -44,7 +44,7 @@ Property | Description
 **class** | the model class the settings item should refer to, eg. `Acme\User\Models\UserSetting::class`.
 **permissions** | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
 **context** | specifies the placement of the settings item, either `system` or `mysettings`. Default: `system`.
-**size** | the settings form size when used with a `class` definition. Supported values: tiny, small, medium, large, huge, giant, adaptive. Default: `large`.
+**size** | the settings form size when used with a `class` definition. Supported values: `tiny`, `small`, `medium`, `large`, `huge`, `giant`, `adaptive`. Default: `large`.
 
 For interoperability with other plugins, the following general constants are available for the `category` property.
 

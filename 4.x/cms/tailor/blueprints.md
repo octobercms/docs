@@ -39,7 +39,7 @@ Property | Description
 
 ### Entry Variants
 
-While an entry type has no specific behavior, there is also several variants that can be used for organising content. The following types are variants of an entry.
+While an entry type has no specific behavior, there are also several variants that can be used for organising content. The following types are variants of an entry.
 
 - **entry** is a basic entry for common purposes.
 - **single** is a single entry with dedicated fields, eg: Contact Us Page.
@@ -184,6 +184,7 @@ Property | Description
 **name** | The label to display when working with this entry.
 **fields** | form fields belonging to the group, see [backend form fields](../../element/form-fields.md).
 **multisite** | enables multisite for this entry, supported values: `true`, `false`. Default: `false`
+**formSize** | the settings form size, supported values: `tiny`, `small`, `medium`, `large`, `huge`, `giant`, `adaptive`. Default: `huge`.
 
 ## Mixin
 

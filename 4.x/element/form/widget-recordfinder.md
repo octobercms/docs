@@ -35,3 +35,4 @@ Property | Description
 **searchScope** | specifies a [query scope method](../../extend/database/model.md) defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 **useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: `true`. Disable to return just the selected model's ID
 **modelClass** | class of the model to use for listing records when `useRelation` is `false`
+**popupSize** | change the size of the finder popup used, either: `giant`, `huge`, `large`, `small`, `tiny` or `adaptive`. Default: `huge`
