@@ -240,7 +240,29 @@ Setting the `prefix` to false will make the event name global, the following tri
 this.dispatch('hello-ready', { prefix: false });
 ```
 
-## Usage Example
+## Usage Examples
+
+The following example shows a simple implementation of a third-party JavaScript library, such as Google Maps API. The library `Map` is initialized on the control `div` element when it is seen on the page. When the control is removed from the page, it prevents memory leaks by calling `destroy` on the map instance and setting the property to `null`.
+
+```html
+<div data-control="google-map"></div>
+
+<script>
+oc.registerControl('google-map', class extends oc.ControlBase {
+    connect() {
+        this.map = new Map(this.element, {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 8
+        });
+    }
+
+    disconnect() {
+        this.map.destroy();
+        this.map = null;
+    }
+});
+</script>
+```
 
 The following example demonstrates a basic HTML form that includes a name input and a greeting button. The control class initializes the input and output elements, and then listens for the click event on the Greet button. When the Greet button is clicked, the output element displays a greeting that includes the entered name.
 
