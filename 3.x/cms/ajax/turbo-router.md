@@ -145,11 +145,19 @@ You can disable the page cache for individual pages by using the `turbo-cache-co
 
 ## Working with JavaScript
 
-When working with PJAX, the page contents may load dynamically, which differs from the usual browser behavior. To overcome this, use the `page:loaded` event handler is called every time the page loads.
+When working with PJAX, the page contents may load dynamically, which differs from the usual browser behavior. To overcome this, use the `render` event handler is called every time the page loads, including [AJAX updates](./update-partials.md).
 
 ```js
-addEventListener('page:loaded', function() {
+addEventListener('render', function() {
     // Page has rendered something new
+});
+```
+
+The `oc.pageReady` function is used call code when the page and scripts are ready. The function returns a promise that is resolved after all the page scripts have loaded, or immediately if they are already loaded.
+
+```js
+oc.pageReady().then(() => {
+    // Page has finished loading scripts
 });
 ```
 
@@ -182,7 +190,7 @@ To execute inline JavaScript code only once, regardless of first page load or PJ
 ### Making Controls Idempotent
 
 ::: aside
-October CMS provides a complimentary library that is used to make building [idempotent controls](./live-controls.md) easy.
+October CMS provides a complimentary library that is used to make building [idempotent controls](./hot-controls.md) easy.
 :::
 
 When a page visit occurs and JavaScript components are initialized, it is important that these function are idempotent. In simple terms, an idempotent function is safe to apply multiple times without changing the result beyond its initial application.
@@ -223,7 +231,7 @@ addEventListener('page:unload', function() {
 ```
 
 ::: tip
-October CMS includes a complimentary library for [building disposible controls](./live-controls.md).
+October CMS includes a complimentary library for [building disposable controls](./hot-controls.md).
 :::
 
 ### Pause Rendering
@@ -250,6 +258,7 @@ The AJAX framework triggers several events during the navigation life cycle and 
 
 Event | Description
 ------------- | -------------
+**render** | triggered when the page updates via PJAX or AJAX.
 **page:click** | triggered when a turbo-routed link is clicked.
 **page:before-visit** | triggered before visiting a location, except when navigating using browser history.
 **page:visit** | triggered after a clicked visit starts.
@@ -265,10 +274,10 @@ Event | Description
 
 ## Usage Examples
 
-The following JavaScript will run every time a page loads.
+The following JavaScript will run every time a page loads, including scripts.
 
 ```js
-addEventListener('page:load', function() {
+addEventListener('page:loaded', function() {
     // ...
 });
 ```
@@ -288,9 +297,8 @@ snippetOptions: {
 }
 ```
 
-
 #### See Also
 
 ::: also
-* [Observable Controls](./live-controls.md)
+* [Observable Controls](./hot-controls.md)
 :::

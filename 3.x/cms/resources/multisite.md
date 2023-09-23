@@ -62,7 +62,22 @@ When the user visits the base URL, their preferred language is automatically det
 You can modify this behavior using the `redirect_policy` value found in the **config/cms.php** file.
 :::
 
-## Multisite Role Restrictions
+## Site Groups
+
+In its initial state, multisite is helpful in creating multiple websites in a single language, or a single website using multiple languages. Grouping sites allow you to extend this concept further to create multiple sites with multiple languages. Create site groups by navigating to **Settings → Manage Sites → Manage Site Groups**, and once a group is created, a group selection field should appear for each site.
+
+In practical terms, each site group represents a website and site definitions belonging to the group represent the site in an alternative language. The following example shows a grouped site configuration for a website about cats and dogs with two languages for each.
+
+Site Group | Site Name
+---------- | -----------
+Dogs       | English
+Dogs       | French
+Cats       | English
+Cats       | French
+
+Grouped sites will only replicate fields within their specific group. For example, if a [Tailor blueprint](../tailor/introduction.md) uses the `multisite: sync` option, the records will only synchronize across sites in the same group.
+
+## Role Restrictions
 
 Site definitions can restrict their visibility based on the administrator role, which allows you to use dedicated administrator roles to manage a specific sites. To enable the multisite role restrictions feature:
 
@@ -72,6 +87,22 @@ Site definitions can restrict their visibility based on the administrator role, 
 4. Click **Save**.
 
 When enabled, the site will only be visible in the backend panel to administrators that are specified in the field. For example, to create a site that is only accessible to Developers, select the **Developer** role in the field.
+
+## Multisite Features
+
+There are some core features that are not multisite-enabled by default, such as the mail configuration. You may selectively enable multisite features using the **config/multisite.php** file found under the `features` section. The following feature keys are available to use with multiple site definitions.
+
+Feature | Description
+------- | --------------------------
+`backend_mail_setting` | Mail configuration found in the admin panel
+
+### Disabling Multisite
+
+You may disable the multisite features entirely by setting the `enabled` configuration to a `false` value.
+
+```php
+'enabled' => false
+```
 
 #### See Also
 

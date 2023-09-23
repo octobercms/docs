@@ -22,8 +22,8 @@ Property | Description
 **emptyOption** | text to display when there is no available selections.
 **conditions** | specifies a raw where query statement to apply to the model query.
 **scope** | applies a [query scope method](../../extend/database/model.md) to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
-**useController** | display the field using integration with [Relation Controller behavior](../../extend/forms/relation-controller.md). Default: `true`
 **defaultSort** | sets a default sorting column and direction, supports a string for the column name or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
+**useController** | automatically detects if this field configured with [Relation Controller behavior](../../extend/forms/relation-controller.md) and use it. Default: `true`
 
 Use the `nameFrom` property to customize the label used for the related record.
 
@@ -118,4 +118,3 @@ countries:
     type: relation
     useController: false
 ```
-

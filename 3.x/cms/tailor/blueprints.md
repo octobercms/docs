@@ -153,6 +153,9 @@ The following messages are available to override as custom messages.
 Message | Default Message
 ------------- | -------------
 **buttonCreate** | Create :name Entry
+**titleIndexList** | Manage :name Entries
+**titleCreateForm** | Create :name
+**titleUpdateForm** | Update :name
 **pagefinderItemType** | :name Entry
 **pagefinderListType** | All :name Entries
 :::
@@ -210,6 +213,10 @@ Property | Description
 **handle** | A meaningful and unique code to identify the entry.
 **name** | The label to display when working with this entry.
 **fields** | form fields belonging to the group, see [backend form fields](../../element/form-fields.md).
+
+::: tip
+Consider prefixing the mixin file and field names with an underscore (\_) to make the blueprint type easy to find. For example: `_location-fields.yaml`
+:::
 
 ### Using the Mixin
 
