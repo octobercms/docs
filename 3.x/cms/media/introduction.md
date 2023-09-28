@@ -37,14 +37,14 @@ There are several options that allow you to fine-tune the Media Manager, which a
 
 The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](./providers.md) on using third party providers such as Amazon S3.
 
-#### SVG uploads are disabled by default
+#### Disabling SVG Uploads
 
-For security reasons, uploading SVG graphic files is disabled in October CMS by default. This is because there is potential for malicious code to be executed when the SVG file renders on the page.
+For security reasons, you may need to disable uploading SVG graphic files because there is potential for malicious code to be executed when the SVG file renders on the page.
 
-To allow the use of SVG files in the backend, simply add it to the list of image extensions.
+To disable the use of SVG files in the backend, remove `svg` from the list of default extensions.
 
 ```php
-'image_extensions' => [..., 'svg'],
+'default_extensions' => [..., 'svg' /* ← Remove this item */, ...],
 ```
 
 ## Audio and Video Players
