@@ -149,7 +149,7 @@ php artisan tailor:propagate --blueprint="Blog\Category"
 
 As a general rule Tailor will never drop table columns and delete content. If a field is removed, the column will be renamed instead of dropped. For example, an old field named `content` may appear as `x_content_fb418fac` in the database table. Tables for old blueprints are also kept in case they are ever restored.
 
-You may prune unused database column with the `tailor:prune` command. This command will also drop tables that no longer have an associated blueprint.
+You may prune unused database columns with the `tailor:prune` command. This command will also drop tables that no longer have an associated blueprint.
 
 ```bash
 php artisan tailor:prune
