@@ -37,16 +37,6 @@ There are several options that allow you to fine-tune the Media Manager, which a
 
 The configuration that specifies where media files are kept is in the system configuration file, see the [Providers article](./providers.md) on using third party providers such as Amazon S3.
 
-#### Disabling SVG Uploads
-
-For security reasons, you may need to disable uploading SVG graphic files because there is potential for malicious code to be executed when the SVG file renders on the page.
-
-To disable the use of SVG files in the backend, remove `svg` from the list of default extensions.
-
-```php
-'default_extensions' => [..., 'svg' /* ← Remove this item */, ...],
-```
-
 ## Audio and Video Players
 
 By default the system uses HTML5 audio and video tags to render audio and video files:
