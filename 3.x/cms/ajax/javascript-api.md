@@ -206,3 +206,20 @@ addEventListener('ajax:confirm-message', function(event) {
     }
 });
 ```
+
+Animating an element after a specific AJAX handler completes its update.
+
+```js
+addEventListener('ajax:update-complete', function(event) {
+    const { handler } = event.detail.context;
+
+    // If the handler is either of the following
+    if (['onRemoveFromCart', 'onAddToCart'].includes(handler)) {
+
+        // Run an animation for 2 seconds
+        var el = document.querySelector('#miniCart');
+        el.classList.add('animate-shockwave');
+        setTimeout(function() { el.classList.remove('animate-shockwave'); }, 2000);
+    }
+});
+```
