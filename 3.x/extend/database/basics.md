@@ -32,6 +32,12 @@ Instead of using `?` to represent your parameter bindings, you may execute a que
 $results = Db::select('select * from users where id = :id', ['id' => 1]);
 ```
 
+If database query may produces a singular value, this can be retrieved using the `scalar` method.
+
+```php
+$count = Db::scalar('select count(*) as count from menu_items');
+```
+
 ### Modifying Records
 
 To execute an `insert` statement, you may use the `insert` method on the `Db` facade. Like `select`, this method takes the raw SQL query as its first argument and bindings as the second argument.
