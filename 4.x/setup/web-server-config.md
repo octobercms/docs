@@ -65,6 +65,20 @@ DEFAULT_FILE_MASK=644
 DEFAULT_FOLDER_MASK=755
 ```
 
+### Using a Reverse Proxy
+
+When using a reverse proxy, such as CloudFlare, the host server may use an insecure protocol internally and October CMS will reflect this when generating links. This can result in mixed links generated as `http://` and `https://` within the response. The `system.link_policy` setting can be used to force `secure` HTTPS links everywhere.
+
+```ini
+LINK_POLICY=secure
+```
+
+You may also `force` the application URL to be used strictly for every link, which is defined in the `app.url` configuration.
+
+```ini
+LINK_POLICY=force
+```
+
 ### Safe Mode
 
 Safe mode is an extra level of protection that prevents running arbitrary PHP code by disabling the PHP code section in the editor. Safe mode will also enable a secure Twig environment, which restricts unsafe method calls.
