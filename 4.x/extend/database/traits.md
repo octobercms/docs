@@ -49,6 +49,12 @@ Use the `getOriginalPurgeValue` to find a value that was purged after the model 
 return $user->getOriginalPurgeValue('password_confirmation');
 ```
 
+Alternatively, use the `restorePurgedValues` method to restore all purged values.
+
+```php
+$user->restorePurgedValues();
+```
+
 ### Encryptable
 
 Similar to the `Hashable` trait, encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
