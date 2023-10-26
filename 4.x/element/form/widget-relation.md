@@ -119,3 +119,16 @@ countries:
     type: relation
     useController: false
 ```
+
+The `controller` property may be used to specify inline configuration.
+
+```yaml
+products:
+    label: Products
+    tab: Products
+    type: relation
+    controller:
+        label: Product
+        list: $/october/test/models/product/columns.yaml
+        form: $/october/test/models/product/fields.yaml
+```
