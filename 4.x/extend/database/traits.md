@@ -13,9 +13,6 @@ class Product extends Model
 {
     use \October\Rain\Database\Traits\Nullable;
 
-    /**
-     * @var array Nullable attributes.
-     */
     protected $nullable = ['sku'];
 }
 ```
@@ -29,9 +26,6 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Hashable;
 
-    /**
-     * @var array List of attributes to hash.
-     */
     protected $hashable = ['password'];
 }
 ```
@@ -45,14 +39,11 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Purgeable;
 
-    /**
-     * @var array List of attributes to purge.
-     */
     protected $purgeable = ['password_confirmation'];
 }
 ```
 
-The defined attributes will be purged when the model is saved, before the [model events](../system/models.md) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
+Use the `getOriginalPurgeValue` to find a value that was purged after the model was saved.
 
 ```php
 return $user->getOriginalPurgeValue('password_confirmation');
@@ -67,9 +58,6 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Encryptable;
 
-    /**
-     * @var array List of attributes to encrypt.
-     */
     protected $encryptable = ['api_key', 'api_secret'];
 }
 ```
@@ -87,9 +75,6 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Sluggable;
 
-    /**
-     * @var array Generate slugs for these attributes.
-     */
     protected $slugs = ['slug' => 'name'];
 }
 ```
