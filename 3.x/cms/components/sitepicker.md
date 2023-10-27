@@ -53,27 +53,21 @@ In the example below, each site will have a `url` set to the CMS page found in *
 
 ## Translating URL Parameters
 
-By default, the `sitePicker` component isn't aware of model parameters in the URL, such as page slugs and identifiers. The [`cms.sitePicker.overrideParams` event](../../extend/services/event.md) is used to override the URL parameters to their translated versions. A good place to put this event is inside the `init` method of a [CMS Component class](../../extend/cms-components.md).
+By default, the `sitePicker` component isn't aware of model parameters in the URL, such as page slugs and identifiers. The [`cms.sitePicker.overrideParams` event](../../extend/services/event.md) is used to override the URL parameters to their translated versions. A good place to put this event is inside the `init` or the `onRun` method of a [CMS Component class](../../extend/cms-components.md).
+
+For example, if the model implements the [`Multisite` trait](../../extend/database/traits.md), the `newOtherSiteQuery` method is used to locate the model for the proposed site and modify the URL parameters.
 
 ```php
-public function init()
-{
-    // ... Place event code here
-}
-```
+$myModel = MyModel::find(1);
+$otherModels = $myModel->newOtherSiteQuery()->get();
 
-For example, if the model implements the [`Multisite` trait](../../extend/database/traits.md), the `findOtherSiteRecords` method is used to locate the model for the proposed site and modify the URL parameters.
-
-```php
-Event::listen('cms.sitePicker.overrideParams', function($page, $params, $currentSite, $proposedSite) {
-    $otherRecord = $this->findOtherSiteRecords()->where('site_id', $proposedSite->id)->first();
-
-    if ($otherRecord) {
-        $params['id'] = $otherRecord->id;
-        $params['slug'] = $otherRecord->slug;
-        $params['fullslug'] = $otherRecord->fullslug;
+Event::listen('cms.sitePicker.overrideParams', function($page, $params, $currentSite, $proposedSite) use ($otherModels) {
+    $otherModel = $otherModels->where('site_id', $proposedSite->id)->first();
+    if ($otherModel) {
+        $params['id'] = $otherModel->id;
+        $params['slug'] = $otherModel->slug;
+        $params['fullslug'] = $otherModel->fullslug;
     }
-
     return $params;
 });
 ```
