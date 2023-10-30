@@ -11,7 +11,7 @@ The following properties are supported by the component.
 
 Property | Description
 -------- | -------------
-**handle** | The handle of the [global blueprint](./blueprints.md).
+**handle** | The handle of the [global blueprint](../tailor/blueprints.md).
 
 ## Basic Usage
 

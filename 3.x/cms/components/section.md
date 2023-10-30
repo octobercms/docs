@@ -11,7 +11,7 @@ The following properties are supported by the component.
 
 Property | Description
 -------- | -------------
-**handle** | The handle of the [entry blueprint](./blueprints.md).
+**handle** | The handle of the [entry blueprint](../tailor/blueprints.md).
 **identifier** | Use this identifier key to look up the entry, supported values are `slug`, `fullslug` or `id`. Default: `slug`
 **value** | Use this identifier value to use to look up the entry, optional. Leave empty to use the identifier key as the URL parameter name. Can be set to a hard coded value, or a custom parameter, eg: `{{ :slug }}`
 **isDefault** | Make this the default page when previewing the entry. Default: `true`.
