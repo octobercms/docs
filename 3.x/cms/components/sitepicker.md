@@ -53,7 +53,7 @@ In the example below, each site will have a `url` set to the CMS page found in *
 
 ## Translating URL Parameters
 
-By default, the `sitePicker` component isn't aware of model parameters in the URL, such as page slugs and identifiers. The [`cms.sitePicker.overrideParams` event](../../extend/services/event.md) is used to override the URL parameters to their translated versions. A good place to put this event is inside the `init` or the `onRun` method of a [CMS Component class](../../extend/cms-components.md).
+By default, the `sitePicker` component isn't aware of model parameters in the URL, such as page slugs and identifiers. The `cms.sitePicker.overrideParams` [global event](../../extend/services/event.md) is used to override the URL parameters to their translated versions. A good place to put this event is inside the `init` or the `onRun` method of a [CMS Component class](../../extend/cms-components.md).
 
 For example, if the model implements the [`Multisite` trait](../../extend/database/traits.md), the `newOtherSiteQuery` method is used to locate the model for the proposed site and modify the URL parameters.
 
