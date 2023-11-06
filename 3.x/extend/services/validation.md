@@ -840,4 +840,8 @@ public function beforeValidate()
 }
 ```
 
+#### See Also
 
+::: also
+* [Laravel Validation Documentation](https://laravel.com/docs/10.x/validation)
+:::
