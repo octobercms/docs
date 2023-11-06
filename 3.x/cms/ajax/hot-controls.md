@@ -8,7 +8,7 @@ October CMS includes a simple implementation of [MutationObserver](https://devel
 ## Registering an Observable Control
 
 ::: aside
-This function is idempotent, so calling it multiple times will take the first seen definition.
+This function can be called multiple times and it will take the **last seen definition**.
 :::
 
 In its basic form, the `oc.registerControl` JavaScript function is used to define a unique control name (first argument) and class definition (second argument) that extends the `oc.ControlBase` base class.
