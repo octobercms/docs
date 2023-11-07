@@ -11,7 +11,7 @@ The following properties are supported by the component.
 
 Property | Description
 -------- | -------------
-**handle** | The handle of the [entry blueprint](./blueprints.md).
+**handle** | The handle of the [entry blueprint](../tailor/blueprints.md).
 **recordsPerPage** | Number of records to display on a single page. Leave empty to disable pagination.
 **pageNumber** | This value is used to determine what page the user is on.
 **sortColumn** | Column name the records should be ordered by.
