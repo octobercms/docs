@@ -8,7 +8,7 @@ The data attributes API lets you issue AJAX requests without any JavaScript. In 
 data-request Attribute | Description
 ------------- | -------------
 **data-request** | specifies the AJAX handler name.
-**data-request-confirm** | specifies a confirmation message. The confirmation is displayed before the request is sent. If the user clicks the Cancel button the request isn't sent.
+**data-request-confirm** | specifies a confirmation message. A confirmation dialog is displayed before the request is sent. If the user clicks the Cancel button the request isn't sent.
 **data-request-redirect** | specifies a URL to redirect the browser after the successful AJAX request.
 **data-request-url** | specifies a URL to which the request is sent. default: `window.location.href`
 **data-request-update** | specifies a list of partials and page elements (CSS selectors) to update. The format is as follows: `partial: selector, partial: selector`. Usage of quotes is required in some cases, for example: `'my-partial': '#myelement'`. The selector string should start with a `#` or `.` character, except you may also prepend it with `@` to append contents to the element, `^` to prepend, `!` to replace with and `=` to use any CSS selector.
@@ -18,6 +18,7 @@ data-request Attribute | Description
 **data-request-success** | specifies JavaScript code to execute after the request is successfully completed.
 **data-request-error** | specifies JavaScript code to execute if the request encounters an error.
 **data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error.
+**data-request-cancel** | specifies JavaScript code to execute if the aborts the request or cancels it via a confirmation dialog.
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show an AJAX loading indicator. The feature uses CSS display `block` and `none` attributes to manage the element visibility.
 **data-request-progress-bar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
 **data-request-form** | explicitly specify a form element to use for sourcing the form data. If this is unspecified, the closest form to the triggering element is used, including if the element itself is a form.
