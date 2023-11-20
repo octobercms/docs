@@ -244,6 +244,17 @@ trigger:
     field: file_format
 ```
 
+#### Wildcard Value Conditions
+
+You may check the `value[]` condition matches multiple possible values using a wildcard character (`*`), for example, **foo\*** matches anything that starts with "foo", and **\*bar** matches anything that ends with "bar".
+
+```yaml
+trigger:
+    action: show
+    condition: value[*.mp4]
+    field: file_name
+```
+
 #### Multiple Field Values
 
 Some fields, such as [Checkbox List](./form/field-checkboxlist.md) and [Tag List](./form/widget-taglist.md), will store their values as an array. When referencing these fields, the field name should use an array suffix (`[]`) to look at all possible values. For example, if a `colors` field name supports multiple values, the field name `colors[]` should be used as a reference.
