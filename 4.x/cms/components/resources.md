@@ -74,6 +74,8 @@ Assets loaded using the resources component should be in a specific folder insid
 ::: cmstemplate
 ```ini
 [resources]
+css[] = "blocks/carousel.css"
+scss[] = "blocks/carousel.scss"
 less[] = "blocks/carousel.less"
 js[] = "blocks/carousel.js"
 ```
