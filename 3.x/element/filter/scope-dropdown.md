@@ -22,6 +22,7 @@ Property | Description
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
 **conditions** | a custom SQL select statement to use for the filter.
 **emptyOption** | text to display when there is no available selections.
+**modelScope** | applies a [query scope method](../../extend/database/model.md) to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model query that the widget will be attaching its value to, i.e. the parent model.
 
 You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
 
@@ -32,15 +33,6 @@ status:
     # ...
 ```
 
-You may dynamically supply `options` by passing a model method.
-
-```yaml
-roles:
-    type: dropdown
-    emptyOption: All
-    options: getStatusOptions
-```
-
 The dropdown filter does not display a label, the `emptyOption` property can be used to set the default state.
 
 ```yaml
@@ -48,4 +40,54 @@ status:
     type: dropdown
     emptyOption: Select Status
     # ...
+```
+
+## PHP Interface
+
+You may define a custom `modelScope` in the model using the following example.
+
+```yaml
+status:
+    label: Status
+    type: dropdown
+    modelScope: applyStatusCode
+    options:
+        active: Active
+        deleted: Deleted
+```
+
+The **scopeApplyStatusCode** method definition where the value is found in `$scope->value`.
+
+```php
+public function scopeApplyStatusCode($query, $scope)
+{
+    if ($scope->value === 'active') {
+        return $query->withoutTrashed();
+    }
+
+    if ($scope->value === 'deleted') {
+        return $query->onlyTrashed();
+    }
+}
+```
+
+You may dynamically supply custom options with `optionsMethod` and by passing a model method.
+
+```yaml
+status:
+    label: Status
+    type: dropdown
+    optionsMethod: getStatusOptions
+```
+
+The **getStatusOptions** method definition.
+
+```php
+public function getStatusOptions()
+{
+    return [
+        'active' => 'Active',
+        'deleted' => 'Deleted',
+    ];
+}
 ```

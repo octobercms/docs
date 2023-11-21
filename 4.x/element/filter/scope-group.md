@@ -25,7 +25,7 @@ Property | Description
 **nameFrom** | the column name to use in the model class, used for displaying the name. Default: `name`.
 **modelClass** | class of the model to use for the available filter records
 nameFrom
-**modelScope** | applies a [query scope method](../../extend/database/model.md) to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
+**modelScope** | applies a [query scope method](../../extend/database/model.md) to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model query that the widget will be attaching its value to, i.e. the parent model.
 
 To filter by an array, specify an `options` property.
 
@@ -82,7 +82,7 @@ public function scopeGroupFilter($query, $scope)
 }
 ```
 
-You may dynamically supply `options` by passing a model method.
+You may dynamically supply custom options with `optionsMethod` and by passing a model method.
 
 ```yaml
 roles:
@@ -90,7 +90,7 @@ roles:
     type: group
     nameFrom: name
     modelClass: October\Test\Models\Role
-    options: getRoleGroupOptions
+    optionsMethod: getRoleGroupOptions
 ```
 
 The **getRoleGroupOptions** method definition.
