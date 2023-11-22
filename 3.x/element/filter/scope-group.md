@@ -118,7 +118,7 @@ state:
     optionsMethod: getCityOptionsForFilter
 ```
 
-The state scope depends on the value of the country scope, and the options are filtered in PHP using the **getCityOptionsForFilter** method.
+The state scope depends on the value of the country scope, and the options are filtered in PHP using the **getCityOptionsForFilter** method. The first argument of this method will contain the entire set of scope definitions, including their current values.
 
 ```php
 public function getCityOptionsForFilter($scopes = null)
