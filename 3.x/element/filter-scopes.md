@@ -42,7 +42,8 @@ Property | Description
 **label** | a name when displaying the filter scope to the user.
 **type** | defines how this scope should be displayed. Default: `group`.
 **conditions** | enables or disables condition functions or specifies a raw where query statement to apply to each condition, see the scope type definition for details.
-**modelScope** | specifies a [query scope method](../extend/database/model.md) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the filtered value(s).
+**modelClass** | class of the model to use as a data source and reference for local method calls.
+**modelScope** | specifies a [query scope method](../extend/database/model.md) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the scope definition, including its populated value(s).
 **options** | options to use if filtering by multiple items, supplied as an array.
 **optionsMethod** | request options from a method name defined on the model or as a static method call, eg `Class::method`.
 **emptyOption** | an optional label for an intentional empty selection.
@@ -51,3 +52,75 @@ Property | Description
 **dependsOn** | a string or an array of other scope names that this scope depends on. When the other scopes are modified, this scope will reset.
 **nameFrom** | a model attribute name used for displaying the filter label. Default: `name`.
 **valueFrom** | defines a model attribute to use for the source value. Default comes from the scope name.
+
+### Applying Model Scopes
+
+Most filters will apply their scoped constraints using sensible defaults. The `modelScope` property can be used to apply custom constraints to the filter query using a [model scope method definition](../extend/database/model.md).
+
+```yaml
+myfilter:
+    label: My Filter
+    type: group
+    modelScope: applyMyFilter
+```
+
+In the above example, we expect a relation on the primary model called **myfilter** and a method defined named **scopeApplyMyFilter** on the related model. The second argument contains the second argument will contain the scope definition, including its populated value(s).
+
+```php
+public function scopeApplyMyFilter($query, $scope)
+{
+    return $query->whereIn('my_filter_attribute', (array) $scope->value);
+}
+```
+
+The `modelScope` property can also be defined as a static PHP class method (`Class::method`).
+
+```yaml
+myfilter:
+    label: My Filter
+    type: group
+    modelScope: "App\MyCustomClass::applyMyFilter"
+```
+
+In this example, the method should be declared statically on the specified class name.
+
+```php
+namespace App;
+
+class MyCustomClass
+{
+    public static function applyMyFilter($query, $scope)
+    {
+        return $query->whereIn('my_filter_attribute', (array) $scope->value);
+    }
+}
+```
+
+### Scope Dependencies
+
+The `dependsOn` property allows you to link multiple filters together. When a dependency is modified, the filter scope will reset to allow for new conditions. Take the following example of two scope definitions.
+
+```yaml
+country:
+    label: Country
+    type: group
+
+state:
+    label: State
+    type: group
+    dependsOn: country
+    optionsMethod: getCityOptionsForFilter
+```
+
+The state scope depends on the value of the country scope, and the options are filtered in PHP using the **getCityOptionsForFilter** method. The first argument of this method will contain the entire set of scope definitions, including their current values.
+
+```php
+public function getCityOptionsForFilter($scopes = null)
+{
+    if ($scopes->country && ($countryIds = $scopes->country->value)) {
+        return self::whereIn('country_id', $countryIds)->lists('name', 'id');
+    }
+
+    return self::lists('name', 'id');
+}
+```

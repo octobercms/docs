@@ -23,9 +23,8 @@ Property | Description
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
 **conditions** | a custom SQL select statement to use for the filter.
 **nameFrom** | the column name to use in the model class, used for displaying the name. Default: `name`.
-**modelClass** | class of the model to use for the available filter records
-nameFrom
-**modelScope** | applies a [query scope method](../../extend/database/model.md) to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model query that the widget will be attaching its value to, i.e. the parent model.
+**modelClass** | class of the model to use for the available filter records.
+**modelScope** | applies a [model scope method](../filter-scopes.md) to the filter query.
 
 To filter by an array, specify an `options` property.
 
@@ -99,34 +98,5 @@ The **getRoleGroupOptions** method definition.
 public function getRoleGroupOptions()
 {
     return $this->whereNull('parent_id')->pluck('name', 'id')->all();
-}
-```
-
-### Joining Two Scopes Together
-
-The `dependsOn` property allows you to link multiple filters together. Take the following example of two scope definitions.
-
-```yaml
-country:
-    label: Country
-    type: group
-
-state:
-    label: State
-    type: group
-    dependsOn: country
-    optionsMethod: getCityOptionsForFilter
-```
-
-The state scope depends on the value of the country scope, and the options are filtered in PHP using the **getCityOptionsForFilter** method. The first argument of this method will contain the entire set of scope definitions, including their current values.
-
-```php
-public function getCityOptionsForFilter($scopes = null)
-{
-    if ($scopes->country && ($countryIds = $scopes->country->value)) {
-        return self::whereIn('country_id', $countryIds)->lists('name', 'id');
-    }
-
-    return self::lists('name', 'id');
 }
 ```
