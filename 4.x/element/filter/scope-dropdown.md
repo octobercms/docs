@@ -71,7 +71,7 @@ public function scopeApplyStatusCode($query, $scope)
 }
 ```
 
-You may dynamically supply custom options with `optionsMethod` and by passing a model method.
+You may dynamically supply options by passing a model method to the `optionsMethod` property.
 
 ```yaml
 status:

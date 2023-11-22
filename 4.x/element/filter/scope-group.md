@@ -82,7 +82,7 @@ public function scopeGroupFilter($query, $scope)
 }
 ```
 
-You may dynamically supply custom options with `optionsMethod` and by passing a model method.
+You may dynamically supply options by passing a model method to the `optionsMethod` property.
 
 ```yaml
 roles:
@@ -99,5 +99,34 @@ The **getRoleGroupOptions** method definition.
 public function getRoleGroupOptions()
 {
     return $this->whereNull('parent_id')->pluck('name', 'id')->all();
+}
+```
+
+### Joining Two Scopes Together
+
+The `dependsOn` property allows you to link multiple filters together. Take the following example of two scope definitions.
+
+```yaml
+country:
+    label: Country
+    type: group
+
+state:
+    label: State
+    type: group
+    dependsOn: country
+    optionsMethod: getCityOptionsForFilter
+```
+
+The state scope depends on the value of the country scope, and the options are filtered in PHP using the **getCityOptionsForFilter** method. The first argument of this method will contain the entire set of scope definitions, including their current values.
+
+```php
+public function getCityOptionsForFilter($scopes = null)
+{
+    if ($scopes->country && ($countryIds = $scopes->country->value)) {
+        return self::whereIn('country_id', $countryIds)->lists('name', 'id');
+    }
+
+    return self::lists('name', 'id');
 }
 ```
