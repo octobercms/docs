@@ -22,6 +22,8 @@ Method | Description
 **registerReportWidgets()** | registers any [backend report widgets](./backend/report-widgets.md), including the dashboard widgets.
 **registerListColumnTypes()** | registers any [custom list column types](./lists/list-controller.md) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](./system/sending-mail.md) supplied by this plugin.
+**registerMailLayouts()** | registers any [mail view layouts](./system/sending-mail.md) supplied by this plugin.
+**registerMailPartials()** | registers any [mail view partials](./system/sending-mail.md) supplied by this plugin.
 **registerSchedule()** | registers [scheduled tasks](./system/scheduling.md) that are executed on a regular basis.
 **registerContentFields()** | registers [content fields](../extend/tailor-fields.md) that are used by Tailor blueprints.
 
