@@ -17,7 +17,8 @@ Property | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **comment** | places a descriptive comment below the field.
-**nameFrom** | a model attribute name used for displaying the relation label. Default: name.
+**nameFrom** | a model attribute name used for displaying the relation label. Default: `name`.
+**excludeFrom** | a parent model attribute used to exclude related keys in the list, optional.
 **select** | a custom SQL select statement to use for the name.
 **emptyOption** | text to display when there is no available selections.
 **conditions** | specifies a raw where query statement to apply to the model query.
