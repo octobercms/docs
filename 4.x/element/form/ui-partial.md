@@ -17,21 +17,31 @@ Property | Description
 ------------- | -------------
 **path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the field name.
 
-You may specify a fully qualified `path` to access partials outside the controller scope.
+When the `path` specifies a local file name, the source path is guessed using the model or controller directories. The following example will check for the partial file at **../models/mymodel/_field_for_content.php** or **../controllers/mycontroller/_field_for_content.php**.
 
 ```yaml
 content:
     type: partial
-    path: $/acme/blog/models/comments/_content_field.htm
+    path: field_for_content
 ```
 
-Inside the partial these variables are available.
+You may specify a fully qualified `path` to access partials outside the model or controller directories. This can be useful for sharing partials between definitions.
+
+```yaml
+content:
+    type: partial
+    path: $/acme/blog/partials/_content_field.php
+```
+
+## Accessing Variables
+
+The following variables are available inside the partial when it is rendered.
 
 - `$value` is the current field value, if found.
 - `$model` is the [model used](../../extend/system/models.md) for the field
 - `$field` is the configured class object `Backend\Classes\FormField`
 
-Here is an some example contents of the **_content_field.htm** file.
+Here is an some example contents of the **_content_field.php** file.
 
 ```php
 <?php if ($model->is_active): ?>
