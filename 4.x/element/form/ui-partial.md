@@ -7,6 +7,7 @@ The `partial` UI element renders a partial, the `path` value can refer to a part
 
 ```yaml
 content:
+    label: Content
     type: partial
     path: content_field
 ```
