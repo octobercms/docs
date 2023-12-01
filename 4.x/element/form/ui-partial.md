@@ -15,7 +15,7 @@ The following [field properties](../form-fields.md) are supported.
 
 Property | Description
 ------------- | -------------
-**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the field name.
+**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the field name with **field_** as a prefix.
 
 When the `path` specifies a local file name, the source path is guessed using the model or controller directories. The following example will check for the partial file at **../models/mymodel/_field_for_content.php** or **../controllers/mycontroller/_field_for_content.php**.
 
