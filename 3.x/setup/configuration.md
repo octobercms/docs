@@ -48,6 +48,12 @@ SetEnv APP_ENV "staging"
 
 When the `APP_ENV` variable is defined, the platform attempts to load a .env file with the suffix matching the environment name. e.g. **.env.staging**. If the file does not exist, there will be no error. If both **.env.staging** and **.env** files exist, the **.env** file is completely ignored.
 
+When using cached or [optimized configuration](./web-server-config.md), the `APP_CONFIG_CACHE` value can be specified in the **.env** file to change the cache file path. This will ensure each environment receives the correct cached configuration values.
+
+```ini
+APP_CONFIG_CACHE=storage/framework/config-staging.php
+```
+
 ## Production Configuration
 
 There are several important commonly used configuration parameters that should be established for production environments.
