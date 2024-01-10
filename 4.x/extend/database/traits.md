@@ -140,14 +140,16 @@ You may modify the key name used to identify the sort order by defining the `SOR
 const SORT_ORDER = 'my_sort_order_column';
 ```
 
-Use the `setSortableOrder` method to set the orders on a single record or multiple records.
+Use the `setSortableOrder` method to set the orders on multiple records. The array contains the model identifiers in the sort order that they should appear.
 
 ```php
-// Sets the order of the user to 1...
-$user->setSortableOrder($user->id, 1);
+$user->setSortableOrder([3, 2, 1]);
+```
 
-// Sets the order of records 1, 2, 3 to 3, 2, 1 respectively...
-$user->setSortableOrder([1, 2, 3], [3, 2, 1]);
+If sorting a subset of records, the second array is used to provide a reference pool of sort order values. For example, the following assigns the sort order column as 100, 200 or 300.
+
+```php
+$user->setSortableOrder([3, 2, 1], [100, 200, 300]);
 ```
 
 ### Simple Tree
