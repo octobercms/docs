@@ -69,3 +69,31 @@ You may also completely disable the navigation by setting the **navigation** pro
 ```yaml
 navigation: false
 ```
+
+## Extra Navigation
+
+Use the `extraNavigation` property to register custom navigation items to include with the blueprint. The value is an array matching the `sideMenu` definition found in the [backend navigation specification](../../extend/backend/navigation.md). The following example includes two a section and divider using custom display types, the `order` property is used to align the items in the correct order.
+
+```yaml
+navigation:
+    label: Authors
+    parent: Blog\Post
+    icon: icon-user
+    order: 230
+
+extraNavigation:
+    _authors_section:
+        itemType: section
+        label: Authors
+        order: 210
+
+    _authors_ruler:
+        itemType: ruler
+        order: 220
+```
+
+#### See Also
+
+::: also
+* [Backend Navigation](../../extend/backend/navigation.md)
+:::
