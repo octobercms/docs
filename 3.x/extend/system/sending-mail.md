@@ -105,21 +105,27 @@ Property | Description
 The **code** value in the backend panel will be the same as the mail view path. For example, `author.plugin:mail.message`.
 :::
 
-Mail views can be registered as default templates created in the backend panel. Templates are registered by overriding the `registerMailTemplates` method of the [plugin registration file](../extending.md). The method should return an array of mail view names.
+Mail views can be registered as default templates created in the backend panel. Templates are registered by overriding the `registerMailTemplates` method of the [plugin registration file](../extending.md). Templates can implement partials and layouts, similar to CMS themes, and these are registered with `registerMailLayouts` and `registerMailPartials` respectively.
 
 ```php
 public function registerMailTemplates()
 {
     return [
-        'templates' => [
-            // ...Templates defined here
-        ],
-        'layouts' => [
-            // ...Layouts defined here
-        ],
-        'partials' => [
-            // ...Partials defined here
-        ]
+        // ...Templates defined here
+    ];
+}
+
+public function registerMailLayouts()
+{
+    return [
+        // ...Layouts defined here
+    ];
+}
+
+public function registerMailPartials()
+{
+    return [
+        // ...Partials defined here
     ];
 }
 ```
@@ -128,24 +134,36 @@ In the backend panel, when a generated template is saved for the first time, the
 
 #### Registering a Template
 
-The `templates` key in the registration array is used for registering views as mail templates.
+The `templates` key in the registration array is used for registering views as mail templates. The method should return an array where the key is the template code and the value is the name of a [view path](../services/response-view.md). The template code is used to reference the template.
 
 ```php
-'templates' => [
-    'rainlab.user::mail.activate',
-    'rainlab.user::mail.restore'
-]
+public function registerMailTemplates()
+{
+    return [
+        'rainlab.user:activate' => 'rainlab.user::mail.activate',
+        'rainlab.user:restore' => 'rainlab.user::mail.restore',
+    ];
+}
+```
+
+Sending a message uses the template code, for example.
+
+```php
+Mail::send('rainlab.user:activate', ...);
 ```
 
 #### Registering a Layout
 
-The `layouts` key is used to register layouts and each layout needs a unique `code` to identify it.
+The `registerMailLayouts` method override is used to register layouts and each layout needs a unique `code` to identify it, along with the default view file for the contents.
 
 ```php
-'layouts' => [
-    'marketing' => 'acme.blog::layouts.marketing',
-    'notification' => 'acme.blog::layouts.notification',
-]
+public function registerMailLayouts()
+{
+    return [
+        'marketing' => 'acme.blog::layouts.marketing',
+        'notification' => 'acme.blog::layouts.notification',
+    ];
+}
 ```
 
 The layout can now be referenced in templates using the `code` value.
@@ -161,13 +179,16 @@ Page contents...
 
 #### Registering a Partial
 
-Like layouts, mail partials can be registered with the `partials` key and each partial needs a unique `code` to identify it.
+Like layouts, mail partials can be registered with the `registerMailLayouts` method override and each partial needs a unique `code` to identify it, along with the default view file for the contents.
 
 ```php
-'partials' => [
-    'tracking' => 'acme.blog::partials.tracking',
-    'promotion' => 'acme.blog::partials.promotion',
-]
+public function registerMailLayouts()
+{
+    return [
+        'tracking' => 'acme.blog::partials.tracking',
+        'promotion' => 'acme.blog::partials.promotion',
+    ];
+}
 ```
 
 The partial can now be referenced in templates using the `{% partial %}` tag and `code` value.
@@ -222,7 +243,7 @@ To send a message, use the `send` method on the `Mail` facade which accepts thre
 // These variables are available inside the message as Twig
 $vars = ['name' => 'Joe', 'user' => 'Mary'];
 
-Mail::send('acme.blog::mail.message', $vars, function($message) {
+Mail::send('acme.blog:message', $vars, function($message) {
     $message->to('admin@domain.tld', 'Admin Person');
     $message->subject('This is a reminder');
 });
@@ -244,13 +265,13 @@ October CMS also includes an alternative method called `sendTo` that can simplif
 
 ```php
 // Send to address using no name
-Mail::sendTo('admin@domain.tld', 'acme.blog::mail.message', $params);
+Mail::sendTo('admin@domain.tld', 'acme.blog:message', $params);
 
 // Send using an object's properties
-Mail::sendTo($user, 'acme.blog::mail.message', $params);
+Mail::sendTo($user, 'acme.blog:message', $params);
 
 // Send to multiple addresses
-Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog::mail.message', $params);
+Mail::sendTo(['admin@domain.tld' => 'Admin Person'], 'acme.blog:message', $params);
 
 // Alternatively send a raw message without parameters
 Mail::rawTo('admin@domain.tld', 'Hello friend');
@@ -289,7 +310,7 @@ Option | Description
 As previously mentioned, the third argument given to the `send` method is a `Closure` allowing you to specify various options on the e-mail message itself. Using this Closure you may specify other attributes of the message, such as carbon copies, blind carbon copies, etc:
 
 ```php
-Mail::send('acme.blog::mail.welcome', $vars, function($message) {
+Mail::send('acme.blog:welcome', $vars, function($message) {
     $message->from('us@example.tld', 'October');
     $message->to('foo@example.tld')->cc('bar@example.tld');
 });
@@ -317,13 +338,13 @@ $message->attachData($data, $name, array $options = []);
 By default, the view given to the `send` method is assumed to contain a mail view, where you may specify a plain text view to send in addition to the HTML view.
 
 ```php
-Mail::send('acme.blog::mail.message', $data, $callback);
+Mail::send('acme.blog:message', $data, $callback);
 ```
 
 Or, if you only need to send a plain text e-mail, you may specify this using the `text` key in the array:
 
 ```php
-Mail::send(['text' => 'acme.blog::mail.text'], $data, $callback);
+Mail::send(['text' => 'acme.blog:text'], $data, $callback);
 ```
 
 #### Mailing Parsed Raw Strings
@@ -362,7 +383,7 @@ Mail::raw([
 To add attachments to an e-mail, use the `attach` method on the `$message` object passed to your Closure. The `attach` method accepts the full path to the file as its first argument:
 
 ```php
-Mail::send('acme.blog::mail.welcome', $data, function ($message) {
+Mail::send('acme.blog:welcome', $data, function ($message) {
     //
 
     $message->attach($pathToFile);
@@ -418,7 +439,7 @@ If you already have a raw data string you wish to embed into an e-mail message, 
 Since sending mail messages can drastically lengthen the response time of your application, many developers choose to queue messages for background sending. This is easy using the built-in [unified queue API](../services/queue.md). To queue a mail message, use the `queue` method on the `Mail` facade:
 
 ```php
-Mail::queue('acme.blog::mail.welcome', $data, function ($message) {
+Mail::queue('acme.blog:welcome', $data, function ($message) {
     //
 });
 ```
@@ -430,7 +451,7 @@ This method will automatically take care of pushing a job onto the queue to send
 If you wish to delay the delivery of a queued e-mail message, you may use the `later` method. To get started, simply pass the number of seconds by which you wish to delay the sending of the message as the first argument to the method.
 
 ```php
-Mail::later(5, 'acme.blog::mail.welcome', $data, function ($message) {
+Mail::later(5, 'acme.blog:welcome', $data, function ($message) {
     //
 });
 ```
@@ -440,11 +461,11 @@ Mail::later(5, 'acme.blog::mail.welcome', $data, function ($message) {
 If you wish to specify a specific queue on which to push the message, you may do so using the `queueOn` and `laterOn` methods:
 
 ```php
-Mail::queueOn('queue-name', 'acme.blog::mail.welcome', $data, function ($message) {
+Mail::queueOn('queue-name', 'acme.blog:welcome', $data, function ($message) {
     //
 });
 
-Mail::laterOn('queue-name', 5, 'acme.blog::mail.welcome', $data, function ($message) {
+Mail::laterOn('queue-name', 5, 'acme.blog:welcome', $data, function ($message) {
     //
 });
 ```

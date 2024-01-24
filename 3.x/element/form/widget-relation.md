@@ -17,13 +17,15 @@ Property | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **comment** | places a descriptive comment below the field.
-**nameFrom** | a model attribute name used for displaying the relation label. Default: name.
+**nameFrom** | a model attribute name used for displaying the relation label. Default: `name`.
+**excludeFrom** | a parent model attribute used to exclude related keys in the list, optional.
 **select** | a custom SQL select statement to use for the name.
 **emptyOption** | text to display when there is no available selections.
 **conditions** | specifies a raw where query statement to apply to the model query.
 **scope** | applies a [query scope method](../../extend/database/model.md) to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
 **defaultSort** | sets a default sorting column and direction, supports a string for the column name or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **useController** | automatically detects if this field configured with [Relation Controller behavior](../../extend/forms/relation-controller.md) and use it. Default: `true`
+**controller** | specifies an array to manually configure integration with the [Relation Controller behavior](../../extend/forms/relation-controller.md).
 
 Use the `nameFrom` property to customize the label used for the related record.
 
@@ -117,4 +119,17 @@ countries:
     label: Categories
     type: relation
     useController: false
+```
+
+The `controller` property may be used to specify inline configuration.
+
+```yaml
+products:
+    label: Products
+    tab: Products
+    type: relation
+    controller:
+        label: Product
+        list: $/october/test/models/product/columns.yaml
+        form: $/october/test/models/product/fields.yaml
 ```

@@ -107,19 +107,25 @@ class extends oc.ControlBase {
 The `oc.fetchControl` function is used to return a control instance from an existing control element, this accepts a selector string, or an element directly. The resulting instance support method calls or accessing properties found on the control class definition.
 
 ```js
-const searchControl = oc.fetchControl('[data-control=search]');
+const searchControl = oc.fetchControl(element);
 ```
 
-Use the `oc.fetchControls` function to retrieve multiple instances.
+You may also pass a selector string, along with the control name as the second argument (optional). This is useful when multiple controls are bound to the same element and you want to clarify the exact identifier.
 
 ```js
-const resultControls = oc.fetchControls('[data-control=results]');
+const searchControl = oc.fetchControl('[data-control=search]', 'search');
 ```
 
 The `oc.importControl` function can be used to return a control class that has been registered, which can be useful for calling static methods on the class. The function accepts the control identifier as a string.
 
 ```js
 const searchControlClass = oc.importControl('search');
+```
+
+The `oc.observeControl` function is used to immediately resolve a control instance and attach it to the element. This is useful when an element does not have the `data-control` attribute and you want to attach it without waiting for the observer events.
+
+```js
+const searchControl = oc.observeControl(element, 'search');
 ```
 
 ## Working with Events
