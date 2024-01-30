@@ -11,7 +11,7 @@ extra_information:
     form:
         fields:
             added_at:
-                label: Date added
+                label: Date Added
                 type: datepicker
             details:
                 label: Details
@@ -27,7 +27,7 @@ Property | Description
 **comment** | places a descriptive comment below the field.
 **form** | inline field definitions or a reference to form field definition file.
 **prompt** | text to display for the create button. Default: Add new item.
-**displayMode** | controls how the interface is dispalyed, as either **accordion** or **builder**. Default: `accordion`
+**displayMode** | controls how the interface is displayed, as either **accordion** or **builder**. Default: `accordion`
 **useTabs** | shows tabs when enabled, allowing fields to specify a `tab` property. Default `false`
 **itemsExpanded** | if repeater items should be expanded by default when using accordion mode. Default: `true`.
 **titleFrom** | name of field within items to use as the title for the collapsed item, optional.

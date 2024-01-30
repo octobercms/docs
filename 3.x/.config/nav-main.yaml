@@ -15,6 +15,7 @@
     children:
         - content/field-mixin
         - content/field-entries
+        - content/field-nesteditems
 -
     title: Form UI
     children:
