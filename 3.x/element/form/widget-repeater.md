@@ -88,7 +88,7 @@ groups:
     quote: $/acme/blog/config/fields_quote.yaml
 ```
 
-Alternatively, the definitions could be specified inline with the repeater.
+Alternatively, the definitions could be specified inline with the repeater. If the group key starts with an underscore (`_`) then it will be ignored.
 
 ```yaml
 groups:
