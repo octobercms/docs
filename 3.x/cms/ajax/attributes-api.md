@@ -19,6 +19,7 @@ data-request Attribute | Description
 **data-request-error** | specifies JavaScript code to execute if the request encounters an error.
 **data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error.
 **data-request-cancel** | specifies JavaScript code to execute if the aborts the request or cancels it via a confirmation dialog.
+**data-request-message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](../features/flash-messages.md).
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show an AJAX loading indicator. The feature uses CSS display `block` and `none` attributes to manage the element visibility.
 **data-request-progress-bar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
 **data-request-form** | explicitly specify a form element to use for sourcing the form data. If this is unspecified, the closest form to the triggering element is used, including if the element itself is a form.
@@ -88,6 +89,14 @@ Send a GET parameter `page` with value `6` on the current request.
 ```html
 <button data-request="onSetPage" data-request-query="{ page: 6 }">
     Page 6
+</button>
+```
+
+Show a [flash message](../features/flash-messages.md) while the request is loading.
+
+```html
+<button data-request="onUpdate" data-request-message="Loading...">
+    Save Changes
 </button>
 ```
 

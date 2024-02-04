@@ -80,6 +80,9 @@ To change the appearance of the flash message, target the `.oc-flash-message` CS
 .oc-flash-message.info {
     background: aqua;
 }
+.oc-flash-message.loading {
+    background: aqua;
+}
 ```
 
 ## Custom Flash Messages

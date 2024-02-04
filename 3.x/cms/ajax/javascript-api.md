@@ -34,6 +34,7 @@ Option | Description
 **download** | when true, file downloads are accepted with a `Content-Disposition` response. When a string, the downloaded filename can be specified. default: `false`
 **bulk** | when true, the request be sent as JSON for bulk data transactions. default: `false`
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
+**message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](../features/flash-messages.md).
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
 **progressBar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
 
