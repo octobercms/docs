@@ -9,7 +9,7 @@ The `partial` UI element renders a partial, the `path` value can refer to a part
 content:
     label: Content
     type: partial
-    path: content_field
+    path: field_content
 ```
 
 The following [field properties](../form-fields.md) are supported.
@@ -18,7 +18,7 @@ Property | Description
 ------------- | -------------
 **path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the field name with **field_** as a prefix.
 
-When the `path` specifies a local file name, the source path is guessed using the model or controller directories. The following example will check for the partial file at **../models/mymodel/_field_for_content.php** or **../controllers/mycontroller/_field_for_content.php**.
+When the `path` is set to an unqualified file name (a file name without a directory path and extension), the source path is determined to be in the model or controller directories. The following example will check for the partial file at **../models/mymodel/_field_for_content.php** or **../controllers/mycontroller/_field_for_content.php**.
 
 ```yaml
 content:
@@ -31,7 +31,7 @@ You may specify a fully qualified `path` to access partials outside the model or
 ```yaml
 content:
     type: partial
-    path: $/acme/blog/partials/_content_field.php
+    path: $/acme/blog/partials/_field_content.php
 ```
 
 ## Accessing Variables
@@ -42,7 +42,7 @@ The following variables are available inside the partial when it is rendered.
 - `$model` is the [model used](../../extend/system/models.md) for the field
 - `$field` is the configured class object `Backend\Classes\FormField`
 
-Here is an some example contents of the **_content_field.php** file.
+Here is an some example contents of the **_field_content.php** file.
 
 ```php
 <?php if ($model->is_active): ?>
