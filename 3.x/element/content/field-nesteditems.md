@@ -25,6 +25,7 @@ Property | Description
 **default** | specifies a default array value, optional.
 **comment** | places a descriptive comment below the field.
 **form** | inline form field definitions.
+**maxDepth** | displays an interface for reordering records, specifying the maximum depth. Set to `0` for unlimited depth.
 **customMessages** | customize the messages used in the user interface.
 
 Like any other form, nested items support the use of tabs by placing the fields under the `tabs` or `secondaryTabs` properties of the `form` definition.

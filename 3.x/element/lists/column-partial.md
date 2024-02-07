@@ -18,7 +18,7 @@ Property | Description
 ------------- | -------------
 **path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the column name with **column_** as a prefix.
 
-When the `path` is set to an unqualified file name (a file name without a directory path or extension), the source path is determined to be in the model or controller directories. The following example will check for the partial file at **../models/mymodel/_column_for_content.php** or **../controllers/mycontroller/_column_for_content.php**.
+When the `path` is set to an unqualified file name (a file name without a directory path and extension), the source path is determined to be in the model or controller directories. The following example will check for the partial file at **../models/mymodel/_column_for_content.php** or **../controllers/mycontroller/_column_for_content.php**.
 
 ```yaml
 content:
