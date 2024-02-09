@@ -217,29 +217,29 @@ secondaryTabs:
 
 ## Form Views
 
-For each page your form supports Create, Update and Preview you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
+For each page your form supports Create, Update and Preview you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.php**, **update.php** and **preview.php**.
 
 The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 
 ### Create View
 
-The **create.htm** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create.htm form.
+The **create.php** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create view file.
 
 ```php
-<?= Form::open(['class'=>'layout']) ?>
+<?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
 
-    <div class="layout-row">
+    <div class="flex-grow-1">
         <?= $this->formRender() ?>
     </div>
 
     <div class="form-buttons">
-        <div class="loading-indicator-container">
+        <div data-control="loader-container">
             <button
                 type="button"
                 data-request="onSave"
                 data-request-data="{ close: true }"
+                data-request-message="Creating Category..."
                 data-hotkey="ctrl+enter, cmd+enter"
-                data-load-indicator="Creating Category..."
                 class="btn btn-default">
                 Create and Close
             </button>
@@ -255,28 +255,28 @@ The **create.htm** view represents the Create page that allows users to create n
 To track unsaved changes and display a warning when navigating away from the form, include the `data-change-monitor` attribute on the form opening tag.
 
 ```php
-<?= Form::open(['class' => 'layout', 'data-change-monitor' => true]) ?>
+<?= Form::open(['class' => '...', 'data-change-monitor' => true]) ?>
 ```
 
 ### Update View
 
-The **update.htm** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.htm form.
+The **update.php** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.php form.
 
 ```php
-<?= Form::open(['class'=>'layout']) ?>
+<?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
 
-    <div class="layout-row">
+    <div class="flex-grow-1">
         <?= $this->formRender() ?>
     </div>
 
     <div class="form-buttons">
-        <div class="loading-indicator-container">
+        <div data-control="loader-container">
             <button
                 type="button"
                 data-request="onSave"
                 data-request-data="{ close: true }"
+                data-request-message="Saving Category..."
                 data-hotkey="ctrl+enter, cmd+enter"
-                data-load-indicator="Saving Category..."
                 class="btn btn-default">
                 Save and Close
             </button>
@@ -284,7 +284,7 @@ The **update.htm** view represents the Update page that allows users to update o
                 type="button"
                 class="oc-icon-trash-o btn-icon danger pull-right"
                 data-request="onDelete"
-                data-load-indicator="Deleting Category..."
+                data-request-message="Deleting Category..."
                 data-request-confirm="Do you really want to delete this category?">
             </button>
             <span class="btn-text">
@@ -298,7 +298,7 @@ The **update.htm** view represents the Update page that allows users to update o
 
 ### Preview View
 
-The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.
+The **preview.php** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.php form.
 
 ```php
 <div class="form-preview">
