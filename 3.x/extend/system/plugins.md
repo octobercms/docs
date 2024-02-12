@@ -94,7 +94,7 @@ Key | Description
 **name** | the plugin name, required.
 **description** | the plugin description, required.
 **author** | the plugin author name, required.
-**icon** | a name of the plugin icon. The full list of available icons can be found in the [UI documentation](https://octobercms.com/docs/ui/icon). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
+**icon** | a name of the plugin icon. The full list of available icons can be found in the [available icon documentation](../../element/available-icons.md). Any icon names provided by this font are valid, for example **icon-glass**, **icon-music**, optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon. The SVG icon should be a rectangle and can support colors, optional.
 **homepage** | a link to the author's website address, optional.
 **hint** | a shorter code used for [routing controller URLs](./controllers.md) in the admin panel, optional.
@@ -136,7 +136,7 @@ namespace Acme\Blog;
 class Plugin extends \System\Classes\PluginBase
 {
     /**
-     * @var array Plugin dependencies
+     * @var array require these plugins
      */
     public $require = ['Acme.User'];
 

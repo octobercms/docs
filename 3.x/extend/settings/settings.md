@@ -38,7 +38,7 @@ Property | Description
 **category** | specifies a category label localization string key, for grouping settings pages together, required.
 **keywords** | specifies keywords used for searching settings.
 **order** | a numerical weight when determining the display order.
-**icon** | an icon name from the [October CMS icon collection](https://octobercms.com/docs/ui/icon), optional.
+**icon** | an icon name from the [October CMS icon collection](../../element/available-icons.md), optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
 **url** | the backend URL the menu item should refer to, eg. `Backend::url('author/plugin/controller/action')`.
 **class** | the model class the settings item should refer to, eg. `Acme\User\Models\UserSetting::class`.
