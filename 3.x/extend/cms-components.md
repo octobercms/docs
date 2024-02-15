@@ -37,7 +37,8 @@ class BlogPosts extends \Cms\Classes\ComponentBase
     {
         return [
             'name' => 'Blog Posts',
-            'description' => 'Displays a collection of blog posts.'
+            'description' => 'Displays a collection of blog posts.',
+            'icon' => 'icon-puzzle-piece'
         ];
     }
 
