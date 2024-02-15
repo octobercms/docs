@@ -28,6 +28,10 @@ website:
         target: _blank
 ```
 
+::: tip
+The `linkage` column type will automatically resolve [page finder link values](../form/widget-pagefinder.md).
+:::
+
 ## Custom Link Text
 
 By default, the value will be the URL to the linked location. For example, you may change the link text by returning an array value from the model.

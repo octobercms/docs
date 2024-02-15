@@ -26,6 +26,10 @@ Property | Description
 **comment** | places a descriptive comment below the field.
 **singleMode** | only allows items to be selected that resolve to a single URL. Default: `false`
 
+::: tip
+Resolve the `pagefinder` value in lists using the [linkage column type](../lists/column-linkage.md).
+:::
+
 ## Linking to Pages
 
 Use the [`|link` Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
