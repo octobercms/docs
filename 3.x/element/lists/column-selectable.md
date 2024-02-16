@@ -9,7 +9,7 @@ subtitle: List Column
 ['open' => 'Open', 'closed' => 'Closed']
 ```
 
-The available options are defined on the model as [dropdown options](../form/field-dropdown.md).
+The available options are defined based on [dropdown options](../define-options.md).
 
 ```yaml
 status:
@@ -17,7 +17,15 @@ status:
     type: selectable
 ```
 
-They can also be specified explicitly in the `options` value.
+The following properties are supported.
+
+Property | Description
+------------- | -------------
+**options** | available options for the dropdown, as an array.
+**optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
+**optionsPreset** | take options from a [preset list of defined options](../define-options.md).
+
+The `options` value can specify options explicitly as an array.
 
 ```yaml
 status:
@@ -27,3 +35,19 @@ status:
         pending: Pending
         active: Active
 ```
+
+The `optionsPreset` can be used to extract the value from a [options preset definition](../define-options.md).
+
+```yaml
+icon:
+    label: Icon
+    type: selectable
+    optionsPreset: phosphorIcons
+```
+
+#### See Also
+
+::: also
+* [Defining Options](../define-options.md)
+* [Dropdown Form Field](../form/field-dropdown.md)
+:::

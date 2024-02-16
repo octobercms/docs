@@ -58,7 +58,7 @@ optionsMethod: MyAuthor\MyPlugin\Helpers\FormHelper::getMyStaticMethodOptions
 
 ## Option Presets
 
-The `optionsMethod` property specifies a preset code that can be used to request the available options.
+The `optionsPreset` property specifies a preset code that can be used to request the available options.
 
 ```yaml
 optionsPreset: icons
@@ -68,7 +68,8 @@ The following presets are available:
 
 Preset | Description
 ------ | -----------
-**icons** | Lists available icon names (eg: `oc-icon-calendar`)
+**icons** | Lists available icon names (eg: `icon-calendar`)
+**phosphorIcons** | Lists available icon names (eg: `ph ph-calendar`)
 **locales** | Lists available locales (eg: `en-au`)
 **flags** | Lists locales with their icons as flags (eg: `[en-au, flag-au]`)
 **timezones** | Lists available timezones (eg: `Australia/Sydney`)
