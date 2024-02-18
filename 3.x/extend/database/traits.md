@@ -610,6 +610,20 @@ In some cases, all records must exist for every site, such as categories and tag
 protected $propagatableSync = true;
 ```
 
+When using [Site Groups](../../cms/resources/multisite.md), the records will be propagated to all sites within that group. This can be controlled by setting the `$propagatableSync` property to an array containing configuration options.
+
+Option | Description
+------------- | -------------
+- **sync** - logic to sync specific sites, available options: `all`, `group`, `locale`. Default: `group`
+- **delete** - delete all linked records when any record is deleted, default: `true`
+
+```php
+protected $propagatableSync = [
+    'sync' => 'all',
+    'delete' => false
+];
+```
+
 #### Saving Models
 
 Models saved with the multisite trait do not propagate by default. Use the `savePropagate` method to ensure the propagation rules take effect.
