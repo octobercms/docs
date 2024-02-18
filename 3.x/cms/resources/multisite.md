@@ -94,7 +94,9 @@ There are some core features that are not multisite-enabled by default, such as 
 
 Feature | Description
 ------- | --------------------------
-`backend_mail_setting` | Mail configuration found in the admin panel
+`cms_maintenance_setting` | Maintenance Mode Settings are unique for each site
+`backend_mail_setting` | Mail Settings are unique for each site
+`system_asset_combiner` | Asset combiner cache keys are unique to the site
 
 ### Disabling Multisite
 

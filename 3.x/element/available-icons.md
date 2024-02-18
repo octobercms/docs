@@ -16,10 +16,8 @@ The [Phosphor Icon pack](https://phosphoricons.com/) is available to use in the 
 
 When used as an icon definition, the icon name contains both the `ph` and `ph-` prefix.
 
-```php
-return [
-    'icon' => 'ph ph-laptop'
-];
+```yaml
+icon: ph ph-laptop
 ```
 
 ## October Icons
@@ -32,10 +30,8 @@ The **October Icon pack** is a custom icon library with icons of various descrip
 
 When used as an icon definition, the icon name contains only the `icon-` prefix.
 
-```php
-return [
-    'icon' => 'icon-october'
-];
+```yaml
+icon: icon-october
 ```
 
 ### Available October Icons
