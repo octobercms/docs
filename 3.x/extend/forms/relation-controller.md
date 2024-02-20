@@ -1,5 +1,5 @@
 ---
-subtitle: Manage related records in any context, usually from a form.
+subtitle: Manages nested form data using related records.
 ---
 # Relation Controller
 

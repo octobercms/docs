@@ -78,7 +78,7 @@ Property | Description
 **commentAbove** | places a comment above the field.
 **commentHtml** | allow HTML markup inside the comment. Options: `true`, `false`.
 **default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
-**defaultFrom** | takes the default value from the value of another field.
+**defaultFrom** | takes the default value from the value of another model attribute.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
 **readOnly** | prevents the field from being modified. Options: `true`, `false`.
