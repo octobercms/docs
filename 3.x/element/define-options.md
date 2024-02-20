@@ -58,7 +58,7 @@ optionsMethod: MyAuthor\MyPlugin\Helpers\FormHelper::getMyStaticMethodOptions
 
 ## Option Presets
 
-The `optionsMethod` property specifies a preset code that can be used to request the available options.
+The `optionsPreset` property specifies a preset code that can be used to request the available options.
 
 ```yaml
 optionsPreset: icons
