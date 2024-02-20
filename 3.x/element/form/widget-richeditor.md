@@ -22,6 +22,7 @@ Property | Description
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
 **showMargins** | set to `true` to include resizable document margins. Default: `false`.
 **useLineBreaks** | uses line breaks instead of paragraph wrappers for each new line. Default `false`.
+**editorOptions** | custom editor options used by the editor control as an array (advanced).
 
 You may specify how large the field size should be with the `size` property.
 
@@ -122,3 +123,24 @@ When registering the JavaScript, it should come after the assets registered by t
     $controller->addJs('/plugins/october/test/assets/js/custom-button.js');
 });
 ```
+
+## Advanced Editor Options
+
+Use the `editorOptions` property to customize the editor options. This is an advanced property, since all options defined here are proxied directly to the editor control.
+
+```yaml
+html_content:
+    type: richeditor
+    editorOptions:
+        imageDefaultWidth: 0
+```
+
+Some example options are listed below.
+
+Option | Description
+------ | -----------
+**imageDefaultWidth** | Sets the default width of the image when it is inserted in the rich text editor. Setting it to `0` will not set any width. Default: `300`.
+**imageDefaultAlign** | Sets the default image alignment when it is inserted in the rich text editor. Possible values are `left`, `center` and `right`. Default: `center`.
+**imageDefaultDisplay** | Sets the default display for an image when is is inserted in the rich text. Possible options are: `inline` and `block`. Default: `block`
+**imageResize** | Disables image resize when set to `false`. Default: `true`
+**imagePaste** | Allows pasting images from clipboard. Default: `true`
