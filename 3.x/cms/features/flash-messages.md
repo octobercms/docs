@@ -63,6 +63,18 @@ When using [validation features](./validation.md) in combination with the `data-
     data-request-flash="success,error,validate">
 ```
 
+### Loading Flash Message
+
+The `data-request-message` attribute can be used to display a flash progress message while the request runs. This is great particularly for long running processes.
+
+```html
+<button
+    data-request="onSubmit"
+    data-request-message="Please wait while we process your request...">
+    Submit
+</button>
+```
+
 ### Styling the Flash Message
 
 To change the appearance of the flash message, target the `.oc-flash-message` CSS class.
