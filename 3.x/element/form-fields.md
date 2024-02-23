@@ -78,7 +78,7 @@ Property | Description
 **commentAbove** | places a comment above the field.
 **commentHtml** | allow HTML markup inside the comment. Options: `true`, `false`.
 **default** | specify the default value for the field. For `dropdown`, `checkboxlist`, `radio` and `balloon-selector` widgets, you may specify an option key here to have it selected by default.
-**defaultFrom** | takes the default value from the value of another field.
+**defaultFrom** | takes the default value from the value of another model attribute.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
 **readOnly** | prevents the field from being modified. Options: `true`, `false`.
@@ -123,6 +123,7 @@ Property | Description
 **activeTab** | selected tab when the form first loads, name or index. Default: `1`
 **icons** | assign icons to tabs using tab names as the key.
 **lazy** | array of tabs to be loaded dynamically when clicked. Useful for tabs that contain large amounts of content.
+**identifiers** | array of custom HTML identifiers for targeting the tab. Useful for showing and hiding tabs using JavaScript.
 **linkable** | determines if the tabs can be linked using URL fragments. Default: `true`
 **cssClass** | assigns a CSS class to the tab container.
 **paneCssClass** | assigns a CSS class to an individual tab pane. Value is an array, key is tab index or label, value is the CSS class. It can also be specified as a string, in which case the value will be applied to all tabs.
@@ -145,6 +146,9 @@ tabs:
     icons:
         User: icon-user
         Groups: icon-group
+
+    identifiers:
+        User: userTab
 
     fields:
         # [...]
@@ -238,6 +242,17 @@ trigger:
     action: show
     condition: value[csv][csv_custom]
     field: file_format
+```
+
+#### Wildcard Value Conditions
+
+You may check the `value[]` condition matches multiple possible values using a wildcard character (`*`), for example, **foo\*** matches anything that starts with "foo", and **\*bar** matches anything that ends with "bar".
+
+```yaml
+trigger:
+    action: show
+    condition: value[*.mp4]
+    field: file_name
 ```
 
 #### Multiple Field Values

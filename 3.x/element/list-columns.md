@@ -55,6 +55,7 @@ Property | Description
 **displayFrom** | defines a model attribute to use for the display value.
 **relation** | defines a model relationship column.
 **relationCount** | display the number of related records as the column value. Must be used with the `relation` option. Default: `false`
+**relationWith** | eager load the specified relation definition with the list query. Useful to improve performance of nested column selections.
 **cssClass** | assigns a CSS class to the column container.
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
@@ -91,7 +92,7 @@ public function getStatusLabelAttribute()
 
 ### Nested Column Selection
 
-In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../extend/database/relations.md) column or a [jsonable array](../extend/system/models.md). The only drawback of doing this is the column cannot use searchable or sortable options.
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../extend/database/relations.md) column or a [jsonable array](../extend/system/models.md). The following example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively.
 
 ```yaml
 content[title]:
@@ -99,7 +100,7 @@ content[title]:
     sortable: false
 ```
 
-The above example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../extend/database/model.md).
+The only drawback of doing this is the column cannot use searchable or sortable options. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../extend/database/model.md). Alternatively, you can use the `relation` property described further below.
 
 ### Direct SQL Selection
 
@@ -113,7 +114,7 @@ full_name:
 
 ### Related Column Selection
 
-The `relation` property allows you to display related columns, you can provide a relationship option. The value of this option has to be the name of the Active Record [relationship](../database/relations.md) on your model. In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
+The `relation` property allows you to display related columns as part of the database query, allowing for searching and sorting of that column. The `relation` is set to the name of the [model relationship](../database/relations.md). In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
 
 ```yaml
 group_name:

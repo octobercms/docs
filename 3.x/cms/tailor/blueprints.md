@@ -31,7 +31,7 @@ Property | Description
 **groups** | references a group of form fields placing the entry in group mode (see below).
 **structure** | structure configuration supplied when using the `structure` type.
 **drafts** | enables drafts for this entry. Default: `false`
-**multisite** | enables multisite for this entry, supported values: `true`, `false`, `sync`. Default: `false`
+**multisite** | enables multisite for this entry, sync records between group, locale or all sites. Supported values: `true`, `false`, `sync`, `locale`, `all`. Default: `false`
 **pagefinder** | includes blueprint type in the [pagefinder form widget](../../element/form/widget-pagefinder.md), supported values: `true`, `false`, `item` or `list`. Default: `true`
 **customMessages** | customize the messages used in the user interface (see below).
 **showExport** | displays a toolbar button for exporting records. Default: `true`.

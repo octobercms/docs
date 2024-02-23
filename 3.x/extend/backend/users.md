@@ -58,7 +58,7 @@ For instance, if you wanted to send an email to all users that are in the group 
 ```php
 $group = UserGroup::where('code', 'head-office-staff')->first();
 
-Mail::sendTo($group->users, 'author.plugin::mail.important_notification');
+Mail::sendTo($group->users, 'author.plugin:important_notification');
 ```
 
 ## Change Backend User Password

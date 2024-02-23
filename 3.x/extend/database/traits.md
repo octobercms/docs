@@ -13,9 +13,6 @@ class Product extends Model
 {
     use \October\Rain\Database\Traits\Nullable;
 
-    /**
-     * @var array Nullable attributes.
-     */
     protected $nullable = ['sku'];
 }
 ```
@@ -29,9 +26,6 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Hashable;
 
-    /**
-     * @var array List of attributes to hash.
-     */
     protected $hashable = ['password'];
 }
 ```
@@ -45,17 +39,20 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Purgeable;
 
-    /**
-     * @var array List of attributes to purge.
-     */
     protected $purgeable = ['password_confirmation'];
 }
 ```
 
-The defined attributes will be purged when the model is saved, before the [model events](../system/models.md) are triggered, including validation. Use the `getOriginalPurgeValue` to find a value that was purged.
+Use the `getOriginalPurgeValue` to find a value that was purged after the model was saved.
 
 ```php
 return $user->getOriginalPurgeValue('password_confirmation');
+```
+
+Alternatively, use the `restorePurgedValues` method to restore all purged values.
+
+```php
+$user->restorePurgedValues();
 ```
 
 ### Encryptable
@@ -67,9 +64,6 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Encryptable;
 
-    /**
-     * @var array List of attributes to encrypt.
-     */
     protected $encryptable = ['api_key', 'api_secret'];
 }
 ```
@@ -87,9 +81,6 @@ class User extends Model
 {
     use \October\Rain\Database\Traits\Sluggable;
 
-    /**
-     * @var array Generate slugs for these attributes.
-     */
     protected $slugs = ['slug' => 'name'];
 }
 ```
@@ -617,6 +608,20 @@ In some cases, all records must exist for every site, such as categories and tag
 
 ```php
 protected $propagatableSync = true;
+```
+
+When using [Site Groups](../../cms/resources/multisite.md), the records will be propagated to all sites within that group. This can be controlled by setting the `$propagatableSync` property to an array containing configuration options.
+
+Option | Description
+------------- | -------------
+- **sync** - logic to sync specific sites, available options: `all`, `group`, `locale`. Default: `group`
+- **delete** - delete all linked records when any record is deleted, default: `true`
+
+```php
+protected $propagatableSync = [
+    'sync' => 'all',
+    'delete' => false
+];
 ```
 
 #### Saving Models

@@ -86,12 +86,6 @@ type: entry
 multisite: true
 ```
 
-You may also set the value to **sync** to keep the records synchronized across sites, which is helpful for categories and tags. When using sync, each record will always exist on every site, although the content can be different.
-
-```yaml
-multisite: sync
-```
-
 When multisite is enabled, all fields in the blueprint become translatable. To keep the same value for a field, set the `translatable` property to false. In this example, when saving the record the **name** field will be copied to every site when it is saved.
 
 ```yaml
@@ -103,6 +97,24 @@ fields:
         label: Full Name
         type: text
         translatable: false
+```
+
+You may also set the value to **sync** to keep the records synchronized across sites, which is helpful for categories and tags. When using sync, each record will always exist on every site, although the content can be different.
+
+```yaml
+multisite: sync
+```
+
+When using [Site Groups](../resources/multisite.md), the records will be propagated to all sites within that group. This can be changed by setting the `multisite` property to **all** to sync within all sites.
+
+```yaml
+multisite: all
+```
+
+Setting to **locale** will sync the records to all sites that share the same locale.
+
+```yaml
+multisite: locale
 ```
 
 ## Migrating Blueprints

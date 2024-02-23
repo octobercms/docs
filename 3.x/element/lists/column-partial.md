@@ -16,15 +16,23 @@ The following properties are supported.
 
 Property | Description
 ------------- | -------------
-**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the column name.
+**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the column name with **column_** as a prefix.
 
-You may specify a fully qualified `path` to access partials outside the controller scope.
+When the `path` is set to an unqualified file name (a file name without a directory path and extension), the source path is determined to be in the model or controller directories. The following example will check for the partial file at **../models/mymodel/_column_for_content.php** or **../controllers/mycontroller/_column_for_content.php**.
+
+```yaml
+content:
+    type: partial
+    path: column_for_content
+```
+
+You may specify a fully qualified `path` to access partials outside the model or controller directories. This can be useful for sharing partials between definitions.
 
 ```yaml
 content:
     label: Content
     type: partial
-    path: ~/plugins/acme/blog/models/comment/_content_column.php
+    path: $/acme/blog/partials/_content_column.php
 ```
 
 Inside the partial these variables are available.

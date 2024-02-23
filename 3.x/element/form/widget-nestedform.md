@@ -12,7 +12,7 @@ content:
     form:
         fields:
             added_at:
-                label: Date added
+                label: Date Added
                 type: datepicker
             details:
                 label: Details
@@ -45,11 +45,11 @@ Like any other form, the nested form widget supports the use of tabs by placing 
 
 ```yaml
 tabbed_content:
-  type: nestedform
-  form:
-    tabs:
-      fields:
-        # ...
+    type: nestedform
+    form:
+        tabs:
+            fields:
+                # ...
 ```
 
 #### See Also

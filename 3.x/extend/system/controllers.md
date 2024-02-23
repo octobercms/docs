@@ -100,13 +100,19 @@ Public controller methods, called **actions** are coupled to **view files** whic
 URL of this page is made up of the author name, plugin name, controller name and action name.
 
 ```text
-backend/[author name]/[plugin name]/[controller name]/[action name]
+admin/[author name]/[plugin name]/[controller name]/[action name]
 ```
 
-The above Controller results in the following:
+For example, the class definition used at the beginning of this article is accessible via the following URL.
 
 ```text
-https://example.tld/backend/acme/blog/users/index
+https://example.tld/admin/acme/blog/users/index
+```
+
+If a [plugin is registered](./plugins.md) with a **hint** in the `pluginDetails` method, a shorter URL structure becomes available, which is useful for masking the author name in URLs.
+
+```text
+admin/[plugin hint]/[controller name]/[action name]
 ```
 
 ## Passing Data to Views

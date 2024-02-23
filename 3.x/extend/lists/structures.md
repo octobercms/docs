@@ -78,7 +78,7 @@ Read more about the `Sortable` trait in the [database documentation](../database
 
 ## Sorting Related Records
 
-Sorting related records is possible using the [Relation Controller](../forms/relation-controller.md) and the supported relation types are listed below.
+Sorting related records is possible using the [Relation Controller](../forms/relation-controller.md) using the **structure** property. The supported relation types are listed below.
 
 - [Has Many](../database/relations.md#relation-one-to-many) uses the `Sortable` trait on the related model.
 - [Belongs To Many](../database/relations.md#relation-many-to-many) uses the `SortableRelation` trait on the parent model (see below).

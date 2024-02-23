@@ -25,6 +25,7 @@ Property | Description
 **comment** | places a descriptive comment below the field.
 **options** | available options for the dropdown, as an array.
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
+**optionsPreset** | take options from a [preset list of defined options](../define-options.md).
 **emptyOption** | text to display when allowing an empty option.
 **showSearch** | allow the user to search options. Default: `true`.
 

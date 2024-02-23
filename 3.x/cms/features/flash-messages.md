@@ -22,7 +22,7 @@ function onSave()
 }
 ```
 
-Flash messages will disappear after an interval of 5 seconds. The `error` message does not disappear automatically to preserve any important details.
+Flash messages will disappear after an interval of 3 seconds. Clicking on a flash message will stop it from disappearing.
 
 ## Built-in Flash Messages
 
@@ -78,6 +78,9 @@ To change the appearance of the flash message, target the `.oc-flash-message` CS
     background: orange;
 }
 .oc-flash-message.info {
+    background: aqua;
+}
+.oc-flash-message.loading {
     background: aqua;
 }
 ```

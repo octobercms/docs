@@ -17,7 +17,7 @@ The third argument of the `oc.request` method is an options object. The followin
 Option | Description
 ------------- | -------------
 **update** | an object, specifies a list partials and page elements (as CSS selectors) to update: `{'partial': '#select'}`. The selector string should start with a `#` or `.` character, except you may also prepend it with `@` to append contents to the element, `^` to prepend, `!` to replace with and `=` to use any CSS selector.
-**confirm** | the confirmation string. If set, the confirmation is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
+**confirm** | the confirmation string. If set, a confirmation dialog is displayed before the request is sent. If the user clicks the Cancel button, the request cancels.
 **data** | an optional object specifying data to be sent to the server along with the form data: `{var: 'value'}`. You may also include files to be uploaded in this object by using [`Blob` objects](https://developer.mozilla.org/en-US/docs/Web/API/Blob). To specify the filename of any `Blob` objects, simply set the `filename` property on the `Blob` object. (Eg. `var blob = new Blob(variable); blob.filename = 'test.txt'; var data = {uploaded_file: blob};`)
 **query** | an optional object specifying data to be added to the current URL query string.
 **headers** | an optional object specifying header values to be sent to the server with the request.
@@ -27,12 +27,14 @@ Option | Description
 **success** | a callback function to execute in case of a successful request. If this option is supplied it overrides the default framework functionality: the elements are not updated, the `beforeUpdate` and `afterUpdate` callbacks are not triggered, the `ajax:update` and `ajax:update-complete` events are not triggered. To call the default framework functionality, use `this.success(...)` inside your function.
 **error** | a callback function execute in case of an error. By default the alert message is displayed. If this option is overridden the alert message won't be displayed.
 **complete** | a callback function execute in case of a success or an error.
+**cancel** | a callback function execute in case the user aborts the request or cancels it via a confirmation dialog.
 **form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
 **flash** | when true, instructs the server to clear and send any flash messages with the response. default: `false`
 **files** | when true, the request will accept file uploads using the `FormData` interface. default: `false`
 **download** | when true, file downloads are accepted with a `Content-Disposition` response. When a string, the downloaded filename can be specified. default: `false`
 **bulk** | when true, the request be sent as JSON for bulk data transactions. default: `false`
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
+**message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](../features/flash-messages.md).
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
 **progressBar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
 
@@ -203,6 +205,23 @@ addEventListener('ajax:confirm-message', function(event) {
     }
     else {
         promise.reject();
+    }
+});
+```
+
+Animating an element after a specific AJAX handler completes its update.
+
+```js
+addEventListener('ajax:update-complete', function(event) {
+    const { handler } = event.detail.context;
+
+    // If the handler is either of the following
+    if (['onRemoveFromCart', 'onAddToCart'].includes(handler)) {
+
+        // Run an animation for 2 seconds
+        var el = document.querySelector('#miniCart');
+        el.classList.add('animate-shockwave');
+        setTimeout(function() { el.classList.remove('animate-shockwave'); }, 2000);
     }
 });
 ```

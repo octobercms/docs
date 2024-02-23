@@ -43,7 +43,7 @@ Property | Description
 ------------- | -------------
 **label** | specifies the menu label localization string key, required.
 **order** | a numerical weight when determining the display order.
-**icon** | an icon name from the [October CMS icon collection](https://octobercms.com/docs/ui/icon), optional.
+**icon** | an icon name from the [October CMS icon collection](../../element/available-icons.md), optional.
 **iconSvg** | an SVG icon to be used in place of the standard icon, the SVG icon should be a rectangle and can support colors, optional.
 **url** | the URL the menu item should point to (eg. `Backend::url('author/plugin/controller/action')`, required.
 **counter** | a numeric value to output near the menu icon. The value should be a number or a callable returning a number, optional.

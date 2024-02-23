@@ -56,6 +56,7 @@ The configuration properties listed below are optional. Define them if you want 
 
 Property | Description
 ------------- | -------------
+**design** | display the form using a specific form design mode when rendering (see below).
 **defaultRedirect** | used as a fallback redirection page when no specific redirect page is defined.
 **create** | a configuration array or reference to a config file for the Create page.
 **update** | a configuration array or reference to a config file for the Update page.
@@ -217,29 +218,29 @@ secondaryTabs:
 
 ## Form Views
 
-For each page your form supports Create, Update and Preview you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.htm**, **update.htm** and **preview.htm**.
+For each page your form supports Create, Update and Preview you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.php**, **update.php** and **preview.php**.
 
-The form behavior adds two methods to the controller class: `formRender` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
+The form behavior adds two methods to the controller class: `formRender`, `formRenderDesign` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 
 ### Create View
 
-The **create.htm** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create.htm form.
+The **create.php** view represents the Create page that allows users to create new records. A typical Create page contains breadcrumbs, the form itself, and the form buttons. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical create view file.
 
 ```php
-<?= Form::open(['class'=>'layout']) ?>
+<?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
 
-    <div class="layout-row">
+    <div class="flex-grow-1">
         <?= $this->formRender() ?>
     </div>
 
     <div class="form-buttons">
-        <div class="loading-indicator-container">
+        <div data-control="loader-container">
             <button
                 type="button"
                 data-request="onSave"
                 data-request-data="{ close: true }"
+                data-request-message="Creating Category..."
                 data-hotkey="ctrl+enter, cmd+enter"
-                data-load-indicator="Creating Category..."
                 class="btn btn-default">
                 Create and Close
             </button>
@@ -255,28 +256,28 @@ The **create.htm** view represents the Create page that allows users to create n
 To track unsaved changes and display a warning when navigating away from the form, include the `data-change-monitor` attribute on the form opening tag.
 
 ```php
-<?= Form::open(['class' => 'layout', 'data-change-monitor' => true]) ?>
+<?= Form::open(['class' => '...', 'data-change-monitor' => true]) ?>
 ```
 
 ### Update View
 
-The **update.htm** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.htm form.
+The **update.php** view represents the Update page that allows users to update or delete existing records. A typical Update page contains breadcrumbs, the form itself, and the form buttons. The Update page is very similar to the Create page, but usually has the Delete button. The **data-request** attribute should refer to the `onSave` AJAX handler provided by the form behavior. Below is a contents of the typical update.php form.
 
 ```php
-<?= Form::open(['class'=>'layout']) ?>
+<?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
 
-    <div class="layout-row">
+    <div class="flex-grow-1">
         <?= $this->formRender() ?>
     </div>
 
     <div class="form-buttons">
-        <div class="loading-indicator-container">
+        <div data-control="loader-container">
             <button
                 type="button"
                 data-request="onSave"
                 data-request-data="{ close: true }"
+                data-request-message="Saving Category..."
                 data-hotkey="ctrl+enter, cmd+enter"
-                data-load-indicator="Saving Category..."
                 class="btn btn-default">
                 Save and Close
             </button>
@@ -284,7 +285,7 @@ The **update.htm** view represents the Update page that allows users to update o
                 type="button"
                 class="oc-icon-trash-o btn-icon danger pull-right"
                 data-request="onDelete"
-                data-load-indicator="Deleting Category..."
+                data-request-message="Deleting Category..."
                 data-request-confirm="Do you really want to delete this category?">
             </button>
             <span class="btn-text">
@@ -298,12 +299,87 @@ The **update.htm** view represents the Update page that allows users to update o
 
 ### Preview View
 
-The **preview.htm** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.htm form.
+The **preview.php** view represents the Preview page that allows users to preview existing records in the read-only mode. A typical Preview page contains breadcrumbs and the form itself. Below is a contents of the typical preview.php form.
 
 ```php
 <div class="form-preview">
     <?= $this->formRenderPreview() ?>
 </div>
+```
+
+## Form Designs
+
+Form designs are a useful when you need to display the form without managing the HTML contents, which is less flexible but can make the process of building forms faster.
+
+```yaml
+design:
+    displayMode: basic
+```
+
+The **design** property, in the behavior configuration, controls how the form is displayed. The following properties are supported.
+
+Property | Description
+------------- | -------------
+**displayMode** | specifies the display mode to use, supported values: `custom`, `basic`, `survey`, `sidebar`, `popup`. Default: `custom`
+**horizontalMode** | show form fields in horizontal orientation. Default: `false`
+**surveyMode** | disables tabs and displays all fields on the page in sections with headers. Default: `false`
+**size** | size of the page container, supported values: `50` stepped increments between `400`-`1200`, `auto`. Default: `auto`
+
+Use the `formRenderDesign` method to render the form design inside the **create.php**, **update.php** and **preview.php** view files.
+
+```php
+<?= $this->formRenderDesign() ?>
+```
+
+### Display Modes
+
+When using a **design** display mode in the behavior configuration, the view contents are generated using standard form contents provided by the system.
+
+The following **displayMode** values are supported with their descriptions.
+
+Display Mode | Description
+------------- | -------------
+**custom** | Render the form using custom view files (default)
+**basic** | Basic layout with for standard forms
+**survey** | Survey layout using stacked sections with headings
+**sidebar** | Sidebar layout where secondary tabs are rendered in the side panel
+**popup** | Form contents are managed inside popup windows
+
+The **size** property defines the size of the page container or the popup size.
+
+```yaml
+design:
+    displayMode: survey
+    size: 950
+```
+
+### Popup Display Mode
+
+If the **design** is set to use the `popup` display mode, then you don't need to create any view files at all. All the form management features are contained inside a popup window.
+
+```yaml
+design:
+    displayMode: popup
+    size: 750
+```
+
+When integrated with the [list controller](../lists/list-controller.md), set the **recordOnClick** property to `popup` to open the manage view when clicking a record.
+
+```yaml
+# config_list.yaml
+recordOnClick: popup
+```
+
+The create view can be opened using the `onLoadPopupForm` AJAX handler in conjunction with the popup control, as in the example below.
+
+```html
+<button
+    type="button"
+    data-control="popup"
+    data-handler="onLoadPopupForm"
+    class="btn btn-primary">
+    New Item
+</button>
 ```
 
 ## Extending Form Behavior
