@@ -107,22 +107,6 @@ Property | Type | Description
 **title** | Both | a popup title, can refer to a [localization string](../system/localization.md).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: `create`, `update`.
 
-### Nested Definitions
-
-The Relation Controller supports nesting relations, in other words, managing relations through relations. A nested relationship uses the standard field nesting syntax. For example, the `countries[cities]` relation definition makes the `cities` relationship available to manage through the `countries` relationship.
-
-```yaml
-countries:
-    label: Country
-    form: $/acme/location/models/country/fields.yaml
-    list: $/acme/location/models/country/columns.yaml
-
-countries[cities]:
-    label: City
-    form: $/acme/location/models/city/fields.yaml
-    list: $/acme/location/models/city/columns.yaml
-```
-
 ### Custom Messages
 
 Specify the `customMessages` property to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../system/localization.md).
@@ -171,6 +155,26 @@ Message | Default Message
 **flashLink** | :name Linked
 **flashRemove** | :name Removed
 **flashUnlink** | :name Unlinked
+:::
+
+### Nested Definitions
+
+The Relation Controller supports nesting relations, in other words, managing relations through relations. A nested relationship uses the standard field nesting syntax. For example, the `countries[cities]` relation definition makes the `cities` relationship available to manage through the `countries` relationship.
+
+```yaml
+countries:
+    label: Country
+    form: $/acme/location/models/country/fields.yaml
+    list: $/acme/location/models/country/columns.yaml
+
+countries[cities]:
+    label: City
+    form: $/acme/location/models/city/fields.yaml
+    list: $/acme/location/models/city/columns.yaml
+```
+
+::: tip
+Nested relation definitions are designed to work seamlessly with the [relation form widget](../../element/form/widget-relation.md), setting the `useController` property set to `true`.
 :::
 
 ## Relationship Types
