@@ -52,6 +52,9 @@ Property | Description
 **dependsOn** | a string or an array of other scope names that this scope depends on. When the other scopes are modified, this scope will reset.
 **nameFrom** | a model attribute name used for displaying the filter label. Default: `name`.
 **valueFrom** | defines a model attribute to use for the source value. Default comes from the scope name.
+**order** | a numerical weight when determining the display order, default value increments at 100 points per scope.
+**after** | place this scope after another existing scope name using the display order (+1).
+**before** | place this scope before another existing scope name using the display order (-1).
 
 ### Applying Model Scopes
 

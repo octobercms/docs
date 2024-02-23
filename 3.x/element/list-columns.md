@@ -60,8 +60,10 @@ Property | Description
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
-**order** | a numerical weight when determining the display order, default value increments at 100 points per column.
 **permissions** | the [permissions](../extend/backend/permissions.md) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**order** | a numerical weight when determining the display order, default value increments at 100 points per column.
+**after** | place this column after another existing column name using the display order (+1).
+**before** | place this column before another existing column name using the display order (-1).
 
 ### Custom Value Selection
 
