@@ -179,10 +179,10 @@ Page contents...
 
 #### Registering a Partial
 
-Like layouts, mail partials can be registered with the `registerMailLayouts` method override and each partial needs a unique `code` to identify it, along with the default view file for the contents.
+Like layouts, mail partials can be registered with the `registerMailPartials` method override and each partial needs a unique `code` to identify it, along with the default view file for the contents.
 
 ```php
-public function registerMailLayouts()
+public function registerMailPartials()
 {
     return [
         'tracking' => 'acme.blog::partials.tracking',
