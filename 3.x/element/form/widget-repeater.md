@@ -157,6 +157,7 @@ Schema::create('acme_blog_repeater_items', function($table) {
     $table->increments('id');
     $table->integer('parent_id')->unsigned()->nullable()->index();
     $table->mediumText('value')->nullable();
+    $table->integer('sort_order')->nullable();
     $table->timestamps();
 });
 ```
@@ -168,9 +169,11 @@ use October\Rain\Database\ExpandoModel;
 
 class RepeaterItem extends ExpandoModel
 {
+    use \October\Rain\Database\Traits\Sortable;
+
     public $table = 'acme_blog_repeater_items';
 
-    protected $expandoPassthru = ['parent_id'];
+    protected $expandoPassthru = ['parent_id', 'sort_order'];
 
     public $attachMany = [
         'photos' => \System\Models\File::class,
