@@ -47,6 +47,14 @@ handle = "Blog\Post"
 ```
 :::
 
+Use the `is empty` or `is not empty` expression to check if a collection has at least one record available to display.
+
+```twig
+{% if posts is not empty %}
+    {# ... #}
+{% endif %}
+```
+
 ## Performing Queries
 
 When accessing the component variable using a method it will switch to a [database model query](../../extend/database/query.md). For example, to only show entries that have a field `color` with the value **blue** use the `where` query method. Using the `{% set %}` Twig tag will assign the result to a new variable.
