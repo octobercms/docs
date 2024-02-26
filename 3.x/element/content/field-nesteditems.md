@@ -17,6 +17,8 @@ items:
                 type: text
 ```
 
+<VideoBlockLink src="https://www.youtube.com/watch?v=vhs9U3_BHqg" title="Nested Items Tutorial" description="This video demonstrates how to implement the Nested Items content field using step by step instructions." prompt="Watch the tutorial" />
+
 The following properties are supported.
 
 Property | Description
