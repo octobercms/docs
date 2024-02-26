@@ -131,8 +131,14 @@ The following messages are available to override as custom messages.
 Message | Default Message
 ------------- | -------------
 **buttonCreate** | Create :name
+**buttonCreateForm** | Create
+**buttonCancelForm** | Cancel
+**buttonCloseForm** | Close
 **buttonUpdate** | Update :name
+**buttonUpdateForm** | Update
 **buttonAdd** | Add :name
+**buttonAddMany** | Add Selected
+**buttonAddForm** | Add
 **buttonLink** | Link :name
 **buttonDelete** | Delete
 **buttonDeleteMany** | Delete Selected
