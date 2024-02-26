@@ -32,7 +32,7 @@ Property | Description
 **structure** | structure configuration supplied when using the `structure` type.
 **drafts** | enables drafts for this entry. Default: `false`
 **multisite** | enables multisite for this entry, sync records between group, locale or all sites. Supported values: `true`, `false`, `sync`, `locale`, `all`. Default: `false`
-**pagefinder** | includes blueprint type in the [pagefinder form widget](../../element/form/widget-pagefinder.md), supported values: `true`, `false`, `item` or `list`. Default: `true`
+**pagefinder** | includes blueprint type in the [pagefinder form widget](../../element/form/widget-pagefinder.md), supported values: `true`, `false`, `item`, `list` or array (see below). Default: `true`
 **customMessages** | customize the messages used in the user interface (see below).
 **showExport** | displays a toolbar button for exporting records. Default: `true`.
 **showImport** | displays a toolbar button for importing records. Default: `true`.
@@ -160,6 +160,44 @@ Message | Default Message
 **pagefinderListType** | All :name Entries
 :::
 
+### Page Finder Configuration
+
+By default, all entries are included in the [page finder](../../element/form/widget-pagefinder.md) lookup values. This can be disabled by setting the **pagefinder** to `false`.
+
+```yaml
+pagefinder: false
+```
+
+You may restrict the page finder context to only allow locating the page as a single `item` (e.g. Blog Post) or a `list` of items (e.g. All Blog Posts).
+
+```yaml
+pagefinder: item
+pagefinder: list
+```
+
+The page finder will automatically resolve the `id`, `code`, `slug` and `fullslug` attributes and use them as replacements in the [page URL parameters](../themes/pages.md). You may specify custom **replacements** as an array using the **pagefinder** properties, including the optional **context** from above.
+
+```yaml
+pagefinder:
+    context: list
+    replacements: []
+```
+
+Each replacement key should match a URL parameter name and use a dot notation path to the attribute value. Take the following URL example for a blog post page.
+
+```ini
+url = "/blog/post/:author/:category/:slug/:id"
+```
+
+The following **replacements** will set the `:author` parameter to the related author slug attribute value, and the `:category` parameter to the first related categories slug attribute value.
+
+```yaml
+pagefinder:
+    replacements:
+        author: author.slug
+        category: categories.0.slug
+```
+
 ## Global
 
 Globals are used to define globally available content for your website. The field values are often used in [CMS layouts](../../cms/themes/layouts.md) and contain settings, such as social networking links.
@@ -215,7 +253,7 @@ Property | Description
 **fields** | form fields belonging to the group, see [backend form fields](../../element/form-fields.md).
 
 ::: tip
-Consider prefixing the mixin file and field names with an underscore (\_) to make the blueprint type easy to find. For example: `_location-fields.yaml`
+Consider prefixing the mixin file and field names with an underscore (\_) to make the blueprint type easy to find. For example: `_location_fields.yaml`
 :::
 
 ### Using the Mixin
