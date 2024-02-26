@@ -377,7 +377,6 @@ The create view can be opened using the `onLoadPopupForm` AJAX handler in conjun
     type="button"
     data-control="popup"
     data-handler="onLoadPopupForm"
-    data-size="750"
     class="btn btn-primary">
     New Item
 </button>
