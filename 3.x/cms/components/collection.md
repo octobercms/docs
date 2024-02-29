@@ -113,8 +113,31 @@ In some cases, and for performance reasons, you may wish to eager load related r
 {% do authorPosts.load('categories') %}
 ```
 
+## Counting Records
+
+Let's assume you want to display a list of blog categories and count the number of posts in each category. First, define the [inverse relation](../../element/content/field-entries.md) on the category blueprint as **posts**.
+
+```yaml
+posts:
+    type: entries
+    source: Blog\Post
+    inverse: categories
+    hidden: true
+```
+
+Then, call the `withCount` function on the collection component, followed by `get` to return a collection of category records. This will create an attribute on each category called **post_count**.
+
+```twig
+{% set categories = collection.withCount('posts').get() %}
+{% for category in categories %}
+    <h5>{{ category.title }} ({{ category.post_count }} posts)</h5>
+{% endfor %}
+```
+
 #### See Also
 
 ::: also
 * [Pagination](../features/pagination.md)
+* [Model Queries](../../extend/database/model.md)
+* [Database Relationships](../../extend/database/relations.md)
 :::
