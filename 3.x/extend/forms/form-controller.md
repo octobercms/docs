@@ -309,6 +309,12 @@ The **preview.php** view represents the Preview page that allows users to previe
 
 ## Form Designs
 
+The `create:controller` command generates [a controller](../system/controllers.md) and supports the `--design` option to implement the desired display mode, as described below.
+
+```bash
+php artisan create:controller Acme.Blog Posts --design=popup
+```
+
 Form designs are a useful when you need to display the form without managing the HTML contents, which is less flexible but can make the process of building forms faster.
 
 ```yaml
