@@ -29,6 +29,7 @@ Property | Description
 **title** | text to display in the title section of the popup.
 **list** | a configuration array or reference to a list column definition file.
 **filter** | a reference to a filter scopes definition file, see [backend list filters](../../extend/lists/filters.md).
+**showSetup** | displays a setup button to configure the list columns and records per page. Default: `false`
 **defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: `10`
 **conditions** | specifies a raw where query statement to apply to the list model query.
