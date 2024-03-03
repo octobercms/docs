@@ -39,3 +39,4 @@ Property | Description
 **useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: `true`. Disable to return just the selected model's ID
 **modelClass** | class of the model to use for listing records when `useRelation` is `false`
 **popupSize** | change the size of the finder popup used, either: `giant`, `huge`, `large`, `small`, `tiny` or `adaptive`. Default: `huge`
+**inlineOptions** | displays the field with buttons alongside the selected record, disable this mode if horizontal space is limited. Default: `true`.
