@@ -64,6 +64,7 @@ Property | Description
 **order** | a numerical weight when determining the display order, default value increments at 100 points per column.
 **after** | place this column after another existing column name using the display order (+1).
 **before** | place this column before another existing column name using the display order (-1).
+**tooltip** | adds an icon with a tooltip after the column label. See below for more detailed settings.
 
 ### Custom Value Selection
 
@@ -138,3 +139,26 @@ users_count:
 ::: warning
 Be careful not to name relations the same as existing database columns. For example, using a name `group_id` could break the group relation due to a naming conflict.
 :::
+
+### Tooltip
+
+The `tooltip` property enhances list columns by adding an informational icon in the column header. Hovering over this icon displays a tooltip, offering additional context or details about the column. This feature aids in providing users with guidance or clarification for understanding column content.
+
+```yaml
+count:
+    label: Count
+    type: number
+    tooltip: Number of users in the group 
+```
+
+In addition to providing a tooltip `title`, you can also specify the `icon` ([available icons](../element/available-icons.md)) and the `placement` (`right`, `bottom`, `left`, default value is `top`) of the tooltip. 
+
+```yaml
+count:
+    label: Count
+    type: number
+    tooltip:
+        title: Number of users in the group
+        placement: bottom
+        icon: icon-users
+```
