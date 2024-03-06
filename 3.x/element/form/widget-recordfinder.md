@@ -10,10 +10,6 @@ user:
     label: User
     type: recordfinder
     list: ~/plugins/rainlab/user/models/user/columns.yaml
-    recordsPerPage: 10
-    title: Find Record
-    nameFrom: name
-    descriptionFrom: email
 ```
 
 The following [field properties](../form-fields.md) are supported and commonly used.
@@ -25,7 +21,7 @@ Property | Description
 **comment** | places a descriptive comment below the field.
 **keyFrom** | the name of column to use in the relation used for key. Default: `id`.
 **nameFrom** | the column name to use in the relation used for displaying the name. Default: `name`.
-**descriptionFrom** | the column name to use in the relation used for displaying a description. Default: description.
+**descriptionFrom** | the column name to use in the relation used for displaying a description. Default: `description`.
 **title** | text to display in the title section of the popup.
 **list** | a configuration array or reference to a list column definition file.
 **filter** | a reference to a filter scopes definition file, see [backend list filters](../../extend/lists/filters.md).
@@ -40,3 +36,69 @@ Property | Description
 **modelClass** | class of the model to use for listing records when `useRelation` is `false`
 **popupSize** | change the size of the finder popup used, either: `giant`, `huge`, `large`, `small`, `tiny` or `adaptive`. Default: `huge`
 **inlineOptions** | displays the field with buttons alongside the selected record, disable this mode if horizontal space is limited. Default: `true`.
+
+You may limit the number of records per page using the `recordsPerPage` property.
+
+```yaml
+user:
+    label: User
+    type: recordfinder
+    recordsPerPage: 10
+```
+
+Use the `title` property to change the title of the management form.
+
+```yaml
+user:
+    label: User
+    type: recordfinder
+    title: Find A User
+```
+
+When a record is selected, the display attributes can be chosen from model attributes using the `nameFrom` and `descriptionFrom` properties.
+
+```yaml
+user:
+    label: User
+    type: recordfinder
+    nameFrom: name
+    descriptionFrom: email
+```
+
+## Usage in Tailor
+
+When the `recordfinder` field is used as a [content field in Tailor](../../cms/tailor/content-fields.md), it requires the `modelClass` property to be specified to define and locate the model relation.
+
+```yaml
+products:
+    label: Products
+    type: recordfinder
+    modelClass: Acme\Test\Models\Product
+    list: $/october/test/models/product/columns.yaml
+```
+
+When the `maxItems` is set to **1**, the relation is defined as a `belongsTo` relation. Otherwise, the relation is defined as `belongsToMany`.
+
+```yaml
+products:
+    label: Products
+    type: recordfinder
+    maxItems: 1
+```
+
+The `inverse` property can be set to the relation name on the related model. This will change the relation definition to `hasOne`, `hasMany` or `belongsToMany` based on the `maxItems` setting and relation type of the related model.
+
+```yaml
+tags:
+    label: Tags
+    type: recordfinder
+    inverse: tags
+    modelClass: Acme\Test\Models\Tag
+```
+
+#### See Also
+
+::: also
+* [Tailor Models](../../cms/tailor/models.md)
+* [Database Relations](../../extend/database/relations.md)
+:::

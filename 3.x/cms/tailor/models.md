@@ -187,26 +187,18 @@ In some cases you may want to combine tailor models with [regular database model
 
 ### Associating Tailor to Regular Models
 
-Introducing model relationships to tailor is when tailor will make a reference to a regular model, for example a model defined by a plugin. This involves creating a custom tailor field that will give complete access to the model and database tables.
+The `recordfinder` form field introduces a relation definition to a regular model, for example a model defined by a plugin. The **modelClass** should refer to the model class and the **list** property is required for singular relations, as specified by **maxItems**.
 
-Inside the content field class definition, the `extendModelObject` method allows the content field to extend the record model, along with `extendDatabaseTable` to add a column to the database table.
-
-```php
-class MyContentField extends ContentFieldBase
-{
-    public function extendModelObject($model)
-    {
-        $model->belongsTo[$this->fieldName] = MyOtherModel::class;
-    }
-
-    public function extendDatabaseTable($table)
-    {
-        $table->mediumText($this->fieldName . '_id')->nullable();
-    }
-}
+```yaml
+products:
+    label: Products
+    type: recordfinder
+    modelClass: Acme\Test\Models\Product
+    list: $/acme/test/models/product/columns.yaml
+    maxItems: 1
 ```
 
-Learn more about building [custom tailor fields here](../../extend/tailor-fields.md).
+Learn more about the [record finder form widget here](../../element/form/widget-recordfinder.md).
 
 ### Associating Regular Models to Tailor
 
@@ -227,3 +219,41 @@ class Product extends Model
     ];
 }
 ```
+
+### Building a Custom Content Field
+
+You may also make reference to a regular model using a implementation specific field type, for example, a customer content field may be hard coded to a `Customer` model class. This involves creating a custom tailor field that will give complete access to the model and database tables.
+
+Inside the content field class definition, the `extendModelObject` method allows the content field to extend the record model, along with `extendDatabaseTable` to add a column to the database table.
+
+```php
+class MyContentField extends ContentFieldBase
+{
+    public function extendModelObject($model)
+    {
+        $model->belongsTo[$this->fieldName] = MyOtherModel::class;
+    }
+
+    public function extendDatabaseTable($table)
+    {
+        $table->integer($this->fieldName . '_id')->nullable();
+    }
+}
+```
+
+This requires a little more effort to get things working, but the results are a simple field **type** definition with minimal configuration.
+
+```yaml
+myfield:
+    label: My Field
+    type: mycontentfield
+```
+
+Learn more about building [custom tailor fields here](../../extend/tailor-fields.md).
+
+#### See Also
+
+::: also
+* [RecordFinder Form Field](../../element/form/widget-recordfinder.md)
+* [Building Tailor Fields](../../extend/tailor-fields.md)
+:::
