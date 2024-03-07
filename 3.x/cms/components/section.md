@@ -112,7 +112,7 @@ When using the [Content Groups](./blueprints.md) feature of the entry blueprint,
 
 ## Using the Full Slug
 
-If the entry type is a `structure`, then it will have a **fullslug** attribute available. To use the full slug in the page URL it should be defined as a [wildcard URL parameter](..//themes/pages.md). The `identifier` property of the component should be set to **fullslug**.
+If the entry type is a `structure`, then it will have a **fullslug** attribute available. To use the full slug in the page URL it should be defined as a [wildcard URL parameter](../themes/pages.md). The `identifier` property of the component should be set to **fullslug**.
 
 ```ini
 url = "/wiki/:fullslug*"

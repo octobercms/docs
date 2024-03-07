@@ -83,6 +83,7 @@ When the `maxItems` is set to **1**, the relation is defined as a `belongsTo` re
 products:
     label: Products
     type: recordfinder
+    modelClass: Acme\Test\Models\Tag
     maxItems: 1
 ```
 
@@ -92,8 +93,8 @@ The `inverse` property can be set to the relation name on the related model. Thi
 tags:
     label: Tags
     type: recordfinder
-    inverse: tags
     modelClass: Acme\Test\Models\Tag
+    inverse: tags
 ```
 
 #### See Also
