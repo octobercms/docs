@@ -162,10 +162,6 @@ public function beforeCreate()
 }
 ```
 
-::: tip
-Relationships created with [deferred bindings](../database/relations.md) (i.e: file attachments) will not be available in the `afterSave` model event if they have not been committed yet. To access uncommitted bindings, use the `withDeferred` method on the relation. For example: `$this->images()->withDeferred($this->sessionKey)->get();`
-:::
-
 ### Basic Usage
 
 Whenever a new model is saved for the first time, the `beforeCreate` and `afterCreate` events will fire. If a model already existed in the database and the `save` method is called, the `beforeUpdate` / `afterUpdate` events will fire. However, in both cases, the `beforeSave` / `afterSave` events will fire.
@@ -179,7 +175,7 @@ public function beforeCreate()
 }
 ```
 
-Returning `false` from an event will cancel the `save` / `update` operation:
+Returning `false` from an event will cancel the `save` / `update` operation.
 
 ```php
 public function beforeCreate()
@@ -196,8 +192,19 @@ It's possible to access old values using the `original` attribute. For example:
 public function afterUpdate()
 {
     if ($this->title !== $this->original['title']) {
-        // title changed
+        // Title has changed
     }
+}
+```
+
+You may find relationships created using [deferred bindings](../database/relations.md) (i.e: file attachments) are not available inside model events yet. To access them early, use the `withDeferred` database query method on the relation.
+
+```php
+public function beforeCreate()
+{
+    $avatar = $this->avatar()->withDeferred()->first();
+
+    $gallery = $this->gallery()->withDeferred()->get();
 }
 ```
 
