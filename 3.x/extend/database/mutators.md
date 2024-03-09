@@ -18,10 +18,7 @@ use Model;
 class User extends Model
 {
     /**
-     * Get the user's first name.
-     *
-     * @param  string  $value
-     * @return string
+     * getFirstNameAttribute is available as `first_name` on the model
      */
     public function getFirstNameAttribute($value)
     {
@@ -38,6 +35,18 @@ $user = User::find(1);
 $firstName = $user->first_name;
 ```
 
+Accessors can be defined on externally by extending the `model.getAttribute` model event.
+
+```php
+User::extend(function ($model) {
+    $model->bindEvent('model.getAttribute', function ($attribute, $value) {
+        if ($attribute === 'first_name') {
+            return ucfirst($value);
+        }
+    });
+});
+```
+
 #### Defining a Mutator
 
 To define a mutator, define a `setFooAttribute` method on your model where `Foo` is the "camel" cased name of the column you wish to access. In this example, let's define a mutator for the `first_name` attribute. This mutator will be automatically called when we attempt to set the value of the `first_name` attribute on the model.
@@ -50,10 +59,7 @@ use Model;
 class User extends Model
 {
     /**
-     * Set the user's first name.
-     *
-     * @param  string  $value
-     * @return string
+     * setFirstNameAttribute writes to the `first_name` attribute
      */
     public function setFirstNameAttribute($value)
     {
@@ -72,6 +78,18 @@ $user->first_name = 'Sally';
 
 Here the `setFirstNameAttribute` function will be called with the value `Sally`. The mutator will then apply the `strtolower` function to the name and set its value in the internal `$attributes` array.
 
+Mutators can be defined on externally by extending the `model.setAttribute` model event.
+
+```php
+User::extend(function ($model) {
+    $model->bindEvent('model.setAttribute', function ($attribute, $value) use ($model) {
+        if ($attribute === 'first_name') {
+            $model->attributes['first_name'] = strtolower($value);
+        }
+    });
+});
+```
+
 ## Date Mutators
 
 By default, Models in October will convert the `created_at` and `updated_at` columns to instances of a [Carbon](https://github.com/briannesbitt/Carbon) object, which provides an assortment of helpful methods and extends the native PHP `DateTime` class.
@@ -82,9 +100,7 @@ You may customize which fields are automatically mutated, and even completely di
 class User extends Model
 {
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * @var array dates return as \Carbon\Carbon instances
      */
     protected $dates = ['created_at', 'updated_at', 'disabled_at'];
 }
@@ -114,9 +130,7 @@ By default, timestamps are formatted as `'Y-m-d H:i:s'`. If you need to customiz
 class Flight extends Model
 {
     /**
-     * The storage format of the model's date columns.
-     *
-     * @var string
+     * @var string dateFormat for storage of the model's date columns.
      */
     protected $dateFormat = 'U';
 }
@@ -132,9 +146,7 @@ For example, let's cast the `is_admin` attribute, which is stored in our databas
 class User extends Model
 {
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * @var array casts attributes to native types.
      */
     protected $casts = [
         'is_admin' => 'boolean',
@@ -160,9 +172,7 @@ The `array` cast type is particularly useful when working with columns that are 
 class User extends Model
 {
     /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
+     * @var array casts attributes to native types.
      */
     protected $casts = [
         'options' => 'array',
