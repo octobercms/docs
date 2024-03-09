@@ -81,13 +81,15 @@ $model->photos()->create(['data' => files('file_input')]);
 You may use the `add` method on the relationship to work directly with a `System\Models\File` model.
 
 ```php
-$model->photos()->add((new File)->fromFile('/path/to/somefile.jpg'));
+$model->photos()->add(
+    $model->photos()->make()->fromFile('/path/to/somefile.jpg')
+);
 ```
 
 Alternatively, you can prepare a File model before hand, then manually associate the relationship later. Notice the `is_public` attribute must be set explicitly using this approach.
 
 ```php
-$file = new System\Models\File;
+$file = new \System\Models\File;
 $file->data = files('file_input');
 $file->is_public = true;
 $file->save();
