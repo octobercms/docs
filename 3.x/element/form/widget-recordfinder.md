@@ -26,6 +26,7 @@ Property | Description
 **list** | a configuration array or reference to a list column definition file.
 **filter** | a reference to a filter scopes definition file, see [backend list filters](../../extend/lists/filters.md).
 **showSetup** | displays a setup button to configure the list columns and records per page. Default: `false`
+**structure** | enables a read-only structured list for selecting records, see the [sorting records article](../../extend/lists/structures.md). Set to `false` to disable, otherwise enabled when the model uses a tree interface.
 **defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: `10`
 **conditions** | specifies a raw where query statement to apply to the list model query.
@@ -63,6 +64,15 @@ user:
     type: recordfinder
     nameFrom: name
     descriptionFrom: email
+```
+
+If a [model structure](../../extend/lists/structures.md) is detected, then the list will display as a structure. This can be disabled or enabled explicitly with the **structure** property.
+
+```yaml
+user:
+    label: User
+    type: recordfinder
+    structure: false
 ```
 
 ## Usage in Tailor
