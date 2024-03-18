@@ -330,6 +330,7 @@ Property | Description
 **horizontalMode** | show form fields in horizontal orientation. Default: `false`
 **surveyMode** | disables tabs and displays all fields on the page in sections with headers. Default: `false`
 **size** | size of the page container, supported values: `50` stepped increments between `400`-`1200`, `auto`. Default: `auto`
+**sidebarSize** | width of the sidebar in `sidebar` mode, supported values `50` steps between `300`-`750`. Default: `300`
 
 Use the `formRenderDesign` method to render the form design inside the **create.php**, **update.php** and **preview.php** view files.
 
