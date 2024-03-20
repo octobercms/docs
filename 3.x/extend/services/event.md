@@ -229,7 +229,19 @@ Event subscribers are classes that may subscribe to multiple events from within 
 class UserEventHandler
 {
     /**
-     * Handle user login events.
+     * subscribe register the listeners for the subscriber.
+     * @param  Illuminate\Events\Dispatcher  $events
+     * @return array
+     */
+    public function subscribe($events)
+    {
+        $events->listen('auth.login', [$this, 'userLogin']);
+
+        $events->listen('auth.logout', [$this, 'userLogout']);
+    }
+
+    /**
+     * userLogin handles user login events.
      */
     public function userLogin($event)
     {
@@ -237,24 +249,11 @@ class UserEventHandler
     }
 
     /**
-     * Handle user logout events.
+     * userLogout handles user logout events.
      */
     public function userLogout($event)
     {
         // ...
-    }
-
-    /**
-     * Register the listeners for the subscriber.
-     *
-     * @param  Illuminate\Events\Dispatcher  $events
-     * @return array
-     */
-    public function subscribe($events)
-    {
-        $events->listen('auth.login', [UserEventHandler::class, 'userLogin']);
-
-        $events->listen('auth.logout', [UserEventHandler::class, 'userLogout']);
     }
 }
 ```
