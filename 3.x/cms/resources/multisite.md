@@ -106,6 +106,18 @@ You may disable the multisite features entirely by setting the `enabled` configu
 'enabled' => false
 ```
 
+## PHP Interface
+
+The [site service](../../extend/services/site.md) includes the global `Site` facade that provides tools for working with multisite. For example, the following code locates a model in the context of the site with ID **2**.
+
+```php
+$model = Site::withContext(2, function() {
+    return Model::find(1);
+});
+```
+
+Read the [Site Service article](../../extend/services/site.md) to learn more.
+
 #### See Also
 
 ::: also
@@ -113,4 +125,5 @@ You may disable the multisite features entirely by setting the `enabled` configu
 * [Theme Localization](../themes/localization.md)
 * [Site Picker Component](../components/sitepicker.md)
 * [Multisite Trait](../../extend/database/traits.md)
+* [Site Service](../../extend/services/site.md)
 :::

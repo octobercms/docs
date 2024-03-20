@@ -168,7 +168,7 @@ By default, all entries are included in the [page finder](../../element/form/wid
 pagefinder: false
 ```
 
-You may restrict the page finder context to only allow locating the page as a single `item` (e.g. Blog Post) or a `list` of items (e.g. All Blog Posts).
+You may restrict the page finder context to only allow locating the page as a single `item` (e.g. Blog Post) or a `list` of items (e.g. All Blog Posts), or when set to `all` will display both.
 
 ```yaml
 pagefinder: item

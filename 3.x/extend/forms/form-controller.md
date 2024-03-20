@@ -326,7 +326,7 @@ The **design** property, in the behavior configuration, controls how the form is
 
 Property | Description
 ------------- | -------------
-**displayMode** | specifies the display mode to use, supported values: `custom`, `basic`, `survey`, `sidebar`, `popup`. Default: `custom`
+**displayMode** | specifies the display mode to use, supported values: `custom`, `basic`, `survey`, `sidebar`, `popup`. Default: `basic`
 **horizontalMode** | show form fields in horizontal orientation. Default: `false`
 **surveyMode** | disables tabs and displays all fields on the page in sections with headers. Default: `false`
 **size** | size of the page container, supported values: `50` stepped increments between `400`-`1200`, `auto`. Default: `auto`
