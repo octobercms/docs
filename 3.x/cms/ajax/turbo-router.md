@@ -161,6 +161,24 @@ oc.pageReady().then(() => {
 });
 ```
 
+The `oc.waitFor` is another useful function that will wait for an object or variable to exist. The function returns a promise that is resolved when the variable is found.
+
+```js
+oc.waitFor(() => window.propName).then(() => [
+    // window.propName is now available
+]);
+```
+
+The second argument provides a timeout interval in milliseconds, the following will stop waiting after two seconds.
+
+```js
+oc.waitFor(() => window.propName, 2000).then(() => {
+    console.log('Found the variable!')
+}).catch(() => {
+    console.error('Gave up waiting...')
+});
+```
+
 ### Inline Script Elements
 
 The turbo router maintains the scripts within the `<head>` tag of the page by comparing the differences. If you use script tags in the `<body>` tag then the script will be executed every time the page renders, which may be undesirable.

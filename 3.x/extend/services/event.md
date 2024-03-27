@@ -235,9 +235,9 @@ class UserEventHandler
      */
     public function subscribe($events)
     {
-        $events->listen('auth.login', [$this, 'userLogin']);
+        $events->listen('auth.login', [static::class, 'userLogin']);
 
-        $events->listen('auth.logout', [$this, 'userLogout']);
+        $events->listen('auth.logout', [static::class, 'userLogout']);
     }
 
     /**
