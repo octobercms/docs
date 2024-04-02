@@ -616,11 +616,15 @@ Option | Description
 ------------- | -------------
 - **sync** - logic to sync specific sites, available options: `all`, `group`, `locale`. Default: `group`
 - **delete** - delete all linked records when any record is deleted, default: `true`
+- **except** - provides attribute names that should not be replicated for newly synced records
 
 ```php
 protected $propagatableSync = [
     'sync' => 'all',
-    'delete' => false
+    'delete' => false,
+    'except' => [
+        'description'
+    ]
 ];
 ```
 
