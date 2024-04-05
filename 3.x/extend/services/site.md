@@ -2,7 +2,7 @@
 
 ### Introduction
 
-The global `Site` facade is included with October CMS to provide tools for working with [multisite implementations](../../cms/resources/multisite.md). All multisite application features are enabled or disabled using the configuration file **config/multisite.php**.
+The global `Site` facade is included with October CMS to provide tools for working with [multisite implementations](../../cms/resources/multisite.md). All optional multisite features are enabled or disabled using the configuration file **config/multisite.php**.
 
 ```php
 'features' => [
@@ -19,7 +19,7 @@ $useMultisite = Site::hasFeature('cms_maintenance_setting');
 
 ## Checking Site Configuration State
 
-Use the `hasAnySite` to check if any enabled site available.
+Use the `hasAnySite` to check if any enabled site is available.
 
 ```php
 if (Site::hasAnySite()) {
@@ -30,13 +30,17 @@ if (Site::hasAnySite()) {
 The `hasMultiSite` will return true if multiple site definitions are available.
 
 ```php
-$multiple = Site::hasMultiSite();
+if (Site::hasMultiSite()) {
+    // ...
+}
 ```
 
-The `hasMultiSite` will return true if multiple site definitions are using grouped definitions.
+The `hasSiteGroups` will return true if multiple site definitions are using grouped definitions.
 
 ```php
-$grouped = Site::hasSiteGroups();
+if (Site::hasSiteGroups()) {
+    // ...
+}
 ```
 
 ## Retrieving a Site
@@ -49,10 +53,10 @@ The `getPrimarySite` method returns the primary site definition, used as a fallb
 $site = Site::getPrimarySite();
 ```
 
-The frontend theme has a selected site that is used when rendering CMS pages, the `getActive` site will return this site.
+The frontend theme has a selected site that is used when rendering CMS pages, the `getActiveSite` site will return this site.
 
 ```php
-$site = Site::getActive();
+$site = Site::getActiveSite();
 ```
 
 Likewise, the admin panel can select a site and this can be retrieved using the `getEditSite` method.
