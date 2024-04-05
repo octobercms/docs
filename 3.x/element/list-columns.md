@@ -50,10 +50,10 @@ Property | Description
 **sortable** | specifies if this column can be sorted. Default: `true`.
 **sortableDefault** | specifies if this column is sorted by default. This should only be used on a single sortable column. Supported values: `asc`, `desc`.
 **clickable** | if set to false, disables the default click behavior when the column is clicked. Default: true.
-**select** | defines a custom SQL select statement to use for the value.
-**valueFrom** | defines a model attribute to use for the source value.
+**select** | defines a custom SQL select statement to use for the value. If a `relation` is specified, this refers to a column on the related database table.
+**valueFrom** | defines a model attribute to use for the source value. If a `relation` is specified, this refers to the attribute of the relation and eager loads the relation.
 **displayFrom** | defines a model attribute to use for the display value.
-**relation** | defines a model relationship column.
+**relation** | defines a model relationship name as a source, used with `select` or `valueFrom`.
 **relationCount** | display the number of related records as the column value. Must be used with the `relation` option. Default: `false`
 **relationWith** | eager load the specified relation definition with the list query. Useful to improve performance of nested column selections.
 **cssClass** | assigns a CSS class to the column container.
@@ -148,10 +148,10 @@ The `tooltip` property enhances list columns by adding an informational icon in 
 count:
     label: Count
     type: number
-    tooltip: Number of users in the group 
+    tooltip: Number of users in the group
 ```
 
-In addition to providing a tooltip `title`, you can also specify the `icon` ([available icons](../element/available-icons.md)) and the `placement` (`right`, `bottom`, `left`, default value is `top`) of the tooltip. 
+In addition to providing a tooltip `title`, you can also specify the `icon` ([available icons](../element/available-icons.md)) and the `placement` (`right`, `bottom`, `left`, default value is `top`) of the tooltip.
 
 ```yaml
 count:
