@@ -402,8 +402,10 @@ public function formGetConfig()
 {
     $config = $this->asExtension('FormController')->formGetConfig();
 
+    $config->form = $this->makeConfig($config->form);
+
     // Set the active tab dynamically
-    $config->form['tabs']['activeTab'] = 'Content';
+    $config->form->tabs['activeTab'] = 'Activities';
 
     return $config;
 }
