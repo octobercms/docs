@@ -161,7 +161,7 @@ Execute a single request that shows a Flash Message using logic handler.
 oc.request('onDoSomething', {
     flash: true,
     handleFlashMessage: function(message, type) {
-        oc.flashMsg({ text: message, class: type });
+        oc.flashMsg({ message: message, type: type });
     }
 });
 ```
@@ -180,12 +180,12 @@ addEventListener('ajax:setup', function(event) {
 
     // Handle Error Messages by triggering a flashMsg of type error
     options.handleErrorMessage = function(message) {
-        oc.flashMsg({ text: message, class: 'error' });
+        oc.flashMsg({ message: message, type: 'error' });
     }
 
     // Handle Flash Messages by triggering a flashMsg of the message type
     options.handleFlashMessage = function(message, type) {
-        oc.flashMsg({ text: message, class: type });
+        oc.flashMsg({ message: message, type: type });
     }
 });
 ```
