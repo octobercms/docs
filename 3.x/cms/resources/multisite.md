@@ -45,7 +45,7 @@ View the [Site Picker component](../components/sitepicker.md) article to learn h
 
 October CMS is configured to automatically detect a matching site based on the browser's preferred language when the following conditions are met.
 
-- The primary site has a CMS route prefix set
+- All sites in the group have a prefix set
 - There are no other sites matching the base URL
 
 For example, if the primary site is **English** with a route prefix of `/en` and another site **French** has a prefix of `/fr` then the following behavior can be observed.
