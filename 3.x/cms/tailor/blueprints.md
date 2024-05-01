@@ -206,6 +206,7 @@ The following defines a **Footer Config** global with a Facebook Link (`facebook
 
 ```yaml
 handle: Site\Footer
+type: global
 name: Footer Config
 
 fields:
@@ -232,6 +233,7 @@ The following defines a **Location** collection with Country (`country_code`) an
 
 ```yaml
 handle: Fields\Location
+type: mixin
 name: Location
 
 fields:
