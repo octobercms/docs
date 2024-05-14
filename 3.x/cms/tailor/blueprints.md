@@ -31,6 +31,7 @@ Property | Description
 **groups** | references a group of form fields placing the entry in group mode (see below).
 **structure** | structure configuration supplied when using the `structure` type.
 **drafts** | enables drafts for this entry. Default: `false`
+**softDeletes** | enables soft deletion for this entry. Default: `true`
 **multisite** | enables multisite for this entry, sync records between group, locale or all sites. Supported values: `true`, `false`, `sync`, `locale`, `all`. Default: `false`
 **pagefinder** | includes blueprint type in the [pagefinder form widget](../../element/form/widget-pagefinder.md), supported values: `true`, `false`, `item`, `list` or array (see below). Default: `true`
 **customMessages** | customize the messages used in the user interface (see below).
