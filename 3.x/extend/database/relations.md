@@ -418,20 +418,54 @@ public $belongsToMany = [
 ];
 ```
 
-These are the parameters supported for `belongsToMany` relations:
+#### Allowing Duplicate Relations
 
-Argument | Description
+In some cases you may want to associate the same relationship twice or more, using different pivot data for each attached record. Below is an example that shows a [database table structure](./structure.md) that has an incrementing primary key on the join table instead of a composed primary key.
+
+```php
+Schema::create('role_user', function($table) {
+    $table->increments('id');
+    $table->integer('user_id')->unsigned();
+    $table->integer('role_id')->unsigned();
+});
+```
+
+A custom `pivotModel` must be used for this configuration, and the `pivotKey` property is set to the incrementing column name (`id`).
+
+```php
+public $belongsToMany = [
+    'roles' => [
+        \Acme\Blog\Models\Role::class,
+        'pivotModel' => \Acme\Blog\Models\UserRolePivot::class,
+        'pivotKey' => 'id'
+    ]
+];
+```
+
+The pivot model definition should set the `$incrementing` property to `true` to enable the incrementing primary key.
+
+```php
+class UserRolePivot extends \October\Rain\Database\Pivot
+{
+    public $incrementing = true;
+}
+```
+
+These are the properties supported for `belongsToMany` relations:
+
+Property | Description
 ------------- | -------------
 **table** | the name of the join table.
 **key** | the key column name of the defining model (inside pivot table). Default value is combined from model name and `_id` suffix, i.e. `user_id`
 **parentKey** | the key column name of the defining model (inside defining model table). Default: id
 **otherKey** | the key column name of the related model (inside pivot table). Default value is combined from model name and `_id` suffix, i.e. `role_id`
 **relatedKey** | the key column name of the related model (inside related model table). Default: id
-**timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: false
+**timestamps** | if true, the join table should contain `created_at` and `updated_at` columns. Default: `false`
 **detach** | if set to false, the related model will be not be detached if the primary model is deleted or relationship is destroyed, default: true.
 **pivot** | an array of pivot columns found in the join table, attributes are available via `$model->pivot`.
 **pivotModel** | specify a custom model class to return when accessing the pivot relation. Defaults to `October\Rain\Database\Pivot` while for polymorphic relation `October\Rain\Database\MorphPivot`.
 **pivotSortable** | specify a sort order column for the pivot table, used in combination with the `SortableRelation` [model trait](../lists/structures.md).
+**pivotKey** | specify an incrementing ID column for the pivot table, must be used with a custom `pivotModel` class with a primary key used on the table.
 
 <a id="relation-has-many-through"></a>
 ### Has Many Through
