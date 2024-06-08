@@ -19,7 +19,8 @@ The first step to testing plugins is to create a file called **phpunit.xml** in 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
+<phpunit
+    backupGlobals="false"
     backupStaticAttributes="false"
     bootstrap="../../../modules/system/tests/bootstrap.php"
     colors="true"

@@ -442,7 +442,7 @@ public $belongsToMany = [
 ];
 ```
 
-The pivot model definition should set the `$incrementing` property to `true` to enable the incrementing primary key.
+The pivot model definition should set the `$incrementing` property to `true` to enable the incrementing primary key, which defaults to `id` like every other model.
 
 ```php
 class UserRolePivot extends \October\Rain\Database\Pivot
