@@ -60,6 +60,14 @@ content:
     path: acme.blog::formfields.content
 ```
 
+You may also place a partial in the app directory, for example, **app/views/formfields/content.php**.
+
+```yaml
+content:
+    type: partial
+    path: app::formfields.content
+```
+
 :::tip
 The path must contain the `::` characters to activate the view service.
 :::
