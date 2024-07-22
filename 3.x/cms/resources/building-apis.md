@@ -240,6 +240,44 @@ The above will output the following JSON format.
 }
 ```
 
+## Usage Examples
+
+These are some practical examples of how snippets can be used.
+
+### Returning Users with Avatar Thumbnails
+
+The following example sets the `users` variable to all the users found in the [User plugin](https://octobercms.com/plugin/rainlab-user). The `avatar` relationship is eager loaded after the fact and then the `avatar_thumb` attribute is set as a thumb URL for each user if an avatar is found.
+
+::: cmstemplate
+```ini
+## pages/api/users.htm
+url = "/api/users"
+```
+```php
+function onStart()
+{
+    $this['users'] = \RainLab\User\Models\User::all();
+}
+```
+```twig
+{# Load up the avatar relation #}
+{% do users.load('avatar') %}
+
+{# Set the 'avatar_thumb' attribute on each user #}
+{% for user in users %}
+    {% do user.setAttribute(
+        'avatar_thumb',
+        user.avatar.getThumbUrl(100, 100, {mode: 'crop'})|default(null)
+    ) %}
+{% endfor %}
+
+{# Respond with the user #}
+{% do response({
+    data: users
+}) %}
+```
+:::
+
 #### See Also
 
 ::: also
