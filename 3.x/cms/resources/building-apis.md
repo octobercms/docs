@@ -17,7 +17,7 @@ In the simplest form, an API resource can be composed by returning a Twig variab
 
 ::: cmstemplate
 ```ini
-url = "/api/foobar
+url = "/api/foobar"
 ```
 ```twig
 {% do response({ foo: 'bar' }) %}
