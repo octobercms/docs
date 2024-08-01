@@ -51,7 +51,7 @@ created_at:
         equals: true
 ```
 
-You may pass a `default` value, ensuring it is wrapped in quotes to represent a string.
+You may pass a `default` value, ensuring it is wrapped in quotes to represent a string. The default can be set to **now** to specify the current date.
 
 ```yaml
 created_at:
