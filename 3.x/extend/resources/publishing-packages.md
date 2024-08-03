@@ -172,7 +172,7 @@ php artisan plugin:install Acme.Blog --from=git@github.com:acme/blog-plugin.git 
 If you use the `git@` address of a repository, composer will prefer the source version and clone the repository so you can continue to push updates normally.
 :::
 
-### Install from a local source
+### Install from a Local Source
 
 To install a plugin using composer from the same project source.
 

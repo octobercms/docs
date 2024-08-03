@@ -36,6 +36,12 @@ October CMS includes a number of commands for managing plugins.
 php artisan plugin:install AuthorName.PluginName
 ```
 
+Use the `--want` option to install a specific plugin version.
+
+```bash
+php artisan plugin:install AuthorName.PluginName --want=1.0
+```
+
 You may install a plugin from a remote source using the `--from` option.
 
 ```bash
