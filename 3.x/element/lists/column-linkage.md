@@ -1,7 +1,8 @@
 ---
 subtitle: List Column
+shortname: Linkage
 ---
-# Linkage
+# Linkage Column
 
 The `linkage` column displays a hyperlink to the specified page.
 

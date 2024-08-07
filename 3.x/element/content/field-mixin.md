@@ -1,7 +1,8 @@
 ---
 subtitle: Content Field
+shortname: Mixin
 ---
-# Mixin
+# Mixin Field
 
 `mixin` - includes another set of fields.
 

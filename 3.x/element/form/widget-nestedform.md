@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Nested Form
 ---
-# Nested Form
+# Nested Form Field
 
 `nestedform` - renders a nested form using a related record or [jsonable attribute](../../extend/system/models.md). Fields can be defined inline or using an external yaml file.
 

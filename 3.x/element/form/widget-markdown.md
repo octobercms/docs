@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Markdown Editor
 ---
-# Markdown Editor
+# Markdown Editor Field
 
 `markdown` - renders a basic editor for markdown formatted text.
 

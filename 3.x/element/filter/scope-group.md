@@ -1,7 +1,8 @@
 ---
 subtitle: Filter Scope
+shortname: Group
 ---
-# Group
+# Group Scope
 
 `group` - filter using a group of multiple items, usually by a related model or an array of predefined options.
 

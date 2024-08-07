@@ -1,7 +1,8 @@
 ---
 subtitle: Filter Scope
+shortname: Text
 ---
-# Text
+# Text Scope
 
 `text` - filter using a plain text input with either `exact` or `contains` condition logic.
 

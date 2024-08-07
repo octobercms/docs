@@ -1,7 +1,8 @@
 ---
 subtitle: Inspector Type
+shortname: String
 ---
-# String
+# String Inspector Type
 
 The `string` inspector type allows entering a single line of a text and represented with a simple input text field. The editor doesn't have any specific parameters. The optional `default` parameter for the editor should contain a string.
 

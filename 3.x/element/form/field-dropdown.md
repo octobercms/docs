@@ -1,7 +1,8 @@
 ---
 subtitle: Form Field
+shortname: Dropdown
 ---
-# Dropdown
+# Dropdown Field
 
 The `dropdown` field renders a dropdown with specified options. There are a number of ways to provide the dropdown options, most of them involve specify the `options` value.
 

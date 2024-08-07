@@ -1,7 +1,8 @@
 ---
 subtitle: Filter Scope
+shortname: Number
 ---
-# Number
+# Number Scope
 
 `number` - filter using a numeric value using `exact`, `between`, `greater` and `lesser` condition logic.
 

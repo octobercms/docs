@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Tag List
 ---
-# Tag List
+# Tag List Field
 
 The `taglist` form widget renders a field for inputting a list of tags.
 

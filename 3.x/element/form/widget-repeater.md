@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Repeater
 ---
-# Repeater
+# Repeater Field
 
 `repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../../extend/system/models.md).
 

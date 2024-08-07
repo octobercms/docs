@@ -1,7 +1,8 @@
 ---
 subtitle: Filter Scope
+shortname: Dropdown
 ---
-# Dropdown
+# Dropdown Scope
 
 `dropdown` - filter using a single selection of multiple items.
 

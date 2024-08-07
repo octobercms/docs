@@ -1,7 +1,8 @@
 ---
 subtitle: List Column
+shortname: Image
 ---
-# Image
+# Image Column
 
 The `image` column displays an image column with the option to resize the output.
 

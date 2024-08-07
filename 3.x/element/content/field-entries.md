@@ -1,7 +1,8 @@
 ---
 subtitle: Content Field
+shortname: Entries
 ---
-# Entries
+# Entries Field
 
 `entries` - links to other entries by UUID or handle.
 

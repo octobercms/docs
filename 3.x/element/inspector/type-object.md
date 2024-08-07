@@ -1,7 +1,8 @@
 ---
 subtitle: Inspector Type
+shortname: Object
 ---
-# Object
+# Object Inspector Type
 
 The `object` inspector type allows defining an object with specific properties editable by users. Object properties are specified with the `properties` attribute. The value of the attribute is an array, which has the same structure as the inspector properties array.
 

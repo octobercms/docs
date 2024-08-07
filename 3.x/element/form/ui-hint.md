@@ -1,7 +1,8 @@
 ---
 subtitle: Form UI
+shortname: Hint
 ---
-# Hint
+# Hint Field
 
 The `hint` UI element identical to the [partial element](./ui-partial.md) but renders inside a hint container that can be dismissed by the user.
 

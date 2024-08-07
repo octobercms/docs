@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Date Picker
 ---
-# Date Picker
+# Date Picker Field
 
 `datepicker` - renders a text field used for selecting date and times.
 

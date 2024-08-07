@@ -1,7 +1,8 @@
 ---
 subtitle: Form Field
+shortname: Text
 ---
-# Text
+# Text Field
 
 The `text` field renders a single line text box. This is the default type used if no type is specified.
 

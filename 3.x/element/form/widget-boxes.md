@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Boxes
 ---
-# Boxes
+# Boxes Field
 
 `boxes` - renders a box editor for building visual pages and works like a frontend page builder.
 

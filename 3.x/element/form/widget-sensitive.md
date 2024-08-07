@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Sensitive
 ---
-# Sensitive
+# Sensitive Field
 
 `sensitive` - renders a revealable password field that can be used for sensitive information such as API keys or secrets, configuration values, etc. A sensitive field can be toggled visible and hidden at the user's request.
 

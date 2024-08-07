@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Media Finder
 ---
-# Media Finder
+# Media Finder Field
 
 `mediafinder` - renders a field for selecting an item from the media manager library. Expanding the field displays the media manager to locate a file. The resulting selection is a string as the relative path to the file.
 

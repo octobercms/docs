@@ -1,7 +1,8 @@
 ---
 subtitle: Form UI
+shortname: Section
 ---
-# Section
+# Section Field
 
 The `section` UI element renders a section heading and subheading. The `label` and `comment` values are optional and contain the content for the heading and subheading.
 

@@ -1,7 +1,8 @@
 ---
 subtitle: List Column
+shortname: Selectable
 ---
-# Selectable
+# Selectable Column
 
 `selectable` - takes the column value and matches it to the value in the record's available options. Take the following array as an example, if the record value is set to `open` then the **Open** value is displayed in the column.
 

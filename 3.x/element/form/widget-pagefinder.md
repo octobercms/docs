@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Page Finder
 ---
-# Page Finder
+# Page Finder Field
 
 `pagefinder` - renders a field for selecting a page link. Expanding the field displays the picker to locate a page. The resulting selection is a string that contains the type and reference.
 

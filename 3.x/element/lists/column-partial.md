@@ -1,7 +1,8 @@
 ---
 subtitle: List Column
+shortname: Partial
 ---
-# Partial
+# Partial Column
 
 The `partial` column will render the column content using a partial or view file. The `path` value can refer to a partial view file otherwise the column name is used as the partial name. The default scope for the view path is the controller's view path.
 

@@ -1,7 +1,8 @@
 ---
 subtitle: Form Field
+shortname: Checkbox
 ---
-# Checkbox
+# Checkbox Field
 
 The `checkbox` field renders a single checkbox.
 

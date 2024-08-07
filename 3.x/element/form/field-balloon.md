@@ -1,7 +1,8 @@
 ---
 subtitle: Form Field
+shortname: Balloon Selector
 ---
-# Balloon Selector
+# Balloon Selector Field
 
 The `balloon-selector` field renders a list, where only one item can be selected at a time.
 Balloon selectors support the same methods for defining the options as the [dropdown field type](./field-dropdown.md).

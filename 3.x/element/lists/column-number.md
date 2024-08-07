@@ -1,7 +1,8 @@
 ---
 subtitle: List Column
+shortname: Number
 ---
-# Number
+# Number Column
 
 `number` - displays a number column, aligned right.
 

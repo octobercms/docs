@@ -1,7 +1,8 @@
 ---
 subtitle: Form Field
+shortname: Number
 ---
-# Number
+# Number Field
 
 The `number` field renders a single line text box that takes numbers only.
 

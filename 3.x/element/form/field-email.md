@@ -1,7 +1,8 @@
 ---
 subtitle: Form Field
+shortname: Email
 ---
-# Email
+# Email Field
 
 The `email` field renders a single line text box with the type of `email`, triggering an email-specialized keyboard in mobile browsers.
 

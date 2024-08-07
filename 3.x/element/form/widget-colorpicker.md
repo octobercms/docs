@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Color Picker
 ---
-# Color Picker
+# Color Picker Field
 
 `colorpicker` - renders controls to select a hexadecimal color value.
 

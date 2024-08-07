@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: File Upload
 ---
-# File Upload
+# File Upload Field
 
 `fileupload` - renders a file uploader for images or regular files.
 

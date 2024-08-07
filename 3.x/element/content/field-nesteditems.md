@@ -1,7 +1,8 @@
 ---
 subtitle: Content Field
+shortname: Nested Items
 ---
-# Nested Items
+# Nested Items Field
 
 `nesteditems` - creates nested records belonging exclusively to the current record.
 

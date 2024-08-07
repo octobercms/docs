@@ -1,7 +1,8 @@
 ---
 subtitle: Form Widget
+shortname: Relation
 ---
-# Relation
+# Relation Field
 
 `relation` - renders either a dropdown or checkbox list according to the field relation type. Singular relationships display a dropdown, multiple relationships display a checkbox list. The label used for displaying each relation is sourced by the `nameFrom` or `select` definition.
 

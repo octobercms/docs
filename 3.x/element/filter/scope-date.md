@@ -1,7 +1,8 @@
 ---
 subtitle: Filter Scope
+shortname: Date
 ---
-# Date
+# Date Scope
 
 `date` - filer using a date value using `equals`, `between`, `before` and `after` condition logic.
 

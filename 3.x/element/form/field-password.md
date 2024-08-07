@@ -1,7 +1,8 @@
 ---
 subtitle: Form Field
+shortname: Password
 ---
-# Password
+# Password Field
 
 The `password` field renders a single line password field and is used for capturing sensitive values, like passwords.
 

@@ -1,7 +1,8 @@
 ---
 subtitle: Inspector Type
+shortname: Set
 ---
-# Set
+# Set Inspector Type
 
 The `set` inspector type is used to make multiple selections from the predefined options. The `set` inspector type support the same methods for defining the options as the [dropdown inspector type](./type-dropdown.md).
 
