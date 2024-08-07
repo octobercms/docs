@@ -56,6 +56,7 @@
         - form/widget-pagefinder
         - form/widget-sensitive
         - form/widget-taglist
+        - form/widget-currency
         - form/widget-boxes
 -
     title: List Columns
@@ -70,6 +71,7 @@
         - lists/column-linkage
         - lists/column-partial
         - lists/column-colorpicker
+        - lists/column-currency
 -
     title: Filter Scopes
     children:
