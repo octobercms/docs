@@ -6,17 +6,15 @@ shortname: Boxes
 
 `boxes` - renders a box editor for building visual pages and works like a frontend page builder.
 
-This feature is introduced by installing the premium [Boxes](https://octobercms.com/plugin/offline-boxes) plugin. Once licensed, you may install it with the following command.
+::: tip
+This field is introduced after installing the [Boxes plugin](https://octobercms.com/plugin/offline-boxes) on the October CMS marketplace. Once licensed, you may install it with the following command.
 
 ```bash
 php artisan plugin:install OFFLINE.Boxes
 ```
-
-::: tip
-Learn more about the Boxes plugin at [the product page](https://boxes.offline.ch/).
 :::
 
-To display the Editor in a Tailor backend form, define a form field like this:
+To display the Boxes Editor in a Tailor backend form, define a form field like this:
 
 ```yaml
 fields:
@@ -42,5 +40,5 @@ entrySlug = "{{ :slug }}"
 #### See Also
 
 ::: also
-* [Boxes Plugin Documentation](https://docs.boxes.offline.ch/use-cases/usage-in-plugins.html)
+* [Boxes Plugin Page](https://octobercms.com/plugin/offline-boxes)
 :::
