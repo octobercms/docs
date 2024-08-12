@@ -81,6 +81,7 @@ Property | Description
 **defaultFrom** | takes the default value from the value of another model attribute.
 **tab** | assigns the field to a tab.
 **cssClass** | assigns a CSS class to the field container.
+**autoFocus** | flags the field to be focused when the form loads. Default: `false`.
 **readOnly** | prevents the field from being modified. Options: `true`, `false`.
 **disabled** | prevents the field from being modified and excludes it from the saved data. Options: `true`, `false`.
 **hidden** | hides the field from the view and excludes it from the saved data. Options: `true`, `false`.

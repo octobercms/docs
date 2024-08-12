@@ -4,7 +4,7 @@ shortname: Currency
 ---
 # Currency Field
 
-The `currency` form widget renders a field for entering a numeric currency value. This field uses the primary currency definition or the **Admin Panel Currency** setting selected [Site Definition](../../cms/resources/multisite.md) area.
+The `currency` form widget renders a field for entering a numeric currency value. This field uses the primary currency definition or the **Base Currency** setting selected [Site Definition](../../cms/resources/multisite.md) area.
 
 ::: tip
 This field is introduced after installing the [Currency plugin](https://octobercms.com/plugin/responsiv-currency) available on the October CMS marketplace. You may install it with the following command.
