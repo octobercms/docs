@@ -38,5 +38,7 @@ total_amount:
 #### See Also
 
 ::: also
+* [Currency Twig Filter](../../markup/filter/currency.md)
+* [Currency List Column](../../element/lists/column-currency.md)
 * [Currency Plugin Page](https://octobercms.com/plugin/responsiv-currency)
 :::
