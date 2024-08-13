@@ -125,6 +125,26 @@ When registering the JavaScript, it should come after the assets registered by t
 });
 ```
 
+### Trigger a Modal from a Custom Button
+
+Use the `oc.popup` JavaScript function to open a modal window.
+
+```js
+oc.popup({
+    handler: 'onLoadPopup'
+});
+```
+
+Use the `backend.ajax.beforeRunHandler` to register a global AJAX handler. The `makePartial` method can be called to render a partial with the modal contents inside.
+
+```php
+Event::listen('backend.ajax.beforeRunHandler', function ($controller, $handler) {
+    if ($handler === 'onLoadPopup') {
+        return $controller->makePartial('~/path/to/my/partials/_popup_form.php');
+    }
+});
+```
+
 ## Advanced Editor Options
 
 Use the `editorOptions` property to customize the editor options. This is an advanced property, since all options defined here are proxied directly to the editor control.
