@@ -254,6 +254,7 @@
         - filter/default
         - filter/raw
         - filter/md
+        - filter/currency
 -
     title: Functions
     collapsable: false
