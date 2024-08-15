@@ -12,6 +12,14 @@ total_amount:
     type: currency
 ```
 
+::: tip
+This column is introduced after installing the [Currency plugin](https://octobercms.com/plugin/responsiv-currency) available on the October CMS marketplace. You may install it with the following command.
+
+```bash
+php artisan plugin:install Responsiv.Currency
+```
+:::
+
 The following properties are supported.
 
 Property | Description

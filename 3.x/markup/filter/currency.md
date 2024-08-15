@@ -3,25 +3,42 @@ subtitle: Twig Filter
 ---
 # |currency
 
-The `|currency` filter
+The `|currency` filter is used to display a currency value.
 
 ```twig
 {{ 100|currency }}
 ```
 
-This method takes an options argument, as an array that supports various values.
+::: tip
+This Twig filter is introduced after installing the [Currency plugin](https://octobercms.com/plugin/responsiv-currency) available on the October CMS marketplace. You may install it with the following command.
 
-- to: To a given currency code
-- from: From a currency code
-- format: Display format. Options: long, short, null.
+```bash
+php artisan plugin:install Responsiv.Currency
+```
+:::
 
-For example, to convert an amount from USD to AUD:
+The filter takes an options argument, as an array that supports various values.
+
+Option | Description
+------ | -----------
+**to** | To a given currency code
+**from** | From a currency code
+**format** | Display format. Options: long, short, null.
+**site** | Set to `true` to use currency codes from the site definition. Default: `false`.
+
+For example, to convert an amount from USD to AUD.
 
 ```php
 {{ 1000|currency({ from: 'USD', to: 'AUD' }) }}
 ```
 
-To display a currency in long or short format
+If you want to use the base and display currency from the site definition, set the **site** option to `true`.
+
+```php
+{{ 1000|currency({ site: true }) }}
+```
+
+To display a currency in `long` or `short` format.
 
 ```php
 // $10.00
