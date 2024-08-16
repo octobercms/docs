@@ -33,6 +33,7 @@ The following list columns are available:
 [Linkage](./lists/column-linkage.md)
 [Partial](./lists/column-partial.md)
 [Color Picker](./lists/column-colorpicker.md)
+[Currency](./lists/column-currency.md)
 
 </div>
 
