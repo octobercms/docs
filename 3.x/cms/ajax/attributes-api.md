@@ -15,9 +15,9 @@ data-request Attribute | Description
 **data-request-data** | specifies additional POST parameters to be sent to the server. The format is following: `var: value, var: value`. Use quotes if needed: `var: 'some string'`. The attribute can be used on the triggering element, for example on the button that also has the `data-request` attribute, on the closest element of the triggering element and on the parent form element. The framework merges values of the `data-request-data` attributes. If the attribute on different elements defines parameters with the same name, the framework uses the following priority: the triggering element `data-request-data`, the closer parent elements `data-request-data`, the form input data.
 **data-request-query** | specifies additional GET parameters to be sent to the server and added to the current URL query string.
 **data-request-before-update** | specifies JavaScript code to execute directly before the page contents are updated.
-**data-request-success** | specifies JavaScript code to execute after the request is successfully completed.
-**data-request-error** | specifies JavaScript code to execute if the request encounters an error.
-**data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error.
+**data-request-success** | specifies JavaScript code to execute after the request is successfully completed. The `data` variable is available in this function containing the response data.
+**data-request-error** | specifies JavaScript code to execute if the request encounters an error. The `data` variable is available in this function containing the response data.
+**data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error. The `data` variable is available in this function containing the response data.
 **data-request-cancel** | specifies JavaScript code to execute if the user aborts the request or cancels it via a confirmation dialog.
 **data-request-message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](../features/flash-messages.md).
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show an AJAX loading indicator. The feature uses CSS display `block` and `none` attributes to manage the element visibility.
