@@ -50,6 +50,27 @@ You may modify the extension with the `extension` option. This process will atte
 }) }}" />
 ```
 
+## Custom Folder Names
+
+When using custom filenames, the filename will still contain a trailing hash to ensure uniqueness within the resizer resource directory. In most cases this is enough to satisfy basic SEO requirements. For example, the file will appear in the system like so.
+
+- `.../800_600_0_0_auto/my-seo-friendly-name_001a14981ffe90700046616c5f415467.png`
+
+A `group` can be specified as a folder name, this will place the image in a dedicated resource group.
+
+```twig
+<img src="{{ 'banner.jpg'|resize(800, 600, {
+    filename: 'my-seo-friendly-name',
+    group: '2024-banners'
+}) }}" />
+```
+
+For example, the above will place the file in the following directory:
+
+- `.../800_600_0_0_auto/2024-banners/my-seo-friendly-name.png`
+
+However, keep in mind, this approach can be prone to naming collisions. If a different file is resized using the same name and resize options, it will output the original file since there is no unique hash added to the path.
+
 ## Available Sources
 
 You may reference images from multiple sources, including the following paths:
