@@ -12,7 +12,7 @@ You can access the current request method object via `this.request.method` and i
 ```twig
 {% if this.request.method == 'GET' %}
     <!-- Do GET Logic -->
-{% else this.request.method == 'POST' %}
+{% elseif this.request.method == 'POST' %}
     <!-- Do POST Logic -->
 {% endif %}
 ```
