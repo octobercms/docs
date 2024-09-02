@@ -32,7 +32,7 @@ Property | Description
 **btnAddRowBelowLabel** | defines a custom label for the "Add Row Below" button.
 **btnDeleteRowLabel** | defines a custom label for the "Delete Row" button.
 **columns** | an array representing the column configuration of the data table. See the *Column configuration* section below.
-**deleting** | allow records to be deleted from the data table. Default: `false`.
+**deleting** | allow records to be deleted from the data table. Default: `true`.
 **dynamicHeight** | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
 **fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
 **height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
