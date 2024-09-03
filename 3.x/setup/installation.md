@@ -132,6 +132,10 @@ The request timeout on the web server should be increased or disabled. For examp
 This issue can appear when internals try to use the OPcache internals. This can be disabled by setting the **force_bytecode_invalidation** configuration to `false` inside the **config/cms.php** file.
 :::
 
+::: details Invalid credentials (HTTP 403) for '...", aborting.
+This error can appear in Composer when your project license has expired, try logging in to your account and check that the project has an active license. If the license is active, you can reset it with the `project:set` artisan command.
+:::
+
 #### See Also
 
 ::: also
