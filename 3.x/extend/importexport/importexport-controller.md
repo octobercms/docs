@@ -179,7 +179,7 @@ export:
     useList: true
 ```
 
-Then simply add button to the [list toolbar](../lists/list-controller.md):
+Then simply add an export button to the [list toolbar](../lists/list-controller.md):
 
 ```php
 <a
@@ -188,6 +188,17 @@ Then simply add button to the [list toolbar](../lists/list-controller.md):
     Export Records
 </a>
 ```
+
+Similarly, to add an import button, the code would look like this:
+
+```php
+<a
+    href="<?= Backend::url('acme/campaign/subscribers/import') ?>"
+    class="btn btn-default oc-icon-upload">
+    Import Records
+</a>
+```
+
 
 If you are using [multiple list definitions](../lists/list-controller.md), then you can supply the list definition.
 
