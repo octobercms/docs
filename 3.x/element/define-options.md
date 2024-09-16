@@ -104,7 +104,7 @@ Property | Description
 **readOnly** | specifies if the option is read-only or not.
 **disabled** | specifies if the option is disabled or not.
 **hidden** | defines the option without ever displaying it.
-**cssColor** | defines a status indicator color for the option (dropdown)
+**color** | defines a status indicator color for the option as a hex color (dropdown)
 **icon** | specifies an icon name for this option (dropdown)
 **image** | specifies an image URL for this option (dropdown)
 **children** | specifies child options as another array for a nested structure (checkbox list)
