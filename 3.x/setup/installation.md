@@ -133,7 +133,7 @@ This issue can appear when internals try to use the OPcache internals. This can 
 :::
 
 ::: details Invalid credentials (HTTP 403) for '...", aborting.
-This error can appear in Composer when your project license has expired, try logging in to your account and check that the project has an active license. If the license is active, you can reset it with the `project:set` artisan command.
+This error can appear in Composer when the **auth.json** file is missing on your server or your project license has expired, try logging in to your account and check that the project has an active license. If the license is active, you can reset it with the `project:set` artisan command.
 :::
 
 #### See Also
