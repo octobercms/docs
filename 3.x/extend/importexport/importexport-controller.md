@@ -29,12 +29,12 @@ The configuration file referred in the `$importExportConfig` property is defined
 ```yaml
 # config_import_export.yaml
 import:
-    title: Import subscribers
+    title: Import Subscribers
     modelClass: Acme\Campaign\Models\SubscriberImport
     list: $/acme/campaign/models/subscriber/columns.yaml
 
 export:
-    title: Export subscribers
+    title: Export Subscribers
     modelClass: Acme\Campaign\Models\SubscriberExport
     list: $/acme/campaign/models/subscriber/columns.yaml
 ```
