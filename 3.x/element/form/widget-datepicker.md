@@ -28,6 +28,7 @@ Property | Description
 **disableDays** | days that cannot be selected, can be a number to represent Sunday (`0`) to Saturday (`6`), or a specific date (`2024-10-01`).
 **firstDay** | the first day of the week. Default: `0` (Sunday).
 **twelveHour** | display a 12-hour clock for selecting time. Default: `false`
+**showOnlyHours** | allows for selecting hours only while selecting time. Default: `false`
 **showWeekNumber** | show week numbers at head of row. Default: `false`
 **useTimezone** | convert the date and time from the backend specified timezone preference.
 
