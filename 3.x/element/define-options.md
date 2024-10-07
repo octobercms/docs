@@ -42,20 +42,6 @@ options:
     image: [Image, '/path/to/image.png']
 ```
 
-## Option Methods
-
-The `optionsMethod` property specifies a callable PHP method that can be used to request the available options. Typically the method name will refer to a method local to the associated model.
-
-```yaml
-optionsMethod: getMyOptionsFromModel
-```
-
-The method name can also be a static method on any object.
-
-```yaml
-optionsMethod: MyAuthor\MyPlugin\Helpers\FormHelper::getMyStaticMethodOptions
-```
-
 ## Option Presets
 
 The `optionsPreset` property specifies a preset code that can be used to request the available options.
@@ -73,3 +59,60 @@ Preset | Description
 **locales** | Lists available locales (eg: `en-au`)
 **flags** | Lists locales with their icons as flags (eg: `[en-au, flag-au]`)
 **timezones** | Lists available timezones (eg: `Australia/Sydney`)
+
+## Option Methods
+
+The `optionsMethod` property specifies a callable PHP method that can be used to request the available options. Typically the method name will refer to a method local to the associated model.
+
+```yaml
+optionsMethod: getMyOptionsFromModel
+```
+
+The method name can also be a static method on any object.
+
+```yaml
+optionsMethod: MyAuthor\MyPlugin\Helpers\FormHelper::getMyStaticMethodOptions
+```
+
+### Detailed Option Definitions
+
+Inside the method, an detailed definition can be used to specify more advanced options, such as setting individual attributes for each option. A detailed definition is identified by its associated array structure.
+
+```php
+public function getDetailedFieldOptions()
+{
+    return [
+        1 => [
+            'label' => 'Option 1',
+            'comment' => 'This is option one'
+        ],
+        2 => [
+            'label' => 'Option 2',
+            'comment' => 'This is option two',
+            'disabled' => true
+        ]
+    ];
+}
+```
+
+The following properties are supported where possible:
+
+Property | Description
+------------- | -------------
+**label** | a name when displaying the option to the user.
+**comment** | places a descriptive comment below the option label.
+**readOnly** | specifies if the option is read-only or not.
+**disabled** | specifies if the option is disabled or not.
+**hidden** | defines the option without ever displaying it.
+**color** | defines a status indicator color for the option as a hex color (dropdown)
+**icon** | specifies an icon name for this option (dropdown)
+**image** | specifies an image URL for this option (dropdown)
+**children** | specifies child options as another array for a nested structure (checkbox list)
+
+#### See Also
+
+::: also
+* [Checkbox List Field](./form/field-checkboxlist.md)
+* [Dropdown Field](./form/field-dropdown.md)
+* [Radio Field](./form/field-radio.md)
+:::

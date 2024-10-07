@@ -148,7 +148,7 @@ class extends oc.ControlBase {
 }
 ```
 
-To bind a local event handler to a child element, pass the event name, CSS selector, and event handler function.
+To bind a local event handler to a child element, pass the event name, CSS selector, and event handler function. The `event.delegateTarget` will always contain the element that matched the CSS selector.
 
 ```js
 class extends oc.ControlBase {
@@ -156,8 +156,8 @@ class extends oc.ControlBase {
         this.listen('click', '.toolbar-find-button', this.onClickFindButton);
     }
 
-    onClickFindButton() {
-        console.log('You clicked the find button inside the control!');
+    onClickFindButton(event) {
+        console.log('You clicked the find button inside the control: ' + event.delegateTarget.innerText);
     }
 }
 ```

@@ -124,6 +124,10 @@ You may then link to this page in Twig with the following markup, where the `fil
 }) }}
 ```
 
+::: tip
+If you intend to display the file inline, as an image for example, call the `$file->output()` method instead.
+:::
+
 #### See Also
 
 ::: also

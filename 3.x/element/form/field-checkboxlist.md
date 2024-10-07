@@ -28,6 +28,7 @@ Property | Description
 **cssClass** | used for setting the options as inline.
 **inlineOptions** | display the options side-by-side instead of stacked, when less than 10 options.
 **placeholder** | a message to display when there are no records selected (preview context).
+**cumulative** | when checkboxes are nested, checking a parent will check all the children. Default: `false`
 
 You may use the `default` property to set a default value, where the value is the key of the option.
 
@@ -54,9 +55,18 @@ permissions:
     quickselect: true
 ```
 
+When using [detailed options](../define-options.md) the checkboxes can appear in a nested structure, set the `cumulative` property to `true` if you want to check all child checkboxes when a parent checkbox is selected.
+
+```yaml
+permissions:
+    type: checkboxlist
+    cumulative: true
+```
+
 #### See Also
 
 ::: also
+* [Detailed Option Definitions](../define-options.md)
 * [Dropdown Form Field](./field-dropdown.md)
 * [Radio Form Field](./field-radio.md)
 :::

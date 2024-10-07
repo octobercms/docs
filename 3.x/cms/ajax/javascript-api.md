@@ -158,7 +158,7 @@ document.querySelector('#result').addEventListener('ajax:update', function() {
 Execute a single request that shows a Flash Message using logic handler.
 
 ```js
-oc.request('onDoSomething', {
+oc.ajax('onDoSomething', {
     flash: true,
     handleFlashMessage: function(message, type) {
         oc.flashMsg({ message: message, type: type });
