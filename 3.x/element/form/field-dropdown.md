@@ -180,6 +180,29 @@ public static function staticMethodOptions($model, $formField)
 }
 ```
 
+To use option groups (`optgroup`) you can specify child items using a [detailed option definition](../define-options.md). In the example below, the label for the option group is taken from the value so it doesn't need to be repeated. The `children` property contains the options for that group and only one level of options are supported.
+
+```php
+public function getDetailedFieldOptions()
+{
+    return [
+        'Option Group' => [
+            'children' => [
+                1 => [
+                    'label' => 'Option 1',
+                    'comment' => 'This is option one',
+                ],
+                2 => [
+                    'label' => 'Option 2',
+                    'comment' => 'This is option two',
+                ],
+                // ...
+            ]
+        ],
+    ];
+}
+```
+
 ## Custom Select2 Configuration
 
 The dropdown field uses the [Select2 control](https://select2.org/) to render the field. In some cases you may wish to specify custom configuration for this field. This is possible using the `attributes` property along with the [data attribute configuration](https://select2.org/configuration/data-attributes) supplied by Select2.
