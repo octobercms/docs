@@ -188,14 +188,8 @@ public function getDetailedFieldOptions()
     return [
         'Option Group' => [
             'children' => [
-                1 => [
-                    'label' => 'Option 1',
-                    'comment' => 'This is option one',
-                ],
-                2 => [
-                    'label' => 'Option 2',
-                    'comment' => 'This is option two',
-                ],
+                1 => 'Option 1',
+                2 => 'Option 2',
                 // ...
             ]
         ],
