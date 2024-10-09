@@ -187,6 +187,7 @@ public function getDetailedFieldOptions()
 {
     return [
         'Option Group' => [
+            'optgroup' => true,
             'children' => [
                 1 => 'Option 1',
                 2 => 'Option 2',

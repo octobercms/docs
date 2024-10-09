@@ -107,6 +107,7 @@ Property | Description
 **color** | defines a status indicator color for the option as a hex color (dropdown)
 **icon** | specifies an icon name for this option (dropdown)
 **image** | specifies an image URL for this option (dropdown)
+**optgroup** | set to `true` if the children should belong to an option group structure, default: `false` (dropdown)
 **children** | specifies child options as another array for a nested structure (checkbox list)
 
 Use the `children` property if the option definition supports nesting. Generally, this will display a structure for checkbox lists and implement an option group for dropdowns.
