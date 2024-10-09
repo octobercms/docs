@@ -109,6 +109,27 @@ Property | Description
 **image** | specifies an image URL for this option (dropdown)
 **children** | specifies child options as another array for a nested structure (checkbox list)
 
+Use the `children` property if the option definition supports nesting. Generally, this will display a structure for checkbox lists and implement an option group for dropdowns.
+
+```php
+public function getDetailedFieldOptions()
+{
+    return [
+        1 => [
+            'label' => 'Option 1',
+            'comment' => 'This is option one',
+            'children' => [
+                2 => [
+                    'label' => 'Option 2',
+                    'comment' => 'This is option two',
+                ],
+                // ...
+            ]
+        ],
+    ];
+}
+```
+
 #### See Also
 
 ::: also

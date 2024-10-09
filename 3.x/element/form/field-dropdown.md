@@ -29,6 +29,7 @@ Property | Description
 **optionsPreset** | take options from a [preset list of defined options](../define-options.md).
 **emptyOption** | text to display when allowing an empty option.
 **showSearch** | allow the user to search options. Default: `true`.
+**attributes** | an associative array of attributes and values to apply to the select field, useful for specifying custom Select2 configuration (see below).
 
 Generally `options` are defined with key-value pair, where the value and label are independently specified.
 
@@ -178,3 +179,50 @@ public static function staticMethodOptions($model, $formField)
     return ['published' => 'Published', ...];
 }
 ```
+
+To use option groups (`optgroup`) you can specify child items using a [detailed option definition](../define-options.md). In the example below, the label for the option group is taken from the value so it doesn't need to be repeated. The `children` property contains the options for that group and only one level of options are supported.
+
+```php
+public function getDetailedFieldOptions()
+{
+    return [
+        'Option Group' => [
+            'children' => [
+                1 => 'Option 1',
+                2 => 'Option 2',
+                // ...
+            ]
+        ],
+    ];
+}
+```
+
+## Custom Select2 Configuration
+
+The dropdown field uses the [Select2 control](https://select2.org/) to render the field. In some cases you may wish to specify custom configuration for this field. This is possible using the `attributes` property along with the [data attribute configuration](https://select2.org/configuration/data-attributes) supplied by Select2.
+
+For example, you may fine tune the auto completion behavior of the dropdown.
+
+```yaml
+attributes:
+    data-handler: onGetClientOptions
+    data-minimum-input-length: 3
+    data-process-Results: true
+    data-ajax--delay: 300
+```
+
+When used with a [Tag List field](./widget-taglist.md) the following will keep the dropdown open after an item has been selected.
+
+```yaml
+categories:
+    type: taglist
+    attributes:
+        data-close-on-select: false
+```
+
+#### See Also
+
+::: also
+* [Tag List Form Field](./widget-taglist.md)
+* [Select2 Control](https://select2.org/)
+:::
