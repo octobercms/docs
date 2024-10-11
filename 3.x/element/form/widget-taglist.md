@@ -26,6 +26,7 @@ Property | Description
 **optionsMethod** | specifies a method name for predefined options, defined on the model or as a static method, eg `Class::method`. Set to `true` to use model **get*Field*Options** method.
 **nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: `name`
 **useKey** | use the key instead of value for saving and reading data. Default: `false`
+**maxItems** | maximum number of tags that can be included or selected.
 
 A tag list support the same methods for defining the options as the [dropdown field type](./field-dropdown.md).
 
