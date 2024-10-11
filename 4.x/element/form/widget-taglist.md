@@ -21,6 +21,7 @@ Property | Description
 **comment** | places a descriptive comment below the field.
 **mode** | controls how the value is returned, either `string`, `array` or `relation`. Default: `string`
 **nameFrom** | if relation mode is used, a model attribute name for displaying the tag name. Default: `name`
+**maxItems** | maximum number of tags that can be included or selected.
 **separator** | separate tags with the specified character, either `comma` or `space`. Default: `comma`
 **options** | specifies an array for predefined options.
 **optionsMethod** | specifies a method name for predefined options, defined on the model or as a static method, eg `Class::method`. Set to `true` to use model **get*Field*Options** method.
