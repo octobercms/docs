@@ -101,6 +101,10 @@ fields:
         # [...]
 ```
 
+::: tip
+A **fields** definition must exist for a **columns** or **scopes** definition to be valid. To hide the definition from the form, use `hidden: true` to hide it from the form, and then `hidden: false` to display it in the column or scope.
+:::
+
 List columns have short-hand values that can be used. Passing a string will replace the label, passing `true` will include the default column, passing `false` will remove the column and passing `invisible` will make the column invisible.
 
 ```yaml
@@ -109,6 +113,7 @@ columns:
     myfield: true         # Shown
     myfield: false        # Hidden
     myfield: invisible    # Invisible
+    myfield: [...]        # Config Array
 ```
 
 Filter scopes have a similar short-hand values to the list columns that can be used.
@@ -118,6 +123,7 @@ scopes:
     myfield: Filter Label # New Label
     myfield: true         # Shown
     myfield: false        # Hidden
+    myfield: [...]        # Config Array
 ```
 
 ## Form Field Validation
