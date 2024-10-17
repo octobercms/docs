@@ -3,14 +3,14 @@ subtitle: Validate form submissions using the AJAX framework.
 ---
 # Validation
 
-Validating forms checks the user input against a set of predefined rules.
+Validating forms checks the user input against a set of predefined rules. When using the [AJAX framework](../ajax/introduction.md) form validation occurs without any special configuration, where the invalid field will be focused and an error message is displayed (usually as an alert window).
 
-## Performing Validation
+## Flash Validation
 
-To enable validation features, include the `data-request-validate` attribute on a HTML form tag. The following is a minimal example of form validation.
+For basic validation, including the [`data-request-flash` attribute](./flash-messages.md) on the HTML form tag provides a clean and simple interface for displaying validation messages and is usually good enough for most implementations.
 
 ```html
-<form data-request="onSubmit" data-request-validate>
+<form data-request="onSubmit" data-request-flash>
     <div>
         <label>Name</label>
         <input name="name" />
@@ -34,6 +34,27 @@ function onSubmit()
 ```
 
 When the AJAX framework encounters the `ValidationException`, it will automatically focus the first invalid field and display error messages, if configured.
+
+## Inline Validation
+
+For a more comprehensive validation experience, inline validation can be enabled by including the `data-request-validate` attribute on the HTML form tag. The following is a minimal example of form validation using this approach with the error message displayed within the form.
+
+```html
+<form data-request="onSubmit" data-request-validate>
+    <div class="alert alert-danger" data-validate-error>
+        <!-- Validation Message -->
+    </div>
+
+    <div>
+        <label>Name</label>
+        <input name="name" />
+    </div>
+
+    <button data-attach-loading>
+        Submit
+    </button>
+</form>
+```
 
 ### Validating a Single Field
 
@@ -83,7 +104,7 @@ function onSubmit()
 
 ### Custom Error Messages & Attributes
 
-To change the deafult validation messages, you may pass custom messages to the `validate` method. The keys in the messages array (third argument) follow the `attribute.rule` format.
+To change the default validation messages, you may pass custom messages to the `validate` method. The keys in the messages array (third argument) follow the `attribute.rule` format.
 
 ```php
 $messages = [
@@ -142,7 +163,7 @@ If the element is left empty, it will be populated with the validation text from
 
 ### Displaying Errors with Flash Messages
 
-When using validation features in combination with the [`data-request-flash` attribute](./flash-messages.md), the validation errors take priority and suppress the flash message. To display both at the same time, set the attribute to a wildcard (`*`) to display all flash message types, including validation.
+When using the `data-request-validate` attribute in combination with the [`data-request-flash` attribute](./flash-messages.md), the validation errors take priority and suppress the flash message. To display both at the same time, set the attribute to a wildcard (`*`) to display all flash message types, including validation.
 
 ```html
 <form
