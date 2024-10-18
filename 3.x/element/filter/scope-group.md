@@ -22,6 +22,7 @@ Property | Description
 ------------- | -------------
 **options** | available options for the filter, as an array.
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
+**optionsScope** | applies a [model scope method](../filter-scopes.md) to the options query.
 **conditions** | a custom SQL select statement to use for the filter.
 **nameFrom** | the column name to use in the model class, used for displaying the name. Default: `name`.
 **modelClass** | class of the model to use for the available filter records.
@@ -99,5 +100,23 @@ The **getRoleGroupOptions** method definition.
 public function getRoleGroupOptions()
 {
     return $this->whereNull('parent_id')->pluck('name', 'id')->all();
+}
+```
+
+The `optionsScope` property allows you to apply a scope to the default query that locates the available options.
+
+```yaml
+roles:
+    label: Role
+    type: group
+    nameFrom: name
+    modelClass: October\Test\Models\Role
+    optionsScope: applyRoleOptionsFilter
+```
+
+```php
+public function scopeApplyRoleOptionsFilter($query)
+{
+    return $query->where('id', '<>', 1);
 }
 ```
