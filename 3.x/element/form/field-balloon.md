@@ -25,6 +25,7 @@ Property | Description
 **comment** | places a descriptive comment below the field.
 **options** | available options for the dropdown, as an array.
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
+**allowEmpty** | allows the selection to be unset by clicking on the active item, default: `false`.
 
 You may use the `default` property to set a default value, where the value is the key of the option.
 
@@ -33,6 +34,15 @@ gender:
     type: balloon-selector
     label: Gender
     default: female
+```
+
+Set the `allowEmpty` property to **true** to allow the user to set an empty value by unselecting the active item.
+
+```yaml
+gender:
+    type: balloon-selector
+    label: Gender
+    allowEmpty: true
 ```
 
 #### See Also
