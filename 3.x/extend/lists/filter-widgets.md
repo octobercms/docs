@@ -11,8 +11,8 @@ Filter Widget classes reside inside the **filterwidgets** directory of the plugi
 ├── `filterwidgets`
 |   ├── discount
 |   |   ├── partials
-|   |   |   └── _discount.htm  _← Partial File_
-|   |   |   └── _discount_form.htm
+|   |   |   └── _discount.php  _← Partial File_
+|   |   |   └── _discount_form.php
 |   |   └── assets
 |   |       ├── js
 |   |       |   └── discount.js  _← JavaScript File_
@@ -203,4 +203,56 @@ public function applyScopeToQuery($query)
         $query->where('discount', 0);
     }
 }
+```
+
+## Working with Inline Filters
+
+Inline filters are filters that can exist as part of the main filter interface, instead of displaying them as a popover form. Accordingly, inside the filter widget class the `renderForm` method is not required and only the `render` method is used to display the filter contents.
+
+The example below shows an inline search filter with a search button. It is important to keep in mind that since the filter is inline, the input field names are shared across the main form, so the search input uses the `$name` variable, instead of the generic `Filter` name.
+
+```php
+<?php
+    $activeValue = $scope->scopeValue !== null ? $scope->value : $scope->default;
+?>
+<div
+    class="filter-scope scope-inline"
+    data-scope-name="<?= $scope->scopeName ?>">
+    <input
+        placeholder="<?= e($this->getHeaderValue($scope)) ?>"
+        name="<?= $name ?>[value]"
+        value="<?= e($activeValue) ?>"
+        class="form-control form-control-sm" />
+    <button
+        class="btn btn-sm btn-search"
+        data-filter-action="apply">
+        <i class="icon-search"></i>
+    </button>
+</div>
+```
+
+The next example shows an inline balloon selector control.
+
+```php
+<?php
+    $activeValue = $scope->scopeValue !== null ? $scope->value : $scope->default;
+?>
+<div
+    data-scope-name="<?= $scope->scopeName ?>"
+    data-control="balloon-selector"
+    data-selector-allow-empty
+    class="filter-scope scope-inline control-balloon-selector form-control-sm">
+    <ul class="list-unstyled m-0">
+        <?php foreach ((array) $scope->options as $key => $value): ?>
+            <li
+                data-value="<?= $key ?>"
+                class="small <?= $key === $activeValue ? 'active' : '' ?>"
+                data-filter-action="apply">
+                <?= $value ?>
+            </li>
+        <?php endforeach ?>
+    </ul>
+    <!-- Hidden input to store the selected filter value -->
+    <input type="hidden" name="<?= $name ?>[value]" value="<?= $activeValue ?>">
+</div>
 ```
