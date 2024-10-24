@@ -23,7 +23,7 @@ Property | Description
 **select** | a custom SQL select statement to use for the name.
 **emptyOption** | text to display when there is no available selections.
 **conditions** | specifies a raw where query statement to apply to the model query.
-**scope** | applies a [model query scope](../../extend/database/model.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
+**modelScope** | applies a [model query scope](../../extend/database/model.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
 **defaultSort** | sets a default sorting column and direction, supports a string for the column name or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **useController** | automatically detects if this field configured with [Relation Controller behavior](../../extend/forms/relation-controller.md) and use it. Default: `true`
 **controller** | specifies an array to manually configure integration with the [Relation Controller behavior](../../extend/forms/relation-controller.md).
@@ -77,16 +77,16 @@ state:
 
 ### PHP Query Scopes
 
-You can provide a model scope to use to filter the results with the `scope` property.
+You can provide a model scope to use to filter the results with the `modelScope` property.
 
 ```yaml
 user:
     label: User
     type: relation
-    scope: withTrashed
+    modelScope: withTrashed
 ```
 
-The `scope` can be used to connect two related fields, for example, connecting a `Country` and `State` model, where the available states are filtered by the selected country. The `dependsOn` property enables [field dependencies](../../extend/forms/field-dependencies.md) and updates the `state` options when a `country` is selected.
+The `modelScope` can be used to connect two related fields, for example, connecting a `Country` and `State` model, where the available states are filtered by the selected country. The `dependsOn` property enables [field dependencies](../../extend/forms/field-dependencies.md) and updates the `state` options when a `country` is selected.
 
 ```yaml
 country:
@@ -97,10 +97,10 @@ state:
     label: State
     type: relation
     dependsOn: country
-    scope: filterStates
+    modelScope: filterStates
 ```
 
-The `scope` value **filterStates** translates to the `scopeFilterStates` method defined in the `State` model. The `$model` (second argument) supplied to the [model query scope](../../extend/database/model.md) lets you capture the selected country and filter the available options.
+The `modelScope` value **filterStates** translates to the `scopeFilterStates` method defined in the `State` model. The `$model` (second argument) supplied to the [model query scope](../../extend/database/model.md) lets you capture the selected country and filter the available options.
 
 ```php
 public function scopeFilterStates($query, $model)

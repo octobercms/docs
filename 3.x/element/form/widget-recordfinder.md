@@ -31,7 +31,7 @@ Property | Description
 **defaultSort** | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **recordsPerPage** | records to display per page, use 0 for no pages. Default: `10`
 **conditions** | specifies a raw where query statement to apply to the list model query.
-**scope** | applies a [model query scope](../../extend/database/model.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
+**modelScope** | applies a [model query scope](../../extend/database/model.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 **searchMode** | defines the search strategy to either contain all words, any word or exact phrase. Supported options: all, any, exact. Default: `all`.
 **searchScope** | specifies a [model query scope](../../extend/database/model.md) method defined in the **related form model** to apply to the search query, the first argument will contain the search term.
 **useRelation** | flag for using the name of the field as a relation name to interact with directly on the parent model. Default: `true`. Disable to return just the selected model's ID
