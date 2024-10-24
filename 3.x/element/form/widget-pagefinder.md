@@ -160,10 +160,10 @@ The following `withComponent` method will find all pages that use the `blogPosts
 'cmsPages' => Page::withComponent('blogPosts')->all();
 ```
 
-Use `whereComponent` to find all pages using the `section` component where the property `entrySlug` is set to true.
+Use `whereComponent` to find all pages using the `section` component where the property `handle` is set to **Your\Handle**.
 
 ```php
-'cmsPages' => Page::whereComponent('section', 'entrySlug', true)->all();
+'cmsPages' => Page::whereComponent('section', 'handle', 'Your\Handle')->all();
 ```
 
 Use `inTheme` to find pages in another theme by passing the theme code.

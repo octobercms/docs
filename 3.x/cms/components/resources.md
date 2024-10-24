@@ -59,7 +59,7 @@ url = "/author/:slug"
 
 [section author]
 handle = "Blog\Author"
-entrySlug = "{{ :slug }}"
+identifier = "slug"
 
 [resources]
 vars[authorIdPage] = 'Author ID is: {{ author.id }}'

@@ -172,7 +172,7 @@ url = "/api/blog/post/:slug"
 
 [section post]
 handle = "Blog\Post"
-entrySlug = "{{ :slug }}"
+identifier = "slug"
 ```
 ```twig
 {% if post %}
