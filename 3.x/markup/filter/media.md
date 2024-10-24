@@ -20,5 +20,5 @@ If the media manager address is __https://cdn.octobercms.com__ the above example
 You may generate URLs in PHP using the `Media\Classes\MediaLibrary` class and `url` method.
 
 ```php
-MediaLibrary::url('relative/path/to/asset.jpg');
+\Media\Classes\MediaLibrary::url('relative/path/to/asset.jpg');
 ```

@@ -2,7 +2,11 @@
 
 ## Introduction
 
-October CMS ships with an image resizer that lets you change the shape and size of supported images. To resize an image, use the `open` method on the `Resizer` facade to target a file path.
+October CMS ships with an image resizer that lets you change the shape and size of supported images.
+
+## Resize a File on Disk
+
+To resize an image, use the `open` method on the `Resizer` facade to target a file path.
 
 ```php
 $image = Resizer::open('path/to/image.jpg');
@@ -32,10 +36,6 @@ Finally, use the `save` method to save the resized image to a new location.
 $image->save('path/to/new/file.jpg');
 ```
 
-::: tip
-There is also a `|resize` [markup filter](../../markup/filter/resize.md) that can be used for resizing images in your themes.
-:::
-
 ### Resize Parameters
 
 The following elements are supported in the options array are supported:
@@ -59,3 +59,30 @@ Mode | Description
 `landscape` | Resize to the given width and adapt the height to preserve aspect ratio
 `crop` | Crop to the given dimensions after fitting as much of the image as possible inside those
 `fit` | Fit the image inside the given maximal dimensions, keeping the aspect ratio
+
+## Resize a File to Browser
+
+The `System\Classes\ResizeImages` class can be used to resize an image and serve it via a URL:
+
+```php
+$url = \System\Classes\ResizeImages::resize($image, $width, $height, $options);
+```
+
+If you are resizing a media library item, you should resolve the media path using the `Media\Classes\MediaLibrary` class and `url` method.
+
+```php
+$image = \Media\Classes\MediaLibrary::url('relative/path/to/asset.jpg');
+
+$url = \System\Classes\ResizeImages::resize($image, $width, $height, $options);
+```
+
+::: tip
+There is also a `|resize` [markup filter](../../markup/filter/resize.md) that can be used for resizing images in your themes.
+:::
+
+#### See Also
+
+::: also
+* [Resize Filter](../../markup/filter/resize.md)
+* [Media Filter](../../markup/filter/media.md)
+:::
