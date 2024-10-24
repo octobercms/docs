@@ -20,7 +20,7 @@ Property | Description
 ------------- | -------------
 **default** | specifies a default value for the filter.
 **conditions** | for each condition, set to `true` or `false` to make it available, or as a string, can be custom SQL statement for selected conditions. Default: `true`.
-**modelScope** | applies a [query scope method](../../extend/database/model.md) to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
+**modelScope** | applies a [model query scope](../../extend/database/model.md) method to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model that the widget will be attaching its value to, i.e. the parent model.
 
 The following `conditions` are available for filtering.
 

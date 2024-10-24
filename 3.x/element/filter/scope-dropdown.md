@@ -23,7 +23,7 @@ Property | Description
 **optionsMethod** | take options from a method defined on the model or as a static method, eg `Class::method`.
 **conditions** | a custom SQL select statement to use for the filter.
 **emptyOption** | text to display when there is no available selections.
-**modelScope** | applies a [query scope method](../../extend/database/model.md) to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model query that the widget will be attaching its value to, i.e. the parent model.
+**modelScope** | applies a [model query scope](../../extend/database/model.md) method to the filter query, can be a model method name or a static PHP class method (`Class::method`). The first argument will contain the model query that the widget will be attaching its value to, i.e. the parent model.
 
 You may pass custom SQL to the conditions as a string where `:value` contains the filtered value.
 

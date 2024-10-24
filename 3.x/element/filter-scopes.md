@@ -43,7 +43,7 @@ Property | Description
 **type** | defines how this scope should be displayed. Default: `group`.
 **conditions** | enables or disables condition functions or specifies a raw where query statement to apply to each condition, see the scope type definition for details.
 **modelClass** | class of the model to use as a data source and reference for local method calls.
-**modelScope** | specifies a [query scope method](../extend/database/model.md) defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the scope definition, including its populated value(s).
+**modelScope** | specifies a [model query scope](../extend/database/model.md) method defined in the **list model** to apply to the list query. The first argument will contain the query object (as per a regular scope method) and the second argument will contain the scope definition, including its populated value(s).
 **options** | options to use if filtering by multiple items, supplied as an array.
 **optionsMethod** | request options from a method name defined on the model or as a static method call, eg `Class::method`.
 **emptyOption** | an optional label for an intentional empty selection.
