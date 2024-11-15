@@ -66,7 +66,7 @@ The Vue component for the widget must be defined in a file located in the assets
 ```jsx
 oc.Modules.register('plugin.author.component.mycustomwidget', function () {
     Vue.component('plugin-author-vuecomponents-mycustomwidget', {
-        extends: oc.Modules.import('backend.vuecomponents.dashboard.widget-base'),
+        extends: new Backend_VueComponents_Dashboard_WidgetBase,
         data: function () {
             return {
             }
