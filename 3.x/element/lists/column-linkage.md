@@ -17,6 +17,7 @@ The following properties are supported.
 Property | Description
 ------------- | -------------
 **linkText** | text to display for the link, optional.
+**linkUrl** | provide a URL instead of taking it from the record value
 **attributes** | an array of HTML attributes to pass to the anchor element.
 
 Use the `attributes` property to add custom HTML attributes.
@@ -32,6 +33,16 @@ website:
 ::: tip
 The `linkage` column type will automatically resolve [page finder link values](../form/widget-pagefinder.md).
 :::
+
+Use the `linkUrl` and `linkText` to explicitly provide a URL, which can either be a backend URI or a fully qualified URL. Attributes from the record will be resolved automatically.
+
+```yaml
+open_link:
+    label: View
+    type: linkage
+    linkText: View Dashboard
+    linkUrl: backend/index/:code/:id
+```
 
 ## Custom Link Text
 
