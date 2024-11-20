@@ -32,9 +32,7 @@ Property Title | specifies the property title, visible to the end user in the sn
 Code           | specifies the property code, used for accessing the property values in the partial markup.
 Type           | the property type, available types are `string`, `dropdown` and `checkbox`.
 Default        | the default property value, for checkbox properties use `0` and `1` values.
-Options        | the option list for the dropdown properties.
-
-When defining **options**, list should have the following format: `key:Value | key2:Value`. The keys represent the internal option value, and values represent the string that users see in the drop-down list. The pipe character separates individual options. Example: `us:US | ca:Canada`. The key is optional, if it's omitted (`US | Canada`), the internal option value will be zero-based integer (`0`, `1`, ...). It's recommended to always use explicit option keys. The keys can contain only Latin letters, digits and characters `-` and `_`.
+Options        | the option list for the dropdown properties (see below).
 
 Any property defined in the property list can be accessed within the partial markdown as a usual variable, for example:
 
@@ -43,6 +41,14 @@ The country name is {{ country }}
 ```
 
 In addition, properties can be passed to the partial components using [external property values](../themes/components.md).
+
+### Defining Options
+
+When defining **options**, list should have the following format: `key:Value | key2:Value`.  The keys represent the internal option value, and values represent the string that users see in the drop-down list. The pipe character separates individual options, for example: `us:US | ca:Canada`.
+
+The key is optional, if it's omitted (`US | Canada`), the internal option value will be zero-based integer (`0`, `1`, ...). It's recommended to always use explicit option keys. The keys can contain only Latin letters, digits and characters `-` and `_`.
+
+Alternatively, the **options** property can also be defined as a reference to a static PHP class method (`Class::method`).
 
 ## Creating Snippets from Components
 
