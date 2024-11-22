@@ -133,44 +133,17 @@ location ~ ^/index.php {
 }
 
 # Allowlist
-location ~ ^/favicon\.ico { try_files $uri /index.php; }
-location ~ ^/sitemap\.xml { try_files $uri /index.php; }
-location ~ ^/robots\.txt { try_files $uri /index.php; }
-location ~ ^/humans\.txt { try_files $uri /index.php; }
+location ~ ^/(favicon\.ico|sitemap\.xml|robots\.txt|humans\.txt) { try_files $uri /index.php; }
 
 # Block all .dotfiles except well-known
 location ~ /\.(?!well-known).* { deny all; }
 
 ## Let nginx return 404 if static file not exists
-location ~ ^/storage/app/uploads/public { try_files $uri 404; }
-location ~ ^/storage/app/media { try_files $uri 404; }
-location ~ ^/storage/app/resources { try_files $uri 404; }
+location ~ ^/storage/app/(uploads/public|media|resources) { try_files $uri 404; }
 location ~ ^/storage/temp/public { try_files $uri 404; }
-
-location ~ ^/modules/.*/assets { try_files $uri 404; }
-location ~ ^/modules/.*/resources { try_files $uri 404; }
-location ~ ^/modules/.*/behaviors/.*/assets { try_files $uri 404; }
-location ~ ^/modules/.*/behaviors/.*/resources { try_files $uri 404; }
-location ~ ^/modules/.*/widgets/.*/assets { try_files $uri 404; }
-location ~ ^/modules/.*/widgets/.*/resources { try_files $uri 404; }
-location ~ ^/modules/.*/formwidgets/.*/assets { try_files $uri 404; }
-location ~ ^/modules/.*/formwidgets/.*/resources { try_files $uri 404; }
-location ~ ^/modules/.*/reportwidgets/.*/assets { try_files $uri 404; }
-location ~ ^/modules/.*/reportwidgets/.*/resources { try_files $uri 404; }
-
-location ~ ^/plugins/.*/.*/assets { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/resources { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/behaviors/.*/assets { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/behaviors/.*/resources { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/reportwidgets/.*/assets { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/reportwidgets/.*/resources { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/formwidgets/.*/assets { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/formwidgets/.*/resources { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/widgets/.*/assets { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/widgets/.*/resources { try_files $uri 404; }
-
-location ~ ^/themes/.*/assets { try_files $uri 404; }
-location ~ ^/themes/.*/resources { try_files $uri 404; }
+location ~ ^/modules/.*/((assets|resources)|((behaviors|widgets|formwidgets|reportwidgets)/.*/)(assets|resources)) { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/((assets|resources)|((behaviors|reportwidgets|formwidgets|widgets)/.*/)(assets|resources)) { try_files $uri 404; }
+location ~ ^/themes/.*/(?:assets|resources) { try_files $uri 404; }
 ```
 
 ### Lighttpd 配置
