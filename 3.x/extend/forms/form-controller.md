@@ -377,6 +377,13 @@ When integrated with the [list controller](../lists/list-controller.md), set the
 recordOnClick: popup
 ```
 
+The **recordOnClick** also supports passing a context to the Form Controller, for example, set the value to `popup@preview` for the preview context.
+
+```yaml
+# config_list.yaml
+recordOnClick: popup@preview
+```
+
 The create view can be opened using the `onLoadPopupForm` AJAX handler in conjunction with the popup control, as in the example below.
 
 ```html
