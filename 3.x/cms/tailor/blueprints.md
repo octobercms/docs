@@ -34,13 +34,14 @@ Property | Description
 **softDeletes** | enables soft deletion for this entry. Default: `true`
 **multisite** | enables multisite for this entry, sync records between group, locale or all sites. Supported values: `true`, `false`, `sync`, `locale`, `all`. Default: `false`
 **pagefinder** | includes blueprint type in the [pagefinder form widget](../../element/form/widget-pagefinder.md), supported values: `true`, `false`, `item`, `list` or array (see below). Default: `true`
+**defaultSort** | used by the `entry` and `stream` types, sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **customMessages** | customize the messages used in the user interface (see below).
 **showExport** | displays a toolbar button for exporting records. Default: `true`.
 **showImport** | displays a toolbar button for importing records. Default: `true`.
 
 ### Entry Variants
 
-While an entry type has no specific behavior, there are also several variants that can be used for organising content. The following types are variants of an entry.
+While an entry type has no specific behavior, there are also several variants that can be used for organizing content. The following types are variants of an entry.
 
 - **entry** is a basic entry for common purposes.
 - **single** is a single entry with dedicated fields, eg: Contact Us Page.
@@ -110,6 +111,18 @@ fields:
     content:
         label: Post Content
         type: richeditor
+```
+
+The `defaultSort` property is used to set the default sorting column when the blueprint record is displayed as a list. This will be set to the published date by default.
+
+```yaml
+handle: Blog\Post
+type: stream
+name: Blog Post
+
+defaultSort:
+    column: title
+    direction: asc
 ```
 
 ### Content Groups
