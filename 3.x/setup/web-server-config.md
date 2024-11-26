@@ -148,9 +148,9 @@ location ~ /\.(?!well-known).* { deny all; }
 location ~ ^/storage/app/(uploads/public|media|resources) { try_files $uri 404; }
 location ~ ^/storage/temp/public { try_files $uri 404; }
 location ~ ^/modules/.*/(assets|resources) { try_files $uri 404; }
-location ~ ^/modules/.*/((behaviors|widgets|formwidgets|reportwidgets)/.*/)(assets|resources) { try_files $uri 404; }
+location ~ ^/modules/.*/(behaviors|widgets|formwidgets|reportwidgets)/.*/(assets|resources) { try_files $uri 404; }
 location ~ ^/plugins/.*/.*/(assets|resources) { try_files $uri 404; }
-location ~ ^/plugins/.*/.*/((behaviors|reportwidgets|formwidgets|widgets)/.*/)(assets|resources) { try_files $uri 404; }
+location ~ ^/plugins/.*/.*/(behaviors|reportwidgets|formwidgets|widgets)/.*/(assets|resources) { try_files $uri 404; }
 location ~ ^/themes/.*/(?:assets|resources) { try_files $uri 404; }
 ```
 :::
