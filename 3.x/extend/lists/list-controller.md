@@ -366,7 +366,7 @@ You may specify the click action for a column record by overriding the `listOver
 public function listOverrideRecordUrl($record, $definition = null)
 {
     if ($record->is_active) {
-        return 'acme/test/services/preview/' . $record->id;
+        return "acme/test/services/preview/{$record->id}";
     }
 }
 ```
@@ -462,7 +462,7 @@ public function listExtendRefreshResults($filter, $result)
 
 ### Extending the Model Query
 
-The lookup query for the list [database model](../database/model.md) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query:
+The lookup query for the list [database model](../database/model.md) can be extended by overriding the `listExtendQuery` method inside the controller class. This example will ensure that soft deleted records are included in the list data, by applying the **withTrashed** scope to the query.
 
 ```php
 public function listExtendQuery($query)
@@ -471,7 +471,7 @@ public function listExtendQuery($query)
 }
 ```
 
-When dealing with multiple lists definitions in a same controller, you can use the second parameter of `listExtendQuery` which contains the name of the definition :
+When dealing with multiple lists definitions in a same controller, you can use the second parameter of `listExtendQuery` which contains the name of the definition.
 
 ```php
 public $listConfig = [
@@ -537,7 +537,7 @@ public function registerListColumnTypes()
         'uppercase' => [$this, 'evalUppercaseListColumn'],
 
         // Using an inline closure
-        'loveit' => function($value) { return 'I love '. $value; }
+        'loveit' => function($value) { return "I love {$value}"; }
     ];
 }
 

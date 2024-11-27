@@ -103,7 +103,7 @@ Key | Description
 
 Plugin registration files can contain two methods `boot` and `register`. With these methods you can do anything you like, like register routes or attach handlers to events.
 
-The `register` method is called immediately when the plugin is registered. The `boot` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method. For example, inside the `boot` method you can extend models:
+The `register` method is called immediately when the plugin is registered. The `boot` method is called right before a request is routed. So if your actions rely on another plugin, you should use the boot method. For example, inside the `boot` method you can extend models.
 
 ```php
 public function boot()
@@ -113,6 +113,10 @@ public function boot()
     });
 }
 ```
+
+::: tip
+The `boot` method is optional and leaving it undefined helps with performance. Additionally, only the `boot` method supports dependency injection via the application container.
+:::
 
 Plugins may also supply a file named **init.php** that contains custom initialization logic. Below is some example content.
 
