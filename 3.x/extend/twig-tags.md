@@ -74,3 +74,47 @@ This is now available in Twig as the following.
 ```twig
 {{ hello_world() }}
 ```
+
+## Escaping Output
+
+It is important to note that custom Twig filters and functions are not escaped by default. To enable escaping by default pass the last array value as `true` in the definition.
+
+```php
+public function registerMarkupTags()
+{
+    return [
+        'functions' => [
+            // Escaped Functions
+            'input' => ['input', true],
+
+            // Raw Functions
+            'link_to' => 'link_to',
+
+            // Escaped Classes
+            'str_*' => [\Str::class, '*', true],
+
+            // Raw Classes
+            'url_*' => [\Url::class, '*'],
+        ],
+        'filters' => [
+            // Escaped Filters
+            'display_name' => [static fn ($user) => $user->getDisplayName(), true],
+
+            // Raw Filters
+            'avatar_url' => [fn ($user) => $user->getAvatarUrl()],
+
+            // Escaped Classes
+            'str_*' => [\Str::class, '*', true],
+
+            // Raw Classes
+            'url_*' => [\Url::class, '*'],
+        ]
+    ];
+}
+```
+
+#### See Also
+
+::: also
+* [Extending Twig](https://twig.symfony.com/doc/3.x/advanced.html)
+:::
