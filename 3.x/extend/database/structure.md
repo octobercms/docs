@@ -13,18 +13,15 @@ php artisan create:migration Acme.Blog CreatePostsTable
 A migration file should define a class that extends the `October\Rain\Database\Updates\Migration` class and contains two methods: `up` and `down`. The `up` method is used to add new tables, columns, or indexes to your database, while the `down` method should simply reverse the operations performed by the `up` method. Within both of these methods you may use the schema builder to expressively create and modify tables. For example, let's look at a sample migration that creates a `october_blog_posts` table:
 
 ```php
-namespace Acme\Blog\Updates;
-
-use Schema;
+use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class CreatePostsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
         Schema::create('october_blog_posts', function($table)
         {
-            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('title');
             $table->string('slug')->index();
@@ -83,8 +80,6 @@ To set the storage engine for a table, set the `engine` property on the schema b
 
 ```php
 Schema::create('users', function ($table) {
-    $table->engine = 'InnoDB';
-
     $table->increments('id');
 });
 ```

@@ -11,7 +11,7 @@ Form Widget classes reside inside the **formwidgets** directory of a plugin. The
 ├── `formwidgets`
 |   ├── colorpicker
 |   |   ├── partials
-|   |   |   └── _colorpicker.htm  _← Partial File_
+|   |   |   └── _colorpicker.php  _← Partial File_
 |   |   └── assets
 |   |       ├── js
 |   |       |   └── colorpicker.js  _← JavaScript File_

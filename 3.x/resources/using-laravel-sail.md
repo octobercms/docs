@@ -4,7 +4,7 @@ subtitle: Learn how to install October CMS with a local Docker environment.
 # Installing with Laravel Sail
 
 ::: aside
-Since the web server runs seperately from your operating system, commands are called using `sail artisan` instead of `php artisan`.
+Since the web server runs separately from your operating system, commands are called using `sail artisan` instead of `php artisan`.
 :::
 
 [Laravel Sail](https://laravel.com/docs/10.x/sail) is a command-line interface for interacting with a local Docker development environment. It helps you get started by automating the process of setting up the web server and database. These instructions teach you how to use Sail and October CMS together to get up and running.
