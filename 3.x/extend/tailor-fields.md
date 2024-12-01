@@ -239,6 +239,39 @@ The file **plugins/october/test/contentfields/mycontentfield/partials/_field.php
 </div>
 ```
 
+## Form Widgets vs. Content Fields
+
+A common question comes up about the differences between a form widget and a content field, and which is better in which situations? [Form Widgets](./forms/form-widgets.md) are form fields used by the `Backend\Widgets\Form` widget exclusively, along with native [form field types](../element/form-fields.md) (text, number, dropdown, partial, etc.)
+
+Content fields are a superset of form fields used exclusively by Tailor and go further, by also including how that field:
+
+- renders as a [list column](../element/list-columns.md)
+- renders as a [filter scope](../element/filter-scopes.md)
+- should exist in [the database table](./database/structure.md)
+- should apply [validation rules](./services/validation.md)
+- should [extend the model](./system/models.md) (jsonable/relationship)
+
+If a form widget has been defined without a content field, it can still be used in Tailor by default and will resolve to the `Tailor\ContentFields\FallbackField` content field type, which is basic and will register in the database as a TEXT column type.
+
+For robust solutions, defining both a form widget and a content field is best. This allows the field to be [used in plugins](../extend/extending.md) and for content in [tailor blueprints](../cms/tailor/blueprints.md). The following links to an example of a currency field that can be used everywhere.
+
+- [Currency Form Widget](https://github.com/responsiv/currency-plugin/blob/master/formwidgets/Currency.php)
+- [Currency Content Field](https://github.com/responsiv/currency-plugin/blob/master/contentfields/Currency.php)
+
+You may notice inside a content field that the YAML definition is defined within PHP. The YAML syntax to PHP syntax is rather simple, where the PHP method name is the YAML property name and the value is passed as the first argument--defaulting to `true`. The only main difference is the `type` property is defined by the `displayAs` method.
+
+Any method name can be called and is chained on the PHP object. See the following table for some YAML to PHP conversion examples.
+
+YAML | PHP
+---- | ----
+`autoFocus: true` | `->autoFocus()`
+`label: my field` | `->label('my field')`
+`type: partial`   | `->displayAs('partial')`
+
+::: tip
+You may also pass all the desired YAML configuration as an array with `->useConfig([...])`.
+:::
+
 #### See Also
 
 ::: also
