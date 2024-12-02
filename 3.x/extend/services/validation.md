@@ -51,6 +51,7 @@ Below is a list of all available validation rules:
 - [String](#rule-string)
 - [Timezone](#rule-timezone)
 - [Unique (Database)](#rule-unique)
+- [Site Unique (Database)](#rule-site-unique)
 - [URL](#rule-url)
 
 </div>
@@ -344,13 +345,13 @@ The field under validation must be formatted as an e-mail address.
 
 The field under validation must exist on a given database table.
 
-#### Basic usage of exists rule
+Basic usage of exists rule
 
 ```php
 'state' => 'exists:states'
 ```
 
-#### Specifying a custom column name
+Specifying a custom column name
 
 ```php
 'state' => 'exists:states,abbreviation'
@@ -491,25 +492,25 @@ The field under validation must be a valid timezone identifier according to the 
 
 The field under validation must be unique on a given database table. If the `column` option is not specified, the field name will be used.
 
-#### Basic usage of unique rule
+Basic usage of unique rule.
 
 ```php
 'email' => 'unique:users'
 ```
 
-#### Specifying a custom column name
+Specifying a custom column name.
 
 ```php
 'email' => 'unique:users,email_address'
 ```
 
-#### Forcing a unique rule to ignore a given ID
+Forcing a unique rule to ignore a given ID.
 
 ```php
 'email' => 'unique:users,email_address,10'
 ```
 
-#### Adding additional where clauses
+Adding additional where clauses.
 
 You may also specify more conditions that will be added as "where" clauses to the query:
 
@@ -518,6 +519,15 @@ You may also specify more conditions that will be added as "where" clauses to th
 ```
 
 In the rule above, only rows with an `account_id` of `1` would be included in the unique check.
+
+<a name="rule-site-unique"></a>
+#### site_unique:_table_,_column_,_except_,_idColumn_
+
+The field under validation must be unique within the same [site context](../../cms/resources/multisite.md). The definition is identical to the `unique` rule.
+
+```php
+'email' => 'site_unique:users'
+```
 
 <a name="rule-url"></a>
 #### url
