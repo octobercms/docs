@@ -21,7 +21,9 @@ This outputs a partial with initial content that includes a `data-auto-submit` d
 <div
     data-request="onAjax"
     data-request-update="{ _self: true }"
-    data-auto-submit></div>
+    data-auto-submit>
+    <!-- Partial contents will render here -->
+    </div>
 ```
 
 When using the `lazy body` attributes, you can specify the initial content to display while the content is loading. Followed by the `{% endpartial %}` tag.
