@@ -102,17 +102,6 @@ To display a call to action, set the type to `primary` to display the link as a 
 ],
 ```
 
-If displaying a button for the create action of a controller, change the side-menu context using the `BackendMenu` facade before inheriting the parent logic.
-
-```php
-public function create()
-{
-    BackendMenu::setContextSideMenu('people_create');
-
-    return $this->asExtension('FormController')->create();
-}
-```
-
 ## Extending the Backend Menu
 
 The `backend.menu.extendItems` [event listener](../extending.md) can be used to modify the existing navigation items, after the system and plugins have registered their navigation items. The event returns a navigation `$manager` instance that supports the following methods.

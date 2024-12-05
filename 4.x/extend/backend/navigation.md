@@ -52,6 +52,7 @@ Property | Description
 **permissions** | an array of permissions the backend user must have in order to view the menu item (Note: direct access of URLs still requires separate permission checks), optional.
 **sideMenu** | an array of sub-menu items sharing the same configuration as parent menu items, optional.
 **itemType** | specifies a display type for the item, sub-menu items only. Supported: `primary`, `link`, `ruler`, `section`. Default: `link`.
+**visibleOn** | used by sub-menu items, provides a list of other items, when active makes this item visible, optional.
 
 The following are system generated value and are not provided when registering the navigation items.
 
@@ -102,15 +103,23 @@ To display a call to action, set the type to `primary` to display the link as a 
 ],
 ```
 
-If displaying a button for the create action of a controller, change the side-menu context using the `BackendMenu` facade before inheriting the parent logic.
+It can also be useful to provide multiple `primary` links and display them conditionally using the `visibleOn` property. The following will show the **New Person** button when the **people** submenu is active, and likewise for the **New Post** and **posts** submenu item.
 
 ```php
-public function create()
-{
-    BackendMenu::setContextSideMenu('people_create');
-
-    return $this->asExtension('FormController')->create();
-}
+'people_create' => [
+    'label' => 'New Person',
+    'icon' => 'icon-plus',
+    'url' => Backend::url('acme/blog/people/create'),
+    'itemType' => 'primary',
+    'visibleOn' => 'people',
+],
+'post_create' => [
+    'label' => 'New Post',
+    'icon' => 'icon-plus',
+    'url' => Backend::url('acme/blog/people/create'),
+    'itemType' => 'primary',
+    'visibleOn' => 'posts',
+],
 ```
 
 ## Extending the Backend Menu
