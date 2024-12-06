@@ -23,8 +23,12 @@ This outputs a partial with initial content that includes a `data-auto-submit` d
     data-request-update="{ _self: true }"
     data-auto-submit>
     <!-- Partial contents will render here -->
-    </div>
+</div>
 ```
+
+::: tip
+Do not include the above markup in your partial, the `{% ajaxPartial %}` will include it automatically (on the first load only).
+:::
 
 When using the `lazy body` attributes, you can specify the initial content to display while the content is loading. Followed by the `{% endpartial %}` tag.
 
