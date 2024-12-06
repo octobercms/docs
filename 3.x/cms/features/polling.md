@@ -15,21 +15,6 @@ In the following example, the **posts** partial will be updated after the page h
 {% ajaxPartial 'posts' lazy %}
 ```
 
-This outputs a partial with initial content that includes a `data-auto-submit` data attribute, which performs the AJAX request to update itself after the page loads. The attribute is not included in subsequent requests.
-
-```html
-<div
-    data-request="onAjax"
-    data-request-update="{ _self: true }"
-    data-auto-submit>
-    <!-- Partial contents will render here -->
-</div>
-```
-
-::: tip
-Do not include the above markup in your partial, the `{% ajaxPartial %}` will include it automatically (on the first load only).
-:::
-
 When using the `lazy body` attributes, you can specify the initial content to display while the content is loading. Followed by the `{% endpartial %}` tag.
 
 ```twig
@@ -37,6 +22,23 @@ When using the `lazy body` attributes, you can specify the initial content to di
     <p>Loading posts...</p>
 {% endpartial %}
 ```
+
+It is important to note, the `{% ajaxPartial lazy %}` tag does not immediately render the partial. Instead, it outputs some initial content that includes a `data-auto-submit` data attribute. This attribute performs an AJAX request to load the partial contents after the page has loaded. The attribute is not included in subsequent requests to prevent an infinite loop.
+
+Here is how it will appear in the browser on the first page load:
+
+```html
+<div
+    data-request="onAjax"
+    data-request-update="{ _self: true }"
+    data-auto-submit>
+    <p>Loading posts...</p>
+</div>
+```
+
+::: tip
+Do not include the above markup in your partial. The `{% ajaxPartial lazy %}` tag will include it automatically for you.
+:::
 
 ## Polling Requests
 
