@@ -55,10 +55,10 @@ You may also pass the `^` symbol to prepend and the `@` symbol to append content
 
 ## Lazy Loading Partials
 
-The `{% ajaxPartial %}` accepts a `lazy` attribute that will defer rendering the content until the page loads.
+The `{% ajaxPartial %}` accepts a `lazy` attribute that will defer rendering the content until the page loads. In the following example, the **posts** partial will be updated after the page has finished loading.
 
 ```twig
-{% ajaxPartial "posts" lazy %}
+{% ajaxPartial 'posts' lazy %}
 ```
 
 The `lazy body` attributes allow specifying the initial content before loading, followed by the `{% endpartial %}` tag.
@@ -68,6 +68,23 @@ The `lazy body` attributes allow specifying the initial content before loading, 
     <p>Loading posts...</p>
 {% endpartial %}
 ```
+
+It is important to note, the `{% ajaxPartial lazy %}` tag does not immediately render the partial. Instead, it outputs some initial content that includes a `data-auto-submit` data attribute used by [polling requests](../../cms/features/polling.md). This attribute performs an AJAX request to load the partial contents after the page has loaded. The attribute is not included in subsequent partial updates to prevent an infinite loop.
+
+Here is how it will appear in the browser on the first page load:
+
+```html
+<div
+    data-request="onAjax"
+    data-request-update="{ _self: true }"
+    data-auto-submit>
+    <p>Loading posts...</p>
+</div>
+```
+
+::: tip
+Do not include the above markup in your partial. The `{% ajaxPartial lazy %}` tag will include it automatically for you.
+:::
 
 ## Calling AJAX Handlers
 

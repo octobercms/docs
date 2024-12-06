@@ -7,38 +7,36 @@ Polling is a technique used to defer or repeat an AJAX update by including the `
 
 ## Lazy Loading Requests
 
-Lazy loading defers the display of content until after the page has loaded. This is useful for heavy operations that may slow down the initial page load. Add the `lazy` attribute to the `{% ajaxPartial %}` tag.
+Polling requests are commonly used in conjunction with the [AJAX Partial Twig Tag](../../markup/tag/ajax-partial.md) since it allows you to self-update partial contents. Take the following AJAX handler defined on a page that loads some results. Assuming it is an expensive lookup, we may want to request it after the page has finished loading.
 
-In the following example, the **posts** partial will be updated after the page has finished loading.
+```php
+public function onFetchResults()
+{
+    $this['results'] = [1, 2, 3];
+}
+```
+
+The next step is to include an AJAX-enabled partial called **posts.htm** somewhere on the page.
 
 ```twig
-{% ajaxPartial 'posts' lazy %}
+{% ajaxPartial 'posts' %}
 ```
 
-When using the `lazy body` attributes, you can specify the initial content to display while the content is loading. Followed by the `{% endpartial %}` tag.
+Inside the partial, the contents will dump the output if the `results` variable exists. Otherwise, it displays a loading message with a `data-auto-submit` request to load the results as a secondary request.
 
 ```twig
-{% ajaxPartial 'posts' lazy body %}
-    <p>Loading posts...</p>
-{% endpartial %}
+{% if results %}
+    <h3>Found results</h3>
+    {{ d(results) }}
+{% else %}
+    <h3>Loading the results...</h3>
+    <div
+        data-request="onFetchResults"
+        data-request-update="{ _self: true }"
+        data-auto-submit>
+    </div>
+{% endif %}
 ```
-
-It is important to note, the `{% ajaxPartial lazy %}` tag does not immediately render the partial. Instead, it outputs some initial content that includes a `data-auto-submit` data attribute. This attribute performs an AJAX request to load the partial contents after the page has loaded. The attribute is not included in subsequent requests to prevent an infinite loop.
-
-Here is how it will appear in the browser on the first page load:
-
-```html
-<div
-    data-request="onAjax"
-    data-request-update="{ _self: true }"
-    data-auto-submit>
-    <p>Loading posts...</p>
-</div>
-```
-
-::: tip
-Do not include the above markup in your partial. The `{% ajaxPartial lazy %}` tag will include it automatically for you.
-:::
 
 ## Polling Requests
 
@@ -79,3 +77,19 @@ The polling can be stopped by not including the element in subsequent requests, 
         data-auto-submit="2000"></div>
 {% endif %}
 ```
+
+## Lazy Loading Partials
+
+The `data-auto-submit` tag is used by the `{% ajaxPartial lazy %}` Twig tag to lazy load partials. The markup is included automatically when the page first renders to dynamically load the partial contents.
+
+```twig
+{% ajaxPartial 'posts' lazy %}
+```
+
+View the [AJAX Partial Twig Tag](../../markup/tag/ajax-partial.md) to learn more.
+
+#### See Also
+
+::: also
+* [AJAX Partial Twig Tag](../../markup/tag/ajax-partial.md)
+:::
