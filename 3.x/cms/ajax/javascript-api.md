@@ -29,11 +29,12 @@ Option | Description
 **complete** | a callback function execute in case of a success or an error.
 **cancel** | a callback function execute in case the user aborts the request or cancels it via a confirmation dialog.
 **form** | a form element to use for sourcing the form data sent with the request, either passed as a selector string or a form element.
-**flash** | when true, instructs the server to clear and send any flash messages with the response. default: `false`
-**files** | when true, the request will accept file uploads using the `FormData` interface. default: `false`
-**download** | when true, file downloads are accepted with a `Content-Disposition` response. When a string, the downloaded filename can be specified. default: `false`
-**bulk** | when true, the request be sent as JSON for bulk data transactions. default: `false`
+**flash** | when true, instructs the server to clear and send any flash messages with the response. Default: `false`
+**files** | when true, the request will accept file uploads using the `FormData` interface. Default: `false`
+**download** | when true, file downloads are accepted with a `Content-Disposition` response. When a string, the downloaded filename can be specified. Default: `false`
+**bulk** | when true, the request be sent as JSON for bulk data transactions. Default: `false`
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
+**browserRedirectBack** | when true and a redirect occurs, if the previous URL from the browser is available, use that in place of the redirect URL provided. Default: `false`.
 **message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](../features/flash-messages.md).
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
 **progressBar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.

@@ -29,6 +29,7 @@ data-request Attribute | Description
 **data-request-bulk** | when specified the request be sent as JSON for bulk data transactions.
 **data-browser-target** | when specified with `data-request-download` the output will target this window, for example `_blank`.
 **data-browser-validate** | when specified browser-based client side validation will run on the request before it submits.
+**data-browser-redirect-back** | when a redirect occurs, if the previous URL from the browser is available, use that in place of the redirect URL provided.
 **data-auto-submit** | automatically triggers an AJAX request on elements that also have the `data-request` attribute. The request submits when the browser window is active using the [Page Visibility API](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API). The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the request.
 **data-track-input** | can be applied to a text, number, or password input field that also has the `data-request` attribute. When defined, the input field automatically sends an AJAX request when a user types something in the field. The optional attribute value can define the interval, in milliseconds, the framework waits before it sends the requests.
 
