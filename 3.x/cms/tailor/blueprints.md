@@ -174,6 +174,19 @@ Message | Default Message
 **pagefinderListType** | All :name Entries
 :::
 
+### Disabling Required Fields
+
+The entry record will require the `title` and `slug` fields to be populated before they can be saved, additionally, the `slug` field must also be unique. You may modify this functionality by overriding these fields in your blueprint. Either by setting the `validation` property to **false** or setting the `hidden` property to **true** and hiding it from the user interface. The following example will disable the validation for both fields and hide the slug field.
+
+```yaml
+fields:
+    title:
+        validation: false
+
+    slug:
+        hidden: true
+```
+
 ### Page Finder Configuration
 
 By default, all entries are included in the [page finder](../../element/form/widget-pagefinder.md) lookup values. This can be disabled by setting the **pagefinder** to `false`.
