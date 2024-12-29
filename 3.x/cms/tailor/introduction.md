@@ -59,7 +59,7 @@ Each blueprint type is described in more detail in the [Blueprints article](./bl
 Blueprints are 100% portable. They use internal identifiers and can reside in any directory with any file name.
 :::
 
-Blueprints are defined using the YAML syntax and will always contain three identifiers, a unique UUID, a user-friendly handle and the blueprint type. The filename and folder of a blueprint is used to organise blueprints and is not used as an identifier. All other properties are defined in the blueprint's relevant documentation article.
+Blueprints are defined using the YAML syntax and will always contain three identifiers, a unique UUID, a user-friendly handle and the blueprint type. The filename and folder of a blueprint is used to organize blueprints and is not used as an identifier. All other properties are defined in the blueprint's relevant documentation article.
 
 ```yaml
 uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6

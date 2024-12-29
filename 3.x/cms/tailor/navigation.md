@@ -92,6 +92,29 @@ extraNavigation:
         order: 220
 ```
 
+You may also register links to [controllers introduced by plugins](../../extend/system/controllers.md) by specifying the `url` property. This property should be set to the controller URL, the following links to the **acme/blog/posts** controller.
+
+```yaml
+navigation:
+    label: Authors
+    # ...
+
+extraNavigation:
+    testimonials:
+        label: Testimonials
+        order: 210
+        icon: icon-group
+        url: acme/blog/posts
+```
+
+To set the navigation context inside the controller, use the `setTailorContext` method on the `BackendMenu` facade. You may also specify the blueprint `uuid` with the `setTailorContextUuid` method. The method takes the `handle` or `uuid` of the blueprint (first argument), and the key used by the extra navigation item (second argument).
+
+```php
+BackendMenu::setTailorContext('Blog\Post', 'testimonials');
+
+BackendMenu::setTailorContextUuid('edcd102e-0525-4e4d-b07e-633ae6c18db6', 'testimonials');
+```
+
 #### See Also
 
 ::: also
