@@ -56,11 +56,19 @@ The `disableDays` property can be used to disable the selection of specific days
 
 ```yaml
 booking_date:
-    label: Start Date
+    label: Booking Date
     type: datepicker
     mode: date
     disableDays:
         - 0 # Sundays
         - 6 # Saturdays
         - "2023-08-10" # Specific date
+```
+
+The `disableDays` property can also be set to a static PHP function for dynamically setting the disabled days.
+
+```yaml
+booking_date:
+    type: datepicker
+    disableDays: App\Classes\BookingManager::getDisabledBookingDates
 ```
