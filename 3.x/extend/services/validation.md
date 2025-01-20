@@ -521,12 +521,12 @@ You may also specify more conditions that will be added as "where" clauses to th
 In the rule above, only rows with an `account_id` of `1` would be included in the unique check.
 
 <a name="rule-site-unique"></a>
-#### site_unique:_table_,_column_,_except_,_idColumn_
+#### unique_site:_table_,_column_,_except_,_idColumn_
 
 The field under validation must be unique within the same [site context](../../cms/resources/multisite.md). The definition is identical to the `unique` rule.
 
 ```php
-'email' => 'site_unique:users'
+'email' => 'unique_site:users'
 ```
 
 <a name="rule-url"></a>
