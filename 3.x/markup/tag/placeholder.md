@@ -17,6 +17,14 @@ Content can then be injected into the placeholder in any subsequent page or part
 {% endput %}
 ```
 
+By default, the `{% put %}` will append the content to the placeholder. Use the `replace` attribute to replace the contents instead.
+
+```twig
+{% put name replace %}
+    <p>Replace all the content inside with this</p>
+{% endput %}
+```
+
 ## Default Placeholder Content
 
 Placeholders can have default content that can be either replaced or complemented by a page. If the `{% put %}` tag for a placeholder with default content is not defined on a page, the default placeholder content is displayed. Example placeholder definition in the layout template:
@@ -81,22 +89,6 @@ A default value (second argument) can be supplied as a fallback.
 
 ```twig
 {% set active = placeholder('activeNav', 'home') }} %}
-```
-
-## Custom Attributes
-
-The `placeholder` tag accepts two optional attributes &mdash; `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment &mdash; **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
-
-```twig
-{% placeholder ordering title="Ordering information" type="text" %}
-```
-
-Example of a placeholder with a default content, title and type attributes.
-
-```twig
-{% placeholder ordering default title="Ordering information" type="text" %}
-    There is no ordering information for this product.
-{% endplaceholder %}
 ```
 
 ## System Placeholders
@@ -188,4 +180,20 @@ You can inject raw markup to the `{% meta %}` tag by using the **meta** anonymou
 {% put meta %}
     <meta name="turbo-visit-control" content="error">
 {% endput %}
+```
+
+## Custom Attributes
+
+The `placeholder` tag accepts two optional attributes &mdash; `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment &mdash; **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
+
+```twig
+{% placeholder ordering title="Ordering information" type="text" %}
+```
+
+Example of a placeholder with a default content, title and type attributes.
+
+```twig
+{% placeholder ordering default title="Ordering information" type="text" %}
+    There is no ordering information for this product.
+{% endplaceholder %}
 ```
