@@ -17,11 +17,23 @@ Content can then be injected into the placeholder in any subsequent page or part
 {% endput %}
 ```
 
+## Replacing Content
+
 By default, the `{% put %}` will append the content to the placeholder. Use the `replace` attribute to replace the contents instead.
 
 ```twig
 {% put name replace %}
     <p>Replace all the content inside with this</p>
+{% endput %}
+```
+
+## Handling Multiple Calls
+
+In some cases you may call the `{% put %}` tag inside a partial to include some assets on the pages. Then, when including that partial multiple times on the same page, it can cause the script to be inserted twice. Including the `once` attribute will ensure the content is only set once per template. The cache key uses the CMS template filename to determine if it has already been inserted.
+
+```twig
+{% put scripts once %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
 {% endput %}
 ```
 
