@@ -16,6 +16,7 @@ use Backend\Classes\ReportMetric;
 use Backend\Classes\ReportDimension;
 use Backend\Classes\ReportDimensionField;
 use Backend\Classes\ReportDataSourceBase;
+use Backend\Classes\ReportFetchData;
 use Backend\Classes\ReportFetchDataResult;
 use Backend\Classes\ReportDataOrderRule;
 use Backend\Classes\ReportDataPaginationParams;
@@ -28,27 +29,31 @@ class MyReportDataSource extends ReportDataSourceBase
         // Register dimensions and metrics here
     }
 
-    protected function fetchData(
-        ReportDimension $dimension,
-        array $metrics,
-        array $metricsConfiguration,
-        ?Carbon $startDate,
-        ?Carbon $endDate,
-        ?int $startTimestamp,
-        array $dimensionFilters,
-        ?string $groupInterval,
-        ?ReportDataOrderRule $orderRule,
-        ?int $limit,
-        ?ReportDataPaginationParams $paginationParams,
-        bool $hideEmptyDimensionValues,
-        bool $totalsOnly
-    ): ReportFetchDataResult
+    protected function fetchData(ReportFetchData $data): ReportFetchDataResult
     {
         // Construct and return a ReportFetchDataResult object,
         // or use the ReportDataQueryBuilder class to do the hard work.
     }
 }
 ```
+
+The `ReportFetchData` object has the following properties available.
+
+Property | Type | Description
+-------- | ---- | -----------
+**$dimension** | `ReportDimension` | the dimension to group the data by
+**$metrics** | `array` | the metrics to return
+**$metricsConfiguration** | `array` | the report metrics configuration
+**$dateStart** | `?Carbon` | the start date
+**$dateEnd** | `?Carbon` | the end date
+**$startTimestamp** | `?int` | the start date
+**$dimensionFilters** | `array` | the filters to apply to the dimension values
+**$groupInterval** | `?string` | the group interval.
+**$orderRule** | `?ReportDataOrderRule` | the data ordering rule.
+**$limit** | `?int` | the maximum number of records to return.
+**$paginationParams** | `?ReportDataPaginationParams` | the pagination parameters.
+**$hideEmptyDimensionValues** | `bool` | indicates whether empty dimension values must be removed from the dataset.
+**$totalsOnly** | `bool` | indicates that the method should only return total values for metrics, and not rows.
 
 Plugins must register their data sources in the Plugin Registration file (Plugin.php), within the `boot` method.
 
@@ -88,12 +93,14 @@ public function __construct()
 }
 ```
 
-The `registerDimension` method accepts a `ReportDimension` object. The constructor for `ReportDimension` takes the following arguments:
+The `registerDimension` method accepts a `ReportDimension` object. The constructor for `ReportDimension` takes the following arguments.
 
-- `string $code` - specifies the dimension referral code. Your data source will use this code to distinguish the dimension in the `fetchData` calls. It can be a simple string, for example, “city”.
-- `string $databaseColumnName` - specifies the dimension column name in the data source table. The column name is used in `ReportDataQueryBuilder` to construct database queries. Including the table name (`acme_shop_products` in this case) along with the column name is often necessary to avoid ambiguity when the data source query includes multiple tables. If your data source is not database-driven, any value can be used for this argument. In most instances, the dimension column corresponds to the primary key in the dimension table.
-- `string $displayName` -  specifies the dimension name used in reports. For example, in the Table widget, this could become the title of the dimension column. It is also used in the widget configuration popup, in the dimension dropdown. The value for this argument can be a static string, or a reference to a localization string.
-- `?string $labelColumnName` -  specifies the name of the column for the dimension label. Use this column to provide a user-friendly label for the dimension. If this argument is not provided, the value of `$databaseColumnName` is used as the dimension label. Keep in mind that widget dimension sorting and filters will utilize the dimension label value when the label column name provided.
+Argument | Type | Description
+-------- | ---- | -----------
+**$code** | `string` | specifies the dimension referral code. Your data source will use this code to distinguish the dimension in the `fetchData` calls. It can be a simple string, for example, “city”.
+**$databaseColumnName** | `string` | specifies the dimension column name in the data source table. The column name is used in `ReportDataQueryBuilder` to construct database queries. Including the table name (`acme_shop_products` in this case) along with the column name is often necessary to avoid ambiguity when the data source query includes multiple tables. If your data source is not database-driven, any value can be used for this argument. In most instances, the dimension column corresponds to the primary key in the dimension table.
+**$displayName** | `string` |  specifies the dimension name used in reports. For example, in the Table widget, this could become the title of the dimension column. It is also used in the widget configuration popup, in the dimension dropdown. The value for this argument can be a static string, or a reference to a localization string.
+**$labelColumnName** | `?string` |  specifies the name of the column for the dimension label. Use this column to provide a user-friendly label for the dimension. If this argument is not provided, the value of `$databaseColumnName` is used as the dimension label. Keep in mind that widget dimension sorting and filters will utilize the dimension label value when the label column name provided.
 
 The `registerDimension` method returns the registered dimension object, allowing for chaining.
 
@@ -131,11 +138,13 @@ public function __construct()
 
 The `registerMetric` method accepts a `ReportMetric` object. The constructor for this class has the following arguments:
 
-- `string $code` - the metric referral code.
-- `string $databaseColumnName` - the metric column name. It's always a good idea to provide the table name along with the field name to avoid ambiguity in SQL queries.
-- `string $displayName` - the metric name used in reports.
-- `string $aggregateFunction` - the aggregate function for the metric. One of the `ReportMetric::AGGREGATE_XXX` constants.
-- `?array $intlFormatOptions`  -  client-side formatting options, compatible with the `Intl.NumberFormat()` constructor options argument. Skip the argument to use the default formatting options.
+Argument | Type | Description
+-------- | ---- | -----------
+**$code** | `string` | the metric referral code.
+**$databaseColumnName** | `string` | the metric column name. It's always a good idea to provide the table name along with the field name to avoid ambiguity in SQL queries.
+**$displayName** | `string` | the metric name used in reports.
+**$aggregateFunction** | `string` | the aggregate function for the metric. One of the `ReportMetric::AGGREGATE_XXX` constants.
+**$intlFormatOptions** | `?array` | client-side formatting options, compatible with the `Intl.NumberFormat()` constructor options argument. Skip the argument to use the default formatting options.
 
 The dashboard can aggregate metric data using one of the following functions:
 
@@ -165,44 +174,31 @@ The use of the `ReportDataQueryBuilder` class is optional. The sole requirement 
 Below is a partial implementation of our demo ecommerce data source:
 
 ```php
-protected function fetchData(
-    ReportDimension $dimension,
-    array $metrics,
-    array $metricsConfiguration,
-    ?Carbon $startDate,
-    ?Carbon $endDate,
-    ?int $startTimestamp,
-    array $dimensionFilters,
-    ?string $groupInterval,
-    ?ReportDataOrderRule $orderRule,
-    ?int $limit,
-    ?ReportDataPaginationParams $paginationParams,
-    bool $hideEmptyDimensionValues,
-    bool $totalsOnly
-): ReportFetchDataResult {
+protected function fetchData(ReportFetchData $data): ReportFetchDataResult
+{
     if ($dimension->getCode() !== self::DIMENSION_PRODUCT) {
         throw new SystemException('Invalid dimension');
     }
 
     $reportQueryBuilder = new ReportDataQueryBuilder(
         'acme_shop_products',
-        $dimension,
-        $metrics,
-        $orderRule,
-        $dimensionFilters,
-        $limit,
-        $paginationParams,
-        $groupInterval,
-        $hideEmptyDimensionValues,
-        $startDate,
-        $endDate,
-        $startTimestamp,
+        $data->dimension,
+        $data->metrics,
+        $data->orderRule,
+        $data->dimensionFilters,
+        $data->limit,
+        $data->paginationParams,
+        $data->groupInterval,
+        $data->hideEmptyDimensionValues,
+        $data->dateStart,
+        $data->dateEnd,
+        $data->startTimestamp,
         'acme_shop_sales.sale_date',
         null,
-        $totalsOnly
+        $data->totalsOnly
     );
 
-    ...
+    // ...
 }
 ```
 
@@ -235,41 +231,28 @@ return $reportQueryBuilder->getFetchDataResult($metricsConfiguration);
 Below is the full implementation of the `fetchData` method:
 
 ```php
-protected function fetchData(
-    ReportDimension $dimension,
-    array $metrics,
-    array $metricsConfiguration,
-    ?Carbon $startDate,
-    ?Carbon $endDate,
-    ?int $startTimestamp,
-    array $dimensionFilters,
-    ?string $groupInterval,
-    ?ReportDataOrderRule $orderRule,
-    ?int $limit,
-    ?ReportDataPaginationParams $paginationParams,
-    bool $hideEmptyDimensionValues,
-    bool $totalsOnly
-): ReportFetchDataResult {
+protected function fetchData(ReportFetchData $data): ReportFetchDataResult
+{
     if ($dimension->getCode() !== self::DIMENSION_PRODUCT) {
         throw new SystemException('Invalid dimension');
     }
 
     $reportQueryBuilder = new ReportDataQueryBuilder(
         'acme_shop_products',
-        $dimension,
-        $metrics,
-        $orderRule,
-        $dimensionFilters,
-        $limit,
-        $paginationParams,
-        $groupInterval,
-        $hideEmptyDimensionValues,
-        $startDate,
-        $endDate,
-        $startTimestamp,
+        $data->dimension,
+        $data->metrics,
+        $data->orderRule,
+        $data->dimensionFilters,
+        $data->limit,
+        $data->paginationParams,
+        $data->groupInterval,
+        $data->hideEmptyDimensionValues,
+        $data->startDate,
+        $data->endDate,
+        $data->startTimestamp,
         'acme_shop_sales.sale_date',
         null,
-        $totalsOnly
+        $data->totalsOnly
     );
 
     $reportQueryBuilder->onConfigureMetrics(
@@ -280,7 +263,7 @@ protected function fetchData(
         }
     );
 
-    return $reportQueryBuilder->getFetchDataResult($metricsConfiguration);
+    return $reportQueryBuilder->getFetchDataResult($data->metricsConfiguration);
 }
 ```
 
@@ -340,11 +323,13 @@ $this->registerDimension(new ReportDimension(
 
 The `ReportDimensionField` constructor takes these arguments:
 
-- `string $code` - specifies the field referral code. The code must begin with the `oc_field_` prefix.
-- `string $displayName` - specifies the field name to use in reports. For example, in the Table widget, this could become the title of the dimension column. It is also used in the widget configuration popup, in the dimension dropdown. The value for this argument can be a static string, or a reference to a localization string.
-- `?string $columnName` -  optional database column name for filtering or sorting. Provide the column name to enable sorting and filtering. In most cases, you should specify a value for this argument.
-- `bool $sortable` - specifies if the field is sortable.
-- `bool $filterable` - specifies if the field is filterable.
+Argument | Type | Description
+-------- | ---- | -----------
+**$code** | `string` | specifies the field referral code. The code must begin with the `oc_field_` prefix.
+**$displayName** | `string` | specifies the field name to use in reports. For example, in the Table widget, this could become the title of the dimension column. It is also used in the widget configuration popup, in the dimension dropdown. The value for this argument can be a static string, or a reference to a localization string.
+**$columnName** | `?string` |  optional database column name for filtering or sorting. Provide the column name to enable sorting and filtering. In most cases, you should specify a value for this argument.
+**$sortable** | `bool` | specifies if the field is sortable.
+**$filterable** | `bool` | specifies if the field is filterable.
 
 After registration, the dimension field will appear in the dashboard widget configurators:
 
