@@ -27,6 +27,7 @@ Property | Description
 **nameFrom** | the column name to use in the model class, used for displaying the name. Default: `name`.
 **modelClass** | class of the model to use for the available filter records.
 **modelScope** | applies a [model scope method](../filter-scopes.md) to the filter query.
+**matchMode** | determines how the selection should be applied, either `include`, `exclude` or `toggle`. Default: `include`
 
 To filter by an array, specify an `options` property.
 
@@ -57,6 +58,14 @@ status:
     default:
         - developer
         - publisher
+```
+
+Use the `matchMode` property control how the filter is applied, either by including or excluding the selected items.
+
+```yaml
+status:
+    # ...
+    matchMode: toggle
 ```
 
 ## PHP Interface
