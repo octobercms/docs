@@ -19,11 +19,11 @@ data-request Attribute | Description
 **data-request-error** | specifies JavaScript code to execute if the request encounters an error. The `data` variable is available in this function containing the response data.
 **data-request-complete** | specifies JavaScript code to execute if the request is successfully completed or encounters an error. The `data` variable is available in this function containing the response data.
 **data-request-cancel** | specifies JavaScript code to execute if the user aborts the request or cancels it via a confirmation dialog.
-**data-request-message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](../features/flash-messages.md).
+**data-request-message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](./features/flash-messages.md).
 **data-request-loading** | specifies a CSS selector for an element to be displayed while the request runs. You can use this option to show an AJAX loading indicator. The feature uses CSS display `block` and `none` attributes to manage the element visibility.
-**data-request-progress-bar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
+**data-request-progress-bar** | enable the [progress bar](./features/loaders.md) when an AJAX request occurs.
 **data-request-form** | explicitly specify a form element to use for sourcing the form data. If this is unspecified, the closest form to the triggering element is used, including if the element itself is a form.
-**data-request-flash** | when included, instructs the server to clear and send any flash messages with the response. This option is used by the [flash messages features](../features/flash-messages.md).
+**data-request-flash** | when included, instructs the server to clear and send any flash messages with the response. This option is used by the [flash messages features](./features/flash-messages.md).
 **data-request-files** | when specified the request will accept file uploads using the `FormData` interface.
 **data-request-download** | when specified file downloads are accepted with a `Content-Disposition` response. This attribute can be added anonymously or set to the downloaded filename.
 **data-request-bulk** | when specified the request be sent as JSON for bulk data transactions.
@@ -93,7 +93,7 @@ Send a GET parameter `page` with value `6` on the current request.
 </button>
 ```
 
-Show a [flash message](../features/flash-messages.md) while the request is loading.
+Show a [flash message](./features/flash-messages.md) while the request is loading.
 
 ```html
 <button data-request="onUpdate" data-request-message="Loading...">

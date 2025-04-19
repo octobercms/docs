@@ -69,7 +69,7 @@ The `lazy body` attributes allow specifying the initial content before loading, 
 {% endpartial %}
 ```
 
-It is important to note, the `{% ajaxPartial lazy %}` tag does not immediately render the partial. Instead, it outputs some initial content that includes a `data-auto-submit` data attribute used by [polling requests](../../cms/features/polling.md). This attribute performs an AJAX request to load the partial contents after the page has loaded. The attribute is not included in subsequent partial updates to prevent an infinite loop.
+It is important to note, the `{% ajaxPartial lazy %}` tag does not immediately render the partial. Instead, it outputs some initial content that includes a `data-auto-submit` data attribute used by [polling requests](../../ajax/features/polling.md). This attribute performs an AJAX request to load the partial contents after the page has loaded. The attribute is not included in subsequent partial updates to prevent an infinite loop.
 
 Here is how it will appear in the browser on the first page load:
 

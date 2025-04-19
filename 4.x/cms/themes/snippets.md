@@ -198,7 +198,7 @@ function timeToSeconds($time = '')
 
 ### Basic Contact Form
 
-The next snippet displays a basic contact form and provides a way to handle the submission logic, it does not include code for [validating the form](../features/validation.md) and [sending the email](../../extend/system/sending-mail.md).
+The next snippet displays a basic contact form and provides a way to handle the submission logic, it does not include code for [validating the form](../../ajax/features/validation.md) and [sending the email](../../extend/system/sending-mail.md).
 
 The snippet has no properties, the publisher only needs to include the widget on the page, and it outputs a contact form with a success message. The `snippetAjax` attribute is set to `1` to enable the use of AJAX handlers.
 

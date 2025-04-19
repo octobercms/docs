@@ -287,14 +287,6 @@
         - themes/components
         - themes/snippets
 -
-    title: Tailor
-    children:
-        - tailor/introduction
-        - tailor/blueprints
-        - tailor/content-fields
-        - tailor/navigation
-        - tailor/models
--
     title: Components
     children:
         - components/section
@@ -302,18 +294,6 @@
         - components/global
         - components/resources
         - components/sitepicker
--
-    title: Features
-    children:
-        - features/validation
-        - features/uploads
-        - features/downloads
-        - features/loaders
-        - features/flash-messages
-        - features/pagination
-        - features/redirects
-        - features/polling
-        - features/modals
 -
     title: Media Manager
     children:
@@ -327,6 +307,14 @@
         - themes/child-themes
         - themes/database-themes
         - themes/seeding-themes
+-
+    title: Tailor
+    children:
+        - tailor/introduction
+        - tailor/blueprints
+        - tailor/content-fields
+        - tailor/navigation
+        - tailor/models
 -
     title: Resources
     children:
@@ -347,6 +335,18 @@
         - javascript-api
         - turbo-router
         - hot-controls
+-
+    title: Features
+    children:
+        - features/validation
+        - features/uploads
+        - features/downloads
+        - features/loaders
+        - features/flash-messages
+        - features/pagination
+        - features/redirects
+        - features/polling
+        - features/modals
 
 #
 # Root Nav

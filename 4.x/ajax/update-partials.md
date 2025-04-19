@@ -67,7 +67,7 @@ See the [AJAX Partial Twig Tag article](../../markup/tag/ajax-partial.md) to lea
 
 ### Global Partial Updates
 
-In some cases, such as with [flash messages](../../cms/features/flash-messages.md), you may wish to include a specific partial update with every response. To merge an update definition with every AJAX request, add the `ajax-request-update` meta tag in the head section of the page, and set the content attribute to an update definition.
+In some cases, such as with [flash messages](./features/flash-messages.md), you may wish to include a specific partial update with every response. To merge an update definition with every AJAX request, add the `ajax-request-update` meta tag in the head section of the page, and set the content attribute to an update definition.
 
 ```html
 <head>

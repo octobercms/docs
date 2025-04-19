@@ -189,13 +189,13 @@ File Location: `~/modules/system/views/pagination/ajax.htm`
 ## Using Custom Markup
 
 ::: tip
-Visit the [Pagination feature article](../../cms/features/pagination.md) for instructions on how to use custom pagination markup.
+Visit the [Pagination feature article](../../ajax/features/pagination.md) for instructions on how to use custom pagination markup.
 :::
 
 #### See Also
 
 ::: also
 * [Building API Resources](../../cms/resources/building-apis.md)
-* [CMS Pagination](../../cms/features/pagination.md)
+* [CMS Pagination](../../ajax/features/pagination.md)
 * [Model Pagination](../../extend/database/pagination.md)
 :::

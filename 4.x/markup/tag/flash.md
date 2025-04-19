@@ -4,7 +4,7 @@ subtitle: Twig Tag
 # {% flash %}
 
 ::: aside
-View the [Flash Messages article](../../cms/features/flash-messages.md) to learn more about using flash messages.
+View the [Flash Messages article](../../ajax/features/flash-messages.md) to learn more about using flash messages.
 :::
 
 The `{% flash %}` and `{% endflash %}` tags will render any flash messages stored in the user session, set by the `Flash` PHP class. The `message` variable inside will contain the flash message text and the markup inside will repeat for multiple flash messages.
@@ -58,5 +58,5 @@ If the first argument is set to **all** it will return an array of types, each t
 #### See Also
 
 ::: also
-* [Flash Messages](../../cms/features/flash-messages.md)
+* [Flash Messages](../../ajax/features/flash-messages.md)
 :::

@@ -88,7 +88,7 @@ You could also apply pagination to the collection with the `paginate()` method i
 ```
 
 ::: tip
-See the [Pagination feature](../features/pagination.md) to learn more about paging records.
+See the [Pagination feature](../../ajax/features/pagination.md) to learn more about paging records.
 :::
 
 ### Searching Records
@@ -137,7 +137,7 @@ Then, call the `withCount` function on the collection component, followed by `ge
 #### See Also
 
 ::: also
-* [Pagination](../features/pagination.md)
+* [Pagination](../../ajax/features/pagination.md)
 * [Model Queries](../../extend/database/model.md)
 * [Database Relationships](../../extend/database/relations.md)
 :::

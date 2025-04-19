@@ -35,9 +35,9 @@ Option | Description
 **bulk** | when true, the request be sent as JSON for bulk data transactions. Default: `false`
 **browserValidate** | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
 **browserRedirectBack** | when true and a redirect occurs, if the previous URL from the browser is available, use that in place of the redirect URL provided. Default: `false`.
-**message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](../features/flash-messages.md).
+**message** | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](./features/flash-messages.md).
 **loading** | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
-**progressBar** | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
+**progressBar** | enable the [progress bar](./features/loaders.md) when an AJAX request occurs.
 
 The **beforeUpdate**, **afterUpdate**, **success**, **error**, and **complete** options all take functions with three arguments: the data object received from the server, the HTTP status code and the XHR object.
 

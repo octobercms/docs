@@ -21,7 +21,7 @@ When working with your [CMS theme](../../cms/themes/themes.md), using the librar
 
 ### Extra Features
 
-The `{% framework %}` tag supports an optional **extras** parameter that includes additional StyleSheet and JavaScript files, for extra features including [form validation](../features/validation.md), [loading indicators](../features/loaders.md), and [flash messages](../features/flash-messages.md).
+The `{% framework %}` tag supports an optional **extras** parameter that includes additional StyleSheet and JavaScript files, for extra features including [form validation](./features/validation.md), [loading indicators](./features/loaders.md), and [flash messages](./features/flash-messages.md).
 
 ```twig
 {% framework extras %}

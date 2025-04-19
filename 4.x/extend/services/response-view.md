@@ -293,6 +293,6 @@ if (View::exists('acme.blog::mail.customer')) {
 #### See Also
 
 ::: also
-* [Uploads & Downloads](../../cms/features/upload-download.md)
+* [Uploads & Downloads](../../ajax/features/upload-download.md)
 * [Laravel Responses](https://laravel.com/docs/10.x/responses)
 :::
