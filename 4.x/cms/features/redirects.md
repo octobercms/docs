@@ -18,7 +18,7 @@ In some cases you may wish to redirect the user to a new page after submitting a
 </form>
 ```
 
-Inside your [AJAX handler](../ajax/handlers.md), you may return a `Redirect` [response type](../../extend/services/response-view.md) where the `to` method accepts a relative or absolute URL (first argument).
+Inside your [AJAX handler](../../ajax/handlers.md), you may return a `Redirect` [response type](../../extend/services/response-view.md) where the `to` method accepts a relative or absolute URL (first argument).
 
 ```php
 function onSignup()
@@ -76,7 +76,7 @@ This function accepts a URL or a CMS page name.
 
 ## Redirects in AJAX
 
-The [AJAX framework](../ajax/introduction.md) supports redirects with the `data-request-redirect` attribute. The attribute value should specify a URL location to redirect after a successful AJAX request completes.
+The [AJAX framework](../../ajax/introduction.md) supports redirects with the `data-request-redirect` attribute. The attribute value should specify a URL location to redirect after a successful AJAX request completes.
 
 ```html
 <button
@@ -86,7 +86,7 @@ The [AJAX framework](../ajax/introduction.md) supports redirects with the `data-
 </button>
 ```
 
-The [turbo router](../ajax/turbo-router.md) supports historical redirects with the `data-browser-redirect-back` attribute. The attribute can be attached to any hyperlink or AJAX request element, overriding a redirect response, and only triggers when there is a previous browser history state.
+The [turbo router](../../ajax/turbo-router.md) supports historical redirects with the `data-browser-redirect-back` attribute. The attribute can be attached to any hyperlink or AJAX request element, overriding a redirect response, and only triggers when there is a previous browser history state.
 
 ```html
 <button

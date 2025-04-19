@@ -32,12 +32,12 @@ To open the file in a new browser window, typically used for previewing PDFs, se
 ```
 
 ::: tip
-When the download attribute is used, the response can be a download or a [regular AJAX update](../ajax/update-partials.md).
+When the download attribute is used, the response can be a download or a [regular AJAX update](../../ajax/update-partials.md).
 :::
 
 ## Download Responses
 
-Inside your [AJAX handler](../ajax/handlers.md), you may return a [file download](../../extend/services/response-view.md) `Response` type where the `download` method accepts the local disk file path.
+Inside your [AJAX handler](../../ajax/handlers.md), you may return a [file download](../../extend/services/response-view.md) `Response` type where the `download` method accepts the local disk file path.
 
 ```php
 public function onExport()

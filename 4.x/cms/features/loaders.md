@@ -116,7 +116,7 @@ form[data-ajax-progress] {
 
 ### Targeting Specific Handlers
 
-In some cases you may want to show a loading indicator for a specific [AJAX handler event](../ajax/handlers.md), the `data-ajax-progress` attribute will contain the most recent handler name, and this can be used to target a specific request.
+In some cases you may want to show a loading indicator for a specific [AJAX handler event](../../ajax/handlers.md), the `data-ajax-progress` attribute will contain the most recent handler name, and this can be used to target a specific request.
 
 ```html
 <form>
@@ -143,7 +143,7 @@ form[data-ajax-progress=onPay] .is-payment-loading {
 
 ## Working with JavaScript
 
-For more complex scenarios, you can hook in to the [AJAX JavaScript API](../ajax/javascript-api.md) using the `ajax:promise` and `ajax:always` events. These events can be attached to the document, form or target elements.
+For more complex scenarios, you can hook in to the [AJAX JavaScript API](../../ajax/javascript-api.md) using the `ajax:promise` and `ajax:always` events. These events can be attached to the document, form or target elements.
 
 ```js
 formElement.addEventListener('ajax:promise', function() {

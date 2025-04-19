@@ -3,7 +3,7 @@ subtitle: Discover how to use AJAX in the backend panel.
 ---
 # AJAX
 
-The backend panel uses the same [AJAX library as the CMS](../../cms/ajax/introduction.md) pages. The library is included and loaded automatically on the backend pages.
+The backend panel uses the same [AJAX library as the CMS](../../ajax/introduction.md) pages. The library is included and loaded automatically on the backend pages.
 
 ## Backend AJAX Handlers
 
@@ -28,7 +28,7 @@ public function onOpenTemplate()
 
 ### Triggering AJAX Requests
 
-The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [frontend AJAX library](../ajax/introduction) for details. The following example shows how to trigger a request with a backend button.
+The AJAX request can be triggered with the data attributes API or the JavaScript API. Please see the [frontend AJAX library](../../ajax/introduction) for details. The following example shows how to trigger a request with a backend button.
 
 ```html
 <button
@@ -76,5 +76,5 @@ data-request="mywidget::onPaginate"
 #### See Also
 
 ::: also
-* [AJAX Framework Guide](../../cms/ajax/introduction.md)
+* [AJAX Framework Guide](../../ajax/introduction.md)
 :::

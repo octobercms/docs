@@ -7,7 +7,7 @@ subtitle: Twig Tag
 This tag extends the [`{% partial %}` Twig tag](./partial.md).
 :::
 
-The `{% ajaxPartial %}` tag renders partial contents on the page and includes support for [AJAX handlers](../../cms/ajax/introduction.md), self-updating and short update syntax. This is commonly referred to as a self-updating partial.
+The `{% ajaxPartial %}` tag renders partial contents on the page and includes support for [AJAX handlers](../../ajax/introduction.md), self-updating and short update syntax. This is commonly referred to as a self-updating partial.
 
 ```twig
 {% ajaxPartial "contact-form" %}
@@ -23,7 +23,7 @@ The partial contents are wrapped with a specific HTML tag on the first load only
 
 ## Short Update Syntax
 
-When an AJAX partial is used, you no longer need to specify a selector to update it. Just pass `true` to the [data attributes API](../../cms/ajax/attributes-api.md) when using the `data-request-update` attribute.
+When an AJAX partial is used, you no longer need to specify a selector to update it. Just pass `true` to the [data attributes API](../../ajax/attributes-api.md) when using the `data-request-update` attribute.
 
 ```html
 <button

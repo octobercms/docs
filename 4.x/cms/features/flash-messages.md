@@ -3,7 +3,7 @@ subtitle: Display a message about the outcome of a request.
 ---
 # Flash Messages
 
-Flash Messages are a handy way to let the user know the outcome of a request, either as a sucess or failure. Simply use the `Flash` facade to display a message after the request finishes. Flash messages are usually set inside [AJAX handlers](../ajax/handlers.md), inside [Component logic](../../extend/cms-components.md) or inside the page or layout [PHP section](../themes/themes.md).
+Flash Messages are a handy way to let the user know the outcome of a request, either as a sucess or failure. Simply use the `Flash` facade to display a message after the request finishes. Flash messages are usually set inside [AJAX handlers](../../ajax/handlers.md), inside [Component logic](../../extend/cms-components.md) or inside the page or layout [PHP section](../themes/themes.md).
 
 ```php
 function onSave()
@@ -130,7 +130,7 @@ Next, include the partial in your form as [a self-updating partial](../../markup
 </form>
 ```
 
-Alternatively, you can include the partial inside a layout, and update it globally instead of adding the `data-request-flash` every element. Add the `ajax-request-update` meta tag in the head section of the page, and set the content attribute to [update the partial globally](../ajax/update-partials.md).
+Alternatively, you can include the partial inside a layout, and update it globally instead of adding the `data-request-flash` every element. Add the `ajax-request-update` meta tag in the head section of the page, and set the content attribute to [update the partial globally](../../ajax/update-partials.md).
 
 ```html
 <head>

@@ -26,7 +26,7 @@ To enable file uploads on a form, include the `data-request-files` attribute on 
 View the [request and input article](../../extend/services/request-input.md) to learn more about the available methods on the `files()` function.
 :::
 
-Inside your [AJAX handler](../ajax/handlers.md), use the `files()` helper function to access the uploaded file, and call the `store` method to save the file to [a storage disk](../../extend/services/storage.md). The resulting value is the local file path to the saved file.
+Inside your [AJAX handler](../../ajax/handlers.md), use the `files()` helper function to access the uploaded file, and call the `store` method to save the file to [a storage disk](../../extend/services/storage.md). The resulting value is the local file path to the saved file.
 
 The following stores the upload in the **storage/app/userfiles** directory using a generated file name.
 

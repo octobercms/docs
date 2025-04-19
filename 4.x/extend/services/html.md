@@ -77,7 +77,7 @@ Form::ajax('onSave', ['update' => [
 ```
 
 ::: tip
-Most [data attributes from the AJAX framework](../../cms/ajax/attributes-api.md) are available here by dropping the `data-request-` prefix.
+Most [data attributes from the AJAX framework](../../ajax/attributes-api.md) are available here by dropping the `data-request-` prefix.
 :::
 
 ## Form Tokens

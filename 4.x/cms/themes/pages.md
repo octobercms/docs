@@ -184,7 +184,7 @@ public function onStart()
 
 ### Handling Forms
 
-You can handle standard forms with handler methods defined in the page or layout PHP section (handling the AJAX requests is explained in the [AJAX Framework](../ajax/introduction.md) article). Use the `form_open()` [Twig function](../../markup/function/form.md) to define a form that refers to an event handler.
+You can handle standard forms with handler methods defined in the page or layout PHP section (handling the AJAX requests is explained in the [AJAX Framework](../../ajax/introduction.md) article). Use the `form_open()` [Twig function](../../markup/function/form.md) to define a form that refers to an event handler.
 
 ```html
 <form data-request="onHandleForm">

@@ -340,13 +340,13 @@
 -
     title: AJAX
     children:
-        - ajax/introduction
-        - ajax/handlers
-        - ajax/update-partials
-        - ajax/attributes-api
-        - ajax/javascript-api
-        - ajax/turbo-router
-        - ajax/hot-controls
+        - introduction
+        - handlers
+        - update-partials
+        - attributes-api
+        - javascript-api
+        - turbo-router
+        - hot-controls
 
 #
 # Root Nav

@@ -3,7 +3,7 @@ subtitle: Validate form submissions using the AJAX framework.
 ---
 # Validation
 
-Validating forms checks the user input against a set of predefined rules. When using the [AJAX framework](../ajax/introduction.md) form validation occurs without any special configuration, where the invalid field will be focused and an error message is displayed (usually as an alert window).
+Validating forms checks the user input against a set of predefined rules. When using the [AJAX framework](../../ajax/introduction.md) form validation occurs without any special configuration, where the invalid field will be focused and an error message is displayed (usually as an alert window).
 
 ## Flash Validation
 
@@ -22,7 +22,7 @@ For basic validation, including the [`data-request-flash` attribute](./flash-mes
 </form>
 ```
 
-Inside your [AJAX handler](../ajax/handlers.md), you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid. The supplied array (first argument) should use field names for the keys and the error messages for the values.
+Inside your [AJAX handler](../../ajax/handlers.md), you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid. The supplied array (first argument) should use field names for the keys and the error messages for the values.
 
 ```php
 function onSubmit()
@@ -173,7 +173,7 @@ When using the `data-request-validate` attribute in combination with the [`data-
 
 ## Working with JavaScript
 
-To implement custom functionality for the error messages, hook into the `ajax:invalid-field` event to display the field and `ajax:promise` to reset the form on a new submission. The JavaScript events used are found in the [AJAX JavaScript API](../ajax/javascript-api.md).
+To implement custom functionality for the error messages, hook into the `ajax:invalid-field` event to display the field and `ajax:promise` to reset the form on a new submission. The JavaScript events used are found in the [AJAX JavaScript API](../../ajax/javascript-api.md).
 
 ```js
 addEventListener('ajax:invalid-field', function(event) {
