@@ -24,6 +24,12 @@ Take a look at the [Help Center](https://octobercms.com/support) for more resour
     </div>
     <div class="col-md-6">
         <SectionCardLink
+            title="AJAX Framework"
+            description="Learn more about the the AJAX framework used by October CMS."
+            href="/4.x/ajax/introduction.html" />
+    </div>
+    <div class="col-md-6">
+        <SectionCardLink
             title="Markup Guide"
             description="Reference guide for the Twig template syntax for displaying content."
             href="/3.x/markup/templating.html" />
