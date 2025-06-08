@@ -37,21 +37,14 @@ The server code for a dashboard widget must define a class that extends `Backend
 ```php
 namespace Acme\MyPlugin\VueComponents;
 
-use Backend\Classes\VueReportWidgetBase;
+use Dashboard\Classes\VueReportWidgetBase;
+use Dashboard\Classes\ReportFetchData;
 use Carbon\Carbon;
 
 class MyCustomWidget extends VueReportWidgetBase
 {
-    public function getData(
-        array $widgetConfig,
-        ?Carbon $dateStart,
-        ?Carbon $dateEnd,
-        ?int $startTimestamp,
-        ?Carbon $compareDateStart,
-        ?Carbon $compareDateEnd,
-        ?string $aggregationInterval,
-        array $extraData
-    ): mixed {
+    public function getData(ReportFetchData $data): mixed
+    {
         return [
             'current_time' => Carbon::now()->format('Y-m-d H:i:s')
         ];
