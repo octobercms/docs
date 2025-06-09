@@ -148,5 +148,5 @@ Some optional steps to configure your system:
 
 ::: also
 * [Laravel 9 Installation](https://laravel.com/docs/9.x/installation)
-* [Laravel 10 Installation](https://laravel.com/docs/10.x/installation)
+* [Laravel 10 Installation](https://laravel.com/docs/12.x/installation)
 :::

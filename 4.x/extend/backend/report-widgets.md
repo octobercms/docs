@@ -23,12 +23,12 @@ The `create:reportwidget` command generates a backend report widget, view and ba
 php artisan create:reportwidget Acme.Blog TopPosts
 ```
 
-The report widget classes must extend the `Backend\Classes\ReportWidgetBase` class. Example report widget class definition. The class should override the `render` method in order to render the widget itself.
+The report widget classes must extend the `Dashboard\Classes\ReportWidgetBase` class. Example report widget class definition. The class should override the `render` method in order to render the widget itself.
 
 ```php
 namespace RainLab\GoogleAnalytics\ReportWidgets;
 
-use Backend\Classes\ReportWidgetBase;
+use Dashboard\Classes\ReportWidgetBase;
 
 class TrafficSources extends ReportWidgetBase
 {

@@ -7,20 +7,20 @@ subtitle: Provides an interface for accessing generic data.
 
 Every plugin can register any number of data sources. It is recommended to create a new data source for each type of data provided by a plugin. For example, if a plugin offers both customer and sales data, having two separate data sources would simplify widget configuration for end users.
 
-Data sources are classes that extend the `Backend\Classes\ReportDataSourceBase` class. Each data source must register at least one metric and one dimension. In addition, data source classes must implement the `fetchData` method, which is required to return the `ReportFetchDataResult` object. In most cases, when your data source fetches data from the database, you can use the `ReportDataQueryBuilder` class, which constructs and executes the database queries based on the dimension and metrics configuration.
+Data sources are classes that extend the `Dashboard\Classes\ReportDataSourceBase` class. Each data source must register at least one metric and one dimension. In addition, data source classes must implement the `fetchData` method, which is required to return the `ReportFetchDataResult` object. In most cases, when your data source fetches data from the database, you can use the `ReportDataQueryBuilder` class, which constructs and executes the database queries based on the dimension and metrics configuration.
 
 ```php
 use Db;
 use Carbon\Carbon;
-use Backend\Classes\ReportMetric;
-use Backend\Classes\ReportDimension;
-use Backend\Classes\ReportDimensionField;
-use Backend\Classes\ReportDataSourceBase;
-use Backend\Classes\ReportFetchData;
-use Backend\Classes\ReportFetchDataResult;
-use Backend\Classes\ReportDataOrderRule;
-use Backend\Classes\ReportDataPaginationParams;
-use Backend\Classes\ReportDataQueryBuilder;
+use Dashboard\Classes\ReportMetric;
+use Dashboard\Classes\ReportDimension;
+use Dashboard\Classes\ReportDimensionField;
+use Dashboard\Classes\ReportDataSourceBase;
+use Dashboard\Classes\ReportFetchData;
+use Dashboard\Classes\ReportFetchDataResult;
+use Dashboard\Classes\ReportDataOrderRule;
+use Dashboard\Classes\ReportDataPaginationParams;
+use Dashboard\Classes\ReportDataQueryBuilder;
 
 class MyReportDataSource extends ReportDataSourceBase
 {
@@ -58,7 +58,7 @@ Property | Type | Description
 Plugins must register their data sources in the Plugin Registration file (Plugin.php), within the `boot` method.
 
 ```php
-use Backend\Classes\ReportDataSourceManager;
+use Dashboard\Classes\ReportDataSourceManager;
 
 public function boot()
 {
@@ -169,7 +169,7 @@ After registering the metrics, you can add them to a dashboard widget configurat
 
 Data sources should implement the `fetchData` method to return data for the requested dimension, metrics, and dimension fields. This method has quite a few arguments, but in most cases, if your data source works with a database, you can pass them directly to the `ReportDataQueryBuilder` class.
 
-The use of the `ReportDataQueryBuilder` class is optional. The sole requirement for the `fetchData` method is to return a `Backend\Classes\ReportFetchDataResult` object. The approach taken to achieve this doesn't matter. If your data source doesn't work with a database, or if you find `ReportDataQueryBuilder` not flexible enough for your needs, you can use native Laravel classes to load the data.
+The use of the `ReportDataQueryBuilder` class is optional. The sole requirement for the `fetchData` method is to return a `Dashboard\Classes\ReportFetchDataResult` object. The approach taken to achieve this doesn't matter. If your data source doesn't work with a database, or if you find `ReportDataQueryBuilder` not flexible enough for your needs, you can use native Laravel classes to load the data.
 
 Below is a partial implementation of our demo ecommerce data source:
 

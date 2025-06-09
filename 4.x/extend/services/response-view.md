@@ -294,5 +294,5 @@ if (View::exists('acme.blog::mail.customer')) {
 
 ::: also
 * [Uploads & Downloads](../../ajax/features/upload-download.md)
-* [Laravel Responses](https://laravel.com/docs/10.x/responses)
+* [Laravel Responses](https://laravel.com/docs/12.x/responses)
 :::

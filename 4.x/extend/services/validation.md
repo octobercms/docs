@@ -853,5 +853,5 @@ public function beforeValidate()
 #### See Also
 
 ::: also
-* [Laravel Validation Documentation](https://laravel.com/docs/10.x/validation)
+* [Laravel Validation Documentation](https://laravel.com/docs/12.x/validation)
 :::
