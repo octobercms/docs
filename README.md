@@ -14,13 +14,13 @@ Take a look at the [Help Center](https://octobercms.com/support) for more resour
         <SectionCardLink
             title="Getting Started"
             description="Learn how to install October CMS on your server and get up and running."
-            href="/3.x/setup/installation.html" />
+            href="/4.x/setup/installation.html" />
     </div>
     <div class="col-md-6">
         <SectionCardLink
             title="CMS Guide"
             description="Build your website using a simple file structure using themes."
-            href="/3.x/cms/themes/themes.html" />
+            href="/4.x/cms/themes/themes.html" />
     </div>
     <div class="col-md-6">
         <SectionCardLink
@@ -32,19 +32,19 @@ Take a look at the [Help Center](https://octobercms.com/support) for more resour
         <SectionCardLink
             title="Markup Guide"
             description="Reference guide for the Twig template syntax for displaying content."
-            href="/3.x/markup/templating.html" />
+            href="/4.x/markup/templating.html" />
     </div>
     <div class="col-md-6">
         <SectionCardLink
             title="Extending October CMS"
             description="Plugins are foundation for adding new features to the CMS by extending it."
-            href="/3.x/extend/system/plugins.html" />
+            href="/4.x/extend/system/plugins.html" />
     </div>
     <div class="col-md-6">
         <SectionCardLink
             title="API Handbook"
             description="Reference guide for form fields, list columns, filter scopes, etc."
-            href="/3.x/element/form-fields.html" />
+            href="/4.x/element/form-fields.html" />
     </div>
 </div>
 

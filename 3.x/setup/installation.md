@@ -46,6 +46,12 @@ To install the platform, initialize a project using the `create-project` command
 composer create-project october/october myoctober
 ```
 
+The above commands install the latest version of October CMS, if you want to install v3.0, use the command below instead.
+
+```bash
+composer create-project october/october myoctober "^3.0"
+```
+
 When the command finishes, enter the project directory:
 
 ```bash
