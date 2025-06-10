@@ -79,7 +79,7 @@ The **onTest** handler method accessed the form data using the `input` [helper m
 ```php
 function onTest()
 {
-    $this->page['result'] = input('value1') + input('value2');
+    $this['result'] = input('value1') + input('value2');
 }
 ```
 
