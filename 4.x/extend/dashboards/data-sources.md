@@ -233,7 +233,7 @@ Below is the full implementation of the `fetchData` method:
 ```php
 protected function fetchData(ReportFetchData $data): ReportFetchDataResult
 {
-    if ($dimension->getCode() !== self::DIMENSION_PRODUCT) {
+    if ($data->dimension->getCode() !== self::DIMENSION_PRODUCT) {
         throw new SystemException('Invalid dimension');
     }
 
