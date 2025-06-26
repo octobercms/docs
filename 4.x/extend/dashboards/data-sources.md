@@ -58,11 +58,11 @@ Property | Type | Description
 Plugins must register their data sources in the Plugin Registration file (Plugin.php), within the `boot` method.
 
 ```php
-use Dashboard\Classes\ReportDataSourceManager;
+use Dashboard\Classes\DashManager;
 
 public function boot()
 {
-    ReportDataSourceManager::instance()->registerDataSourceClass(
+    DashManager::instance()->registerDataSourceClass(
         MyReportDataSource::class,
         'My Custom Data Source' // This can be a reference to a localization string
     );
@@ -233,7 +233,7 @@ Below is the full implementation of the `fetchData` method:
 ```php
 protected function fetchData(ReportFetchData $data): ReportFetchDataResult
 {
-    if ($dimension->getCode() !== self::DIMENSION_PRODUCT) {
+    if ($data->dimension->getCode() !== self::DIMENSION_PRODUCT) {
         throw new SystemException('Invalid dimension');
     }
 
