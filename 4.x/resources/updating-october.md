@@ -50,9 +50,13 @@ The `develop` branch includes updates that are not released in the stable channe
 The `dev-develop` notation may also apply to some plugins and themes.
 :::
 
-## Upgrade Guide from v1 and v2
+## Upgrade Guide from v1, v2 and v3
 
-If your starting point is October CMS 2.0, please observe the following guides when performing the upgrade.
+If your starting point is October CMS 3.0, please observe the following guides when performing the upgrade.
+
+- [October CMS v4.0 Upgrade Guide](https://octobercms.com/support/article/rn-39)
+
+If your starting point is October CMS 2.0, please observe these guides before continuing with the above guides.
 
 - [October CMS v3.0 Upgrade Guide](https://octobercms.com/support/article/rn-30)
 - [October CMS v3.1 Stable Release](https://octobercms.com/support/article/rn-32)

@@ -163,6 +163,13 @@
         - settings/file-settings
         - settings/model-settings
 -
+    title: Dashboard Design
+    children:
+        - dashboards/dash-controller
+        - dashboards/data-sources
+        - dashboards/report-widgets
+        - dashboards/vue-report-widgets
+-
     title: Database
     children:
         - database/basics
