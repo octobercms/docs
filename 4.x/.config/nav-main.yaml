@@ -136,7 +136,6 @@
         - backend/navigation
         - backend/users
         - backend/permissions
-        - backend/report-widgets
 -
     title: Form Design
     children:
