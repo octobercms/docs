@@ -80,6 +80,7 @@ To set the storage engine for a table, set the `engine` property on the schema b
 
 ```php
 Schema::create('users', function ($table) {
+    $table->engine = 'InnoDB';
     $table->increments('id');
 });
 ```
