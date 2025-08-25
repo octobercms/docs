@@ -230,7 +230,7 @@ $this->call('october:migrate');
 You can also pass arguments as an array.
 
 ```php
-$this->call('plugin:refresh', ['name' => 'October.Demo']);
+$this->call('plugin:refresh', ['namespace' => 'October.Demo']);
 ```
 
 As well as options.
