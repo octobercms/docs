@@ -35,18 +35,13 @@ Below you can see an example seed directory structure. The **blueprints** direct
 |           |   └── post.yaml  _← Blueprint File_
 |           ├── lang
 |           |   └── en.json  _← Language File_
+|           ├── media
+|           |   └── banner.jpg  _← Media File_
 |           ├── data
-|           |   └── blog-posts.json  _← Data File_
+|           |   ├── blog-posts.json  _← Data File_
+|           |   └── media-files.json
 |           └── data.yaml  _← Seeding Script_
 :::
-
-## Importing Blueprints
-
-::: aside
-Since blueprints do not depend on any specific file or directory structure, they can be moved around freely.
-:::
-
-When importing blueprints, simply place the blueprint files in the **blueprints** directory. It does not use any configuration, when seeding all blueprints are simply copied to the **app/blueprints** directory. A new directory is created inside that has the same name as the theme. The blueprints are placed inside this new directory.
 
 ## Importing Languages
 
@@ -65,12 +60,11 @@ The **data.yaml** file contains a specific format used for importing content in 
         file_format: json
         blueprint_uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6
 -
-    name: Blog Category Data
-    class: Tailor\Models\RecordImport
-    file: seeds/data/blog-categories.json
+    name: Media File Data
+    class: Media\Models\MediaLibraryItemImport
+    file: seeds/data/media-files.json
     attributes:
         file_format: json
-        blueprint_uuid: b022a74b-15e6-4c6b-9eb9-17efc5103543
 ```
 
 The YAML file should define an array where each item in the array supports the following properties.
@@ -82,9 +76,9 @@ Property | Description
 **file** | refers to the JSON data file that contains the content to import.
 **attributes** | a list of attributes to set on the Import Model before importing.
 
-### Example Data File
+### Tailor Blueprint Data
 
-The following is an example of a JSON file that can be used to import blog categories. Each item in the JSON array produces an imported record in the database with the supplied attributes. Providing an **id** attribute allows records to link across multiple imports.
+Use the `Tailor\Models\RecordImport` class to import Tailor blueprints to the app directory. The following is an example of a JSON file that can be used to import blog categories. Each item in the JSON array produces an imported record in the database with the supplied attributes. Providing an **id** attribute allows records to link across multiple imports.
 
 ```json
 [
@@ -100,3 +94,38 @@ The following is an example of a JSON file that can be used to import blog categ
     }
 ]
 ```
+### Media File Data
+
+Use the `Media\Models\MediaLibraryItemImport` to import images in to the media directory. The following JSON is an example of importing files to the media library. The **rootPath** attribute defines a prefix for the media library, this could set to an empty string to import everything in the root directory. The **type** attribute specifies either `file` or `folder` are used to import their respective types, with the **path** as the destination and **source** as the source file, found in the context of the theme directory.
+
+```json
+[
+    {
+        "type": "folder",
+        "path": "my-theme/announcements",
+        "source": "seeds/media/announcements"
+    },
+    {
+        "type": "folder",
+        "path": "my-theme/news/2025",
+        "source": "seeds/media/news"
+    },
+    {
+        "type": "file",
+        "path": "my-theme/banner.jpg",
+        "source": "seeds/media/banner.jpg"
+    }
+]
+```
+
+## Importing Blueprints
+
+::: aside
+Since blueprints do not depend on any specific file or directory structure, they can be moved around freely.
+:::
+
+When importing blueprints, simply place the blueprint files in the **seeds/blueprints** directory. It does not use any configuration, when seeding all blueprints are simply copied to the **app/blueprints** directory. A new directory is created inside that has the same name as the theme. The blueprints are placed inside this new directory.
+
+:::tip
+Blueprints do not always need to be imported via seeding. They can be included in the theme's **/blueprints** directory instead. See [the introduction article](../tailor/introduction.md) to learn more.
+:::
