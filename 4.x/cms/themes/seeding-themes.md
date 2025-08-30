@@ -5,6 +5,24 @@ subtitle: Populate blueprints and database records with sample content.
 
 Themes support the ability to import sample content from seed scripts, including database content and [Tailor blueprints](../../cms/tailor/introduction.md). A specific folder inside the theme called **seeds** is used along with a directory structure to provide the content.
 
+## Seeding a Theme
+
+The `theme:seed` artisan command is used to seed a theme.
+
+```bash
+php artisan theme:seed <theme name>
+```
+
+You may also use the `--root` option to instruct the command to import the blueprints in to the root directory instead of in a nested directory.
+
+```bash
+php artisan theme:seed <theme name> --root
+```
+
+:::tip
+You may also seed a theme using the admin panel by navigating to **Settings → Frontend Theme → Manage → Seed Content**.
+:::
+
 ## Directory Structure
 
 Below you can see an example seed directory structure. The **blueprints** directory contains any blueprint templates used by the theme, these are imported automatically to the **app/blueprints** directory with a nested directory called **mywebsite**. The **data.yaml** file contains instructions on how to import the content in to the database.
@@ -82,21 +100,3 @@ The following is an example of a JSON file that can be used to import blog categ
     }
 ]
 ```
-
-## Seeding a Theme
-
-The `theme:seed` artisan command is used to seed a theme.
-
-```bash
-php artisan theme:seed <theme name>
-```
-
-You may also use the `--root` option to instruct the command to import the blueprints in to the root directory instead of in a nested directory.
-
-```bash
-php artisan theme:seed <theme name> --root
-```
-
-:::tip
-You may also seed a theme using the admin panel by navigating to **Settings → Frontend Theme → Manage → Seed Content**.
-:::
