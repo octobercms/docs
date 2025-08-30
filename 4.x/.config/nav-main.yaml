@@ -242,6 +242,7 @@
         - tag/component
         - tag/placeholder
         - tag/flash
+        - tag/cache
         - tag/verbatim
         - tag/macro
         - tag/for
