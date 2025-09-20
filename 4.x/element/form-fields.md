@@ -258,6 +258,24 @@ trigger:
     field: file_name
 ```
 
+The `value[]` can be used to match an empty value.
+
+```yaml
+trigger:
+    action: show
+    condition: value[]
+    # ...
+```
+
+Likewise, the `value[*]` condition can be used to match any value.
+
+```yaml
+trigger:
+    action: show
+    condition: value[*]
+    # ...
+```
+
 #### Multiple Field Values
 
 Some fields, such as [Checkbox List](./form/field-checkboxlist.md) and [Tag List](./form/widget-taglist.md), will store their values as an array. When referencing these fields, the field name should use an array suffix (`[]`) to look at all possible values. For example, if a `colors` field name supports multiple values, the field name `colors[]` should be used as a reference.
