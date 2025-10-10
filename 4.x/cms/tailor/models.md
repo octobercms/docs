@@ -5,13 +5,21 @@ subtitle: The available models provided by Tailor.
 
 This article describes how to interact with Tailor using PHP and the available models.
 
-## Entry Record
+## Model Classes
 
-The `Tailor\Models\EntryRecord` model is used to store content for an entry.
+The following model classes can be observed to their associated blueprint types.
 
-### Available Attributes
+Model Class | Blueprint Type
+----------- | --------------
+`Tailor\Models\EntryRecord` | entry
+`Tailor\Models\StructureRecord` | structure
+`Tailor\Models\StreamRecord` | stream
+`Tailor\Models\SingleRecord` | single
+`Tailor\Models\GlobalRecord` | global
 
-In addition to your defined form fields, the following attributes can be found on the retrieved model.
+## Entry Records
+
+The `EntryRecord` model is base model used to store content for an entry. In addition to your defined form fields, the following attributes can be found on the retrieved model.
 
 Attribute | Description
 -------- | -------------
@@ -27,9 +35,9 @@ Attribute | Description
 **published_at** | The published date for the entry.
 **published_at_date** | The published date, or if none is specified, the creation date.
 
-#### Structure Entries
+### Structure Entry
 
-If an entry type is a `structure`, it will have some extra attributes.
+The `StructureRecord` model extends the `EntryRecord` and is used to store content for an structured entries. If an entry type is a `structure`, it will resolve to this model and have some extra attributes.
 
 Attribute | Description
 -------- | -------------
@@ -37,9 +45,9 @@ Attribute | Description
 **parent** | The parent record for this entry, if available.
 **children** | The child records for this entry, if available.
 
-#### Stream Entries
+### Stream Entry
 
-If an entry type is a `stream`, it will have some extra attributes.
+The `StreamRecord` model extends the `EntryRecord` model is used to store content for streamed entries. If an entry type is a `stream`, it will have some extra attributes.
 
 Attribute | Description
 -------- | -------------
@@ -49,7 +57,7 @@ Attribute | Description
 
 ### Retrieving Multiple Entries
 
-To work with an entry using PHP, you may use the `Tailor\Models\EntryRecord` model and call the `inSection` static method, passing the handle to return a prepared [database model query](../../extend/database/query.md). Alternatively, you can look it up using the UUID and the `inSectionUuid` method.
+To work with an entry using PHP, you may use the model class (e.g. `EntryRecord`) and call the `inSection` static method, passing the handle to return a prepared [database model query](../../extend/database/query.md). Alternatively, you can look it up using the UUID and the `inSectionUuid` method.
 
 The following `get` method query returns [a collection of records](../../extend/services/collection.md).
 
@@ -70,9 +78,9 @@ $record = EntryRecord::inSection('Blog\Post')->where('slug', 'first-post')->firs
 If an [entry type](../tailor/blueprints.md) is set to `single`, you can use the `findSingleForSection` method to look up the entry. Likewise, the `findSingleForSectionUuid` can be used for looking up by the UUID. These methods will ensure a record exists during lookup.
 
 ```php
-$record = EntryRecord::findSingleForSection('Homepage');
+$record = SingleRecord::findSingleForSection('Homepage');
 
-$record = EntryRecord::findSingleForSectionUuid('3328c303-7989-462e-b866-27e7037ba275');
+$record = SingleRecord::findSingleForSectionUuid('3328c303-7989-462e-b866-27e7037ba275');
 ```
 
 ### Inserting & Updating Entries
@@ -87,7 +95,7 @@ $post->save();
 
 ## Global Record
 
-The `Tailor\Models\GlobalRecord` model is used to store content for a global.
+The `GlobalRecord` model is used to store content for a global.
 
 ### Available Attributes
 
@@ -184,6 +192,33 @@ The `extendInSectionUuid` and `extendInGlobalUuid` methods will not throw an exc
 ## Extending Tailor Models
 
 In some cases you may want to combine tailor models with [regular database models](../../extend/system/models.md).
+
+### Replacing the Entire Model
+
+Use the `modelClass` blueprint property when you need Tailor blueprints to include more complex functionality. This will resolve the blueprint to a custom model instance.
+
+```yaml
+handle: Blog\Post
+type: stream
+name: Blog Post
+modelClass: App\Models\TailorBlogPost
+# ...
+```
+
+It is important that the model defined extends the exact model class used by the blueprint type. In the above example, we must extend the `StreamRecord` class since it uses the `stream` type.
+
+```php
+namespace App\Models;
+
+use Tailor\Models\StreamRecord;
+
+class TailorBlogPost extends StreamRecord
+{
+    // Custom model logic goes here
+}
+```
+
+Now, whenever the blueprint is resolved, it will be an instance of the `TailorBlogPost` class.
 
 ### Associating Tailor to Regular Models
 
