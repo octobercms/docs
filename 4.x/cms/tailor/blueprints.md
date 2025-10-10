@@ -38,6 +38,7 @@ Property | Description
 **customMessages** | customize the messages used in the user interface (see below).
 **showExport** | displays a toolbar button for exporting records. Default: `true`.
 **showImport** | displays a toolbar button for importing records. Default: `true`.
+**modelClass** | replaces the PHP model class with a [custom model instance](./models.md).
 
 ### Entry Variants
 
