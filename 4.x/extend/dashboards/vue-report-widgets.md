@@ -57,32 +57,34 @@ class MyCustomWidget extends VueReportWidgetBase
 The Vue component for the widget must be defined in a file located in the assets/js directory, as previously mentioned. Example component code (assets/js/mycustomwidget.js):
 
 ```jsx
-Vue.component('plugin-author-component-mycustomwidget', {
-    extends: Vue.options.components['dashboard-component-dashboard-widget-base'],
-    data: function () {
-        return {
-        }
-    },
-    methods: {
-        useCustomData: function () {
-            return true;
+oc.Modules.register('plugin-author.vuecomponents.mycustomwidget', function () {
+    Vue.component('plugin-author-vuecomponents-mycustomwidget', {
+        extends: Vue.options.components['dashboard-component-dashboard-widget-base'],
+        data: function () {
+            return {
+            }
         },
+        methods: {
+            useCustomData: function () {
+                return true;
+            },
 
-        makeDefaultConfigAndData: function () {
-            Vue.set(this.widget.configuration, 'title', 'My Custom Widget');
+            makeDefaultConfigAndData: function () {
+                Vue.set(this.widget.configuration, 'title', 'My Custom Widget');
+            },
+
+            getSettingsConfiguration: function () {
+                const result = [{
+                    property: "title",
+                    title: "Title",
+                    type: "string",
+                }];
+
+                return result;
+            }
         },
-
-        getSettingsConfiguration: function () {
-            const result = [{
-                property: "title",
-                title: "Title",
-                type: "string",
-            }];
-
-            return result;
-        }
-    },
-    template: '#plugin_author_vuecomponents_mycustomwidget'
+        template: '#plugin_author_vuecomponents_mycustomwidget'
+    });
 });
 ```
 
