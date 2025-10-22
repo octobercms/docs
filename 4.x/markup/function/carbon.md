@@ -27,12 +27,18 @@ The `format` method can be used to apply various formats.
 Meeting starts at {{ carbon(event.start_at).format('H:i') }} in Johannesburg.
 ```
 
-## formatLocalized
+## isoFormat
 
-Format a local time/date according to locale settings, this is the equivalent to `strftime` in PHP.
+Formats a date or time according to locale settings using ISO standards. This replaces the deprecated `formatLocalized` method.
 
 ```twig
-{{ carbon(article.created_at).formatLocalized('%d.%m.%Y %H:%M:%S') }}
+{{ carbon(article.created_at).isoFormat('DD.MM.YYYY HH:mm:ss') }}
+```
+
+For example, to display the month and year in French:
+
+```twig
+{{ carbon(someDate).isoFormat('MMMM Y') }}  {# outputs "octobre 2025" #}
 ```
 
 ## diffForHumans
