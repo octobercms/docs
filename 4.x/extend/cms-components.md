@@ -394,18 +394,25 @@ Components can inject assets (CSS and JavaScript files) to pages or layouts they
 ```php
 public function onRun()
 {
-    $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
+    $this->addJs('assets/javascript/blog-controls.js');
 }
 ```
 
-If the path specified in the `addCss` and `addJs` method argument begins with a slash (`/`) then it will be relative to the website root. If the asset path does not begin with a slash then it is relative to the component directory.
-
-The `addCss` and `addJs` methods provide a second argument that defines the attributes of your injected asset as an array.
+If the path specified in the `addCss` and `addJs` method is relative to the component directory. The `addCss` and `addJs` methods provide a second argument that defines the attributes of your injected asset as an array.
 
 ```php
 public function onRun()
 {
-    $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js', ['defer' => true]);
+    $this->addJs('assets/javascript/blog-controls.js', ['defer' => true]);
+}
+```
+
+If the first argument begins with a slash (`/`) then it will be relative to the website root. Use this if you need to reference an asset outside the context of the component.
+
+```php
+public function onRun()
+{
+    $this->addJs('/plugins/acme/blog/assets/javascript/blog-controls.js');
 }
 ```
 
