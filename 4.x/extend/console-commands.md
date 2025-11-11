@@ -242,5 +242,6 @@ $this->call('october:update', ['--force' => true]);
 #### See Also
 
 ::: also
+* [Available Console Commands](../element/available-commands.md)
 * [Laravel Artisan Console Documentation](https://laravel.com/docs/12.x/artisan)
 :::

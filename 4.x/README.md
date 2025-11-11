@@ -1,3 +1,3 @@
-# October CMS 3.0
+# October CMS 4.0
 
 <Redirect to="setup/installation" />
