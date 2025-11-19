@@ -64,11 +64,32 @@ columns:
 Option | Description
 ------ | -----------
 **type** | the input type for this column's cells. Must be one of the following: `string`, `checkbox`, `dropdown` or `autocomplete`.
-**options** | for `dropdown` and `autocomplete` columns only - this specifies the AJAX handler that will return the available options, as an array. The array key is used as the value of the option, and the array value is used as the option label.
+**options** | used only for ``dropdown``  and ``autocomplete`` columns. The array key defines the option value, and the array value defines the option label.
 **readOnly** | whether this column is read-only. Default: `false`.
 **title** | defines the column's title.
 **validation** | an array specifying the validation for the content of the column's cells. See the *Column validation* section below.
 **width** | defines the width of the column, in pixels.
+
+
+#### Ajax Handler
+
+For columns of type `dropdown` or `autocomplete`, the list of available options can be provided through an AJAX handler defined in the model.
+The handler must follow the naming convention `get<<FieldName>>DataTableOptions()`, where `FieldName` matches the name of the field defined in the form configuration.
+
+The method should return an associative array, where the array key is used as the stored value and the array value is used as the display label in the data table.
+
+**Example:**
+
+For a field named `country`:
+
+```php
+public function getCountryDataTableOptions()
+{
+    return Country::pluck('name', 'code')->all();
+}
+```
+
+This will automatically populate the options for the `country` field in the DataTable.
 
 #### Column Validation
 
