@@ -64,32 +64,11 @@ columns:
 Option | Description
 ------ | -----------
 **type** | the input type for this column's cells. Must be one of the following: `string`, `checkbox`, `dropdown` or `autocomplete`.
-**options** | used only for ``dropdown``  and ``autocomplete`` columns. The array key defines the option value, and the array value defines the option label.
+**options** | used only for `dropdown` and `autocomplete` columns. The array key defines the option value, and the array value defines the option label. See the AJAX Handlers section below.
 **readOnly** | whether this column is read-only. Default: `false`.
 **title** | defines the column's title.
 **validation** | an array specifying the validation for the content of the column's cells. See the *Column validation* section below.
 **width** | defines the width of the column, in pixels.
-
-
-#### Ajax Handler
-
-For columns of type `dropdown` or `autocomplete`, the list of available options can be provided through an AJAX handler defined in the model.
-The handler must follow the naming convention `get<<FieldName>>DataTableOptions()`, where `FieldName` matches the name of the field defined in the form configuration.
-
-The method should return an associative array, where the array key is used as the stored value and the array value is used as the display label in the data table.
-
-**Example:**
-
-For a field named `country`:
-
-```php
-public function getCountryDataTableOptions()
-{
-    return Country::pluck('name', 'code')->all();
-}
-```
-
-This will automatically populate the options for the `country` field in the DataTable.
 
 #### Column Validation
 
@@ -102,3 +81,22 @@ Validation | Description
 **length** | Validates the data to be of a certain length. An integer `min` and `max` attribute must be provided, representing the minimum and maximum number of characters that must be entered.
 **regex** | Validates the data against a regular expression. A string `pattern` attribute must be provided, defining the regular expression to test the data against.
 **required** | Validates that the data must be entered before saving.
+
+#### AJAX Handlers
+
+For columns of type `dropdown` or `autocomplete`, the list of available options can be provided through an AJAX handler defined in the model.
+
+The handler must follow the naming convention `getFieldNameDataTableOptions()`, where `FieldName` matches the name of the field defined in the form configuration.
+
+The method should return an associative array, where the array key is used as the stored value and the array value is used as the display label in the data table.
+
+For example, with a field named **country** the `getCountryDataTableOptions` is used.
+
+```php
+public function getCountryDataTableOptions()
+{
+    return Country::pluck('name', 'code')->all();
+}
+```
+
+This will automatically populate the options for the `country` field in the DataTable.
