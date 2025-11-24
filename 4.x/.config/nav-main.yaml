@@ -286,7 +286,6 @@
 "/cms/":
 -
     title: CMS
-    collapsable: false
     children:
         - themes/themes
         - themes/pages
@@ -296,63 +295,17 @@
         - themes/components
         - themes/snippets
 -
-    title: Tailor
-    collapsable: false
-    children:
-        - tailor/introduction
-        - tailor/blueprints
-        - tailor/content-fields
-        - tailor/navigation
-        - tailor/models
--
-    title: Available Components
-    collapsable: false
-    children:
-        - components/section
-        - components/collection
-        - components/global
-        - components/resources
-        - components/sitepicker
--
-    title: Theme Development
-    collapsable: false
-    children:
-        - themes/settings
-        - themes/localization
-        - themes/child-themes
-        - themes/database-themes
-        - themes/seeding-themes
--
-    title: Media Manager
-    collapsable: false
-    children:
-        - media/introduction
-        - media/providers
--
-    title: Resources
-    collapsable: false
-    children:
-        - resources/multisite
-        - resources/building-apis
-
-#
-# AJAX Nav
-#
-"/ajax/":
--
     title: AJAX
-    collapsable: false
     children:
-        - introduction
-        - handlers
-        - update-partials
-        - attributes-api
-        - javascript-api
-        - turbo-router
-        - hot-controls
+        - ajax/introduction
+        - ajax/handlers
+        - ajax/update-partials
+        - ajax/attributes-api
+        - ajax/javascript-api
+        - ajax/turbo-router
+        - ajax/hot-controls
 -
     title: Features
-    collapsable: false
     children:
         - features/validation
         - features/uploads
@@ -363,6 +316,40 @@
         - features/redirects
         - features/polling
         - features/modals
+-
+    title: Media Manager
+    children:
+        - media/introduction
+        - media/providers
+-
+    title: Tailor
+    children:
+        - tailor/introduction
+        - tailor/blueprints
+        - tailor/content-fields
+        - tailor/navigation
+        - tailor/models
+-
+    title: Theme Development
+    children:
+        - themes/settings
+        - themes/localization
+        - themes/child-themes
+        - themes/database-themes
+        - themes/seeding-themes
+-
+    title: Available Components
+    children:
+        - components/section
+        - components/collection
+        - components/global
+        - components/resources
+        - components/sitepicker
+-
+    title: Resources
+    children:
+        - resources/multisite
+        - resources/building-apis
 
 #
 # Root Nav
