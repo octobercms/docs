@@ -11,6 +11,7 @@
         - inspector-types
         - define-options
         - available-icons
+        - available-commands
 -
     title: Tailor Fields
     children:
