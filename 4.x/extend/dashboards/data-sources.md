@@ -42,18 +42,23 @@ The `ReportFetchData` object has the following properties available.
 Property | Type | Description
 -------- | ---- | -----------
 **$dimension** | `ReportDimension` | the dimension to group the data by
-**$metrics** | `array` | the metrics to return
-**$metricsConfiguration** | `array` | the report metrics configuration
+**$dimensionCode** | `string` | the dimension code string
+**$metrics** | `array` | the metrics to return (array of `ReportMetric` objects)
+**$metricCodes** | `array` | the metric code strings
+**$metricsConfiguration** | `array` | the report metrics configuration (array of `ReportMetricConfiguration` objects)
 **$dateStart** | `?Carbon` | the start date
 **$dateEnd** | `?Carbon` | the end date
-**$startTimestamp** | `?int` | the start date
-**$dimensionFilters** | `array` | the filters to apply to the dimension values
-**$groupInterval** | `?string` | the group interval.
-**$orderRule** | `?ReportDataOrderRule` | the data ordering rule.
-**$limit** | `?int` | the maximum number of records to return.
-**$paginationParams** | `?ReportDataPaginationParams` | the pagination parameters.
-**$hideEmptyDimensionValues** | `bool` | indicates whether empty dimension values must be removed from the dataset.
-**$totalsOnly** | `bool` | indicates that the method should only return total values for metrics, and not rows.
+**$compareDateStart** | `?Carbon` | the comparison period start date (for period-over-period comparisons)
+**$compareDateEnd** | `?Carbon` | the comparison period end date
+**$startTimestamp** | `?int` | optional starting timestamp for relative intervals (e.g., past hour)
+**$dimensionFilters** | `array` | the filters to apply to the dimension values (array of `ReportDimensionFilter` objects)
+**$groupInterval** | `?string` | the group interval (one of the `GROUP_INTERVAL_*` constants: DAY, WEEK, MONTH, QUARTER, YEAR, FULL)
+**$orderRule** | `?ReportDataOrderRule` | the data ordering rule
+**$limit** | `?int` | the maximum number of records to return
+**$paginationParams** | `?ReportDataPaginationParams` | the pagination parameters
+**$hideEmptyDimensionValues** | `bool` | indicates whether empty dimension values must be removed from the dataset
+**$totalsOnly** | `bool` | indicates that the method should only return total values for metrics, and not rows
+**$resetCache** | `bool` | indicates that the cache should be reset
 
 Plugins must register their data sources in the Plugin Registration file (Plugin.php), within the `boot` method.
 
