@@ -299,6 +299,53 @@ The updated metric data is displayed on the dashboard as follows:
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/dashboards/currency.png)
 
+### Custom Display Formatting
+
+While `Intl.NumberFormat` handles most numeric formatting needs (currencies, percentages, compact notation), some metrics require custom string transformations that cannot be achieved with standard number formatting. For example, displaying durations as "2:30h" instead of "150" minutes.
+
+The `setDisplayFormatter` method allows you to define a server-side callback that formats metric values into human-readable strings. This formatted value is used in non-graph displays such as tables and indicators, while charts continue to use the raw numeric values.
+
+```php
+$this->registerMetric(
+    (new ReportMetric(
+        self::METRIC_DURATION,
+        'acme_entries.duration_minutes',
+        'Duration',
+        ReportMetric::AGGREGATE_SUM
+    ))->setDisplayFormatter(function ($value) {
+        $totalMinutes = (int) $value;
+        $hours = intdiv($totalMinutes, 60);
+        $minutes = $totalMinutes % 60;
+        return sprintf('%d:%02dh', $hours, $minutes);
+    })
+);
+```
+
+When a display formatter is set:
+
+- **Tables**: Cell values and totals display the formatted string (e.g., "2:30h")
+- **Indicators**: The main value displays the formatted string
+- **Charts**: Raw numeric values are used (formatting would break graph rendering)
+
+You can combine `setDisplayFormatter` with `intlFormatOptions`. If both are set, the display formatter takes precedence for non-graph displays, while `intlFormatOptions` serves as a fallback for contexts where server-side formatting isn't available.
+
+```php
+$this->registerMetric(
+    (new ReportMetric(
+        self::METRIC_DURATION,
+        'acme_entries.duration_minutes',
+        'Duration',
+        ReportMetric::AGGREGATE_SUM,
+        ['style' => 'unit', 'unit' => 'minute'] // Fallback for charts
+    ))->setDisplayFormatter(function ($value) {
+        // Used for tables and indicators
+        $hours = intdiv((int) $value, 60);
+        $minutes = (int) $value % 60;
+        return sprintf('%d:%02dh', $hours, $minutes);
+    })
+);
+```
+
 ### Displaying Extra Dimension Data
 
 In our demo database structure, the products table has a `brand` column. Additionally, it references the categories table, ensuring each product is linked to a category. We can display the brand and category names in reports along with the product name by using the dimension fields feature.
