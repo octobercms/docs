@@ -113,6 +113,38 @@ $user->slugAttributes();
 $user->save();
 ```
 
+### Base Identifier
+
+Base identifiers add random base64 encoded identifiers to a model, used as random lookup keys that are immune to enumeration attacks. To add base identifiers to your model, apply the `October\Rain\Database\Traits\BaseIdentifier` trait.
+
+```php
+class Order extends Model
+{
+    use \October\Rain\Database\Traits\BaseIdentifier;
+}
+```
+
+To add a `baseid` column to your table, you may use the `string` method inside a migration.
+
+```php
+Schema::table('orders', function ($table) {
+    $table->string('baseid')->nullable()->index();
+});
+```
+
+Now, when a model is created, a unique random identifier will be generated and stored in the `baseid` column. This identifier is URL-safe and can be used for public-facing lookups instead of sequential IDs.
+
+```php
+$order = Order::create(['name' => 'My Order']);
+echo $order->baseid; // Outputs something like: "xK9mN2pL1qRs"
+```
+
+You may modify the column name used to store the base identifier by defining the `BASEID` constant.
+
+```php
+const BASEID = 'my_custom_baseid_column';
+```
+
 ## Sorting and Reordering
 
 ### Sortable
@@ -150,6 +182,51 @@ If sorting a subset of records, the second array is used to provide a reference 
 
 ```php
 $user->setSortableOrder([3, 2, 1], [100, 200, 300]);
+```
+
+### Sortable Relation
+
+Sortable relations add sorting support to pivot relationships, such as `belongsToMany`. To add sorting to a pivot relationship, apply the `October\Rain\Database\Traits\SortableRelation` trait and define the `pivotSortable` option in your relation definition.
+
+```php
+class Post extends Model
+{
+    use \October\Rain\Database\Traits\SortableRelation;
+
+    public $belongsToMany = [
+        'tags' => [
+            \Acme\Blog\Models\Tag::class,
+            'table' => 'acme_blog_post_tag',
+            'pivotSortable' => 'sort_order'
+        ]
+    ];
+}
+```
+
+To add a `sort_order` column to your pivot table, you may use the `integer` method inside a migration.
+
+```php
+Schema::table('acme_blog_post_tag', function ($table) {
+    $table->integer('sort_order')->default(0);
+});
+```
+
+Use the `setSortableRelationOrder` method to set the order of related records. The first argument is the relation name, the second is an array of record IDs in the desired order.
+
+```php
+$post->setSortableRelationOrder('tags', [3, 1, 2]);
+```
+
+If you want to use an incrementing pool starting from 1, pass `true` as the third argument.
+
+```php
+$post->setSortableRelationOrder('tags', [3, 1, 2], true);
+```
+
+Alternatively, you can provide a specific array of sort order values.
+
+```php
+$post->setSortableRelationOrder('tags', [3, 1, 2], [100, 200, 300]);
 ```
 
 ### Simple Tree
@@ -299,6 +376,56 @@ There are several methods for moving nodes around:
 - `moveAfter($otherNode)`: Move to the node to the right of ...
 - `makeChildOf($otherNode)`: Make the node a child of ...
 - `makeRoot()`: Make current node a root node.
+
+### Sluggable Tree
+
+The sluggable tree trait creates structured slugs, called full slugs, for hierarchical models. This is useful when you need URL paths that reflect the tree structure, such as `parent-slug/child-slug/grandchild-slug`. The model is assumed to have `parent` and `children` relations defined (typically via the `SimpleTree` or `NestedTree` traits).
+
+To use the sluggable tree, apply the `October\Rain\Database\Traits\SluggableTree` trait along with a tree trait.
+
+```php
+class Category extends Model
+{
+    use \October\Rain\Database\Traits\SimpleTree;
+    use \October\Rain\Database\Traits\Sluggable;
+    use \October\Rain\Database\Traits\SluggableTree;
+
+    protected $slugs = ['slug' => 'name'];
+}
+```
+
+To add a `fullslug` column to your table, you may use the `string` method inside a migration.
+
+```php
+Schema::table('categories', function ($table) {
+    $table->string('fullslug')->nullable()->index();
+});
+```
+
+Use the `fullSlugAttributes` method to calculate and update the full slug for a model and all its children. This should be called after making changes to the tree structure.
+
+```php
+$category = Category::find(1);
+$category->fullSlugAttributes();
+```
+
+For example, if you have the following structure:
+
+- Electronics (slug: `electronics`)
+  - Phones (slug: `phones`)
+    - Smartphones (slug: `smartphones`)
+
+The full slugs would be:
+- Electronics: `electronics`
+- Phones: `electronics/phones`
+- Smartphones: `electronics/phones/smartphones`
+
+You may modify the column names by defining the `FULLSLUG` and `SLUG` constants.
+
+```php
+const FULLSLUG = 'my_fullslug_column';
+const SLUG = 'my_slug_column';
+```
 
 ## Utility Functions
 
@@ -681,4 +808,80 @@ public function getRevisionableUser()
 {
     return BackendAuth::getUser()->id;
 }
+```
+
+### Defaultable
+
+The defaultable trait adds default assignment to models using an `is_default` column. This is useful when you need to designate one record as the default among a collection, such as a default shipping method or payment gateway. To enable defaultable for a model, apply the `October\Rain\Database\Traits\Defaultable` trait.
+
+```php
+class PaymentMethod extends Model
+{
+    use \October\Rain\Database\Traits\Defaultable;
+}
+```
+
+To add an `is_default` column to your table, you may use the `boolean` method inside a migration.
+
+```php
+Schema::table('payment_methods', function ($table) {
+    $table->boolean('is_default')->default(false);
+});
+```
+
+When a model is saved with `is_default` set to `true`, all other records will automatically have their `is_default` set to `false`, ensuring only one default exists.
+
+```php
+$method = PaymentMethod::find(1);
+$method->is_default = true;
+$method->save(); // All other records will have is_default set to false
+```
+
+Use the `makeDefault` method to explicitly make a record the default.
+
+```php
+$method->makeDefault();
+```
+
+Use the static `getDefault` method to retrieve the default record. If no default is found, the first record will automatically be made the default.
+
+```php
+$defaultMethod = PaymentMethod::getDefault();
+```
+
+### User Footprints
+
+The user footprints trait automatically populates `created_user_id` and `updated_user_id` columns with the currently logged in backend user. This is useful for tracking which administrator created or last modified a record. To enable user footprints for a model, apply the `October\Rain\Database\Traits\UserFootprints` trait.
+
+```php
+class Post extends Model
+{
+    use \October\Rain\Database\Traits\UserFootprints;
+}
+```
+
+To add the user footprint columns to your table, you may use the `integer` method inside a migration.
+
+```php
+Schema::table('posts', function ($table) {
+    $table->integer('created_user_id')->nullable()->unsigned();
+    $table->integer('updated_user_id')->nullable()->unsigned();
+});
+```
+
+Now, when a model is created, the `created_user_id` will be set to the current backend user. When a model is updated, the `updated_user_id` will be updated to the current backend user.
+
+The trait automatically injects two `belongsTo` relations called `created_user` and `updated_user` that reference the backend user model.
+
+```php
+$post = Post::find(1);
+echo $post->created_user->full_name; // Outputs the full name of the creator
+echo $post->updated_user->full_name; // Outputs the full name of the last editor
+```
+
+You may modify the column names by defining the `CREATED_USER_ID` and `UPDATED_USER_ID` constants.
+
+```php
+const CREATED_USER_ID = 'my_created_by_column';
+const UPDATED_USER_ID = 'my_updated_by_column';
 ```
