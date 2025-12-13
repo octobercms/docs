@@ -37,15 +37,20 @@ Type | Description
 
 ## Creating Default Plugin Dashboards
 
-Plugins can create and install custom dashboards in October CMS by using the [seeding feature](https://docs.octobercms.com/3.x/extend/database/structure.html). To create a plugin dashboard, first create a dashboard manually, then export it using the dashboard's built-in Export Dashboard feature. Save the exported JSON file in a plugin directory. Afterwards, employ the Dashboard model’s `import` function to import the JSON file as a new dashboard.
+Plugins can create and install custom dashboards in October CMS by using the `syncAll` method on the Dashboard model. This method synchronizes dashboard definitions with the database, creating entries for each dashboard configuration.
 
 ```php
-use Backend\Models\Dashboard;
+use Dashboard\Models\Dashboard;
 
 ...
 
-$content = file_get_contents(__DIR__.'/default-dashboard.json');
-Dashboard::import($content, null, true);
+Dashboard::syncAll($owner, [
+    'my-dashboard' => [
+        'name' => 'My Dashboard',
+        'icon' => 'icon-chart-bar',
+        'showInterval' => true
+    ]
+]);
 ```
 
-The second argument of the call should always be `null` for seeding purposes. The third argument specifies whether the dashboard should be accessible to all users. If set to `false`, the dashboard will be accessible only to users with dashboard management permissions.
+The first argument is the owner class instance or class name that owns the dashboards. The second argument is an array of dashboard definitions keyed by their field/code name. Each definition should include a `name`, `icon`, and optionally `showInterval` to control whether the date interval selector is visible.

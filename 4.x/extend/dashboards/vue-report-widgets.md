@@ -32,7 +32,7 @@ Dashboard widgets should be placed in the `vuecomponents` directory located in t
 
 ### Server-Side Class
 
-The server code for a dashboard widget must define a class that extends `Backend\Classes\VueReportWidgetBase`. The only required method that a widget class needs to implement is `getData`. Below is the initial implementation of the class (MyCustomWidget.php):
+The server code for a dashboard widget must define a class that extends `Dashboard\Classes\VueReportWidgetBase`. The only required method that a widget class needs to implement is `getData`. Below is the initial implementation of the class (MyCustomWidget.php):
 
 ```php
 namespace Acme\MyPlugin\VueComponents;
@@ -51,6 +51,8 @@ class MyCustomWidget extends VueReportWidgetBase
     }
 }
 ```
+
+The `VueReportWidgetBase` class extends `Backend\Classes\VueComponentBase` and provides the dashboard-specific functionality needed for report widgets.
 
 ### Client-Side Component
 

@@ -25,6 +25,7 @@ The following list columns are available:
 
 [Text](./lists/column-text.md)
 [Number](./lists/column-number.md)
+[File](./lists/column-file.md)
 [Image](./lists/column-image.md)
 [Switch](./lists/column-switch.md)
 [Summary](./lists/column-summary.md)

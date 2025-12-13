@@ -42,18 +42,23 @@ The `ReportFetchData` object has the following properties available.
 Property | Type | Description
 -------- | ---- | -----------
 **$dimension** | `ReportDimension` | the dimension to group the data by
-**$metrics** | `array` | the metrics to return
-**$metricsConfiguration** | `array` | the report metrics configuration
+**$dimensionCode** | `string` | the dimension code string
+**$metrics** | `array` | the metrics to return (array of `ReportMetric` objects)
+**$metricCodes** | `array` | the metric code strings
+**$metricsConfiguration** | `array` | the report metrics configuration (array of `ReportMetricConfiguration` objects)
 **$dateStart** | `?Carbon` | the start date
 **$dateEnd** | `?Carbon` | the end date
-**$startTimestamp** | `?int` | the start date
-**$dimensionFilters** | `array` | the filters to apply to the dimension values
-**$groupInterval** | `?string` | the group interval.
-**$orderRule** | `?ReportDataOrderRule` | the data ordering rule.
-**$limit** | `?int` | the maximum number of records to return.
-**$paginationParams** | `?ReportDataPaginationParams` | the pagination parameters.
-**$hideEmptyDimensionValues** | `bool` | indicates whether empty dimension values must be removed from the dataset.
-**$totalsOnly** | `bool` | indicates that the method should only return total values for metrics, and not rows.
+**$compareDateStart** | `?Carbon` | the comparison period start date (for period-over-period comparisons)
+**$compareDateEnd** | `?Carbon` | the comparison period end date
+**$startTimestamp** | `?int` | optional starting timestamp for relative intervals (e.g., past hour)
+**$dimensionFilters** | `array` | the filters to apply to the dimension values (array of `ReportDimensionFilter` objects)
+**$groupInterval** | `?string` | the group interval (one of the `GROUP_INTERVAL_*` constants: DAY, WEEK, MONTH, QUARTER, YEAR, FULL)
+**$orderRule** | `?ReportDataOrderRule` | the data ordering rule
+**$limit** | `?int` | the maximum number of records to return
+**$paginationParams** | `?ReportDataPaginationParams` | the pagination parameters
+**$hideEmptyDimensionValues** | `bool` | indicates whether empty dimension values must be removed from the dataset
+**$totalsOnly** | `bool` | indicates that the method should only return total values for metrics, and not rows
+**$resetCache** | `bool` | indicates that the cache should be reset
 
 Plugins must register their data sources in the Plugin Registration file (Plugin.php), within the `boot` method.
 
@@ -293,6 +298,53 @@ $this->registerMetric(new ReportMetric(
 The updated metric data is displayed on the dashboard as follows:
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/dashboards/currency.png)
+
+### Custom Display Formatting
+
+While `Intl.NumberFormat` handles most numeric formatting needs (currencies, percentages, compact notation), some metrics require custom string transformations that cannot be achieved with standard number formatting. For example, displaying durations as "2:30h" instead of "150" minutes.
+
+The `setDisplayFormatter` method allows you to define a server-side callback that formats metric values into human-readable strings. This formatted value is used in non-graph displays such as tables and indicators, while charts continue to use the raw numeric values.
+
+```php
+$this->registerMetric(
+    (new ReportMetric(
+        self::METRIC_DURATION,
+        'acme_entries.duration_minutes',
+        'Duration',
+        ReportMetric::AGGREGATE_SUM
+    ))->setDisplayFormatter(function ($value) {
+        $totalMinutes = (int) $value;
+        $hours = intdiv($totalMinutes, 60);
+        $minutes = $totalMinutes % 60;
+        return sprintf('%d:%02dh', $hours, $minutes);
+    })
+);
+```
+
+When a display formatter is set:
+
+- **Tables**: Cell values and totals display the formatted string (e.g., "2:30h")
+- **Indicators**: The main value displays the formatted string
+- **Charts**: Raw numeric values are used (formatting would break graph rendering)
+
+You can combine `setDisplayFormatter` with `intlFormatOptions`. If both are set, the display formatter takes precedence for non-graph displays, while `intlFormatOptions` serves as a fallback for contexts where server-side formatting isn't available.
+
+```php
+$this->registerMetric(
+    (new ReportMetric(
+        self::METRIC_DURATION,
+        'acme_entries.duration_minutes',
+        'Duration',
+        ReportMetric::AGGREGATE_SUM,
+        ['style' => 'unit', 'unit' => 'minute'] // Fallback for charts
+    ))->setDisplayFormatter(function ($value) {
+        // Used for tables and indicators
+        $hours = intdiv((int) $value, 60);
+        $minutes = (int) $value % 60;
+        return sprintf('%d:%02dh', $hours, $minutes);
+    })
+);
+```
 
 ### Displaying Extra Dimension Data
 
