@@ -7,7 +7,7 @@ subtitle: Provides an interface for accessing generic data.
 
 Every plugin can register any number of data sources. It is recommended to create a new data source for each type of data provided by a plugin. For example, if a plugin offers both customer and sales data, having two separate data sources would simplify widget configuration for end users.
 
-Data sources are classes that extend the `Dashboard\Classes\ReportDataSourceBase` class. Each data source must register at least one metric and one dimension. In addition, data source classes must implement the `fetchData` method, which is required to return the `ReportFetchDataResult` object. In most cases, when your data source fetches data from the database, you can use the `ReportDataQueryBuilder` class, which constructs and executes the database queries based on the dimension and metrics configuration.
+Data sources are classes that extend the `Dashboard\Classes\ReportDataSourceBase` class. Each data source must register at least one metric and one dimension. In addition, data source classes must implement the `fetchData` method, which is required to return the `ReportFetchDataResult` object. In most cases, when your data source fetches data from the database, you can use the `ReportQueryBuilder` class, which provides a fluent interface for constructing and executing database queries based on the dimension and metrics configuration.
 
 ```php
 use Db;
@@ -18,9 +18,7 @@ use Dashboard\Classes\ReportDimensionField;
 use Dashboard\Classes\ReportDataSourceBase;
 use Dashboard\Classes\ReportFetchData;
 use Dashboard\Classes\ReportFetchDataResult;
-use Dashboard\Classes\ReportDataOrderRule;
-use Dashboard\Classes\ReportDataPaginationParams;
-use Dashboard\Classes\ReportDataQueryBuilder;
+use Dashboard\Classes\ReportQueryBuilder;
 
 class MyReportDataSource extends ReportDataSourceBase
 {
@@ -32,7 +30,7 @@ class MyReportDataSource extends ReportDataSourceBase
     protected function fetchData(ReportFetchData $data): ReportFetchDataResult
     {
         // Construct and return a ReportFetchDataResult object,
-        // or use the ReportDataQueryBuilder class to do the hard work.
+        // or use the ReportQueryBuilder class to do the hard work.
     }
 }
 ```
@@ -172,68 +170,13 @@ After registering the metrics, you can add them to a dashboard widget configurat
 
 ### Returning Data from a Data Source
 
-Data sources should implement the `fetchData` method to return data for the requested dimension, metrics, and dimension fields. This method has quite a few arguments, but in most cases, if your data source works with a database, you can pass them directly to the `ReportDataQueryBuilder` class.
+Data sources should implement the `fetchData` method to return data for the requested dimension, metrics, and dimension fields. The `ReportQueryBuilder` class provides a fluent interface that makes this straightforward.
 
-The use of the `ReportDataQueryBuilder` class is optional. The sole requirement for the `fetchData` method is to return a `Dashboard\Classes\ReportFetchDataResult` object. The approach taken to achieve this doesn't matter. If your data source doesn't work with a database, or if you find `ReportDataQueryBuilder` not flexible enough for your needs, you can use native Laravel classes to load the data.
+The use of `ReportQueryBuilder` is optional. The sole requirement for the `fetchData` method is to return a `Dashboard\Classes\ReportFetchDataResult` object. If your data source doesn't work with a database, or if you need more control, you can use native Laravel classes to load the data.
 
-Below is a partial implementation of our demo ecommerce data source:
+#### Using ReportQueryBuilder (Recommended)
 
-```php
-protected function fetchData(ReportFetchData $data): ReportFetchDataResult
-{
-    if ($dimension->getCode() !== self::DIMENSION_PRODUCT) {
-        throw new SystemException('Invalid dimension');
-    }
-
-    $reportQueryBuilder = new ReportDataQueryBuilder(
-        'acme_shop_products',
-        $data->dimension,
-        $data->metrics,
-        $data->orderRule,
-        $data->dimensionFilters,
-        $data->limit,
-        $data->paginationParams,
-        $data->groupInterval,
-        $data->hideEmptyDimensionValues,
-        $data->dateStart,
-        $data->dateEnd,
-        $data->startTimestamp,
-        'acme_shop_sales.sale_date',
-        null,
-        $data->totalsOnly
-    );
-
-    // ...
-}
-```
-
-The `ReportDataQueryBuilder` class constructor accepts most of the `fetchData` arguments, with a few additions:
-
-- The first argument is the main table name to be used for fetching data. It's typically the table associated with the requested dimension. In our case, as the dimension is product ID, we use the `acme_shop_products` table as the main query table.
-- The constructor also accepts the name of a date column, which is used to limit the returned data to the interval requested by the user. In our case, we will use the sales date column `acme_shop_sales.sale_date`.
-- Additionally, the constructor accepts a timestamp column name. Although the default minimum time resolution of the dashboard is one day, some widgets can fetch data for the past hour, enabled by the timestamp column. For simplicity, we are not implementing this feature and will pass `null` as the argument value.
-
-As our metrics belong to a table different from the dimension table, we need to configure the report data query builder object to load the metrics data from the `acme_shop_sales` table. This is achieved using the `onConfigureMetrics` method:
-
-```php
-$reportQueryBuilder->onConfigureMetrics(
-    function(Builder $query, ReportDimension $dimension, array $metrics) {
-        $query->leftJoin('acme_shop_sales', function($join) {
-            $join->on('acme_shop_sales.product_id', '=', 'acme_shop_products.id');
-        });
-    }
-);
-```
-
-The method accepts a callback function, which must take an `Illuminate\Database\Query\Builder` object, a dimension object, and an array of metrics as arguments. This enables highly customizable implementations. In our simple case, we only use Laravel’s query builder object to join the sales table.
-
-And finally, once the report data query builder is configured, we can execute the queries and return the loaded data:
-
-```php
-return $reportQueryBuilder->getFetchDataResult($metricsConfiguration);
-```
-
-Below is the full implementation of the `fetchData` method:
+The simplest way to implement `fetchData` is using the `fromFetchData` static method, which automatically configures the builder from the request data:
 
 ```php
 protected function fetchData(ReportFetchData $data): ReportFetchDataResult
@@ -242,35 +185,114 @@ protected function fetchData(ReportFetchData $data): ReportFetchDataResult
         throw new SystemException('Invalid dimension');
     }
 
-    $reportQueryBuilder = new ReportDataQueryBuilder(
-        'acme_shop_products',
-        $data->dimension,
-        $data->metrics,
-        $data->orderRule,
-        $data->dimensionFilters,
-        $data->limit,
-        $data->paginationParams,
-        $data->groupInterval,
-        $data->hideEmptyDimensionValues,
-        $data->dateStart,
-        $data->dateEnd,
-        $data->startTimestamp,
-        'acme_shop_sales.sale_date',
-        null,
-        $data->totalsOnly
-    );
-
-    $reportQueryBuilder->onConfigureMetrics(
-        function(Builder $query, ReportDimension $dimension, array $metrics) {
+    return ReportQueryBuilder::fromFetchData($data, 'acme_shop_products')
+        ->dateColumn('acme_shop_sales.sale_date')
+        ->onConfigureMetrics(function($query, $dimension, $metrics) {
             $query->leftJoin('acme_shop_sales', function($join) {
                 $join->on('acme_shop_sales.product_id', '=', 'acme_shop_products.id');
             });
-        }
-    );
-
-    return $reportQueryBuilder->getFetchDataResult($data->metricsConfiguration);
+        })
+        ->get($data->metricsConfiguration);
 }
 ```
+
+The `fromFetchData` method accepts the `ReportFetchData` object and the main table name. It automatically configures:
+
+- The dimension and metrics from the request
+- Ordering, filtering, pagination, and limits
+- Date range and group interval settings
+- The `totalsOnly` and `hideEmptyValues` flags
+
+You then chain additional configuration:
+
+- `dateColumn()` - specifies the column used to filter by the user's selected date range
+- `timestampColumn()` - optional column for relative time filtering (e.g., "past hour")
+- `onConfigureMetrics()` - callback to join tables or configure metric columns
+- `onConfigureQuery()` - callback for additional query customization
+
+#### Building Queries Manually
+
+For more control, you can build the query step by step using the fluent interface:
+
+```php
+protected function fetchData(ReportFetchData $data): ReportFetchDataResult
+{
+    return ReportQueryBuilder::table('acme_shop_products')
+        ->dimension($data->dimension)
+        ->metrics($data->metrics)
+        ->orderBy($data->orderRule)
+        ->filters($data->dimensionFilters)
+        ->limit($data->limit)
+        ->groupInterval($data->groupInterval)
+        ->hideEmptyValues($data->hideEmptyDimensionValues)
+        ->dateRange($data->dateStart, $data->dateEnd, 'acme_shop_sales.sale_date')
+        ->totalsOnly($data->totalsOnly)
+        ->onConfigureMetrics(function($query, $dimension, $metrics) {
+            $query->leftJoin('acme_shop_sales', function($join) {
+                $join->on('acme_shop_sales.product_id', '=', 'acme_shop_products.id');
+            });
+        })
+        ->get($data->metricsConfiguration);
+}
+```
+
+#### Semantic Group Interval Methods
+
+For date-based dimensions, you can use semantic methods instead of passing interval constants:
+
+```php
+ReportQueryBuilder::fromFetchData($data, 'orders')
+    ->dateColumn('order_date')
+    ->groupByYear()    // or groupByMonth(), groupByWeek(), groupByDay(), groupByQuarter()
+    ->get($data->metricsConfiguration);
+```
+
+#### Conditional Configuration
+
+Use the `when()` method to conditionally apply configuration:
+
+```php
+ReportQueryBuilder::fromFetchData($data, 'orders')
+    ->dateColumn('order_date')
+    ->when($data->limit, fn($builder) => $builder->limit($data->limit))
+    ->when($onlyCompleted, fn($builder) => $builder->onConfigureQuery(
+        fn($query) => $query->where('status', 'completed')
+    ))
+    ->get($data->metricsConfiguration);
+```
+
+#### Available ReportQueryBuilder Methods
+
+Method | Description
+------ | -----------
+`table($name)` | Static constructor - creates builder for the given table
+`fromFetchData($data, $table)` | Static constructor - creates builder from ReportFetchData
+`dimension($dimension)` | Sets the dimension to group by
+`metrics($metrics)` | Sets the metrics array
+`addMetric($metric)` | Adds a single metric
+`orderBy($rule)` | Sets the ordering rule
+`filters($filters)` | Sets dimension filters
+`limit($limit)` | Sets maximum number of results
+`paginate($params)` | Sets pagination parameters
+`groupInterval($interval)` | Sets the grouping interval
+`groupByDay()` | Groups by day
+`groupByWeek()` | Groups by week
+`groupByMonth()` | Groups by month
+`groupByQuarter()` | Groups by quarter
+`groupByYear()` | Groups by year
+`withoutGrouping()` | Disables grouping (full interval)
+`dateRange($start, $end, $column)` | Sets date range and optional column
+`dateColumn($column)` | Sets the date column for filtering
+`sinceTimestamp($ts, $column)` | Sets relative timestamp filtering
+`timestampColumn($column)` | Sets the timestamp column
+`hideEmptyValues($hide)` | Hides null dimension values
+`totalsOnly($totals)` | Returns only totals, not rows
+`onConfigureQuery($callback)` | Registers query customization callback
+`onConfigureMetrics($callback)` | Registers metrics configuration callback
+`onConfigureMetric($callback)` | Registers per-metric configuration callback
+`when($condition, $callback)` | Conditionally applies configuration
+`get($metricsConfig, $urlTemplate)` | Executes query and returns results
+`toSql()` | Returns the SQL string (for debugging)
 
 This configuration is sufficient to display the data source data in a table widget:
 
@@ -387,11 +409,17 @@ After registration, the dimension field will appear in the dashboard widget conf
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/dashboards/dimension-fields.png)
 
-The remaining task involves returning data for the dimension fields. Since the `ReportDataQueryBuilder` class does not automate this process, it's necessary to configure its underlying query to add a join and add the corresponding columns to the query. This can be accomplished in the `onConfigureQuery` callback:
+The remaining task involves returning data for the dimension fields. Since `ReportQueryBuilder` does not automate this process, it's necessary to configure its underlying query to add a join and add the corresponding columns to the query. This can be accomplished in the `onConfigureQuery` callback:
 
 ```php
-$reportQueryBuilder->onConfigureQuery(
-    function(Builder $query, ReportDimension $dimension, array $metrics) {
+ReportQueryBuilder::fromFetchData($data, 'acme_shop_products')
+    ->dateColumn('acme_shop_sales.sale_date')
+    ->onConfigureMetrics(function($query, $dimension, $metrics) {
+        $query->leftJoin('acme_shop_sales', function($join) {
+            $join->on('acme_shop_sales.product_id', '=', 'acme_shop_products.id');
+        });
+    })
+    ->onConfigureQuery(function($query, $dimension, $metrics) {
         $query->leftJoin('acme_shop_categories', function($join) {
             $join->on('acme_shop_categories.id', '=', 'acme_shop_products.category_id');
         });
@@ -400,8 +428,8 @@ $reportQueryBuilder->onConfigureQuery(
             Db::raw('max(acme_shop_products.brand) as oc_field_brand'),
             Db::raw('max(acme_shop_categories.category_name) as oc_field_category'),
         ]);
-    }
-);
+    })
+    ->get($data->metricsConfiguration);
 ```
 
 It may seem odd that we use the `max` function for the product brand and category. The reason this is necessary is because the query is grouped by the product ID column (dimension), and we must use aggregation functions on all columns to avoid MySQL errors. This simple trick resolves the issue.
@@ -450,3 +478,48 @@ The iPhones Indicator widget uses the following filter configuration:
 - Value: iPhone
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/dashboards/indicator-iphones.webp)
+
+### Legacy ReportDataQueryBuilder
+
+For backward compatibility, the original `ReportDataQueryBuilder` class is still available. This class uses a constructor-based approach with 15 parameters:
+
+```php
+use Dashboard\Classes\ReportDataQueryBuilder;
+
+$reportQueryBuilder = new ReportDataQueryBuilder(
+    'acme_shop_products',      // Table name
+    $data->dimension,          // Dimension
+    $data->metrics,            // Metrics array
+    $data->orderRule,          // Order rule
+    $data->dimensionFilters,   // Filters
+    $data->limit,              // Limit
+    $data->paginationParams,   // Pagination
+    $data->groupInterval,      // Group interval
+    $data->hideEmptyDimensionValues,  // Hide empty values
+    $data->dateStart,          // Date start
+    $data->dateEnd,            // Date end
+    $data->startTimestamp,     // Start timestamp
+    'sale_date',               // Date column
+    null,                      // Timestamp column
+    $data->totalsOnly          // Totals only
+);
+
+$reportQueryBuilder->onConfigureMetrics(function($query, $dimension, $metrics) {
+    // Configure metrics...
+});
+
+return $reportQueryBuilder->getFetchDataResult($data->metricsConfiguration);
+```
+
+The legacy class also provides a `fromFetchData` static method as a shorthand:
+
+```php
+$reportQueryBuilder = ReportDataQueryBuilder::fromFetchData(
+    $data,
+    'acme_shop_products',
+    'sale_date',  // Date column
+    null          // Timestamp column
+);
+```
+
+> **Note**: New implementations should use `ReportQueryBuilder` for its cleaner fluent interface and better readability.
