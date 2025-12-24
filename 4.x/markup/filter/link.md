@@ -13,9 +13,13 @@ The `|link` filter returns a link generated using the `october://` output schema
 If you are looking to parse HTML for multiple links and resolve them as HTTP links in the output, see the [`|content` Twig filter](../tag/content.md).
 :::
 
+::: warning
+The `|link` filter only returns the URL string. If you need to access nested child items from dynamic page types (like "All Blog Posts" or "All Categories"), use the `link()` function with the `nesting` option instead.
+:::
+
 ## link()
 
-The complimentary `link()` function is used to extract more detailed information about a link.
+The `link()` function is used to extract more detailed information about a link, including dynamically generated child items.
 
 ```twig
 {% set resolved = link('october://cms-page@link/about') %}
@@ -33,13 +37,43 @@ Property | Data
 **items** | an array containing generated child items, optional.
 **isActive** | set to true if the link is currently active.
 
-You may request nested child items by passing the `nesting` option to `true` (second argument), which populates the `items` property on the result.
+### Nested Items
+
+You may request nested child items by passing the `nesting` option to `true` (second argument), which populates the `items` property on the result. This is essential when working with dynamic page types that generate multiple items, such as "All Blog Posts" or "All Categories".
 
 ```twig
 {% set resolved = link('october://...', { nesting: true }) %}
 
 {% for subitem in resolved.items %}
-    {{ subitem.url }}
+    <a href="{{ subitem.url }}">{{ subitem.title }}</a>
+{% endfor %}
+```
+
+Each child item in the `items` array contains the same properties: `url`, `title`, `mtime`, `isActive`, and potentially nested `items` of its own for hierarchical structures.
+
+#### Replacing Parent with Children
+
+When building menus with dynamic page types, you may want to replace a menu item with its generated children. This can be achieved by checking a stored flag and iterating the resolved items.
+
+```twig
+{% for item in menu.items %}
+    {% set resolved = link(item.reference, { nesting: item.nesting }) %}
+
+    {% if item.replace and resolved.items %}
+        {# Replace parent with its generated children #}
+        {% for child in resolved.items %}
+            <a href="{{ child.url }}">{{ child.title }}</a>
+        {% endfor %}
+    {% else %}
+        <a href="{{ resolved.url }}">{{ item.title }}</a>
+        {% if resolved.items %}
+            <ul>
+                {% for child in resolved.items %}
+                    <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
 {% endfor %}
 ```
 

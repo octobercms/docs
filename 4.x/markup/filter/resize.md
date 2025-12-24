@@ -25,7 +25,16 @@ You can also pass a third options argument. This example will crop the image ins
 <img src="{{ 'banner.jpg'|resize(800, 600, { mode: 'crop' }) }}" />
 ```
 
-See the [image resizer article](../../extend/services/resizer.md) for more information on the available `options` parameters.
+## Available Options
+
+The following options are supported in addition to the [standard resizer options](../../extend/services/resizer.md):
+
+Option | Description | Default
+------ | ----------- | -------
+`extension` | Output file extension, or `auto` to use the source extension | `auto`
+`filename` | Output filename: `true` for original name, or a custom string | `img`
+`group` | Folder name to group resized images, removing the unique hash | `null`
+`force` | Perform the resize immediately instead of deferring to a redirect | `false`
 
 ## Custom Filenames
 
@@ -70,6 +79,20 @@ For example, the above will place the file in the following directory:
 - `.../800_600_0_0_auto/2024-banners/my-seo-friendly-name.png`
 
 However, keep in mind, this approach can be prone to naming collisions. If a different file is resized using the same name and resize options, it will output the original file since there is no unique hash added to the path.
+
+## Forcing Immediate Resize
+
+By default, the resizer uses a deferred approach where the first request returns a `/resize/...` URL that redirects to the final resized image when accessed. This is efficient for page rendering since the image processing happens on-demand.
+
+However, this behavior can cause issues with meta tags (OpenGraph, Twitter Cards) where social media bots may cache the deferred URL before it's processed, resulting in broken images. The `force` option performs the resize immediately and returns the final URL directly.
+
+```twig
+<meta property="og:image" content="{{ page.image|media|resize(1200, 630, { force: true }) }}">
+```
+
+::: warning
+Using `force: true` adds image processing time to the page render. Only use this option when necessary, such as for SEO meta tags.
+:::
 
 ## Available Sources
 
