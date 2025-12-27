@@ -153,14 +153,15 @@ count:
     tooltip: Number of users in the group
 ```
 
-In addition to providing a tooltip `title`, you can also specify the `icon` ([available icons](../element/available-icons.md)) and the `placement` (`right`, `bottom`, `left`, default value is `top`) of the tooltip.
+In addition to providing a tooltip `title`, you can also specify the `icon` ([available icons](../element/available-icons.md)), the `placement` (`right`, `bottom`, `left`, default value is `top`), and enable HTML content with `isHtml`.
 
 ```yaml
 count:
     label: Count
     type: number
     tooltip:
-        title: Number of users in the group
+        title: "<b>Active</b> = currently online<br><b>Inactive</b> = offline"
+        isHtml: true
         placement: bottom
         icon: icon-users
 ```

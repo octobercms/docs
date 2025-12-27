@@ -98,6 +98,7 @@ Property | Description
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 **order** | a numerical weight when determining the display order, default value increments at 100 points per field.
 **permissions** | the [permissions](../extend/backend/permissions.md) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**tooltip** | adds an icon with a tooltip next to the field label. See below for more detailed settings.
 
 ### Tab Properties
 
@@ -155,6 +156,30 @@ tabs:
 
     fields:
         # [...]
+```
+
+### Tooltip
+
+The `tooltip` property enhances form fields by adding an informational icon next to the field label. Hovering over this icon displays a tooltip, offering additional context or details about the field. This feature aids in providing users with guidance or clarification for understanding field options.
+
+```yaml
+status:
+    label: Status
+    type: dropdown
+    tooltip: Select the current status of this item
+```
+
+In addition to providing a tooltip `title`, you can also specify the `icon` ([available icons](../element/available-icons.md)), the `placement` (`right`, `bottom`, `left`, default value is `top`), and enable HTML content with `isHtml`.
+
+```yaml
+status:
+    label: Status
+    type: dropdown
+    tooltip:
+        title: "<b>Draft</b> = work in progress<br><b>Published</b> = visible to users"
+        isHtml: true
+        placement: bottom
+        icon: icon-question-circle
 ```
 
 ### Custom Field Types
