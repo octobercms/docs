@@ -9,6 +9,42 @@ Individual plugin test cases can be performed using the `plugin:test` artisan co
 php artisan plugin:test acme.demo
 ```
 
+The command automatically detects whether to use [Pest](https://pestphp.com/) or PHPUnit based on your installed dependencies. If Pest is installed, it will be used by default.
+
+### Passing Options
+
+You can pass any PHPUnit or Pest options directly to the command. For example, to filter tests by name.
+
+```bash
+php artisan plugin:test acme.blog --filter=testCreatePost
+```
+
+Run tests in a specific group.
+
+```bash
+php artisan plugin:test acme.blog --group=api
+```
+
+Stop on the first failure.
+
+```bash
+php artisan plugin:test acme.blog --stop-on-failure
+```
+
+Options can be combined as needed.
+
+```bash
+php artisan plugin:test acme.blog --filter=testCreate --stop-on-failure
+```
+
+### Parallel Testing
+
+Use the `--parallel` flag to run tests in parallel for faster execution. This uses Pest's built-in parallel runner when using Pest, or [ParaTest](https://github.com/paratestphp/paratest) when using PHPUnit.
+
+```bash
+php artisan plugin:test acme.blog --parallel
+```
+
 ::: tip
 If you have `phpunit` installed globally, you can also call this from the plugin directory.
 :::
