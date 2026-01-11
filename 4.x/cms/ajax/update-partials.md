@@ -32,7 +32,7 @@ The [JavaScript API](./javascript-api.md) uses the `update` configuration option
 
 ```js
 // JavaScript API
-oc.request('#mybutton', 'onRefreshTime', {
+jax.request('#mybutton', 'onRefreshTime', {
     update: { mytime: '#myDiv' }
 });
 ```

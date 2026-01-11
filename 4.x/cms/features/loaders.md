@@ -22,28 +22,28 @@ To disable the progress bar for a request, set the `data-request-progress-bar` a
 In JavaScript, set the `progressBar` option of an AJAX request to `false`.
 
 ```js
-oc.ajax('onSilentRequest', { progressBar: false });
+jax.ajax('onSilentRequest', { progressBar: false });
 ```
 
 To disable the progress bar globally, set the `visibility` style to `hidden` using a StyleSheet.
 
 ```css
-.oc-progress-bar {
+.jax-progress-bar {
     visibility: hidden;
 }
 ```
 
-You may display the progress bar using JavaScript using the `oc.progressBar` object and `show` / `hide` functions.
+You may display the progress bar using JavaScript using the `jax.progressBar` object and `show` / `hide` functions.
 
 ```js
-oc.progressBar.show();
+jax.progressBar.show();
 
-oc.progressBar.hide();
+jax.progressBar.hide();
 ```
 
 ## Loading Button
 
-When submitting forms, users can accidentally click the button twice and cause a double submission, and this is solved using a loading button. During AJAX requests, button elements that have the `data-attach-loading` attribute will be disabled, and a CSS class `oc-attach-loader` added. This class will spawn a loading spinner on button and anchor elements using the `:after` CSS selector.
+When submitting forms, users can accidentally click the button twice and cause a double submission, and this is solved using a loading button. During AJAX requests, button elements that have the `data-attach-loading` attribute will be disabled, and a CSS class `jax-attach-loader` added. This class will spawn a loading spinner on button and anchor elements using the `:after` CSS selector.
 
 ```html
 <a href="#"
@@ -53,7 +53,7 @@ When submitting forms, users can accidentally click the button twice and cause a
 </a>
 ```
 
-When a button exists inside a form that contain the `oc-attach-loader` attribute will display the loading indicator.
+When a button exists inside a form that contain the `jax-attach-loader` attribute will display the loading indicator.
 
 ```html
 <form data-request="onSubmit">
@@ -72,12 +72,12 @@ Since inputs do not support the `:after` CSS selector, they have a new element i
     data-attach-loading />
 ```
 
-You can manually add the loader to a button using the `oc.attachLoader` object and `show` / `hide` functions passing the element selector or object as the first argument.
+You can manually add the loader to a button using the `jax.attachLoader` object and `show` / `hide` functions passing the element selector or object as the first argument.
 
 ```js
-oc.attachLoader.show('.my-element');
+jax.attachLoader.show('.my-element');
 
-oc.attachLoader.hide('.my-element');
+jax.attachLoader.hide('.my-element');
 ```
 
 ## Toggling Elements
