@@ -99,6 +99,22 @@ Property | Description
 **subject** | the mail message subject, required.
 **layout** | the mail layout code or view, optional. Default value is `default`.
 
+#### Using Twig in Subject Lines
+
+The subject line supports Twig variables and expressions, allowing you to create dynamic subjects based on the same data passed to the email body. For example:
+
+```ini
+subject = "Invoice #{{ invoice.number }} - {{ invoice.customer_name }}"
+==
+```
+
+This is useful for common scenarios such as:
+
+- Order confirmations: `subject = "Order #{{ order.number }} confirmed"`
+- Invoice notifications: `subject = "Invoice #{{ invoice.number }} is ready"`
+- Password resets: `subject = "Password reset for {{ user.email }}"`
+- Reservation confirmations: `subject = "Reservation #{{ reservation.id }} for {{ reservation.date }}"`
+
 ### Registering Templates, Layouts & Partials
 
 ::: aside
