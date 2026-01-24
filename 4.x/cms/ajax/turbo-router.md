@@ -20,19 +20,19 @@ Once enabled, all internal links on the page will automatically use PJAX navigat
 You may programmatically visit a link with the following.
 
 ```js
-oc.visit(location);
+jax.visit(location);
 ```
 
 To replace the current URL without adding it to the navigation history, similar to `window.history.replaceState`, set the `action` option to **replace**.
 
 ```js
-oc.visit(location, { action: 'replace' });
+jax.visit(location, { action: 'replace' });
 ```
 
 To check if the turbo router is enabled and should be used.
 
 ```js
-if (oc.useTurbo && oc.useTurbo()) {
+if (jax.useTurbo && jax.useTurbo()) {
     // Use PJAX
 }
 ```
@@ -159,18 +159,18 @@ addEventListener('render', function() {
 });
 ```
 
-The `oc.pageReady` function is used call code when the page and scripts are ready. The function returns a promise that is resolved after all the page scripts have loaded, or immediately if they are already loaded.
+The `jax.pageReady` function is used call code when the page and scripts are ready. The function returns a promise that is resolved after all the page scripts have loaded, or immediately if they are already loaded.
 
 ```js
-oc.pageReady().then(() => {
+jax.pageReady().then(() => {
     // Page has finished loading scripts
 });
 ```
 
-The `oc.waitFor` is another useful function that will wait for an object or variable to exist. The function returns a promise that is resolved when the variable is found.
+The `jax.waitFor` is another useful function that will wait for an object or variable to exist. The function returns a promise that is resolved when the variable is found.
 
 ```js
-oc.waitFor(() => window.propName).then(() => [
+jax.waitFor(() => window.propName).then(() => [
     // window.propName is now available
 ]);
 ```
@@ -178,7 +178,7 @@ oc.waitFor(() => window.propName).then(() => [
 The second argument provides a timeout interval in milliseconds, the following will stop waiting after two seconds.
 
 ```js
-oc.waitFor(() => window.propName, 2000).then(() => {
+jax.waitFor(() => window.propName, 2000).then(() => {
     console.log('Found the variable!')
 }).catch(() => {
     console.error('Gave up waiting...')
@@ -324,5 +324,6 @@ snippetOptions: {
 #### See Also
 
 ::: also
+* [Larajax Turbo Router](https://larajax.org/turbo/setup)
 * [Observable Controls](./hot-controls.md)
 :::

@@ -11,10 +11,10 @@ October CMS includes a simple implementation of [MutationObserver](https://devel
 This function can be called multiple times and it will take the **last seen definition**.
 :::
 
-In its basic form, the `oc.registerControl` JavaScript function is used to define a unique control name (first argument) and class definition (second argument) that extends the `oc.ControlBase` base class.
+In its basic form, the `jax.registerControl` JavaScript function is used to define a unique control name (first argument) and class definition (second argument) that extends the `jax.ControlBase` base class.
 
 ```js
-oc.registerControl('hello', class extends oc.ControlBase {
+jax.registerControl('hello', class extends jax.ControlBase {
     // ...
 });
 ```
@@ -28,7 +28,7 @@ The control name is used to link to a DOM element representing the control, usin
 The `connect` and `disconnect` methods within the class definition are triggered whenever the control is added or removed from the page. This can occur at any time, as the observer continuously monitors for DOM changes.
 
 ```js
-class extends oc.ControlBase {
+class extends jax.ControlBase {
     connect() {
         // Element has appeared in DOM
     }
@@ -44,7 +44,7 @@ class extends oc.ControlBase {
 The `init` method allows you to load the default configuration for the control and configure its child elements.
 
 ```js
-class extends oc.ControlBase {
+class extends jax.ControlBase {
     init() {
         // Establish the control before running logic
     }
@@ -66,7 +66,7 @@ All `data-` attributes on the control element make up its available configuratio
 Configuration values can be accessed via the `this.config` property. The data attributes are converted from to camelCase, without the `data-` prefix, for example, the `data-favorite-color` attribute is accessed as `this.config.favoriteColor`.
 
 ```js
-class extends oc.ControlBase {
+class extends jax.ControlBase {
     init() {
         this.favoriteColor = this.config.favoriteColor || 'green';
     }
@@ -90,7 +90,7 @@ Any selector, whether CSS or data attributes, can be used to select child elemen
 The parent control element is available via `this.element`. Any child element can be selected with `querySelector` for a single element, or `querySelectorAll` for multiple elements.
 
 ```js
-class extends oc.ControlBase {
+class extends jax.ControlBase {
     init() {
         this.$name = this.element.querySelector('input.name');
     }
@@ -104,28 +104,28 @@ class extends oc.ControlBase {
 
 ## Referencing Other Controls
 
-The `oc.fetchControl` function is used to return a control instance from an existing control element, this accepts a selector string, or an element directly. The resulting instance support method calls or accessing properties found on the control class definition.
+The `jax.fetchControl` function is used to return a control instance from an existing control element, this accepts a selector string, or an element directly. The resulting instance support method calls or accessing properties found on the control class definition.
 
 ```js
-const searchControl = oc.fetchControl(element);
+const searchControl = jax.fetchControl(element);
 ```
 
 You may also pass a selector string, along with the control name as the second argument (optional). This is useful when multiple controls are bound to the same element and you want to clarify the exact identifier.
 
 ```js
-const searchControl = oc.fetchControl('[data-control=search]', 'search');
+const searchControl = jax.fetchControl('[data-control=search]', 'search');
 ```
 
-The `oc.importControl` function can be used to return a control class that has been registered, which can be useful for calling static methods on the class. The function accepts the control identifier as a string.
+The `jax.importControl` function can be used to return a control class that has been registered, which can be useful for calling static methods on the class. The function accepts the control identifier as a string.
 
 ```js
-const searchControlClass = oc.importControl('search');
+const searchControlClass = jax.importControl('search');
 ```
 
-The `oc.observeControl` function is used to immediately resolve a control instance and attach it to the element. This is useful when an element does not have the `data-control` attribute and you want to attach it without waiting for the observer events.
+The `jax.observeControl` function is used to immediately resolve a control instance and attach it to the element. This is useful when an element does not have the `data-control` attribute and you want to attach it without waiting for the observer events.
 
 ```js
-const searchControl = oc.observeControl(element, 'search');
+const searchControl = jax.observeControl(element, 'search');
 ```
 
 ## Working with Events
@@ -137,7 +137,7 @@ Observable controls can bind events either locally or globally. Local events are
 You can bind a local event handler using the `listen` function, and these handlers will automatically unbind. To bind a listener to the control element itself, pass the event name and the event handler function to the `listen` function.
 
 ```js
-class extends oc.ControlBase {
+class extends jax.ControlBase {
     connect() {
         this.listen('dblclick', this.onDoubleClick);
     }
@@ -151,7 +151,7 @@ class extends oc.ControlBase {
 To bind a local event handler to a child element, pass the event name, CSS selector, and event handler function. The `event.delegateTarget` will always contain the element that matched the CSS selector.
 
 ```js
-class extends oc.ControlBase {
+class extends jax.ControlBase {
     connect() {
         this.listen('click', '.toolbar-find-button', this.onClickFindButton);
     }
@@ -165,7 +165,7 @@ class extends oc.ControlBase {
 You may also bind to a DOM object, pass the event name, HTML element, and the event handler function.
 
 ```js
-class extends oc.ControlBase {
+class extends jax.ControlBase {
     init() {
         this.$name = this.element.querySelector('input.name');
     }
@@ -185,7 +185,7 @@ class extends oc.ControlBase {
 Global events can be attached and removed using the `addEventListener` and `removeEventListener` native JavaScript functions. The event handler (second argument) refers to the class method of the same control instance. The `proxy` method is called to bind the current context to the function call.
 
 ```js
-class extends oc.ControlBase {
+class extends jax.ControlBase {
     connect() {
         addEventListener('keydown', this.proxy(this.onKeyDown));
     }
@@ -211,18 +211,18 @@ To prevent memory leaks, it is important to unbind global events so they are cap
 Controls can dispatch events by passing an event name to the `dispatch` function. The event is triggered on the DOM element and the event name is prefixed with the control name. In the following example, if the control is registered with a name **hello**, the event will be named **hello:ready**.
 
 ```js
-oc.registerControl('hello', class extends oc.ControlBase {
+jax.registerControl('hello', class extends jax.ControlBase {
     connect() {
         this.dispatch('ready');
     }
 });
 ```
 
-Now you can listen when the control is connected and grab the object using `oc.fetchControl` on the event target.
+Now you can listen when the control is connected and grab the object using `jax.fetchControl` on the event target.
 
 ```js
 addEventListener('hello:ready', function(ev) {
-    const helloControl = oc.fetchControl(ev.target);
+    const helloControl = jax.fetchControl(ev.target);
 });
 ```
 
@@ -265,7 +265,7 @@ The following example demonstrates a basic HTML form that includes a name input 
 </div>
 
 <script>
-oc.registerControl('hello-world', class extends oc.ControlBase {
+jax.registerControl('hello-world', class extends jax.ControlBase {
     init() {
         this.$name = this.element.querySelector('input.name');
         this.$output = this.element.querySelector('span.output');
@@ -290,7 +290,7 @@ The following example shows a simple implementation of a third-party JavaScript 
 <div data-control="google-map"></div>
 
 <script>
-oc.registerControl('google-map', class extends oc.ControlBase {
+jax.registerControl('google-map', class extends jax.ControlBase {
     connect() {
         this.map = new Map(this.element, {
             center: { lat: -34.397, lng: 150.644 },
@@ -318,7 +318,7 @@ The next example shows how you can bring your own technology to build dynamic us
 </div>
 
 <script>
-oc.registerControl('my-vue-control', class extends oc.ControlBase {
+jax.registerControl('my-vue-control', class extends jax.ControlBase {
     connect() {
         this.vm = new Vue({
             el: this.element.querySelector('[data-vue-template]'),
@@ -350,7 +350,7 @@ You can also use hot controls to initialize Vue components using the `Vue.compon
 </div>
 
 <script>
-oc.registerControl('my-vue-component', class extends oc.ControlBase {
+jax.registerControl('my-vue-component', class extends jax.ControlBase {
     init() {
         Vue.component('my-vue-component', {
             template: this.element,
@@ -370,3 +370,9 @@ oc.registerControl('my-vue-component', class extends oc.ControlBase {
 });
 </script>
 ```
+
+#### See Also
+
+::: also
+* [Larajax Hot Controls](https://larajax.org/controls/definition)
+:::

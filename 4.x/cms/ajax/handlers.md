@@ -29,7 +29,7 @@ Every AJAX request should specify a handler name, either using the [data attribu
 <button data-request="onSubmitContactForm">Go</button>
 
 <!-- JavaScript API -->
-<script> oc.ajax('onSubmitContactForm') </script>
+<script> jax.ajax('onSubmitContactForm') </script>
 ```
 
 Handlers defined by pages, layouts and components are all registered automatically. If you are calling a handler from inside a partial, use the [`{% ajaxPartial %}` Twig tag](../../markup/tag/ajax-partial.md), which adjusts the page cycle to register its handlers.
@@ -45,10 +45,10 @@ When an AJAX request occurs inside a HTML form tag, all the input values of the 
 </form>
 ```
 
-The JavaScript API support this logic with the `oc.request` function.
+The JavaScript API support this logic with the `jax.request` function.
 
 ```html
-<script> oc.request('#myForm', 'onSubmitContactForm') </script>
+<script> jax.request('#myForm', 'onSubmitContactForm') </script>
 ```
 
 You may use the `input()` PHP function to access the variable.
@@ -114,7 +114,7 @@ The data can be fetched with the data attributes API.
 The same with the JavaScript API.
 
 ```html
-<form onsubmit="oc.request(this, 'onHandleForm', {
+<form onsubmit="jax.request(this, 'onHandleForm', {
         success: function(data) {
             console.log(data);
         }
@@ -162,7 +162,7 @@ These errors are handled by the AJAX framework.
 The same with the JavaScript API.
 
 ```html
-<form onsubmit="oc.request(this, 'onHandleForm', {
+<form onsubmit="jax.request(this, 'onHandleForm', {
         error: function(data) {
             console.log(data);
         }
@@ -218,7 +218,7 @@ You can listen to this event in the browser using a generic listener. This examp
 ```js
 addEventListener('app:stale-document', function (event) {
     if (confirm('Another user has updated this document, proceed?')) {
-        oc.request(event.target, 'onUpdate', { data: {
+        jax.request(event.target, 'onUpdate', { data: {
             force: true
         }});
     }
