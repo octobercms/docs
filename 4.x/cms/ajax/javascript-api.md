@@ -125,7 +125,7 @@ The AJAX framework triggers events on the updated elements, triggering element, 
 
 Extra details are available on the `event.detail` property of the event handler. Unless otherwise specified, the handler details are the `context` object, the `data` object received from the server, the `responseCode` and the `xhr` object.
 
-Event | Description
+JavaScript Event | Description
 ------------- | -------------
 [ajax:before-send](https://larajax.org/api/events#ajax-before-send) | triggered on the window object before sending the request. The handler details provide the `context` object.
 [ajax:before-update](https://larajax.org/api/events#ajax-before-update) | triggered on the form object directly after the request is complete, but before the page is updated.
@@ -138,7 +138,7 @@ Event | Description
 
 These events are fired on the triggering element:
 
-Event | Description
+JavaScript Event | Description
 ------------- | -------------
 [ajax:setup](https://larajax.org/api/events#ajax-setup) | triggered before the request is formed. The handler details provide the `context` object, allowing options to be modified via the `context.options` property.
 [ajax:promise](https://larajax.org/api/events#ajax-promise) | triggered directly before the AJAX request is sent. The handler details provide the `context` object.

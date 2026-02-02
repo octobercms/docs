@@ -5,7 +5,7 @@ subtitle: Interact with handlers using HTML attributes.
 
 The data attributes API lets you issue AJAX requests without any JavaScript. In many cases the data attributes API is less verbose than the JavaScript API - you write less code to get the same result. The supported AJAX data attributes are:
 
-Attribute | Description
+data-request Attribute | Description
 ------------- | -------------
 [data-request](https://larajax.org/api/attributes/request) | specifies the AJAX handler name.
 [data-request-confirm](https://larajax.org/api/attributes/request-confirm) | specifies a confirmation message. A confirmation dialog is displayed before the request is sent. If the user clicks the Cancel button the request isn't sent.
