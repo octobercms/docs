@@ -304,7 +304,6 @@
         - ajax/attributes-api
         - ajax/javascript-api
         - ajax/turbo-router
-        - ajax/hot-controls
 -
     title: Features
     children:

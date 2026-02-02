@@ -56,46 +56,45 @@ The `VueReportWidgetBase` class extends `Backend\Classes\VueComponentBase` and p
 
 ### Client-Side Component
 
-The Vue component for the widget must be defined in a file located in the assets/js directory, as previously mentioned. Example component code (assets/js/mycustomwidget.js):
+The Vue component for the widget must be defined as an ES module in the assets/js directory. The component uses `export default` and extends the base widget class. Example component code (assets/js/mycustomwidget.js):
 
-```jsx
-oc.Modules.register('plugin.author.vuecomponents.mycustomwidget', function () {
-    Vue.component('plugin-author-vuecomponents-mycustomwidget', {
-        extends: Vue.options.components['dashboard-component-dashboard-widget-base'],
-        data: function () {
-            return {
-            }
+```js
+import WidgetBase from 'modules/dashboard/vuecomponents/dashboard/assets/js/widget-base.js';
+
+export default {
+    extends: WidgetBase,
+    data: function () {
+        return {
+        }
+    },
+    methods: {
+        useCustomData: function () {
+            return true;
         },
-        methods: {
-            useCustomData: function () {
-                return true;
-            },
 
-            makeDefaultConfigAndData: function () {
-                Vue.set(this.widget.configuration, 'title', 'My Custom Widget');
-            },
-
-            getSettingsConfiguration: function () {
-                const result = [{
-                    property: "title",
-                    title: "Title",
-                    type: "string",
-                }];
-
-                return result;
-            }
+        makeDefaultConfigAndData: function () {
+            this.widget.configuration.title = 'My Custom Widget';
         },
-        template: '#plugin_author_vuecomponents_mycustomwidget'
-    });
-});
+
+        getSettingsConfiguration: function () {
+            const result = [{
+                property: "title",
+                title: "Title",
+                type: "string",
+            }];
+
+            return result;
+        }
+    }
+};
 ```
 
-When defining a component, ensure you use the correct namespaces in the `register` and `component` calls, as well as in the template identifier. These should be inferred from your plugin's PHP namespace and the plugin PHP class name.
+The component is automatically registered by the `VueMaker` trait when the widget's PHP class is loaded. The template is injected from the partial file, so you don't need to specify a `template` property in the JavaScript.
 
 Widget Vue components must include all the methods outlined in the example code. Specifically:
 
 - `useCustomData` - this method must return `true` to inform the dashboard system that the component manages its own data cycle.
-- `makeDefaultConfigAndData` - sets the default widget configuration. In our example, we assign the widget title. The configuration object's keys are arbitrary and intended for the widget’s internal use. We will later demonstrate how to access the widget configuration in the component template. In the server-side code, the widget configuration can be accessed in the `getData` method via the `widgetConfig` argument.
+- `makeDefaultConfigAndData` - sets the default widget configuration. In our example, we assign the widget title using direct assignment (Vue 3's Proxy-based reactivity makes this reactive automatically). The configuration object's keys are arbitrary and intended for the widget's internal use. We will later demonstrate how to access the widget configuration in the component template. In the server-side code, the widget configuration can be accessed in the `getData` method via the `widgetConfig` argument.
 - `getSettingsConfiguration` - provides the configuration for the widget’s settings form. The configuration is defined using JavaScript objects and aligns with the [Inspector fields configuration](https://docs.octobercms.com/3.x/element/inspector-types.html).
 
 The component Vue template must be defined in a partial file located in the `partials` directory, as mentioned above. Below is a basic implementation of a component template (partials/_mycustomwidget.php):
