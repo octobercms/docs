@@ -12,7 +12,6 @@ data:
     adding: true
     deleting: true
     columns: []
-    recordsPerPage: false
     searching: false
 ```
 
@@ -28,19 +27,12 @@ Property | Description
 **default** | specifies a default string value, optional.
 **comment** | places a descriptive comment below the field.
 **adding** | allow records to be added to the data table. Default: `true`.
-**btnAddRowLabel** | defines a custom label for the "Add Row Above" button.
-**btnAddRowBelowLabel** | defines a custom label for the "Add Row Below" button.
-**btnDeleteRowLabel** | defines a custom label for the "Delete Row" button.
-**columns** | an array representing the column configuration of the data table. See the *Column configuration* section below.
 **deleting** | allow records to be deleted from the data table. Default: `true`.
-**dynamicHeight** | if `true`, the data table's height will extend or shrink depending on the records added, up to the maximum size defined by the `height` configuration value. Default: `false`.
-**fieldName** | defines a custom field name to use in the POST data sent from the data table. Leave blank to use the default field alias.
-**height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the field container.
-**keyFrom** | the data attribute to use for keying each record. This should usually be set to `id`. Only supports integer values.
-**postbackHandlerName** | specifies the AJAX handler name in which the data table content will be sent with. When set to `null` (default), the handler name will be auto-detected from the request name used by the form which contains the data table. It is recommended to keep this as `null`.
-**recordsPerPage** | the number of records to show per page. If set to `false`, the pagination will be disabled.
+**toolbar** | show the toolbar above the data table. Default: `true`.
 **searching** | allow records to be searched via a search box. Default: `false`.
-**toolbar** | an array representing the toolbar configuration of the data table.
+**sorting** | allow rows to be manually reordered by dragging. Default: `false`.
+**height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the content. Default: `false`.
+**columns** | an array representing the column configuration of the data table. See the *Column Configuration* section below.
 
 #### Column Configuration
 
@@ -50,34 +42,124 @@ Example:
 
 ```yaml
 columns:
+    name:
+        type: string
+        title: Name
+    price:
+        type: numeric
+        title: Price
+        width: 100px
+    country:
+        type: dropdown
+        title: Country
+    state:
+        type: dropdown
+        title: State
+        dependsOn: country
+    is_active:
+        type: checkbox
+        title: Active
+```
+
+Option | Description
+------ | -----------
+**type** | the input type for this column's cells. See the *Column Types* section below.
+**title** | defines the column's title.
+**width** | defines the width of the column, in pixels. Example: `100px`.
+**readOnly** | whether this column is read-only. Default: `false`.
+**validation** | an array specifying the validation for the content of the column's cells. See the *Column Validation* section below.
+**options** | for `dropdown` columns only - specifies the available options as an array. If omitted, options will be loaded via AJAX using the model's `getDataTableOptions` method.
+**strict** | for `dropdown` columns only - when set to `false`, allows free-text entry in addition to the dropdown options. Default: `true`.
+**dependsOn** | specifies the name of another column that this column depends on. When the parent column value changes, this column's value is cleared and its options are refreshed.
+**dateFormat** | for `date` columns only - the date format. Default: `YYYY-MM-DD`.
+**timeFormat** | for `time` columns only - the time format. Default: `HH:mm`.
+
+#### Column Types
+
+The following column types are available.
+
+Type | Description
+------ | -----------
+**string** | a standard text input (default).
+**checkbox** | a checkbox for boolean values.
+**numeric** | a numeric input that only accepts numbers, including decimals.
+**dropdown** | a dropdown select list. Options can be provided inline via the `options` property, or loaded dynamically via AJAX.
+**autocomplete** | a text input with autocomplete suggestions. Always allows free-text entry.
+**date** | a date picker input.
+**time** | a time picker input.
+
+#### Dropdown and Autocomplete Options
+
+Dropdown and autocomplete column options can be provided in two ways.
+
+**Inline options** are defined directly in the column configuration.
+
+```yaml
+columns:
+    status:
+        type: dropdown
+        title: Status
+        options:
+            draft: Draft
+            published: Published
+            archived: Archived
+```
+
+**AJAX options** are loaded dynamically from the model when no inline `options` are specified. The widget will call one of the following methods on the model.
+
+Method | Description
+------ | -----------
+**get*FieldName*DataTableOptions** | called first, where *FieldName* is the studly-cased field name (e.g., `getRatesDataTableOptions`). Receives `$column` and `$rowData` parameters.
+**getDataTableOptions** | a generic fallback method. Receives `$fieldName`, `$column` and `$rowData` parameters.
+
+```php
+public function getRatesDataTableOptions($column, $rowData)
+{
+    if ($column === 'country') {
+        return ['au' => 'Australia', 'us' => 'United States'];
+    }
+
+    if ($column === 'state') {
+        // Use $rowData['country'] to return dependent options
+        return State::getNamesByCountry($rowData['country']);
+    }
+}
+```
+
+#### Column Dependencies
+
+A column can depend on another column using the `dependsOn` property. When the parent column value changes, the dependent column value is automatically cleared and its dropdown options are refreshed.
+
+```yaml
+columns:
+    country:
+        type: dropdown
+        title: Country
+    state:
+        type: dropdown
+        title: State
+        dependsOn: country
+```
+
+#### Column Validation
+
+Column cells can be validated against the below types of validation. Validation should be specified as an array within the column configuration.
+
+```yaml
+columns:
     id:
         type: string
         title: ID
         validation:
             integer:
                 message: Please enter a number
-    name:
-        type: string
-        title: Name
+            required:
+                message: This field is required
 ```
-
-Option | Description
------- | -----------
-**type** | the input type for this column's cells. Must be one of the following: `string`, `checkbox`, `dropdown` or `autocomplete`.
-**options** | for `dropdown` and `autocomplete` columns only - this specifies the AJAX handler that will return the available options, as an array. The array key is used as the value of the option, and the array value is used as the option label.
-**readOnly** | whether this column is read-only. Default: `false`.
-**title** | defines the column's title.
-**validation** | an array specifying the validation for the content of the column's cells. See the *Column validation* section below.
-**width** | defines the width of the column, in pixels.
-
-#### Column Validation
-
-Column cells can be validated against the below types of validation. Validation should be specified as an array, with the type of validation used as a key, and an optional message specified as the `message` attrbute for that validation.
 
 Validation | Description
 ---------- | -----------
-**float** | Validates the data as a float. An optional boolean `allowNegative` attribute can be provided, allowing for negative float numbers.
-**integer** | Validates the data as an integer. An optional boolean `allowNegative` attribute can be provided, allowing for negative integers.
-**length** | Validates the data to be of a certain length. An integer `min` and `max` attribute must be provided, representing the minimum and maximum number of characters that must be entered.
-**regex** | Validates the data against a regular expression. A string `pattern` attribute must be provided, defining the regular expression to test the data against.
-**required** | Validates that the data must be entered before saving.
+**required** | validates that data must be entered before saving.
+**integer** | validates that the data is an integer.
+**float** | validates that the data is a floating-point number.
+**regex** | validates the data against a regular expression. A string `pattern` attribute must be provided.
