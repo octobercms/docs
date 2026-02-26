@@ -31,7 +31,7 @@ Below you can see an example blueprint directory structure. Each blueprint can r
 
 ### Theme Blueprints
 
-Next is an example of a blueprint structure inside the **demo** theme. Just like in the app directory, blueprints can reside in any directory with any filename, with any nesting depth. The admin panel navigation for these blueprints will only appear when the theme is selected, often controlled by the [multisite settings](../resources/multisite.md).
+Next is an example of a blueprint structure inside the **demo** theme. Just like in the app directory, blueprints can reside in any directory with any filename, with any nesting depth. The admin panel navigation for these blueprints will only appear when the theme is selected, often controlled by the [multisite settings](../multisite/multisite.md).
 
 ::: dir
 ├── themes
@@ -92,45 +92,7 @@ _blog_content:
 
 ## Integration with Multisite
 
-Blueprints do not use [multisite capabilities](../resources/multisite.md) by default. You may use the `multisite` property to enable this. When enabled, records can be unique to each configured site.
-
-```yaml
-handle: Blog\Post
-type: entry
-# ...
-multisite: true
-```
-
-When multisite is enabled, all fields in the blueprint become translatable. To keep the same value for a field, set the `translatable` property to false. In this example, when saving the record the **name** field will be copied to every site when it is saved.
-
-```yaml
-# ...
-multisite: true
-
-fields:
-    name:
-        label: Full Name
-        type: text
-        translatable: false
-```
-
-You may also set the value to **sync** to keep the records synchronized across sites, which is helpful for categories and tags. When using sync, each record will always exist on every site, although the content can be different.
-
-```yaml
-multisite: sync
-```
-
-When using [Site Groups](../resources/multisite.md), the records will be propagated to all sites within that group. This can be changed by setting the `multisite` property to **all** to sync within all sites.
-
-```yaml
-multisite: all
-```
-
-Setting to **locale** will sync the records to all sites that share the same locale.
-
-```yaml
-multisite: locale
-```
+Blueprints support multisite and localization features. See the [Tailor Localization](../multisite/tailor.md) article for complete details on translating Tailor content across multiple sites.
 
 ## Migrating Blueprints
 
@@ -156,20 +118,6 @@ To refresh a single blueprint use the `--blueprint` option and specify its handl
 
 ```bash
 php artisan tailor:refresh --blueprint="Blog\Post"
-```
-
-### Propagating Content
-
-When using the **sync** option for multisite, you may retroactively propagate records using the `tailor:propagate` command.
-
-```bash
-php artisan tailor:propagate
-```
-
-To propagate a single blueprint use the `--blueprint` option and specify its handle.
-
-```bash
-php artisan tailor:propagate --blueprint="Blog\Category"
 ```
 
 ### Pruning Content

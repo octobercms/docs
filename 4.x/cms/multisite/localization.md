@@ -1,13 +1,13 @@
 ---
 subtitle: Learn how to translate messages inside CMS themes.
 ---
-# Localization
+# Theme Localization
 
 ::: aside
-View the [Multisite article](../resources/multisite.md) to learn how to set the active language for your website.
+View the [Multisite article](./multisite.md) to learn how to set the active language for your website.
 :::
 
-Themes can provide localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically and can be used inside the theme contents or as backend form labels similar to [plugin localization](../../extend/system/localization.md).
+Themes can provide localization keys through files placed in the **lang** subdirectory of the theme's directory. These localization keys are registered automatically and can be used inside the theme contents or as backend form labels similar to [plugin localization](../../extend/multisite/localization.md).
 
 ### Localization File Structure
 
@@ -53,6 +53,6 @@ View [the markup guide](../../markup/filter/trans.md) to learn more about transl
 #### See Also
 
 ::: also
-* [Multisite](../resources/multisite.md)
-* [Plugin Localization](../../extend/system/localization.md)
+* [Multisite](./multisite.md)
+* [Plugin Localization](../../extend/multisite/localization.md)
 :::

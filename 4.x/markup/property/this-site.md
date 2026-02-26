@@ -3,7 +3,7 @@ subtitle: Twig Property
 ---
 # this.site
 
-You can access the active site via `this.site` and it returns the object `System\Models\SiteDefinition` [current site definition](../../cms/resources/multisite.md).
+You can access the active site via `this.site` and it returns the object `System\Models\SiteDefinition` [current site definition](../../cms/multisite/multisite.md).
 
 ## Retrieving Data From the Site
 

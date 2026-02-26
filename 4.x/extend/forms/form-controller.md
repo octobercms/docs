@@ -79,7 +79,7 @@ The following properties are supported for the Create page.
 
 Property | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../system/localization.md).
+**title** | a page title, can refer to a [localization string](../multisite/localization.md).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
 **form** | overrides the default form fields definitions for the create page only.
@@ -98,7 +98,7 @@ The following properties are supported for the Update page.
 
 Property | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../system/localization.md).
+**title** | a page title, can refer to a [localization string](../multisite/localization.md).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
 **form** | overrides the default form fields definitions for the update page only.
@@ -116,12 +116,12 @@ The following properties are supported for the Preview page.
 
 Property  | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../system/localization.md).
+**title** | a page title, can refer to a [localization string](../multisite/localization.md).
 **form** | overrides the default form fields definitions for the preview page only.
 
 ### Custom Messages
 
-Specify the `customMessages` property to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../system/localization.md).
+Specify the `customMessages` property to override the default messages used by the Form Controller. The values can be plain text or can refer to a [localization string](../multisite/localization.md).
 
 ```yaml
 customMessages:

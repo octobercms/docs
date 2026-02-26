@@ -3,8 +3,6 @@ subtitle: Learn how to translate content using multiple sites
 ---
 # Multisite
 
-<VideoBlockLink src="https://www.youtube.com/watch?v=_kX7P3SEHg8" title="Multisite Demo" description="This video demonstrates how to create multilingual sites with October CMS Multisite." prompt="Watch the demonstration" />
-
 The multisite feature lets you manage multiple websites from a single October CMS installation and assign content dependent on the domain name. For example, an e-commerce store with different country-specific sub-sites. You can also use it to manage translations for a localized website.
 
 ## Managing Sites
@@ -122,8 +120,9 @@ Read the [Site Service article](../../extend/services/site.md) to learn more.
 
 ::: also
 * [Multisite Features](https://octobercms.com/features/multisite)
-* [Theme Localization](../themes/localization.md)
+* [Theme Localization](./localization.md)
+* [Tailor Localization](./tailor.md)
 * [Site Picker Component](../components/sitepicker.md)
-* [Multisite Trait](../../extend/database/traits.md)
+* [Multisite Trait](../../extend/multisite/multisite.md)
 * [Site Service](../../extend/services/site.md)
 :::

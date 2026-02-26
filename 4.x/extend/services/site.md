@@ -2,7 +2,7 @@
 
 ### Introduction
 
-The global `Site` facade is included with October CMS to provide tools for working with [multisite implementations](../../cms/resources/multisite.md). All optional multisite features are enabled or disabled using the configuration file **config/multisite.php**.
+The global `Site` facade is included with October CMS to provide tools for working with [multisite implementations](../../cms/multisite/multisite.md). All optional multisite features are enabled or disabled using the configuration file **config/multisite.php**.
 
 ```php
 'features' => [
@@ -127,6 +127,6 @@ $global = Site::hasGlobalContext();
 #### See Also
 
 ::: also
-* [Multisite](../../cms/resources/multisite.md)
-* [Multisite Trait](../database/traits.md)
+* [Multisite](../../cms/multisite/multisite.md)
+* [Multisite Trait](../multisite/multisite.md)
 :::

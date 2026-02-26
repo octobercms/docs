@@ -523,7 +523,7 @@ In the rule above, only rows with an `account_id` of `1` would be included in th
 <a name="rule-site-unique"></a>
 #### unique_site:_table_,_column_,_except_,_idColumn_
 
-The field under validation must be unique within the same [site context](../../cms/resources/multisite.md). The definition is identical to the `unique` rule.
+The field under validation must be unique within the same [site context](../../cms/multisite/multisite.md). The definition is identical to the `unique` rule.
 
 ```php
 'email' => 'unique_site:users'
