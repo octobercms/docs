@@ -12,6 +12,7 @@ The following properties are supported by the component.
 Property | Description
 -------- | -------------
 **js** | Array of JavaScript files in the theme **assets/js** folder
+**module** | Array of JavaScript module files in the theme **assets/js** folder
 **less** | Array of LESS files in the theme **assets/less** folder
 **scss** | Array of SCSS files in the theme **assets/scss** folder
 **css** | Array of Stylesheet files in the theme **assets/css** folder
@@ -94,6 +95,36 @@ Now when the partial is loaded on the page, the scripts and stylesheets will be 
 ::: tip
 Using the partial twice on the page will only inject the assets once.
 :::
+
+## Injecting JavaScript Modules
+
+The `module` property includes JavaScript files as ES modules. Unlike the `js` property which bundles and combines scripts, module files are served individually with `type="module"` on the script tag. This is useful for loading ESM entry points that use `import` statements.
+
+::: cmstemplate
+```ini
+[resources]
+module[] = "app.js"
+```
+```html
+<!-- Page Contents Here -->
+```
+:::
+
+The module file should be located at **assets/js/app.js** and can use standard ESM imports to load other modules.
+
+```js
+import { initCarousel } from './controls/carousel.js';
+
+initCarousel();
+```
+
+You can use `module` alongside `js` on the same page. The `js` assets will be bundled as usual, while `module` assets are loaded as separate ES modules.
+
+```ini
+[resources]
+js[] = "legacy-script.js"
+module[] = "app.js"
+```
 
 ## Using Custom Headers
 
