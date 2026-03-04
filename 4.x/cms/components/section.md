@@ -82,6 +82,25 @@ value = "{{ :foobar }}"
 Previewing links and using the [Page Finder widget](../../element/form/widget-pagefinder.md) do not support identifiers with custom values.
 :::
 
+## How the Component Variable Works
+
+The component variable (e.g. `section` or your alias like `author`) acts as a smart proxy. Accessing an attribute returns the record field value directly.
+
+```twig
+{{ author.title }}
+{{ author.slug }}
+```
+
+Calling a method starts a new [database model query](../../extend/database/query.md) instead. For example, the following creates a new query to fetch related posts.
+
+```twig
+{% set recentPosts = posts.where('author_id', author.id).get() %}
+```
+
+::: warning
+When accessing the component variable as an attribute (e.g. `author.title`) or as a query (e.g. `author.where(...)`) the result will be different. Attributes return a stored value from the primary record, whereas methods initiate a new database query.
+:::
+
 ## Checking Record Existence
 
 In most cases you will want to display a 404 page when a record cannot be found. This is possible by using an `{% if %}` statement combined with the `abort(404)` function.
