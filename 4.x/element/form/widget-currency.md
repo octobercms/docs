@@ -35,6 +35,19 @@ total_amount:
     format: short
 ```
 
+## Currencyable Models
+
+When the currency field is used on a model that implements the `Currencyable` trait, the widget automatically adjusts its behavior based on the active site currency.
+
+On the **primary currency site**, the field behaves as a normal editable input. On a **non-primary currency site**, the field displays the auto-converted value in a read-only state, with the following options:
+
+- **Override**: enables the input for manual entry of a fixed value in the site currency.
+- **Clear**: removes the override and reverts to automatic exchange-rate conversion.
+
+This prevents accidental data corruption where a base-currency value could be saved with a non-base currency symbol. Overrides are stored separately from the base value, so clearing an override has no effect on the primary currency data.
+
+To learn more about implementing the `Currencyable` trait on a model, see the [Currency plugin documentation](https://octobercms.com/plugin/responsiv-currency).
+
 #### See Also
 
 ::: also
