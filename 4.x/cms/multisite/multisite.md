@@ -24,6 +24,48 @@ The following configuration defines each site:
 
 When you create more than one site, each can be selected in the admin panel using the site selection dropdown menu.
 
+## Site Routing
+
+When a request arrives, October CMS determines which site should handle it by matching the request against each site definition. Understanding this process is important when running multiple sites on different domains.
+
+### How Requests Are Matched
+
+The system uses a two-stage matching process to resolve the active site for each request.
+
+1. **Hostname matching**: if a site has **Define matching hostnames** enabled, it will only match requests for those specific hostnames. If a site does not have this option enabled, it will match requests from **any hostname**.
+
+2. **Route prefix matching**: if a site has **Use a CMS route prefix** enabled, the request URI must match the prefix. For example, a site with the prefix `/en` will match `/en` and `/en/about` but not `/fr/about`.
+
+When multiple sites match, the site with the most specific route prefix takes priority. If no site matches the request, the primary site is used as the fallback.
+
+### Default Site Fallback
+
+The primary site acts as a catch-all when no other site matches. However, if the primary site does not have its hostnames restricted, it will match **every request**, including requests intended for other domains.
+
+For example, consider the following configuration.
+
+Site | Hostname Restriction | Theme
+---- | -------------------- | -----
+Primary Site | _None_ | default-theme
+Secondary Site | `www.domain2.tld` | other-theme
+
+In this case, a request to `www.domain2.tld` will match **both** sites — the Secondary Site matches by hostname, and the Primary Site matches because it has no hostname restriction. This can result in the wrong theme being displayed.
+
+### Best Practices
+
+To avoid unexpected routing, you should restrict the hostnames of every site, including the primary site. The following configuration ensures each site only responds to its intended domain.
+
+Site | Hostname Restriction | Theme
+---- | -------------------- | -----
+Primary Site | `cms.domain.tld` | default-theme
+Secondary Site | `www.domain2.tld` | other-theme
+
+Alternatively, if the primary site is only used for managing content in the admin panel, you can disable it on the frontend by unchecking **Enabled** while keeping it accessible in the backend.
+
+::: tip
+Always enable **Define matching hostnames** for production sites. This prevents one site from unintentionally serving content for another domain.
+:::
+
 ## Site Picker Component
 
 The `sitePicker` component lets you manage links to other sites. The best place to include this is in your page or layout template.
