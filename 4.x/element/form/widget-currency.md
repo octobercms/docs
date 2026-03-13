@@ -25,6 +25,7 @@ total_amount:
 Property | Description
 ------------- | -------------
 **format** | an optional format when previewing the form field, either: `long`, `short` or `null`. Default: `null`.
+**currencyFrom** | read the currency code from another model attribute. Supports dot notation for relations. Default: `null`
 
 Use the `format` property to change the format when displaying the form field in a preview context.
 
@@ -34,6 +35,28 @@ total_amount:
     type: currency
     format: short
 ```
+
+## Locked Currency
+
+Use the `currencyFrom` property to lock the field to a specific currency stored on the model. This is useful for financial records like orders and invoices where the currency is determined at creation time and should not change when the active site changes.
+
+```yaml
+total:
+    label: Total
+    type: currency
+    currencyFrom: currency_code
+```
+
+The property supports dot notation for reading the currency code from a related model.
+
+```yaml
+price:
+    label: Price
+    type: currency
+    currencyFrom: order.currency_code
+```
+
+When `currencyFrom` is set, the field input and preview will use the specified currency regardless of the active site currency.
 
 ## Currencyable Models
 

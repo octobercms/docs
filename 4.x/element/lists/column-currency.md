@@ -28,6 +28,7 @@ Property | Description
 **fromCode** | specify the source currency code.
 **toCode** | specify the display currency code.
 **site** | display the currency using the multisite definition context. Default: `false`
+**currencyFrom** | read the currency code from another model attribute. Supports dot notation for relations. Default: `null`
 
 Use the `format` property to display the column value using a longer format.
 
@@ -45,6 +46,24 @@ total_amount:
     label: Loan amount
     type: currency
     site: true
+```
+
+Use the `currencyFrom` property to lock the display currency to a value stored on the record itself. This is useful for financial records like orders and invoices where the currency is determined at creation time and should not change when the active site changes.
+
+```yaml
+total:
+    label: Total
+    type: currency
+    currencyFrom: currency_code
+```
+
+The property supports dot notation for reading the currency code from a related model.
+
+```yaml
+price:
+    label: Price
+    type: currency
+    currencyFrom: order.currency_code
 ```
 
 ::: also
