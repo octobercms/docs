@@ -79,6 +79,18 @@ You may also `force` the application URL to be used strictly for every link, whi
 LINK_POLICY=force
 ```
 
+### Trusted Hosts
+
+In production environments, you should configure your web server to only accept requests with a recognized `Host` header matching your domain. This prevents host header spoofing, where a crafted request could influence URL generation for redirects and emails.
+
+Most web servers handle this by default through virtual host configuration. For example, Apache only routes requests to a virtual host when the `Host` header matches its `ServerName` or `ServerAlias`, and Nginx requires a matching `server_name` directive.
+
+At the application level, there are two ways to pin URL generation to your domain:
+
+- **Link Policy** — use the `LINK_POLICY=force` setting described above, which pins all generated URLs to the configured `APP_URL` value regardless of the request host.
+
+- **Multisite** — when the [multisite feature](../setup/configuration.md#multisite) is enabled with hostname restrictions, only requests matching the allowed hostnames will be served. This effectively rejects requests with unrecognized Host headers and can also be used with wildcard patterns (e.g. `*.example.com`).
+
 ### Safe Mode
 
 Safe mode is an extra level of protection that prevents running arbitrary PHP code by disabling the PHP code section in the editor. Safe mode will also enable a secure Twig environment, which restricts unsafe method calls.
