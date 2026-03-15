@@ -134,9 +134,22 @@ There are some core features that are not multisite-enabled by default, such as 
 
 Feature | Description
 ------- | --------------------------
+`system_plugin_sites` | Plugins can be enabled or disabled per site
+`system_plugin_site_groups` | Plugins can be enabled or disabled per site group
+`system_asset_combiner` | Asset combiner cache keys are unique to the site
 `cms_maintenance_setting` | Maintenance Mode Settings are unique for each site
 `backend_mail_setting` | Mail Settings are unique for each site
-`system_asset_combiner` | Asset combiner cache keys are unique to the site
+`dashboard_traffic_statistics` | Dashboard traffic statistics are unique for each site
+
+### Per-Site Plugin Management
+
+When the `system_plugin_sites` or `system_plugin_site_groups` feature is enabled, you can enable or disable plugins for individual sites or site groups. Navigate to **Settings → Updates & Plugins → Manage Plugins** and use the toggle switch next to each plugin to control its availability for the currently selected site.
+
+A plugin that is disabled for a site will have its backend navigation, settings and controllers hidden for that site. Switching to a different site using the site picker will restore access to the plugin if it is enabled there.
+
+::: tip
+You must clear the application cache after enabling or disabling these features in the configuration file.
+:::
 
 ### Disabling Multisite
 
