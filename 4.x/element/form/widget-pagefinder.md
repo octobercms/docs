@@ -26,6 +26,9 @@ Property | Description
 **default** | specifies a default string value, optional.
 **comment** | places a descriptive comment below the field.
 **singleMode** | only allows items to be selected that resolve to a single URL. Default: `false`
+**allowCustomUrl** | controls whether the free-form URL option appears in the type dropdown. Default: `true`
+**allowedTypes** | an array of type codes to show in the type dropdown, acting as a whitelist. Default: `null`
+**excludedTypes** | an array of type codes to hide from the type dropdown, acting as a blacklist. Default: `null`
 
 ::: tip
 Resolve the `pagefinder` value in lists using the [linkage column type](../lists/column-linkage.md).
@@ -43,6 +46,39 @@ Use the [`|content` Twig filter](../../markup/tag/content.md) to process HTML ma
 
 ```twig
 {{ blog_html|content }}
+```
+
+## Filtering Page Types
+
+By default the page finder shows all registered page types, including the URL type and any types registered by plugins and Tailor blueprints. Page types that have no available CMS pages are automatically hidden.
+
+Use the `allowedTypes` property to restrict the type dropdown to specific types only. For example, to only allow CMS page selection.
+
+```yaml
+custom_page:
+    label: Custom Page
+    type: pagefinder
+    allowedTypes:
+        - cms-page
+```
+
+Use `excludedTypes` to hide specific types from the dropdown.
+
+```yaml
+custom_page:
+    label: Custom Page
+    type: pagefinder
+    excludedTypes:
+        - url
+```
+
+Set `allowCustomUrl` to `false` to remove the free-form URL option independently of the type filters.
+
+```yaml
+custom_page:
+    label: Custom Page
+    type: pagefinder
+    allowCustomUrl: false
 ```
 
 ## Creating New Page Types
