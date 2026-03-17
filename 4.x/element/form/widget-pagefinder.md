@@ -114,15 +114,19 @@ Event::listen('cms.pageLookup.listTypes', function() {
 });
 ```
 
-For pages types that support nested subitems, such as linking to all blog posts, the type name value should be an array where the last item is set to `true`. This will exclude it from scenarios where only one link can be selected. The following marks the **blog-posts** type with nesting support.
+For pages types that support nested subitems, such as linking to all blog posts, the type name value should be an array with a `label` key and a `nesting` key set to `true`. This will exclude it from scenarios where only one link can be selected. The following marks the **blog-posts** type with nesting support.
 
 ```php
 Event::listen('cms.pageLookup.listTypes', function() {
     return [
-        'blog-posts' => ['All Blog Posts', true]
+        'blog-posts' => ['label' => 'All Blog Posts', 'nesting' => true]
     ];
 });
 ```
+
+::: tip
+A legacy format `['All Blog Posts', true]` (numeric keys with a boolean last element) is also supported for backward compatibility.
+:::
 
 ### Returning Information About a Page Type
 
@@ -356,13 +360,13 @@ Event::listen('cms.pageLookup.resolveItem', function($type, $item, $url, $theme)
         return $result;
     }
 
-    $iterator = function($children) use (&$iterator, &$item, &$theme, $url, $controller, $model) {
+    $iterator = function($children) use (&$iterator, &$item, &$theme, $url, $controller) {
         $branch = [];
 
         foreach ($children as $child) {
             $childUrl = $controller->pageUrl($item->cmsPage, [
-                'id' => $model->id,
-                'slug' => $model->slug
+                'id' => $child->id,
+                'slug' => $child->slug
             ]);
 
             $childItem = [
