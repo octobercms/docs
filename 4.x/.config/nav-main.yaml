@@ -114,16 +114,24 @@
         - system/views
         - system/behaviors
         - system/widgets
+        - system/vue-components
         - system/ajax
 -
     title: Core Concepts
     children:
         - system/exceptions
         - system/sending-mail
-        - system/localization
         - system/routing
         - system/scheduling
         - system/unit-testing
+-
+    title: Localization & Multisite
+    children:
+        - multisite/introduction
+        - multisite/localization
+        - multisite/multisite
+        - multisite/translatable
+        - multisite/multisite-group
 -
     title: Extending the CMS
     children:
@@ -304,7 +312,6 @@
         - ajax/attributes-api
         - ajax/javascript-api
         - ajax/turbo-router
-        - ajax/hot-controls
 -
     title: Features
     children:
@@ -331,10 +338,15 @@
         - tailor/navigation
         - tailor/models
 -
+    title: Localization & Multisite
+    children:
+        - multisite/multisite
+        - multisite/localization
+        - multisite/tailor
+-
     title: Theme Development
     children:
         - themes/settings
-        - themes/localization
         - themes/child-themes
         - themes/database-themes
         - themes/seeding-themes
@@ -349,7 +361,6 @@
 -
     title: Resources
     children:
-        - resources/multisite
         - resources/building-apis
 
 #

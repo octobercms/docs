@@ -3,7 +3,7 @@ subtitle: Tools for working with multiple site definitions
 ---
 # Site Picker
 
-The `sitePicker` component provides tools for working with [Multisite configuration](../resources/multisite.md) for your website. The best place to include this is in your page or layout template.
+The `sitePicker` component provides tools for working with [Multisite configuration](../multisite/multisite.md) for your website. The best place to include this is in your page or layout template.
 
 ## Basic Usage
 
@@ -55,7 +55,9 @@ In the example below, each site will have a `url` set to the CMS page found in *
 
 By default, the `sitePicker` component isn't aware of model parameters in the URL, such as page slugs and identifiers. The `cms.sitePicker.overrideParams` [global event](../../extend/services/event.md) is used to override the URL parameters to their translated versions. A good place to put this event is inside the `init` or the `onRun` method of a [CMS Component class](../../extend/cms-components.md).
 
-For example, if the model implements the [`Multisite` trait](../../extend/database/traits.md), the `newOtherSiteQuery` method is used to locate the model for the proposed site and modify the URL parameters.
+### Using the Multisite Trait
+
+If the model implements the [`Multisite` trait](../../extend/multisite/multisite.md), each site has a separate record with its own slug. The `newOtherSiteQuery` method is used to locate the model for the proposed site and modify the URL parameters.
 
 ```php
 $myModel = MyModel::find(1);
@@ -72,8 +74,34 @@ Event::listen('cms.sitePicker.overrideParams', function($page, $params, $current
 });
 ```
 
+### Using the Translatable Trait
+
+If the model implements the [`Translatable` trait](../../extend/multisite/translatable.md), there is a single record with translated attributes. The `getTranslation` method retrieves the slug for the proposed locale.
+
+```php
+$myModel = MyModel::find(1);
+
+Event::listen('cms.sitePicker.overrideParams', function($page, $params, $currentSite, $proposedSite) use ($myModel) {
+    $proposedLocale = $proposedSite->hard_locale;
+    $params['slug'] = $myModel->getTranslation('slug', $proposedLocale);
+    return $params;
+});
+```
+
+## Translating Query String Parameters
+
+The `cms.sitePicker.overrideQuery` [global event](../../extend/services/event.md) works the same way as `cms.sitePicker.overrideParams` but applies to query string parameters instead of URL route parameters. This is useful when model identifiers or filters are passed via the query string.
+
+```php
+Event::listen('cms.sitePicker.overrideQuery', function($page, $params, $currentSite, $proposedSite) {
+    // Modify $params and return the translated query string values
+    return $params;
+});
+```
+
 #### See Also
 
 ::: also
-* [Multisite](../resources/multisite.md)
+* [Multisite](../multisite/multisite.md)
+* [Translatable](../../extend/multisite/translatable.md)
 :::

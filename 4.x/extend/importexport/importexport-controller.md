@@ -64,7 +64,7 @@ The following configuration properties are supported for the Import page.
 
 Property | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../system/localization.md).
+**title** | a page title, can refer to a [localization string](../multisite/localization.md).
 **list** | defines the list columns available for importing.
 **form** | provides additional fields used as import options, optional.
 **redirect** | redirection page when the import is complete, optional
@@ -86,7 +86,7 @@ The following configuration properties are supported for the Export page:
 
 Property | Description
 ------------- | -------------
-**title** | a page title, can refer to a [localization string](../system/localization.md).
+**title** | a page title, can refer to a [localization string](../multisite/localization.md).
 **fileName** | the file name to use for the exported file without extension. Default `export`
 **list** | defines the list columns available for exporting.
 **form** | provides additional fields used as export options, optional.

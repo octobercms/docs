@@ -65,6 +65,7 @@ Property | Description
 **$bodyClass** | body class property used for customizing the layout. Can be set in the controller constructor or action method.
 **$guarded** | controller specific methods which cannot be called as actions. Can be extended in the controller constructor.
 **$layout** | specify a custom layout for the [controller views](../system/views.md).
+**$turboRouter** | configures the [turbo router](../../cms/ajax/turbo-router.md) for PJAX navigation. Set to `true` to enable, `false` to disable, a string for visit control (e.g. `'reload'`), or an array of turbo meta tag values.
 
 ## Initialization Logic
 
@@ -209,6 +210,49 @@ $this->setResponse(Response::make(...));
 ```
 
 View the [Views & Responses article](../services/response-view.md) for more information on building responses.
+
+
+## Configuring the Turbo Router
+
+The [turbo router](../../cms/ajax/turbo-router.md) uses PJAX (push state and AJAX) to swap page content client-side without full page reloads. You can configure turbo behavior per controller using the `$turboRouter` property.
+
+Setting the property to `true` enables turbo and outputs `<meta name="turbo-visit-control" content="enable">`.
+
+```php
+public $turboRouter = true;
+```
+
+Setting it to `false` disables turbo entirely for the controller, outputting no turbo meta tags.
+
+```php
+public $turboRouter = false;
+```
+
+A string value is shorthand for setting the `visit-control` meta tag. For example, `'reload'` will trigger a full page reload on incoming PJAX requests.
+
+```php
+public $turboRouter = 'reload';
+```
+
+For deeper configuration, use an array where each key maps to a `turbo-{key}` meta tag.
+
+```php
+public $turboRouter = [
+    'visit-control' => 'enable',
+    'view-transition' => 'same-origin',
+    'root' => '/app',
+];
+```
+
+This outputs multiple meta tags:
+
+```html
+<meta name="turbo-visit-control" content="enable" />
+<meta name="turbo-view-transition" content="same-origin" />
+<meta name="turbo-root" content="/app" />
+```
+
+When turbo is enabled and no `root` key is specified, the `turbo-root` meta tag defaults to the backend base URL automatically.
 
 #### See Also
 

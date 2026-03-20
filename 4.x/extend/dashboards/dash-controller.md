@@ -54,3 +54,27 @@ Dashboard::syncAll($owner, [
 ```
 
 The first argument is the owner class instance or class name that owns the dashboards. The second argument is an array of dashboard definitions keyed by their field/code name. Each definition should include a `name`, `icon`, and optionally `showInterval` to control whether the date interval selector is visible.
+
+### Default Date Range
+
+You can configure the default date range and grouping interval for a dashboard using the following properties in the dashboard YAML configuration file.
+
+Property | Description
+------------- | -------------
+**defaultStart** | default start date keyword. Supported values: `today`, `week`, `month`, `quarter`, `year`. Default: `month`.
+**defaultEnd** | default end date keyword. Supported values: `today`, `week`, `month`, `quarter`, `year`. Default: `today`.
+**defaultInterval** | default grouping interval. Supported values: `day`, `week`, `month`, `quarter`, `year`. Default: `day`.
+**defaultCompare** | default comparison mode. Supported values: `none`, `prev-period`, `prev-year`. Default: `none`.
+
+For example, to default a finance dashboard to show data from the start of the year, grouped by month:
+
+```yaml
+finance:
+    name: Finance
+    icon: icon-chart-bar
+    defaultStart: year
+    defaultEnd: today
+    defaultInterval: month
+```
+
+These defaults apply when the user first visits the dashboard and no date range is selected in the URL. Once the user selects a different range, their selection takes precedence.

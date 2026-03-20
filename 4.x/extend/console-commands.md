@@ -186,9 +186,11 @@ $this->confirm($question, true);
 
 ## Registering Commands
 
-#### Registering a Console Command
+#### Automatic Command Discovery
 
-Once your command class is finished, you need to register it so it will be available for use. This is typically done in the `register` method of a [plugin registration file](./extending.md) using the `registerConsoleCommand` helper method.
+Any command class placed in the plugin **console** directory is automatically discovered and registered. There is no need to manually register commands if they follow the standard directory convention.
+
+For example, a command class at **plugins/acme/blog/console/MyCommand.php** with namespace `Acme\Blog\Console` will be available immediately. To enable this, call the `discoverConsoleCommands` method in the `register` method of your [plugin registration file](./extending.md).
 
 ```php
 class Blog extends PluginBase
@@ -200,8 +202,21 @@ class Blog extends PluginBase
 
     public function register()
     {
-        $this->registerConsoleCommand('acme.mycommand', \Acme\Blog\Console\MyConsoleCommand::class);
+        $this->discoverConsoleCommands();
     }
+}
+```
+
+The method scans the **console** directory for PHP classes that extend `Illuminate\Console\Command` and registers them automatically. Traits, abstract classes and other non-command files are ignored.
+
+#### Registering a Console Command
+
+You may also register commands explicitly using the `registerConsoleCommand` helper method. This is useful when commands are stored in a non-standard location.
+
+```php
+public function register()
+{
+    $this->registerConsoleCommand('acme.mycommand', \Acme\Blog\Console\MyConsoleCommand::class);
 }
 ```
 

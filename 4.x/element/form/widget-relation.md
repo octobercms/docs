@@ -25,6 +25,7 @@ Property | Description
 **conditions** | specifies a raw where query statement to apply to the model query.
 **modelScope** | applies a [model query scope](../../extend/database/model.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
 **defaultSort** | sets a default sorting column and direction, supports a string for the column name or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
+**quickCreate** | adds a [quick create](#quick-create) option to the dropdown for creating new related records on the fly. Accepts a string path to a fields definition file, or an object with extended options.
 **useController** | automatically detects if this field configured with [Relation Controller behavior](../../extend/forms/relation-controller.md) and use it. Default: `true`
 **controller** | specifies an array to manually configure integration with the [Relation Controller behavior](../../extend/forms/relation-controller.md).
 
@@ -110,6 +111,47 @@ public function scopeFilterStates($query, $model)
     }
 }
 ```
+
+## Quick Create
+
+The `quickCreate` property adds a special option to the dropdown that opens a popup form for creating a new related record on the fly. This is only available for singular relations (belongsTo, hasOne, morphOne) that render as a dropdown.
+
+```yaml
+manufacturer:
+    label: Manufacturer
+    type: relation
+    nameFrom: title
+    quickCreate: $/acme/shop/models/manufacturer/fields.yaml
+```
+
+When configured, the dropdown will include an additional option (e.g. "- Create New Manufacturer -") at the top. Selecting it opens a popup form using the specified fields definition. After the record is created, the dropdown refreshes with the new record selected.
+
+The `quickCreate` property accepts a string path to a [form fields definition](../form-fields.md) file, or an object with the following options.
+
+```yaml
+manufacturer:
+    label: Manufacturer
+    type: relation
+    nameFrom: title
+    quickCreate:
+        fields: $/acme/shop/models/manufacturer/fields.yaml
+        optionText: Create New Manufacturer
+        title: New Manufacturer
+        context: quickcreate
+        popupSize: large
+```
+
+Property | Description
+------------- | -------------
+**fields** | path to a [form fields definition](../form-fields.md) file used for the popup form. Required.
+**optionText** | text shown in the dropdown option. Default: `- Create New :name -` where `:name` is replaced with the field label.
+**title** | title shown in the popup modal header. Default: `New :name`.
+**context** | form context passed to the popup form. Default: `quickcreate`.
+**popupSize** | popup size, can be `giant`, `huge`, `large`, `small`, `tiny` or `adaptive`. Default: `adaptive`.
+
+::: tip
+The `quickCreate` feature is automatically disabled when the field is in preview mode, read-only mode, or when using the [Relation Controller](#relation-controller-integration).
+:::
 
 ## Relation Controller Integration
 

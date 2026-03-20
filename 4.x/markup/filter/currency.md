@@ -51,6 +51,39 @@ To display a currency in `long` or `short` format.
 {{ 1000|currency({ format: 'short' }) }}
 ```
 
+## currency() Function
+
+The `currency()` Twig function returns the default currency model, giving you access to the currency's formatting properties. This is useful when you need to pass currency settings to JavaScript controls or perform custom formatting.
+
+```twig
+{% set cur = currency() %}
+```
+
+The returned model provides these properties:
+
+Property | Type | Example | Description
+-------- | ---- | ------- | -----------
+**currency_symbol** | string | `$` | The currency symbol
+**decimal_scale** | int | `2` | Number of decimal places (used to convert base values)
+**decimal_point** | string | `.` | Decimal separator character
+**thousand_separator** | string | `,` | Thousands separator character
+**place_symbol_before** | bool | `true` | Whether the symbol appears before the number
+
+For example, passing currency settings to a JavaScript control via data attributes:
+
+```twig
+{% set cur = currency() %}
+<div
+    data-control="price-slider"
+    data-decimal-scale="{{ cur.decimal_scale }}"
+    data-currency-symbol="{{ cur.currency_symbol }}"
+    data-symbol-before="{{ cur.place_symbol_before ? 'true' : 'false' }}"
+    data-thousand-separator="{{ cur.thousand_separator }}"
+>
+    ...
+</div>
+```
+
 ## PHP Interface
 
 You may interact with the currency functions via the global `Currency` facade.

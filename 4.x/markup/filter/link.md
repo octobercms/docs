@@ -17,6 +17,16 @@ If you are looking to parse HTML for multiple links and resolve them as HTTP lin
 The `|link` filter only returns the URL string. If you need to access nested child items from dynamic page types (like "All Blog Posts" or "All Categories"), use the `link()` function with the `nesting` option instead.
 :::
 
+## Supplying URL Parameters
+
+You may pass URL parameters to the `|link` filter to supply values for the target page's URL pattern. This is useful when the stored link reference doesn't contain the parameter values needed to build the URL.
+
+```twig
+{{ product.custom_page|link({ slug: product.slug, id: product.id }) }}
+```
+
+For example, if the selected CMS page has the URL pattern `/shop/product/:slug/:id`, the above will produce a URL like `/shop/product/my-product/42`.
+
 ## link()
 
 The `link()` function is used to extract more detailed information about a link, including dynamically generated child items.
@@ -87,12 +97,35 @@ You may request other site URLs by passing the `sites` option to `true`, which p
 {% endfor %}
 ```
 
+### URL Parameters
+
+You may supply URL parameters using the `params` option. This is useful when combining parameter resolution with other options like `nesting` or `sites`.
+
+```twig
+{% set resolved = link(product.custom_page, {
+    params: { slug: product.slug, id: product.id }
+}) %}
+```
+
+::: tip
+When you only need the URL string and don't need options like `nesting` or `sites`, the `|link` filter provides a simpler syntax for passing URL parameters. See [Supplying URL Parameters](#supplying-url-parameters) above.
+:::
+
 ## PHP Interface
 
 You may resolve links in PHP using the `Cms\Classes\PageManager` class. The `url` method returns a string to the public URL.
 
 ```php
 Cms\Classes\PageManager::url('october://cms-page@link/about');
+```
+
+You may pass URL parameters as the second argument to supply values for the target page's URL pattern.
+
+```php
+Cms\Classes\PageManager::url($model->custom_page, [
+    'slug' => $model->slug,
+    'id' => $model->id
+]);
 ```
 
 The `resolve` method returns a detailed `Cms\Models\PageLookupItem` object.

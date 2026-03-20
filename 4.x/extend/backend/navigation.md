@@ -35,7 +35,7 @@ public function registerNavigation()
 }
 ```
 
-When you register the backend navigation you can use [localization strings](../system/localization.md) for the `label` values. Backend navigation can also be controlled by the `permissions` values and correspond to defined [backend user permissions](./permissions.md). The order in which the backend navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
+When you register the backend navigation you can use [localization strings](../multisite/localization.md) for the `label` values. Backend navigation can also be controlled by the `permissions` values and correspond to defined [backend user permissions](./permissions.md). The order in which the backend navigation appears on the overall navigation menu items, is controlled by the `order` value. Higher numbers mean that the item will appear later on in the order of menu items while lower numbers mean that it will appear earlier on.
 
 To make the sub-menu items visible, you may set the navigation context in the [backend controller](../system/controllers.md) using the `BackendMenu::setContext` method. This will make the parent menu item active and display the children in the side menu.
 

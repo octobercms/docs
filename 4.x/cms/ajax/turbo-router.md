@@ -214,7 +214,7 @@ To execute inline JavaScript code only once, regardless of first page load or PJ
 ### Making Controls Idempotent
 
 ::: aside
-October CMS provides a complimentary library that is used to make building [idempotent controls](./hot-controls.md) easy.
+October CMS includes a library that is used to make building [idempotent controls](https://larajax.org/controls/definition) easy.
 :::
 
 When a page visit occurs and JavaScript components are initialized, it is important that these function are idempotent. In simple terms, an idempotent function is safe to apply multiple times without changing the result beyond its initial application.
@@ -255,7 +255,7 @@ addEventListener('page:unload', function() {
 ```
 
 ::: tip
-October CMS includes a complimentary library for [building disposable controls](./hot-controls.md).
+October CMS includes a library for [building disposable controls](https://larajax.org/controls/definition).
 :::
 
 ### Pause Rendering
@@ -325,5 +325,5 @@ snippetOptions: {
 
 ::: also
 * [Larajax Turbo Router](https://larajax.org/turbo/setup)
-* [Observable Controls](./hot-controls.md)
+* [Observable Controls](https://larajax.org/controls/definition)
 :::

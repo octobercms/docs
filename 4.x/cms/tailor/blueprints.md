@@ -155,7 +155,7 @@ It is recommended to use [mixin blueprints](#mixin) to group common field defini
 
 ### Custom Messages
 
-Specify the `customMessages` property to override the default messages used by the interface. The values can be plain text or can refer to a [localization string](../../extend/system/localization.md).
+Specify the `customMessages` property to override the default messages used by the interface. The values can be plain text or can refer to a [localization string](../../extend/multisite/localization.md).
 
 ```yaml
 customMessages:

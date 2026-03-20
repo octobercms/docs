@@ -55,6 +55,34 @@ Use the `is empty` or `is not empty` expression to check if a collection has at 
 {% endif %}
 ```
 
+## How the Component Variable Works
+
+The component variable (e.g. `collection` or your alias like `posts`) acts as a smart proxy that behaves differently depending on how you access it.
+
+**Accessing attributes** returns the record field value, useful for section and global components.
+
+```twig
+{{ section.title }}
+```
+
+**Iterating directly** returns the loaded records using the component's default query, useful for collection components.
+
+```twig
+{% for post in posts %}
+    <h1>{{ post.title }}</h1>
+{% endfor %}
+```
+
+**Calling a method** starts a new [database model query](../../extend/database/query.md) that can be chained and must end with `get()` or `paginate()`.
+
+```twig
+{% set featured = posts.where('is_featured', true).get() %}
+```
+
+::: warning
+When accessing the component variable as an attribute (e.g. `posts.title`) or as a query (e.g. `posts.where(...)`) the result will be different. Attributes return a stored value from the primary record, whereas methods initiate a new database query.
+:::
+
 ## Performing Queries
 
 When accessing the component variable using a method it will switch to a [database model query](../../extend/database/query.md). For example, to only show entries that have a field `color` with the value **blue** use the `where` query method. Using the `{% set %}` Twig tag will assign the result to a new variable.

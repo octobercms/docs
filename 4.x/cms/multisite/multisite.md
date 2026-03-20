@@ -3,8 +3,6 @@ subtitle: Learn how to translate content using multiple sites
 ---
 # Multisite
 
-<VideoBlockLink src="https://www.youtube.com/watch?v=_kX7P3SEHg8" title="Multisite Demo" description="This video demonstrates how to create multilingual sites with October CMS Multisite." prompt="Watch the demonstration" />
-
 The multisite feature lets you manage multiple websites from a single October CMS installation and assign content dependent on the domain name. For example, an e-commerce store with different country-specific sub-sites. You can also use it to manage translations for a localized website.
 
 ## Managing Sites
@@ -25,6 +23,48 @@ The following configuration defines each site:
 - **Display a color for this site** - when enabled, displays a banner at the top of the admin panel. Useful to identify the active site or distinguish different environments, for example, red for development, green for staging and no color for production.
 
 When you create more than one site, each can be selected in the admin panel using the site selection dropdown menu.
+
+## Site Routing
+
+When a request arrives, October CMS determines which site should handle it by matching the request against each site definition. Understanding this process is important when running multiple sites on different domains.
+
+### How Requests Are Matched
+
+The system uses a two-stage matching process to resolve the active site for each request.
+
+1. **Hostname matching**: if a site has **Define matching hostnames** enabled, it will only match requests for those specific hostnames. If a site does not have this option enabled, it will match requests from **any hostname**.
+
+2. **Route prefix matching**: if a site has **Use a CMS route prefix** enabled, the request URI must match the prefix. For example, a site with the prefix `/en` will match `/en` and `/en/about` but not `/fr/about`.
+
+When multiple sites match, the site with the most specific route prefix takes priority. If no site matches the request, the primary site is used as the fallback.
+
+### Default Site Fallback
+
+The primary site acts as a catch-all when no other site matches. However, if the primary site does not have its hostnames restricted, it will match **every request**, including requests intended for other domains.
+
+For example, consider the following configuration.
+
+Site | Hostname Restriction | Theme
+---- | -------------------- | -----
+Primary Site | _None_ | default-theme
+Secondary Site | `www.domain2.tld` | other-theme
+
+In this case, a request to `www.domain2.tld` will match **both** sites — the Secondary Site matches by hostname, and the Primary Site matches because it has no hostname restriction. This can result in the wrong theme being displayed.
+
+### Best Practices
+
+To avoid unexpected routing, you should restrict the hostnames of every site, including the primary site. The following configuration ensures each site only responds to its intended domain.
+
+Site | Hostname Restriction | Theme
+---- | -------------------- | -----
+Primary Site | `cms.domain.tld` | default-theme
+Secondary Site | `www.domain2.tld` | other-theme
+
+Alternatively, if the primary site is only used for managing content in the admin panel, you can disable it on the frontend by unchecking **Enabled** while keeping it accessible in the backend.
+
+::: tip
+Always enable **Define matching hostnames** for production sites. This prevents one site from unintentionally serving content for another domain.
+:::
 
 ## Site Picker Component
 
@@ -94,9 +134,22 @@ There are some core features that are not multisite-enabled by default, such as 
 
 Feature | Description
 ------- | --------------------------
+`system_plugin_sites` | Plugins can be enabled or disabled per site
+`system_plugin_site_groups` | Plugins can be enabled or disabled per site group
+`system_asset_combiner` | Asset combiner cache keys are unique to the site
 `cms_maintenance_setting` | Maintenance Mode Settings are unique for each site
 `backend_mail_setting` | Mail Settings are unique for each site
-`system_asset_combiner` | Asset combiner cache keys are unique to the site
+`dashboard_traffic_statistics` | Dashboard traffic statistics are unique for each site
+
+### Per-Site Plugin Management
+
+When the `system_plugin_sites` or `system_plugin_site_groups` feature is enabled, you can enable or disable plugins for individual sites or site groups. Navigate to **Settings → Updates & Plugins → Manage Plugins** and use the toggle switch next to each plugin to control its availability for the currently selected site.
+
+A plugin that is disabled for a site will have its backend navigation, settings and controllers hidden for that site. Switching to a different site using the site picker will restore access to the plugin if it is enabled there.
+
+::: tip
+You must clear the application cache after enabling or disabling these features in the configuration file.
+:::
 
 ### Disabling Multisite
 
@@ -122,8 +175,9 @@ Read the [Site Service article](../../extend/services/site.md) to learn more.
 
 ::: also
 * [Multisite Features](https://octobercms.com/features/multisite)
-* [Theme Localization](../themes/localization.md)
+* [Theme Localization](./localization.md)
+* [Tailor Localization](./tailor.md)
 * [Site Picker Component](../components/sitepicker.md)
-* [Multisite Trait](../../extend/database/traits.md)
+* [Multisite Trait](../../extend/multisite/multisite.md)
 * [Site Service](../../extend/services/site.md)
 :::

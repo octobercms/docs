@@ -45,7 +45,7 @@ Below you can see an example seed directory structure. The **blueprints** direct
 
 ## Importing Languages
 
-As an optional feature, languages can be imported to the **app/lang** directory by placing the [JSON language files](../../extend/system/localization.md) in the **lang** directory. This makes it possible to translate labels and other descriptions inside blueprints. If a language file already exists in the application language directory, then the language strings will be merged together.
+As an optional feature, languages can be imported to the **app/lang** directory by placing the [JSON language files](../../extend/multisite/localization.md) in the **lang** directory. This makes it possible to translate labels and other descriptions inside blueprints. If a language file already exists in the application language directory, then the language strings will be merged together.
 
 ## Importing Data
 

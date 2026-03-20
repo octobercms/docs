@@ -130,6 +130,73 @@ The **card** partial is composed of two content areas and an image variable.
 </div>
 ```
 
+## Props and Attributes
+
+Partials can declare which parameters are **props** (template data) and which are **attributes** (HTML pass-through) using the `{% props %}` tag. This brings a component-style pattern to partials, allowing you to build reusable UI elements with smart class merging and attribute forwarding.
+
+### Declaring Props
+
+Place the `{% props %}` tag at the top of a partial `.htm` file. It uses Twig hash syntax where keys are prop names and values are defaults:
+
+```twig
+{% props {title: null, icon: null, size: 'md'} %}
+```
+
+- Keys listed in `{% props %}` become Twig variables (props), values are their defaults
+- Parameters **not** listed flow into the `attributes` bag
+- An empty `{% props {} %}` means all parameters go to attributes
+
+### The Attributes Variable
+
+When `{% props %}` is present, the template receives an `attributes` variable — an instance of Laravel's `ComponentAttributeBag`. It supports smart class merging where the caller's classes are appended to the partial's defaults.
+
+```twig
+{# partials/ui/card.htm #}
+{% props {title: null} %}
+
+<div {{ attributes.merge({class: 'card'}) }}>
+    <h2>{{ title }}</h2>
+    {{ body }}
+</div>
+```
+
+```twig
+{% partial "ui/card" title="Hello" class="mt-4 shadow" id="featured" body %}
+    <p>Card content goes here</p>
+{% endpartial %}
+```
+
+The `title` parameter is a prop and becomes a template variable. The `class` and `id` parameters are not listed in props, so they flow into the attribute bag. The `merge` method appends the caller's `class` to the default, producing `class="card mt-4 shadow"`.
+
+::: tip
+See the [Props Twig Tag](../../markup/tag/props.md) for the full attribute bag API including `only()`, `except()`, `has()`, and `get()` methods.
+:::
+
+### Composable Partials with Props
+
+The existing `{% put %}` / `{% placeholder %}` system works alongside `{% props %}` for partials that need multiple content sections:
+
+```twig
+{# Caller #}
+{% partial "card" class="shadow" body %}
+    {% put header %}
+        <h2>Card Title</h2>
+    {% endput %}
+    <p>Body content</p>
+{% endpartial %}
+```
+
+```twig
+{# card.htm #}
+{% props {} %}
+<div {{ attributes.merge({class: 'card'}) }}>
+    <div class="card-header">
+        {% placeholder header %}
+    </div>
+    <div class="card-body">{{ body }}</div>
+</div>
+```
+
 ## Dynamic Partials
 
 Partials, like pages, can use any Twig features. Please refer to the [Dynamic Pages section](pages.md) of the documentation for details.
@@ -197,5 +264,6 @@ When calling a handler from within an AJAX partial, the life cycle operates diff
 
 ::: also
 * [Partial Twig Tag](../../markup/tag/partial.md)
+* [Props Twig Tag](../../markup/tag/props.md)
 * [AJAX Partial Twig Tag](../../markup/tag/ajax-partial.md)
 :::

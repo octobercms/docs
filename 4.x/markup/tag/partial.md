@@ -86,6 +86,32 @@ Next, you can include the `{% put %}` tag inside the `body` to compose the parti
 {% endpartial %}
 ```
 
+## Props and Attributes
+
+Partials can use the `{% props %}` tag to separate parameters into **props** (template variables) and **attributes** (HTML pass-through). This lets you build reusable partials with smart class merging and attribute forwarding.
+
+```twig
+{# partials/card.htm #}
+{% props {title: null} %}
+
+<div {{ attributes.merge({class: 'card'}) }}>
+    <h2>{{ title }}</h2>
+    {{ body }}
+</div>
+```
+
+```twig
+{% partial "card" title="Hello" class="mt-4" id="featured" body %}
+    <p>Card content goes here</p>
+{% endpartial %}
+```
+
+The `title` parameter is a declared prop and becomes a template variable. The `class` and `id` parameters flow into the `attributes` bag. The `merge` method smart-appends the caller's class to the default.
+
+::: tip
+See the [Props Twig Tag](./props.md) for the full `attributes` API and detailed usage examples.
+:::
+
 ## Setting Partial Contents to a Twig Variable
 
 In any template you can set the partial contents to a variable with the `partial()` function. This lets you manipulate the output before display. Remember to use the `|raw` filter to prevent output escaping.

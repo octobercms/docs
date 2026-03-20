@@ -4,7 +4,7 @@ subtitle: Learn how to translate messages in the backend area.
 # Localization
 
 ::: aside
-The language strings defined here will only be loaded in the backend panel. For translating frontend content, visit the [Theme Localization article](../../cms/themes/settings.md).
+The language strings defined here will only be loaded in the backend panel. For translating frontend content, visit the [Theme Localization article](../../cms/multisite/localization.md).
 :::
 
 Plugins can have localization files inside **lang** subdirectory. Plugin localization files use the JSON format and detected by the system automatically in the backend panel. Using localization strings are supported natively in the backend user interface menus, form labels, etc.
@@ -174,6 +174,6 @@ If the language key does not exist or you cannot find it, you may [contact us fo
 #### See Also
 
 ::: also
-* [Theme Localization](../../cms/themes/localization.md)
+* [Theme Localization](../../cms/multisite/localization.md)
 * [Laravel Localization](https://laravel.com/docs/12.x/localization)
 :::

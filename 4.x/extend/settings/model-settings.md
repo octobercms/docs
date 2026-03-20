@@ -74,7 +74,7 @@ echo UserSetting::get('is_activated', true);
 
 ## Integration with Multisite
 
-Settings models can provide different configuration values for each site defined by [multisite configuration](../../cms/resources/multisite.md). To enable multisite, include the `October\Rain\Database\Traits\Multisite` [trait](../database/traits.md) inside the model and define a `$propagatable` property, which can specify fields that propagate across all sites.
+Settings models can provide different configuration values for each site defined by [multisite configuration](../../cms/multisite/multisite.md). To enable multisite, include the `October\Rain\Database\Traits\Multisite` [trait](../multisite/multisite.md) inside the model and define a `$propagatable` property, which can specify fields that propagate across all sites.
 
 ```php
 namespace Acme\Demo\Models;

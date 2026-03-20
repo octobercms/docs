@@ -81,7 +81,7 @@ Property | Type | Description
 **showSetup** | List | displays a setup button to configure the list columns and records per page. Default: `false`
 **defaultSort** | List | sets a default sorting column and direction when user preference is not defined. Supports a string or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **recordsPerPage** | List | maximum rows to display for each page.
-**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../system/localization.md).
+**noRecordsMessage** | List | a message to display when no records are found, can refer to a [localization string](../multisite/localization.md).
 **conditions** | List | specifies a raw where query statement to apply to the list model query.
 **scope** | List | specifies a [model query scope](../database/model.md) method defined in the related form model to apply to the list query always. The model that this relationship will be attached to (i.e. the parent model) is passed to this scope method as the second parameter (`$query` is the first).
 **searchMode** | List | defines the search strategy to either contain all words, any word or exact phrase. Supported options: `all`, `any`, `exact`. Default: `all`.
@@ -105,12 +105,12 @@ These configuration values can be specified only for the **manage** property.
 
 Property | Type | Description
 ------------- | ------------- | -------------
-**title** | Both | a popup title, can refer to a [localization string](../system/localization.md).
+**title** | Both | a popup title, can refer to a [localization string](../multisite/localization.md).
 **context** | Form | context of the form being displayed. Can be a string or an array with keys: `create`, `update`.
 
 ### Custom Messages
 
-Specify the `customMessages` property to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../system/localization.md).
+Specify the `customMessages` property to override the default messages used by the Relation Controller. The values can be plain text or can refer to a [localization string](../multisite/localization.md).
 
 ```yaml
 customMessages:
