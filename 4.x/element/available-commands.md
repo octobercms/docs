@@ -27,6 +27,10 @@ The `october:migrate` command will perform a database migration, creating databa
 php artisan october:migrate
 ```
 
+::: tip
+This command does not migrate Tailor blueprints. Use the `tailor:migrate` command to [migrate blueprint changes](../cms/tailor/introduction.md#oc-migrating-blueprints).
+:::
+
 The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The `plugin:refresh` command is a useful alternative for debugging a single plugin.
 
 ```bash

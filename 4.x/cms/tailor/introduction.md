@@ -96,7 +96,7 @@ Blueprints support multisite and localization features. See the [Tailor Localiza
 
 ## Migrating Blueprints
 
-Blueprints and their structure are migrated in the database during the normal database migration process. When a change is made manually to a blueprint file, you should run the `tailor:migrate` command to update the database tables.
+Blueprints and their structure are migrated using the `tailor:migrate` command. This is different from the `october:migrate` command used for plugins. When a change is made to a blueprint file, you should run the `tailor:migrate` command to update the database tables.
 
 ```bash
 php artisan tailor:migrate
