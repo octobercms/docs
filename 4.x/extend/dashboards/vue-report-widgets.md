@@ -43,6 +43,11 @@ use Carbon\Carbon;
 
 class MyCustomWidget extends VueReportWidgetBase
 {
+    /**
+     * @var string componentName is the Vue component tag name.
+     */
+    protected $componentName = 'acme-myplugin-vuecomponents-mycustomwidget';
+
     public function getData(ReportFetchData $data): mixed
     {
         return [
@@ -52,14 +57,14 @@ class MyCustomWidget extends VueReportWidgetBase
 }
 ```
 
-The `VueReportWidgetBase` class extends `Backend\Classes\VueComponentBase` and provides the dashboard-specific functionality needed for report widgets.
+The `VueReportWidgetBase` class extends `Backend\Classes\VueComponentBase` and provides the dashboard-specific functionality needed for report widgets. The `$componentName` property is required and defines the Vue component tag name. The convention is to use the fully qualified class name in lowercase with backslashes replaced by hyphens (e.g., `Acme\MyPlugin\VueComponents\MyCustomWidget` becomes `acme-myplugin-vuecomponents-mycustomwidget`).
 
 ### Client-Side Component
 
 The Vue component for the widget must be defined as an ES module in the assets/js directory. The component uses `export default` and extends the base widget class. Example component code (assets/js/mycustomwidget.js):
 
 ```js
-import WidgetBase from 'modules/dashboard/vuecomponents/dashboard/assets/js/widget-base.js';
+import WidgetBase from '../../../../../../../modules/dashboard/vuecomponents/dashboard/assets/js/widget-base.js';
 
 export default {
     extends: WidgetBase,
