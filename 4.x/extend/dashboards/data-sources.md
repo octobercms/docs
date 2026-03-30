@@ -294,6 +294,29 @@ Method | Description
 `get($metricsConfig, $urlTemplate)` | Executes query and returns results
 `toSql()` | Returns the SQL string (for debugging)
 
+#### Pre-Aggregated Data
+
+When using `ReportQueryBuilder` or `ReportDataQueryBuilder`, data is aggregated at the SQL level using `GROUP BY` and aggregate functions. The query builders automatically signal this to the framework so that the results are only normalized (gap-filled with missing periods) and not re-aggregated in PHP.
+
+If your data source performs its own aggregation, for example, fetching pre-grouped data from an external API or using custom SQL — you should set the pre-aggregated flag on the result to prevent double aggregation:
+
+```php
+protected function fetchData(ReportFetchData $data): ReportFetchDataResult
+{
+    // Data is already aggregated by the group interval
+    $rows = $this->fetchFromExternalApi($data);
+
+    $result = new ReportFetchDataResult($rows);
+    $result->setPreAggregated();
+
+    return $result;
+}
+```
+
+When `setPreAggregated` is set, the framework will still normalize the data for date dimensions (filling in missing date periods with null values) but will not re-aggregate metric values. This is important for aggregate functions like `COUNT` and `AVG` where re-aggregation would produce incorrect results.
+
+> **Note**: If your data source returns raw daily rows and relies on the framework to aggregate them into weeks, months, etc., do **not** set this flag. The framework will handle the aggregation automatically.
+
 This configuration is sufficient to display the data source data in a table widget:
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/dashboards/table-all-data.png)
