@@ -94,6 +94,81 @@ Use the `Tailor\Models\RecordImport` class to import Tailor blueprints to the ap
     }
 ]
 ```
+### File Attachment Data
+
+When seeding Tailor entries that have file attachment fields (`attachOne` or `attachMany`), you can reference files that should be attached to the imported records. Files can be referenced from two sources: the **media library** or **theme-relative paths** on disk.
+
+#### Using Media Library Paths
+
+If you seed your media files first using `MediaLibraryItemImport`, you can reference them by their media-relative path. Make sure the media import step comes **before** the record import step in `data.yaml`.
+
+```yaml
+-
+    name: Media File Data
+    class: Media\Models\MediaLibraryItemImport
+    file: seeds/data/media-files.json
+    attributes:
+        file_format: json
+-
+    name: Blog Post Data
+    class: Tailor\Models\RecordImport
+    file: seeds/data/blog-posts.json
+    attributes:
+        file_format: json
+        blueprint_uuid: edcd102e-0525-4e4d-b07e-633ae6c18db6
+```
+
+In the record data file, reference the media paths directly.
+
+```json
+[
+    {
+        "id": 1,
+        "title": "My Post",
+        "slug": "my-post",
+        "featured_image": "my-theme/hero.jpg",
+        "gallery": [
+            "my-theme/photo1.jpg",
+            "my-theme/photo2.jpg"
+        ]
+    }
+]
+```
+
+For `attachOne` relations, the value should be a single path string. For `attachMany` relations, the value should be an array of path strings.
+
+#### Using Theme-relative Paths
+
+You can also reference files directly from the theme directory without importing them to the media library first. Place the files in the theme's **seeds** directory and reference them by their path relative to the theme root.
+
+::: dir
+├── themes
+|   └── mywebsite
+|       └── seeds
+|           ├── files
+|           |   ├── hero.jpg
+|           |   ├── photo1.jpg
+|           |   └── photo2.jpg
+|           ├── data
+|           |   └── blog-posts.json
+|           └── data.yaml
+:::
+
+```json
+[
+    {
+        "id": 1,
+        "title": "My Post",
+        "slug": "my-post",
+        "featured_image": "seeds/files/hero.jpg",
+        "gallery": [
+            "seeds/files/photo1.jpg",
+            "seeds/files/photo2.jpg"
+        ]
+    }
+]
+```
+
 ### Media File Data
 
 Use the `Media\Models\MediaLibraryItemImport` to import images in to the media directory. The following JSON is an example of importing files to the media library. The **rootPath** attribute defines a prefix for the media library, this could set to an empty string to import everything in the root directory. The **type** attribute specifies either `file` or `folder` are used to import their respective types, with the **path** as the destination and **source** as the source file, found in the context of the theme directory.
