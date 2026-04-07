@@ -19,7 +19,7 @@ public function defineProperties()
 }
 ```
 
-The generated output is a string value corresponding to the selected option, for example:
+The generated output is a string value, for example:
 
 ```json
 "firstName": "Sam"

@@ -37,6 +37,10 @@ Property | Description
 **items** | an array of available items as keys and values, optional if defining a `get*PropertyName*Options` method.
 **default** | an array of selected items by default containing keys only.
 
+::: warning
+This type does not support the external parameter editor as specified by the `showExternalParam` property.
+:::
+
 The `default` parameter, if specified, should be an array listing item keys selected by default.
 
 ```php
