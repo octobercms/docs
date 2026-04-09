@@ -82,6 +82,7 @@ MCP (Model Context Protocol) tools give the AI real-time access to your applicat
 
 Tool | Purpose
 ------------- | -------------
+**SearchOctoberDocs** | Search official documentation for Laravel, October CMS, Larajax, and Meloncart
 **GetBlueprints** | List and inspect Tailor blueprint definitions
 **GetPluginRegistration** | List installed plugins with their components, permissions, and navigation
 **GetThemeStructure** | Inspect the active theme's pages, layouts, and partials
