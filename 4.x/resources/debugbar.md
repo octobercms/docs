@@ -43,7 +43,6 @@ Collector | Description
 **Backend** | Shows the backend controller, action, parameters, and AJAX handler with file location
 **CMS** | Shows the CMS page, URL, AJAX handler, and page properties with file location
 **Components** | Lists all components from the page and layout with their class and properties
-**Models** | Tracks October model instantiation counts via the `model.afterFetch` event
 
 ## Logging Messages
 
@@ -86,7 +85,6 @@ return [
         'views' => false,   // Views with their data
         'events' => false,  // All events fired
         'cache' => false,   // Cache events
-        'models' => false,  // Model instantiation counts
     ],
 
     'options' => [
@@ -100,13 +98,7 @@ return [
 
 ## AJAX Debugging
 
-By default, the debugbar captures AJAX requests and displays them in the toolbar. To also include debugbar data in AJAX response headers, set `debug_ajax` to `true` in `config/app.php`.
-
-```php
-'debug_ajax' => true,
-```
-
-This is useful when inspecting AJAX-heavy pages where you want to see queries and timing for each request.
+AJAX requests are captured by the debugbar automatically and displayed in the toolbar dropdown. To disable this, set `capture_ajax` to `false` in `config/debugbar.php`.
 
 ## Disabling the Debugbar
 

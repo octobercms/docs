@@ -86,19 +86,7 @@ Tool | Purpose
 **GetPluginRegistration** | List installed plugins with their components, permissions, and navigation
 **GetThemeStructure** | Inspect the active theme's pages, layouts, and partials
 
-To register the MCP tools, add them to your `config/boost.php` file.
-
-```php
-'mcp' => [
-    'tools' => [
-        'include' => [
-            \October\Boost\Tools\GetBlueprints::class,
-            \October\Boost\Tools\GetPluginRegistration::class,
-            \October\Boost\Tools\GetThemeStructure::class,
-        ],
-    ],
-],
-```
+MCP tools are registered automatically when the package is installed - no manual configuration needed.
 
 ## Keeping Boost Updated
 
