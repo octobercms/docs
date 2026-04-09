@@ -390,5 +390,11 @@
         - resources/updating-october
         - resources/installing-packages
         - resources/development-workflow
-        - ['https://octobercms.com/docker-dev-image', 'Development Docker Image']
         - resources/migrate-laravel-project
+-
+    title: Tools
+    collapsable: false
+    children:
+        - resources/debugbar
+        - resources/ai-boost
+        - ['https://octobercms.com/docker-dev-image', 'Development Docker Image']
