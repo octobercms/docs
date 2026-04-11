@@ -9,14 +9,12 @@ October CMS Boost requires [Laravel Boost](https://laravel.com/docs/boost) as a 
 
 October CMS Boost is a Composer package that extends [Laravel Boost](https://laravel.com/docs/boost) with October CMS-specific guidelines, skills, and tools. It teaches AI agents how to write idiomatic October CMS code instead of defaulting to standard Laravel patterns.
 
-While Laravel Boost provides the foundation - database tools, log inspection, and documentation search - October CMS Boost adds the layer that understands plugins, Tailor blueprints, backend controllers, CMS themes, the AJAX framework, and October's model conventions.
+While Laravel Boost provides the foundation (database tools, log inspection, documentation search), October CMS Boost adds the layer that understands plugins, Tailor blueprints, backend controllers, CMS themes, the AJAX framework, and October's model conventions.
 
 ## Installation
 
-Install [Laravel Boost](https://laravel.com/docs/boost) followed by October CMS Boost via Composer.
-
 ```bash
-composer require laravel/boost october/boost --dev
+composer require october/boost --dev
 ```
 
 Then run the Boost installer to configure your AI agent.
@@ -61,20 +59,26 @@ October CMS Boost provides three layers of context to your AI agent.
 
 ### Guidelines
 
-Guidelines are loaded automatically and tell the AI the fundamental rules about October CMS. For example, the AI learns to use array-based model relationships instead of Laravel's fluent methods, October's scaffolding commands instead of `php artisan make:model`, and the AJAX framework instead of Livewire or Inertia.
+A core guideline file loaded into every AI conversation that covers:
+
+- Critical differences from Laravel (don't suggest Livewire, Inertia, Blade, etc.)
+- Architecture overview (plugins, themes, backend, Tailor, AJAX)
+- Model conventions (array-based relationships, Validation trait)
+- Event system and settings model patterns
+- Artisan commands and naming conventions
 
 ### Skills
 
-Skills are on-demand knowledge modules that activate when the AI recognizes it is working in a specific domain.
+Skills are on-demand knowledge modules that AI agents activate when working in specific domains.
 
-Skill | When Activated
+Skill | Covers
 ------------- | -------------
-**Plugin Development** | Creating or modifying plugins, Plugin.php, migrations, version.yaml
-**Tailor Development** | Working with Tailor blueprints, content fields, entry records
-**Backend Controllers** | Building backend pages with FormController, ListController, or RelationController
-**Theme Development** | Creating themes, pages, layouts, partials, Twig templates, CMS components
-**AJAX Framework** | Using data-request attributes, the jax API, AJAX handlers, partial updates
-**Model Development** | Defining models, array relationships, validation, traits, model events
+**Plugin Development** | Plugin.php, registration, migrations, settings models, events, console commands, localization, mail templates
+**Tailor Development** | Blueprints, content fields, entry records, multisite, navigation, columns
+**Backend Controllers** | Form/List/Relation/Import-Export/Reorder controllers, behavior overrides, filter scopes, YAML configs
+**Theme Development** | Pages, layouts, partials, Twig, components, theme.yaml customization, error pages, asset compilation
+**AJAX Framework** | Data attributes, jax API, handlers, partial updates, file uploads, validation, turbo router
+**Model Development** | Relationships, validation, traits, events, accessors/mutators, deferred bindings, eager loading, extending models
 
 ### MCP Tools
 
@@ -82,10 +86,10 @@ MCP (Model Context Protocol) tools give the AI real-time access to your applicat
 
 Tool | Purpose
 ------------- | -------------
-**SearchOctoberDocs** | Search official documentation for Laravel, October CMS, Larajax, and Meloncart
-**GetBlueprints** | List and inspect Tailor blueprint definitions
+**SearchOctoberDocs** | Search official documentation for Laravel, October CMS, Larajax, and Meloncart from their GitHub-hosted repos
+**GetBlueprints** | List and inspect Tailor blueprint definitions and fields
 **GetPluginRegistration** | List installed plugins with their components, permissions, and navigation
-**GetThemeStructure** | Inspect the active theme's pages, layouts, and partials
+**GetThemeStructure** | Inspect the active theme's pages, layouts, partials, and content files
 
 MCP tools are registered automatically when the package is installed - no manual configuration needed.
 
