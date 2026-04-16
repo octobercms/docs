@@ -326,11 +326,12 @@ The **design** property, in the behavior configuration, controls how the form is
 
 Property | Description
 ------------- | -------------
-**displayMode** | specifies the display mode to use, supported values: `custom`, `basic`, `survey`, `sidebar`, `popup`. Default: `basic`
+**displayMode** | specifies the display mode to use, supported values: `custom`, `basic`, `survey`, `sidebar`, `popup`, `document`. Default: `basic`
 **horizontalMode** | show form fields in horizontal orientation. Default: `false`
 **surveyMode** | disables tabs and displays all fields on the page in sections with headers. Default: `false`
 **size** | size of the page container, supported values: `50` stepped increments between `400`-`1200`, `auto`. Default: `auto`
 **sidebarSize** | width of the sidebar in `sidebar` mode, supported values `50` steps between `300`-`750`. Default: `300`
+**secondaryLabel** | label for the secondary tabs popover button in `document` mode. Default: `Options`
 
 Use the `formRenderDesign` method to render the form design inside the **create.php**, **update.php** and **preview.php** view files.
 
@@ -351,6 +352,7 @@ Display Mode | Description
 **survey** | Survey layout using stacked sections with headings
 **sidebar** | Sidebar layout where secondary tabs are rendered in the side panel
 **popup** | Form contents are managed inside popup windows
+**document** | Full-height document layout with a Vue-powered toolbar and secondary tabs in a popover
 
 The **size** property defines the size of the page container or the popup size.
 
@@ -394,6 +396,56 @@ The create view can be opened using the `onLoadPopupForm` AJAX handler in conjun
     class="btn btn-primary">
     New Item
 </button>
+```
+
+### Document Display Mode
+
+The `document` display mode provides a full-height layout with a Vue-powered toolbar that includes **Save**, **Save & Close**, and **Delete** buttons.
+
+```yaml
+design:
+    displayMode: document
+```
+
+The three form field areas are rendered in specific locations within the document layout.
+
+- **Outside fields** are displayed in the document header area above the toolbar.
+- **Primary tabs** are rendered as the main content area below the toolbar.
+- **Secondary tabs** are placed inside a popover, accessible from a button in the document header.
+
+The secondary tabs popover button label defaults to **Options** and can be customized using the `secondaryLabel` property. The button is only shown when secondary tab fields are defined.
+
+```yaml
+design:
+    displayMode: document
+    secondaryLabel: Settings
+```
+
+Form fields with `span: adaptive` will automatically inject their toolbar buttons into the document toolbar. This is useful for widgets like the rich editor and markdown editor that provide formatting toolbars.
+
+```yaml
+fields:
+    content:
+        label: Content
+        type: richeditor
+        tab: Edit
+        span: adaptive
+```
+
+The document design can also be applied to specific form contexts. For example, to use the document layout for create and update pages, but not the preview page.
+
+```yaml
+create:
+    design:
+        displayMode: document
+
+update:
+    design:
+        displayMode: document
+
+preview:
+    design:
+        size: auto
 ```
 
 ## Extending Form Behavior
