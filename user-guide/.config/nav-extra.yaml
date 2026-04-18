@@ -10,6 +10,11 @@
     prefix: "/user-guide/blog/"
     link: "/user-guide/blog/introduction.html"
 -
+    title: Forum Tutorial
+    icon: "/images/markup-guide.svg"
+    prefix: "/user-guide/forum/"
+    link: "/user-guide/forum/introduction.html"
+-
     title: Helpdesk Tutorial
     icon: "/images/markup-guide.svg"
     prefix: "/user-guide/helpdesk/"

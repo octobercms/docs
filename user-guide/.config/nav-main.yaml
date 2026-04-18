@@ -14,6 +14,21 @@
         - rss-feed
 
 #
+# Tutorial Nav: Creating a Forum
+#
+"/forum/":
+-
+    title: Creating a Forum
+    collapsable: false
+    children:
+        - introduction
+        - forum-blueprint
+        - channel-page
+        - thread-page
+        - moderation
+        - search-and-filtering
+
+#
 # Tutorial Nav: Creating a Helpdesk
 #
 "/helpdesk/":
