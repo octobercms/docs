@@ -18,7 +18,7 @@ sidebar:
         icon: ph-duotone ph-code
         collapsable: false
         children:
-            - [/4.x/setup/installation, Getting Started]
+            - [/4.x/setup/installation, Installation]
             - [/4.x/cms/themes/themes, CMS Guide]
             - [/4.x/markup/templating, Markup Guide]
             - [/4.x/extend/system/plugins, Extending October CMS]
