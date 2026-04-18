@@ -76,4 +76,4 @@ Enter your administrator credentials to access the dashboard — your site's con
 
 ## Next Steps
 
-Your site is installed and running. Continue to [Project Structure](./project-structure.md) to understand where everything lives, or skip ahead to [Exploring the Backend](./backend-tour.md) to start building.
+Your site is installed and running. Continue to [Exploring the Backend](../backend/backend-tour.md) to start building.

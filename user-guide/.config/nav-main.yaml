@@ -63,22 +63,35 @@
 #
 "/quickstart/":
 -
-    title: Getting Started
+    title: Introduction
     collapsable: false
     children:
-        - getting-started/requirements
-        - getting-started/installation
-        - getting-started/project-structure
-        - getting-started/backend-tour
-        - getting-started/your-first-page
+        - introduction/welcome
+-
+    title: Setting Up Your Environment
+    collapsable: false
+    children:
+        - introduction/terminal
+        - introduction/editor
+        - introduction/installation
 -
     title: The Backend Panel
     collapsable: false
     children:
+        - backend/backend-tour
         - backend/dashboard
         - backend/managing-admins
-        - backend/settings-overview
         - backend/system-updates
+-
+    title: The Editor
+    collapsable: false
+    children:
+        - editor/understanding-themes
+        - editor/creating-a-layout
+        - editor/your-first-page
+        - editor/content-files
+        - editor/including-partials
+        - editor/media-manager
 -
     title: Content Management
     collapsable: false

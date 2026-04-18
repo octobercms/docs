@@ -1,113 +1,69 @@
 ---
-subtitle: "Keep your site secure and up to date with the latest improvements."
+subtitle: "Manage plugins, check for updates, and register your site"
 ---
 # System Updates
 
-Keeping October CMS, its plugins, and themes up to date is essential. Updates bring new features, performance improvements, and -- most importantly -- security patches that protect your site from known vulnerabilities. Making updates a regular habit is one of the easiest ways to keep your website safe.
+October CMS has a built-in update system that handles the core, plugins, and themes. Let's explore it by checking the changelog, managing some plugins, and optionally registering your installation.
 
-## How October CMS Handles Updates
+## View the Changelog
 
-October CMS uses a managed update system. When the October CMS team or a plugin author releases a new version, it is published to the October CMS marketplace. Your backend can check for these releases and apply them with just a few clicks.
+1. Navigate to **Settings → Updates & Plugins**.
+2. You will see the current version of October CMS and a list of recent changes. Browse through the changelog entries to see what has been updated.
+3. Click the **Check for Updates** button to see if anything new is available.
 
-Updates can include:
+This is the page you will visit whenever you want to keep your site up to date.
 
-- **Core updates** -- improvements and fixes to October CMS itself.
-- **Plugin updates** -- new features, bug fixes, or compatibility changes for installed plugins.
-- **Theme updates** -- template fixes or design improvements for installed themes.
-- **Database migrations** -- structural changes to the database that accompany code updates.
+## Manage Plugins
 
-When an update includes database migrations, they are applied automatically as part of the update process. Your existing data is preserved.
+Your installation comes with a few plugins already active. Let's get familiar with plugin management.
 
-## Checking for Updates
+### Disable the Demo Plugin
 
-To see if updates are available:
+October CMS ships with a demo plugin that provides some example pages. You don't need it anymore — let's disable it.
 
-1. Go to **Settings > Updates & Plugins** (or **Settings > Updates**).
-2. Click the **Check for Updates** button.
-3. The system will contact the October CMS gateway and display a list of any available updates, along with version numbers and changelogs.
+1. On the **Settings → Updates & Plugins** page, click **Manage Plugins**.
+2. Find **October.Demo** in the list.
+3. Click the toggle or disable button to turn it off.
 
-::: aside
-The dashboard's System Status widget also shows a notification when updates are available, so you can spot them without navigating to the Updates page.
-:::
+The demo plugin is now disabled. Its routes and components are no longer active, but its files are still on disk in case you want to re-enable it later.
 
-## Updating the Core and Plugins
+### Install a New Plugin
 
-Once you see available updates, applying them is straightforward.
+Let's install a plugin from the marketplace. We will use **RainLab.GoogleAnalytics** as an example.
 
-::: warning
-Always create a full backup of your site before applying updates. This includes both your files and your database. While updates are designed to be safe, unexpected issues can occasionally occur -- especially with third-party plugins. Having a backup means you can always roll back if something goes wrong.
-:::
+1. On the **Settings → Updates & Plugins** page, click **Install Plugins**.
+2. Search for **Google Analytics** in the marketplace search.
+3. Click on **RainLab.GoogleAnalytics** in the results.
+4. Click **Install** to add it to your site.
+5. Wait for the download and installation to complete.
 
-1. Go to **Settings > Updates & Plugins**.
-2. Review the list of available updates. Read the changelog entries so you understand what each update changes.
-3. Click **Update** to apply all available updates at once, or select individual items if you prefer to update them one at a time.
-4. Wait for the process to complete. The page will show progress as files are downloaded, extracted, and database migrations are run.
-5. Once finished, verify that your site is working correctly by checking key pages and features.
+After installation, the plugin may add new settings pages or dashboard widgets. Check **Settings** for a new Google Analytics entry.
 
 ::: tip
-After updating, clear your browser cache and test your site in a private browsing window. This ensures you are seeing the latest version of your pages and not a cached copy.
+You can browse the full plugin marketplace at [octobercms.com/plugins](https://octobercms.com/plugins) to discover what is available. Plugins can add anything from contact forms and SEO tools to full e-commerce systems.
 :::
 
-## Installing New Plugins
+## Clear the Application Cache
 
-Plugins extend the functionality of your site. You can browse and install them directly from the backend.
+If things ever look stale or out of date after making changes, clearing the cache can help.
 
-1. Go to **Settings > Updates & Plugins**.
-2. Click the **Install Plugins** button.
-3. Browse or search for the plugin you want. Each listing includes a description, author, rating, and version information.
-4. Click the plugin to view its details, then click **Install** to add it to your site.
-5. The plugin will be downloaded, its files placed in the `plugins` directory, and any required database tables will be created automatically.
+1. On the **Settings → Updates & Plugins** page, look for the **Clear Cache** button (or find it under the utilities menu).
+2. Click it to flush all cached data.
 
-After installation, the plugin may add new menu items, settings pages, or components that you can use in your themes. Check the plugin's documentation for setup instructions.
+This forces October CMS to rebuild its internal caches on the next page load.
 
-## Installing New Themes
+## Register Your Software
 
-Themes control the visual design of your website. Installing a new theme works similarly to plugins.
+Registering your installation connects it to the October CMS marketplace, which unlocks automatic updates and access to premium plugins.
 
-1. Go to **Settings > Updates & Plugins**.
-2. Click the **Install Themes** button.
-3. Browse available themes in the marketplace, preview their designs, and click **Install** on the one you want.
-4. Once installed, activate the theme by going to **Settings > Frontend Theme** and clicking **Activate** next to it.
+1. On the **Settings → Updates & Plugins** page, look for the registration or license key section.
+2. If you have an account at [octobercms.com](https://octobercms.com), enter your license key.
+3. If you don't have an account yet, you can [sign up](https://octobercms.com/account/register) — or skip this step and come back to it later.
 
 ::: aside
-Installing a theme does not automatically make it active. You must activate it separately, which gives you time to review it before your visitors see it.
+Registration is optional for local development. You can explore everything in this tutorial without a license key.
 :::
 
-## Command-Line Alternative
+## Next Steps
 
-If you have access to the command line on your server, you can run updates without using the backend interface. This is useful for automated deployments, scripted maintenance, or situations where the backend is temporarily inaccessible.
-
-To update the core and all plugins, run:
-
-```bash
-php artisan october:update
-```
-
-This command contacts the October CMS gateway, downloads any available updates, and runs database migrations -- the same process that happens when you click Update in the backend.
-
-To install a specific plugin from the command line:
-
-```bash
-php artisan plugin:install AuthorName.PluginName
-```
-
-To install a specific theme:
-
-```bash
-php artisan theme:install AuthorName.ThemeName
-```
-
-For more command-line options, see [Installing Packages](../../../4.x/resources/installing-packages.md) and [Updating October](../../../4.x/resources/updating-october.md) in the developer documentation.
-
-## Troubleshooting Updates
-
-If an update does not complete successfully, try these steps:
-
-1. **Check the logs.** Go to **Settings > Event Log** (or use the [Log Viewer](./settings-overview.md)) to see if an error message was recorded.
-2. **Try again.** Temporary network issues can interrupt downloads. Clicking **Check for Updates** and applying the update again often resolves the problem.
-3. **Use the command line.** Running `php artisan october:update` from the terminal can provide more detailed error output.
-4. **Restore your backup.** If an update causes problems you cannot resolve, restore your backup and wait for a fix or reach out to the plugin author for support.
-
-::: warning
-Never leave your site in a partially updated state. If an update fails midway, either complete it manually or restore from backup. A half-applied update can cause unpredictable behavior and security gaps.
-:::
+You now know how to manage plugins, check for updates, and keep your site in good shape. The Backend Panel section is complete — next, let's start building pages. Continue to [Understanding Themes](../editor/understanding-themes.md) to create a theme and start working with the editor.

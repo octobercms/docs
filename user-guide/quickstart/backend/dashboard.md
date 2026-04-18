@@ -1,73 +1,56 @@
 ---
-subtitle: "Your starting point every time you log in to the backend."
+subtitle: "Customize your dashboard and generate some statistics"
 ---
-# Dashboard
+# Dashboard & Statistics
 
-The dashboard is the first thing you see after logging in to the October CMS backend. Think of it as your home base -- a quick overview of your website's status and any information that matters to you most. From here, you can check how things are running, jump to common tasks, and customize the layout so it works the way you prefer.
+The dashboard is the first thing you see after logging in. Right now it shows a couple of default widgets — let's make it your own and give it some real data to display.
 
-## What You See When You Log In
+## Rearrange the Widgets
 
-When you first sign in, the dashboard displays a default set of widgets. Depending on your installation, you will typically see:
+The dashboard ships with a **Welcome** widget and a **System Status** widget. Try rearranging them:
 
-- **Welcome Widget** -- a friendly greeting along with helpful links to documentation and resources.
-- **System Status Widget** -- a summary of your October CMS version, the current PHP version, and any available updates.
+1. Click and hold the title bar of the **System Status** widget.
+2. Drag it above the **Welcome** widget.
+3. Release — the widgets swap positions and the new layout is saved automatically.
 
-These widgets give you an at-a-glance picture of your site's health without needing to navigate anywhere else. If updates are available, the system status widget will let you know right away so you can take action.
+Feel free to drag widgets into any order that makes sense to you.
 
-## Dashboard Widgets
+## Remove a Widget
 
-Widgets are self-contained panels that display a specific piece of information or provide a shortcut to a common task. The default dashboard ships with a small set of built-in widgets, but the real power comes from the ability to mix and match them to suit your workflow.
+Let's clean up by removing the Welcome widget — you won't need it once you know your way around.
 
-Built-in widgets you may encounter include:
-
-- **System Status** -- shows version information and update availability.
-- **Welcome** -- provides quick links and orientation for new administrators.
-
-::: tip
-Plugins can add their own dashboard widgets. For example, an analytics plugin might provide a traffic overview widget, or a blog plugin might show your most recent drafts. After installing a plugin, check the dashboard widget list to see if new options have become available.
-:::
-
-## Customizing the Dashboard
-
-You are not stuck with the default layout. October CMS lets you tailor the dashboard so it shows exactly what you need.
-
-### Adding Widgets
-
-1. Click the **Add Widget** button located at the top of the dashboard area.
-2. A popup will appear listing all available widgets. Select the one you would like to add.
-3. Configure any options the widget offers (for example, choosing a date range or a data source).
-4. Click **Save** to place the widget on your dashboard.
-
-The new widget will appear on the dashboard immediately.
-
-### Rearranging Widgets
-
-If you would like to change the order or position of your widgets, simply drag and drop them into a new arrangement. Click and hold the title bar of any widget, then move it to your preferred location. The other widgets will shift to make room. Your new layout is saved automatically.
-
-### Removing Widgets
-
-To remove a widget you no longer need:
-
-1. Hover over the widget you want to remove.
-2. Click the **X** or **Remove** icon in the top-right corner of the widget.
+1. Hover over the **Welcome** widget.
+2. Click the **×** icon in the top-right corner of the widget.
 3. Confirm the removal when prompted.
 
-Removing a widget only takes it off your dashboard -- it does not delete any data. You can always add the widget back later.
+The widget disappears. Don't worry — removing a widget doesn't delete any data, it just hides the panel.
 
-## Resetting the Dashboard Layout
+## Reset the Layout
 
-If you have rearranged or removed widgets and want to start fresh, you can reset the dashboard back to its original state.
+Changed your mind? You can always start over.
 
-1. Navigate to the dashboard.
-2. Click the **Reset Layout** option (often found under a menu or gear icon on the dashboard toolbar).
-3. Confirm that you want to restore the defaults.
-
-This will remove all of your customizations and return the dashboard to the layout it had when you first logged in. Any widgets you added will be removed, and the default widgets will be restored.
+1. Click the **Manage widgets** button on the dashboard toolbar.
+2. Click **Reset to default** (or the reset option in the menu).
+3. Confirm — your dashboard returns to the default layout with all the original widgets restored.
 
 ::: aside
-Each administrator has their own independent dashboard layout. Resetting your dashboard will not affect what other administrators see on theirs.
+Each administrator has their own independent dashboard layout. Resetting yours won't affect what other admins see.
+:::
+
+## Add Traffic Statistics
+
+October CMS includes a built-in statistics plugin that tracks page views. Let's turn it on and generate some sample data.
+
+1. Navigate to **Settings → Internal Traffic Statistics** in the main menu.
+2. Click the **Generate Data** button to create some sample traffic data. This fills the statistics widget with fake page views so you can see how it looks.
+3. Go back to the **Dashboard** by clicking the Dashboard link in the top menu.
+
+You should now see a traffic chart on your dashboard. If it doesn't appear automatically, click **Manage widgets**, add the **Traffic overview** widget, and save.
+
+::: tip
+In production, this plugin tracks real visitor traffic automatically — no fake data needed. The statistics you generated here are just for exploring the dashboard during this tutorial.
 :::
 
 ## Next Steps
 
-Once you are comfortable with the dashboard, explore the rest of the backend. You can manage your site content, configure settings, and install new features -- all from the navigation menu on the left-hand side.
+Your dashboard is set up. Next, let's create another administrator account and explore roles. Continue to [Managing Administrators](./managing-admins.md).

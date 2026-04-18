@@ -41,7 +41,7 @@ You have two options for creating pages, and you can freely mix both approaches.
 
 The most common way to create pages is through the backend:
 
-1. Log in to the backend and navigate to **CMS** in the main menu.
+1. Log in to the backend and navigate to **Editor** in the main menu.
 2. Click **Pages** in the sidebar.
 3. Click the **+ Add** button to create a new page.
 4. Fill in the page settings (URL, title, layout) and write your markup in the editor.

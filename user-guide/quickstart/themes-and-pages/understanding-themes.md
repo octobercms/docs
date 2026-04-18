@@ -34,7 +34,7 @@ Each of these folders plays a specific role:
 You can change your site's active theme at any time without losing your content. To switch themes:
 
 1. Log in to the backend and navigate to **Settings**.
-2. Under the **CMS** section, click **Frontend Theme**.
+2. Under the **Editor** section, click **Frontend Theme**.
 3. Select the theme you want to activate from the list.
 4. Click **Save**.
 

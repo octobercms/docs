@@ -125,7 +125,7 @@ If SSH is not available, October CMS can handle migrations through the backend i
 Once your site is live, take a few minutes to verify everything is working correctly.
 
 - **Visit the frontend.** Browse through your main pages and make sure everything loads — images, styles, scripts, and content.
-- **Log into the backend.** Go to `yoursite.com/backend` and confirm you can sign in and navigate the administration area.
+- **Log into the backend.** Go to `yoursite.com/admin` and confirm you can sign in and navigate the administration area.
 - **Test interactive features.** Submit any contact forms, test AJAX-powered elements, and verify flash messages appear correctly.
 - **Check for mixed content.** If your site uses HTTPS, make sure all assets (images, scripts, stylesheets) are also loaded over HTTPS. Mixed content warnings can break functionality and erode visitor trust.
 - **Set up backups.** Configure automated backups for both your files and your database. Many hosting providers offer built-in backup tools. At a minimum, keep regular database exports in a safe location.

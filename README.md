@@ -8,7 +8,7 @@ sidebar:
         icon: ph-duotone ph-book-open-text
         collapsable: false
         children:
-            - [/user-guide/quickstart/getting-started/requirements, Quick Start]
+            - [/user-guide/quickstart/introduction/welcome, Quick Start]
             - [/user-guide/blog/introduction, Creating a Blog]
             - [/user-guide/forum/introduction, Creating a Forum]
             - [/user-guide/helpdesk/introduction, Creating a Helpdesk]
@@ -44,7 +44,7 @@ sidebar:
 #         title: Docs
 #         collapsable: false
 #         children:
-#             - [/user-guide/quickstart/getting-started/requirements, Quick Start]
+#             - [/user-guide/quickstart/introduction/welcome, Quick Start]
 #             - [/4.x/cms/themes/themes, CMS Guide]
 #             - [/4.x/markup/templating, Markup Guide]
 #     -
@@ -85,7 +85,7 @@ sidebar:
         <div class="home-hero-icon"><i class="ph-duotone ph-rocket-launch"></i> Start Here</div>
         <h2>Install October CMS</h2>
         <p>Build your first project in minutes with our step-by-step guide.</p>
-        <p><a href="/user-guide/quickstart/getting-started/requirements.html" class="btn btn-primary btn-lg">Get Started</a></p>
+        <p><a href="/user-guide/quickstart/introduction/welcome.html" class="btn btn-primary btn-lg">Get Started</a></p>
     </div>
     <div class="home-hero-light">
         <ul class="home-hero-checklist">
@@ -93,7 +93,7 @@ sidebar:
             <li><i class="ph-duotone ph-check-circle"></i> Install October CMS</li>
             <li><i class="ph-duotone ph-check-circle"></i> Build your first website</li>
         </ul>
-        <p>Follow our <a href="/user-guide/quickstart/getting-started/requirements.html">beginner tutorial</a> to get up and running fast.</p>
+        <p>Follow our <a href="/user-guide/quickstart/introduction/welcome.html">beginner tutorial</a> to get up and running fast.</p>
     </div>
 </div>
 
