@@ -1,0 +1,97 @@
+#
+# Tutorial Nav: Creating a Blog
+#
+"/blog/":
+-
+    title: Creating a Blog
+    collapsable: false
+    children:
+        - introduction
+        - blog-blueprint
+        - listing-page
+        - detail-page
+        - categories-and-tags
+        - rss-feed
+
+#
+# Tutorial Nav: Creating a Helpdesk
+#
+"/helpdesk/":
+-
+    title: Creating a Helpdesk
+    collapsable: false
+    children:
+        - introduction
+        - ticket-blueprint
+        - ticket-form
+        - managing-tickets
+        - status-workflow
+        - email-notifications
+
+#
+# Tutorial Nav: Creating a Mailing List
+#
+"/mailing-list/":
+-
+    title: Creating a Mailing List
+    collapsable: false
+    children:
+        - introduction
+        - subscriber-blueprint
+        - signup-form
+        - managing-subscribers
+        - sending-campaigns
+        - unsubscribe-handling
+
+#
+# Quick Start Guide
+#
+"/quickstart/":
+-
+    title: Getting Started
+    collapsable: false
+    children:
+        - getting-started/requirements
+        - getting-started/installation
+        - getting-started/project-structure
+        - getting-started/backend-tour
+        - getting-started/your-first-page
+-
+    title: The Backend Panel
+    collapsable: false
+    children:
+        - backend/dashboard
+        - backend/managing-admins
+        - backend/settings-overview
+        - backend/system-updates
+-
+    title: Content Management
+    collapsable: false
+    children:
+        - content-management/tailor-introduction
+        - content-management/creating-blueprints
+        - content-management/managing-entries
+        - content-management/global-content
+        - content-management/media-manager
+-
+    title: Themes & Pages
+    collapsable: false
+    children:
+        - themes-and-pages/understanding-themes
+        - themes-and-pages/pages-and-urls
+        - themes-and-pages/layouts-and-partials
+        - themes-and-pages/adding-dynamic-content
+        - themes-and-pages/using-components
+-
+    title: Interactive Features
+    collapsable: false
+    children:
+        - interactive-features/ajax-introduction
+        - interactive-features/building-forms
+        - interactive-features/flash-messages-and-loaders
+-
+    title: Going Live
+    collapsable: false
+    children:
+        - deployment/preparing-for-production
+        - deployment/deploying-your-site

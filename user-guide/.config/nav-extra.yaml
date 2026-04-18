@@ -1,0 +1,21 @@
+"/":
+-
+    title: Quick Start
+    icon: "/images/october-leaf.svg"
+    prefix: "/user-guide/quickstart/"
+    link: "/user-guide/quickstart/getting-started/requirements.html"
+-
+    title: Blog Tutorial
+    icon: "/images/markup-guide.svg"
+    prefix: "/user-guide/blog/"
+    link: "/user-guide/blog/introduction.html"
+-
+    title: Helpdesk Tutorial
+    icon: "/images/markup-guide.svg"
+    prefix: "/user-guide/helpdesk/"
+    link: "/user-guide/helpdesk/introduction.html"
+-
+    title: Mailing List Tutorial
+    icon: "/images/markup-guide.svg"
+    prefix: "/user-guide/mailing-list/"
+    link: "/user-guide/mailing-list/introduction.html"
