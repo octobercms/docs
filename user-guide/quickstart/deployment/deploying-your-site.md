@@ -1,18 +1,17 @@
 ---
-subtitle: "Get your October CMS site from your local machine to a live web server where the world can see it."
+subtitle: "Deploy your site using Git or FTP: two approaches for different hosting setups"
 ---
-
 # Deploying Your Site
 
-You have built your site, tested it locally, and [prepared it for production](./preparing-for-production.md). Now it is time for the final step — putting it on a live server so your visitors can reach it. There are several ways to deploy an October CMS site, depending on your hosting environment and technical comfort level. This guide covers the two most common approaches.
+You have built your site and [prepared it for production](./preparing-for-production.md). Now let's get it onto a live server. There are two main approaches: Git-based deployment for servers with SSH access, and FTP upload for shared hosting.
 
 ## Option 1: Git-Based Deployment (Recommended)
 
-If you have SSH access to your server, a Git-based deployment is the most reliable approach. It gives you version control, easy rollbacks, and a repeatable process you can use every time you make changes.
+If you have SSH access to your server, Git gives you version control, easy rollbacks, and a clean deployment workflow.
 
-### Step 1: Push Your Project to a Git Repository
+### Push Your Project to Git
 
-If you have not already, initialize a Git repository for your project and push it to a service like GitHub, GitLab, or Bitbucket.
+Initialize a repository and push to GitHub, GitLab, or Bitbucket:
 
 ```bash
 git init
@@ -22,126 +21,108 @@ git remote add origin https://github.com/your-username/your-project.git
 git push -u origin main
 ```
 
+You will notice that `modules/` and `vendor/` are already excluded in `.gitignore`. These are framework dependencies provided by Composer. The rest of the project (including your `app/`, `plugins/`, and `themes/` directories) is what makes up your site.
+
 ::: warning
-Never commit your `.env` file to version control. It contains sensitive credentials like database passwords, your application key, and API tokens. Add `.env` to your `.gitignore` file (October CMS does this by default). You will create a separate `.env` file directly on your production server.
+Never commit your `.env` file to version control. It contains sensitive credentials. October CMS excludes it by default via `.gitignore`. You will create a separate `.env` file on your production server.
 :::
 
-### Step 2: Connect to Your Server
+### Clone and Set Up on the Server
 
-Use SSH to log into your production server:
+SSH into your server, clone the project, and install dependencies:
 
 ```bash
 ssh user@your-server.com
-```
-
-### Step 3: Clone the Repository
-
-Navigate to the directory where your site will live (your web root or a directory above it) and clone your project:
-
-```bash
 cd /var/www
 git clone https://github.com/your-username/your-project.git your-site
 cd your-site
 ```
 
-### Step 4: Copy Your Composer Auth File
-
-October CMS uses Composer to manage plugins and dependencies. Your local project has an `auth.json` file that contains your license key, which Composer needs to download packages from the October CMS marketplace.
-
-Copy `auth.json` from your local project to the project root on your server. You can use `scp` from your local machine:
+Copy your `auth.json` file to the server (it contains your license key for Composer):
 
 ```bash
+# Run this from your local machine
 scp auth.json user@your-server.com:/var/www/your-site/auth.json
 ```
 
-### Step 5: Install Dependencies
-
-On the server, install the PHP dependencies without development packages:
+Then install dependencies and run migrations on the server:
 
 ```bash
 composer install --no-dev
-```
-
-The `--no-dev` flag skips packages that are only needed during development, keeping your production installation lean.
-
-### Step 6: Configure the Environment
-
-Create a `.env` file on the server with your production settings. You can use the `.env.example` file as a starting point:
-
-```bash
 cp .env.example .env
-```
-
-Then edit it with your production values — database credentials, `APP_DEBUG=false`, your live `APP_URL`, and so on. See [Preparing for Production](./preparing-for-production.md) for the full list of settings to configure.
-
-### Step 7: Run Migrations
-
-Run the database migrations to set up your production database tables:
-
-```bash
+# Edit .env with your production settings
 php artisan october:migrate
 ```
 
-### Step 8: Set Up the Web Server
+### Set Up the Public Directory with Mirror
 
-Configure your web server (Apache, Nginx, etc.) to point its document root to your project's root directory. October CMS includes an `.htaccess` file for Apache and provides Nginx configuration examples in the developer documentation.
+For Git deployments, we recommend using the `october:mirror` command. This creates a `public/` directory and mirrors the necessary assets (like plugin and theme assets) into it. Point your web server's document root to this `public/` directory.
 
-::: tip
-Git-based deployments are recommended because they are repeatable and reversible. If something goes wrong after an update, you can quickly roll back to the previous version with `git checkout`. For even more reliability, consider setting up a simple deployment script or using a tool like Deployer or Envoyer.
+```bash
+php artisan october:mirror
+```
+
+::: warning
+You need to run `october:mirror` again any time you install a new plugin or create a new theme, so the new assets get mirrored into the public directory.
 :::
 
-## Option 2: FTP / Shared Hosting
+### Updating Your Site
 
-If you are on shared hosting without SSH access, you can deploy by uploading your project files directly via FTP.
+After the initial deployment, updates are straightforward:
 
-### Upload Your Files
+1. Push changes to your Git repository.
+2. Pull them on the server: `git pull`
+3. Run `composer update` if dependencies changed.
+4. Run `php artisan october:migrate` if there are new migrations.
+5. Run `php artisan october:mirror` if you added new plugins or themes.
 
-Using an FTP client (like FileZilla or Cyberduck), upload your entire project directory to your hosting account's web root (often called `public_html` or `www`).
+## Option 2: FTP Upload
 
-### Check Server Requirements
+If you are on shared hosting without SSH, the simplest approach is to install October CMS on the server first, then upload your app files.
 
-Before proceeding, confirm that your hosting environment meets the requirements:
+### Install on the Server First
 
-- PHP 8.0 or higher
-- A supported database (MySQL 5.7+, PostgreSQL 9.6+, SQLite 3.8.8+, or SQL Server 2017+)
-- Required PHP extensions: PDO, cURL, OpenSSL, Mbstring, ZipArchive, GD or Imagick, Fileinfo
+1. Download the **Wizard Installer** from octobercms.com.
+2. Upload the installer zip to your server's web root via FTP.
+3. Extract the zip on the server (most hosting control panels let you do this).
+4. Visit the URL in your browser and follow the on-screen wizard to install October CMS with your production database.
 
-### Configure the Environment
+This gives you a clean October CMS installation on the server with all framework files in place.
 
-Create or edit the `.env` file in your project root with your hosting provider's database credentials and other production settings. Your hosting control panel (cPanel, Plesk, etc.) typically provides the database host, name, username, and password.
+### Upload Your App Files
+
+Now upload just your custom files on top of the installation. Using your FTP client, upload:
+
+- **`themes/`**: your theme with layouts, pages, partials, and blueprints
+- **`app/`**: your application code (if any)
+- **`plugins/`**: any custom plugins (marketplace plugins can be installed through the backend)
+
+These three directories contain everything that makes your site unique. The rest of the framework is already installed.
 
 ### Run Migrations
 
-If your host provides SSH access or a terminal in the control panel, run:
+If your host provides SSH or a terminal in the control panel, run:
 
 ```bash
 php artisan october:migrate
 ```
 
-If SSH is not available, October CMS can handle migrations through the backend interface when you first access the administration area.
+If SSH is not available, October CMS handles migrations automatically when you first access the backend.
+
+### Configure Nginx
+
+If your hosting uses Nginx, copy the `nginx.conf` file from the October CMS project root and use it in your server block configuration. Apache servers work out of the box with the included `.htaccess` file.
 
 ## Post-Deployment Checklist
 
-Once your site is live, take a few minutes to verify everything is working correctly.
+Once your site is live, verify everything works:
 
-- **Visit the frontend.** Browse through your main pages and make sure everything loads — images, styles, scripts, and content.
-- **Log into the backend.** Go to `yoursite.com/admin` and confirm you can sign in and navigate the administration area.
-- **Test interactive features.** Submit any contact forms, test AJAX-powered elements, and verify flash messages appear correctly.
-- **Check for mixed content.** If your site uses HTTPS, make sure all assets (images, scripts, stylesheets) are also loaded over HTTPS. Mixed content warnings can break functionality and erode visitor trust.
-- **Set up backups.** Configure automated backups for both your files and your database. Many hosting providers offer built-in backup tools. At a minimum, keep regular database exports in a safe location.
+- **Visit the frontend.** Browse your pages and check that images, styles, and content load correctly.
+- **Log into the backend.** Go to `yoursite.com/admin` and confirm you can sign in.
+- **Test interactive features.** Submit the contact form on a team member's profile and check that it works.
+- **Check for mixed content.** If using HTTPS, make sure all assets load over HTTPS too.
+- **Set up backups.** Configure automated backups for your files and database.
 
-::: aside
-Your first deployment is usually the most involved. After the initial setup, updating your site is much simpler — push changes to Git, pull them on the server, and run migrations if needed. The process becomes routine quickly.
-:::
+## Next Steps
 
-## Keeping Your Site Updated
-
-After your initial deployment, you will occasionally need to update October CMS, your plugins, or your theme. The general process is:
-
-1. Make and test changes locally.
-2. Commit and push to your Git repository.
-3. Pull the changes on your server.
-4. Run `composer update` if dependencies changed.
-5. Run `php artisan october:migrate` if there are new migrations.
-
-For detailed information about deployment options and server configuration, see the [Deployment](../../../4.x/setup/deployment.md) page in the developer documentation.
+Your site is live. Continue to [Where to Go from Here](./what-next.md) for ideas on what to build next, from exploring the demo theme to building plugins and selling products.

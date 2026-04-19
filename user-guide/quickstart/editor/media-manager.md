@@ -10,12 +10,12 @@ The **Media Manager** is October CMS's built-in file library. It gives you a cen
 1. Click **Media** in the top navigation menu.
 2. You will see an empty library with a folder tree on the left and the main file area on the right.
 
-This is where all your shared media files live — photos, logos, PDFs, anything your site needs.
+This is where all your shared media files live: photos, logos, PDFs, anything your site needs.
 
 ## Upload an Image
 
 1. Click the **Upload** button in the toolbar (or drag a file from your computer directly into the Media Manager window).
-2. Select any image from your computer — a photo, a logo, anything you like.
+2. Select any image from your computer, such as a photo, a logo, or anything you like.
 3. Wait for the upload to complete. The image will appear in the file list.
 
 ::: tip
@@ -25,8 +25,8 @@ You can create folders to keep things organized. Click the **New Folder** button
 ## Copy the File Path
 
 1. Click on the image you just uploaded to select it.
-2. Look for the file path displayed in the details panel — it will be something like `my-image.jpg` (or `images/my-image.jpg` if you put it in a folder).
-3. Copy this path or remember it — you will need it in the next step.
+2. Look for the file path displayed in the details panel. It will be something like `my-image.jpg` (or `images/my-image.jpg` if you put it in a folder).
+3. Copy this path or remember it. You will need it in the next step.
 
 ## Display the Image on a Page
 
@@ -37,7 +37,7 @@ You can create folders to keep things organized. Click the **New Folder** button
 <h1 class="text-3xl font-bold mb-4">About</h1>
 <p class="text-lg text-gray-600 mb-6">
     This is another page using the same layout. The header, navigation,
-    and footer are identical — only the content area changed.
+    and footer are identical. Only the content area changed.
 </p>
 
 <img
@@ -63,12 +63,12 @@ You can also insert images directly into content files using the Markdown editor
 1. Navigate to **Editor → Content** and open **my-content.md**.
 2. Place your cursor where you want the image to appear.
 3. Click the **Image** icon in the Markdown toolbar.
-4. Select **Browse Media Library** — the Media Manager opens as a popup.
+4. Select **Browse Media Library**. The Media Manager opens as a popup.
 5. Click the image you uploaded earlier and confirm.
 6. The image is inserted into your Markdown content automatically.
 7. Click **Save** and preview the home page to see the image rendered inside the content block.
 
-This is a quick way to add images without writing any markup — the editor handles the `|media` path for you.
+This is a quick way to add images without writing any markup. The editor handles the `|media` path for you.
 
 ## How the |media Filter Works
 
@@ -78,7 +78,7 @@ The `|media` filter takes a path relative to your media storage root and convert
 {{ 'my-image.jpg'|media }}
 ```
 
-This outputs something like `https://yoursite.com/storage/app/media/my-image.jpg`. You should always use this filter instead of hardcoding paths — it ensures your media URLs are correct regardless of your server configuration.
+This outputs something like `https://yoursite.com/storage/app/media/my-image.jpg`. You should always use this filter instead of hardcoding paths. It ensures your media URLs are correct regardless of your server configuration.
 
 ::: aside
 For the full reference on the Media Manager, including image resizing and cloud storage configuration, see the [Media Manager](../../../4.x/cms/media/introduction.md) documentation.

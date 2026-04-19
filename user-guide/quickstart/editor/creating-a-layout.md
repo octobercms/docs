@@ -3,9 +3,9 @@ subtitle: "Build the HTML skeleton that all your pages will share"
 ---
 # Creating a Layout
 
-A **layout** is the shared HTML structure that wraps every page on your site. It defines the `<head>` tag, header, footer, navigation — everything that stays the same from page to page. Instead of repeating this HTML in every page file, you write it once in a layout.
+A **layout** is the shared HTML structure that wraps every page on your site. It defines the `<head>` tag, header, footer, navigation, and everything that stays the same from page to page. Instead of repeating this HTML in every page file, you write it once in a layout.
 
-The most important tag in a layout is `{% page %}` — this marks the spot where each page's unique content gets inserted.
+The most important tag in a layout is `{% page %}`. This marks the spot where each page's unique content gets inserted.
 
 ## Create the Default Layout
 
@@ -58,11 +58,11 @@ The most important tag in a layout is `{% page %}` — this marks the spot where
 
 Let's walk through the key parts:
 
-- **Tailwind CSS** — loaded from a CDN, giving us utility classes for styling without writing any custom CSS. This is the approach we will use throughout the rest of the tutorials.
-- **`{{ this.page.title }}`** — outputs the current page's title in the browser tab.
-- **`{% page %}`** — the placeholder where each page's content gets inserted.
-- **`{% styles %}`** and **`{% scripts %}`** — placeholders where October CMS injects any CSS or JavaScript added by components.
-- **`{% framework extras %}`** — includes the October CMS AJAX framework, which we will use later for interactive features like forms.
+- **Tailwind CSS**: loaded from a CDN, giving us utility classes for styling without writing any custom CSS. This is the approach we will use throughout the rest of the tutorials.
+- **`{{ this.page.title }}`**: outputs the current page's title in the browser tab.
+- **`{% page %}`**: the placeholder where each page's content gets inserted.
+- **`{% styles %}`** and **`{% scripts %}`**: placeholders where October CMS injects any CSS or JavaScript added by components.
+- **`{% framework extras %}`**: includes the October CMS AJAX framework, which we will use later for interactive features like forms.
 
 ::: tip
 The navigation links use hardcoded URLs for now (`/` and `/about`). After we create the pages, we will update them to use the `|page` filter so they stay in sync automatically.

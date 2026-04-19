@@ -3,7 +3,7 @@ subtitle: "Log in and explore the main areas of the backend"
 ---
 # Exploring the Backend
 
-The backend is your control center — this is where you manage pages, content, media, settings, and everything else about your site. Let's log in and take a quick tour.
+The backend is your control center. This is where you manage pages, content, media, settings, and everything else about your site. Let's log in and take a quick tour.
 
 ## Log In
 
@@ -19,10 +19,10 @@ Enter the administrator username and password you created during installation. A
 
 The main navigation runs along the top of the screen. Click through each section to see what is there:
 
-1. **Dashboard** — your home base. It shows widgets with at-a-glance information about your site. We will customize this in the next article.
-2. **Editor** — click into this section. You will see **Pages**, **Layouts**, **Partials**, and **Content** in the side panel. This is where you build and edit your site's templates.
-3. **Media** — your file manager. Click into it and you will see an empty library. This is where you upload images, documents, and other files.
-4. **Settings** — the configuration area. Click through a few items to get a sense of what is here — administrator management, mail settings, updates, and more.
+1. **Dashboard**: your home base. It shows widgets with at-a-glance information about your site. We will customize this in the next article.
+2. **Editor**: click into this section. You will see **Pages**, **Layouts**, **Partials**, and **Content** in the side panel. This is where you build and edit your site's templates.
+3. **Media**: your file manager. Click into it and you will see an empty library. This is where you upload images, documents, and other files.
+4. **Settings**: the configuration area. Click through a few items to get a sense of what is here, including administrator management, mail settings, updates, and more.
 
 Don't worry about memorizing everything. The goal right now is just to know what lives where.
 
@@ -39,7 +39,7 @@ As you install plugins, new menu items may appear in the top navigation. For exa
 
 ## Try a Keyboard Shortcut
 
-While you are here, try pressing **Ctrl+S** (or **Cmd+S** on macOS) in any editor — this saves the current page. It's a small thing, but it will save you a lot of mouse clicks as you work.
+While you are here, try pressing **Ctrl+S** (or **Cmd+S** on macOS) in any editor. This saves the current page. It's a small thing, but it will save you a lot of mouse clicks as you work.
 
 ## Next Steps
 

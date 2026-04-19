@@ -1,91 +1,82 @@
 ---
-subtitle: "Creating, editing, and organizing your content"
+subtitle: "Customize the navigation, add team members, and manage your content"
 ---
 # Managing Entries
 
-Once you have defined a blueprint, October CMS automatically generates a complete backend interface for managing that content. You do not need to build list views, forms, or search features yourself — it is all created for you based on the fields in your blueprint. This section covers everything you need to know about working with entries day to day.
+Your blueprints are created and the database is set up. Now let's customize how the content type appears in the backend, then add some team members.
 
-## The Entry List View
+## Reassign the Navigation
 
-When you click on a content type in the backend sidebar (for example, "Blog Posts"), you will see the entry list view. This is your starting point for managing content of that type.
+By default, new blueprints appear under the **Content** menu. Let's give Team Members their own top-level navigation item with a custom label and icon.
 
-The list view shows all existing entries in a table format with key information like the title, status, and dates. From here you can:
+1. Open your team member blueprint at `themes/mytheme/blueprints/team/member.yaml`.
+2. Add a `navigation` section below the `name` field:
 
-- **Sort entries** by clicking on any column header. Click once to sort ascending, click again to sort descending.
-- **Search entries** using the search box at the top of the list. This searches across the title and other text fields.
-- **Filter entries** using the filter options to narrow down the list by status, category, or other criteria.
+```yaml
+handle: Team\Member
+type: entry
+name: Team Member
+
+navigation:
+    label: Our Team
+    icon: icon-users
+    order: 200
+```
+
+3. Save the file.
+4. Refresh the backend. You should now see **Our Team** in the top navigation with a users icon.
 
 ::: tip
-For content types with many entries, take advantage of search and filtering to find what you need quickly. You can combine multiple filters at the same time — for example, filtering by a specific category and then searching within those results.
+October CMS uses the [Font Awesome 4](https://fontawesome.com/v4/icons/) icon set. Browse the icons to find one that fits your content type. Common choices: `icon-pencil` for blog posts, `icon-calendar` for events, `icon-shopping-cart` for products.
 :::
 
-## Creating a New Entry
+## Add Your First Team Member
 
-To create a new entry, click the **Create** button (or **New Blog Post**, depending on how the blueprint is configured) in the top-right corner of the list view. This opens the entry form with all the fields defined in your blueprint.
+1. Click **Our Team** in the navigation.
+2. Click the **Create** button.
+3. Fill in the fields:
+   - **Title**: `Ada Lovelace`
+   - **Role**: `Lead Engineer`
+   - **Email**: `ada@example.com`
+   - **Photo**: upload any image (or skip this for now)
+   - **Bio**: `Pioneer of computer programming and mathematical genius.`
+4. Click **Save**.
 
-Fill in the fields as needed:
+Your first team member is created and appears in the list.
 
-1. **Title** — Every entry has a title field at the top. This is the main name or heading for the entry.
-2. **Slug** — The URL-friendly version of the title. It is generated automatically as you type the title, but you can edit it manually if you want a different URL.
-3. **Content fields** — The remaining fields depend on your blueprint. Fill in the rich text editor, upload images, set dates, choose dropdown values, and so on.
+## Duplicate and Add More Members
 
-When you are finished, click **Save** to store the entry. It will appear in the list view immediately.
+Instead of filling out the form from scratch each time, you can duplicate an existing entry.
 
-## Editing Existing Entries
+1. Open **Ada Lovelace** from the list.
+2. Click the **Duplicate** button (or find it in the toolbar menu).
+3. A copy is created. Update the fields:
+   - **Title**: `Grace Hopper`
+   - **Role**: `Systems Architect`
+   - **Email**: `grace@example.com`
+   - **Bio**: `Invented the first compiler and popularized machine-independent programming languages.`
+4. Click **Save**.
 
-To edit an entry, click on its title in the list view. This opens the same form you used to create it, with the current values already filled in. Make your changes and click **Save** to update the entry.
+Repeat to add a few more team members. Here are some suggestions:
 
-You can also use the list view to quickly identify which entries need attention. The status column shows whether each entry is published, in draft, or has other states, making it easy to spot content that still needs work.
+- **Alan Turing**: `Research Scientist`, `Laid the foundation for modern computing and artificial intelligence.`
+- **Margaret Hamilton**: `Software Director`, `Led the team that wrote the onboard flight software for NASA's Apollo missions.`
+- **Linus Torvalds**: `Open Source Lead`, `Created Linux and Git, two pillars of modern software development.`
 
-## Working with Drafts
+Add as many or as few as you like. We will use these entries when building the frontend.
 
-When drafts are enabled for a blueprint, you gain a powerful workflow for managing content that is not yet ready to go live. Instead of publishing immediately, you can save entries as drafts and come back to them later.
+## Configure the Team Settings
 
-Here is how the draft workflow works:
+1. Navigate to the **Team Settings** global. You will find it under **Content** in the navigation (or wherever Tailor placed it).
+2. Fill in the settings:
+   - **Page Title**: `Meet the Team`
+   - **Introduction**: `The people behind the project. Each one brings something unique to the table.`
+   - **Show Profile Photos**: leave it toggled **on**
+   - **Members Per Page**: set to `2` (we are using a small number so you can see pagination in action)
+3. Click **Save**.
 
-- **Saving a draft** — When you create or edit an entry, you can save it without publishing. The entry is stored in the database but will not appear on your live website.
-- **Publishing** — When the entry is ready, click the **Publish** button to make it live. Published entries are visible to your site visitors.
-- **Returning to draft** — If you need to pull a published entry back for revisions, you can unpublish it and it will revert to draft status.
-
-Drafts are especially useful for teams where one person writes content and another reviews and publishes it. You can save your work at any stage without worrying about incomplete content appearing on the live site.
-
-## Versioning
-
-Some blueprints support versioning, which keeps a history of changes to each entry. When versioning is enabled, October CMS saves a snapshot of the entry each time you make changes. This gives you the ability to:
-
-- **View past versions** of an entry to see how it has changed over time
-- **Compare versions** to understand what was added, removed, or modified
-- **Restore a previous version** if you need to roll back to an earlier state
-
-Versioning acts as a safety net — you can make changes confidently, knowing that you can always go back if something does not work out.
-
-## Deleting Entries
-
-To delete an entry, open it from the list view and click the **Delete** button at the bottom of the form. You can also select multiple entries from the list view and delete them in bulk using the toolbar actions.
-
-::: warning
-Deleted entries may be moved to a soft-delete state where they can be recovered, or they may be permanently removed depending on your blueprint configuration. If you are unsure, check with your site administrator before deleting content.
-:::
-
-## Reordering Entries in Structures
-
-If your blueprint uses the **structure** type, your entries can be organized in a tree hierarchy with parent-child relationships. In the list view, you will see the entries displayed in their nested structure.
-
-To reorder or reorganize entries:
-
-1. **Drag and drop** — Click and hold an entry, then drag it to a new position in the list. You can move it up or down to change the sort order.
-2. **Nest entries** — Drag an entry onto another entry to make it a child. This creates a hierarchical relationship — useful for sections and subsections.
-3. **Un-nest entries** — Drag a child entry out from under its parent to move it back to the top level.
-
-The tree structure is reflected on the frontend of your site, so reordering entries in the backend changes how they appear to your visitors.
-
-## Tips for Managing Content Effectively
-
-- **Use descriptive titles** — Clear titles make it easier to find entries in the list view and help with SEO on the frontend.
-- **Set publish dates** — If your blueprint includes a publish date field, use it to schedule content or to keep an accurate record of when content was originally published.
-- **Keep drafts organized** — If you have many drafts, review them periodically and either publish or delete the ones you no longer need.
-- **Use the search bar** — The search feature is fast and searches across multiple fields. It is often quicker than scrolling through a long list.
+These settings will control the frontend display when we build the team page in the next article.
 
 ## Next Steps
 
-Now that you know how to manage entries, learn about [Global Content](./global-content.md) for managing site-wide settings and content that appears across your entire website.
+You have team members in the system and settings configured. Continue to [Building the Frontend](./building-the-frontend.md) to create a team listing page and individual profile pages that display this content.

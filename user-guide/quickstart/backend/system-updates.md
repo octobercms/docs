@@ -19,7 +19,7 @@ Your installation comes with a few plugins already active. Let's get familiar wi
 
 ### Disable the Demo Plugin
 
-October CMS ships with a demo plugin that provides some example pages. You don't need it anymore — let's disable it.
+October CMS ships with a demo plugin that provides some example pages. You don't need it anymore, so let's disable it.
 
 1. On the **Settings → Updates & Plugins** page, click **Manage Plugins**.
 2. Find **October.Demo** in the list.
@@ -58,7 +58,7 @@ Registering your installation connects it to the October CMS marketplace, which 
 
 1. On the **Settings → Updates & Plugins** page, look for the registration or license key section.
 2. If you have an account at [octobercms.com](https://octobercms.com), enter your license key.
-3. If you don't have an account yet, you can [sign up](https://octobercms.com/account/register) — or skip this step and come back to it later.
+3. If you don't have an account yet, you can [sign up](https://octobercms.com/account/register), or skip this step and come back to it later.
 
 ::: aside
 Registration is optional for local development. You can explore everything in this tutorial without a license key.
@@ -66,4 +66,4 @@ Registration is optional for local development. You can explore everything in th
 
 ## Next Steps
 
-You now know how to manage plugins, check for updates, and keep your site in good shape. The Backend Panel section is complete — next, let's start building pages. Continue to [Understanding Themes](../editor/understanding-themes.md) to create a theme and start working with the editor.
+You now know how to manage plugins, check for updates, and keep your site in good shape. The Backend Panel section is complete. Next, let's start building pages. Continue to [Understanding Themes](../editor/understanding-themes.md) to create a theme and start working with the editor.

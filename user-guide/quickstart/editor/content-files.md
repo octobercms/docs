@@ -3,7 +3,7 @@ subtitle: "Create editable content blocks using Markdown"
 ---
 # Content Files
 
-A **content file** holds static text or Markdown that can be edited in the backend without touching your page templates. Content files are great for text that changes often — an "about" blurb, a legal notice, a welcome message — anything where you want to update the words without opening the page markup.
+A **content file** holds static text or Markdown that can be edited in the backend without touching your page templates. Content files are great for text that changes often, such as an "about" blurb, a legal notice, or a welcome message. They are ideal for anything where you want to update the words without opening the page markup.
 
 The key idea: your page template decides **where** content appears, and the content file provides **what** appears there.
 
@@ -11,7 +11,7 @@ The key idea: your page template decides **where** content appears, and the cont
 
 1. Navigate to **Editor** in the top menu, then click **Content** in the side panel.
 2. Click the **+ Add** button.
-3. A new file appears. Click the file name at the top and rename it to `my-content.md` — the `.md` extension tells October CMS to render this as Markdown.
+3. A new file appears. Click the file name at the top and rename it to `my-content.md`. The `.md` extension tells October CMS to render this as Markdown.
 4. In the editor, enter some Markdown content:
 
 ```markdown
@@ -46,7 +46,7 @@ For example, your full markup might look like:
 <h1 class="text-3xl font-bold mb-4">Welcome to My Website</h1>
 <p class="text-lg text-gray-600 mb-6">
     This is your first page built with October CMS. The layout provides
-    the header and footer — this page just fills in the content.
+    the header and footer, and this page just fills in the content.
 </p>
 
 <div class="prose mt-8">

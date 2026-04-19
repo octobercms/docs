@@ -1,109 +1,118 @@
 ---
-subtitle: "Build interactive forms that validate input and respond to submissions without reloading the page."
+subtitle: "Add a contact form to the team profile page with validation, email sending, and flash messages"
 ---
+# Build a Form
 
-# Building Forms
+Let's add a real feature to the site: a contact form on each team member's profile page. Visitors will be able to send a message to the team member. The form will validate input, send an email, and show a success message, all without a page reload.
 
-Forms are one of the most common interactive elements on any website — contact forms, signup forms, feedback forms, order requests. October CMS makes building these forms straightforward by combining the AJAX framework with server-side validation. Your visitors get instant feedback when something is wrong, and a clear confirmation when their message is sent, all without a page reload.
+## Add the Form Markup
 
-This guide walks you through building a complete contact form from scratch.
-
-## Step 1: Include the Extras Framework
-
-Before building your form, make sure your layout includes the extras framework. The extras add automatic support for displaying validation errors next to form fields and showing flash messages after submission.
+1. Open **Editor → Pages → Team Profile** (the page with the URL `/team/:slug`).
+2. In the **Markup** tab, add the following form below the existing profile content, just before the closing `</div>`:
 
 ```twig
-{% framework extras %}
+    <hr class="my-8">
+
+    <h2 class="text-xl font-semibold mb-4">Send {{ section.title }} a Message</h2>
+
+    <form data-request="onSendMessage" data-request-flash data-request-validate>
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">Your Email</label>
+            <input
+                type="email"
+                name="email"
+                class="w-full border rounded-lg px-3 py-2"
+            >
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">Message</label>
+            <textarea
+                name="message"
+                rows="4"
+                class="w-full border rounded-lg px-3 py-2"
+            ></textarea>
+        </div>
+        <button
+            type="submit"
+            class="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700"
+            data-attach-loading
+        >
+            Send Message
+        </button>
+    </form>
 ```
 
-If you have not done this yet, see [Introduction to AJAX](./ajax-introduction.md) for where to place this tag in your layout.
+3. Click **Save**.
 
-## Step 2: Create the Form Markup
+### What the Attributes Do
 
-Add the following HTML to your page. The key data attributes on the `<form>` tag tell the AJAX framework how to handle the submission.
+- **`data-request="onSendMessage"`**: calls our `onSendMessage` handler when the form is submitted.
+- **`data-request-flash`**: displays flash messages (success or error) automatically after the request.
+- **`data-request-validate`**: shows validation errors inline next to the fields that failed.
+- **`data-attach-loading`**: disables the button and shows a loading indicator while the request is processing.
 
-```html
-<form data-request="onFormSubmit" data-request-validate data-request-flash>
-    <div>
-        <label>Name</label>
-        <input type="text" name="name" />
-    </div>
-    <div>
-        <label>Email</label>
-        <input type="email" name="email" />
-    </div>
-    <div>
-        <label>Message</label>
-        <textarea name="message"></textarea>
-    </div>
-    <button type="submit">Send Message</button>
-</form>
-```
+## Write the Handler
 
-Here is what each attribute does:
-
-- **`data-request="onFormSubmit"`** tells the framework to call the `onFormSubmit` handler on the server when the form is submitted.
-- **`data-request-validate`** enables automatic client-side display of validation errors. When the server rejects a field, the error message appears next to that field.
-- **`data-request-flash`** enables automatic display of flash messages (like "Thank you for your message!") after a successful submission.
-
-## Step 3: Write the Handler
-
-In the PHP code section of your page, add the handler that processes the form. This function runs on the server when the form is submitted.
+1. Switch to the **Code** tab in the Team Profile page editor.
+2. Enter the following PHP code:
 
 ```php
-function onFormSubmit()
+function onSendMessage()
 {
-    $rules = [
-        'name' => 'required',
+    $data = Request::validate([
         'email' => 'required|email',
-        'message' => 'required'
-    ];
+        'message' => 'required',
+    ]);
 
-    $validation = Validator::make(input(), $rules);
+    $member = $this->section->getRecord();
 
-    if ($validation->fails()) {
-        throw new ValidationException($validation);
-    }
-
-    // Process the form (e.g., send an email)
-    Mail::send('mail.contact', input(), function($message) {
-        $message->to('admin@example.com');
+    Mail::raw($data['message'], function($msg) use ($data, $member) {
+        $msg->to($member->email, $member->title);
+        $msg->replyTo($data['email']);
+        $msg->subject('Message from your profile page');
     });
 
-    Flash::success('Thank you for your message!');
+    Flash::success('Your message has been sent to ' . $member->title . '!');
 }
 ```
 
-Let's break this down:
+3. Click **Save**.
 
-1. **Define validation rules.** Each field gets one or more rules. The `email` field, for instance, must be present (`required`) and must look like a valid email address (`email`).
-2. **Run the validator.** The `input()` helper grabs all the data the visitor submitted. `Validator::make()` checks it against the rules.
-3. **Throw on failure.** If validation fails, throwing a `ValidationException` sends the error messages back to the browser. The extras framework displays them next to the relevant fields automatically.
-4. **Process the data.** If everything passes, you can do whatever you need — send an email, save to the database, or both.
-5. **Show a success message.** `Flash::success()` sets a flash message that the framework displays to the visitor.
+### How This Works
 
-::: warning
-Always validate form input on the server side. Client-side validation (like the HTML `required` attribute) can be bypassed by anyone. Server-side validation with `Validator` ensures that no invalid or malicious data gets through, regardless of what happens in the browser.
-:::
+1. **`Request::validate()`** checks that the email is present and valid, and the message is not empty. If validation fails, the framework automatically sends the errors back to the browser. The `data-request-validate` attribute displays them next to the form fields.
 
-## How Validation Errors Are Displayed
+2. **`$this->section->getRecord()`** retrieves the current team member from the Section component. This gives us access to their name and email address.
 
-When you include `data-request-validate` on your form and load the `{% framework extras %}`, validation errors are displayed automatically. If the visitor submits the form without filling in the "Name" field, for example, an error message like "The name field is required" appears near that field.
+3. **`Mail::raw()`** sends the visitor's message as a plain-text email. The `replyTo` is set to the visitor's email so the team member can reply directly.
 
-You do not need to write any extra HTML or JavaScript for this to work. The extras framework handles the error placement and styling for you.
+4. **`Flash::success()`** sets a success message. Because the form has `data-request-flash`, the framework displays it automatically as a notification at the top of the page.
+
+## Configure the Mail Logger
+
+Before testing, let's make sure emails are captured safely. Instead of sending real emails, we will use the **log** mail driver, which writes emails to the event log.
+
+1. Navigate to **Settings → Mail Configuration** in the backend.
+2. Set the **Send Mode** to **Log File**.
+3. Click **Save**.
+
+Now all emails are written to the log instead of being sent. This is perfect for development.
+
+## Try It Out
+
+1. Preview your site and navigate to a team member's profile page (e.g., `/team/ada-lovelace`).
+2. Scroll down to the contact form.
+3. Try submitting the form with both fields empty. You should see validation error messages appear.
+4. Fill in a valid email and a message, then click **Send Message**.
+5. A green success notification should appear at the top of the page: "Your message has been sent to Ada Lovelace!"
+6. Go to **Settings → Event Log** in the backend. You should see the email logged there with the message content.
 
 ::: tip
-The extras framework provides sensible default styling for validation errors and flash messages. If your theme includes its own CSS, the error messages will blend in naturally. You can customize the appearance by styling the `.oc-flash-message` and field error classes in your theme's stylesheet.
+If you want to test with real emails later, change the send mode to **SMTP**, **Mailgun**, or another provider in Mail Configuration. The code stays the same. Only the mail driver changes.
 :::
 
-## How Flash Messages Are Displayed
+## Next Steps
 
-When the handler calls `Flash::success(...)` and the form has the `data-request-flash` attribute, the message appears automatically at the top of the page (or wherever your layout's `{% flash %}` block is placed). This gives the visitor clear feedback that their form was submitted successfully.
+The form works and shows a flash message on success. But flash messages disappear after a few seconds. What if you want a permanent confirmation that stays on the page? Continue to [Updating the Page](./flash-messages-and-loaders.md) to learn how to replace parts of the page with new content after a request.
 
-For more details on flash messages and how to customize their appearance, see [Flash Messages & Loaders](./flash-messages-and-loaders.md).
-
-## Going Further
-
-This example covers a basic contact form, but the same pattern works for any kind of form — newsletter signups, surveys, booking requests, and more. You can add as many fields and validation rules as you need.
-
-For the full list of available validation rules and advanced handler techniques, see the [AJAX Handlers](../../../4.x/cms/ajax/handlers.md) and [Validation](../../../4.x/cms/features/validation.md) pages in the developer documentation.
+For the complete AJAX form reference, see [AJAX Handlers](../../../4.x/cms/ajax/handlers.md) and [Validation](../../../4.x/cms/features/validation.md) in the developer documentation.

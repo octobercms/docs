@@ -17,9 +17,9 @@ Open **Terminal** from Applications → Utilities, or search for "Terminal" in S
 
 You have a few options:
 
-- **Laragon Terminal** — If you use [Laragon](https://laragon.org/), it includes a built-in terminal that is preconfigured with PHP and Composer. Click the **Terminal** button in the Laragon window.
-- **Windows Terminal** — Search for "Terminal" in the Start menu. This is the modern terminal app included with Windows 10 and later.
-- **WSL (Ubuntu)** — For a Linux-like experience on Windows, install [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install). This gives you a full Ubuntu terminal with native support for PHP, Composer, and DDEV.
+- **Laragon Terminal**: If you use [Laragon](https://laragon.org/), it includes a built-in terminal that is preconfigured with PHP and Composer. Click the **Terminal** button in the Laragon window.
+- **Windows Terminal**: Search for "Terminal" in the Start menu. This is the modern terminal app included with Windows 10 and later.
+- **WSL (Ubuntu)**: For a Linux-like experience on Windows, install [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install). This gives you a full Ubuntu terminal with native support for PHP, Composer, and DDEV.
 
 ### Linux
 
@@ -27,7 +27,7 @@ Open your distribution's terminal emulator, usually found in the system menu or 
 
 ## Running a Command
 
-A command is a piece of text you type and then press **Enter** to execute. Try this one — it prints your username:
+A command is a piece of text you type and then press **Enter** to execute. Try this one. It prints your username:
 
 ```bash
 whoami

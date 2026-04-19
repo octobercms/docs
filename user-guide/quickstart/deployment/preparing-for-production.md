@@ -1,60 +1,61 @@
 ---
-subtitle: "Configure your site's settings and environment for a secure, optimized production deployment."
+subtitle: "Understand your project structure and configure your site for a live environment"
 ---
-
 # Preparing for Production
 
-Your site looks great and works well on your local machine — now it is time to get it ready for the real world. Before you deploy to a live server, there are several important settings to review and configure. Taking a few minutes to go through this checklist can prevent security issues, broken features, and poor performance once your site is public.
+Your site works locally. Now let's get it ready for the real world. Before deploying, it helps to understand which parts of your project actually matter and what settings to change for production.
 
-Most of these settings live in your `.env` file, a configuration file in the root of your October CMS project. This file is where you define environment-specific values like database credentials, debug settings, and your site's URL.
+## Know Your Project
 
-## Disable Debug Mode
+An October CMS project contains many directories, but your site really lives in just three:
 
-Debug mode is incredibly helpful during development — it shows detailed error messages, stack traces, and environment information when something goes wrong. But in production, that same information becomes a security risk. Detailed error pages can expose your database credentials, file paths, server configuration, and other sensitive data to anyone who visits your site.
+- **`app/`**: your application code, custom classes, and app-level blueprints
+- **`plugins/`**: installed plugins and any custom plugins you build
+- **`themes/`**: your theme files (layouts, pages, partials, blueprints, assets)
 
-In your `.env` file, set:
+Everything you have built in this tutorial (the theme, the blueprints, the pages) lives in `themes/`. If you installed any plugins, they are in `plugins/`. These three directories are what make your site yours.
+
+The other directories (`modules/`, `vendor/`) are framework code provided by Composer. They are excluded from version control by default because they can be rebuilt with `composer install` at any time.
+
+## Configure the Environment
+
+Most production settings live in your `.env` file in the project root. Here are the important ones to change:
+
+### Disable Debug Mode
+
+Debug mode shows detailed error messages during development. In production, those messages expose sensitive information.
 
 ```
 APP_DEBUG=false
 ```
 
-::: warning
-Never leave debug mode enabled on a production site. When `APP_DEBUG=true`, error pages display sensitive information about your server, database, and application internals. This is one of the most common and most dangerous oversights when deploying a website.
-:::
+With debug mode off, visitors see a clean error page while detailed errors go to your log files.
 
-With debug mode disabled, visitors see a clean, generic error page if something goes wrong, while the detailed errors are still logged to your server's log files where only you can see them.
-
-## Set Your Application URL
-
-The `APP_URL` setting tells October CMS what your live domain is. This is used for generating correct links, asset URLs, and other references throughout the site.
+### Set Your Application URL
 
 ```
 APP_URL=https://www.yoursite.com
 ```
 
-Make sure this matches your actual domain, including the protocol (`https://`). If you are using HTTPS (and you should be), set it accordingly.
+Make sure this matches your actual domain with `https://`.
 
-## Verify Your Application Key
+### Verify Your Application Key
 
-The `APP_KEY` is a random string used for encryption — securing session data, cookies, and other sensitive values. This key is generated automatically during installation, but it is worth confirming that it is set in your `.env` file.
+The `APP_KEY` is used for encryption. It is generated during installation, but confirm it exists:
 
 ```
 APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-If this value is missing or empty, you can generate one by running:
+If it is missing, generate one:
 
 ```bash
 php artisan key:generate
 ```
 
-::: aside
-Never share your `APP_KEY` or commit it to a public repository. If it is compromised, anyone could decrypt your application's encrypted data.
-:::
+### Configure Your Database
 
-## Configure Your Database
-
-Update your `.env` file with the credentials for your production database. These values will be different from your local development database.
+Update with your production database credentials:
 
 ```
 DB_CONNECTION=mysql
@@ -65,51 +66,54 @@ DB_USERNAME=your_database_user
 DB_PASSWORD=your_database_password
 ```
 
-Double-check that the database exists on your production server and that the user has the necessary permissions before deploying.
+## Configure Nginx
 
-## CSRF Protection
+If your server uses Nginx, October CMS includes a ready-made configuration file at `nginx.conf` in the project root. Copy or reference this file in your Nginx server block to ensure URL rewriting and other settings work correctly.
 
-October CMS enables CSRF (Cross-Site Request Forgery) protection by default. This prevents malicious websites from submitting forms on behalf of your visitors. You do not need to change anything — just be aware that it is active and protecting your forms automatically.
+::: tip
+Apache users do not need to worry about this. October CMS includes an `.htaccess` file that handles URL rewriting automatically.
+:::
 
 ## File Permissions
 
-Your web server needs to be able to write to certain directories. Make sure the following directories are writable by the web server process:
+Your web server needs write access to these directories:
 
 - `storage/` (and all subdirectories)
 - `bootstrap/cache/`
 
-On most Linux servers, you can set this with:
+On most Linux servers:
 
 ```bash
 chmod -R 755 storage bootstrap/cache
 chown -R www-data:www-data storage bootstrap/cache
 ```
 
-The exact user (`www-data`) depends on your server configuration. Check with your hosting provider if you are unsure.
+The exact user (`www-data`) depends on your server setup.
 
 ## Optimize for Performance
 
-Once your settings are configured, you can cache your configuration and routes for faster performance. Run the following command on your server:
+Once your settings are configured, cache them for faster performance:
 
 ```bash
 php artisan october:optimize
 ```
 
-This creates cached versions of your configuration files and route definitions, so the application does not need to parse them on every request. The performance improvement is noticeable, especially on shared hosting.
+## Pre-Deployment Checklist
 
 ::: tip
-Use a pre-deployment checklist to make sure nothing is missed. Here is a quick summary of everything covered on this page:
+Quick summary of everything on this page:
 
-- [ ] `APP_DEBUG` is set to `false`
-- [ ] `APP_URL` is set to your live domain
-- [ ] `APP_KEY` is present and not empty
-- [ ] Database credentials are set for production
+- [ ] `APP_DEBUG` set to `false`
+- [ ] `APP_URL` set to your live domain
+- [ ] `APP_KEY` is present
+- [ ] Database credentials set for production
+- [ ] Nginx configured (if applicable)
 - [ ] `storage/` and `bootstrap/cache/` are writable
 - [ ] `php artisan october:optimize` has been run
 :::
 
 ## Next Steps
 
-With your configuration in place, you are ready to deploy. Head to [Deploying Your Site](./deploying-your-site.md) for step-by-step instructions on getting your project onto a live server.
+With your configuration in place, head to [Deploying Your Site](./deploying-your-site.md) for instructions on getting your project onto a live server.
 
-For the full reference on all available configuration options, see the [Configuration](../../../4.x/setup/configuration.md) and [Deployment](../../../4.x/setup/deployment.md) pages in the developer documentation.
+For the full reference on configuration options, see [Configuration](../../../4.x/setup/configuration.md) and [Deployment](../../../4.x/setup/deployment.md) in the developer documentation.

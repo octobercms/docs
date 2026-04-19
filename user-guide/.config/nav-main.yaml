@@ -99,17 +99,7 @@
         - content-management/tailor-introduction
         - content-management/creating-blueprints
         - content-management/managing-entries
-        - content-management/global-content
-        - content-management/media-manager
--
-    title: Themes & Pages
-    collapsable: false
-    children:
-        - themes-and-pages/understanding-themes
-        - themes-and-pages/pages-and-urls
-        - themes-and-pages/layouts-and-partials
-        - themes-and-pages/adding-dynamic-content
-        - themes-and-pages/using-components
+        - content-management/building-the-frontend
 -
     title: Interactive Features
     collapsable: false
@@ -123,3 +113,4 @@
     children:
         - deployment/preparing-for-production
         - deployment/deploying-your-site
+        - deployment/what-next

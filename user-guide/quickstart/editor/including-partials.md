@@ -3,7 +3,7 @@ subtitle: "Extract reusable template fragments into partials"
 ---
 # Including Partials
 
-A **partial** is a reusable template fragment — a piece of HTML and Twig that you write once and include wherever you need it. Partials are ideal for things that appear in multiple places: navigation menus, footers, card layouts, sidebars, call-to-action banners.
+A **partial** is a reusable template fragment, a piece of HTML and Twig that you write once and include wherever you need it. Partials are ideal for things that appear in multiple places: navigation menus, footers, card layouts, sidebars, call-to-action banners.
 
 The difference from content files: content files hold **editable text** (Markdown or plain HTML), while partials hold **template markup** with full Twig support.
 
@@ -37,7 +37,7 @@ Let's extract the footer from our layout into a partial so it can be reused.
 
 3. Click **Save** and preview the site.
 
-The page looks exactly the same — but now the footer markup lives in its own file. If you ever need to change the footer, you update it in one place and every layout that includes it gets the change.
+The page looks exactly the same, but now the footer markup lives in its own file. If you ever need to change the footer, you update it in one place and every layout that includes it gets the change.
 
 ## Passing Variables to Partials
 
@@ -59,7 +59,7 @@ This is especially useful for partials like cards, hero sections, or any compone
 
 ## Partials as UI Components
 
-Partials can do more than just include a chunk of HTML — they can act as full UI components that accept content inside them. Let's build a reusable styled button.
+Partials can do more than just include a chunk of HTML. They can act as full UI components that accept content inside them. Let's build a reusable styled button.
 
 ### Create the Button Partial
 
@@ -100,11 +100,11 @@ This partial uses `{% props %}` to declare two parameters: `href` and `style`. A
 
 3. Click **Save** and preview the page.
 
-You should see two styled buttons — a blue primary button and a grey secondary button. The `body` keyword lets you pass the button label as content inside the partial tag, rather than as a variable.
+You should see two styled buttons, a blue primary button and a grey secondary button. The `body` keyword lets you pass the button label as content inside the partial tag, rather than as a variable.
 
 ### Why This Matters
 
-You now have a reusable button component. Need a button anywhere on your site? Use `{% partial 'btn' %}` with the right props. Change the styling in one place and every button updates. This pattern works for any UI element — cards, alerts, badges, modals.
+You now have a reusable button component. Need a button anywhere on your site? Use `{% partial 'btn' %}` with the right props. Change the styling in one place and every button updates. This pattern works for any UI element: cards, alerts, badges, modals.
 
 ::: aside
 For the full reference on partials, including the `{% props %}` tag and `attributes` API, see [Partials](../../../4.x/cms/themes/partials.md) in the developer documentation.

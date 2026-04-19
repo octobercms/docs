@@ -28,9 +28,9 @@ VS Code includes an integrated terminal (open it with `` Ctrl+` ``), so you can 
 
 If VS Code is not your style, these editors also work well:
 
-- **[Sublime Text](https://www.sublimetext.com/)** — Lightweight and fast. Available on all platforms.
-- **[PhpStorm](https://www.jetbrains.com/phpstorm/)** — A full-featured PHP IDE with deep Laravel support. Paid, but powerful.
-- **[Cursor](https://cursor.sh/)** — An AI-enhanced code editor built on VS Code.
+- **[Sublime Text](https://www.sublimetext.com/)**: Lightweight and fast. Available on all platforms.
+- **[PhpStorm](https://www.jetbrains.com/phpstorm/)**: A full-featured PHP IDE with deep Laravel support. Paid, but powerful.
+- **[Cursor](https://cursor.sh/)**: An AI-enhanced code editor built on VS Code.
 
 ## Next Steps
 

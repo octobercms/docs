@@ -3,35 +3,35 @@ subtitle: "Create an administrator, assign a role, and check the event log"
 ---
 # Managing Administrators
 
-Every person who logs in to the backend is an administrator. Right now you are the only one — let's create a second account, assign it a role, and verify that the system sent a welcome email.
+Every person who logs in to the backend is an administrator. Right now you are the only one. Let's create a second account, assign it a role, and verify that the system sent a welcome email.
 
 ## Create a New Administrator
 
 1. Open the **Settings** area from the main menu.
 2. Click **Administrators** in the left-hand sidebar.
 3. Click the **Add** button.
-4. Fill in the details — use any name and email you like. For example:
-   - **First Name** — `Test`
-   - **Last Name** — `Editor`
-   - **Email** — `editor@example.com`
-   - **Login** — `editor`
-   - **Password** — pick something simple for now (this is just a local test).
+4. Fill in the details, using any name and email you like. For example:
+   - **First Name**: `Test`
+   - **Last Name**: `Editor`
+   - **Email**: `editor@example.com`
+   - **Login**: `editor`
+   - **Password**: pick something simple for now (this is just a local test).
 5. Click **Save**.
 
 Your new administrator now appears in the list.
 
 ## Assign a Role
 
-By default the new account has no restrictions — let's give it a specific role so it only has access to certain areas.
+By default the new account has no restrictions. Let's give it a specific role so it only has access to certain areas.
 
 1. Click on **Test Editor** in the administrator list to open their profile.
-2. Find the **Role** dropdown and select **Publisher** (or whichever role fits — you can browse the available roles to see what permissions each one includes).
+2. Find the **Role** dropdown and select **Publisher** (or whichever role fits; you can browse the available roles to see what permissions each one includes).
 3. Click **Save**.
 
 That administrator is now limited to the permissions defined by their role. They won't see settings or areas they don't have access to.
 
 ::: tip
-You can manage roles under **Settings → Administrators → Manage Roles**. Roles are just named groups of permissions — create as many as your team needs.
+You can manage roles under **Settings → Administrators → Manage Roles**. Roles are just named groups of permissions, so create as many as your team needs.
 :::
 
 ## Check the Event Log
@@ -48,11 +48,11 @@ This is where you will check for errors, debug issues, and verify that things li
 Now let's see where you would configure a real mail provider for production.
 
 1. Navigate to **Settings → Mail → Mail Configuration**.
-2. You will see the current **Send Method** — it is most likely set to **Log**, which writes emails to the log file instead of sending them.
+2. You will see the current **Send Method**. It is most likely set to **Log**, which writes emails to the log file instead of sending them.
 3. In production, you would change this to **SMTP**, **Mailgun**, **Postmark**, or another provider and fill in your credentials.
 4. The **Send Test Message** button lets you verify your settings before going live.
 
-You don't need to change anything right now — just know where this setting lives for when you are ready to deploy.
+You don't need to change anything right now. Just know where this setting lives for when you are ready to deploy.
 
 ## Next Steps
 

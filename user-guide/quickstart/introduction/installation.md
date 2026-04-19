@@ -7,11 +7,11 @@ October CMS can be installed in just a few minutes. Choose the method that suits
 
 ## Wizard Installer
 
-The wizard installer is the simplest way to get started — no command line needed.
+The wizard installer is the simplest way to get started, no command line needed.
 
 1. [Download the installer archive](https://octobercms.com/download) from the October CMS website.
 1. Extract the archive to a directory on your web server.
-1. Open the directory in your browser (e.g. `http://localhost/mysite`) — the setup wizard will launch automatically.
+1. Open the directory in your browser (e.g. `http://localhost/mysite`). The setup wizard will launch automatically.
 1. Follow the on-screen steps to configure your database and create an administrator account.
 
 When the wizard finishes, your site is ready. Visit the URL to see the frontend, or add `/admin` to log into the admin panel.
@@ -72,7 +72,7 @@ Regardless of which method you used, the backend is where you manage your websit
 http://your-site-url/admin
 ```
 
-Enter your administrator credentials to access the dashboard — your site's control center.
+Enter your administrator credentials to access the dashboard, your site's control center.
 
 ## Next Steps
 
