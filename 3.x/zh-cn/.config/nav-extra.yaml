@@ -1,0 +1,26 @@
+"/zh-cn/":
+-
+    title: 入门
+    icon: "/images/october-leaf.svg"
+    prefix: "/3.x/zh-cn/"
+    link: "/3.x/zh-cn/setup/installation.html"
+-
+    title: CMS 指南
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/zh-cn/cms/"
+    link: "/3.x/zh-cn/cms/themes/themes.html"
+-
+    title: 标记指南
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/zh-cn/markup/"
+    link: "/3.x/zh-cn/markup/templating.html"
+-
+    title: 扩展 October CMS
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/zh-cn/extend/"
+    link: "/3.x/zh-cn/extend/system/plugins.html"
+-
+    title: API 手册
+    icon: "/images/markup-guide.svg"
+    prefix: "/3.x/zh-cn/element/"
+    link: "/3.x/zh-cn/element/form-fields.html"
