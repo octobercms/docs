@@ -1,41 +1,46 @@
 ---
-subtitle: "Welcome to October CMS: learn what it is and what makes it special"
+subtitle: "A content management framework built on Laravel"
 ---
 # Welcome
 
-You have found October CMS, a content management system for building websites that are as simple or as powerful as you need them to be. Whether you are here to launch a personal blog, a business site, or something entirely custom, you are in the right place.
+Welcome to October CMS, a content management framework for building websites that are as simple or as powerful as you need them to be. Whether you are here to launch a personal blog, a business site, or something entirely custom, you are in the right place.
 
 ## What is October CMS?
 
-October CMS is a web application. It runs on a web server, you interact with it through a browser, and it produces the websites your visitors see. Think of it as the engine behind your site. It handles content, templates, media, and everything in between.
+Think of October CMS as a content management framework. It takes care of the things every website needs, like content management, user accounts, file storage, and backend administration, so you can focus on what makes your site yours. You manage it through a browser-based backend panel or directly from your code editor.
 
-Technically, October CMS is built on PHP and the [Laravel](https://laravel.com/) framework. You do not need to know PHP to use it, but if you do, you will feel right at home.
+Under the hood, it extends the [Laravel framework](https://laravel.com/) with its own library that simplifies common tasks so you never have to reinvent the wheel. Everything Laravel offers is still there, plus a layer on top that makes it even easier to use.
 
-## What Makes It Special?
+## What Can It Do?
 
-- **Tailor** lets you define custom content types (blog posts, team members, product listings, events) using simple YAML files. No plugins, no code. Describe what your content looks like and October CMS builds the backend forms and database for you.
-- **A real theming system** gives you full control over your HTML, CSS, and JavaScript. No mystery markup or locked-down templates. Your site looks exactly the way you design it.
-- **A plugin ecosystem** lets you add features when you need them (contact forms, SEO tools, e-commerce) without bloating your project from day one.
-- **Built on Laravel** means you have a modern, well-documented foundation underneath. If you ever need to go deeper, the full power of Laravel is there.
+October CMS is a one-stop shop. Everything you need to build and manage a professional website is included out of the box:
+
+- **Custom content types.** Use blueprints to define blog posts, team members, product listings, or anything else in simple YAML files. October CMS generates the backend forms, database, and admin navigation for you.
+- **Ready-made admin interfaces.** Lists, forms, dashboards, import/export, and relation management are all built in. Define them in configuration and skip the boilerplate.
+- **A built-in AJAX framework.** Build interactive pages using HTML attributes alone, no JavaScript required. Add a single meta tag and your site gets SPA-like page transitions out of the box.
+- **Full control over your markup.** Your HTML, CSS, and JavaScript are yours. No mystery markup or locked-down templates. Your site looks exactly the way you design it.
+- **Multisite from the ground up.** Run multiple sites and languages from a single installation with per-site themes, plugins, and permissions.
+- **An escape hatch when you need it.** Blueprints and custom plugins share the same architecture, so when you need more control, you can switch to the familiar MVC pattern without starting over.
+- **A plugin ecosystem** for when you need something extra (contact forms, SEO tools, e-commerce) without bloating your project from day one.
 
 ## What Does "October CMS" Stand For?
 
-October CMS was first released in October 2014. The name captures the spirit of the project: a fresh start, like the beginning of a new season.
+The name comes from the month the project launched, capturing the spirit of a fresh start and a new season. The guiding philosophy aligns with a well-known principle from Albert Einstein:
 
-## What You Will Learn
+> _"Everything should be made as simple as possible, but not simpler."_
 
-The next few pages will get you set up and building. Here is what we will cover:
+Websites are simple by nature, and building them should be too. You own your code, your data, and your infrastructure.
 
-- **The terminal**: the command-line application built into your operating system. If you already know your way around a terminal, feel free to skip ahead.
-- **A text editor**: your tool for editing templates and configuration files. We recommend VS Code with the October Code extension.
-- **Installing October CMS**: using the Wizard Installer, DDEV, or Composer.
+## Getting Started
+
+The next few pages will get you set up and building:
+
+- **[Terminal Basics](./terminal.md)**: a quick introduction to the command line. Skip ahead if you are already comfortable.
+- **[Text Editor](./text-editor.md)**: setting up VS Code with the October Code extension.
+- **[Installation](./installation.md)**: getting October CMS running using the Wizard Installer, DDEV, or Composer.
 
 After that, we will tour the backend panel, create your first page, and start building real features.
 
 ::: tip
-If you get stuck at any point, the [October CMS community](https://talk.octobercms.com) and [Discord server](https://discord.gg/jNaFhfz6FX) are great places to ask for help. We all want your first experience with October CMS to be a good one.
+The [October CMS community](https://talk.octobercms.com) and [Discord server](https://discord.gg/jNaFhfz6FX) are great places to ask questions and connect with other developers.
 :::
-
-## Next Steps
-
-Continue to [Terminal Basics](./terminal.md) to get comfortable with the command line, or skip ahead to [Installation](./installation.md) if you are ready to dive in.
