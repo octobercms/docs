@@ -38,6 +38,8 @@ The following inspector types are available:
 [Object](./inspector/type-object.md)
 [Object List](./inspector/type-objectlist.md)
 [Set](./inspector/type-set.md)
+[Table](./inspector/type-table.md)
+[Media Finder](./inspector/type-mediafinder.md)
 
 </div>
 
