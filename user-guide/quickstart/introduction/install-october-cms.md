@@ -1,7 +1,7 @@
 ---
 subtitle: "Install October CMS and log in for the first time"
 ---
-# Installation
+# Install October CMS
 
 October CMS can be installed in just a few minutes. Choose the method that suits your setup.
 

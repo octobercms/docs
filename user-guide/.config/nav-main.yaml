@@ -10,7 +10,8 @@
         - blog-blueprint
         - listing-page
         - detail-page
-        - categories-and-tags
+        - categories
+        - tags
         - rss-feed
 
 #
@@ -22,11 +23,21 @@
     collapsable: false
     children:
         - introduction
-        - forum-blueprint
-        - channel-page
-        - thread-page
-        - moderation
-        - search-and-filtering
+-
+    title: "Part 1: User Authentication"
+    collapsable: false
+    children:
+        - installing-the-user-plugin
+        - login-and-registration
+        - password-reset
+-
+    title: "Part 2: The Forum"
+    collapsable: false
+    children:
+        - installing-the-forum-plugin
+        - forum-pages
+        - topic-page
+        - member-profile
 
 #
 # Tutorial Nav: Creating a Helpdesk
@@ -37,11 +48,11 @@
     collapsable: false
     children:
         - introduction
-        - ticket-blueprint
-        - ticket-form
-        - managing-tickets
-        - status-workflow
-        - email-notifications
+        - installing-the-plugin
+        - ticket-list
+        - submit-ticket
+        - ticket-page
+        - editing-messages
 
 #
 # Tutorial Nav: Creating a Mailing List
@@ -52,11 +63,11 @@
     collapsable: false
     children:
         - introduction
-        - subscriber-blueprint
+        - installing-the-plugin
         - signup-form
-        - managing-subscribers
         - sending-campaigns
-        - unsubscribe-handling
+        - customizing-the-template
+        - dynamic-campaigns
 
 #
 # Quick Start Guide
@@ -72,8 +83,8 @@
     collapsable: false
     children:
         - introduction/terminal
-        - introduction/editor
-        - introduction/installation
+        - introduction/text-editor
+        - introduction/install-october-cms
 -
     title: The Backend Panel
     collapsable: false

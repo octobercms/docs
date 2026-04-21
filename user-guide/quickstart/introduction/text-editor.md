@@ -11,14 +11,14 @@ You will need a text editor to work with October CMS templates, blueprints, and 
 
 ### October Code Extension
 
-Install the [October Code](https://marketplace.visualstudio.com/items?itemName=ArtisticPhoenix.october-code) extension to get:
+Install the [October Code](https://marketplace.visualstudio.com/items?itemName=SergeyKasyanov.october-code) extension to get:
 
 - Twig syntax highlighting for October CMS templates
 - Autocompletion for Twig tags, filters, and functions
 - Blueprint YAML support
 - Quick navigation between pages, layouts, and partials
 
-Search for **"October Code"** in the VS Code extensions panel, or install it from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ArtisticPhoenix.october-code).
+Search for **"October Code"** in the VS Code extensions panel, or install it from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=SergeyKasyanov.october-code).
 
 ### Built-in Terminal
 
@@ -34,4 +34,4 @@ If VS Code is not your style, these editors also work well:
 
 ## Next Steps
 
-With a text editor ready, it is time to install October CMS. Continue to [Installation](./installation.md).
+With a text editor ready, it is time to install October CMS. Continue to [Install October CMS](./install-october-cms.md).

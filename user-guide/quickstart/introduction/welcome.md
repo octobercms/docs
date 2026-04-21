@@ -18,7 +18,7 @@ October CMS is a one-stop shop. Everything you need to build and manage a profes
 - **Custom content types.** Use blueprints to define blog posts, team members, product listings, or anything else in simple YAML files. October CMS generates the backend forms, database, and admin navigation for you.
 - **Ready-made admin interfaces.** Lists, forms, dashboards, import/export, and relation management are all built in. Define them in configuration and skip the boilerplate.
 - **A built-in AJAX framework.** Build interactive pages using HTML attributes alone, no JavaScript required. Add a single meta tag and your site gets SPA-like page transitions out of the box.
-- **Full control over your markup.** Your HTML, CSS, and JavaScript are yours. No mystery markup or locked-down templates. Your site looks exactly the way you design it.
+- **Total frontend freedom.** October CMS ships with vanilla JS and CSS, but never forces that choice on you. Use Tailwind, Bootstrap, React, Vue, Astro, or go fully headless. No mystery markup, no locked-down templates. It is your canvas.
 - **Multisite from the ground up.** Run multiple sites and languages from a single installation with per-site themes, plugins, and permissions.
 - **An escape hatch when you need it.** Blueprints and custom plugins share the same architecture, so when you need more control, you can switch to the familiar MVC pattern without starting over.
 - **A plugin ecosystem** for when you need something extra (contact forms, SEO tools, e-commerce) without bloating your project from day one.
@@ -37,7 +37,7 @@ The next few pages will get you set up and building:
 
 - **[Terminal Basics](./terminal.md)**: a quick introduction to the command line. Skip ahead if you are already comfortable.
 - **[Text Editor](./text-editor.md)**: setting up VS Code with the October Code extension.
-- **[Installation](./installation.md)**: getting October CMS running using the Wizard Installer, DDEV, or Composer.
+- **[Install October CMS](./install-october-cms.md)**: getting October CMS running using the Wizard Installer, DDEV, or Composer.
 
 After that, we will tour the backend panel, create your first page, and start building real features.
 
