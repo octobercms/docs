@@ -99,6 +99,7 @@
         - inspector/type-set
         - inspector/type-table
         - inspector/type-mediafinder
+        - inspector/type-stringlistautocomplete
 
 #
 # Backend Nav
@@ -254,6 +255,7 @@
         - tag/cache
         - tag/verbatim
         - tag/macro
+        - tag/props
         - tag/for
         - tag/if
 -
