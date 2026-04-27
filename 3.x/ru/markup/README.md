@@ -1,0 +1,3 @@
+# Разметка
+
+<Redirect to="templating" />

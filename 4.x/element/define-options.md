@@ -54,10 +54,11 @@ The following presets are available:
 
 Preset | Description
 ------ | -----------
-**icons** | Lists available icon names (eg: `icon-calendar`)
-**phosphorIcons** | Lists available icon names (eg: `ph ph-calendar`)
+**icons** | Lists available icon names (eg: `oc-icon-calendar`)
+**icons@phosphor** | Lists available Phosphor icon names (eg: `ph ph-calendar`)
 **locales** | Lists available locales (eg: `en-au`)
 **flags** | Lists locales with their icons as flags (eg: `[en-au, flag-au]`)
+**flags@short** | Lists locales with short codes and flag icons
 **timezones** | Lists available timezones (eg: `Australia/Sydney`)
 
 ## Option Methods
