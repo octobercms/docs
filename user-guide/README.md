@@ -1,3 +1,3 @@
 # October CMS User Guide
 
-<Redirect to="quickstart/getting-started/requirements" />
+<Redirect to="quickstart/introduction/welcome" />
