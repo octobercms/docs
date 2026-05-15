@@ -30,7 +30,9 @@ Property | Description
 **deleting** | allow records to be deleted from the data table. Default: `true`.
 **toolbar** | show the toolbar above the data table. Default: `true`.
 **searching** | allow records to be searched via a search box. Default: `false`.
-**sorting** | allow rows to be manually reordered by dragging. Default: `false`.
+**sorting** | allow columns to be sorted by clicking the column header. Default: `false`.
+**reorderRows** | allow rows to be manually reordered by dragging the row handle. Default: `false`.
+**reorderColumns** | allow columns to be manually reordered by dragging the column header. Default: `false`.
 **height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the content. Default: `false`.
 **columns** | an array representing the column configuration of the data table. See the *Column Configuration* section below.
 
