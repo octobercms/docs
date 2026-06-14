@@ -19,7 +19,7 @@ public function defineProperties()
 }
 ```
 
-The generated output is a string value corresponding to the selected option, for example:
+The generated output is a key-value object, for example:
 
 ```json
 "options": {"option1": "Option 1", "option2": "Option 2"}
@@ -32,6 +32,10 @@ Property | Description
 **title** | title for the property.
 **description** | a brief description of the property, optional.
 **default** | specifies a default an array of keys and values, optional.
+
+::: warning
+This type does not support the external parameter editor as specified by the `showExternalParam` property.
+:::
 
 ## Extra Validation
 

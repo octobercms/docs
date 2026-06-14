@@ -97,9 +97,9 @@
         - inspector/type-object
         - inspector/type-objectlist
         - inspector/type-set
-        # Types only supported by v3 Inspector
-        # - inspector/type-table
-        # - inspector/type-mediafinder
+        - inspector/type-table
+        - inspector/type-mediafinder
+        - inspector/type-stringlistautocomplete
 
 #
 # Backend Nav
@@ -255,6 +255,7 @@
         - tag/cache
         - tag/verbatim
         - tag/macro
+        - tag/props
         - tag/for
         - tag/if
 -
@@ -391,5 +392,11 @@
         - resources/updating-october
         - resources/installing-packages
         - resources/development-workflow
-        - ['https://octobercms.com/docker-dev-image', 'Development Docker Image']
         - resources/migrate-laravel-project
+-
+    title: Tools
+    collapsable: false
+    children:
+        - resources/debugbar
+        - resources/ai-boost
+        - ['https://octobercms.com/docker-dev-image', 'Development Docker Image']

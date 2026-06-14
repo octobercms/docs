@@ -1,0 +1,127 @@
+#
+# Tutorial Nav: Creating a Blog
+#
+"/blog/":
+-
+    title: Creating a Blog
+    collapsable: false
+    children:
+        - introduction
+        - blog-blueprint
+        - listing-page
+        - detail-page
+        - categories
+        - tags
+        - rss-feed
+
+#
+# Tutorial Nav: Creating a Forum
+#
+"/forum/":
+-
+    title: Creating a Forum
+    collapsable: false
+    children:
+        - introduction
+-
+    title: "Part 1: User Authentication"
+    collapsable: false
+    children:
+        - installing-the-user-plugin
+        - login-and-registration
+        - password-reset
+-
+    title: "Part 2: The Forum"
+    collapsable: false
+    children:
+        - installing-the-forum-plugin
+        - forum-pages
+        - topic-page
+        - member-profile
+
+#
+# Tutorial Nav: Creating a Helpdesk
+#
+"/helpdesk/":
+-
+    title: Creating a Helpdesk
+    collapsable: false
+    children:
+        - introduction
+        - installing-the-plugin
+        - ticket-list
+        - submit-ticket
+        - ticket-page
+        - editing-messages
+
+#
+# Tutorial Nav: Creating a Mailing List
+#
+"/mailing-list/":
+-
+    title: Creating a Mailing List
+    collapsable: false
+    children:
+        - introduction
+        - installing-the-plugin
+        - signup-form
+        - sending-campaigns
+        - customizing-the-template
+        - dynamic-campaigns
+
+#
+# Quick Start Guide
+#
+"/quickstart/":
+-
+    title: Introduction
+    collapsable: false
+    children:
+        - introduction/welcome
+-
+    title: Setting Up Your Environment
+    collapsable: false
+    children:
+        - introduction/terminal
+        - introduction/text-editor
+        - introduction/install-october-cms
+-
+    title: The Backend Panel
+    collapsable: false
+    children:
+        - backend/backend-tour
+        - backend/dashboard
+        - backend/managing-admins
+        - backend/system-updates
+-
+    title: The Editor
+    collapsable: false
+    children:
+        - editor/understanding-themes
+        - editor/creating-a-layout
+        - editor/your-first-page
+        - editor/content-files
+        - editor/including-partials
+        - editor/media-manager
+-
+    title: Content Management
+    collapsable: false
+    children:
+        - content-management/tailor-introduction
+        - content-management/creating-blueprints
+        - content-management/managing-entries
+        - content-management/building-the-frontend
+-
+    title: Interactive Features
+    collapsable: false
+    children:
+        - interactive-features/ajax-introduction
+        - interactive-features/building-forms
+        - interactive-features/flash-messages-and-loaders
+-
+    title: Going Live
+    collapsable: false
+    children:
+        - deployment/preparing-for-production
+        - deployment/deploying-your-site
+        - deployment/what-next

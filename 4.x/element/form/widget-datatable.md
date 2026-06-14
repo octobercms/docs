@@ -30,8 +30,11 @@ Property | Description
 **deleting** | allow records to be deleted from the data table. Default: `true`.
 **toolbar** | show the toolbar above the data table. Default: `true`.
 **searching** | allow records to be searched via a search box. Default: `false`.
-**sorting** | allow rows to be manually reordered by dragging. Default: `false`.
+**sorting** | allow columns to be sorted by clicking the column header. Default: `false`.
+**reorderRows** | allow rows to be manually reordered by dragging the row handle. Default: `false`.
+**reorderColumns** | allow columns to be manually reordered by dragging the column header. Default: `false`.
 **height** | the data table's height, in pixels. If set to `false`, the data table will stretch to fit the content. Default: `false`.
+**placeholder** | a title to display as a placeholder overlay when the table has no rows. When set, the table starts empty (no automatic blank row). Default: `false`.
 **columns** | an array representing the column configuration of the data table. See the *Column Configuration* section below.
 
 #### Column Configuration
@@ -67,9 +70,9 @@ Option | Description
 **title** | defines the column's title.
 **width** | defines the width of the column, in pixels. Example: `100px`.
 **readOnly** | whether this column is read-only. Default: `false`.
+**ellipsis** | truncate overflowing cell content with `...` instead of clipping silently. Requires a fixed `width` to take visible effect. Default: `false`.
 **validation** | an array specifying the validation for the content of the column's cells. See the *Column Validation* section below.
-**options** | for `dropdown` columns only - specifies the available options as an array. If omitted, options will be loaded via AJAX using the model's `getDataTableOptions` method.
-**strict** | for `dropdown` columns only - when set to `false`, allows free-text entry in addition to the dropdown options. Default: `true`.
+**options** | for `dropdown` columns only - specifies the available options as a `{key: label}` map. The grid stores the **key** in the data and shows the **label** in the cell. If omitted, options will be loaded via AJAX using the model's `getDataTableOptions` method.
 **dependsOn** | specifies the name of another column that this column depends on. When the parent column value changes, this column's value is cleared and its options are refreshed.
 **dateFormat** | for `date` columns only - the date format. Default: `YYYY-MM-DD`.
 **timeFormat** | for `time` columns only - the time format. Default: `HH:mm`.
@@ -83,8 +86,8 @@ Type | Description
 **string** | a standard text input (default).
 **checkbox** | a checkbox for boolean values.
 **numeric** | a numeric input that only accepts numbers, including decimals.
-**dropdown** | a dropdown select list. Options can be provided inline via the `options` property, or loaded dynamically via AJAX.
-**autocomplete** | a text input with autocomplete suggestions. Always allows free-text entry.
+**dropdown** | a strict dropdown select list. The full list is always shown when opened; the user must pick one of the configured options. Options can be provided inline via the `options` property, or loaded dynamically via AJAX.
+**autocomplete** | a text input with autocomplete suggestions. The list filters as the user types and free-text entry is allowed. Options can be provided inline via the `options` property, or loaded dynamically via AJAX.
 **date** | a date picker input.
 **time** | a time picker input.
 

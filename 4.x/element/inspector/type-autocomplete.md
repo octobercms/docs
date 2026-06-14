@@ -4,7 +4,7 @@ shortname: Autocomplete
 ---
 # Autocomplete Inspector Type
 
-The `autocomplete` inspector type works like the `string` editor, except it includes auto competion features. Available options can be specified statically with the `options` parameter or loaded dynamically.
+The `autocomplete` inspector type works like the `string` editor, except it includes auto completion features. Available options can be specified statically with the `options` parameter or loaded dynamically.
 
 ```php
 public function defineProperties()
@@ -19,7 +19,7 @@ public function defineProperties()
 }
 ```
 
-The generated output is an array value corresponding to the selected options, for example:
+The generated output is a string value, for example:
 
 ```json
 "condition": "start"
@@ -33,11 +33,6 @@ Property | Description
 **description** | a brief description of the property, optional.
 **default** | specifies a default string value, optional.
 **options** | array of options for dropdown properties, optional if defining a `get*PropertyName*Options` method.
-**showExternalParam** | unsupported, and should be set to `false`.
-
-::: warning
-This type does not support the external parameter editor as specified by the `showExternalParam` property.
-:::
 
 ## Dynamic Options
 

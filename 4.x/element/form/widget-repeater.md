@@ -137,6 +137,66 @@ Option | Description
 The group key is stored along with the saved data as the `_group` attribute. This can be customized with the `groupKeyFrom` option.
 :::
 
+## Translatable Repeaters in Tailor
+
+When a [Tailor blueprint](../../cms/tailor/blueprints.md) uses [multisite synchronization](../../cms/multisite/tailor.md) (`multisite: sync`), repeater fields support three modes via the `translatable` property.
+
+Value | Behavior
+----- | --------
+`true` (default) | Each site has fully independent repeater items
+`false` | All sites share the exact same repeater items (shared rows)
+`sync` | Items are replicated per site with structure synced — adding, removing, or reordering items on one site propagates to all others
+
+The `sync` mode keeps the repeater **structure** (items, order) consistent across all sites while allowing individual sub-fields to have different values per site. This is useful for content like FAQs, file attachment lists, or specification tables where the list of items stays the same across languages but some values are translated.
+
+### Blueprint Configuration
+
+Set `translatable: sync` on the repeater field and mark individual sub-fields with `translatable: true` to allow per-site values.
+
+```yaml
+handle: Blog\Post
+type: stream
+multisite: sync
+
+fields:
+    attachments:
+        type: repeater
+        translatable: sync
+        form:
+            fields:
+                file_title:
+                    type: text
+                    translatable: true    # Different value per site
+                file_desc:
+                    type: textarea        # Shared across all sites
+                file:
+                    type: fileupload
+                    mode: file
+                    maxFiles: 1           # Shared file across all sites
+                localized_image:
+                    type: fileupload
+                    mode: image
+                    maxFiles: 1
+                    translatable: true    # Different file per site
+```
+
+In this example:
+
+- **file_title** has `translatable: true`, so each site can enter its own translated title. A globe icon indicates the field is translatable.
+- **file_desc** does not set `translatable`, so its value is shared and propagated to all sites when saving.
+- **file** is a file upload without `translatable`, so the uploaded file is shared across all sites automatically.
+- **localized_image** is a file upload with `translatable: true`, so each site can upload a different image.
+
+### How It Works
+
+When you save a record, structural changes (adding, removing, or reordering items) propagate to all synchronized sites automatically. Non-translatable sub-field values are copied, while translatable sub-field values are left untouched on each site.
+
+Translatable sub-fields display a globe icon in the backend form, consistent with how translatable fields work on the parent entry.
+
+::: tip
+The `translatable` property on sub-fields is only meaningful when the repeater uses `translatable: sync`. Without it, sub-field `translatable` settings have no effect.
+:::
+
 ## Example of Using Related Records
 
 The repeater form widget will automatically detect if the model attribute is a related field and use it. The following provides an example implementation that you may use. For example, if your model uses a `hasMany` relation that refers to a **RepeaterItem** model the repeater will use this related model for each item.

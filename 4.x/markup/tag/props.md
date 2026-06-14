@@ -40,6 +40,22 @@ The output will be:
 
 The `title` parameter was declared as a prop, so it becomes a template variable. The `class` and `id` parameters were not listed, so they flow into the `attributes` bag.
 
+### Hyphenated Attributes
+
+Hyphenated attribute names such as `data-*` and `aria-*` can be passed directly to the partial tag and flow into the `attributes` bag like any other attribute:
+
+```twig
+{% partial "card" title="Hello" data-testid="featured-card" aria-label="Featured" %}
+```
+
+The output preserves the original attribute names:
+
+```html
+<div class="card" data-testid="featured-card" aria-label="Featured">
+    <h2>Hello</h2>
+</div>
+```
+
 ## The Attributes Variable
 
 The `attributes` variable is an instance of Laravel's `ComponentAttributeBag`. It supports the following methods:

@@ -103,6 +103,56 @@ $exportModel->file_format = 'json';
 return $exportModel->exportDownload('myexportfile.json', ['columns' => $exportColumns]);
 ```
 
+## File Attachments
+
+Models with file attachment relations (`attachOne` and `attachMany`) can include file references in the import data. When exporting, file attachments are exported as relative file paths. When importing, these paths are resolved to local files and attached to the record.
+
+### Exporting File Attachments
+
+When exporting records that have file attachments, the export will automatically produce a **ZIP archive** instead of a plain JSON or CSV file. The ZIP contains the data file (`data.json` or `data.csv`) along with a `files/` directory containing the attachment files.
+
+::: dir
+├── `export.zip`
+|   ├── data.json
+|   └── files
+|       ├── hero.jpg
+|       └── photo1.jpg
+:::
+
+In the data file, file attachment fields are stored as relative paths pointing to the files inside the archive.
+
+```json
+[
+    {
+        "title": "My Post",
+        "featured_image": "files/hero.jpg",
+        "gallery": ["files/photo1.jpg", "files/photo2.jpg"]
+    }
+]
+```
+
+If no file attachments are included in the export, a standard JSON or CSV file is produced instead.
+
+### Importing File Attachments
+
+When importing, file attachment fields can reference files from two sources.
+
+**ZIP Archive** — Upload the exported ZIP file directly. File paths starting with `files/` are resolved from the archive contents.
+
+**Media Library** — Reference files already in the media library by their media-relative path. For example, if a file exists at `storage/app/media/photos/hero.jpg`, use `photos/hero.jpg` as the path.
+
+```json
+[
+    {
+        "title": "My Post",
+        "featured_image": "photos/hero.jpg",
+        "gallery": ["photos/photo1.jpg", "photos/photo2.jpg"]
+    }
+]
+```
+
+For `attachOne` relations, the value should be a single path string. For `attachMany` relations, the value should be an array of path strings.
+
 ## Custom Options
 
 Both import and export forms support custom options that can be introduced using form fields, defined in the **form** option in the import or export configuration respectively. These values are then passed to the Import / Export model and are available during processing.

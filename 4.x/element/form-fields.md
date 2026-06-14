@@ -72,7 +72,7 @@ Property | Description
 ------------- | -------------
 **label** | a name when displaying the form field to the user.
 **type** | defines how this field should be rendered. Default: `text`.
-**span** | aligns the form field to one side. Options: `auto`, `left`, `right`, `row`, `full`. Default: `full`.
+**span** | aligns the form field to one side. Options: `auto`, `left`, `right`, `row`, `full`, `adaptive`. Default: `full`.
 **spanClass** | used with the span `row` property to display the form as a Bootstrap grid, for example, `spanClass: col-4`.
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
 **placeholder** | if the field supports a placeholder value.

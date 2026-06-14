@@ -53,6 +53,10 @@ Property | Description
 **itemProperties** | an array of nested property definitions.
 
 ::: warning
+This type does not support the external parameter editor as specified by the `showExternalParam` property.
+:::
+
+::: warning
 The Object List inspector type doesn't support default values.
 :::
 
