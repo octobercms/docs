@@ -156,12 +156,58 @@ html_content:
         imageDefaultWidth: 0
 ```
 
-Some example options are listed below.
+The options are proxied to the underlying Froala editor. The most commonly used options are listed below, grouped by area.
+
+### Image Options
 
 Option | Description
 ------ | -----------
-**imageDefaultWidth** | Sets the default width of the image when it is inserted in the rich text editor. Setting it to `0` will not set any width. Default: `300`.
-**imageDefaultAlign** | Sets the default image alignment when it is inserted in the rich text editor. Possible values are `left`, `center` and `right`. Default: `center`.
-**imageDefaultDisplay** | Sets the default display for an image when is is inserted in the rich text. Possible options are: `inline` and `block`. Default: `block`
-**imageResize** | Disables image resize when set to `false`. Default: `true`
-**imagePaste** | Allows pasting images from clipboard. Default: `true`
+**imageUpload** | Enables image uploads. Set to `false` to block users from inserting images via the upload button or by dropping image files into the editor. Default: `true`.
+**imagePaste** | Allows pasting images from the clipboard. Set to `false` to strip pasted images. Default: `true`.
+**imagePasteProcess** | When `true`, pasted images are re-uploaded through the configured upload handler instead of being kept as inline data. Default: `false`.
+**imageMove** | Allows existing images inside the editor to be dragged to a new position. Set to `false` to lock images in place. Default: `true`.
+**imageResize** | Allows images to be resized by dragging their corners. Set to `false` to disable resizing. Default: `true`.
+**imageResizeWithPercent** | When `true`, image sizes are stored as percentages rather than fixed pixel widths. Default: `false`.
+**imageRoundPercent** | When `true`, percentage-based image sizes are rounded to whole numbers. Default: `false`.
+**imageDefaultWidth** | Sets the default width of an image when it is inserted. Setting it to `0` will not set any width. Default: `300`.
+**imageDefaultAlign** | Sets the default image alignment when inserted. Possible values are `left`, `center` and `right`. Default: `center`.
+**imageDefaultDisplay** | Sets the default display for an inserted image. Possible values are `inline` and `block`. Default: `block`.
+**imageDefaultMargin** | Default margin in pixels applied to inserted images. Default: `5`.
+**imageMinWidth** | Minimum width (in pixels) when resizing an image. Default: `16`.
+**imageMaxSize** | Maximum allowed upload size in bytes. Default: `10485760` (10MB).
+**imageAllowedTypes** | Array of allowed image file extensions for uploads. Default: `['jpeg', 'jpg', 'png', 'gif', 'webp']`.
+**imageMultipleStyles** | When `false`, only one style class can be applied to an image at a time. Default: `true`.
+**imageTextNear** | Allows text to wrap next to an inserted image. Default: `true`.
+**imageOutputSize** | When `true`, image width and height attributes are written into the output HTML. Default: `false`.
+**imageSplitHTML** | When `true`, the editor will split paragraphs to place block images. Default: `false`.
+**imageAddNewLine** | When `true`, a new line is automatically added after an inserted image. Default: `false`.
+**imageStyles** | Object mapping CSS class names to style labels available in the image edit popup. Default includes `fr-rounded`, `fr-bordered`, `fr-shadow`.
+
+### File Upload Options
+
+Option | Description
+------ | -----------
+**fileUpload** | Enables file uploads. Set to `false` to disable. Default: `true`.
+**fileMaxSize** | Maximum allowed file upload size in bytes. Default: `10485760` (10MB).
+**fileAllowedTypes** | Array of allowed MIME subtypes for uploads, or `['*']` for any. Default: `['*']`.
+
+### Drag and Drop
+
+Option | Description
+------ | -----------
+**dragInline** | When `true`, dragged content is dropped at the cursor position inline. When `false`, drag-and-drop inside the editor is disabled. Default: `true`.
+
+### Where to find the full list
+
+The `editorOptions` values are passed through to the underlying Froala v2 editor. Every available option, along with its default, is declared at the top of each plugin file under `vendor_drm/froala/js/plugins/` in the October CMS source — for example `image.js` for image options and `file.js` for file upload options.
+
+### Example: block all image insertion
+
+```yaml
+html_content:
+    type: richeditor
+    editorOptions:
+        imageUpload: false
+        imagePaste: false
+        imageMove: false
+```
