@@ -3,7 +3,7 @@ subtitle: Store theme content changes in the database instead of the file system
 ---
 # Database-driven Themes
 
-In some cases you may not have access to write to the filesystem to make changes to the theme. Database-driven themes allows you to store all changes to CMS templates in the database.
+In some cases you may not have access to write to the filesystem to make changes to the theme. Database-driven themes allows you to store all changes to CMS templates in the database. This covers pages, layouts, partials, content files, and language files.
 
 To enable this feature for a single theme, navigate to **Settings → Frontend Theme**, select **Edit Properties** and check the checkbox called **Save Changes in Database**.
 
@@ -13,15 +13,21 @@ Alternatively you can enable this feature globally for all themes with the confi
 CMS_DB_TEMPLATES=true
 ```
 
+## How Database-driven Templates Behave
+
+When the database layer is active for a theme, edits made in the CMS editor are written to the database instead of the filesystem. Reads check the database first and fall back to the filesystem, so files that have never been edited continue to be served directly from the theme directory.
+
+Deleting a template via the editor writes a tombstone row to the database. The tombstone hides the filesystem copy from listings and reads, so the file appears deleted across every instance even though the on-disk copy is still present. This is the same mechanism used for templates and language files.
+
 ## Importing from Database to Filesystem
 
-The `theme:copy` command can be used to copy the database version of the theme to the filesystem. Simply call the command with the `--import-db` option.
+The `theme:copy` command can be used to copy the database version of the theme to the filesystem. Simply call the command with the `--import-db` option. This imports both templates and language files in a single pass and applies tombstones by deleting the corresponding on-disk files.
 
 ```bash
 php artisan theme:copy demo --import-db
 ```
 
-To delete all the database templates at the same time, use the `--purge-db` option.
+To delete all the database templates and language file rows at the same time, use the `--purge-db` option.
 
 ```bash
 php artisan theme:copy demo --import-db --purge-db
