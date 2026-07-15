@@ -618,18 +618,18 @@ public function onMyAction()
     // ... your logic ...
 
     return array_merge(
-        $this->formGetWidget()->onRefresh(),  // all form fields
-        $this->relationRefresh('files'),       // a specific relation
-        $this->relationRefresh('comments')     // another relation
+        $this->formGetWidget()->onRefresh(),   // All form fields
+        $this->relationRefresh('files'),       // A specific relation
+        $this->relationRefresh('comments')     // Another relation
     );
 }
 ```
 
-> **Note:** If your relation fields are declared directly inside `config_form.yaml` as `type: relation`, they are part of the form widget and will be refreshed by `formGetWidget()->onRefresh()` automatically. Use `relationRefresh()` only for relations managed by `RelationController` (declared in `config_relation.yaml`).
+> **Note:** If your relation fields are declared directly using the [relation field type](../../element/form/widget-relation.md), they are part of the form widget and will be refreshed by `formGetWidget()->onRefresh()` automatically.
 
 ### Getting the Active Form Model
 
-The `formGetModel` method returns the model currently bound to the form. This is especially useful in custom AJAX handlers where the form is open in a popup and the model is already initialised by the behavior — avoiding the need to re-query the database using `post('record_id')`.
+The `formGetModel` method returns the model currently bound to the form. This is especially useful in custom AJAX handlers where the form is open in a popup and the model is already initialised by the behavior, avoiding the need to re-query the database using `post('record_id')`.
 
 ```php
 public function onMyAction()
@@ -659,7 +659,7 @@ public function formExtendRefreshResults($host, $result)
 }
 ```
 
-This is the inverse of `formGetWidget()->onRefresh()`: instead of triggering a full refresh manually, you declare what should always be appended whenever a refresh occurs.
+This approach is useful for including external partials and other page elements whenever the form is refreshed. Instead of triggering a full refresh manually, you declare what should always be appended whenever a refresh occurs.
 
 ## Validating Form Fields
 

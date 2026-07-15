@@ -514,8 +514,8 @@ public function onSaveSignature()
     // ... your logic ...
 
     return array_merge(
-        $this->formGetWidget()->onRefresh(),  // all form fields
-        $this->relationRefresh('files')        // relation container
+        $this->formGetWidget()->onRefresh(),   // All form fields
+        $this->relationRefresh('files')        // A specific relation
     );
 }
 ```
