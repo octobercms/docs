@@ -627,6 +627,40 @@ public function onMyAction()
 
 > **Note:** If your relation fields are declared directly inside `config_form.yaml` as `type: relation`, they are part of the form widget and will be refreshed by `formGetWidget()->onRefresh()` automatically. Use `relationRefresh()` only for relations managed by `RelationController` (declared in `config_relation.yaml`).
 
+### Getting the Active Form Model
+
+The `formGetModel` method returns the model currently bound to the form. This is especially useful in custom AJAX handlers where the form is open in a popup and the model is already initialised by the behavior — avoiding the need to re-query the database using `post('record_id')`.
+
+```php
+public function onMyAction()
+{
+    $model = $this->formGetModel();
+
+    $model->status = 'processed';
+    $model->save();
+
+    return $this->formGetWidget()->onRefresh();
+}
+```
+
+### Extending Every Form Refresh
+
+The `formExtendRefreshResults` override is called automatically on every `onRefresh` cycle, including calls triggered by field dependencies or `formGetWidget()->onRefresh()`. Use it to inject additional DOM updates into any refresh without modifying individual AJAX handlers.
+
+```php
+public function formExtendRefreshResults($host, $result)
+{
+    $model = $this->formGetModel();
+
+    // Appended to every refresh response automatically
+    return $result + [
+        '#my-status-block' => $this->makePartial('status_block', ['model' => $model]),
+    ];
+}
+```
+
+This is the inverse of `formGetWidget()->onRefresh()`: instead of triggering a full refresh manually, you declare what should always be appended whenever a refresh occurs.
+
 ## Validating Form Fields
 
 To validate the fields of your form you can make use of the [Validation trait](../database/traits.md) in your model.
