@@ -478,6 +478,48 @@ public function relationExtendRefreshResults($field)
 }
 ```
 
+### Refreshing Relations via AJAX
+
+The `relationRefresh` method is available in your controller to programmatically refresh a relation container from a custom AJAX handler. It returns a DOM update array that the AJAX framework applies automatically.
+
+```php
+public function onSaveSignature()
+{
+    // ... your logic ...
+
+    // Refreshes the view and toolbar of the 'files' relation
+    return $this->relationRefresh('files');
+}
+```
+
+To refresh multiple relations at once, merge the results into a single array:
+
+```php
+public function onSaveSignature()
+{
+    // ... your logic ...
+
+    return array_merge(
+        $this->relationRefresh('files'),
+        $this->relationRefresh('comments')
+    );
+}
+```
+
+To refresh both the entire form and one or more relations simultaneously, combine with `formGetWidget()->onRefresh()` from the [Form Controller](./form-controller.md):
+
+```php
+public function onSaveSignature()
+{
+    // ... your logic ...
+
+    return array_merge(
+        $this->formGetWidget()->onRefresh(),  // all form fields
+        $this->relationRefresh('files')        // relation container
+    );
+}
+```
+
 #### See Also
 
 ::: also

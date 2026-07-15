@@ -596,6 +596,37 @@ User::extend(function ($model) {
 });
 ```
 
+### Refreshing the Form via AJAX
+
+When a custom AJAX handler needs to update all form fields at once, use the form widget's `onRefresh` method. This re-renders the entire form and returns the result as a DOM update array, which the AJAX framework applies automatically.
+
+```php
+public function onMyAction()
+{
+    // ... your logic ...
+
+    // Re-renders all form fields, tabs and custom partials in one request
+    return $this->formGetWidget()->onRefresh();
+}
+```
+
+To refresh the form and one or more relation containers simultaneously, merge the results:
+
+```php
+public function onMyAction()
+{
+    // ... your logic ...
+
+    return array_merge(
+        $this->formGetWidget()->onRefresh(),  // all form fields
+        $this->relationRefresh('files'),       // a specific relation
+        $this->relationRefresh('comments')     // another relation
+    );
+}
+```
+
+> **Note:** If your relation fields are declared directly inside `config_form.yaml` as `type: relation`, they are part of the form widget and will be refreshed by `formGetWidget()->onRefresh()` automatically. Use `relationRefresh()` only for relations managed by `RelationController` (declared in `config_relation.yaml`).
+
 ## Validating Form Fields
 
 To validate the fields of your form you can make use of the [Validation trait](../database/traits.md) in your model.
