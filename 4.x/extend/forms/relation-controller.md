@@ -478,6 +478,48 @@ public function relationExtendRefreshResults($field)
 }
 ```
 
+### Refreshing Relations via AJAX
+
+The `relationRefresh` method is available in your controller to programmatically refresh a relation container from a custom AJAX handler. It returns a DOM update array that the AJAX framework applies automatically.
+
+```php
+public function onSaveSignature()
+{
+    // ... your logic ...
+
+    // Refreshes the view and toolbar of the 'files' relation
+    return $this->relationRefresh('files');
+}
+```
+
+To refresh multiple relations at once, merge the results into a single array:
+
+```php
+public function onSaveSignature()
+{
+    // ... your logic ...
+
+    return array_merge(
+        $this->relationRefresh('files'),
+        $this->relationRefresh('comments')
+    );
+}
+```
+
+To refresh both the entire form and one or more relations simultaneously, combine with `formGetWidget()->onRefresh()` from the [Form Controller](./form-controller.md):
+
+```php
+public function onSaveSignature()
+{
+    // ... your logic ...
+
+    return array_merge(
+        $this->formGetWidget()->onRefresh(),   // All form fields
+        $this->relationRefresh('files')        // A specific relation
+    );
+}
+```
+
 ### Adding Custom Toolbar Buttons
 
 In addition to the built-in `toolbarButtons` (such as `create`, `add`, `delete`), you may add your own buttons by listing a custom name and providing a matching partial in the controller's views directory. The partial name follows the convention `_relation_button_{name}.php`.

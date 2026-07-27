@@ -96,28 +96,26 @@ The `|` character will insert a vertical separator line in the toolbar.
 
 ## Registering a Custom Button
 
-The following JavaScript code can be used to register a custom button as a command.
+The following JavaScript code can be used to register a custom button as a command. The Rich Editor globals are defined by an ES module, so wrap your registration in `oc.pageReady()` to ensure `oc.richEditorRegisterButton` and `oc.richEditorButtons` are available when your code runs.
 
 ```js
-oc.richEditorRegisterButton('insertCustomThing', {
-    title: 'Insert Something',
-    icon: '<i class="icon-star"></i>',
-    undo: true,
-    focus: true,
-    refreshOnCallback: true,
-    callback: function () {
-        this.html.insert('<strong>My Custom Thing!</strong>');
-    }
+oc.pageReady().then(function () {
+    oc.richEditorRegisterButton('insertCustomThing', {
+        title: 'Insert Something',
+        icon: '<i class="icon-star"></i>',
+        undo: true,
+        focus: true,
+        refreshOnCallback: true,
+        callback: function () {
+            this.html.insert('<strong>My Custom Thing!</strong>');
+        }
+    });
+
+    oc.richEditorButtons.splice(0, 0, 'insertCustomThing');
 });
 ```
 
-Then add the button to the default collection.
-
-```js
-oc.richEditorButtons.splice(0, 0, 'insertCustomThing');
-```
-
-When registering the JavaScript, it should come after the assets registered by the Rich Editor. You may extend the `RichEditor` class constructor to achieve this.
+Register the JavaScript by extending the `RichEditor` form widget class.
 
 ```php
 \Backend\FormWidgets\RichEditor::extend(function($controller) {
