@@ -21,13 +21,13 @@ Deleting a template via the editor writes a tombstone row to the database. The t
 
 ## Importing from Database to Filesystem
 
-The `theme:copy` command can be used to copy the database version of the theme to the filesystem. Simply call the command with the `--import-db` option. This imports both templates and language files in a single pass and applies tombstones by deleting the corresponding on-disk files.
+The `theme:copy` command can be used to copy the database version of the theme to the filesystem. Simply call the command with the `--import-db` option. This imports templates, language files, assets, and blueprints in a single pass and applies tombstones by deleting the corresponding on-disk files.
 
 ```bash
 php artisan theme:copy demo --import-db
 ```
 
-To delete all the database templates and language file rows at the same time, use the `--purge-db` option.
+To delete all the imported database rows at the same time, use the `--purge-db` option.
 
 ```bash
 php artisan theme:copy demo --import-db --purge-db
@@ -89,14 +89,20 @@ The feature is disabled by default so a fresh checkout of the project does not r
 
 ### Publishing Assets on Deployment
 
-A console command publishes all theme, module, plugin, and app assets to the `assets` disk. Run this as part of your deployment pipeline so the published assets reflect the latest version of the code.
+The `october:mirror` command publishes all theme, module, plugin, and app assets to a filesystem disk when called with the `--disk` option. Run this as part of your deployment pipeline so the published assets reflect the latest version of the code.
 
 ```bash
-php artisan october:mirror --assets
+php artisan october:mirror --disk=assets
 ```
 
-The command is additive — it uploads or overwrites files but never deletes. Orphaned files left by code changes can be cleaned up with object storage lifecycle rules at the bucket level if desired.
+The command is additive, meaning it uploads or overwrites files but never deletes. Orphaned files left by code changes can be cleaned up with object storage lifecycle rules at the bucket level if desired. Unchanged files are skipped using a size comparison, use the `--checksum` option to compare content hashes instead, the `--force` option to upload everything, or the `--dry-run` option to preview the upload list.
 
 ### Cache Invalidation
 
-When an asset is edited via the CMS editor, the published URL is invalidated at the CDN so cached copies clear within seconds. This requires CDN credentials to be configured separately — see your CDN provider's documentation for the relevant environment variables.
+When an asset changes via the CMS editor, the `cms.asset.invalidate` event fires with the theme and the changed disk keys. Listen to this event to purge cached copies at your CDN, keeping the core CDN-agnostic.
+
+```php
+Event::listen('cms.asset.invalidate', function ($theme, $diskPaths) {
+    MyCdnProvider::invalidate($diskPaths);
+});
+```
