@@ -26,12 +26,12 @@ The naming convention uses lowercase for directories and file names, while the P
 
 ## Component Class
 
-The PHP class defines the server-side configuration for your Vue component. It must extend `Backend\Classes\VueComponentBase` and define a component name.
+The PHP class defines the server-side configuration for your Vue component. It must extend `System\Classes\VueComponentBase` and define a component name.
 
 ```php
 namespace Acme\Blog\VueComponents;
 
-use Backend\Classes\VueComponentBase;
+use System\Classes\VueComponentBase;
 
 class PostEditor extends VueComponentBase
 {
@@ -324,23 +324,45 @@ The controller's layout automatically outputs the component templates and JavaSc
 
 ### CMS Components
 
-::: aside
-Vue component support in CMS Components will be available in a future update.
-:::
-
-CMS components can also register Vue components for use in the frontend. The `VueMaker` trait provides the same registration methods available to backend controllers.
+CMS components can also register Vue components for use in the frontend. The call forwards to the CMS controller, which provides the same registration methods available to backend controllers.
 
 ```php
 class MyComponent extends ComponentBase
 {
-    use \Backend\Traits\VueMaker;
-
-    public function onRun()
+    public function init()
     {
         $this->registerVueComponent(\Acme\Blog\VueComponents\PostViewer::class);
     }
 }
 ```
+
+Registering in the `init` method makes the Vue component available during both page renders and AJAX requests. The `onRun` method may also be used when the component is only needed for the initial page render.
+
+On the frontend, the Vue library and registered components are output by two Twig tags that work together. The `{% framework vue %}` tag loads the Vue library and exposes it as the `Vue` global. If the tag is omitted, include a Vue 3 build yourself and expose it as `window.Vue`.
+
+```twig
+{% framework vue %}
+```
+
+The `{% vuecomponents %}` tag renders the component templates and registration code, along with the `oc.createVueApp` and `oc.mountVueApp` factory functions. Place it near the end of the page, before any scripts that mount a Vue application.
+
+```twig
+<div id="app">
+    <acme-blog-post-viewer :post-id="7"></acme-blog-post-viewer>
+</div>
+
+{% vuecomponents %}
+
+<script type="module">
+    oc.mountVueApp('#app');
+</script>
+```
+
+::: aside
+Frontend component JavaScript modules should read the `Vue` global (`const { ref } = Vue`) instead of using bare imports (`import { ref } from 'vue'`), since bare module specifiers only resolve in the backend panel.
+:::
+
+Vue components registered during an AJAX request, for example by a component inside an updated partial, are delivered through the AJAX framework and registered before the page is updated. Mounting an application over the updated markup remains the responsibility of the page.
 
 ## Using Components in Templates
 

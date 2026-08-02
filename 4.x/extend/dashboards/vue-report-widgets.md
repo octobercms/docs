@@ -57,7 +57,7 @@ class MyCustomWidget extends VueReportWidgetBase
 }
 ```
 
-The `VueReportWidgetBase` class extends `Backend\Classes\VueComponentBase` and provides the dashboard-specific functionality needed for report widgets. The `$componentName` property is required and defines the Vue component tag name. The convention is to use the fully qualified class name in lowercase with backslashes replaced by hyphens (e.g., `Acme\MyPlugin\VueComponents\MyCustomWidget` becomes `acme-myplugin-vuecomponents-mycustomwidget`).
+The `VueReportWidgetBase` class extends `System\Classes\VueComponentBase` and provides the dashboard-specific functionality needed for report widgets. The `$componentName` property is required and defines the Vue component tag name. The convention is to use the fully qualified class name in lowercase with backslashes replaced by hyphens (e.g., `Acme\MyPlugin\VueComponents\MyCustomWidget` becomes `acme-myplugin-vuecomponents-mycustomwidget`).
 
 ### Client-Side Component
 

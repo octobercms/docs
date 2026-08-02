@@ -33,6 +33,14 @@ The `{% framework %}` tag supports an optional **extras** parameter that include
 {% framework extras %}
 ```
 
+### Vue Library
+
+The **vue** parameter includes the Vue 3 library and exposes it as the `Vue` global, for use with [Vue components](../../extend/system/vue-components.md) registered on the page.
+
+```twig
+{% framework vue %}
+```
+
 ## How AJAX Requests Work
 
 A page can issue an AJAX request either prompted by data attributes or by using JavaScript. Each request invokes an **event handler** -- also called an [AJAX handler](./handlers.md) -- on the server and can update page elements using partials. AJAX requests work best with forms, since the form data is automatically sent to the server. Here is request workflow:
