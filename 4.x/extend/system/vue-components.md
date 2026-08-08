@@ -26,6 +26,12 @@ The naming convention uses lowercase for directories and file names, while the P
 
 ## Component Class
 
+The `create:vuecomponent` command generates a Vue component class, template partial and basic asset files. The first argument specifies the author and plugin name. The second argument specifies the Vue component class name.
+
+```bash
+php artisan create:vuecomponent Acme.Blog PostEditor
+```
+
 The PHP class defines the server-side configuration for your Vue component. It must extend `System\Classes\VueComponentBase` and define a component name.
 
 ```php
