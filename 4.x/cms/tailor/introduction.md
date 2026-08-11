@@ -48,6 +48,7 @@ The blueprint **type** property determines how the blueprint should be implement
 Type | Description
 ------------- | -------------
 Entry | the standard content structure that supports drafts.
+Submission | user submitted content captured on the frontend, such as comments and contact forms.
 Global | a single record in the database and is often used for settings and configuration.
 Mixin | defines reusable field definitions that can be imported and mixed in with other field definitions.
 
