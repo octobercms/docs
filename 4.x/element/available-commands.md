@@ -259,6 +259,138 @@ To delete all the database templates at the same time, use the `--purge-db` opti
 php artisan theme:copy demo --import-db --purge-db
 ```
 
+## Scaffolding
+
+The scaffolding commands generate the boilerplate files for common October CMS objects. Unless noted otherwise, the first argument is the plugin namespace (eg: `Acme.Blog`), and most commands accept the `--overwrite` (or `-o`) option to replace existing files.
+
+### Command - `create:plugin`
+
+The `create:plugin` command generates the files and directories for a new [plugin](../extend/system/plugins.md). The argument specifies the author and plugin name.
+
+```bash
+php artisan create:plugin Acme.Blog
+```
+
+### Command - `create:theme`
+
+The `create:theme` command generates a new [theme](../cms/themes/themes.md) directory with a starter layout, home page and configuration files. The argument specifies the theme name.
+
+```bash
+php artisan create:theme "My Theme"
+```
+
+### Command - `create:model`
+
+The `create:model` command generates the files for a new [model](../extend/system/models.md). The second argument specifies the model name.
+
+```bash
+php artisan create:model Acme.Blog Post
+```
+
+Use the `--soft-deletes` option to implement soft deletion, and the `--no-timestamps` option to disable automatic timestamps.
+
+### Command - `create:migration`
+
+The `create:migration` command generates a new [migration](../extend/database/structure.md) file. The second argument specifies the migration name.
+
+```bash
+php artisan create:migration Acme.Blog AddStatusColumn
+```
+
+Use the `--create` option to name a table to be created, or the `--table` option to name a table to be modified.
+
+### Command - `create:controller`
+
+The `create:controller` command generates the files for a new backend [controller](../extend/system/controllers.md). The second argument specifies the controller name.
+
+```bash
+php artisan create:controller Acme.Blog Posts
+```
+
+Use the `--model` option to define which model name to use, and the `--design` option to specify a design (`basic`, `sidebar`, `survey`, `popup`, `custom`).
+
+### Command - `create:component`
+
+The `create:component` command generates a new plugin [component](../extend/cms-components.md). The second argument specifies the component class name.
+
+```bash
+php artisan create:component Acme.Blog BlogPosts
+```
+
+### Command - `create:formwidget`
+
+The `create:formwidget` command generates a new [form widget](../extend/forms/form-widgets.md). The second argument specifies the form widget name.
+
+```bash
+php artisan create:formwidget Acme.Blog PostList
+```
+
+### Command - `create:filterwidget`
+
+The `create:filterwidget` command generates a new [filter widget](../extend/lists/filters.md). The second argument specifies the filter widget name.
+
+```bash
+php artisan create:filterwidget Acme.Blog HasDiscount
+```
+
+### Command - `create:reportwidget`
+
+The `create:reportwidget` command generates a new [report widget](../extend/dashboards/report-widgets.md). The second argument specifies the report widget name.
+
+```bash
+php artisan create:reportwidget Acme.Blog TopPages
+```
+
+### Command - `create:contentfield`
+
+The `create:contentfield` command generates a new [Tailor content field](../extend/tailor-fields.md). The second argument specifies the content field name.
+
+```bash
+php artisan create:contentfield Acme.Blog IconPicker
+```
+
+### Command - `create:command`
+
+The `create:command` command generates a new [console command](../extend/console-commands.md). The second argument specifies the command class name.
+
+```bash
+php artisan create:command Acme.Blog ProcessJobs
+```
+
+### Command - `create:job`
+
+The `create:job` command generates a new [queue job](../extend/services/queue.md) class. The second argument specifies the job class name.
+
+```bash
+php artisan create:job Acme.Blog ImportPosts
+```
+
+Use the `--sync` option to indicate that the job should be synchronous.
+
+### Command - `create:factory`
+
+The `create:factory` command generates a new model factory class. The second argument specifies the factory class name.
+
+```bash
+php artisan create:factory Acme.Blog PostFactory
+```
+
+### Command - `create:seeder`
+
+The `create:seeder` command generates a new database seeder class. The second argument specifies the seeder class name.
+
+```bash
+php artisan create:seeder Acme.Blog PostSeeder
+```
+
+### Command - `create:test`
+
+The `create:test` command generates a new [test](../extend/system/unit-testing.md) class. The second argument specifies the test class name, which must end in `Test`.
+
+```bash
+php artisan create:test Acme.Blog UserTest
+```
+
 ## Utilities
 
 ### Command - `cache:clear`
