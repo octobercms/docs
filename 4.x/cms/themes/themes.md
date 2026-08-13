@@ -76,6 +76,39 @@ The template paths are always absolute. If in a partial you render another parti
 ```
 :::
 
+## Creating a Theme
+
+The `create:theme` command scaffolds a new theme directory with a starter layout, home page, and the supporting configuration files. The argument specifies the theme name, which is converted to a directory slug.
+
+```bash
+php artisan create:theme "My Theme"
+```
+
+The example above creates the theme in the **themes/my-theme** directory with the following files.
+
+::: dir
+├── themes
+|   └── my-theme  _← Theme Starts Here_
+|       ├── `layouts`
+|       │   └── default.htm
+|       ├── `pages`
+|       │   └── index.htm
+|       ├── `partials`
+|       ├── `content`
+|       ├── `assets`
+|       ├── theme.yaml  _← Theme Metadata_
+|       ├── version.yaml
+|       └── composer.json
+:::
+
+Pass the `--overwrite` option (or `-o`) to replace any existing files when regenerating a theme.
+
+```bash
+php artisan create:theme "My Theme" --overwrite
+```
+
+The generated **theme.yaml** and **version.yaml** files describe the theme and its change log. See the [Theme Settings](./settings.md) article for the available fields.
+
 ## Template Structure
 
 Pages, partials and layout templates can include up to 3 sections: **configuration**, **PHP code**, and **Twig markup**. Sections are separated with the `==` sequence.
