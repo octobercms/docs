@@ -65,7 +65,6 @@ templatePage = "campaign/message"
 
 The result partial is rendered after the form is submitted. Create a new partial at `partials/subscribe_result.htm`:
 
-::: cmstemplate
 ```twig
 {% if error %}
     <div class="p-3 bg-red-50 text-red-700 text-sm rounded-md">
@@ -85,7 +84,6 @@ The result partial is rendered after the form is submitted. Create a new partial
     </div>
 {% endif %}
 ```
-:::
 
 ## How the Form Works
 
