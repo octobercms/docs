@@ -93,7 +93,7 @@ function onSendMessage()
 Before testing, let's make sure emails are captured safely. Instead of sending real emails, we will use the **log** mail driver, which writes emails to the event log.
 
 1. Navigate to **Settings → Mail Configuration** in the backend.
-2. Set the **Send Mode** to **Log File**.
+2. Set the **Mail Method** to **Log File**.
 3. Click **Save**.
 
 Now all emails are written to the log instead of being sent. This is perfect for development.

@@ -42,9 +42,9 @@ redirect = "account/login"
             </h1>
             <div class="flex items-center gap-2 mt-1">
                 <span class="text-xs font-medium px-2 py-0.5 rounded
-                    {% if ticket.status.status_code == 'closed' %}
+                    {% if ticket.status.code == 'closed' %}
                         text-gray-700 bg-gray-100
-                    {% elseif ticket.status.status_code == 'new' %}
+                    {% elseif ticket.status.code == 'new' %}
                         text-blue-700 bg-blue-100
                     {% else %}
                         text-green-700 bg-green-100

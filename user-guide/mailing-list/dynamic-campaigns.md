@@ -124,8 +124,6 @@ handle = "Blog\Post"
     </tr>
     </table>
 
-    {tracking_pixel}
-
 </body>
 </html>
 ```
@@ -162,7 +160,7 @@ A repeating campaign automatically duplicates itself after sending and schedules
 2. Enter a name like "Weekly Blog Digest" and select the **Blog Digest** template
 3. Fill in the greeting text. Since the blog posts are pulled dynamically, you only need to write the intro once.
 4. Click **Launch campaign** and select the "Newsletter" list
-5. Check the **Repeating campaign** option and select **Weekly** as the frequency
+5. Check the **Repeat frequency** option and select **Weekly** as the frequency
 6. Optionally check **Delayed launch** and pick a date and time for the first send (e.g., next Monday morning)
 7. Click **Launch**
 

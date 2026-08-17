@@ -74,16 +74,17 @@ Save the layout.
 
 Congratulations! You have built a complete blog with October CMS. Here is what you created:
 
-1. **Blueprints**: three content types defined in YAML: a Blog Post stream, a Category structure, and a Tag entry. No PHP code, no database SQL.
+1. **Blueprints**: four content types defined in YAML: a Blog Post stream, a Category structure, a Tag entry, and a Comment submission. No PHP code, no database SQL.
 2. **Listing Page**: a Collection component with pagination, displaying posts sorted newest-first.
 3. **Detail Page**: a Section component that resolves posts by slug, with 404 handling for missing entries.
 4. **Category and Tag Filtering**: `whereRelation` queries to filter posts, and a reusable tag cloud partial with post counts shared across pages.
-5. **RSS Feed**: XML output with a custom Content-Type header for feed reader subscriptions.
+5. **Comments**: a moderated comment form powered by a Submission component, with validation, spam protection, and an approval workflow.
+6. **RSS Feed**: XML output with a custom Content-Type header for feed reader subscriptions.
 
 Everything is managed through the backend, from creating posts and assigning categories to configuring the published date. The frontend is powered entirely by Twig templates and Tailwind CSS.
 
 ### Where to Go From Here
 
-- Explore the [demo theme](https://github.com/octobercms/october/tree/4.x/themes/demo) for a more complete blog with search, archives, authors, comments, and more
+- Explore the [demo theme](https://github.com/octobercms/october/tree/4.x/themes/demo) for a more complete blog with search, archives, authors, and more
 - Read the [Tailor documentation](../../4.x/cms/tailor/blueprints.md) for the full blueprint and content field reference
 - Try the next tutorial in the User Guide to continue building your skills

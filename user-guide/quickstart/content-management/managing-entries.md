@@ -19,7 +19,7 @@ name: Team Member
 
 navigation:
     label: Our Team
-    icon: icon-users
+    icon: ph ph-users
     order: 200
 ```
 

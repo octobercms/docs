@@ -26,7 +26,7 @@ You don't need to memorize this. You will learn each piece as we go. For now, le
 
 ## Create a New Blank Theme
 
-1. Click the **Create a new blank theme** button.
+1. Click the **Create a New Blank Theme** button.
 2. Enter the following:
    - **Name**: `My Theme`
    - **Directory Name**: `mytheme`

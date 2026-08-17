@@ -49,7 +49,7 @@ fields:
 - **`richeditor`**: a visual editor for the post body.
 - **`fileupload`** with `mode: image`: an image upload field limited to one file.
 - **`customMessages`**: changes the "Create" button label in the backend to "New Post".
-- Tailor automatically adds **title**, **slug**, and **published date** fields to every stream blueprint, so you don't need to define those yourself.
+- Tailor automatically adds **title**, **slug**, and **published date** fields to every entry blueprint, so you don't need to define those yourself.
 
 ## Adding Navigation
 
@@ -65,7 +65,7 @@ customMessages:
 
 primaryNavigation:
     label: Blog
-    icon: icon-pencil
+    icon: ph ph-pencil
     order: 200
 
 navigation:
@@ -116,7 +116,7 @@ customMessages:
 navigation:
     label: Categories
     parent: Blog\Post
-    icon: icon-list-ul
+    icon: ph ph-list-bullets
     order: 200
 
 fields:
@@ -144,7 +144,7 @@ name: Tag
 navigation:
     label: Tags
     parent: Blog\Post
-    icon: icon-tags
+    icon: ph ph-tag
     order: 300
 
 fields:
@@ -171,7 +171,7 @@ customMessages:
 
 primaryNavigation:
     label: Blog
-    icon: icon-pencil
+    icon: ph ph-pencil
     order: 200
 
 navigation:

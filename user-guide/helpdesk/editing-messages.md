@@ -186,7 +186,7 @@ Configure your mail settings in **Settings > Mail Configuration**. You can custo
 
 ## Auto-closing Tickets
 
-Tickets close automatically after 7 days if the last message was from support staff and the user has not responded. This keeps the ticket queue clean without manual intervention. The auto-close interval can be changed in a config file at `config/responsiv/support/config.php`.
+Tickets close automatically after 7 days if the last message was from support staff and the user has not responded. This keeps the ticket queue clean without manual intervention. The auto-close interval can be changed by creating a config override file at `config/responsiv/support/config.php` with an `expireInterval` value.
 
 ## Restricting Support Staff
 

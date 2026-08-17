@@ -157,4 +157,4 @@ The [demo theme](https://github.com/octobercms/october/tree/4.x/themes/demo) inc
 
 ## Next Steps
 
-Continue to [RSS Feed](./rss-feed.md) to add an RSS feed so readers can subscribe to your blog.
+Continue to [Comments](./comments.md) to let readers respond to your posts with moderated comments.

@@ -15,7 +15,7 @@ Alternatively, install via the command line:
 php artisan plugin:install RainLab.Forum
 ```
 
-The Forum plugin depends on RainLab.User, which you already installed in Part 1. After installation, you will see a new **Forum** section under **Settings** in the backend.
+The Forum plugin depends on RainLab.User, which you already installed in Part 1. After installation, you will see a new **Forum Channels** item on the Settings page, under the **Users** category.
 
 ## Creating Forum Channels
 

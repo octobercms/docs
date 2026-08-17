@@ -15,7 +15,7 @@ Alternatively, install via the command line:
 php artisan plugin:install Responsiv.Campaign
 ```
 
-After installation, you will see a new **Mailing List** section in the backend navigation with links to **Campaigns**, **Lists**, and **Subscribers**.
+After installation, you will see a new **Mailing List** section in the backend navigation with links to **Campaigns**, **Lists**, **Subscribers**, and **Settings**.
 
 ## Creating a Subscriber List
 
@@ -30,7 +30,7 @@ Subscriber lists are opt-in groups that visitors join via signup forms on your s
 
 ## Generating the Default Template
 
-Navigate to **Mailing List > Campaigns** and click **New Campaign**. Since no campaign template pages exist yet, the plugin offers to generate one for you. Click **Generate Template** to create a default CMS page at `campaign/message.htm` with the `campaignTemplate` component already attached.
+Navigate to **Mailing List > Campaigns** and click **New Campaign**. Since no campaign template pages exist yet, the plugin offers to generate one for you. Click **Create a Default Template** to create a default CMS page at `campaign/default-template.htm` with the `campaignTemplate` component already attached.
 
 This page serves as the HTML scaffold for all your campaign emails. You will customize it later, but the default template gives you a working starting point with a header, banner image, content sections, and footer.
 

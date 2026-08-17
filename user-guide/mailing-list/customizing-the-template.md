@@ -7,7 +7,7 @@ The default campaign template provides a working starting point, but you will wa
 
 ## Opening the Template
 
-The campaign template lives at `campaign/message.htm` in your theme. Open it in the CMS Editor. You will notice it looks different from your regular site pages:
+The campaign template lives at `campaign/default-template.htm` in your theme. Open it in the CMS Editor. You will notice it looks different from your regular site pages:
 
 - It does not use a layout. Campaign templates are standalone HTML email documents.
 - The HTML uses table-based formatting with inline styles. This is required because email clients like Gmail and Outlook strip `<style>` blocks and ignore modern CSS features like flexbox and grid.
@@ -85,7 +85,7 @@ In addition to the syntax fields, campaign templates support bracket tags that a
 | `{email}` | Subscriber's email address |
 | `{browser_url}` | URL to view the email in a web browser |
 | `{unsubscribe_url}` | URL for the subscriber to opt out |
-| `{tracking_pixel}` | Invisible image tag for open tracking |
+| `{tracking_pixel}` | Invisible image tag for open tracking. The plugin injects one automatically before `</body>`, so only add this tag when you need to control its placement |
 
 Always include an `{unsubscribe_url}` link in your templates. Most email providers require it, and campaigns without one are more likely to be flagged as spam.
 
@@ -93,7 +93,7 @@ Always include an `{unsubscribe_url}` link in your templates. Most email provide
 
 Here is a simplified template you can use as a starting point. It replaces the default with a cleaner structure while keeping the table-based email HTML pattern required for compatibility.
 
-Open `campaign/message.htm` in the CMS Editor and replace its contents:
+Open `campaign/default-template.htm` in the CMS Editor and replace its contents:
 
 ::: cmstemplate
 ```ini
@@ -173,8 +173,6 @@ unsubscribePage = "subscribe/goodbye"
     </tr>
     </table>
 
-    {tracking_pixel}
-
 </body>
 </html>
 ```
@@ -186,7 +184,7 @@ This template has:
 - A greeting field with the subscriber's first name
 - A single rich editor for the main email content
 - A footer with "View in browser" and "Unsubscribe" links
-- An invisible tracking pixel for open rate tracking
+- An invisible tracking pixel for open rate tracking, injected automatically before the closing `</body>` tag
 
 You can adjust the colors, add a logo image, or restructure the sections to match your brand. Just remember to keep using HTML tables with inline styles for email compatibility.
 
