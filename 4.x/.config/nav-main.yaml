@@ -360,6 +360,7 @@
         - components/submission
         - components/resources
         - components/sitepicker
+        - components/translatable
 -
     title: Resources
     children:
