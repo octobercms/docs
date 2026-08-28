@@ -121,15 +121,32 @@ Event::listen('cms.form.beforeSubmit', function ($component, $model) {
 });
 ```
 
-The `cms.form.submitSuccess` event fires after the submission has been saved, useful for sending notifications.
+The `cms.form.submitSuccess` event fires after the submission has been saved, useful for custom notification logic beyond the built-in [admin group notifications](../tailor/blueprints.md#email-notifications).
+
+### Sending a Visitor Confirmation
+
+Use the `cms.form.submitSuccess` event to send a confirmation email to the person submitting the form. The following sends a receipt using the submitted `email` field, checking the component alias so the listener only applies to the intended form.
 
 ```php
 Event::listen('cms.form.submitSuccess', function ($component, $model) {
-    Mail::send('blog:new_comment', ['comment' => $model], function ($message) {
-        $message->to('moderator@example.com');
-    });
+    if ($component->alias !== 'contactForm') {
+        return;
+    }
+
+    $email = $model->email;
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return;
+    }
+
+    Mail::sendTo($email, 'contact:submission-received', [
+        'title' => $model->title
+    ]);
 });
 ```
+
+::: warning
+Auto-responders send mail to an address supplied by the visitor, making them a target for abuse, including inbox flooding of third parties and damage to your mail sender reputation from bounced or fake addresses. Avoid echoing the submitted content back in the message, and consider pairing this with CAPTCHA verification using the `cms.form.beforeSubmit` event.
+:::
 
 #### See Also
 
