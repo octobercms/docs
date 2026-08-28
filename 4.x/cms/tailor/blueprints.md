@@ -278,6 +278,9 @@ The following values are supported by the `submission` property.
 Property | Description
 -------- | -------------
 **titleTemplate** | a Twig template used to build the record title (see below).
+**notifyGroup** | an admin user group code to notify by email when a submission is received (see below).
+**notifyTemplate** | the mail template used for the notification. Default: `tailor:submission-notification`
+**notifyReplyTo** | field name used as the reply-to address for the notification. Default: `email`
 **spamSweepDays** | lookback window in days used when marking a record as spam, where other pending submissions from the same IP address are also rejected. Use `0` to disable the sweep. Default: `30`
 **purgeRejectedDays** | number of days to keep rejected submissions before they are deleted forever. Use `0` to disable purging. Default: `30`
 
@@ -309,6 +312,41 @@ submission:
 ```
 
 When no template is configured, the title falls back to the first available value from the `name`, `subject`, `author_name`, `full_name` or `email` fields, otherwise a random reference is generated, for example, **Submission #GNNWPWFK**.
+
+### Email Notifications
+
+Use the `notifyGroup` property to send an email notification to an [admin user group](../../extend/backend/users.md#groups) every time a submission is received. The value is the group code, found in the admin panel by navigating to **Settings → Team → Manage Groups**.
+
+```yaml
+submission:
+    notifyGroup: contact-team
+```
+
+Notifications are sent with the generic `tailor:submission-notification` mail template, listing the submitted field values with a link to moderate the record in the admin panel. Use the `notifyTemplate` property to specify a custom [mail template](../../extend/system/sending-mail.md), where every field is available as a Twig variable, along with the following variables.
+
+Variable | Description
+-------- | -------------
+**fields** | the submitted field values as an array of `label` and `value` pairs.
+**title** | the generated record title.
+**blueprintName** | the name of the submission blueprint.
+**recordUrl** | a link to the record in the admin panel.
+**record** | the submission record for accessing related records.
+
+```yaml
+submission:
+    notifyGroup: contact-team
+    notifyTemplate: blog:new-comment
+```
+
+When the submission contains a valid email address, it is used as the reply-to address for the notification, letting moderators respond directly from their mail client. The address is taken from the `email` field by default and the `notifyReplyTo` property can specify a different field name.
+
+```yaml
+submission:
+    notifyGroup: contact-team
+    notifyReplyTo: author_email
+```
+
+Notification failures never lose a submission since the record is saved first, and any mail errors are captured in the event log without interrupting the visitor.
 
 ## Global
 

@@ -105,6 +105,10 @@ The component includes several layers of spam protection for the public form end
 
 The rate limit can be changed by overriding the `formGetThrottleRate` method on the component class, returning the maximum submissions per minute, or `0` to disable the limit.
 
+## Email Notifications
+
+Submissions can notify an admin user group by email as they arrive, configured with the `notifyGroup` property on the [submission blueprint](../tailor/blueprints.md#email-notifications). The notification is sent after the record is saved and includes a link to moderate the record in the admin panel.
+
 ## Events
 
 The `cms.form.beforeSubmit` event fires before the submission is saved, and throwing an exception from a listener rejects it. This is the extension point for connecting spam scoring services, CAPTCHA verification or blocklists.
