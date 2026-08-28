@@ -35,7 +35,7 @@ Supported web servers:
 ## Installing October CMS
 
 ::: aside
-You should configure a virtual host on the web server to access the installation directory. For local development you can use [Laravel Sail](../resources/using-laravel-sail.md), [Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/) or the built-in Laravel development server.
+You should configure a virtual host on the web server to access the installation directory. For local development you can use [DDEV](#installing-with-ddev), [Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/) or the built-in Laravel development server.
 :::
 
 October CMS is a PHP web application that uses [Composer](http://getcomposer.org/) to manage its dependencies. Ensure that Composer is installed before you begin. The [License Key](https://octobercms.com/help/site/projects#project-id) will be required to complete the installation.
@@ -72,6 +72,69 @@ php artisan serve
 
 ::: warning
 If you are installing the platform on a production web server, review the recommendations listed in the [Production Configuration](../setup/configuration.md#production-configuration) article.
+:::
+
+## Installing with DDEV
+
+::: aside
+Since the web server runs inside a container, commands are called using `ddev artisan` and `ddev composer` instead of `php artisan` and `composer`.
+:::
+
+[DDEV](https://ddev.com/) is a Docker-based tool that provisions the web server, PHP and database for a local development environment. It is a good choice when you don't want to install PHP and Composer on your operating system. Install [Docker](https://www.docker.com/get-started/) and [DDEV](https://ddev.readthedocs.io/en/stable/users/install/) before you begin.
+
+Create a directory for the project and enter it. The directory name becomes the project name and local site address.
+
+```bash
+mkdir myoctober && cd myoctober
+```
+
+Configure the environment using the Laravel project type, which October CMS is compatible with.
+
+```bash
+ddev config --project-type=laravel --webserver-type=apache-fpm
+```
+
+Start the containers. The first run may take a few minutes while the images are downloaded.
+
+```bash
+ddev start
+```
+
+Install October CMS in the project directory.
+
+```bash
+ddev composer create-project october/october ./
+```
+
+Run the installation command, entering your [License Key](https://octobercms.com/help/site/projects#project-id) when prompted.
+
+```bash
+ddev artisan october:install
+```
+
+Restart the environment so DDEV writes the database credentials to the **.env** file, then run the migration command to initialize the database.
+
+```bash
+ddev restart
+ddev artisan october:migrate
+```
+
+Finally, open the website in a browser.
+
+```bash
+ddev launch
+```
+
+::: tip
+If the database connection fails, check that the **.env** file contains the DDEV database credentials, where the host, database name, username and password are all set to `db`.
+```ini
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=db
+DB_USERNAME=db
+DB_PASSWORD=db
+```
 :::
 
 ## Wizard Installation
@@ -140,4 +203,5 @@ This error can appear in Composer when the **auth.json** file is missing on your
 
 ::: also
 * [Production Configuration](../setup/configuration.md#production-configuration)
+* [DDEV Documentation](https://ddev.readthedocs.io/en/stable/)
 :::
