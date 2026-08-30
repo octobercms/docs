@@ -24,6 +24,7 @@ Property | Description
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 **maxItems** | maximum number of items that can be selected.
 **thumbOptions** | additional [resize options](../../extend/services/resizer.md) for generating the thumbnail, or pass `false` to disable thumb generation.
+**useCopyPaste** | shows the select all, copy and paste toolbar buttons when selecting multiple items. Default: `false`.
 
 Set the `mode` to **image** to display a preview of the selected image.
 
@@ -60,3 +61,18 @@ media_gallery:
     mode: image
     maxItems: 10
 ```
+
+### Copying and Pasting Items
+
+When selecting multiple items, enable the `useCopyPaste` property to add **Select All**, **Copy Selected** and **Paste** buttons to the toolbar. This lets the user copy a selection from one media finder field and paste it into another.
+
+```yaml
+media_gallery:
+    label: Image
+    type: mediafinder
+    mode: image
+    maxItems: 10
+    useCopyPaste: true
+```
+
+The copied items are held in the browser and can be pasted into any media finder field that also has this property enabled. Items already present in the target field are skipped, and the `maxItems` limit is respected when pasting.

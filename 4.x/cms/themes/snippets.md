@@ -3,7 +3,7 @@ subtitle: Bridge the gap between developers and publishers.
 ---
 # Snippets
 
-Snippets are blocks inserted into the [rich editor](../../element/form/widget-richeditor.md) or [markdown editor](../../element/form/widget-markdown.md), and configured with the [inspector tool](../../element/inspector-types.md). When the feature is available, an insert snippets button is shown in toolbar, and selecting a snippet will insert it into the editor.
+Snippets are blocks inserted into the [rich editor](../../element/form/widget-richeditor.md) or [markdown editor](../../element/form/widget-markdown.md), and configured with the [inspector tool](../../element/inspector-types.md). When the feature is available, an insert snippets button is shown in toolbar, and selecting a snippet will insert it into the editor. Snippets are inserted as blocks by default, or as [inline snippets](#inline-snippets) that sit within a line of text.
 
 Snippets can be defined as [partials](./partials.md) or [components](./components.md), allowing developers to define reusable and configurable pieces of content. There are many possible applications and examples of using snippets:
 
@@ -77,6 +77,30 @@ public function componentDetails()
         'snippetAjax' => true
     ];
 }
+```
+
+## Inline Snippets
+
+By default a snippet is inserted as a block that occupies its own line. An inline snippet is inserted within a line of text instead, which is useful for small pieces of content such as a phone number, a price or a formatted value.
+
+For a partial snippet, open the partial in the Editor, click the **Snippet** button, and check the **Inline Snippet** option.
+
+For a component snippet, set `snippetInline` to `true` in the [component class definition](../../extend/cms-components.md).
+
+```php
+public function componentDetails()
+{
+    return [
+        // ...
+        'snippetInline' => true
+    ];
+}
+```
+
+An inline snippet should render an inline element, such as a `<span>`, so it sits correctly within the surrounding text.
+
+```twig
+<span class="price">{{ amount }}</span>
 ```
 
 ## Usage Examples

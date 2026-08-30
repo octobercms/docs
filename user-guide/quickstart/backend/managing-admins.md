@@ -3,20 +3,21 @@ subtitle: "Create an administrator, assign a role, and check the event log"
 ---
 # Managing Administrators
 
-Every person who logs in to the backend is an administrator. Right now you are the only one. Let's create a second account, assign it a role, and verify that the system sent a welcome email.
+Every person who logs in to the backend is an administrator. Right now you are the only one. Let's create a second account, assign it a role, and verify that the system sent an invitation email.
 
 ## Create a New Administrator
 
 1. Open the **Settings** area from the main menu.
 2. Click **Administrators** in the left-hand sidebar.
-3. Click the **Add** button.
+3. Click the **New Administrator** button.
 4. Fill in the details, using any name and email you like. For example:
    - **First Name**: `Test`
    - **Last Name**: `Editor`
    - **Email**: `editor@example.com`
-   - **Login**: `editor`
+   - **Username**: `editor`
    - **Password**: pick something simple for now (this is just a local test).
-5. Click **Save**.
+5. Leave the **Send invitation by email** checkbox ticked so the new administrator receives their login details.
+6. Click **Create**.
 
 Your new administrator now appears in the list.
 
@@ -25,21 +26,21 @@ Your new administrator now appears in the list.
 By default the new account has no restrictions. Let's give it a specific role so it only has access to certain areas.
 
 1. Click on **Test Editor** in the administrator list to open their profile.
-2. Find the **Role** dropdown and select **Publisher** (or whichever role fits; you can browse the available roles to see what permissions each one includes).
+2. Find the **Role** options and select **Publisher** (or whichever role fits; you can browse the available roles to see what permissions each one includes).
 3. Click **Save**.
 
 That administrator is now limited to the permissions defined by their role. They won't see settings or areas they don't have access to.
 
 ::: tip
-You can manage roles under **Settings → Administrators → Manage Roles**. Roles are just named groups of permissions, so create as many as your team needs.
+You can manage roles under **Settings → Role Permissions**. Roles are just named groups of permissions, so create as many as your team needs.
 :::
 
 ## Check the Event Log
 
-When you created that administrator, the system should have sent a welcome email. Since your site is probably using the **Log** mail driver (the default for local development), the email was written to the log file instead of actually being sent. Let's check.
+When you created that administrator, the system sent the invitation email. Since your site is probably using the **Log** mail driver (the default for local development), the email was written to the log file instead of actually being sent. Let's check.
 
 1. Go to **Settings → Logs → Event Log**.
-2. Look for a recent entry related to the welcome email. Click it to see the full details.
+2. Look for a recent entry related to the invitation email. Click it to see the full details.
 
 This is where you will check for errors, debug issues, and verify that things like email delivery are working. Get in the habit of checking the event log when something doesn't seem right.
 

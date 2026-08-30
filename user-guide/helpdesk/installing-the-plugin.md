@@ -19,7 +19,7 @@ The Support plugin depends on RainLab.User, which you already installed when set
 
 ## Creating Ticket Types
 
-Ticket types categorize incoming requests so your team can prioritize and route them. Navigate to **Support > Ticket Types** and create a few types:
+Ticket types categorize incoming requests so your team can prioritize and route them. The plugin ships with some example types (General, Sales, Technical, Account, Press) that you can keep or remove. Navigate to **Support > Ticket types** and create a few of your own:
 
 | Type | Code |
 |------|------|

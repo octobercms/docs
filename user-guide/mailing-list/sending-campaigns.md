@@ -7,7 +7,7 @@ With subscribers on your list, you are ready to send them content. In this step,
 
 ## Creating a Campaign
 
-Navigate to **Mailing List > Campaigns** and click **New Campaign**. Enter a name for your campaign (e.g., "Welcome Newsletter") and select the "Default template" page that was generated earlier. Click **Create** to save it.
+Navigate to **Mailing List > Campaigns** and click **New Campaign**. Enter a name for your campaign (e.g., "Welcome Newsletter") and select the "Default template" page that was generated earlier. Click **Create Campaign** to save it.
 
 The campaign is created in **Draft** status. While in draft, you can edit the content as many times as you like.
 
@@ -39,13 +39,13 @@ You can use these tags both in the syntax field content and directly in the temp
 
 ## Previewing and Testing
 
-Before launching, you can preview the campaign and send a test email. Click the **Send test message** button, enter your own email address, and click **Send**. You can optionally select a subscriber list and a specific subscriber to see how the personalization tags resolve for that person.
+Before launching, you can preview the campaign and send a test email. Click the **Send Test Message** button, enter your own email address, and click **Send**. You can optionally select a subscriber list and a specific subscriber to see how the personalization tags resolve for that person.
 
 Check your inbox for the test email. Verify that the content looks correct, the personalization tags resolved properly, and the "View in browser" and "Unsubscribe" links work.
 
 ## Launching the Campaign
 
-When you are satisfied with the content, click **Launch campaign**. You will be asked to select which subscribers should receive the email.
+When you are satisfied with the content, click **Launch Campaign**. You will be asked to select which subscribers should receive the email.
 
 Under **Subscriber Lists**, select the "Newsletter" list. If you have RainLab.User installed, you will also see **Recipient Groups** like "All registered users" that you can select alongside your lists.
 
@@ -53,7 +53,7 @@ The launch dialog offers several options:
 
 - **Delayed launch**: check this to schedule the campaign for a specific date and time. The campaign will stay in Pending status until the scheduled time.
 - **Staggered launch**: divides subscribers into smaller groups and sends in batches. Useful for large lists to avoid email provider rate limits. You can stagger by time period or by a fixed number of messages per batch.
-- **Repeating campaign**: automatically duplicates the campaign after it is sent and schedules the next send. This is covered in the [Dynamic Campaigns](./dynamic-campaigns.md) chapter.
+- **Repeat frequency**: automatically duplicates the campaign after it is sent and schedules the next send. This is covered in the [Dynamic Campaigns](./dynamic-campaigns.md) chapter.
 
 For your first campaign, leave these options unchecked and click **Launch**. The campaign will process immediately.
 
@@ -63,7 +63,7 @@ A campaign moves through several statuses during its lifecycle:
 
 - **Draft**: content is being edited. This is the only status where you can modify the campaign.
 - **Pending**: the campaign is scheduled but has not reached its launch date yet.
-- **Processing**: the subscriber list is being prepared. For large lists, this may take a few minutes.
+- **Processing**: the subscriber list is being prepared. For large lists, this may take a few minutes. The backend displays this status as "Pending".
 - **Active**: emails are being sent. Some subscribers may have already received the message.
 - **Sent**: all emails have been delivered. The campaign dashboard shows open rates and unsubscribe counts.
 - **Cancelled**: the campaign was stopped before completion.

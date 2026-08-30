@@ -14,7 +14,7 @@ Create a new partial at `partials/subscribe-form.htm`:
 [campaignSignup]
 list = "newsletter"
 confirm = 1
-templatePage = "campaign/message"
+templatePage = "campaign/default-template"
 ```
 ```twig
 <div id="subscribe-form">
@@ -65,7 +65,6 @@ templatePage = "campaign/message"
 
 The result partial is rendered after the form is submitted. Create a new partial at `partials/subscribe_result.htm`:
 
-::: cmstemplate
 ```twig
 {% if error %}
     <div class="p-3 bg-red-50 text-red-700 text-sm rounded-md">
@@ -85,7 +84,6 @@ The result partial is rendered after the form is submitted. Create a new partial
     </div>
 {% endif %}
 ```
-:::
 
 ## How the Form Works
 
@@ -97,7 +95,7 @@ The component properties control the behavior:
 
 - `list = "newsletter"`: the subscriber is added to the "Newsletter" list you created earlier
 - `confirm = 1`: the subscriber must confirm their email address before they are fully added
-- `templatePage = "campaign/message"`: the CMS page used to generate the email confirmation URL
+- `templatePage = "campaign/default-template"`: the CMS page used to generate the email confirmation URL
 
 ## Including the Partial
 
@@ -131,7 +129,7 @@ layout = "default"
 With `confirm = 1`, the signup process works in two steps:
 
 1. The visitor fills in the form and submits it. The plugin creates a subscriber record (marked as unconfirmed) and sends a verification email.
-2. The subscriber clicks the confirmation link in the email. The link points to your campaign template page (`campaign/message.htm`) with a `?verify=1` parameter. The `campaignTemplate` component verifies the subscriber and redirects them to a confirmation page.
+2. The subscriber clicks the confirmation link in the email. The link points to your campaign template page (`campaign/default-template.htm`) with a `?verify=1` parameter. The `campaignTemplate` component verifies the subscriber and redirects them to a confirmation page.
 
 The verification email is sent using the `responsiv.campaign::mail.confirm_subscriber` mail template, which you can customize under **Settings > Mail Templates**.
 
@@ -185,7 +183,7 @@ layout = "default"
 ```
 :::
 
-Now update the `campaignTemplate` component in `campaign/message.htm` to redirect to these pages. Open the page in the CMS Editor and update the component configuration:
+Now update the `campaignTemplate` component in `campaign/default-template.htm` to redirect to these pages. Open the page in the CMS Editor and update the component configuration:
 
 ```ini
 [campaignTemplate]

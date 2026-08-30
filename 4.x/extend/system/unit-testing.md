@@ -188,6 +188,24 @@ Method Name | Purpose
 **migrateCurrentPlugin()** | Migrate the current plugin and its dependencies.
 **migratePlugin($code)** | Migrates a specific plugin using its code, eg: `Acme.Blog`.
 
+### Faster Tests using Transactions
+
+Since the database is rebuilt for every test, larger test suites can take a long time to run. Setting the `useTransactions` property to `true` in the test class will migrate the database once for the entire test run instead. Each test then runs inside a database transaction that is rolled back when the test finishes, keeping every test isolated from the others.
+
+```php
+class PostTest extends PluginTestCase
+{
+    /**
+     * @var bool useTransactions isolates each test with a database transaction.
+     */
+    protected $useTransactions = true;
+}
+```
+
+::: warning
+Test code that commits the outer transaction or reconnects to the database will leak changes into the remaining tests. Leave this feature disabled for tests that manage transactions or connections themselves.
+:::
+
 ### Changing the Database
 
 By default unit tests use SQLite stored in memory for the plugin testing environment. You can modify this setting in the `phpunit.xml` file. The values here are based on the `/config/database.php` configuration file.

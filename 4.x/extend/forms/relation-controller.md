@@ -98,7 +98,7 @@ Property | Type | Description
 **customViewPath** | List | specify a custom view path to override partials used by the list.
 **recordOnClick** | List | custom JavaScript code to execute when clicking on a record.
 **toolbarPartial** | Both | a reference to a controller partial file with the toolbar buttons. Eg: `_relation_toolbar.php`. This property overrides the `toolbarButtons` property.
-**toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add|remove`.
+**toolbarButtons** | Both | the set of buttons to display. This can be formatted as an array or a pipe separated string, or set to `false` to show no buttons. Available options are: `create`, `update`, `delete`, `add`, `remove`, `link`, & `unlink`. Example: `add|remove`. Custom button names are also supported, see [Adding Custom Toolbar Buttons](#adding-custom-toolbar-buttons).
 **structure** | List | options to enable [sorting records](../lists/structures.md) for the list.
 
 These configuration values can be specified only for the **manage** property.
@@ -519,6 +519,43 @@ public function onSaveSignature()
     );
 }
 ```
+
+### Adding Custom Toolbar Buttons
+
+In addition to the built-in `toolbarButtons` (such as `create`, `add`, `delete`), you may add your own buttons by listing a custom name and providing a matching partial in the controller's views directory. The partial name follows the convention `_relation_button_{name}.php`.
+
+For example, to add an **Export** button to the toolbar, include `export` in the `toolbarButtons` definition.
+
+```yaml
+# config_relation.yaml
+items:
+    view:
+        list: $/acme/pay/models/invoiceitem/columns.yaml
+        toolbarButtons: create|delete|export
+```
+
+Then create a partial named `_relation_button_export.php` in the controller's views directory.
+
+```php
+<a
+    data-request="onExportRelation"
+    href="javascript:;"
+    class="btn btn-sm btn-secondary"
+>
+    <i class="icon-download"></i> Export
+</a>
+```
+
+The button's AJAX handler is defined as a method on the controller, just like any other handler.
+
+```php
+public function onExportRelation()
+{
+    // Perform export logic
+}
+```
+
+The same approach can be used to override any of the default button partials. For example, defining a `_relation_button_create.php` partial in the controller's views directory will take precedence over the built-in **Create** button markup.
 
 #### See Also
 

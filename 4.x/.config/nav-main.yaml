@@ -357,8 +357,10 @@
         - components/section
         - components/collection
         - components/global
+        - components/submission
         - components/resources
         - components/sitepicker
+        - components/translatable
 -
     title: Resources
     children:

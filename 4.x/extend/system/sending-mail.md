@@ -251,6 +251,41 @@ View::share('site_name', 'October CMS');
 
 This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration.md). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 
+### Translating Mail Templates
+
+When using [site definitions](../../cms/multisite/multisite.md) with different locales, mail templates are translated for the locale of the person receiving the message.
+
+Templates customized in the admin panel store translated values for the subject and content fields, edited using the translate popup available on each field. Layouts and partials translate the same way, so shared markup stays locale-consistent.
+
+Registered view templates are translated by placing a copy of the file inside a subdirectory named after the locale, matching the convention used by [content blocks](../../cms/themes/content.md). The locale directory is created next to the base view file.
+
+```
+plugins/acme/blog/views/mail/
+├── welcome.htm          ← acme.blog::mail.welcome (default)
+├── fr/
+│   └── welcome.htm      ← French
+└── ru/
+    └── welcome.htm      ← Russian
+```
+
+The locale is resolved for each message in the following order, where a regional locale such as `fr-ca` also checks its base language `fr`.
+
+1. The `_current_locale` value in the message data, when passed explicitly.
+2. The active application locale, set by the active site.
+
+To send a message in a specific locale, pass `_current_locale` with the message data and the entire message is composed in that locale, including the subject, layout and partials.
+
+```php
+Mail::sendTo('user@domain.tld', 'acme.blog::mail.welcome', [
+    'name' => 'Joe',
+    '_current_locale' => 'fr',
+]);
+```
+
+Queued messages capture the locale and site context when they are queued, so translated templates are selected correctly when the queue worker sends the message. To pin a queued message to a specific locale, pass `_current_locale` in the message data.
+
+The feature is enabled with the `multisite.translate.system_mail_templates` configuration value (default `true`) found in the **config/multisite.php** file.
+
 ## Sending Mail
 
 To send a message, use the `send` method on the `Mail` facade which accepts three arguments. The first argument is a unique mail code used to locate either the mail view or mail template. The second argument is an array of data you wish to pass to the view. The third argument is a `Closure` callback which receives a message instance, allowing you to customize the recipients, subject, and other aspects of the mail message.

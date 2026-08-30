@@ -29,6 +29,8 @@ redirect = "forum/index"
     </h1>
 
     <form data-request="onLogin" data-request-flash>
+        <input type="hidden" name="redirect" value="forum/index" />
+
         <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
                 Email address
@@ -90,11 +92,12 @@ redirect = "forum/index"
 
 ## How This Works
 
-The `[authentication]` component provides the `onLogin` handler. When the form is submitted, it reads the `email`, `password`, and `remember` fields and authenticates the user. On success, it redirects to the page specified in the session component.
+The `[authentication]` component provides the `onLogin` handler. When the form is submitted, it reads the `email`, `password`, and `remember` fields and authenticates the user. On success, it redirects to the page name posted in the hidden `redirect` field.
 
 Key attributes:
 
 - `data-request="onLogin"`: calls the component's login handler via AJAX
+- `name="redirect"` hidden field: tells the handler where to send the user after a successful login. Without it, the user stays on the login page
 - `data-request-flash`: displays success or error messages using the flash message system
 - `data-attach-loading`: adds a loading indicator to the button while the request is in progress
 
@@ -123,6 +126,8 @@ redirect = "forum/index"
     </h1>
 
     <form data-request="onRegister" data-request-flash>
+        <input type="hidden" name="redirect" value="forum/index" />
+
         <div class="mb-4">
             <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">
                 First name
@@ -196,7 +201,7 @@ redirect = "forum/index"
 ```
 :::
 
-The `[registration]` component provides the `onRegister` handler. It reads the form fields (`first_name`, `last_name`, `email`, `password`), creates the user account, and logs them in automatically.
+The `[registration]` component provides the `onRegister` handler. It reads the form fields (`first_name`, `last_name`, `email`, `password`), creates the user account, and logs them in automatically. The same hidden `redirect` field sends the new user to the forum index after signing up.
 
 ## Try It Out
 

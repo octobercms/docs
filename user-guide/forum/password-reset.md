@@ -12,11 +12,10 @@ Create a new page at `pages/account/forgot-password.htm`:
 ::: cmstemplate
 ```ini
 title = "Reset Password"
-url = "/forgot-password/:code?"
+url = "/forgot-password"
 layout = "default"
 
 [resetPassword]
-paramCode = "code"
 ```
 ```twig
 <div class="max-w-sm mx-auto">
@@ -128,7 +127,7 @@ paramCode = "code"
 
 ## How This Works
 
-The URL `/forgot-password/:code?` has an optional parameter (`:code?`). The `paramCode = "code"` property tells the `resetPassword` component to look for the token in this URL segment.
+The reset link in the email arrives with `reset` and `email` query parameters, for example `/forgot-password?reset=TOKEN&email=user@example.com`. The `resetPassword` component reads these parameters and exposes them as `resetPassword.token` and `resetPassword.email`.
 
 The page handles two scenarios:
 
@@ -141,7 +140,7 @@ The page handles two scenarios:
 The complete flow spans two pages:
 
 1. On the **login page**, the "Forgot your password?" link takes the user to the recover password flow. The `authentication` component provides an `onRecoverPassword` handler that sends the reset email.
-2. The email contains a link to `/forgot-password/TOKEN_HERE`. The user arrives on this page with the token in the URL.
+2. The email contains a link to `/forgot-password?reset=TOKEN&email=EMAIL`. The user arrives on this page with the token in the query string.
 3. The `resetPassword` component reads the token, and the user enters a new password.
 
 To add the email recovery step to your login page, you could add a second form that calls `onRecoverPassword`. For simplicity, the login page we built links directly to this page, and you can test the flow through the backend or application logs.

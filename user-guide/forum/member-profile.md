@@ -132,17 +132,6 @@ Create `partials/forum/member/controlpanel.htm` for the sidebar actions:
     </div>
 
     {% if user %}
-        {% if member.id != otherMember.id %}
-            <a
-                href="javascript:;"
-                data-request="onPoke"
-                data-request-flash
-                class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50"
-            >
-                Poke member
-            </a>
-        {% endif %}
-
         {% if otherMember.is_moderator %}
             <div class="px-4 py-3">
                 <p class="text-xs font-semibold text-gray-400 uppercase mb-2">
@@ -187,7 +176,6 @@ Create `partials/forum/member/controlpanel.htm` for the sidebar actions:
             <a
                 href="javascript:;"
                 data-request="onReport"
-                data-request-update="{ 'forum/member/controlpanel': '#memberControlPanel' }"
                 data-request-confirm="Are you sure you want to flag this member as a spammer?"
                 class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50"
             >
@@ -200,10 +188,14 @@ Create `partials/forum/member/controlpanel.htm` for the sidebar actions:
 
 The sidebar shows different actions depending on who is viewing:
 
-- **All logged-in users**: can poke the member (a friendly notification) and report spammers
+- **All logged-in users**: can report spammers. The `onReport` handler flags the member and reloads the page
 - **Moderators** (`otherMember.is_moderator`): can approve/unapprove, ban/unban, and purge all posts by the member
 
 The approve and ban buttons refresh the sidebar via `data-request-update` to reflect the updated state.
+
+::: tip
+The component also provides an `onPoke` handler for sending a friendly notification to a member. It requires the RainLab.UserPlus plugin, so it is not included in this tutorial.
+:::
 
 ## How Forum Members Work
 

@@ -8,13 +8,13 @@ In October CMS, a **theme** is the folder that holds everything your visitors se
 A theme's folder structure looks like this:
 
 ::: dir
-- themes/
-  - my-theme/
-    - **pages/**: individual pages, each with its own URL
-    - **layouts/**: shared page structures (header, footer, common elements)
-    - **partials/**: reusable template fragments
-    - **content/**: static content blocks that can be edited in the backend
-    - **assets/**: CSS, JavaScript, images, and fonts
+├── themes
+|   └── my-theme
+|       ├── `pages`  _← individual pages, each with its own URL_
+|       ├── `layouts`  _← shared page structures (header, footer)_
+|       ├── `partials`  _← reusable template fragments_
+|       ├── `content`  _← static content blocks, editable in the backend_
+|       └── `assets`  _← CSS, JavaScript, images, and fonts_
 :::
 
 You don't need to memorize this. You will learn each piece as we go. For now, let's create a theme.
@@ -26,7 +26,7 @@ You don't need to memorize this. You will learn each piece as we go. For now, le
 
 ## Create a New Blank Theme
 
-1. Click the **Create a new blank theme** button.
+1. Click the **Create a New Blank Theme** button.
 2. Enter the following:
    - **Name**: `My Theme`
    - **Directory Name**: `mytheme`

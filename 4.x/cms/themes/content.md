@@ -41,6 +41,31 @@ Another example rendering some markdown with the `md` extension.
 {% content 'my-markdown.md' %}
 ```
 
+## Translating Content Blocks
+
+When using [site definitions](../multisite/multisite.md) with different locales, a content block is translated by placing a copy of the file inside a subdirectory named after the locale. The base file acts as the default and the locale directory mirrors the same file path.
+
+```
+content/
+├── my-content.htm          ← Default locale
+├── fr/
+│   └── my-content.htm      ← French
+└── ru/
+    └── my-content.htm      ← Russian
+```
+
+Nested paths mirror the same way, so `content/blog/intro.htm` translates as `content/fr/blog/intro.htm`, where the locale directory is created at the content root.
+
+When the block is rendered, the directories are checked against the active site's locale in the following order, where the first matching file wins.
+
+1. The exact site locale, for example `fr-ca`.
+2. The base language of the locale, for example `fr`.
+3. The base file.
+
+This means a site using the `fr-ca` locale shares the `fr` directory until a dedicated `fr-ca` directory exists, and any site without a matching directory falls back to the base file. The lookup only applies to directories matching the active site's locale, so directories with other names remain addressable directly, for example `{% content 'fr/my-content.htm' %}`.
+
+The feature is enabled with the `multisite.translate.cms_content` configuration value (default `true`) found in the **config/multisite.php** file.
+
 ## Passing Variables to Content Blocks
 
 Sometimes you may need to pass variables to a content block from the external code. While content blocks do not support Twig markup, they do support using variables with basic syntax. You can pass variables to content blocks by specifying them after the content block name in the `{% content %}` tag.
