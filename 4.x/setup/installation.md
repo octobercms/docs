@@ -106,7 +106,7 @@ Install October CMS in the project directory.
 ddev composer create-project october/october ./
 ```
 
-Run the installation command, entering your [License Key](https://octobercms.com/help/site/projects#project-id) when prompted.
+Run the installation command.
 
 ```bash
 ddev artisan october:install --no-interaction
@@ -117,18 +117,6 @@ Finally, open the website in a browser.
 ```bash
 ddev launch
 ```
-
-::: tip
-If the database connection fails, check that the **.env** file contains the DDEV database credentials, where the host, database name, username and password are all set to `db`.
-```ini
-DB_CONNECTION=mysql
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=db
-DB_USERNAME=db
-DB_PASSWORD=db
-```
-:::
 
 ## Wizard Installation
 
