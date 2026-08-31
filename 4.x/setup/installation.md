@@ -109,14 +109,7 @@ ddev composer create-project october/october ./
 Run the installation command, entering your [License Key](https://octobercms.com/help/site/projects#project-id) when prompted.
 
 ```bash
-ddev artisan october:install
-```
-
-Restart the environment so DDEV writes the database credentials to the **.env** file, then run the migration command to initialize the database.
-
-```bash
-ddev restart
-ddev artisan october:migrate
+ddev artisan october:install --no-interaction
 ```
 
 Finally, open the website in a browser.
