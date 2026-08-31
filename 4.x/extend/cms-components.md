@@ -54,6 +54,8 @@ class BlogPosts extends \Cms\Classes\ComponentBase
 
 The `componentDetails` method is required. The method should return an array with two keys: `name` and `description`. The name and description are display in the CMS back-end user interface.
 
+The array may also include the `ajaxPartial` key set to `true`, which wraps the [`{% component %}` tag](../markup/tag/component.md) output in an [AJAX partial](../markup/tag/ajax-partial.md) so it can be updated in place using `_self`.
+
 When this [component is attached to a page or layout](../cms/themes/components.md), the class properties and methods become available on the page through the component variable, which name matches the component short name or the alias. For example, if the BlogPost component from the previous example was defined on a page with its short name:
 
 ```ini

@@ -284,7 +284,7 @@ Mail::sendTo('user@domain.tld', 'acme.blog::mail.welcome', [
 
 Queued messages capture the locale and site context when they are queued, so translated templates are selected correctly when the queue worker sends the message. To pin a queued message to a specific locale, pass `_current_locale` in the message data.
 
-The feature is enabled with the `multisite.translate.system_mail_templates` configuration value (default `true`) found in the **config/multisite.php** file.
+The feature is enabled with the `multisite.features.backend_mail_template` configuration value (default `false`) found in the **config/multisite.php** file.
 
 ## Sending Mail
 

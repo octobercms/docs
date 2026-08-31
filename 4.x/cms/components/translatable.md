@@ -69,7 +69,7 @@ When a site with a matching locale is active, the translated URL replaces the pa
 - `/contactez` displays the page on the French site and `/contact` responds with a redirect to `/contactez`.
 - `/contact` displays the page on every other site and `/contactez` is not found.
 
-The redirect status code is set with the `multisite.translate.cms_page_url_redirect` configuration value (default `301`), where `false` disables the redirect and responds with a 404 instead.
+The default URL redirects to its translated URL with a `301` permanent redirect status code.
 
 Links generated for the page follow the same rules, so the `|page` filter, menus and sitemaps produce the translated URL automatically. The [Site Picker component](./sitepicker.md) and `hreflang` links resolve the translated URL for each alternative site.
 

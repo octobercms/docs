@@ -139,6 +139,7 @@ Feature | Description
 `system_asset_combiner` | Asset combiner cache keys are unique to the site
 `cms_maintenance_setting` | Maintenance Mode Settings are unique for each site
 `backend_mail_setting` | Mail Settings are unique for each site
+`backend_mail_template` | Mail templates translate via attributes and locale view directories
 `dashboard_traffic_statistics` | Dashboard traffic statistics are unique for each site
 
 ### Per-Site Plugin Management

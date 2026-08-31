@@ -64,8 +64,6 @@ When the block is rendered, the directories are checked against the active site'
 
 This means a site using the `fr-ca` locale shares the `fr` directory until a dedicated `fr-ca` directory exists, and any site without a matching directory falls back to the base file. The lookup only applies to directories matching the active site's locale, so directories with other names remain addressable directly, for example `{% content 'fr/my-content.htm' %}`.
 
-The feature is enabled with the `multisite.translate.cms_content` configuration value (default `true`) found in the **config/multisite.php** file.
-
 ## Passing Variables to Content Blocks
 
 Sometimes you may need to pass variables to a content block from the external code. While content blocks do not support Twig markup, they do support using variables with basic syntax. You can pass variables to content blocks by specifying them after the content block name in the `{% content %}` tag.
