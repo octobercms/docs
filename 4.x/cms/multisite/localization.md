@@ -50,6 +50,24 @@ View [the markup guide](../../markup/filter/trans.md) to learn more about transl
 ```
 :::
 
+## Scanning for Messages
+
+Instead of adding every localization key by hand, the theme templates can be scanned for translatable strings. The scanner inspects the markup of every layout, page and partial in the theme, collecting string literals passed to the translation filters (`|trans`, `|_`, `|__`, `|trans_choice`) and functions (`__()`, `trans()`, `trans_choice()`).
+
+Language files are managed in the CMS Editor area of the admin panel, in the **Languages** section of the navigator. When editing a language file, click the **Scan for Messages** button in the toolbar and any newly discovered messages are added to the file as keys with empty translations, keeping the existing values untouched.
+
+The same operation is available with the `theme:scan` artisan command, where new keys are written to the language file of the primary site locale.
+
+```bash
+php artisan theme:scan mytheme
+```
+
+Use the `--locale` option to target a different language file, or the `--dry-run` option to list the found messages without writing anything.
+
+```bash
+php artisan theme:scan mytheme --locale=fr --dry-run
+```
+
 #### See Also
 
 ::: also

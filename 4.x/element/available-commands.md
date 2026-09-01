@@ -259,6 +259,26 @@ To delete all the database templates at the same time, use the `--purge-db` opti
 php artisan theme:copy demo --import-db --purge-db
 ```
 
+### Command - `theme:scan`
+
+`theme:scan` - scan the theme templates for translatable strings and add any missing keys to the [theme language file](../cms/multisite/localization.md). The following example will scan the theme in `/themes/demo` and write new keys to the language file of the primary site locale.
+
+```bash
+php artisan theme:scan demo
+```
+
+Use the `--locale` option to target a different language file.
+
+```bash
+php artisan theme:scan demo --locale=fr
+```
+
+Use the `--dry-run` option to list the found messages without writing the language file.
+
+```bash
+php artisan theme:scan demo --dry-run
+```
+
 ## Scaffolding
 
 The scaffolding commands generate the boilerplate files for common October CMS objects. Unless noted otherwise, the first argument is the plugin namespace (eg: `Acme.Blog`), and most commands accept the `--overwrite` (or `-o`) option to replace existing files.
