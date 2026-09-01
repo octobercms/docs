@@ -1,9 +1,9 @@
 ---
 subtitle: Twig Function
 ---
-# __()
+# trans()
 
-The `__()` function is the preferred way to translate strings in your theme, using the applications localization configuration. The localization strings can be loaded by passing the default translation of your string.
+The `trans()` or `__()` function is the preferred way to translate strings in your theme, using the applications localization configuration. The localization strings can be loaded by passing the default translation of your string.
 
 ```twig
 {{ __('I love programming.') }}
