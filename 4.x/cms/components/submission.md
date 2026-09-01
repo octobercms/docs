@@ -3,6 +3,8 @@ subtitle: Displays a form for accepting user submitted content.
 ---
 # Submission
 
+<VideoBlockLink src="https://www.youtube.com/watch?v=SzIYzEXF3Wk" title="User Content Submissions" description="This video demonstrates how to accept user submitted content, such as comments and contact forms, with the submission component." prompt="Watch the demonstration" />
+
 The `submission` component displays a frontend form for a [submission blueprint](../tailor/blueprints.md#submission), used to capture user generated content such as blog comments and contact form submissions. The component handles rendering the form, validating the input and saving the record for moderation.
 
 ## Available Properties
