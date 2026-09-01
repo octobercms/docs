@@ -19,7 +19,7 @@ The following table summarizes the five approaches available. Most projects will
 
 ## Locale Strings
 
-Use locale strings for UI text that is not tied to a database record: button labels, flash messages, form labels, navigation items, and validation messages. Translations are stored in `lang/en.json` files inside your plugin or theme directory and accessed with the `__()` helper or the `|trans` Twig filter.
+Use locale strings for UI text that is not tied to a database record: button labels, flash messages, form labels, navigation items, and validation messages. Translations are stored in `lang/en.json` files inside your plugin or theme directory and accessed with the `__()` helper in both PHP and Twig.
 
 This approach works identically whether you have one site or many. Every plugin should use it for its interface strings.
 
@@ -28,7 +28,7 @@ echo __('Save Changes');
 ```
 
 ```twig
-{{ 'Save Changes'|trans }}
+{{ __('Save Changes') }}
 ```
 
 Read the [Localization article](./localization.md) for plugin lang files, or the [Theme Localization article](../../cms/multisite/localization.md) for theme lang files.

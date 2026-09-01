@@ -37,22 +37,22 @@ You are also able to define code-based keys by using the complete language key i
 }
 ```
 
-Language strings can be accessed in your theme files using the `trans` Twig filter.
+Language strings can be accessed in your theme files using the `__()` Twig function.
 
 ::: tip
-View [the markup guide](../../markup/filter/trans.md) to learn more about translation in Twig.
+View [the markup guide](../../markup/function/trans.md) to learn more about translation in Twig.
 ```twig
 <!-- j'adore programmer -->
-{{ 'I love programming.'|trans }}
+{{ __('I love programming.') }}
 
 <!-- October CMS -->
-{{ 'theme.options.website_name'|trans }}
+{{ __('theme.options.website_name') }}
 ```
 :::
 
 ## Scanning for Messages
 
-Instead of adding every localization key by hand, the theme templates can be scanned for translatable strings. The scanner inspects the markup of every layout, page and partial in the theme, collecting string literals passed to the translation filters (`|trans`, `|_`, `|__`, `|trans_choice`) and functions (`__()`, `trans()`, `trans_choice()`).
+Instead of adding every localization key by hand, the theme templates can be scanned for translatable strings. The scanner inspects the markup of every layout, page and partial in the theme, collecting string literals passed to the translation functions (`__()`, `trans()`, `trans_choice()`) and filters (`|trans`, `|_`, `|__`, `|trans_choice`).
 
 Language files are managed in the CMS Editor area of the admin panel, in the **Languages** section of the navigator. When editing a language file, click the **Scan for Messages** button in the toolbar and any newly discovered messages are added to the file as keys with empty translations, keeping the existing values untouched.
 

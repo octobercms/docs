@@ -266,7 +266,6 @@
         - filter/page
         - filter/link
         - filter/theme
-        - filter/trans
         - filter/media
         - filter/resize
         - filter/default
@@ -282,6 +281,7 @@
         - function/redirect
         - function/collect
         - function/config
+        - function/trans
         - function/carbon
         - function/pager
         - function/abort
