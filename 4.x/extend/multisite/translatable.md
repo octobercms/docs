@@ -169,6 +169,28 @@ Use the `orderByTranslation` scope to sort by translated attribute values.
 Product::orderByTranslation('name', 'fr', 'asc')->get();
 ```
 
+### Base Value Fallback Scopes
+
+The `whereTranslation` and `orderByTranslation` scopes match and sort against stored translation rows only, so records with no translation for the requested locale are excluded from a `where` and sort as `NULL` in an order. When you want untranslated records to fall back to their default-locale value instead, use the `transWhere` and `transOrderBy` scopes.
+
+Use the `transWhere` scope to filter by either the base value or the translated value for the locale. The locale defaults to the active locale when omitted.
+
+```php
+Product::transWhere('name', 'Produit', 'fr')->get();
+```
+
+Like `whereTranslation`, it accepts a comparison operator.
+
+```php
+Product::transWhere('name', '%Prod%', 'fr', 'like')->get();
+```
+
+Use the `transOrderBy` scope to sort by the translated value, falling back to the base column value for untranslated records. The locale defaults to the active locale when omitted.
+
+```php
+Product::transOrderBy('name', 'asc', 'fr')->get();
+```
+
 ## Eager Loading
 
 Use the `withTranslation` scope to eager load translations for a single locale, avoiding N+1 queries.
@@ -234,6 +256,10 @@ Method | Description
 `isTranslatableAttribute($key)` | Check if attribute should be translated right now.
 `shouldTranslate()` | Check if translation is active (context !== default).
 `getTranslatableAttributes()` | Get the `$translatable` attribute names.
+`whereTranslation($key, $locale, $value, $operator = '=')` | Filter by a stored translated value only.
+`orderByTranslation($key, $locale, $direction = 'asc')` | Sort by a stored translated value (untranslated rows sort as `NULL`).
+`transWhere($key, $value, $locale = null, $operator = '=')` | Filter by the base or translated value, defaulting to the active locale.
+`transOrderBy($key, $direction = 'asc', $locale = null)` | Sort by the translated value, falling back to the base value.
 
 #### See Also
 
