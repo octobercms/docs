@@ -298,6 +298,24 @@ Rejected submissions are deleted forever after the `purgeRejectedDays` retention
 
 Every submission automatically captures the visitor IP address and user agent in the `submitted_ip` and `submitted_user_agent` attributes. These are available as a list column, a filter scope and as read-only fields when viewing the record.
 
+### Multi-Step Fields
+
+Fields on a submission blueprint can be assigned to a step using the `tags` property, which accepts a single tag or an array of tags. This groups fields so they can be captured across several steps by a [multi-step submission form](../components/submission.md#multi-step-forms).
+
+```yaml
+fields:
+    rating:
+        label: Rating
+        type: dropdown
+        tags: step1
+
+    comments:
+        label: Comments
+        type: textarea
+        validation: nullable|max:2000
+        tags: step2
+```
+
 ::: tip
 When your site runs behind a proxy or CDN, configure the [trusted proxy settings](../../setup/configuration.md) so the correct visitor IP address is captured.
 :::
