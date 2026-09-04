@@ -307,14 +307,17 @@ fields:
     rating:
         label: Rating
         type: dropdown
+        validation: required
         tags: step1
 
     comments:
         label: Comments
         type: textarea
-        validation: nullable|max:2000
+        validation: required|max:2000
         tags: step2
 ```
+
+Each step validates only the fields tagged for that step, so a required field on a later step never prevents an earlier step from being saved.
 
 ::: tip
 When your site runs behind a proxy or CDN, configure the [trusted proxy settings](../../setup/configuration.md) so the correct visitor IP address is captured.

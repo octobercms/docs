@@ -102,18 +102,17 @@ fields:
     rating:
         label: Rating
         type: dropdown
+        validation: required
         tags: step1
 
     comments:
         label: Comments
         type: textarea
-        validation: nullable|max:2000
+        validation: required|max:2000
         tags: step2
 ```
 
-::: tip
-Fields validated on a later step should use the `nullable` rule so an earlier step can be saved before those fields are populated. Without it, a required field on a future step blocks the earlier steps from saving.
-:::
+When a step is saved, only the validation rules for the fields belonging to that step are applied, so each step can define its own required fields without affecting the others. The full rule set for every field is enforced later when the form is completed.
 
 ### Navigating Steps
 
