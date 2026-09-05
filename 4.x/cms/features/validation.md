@@ -173,17 +173,17 @@ When using the `data-request-validate` attribute in combination with the [`data-
 
 ## Working with JavaScript
 
-To implement custom functionality for the error messages, hook into the `ajax:invalid-field` event to display the field and `ajax:promise` to reset the form on a new submission. The JavaScript events used are found in the [AJAX JavaScript API](../../ajax/javascript-api.md).
+To style the invalid fields themselves, hook into the `ajax:invalid-field` event to mark each field and `ajax:promise` to reset the form on a new submission. The following applies the `is-invalid` class, which pairs with the [Bootstrap validation styles](https://getbootstrap.com/docs/5.3/forms/validation/) and a sibling `invalid-feedback` element. Substitute any class you prefer. The JavaScript events used are found in the [AJAX JavaScript API](../../ajax/javascript-api.md).
 
 ```js
 addEventListener('ajax:invalid-field', function(event) {
     const { element, fieldName, errorMsg, isFirst } = event.detail;
-    element.classList.add('has-error');
+    element.classList.add('is-invalid');
 });
 
 addEventListener('ajax:promise', function(event) {
-    event.target.closest('form').querySelectorAll('.has-error').forEach(function(el) {
-        el.classList.remove('has-error');
+    event.target.closest('form').querySelectorAll('.is-invalid').forEach(function(el) {
+        el.classList.remove('is-invalid');
     });
 });
 ```
