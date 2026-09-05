@@ -116,16 +116,16 @@ When a step is saved, only the validation rules for the fields belonging to that
 
 ### Navigating Steps
 
-Steps are navigated using the `onFormStep` AJAX handler, which understands two posted values.
+Two AJAX handlers move between steps, one for each direction.
 
-Value | Description
------ | -----------
-**_form_tag** | the tag of the fields to validate and save before moving on (a **Next** action).
-**_form_goto** | the step to display after handling the request.
+Handler | Posted value | Description
+------- | ------------ | -----------
+**onFormStep** | `_form_step` | the tag of the fields to validate and save. This is the forward (**Next**) action, and the saved step becomes the active step.
+**onFormGoto** | `_form_goto` | the step to display without validating or saving. This is the backward (**Back**) action, so the visitor never loses earlier input.
 
-To advance a step, post both values. The fields carrying the `_form_tag` are validated against the blueprint and saved to the record, then the step named by `_form_goto` is displayed. To go back, post only `_form_goto`. No validation or saving occurs, and the target step is displayed using the values already saved, so the visitor never loses earlier input.
+Keeping the two directions on separate handlers means a **Back** action never triggers validation, even when the step form contains a hidden `_form_step` field that gets submitted with the request.
 
-The current step is available as the `formTag` variable, and the record being built is available as the `formModel` variable, letting you display the appropriate step and pre-fill fields with previously saved values.
+The active step is available as the `formTag` variable, and the record being built is available as the `formModel` variable, letting you display the appropriate step and pre-fill fields with previously saved values.
 
 ```twig
 <div class="survey-form">
@@ -137,7 +137,7 @@ The current step is available as the `formTag` variable, and the record being bu
             <textarea name="comments" placeholder="Comments">{{ formModel.comments }}</textarea>
 
             <button type="button"
-                data-request="surveyForm::onFormStep"
+                data-request="surveyForm::onFormGoto"
                 data-request-data="{ _form_goto: 'start' }"
                 data-request-update="{ _self: true }">
                 Back
@@ -149,8 +149,7 @@ The current step is available as the `formTag` variable, and the record being bu
 
     {% else %}
         <form data-request="surveyForm::onFormStep" data-request-update="{ _self: true }">
-            <input type="hidden" name="_form_tag" value="step1">
-            <input type="hidden" name="_form_goto" value="step1">
+            <input type="hidden" name="_form_step" value="step1">
 
             <select name="rating">
                 <option value="good">Good</option>
@@ -165,7 +164,7 @@ The current step is available as the `formTag` variable, and the record being bu
 </div>
 ```
 
-Here the first screen saves the `step1` fields and advances by displaying the `step1` step, which collects the remaining input. The final step submits to the `onFormSubmit` handler as usual, which completes the record and enforces the full validation rule set across all fields. The **Back** button navigates to `start`, a step name that matches no fields, returning the form to its initial screen.
+Here the first screen saves the `step1` fields, which becomes the active step and displays the screen collecting the remaining input. The final step submits to the `onFormSubmit` handler as usual, which completes the record and enforces the full validation rule set across all fields. The **Back** button navigates to `start`, a step name that matches no fields, returning the form to its initial screen.
 
 ### Partial Submissions
 
