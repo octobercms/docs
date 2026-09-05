@@ -138,7 +138,7 @@ The active step is available as the `formTag` variable, and the record being bui
 
             <button type="button"
                 data-request="surveyForm::onFormGoto"
-                data-request-data="{ _form_goto: 'start' }"
+                data-request-data="{ _form_goto: '' }"
                 data-request-update="{ _self: true }">
                 Back
             </button>
@@ -164,7 +164,7 @@ The active step is available as the `formTag` variable, and the record being bui
 </div>
 ```
 
-Here the first screen saves the `step1` fields, which becomes the active step and displays the screen collecting the remaining input. The final step submits to the `onFormSubmit` handler as usual, which completes the record and enforces the full validation rule set across all fields. The **Back** button navigates to `start`, a step name that matches no fields, returning the form to its initial screen.
+Here the first screen saves the `step1` fields, which becomes the active step and displays the screen collecting the remaining input. The final step submits to the `onFormSubmit` handler as usual, which completes the record and enforces the full validation rule set across all fields. The **Back** button posts an empty `_form_goto`, which matches no named step and falls through to the initial screen rendered by the template's `{% else %}` branch.
 
 ### Partial Submissions
 
