@@ -55,10 +55,16 @@ For the first argument you may pass either the login name or email address. For 
 
 ### Command - `october:optimize`
 
-The `october:optimize` will cache the framework and platform files for performance.
+The `october:optimize` will cache the framework and platform files for performance. This caches the configuration, routes and, when the CMS module is installed, the theme files.
 
 ```bash
 php artisan october:optimize
+```
+
+To remove these cached files, use the `--clear` option. This clears the configuration, routes and theme caches created by the command above.
+
+```bash
+php artisan october:optimize --clear
 ```
 
 ## Project Management
