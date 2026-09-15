@@ -100,6 +100,47 @@ To create a new plugin or theme that uses an external package or library, you sh
 
 3. Copy this definition from the root **composer.json** file and include it in the **plugins/acme/blog/composer.json** file for your plugin. Now the dependency is available to your app and also required by the plugin for others to use.
 
+::: warning
+Do not commit the plugin's `vendor` directory to source control as a way to ship its dependencies. October CMS loads packages through Composer at the project level, and a bundled `vendor` directory inside a plugin can conflict with the project autoloader. Declare dependencies in the plugin `composer.json` instead, as described below.
+:::
+
+### Merging Plugin Dependencies
+
+When a plugin declares its own dependencies in a `composer.json` file, the project needs a way to read and install them. This is handled by the [wikimedia/composer-merge-plugin](https://github.com/wikimedia/composer-merge-plugin) package, which merges each plugin's `composer.json` into the project when Composer runs. This lets a plugin ship its dependencies without bundling a `vendor` directory.
+
+The merge plugin is not included by default, so add it to your project once.
+
+1. In the root directory, require the merge plugin.
+
+```bash
+composer require wikimedia/composer-merge-plugin
+```
+
+2. Add a `merge-plugin` section to the `extra` property of the root **composer.json** file so that it includes every plugin's `composer.json` file.
+
+```json
+"extra": {
+    "merge-plugin": {
+        "include": ["plugins/*/*/composer.json"],
+        "recurse": true,
+        "replace": false,
+        "merge-dev": false
+    }
+}
+```
+
+3. If Composer prompts to allow the plugin, add it to the `allow-plugins` section of the `config` property.
+
+```json
+"config": {
+    "allow-plugins": {
+        "wikimedia/composer-merge-plugin": true
+    }
+}
+```
+
+Now when you run `composer update`, any dependency declared in a plugin's `composer.json` file is installed and managed at the project level.
+
 ## Tagging a Release
 
 Packages in October CMS follow [semantic versioning](https://semver.org/) and Composer uses git to determine the stability and impact of a given release.
