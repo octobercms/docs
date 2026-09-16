@@ -39,6 +39,7 @@ Property | Description
 **showExport** | displays a toolbar button for exporting records. Default: `true`.
 **showImport** | displays a toolbar button for importing records. Default: `true`.
 **modelClass** | replaces the PHP model class with a [custom model instance](./models.md).
+**permissions** | customize the permission `code` and `label` registered for this blueprint (see below).
 
 ### Entry Variants
 
@@ -226,6 +227,33 @@ pagefinder:
         category: categories.0.slug
 ```
 
+### Custom Permissions
+
+Every blueprint registers permissions in the admin panel, and by default the permission code is based on the blueprint UUID and the label is based on the blueprint name. When multiple blueprints share the same name, the `permissions` property is used to make them easier to identify.
+
+```yaml
+name: Tag
+handle: Blog\Tag
+
+permissions:
+    label: Blog Tags
+```
+
+Specify a custom `code` to give the permission a readable code, this can also be used to share a single permission definition between multiple blueprints by giving them the same code.
+
+```yaml
+permissions:
+    code: blog_tags
+    label: Blog Tags
+```
+
+The following values are supported by the `permissions` property.
+
+Property | Description
+-------- | -------------
+**code** | a custom permission code used in place of the blueprint UUID.
+**label** | a custom label to display in the permissions editor.
+
 ## Submission
 
 A submission blueprint is used to accept user generated content from the frontend of your website, such as blog comments, contact form submissions or product reviews. Submissions are captured on the frontend using the [submission component](../components/submission.md) and moderated in the admin panel.
@@ -395,6 +423,7 @@ Property | Description
 **fields** | form fields belonging to the group, see [backend form fields](../../element/form-fields.md).
 **multisite** | enables multisite for this entry, supported values: `true`, `false`. Default: `false`
 **formSize** | the settings form size, supported values: `tiny`, `small`, `medium`, `large`, `huge`, `giant`, `adaptive`. Default: `huge`.
+**permissions** | customize the permission `code` and `label` registered for this blueprint (see [Custom Permissions](#custom-permissions)).
 
 ## Mixin
 
