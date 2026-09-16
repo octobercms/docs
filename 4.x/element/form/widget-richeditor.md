@@ -94,34 +94,72 @@ The available toolbar buttons are:
 The `|` character will insert a vertical separator line in the toolbar.
 :::
 
+## Toolbar Precedence
+
+The toolbar button list is resolved for each editor from the first available source.
+
+1. The field `toolbarButtons` property, used exactly as written.
+2. The **Settings → Editor → Default Toolbar Buttons** configuration.
+3. The built-in default button list.
+
+Custom buttons registered with a `toolbar` placement (see below) are added to sources 2 and 3 automatically. When a field defines its own `toolbarButtons`, that list is used verbatim, so include the custom button name in the list to display it there.
+
 ## Registering a Custom Button
 
-The following JavaScript code can be used to register a custom button as a command. The Rich Editor globals are defined by an ES module, so wrap your registration in `oc.pageReady()` to ensure `oc.richEditorRegisterButton` and `oc.richEditorButtons` are available when your code runs.
+Custom toolbar buttons are registered in JavaScript using the `oc.richEditor.registerButton` function. The API is available on every backend page, even when no rich editor is present, and the definition is editor-agnostic, it is not coupled to the underlying editor engine.
 
 ```js
-oc.pageReady().then(function () {
-    oc.richEditorRegisterButton('insertCustomThing', {
-        title: 'Insert Something',
-        icon: '<i class="icon-star"></i>',
-        undo: true,
-        focus: true,
-        refreshOnCallback: true,
-        callback: function () {
-            this.html.insert('<strong>My Custom Thing!</strong>');
-        }
-    });
-
-    oc.richEditorButtons.splice(0, 0, 'insertCustomThing');
+oc.richEditor.registerButton('insertCustomThing', {
+    label: 'Insert Something',
+    icon: 'icon-star',
+    toolbar: 'end',
+    undo: true,
+    focus: true,
+    onClick: function(editor) {
+        editor.insertHtml('<strong>My Custom Thing!</strong>');
+    }
 });
 ```
 
 Register the JavaScript by extending the `RichEditor` form widget class.
 
 ```php
-\Backend\FormWidgets\RichEditor::extend(function($controller) {
-    $controller->addJs('/plugins/october/test/assets/js/custom-button.js');
+\Backend\FormWidgets\RichEditor::extend(function($widget) {
+    $widget->addJs('/plugins/october/test/assets/js/custom-button.js');
 });
 ```
+
+::: warning
+Call `registerButton` at the top level of your script, plain and module scripts both work. Do not wrap the call in `oc.pageReady()`. Registration must complete before the first editor on the page initializes, which is guaranteed for any script included in the page.
+:::
+
+The following properties are supported by the button definition.
+
+Property | Description
+------------- | -------------
+**label** | the button tooltip and accessible label.
+**icon** | an icon class name, for example `icon-star`, or custom markup as `{ html: '<svg>...</svg>' }`.
+**toolbar** | where to place the button: `start`, `end`, `{ before: 'name' }` or `{ after: 'name' }`. Omit to register the command without placing it.
+**separator** | inserts a separator line next to the button: `before`, `after` or `both`.
+**undo** | records an undo step after the button action. Default: `true`.
+**focus** | focuses the editor before the button action. Default: `true`.
+**onClick** | function called when the button is clicked, receives the editor instance.
+
+### The Editor Instance
+
+The `onClick` function receives an editor object with the following methods, which remain stable across editor engine versions.
+
+Method | Description
+------------- | -------------
+**insertHtml(html)** | inserts HTML at the cursor position.
+**insertElement(element)** | inserts a DOM element or jQuery object.
+**insertUiBlock(node)** | inserts a non-editable block element.
+**getContent()** / **setContent(html)** | reads or replaces the document contents.
+**saveSelection()** / **restoreSelection()** | preserves the selection around popups or dialogs.
+**focus()** | focuses the editing surface.
+**saveUndoStep()** | records an undo checkpoint.
+**engine** | the active engine name, for advanced use.
+**native** | the raw engine instance, engine-specific and subject to change.
 
 ### Trigger a Modal from a Custom Button
 
