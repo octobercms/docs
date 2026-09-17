@@ -19,6 +19,7 @@ Property | Description
 **label** | a name when displaying the form field to the user.
 **default** | specifies a default string value, optional.
 **comment** | places a descriptive comment below the field.
+**toolbar** | reference a named toolbar definition by its code. Example: `shop-content`
 **toolbarButtons** | buttons to show on the editor toolbar. Example: `bold|italic`
 **size** | specifies a field size for fields that use it, for example, the textarea field. Options: `tiny`, `small`, `large`, `huge`, `giant`.
 **showMargins** | set to `true` to include resizable document margins. Default: `false`.
@@ -94,15 +95,73 @@ The available toolbar buttons are:
 The `|` character will insert a vertical separator line in the toolbar.
 :::
 
+## Toolbar Definitions
+
+Toolbar definitions are named button configurations that can be shared by many rich editor fields and managed visually in the **Settings → Editor Settings → Toolbar Buttons** area. Each definition has a unique code, a label and a description explaining where it is used. Definitions are edited with a visual builder by dragging buttons between the toolbar and the available buttons palette.
+
+The following definitions are included by default.
+
+Code | Description
+------------- | -------------
+**default** | used by rich editors without a specific toolbar.
+**minimal** | a compact toolbar for simple content.
+**full** | every available button.
+
+Use the `toolbar` property to reference a definition from a rich editor field. The same code can be shared by any number of fields, and updating the definition updates every field that references it.
+
+```yaml
+description:
+    type: richeditor
+    toolbar: shop-content
+```
+
+A definition with no buttons inherits the default toolbar. This makes it possible to give an area of the admin panel its own toolbar code without prescribing any buttons, the fields simply follow the default toolbar until the definition is customized. The visual builder displays the inherited buttons for empty definitions, and modifying them makes the definition independent from the default toolbar. Definitions that have been changed from their registered configuration display as modified, along with a **Reset to Default** option to restore them.
+
+Administrators may also create their own definitions with new codes using the **Create Toolbar** button, which can then be referenced from form fields and blueprints in the same way.
+
+### Registering a Toolbar Definition
+
+Plugins register toolbar definitions using the `registerRichEditorToolbars` method of the [plugin registration file](../../extend/system/plugins.md). Each definition supplies a label and a description, along with an optional button list.
+
+```php
+public function registerRichEditorToolbars()
+{
+    return [
+        'shop-content' => [
+            'label' => 'Shop Content',
+            'description' => 'Used by shop product and category descriptions.',
+        ],
+    ];
+}
+```
+
+The definition above contains no buttons, so it inherits the default toolbar until an administrator customizes it. Specify the `buttons` value as a comma separated list to register an opinionated button set, which also acts as the baseline for the **Reset to Default** feature.
+
+```php
+public function registerRichEditorToolbars()
+{
+    return [
+        'shop-content' => [
+            'label' => 'Shop Content',
+            'description' => 'Used by shop product and category descriptions.',
+            'buttons' => 'paragraphFormat, bold, italic, |, insertImage, insertPageLink, html',
+        ],
+    ];
+}
+```
+
+Registered definitions appear in the settings area automatically, where administrators can review and customize them. [Custom buttons](#registering-a-custom-button) registered in JavaScript can be included in a definition by their registered name.
+
 ## Toolbar Precedence
 
 The toolbar button list is resolved for each editor from the first available source.
 
 1. The field `toolbarButtons` property, used exactly as written.
-2. The **Settings → Editor → Default Toolbar Buttons** configuration.
-3. The built-in default button list.
+2. The field `toolbar` property, resolved to its toolbar definition.
+3. The **default** toolbar definition, when it has been customized.
+4. The built-in default button list.
 
-Custom buttons registered with a `toolbar` placement (see below) are added to sources 2 and 3 automatically. When a field defines its own `toolbarButtons`, that list is used verbatim, so include the custom button name in the list to display it there.
+Custom buttons registered with a `toolbar` placement (see below) are added to the default toolbar automatically, and the default definition in the settings area displays them in place. Modifying the default toolbar stores the visible buttons exactly, making the placed buttons real entries that can be moved or removed. Every other source is used verbatim, so include the custom button name in the toolbar definition to display it there.
 
 ## Registering a Custom Button
 
@@ -121,11 +180,11 @@ oc.richEditor.registerButton('insertCustomThing', {
 });
 ```
 
-Register the JavaScript by extending the `RichEditor` form widget class.
+Register the JavaScript globally on every backend page, so the button is available to every rich editor surface, including the form widget and the CMS editor.
 
 ```php
-\Backend\FormWidgets\RichEditor::extend(function($widget) {
-    $widget->addJs('/plugins/october/test/assets/js/custom-button.js');
+Event::listen('backend.page.beforeDisplay', function($controller) {
+    $controller->addJs('/plugins/october/test/assets/js/custom-button.js');
 });
 ```
 
