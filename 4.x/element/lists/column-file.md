@@ -17,7 +17,7 @@ The following properties are supported.
 Property | Description
 ------------- | -------------
 **sortable** | disables sorting of the column. Default: `false`
-**clickable** | when enabled, clicking the file icon opens the file in a new window. Default: `true`
+**clickable** | when enabled, the column participates in the row click action instead of linking to the file. Default: `true`
 **limit** | the maximum number of files to display. Default: `3`
 
 Use the `sortable` property to disable sorting.
@@ -29,13 +29,13 @@ attachment:
     sortable: false
 ```
 
-Use the `clickable` property to disable clicking on the file icon. When set to `false`, the file icon is displayed without a link. This is useful when you want the row click action to take precedence.
+Use the `clickable` property to disable clicking on the file icon. When set to `true`, the file icon is displayed without a link. This is useful when you want the row click action to take precedence.
 
 ```yaml
 attachment:
     label: Attachment
     type: file
-    clickable: false
+    clickable: true
 ```
 
 Use the `limit` property to specify the maximum number of files to display when using an `attachMany` relationship.
