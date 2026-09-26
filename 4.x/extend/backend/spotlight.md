@@ -60,15 +60,14 @@ public function registerSpotlight()
 }
 ```
 
-A command class extends `Backend\Classes\SpotlightManager\SpotlightCommand` and implements the `execute` method, which runs when the user selects the command. Commands are usually placed in a **spotlight** directory inside the plugin.
+A command class extends `Backend\Classes\SpotlightManager\SpotlightCommand` and implements the `onExecute` method, which runs when the user selects the command. Commands are usually placed in a **spotlight** directory inside the plugin.
 
 ```php
 namespace Acme\Blog\Spotlight;
 
+use Flash;
 use Acme\Blog\Classes\Sitemap;
-use Backend\Classes\SpotlightManager;
 use Backend\Classes\SpotlightManager\SpotlightCommand;
-use Backend\Classes\SpotlightManager\SpotlightResponse;
 
 class RebuildSitemap extends SpotlightCommand
 {
@@ -83,11 +82,11 @@ class RebuildSitemap extends SpotlightCommand
         $this->synonyms = ['seo', 'xml'];
     }
 
-    public function execute(SpotlightManager $manager, array $dependencies = []): array
+    public function onExecute(array $dependencies = [])
     {
         Sitemap::rebuild();
 
-        return SpotlightResponse::success(__("Sitemap rebuilt"));
+        Flash::success(__("Sitemap rebuilt"));
     }
 }
 ```
@@ -113,26 +112,26 @@ public function shouldBeShown(): bool
 
 ### Command Responses
 
-The `execute` method returns a response built with the `Backend\Classes\SpotlightManager\SpotlightResponse` class.
+The `onExecute` method works like an [AJAX handler](../../cms/ajax/handlers.md). It can display messages, return a redirect or a browser event, and throw an exception to report a failure.
 
-Method | Description
+Response | Description
 ------------- | -------------
-**success($text)** | displays a success message.
-**error($text)** | displays an error message.
-**info($text)** | displays an information message.
-**warning($text)** | displays a warning message.
-**redirect($url, $target)** | sends the browser to a URL, where the target is `_self` (default) or `_blank`.
-**event($name, $payload, $flash)** | dispatches a browser event with an optional flash message.
+**Flash::success($text)** | displays a message, along with the `error`, `warning` and `info` methods.
+**return Backend::redirect($path)** | sends the browser to a backend page. Any redirect response can be returned.
+**throw new ApplicationException($text)** | displays an error message and stops the command.
+**return ajax()->browserEvent($name, $data)** | dispatches a browser event for custom client-side behavior.
 
-The message methods accept an optional second argument for the number of seconds the message is displayed, which defaults to 5.
+A command that fails is not added to the user's recent items.
 
-The `event` response is used for custom client-side behavior. The payload is passed to listeners as the event detail, and the optional flash message is an array with `type` and `text` values.
+The data passed to `browserEvent` is available to listeners as the event detail.
 
 ```php
-return SpotlightResponse::event('acme:sitemap-rebuilt', ['pages' => 42], [
-    'type' => 'success',
-    'text' => __("Sitemap rebuilt"),
-]);
+public function onExecute(array $dependencies = [])
+{
+    Flash::success(__("Sitemap rebuilt"));
+
+    return ajax()->browserEvent('acme:sitemap-rebuilt', ['pages' => 42]);
+}
 ```
 
 A script loaded on the backend page can then listen for the event.
@@ -188,7 +187,7 @@ public function searchPost(string $query): array
         ->all();
 }
 
-public function execute(SpotlightManager $manager, array $dependencies = []): array
+public function onExecute(array $dependencies = [])
 {
     $post = Post::find($dependencies['post']);
 
@@ -196,7 +195,7 @@ public function execute(SpotlightManager $manager, array $dependencies = []): ar
         $message->to($dependencies['email']);
     });
 
-    return SpotlightResponse::success(__("Post sent"));
+    Flash::success(__("Post sent"));
 }
 ```
 
@@ -209,7 +208,7 @@ public function searchCategory(string $query, $postId): array
 }
 ```
 
-The resolved values are passed to the `execute` method, keyed by the argument identifier. A `SEARCH` argument provides the `id` of the chosen result, and an `INPUT` argument provides the typed text.
+The resolved values are passed to the `onExecute` method, keyed by the argument identifier. A `SEARCH` argument provides the `id` of the chosen result, and an `INPUT` argument provides the typed text.
 
 The following methods are available to configure an argument.
 
