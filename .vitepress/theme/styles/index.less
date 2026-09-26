@@ -72,39 +72,33 @@
 //
 
 .home-hero {
-    border-radius: 8px;
+    position: relative;
+    border-radius: 12px;
     border: 1px solid #E8E0D4;
     margin-bottom: 28px;
     overflow: hidden;
+    background: #fdf5ea url("/images/hero-get-started-bottom-right.png") no-repeat right bottom;
+    background-size: 42%;
 
-    .home-hero-warm {
-        background: #FFF8ED;
-        padding: 28px 32px 24px;
+    .home-hero-content {
+        max-width: 62%;
+        padding: 32px 32px 34px;
 
         p {
-            margin-bottom: 12px;
-            color: #555;
-        }
-    }
-
-    .home-hero-light {
-        background: #fff;
-        padding: 20px 32px 24px;
-        border-top: 1px solid #E8E0D4;
-
-        > p {
-            margin-bottom: 0;
+            margin-bottom: 20px;
             color: #555;
         }
     }
 
     .home-hero-icon {
-        font-size: 16px;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
         color: #D97706;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 8px;
         i {
-            font-size: 24px;
+            font-size: 22px;
             position: relative;
             top: 4px;
             margin-right: 4px;
@@ -112,44 +106,93 @@
     }
 
     h2 {
-        font-size: 28px;
+        font-size: 30px;
         font-weight: 700;
         margin-top: 4px;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         border: none;
         padding: 0;
-        color: #1a1a1a;
+        color: #26394a;
+    }
+
+    .home-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .btn-lg {
+        padding: 10px 26px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
     }
 
     .btn-primary {
         background: #E67E22;
         border-color: #E67E22;
         color: #fff;
-        padding: 8px 24px;
-        border-radius: 6px;
-        font-weight: 600;
-        text-decoration: none;
-        display: inline-block;
         &:hover {
             background: #CF6D17;
             border-color: #CF6D17;
         }
     }
 
-    .home-hero-checklist {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 12px;
-        li {
-            padding: 4px 0;
-            color: #333;
-            i {
-                color: #16A34A;
-                font-size: 18px;
-                margin-right: 6px;
-                position: relative;
-                top: 3px;
-            }
+    .btn-outline {
+        background: transparent;
+        border-color: #D8C4A6;
+        color: #8a5a25;
+        &:hover {
+            border-color: #E67E22;
+            color: #CF6D17;
+        }
+    }
+
+    @media (max-width: 720px) {
+        background-image: none;
+
+        .home-hero-content {
+            max-width: 100%;
+        }
+    }
+}
+
+.section-subtitle {
+    margin-top: -8px;
+    margin-bottom: 20px;
+    color: #6b7785;
+    font-size: 15px;
+}
+
+.home-page {
+    .row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin: 0 0 28px;
+
+        &:before,
+        &:after {
+            content: none;
+        }
+
+        > [class*="col-md-"] {
+            width: auto;
+            float: none;
+            padding: 0;
+        }
+    }
+
+    .section-card-wrapper {
+        height: 100%;
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 720px) {
+        .row {
+            grid-template-columns: 1fr;
         }
     }
 }

@@ -1,104 +1,93 @@
 <template>
     <a v-bind:href="href" :class="cssClassName" :target="target">
-        <div class="d-flex">
-            <i v-if="icon" :class="icon" class="card-icon"></i>
-            <i v-else class="icon icon-chevron-right"></i>
-            <h4 v-text="title"></h4>
-        </div>
-        <p v-text="description"></p>
-        <p v-text="prompt" class="link-prompt"></p>
+        <span class="card-badge" :style="badgeStyle">
+            <i v-if="icon" :class="icon" :style="{ color }"></i>
+        </span>
+        <span class="card-body">
+            <span class="card-title">{{ title }}</span>
+            <span class="card-desc">{{ description }}</span>
+        </span>
+        <i class="ph-duotone ph-arrow-right card-arrow"></i>
     </a>
 </template>
 <style lang="less">
     .section-card-wrapper {
-        display: block;
-        // width: 280px;
-        min-height: 120px;
+        display: flex;
+        align-items: flex-start;
         background: white;
-        border-radius: 6px;
+        border-radius: 12px;
         border: 1px solid #ECF0F1;
-        padding: 16px 18px;
+        padding: 22px 24px;
         margin-bottom: 20px;
         text-decoration: none;
         color: inherit;
+        transition: box-shadow 0.15s ease, border-color 0.15s ease;
 
         &:hover {
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 0 0 2px #7f81ef;
-        }
+            border-color: #d9dfe6;
+            box-shadow: 0 6px 20px rgba(38, 57, 74, 0.08);
 
-        .icon {
-            position: relative;
-            top: 6px;
-        }
-
-        .card-icon {
-            font-size: 20px;
-            position: relative;
-            top: 3px;
-            color: #6A6CF7;
-        }
-
-        h4 {
-            margin-left: 10px;
-            margin-bottom: 10px;
-            margin-top: 0;
-            color: #6A6CF7;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        p {
-            font-size: 14px;
-            line-height: 150%;
-            margin-bottom: 0;
-
-            &.link-prompt {
-                margin-top: 10px;
-                color: #7f81ef;
-                text-decoration: underline;
+            .card-arrow {
+                transform: translateX(3px);
             }
+        }
+
+        .card-badge {
+            flex: 0 0 auto;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+
+            i {
+                font-size: 22px;
+                line-height: 1;
+            }
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .card-title {
+            display: block;
+            color: #26394a;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            display: block;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #6b7785;
+        }
+
+        .card-arrow {
+            flex: 0 0 auto;
+            margin-left: 12px;
+            color: #7f81ef;
+            font-size: 18px;
+            position: relative;
+            top: 2px;
+            transition: transform 0.15s ease;
         }
 
         &.is-simple {
-            border: 0;
-            padding: 0;
-            background: none;
-            box-shadow: none !important;
-            min-height: auto;
-            .d-flex {
-                align-items: center;
-            }
-            .icon {
+            .card-desc,
+            .card-arrow {
                 display: none;
             }
-            .card-icon {
-                font-size: 22px;
-                top: 0;
-                color: #555;
-            }
-            h4 {
-                margin-left: 8px;
-                margin-bottom: 0;
-                color: #333;
-                font-size: 16px;
-                font-weight: 500;
-                &:after {
-                    content: " ›";
-                    color: #999;
-                }
-            }
-            p {
-                display: none;
-            }
-            &:hover {
-                h4 {
-                    color: #6A6CF7;
-                }
-                .card-icon {
-                    color: #6A6CF7;
-                }
+            .card-title:after {
+                content: " ›";
+                color: #999;
             }
         }
     }
@@ -119,13 +108,14 @@
                 type: String,
                 required: true
             },
-            prompt: {
-                type: String,
-                required: false
-            },
             icon: {
                 type: String,
                 required: false
+            },
+            color: {
+                type: String,
+                required: false,
+                default: '#7f81ef'
             },
             cssClass: {
                 type: String,
@@ -136,16 +126,22 @@
                 required: false
             }
         },
-        data () {
-            return {
-            }
-        },
         computed: {
-            cssClassName: function(val) {
-                return 'section-card-wrapper ' + this.cssClass;
+            cssClassName() {
+                return 'section-card-wrapper ' + (this.cssClass || '');
+            },
+            badgeStyle() {
+                return { backgroundColor: this.hexToTint(this.color) };
             }
         },
         methods: {
+            hexToTint(hex) {
+                const c = (hex || '#7f81ef').replace('#', '');
+                const r = parseInt(c.substring(0, 2), 16);
+                const g = parseInt(c.substring(2, 4), 16);
+                const b = parseInt(c.substring(4, 6), 16);
+                return `rgba(${r}, ${g}, ${b}, 0.12)`;
+            }
         }
     }
 </script>

@@ -3,7 +3,7 @@ subtitle: "A content management framework built on Laravel"
 ---
 # Welcome
 
-Welcome to October CMS, a content management framework for building websites that are as simple or as powerful as you need them to be. Whether you are here to launch a personal blog, a business site, or something entirely custom, you are in the right place.
+Welcome to October CMS, a content management system for building websites that are as simple or as powerful as you need them to be. Whether you are here to launch a personal blog, a business site, or something entirely custom, you are in the right place.
 
 ## What is October CMS?
 

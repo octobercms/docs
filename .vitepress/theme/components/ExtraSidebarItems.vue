@@ -44,6 +44,15 @@
     &:hover {
         color: @text-accent-color;
     }
+
+    // Muted outbound icon
+    .icon.outbound {
+        color: lighten(@text-color-secondary, 30%);
+    }
+
+    &:hover .icon.outbound {
+        color: @text-accent-color;
+    }
 }
 
 .sidebar-extra-icon {

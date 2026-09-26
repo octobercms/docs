@@ -81,28 +81,26 @@ sidebar:
 # Start Here
 
 <div class="home-hero">
-    <div class="home-hero-warm">
+    <div class="home-hero-content">
         <div class="home-hero-icon"><i class="ph-duotone ph-rocket-launch"></i> Start Here</div>
         <h2>Install October CMS</h2>
-        <p>Build your first project in minutes with our step-by-step guide.</p>
-        <p><a href="/user-guide/quickstart/introduction/welcome.html" class="btn btn-primary btn-lg">Get Started</a></p>
-    </div>
-    <div class="home-hero-light">
-        <ul class="home-hero-checklist">
-            <li><i class="ph-duotone ph-check-circle"></i> Setup your server</li>
-            <li><i class="ph-duotone ph-check-circle"></i> Install October CMS</li>
-            <li><i class="ph-duotone ph-check-circle"></i> Build your first website</li>
-        </ul>
-        <p>Follow our <a href="/user-guide/quickstart/introduction/welcome.html">beginner tutorial</a> to get up and running fast.</p>
+        <p>Build your first project in minutes with our step-by-step guide, or dive straight into the developer documentation.</p>
+        <div class="home-hero-actions">
+            <a href="/user-guide/quickstart/introduction/welcome.html" class="btn btn-primary btn-lg">Quick Start</a>
+            <a href="/4.x/setup/installation.html" class="btn btn-outline btn-lg">v4 Documentation</a>
+        </div>
     </div>
 </div>
 
 ## Build Features
 
+<p class="section-subtitle">Step-by-step guides to help you build common features with October CMS.</p>
+
 <div class="row">
     <div class="col-md-6">
         <SectionCardLink
             icon="ph-duotone ph-paper-plane-tilt"
+            color="#6A6CF7"
             title="Creating a Blog"
             description="Build a fully-featured blog with posts, categories, tags, and an RSS feed."
             href="/user-guide/blog/introduction.html" />
@@ -110,6 +108,7 @@ sidebar:
     <div class="col-md-6">
         <SectionCardLink
             icon="ph-duotone ph-chats-circle"
+            color="#E67E22"
             title="Creating a Forum"
             description="Build a community forum with channels, discussion threads, and replies."
             href="/user-guide/forum/introduction.html" />
@@ -117,6 +116,7 @@ sidebar:
     <div class="col-md-6">
         <SectionCardLink
             icon="ph-duotone ph-envelope-simple"
+            color="#16A34A"
             title="Creating a Helpdesk"
             description="Build a fully-featured helpdesk with tickets, categories, tags, and an RSS feed."
             href="/user-guide/helpdesk/introduction.html" />
@@ -124,6 +124,7 @@ sidebar:
     <div class="col-md-6">
         <SectionCardLink
             icon="ph-duotone ph-chat-circle-text"
+            color="#EAB308"
             title="Creating a Mailing List"
             description="Build a mailing list with signup forms, subscriber management, and campaigns."
             href="/user-guide/mailing-list/introduction.html" />
@@ -132,10 +133,13 @@ sidebar:
 
 ## Reference
 
+<p class="section-subtitle">Detailed guides and technical reference for developers.</p>
+
 <div class="row">
     <div class="col-md-6">
         <SectionCardLink
             icon="ph-duotone ph-brackets-curly"
+            color="#6A6CF7"
             title="CMS Guide"
             description="Plugins and techniques using file structure with Twig templates."
             href="/4.x/cms/themes/themes.html" />
@@ -143,6 +147,7 @@ sidebar:
     <div class="col-md-6">
         <SectionCardLink
             icon="ph-duotone ph-pencil-line"
+            color="#6A6CF7"
             title="Markup Guide"
             description="Reference guide for the Twig template syntax for displaying content."
             href="/4.x/markup/templating.html" />
@@ -151,24 +156,26 @@ sidebar:
 
 ## Plugins & Themes
 
+<p class="section-subtitle">Extend October CMS with powerful plugins and beautiful themes.</p>
+
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
         <SectionCardLink
             icon="ph-duotone ph-plugs-connected"
+            color="#E67E22"
             title="Browse Plugins"
-            description="Browse plugins both free and paid"
+            description="Find and install plugins from the marketplace."
             href="https://octobercms.com/plugins"
-            target="_blank"
-            cssClass="is-simple" />
+            target="_blank" />
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
         <SectionCardLink
-            icon="ph-duotone ph-paint-brush-broad"
+            icon="ph-duotone ph-monitor"
+            color="#E67E22"
             title="Browse Themes"
-            description="Browse themes both free and paid"
+            description="Discover beautiful themes for your project."
             href="https://octobercms.com/themes"
-            target="_blank"
-            cssClass="is-simple" />
+            target="_blank" />
     </div>
 </div>
 

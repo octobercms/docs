@@ -120,6 +120,16 @@ a.sidebar-link {
         font-weight: 500;
         position: relative;
     }
+
+    // Muted outbound icon
+    .icon.outbound {
+        color: lighten(#3a3a3a, 45%);
+        margin-left: 3px;
+    }
+    &:hover .icon.outbound,
+    &.active .icon.outbound {
+        color: @october-purple;
+    }
 }
 
 .toggle-sidebar-group h6,
