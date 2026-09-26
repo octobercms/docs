@@ -19,8 +19,8 @@ jobs:
             - run: bun install
             - run: bun run build
 
-            # - name: Add CNAME
-            #   run: echo "docs.octobercms.com" > dist/CNAME
+            - name: Add CNAME
+              run: echo "docs.octobercms.com" > dist/CNAME
 
             - name: Deploy to GitHub Pages
               uses: peaceiris/actions-gh-pages@v4
