@@ -1,5 +1,5 @@
 ---
-subtitle: "A content management framework built on Laravel"
+subtitle: "A mature and minimalist platform built on Laravel"
 ---
 # Welcome
 
