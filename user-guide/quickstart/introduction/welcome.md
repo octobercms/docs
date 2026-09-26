@@ -19,7 +19,8 @@ Everything you need to build a professional website is here from the start:
 - **Custom content types.** Describe blog posts, team members, or product listings in simple YAML blueprints, and October CMS builds the backend forms, database, and admin navigation for you.
 - **Ready-made admin interfaces.** Lists, forms, dashboards, and relations are built in. Describe them in configuration and skip the boilerplate.
 - **A simple AJAX framework.** Bind a request to a form or a button with HTML attributes alone, no JavaScript required, and update parts of the page when it finishes.
-- **Total frontend freedom.** October CMS ships with vanilla JS and CSS but never forces the choice on you. Use Tailwind, Bootstrap, React, Vue, Astro, or go fully headless. No mystery markup, no locked-down templates. It is your canvas.
+- **No build step by default.** October CMS ships with vanilla JS and CSS, so there is nothing to compile and no npm to install. Just start the server and you are building. Reach for Tailwind, Vite, React, or a full toolchain the moment you want to, but never because you have to.
+- **Total frontend freedom.** October CMS never forces a choice on you. Use whatever you like on the frontend, or go fully headless. No mystery markup, no locked-down templates. It is your canvas.
 - **An escape hatch when you need it.** Blueprints and plugins share the same architecture, so when you want more control you can drop into the familiar MVC pattern without starting over.
 
 The power and flexibility are hidden behind the mask of simplicity.
