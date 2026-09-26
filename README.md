@@ -78,8 +78,6 @@ sidebar:
 #         children:
 #             - ['https://larajax.org', Larajax Framework]
 ---
-# Start Here
-
 <div class="home-hero">
     <div class="home-hero-content">
         <div class="home-hero-icon"><i class="ph-duotone ph-rocket-launch"></i> Start Here</div>
