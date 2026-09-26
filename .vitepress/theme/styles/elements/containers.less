@@ -1,0 +1,171 @@
+@import "../boot.less";
+
+.article.theme-default-content {
+    div.custom-block {
+        color: inherit;
+
+        *:last-child {
+            margin-bottom: 0;
+        }
+
+        &:not(.also) {
+            font-size: 14px;
+            line-height: 150%;
+            padding: 15px 15px 15px 40px;
+            border: 1px solid #ECF0F1;
+            border-radius: 4px;
+        }
+
+        &.warning {
+            background: #FFFBEA url("/images/warning.png") no-repeat;
+            background-size: 14px 13px;
+            background-position: 13px 19px;
+        }
+
+        &.tip {
+            background: #F3F4F6 url("/images/tip.png") no-repeat;
+            background-size: 14px 13px;
+            background-position: 13px 19px;
+
+            code {
+                background: #e7e7e7;
+            }
+        }
+
+        &.aside {
+            width: 260px;
+            float: right;
+            border: 1px solid #ECF0F1;
+            border-radius: 6px;
+            padding: 12px 15px;
+            margin-left: 16px;
+
+            p {
+                line-height: 150%;
+                font-size: 14px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            @media (max-width: @screen-sm-max) {
+                float: none;
+                margin-bottom: 15px;
+                margin-left: 0;
+                width: auto;
+            }
+        }
+
+        &.also ul {
+            list-style: none;
+            padding-left: 0;
+
+            li {
+                padding-left: 25px;
+                position: relative;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 6px;
+                    width: 17px;
+                    height: 14px;
+                    background: transparent url("/images/article.png") no-repeat;
+                    background-size: 17px 14px;
+                }
+
+                a {
+                    text-decoration: none;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        &:not(.cmstemplate) {
+            div[class*="language-"] {
+                margin-left: -41px;
+                margin-right: -16px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+
+                &:last-child {
+                    margin-bottom: -15px;
+                }
+            }
+        }
+
+        &.cmstemplate {
+            padding: 0;
+            margin-bottom: 30px;
+            background: #073672;
+            .language-ini.extra-class {
+                &:before {
+                    content: 'HTM';
+                }
+            }
+            div[class*="language-"]:not(.language-ini).extra-class {
+                &:before {
+                    color: #8292a2;
+                    font-size: 11px;
+                    content: '==';
+                    top: 0;
+                }
+                .code-copy {
+                    display: none;
+                }
+                > pre {
+                    padding-top: 20px !important;
+                }
+            }
+
+            div[class*="language-"] {
+                margin: 0;
+                > pre {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    details.custom-block {
+        &.details {
+            background: transparent;
+            padding: 0 0 5px 0;
+            border-bottom: 1px solid #ECF0F1;
+            margin: 20px 0;
+
+            summary {
+                font-weight: bold;
+                color: #7F8C8D;
+                position: relative;
+                padding-right: 30px;
+
+                &::-webkit-details-marker {
+                    display:none;
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    top: 6px;
+                    width: 14px;
+                    height: 14px;
+                    background: transparent url("/images/angle-down.png") no-repeat;
+                    background-size: 14px 14px;
+                    transition: transform 0.2s;
+                }
+            }
+
+            &[open] summary:after {
+                transform: scaleY(-1);
+            }
+
+            div[class*="language-"]:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

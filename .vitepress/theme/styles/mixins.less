@@ -1,0 +1,107 @@
+//
+// Mixins file
+//
+// Space for any custom mixins used by this application
+//
+
+.icons-sprite(@offsetX: 0, @offsetY: 0, @version: "", @spriteVersion: "v1") {
+    background-image: url("https://d2f5cg397c40hu.cloudfront.net/website-static-files/images/icons-sprite@{version}-@{spriteVersion}.png");
+    background-position: -(@offsetX) -(@offsetY);
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+        only screen and (-o-min-device-pixel-ratio: 13/10),
+        only screen and (min-resolution: 120dpi) {
+            .icons-sprite2x(@version, @spriteVersion);
+    }
+}
+
+.icons-sprite2x(@version: "", @spriteVersion: "v1") {
+    background-image: url("https://d2f5cg397c40hu.cloudfront.net/website-static-files/images/icons-sprite@{version}-@{spriteVersion}%402x.png");
+    background-size: 1135px 755px;
+}
+
+.icons-sprite-custom(@offsetX, @offsetY, @backgroundWidth, @backgroundHeight, @imagePath) {
+    background-image: url("@{images-path}/@{imagePath}.png");
+    background-position: -(@offsetX) -(@offsetY);
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+        only screen and (-o-min-device-pixel-ratio: 13/10),
+        only screen and (min-resolution: 120dpi) {
+            .icons-sprite-custom2x(@offsetX, @offsetY, @backgroundWidth, @backgroundHeight, @imagePath);
+    }
+}
+
+.icons-sprite-custom2x(@offsetX, @offsetY, @backgroundWidth, @backgroundHeight, @imagePath) {
+    background-image: url("@{images-path}/@{imagePath}%402x.png");
+    background-size: @backgroundWidth, @backgroundHeight;
+}
+
+.icons-sprite-custom-pseudo(@width, @height, @offsetX, @offsetY, @backgroundWidth, @backgroundHeight, @imagePath) {
+    content: '';
+    width: @width;
+    height: @height;
+    display: inline-block;
+    .icons-sprite-custom(@offsetX, @offsetY, @backgroundWidth, @backgroundHeight, @imagePath);
+}
+
+.responsive-background(@basePath, @width, @height) {
+    background-image: url("@{images-path}/@{basePath}.png");
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+        only screen and (-o-min-device-pixel-ratio: 13/10),
+        only screen and (min-resolution: 120dpi) {
+            background-image: url("@{images-path}/@{basePath}@2x.png");
+            background-size: @width @height;
+    }
+}
+
+.responsive-background-cdn(@path1x, @path2x, @width, @height) {
+    background-image: url("@{path1x}");
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+        only screen and (-o-min-device-pixel-ratio: 13/10),
+        only screen and (min-resolution: 120dpi) {
+            background-image: url("@{path2x}");
+            background-size: @width @height;
+    }
+}
+
+.icons-sprite-pseudo(@width, @height, @offsetX: 0, @offsetY: 0, @version: "") {
+    content: '';
+    width: @width;
+    height: @height;
+    display: inline-block;
+    .icons-sprite(@offsetX, @offsetY, @version);
+}
+
+.icons-sprite-pseudo-cdn(@path, @backgroundWidth, @backgroundHeight, @width, @height, @offsetX: 0, @offsetY: 0, @version: "v1") {
+    content: '';
+    background-image: url("@{path}-@{version}.png");
+    background-position: -(@offsetX) -(@offsetY);
+    background-size: @backgroundWidth @backgroundHeight;
+    width: @width;
+    height: @height;
+    display: inline-block;
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+        only screen and (-o-min-device-pixel-ratio: 13/10),
+        only screen and (min-resolution: 120dpi) {
+            .icons-sprite2x_cdn(@version);
+    }
+}
+
+.icons-sprite-cdn(@path, @backgroundWidth, @backgroundHeight, @offsetX: 0, @offsetY: 0, @version: "v1") {
+    background-image: url("@{path}-@{version}.png");
+    background-position: -(@offsetX) -(@offsetY);
+    background-size: @backgroundWidth @backgroundHeight;
+
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+        only screen and (-o-min-device-pixel-ratio: 13/10),
+        only screen and (min-resolution: 120dpi) {
+            .icons-sprite2x_cdn(@version);
+    }
+}
+
+.icons-sprite2x_cdn(@version: "v1") {
+    background-image: url("@{path}-@{version}%402x.png");
+}

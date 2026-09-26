@@ -1,0 +1,30 @@
+# Builds the documentation with VitePress and deploys it to GitHub Pages.
+name: Deploy docs
+on:
+    push:
+        branches: [ develop ]
+    workflow_dispatch:
+
+jobs:
+    build-deploy:
+        permissions:
+            contents: write
+            pages: write
+            id-token: write
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: oven-sh/setup-bun@v2
+
+            - run: bun install
+            - run: bun run build
+
+            # - name: Add CNAME
+            #   run: echo "docs.octobercms.com" > dist/CNAME
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: dist
+                force_orphan: true

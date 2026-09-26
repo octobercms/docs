@@ -1,0 +1,94 @@
+.custom-block {
+    border-radius: 3px;
+
+    .custom-block-title {
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    &.tip, &.warning, &.danger {
+        padding: 5px 15px;
+        border-left-width: 0.5rem;
+        border-left-style: solid;
+        margin: 15px 0;
+    }
+
+    &.tip {
+        background-color: #f3f5f7;
+        border-color: #42b983;
+    }
+    &.warning {
+        background-color: rgba(255,229,100,0.3);
+        border-color: #e7c000;
+        color: #6b5900;
+        .custom-block-title {
+            color: #b29400;
+        }
+        a {
+            color: @text-color;
+        }
+    }
+    &.danger {
+        background-color: #ffe6e6;
+        border-color: #c00;
+        color: #4d0000;
+        .custom-block-title {
+            color: #900;
+        }
+        a {
+            color: @text-color;
+        }
+    }
+
+    &.details {
+        display: block;
+        position: relative;
+        border-radius: 2px;
+        margin: 16px 0;
+        padding: 16px;
+        background-color: #eee;
+        h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        figure:last-child, p:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        summary {
+            outline: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        &[open] {
+            summary {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+pre.dir-container {
+    padding-top: 20px !important;
+}
+
+pre.dir-container > code {
+    > p {
+        line-height: 1.75;
+        margin: -5px 0 -20px;
+    }
+    > p > code {
+        background: @october-purple !important;
+        padding: 3px 5px;
+        border-radius: 3px;
+        color: #fff;
+    }
+    em {
+        color: #999;
+    }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="15px" viewBox="0 0 16 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>copy-markdown</title>
+    <g id="copy-markdown" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M10.5,0 L3,0 C2.175,0 1.5,0.675 1.5,1.5 L1.5,10.5 L3,10.5 L3,1.5 L10.5,1.5 L10.5,0 Z M12.75,3 L6,3 C5.175,3 4.5,3.675 4.5,4.5 L4.5,13.5 C4.5,14.325 5.175,15 6,15 L12.75,15 C13.575,15 14.25,14.325 14.25,13.5 L14.25,4.5 C14.25,3.675 13.575,3 12.75,3 Z M12.75,13.5 L6,13.5 L6,4.5 L12.75,4.5 L12.75,13.5 Z" id="Shape" fill="#7F8C8D" fill-rule="nonzero"></path>
+    </g>
+</svg>

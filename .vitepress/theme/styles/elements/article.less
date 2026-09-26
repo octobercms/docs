@@ -1,0 +1,230 @@
+//
+// Article text - used in product descriptions, documentation,
+// legal documents. In the user-provided content we don't want
+// to allow too much variance of text styles.
+// -----------------------------------------------------------
+
+@import "../boot.less";
+
+.article {
+    h1, h2, h3.header-h1, h3.header-h2 {
+        &.no-border {
+            border-bottom: none;
+        }
+    }
+
+    h1, h2, h3 {
+        margin-bottom: 20px;
+    }
+
+    h4, h5, h6 {
+        margin-bottom: 10px;
+    }
+
+    h2, h3, h4 {
+        margin-top: 30px;
+    }
+
+    // The product title has font size 30px. Headers in the product
+    // description should not be larger than that. The standard font
+    // size is 16px, h5 should be just a bit larger than that.
+    h1, h3.header-h1 {
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    h2, h3.header-h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 20px;
+        color: #536061;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+
+    h5 {
+        font-size: 16px;
+    }
+
+    h6 {
+        font-size: 14px;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+
+        &.inline-image {
+            display: inline-block;
+        }
+    }
+
+    img.frame {
+        border: 1px solid @grid-line-color;
+        .box-sizing(content-box);
+    }
+
+    blockquote {
+        border-radius: 3px;
+        background: #7f81ef !important;
+        border: none;
+        color: white;
+
+        a {
+            color: inherit;
+        }
+
+        a.is-ext .icon.outbound {
+            color: #fff;
+        }
+
+        *:last-child {
+            margin-bottom: 0!important;
+        }
+    }
+
+    ul ul, ol ol, ul ol, ol ul {
+        margin-bottom: 0;
+    }
+
+    p {
+        overflow: hidden; // Required for .aside elements
+    }
+
+    code {
+        border-radius: 3px;
+        padding: 2px;
+    }
+
+    a.header-anchor {
+        position: absolute;
+        color: transparent;
+        left: -20px;
+        width: 15px;
+
+        &:before {
+            .icons-sprite-pseudo(15px, 15px, 157px, 536px);
+            display: none;
+            position: static;
+        }
+
+        @media (max-width: @screen-sm-max) {
+            &:before {
+                display: none;
+            }
+        }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        position: relative;
+        &:hover .header-anchor:before {
+            display: inline-block;
+        }
+    }
+
+    table {
+        width: 100%;
+        font-size: 15px;
+        border-collapse: separate;
+        margin: 25px 0;
+
+        td, th {
+            padding: 8px 10px;
+            vertical-align: top;
+        }
+
+        thead {
+            th, td {
+                color: #536061;
+                font-weight: 500;
+                font-size: 13px;
+                text-transform: uppercase;
+                white-space: nowrap;
+                padding-top: 0;
+            }
+        }
+
+        tbody {
+            td, th {
+                border-color: #d7e1ea;
+                border-width: 0px;
+                border-bottom-width: 1px;
+                border-style: solid;
+                font-size: 14px;
+            }
+
+            tr:nth-child(odd) {
+                td, th {
+                    background-color: #fafbfd;
+                }
+            }
+
+            tr:first-child > td:first-child {
+                border-top-left-radius: 5px;
+            }
+            tr:first-child > td:last-child {
+                border-top-right-radius: 5px;
+            }
+            tr:last-child > td:first-child {
+                border-bottom-left-radius: 5px;
+            }
+            tr:last-child > td:last-child {
+                border-bottom-right-radius: 5px;
+            }
+
+            tr:first-child > td {
+                border-top-width: 1px;
+            }
+            td:first-child {
+                border-left-width: 1px;
+            }
+            td:last-child {
+                border-right-width: 1px;
+            }
+            tr:last-child > td {
+                border-bottom-width: 1px;
+            }
+
+            // tr:last-child {
+            //     th, td {
+            //         padding-bottom: 0;
+            //         border-bottom: none;
+            //     }
+            // }
+        }
+
+        &.table {
+            font-size: 20px;
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+
+    ol.manual-counter {
+        padding-left: 0;
+
+        li {
+            list-style: none;
+            padding-left: 35px;
+            position: relative;
+
+            span.counter {
+                position: absolute;
+                left: 0;
+            }
+        }
+
+        &.offset-3 {
+            li {
+                padding-left: 45px;
+            }
+        }
+    }
+}

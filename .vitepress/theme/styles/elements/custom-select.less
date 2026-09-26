@@ -1,0 +1,32 @@
+.dropdown-arrow {
+    position: absolute;
+    pointer-events: none;
+    top: 8px;
+    right: 8px;
+    opacity: .75;
+}
+
+.custom-select {
+    height: 35px;
+    border: 1px solid @header-border-color;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-weight: 500;
+    background-color: #fff;
+    cursor: pointer;
+    padding-top: 2px;
+    padding-left: 12px;
+    padding-right: 27px;
+    border-color: @header-border-color;
+
+    &:focus {
+        border-color: @header-border-active-color;
+        outline: 0;
+    }
+}
+
+.custom-select:focus + .dropdown-arrow {
+    opacity: 1;
+}

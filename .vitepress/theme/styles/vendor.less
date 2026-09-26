@@ -1,0 +1,37 @@
+//
+// Vendor file
+//
+// Includes all vendor LESS files that contain usable output
+//
+
+//
+// Icons
+//
+
+@import "vendor/octoicons/style.css";
+// phosphor duotone icons are imported in Layout.vue (Vite cannot resolve
+// bare package specifiers from within .less files)
+
+//
+// Bootstrap
+//
+
+// Reset
+@import "vendor/bootstrap/normalize";
+@import "vendor/bootstrap/print";
+
+// Core CSS
+@import "vendor/bootstrap/scaffolding";
+@import "vendor/bootstrap/type";
+@import "vendor/bootstrap/code";
+@import "vendor/bootstrap/grid";
+@import "vendor/bootstrap/tables";
+@import "vendor/bootstrap/forms";
+@import "vendor/bootstrap/buttons";
+
+//
+// Utility classes
+//
+
+@import "vendor/bootstrap/utilities";
+@import "vendor/bootstrap/responsive-utilities";

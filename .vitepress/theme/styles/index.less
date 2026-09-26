@@ -1,0 +1,155 @@
+//
+// Global theme file
+//
+// This should output all shared styles, including:
+// - common layout
+// - theme controls
+// - vendor styles
+//
+
+//
+// Boot variables and mixins
+//
+
+@import "boot.less";
+
+//
+// Vendor
+//
+
+@import "vendor.less";
+
+//
+// Common layout
+//
+
+@import "layouts/default.less";
+@import "layouts/default-responsive.less";
+
+//
+// Elements
+//
+
+@import "elements/text.less";
+@import "elements/article.less";
+@import "elements/arrow.less";
+@import "elements/code.less";
+@import "elements/containers.less";
+@import "elements/nprogress.less";
+@import "elements/custom-blocks.less";
+@import "elements/custom-select.less";
+@import "elements/method-list.less";
+
+//
+// Utils
+//
+
+.d-flex {
+    display: flex;
+}
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+//
+// Home page
+//
+
+// .home-page {
+//     #layout-content {
+//         background: #F5F5FA;
+//         padding-left: 40px;
+//         padding-right: 40px;
+//         padding-bottom: 40px;
+//         margin-left: -40px;
+//         margin-right: -40px;
+//     }
+// }
+
+//
+// Home hero
+//
+
+.home-hero {
+    border-radius: 8px;
+    border: 1px solid #E8E0D4;
+    margin-bottom: 28px;
+    overflow: hidden;
+
+    .home-hero-warm {
+        background: #FFF8ED;
+        padding: 28px 32px 24px;
+
+        p {
+            margin-bottom: 12px;
+            color: #555;
+        }
+    }
+
+    .home-hero-light {
+        background: #fff;
+        padding: 20px 32px 24px;
+        border-top: 1px solid #E8E0D4;
+
+        > p {
+            margin-bottom: 0;
+            color: #555;
+        }
+    }
+
+    .home-hero-icon {
+        font-size: 16px;
+        color: #D97706;
+        font-weight: 600;
+        margin-bottom: 8px;
+        i {
+            font-size: 24px;
+            position: relative;
+            top: 4px;
+            margin-right: 4px;
+        }
+    }
+
+    h2 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-top: 4px;
+        margin-bottom: 8px;
+        border: none;
+        padding: 0;
+        color: #1a1a1a;
+    }
+
+    .btn-primary {
+        background: #E67E22;
+        border-color: #E67E22;
+        color: #fff;
+        padding: 8px 24px;
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        &:hover {
+            background: #CF6D17;
+            border-color: #CF6D17;
+        }
+    }
+
+    .home-hero-checklist {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 12px;
+        li {
+            padding: 4px 0;
+            color: #333;
+            i {
+                color: #16A34A;
+                font-size: 18px;
+                margin-right: 6px;
+                position: relative;
+                top: 3px;
+            }
+        }
+    }
+}

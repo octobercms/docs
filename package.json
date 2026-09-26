@@ -1,0 +1,32 @@
+{
+    "private": true,
+    "name": "octoberdocs-vitepress",
+    "version": "0.0.1",
+    "description": "October CMS Documentation (VitePress)",
+    "type": "module",
+    "authors": {
+        "name": "Alexey Bobkov, Samuel Georges",
+        "email": "hello@octobercms.com"
+    },
+    "repository": "https://github.com/octobercms/docs",
+    "scripts": {
+        "dev": "bun --bun node_modules/vitepress/bin/vitepress.js dev . --port 5180",
+        "build": "bun --bun node_modules/vitepress/bin/vitepress.js build .",
+        "preview": "bun --bun node_modules/vitepress/bin/vitepress.js preview . --port 8080"
+    },
+    "license": "proprietary",
+    "devDependencies": {
+        "@phosphor-icons/web": "^2.1.2",
+        "flexsearch": "0.6.32",
+        "html-to-text": "^7.1.3",
+        "js-yaml": "^4.1.0",
+        "less": "^4.3.0",
+        "lodash-es": "^4.17.21",
+        "markdown-it-container": "^3.0.0",
+        "markdown-it-deflist": "^2.1.0",
+        "markdown-it-imsize": "^2.0.1",
+        "nprogress": "^0.2.0",
+        "prismjs": "^1.29.0",
+        "vitepress": "^1.6.3"
+    }
+}
