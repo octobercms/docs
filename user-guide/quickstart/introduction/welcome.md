@@ -35,9 +35,11 @@ Websites are simple by nature, and building them should be too. You own your cod
 
 ## Built to Last
 
-October CMS is [source-available on GitHub](https://github.com/octobercms), and there is a small honest reason for that. Building a platform you can trust for years takes steady, funded work, so we ask for a modest license fee to keep that work going. The source is open for you to read, learn from, and adapt, and once your site is built it keeps running for as long as you need it to.
+October CMS is a commercially licensed, source-available platform built for long-term projects. It provides a cohesive product with predictable releases and a team responsible for its continued development and maintenance.
 
-Think of it less as buying software and more as keeping the lights on for a project you rely on. That support is what lets us stay independent and keep the platform simple, dependable, and yours.
+The source code is [available on GitHub](https://github.com/octobercms). License revenue funds ongoing development, security updates, compatibility work, and support while preserving the benefits of self-hosted software.
+
+Your code, data, and infrastructure remain yours. Once deployed, your website continues to run independently, without relying on October CMS infrastructure or an active subscription.
 
 ## Getting Started
 
