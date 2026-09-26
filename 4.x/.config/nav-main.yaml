@@ -145,6 +145,7 @@
     children:
         - backend/navigation
         - backend/skins
+        - backend/spotlight
         - backend/users
         - backend/permissions
 -
