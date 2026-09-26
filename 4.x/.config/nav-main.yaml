@@ -144,6 +144,7 @@
     title: Backend Panel
     children:
         - backend/navigation
+        - backend/skins
         - backend/users
         - backend/permissions
 -
