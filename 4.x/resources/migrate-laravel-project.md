@@ -3,7 +3,7 @@ subtitle: How to move an existing Laravel App or Project to October CMS
 ---
 # Migrating a Laravel Project
 
-The following guide can be used to install October CMS v3 atop an existing Laravel 9 application. This is useful if you want to keep the same database without losing data or just prefer to use Laravel as a starting point.
+The following guide can be used to install October CMS v4 atop an existing Laravel 12 application. This is useful if you want to keep the same database without losing data or just prefer to use Laravel as a starting point.
 
 The significant steps involve replacing Laravel’s Illuminate package with October’s Rain package, which represents an extended technology version of Laravel and adds the necessary core features to run October CMS.
 
@@ -11,12 +11,12 @@ The significant steps involve replacing Laravel’s Illuminate package with Octo
 Be sure to follow this guide carefully, as slight differences exist in class names.
 :::
 
-## Install Laravel 9/10 and then October Rain
+## Install Laravel 12 and then October Rain
 
 To get started, assume we have a brand new Laravel installation with the following command:
 
 ```bash
-composer create-project laravel/laravel:^9.0 mylaravel
+composer create-project laravel/laravel:^12.0 mylaravel
 ```
 
 In the newly created directory, require the October CMS Rain library.
@@ -50,64 +50,33 @@ Do you trust "composer/installers" to execute code and wish to enable it now?
 
 The following steps are used to replace Illuminate with Rain.
 
-### Update Application Container
+### Update Application Class
 
 In the file **bootstrap/app.php** the `Illuminate\Foundation\Application` class should be replaced with `October\Rain\Foundation\Application`.
 
-```bash
+```php
 // File bootstrap/app.php
 
 // Replace
-$app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
-);
+use Illuminate\Foundation\Application;
 
 // With
-$app = new October\Rain\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
-);
+use October\Rain\Foundation\Application;
 ```
 
-### Update HTTP Kernel
+Laravel 12 no longer includes the HTTP kernel, console kernel and exception handler files. The October application class registers its own versions of these automatically, so the rest of the file can stay the same.
 
-In the file **app/Http/Kernel.php** the `App\Http\Kernel` class should extend `October\Rain\Foundation\Http\Kernel`.
+### Register the System Module
 
-```bash
-// File app/Http/Kernel.php
+In the file **bootstrap/providers.php** the `System\ServiceProvider` class should be added to the list of providers.
 
-// Replace
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
+```php
+// File bootstrap/providers.php
 
-// With
-use October\Rain\Foundation\Http\Kernel as HttpKernel;
-```
-
-### Update Console Kernel
-
-In the file **app/Console/Kernel.php** the `App\Console\Kernel` class should extend `October\Rain\Foundation\Console\Kernel`.
-
-```bash
-// File app/Console/Kernel.php
-
-// Replace
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
-// With
-use October\Rain\Foundation\Console\Kernel as ConsoleKernel;
-```
-
-### Update Exception Handler
-
-In the file **app/Exceptions/Handler.php** the `App\Exceptions\Handler` class should extend `October\Rain\Foundation\Exception\Handler`.
-
-```bash
-// File app/Exceptions/Handler.php
-
-// Replace
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
-// With
-use October\Rain\Foundation\Exception\Handler as ExceptionHandler;
+return [
+    System\ServiceProvider::class,
+    App\Providers\AppServiceProvider::class,
+];
 ```
 
 ## Publish October CMS Files
@@ -135,18 +104,17 @@ php artisan october:migrate
 
 Next, to make CMS pages available to the frontend, remove or comment out the default route in the file **routes/web.php**.
 
-Now you can open the `/backend` route to set up the administrator account.
+Now you can open the `/admin` route to set up the administrator account.
 
 ### Extra Steps
 
 Some optional steps to configure your system:
 
-- If you plan on using the default Laravel path for views, uncomment this in the **config/view.php** file.
+- If you plan on using the default Laravel path for views, add `resource_path('views')` to the `paths` array in the **config/view.php** file.
 
 
 #### See Also
 
 ::: also
-* [Laravel 9 Installation](https://laravel.com/docs/9.x/installation)
-* [Laravel 10 Installation](https://laravel.com/docs/12.x/installation)
+* [Laravel 12 Installation](https://laravel.com/docs/12.x/installation)
 :::
