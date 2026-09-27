@@ -40,47 +40,46 @@ The following commands are included.
 
 Command | Description
 ------------- | -------------
-**Clear Cache** | clears the application, configuration, route, view, event and theme caches. Requires the **Perform Software Updates** permission.
+**Clear Cache** | clears the application cache, along with the internal caches such as the theme, blueprint and Twig caches. Requires the **Perform Software Updates** permission.
 **Sign Out** | signs out of the backend panel.
 **Toggle Light Switch** | switches the backend panel between light and dark mode. Requires the **Manage Backend Preferences** permission.
 **Toggle Maintenance Mode** | turns maintenance mode on or off, the same setting found in **Settings → Maintenance Mode**. Requires the **Manage Maintenance Mode** permission.
 
 ## Registering Commands
 
-Plugins register commands by overriding the `registerSpotlight` method of the [plugin registration file](../extending.md). The method returns an array where the `commands` key lists command classes, keyed by a unique identifier. The same method registers [record sources](#registering-record-sources) using the `sources` key.
+Plugins register commands by overriding the `registerSpotlight` method of the [plugin registration file](../extending.md). The method returns an array where the `commands` key lists command classes, each paired with a unique code. The same method registers [record sources](#registering-record-sources) using the `sources` key.
 
 ```php
 public function registerSpotlight()
 {
     return [
         'commands' => [
-            'rebuildSitemap' => \Acme\Blog\Spotlight\RebuildSitemap::class,
+            \Acme\Blog\Spotlight\RebuildSitemap::class => 'rebuildSitemap',
         ],
     ];
 }
 ```
 
-A command class extends `Backend\Classes\SpotlightManager\SpotlightCommand` and implements the `onExecute` method, which runs when the user selects the command. Commands are usually placed in a **spotlight** directory inside the plugin.
+A command class extends `Backend\Classes\SpotlightCommandBase` and implements the `onExecute` method, which runs when the user selects the command. Commands are usually placed in a **spotlight** directory inside the plugin.
 
 ```php
 namespace Acme\Blog\Spotlight;
 
 use Flash;
 use Acme\Blog\Classes\Sitemap;
-use Backend\Classes\SpotlightManager\SpotlightCommand;
+use Backend\Classes\SpotlightCommandBase;
 
-class RebuildSitemap extends SpotlightCommand
+class RebuildSitemap extends SpotlightCommandBase
 {
-    protected ?string $icon = 'ph ph-tree-structure';
+    public $name = "Rebuild Sitemap";
 
-    protected array $permissions = ['acme.blog.manage_sitemap'];
+    public $description = "Regenerate the XML sitemap";
 
-    public function __construct()
-    {
-        $this->name = __("Rebuild Sitemap");
-        $this->description = __("Regenerate the XML sitemap");
-        $this->synonyms = ['seo', 'xml'];
-    }
+    public $synonyms = ['seo', 'xml'];
+
+    public $icon = 'ph ph-tree-structure';
+
+    public $permissions = ['acme.blog.manage_sitemap'];
 
     public function onExecute(array $dependencies = [])
     {
@@ -91,7 +90,7 @@ class RebuildSitemap extends SpotlightCommand
 }
 ```
 
-The following properties are available to command classes. Properties that display text should be set in the constructor so they can be translated.
+The following properties are available to command classes. The name and description are translated when displayed.
 
 Property | Description
 ------------- | -------------
@@ -144,38 +143,35 @@ document.addEventListener('acme:sitemap-rebuilt', function(ev) {
 
 ### Command Arguments
 
-A command can ask the user for values before it runs by overriding the `dependencies` method. Each argument is a `SpotlightDependency` object, and the user resolves them one at a time in the order they are added. Pressing <kbd>Esc</kbd>, or <kbd>Backspace</kbd> in an empty field, returns to the previous step.
+A command can ask the user for values before it runs by overriding the `defineDependencies` method. The method returns an array of arguments keyed by name, and the user resolves them one at a time in the order they are defined. Pressing <kbd>Esc</kbd>, or <kbd>Backspace</kbd> in an empty field, returns to the previous step.
 
 There are two types of argument.
 
 Type | Description
 ------------- | -------------
-**SpotlightDependency::SEARCH** | the user picks a value from search results.
-**SpotlightDependency::INPUT** | the user types a value, which is validated before the command runs.
+**search** | the user picks a value from search results.
+**input** | the user types a value, which is validated before the command runs.
 
 The following example asks the user to pick a post, then enter an email address to send it to.
 
 ```php
 use Acme\Blog\Models\Post;
-use Backend\Classes\SpotlightManager\SpotlightDependency;
-use Backend\Classes\SpotlightManager\SpotlightDependencyList;
-use Backend\Classes\SpotlightManager\SpotlightResult;
+use Backend\Classes\SpotlightResult;
 
-public function dependencies(): ?SpotlightDependencyList
+public function defineDependencies()
 {
-    return SpotlightDependencyList::collection()
-        ->add(
-            SpotlightDependency::make('post')
-                ->setTitle(__("Post"))
-                ->setPlaceholder(__("Find a post to send..."))
-                ->setType(SpotlightDependency::SEARCH)
-        )
-        ->add(
-            SpotlightDependency::make('email')
-                ->setTitle(__("Email Address"))
-                ->setType(SpotlightDependency::INPUT)
-                ->setValidation('required|email|max:255')
-        );
+    return [
+        'post' => [
+            'title' => "Post",
+            'placeholder' => "Find a post to send...",
+            'type' => 'search',
+        ],
+        'email' => [
+            'title' => "Email Address",
+            'type' => 'input',
+            'validation' => 'required|email|max:255',
+        ],
+    ];
 }
 
 public function searchPost(string $query): array
@@ -183,7 +179,10 @@ public function searchPost(string $query): array
     return Post::where('title', 'like', "%{$query}%")
         ->limit(10)
         ->get()
-        ->map(fn ($post) => new SpotlightResult($post->id, $post->title))
+        ->map(fn ($post) => new SpotlightResult([
+            'id' => $post->id,
+            'title' => $post->title,
+        ]))
         ->all();
 }
 
@@ -199,7 +198,7 @@ public function onExecute(array $dependencies = [])
 }
 ```
 
-The results for a `SEARCH` argument come from a method on the command named after the argument identifier, so the `post` argument uses the `searchPost` method and a `target_site` argument uses the `searchTargetSite` method. The method receives the search query, followed by the values of any arguments already resolved.
+The results for a `search` argument come from a method on the command named after the argument, so the `post` argument uses the `searchPost` method and a `target_site` argument uses the `searchTargetSite` method. The method receives the search query, followed by the values of any arguments already resolved.
 
 ```php
 public function searchCategory(string $query, $postId): array
@@ -208,18 +207,18 @@ public function searchCategory(string $query, $postId): array
 }
 ```
 
-The resolved values are passed to the `onExecute` method, keyed by the argument identifier. A `SEARCH` argument provides the `id` of the chosen result, and an `INPUT` argument provides the typed text.
+The resolved values are passed to the `onExecute` method, keyed by the argument name. A `search` argument provides the `id` of the chosen result, and an `input` argument provides the typed text.
 
-The following methods are available to configure an argument.
+The following options are available to configure an argument. The title, placeholder and messages are translated when displayed.
 
-Method | Description
+Option | Description
 ------------- | -------------
-**setTitle** | sets the title shown to the user.
-**setPlaceholder** | sets the placeholder text of the field.
-**setType** | sets the argument type, either `SEARCH` (default) or `INPUT`.
-**setValidation** | sets Laravel validation rules for an `INPUT` argument, for example `required|email`.
-**setValidationMessage** | sets a single message used for any failing rule.
-**setValidationMessages** | sets messages by rule name, supporting the `:attribute`, `:min`, `:max`, `:size` and `:digits` placeholders.
+**title** | the title shown to the user.
+**placeholder** | the placeholder text of the field.
+**type** | the argument type, either `search` (default) or `input`.
+**validation** | Laravel validation rules for an `input` argument, for example `required|email`.
+**validationMessage** | a single message used for any failing rule, when no `validationMessages` are set.
+**validationMessages** | an array of messages keyed by rule name, for example `['email' => "Enter a valid email address"]`.
 
 ## Registering Record Sources
 
@@ -230,45 +229,43 @@ public function registerSpotlight()
 {
     return [
         'commands' => [
-            'rebuildSitemap' => \Acme\Blog\Spotlight\RebuildSitemap::class,
+            \Acme\Blog\Spotlight\RebuildSitemap::class => 'rebuildSitemap',
         ],
         'sources' => [
-            'blogPosts' => \Acme\Blog\Spotlight\Posts::class,
+            \Acme\Blog\Spotlight\Posts::class => 'blogPosts',
         ],
     ];
 }
 ```
 
-A source class extends `Backend\Classes\SpotlightManager\SpotlightSource` and implements the `search` method, which returns an array of results for the typed query. Every result should include a URL, which is opened when the user selects it. The `searchModel` helper searches the given model columns and passes each match to a callback that builds the result. Sources are placed in the same **spotlight** directory as commands.
+A source class extends `Backend\Classes\SpotlightSourceBase` and implements the `search` method, which returns an array of results for the typed query. Every result should include a URL, which is opened when the user selects it. The `searchModel` helper searches the given model columns and passes each match to a callback that builds the result. Sources are placed in the same **spotlight** directory as commands.
 
 ```php
 namespace Acme\Blog\Spotlight;
 
 use Backend;
 use Acme\Blog\Models\Post;
-use Backend\Classes\SpotlightManager\SpotlightSource;
-use Backend\Classes\SpotlightManager\SpotlightResult;
+use Backend\Classes\SpotlightSourceBase;
+use Backend\Classes\SpotlightResult;
 
-class Posts extends SpotlightSource
+class Posts extends SpotlightSourceBase
 {
-    protected ?string $icon = 'ph ph-article';
+    public $label = "Blog Posts";
 
-    protected array $permissions = ['acme.blog.access_posts'];
+    public $icon = 'ph ph-article';
 
-    public function __construct()
-    {
-        $this->label = __("Blog Posts");
-    }
+    public $permissions = ['acme.blog.access_posts'];
 
     public function search(string $query, int $limit = 10): array
     {
         return $this->searchModel(Post::class, ['title', 'slug'], $query, function ($post) {
-            return (new SpotlightResult(
-                $post->id,
-                $post->title,
-                $post->slug,
-                Backend::url('acme/blog/posts/update/'.$post->id)
-            ))->setMeta($post->published_at?->format('M j, Y') ?? '');
+            return new SpotlightResult([
+                'id' => $post->id,
+                'title' => $post->title,
+                'description' => $post->slug,
+                'url' => Backend::url('acme/blog/posts/update/'.$post->id),
+                'meta' => $post->published_at?->format('M j, Y'),
+            ]);
         }, $limit);
     }
 }
@@ -276,7 +273,7 @@ class Posts extends SpotlightSource
 
 The `searchModel` helper requires every typed word to appear in at least one of the columns. Sources can also run their own queries and return `SpotlightResult` objects directly.
 
-The following properties are available to source classes.
+The following properties are available to source classes. The labels are translated when displayed.
 
 Property | Description
 ------------- | -------------
@@ -294,20 +291,26 @@ Record sources are searched on the server once at least two characters are typed
 
 ### Search Results
 
-A `SpotlightResult` object is created with an identifier, a title, and optionally a description, URL, icon and an array of synonyms.
+A `Backend\Classes\SpotlightResult` object is created with an array of values.
+
+Value | Description
+------------- | -------------
+**id** | a unique identifier for the result within its source, required.
+**title** | the title shown in the results, required.
+**description** | a short description shown below the title.
+**url** | the URL opened when the result is selected, required for record sources.
+**icon** | an icon CSS class, which defaults to the icon of the source.
+**meta** | a short label shown on the right side of the result, such as a date or an amount.
+
+Each value can also be set with a method of the same name after the result is created.
 
 ```php
-new SpotlightResult($id, $title, $description, $url, $icon, $synonyms);
+$result = new SpotlightResult(['id' => $post->id, 'title' => $post->title]);
+
+$result->url(Backend::url('acme/blog/posts/update/'.$post->id))->meta('Draft');
 ```
 
-The following methods can also be used to set values after the result is created.
-
-Method | Description
-------------- | -------------
-**setUrl** | sets the URL opened when the result is selected.
-**setIcon** | sets the icon CSS class.
-**setSynonyms** | sets an array of alternative search terms.
-**setMeta** | sets a short label shown on the right side of the result, such as a date or an amount.
+Results returned for a `search` argument of a command only use the `id`, `title` and `description` values.
 
 ### Searching In-Memory Data
 
@@ -330,15 +333,13 @@ public function search(string $query, int $limit = 10): array
 Sources that share the same `scope` handle are grouped into a search scope. The user enters a scope by typing the `in:` prefix followed by the handle, such as `in:blog`, or by selecting the scope in the results. Inside a scope, only the sources of that scope are searched, and navigation, settings and commands are limited to the plugin that owns the scope.
 
 ```php
-class Posts extends SpotlightSource
+class Posts extends SpotlightSourceBase
 {
-    protected ?string $scope = 'blog';
+    public $label = "Blog Posts";
 
-    public function __construct()
-    {
-        $this->label = __("Blog Posts");
-        $this->scopeLabel = __("Blog");
-    }
+    public $scope = 'blog';
+
+    public $scopeLabel = "Blog";
 }
 ```
 
@@ -346,12 +347,12 @@ Set the `scopedOnly` property to `true` for sources that are expensive to search
 
 ## Registering Dynamically
 
-Commands and sources may also be registered using the `backend.spotlight.extendItems` event, which is useful when registration depends on conditions. The last argument is the owner code of the registering plugin.
+Commands and sources may also be registered using the `backend.spotlight.extendItems` event, which is useful when registration depends on conditions. The arguments are the class name, the code and the owner code of the registering plugin.
 
 ```php
 Event::listen('backend.spotlight.extendItems', function ($manager) {
-    $manager->registerCommand('rebuildSitemap', \Acme\Blog\Spotlight\RebuildSitemap::class, 'Acme.Blog');
-    $manager->registerSource('blogPosts', \Acme\Blog\Spotlight\Posts::class, 'Acme.Blog');
+    $manager->registerCommand(\Acme\Blog\Spotlight\RebuildSitemap::class, 'rebuildSitemap', 'Acme.Blog');
+    $manager->registerSource(\Acme\Blog\Spotlight\Posts::class, 'blogPosts', 'Acme.Blog');
 });
 ```
 
