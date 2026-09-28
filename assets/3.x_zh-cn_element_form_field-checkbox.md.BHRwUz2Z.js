@@ -1,0 +1,12 @@
+import{_ as o,r as a,o as c,c as l,e as t,a as p,s as r}from"./chunks/framework.CXcwiNg-.js";const y=JSON.parse('{"title":"Checkbox 字段 - October CMS - 3.x","titleTemplate":false,"description":"表单字段","frontmatter":{"subtitle":"表单字段","shortname":"Checkbox"},"headers":[],"relativePath":"3.x/zh-cn/element/form/field-checkbox.md","filePath":"3.x/zh-cn/element/form/field-checkbox.md"}'),d={name:"3.x/zh-cn/element/form/field-checkbox.md"};function i(u,e,k,m,h,_){const n=a("pre-heading"),s=a("post-heading");return c(),l("div",null,[t(n),e[0]||(e[0]=p("h1",null,"Checkbox 字段",-1)),t(s),e[1]||(e[1]=r(`<p><code>checkbox</code> 字段渲染一个单独的复选框。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">show_content</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> checkbox
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Display content
+</code></pre></div><p>以下<a href="./../form-fields.html">字段属性</a>常用。</p><div class="table"><table tabindex="0"><thead><tr><th>属性</th><th>描述</th></tr></thead><tbody><tr><td><strong>label</strong></td><td>向用户显示表单字段时使用的名称。</td></tr><tr><td><strong>default</strong></td><td>新记录使用的默认值。</td></tr><tr><td><strong>comment</strong></td><td>在复选框下方显示的文本。</td></tr></tbody></table></div><p>您可以使用 <code>default</code> 属性默认选中复选框。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">show_content</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> checkbox
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Display content
+    <span class="token key atrule">default</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+</code></pre></div><p>使用 <code>comment</code> 显示一些附带文本。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">is_active</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> checkbox
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Active
+    <span class="token key atrule">comment</span><span class="token punctuation">:</span> Check this box to make the record active.
+</code></pre></div>`,8))])}const g=o(d,[["render",i]]);export{y as __pageData,g as default};
