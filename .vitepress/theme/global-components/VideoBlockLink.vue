@@ -27,9 +27,13 @@
         text-decoration: none;
         color: inherit;
 
-        &:hover {
+        &:hover,
+        &:focus {
             text-decoration: none;
             color: inherit;
+        }
+
+        &:hover {
             box-shadow: 0 0 0 2px #7f81ef;
         }
 

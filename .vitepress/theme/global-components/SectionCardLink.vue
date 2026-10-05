@@ -15,23 +15,21 @@
         display: flex;
         align-items: flex-start;
         background: white;
-        border-radius: 12px;
+        border-radius: 6px;
         border: 1px solid #ECF0F1;
-        padding: 22px 24px;
+        padding: 16px 18px;
         margin-bottom: 20px;
         text-decoration: none;
         color: inherit;
-        transition: box-shadow 0.15s ease, border-color 0.15s ease;
 
-        &:hover {
+        &:hover,
+        &:focus {
             text-decoration: none;
             color: inherit;
-            border-color: #d9dfe6;
-            box-shadow: 0 6px 20px rgba(38, 57, 74, 0.08);
+        }
 
-            .card-arrow {
-                transform: translateX(3px);
-            }
+        &:hover {
+            box-shadow: 0 0 0 2px #7f81ef;
         }
 
         .card-badge {
@@ -77,7 +75,6 @@
             font-size: 18px;
             position: relative;
             top: 2px;
-            transition: transform 0.15s ease;
         }
 
         &.is-simple {
