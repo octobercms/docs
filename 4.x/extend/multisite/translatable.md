@@ -334,7 +334,9 @@ When the record is deleted, the files for every locale are deleted with it, or d
 
 ### Translating Files in the Backend
 
-File upload fields do not offer the translate popup used by other form fields. To translate files in the backend, switch the site using the site selector, then upload the files for that locale. In a non-default locale, the file upload field lists only the files of that locale, and an empty field means the default files are used.
+File upload fields for translated attachments show the translate icon like other translatable fields. Click the icon and select a site to upload or remove the files for that locale in a popup, then click **Save** to keep the changes. Closing the popup without saving discards the uploads. Files can also be translated by switching the site using the site selector and uploading them in the main form.
+
+In a non-default locale, the file upload field lists only the files of that locale, and an empty field means the default files are used.
 
 ### How Files Are Stored
 
