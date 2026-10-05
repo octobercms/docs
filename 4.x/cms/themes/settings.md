@@ -138,6 +138,21 @@ fields:
         default: My Amazing Site!
 ```
 
+### Translating Theme Data
+
+When your website has [sites with different languages](../multisite/multisite.md), set the `translatable` option on a field to give each locale its own value. Fields without this option share one value across every locale.
+
+```yaml
+form:
+    fields:
+        site_name:
+            label: Site name
+            default: My Amazing Site!
+            translatable: true
+```
+
+Selecting a different site in the site picker edits every translatable field in that site's locale. The `this.theme.site_name` variable returns the value for the active locale, falling back to the default locale when no translation exists.
+
 ### Using Theme Data in CSS
 
 Sometimes you want to include a visual preference inside your theme stylesheet. You may use CSS custom properties (variables) to make these values available. In the following example, we will use a [Color Picker field type](../../element/form/widget-colorpicker.md) to specify a custom link color.
