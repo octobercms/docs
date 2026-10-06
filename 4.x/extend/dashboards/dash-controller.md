@@ -29,9 +29,9 @@ October CMS includes the following widget types:
 
 Type | Description
 ------------- | -------------
-**Indicator** | displays a single data source metric value, such as the total number of pageviews over the selected dashboard period.
+**Indicator** | displays a single data source metric value, such as the total number of pageviews over the selected dashboard period. Set a **Goal** to show the progress toward a target value.
 **Table** | capable of displaying multiple dimension values and metrics, like product names, numbers of units sold, and total sales amount.
-**Chart** | supports line and bar charts. In line charts, the horizontal axis shows dimension values, while the vertical axis shows metric values.
+**Chart** | supports line, bar, pie and doughnut charts. In line charts, the horizontal axis shows dimension values, while the vertical axis shows metric values. Pie and doughnut charts show a slice for each dimension value.
 **Section Title** | Shows a static section title, such as 'Traffic Information'. This widget can also display the currently selected reporting interval.
 **Text Notice** | contains a static title and paragraph text to present any information related to the dashboard.
 
@@ -65,6 +65,8 @@ reports:
         type: section-title
         title: Sales
 ```
+
+Report properties match the widget settings in the dashboard editor, for example `chartType: doughnut` for a chart, or `metric` and `goal` for an indicator.
 
 Registered dashboards appear on the backend dashboard as system dashboards, listed after the existing ones. Administrators can rename, hide, reorder and customize them, and the **Reset to Default** button restores the registered layout. A dashboard that has not been customized always follows the latest definition from the plugin, and it is removed when the plugin is disabled or uninstalled. A customized dashboard is kept as a regular dashboard that can be deleted.
 
