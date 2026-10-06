@@ -58,19 +58,22 @@ Property | Type | Description
 **$totalsOnly** | `bool` | indicates that the method should only return total values for metrics, and not rows
 **$resetCache** | `bool` | indicates that the cache should be reset
 
-Plugins must register their data sources in the Plugin Registration file (Plugin.php), within the `boot` method.
+Plugins register their data sources in the [plugin registration file](../extending.md) (Plugin.php), using the `dataSources` key of the `registerDashboards` method. The key should contain an array with the data source classes in the keys and a label in the values.
 
 ```php
-use Dashboard\Classes\DashManager;
-
-public function boot()
+public function registerDashboards()
 {
-    DashManager::instance()->registerDataSourceClass(
-        MyReportDataSource::class,
-        'My Custom Data Source' // This can be a reference to a localization string
-    );
+    return [
+        'dataSources' => [
+            MyReportDataSource::class => [
+                'label' => 'My Custom Data Source' // This can be a reference to a localization string
+            ]
+        ]
+    ];
 }
 ```
+
+Data sources can also be registered at runtime with the `registerDataSourceClass` method of the `Dashboard\Classes\DashManager` class.
 
 We will use a simple ecommerce plugin database structure for the documentation examples. The plugin includes the following tables.
 

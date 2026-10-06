@@ -123,21 +123,23 @@ Lastly, the template guides you on accessing server-provided data using the `ful
 
 ### Registering a Widget
 
-Dashboard widgets must be registered in the plugin registration file (Plugin.php), within the `registerReportWidgets` method. The method should return an array containing the widget classes in the keys and widget configuration (label, group, and required permissions) in the values. The `vue` property should be set to `true` to indicate that it is a Vue component.
+Dashboard widgets must be registered in the plugin registration file (Plugin.php), using the `widgets` key of the `registerDashboards` method. The key should contain an array with the widget classes in the keys and widget configuration (label, group, and required permissions) in the values.
 
 ```php
-public function registerReportWidgets()
+public function registerDashboards()
 {
     return [
-        \October\Test\VueComponents\MyCustomWidget::class => [
-            'label' => 'Custom Widget',
-            'group' => 'Acme Author'
+        'widgets' => [
+            \October\Test\VueComponents\MyCustomWidget::class => [
+                'label' => 'Custom Widget',
+                'group' => 'Acme Author'
+            ]
         ]
     ];
 }
 ```
 
-The label and group properties of the `registerReportWidgets` return array are the widget's name and the author's name. These will be displayed in the Dashboard user interface, particularly in the Create Widget menu. Once the widget is registered, you can add it to the dashboard:
+The label and group properties are the widget's name and the author's name. These will be displayed in the Dashboard user interface, particularly in the Create Widget menu. Once the widget is registered, you can add it to the dashboard:
 
 ![image](https://raw.githubusercontent.com/octobercms/docs/develop/images/dashboards/adding-widget.webp)
 

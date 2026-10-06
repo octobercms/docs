@@ -35,25 +35,49 @@ Type | Description
 **Section Title** | Shows a static section title, such as 'Traffic Information'. This widget can also display the currently selected reporting interval.
 **Text Notice** | contains a static title and paragraph text to present any information related to the dashboard.
 
-## Creating Default Plugin Dashboards
+## Registering Plugin Dashboards
 
-Plugins can create and install custom dashboards in October CMS by using the `syncAll` method on the Dashboard model. This method synchronizes dashboard definitions with the database, creating entries for each dashboard configuration.
+Plugins can supply their own dashboards by overriding the `registerDashboards` method in the [plugin registration file](../extending.md). Each dashboard is keyed by a unique code, which is also used in its URL, and refers to a YAML file containing the dashboard definition.
 
 ```php
-use Dashboard\Models\Dashboard;
-
-...
-
-Dashboard::syncAll($owner, [
-    'my-dashboard' => [
-        'name' => 'My Dashboard',
-        'icon' => 'icon-chart-bar',
-        'showInterval' => true
-    ]
-]);
+public function registerDashboards()
+{
+    return [
+        'dashboards' => [
+            'sales' => '$/acme/shop/dashboards/sales.yaml'
+        ]
+    ];
+}
 ```
 
-The first argument is the owner class instance or class name that owns the dashboards. The second argument is an array of dashboard definitions keyed by their field/code name. Each definition should include a `name`, `icon`, and optionally `showInterval` to control whether the date interval selector is visible.
+The definition file supports the same properties as a dashboard in the Dash Behavior configuration. The optional `permissions` property hides the dashboard from users without any of the listed permissions, and `showInterval` can be set to `false` when the reports do not use the date range picker.
+
+```yaml
+name: Sales
+icon: ph ph-shopping-cart
+permissions:
+    - acme.shop.view_sales
+
+reports:
+    sales_title:
+        row: 1
+        width: 20
+        type: section-title
+        title: Sales
+```
+
+Registered dashboards appear on the backend dashboard as system dashboards, listed after the existing ones. Administrators can rename, hide, reorder and customize them, and the **Reset to Default** button restores the registered layout. A dashboard that has not been customized always follows the latest definition from the plugin, and it is removed when the plugin is disabled or uninstalled. A customized dashboard is kept as a regular dashboard that can be deleted.
+
+The same method also registers [report widgets](./report-widgets.md) and [data sources](./data-sources.md) with the `widgets` and `dataSources` keys. When a plugin only registers dashboards, the method can return them directly.
+
+```php
+public function registerDashboards()
+{
+    return [
+        'sales' => '$/acme/shop/dashboards/sales.yaml'
+    ];
+}
+```
 
 ### Default Date Range
 
