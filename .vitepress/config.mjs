@@ -10,6 +10,17 @@ const description = 'October CMS Documentation';
 
 const docSets = [octoberCms, userGuide];
 
+// Google Analytics (GA4), production builds only so local dev visits are not tracked
+const gaMeasurementId = 'G-2DEHQSPSXN';
+
+const analyticsHead = process.env.NODE_ENV === 'production' ? [
+    ['script', { async: '', src: `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}` }],
+    ['script', {}, `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${gaMeasurementId}');`]
+] : [];
+
 export default defineConfig({
     title: 'October CMS Documentation',
     description: description,
@@ -54,7 +65,8 @@ export default defineConfig({
         ['link', { rel: 'icon', href: '/images/october.png', type: 'image/png' }],
         ['meta', { property: 'og:image', content: 'https://d2f5cg397c40hu.cloudfront.net/website-static-files/images/docs-open-graph.png' }],
         ['meta', { property: 'og:image:width', content: '1200' }],
-        ['meta', { property: 'og:image:height', content: '630' }]
+        ['meta', { property: 'og:image:height', content: '630' }],
+        ...analyticsHead
     ],
 
     themeConfig: {
