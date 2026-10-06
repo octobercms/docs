@@ -26,7 +26,7 @@ php artisan create:reportwidget Acme.Blog TopPosts
 The report widget classes must extend the `Dashboard\Classes\ReportWidgetBase` class. Example report widget class definition. The class should override the `render` method in order to render the widget itself.
 
 ```php
-namespace RainLab\GoogleAnalytics\ReportWidgets;
+namespace Acme\Blog\ReportWidgets;
 
 use Dashboard\Classes\ReportWidgetBase;
 
@@ -148,18 +148,18 @@ public function registerDashboards()
 {
     return [
         'widgets' => [
-            \RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview::class => [
-                'label' => 'Google Analytics traffic overview',
+            \Acme\Blog\ReportWidgets\TrafficOverview::class => [
+                'label' => 'Blog traffic overview',
                 'group' => 'Widgets',
                 'permissions' => [
-                    'rainlab.googleanalytics.widgets.traffic_overview',
+                    'acme.blog.widgets.traffic_overview',
                 ],
             ],
-            \RainLab\GoogleAnalytics\ReportWidgets\TrafficSources::class => [
-                'label' => 'Google Analytics traffic sources',
+            \Acme\Blog\ReportWidgets\TrafficSources::class => [
+                'label' => 'Blog traffic sources',
                 'group' => 'Widgets',
                 'permissions' => [
-                    'rainlab.googleanalytics.widgets.traffic_sources',
+                    'acme.blog.widgets.traffic_sources',
                 ],
             ]
         ]
@@ -174,7 +174,7 @@ Registered report widgets can be included in a [plugin dashboard](./dash-control
 ```yaml
 reports:
     traffic_overview:
-        type: RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview
+        type: Acme\Blog\ReportWidgets\TrafficOverview
         row: 1
         width: 20
         days: 30
