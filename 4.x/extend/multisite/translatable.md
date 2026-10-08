@@ -353,8 +353,31 @@ Translated files are stored in the `system_files` table along with every other a
 Since the default files are stored without a suffix, adding an existing relation to `$translatable` keeps its current files as the default files, with no migration required.
 
 ::: tip
-Each locale stores its own file records, so the file title and description can be different for each locale. The title and description of a file shared by every locale cannot be translated.
+Each locale stores its own file records, so the file title and description can already be different for each locale.
 :::
+
+### Translating File Titles and Descriptions
+
+A file shared by every locale can still have its title and description translated. Use the `System\Models\TranslatableFile` model in the relation definition instead of `System\Models\File`.
+
+```php
+public $attachOne = [
+    'manual' => \System\Models\TranslatableFile::class
+];
+```
+
+The title and description are translated like any other translatable attribute, and fall back to the default locale when there is no translation. The file reads its locale from the active site, so calling `setLocale` on the parent model does not change it. Call `setLocale` on the file instead.
+
+```php
+$product->manual->title; // Title in the active locale
+
+$product->manual->setTranslation('title', 'fr', "Guide d'utilisation");
+$product->manual->save();
+```
+
+In the backend, the title and description fields show the translate icon when editing the details of the file.
+
+The `TranslatableFile` model works on any model, including models without the `Translatable` trait. Switching a relation between `File` and `TranslatableFile` requires no migration, since the model class is not stored with the file.
 
 ## Method Reference
 
