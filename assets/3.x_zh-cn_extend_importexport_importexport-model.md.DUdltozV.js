@@ -1,0 +1,80 @@
+import{_ as e,r as s,o,c,e as a,a as l,s as r}from"./chunks/framework.CXcwiNg-.js";const f=JSON.parse('{"title":"导入导出模型 - October CMS - 3.x","titleTemplate":false,"description":"了解如何自定义导入和导出过程。","frontmatter":{"subtitle":"了解如何自定义导入和导出过程。"},"headers":[{"level":2,"title":"导入模型","slug":"导入模型","link":"#导入模型","children":[{"level":3,"title":"使用 PHP 导入","slug":"使用-php-导入","link":"#使用-php-导入","children":[]}]},{"level":2,"title":"导出模型","slug":"导出模型","link":"#导出模型","children":[{"level":3,"title":"使用 PHP 导出","slug":"使用-php-导出","link":"#使用-php-导出","children":[]}]},{"level":2,"title":"自定义选项","slug":"自定义选项","link":"#自定义选项","children":[]}],"relativePath":"3.x/zh-cn/extend/importexport/importexport-model.md","filePath":"3.x/zh-cn/extend/importexport/importexport-model.md"}'),i={name:"3.x/zh-cn/extend/importexport/importexport-model.md"};function u(k,n,d,m,g,b){const t=s("pre-heading"),p=s("post-heading");return o(),c("div",null,[a(t),n[0]||(n[0]=l("h1",null,"导入导出模型",-1)),a(p),n[1]||(n[1]=r(`<p>导入和导出模型定义了处理导入或导出操作时使用的逻辑，分别继承 <code>Backend\\Models\\ImportModel</code> 和 <code>Backend\\Models\\ExportModel</code> 模型。这些模型设计用于与<a href="./importexport-controller.html">导入导出控制器</a>配合使用，但也可以直接在 PHP 中使用。</p><h2 id="导入模型"><a href="#导入模型" class="header-anchor">#</a> 导入模型</h2><p>要导入数据，您应该为此过程创建一个专用模型，该模型继承 <code>Backend\\Models\\ImportModel</code> 类。以下是一个类定义示例：</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name-definition class-name">SubscriberImport</span> <span class="token keyword">extends</span> <span class="token class-name class-name-fully-qualified"><span class="token punctuation">\\</span>Backend<span class="token punctuation">\\</span>Models<span class="token punctuation">\\</span>ImportModel</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * @var array rules to be applied to the data.
+     */</span>
+    <span class="token keyword">public</span> <span class="token variable">$rules</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">importData</span><span class="token punctuation">(</span><span class="token variable">$results</span><span class="token punctuation">,</span> <span class="token variable">$sessionKey</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$results</span> <span class="token keyword">as</span> <span class="token variable">$row</span> <span class="token operator">=&gt;</span> <span class="token variable">$data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token variable">$subscriber</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Subscriber</span><span class="token punctuation">;</span>
+                <span class="token variable">$subscriber</span><span class="token operator">-&gt;</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token variable">$data</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token variable">$subscriber</span><span class="token operator">-&gt;</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token function">logCreated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> <span class="token variable">$ex</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token function">logError</span><span class="token punctuation">(</span><span class="token variable">$row</span><span class="token punctuation">,</span> <span class="token variable">$ex</span><span class="token operator">-&gt;</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>该类必须定义一个名为 <code>importData</code> 的方法，用于处理导入的数据。第一个参数 <code>$results</code> 将包含一个含有要导入数据的数组。第二个参数 <code>$sessionKey</code> 将包含请求使用的会话密钥。</p><div class="table"><table tabindex="0"><thead><tr><th>方法</th><th>描述</th></tr></thead><tbody><tr><td><code>logUpdated()</code></td><td>当记录被更新时调用。</td></tr><tr><td><code>logCreated()</code></td><td>当记录被创建时调用。</td></tr><tr><td><code>logError(rowIndex, message)</code></td><td>当导入记录出现问题时调用。</td></tr><tr><td><code>logWarning(rowIndex, message)</code></td><td>用于提供软警告，例如修改值。</td></tr><tr><td><code>logSkipped(rowIndex, message)</code></td><td>当整行数据未被导入（跳过）时使用。</td></tr></tbody></table></div><h3 id="使用-php-导入"><a href="#使用-php-导入" class="header-anchor">#</a> 使用 PHP 导入</h3><p>使用 <code>importFile</code> 方法从存储在磁盘上的本地文件手动处理导入。</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token variable">$importModel</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyImportClass</span><span class="token punctuation">;</span>
+
+<span class="token variable">$importModel</span><span class="token operator">-&gt;</span><span class="token property">file_format</span> <span class="token operator">=</span> <span class="token string single-quoted-string">&#39;json&#39;</span><span class="token punctuation">;</span>
+
+<span class="token variable">$importModel</span><span class="token operator">-&gt;</span><span class="token function">importFile</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;/path/to/import/file.json&#39;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>如果文件来自上传文件，请使用 <code>Input</code> facade 访问本地路径。</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token variable">$importModel</span><span class="token operator">-&gt;</span><span class="token function">importFile</span><span class="token punctuation">(</span>
+    <span class="token class-name static-context">Input</span><span class="token operator">::</span><span class="token function">file</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;file&#39;</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">getRealPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="导出模型"><a href="#导出模型" class="header-anchor">#</a> 导出模型</h2><p>要导出数据，您应该创建一个继承 <code>Backend\\Models\\ExportModel</code> 类的专用模型。以下是一个示例：</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name-definition class-name">SubscriberExport</span> <span class="token keyword">extends</span> <span class="token class-name class-name-fully-qualified"><span class="token punctuation">\\</span>Backend<span class="token punctuation">\\</span>Models<span class="token punctuation">\\</span>ExportModel</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">exportData</span><span class="token punctuation">(</span><span class="token variable">$columns</span><span class="token punctuation">,</span> <span class="token variable">$sessionKey</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$subscribers</span> <span class="token operator">=</span> <span class="token class-name static-context">Subscriber</span><span class="token operator">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token variable">$subscribers</span><span class="token operator">-&gt;</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token variable">$subscriber</span><span class="token punctuation">)</span> <span class="token keyword">use</span> <span class="token punctuation">(</span><span class="token variable">$columns</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$subscriber</span><span class="token operator">-&gt;</span><span class="token function">addVisible</span><span class="token punctuation">(</span><span class="token variable">$columns</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token variable">$subscribers</span><span class="token operator">-&gt;</span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>该类必须定义一个名为 <code>exportData</code> 的方法，用于返回导出数据。第一个参数 <code>$columns</code> 是要导出的列名数组。第二个参数 <code>$sessionKey</code> 将包含请求使用的会话密钥。</p><h3 id="使用-php-导出"><a href="#使用-php-导出" class="header-anchor">#</a> 使用 PHP 导出</h3><p>使用 <code>exportDownload</code> 方法手动处理导出并返回下载响应。</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token variable">$exportColumns</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;id&#39;</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">&#39;title&#39;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token variable">$exportModel</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyExportClass</span><span class="token punctuation">;</span>
+
+<span class="token variable">$exportModel</span><span class="token operator">-&gt;</span><span class="token property">file_format</span> <span class="token operator">=</span> <span class="token string single-quoted-string">&#39;json&#39;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">return</span> <span class="token variable">$exportModel</span><span class="token operator">-&gt;</span><span class="token function">exportDownload</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;myexportfile.json&#39;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;columns&#39;</span> <span class="token operator">=&gt;</span> <span class="token variable">$exportColumns</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="自定义选项"><a href="#自定义选项" class="header-anchor">#</a> 自定义选项</h2><p>导入和导出表单都支持自定义选项，这些选项可以通过表单字段引入，分别在导入或导出配置中的 <strong>form</strong> 选项中定义。这些值然后传递给导入/导出模型，并在处理过程中可用。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token comment"># config_import_export.yaml</span>
+<span class="token key atrule">import</span><span class="token punctuation">:</span>
+    <span class="token comment"># ...</span>
+    <span class="token key atrule">form</span><span class="token punctuation">:</span> $/acme/campaign/models/subscriberimport/fields.yaml
+
+<span class="token key atrule">export</span><span class="token punctuation">:</span>
+    <span class="token comment"># ...</span>
+    <span class="token key atrule">form</span><span class="token punctuation">:</span> $/acme/campaign/models/subscriberexport/fields.yaml
+</code></pre></div><p>指定的表单字段将显示在导入/导出页面上。以下是 <code>fields.yaml</code> 文件内容的示例：</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token comment"># fields.yaml</span>
+<span class="token key atrule">fields</span><span class="token punctuation">:</span>
+
+    <span class="token key atrule">auto_create_lists</span><span class="token punctuation">:</span>
+        <span class="token key atrule">label</span><span class="token punctuation">:</span> Automatically create lists
+        <span class="token key atrule">type</span><span class="token punctuation">:</span> checkbox
+        <span class="token key atrule">default</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+</code></pre></div><p>上面名为 <strong>auto_create_lists</strong> 的表单字段的值可以在导入模型的 <code>importData</code> 方法中使用 <code>$this-&gt;auto_create_lists</code> 访问。如果这是导出模型，该值将在 <code>exportData</code> 方法中可用。</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name-definition class-name">SubscriberImport</span> <span class="token keyword">extends</span> <span class="token class-name class-name-fully-qualified"><span class="token punctuation">\\</span>Backend<span class="token punctuation">\\</span>Models<span class="token punctuation">\\</span>ImportModel</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">importData</span><span class="token punctuation">(</span><span class="token variable">$results</span><span class="token punctuation">,</span> <span class="token variable">$sessionKey</span> <span class="token operator">=</span> <span class="token constant">null</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token property">auto_create_lists</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// Do something</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>`,25))])}const v=e(i,[["render",u]]);export{f as __pageData,v as default};

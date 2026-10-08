@@ -1,0 +1,22 @@
+import{_ as l,r as e,o as c,c as r,e as s,a as d,s as n}from"./chunks/framework.CXcwiNg-.js";const f=JSON.parse('{"title":"Nested Items 字段 - October CMS - 3.x","titleTemplate":false,"description":"内容字段","frontmatter":{"subtitle":"内容字段","shortname":"Nested Items"},"headers":[{"level":4,"title":"另请参阅","slug":"另请参阅","link":"#另请参阅","children":[]}],"relativePath":"3.x/zh-cn/element/content/field-nesteditems.md","filePath":"3.x/zh-cn/element/content/field-nesteditems.md"}'),i={name:"3.x/zh-cn/element/content/field-nesteditems.md"};function u(k,t,m,_,h,g){const a=e("pre-heading"),o=e("post-heading"),p=e("VideoBlockLink");return c(),r("div",null,[s(a),t[0]||(t[0]=d("h1",null,"Nested Items 字段",-1)),s(o),t[1]||(t[1]=n(`<p><code>nesteditems</code> - 创建专属于当前记录的嵌套记录。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">items</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Menu Items
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nesteditems
+    <span class="token key atrule">span</span><span class="token punctuation">:</span> adaptive
+    <span class="token key atrule">form</span><span class="token punctuation">:</span>
+        <span class="token key atrule">fields</span><span class="token punctuation">:</span>
+            <span class="token key atrule">title</span><span class="token punctuation">:</span>
+                <span class="token key atrule">label</span><span class="token punctuation">:</span> Title
+                <span class="token key atrule">type</span><span class="token punctuation">:</span> text
+</code></pre></div>`,2)),s(p,{src:"https://www.youtube.com/watch?v=vhs9U3_BHqg",title:"Nested Items Tutorial",description:"This video demonstrates how to implement the Nested Items content field using step by step instructions.",prompt:"Watch the tutorial"}),t[2]||(t[2]=n(`<p>支持以下属性。</p><div class="table"><table tabindex="0"><thead><tr><th>属性</th><th>描述</th></tr></thead><tbody><tr><td><strong>label</strong></td><td>向用户显示表单字段时使用的名称。</td></tr><tr><td><strong>default</strong></td><td>指定默认数组值，可选。</td></tr><tr><td><strong>comment</strong></td><td>在字段下方放置描述性注释。</td></tr><tr><td><strong>form</strong></td><td>内联表单字段定义。</td></tr><tr><td><strong>maxDepth</strong></td><td>显示用于重新排序记录的界面，指定最大深度。设置为 <code>0</code> 表示无限深度。</td></tr><tr><td><strong>customMessages</strong></td><td>自定义用户界面中使用的消息。</td></tr></tbody></table></div><p>与其他表单一样，嵌套项目支持使用选项卡，只需将字段放在 <code>form</code> 定义的 <code>tabs</code> 或 <code>secondaryTabs</code> 属性下即可。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">tabbed_content</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nesteditems
+    <span class="token key atrule">form</span><span class="token punctuation">:</span>
+        <span class="token key atrule">tabs</span><span class="token punctuation">:</span>
+            <span class="token key atrule">fields</span><span class="token punctuation">:</span>
+                <span class="token comment"># ...</span>
+</code></pre></div><p><code>customMessages</code> 属性用于修改字段定义中使用的各种消息。可用的消息与<a href="./../../extend/forms/relation-controller.html">关联控制器行为</a>的消息相同。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">author</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nesteditems
+    <span class="token key atrule">customMessages</span><span class="token punctuation">:</span>
+        <span class="token key atrule">buttonCreate</span><span class="token punctuation">:</span> New Author
+        <span class="token key atrule">titleUpdateForm</span><span class="token punctuation">:</span> Update Author
+        <span class="token key atrule">titleCreateForm</span><span class="token punctuation">:</span> Create Author
+</code></pre></div><h4 id="另请参阅"><a href="#另请参阅" class="header-anchor">#</a> 另请参阅</h4><div class="custom-block also"><ul><li><a href="./field-entries.html">Entries 内容字段</a></li><li><a href="./../form/widget-repeater.html">Repeater 表单字段</a></li></ul></div>`,8))])}const b=l(i,[["render",u]]);export{f as __pageData,b as default};

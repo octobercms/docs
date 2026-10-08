@@ -1,0 +1,16 @@
+import{_ as o,r as e,o as l,c as p,e as t,a as c,s as r}from"./chunks/framework.CXcwiNg-.js";const x=JSON.parse('{"title":"Textarea 字段 - October CMS - 3.x","titleTemplate":false,"description":"表单字段","frontmatter":{"subtitle":"表单字段","shortname":"Textarea"},"headers":[],"relativePath":"3.x/zh-cn/element/form/field-textarea.md","filePath":"3.x/zh-cn/element/form/field-textarea.md"}'),d={name:"3.x/zh-cn/element/form/field-textarea.md"};function u(i,a,k,g,m,y){const n=e("pre-heading"),s=e("post-heading");return l(),p("div",null,[t(n),a[0]||(a[0]=c("h1",null,"Textarea 字段",-1)),t(s),a[1]||(a[1]=r(`<p><code>textarea</code> 字段渲染一个多行文本框。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">blog_contents</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> textarea
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Contents
+</code></pre></div><p>以下<a href="./../form-fields.html">字段属性</a>受支持且常用。</p><div class="table"><table tabindex="0"><thead><tr><th>属性</th><th>描述</th></tr></thead><tbody><tr><td><strong>title</strong></td><td>表单字段的标题。</td></tr><tr><td><strong>default</strong></td><td>指定默认字符串值，可选。</td></tr><tr><td><strong>placeholder</strong></td><td>字段为空时显示的文本。</td></tr><tr><td><strong>comment</strong></td><td>在字段下方放置描述性注释。</td></tr><tr><td><strong>size</strong></td><td>字段的高度大小。支持的值：<code>tiny</code>、<code>small</code>、<code>large</code>、<code>huge</code>、<code>giant</code>。默认值：<code>large</code>。</td></tr></tbody></table></div><p>您可以使用 <code>size</code> 属性指定字段大小。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">blog_contents</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> textarea
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Contents
+    <span class="token key atrule">size</span><span class="token punctuation">:</span> large
+</code></pre></div><p>您可以使用 <code>default</code> 属性设置默认值。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">quote_content</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> textarea
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Details
+    <span class="token key atrule">default</span><span class="token punctuation">:</span> I like turtles
+</code></pre></div><p>使用 <code>placeholder</code> 属性分配一些占位符文本。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">point_summary</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> textarea
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Point
+    <span class="token key atrule">placeholder</span><span class="token punctuation">:</span> Type some key points are you trying to make
+</code></pre></div>`,10))])}const f=o(d,[["render",u]]);export{x as __pageData,f as default};

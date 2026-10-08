@@ -1,0 +1,68 @@
+import{_ as e,r as s,o,c,e as t,a as r,s as i}from"./chunks/framework.CXcwiNg-.js";const m=JSON.parse('{"title":"Тип Inspector Object - October CMS - 3.x","titleTemplate":false,"description":"Тип Inspector","frontmatter":{"subtitle":"Тип Inspector","shortname":"Object"},"headers":[],"relativePath":"3.x/ru/element/inspector/type-object.md","filePath":"3.x/ru/element/inspector/type-object.md"}'),l={name:"3.x/ru/element/inspector/type-object.md"};function u(g,n,k,d,q,y){const a=s("pre-heading"),p=s("post-heading");return o(),c("div",null,[t(a),n[0]||(n[0]=r("h1",null,"Тип Inspector Object",-1)),t(p),n[1]||(n[1]=i(`<p>Тип inspector <code>object</code> позволяет определять объект с конкретными свойствами, редактируемыми пользователями. Свойства объекта задаются атрибутом <code>properties</code>. Значение атрибута — массив, имеющий ту же структуру, что и массив свойств inspector.</p><p>Приведённый пример создаёт объект с тремя свойствами. Два из них отображаются как текстовые поля, а третье — как выпадающий список.</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">defineProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">&#39;address&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">&#39;title&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;Address&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;type&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;object&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;properties&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                <span class="token string single-quoted-string">&#39;streetAddress&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                    <span class="token string single-quoted-string">&#39;title&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;Street Address&#39;</span><span class="token punctuation">,</span>
+                    <span class="token string single-quoted-string">&#39;type&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;string&#39;</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token string single-quoted-string">&#39;city&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                    <span class="token string single-quoted-string">&#39;title&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;City&#39;</span><span class="token punctuation">,</span>
+                    <span class="token string single-quoted-string">&#39;type&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;string&#39;</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token string single-quoted-string">&#39;country&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                    <span class="token string single-quoted-string">&#39;title&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;Country&#39;</span><span class="token punctuation">,</span>
+                    <span class="token string single-quoted-string">&#39;type&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;dropdown&#39;</span><span class="token punctuation">,</span>
+                    <span class="token string single-quoted-string">&#39;options&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                        <span class="token string single-quoted-string">&#39;us&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;US&#39;</span><span class="token punctuation">,</span>
+                        <span class="token string single-quoted-string">&#39;ca&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;Canada&#39;</span>
+                    <span class="token punctuation">]</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Генерируемый вывод — объект, например:</p><div class="language-json extra-class"><pre class="language-json"><code><span class="token property">&quot;address&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;streetAddress&quot;</span><span class="token operator">:</span> <span class="token string">&quot;321-210 Second ave&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;city&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Springfield&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;country&quot;</span><span class="token operator">:</span> <span class="token string">&quot;us&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Обычно используются и поддерживаются следующие <a href="./../inspector-types.html">значения конфигурации</a>.</p><div class="table"><table tabindex="0"><thead><tr><th>Свойство</th><th>Описание</th></tr></thead><tbody><tr><td><strong>title</strong></td><td>заголовок свойства.</td></tr><tr><td><strong>description</strong></td><td>краткое описание свойства, необязательно.</td></tr><tr><td><strong>properties</strong></td><td>массив вложенных определений свойств.</td></tr><tr><td><strong>default</strong></td><td>массив заполненных элементов по умолчанию, содержащий ключи и значения.</td></tr><tr><td><strong>ignoreIfPropertyEmpty</strong></td><td>задаёт массив значений, которые должны быть исключены из вывода, если значение пусто.</td></tr></tbody></table></div><div class="custom-block warning"><p>Этот тип не поддерживает редактор внешних параметров, указанный свойством <code>showExternalParam</code>.</p></div><p>Свойства объекта могут быть любого типа, поддерживаемого inspector, включая другие объекты. Существует способ полностью исключить объект из значений Inspector, если одно из полей объекта пусто. Поле идентифицируется параметром <code>ignoreIfPropertyEmpty</code>. Например:</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">defineProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">&#39;address&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">&#39;title&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;Address&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;type&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;object&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;ignoreIfPropertyEmpty&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;title&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;properties&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                <span class="token string single-quoted-string">&#39;streetAddress&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                    <span class="token string single-quoted-string">&#39;title&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;Street Address&#39;</span><span class="token punctuation">,</span>
+                    <span class="token string single-quoted-string">&#39;type&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;string&#39;</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token string single-quoted-string">&#39;city&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                    <span class="token string single-quoted-string">&#39;title&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;City&#39;</span><span class="token punctuation">,</span>
+                    <span class="token string single-quoted-string">&#39;type&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;string&#39;</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>В примере выше, если адрес улицы не указан, объект (&quot;address&quot;) будет полностью удалён из вывода inspector. Если для других свойств объекта определены правила валидации и обязательное свойство пусто, эти правила будут проигнорированы.</p><p>Значение <code>default</code> для редактора, если указано, должно быть объектом с теми же свойствами, что и определённые в параметре конфигурации <code>properties</code>.</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">defineProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">&#39;address&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">&#39;title&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;Address&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;type&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;object&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;properties&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span><span class="token comment">/*...*/</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;default&#39;</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+                <span class="token string single-quoted-string">&#39;streetAddress&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;321-210 Second ave&#39;</span><span class="token punctuation">,</span>
+                <span class="token string single-quoted-string">&#39;city&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;Springfield&#39;</span><span class="token punctuation">,</span>
+                <span class="token string single-quoted-string">&#39;country&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;us&#39;</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>`,13))])}const _=e(l,[["render",u]]);export{m as __pageData,_ as default};

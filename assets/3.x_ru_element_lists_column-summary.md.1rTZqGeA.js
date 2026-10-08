@@ -1,0 +1,13 @@
+import{_ as o,r as n,o as p,c as l,e as s,a as c,s as r}from"./chunks/framework.CXcwiNg-.js";const h=JSON.parse('{"title":"Столбец Summary - October CMS - 3.x","titleTemplate":false,"description":"Столбец списка","frontmatter":{"subtitle":"Столбец списка","shortname":"Summary"},"headers":[],"relativePath":"3.x/ru/element/lists/column-summary.md","filePath":"3.x/ru/element/lists/column-summary.md"}'),u={name:"3.x/ru/element/lists/column-summary.md"};function m(i,a,d,k,y,_){const e=n("pre-heading"),t=n("post-heading");return p(),l("div",null,[s(e),a[0]||(a[0]=c("h1",null,"Столбец Summary",-1)),s(t),a[1]||(a[1]=r(`<p><code>summary</code> — генерирует сводное значение, удаляет HTML и ограничивает длину до ближайшей границы слова.</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">html_content</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Content
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> summary
+</code></pre></div><p>Длина сводки по умолчанию — 40 символов, вы можете изменить её с помощью опции <code>limitChars</code>.</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">html_content</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Content
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> summary
+    <span class="token key atrule">limitChars</span><span class="token punctuation">:</span> <span class="token number">100</span>
+</code></pre></div><p>Для ограничения по количеству слов укажите опцию <code>limitWords</code>. Вы также можете изменить завершающие символы с помощью опции <code>endChars</code>.</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">html_content</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Content
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> summary
+    <span class="token key atrule">limitWords</span><span class="token punctuation">:</span> <span class="token number">10</span>
+    <span class="token key atrule">endChars</span><span class="token punctuation">:</span> <span class="token string">&quot;...&quot;</span>
+</code></pre></div>`,6))])}const C=o(u,[["render",m]]);export{h as __pageData,C as default};
