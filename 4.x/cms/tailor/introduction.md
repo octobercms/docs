@@ -53,12 +53,6 @@ A plugin can ship blueprints in a **blueprints** directory inside the plugin, fo
 |           │   └── post.yaml
 :::
 
-Plugin blueprints are not reindexed automatically in debug mode, so run the `tailor:migrate` command after changing one.
-
-```bash
-php artisan tailor:migrate
-```
-
 ## Blueprint Types
 
 The blueprint **type** property determines how the blueprint should be implemented. There are several types available and most blueprints will specify [form field definitions](../../element/form-fields.md).
