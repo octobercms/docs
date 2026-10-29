@@ -1,0 +1,12 @@
+import{_ as l,r as e,o,c as p,e as a,a as c,s as r}from"./chunks/framework.CXcwiNg-.js";const f=JSON.parse('{"title":"Text 字段 - October CMS - 3.x","titleTemplate":false,"description":"表单字段","frontmatter":{"subtitle":"表单字段","shortname":"Text"},"headers":[],"relativePath":"3.x/zh-cn/element/form/field-text.md","filePath":"3.x/zh-cn/element/form/field-text.md"}'),d={name:"3.x/zh-cn/element/form/field-text.md"};function u(i,t,k,m,g,_){const n=e("pre-heading"),s=e("post-heading");return o(),p("div",null,[a(n),t[0]||(t[0]=c("h1",null,"Text 字段",-1)),a(s),t[1]||(t[1]=r(`<p><code>text</code> 字段渲染一个单行文本框。如果未指定类型，这是默认使用的类型。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">blog_title</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> text
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Blog Title
+</code></pre></div><p>以下<a href="./../form-fields.html">字段属性</a>常用。</p><div class="table"><table tabindex="0"><thead><tr><th>属性</th><th>描述</th></tr></thead><tbody><tr><td><strong>label</strong></td><td>向用户显示表单字段时使用的名称。</td></tr><tr><td><strong>placeholder</strong></td><td>字段为空时显示的文本。</td></tr><tr><td><strong>default</strong></td><td>指定默认字符串值，可选。</td></tr><tr><td><strong>comment</strong></td><td>在字段下方放置描述性注释。</td></tr></tbody></table></div><p>您可以使用 <code>default</code> 属性设置默认值。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">quote_content</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> text
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Details
+    <span class="token key atrule">default</span><span class="token punctuation">:</span> I like turtles
+</code></pre></div><p>使用 <code>placeholder</code> 属性分配一些占位符文本。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">point_summary</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> text
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Point
+    <span class="token key atrule">placeholder</span><span class="token punctuation">:</span> Type some key points are you trying to make
+</code></pre></div>`,8))])}const x=l(d,[["render",u]]);export{f as __pageData,x as default};
