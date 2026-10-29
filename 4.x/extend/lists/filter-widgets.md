@@ -117,7 +117,7 @@ At a basic level the filter widget should show a label and its current state to 
     class="filter-scope <?= $value ? 'active' : '' ?>"
     data-scope-name="<?= $name ?>"
 >
-    <span class="filter-label"><?= e(trans($scope->label)) ?></span>
+    <span class="filter-label"><?= e(__($scope->label)) ?></span>
     <?php if ($value): ?>
         <span class="filter-setting">1</span>
     <?php endif ?>
