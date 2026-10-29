@@ -96,7 +96,7 @@ groups:
     textarea:
         name: Textarea
         description: Basic text field
-        icon: icon-file-text-o
+        icon: ph ph-file-text
         fields:
             text_area:
                 label: Text Content
@@ -106,7 +106,7 @@ groups:
     quote:
         name: Quote
         description: Quote item
-        icon: icon-quote-right
+        icon: ph ph-quotes
         fields:
             quote_position:
                 span: auto

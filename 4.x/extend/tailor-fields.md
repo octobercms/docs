@@ -24,7 +24,8 @@ The `create:contentfield` command generates a content field class. The first arg
 php artisan create:contentfield Acme.Blog MyContentField
 ```
 
-The content field class must extend the `Backend\Classes\FormWidgetBase` class.
+The content field class must extend the `Tailor\Classes\ContentFieldBase` class.
+
 A registered content field can be used in [Tailor form fields](../element/form-fields.md) and blueprints.  The class defines how the field should interact with the rest of the system. For example, **plugins/acme/blog/contentfields/MyContentField.php** with the following contents.
 
 ```php
@@ -199,7 +200,7 @@ class MyContentField extends ContentFieldBase
         $form->addFormField($this->fieldName, $this->label)
             ->useConfig($this->config)
             ->displayAs('partial')
-            ->path('$/october/test/contentfields/mycontentfield/partials/_field.php');
+            ->path('$/october/test/contentfields/mycontentfield/partials/_field_mycontentfield.php');
     }
 
     public function extendModelObject($model)
@@ -214,7 +215,7 @@ class MyContentField extends ContentFieldBase
 }
 ```
 
-The file **plugins/october/test/contentfields/mycontentfield/partials/_field.php** contains the partial contents to render the form field. The values are retrieved and saved as an array `[first_value => 'foo', second_value => 'bar']`.
+The file **plugins/october/test/contentfields/mycontentfield/partials/_field_mycontentfield.php** contains the partial contents to render the form field. The values are retrieved and saved as an array `[first_value => 'foo', second_value => 'bar']`.
 
 ```php
 <div class="row">
@@ -224,7 +225,7 @@ The file **plugins/october/test/contentfields/mycontentfield/partials/_field.php
             name="<?= $field->getName() ?>[first_value]"
             value="<?= e($field->value['first_value'] ?? '') ?>"
             class="form-control"
-            style="color:<?= $field->firstColor ?: 'red' ?>"
+            style="color: <?= e($field->firstColor ?: 'red') ?>"
         />
     </div>
     <div class="col">
@@ -233,7 +234,7 @@ The file **plugins/october/test/contentfields/mycontentfield/partials/_field.php
             name="<?= $field->getName() ?>[second_value]"
             value="<?= e($field->value['second_value'] ?? '') ?>"
             class="form-control"
-            style="color:<?= $field->secondColor ?: 'blue' ?>"
+            style="color: <?= e($field->secondColor ?: 'blue') ?>"
         />
     </div>
 </div>

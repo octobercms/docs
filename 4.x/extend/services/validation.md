@@ -711,15 +711,15 @@ A globally registered rule can be shared throughout your application by register
 ```php
 public function register()
 {
-    $this->registerValidationRule('uppercase', UppercaseRule::class);
+    $this->registerValidationRule('all_caps', UppercaseRule::class);
 }
 ```
 
-In this instance, we have created a rule tagged **uppercase** and referenced our rule class where it becomes available to specify as a rule everywhere.
+In this instance, we have created a rule tagged **all_caps** and referenced our rule class where it becomes available to specify as a rule everywhere. The tag should not match the name of a built-in rule, such as `uppercase`, because built-in rules take precedence over registered ones.
 
 ```php
 Validator::make($data, [
-    'shoutout' => 'required|uppercase',
+    'shoutout' => 'required|all_caps',
 ]);
 ```
 
@@ -755,7 +755,7 @@ class UppercaseRule
 
 #### Passing Arguments to Rules
 
-Global rules can support passing arguments along with their definition. For example, a rule called **betwixt** may require two values. Parameters can be passed to a rule by separating with a colon (`:`) and each parameter is seperated by a comma (`,`).
+Global rules can support passing arguments along with their definition. For example, a rule called **betwixt** may require two values. Parameters can be passed to a rule by separating with a colon (`:`) and each parameter is separated by a comma (`,`).
 
 ```php
 $v = Validator::make($data, [
@@ -806,34 +806,27 @@ class BetwixtRule
 
 ### Local Rule Objects
 
-The [Laravel documentation on rule objects](https://laravel.com/docs/6.x/validation#using-rule-objects) describes in more detail how to define a rule class. Specifically, the rule must implement the `Illuminate\Contracts\Validation\Rule` contract which requires a `passes` method to be defined.
+The [Laravel documentation on rule objects](https://laravel.com/docs/12.x/validation#using-rule-objects) describes in more detail how to define a rule class. Specifically, the rule must implement the `Illuminate\Contracts\Validation\ValidationRule` contract which requires a `validate` method to be defined. Unlike a global rule class, this method returns nothing and calls the `$fail` closure with an error message when validation does not pass.
 
 ```php
-class LowercaseRule implements \Illuminate\Contracts\Validation\Rule
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
+
+class LowercaseRule implements ValidationRule
 {
     /**
-     * passes checks if the rule is successful
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
+     * validate fails the attribute when its value is not lowercase.
      */
-    public function passes($attribute, $value)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        return strtolower($value) === $value;
-    }
-
-    /**
-     * message gets the validation error message.
-     * @return string
-     */
-    public function message()
-    {
-        return 'The :attribute must be lowercase.';
+        if (strtolower($value) !== $value) {
+            $fail('The :attribute must be lowercase.');
+        }
     }
 }
 ```
 
-Once a rule is defined, it can be passed as an insatance to the `Validator` service.
+Once a rule is defined, it can be passed as an instance to the `Validator` service.
 
 ```php
 $v = Validator::make($data, [

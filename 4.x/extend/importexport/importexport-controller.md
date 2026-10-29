@@ -116,30 +116,33 @@ Property | Description | Format
 
 ## Import and Export Views
 
-For each page feature import and export you should provide a [view file](../system/views.md) with the corresponding name - **import.htm** and **export.htm**.
+For each page feature import and export you should provide a [view file](../system/views.md) with the corresponding name - **import.php** and **export.php**.
 
 The import/export behavior adds two methods to the controller class: `importRender` and `exportRender`. These methods render the importing and exporting sections as per the YAML configuration file described above.
 
 ### Import View
 
-The **import.htm** view represents the Import page that allows users to import data. A typical Import page contains breadcrumbs, the import section itself, and the submission buttons. The **data-request** attribute should refer to the `onImport` AJAX handler provided by the behavior. Below is a contents of the typical import.htm view file.
+The **import.php** view represents the Import page that allows users to import data. A typical Import page contains breadcrumbs, the import section itself, and the submission buttons. The **data-request** attribute should refer to the `onImport` AJAX handler provided by the behavior. Below is a contents of the typical import.php view file.
 
 ```php
-<?= Form::open(['class' => 'layout']) ?>
+<?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
 
-    <div class="layout-row">
+    <div class="flex-grow-1">
         <?= $this->importRender() ?>
     </div>
 
     <div class="form-buttons">
-        <button
-            type="submit"
-            data-control="popup"
-            data-handler="onImportLoadForm"
-            data-keyboard="false"
-            class="btn btn-primary">
-            Import records
-        </button>
+        <div data-control="loader-container">
+            <button
+                type="button"
+                data-control="popup"
+                data-handler="onImportLoadForm"
+                data-keyboard="false"
+                class="btn btn-primary">
+                <i class="ph ph-upload-simple"></i>
+                Import records
+            </button>
+        </div>
     </div>
 
 <?= Form::close() ?>
@@ -147,24 +150,27 @@ The **import.htm** view represents the Import page that allows users to import d
 
 ### Export View
 
-The **export.htm** view represents the Export page that allows users to export a file from the database. A typical Export page contains breadcrumbs, the export section itself, and the submission buttons. The **data-request** attribute should refer to the `onExport` AJAX handler provided by the behavior. Below is a contents of the typical export.htm form.
+The **export.php** view represents the Export page that allows users to export a file from the database. A typical Export page contains breadcrumbs, the export section itself, and the submission buttons. The **data-request** attribute should refer to the `onExport` AJAX handler provided by the behavior. Below is a contents of the typical export.php view file.
 
 ```php
-<?= Form::open(['class' => 'layout']) ?>
+<?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
 
-    <div class="layout-row">
+    <div class="flex-grow-1">
         <?= $this->exportRender() ?>
     </div>
 
     <div class="form-buttons">
-        <button
-            type="submit"
-            data-control="popup"
-            data-handler="onExportLoadForm"
-            data-keyboard="false"
-            class="btn btn-primary">
-            Export records
-        </button>
+        <div data-control="loader-container">
+            <button
+                type="button"
+                data-control="popup"
+                data-handler="onExportLoadForm"
+                data-keyboard="false"
+                class="btn btn-primary">
+                <i class="ph ph-download-simple"></i>
+                Export records
+            </button>
+        </div>
     </div>
 
 <?= Form::close() ?>
@@ -184,7 +190,8 @@ Then simply add an export button to the [list toolbar](../lists/list-controller.
 ```php
 <a
     href="<?= Backend::url('acme/campaign/subscribers/export') ?>"
-    class="btn btn-default oc-icon-download">
+    class="btn btn-default">
+    <i class="ph ph-download-simple"></i>
     Export Records
 </a>
 ```
@@ -194,7 +201,8 @@ Similarly, to add an import button, the code would look like this:
 ```php
 <a
     href="<?= Backend::url('acme/campaign/subscribers/import') ?>"
-    class="btn btn-default oc-icon-upload">
+    class="btn btn-default">
+    <i class="ph ph-upload-simple"></i>
     Import Records
 </a>
 ```

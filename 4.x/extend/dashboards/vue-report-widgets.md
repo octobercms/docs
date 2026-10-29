@@ -131,8 +131,9 @@ public function registerDashboards()
     return [
         'widgets' => [
             \October\Test\VueComponents\MyCustomWidget::class => [
-                'label' => 'Custom Widget',
-                'group' => 'Acme Author'
+                'label' => "Custom Widget",
+                'group' => "Acme Author",
+                'permissions' => ['october.test.access_plugin'],
             ]
         ]
     ];
