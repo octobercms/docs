@@ -76,7 +76,7 @@
 <script>
 import "./styles/index.less";
 
-import { resolvePageBasic } from './util'
+import { resolvePageBasic, getMovedPageInVersion } from './util'
 import SidebarButton from './components/SidebarButton.vue';
 import SearchBox from "./components/SearchBox.vue";
 import Redirect from "./global-components/Redirect.vue";
@@ -109,11 +109,21 @@ export default {
 
                     // Strip the version so a page missing from one version resolves to another
                     let relativePath = path;
+                    let pathVersionBase = null;
                     for (let key of versionKeys) {
                         const setVersionBase = setBase + "/" + key + "/";
                         if (path.toLowerCase().indexOf(setVersionBase.toLowerCase()) === 0) {
                             relativePath = path.substring(setVersionBase.length - 1);
+                            pathVersionBase = setVersionBase;
                             break;
+                        }
+                    }
+
+                    // Prefer a page that moved within the same version over another version
+                    if (pathVersionBase) {
+                        const movedPage = getMovedPageInVersion(this.$site.pages, pathVersionBase, relativePath);
+                        if (movedPage) {
+                            return resolvePageBasic(this.$site.pages, movedPage.path);
                         }
                     }
 

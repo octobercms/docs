@@ -402,7 +402,7 @@ function resolveItem(item, pages, base, groupDepth = 1) {
         const toggleChildren = item.toggleChildren || [];
         return {
             type: "group",
-            path: item.path,
+            path: item.path ? resolvePage(pages, item.path, base).path : item.path,
             title: item.title,
             icon: item.icon,
             sidebarDepth: item.sidebarDepth,
@@ -469,6 +469,64 @@ export function getAlternateVersion(page, activeVersion, targetVersion, pages, l
     if (updatedPage) {
         return updatedPage.relativePath;
     }
+
+    const movedPage = getMovedPageForVersion(page, activeVersion, targetVersion, pages);
+
+    if (movedPage) {
+        return movedPage.relativePath;
+    }
+}
+
+/**
+ * Finds the same content in another version when a page moved, using the previousPath frontmatter.
+ */
+function getMovedPageForVersion(page, activeVersion, targetVersion, pages) {
+    const versionIndex = page.relativePath.indexOf(activeVersion + "/");
+    if (versionIndex === -1) {
+        return null;
+    }
+
+    const targetBase = page.relativePath.substring(0, versionIndex) + targetVersion + "/";
+    const localPath = page.relativePath.substring(versionIndex + activeVersion.length + 1);
+
+    // This page moved, look for its previous location in the target version
+    if (page.frontmatter.previousPath) {
+        const previousPage = getPageWithRelativePath(pages, targetBase + page.frontmatter.previousPath);
+        if (previousPage) {
+            return previousPage;
+        }
+    }
+
+    // A page in the target version moved from this location
+    return getMovedPageInVersion(pages, targetBase, localPath);
+}
+
+/**
+ * Finds the page in a version that moved from the given path, using the previousPath frontmatter.
+ * @param {string} versionBase Version path, e.g. `/5.x/` or `5.x/`
+ * @param {string} localPath Page path inside the version, e.g. `/element/form/widget-text.html` or `element/form/widget-text.md`
+ */
+export function getMovedPageInVersion(pages, versionBase, localPath) {
+    const previousPath = localPath
+        .replace(/^\//, "")
+        .replace(/\.html$/, "")
+        .replace(/\.md$/, "") + ".md";
+
+    const relativeBase = versionBase.replace(/^\//, "");
+
+    for (let i = 0; i < pages.length; i++) {
+        const sitePage = pages[i];
+
+        if (
+            sitePage.frontmatter &&
+            sitePage.frontmatter.previousPath === previousPath &&
+            sitePage.relativePath.indexOf(relativeBase) === 0
+        ) {
+            return sitePage;
+        }
+    }
+
+    return null;
 }
 
 export function getPageWithRelativePath(pages, relativePath) {

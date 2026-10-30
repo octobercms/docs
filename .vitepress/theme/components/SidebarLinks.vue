@@ -56,8 +56,13 @@ export default {
     ],
 
     data () {
+        // Nested groups start closed unless they contain the active page
+        const defaultOpenIndex = this.depth > 0 ? -1 : 0
+
         return {
-            openGroupIndex: this.initialOpenGroupIndex || 0
+            openGroupIndex: this.initialOpenGroupIndex !== undefined
+                ? this.initialOpenGroupIndex
+                : defaultOpenIndex
         }
     },
 

@@ -23,6 +23,7 @@ export default {
             const fm = {};
             if (frontmatter.shortname) fm.shortname = frontmatter.shortname;
             if (frontmatter.updatedVersion) fm.updatedVersion = frontmatter.updatedVersion;
+            if (frontmatter.previousPath) fm.previousPath = frontmatter.previousPath;
 
             return {
                 key: pagePath,

@@ -1,102 +1,105 @@
 #
-# Elements Nav
+# Handbook Nav
 #
-"/element/":
+"/handbook/":
 -
-    title: Definitions
+    title: Backend Definitions
+    collapsable: false
     children:
-        - form-fields
-        - list-columns
-        - filter-scopes
-        - inspector-types
-        - define-options
-        - available-icons
-        - available-commands
+        -
+            title: Form Fields
+            path: form-fields
+            children:
+                - form-fields/balloon-selector
+                - form-fields/boxes
+                - form-fields/checkbox
+                - form-fields/checkboxlist
+                - form-fields/codeeditor
+                - form-fields/colorpicker
+                - form-fields/currency
+                - form-fields/datatable
+                - form-fields/datepicker
+                - form-fields/dropdown
+                - form-fields/email
+                - form-fields/fileupload
+                - form-fields/hint
+                - form-fields/ruler
+                - form-fields/markdown
+                - form-fields/mediafinder
+                - form-fields/nestedform
+                - form-fields/number
+                - form-fields/pagefinder
+                - form-fields/partial
+                - form-fields/password
+                - form-fields/radio
+                - form-fields/recordfinder
+                - form-fields/relation
+                - form-fields/repeater
+                - form-fields/richeditor
+                - form-fields/section
+                - form-fields/sensitive
+                - form-fields/switch
+                - form-fields/taglist
+                - form-fields/text
+                - form-fields/textarea
+        -
+            title: List Columns
+            path: list-columns
+            children:
+                - list-columns/colorpicker
+                - list-columns/currency
+                - list-columns/datetime
+                - list-columns/file
+                - list-columns/image
+                - list-columns/linkage
+                - list-columns/number
+                - list-columns/partial
+                - list-columns/selectable
+                - list-columns/summary
+                - list-columns/switch
+                - list-columns/text
+        -
+            title: Filter Scopes
+            path: filter-scopes
+            children:
+                - filter-scopes/checkbox
+                - filter-scopes/date
+                - filter-scopes/dropdown
+                - filter-scopes/group
+                - filter-scopes/number
+                - filter-scopes/switch
+                - filter-scopes/text
+        -
+            title: Inspector Types
+            path: inspector-types
+            children:
+                - inspector-types/autocomplete
+                - inspector-types/checkbox
+                - inspector-types/dictionary
+                - inspector-types/dropdown
+                - inspector-types/mediafinder
+                - inspector-types/object
+                - inspector-types/objectlist
+                - inspector-types/set
+                - inspector-types/string
+                - inspector-types/stringlist
+                - inspector-types/stringlistautocomplete
+                - inspector-types/table
+                - inspector-types/text
+        - options
+        - icons
 -
-    title: Tailor Fields
+    title: Tailor
+    collapsable: false
     children:
-        - content/field-mixin
-        - content/field-entries
-        - content/field-nesteditems
+        -
+            title: Tailor Fields
+            children:
+                - tailor-fields/entries
+                - tailor-fields/mixin
+                - tailor-fields/nesteditems
 -
-    title: Form UI
+    title: Console
+    collapsable: false
     children:
-        - form/ui-section
-        - form/ui-hint
-        - form/ui-ruler
-        - form/ui-partial
--
-    title: Form Fields
-    children:
-        - form/field-text
-        - form/field-number
-        - form/field-password
-        - form/field-email
-        - form/field-textarea
-        - form/field-dropdown
-        - form/field-radio
-        - form/field-balloon
-        - form/field-checkbox
-        - form/field-checkboxlist
-        - form/field-switch
--
-    title: Form Widgets
-    children:
-        - form/widget-codeeditor
-        - form/widget-colorpicker
-        - form/widget-datatable
-        - form/widget-datepicker
-        - form/widget-fileupload
-        - form/widget-markdown
-        - form/widget-mediafinder
-        - form/widget-nestedform
-        - form/widget-recordfinder
-        - form/widget-relation
-        - form/widget-repeater
-        - form/widget-richeditor
-        - form/widget-pagefinder
-        - form/widget-sensitive
-        - form/widget-taglist
-        - form/widget-currency
-        - form/widget-boxes
--
-    title: List Columns
-    children:
-        - lists/column-text
-        - lists/column-number
-        - lists/column-file
-        - lists/column-image
-        - lists/column-switch
-        - lists/column-summary
-        - lists/column-datetime
-        - lists/column-selectable
-        - lists/column-linkage
-        - lists/column-partial
-        - lists/column-colorpicker
-        - lists/column-currency
--
-    title: Filter Scopes
-    children:
-        - filter/scope-checkbox
-        - filter/scope-switch
-        - filter/scope-text
-        - filter/scope-number
-        - filter/scope-dropdown
-        - filter/scope-group
-        - filter/scope-date
--
-    title: Inspector Types
-    children:
-        - inspector/type-string
-        - inspector/type-stringlist
-        - inspector/type-text
-        - inspector/type-autocomplete
-        - inspector/type-checkbox
-        - inspector/type-dropdown
-        - inspector/type-dictionary
-        - inspector/type-object
-        - inspector/type-objectlist
-        - inspector/type-set
-        - inspector/type-table
-        - inspector/type-mediafinder
-        - inspector/type-stringlistautocomplete
+        - console-commands

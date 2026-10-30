@@ -1,3 +1,3 @@
 # October CMS 5.0
 
-<Redirect to="element/form-fields" />
+<Redirect to="handbook/" />
