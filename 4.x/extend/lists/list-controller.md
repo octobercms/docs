@@ -81,7 +81,7 @@ The toolbar configuration allows:
 
 Property | Description
 ------------- | -------------
-**buttons** | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.htm**
+**buttons** | a reference to a controller partial file with the toolbar buttons. Eg: **_list_toolbar.php**
 **search** | reference to a Search Widget configuration file, or an array with configuration.
 
 The search configuration supports the following properties:
@@ -98,7 +98,8 @@ The toolbar buttons partial referred above should contain the toolbar control de
 ```php
 <div data-control="toolbar">
     <a href="<?= Backend::url('acme/blog/posts/create') ?>"
-        class="btn btn-primary oc-icon-plus">
+        class="btn btn-primary">
+        <i class="ph ph-plus"></i>
         New Post
     </a>
 </div>

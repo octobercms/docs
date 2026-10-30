@@ -43,7 +43,7 @@ The `optionsPreset` can be used to extract the value from a [options preset defi
 icon:
     label: Icon
     type: selectable
-    optionsPreset: phosphorIcons
+    optionsPreset: icons@phosphor
 ```
 
 #### See Also

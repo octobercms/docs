@@ -12,20 +12,20 @@ public function registerNavigation()
         'blog' => [
             'label' => 'Blog',
             'url' => Backend::url('acme/blog/posts'),
-            'icon' => 'icon-pencil',
+            'icon' => 'ph ph-pencil-simple',
             'permissions' => ['acme.blog.*'],
             'order' => 500,
 
             'sideMenu' => [
                 'posts' => [
                     'label' => 'Posts',
-                    'icon' => 'icon-copy',
+                    'icon' => 'ph ph-copy',
                     'url' => Backend::url('acme/blog/posts'),
                     'permissions' => ['acme.blog.access_posts'],
                 ],
                 'categories' => [
                     'label' => 'Categories',
-                    'icon' => 'icon-copy',
+                    'icon' => 'ph ph-copy',
                     'url' => Backend::url('acme/blog/categories'),
                     'permissions' => ['acme.blog.access_categories'],
                 ]
@@ -97,7 +97,7 @@ To display a call to action, set the type to `primary` to display the link as a 
 ```php
 'people_create' => [
     'label' => 'New Person',
-    'icon' => 'icon-plus',
+    'icon' => 'ph ph-plus',
     'url' => Backend::url('acme/blog/people/create'),
     'itemType' => 'primary',
 ],
@@ -108,14 +108,14 @@ It can also be useful to provide multiple `primary` links and display them condi
 ```php
 'people_create' => [
     'label' => 'New Person',
-    'icon' => 'icon-plus',
+    'icon' => 'ph ph-plus',
     'url' => Backend::url('acme/blog/people/create'),
     'itemType' => 'primary',
     'visibleOn' => 'people',
 ],
 'post_create' => [
     'label' => 'New Post',
-    'icon' => 'icon-plus',
+    'icon' => 'ph ph-plus',
     'url' => Backend::url('acme/blog/people/create'),
     'itemType' => 'primary',
     'visibleOn' => 'posts',

@@ -11,7 +11,7 @@ When using Tailor you can skip the traditional plugin development workflow and g
 
 ## Directory Structure
 
-Blueprints are YAML files that reside in the **app/blueprints** directory by default, in addition to the **themes/.../blueprints** directory for a [CMS theme](../themes/themes.md). Where to place your blueprints depends on the context: **App Blueprints** are globally available, whereas **Theme Blueprints** are only available when that theme is selected.
+Blueprints are YAML files that reside in the **app/blueprints** directory by default, in addition to the **themes/.../blueprints** directory for a [CMS theme](../themes/themes.md) and the **plugins/.../blueprints** directory for a plugin. Where to place your blueprints depends on the context: **App Blueprints** and **Plugin Blueprints** are globally available, whereas **Theme Blueprints** are only available when that theme is selected.
 
 ### App Blueprints
 
@@ -39,6 +39,18 @@ Next is an example of a blueprint structure inside the **demo** theme. Just like
 |       ├── `blueprints`  _← Blueprints Start Here_
 |       │   └── settings.yaml
 |       │   └── color-scheme.yaml
+:::
+
+### Plugin Blueprints
+
+A plugin can ship blueprints in a **blueprints** directory inside the plugin, following the same rules as the app directory. This is useful when a plugin provides content structures alongside its own code.
+
+::: dir
+├── plugins
+|   └── acme
+|       └── blog
+|           ├── `blueprints`  _← Blueprints Start Here_
+|           │   └── post.yaml
 :::
 
 ## Blueprint Types

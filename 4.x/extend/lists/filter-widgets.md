@@ -49,7 +49,7 @@ class Discount extends FilterWidgetBase
 Filter widgets may have properties that can be set using the [filter scope configuration](../../element/filter-scopes.md). Simply define the configurable properties on the class and then call the `fillFromConfig` method to populate them inside the `init` method definition.
 
 ```php
-class Discount extends FormWidgetBase
+class Discount extends FilterWidgetBase
 {
     /**
      * @var bool allowSearch show the search input in the dropdown
@@ -117,7 +117,7 @@ At a basic level the filter widget should show a label and its current state to 
     class="filter-scope <?= $value ? 'active' : '' ?>"
     data-scope-name="<?= $name ?>"
 >
-    <span class="filter-label"><?= e(trans($scope->label)) ?></span>
+    <span class="filter-label"><?= e(__($scope->label)) ?></span>
     <?php if ($value): ?>
         <span class="filter-setting">1</span>
     <?php endif ?>
@@ -147,18 +147,18 @@ The contents should contain the form values and buttons to apply or clear the fi
     <div class="filter-facet">
         <div class="facet-item is-grow">
             <select name="Filter[value]" class="form-control form-control-sm custom-select <?= $allowSearch ? '' : 'select-no-search' ?>">
-                <option value="1" <?= $scope->value === '1' ? 'selected="selected"' : '' ?>>has a discount</option>
-                <option value="0" <?= $scope->value === '0' ? 'selected="selected"' : '' ?>>does not have a discount</option>
+                <option value="1" <?= $scope->value === '1' ? 'selected="selected"' : '' ?>><?= __("has a discount") ?></option>
+                <option value="0" <?= $scope->value === '0' ? 'selected="selected"' : '' ?>><?= __("does not have a discount") ?></option>
             </select>
         </div>
     </div>
     <div class="filter-buttons">
         <button class="btn btn-sm btn-primary" data-filter-action="apply">
-            Apply
+            <?= __("Apply") ?>
         </button>
         <div class="flex-grow-1"></div>
         <button class="btn btn-sm btn-secondary" data-filter-action="clear">
-            Clear
+            <?= __("Clear") ?>
         </button>
     </div>
 </div>
@@ -226,7 +226,7 @@ The example below shows an inline search filter with a search button. It is impo
     <button
         class="btn btn-sm btn-search"
         data-filter-action="apply">
-        <i class="icon-search"></i>
+        <i class="ph ph-magnifying-glass"></i>
     </button>
 </div>
 ```
@@ -245,14 +245,14 @@ The next example shows an inline balloon selector control.
     <ul class="list-unstyled m-0">
         <?php foreach ((array) $scope->options as $key => $value): ?>
             <li
-                data-value="<?= $key ?>"
+                data-value="<?= e($key) ?>"
                 class="small <?= $key === $activeValue ? 'active' : '' ?>"
                 data-filter-action="apply">
-                <?= $value ?>
+                <?= e($value) ?>
             </li>
         <?php endforeach ?>
     </ul>
     <!-- Hidden input to store the selected filter value -->
-    <input type="hidden" name="<?= $name ?>[value]" value="<?= $activeValue ?>">
+    <input type="hidden" name="<?= $name ?>[value]" value="<?= e($activeValue) ?>">
 </div>
 ```

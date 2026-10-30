@@ -67,7 +67,7 @@ DEFAULT_FOLDER_MASK=755
 
 ### Using a Reverse Proxy
 
-When using a reverse proxy, such as CloudFlare, the host server may use an insecure protocol internally and October CMS will reflect this when generating links. This can result in mixed links generated as `http://` and `https://` within the response. The `system.link_policy` setting can be used to force `secure` HTTPS links everywhere.
+When using a reverse proxy, such as Cloudflare, the host server may use an insecure protocol internally and October CMS will reflect this when generating links. This can result in mixed links generated as `http://` and `https://` within the response. The `system.link_policy` setting can be used to force `secure` HTTPS links everywhere.
 
 ```ini
 LINK_POLICY=secure
@@ -78,6 +78,22 @@ You may also `force` the application URL to be used strictly for every link, whi
 ```ini
 LINK_POLICY=force
 ```
+
+### Using Cloudflare
+
+Cloudflare [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/) rewrites script tags to defer their execution, which breaks the script loading order that the backend panel relies on. The symptoms can be hard to trace since no errors appear in the browser console. For example, the navigation menu stops responding after opening a page, list rows ignore hover and click events, or the page only starts working again after a popup is opened and closed.
+
+The recommended solution is to install the [Cloudflare plugin](https://octobercms.com/plugin/rainlab-cloudflare), which adds the `data-cfasync="false"` attribute to every backend script tag so Rocket Loader leaves them untouched. The plugin also registers the Cloudflare network as trusted proxies, so the HTTPS protocol and visitor IP address are detected correctly.
+
+```bash
+php artisan plugin:install RainLab.Cloudflare
+```
+
+Alternatively, you may disable Rocket Loader in the Cloudflare dashboard, either for the entire site or with a configuration rule that targets the backend path (`/admin` by default).
+
+::: tip
+The plugin only protects the backend by default, so Rocket Loader can continue optimizing theme scripts. If your theme or the AJAX framework is affected on the frontend, set `CLOUDFLARE_IGNORE_FRONTEND_SCRIPTS=true` in the `.env` file.
+:::
 
 ### Trusted Hosts
 

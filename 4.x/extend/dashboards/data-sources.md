@@ -58,19 +58,33 @@ Property | Type | Description
 **$totalsOnly** | `bool` | indicates that the method should only return total values for metrics, and not rows
 **$resetCache** | `bool` | indicates that the cache should be reset
 
-Plugins must register their data sources in the Plugin Registration file (Plugin.php), within the `boot` method.
+Plugins register their data sources in the [plugin registration file](../extending.md) (Plugin.php), using the `dataSources` key of the `registerDashboards` method. The key should contain an array with the data source classes in the keys and a label in the values.
 
 ```php
-use Dashboard\Classes\DashManager;
-
-public function boot()
+public function registerDashboards()
 {
-    DashManager::instance()->registerDataSourceClass(
-        MyReportDataSource::class,
-        'My Custom Data Source' // This can be a reference to a localization string
-    );
+    return [
+        'dataSources' => [
+            MyReportDataSource::class => [
+                'label' => 'My Custom Data Source' // This can be a reference to a localization string
+            ]
+        ]
+    ];
 }
 ```
+
+Use the `permissions` key to limit a data source to administrators with any of the listed permissions. Other administrators cannot select the data source or load its data.
+
+```php
+'dataSources' => [
+    MyReportDataSource::class => [
+        'label' => 'My Custom Data Source',
+        'permissions' => ['acme.shop.view_reports']
+    ]
+]
+```
+
+Data sources can also be registered at runtime with the `registerDataSourceClass` method of the `Dashboard\Classes\DashManager` class, which accepts the permissions as an optional third argument.
 
 We will use a simple ecommerce plugin database structure for the documentation examples. The plugin includes the following tables.
 
@@ -316,6 +330,14 @@ protected function fetchData(ReportFetchData $data): ReportFetchDataResult
 When `setPreAggregated` is set, the framework will still normalize the data for date dimensions (filling in missing date periods with null values) but will not re-aggregate metric values. This is important for aggregate functions like `COUNT` and `AVG` where re-aggregation would produce incorrect results.
 
 > **Note**: If your data source returns raw daily rows and relies on the framework to aggregate them into weeks, months, etc., do **not** set this flag. The framework will handle the aggregation automatically.
+
+Pre-aggregated date rows are keyed by the first date of their group, for example the Monday of a week or the first day of a month, including a group that begins before the selected date range. When widgets display totals or relative bars, return the totals with the `setMetricTotals` method of the result, because adding up grouped rows gives the wrong total for metrics such as unique visitors.
+
+```php
+$result->setMetricTotals(['unique_visitors' => $totalUniqueVisitors]);
+```
+
+To show a message inside the widget, for example when an external service is not configured, throw an `ApplicationException` from the `fetchData` method.
 
 This configuration is sufficient to display the data source data in a table widget:
 

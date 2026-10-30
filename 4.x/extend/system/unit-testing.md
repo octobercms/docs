@@ -74,7 +74,7 @@ The first step to testing plugins is to create a file called **phpunit.xml** in 
     </testsuites>
     <php>
         <env name="APP_ENV" value="testing" />
-        <env name="CACHE_DRIVER" value="array" />
+        <env name="CACHE_STORE" value="array" />
         <env name="SESSION_DRIVER" value="array" />
         <env name="ACTIVE_THEME" value="test" />
         <env name="CONVERT_LINE_ENDINGS" value="true" />

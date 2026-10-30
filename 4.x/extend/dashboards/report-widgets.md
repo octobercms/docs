@@ -3,7 +3,7 @@ subtitle: A widget specifically made for use in the dashboard.
 ---
 # Report Widgets
 
-Report widgets can be used on the backend dashboard and in other backend report containers. Report widgets must be registered in the [plugin registration file](../extending.md).
+Report widgets are used on the backend dashboard and must be registered in the [plugin registration file](../extending.md).
 
 The report widget classes reside inside the **reportwidgets** directory of a plugin. As any other plugin class, generic widget controllers should belong to the plugin namespace. Similarly to all backend widgets, report widgets use partials and a special directory layout. Example directory layout:
 
@@ -26,7 +26,7 @@ php artisan create:reportwidget Acme.Blog TopPosts
 The report widget classes must extend the `Dashboard\Classes\ReportWidgetBase` class. Example report widget class definition. The class should override the `render` method in order to render the widget itself.
 
 ```php
-namespace RainLab\GoogleAnalytics\ReportWidgets;
+namespace Acme\Blog\ReportWidgets;
 
 use Dashboard\Classes\ReportWidgetBase;
 
@@ -141,28 +141,41 @@ public function defineProperties()
 
 ## Report Widget Registration
 
-Plugins can register report widgets by overriding the `registerReportWidgets` method inside the [plugin registration file](../extending.md). The method should return an array containing the widget classes in the keys and widget configuration (label, group, and required permissions) in the values.
+Plugins can register report widgets by overriding the `registerDashboards` method inside the [plugin registration file](../extending.md) and using the `widgets` key. The key should contain an array with the widget classes in the keys and widget configuration (label, group, and required permissions) in the values.
 
 ```php
-public function registerReportWidgets()
+public function registerDashboards()
 {
     return [
-        \RainLab\GoogleAnalytics\ReportWidgets\TrafficOverview::class => [
-            'label' => 'Google Analytics traffic overview',
-            'group' => 'Widgets',
-            'permissions' => [
-                'rainlab.googleanalytics.widgets.traffic_overview',
+        'widgets' => [
+            \Acme\Blog\ReportWidgets\TrafficOverview::class => [
+                'label' => 'Blog traffic overview',
+                'group' => 'Widgets',
+                'permissions' => [
+                    'acme.blog.widgets.traffic_overview',
+                ],
             ],
-        ],
-        \RainLab\GoogleAnalytics\ReportWidgets\TrafficSources::class => [
-            'label' => 'Google Analytics traffic sources',
-            'group' => 'Widgets',
-            'permissions' => [
-                'rainlab.googleanaltyics.widgets.traffic_sources',
-            ],
+            \Acme\Blog\ReportWidgets\TrafficSources::class => [
+                'label' => 'Blog traffic sources',
+                'group' => 'Widgets',
+                'permissions' => [
+                    'acme.blog.widgets.traffic_sources',
+                ],
+            ]
         ]
     ];
 }
 ```
 
 The **label** element defines the widget name for the Add Widget popup window. The **group** element defines the menu item context where the widget can be selected.
+
+Registered report widgets can be included in a [plugin dashboard](./dash-controller.md#registering-plugin-dashboards) by using the widget class as the report type, along with any widget properties.
+
+```yaml
+reports:
+    traffic_overview:
+        type: Acme\Blog\ReportWidgets\TrafficOverview
+        row: 1
+        width: 20
+        days: 30
+```

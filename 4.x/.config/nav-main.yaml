@@ -291,6 +291,7 @@
         - function/str
         - function/form
         - function/html
+        - function/vite
 
 #
 # Frontend Nav
@@ -351,6 +352,7 @@
     children:
         - themes/settings
         - themes/child-themes
+        - themes/vite
         - themes/database-themes
         - themes/seeding-themes
 -

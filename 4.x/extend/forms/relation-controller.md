@@ -377,10 +377,10 @@ public function relationExtendConfig($config, $field, $model)
 
 ### Extending the View Widget
 
-Provides an opportunity to manipulate the view widget. For example you might want to toggle showCheckboxes based on a property of your model.
+Provides an opportunity to manipulate the view widget. Relations with many records are viewed with a list widget, extended by the `relationExtendViewListWidget` method, and singular relations are viewed with a form widget, extended by the `relationExtendViewFormWidget` method. For example you might want to toggle showCheckboxes based on a property of your model.
 
 ```php
-public function relationExtendViewWidget($widget, $field, $model)
+public function relationExtendViewListWidget($widget, $field, $model)
 {
     // Make sure the model and field matches those you want to manipulate
     if (!$model instanceof MyModel || $field !== 'myField') {
@@ -395,10 +395,10 @@ public function relationExtendViewWidget($widget, $field, $model)
 
 #### How to Remove a Column
 
-Since the widget has not completed initializing at this point of the runtime cycle you can't call `$widget->removeColumn()`. The `addColumns()` method as described in the [List Controller documentation](../lists/list-controller.md) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the `relationExtendViewWidget()` method. The following example shows how to remove a column.
+Since the widget has not completed initializing at this point of the runtime cycle you can't call `$widget->removeColumn()`. The `addColumns()` method as described in the [List Controller documentation](../lists/list-controller.md) will work as expected, but to remove a column we need to listen to the 'list.extendColumns' event within the `relationExtendViewListWidget()` method. The following example shows how to remove a column.
 
 ```php
-public function relationExtendViewWidget($widget, $field, $model)
+public function relationExtendViewListWidget($widget, $field, $model)
 {
     // Make sure the model and field matches those you want to manipulate
     if (!$model instanceof MyModel || $field !== 'myField') {
@@ -414,10 +414,20 @@ public function relationExtendViewWidget($widget, $field, $model)
 
 ### Extending the Manage Widget
 
-Provides an opportunity to manipulate the manage widget of your relation.
+Provides an opportunity to manipulate the manage widget of your relation. The `relationExtendManageListWidget` method extends the list used to select existing records, and the `relationExtendManageFormWidget` method extends the form used to create or update a record.
 
 ```php
-public function relationExtendManageWidget($widget, $field, $model)
+public function relationExtendManageListWidget($widget, $field, $model)
+{
+    // Make sure the field is the expected one
+    if ($field !== 'myField') {
+        return;
+    }
+
+    // Manipulate widget as needed
+}
+
+public function relationExtendManageFormWidget($widget, $field, $model)
 {
     // Make sure the field is the expected one
     if ($field !== 'myField') {
@@ -433,7 +443,7 @@ public function relationExtendManageWidget($widget, $field, $model)
 Provides an opportunity to manipulate the pivot widget of your relation.
 
 ```php
-public function relationExtendPivotWidget($widget, $field, $model)
+public function relationExtendPivotFormWidget($widget, $field, $model)
 {
     // Make sure the field is the expected one
     if ($field !== 'myField') {

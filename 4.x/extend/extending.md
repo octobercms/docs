@@ -20,7 +20,7 @@ Method | Description
 **registerSettings()** | registers any [backend configuration links](./settings/settings.md) used by this plugin.
 **registerFormWidgets()** | registers any [backend form widgets](./forms/form-widgets.md) supplied by this plugin.
 **registerRichEditorToolbars()** | registers any [rich editor toolbar definitions](../element/form/widget-richeditor.md#registering-a-toolbar-definition) supplied by this plugin.
-**registerReportWidgets()** | registers any [backend report widgets](./backend/report-widgets.md), including the dashboard widgets.
+**registerDashboards()** | registers any [dashboards](./dashboards/dash-controller.md), [report widgets](./dashboards/report-widgets.md) and [data sources](./dashboards/data-sources.md) supplied by this plugin.
 **registerSpotlight()** | registers any [Spotlight commands and record sources](./backend/spotlight.md) supplied by this plugin.
 **registerListColumnTypes()** | registers any [custom list column types](./lists/list-controller.md) supplied by this plugin.
 **registerMailTemplates()** | registers any [mail view templates](./system/sending-mail.md) supplied by this plugin.
