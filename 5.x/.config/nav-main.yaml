@@ -1,0 +1,102 @@
+#
+# Elements Nav
+#
+"/element/":
+-
+    title: Definitions
+    children:
+        - form-fields
+        - list-columns
+        - filter-scopes
+        - inspector-types
+        - define-options
+        - available-icons
+        - available-commands
+-
+    title: Tailor Fields
+    children:
+        - content/field-mixin
+        - content/field-entries
+        - content/field-nesteditems
+-
+    title: Form UI
+    children:
+        - form/ui-section
+        - form/ui-hint
+        - form/ui-ruler
+        - form/ui-partial
+-
+    title: Form Fields
+    children:
+        - form/field-text
+        - form/field-number
+        - form/field-password
+        - form/field-email
+        - form/field-textarea
+        - form/field-dropdown
+        - form/field-radio
+        - form/field-balloon
+        - form/field-checkbox
+        - form/field-checkboxlist
+        - form/field-switch
+-
+    title: Form Widgets
+    children:
+        - form/widget-codeeditor
+        - form/widget-colorpicker
+        - form/widget-datatable
+        - form/widget-datepicker
+        - form/widget-fileupload
+        - form/widget-markdown
+        - form/widget-mediafinder
+        - form/widget-nestedform
+        - form/widget-recordfinder
+        - form/widget-relation
+        - form/widget-repeater
+        - form/widget-richeditor
+        - form/widget-pagefinder
+        - form/widget-sensitive
+        - form/widget-taglist
+        - form/widget-currency
+        - form/widget-boxes
+-
+    title: List Columns
+    children:
+        - lists/column-text
+        - lists/column-number
+        - lists/column-file
+        - lists/column-image
+        - lists/column-switch
+        - lists/column-summary
+        - lists/column-datetime
+        - lists/column-selectable
+        - lists/column-linkage
+        - lists/column-partial
+        - lists/column-colorpicker
+        - lists/column-currency
+-
+    title: Filter Scopes
+    children:
+        - filter/scope-checkbox
+        - filter/scope-switch
+        - filter/scope-text
+        - filter/scope-number
+        - filter/scope-dropdown
+        - filter/scope-group
+        - filter/scope-date
+-
+    title: Inspector Types
+    children:
+        - inspector/type-string
+        - inspector/type-stringlist
+        - inspector/type-text
+        - inspector/type-autocomplete
+        - inspector/type-checkbox
+        - inspector/type-dropdown
+        - inspector/type-dictionary
+        - inspector/type-object
+        - inspector/type-objectlist
+        - inspector/type-set
+        - inspector/type-table
+        - inspector/type-mediafinder
+        - inspector/type-stringlistautocomplete

@@ -7,6 +7,7 @@ export default {
     icon: "/images/october-leaf.svg",
     baseDir: "",
     versions: [
+        ["5.x", { label: "5.x" }],
         ["4.x", { label: "4.x" }],
         ["3.x", { label: "3.x" }],
         ["2.x", { label: "2.x" }],
@@ -28,12 +29,14 @@ export default {
                     "2.x": loadYamlConfig('2.x/.config/nav-main.yaml'),
                     "3.x": loadYamlConfig('3.x/.config/nav-main.yaml'),
                     "4.x": loadYamlConfig('4.x/.config/nav-main.yaml'),
+                    "5.x": loadYamlConfig('5.x/.config/nav-main.yaml'),
                 },
                 sidebarExtra: {
                     "1.x": loadYamlConfig('1.x/.config/nav-extra.yaml'),
                     "2.x": loadYamlConfig('2.x/.config/nav-extra.yaml'),
                     "3.x": loadYamlConfig('3.x/.config/nav-extra.yaml'),
                     "4.x": loadYamlConfig('4.x/.config/nav-extra.yaml'),
+                    "5.x": loadYamlConfig('5.x/.config/nav-extra.yaml'),
                 }
             }
         },

@@ -104,10 +104,22 @@ export default {
                 const set = themeConfig.docSets[index];
 
                 if (set.versions) {
-                    for (let version of set.versions) {
-                        const key = version[0];
-                        const setVersionBase = (set.baseDir ? "/" + set.baseDir : "") + "/" + key;
-                        var foundPage = resolvePageBasic(this.$site.pages, setVersionBase + path);
+                    const setBase = set.baseDir ? "/" + set.baseDir : "";
+                    const versionKeys = this.getVersionKeysDefaultFirst(set);
+
+                    // Strip the version so a page missing from one version resolves to another
+                    let relativePath = path;
+                    for (let key of versionKeys) {
+                        const setVersionBase = setBase + "/" + key + "/";
+                        if (path.toLowerCase().indexOf(setVersionBase.toLowerCase()) === 0) {
+                            relativePath = path.substring(setVersionBase.length - 1);
+                            break;
+                        }
+                    }
+
+                    for (let key of versionKeys) {
+                        const setVersionBase = setBase + "/" + key;
+                        var foundPage = resolvePageBasic(this.$site.pages, setVersionBase + relativePath);
                         if (foundPage) {
                             return foundPage;
                         }
@@ -123,6 +135,15 @@ export default {
             }
 
             return false;
+        },
+        getVersionKeysDefaultFirst(set) {
+            const versionKeys = set.versions.map(version => version[0]);
+
+            if (!set.defaultVersion || versionKeys.indexOf(set.defaultVersion) === -1) {
+                return versionKeys;
+            }
+
+            return [set.defaultVersion].concat(versionKeys.filter(key => key !== set.defaultVersion));
         },
         checkReferrer() {
             const redirectPage = this.findAnyPage();
