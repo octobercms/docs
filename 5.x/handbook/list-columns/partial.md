@@ -18,7 +18,7 @@ The following properties are supported.
 
 Property | Description
 ------------- | -------------
-**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the column name with **column_** as a prefix.
+**path** | path to a [partial view file](../../backend/panel/views.md) or [view template code](../../backend/services/response-view.md), defaults to the column name with **column_** as a prefix.
 
 When the `path` is set to an unqualified file name (a file name without a directory path and extension), the source path is determined to be in the model or controller directories. The following example will check for the partial file at **../models/mymodel/_column_for_content.php** or **../controllers/mycontroller/_column_for_content.php**.
 
@@ -69,6 +69,6 @@ The path must contain the `::` characters to activate the view service.
 #### See Also
 
 ::: also
-* [Rendering Controller Views](../../extend/system/views.md)
-* [Response & View Service](../../extend/services/response-view.md)
+* [Rendering Controller Views](../../backend/panel/views.md)
+* [Response & View Service](../../backend/services/response-view.md)
 :::

@@ -470,20 +470,17 @@ export function getAlternateVersion(page, activeVersion, targetVersion, pages, l
         return updatedPage.relativePath;
     }
 
-    const movedPage = getMovedPageForVersion(page, activeVersion, targetVersion, pages);
-
-    if (movedPage) {
-        return movedPage.relativePath;
-    }
+    return getMovedPathForVersion(page, activeVersion, targetVersion, pages);
 }
 
 /**
  * Finds the same content in another version when a page moved, using the previousPath frontmatter.
+ * The previousPath may include an anchor when the page was split from a section of another page.
  */
-function getMovedPageForVersion(page, activeVersion, targetVersion, pages) {
+function getMovedPathForVersion(page, activeVersion, targetVersion, pages) {
     const versionIndex = page.relativePath.indexOf(activeVersion + "/");
     if (versionIndex === -1) {
-        return null;
+        return;
     }
 
     const targetBase = page.relativePath.substring(0, versionIndex) + targetVersion + "/";
@@ -491,14 +488,19 @@ function getMovedPageForVersion(page, activeVersion, targetVersion, pages) {
 
     // This page moved, look for its previous location in the target version
     if (page.frontmatter.previousPath) {
-        const previousPage = getPageWithRelativePath(pages, targetBase + page.frontmatter.previousPath);
+        const previousLocation = targetBase + page.frontmatter.previousPath;
+        const previousPage = getPageWithRelativePath(pages, previousLocation);
         if (previousPage) {
-            return previousPage;
+            const anchorHash = getAnchorHash(previousLocation);
+            return previousPage.relativePath + (anchorHash ? "#" + anchorHash : "");
         }
     }
 
     // A page in the target version moved from this location
-    return getMovedPageInVersion(pages, targetBase, localPath);
+    const movedPage = getMovedPageInVersion(pages, targetBase, localPath);
+    if (movedPage) {
+        return movedPage.relativePath;
+    }
 }
 
 /**

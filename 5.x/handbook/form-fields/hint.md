@@ -20,7 +20,7 @@ Property | Description
 **label** | title text for the section.
 **comment** | secondary text for the section.
 **mode** | visual display mode, as either: `tip`, `info`, `warning`, `danger`, `success`. Default: `info`.
-**path** | path to a [partial view file](../../extend/system/views.md).
+**path** | path to a [partial view file](../../backend/panel/views.md).
 
 A hint supports content inline to the field. The `label` and `comment` values are optional and contain the content for the heading and subheading. You may also use Markdown syntax for the values.
 

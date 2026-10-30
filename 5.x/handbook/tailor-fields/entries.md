@@ -22,7 +22,7 @@ Property | Description
 **maxItems** | limits the number of entries that can be selected.
 **displayMode** | modifies how the field is displayed. Supported values: `relation`, `recordfinder`, `taglist`, `controller`. Default: `relation`.
 **conditions** | specifies a raw where query statement to apply to the model query.
-**modelScope** | applies a [model query scope](../../extend/database/model.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
+**modelScope** | applies a [model query scope](../../backend/data/model-queries.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
 **inverse** | when defined as an inverse relationship, the name of the related field in the source blueprint.
 
 To limit the number of selectable items, use the `maxItems` property.
@@ -134,7 +134,7 @@ categories:
 
 ## Advanced Record Management
 
-To create, update and delete items within the form, set the `displayMode` to controller to show an advanced management mode, powered by [Relation Controller behavior](../../extend/forms/relation-controller.md).
+To create, update and delete items within the form, set the `displayMode` to controller to show an advanced management mode, powered by [Relation Controller behavior](../../backend/relations/relation-controller.md).
 
 ```yaml
 author:

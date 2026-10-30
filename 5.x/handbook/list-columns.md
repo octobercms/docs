@@ -6,8 +6,8 @@ subtitle: Learn how to define columns in a list structure.
 
 List Columns are column definitions used by lists. These are referred to by the following areas.
 
-- [Backend List Controller](../extend/lists/list-controller.md)
-- [Backend Relation Controller](../extend/forms/relation-controller.md)
+- [Backend List Controller](../backend/lists/list-controller.md)
+- [Backend Relation Controller](../backend/relations/relation-controller.md)
 
 All list columns are identified as their individual **type** property.
 
@@ -63,7 +63,7 @@ Property | Description
 **headCssClass** | assigns a CSS class to the column header container.
 **width** | sets the column width, can be specified in percents (10%) or pixels (50px). There could be a single column without width specified, it will be stretched to take the available space.
 **align** | specifies the column alignment. Possible values are `left`, `right` and `center`.
-**permissions** | the [permissions](../extend/backend/permissions.md) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](../backend/panel/permissions.md) that the current backend user must have in order for the column to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 **order** | a numerical weight when determining the display order, default value increments at 100 points per column.
 **after** | place this column after another existing column name using the display order (+1).
 **before** | place this column before another existing column name using the display order (-1).
@@ -87,7 +87,7 @@ status_code:
     displayFrom: status_label
 ```
 
-This is mostly applicable when a [model accessor](../extend/database/mutators.md) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
+This is mostly applicable when a [model accessor](../backend/data/mutators.md) is used to modify the display value. This is useful where you want to display a certain value, but sort and search by a different value.
 
 ```php
 public function getStatusLabelAttribute()
@@ -98,7 +98,7 @@ public function getStatusLabelAttribute()
 
 ### Nested Column Selection
 
-In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../extend/database/relations.md) column or a [jsonable array](../extend/system/models.md). The following example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively.
+In some cases it makes sense to retrieve a column value from a nested data structure, such as a [model relationship](../backend/data/relationships.md) column or a [jsonable array](../backend/data/models.md). The following example would look for the value in PHP equivalent of `$record->content->title` or `$record->content['title']` respectively.
 
 ```yaml
 content[title]:
@@ -106,7 +106,7 @@ content[title]:
     sortable: false
 ```
 
-The only drawback of doing this is the column cannot use searchable or sortable options. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../extend/database/model.md). Alternatively, you can use the `relation` property described further below.
+The only drawback of doing this is the column cannot use searchable or sortable options. To make the column searchable, and for performance reasons, we recommend duplicating its value on the local database table using [model events](../backend/data/model-queries.md). Alternatively, you can use the `relation` property described further below.
 
 ### Direct SQL Selection
 
@@ -120,7 +120,7 @@ full_name:
 
 ### Related Column Selection
 
-The `relation` property allows you to display related columns as part of the database query, allowing for searching and sorting of that column. The `relation` is set to the name of the [model relationship](../database/relations.md). In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
+The `relation` property allows you to display related columns as part of the database query, allowing for searching and sorting of that column. The `relation` is set to the name of the [model relationship](../backend/data/relationships.md). In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
 
 ```yaml
 group_name:

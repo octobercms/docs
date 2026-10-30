@@ -6,10 +6,10 @@ subtitle: Learn about the different form field types.
 
 Form fields are definitions used by forms, such as a text input. These are commonly referred to by the following areas:
 
-- [CMS Theme Settings](../cms/themes/settings.md)
-- [Tailor Content Fields](../cms/tailor/content-fields.md)
-- [Backend Form Controller](../extend/forms/form-controller.md)
-- [Backend Relation Controller](../extend/forms/relation-controller.md)
+- [CMS Theme Settings](../themes/customization.md)
+- [Tailor Content Fields](../themes/tailor/fields.md)
+- [Backend Form Controller](../backend/forms/form-controller.md)
+- [Backend Relation Controller](../backend/relations/relation-controller.md)
 
 All form fields are identified as their individual **type** property.
 
@@ -20,7 +20,7 @@ fields:
         # ...
 ```
 
-Some fields are simple inputs while others add richer functionality, and plugins can provide their own using [form widgets](../extend/forms/form-widgets.md). Layout fields help with the form design and Tailor fields are only available inside Tailor blueprints.
+Some fields are simple inputs while others add richer functionality, and plugins can provide their own using [form widgets](../backend/forms/form-widgets.md). Layout fields help with the form design and Tailor fields are only available inside Tailor blueprints.
 
 ## Available Fields
 
@@ -142,15 +142,15 @@ Property | Description
 **hidden** | hides the field from the view and excludes it from the saved data. Options: `true`, `false`.
 **stretch** | specifies if this field stretches to fit the parent height.
 **context** | specifies what context should be used when displaying the field. Context can also be passed by using an `@` symbol in the field name, for example, `name@update`.
-**dependsOn** | an array of other field names this field [depends on](../extend/forms/field-dependencies.md), when the other fields are modified, this field will update.
+**dependsOn** | an array of other field names this field [depends on](../backend/forms/field-dependencies.md), when the other fields are modified, this field will update.
 **changeHandler** | the name of an AJAX handler to call when the field value is changed, optional.
 **trigger** | specify conditions for this field using trigger events.
 **preset** | allows the field value to be initially set by the value of another field, converted using the input preset converter.
-**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use the [validation trait on the model](../extend/database/traits.md) as this is not enforced by the form controller.
+**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use the [validation trait on the model](../backend/data/model-traits.md#validation) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 **order** | a numerical weight when determining the display order, default value increments at 100 points per field.
-**permissions** | the [permissions](../extend/backend/permissions.md) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
+**permissions** | the [permissions](../backend/panel/permissions.md) that the current backend user must have in order for the field to be used. Supports either a string for a single permission or an array of permissions of which only one is needed to grant access.
 **tooltip** | adds an icon with a tooltip next to the field label. See below for more detailed settings.
 
 ### Tab Properties
@@ -237,7 +237,7 @@ status:
 
 ### Custom Field Types
 
-There are various native field types that can be used for the **type** setting. It is also possible to render a field directly by specifying the PHP class name of a [form field widget](../extend/forms/form-widgets.md).
+There are various native field types that can be used for the **type** setting. It is also possible to render a field directly by specifying the PHP class name of a [form field widget](../backend/forms/form-widgets.md).
 
 ```yaml
 blog_content:

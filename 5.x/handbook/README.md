@@ -1,9 +1,10 @@
 ---
-subtitle: Look up the definitions, syntax and commands used across October CMS.
+subtitle: Look up the YAML definitions and Twig syntax used across October CMS.
+shortname: Overview
 ---
 # API Handbook
 
-The handbook documents one item per page, such as a form field type or a console command. Each page lists the available properties with examples, while the guides explain how the pieces fit together.
+The handbook documents everything you write in YAML and Twig, one item per page, for readers who already know the concept and need the details.
 
 ## Backend Definitions
 
@@ -38,6 +39,13 @@ The handbook documents one item per page, such as a form field type or a console
     </div>
     <div class="col-md-6">
         <SectionCardLink
+            icon="ph-duotone ph-gear-six"
+            title="Controller Config"
+            description="The config_form, config_list and other behavior configuration files."
+            href="/5.x/handbook/controller-config.html" />
+    </div>
+    <div class="col-md-6">
+        <SectionCardLink
             icon="ph-duotone ph-list-checks"
             title="Defining Options"
             description="The options property used across many field, column and scope types."
@@ -57,21 +65,56 @@ The handbook documents one item per page, such as a form field type or a console
 <div class="row">
     <div class="col-md-6">
         <SectionCardLink
+            icon="ph-duotone ph-blueprint"
+            title="Blueprint Types"
+            description="Entry, single, structure, stream, global, mixin and submission blueprints."
+            href="/5.x/handbook/blueprint-types.html" />
+    </div>
+    <div class="col-md-6">
+        <SectionCardLink
             icon="ph-duotone ph-scissors"
-            title="Tailor Fields"
+            title="Content Fields"
             description="Field types only available inside Tailor blueprints."
-            href="/5.x/handbook/form-fields.html#available-fields" />
+            href="/5.x/handbook/tailor-fields.html" />
+    </div>
+    <div class="col-md-6">
+        <SectionCardLink
+            icon="ph-duotone ph-puzzle-piece"
+            title="Components"
+            description="CMS components for displaying Tailor content on pages."
+            href="/5.x/handbook/tailor-components.html" />
     </div>
 </div>
 
-## Console
+## Twig
 
 <div class="row">
     <div class="col-md-6">
         <SectionCardLink
-            icon="ph-duotone ph-terminal-window"
-            title="Console Commands"
-            description="Artisan commands for managing projects, plugins and themes."
-            href="/5.x/handbook/console-commands.html" />
+            icon="ph-duotone ph-brackets-curly"
+            title="Properties"
+            description="Global properties available under the this variable."
+            href="/5.x/handbook/twig-properties.html" />
+    </div>
+    <div class="col-md-6">
+        <SectionCardLink
+            icon="ph-duotone ph-tag"
+            title="Tags"
+            description="Tags for rendering pages, partials, components and content."
+            href="/5.x/handbook/twig-tags.html" />
+    </div>
+    <div class="col-md-6">
+        <SectionCardLink
+            icon="ph-duotone ph-funnel-simple"
+            title="Filters"
+            description="Filters for links, assets, images and formatting."
+            href="/5.x/handbook/twig-filters.html" />
+    </div>
+    <div class="col-md-6">
+        <SectionCardLink
+            icon="ph-duotone ph-function"
+            title="Functions"
+            description="Functions for responses, translation, dates and helpers."
+            href="/5.x/handbook/twig-functions.html" />
     </div>
 </div>

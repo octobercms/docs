@@ -17,7 +17,7 @@ data:
 ```
 
 ::: tip
-In order to use this with a model, the field should be defined in the [jsonable property](../../extend/system/models.md) or anything that can handle storing as an array.
+In order to use this with a model, the field should be defined in the [jsonable property](../../backend/data/models.md) or anything that can handle storing as an array.
 :::
 
 The following [field properties](../form-fields.md) are supported and commonly used.

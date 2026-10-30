@@ -43,7 +43,7 @@ tabbed_content:
                 # ...
 ```
 
-The `customMessages` property is used to modify the various messages used on the field definition. The available messages are shared with the [Relation Controller behavior](../../extend/forms/relation-controller.md) messages.
+The `customMessages` property is used to modify the various messages used on the field definition. The available messages are shared with the [Relation Controller behavior](../../backend/relations/relation-controller.md) messages.
 
 ```yaml
 author:

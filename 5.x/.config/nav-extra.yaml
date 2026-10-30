@@ -1,5 +1,20 @@
 "/":
 -
+    title: Getting Started
+    icon: "/images/october-leaf.svg"
+    prefix: "/5.x/setup/"
+    link: "/5.x/setup/introduction.html"
+-
+    title: Theme Development
+    icon: "/images/markup-guide.svg"
+    prefix: "/5.x/themes/"
+    link: "/5.x/themes/introduction.html"
+-
+    title: Backend Development
+    icon: "/images/markup-guide.svg"
+    prefix: "/5.x/backend/"
+    link: "/5.x/backend/introduction.html"
+-
     title: API Handbook
     icon: "/images/markup-guide.svg"
     prefix: "/5.x/handbook/"

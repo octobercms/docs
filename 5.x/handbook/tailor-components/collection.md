@@ -1,0 +1,172 @@
+---
+previousPath: cms/components/collection.md
+subtitle: Adds a collection of model records to the page.
+---
+# Collection
+
+The `collection` component displays a collection of entries on the page. The collection component can be used on any page, layout or partial.
+
+## Available Properties
+
+The following properties are supported by the component.
+
+Property | Description
+-------- | -------------
+**handle** | The handle of the [entry blueprint](../blueprint-types/entry.md).
+**recordsPerPage** | Number of records to display on a single page. Leave empty to disable pagination.
+**pageNumber** | This value is used to determine what page the user is on.
+**sortColumn** | Column name the records should be ordered by.
+**sortDirection** | Direction the records should be ordered by. Supported values are `asc` and `desc`.
+
+## Basic Usage
+
+The following adds a collection of **Blog\Post** entries to the page. The collection is accessed in Twig by looping the default `collection` variable.
+
+::: cmstemplate
+```ini
+[collection]
+handle = "Blog\Post"
+```
+```twig
+{% for post in collection %}
+    <h1>{{ post.title }}</h1>
+{% endfor %}
+```
+:::
+
+When multiple collections are used on the same page, the component can be assigned a name **posts** using the component alias and this is the variable name that becomes available to the page. The following collection is accessed using the `posts` variable instead.
+
+::: cmstemplate
+```ini
+[collection posts]
+handle = "Blog\Post"
+```
+```twig
+{% for post in posts %}
+    <h1>{{ post.title }}</h1>
+{% endfor %}
+```
+:::
+
+Use the `is empty` or `is not empty` expression to check if a collection has at least one record available to display.
+
+```twig
+{% if posts is not empty %}
+    {# ... #}
+{% endif %}
+```
+
+## How the Component Variable Works
+
+The component variable (e.g. `collection` or your alias like `posts`) acts as a smart proxy that behaves differently depending on how you access it.
+
+**Accessing attributes** returns the record field value, useful for section and global components.
+
+```twig
+{{ section.title }}
+```
+
+**Iterating directly** returns the loaded records using the component's default query, useful for collection components.
+
+```twig
+{% for post in posts %}
+    <h1>{{ post.title }}</h1>
+{% endfor %}
+```
+
+**Calling a method** starts a new [database model query](../../backend/data/query-builder.md) that can be chained and must end with `get()` or `paginate()`.
+
+```twig
+{% set featured = posts.where('is_featured', true).get() %}
+```
+
+::: warning
+When accessing the component variable as an attribute (e.g. `posts.title`) or as a query (e.g. `posts.where(...)`) the result will be different. Attributes return a stored value from the primary record, whereas methods initiate a new database query.
+:::
+
+## Performing Queries
+
+When accessing the component variable using a method it will switch to a [database model query](../../backend/data/query-builder.md). For example, to only show entries that have a field `color` with the value **blue** use the `where` query method. Using the `{% set %}` Twig tag will assign the result to a new variable.
+
+```twig
+{% set bluePosts = posts.where('color', 'blue').get() %}
+```
+
+To show only posts that have a related author, you can use the `whereRelation` query method. To complete the query, proceed with the `get()` method. The following lists posts that are assigned to the `author` with a slug set to **bella-vista**.
+
+```twig
+{% set authorPosts = posts.whereRelation('author', 'slug', 'bella-vista').get() %}
+```
+
+### Accessing the Entry Type
+
+To filter records by their entry type, perform a `where()` query using the `content_group` attribute. The following will list posts that use the entry type code **featured_post**.
+
+```twig
+{% set featuredPosts = posts.where('content_group', 'featured_post').get() %}
+```
+
+### Paginating Records
+
+You could also apply pagination to the collection with the `paginate()` method instead. The following will paginate the posts at **10** per page and displays the paginated navigation.
+
+```twig
+{% set authorPosts = posts.whereRelation(...).paginate(10) %}
+
+{{ pager(authorPosts) }}
+```
+
+::: tip
+See the [Pagination feature](../../themes/ajax/pagination.md) to learn more about paging records.
+:::
+
+### Searching Records
+
+To search records, use the [`searchWhere()` method](../../backend/data/query-builder.md) to perform a search query on a column's value. The following will search for records the supplied term and columns using a case insensitive query.
+
+```twig
+{% set foundPages = pages.searchWhere(searchTerm, ['title', 'content']).get() %}
+```
+
+You may also use the [`searchWhereRelation()` method](../../backend/data/relationships.md) to search related records, where the relation name is included in the method for querying the relationship existence.
+
+```twig
+{% set foundPages = pages.searchWhereRelation(searchTerm, 'author', ['title']).get() %}
+```
+
+## Eager Loading Related Records
+
+In some cases, and for performance reasons, you may wish to eager load related records. Use the `load` method on the collection, passing the relation name. In the next example, the `categories` relation will be loaded with every post in the collection.
+
+```twig
+{% do authorPosts.load('categories') %}
+```
+
+## Counting Records
+
+Let's assume you want to display a list of blog categories and count the number of posts in each category. First, define the [inverse relation](../tailor-fields/entries.md) on the category blueprint as **posts**.
+
+```yaml
+posts:
+    type: entries
+    source: Blog\Post
+    inverse: categories
+    hidden: true
+```
+
+Then, call the `withCount` function on the collection component, followed by `get` to return a collection of category records. This will create an attribute on each category called **post_count**.
+
+```twig
+{% set categories = collection.withCount('posts').get() %}
+{% for category in categories %}
+    <h5>{{ category.title }} ({{ category.post_count }} posts)</h5>
+{% endfor %}
+```
+
+#### See Also
+
+::: also
+* [Pagination](../../themes/ajax/pagination.md)
+* [Model Queries](../../backend/data/model-queries.md)
+* [Database Relationships](../../backend/data/relationships.md)
+:::

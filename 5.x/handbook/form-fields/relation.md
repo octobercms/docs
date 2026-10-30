@@ -24,11 +24,11 @@ Property | Description
 **select** | a custom SQL select statement to use for the name.
 **emptyOption** | text to display when there is no available selections.
 **conditions** | specifies a raw where query statement to apply to the model query.
-**modelScope** | applies a [model query scope](../../extend/database/model.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
+**modelScope** | applies a [model query scope](../../backend/data/model-queries.md) method to the **related form model**, can be a model method name or a static PHP class method (`Class::method`).
 **defaultSort** | sets a default sorting column and direction, supports a string for the column name or an array with keys `column` and `direction`. The direction can be `asc` for ascending (default) or `desc` for descending order.
 **quickCreate** | adds a [quick create](#quick-create) option to the dropdown for creating new related records on the fly. Accepts a string path to a fields definition file, or an object with extended options.
-**useController** | automatically detects if this field configured with [Relation Controller behavior](../../extend/forms/relation-controller.md) and use it. Default: `true`
-**controller** | specifies an array to manually configure integration with the [Relation Controller behavior](../../extend/forms/relation-controller.md).
+**useController** | automatically detects if this field configured with [Relation Controller behavior](../../backend/relations/relation-controller.md) and use it. Default: `true`
+**controller** | specifies an array to manually configure integration with the [Relation Controller behavior](../../backend/relations/relation-controller.md).
 
 Use the `nameFrom` property to customize the label used for the related record.
 
@@ -88,7 +88,7 @@ user:
     modelScope: withTrashed
 ```
 
-The `modelScope` can be used to connect two related fields, for example, connecting a `Country` and `State` model, where the available states are filtered by the selected country. The `dependsOn` property enables [field dependencies](../../extend/forms/field-dependencies.md) and updates the `state` options when a `country` is selected.
+The `modelScope` can be used to connect two related fields, for example, connecting a `Country` and `State` model, where the available states are filtered by the selected country. The `dependsOn` property enables [field dependencies](../../backend/forms/field-dependencies.md) and updates the `state` options when a `country` is selected.
 
 ```yaml
 country:
@@ -102,7 +102,7 @@ state:
     modelScope: filterStates
 ```
 
-The `modelScope` value **filterStates** translates to the `scopeFilterStates` method defined in the `State` model. The `$model` (second argument) supplied to the [model query scope](../../extend/database/model.md) lets you capture the selected country and filter the available options.
+The `modelScope` value **filterStates** translates to the `scopeFilterStates` method defined in the `State` model. The `$model` (second argument) supplied to the [model query scope](../../backend/data/model-queries.md) lets you capture the selected country and filter the available options.
 
 ```php
 public function scopeFilterStates($query, $model)
@@ -156,7 +156,7 @@ The `quickCreate` feature is automatically disabled when the field is in preview
 
 ## Relation Controller Integration
 
-If the controller implements the [Relation Controller behavior](../../extend/forms/relation-controller.md) and the field is defined there, then it will be displayed using this definition. Set the `useController` property to false to disable this functionality.
+If the controller implements the [Relation Controller behavior](../../backend/relations/relation-controller.md) and the field is defined there, then it will be displayed using this definition. Set the `useController` property to false to disable this functionality.
 
 ```yaml
 countries:

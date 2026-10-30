@@ -40,7 +40,7 @@ tags:
         - Orange
 ```
 
-You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../../extend/database/relations.md). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
+You may use the `mode` called **relation** where the field name is a [many-to-many relationship](../../backend/data/relationships.md). This will automatically source and assign tags via the relationship. If custom tags are supported, they will be created before assignment.
 
 ```yaml
 tags:

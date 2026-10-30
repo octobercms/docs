@@ -33,11 +33,11 @@ _blog_fields:
     source: 6d6a5efa-3ce7-4b9d-bddc-ac48867552cb
 ```
 
-See the [Blueprints article](../../cms/tailor/blueprints.md) for more information on defining mixins.
+See the [Blueprints article](../blueprint-types.md) for more information on defining mixins.
 
 
 #### See Also
 
 ::: also
-* [Tailor Blueprints](../../cms/tailor/blueprints.md)
+* [Tailor Blueprints](../blueprint-types.md)
 :::

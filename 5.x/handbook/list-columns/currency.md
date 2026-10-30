@@ -68,7 +68,7 @@ price:
 ```
 
 ::: also
-* [Currency Twig Filter](../../markup/filter/currency.md)
+* [Currency Twig Filter](../twig-filters/currency.md)
 * [Currency Form Widget](../form-fields/currency.md)
 * [Currency Plugin Page](https://octobercms.com/plugin/responsiv-currency)
 :::

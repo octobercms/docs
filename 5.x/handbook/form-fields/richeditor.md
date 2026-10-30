@@ -122,7 +122,7 @@ Administrators may also create their own definitions with new codes using the **
 
 ### Registering a Toolbar Definition
 
-Plugins register toolbar definitions using the `registerRichEditorToolbars` method of the [plugin registration file](../../extend/system/plugins.md). Each definition supplies a label and a description, along with an optional button list.
+Plugins register toolbar definitions using the `registerRichEditorToolbars` method of the [plugin registration file](../../backend/plugins/introduction.md). Each definition supplies a label and a description, along with an optional button list.
 
 ```php
 public function registerRichEditorToolbars()

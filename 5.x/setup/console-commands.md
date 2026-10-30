@@ -3,7 +3,7 @@ previousPath: element/available-commands.md
 ---
 # Available Commands
 
-October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../extend/console-commands.md) using plugins.
+October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../backend/console/commands.md) using plugins.
 
 ## Setup & Maintenance
 
@@ -24,14 +24,14 @@ php artisan october:migrate
 
 ### Command - `october:migrate`
 
-The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../extend/system/plugins.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
+The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../backend/plugins/introduction.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
 
 ```bash
 php artisan october:migrate
 ```
 
 ::: tip
-This command does not migrate Tailor blueprints. Use the `tailor:migrate` command to [migrate blueprint changes](../cms/tailor/introduction.md#oc-migrating-blueprints).
+This command does not migrate Tailor blueprints. Use the `tailor:migrate` command to [migrate blueprint changes](../themes/tailor/introduction.md#oc-migrating-blueprints).
 :::
 
 The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The `plugin:refresh` command is a useful alternative for debugging a single plugin.
@@ -206,7 +206,7 @@ php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/
 
 ### Command - `theme:check`
 
-`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#oc-child-themes) is added and a child theme is created.
+`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../themes/child-themes.md) is added and a child theme is created.
 
 ```bash
 php artisan theme:check
@@ -256,7 +256,7 @@ To create a child theme that inherits the parent theme, specify the `--child` op
 php artisan theme:copy demo demo-child --child
 ```
 
-If using [database-driven themes](../cms/themes.md#oc-database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
+If using [database-driven themes](../themes/database-themes.md), you may sync the database changes to the filesystem with the `--import-db` option.
 
 ```bash
 php artisan theme:copy demo --import-db
@@ -270,7 +270,7 @@ php artisan theme:copy demo --import-db --purge-db
 
 ### Command - `theme:scan`
 
-`theme:scan` - scan the theme templates for translatable strings and add any missing keys to the [theme language file](../cms/multisite/localization.md). The following example will scan the theme in `/themes/demo` and write new keys to the language file of the primary site locale.
+`theme:scan` - scan the theme templates for translatable strings and add any missing keys to the [theme language file](../themes/sites/localization.md). The following example will scan the theme in `/themes/demo` and write new keys to the language file of the primary site locale.
 
 ```bash
 php artisan theme:scan demo
@@ -294,7 +294,7 @@ The scaffolding commands generate the boilerplate files for common October CMS o
 
 ### Command - `create:plugin`
 
-The `create:plugin` command generates the files and directories for a new [plugin](../extend/system/plugins.md). The argument specifies the author and plugin name.
+The `create:plugin` command generates the files and directories for a new [plugin](../backend/plugins/introduction.md). The argument specifies the author and plugin name.
 
 ```bash
 php artisan create:plugin Acme.Blog
@@ -302,7 +302,7 @@ php artisan create:plugin Acme.Blog
 
 ### Command - `create:theme`
 
-The `create:theme` command generates a new [theme](../cms/themes/themes.md) directory with a starter layout, home page and configuration files. The argument specifies the theme name.
+The `create:theme` command generates a new [theme](../themes/structure.md) directory with a starter layout, home page and configuration files. The argument specifies the theme name.
 
 ```bash
 php artisan create:theme "My Theme"
@@ -310,7 +310,7 @@ php artisan create:theme "My Theme"
 
 ### Command - `create:model`
 
-The `create:model` command generates the files for a new [model](../extend/system/models.md). The second argument specifies the model name.
+The `create:model` command generates the files for a new [model](../backend/data/models.md). The second argument specifies the model name.
 
 ```bash
 php artisan create:model Acme.Blog Post
@@ -320,7 +320,7 @@ Use the `--soft-deletes` option to implement soft deletion, and the `--no-timest
 
 ### Command - `create:migration`
 
-The `create:migration` command generates a new [migration](../extend/database/structure.md) file. The second argument specifies the migration name.
+The `create:migration` command generates a new [migration](../backend/data/migrations.md) file. The second argument specifies the migration name.
 
 ```bash
 php artisan create:migration Acme.Blog AddStatusColumn
@@ -330,7 +330,7 @@ Use the `--create` option to name a table to be created, or the `--table` option
 
 ### Command - `create:controller`
 
-The `create:controller` command generates the files for a new backend [controller](../extend/system/controllers.md). The second argument specifies the controller name.
+The `create:controller` command generates the files for a new backend [controller](../backend/panel/controllers.md). The second argument specifies the controller name.
 
 ```bash
 php artisan create:controller Acme.Blog Posts
@@ -340,7 +340,7 @@ Use the `--model` option to define which model name to use, and the `--design` o
 
 ### Command - `create:component`
 
-The `create:component` command generates a new plugin [component](../extend/cms-components.md). The second argument specifies the component class name.
+The `create:component` command generates a new plugin [component](../themes/extending/components.md). The second argument specifies the component class name.
 
 ```bash
 php artisan create:component Acme.Blog BlogPosts
@@ -348,7 +348,7 @@ php artisan create:component Acme.Blog BlogPosts
 
 ### Command - `create:formwidget`
 
-The `create:formwidget` command generates a new [form widget](../extend/forms/form-widgets.md). The second argument specifies the form widget name.
+The `create:formwidget` command generates a new [form widget](../backend/forms/form-widgets.md). The second argument specifies the form widget name.
 
 ```bash
 php artisan create:formwidget Acme.Blog PostList
@@ -356,7 +356,7 @@ php artisan create:formwidget Acme.Blog PostList
 
 ### Command - `create:filterwidget`
 
-The `create:filterwidget` command generates a new [filter widget](../extend/lists/filters.md). The second argument specifies the filter widget name.
+The `create:filterwidget` command generates a new [filter widget](../backend/lists/filters.md). The second argument specifies the filter widget name.
 
 ```bash
 php artisan create:filterwidget Acme.Blog HasDiscount
@@ -364,7 +364,7 @@ php artisan create:filterwidget Acme.Blog HasDiscount
 
 ### Command - `create:reportwidget`
 
-The `create:reportwidget` command generates a new [report widget](../extend/dashboards/report-widgets.md). The second argument specifies the report widget name.
+The `create:reportwidget` command generates a new [report widget](../backend/dashboards/report-widgets.md). The second argument specifies the report widget name.
 
 ```bash
 php artisan create:reportwidget Acme.Blog TopPages
@@ -372,7 +372,7 @@ php artisan create:reportwidget Acme.Blog TopPages
 
 ### Command - `create:contentfield`
 
-The `create:contentfield` command generates a new [Tailor content field](../extend/tailor-fields.md). The second argument specifies the content field name.
+The `create:contentfield` command generates a new [Tailor content field](../themes/extending/tailor-fields.md). The second argument specifies the content field name.
 
 ```bash
 php artisan create:contentfield Acme.Blog IconPicker
@@ -380,7 +380,7 @@ php artisan create:contentfield Acme.Blog IconPicker
 
 ### Command - `create:command`
 
-The `create:command` command generates a new [console command](../extend/console-commands.md). The second argument specifies the command class name.
+The `create:command` command generates a new [console command](../backend/console/commands.md). The second argument specifies the command class name.
 
 ```bash
 php artisan create:command Acme.Blog ProcessJobs
@@ -388,7 +388,7 @@ php artisan create:command Acme.Blog ProcessJobs
 
 ### Command - `create:job`
 
-The `create:job` command generates a new [queue job](../extend/services/queue.md) class. The second argument specifies the job class name.
+The `create:job` command generates a new [queue job](../backend/services/queue.md) class. The second argument specifies the job class name.
 
 ```bash
 php artisan create:job Acme.Blog ImportPosts
@@ -414,7 +414,7 @@ php artisan create:seeder Acme.Blog PostSeeder
 
 ### Command - `create:test`
 
-The `create:test` command generates a new [test](../extend/system/unit-testing.md) class. The second argument specifies the test class name, which must end in `Test`.
+The `create:test` command generates a new [test](../backend/console/testing.md) class. The second argument specifies the test class name, which must end in `Test`.
 
 ```bash
 php artisan create:test Acme.Blog UserTest
@@ -440,7 +440,7 @@ php artisan october:fresh
 
 ### Command - `october:mirror`
 
-`october:mirror` - will mirror all asset and resource files to the [public folder](../setup/deployment.md#oc-public-folder) using symbolic linking.
+`october:mirror` - will mirror all asset and resource files to the [public folder](./deployment.md#oc-public-folder) using symbolic linking.
 
 ```bash
 php artisan october:mirror
@@ -502,5 +502,5 @@ php artisan october:util purge orphans
 #### See Also
 
 ::: also
-* [Creating Console Commands](../extend/console-commands.md)
+* [Creating Console Commands](../backend/console/commands.md)
 :::

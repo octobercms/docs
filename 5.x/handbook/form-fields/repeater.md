@@ -5,7 +5,7 @@ shortname: Repeater
 ---
 # Repeater Field
 
-`repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../../extend/system/models.md).
+`repeater` - renders a repeating set of form fields using a related record or [jsonable attribute](../../backend/data/models.md).
 
 ```yaml
 extra_information:
@@ -140,7 +140,7 @@ The group key is stored along with the saved data as the `_group` attribute. Thi
 
 ## Translatable Repeaters in Tailor
 
-When a [Tailor blueprint](../../cms/tailor/blueprints.md) uses [multisite synchronization](../../cms/multisite/tailor.md) (`multisite: sync`), repeater fields support three modes via the `translatable` property.
+When a [Tailor blueprint](../blueprint-types.md) uses [multisite synchronization](../../themes/sites/tailor.md) (`multisite: sync`), repeater fields support three modes via the `translatable` property.
 
 Value | Behavior
 ----- | --------
@@ -212,7 +212,7 @@ public $hasMany = [
 ];
 ```
 
-A simple [database table schema](../../extend/database/structure.md) for the model can be defined that includes a reference to the parent model `id` and a serialized JSON `value` for dynamic attributes (see below).
+A simple [database table schema](../../backend/data/migrations.md) for the model can be defined that includes a reference to the parent model `id` and a serialized JSON `value` for dynamic attributes (see below).
 
 ```php
 Schema::create('acme_blog_repeater_items', function($table) {
@@ -224,7 +224,7 @@ Schema::create('acme_blog_repeater_items', function($table) {
 });
 ```
 
-The model extends the `October\Rain\Database\ExpandoModel` base class to allow dynamic attributes set on the model and saved in the database, in JSON format. The model can [include attachments](../../extend/database/attachments.md) and any other related fields.
+The model extends the `October\Rain\Database\ExpandoModel` base class to allow dynamic attributes set on the model and saved in the database, in JSON format. The model can [include attachments](../../backend/data/attachments.md) and any other related fields.
 
 ```php
 use October\Rain\Database\ExpandoModel;
@@ -243,7 +243,7 @@ class RepeaterItem extends ExpandoModel
 }
 ```
 
-Finally, the repeater item can be specified as a form field with accompanying form field definitions, including fields that use [model relationships](../../extend/database/relations.md).
+Finally, the repeater item can be specified as a form field with accompanying form field definitions, including fields that use [model relationships](../../backend/data/relationships.md).
 
 ```yaml
 extra_information:

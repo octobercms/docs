@@ -20,7 +20,7 @@ Property | Description
 **sortable** | disables sorting of the column. Default: `false`
 **width** | image thumbnail width to use, optional.
 **height** | image thumbnail height to use, optional.
-**options** | [image resizer](../../extend/services/resizer.md) options.
+**options** | [image resizer](../../backend/services/resizer.md) options.
 **limit** | the maximum number of images to display. Default: `3`
 
 Use the `sortable` property to disable sorting.
@@ -52,10 +52,10 @@ avatar:
         quality: 80
 ```
 
-See the [image resizing article](../../extend/services/resizer.md) for more information on what options are supported.
+See the [image resizing article](../../backend/services/resizer.md) for more information on what options are supported.
 
 #### See Also
 
 ::: also
-* [Image Resizer](../../extend/services/resizer.md)
+* [Image Resizer](../../backend/services/resizer.md)
 :::

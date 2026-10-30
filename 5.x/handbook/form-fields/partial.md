@@ -18,7 +18,7 @@ The following [field properties](../form-fields.md) are supported.
 
 Property | Description
 ------------- | -------------
-**path** | path to a [partial view file](../../extend/system/views.md) or [view template code](../../extend/services/response-view.md), defaults to the field name with **field_** as a prefix.
+**path** | path to a [partial view file](../../backend/panel/views.md) or [view template code](../../backend/services/response-view.md), defaults to the field name with **field_** as a prefix.
 
 When the `path` is set to an unqualified file name (a file name without a directory path and extension), the source path is determined to be in the model or controller directories. The following example will check for the partial file at **../models/mymodel/_field_for_content.php** or **../controllers/mycontroller/_field_for_content.php**.
 
@@ -41,7 +41,7 @@ content:
 The following variables are available inside the partial when it is rendered.
 
 - `$value` is the current field value, if found.
-- `$model` is the [model used](../../extend/system/models.md) for the field
+- `$model` is the [model used](../../backend/data/models.md) for the field
 - `$field` is the configured class object `Backend\Classes\FormField`
 
 Here is an some example contents of the **_field_content.php** file.
@@ -78,6 +78,6 @@ The path must contain the `::` characters to activate the view service.
 
 ::: also
 * [Hint Form UI](./hint.md)
-* [Rendering Controller Views](../../extend/system/views.md)
-* [Response & View Service](../../extend/services/response-view.md)
+* [Rendering Controller Views](../../backend/panel/views.md)
+* [Response & View Service](../../backend/services/response-view.md)
 :::

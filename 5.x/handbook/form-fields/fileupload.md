@@ -32,11 +32,11 @@ Property | Description
 **maxFilesize** | file size in MB that are accepted by the uploader, optional. Default: from `upload_max_filesize` php.ini value.
 **maxFiles** | maximum number of files allowed to be uploaded.
 **useCaption** | allows a title and description to be set for the file. Default: `true`
-**thumbOptions** | additional [resize options](../../extend/services/resizer.md) for generating the thumbnail, or pass `false` to disable thumb generation.
+**thumbOptions** | additional [resize options](../../backend/services/resizer.md) for generating the thumbnail, or pass `false` to disable thumb generation.
 **deferredBinding** | use deferred binding when uploading a file, when available. Disable this to attach the file immediately on upload instead of when saving. Default: `true`
 
 ::: tip
-Unlike the [Media Finder form widget](./mediafinder.md), the File Upload form widget uses [database file attachments](../../extend/database/attachments.md) so the field name must be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
+Unlike the [Media Finder form widget](./mediafinder.md), the File Upload form widget uses [database file attachments](../../backend/data/attachments.md) so the field name must be that of an `attachOne` or `attachMany` relationship attribute on your associated model.
 :::
 
 ## Uploading Files
@@ -91,7 +91,7 @@ When `mode` is set to `image` and no `fileTypes` are specified, the following im
 
 ## Thumbnail Options
 
-Use the `thumbOptions` property to control how preview thumbnails are generated. This accepts the same options as the [image resizer](../../extend/services/resizer.md).
+Use the `thumbOptions` property to control how preview thumbnails are generated. This accepts the same options as the [image resizer](../../backend/services/resizer.md).
 
 ```yaml
 photo:

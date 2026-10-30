@@ -5,7 +5,7 @@ shortname: Nested Form
 ---
 # Nested Form Field
 
-`nestedform` - renders a nested form using a related record or [jsonable attribute](../../extend/system/models.md). Fields can be defined inline or using an external yaml file.
+`nestedform` - renders a nested form using a related record or [jsonable attribute](../../backend/data/models.md). Fields can be defined inline or using an external yaml file.
 
 ```yaml
 content:

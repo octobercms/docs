@@ -97,10 +97,11 @@ export default {
         & > .sidebar-heading {
             padding-left: 20px;
             line-height: 1.4;
+        }
 
-            &:not(.clickable) {
-                opacity: 0.5;
-            }
+        // Plain labels are dimmed, collapsible headings still toggle so they stay solid
+        &:not(.collapsable) > .sidebar-heading:not(.clickable) {
+            opacity: 0.5;
         }
 
         & > .sidebar-group-items {
@@ -111,6 +112,13 @@ export default {
             }
         }
     }
+}
+
+// Linked and plain headings share the same box so groups keep an even rhythm
+.sidebar .sidebar-group > .sidebar-heading {
+    display: block;
+    line-height: 1.6;
+    margin-bottom: 0;
 }
 
 .sidebar-heading {

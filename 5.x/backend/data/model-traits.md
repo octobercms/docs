@@ -1,0 +1,892 @@
+---
+previousPath: extend/database/traits.md
+subtitle: Add common functionality to models with traits.
+---
+# Model Traits
+
+Model traits are used to implement common functionality. Apply a trait to a model class with the `use` keyword, then declare any properties the trait needs.
+
+```php
+class Product extends Model
+{
+    use \October\Rain\Database\Traits\Sluggable;
+
+    protected $slugs = ['slug' => 'name'];
+}
+```
+
+## Available Traits
+
+The following traits are available, grouped by purpose.
+
+**Attribute Manipulation**
+
+Trait | Description
+------------- | -------------
+[Nullable](#nullable) | sets attributes to `NULL` when left empty.
+[Hashable](#hashable) | hashes attributes when they are first set.
+[Purgeable](#purgeable) | prevents attributes from being saved to the database.
+[Encryptable](#encryptable) | encrypts attributes when set and decrypts them when retrieved.
+[Sluggable](#sluggable) | generates a unique slug for use in URLs.
+[Base Identifier](#base-identifier) | adds a random identifier that is immune to enumeration attacks.
+
+**Sorting and Reordering**
+
+Trait | Description
+------------- | -------------
+[Sortable](#sortable) | stores the sort order of each record in a `sort_order` column.
+[Sortable Relation](#sortable-relation) | adds sorting support to pivot relationships.
+[Simple Tree](#simple-tree) | maintains a parent and child hierarchy using a `parent_id` column.
+[Nested Tree](#nested-tree) | maintains a hierarchy using the nested set model.
+[Sluggable Tree](#sluggable-tree) | generates full slugs that reflect the tree structure.
+
+**Utility Functions**
+
+Trait | Description
+------------- | -------------
+[Validation](#validation) | validates attributes against rules before saving.
+[Soft Deleting](#soft-deleting) | sets a `deleted_at` timestamp instead of deleting the record.
+[Revisionable](#revisionable) | records the history of changes to attribute values.
+[Defaultable](#defaultable) | designates one record as the default using an `is_default` column.
+[User Footprints](#user-footprints) | records the backend user that created or updated the record.
+
+**Localization & Multisite**
+
+Trait | Description
+------------- | -------------
+[Multisite](#multisite) | duplicates records across multiple sites.
+[Multisite Group](#multisite-group) | scopes records to a site group for multi-tenancy.
+[Translatable](#translatable) | translates individual attributes across locales.
+[Translatable Attachments](#translatable-attachments) | translates file attachments across locales.
+
+## Nullable
+
+Nullable attributes are set to `NULL` when left empty. To nullify attributes in your model, apply the `October\Rain\Database\Traits\Nullable` trait and declare a `$nullable` property with an array containing the attributes to nullify.
+
+```php
+class Product extends Model
+{
+    use \October\Rain\Database\Traits\Nullable;
+
+    protected $nullable = ['sku'];
+}
+```
+
+## Hashable
+
+Hashed attributes are hashed immediately when the attribute is first set on the model. To hash attributes in your model, apply the `October\Rain\Database\Traits\Hashable` trait and declare a `$hashable` property with an array containing the attributes to hash.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Hashable;
+
+    protected $hashable = ['password'];
+}
+```
+
+## Purgeable
+
+Purged attributes will not be saved to the database when a model is created or updated. To purge attributes in your model, apply the `October\Rain\Database\Traits\Purgeable` trait and declare a `$purgeable` property with an array containing the attributes to purge.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Purgeable;
+
+    protected $purgeable = ['password_confirmation'];
+}
+```
+
+Use the `getOriginalPurgeValue` to find a value that was purged after the model was saved.
+
+```php
+return $user->getOriginalPurgeValue('password_confirmation');
+```
+
+Alternatively, use the `restorePurgedValues` method to restore all purged values.
+
+```php
+$user->restorePurgedValues();
+```
+
+## Encryptable
+
+Similar to the `Hashable` trait, encrypted attributes are encrypted when set but also decrypted when an attribute is retrieved. To encrypt attributes in your model, apply the `October\Rain\Database\Traits\Encryptable` trait and declare a `$encryptable` property with an array containing the attributes to encrypt.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Encryptable;
+
+    protected $encryptable = ['api_key', 'api_secret'];
+}
+```
+
+::: warning
+Encrypted attributes are not compatible with [jsonable attributes](./models.md).
+:::
+
+## Sluggable
+
+Slugs are meaningful codes that are commonly used in page URLs. To automatically generate a unique slug for your model, apply the `October\Rain\Database\Traits\Sluggable` trait and declare a `$slugs` property.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Sluggable;
+
+    protected $slugs = ['slug' => 'name'];
+}
+```
+
+The `$slugs` property should be an array where the key is the destination column for the slug and the value is the source string used to generate the slug. In the above example, if the `name` column was set to **Cheyenne**, as a result the `slug` column would be set to **cheyenne**, **cheyenne-2**, or **cheyenne-3**, etc before the model is created.
+
+To generate a slug from multiple sources, pass another array as the source value:
+
+```php
+protected $slugs = [
+    'slug' => ['first_name', 'last_name']
+];
+```
+
+Slugs are only generated when a model first created. To override or disable this functionality, simply set the slug attribute manually:
+
+```php
+$user = new User;
+$user->name = 'Remy';
+$user->slug = 'custom-slug';
+$user->save(); // Slug will not be generated
+```
+
+Use the `slugAttributes` method to regenerate slugs when updating a model:
+
+```php
+$user = User::find(1);
+$user->slug = null;
+$user->slugAttributes();
+$user->save();
+```
+
+## Base Identifier
+
+Base identifiers add random base64 encoded identifiers to a model, used as random lookup keys that are immune to enumeration attacks. To add base identifiers to your model, apply the `October\Rain\Database\Traits\BaseIdentifier` trait.
+
+```php
+class Order extends Model
+{
+    use \October\Rain\Database\Traits\BaseIdentifier;
+}
+```
+
+To add a `baseid` column to your table, you may use the `string` method inside a migration.
+
+```php
+Schema::table('orders', function ($table) {
+    $table->string('baseid')->nullable()->index();
+});
+```
+
+Now, when a model is created, a unique random identifier will be generated and stored in the `baseid` column. This identifier is URL-safe and can be used for public-facing lookups instead of sequential IDs.
+
+```php
+$order = Order::create(['name' => 'My Order']);
+echo $order->baseid; // Outputs something like: "xK9mN2pL1qRs"
+```
+
+You may modify the column name used to store the base identifier by defining the `BASEID` constant.
+
+```php
+const BASEID = 'my_custom_baseid_column';
+```
+
+## Sortable
+
+Sorted models will store a number value in `sort_order` which maintains the sort order of each individual model in a collection. To add the `sort_order` column to your table, you may use the `integer` method inside a migration.
+
+```php
+Schema::table('users', function ($table) {
+    $table->integer('sort_order')->default(0);
+});
+```
+
+To store a sort order for your models, apply the `October\Rain\Database\Traits\Sortable` trait and ensure that your schema has a column defined for it to use.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Sortable;
+}
+```
+
+You may modify the key name used to identify the sort order by defining the `SORT_ORDER` constant.
+
+```php
+const SORT_ORDER = 'my_sort_order_column';
+```
+
+Use the `setSortableOrder` method to set the orders on multiple records. The array contains the model identifiers in the sort order that they should appear.
+
+```php
+$user->setSortableOrder([3, 2, 1]);
+```
+
+If sorting a subset of records, the second array is used to provide a reference pool of sort order values. For example, the following assigns the sort order column as 100, 200 or 300.
+
+```php
+$user->setSortableOrder([3, 2, 1], [100, 200, 300]);
+```
+
+## Sortable Relation
+
+Sortable relations add sorting support to pivot relationships, such as `belongsToMany`. To add sorting to a pivot relationship, apply the `October\Rain\Database\Traits\SortableRelation` trait and define the `pivotSortable` option in your relation definition.
+
+```php
+class Post extends Model
+{
+    use \October\Rain\Database\Traits\SortableRelation;
+
+    public $belongsToMany = [
+        'tags' => [
+            \Acme\Blog\Models\Tag::class,
+            'table' => 'acme_blog_post_tag',
+            'pivotSortable' => 'sort_order'
+        ]
+    ];
+}
+```
+
+To add a `sort_order` column to your pivot table, you may use the `integer` method inside a migration.
+
+```php
+Schema::table('acme_blog_post_tag', function ($table) {
+    $table->integer('sort_order')->default(0);
+});
+```
+
+Use the `setSortableRelationOrder` method to set the order of related records. The first argument is the relation name, the second is an array of record IDs in the desired order.
+
+```php
+$post->setSortableRelationOrder('tags', [3, 1, 2]);
+```
+
+If you want to use an incrementing pool starting from 1, pass `true` as the third argument.
+
+```php
+$post->setSortableRelationOrder('tags', [3, 1, 2], true);
+```
+
+Alternatively, you can provide a specific array of sort order values.
+
+```php
+$post->setSortableRelationOrder('tags', [3, 1, 2], [100, 200, 300]);
+```
+
+## Simple Tree
+
+A simple tree model will use the `parent_id` column maintain a parent and child relationship between models. To add the `parent_id` column to your table, you may use the `integer` method inside a migration.
+
+```php
+Schema::table('categories', function ($table) {
+    $table->integer('parent_id')->nullable()->unsigned();
+});
+```
+
+To use the simple tree, apply the `October\Rain\Database\Traits\SimpleTree` trait.
+
+```php
+class Category extends Model
+{
+    use \October\Rain\Database\Traits\SimpleTree;
+}
+```
+
+This trait will automatically inject two [model relations](./relationships.md) called `parent` and `children`, it is the equivalent of the following definitions.
+
+```php
+public $belongsTo = [
+    'parent' => [Category ::class, 'key' => 'parent_id'],
+];
+
+public $hasMany = [
+    'children' => [Category ::class, 'key' => 'parent_id'],
+];
+```
+
+You do not need to define these relations yourself, however, you may modify the key name used to identify the parent by defining the `PARENT_ID` constant:
+
+```php
+const PARENT_ID = 'my_parent_column';
+```
+
+Collections of models that use this trait will return the type of `October\Rain\Database\TreeCollection` which adds the `toNested` method. To build an eager loaded tree structure, return the records with the relations eager loaded.
+
+```php
+Category::all()->toNested();
+```
+
+### Rendering
+
+In order to render all levels of items and their children, you can use recursive processing
+
+```twig
+{% macro renderChildren(item) %}
+    {% if item.children is not empty %}
+        <ul>
+            {% for child in item.children %}
+                <li>{{ child.name }}{{ _self_.renderChildren(child)|raw }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{% import _self as nav %}
+{{ nav.renderChildren(category)|raw }}
+```
+
+## Nested Tree
+
+The [nested set model](https://en.wikipedia.org/wiki/Nested_set_model) is an advanced technique for maintaining hierachies among models using `parent_id`, `nest_left`, `nest_right`, and `nest_depth` columns. To add these columns to your table, you may use these methods inside a migration.
+
+```php
+Schema::table('categories', function ($table) {
+    $table->integer('parent_id')->nullable()->unsigned();
+    $table->integer('nest_left')->nullable();
+    $table->integer('nest_right')->nullable();
+    $table->integer('nest_depth')->nullable();
+});
+```
+
+To use a nested set model, apply the `October\Rain\Database\Traits\NestedTree` trait. All of the features of the `SimpleTree` trait are inherently available in this model.
+
+```php
+class Category extends Model
+{
+    use \October\Rain\Database\Traits\NestedTree;
+}
+```
+
+### Creating a Root Node
+
+By default, all nodes are created as roots:
+
+```php
+$root = Category::create(['name' => 'Root category']);
+```
+
+Alternatively, you may find yourself in the need of converting an existing node into a root node:
+
+```php
+$node->makeRoot();
+```
+
+You may also nullify it's `parent_id` column which works the same as `makeRoot'.
+
+```php
+$node->parent_id = null;
+$node->save();
+```
+
+### Inserting Nodes
+
+You can insert new nodes directly by the relation:
+
+```php
+$child1 = $root->children()->create(['name' => 'Child 1']);
+```
+
+Or use the `makeChildOf` method for existing nodes:
+
+```php
+$child2 = Category::create(['name' => 'Child 2']);
+$child2->makeChildOf($root);
+```
+
+### Deleting Nodes
+
+When a node is deleted with the `delete` method, all descendants of the node will also be deleted. Note that the delete [model events](./models.md) will not be fired for the child models.
+
+```php
+$child1->delete();
+```
+
+### Getting the Nesting Level of a Node
+
+The `getLevel` method will return current nesting level, or depth, of a node.
+
+```php
+// 0 when root
+$node->getLevel()
+```
+
+### Moving Nodes Around
+
+There are several methods for moving nodes around:
+
+- `moveLeft()`: Find the left sibling and move to the left of it.
+- `moveRight()`: Find the right sibling and move to the right of it.
+- `moveBefore($otherNode)`: Move to the node to the left of ...
+- `moveAfter($otherNode)`: Move to the node to the right of ...
+- `makeChildOf($otherNode)`: Make the node a child of ...
+- `makeRoot()`: Make current node a root node.
+
+## Sluggable Tree
+
+The sluggable tree trait creates structured slugs, called full slugs, for hierarchical models. This is useful when you need URL paths that reflect the tree structure, such as `parent-slug/child-slug/grandchild-slug`. The model is assumed to have `parent` and `children` relations defined (typically via the `SimpleTree` or `NestedTree` traits).
+
+To use the sluggable tree, apply the `October\Rain\Database\Traits\SluggableTree` trait along with a tree trait.
+
+```php
+class Category extends Model
+{
+    use \October\Rain\Database\Traits\SimpleTree;
+    use \October\Rain\Database\Traits\Sluggable;
+    use \October\Rain\Database\Traits\SluggableTree;
+
+    protected $slugs = ['slug' => 'name'];
+}
+```
+
+To add a `fullslug` column to your table, you may use the `string` method inside a migration.
+
+```php
+Schema::table('categories', function ($table) {
+    $table->string('fullslug')->nullable()->index();
+});
+```
+
+Use the `fullSlugAttributes` method to calculate and update the full slug for a model and all its children. This should be called after making changes to the tree structure.
+
+```php
+$category = Category::find(1);
+$category->fullSlugAttributes();
+```
+
+For example, if you have the following structure:
+
+- Electronics (slug: `electronics`)
+  - Phones (slug: `phones`)
+    - Smartphones (slug: `smartphones`)
+
+The full slugs would be:
+- Electronics: `electronics`
+- Phones: `electronics/phones`
+- Smartphones: `electronics/phones/smartphones`
+
+You may modify the column names by defining the `FULLSLUG` and `SLUG` constants.
+
+```php
+const FULLSLUG = 'my_fullslug_column';
+const SLUG = 'my_slug_column';
+```
+
+## Validation
+
+October CMS models uses the built-in [Validator class](../services/validation.md). The validation rules are defined in the model class as a property named `$rules` and the class must use the trait `October\Rain\Database\Traits\Validation`.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Validation;
+
+    public $rules = [
+        'name' => ['required', 'between:4,16'],
+        'email' => ['required', 'email'],
+        'password' => ['required', 'alpha_num', 'between:4,8', 'confirmed'],
+        'password_confirmation' => ['required', 'alpha_num', 'between:4,8']
+    ];
+}
+```
+
+You may also use [array syntax](../services/validation.md) for validation rules.
+
+```php
+public $rules = [
+    'links.*.url' => ['required', 'url'],
+    'links.*.anchor' => ['required']
+];
+```
+
+Models validate themselves automatically when the `save` method is called.
+
+```php
+$user = new User;
+$user->name = 'Actual Person';
+$user->email = 'a.person@example.tld';
+$user->password = 'passw0rd';
+
+// Returns false if model is invalid
+$success = $user->save();
+```
+
+::: tip
+You can also validate a model at any time using the `validate` method.
+:::
+
+### Enhanced Validation Rules
+
+The `unique` validation rule is automatically configured and does not require a table name to be specified.
+
+```php
+public $rules = [
+    'name' => ['unique'],
+];
+```
+
+The `required` validation rule supports **create** and **update** modifiers to only apply when a model is created or updated respectively. The following is only required when the model does not already exist.
+
+```php
+public $rules = [
+    'password' => ['required:create'],
+];
+```
+
+### Retrieving Validation Errors
+
+When a model fails to validate, a `Illuminate\Support\MessageBag` object is attached to the model. The object which contains validation failure messages. Retrieve the validation errors message collection instance with `errors` method or `$validationErrors` property. Retrieve all validation errors with `errors()->all()`. Retrieve errors for a *specific* attribute using `validationErrors->get('attribute')`.
+
+::: tip
+The Model leverages the `MessagesBag` object which has a [simple and elegant method](../services/validation.md) of formatting errors.
+:::
+
+### Overriding Validation
+
+The `forceSave` method validates the model and saves regardless of whether or not there are validation errors.
+
+```php
+$user = new User;
+
+// Creates a user without validation
+$user->forceSave();
+```
+
+### Custom Error Messages
+
+Just like the Validator class, you can set custom error messages using the [same syntax](../services/validation.md).
+
+```php
+class User extends Model
+{
+    public $customMessages = [
+        'required' => 'The :attribute field is required.',
+        // ...
+    ];
+}
+```
+
+You can also add custom error messages to the array syntax for validation rules as well.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Validation;
+
+    public $rules = [
+        'links.*.url' => ['required', 'url'],
+        'links.*.anchor' => ['required'],
+    ];
+
+    public $customMessages = [
+        'links.*.url.required' => 'The url is required',
+        'links.*.url.*' => 'The url needs to be a valid url'
+        'links.*.anchor.required' => 'The anchor text is required',
+    ];
+}
+```
+
+In the above example you can write custom error messages to specific validation rules (here we used: `required`). Or you can use a `*` to select everything else (here we added a custom message to the `url` validation rule using the `*`).
+
+### Custom Attribute Names
+
+You may also set custom attribute names with the `$attributeNames` array.
+
+```php
+class User extends Model
+{
+    public $attributeNames = [
+        'email' => 'Email Address',
+        // ...
+    ];
+}
+```
+
+### Dynamic Validation Rules
+
+You can apply rules dynamically by overriding the `beforeValidate` [model event](./models.md) method. Here we check if the `is_remote` attribute is `false` and then dynamically set the `latitude` and `longitude` attributes to be required fields.
+
+```php
+public function beforeValidate()
+{
+    if (!$this->is_remote) {
+        $this->rules['latitude'] = 'required';
+        $this->rules['longitude'] = 'required';
+    }
+}
+```
+
+### Custom Validation Rules
+
+You can also create custom validation rules the [same way](../services/validation.md) you would for the `Validator` service.
+
+## Soft Deleting
+
+When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, apply the `October\Rain\Database\Traits\SoftDelete` trait to the model and add the deleted_at column to your `$dates` property:
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\SoftDelete;
+
+    protected $dates = ['deleted_at'];
+}
+```
+
+To add a `deleted_at` column to your table, you may use the `softDeletes` method from a migration:
+
+```php
+Schema::table('posts', function ($table) {
+    $table->softDeletes();
+});
+```
+
+Now, when you call the `delete` method on the model, the `deleted_at` column will be set to the current timestamp. When querying a model that uses soft deletes, the "deleted" models will not be included in query results.
+
+To determine if a given model instance has been soft deleted, use the `trashed` method:
+
+```php
+if ($user->trashed()) {
+    //
+}
+```
+
+### Querying Soft Deleted Models
+
+#### Including Soft Deleted Models
+
+As noted above, soft deleted models will automatically be excluded from query results. However, you may force soft deleted models to appear in a result set using the `withTrashed` method on the query:
+
+```php
+$users = User::withTrashed()->where('account_id', 1)->get();
+```
+
+The `withTrashed` method may also be used on a [relationship](./relationships.md) query:
+
+```php
+$flight->history()->withTrashed()->get();
+```
+
+#### Retrieving Only Soft Deleted Models
+
+The `onlyTrashed` method will retrieve **only** soft deleted models:
+
+```php
+$users = User::onlyTrashed()->where('account_id', 1)->get();
+```
+
+#### Restoring Soft Deleted Models
+
+Sometimes you may wish to "un-delete" a soft deleted model. To restore a soft deleted model into an active state, use the `restore` method on a model instance:
+
+```php
+$user->restore();
+```
+
+You may also use the `restore` method in a query to quickly restore multiple models:
+
+```php
+// Restore a single model instance...
+User::withTrashed()->where('account_id', 1)->restore();
+
+// Restore all related models...
+$user->posts()->restore();
+```
+
+### Permanently Deleting Models
+
+Sometimes you may need to truly remove a model from your database. To permanently remove a soft deleted model from the database, use the `forceDelete` method:
+
+```php
+// Force deleting a single model instance...
+$user->forceDelete();
+
+// Force deleting all related models...
+$user->posts()->forceDelete();
+```
+
+### Soft Deleting Relations
+
+When two related models have soft deletes enabled, you can cascade the delete event by defining the `softDelete` option in the [relation definition](./relationships.md). In this example, if the user model is soft deleted, the comments belonging to that user will also be soft deleted.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\SoftDelete;
+
+    public $hasMany = [
+        'comments' => [\Acme\Blog\Models\Comment::class, 'softDelete' => true]
+    ];
+}
+```
+
+::: tip
+If the related model does not use the soft delete trait, it will be treated the same as the `delete` option and deleted permanently.
+:::
+
+Under these same conditions, when the primary model is restored, all the related models that use the `softDelete` option will also be restored.
+
+```php
+// Restore the user and comments
+$user->restore();
+```
+
+### Including Soft Deleted Relations
+
+Soft deleted records are not included as part of relation lookups, however, you may include them by adding the `withTrashed` scope to the query.
+
+```php
+class User extends Model
+{
+    public $hasMany = [
+        'comments' => [\Acme\Blog\Models\Comment::class, 'scope' => 'withTrashed']
+    ];
+}
+```
+
+## Revisionable
+
+October CMS models can record the history of changes in values by storing revisions. To store revisions for your model, apply the `October\Rain\Database\Traits\Revisionable` trait and declare a `$revisionable` property with an array containing the attributes to monitor for changes. You also need to define a `$morphMany` [model relation](./relationships.md) called `revision_history` that refers to the `System\Models\Revision` class with the name `revisionable`, this is where the revision history data is stored.
+
+```php
+class User extends Model
+{
+    use \October\Rain\Database\Traits\Revisionable;
+
+    protected $revisionable = ['name', 'email'];
+
+    public $morphMany = [
+        'revision_history' => [\System\Models\Revision::class, 'name' => 'revisionable']
+    ];
+}
+```
+
+By default a maximum number of 500 records will be kept, however, this can be modified by declaring a `$revisionableLimit` property on the model with a new limit value.
+
+```php
+/**
+ * @var int revisionableLimit as the maximum number records to keep.
+ */
+public $revisionableLimit = 8;
+```
+
+The revision history can be accessed like any other relation:
+
+```php
+$history = User::find(1)->revision_history;
+
+foreach ($history as $record) {
+    echo $record->field . ' updated ';
+    echo 'from ' . $record->old_value;
+    echo 'to ' . $record->new_value;
+}
+```
+
+The revision record optionally supports a user relationship using the `user_id` attribute. You may include a `getRevisionableUser` method in your model to keep track of the user that made the modification.
+
+```php
+public function getRevisionableUser()
+{
+    return BackendAuth::getUser()->id;
+}
+```
+
+## Defaultable
+
+The defaultable trait adds default assignment to models using an `is_default` column. This is useful when you need to designate one record as the default among a collection, such as a default shipping method or payment gateway. To enable defaultable for a model, apply the `October\Rain\Database\Traits\Defaultable` trait.
+
+```php
+class PaymentMethod extends Model
+{
+    use \October\Rain\Database\Traits\Defaultable;
+}
+```
+
+To add an `is_default` column to your table, you may use the `boolean` method inside a migration.
+
+```php
+Schema::table('payment_methods', function ($table) {
+    $table->boolean('is_default')->default(false);
+});
+```
+
+When a model is saved with `is_default` set to `true`, all other records will automatically have their `is_default` set to `false`, ensuring only one default exists.
+
+```php
+$method = PaymentMethod::find(1);
+$method->is_default = true;
+$method->save(); // All other records will have is_default set to false
+```
+
+Use the `makeDefault` method to explicitly make a record the default.
+
+```php
+$method->makeDefault();
+```
+
+Use the static `getDefault` method to retrieve the default record. If no default is found, the first record will automatically be made the default.
+
+```php
+$defaultMethod = PaymentMethod::getDefault();
+```
+
+## User Footprints
+
+The user footprints trait automatically populates `created_user_id` and `updated_user_id` columns with the currently logged in backend user. This is useful for tracking which administrator created or last modified a record. To enable user footprints for a model, apply the `October\Rain\Database\Traits\UserFootprints` trait.
+
+```php
+class Post extends Model
+{
+    use \October\Rain\Database\Traits\UserFootprints;
+}
+```
+
+To add the user footprint columns to your table, you may use the `integer` method inside a migration.
+
+```php
+Schema::table('posts', function ($table) {
+    $table->integer('created_user_id')->nullable()->unsigned();
+    $table->integer('updated_user_id')->nullable()->unsigned();
+});
+```
+
+Now, when a model is created, the `created_user_id` will be set to the current backend user. When a model is updated, the `updated_user_id` will be updated to the current backend user.
+
+The trait automatically injects two `belongsTo` relations called `created_user` and `updated_user` that reference the backend user model.
+
+```php
+$post = Post::find(1);
+echo $post->created_user->full_name; // Outputs the full name of the creator
+echo $post->updated_user->full_name; // Outputs the full name of the last editor
+```
+
+You may modify the column names by defining the `CREATED_USER_ID` and `UPDATED_USER_ID` constants.
+
+```php
+const CREATED_USER_ID = 'my_created_by_column';
+const UPDATED_USER_ID = 'my_updated_by_column';
+```
+
+## Multisite
+
+The `October\Rain\Database\Traits\Multisite` trait duplicates model records across multiple sites. See the [Multisite](../localization/multisite.md) article for multisite model support.
+
+## Multisite Group
+
+The `October\Rain\Database\Traits\MultisiteGroup` trait scopes model records to a site group for multi-tenancy. See the [MultisiteGroup](../localization/site-groups.md) article for multisite group model support.
+
+## Translatable
+
+The `October\Rain\Database\Traits\Translatable` trait translates individual model attributes across locales. See the [Translatable](../localization/translatable.md) article for model translation support.
+
+## Translatable Attachments
+
+The `October\Rain\Database\Traits\TranslatableAttachments` trait translates file attachments across locales. See the [File Attachments](../localization/translatable.md#file-attachments) section of the Translatable article for translated file support.

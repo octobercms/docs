@@ -37,13 +37,13 @@ Resolve the `pagefinder` value in lists using the [linkage column type](../list-
 
 ## Linking to Pages
 
-Use the [`|link` Twig filter](../../markup/filter/link.md) to convert the page finder value to a URL.
+Use the [`|link` Twig filter](../twig-filters/link.md) to convert the page finder value to a URL.
 
 ```twig
 {{ featured_page|link }}
 ```
 
-Use the [`|content` Twig filter](../../markup/tag/content.md) to process HTML markup and replace all links within the content.
+Use the [`|content` Twig filter](../twig-tags/content.md) to process HTML markup and replace all links within the content.
 
 ```twig
 {{ blog_html|content }}

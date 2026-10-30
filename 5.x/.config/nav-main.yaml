@@ -1,105 +1,426 @@
 #
+# Getting Started Nav
+#
+"/setup/":
+- introduction
+-
+    title: Installation
+    collapsable: false
+    children:
+        - installation
+        - configuration
+        - directory-structure
+        - web-server
+        - database
+        - mail
+        - media-storage
+-
+    title: Production
+    collapsable: false
+    children:
+        - deployment
+        - scheduler
+        - errors-logging
+        - updating
+-
+    title: Workflow & Tools
+    collapsable: false
+    children:
+        - development-workflow
+        - installing-packages
+        - console-commands
+        - debugbar
+        - ai-boost
+        - migrate-laravel-project
+        - ['https://octobercms.com/docker-dev-image', 'Development Docker Image']
+
+#
+# Theme Development Nav
+#
+"/themes/":
+- introduction
+-
+    title: Theme Basics
+    children:
+        - structure
+        - pages
+        - layouts
+        - partials
+        - templating
+-
+    title: Adding to Pages
+    children:
+        - content
+        - components
+        - snippets
+        - vite
+-
+    title: Managing Themes
+    children:
+        - customization
+        - child-themes
+        - database-themes
+        - seeding
+-
+    title: Tailor
+    children:
+        - tailor/introduction
+        - tailor/blueprints
+        - tailor/fields
+        - tailor/displaying-content
+        - tailor/navigation
+        - tailor/submissions
+        - tailor/models
+-
+    title: AJAX
+    children:
+        - ajax/introduction
+        - ajax/handlers
+        - ajax/update-partials
+        - ajax/attributes-api
+        - ajax/javascript-api
+        - ajax/turbo-router
+-
+    title: Forms
+    children:
+        - ajax/validation
+        - ajax/uploads
+        - ajax/downloads
+        - ajax/flash-messages
+-
+    title: Navigation & Loading
+    children:
+        - ajax/redirects
+        - ajax/pagination
+        - ajax/loaders
+        - ajax/modals
+        - ajax/polling
+-
+    title: Sites & Localization
+    children:
+        - sites/multisite
+        - sites/localization
+        - sites/tailor
+-
+    title: Extending Themes
+    children:
+        - extending/introduction
+        - extending/components
+        - extending/twig
+        - extending/tailor-fields
+        - extending/building-apis
+
+#
+# Backend Development Nav
+#
+"/backend/":
+- introduction
+-
+    title: Plugins
+    children:
+        - plugins/introduction
+        - plugins/extending
+        - plugins/versions
+        - plugins/laravel-packages
+        - plugins/publishing-packages
+-
+    title: Models
+    children:
+        - data/models
+        - data/model-traits
+        - data/relationships
+        - data/relation-types
+        - data/attachments
+        - data/mutators
+        - data/serialization
+-
+    title: Database
+    children:
+        - data/model-queries
+        - data/collection-methods
+        - data/query-builder
+        - data/database
+        - data/migrations
+-
+    title: Backend Panel
+    children:
+        - panel/controllers
+        - panel/views
+        - panel/behaviors
+        - panel/widgets
+        - panel/navigation
+        - panel/permissions
+        - panel/users
+        - panel/ajax
+        - panel/vue-components
+        - panel/skins
+        - panel/spotlight
+-
+    title: Forms
+    children:
+        - forms/form-controller
+        - forms/field-dependencies
+        - forms/extending
+        - forms/form-widgets
+-
+    title: Lists
+    children:
+        - lists/list-controller
+        - lists/filters
+        - lists/sorting
+        - lists/extending
+        - lists/filter-widgets
+-
+    title: Relations
+    children:
+        - relations/relation-controller
+        - relations/extending
+-
+    title: Import & Export
+    children:
+        - import-export/import-export-controller
+        - import-export/import-export-models
+-
+    title: Dashboards
+    children:
+        - dashboards/dash-controller
+        - dashboards/data-sources
+        - dashboards/report-widgets
+        - dashboards/vue-report-widgets
+-
+    title: Settings
+    children:
+        - settings/introduction
+        - settings/model-settings
+        - settings/file-settings
+-
+    title: Localization
+    children:
+        - localization/introduction
+        - localization/backend
+        - localization/translatable
+        - localization/multisite
+        - localization/site-groups
+-
+    title: Services
+    children:
+        - services/events
+        - services/mail
+        - services/validation
+        - services/validation-rules
+        - services/exceptions
+        - services/scheduling
+        - services/site
+        - services/html
+        - services/parser
+        - services/resizer
+        - services/helpers
+-
+    title: Laravel Services
+    children:
+        - services/routing
+        - services/request-input
+        - services/response-view
+        - services/session
+        - services/cache
+        - services/storage
+        - services/queue
+        - services/log
+        - services/http
+        - services/hash-crypt
+        - services/application
+-
+    title: Console & Testing
+    children:
+        - console/commands
+        - console/testing
+
+#
 # Handbook Nav
 #
 "/handbook/":
+- ./
 -
-    title: Backend Definitions
-    collapsable: false
+    title: Form Fields
+    path: form-fields
     children:
-        -
-            title: Form Fields
-            path: form-fields
-            children:
-                - form-fields/balloon-selector
-                - form-fields/boxes
-                - form-fields/checkbox
-                - form-fields/checkboxlist
-                - form-fields/codeeditor
-                - form-fields/colorpicker
-                - form-fields/currency
-                - form-fields/datatable
-                - form-fields/datepicker
-                - form-fields/dropdown
-                - form-fields/email
-                - form-fields/fileupload
-                - form-fields/hint
-                - form-fields/ruler
-                - form-fields/markdown
-                - form-fields/mediafinder
-                - form-fields/nestedform
-                - form-fields/number
-                - form-fields/pagefinder
-                - form-fields/partial
-                - form-fields/password
-                - form-fields/radio
-                - form-fields/recordfinder
-                - form-fields/relation
-                - form-fields/repeater
-                - form-fields/richeditor
-                - form-fields/section
-                - form-fields/sensitive
-                - form-fields/switch
-                - form-fields/taglist
-                - form-fields/text
-                - form-fields/textarea
-        -
-            title: List Columns
-            path: list-columns
-            children:
-                - list-columns/colorpicker
-                - list-columns/currency
-                - list-columns/datetime
-                - list-columns/file
-                - list-columns/image
-                - list-columns/linkage
-                - list-columns/number
-                - list-columns/partial
-                - list-columns/selectable
-                - list-columns/summary
-                - list-columns/switch
-                - list-columns/text
-        -
-            title: Filter Scopes
-            path: filter-scopes
-            children:
-                - filter-scopes/checkbox
-                - filter-scopes/date
-                - filter-scopes/dropdown
-                - filter-scopes/group
-                - filter-scopes/number
-                - filter-scopes/switch
-                - filter-scopes/text
-        -
-            title: Inspector Types
-            path: inspector-types
-            children:
-                - inspector-types/autocomplete
-                - inspector-types/checkbox
-                - inspector-types/dictionary
-                - inspector-types/dropdown
-                - inspector-types/mediafinder
-                - inspector-types/object
-                - inspector-types/objectlist
-                - inspector-types/set
-                - inspector-types/string
-                - inspector-types/stringlist
-                - inspector-types/stringlistautocomplete
-                - inspector-types/table
-                - inspector-types/text
+        - form-fields/balloon-selector
+        - form-fields/boxes
+        - form-fields/checkbox
+        - form-fields/checkboxlist
+        - form-fields/codeeditor
+        - form-fields/colorpicker
+        - form-fields/currency
+        - form-fields/datatable
+        - form-fields/datepicker
+        - form-fields/dropdown
+        - form-fields/email
+        - form-fields/fileupload
+        - form-fields/hint
+        - form-fields/ruler
+        - form-fields/markdown
+        - form-fields/mediafinder
+        - form-fields/nestedform
+        - form-fields/number
+        - form-fields/pagefinder
+        - form-fields/partial
+        - form-fields/password
+        - form-fields/radio
+        - form-fields/recordfinder
+        - form-fields/relation
+        - form-fields/repeater
+        - form-fields/richeditor
+        - form-fields/section
+        - form-fields/sensitive
+        - form-fields/switch
+        - form-fields/taglist
+        - form-fields/text
+        - form-fields/textarea
+-
+    title: List Columns
+    path: list-columns
+    children:
+        - list-columns/colorpicker
+        - list-columns/currency
+        - list-columns/datetime
+        - list-columns/file
+        - list-columns/image
+        - list-columns/linkage
+        - list-columns/number
+        - list-columns/partial
+        - list-columns/selectable
+        - list-columns/summary
+        - list-columns/switch
+        - list-columns/text
+-
+    title: Filter Scopes
+    path: filter-scopes
+    children:
+        - filter-scopes/checkbox
+        - filter-scopes/date
+        - filter-scopes/dropdown
+        - filter-scopes/group
+        - filter-scopes/number
+        - filter-scopes/switch
+        - filter-scopes/text
+-
+    title: Inspector Types
+    path: inspector-types
+    children:
+        - inspector-types/autocomplete
+        - inspector-types/checkbox
+        - inspector-types/dictionary
+        - inspector-types/dropdown
+        - inspector-types/mediafinder
+        - inspector-types/object
+        - inspector-types/objectlist
+        - inspector-types/set
+        - inspector-types/string
+        - inspector-types/stringlist
+        - inspector-types/stringlistautocomplete
+        - inspector-types/table
+        - inspector-types/text
+-
+    title: Controller Config
+    path: controller-config
+    children:
+        - controller-config/form
+        - controller-config/import-export
+        - controller-config/list
+        - controller-config/relation
+-
+    title: Options & Icons
+    children:
         - options
         - icons
 -
-    title: Tailor
-    collapsable: false
+    title: Blueprint Types
+    path: blueprint-types
     children:
-        -
-            title: Tailor Fields
-            children:
-                - tailor-fields/entries
-                - tailor-fields/mixin
-                - tailor-fields/nesteditems
+        - blueprint-types/entry
+        - blueprint-types/global
+        - blueprint-types/mixin
+        - blueprint-types/single
+        - blueprint-types/stream
+        - blueprint-types/structure
+        - blueprint-types/submission
 -
-    title: Console
-    collapsable: false
+    title: Content Fields
+    path: tailor-fields
     children:
-        - console-commands
+        - tailor-fields/entries
+        - tailor-fields/mixin
+        - tailor-fields/nesteditems
+-
+    title: Tailor Components
+    path: tailor-components
+    children:
+        - tailor-components/collection
+        - tailor-components/global
+        - tailor-components/resources
+        - tailor-components/section
+        - tailor-components/sitepicker
+        - tailor-components/submission
+        - tailor-components/translatable
+-
+    title: Twig Properties
+    path: twig-properties
+    children:
+        - twig-properties/this-controller
+        - twig-properties/this-environment
+        - twig-properties/this-layout
+        - twig-properties/this-page
+        - twig-properties/this-param
+        - twig-properties/this-request
+        - twig-properties/this-session
+        - twig-properties/this-site
+        - twig-properties/this-theme
+-
+    title: Twig Tags
+    path: twig-tags
+    children:
+        - twig-tags/ajax-partial
+        - twig-tags/cache
+        - twig-tags/component
+        - twig-tags/content
+        - twig-tags/flash
+        - twig-tags/for
+        - twig-tags/if
+        - twig-tags/macro
+        - twig-tags/page
+        - twig-tags/partial
+        - twig-tags/placeholder
+        - twig-tags/props
+        - twig-tags/verbatim
+-
+    title: Twig Filters
+    path: twig-filters
+    children:
+        - twig-filters/app
+        - twig-filters/currency
+        - twig-filters/default
+        - twig-filters/link
+        - twig-filters/md
+        - twig-filters/media
+        - twig-filters/page
+        - twig-filters/raw
+        - twig-filters/resize
+        - twig-filters/theme
+-
+    title: Twig Functions
+    path: twig-functions
+    children:
+        - twig-functions/abort
+        - twig-functions/ajax-handler
+        - twig-functions/carbon
+        - twig-functions/collect
+        - twig-functions/config
+        - twig-functions/dump
+        - twig-functions/form
+        - twig-functions/html
+        - twig-functions/pager
+        - twig-functions/redirect
+        - twig-functions/response
+        - twig-functions/str
+        - twig-functions/trans
+        - twig-functions/vite

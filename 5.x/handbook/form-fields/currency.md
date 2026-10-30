@@ -5,7 +5,7 @@ shortname: Currency
 ---
 # Currency Field
 
-The `currency` form widget renders a field for entering a numeric currency value. This field uses the primary currency definition or the **Base Currency** setting selected [Site Definition](../../cms/multisite/multisite.md) area.
+The `currency` form widget renders a field for entering a numeric currency value. This field uses the primary currency definition or the **Base Currency** setting selected [Site Definition](../../themes/sites/multisite.md) area.
 
 ::: tip
 This field is introduced after installing the [Currency plugin](https://octobercms.com/plugin/responsiv-currency) available on the October CMS marketplace. You may install it with the following command.
@@ -75,7 +75,7 @@ To learn more about implementing the `Currencyable` trait on a model, see the [C
 #### See Also
 
 ::: also
-* [Currency Twig Filter](../../markup/filter/currency.md)
+* [Currency Twig Filter](../twig-filters/currency.md)
 * [Currency List Column](../list-columns/currency.md)
 * [Currency Plugin Page](https://octobercms.com/plugin/responsiv-currency)
 :::

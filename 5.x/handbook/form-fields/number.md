@@ -62,4 +62,4 @@ public $rules = [
 ];
 ```
 
-For more information on model validation, please visit the [validation service article](../../extend/services/validation.md#rule-numeric).
+For more information on model validation, please visit the [validation service article](../../backend/services/validation-rules.md#rule-numeric).

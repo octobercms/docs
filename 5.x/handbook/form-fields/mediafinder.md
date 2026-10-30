@@ -24,7 +24,7 @@ Property | Description
 **imageWidth** | if using image type, the preview image will be displayed to this width, optional.
 **imageHeight** | if using image type, the preview image will be displayed to this height, optional.
 **maxItems** | maximum number of items that can be selected.
-**thumbOptions** | additional [resize options](../../extend/services/resizer.md) for generating the thumbnail, or pass `false` to disable thumb generation.
+**thumbOptions** | additional [resize options](../../backend/services/resizer.md) for generating the thumbnail, or pass `false` to disable thumb generation.
 **useCopyPaste** | shows the select all, copy and paste toolbar buttons when selecting multiple items. Default: `false`.
 
 Set the `mode` to **image** to display a preview of the selected image.
@@ -51,7 +51,7 @@ Unlike the [File Upload form widget](./fileupload.md), the Media Finder form wid
 
 ## Selecting Multiple Items
 
-The media finder will attempt to guess if multiple items can be selected based on the [jsonable attribute](../../extend/system/models.md) in the model, which is a requirement for storing multiple items.
+The media finder will attempt to guess if multiple items can be selected based on the [jsonable attribute](../../backend/data/models.md) in the model, which is a requirement for storing multiple items.
 
 You may limit the number of items that can be selected using the `maxItems` property.
 
