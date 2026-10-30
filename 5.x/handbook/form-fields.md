@@ -146,7 +146,7 @@ Property | Description
 **changeHandler** | the name of an AJAX handler to call when the field value is changed, optional.
 **trigger** | specify conditions for this field using trigger events.
 **preset** | allows the field value to be initially set by the value of another field, converted using the input preset converter.
-**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use the [validation trait on the model](../backend/data/model-traits.md#validation) as this is not enforced by the form controller.
+**required** | places a red asterisk next to the field label to indicate it is required. Be sure to use the [validation trait on the model](../backend/data/model-traits/validation.md) as this is not enforced by the form controller.
 **attributes** | specify custom HTML attributes to add to the form field element.
 **containerAttributes** | specify custom HTML attributes to add to the form field container.
 **order** | a numerical weight when determining the display order, default value increments at 100 points per field.

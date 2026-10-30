@@ -127,12 +127,51 @@
     title: Models
     children:
         - data/models
-        - data/model-traits
         - data/relationships
-        - data/relation-types
         - data/attachments
         - data/mutators
         - data/serialization
+-
+    title: Relation Types
+    path: data/relation-types
+    children:
+        - data/relation-types/attach-many
+        - data/relation-types/attach-one
+        - data/relation-types/belongs-to
+        - data/relation-types/belongs-to-many
+        - data/relation-types/has-many
+        - data/relation-types/has-many-through
+        - data/relation-types/has-one
+        - data/relation-types/has-one-through
+        - data/relation-types/morph-many
+        - data/relation-types/morph-one
+        - data/relation-types/morph-to
+        - data/relation-types/morph-to-many
+        - data/relation-types/morphed-by-many
+-
+    title: Model Traits
+    path: data/model-traits
+    children:
+        - data/model-traits/base-identifier
+        - data/model-traits/defaultable
+        - data/model-traits/encryptable
+        - data/model-traits/hashable
+        - data/model-traits/multisite
+        - data/model-traits/multisite-group
+        - data/model-traits/nested-tree
+        - data/model-traits/nullable
+        - data/model-traits/purgeable
+        - data/model-traits/revisionable
+        - data/model-traits/simple-tree
+        - data/model-traits/sluggable
+        - data/model-traits/sluggable-tree
+        - data/model-traits/soft-delete
+        - data/model-traits/sortable
+        - data/model-traits/sortable-relation
+        - data/model-traits/translatable
+        - data/model-traits/translatable-attachments
+        - data/model-traits/user-footprints
+        - data/model-traits/validation
 -
     title: Database
     children:
