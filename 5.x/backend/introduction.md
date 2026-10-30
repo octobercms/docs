@@ -10,7 +10,7 @@ Backend development builds the application behind a website, or an application w
 
 Read these in order to learn the essentials.
 
-1. [Plugins](./plugins/introduction.md), how a plugin is structured and registered.
+1. [Plugin Structure](./plugins/introduction.md), how a plugin is structured and registered.
 1. [Defining Models](./data/models.md), [Model Queries](./data/model-queries.md) and [Relationships](./data/relationships.md), working with data.
 1. [Controllers](./panel/controllers.md), adding pages to the admin panel.
 1. [Form Controller](./forms/form-controller.md) and [List Controller](./lists/list-controller.md), managing records with forms and lists.

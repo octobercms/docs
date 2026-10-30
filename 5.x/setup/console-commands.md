@@ -1,7 +1,8 @@
 ---
 previousPath: element/available-commands.md
+subtitle: Artisan commands for managing projects, plugins and themes.
 ---
-# Available Commands
+# Console Commands
 
 October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../backend/console/commands.md) using plugins.
 

@@ -7,3 +7,9 @@ subtitle: Query, load and save related records.
 ::: tip
 This page is a stub. Its content comes from the 4.x [Relationships](/4.x/extend/database/relations.html) article.
 :::
+
+#### See Also
+
+::: also
+* [Relation Types](./relation-types.md)
+:::
