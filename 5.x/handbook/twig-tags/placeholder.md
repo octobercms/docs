@@ -101,7 +101,7 @@ The variable can be accessed inside the layout template using the `placeholder()
 A default value (second argument) can be supplied as a fallback.
 
 ```twig
-{% set active = placeholder('activeNav', 'home') }} %}
+{% set active = placeholder('activeNav', 'home') %}
 ```
 
 ## System Placeholders
@@ -197,7 +197,7 @@ You can inject raw markup to the `{% meta %}` tag by using the **meta** anonymou
 
 ## Custom Attributes
 
-The `placeholder` tag accepts two optional attributes &mdash; `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment &mdash; **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
+The `placeholder` tag accepts two optional attributes: `title` and `type`. The `title` attribute is not used by the CMS itself, but could be used by other plugins. The type attribute manages the placeholder type. There are two types supported at the moment: **text** and **html**. The content of text placeholders is escaped before it's displayed. The title and type attributes should be defined after the placeholder name and the `default` attribute, if it's presented. Example:
 
 ```twig
 {% placeholder ordering title="Ordering information" type="text" %}

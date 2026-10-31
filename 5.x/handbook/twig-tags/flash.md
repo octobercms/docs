@@ -18,7 +18,7 @@ The `{% flash %}` and `{% endflash %}` tags will render any flash messages store
 </ul>
 ```
 
-You can use the `type` variable that represents the flash message type &mdash; **success**, **error**, **info** or **warning**.
+You can use the `type` variable that represents the flash message type: **success**, **error**, **info** or **warning**.
 
 ```twig
 {% flash %}

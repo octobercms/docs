@@ -146,7 +146,7 @@ Value | Behavior
 ----- | --------
 `true` (default) | Each site has fully independent repeater items
 `false` | All sites share the exact same repeater items (shared rows)
-`sync` | Items are replicated per site with structure synced — adding, removing, or reordering items on one site propagates to all others
+`sync` | Items are replicated per site with structure synced: adding, removing or reordering items on one site propagates to all others
 
 The `sync` mode keeps the repeater **structure** (items, order) consistent across all sites while allowing individual sub-fields to have different values per site. This is useful for content like FAQs, file attachment lists, or specification tables where the list of items stays the same across languages but some values are translated.
 

@@ -73,12 +73,12 @@ When rendered (cast to string), the bag produces HTML attribute pairs: `class="c
 
 ### Smart Class Merging
 
-The `merge` method handles `class` and `style` attributes intelligently — the caller's values are appended to the defaults rather than replacing them.
+The `merge` method handles `class` and `style` attributes intelligently: the caller's values are appended to the defaults rather than replacing them.
 
 ```twig
 {% props {} %}
 <button {{ attributes.merge({class: 'btn btn-primary'}) }}>
-    {{ body }}
+    {{ body|raw }}
 </button>
 ```
 
@@ -96,7 +96,7 @@ Using `{% props {} %}` with an empty hash means all parameters go to attributes.
 
 ```twig
 {% props {} %}
-<div {{ attributes }}>{{ body }}</div>
+<div {{ attributes }}>{{ body|raw }}</div>
 ```
 
 ## Default Values
@@ -118,7 +118,7 @@ The `{% props %}` tag works naturally with the existing `body` keyword on partia
 {% props {type: 'info', dismissible: false} %}
 
 <div {{ attributes.merge({class: 'alert alert-' ~ type, role: 'alert'}) }}>
-    <div class="alert-content">{{ body }}</div>
+    <div class="alert-content">{{ body|raw }}</div>
 
     {% if dismissible %}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>

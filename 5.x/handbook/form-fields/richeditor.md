@@ -295,7 +295,7 @@ Option | Description
 
 ### Where to find the full list
 
-The `editorOptions` values are passed through to the underlying Froala v2 editor. Every available option, along with its default, is declared at the top of each plugin file under `vendor_drm/froala/js/plugins/` in the October CMS source — for example `image.js` for image options and `file.js` for file upload options.
+The `editorOptions` values are passed through to the underlying Froala v2 editor. Every available option, along with its default, is declared at the top of each plugin file under `vendor_drm/froala/js/plugins/` in the October CMS source, for example `image.js` for image options and `file.js` for file upload options.
 
 ### Example: block all image insertion
 

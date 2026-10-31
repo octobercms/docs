@@ -97,7 +97,7 @@ Partials can use the `{% props %}` tag to separate parameters into **props** (te
 
 <div {{ attributes.merge({class: 'card'}) }}>
     <h2>{{ title }}</h2>
-    {{ body }}
+    {{ body|raw }}
 </div>
 ```
 

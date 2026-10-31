@@ -474,6 +474,18 @@ export function getAlternateVersion(page, activeVersion, targetVersion, pages, l
 }
 
 /**
+ * Returns the previousPath frontmatter as a list, since a merged page lists every page it absorbed.
+ */
+function previousPathsOf(frontmatter) {
+    const value = frontmatter && frontmatter.previousPath;
+    if (!value) {
+        return [];
+    }
+
+    return Array.isArray(value) ? value : [value];
+}
+
+/**
  * Finds the same content in another version when a page moved, using the previousPath frontmatter.
  * The previousPath may include an anchor when the page was split from a section of another page.
  */
@@ -487,8 +499,8 @@ function getMovedPathForVersion(page, activeVersion, targetVersion, pages) {
     const localPath = page.relativePath.substring(versionIndex + activeVersion.length + 1);
 
     // This page moved, look for its previous location in the target version
-    if (page.frontmatter.previousPath) {
-        const previousLocation = targetBase + page.frontmatter.previousPath;
+    for (const previousPath of previousPathsOf(page.frontmatter)) {
+        const previousLocation = targetBase + previousPath;
         const previousPage = getPageWithRelativePath(pages, previousLocation);
         if (previousPage) {
             const anchorHash = getAnchorHash(previousLocation);
@@ -520,8 +532,7 @@ export function getMovedPageInVersion(pages, versionBase, localPath) {
         const sitePage = pages[i];
 
         if (
-            sitePage.frontmatter &&
-            sitePage.frontmatter.previousPath === previousPath &&
+            previousPathsOf(sitePage.frontmatter).includes(previousPath) &&
             sitePage.relativePath.indexOf(relativeBase) === 0
         ) {
             return sitePage;

@@ -13,8 +13,12 @@ require('prismjs/plugins/treeview/prism-treeview.js');
 
 const loadLanguages = require('prismjs/components/index');
 
-// Required to make embedded highlighting work
-loadLanguages(['markup', 'css', 'javascript']);
+// Required to make embedded highlighting work, loading only what is missing because reloading a
+// language reloads its dependents, which registers Twig's placeholder hooks twice and leaves ___TWIG0___ in the output
+const missingLanguages = ['markup', 'css', 'javascript'].filter(lang => !prism.languages[lang]);
+if (missingLanguages.length) {
+    loadLanguages(missingLanguages);
+}
 
 function escapeHtml(str) {
     return str

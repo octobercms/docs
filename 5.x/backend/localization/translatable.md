@@ -1,9 +1,423 @@
 ---
 previousPath: extend/multisite/translatable.md
-subtitle: Learn how to translate individual model attributes across locales.
+subtitle: Translate individual model attributes and file attachments into each site locale while keeping a single record.
 ---
 # Translatable Models
 
+The Translatable trait translates individual model attributes, such as a product name, while keeping one record in the database. Use it when a record is the same entity in every language. For an overview of when to use this trait versus Multisite or MultisiteGroup, see [Localization & Multisite](./introduction.md).
+
+Apply the `October\Rain\Database\Traits\Translatable` trait and list the attributes to translate in the `$translatable` property.
+
+```php
+class Product extends Model
+{
+    use \October\Rain\Database\Traits\Translatable;
+
+    public $translatable = ['name', 'description', 'slug'];
+}
+```
+
+The active locale comes from the `Site` facade. When the active site uses a different locale from the primary site, reading `$product->name` returns the translation, and saving the model stores the translation. No migration is needed, since translations are stored in a shared table.
+
+## Reading Translations
+
+Model attributes return the translated value for the active site locale automatically.
+
+```php
+$product->name; // Returns translated value or falls back to default
+```
+
+Use the `getTranslation` method to read a translation for a specific locale.
+
+```php
+$product->getTranslation('name', 'fr');
+```
+
+If no translation exists for the requested locale, the method falls back to the default locale value. To return `null` instead, pass `false` as the third argument.
+
+```php
+$product->getTranslation('name', 'fr', useFallback: false);
+```
+
+Use the `getTranslations` method to get the values of a single attribute for every locale.
+
+```php
+$product->getTranslations('name');
+// Returns: ['en' => 'Product', 'fr' => 'Produit', 'de' => 'Produkt']
+```
+
+## Writing Translations
+
+Set the locale on the model, assign the attribute and save the model. The value is stored as the translation for that locale.
+
+```php
+$product->setLocale('fr');
+$product->name = 'Produit';
+$product->save();
+```
+
+Use the `setTranslation` method to set a translation for a specific locale without changing the model locale. Save the model afterward.
+
+```php
+$product->setTranslation('name', 'fr', 'Produit');
+$product->save();
+```
+
+Use the `setTranslations` method to set several locales at once for a single attribute.
+
+```php
+$product->setTranslations('name', [
+    'fr' => 'Produit',
+    'de' => 'Produkt',
+]);
+$product->save();
+```
+
 ::: tip
-This page is a stub. Its content comes from the 4.x [Translatable](/4.x/extend/multisite/translatable.html) article.
+For non-default locales, a value that matches the default locale value is not stored. The locale inherits the value from the model table instead, so changes to the default value carry over to untranslated locales.
+:::
+
+## Switching the Model Locale
+
+Use the `setLocale` method to change the locale of a model instance. This changes which values the model attributes read and write. The `getLocale` method returns the active locale.
+
+```php
+$product->setLocale('fr');
+$product->name; // Returns French translation
+$product->getLocale(); // 'fr'
+```
+
+The `setLocale` method is chainable.
+
+```php
+$product->setLocale('fr')->name;
+```
+
+## Checking for Translations
+
+Use the `hasTranslation` method to check if an attribute has been translated.
+
+```php
+$product->hasTranslation('name', 'fr'); // true or false
+```
+
+Use the `hasTranslations` method to check if the model has any translations at all for a locale.
+
+```php
+$product->hasTranslations('fr'); // true if ANY attribute has a translation for 'fr'
+```
+
+Use the `getTranslatedLocales` method to list the locales that have translations. Pass an attribute name to list the locales for that attribute only.
+
+```php
+$product->getTranslatedLocales(); // ['fr', 'de']
+$product->getTranslatedLocales('name'); // ['fr', 'de']
+```
+
+## Deleting Translations
+
+Use the `forgetTranslation` method to remove a single translation.
+
+```php
+$product->forgetTranslation('name', 'fr');
+```
+
+Use the `forgetTranslations` method to remove the translations of an attribute for every locale.
+
+```php
+$product->forgetTranslations('name');
+```
+
+Use the `forgetAllTranslations` method to remove every translation for a locale, which "unpublishes" that language.
+
+```php
+$product->forgetAllTranslations('fr');
+```
+
+## Querying Translated Values
+
+Use the `whereTranslation` scope to filter by a translated value.
+
+```php
+Product::whereTranslation('name', 'fr', 'Produit')->get();
+```
+
+Pass a comparison operator as the fourth argument.
+
+```php
+Product::whereTranslation('name', 'fr', '%Prod%', 'like')->get();
+```
+
+Use the `orderByTranslation` scope to sort by a translated value.
+
+```php
+Product::orderByTranslation('name', 'fr', 'asc')->get();
+```
+
+### Including Untranslated Records
+
+The `whereTranslation` and `orderByTranslation` scopes only look at stored translations. Records without a translation for the locale are left out of a `where`, and sort as `NULL` in an order. To fall back to the default locale value for untranslated records, use the `transWhere` and `transOrderBy` scopes.
+
+Use the `transWhere` scope to match either the base value or the translated value for the locale. The locale defaults to the active locale when omitted.
+
+```php
+Product::transWhere('name', 'Produit', 'fr')->get();
+```
+
+Like `whereTranslation`, it accepts a comparison operator.
+
+```php
+Product::transWhere('name', '%Prod%', 'fr', 'like')->get();
+```
+
+Use the `transOrderBy` scope to sort by the translated value, using the base column value for untranslated records. The locale defaults to the active locale when omitted.
+
+```php
+Product::transOrderBy('name', 'asc', 'fr')->get();
+```
+
+## Eager Loading Translations
+
+Use the `withTranslation` scope to eager load translations for a single locale and avoid N+1 queries.
+
+```php
+Product::withTranslation('fr')->get();
+```
+
+Without an argument, it uses the current site locale.
+
+```php
+Product::withTranslation()->get();
+```
+
+Use the `withTranslations` scope to eager load the translations for every locale.
+
+```php
+Product::withTranslations()->get();
+```
+
+The trait registers a `translations` relationship, so standard eager loading also works.
+
+```php
+Product::with('translations')->get();
+```
+
+## Translating JSON Attributes
+
+Attributes listed in the `$jsonable` property work without extra setup. Array values are encoded as JSON when stored in the translation table and decoded back to arrays when read.
+
+```php
+class Product extends Model
+{
+    use \October\Rain\Database\Traits\Translatable;
+
+    public $translatable = ['options'];
+
+    protected $jsonable = ['options'];
+}
+
+$product->setTranslation('options', 'fr', ['color' => 'rouge']);
+$product->save();
+
+$product->getTranslation('options', 'fr'); // ['color' => 'rouge']
+```
+
+## File Attachments
+
+To give each locale its own files, apply the `October\Rain\Database\Traits\TranslatableAttachments` trait alongside the `Translatable` trait. Then add the name of an `$attachOne` or `$attachMany` relation to the `$translatable` property. Attachment relations not listed in `$translatable` are shared by every locale.
+
+```php
+class Product extends Model
+{
+    use \October\Rain\Database\Traits\Translatable;
+    use \October\Rain\Database\Traits\TranslatableAttachments;
+
+    public $translatable = ['name', 'image', 'gallery'];
+
+    public $attachOne = [
+        'image' => \System\Models\File::class,
+        'manual' => \System\Models\File::class
+    ];
+
+    public $attachMany = [
+        'gallery' => \System\Models\File::class
+    ];
+}
+```
+
+In this example, the `image` and `gallery` relations store their files per locale, while the `manual` file is the same for every locale. Without the `TranslatableAttachments` trait, attachment relations listed in `$translatable` are shared by every locale.
+
+### Reading Translated Files
+
+Accessing the relation as a property returns the files for the active locale. When the locale has no files of its own, you get the files for the default locale instead.
+
+```php
+$product->setLocale('fr');
+$product->image; // French image, or the default image when there is none
+```
+
+The fallback applies to the whole relation. When a locale has its own files for an `$attachMany` relation, only those files are returned, and the default files are not merged in. For example, if the default gallery has six images and the French gallery has one, the French gallery contains one image.
+
+Eager loading and relation queries such as `has` and `withCount` use the same fallback, so each record resolves to its own locale files or the default files.
+
+```php
+Product::with('gallery')->get();
+Product::has('image')->get();
+Product::withCount('gallery')->get();
+```
+
+Calling the relation method directly returns only the files stored for the active locale, without the fallback. Use it when you need to know which files a locale has of its own.
+
+```php
+$product->setLocale('fr');
+$product->gallery()->get(); // Only the French files
+```
+
+### Writing Translated Files
+
+Files are added for the active locale. Set the locale on the model, then assign or add files the same way as an untranslated attachment.
+
+```php
+$product->setLocale('fr');
+$product->image = $uploadedFile;
+$product->save();
+```
+
+```php
+$product->setLocale('fr');
+$product->gallery()->add($file);
+```
+
+Adding a file for one locale never changes the files of another locale. Replacing the French image of an `$attachOne` relation removes the previous French image and keeps the default image.
+
+### Checking and Deleting Translated Files
+
+Use the `hasAttachmentTranslation` method to check if a locale has files of its own, and the `getTranslatedAttachmentLocales` method to list the locales that do. The locale defaults to the active locale when omitted.
+
+```php
+$product->hasAttachmentTranslation('image', 'fr'); // true if French has its own image
+$product->getTranslatedAttachmentLocales('image'); // ['fr', 'de']
+```
+
+Use the `forgetAttachmentTranslation` method to remove the files for a locale. The locale then falls back to the default files again.
+
+```php
+$product->forgetAttachmentTranslation('image', 'fr');
+```
+
+Use the `forgetAttachmentTranslations` method to remove the files for every locale except the default locale.
+
+```php
+$product->forgetAttachmentTranslations('image');
+```
+
+::: tip
+The record-level methods of the `Translatable` trait, such as `hasTranslations`, `getTranslatedLocales` and `forgetAllTranslations`, only consider attribute translations. To include files, call the attachment methods for each name returned by `getTranslatableAttachments`.
+:::
+
+When the record is deleted, the files for every locale are deleted with it, or detached when the relation definition sets `delete` to `false`. Soft deleted records keep their files so they can be restored.
+
+### Translating Files in the Backend
+
+File upload fields for translated attachments show the translate icon like other translatable fields. Click the icon and select a site to upload or remove the files for that locale in a popup, then click **Save** to keep the changes. Closing the popup without saving discards the uploads. You can also translate files by switching the site with the site selector and uploading them in the main form.
+
+In a non-default locale, the file upload field lists only the files of that locale. An empty field means the default files are used.
+
+### Translating File Titles and Descriptions
+
+A file shared by every locale can still have its title and description translated. Use the `System\Models\TranslatableFile` model in the relation definition instead of `System\Models\File`.
+
+```php
+public $attachOne = [
+    'manual' => \System\Models\TranslatableFile::class
+];
+```
+
+The title and description are translated like any other translatable attribute, and fall back to the default locale when there is no translation. The file reads its locale from the active site, so calling `setLocale` on the parent model does not change it. Call `setLocale` on the file instead.
+
+```php
+$product->manual->title; // Title in the active locale
+
+$product->manual->setTranslation('title', 'fr', "Guide d'utilisation");
+$product->manual->save();
+```
+
+In the backend, the title and description fields show the translate icon when you edit the details of the file.
+
+The `TranslatableFile` model works on any model, including models without the `Translatable` trait. Switching a relation between `File` and `TranslatableFile` needs no migration, since the model class is not stored with the file.
+
+## How Translations Are Stored
+
+The trait registers a `translations` morphMany relationship and stores translated values in the `system_translate_attributes` table, with one row per model, attribute and locale.
+
+```
+| model_type | model_id | locale | attribute | value   |
+|------------|----------|--------|-----------|---------|
+| Product    | 42       | fr     | name      | Produit |
+| Product    | 42       | fr     | slug      | produit |
+| Product    | 42       | de     | name      | Produkt |
+```
+
+When the active site locale differs from the default locale, the trait swaps the translated values into the model attributes when the record is fetched, and restores the default values before the model table is saved. When only one locale exists, or the default locale is active, the trait stays out of the way and runs no extra queries.
+
+### How Files Are Stored
+
+Translated files are stored in the `system_files` table along with every other attachment. The locale is added to the `field` column, while files for the default locale are stored without a suffix, the same as an untranslated attachment.
+
+```
+| attachment_type | attachment_id | field    | file_name    |
+|-----------------|---------------|----------|--------------|
+| Product         | 42            | image    | product.jpg  |
+| Product         | 42            | image:fr | produit.jpg  |
+| Product         | 42            | image:de | produkt.jpg  |
+```
+
+Since the default files are stored without a suffix, adding an existing relation to `$translatable` keeps its current files as the default files, with no migration required.
+
+::: tip
+Each locale stores its own file records, so the file title and description can already be different for each locale.
+:::
+
+## Method Reference
+
+Method | Description
+------------- | -------------
+`getTranslation($key, $locale, $useFallback = true)` | Get translated value for attribute and locale.
+`setTranslation($key, $locale, $value)` | Set translated value for attribute and locale.
+`getTranslations($key)` | Get all locale values for an attribute.
+`setTranslations($key, array $translations)` | Set multiple locales at once.
+`hasTranslation($key, $locale = null)` | Check if a translation row exists for one attribute.
+`hasTranslations($locale = null)` | Check if any translation rows exist for the locale (record-level).
+`getTranslatedLocales($key = null)` | Get locales with translations.
+`forgetTranslation($key, $locale)` | Delete a single translation row.
+`forgetTranslations($key)` | Delete all translation rows for an attribute.
+`forgetAllTranslations($locale)` | Delete all translation rows for a locale.
+`setLocale($locale)` | Override the locale context for this instance.
+`getLocale()` | Get the active locale.
+`isTranslatableAttribute($key)` | Check if attribute should be translated right now.
+`shouldTranslate()` | Check if translation is active (context !== default).
+`getTranslatableAttributes()` | Get the `$translatable` attribute names.
+`whereTranslation($key, $locale, $value, $operator = '=')` | Filter by a stored translated value only.
+`orderByTranslation($key, $locale, $direction = 'asc')` | Sort by a stored translated value (untranslated rows sort as `NULL`).
+`transWhere($key, $value, $locale = null, $operator = '=')` | Filter by the base or translated value, defaulting to the active locale.
+`transOrderBy($key, $direction = 'asc', $locale = null)` | Sort by the translated value, falling back to the base value.
+
+The `TranslatableAttachments` trait adds the following methods.
+
+Method | Description
+------------- | -------------
+`getTranslatableAttachments()` | Get the `$translatable` names that are file attachment relations.
+`hasAttachmentTranslation($key, $locale = null)` | Check if a locale has files of its own for an attachment.
+`getTranslatedAttachmentLocales($key)` | Get the non-default locales with files of their own for an attachment.
+`forgetAttachmentTranslation($key, $locale)` | Delete the files of a locale for an attachment.
+`forgetAttachmentTranslations($key)` | Delete the files of every non-default locale for an attachment.
+
+#### See Also
+
+::: also
+* [Localization & Multisite](./introduction.md)
+* [Multisite Models](./multisite.md)
+* [Site Groups](./site-groups.md)
+* [File Attachments](../data/attachments.md)
+* [Tailor Localization](../../themes/sites/tailor.md)
 :::

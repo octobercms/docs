@@ -1,12 +1,18 @@
 ---
 previousPath: element/available-commands.md
-subtitle: Artisan commands for managing projects, plugins and themes.
+subtitle: Look up the Artisan commands that update, maintain and scaffold October CMS projects, plugins and themes.
 ---
 # Console Commands
 
-October CMS includes several command-line interface (CLI) commands and utilities that allow you to manage various aspects of the platform, as well as speed up the development process. The console commands are based on Laravel's [Artisan](http://laravel.com/docs/artisan) tool. You may [develop your own console commands](../backend/console/commands.md) using plugins.
+October CMS includes command-line tools for managing the platform and speeding up development. They are built on Laravel's [Artisan](https://laravel.com/docs/12.x/artisan) tool, so you run each one from the project root with `php artisan`. This command lists every available command.
 
-## Setup & Maintenance
+```bash
+php artisan list
+```
+
+Add `--help` to any command to see all of its arguments and options. You can also [create your own console commands](../backend/console/commands.md) in plugins.
+
+## Updates & Maintenance Commands
 
 ### Command - `october:update`
 
@@ -25,14 +31,14 @@ php artisan october:migrate
 
 ### Command - `october:migrate`
 
-The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../backend/plugins/introduction.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
+The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../backend/plugins/versions.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
 
 ```bash
 php artisan october:migrate
 ```
 
 ::: tip
-This command does not migrate Tailor blueprints. Use the `tailor:migrate` command to [migrate blueprint changes](../themes/tailor/introduction.md#oc-migrating-blueprints).
+This command does not migrate Tailor blueprints. Use the `tailor:migrate` command to [migrate blueprint changes](../themes/tailor/blueprints.md#applying-blueprint-changes).
 :::
 
 The `--rollback` option will reverse all migrations, dropping database tables and deleting data. Care should be taken when using this command. The `plugin:refresh` command is a useful alternative for debugging a single plugin.
@@ -71,7 +77,7 @@ To remove these cached files, use the `--clear` option. This clears the configur
 php artisan october:optimize --clear
 ```
 
-## Project Management
+## Project Commands
 
 ### Command - `project:sync`
 
@@ -89,7 +95,7 @@ php artisan project:sync
 php artisan project:set <license key>
 ```
 
-## Plugin Management
+## Plugin Commands
 
 ### Command - `plugin:install`
 
@@ -177,7 +183,7 @@ php artisan plugin:enable AuthorName.PluginName
 php artisan plugin:remove AuthorName.PluginName
 ```
 
-## Theme Management
+## Theme Commands
 
 ### Command - `theme:install`
 
@@ -196,8 +202,8 @@ php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/
 Use the `--want` option to specify a target branch or version.
 
 ```bash
-php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/themename-theme.git
-```--want=dev-develop
+php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/themename-theme.git --want=dev-develop
+```
 
 Use the `--oc` option if your package name has the `oc` prefix.
 
@@ -289,9 +295,9 @@ Use the `--dry-run` option to list the found messages without writing the langua
 php artisan theme:scan demo --dry-run
 ```
 
-## Scaffolding
+## Scaffolding Commands
 
-The scaffolding commands generate the boilerplate files for common October CMS objects. Unless noted otherwise, the first argument is the plugin namespace (eg: `Acme.Blog`), and most commands accept the `--overwrite` (or `-o`) option to replace existing files.
+The scaffolding commands generate the boilerplate files for common October CMS objects. Unless noted otherwise, the first argument is the plugin namespace (for example, `Acme.Blog`), and most commands accept the `--overwrite` (or `-o`) option to replace existing files.
 
 ### Command - `create:plugin`
 
@@ -421,7 +427,7 @@ The `create:test` command generates a new [test](../backend/console/testing.md) 
 php artisan create:test Acme.Blog UserTest
 ```
 
-## Utilities
+## Utility Commands
 
 ### Command - `cache:clear`
 
@@ -441,7 +447,7 @@ php artisan october:fresh
 
 ### Command - `october:mirror`
 
-`october:mirror` - will mirror all asset and resource files to the [public folder](./deployment.md#oc-public-folder) using symbolic linking.
+`october:mirror` - mirrors all asset and resource files to the [public folder](./web-server.md#using-a-public-folder) using symbolic links.
 
 ```bash
 php artisan october:mirror
@@ -503,5 +509,7 @@ php artisan october:util purge orphans
 #### See Also
 
 ::: also
+* [Installing Plugins & Themes](./installing-packages.md)
+* [Updating October CMS](./updating.md)
 * [Creating Console Commands](../backend/console/commands.md)
 :::

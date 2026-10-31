@@ -56,7 +56,7 @@ Property | Description
 -------- | -------------
 **titleTemplate** | a Twig template used to build the record title (see below).
 **notifyGroup** | an admin user group code to notify by email when a submission is received (see below).
-**notifyTemplate** | the mail template used for the notification. Default: `tailor:submission-notification`
+**notifyTemplate** | the mail template used for the notification. Default: `tailor:submission`
 **notifyReplyTo** | field name used as the reply-to address for the notification. Default: `email`
 **spamSweepDays** | lookback window in days used when marking a record as spam, where other pending submissions from the same IP address are also rejected. Use `0` to disable the sweep. Default: `30`
 **purgeRejectedDays** | number of days to keep rejected submissions before they are deleted forever. Use `0` to disable purging. Default: `30`
@@ -120,7 +120,7 @@ submission:
     notifyGroup: contact-team
 ```
 
-Notifications are sent with the generic `tailor:submission-notification` mail template, listing the submitted field values with a link to moderate the record in the admin panel. Use the `notifyTemplate` property to specify a custom [mail template](../../backend/services/mail.md), where every field is available as a Twig variable, along with the following variables.
+Notifications are sent with the generic `tailor:submission` mail template, listing the submitted field values with a link to moderate the record in the admin panel. Use the `notifyTemplate` property to specify a custom [mail template](../../backend/services/mail.md), where every field is available as a Twig variable, along with the following variables.
 
 Variable | Description
 -------- | -------------

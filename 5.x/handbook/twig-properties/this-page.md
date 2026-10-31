@@ -60,12 +60,12 @@ An alternative `description` field, usually more descriptive for SEO purposes.
 <meta name="description" content="{{ this.page.meta_description }}">
 ```
 
-### hidden
+### is_hidden
 
 Hidden pages are accessible only by logged-in back-end users.
 
 ```twig
-{% if this.page.hidden %}
+{% if this.page.is_hidden %}
     <p>Note to other admins: We are currently working on this page.</p>
 {% endif %}
 ```
