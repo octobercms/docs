@@ -191,7 +191,7 @@ a {
 
 ### Using Theme Data with Combined Assets
 
-Assets combined using the `|theme` [filter and combiner](../markup/filter-theme.md) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
+Assets combined using the `|theme` [filter and combiner](../../markup/filter/theme.md) can have values passed to supporting filters, such as the LESS filter. Simply specify the `assetVar` option when defining the form field, the value should contain the desired variable name.
 
 ```yaml
 form:

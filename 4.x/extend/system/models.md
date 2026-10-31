@@ -46,7 +46,7 @@ The `$table` protected field specifies the database table corresponding the mode
 
 ### Supported Properties
 
-There are some standard properties that can be found on models, in addition to those provided by [model traits](traits.md). For example:
+There are some standard properties that can be found on models, in addition to those provided by [model traits](../database/traits.md). For example:
 
 ```php
 class User extends Model

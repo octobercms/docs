@@ -37,13 +37,3 @@ To check if the current request was made using the [Turbo Router](../../themes/a
     Page was loaded via PJAX
 {% endif %}
 ```
-
-## this.request.pjaxCached
-
-Use the `this.request.pjaxCached` property to also check if the [Turbo Router](../../themes/ajax/turbo-router.md) request had a cached snapshot coming before it.
-
-```twig
-{% if this.request.pjaxCached %}
-    Page was loaded via PJAX with a snapshot
-{% endif %}
-```

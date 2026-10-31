@@ -203,7 +203,7 @@ php artisan theme:install AuthorName.ThemeName --from=git@github.com:authorname/
 
 ### Command - `theme:check`
 
-`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes.md#oc-child-themes) is added and a child theme is created.
+`theme:check` - performs a system wide check of themes to see if they should be flagged read-only and protected from changes. This command will spin over every theme and check if it has been installed with composer, if so, a [theme lock file](../cms/themes/child-themes.md#theme-lock-file) is added and a child theme is created.
 
 ```bash
 php artisan theme:check
@@ -253,7 +253,7 @@ To create a child theme that inherits the parent theme, specify the `--child` op
 php artisan theme:copy demo demo-child --child
 ```
 
-If using [database-driven themes](../cms/themes.md#oc-database-driven-themes), you may sync the database changes to the filesystem with the `--import-db` option.
+If using [database-driven themes](../cms/themes/database-themes.md), you may sync the database changes to the filesystem with the `--import-db` option.
 
 ```bash
 php artisan theme:copy demo --import-db

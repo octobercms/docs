@@ -187,6 +187,6 @@ The JSON from the paginator will include meta information such as `total`, `curr
 #### See Also
 
 ::: also
-* [CMS Pagination](../../ajax/features/pagination.md)
+* [CMS Pagination](../../cms/features/pagination.md)
 * [Pager Twig function](../../markup/function/pager.md)
 :::

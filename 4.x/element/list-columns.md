@@ -119,7 +119,7 @@ full_name:
 
 ### Related Column Selection
 
-The `relation` property allows you to display related columns as part of the database query, allowing for searching and sorting of that column. The `relation` is set to the name of the [model relationship](../database/relations.md). In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
+The `relation` property allows you to display related columns as part of the database query, allowing for searching and sorting of that column. The `relation` is set to the name of the [model relationship](../extend/database/relations.md). In the next example the **name** value will be translated to the name attribute found in the related model (eg: `$model->name`).
 
 ```yaml
 group_name:

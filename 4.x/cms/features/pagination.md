@@ -52,7 +52,7 @@ handle = "Blog\Category"
 ```twig
 {% set posts = blog.paginateCustom(10, 'postPage') %}
 
-{% set comments = comments.paginateCustom(10, 'commentPage') %}
+{% set categories = category.paginateCustom(10, 'categoryPage') %}
 ```
 :::
 
@@ -62,7 +62,7 @@ Set the `withQuery` option to preserve the page number for other pagination inst
 {{ pager(categories, { withQuery: true }) }}
 ```
 
-This results in the query string containing both page numbers, for example,<br>`?postPage=1&commentPage=2`.
+This results in the query string containing both page numbers, for example,<br>`?postPage=1&categoryPage=2`.
 
 ### Using Custom Pagination Markup
 
@@ -173,7 +173,7 @@ This approach uses an AJAX partial to append the new content along with a self-d
 {% endif %}
 ```
 
-The button element leverages a combination of AJAX data attributes to perform [a self-update in append mode](../../ajax/update-partials.md), passing the next page number as data and removing itself upon completion.
+The button element leverages a combination of AJAX data attributes to perform [a self-update in append mode](../ajax/update-partials.md), passing the next page number as data and removing itself upon completion.
 
 The partial should be rendered using  [`{% ajaxPartial %}` Twig tag](../../markup/tag/ajax-partial.md).
 

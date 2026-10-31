@@ -114,5 +114,5 @@ function init()
 ::: also
 * [Form Widgets](../forms/form-widgets.md)
 * [Filter Widgets](../lists/filter-widgets.md)
-* [Report Widgets](../backend/report-widgets.md)
+* [Report Widgets](../dashboards/report-widgets.md)
 :::

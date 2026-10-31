@@ -111,7 +111,7 @@ At the application level, there are two ways to pin URL generation to your domai
 
 Safe mode is an extra level of protection that prevents running arbitrary PHP code by disabling the PHP code section in the editor. Safe mode will also enable a secure Twig environment, which restricts unsafe method calls.
 
-The `cms.safe_mode` parameter can be found in the `config/cms.php` file. By default, the value is loaded from the `CMS_SAFE_MODE` environment variable. Safe mode disables the [PHP code section](../cms/themes.md#php-code-section) in CMS templates.
+The `cms.safe_mode` parameter can be found in the `config/cms.php` file. By default, the value is loaded from the `CMS_SAFE_MODE` environment variable. Safe mode disables the [PHP code section](../cms/themes/themes.md#php-code-section) in CMS templates.
 
 The parameter can take one of the following values:
 

@@ -3,7 +3,7 @@ subtitle: Used for lazy loading and repeating updates.
 ---
 # Polling
 
-Polling is a technique used to defer or repeat an AJAX update by including the `data-auto-submit` attribute on a request element. This feature should be used sparingly since it can increase server load at scale, and to mitigate this, the attribute only triggers when the user's browser window is active.
+Polling is a technique used to defer or repeat an AJAX update by including the `data-auto-submit` attribute on a request element. This feature should be used sparingly since it can increase server load at scale. To repeat a request only while the user's browser window is active, use the [`data-request-poll` attribute](../ajax/attributes-api.md) instead.
 
 ## Lazy Loading Requests
 
@@ -44,18 +44,14 @@ For repeated requests to update content, you can set the `data-auto-submit` to a
 
 ```twig
 <div>
-    {% set launchDate = carbon('2025-01-01') %}
-    {% set days = launchDate.diffInDays %}
-    {% set hours = launchDate.subDays(days).diffInHours %}
-    {% set minutes = launchDate.subHours(hours).diffInMinutes %}
-    {% set seconds = launchDate.subMinutes(minutes).diffInSeconds %}
+    {% set remaining = carbon('now').diff(carbon('2030-01-01')) %}
 
     <h2>
         Launch in...
-        {{ days }} days,
-        {{ hours }} hours,
-        {{ minutes }} minutes,
-        {{ seconds }} seconds
+        {{ remaining.days }} days,
+        {{ remaining.h }} hours,
+        {{ remaining.i }} minutes,
+        {{ remaining.s }} seconds
     </h2>
 </div>
 

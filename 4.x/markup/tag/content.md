@@ -79,7 +79,7 @@ The collection of variables is accessed by using an opening and closing set of b
 </ul>
 ```
 
-> **Note**: Twig syntax is not supported in Content blocks, consider using a [CMS partial](../cms/partials.md) instead.
+> **Note**: Twig syntax is not supported in Content blocks, consider using a [CMS partial](../../cms/themes/partials.md) instead.
 
 ## Setting Contents to a Twig Variable
 

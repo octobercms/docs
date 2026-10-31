@@ -117,7 +117,7 @@ The [`abort()` Twig function](../../markup/function/abort.md) is used to show a 
 
 ## Accessing the Entry Type
 
-When using the [Content Groups](./blueprints.md) feature of the entry blueprint, you may access the group code using the `content_group` attribute. For example, a post may have a content group of **regular_post** and **markdown_post** where the content is handled differently.
+When using the [Content Groups](../tailor/blueprints.md#content-groups) feature of the entry blueprint, you may access the group code using the `content_group` attribute. For example, a post may have a content group of **regular_post** and **markdown_post** where the content is handled differently.
 
 ```twig
 {% if post.content_group == 'markdown_post' %}

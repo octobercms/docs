@@ -716,7 +716,7 @@ $value = studly_case('foo_bar');
 <a name="method-trans"></a>
 #### `trans()`
 
-The `trans` function translates the given language line using your [localization files](../plugin/localization.md):
+The `trans` function translates the given language line using your [localization files](../multisite/localization.md):
 
 ```php
 echo trans('validation.required'):

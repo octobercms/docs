@@ -149,7 +149,7 @@ JavaScript Event | Description
 [ajax:before-update](https://larajax.org/api/events#ajax-before-update) | triggered on the form object directly after the request is complete, but before the page is updated.
 [ajax:update](https://larajax.org/api/events#ajax-update) | triggered on a page element after it has been updated with the framework.
 [ajax:update-complete](https://larajax.org/api/events#ajax-update-complete) | triggered on the window object after all elements are updated by the framework.
-[ajax:request-success](https://larajax.org/api/events#ajax-request-success) | triggered on the form object after the request is successfully completed.
+[ajax:request-success](https://larajax.org/api/events#ajax-request-success) | triggered on the form object after the request is successfully completed. The `event.detail` object contains the `context`, the `data` received from the server, the `responseCode` and the `xhr` object.
 [ajax:request-error](https://larajax.org/api/events#ajax-request-error) | triggered on the form object if the request encounters an error.
 [ajax:error-message](https://larajax.org/api/events#ajax-error-message) | triggered on the window object if the request encounters an error. The handler has a `message` detail with the error message returned from the server.
 [ajax:confirm-message](https://larajax.org/api/events#ajax-confirm-message) | triggered on the window object when the `confirm` option is given. The handler has a `message` detail with the text message assigned to the `confirm` option. A `promise` detail is also provided to defer or cancel the outcome, which is useful for building a custom confirmation interface instead of the native JavaScript confirm box.

@@ -218,7 +218,7 @@ secondaryTabs:
 
 ## Form Views
 
-For each page your form supports Create, Update and Preview you should provide a [view file](../backend/controllers-ajax.md) with the corresponding name - **create.php**, **update.php** and **preview.php**.
+For each page your form supports Create, Update and Preview you should provide a [view file](../system/controllers.md#actions-views-and-routing) with the corresponding name - **create.php**, **update.php** and **preview.php**.
 
 The form behavior adds two methods to the controller class: `formRender`, `formRenderDesign` and `formRenderPreview`. These methods render the form controls configured with the YAML file described above.
 

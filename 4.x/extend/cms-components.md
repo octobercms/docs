@@ -248,7 +248,7 @@ public function onRun()
 
 ## AJAX Handlers
 
-Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../ajax/handlers.md). An example AJAX handler method defined in a component class:
+Components can host AJAX event handlers. They are defined in the component class exactly like they can be defined in the [page or layout code](../cms/ajax/handlers.md). An example AJAX handler method defined in a component class:
 
 ```php
 public function onAddItem()
@@ -259,7 +259,7 @@ public function onAddItem()
 }
 ```
 
-If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. See the [AJAX handlers article](../ajax/handlers.md) to learn about using AJAX with components.
+If the alias for this component was *demoTodo* this handler can be accessed by `demoTodo::onAddItem`. See the [AJAX handlers article](../cms/ajax/handlers.md) to learn about using AJAX with components.
 
 ## Default Markup
 
@@ -370,7 +370,7 @@ $content = $this->renderPartial('@component-partial.htm', [
 ]);
 ```
 
-For example, to render a partial as a response to an [AJAX handler](../ajax/handlers.md):
+For example, to render a partial as a response to an [AJAX handler](../cms/ajax/handlers.md):
 
 ```php
 function onGetTemplate()
