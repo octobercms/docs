@@ -88,7 +88,7 @@ Chart and table reports list their metrics under `metrics`, keyed by the metric 
 Property | Description
 ------------- | -------------
 **color** | the metric color as a hex code, such as `"#3b82f6"`.
-**displayTotals** | displays the total of the metric for the selected period.
+**displayTotals** | displays the total of the metric for the selected period. In a chart report, clicking the total shows or hides the metric.
 **displayRelativeBar** | in a table report, displays a bar comparing each value to the total.
 **axis** | in a chart report, the value axis to plot the metric against. Supported values: `left`, `right`. Default: `left`.
 
