@@ -14,7 +14,7 @@ When updating your plugins or themes to be compatible with newer versions of Oct
 
 ## Publishing Plugins
 
-When publishing your plugin the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-plugin** and include the `composer/installers` package as a dependency.
+When publishing your plugin the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-plugin** and the `require` block sets the PHP version that the plugin supports.
 
 ```json
 {
@@ -22,12 +22,16 @@ When publishing your plugin the `composer.json` file should have this JSON conte
     "type": "october-plugin",
     "description": "Enter a meaningful description here",
     "require": {
-        "composer/installers": "~1.0"
+        "php": ">=8.2"
     }
 }
 ```
 
 A plugin with the code **Acme.Blog** will have a composer package name of `acme/blog-plugin` and will be installed in the **plugins/acme/blog** directory.
+
+::: tip
+Plugins do not need to require the `composer/installers` package, since every October CMS installation already includes it. Requiring an older version, such as `~1.0`, forces Composer to downgrade the package for the whole project.
+:::
 
 ## Publishing Themes
 
