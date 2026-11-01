@@ -63,6 +63,8 @@ Add a "Support" link to your layout navigation so logged-in users can access the
 
 The "Support" link is inside the `{% if user %}` block because only logged-in users can submit and view tickets.
 
+While you have the layout open, check that it loads the AJAX framework with the `{% framework extras %}` tag. The helpdesk forms are AJAX forms, and the extras show their errors next to each field, display flash messages and add loading indicators to buttons. With the plain `{% framework %}` tag, the forms still work, but errors appear as browser alerts. The layout from the Forum tutorial already includes the tag.
+
 ## Next Steps
 
 Continue to [Ticket List](./ticket-list.md) to create the page where users browse their submitted tickets.

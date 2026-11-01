@@ -109,7 +109,7 @@ The `[session]` component with `security = "user"` requires the visitor to be lo
 
 The `supportTickets` component provides the `tickets` variable, a paginated collection of the logged-in user's tickets sorted by newest first. Each ticket has a `url` property that links to the ticket detail page (set by the `ticketPage` property).
 
-The `has_new` property is true when the last message on the ticket was from support staff, indicating there is a response the user has not seen yet. The blue dot makes these tickets easy to spot.
+The `has_new` property is true when the last public message on the ticket was from support staff, indicating the ticket is waiting for the user to respond. The blue dot makes these tickets easy to spot.
 
 ## Try It Out
 

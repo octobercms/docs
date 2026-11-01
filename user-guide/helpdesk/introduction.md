@@ -24,10 +24,10 @@ Responsiv.Support is a premium plugin available from the [October CMS Marketplac
 Before starting, you should have:
 
 - October CMS installed and running
-- A theme with a default layout that includes Tailwind CSS
+- A theme with a default layout that includes Tailwind CSS and the AJAX framework with `{% framework extras %}`
 - User authentication set up with RainLab.User, including the session component on your layout and login/registration pages
 
-If you need to set up user authentication, work through [Part 1 of the Forum tutorial](../forum/installing-the-user-plugin.md) first. It covers installing RainLab.User, configuring the session component, and building login, registration, and password reset pages.
+If you need to set up user authentication, work through [Part 1 of the Forum tutorial](../forum/installing-the-user-plugin.md) first. It covers installing RainLab.User, configuring the session component, and building login, registration, and password reset pages. Its default layout already includes Tailwind CSS and `{% framework extras %}`.
 
 ## Overview
 

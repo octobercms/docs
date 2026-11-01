@@ -25,8 +25,21 @@ redirect = "account/login"
 ```twig
 {% set model = supportTicketUpdate.model %}
 {% set updateMode = supportTicketUpdate.updateMode %}
+{% set ticket = model and updateMode == 'message' ? model.ticket : model %}
 
-{% if model %}
+{% if model and ticket.closed_at %}
+
+    <div class="mb-4">
+        <a href="{{ supportTicketUpdate.returnUrl }}" class="text-sm text-blue-600 hover:underline">
+            &larr; Back to ticket
+        </a>
+    </div>
+
+    <div class="p-4 bg-gray-50 rounded-lg text-center text-sm text-gray-500">
+        This ticket has been closed and can no longer be edited.
+    </div>
+
+{% elseif model %}
 
     <div class="mb-4">
         <a href="{{ supportTicketUpdate.returnUrl }}" class="text-sm text-blue-600 hover:underline">
@@ -38,7 +51,7 @@ redirect = "account/login"
         Edit {{ updateMode == 'ticket' ? 'Ticket' : 'Message' }}
     </h1>
 
-    {{ form_open({ request: 'onUpdateMessage', files: true, flash: true }) }}
+    {{ form_ajax('onUpdateMessage', { files: true, flash: true, validate: true }) }}
 
         <input type="hidden" name="mode" value="{{ updateMode }}" />
 
@@ -51,10 +64,11 @@ redirect = "account/login"
                     type="text"
                     name="subject"
                     id="subject"
-                    value="{{ post('subject', model.subject) }}"
+                    value="{{ model.subject }}"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md"
                     maxlength="255"
                 />
+                <div data-validate-for="subject" class="text-sm text-red-600 mt-1"></div>
             </div>
         {% endif %}
 
@@ -67,7 +81,8 @@ redirect = "account/login"
                 id="content"
                 rows="8"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md"
-            >{{ post('content', model.content) }}</textarea>
+            >{{ model.content }}</textarea>
+            <div data-validate-for="content" class="text-sm text-red-600 mt-1"></div>
         </div>
 
         <div class="mb-4">
@@ -120,8 +135,10 @@ redirect = "account/login"
             <input
                 name="files[]"
                 type="file"
+                multiple
                 class="text-sm text-gray-600"
             />
+            <div data-validate-for="files" class="text-sm text-red-600 mt-1"></div>
         </div>
 
         <div class="flex items-center gap-3">
@@ -158,6 +175,12 @@ This page handles both ticket editing and message editing using the `mode` query
 
 The "Edit" links on the ticket page pass the appropriate mode and ID. For example, the original ticket links to `/support/update/5?mode=ticket`, while a message links to `/support/update/12` (message mode is the default).
 
+The form is an AJAX form, like the submission form. After a successful save, the component returns to the ticket page, where the `{% flash %}` block shows the confirmation. If the update is refused, for example because the content is empty, the error appears under the field and as a flash message, and the page stays as it is.
+
+## Editing a Closed Ticket
+
+The `ticket` variable holds the ticket being edited in ticket mode, or the ticket the message belongs to in message mode. Once that ticket is closed, the page shows a notice instead of the form. The component also refuses edits and attachment changes on a closed ticket, so a form that was opened before the ticket closed cannot be saved afterwards, and the refusal appears as a flash message. Staff can reopen the ticket from the backend.
+
 ## The Minor Update Checkbox
 
 When "Minor update" is checked, the support team is not notified about the edit. This is useful for fixing typos or adding forgotten details. The checkbox is checked by default since most edits are minor corrections.
@@ -186,15 +209,15 @@ Configure your mail settings in **Settings > Mail Configuration**. You can custo
 
 ## Auto-closing Tickets
 
-Tickets close automatically after 7 days if the last message was from support staff and the user has not responded. This keeps the ticket queue clean without manual intervention. The auto-close interval can be changed by creating a config override file at `config/responsiv/support/config.php` with an `expireInterval` value.
+Tickets close automatically after 7 days if the last message was from support staff and the user has not responded. This keeps the ticket queue clean without manual intervention. The plugin checks for expired tickets every 5 minutes using the system scheduler, so make sure your [cron table is configured](../../4.x/setup/scheduler.md). The auto-close interval can be changed by creating a config override file at `config/responsiv/support/config.php` with an `expireInterval` value. The same file holds the [attachment settings](./submit-ticket.md#how-file-attachments-work).
 
 ## Restricting Support Staff
 
 By default, all backend administrators are considered support staff and receive notifications for new tickets. To restrict this to specific team members:
 
-1. Navigate to **Settings > Administrators > Manage Groups**
+1. Navigate to **Settings > Team Groups** and click **New Group**
 2. Create a new group named **Support members** with the code `support-members`
-3. Assign the administrators who should act as support staff to this group
+3. Add the administrators who should act as support staff on the group's **Users** tab
 
 Only members of this group will receive ticket notifications and appear in the assignment dropdown.
 
