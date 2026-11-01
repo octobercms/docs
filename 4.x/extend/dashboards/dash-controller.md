@@ -81,6 +81,40 @@ public function registerDashboards()
 }
 ```
 
+### Report Metrics
+
+Chart and table reports list their metrics under `metrics`, keyed by the metric code. Each metric supports the following properties.
+
+Property | Description
+------------- | -------------
+**color** | the metric color as a hex code, such as `"#3b82f6"`.
+**displayTotals** | displays the total of the metric for the selected period.
+**displayRelativeBar** | in a table report, displays a bar comparing each value to the total.
+**axis** | in a chart report, the value axis to plot the metric against. Supported values: `left`, `right`. Default: `left`.
+
+Use the right axis for a metric with a different scale from the others, such as a number of orders beside the sales amount, so the smaller values don't appear as a flat line. On a horizontal bar chart, the second axis is displayed along the top. The following chart plots sales on the left axis and orders on the right.
+
+```yaml
+sales_and_orders:
+    row: 2
+    width: 20
+    type: chart
+    chartType: line
+    title: Sales and Orders
+    dataSource: Acme\Shop\Classes\SalesDataSource
+    dimension: date
+    metrics:
+        sales:
+            color: "#3b82f6"
+            displayTotals: true
+        orders:
+            color: "#22c55e"
+            displayTotals: true
+            axis: right
+```
+
+In the dashboard editor, these are the settings of each item in the **Metrics** list.
+
 ### Default Date Range
 
 You can configure the default date range and grouping interval for a dashboard using the following properties in the dashboard YAML configuration file.
@@ -103,4 +137,4 @@ finance:
     defaultInterval: month
 ```
 
-These defaults apply when the user first visits the dashboard and no date range is selected in the URL. Once the user selects a different range, their selection takes precedence.
+These defaults apply when the user first visits the dashboard and no date range is selected in the URL. Once the user selects a different range, their selection takes precedence. The date range picker offers presets, such as **Yesterday**, **Last 7 days**, **Last 30 days** and **Last month**, as well as a custom range.
