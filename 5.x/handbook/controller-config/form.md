@@ -174,6 +174,7 @@ Property | Description
 **size** | size of the page container, supported values: `50` stepped increments between `400`-`1200`, `auto`. Default: `auto`
 **sidebarSize** | width of the sidebar in `sidebar` mode, supported values `50` steps between `300`-`750`. Default: `300`
 **secondaryLabel** | label for the secondary tabs popover button in `document` mode. Default: `Options`
+**changeMonitor** | warns about unsaved changes when the user leaves the page, supported in all modes except `popup`. Default: `false`, or `true` in `document` mode
 
 Use the `formRenderDesign` method to render the form design inside the **create.php**, **update.php** and **preview.php** view files.
 
@@ -202,6 +203,14 @@ The **size** property defines the size of the page container or the popup size.
 design:
     displayMode: survey
     size: 950
+```
+
+The **changeMonitor** property shows a browser warning when the user leaves the page with unsaved changes. The default form buttons mark the changes as saved once the request succeeds. When using custom buttons, add the `data-change-monitor-commit` attribute to the buttons that save or delete the record.
+
+```yaml
+design:
+    displayMode: basic
+    changeMonitor: true
 ```
 
 ### Popup Display Mode

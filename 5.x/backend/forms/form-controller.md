@@ -196,6 +196,20 @@ To track unsaved changes and show a warning when the user navigates away from th
 <?= Form::open(['class' => '...', 'data-change-monitor' => true]) ?>
 ```
 
+Add the `data-change-monitor-commit` attribute to the buttons that save the record, so the warning clears once the request succeeds.
+
+```php
+<button
+    type="button"
+    data-request="onSave"
+    data-change-monitor-commit
+    class="btn btn-primary">
+    Create
+</button>
+```
+
+When the page uses a [form design](../../handbook/controller-config/form.md#form-designs), set the `changeMonitor` design property instead.
+
 ## Validating Form Fields
 
 Validation rules belong to the model, not the form. Add the [Validation trait](../data/model-traits/validation.md) to your model, and its rules are checked when the form saves the record.
