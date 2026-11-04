@@ -146,7 +146,24 @@ Feature | Description
 
 When the `system_plugin_sites` or `system_plugin_site_groups` feature is enabled, you can enable or disable plugins for individual sites or site groups. Navigate to **Settings → Updates & Plugins → Manage Plugins** and use the toggle switch next to each plugin to control its availability for the currently selected site.
 
-A plugin that is disabled for a site will have its backend navigation, settings and controllers hidden for that site. Switching to a different site using the site picker will restore access to the plugin if it is enabled there.
+Disabling a plugin for a site hides its features on that site. The plugin remains installed and loaded, so other sites can continue to use it. On a site where a plugin is disabled:
+
+- Its components, snippets and Twig markup tags are not available to the theme.
+- Its backend navigation, settings, permissions and dashboard widgets are hidden.
+- Its backend controllers return a 404 page.
+- Its form widgets, list column types, content fields and mail templates are not listed.
+
+Switching to a different site using the site picker will restore access to the plugin if it is enabled there. A plugin that [requires another plugin](../../extend/system/plugins.md#dependency-definitions) is also hidden on any site where its requirement is disabled.
+
+Plugin code is loaded once for the whole installation, before the site is known. This means some parts of a plugin are active on every site, as long as the plugin is enabled for at least one site:
+
+- The `register` and `boot` methods of the plugin registration file, including any event listeners and model extensions they add.
+- Routes defined in the plugin's **routes.php** file.
+- Views, translations, configuration and mail templates referenced directly by their namespace, for example `acme.blog::mail.message`.
+
+Plugins are only hidden once a site has been selected, such as when a CMS page or backend page is requested. Console commands, queue workers and scheduled tasks have no site, so every loaded plugin is available to them, including its migrations and scheduled tasks. Code that runs inside `Site::withContext` hides the plugins disabled for that site.
+
+When a plugin should not run any code at all, disable it completely. A plugin is not loaded when it is disabled for every site (or every site group), when it is disabled with the `plugin:disable` command, or when it is listed in the `disable_plugins` value of the **config/system.php** file. Plugins are enabled by default on a new site, so adding a site will load a plugin that was disabled for every other site, until you disable it for the new site too.
 
 ::: tip
 You must clear the application cache after enabling or disabling these features in the configuration file.

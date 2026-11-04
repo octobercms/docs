@@ -118,6 +118,21 @@ public function boot()
 The `boot` method is optional and leaving it undefined helps with performance. Additionally, only the `boot` method supports dependency injection via the application container.
 :::
 
+When plugins can be [enabled or disabled per site](../../cms/multisite/multisite.md#per-site-plugin-management), the `register` and `boot` methods are called on every site, even where the plugin is disabled. If some logic should only apply to sites where the plugin is enabled, check the plugin state at the time the logic runs, rather than inside the `boot` method itself.
+
+```php
+public function boot()
+{
+    Event::listen('cms.page.beforeDisplay', function($controller, $url, $page) {
+        if (PluginManager::instance()->isDisabled('Acme.Blog')) {
+            return;
+        }
+
+        // ...
+    });
+}
+```
+
 Plugins may also supply a file named **init.php** that contains custom initialization logic. Below is some example content.
 
 ```php
