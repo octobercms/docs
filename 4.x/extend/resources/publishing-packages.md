@@ -30,12 +30,12 @@ When publishing your plugin the `composer.json` file should have this JSON conte
 A plugin with the code **Acme.Blog** will have a composer package name of `acme/blog-plugin` and will be installed in the **plugins/acme/blog** directory.
 
 ::: tip
-Plugins do not need to require the `composer/installers` package, since every October CMS installation already includes it. Requiring an older version, such as `~1.0`, forces Composer to downgrade the package for the whole project.
+Plugins and themes do not need to require the `composer/installers` package, since every October CMS installation already includes it. Requiring an older version, such as `~1.0`, forces Composer to downgrade the package for the whole project.
 :::
 
 ## Publishing Themes
 
-When publishing your theme the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-theme** and include the `composer/installers` package as a dependency.
+When publishing your theme the `composer.json` file should have this JSON content at a minimum. Notice that the package name must end with **-theme** and the `require` block sets the PHP version that the theme supports.
 
 ```json
 {
@@ -43,12 +43,12 @@ When publishing your theme the `composer.json` file should have this JSON conten
     "type": "october-theme",
     "description": "Enter a meaningful description here",
     "require": {
-        "composer/installers": "~1.0"
+        "php": ">=8.2"
     }
 }
 ```
 
-A plugin with the code **Acme.Boilerplate** will have a composer package name of `acme/boilerplate-theme` and be installed in the **themes/boilerplate** directory.
+A theme with the code **Acme.Boilerplate** will have a composer package name of `acme/boilerplate-theme` and be installed in the **themes/boilerplate** directory.
 
 ## Declaring Dependencies
 
@@ -144,6 +144,20 @@ composer require wikimedia/composer-merge-plugin
 ```
 
 Now when you run `composer update`, any dependency declared in a plugin's `composer.json` file is installed and managed at the project level.
+
+### Deploying with the Merge Plugin
+
+The merge plugin runs `composer update` the first time it is installed. When `composer install` runs without a `vendor` directory, such as on a new server or in a deployment pipeline, every package that a plugin's `composer.json` file requires can move to a newer version than the one in the `composer.lock` file.
+
+To deploy the exact versions in the lock file, keep the modules, plugins and themes in source control and install with the `--no-plugins` option.
+
+```bash
+composer install --no-dev --no-plugins
+```
+
+::: warning
+The `--no-plugins` option turns off every Composer plugin, including `composer/installers`, which places packages in the `modules`, `plugins` and `themes` directories. Only use it when the lock file has no packages of the `october-module`, `october-plugin` or `october-theme` type.
+:::
 
 ## Tagging a Release
 
