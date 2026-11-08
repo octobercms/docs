@@ -7,7 +7,7 @@
 <script>
     import PulseLoader from './PulseLoader.vue'
 
-    /** Redirects to the given 'to' url, which is relative to the current location. */
+    /** Redirects to the given 'to' url, which is relative to the current location or on another site. */
     export default {
         name: 'Redirect',
         components: { PulseLoader },
@@ -21,7 +21,13 @@
             var self = this;
             setTimeout(function() {
                 try {
-                    self.$router.push(self.to);
+                    // Resolve against the current page since the router resolves relative paths from the site root
+                    var url = new URL(self.to, location.href);
+                    if (url.origin !== location.origin) {
+                        location.replace(url.href);
+                        return;
+                    }
+                    self.$router.push(url.pathname + url.search + url.hash);
                 }
                 catch (e) {}
             }, 1000);

@@ -200,7 +200,7 @@ $chunks->toArray();
 // [[1, 2, 3, 4], [5, 6, 7]]
 ```
 
-This method is especially useful in [CMS pages](../cms/pages.md) when working with a grid system, such as [Bootstrap](https://getbootstrap.tld/css/#grid). Imagine you have a collection of models you want to display in a grid:
+This method is especially useful in [CMS pages](../../cms/themes/pages.md) when working with a grid system, such as [Bootstrap](https://getbootstrap.tld/css/#grid). Imagine you have a collection of models you want to display in a grid:
 
 ```twig
 {% for chunk in products.chunk(3) %}

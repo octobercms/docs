@@ -3,7 +3,7 @@ subtitle: Validate form submissions using the AJAX framework.
 ---
 # Validation
 
-Validating forms checks the user input against a set of predefined rules. When using the [AJAX framework](../../ajax/introduction.md) form validation occurs without any special configuration, where the invalid field will be focused and an error message is displayed (usually as an alert window).
+Validating forms checks the user input against a set of predefined rules. When using the [AJAX framework](../ajax/introduction.md) form validation occurs without any special configuration, where the invalid field will be focused and an error message is displayed (usually as an alert window).
 
 ## Flash Validation
 
@@ -22,7 +22,7 @@ For basic validation, including the [`data-request-flash` attribute](./flash-mes
 </form>
 ```
 
-Inside your [AJAX handler](../../ajax/handlers.md), you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid. The supplied array (first argument) should use field names for the keys and the error messages for the values.
+Inside your [AJAX handler](../ajax/handlers.md), you may throw a [validation exception](../../extend/system/exceptions.md) using the `ValidationException` class to make a field invalid. The supplied array (first argument) should use field names for the keys and the error messages for the values.
 
 ```php
 function onSubmit()
@@ -104,7 +104,7 @@ function onSubmit()
 
 ### Custom Error Messages & Attributes
 
-To change the default validation messages, you may pass custom messages to the `validate` method. The keys in the messages array (third argument) follow the `attribute.rule` format.
+To change the default validation messages, you may pass custom messages to the `validate` method. The keys in the messages array (second argument) follow the `attribute.rule` format.
 
 ```php
 $messages = [
@@ -115,7 +115,7 @@ $messages = [
 $data = Request::validate($rules, $messages);
 ```
 
-If you want to keep the default validation messages, and only change the `:attribute` name used, pass custom attributes as an array (fourth argument).
+If you want to keep the default validation messages, and only change the `:attribute` name used, pass custom attributes as an array (third argument).
 
 ```php
 $attributeNames = [
@@ -163,17 +163,25 @@ If the element is left empty, it will be populated with the validation text from
 
 ### Displaying Errors with Flash Messages
 
-When using the `data-request-validate` attribute in combination with the [`data-request-flash` attribute](./flash-messages.md), the validation errors take priority and suppress the flash message. To display both at the same time, set the attribute to a wildcard (`*`) to display all flash message types, including validation.
+When using the `data-request-validate` attribute in combination with the [`data-request-flash` attribute](./flash-messages.md), validation errors show inside the form and as a flash message.
 
 ```html
 <form
     data-request-validate
-    data-request-flash="*">
+    data-request-flash>
+```
+
+To show validation errors inside the form only, exclude the **validate** type from the flash messages.
+
+```html
+<form
+    data-request-validate
+    data-request-flash="-validate">
 ```
 
 ## Working with JavaScript
 
-To style the invalid fields themselves, hook into the `ajax:invalid-field` event to mark each field and `ajax:promise` to reset the form on a new submission. The following applies the `is-invalid` class, which pairs with the [Bootstrap validation styles](https://getbootstrap.com/docs/5.3/forms/validation/) and a sibling `invalid-feedback` element. Substitute any class you prefer. The JavaScript events used are found in the [AJAX JavaScript API](../../ajax/javascript-api.md).
+To style the invalid fields themselves, hook into the `ajax:invalid-field` event to mark each field and `ajax:promise` to reset the form on a new submission. The following applies the `is-invalid` class, which pairs with the [Bootstrap validation styles](https://getbootstrap.com/docs/5.3/forms/validation/) and a sibling `invalid-feedback` element. Substitute any class you prefer. The JavaScript events used are found in the [AJAX JavaScript API](../ajax/javascript-api.md).
 
 ```js
 addEventListener('ajax:invalid-field', function(event) {

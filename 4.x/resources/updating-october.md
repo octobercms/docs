@@ -11,7 +11,7 @@ php artisan october:update
 
 ## Database Migration
 
-The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../plugin/updates.md). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
+The `october:migrate` command will perform a database migration, creating database tables and executing seed scripts, provided by the system and [plugin version history](../extend/system/plugins.md#version-history). The migration command can be run multiple times, it will only execute a migration or seed script once, which means only new changes are applied.
 
 ```bash
 php artisan october:migrate

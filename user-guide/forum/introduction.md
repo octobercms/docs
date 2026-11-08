@@ -17,7 +17,7 @@ You will create a forum powered by two plugins: RainLab.User for authentication 
 
 ## Plugins vs Tailor
 
-In the [blog tutorial](../blog/introduction.md), you defined content with YAML blueprints and wrote all the Twig markup yourself. Tailor gives you complete control over the data structure, but you build everything from scratch.
+In the [blog tutorial](https://octobercms.com/support/article/creating-a-blog-with-october-cms), you defined content with YAML blueprints and wrote all the Twig markup yourself. Tailor gives you complete control over the data structure, but you build everything from scratch.
 
 Plugins take a different approach. They are installable packages that bring their own database tables, backend management pages, and frontend components. You install them, configure their settings, and write your own templates to display the data they provide.
 

@@ -8,11 +8,10 @@ sidebar:
         icon: ph-duotone ph-book-open-text
         collapsable: false
         children:
-            - [/user-guide/quickstart/introduction/welcome, Quick Start]
-            - [/user-guide/blog/introduction, Creating a Blog]
+            - [/user-guide/quickstart/introduction/welcome, Getting Set Up]
+            - [/user-guide/quickstart/editor/understanding-themes, Creating a Theme]
             - [/user-guide/forum/introduction, Creating a Forum]
-            - [/user-guide/helpdesk/introduction, Creating a Helpdesk]
-            - [/user-guide/mailing-list/introduction, Creating a Mailing List]
+            - ['https://octobercms.com/support/articles/tutorials', More Tutorials]
     -
         title: Documentation
         icon: ph-duotone ph-code
@@ -101,7 +100,8 @@ sidebar:
             color="#6A6CF7"
             title="Creating a Blog"
             description="Build a fully-featured blog with posts, categories, tags, and an RSS feed."
-            href="/user-guide/blog/introduction.html" />
+            href="https://octobercms.com/support/article/creating-a-blog-with-october-cms"
+            target="_blank" />
     </div>
     <div class="col-md-6">
         <SectionCardLink
@@ -117,7 +117,8 @@ sidebar:
             color="#16A34A"
             title="Creating a Helpdesk"
             description="Build a fully-featured helpdesk with tickets, categories, tags, and an RSS feed."
-            href="/user-guide/helpdesk/introduction.html" />
+            href="https://octobercms.com/support/article/creating-a-helpdesk-with-october-cms"
+            target="_blank" />
     </div>
     <div class="col-md-6">
         <SectionCardLink
@@ -125,7 +126,8 @@ sidebar:
             color="#EAB308"
             title="Creating a Mailing List"
             description="Build a mailing list with signup forms, subscriber management, and campaigns."
-            href="/user-guide/mailing-list/introduction.html" />
+            href="https://octobercms.com/support/article/creating-a-mailing-list-with-october-cms"
+            target="_blank" />
     </div>
 </div>
 

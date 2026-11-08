@@ -65,7 +65,7 @@ public function registerContentFields()
 }
 ```
 
-The short code is used when referencing the field in the [blueprint templates](introduction.md), it should be a unique value to avoid conflicts with other form fields.
+The short code is used when referencing the field in the [blueprint templates](../cms/tailor/blueprints.md), it should be a unique value to avoid conflicts with other form fields.
 
 ## Processing Config
 

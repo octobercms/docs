@@ -137,39 +137,7 @@ Lang::set('I love programming.', 'Le codage est le meilleur!', 'fr');
 
 ## Contributing Language Strings
 
-October CMS uses a service called Crowdin to better manage translations for popular languages. It also performs automated machine translations using Google's translation API for all other languages. If you discover missing or incorrect translations in October CMS, please follow the instructions below.
-
-### Using Crowdin
-
-You may check to see if your language is supported by the Crowdin project using the link below. This service allows you to contribute translations using a streamlined interface.
-
-- [October CMS Crowdin Project Page](https://crowdin.com/project/octobercms)
-
-If your language does not appear on this page, please follow the GitHub instructions below. Languages are added to Crowdin when we notice a language is becoming more active on GitHub.
-
-### Using GitHub
-
-You may visit the [repository on GitHub](https://github.com/octobercms/october/tree/develop/modules) to suggest updates for your language using a pull request. The language files are found in the various modules, so you may need to check multiple files to find the correct language string. In this example, we will modify the Dutch language using the `nl` language code and we know the string is located in the Tailor module.
-
-1. Open the [GitHub repository](https://github.com/octobercms/october/tree/develop/modules).
-2. Click on **tailor**, then **lang** to open the language directory for Tailor
-3. Click on the **nl.json** file to open the language file for Dutch
-4. At the top right, click the pencil icon to **Edit this file**
-
-In the file you will see the English version on the left side and the Dutch version on the right side, for example:
-
-```json
-{
-  "Manage Entries": "Invoer beheren",
-  "Create :name Entry": "Maak :name invoer"
-}
-```
-
-When making the update, only modify the right side which contains the translated value. Some values may contain variables such as `:name` and these should be left intact. Once completed, click the **Commit changes** button to submit a new Pull Request. It will be reviewed by the team and included in subsequent releases.
-
-::: tip
-If the language key does not exist or you cannot find it, you may [contact us for assistance](https://octobercms.com/contact).
-:::
+October CMS uses a service called Crowdin to better manage translations for popular languages, and accepts pull requests on GitHub for all other languages. If you discover missing or incorrect translations in October CMS, the [Contributing Translations to October CMS](https://octobercms.com/support/article/contributing-translations-to-october-cms) article explains how to submit a fix.
 
 #### See Also
 

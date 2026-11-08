@@ -81,19 +81,13 @@ LINK_POLICY=force
 
 ### Using Cloudflare
 
-Cloudflare [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/) rewrites script tags to defer their execution, which breaks the script loading order that the backend panel relies on. The symptoms can be hard to trace since no errors appear in the browser console. For example, the navigation menu stops responding after opening a page, list rows ignore hover and click events, or the page only starts working again after a popup is opened and closed.
-
-The recommended solution is to install the [Cloudflare plugin](https://octobercms.com/plugin/rainlab-cloudflare), which adds the `data-cfasync="false"` attribute to every backend script tag so Rocket Loader leaves them untouched. The plugin also registers the Cloudflare network as trusted proxies, so the HTTPS protocol and visitor IP address are detected correctly.
+When the site is served through Cloudflare, it is recommended to install the [Cloudflare plugin](https://octobercms.com/plugin/rainlab-cloudflare). It registers the Cloudflare network as trusted proxies, so the HTTPS protocol and visitor IP address are detected correctly, and stops Cloudflare Rocket Loader from breaking the backend panel scripts.
 
 ```bash
 php artisan plugin:install RainLab.Cloudflare
 ```
 
-Alternatively, you may disable Rocket Loader in the Cloudflare dashboard, either for the entire site or with a configuration rule that targets the backend path (`/admin` by default).
-
-::: tip
-The plugin only protects the backend by default, so Rocket Loader can continue optimizing theme scripts. If your theme or the AJAX framework is affected on the frontend, set `CLOUDFLARE_IGNORE_FRONTEND_SCRIPTS=true` in the `.env` file.
-:::
+If the backend navigation or list rows stop responding behind Cloudflare, see [this article](https://octobercms.com/support/article/backend-navigation-stops-responding-behind-cloudflare) for the cause and other solutions.
 
 ### Trusted Hosts
 
@@ -111,7 +105,7 @@ At the application level, there are two ways to pin URL generation to your domai
 
 Safe mode is an extra level of protection that prevents running arbitrary PHP code by disabling the PHP code section in the editor. Safe mode will also enable a secure Twig environment, which restricts unsafe method calls.
 
-The `cms.safe_mode` parameter can be found in the `config/cms.php` file. By default, the value is loaded from the `CMS_SAFE_MODE` environment variable. Safe mode disables the [PHP code section](../cms/themes.md#php-code-section) in CMS templates.
+The `cms.safe_mode` parameter can be found in the `config/cms.php` file. By default, the value is loaded from the `CMS_SAFE_MODE` environment variable. Safe mode disables the [PHP code section](../cms/themes/themes.md#php-code-section) in CMS templates.
 
 The parameter can take one of the following values:
 

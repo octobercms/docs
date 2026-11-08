@@ -2,7 +2,7 @@
 
 ## Basic Responses
 
-A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [Layout Execution Life Cycle](../../cms/themes/layouts.md) and [AJAX handler definitions](../../ajax/handlers.md).
+A response can be returned from almost PHP method that is used by the page. This includes all the CMS methods contained in the [Layout Execution Life Cycle](../../cms/themes/layouts.md) and [AJAX handler definitions](../../cms/ajax/handlers.md).
 
 #### Returning strings from a CMS method
 
@@ -293,6 +293,7 @@ if (View::exists('acme.blog::mail.customer')) {
 #### See Also
 
 ::: also
-* [Uploads & Downloads](../../ajax/features/upload-download.md)
+* [File Uploads](../../cms/features/uploads.md)
+* [File Downloads](../../cms/features/downloads.md)
 * [Laravel Responses](https://laravel.com/docs/12.x/responses)
 :::

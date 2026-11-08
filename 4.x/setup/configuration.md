@@ -70,9 +70,9 @@ When enabled, the debug mode shows detailed error messages when they occur, alon
 
 Features provided when debug mode is enabled:
 
-- [detailed error messages](../cms/pages.md#error-page)
+- [detailed error messages](../cms/themes/pages.md#error-page)
 - failed user authentication provides a specific reason
-- [combined assets](../markup/filter-theme.md) are not minified by default
+- [combined assets](../markup/filter/theme.md) are not minified by default
 
 ### CSRF protection
 

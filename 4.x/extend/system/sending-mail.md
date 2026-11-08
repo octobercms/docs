@@ -249,7 +249,7 @@ You may register variables that are globally available to all mail templates wit
 View::share('site_name', 'October CMS');
 ```
 
-This code could be called inside the register or boot method of a [plugin registration file](../plugin/registration.md). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
+This code could be called inside the register or boot method of a [plugin registration file](./plugins.md#registration-file). Using the above example, the variable `{{ site_name }}` will be available inside all mail templates.
 
 ### Translating Mail Templates
 

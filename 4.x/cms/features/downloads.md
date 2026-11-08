@@ -3,41 +3,33 @@ subtitle: Easily handle downloading files.
 ---
 # File Downloads
 
-October CMS provides simple features for downloading files in responses. The feature is opt-in to the AJAX framework for the best performance.
+An AJAX handler can return a file download. When the response has a `Content-Disposition` header, the AJAX framework downloads the file in the browser, using the filename sent by the server.
 
 ## Download Buttons
 
-To enable file downloads, include the `data-request-download` attribute on a HTML form or button tag. The following is a minimal example of downloading a file.
+No extra attribute is needed to accept a download. The following is a minimal example of downloading a file.
 
 ```html
-<button data-request="onExport" data-request-download>
+<button data-request="onExport">
     Download
-</button>
-```
-
-If the `data-request-download="..."` attribute is set on the request trigger, the filename in this attribute will be given to the downloaded file. The following produces a file named **data.csv**.
-
-```html
-<button data-request="onExport" data-request-download="data.csv">
-    Download Document
 </button>
 ```
 
 To open the file in a new browser window, typically used for previewing PDFs, set the `data-browser-target` attribute to `_blank`.
 
 ```html
-<button data-request="onExport" data-request-download data-browser-target="_blank">
+<button data-request="onExport" data-browser-target="_blank">
     Open in New Window
 </button>
 ```
 
 ::: tip
-When the download attribute is used, the response can be a download or a [regular AJAX update](../../ajax/update-partials.md).
+The same request can return either a download or a [regular AJAX update](../ajax/update-partials.md).
 :::
 
 ## Download Responses
 
-Inside your [AJAX handler](../../ajax/handlers.md), you may return a [file download](../../extend/services/response-view.md) `Response` type where the `download` method accepts the local disk file path.
+Inside your [AJAX handler](../ajax/handlers.md), you may return a [file download](../../extend/services/response-view.md) `Response` type where the `download` method accepts the local disk file path. The name of the downloaded file can be set with the second argument, for example `Response::download($path, 'data.csv')`.
 
 ```php
 public function onExport()

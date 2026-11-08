@@ -111,7 +111,7 @@ layout = "default"
 ```
 :::
 
-More information on placeholders can be found [in the Markup guide](../markup/tag-placeholder.md).
+More information on placeholders can be found [in the Markup guide](../../markup/tag/placeholder.md).
 
 ## Dynamic Layouts
 

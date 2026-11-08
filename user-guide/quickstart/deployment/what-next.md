@@ -26,7 +26,7 @@ The October Demo plugin that came with your installation includes a theme with w
 
 Once you are comfortable with the basics, try building something more ambitious.
 
-- **Follow a tutorial**: build a [Blog](../../blog/), [Forum](../../forum/), [Helpdesk](../../helpdesk/), or [Mailing List](../../mailing-list/) using the step-by-step tutorials. Each one teaches different patterns and techniques.
+- **Follow a tutorial**: build a [Blog](https://octobercms.com/support/article/creating-a-blog-with-october-cms), [Forum](../../forum/), [Helpdesk](https://octobercms.com/support/article/creating-a-helpdesk-with-october-cms), or [Mailing List](https://octobercms.com/support/article/creating-a-mailing-list-with-october-cms) using the step-by-step tutorials, or browse more [tutorials in the Knowledge Base](https://octobercms.com/support/articles/tutorials). Each one teaches different patterns and techniques.
 - **Add user authentication**: install the [RainLab.User](https://octobercms.com/plugin/rainlab-user) plugin to add frontend user registration, login, and account management.
 - **Build a multi-language site**: install the [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) plugin and learn how to serve your content in multiple languages.
 - **Use the Turbo Router**: replace `{% framework extras %}` with `{% framework turbo %}` in your layout to get instant page transitions that make your site feel like a single-page app.
