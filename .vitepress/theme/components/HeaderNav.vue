@@ -62,20 +62,23 @@ export default {
             return isExternal(link);
         },
         isActive (item) {
-            return this.findActiveItem(this.$route.path) === item.prefix;
+            return this.findActiveItem(this.$route.path) === item;
         },
         findActiveItem(path) {
-            let result = this.items
-                .map(a => a.prefix)
-                .sort((a, b) => b.length - a.length)
-            ;
+            // An item's prefix can be a list, the longest matching prefix wins
+            let result = null;
+            let resultLength = -1;
 
-            for (var key in result) {
-                if (path.startsWith(result[key])) {
-                    return result[key];
+            for (const item of this.items) {
+                for (const prefix of [].concat(item.prefix)) {
+                    if (path.startsWith(prefix) && prefix.length > resultLength) {
+                        result = item;
+                        resultLength = prefix.length;
+                    }
                 }
             }
-            return null;
+
+            return result;
         }
     },
 };

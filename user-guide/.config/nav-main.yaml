@@ -1,99 +1,28 @@
 #
-# Tutorial Nav: Creating a Blog
+# Getting Set Up (the introduction and backend folders of the Quick Start)
 #
-"/blog/":
+"/quickstart/introduction/": &getting-set-up
 -
-    title: Creating a Blog
+    title: Getting Set Up
     collapsable: false
     children:
-        - introduction
-        - blog-blueprint
-        - listing-page
-        - detail-page
-        - categories
-        - tags
-        - comments
-        - rss-feed
-
-#
-# Tutorial Nav: Creating a Forum
-#
-"/forum/":
--
-    title: Creating a Forum
-    collapsable: false
-    children:
-        - introduction
--
-    title: "Part 1: User Authentication"
-    collapsable: false
-    children:
-        - installing-the-user-plugin
-        - login-and-registration
-        - password-reset
--
-    title: "Part 2: The Forum"
-    collapsable: false
-    children:
-        - installing-the-forum-plugin
-        - forum-pages
-        - topic-page
-        - member-profile
-
-#
-# Tutorial Nav: Creating a Helpdesk
-#
-"/helpdesk/":
--
-    title: Creating a Helpdesk
-    collapsable: false
-    children:
-        - introduction
-        - installing-the-plugin
-        - ticket-list
-        - submit-ticket
-        - ticket-page
-        - editing-messages
-
-#
-# Tutorial Nav: Creating a Mailing List
-#
-"/mailing-list/":
--
-    title: Creating a Mailing List
-    collapsable: false
-    children:
-        - introduction
-        - installing-the-plugin
-        - signup-form
-        - sending-campaigns
-        - customizing-the-template
-        - dynamic-campaigns
-
-#
-# Quick Start Guide
-#
-"/quickstart/":
--
-    title: Introduction
-    collapsable: false
-    children:
-        - introduction/welcome
--
-    title: Setting Up Your Environment
-    collapsable: false
-    children:
-        - introduction/terminal
-        - introduction/text-editor
-        - introduction/install-october-cms
+        - /user-guide/quickstart/introduction/welcome
+        - /user-guide/quickstart/introduction/install-october-cms
 -
     title: The Backend Panel
     collapsable: false
     children:
-        - backend/backend-tour
-        - backend/dashboard
-        - backend/managing-admins
-        - backend/system-updates
+        - /user-guide/quickstart/backend/backend-tour
+        - /user-guide/quickstart/backend/dashboard
+        - /user-guide/quickstart/backend/managing-admins
+        - /user-guide/quickstart/backend/system-updates
+
+"/quickstart/backend/": *getting-set-up
+
+#
+# Creating a Theme (the rest of the Quick Start)
+#
+"/quickstart/":
 -
     title: The Editor
     collapsable: false
@@ -126,3 +55,28 @@
         - deployment/preparing-for-production
         - deployment/deploying-your-site
         - deployment/what-next
+
+#
+# Tutorial Nav: Creating a Forum
+#
+"/forum/":
+-
+    title: Creating a Forum
+    collapsable: false
+    children:
+        - introduction
+-
+    title: "Part 1: User Authentication"
+    collapsable: false
+    children:
+        - installing-the-user-plugin
+        - login-and-registration
+        - password-reset
+-
+    title: "Part 2: The Forum"
+    collapsable: false
+    children:
+        - installing-the-forum-plugin
+        - forum-pages
+        - topic-page
+        - member-profile

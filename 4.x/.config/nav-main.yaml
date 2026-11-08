@@ -395,8 +395,7 @@
     children:
         - resources/updating-october
         - resources/installing-packages
-        - resources/development-workflow
-        - resources/migrate-laravel-project
+        - ['https://octobercms.com/support/articles/tutorials', 'Tutorials']
 -
     title: Tools
     collapsable: false

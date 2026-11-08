@@ -35,13 +35,9 @@ Websites are simple by nature, and building them should be too. You own your cod
 
 ## Getting Started
 
-The next few pages will get you set up and building:
+The next page will get you set up: **[Install October CMS](./install-october-cms.md)** covers getting October CMS running using the Wizard Installer or Composer. If you are new to the command line or need a code editor, read [Terminal Basics](https://octobercms.com/support/article/terminal-basics-for-october-cms) and [Choosing a Text Editor](https://octobercms.com/support/article/choosing-a-text-editor-for-october-cms) first.
 
-- **[Terminal Basics](./terminal.md)**: a quick introduction to the command line. Skip ahead if you are already comfortable.
-- **[Text Editor](./text-editor.md)**: setting up VS Code with the October Code extension.
-- **[Install October CMS](./install-october-cms.md)**: getting October CMS running using the Wizard Installer, DDEV, or Composer.
-
-After that, we will tour the backend panel, create your first page, and start building real features.
+After that, we will tour the backend panel, then create a theme with your first page and start building real features.
 
 ::: tip
 The [October CMS community](https://talk.octobercms.com) and [Discord server](https://discord.gg/jNaFhfz6FX) are great places to ask questions and connect with other developers.

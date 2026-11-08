@@ -192,19 +192,13 @@ LINK_POLICY=force
 
 ### Using Cloudflare
 
-Cloudflare [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/) rewrites script tags to defer their execution, which breaks the script loading order the backend panel relies on. The symptoms are hard to trace because no errors appear in the browser console. For example, the navigation menu stops responding after you open a page, list rows ignore hover and click events, or the page only works again after a popup opens and closes.
-
-The recommended solution is the [Cloudflare plugin](https://octobercms.com/plugin/rainlab-cloudflare). It adds the `data-cfasync="false"` attribute to every backend script tag so Rocket Loader leaves them alone. The plugin also registers the Cloudflare network as trusted proxies, so the HTTPS protocol and visitor IP address are detected correctly.
+When the site is served through Cloudflare, install the [Cloudflare plugin](https://octobercms.com/plugin/rainlab-cloudflare). It registers the Cloudflare network as trusted proxies, so the HTTPS protocol and visitor IP address are detected correctly, and stops Cloudflare Rocket Loader from breaking the backend panel scripts.
 
 ```bash
 php artisan plugin:install RainLab.Cloudflare
 ```
 
-Alternatively, disable Rocket Loader in the Cloudflare dashboard, either for the entire site or with a configuration rule that targets the backend path (`/admin` by default).
-
-::: tip
-The plugin only protects the backend by default, so Rocket Loader can continue optimizing theme scripts. If your theme or the AJAX framework is affected on the frontend, set `CLOUDFLARE_IGNORE_FRONTEND_SCRIPTS=true` in the `.env` file.
-:::
+If the backend navigation or list rows stop responding behind Cloudflare, see [this article](https://octobercms.com/support/article/backend-navigation-stops-responding-behind-cloudflare) for the cause and other solutions.
 
 ## Restricting Trusted Hosts
 

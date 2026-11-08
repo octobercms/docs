@@ -20,49 +20,19 @@ When the wizard finishes, your site is ready. Visit the URL to see the frontend,
 You can proceed without a license key to explore October CMS locally. To unlock updates and marketplace access, create an account at [octobercms.com](https://octobercms.com) and add a license key later.
 :::
 
-## DDEV
+## Using Composer
 
-[DDEV](https://ddev.com/) is a Docker-based local development tool that handles PHP, the database, and the web server in an isolated container. Install [Docker](https://www.docker.com/get-started/) and [DDEV](https://ddev.readthedocs.io/en/stable/) first, then run:
+If you already have PHP and Composer set up on your machine, you can install October CMS from the command line. See the [Installation guide](../../../4.x/setup/installation.md) in the developer documentation.
 
-```bash
-mkdir my-october-site && cd my-october-site
-```
+## Local Development Environments
 
-Configure DDEV for a Laravel project:
+If you would rather not install PHP and a database on your computer yourself, these tutorials set up a local environment that runs October CMS for you:
 
-```bash
-ddev config --project-type=laravel --webserver-type=apache-fpm
-```
+- [Installing October CMS with DDEV](https://octobercms.com/support/article/installing-october-cms-with-ddev), a Docker-based environment.
+- [Installing October CMS with Laravel Sail](https://octobercms.com/support/article/installing-october-cms-with-laravel-sail), the Docker-based environment from Laravel.
+- [Installing October CMS with Laragon](https://octobercms.com/support/article/installing-october-cms-with-laragon), a local environment for Windows.
 
-Start the environment:
-
-```bash
-ddev start
-```
-
-Install October CMS:
-
-```bash
-ddev composer create-project october/october
-```
-
-Run the installer:
-
-```bash
-ddev artisan october:install --no-interaction
-```
-
-Open your site in the browser:
-
-```bash
-ddev launch
-```
-
-Your site is now running. Add `/admin` to the URL to access the admin panel and create your first administrator account.
-
-## Using Composer Directly?
-
-If you already have PHP and Composer set up on your machine, you can install October CMS from the command line without DDEV. See the [Installation guide](../../../4.x/setup/installation.md) in the developer documentation.
+When you are done, come back here to log into the backend.
 
 ## Log Into the Backend
 

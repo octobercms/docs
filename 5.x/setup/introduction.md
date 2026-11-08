@@ -34,5 +34,5 @@ There are two main ways to work with October CMS. Many projects use both, but it
 ## Before You Start
 
 - [Install October CMS](./installation.md) and [configure](./configuration.md) your environment.
-- Learn by building in the [User Guide](/user-guide/quickstart/introduction/welcome.html), which walks through complete projects such as a blog and a forum.
+- Learn by building in the [User Guide](/user-guide/quickstart/introduction/welcome.html), which walks through getting set up, creating a theme and building a forum. More step-by-step tutorials are in the [Knowledge Base](https://octobercms.com/support/articles/tutorials).
 - Look up field types, Twig tags and other definitions in the [API Handbook](../handbook/).

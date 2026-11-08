@@ -148,39 +148,7 @@ Lang::set('I love programming.', 'Le codage est le meilleur!', 'fr');
 
 ## Contributing Translations to October CMS
 
-October CMS uses a service called Crowdin to manage translations for popular languages, and Google's translation API to machine translate all other languages. If you find a missing or incorrect translation in October CMS, follow the instructions below.
-
-### Using Crowdin
-
-Check whether your language is supported on the Crowdin project page. Crowdin lets you contribute translations through a streamlined interface.
-
-- [October CMS Crowdin Project Page](https://crowdin.com/project/octobercms)
-
-If your language is not listed there, follow the GitHub instructions below. A language is added to Crowdin when it becomes more active on GitHub.
-
-### Using GitHub
-
-You can suggest updates for your language with a pull request to the [repository on GitHub](https://github.com/octobercms/october/tree/develop/modules). The language files are spread across the modules, so you may need to check several files to find the right string. In this example, you update the Dutch language, using the `nl` language code, for a string in the Tailor module.
-
-1. Open the [GitHub repository](https://github.com/octobercms/october/tree/develop/modules).
-2. Click **tailor**, then **lang** to open the language directory for Tailor.
-3. Click the **nl.json** file to open the language file for Dutch.
-4. At the top right, click the pencil icon to **Edit this file**.
-
-The file shows the English text on the left side and the Dutch text on the right side.
-
-```json
-{
-  "Manage Entries": "Invoer beheren",
-  "Create :name Entry": "Maak :name invoer"
-}
-```
-
-Only change the right side, which holds the translated value. Leave variables such as `:name` intact. When you are done, click **Commit changes** to submit a new pull request. The team reviews it and includes it in a later release.
-
-::: tip
-If you cannot find the language key, or it does not exist, [contact us for assistance](https://octobercms.com/contact).
-:::
+October CMS uses a service called Crowdin to manage translations for popular languages, and accepts pull requests on GitHub for all other languages. If you find a missing or incorrect translation in October CMS, the [Contributing Translations to October CMS](https://octobercms.com/support/article/contributing-translations-to-october-cms) article explains how to submit a fix.
 
 #### See Also
 

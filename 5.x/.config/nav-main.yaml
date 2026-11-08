@@ -30,12 +30,11 @@
     title: Workflow & Tools
     collapsable: false
     children:
-        - development-workflow
         - installing-packages
         - console-commands
         - debugbar
         - ai-boost
-        - migrate-laravel-project
+        - ['https://octobercms.com/support/articles/tutorials', 'Tutorials']
         - ['https://octobercms.com/docker-dev-image', 'Development Docker Image']
 
 #

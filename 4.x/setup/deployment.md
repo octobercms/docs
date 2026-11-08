@@ -28,14 +28,11 @@ php artisan project:set <license key>
 
 ## Deploying without Composer
 
-If you don't have SSH access to the server or can't run Composer commands for any reason, there is an option to deploy an October CMS project using the official <LinkWithIcon text="Deploy Plugin" icon="https://d2f5cg397c40hu.cloudfront.net/storage/app/uploads/public/optimized/local/c99/b52/eb1c99b52eb1dde393bb7ef60e4c861b062.png" href="https://octobercms.com/plugin/rainlab-deploy"/>.
-
-<VideoBlockLink src="https://www.youtube.com/watch?v=Lx9X3CfXwfw" title="Deploy Tutorial" description="This video describes how to deploy your project to a remote server without Composer." prompt="Watch the tutorial"/>
-
-This Deploy plugin uses a local installation of October CMS to run composer commands on your own computer. The locally generated files are deployed to your server based on this installation. From there, October CMS has a one-click updater that can be used to update the installation directly on the server. If the one-click update fails, the deploy plugin can be used to repair an installation without command line access.
+If you don't have SSH access to the server or can't run Composer commands for any reason, you can deploy the project using the official [Deploy plugin](https://octobercms.com/plugin/rainlab-deploy). The [Deploying October CMS with the Deploy Plugin](https://octobercms.com/support/article/deploying-october-cms-with-the-deploy-plugin) tutorial walks through the process.
 
 #### See Also
 
 ::: also
 * [Production Configuration](../setup/configuration.md)
+* [Managing Projects with Git](https://octobercms.com/support/article/managing-october-cms-projects-with-git)
 :::

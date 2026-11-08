@@ -191,6 +191,6 @@ php artisan theme:remove rainlab-vanilla
 
 ::: also
 * [Console Commands](./console-commands.md)
-* [Development Workflow](./development-workflow.md)
+* [Managing Projects with Git](https://octobercms.com/support/article/managing-october-cms-projects-with-git)
 * [Child Themes](../themes/child-themes.md)
 :::

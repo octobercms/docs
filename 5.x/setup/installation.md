@@ -1,6 +1,6 @@
 ---
 previousPath: setup/installation.md
-subtitle: Install October CMS with Composer, DDEV or the wizard and sign in to the backend panel for the first time.
+subtitle: Install October CMS with Composer or the wizard and sign in to the backend panel for the first time.
 ---
 # Installation
 
@@ -47,7 +47,7 @@ You also need a [License Key](https://octobercms.com/help/site/projects#project-
 ## Installing with Composer
 
 ::: aside
-Configure a virtual host on your web server that points to the installation directory. For local development you can use [DDEV](#installing-with-ddev), [Valet](https://laravel.com/docs/valet), [Laragon](https://laragon.org/) or the built-in Laravel development server.
+Configure a virtual host on your web server that points to the installation directory. For local development you can use [DDEV, Laravel Sail or Laragon](#local-development-environments), [Valet](https://laravel.com/docs/valet) or the built-in Laravel development server.
 :::
 
 October CMS uses [Composer](http://getcomposer.org/) to manage its dependencies, so make sure Composer is installed first.
@@ -86,49 +86,13 @@ php artisan serve
 If you are installing on a production web server, review the recommendations in [Production Configuration](./configuration.md#production-configuration).
 :::
 
-## Installing with DDEV
+## Local Development Environments
 
-::: aside
-The web server runs inside a container, so you call commands with `ddev artisan` and `ddev composer` instead of `php artisan` and `composer`.
-:::
+These tutorials set up a local development environment for October CMS, including the web server, PHP and database.
 
-[DDEV](https://ddev.com/) is a Docker-based tool that provides the web server, PHP and database for a local development environment. Use it when you don't want to install PHP and Composer on your operating system. Install [Docker](https://www.docker.com/get-started/) and [DDEV](https://ddev.readthedocs.io/en/stable/users/install/) before you begin.
-
-Create a directory for the project and enter it. The directory name becomes the project name and local site address.
-
-```bash
-mkdir myoctober && cd myoctober
-```
-
-Configure the environment with the Laravel project type, which October CMS is compatible with.
-
-```bash
-ddev config --project-type=laravel --webserver-type=apache-fpm
-```
-
-Start the containers. The first run may take a few minutes while the images download.
-
-```bash
-ddev start
-```
-
-Install October CMS in the project directory.
-
-```bash
-ddev composer create-project october/october ./
-```
-
-Run the installation command.
-
-```bash
-ddev artisan october:install --no-interaction
-```
-
-Open the website in a browser.
-
-```bash
-ddev launch
-```
+- [Installing October CMS with DDEV](https://octobercms.com/support/article/installing-october-cms-with-ddev), a Docker-based environment that doesn't need PHP or Composer on your operating system.
+- [Installing October CMS with Laravel Sail](https://octobercms.com/support/article/installing-october-cms-with-laravel-sail), the Docker-based environment from Laravel.
+- [Installing October CMS with Laragon](https://octobercms.com/support/article/installing-october-cms-with-laragon), a local environment for Windows.
 
 ## Installing with the Wizard
 
@@ -147,55 +111,23 @@ The wizard installs October CMS from your browser, without Composer or the comma
 
 ## Troubleshooting Installation
 
-These are the most common issues during or after installation.
+These articles explain how to resolve the most common issues during or after installation.
 
-::: details The installation freezes after entering the license key
-This can happen in some environments when you paste the license key. Press the ENTER key several times to let the installation continue.
-:::
+- [Installation freezes after entering the license key](https://octobercms.com/support/article/installation-freezes-after-entering-the-license-key)
+- [cURL error 60: unable to get local issuer certificate](https://octobercms.com/support/article/curl-error-60-unable-to-get-local-issuer-certificate)
+- [Specified key was too long; max key length is 767 bytes](https://octobercms.com/support/article/specified-key-was-too-long-max-key-length-767-bytes)
+- [Blank screen when opening the application](https://octobercms.com/support/article/blank-screen-when-opening-the-application)
+- [Invalid security token error when logging in](https://octobercms.com/support/article/invalid-security-token-error-when-logging-in)
+- [Backend panel displays "Page not found" (404)](https://octobercms.com/support/article/backend-panel-displays-page-not-found-404)
+- [Error 500 when updating the application](https://octobercms.com/support/article/error-500-when-updating-the-application)
+- [Zend OPcache API is restricted by "restrict_api" configuration directive](https://octobercms.com/support/article/zend-opcache-api-is-restricted-by-restrict-api)
+- [Composer error: Invalid credentials (HTTP 403)](https://octobercms.com/support/article/composer-error-invalid-credentials-http-403)
 
-::: details An error "Unable to get local issuer certificate" is displayed during installation
-The complete error may read `cURL error 60: SSL certificate problem: unable to get local issuer certificate`.
-
-Download [this certificate file](https://curl.se/ca/cacert.pem) and save it as `cacert.pem`. Open your **php.ini** file and insert or edit the following line. You may need to restart Apache for the change to take effect.
-```
-curl.cainfo = "/path/to/cacert.pem"
-```
-:::
-
-::: details An error "Specified key was too long" is displayed during migration
-The complete error may read `SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes`
-
-This can happen with older versions of MySQL or MariaDB. [Configure the index lengths](./database.md#oc-index-lengths-using-mysql-mariadb) to support the utf8mb4 character set.
-:::
-
-::: details A blank screen is displayed when opening the application
-Check that the permissions are set correctly on the **storage** directory, its subdirectories and files. The web server must be able to write to them.
-:::
-
-::: details Invalid security token error when logging in
-Check that no subdirectories are missing from the **storage/framework** path. It must contain the **sessions**, **cache** and **views** directories.
-:::
-
-::: details The backend panel displays "Page not found" (404)
-If the application cannot find the database, the backend shows a 404 page. Enable [debug mode](./configuration.md#debug-mode) to see the underlying error message.
-:::
-
-::: details An error 500 is displayed when updating the application
-Increase or disable the request timeout on the web server. For example, Apache's FastCGI sometimes has the `-idle-timeout` option set to 30 seconds.
-:::
-
-::: details Zend OPcache API is restricted by "restrict_api" configuration directive
-This issue can appear when October CMS tries to use the OPcache internals. Set the **force_bytecode_invalidation** configuration to `false` in the **config/cms.php** file to stop it.
-:::
-
-::: details Invalid credentials (HTTP 403) for '...', aborting.
-Composer shows this error when the **auth.json** file is missing on your server or your project license has expired. Log in to your account and check that the project has an active license. If the license is active, reset it with the `project:set` artisan command.
-:::
+More solutions are listed under [Known Errors](https://octobercms.com/support/articles/known-errors) in the Knowledge Base.
 
 #### See Also
 
 ::: also
 * [Production Configuration](./configuration.md#production-configuration)
 * [Web Server Configuration](./web-server.md)
-* [DDEV Documentation](https://ddev.readthedocs.io/en/stable/)
 :::

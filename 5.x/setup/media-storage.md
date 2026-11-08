@@ -49,47 +49,7 @@ To use Amazon S3, install the Flysystem S3 package first.
 composer require league/flysystem-aws-s3-v3 "^3.0"
 ```
 
-Then create an S3 bucket, a folder in the bucket and an API user, and update the disk configuration.
-
-### Creating a Public Bucket
-
-Sign up for an Amazon AWS account, or sign in to the AWS Console with your existing account, and open the S3 management panel. Create a new bucket with any name. The bucket name becomes part of your public file URLs.
-
-By default, files in S3 buckets cannot be accessed directly. To make the bucket public, open the bucket's permissions and edit its bucket policy. Paste the following code, replacing `BUCKETNAME` with your bucket name:
-
-```json
-{
-    "Version": "2008-10-17",
-    "Id": "Policy1397632521960",
-    "Statement": [
-        {
-            "Sid": "Stmt1397633323327",
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "*"
-            },
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::BUCKETNAME/*"
-        }
-    ]
-}
-```
-
-::: tip
-New S3 buckets block public access by default. Turn off the block public access settings for the bucket before you save a public bucket policy.
-:::
-
-Save the policy. It gives public read-only access to every folder in the bucket. If you use the bucket for other things too, you can make only a specific folder public by naming it in the **Resource** value:
-
-```
-"arn:aws:s3:::BUCKETNAME/media/*"
-```
-
-### Creating an API User
-
-October CMS needs an API user to manage the bucket files. In the AWS Console, go to the IAM section and create a new user with any name. Create an access key for the user, then copy the **Access Key ID** and **Secret Access Key** somewhere safe.
-
-Attach the **AmazonS3FullAccess** policy to the user.
+Then create an S3 bucket, a folder in the bucket and an API user, and update the disk configuration. The [Storing October CMS Media on Amazon S3](https://octobercms.com/support/article/storing-october-cms-media-on-amazon-s3) tutorial walks through creating the bucket and API user in the AWS Console.
 
 ### Configuring the Media Disk
 
@@ -101,7 +61,7 @@ Parameter | Value
 **key** | the **Access Key ID** of the user you created.
 **secret** | the **Secret Access Key** of the user you created.
 **bucket** | your bucket name.
-**region** | the bucket region code, such as `us-west-2` for US West (Oregon). Find the code for your bucket's region in the [AWS documentation](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region).
+**region** | the bucket region code, such as `us-west-2` for US West (Oregon). Find the code for your bucket's region in the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_region).
 **url** | the public URL of the folder in the bucket. To find it, upload any file to the folder, open the file in the S3 console, and copy its URL without the file name and trailing slash.
 
 Example configuration:
@@ -123,7 +83,7 @@ Example configuration:
 ]
 ```
 
-Save the **config/filesystems.php** file and October CMS starts using Amazon S3 for media. You can also put the Amazon CloudFront CDN in front of your bucket, as described in the [CloudFront documentation](http://aws.amazon.com/cloudfront/). After you configure CloudFront, update the **url** parameter in the disk configuration.
+Save the **config/filesystems.php** file and October CMS starts using Amazon S3 for media. You can also put the Amazon CloudFront CDN in front of your bucket, as described in the [CloudFront documentation](https://aws.amazon.com/cloudfront/). After you configure CloudFront, update the **url** parameter in the disk configuration.
 
 ::: tip
 The most common issue with remote services is an SSL connection problem. If you get SSL errors, make sure your server has up-to-date SSL certificates from the public Certificate Authorities (CA).
