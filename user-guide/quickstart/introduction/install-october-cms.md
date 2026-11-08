@@ -20,9 +20,34 @@ When the wizard finishes, your site is ready. Visit the URL to see the frontend,
 You can proceed without a license key to explore October CMS locally. To unlock updates and marketplace access, create an account at [octobercms.com](https://octobercms.com) and add a license key later.
 :::
 
-## Using Composer
+## Composer
 
-If you already have PHP and Composer set up on your machine, you can install October CMS from the command line. See the [Installation guide](../../../4.x/setup/installation.md) in the developer documentation.
+If you have PHP and [Composer](https://getcomposer.org/) on your computer, you can install October CMS from the terminal. You will need your [license key](https://octobercms.com/help/site/projects#project-id) to complete the installation, and your computer should meet the [system requirements](../../../4.x/setup/installation.md#minimum-system-requirements).
+
+Create a new project in a directory called *myoctober*:
+
+```bash
+composer create-project october/october myoctober
+```
+
+Enter the project directory and run the installer. It asks for your language, application URL, backend URL, database connection, whether to install the demo theme, and your license key.
+
+```bash
+cd myoctober
+php artisan october:install
+```
+
+When the installer finishes, create the database tables:
+
+```bash
+php artisan october:migrate
+```
+
+If you don't have a web server set up, start the built-in one and open the address it shows in your browser:
+
+```bash
+php artisan serve
+```
 
 ## Local Development Environments
 
@@ -42,7 +67,7 @@ Regardless of which method you used, the backend is where you manage your websit
 http://your-site-url/admin
 ```
 
-Enter your administrator credentials to access the dashboard, your site's control center.
+Enter your administrator credentials to access the dashboard, your site's control center. If you installed with Composer, the first visit asks you to create the administrator account.
 
 ## Next Steps
 
