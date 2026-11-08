@@ -1,0 +1,18 @@
+import{_ as l,r as s,o,c as p,e,a as c,s as r}from"./chunks/framework.CXcwiNg-.js";const v=JSON.parse('{"title":"Image 列 - October CMS - 3.x","titleTemplate":false,"description":"列表列","frontmatter":{"subtitle":"列表列","shortname":"Image"},"headers":[{"level":4,"title":"另请参阅","slug":"另请参阅","link":"#另请参阅","children":[]}],"relativePath":"3.x/zh-cn/element/lists/column-image.md","filePath":"3.x/zh-cn/element/lists/column-image.md"}'),d={name:"3.x/zh-cn/element/lists/column-image.md"};function i(u,a,k,m,g,h){const n=s("pre-heading"),t=s("post-heading");return o(),p("div",null,[e(n),a[0]||(a[0]=c("h1",null,"Image 列",-1)),e(t),a[1]||(a[1]=r(`<p><code>image</code> 列显示图片列，并提供调整输出大小的选项。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">avatar</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Avatar
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> image
+</code></pre></div><p>支持以下属性。</p><div class="table"><table tabindex="0"><thead><tr><th>属性</th><th>描述</th></tr></thead><tbody><tr><td><strong>sortable</strong></td><td>禁用列排序。默认值：<code>false</code></td></tr><tr><td><strong>width</strong></td><td>要使用的图片缩略图宽度，可选。</td></tr><tr><td><strong>height</strong></td><td>要使用的图片缩略图高度，可选。</td></tr><tr><td><strong>options</strong></td><td><a href="./../../extend/services/resizer.html">图片调整大小</a>选项。</td></tr><tr><td><strong>limit</strong></td><td>显示的最大图片数量。默认值：<code>3</code></td></tr></tbody></table></div><p>使用 <code>sortable</code> 属性禁用排序。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">avatar</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Avatar
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> image
+    <span class="token key atrule">sortable</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+</code></pre></div><p>使用 <code>width</code> 和 <code>height</code> 属性指定自定义图片大小。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">avatar</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Avatar
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> image
+    <span class="token key atrule">width</span><span class="token punctuation">:</span> <span class="token number">150</span>
+    <span class="token key atrule">height</span><span class="token punctuation">:</span> <span class="token number">150</span>
+</code></pre></div><p>使用 <code>options</code> 属性指定调整大小选项。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">avatar</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Avatar
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> image
+    <span class="token key atrule">options</span><span class="token punctuation">:</span>
+        <span class="token key atrule">quality</span><span class="token punctuation">:</span> <span class="token number">80</span>
+</code></pre></div><p>有关支持的选项的更多信息，请参阅<a href="./../../extend/services/resizer.html">图片调整大小文章</a>。</p><h4 id="另请参阅"><a href="#另请参阅" class="header-anchor">#</a> 另请参阅</h4><div class="custom-block also"><ul><li><a href="./../../extend/services/resizer.html">图片调整大小</a></li></ul></div>`,13))])}const _=l(d,[["render",i]]);export{v as __pageData,_ as default};

@@ -1,0 +1,28 @@
+import{_ as l,r as a,o as c,c as p,e as s,a as o,s as i}from"./chunks/framework.CXcwiNg-.js";const _=JSON.parse('{"title":"Date & Time 列 - October CMS - 3.x","titleTemplate":false,"description":"列表列","frontmatter":{"subtitle":"列表列","shortname":"Date & Time"},"headers":[{"level":2,"title":"Date","slug":"date","link":"#date","children":[]},{"level":2,"title":"Time","slug":"time","link":"#time","children":[]},{"level":2,"title":"Time Since","slug":"time-since","link":"#time-since","children":[]},{"level":2,"title":"Time Tense","slug":"time-tense","link":"#time-tense","children":[]}],"relativePath":"3.x/zh-cn/element/lists/column-datetime.md","filePath":"3.x/zh-cn/element/lists/column-datetime.md"}'),u={name:"3.x/zh-cn/element/lists/column-datetime.md"};function r(d,e,k,m,g,y){const n=a("pre-heading"),t=a("post-heading");return c(),p("div",null,[s(n),e[0]||(e[0]=o("h1",null,"Date & Time 列",-1)),s(t),e[1]||(e[1]=i(`<p><code>datetime</code> - 将列值显示为格式化的日期和时间。下面的示例将日期显示为 <strong>Thu, Dec 25, 1975 2:15 PM</strong>。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">created_at</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Date
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> datetime
+</code></pre></div><p>您也可以指定自定义日期格式，例如 <strong>Thursday 25th of December 1975 02:15:16 PM</strong>。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">created_at</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Date
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> datetime
+    <span class="token key atrule">format</span><span class="token punctuation">:</span> l jS \\of F Y h<span class="token punctuation">:</span>i<span class="token punctuation">:</span>s A
+</code></pre></div><p>显示值会自动转换为后端时区偏好，您可以使用 <code>useTimezone</code> 选项禁用此功能。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">created_at</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Date
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> datetime
+    <span class="token key atrule">useTimezone</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+</code></pre></div><div class="custom-block tip"><p><code>useTimezone</code> 选项也适用于其他与日期和时间相关的字段类型，包括 <code>date</code>、<code>time</code>、<code>timesince</code> 和 <code>timetense</code>。</p></div><h2 id="date"><a href="#date" class="header-anchor">#</a> Date</h2><p><code>date</code> - 以日期格式 <strong>M j, Y</strong> 显示列值。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">created_at</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Date
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> date
+</code></pre></div><p>默认情况下，此值不会应用后端时区偏好。如果日期包含时间，您可以使用 <code>useTimezone</code> 选项转换时区。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">created_at</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Date
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> date
+    <span class="token key atrule">useTimezone</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+</code></pre></div><div class="custom-block tip"><p><code>date</code> 和 <code>time</code> 列默认不应用后端时区转换，因为转换需要同时具有日期和时间。</p></div><h2 id="time"><a href="#time" class="header-anchor">#</a> Time</h2><p><code>time</code> - 以时间格式 <strong>g:i A</strong> 显示列值。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">created_at</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Date
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> time
+</code></pre></div><h2 id="time-since"><a href="#time-since" class="header-anchor">#</a> Time Since</h2><p><code>timesince</code> - 显示从值到当前时间的人类可读时间差。例如：<strong>10 minutes ago</strong></p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">created_at</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Date
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> timesince
+</code></pre></div><h2 id="time-tense"><a href="#time-tense" class="header-anchor">#</a> Time Tense</h2><p><code>timetense</code> - 使用当前日期的语法时态显示 24 小时制时间和日期。例如：<strong>Today at 12:49</strong>、<strong>Yesterday at 4:00</strong> 或 <strong>18 Sep 2015 at 14:33</strong>。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">created_at</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Date
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> timetense
+</code></pre></div>`,22))])}const v=l(u,[["render",r]]);export{_ as __pageData,v as default};

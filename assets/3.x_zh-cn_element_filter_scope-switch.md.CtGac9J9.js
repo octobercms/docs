@@ -1,0 +1,11 @@
+import{_ as o,r as t,o as p,c,e as a,a as l,s as d}from"./chunks/framework.CXcwiNg-.js";const y=JSON.parse('{"title":"Switch 范围 - October CMS - 3.x","titleTemplate":false,"description":"过滤器范围","frontmatter":{"subtitle":"过滤器范围","shortname":"Switch"},"headers":[],"relativePath":"3.x/zh-cn/element/filter/scope-switch.md","filePath":"3.x/zh-cn/element/filter/scope-switch.md"}'),r={name:"3.x/zh-cn/element/filter/scope-switch.md"};function i(u,e,k,_,h,m){const s=t("pre-heading"),n=t("post-heading");return p(),c("div",null,[a(s),e[0]||(e[0]=l("h1",null,"Switch 范围",-1)),a(n),e[1]||(e[1]=d(`<p><code>switch</code> - 用作开关在列表的两个预定义条件或查询之间切换，可选不确定、开启或关闭。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">is_approved</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Approved
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> switch
+    <span class="token key atrule">conditions</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> is_approved &lt;<span class="token punctuation">&gt;</span> true
+        <span class="token punctuation">-</span> is_approved = true
+</code></pre></div><p>以下属性可用于过滤器。</p><div class="table"><table tabindex="0"><thead><tr><th>属性</th><th>描述</th></tr></thead><tbody><tr><td><strong>default</strong></td><td>设置为 <code>1</code> 或 <code>2</code> 使过滤器默认选中。默认值：<code>0</code>。</td></tr><tr><td><strong>select</strong></td><td>一个包含自定义 SQL select 语句的数组，用于过滤器，包含条件不确定时（第一项）和选中时（第二项）的语句。</td></tr></tbody></table></div><p>您可以设置 <code>default</code> 值来设置默认过滤值。使用 <code>0</code> 表示关闭，<code>1</code> 表示不确定，<code>2</code> 表示开启作为默认值。</p><div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">is_approved</span><span class="token punctuation">:</span>
+    <span class="token key atrule">label</span><span class="token punctuation">:</span> Approved
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> switch
+    <span class="token key atrule">default</span><span class="token punctuation">:</span> <span class="token number">1</span>
+</code></pre></div>`,6))])}const f=o(r,[["render",i]]);export{y as __pageData,f as default};

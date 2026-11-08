@@ -1,0 +1,49 @@
+import{_ as p,r as n,o,c,e as a,a as l,s as i}from"./chunks/framework.CXcwiNg-.js";const _=JSON.parse('{"title":"模型设置 - October CMS - 3.x","titleTemplate":false,"description":"","frontmatter":{},"headers":[{"level":2,"title":"数据库设置","slug":"数据库设置","link":"#数据库设置","children":[{"level":3,"title":"模型类定义","slug":"模型类定义","link":"#模型类定义","children":[]}]},{"level":2,"title":"写入设置模型","slug":"写入设置模型","link":"#写入设置模型","children":[]},{"level":2,"title":"从设置模型读取","slug":"从设置模型读取","link":"#从设置模型读取","children":[]},{"level":2,"title":"与多站点集成","slug":"与多站点集成","link":"#与多站点集成","children":[]}],"relativePath":"3.x/zh-cn/extend/settings/model-settings.md","filePath":"3.x/zh-cn/extend/settings/model-settings.md"}'),r={name:"3.x/zh-cn/extend/settings/model-settings.md"};function u(k,s,d,g,m,h){const e=n("pre-heading"),t=n("post-heading");return o(),c("div",null,[a(e),s[0]||(s[0]=l("h1",null,"模型设置",-1)),a(t),s[1]||(s[1]=i(`<p>模型设置将值存储在数据库中，可以通过后台面板的用户界面覆盖。</p><h2 id="数据库设置"><a href="#数据库设置" class="header-anchor">#</a> 数据库设置</h2><p>插件可以使用继承 <code>System\\Models\\SettingModel</code> 基类的模型来实现数据库驱动的配置，将设置存储在数据库中。此模型可以直接用于创建后台设置表单。您不需要创建数据库表和控制器来创建基于设置模型的后台设置表单。模型设置目录结构示例：</p><pre class="dir-container"><code><p>├── plugins
+|   └── acme
+|       └── demo
+|           ├── models
+|           |   ├── usersetting  <em>← 配置目录</em>
+|           |   |   └── fields.yaml  <em>← 表单字段</em>
+|           |   └── <code>UserSetting.php</code>  <em>← 模型类</em>
+|           └── Plugin.php</p>
+</code></pre><p>设置模型可以注册以显示在<a href="./settings.html">后台面板的设置区域</a>中，但这不是必需的——您可以像其他模型一样设置和读取设置值。</p><h3 id="模型类定义"><a href="#模型类定义" class="header-anchor">#</a> 模型类定义</h3><p>设置模型类应继承 <code>System\\Models\\SettingModel</code> 类，并且与其他模型一样，应在插件目录的 <strong>models</strong> 子目录中定义。下面示例中的模型应在 <strong>plugins/acme/demo/models/UserSetting.php</strong> 文件中定义。</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">namespace</span> <span class="token package">Acme<span class="token punctuation">\\</span>Demo<span class="token punctuation">\\</span>Models</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">UserSetting</span> <span class="token keyword">extends</span> <span class="token class-name class-name-fully-qualified"><span class="token punctuation">\\</span>System<span class="token punctuation">\\</span>Models<span class="token punctuation">\\</span>SettingModel</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$settingsCode</span> <span class="token operator">=</span> <span class="token string single-quoted-string">&#39;acme_demo_settings&#39;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token variable">$settingsFields</span> <span class="token operator">=</span> <span class="token string single-quoted-string">&#39;fields.yaml&#39;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>$settingsCode</code> 属性对于设置模型是必需的。它定义了用于将设置保存到数据库的唯一设置键。</p><p>如果您要构建基于模型的后台设置表单，则 <code>$settingsFields</code> 属性是必需的。该属性指定包含表单字段定义的 YAML 文件名。表单字段在<a href="./../forms/form-controller.html">表单控制器文章</a>中有描述。YAML 文件应放置在与小写的模型类名匹配的目录中。</p><h2 id="写入设置模型"><a href="#写入设置模型" class="header-anchor">#</a> 写入设置模型</h2><p>设置模型具有静态 <code>set</code> 方法，允许保存单个或多个值。您还可以使用标准模型功能设置模型属性并保存模型。</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">use</span> <span class="token package">Acme<span class="token punctuation">\\</span>Demo<span class="token punctuation">\\</span>Models<span class="token punctuation">\\</span>UserSetting</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Set a single value</span>
+<span class="token class-name static-context">UserSetting</span><span class="token operator">::</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;api_key&#39;</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">&#39;ABCD&#39;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Set an array of values</span>
+<span class="token class-name static-context">UserSetting</span><span class="token operator">::</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;api_key&#39;</span> <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;ABCD&#39;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Set object values</span>
+<span class="token variable">$settings</span> <span class="token operator">=</span> <span class="token class-name static-context">UserSetting</span><span class="token operator">::</span><span class="token function">instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$settings</span><span class="token operator">-&gt;</span><span class="token property">api_key</span> <span class="token operator">=</span> <span class="token string single-quoted-string">&#39;ABCD&#39;</span><span class="token punctuation">;</span>
+<span class="token variable">$settings</span><span class="token operator">-&gt;</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="从设置模型读取"><a href="#从设置模型读取" class="header-anchor">#</a> 从设置模型读取</h2><p>设置模型具有静态 <code>get</code> 方法，可以加载单个属性。此外，当您使用 <code>instance</code> 方法实例化模型时，它会从数据库加载属性，您可以直接访问它们。</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token comment">// Outputs: ABCD</span>
+<span class="token keyword">echo</span> <span class="token class-name static-context">UserSetting</span><span class="token operator">::</span><span class="token function">instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token property">api_key</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Get a single value</span>
+<span class="token keyword">echo</span> <span class="token class-name static-context">UserSetting</span><span class="token operator">::</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;api_key&#39;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Get a value and return a default value if it doesn&#39;t exist</span>
+<span class="token keyword">echo</span> <span class="token class-name static-context">UserSetting</span><span class="token operator">::</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string single-quoted-string">&#39;is_activated&#39;</span><span class="token punctuation">,</span> <span class="token constant boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="与多站点集成"><a href="#与多站点集成" class="header-anchor">#</a> 与多站点集成</h2><p>设置模型可以为<a href="./../../cms/resources/multisite.html">多站点配置</a>定义的每个站点提供不同的配置值。要启用多站点，请在模型中包含 <code>October\\Rain\\Database\\Traits\\Multisite</code> <a href="./../database/traits.html">Trait</a>，并定义 <code>$propagatable</code> 属性，该属性可以指定在所有站点之间传播的字段。</p><div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">namespace</span> <span class="token package">Acme<span class="token punctuation">\\</span>Demo<span class="token punctuation">\\</span>Models</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">UserSetting</span> <span class="token keyword">extends</span> <span class="token class-name class-name-fully-qualified"><span class="token punctuation">\\</span>System<span class="token punctuation">\\</span>Models<span class="token punctuation">\\</span>SettingModel</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">use</span> <span class="token package"><span class="token punctuation">\\</span>October<span class="token punctuation">\\</span>Rain<span class="token punctuation">\\</span>Database<span class="token punctuation">\\</span>Traits<span class="token punctuation">\\</span>Multisite</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token variable">$settingsCode</span> <span class="token operator">=</span> <span class="token string single-quoted-string">&#39;acme_demo_settings&#39;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token variable">$settingsFields</span> <span class="token operator">=</span> <span class="token string single-quoted-string">&#39;fields.yaml&#39;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">protected</span> <span class="token variable">$propagatable</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>`,19))])}const y=p(r,[["render",u]]);export{_ as __pageData,y as default};
