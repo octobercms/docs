@@ -73,6 +73,7 @@ $HTTP["host"] =~ "domain.example.tld" {
     url.rewrite-once = (
         "^/(plugins|modules/(system|backend|cms))/(([\w-]+/)+|/|)assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
         "^/(system|themes/[\w-]+)/assets/([\w-]+/)+[-\w^&'@{}[\],$=!#().%+~/ ]+\.(jpg|jpeg|gif|png|svg|swf|avi|mpg|mpeg|mp3|flv|ico|css|js|woff|ttf)(\?.*|)$" => "$0",
+        "^/app/(assets|resources)/.*$" => "$0",
         "^/storage/app/uploads/public/[\w-]+/.*$" => "$0",
         "^/storage/app/media/.*$" => "$0",
         "^/storage/app/resources/.*$" => "$0",
