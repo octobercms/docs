@@ -106,8 +106,8 @@ Use the following properties in the dashboard YAML file to set the default date 
 
 Property | Description
 ------------- | -------------
-**defaultStart** | default start date keyword. Supported values: `today`, `week`, `month`, `quarter`, `year`. Default: `month`.
-**defaultEnd** | default end date keyword. Supported values: `today`, `week`, `month`, `quarter`, `year`. Default: `today`.
+**defaultStart** | default start date keyword. Supported values: `today`, `yesterday`, `week`, `last-7-days`, `last-30-days`, `month`, `last-month`, `quarter`, `year`. A period starts on its first day. Default: `month`.
+**defaultEnd** | default end date keyword. Supported values: `today`, `yesterday`, `week`, `month`, `last-month`, `quarter`, `year`. A period ends on its last day. Default: `today`.
 **defaultInterval** | default grouping interval. Supported values: `day`, `week`, `month`, `quarter`, `year`. Default: `day`.
 **defaultCompare** | default comparison mode. Supported values: `none`, `prev-period`, `prev-year`. Default: `none`.
 
