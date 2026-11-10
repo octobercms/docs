@@ -30,7 +30,7 @@ Property | Description
 **optionsPreset** | take options from a [preset list of defined options](../options.md).
 **emptyOption** | text to display when allowing an empty option.
 **showSearch** | allow the user to search options. Default: `true`.
-**attributes** | an associative array of attributes and values to apply to the select field, useful for specifying custom Select2 configuration (see below).
+**attributes** | an associative array of attributes and values to apply to the select field, useful for specifying custom select configuration (see below).
 
 Generally `options` are defined with key-value pair, where the value and label are independently specified.
 
@@ -199,9 +199,27 @@ public function getDetailedFieldOptions()
 }
 ```
 
-## Custom Select2 Configuration
+## Custom Select Configuration
 
-The dropdown field uses the [Select2 control](https://select2.org/) to render the field. In some cases you may wish to specify custom configuration for this field. This is possible using the `attributes` property along with the [data attribute configuration](https://select2.org/configuration/data-attributes) supplied by Select2.
+The dropdown field uses the custom select control, built on [Tom Select](https://tom-select.js.org/), to render the field. In some cases you may wish to specify custom configuration for this field. This is possible using the `attributes` property along with the data attributes below.
+
+Attribute | Description
+------------- | -------------
+**data-handler** | an AJAX handler that returns the options, as a `results` array of `id` and `text` pairs.
+**data-minimum-input-length** | the number of characters to type before the handler runs.
+**data-ajax--delay** | the time to wait after the last key press before asking the handler, in milliseconds.
+**data-preload** | asks the handler for its options when the field takes focus, before anything is typed.
+**data-allow-clear** | shows a button that clears the choice, which a placeholder also does.
+**data-tags** | allows the user to enter values of their own.
+**data-maximum-selection-length** | the maximum number of options a multiple select takes.
+**data-close-on-select** | set to `false` to keep the dropdown open after each pick of a multiple select.
+**data-minimum-results-for-search** | hides the search box below this number of options, `Infinity` to always hide it.
+**data-sortable** | allows the tags of a multiple select to be reordered by dragging.
+**data-checkboxes** | shows a checkbox beside each option of a multiple select.
+**data-dropdown-header** | a title shown atop the dropdown, with a button to close it.
+**data-optgroup-columns** | shows option groups side by side as columns.
+**data-search-fields** | the option fields the search matches, comma separated.
+**data-select-on-tab** | the Tab key picks the highlighted option.
 
 For example, you may fine tune the auto completion behavior of the dropdown.
 
@@ -209,7 +227,6 @@ For example, you may fine tune the auto completion behavior of the dropdown.
 attributes:
     data-handler: onGetClientOptions
     data-minimum-input-length: 3
-    data-process-Results: true
     data-ajax--delay: 300
 ```
 
@@ -226,5 +243,5 @@ categories:
 
 ::: also
 * [Tag List Form Field](./taglist.md)
-* [Select2 Control](https://select2.org/)
+* [Tom Select Control](https://tom-select.js.org/)
 :::

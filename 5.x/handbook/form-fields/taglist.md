@@ -28,6 +28,9 @@ Property | Description
 **optionsMethod** | specifies a method name for predefined options, defined on the model or as a static method, eg `Class::method`. Set to `true` to use model **get*Field*Options** method.
 **useKey** | use the key instead of value for saving and reading data. Default: `true`
 **customTags** | allows custom tags to be entered manually by the user. Default: `false`
+**sortable** | allows the tags to be reordered by dragging, and saves them in that order. Default: `false`
+**tagPattern** | with `customTags`, a regular expression that typed tags must match, eg `^[a-z0-9-]+$`.
+**createOnBlur** | with `customTags`, keeps the typed text as a tag when the field loses focus. Default: `false`
 
 A tag list support the same methods for defining the options as the [dropdown field type](./dropdown.md).
 
