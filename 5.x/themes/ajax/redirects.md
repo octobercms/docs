@@ -91,7 +91,7 @@ The `data-request-redirect` attribute redirects after a successful AJAX request,
 
 ### Going Back to the Previous Page
 
-The `data-browser-redirect-back` attribute sends the visitor back to the previous page in the browser history. Add it to any AJAX request element to override a redirect response. It only applies when there is a previous browser history state.
+A handler that redirects to a page only knows its URL, not the query parameters the visitor had applied to it, such as filters or a page number. The `data-browser-redirect-back` attribute restores them by using the previous URL from the browser history in place of the redirect. For example, when a handler redirects to `/posts`, a visitor who came from `/posts?category=news&page=2` is returned to that URL.
 
 ```html
 <button
@@ -101,7 +101,9 @@ The `data-browser-redirect-back` attribute sends the visitor back to the previou
 </button>
 ```
 
-The attribute also works on hyperlinks when the layout includes the `{% framework extras %}` tag.
+The previous URL is only used when it is the same page as the redirect. Otherwise the redirect is followed as given, as is any redirect with its own query string.
+
+The attribute also works on hyperlinks when the layout includes the `{% framework extras %}` tag. A hyperlink goes to the previous page, whichever page it was, and follows its `href` when there is no previous page.
 
 ```html
 <a

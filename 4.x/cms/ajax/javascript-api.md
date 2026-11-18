@@ -35,7 +35,7 @@ Option | Description
 [browserTarget](https://larajax.org/api/framework#request-options) | when the response is a file download, opens it in this window target, for example `_blank`. Default: `null`
 [bulk](https://larajax.org/api/framework#request-options) | when true, the request be sent as JSON for bulk data transactions. Default: `false`
 [browserValidate](https://larajax.org/api/framework#request-options) | when true, browser-based client side validation will be performed on the request before submitting. Only applies to requests triggered in the context of a `<form>` element.
-[browserRedirectBack](https://larajax.org/api/framework#request-options) | when true and a redirect occurs, if the previous URL from the browser is available, use that in place of the redirect URL provided. Default: `false`.
+[browserRedirectBack](https://larajax.org/api/framework#request-options) | when true and a redirect leads back to the previous page, restores the query string it was left with, such as filters or a page number. Default: `false`.
 [message](https://larajax.org/api/framework#request-options) | displays a progress message with the specified text, shown while the request is running. This option is used by the [flash messages features](../features/flash-messages.md).
 [loading](https://larajax.org/api/framework#request-options) | an optional string or object to be displayed when a request runs. The string should be a CSS selector for an element or the object should support the `show()` and `hide()` functions to manage the visibility.
 [progressBar](https://larajax.org/api/framework#request-options) | enable the [progress bar](../features/loaders.md) when an AJAX request occurs.
