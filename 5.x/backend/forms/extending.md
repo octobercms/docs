@@ -133,7 +133,7 @@ Event::listen('backend.form.beforeSave', function ($controller, $model) {
 
 ## Overriding Controller Redirect
 
-To set the URL to open after the record is saved, override the `formGetRedirectUrl` method. It returns the location to redirect to, and relative URLs are treated as backend URLs.
+To set the URL to open after the record is saved, override the `formGetRedirectUrl` method. It returns the location to redirect to, and relative URLs are treated as backend URLs. The context is the page, such as `create` or `update`, and ends with `-close` or `-new` when the request sends the **close** or **new** variable. Return nothing to keep the configured redirect.
 
 ```php
 public function formGetRedirectUrl($context = null, $model = null)

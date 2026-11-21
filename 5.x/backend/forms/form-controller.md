@@ -109,7 +109,7 @@ A [form design](../../handbook/controller-config/form.md#form-designs) generates
 
 ### Create View
 
-The **create.php** view is the Create page, where users create new records. It contains the form and its buttons. The save button's **data-request** attribute calls the `onSave` AJAX handler provided by the behavior.
+The **create.php** view is the Create page, where users create new records. It contains the form and its buttons. Each save button's **data-request** attribute calls the `onSave` AJAX handler provided by the behavior, and the second button returns to the Create page for [another record](#redirecting-after-saving).
 
 ```php
 <?= Form::open(['class' => 'd-flex flex-column h-100']) ?>
@@ -123,11 +123,19 @@ The **create.php** view is the Create page, where users create new records. It c
             <button
                 type="button"
                 data-request="onSave"
-                data-request-data="{ close: true }"
+                data-request-message="Creating Category..."
+                data-hotkey="ctrl+s, cmd+s"
+                class="btn btn-primary">
+                Save
+            </button>
+            <button
+                type="button"
+                data-request="onSave"
+                data-request-data="{ new: true }"
                 data-request-message="Creating Category..."
                 data-hotkey="ctrl+enter, cmd+enter"
                 class="btn btn-default">
-                Create and Close
+                Save and Create Another
             </button>
             <span class="btn-text">
                 or <a href="<?= Backend::url('acme/blog/categories') ?>">Cancel</a>
@@ -187,6 +195,20 @@ The **preview.php** view is the Preview page, where users view existing records 
     <?= $this->formRenderPreview() ?>
 </div>
 ```
+
+### Redirecting After Saving
+
+After the record is saved, the `onSave` handler redirects to a page set in the [configuration file](../../handbook/controller-config/form.md#create-page). Each save button chooses the page by the variable it sends with `data-request-data`.
+
+Variable | Redirects To
+------------- | -------------
+_none_ | the `redirect` page.
+**close** | the `redirectClose` page, usually the list of records.
+**new** | the `redirectNew` page. This is the Create page unless configured, so another record can be created straight away.
+
+A page without its own `redirect` or `redirectClose` uses the `defaultRedirect` page.
+
+A [form design](../../handbook/controller-config/form.md#form-designs) adds these buttons for you, except in `popup` mode. The Create page shows **Save** and **Save & Create Another**, and the Update page shows **Save** and **Save & Close**.
 
 ### Warning About Unsaved Changes
 

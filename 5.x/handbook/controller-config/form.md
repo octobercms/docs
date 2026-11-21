@@ -60,6 +60,7 @@ Property | Description
 **title** | a page title, can refer to a [localization string](../../backend/localization/backend.md).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and the **close** post variable is sent with the request.
+**redirectNew** | redirection page when record is saved and the **new** post variable is sent with the request. Default: the Create page, keeping its query string.
 **form** | overrides the default form fields definitions for the create page only.
 
 ## Update Page
@@ -79,6 +80,7 @@ Property | Description
 **title** | a page title, can refer to a [localization string](../../backend/localization/backend.md).
 **redirect** | redirection page when record is saved.
 **redirectClose** | redirection page when record is saved and **close** post variable is sent with the request.
+**redirectNew** | redirection page when record is saved and **new** post variable is sent with the request. Default: the Create page.
 **form** | overrides the default form fields definitions for the update page only.
 
 ## Preview Page
@@ -251,7 +253,7 @@ The create view can be opened using the `onLoadPopupForm` AJAX handler in conjun
 
 ### Document Display Mode
 
-The `document` display mode provides a full-height layout with a Vue-powered toolbar that includes **Save**, **Save & Close**, and **Delete** buttons.
+The `document` display mode provides a full-height layout with a Vue-powered toolbar. The toolbar includes **Save** and **Save & Create Another** buttons on the Create page, and **Save**, **Save & Close** and **Delete** buttons on the Update page.
 
 ```yaml
 design:
