@@ -15,8 +15,7 @@ Every person who logs in to the backend is an administrator. Right now you are t
    - **Last Name**: `Editor`
    - **Email**: `editor@example.com`
    - **Username**: `editor`
-   - **Password**: pick something simple for now (this is just a local test).
-5. Leave the **Send invitation by email** checkbox ticked so the new administrator receives their login details.
+5. Leave the **Send invitation by email** checkbox ticked so the new administrator is emailed a link to choose their own password.
 6. Click **Create**.
 
 Your new administrator now appears in the list.

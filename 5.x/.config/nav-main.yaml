@@ -18,6 +18,7 @@
         - database
         - mail
         - media-storage
+        - authentication
 -
     title: Production
     collapsable: false

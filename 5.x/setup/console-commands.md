@@ -63,6 +63,20 @@ php artisan october:passwd username password
 
 For the first argument you may pass either the login name or email address. For the second argument you may optionally pass the desired password, otherwise you will be prompted to enter one.
 
+### Command - `october:twofactor`
+
+The `october:twofactor` command reports whether a backend administrator has [two-factor authentication](./authentication.md#two-factor-authentication) turned on, along with the number of recovery codes they have left. For the argument you may pass either the login name or email address, otherwise you will be prompted to enter one.
+
+```bash
+php artisan october:twofactor username
+```
+
+The `--reset` option turns two-factor off for the administrator and signs them out of every device. This is useful when an administrator has lost both their authenticator app and their recovery codes, since they can then sign in with their password alone and set it up again.
+
+```bash
+php artisan october:twofactor username --reset
+```
+
 ### Command - `october:optimize`
 
 The `october:optimize` will cache the framework and platform files for performance. This caches the configuration, routes and, when the CMS module is installed, the theme files.
