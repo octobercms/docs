@@ -23,5 +23,6 @@ Property | Description
 **comment** | places a descriptive comment below the field.
 **language** | code language, for example, php, css, javascript, html. Default: `php`.
 **showGutter** | shows a gutter with line numbers. Default: `true`.
+**showToolbar** | shows a toolbar above the editor with buttons for undo, redo, find, replace, format code, word wrap and fullscreen. Default: `false`.
 **wordWrap** | breaks long lines on to a new line. Set to `true`, `fluid`, `40` or `80` to wrap at the respective column, or `false` to disable. Default: `fluid`.
 **fontSize** | the text font size. Default: 12.
