@@ -33,6 +33,7 @@ Method | Description
 **registerSettings()** | registers any [backend configuration links](../settings/introduction.md) used by this plugin.
 **registerFormWidgets()** | registers any [backend form widgets](../forms/form-widgets.md) supplied by this plugin.
 **registerFilterWidgets()** | registers any [backend filter widgets](../lists/filter-widgets.md) supplied by this plugin.
+**registerListWidgets()** | registers any [backend list widgets](../lists/list-widgets.md) supplied by this plugin.
 **registerRichEditorToolbars()** | registers any [rich editor toolbar definitions](../../handbook/form-fields/richeditor.md#registering-a-toolbar-definition) supplied by this plugin.
 **registerDashboards()** | registers any [dashboards](../dashboards/dash-controller.md), [report widgets](../dashboards/report-widgets.md) and [data sources](../dashboards/data-sources.md) supplied by this plugin.
 **registerSpotlight()** | registers any [Spotlight commands and record sources](../panel/spotlight.md) supplied by this plugin.

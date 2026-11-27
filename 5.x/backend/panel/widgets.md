@@ -114,5 +114,6 @@ function init()
 * [Backend AJAX](./ajax.md)
 * [Form Widgets](../forms/form-widgets.md)
 * [Filter Widgets](../lists/filter-widgets.md)
+* [List Widgets](../lists/list-widgets.md)
 * [Report Widgets](../dashboards/report-widgets.md)
 :::

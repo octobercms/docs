@@ -308,6 +308,8 @@ columns:
         type: uppercase
 ```
 
+When a column type needs its own options, partials, assets or AJAX handlers, build a [list widget](./list-widgets.md) instead.
+
 ## Extending the List Configuration
 
 To change the list configuration at runtime, override the `listGetConfig` method.
@@ -392,5 +394,6 @@ For example, to change the markup of a list body row, create a file called `list
 * [List Controller](./list-controller.md)
 * [Filtering Records](./filters.md)
 * [Custom Filter Widgets](./filter-widgets.md)
+* [Custom List Widgets](./list-widgets.md)
 * [Extending October CMS](../plugins/extending.md)
 :::

@@ -36,8 +36,11 @@ The following list columns are available:
 [Partial](./list-columns/partial.md)
 [Color Picker](./list-columns/colorpicker.md)
 [Currency](./list-columns/currency.md)
+[Actions](./list-columns/actions.md)
 
 </div>
+
+Plugins can provide their own column types using [list widgets](../backend/lists/list-widgets.md).
 
 ## Column Properties
 

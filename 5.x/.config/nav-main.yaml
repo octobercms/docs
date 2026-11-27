@@ -164,6 +164,7 @@
         - lists/sorting
         - lists/extending
         - lists/filter-widgets
+        - lists/list-widgets
 -
     title: Relations
     children:
@@ -323,6 +324,7 @@
     title: List Columns
     path: list-columns
     children:
+        - list-columns/actions
         - list-columns/colorpicker
         - list-columns/currency
         - list-columns/datetime

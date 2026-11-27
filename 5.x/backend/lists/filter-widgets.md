@@ -264,5 +264,6 @@ The next example shows an inline balloon selector control.
 * [Filtering Records](./filters.md)
 * [Filter Scopes](../../handbook/filter-scopes.md)
 * [Widgets](../panel/widgets.md)
+* [Custom List Widgets](./list-widgets.md)
 * [Custom Form Widgets](../forms/form-widgets.md)
 :::

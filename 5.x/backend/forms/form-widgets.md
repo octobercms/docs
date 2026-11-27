@@ -183,4 +183,5 @@ public function getSaveValue($value)
 * [Custom Field Types](../../handbook/form-fields.md#custom-field-types)
 * [Widgets](../panel/widgets.md)
 * [Custom Filter Widgets](../lists/filter-widgets.md)
+* [Custom List Widgets](../lists/list-widgets.md)
 :::
