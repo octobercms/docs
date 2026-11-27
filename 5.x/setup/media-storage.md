@@ -96,7 +96,8 @@ The **config/media.php** file contains options that fine-tune the media manager.
 Option | Description
 ------------- | -------------
 **item_cache_ttl** | the cache time-to-live, in minutes. The cache invalidates automatically when items are added, updated or deleted. Default: `10`.
-**auto_rename** | set to `slug` to slug the names of uploaded files and of created or renamed folders. Reads the `MEDIA_AUTO_RENAME` environment variable.
+**auto_rename** | set to `slug` to slug the names of uploaded or renamed files. Reads the `MEDIA_AUTO_RENAME` environment variable.
+**auto_rename_folders** | set to `slug` to slug the names of created or renamed folders, or to `false` to keep folder names as typed. Folders follow **auto_rename** when this is not set. Reads the `MEDIA_AUTO_RENAME_FOLDERS` environment variable.
 **clean_vectors** | removes scripts and other potentially dangerous content from uploaded SVG files. Default: `true`.
 **ignore_files** | file names the media manager ignores.
 **ignore_patterns** | file name patterns the media manager ignores.
